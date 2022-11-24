@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Processor\Proposal;
 
 use Capco\AppBundle\Notifier\AnalysisNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -38,7 +37,7 @@ class ProposalAssignationProcessor implements ProcessorInterface
 
         if (!$assigned) {
             $this->logger->error(
-                __CLASS__ . 'Unable to find user with id: ' . $decoded['assigned']
+                sprintf('%s Unable to find user with id: %s', __CLASS__, $decoded['assigned'])
             );
 
             return false;
@@ -46,9 +45,11 @@ class ProposalAssignationProcessor implements ProcessorInterface
 
         if (empty($proposals)) {
             $this->logger->error(
-                __CLASS__ .
-                    'Unable to find any proposal with ids: ' .
+                sprintf(
+                    '%s Unable to find any proposal with ids: %s',
+                    __CLASS__,
                     implode(', ', $decoded['proposals'])
+                )
             );
 
             return false;

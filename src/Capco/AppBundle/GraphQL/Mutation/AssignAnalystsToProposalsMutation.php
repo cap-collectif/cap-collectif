@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -58,17 +59,14 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
         $connection->setTotalCount(\count($proposals));
 
         foreach ($proposals as $proposal) {
-            if (
-                !$this->authorizationChecker->isGranted(
-                    ProposalAnalysisRelatedVoter::ASSIGN_ANALYST,
-                    $proposal
-                )
-            ) {
-                return $this->buildPayload(
-                    $connection,
-                    ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_ANALYST
-                );
+            if ($this->isGranted($proposal)) {
+                continue;
             }
+
+            return $this->buildPayload(
+                $connection,
+                ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_ANALYST
+            );
         }
         $nbAnalysts = \count($analystIds);
         if ($nbAnalysts > self::NB_MAX_ANALYSTS_ASSIGNED) {
@@ -86,19 +84,20 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
-            if ($nbAnalysts + $proposal->getAnalysts()->count() > self::NB_MAX_ANALYSTS_ASSIGNED) {
-                return $this->buildPayload(
-                    $connection,
-                    ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
-                );
+            if ($nbAnalysts + $proposal->getAnalysts()->count() < self::NB_MAX_ANALYSTS_ASSIGNED) {
+                $proposal->addAnalysts($analysts);
+
+                continue;
             }
 
-            $proposal->addAnalysts($analysts);
+            return $this->buildPayload(
+                $connection,
+                ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
+            );
         }
         $this->em->flush();
 
         $this->notifyNewAnalysts($newAssignations);
-
         $connection = $this->builder->connectionFromArray($proposals, $input);
         $connection->setTotalCount(\count($proposals));
 
@@ -115,16 +114,17 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
         ];
     }
 
-    private static function getNewAssignations(array $proposals, array $analysts): array
+    private static function getNewAssignations(array $proposals, array $analysts): ArrayCollection
     {
-        $newAssignations = [];
+        $newAssignations = new ArrayCollection();
         foreach ($analysts as $analyst) {
             $proposals = self::getNewAssignationsForAnalyst($proposals, $analyst);
             if (!empty($proposals)) {
-                $newAssignations[] = [
+                $assignation = (object) [
                     'analyst' => $analyst,
                     'proposals' => $proposals,
                 ];
+                $newAssignations->add($assignation);
             }
         }
 
@@ -134,6 +134,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
     private static function getNewAssignationsForAnalyst(array $proposals, User $analyst): array
     {
         $newAssignations = [];
+        /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
             if (!$proposal->getAnalysts()->contains($analyst)) {
                 $newAssignations[] = $proposal;
@@ -143,15 +144,15 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
         return $newAssignations;
     }
 
-    private function notifyNewAnalysts(array $newAssignations): void
+    private function notifyNewAnalysts(ArrayCollection $newAssignations): void
     {
         foreach ($newAssignations as $newAnalyst) {
             $message = [
-                'assigned' => $newAnalyst['analyst']->getId(),
+                'assigned' => $newAnalyst->analyst->getId(),
                 'role' => 'admin.global.evaluers',
                 'proposals' => [],
             ];
-            foreach ($newAnalyst['proposals'] as $proposal) {
+            foreach ($newAnalyst->proposals as $proposal) {
                 $message['proposals'][] = $proposal->getId();
             }
             $this->publisher->publish(
@@ -159,5 +160,13 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
                 new Message(json_encode($message))
             );
         }
+    }
+
+    private function isGranted($proposal): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            ProposalAnalysisRelatedVoter::ASSIGN_ANALYST,
+            $proposal
+        );
     }
 }

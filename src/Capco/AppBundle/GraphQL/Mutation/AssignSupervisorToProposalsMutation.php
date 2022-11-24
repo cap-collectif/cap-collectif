@@ -60,45 +60,20 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
 
         // unassigned supervisor to proposals
         if (!$supervisor && !empty($proposalIds)) {
-            /** @var Proposal $proposal */
-            foreach ($proposals as $proposal) {
-                $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-                if (
-                    !$this->authorizationChecker->isGranted(
-                        ProposalAnalysisRelatedVoter::ASSIGN_SUPERVISOR,
-                        $proposal
-                    )
-                ) {
-                    $connection = $this->builder->connectionFromArray($proposals, $input);
-                    $connection->setTotalCount(\count($proposals));
-
-                    return $this->buildPayload(
-                        $connection,
-                        ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR
-                    );
-                }
-            }
-
-            return $this->revokeSupervisorToProposals($proposals, $input);
+            return $this->unassignedSupervisor($proposals, $input);
         }
 
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
-            $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if (
-                !$this->authorizationChecker->isGranted(
-                    ProposalAnalysisRelatedVoter::ASSIGN_SUPERVISOR,
-                    $proposal
-                )
-            ) {
-                $connection = $this->builder->connectionFromArray($proposals, $input);
-                $connection->setTotalCount(\count($proposals));
-
-                return $this->buildPayload(
-                    $connection,
-                    ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
-                );
+            $connection = $this->buildErrorConnection($proposal, $proposals, $input);
+            if (null === $connection) {
+                continue;
             }
+
+            return $this->buildPayload(
+                $connection,
+                ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
+            );
         }
 
         $assignationChanges = self::getAssignationChanges($proposals, $supervisor);
@@ -116,7 +91,6 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
             $proposal->removeSupervisor();
         }
         $this->em->flush();
-
         $connection = $this->builder->connectionFromArray($proposals, $input);
         $connection->setTotalCount(\count($proposals));
 
@@ -129,23 +103,21 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         User $viewer,
         Arg $input
     ): array {
+        /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
-            /** @var Proposal $proposal */
             // change supervisor
-            if ($proposal->getSupervisor()) {
-                if ($proposal->getSupervisor() !== $supervisor) {
-                    $proposal->changeSupervisor($supervisor, $viewer);
-                    $proposal->removeAssessment();
-                }
-                // assign supervisor
-            } else {
-                $proposalSupervisor = (new ProposalSupervisor(
-                    $proposal,
-                    $supervisor
-                ))->setAssignedBy($viewer);
-                $proposal->setSupervisor($proposalSupervisor);
-                $supervisor->addSupervisedProposal($proposalSupervisor);
+            if ($proposal->getSupervisor() && $supervisor !== $proposal->getSupervisor()) {
+                $proposal->changeSupervisor($supervisor, $viewer);
+                $proposal->removeAssessment();
+
+                continue;
             }
+            // assign supervisor
+            $proposalSupervisor = (new ProposalSupervisor($proposal, $supervisor))->setAssignedBy(
+                $viewer
+            );
+            $proposal->setSupervisor($proposalSupervisor);
+            $supervisor->addSupervisedProposal($proposalSupervisor);
         }
 
         $this->em->flush();
@@ -179,7 +151,6 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
             CapcoAppBundleMessagesTypes::PROPOSAL_ASSIGNATION,
             new Message(json_encode($message))
         );
-
         foreach ($assignationsChanges['revokations'] as $revokation) {
             $message = [
                 'assigned' => $revokation['supervisor']->getId(),
@@ -201,23 +172,68 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
         $revokations = [];
         foreach ($proposals as $proposal) {
             $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if ($proposal->getSupervisor() !== $newSupervisor) {
-                $newAssignations[] = $proposal;
-                if ($supervisor = $proposal->getSupervisor()) {
-                    if (!isset($revokations[$supervisor->getUsername()])) {
-                        $revokations[$supervisor->getUsername()] = [
-                            'supervisor' => $supervisor,
-                            'unassignations' => [],
-                        ];
-                    }
-                    $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
-                }
+            $supervisor = $proposal->getSupervisor();
+            if ($supervisor instanceof User && $supervisor === $newSupervisor) {
+                continue;
             }
+            $newAssignations[] = $proposal;
+            if (!$supervisor instanceof User) {
+                continue;
+            }
+            if (!isset($revokations[$supervisor->getUsername()])) {
+                $revokations[$supervisor->getUsername()] = [
+                    'supervisor' => $supervisor,
+                    'unassignations' => [],
+                ];
+            }
+            $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
         }
 
         return [
             'newAssignations' => $newAssignations,
             'revokations' => $revokations,
         ];
+    }
+
+    private function unassignedSupervisor(array $proposals, Arg $input): array
+    {
+        /** @var Proposal $proposal */
+        foreach ($proposals as $proposal) {
+            $connection = $this->buildErrorConnection($proposal, $proposals, $input);
+            if (!$connection) {
+                continue;
+            }
+
+            return $this->buildPayload(
+                $connection,
+                ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR
+            );
+        }
+
+        return $this->revokeSupervisorToProposals($proposals, $input);
+    }
+
+    private function buildErrorConnection(
+        $proposal,
+        array $proposals,
+        Arg $input
+    ): ?ConnectionInterface {
+        $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
+        if ($this->isGranted($proposal)) {
+            return null;
+        }
+
+        $connection = $this->builder->connectionFromArray($proposals, $input);
+        $connection->setTotalCount(\count($proposals));
+
+        return $connection;
+    }
+
+    private function isGranted($proposal): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            ProposalAnalysisRelatedVoter::ASSIGN_SUPERVISOR,
+            $proposal
+        );
     }
 }

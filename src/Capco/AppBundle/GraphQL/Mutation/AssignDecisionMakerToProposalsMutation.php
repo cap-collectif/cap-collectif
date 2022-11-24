@@ -59,44 +59,23 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
 
         // revoke decisionMaker to proposals
         if (!$decisionMaker && !empty($proposalIds)) {
-            /** @var Proposal $proposal */
-            foreach ($proposals as $proposal) {
-                $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-                if (
-                    !$this->authorizationChecker->isGranted(
-                        ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER,
-                        $proposal
-                    )
-                ) {
-                    $connection = $this->builder->connectionFromArray($proposals, $input);
-                    $connection->setTotalCount(\count($proposals));
-
-                    return $this->buildPayload(
-                        $connection,
-                        ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_DECISION_MAKER
-                    );
-                }
+            $connection = $this->buildErrorConnection($proposals, $input);
+            if ($connection instanceof ConnectionInterface) {
+                return $this->buildPayload(
+                    $connection,
+                    ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_DECISION_MAKER
+                );
             }
 
             return $this->revokeDecisionMakerToProposals($proposals, $input);
         }
 
-        foreach ($proposals as $proposal) {
-            $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if (
-                !$this->authorizationChecker->isGranted(
-                    ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER,
-                    $proposal
-                )
-            ) {
-                $connection = $this->builder->connectionFromArray($proposals, $input);
-                $connection->setTotalCount(\count($proposals));
-
-                return $this->buildPayload(
-                    $connection,
-                    ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER
-                );
-            }
+        $connection = $this->buildErrorConnection($proposals, $input);
+        if ($connection instanceof ConnectionInterface) {
+            return $this->buildPayload(
+                $connection,
+                ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER
+            );
         }
 
         $assignationChanges = self::getAssignationChanges($proposals, $decisionMaker);
@@ -128,16 +107,15 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         foreach ($proposals as $proposal) {
             /** @var Proposal $proposal */
             // change decision maker
-            if ($proposal->getDecisionMaker()) {
-                if ($proposal->getDecisionMaker() !== $decisionMaker) {
-                    $proposal->changeDecisionMaker($decisionMaker);
-                    $proposal->removeDecision();
-                }
-                // assign decision maker
-            } else {
-                $proposalDecisionMaker = new ProposalDecisionMaker($proposal, $decisionMaker);
-                $proposal->setProposalDecisionMaker($proposalDecisionMaker);
+            if ($proposal->getDecisionMaker() && $proposal->getDecisionMaker() !== $decisionMaker) {
+                $proposal->changeDecisionMaker($decisionMaker);
+                $proposal->removeDecision();
+
+                continue;
             }
+            // assign decision maker
+            $proposalDecisionMaker = new ProposalDecisionMaker($proposal, $decisionMaker);
+            $proposal->setProposalDecisionMaker($proposalDecisionMaker);
         }
         $this->em->flush();
         $connection = $this->builder->connectionFromArray($proposals, $input);
@@ -192,23 +170,52 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         $revokations = [];
         foreach ($proposals as $proposal) {
             $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if ($proposal->getDecisionMaker() !== $newDecisionMaker) {
-                $newAssignations[] = $proposal;
-                if ($supervisor = $proposal->getSupervisor()) {
-                    if (!isset($revokations[$supervisor->getUsername()])) {
-                        $revokations[$supervisor->getUsername()] = [
-                            'decisionMaker' => $supervisor,
-                            'unassignations' => [],
-                        ];
-                    }
-                    $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
-                }
+            if ($proposal->getDecisionMaker() === $newDecisionMaker) {
+                continue;
             }
+            $newAssignations[] = $proposal;
+            $supervisor = $proposal->getSupervisor();
+            if (!$supervisor) {
+                continue;
+            }
+            if (!isset($revokations[$supervisor->getUsername()])) {
+                $revokations[$supervisor->getUsername()] = [
+                    'decisionMaker' => $supervisor,
+                    'unassignations' => [],
+                ];
+            }
+            $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
         }
 
         return [
             'newAssignations' => $newAssignations,
             'revokations' => $revokations,
         ];
+    }
+
+    private function isGranted($proposal): bool
+    {
+        return $this->authorizationChecker->isGranted(
+            ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER,
+            $proposal
+        );
+    }
+
+    private function buildErrorConnection(array $proposals, Arg $input): ?ConnectionInterface
+    {
+        /** @var Proposal $proposal */
+        foreach ($proposals as $proposal) {
+            $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
+            if ($this->isGranted($proposal)) {
+                return null;
+            }
+
+            $connection = $this->builder->connectionFromArray($proposals, $input);
+            $connection->setTotalCount(\count($proposals));
+
+            return $connection;
+        }
+
+        return null;
     }
 }
