@@ -316,7 +316,12 @@ export const Profile = ({
                   borderRadius="normal"
                   borderColor="gray.200"
                   mb={4}>
-                  <Flex alignItems="center" spacing={2} as="a" href={org?.url} color="gray.900">
+                  <Flex
+                    alignItems="center"
+                    spacing={2}
+                    as="a"
+                    href={`/profile/organization/${org?.slug || ''}`}
+                    color="gray.900">
                     {org?.media?.url ? (
                       <Avatar size="tiny" alt={org.username || ''} src={org.media.url || ''} />
                     ) : null}
@@ -501,7 +506,7 @@ export default createFragmentContainer(container, {
       twitterUrl
       organizations {
         id
-        url
+        slug
         username
         media {
           url

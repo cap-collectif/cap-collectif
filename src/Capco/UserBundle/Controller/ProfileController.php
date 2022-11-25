@@ -253,11 +253,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * TODO change view and content for organization.
-     *
      * @Route("/organization", name="capco_organization_profile_show", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
      * @Route("/organization/{slug}", name="capco_organization_profile_show_all", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
-     * @Template("@CapcoUser/Profile/show.html.twig")
+     * @Template("@CapcoUser/Organization/show.html.twig")
      */
     public function showOrganizationAction(?string $slug = null)
     {
@@ -274,13 +272,8 @@ class ProfileController extends Controller
             throw $this->createNotFoundException();
         }
 
-        //        $arguments = $this->argumentRepository->getByUser($user);
-        //        $replies = $this->replyRepository->getByAuthor($user);
-        //        $sources = $this->sourceRepository->getByUser($user);
-        //        $eventsCount = $this->getEventsCount($user);
-
         return [
-            'user' => $organization,
+            'organization' => $organization,
         ];
     }
 

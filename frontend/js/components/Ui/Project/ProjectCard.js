@@ -21,9 +21,20 @@ type Props = {|
   +project: ProjectCard_project,
   +backgroundColor: string,
   +isProjectsPage: boolean,
+  +variantSize?: 'L' | 'M',
 |};
 
-export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props }: Props) => {
+export const ProjectCard = ({
+  project,
+  backgroundColor,
+  isProjectsPage,
+  gridArea,
+  width,
+  height,
+  p,
+  variantSize,
+  ...props
+}: Props) => {
   const intl = useIntl();
   const isMobile = useIsMobile();
 
@@ -34,13 +45,15 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
       as="a"
       href={project.externalLink || project.url}
       display="grid"
-      width="100%"
-      height="100%"
+      gridArea={gridArea}
+      width={width || '100%'}
+      height={height || '100%'}
+      p={p}
       css={{ '&:hover': { textDecoration: 'none' } }}>
       <Card
         bg="white"
         p={0}
-        flexDirection="column"
+        flexDirection={variantSize === 'L' ? 'row' : 'column'}
         overflow="hidden"
         display="flex"
         border="unset"
@@ -56,8 +69,8 @@ export const ProjectCard = ({ project, backgroundColor, isProjectsPage, ...props
             opacity: project.archived ? '50%' : null,
           }}
           position="relative"
-          width="100%"
-          pt="66.66%" // 3:2 aspect ratio trick
+          width={variantSize === 'L' ? '50%' : '100%'}
+          pt={variantSize === 'L' ? '300px' : variantSize === 'M' ? '33.33%' : '66.66%'} // 3:2 aspect ratio trick
         >
           {!project.cover?.url && <DefaultProjectImage isNewCard />}
         </AppBox>

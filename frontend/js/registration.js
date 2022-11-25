@@ -80,6 +80,7 @@ import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
 import ChartModalApp from '~/startup/ChartModalApp';
 import ProjectStepPageApp from './startup/ProjectStepPageApp';
 import ProjectsMapViewApp from './startup/ProjectsMapViewApp';
+import OrganizationPageApp from './startup/OrganizationPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -148,6 +149,7 @@ ReactOnRails.register({
   ChartModalApp,
   ProjectStepPageApp,
   ProjectsMapViewApp,
+  OrganizationPageApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

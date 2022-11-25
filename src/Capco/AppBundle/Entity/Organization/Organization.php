@@ -64,7 +64,7 @@ class Organization implements
     /**
      * @ORM\Column(name="email", type="string", nullable=true)
      */
-    private string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
@@ -232,7 +232,7 @@ class Organization implements
         return $this->getLogo();
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

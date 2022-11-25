@@ -1,0 +1,30 @@
+
+{% set page_class = "organization-page" %}
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block canonical_link %}{{ url('capco_organization_profile_show_all', {'slug': organization.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    {# OpenGraph doesn't support svg as image so no default avatar :'( #}
+    {% set organizationMedia %}{% if organization.media %}{% path organization.media, 'avatar' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':        organization.title,
+        'description':  organization.body,
+        'url':          url('capco_organization_profile_show_all', {'slug': organization.slug}),
+        'type':         'profile',
+        'image':        organizationMedia,
+    } only %}
+{% endblock %}
+{% block title %}
+    {{ parent() }} 
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block fos_user_content %}
+    {{ react_render_component('OrganizationPageApp', { 'props': { 'organizationId': organization.id|toGlobalId('Organization') }}) }}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

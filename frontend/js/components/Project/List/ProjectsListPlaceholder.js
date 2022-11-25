@@ -7,11 +7,12 @@ import Card from '~ds/Card/Card';
 
 type Props = {|
   +count: number,
+  +templateColumns?: string | Array<string>,
 |};
 
-const ProjectsListPlaceholder = ({ count }: Props) => {
+const ProjectsListPlaceholder = ({ count, templateColumns }: Props) => {
   return (
-    <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
+    <Grid templateColumns={templateColumns || ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
       {[...Array(count)].map((_, index) => (
         <Flex mt={7} mb={7} mr={5} ml={5} key={index}>
           <Card

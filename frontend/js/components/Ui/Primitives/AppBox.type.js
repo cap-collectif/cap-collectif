@@ -316,6 +316,19 @@ type Table = {|
 
 type Cursor = {| cursor?: 'pointer' | 'normal' |};
 
+type ObjectFit = {|
+  objectFit?:
+    | 'cover'
+    | 'contains'
+    | 'fills'
+    | 'none'
+    | 'scale-down'
+    | 'inherit'
+    | 'initial'
+    | 'revert'
+    | 'unset',
+|};
+
 export type AppBoxProps = {|
   ...Width,
   ...Size,
@@ -362,4 +375,5 @@ export type AppBoxProps = {|
   ...WhiteSpace,
   ...Table,
   ...Cursor,
+  ...ObjectFit,
 |};
