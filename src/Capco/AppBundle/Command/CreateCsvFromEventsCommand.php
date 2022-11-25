@@ -124,7 +124,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
             'events',
             function ($edge) use ($writer, $progress) {
                 $event = $edge['node'];
-                $address = $this->handleAddressFormat($event);
+                $this->handleAddressFormat($event);
                 $writer->addRow(
                     WriterEntityFactory::createRowFromArray([
                         $event['_id'],
@@ -140,10 +140,10 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                         $event['enabled'],
                         $event['startAt'],
                         $event['endAt'],
-                        $address['zipCode'],
-                        $address['address'],
-                        $address['city'],
-                        $address['country'],
+                        $event['zipCode'],
+                        $event['address'],
+                        $event['city'],
+                        $event['country'],
                         $event['lat'],
                         $event['lng'],
                         $event['link'],
@@ -186,7 +186,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
               hasNextPage
             }
             edges {
-              cursor  
+              cursor
               node {
                 _id
                 id
@@ -229,35 +229,37 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
 EOF;
     }
 
-    private function handleAddressFormat(array $event): array
+    private function handleAddressFormat(array &$event): void
     {
         $googleMapsAddress = null;
         if ($event['googleMapsAddress']) {
             $googleMapsAddress = GoogleMapsAddress::fromApi($event['googleMapsAddress']['json']);
         }
-        $address = [
-            'zipCode' => $event['zipCode'],
-            'address' => $event['address'],
-            'city' => $event['city'],
-            'country' => $event['country']
-        ];
 
-        if ($googleMapsAddress) {
-            $decomposed = $googleMapsAddress->decompose();
-            if (array_key_exists('postal_code', $decomposed)) {
-                $address['zipCode'] = $decomposed['postal_code'];
-            }
-            if (array_key_exists('locality', $decomposed)) {
-                $address['city'] = $decomposed['locality'];
-            }
-            if (array_key_exists('country', $decomposed)) {
-                $address['country'] = $decomposed['country'];
-            }
-            if (array_key_exists('street_number', $decomposed) && array_key_exists('route', $decomposed)) {
-                $address['address'] = $decomposed['street_number'].' '.$decomposed['route'];
-            }
+        if (null === $googleMapsAddress) {
+            return;
         }
 
-        return $address;
+        $this->mapGoogleMapAddressOnEvent($event, $googleMapsAddress);
+    }
+
+    private function mapGoogleMapAddressOnEvent(array &$event, GoogleMapsAddress $address): void
+    {
+        $decomposed = $address->decompose();
+        if (\array_key_exists('postal_code', $decomposed)) {
+            $event['zipCode'] = $decomposed['postal_code'];
+        }
+        if (\array_key_exists('locality', $decomposed)) {
+            $event['city'] = $decomposed['locality'];
+        }
+        if (\array_key_exists('country', $decomposed)) {
+            $event['country'] = $decomposed['country'];
+        }
+        if (\array_key_exists('route', $decomposed)) {
+            $event['address'] = $decomposed['route'];
+            if (\array_key_exists('street_number', $decomposed)) {
+                $event['address'] = $decomposed['street_number'] . ' ' . $decomposed['route'];
+            }
+        }
     }
 }
