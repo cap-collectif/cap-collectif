@@ -145,14 +145,23 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
         </Route>
 
         <Route path={getContributionsPath(baseUrl, 'CollectStep')}>
-          <ProjectAdminProposalsProvider firstCollectStepId={project?.firstCollectStep?.id}>
+          {project ? (
+            <ProjectAdminProposalsProvider firstCollectStepId={project?.firstCollectStep?.id}>
+              <ProjectAdminProposalsPage
+                hasContributionsStep={hasIndex}
+                projectId={projectId}
+                query={dataPreloaded}
+                baseUrl={baseUrl}
+              />
+            </ProjectAdminProposalsProvider>
+          ) : (
             <ProjectAdminProposalsPage
               hasContributionsStep={hasIndex}
               projectId={projectId}
               query={dataPreloaded}
               baseUrl={baseUrl}
             />
-          </ProjectAdminProposalsProvider>
+          )}
         </Route>
 
         <Route
