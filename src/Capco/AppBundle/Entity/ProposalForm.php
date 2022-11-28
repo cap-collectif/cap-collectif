@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
+use Capco\AppBundle\Traits\Map\ZoomTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -47,16 +48,21 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
+class ProposalForm implements
+    DisplayableInBOInterface,
+    QuestionnableForm,
+    Ownerable,
+    CreatableInterface
 {
+    use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;
     use OwnerableTrait;
-    use CreatableTrait;
     use ReferenceTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UsingSocialNetworksTrait;
     use UuidTrait;
+    use ZoomTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "description"})
@@ -214,11 +220,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
      * @ORM\Column(name="require_proposal_in_a_zone", nullable=false, type="boolean", options={"default": false})
      */
     private bool $proposalInAZoneRequired = false;
-
-    /**
-     * @ORM\Column(name="zoom_map", nullable=true, type="integer")
-     */
-    private ?int $zoomMap;
 
     /**
      * @ORM\Column(name="map_center", type="text", nullable=true)
@@ -770,18 +771,6 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     public function setAddressHelpText(?string $addressHelpText = null): self
     {
         $this->addressHelpText = $addressHelpText;
-
-        return $this;
-    }
-
-    public function getZoomMap(): ?int
-    {
-        return $this->zoomMap;
-    }
-
-    public function setZoomMap(?int $zoomMap = null): self
-    {
-        $this->zoomMap = $zoomMap;
 
         return $this;
     }

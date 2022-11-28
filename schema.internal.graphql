@@ -6819,6 +6819,9 @@ type HomePageProjectsMapSectionConfiguration {
 
   """The longitude of the center of map."""
   centerLongitude: Float
+
+  """The level of zoom of the map."""
+  zoomMap: Int
 }
 
 input HomePageProjectsMapSectionConfigurationTranslationInput {
@@ -16459,6 +16462,9 @@ input UpdateHomePageProjectsMapSectionConfigurationInput {
 
   """The longitude of the center of map."""
   centerLongitude: Float
+
+  """The level of zoom of the map."""
+  zoomMap: Float
   clientMutationId: String
 }
 

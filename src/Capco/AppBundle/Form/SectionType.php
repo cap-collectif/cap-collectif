@@ -58,7 +58,7 @@ class SectionType extends AbstractType
             ])
             ->add('centerLatitude', NumberType::class)
             ->add('centerLongitude', NumberType::class)
-        ;
+            ->add('zoomMap', NumberType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

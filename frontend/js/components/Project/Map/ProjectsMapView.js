@@ -50,6 +50,7 @@ const QUERY = graphql`
       teaser
       centerLatitude
       centerLongitude
+      zoomMap
     }
     projects {
       edges {
@@ -210,7 +211,7 @@ export const ProjectsMapView = ({
                   lat: homePageProjectsMapSectionConfiguration.centerLatitude,
                   lng: homePageProjectsMapSectionConfiguration.centerLongitude,
                 }}
-                zoom={13}
+                zoom={homePageProjectsMapSectionConfiguration.zoomMap}
                 maxZoom={20}
                 style={{
                   height: isMobile ? '100vw' : '33vw',

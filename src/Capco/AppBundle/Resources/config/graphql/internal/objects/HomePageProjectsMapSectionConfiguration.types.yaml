@@ -26,3 +26,6 @@ HomePageProjectsMapSectionConfiguration:
             centerLongitude:
                 type: 'Float'
                 description: 'The longitude of the center of map.'
+            zoomMap:
+                type: 'Int'
+                description: 'The level of zoom of the map.'

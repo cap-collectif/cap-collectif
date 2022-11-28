@@ -373,6 +373,7 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2020-06-18 12:00:00')))>
         visibility: 2
         cover: '@imageCafe'
+        address: '[{"address_components": [  {"long_name": "6","short_name": "6","types": [ "street_number" ] },  {"long_name": "Rue Descartes","short_name": "Rue Descartes","types": [ "route" ] },  {"long_name": "Paris","short_name": "Paris","types": [ "locality", "political" ] },  {"long_name": "Département de Paris","short_name": "Département de Paris","types": [ "administrative_area_level_2", "political" ] },  {"long_name": "Île-de-France","short_name": "IDF","types": [ "administrative_area_level_1", "political" ] },  {"long_name": "France","short_name": "FR","types": [ "country", "political" ] },  {"long_name": "75005","short_name": "75005","types": [ "postal_code" ] }],"formatted_address": "6 Rue Descartes, 75005 Paris, France","geometry": {  "bounds": {"northeast": { "lat": 48.847207, "lng": 2.3485302 },"southwest": { "lat": 48.8470684, "lng": 2.3483977 } },  "location": {"lat": 48.8471578,"lng": 2.3484722 },  "location_type": "ROOFTOP",  "viewport": {"northeast": { "lat": 48.8484866802915, "lng": 2.349812930291502 },"southwest": { "lat": 48.8457887197085, "lng": 2.347114969708498 } }},"place_id": "ChIJNYpNEuZx5kcRceTkIv6AC1k","types": [ "premise" ]} ]'
     projectOculusQuest:
         id: 'projectOculusQuest'
         title: Débat sur l'Oculus Quest

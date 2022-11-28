@@ -1,110 +1,111 @@
 Capco\AppBundle\Entity\Section:
-  SectionHighlighted:
-    id: 'sectionHighlighted'
-    type: highlight
-    position: 1
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionIntro:
-    id: 'sectionIntro'
-    type: introduction
-    position: 2
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionVideos:
-    id: 'sectionVideos'
-    type: videos
-    position: 3
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: []
-  SectionProjects:
-    id: 'sectionProjects'
-    type: projects
-    position: 4
-    nbObjects: 4
-    enabled: true
-    associatedFeatures: []
-  SectionThemes:
-    id: 'sectionThemes'
-    type: themes
-    position: 5
-    nbObjects: 4
-    enabled: true
-    associatedFeatures: [themes]
-  SectionNews:
-    id: 'sectionNews'
-    type: news
-    position: 6
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: [blog]
-  SectionEvents:
-    id: 'sectionEvents'
-    type: events
-    position: 7
-    nbObjects: 3
-    enabled: true
-    associatedFeatures: [calendar]
-  SectionNewsletter:
-    id: 'sectionNewsletter'
-    type: newsletter
-    position: 8
-    nbObjects: null
-    enabled: true
-    associatedFeatures: [newsletter]
-  SectionSocialNetworks:
-    id: 'sectionSocialNetworks'
-    type: social-networks
-    position: 9
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionMetrics:
-    id: 'sectionMetrics'
-    type: metrics
-    position: 11
-    nbObjects: null
-    enabled: false
-    associatedFeatures: []
-  SectionCustomEnabled:
-    id: 'sectionCustomEnabled'
-    type: custom
-    position: 12
-    nbObjects: null
-    enabled: true
-    associatedFeatures: []
-  SectionCustomDisabled:
-    id: 'sectionCustomDisabled'
-    type: custom
-    position: 13
-    nbObjects: null
-    enabled: false
-    associatedFeatures: []
-  SectionProposals:
-    id: 'sectionProposals'
-    type: proposals
-    position: 11
-    nbObjects: 8
-    enabled: true
-    associatedFeatures: []
-    step: '@collectstep1'
-  SectionQuestion:
-    id: 'sectionQuestion'
-    type: proposals
-    position: 11
-    nbObjects: 8
-    enabled: true
-    associatedFeatures: []
-    step: '@collectQuestionVoteAvecClassement'
-  SectionProjectsMap:
-    id: 'sectionProjectsMap'
-    type: projectsMap
-    position: 14
-    nbObjects: null
-    enabled: true
-    centerLatitude: 48.848578564165784
-    centerLongitude: 2.3884014755569796
-    associatedFeatures: []
+    SectionHighlighted:
+        id: 'sectionHighlighted'
+        type: highlight
+        position: 1
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionIntro:
+        id: 'sectionIntro'
+        type: introduction
+        position: 2
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionVideos:
+        id: 'sectionVideos'
+        type: videos
+        position: 3
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: []
+    SectionProjects:
+        id: 'sectionProjects'
+        type: projects
+        position: 4
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: []
+    SectionThemes:
+        id: 'sectionThemes'
+        type: themes
+        position: 5
+        nbObjects: 4
+        enabled: true
+        associatedFeatures: [themes]
+    SectionNews:
+        id: 'sectionNews'
+        type: news
+        position: 6
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [blog]
+    SectionEvents:
+        id: 'sectionEvents'
+        type: events
+        position: 7
+        nbObjects: 3
+        enabled: true
+        associatedFeatures: [calendar]
+    SectionNewsletter:
+        id: 'sectionNewsletter'
+        type: newsletter
+        position: 8
+        nbObjects: null
+        enabled: true
+        associatedFeatures: [newsletter]
+    SectionSocialNetworks:
+        id: 'sectionSocialNetworks'
+        type: social-networks
+        position: 9
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionMetrics:
+        id: 'sectionMetrics'
+        type: metrics
+        position: 11
+        nbObjects: null
+        enabled: false
+        associatedFeatures: []
+    SectionCustomEnabled:
+        id: 'sectionCustomEnabled'
+        type: custom
+        position: 12
+        nbObjects: null
+        enabled: true
+        associatedFeatures: []
+    SectionCustomDisabled:
+        id: 'sectionCustomDisabled'
+        type: custom
+        position: 13
+        nbObjects: null
+        enabled: false
+        associatedFeatures: []
+    SectionProposals:
+        id: 'sectionProposals'
+        type: proposals
+        position: 11
+        nbObjects: 8
+        enabled: true
+        associatedFeatures: []
+        step: '@collectstep1'
+    SectionQuestion:
+        id: 'sectionQuestion'
+        type: proposals
+        position: 11
+        nbObjects: 8
+        enabled: true
+        associatedFeatures: []
+        step: '@collectQuestionVoteAvecClassement'
+    SectionProjectsMap:
+        id: 'sectionProjectsMap'
+        type: projectsMap
+        position: 14
+        nbObjects: null
+        enabled: true
+        centerLatitude: 48.848578564165784
+        centerLongitude: 2.3884014755569796
+        zoomMap: 10
+        associatedFeatures: []

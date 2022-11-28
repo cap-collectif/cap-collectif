@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\Map\ZoomTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -24,6 +25,7 @@ class Section implements Translatable, SonataTranslatableInterface
     use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
+    use ZoomTrait;
 
     public static $fieldsForType = [
         'highlight' => [
@@ -368,9 +370,10 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this->centerLatitude;
     }
 
-    public function setCenterLatitude(?float $centerLatitude): Section
+    public function setCenterLatitude(?float $centerLatitude): self
     {
         $this->centerLatitude = $centerLatitude;
+
         return $this;
     }
 
@@ -379,9 +382,10 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this->centerLongitude;
     }
 
-    public function setCenterLongitude(?float $centerLongitude): Section
+    public function setCenterLongitude(?float $centerLongitude): self
     {
         $this->centerLongitude = $centerLongitude;
+
         return $this;
     }
 

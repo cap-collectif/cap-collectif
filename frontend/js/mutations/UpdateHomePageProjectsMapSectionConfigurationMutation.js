@@ -20,6 +20,7 @@ const mutation = graphql`
         enabled
         centerLatitude
         centerLongitude
+        zoomMap
       }
     }
   }

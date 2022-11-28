@@ -7,6 +7,7 @@ import type { IntlShape } from 'react-intl';
 import L from 'leaflet';
 import { Marker, ZoomControl, MapContainer as Map } from 'react-leaflet';
 import { FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { GestureHandling } from 'leaflet-gesture-handling';
 import * as S from './HomePageProjectsSectionConfigurationPage.style';
 import renderComponent from '~/components/Form/Field';
 import type { Dispatch, GlobalState } from '~/types';
@@ -22,7 +23,11 @@ import InfoMessage from '~ds/InfoMessage/InfoMessage';
 import { MapContainer } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode.style';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types';
-import { LOCATION_PARIS } from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
+import {
+  LOCATION_PARIS,
+  ZOOM_CITY,
+  zoomLevels,
+} from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import Address from '~/components/Form/Address/Address';
 import { flyToPosition } from '~/components/Proposal/Create/ProposalChangeAddressModal';
@@ -37,6 +42,7 @@ type Props = {|
   +intl: IntlShape,
   +centerLatitude: ?number,
   +centerLongitude: ?number,
+  +zoomMap: ?number,
   ...ReduxFormFormProps,
 |};
 
@@ -47,6 +53,7 @@ type FormValues = {|
   +title: string,
   +centerLatitude: number,
   +centerLongitude: number,
+  +zoomMap: number,
 |};
 
 const TEASER_MAX = 200;
@@ -73,7 +80,7 @@ const onSubmit = async (
   dispatch: Dispatch,
   { currentLanguage, intl }: Props,
 ) => {
-  const { title, teaser, position, centerLatitude, centerLongitude } = values;
+  const { title, teaser, position, centerLatitude, centerLongitude, zoomMap } = values;
 
   const translationsData = handleTranslationChange(
     [],
@@ -91,6 +98,7 @@ const onSubmit = async (
     translations: translationsData,
     centerLatitude,
     centerLongitude,
+    zoomMap,
   };
 
   try {
@@ -123,10 +131,24 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
   dispatch,
   centerLatitude,
   centerLongitude,
+  zoomMap,
+  homePageProjectsMapSectionConfiguration,
 }: Props) => {
   const [address, setAddress] = React.useState(null);
+  const position = [
+    centerLatitude || homePageProjectsMapSectionConfiguration.centerLatitude || LOCATION_PARIS.lat,
+    centerLongitude ||
+      homePageProjectsMapSectionConfiguration.centerLongitude ||
+      LOCATION_PARIS.lng,
+  ];
   const refMap = React.useRef(null);
-  const position = [centerLatitude || LOCATION_PARIS.lat, centerLongitude || LOCATION_PARIS.lng];
+
+  React.useEffect(() => {
+    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+    if (refMap.current) {
+      refMap.current.setZoom(zoomMap);
+    }
+  }, [zoomMap, refMap]);
 
   return (
     <form method="POST" onSubmit={handleSubmit}>
@@ -198,7 +220,7 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
                 }}
                 className="map"
                 center={position}
-                zoom={10}
+                zoom={zoomMap || zoomLevels[ZOOM_CITY].id}
                 zoomControl={false}
                 doubleClickZoom={false}
                 gestureHandling>
@@ -228,6 +250,21 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
                   component={renderComponent}
                   label={intl.formatMessage({ id: 'admin.fields.proposal_form.longitude' })}
                 />
+                <Field
+                  type="select"
+                  name="zoomMap"
+                  id="zoom"
+                  component={renderComponent}
+                  normalize={val => parseInt(val, 10)}
+                  label={intl.formatMessage({ id: 'admin.fields.proposal_form.zoom' })}>
+                  {zoomLevels.map(level => (
+                    <option key={level.id} value={level.id}>
+                      {`${level.id} ${
+                        level.name ? `- ${intl.formatMessage({ id: level.name })}` : ''
+                      }`}
+                    </option>
+                  ))}
+                </Field>
               </div>
             </MapContainer>
           </div>
@@ -281,7 +318,7 @@ const mapStateToProps = (
   { homePageProjectsMapSectionConfiguration }: Props,
 ) => {
   if (homePageProjectsMapSectionConfiguration) {
-    const { title, teaser, position, enabled, centerLatitude, centerLongitude } =
+    const { title, teaser, position, enabled, centerLatitude, centerLongitude, zoomMap } =
       homePageProjectsMapSectionConfiguration;
 
     const initialValues = {
@@ -290,6 +327,7 @@ const mapStateToProps = (
       position,
       centerLatitude,
       centerLongitude,
+      zoomMap,
       enabled: enabled === true ? 'published' : 'unpublished',
     };
     return {
@@ -297,6 +335,7 @@ const mapStateToProps = (
       currentLanguage: state.language.currentLanguage,
       centerLatitude: formValueSelector(formName)(state, 'centerLatitude'),
       centerLongitude: formValueSelector(formName)(state, 'centerLongitude'),
+      zoomMap: formValueSelector(formName)(state, 'zoomMap'),
     };
   }
 };
@@ -325,6 +364,7 @@ const fragmentContainer = createFragmentContainer(
         enabled
         centerLatitude
         centerLongitude
+        zoomMap
       }
     `,
   },

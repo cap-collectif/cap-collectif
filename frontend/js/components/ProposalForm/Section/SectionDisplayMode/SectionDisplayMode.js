@@ -43,7 +43,7 @@ export const LOCATION_PARIS = {
   lng: 2.3488,
 };
 
-const ZOOM_CITY = 9;
+export const ZOOM_CITY = 9;
 
 export const zoomLevels = [
   { id: 1, name: 'map.zoom.world' },
