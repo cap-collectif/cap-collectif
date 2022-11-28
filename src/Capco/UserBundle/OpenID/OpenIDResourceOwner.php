@@ -87,7 +87,9 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         $scope = $this->getScope();
 
         switch ($this->getInstanceName()) {
+            // activate state when it is mandatory
             case 'carpentras':
+            case 'debatpenly':
                 $resolver
                     ->setDefaults([
                         'state' => null,

@@ -12,6 +12,7 @@ use Capco\UserBundle\OpenID\Mapping\NantesMapping;
 use Capco\UserBundle\OpenID\Mapping\OccitanieMapping;
 use Capco\UserBundle\OpenID\Mapping\ParisMapping;
 use Capco\UserBundle\OpenID\Mapping\AixMarseilleUnivMapping;
+use Capco\UserBundle\OpenID\Mapping\CndpMapping;
 
 class OpenIDPathMapper
 {
@@ -59,6 +60,10 @@ class OpenIDPathMapper
                 break;
             case 'aix-marseille-univ':
                 $this->instanceMapper = new AixMarseilleUnivMapping();
+
+                break;
+            case 'debatpenly':
+                $this->instanceMapper = new CndpMapping();
 
                 break;
             default:
