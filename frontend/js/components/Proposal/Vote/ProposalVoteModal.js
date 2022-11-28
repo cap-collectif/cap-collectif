@@ -163,6 +163,7 @@ export const ProposalVoteModal = ({
   const pristine = isPristine(getFormName(step))(localState);
   const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
 
+  // Create temp vote to display Proposal in ProposalsUserVotesTable
   const createTmpVote = React.useCallback(() => {
     commitLocalUpdate(environment, store => {
       const dataID = `client:newTmpVote:${proposal.id}`;
@@ -201,8 +202,6 @@ export const ProposalVoteModal = ({
         return;
       }
       ConnectionHandler.insertEdgeAfter(connection, newEdge);
-      const totalCount = parseInt(connection.getValue('totalCount'), 10);
-      connection.setValue(totalCount + 1, 'totalCount');
     });
   }, [proposal.id, step.id, viewerIsConfirmedByEmail, token]);
 
@@ -217,8 +216,6 @@ export const ProposalVoteModal = ({
       const connection = stepProxy.getLinkedRecord('viewerVotes', args);
       if (connection) {
         ConnectionHandler.deleteNode(connection, dataID);
-        const totalCount = parseInt(connection.getValue('totalCount'), 10);
-        connection.setValue(totalCount - 1, 'totalCount');
       }
       store.delete(dataID);
     });

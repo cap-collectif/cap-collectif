@@ -18,28 +18,28 @@ const mutation = graphql`
         node {
           id
           __typename
-          ...on ProposalUserVote {
-              author {
-                  id
-                  ...UserBox_user
-              }
+          ... on ProposalUserVote {
+            author {
+              id
+              ...UserBox_user
+            }
           }
           step {
-              votesMin
-              votesLimit
-              id
-              viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
-                  ...ProposalsUserVotesTable_votes
-                  totalCount
-                  edges {
-                      node {
-                          id
-                          proposal {
-                              id
-                          }
-                      }
+            votesMin
+            votesLimit
+            id
+            viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+              ...ProposalsUserVotesTable_votes
+              totalCount
+              edges {
+                node {
+                  id
+                  proposal {
+                    id
                   }
+                }
               }
+            }
             ...interpellationLabelHelper_step @relay(mask: false)
           }
         }
@@ -103,7 +103,6 @@ const commit = (
       if (!stepConnection) return;
 
       const totalCount = parseInt(stepConnection.getValue('totalCount'), 10);
-      stepConnection.setValue(totalCount + 1, 'totalCount');
 
       let votesMin = parseInt(stepProxy.getValue('votesMin'), 10);
       if (!votesMin || Number.isNaN(votesMin)) votesMin = 1;

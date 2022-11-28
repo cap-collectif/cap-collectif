@@ -272,7 +272,10 @@ export const ProposalVoteBasketWidget = ({
                 <FormattedMessage
                   tagName="p"
                   id={isInterpellation ? 'support.count_no_nb' : 'project.preview.counters.votes'}
-                  values={{ num: 2, count: 2 }}
+                  values={{
+                    num: step?.viewerVotes?.totalCount || 0,
+                    count: step?.viewerVotes?.totalCount || 0,
+                  }}
                 />
                 <p id="vote-counter">{step?.viewerVotes?.totalCount || 0}</p>
               </InfoContainer>

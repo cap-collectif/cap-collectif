@@ -28,8 +28,8 @@ exports[`<ProposalVoteBasketWidget /> should hide votes button when anon vote is
               tagName="p"
               values={
                 Object {
-                  "count": 2,
-                  "num": 2,
+                  "count": 5,
+                  "num": 5,
                 }
               }
             />
@@ -75,8 +75,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
               tagName="p"
               values={
                 Object {
-                  "count": 2,
-                  "num": 2,
+                  "count": 1,
+                  "num": 1,
                 }
               }
             />
@@ -136,8 +136,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
               tagName="p"
               values={
                 Object {
-                  "count": 2,
-                  "num": 2,
+                  "count": 0,
+                  "num": 0,
                 }
               }
             />
@@ -292,8 +292,8 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
               tagName="p"
               values={
                 Object {
-                  "count": 2,
-                  "num": 2,
+                  "count": 5,
+                  "num": 5,
                 }
               }
             />
