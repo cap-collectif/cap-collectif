@@ -12,16 +12,23 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AddOrganizationMutation implements MutationInterface
 {
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
+    private SluggerInterface $slugger;
 
-    public function __construct(EntityManagerInterface $em, FormFactoryInterface $formFactory)
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        SluggerInterface $slugger
+    )
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
+        $this->slugger = $slugger;
     }
 
     public function __invoke(Arg $input): array
@@ -31,6 +38,10 @@ class AddOrganizationMutation implements MutationInterface
 
         $organization = new Organization();
         $organization->mergeNewTranslations();
+
+        if (isset($data['translations'])) {
+            $this->updateSlug($organization, $data['translations']);
+        }
 
         $form = $this->formFactory->create(OrganizationType::class, $organization);
         $form->submit($data, false);
@@ -46,5 +57,16 @@ class AddOrganizationMutation implements MutationInterface
         }
 
         return ['organization' => $organization];
+    }
+
+    private function updateSlug(Organization $organization, array $translations): void
+    {
+        foreach ($translations as $translation) {
+            if ($translation['title']) {
+                $slug = strtolower($this->slugger->slug($translation['title'])->toString());
+                $organization->setSlug($slug);
+                return;
+            }
+        }
     }
 }

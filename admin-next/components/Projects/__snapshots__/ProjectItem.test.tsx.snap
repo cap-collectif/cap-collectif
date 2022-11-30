@@ -66,6 +66,21 @@ Array [
       }
     }
   >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     <div
       className="sc-bdvvtL iOUgMg sc-fWCJzd eCIVdF cap-tag"
       style={Object {}}
@@ -354,6 +369,21 @@ Array [
         </a>
       </div>
     </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
   </td>,
   <td
     className="sc-bdvvtL gJUzIT cap-table__td"
@@ -660,6 +690,21 @@ Array [
       }
     }
   >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     <div
       className="sc-bdvvtL iOUgMg sc-fWCJzd eCIVdF cap-tag"
       style={Object {}}
@@ -884,6 +929,21 @@ Array [
         className="sc-bdvvtL fIfDCJ"
       />
     </div>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
   </td>,
   <td
     className="sc-bdvvtL gJUzIT cap-table__td"

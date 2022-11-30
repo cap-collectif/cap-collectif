@@ -438,7 +438,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
             />
           ) : null}
 
-          {features.beta__analytics_page ? (
+          {(features.beta__analytics_page && !organizationId) ? (
             <SidebarLink
               text="admin.label.analytics"
               href="/admin-next/dashboard"

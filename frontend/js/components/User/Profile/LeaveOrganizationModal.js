@@ -34,7 +34,7 @@ export const LeaveOrganizationModal = ({ organizationId, organizationName }: Pro
           hide();
           return mutationErrorToast(intl);
         }
-        toast({ variant: 'success', content: intl.formatMessage({ id: 'leave-org-success' }) });
+        toast({ variant: 'success', content: intl.formatMessage({ id: 'leave-org-success' }, { organization: organizationName }) });
         hide();
         setTimeout(() => {
           window.location.reload();

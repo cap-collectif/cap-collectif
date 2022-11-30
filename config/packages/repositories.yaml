@@ -737,3 +737,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:PostAuthor']
+
+    Capco\AppBundle\Repository\OfficialResponseAuthorRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:OfficialResponseAuthor']

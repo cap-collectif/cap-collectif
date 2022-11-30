@@ -326,6 +326,7 @@ export class EventFormPage extends React.Component<Props, State> {
     if (
       query.viewer.isSuperAdmin ||
       query.viewer.isOnlyProjectAdmin ||
+      query.viewer.organizations?.[0] ||
       (event?.review?.status !== 'REFUSED' && event?.deletedAt === null && query.viewer.isAdmin)
     ) {
       return (
@@ -355,6 +356,13 @@ export class EventFormPage extends React.Component<Props, State> {
       className,
     } = this.props;
     const { showDeleteModal } = this.state;
+    const canDelete = () => {
+      const viewerBelongsToAnOrganization = (query.viewer.organizations?.length ?? 0) > 0;
+      if (viewerBelongsToAnOrganization) {
+        return query.viewer?.isAdminOrganization || query?.viewer?.id === event?.creator?.id;
+      }
+      return (event?.viewerDidAuthor || query.viewer.isSuperAdmin) && event?.deletedAt === null;
+    };
 
     return (
       <>
@@ -369,29 +377,27 @@ export class EventFormPage extends React.Component<Props, State> {
           {!isFrontendView && (
             <ButtonToolbar className="mt-45 box-content__toolbar">
               {this.renderSubmitButton()}
-              {event &&
-                (event.viewerDidAuthor || query.viewer.isSuperAdmin) &&
-                event.deletedAt === null && (
-                  <>
-                    <DeleteModal
-                      closeDeleteModal={this.cancelCloseDeleteModal}
-                      showDeleteModal={showDeleteModal}
-                      deleteElement={() => {
-                        onDelete(event.id);
-                      }}
-                      deleteModalTitle="event.alert.delete"
-                      deleteModalContent="group.admin.parameters.modal.delete.content"
-                      buttonConfirmMessage="global.removeDefinitively"
-                    />
-                    <Button
-                      bsStyle="danger"
-                      className="ml-5"
-                      onClick={this.openDeleteModal}
-                      id="delete-event">
-                      <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
-                    </Button>
-                  </>
-                )}
+              {event && canDelete() && (
+                <>
+                  <DeleteModal
+                    closeDeleteModal={this.cancelCloseDeleteModal}
+                    showDeleteModal={showDeleteModal}
+                    deleteElement={() => {
+                      onDelete(event.id);
+                    }}
+                    deleteModalTitle="event.alert.delete"
+                    deleteModalContent="group.admin.parameters.modal.delete.content"
+                    buttonConfirmMessage="global.removeDefinitively"
+                  />
+                  <Button
+                    bsStyle="danger"
+                    className="ml-5"
+                    onClick={this.openDeleteModal}
+                    id="delete-event">
+                    <i className="fa fa-trash" /> <FormattedMessage id="global.delete" />
+                  </Button>
+                </>
+              )}
               {event?.deletedAt === null && (
                 <AlertForm
                   valid={valid}
@@ -442,9 +448,14 @@ export default createFragmentContainer(EventFormCreatePage, {
     @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...EventForm_query @arguments(affiliations: $affiliations)
       viewer {
+        id
         isSuperAdmin
         isAdmin
         isOnlyProjectAdmin
+        isAdminOrganization
+        organizations {
+          id
+        }
       }
     }
   `,
@@ -460,7 +471,12 @@ export default createFragmentContainer(EventFormCreatePage, {
       deletedAt
       author {
         id
-        isAdmin
+        ... on User {
+          isAdmin
+        }
+      }
+      creator {
+        id
       }
       translations {
         locale

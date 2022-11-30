@@ -90,13 +90,24 @@ InternalOrganization:
             projects:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args, getUser()])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    visibilityFilter:
+                        type: 'ProjectVisibility'
+                        description: 'Filter by visiblity'
             events:
                 type: 'InternalEventConnection!'
                 description: 'Get all events that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\OwnerEventsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    hideDeletedEvents:
+                        type: 'Boolean'
+                        description: 'Hide deleted events'
+                    hideUnpublishedEvents:
+                        type: 'Boolean'
+                        description: 'Hide unpublished events'
             proposalForms:
                 type: 'InternalProposalFormConnection!'
                 description: 'Get all proposalForm that the organization owns.'
@@ -117,3 +128,12 @@ InternalOrganization:
                 description: 'Get all emailing campaigns that the organization owns.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationEmailingCampaignsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
+            posts:
+                type: 'InternalPostConnection!'
+                description: 'Get all posts that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationPostsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    hideUnpublishedPosts:
+                        type: 'Boolean'
+                        description: 'Hide unpublished posts'

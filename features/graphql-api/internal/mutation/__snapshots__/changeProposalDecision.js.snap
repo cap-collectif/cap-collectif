@@ -55,10 +55,10 @@ Object {
       "officialResponse": Object {
         "authors": Array [
           Object {
-            "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
+            "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
           },
           Object {
-            "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
+            "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
           },
         ],
         "body": "Je suis le body de l'article lié à la proposition sur laquelle je donne ma décision",
@@ -72,15 +72,15 @@ Object {
       "officialResponse": Object {
         "authors": Array [
           Object {
-            "displayName": "decisionmaker",
-            "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
-            "url": "https://capco.test/profile/decisionmaker",
-            "vip": false,
-          },
-          Object {
             "displayName": "supervisor2",
             "id": "VXNlcjp1c2VyU3VwZXJ2aXNvcjI=",
             "url": "https://capco.test/profile/supervisor2",
+            "vip": false,
+          },
+          Object {
+            "displayName": "decisionmaker",
+            "id": "VXNlcjp1c2VyRGVjaXNpb25NYWtlcg==",
+            "url": "https://capco.test/profile/decisionmaker",
             "vip": false,
           },
         ],

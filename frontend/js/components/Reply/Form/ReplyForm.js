@@ -639,7 +639,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     reply ? reply.responses : [],
   );
 
-  console.log(getFormSyncErrors(RequirementsFormLegacyName)(state));
 
   return {
     responses:

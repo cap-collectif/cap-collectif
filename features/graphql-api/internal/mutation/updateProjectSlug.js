@@ -44,6 +44,6 @@ describe('mutations.createEvent', () => {
         },
         'internal_admin',
       ),
-    ).resolves.toMatchSnapshot();
+    ).rejects.toThrowError('Access denied to this field.');
   });
 });

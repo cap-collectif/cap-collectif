@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
@@ -401,10 +402,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         return $this;
     }
 
-    public function getFirstAuthor(): ?User
+    public function getFirstAuthor(): ?Owner
     {
         if ($this->authors && isset($this->authors[0])) {
-            return $this->authors[0]->getUser();
+                return $this->authors[0]->getAuthor();
         }
 
         return null;

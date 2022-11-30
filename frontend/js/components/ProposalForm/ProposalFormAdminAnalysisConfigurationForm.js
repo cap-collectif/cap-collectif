@@ -239,6 +239,17 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                       }
                     }
                   }
+                  organizations {
+                    questionnaires(affiliations: $affiliations, availableOnly: true) {
+                      edges {
+                        node {
+                          id
+                          title
+                          adminUrl
+                        }
+                      }
+                    }
+                  }
                 }
               }
             `}
@@ -256,9 +267,11 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
 
               if (props) {
                 const { viewer } = props;
+                const organization = viewer?.organizations?.[0];
+                const questionnaires = organization?.questionnaires ?? viewer.questionnaires
 
                 const availableQuestionnaires: QuestionnaireFormatted[] =
-                  viewer.questionnaires.edges
+                  questionnaires.edges
                     ?.filter(Boolean)
                     .map(edge => edge.node)
                     .filter(Boolean)

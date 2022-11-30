@@ -9,11 +9,13 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
+use Capco\AppBundle\Security\ProposalVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdatePaperVoteMutation implements MutationInterface
 {
@@ -23,15 +25,21 @@ class UpdatePaperVoteMutation implements MutationInterface
     private EntityManagerInterface $em;
     private GlobalIdResolver $resolver;
     private ProposalStepPaperVoteCounterRepository $repository;
+    private GlobalIdResolver $globalIdResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $resolver,
-        ProposalStepPaperVoteCounterRepository $repository
+        ProposalStepPaperVoteCounterRepository $repository,
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->resolver = $resolver;
         $this->repository = $repository;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -69,9 +77,6 @@ class UpdatePaperVoteMutation implements MutationInterface
         if (!($step instanceof CollectStep) && !($step instanceof SelectionStep)) {
             throw new UserError(self::STEP_NOT_FOUND);
         }
-        if (!$viewer->isAdmin() && $step->getProject()->getOwner() !== $viewer) {
-            throw new UserError(self::STEP_NOT_FOUND);
-        }
 
         return $step;
     }
@@ -81,9 +86,6 @@ class UpdatePaperVoteMutation implements MutationInterface
         $proposal = $this->resolver->resolve($input->offsetGet('proposal'), $viewer);
 
         if (null === $proposal) {
-            throw new UserError(self::PROPOSAL_NOT_FOUND);
-        }
-        if (!$viewer->isAdmin() && $proposal->getProject()->getOwner() !== $viewer) {
             throw new UserError(self::PROPOSAL_NOT_FOUND);
         }
 
@@ -100,4 +102,19 @@ class UpdatePaperVoteMutation implements MutationInterface
             ->setTotalCount(0)
             ->setTotalPointsCount(0);
     }
+
+    public function isGranted(string $proposalId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+        $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
+
+        if ($proposal) {
+            return $this->authorizationChecker->isGranted(ProposalVoter::EDIT, $proposal);
+        }
+
+        return false;
+    }
+
 }

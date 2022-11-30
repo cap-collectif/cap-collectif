@@ -12,9 +12,9 @@ import AppBox from '~/components/Ui/Primitives/AppBox';
 
 const FRAGMENT = graphql`
   fragment OrganizationPageProjectList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
+  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, visibilityFilter: { type: "ProjectVisibility" })
   @refetchable(queryName: "OrganizationPageProjectListPaginationQuery") {
-    projects(first: $count, after: $cursor)
+    projects(first: $count, after: $cursor, visibilityFilter: $visibilityFilter)
       @connection(key: "OrganizationPageProjectList_projects", filters: ["query", "orderBy"]) {
       totalCount
       edges {

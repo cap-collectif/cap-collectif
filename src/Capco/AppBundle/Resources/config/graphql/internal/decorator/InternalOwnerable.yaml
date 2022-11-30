@@ -4,6 +4,5 @@ InternalOwnerable:
     config:
         fields:
             creator:
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Ownerable\\OwnerableCreatorAccessResolver", [value, getUser()])'
                 type: 'InternalUser'
                 description: 'The user that created the resource.'

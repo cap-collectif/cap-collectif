@@ -53,6 +53,16 @@ Array [
       }
     }
   >
+    Valérie Masson Delmotte
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     25/10/2022
   </td>,
   <td
@@ -176,6 +186,16 @@ Array [
     }
   >
     -
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
     className="sc-bdvvtL gJUzIT cap-table__td"

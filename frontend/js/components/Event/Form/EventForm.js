@@ -199,7 +199,7 @@ export const validate = (values: FormValues, props: Props) => {
       errors[value] = 'fill-field';
     }
   });
-  if (props.query.viewer.isOnlyProjectAdmin) {
+  if (props.query.viewer.isOnlyProjectAdmin || props.query.viewer.organizations?.[0]) {
     if (!values.projects || values.projects.length === 0) {
       errors.projects = 'fill-field';
     }
@@ -266,11 +266,15 @@ export const EventForm = ({
   const isFeatureThemesEnabled = useFeatureFlag('themes');
   const isBackOfficeView = !isFrontendView;
 
+  const organization = query.viewer.organizations ? query.viewer.organizations[0] : null;
+  const owner = organization ?? query.viewer;
+
   const isDisabled = (adminCanEdit = false): boolean => {
     if (
       query.viewer.isSuperAdmin ||
       query.viewer.isOnlyProjectAdmin ||
       (query.viewer.isAdmin && !isFeatureUserEventEnabled)
+      || organization
     ) {
       return false;
     }
@@ -289,8 +293,6 @@ export const EventForm = ({
 
     return isBackOfficeView && !query.viewer.isAdmin;
   };
-
-  const organization = query.viewer.organizations ? query.viewer.organizations[0] : null;
 
   const isModerationDisable = (): boolean => {
     if (query.viewer.isSuperAdmin) {
@@ -529,7 +531,7 @@ export const EventForm = ({
           />
         )}
         <SelectProject
-          query={query.viewer}
+          projectOwner={owner}
           multi
           clearable
           name="projects"
@@ -539,7 +541,7 @@ export const EventForm = ({
           disabled={false}
         />
         <SelectStep
-          query={query.viewer}
+          projectOwner={owner}
           multi
           clearable
           projectIds={selectedProjectIds}
@@ -638,7 +640,7 @@ export const EventForm = ({
               </div>
             </div>
           )}
-          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin) && isBackOfficeView && (
+          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin || organization) && isBackOfficeView && (
             <div>
               <div className="box-header pt-0">
                 <h3 className="box-title">{intl.formatMessage({ id: 'global.publication' })}</h3>
@@ -848,8 +850,8 @@ export default createFragmentContainer(container, {
     @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...SelectTheme_query
       viewer {
-        ...SelectProject_viewer @arguments(affiliations: $affiliations)
-        ...SelectStep_viewer @arguments(affiliations: $affiliations)
+        ...SelectProject_projectOwner @arguments(affiliations: $affiliations)
+        ...SelectStep_projectOwner @arguments(affiliations: $affiliations)
         isAdmin
         isSuperAdmin
         isOnlyProjectAdmin
@@ -858,6 +860,8 @@ export default createFragmentContainer(container, {
         organizations {
           id
           displayName
+          ...SelectProject_projectOwner @arguments(affiliations: $affiliations)
+          ...SelectStep_projectOwner @arguments(affiliations: $affiliations)
         }
       }
     }
@@ -900,7 +904,9 @@ export default createFragmentContainer(container, {
       author {
         id
         displayName
-        isAdmin
+        ... on User {
+          isAdmin
+        }
       }
       lat
       lng

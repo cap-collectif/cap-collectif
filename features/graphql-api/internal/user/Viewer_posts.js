@@ -78,8 +78,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(24);
-    expect(response.viewer.posts.edges).toHaveLength(24);
+    expect(response.viewer.posts.totalCount).toBe(25);
+    expect(response.viewer.posts.edges).toHaveLength(25);
   });
 
   it('should correctly fetch posts filtered by a given query', async () => {
@@ -91,10 +91,12 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(1);
-    expect(response.viewer.posts.edges).toHaveLength(1);
-    expect(response.viewer.posts.edges[0].node.id).toBe('UG9zdDpwb3N0V2l0aE93bmVyMg==');
-    expect(response.viewer.posts.edges[0].node.title).toBe('Deuxieme article possédé par un owner');
+    expect(response.viewer.posts.totalCount).toBe(2);
+    expect(response.viewer.posts.edges).toHaveLength(2);
+    expect(response.viewer.posts.edges[0].node.id).toBe('UG9zdDpwb3N0V2l0aE9yZ2FNZW1iZXIy');
+    expect(response.viewer.posts.edges[0].node.title).toBe('Deuxieme article');
+    expect(response.viewer.posts.edges[1].node.id).toBe('UG9zdDpwb3N0V2l0aE93bmVyMg==');
+    expect(response.viewer.posts.edges[1].node.title).toBe('Deuxieme article possédé par un owner');
   });
 
   it('should correctly fetch all posts if given `query` is empty', async () => {
@@ -106,8 +108,8 @@ describe('Internal.viewer.posts', () => {
       'internal_theo',
     );
 
-    expect(response.viewer.posts.totalCount).toBe(24);
-    expect(response.viewer.posts.edges).toHaveLength(24);
+    expect(response.viewer.posts.totalCount).toBe(25);
+    expect(response.viewer.posts.edges).toHaveLength(25);
   });
 
   it('should correctly order posts by a given field and direction', async () => {

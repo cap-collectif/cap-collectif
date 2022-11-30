@@ -102,13 +102,11 @@ const ProjectList: React.FC<ProjectListProps> = ({
                             {intl.formatMessage({ id: 'admin.fields.proposal.project' })}
                         </Text>
                     </Table.Th>
-                    {isAdmin && (
-                        <Table.Th>
-                            <Text lineHeight="sm">
-                                {intl.formatMessage({ id: 'admin.projects.list.author' })}
-                            </Text>
-                        </Table.Th>
-                    )}
+                    <Table.Th>
+                        <Text lineHeight="sm">
+                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
+                        </Text>
+                    </Table.Th>
                     {isAdmin || isAdminOrganization ? (
                         <Table.Th>
                             <Text lineHeight="sm">

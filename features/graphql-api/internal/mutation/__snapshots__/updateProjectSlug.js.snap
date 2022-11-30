@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.createEvent should return PROJECT_NOT_FOUND errorCode 1`] = `
-Object {
-  "updateProjectSlug": Object {
-    "errorCode": "PROJECT_NOT_FOUND",
-    "project": null,
-  },
-}
-`;
-
 exports[`mutations.createEvent should update slug 1`] = `
 Object {
   "updateProjectSlug": Object {

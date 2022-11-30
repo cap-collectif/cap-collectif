@@ -36,7 +36,9 @@ Scenario: Logged in API client wants delete his event
         event {
           deletedAt
           author {
-            _id
+            ...on User {
+              _id
+            }
           }
           timeRange {
             startAt
@@ -126,7 +128,9 @@ Scenario: Logged in API client wants delete his event
         event {
           deletedAt
           author {
-            _id
+            ...on User {
+              _id
+            }
           }
           timeRange {
             startAt

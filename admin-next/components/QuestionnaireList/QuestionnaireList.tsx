@@ -105,11 +105,9 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                 <Table.Tr>
                     <Table.Th width="50%">{intl.formatMessage({ id: 'global.title' })}</Table.Th>
                     <Table.Th>{intl.formatMessage({ id: 'global.project' })}</Table.Th>
-                    {viewer?.isAdmin && (
-                        <Table.Th>
-                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
-                        </Table.Th>
-                    )}
+                    <Table.Th>
+                        {intl.formatMessage({ id: 'admin.projects.list.author' })}
+                    </Table.Th>
                     {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                         <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
                     ) : null}

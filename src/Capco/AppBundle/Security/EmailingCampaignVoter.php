@@ -13,6 +13,8 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
     const EDIT = 'edit';
     const DELETE = 'delete';
     const SEND = 'send';
+    const TEST = 'test';
+    const CANCEL = 'cancel';
 
     protected function supports($attribute, $subject): bool
     {
@@ -22,6 +24,8 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
             self::EDIT,
             self::DELETE,
             self::SEND,
+            self::TEST,
+            self::CANCEL,
         ]) && $subject instanceof EmailingCampaign;
     }
 
@@ -44,12 +48,26 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
                 return self::canDelete($subject, $viewer);
             case self::SEND:
                 return self::canSend($subject, $viewer);
+            case self::TEST:
+                return self::canTest($subject, $viewer);
+            case self::CANCEL:
+                return self::canCancel($subject, $viewer);
             default:
                 return false;
         }
     }
 
     private static function canSend($subject, $viewer): bool
+    {
+        return self::canEdit($subject, $viewer);
+    }
+
+    private static function canTest($subject, $viewer): bool
+    {
+        return self::canEdit($subject, $viewer);
+    }
+
+    private static function canCancel($subject, $viewer): bool
     {
         return self::canEdit($subject, $viewer);
     }

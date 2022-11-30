@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
-use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -59,23 +58,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
 
         // revoke decisionMaker to proposals
         if (!$decisionMaker && !empty($proposalIds)) {
-            $connection = $this->buildErrorConnection($proposals, $input);
-            if ($connection instanceof ConnectionInterface) {
-                return $this->buildPayload(
-                    $connection,
-                    ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_DECISION_MAKER
-                );
-            }
-
             return $this->revokeDecisionMakerToProposals($proposals, $input);
-        }
-
-        $connection = $this->buildErrorConnection($proposals, $input);
-        if ($connection instanceof ConnectionInterface) {
-            return $this->buildPayload(
-                $connection,
-                ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER
-            );
         }
 
         $assignationChanges = self::getAssignationChanges($proposals, $decisionMaker);
@@ -193,29 +176,26 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         ];
     }
 
-    private function isGranted($proposal): bool
+
+    public function isGranted(array $proposalIds, ?User $viewer = null): bool
     {
-        return $this->authorizationChecker->isGranted(
-            ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER,
-            $proposal
-        );
-    }
-
-    private function buildErrorConnection(array $proposals, Arg $input): ?ConnectionInterface
-    {
-        /** @var Proposal $proposal */
-        foreach ($proposals as $proposal) {
-            $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if ($this->isGranted($proposal)) {
-                return null;
-            }
-
-            $connection = $this->builder->connectionFromArray($proposals, $input);
-            $connection->setTotalCount(\count($proposals));
-
-            return $connection;
+        if (!$viewer) {
+            return false;
         }
 
-        return null;
+        foreach ($proposalIds as $proposalId) {
+            /** * @var $proposal Proposal  */
+            $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
+            if (!$proposal) {
+                return false;
+            }
+            $isGranted = $this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER, $proposal);
+            if (!$isGranted) {
+                return false;
+            }
+        }
+
+        return true;
     }
+
 }

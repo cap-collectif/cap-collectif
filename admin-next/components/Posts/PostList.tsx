@@ -108,6 +108,11 @@ const PostList: React.FC<PostListProps> = ({ viewer: viewerRef, postOwner, term,
                     ) : null}
                     <Table.Th>
                         <Text lineHeight="sm">
+                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
+                        </Text>
+                    </Table.Th>
+                    <Table.Th>
+                        <Text lineHeight="sm">
                             {intl.formatMessage({ id: 'global.participative.project' })}
                         </Text>
                     </Table.Th>

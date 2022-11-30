@@ -32,6 +32,11 @@ describe('<ProjectModalExportSteps />', () => {
                 totalCount: 5,
             },
         }),
+        viewer: () => ({
+            isAdmin: true,
+            isOnlyProjectAdmin: false,
+            organizations: null
+        })
     };
 
     beforeEach(() => {

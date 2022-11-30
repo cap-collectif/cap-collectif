@@ -151,11 +151,18 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "User",
+                      "concreteType": null,
                       "kind": "LinkedField",
                       "name": "author",
                       "plural": false,
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": null,
@@ -167,14 +174,39 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isAdmin",
+                          "name": "displayName",
                           "storageKey": null,
                         },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isAdmin",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "User",
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "creator",
+                      "plural": false,
+                      "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "displayName",
+                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -515,7 +547,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "08a706453b196555d972a19eeedc98a9",
+          "cacheID": "e08fef95406627d21db88efa514ba346",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -540,8 +572,14 @@ fragment EventFormPage_event_FngS2 on Event {
   }
   deletedAt
   author {
+    __typename
     id
-    isAdmin
+    ... on User {
+      isAdmin
+    }
+  }
+  creator {
+    id
   }
   translations {
     locale
@@ -590,9 +628,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng
@@ -784,11 +825,18 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "User",
+                      "concreteType": null,
                       "kind": "LinkedField",
                       "name": "author",
                       "plural": false,
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "__typename",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": null,
@@ -800,14 +848,39 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isAdmin",
+                          "name": "displayName",
                           "storageKey": null,
                         },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isAdmin",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "User",
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "creator",
+                      "plural": false,
+                      "selections": Array [
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "displayName",
+                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -1148,7 +1221,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "08a706453b196555d972a19eeedc98a9",
+          "cacheID": "e08fef95406627d21db88efa514ba346",
           "id": null,
           "metadata": Object {},
           "name": "EventAdminQuery",
@@ -1173,8 +1246,14 @@ fragment EventFormPage_event_FngS2 on Event {
   }
   deletedAt
   author {
+    __typename
     id
-    isAdmin
+    ... on User {
+      isAdmin
+    }
+  }
+  creator {
+    id
   }
   translations {
     locale
@@ -1223,9 +1302,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng

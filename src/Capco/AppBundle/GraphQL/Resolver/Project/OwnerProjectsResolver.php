@@ -21,18 +21,23 @@ class OwnerProjectsResolver implements ResolverInterface
 
     public function __invoke(
         ProjectOwner $owner,
-        Argument $args,
-        ?User $viewer
+        Argument $args
     ): ConnectionInterface {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $viewer) {
+
+        $visibilityFilter = $args->offsetGet('visibilityFilter');
+        $options = [
+            'visibilityFilter' => $visibilityFilter
+        ];
+
+        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {
             return $this->repository->getByOwnerPaginated(
                 $owner,
-                $viewer,
                 $offset,
                 $limit,
+                $options
             );
         });
 
-        return $paginator->auto($args, $this->repository->countByOwner($owner, $viewer));
+        return $paginator->auto($args, $this->repository->countByOwner($owner, $options));
     }
 }

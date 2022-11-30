@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -14,6 +16,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostRepository extends EntityRepository
 {
+    private const ORDERS = [
+        'UPDATED_AT' => 'updatedAt',
+        'CREATED_AT' => 'createdAt',
+    ];
+
     public function getPublishedPostsByProposal(Proposal $proposal): array
     {
         return $this->createPublishedPostsByProposalQB($proposal)
@@ -327,4 +334,49 @@ class PostRepository extends EntityRepository
             ->andWhere('proposal.id = :id')
             ->setParameter('id', $proposal->getId());
     }
+
+    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByOwner(Owner $owner, array $options): int
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+    private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
+    {
+        $ownerField = $owner instanceof User ? 'p.owner' : 'p.organizationOwner';
+
+        $qb = $this->createQueryBuilder('p')
+            ->where("{$ownerField} = :owner")
+            ->setParameter('owner', $owner);
+
+        if ($query = $options['query']) {
+            $qb->join('p.translations', 'pt');
+            $qb->andWhere('pt.title LIKE :query');
+            $qb->setParameter('query', "%{$query}%");
+        }
+
+        if ($options['hideUnpublishedPosts']) {
+            $qb->andWhere('p.isPublished = true');
+        }
+
+        $orderByField = $options['orderByField'];
+        $orderByDirection = $options['orderByDirection'];
+
+        if ($orderByField && $orderByDirection) {
+            $qb->orderBy('p.' . self::ORDERS[$orderByField], $orderByDirection);
+        }
+
+        return $qb;
+    }
+
 }

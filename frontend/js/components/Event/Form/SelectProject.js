@@ -4,10 +4,10 @@ import { graphql, useFragment } from 'react-relay';
 import { useIntl, type IntlShape } from 'react-intl';
 import { Field } from 'redux-form';
 import select from '../../Form/Select';
-import type { SelectProject_viewer$key } from '~relay/SelectProject_viewer.graphql';
+import type { SelectProject_projectOwner$key } from '~relay/SelectProject_projectOwner.graphql';
 
 type Props = {|
-  +query: SelectProject_viewer$key,
+  +projectOwner: SelectProject_projectOwner$key,
   +multi: boolean,
   +clearable: boolean,
   +name: string,
@@ -17,8 +17,8 @@ type Props = {|
   +disabled: boolean,
 |};
 const FRAGMENT = graphql`
-  fragment SelectProject_viewer on User
-    @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
+  fragment SelectProject_projectOwner on ProjectOwner
+  @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
     projects(affiliations: $affiliations) {
       edges {
         node {
@@ -43,7 +43,7 @@ const renderLabel = (intl: IntlShape, label: string, optional: boolean) => {
 };
 
 const SelectProject = ({
-  query,
+  projectOwner,
   multi = false,
   clearable = false,
   name = 'project',
@@ -52,7 +52,7 @@ const SelectProject = ({
   placeholder,
   disabled = false,
 }: Props) => {
-  const { projects } = useFragment(FRAGMENT, query);
+  const { projects } = useFragment(FRAGMENT, projectOwner);
   const intl = useIntl();
   const renderSelectedOption =
     projects && projects.edges

@@ -39,7 +39,7 @@ final class OrganizationMemberNotifier extends BaseNotifier
             InvitationMessage::class,
             $invitation,
             [
-                'organizationName' => $invitation->getOrganization()->getTitle(),
+                'organizationName' => $this->organizationName,
                 'invitationUrl' => $this->urlResolver->getObjectUrl($invitation, true),
                 'plateformName' => $this->siteName,
                 'siteName' => $this->siteName,

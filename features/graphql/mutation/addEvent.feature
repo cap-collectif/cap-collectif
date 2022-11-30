@@ -15,7 +15,9 @@ Scenario: Admin wants to add an event with registration by external link
             title
             body
             author {
-              _id
+              ...on User {
+                _id
+              }
             }
             timeRange {
               startAt
@@ -242,7 +244,7 @@ Scenario: User wants to add an event with 2 registration type
 
 @database
 Scenario: User wants to add an event
-  Given I am logged in to graphql as user
+  When I am logged in to graphql as Agui
   Given feature allow_users_to_propose_events is enabled
   And I send a GraphQL POST request:
    """
@@ -255,7 +257,9 @@ Scenario: User wants to add an event
             title
             body
             author {
-              _id
+              ...on User {
+                _id
+              }
             }
             timeRange {
               startAt
@@ -316,7 +320,7 @@ Scenario: User wants to add an event
                  "title":"Rencontre avec les habitants",
                  "body":"Tout le monde est invit\u00e9",
                  "author":{
-                    "_id":"user5"
+                    "_id":"userAgui"
                  },
                  "timeRange":{
                     "startAt":"2018-03-07 00:00:00",

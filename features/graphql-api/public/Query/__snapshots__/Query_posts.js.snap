@@ -198,6 +198,20 @@ Object {
       ],
     },
     Object {
+      "enTitle": "Deuxieme article",
+      "frTitle": "Deuxieme article",
+      "id": "UG9zdDpwb3N0V2l0aE9yZ2FNZW1iZXIy",
+      "title": "Deuxieme article",
+      "translations": Array [
+        Object {
+          "abstract": null,
+          "body": "Body de l'article",
+          "locale": "FR_FR",
+          "title": "Deuxieme article",
+        },
+      ],
+    },
+    Object {
       "enTitle": "Post EN 1",
       "frTitle": "Post FR 1",
       "id": "UG9zdDpwb3N0MQ==",

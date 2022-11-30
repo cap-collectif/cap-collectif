@@ -41,7 +41,7 @@ Scenario: GraphQL client wants to get all campaigns
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount": 6,
+        "totalCount": 7,
         "edges":[
           {
             "node": {
@@ -91,12 +91,19 @@ Scenario: GraphQL client wants to get planned campaigns
   {
     "data": {
       "emailingCampaigns": {
-        "totalCount":1,
+        "totalCount":2,
         "edges":[
           {
             "node": {
               "name": "Campagne pour remercier les inscrits confirmés",
               "sendAt": "2021-01-01 00:00:00",
+              "status": "PLANNED"
+            }
+          },
+          {
+            "node": {
+              "name": "Campagne pour le projet avec organization planned",
+              "sendAt": null,
               "status": "PLANNED"
             }
           }
@@ -134,7 +141,7 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
   {
      "data":{
         "emailingCampaigns":{
-           "totalCount":6,
+           "totalCount":7,
            "edges":[
               {
                  "node":{

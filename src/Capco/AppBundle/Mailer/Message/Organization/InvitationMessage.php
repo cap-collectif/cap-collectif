@@ -16,7 +16,7 @@ final class InvitationMessage extends AbstractExternalMessage
         array $params
     ): array {
         return [
-            'organizationName' => $params['organizationName'],
+            'organizationName' => $invitation->getOrganization()->getTitle(),
             'invitationUrl' => $params['invitationUrl'],
             'baseUrl' => $params['baseURL'],
             'siteName' => $params['siteName'],
@@ -30,8 +30,8 @@ final class InvitationMessage extends AbstractExternalMessage
         array $params
     ): array {
         return [
-            'organizationName' => self::escape($params['organizationName']),
-            'plateformName' => $params['plateformName'],
+            'organizationName' => $invitation->getOrganization()->getTitle(),
+            'plateformName' => $params['organizationName'],
         ];
     }
 

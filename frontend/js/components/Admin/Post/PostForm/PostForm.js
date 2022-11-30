@@ -50,6 +50,10 @@ type FormValues = {|
   +isSuperAdmin?: ?boolean,
   +proposalId?: ?string,
   +bodyUsingJoditWysiwyg?: ?boolean,
+  +organization?: {
+    id: string,
+    displayName: string,
+  },
 |};
 type OwnProps = {|
   +query: PostForm_query$key,
@@ -94,6 +98,14 @@ const FRAGMENT = graphql`
       organizations {
         id
         displayName
+        projects(affiliations: $affiliations) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
       }
     }
     themes @include(if: $isAdmin) {
@@ -203,6 +215,9 @@ const PostForm = ({
   const multiLangue = useFeatureFlag('multilangue');
   const organization = data.viewer.organizations?.[0];
 
+  const owner = organization ?? data?.viewer;
+  const projects = owner?.projects;
+
   React.useEffect(() => {
     if (dirty) {
       window.addEventListener('beforeunload', onUnload);
@@ -215,7 +230,7 @@ const PostForm = ({
   }, [dirty]);
 
   const renderLinkedContent = () => {
-    if (data.viewer.isAdmin || data.viewer.isSuperAdmin) {
+    if (data.viewer.isAdmin) {
       return (
         <>
           {initialValues.proposal && (
@@ -250,7 +265,7 @@ const PostForm = ({
             autoload
             clearable
             loadOptions={() =>
-              data?.viewer?.projects?.edges
+              projects?.edges
                 ?.filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
@@ -294,7 +309,7 @@ const PostForm = ({
         </>
       );
     }
-    if (data.viewer.isProjectAdmin) {
+    if (data.viewer.isProjectAdmin || organization) {
       return (
         <>
           {initialValues.proposal && (
@@ -330,7 +345,7 @@ const PostForm = ({
               autoload
               clearable
               loadOptions={() =>
-                data?.viewer?.projects?.edges
+                projects?.edges
                   ?.filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
@@ -645,7 +660,12 @@ const validate = (values: FormValues) => {
   if (!values.author || values.author.length === 0) {
     errors.author = 'fill-field';
   }
-  if (!values.isAdmin && !values.isSuperAdmin && values.isProjectAdmin && !values.proposal) {
+  if (
+    !values.isAdmin &&
+    !values.isSuperAdmin &&
+    (values.isProjectAdmin || values?.organization) &&
+    !values.proposal
+  ) {
     if (!values.project || values.project.length === 0) {
       errors.project = 'fill-field';
     }
@@ -661,6 +681,7 @@ const mapStateToProps = (state: GlobalState, { initialValues, query }: OwnProps)
     bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
     initialValues: {
       ...initialValues,
+      organization,
       author: organization?.id
         ? {
             value: organization?.id,

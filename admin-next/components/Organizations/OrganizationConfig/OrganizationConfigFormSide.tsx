@@ -96,9 +96,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             name="socialNetworks.webPageUrl"
                             control={control}
                             type="text"
-                            placeholder={intl.formatMessage({
-                                id: 'admiun.project.create.title.placeholder',
-                            })}
+                            placeholder="https://votresiteweb.com"
                         />
                     </FormControl>
                     <FormControl name="socialNetworks.twitterUrl" control={control}>
@@ -111,9 +109,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             name="socialNetworks.twitterUrl"
                             control={control}
                             type="text"
-                            placeholder={intl.formatMessage({
-                                id: 'admiun.project.create.title.placeholder',
-                            })}
+                            placeholder="https://twitter.com/pseudo"
                         />
                     </FormControl>
                     <FormControl name="socialNetworks.facebookUrl" control={control}>
@@ -126,9 +122,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             name="socialNetworks.facebookUrl"
                             control={control}
                             type="text"
-                            placeholder={intl.formatMessage({
-                                id: 'admiun.project.create.title.placeholder',
-                            })}
+                            placeholder="https://facebook.com/pseudo"
                         />
                     </FormControl>
                 </Accordion.Panel>

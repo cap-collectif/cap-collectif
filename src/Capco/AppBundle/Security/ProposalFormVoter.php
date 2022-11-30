@@ -13,6 +13,7 @@ class ProposalFormVoter extends AbstractOwnerableVoter
     const EDIT = 'edit';
     const DELETE = 'delete';
     const DUPLICATE = 'duplicate';
+    const IMPORT_PROPOSALS = 'import_proposals';
 
     protected function supports($attribute, $subject)
     {
@@ -23,6 +24,7 @@ class ProposalFormVoter extends AbstractOwnerableVoter
                 self::DELETE,
                 self::VIEW,
                 self::DUPLICATE,
+                self::IMPORT_PROPOSALS,
             ])
         ) {
             return false;

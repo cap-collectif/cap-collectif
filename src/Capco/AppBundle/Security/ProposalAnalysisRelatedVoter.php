@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ProposalAnalysisRelatedVoter extends Voter
+class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
 {
     public const ANALYSE = 'ANALYSE';
     public const EVALUATE = 'EVALUATE';
@@ -76,7 +76,7 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canSee(Proposal $subject, User $viewer): bool
     {
-        return $this->viewerIsAdminOrOwner($subject, $viewer) ||
+        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
             $subject->getDecisionMaker() === $viewer ||
             $subject->getSupervisor() === $viewer ||
             $subject->getAnalysts()->contains($viewer);
@@ -106,19 +106,19 @@ class ProposalAnalysisRelatedVoter extends Voter
 
     private function canAssignSupervisor(Proposal $subject, User $viewer): bool
     {
-        return $this->viewerIsAdminOrOwner($subject, $viewer) ||
+        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
             $subject->getDecisionMaker() === $viewer;
     }
 
     private function canAssignDecisionMaker(Proposal $subject, User $viewer): bool
     {
-        return $this->viewerIsAdminOrOwner($subject, $viewer);
+        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer);
     }
 
     private function canAssignAnalyst(Proposal $subject, User $viewer): bool
     {
         if (
-            $this->viewerIsAdminOrOwner($subject, $viewer) ||
+            self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
             $subject->getDecisionMaker() === $viewer ||
             $subject->getSupervisor() === $viewer
         ) {
@@ -126,10 +126,5 @@ class ProposalAnalysisRelatedVoter extends Voter
         }
 
         return $this->canAnalyse($subject, $viewer);
-    }
-
-    private function viewerIsAdminOrOwner(Proposal $subject, User $viewer): bool
-    {
-        return $viewer->isAdmin() || $subject->getProjectOwner() === $viewer;
     }
 }

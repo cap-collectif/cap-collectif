@@ -43,6 +43,16 @@ Array [
       }
     }
   >
+    &lt;mock-value-for-field-"username"&gt;
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     <div
       className="sc-bdvvtL eRYtWO"
     >
@@ -254,6 +264,16 @@ Array [
     >
       Post FR 12
     </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
     className="sc-bdvvtL gJUzIT cap-table__td"

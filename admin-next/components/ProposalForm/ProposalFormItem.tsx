@@ -116,7 +116,7 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
                     proposalForm?.step?.project?.title
                 )}
             </Table.Td>
-            {viewer?.isAdmin && <Table.Td>{proposalForm.creator?.username}</Table.Td>}
+            <Table.Td>{proposalForm.creator?.username}</Table.Td>
             {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                 <Table.Td>{proposalForm.owner?.username}</Table.Td>
             ) : null}

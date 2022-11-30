@@ -90,6 +90,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->isSuperAdmin()->willReturn(false);
         $viewer->isProjectAdmin()->willReturn(false);
         $viewer->isOnlyUser()->willReturn(true);
+        $viewer->isOrganizationMember()->willReturn(false);
 
         $event->getAuthor()->willReturn($viewer);
 

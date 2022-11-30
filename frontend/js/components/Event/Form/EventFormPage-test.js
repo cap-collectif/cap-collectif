@@ -23,14 +23,20 @@ const defaultProps = {
     author: { id: 'auth1', isAdmin: true },
     translations: [],
     deletedAt: null,
+    creator: {
+      id: 'viewerId',
+    },
     $fragmentRefs,
     $refType,
   },
   query: {
     viewer: {
+      id: 'viewerId',
       isSuperAdmin: true,
       isAdmin: false,
       isOnlyProjectAdmin: false,
+      isAdminOrganization: false,
+      organizations: null,
     },
     $fragmentRefs,
     $refType,
@@ -59,9 +65,12 @@ describe('<EventAdminFormPage />', () => {
       invalid: false,
       query: {
         viewer: {
+          id: 'viewerId',
           isSuperAdmin: false,
           isAdmin: false,
           isOnlyProjectAdmin: false,
+          isAdminOrganization: false,
+          organizations: null,
         },
         $fragmentRefs,
         $refType,
@@ -95,15 +104,21 @@ describe('<EventAdminFormPage />', () => {
         review: null,
         author: { id: 'auth1', isAdmin: true },
         translations: [],
+        creator: {
+          id: 'viewerId',
+        },
         deletedAt: null,
         $fragmentRefs,
         $refType,
       },
       query: {
         viewer: {
+          id: 'viewerId',
           isSuperAdmin: false,
           isAdmin: false,
           isOnlyProjectAdmin: false,
+          isAdminOrganization: false,
+          organizations: null,
         },
         $fragmentRefs,
         $refType,
@@ -129,14 +144,20 @@ describe('<EventAdminFormPage />', () => {
         review: null,
         translations: [],
         deletedAt: null,
+        creator: {
+          id: 'viewerId',
+        },
         $fragmentRefs,
         $refType,
       },
       query: {
         viewer: {
+          id: 'viewerId',
           isSuperAdmin: false,
           isAdmin: false,
           isOnlyProjectAdmin: false,
+          isAdminOrganization: false,
+          organizations: null,
         },
         $fragmentRefs,
         $refType,
@@ -160,6 +181,9 @@ describe('<EventAdminFormPage />', () => {
         viewerDidAuthor: true,
         review: null,
         author: { id: 'auth1', isAdmin: true },
+        creator: {
+          id: 'viewerId',
+        },
         translations: [
           {
             locale: 'fr-FR',
@@ -182,9 +206,12 @@ describe('<EventAdminFormPage />', () => {
       },
       query: {
         viewer: {
+          id: 'viewerId',
           isSuperAdmin: false,
           isAdmin: false,
           isOnlyProjectAdmin: false,
+          isAdminOrganization: false,
+          organizations: null,
         },
         $fragmentRefs,
         $refType,

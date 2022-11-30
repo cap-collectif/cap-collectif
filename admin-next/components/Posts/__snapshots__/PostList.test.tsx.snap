@@ -67,6 +67,15 @@ Array [
             <p
               className="sc-bdvvtL bhcRpW cap-text"
             >
+              admin.projects.list.author
+            </p>
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
+            <p
+              className="sc-bdvvtL bhcRpW cap-text"
+            >
               global.participative.project
             </p>
           </th>
@@ -310,6 +319,16 @@ Array [
               }
             }
           >
+            &lt;mock-value-for-field-"username"&gt;
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             <div
               className="sc-bdvvtL eRYtWO"
             >
@@ -509,6 +528,16 @@ Array [
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"

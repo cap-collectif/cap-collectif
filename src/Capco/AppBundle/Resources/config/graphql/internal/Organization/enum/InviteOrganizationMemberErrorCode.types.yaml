@@ -16,3 +16,6 @@ InviteOrganizationMemberErrorCode:
             USER_NOT_ONLY_ROLE_USER:
                 value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation::USER_NOT_ONLY_ROLE_USER")'
                 description: 'The invited user is not only regular user.'
+            USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\InviteOrganizationMemberMutation::USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION")'
+                description: 'The invited user is already member of another organization.'

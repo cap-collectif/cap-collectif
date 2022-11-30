@@ -14,6 +14,9 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "creator": Object {
+            "id": "viewerId",
+          },
           "deletedAt": null,
           "id": "event1",
           "review": null,
@@ -43,9 +46,12 @@ exports[`<EventAdminFormPage /> it renders correctly with translations 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
+            "organizations": null,
           },
         }
       }
@@ -107,6 +113,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
             "id": "auth1",
             "isAdmin": true,
           },
+          "creator": Object {
+            "id": "viewerId",
+          },
           "deletedAt": null,
           "id": "event1",
           "review": null,
@@ -121,9 +130,12 @@ exports[`<EventAdminFormPage /> it renders correctly, with  registration type 1`
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
+            "organizations": null,
           },
         }
       }
@@ -185,6 +197,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "creator": Object {
+            "id": "viewerId",
+          },
           "deletedAt": null,
           "id": "event1",
           "review": null,
@@ -199,9 +214,12 @@ exports[`<EventAdminFormPage /> it renders correctly, with bad date 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
+            "organizations": null,
           },
         }
       }
@@ -263,6 +281,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
             "id": "auth1",
             "isAdmin": true,
           },
+          "creator": Object {
+            "id": "viewerId",
+          },
           "deletedAt": null,
           "id": "event1",
           "review": null,
@@ -277,9 +298,12 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at false 1`] = 
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": false,
+            "organizations": null,
           },
         }
       }
@@ -341,6 +365,9 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
             "id": "auth1",
             "isAdmin": true,
           },
+          "creator": Object {
+            "id": "viewerId",
+          },
           "deletedAt": null,
           "id": "event1",
           "review": null,
@@ -355,9 +382,12 @@ exports[`<EventAdminFormPage /> it renders correctly, with props at true 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": true,
+            "organizations": null,
           },
         }
       }
@@ -426,9 +456,12 @@ exports[`<EventAdminFormPage /> it renders correctly, without event 1`] = `
           "$fragmentRefs": null,
           "$refType": null,
           "viewer": Object {
+            "id": "viewerId",
             "isAdmin": false,
+            "isAdminOrganization": false,
             "isOnlyProjectAdmin": false,
             "isSuperAdmin": true,
+            "organizations": null,
           },
         }
       }

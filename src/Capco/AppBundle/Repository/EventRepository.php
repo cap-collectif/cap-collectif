@@ -176,30 +176,55 @@ class EventRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getByOwnerPaginated(Owner $owner, int $offset, int $limit): array
+    public function getByOwnerPaginated(Owner $owner, int $offset, int $limit, array $options): array
     {
-        return $this->getByOwnerQueryBuilder($owner)
+        return $this->getByOwnerQueryBuilder($owner, $options)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
 
-    public function countByOwner(Owner $owner): int
+    public function countByOwner(Owner $owner, $options): int
     {
-        return $this->getByOwnerQueryBuilder($owner)
+        return $this->getByOwnerQueryBuilder($owner, $options)
             ->select('count(e.id)')
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function getByOwnerQueryBuilder(Owner $owner): QueryBuilder
+    public function getByOwnerQueryBuilder(Owner $owner, $options): QueryBuilder
     {
-        return $this->createAvailableOrApprovedEventsQueryBuilder('e')
+        $qb = $this->createQueryBuilder('e')
             ->leftJoin($owner instanceof User ? 'e.owner' : 'e.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
-            ->orderBy('e.startAt', 'DESC');
+            ->orderBy('e.startAt', 'DESC')
+        ;
+
+        if ($options['query'] ?? false) {
+            $qb->join('e.translations', 'et');
+            $qb->andWhere('et.title LIKE :query');
+            $qb->setParameter('query', "%{$options['query']}%");
+        }
+
+        if ($options['hideUnpublishedEvents'] ?? false) {
+            $qb->andWhere('e.enabled = true');
+        }
+
+        switch ($options['status'] ?? false) {
+            case EventReviewStatusType::DELETED:
+                $qb->andWhere('e.deletedAt IS NOT NULL');
+                break;
+            case EventReviewStatusType::AWAITING:
+            case EventReviewStatusType::APPROVED:
+            case EventReviewStatusType::REFUSED:
+                $qb->leftJoin('e.review', 'review');
+                $qb->andWhere('e.review IS NOT NULL');
+                break;
+        }
+
+        return $qb;
     }
 
     private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder

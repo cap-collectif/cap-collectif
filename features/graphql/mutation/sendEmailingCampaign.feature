@@ -180,11 +180,39 @@ Scenario: GraphQL project owner tries to send other one campaign
   """
   Then the JSON response should match:
   """
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"sendEmailingCampaign":null}}
+  """
+
+  @database
+  Scenario: Organization admin send a draft campaign
+    Given I am logged in to graphql as VMD
+    And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: SendEmailingCampaignInput!) {
+      sendEmailingCampaign(input: $input) {
+        error
+        emailingCampaign {
+          status
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvT3JnYW5pemF0aW9uRHJhZnQ="
+      }
+    }
+  }
+  """
+    Then the JSON response should match:
+  """
   {
     "data": {
       "sendEmailingCampaign": {
-        "error": "ID_NOT_FOUND",
-        "emailingCampaign": null
+        "error": null,
+        "emailingCampaign": {
+          "status": "SENT"
+        }
       }
     }
   }

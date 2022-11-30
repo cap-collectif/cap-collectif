@@ -9,6 +9,7 @@ use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -17,9 +18,10 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $this->beConstructedWith($em, $globalIdResolver, $slugger);
+        $this->beConstructedWith($em, $globalIdResolver, $slugger, $authorizationChecker);
     }
 
     public function it_is_initializable()

@@ -174,3 +174,9 @@ Capco\AppBundle\Entity\EventTranslation:
         translatable: '@eventParthenay'
         title: 'Parthenay party'
         body: 'La grosse teuf de Parthenay'
+    eventOrganizationDeleted_fr:
+        id: 'eventOrganizationDeleted_fr'
+        locale: 'fr-FR'
+        translatable: '@eventOrganizationDeleted'
+        title: 'Event orga supprimé'
+        body: 'Je suis supprimé :('

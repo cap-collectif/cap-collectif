@@ -19,19 +19,20 @@ import type {
 import downloadCSV from 'utils/download-csv';
 import { useForm } from 'react-hook-form';
 import { FormControl, FieldInput } from '@cap-collectif/form';
+import {ProjectModalExportSteps_viewer$key} from "@relay/ProjectModalExportSteps_viewer.graphql";
 
 const formName = 'form-export-project';
 
 interface ProjectModalExportStepsProps {
     project: ProjectModalExportSteps_project$key;
-    isOnlyProjectAdmin?: boolean;
+    viewer: ProjectModalExportSteps_viewer$key;
 }
 
 type FormValues = {
     export_list: any,
 };
 
-const FRAGMENT = graphql`
+const PROJECT_FRAGMENT = graphql`
     fragment ProjectModalExportSteps_project on Project {
         title
         exportContributorsUrl
@@ -43,6 +44,16 @@ const FRAGMENT = graphql`
                 exportStepUrl
                 exportContributorsUrl
             }
+        }
+    }
+`;
+
+const VIEWER_FRAGMENT = graphql`
+    fragment ProjectModalExportSteps_viewer on User {
+        isAdmin
+        isOnlyProjectAdmin
+        organizations {
+            id
         }
     }
 `;
@@ -65,11 +76,15 @@ const getSteptrad = (step: ProjectModalExportSteps_project['exportableSteps'][nu
 };
 const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
     project: projectFragment,
-    isOnlyProjectAdmin,
+    viewer: viewerFragment,
 }) => {
-    const project = useFragment(FRAGMENT, projectFragment);
+    const project = useFragment(PROJECT_FRAGMENT, projectFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+    const organization = viewer?.organizations?.[0];
+    const canExportContributors = viewer?.isAdmin && !(!!organization && viewer?.isOnlyProjectAdmin);
+
     const intl = useIntl();
-    const exportChoices = isOnlyProjectAdmin
+    const exportChoices = !canExportContributors
         ? project.exportableSteps.map(step => {
               return {
                   id: step?.step?.exportStepUrl,

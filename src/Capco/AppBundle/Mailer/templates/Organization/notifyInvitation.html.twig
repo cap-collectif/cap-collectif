@@ -2,9 +2,9 @@
 
 {% set logo = app_logo_url() %}
 
-{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% set btnBg = capco_site_color_value('color.btn.primary.bg') %}
 {% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
-{% set btnText = capco_site_color_value('color.btn.text') %}
+{% set btnText = capco_site_color_value('color.btn.primary.text') %}
 {% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
 {% set linkText = capco_site_color_value('color.link.default') %}
 {% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}

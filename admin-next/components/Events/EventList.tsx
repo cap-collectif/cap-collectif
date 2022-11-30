@@ -2,7 +2,7 @@ import * as React from 'react';
 import { graphql, useFragment, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import EventItem from './EventItem';
-import { Table, Text, Icon, CapUIIcon } from '@cap-collectif/ui';
+import {Table, Text, Icon, CapUIIcon, Link} from '@cap-collectif/ui';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import { EventList_viewer$key } from '@relay/EventList_viewer.graphql';
 import { EventList_eventOwner$key } from '@relay/EventList_eventOwner.graphql';
@@ -142,6 +142,11 @@ const EventList: React.FC<EventListProps> = ({
                             {intl.formatMessage({ id: 'admin.projects.list.author' })}
                         </Table.Th>
                     )}
+                    <Table.Th>
+                        <Text lineHeight="sm">
+                            {intl.formatMessage({ id: 'admin.projects.list.author' })}
+                        </Text>
+                    </Table.Th>
                     {isAdmin || isAdminOrganization ? (
                         <Table.Th lineHeight="sm">
                             {intl.formatMessage({ id: 'global.owner' })}

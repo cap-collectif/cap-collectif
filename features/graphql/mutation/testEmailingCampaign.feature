@@ -86,11 +86,37 @@ Scenario: GraphQL project owner wants to test another one campaign
   """
   Then the JSON response should match:
   """
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"testEmailingCampaign":null}}
+  """
+
+
+  @database
+  Scenario: Organization admin tests a campaign
+    Given I am logged in to graphql as VMD
+    And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: TestEmailingCampaignInput!) {
+      testEmailingCampaign(input: $input) {
+        error
+        html
+      }
+    }",
+    "variables": {
+      "input": {
+        "email": "vincent@cap-collectif.com",
+        "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvT3JnYW5pemF0aW9uRHJhZnQ="
+      }
+    }
+  }
+  """
+    Then the JSON response should match:
+  """
   {
     "data": {
       "testEmailingCampaign": {
-        "error": "ID_NOT_FOUND",
-        "html": null
+        "error": null,
+        "html": "@string@"
       }
     }
   }

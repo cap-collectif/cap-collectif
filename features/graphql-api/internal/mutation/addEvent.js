@@ -123,4 +123,23 @@ describe('mutations.createEvent', () => {
       ),
     ).rejects.toThrowError();
   });
+
+  it('should create an event as organization', async () => {
+    const organizationId = toGlobalId('Organization', 'organization2');
+    await expect(
+      graphql(
+        AddEventMutation,
+        {
+          input: {
+            ...input,
+            projects: [],
+            customCode: undefined,
+            author: organizationId,
+            owner: organizationId,
+          },
+        },
+        'internal_christophe',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
 });

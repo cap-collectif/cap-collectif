@@ -18,6 +18,10 @@ const QUERY = graphql`
     $cursorProjects: String
     $cursorPosts: String
     $cursorEvents: String
+    $projectVisibilityFilter: ProjectVisibility
+    $hideDeletedEvents: Boolean
+    $hideUnpublishedEvents: Boolean
+    $hideUnpublishedPosts: Boolean
   ) {
     organization: node(id: $organizationId) {
       ... on Organization {
@@ -39,19 +43,20 @@ const QUERY = graphql`
           url
         }
         url
-        projectsCount: projects {
+        projectsCount: projects(visibilityFilter: $projectVisibilityFilter) {
           totalCount
         }
-        eventsCount: events {
+        eventsCount: events(hideDeletedEvents: $hideDeletedEvents, hideUnpublishedEvents: $hideUnpublishedEvents) {
           totalCount
         }
-        postsCount: posts {
+        postsCount: posts(hideUnpublishedPosts: $hideUnpublishedPosts) {
           totalCount
         }
         ...OrganizationPageProjectList_organization
-          @arguments(count: $count, cursor: $cursorProjects)
-        ...OrganizationPageEventList_organization @arguments(count: $count, cursor: $cursorEvents)
-        ...OrganizationPagePostList_organization @arguments(count: $count, cursor: $cursorPosts)
+          @arguments(count: $count, cursor: $cursorProjects, visibilityFilter: $projectVisibilityFilter)
+        ...OrganizationPageEventList_organization 
+            @arguments(count: $count, cursor: $cursorEvents, hideDeletedEvents: $hideDeletedEvents, hideUnpublishedEvents: $hideUnpublishedEvents)
+        ...OrganizationPagePostList_organization @arguments(count: $count, cursor: $cursorPosts, hideUnpublishedPosts: $hideUnpublishedPosts)
       }
     }
   }
@@ -66,6 +71,10 @@ export const OrganizationPage = ({ organizationId }: Props) => {
     cursorProjects: null,
     cursorPosts: null,
     cursorEvents: null,
+    projectVisibilityFilter: 'PUBLIC',
+    hideDeletedEvents: true,
+    hideUnpublishedEvents: true,
+    hideUnpublishedPosts: true,
   });
 
   if (!query || !query.organization) return null;
@@ -77,6 +86,8 @@ export const OrganizationPage = ({ organizationId }: Props) => {
   const hasProjects = !!projectsCount?.totalCount;
   const hasPosts = !!postsCount?.totalCount;
   const hasEvents = !!eventsCount?.totalCount;
+
+  console.log(hasEvents, eventsCount?.totalCount )
 
   const cover = organization.banner?.url;
   const logo = organization.media?.url;

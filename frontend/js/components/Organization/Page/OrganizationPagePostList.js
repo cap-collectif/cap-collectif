@@ -11,9 +11,9 @@ import PostCard from '~/components/Ui/News/PostCard';
 
 const FRAGMENT = graphql`
   fragment OrganizationPagePostList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
+  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, hideUnpublishedPosts: { type: "Boolean" })
   @refetchable(queryName: "OrganizationPagePostListPaginationQuery") {
-    posts(first: $count, after: $cursor)
+    posts(first: $count, after: $cursor, hideUnpublishedPosts: $hideUnpublishedPosts)
       @connection(key: "OrganizationPagePostList_posts", filters: ["query", "orderBy"]) {
       totalCount
       edges {

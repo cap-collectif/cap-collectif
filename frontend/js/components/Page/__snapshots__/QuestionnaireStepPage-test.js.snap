@@ -418,11 +418,18 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "User",
+                                        "concreteType": null,
                                         "kind": "LinkedField",
                                         "name": "author",
                                         "plural": false,
                                         "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -1917,7 +1924,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "2dd6d135ada3cdaf838076b8dde46fcf",
+        "cacheID": "dd4daa8efd477fb284a371f0566c02cb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -1967,6 +1974,7 @@ fragment ProjectEventPreview_event on Event {
   title
   url
   author {
+    __typename
     username
     id
   }
@@ -2755,11 +2763,18 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "User",
+                                        "concreteType": null,
                                         "kind": "LinkedField",
                                         "name": "author",
                                         "plural": false,
                                         "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
                                           Object {
                                             "alias": null,
                                             "args": null,
@@ -4254,7 +4269,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "2dd6d135ada3cdaf838076b8dde46fcf",
+        "cacheID": "dd4daa8efd477fb284a371f0566c02cb",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4304,6 +4319,7 @@ fragment ProjectEventPreview_event on Event {
   title
   url
   author {
+    __typename
     username
     id
   }

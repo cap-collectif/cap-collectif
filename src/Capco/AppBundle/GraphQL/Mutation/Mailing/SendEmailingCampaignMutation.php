@@ -6,6 +6,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -66,5 +67,19 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 
         $emailingCampaign->setSendAt(new \DateTime());
         $emailingCampaign->setStatus(EmailingCampaignStatus::SENT);
+    }
+
+    public function isGranted(string $id, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
+        if (!$emailCampaign) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::SEND, $emailCampaign);
     }
 }

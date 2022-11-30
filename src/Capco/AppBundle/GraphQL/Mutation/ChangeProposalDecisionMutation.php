@@ -6,11 +6,13 @@ use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Entity\OfficialResponseAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Event\DecisionEvent;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -45,6 +47,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
     private EventDispatcherInterface $eventDispatcher;
     private Indexer $indexer;
     private Publisher $publisher;
+    private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         ProposalRepository $proposalRepository,
@@ -56,7 +59,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
         Indexer $indexer,
         TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
-        Publisher $publisher
+        Publisher $publisher,
+        GlobalIdResolver $globalIdResolver
     ) {
         $this->proposalRepository = $proposalRepository;
         $this->entityManager = $entityManager;
@@ -68,6 +72,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $this->statusRepository = $statusRepository;
         $this->eventDispatcher = $eventDispatcher;
         $this->publisher = $publisher;
+        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array
@@ -92,7 +97,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         $oldState = $proposalDecision->getState();
 
         $this->updateDecision($proposalDecision, $args, $viewer);
-        $this->handleDecisionOfficialResponse($proposalDecision, $args);
+        $this->handleDecisionOfficialResponse($proposalDecision, $args, $viewer);
         $this->setRefusedReasonIfAny($proposalDecision, $args);
 
         if ($args->offsetGet('isDone')) {
@@ -192,7 +197,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
     private function handleDecisionOfficialResponse(
         ProposalDecision $proposalDecision,
-        Argument $args
+        Argument $args,
+        User $viewer
     ): ?OfficialResponse {
         $officialResponse = null;
         if (strip_tags($args->offsetGet('body')) || !empty($args->offsetGet('authors'))) {
@@ -204,7 +210,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
                     ->setIsPublished(false);
             }
             $officialResponse->setBody($args->offsetGet('body'));
-            $this->updateDecisionOfficialResponseAuthors($officialResponse, $args);
+            $this->updateDecisionOfficialResponseAuthors($officialResponse, $args, $viewer);
         } elseif ($proposalDecision->getOfficialResponse()) {
             $this->entityManager->remove($proposalDecision->getOfficialResponse());
         }
@@ -216,15 +222,18 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
     private function updateDecisionOfficialResponseAuthors(
         OfficialResponse $officialResponse,
-        Argument $args
+        Argument $args,
+        User $viewer
     ): OfficialResponse {
         $authors = $args->offsetGet('authors') ?? [];
         if (!empty($authors)) {
-            $authorsIds = [];
-            foreach ($authors as $author) {
-                $authorsIds[] = GlobalId::fromGlobalId($author)['id'];
+            foreach ($authors as $authorId) {
+                $author = $this->globalIdResolver->resolve($authorId, $viewer);
+                $officialResponseAuthor = (new OfficialResponseAuthor())
+                    ->setAuthor($author)
+                    ->setOfficialResponse($officialResponse);
+                $officialResponse->addAuthor($officialResponseAuthor);
             }
-            $officialResponse->setAuthors($this->userRepository->findBy(['id' => $authorsIds]));
         }
 
         return $officialResponse;

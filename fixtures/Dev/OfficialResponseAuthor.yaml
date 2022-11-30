@@ -1,0 +1,41 @@
+Capco\AppBundle\Entity\OfficialResponseAuthor:
+    officialResponseAuthor1:
+        id: 'officialResponseAuthor1'
+        author: '@user3'
+        officialResponse: '@officialResponse11'
+    officialResponseAuthor2:
+        id: 'officialResponseAuthor2'
+        author: '@userSupervisor2'
+        officialResponse: '@officialResponse17'
+    officialResponseAuthor3:
+        id: 'officialResponseAuthor3'
+        author: '@userSupervisor2'
+        officialResponse: '@officialResponse18'
+    officialResponseAuthor4:
+        id: 'officialResponseAuthor4'
+        author: '@userSupervisor2'
+        officialResponse: '@officialResponse19'
+    officialResponseAuthor5:
+        id: 'officialResponseAuthor5'
+        author: '@userSpyl'
+        officialResponse: '@officialResponse20'
+    officialResponseAuthor6:
+        id: 'officialResponseAuthor6'
+        author: '@userSpyl'
+        officialResponse: '@officialResponse21'
+    officialResponseAuthor7:
+        id: 'officialResponseAuthor7'
+        author: '@userSpyl'
+        officialResponse: '@officialResponse22'
+    officialResponseAuthor8:
+        id: 'officialResponseAuthor8'
+        author: '@userMickael'
+        officialResponse: '@officialResponse22'
+    officialResponseAuthor9:
+        id: 'officialResponseAuthor9'
+        author: '@userDecisionMaker'
+        officialResponse: '@officialResponse23'
+    officialResponseAuthor10:
+        id: 'officialResponseAuthor10'
+        author: '@userMickael'
+        officialResponse: '@officialResponse23'

@@ -62,11 +62,14 @@ describe('Internal mutation.addProposalsFromCsv', () => {
     expect(importProposals).toMatchSnapshot();
   });
   it('should not import when project admin is not owner', async () => {
-    const importProposals = await graphql(
-      AddProposalsFromCsvMutation,
-      { input },
-      'internal_kiroule',
-    );
-    expect(importProposals).toMatchSnapshot();
+    await expect(
+      graphql(
+        AddProposalsFromCsvMutation,
+        {
+          input,
+        },
+        'internal_kiroule',
+      ),
+    ).rejects.toThrowError('Access denied to this field.');
   });
 });

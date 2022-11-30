@@ -6,7 +6,8 @@ InternalOfficialResponse:
         name: OfficialResponse
         fields:
             authors:
-                type: '[InternalUser!]!'
+                type: '[Author!]!'
+                resolve: '@=value.getAuthorsObject()'
             proposal:
                 type: 'InternalProposal!'
             bodyUsingJoditWysiwyg:

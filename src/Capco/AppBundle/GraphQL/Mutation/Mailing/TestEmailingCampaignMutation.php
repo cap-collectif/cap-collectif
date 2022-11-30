@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\AbstractEmailingCampaignMessage;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\TestEmailingCampaignMessage;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -85,5 +86,19 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     private function getTestEmail(Argument $input): string
     {
         return $input->offsetGet('email');
+    }
+
+    public function isGranted(string $id, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
+        if (!$emailCampaign) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::TEST, $emailCampaign);
     }
 }

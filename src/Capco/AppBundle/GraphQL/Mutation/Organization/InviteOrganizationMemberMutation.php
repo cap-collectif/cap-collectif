@@ -26,6 +26,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
 {
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     public const USER_ALREADY_MEMBER = 'USER_ALREADY_MEMBER';
+    public const USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION = 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION';
     public const USER_ALREADY_INVITED = 'USER_ALREADY_INVITED';
     public const USER_NOT_ONLY_ROLE_USER = 'USER_NOT_ONLY_ROLE_USER';
     private EntityManagerInterface $em;
@@ -77,6 +78,10 @@ class InviteOrganizationMemberMutation implements MutationInterface
 
         if ($user instanceof User && $organization->isUserMember($user)) {
             return ['errorCode' => self::USER_ALREADY_MEMBER];
+        }
+
+        if ($user instanceof User && $user->isOrganizationMember()) {
+            return ['errorCode' => self::USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION];
         }
         if ($this->isUserAlreadyInvited($organization, $user, $email)) {
             return ['errorCode' => self::USER_ALREADY_INVITED];

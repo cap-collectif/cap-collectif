@@ -21,12 +21,21 @@ export const getSideBarItemsFiltered = (
         );
         // Organization Redirect
         if (sideBarItem.id === 'organizations') {
+            if (!isAdmin && !isOrganizationMember) {
+                return acc;
+            }
             if (isAdminOrganization) {
                 sideBarItem.href = `/admin-next/organizationConfig/${organization}`;
             } else if (isOrganizationMember && !isAdminOrganization) {
                 return acc;
             }
         }
+
+        // this is temporary
+        if (sideBarItem.id === 'analytics' && (isOrganizationMember)) {
+            return acc;
+        }
+
 
         if ((isItemForAdminOnly || isItemForAll) && hasItemFeatureRequired) {
             // Filtering sub items of a menu here

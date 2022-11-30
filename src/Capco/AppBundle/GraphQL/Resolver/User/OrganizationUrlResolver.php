@@ -19,7 +19,7 @@ class OrganizationUrlResolver implements ResolverInterface
     public function __invoke(Author $user): string
     {
         return $this->router->generate(
-            'capco_organization_profile_show',
+            'capco_organization_profile_show_all',
             ['slug' => $user->getSlug()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );

@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Organization.Posts organization admin should be able to fetch all posts from organization 1`] = `
+Object {
+  "node": Object {
+    "posts": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2022-01-08 00:00:00",
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Deuxieme article",
+            "updatedAt": "2022-01-08 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2021-01-08 00:00:00",
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Article créer par un membre du giec",
+            "updatedAt": "2021-01-08 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.Posts organization admin should be able to fetch posts from organization filter by query 1`] = `
+Object {
+  "node": Object {
+    "posts": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2022-01-08 00:00:00",
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Deuxieme article",
+            "updatedAt": "2022-01-08 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.Posts organization admin should be able to fetch posts from organization ordered by updated_at desc 1`] = `
+Object {
+  "node": Object {
+    "posts": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "createdAt": "2022-01-08 00:00:00",
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Deuxieme article",
+            "updatedAt": "2022-01-08 00:00:00",
+          },
+        },
+        Object {
+          "node": Object {
+            "createdAt": "2021-01-08 00:00:00",
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Article créer par un membre du giec",
+            "updatedAt": "2021-01-08 00:00:00",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

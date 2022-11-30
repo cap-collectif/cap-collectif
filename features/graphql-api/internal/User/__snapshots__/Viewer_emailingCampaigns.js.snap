@@ -27,7 +27,12 @@ Object {
         },
         Object {
           "node": Object {
-            "name": "Campagne pour le projet avec organization",
+            "name": "Campagne pour le projet avec organization draft",
+          },
+        },
+        Object {
+          "node": Object {
+            "name": "Campagne pour le projet avec organization planned",
           },
         },
         Object {
@@ -36,7 +41,7 @@ Object {
           },
         },
       ],
-      "totalCount": 6,
+      "totalCount": 7,
     },
   },
 }

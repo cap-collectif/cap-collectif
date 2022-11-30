@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Security\EventVoter;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -11,6 +12,10 @@ class EventController extends Controller
 {
     public function createAction(?Request $request = null)
     {
+        if (!$this->isGranted(EventVoter::CREATE, new Event())) {
+            throw $this->createAccessDeniedException();
+        }
+
         return $this->renderWithExtraParams(
             $this->admin->getTemplate('create'),
             [
@@ -24,7 +29,7 @@ class EventController extends Controller
 
     public function editAction($id = null)
     {
-        if (!$this->isGranted(EventVoter::VIEW_ADMIN, $this->admin->getSubject())) {
+        if (!$this->isGranted(EventVoter::EDIT, $this->admin->getSubject())) {
             throw $this->createAccessDeniedException();
         }
 

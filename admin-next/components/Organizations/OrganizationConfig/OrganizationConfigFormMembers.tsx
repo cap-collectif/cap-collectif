@@ -136,6 +136,14 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                         }),
                     });
                 }
+                if (response.inviteOrganizationMember?.errorCode === 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION') {
+                    toast({
+                        variant: 'danger',
+                        content: intl.formatMessage({
+                            id: 'this-user-cannot-join-the-organization',
+                        }),
+                    });
+                }
                 if (!response?.inviteOrganizationMember?.errorCode) {
                     toast({
                         variant: 'success',

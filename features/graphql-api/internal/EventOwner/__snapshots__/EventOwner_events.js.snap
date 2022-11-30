@@ -310,13 +310,20 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRPcmdhbml6YXRpb25EZWxldGVk",
+            "reviewStatus": "DELETED",
+            "title": "Event orga supprimé",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "RXZlbnQ6ZXZlbnREZWxldGVk",
             "reviewStatus": "DELETED",
             "title": "eventDeleted",
           },
         },
       ],
-      "totalCount": 1,
+      "totalCount": 2,
     },
   },
 }
@@ -388,6 +395,16 @@ Object {
               "startAt": "2029-03-03 00:00:00",
             },
             "title": "Le droit de suite",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnRPcmdhbml6YXRpb25EZWxldGVk",
+            "timeRange": Object {
+              "endAt": "2030-05-14 00:00:00",
+              "startAt": "2030-05-12 00:00:00",
+            },
+            "title": "Event orga supprimé",
           },
         },
         Object {
@@ -601,7 +618,7 @@ Object {
           },
         },
       ],
-      "totalCount": 24,
+      "totalCount": 25,
     },
   },
 }

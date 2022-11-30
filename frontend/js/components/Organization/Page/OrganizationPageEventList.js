@@ -11,9 +11,9 @@ import EventCard from '~/components/Ui/Event/EventCard';
 
 const FRAGMENT = graphql`
   fragment OrganizationPageEventList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
+  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, hideDeletedEvents: { type: "Boolean" }, hideUnpublishedEvents: { type: "Boolean" })
   @refetchable(queryName: "OrganizationPageEventListPaginationQuery") {
-    events(first: $count, after: $cursor)
+    events(first: $count, after: $cursor, hideDeletedEvents: $hideDeletedEvents, hideUnpublishedEvents: $hideUnpublishedEvents)
       @connection(key: "OrganizationPageEventList_events", filters: ["query", "orderBy"]) {
       totalCount
       edges {

@@ -192,15 +192,9 @@ Scenario: GraphQL client wants to create an officialResponse but wrong proposal 
   }
   """
   Then the JSON response should match:
+
   """
-  {
-    "data": {
-      "updateOfficialResponse": {
-        "error": "PROPOSAL_NOT_FOUND",
-        "officialResponse": null
-      }
-    }
-  }
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"updateOfficialResponse":null}}
   """
 
 Scenario: GraphQL client wants to update an officialResponse but wrong id

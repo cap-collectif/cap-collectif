@@ -11,7 +11,9 @@ const ChangeProposalDecisionMutation = /* GraphQL */ `
           authors {
             id
             url
-            vip
+            ...on User {
+              vip
+            }
             displayName
           }
         }

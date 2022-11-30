@@ -5888,7 +5888,7 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   viewerDidAuthor: Boolean
 
   """Identifies the author of the event."""
-  author: User
+  author: Author
 
   """The start date of the event."""
   startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange.startAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
@@ -6913,6 +6913,9 @@ enum InviteOrganizationMemberErrorCode {
 
   """The invited user is not only regular user."""
   USER_NOT_ONLY_ROLE_USER
+
+  """The invited user is already member of another organization."""
+  USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION
 }
 
 input InviteOrganizationMemberInput {
@@ -8218,7 +8221,7 @@ type OfficialResponse implements Node {
   publishedAt: DateTime
 
   """The response's authors."""
-  authors: [User!]!
+  authors: [Author!]!
 
   """The proposal linked to the official response"""
   proposal: Proposal!
@@ -8597,7 +8600,7 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
   isProjectAdmin: Boolean!
   userType: UserType
 
-  """Get all posts that the user owns."""
+  """Get all posts that the organization owns."""
   posts(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -8619,6 +8622,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """The ordering direction for posts"""
     orderBy: PostOrder = {field: UPDATED_AT, direction: DESC}
+
+    """Hide unpublished posts"""
+    hideUnpublishedPosts: Boolean
   ): PostConnection!
 
   """Get all events that the organization owns."""
@@ -8649,6 +8655,12 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """only fetch where user is author"""
     onlyWhenAuthor: Boolean = false
+
+    """Hide deleted events"""
+    hideDeletedEvents: Boolean
+
+    """Hide unpublished events"""
+    hideUnpublishedEvents: Boolean
   ): EventConnection!
 
   """Get all projects that the organization owns."""
@@ -8678,6 +8690,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     ID of a Status to filter by. If non-null, filter projects by statuses.
     """
     status: ID
+
+    """Filter by visiblity"""
+    visibilityFilter: ProjectVisibility
   ): ProjectConnection!
 
   """Get all proposalForm that the organization owns."""

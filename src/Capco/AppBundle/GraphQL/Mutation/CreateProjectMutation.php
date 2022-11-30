@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
@@ -70,7 +71,8 @@ class CreateProjectMutation implements MutationInterface
         if (isset($arguments['owner'])) {
             unset($arguments['owner']);
         }
-        if ($viewer->isOnlyProjectAdmin()) {
+        $owner = $project->getOwner();
+        if ($viewer->isOnlyProjectAdmin() || $owner instanceof Organization) {
             $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ME);
         }
 

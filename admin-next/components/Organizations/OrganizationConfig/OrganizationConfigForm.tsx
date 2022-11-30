@@ -5,7 +5,7 @@ import OrganizationConfigFormGeneral from './OrganizationConfigFormGeneral';
 import { useIntl } from 'react-intl';
 import OrganizationConfigFormSide from './OrganizationConfigFormSide';
 import OrganizationConfigFormMembers from './OrganizationConfigFormMembers';
-import { getInitialValues, getMemberList } from './OrganizationConfigForm.utils';
+import { getInitialValues } from './OrganizationConfigForm.utils';
 import UpdateOrganizationMutation from '@mutations/UpdateOrganizationMutation';
 import { UpdateOrganizationInput } from '@relay/UpdateOrganizationMutation.graphql';
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay';
@@ -26,6 +26,7 @@ export const QUERY = graphql`
             isDefault
             traductionKey
         }
+        ...OrganizationConfigFormGeneral_query
     }
 `;
 
@@ -82,6 +83,7 @@ const FRAGMENT = graphql`
         deletedAt
         ...OrganizationConfigFormMembers_organization
         ...OrganizationConfigFormDeleteOrganizationModal_organization
+        ...OrganizationConfigFormGeneral_organization
     }
 `;
 
@@ -89,8 +91,8 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
     organization: orgRef,
 }) => {
     const intl = useIntl();
-    const { availableLocales } = useLazyLoadQuery<OrganizationConfigFormQuery>(QUERY, {});
-    const defaultLocale = availableLocales.find(locale => locale.isDefault);
+    const query = useLazyLoadQuery<OrganizationConfigFormQuery>(QUERY, {});
+    const defaultLocale = query.availableLocales.find(locale => locale.isDefault);
     const organization = useFragment(FRAGMENT, orgRef);
 
     const { handleSubmit, formState, control, setError, setValue, watch } = useForm<FormValues>({
@@ -131,7 +133,7 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
             spacing={6}>
             <Flex direction="row" width="100%" spacing={6}>
                 <Flex direction="column" spacing={6} width="70%">
-                    <OrganizationConfigFormGeneral control={control} />
+                    <OrganizationConfigFormGeneral control={control} organization={organization} query={query}/>
                     <OrganizationConfigFormMembers organization={organization} />
                 </Flex>
                 <Flex direction="column" spacing={6} width="30%">

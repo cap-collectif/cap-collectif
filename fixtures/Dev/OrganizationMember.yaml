@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Organization\OrganizationMember:
         role: 'user'
     organizationMember5:
         organization: '@organization1'
-        user: '@user5'
+        user: '@user101'
         role: 'user'
     organizationMember7:
         organization: '@organization2'

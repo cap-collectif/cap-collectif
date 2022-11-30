@@ -116,7 +116,7 @@ Scenario: Anonymous wants to create an event
 
 @database
 Scenario: Logged in user wants to create an event
-  Given I am logged in as user
+  Given I am logged in as Agui
   Given features themes, projects, allow_users_to_propose_events, calendar are enabled
   And I visited "events page"
   And I wait "#btn-create-event" to appear on current page

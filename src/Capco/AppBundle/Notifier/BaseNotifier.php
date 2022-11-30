@@ -15,6 +15,7 @@ abstract class BaseNotifier
     protected RouterInterface $router;
     protected ?string $siteName;
     protected string $siteUrl;
+    protected ?string $organizationName;
 
     public function __construct(
         MailerService $mailer,
@@ -32,5 +33,6 @@ abstract class BaseNotifier
         );
         $this->siteUrl = $siteParams->getValue('global.site.url');
         $this->siteName = $siteParams->getValue('global.site.fullname');
+        $this->organizationName = $siteParams->getValue('global.site.organization_name');
     }
 }

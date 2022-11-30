@@ -65,6 +65,21 @@ describe('Internal|inviteOrganizationMember mutation', () => {
     expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_INVITED');
   });
 
+  it('should return USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION errorCode', async () => {
+    const response = await graphql(
+      InviteOrganizationMember,
+      {
+        input: {
+          ...input,
+          organizationId: toGlobalId('Organization', 'organization2'),
+          email: 'omar@cap-collectif.com',
+        },
+      },
+      'internal_admin',
+    );
+    expect(response.inviteOrganizationMember.errorCode).toBe('USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION');
+  });
+
   it('should return ORGANIZATION_NOT_FOUND errorCode', async () => {
     const response = await graphql(
       InviteOrganizationMember,

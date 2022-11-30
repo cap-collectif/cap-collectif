@@ -5,9 +5,8 @@ namespace Capco\AppBundle\Security;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class ProposalVoter extends Voter
+class ProposalVoter extends AbstractOwnerableVoter
 {
     public const CHANGE_STATUS = 'changeStatus';
     public const CHANGE_CONTENT = 'changeContent';
@@ -21,17 +20,23 @@ class ProposalVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!\in_array($attribute, [self::CHANGE_STATUS, self::CHANGE_CONTENT, self::EDIT, self::SELECT_PROPOSAL,
-            self::UNSELECT_PROPOSAL,
-            self::CREATE_PROPOSAL_FUSION,
-            self::UPDATE_PROPOSAL_FUSION,
-            self::CHANGE_PROPOSAL_NOTATION,
-            self::CHANGE_PROPOSAL_PROGRESS_STEPS
-        ])) {
+        if (
+            !\in_array($attribute, [
+                self::CHANGE_STATUS,
+                self::CHANGE_CONTENT,
+                self::EDIT,
+                self::SELECT_PROPOSAL,
+                self::UNSELECT_PROPOSAL,
+                self::CREATE_PROPOSAL_FUSION,
+                self::UPDATE_PROPOSAL_FUSION,
+                self::CHANGE_PROPOSAL_NOTATION,
+                self::CHANGE_PROPOSAL_PROGRESS_STEPS,
+            ])
+        ) {
             return false;
         }
 
-        if (in_array($attribute, [self::CREATE_PROPOSAL_FUSION, self::UPDATE_PROPOSAL_FUSION])) {
+        if (\in_array($attribute, [self::CREATE_PROPOSAL_FUSION, self::UPDATE_PROPOSAL_FUSION])) {
             return true;
         }
 
@@ -56,7 +61,7 @@ class ProposalVoter extends Voter
             case self::UNSELECT_PROPOSAL:
             case self::CHANGE_PROPOSAL_NOTATION:
             case self::CHANGE_PROPOSAL_PROGRESS_STEPS:
-                return self::isOwnerOrAdmin($subject, $viewer);
+                return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer);
             case self::CHANGE_CONTENT:
                 return self::canChangeContent($subject, $viewer);
             case self::CREATE_PROPOSAL_FUSION:
@@ -69,13 +74,11 @@ class ProposalVoter extends Voter
 
     private static function canChangeContent(Proposal $proposal, User $viewer): bool
     {
-        return $proposal->viewerCanUpdate($viewer) &&
-            ($proposal->canContribute($viewer) || $proposal->viewerIsAdminOrOwner($viewer));
-    }
+        if (self::isAdminOrOwnerOrMember($proposal->getProject(), $viewer)) {
+            return true;
+        }
 
-    private static function isOwnerOrAdmin(Proposal $proposal, User $viewer): bool
-    {
-        return $proposal->viewerIsAdminOrOwner($viewer);
+        return $proposal->viewerCanUpdate($viewer) && $proposal->canContribute($viewer);
     }
 
     private static function canFusion(array $proposals, User $viewer): bool
@@ -85,6 +88,7 @@ class ProposalVoter extends Voter
                 return false;
             }
         }
+
         return true;
     }
 }

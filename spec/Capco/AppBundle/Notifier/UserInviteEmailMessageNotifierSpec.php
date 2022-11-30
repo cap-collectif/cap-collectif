@@ -37,6 +37,7 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $router->generate('app_homepage', ['_locale' => 'fr'], 0)->willReturn('/');
         $siteParams->getValue('global.site.url')->willReturn('test');
         $siteParams->getValue('global.site.fullname')->willReturn('test');
+        $siteParams->getValue('global.site.organization_name')->willReturn('test');
         $this->beConstructedWith(
             $mailer,
             $siteParams,

@@ -215,7 +215,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       name="projects"
       optional={false}
       placeholder="select-project"
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",
@@ -235,7 +235,7 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
       name="steps"
       optional={false}
       projectIds={Array []}
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",
@@ -571,7 +571,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       name="projects"
       optional={false}
       placeholder="select-project"
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",
@@ -591,7 +591,7 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
       name="steps"
       optional={false}
       projectIds={Array []}
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",
@@ -927,7 +927,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       name="projects"
       optional={false}
       placeholder="select-project"
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",
@@ -947,7 +947,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
       name="steps"
       optional={false}
       projectIds={Array []}
-      query={
+      projectOwner={
         Object {
           "$fragmentRefs": null,
           "displayName": "Théo QP",

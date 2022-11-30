@@ -377,7 +377,7 @@ InternalMutation:
                     payloadType: CreateProposalPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateProposalMutation", [value, getUser()])'
             addProposalsFromCsv:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalsFromCsvMutation").isGranted(args["input"]["proposalFormId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: InternalAddProposalsFromCsvInput
@@ -753,7 +753,7 @@ InternalMutation:
                     payloadType: CreateQuestionnairePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateQuestionnaireMutation", [value, getUser()])'
             updateQuestionnaireParameters:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireParametersMutation").isGranted(args["input"]["questionnaireId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateQuestionnaireParametersInput
@@ -974,7 +974,7 @@ InternalMutation:
                     payloadType: AssignSupervisorToProposalsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AssignSupervisorToProposalsMutation", [value, getUser()])'
             assignDecisionMakerToProposals:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AssignDecisionMakerToProposalsMutation").isGranted(args["input"]["proposalIds"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AssignDecisionMakerToProposalsInput
@@ -1119,28 +1119,28 @@ InternalMutation:
                     payloadType: UpdateEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\UpdateEmailingCampaignMutation", [value, getUser()])'
             sendEmailingCampaign:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SendEmailingCampaignMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SendEmailingCampaignInput
                     payloadType: SendEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SendEmailingCampaignMutation", [value, getUser()])'
             testEmailingCampaign:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\TestEmailingCampaignMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: TestEmailingCampaignInput
                     payloadType: TestEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\TestEmailingCampaignMutation", [value, getUser()])'
             cancelEmailingCampaign:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CancelEmailingCampaignMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CancelEmailingCampaignInput
                     payloadType: CancelEmailingCampaignPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CancelEmailingCampaignMutation", [value, getUser()])'
             updateOfficialResponse:
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOfficialResponseMutation").isGranted(args["input"]["proposal"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateOfficialResponseInput
@@ -1505,7 +1505,7 @@ InternalMutation:
                     payloadType: SendSmsPhoneValidationCodePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\SendSmsPhoneValidationCodeMutation", [value, getUser()])'
             updateProposalStepPaperVoteCounter:
-                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdateProposalStepPaperVoteCounterMutation").isGranted(args["input"]["proposal"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateProposalStepPaperVoteCounterInput
@@ -1561,14 +1561,14 @@ InternalMutation:
                     payloadType: UpdateSmsCreditPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\UpdateSmsCreditMutation", [value, getUser()])'
             updatePaperVote:
-                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation").isGranted(args["input"]["proposal"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdatePaperVoteInput
                     payloadType: UpdatePaperVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation", [value, getUser()])'
             updateProjectSlug:
-                access: '@=hasRole("ROLE_PROJECT_ADMIN")'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProjectSlugMutation").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateProjectSlugInput

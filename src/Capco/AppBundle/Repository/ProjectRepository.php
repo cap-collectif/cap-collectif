@@ -109,30 +109,37 @@ class ProjectRepository extends EntityRepository
 
     public function getByOwnerPaginated(
         ProjectOwner $owner,
-        ?User $viewer,
         int $offset,
-        int $limit
+        int $limit,
+        array $options = []
     ): array {
-        return $this->getByOwnerQueryBuilder($owner, $viewer)
+        return $this->getByOwnerQueryBuilder($owner, $options)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()->getResult();
     }
 
-    public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int
+    public function countByOwner(ProjectOwner $owner, $options = []): int
     {
-        return $this->getByOwnerQueryBuilder($owner, $viewer)
+        return $this->getByOwnerQueryBuilder($owner, $options)
             ->select('count(p.id)')
             ->getQuery()->getSingleScalarResult();
     }
 
-    public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
+    public function getByOwnerQueryBuilder(ProjectOwner $owner, $options = []): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
+        $qb = $this->createQueryBuilder('p')
             ->leftJoin(($owner instanceof User) ? 'p.owner' : 'p.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
             ->orderBy('p.updatedAt', 'DESC');
+
+        if ($options['visibilityFilter'] ?? false) {
+            $qb->andWhere("p.visibility = :visibility");
+            $qb->setParameter('visibility', $options['visibilityFilter']);
+        }
+
+        return $qb;
     }
 
     public function getProjectsViewerCanSeeQueryBuilder($viewer = null): QueryBuilder

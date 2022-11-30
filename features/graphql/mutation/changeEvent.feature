@@ -14,7 +14,9 @@ Scenario: Admin wants to change an event
           title
           body
           author {
-            _id
+            ...on User {
+              _id
+            }
           }
           timeRange {
             startAt
@@ -116,7 +118,9 @@ Scenario: Admin wants to change an event with external to register
           title
           body
           author {
-            _id
+            ...on User {
+              _id
+            }
           }
           timeRange {
             startAt

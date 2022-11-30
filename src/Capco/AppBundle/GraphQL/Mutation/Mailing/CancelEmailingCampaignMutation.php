@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
+use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -32,5 +33,19 @@ class CancelEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         $emailingCampaign->setStatus(EmailingCampaignStatus::DRAFT);
 
         return $emailingCampaign;
+    }
+
+    public function isGranted(string $id, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
+        if (!$emailCampaign) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::CANCEL, $emailCampaign);
     }
 }

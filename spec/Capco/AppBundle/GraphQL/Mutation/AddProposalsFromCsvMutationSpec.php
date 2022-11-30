@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalsFromCsvMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\MediaBundle\Entity\Media;
@@ -17,6 +18,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 BypassFinals::enable();
 
@@ -28,7 +30,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ImportProposalsFromCsv $importProposalsFromCsv,
         ConnectionBuilder $connectionBuilder,
         MediaRepository $mediaRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->beConstructedWith(
             $proposalFormRepository,
@@ -36,7 +40,9 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
             $importProposalsFromCsv,
             $connectionBuilder,
             $mediaRepository,
-            $em
+            $em,
+            $globalIdResolver,
+            $authorizationChecker
         );
     }
 

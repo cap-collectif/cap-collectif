@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -13,6 +14,8 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\AppBundle\Utils\Map;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
@@ -25,6 +28,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddProposalsFromCsvMutation implements MutationInterface
 {
@@ -52,6 +56,8 @@ class AddProposalsFromCsvMutation implements MutationInterface
     private ConnectionBuilder $connectionBuilder;
     private MediaRepository $mediaRepository;
     private EntityManagerInterface $em;
+    private GlobalIdResolver $globalIdResolver;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalFormRepository $proposalFormRepository,
@@ -59,7 +65,9 @@ class AddProposalsFromCsvMutation implements MutationInterface
         ImportProposalsFromCsv $importProposalsFromCsv,
         ConnectionBuilder $connectionBuilder,
         MediaRepository $mediaRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->mediaRepository = $mediaRepository;
         $this->logger = $logger;
@@ -67,6 +75,8 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $this->proposalFormRepository = $proposalFormRepository;
         $this->connectionBuilder = $connectionBuilder;
         $this->em = $em;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -163,5 +173,19 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $connection->setTotalCount(\count($proposals));
 
         return $connection;
+    }
+
+    public function isGranted(string $proposalformId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+        $proposalform = $this->globalIdResolver->resolve($proposalformId, $viewer);
+
+        if ($proposalform) {
+            return $this->authorizationChecker->isGranted(ProposalFormVoter::IMPORT_PROPOSALS, $proposalform);
+        }
+
+        return false;
     }
 }

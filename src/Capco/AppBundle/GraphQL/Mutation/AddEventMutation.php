@@ -5,6 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\EventTranslation;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;
@@ -68,15 +70,13 @@ class AddEventMutation extends AbstractEventMutation
                 $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
             );
             $event->setCreator($viewer);
-            $this->setAuthor($event, $values, $viewer);
+            $author = $this->getAuthor($values, $viewer);
+            $event->setAuthor($author);
             LocaleUtils::indexTranslations($values);
             $this->setProjects($event, $viewer, $values);
             $this->setSteps($event, $viewer, $values);
 
-            if ($viewer->isProjectAdmin()) {
-                $event->setEnabled(true);
-            }
-            if ($viewer->isOnlyUser()) {
+            if ($viewer->isOnlyUser() && !$viewer->isOrganizationMember()) {
                 $event->setReview(new EventReview());
             }
             $this->submitEventFormData($event, $values, $this->formFactory);
@@ -139,14 +139,27 @@ class AddEventMutation extends AbstractEventMutation
         return $this->authorizationChecker->isGranted(EventVoter::CREATE, new Event());
     }
 
-    private function setAuthor(Event $event, array $values, User $viewer): void
+    private function getAuthor(array $values, User $viewer): Author
     {
-        $author = $viewer;
+        $authorId = $values['author'] ?? null;
 
-        if ($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])) {
-            $author = $this->getUser($values['author'], $viewer);
+        if (!$authorId) {
+            return $viewer;
         }
 
-        $event->setAuthor($author);
+        $author = $this->globalIdResolver->resolve($authorId, $viewer);
+
+        if (!$author) {
+            throw new UserError("No user or organization matching id : {$authorId}");
+        }
+
+        if ($author instanceof User && $viewer->isAdmin()) {
+            return $author;
+        }
+        if ($author instanceof Organization && $viewer->isMemberOfOrganization($author)) {
+            return $author;
+        }
+
+        return $viewer;
     }
 }

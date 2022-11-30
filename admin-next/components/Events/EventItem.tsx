@@ -52,6 +52,7 @@ const FRAGMENT = graphql`
         creator {
             id
             username
+            url
         }
         guestListEnabled
         exportParticipantsUrl
@@ -161,6 +162,13 @@ const EventItem: React.FC<Props> = ({
                     {event.creator && <Text fontSize={3}>{event.creator.username}</Text>}
                 </Table.Td>
             )}
+            <Table.Td>
+                {(event?.creator?.url && event?.creator?.username) && (
+                    <Link key={event?.creator?.id} href={event?.creator?.url}>
+                        {event?.creator?.username}
+                    </Link>
+                )}
+            </Table.Td>
             {isAdmin || isAdminOrganization ? (
                 <Table.Td>
                     {event.owner && <Text fontSize={3}>{event.owner.username}</Text>}

@@ -94,12 +94,45 @@ Scenario: GraphQL project owner wants to cancel another one campaign
   """
   Then the JSON response should match:
   """
-  {
-    "data": {
-      "cancelEmailingCampaign": {
-        "error": "ID_NOT_FOUND",
-        "emailingCampaign": null
+  {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"cancelEmailingCampaign":null}}
+  """
+
+
+@database
+Scenario: Organization admin cancel a planned campaign
+  Given I am logged in to graphql as VMD
+  And I send a GraphQL POST request:
+"""
+{
+  "query": "mutation ($input: CancelEmailingCampaignInput!) {
+    cancelEmailingCampaign(input: $input) {
+      error
+      emailingCampaign {
+        sendAt
+        status
+        preview
+      }
+    }
+  }",
+  "variables": {
+    "input": {
+      "id": "RW1haWxpbmdDYW1wYWlnbjpDYW1wYWlnblRvT3JnYW5pemF0aW9uUGxhbm5lZA=="
+    }
+  }
+}
+"""
+  Then the JSON response should match:
+"""
+{
+  "data": {
+    "cancelEmailingCampaign": {
+      "error": null,
+      "emailingCampaign": {
+        "sendAt": null,
+        "status": "DRAFT",
+        "preview": @string@
       }
     }
   }
-  """
+}
+"""

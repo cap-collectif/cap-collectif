@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use ArrayObject;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserWarning;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -21,12 +23,23 @@ class ProposalAdminUrlResolver implements ResolverInterface
         $this->router = $router;
     }
 
-    public function __invoke(Proposal $proposal, $viewer, ?ArrayObject $context = null): ?string
-    {
+    public function __invoke(
+        Proposal $proposal,
+        ?User $viewer = null,
+        ?ArrayObject $context = null
+    ): ?string {
         $isAuthorized = $this->isAdminOrAuthorized($context, $viewer);
-        if ($viewer && $proposal->getProject() && $proposal->getProject()->getOwner() === $viewer) {
-            $isAuthorized = true;
+
+        if (!$isAuthorized) {
+            $project = $proposal->getProject();
+            $owner = $project->getOwner();
+            if ($owner instanceof Organization) {
+                $isAuthorized = $viewer->isMemberOfOrganization($owner);
+            } elseif ($owner instanceof User) {
+                $isAuthorized = $owner === $viewer;
+            }
         }
+
 
         if (!$isAuthorized) {
             throw new UserWarning('Access denied to this field.');

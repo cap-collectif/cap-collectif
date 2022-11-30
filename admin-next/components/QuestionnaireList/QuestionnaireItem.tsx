@@ -74,7 +74,7 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
                     questionnaire?.step?.project?.title
                 )}
             </Table.Td>
-            {viewer?.isAdmin && <Table.Td>{questionnaire.creator?.username}</Table.Td>}
+            <Table.Td>{questionnaire.creator?.username}</Table.Td>
             {viewer?.isAdmin || viewer?.isAdminOrganization ? (
                 <Table.Td>{questionnaire.owner?.username}</Table.Td>
             ) : null}

@@ -406,6 +406,8 @@ Capco\AppBundle\Entity\ProposalForm:
         usingInstagram: true
         usingYoutube: true
         usingLinkedIn: true
+        owner: '@userTheo'
+        creator: '@userTheo'
     proposalFormProjectWithOwner:
         id: proposalFormProjectWithOwner
         title: Formulaire du project avec administrateurs de projets

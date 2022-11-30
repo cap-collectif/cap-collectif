@@ -43,7 +43,7 @@ class ProjectRepositorySpec extends ObjectBehavior
         $qb->andWhere('o.id = :ownerId')->shouldBeCalled()->willReturn($qb);
         $qb->setParameter('ownerId', 'userId')->shouldBeCalled()->willReturn($qb);
         $qb->orderBy('p.updatedAt', 'DESC')->shouldBeCalled()->willReturn($qb);
-        $this->getByOwnerQueryBuilder($user, null)->shouldReturn($qb);
+        $this->getByOwnerQueryBuilder($user)->shouldReturn($qb);
     }
 
     public function it_can_get_project_by_owner_organization(
@@ -55,6 +55,6 @@ class ProjectRepositorySpec extends ObjectBehavior
         $qb->andWhere('o.id = :ownerId')->shouldBeCalled()->willReturn($qb);
         $qb->setParameter('ownerId', 'organizationId')->shouldBeCalled()->willReturn($qb);
         $qb->orderBy('p.updatedAt', 'DESC')->shouldBeCalled()->willReturn($qb);
-        $this->getByOwnerQueryBuilder($organization, null)->shouldReturn($qb);
+        $this->getByOwnerQueryBuilder($organization)->shouldReturn($qb);
     }
 }

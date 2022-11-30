@@ -70,6 +70,14 @@ class GraphQLContext implements Context
     }
 
     /**
+     * @When I am logged in to graphql as Agui
+     */
+    public function iAmLoggedInToGraphQLAsAgui()
+    {
+        $this->createAuthenticatedClient('julien.aguilar@cap-collectif.com', 'toto');
+    }
+
+    /**
      * @When I am logged in to graphql as userNotConfirmedWithContributions
      */
     public function iAmLoggedInToGraphQLAsUserNotConfirmedWithContributions()

@@ -83,6 +83,21 @@ Array [
       }
     }
   >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
     03/01/2015
   </td>,
   <td
@@ -219,6 +234,21 @@ Array [
        
       16/03/2035
     </p>
+  </td>,
+  <td
+    className="sc-bdvvtL gJUzIT cap-table__td"
+    style={
+      Object {
+        "whiteSpace": "initial",
+      }
+    }
+  >
+    <a
+      className="sc-bdvvtL jtXLLM cap-link"
+      href="<mock-value-for-field-\\"url\\">"
+    >
+      &lt;mock-value-for-field-"username"&gt;
+    </a>
   </td>,
   <td
     className="sc-bdvvtL gJUzIT cap-table__td"

@@ -15,6 +15,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UpdateOrganizationMutation implements MutationInterface
 {
@@ -24,17 +25,20 @@ class UpdateOrganizationMutation implements MutationInterface
     private FormFactoryInterface $formFactory;
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private SluggerInterface $slugger;
 
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        SluggerInterface $slugger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
+        $this->slugger = $slugger;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -52,6 +56,10 @@ class UpdateOrganizationMutation implements MutationInterface
         LocaleUtils::indexTranslations($data);
         $this->handleSocialNetworks($organization, $data);
 
+        if (isset($data['translations'])) {
+            $this->updateSlug($organization, $data['translations']);
+        }
+
         $form = $this->formFactory->create(OrganizationType::class, $organization);
         $form->submit($data, false);
 
@@ -62,6 +70,18 @@ class UpdateOrganizationMutation implements MutationInterface
 
         return ['organization' => $organization, 'errorCode' => null];
     }
+
+    private function updateSlug(Organization $organization, array $translations): void
+    {
+        foreach ($translations as $translation) {
+            if ($translation['title']) {
+                $slug = strtolower($this->slugger->slug($translation['title'])->toString());
+                $organization->setSlug($slug);
+                return;
+            }
+        }
+    }
+
 
     public function handleSocialNetworks(Organization $organization, array &$data): void
     {

@@ -36,7 +36,7 @@ query {
           {
             "node": {
               "user": {
-                "username": "user6"
+                "username": "user101"
               },
               "role": "USER"
             }
@@ -44,7 +44,7 @@ query {
           {
             "node": {
               "user": {
-                "username": "user"
+                "username": "user6"
               },
               "role": "USER"
             }

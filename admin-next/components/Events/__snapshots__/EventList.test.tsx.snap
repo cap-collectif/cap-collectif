@@ -223,6 +223,15 @@ Array [
           <th
             className="sc-bdvvtL hVXTPE cap-table__th"
           >
+            <p
+              className="sc-bdvvtL bhcRpW cap-text"
+            >
+              admin.projects.list.author
+            </p>
+          </th>
+          <th
+            className="sc-bdvvtL hVXTPE cap-table__th"
+          >
             global.owner
           </th>
           <th
@@ -310,6 +319,21 @@ Array [
             >
               &lt;mock-value-for-field-"username"&gt;
             </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"
@@ -486,6 +510,21 @@ Array [
               }
             }
           >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
             -
           </td>
           <td
@@ -577,6 +616,21 @@ Array [
             >
               &lt;mock-value-for-field-"username"&gt;
             </p>
+          </td>
+          <td
+            className="sc-bdvvtL gJUzIT cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <a
+              className="sc-bdvvtL jtXLLM cap-link"
+              href="<mock-value-for-field-\\"url\\">"
+            >
+              &lt;mock-value-for-field-"username"&gt;
+            </a>
           </td>
           <td
             className="sc-bdvvtL gJUzIT cap-table__td"

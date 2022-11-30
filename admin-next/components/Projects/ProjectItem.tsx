@@ -71,13 +71,13 @@ const PROJECT_FRAGMENT = graphql`
 const VIEWER_FRAGMENT = graphql`
     fragment ProjectItem_viewer on User {
         id
-        isOnlyProjectAdmin
         isAdmin
         isAdminOrganization
         isSuperAdmin
         organizations {
             id
         }
+        ...ProjectModalExportSteps_viewer 
     }
 `;
 
@@ -112,7 +112,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
 }) => {
     const project = useFragment(PROJECT_FRAGMENT, projectFragment);
     const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
-    const { isOnlyProjectAdmin, isAdmin, isAdminOrganization, isSuperAdmin } = viewer;
+    const { isAdmin, isAdminOrganization, isSuperAdmin } = viewer;
     const intl = useIntl();
 
     const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0;
@@ -155,15 +155,13 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                     </Flex>
                 </Flex>
             </Table.Td>
-            {isAdmin && (
-                <Table.Td>
-                    {project?.creator?.url && (
-                        <Link key={project?.creator?.id} href={project?.creator?.url}>
-                            {project?.creator?.username}
-                        </Link>
-                    )}
-                </Table.Td>
-            )}
+            <Table.Td>
+                {(project?.creator?.url && project?.creator?.username) && (
+                    <Link key={project?.creator?.id} href={project?.creator?.url}>
+                        {project?.creator?.username}
+                    </Link>
+                )}
+            </Table.Td>
             {isAdmin || isAdminOrganization ? (
                 <Table.Td>
                     {project?.owner?.url && (
@@ -211,7 +209,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                             (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
                             <ProjectModalExportSteps
                                 project={project}
-                                isOnlyProjectAdmin={isOnlyProjectAdmin}
+                                viewer={viewer}
                             />
                         )}
                         {isSuperAdmin && (

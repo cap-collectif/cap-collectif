@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Security;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Security\ProposalVoter;
@@ -48,20 +49,15 @@ class ProposalVoterSpec extends ObjectBehavior
     public function it_allow_admin_and_owner_to_change_content(
         Proposal $subject,
         TokenInterface $token,
-        User $admin
+        User $admin,
+        Project $project
     ): void {
         $token
             ->getUser()
             ->shouldBeCalled()
             ->willReturn($admin);
-        $subject
-            ->viewerCanUpdate($admin)
-            ->shouldBeCalled()
-            ->willReturn(true);
-        $subject
-            ->canContribute($admin)
-            ->shouldBeCalled()
-            ->willReturn(true);
+        $subject->getProject()->willReturn($project);
+        $admin->isAdmin()->willReturn(true);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
             ProposalVoter::ACCESS_GRANTED
         );
@@ -70,16 +66,15 @@ class ProposalVoterSpec extends ObjectBehavior
     public function it_allow_admin_and_owner_to_change_status(
         Proposal $subject,
         TokenInterface $token,
-        User $admin
+        User $admin,
+        Project $project
     ): void {
         $token
             ->getUser()
             ->shouldBeCalled()
             ->willReturn($admin);
-        $subject
-            ->viewerIsAdminOrOwner($admin)
-            ->shouldBeCalled()
-            ->willReturn(true);
+        $subject->getProject()->willReturn($project);
+        $admin->isAdmin()->willReturn(true);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_STATUS])->shouldReturn(
             ProposalVoter::ACCESS_GRANTED
         );
@@ -88,7 +83,8 @@ class ProposalVoterSpec extends ObjectBehavior
     public function it_allow_author_to_change_content(
         Proposal $subject,
         TokenInterface $token,
-        User $author
+        User $author,
+        Project $project
     ): void {
         $token
             ->getUser()
@@ -102,6 +98,8 @@ class ProposalVoterSpec extends ObjectBehavior
             ->canContribute($author)
             ->shouldBeCalled()
             ->willReturn(true);
+        $subject->getProject()->willReturn($project);
+        $author->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
             ProposalVoter::ACCESS_GRANTED
         );
@@ -110,16 +108,15 @@ class ProposalVoterSpec extends ObjectBehavior
     public function it_forbid_author_to_change_status(
         Proposal $subject,
         TokenInterface $token,
-        User $author
+        User $author,
+        Project $project
     ): void {
         $token
             ->getUser()
             ->shouldBeCalled()
             ->willReturn($author);
-        $subject
-            ->viewerIsAdminOrOwner($author)
-            ->shouldBeCalled()
-            ->willReturn(false);
+        $subject->getProject()->willReturn($project);
+        $author->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_STATUS])->shouldReturn(
             ProposalVoter::ACCESS_DENIED
         );
@@ -128,7 +125,8 @@ class ProposalVoterSpec extends ObjectBehavior
     public function it_forbid_others_to_do_anything(
         Proposal $subject,
         TokenInterface $token,
-        User $viewer
+        User $viewer,
+        Project $project
     ): void {
         $token
             ->getUser()
@@ -138,10 +136,8 @@ class ProposalVoterSpec extends ObjectBehavior
             ->viewerCanUpdate($viewer)
             ->shouldBeCalled()
             ->willReturn(false);
-        $subject
-            ->viewerIsAdminOrOwner($viewer)
-            ->shouldBeCalled()
-            ->willReturn(false);
+        $subject->getProject()->willReturn($project);
+        $viewer->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
             ProposalVoter::ACCESS_DENIED
         );

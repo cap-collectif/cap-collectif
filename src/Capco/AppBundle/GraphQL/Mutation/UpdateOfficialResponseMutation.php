@@ -3,24 +3,29 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Entity\OfficialResponseAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateOfficialResponseMutation implements MutationInterface
 {
     private GlobalIdResolver $resolver;
     private EntityManagerInterface $em;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em)
+    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->resolver = $resolver;
         $this->em = $em;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -88,14 +93,26 @@ class UpdateOfficialResponseMutation implements MutationInterface
             throw new UserError(UpdateOfficialResponseErrorCode::NO_AUTHOR);
         }
 
+        if ($user->isOrganizationMember()) {
+            $organization = $this->resolver->resolve($user->getOrganizationId(), $user);
+            $officialResponseAuthor = (new OfficialResponseAuthor())
+                ->setAuthor($organization)
+                ->setOfficialResponse($officialResponse);
+            $officialResponse->addAuthor($officialResponseAuthor);
+            return $officialResponse;
+        }
+
+
         $officialResponse->getAuthors()->clear();
         foreach ($authorsIds as $authorsId) {
             $author = $this->resolver->resolve($authorsId, $user);
             if (null === $author) {
                 throw new UserError(UpdateOfficialResponseErrorCode::AUTHOR_NOT_FOUND);
             }
-
-            $officialResponse->addAuthor($author);
+            $officialResponseAuthor = (new OfficialResponseAuthor())
+                ->setAuthor($author)
+                ->setOfficialResponse($officialResponse);
+            $officialResponse->addAuthor($officialResponseAuthor);
         }
 
         return $officialResponse;
@@ -109,9 +126,6 @@ class UpdateOfficialResponseMutation implements MutationInterface
         $proposal = $this->resolver->resolve($proposalId, $user);
         if (null === $proposal) {
             throw new UserError(UpdateOfficialResponseErrorCode::PROPOSAL_NOT_FOUND);
-        }
-        if (!$proposal->viewerIsAdminOrOwner($user)) {
-            throw new UserError(UpdateOfficialResponseErrorCode::NOT_ADMIN);
         }
         if (
             $proposal->getOfficialResponse() &&
@@ -139,4 +153,21 @@ class UpdateOfficialResponseMutation implements MutationInterface
 
         return $officialResponse;
     }
+
+    public function isGranted(string $proposalId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+        
+        /** * @var $proposal Proposal  */
+        $proposal = $this->resolver->resolve($proposalId, $viewer);
+        if (!$proposal) {
+            return false;
+        }
+
+        $proposalForm = $proposal->getProposalForm();
+        return $this->authorizationChecker->isGranted(ProposalFormVoter::EDIT, $proposalForm);
+    }
+
 }

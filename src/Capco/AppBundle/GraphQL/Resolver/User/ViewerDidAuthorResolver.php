@@ -15,13 +15,13 @@ class ViewerDidAuthorResolver implements ResolverInterface
     public function __invoke(?Authorable $entity, $viewer): bool
     {
         $viewer = $this->preventNullableViewer($viewer);
-        $author = $entity->getAuthor() ;
+        $author = $entity->getAuthor();
         if ($author instanceof User) {
             return $author === $viewer;
         }
 
         if ($author instanceof Organization) {
-            return $author->getMembers()->contains($viewer);
+            return (bool) $author->getMembership($viewer);
         }
 
         return false;

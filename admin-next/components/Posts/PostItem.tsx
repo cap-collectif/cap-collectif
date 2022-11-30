@@ -37,6 +37,7 @@ const FRAGMENT = graphql`
         }
         creator {
             id
+            username
         }
         relatedContent {
             __typename
@@ -108,6 +109,7 @@ const PostItem: React.FC<PostItemProps> = ({
                 </Table.Td>
             )}
             {isAdmin || isAdminOrganization ? <Table.Td>{post.owner?.username}</Table.Td> : null}
+            <Table.Td>{post.creator?.username}</Table.Td>
             <Table.Td>
                 <Flex direction="column">
                     {!!project && project.__typename === 'Project' && (

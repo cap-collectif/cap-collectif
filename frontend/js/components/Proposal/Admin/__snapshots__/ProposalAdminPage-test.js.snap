@@ -2186,11 +2186,18 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "User",
+                          "concreteType": null,
                           "kind": "LinkedField",
                           "name": "authors",
                           "plural": true,
                           "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "__typename",
+                              "storageKey": null,
+                            },
                             Object {
                               "alias": "value",
                               "args": null,
@@ -2394,7 +2401,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c144b8ad028218d45a1ede161061b6d8",
+          "cacheID": "3a3cd8c60a7a74137728e8fdf9290dc5",
           "id": null,
           "metadata": Object {},
           "name": "ProposalAdminPageQuery",
@@ -2653,6 +2660,7 @@ fragment ProposalAdminOfficialAnswerForm_proposal on Proposal {
     id
     body
     authors {
+      __typename
       value: id
       label: username
       id
@@ -2683,6 +2691,7 @@ fragment ProposalAdminOfficialAnswer_proposal on Proposal {
     id
     body
     authors {
+      __typename
       value: id
       label: username
       id

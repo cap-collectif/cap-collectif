@@ -142,3 +142,8 @@ Capco\AppBundle\Entity\PostTranslation:
         translatable: '@postWithOrgaMember'
         title: Article créer par un membre du giec
         body: "Body de l'article"
+    postWithOrgaMember2Fr:
+        locale: fr-FR
+        translatable: '@postWithOrgaMember2'
+        title: Deuxieme article
+        body: "Body de l'article"

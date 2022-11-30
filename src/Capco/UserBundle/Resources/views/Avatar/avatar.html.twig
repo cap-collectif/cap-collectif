@@ -13,7 +13,13 @@
 {% set classes = (classes is defined) ? ' ' ~ classes : '' %}
 
 {% if user is not null and not private and is_feature_enabled('profiles') %}
-    <a {% if link_classes is defined %}class="{{ link_classes }}"{% endif %} href="{{ path('capco_user_profile_show_all', {'slug': user.slug}) }}" title="{{ 'usernames-profile'|trans({'userName': user.username}, 'CapcoAppBundle') }}">
+
+    {% set profile_url = 'capco_user_profile_show_all' %}
+    {% if user is instanceof('Capco\\AppBundle\\Entity\\Organization\\Organization') %}
+        {% set profile_url = 'capco_organization_profile_show_all' %}
+    {% endif %}
+
+    <a {% if link_classes is defined %}class="{{ link_classes }}"{% endif %} href="{{ path(profile_url, {'slug': user.slug}) }}" title="{{ 'usernames-profile'|trans({'userName': user.username}, 'CapcoAppBundle') }}">
         <span style="display: none" class="mr-10">{{ user.username }}</span>
 {% else %}
     <span {% if link_classes is defined %}class="{{ link_classes }}"{% endif %}>

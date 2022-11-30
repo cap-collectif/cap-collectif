@@ -31,7 +31,8 @@ InternalEvent:
             projects:
                 type: '[InternalProject!]!'
             author:
-                type: 'InternalUser'
+                type: 'Author'
+                resolve: '@=value.getAuthor()'
             commentable:
                 type: 'Boolean!'
                 resolve: '@=value.isCommentable()'

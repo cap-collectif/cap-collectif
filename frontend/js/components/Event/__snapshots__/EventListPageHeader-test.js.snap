@@ -325,11 +325,18 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "User",
+                    "concreteType": null,
                     "kind": "LinkedField",
                     "name": "author",
                     "plural": false,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -345,11 +352,18 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isAdmin",
-                        "storageKey": null,
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isAdmin",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "User",
                       },
                     ],
                     "storageKey": null,
@@ -560,85 +574,6 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectConnection",
-                    "kind": "LinkedField",
-                    "name": "projects",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectEdge",
-                        "kind": "LinkedField",
-                        "name": "edges",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "node",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "title",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": null,
-                                "kind": "LinkedField",
-                                "name": "steps",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
                     "kind": "ScalarField",
                     "name": "isAdmin",
                     "storageKey": null,
@@ -693,8 +628,180 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                         "name": "displayName",
                         "storageKey": null,
                       },
+                      Object {
+                        "abstractKey": "__isProjectOwner",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectConnection",
+                            "kind": "LinkedField",
+                            "name": "projects",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ProjectEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "steps",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "ProjectOwner",
+                      },
                     ],
                     "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isProjectOwner",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ProjectConnection",
+                        "kind": "LinkedField",
+                        "name": "projects",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Project",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "steps",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "type": "ProjectOwner",
                   },
                 ],
                 "storageKey": null,
@@ -704,7 +811,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
         ],
       },
       "params": Object {
-        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
+        "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -765,9 +872,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng
@@ -798,8 +908,8 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   viewer {
-    ...SelectProject_viewer_3ggdEH
-    ...SelectStep_viewer_3ggdEH
+    ...SelectProject_projectOwner_3ggdEH
+    ...SelectStep_projectOwner_3ggdEH
     isAdmin
     isSuperAdmin
     isOnlyProjectAdmin
@@ -808,11 +918,14 @@ fragment EventForm_query on Query {
     organizations {
       id
       displayName
+      ...SelectProject_projectOwner_3ggdEH
+      ...SelectStep_projectOwner_3ggdEH
     }
   }
 }
 
-fragment SelectProject_viewer_3ggdEH on User {
+fragment SelectProject_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -823,7 +936,8 @@ fragment SelectProject_viewer_3ggdEH on User {
   }
 }
 
-fragment SelectStep_viewer_3ggdEH on User {
+fragment SelectStep_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -1184,11 +1298,18 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "User",
+                    "concreteType": null,
                     "kind": "LinkedField",
                     "name": "author",
                     "plural": false,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -1204,11 +1325,18 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isAdmin",
-                        "storageKey": null,
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isAdmin",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "User",
                       },
                     ],
                     "storageKey": null,
@@ -1419,85 +1547,6 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectConnection",
-                    "kind": "LinkedField",
-                    "name": "projects",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectEdge",
-                        "kind": "LinkedField",
-                        "name": "edges",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "node",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "title",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": null,
-                                "kind": "LinkedField",
-                                "name": "steps",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
                     "kind": "ScalarField",
                     "name": "isAdmin",
                     "storageKey": null,
@@ -1552,8 +1601,180 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                         "name": "displayName",
                         "storageKey": null,
                       },
+                      Object {
+                        "abstractKey": "__isProjectOwner",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectConnection",
+                            "kind": "LinkedField",
+                            "name": "projects",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ProjectEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "steps",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "ProjectOwner",
+                      },
                     ],
                     "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isProjectOwner",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ProjectConnection",
+                        "kind": "LinkedField",
+                        "name": "projects",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Project",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "steps",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "type": "ProjectOwner",
                   },
                 ],
                 "storageKey": null,
@@ -1563,7 +1784,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
         ],
       },
       "params": Object {
-        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
+        "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -1624,9 +1845,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng
@@ -1657,8 +1881,8 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   viewer {
-    ...SelectProject_viewer_3ggdEH
-    ...SelectStep_viewer_3ggdEH
+    ...SelectProject_projectOwner_3ggdEH
+    ...SelectStep_projectOwner_3ggdEH
     isAdmin
     isSuperAdmin
     isOnlyProjectAdmin
@@ -1667,11 +1891,14 @@ fragment EventForm_query on Query {
     organizations {
       id
       displayName
+      ...SelectProject_projectOwner_3ggdEH
+      ...SelectStep_projectOwner_3ggdEH
     }
   }
 }
 
-fragment SelectProject_viewer_3ggdEH on User {
+fragment SelectProject_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -1682,7 +1909,8 @@ fragment SelectProject_viewer_3ggdEH on User {
   }
 }
 
-fragment SelectStep_viewer_3ggdEH on User {
+fragment SelectStep_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -2043,11 +2271,18 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "User",
+                    "concreteType": null,
                     "kind": "LinkedField",
                     "name": "author",
                     "plural": false,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -2063,11 +2298,18 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isAdmin",
-                        "storageKey": null,
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isAdmin",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "User",
                       },
                     ],
                     "storageKey": null,
@@ -2278,85 +2520,6 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectConnection",
-                    "kind": "LinkedField",
-                    "name": "projects",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectEdge",
-                        "kind": "LinkedField",
-                        "name": "edges",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "node",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "title",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": null,
-                                "kind": "LinkedField",
-                                "name": "steps",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
                     "kind": "ScalarField",
                     "name": "isAdmin",
                     "storageKey": null,
@@ -2411,8 +2574,180 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                         "name": "displayName",
                         "storageKey": null,
                       },
+                      Object {
+                        "abstractKey": "__isProjectOwner",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectConnection",
+                            "kind": "LinkedField",
+                            "name": "projects",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ProjectEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "steps",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "ProjectOwner",
+                      },
                     ],
                     "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isProjectOwner",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ProjectConnection",
+                        "kind": "LinkedField",
+                        "name": "projects",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Project",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "steps",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "type": "ProjectOwner",
                   },
                 ],
                 "storageKey": null,
@@ -2422,7 +2757,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
+        "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -2483,9 +2818,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng
@@ -2516,8 +2854,8 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   viewer {
-    ...SelectProject_viewer_3ggdEH
-    ...SelectStep_viewer_3ggdEH
+    ...SelectProject_projectOwner_3ggdEH
+    ...SelectStep_projectOwner_3ggdEH
     isAdmin
     isSuperAdmin
     isOnlyProjectAdmin
@@ -2526,11 +2864,14 @@ fragment EventForm_query on Query {
     organizations {
       id
       displayName
+      ...SelectProject_projectOwner_3ggdEH
+      ...SelectStep_projectOwner_3ggdEH
     }
   }
 }
 
-fragment SelectProject_viewer_3ggdEH on User {
+fragment SelectProject_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -2541,7 +2882,8 @@ fragment SelectProject_viewer_3ggdEH on User {
   }
 }
 
-fragment SelectStep_viewer_3ggdEH on User {
+fragment SelectStep_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -2902,11 +3244,18 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "User",
+                    "concreteType": null,
                     "kind": "LinkedField",
                     "name": "author",
                     "plural": false,
                     "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "__typename",
+                        "storageKey": null,
+                      },
                       Object {
                         "alias": null,
                         "args": null,
@@ -2922,11 +3271,18 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                         "storageKey": null,
                       },
                       Object {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "isAdmin",
-                        "storageKey": null,
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isAdmin",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "User",
                       },
                     ],
                     "storageKey": null,
@@ -3137,85 +3493,6 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                   Object {
                     "alias": null,
                     "args": null,
-                    "concreteType": "ProjectConnection",
-                    "kind": "LinkedField",
-                    "name": "projects",
-                    "plural": false,
-                    "selections": Array [
-                      Object {
-                        "alias": null,
-                        "args": null,
-                        "concreteType": "ProjectEdge",
-                        "kind": "LinkedField",
-                        "name": "edges",
-                        "plural": true,
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Project",
-                            "kind": "LinkedField",
-                            "name": "node",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "title",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "concreteType": null,
-                                "kind": "LinkedField",
-                                "name": "steps",
-                                "plural": true,
-                                "selections": Array [
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "__typename",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "id",
-                                    "storageKey": null,
-                                  },
-                                  Object {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "title",
-                                    "storageKey": null,
-                                  },
-                                ],
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "storageKey": null,
-                      },
-                    ],
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
                     "kind": "ScalarField",
                     "name": "isAdmin",
                     "storageKey": null,
@@ -3270,8 +3547,180 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                         "name": "displayName",
                         "storageKey": null,
                       },
+                      Object {
+                        "abstractKey": "__isProjectOwner",
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectConnection",
+                            "kind": "LinkedField",
+                            "name": "projects",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "ProjectEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Project",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "steps",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "__typename",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "title",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "ProjectOwner",
+                      },
                     ],
                     "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isProjectOwner",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ProjectConnection",
+                        "kind": "LinkedField",
+                        "name": "projects",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProjectEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Project",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "title",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": null,
+                                    "kind": "LinkedField",
+                                    "name": "steps",
+                                    "plural": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "__typename",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "title",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "type": "ProjectOwner",
                   },
                 ],
                 "storageKey": null,
@@ -3281,7 +3730,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "57cee28da8f7c8467d0a914109cf93a4",
+        "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
         "id": null,
         "metadata": Object {},
         "name": "EventListPageHeaderQuery",
@@ -3342,9 +3791,12 @@ fragment EventForm_event on Event {
     id
   }
   author {
+    __typename
     id
     displayName
-    isAdmin
+    ... on User {
+      isAdmin
+    }
   }
   lat
   lng
@@ -3375,8 +3827,8 @@ fragment EventForm_event on Event {
 fragment EventForm_query on Query {
   ...SelectTheme_query
   viewer {
-    ...SelectProject_viewer_3ggdEH
-    ...SelectStep_viewer_3ggdEH
+    ...SelectProject_projectOwner_3ggdEH
+    ...SelectStep_projectOwner_3ggdEH
     isAdmin
     isSuperAdmin
     isOnlyProjectAdmin
@@ -3385,11 +3837,14 @@ fragment EventForm_query on Query {
     organizations {
       id
       displayName
+      ...SelectProject_projectOwner_3ggdEH
+      ...SelectStep_projectOwner_3ggdEH
     }
   }
 }
 
-fragment SelectProject_viewer_3ggdEH on User {
+fragment SelectProject_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {
@@ -3400,7 +3855,8 @@ fragment SelectProject_viewer_3ggdEH on User {
   }
 }
 
-fragment SelectStep_viewer_3ggdEH on User {
+fragment SelectStep_projectOwner_3ggdEH on ProjectOwner {
+  __isProjectOwner: __typename
   projects {
     edges {
       node {

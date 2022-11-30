@@ -21,6 +21,7 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Utils\Text;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
@@ -315,7 +316,6 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-proposal-form-csv-model/{stepId}", name="app_export_step_proposal_form_csv_model", options={"i18n" = false})
-     * @Security("has_role('ROLE_PROJECT_ADMIN')")
      */
     public function downloadProposalFormCsvModelAction(Request $request, string $stepId): Response
     {
@@ -325,10 +325,17 @@ class ExportController extends Controller
 
         $proposalFormId = $step->getProposalFormId();
         $proposalForm = $step->getProposalForm();
+        /** * @var $viewer User  */
         $viewer = $this->getUser();
-        $viewerIsNotProjectOwner =
-            $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
-        if (!$proposalForm || $viewerIsNotProjectOwner) {
+
+        if (!$viewer) {
+            throw new AccessDeniedException();
+        }
+
+        $viewerIsNotProjectOwner = $viewer->isOnlyProjectAdmin() && $proposalForm->getProject()->getOwner() !== $viewer;
+        $isMemberOrga = $viewer->isOrganizationMember();
+
+        if (!$proposalForm || ($viewerIsNotProjectOwner && !$isMemberOrga)) {
             throw new AccessDeniedException();
         }
 
