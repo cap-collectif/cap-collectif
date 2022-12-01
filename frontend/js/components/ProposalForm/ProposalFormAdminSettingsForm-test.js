@@ -10,6 +10,7 @@ describe('<ProposalFormAdminSettingsForm />', () => {
     intl: intlMock,
     ...formMock,
     isSuperAdmin: true,
+    isAdmin: true,
     proposalForm: {
       $refType,
       id: 'proposalFormId',

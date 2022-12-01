@@ -13,6 +13,7 @@ import type { State, Dispatch } from '../../types';
 
 type RelayProps = {|
   isSuperAdmin: boolean,
+  isAdmin: boolean,
   proposalForm: ProposalFormAdminSettingsForm_proposalForm,
 |};
 
@@ -40,6 +41,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
       intl,
       invalid,
       isSuperAdmin,
+      isAdmin,
       pristine,
       handleSubmit,
       submitting,
@@ -76,7 +78,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
             <h4>
               <FormattedMessage id="global.options" />
             </h4>
-            {isSuperAdmin && (
+            {(isAdmin || isSuperAdmin) && (
               <Field
                 name="commentable"
                 component={component}
@@ -137,6 +139,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
     isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+    isAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_ADMIN')),
     initialValues: {
       title: proposalForm.title,
       commentable: proposalForm.commentable,
