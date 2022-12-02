@@ -38,6 +38,10 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                                 { format: 'jpg, png' },
                             )}{' '}
                             {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '300Ko' })}
+                            {intl.formatMessage(
+                                { id: 'min-size-dynamic' },
+                                { width: '60', height: '60' },
+                            )}
                         </FormGuideline>
 
                         <FieldInput
@@ -45,7 +49,11 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             name="logo"
                             control={control}
                             format=".jpg,.jpeg,.png"
-                            maxSize={204800}
+                            maxSize={300000}
+                            minResolution={{
+                                width: 60,
+                                height: 60,
+                            }}
                             size={UPLOADER_SIZE.SM}
                             uploadURI={UPLOAD_PATH}
                             showThumbnail
@@ -74,7 +82,11 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             name="banner"
                             control={control}
                             format=".jpg,.jpeg,.png"
-                            maxSize={204800}
+                            maxSize={1000000}
+                            minResolution={{
+                                width: 800,
+                                height: 500,
+                            }}
                             size={UPLOADER_SIZE.SM}
                             uploadURI={UPLOAD_PATH}
                             showThumbnail
