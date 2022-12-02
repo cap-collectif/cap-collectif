@@ -246,6 +246,25 @@ EOF;
     private function mapGoogleMapAddressOnEvent(array &$event, GoogleMapsAddress $address): void
     {
         $decomposed = $address->decompose();
+        $poi = $decomposed['point_of_interest'] ?? null;
+        $route = $decomposed['route'] ?? null;
+        $streetNumber = $decomposed['street_number'] ?? null;
+
+        if ($poi || $route) {
+            $event['address'] = '';
+            if ($poi) {
+                $event['address'] = $poi;
+            }
+            if ($poi && $route) {
+                $event['address'] .= ', ';
+            }
+            if ($route) {
+                if ($streetNumber) {
+                    $event['address'] .= $streetNumber . ' ';
+                }
+                $event['address'] .= $route;
+            }
+        }
         if (\array_key_exists('postal_code', $decomposed)) {
             $event['zipCode'] = $decomposed['postal_code'];
         }
@@ -254,12 +273,6 @@ EOF;
         }
         if (\array_key_exists('country', $decomposed)) {
             $event['country'] = $decomposed['country'];
-        }
-        if (\array_key_exists('route', $decomposed)) {
-            $event['address'] = $decomposed['route'];
-            if (\array_key_exists('street_number', $decomposed)) {
-                $event['address'] = $decomposed['street_number'] . ' ' . $decomposed['route'];
-            }
         }
     }
 }

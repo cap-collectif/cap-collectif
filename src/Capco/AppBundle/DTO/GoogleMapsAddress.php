@@ -4,11 +4,11 @@ namespace Capco\AppBundle\DTO;
 
 class GoogleMapsAddress
 {
-    protected $json;
-    protected $formatted;
-    protected $types;
-    protected $lat;
-    protected $lng;
+    protected string $json;
+    protected ?string $formatted;
+    protected array $types;
+    protected float $lat;
+    protected float $lng;
 
     public function __construct(
         string $json,
@@ -111,20 +111,40 @@ class GoogleMapsAddress
         if (\count($decoded) > 0 && ($address = $decoded[0])) {
             foreach ($address['address_components'] as $component) {
                 foreach ($component['types'] as $type) {
-                    if ('postal_code' === $type) {
-                        $decomposed['postal_code'] = $component['long_name'];
+                    if ('point_of_interest' === $type) {
+                        $decomposed['point_of_interest'] = $component['long_name'];
+
+                        break;
                     }
-                    if ('locality' === $type) {
-                        $decomposed['locality'] = $component['long_name'];
-                    }
-                    if ('country' === $type) {
-                        $decomposed['country'] = $component['long_name'];
+                    if ('neighborhood' === $type) {
+                        $decomposed['point_of_interest'] = $component['long_name'];
+
+                        break;
                     }
                     if ('street_number' === $type) {
                         $decomposed['street_number'] = $component['long_name'];
+
+                        break;
                     }
                     if ('route' === $type) {
                         $decomposed['route'] = $component['long_name'];
+
+                        break;
+                    }
+                    if ('postal_code' === $type) {
+                        $decomposed['postal_code'] = $component['long_name'];
+
+                        break;
+                    }
+                    if ('locality' === $type) {
+                        $decomposed['locality'] = $component['long_name'];
+
+                        break;
+                    }
+                    if ('country' === $type) {
+                        $decomposed['country'] = $component['long_name'];
+
+                        break;
                     }
                 }
             }
