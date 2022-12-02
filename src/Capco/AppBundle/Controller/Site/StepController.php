@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -65,8 +66,9 @@ class StepController extends Controller
      */
     public function showStepAction(Project $project, OtherStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         return [
@@ -87,8 +89,9 @@ class StepController extends Controller
      */
     public function showPresentationAction(Project $project, PresentationStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
         $projectSlug = $project->getSlug();
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
@@ -129,8 +132,9 @@ class StepController extends Controller
      */
     public function showDebateAction(Project $project, DebateStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         return [
@@ -158,8 +162,9 @@ class StepController extends Controller
      */
     public function showRankingAction(Project $project, RankingStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         $opinions = $this->opinionSearch
@@ -208,8 +213,9 @@ class StepController extends Controller
      */
     public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking()
@@ -246,8 +252,9 @@ class StepController extends Controller
      */
     public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking()
@@ -284,8 +291,9 @@ class StepController extends Controller
      */
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         if (!$step->getProposalForm()) {
@@ -318,7 +326,7 @@ class StepController extends Controller
     ) {
         $viewer = $this->getUser();
         if (!$project->viewerCanSee($viewer)) {
-            throw new ProjectAccessDeniedException();
+            return $this->redirect403();
         }
 
         if ($replyId) {
@@ -373,8 +381,9 @@ class StepController extends Controller
      */
     public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
-        if (!$project->viewerCanSee($this->getUser())) {
-            throw new ProjectAccessDeniedException();
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
         }
 
         return [
@@ -490,5 +499,15 @@ class StepController extends Controller
                 'id' => GlobalId::toGlobalId('ConsultationStep', $step->getId()),
             ],
         ];
+    }
+
+    private function redirect403(): Response
+    {
+        $viewer = $this->getUser();
+        if (!$viewer) {
+            return $this->render('@CapcoApp/Project/403_auth.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
+        }
+        throw new ProjectAccessDeniedException();
+//        return $this->render('@CapcoApp/Project/403_project.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
     }
 }

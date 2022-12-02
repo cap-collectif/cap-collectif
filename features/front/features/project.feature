@@ -183,35 +183,29 @@ Scenario: Users can't see privates project
   And I visited "projects page"
   Then I should not see "Qui doit conquérir le monde ? | Visible par les admins seulement"
 
-Scenario: Anonymous can't access to a private project
+Scenario: Anonymous can't access to a private project and should see login modal
   Given I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
-  Then I should see "unauthorized-access"
-  And I should see "restricted-access"
-  When I follow "error.to_homepage"
-  Then I should be redirected to "/"
+  Then I should see "global.login"
 
 Scenario: Anonymous try to access to a wrong page
   Given I go to "https://capco.test/project/qui-doit-conquerir-fautedefrappe-visible-par-les-admins-seulement-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
   Then I should see "error.404.title"
 
-Scenario: Anonymous try to access to a project with restricted access
+Scenario: Anonymous try to access to a project with restricted access and should see login modal
   Given I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
-  And I wait ".error-page" to appear on current page
-  Then I should see 'restricted-access'
+  Then I should see "global.login"
 
-Scenario: Not allowed user can't access to a private project
+  Scenario: Not allowed user can't access to a private project
   Given I am logged in as user
   And I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
-  And I wait ".error-page" to appear on current page
-  Then I should see 'restricted-access'
+  Then I should see 'unauthorized-access'
   When I follow "error.report"
   Then I should be redirected to "/contact"
 
 Scenario: User try to access to a project with restricted access
   Given I am logged in as user
   And I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
-  And I wait ".error-page" to appear on current page
-  Then I should see 'restricted-access'
+  Then I should see 'unauthorized-access'
 
 Scenario: Super Admin can access to all private projects
   Given feature "projects_form" is enabled

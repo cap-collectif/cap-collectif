@@ -80,6 +80,8 @@ import UserUnsubscribePageApp from '~/startup/UserUnsubscribePageApp';
 import ChartModalApp from '~/startup/ChartModalApp';
 import ProjectStepPageApp from './startup/ProjectStepPageApp';
 import ProjectsMapViewApp from './startup/ProjectsMapViewApp';
+import AccessDeniedAuthApp from './startup/AccessDeniedAuthApp';
+import AccessDeniedApp from './startup/AccessDeniedApp';
 import OrganizationPageApp from './startup/OrganizationPageApp';
 
 ReactOnRails.registerStore({ appStore });
@@ -149,6 +151,8 @@ ReactOnRails.register({
   ChartModalApp,
   ProjectStepPageApp,
   ProjectsMapViewApp,
+  AccessDeniedAuthApp,
+  AccessDeniedApp,
   OrganizationPageApp,
 
   /* # COMPONENTS INTE CLIENT # */

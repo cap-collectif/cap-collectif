@@ -19,11 +19,7 @@
 {% endblock %}
 
 {% block title %}
-    {% if null != title %}
-        {{ parent() }} - {{ title|trans({},'CapcoAppBundle') }}
-    {% else %}
         {{ parent() }}
-    {% endif %}
 {% endblock %}
 
 {% block stylesheets %}
@@ -34,7 +30,7 @@
 
 {% block body %}
     <section>
-        {{ react_render_component('AccessDeniedApp') }}
+        {{ react_render_component('AccessDeniedAuthApp') }}
     </section>
 {% endblock %}
 

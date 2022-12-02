@@ -27,12 +27,14 @@ export const SPOT_ICON_NAME = {
   CALENDAR: 'CALENDAR',
   PROJECT: 'PROJECT',
   SMS: 'SMS',
+  LOCK_EYE: 'LOCK_EYE'
 };
 
 export const SPOT_ICON_SIZE = {
   SM: 'sm', // 56px
   MD: 'md', // 64px
   LG: 'lg', // 124px
+  XL: 'xl', // 200px
 };
 
 export type Props = {|
@@ -52,6 +54,8 @@ const getSize = (size: $PropertyType<Props, 'size'> = 'md'): number | string => 
       return 12;
     case 'lg':
       return '124px';
+    case 'xl':
+      return '200px';
   }
 };
 

@@ -24,7 +24,7 @@ declare export const SPOT_ICON_NAME = {
 
 declare const SpotIcon: PolymorphicComponent<ComponentProps<SVGElement> & {
     name: keyof typeof SPOT_ICON_NAME,
-    size?: 'sm' | 'md' | 'lg' | string,
+    size?: 'sm' | 'md' | 'lg'  | 'xl' | string,
     color?: string,
 }>
 
