@@ -46,17 +46,34 @@ const QUERY = graphql`
         projectsCount: projects(visibilityFilter: $projectVisibilityFilter) {
           totalCount
         }
-        eventsCount: events(hideDeletedEvents: $hideDeletedEvents, hideUnpublishedEvents: $hideUnpublishedEvents) {
+        eventsCount: events(
+          hideDeletedEvents: $hideDeletedEvents
+          hideUnpublishedEvents: $hideUnpublishedEvents
+        ) {
           totalCount
         }
         postsCount: posts(hideUnpublishedPosts: $hideUnpublishedPosts) {
           totalCount
         }
         ...OrganizationPageProjectList_organization
-          @arguments(count: $count, cursor: $cursorProjects, visibilityFilter: $projectVisibilityFilter)
-        ...OrganizationPageEventList_organization 
-            @arguments(count: $count, cursor: $cursorEvents, hideDeletedEvents: $hideDeletedEvents, hideUnpublishedEvents: $hideUnpublishedEvents)
-        ...OrganizationPagePostList_organization @arguments(count: $count, cursor: $cursorPosts, hideUnpublishedPosts: $hideUnpublishedPosts)
+          @arguments(
+            count: $count
+            cursor: $cursorProjects
+            visibilityFilter: $projectVisibilityFilter
+          )
+        ...OrganizationPageEventList_organization
+          @arguments(
+            count: $count
+            cursor: $cursorEvents
+            hideDeletedEvents: $hideDeletedEvents
+            hideUnpublishedEvents: $hideUnpublishedEvents
+          )
+        ...OrganizationPagePostList_organization
+          @arguments(
+            count: $count
+            cursor: $cursorPosts
+            hideUnpublishedPosts: $hideUnpublishedPosts
+          )
       }
     }
   }
@@ -86,8 +103,6 @@ export const OrganizationPage = ({ organizationId }: Props) => {
   const hasProjects = !!projectsCount?.totalCount;
   const hasPosts = !!postsCount?.totalCount;
   const hasEvents = !!eventsCount?.totalCount;
-
-  console.log(hasEvents, eventsCount?.totalCount )
 
   const cover = organization.banner?.url;
   const logo = organization.media?.url;
@@ -144,7 +159,9 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                 borderRadius={[0, 'accordion']}
                 overflow="hidden"
                 minHeight={['unset', '270px']}
-                objectFit="cover"
+                css={{
+                  objectFit: 'cover',
+                }}
                 maxHeight="315px"
               />
               {cover && logo ? (
@@ -163,7 +180,9 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                     alt="logo"
                     width="104px"
                     height="64px"
-                    objectFit="cover"
+                    css={{
+                      objectFit: 'cover',
+                    }}
                   />
                 </AppBox>
               ) : null}

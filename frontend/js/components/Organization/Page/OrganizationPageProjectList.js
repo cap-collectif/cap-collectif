@@ -12,7 +12,11 @@ import AppBox from '~/components/Ui/Primitives/AppBox';
 
 const FRAGMENT = graphql`
   fragment OrganizationPageProjectList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, visibilityFilter: { type: "ProjectVisibility" })
+  @argumentDefinitions(
+    count: { type: "Int!" }
+    cursor: { type: "String" }
+    visibilityFilter: { type: "ProjectVisibility" }
+  )
   @refetchable(queryName: "OrganizationPageProjectListPaginationQuery") {
     projects(first: $count, after: $cursor, visibilityFilter: $visibilityFilter)
       @connection(key: "OrganizationPageProjectList_projects", filters: ["query", "orderBy"]) {
@@ -57,15 +61,34 @@ export const OrganizationPageProjectList = ({ organization, fullSizeLayout }: Pr
       <Heading as="h4" mb={4}>
         {intl.formatMessage({ id: 'project.title' })}
       </Heading>
-      <Flex flexWrap="wrap">
+      <Flex flexWrap="wrap" mt={-4} ml={[0, -4]}>
         {projects?.edges?.map((edge, index) => (
-          <ProjectCard
-            project={edge?.node}
-            key={index}
-            {...getItemStyles(index, fullSizeLayout, isMobile)}
-            height="auto"
-            p={4}
-          />
+          <>
+            <ProjectCard
+              project={edge?.node}
+              key={index}
+              {...getItemStyles(index, fullSizeLayout, isMobile)}
+              height="auto"
+              px={[0, 4]}
+              py={4}
+            />
+            <ProjectCard
+              project={edge?.node}
+              key={index + 1}
+              {...getItemStyles(index + 1, fullSizeLayout, isMobile)}
+              height="auto"
+              px={[0, 4]}
+              py={4}
+            />
+            <ProjectCard
+              project={edge?.node}
+              key={index + 2}
+              {...getItemStyles(index + 2, fullSizeLayout, isMobile)}
+              height="auto"
+              px={[0, 4]}
+              py={4}
+            />
+          </>
         ))}
       </Flex>
       {hasNext ? (

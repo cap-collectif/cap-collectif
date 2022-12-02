@@ -201,7 +201,6 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
       href={post.url}
       display="grid"
       width="100%"
-      height="100%"
       css={{ '&:hover': { textDecoration: 'none' } }}>
       <Card
         bg="white"

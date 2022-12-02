@@ -32,6 +32,8 @@ export const ProjectCard = ({
   width,
   height,
   p,
+  px,
+  py,
   variantSize,
   ...props
 }: Props) => {
@@ -49,6 +51,8 @@ export const ProjectCard = ({
       width={width || '100%'}
       height={height || '100%'}
       p={p}
+      px={px}
+      py={py}
       css={{ '&:hover': { textDecoration: 'none' } }}>
       <Card
         bg="white"

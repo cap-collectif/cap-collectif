@@ -41,7 +41,6 @@ export const EventCard = ({ event: eventQuery, backgroundColor, ...props }: Prop
       href={event.url}
       display="grid"
       width="100%"
-      height="100%"
       css={{ '&:hover': { textDecoration: 'none' } }}>
       <Card
         bg="white"
@@ -51,6 +50,7 @@ export const EventCard = ({ event: eventQuery, backgroundColor, ...props }: Prop
         display="flex"
         border="normal"
         position="relative"
+        alignItems="start"
         {...props}>
         <Card
           flexDirection="row"
