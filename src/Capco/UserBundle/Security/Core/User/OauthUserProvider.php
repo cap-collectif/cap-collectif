@@ -178,8 +178,8 @@ class OauthUserProvider extends FOSUBUserProvider
     private function findUser(UserResponseInterface $response, ?string $email = null): ?User
     {
         $user = $this->userRepository->findByAccessTokenOrUsername(
-            $response->getAccessToken(),
-            $response->getUsername()
+            $response->getAccessToken() ?? '',
+            $response->getUsername() ?? ''
         );
 
         return !$user && $email ? $this->userRepository->findOneByEmail($email) : $user;
