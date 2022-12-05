@@ -51,6 +51,8 @@ export type GeoJson = {|
   district: string,
   style: Style,
   titleOnMap?: ?string,
+  id?: string,
+  slug?: ?string,
 |};
 
 export const geoContains = (geoJSONS: Array<GeoJson>, pos: MapCenterObject) => {
@@ -65,6 +67,7 @@ export const geoContains = (geoJSONS: Array<GeoJson>, pos: MapCenterObject) => {
 type District = {|
   +geojson: ?string,
   +id: string,
+  +slug?: ?string,
   +displayedOnMap: boolean,
   +name?: string,
   +titleOnMap?: string,
@@ -97,11 +100,14 @@ const parseGeoJson = (district: District) => {
   }
 };
 
-export const formatGeoJsons = (districts: $ReadOnlyArray<District>) => {
+export const formatGeoJsons = (
+  districts: $ReadOnlyArray<District>,
+  getAllGeojsons?: boolean = false,
+) => {
   let geoJsons = [];
   if (districts) {
     geoJsons = districts
-      .filter(d => d.geojson && d.displayedOnMap)
+      .filter(d => d.geojson && (d.displayedOnMap || getAllGeojsons))
       .map<GeoJson>(d => ({
         // $FlowFixMe geojson is a non-null string, don't worry Flow
         district: parseGeoJson(d),
@@ -110,6 +116,8 @@ export const formatGeoJsons = (districts: $ReadOnlyArray<District>) => {
           background: d.background,
         },
         titleOnMap: d.titleOnMap || undefined,
+        id: d.id,
+        slug: d.slug,
       }));
   }
   return geoJsons;

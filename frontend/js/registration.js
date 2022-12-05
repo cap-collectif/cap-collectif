@@ -83,6 +83,7 @@ import ProjectsMapViewApp from './startup/ProjectsMapViewApp';
 import AccessDeniedAuthApp from './startup/AccessDeniedAuthApp';
 import AccessDeniedApp from './startup/AccessDeniedApp';
 import OrganizationPageApp from './startup/OrganizationPageApp';
+import DistrictPageApp from './startup/DistrictPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -154,6 +155,7 @@ ReactOnRails.register({
   AccessDeniedAuthApp,
   AccessDeniedApp,
   OrganizationPageApp,
+  DistrictPageApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

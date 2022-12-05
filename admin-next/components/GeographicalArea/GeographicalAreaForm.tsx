@@ -56,7 +56,13 @@ const isGeoJSONValid = (geoJSON: any[]) => {
     }
 };
 
-const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, translations?: any) => {
+const onSubmit = (
+    data: FormattedDistrict,
+    intl: IntlShape,
+    locale: string,
+    setIsLoading: (isLoading: boolean) => void,
+    translations?: any,
+) => {
     const fields = [
         {
             name: 'name',
@@ -71,7 +77,6 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
             value: data.description,
         },
     ];
-
     const input = {
         translations: createOrReplaceTranslation(
             fields,
@@ -89,8 +94,10 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
         },
         background: {
             enabled: data.background ? true : false,
-            color: data.background ? data.background.color : null,
-            opacity: data.background ? data.background.opacity : null,
+            color: data.background ? data.background.color?.slice(0, 7) : null,
+            opacity: data.background
+                ? fromHexStringToOpacity(data.background.color?.slice(7, 9))
+                : null,
         },
     };
     if (!data.id) {
@@ -102,6 +109,7 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
                     variant: 'success',
                     content: intl.formatMessage({ id: 'zone-geo-created' }),
                 });
+                setIsLoading(false);
                 window.location.href = '/admin-next/geographicalAreas';
             })
             .catch(() => {
@@ -119,6 +127,7 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
                     variant: 'success',
                     content: intl.formatMessage({ id: 'zone-geo-modified' }),
                 });
+                setIsLoading(false);
             })
             .catch(() => {
                 mutationErrorToast(intl);
@@ -127,6 +136,7 @@ const onSubmit = (data: FormattedDistrict, intl: IntlShape, locale: string, tran
 };
 
 const fromHexStringToOpacity = (hex: string) => Math.round(100 * (Number(`0x${hex}`) / 255));
+const toHexStringFromOpacity = (opacity: number) => Math.round(255 * (opacity / 100)).toString(16);
 
 type Props = {
     queryValues?: any,
@@ -143,6 +153,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
     const [geoJSONValid, setGeoJSONValid] = React.useState(false);
     const multilangue = useFeatureFlag('multilangue');
     const { isOpen, onOpen, onClose } = useDisclosure(false);
+    const [isLoading, setIsLoading] = React.useState(false);
     const { availableLocales } = useLazyLoadQuery<GeographicalAreaFormQuery>(QUERY, {});
     const defaultLocale = availableLocales.find(locale => locale.isDefault);
     const [localeSelected, setLocaleSelected] = React.useState({
@@ -166,12 +177,12 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
         ...queryValues,
         border: { color: '#5e5e5e', size: 1, ...queryValues?.border, opacity: 100 },
         background: {
-            color: queryValues?.background?.color || '#0000001e',
-            opacity: queryValues?.opacity
-                ? queryValues.opacity < 1
-                    ? queryValues.opacity * 100
-                    : queryValues.opacity
-                : 12,
+            color: queryValues?.background?.color
+                ? `${queryValues?.background?.color}${toHexStringFromOpacity(
+                      queryValues?.background?.opacity || 12,
+                  )}`
+                : '#0000001f',
+            opacity: 100,
         },
     };
 
@@ -303,14 +314,18 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                     {intl.formatMessage({ id: 'uploader.banner.format' }) +
                                         ' jpg, png. ' +
                                         intl.formatMessage({ id: 'uploader.banner.weight' }) +
-                                        ' 1mo.'}
+                                        ' 2mo.'}
+                                </FormGuideline>
+                                <FormGuideline>
+                                    {intl.formatMessage({ id: 'featured-dimensions' }) +
+                                        ' 1920x1080'}
                                 </FormGuideline>
                                 <FieldInput
                                     type="uploader"
                                     name="cover"
                                     control={control}
                                     format=".jpg,.jpeg,.png"
-                                    maxSize={204800}
+                                    maxSize={2048000}
                                     size={UPLOADER_SIZE.MD}
                                     uploadURI={UPLOAD_PATH}
                                     showThumbnail
@@ -351,7 +366,11 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                 </Flex>
                 <Flex direction="column" bg="white" borderRadius="normal" p={6} mt={6}>
                     <Flex justify="space-between" alignItems="flex-start">
-                        <Heading as="h4" color="blue.800" fontWeight={600} mb={4}>
+                        <Heading
+                            as="h4"
+                            color="blue.800"
+                            fontWeight={600}
+                            mb={displayedOnMap ? 4 : 0}>
                             {intl.formatMessage({ id: 'display-area-on-map' })}
                         </Heading>
                         <Switch
@@ -395,16 +414,6 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                             name="background.color"
                                             control={control}
                                             type="colorPicker"
-                                            onChange={hexColor => {
-                                                const color = String(hexColor);
-                                                setValue('background.color', color?.slice(0, 6));
-                                                setValue(
-                                                    'background.opacity',
-                                                    color?.length === 10
-                                                        ? fromHexStringToOpacity(color?.slice(7, 9))
-                                                        : 100,
-                                                );
-                                            }}
                                             withOpacity
                                         />
                                     </FormControl>
@@ -455,13 +464,20 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                         variant="primary"
                         variantColor="primary"
                         variantSize="big"
-                        disabled={!formState.isValid || !formState.isDirty}
-                        loading={formState.isSubmitting}
-                        onClick={e =>
+                        disabled={!formState.isValid || !formState.isDirty || isLoading}
+                        loading={isLoading}
+                        onClick={e => {
+                            setIsLoading(true);
                             handleSubmit((data: FormattedDistrict) =>
-                                onSubmit(data, intl, localeSelected?.value, translations),
-                            )(e)
-                        }>
+                                onSubmit(
+                                    data,
+                                    intl,
+                                    localeSelected?.value,
+                                    setIsLoading,
+                                    translations,
+                                ),
+                            )(e);
+                        }}>
                         {intl.formatMessage({ id: queryValues ? 'global.save' : 'global.create' })}
                     </Button>
                     {queryValues ? (
@@ -483,6 +499,19 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                 })}
                             </Button>
                         </>
+                    ) : null}
+                    {!queryValues ? (
+                        <Button
+                            type="button"
+                            variant="secondary"
+                            variantColor="hierarchy"
+                            variantSize="big"
+                            as="a"
+                            href="/admin-next/geographicalAreas">
+                            {intl.formatMessage({
+                                id: 'global.cancel',
+                            })}
+                        </Button>
                     ) : null}
                 </Flex>
             </form>

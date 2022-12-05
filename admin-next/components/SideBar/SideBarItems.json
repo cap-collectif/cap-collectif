@@ -228,7 +228,7 @@
             },
             {
                 "title": "admin.label.project_district",
-                "href": "/admin/capco/app/district-projectdistrict/list",
+                "href": "/admin-next/geographicalAreas",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

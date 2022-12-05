@@ -44,7 +44,7 @@ export const URL_MAP = {
     '/admin/capco/app/menuitem/',
     '/admin/capco/app/socialnetwork/',
     '/admin/capco/app/footersocialnetwork/',
-    '/admin/capco/app/district-projectdistrict/',
+    '/admin-next/geographicalAreas',
     '/admin/map/',
     '/admin/redirect/',
     '/admin/favicon/',

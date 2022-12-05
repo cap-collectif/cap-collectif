@@ -8,6 +8,8 @@ InternalDistrictTranslation:
                 type: 'String!'
             name:
                 type: 'String!'
+            slug:
+                type: 'String!'
             titleOnMap:
                 type: 'String'
             description:

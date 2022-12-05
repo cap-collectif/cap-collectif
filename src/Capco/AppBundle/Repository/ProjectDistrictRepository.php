@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -41,6 +42,16 @@ class ProjectDistrictRepository extends EntityRepository
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getBySlug(string $slug): ?ProjectDistrict
+    {
+        $qb = $this->createQueryBuilder('pd')
+            ->leftJoin('pd.translations', 'pdt')
+            ->andWhere('pdt.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     // TODO remove me when project page is in React

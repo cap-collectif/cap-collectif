@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\TranslationTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DistrictTranslationRepository")
@@ -29,12 +30,18 @@ class DistrictTranslation implements Translation
     /**
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    private ?string $name = null;
 
     /**
      * @ORM\Column(name="title_on_map", type="string", length=255, nullable=true)
      */
     private ?string $titleOnMap = null;
+
+    /**
+     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
+     * @ORM\Column(length=255)
+     */
+    protected ?string $slug;
 
     public function getName(): ?string
     {
@@ -56,6 +63,18 @@ class DistrictTranslation implements Translation
     public function setTitleOnMap(?string $titleOnMap): self
     {
         $this->titleOnMap = $titleOnMap;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

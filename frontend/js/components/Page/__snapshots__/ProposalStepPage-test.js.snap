@@ -138,6 +138,8 @@ exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
         Array [
           Object {
             "district": null,
+            "id": "1159891f-770c-11e9-990d-0242ac110007",
+            "slug": undefined,
             "style": Object {
               "background": null,
               "border": null,

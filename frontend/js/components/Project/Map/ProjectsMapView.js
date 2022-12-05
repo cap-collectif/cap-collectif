@@ -78,6 +78,7 @@ const QUERY = graphql`
             totalCount
           }
           isExternal
+          externalLink
           isContributionsCounterDisplayable
           isParticipantsCounterDisplayable
           externalParticipantsCount
@@ -90,6 +91,7 @@ const QUERY = graphql`
       edges {
         node {
           id
+          slug
           titleOnMap
           geojson
           displayedOnMap
@@ -161,11 +163,12 @@ export const ProjectsMapView = ({
                 fontSize: '14px',
                 fontWeight: 600,
                 marginLeft: '50%',
+                zIndex: 99,
                 width: 'fit-content',
                 '::before': { display: 'none' },
               },
             }}>
-            <Flex justifyContent="space-between" alignItems="center">
+            <Flex justifyContent="space-between" alignItems="center" pl={[4, 0]}>
               <h2 className="h2">{homePageProjectsMapSectionConfiguration.title}</h2>
               <Flex
                 css={{
@@ -292,7 +295,7 @@ export const ProjectsMapView = ({
                                 <Link
                                   fontSize="14px"
                                   fontWeight={400}
-                                  href={mark.url}
+                                  href={mark.isExternal ? mark.externalLink : mark.url}
                                   color={`${linkColor} !important`}
                                   css={{
                                     textDecoration: 'none !important',
@@ -317,7 +320,7 @@ export const ProjectsMapView = ({
                   geoJsons.map((geoJson, idx) => {
                     const districtGeoJSON = getDistrict(geoJson);
                     return (
-                      <>
+                      <React.Fragment key={idx}>
                         <GeoJSON
                           style={convertToGeoJsonStyle(geoJson.style)}
                           key={idx}
@@ -326,13 +329,18 @@ export const ProjectsMapView = ({
                         {geoJson.titleOnMap ? (
                           <Rectangle
                             bounds={districtGeoJSON?.getBounds()}
-                            pathOptions={{ color: 'transparent' }}>
-                            <Tooltip permanent className="titleTooltip">
-                              {geoJson.titleOnMap}
+                            pathOptions={{ color: 'transparent' }}
+                            interactive>
+                            <Tooltip interactive permanent className="titleTooltip">
+                              <a
+                                href={`/project-district/${geoJson.slug || ''}`}
+                                style={{ color: 'black', textDecoration: 'none' }}>
+                                {geoJson.titleOnMap}
+                              </a>
                             </Tooltip>
                           </Rectangle>
                         ) : null}
-                      </>
+                      </React.Fragment>
                     );
                   })}
                 {!isMobile && <ZoomControl position="bottomright" />}

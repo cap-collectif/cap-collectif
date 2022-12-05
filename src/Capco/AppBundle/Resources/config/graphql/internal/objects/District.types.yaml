@@ -16,6 +16,10 @@ District:
                 type: 'String!'
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getName(args["locale"])'
+            slug:
+                type: 'String!'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getSlug(args["locale"])'
             titleOnMap:
                 type: 'String'
                 argsBuilder: 'Translatable::Field'

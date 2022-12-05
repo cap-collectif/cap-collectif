@@ -743,3 +743,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:OfficialResponseAuthor']
+
+    Capco\AppBundle\Repository\DistrictTranslationRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:DistrictTranslation']

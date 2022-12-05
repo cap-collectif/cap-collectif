@@ -5482,6 +5482,10 @@ interface District {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
   titleOnMap(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
@@ -5530,6 +5534,7 @@ enum DistrictOrderField {
 type DistrictTranslation {
   locale: String!
   name: String!
+  slug: String!
   titleOnMap: String
 
   """The description of the district."""
@@ -10065,6 +10070,10 @@ type ProjectDistrict implements District & Node {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
   titleOnMap(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
@@ -10943,6 +10952,10 @@ type ProposalDistrict implements District & Node {
   """The ID of an object"""
   id: ID!
   name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  slug(
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!

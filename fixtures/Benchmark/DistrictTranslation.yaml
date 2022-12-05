@@ -3,15 +3,19 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
         translatable: '@district1'
         locale: fr-FR
         name: Premier Quartier
+        slug: 'premier-quartier'
     district1Translation1En:
         translatable: '@district1'
         locale: en-GB
         name: First District
+        slug: 'first-district'
     district2Translation2FR:
         translatable: '@district2'
         locale: fr-FR
         name: Deuxième Quartier
+        slug: 'deuxieme-quartier'
     district2Translation2EN:
         translatable: '@district2'
         locale: en-GB
         name: Second District
+        slug: 'second-district'

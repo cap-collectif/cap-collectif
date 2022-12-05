@@ -41,6 +41,11 @@ Object {
         Object {
           "displayedOnMap": true,
           "geojson": null,
+          "name": "Toute la région",
+        },
+        Object {
+          "displayedOnMap": true,
+          "geojson": null,
           "name": "Quartier 2",
         },
         Object {
@@ -552,6 +557,11 @@ Object {
       "districtHelpText": "Sélectionnez une zone géographique",
       "districtMandatory": false,
       "districts": Array [
+        Object {
+          "displayedOnMap": true,
+          "geojson": null,
+          "name": "Toute la région",
+        },
         Object {
           "displayedOnMap": true,
           "geojson": null,

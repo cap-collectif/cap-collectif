@@ -389,6 +389,8 @@
         "stylelint-processor-styled-components": "^1.9.0",
         "terser-webpack-plugin": "^5.1.1",
         "tinycolor2": "^1.4.2",
+        "turf-meta": "^3.0.12",
+        "turf-union": "^3.0.12",
         "url-search-params-polyfill": "^8.1.0",
         "use-analytics": "^0.0.5",
         "vscode-apollo-relay": "^1.5.2",

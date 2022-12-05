@@ -1,0 +1,6 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block body %}
+ {{ react_render_component('DistrictPageApp', {'props': { 'districtId': districtId }}) }}
+{% endblock %}
+

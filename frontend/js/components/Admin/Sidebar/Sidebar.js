@@ -292,7 +292,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
                   />
                   <SidebarLink
                     text="admin.label.project_district"
-                    href="/admin/capco/app/district-projectdistrict/list"
+                    href="/admin-next/geographicalAreas"
                   />
                   <SidebarLink text="admin.fields.proposal_form.map" href="/admin/map/list" />
                   {features.multilangue && (
