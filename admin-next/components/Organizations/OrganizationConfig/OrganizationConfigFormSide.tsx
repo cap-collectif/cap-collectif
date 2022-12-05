@@ -40,7 +40,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '300Ko' })}
                             {intl.formatMessage(
                                 { id: 'min-size-dynamic' },
-                                { width: '60', height: '60' },
+                                { width: '120', height: '80' },
                             )}
                         </FormGuideline>
 
@@ -51,8 +51,8 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
                             format=".jpg,.jpeg,.png"
                             maxSize={300000}
                             minResolution={{
-                                width: 60,
-                                height: 60,
+                                width: 120,
+                                height: 80,
                             }}
                             size={UPLOADER_SIZE.SM}
                             uploadURI={UPLOAD_PATH}
