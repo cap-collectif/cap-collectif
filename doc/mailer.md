@@ -1,10 +1,7 @@
-# <a id="mailer"></a> Mailer 
+# <a id="mailer"></a>  🇫🇷 Ajout d'emailing
 
-[⬅️](../README.md) Retour
+[⬅️ Retour](../README.md) 
 
----
- 🇫🇷 Ajout d'emailing
----
 Si vous voulez envoyer des emails via la plateforme, cela se fait via RabbitMQ.
 
 #### Sommaire :
@@ -12,7 +9,9 @@ Si vous voulez envoyer des emails via la plateforme, cela se fait via RabbitMQ.
 - 2 [Le Processor](#processor)
 - 3 [Le Notifier](#notifier)
 - 4 [Le Message](#message)
-- 4 [Le Supervisor](#supervisor)
+- 5 [Le Supervisor](#supervisor)
+- 6 [Trigger l'envoi d'email local](#local) 
+- 7 [Les tests e2e](#test)
 
 ###  <div id="config"/></div> La config [⬆️](#mailer) 
 
@@ -221,3 +220,44 @@ stdout_logfile_maxbytes = 0
 stderr_logfile_maxbytes = 0
 
 ```
+
+###  <div id="local"/></div> Trigger l'envoi d'email en local [⬆️](#mailer)
+
+Parfois, on n'a juste pas besoin de lancer les tests e2e ou de faire tout le processus via l'UI pour déclencher l'envoie d'email. Pour ça il existe une méthode manuelle :
+
+Dans votre Processor faker les IDs en dure dont vous avez besoin![](processor.png). 
+
+Puis aller sur https://rabbitmq.cap.co/ (login guest, mdp :guest) dans l'onglet "Queues", recherchez/cliquez sur votre worker en question.
+![](rbmq1.png) 
+Et publiez un message, ensuite lancez votre commande de consumer normalement.
+Dans l'exemple : `bin/console swarrot:consume:user_invite_invitation_by_organization user_invite_invitation_by_organization
+`
+vous devriez avoir trigger l'envoi d'email en question, il se retrouve sur l'URL mail.cap.co
+![](rbmq2.png)
+![](rbmq3.png)
+
+###  <div id="test"/></div> Les tests e2e [⬆️](#mailer)
+
+On utilise les tests e2e pour avoir un snapshot d'email et donc déceler les éventuelles régressions. Mais on peut aussi tester le résultat comme le nombre d'emails envoyés, le titre du sujet etc.
+
+Pour ajouter un test e2e, ça se passe dans `features/commands/consumers`
+Exemple :
+
+
+```gherkin
+
+@database @rabbitmq @snapshot-email @dev
+Scenario: A user invitation is asynchronous
+Given I publish in "user_invite_invitation_by_organization" with message below:
+"""
+  {
+    "id": "organizationInvitationMessage"
+  }
+  """
+And I consume 1 messages in "user_invite_invitation_by_organization"
+And I open mail with subject "notification-subject-organization-invite"
+Then email should match snapshot 'userOrganizationInvitation.html'
+```
+
+Dans le container de l'application Docker vous pouvez jouer cette commande pour générer le snapshot
+`UPDATE_SNAPSHOTS=true php -d memory_limit=-1 ./bin/behat -p commands --tags=dev`
