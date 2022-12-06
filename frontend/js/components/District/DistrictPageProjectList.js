@@ -49,7 +49,7 @@ export const DistrictPageProjectList = ({ query }: Props) => {
       </Heading>
       <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} marginLeft={-4}>
         {projects.map((node, index) => (
-          <ProjectPreview key={index} project={node} />
+          <ProjectPreview key={index} project={node} forceNewCardDesign />
         ))}
       </Grid>
       {hasNext ? (

@@ -17,11 +17,18 @@ type Props = {|
   +hasSecondTitle?: boolean,
   +features: FeatureToggles,
   +isProjectsPage: boolean,
+  +forceNewCardDesign?: ?boolean,
 |};
 
-export const ProjectPreview = ({ project, hasSecondTitle, features, isProjectsPage }: Props) => {
+export const ProjectPreview = ({
+  project,
+  hasSecondTitle,
+  features,
+  isProjectsPage,
+  forceNewCardDesign,
+}: Props) => {
   const projectID = project.id ? `project-preview-${project.id}` : 'project-preview';
-  if (features.new_project_card)
+  if (features.new_project_card || forceNewCardDesign)
     return (
       <Flex mt={7} mb={7} mr={5} ml={5}>
         <ProjectCard project={project} isProjectsPage={isProjectsPage} />
@@ -47,7 +54,7 @@ const connector = connect<any, any, _, _, _, _>(mapStateToProps);
 export default createFragmentContainer(connector(ProjectPreview), {
   project: graphql`
     fragment ProjectPreview_project on Project
-      @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
       id
       ...ProjectCard_project
       ...ProjectPreviewBody_project

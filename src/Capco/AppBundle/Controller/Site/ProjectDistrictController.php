@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -26,7 +27,7 @@ class ProjectDistrictController extends Controller
     {
         $district = $this->getDistrict($slug);
 
-        return ['districtId' => $district->getId()];
+        return ['districtId' => GlobalId::toGlobalId('District', $district->getId())];
     }
 
     private function getDistrict(string $slug): ProjectDistrict
