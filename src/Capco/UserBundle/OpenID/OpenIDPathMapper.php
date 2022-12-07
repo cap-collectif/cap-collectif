@@ -5,6 +5,7 @@ namespace Capco\UserBundle\OpenID;
 use Capco\UserBundle\OpenID\Mapping\CarpentrasMapping;
 use Capco\UserBundle\OpenID\Mapping\DecathlonMapping;
 use Capco\UserBundle\OpenID\Mapping\DevOpenIDMapping;
+use Capco\UserBundle\OpenID\Mapping\DijonMapping;
 use Capco\UserBundle\OpenID\Mapping\EdfMapping;
 use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
 use Capco\UserBundle\OpenID\Mapping\MappingInterface;
@@ -35,10 +36,6 @@ class OpenIDPathMapper
                 $this->instanceMapper = new NantesMapping();
 
                 break;
-            case 'dev':
-                $this->instanceMapper = new DevOpenIDMapping();
-
-                break;
             case 'decathlon-preprod':
             case 'nl-decathlon':
             case 'decathlon':
@@ -66,6 +63,11 @@ class OpenIDPathMapper
                 $this->instanceMapper = new CndpMapping();
 
                 break;
+            case 'dijon':
+                $this->instanceMapper = new DijonMapping();
+
+                break;
+            case 'dev':
             default:
                 $this->instanceMapper = new DevOpenIDMapping();
         }

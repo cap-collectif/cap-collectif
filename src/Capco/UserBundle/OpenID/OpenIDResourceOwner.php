@@ -3,14 +3,17 @@
 namespace Capco\UserBundle\OpenID;
 
 use Capco\AppBundle\Helper\EnvHelper;
+use Capco\UserBundle\Security\JWT;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
     protected $paths = [
-        'identifier' => 'sub',
+        'identifier' => 'accountName',
     ];
 
     private $instanceName;
@@ -61,7 +64,31 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             EnvHelper::get('SYMFONY_INSTANCE_NAME')
         ))->getOpenIDMapping();
 
-        return parent::getUserInformation($accessToken, $extraParameters);
+        $content = JWT::getPayloadFromJWT($accessToken['access_token']);
+
+        if (is_null($content) && $this->options['use_bearer_authorization']) {
+            $content = $this->httpRequest(
+                $this->normalizeUrl($this->options['infos_url'], $extraParameters),
+                null,
+                ['Authorization' => 'Bearer '.$accessToken['access_token']]
+            );
+        }
+
+        if (is_null($content)) {
+            $content = $this->doGetUserInformationRequest(
+                $this->normalizeUrl(
+                    $this->options['infos_url'],
+                    array_merge([$this->options['attr_name'] => $accessToken['access_token']], $extraParameters)
+                )
+            );
+        }
+
+        $response = $this->getUserResponse();
+        $response->setData($content instanceof ResponseInterface ? (string) $content->getBody() : $content);
+        $response->setResourceOwner($this);
+        $response->setOAuthToken(new OAuthToken($accessToken));
+
+        return $response;
     }
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
