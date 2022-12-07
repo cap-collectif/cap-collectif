@@ -1,16 +1,24 @@
 // @flow
 import * as React from 'react';
 import {useIntl} from "react-intl";
+import {useSelector} from "react-redux";
 import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import Button from '~ds/Button/Button';
 import Link from '~ds/Link/Link';
 import { baseUrl } from '~/config';
 import SpotIcon, { SPOT_ICON_NAME, SPOT_ICON_SIZE } from '~ds/SpotIcon/SpotIcon';
+import type {GlobalState} from "~/types";
 
 
 const AccessDenied = (): React.Node => {
   const intl = useIntl();
+
+  const { btnBgColor, btnTextColor } = useSelector((state: GlobalState) => ({
+    btnBgColor: state.default.parameters['color.btn.primary.bg'],
+    btnTextColor: state.default.parameters['color.btn.primary.text'],
+  }));
+
 
   return (
     <Flex
@@ -25,6 +33,8 @@ const AccessDenied = (): React.Node => {
       <Text fontSize={4} mb="41px" textAlign="center">{intl.formatMessage({id: 'restricted-access'})}</Text>
       <SpotIcon name={SPOT_ICON_NAME.LOCK_EYE} size={SPOT_ICON_SIZE.XL} mb="41px" />
       <Button
+        bg={`${btnBgColor} !important`}
+        color={`${btnTextColor} !important`}
         variant="primary"
         variantSize="big"
         mb={4}

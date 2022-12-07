@@ -73,7 +73,7 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
 
         $viewer->hasRole('ROLE_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
-        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 1]);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 0, 1]);
 
         $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);
@@ -101,12 +101,12 @@ class ProjectVisibilityStubSpec extends ObjectBehavior
         $this->setAuthors($authors);
         $this->getAuthors()->shouldReturn($authors);
 
-        $this->getVisibilityForViewer($author)->shouldReturn([2, 1]);
+        $this->getVisibilityForViewer($author)->shouldReturn([2, 0, 1]);
         $this->getVisibilityForViewer($viewer)->shouldReturn([2]);
 
         $viewer->hasRole('ROLE_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN']);
-        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 1]);
+        $this->getVisibilityForViewer($viewer)->shouldReturn([2, 0, 1]);
 
         $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(true);
         $viewer->getRoles()->willReturn(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']);

@@ -160,6 +160,6 @@ Capco\AppBundle\Entity\ProjectAuthor:
         organization: '@organization2'
         project: '@rapportEvaluation'
     pa41:
-        createdAt: <(new \DateTime('2022-07-20 00:00:02'))>
+        createdAt: <(new \DateTime('2022-07-20 00:00:01'))>
         organization: '@organization2'
-        project: '@projectIdf3'
+        project: '@projectOrgaVisibilityMe'

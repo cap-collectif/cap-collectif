@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|Organization.Projects admin should be able to fetch projects from organization 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "projectOrgaVisibilityMe",
+            "visibility": "ME",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Rapport d'évaluation 6 (AR6)",
+            "visibility": "PUBLIC",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
 exports[`Internal|Organization.Projects anonymous should be able to fetch public projects from organization 1`] = `
 Object {
   "node": Object {
@@ -9,10 +34,61 @@ Object {
         Object {
           "node": Object {
             "title": "Rapport d'évaluation 6 (AR6)",
+            "visibility": "PUBLIC",
           },
         },
       ],
       "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.Projects orga member should be able to fetch projects from organization 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "projectOrgaVisibilityMe",
+            "visibility": "ME",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Rapport d'évaluation 6 (AR6)",
+            "visibility": "PUBLIC",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;
+
+exports[`Internal|Organization.Projects super admin should be able to fetch projects from organization 1`] = `
+Object {
+  "node": Object {
+    "id": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjI=",
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "projectOrgaVisibilityMe",
+            "visibility": "ME",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Rapport d'évaluation 6 (AR6)",
+            "visibility": "PUBLIC",
+          },
+        },
+      ],
+      "totalCount": 2,
     },
   },
 }

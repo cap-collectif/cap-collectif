@@ -19,6 +19,7 @@ trait ProjectVisibilityTrait
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
             } elseif (is_object($viewer) && $viewer->hasRole('ROLE_ADMIN')) {
+                $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
             }
         }

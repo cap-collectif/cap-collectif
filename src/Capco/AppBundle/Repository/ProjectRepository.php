@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -111,34 +112,32 @@ class ProjectRepository extends EntityRepository
         ProjectOwner $owner,
         int $offset,
         int $limit,
-        array $options = []
+        ?User $viewer = null
     ): array {
-        return $this->getByOwnerQueryBuilder($owner, $options)
+        return $this->getByOwnerQueryBuilder($owner, $viewer)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()->getResult();
     }
 
-    public function countByOwner(ProjectOwner $owner, $options = []): int
+    public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int
     {
-        return $this->getByOwnerQueryBuilder($owner, $options)
+        return $this->getByOwnerQueryBuilder($owner, $viewer)
             ->select('count(p.id)')
             ->getQuery()->getSingleScalarResult();
     }
 
-    public function getByOwnerQueryBuilder(ProjectOwner $owner, $options = []): QueryBuilder
+    public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
     {
-        $qb = $this->createQueryBuilder('p')
+        $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
             ->leftJoin(($owner instanceof User) ? 'p.owner' : 'p.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
             ->orderBy('p.updatedAt', 'DESC');
 
-        if ($options['visibilityFilter'] ?? false) {
-            $qb->andWhere("p.visibility = :visibility");
-            $qb->setParameter('visibility', $options['visibilityFilter']);
+        if ($owner instanceof Organization && $viewer && $viewer->isMemberOfOrganization($owner)) {
+            $qb->orWhere('authors.organization = :ownerId');
         }
-
         return $qb;
     }
 

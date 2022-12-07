@@ -18,6 +18,13 @@ Object {
           Object {
             "node": Object {
               "archived": true,
+              "title": "projectOrgaVisibilityMe",
+              "visibility": "ADMIN",
+            },
+          },
+          Object {
+            "node": Object {
+              "archived": true,
               "title": "Rapport d'évaluation 6 (AR6)",
               "visibility": "ADMIN",
             },

@@ -18,7 +18,6 @@ const QUERY = graphql`
     $cursorProjects: String
     $cursorPosts: String
     $cursorEvents: String
-    $projectVisibilityFilter: ProjectVisibility
     $hideDeletedEvents: Boolean
     $hideUnpublishedEvents: Boolean
     $hideUnpublishedPosts: Boolean
@@ -43,7 +42,7 @@ const QUERY = graphql`
           url
         }
         url
-        projectsCount: projects(visibilityFilter: $projectVisibilityFilter) {
+        projectsCount: projects {
           totalCount
         }
         eventsCount: events(
@@ -59,7 +58,6 @@ const QUERY = graphql`
           @arguments(
             count: $count
             cursor: $cursorProjects
-            visibilityFilter: $projectVisibilityFilter
           )
         ...OrganizationPageEventList_organization
           @arguments(
@@ -88,7 +86,6 @@ export const OrganizationPage = ({ organizationId }: Props) => {
     cursorProjects: null,
     cursorPosts: null,
     cursorEvents: null,
-    projectVisibilityFilter: 'PUBLIC',
     hideDeletedEvents: true,
     hideUnpublishedEvents: true,
     hideUnpublishedPosts: true,

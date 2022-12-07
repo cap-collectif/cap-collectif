@@ -90,12 +90,8 @@ InternalOrganization:
             projects:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args, getUser()])'
                 argsBuilder: 'Relay::ForwardConnection'
-                args:
-                    visibilityFilter:
-                        type: 'ProjectVisibility'
-                        description: 'Filter by visiblity'
             events:
                 type: 'InternalEventConnection!'
                 description: 'Get all events that the organization owns.'

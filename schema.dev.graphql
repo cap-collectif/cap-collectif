@@ -8695,9 +8695,6 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     ID of a Status to filter by. If non-null, filter projects by statuses.
     """
     status: ID
-
-    """Filter by visiblity"""
-    visibilityFilter: ProjectVisibility
   ): ProjectConnection!
 
   """Get all proposalForm that the organization owns."""

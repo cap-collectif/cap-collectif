@@ -473,3 +473,13 @@ Capco\AppBundle\Entity\Project:
         visibility: 2
         owner: '@organization2'
         creator: '@user1'
+    projectOrgaVisibilityMe:
+        id: 'projectOrgaVisibilityMe'
+        title: projectOrgaVisibilityMe
+        projectType: '@projectType9'
+        createdAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 0
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'

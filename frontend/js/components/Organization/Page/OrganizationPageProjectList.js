@@ -15,10 +15,9 @@ const FRAGMENT = graphql`
   @argumentDefinitions(
     count: { type: "Int!" }
     cursor: { type: "String" }
-    visibilityFilter: { type: "ProjectVisibility" }
   )
   @refetchable(queryName: "OrganizationPageProjectListPaginationQuery") {
-    projects(first: $count, after: $cursor, visibilityFilter: $visibilityFilter)
+    projects(first: $count, after: $cursor)
       @connection(key: "OrganizationPageProjectList_projects", filters: ["query", "orderBy"]) {
       totalCount
       edges {

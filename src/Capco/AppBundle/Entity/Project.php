@@ -1347,10 +1347,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
             return true;
         }
 
-        if ($viewer && $this->organizationOwner) {
-            return $viewer->isMemberOfOrganization($this->organizationOwner);
-        }
-
         $isOwner = $this->owner && $this->owner === $viewer;
         if (
             $viewer &&
@@ -1369,6 +1365,11 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
                 }
             }
         }
+
+        if ($viewer && $this->organizationOwner) {
+            return $viewer->isMemberOfOrganization($this->organizationOwner);
+        }
+
         $viewerVisibility = $this->getVisibilityForViewer($viewer);
 
         return \in_array($this->getVisibility(), $viewerVisibility) &&

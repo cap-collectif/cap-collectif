@@ -27,10 +27,19 @@ Object {
           "node": Object {
             "authors": Array [
               Object {
-                "username": "admin",
-              },
-              Object {
                 "username": "GIEC",
+              },
+            ],
+            "owner": Object {
+              "username": "GIEC",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [
+              Object {
+                "username": "admin",
               },
             ],
             "owner": Object {
@@ -448,7 +457,7 @@ Object {
           },
         },
       ],
-      "totalCount": 45,
+      "totalCount": 46,
     },
   },
 }
@@ -513,6 +522,11 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "title": "projectOrgaVisibilityMe",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "Food project",
           },
         },
@@ -537,7 +551,7 @@ Object {
           },
         },
       ],
-      "totalCount": 5,
+      "totalCount": 6,
     },
   },
 }
@@ -815,11 +829,17 @@ Object {
         Object {
           "node": Object {
             "publishedAt": "2022-01-03 12:00:00",
+            "title": "projectOrgaVisibilityMe",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2022-01-03 12:00:00",
             "title": "Rapport d'évaluation 6 (AR6)",
           },
         },
       ],
-      "totalCount": 45,
+      "totalCount": 46,
     },
   },
 }
