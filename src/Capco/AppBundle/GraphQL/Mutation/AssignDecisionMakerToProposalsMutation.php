@@ -153,21 +153,21 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         $revokations = [];
         foreach ($proposals as $proposal) {
             $proposal = \is_array($proposal) ? $proposal[0] : $proposal;
-            if ($proposal->getDecisionMaker() === $newDecisionMaker) {
+            $decisionMaker = $proposal->getDecisionMaker();
+            if ($decisionMaker instanceof User && $decisionMaker === $newDecisionMaker) {
                 continue;
             }
             $newAssignations[] = $proposal;
-            $supervisor = $proposal->getSupervisor();
-            if (!$supervisor) {
+            if (!$decisionMaker instanceof User) {
                 continue;
             }
-            if (!isset($revokations[$supervisor->getUsername()])) {
-                $revokations[$supervisor->getUsername()] = [
-                    'decisionMaker' => $supervisor,
+            if (!isset($revokations[$decisionMaker->getUsername()])) {
+                $revokations[$decisionMaker->getUsername()] = [
+                    'decisionMaker' => $decisionMaker,
                     'unassignations' => [],
                 ];
             }
-            $revokations[$supervisor->getUsername()]['unassignations'][] = $proposal;
+            $revokations[$decisionMaker->getUsername()]['unassignations'][] = $proposal;
         }
 
         return [
