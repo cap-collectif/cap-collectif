@@ -28,7 +28,7 @@
 # At minute 0 past every 12th hour.
 0 */12 * * * /usr/bin/timeout 480m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors --env=prod --quiet
 
-# Remind users to confirm their account at minute 0 every hour.
+# Remind users to confirm their account every 15 minutes.
 */15 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod
 
 # Delete user archives at minute 0 every hour.

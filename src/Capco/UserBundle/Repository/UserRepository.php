@@ -1134,14 +1134,14 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function findNotEmailConfirmedUserIdsSinceLastCronExecution(): array
+    public function foundUnconfirmedUsersInTheLast24Hours(): array
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('u.id')
             ->andWhere('u.confirmationToken IS NOT NULL')
-            ->andWhere('u.createdAt < :oneHour AND u.createdAt > :oneWeekAgo')
-            ->andWhere('u.remindedAccountConfirmationAfter1Hour = false')
-            ->setParameter('oneHour', new \DateTime('-1 hour'))
+            ->andWhere('u.createdAt < :oneDayAgo AND u.createdAt > :oneWeekAgo')
+            ->andWhere('u.remindedAccountConfirmationAfter24Hours = false')
+            ->setParameter('oneDayAgo', new \DateTime('-1 day'))
             ->setParameter('oneWeekAgo', new \DateTime('-7 day'));
 
         return $qb->getQuery()->getResult();

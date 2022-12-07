@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
-use Capco\AppBundle\Notifier\UserNotifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
@@ -18,7 +17,6 @@ class RemindUserAccountConfirmationCommand extends Command
 {
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
-    private UserNotifier $userNotifier;
     private UserRepository $userRepository;
     private Manager $toggleManager;
     private Publisher $publisher;
@@ -26,7 +24,6 @@ class RemindUserAccountConfirmationCommand extends Command
     public function __construct(
         LoggerInterface $logger,
         EntityManagerInterface $entityManager,
-        UserNotifier $userNotifier,
         UserRepository $userRepository,
         Manager $toggleManager,
         Publisher $publisher,
@@ -35,7 +32,6 @@ class RemindUserAccountConfirmationCommand extends Command
         $this->logger = $logger;
         $this->entityManager = $entityManager;
         $this->userRepository = $userRepository;
-        $this->userNotifier = $userNotifier;
         $this->toggleManager = $toggleManager;
         $this->publisher = $publisher;
         parent::__construct($name);
@@ -58,7 +54,7 @@ class RemindUserAccountConfirmationCommand extends Command
             return 0;
         }
 
-        $userIds = $this->userRepository->findNotEmailConfirmedUserIdsSinceLastCronExecution();
+        $userIds = $this->userRepository->foundUnconfirmedUsersInTheLast24Hours();
         foreach ($userIds as $id) {
             $user = $this->userRepository->find($id);
             $email = $user->getEmail();
@@ -75,7 +71,7 @@ class RemindUserAccountConfirmationCommand extends Command
             }
 
             // We make sure that we don't spam the user with another reminder
-            $user->setRemindedAccountConfirmationAfter1Hour(true);
+            $user->setRemindedAccountConfirmationAfter24Hours(true);
             $this->entityManager->flush();
         }
 

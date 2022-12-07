@@ -94,7 +94,7 @@ class User extends AbstractUser implements
     protected ?\DateTime $smsConfirmationSentAt = null;
     protected ?\DateTime $confirmedAccountAt = null;
     protected ?\DateTime $deletedAccountAt = null;
-    protected bool $remindedAccountConfirmationAfter1Hour = false;
+    protected bool $remindedAccountConfirmationAfter24Hours = false;
 
     //notifications
     protected Collection $followingContributions;
@@ -943,15 +943,15 @@ class User extends AbstractUser implements
         return $this;
     }
 
-    public function getRemindedAccountConfirmationAfter1Hour(): bool
+    public function getRemindedAccountConfirmationAfter24Hours(): bool
     {
-        return $this->remindedAccountConfirmationAfter1Hour;
+        return $this->remindedAccountConfirmationAfter24Hours;
     }
 
-    public function setRemindedAccountConfirmationAfter1Hour(
-        bool $remindedAccountConfirmationAfter1Hour
+    public function setRemindedAccountConfirmationAfter24Hours(
+        bool $remindedAccountConfirmationAfter24Hours
     ): self {
-        $this->remindedAccountConfirmationAfter1Hour = $remindedAccountConfirmationAfter1Hour;
+        $this->remindedAccountConfirmationAfter24Hours = $remindedAccountConfirmationAfter24Hours;
 
         return $this;
     }
