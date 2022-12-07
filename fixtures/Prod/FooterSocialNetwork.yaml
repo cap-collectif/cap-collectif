@@ -20,13 +20,6 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
     isEnabled: false
     style: linkedin
 
-  FooterSocialNetwork4:
-    title: Google+
-    link: https://plus.google.com
-    position: 4
-    isEnabled: false
-    style: gplus
-
   FooterSocialNetwork5:
     title: Flux RSS
     link: '#'
