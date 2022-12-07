@@ -369,7 +369,7 @@ class Event implements
         return $this;
     }
 
-    public function getLat(?bool $fromJson = false): ?float
+    public function getLat(?bool $fromJson = true): ?float
     {
         if ($this->addressJson && $fromJson) {
             return json_decode($this->addressJson, true)[0]['geometry']['location']['lat'];
@@ -393,7 +393,7 @@ class Event implements
         return $this;
     }
 
-    public function getLng(?bool $fromJson = false): ?float
+    public function getLng(?bool $fromJson = true): ?float
     {
         if ($this->addressJson && $fromJson) {
             return json_decode($this->addressJson, true)[0]['geometry']['location']['lng'];
