@@ -16,6 +16,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useIntl } from 'react-intl';
 import useFeatureFlag from '../../hooks/useFeatureFlag';
 import { useNavBarContext } from './NavBar.context';
+import BreadCrumbItems from "../BreadCrumb/BreadCrumbItems";
 
 const QUERY = graphql`
     query NavBarQuery {
@@ -63,7 +64,7 @@ export const NavBar: React.FC<NavBarProps> = ({  title, data }) => {
     const { availableLocales, viewer } = useLazyLoadQuery<NavBarQuery>(QUERY, {});
     const intl = useIntl();
     const hasMultilangue = useFeatureFlag('multilangue');
-    const { saving } = useNavBarContext()
+    const { saving, breadCrumbItems } = useNavBarContext()
     const localeFromCookie = intl.locale;
     const localeSelected =
         availableLocales.find(locale =>
@@ -74,7 +75,9 @@ export const NavBar: React.FC<NavBarProps> = ({  title, data }) => {
 
     return (
         <NavBarUI>
-            <NavBarUI.Title>{title}</NavBarUI.Title>
+            <NavBarUI.Title>
+                {breadCrumbItems.length > 0 ? <BreadCrumbItems breadCrumbItems={breadCrumbItems} /> : title }
+            </NavBarUI.Title>
 
             {saving && (
                 <NavBarUI.List ml="auto" mr={4} spacing={2} color="gray.500">
