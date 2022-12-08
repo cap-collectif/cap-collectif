@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
     protected $paths = [
-        'identifier' => 'accountName',
+        'identifier' => 'sub',
     ];
 
     private $instanceName;
