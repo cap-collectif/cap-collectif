@@ -11,7 +11,11 @@ import PostCard from '~/components/Ui/News/PostCard';
 
 const FRAGMENT = graphql`
   fragment OrganizationPagePostList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, hideUnpublishedPosts: { type: "Boolean" })
+  @argumentDefinitions(
+    count: { type: "Int!" }
+    cursor: { type: "String" }
+    hideUnpublishedPosts: { type: "Boolean" }
+  )
   @refetchable(queryName: "OrganizationPagePostListPaginationQuery") {
     posts(first: $count, after: $cursor, hideUnpublishedPosts: $hideUnpublishedPosts)
       @connection(key: "OrganizationPagePostList_posts", filters: ["query", "orderBy"]) {
@@ -39,7 +43,7 @@ export const OrganizationPagePostList = ({ organization }: Props) => {
   const { posts } = data;
 
   return (
-    <Flex direction="column" maxWidth={['100%', '380px']} width="100%">
+    <Flex direction="column" maxWidth={['100%', '380px']} width="100%" mb={4}>
       <Heading as="h4" mb={4}>
         {intl.formatMessage({ id: 'menu.news' })}
       </Heading>

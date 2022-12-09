@@ -55,10 +55,7 @@ const QUERY = graphql`
           totalCount
         }
         ...OrganizationPageProjectList_organization
-          @arguments(
-            count: $count
-            cursor: $cursorProjects
-          )
+          @arguments(count: $count, cursor: $cursorProjects)
         ...OrganizationPageEventList_organization
           @arguments(
             count: $count
@@ -118,7 +115,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
           p={[0, 8]}
           direction={['column-reverse', 'row']}>
           <Flex direction="column" maxWidth="550px" p={[4, 0]}>
-            <Heading as="h1" mb={6}>
+            <Heading as="h1" mb={6} fontSize="32px" lineHeight="44px">
               {title}
             </Heading>
             <Text as="div">{body}</Text>
@@ -157,7 +154,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                 overflow="hidden"
                 minHeight={['unset', '270px']}
                 css={{
-                  objectFit: 'cover',
+                  objectFit: !cover ? 'contain' : 'cover',
                 }}
                 maxHeight="315px"
               />
@@ -178,7 +175,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                     width="104px"
                     height="64px"
                     css={{
-                      objectFit: 'cover',
+                      objectFit: 'contain',
                     }}
                   />
                 </AppBox>
@@ -203,8 +200,8 @@ export const OrganizationPage = ({ organizationId }: Props) => {
           ) : null}
           {!fullSizeLayout ? (
             <Flex direction="column" width={['100%', '30%']}>
-              {hasEvents ? <OrganizationPageEventList organization={organization} /> : null}
               {hasPosts ? <OrganizationPagePostList organization={organization} /> : null}
+              {hasEvents ? <OrganizationPageEventList organization={organization} /> : null}
             </Flex>
           ) : null}
         </Flex>
