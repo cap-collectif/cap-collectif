@@ -146,7 +146,7 @@ export const ProposalEditModal = ({
 }: Props) => {
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL');
   const [errorCount, setErrorCount] = React.useState<number>(0);
-  const [isDraft, setIsDraft] = React.useState<boolean>(false);
+  const [isDraft, setIsDraft] = React.useState<boolean>(proposal.publicationStatus === 'DRAFT');
   const [valuesSaved, setValuesSaved] = React.useState<?ChangeProposalContentInput>(null);
 
   if (!proposal || !show) return null;
@@ -289,7 +289,7 @@ export const ProposalEditModal = ({
                       variant="tertiary"
                       variantColor="primary"
                       isLoading={submitting && isDraft}
-                      disabled={pristine || (!isDraft && submitting)}
+                      disabled={(!isDraft && pristine) || (!isDraft && submitting)}
                       onClick={() => {
                         dispatch(change(formName, 'draft', true));
                         setIsDraft(true);
@@ -308,7 +308,7 @@ export const ProposalEditModal = ({
                     variant="primary"
                     variantColor="primary"
                     isLoading={submitting && !isDraft}
-                    disabled={pristine || invalid || (isDraft && submitting)}
+                    disabled={(!isDraft && pristine) || invalid || (isDraft && submitting)}
                     onClick={() => {
                       dispatch(change(formName, 'draft', false));
                       setIsDraft(false);

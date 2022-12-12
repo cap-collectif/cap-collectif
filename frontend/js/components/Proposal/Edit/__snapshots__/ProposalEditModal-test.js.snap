@@ -284,7 +284,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
       >
         <ButtonGroup>
           <Button
-            disabled={true}
+            disabled={false}
             id="confirm-proposal-create-as-draft"
             isLoading={false}
             onClick={[Function]}
@@ -295,7 +295,7 @@ exports[`<ProposalEditModal /> should render correctly with DRAFT status 1`] = `
             global.save
           </Button>
           <Button
-            disabled={true}
+            disabled={false}
             id="confirm-proposal-edit"
             isLoading={false}
             onClick={[Function]}
