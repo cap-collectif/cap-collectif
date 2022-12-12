@@ -149,7 +149,7 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
                     .map(
                         proposalForm =>
                             proposalForm && (
-                                <Table.Tr key={proposalForm.id} rowId={proposalForm.id}>
+                                <Table.Tr key={proposalForm.id} rowId={proposalForm.id} data-cy="proposalform-item">
                                     <ProposalFormItem
                                         viewer={viewer}
                                         proposalForm={proposalForm}

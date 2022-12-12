@@ -32,7 +32,14 @@ declare namespace Cypress {
     email: string
     password: string
   }
-  type LoginAsUsernames = 'admin' | 'super_admin' | 'project_owner' | 'user' | 'pierre' | 'user_not_confirmed'
+  type LoginAsUsernames =
+    | 'admin'
+    | 'super_admin'
+    | 'project_owner'
+    | 'user'
+    | 'pierre'
+    | 'user_not_confirmed'
+    | 'valerie'
   interface cy {
     appendOperationToGraphQLFetch(): void
   }
@@ -46,6 +53,7 @@ declare namespace Cypress {
     checkAccessDenied(url: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
     confirmRecaptcha(): Chainable<void>
+    getByDataCy(name: string): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>
     directLoginAs(username: LoginAsUsernames): Chainable<any>
     directLogin(options: LoginOptions): Chainable<any>

@@ -144,6 +144,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
             size={CapUIModalSize.Lg}
             disclosure={
                 <Button
+                    data-cy="create-project-button"
                     variant="primary"
                     variantColor="primary"
                     variantSize={noResult ? 'big' : 'small'}
@@ -165,6 +166,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                                     label={intl.formatMessage({ id: 'global.title' })}
                                 />
                                 <FieldInput
+                                    data-cy="create-project-modal-title"
                                     id="title"
                                     name="title"
                                     control={control}
@@ -176,11 +178,16 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                             </FormControl>
 
                             <FormControl
+                                data-cy="create-project-modal-authors"
                                 name="author"
                                 control={control}
                                 isDisabled={viewer.isOnlyProjectAdmin || !!organization}>
                                 <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
-                                <UserListField name="author" control={control} isMulti />
+                                <UserListField
+                                    name="author"
+                                    control={control}
+                                    isMulti
+                                />
                             </FormControl>
 
                             <FormControl name="type" control={control}>
@@ -217,6 +224,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                                 {intl.formatMessage({ id: 'cancel' })}
                             </Button>
                             <Button
+                                data-cy="create-project-modal-create-button"
                                 onClick={e => {
                                     handleSubmit((data: FormValues) => onSubmit(data))(e);
                                     hide();

@@ -25,6 +25,7 @@ Array [
     aria-expanded={false}
     aria-haspopup="dialog"
     className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    data-cy="create-project-button"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -96,6 +97,7 @@ Array [
     aria-expanded={true}
     aria-haspopup="dialog"
     className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    data-cy="create-project-button"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -233,6 +235,7 @@ Array [
               <input
                 aria-required={true}
                 className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
+                data-cy="create-project-modal-title"
                 disabled={false}
                 id="title"
                 name="title"
@@ -247,6 +250,7 @@ Array [
             </div>
             <div
               className="sc-bdvvtL iXOAiz cap-form-control"
+              data-cy="create-project-modal-authors"
               role="group"
             >
               <label
@@ -556,6 +560,7 @@ Array [
             </button>
             <button
               className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              data-cy="create-project-modal-create-button"
               disabled={true}
               onClick={[Function]}
               type="button"

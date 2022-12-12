@@ -269,6 +269,7 @@ Array [
       >
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="post-item"
           id="UG9zdDpwb3N0MTI="
         >
           <td
@@ -497,6 +498,7 @@ Array [
         </tr>
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="post-item"
           id="UG9zdDpwb3N0MTM="
         >
           <td

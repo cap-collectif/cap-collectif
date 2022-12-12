@@ -150,7 +150,7 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                     .map(
                         questionnaire =>
                             questionnaire && (
-                                <Table.Tr key={questionnaire.id} rowId={questionnaire.id}>
+                                <Table.Tr key={questionnaire.id} rowId={questionnaire.id} data-cy="questionnaire-item">
                                     <QuestionnaireItem
                                         viewer={viewer}
                                         questionnaire={questionnaire}

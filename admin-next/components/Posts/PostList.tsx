@@ -180,7 +180,7 @@ const PostList: React.FC<PostListProps> = ({ viewer: viewerRef, postOwner, term,
                     .map(
                         post =>
                             post && (
-                                <Table.Tr key={post.id} rowId={post.id}>
+                                <Table.Tr key={post.id} rowId={post.id} data-cy="post-item">
                                     <PostItem
                                         post={post}
                                         connectionName={posts.__id}

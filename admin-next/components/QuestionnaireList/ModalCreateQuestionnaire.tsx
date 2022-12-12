@@ -127,6 +127,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
         <Modal
             disclosure={
                 <Button
+                    data-cy="create-questionnaire-button"
                     variant="primary"
                     variantColor="primary"
                     variantSize={noResult ? 'big' : 'small'}
@@ -177,6 +178,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
                                     label={intl.formatMessage({ id: 'global.title' })}
                                 />
                                 <FieldInput
+                                    data-cy="create-questionnaire-modal-title"
                                     type="text"
                                     id="title"
                                     name="title"
@@ -200,6 +202,7 @@ const ModalCreateQuestionnaire: React.FC<ModalCreateQuestionnaireProps> = ({
                                 {intl.formatMessage({ id: 'cancel' })}
                             </Button>
                             <Button
+                                data-cy="create-questionnaire-modal-create-button"
                                 type="submit"
                                 variantSize="medium"
                                 variant="primary"

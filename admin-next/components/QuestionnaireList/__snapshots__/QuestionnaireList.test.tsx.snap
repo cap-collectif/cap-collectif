@@ -233,6 +233,7 @@ Array [
       >
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="questionnaire-item"
           id="questionnaire-1"
         >
           <td
@@ -386,6 +387,7 @@ Array [
         </tr>
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="questionnaire-item"
           id="questionnaire-2"
         >
           <td

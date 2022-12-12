@@ -25,6 +25,7 @@ Array [
     aria-expanded={false}
     aria-haspopup="dialog"
     className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -97,6 +98,7 @@ Array [
     aria-expanded={true}
     aria-haspopup="dialog"
     className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -321,6 +323,7 @@ Array [
               <input
                 aria-required={true}
                 className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
+                data-cy="create-questionnaire-modal-title"
                 disabled={false}
                 id="title"
                 maxLength={255}
@@ -364,6 +367,7 @@ Array [
             </button>
             <button
               className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              data-cy="create-questionnaire-modal-create-button"
               id="confirm-questionnaire-create"
               onClick={[Function]}
               type="submit"

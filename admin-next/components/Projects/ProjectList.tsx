@@ -156,7 +156,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
                     .map(
                         project =>
                             project && (
-                                <Table.Tr key={project.id} rowId={project.id}>
+                                <Table.Tr key={project.id} rowId={project.id} data-cy="project-item">
                                     <ProjectItem
                                         project={project}
                                         connectionName={projects.__id}

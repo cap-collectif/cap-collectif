@@ -80,6 +80,7 @@ const PostListPage: React.FC<PostListPageProps> = ({ queryReference, isAdmin }) 
                     overflow="hidden">
                     <Flex direction="row">
                         <Button
+                            data-cy="create-post-button"
                             variant="primary"
                             variantColor="primary"
                             variantSize="small"

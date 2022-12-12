@@ -244,6 +244,7 @@ Array [
       >
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0SWRmMw=="
         >
           <td
@@ -537,6 +538,7 @@ Array [
         </tr>
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Rm9vZA=="
         >
           <td
@@ -830,6 +832,7 @@ Array [
         </tr>
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ="
         >
           <td
@@ -1123,6 +1126,7 @@ Array [
         </tr>
         <tr
           className="sc-bdvvtL fuBSjA cap-table__tr"
+          data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ="
         >
           <td

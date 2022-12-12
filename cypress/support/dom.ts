@@ -9,3 +9,6 @@ Cypress.Commands.add('confirmRecaptcha', () => {
     }
   })
 })
+Cypress.Commands.add('getByDataCy', (name: string) => {
+  return cy.get(`[data-cy="${name}"]`)
+})

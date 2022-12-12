@@ -117,6 +117,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
             }}
             disclosure={
                 <Button
+                    data-cy="create-proposalform-button"
                     variant="primary"
                     variantColor="primary"
                     variantSize={noResult ? 'big' : 'small'}
@@ -140,6 +141,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
                                     label={intl.formatMessage({ id: 'global.title' })}
                                 />
                                 <FieldInput
+                                    data-cy="create-proposalform-modal-title"
                                     id="title"
                                     name="title"
                                     control={control}
@@ -163,6 +165,7 @@ const ModalCreateProposalForm: React.FC<ModalCreateProposalFormProps> = ({
                                 {intl.formatMessage({ id: 'cancel' })}
                             </Button>
                             <Button
+                                data-cy="create-proposalform-modal-create-button"
                                 variantSize="medium"
                                 variant="primary"
                                 variantColor="primary"
