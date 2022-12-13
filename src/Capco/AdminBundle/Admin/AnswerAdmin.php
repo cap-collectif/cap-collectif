@@ -6,6 +6,7 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class AnswerAdmin extends CapcoAdmin
 {
@@ -30,13 +31,8 @@ class AnswerAdmin extends CapcoAdmin
                 'label' => 'global.title',
                 'required' => false,
             ])
-            ->add('author', ModelAutocompleteType::class, [
+            ->add('author', null, [
                 'label' => 'global.author',
-                'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
-                'required' => true,
             ])
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',

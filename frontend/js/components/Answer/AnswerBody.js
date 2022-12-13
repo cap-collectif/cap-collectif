@@ -53,7 +53,8 @@ export default createFragmentContainer(AnswerBody, {
         body
         createdAt
         author {
-          ...UserAvatar_user
+          ...UserLink_user
+          ...UserAvatarLegacy_user
         }
       }
       ... on Post {
@@ -61,7 +62,7 @@ export default createFragmentContainer(AnswerBody, {
         createdAt
         body
         authors {
-          ...UserAvatar_user
+          ...UserAvatarLegacy_user
           id
           ... on User {
             vip

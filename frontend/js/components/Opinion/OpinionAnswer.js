@@ -25,7 +25,7 @@ class OpinionAnswer extends React.Component<Props> {
     return (
       <div className={classes} id="answer">
         {answer.title ? (
-          <p className="h4" style={{ marginTop: '0' }}>
+          <p className="h4" style={{ marginTop: '0', marginBottom: '16px' }}>
             {translateContent(answer.title)}
           </p>
         ) : null}
