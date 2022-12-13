@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render correctly 1`] = `
+<div
+  className="sc-bdvvtL iKnbti"
+>
+  <h2
+    className="sc-bdvvtL lgTyZH cap-heading"
+  >
+    event.page.project.list
+  </h2>
+  <div
+    className="sc-bdvvtL bqsvzy"
+  >
+    <a
+      className="sc-bdvvtL tSdyx"
+      href="https://capco.dev/project/croissance-innovation-disruption/presentation/presentation-1"
+      style={
+        Object {
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="sc-bdvvtL kNYeVh cap-card"
+        style={
+          Object {
+            "borderRadius": "8px",
+          }
+        }
+      >
+        <div
+          className="sc-bdvvtL EventPageProjectList___StyledBox-eWbyLV hKyHsZ dFYqSf"
+        />
+        <div
+          className="sc-bdvvtL dcgjBK"
+        >
+          <h4
+            className="sc-bdvvtL chjhTx cap-heading"
+            title="Croissance, innovation, disruption"
+          >
+            Croissance, innovation, disruption
+          </h4>
+          <div
+            className="sc-bdvvtL kjVjIu"
+          >
+            <div
+              className="sc-bdvvtL QYbBT"
+            >
+              <div
+                className="sc-bdvvtL jFhPOR"
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 9 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                  <path
+                    d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+                <span
+                  className="EventPageProjectList___StyledText-eFGTA-d dUOTPQ"
+                >
+                  Premier Quartier • Deuxième Quartier
+                </span>
+              </div>
+              <div
+                className="sc-bdvvtL jFhPOR"
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 11 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.333 11.334H2a1 1 0 01-1-1M9 5V1.667a.333.333 0 00-.333-.334H2.333C1.597 1.333 1 1.93 1 2.667v7.667a1 1 0 011-1h2.333"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                  <path
+                    clipRule="evenodd"
+                    d="M7.978 6.191l.684 1.476h1.333a.327.327 0 01.23.57L9.07 9.376l.641 1.474a.35.35 0 01-.497.436l-1.552-.871-1.55.871a.35.35 0 01-.498-.436l.641-1.473L5.1 8.238a.326.326 0 01.228-.571h1.334l.686-1.477a.356.356 0 01.63.001z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+                <span
+                  className="EventPageProjectList___StyledText2-lhirYX bCCroO"
+                >
+                  project.types.interpellation
+                </span>
+              </div>
+              <div
+                className="sc-bdvvtL jFhPOR"
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 10"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+                <span
+                  className="EventPageProjectList___StyledText3-dRNZYq elYRXR"
+                >
+                  Immobilier, Justice
+                </span>
+              </div>
+            </div>
+            <div
+              className="sc-bdvvtL ohmfR"
+            >
+              <div
+                className="sc-bdvvtL eOtkDA"
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 14 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.174 7.72a.783.783 0 010 1.565h-.522a.782.782 0 01.783.783c0 .433-.35.522-.783.522H7.261c-1.488 0-1.826-.261-3.652-.522V5.633C4.887 5.633 7 3.285 7 1.198c0-.824 1.142-1.132 1.565.376.261.929-.522 2.755-.522 2.755h4.174A.783.783 0 0113 5.11c0 .433-.35 1.044-.783 1.044h-.521a.783.783 0 110 1.565h-.522z"
+                    fill="#fff"
+                  />
+                  <path
+                    d="M11.174 7.72a.783.783 0 010 1.565h-.522a.782.782 0 01.783.783c0 .433-.35.522-.783.522H7.261c-1.488 0-1.826-.261-3.652-.522V5.633C4.887 5.633 7 3.285 7 1.198c0-.824 1.142-1.132 1.565.376.261.929-.522 2.755-.522 2.755h4.174A.783.783 0 0113 5.11c0 .433-.35 1.044-.783 1.044h-.521a.783.783 0 110 1.565h-.522"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M3.609 4.85H1v6.261h2.609v-6.26z"
+                    fill="#fff"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div
+                  className="sc-bdvvtL hEezwl cap-text"
+                >
+                  10
+                </div>
+              </div>
+              <div
+                className="sc-bdvvtL eOtkDA"
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 14 13"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                    fill="#fff"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div
+                  className="sc-bdvvtL hEezwl cap-text"
+                >
+                  264
+                </div>
+              </div>
+              <div
+                className="sc-bdvvtL eOtkDA"
+              >
+                <svg
+                  className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                  fill="none"
+                  viewBox="0 0 13 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M3.75 3.261a2.75 2.75 0 105.5 0 2.75 2.75 0 00-5.5 0z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M1 12.611a5.5 5.5 0 0111 0"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div
+                  className="sc-bdvvtL hEezwl cap-text"
+                >
+                  41
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;

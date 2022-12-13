@@ -16,6 +16,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import EventModerationMotive from './EventModerationMotive';
 import CommentSectionApp from '~/startup/CommentSectionApp';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
+import EventPageProjectList from '~/components/Event/EventPage/EventPageProjectList';
 
 type Props = {|
   +queryRef: ?EventPageContent_query$key,
@@ -37,6 +38,7 @@ const FRAGMENT = graphql`
           lat
           lng
         }
+        ...EventPageProjectList_event
         ...EventModerationMotive_event
         commentable
         viewerDidAuthor @include(if: $isAuthenticated)
@@ -184,6 +186,7 @@ export const EventPageContent = ({ queryRef }: Props) => {
             <EventModerationMotive eventRef={event} />
           )}
           <About>{event.body}</About>
+          <EventPageProjectList eventRef={event} />
         </Flex>
         <Flex direction="column" mt={[8, 0]}>
           <Aside>
