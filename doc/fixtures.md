@@ -1,4 +1,4 @@
-<a id="mailer"></a> 🇫🇷 Les Fixtures
+<a id="fixtures"></a> 🇫🇷 Les Fixtures
 =========
 
 [⬅️](../README.md) Retour
