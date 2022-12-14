@@ -85,6 +85,7 @@ class Manager
     public const proposal_sms_vote = 'proposal_sms_vote';
     public const unstable__organizations = 'unstable__organizations';
     public const moderation_comment = 'moderation_comment';
+    public const unstable__new_create_project = 'unstable__new_create_project';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -188,6 +189,7 @@ class Manager
         self::proposal_sms_vote,
         self::unstable__organizations,
         self::moderation_comment,
+        self::unstable__new_create_project
     ];
 
     protected ToggleManager $toggleManager;

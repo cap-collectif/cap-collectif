@@ -57,6 +57,7 @@ const VIEWER_FRAGMENT = graphql`
         username
         isAdmin
         isOnlyProjectAdmin
+        url
         organizations {
             id
             displayName
@@ -102,6 +103,13 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
                 ? values.author[0]
                 : values.author
             : null;
+
+        const creator = {
+            id: viewer.id,
+            username: viewer.username,
+            url: viewer.url
+        }
+
         return CreateProjectMutation.commit(
             {
                 input,
@@ -120,6 +128,7 @@ const ProjectModalCreateProject: FC<ProjectModalCreateProjectProps> = ({
             viewer.isAdmin,
             hasProjects,
             owner,
+            creator
         )
             .then(response => {
                 if (!response.createProject?.project) {

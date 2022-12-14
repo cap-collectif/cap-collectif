@@ -295,6 +295,10 @@ Object {
       "enabled": false,
       "type": "moderation_comment",
     },
+    Object {
+      "enabled": false,
+      "type": "unstable__new_create_project",
+    },
   ],
 }
 `;

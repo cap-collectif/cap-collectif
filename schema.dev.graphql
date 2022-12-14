@@ -6441,6 +6441,9 @@ enum FeatureFlagType {
 
   """Whether or not comment moderation is enabled"""
   moderation_comment
+
+  """Whether or not project create rework is enabled"""
+  unstable__new_create_project
 }
 
 """Require a firstname"""

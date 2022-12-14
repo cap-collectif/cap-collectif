@@ -90,6 +90,11 @@
                         "title": "capco.module.moderation_comment",
                         "description": "description.module.moderation_comment",
                         "onlySuperAdmin": true
+                    },
+                    "unstable__new_create_project": {
+                        "title": "capco.module.unstable__new_create_project",
+                        "description": "",
+                        "onlySuperAdmin": true
                     }
                 }
             }

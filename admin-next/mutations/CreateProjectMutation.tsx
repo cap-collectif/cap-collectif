@@ -22,9 +22,10 @@ const mutation = graphql`
 
 const commit = (
     variables: CreateProjectMutationVariables,
-    isAdmin: boolean,
-    hasProject: boolean,
-    owner: { value: string; label: string | null } | null,
+    isAdmin?: boolean,
+    hasProject?: boolean,
+    owner?: { value: string; label: string | null } | null,
+    creator?: { id: string; username: string | null, url: string } | null,
 ): Promise<CreateProjectMutationResponse> =>
     commitMutation<CreateProjectMutation>(environment, {
         mutation,
@@ -46,6 +47,12 @@ const commit = (
                         id: owner?.value || '',
                         username: owner?.label || '',
                         url: '/',
+                    },
+                    creator: {
+                        __typename: 'User',
+                        id: creator?.id || '',
+                        username: creator?.username || '',
+                        url: creator?.url || ''
                     },
                     contributions: { totalCount: 0 },
                 },

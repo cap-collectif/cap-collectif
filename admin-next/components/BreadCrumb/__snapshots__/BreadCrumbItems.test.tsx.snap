@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BreadCrumbItems /> should render multiple items with slash in between them 1`] = `
+<div
+  className="sc-bdvvtL iJGMDo"
+>
+  <div
+    className="sc-bdvvtL iJGMDo"
+  >
+    <a
+      className="sc-bdvvtL eWQXuY cap-link"
+      href="/projects"
+    >
+      Project list
+    </a>
+    <span
+      className="sc-bdvvtL daVYXL cap-text"
+    >
+      /
+    </span>
+  </div>
+  <div
+    className="sc-bdvvtL iJGMDo"
+  >
+    <p
+      className="sc-bdvvtL kEtfBQ cap-text"
+    >
+      New Project
+    </p>
+  </div>
+</div>
+`;
+
+exports[`<BreadCrumbItems /> should render one single item 1`] = `
+<div
+  className="sc-bdvvtL iJGMDo"
+>
+  <div
+    className="sc-bdvvtL iJGMDo"
+  >
+    <p
+      className="sc-bdvvtL kEtfBQ cap-text"
+    >
+      Project list
+    </p>
+  </div>
+</div>
+`;

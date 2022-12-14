@@ -167,3 +167,6 @@ InternalFeatureFlagType:
             moderation_comment:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::moderation_comment")'
                 description: 'Whether or not comment moderation is enabled'
+            unstable__new_create_project:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_create_project")'
+                description: 'Whether or not project create rework is enabled'

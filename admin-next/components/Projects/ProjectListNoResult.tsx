@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { Heading, Flex, Text, SpotIcon, CapUISpotIcon, CapUISpotIconSize } from '@cap-collectif/ui';
+import {Heading, Flex, Text, SpotIcon, CapUISpotIcon, CapUISpotIconSize, CapUIIcon, Button} from '@cap-collectif/ui';
 import type { ProjectModalCreateProject_query$key } from '@relay/ProjectModalCreateProject_query.graphql';
 import ProjectModalCreateProject from './ProjectModalCreateProject';
 import { graphql, useFragment } from 'react-relay';
 import { ProjectListNoResult_viewer$key } from '@relay/ProjectListNoResult_viewer.graphql';
+import useFeatureFlag from "@hooks/useFeatureFlag";
 
 export interface ProjectListNoResultProps {
     orderBy: string;
@@ -26,6 +27,7 @@ const ProjectListNoResult: React.FC<ProjectListNoResultProps> = ({
     term,
     hasProjects,
 }) => {
+    const isNewProjectCreateEnabled = useFeatureFlag('unstable__new_create_project');
     const intl = useIntl();
     const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
 
@@ -45,14 +47,28 @@ const ProjectListNoResult: React.FC<ProjectListNoResultProps> = ({
                     {intl.formatMessage({ id: 'publish.first.project' })}
                 </Heading>
                 <Text mb={8}>{intl.formatMessage({ id: 'project.first.description' })}</Text>
-                <ProjectModalCreateProject
-                    orderBy={orderBy}
-                    term={term}
-                    query={query}
-                    viewer={viewer}
-                    noResult
-                    hasProjects={hasProjects}
-                />
+                {isNewProjectCreateEnabled ?
+                    <Button
+                        as="a"
+                        href="/admin-next/createProject"
+                        variant="primary"
+                        variantColor="primary"
+                        variantSize="big"
+                        leftIcon={CapUIIcon.Add}
+                        mr={8}
+                    >
+                        {intl.formatMessage({ id: 'create-a-project' })}
+                    </Button>
+                    :
+                    <ProjectModalCreateProject
+                        orderBy={orderBy}
+                        term={term}
+                        viewer={viewer}
+                        query={query}
+                        noResult={true}
+                        hasProjects={hasProjects}
+                    />
+                }
             </Flex>
         </Flex>
     );

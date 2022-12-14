@@ -73,6 +73,7 @@ class FeaturesCategoryResolver
                     Manager::api_sendinblue,
                     Manager::unstable__organizations,
                     Manager::moderation_comment,
+                    Manager::unstable__new_create_project,
                 ],
             ],
         ],

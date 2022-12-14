@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BreadCrumbItem /> should render a text when link is active 1`] = `
+<p
+  className="sc-bdvvtL kEtfBQ cap-text"
+>
+  Project List
+</p>
+`;
+
+exports[`<BreadCrumbItem /> should render link with href when link is not active 1`] = `
+<a
+  className="sc-bdvvtL eWQXuY cap-link"
+  href="/projects"
+>
+  Project List
+</a>
+`;
