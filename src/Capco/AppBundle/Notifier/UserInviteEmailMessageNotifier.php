@@ -170,41 +170,46 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
 
     public function deliver(UserInviteEmailMessage $emailMessage, bool $delivered): bool
     {
-        // The transport instance returned from the mailer is Capco\AppBundle\Mailer\Transport\Transport
-        $transport = $this->mailer->getMailerTransport()->getTransport();
-        if ($messageId = $this->getLastMessageId($transport)) {
-            $emailMessage->setMailerId($messageId);
-            if ($transport instanceof MailjetTransport) {
-                $emailMessage->setMailerType(MailerType::MAILJET);
-            }
-            if ($transport instanceof MandrillTransport) {
-                $emailMessage->setMailerType(MailerType::MANDRILL);
-            }
+        $mailerType = $this->getMailerType();
+        $emailMessage->setMailerType($mailerType);
+        $messageId = $this->getLastMessageId();
 
-            $this->entityManager->flush();
+        if ($messageId) {
+            $emailMessage->setMailerId($messageId);
+        } else {
+            $emailMessage->setInternalStatus(UserInviteEmailMessage::SENT);
+        }
+
+        $this->entityManager->flush();
+
+        if ($messageId) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::USER_INVITE_CHECK,
                 new Message(
                     json_encode([
                         'id' => $emailMessage->getId(),
-                        'provider' => ClassUtils::getClass($transport),
+                        'provider' => ClassUtils::getClass(
+                            $this->mailer->getMailerTransport()->getTransport()
+                        ),
                     ])
                 )
             );
-
-            return $delivered;
         }
-
-        $emailMessage
-            ->setMailerType(MailerType::SMTP)
-            ->setInternalStatus(UserInviteEmailMessage::SENT);
-        $this->entityManager->flush();
 
         return $delivered;
     }
 
-    private function getLastMessageId(\Swift_Transport $transport): ?string
+    private function getLastMessageId(): ?string
     {
+        $mailerTransport = $this->mailer->getMailerTransport();
+        $transport = $mailerTransport ? $mailerTransport->getTransport() : null;
+
+        if (!$transport) {
+            $this->logger->error('The current transport instance is null.');
+
+            return null;
+        }
+
         $transportClass = ClassUtils::getClass($transport);
         if (method_exists($transportClass, 'getLastMessageId')) {
             return $transport->getLastMessageId();
@@ -214,5 +219,24 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         );
 
         return null;
+    }
+
+    private function getMailerType(): MailerType
+    {
+        $mailerTransport = $this->mailer->getMailerTransport();
+        $transport = $mailerTransport ? $mailerTransport->getTransport() : null;
+
+        if (!$transport) {
+            return MailerType::SMTP;
+        }
+
+        if ($transport instanceof MailjetTransport) {
+            return MailerType::MAILJET;
+        }
+        if ($transport instanceof MandrillTransport) {
+            return MailerType::MANDRILL;
+        }
+
+        return MailerType::SMTP;
     }
 }
