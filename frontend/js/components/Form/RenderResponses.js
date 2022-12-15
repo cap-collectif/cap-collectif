@@ -33,6 +33,10 @@ const BoxWithMarge: StyledComponent<{ isQuestionnaire: boolean }, {}, HTMLDivEle
 ).attrs({ className: 'box-with-marge' })`
   padding-left: ${props => (props.isQuestionnaire ? '32px' : '0')};
   padding-right: ${props => (props.isQuestionnaire ? '32px' : '0')};
+  margin-bottom: 32px !important;
+  .form-group {
+    margin-bottom: 0px !important;
+  }
 `;
 
 const mapQuestionChoicesToOptions = (question: Question) =>

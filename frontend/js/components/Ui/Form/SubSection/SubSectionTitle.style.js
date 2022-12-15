@@ -27,7 +27,7 @@ export const TitleQuestionnaire: StyledComponent<
     color: ${props => props.primaryColor || '#000'};
     padding: 0 2%;
     background-color: #fff;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: normal;
     margin-bottom: 16px;

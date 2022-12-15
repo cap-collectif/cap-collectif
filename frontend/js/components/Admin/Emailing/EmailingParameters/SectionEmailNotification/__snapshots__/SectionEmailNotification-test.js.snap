@@ -25,7 +25,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       className="form-group"
     >
       <label
-        className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+        className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
         htmlFor="recipient-email"
         id="label-recipient-email"
         type="label"
@@ -57,7 +57,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+          className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
           htmlFor="sender-email"
           id="label-select-sender-email"
           type="label"
@@ -193,7 +193,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf hrohVq control-label label-container"
+          className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
           htmlFor="sender-name"
           id="label-sender-name"
           type="label"

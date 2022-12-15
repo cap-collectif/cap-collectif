@@ -7,7 +7,6 @@ const QuestionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div.at
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 15px;
 `;
 
 export default QuestionContainer;

@@ -55,8 +55,8 @@ import Captcha from '~/components/Form/Captcha';
 import { SPACES_SCALES } from '~/styles/theme/base';
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
-import TitleInvertContrast from '~ui/Typography/TitleInvertContrast';
 import Section from '~/components/Form/Section/Section';
+import SectionTitle from '~ui/Form/Section/SectionTitle';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -507,9 +507,9 @@ export class ReplyForm extends React.Component<Props, State> {
             questionnaire.step?.collectParticipantsEmail &&
             canParticipateAnonymously && (
               <>
-                <TitleInvertContrast>
+                <SectionTitle typeForm={TYPE_FORM.QUESTIONNAIRE}>
                   <FormattedMessage id="youre-almost-there" />
-                </TitleInvertContrast>
+                </SectionTitle>
 
                 <ParticipantEmailWrapper mb={4}>
                   <Text fontSize="20px" color="gray.900" fontWeight={600} fontFamily="inherit">

@@ -18,7 +18,7 @@ const Title: StyledComponent<{ primaryColor: string }, {}, HTMLHeadingElement> =
     props.primaryColor ? hexToRgba(props.primaryColor, 0.08, true) : hexToRgba('#fff', 0.08, true)};
   color: ${props => props.primaryColor || '#919191'};
   padding: 16px;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 24px;
   font-weight: 600;
   text-align: center;

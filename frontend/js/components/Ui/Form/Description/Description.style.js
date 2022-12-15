@@ -6,7 +6,7 @@ const DescriptionContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div
 })`
   font-size: 16px;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 `;
 
 export default DescriptionContainer;
