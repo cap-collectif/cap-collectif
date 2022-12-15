@@ -7,7 +7,7 @@ import chalk from 'chalk';
 // So we can keep it here.
 const LOCO_READ_ONLY_KEY = 'UdTAAZySXEx3EYrJfvD8byxPgOX76Vvf';
 
-const locales = ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC'];
+const locales = ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN'];
 const domains = [
     'CapcoAppBundle',
     'SonataAdminBundle',

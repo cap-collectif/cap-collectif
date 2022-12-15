@@ -70,7 +70,7 @@ class ParametersRuntime implements RuntimeExtensionInterface
 
     public static function getCacheKey(string $locale): string
     {
-        return self::CACHE_KEY.$locale;
+        return self::CACHE_KEY . $locale;
     }
 
     public function getSiteParameters(): array
@@ -145,8 +145,10 @@ class ParametersRuntime implements RuntimeExtensionInterface
         return $cachedItem->get();
     }
 
-    public function getAvailableLocales(): array
+    public function getAvailableLocales($viewer = null): array
     {
-        return $this->localeRepository->findPublishedLocales();
+        $isSuperAdmin = $viewer ? $viewer->isSuperAdmin() : false;
+
+        return $this->localeRepository->findPublishedLocales($isSuperAdmin);
     }
 }

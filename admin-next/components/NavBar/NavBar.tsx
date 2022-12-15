@@ -1,14 +1,6 @@
 import * as React from 'react';
 import { NavBarQuery } from '@relay/NavBarQuery.graphql';
-import {
-    Avatar,
-    CapUIIcon,
-    CapUIIconSize,
-    Icon,
-    Menu,
-    Spinner,
-    Text,
-} from '@cap-collectif/ui';
+import { Avatar, CapUIIcon, CapUIIconSize, Icon, Menu, Spinner, Text } from '@cap-collectif/ui';
 import { NavBar as NavBarUI } from '@ui/NavBar';
 import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper';
 import { getBaseUrlWithAdminNextSupport } from '~/config';
@@ -16,7 +8,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useIntl } from 'react-intl';
 import useFeatureFlag from '../../hooks/useFeatureFlag';
 import { useNavBarContext } from './NavBar.context';
-import BreadCrumbItems from "../BreadCrumb/BreadCrumbItems";
+import BreadCrumbItems from '../BreadCrumb/BreadCrumbItems';
 
 const QUERY = graphql`
     query NavBarQuery {
@@ -45,26 +37,27 @@ const FLAGS = {
     SV_SE: '🇸🇪',
     EU_EU: '🇪🇸',
     OC_OC: '🇫🇷',
+    UR_IN: '🏁',
 };
 
 type NavBarData = {
     number: {
-        color: string,
-        label: string | number,
-    }
-    label: string
-}
+        color: string;
+        label: string | number;
+    };
+    label: string;
+};
 
 export interface NavBarProps {
     readonly title: string;
     readonly data?: NavBarData[];
 }
 
-export const NavBar: React.FC<NavBarProps> = ({  title, data }) => {
+export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
     const { availableLocales, viewer } = useLazyLoadQuery<NavBarQuery>(QUERY, {});
     const intl = useIntl();
     const hasMultilangue = useFeatureFlag('multilangue');
-    const { saving, breadCrumbItems } = useNavBarContext()
+    const { saving, breadCrumbItems } = useNavBarContext();
     const localeFromCookie = intl.locale;
     const localeSelected =
         availableLocales.find(locale =>
@@ -76,7 +69,11 @@ export const NavBar: React.FC<NavBarProps> = ({  title, data }) => {
     return (
         <NavBarUI>
             <NavBarUI.Title>
-                {breadCrumbItems.length > 0 ? <BreadCrumbItems breadCrumbItems={breadCrumbItems} /> : title }
+                {breadCrumbItems.length > 0 ? (
+                    <BreadCrumbItems breadCrumbItems={breadCrumbItems} />
+                ) : (
+                    title
+                )}
             </NavBarUI.Title>
 
             {saving && (

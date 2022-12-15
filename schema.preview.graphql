@@ -1738,6 +1738,9 @@ enum TranslationLocale {
 
   """Gascon - OCCITAN locale"""
   OC_OC
+
+  """Recette - RECETTE locale"""
+  UR_IN
 }
 
 """Entities that can be trashed."""

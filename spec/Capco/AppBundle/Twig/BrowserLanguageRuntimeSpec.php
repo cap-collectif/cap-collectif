@@ -33,7 +33,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
     ) {
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
-        $manager->isActive('multilangue')->willReturn(false);
+        $manager->isActive(Manager::multilangue)->willReturn(false);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 
@@ -52,8 +52,8 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
             new Locale('es-ES', 'spanish'),
             new Locale('de-DE', 'deutsch'),
         ];
-        $dataloader->__invoke()->willReturn($availableLocales);
-        $manager->isActive('multilangue')->willReturn(true);
+        $dataloader->__invoke(null)->willReturn($availableLocales);
+        $manager->isActive(Manager::multilangue)->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('en-GB');
     }
 
@@ -71,8 +71,9 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
             new Locale('es-ES', 'spanish'),
             new Locale('de-DE', 'deutsch'),
         ];
-        $dataloader->__invoke()->willReturn($availableLocales);
-        $manager->isActive('multilangue')->willReturn(true);
+
+        $dataloader->__invoke(null)->willReturn($availableLocales);
+        $manager->isActive(Manager::multilangue)->willReturn(true);
         $defaultLocaleCodeDataloader->__invoke()->willReturn('fr-FR');
 
         $bag->has('locale')->willReturn(false);
@@ -94,14 +95,14 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         ParameterBag $bag,
         HeaderBag $headerBag
     ) {
-        $dataloader
-            ->__invoke()
-            ->willReturn([
-                new Locale('fr-FR', 'french'),
-                new Locale('en-GB', 'english'),
-                new Locale('es-ES', 'spanish'),
-                new Locale('de-DE', 'deutsch'),
-            ]);
+        $availableLocales = [
+            new Locale('fr-FR', 'french'),
+            new Locale('en-GB', 'english'),
+            new Locale('es-ES', 'spanish'),
+            new Locale('de-DE', 'deutsch'),
+        ];
+
+        $dataloader->__invoke(null)->willReturn($availableLocales);
         $bag->has('locale')->willReturn(true);
         // This locale unfortunately does not yet exist.
         $bag->get('locale')->willReturn('jp-EC');
@@ -113,7 +114,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         );
         $request->headers = $headerBag;
 
-        $manager->isActive('multilangue')->willReturn(true);
+        $manager->isActive(Manager::multilangue)->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 
@@ -126,7 +127,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         HeaderBag $headerBag
     ) {
         $dataloader
-            ->__invoke()
+            ->__invoke(null)
             ->willReturn([
                 new Locale('fr-FR', 'french'),
                 new Locale('en-GB', 'english'),
@@ -144,7 +145,7 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
         );
         $request->headers = $headerBag;
 
-        $manager->isActive('multilangue')->willReturn(true);
+        $manager->isActive(Manager::multilangue)->willReturn(true);
         $this->getBrowserLanguage($request)->shouldReturn('fr-FR');
     }
 }

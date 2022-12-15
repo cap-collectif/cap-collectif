@@ -13,9 +13,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SetUserDefaultLocaleMutation implements MutationInterface
 {
-    private $localeRepository;
-    private $entityManager;
-    private $userRepository;
+    private LocaleRepository $localeRepository;
+    private EntityManagerInterface $entityManager;
+    private UserRepository $userRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -47,18 +47,12 @@ class SetUserDefaultLocaleMutation implements MutationInterface
 
     public function setUserDefaultLocale(User $user, ?string $code): ?User
     {
-        if ($code) {
-            if (
-                null === $this->localeRepository->findOneBy(['code' => $code, 'published' => true])
-            ) {
-                throw new BadRequestHttpException(
-                    "The locale with code ${code} does not exist or is not enabled."
-                );
-            }
-        }
-
         if (null === $user) {
             throw new BadRequestHttpException('You must provide a userId or be connected.');
+        }
+
+        if ($code && !$this->localeRepository->findOneBy(['code' => $code, 'published' => true])) {
+            throw new BadRequestHttpException("The locale with code ${code} does not exist or is not enabled.");
         }
 
         $user->setLocale($code);

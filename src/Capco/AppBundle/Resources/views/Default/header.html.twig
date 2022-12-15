@@ -1,4 +1,4 @@
-{% set languageList = formatted_locales() %}
+{% set languageList = formatted_locales(app.user()) %}
 {{ react_render_component('NavbarApp', {
     'props': {
         'currentRouteName': app.request.get('_route'),

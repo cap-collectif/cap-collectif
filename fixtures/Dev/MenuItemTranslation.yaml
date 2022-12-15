@@ -1,82 +1,156 @@
 Capco\AppBundle\Entity\MenuItemTranslation:
-  MenuItem1fr:
-    translatable: '@MenuItem1'
-    locale: fr-FR
-    title: Accueil
-    link: '/'
+    MenuItem1fr:
+        translatable: '@MenuItem1'
+        locale: fr-FR
+        title: Accueil
+        link: '/'
 
-  MenuItem1en:
-      translatable: '@MenuItem1'
-      locale: en-GB
-      title: Home
-      link: '/'
+    MenuItem1ur:
+        translatable: '@MenuItem1'
+        locale: ur-IN
+        title: Accueil
+        link: '/'
 
-  MenuItem2fr:
-    translatable: '@MenuItem2'
-    locale: fr-FR
-    title: Thèmes
-    link: themes
+    MenuItem1en:
+        translatable: '@MenuItem1'
+        locale: en-GB
+        title: Home
+        link: '/'
 
-  MenuItem3fr:
-    translatable: '@MenuItem3'
-    locale: fr-FR
-    title: Projets participatifs
-    link: projects
+    MenuItem2fr:
+        translatable: '@MenuItem2'
+        locale: fr-FR
+        title: Thèmes
+        link: themes
+    MenuItem2ur:
+        translatable: '@MenuItem2'
+        locale: ur-IN
+        title: Thèmes
+        link: themes
 
-  MenuItem5fr:
-    translatable: '@MenuItem5'
-    locale: fr-FR
-    title: À propos
-    link: ''
+    MenuItem3fr:
+        translatable: '@MenuItem3'
+        locale: fr-FR
+        title: Projets participatifs
+        link: projects
+    MenuItem3ur:
+        translatable: '@MenuItem3'
+        locale: ur-IN
+        title: Projets participatifs
+        link: projects
 
-  MenuItem6fr:
-    translatable: '@MenuItem6'
-    locale: fr-FR
-    title: Contact
-    link: contact
+    MenuItem5fr:
+        translatable: '@MenuItem5'
+        locale: fr-FR
+        title: À propos
+        link: ''
 
-  MenuItem8fr:
-    translatable: '@MenuItem8'
-    locale: fr-FR
-    title: Charte
-    link: pages/charte
+    MenuItem6fr:
+        translatable: '@MenuItem6'
+        locale: fr-FR
+        title: Contact
+        link: contact
 
-  MenuItem9fr:
-    translatable: '@MenuItem9'
-    locale: fr-FR
-    title: FAQ
+    MenuItem8fr:
+        translatable: '@MenuItem8'
+        locale: fr-FR
+        title: Charte
+        link: pages/charte
 
-  MenuItem10fr:
-    translatable: '@MenuItem10'
-    locale: fr-FR
-    title: Comment ça marche
+    MenuItem9fr:
+        translatable: '@MenuItem9'
+        locale: fr-FR
+        title: FAQ
 
-  MenuItem11fr:
-    translatable: '@MenuItem11'
-    locale: fr-FR
-    title: Actualités
-    link: blog
+    MenuItem10fr:
+        translatable: '@MenuItem10'
+        locale: fr-FR
+        title: Comment ça marche
 
-  MenuItem12fr:
-    translatable: '@MenuItem12'
-    locale: fr-FR
-    title: Évènements
-    link: events
+    MenuItem11fr:
+        translatable: '@MenuItem11'
+        locale: fr-FR
+        title: Actualités
+        link: blog
 
-  MenuItem14fr:
-    translatable: '@MenuItem14'
-    locale: fr-FR
-    title: Liste des inscrits
-    link: members
+    MenuItem12fr:
+        translatable: '@MenuItem12'
+        locale: fr-FR
+        title: Évènements
+        link: events
 
-  MenuItem15fr:
-    translatable: '@MenuItem15'
-    locale: fr-FR
-    title: Lien externe
-    link: http://www.google.fr
+    MenuItem14fr:
+        translatable: '@MenuItem14'
+        locale: fr-FR
+        title: Liste des inscrits
+        link: members
 
-  MenuItem16fr:
-    translatable: '@MenuItem16'
-    locale: fr-FR
-    title: Développeurs
-    link: developer
+    MenuItem15fr:
+        translatable: '@MenuItem15'
+        locale: fr-FR
+        title: Lien externe
+        link: http://www.google.fr
+
+    MenuItem16fr:
+        translatable: '@MenuItem16'
+        locale: fr-FR
+        title: Développeurs
+        link: developer
+
+    MenuItem5ur:
+        translatable: '@MenuItem5'
+        locale: ur-IN
+        title: À propos
+        link: ''
+
+    MenuItem6ur:
+        translatable: '@MenuItem6'
+        locale: ur-IN
+        title: Contact
+        link: contact
+
+    MenuItem8ur:
+        translatable: '@MenuItem8'
+        locale: ur-IN
+        title: Charte
+        link: pages/charte
+
+    MenuItem9ur:
+        translatable: '@MenuItem9'
+        locale: ur-In
+        title: FAQ
+
+    MenuItem10ur:
+        translatable: '@MenuItem10'
+        locale: ur-IN
+        title: Comment ça marche
+
+    MenuItem11ur:
+        translatable: '@MenuItem11'
+        locale: ur-IN
+        title: Actualités
+        link: blog
+
+    MenuItem12ur:
+        translatable: '@MenuItem12'
+        locale: ur-IN
+        title: Évènements
+        link: events
+
+    MenuItem14ur:
+        translatable: '@MenuItem14'
+        locale: ur-IN
+        title: Liste des inscrits
+        link: members
+
+    MenuItem15ur:
+        translatable: '@MenuItem15'
+        locale: ur-IN
+        title: Lien externe
+        link: http://www.google.fr
+
+    MenuItem16ur:
+        translatable: '@MenuItem16'
+        locale: ur-IN
+        title: Développeurs
+        link: developer

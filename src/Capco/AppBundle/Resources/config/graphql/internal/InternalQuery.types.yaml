@@ -377,11 +377,11 @@ InternalQuery:
                     includeDisabled:
                         type: 'Boolean'
                 type: '[Locale!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args, getUser()])'
             locales:
                 description: 'List all locales published.'
                 type: '[Locale!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver")'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver", [getUser()])'
             defaultLocale:
                 description: 'Get the default locale.'
                 type: 'Locale!'

@@ -11,6 +11,7 @@ import deMessages from '~/../../translations/de-DE.json';
 import svMessages from '~/../../translations/sv-SE.json';
 import ocMessages from '~/../../translations/oc-OC.json';
 import euMessages from '~/../../translations/eu-EU.json';
+import urMessages from '~/../../translations/ur-IN.json';
 import { __isDev__, __isTest__ } from '../config';
 import { getLocaleFromReq } from '../utils/locale-helper';
 
@@ -23,6 +24,7 @@ const messages = {
     'sv-SE': svMessages,
     'oc-OC': ocMessages,
     'eu-EU': euMessages,
+    'ur-IN': urMessages,
 };
 
 const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {

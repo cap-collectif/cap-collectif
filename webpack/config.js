@@ -12,7 +12,7 @@ const config = {
   appDir: path.join(ABSOLUTE_BASE, 'app'),
   assetsDir: path.join(ABSOLUTE_BASE, 'assets'),
   webpackDir: path.join(ABSOLUTE_BASE, 'webpack'),
-  locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'oc-OC', 'eu-EU'],
+  locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'oc-OC', 'eu-EU', 'ur-IN'],
 };
 
 module.exports = config;

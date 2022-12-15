@@ -9,4 +9,5 @@ export const TranslationLocaleEnum = {
   'sv-SE': 'SV_SE',
   'oc-OC': 'OC_OC',
   'eu-EU': 'EU_EU',
+  'ur-IN': 'UR_IN',
 };

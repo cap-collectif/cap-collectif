@@ -16,6 +16,7 @@ export enum Locale {
     svSE = 'sv-SE',
     ocOC = 'oc-OC',
     euEU = 'eu-EU',
+    urIN = 'ur-IN',
 }
 
 export type ViewerSession = {

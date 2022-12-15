@@ -12,10 +12,18 @@ final class TranslationLocale implements EnumType
     public const SV_SE = 'sv-SE';
     public const EU_EU = 'eu-EU';
     public const OC_OC = 'oc-OC';
+    public const UR_IN = 'ur-IN';
 
     public static function isValid($value): bool
     {
         return \in_array($value, self::getAvailableTypes(), true);
+    }
+
+    public static function getAvailablePrefixes(): array
+    {
+        return array_map(function ($locale) {
+            return explode('-', $locale)[0];
+        }, self::getAvailableTypes());
     }
 
     public static function getAvailableTypes(): array
@@ -29,6 +37,7 @@ final class TranslationLocale implements EnumType
             self::SV_SE,
             self::EU_EU,
             self::OC_OC,
+            self::UR_IN,
         ];
     }
 

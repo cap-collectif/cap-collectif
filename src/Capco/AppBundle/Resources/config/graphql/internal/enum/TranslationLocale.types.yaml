@@ -27,3 +27,6 @@ TranslationLocale:
             OC_OC:
                 value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::OC_OC")'
                 description: 'Gascon - OCCITAN locale'
+            UR_IN:
+                value: '@=constant("Capco\\AppBundle\\Enum\\TranslationLocale::UR_IN")'
+                description: 'Recette - RECETTE locale'

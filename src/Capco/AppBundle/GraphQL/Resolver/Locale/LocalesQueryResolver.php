@@ -7,15 +7,17 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class LocalesQueryResolver implements ResolverInterface
 {
-    protected $localeRepository;
+    protected LocaleRepository $localeRepository;
 
     public function __construct(LocaleRepository $localeRepository)
     {
         $this->localeRepository = $localeRepository;
     }
 
-    public function __invoke(): array
+    public function __invoke($viewer): array
     {
-        return $this->localeRepository->findPublishedLocales();
+        $isSuperAdmin = $viewer ? $viewer->isSuperAdmin() : false;
+
+        return $this->localeRepository->findPublishedLocales($isSuperAdmin);
     }
 }

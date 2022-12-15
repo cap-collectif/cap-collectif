@@ -15805,6 +15805,9 @@ enum TranslationLocale {
 
   """Gascon - OCCITAN locale"""
   OC_OC
+
+  """Recette - RECETTE locale"""
+  UR_IN
 }
 
 """Available errors for a `trash` mutation."""

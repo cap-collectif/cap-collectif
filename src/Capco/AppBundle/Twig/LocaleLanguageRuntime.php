@@ -10,9 +10,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class LocaleLanguageRuntime implements RuntimeExtensionInterface
 {
-    protected $translator;
-    protected $localesDataloader;
-    protected $manager;
+    protected TranslatorInterface $translator;
+    protected PublishedLocalesDataloader $localesDataloader;
+    protected Manager $manager;
 
     public function __construct(
         TranslatorInterface $translator,
@@ -24,24 +24,24 @@ class LocaleLanguageRuntime implements RuntimeExtensionInterface
         $this->manager = $manager;
     }
 
-    public function getLocaleMap(): array
+    public function getLocaleMap($viewer = null): array
     {
-        $parsedLocales = [];
-        if ($this->manager->isActive('multilangue')) {
-            $publishedLocales = $this->localesDataloader->__invoke();
-            $parsedLocales = array_map(function (Locale $locale) {
-                return [
-                    'translationKey' => $this->translator->trans(
-                        $locale->getTraductionKey(),
-                        [],
-                        'CapcoAppBundle',
-                        $locale->getCode()
-                    ),
-                    'code' => $locale->getCode(),
-                ];
-            }, $publishedLocales);
+        if (!$this->manager->isActive(Manager::multilangue)) {
+            return [];
         }
 
-        return $parsedLocales;
+        $publishedLocales = $this->localesDataloader->__invoke($viewer);
+
+        return array_map(function (Locale $locale) {
+            return [
+                'translationKey' => $this->translator->trans(
+                    $locale->getTraductionKey(),
+                    [],
+                    'CapcoAppBundle',
+                    $locale->getCode()
+                ),
+                'code' => $locale->getCode(),
+            ];
+        }, $publishedLocales);
     }
 }

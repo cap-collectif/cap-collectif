@@ -58,11 +58,12 @@ class MultilangueRouteListener
     private static function getUrlLocalisation(Request $request): ?string
     {
         $urlPrefix = self::getUrlPrefix($request);
-        if (2 === \strlen($urlPrefix)) {
-            foreach (TranslationLocale::getAvailableTypes() as $code) {
-                if (explode('-', $code)[0] === $urlPrefix) {
-                    return $code;
-                }
+        if (!\in_array($urlPrefix, TranslationLocale::getAvailablePrefixes())) {
+            return null;
+        }
+        foreach (TranslationLocale::getAvailableTypes() as $code) {
+            if (explode('-', $code)[0] === $urlPrefix) {
+                return $code;
             }
         }
 

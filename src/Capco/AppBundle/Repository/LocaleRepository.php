@@ -7,6 +7,7 @@ use Capco\AppBundle\Exception\LocaleConfigurationException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * Class LocaleRepository.
@@ -14,10 +15,16 @@ use Doctrine\ORM\NoResultException;
 class LocaleRepository extends EntityRepository
 {
     private const ORDER = ['code' => 'ASC'];
+    private const RECETTE_KEY = 'ur-IN';
 
-    public function findAll()
+    public function findAll(bool $isSuperAdmin = false)
     {
-        return $this->findBy([], self::ORDER);
+        $qb = $this->createQueryBuilder('l')->orderBy('l.code', 'ASC');
+        if (!$isSuperAdmin) {
+            self::filterOutRecette($qb);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function getValidCode(?string $userLocaleCode = null): string
@@ -48,9 +55,15 @@ class LocaleRepository extends EntityRepository
         return $this->findBy(['enabled' => true], self::ORDER);
     }
 
-    public function findPublishedLocales(): array
+    public function findPublishedLocales(bool $isSuperAdmin = false): array
     {
-        return $this->findBy(['published' => true], self::ORDER);
+        $qb = $this->createQueryBuilder('l');
+        $qb->andWhere('l.published = true')->orderBy('l.code', 'ASC');
+        if (!$isSuperAdmin) {
+            self::filterOutRecette($qb);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
@@ -117,6 +130,12 @@ class LocaleRepository extends EntityRepository
             ->setParameter('userCode', $userLocaleCode);
 
         return 0 < $qb->getQuery()->getSingleScalarResult();
+    }
+
+    // recette locale only for super admin
+    private static function filterOutRecette(QueryBuilder $qb): void
+    {
+        $qb->andWhere('l.code != :code')->setParameter('code', self::RECETTE_KEY);
     }
 
     private function getSimilarCode(string $userCode): ?string

@@ -44,6 +44,8 @@ export function getOnlyLanguage(locale: string) {
             return 'nl';
         case 'sv-SE':
             return 'sv';
+        case 'ur-IN':
+            return 'ur';
         case 'fr-FR':
         case 'oc-OC':
         default:
@@ -51,16 +53,15 @@ export function getOnlyLanguage(locale: string) {
     }
 }
 
-
 type Translation = {
-    readonly locale: string,
-    readonly [field: string]: ReactNode,
+    readonly locale: string;
+    readonly [field: string]: ReactNode;
 };
 
 export type TranslateField = {
-    name: string
-    value: ReactNode
-}
+    name: string;
+    value: ReactNode;
+};
 
 export function createOrReplaceTranslation(
     fields: TranslateField[],

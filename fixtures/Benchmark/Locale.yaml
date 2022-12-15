@@ -24,3 +24,6 @@ Capco\AppBundle\Entity\Locale:
     locale_gascon:
         __construct: ['oc-OC', 'gascon']
         id: 'locale-oc-OC'
+    locale_recette:
+        __construct: ['ur-IN', 'recette']
+        id: 'locale-ur-IN'

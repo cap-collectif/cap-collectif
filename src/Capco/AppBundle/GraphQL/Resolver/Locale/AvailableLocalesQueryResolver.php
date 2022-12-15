@@ -8,22 +8,21 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class AvailableLocalesQueryResolver implements ResolverInterface
 {
-    protected $localeRepository;
+    protected LocaleRepository $localeRepository;
 
     public function __construct(LocaleRepository $localeRepository)
     {
         $this->localeRepository = $localeRepository;
     }
 
-    public function __invoke(Argument $args): array
+    public function __invoke(Argument $args, $viewer): array
     {
         $includeDisabled = $args->offsetGet('includeDisabled');
+        $isSuperAdmin = $viewer ? $viewer->isSuperAdmin() : false;
         if ($includeDisabled) {
-            $locales = $this->localeRepository->findAll();
-        } else {
-            $locales = $this->localeRepository->findEnabledLocales();
+            return $this->localeRepository->findAll($isSuperAdmin);
         }
 
-        return $locales;
+        return $this->localeRepository->findPublishedLocales($isSuperAdmin);
     }
 }
