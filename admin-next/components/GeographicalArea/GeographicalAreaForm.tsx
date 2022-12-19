@@ -14,7 +14,6 @@ import {
     Switch,
     Spinner,
     toast,
-    Uploader,
     FormGuideline,
     Box,
     UPLOADER_SIZE,
@@ -34,6 +33,7 @@ import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import UpdateProjectDistrictMutation from '@mutations/UpdateProjectDistrictMutation';
 import { UPLOAD_PATH } from '@utils/config';
+//import TextEditor from 'components/Form/TextEditor/TextEditor';
 
 const GeographicalAreaMap = dynamic(() => import('./GeographicalAreaMap'), { ssr: false });
 
@@ -186,10 +186,12 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
         },
     };
 
-    const { control, reset, handleSubmit, formState, watch, setValue } = useForm({
+    const methods = useForm({
         mode: 'onChange',
         defaultValues,
     });
+
+    const { control, reset, handleSubmit, formState, watch, setValue } = methods;
 
     React.useEffect(() => {
         reset(defaultValues);
@@ -303,6 +305,17 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                     })}
                                 />
                             </FormControl>
+                            {/*<FormProvider {...methods}>
+                                <TextEditor
+                                    name="description"
+                                    placeholder={intl.formatMessage({
+                                        id: 'city-neighbourhood-placeholder',
+                                    })}
+                                    label={intl.formatMessage({ id: 'global.description' })}
+                                    platformLanguage={defaultLocale?.code}
+                                    selectedLanguage={localeSelected.value}
+                                />
+                                </FormProvider>*/}
                             <FormControl name="cover" control={control}>
                                 <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
                                     {' '}
