@@ -245,6 +245,7 @@ class UserRepository extends EntityRepository
                 WHERE
                     u.confirmationToken IS NULL
                     AND u.email IS NOT NULL
+                    AND u.enabled = 1
                     AND u.consentInternalCommunication = 1
                     AND 0 = (
                         SELECT count(distinct v.id)
@@ -271,6 +272,7 @@ class UserRepository extends EntityRepository
                 WHERE
                     u.confirmationToken IS NULL
                     AND u.email IS NOT NULL
+                    AND u.enabled = 1
                     AND u.consentInternalCommunication = 1
                     AND 0 = (
                         SELECT count(distinct v.id)
