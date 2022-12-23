@@ -11,7 +11,6 @@ use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
 use Capco\AppBundle\Form\Subscriber\ProjectDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -101,7 +100,7 @@ class AlphaProjectFormType extends AbstractType
                 $form
                     ->add('externalLink', UrlType::class, [
                         'required' => true,
-                        'constraints' => [new CheckExternalLink(), new NotBlank()],
+                        'constraints' => [new NotBlank()],
                     ])
                     ->add('externalParticipantsCount')
                     ->add('externalContributionsCount')
