@@ -28,9 +28,11 @@ trait AuthorableTrait
     public function setAuthor(?Author $author): self
     {
         if ($author instanceof User) {
+            $this->organization = null;
             $this->author = $author;
         }
         if ($author instanceof Organization) {
+            $this->author = null;
             $this->organization = $author;
         }
 

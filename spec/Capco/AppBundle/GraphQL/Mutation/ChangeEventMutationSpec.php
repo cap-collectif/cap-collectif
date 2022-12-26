@@ -76,6 +76,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
 
         $viewer->isAdmin()->willReturn(true);
         $viewer->isProjectAdmin()->willReturn(true);
+        $viewer->getOrganizationId()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
         $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
         $event->getId()->willReturn('event1');
@@ -203,6 +204,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         ];
 
         $viewer->isAdmin()->willReturn(false);
+        $viewer->getOrganizationId()->willReturn(false);
         $viewer->isProjectAdmin()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
 

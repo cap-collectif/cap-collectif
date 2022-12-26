@@ -138,28 +138,4 @@ class AddEventMutation extends AbstractEventMutation
     {
         return $this->authorizationChecker->isGranted(EventVoter::CREATE, new Event());
     }
-
-    private function getAuthor(array $values, User $viewer): Author
-    {
-        $authorId = $values['author'] ?? null;
-
-        if (!$authorId) {
-            return $viewer;
-        }
-
-        $author = $this->globalIdResolver->resolve($authorId, $viewer);
-
-        if (!$author) {
-            throw new UserError("No user or organization matching id : {$authorId}");
-        }
-
-        if ($author instanceof User && $viewer->isAdmin()) {
-            return $author;
-        }
-        if ($author instanceof Organization && $viewer->isMemberOfOrganization($author)) {
-            return $author;
-        }
-
-        return $viewer;
-    }
 }

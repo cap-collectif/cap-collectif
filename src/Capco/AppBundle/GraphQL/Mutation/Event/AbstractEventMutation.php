@@ -4,6 +4,8 @@ namespace Capco\AppBundle\GraphQL\Mutation\Event;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Form\EventType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -92,14 +94,32 @@ abstract class AbstractEventMutation implements MutationInterface
         }
     }
 
-    protected function getUser(string $globalId, User $viewer): User
+    protected function getAuthor(array $values, User $viewer): Author
     {
-        $user = $this->globalIdResolver->resolve($globalId, $viewer);
-        if (!($user instanceof User)) {
-            throw new UserError('No user matching id.');
+        $authorId = $values['author'] ?? null;
+
+        if (!$authorId) {
+            return $viewer;
         }
 
-        return $user;
+        $author = $this->globalIdResolver->resolve($authorId, $viewer);
+
+
+        if (!$author) {
+            throw new UserError("No user or organization matching id : {$authorId}");
+        }
+
+        if ($viewer->isAdmin()) {
+            return $author;
+        }
+        if ($author instanceof User && $viewer->isAdmin()) {
+            return $author;
+        }
+        if ($author instanceof Organization && $viewer->isMemberOfOrganization($author)) {
+            return $author;
+        }
+
+        return $viewer;
     }
 
     protected function setProjects(Event $event, User $viewer, array $values): void

@@ -51,7 +51,7 @@ class ChangeEventMutation extends AbstractEventMutation
         $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
 
-        if (!$viewer->isProjectAdmin()) {
+        if (!$viewer->isProjectAdmin() && !$viewer->getOrganizationId()) {
             $this->publisher->publish(
                 'event.update',
                 new Message(
@@ -81,7 +81,7 @@ class ChangeEventMutation extends AbstractEventMutation
         $author = $event->getAuthor();
 
         if ($viewer->isAdmin() && isset($values['author']) && !empty($values['author'])) {
-            $author = $this->getUser($values['author'], $viewer);
+            $author = $this->getAuthor($values, $viewer);
         }
 
         $event->setAuthor($author);
