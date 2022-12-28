@@ -42,6 +42,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: QuestionnaireProps)
 const FRAGMENT = graphql`
   fragment QuestionnaireAdminNotifications_questionnaire on Questionnaire {
     id
+    creator {
+      email
+    }
     notificationsConfiguration {
       email
       onQuestionnaireReplyCreate
@@ -62,9 +65,10 @@ const QuestionnaireAdminNotifications = ({
 }: Props) => {
   const intl = useIntl();
 
-  const isOnlyProjectAdmin: boolean = useSelector(
-    (state: GlobalState) => state.user?.user?.isOnlyProjectAdmin || false,
-  );
+  const showEmailField: boolean = useSelector((state: GlobalState) => {
+    const user = state.user?.user;
+    return (user?.isProjectAdmin || !!user?.organizationId) ?? false;
+  });
 
   return (
     <div className="box box-primary container-fluid">
@@ -94,7 +98,7 @@ const QuestionnaireAdminNotifications = ({
             id="on_questionnaire_reply_delete">
             {intl.formatMessage({ id: 'global.deleted.feminine' })}
           </Field>
-          {isOnlyProjectAdmin && (
+          {showEmailField && (
             <AppBox width="250px">
               <Field
                 name="email"
@@ -141,15 +145,13 @@ function injectProp(Component) {
   return function WrapperComponent(props: QuestionnaireFragmentProps) {
     const { questionnaire: questionnaireFragment } = props;
     const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
-
+    const { notificationsConfiguration } = questionnaire;
+    const creator = questionnaire?.creator;
     const initialValues = {
-      email: questionnaire.notificationsConfiguration.email,
-      onQuestionnaireReplyCreate:
-        questionnaire.notificationsConfiguration.onQuestionnaireReplyCreate,
-      onQuestionnaireReplyUpdate:
-        questionnaire.notificationsConfiguration.onQuestionnaireReplyUpdate,
-      onQuestionnaireReplyDelete:
-        questionnaire.notificationsConfiguration.onQuestionnaireReplyDelete,
+      email: notificationsConfiguration.email ?? creator?.email,
+      onQuestionnaireReplyCreate: notificationsConfiguration.onQuestionnaireReplyCreate,
+      onQuestionnaireReplyUpdate: notificationsConfiguration.onQuestionnaireReplyUpdate,
+      onQuestionnaireReplyDelete: notificationsConfiguration.onQuestionnaireReplyDelete,
     };
 
     return <Component {...props} questionnaire={questionnaire} initialValues={initialValues} />;

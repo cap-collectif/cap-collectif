@@ -75,6 +75,9 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
         $tokenStorage->getToken()->willReturn($token);
 
+        $viewer->getOrganizationId()->willReturn(null);
+        $userRequest->getOrganizationId()->willReturn(null);
+
         $this->beConstructedWith($tokenStorage, $logger);
         $this->isGranted($viewer, $userRequest)->shouldReturn(false);
     }
@@ -94,6 +97,10 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
         $token->getUser()->willReturn($userInToken);
         $tokenStorage->getToken()->willReturn($token);
+
+        $viewer->getOrganizationId()->willReturn(null);
+        $userInToken->getOrganizationId()->willReturn(null);
+
 
         $this->beConstructedWith($tokenStorage, $logger);
         $this->isGranted($viewer, null)->shouldReturn(false);
@@ -122,5 +129,41 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
         $this->beConstructedWith($tokenStorage, $logger);
         $this->isViewer($user, $userRequest)->shouldReturn(false);
+    }
+
+    function it_grant_access_as_orga_member_who_views_other_orga_member_profile(User $viewer, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    {
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
+        $viewer->getId()->willReturn('1');
+        $userRequest->getId()->willReturn('3');
+
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
+
+        $tokenStorage->getToken()->willReturn($token);
+
+        $viewer->getOrganizationId()->willReturn("orga1");
+        $userRequest->getOrganizationId()->willReturn("orga1");
+
+        $this->beConstructedWith($tokenStorage, $logger);
+        $this->isGranted($viewer, $userRequest)->shouldReturn(true);
+    }
+
+    function it_denies_access_as_orga_member_who_attempt_to_view_member_who_does_not_belong_to_the_same_orga(User $viewer, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    {
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
+        $viewer->getId()->willReturn('1');
+        $userRequest->getId()->willReturn('3');
+
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
+
+        $tokenStorage->getToken()->willReturn($token);
+
+        $viewer->getOrganizationId()->willReturn("orga1");
+        $userRequest->getOrganizationId()->willReturn("orga2");
+
+        $this->beConstructedWith($tokenStorage, $logger);
+        $this->isGranted($viewer, $userRequest)->shouldReturn(false);
     }
 }

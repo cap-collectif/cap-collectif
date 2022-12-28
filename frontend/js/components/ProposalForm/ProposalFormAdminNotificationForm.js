@@ -9,11 +9,9 @@ import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from '~relay/ProposalFormAdminNotificationForm_proposalForm.graphql';
-import type { ProposalFormAdminNotificationForm_query } from '~relay/ProposalFormAdminNotificationForm_query.graphql';
 import type { State, Dispatch } from '../../types';
 
 type RelayProps = {|
-  query: ProposalFormAdminNotificationForm_query,
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,
 |};
 type Props = {|
@@ -51,7 +49,6 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
-      query,
     } = this.props;
     return (
       <div className="box box-primary container-fluid mt-10">
@@ -140,19 +137,17 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               id="proposal_form_notification_proposal_news_on_delete">
               <FormattedMessage id="global.deleted" />
             </Field>
-            {!query.viewer.isAdmin && (
-              <>
-                <h4 style={{ fontWeight: 'bold' }}>
-                  <FormattedMessage id="admin.mail.notifications.receive_address" />
-                </h4>
-                <Field
-                  name="email"
-                  id="proposal_form_notification_email"
-                  type="text"
-                  component={component}
-                />
-              </>
-            )}
+            <>
+              <h4 style={{ fontWeight: 'bold' }}>
+                <FormattedMessage id="admin.mail.notifications.receive_address" />
+              </h4>
+              <Field
+                name="email"
+                id="proposal_form_notification_email"
+                type="text"
+                component={component}
+              />
+            </>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -187,12 +182,11 @@ const form = reduxForm({
 })(ProposalFormAdminNotificationForm);
 
 const mapStateToProps = (state: State, props: RelayProps) => {
+  const { notificationsConfiguration } = props.proposalForm;
   return {
     initialValues: {
-      ...props.proposalForm.notificationsConfiguration,
-      email:
-        props.proposalForm.notificationsConfiguration.email ??
-        (props.query.viewer.isAdmin ? null : props.query.viewer.email),
+      ...notificationsConfiguration,
+      email: notificationsConfiguration.email ?? props.proposalForm.creator?.email,
     },
   };
 };
@@ -204,6 +198,9 @@ export default createFragmentContainer(intlContainer, {
   proposalForm: graphql`
     fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
       id
+      creator {
+        email
+      }
       notificationsConfiguration {
         onCreate
         onUpdate
@@ -214,14 +211,6 @@ export default createFragmentContainer(intlContainer, {
         onProposalNewsCreate
         onProposalNewsUpdate
         onProposalNewsDelete
-        email
-      }
-    }
-  `,
-  query: graphql`
-    fragment ProposalFormAdminNotificationForm_query on Query {
-      viewer {
-        isAdmin
         email
       }
     }

@@ -1506,6 +1506,31 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "concreteType": "User",
+                      "kind": "LinkedField",
+                      "name": "creator",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "email",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "NotificationsConfiguration",
                       "kind": "LinkedField",
                       "name": "notificationsConfiguration",
@@ -1973,27 +1998,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                   "name": "id",
                   "storageKey": null,
                 },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "isAdmin",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "email",
-                  "storageKey": null,
-                },
               ],
               "storageKey": null,
             },
           ],
         },
         "params": Object {
-          "cacheID": "469a1961b7e4d4d731f3d0351a80c144",
+          "cacheID": "807753b5ae2ae243d26cb3924974fb44",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2304,6 +2315,10 @@ fragment ProposalFormAdminConfigurationForm_query on Query {
 
 fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
   id
+  creator {
+    email
+    id
+  }
   notificationsConfiguration {
     onCreate
     onUpdate
@@ -2315,14 +2330,6 @@ fragment ProposalFormAdminNotificationForm_proposalForm on ProposalForm {
     onProposalNewsUpdate
     onProposalNewsDelete
     email
-  }
-}
-
-fragment ProposalFormAdminNotificationForm_query on Query {
-  viewer {
-    isAdmin
-    email
-    id
   }
 }
 
@@ -2340,7 +2347,6 @@ fragment ProposalFormAdminPageTabs_proposalForm on ProposalForm {
 
 fragment ProposalFormAdminPageTabs_query on Query {
   ...ProposalFormAdminConfigurationForm_query
-  ...ProposalFormAdminNotificationForm_query
 }
 
 fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {

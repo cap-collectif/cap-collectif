@@ -50,9 +50,14 @@ class UserIsGrantedResolver
             }
         }
 
-        if ($viewer && $viewer instanceof User) {
+        if ($viewer instanceof User) {
             if ($user->hasRole('ROLE_USER') && $user->getId() === $viewer->getId()) {
                 return true;
+            }
+
+            $viewerAndUserBelongsToAnOrganization = $viewer->getOrganizationId() && $user->getOrganizationId();
+            if ($viewerAndUserBelongsToAnOrganization) {
+                return $viewer->getOrganizationId() === $user->getOrganizationId();
             }
 
             return false;

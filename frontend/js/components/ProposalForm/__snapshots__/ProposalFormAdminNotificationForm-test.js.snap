@@ -172,6 +172,24 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
           values={Object {}}
         />
       </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="admin.mail.notifications.receive_address"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_email"
+        name="email"
+        type="text"
+      />
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

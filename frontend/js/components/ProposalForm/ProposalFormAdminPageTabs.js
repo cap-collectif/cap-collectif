@@ -146,7 +146,6 @@ export default createFragmentContainer(withIntl, {
   query: graphql`
     fragment ProposalFormAdminPageTabs_query on Query {
       ...ProposalFormAdminConfigurationForm_query
-      ...ProposalFormAdminNotificationForm_query
     }
   `,
 });

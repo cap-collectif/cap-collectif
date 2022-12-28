@@ -16,6 +16,9 @@ describe('<ProposalFormAdminNotificationForm />', () => {
     submitSucceeded: false,
     submitFailed: false,
     proposalForm: {
+      creator: {
+        email: 'creator',
+      },
       $refType,
       id: 'proposalFormId',
       notificationsConfiguration: {
@@ -29,13 +32,6 @@ describe('<ProposalFormAdminNotificationForm />', () => {
         onProposalNewsUpdate: true,
         onProposalNewsDelete: true,
         email: null,
-      },
-    },
-    query: {
-      $refType,
-      viewer: {
-        isAdmin: true,
-        email: 'admin@cap-collectif.com',
       },
     },
   };
