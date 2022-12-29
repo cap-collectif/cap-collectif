@@ -188,9 +188,7 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
                 new Message(
                     json_encode([
                         'id' => $emailMessage->getId(),
-                        'provider' => ClassUtils::getClass(
-                            $this->mailer->getMailerTransport()->getTransport()
-                        ),
+                        'provider' => ClassUtils::getClass($this->getMailerTransport()),
                     ])
                 )
             );
@@ -199,10 +197,24 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         return $delivered;
     }
 
-    private function getLastMessageId(): ?string
+    private function getMailerTransport()
     {
         $mailerTransport = $this->mailer->getMailerTransport();
-        $transport = $mailerTransport ? $mailerTransport->getTransport() : null;
+
+        if (!$mailerTransport) {
+            return null;
+        }
+
+        if (method_exists(ClassUtils::getClass($mailerTransport), 'getTransport')) {
+            return $mailerTransport->getTransport();
+        }
+
+        return null;
+    }
+
+    private function getLastMessageId(): ?string
+    {
+        $transport = $this->getMailerTransport();
 
         if (!$transport) {
             $this->logger->error('The current transport instance is null.');
@@ -210,21 +222,20 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
             return null;
         }
 
-        $transportClass = ClassUtils::getClass($transport);
-        if (method_exists($transportClass, 'getLastMessageId')) {
+        if (method_exists(ClassUtils::getClass($transport), 'getLastMessageId')) {
             return $transport->getLastMessageId();
         }
+
         $this->logger->error(
-            "The current transport instance (${transportClass}) does not implement `getLastMessageId` method."
+            "The current transport instance does not implement `getLastMessageId` method."
         );
 
         return null;
     }
 
-    private function getMailerType(): MailerType
+    private function getMailerType(): string
     {
-        $mailerTransport = $this->mailer->getMailerTransport();
-        $transport = $mailerTransport ? $mailerTransport->getTransport() : null;
+        $transport = $this->getMailerTransport();
 
         if (!$transport) {
             return MailerType::SMTP;
