@@ -18,7 +18,7 @@ export type Filters = {
 
 export const DEFAULT_FILTERS = {
     dateRange: {
-        startAt: moment().subtract(3, 'years').format('MM/DD/YYYY'),
+        startAt: moment().subtract(1, 'months').format('MM/DD/YYYY'),
         endAt: moment().format('MM/DD/YYYY'),
     },
     projectId: 'ALL',
