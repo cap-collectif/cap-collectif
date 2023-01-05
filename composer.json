@@ -207,7 +207,8 @@
         "ext-simplexml": "*",
         "twilio/sdk": "^6.32",
         "symfony/string": "^5.4",
-        "sendinblue/api-v3-sdk": "7.4.4"
+        "sendinblue/api-v3-sdk": "7.4.4",
+        "knplabs/gaufrette": "0.9"
     },
     "require-dev": {
         "behat/behat": "^3.3",
