@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Twig\MediaExtension;
+use Capco\MediaBundle\Provider\AllowedExtensions;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,33 +20,6 @@ class MediasController extends AbstractController
 {
     public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
     public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
-
-    private const ALLOWED_MIMETYPES = [
-        'image/png', // .png
-        'image/svg+xml', // .svg
-        'image/gif', // .gif
-        'image/jpeg', // .jpeg .jpg
-        'image/webp', // .webp
-        'application/csv', // .csv
-        'text/csv', // .csv
-        'text/plain', // .csv
-        'application/x-PhpStorm-csv-file', // .csv
-        'text/anytext', // .csv
-        'text/comma-separated-values', // .csv
-        'application/pdf', // .pdf
-        'application/msword', // .doc
-        'text/rtf', // .doc
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
-        'application/zip', //.docx
-        'application/vnd.ms-excel', // .xls
-        'application/vnd.msexcel', // .xls
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // .xlsx
-        'application/vnd.ms-powerpoint', // .ppt
-        'application/vnd.openxmlformats-officedocument.presentationml.presentation', // .pptx
-        'application/vnd.oasis.opendocument.text', // .odt
-        'application/vnd.oasis.opendocument.presentation', // .odp
-        'application/vnd.oasis.opendocument.spreadsheet', // .ods
-    ];
 
     private ValidatorInterface $validator;
     private MediaManager $mediaManager;
@@ -128,7 +102,7 @@ class MediasController extends AbstractController
         $violations = $this->validator->validate($file, [
             new File([
                 'maxSize' => '10M',
-                'mimeTypes' => self::ALLOWED_MIMETYPES,
+                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES,
             ]),
         ]);
 
