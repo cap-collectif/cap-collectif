@@ -1,7 +1,12 @@
     <div class="video-thumbnail">
         {% if project %}
             {% if project.cover %}
-                {% thumbnail project.cover, 'blockHeader' with {'title': project.title, 'alt': '', 'class': 'img-responsive'} %}
+                <img
+                    title={{ project.title }}
+                    alt={{ project.title }}
+                    class="img-responsive"
+                    src={{ media_public_url(project.cover, 'default_blockHeader') }}
+                />
             {% else %}
                 <div class="bg__wrapper">
                     <div class="bg--default bg--project">
@@ -22,7 +27,12 @@
         {% else %}
             {% set link = video.link %}
             {% if video.media %}
-                {% thumbnail video.media, 'homepageVideo' with {'title': video.media.name, 'alt': video.media.name, 'class': 'img-responsive'} %}
+                <img
+                    title={{ video.media.name }}
+                    alt={{ video.media.name }}
+                    class="img-responsive"
+                    src={{ media_public_url(video.media, 'default_homepageVideo') }}
+                />
                 <a href="{{ link }}" class="play fancybox" data-type="iframe">
                     <span class="play-button"></span>
                     <span class="triangle"></span>

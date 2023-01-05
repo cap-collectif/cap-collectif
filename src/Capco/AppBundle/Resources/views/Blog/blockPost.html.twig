@@ -1,7 +1,12 @@
 <li class="media  media--news  block  block--bordered  box">
     {%  if post.media %}
         <a href="{{ path('app_blog_show', {'slug': post.translate.slug, '_locale': app.request.locale}) }}" class="pull-left">
-            {% thumbnail post.media, 'post' with {'title': post.media.name, 'alt': post.media.name, 'class': 'media-object'} %}
+            <img
+                title={{ post.media.name }}
+                alt={{ post.media.name }}
+                class="media-object"
+                src={{ media_public_url(post.media, 'default_post') }}
+            />
         </a>
     {% else %}
         <a href="{{ path('app_blog_show', {'slug': post.translate.slug, '_locale': app.request.locale }) }}" class="pull-left">

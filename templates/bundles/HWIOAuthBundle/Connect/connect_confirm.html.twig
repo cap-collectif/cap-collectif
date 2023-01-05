@@ -18,7 +18,11 @@
             </div>
             <div class="col-md6">
                 {% if userInformation.profilePicture is defined and userInformation.profilePicture is not empty %}
-                    {% thumbnail userInformation.profilePicture, 'small' %}
+                    <img
+                        title={{ userInformation.profilePicture.name }}
+                        alt={{ userInformation.profilePicture.name }}
+                        src={{ media_public_url(userInformation.profilePicture, 'default_small') }}
+                    />
                 {% endif %}
             </div>
         </div>

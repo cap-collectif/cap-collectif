@@ -2,6 +2,10 @@
 
 {% block field %}
     {%  if value is not null %}
-        {% thumbnail value, 'form' with {'title': value.name, 'alt': value.name} %}
+        <img
+            title={{ value.name }}
+            alt={{ value.name }}
+            src={{ media_public_url(uvalue, 'default_form') }}
+        />
     {%  endif %}
 {% endblock %}

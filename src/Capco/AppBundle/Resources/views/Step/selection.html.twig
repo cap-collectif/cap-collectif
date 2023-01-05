@@ -6,7 +6,7 @@
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% set image %}
         {% if project.cover %}
-            {% path project.cover, 'blockHeader' %}
+            {{ media_public_url(project.cover, 'default_blockHeader') }}
         {% endif %}
     {% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {

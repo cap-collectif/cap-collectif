@@ -6,7 +6,9 @@
 
 {% block metaTags %}
     {# OpenGraph doesn't support svg as image so no default avatar :'( #}
-    {% set organizationMedia %}{% if organization.media %}{% path organization.media, 'avatar' %}{% endif %}{% endset %}
+    {% set organizationMedia %}{% if organization.media %}
+        {{ media_public_url(organization.media, 'default_avatar') }}
+    {% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':        organization.title,
         'description':  organization.body,

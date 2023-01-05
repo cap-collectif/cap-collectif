@@ -1,6 +1,6 @@
 <script>
     window.parent.CKEDITOR.tools.callFunction(
         {{ app.request.get('CKEditorFuncNum')|escape('js') }},
-        "/media{% path object, 'reference'|escape('js') %}"
+        "/media{{ media_public_url(object, 'reference') }}"
     );
 </script>

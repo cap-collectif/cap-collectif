@@ -2,7 +2,12 @@
     <div class="row">
         <div class="col-md-4">
             {% if value is not empty and value.providerReference %}
-                {% thumbnail value, 'form' with {'class': 'img-responsive'} %}
+                <img
+                    title={{ value.name }}
+                    alt={{ value.name }}
+                    class="img-responsive"
+                    src={{ media_public_url(value, 'default_form') }}
+                />
                 {% if sonata_admin_enabled is defined and sonata_admin_enabled %}
                     <p><a href="{{ url('admin_capco_media_media_edit', {id: value.id}) }}"><strong>{{ value.name }}</strong></a></p>
                 {% else %}

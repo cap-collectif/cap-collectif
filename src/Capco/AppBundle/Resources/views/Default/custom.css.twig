@@ -442,7 +442,7 @@
     {% if null != capco_site_image_media('image.header') and app.request.attributes.get('_route') == 'app_homepage' %}
 
         .jumbotron--bg-1{
-            background-image: url({% path capco_site_image_media('image.header'), 'header_xs' %});
+            background-image: url({{ media_public_url(capco_site_image_media('image.header'), 'default_header_xs') }});
             background-position: 50% 50%;
             background-size: cover;
             padding: 0;
@@ -466,7 +466,7 @@
 
         @media (min-width: 768px ) {
             .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header_sm' %});
+                background-image: url({{ media_public_url(capco_site_image_media('image.header'), 'default_header_sm') }});
             }
             .header-img {
                 padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
@@ -475,7 +475,7 @@
 
         @media (min-width: 992px ) {
             .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header_md' %});
+                background-image: url({{ media_public_url(capco_site_image_media('image.header'), 'default_header_md') }});
             }
             .header-img {
                 padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;
@@ -484,7 +484,7 @@
 
         @media (min-width: 1200px ) {
             .jumbotron--bg-1 {
-                background-image: url({% path capco_site_image_media('image.header'), 'header' %});
+                background-image: url({{ media_public_url(capco_site_image_media('image.header'), 'default_header') }});
             }
             .header-img {
                 padding: {{ jumbontronMargin | raw }}px 0 {{ jumbontronMargin | raw }}px;

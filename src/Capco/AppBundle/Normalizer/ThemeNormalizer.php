@@ -53,7 +53,10 @@ class ThemeNormalizer implements
         }
 
         try {
-            $data['media']['url'] = $this->mediaExtension->path($object->getMedia(), 'slider');
+            $data['media']['url'] = $this->mediaExtension->getMediaUrl(
+                $object->getMedia(),
+                'default_slider'
+            );
         } catch (RouteNotFoundException $e) {
             // Avoid some SonataMedia problems
         }

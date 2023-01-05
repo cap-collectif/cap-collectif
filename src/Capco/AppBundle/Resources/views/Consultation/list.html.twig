@@ -4,7 +4,9 @@
 {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title ~ ' - ' ~ 'consultations-list'|trans({}, 'CapcoAppBundle')  %}
 
 {% block metaTags %}
-    {% set image %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}
+        {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
+    {% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
         'description': currentStep.metaDescription|striptags ?: currentStep.body|striptags|truncate(250, true),

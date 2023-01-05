@@ -8,7 +8,7 @@
 
 {% block metaTags %}
     {% set picto = capco_site_image_media('homepage.picto') %}
-    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}{% if picto %}{{ media_public_url(picto, 'default_blockHeader') }}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       jumbotron_title ?: siteName,
         'description': meta_description,

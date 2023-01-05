@@ -144,7 +144,10 @@ class ProjectNormalizer implements
         if (\in_array('Projects', $groups, true) && $object->getCover()) {
             try {
                 $data['cover'] = [
-                    'url' => $this->mediaExtension->path($object->getCover(), 'project'),
+                    'url' => $this->mediaExtension->getMediaUrl(
+                        $object->getCover(),
+                        'default_project'
+                    ),
                 ];
             } catch (RouteNotFoundException $e) {
                 // Avoid some SonataMedia problems

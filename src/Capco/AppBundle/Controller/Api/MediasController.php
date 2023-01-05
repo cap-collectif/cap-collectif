@@ -85,7 +85,7 @@ class MediasController extends AbstractController
                 'size' => self::formatBytes($media->getSize()),
                 'url' =>
                     $request->getUriForPath('/media') .
-                    $this->mediaExtension->path($media, 'reference'),
+                    $this->mediaExtension->getMediaUrl($media, 'reference'),
                 'type' => $media->getContentType(),
             ],
             201
@@ -104,10 +104,9 @@ class MediasController extends AbstractController
         }
         $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
 
-        $response = $this->render(
-            'CapcoMediaBundle:MediaAdmin:upload.html.twig',
-            ['object' => $media]
-        );
+        $response = $this->render('CapcoMediaBundle:MediaAdmin:upload.html.twig', [
+            'object' => $media,
+        ]);
         $response->headers->set('content-type', 'text/html');
 
         return $response;
@@ -145,8 +144,7 @@ class MediasController extends AbstractController
 
     private function getFile(Request $request)
     {
-        $uploadedFile = $request->files->get('file') ??
-            $request->files->get('upload');
+        $uploadedFile = $request->files->get('file') ?? $request->files->get('upload');
 
         if (!$uploadedFile) {
             throw new \RuntimeException(self::NO_MEDIA_FOUND);
@@ -155,11 +153,12 @@ class MediasController extends AbstractController
         if (!$this->validateUploadedFile($uploadedFile)) {
             $this->logger->error(
                 __METHOD__ .
-                ' : ' .
-                $uploadedFile->getMimeType() .
-                ' ' .
-                var_export($this->fileUploadViolations->get(0), true)
+                    ' : ' .
+                    $uploadedFile->getMimeType() .
+                    ' ' .
+                    var_export($this->fileUploadViolations->get(0), true)
             );
+
             throw new \RuntimeException(self::FILE_NOT_ALLOWED);
         }
 

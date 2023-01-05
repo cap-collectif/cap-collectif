@@ -2,6 +2,11 @@
 
 {% block field %}
     <div>
-    	{% thumbnail object.media, 'socialIcon' with {'title': object.title, 'alt': object.title, 'class': 'social__icon'} %}
+        <img
+            title={{ object.title }}
+            alt={{ object.title }}
+            class="social__icon"
+            src={{ media_public_url(object.media, 'default_socialIcon') }}
+        />
     </div>
 {% endblock %}

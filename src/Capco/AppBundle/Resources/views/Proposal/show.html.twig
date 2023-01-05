@@ -3,7 +3,9 @@
 {% block canonical_link %}{{ '' }}{% endblock %}
 
 {% block metaTags %}
-    {% set image %}{% if proposal.media %}{% path proposal.media, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}
+        {% if proposal.media %}{{ media_public_url(proposal.media, 'default_blockHeader') }}{% endif %}
+    {% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       proposal.title,
         'description': proposal.summaryOrBodyExcerpt,

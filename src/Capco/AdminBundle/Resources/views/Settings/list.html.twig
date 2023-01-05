@@ -166,7 +166,11 @@
                                 <td>
                                     <div>
                                         {% if image is not null and image.media is not null %}
-                                            {% thumbnail image.media, 'logo' with {'title': image.media.name, 'alt': image.media.name} %}
+                                            <img
+                                                title={{ image.media.name }}
+                                                alt={{ image.media.name }}
+                                                src={{ media_public_url(image.media, 'default_logo') }}
+                                            />
                                         {% endif %}
                                     </div>
                                 </td>

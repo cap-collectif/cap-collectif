@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_blog_show', {'slug': post.translate.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set postMedia %}{% path post.media, 'blockHeader' %}{% endset %}
+    {% set postMedia %}{{ media_public_url(post.media, 'default_blockHeader') }}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       post.title,
         'description': post.metadescription|striptags ?: post.abstract|striptags ?: post.body|striptags|truncate(250, true),
@@ -40,7 +40,12 @@
         <div class="container container--thinner">
 
             {%  if post.media %}
-                {% thumbnail post.media, 'blockHeader' with {'title': post.media.name, 'alt': post.media.name, 'class': 'img-responsive block'} %}
+                <img
+                    title={{ post.media.name }}
+                    alt={{ post.media.name }}
+                    class="img-responsive block"
+                    src={{ media_public_url(post.media, 'default_blockHeader') }}
+                />
             {%  endif %}
 
             <div class="block ql-editor wysiwyg-render" style="font-size: 16px">

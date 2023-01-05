@@ -3,7 +3,11 @@
 
         {%  if theme.media %}
             <a href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}" alt="{{ theme.translate.title }}">
-                {% thumbnail theme.media, 'theme' with {'title': theme.media.name, 'alt': theme.media.name, 'class': 'img-responsive'} %}
+                <img
+                    title={{ theme.translate.title }}
+                    alt={{ theme.translate.title }}
+                    src={{ media_public_url(theme.media, 'default_theme') }}
+                />
             </a>
         {% else %}
             <a class="bg__wrapper" href="{{ path('app_theme_show', {'slug': theme.translate.slug}) }}" alt="{{ theme.translate.title }}">

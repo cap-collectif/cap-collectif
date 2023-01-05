@@ -3,7 +3,9 @@
 {% block canonical_link %}{{ url('app_project_show_contributors', {'projectSlug': project.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set image %}{% if project.cover %}{% path project.cover, 'blockHeader' %}{% endif %}{% endset %}
+    {% set image %}
+        {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
+    {% endset %}
     {% set title = ('capco.section.metrics.participants' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       title,
