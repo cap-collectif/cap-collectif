@@ -1,19 +1,27 @@
 import * as React from 'react';
 import CardOrg from '@ui/CardOrg/CardOrg';
-import { Button, Flex, Text } from '@cap-collectif/ui';
-import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay';
-import type { OrganizationListQuery as OrganizationListQueryType } from '@relay/OrganizationListQuery.graphql';
+import {Button, Flex, Text, Box} from '@cap-collectif/ui';
+import {graphql, usePaginationFragment} from 'react-relay';
 import { useIntl } from 'react-intl';
+import {OrganizationList_query$key} from "@relay/OrganizationList_query.graphql";
+import {ORGANIZATION_PAGINATION_COUNT} from "../../pages/organizations";
+import CreateOrganizationButton from "../Organizations/CreateOrganizationButton";
 
-export interface OrganizationListProps {}
-export const QUERY: GraphQLTaggedNode = graphql`
-    query OrganizationListQuery(
-        $count: Int
-        $cursor: String
-        $term: String
-        $affiliations: [OrganizationAffiliation!]
-    ) {
-        organizations(after: $cursor, first: $count, search: $term, affiliations: $affiliations) {
+export interface OrganizationListProps {
+    query: OrganizationList_query$key
+}
+export const FRAGMENT = graphql`
+    fragment OrganizationList_query on Query
+    @argumentDefinitions(
+        affiliations: { type: "[OrganizationAffiliation!]" }
+        term: { type: "String" }
+        count: { type: "Int" }
+        cursor: { type: "String" }
+    )
+    @refetchable(queryName: "OrganizationListQuery") {
+        organizations(after: $cursor, first: $count, search: $term, affiliations: $affiliations) 
+        @connection(key: "OrganizationList_organizations", filters: [])
+        {
             totalCount
             edges {
                 node {
@@ -35,14 +43,9 @@ export const QUERY: GraphQLTaggedNode = graphql`
     }
 `;
 
-const OrganizationList: React.FC<OrganizationListProps> = () => {
+const OrganizationList: React.FC<OrganizationListProps> = ({ query: queryRef }) => {
     const intl = useIntl();
-    const query = useLazyLoadQuery<OrganizationListQueryType>(QUERY, {
-        count: 50,
-        cursor: null,
-        term: null,
-        affiliations: null,
-    });
+    const { data: query, loadNext, hasNext, isLoadingNext } = usePaginationFragment(FRAGMENT, queryRef);
     const organizations = query.organizations?.edges
         ?.filter(Boolean)
         .map(edge => edge?.node)
@@ -50,44 +53,60 @@ const OrganizationList: React.FC<OrganizationListProps> = () => {
 
     return (
         <>
-            {organizations &&
-                organizations.map(organization => {
-                    const hasLogo = !!organization?.logo;
-                    return (
-                        <CardOrg key={organization?.id} marginBottom={4} marginRight={4}>
-                            <CardOrg.Header>
-                                {hasLogo ? (
-                                    <img
-                                        style={{ objectFit: 'cover' }}
-                                        src={organization?.logo?.url}
-                                        alt={organization?.logo?.description || ''}
-                                    />
-                                ) : (
-                                    <Text textAlign="center">{organization?.title}</Text>
-                                )}
-                            </CardOrg.Header>
-                            <CardOrg.Body>
-                                <Text>
-                                    {intl.formatMessage(
-                                        { id: 'organizations.members' },
-                                        { num: organization?.members?.totalCount },
+            <Flex direction="row" wrap="wrap">
+                <CreateOrganizationButton />
+                {organizations &&
+                    organizations.map(organization => {
+                        const hasLogo = !!organization?.logo;
+                        return (
+                            <CardOrg key={organization?.id} marginBottom={4} marginRight={4}>
+                                <CardOrg.Header>
+                                    {hasLogo ? (
+                                        <img
+                                            style={{ objectFit: 'cover' }}
+                                            src={organization?.logo?.url}
+                                            alt={organization?.logo?.description || ''}
+                                        />
+                                    ) : (
+                                        <Text textAlign="center">{organization?.title}</Text>
                                     )}
-                                </Text>
-                                <Button
-                                    onClick={() => {
-                                        window.open(
-                                            `/admin-next/organizationConfig/${organization?.id}`,
-                                            '_self',
-                                        );
-                                    }}
-                                    variant="tertiary"
-                                    variantColor="primary">
-                                    {intl.formatMessage({ id: 'global.handle' })}
-                                </Button>
-                            </CardOrg.Body>
-                        </CardOrg>
-                    );
-                })}
+                                </CardOrg.Header>
+                                <CardOrg.Body>
+                                    <Text>
+                                        {intl.formatMessage(
+                                            { id: 'organizations.members' },
+                                            { num: organization?.members?.totalCount },
+                                        )}
+                                    </Text>
+                                    <Button
+                                        onClick={() => {
+                                            window.open(
+                                                `/admin-next/organizationConfig/${organization?.id}`,
+                                                '_self',
+                                            );
+                                        }}
+                                        variant="tertiary"
+                                        variantColor="primary">
+                                        {intl.formatMessage({ id: 'global.handle' })}
+                                    </Button>
+                                </CardOrg.Body>
+                            </CardOrg>
+                        );
+                    })}
+            </Flex>
+            {
+                hasNext && (
+                    <Box>
+                        <Button
+                            variant="tertiary"
+                            onClick={() => loadNext(ORGANIZATION_PAGINATION_COUNT)}
+                            isLoading={isLoadingNext}
+                        >
+                            {intl.formatMessage({id: 'global.more'})}
+                        </Button>
+                    </Box>
+                )
+            }
         </>
     );
 };

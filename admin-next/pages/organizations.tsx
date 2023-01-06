@@ -5,13 +5,36 @@ import { PageProps } from '../types';
 import Layout from '../components/Layout/Layout';
 import { useIntl } from 'react-intl';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
-import CreateOrganizationButton from '../components/Organizations/createOrganizationButton';
 import OrganizationList from '../components/Organizations/OrganizationList';
+import {graphql, GraphQLTaggedNode, useLazyLoadQuery} from "react-relay";
+import {organizationsQuery} from "@relay/organizationsQuery.graphql";
 
 export interface OrganizationPageProps {}
 
+
+const QUERY: GraphQLTaggedNode = graphql`
+    query organizationsQuery(
+        $count: Int
+        $cursor: String
+        $term: String
+        $affiliations: [OrganizationAffiliation!]
+    ) {
+        ...OrganizationList_query
+            @arguments(affiliations: $affiliations, count: $count, cursor: $cursor, term: $term)
+    }
+`;
+
+export const ORGANIZATION_PAGINATION_COUNT = 50;
+
 const OrganizationPage: React.FC<OrganizationPageProps> = () => {
     const intl = useIntl();
+    const query = useLazyLoadQuery<organizationsQuery>(QUERY, {
+        count: ORGANIZATION_PAGINATION_COUNT,
+        cursor: null,
+        term: null,
+        affiliations: null,
+    });
+
     return (
         <Flex direction="column" spacing={6}>
             <Flex
@@ -28,17 +51,13 @@ const OrganizationPage: React.FC<OrganizationPageProps> = () => {
                         {intl.formatMessage({ id: 'admin.organizations.subtitle' })}
                     </Text>
                 </Flex>
-
-                <Flex direction="row" wrap="wrap">
-                    <CreateOrganizationButton />
-                    <OrganizationList />
-                </Flex>
+                <OrganizationList query={query} />
             </Flex>
         </Flex>
     );
 };
 
-const Organizations: NextPage<PageProps> = ({ viewerSession }) => {
+const Organizations: NextPage<PageProps> = () => {
     const intl = useIntl();
     return (
         <Layout navTitle={intl.formatMessage({ id: 'global.all.organisation' })}>
