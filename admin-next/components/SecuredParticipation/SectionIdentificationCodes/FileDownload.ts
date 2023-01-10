@@ -1,4 +1,4 @@
-import { getBaseUrlWithAdminNextSupport } from '~/config';
+import { getBaseUrlWithAdminNextSupport } from '../../../utils/config';
 
 const getFileDownloadUrl = (listId: string): string => {
     return (

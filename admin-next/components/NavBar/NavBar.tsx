@@ -3,7 +3,7 @@ import { NavBarQuery } from '@relay/NavBarQuery.graphql';
 import { Avatar, CapUIIcon, CapUIIconSize, Icon, Menu, Spinner, Text } from '@cap-collectif/ui';
 import { NavBar as NavBarUI } from '@ui/NavBar';
 import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper';
-import { getBaseUrlWithAdminNextSupport } from '~/config';
+import { getBaseUrlWithAdminNextSupport } from '../../utils/config';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { useIntl } from 'react-intl';
 import useFeatureFlag from '../../hooks/useFeatureFlag';

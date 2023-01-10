@@ -4,7 +4,8 @@ import commitMutation from './commitMutation';
 import type {
     UpdateRedirectIOProjectKeyMutationVariables,
     UpdateRedirectIOProjectKeyMutationResponse,
-} from '~relay/UpdateRedirectIOProjectKeyMutation.graphql';
+    UpdateRedirectIOProjectKeyMutation,
+} from '@relay/UpdateRedirectIOProjectKeyMutation.graphql';
 
 const mutation = graphql`
     mutation UpdateRedirectIOProjectKeyMutation($input: UpdateRedirectIOProjectIdInput!) {
@@ -17,7 +18,7 @@ const mutation = graphql`
 const commit = (
     variables: UpdateRedirectIOProjectKeyMutationVariables,
 ): Promise<UpdateRedirectIOProjectKeyMutationResponse> =>
-    commitMutation(environment, {
+    commitMutation<UpdateRedirectIOProjectKeyMutation>(environment, {
         mutation,
         variables,
     });

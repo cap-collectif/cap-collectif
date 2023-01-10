@@ -1,7 +1,9 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-module.exports = {
+const nextJest = require('next/jest');
+const createJestConfig = nextJest({ dir: './' });
+const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   moduleNameMapper: {
     '^utils/(.*)$': '<rootDir>/utils/$1',
@@ -20,3 +22,5 @@ module.exports = {
   testEnvironment: 'jsdom',
   coverageDirectory: 'coverage',
 };
+
+module.exports = createJestConfig(customJestConfig);

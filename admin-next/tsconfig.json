@@ -15,7 +15,6 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~ui/*": ["../frontend/js/components/Ui/*"],
       "~/*": ["../frontend/js/*"],
       "@relay/*": ["./__generated__/*"],
       "@ui/*": ["./components/UI/*"],

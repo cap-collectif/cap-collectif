@@ -1,9 +1,8 @@
 import { NextPage } from 'next';
 import { PageProps } from '../types';
 import React, { Suspense } from 'react';
-import { Flex } from '@cap-collectif/ui';
+import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui';
 import Layout from '../components/Layout/Layout';
-import Loader from '~ui/FeedbacksIndicators/Loader';
 import { useIntl } from 'react-intl';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
 import SectionSms from '../components/SecuredParticipation/SectionSMS/SectionSms';
@@ -15,11 +14,20 @@ const SecuredParticipation: NextPage<PageProps> = () => {
     return (
         <Layout navTitle={intl.formatMessage({ id: 'secured-participation' })}>
             <Flex direction="column" spacing={6}>
-                <Suspense fallback={<Loader />}>
+                <Suspense
+                    fallback={
+                        <Flex alignItems="center" justifyContent="center">
+                            <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
+                        </Flex>
+                    }>
                     <SectionSms />
                 </Suspense>
-
-                <Suspense fallback={<Loader />}>
+                <Suspense
+                    fallback={
+                        <Flex alignItems="center" justifyContent="center">
+                            <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
+                        </Flex>
+                    }>
                     <SectionIdentificationCodes />
                 </Suspense>
             </Flex>
