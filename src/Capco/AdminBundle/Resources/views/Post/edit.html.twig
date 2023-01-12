@@ -1,9 +1,20 @@
 {% extends 'CapcoAdminBundle:CRUD:edit.html.twig' %}
-
-
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block navbar_title %}
+    {{ title }}
+{% endblock %}
+{%- block actions -%}
+{% endblock %}
+{%- block tab_menu -%}
+{% endblock %}
 {% block sonata_breadcrumb %}
 {% endblock %}
-
+{% block side_bar_nav %}
+{% endblock side_bar_nav %}
+{% block sonata_admin_content_actions_wrappers %}
+{% endblock sonata_admin_content_actions_wrappers %}
 
 {% block tab_menu_navbar_header %}
     <div class="navbar-header">

@@ -50,7 +50,6 @@ sonata_admin:
                 items:
                     - Capco\AdminBundle\Admin\HighlightedContentAdmin
                     - Capco\AdminBundle\Admin\ThemeAdmin
-                    - Capco\AdminBundle\Admin\PostAdmin
                     - Capco\AdminBundle\Admin\EventAdmin
                     - Capco\AdminBundle\Admin\VideoAdmin
                     - Capco\AdminBundle\Admin\PageAdmin

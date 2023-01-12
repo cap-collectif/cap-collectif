@@ -1,16 +1,25 @@
 {% extends 'CapcoAdminBundle:CRUD:edit.html.twig' %}
-
-
-{% block sonata_breadcrumb %}
+{% block title %}
+        {{ 'title_create'|trans({}, 'SonataAdminBundle')|truncate(15) }}
 {% endblock %}
 
+{%- block tab_menu -%}
+{% endblock %}
+{% block sonata_breadcrumb %}
+{% endblock %}
+{%- block actions -%}
+{% endblock %}
+{% block side_bar_nav %}
+{% endblock side_bar_nav %}
+{% block sonata_admin_content_actions_wrappers %}
+{% endblock sonata_admin_content_actions_wrappers %}
 {% block tab_menu_navbar_header %}
     <div class="navbar-header">
-        <a class="navbar-brand" href="#" 
+        <a class="navbar-brand" href="#"
            style='font-size: 18px;
            line-height: 24px;
            color: #003670;'>
-            {{ 'admin.create.post'|trans({}, 'CapcoAppBundle') }}        
+            {{ 'admin.create.post'|trans({}, 'CapcoAppBundle') }}
         </a>
     </div>
 {% endblock %}
