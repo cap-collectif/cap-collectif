@@ -25,8 +25,8 @@ class PostAdminUrlResolver implements ResolverInterface
     public function __invoke(Post $post): string
     {
         return $this->router->generate(
-            'admin_capco_app_post_edit',
-            ['id' => $post->getId()],
+            'capco_admin_edit_post',
+            ['postId' => $post->getId()],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }

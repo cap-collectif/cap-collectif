@@ -11,7 +11,7 @@
         <div class="box-body">
             <div class="sonata-blog-post-container list-group">
                 {% for post in posts %}
-                    <a class="list-group-item" href="{{ url('admin_capco_app_post_edit', { 'id': post.id }) }}">
+                    <a class="list-group-item" href="{{ url('capco_admin_edit_post', { 'postId': post.id }) }}">
                         {% if post.isPublic %}
                             <span class="label label-success">{{ 'global.published'|trans({}, 'CapcoAppBundle') }}</span>
                         {% else %}
@@ -24,7 +24,7 @@
                 {% endfor %}
             </div>
 
-            <a href="{{ url('admin_capco_app_post_list') }}" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_posts'|trans({}, 'CapcoAppBundle') }}</a>
+            <a href="/admin-next/posts" class="btn btn-primary btn-block"><i class="fa fa-list"></i> {{ 'view_all_posts'|trans({}, 'CapcoAppBundle') }}</a>
         </div>
     </div>
 {% endblock %}
