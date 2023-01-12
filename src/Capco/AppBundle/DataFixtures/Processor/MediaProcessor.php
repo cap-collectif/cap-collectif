@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Capco\AppBundle\DataFixtures\Processor;
 
 use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Fidry\AliceDataFixtures\ProcessorInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
 use Liip\ImagineBundle\Service\FilterService;
 
@@ -22,15 +24,18 @@ class MediaProcessor implements ProcessorInterface
     private array $referenceMap = [];
     private EntityManagerInterface $em;
     private FilterService $filterService;
+    private MediaProvider $mediaProvider;
     private string $projectDir;
 
     public function __construct(
         EntityManagerInterface $em,
         FilterService $filterService,
+        MediaProvider $mediaProvider,
         string $projectDir
     ) {
         $this->em = $em;
         $this->filterService = $filterService;
+        $this->mediaProvider = $mediaProvider;
         $this->projectDir = $projectDir;
     }
 
@@ -41,13 +46,24 @@ class MediaProcessor implements ProcessorInterface
 
             $object->setContext(ContextInterface::DEFAULT_CONTEXT);
 
-            // This will reset the providerReference
             $object->setBinaryContent(
                 $this->projectDir . '/fixtures/files/' . $object->getBinaryContent()
             );
 
+            $binaryContent = new File($object->getBinaryContent());
+            $object->setContentType($binaryContent->getMimeType());
+            $object->setSize($binaryContent->getSize());
+            $object->setBinaryContent($binaryContent);
             $object->setEnabled(true);
-            $object->setProviderName($this->resolveProviderName($object));
+            $object->setProviderName(MediaProvider::class);
+            $object->setProviderReference(
+                $object->getProviderReference() ?: $this->mediaProvider->generateName($object)
+            );
+
+            $this->mediaProvider->writeBinaryContentInFile($object);
+            if ($object->isImage()) {
+                $this->generateFormats($object);
+            }
         }
     }
 
@@ -74,19 +90,8 @@ class MediaProcessor implements ProcessorInterface
 
                 // Restore providerReference in fixtures
                 $object->setProviderReference($newProviderReference);
-
-                // Let's generate cache for all medias in all formats, to avoid "/resolve" in first URL generation
-                $imgFormats = ['default_logo', 'default_avatar', 'default_project'];
-                $notNeededExtensions = ['pdf', 'svg', 'csv'];
-                foreach ($imgFormats as $format) {
-                    $extension = pathinfo($newProviderReference)['extension'];
-                    if (!\in_array($extension, $notNeededExtensions, true)) {
-                        // Will generate cache file
-                        $this->filterService->getUrlOfFilteredImage(
-                            'default/0001/01/' . $newProviderReference,
-                            $format
-                        );
-                    }
+                if ($object->isImage()) {
+                    $this->generateFormats($object);
                 }
 
                 // Flush new provider reference
@@ -95,14 +100,17 @@ class MediaProcessor implements ProcessorInterface
         }
     }
 
-    protected function resolveProviderName(Media $media): string
+    // Let's generate cache for images in all formats, to avoid "/resolve" in first URL generation
+    protected function generateFormats(Media $media): void
     {
-        return \in_array(
-            pathinfo($media->getBinaryContent(), \PATHINFO_EXTENSION),
-            ['png', 'jpeg', 'jpg', 'bmp', 'gif', 'tiff'],
-            true
-        )
-            ? 'sonata.media.provider.image'
-            : 'sonata.media.provider.file';
+        foreach (['default_logo', 'default_avatar', 'default_project'] as $format) {
+            if ('svg' === pathinfo($media->getProviderReference())['extension']) {
+                continue;
+            }
+            $this->filterService->getUrlOfFilteredImage(
+                'default/0001/01/' . $media->getProviderReference(),
+                $format
+            );
+        }
     }
 }

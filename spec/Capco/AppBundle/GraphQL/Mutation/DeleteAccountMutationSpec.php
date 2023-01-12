@@ -19,6 +19,7 @@ use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
@@ -33,9 +34,7 @@ use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Translation\Translator;
 
 class DeleteAccountMutationSpec extends ObjectBehavior
@@ -49,7 +48,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
         CommentRepository $commentRepository,
         ProposalEvaluationRepository $proposalEvaluationRepository,
@@ -62,7 +61,6 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         FilterCollection $filterCollection,
         SoftDeleteEventListener $softDeleteEventListener,
@@ -106,7 +104,6 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             $eventRepository,
             $highlightedContentRepository,
             $mailingListRepository,
-            $formFactory,
             $logger,
             $anonymizeUser,
             $publisher

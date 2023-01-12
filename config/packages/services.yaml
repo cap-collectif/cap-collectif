@@ -19,7 +19,6 @@ services:
     Capco\AppBundle\Service\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Service/*'
 
-
     Capco\AppBundle\Factory\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Factory/*'
 
@@ -380,3 +379,21 @@ services:
         autowire: true
 
     Symfony\Component\String\Slugger\SluggerInterface: '@Symfony\Component\String\Slugger\AsciiSlugger'
+
+    Gaufrette\Adapter\Local:
+        public: true
+        autowire: true
+        arguments:
+            $directory: '%kernel.project_dir%/public/media'
+
+    Gaufrette\Filesystem:
+        public: true
+        autowire: true
+        arguments:
+            $adapter: '@Gaufrette\Adapter\Local'
+
+    Capco\MediaBundle\Provider\MediaProvider:
+        public: true
+        autowire: true
+        tags:
+            - { name: sonata.media.provider }

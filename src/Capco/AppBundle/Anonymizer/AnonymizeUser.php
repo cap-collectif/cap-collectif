@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
@@ -15,7 +16,6 @@ use Capco\UserBundle\Form\Type\UserMedia;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class AnonymizeUser
@@ -29,7 +29,7 @@ class AnonymizeUser
     protected ProposalAuthorDataLoader $proposalAuthorDataLoader;
     protected UserManager $userManager;
     protected MediaRepository $mediaRepository;
-    protected ImageProvider $mediaProvider;
+    protected MediaProvider $mediaProvider;
     protected MailingListRepository $mailingListRepository;
     private FormFactoryInterface $formFactory;
 
@@ -42,7 +42,7 @@ class AnonymizeUser
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
         UserManager $userManager,
         MediaRepository $mediaRepository,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         MailingListRepository $mailingListRepository
     ) {
         $this->em = $em;
@@ -156,7 +156,6 @@ class AnonymizeUser
 
     public function removeMedia(Media $media): void
     {
-        $this->mediaProvider->removeThumbnails($media);
         $this->em->remove($media);
     }
 

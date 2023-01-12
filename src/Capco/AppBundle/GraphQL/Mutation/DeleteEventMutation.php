@@ -11,10 +11,10 @@ use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -35,7 +35,7 @@ class DeleteEventMutation extends BaseDeleteMutation
         Indexer $indexer,
         Publisher $publisher,
         EventRegistrationRepository $registration,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         AuthorizationCheckerInterface $authorizationChecker,
         HighlightedContentRepository $highlightedContentRepository
     ) {
@@ -93,7 +93,10 @@ class DeleteEventMutation extends BaseDeleteMutation
 
         $highlightedContents = $this->highlightedContentRepository->findAll();
         foreach ($highlightedContents as $highlightedContent) {
-            if ($highlightedContent instanceof HighlightedEvent && $highlightedContent->getEvent()->getId() === $event->getId()) {
+            if (
+                $highlightedContent instanceof HighlightedEvent &&
+                $highlightedContent->getEvent()->getId() === $event->getId()
+            ) {
                 $this->em->remove($highlightedContent);
             }
         }

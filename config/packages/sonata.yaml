@@ -74,6 +74,7 @@ sonata_media:
                 - sonata.media.provider.vimeo
                 - sonata.media.provider.image
                 - sonata.media.provider.file
+                - Capco\MediaBundle\Provider\MediaProvider
             formats:
                 small: { width: 100, quality: 70 }
                 big: { width: 500, quality: 70 }
@@ -97,12 +98,14 @@ sonata_media:
         sonata_collection:
             providers:
                 - sonata.media.provider.image
+                - Capco\MediaBundle\Provider\MediaProvider
             formats:
                 preview: { width: 100, quality: 100 }
                 wide: { width: 820, quality: 100 }
         sonata_category:
             providers:
                 - sonata.media.provider.image
+                - Capco\MediaBundle\Provider\MediaProvider
             formats:
                 preview: { width: 100, quality: 100 }
                 wide: { width: 820, quality: 100 }
@@ -113,6 +116,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.file
                 - sonata.media.provider.image
+                - Capco\MediaBundle\Provider\MediaProvider
             formats: ~
     providers:
         image:

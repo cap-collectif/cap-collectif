@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,12 +24,10 @@ use Capco\AppBundle\Helper\RedisStorageHelper;
 use Exception;
 use GraphQL\Error\UserError;
 use Psr\Log\LoggerInterface;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
@@ -42,7 +41,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
         LoggerInterface $logger,
         CommentRepository $commentRepository,
@@ -56,7 +55,6 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        FormFactoryInterface $formFactory,
         AnonymizeUser $anonymizeUser,
         Publisher $publisher
     ) {
@@ -80,7 +78,6 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $formFactory,
             $anonymizeUser,
             $publisher
         );

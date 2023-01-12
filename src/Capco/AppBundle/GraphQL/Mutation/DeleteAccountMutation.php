@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,13 +23,11 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Psr\Log\LoggerInterface;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
@@ -45,7 +44,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
         CommentRepository $commentRepository,
         ProposalEvaluationRepository $proposalEvaluationRepository,
@@ -58,7 +57,6 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         AnonymizeUser $anonymizeUser,
         Publisher $publisher
@@ -83,7 +81,6 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $formFactory,
             $anonymizeUser,
             $publisher
         );

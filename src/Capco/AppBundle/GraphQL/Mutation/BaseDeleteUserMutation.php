@@ -26,21 +26,18 @@ use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Sonata\MediaBundle\Provider\ImageProvider;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 {
-    protected EntityManagerInterface $em;
-    protected ImageProvider $mediaProvider;
     protected TranslatorInterface $translator;
     protected array $originalEventListeners = [];
     protected RedisStorageHelper $redisStorageHelper;
@@ -60,12 +57,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected MailingListRepository $mailingListRepository;
     protected LoggerInterface $logger;
     protected AnonymizeUser $anonymizeUser;
-    private FormFactoryInterface $formFactory;
     private Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
-        ImageProvider $mediaProvider,
+        MediaProvider $mediaProvider,
         TranslatorInterface $translator,
         RedisStorageHelper $redisStorageHelper,
         UserGroupRepository $groupRepository,
@@ -83,7 +79,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
         AnonymizeUser $anonymizeUser,
         Publisher $publisher
     ) {
@@ -105,7 +100,6 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->highlightedContentRepository = $highlightedContentRepository;
         $this->mailingListRepository = $mailingListRepository;
         $this->logger = $logger;
-        $this->formFactory = $formFactory;
         $this->anonymizeUser = $anonymizeUser;
         $this->publisher = $publisher;
     }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -9,26 +10,25 @@ use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Sonata\MediaBundle\Provider\Pool;
 use InvalidArgumentException;
 
 class CropMediaMutation implements MutationInterface
 {
-    private Pool $mediaPool;
     private MediaRepository $mediaRepository;
+    private MediaProvider $mediaProvider;
     private CacheManager $cacheManager;
     private FilterManager $filterManager;
     private DataManager $dataManager;
 
     public function __construct(
-        FilterManager $filterManager,
-        DataManager $dataManager,
         MediaRepository $mediaRepository,
-        Pool $mediaPool,
-        CacheManager $cacheManager
+        MediaProvider $mediaProvider,
+        CacheManager $cacheManager,
+        FilterManager $filterManager,
+        DataManager $dataManager
     ) {
-        $this->mediaPool = $mediaPool;
         $this->mediaRepository = $mediaRepository;
+        $this->mediaProvider = $mediaProvider;
         $this->cacheManager = $cacheManager;
         $this->filterManager = $filterManager;
         $this->dataManager = $dataManager;
@@ -42,8 +42,7 @@ class CropMediaMutation implements MutationInterface
             throw new InvalidArgumentException('This media does not exist.');
         }
 
-        $provider = $this->mediaPool->getProvider($media->getProviderName());
-        $file = $provider->getReferenceFile($media);
+        $file = $this->mediaProvider->getOrGenerateReferenceFile($media);
         $filter = 'cropped_media';
         $runtimeFilters = [
             'crop' => [

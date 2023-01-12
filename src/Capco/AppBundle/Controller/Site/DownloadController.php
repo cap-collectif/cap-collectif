@@ -9,16 +9,17 @@ use Capco\AppBundle\Generator\CSV\IdentificationCodeListCSVGenerator;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -29,6 +30,7 @@ class DownloadController extends Controller
     private SessionInterface $session;
     private TranslatorInterface $translator;
     private UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
+    private MediaProvider $mediaProvider;
     private string $projectDir;
 
     public function __construct(
@@ -36,12 +38,14 @@ class DownloadController extends Controller
         SessionInterface $session,
         TranslatorInterface $translator,
         UserIdentificationCodeListRepository $userIdentificationCodeListRepository,
+        MediaProvider $mediaProvider,
         string $projectDir
     ) {
         $this->logger = $logger;
         $this->session = $session;
         $this->translator = $translator;
         $this->userIdentificationCodeListRepository = $userIdentificationCodeListRepository;
+        $this->mediaProvider = $mediaProvider;
         $this->projectDir = $projectDir;
     }
 
@@ -90,36 +94,32 @@ class DownloadController extends Controller
             $this->getUser() === $mediaResponse->getProposal()->getAuthor() ||
             $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
-            $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
-
-            // In case something bad happened, and we lost the file…
-            if (!$provider->getReferenceFile($media)->exists()) {
-                $this->logger->error('File not found for media : ' . $media->getId());
-
-                return new Response('File not found.');
-            }
-
             // Depending on the file type we redirect to the file or download it
             $type = $media->getContentType();
             $redirectFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
             if (\in_array($type, $redirectFileTypes, true)) {
                 $url =
                     $request->getUriForPath('/media') .
-                    $this->get(MediaExtension::class)->path($media, 'reference');
+                    $this->get(MediaExtension::class)->getMediaUrl($media, 'reference');
 
                 return new RedirectResponse($url);
             }
 
-            $downloadMode = $this->get('sonata.media.pool')->getDownloadMode($media);
-            $response = $provider->getDownloadResponse($media, 'reference', $downloadMode);
-            if ($response instanceof BinaryFileResponse) {
-                $response->prepare($request);
-            }
+            $file = $this->mediaProvider->getOrGenerateReferenceFile($media);
 
-            // Avoid some files to be corrupt
-            ob_get_clean();
-
-            return $response;
+            return new StreamedResponse(
+                static function () use ($file) {
+                    echo $file->getContent();
+                },
+                200,
+                [
+                    'Content-Type' => $media->getContentType(),
+                    'Content-Disposition' => sprintf(
+                        'attachment; filename="%s"',
+                        $media->getMetadataValue('filename')
+                    ),
+                ]
+            );
         }
 
         return new Response('Sorry, you are not allowed to see this file.');

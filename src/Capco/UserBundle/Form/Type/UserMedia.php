@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\UserBundle\Entity\User;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +14,7 @@ class UserMedia extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('media', MediaType::class, [
-            'provider' => 'sonata.media.provider.image',
+            'provider' => MediaProvider::class,
             'context' => 'default',
         ]);
     }

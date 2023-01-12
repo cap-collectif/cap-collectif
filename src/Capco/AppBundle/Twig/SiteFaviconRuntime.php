@@ -3,18 +3,24 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Repository\SiteImageRepository;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteFaviconRuntime implements RuntimeExtensionInterface
 {
-    protected $container;
-    private $repository;
+    protected ContainerInterface $container;
+    private SiteImageRepository $repository;
+    private MediaProvider $provider;
 
-    public function __construct(ContainerInterface $container, SiteImageRepository $repository)
-    {
+    public function __construct(
+        ContainerInterface $container,
+        SiteImageRepository $repository,
+        MediaProvider $provider
+    ) {
         $this->container = $container;
         $this->repository = $repository;
+        $this->provider = $provider;
     }
 
     public function getSiteFavicons(): ?array
@@ -31,7 +37,6 @@ class SiteFaviconRuntime implements RuntimeExtensionInterface
             return null;
         }
 
-        $provider = $this->container->get($mediaFavicon->getProviderName());
         $siteFavicon = [];
 
         foreach (
@@ -57,7 +62,7 @@ class SiteFaviconRuntime implements RuntimeExtensionInterface
             ]
             as $filter
         ) {
-            $siteFavicon[$filter] = $provider->generatePublicUrl($mediaFavicon, $filter);
+            $siteFavicon[$filter] = $this->provider->generatePublicUrl($mediaFavicon, $filter);
         }
 
         return $siteFavicon;
