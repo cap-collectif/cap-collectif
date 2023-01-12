@@ -95,7 +95,7 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
     const defaultLocale = query.availableLocales.find(locale => locale.isDefault);
     const organization = useFragment(FRAGMENT, orgRef);
 
-    const { handleSubmit, formState, control, setError, setValue, watch } = useForm<FormValues>({
+    const { handleSubmit, formState, control } = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: getInitialValues(organization, intl),
     });
@@ -133,22 +133,26 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
             spacing={6}>
             <Flex direction="row" width="100%" spacing={6}>
                 <Flex direction="column" spacing={6} width="70%">
-                    <OrganizationConfigFormGeneral control={control} organization={organization} query={query}/>
+                    <OrganizationConfigFormGeneral
+                        control={control}
+                        organization={organization}
+                        query={query}
+                    />
                     <OrganizationConfigFormMembers organization={organization} />
+                    <Flex direction="row" spacing={4}>
+                        <Button type="submit" isLoading={isSubmitting}>
+                            {intl.formatMessage({ id: 'global.save' })}
+                        </Button>
+                        {!organization.deletedAt && (
+                            <OrganizationConfigFormDeleteOrganizationModal
+                                organization={organization}
+                            />
+                        )}
+                    </Flex>
                 </Flex>
                 <Flex direction="column" spacing={6} width="30%">
                     <OrganizationConfigFormSide control={control} />
                 </Flex>
-            </Flex>
-            <Flex direction="row" spacing={4}>
-                <Button type="submit" isLoading={isSubmitting}>
-                    {intl.formatMessage({ id: 'global.save' })}
-                </Button>
-                {
-                    !organization.deletedAt && (
-                        <OrganizationConfigFormDeleteOrganizationModal organization={organization} />
-                    )
-                }
             </Flex>
         </Flex>
     );

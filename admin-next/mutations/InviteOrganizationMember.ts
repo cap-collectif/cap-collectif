@@ -21,6 +21,7 @@ const mutation = graphql`
                 email
                 user {
                     email
+                    username
                 }
                 role
             }

@@ -136,7 +136,10 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                         }),
                     });
                 }
-                if (response.inviteOrganizationMember?.errorCode === 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION') {
+                if (
+                    response.inviteOrganizationMember?.errorCode ===
+                    'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION'
+                ) {
                     toast({
                         variant: 'danger',
                         content: intl.formatMessage({
@@ -147,9 +150,16 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                 if (!response?.inviteOrganizationMember?.errorCode) {
                     toast({
                         variant: 'success',
-                        content: intl.formatMessage({
-                            id: 'organization.member.invite.success.toast',
-                        }),
+                        content: intl.formatMessage(
+                            {
+                                id: 'organization.member.invite.success.toast',
+                            },
+                            {
+                                User:
+                                    response?.inviteOrganizationMember?.invitation?.user
+                                        ?.username || values?.memberEmail,
+                            },
+                        ),
                     });
                 }
             })
@@ -164,8 +174,10 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
             direction="column"
             spacing={8}
             backgroundColor="white"
-            borderRadius={'accordion'}
-            borderColor="none">
+            style={{
+                borderRadius: '8px',
+                border: 'none',
+            }}>
             <Heading as="h4" fontWeight="semibold" color="blue.800">
                 {intl.formatMessage({ id: 'organisation.members' })}
             </Heading>
@@ -187,8 +199,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                             name="memberEmail"
                             control={control}
                             style={{ minWidth: '320px', flexBasis: '60%' }}
-                            isRequired
-                        >
+                            isRequired>
                             <FieldInput
                                 id="memberEmail"
                                 name="memberEmail"
@@ -203,8 +214,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                             name="memberRole"
                             control={control}
                             style={{ flexBasis: '30%', minWidth: '200px' }}
-                            isRequired
-                        >
+                            isRequired>
                             <FieldInput
                                 type="select"
                                 name="memberRole"
@@ -220,7 +230,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                             onClick={e => {
                                 handleSubmit(onSubmit)(e);
                             }}
-                            style={{ flexBasis: '10%', justifyContent: 'center' }}>
+                            style={{ flexBasis: '10%', justifyContent: 'center', height: '34px' }}>
                             {intl.formatMessage({ id: 'organization.invite' })}
                         </Button>
                     </InputGroup>
@@ -254,9 +264,10 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                                         <Table.Td>
                                             <Flex direction="row" spacing={1}>
                                                 <Text>
-                                                    {invite?.email
-                                                        ? invite?.email
-                                                        : invite?.user.username}
+                                                    {invite.user.username &&
+                                                    invite.user.username !== ''
+                                                        ? invite.user.username
+                                                        : invite?.email}
                                                 </Text>
                                                 {invite?.status === 'PENDING' && (
                                                     <Tag variantColor="orange">
