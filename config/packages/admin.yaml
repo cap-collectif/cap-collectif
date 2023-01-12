@@ -579,8 +579,6 @@ services:
                 ~,
                 Capco\AppBundle\Entity\Event,
                 Capco\AdminBundle\Controller\EventController,
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-                '@security.token_storage',
             ]
         tags:
             - {
