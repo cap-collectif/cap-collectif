@@ -44,7 +44,7 @@ const SideBar: FC<SideBarProps> = () => {
     return (
         <SideBarUI>
             <SideBarUI.Header>
-                <Box as="a" href={getBaseUrlWithAdminNextSupport()}>
+                <Box as="a" href={getBaseUrlWithAdminNextSupport()} target="_blank">
                     <LogoCapco height={6} />
                 </Box>
             </SideBarUI.Header>

@@ -97,7 +97,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
           p={4}
           justifyContent="space-between"
           position="relative">
-          <a href="/" style={{ overflow: 'hidden' }}>
+          <a href="/" style={{ overflow: 'hidden' }} target="_blank">
             {CAP_COLLECTIF_SVG}
           </a>
           <Button
