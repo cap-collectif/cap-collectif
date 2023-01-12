@@ -84,7 +84,10 @@ export const ProjectContributors = ({ project, isAdmin }: Props) => {
             )}
           </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage({ id: 'mailingList-refusing-members' })}
+            {intl.formatMessage(
+              { id: 'mailingList-refusing-members' },
+              { num: data.emailableContributors.refusingCount },
+            )}
           </InfoMessage.Content>
         </InfoMessage>
       )}

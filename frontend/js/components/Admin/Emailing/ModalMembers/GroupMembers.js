@@ -77,7 +77,10 @@ export const GroupMembers = ({ groupList, isAdmin }: Props) => {
             )}
           </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage({ id: 'mailingList-refusing-members' })}
+            {intl.formatMessage(
+              { id: 'mailingList-refusing-members' },
+              { num: refusingMembers.totalCount },
+            )}
           </InfoMessage.Content>
         </InfoMessage>
       )}

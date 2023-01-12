@@ -37,7 +37,10 @@ export const InternalMembers = ({ query, relay }: Props) => {
             )}
           </InfoMessage.Title>
           <InfoMessage.Content>
-            {intl.formatMessage({ id: 'mailingList-refusing-members' })}
+            {intl.formatMessage(
+              { id: 'mailingList-refusing-members' },
+              { num: query.refusingMembers.totalCount },
+            )}
           </InfoMessage.Content>
         </InfoMessage>
       )}
@@ -73,11 +76,11 @@ export default createPaginationContainer(
   {
     query: graphql`
       fragment InternalMembers_query on Query
-        @argumentDefinitions(
-          count: { type: "Int!" }
-          cursor: { type: "String" }
-          emailConfirmed: { type: "Boolean" }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int!" }
+        cursor: { type: "String" }
+        emailConfirmed: { type: "Boolean" }
+      ) {
         refusingMembers: users(consentInternalCommunication: false) {
           totalCount
         }
