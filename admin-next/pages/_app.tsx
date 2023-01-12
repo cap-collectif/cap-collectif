@@ -19,6 +19,10 @@ const SafeHydrate: FC = ({ children }) => {
 function MyApp({ Component, pageProps }: AppProps) {
     if (pageProps.intl) moment.locale(getOnlyLanguage(pageProps.intl.locale));
 
+    if (Object.keys(pageProps).length === 0) {
+        return <Component {...pageProps} />
+    }
+
     return (
         <SafeHydrate>
             <Providers
