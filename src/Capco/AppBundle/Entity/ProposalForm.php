@@ -94,7 +94,7 @@ class ProposalForm implements
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="proposalForm", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private ?CollectStep $step;
+    private ?CollectStep $step = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Proposal", mappedBy="proposalForm", cascade={"remove"})
@@ -271,7 +271,7 @@ class ProposalForm implements
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\AnalysisConfiguration", mappedBy="proposalForm", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true, name="analysis_configuration", onDelete="SET NULL")
      */
-    private ?AnalysisConfiguration $analysisConfiguration;
+    private ?AnalysisConfiguration $analysisConfiguration = null;
 
     public function __construct()
     {

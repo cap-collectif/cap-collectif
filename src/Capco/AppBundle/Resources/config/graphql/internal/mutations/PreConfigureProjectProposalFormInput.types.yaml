@@ -1,0 +1,6 @@
+PreConfigureProjectProposalFormInput:
+    type: relay-mutation-input
+    inherits:
+        - InternalUpdateProposalForm
+    config:
+        description: 'ProposalForm input of PreConfigureProjectInput mutation'

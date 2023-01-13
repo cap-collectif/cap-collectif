@@ -1,0 +1,13 @@
+PreConfigureProjectInput:
+    type: relay-mutation-input
+    config:
+        description: 'Pre-confiture a project'
+        fields:
+            project:
+                type: 'CreateAlphaProjectInput!'
+            questionnaires:
+                type: '[PreConfigureProjectQuestionnaireInput]'
+            proposalForms:
+                type: '[PreConfigureProjectProposalFormInput]'
+            analysisForm:
+                type: 'ConfigureAnalysisInput'

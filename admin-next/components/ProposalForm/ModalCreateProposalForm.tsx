@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ConnectionHandler } from 'relay-runtime';
-import CreateProposalFormMutation from 'mutations/CreateProposalFormMutation';
+import CreateProposalFormMutation from '@mutations/CreateProposalFormMutation';
 import {
     Button,
     Modal,

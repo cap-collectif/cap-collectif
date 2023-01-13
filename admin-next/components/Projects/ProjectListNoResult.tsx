@@ -50,7 +50,7 @@ const ProjectListNoResult: React.FC<ProjectListNoResultProps> = ({
                 {isNewProjectCreateEnabled ?
                     <Button
                         as="a"
-                        href="/admin-next/createProject"
+                        href="/admin-next/create-project"
                         variant="primary"
                         variantColor="primary"
                         variantSize="big"

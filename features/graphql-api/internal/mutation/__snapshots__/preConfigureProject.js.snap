@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.preConfigureProject should configure a project with participatory budget preset 1`] = `
+Object {
+  "preConfigureProject": Object {
+    "project": Object {
+      "steps": Array [
+        Object {
+          "__typename": "PresentationStep",
+          "body": "<p>- C'est quoi un BP</p><p>- Calendrier / démarche</p><p>- Règlement</p>",
+          "enabled": true,
+          "label": "Présentation de votre projet",
+          "title": "Présentation de votre projet",
+        },
+        Object {
+          "__typename": "CollectStep",
+          "body": "<p>- Rappel du fonctionnement</p><p>- Critères pour les idées</p><p>- Exemple de projet recevable / non recevable</p>",
+          "defaultSort": "random",
+          "defaultStatus": null,
+          "enabled": true,
+          "form": Object {
+            "analysisConfiguration": Object {
+              "analysisStep": Object {
+                "title": "Analyse des projets",
+              },
+              "evaluationForm": Object {
+                "title": "project title - Formulaire d'analyse",
+              },
+              "favourableStatus": Object {
+                "name": "Soumis au vote",
+              },
+              "moveToSelectionStep": Object {
+                "title": "Votez pour vos projets préférés",
+              },
+              "proposalForm": Object {
+                "title": "project title - Formulaire de dépôt",
+              },
+              "selectionStepStatus": Object {
+                "name": "Soumis au vote",
+              },
+              "unfavourableStatuses": Array [
+                Object {
+                  "name": "Non réalisable",
+                },
+                Object {
+                  "name": "Hors cadre",
+                },
+                Object {
+                  "name": "Déjà prévu",
+                },
+              ],
+            },
+            "title": "project title - Formulaire de dépôt",
+          },
+          "label": "Dépôt des projets",
+          "title": "Proposez vos projets",
+        },
+        Object {
+          "__typename": "SelectionStep",
+          "body": null,
+          "defaultStatus": Object {
+            "name": "En cours d'analyse",
+          },
+          "enabled": true,
+          "label": "L'analyse des projets",
+          "mainView": "GRID",
+          "requirements": Object {
+            "edges": Array [],
+          },
+          "statuses": Array [
+            Object {
+              "name": "En cours d'analyse",
+            },
+            Object {
+              "name": "Soumis au vote",
+            },
+            Object {
+              "name": "Non réalisable",
+            },
+            Object {
+              "name": "Hors cadre",
+            },
+            Object {
+              "name": "Déjà prévu",
+            },
+            Object {
+              "name": "Fusionné",
+            },
+          ],
+          "title": "Analyse des projets",
+        },
+        Object {
+          "__typename": "SelectionStep",
+          "body": null,
+          "defaultStatus": Object {
+            "name": "Soumis au vote",
+          },
+          "enabled": true,
+          "label": "Vote",
+          "mainView": "GRID",
+          "requirements": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "__typename": "FirstnameRequirement",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "LastnameRequirement",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "PhoneRequirement",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "DateOfBirthRequirement",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "PostalAddressRequirement",
+                },
+              },
+              Object {
+                "node": Object {
+                  "__typename": "CheckboxRequirement",
+                  "label": "J'atteste avoir plus de 16 ans",
+                },
+              },
+            ],
+          },
+          "statuses": Array [
+            Object {
+              "name": "Soumis au vote",
+            },
+          ],
+          "title": "Votez pour vos projets préférés",
+        },
+        Object {
+          "__typename": "SelectionStep",
+          "body": null,
+          "defaultStatus": Object {
+            "name": "Projet lauréats",
+          },
+          "enabled": true,
+          "label": "Projets lauréats",
+          "mainView": "GRID",
+          "requirements": Object {
+            "edges": Array [],
+          },
+          "statuses": Array [
+            Object {
+              "name": "Projet réalisé",
+            },
+            Object {
+              "name": "Projet en cours de réalisation",
+            },
+            Object {
+              "name": "Projet en cours d'étude",
+            },
+            Object {
+              "name": "Projet lauréats",
+            },
+          ],
+          "title": "Liste des projets retenus",
+        },
+      ],
+      "title": "project title",
+    },
+  },
+}
+`;

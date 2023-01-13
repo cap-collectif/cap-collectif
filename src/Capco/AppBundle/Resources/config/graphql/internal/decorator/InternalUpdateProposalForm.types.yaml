@@ -1,0 +1,114 @@
+InternalUpdateProposalForm:
+    type: object
+    decorator: true
+    config:
+        fields:
+            title:
+                type: 'String'
+            description:
+                type: 'HTML'
+            descriptionUsingJoditWysiwyg:
+                description: 'Is the description using Jodit Wysiwyg.'
+                type: 'Boolean'
+            summaryHelpText:
+                type: 'String'
+            illustrationHelpText:
+                type: 'String'
+            usingThemes:
+                type: 'Boolean'
+            themeMandatory:
+                type: 'Boolean'
+            themeHelpText:
+                type: 'String'
+            usingDistrict:
+                type: 'Boolean'
+            districtMandatory:
+                type: 'Boolean'
+            commentable:
+                type: 'Boolean'
+            costable:
+                type: 'Boolean'
+            districtHelpText:
+                type: 'String'
+            usingCategories:
+                type: 'Boolean'
+            categoryMandatory:
+                type: 'Boolean'
+            categoryHelpText:
+                type: 'String'
+            usingAddress:
+                type: 'Boolean'
+            proposalInAZoneRequired:
+                type: 'Boolean'
+            titleHelpText:
+                type: 'String'
+            descriptionHelpText:
+                type: 'String'
+            addressHelpText:
+                type: 'String'
+            mapCenter:
+                type: 'String'
+                description: 'the json of the googleMapsAddress'
+            zoomMap:
+                type: 'Int'
+            categories:
+                type: '[ProposalCategoryInput!]'
+            districts:
+                type: '[DistrictInput!]'
+            questions:
+                type: '[QuestionnaireAbstractQuestionInput!]'
+            allowAknowledge:
+                type: 'Boolean'
+            objectType:
+                type: 'ProposalFormObjectType'
+                description: 'Proposal form is type of Proposal or Question or Establishment'
+            usingDescription:
+                type: 'Boolean'
+                description: 'Proposal form using description field'
+            usingIllustration:
+                type: 'Boolean'
+                description: 'Proposal form using illustration field'
+            usingSummary:
+                type: 'Boolean'
+                description: 'Proposal form using summary field'
+            suggestingSimilarProposals:
+                type: 'Boolean'
+            descriptionMandatory:
+                type: 'Boolean'
+                description: 'Proposal form is description field is mandatory or not'
+            canContact:
+                type: 'Boolean'
+                description: 'can the viewer send a contact message to the proposals author'
+            isGridViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a GRID'
+            isListViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a LIST'
+            isMapViewEnabled:
+                type: 'Boolean'
+                description: 'can the viewer see the proposals as a MAP'
+            usingWebPage:
+                type: 'Boolean!'
+                description: 'Can proposal contain web site url'
+                defaultValue: false
+            usingFacebook:
+                type: 'Boolean!'
+                description: 'Can proposal contain facebook url'
+                defaultValue: false
+            usingTwitter:
+                type: 'Boolean!'
+                description: 'Can proposal contain twitter url'
+                defaultValue: false
+            usingInstagram:
+                type: 'Boolean!'
+                description: 'Can proposal contain instagram url'
+                defaultValue: false
+            usingYoutube:
+                type: 'Boolean!'
+                description: 'Can proposal contain youtube url'
+                defaultValue: false
+            usingLinkedIn:
+                type: 'Boolean!'
+                description: 'Can proposal contain linkedin url'
+                defaultValue: false

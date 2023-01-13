@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -19,4 +20,18 @@ class QuestionChoiceRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findOneByQuestionAndTitle(MultipleChoiceQuestion $question, string $title)
+    {
+        $qb = $this->createQueryBuilder('qc')
+            ->join('qc.question', 'q')
+            ->where('q = :question')
+            ->andWhere('qc.title = :title')
+            ->setParameter('question', $question)
+            ->setParameter('title', $title)
+        ;
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
 }

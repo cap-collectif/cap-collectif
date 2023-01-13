@@ -7923,6 +7923,7 @@ type Mutation {
   createProject(input: CreateProjectInput!): CreateProjectPayload
   createAlphaProject(input: CreateAlphaProjectInput!): CreateAlphaProjectPayload
   updateAlphaProject(input: UpdateAlphaProjectInput!): UpdateAlphaProjectPayload
+  preConfigureProject(input: PreConfigureProjectInput!): PreConfigureProjectPayload
   duplicateProject(input: DuplicateProjectInput!): DuplicateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
@@ -9538,6 +9539,116 @@ type PostalAddressRequirement implements Node & Requirement {
 
   """The postal address of the viewer."""
   viewerAddress: GoogleMapsAddress
+}
+
+input PreConfigureProjectInput {
+  project: CreateAlphaProjectInput!
+  questionnaires: [PreConfigureProjectQuestionnaireInput]
+  proposalForms: [PreConfigureProjectProposalFormInput]
+  analysisForm: ConfigureAnalysisInput
+  clientMutationId: String
+}
+
+type PreConfigureProjectPayload {
+  """The created project"""
+  project: Project
+  clientMutationId: String
+}
+
+input PreConfigureProjectProposalFormInput {
+  title: String
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean
+  summaryHelpText: String
+  illustrationHelpText: String
+  usingThemes: Boolean
+  themeMandatory: Boolean
+  themeHelpText: String
+  usingDistrict: Boolean
+  districtMandatory: Boolean
+  commentable: Boolean
+  costable: Boolean
+  districtHelpText: String
+  usingCategories: Boolean
+  categoryMandatory: Boolean
+  categoryHelpText: String
+  usingAddress: Boolean
+  proposalInAZoneRequired: Boolean
+  titleHelpText: String
+  descriptionHelpText: String
+  addressHelpText: String
+
+  """the json of the googleMapsAddress"""
+  mapCenter: String
+  zoomMap: Int
+  categories: [ProposalCategoryInput!]
+  districts: [DistrictInput!]
+  questions: [QuestionnaireAbstractQuestionInput!]
+  allowAknowledge: Boolean
+
+  """Proposal form is type of Proposal or Question or Establishment"""
+  objectType: ProposalFormObjectType
+
+  """Proposal form using description field"""
+  usingDescription: Boolean
+
+  """Proposal form using illustration field"""
+  usingIllustration: Boolean
+
+  """Proposal form using summary field"""
+  usingSummary: Boolean
+  suggestingSimilarProposals: Boolean
+
+  """Proposal form is description field is mandatory or not"""
+  descriptionMandatory: Boolean
+
+  """can the viewer send a contact message to the proposals author"""
+  canContact: Boolean
+
+  """can the viewer see the proposals as a GRID"""
+  isGridViewEnabled: Boolean
+
+  """can the viewer see the proposals as a LIST"""
+  isListViewEnabled: Boolean
+
+  """can the viewer see the proposals as a MAP"""
+  isMapViewEnabled: Boolean
+
+  """Can proposal contain web site url"""
+  usingWebPage: Boolean! = false
+
+  """Can proposal contain facebook url"""
+  usingFacebook: Boolean! = false
+
+  """Can proposal contain twitter url"""
+  usingTwitter: Boolean! = false
+
+  """Can proposal contain instagram url"""
+  usingInstagram: Boolean! = false
+
+  """Can proposal contain youtube url"""
+  usingYoutube: Boolean! = false
+
+  """Can proposal contain linkedin url"""
+  usingLinkedIn: Boolean! = false
+  clientMutationId: String
+}
+
+input PreConfigureProjectQuestionnaireInput {
+  """The new title of the questionnaire."""
+  title: String!
+
+  """The new description of the questionnaire."""
+  description: HTML
+
+  """Is the description using Jodit Wysiwyg."""
+  descriptionUsingJoditWysiwyg: Boolean
+
+  """The new list of available questions for this questionnaire"""
+  questions: [QuestionnaireAbstractQuestionInput!]!
+  clientMutationId: String
 }
 
 """A step inside a project."""
@@ -17127,7 +17238,6 @@ type UpdateProjectSlugPayload {
 }
 
 input UpdateProposalFormInput {
-  proposalFormId: ID!
   title: String
   description: HTML
 
@@ -17205,6 +17315,7 @@ input UpdateProposalFormInput {
 
   """Can proposal contain linkedin url"""
   usingLinkedIn: Boolean! = false
+  proposalFormId: ID!
   clientMutationId: String
 }
 
@@ -17381,8 +17492,6 @@ type UpdateProposalVotesPayload {
 }
 
 input UpdateQuestionnaireConfigurationInput {
-  questionnaireId: ID!
-
   """The new title of the questionnaire."""
   title: String
 
@@ -17394,6 +17503,7 @@ input UpdateQuestionnaireConfigurationInput {
 
   """The new list of available questions for this questionnaire"""
   questions: [QuestionnaireAbstractQuestionInput!]
+  questionnaireId: ID!
   clientMutationId: String
 }
 

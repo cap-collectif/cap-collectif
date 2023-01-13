@@ -797,6 +797,13 @@ InternalMutation:
                     inputType: UpdateAlphaProjectInput
                     payloadType: UpdateAlphaProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateAlphaProjectMutation", [value, getUser()])'
+            preConfigureProject:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\PreConfigureProjectMutation").isGranted()'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: PreConfigureProjectInput
+                    payloadType: PreConfigureProjectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\PreConfigureProjectMutation", [value, getUser()])'
             duplicateProject:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DuplicateProjectMutation").isGranted(args["input"]["id"], getUser())'
                 builder: 'Relay::Mutation'

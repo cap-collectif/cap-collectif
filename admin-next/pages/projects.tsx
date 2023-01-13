@@ -92,7 +92,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                         {isNewProjectCreateEnabled ?
                             <Button
                                 as="a"
-                                href="/admin-next/createProject"
+                                href="/admin-next/create-project"
                                 variant="primary"
                                 variantColor="primary"
                                 variantSize="small"

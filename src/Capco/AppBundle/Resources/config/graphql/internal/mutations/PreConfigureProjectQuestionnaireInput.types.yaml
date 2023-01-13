@@ -1,0 +1,13 @@
+PreConfigureProjectQuestionnaireInput:
+    type: relay-mutation-input
+    inherits:
+        - InternalUpdateQuestionnaire
+    config:
+        description: 'Questionnaire input of PreConfigureProjectInput mutation'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The new title of the questionnaire.'
+            questions:
+                type: '[QuestionnaireAbstractQuestionInput!]!'
+                description: 'The new list of available questions for this questionnaire'

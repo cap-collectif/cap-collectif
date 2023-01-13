@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Doctrine\ORM\EntityRepository;
 
 class AbstractQuestionRepository extends EntityRepository
@@ -38,5 +39,18 @@ class AbstractQuestionRepository extends EntityRepository
             ->addOrderBy("qaq.${field}", $direction)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findOneByQuestionnaireAndTitle(Questionnaire $questionnaire, string $questionTitle): AbstractQuestion
+    {
+        $qb = $this->createQueryBuilder('aq')
+            ->join('aq.questionnaireAbstractQuestion', 'qaq')
+            ->where('qaq.questionnaire = :questionnaire')
+            ->andWhere('aq.title = :title')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setParameter('title', $questionTitle)
+            ;
+
+        return $qb->getQuery()->getSingleResult();
     }
 }

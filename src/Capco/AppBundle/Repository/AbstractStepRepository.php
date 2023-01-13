@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
@@ -65,5 +66,17 @@ class AbstractStepRepository extends EntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.isEnabled = :isEnabled')
             ->setParameter('isEnabled', true);
+    }
+
+    public function findOneByProjectAndStepTitle(Project $project, string $stepTitle): AbstractStep
+    {
+        $qb = $this->createQueryBuilder('asStep')
+            ->join('asStep.projectAbstractStep', 'paStep')
+            ->where('asStep.title = :title')
+            ->andWhere('paStep.project = :project')
+            ->setParameter('project', $project)
+            ->setParameter('title', $stepTitle);
+
+        return $qb->getQuery()->getSingleResult();
     }
 }

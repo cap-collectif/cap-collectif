@@ -5,51 +5,49 @@ import {useForm} from "react-hook-form";
 import {useIntl} from "react-intl";
 import {graphql, useFragment} from "react-relay";
 import UserListField from "../../Form/UserListField";
-import {CreateProjectForm_query$key} from "@relay/CreateProjectForm_query.graphql";
 import formatSubmitted from "@utils/format-submitted";
 import {mutationErrorToast} from "@utils/mutation-error-toast";
 import CreateProjectMutation from "@mutations/CreateProjectMutation";
 import {CreateProjectForm_viewer$key} from "@relay/CreateProjectForm_viewer.graphql";
 import {useNavBarContext} from "../../NavBar/NavBar.context";
+import {getParticipatoryBudgetInput} from "./ConfigureParticipatoryBudgetInput";
+import PreConfigureProjectMutation from "@mutations/PreConfigureProjectMutation";
+import {CreateProjectMutationResponse} from "@relay/CreateProjectMutation.graphql";
+import {PreConfigureProjectMutationResponse} from "@relay/PreConfigureProjectMutation.graphql";
 
-
+type ProjectModelType = 'PARTICIPATORY_BUDGET'
 
 type Props = {
-    query: CreateProjectForm_query$key,
     viewer: CreateProjectForm_viewer$key,
     setShowHelpMessage: (showHelpMessage: boolean) => void
 }
 
+type ProjectResponse = { adminAlphaUrl: string }  | null | undefined;
+
+type MutationResponse = CreateProjectMutationResponse | PreConfigureProjectMutationResponse | null;
+
 type FormValues = {
     title: string
     authors: Array<{label: string, value: string}>
-    type: string
+    model: ProjectModelType | null
 }
-
-
-const QUERY_FRAGMENT = graphql`
-    fragment CreateProjectForm_query on Query {
-        projectTypes {
-            id
-            title
-        }
-    }
-`;
 
 const VIEWER_FRAGMENT = graphql`
     fragment CreateProjectForm_viewer on User {
+        __typename
         id
         username
         isOnlyProjectAdmin
+        isAdmin
         organizations {
+            __typename
             id
-            displayName
+            username
         }
     }
 `;
-const CreateProjectForm: React.FC<Props> = ({ query: queryFragment, viewer: viewerFragment, setShowHelpMessage }) => {
+const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHelpMessage }) => {
     const intl = useIntl();
-    const query = useFragment(QUERY_FRAGMENT, queryFragment);
     const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
     const {setSaving: triggerNavBarSaving, setBreadCrumbItems} = useNavBarContext();
 
@@ -57,18 +55,17 @@ const CreateProjectForm: React.FC<Props> = ({ query: queryFragment, viewer: view
     const organization = viewer?.organizations?.[0];
     const owner = organization ?? viewer;
 
-    const projectTypeOptions = query?.projectTypes?.filter(Boolean).map(type => ({
-        value: type.id,
-        label: intl.formatMessage({id: type.title}),
-    })) ?? []
+    const modelOptions = [
+        { value: 'PARTICIPATORY_BUDGET', label: intl.formatMessage({id: 'project.types.participatoryBudgeting'}) },
+    ]
 
     const initialValues: FormValues = {
         title: '',
         authors: [{
-            label: organization?.displayName ?? viewer.username ?? '',
+            label: organization?.username ?? viewer.username ?? '',
             value: owner.id,
         }],
-        type: ''
+        model: null
     }
 
     const { handleSubmit, formState, control, watch } = useForm<FormValues>({
@@ -92,6 +89,7 @@ const CreateProjectForm: React.FC<Props> = ({ query: queryFragment, viewer: view
 
     React.useEffect(() => {
         setBreadCrumbItems(breadCrumbItems)
+        return () => setBreadCrumbItems([])
     }, [setBreadCrumbItems, title])
 
     useEffect(() => {
@@ -100,32 +98,53 @@ const CreateProjectForm: React.FC<Props> = ({ query: queryFragment, viewer: view
 
     const onSubmit = async (values: FormValues) => {
 
-        const input = {
-            projectType: values.type,
-            title: values.title,
-            authors: formatSubmitted(values.authors),
-            owner: owner.id
-        };
+        const authors = formatSubmitted(values.authors);
+        const title = values.title;
+
+        let response: MutationResponse;
+        let project: ProjectResponse;
 
         try {
-            const response = await CreateProjectMutation.commit(
-                { input, connections: [] }
-            )
-            if (!response.createProject?.project) {
-                return mutationErrorToast(intl);
+            switch (values.model) {
+                case "PARTICIPATORY_BUDGET":
+                    const participatoryBudgetInput = getParticipatoryBudgetInput({
+                        projectTitle: title,
+                        authors,
+                        intl
+                    });
+
+                    response = await PreConfigureProjectMutation.commit({
+                        input: participatoryBudgetInput
+                    });
+                    project = response.preConfigureProject?.project;
+                    break;
+                default:
+                    const input = {
+                        title,
+                        authors,
+                        owner: owner.id
+                    };
+                    response = await CreateProjectMutation.commit(
+                        { input, connections: [] }
+                    )
+                    project = response?.createProject?.project;
             }
-            toast({
-                variant: 'success',
-                content: intl.formatMessage({ id: 'project-successfully-created' }),
-            });
-            const adminUrl = response.createProject?.project.adminAlphaUrl;
-            if (adminUrl) {
-                window.location.href = adminUrl;
-            }
-        } catch (error) {
-            mutationErrorToast(intl)
+        } catch {
+            return mutationErrorToast(intl);
         }
-    };
+
+        if (!project) return mutationErrorToast(intl);
+
+        toast({
+            variant: 'success',
+            content: intl.formatMessage({ id: 'project-successfully-created' }),
+        });
+
+        const adminUrl = project.adminAlphaUrl;
+        if (adminUrl) {
+            window.location.href = adminUrl;
+        }
+    }
 
     return (
         <Box width="50%">
@@ -166,21 +185,22 @@ const CreateProjectForm: React.FC<Props> = ({ query: queryFragment, viewer: view
                     />
                     <UserListField name="authors" control={control} isMulti/>
                 </FormControl>
-                {/*<FormControl name="type" control={control}>*/}
-                {/*    <FormLabel*/}
-                {/*        htmlFor="type"*/}
-                {/*        label={intl.formatMessage({id: 'global.type'})}*/}
-                {/*    />*/}
-                {/*    <FieldInput*/}
-                {/*        name="type"*/}
-                {/*        control={control}*/}
-                {/*        options={projectTypeOptions}*/}
-                {/*        type="select"*/}
-                {/*        placeholder={intl.formatMessage({*/}
-                {/*            id: 'global.type',*/}
-                {/*        })}*/}
-                {/*    />*/}
-                {/*</FormControl>*/}
+                <FormControl name="model" control={control}>
+                    <FormLabel
+                        htmlFor="model"
+                        label={intl.formatMessage({id: 'global.model'})}
+                    />
+                    <FieldInput
+                        name="model"
+                        control={control}
+                        options={modelOptions}
+                        type="select"
+                        clearable
+                        placeholder={intl.formatMessage({
+                            id: 'global.model',
+                        })}
+                    />
+                </FormControl>
                 <Button
                     mt={5}
                     variant="primary"

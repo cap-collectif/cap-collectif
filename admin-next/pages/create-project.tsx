@@ -15,7 +15,6 @@ import useFeatureFlag from "@hooks/useFeatureFlag";
 
 export const CreateProjectQuery = graphql`
     query createProjectQuery {
-        ...CreateProjectForm_query
         viewer {
             ...CreateProjectForm_viewer
         }
@@ -27,7 +26,6 @@ type CreateProjectPageProps = {
 }
 
 const CreateProjectPage: React.FC<CreateProjectPageProps> = ({queryReference}) => {
-    const intl = useIntl();
     const query = usePreloadedQuery(CreateProjectQuery, queryReference);
     const {viewer} = query;
     const [showHelpMessage, setShowHelpMessage] = useState(false)
@@ -36,7 +34,7 @@ const CreateProjectPage: React.FC<CreateProjectPageProps> = ({queryReference}) =
         <>
             <Flex padding="32px">
                 <Flex width="100%" height="100%">
-                    <CreateProjectForm query={query} viewer={viewer} setShowHelpMessage={setShowHelpMessage}/>
+                    <CreateProjectForm viewer={viewer} setShowHelpMessage={setShowHelpMessage}/>
                     <CreateProjectHelpMessage showHelpMessage={showHelpMessage}  />
                 </Flex>
             </Flex>
