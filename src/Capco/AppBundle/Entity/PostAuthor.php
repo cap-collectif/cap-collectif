@@ -59,7 +59,7 @@ class PostAuthor implements Authorable
 
     public function getUsername(): ?string
     {
-        return $this->getAuthor() ?? $this->getAuthor()->getUsername();
+        return $this->getAuthor() ? $this->getAuthor()->getUsername() : null;
     }
 
     public function getOrganization(): ?Organization
