@@ -11,7 +11,7 @@ exports[`<PostForm/> should render correctly 1`] = `
       className="form-group"
     >
       <label
-        className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+        className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
         htmlFor="FR_FR-title"
         id="label-FR_FR-title"
         type="label"
@@ -45,7 +45,7 @@ exports[`<PostForm/> should render correctly 1`] = `
       className="form-group"
     >
       <label
-        className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+        className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
         htmlFor="author"
         id="label-select-author"
         type="label"
@@ -258,7 +258,7 @@ exports[`<PostForm/> should render correctly 1`] = `
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+          className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
           htmlFor="FR_FR-abstract"
           id="label-FR_FR-abstract"
           type="label"
@@ -301,7 +301,7 @@ exports[`<PostForm/> should render correctly 1`] = `
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+          className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
           htmlFor="FR_FR-body"
           id="label-FR_FR-body"
           type="label"
@@ -691,7 +691,7 @@ exports[`<PostForm/> should render correctly 1`] = `
       className="form-group"
     >
       <label
-        className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+        className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
         htmlFor=""
         id=""
         type="label"
@@ -818,7 +818,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                   className="Checkbox__CheckboxContainer-eHTpAn kBRCEu text-center checkbox-container"
                 >
                   <label
-                    className="Labelstyle__LabelContainer-jXVmhf fjDFJj label-container"
+                    className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
                     htmlFor="_delete"
                     id="label-checkbox-_delete"
                     type="checkbox"
@@ -963,7 +963,7 @@ exports[`<PostForm/> should render correctly 1`] = `
             className="form-group"
           >
             <label
-              className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               htmlFor=""
               id=""
               type="label"
@@ -1395,7 +1395,7 @@ exports[`<PostForm/> should render correctly 1`] = `
               className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
             >
               <label
-                className="Labelstyle__LabelContainer-jXVmhf fjDFJj label-container"
+                className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
                 htmlFor="is_published"
                 id="label-checkbox-is_published"
                 type="checkbox"
@@ -1443,7 +1443,7 @@ exports[`<PostForm/> should render correctly 1`] = `
               className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
             >
               <label
-                className="Labelstyle__LabelContainer-jXVmhf fjDFJj label-container"
+                className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
                 htmlFor="has_comments"
                 id="label-checkbox-has_comments"
                 type="checkbox"
@@ -1510,7 +1510,7 @@ exports[`<PostForm/> should render correctly 1`] = `
             className="form-group"
           >
             <label
-              className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               htmlFor="FR_FR-meta_description"
               id="label-FR_FR-meta_description"
               type="label"
@@ -1562,7 +1562,7 @@ exports[`<PostForm/> should render correctly 1`] = `
             className="form-group"
           >
             <label
-              className="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               htmlFor=""
               id=""
               type="label"

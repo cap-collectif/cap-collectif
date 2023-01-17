@@ -92,6 +92,12 @@ exports[`<ReplyForm /> should render correctly when anonymous participation is a
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -576,6 +582,12 @@ exports[`<ReplyForm /> should render correctly with a select with a lot of choic
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -842,6 +854,12 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -1055,6 +1073,12 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -1383,6 +1407,12 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -1624,6 +1654,12 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -1784,6 +1820,12 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -1977,6 +2019,12 @@ exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>
@@ -2170,6 +2218,12 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
       id="formName-submit-create-reply"
       label="global.send"
       onSubmit={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#fff000",
+          "borderColor": "#fff000",
+        }
+      }
       type="submit"
     />
   </ReplyFormstyle__ButtonGroupSubmit>

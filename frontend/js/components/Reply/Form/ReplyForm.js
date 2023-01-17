@@ -75,6 +75,7 @@ type Props = {|
   +isAuthenticated: boolean,
   +isAnonymousQuestionnaireFeatureEnabled: boolean,
   +backgroundColorSection: string,
+  +backgroundPrimaryButton: string,
 |};
 
 type FormValues = {|
@@ -406,6 +407,7 @@ export class ReplyForm extends React.Component<Props, State> {
       isAuthenticated,
       isAnonymousQuestionnaireFeatureEnabled,
       backgroundColorSection,
+      backgroundPrimaryButton,
     } = this.props;
 
     const availableQuestions = memoizeAvailableQuestions.cache.get(
@@ -608,6 +610,10 @@ export class ReplyForm extends React.Component<Props, State> {
               type="submit"
               id={`${form}-submit-create-reply`}
               bsStyle="info"
+              style={{
+                backgroundColor: backgroundPrimaryButton,
+                borderColor: backgroundPrimaryButton,
+              }}
               disabled={disabledSubmitBtn()}
               label={submitting ? 'global.loading' : 'global.send'}
               onSubmit={() => {
@@ -639,7 +645,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     reply ? reply.responses : [],
   );
 
-
   return {
     responses:
       formValueSelector(reply ? getFormNameUpdate(reply.id) : `Create${formName}`)(
@@ -662,6 +667,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
       Object.keys(getFormSyncErrors(RequirementsFormLegacyName)(state)).length > 0,
     platformName: state.default.parameters['global.site.fullname'],
     backgroundColorSection: state.default.parameters['color.section.bg'],
+    backgroundPrimaryButton: state.default.parameters['color.btn.primary.bg'],
   };
 };
 

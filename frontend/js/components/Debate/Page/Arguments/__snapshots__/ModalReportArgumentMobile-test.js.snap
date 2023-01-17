@@ -54,7 +54,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
             class="form-group"
           >
             <label
-              class="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               for="reportType"
               id="label-reportType"
               type="label"
@@ -109,7 +109,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
             class="form-group"
           >
             <label
-              class="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               for="reportBody"
               id="label-reportBody"
               type="label"

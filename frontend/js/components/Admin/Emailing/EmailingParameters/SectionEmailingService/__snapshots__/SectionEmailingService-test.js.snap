@@ -29,7 +29,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
         className="Radiostyle__RadioContainer-herXYA eHjEqc radio-container"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf fjDFJj label-container"
+          className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
           htmlFor="mandrill"
           id="label-radio-mandrill"
           type="radio"
@@ -69,7 +69,7 @@ exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render
         className="Radiostyle__RadioContainer-herXYA eHjEqc radio-container"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf fjDFJj label-container"
+          className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
           htmlFor="mailjet"
           id="label-radio-mailjet"
           type="radio"

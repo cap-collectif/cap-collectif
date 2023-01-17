@@ -5,6 +5,7 @@ export const Container: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .form-description {
     margin-bottom: 25px;
   }
+  margin-bottom: 32px;
 `;
 
 export const TitleSubSection: StyledComponent<

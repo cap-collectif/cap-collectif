@@ -133,7 +133,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
             class="form-group"
           >
             <label
-              class="Labelstyle__LabelContainer-jXVmhf gPqCXA control-label label-container"
+              class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
               for="reason"
               id="label-reason"
               type="label"
