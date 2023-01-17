@@ -6,6 +6,7 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationParticipationMessage;
+use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationStepReminderMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -122,6 +123,23 @@ final class UserNotifier extends BaseNotifier
             UserAccountConfirmationReminderMessage::class,
             $user,
             ['confirmationURL' => $this->userRegistrationConfirmationUrlResolver->__invoke($user)],
+            $user
+        );
+    }
+    public function remindingEmailConfirmationBeforeStepEnd(
+        string $email,
+        string $username,
+        string $urlConfirmation,
+        string $projectTitle
+    ): void {
+        $user = (new User())->setEmail($email)->setUsername($username);
+        $this->mailer->createAndSendMessage(
+            UserAccountConfirmationStepReminderMessage::class,
+            $user,
+            [
+                'confirmationURL' => $urlConfirmation,
+                'projectTitle' => $projectTitle,
+            ],
             $user
         );
     }

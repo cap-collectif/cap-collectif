@@ -190,7 +190,7 @@ class TokenController extends AbstractController
                 ->getStep()
                 ->isOpen()
         ) {
-            $this->addFlash('danger', $this->translator->trans('closed', [], 'CapcoAppBundle'));
+            $this->addFlash('danger', $this->translator->trans('error-contribution-validation', [], 'CapcoAppBundle'));
 
             return $this->redirectToDebate($argument->getDebate());
         }

@@ -106,6 +106,9 @@ swarrot:
         user.email.reminder:
             exchange: capco_direct_exchange
             routing_key: user_email_reminder
+        user.step.reminder:
+            exchange: capco_direct_exchange
+            routing_key: user_step_reminder
         event.create:
             exchange: capco_direct_exchange
             routing_key: event_create
@@ -712,7 +715,24 @@ swarrot:
                   extras:
                       retry_attempts: 3
                       retry_exchange: 'retry'
-                      retry_routing_key_pattern: 'user_email_retry_%%attempt%%'
+                      retry_routing_key_pattern: 'user_email_reminder_retry_%%attempt%%'
+        user_step_reminder:
+            processor: Capco\AppBundle\Processor\User\UserStepReminderProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'user_step_reminder_retry_%%attempt%%'
         event_create:
             processor: Capco\AppBundle\Processor\Event\EventCreateProcessor
             middleware_stack:

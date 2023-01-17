@@ -10,6 +10,8 @@ final class CapcoAppBundleMessagesTypes
     public const USER_INVITE_INVITATION_BY_ORGANIZATION = 'user_invite.invitation_by_organization';
     public const USER_INVITE_CHECK = 'user_invite.check';
     public const USER_EMAIL_REMINDER = 'user.email.reminder';
+
+    public const USER_STEP_REMINDER = 'user.step.reminder';
     public const USER_ARCHIVE_REQUEST = 'user_archive.request';
 
     public const COMMENT_CREATE = 'comment.create';

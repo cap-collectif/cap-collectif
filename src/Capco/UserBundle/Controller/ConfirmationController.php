@@ -3,6 +3,9 @@
 namespace Capco\UserBundle\Controller;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,9 +28,11 @@ class ConfirmationController extends Controller
     private UserManager $userManager;
     private LoginManagerInterface $loginManager;
     private RouterInterface $router;
+    private StepUrlResolver $stepUrlResolver;
     private ContributionManager $contributionManager;
     private SessionInterface $session;
     private UserRepository $userRepo;
+    private AbstractStepRepository $stepRepo;
     private TranslatorInterface $translator;
     private Publisher $publisher;
     private CommentRepository $commentRepository;
@@ -38,10 +43,12 @@ class ConfirmationController extends Controller
         UserManager $userManager,
         LoginManagerInterface $loginManager,
         RouterInterface $router,
+        StepUrlResolver $stepUrlResolver,
         SessionInterface $session,
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
         UserRepository $userRepo,
+        AbstractStepRepository $stepRepo,
         Publisher $publisher,
         CommentRepository $commentRepository,
         EntityManagerInterface $em,
@@ -50,9 +57,11 @@ class ConfirmationController extends Controller
         $this->userManager = $userManager;
         $this->loginManager = $loginManager;
         $this->router = $router;
+        $this->stepUrlResolver = $stepUrlResolver;
         $this->contributionManager = $contributionManager;
         $this->session = $session;
         $this->userRepo = $userRepo;
+        $this->stepRepo = $stepRepo;
         $this->translator = $translator;
         $this->login = true;
         $this->publisher = $publisher;
@@ -62,12 +71,18 @@ class ConfirmationController extends Controller
     }
 
     /**
+     * @Route("/account/email_confirmation/{token}/{stepId}", name="account_confirm_email_step", options={"i18n" = false})
      * @Route("/account/email_confirmation/{token}", name="account_confirm_email", options={"i18n" = false})
      * @Route("/email-confirmation/{token}", name="account_confirm_email_legacy", options={"i18n" = false})
      */
-    public function emailAction(string $token): RedirectResponse
+    public function emailAction(string $token, ?string $stepId = null): RedirectResponse
     {
-        $response = new RedirectResponse($this->router->generate('app_homepage'));
+        $step = $stepId ? $this->stepRepo->find($stepId) : null;
+
+        $response = new RedirectResponse($step ?
+            $this->stepUrlResolver->__invoke($step) :
+            $this->router->generate('app_homepage')
+        );
 
         // We create a session for flashBag
         $flashBag = $this->session->getFlashBag();
@@ -116,16 +131,7 @@ class ConfirmationController extends Controller
             $this->loginManager->loginUser('main', $user, $response);
         }
 
-        $flashBag->add(
-            'success',
-            $this->translator->trans(
-                $hasPublishedContributions
-                    ? 'global.alert.email_confirmed_with_republish'
-                    : 'global.alert.email_confirmed',
-                [],
-                'CapcoAppBundle'
-            )
-        );
+        $this->addConfirmationMessageToFlashbag($step, $hasPublishedContributions);
 
         return $response;
     }
@@ -218,6 +224,23 @@ class ConfirmationController extends Controller
         );
 
         return $response;
+    }
+
+    private function addConfirmationMessageToFlashbag(?AbstractStep $step, bool $hasPublishedContributions): void
+    {
+        $type = ($step && $step->isClosed()) ? 'danger' : 'success';
+        $message = $step ?
+            ($step->isOpen() ?
+                'confirmation-contribution-validation' :
+                'error-contribution-validation') :
+            ($hasPublishedContributions ?
+                'global.alert.email_confirmed_with_republish' :
+                'global.alert.email_confirmed');
+
+        $this->session->getFlashBag()->add(
+            $type,
+            $this->translator->trans($message, [], 'CapcoAppBundle')
+        );
     }
 
     private function pushToSendinblue(array $args): void

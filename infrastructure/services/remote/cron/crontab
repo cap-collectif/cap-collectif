@@ -31,6 +31,9 @@
 # Remind users to confirm their account every 15 minutes.
 */15 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:remind-user-account-confirmation --env=prod
 
+# Remind users to confirm their account before step close, at minute 5 every hour
+5 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:remind-user-account-confirmation-before-step-close --env=prod
+
 # Delete user archives at minute 0 every hour.
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:user_archives:delete --env=prod
 

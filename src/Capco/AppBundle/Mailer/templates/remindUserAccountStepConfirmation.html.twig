@@ -1,0 +1,72 @@
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+
+
+{% block core_mail %}
+    <div>
+        {% if logo is not null %}
+            <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ organizationName }}" />
+        {% else %}
+            <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+        {% endif %}
+
+        <div style="text-align: left;">
+            <p style="margin: 0; color: #272B30; font-weight: 600; line-height: 32px; font-size: 24px">
+                {{ 'confirm-email-address-to-validate'|trans({}, 'CapcoAppBundle', user_locale)|raw }}
+            </p>
+            <div style="margin: 10px 0 0 0; color: #272B30; font-weight: 400; font-size: 14px; line-height: 24px;">
+                <p>
+                    {{ 'mail-greeting-username'
+                    |trans({'{username}': user.username}, 'CapcoAppBundle', user_locale)
+                    |raw }}
+                </p>
+                <p style="margin: 0; line-height: 24px;">
+                    {{ 'thank-you-for-participating-in-the-project'
+                    |trans({'{projectLink}': projectTitle},'CapcoAppBundle', user_locale)
+                    |raw }}
+                    <span style="font-weight: 600; color: #272B30">"{{ projectTitle }}"</span>.
+                </p>
+                <p style="margin: 0; line-height: 24px;">
+                    {{ 'email.user_step_reminder.body'
+                    |trans({},'CapcoAppBundle', user_locale)
+                    |raw }}
+                </p>
+            </div>
+            <p>
+                <a href="{{ confirmationUrl }}" style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: 600;">
+                    {{ 'user.register.confirmation_message.validate'|trans({}, 'CapcoAppBundle', user_locale) }}
+                </a>
+            </p>
+            <p><a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a></p>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block footer_mail %}
+    <div>
+        <p style="margin: 0; text-align: left">
+            {{ 'email.notification.footer.mail-send-by'
+            |trans({'{siteName}': siteName,'{siteUrl}': siteUrl}, 'CapcoAppBundle', user_locale)
+            | raw }}
+        </p>
+
+        <p style="text-align: left;">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img
+                src="{{ baseUrl ~ asset("capco-logo-mail.png")}}"
+                alt="logo cap collectif"
+                style="width: 15px;height: 15px;margin: 0 2px 0 4px;"
+            />
+            Cap Collectif
+        </p>
+    </div>
+{% endblock %}

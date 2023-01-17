@@ -108,6 +108,7 @@ Pour les prochaines commandes d'export merci de ne pas utiliser graphQL, mais bi
       capco:process_proposals                     
       capco:publisher                             
       capco:remind-user-account-confirmation      
+      capco:remind-user-account-confirmation-before-step-close
       capco:send-emailing-campaign                
       capco:sms-credit-consumption-alert          
       capco:user:unsubscribe                      

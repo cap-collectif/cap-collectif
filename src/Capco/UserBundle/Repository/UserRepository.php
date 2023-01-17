@@ -1149,6 +1149,14 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getUnconfirmedUsers(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.confirmationToken IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function countAllowedViewersForProject(Project $project): int
     {
         // TODO why do we need DISTINCT ?

@@ -3,6 +3,8 @@
 namespace spec\Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Argument;
@@ -28,10 +30,12 @@ class ConfirmationControllerSpec extends ObjectBehavior
         UserManager $userManager,
         LoginManager $loginManager,
         Router $router,
+        StepUrlResolver $stepUrlResolver,
         Session $session,
         ContributionManager $contributionManager,
         TranslatorInterface $translator,
         UserRepository $userRepo,
+        AbstractStepRepository $stepRepository,
         Publisher $publisher,
         CommentRepository $commentRepository,
         EntityManagerInterface $em,
@@ -41,10 +45,12 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $userManager,
             $loginManager,
             $router,
+            $stepUrlResolver,
             $session,
             $contributionManager,
             $translator,
             $userRepo,
+            $stepRepository,
             $publisher,
             $commentRepository,
             $em,

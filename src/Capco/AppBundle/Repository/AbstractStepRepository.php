@@ -61,6 +61,17 @@ class AbstractStepRepository extends EntityRepository
         return $qb->getQuery()->execute();
     }
 
+    public function getStepEndingBetween(\DateTimeInterface $before, \DateTimeInterface $after): array
+    {
+        return $this->getIsEnabledQueryBuilder()
+            ->andWhere('s.endAt IS NOT NULL')
+            ->andWhere('s.endAt BETWEEN :before AND :after')
+            ->setParameter('before', $before)
+            ->setParameter('after', $after)
+            ->getQuery()
+            ->execute();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('s')
