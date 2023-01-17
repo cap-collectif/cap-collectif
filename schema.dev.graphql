@@ -736,6 +736,20 @@ type AddSourceVotePayload {
   clientMutationId: String
 }
 
+input AddStepInput {
+  """The project linked to the step."""
+  projectId: ID!
+
+  """The step title."""
+  title: String!
+  clientMutationId: String
+}
+
+type AddStepPayload {
+  step: Step!
+  clientMutationId: String
+}
+
 """Available errors for an `addUserReply` mutation."""
 enum AddUserReplyErrorCode {
   """the viewer does not meet requirements"""
@@ -2176,6 +2190,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -2897,6 +2912,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   project: Project!
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -4741,6 +4757,7 @@ type DebateStep implements Step & Node {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """The debate of the step."""
   debate: Debate!
@@ -8095,6 +8112,12 @@ type Mutation {
   kickFromOrganization(input: KickFromOrganizationInput!): KickFromOrganizationPayload
   deleteOrganizationInvitation(input: DeleteOrganizationInvitationInput!): DeleteOrganizationInvitationPayload
   createProposalAnalysisComment(input: CreateProposalAnalysisCommentInput!): CreateProposalAnalysisCommentPayload
+  addCollectStep(input: AddStepInput!): AddStepPayload
+  addSelectionStep(input: AddStepInput!): AddStepPayload
+  addDebateStep(input: AddStepInput!): AddStepPayload
+  addQuestionnaireStep(input: AddStepInput!): AddStepPayload
+  addConsultationStep(input: AddStepInput!): AddStepPayload
+  addOtherStep(input: AddStepInput!): AddStepPayload
 }
 
 """A connection to a list of items."""
@@ -8996,6 +9019,7 @@ type OtherStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 }
 
 """A page."""
@@ -9712,6 +9736,7 @@ type PresentationStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 }
 
 """A vote that can be anonymous."""
@@ -10130,6 +10155,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The address of the project."""
   address: GoogleMapsAddress
+
+  """Wether or not the logged in user has the authorization to edit"""
+  canEdit: Boolean
 }
 
 """A project abstract step."""
@@ -11809,6 +11837,7 @@ interface ProposalStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -13220,6 +13249,7 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """Requirements for answering the questionnaire"""
   requirements(
@@ -13327,6 +13357,7 @@ type RankingStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -14651,6 +14682,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -15675,6 +15707,7 @@ interface Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
+  adminUrl: URI!
 }
 
 """Ways in which lists of steps can be ordered upon return."""

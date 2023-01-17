@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addSelectionStepMutation admin project should be able to add selection step. 1`] = `
+Object {
+  "addSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "title": "My selection step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addSelectionStepMutation admin should be able to add selection step. 1`] = `
+Object {
+  "addSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "title": "My selection step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addSelectionStepMutation orga member should be able to add selection step. 1`] = `
+Object {
+  "addSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "title": "My selection step",
+    },
+  },
+}
+`;

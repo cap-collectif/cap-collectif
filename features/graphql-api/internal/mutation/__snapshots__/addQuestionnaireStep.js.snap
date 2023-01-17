@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addQuestionnaireStepMutation admin project should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "title": "My questionnaire step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addQuestionnaireStepMutation admin should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "title": "My questionnaire step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addQuestionnaireStepMutation orga member should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "title": "My questionnaire step",
+    },
+  },
+}
+`;

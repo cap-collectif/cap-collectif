@@ -1,0 +1,6 @@
+AddStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            step:
+                type: 'InternalStep!'

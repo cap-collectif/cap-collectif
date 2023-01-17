@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addOtherStepMutation admin project should be able to add other step. 1`] = `
+Object {
+  "addOtherStep": Object {
+    "step": Object {
+      "__typename": "OtherStep",
+      "title": "My custom step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addOtherStepMutation admin should be able to add other step. 1`] = `
+Object {
+  "addOtherStep": Object {
+    "step": Object {
+      "__typename": "OtherStep",
+      "title": "My custom step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addOtherStepMutation orga member should be able to add other step. 1`] = `
+Object {
+  "addOtherStep": Object {
+    "step": Object {
+      "__typename": "OtherStep",
+      "title": "My custom step",
+    },
+  },
+}
+`;

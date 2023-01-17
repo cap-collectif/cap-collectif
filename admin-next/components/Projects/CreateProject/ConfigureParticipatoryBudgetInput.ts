@@ -112,7 +112,7 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                 "usingAddress": true,
                 "usingDescription": true,
                 "isGridViewEnabled": true,
-                "isListViewEnabled": true,
+                "isMapViewEnabled": true,
                 "objectType": "PROPOSAL",
                 "usingFacebook": false,
                 "usingWebPage": false,

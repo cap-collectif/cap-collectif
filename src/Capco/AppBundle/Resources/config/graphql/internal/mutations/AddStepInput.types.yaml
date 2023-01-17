@@ -1,0 +1,10 @@
+AddStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            projectId:
+                type: 'ID!'
+                description: 'The project linked to the step.'
+            title:
+                type: 'String!'
+                description: 'The step title.'

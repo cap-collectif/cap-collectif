@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addCollectStepMutation admin project should be able to add collect step. 1`] = `
+Object {
+  "addCollectStep": Object {
+    "step": Object {
+      "__typename": "CollectStep",
+      "title": "My collect step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addCollectStepMutation admin should be able to add collect step. 1`] = `
+Object {
+  "addCollectStep": Object {
+    "step": Object {
+      "__typename": "CollectStep",
+      "title": "My collect step",
+    },
+  },
+}
+`;
+
+exports[`mutations.addCollectStepMutation orga member should be able to add collect step. 1`] = `
+Object {
+  "addCollectStep": Object {
+    "step": Object {
+      "__typename": "CollectStep",
+      "title": "My collect step",
+    },
+  },
+}
+`;
