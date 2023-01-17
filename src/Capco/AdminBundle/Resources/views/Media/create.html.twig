@@ -1,0 +1,29 @@
+<form
+    role="form"
+    action="/admin/capco/media/media/create"
+    enctype="multipart/form-data"
+    method="POST"
+>
+    <div class="box box-primary">
+        <div class="box-body">
+            <label
+                for="binaryContent"
+                class="required">
+                {{ 'sonata.media.provider.file'|trans({}, 'SonataAdminBundle') }}
+            </label>
+            <input
+                type="file"
+                id="binaryContent"
+                name="binaryContent"
+                required="required"
+            >
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success" name="btn_create">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}
+        </button>
+    </div>
+</form>
