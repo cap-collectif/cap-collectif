@@ -12,7 +12,6 @@ use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\UserMedia;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -114,19 +113,8 @@ class AnonymizeUser
                 $this->removeObjectMedia($user);
             } catch (\Exception $e) {
                 $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
-                $form = $this->formFactory->create(UserMedia::class, $user, [
-                    'csrf_protection' => false,
-                ]);
-                // we force to delete media, so fill an empty field
-                $form->submit(['media' => null], false);
 
-                if (!$form->isValid()) {
-                    $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
-
-                    throw new Exception(self::CANNOT_DELETE_USER_PROFILE_IMAGE);
-                }
-
-                $this->em->flush();
+                throw new Exception(self::CANNOT_DELETE_USER_PROFILE_IMAGE);
             }
         }
 

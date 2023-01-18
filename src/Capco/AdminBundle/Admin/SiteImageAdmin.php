@@ -65,21 +65,10 @@ class SiteImageAdmin extends AbstractAdmin
                 'label' => 'global.published',
                 'required' => false,
             ])
-            ->add(
-                'media',
-                ModelListType::class,
-                [
-                    'required' => false,
-                    'label' => 'global.image',
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            );
+            ->add('media', ModelListType::class, [
+                'required' => false,
+                'label' => 'global.image',
+            ]);
         if ($this->subject->isSocialNetworkThumbnail()) {
             $formMapper->addHelp('Media', 'admin.help.social_network_thumbnail');
         }

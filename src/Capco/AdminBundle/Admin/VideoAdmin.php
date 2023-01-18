@@ -13,7 +13,6 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
-use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -131,22 +130,11 @@ class VideoAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position',
             ])
-            ->add(
-                'media',
-                ModelListType::class,
-                [
-                    'label' => 'global.image',
-                    'required' => false,
-                    'help' => 'admin.help.video.media',
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            )
+            ->add('media', ModelListType::class, [
+                'label' => 'global.image',
+                'required' => false,
+                'help' => 'admin.help.video.media',
+            ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
                 'required' => false,
@@ -165,9 +153,8 @@ class VideoAdmin extends AbstractAdmin
             ->add('author', null, [
                 'label' => 'global.author',
             ])
-            ->add('media', MediaType::class, [
+            ->add('media', null, [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
-                'provider' => 'sonata.media.provider.image',
                 'label' => 'global.image',
             ])
             ->add('isEnabled', null, [

@@ -200,21 +200,10 @@ class ThemeAdmin extends AbstractAdmin
                 'required' => false,
                 'placeholder' => 'global.no_status',
             ])
-            ->add(
-                'media',
-                ModelListType::class,
-                [
-                    'required' => false,
-                    'label' => 'global.image',
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            )
+            ->add('media', ModelListType::class, [
+                'required' => false,
+                'label' => 'global.image',
+            ])
             ->end();
         $formMapper
             ->with('admin.fields.page.advanced')

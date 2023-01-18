@@ -60,22 +60,11 @@ class PageAdmin extends AbstractAdmin
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-            ->add(
-                'cover',
-                ModelListType::class,
-                [
-                    'required' => false,
-                    'label' => 'global.image',
-                    'help' => 'admin.help.social_network_thumbnail',
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            )
+            ->add('cover', ModelListType::class, [
+                'required' => false,
+                'label' => 'global.image',
+                'help' => 'admin.help.social_network_thumbnail',
+            ])
             ->add('customCode', TextareaType::class, [
                 'label' => 'admin.customcode',
                 'required' => false,

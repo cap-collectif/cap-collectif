@@ -2,36 +2,23 @@
 
 namespace Capco\AppBundle\Twig;
 
-use Sonata\Doctrine\Model\ManagerInterface;
-use Sonata\MediaBundle\Model\MediaInterface;
-use Sonata\MediaBundle\Provider\MediaProviderInterface;
-use Sonata\MediaBundle\Provider\Pool;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Capco\MediaBundle\Entity\Media;
+use Capco\MediaBundle\Provider\MediaProvider;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-/*
- * I had to reimplement Sonata\MediaBundle\Twig\Extension\MediaExtension because we could not specify
- * a custom host in sonata media bundle config. I override `path` and `thumbnail` method to
- * take in account custom assets host (if env var `SYMFONY_ASSETS_HOST` is defined) to load files from the custom host.
- * It allows us to load assets from `assets.cap.co` when using Symfony binary because we can not define
- * particular rewrite rules like nginx when using the internal PHP server, and this one serve to handle
- * Liip Imagine files location.
- */
-class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
+class MediaExtension extends AbstractExtension
 {
-    protected $container;
-    private $assetsHost;
-    private $routerRequestContextHost;
+    private MediaProvider $mediaProvider;
+    private string $routerRequestContextHost;
+    private ?string $assetsHost;
 
     public function __construct(
-        Pool $mediaService,
-        ManagerInterface $mediaManager,
-        ContainerInterface $container,
+        MediaProvider $mediaProvider,
         string $routerRequestContextHost,
         ?string $assetsHost = null
     ) {
-        parent::__construct($mediaService, $mediaManager);
-        $this->container = $container;
+        $this->mediaProvider = $mediaProvider;
         $this->assetsHost = $assetsHost;
         $this->routerRequestContextHost = $routerRequestContextHost;
     }
@@ -41,28 +28,23 @@ class MediaExtension extends \Sonata\MediaBundle\Twig\Extension\MediaExtension
         return [new TwigFunction('media_public_url', [$this, 'getMediaUrl'])];
     }
 
-    public function getMediaUrl($media, $format)
+    public function getMediaUrl(?Media $media, string $format): string
     {
-        if (!$media) {
+        if (null === $media) {
             return '';
         }
-        /** @var MediaProviderInterface $provider */
-        $provider = $this->container->get($media->getProviderName());
 
-        return $this->generatePublicUrlForProvider($provider, $media, $format);
+        return $this->generatePublicUrlForProvider($media, $format);
     }
 
-    private function generatePublicUrlForProvider(
-        MediaProviderInterface $provider,
-        MediaInterface $media,
-        string $format
-    ) {
+    private function generatePublicUrlForProvider(Media $media, string $format): string
+    {
         return $this->assetsHost
             ? str_replace(
                 $this->routerRequestContextHost,
                 $this->assetsHost,
-                $provider->generatePublicUrl($media, $format)
+                $this->mediaProvider->generatePublicUrl($media, $format)
             )
-            : $provider->generatePublicUrl($media, $format);
+            : $this->mediaProvider->generatePublicUrl($media, $format);
     }
 }

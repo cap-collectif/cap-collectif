@@ -283,18 +283,7 @@ final class ProjectAdmin extends CapcoAdmin
         // Ranking
         // Steps
         $formMapper
-            ->add(
-                'cover',
-                ModelListType::class,
-                ['required' => false, 'label' => 'global.image'],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            )
+            ->add('cover', ModelListType::class, ['required' => false, 'label' => 'global.image'])
             ->add(
                 'video',
                 null,

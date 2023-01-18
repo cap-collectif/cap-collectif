@@ -10,7 +10,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\MediaBundle\Form\Type\MediaType;
 
 class SocialNetworkAdmin extends AbstractAdmin
 {
@@ -70,9 +69,8 @@ class SocialNetworkAdmin extends AbstractAdmin
             ->add('link', null, [
                 'label' => 'global.link',
             ])
-            ->add('media', MediaType::class, [
+            ->add('media', null, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
-                'provider' => 'sonata.media.provider.image',
                 'label' => 'global.image',
             ])
             ->add('position', null, [
@@ -107,21 +105,10 @@ class SocialNetworkAdmin extends AbstractAdmin
             ->add('position', null, [
                 'label' => 'global.position',
             ])
-            ->add(
-                'media',
-                ModelListType::class,
-                [
-                    'required' => false,
-                    'label' => 'global.image',
-                ],
-                [
-                    'link_parameters' => [
-                        'context' => 'default',
-                        'hide_context' => true,
-                        'provider' => 'sonata.media.provider.image',
-                    ],
-                ]
-            );
+            ->add('media', ModelListType::class, [
+                'required' => false,
+                'label' => 'global.image',
+            ]);
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -136,7 +123,7 @@ class SocialNetworkAdmin extends AbstractAdmin
             ->add('link', null, [
                 'label' => 'global.link',
             ])
-            ->add('media', MediaType::class, [
+            ->add('media', null, [
                 'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
                 'label' => 'global.image',
             ])

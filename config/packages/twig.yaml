@@ -74,14 +74,10 @@ services:
 
     Capco\AppBundle\Twig\MediaExtension:
         public: true
+        autowire: true
         arguments:
-            [
-                '@sonata.media.pool',
-                '@sonata.media.manager.media',
-                '@service_container',
-                '%router.request_context.host%',
-                '%assets_host%',
-            ]
+            $routerRequestContextHost: '%router.request_context.host%'
+            $assetsHost: '%assets_host%'
 
     Capco\AppBundle\Twig\ThemeRuntime:
         arguments:

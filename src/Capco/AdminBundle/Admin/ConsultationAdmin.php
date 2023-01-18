@@ -98,22 +98,11 @@ class ConsultationAdmin extends AbstractAdmin
                     'config_name' => 'admin_editor',
                     'required' => false,
                 ])
-                ->add(
-                    'illustration',
-                    ModelListType::class,
-                    [
-                        'required' => false,
-                        'label' => 'global.illustration',
-                        'help' => 'help-text-description-step',
-                    ],
-                    [
-                        'link_parameters' => [
-                            'context' => 'default',
-                            'hide_context' => true,
-                            'provider' => 'sonata.media.provider.image',
-                        ],
-                    ]
-                )
+                ->add('illustration', ModelListType::class, [
+                    'required' => false,
+                    'label' => 'global.illustration',
+                    'help' => 'help-text-description-step',
+                ])
                 ->add('step', null, [
                     'label' => 'admin.label.step',
                     'required' => false,
