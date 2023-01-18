@@ -41,7 +41,10 @@ class StepAdminUrlResolver implements ResolverInterface
         $baseUrl = $this->router->getContext()->getBaseUrl();
         $project = $step->getProject();
         $projectId = GlobalId::toGlobalId('Project', $project->getId());
-        $stepId = GlobalId::toGlobalId($className, $step->getId());
+
+        $splittedClassName = explode("\\", $className);
+        $classNameWithoutNameSpace = end($splittedClassName);
+        $stepId = GlobalId::toGlobalId($classNameWithoutNameSpace, $step->getId());
 
         $url = "{$baseUrl}/admin-next/project/{$projectId}/update-step/{$stepType}/{$stepId}";
         return $url;
