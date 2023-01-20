@@ -11,6 +11,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import Play from './SVG/Play';
 import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
+import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -209,6 +210,7 @@ type AuthorsProps = {|
     +username: ?string,
     +url: string,
     +avatarUrl: ?string,
+    +__typename?: string,
   |}> | null,
 |};
 
@@ -216,12 +218,16 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
   const isMobile = useIsMobile();
   const hoverColor = useSelector(state => state.default.parameters['color.link.hover']);
   const intl = useIntl();
+  const profilesToggle = useFeatureFlag('profiles');
+
+  const firstAuthor = authors?.[0];
+  const showProfileLink = profilesToggle || firstAuthor?.__typename === 'Organization';
 
   if (!authors) return null;
 
   const getTextValue = (): string => {
     const remainingAuthorsLength = authors.length - 1;
-    const firstAuthorUsername = authors[0].username ?? '';
+    const firstAuthorUsername = firstAuthor?.username ?? '';
     if (remainingAuthorsLength === 0) {
       return firstAuthorUsername;
     }
@@ -272,10 +278,11 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
         fontSize="14px"
         sx={{
           '&:hover': {
-            textDecoration: 'underline',
-            cursor: 'pointer',
+            textDecoration: showProfileLink ? 'underline' : 'none',
+            cursor: showProfileLink ? 'pointer' : 'default',
           },
-        }}>
+        }}
+      >
         {getTextValue()}
       </Text>
     </Flex>

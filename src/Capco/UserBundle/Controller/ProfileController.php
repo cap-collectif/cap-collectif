@@ -253,8 +253,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/organization", name="capco_organization_profile_show", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
-     * @Route("/organization/{slug}", name="capco_organization_profile_show_all", defaults={"_feature_flags" = "profiles"}, options={"i18n" = false})
+     * @Route("/organization", name="capco_organization_profile_show", options={"i18n" = false})
+     * @Route("/organization/{slug}", name="capco_organization_profile_show_all", options={"i18n" = false})
      * @Template("@CapcoUser/Organization/show.html.twig")
      */
     public function showOrganizationAction(?string $slug = null)

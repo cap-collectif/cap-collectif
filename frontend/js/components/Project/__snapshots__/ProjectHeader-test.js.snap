@@ -46,7 +46,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           </div>
         </div>
         <p
-          className="sc-bdvvtL fnwNFv cap-text platform__body"
+          className="sc-bdvvtL coKxPj cap-text platform__body"
           id="authors-credit"
           onClick={[Function]}
         >

@@ -14,6 +14,7 @@ const FRAGMENT = graphql`
   fragment ProjectHeaderAuthorList_project on Project {
     ...ProjectHeaderAuthorsModal_project
     authors {
+      __typename
       id
       username
       url
@@ -34,11 +35,12 @@ const ProjectHeaderAuthorList = ({ project }: Props): React.Node => {
       const hash = new ColorHash();
       const backgroundColor = hash.hex(firstAuthor.username);
       const computedColor = colorContrast(backgroundColor);
+      const showProfileLink = profilesToggle || firstAuthor.__typename === 'Organization';
       return (
         <ProjectHeaderLayout.Authors
-          active={profilesToggle}
-          style={{ cursor: profilesToggle ? 'pointer' : 'default' }}
-          onClick={() => (profilesToggle ? window.open(firstAuthor.url, '_self') : null)}
+          active={showProfileLink}
+          style={{ cursor: showProfileLink ? 'pointer' : 'default' }}
+          onClick={() => showProfileLink ? window.open(firstAuthor.url, '_self') : null}
           authors={data.authors}>
           <Avatar
             key={firstAuthor.id}
