@@ -1,20 +1,20 @@
 import type { FC } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
-import { QUESTIONNAIRE_LIST_PAGINATION } from './QuestionnaireList';
-import QuestionnaireListPage from './QuestionnaireListPage';
+import { PROPOSAL_FORM_LIST_PAGINATION } from './ProposalFormList';
+import ProposalFormListPage from './ProposalFormListPage';
 import { useAppContext } from '../AppProvider/App.context';
-import type { QuestionnaireListQuery as QuestionnaireListQueryType } from '@relay/QuestionnaireListQuery.graphql';
+import type { ProposalFormListOldQuery as ProposalFormListOldQueryType } from '@relay/ProposalFormListOldQuery.graphql';
 
 export const QUERY = graphql`
-    query QuestionnaireListQuery(
+    query ProposalFormListOldQuery(
         $count: Int
         $cursor: String
         $term: String
-        $affiliations: [QuestionnaireAffiliation!]
-        $orderBy: QuestionnaireOrder
+        $affiliations: [ProposalFormAffiliation!]
+        $orderBy: ProposalFormOrder
     ) {
         viewer {
-            ...QuestionnaireListPage_viewer
+            ...ProposalFormListPage_viewer
                 @arguments(
                     count: $count
                     cursor: $cursor
@@ -26,17 +26,17 @@ export const QUERY = graphql`
     }
 `;
 
-const QuestionnaireListQuery: FC = () => {
+const ProposalFormListOldQuery: FC = () => {
     const { viewerSession } = useAppContext();
-    const query = useLazyLoadQuery<QuestionnaireListQueryType>(QUERY, {
-        count: QUESTIONNAIRE_LIST_PAGINATION,
+    const query = useLazyLoadQuery<ProposalFormListOldQueryType>(QUERY, {
+        count: PROPOSAL_FORM_LIST_PAGINATION,
         cursor: null,
         term: null,
         affiliations: viewerSession.isAdmin ? null : ['OWNER'],
         orderBy: { field: 'CREATED_AT', direction: 'DESC' },
     });
 
-    return <QuestionnaireListPage viewer={query.viewer} />;
+    return <ProposalFormListPage viewer={query.viewer} />;
 };
 
-export default QuestionnaireListQuery;
+export default ProposalFormListOldQuery;

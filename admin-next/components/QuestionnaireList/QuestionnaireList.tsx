@@ -5,9 +5,10 @@ import { Table, Menu, Icon, CapUIIcon, Text } from '@cap-collectif/ui';
 import type { QuestionnaireList_viewer$key } from '@relay/QuestionnaireList_viewer.graphql';
 import QuestionnaireItem from './QuestionnaireItem';
 import EmptyMessage from '@ui/Table/EmptyMessage';
-import type { OrderDirection } from '@relay/QuestionnaireListQuery.graphql';
 import { useLayoutContext } from '../Layout/Layout.context';
 import { QuestionnaireList_questionnaireOwner$key } from '@relay/QuestionnaireList_questionnaireOwner.graphql';
+import {useState} from "react";
+import {QuestionnaireType} from "@relay/QuestionnaireListQuery.graphql";
 
 export const QUESTIONNAIRE_LIST_PAGINATION = 20;
 
@@ -16,8 +17,7 @@ type QuestionnaireListProps = {
     questionnaireOwner: QuestionnaireList_questionnaireOwner$key;
     term: string;
     resetTerm: () => void;
-    orderBy: string;
-    setOrderBy: (orderBy: OrderDirection) => void;
+    types?: Array<QuestionnaireType>;
 };
 
 export const QUESTIONNAIRE_OWNER_FRAGMENT = graphql`
@@ -28,6 +28,7 @@ export const QUESTIONNAIRE_OWNER_FRAGMENT = graphql`
         term: { type: "String", defaultValue: null }
         affiliations: { type: "[QuestionnaireAffiliation!]" }
         orderBy: { type: "QuestionnaireOrder" }
+        types: { type: "[QuestionnaireType]" }
     )
     @refetchable(queryName: "QuestionnaireListPaginationQuery") {
         questionnaires(
@@ -36,10 +37,11 @@ export const QUESTIONNAIRE_OWNER_FRAGMENT = graphql`
             query: $term
             affiliations: $affiliations
             orderBy: $orderBy
+            types: $types
         )
             @connection(
                 key: "QuestionnaireList_questionnaires"
-                filters: ["query", "orderBy", "affiliations"]
+                filters: ["query", "orderBy", "affiliations", "types"]
             ) {
             __id
             totalCount
@@ -65,10 +67,10 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
     questionnaireOwner,
     term,
     resetTerm,
-    orderBy,
-    setOrderBy,
+    types
 }) => {
     const intl = useIntl();
+    const [orderBy, setOrderBy] = useState('DESC');
     const firstRendered = React.useRef<true | null>(null);
     const { data, loadNext, hasNext, refetch } = usePaginationFragment(
         QUESTIONNAIRE_OWNER_FRAGMENT,
@@ -85,11 +87,12 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                 term: term || null,
                 affiliations: viewer?.isAdmin ? null : ['OWNER'],
                 orderBy: { field: 'CREATED_AT', direction: orderBy },
+                types
             });
         }
 
         firstRendered.current = true;
-    }, [term, viewer?.isAdmin, refetch, orderBy]);
+    }, [term, viewer?.isAdmin, refetch, orderBy, types]);
 
     return (
         <Table

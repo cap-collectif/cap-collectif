@@ -70,7 +70,8 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableOnly
+        ?bool $availableOnly,
+        ?array $types
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('q');
 
@@ -101,6 +102,11 @@ class QuestionnaireRepository extends EntityRepository
                 );
         }
 
+        if ($types) {
+            $qb->andWhere('q.type IN (:types)');
+            $qb->setParameter('types', $types);
+        }
+
         if ($orderByField) {
             $qb->orderBy("q.{$orderByField}", $orderByDirection);
         }
@@ -124,7 +130,8 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableOnly
+        ?bool $availableOnly,
+        ?array $types
     ) {
         return $this->getAllQueryBuilder(
             $offset,
@@ -134,7 +141,8 @@ class QuestionnaireRepository extends EntityRepository
             $query,
             $orderByField,
             $orderByDirection,
-            $availableOnly
+            $availableOnly,
+            $types
         )
             ->getQuery()
             ->getResult();
@@ -148,7 +156,8 @@ class QuestionnaireRepository extends EntityRepository
         ?string $query,
         ?string $orderByField,
         ?string $orderByDirection,
-        ?bool $availableOnly
+        ?bool $availableOnly,
+        ?array $types
     ): int {
         $qb = $this->getAllQueryBuilder(
             $offset,
@@ -158,7 +167,8 @@ class QuestionnaireRepository extends EntityRepository
             $query,
             $orderByField,
             $orderByDirection,
-            $availableOnly
+            $availableOnly,
+            $types
         );
         $qb->select('COUNT(q.id)');
 

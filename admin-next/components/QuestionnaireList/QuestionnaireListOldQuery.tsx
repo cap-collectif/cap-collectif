@@ -1,20 +1,20 @@
 import type { FC } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
-import { PROPOSAL_FORM_LIST_PAGINATION } from './ProposalFormList';
-import ProposalFormListPage from './ProposalFormListPage';
+import { QUESTIONNAIRE_LIST_PAGINATION } from './QuestionnaireList';
+import QuestionnaireListPage from './QuestionnaireListPage';
 import { useAppContext } from '../AppProvider/App.context';
-import type { ProposalFormListQuery as ProposalFormListQueryType } from '@relay/ProposalFormListQuery.graphql';
+import type { QuestionnaireListOldQuery as QuestionnaireListOldQueryType } from '@relay/QuestionnaireListOldQuery.graphql';
 
 export const QUERY = graphql`
-    query ProposalFormListQuery(
+    query QuestionnaireListOldQuery(
         $count: Int
         $cursor: String
         $term: String
-        $affiliations: [ProposalFormAffiliation!]
-        $orderBy: ProposalFormOrder
+        $affiliations: [QuestionnaireAffiliation!]
+        $orderBy: QuestionnaireOrder
     ) {
         viewer {
-            ...ProposalFormListPage_viewer
+            ...QuestionnaireListPage_viewer
                 @arguments(
                     count: $count
                     cursor: $cursor
@@ -26,17 +26,17 @@ export const QUERY = graphql`
     }
 `;
 
-const ProposalFormListQuery: FC = () => {
+const QuestionnaireListOldQuery: FC = () => {
     const { viewerSession } = useAppContext();
-    const query = useLazyLoadQuery<ProposalFormListQueryType>(QUERY, {
-        count: PROPOSAL_FORM_LIST_PAGINATION,
+    const query = useLazyLoadQuery<QuestionnaireListOldQueryType>(QUERY, {
+        count: QUESTIONNAIRE_LIST_PAGINATION,
         cursor: null,
         term: null,
         affiliations: viewerSession.isAdmin ? null : ['OWNER'],
         orderBy: { field: 'CREATED_AT', direction: 'DESC' },
     });
 
-    return <ProposalFormListPage viewer={query.viewer} />;
+    return <QuestionnaireListPage viewer={query.viewer} />;
 };
 
-export default ProposalFormListQuery;
+export default QuestionnaireListOldQuery;

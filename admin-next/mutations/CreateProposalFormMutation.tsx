@@ -15,6 +15,8 @@ type Owner = {
     readonly username: string | null;
 };
 
+type Viewer = Pick<ModalCreateProposalForm_viewer, '__typename' | 'id' | 'username'>
+
 const mutation = graphql`
     mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!)
     @raw_response_type {
@@ -31,7 +33,7 @@ const commit = (
     variables: CreateProposalFormMutationVariables,
     isAdmin: boolean,
     owner: Owner,
-    viewer: ModalCreateProposalForm_viewer,
+    viewer: Viewer,
     hasProposalForm: boolean,
 ): Promise<CreateProposalFormMutationResponse> =>
     commitMutation<CreateProposalFormMutation>(environment, {
@@ -46,7 +48,11 @@ const commit = (
                     updatedAt: new Date().toString(),
                     step: null,
                     adminUrl: '',
-                    owner,
+                    owner: {
+                        __typename: owner.__typename,
+                        id: owner.id,
+                        username: owner.username,
+                    },
                     creator: {
                         __typename: viewer.__typename,
                         id: viewer.id,

@@ -36,3 +36,6 @@ InternalQuestionnaireOwner:
                     availableOnly:
                         type: 'Boolean'
                         description: 'Filter by available questionnaires'
+                    types:
+                        type: '[QuestionnaireType]'
+                        description: 'Filter by types.'

@@ -8776,6 +8776,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """Filter by available questionnaires"""
     availableOnly: Boolean
+
+    """Filter by types."""
+    types: [QuestionnaireType]
   ): QuestionnaireConnection!
 
   """Get all mailingLists that the organization owns."""
@@ -13185,6 +13188,9 @@ interface QuestionnaireOwner {
 
     """Filter by available questionnaires"""
     availableOnly: Boolean
+
+    """Filter by types."""
+    types: [QuestionnaireType]
   ): QuestionnaireConnection!
 }
 
@@ -13294,6 +13300,9 @@ enum QuestionnaireType {
 
   """Draft are not allowed."""
   VOTING
+
+  """Questionnaire that are used in analysis step."""
+  QUESTIONNAIRE_ANALYSIS
 }
 
 """A step inside a project."""
@@ -17964,6 +17973,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """Filter by available questionnaires"""
     availableOnly: Boolean
+
+    """Filter by types."""
+    types: [QuestionnaireType]
   ): QuestionnaireConnection!
 
   """Get all events that the user owns."""

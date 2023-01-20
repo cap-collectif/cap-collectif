@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
 import { PageProps } from '../types';
 import Layout from '../components/Layout/Layout';
-import ProposalFormListQuery from '../components/ProposalForm/ProposalFormListQuery';
+import ProposalFormListQuery from '../components/ProposalForm/ProposalFormListOldQuery';
 
 const ProposalForm: NextPage<PageProps> = () => {
     const intl = useIntl();

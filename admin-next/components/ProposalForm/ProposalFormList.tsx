@@ -5,10 +5,10 @@ import { Table, Menu, Icon, CapUIIcon, Text } from '@cap-collectif/ui';
 import type { ProposalFormList_viewer$key } from '@relay/ProposalFormList_viewer.graphql';
 import ProposalFormItem from './ProposalFormItem';
 import EmptyMessage from '@ui/Table/EmptyMessage';
-import type { OrderDirection } from '@relay/ProposalFormListQuery.graphql';
 import { useAppContext } from '../AppProvider/App.context';
 import { useLayoutContext } from '../Layout/Layout.context';
 import {ProposalFormList_proposalFormOwner$key} from "@relay/ProposalFormList_proposalFormOwner.graphql";
+import {useState} from "react";
 
 export const PROPOSAL_FORM_LIST_PAGINATION = 20;
 
@@ -17,8 +17,6 @@ type ProposalFormListProps = {
     viewer: ProposalFormList_viewer$key
     term: string,
     resetTerm: () => void,
-    orderBy: string,
-    setOrderBy: (orderBy: OrderDirection) => void,
 };
 
 export const PROPOSALFORM_OWNER_FRAGMENT = graphql`
@@ -65,9 +63,8 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
     viewer: viewerFragment,
     term,
     resetTerm,
-    orderBy,
-    setOrderBy,
 }) => {
+    const [orderBy, setOrderBy] = useState('DESC');
     const { viewerSession } = useAppContext();
     const intl = useIntl();
     const firstRendered = React.useRef<true | null>(null);

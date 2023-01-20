@@ -5,7 +5,7 @@ import { NextPage } from 'next';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
 import { PageProps } from '../types';
 import Layout from '../components/Layout/Layout';
-import QuestionnaireListQuery from '../components/QuestionnaireList/QuestionnaireListQuery';
+import QuestionnaireListOldQuery from '../components/QuestionnaireList/QuestionnaireListOldQuery';
 
 const QuestionnaireList: NextPage<PageProps> = () => {
     const intl = useIntl();
@@ -18,7 +18,7 @@ const QuestionnaireList: NextPage<PageProps> = () => {
                         <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
                     </Flex>
                 }>
-                <QuestionnaireListQuery />
+                <QuestionnaireListOldQuery />
             </React.Suspense>
         </Layout>
     );

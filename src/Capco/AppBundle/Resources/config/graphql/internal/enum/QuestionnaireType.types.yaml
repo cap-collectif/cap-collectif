@@ -9,3 +9,6 @@ QuestionnaireType:
             VOTING:
                 value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING")'
                 description: 'Draft are not allowed.'
+            QUESTIONNAIRE_ANALYSIS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE_ANALYSIS")'
+                description: 'Questionnaire that are used in analysis step.'

@@ -15,6 +15,8 @@ type Owner = {
     readonly username: string | null;
 };
 
+type Viewer = Pick<ModalCreateQuestionnaire_viewer, '__typename' | 'id' | 'username'>
+
 const mutation = graphql`
     mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!, $connections: [ID!]!)
     @raw_response_type {
@@ -32,7 +34,7 @@ const commit = (
     variables: CreateQuestionnaireMutationVariables,
     isAdmin: boolean,
     owner: Owner,
-    viewer: ModalCreateQuestionnaire_viewer,
+    viewer: Viewer,
     hasQuestionnaire: boolean,
 ): Promise<CreateQuestionnaireMutationResponse> =>
     commitMutation<CreateQuestionnaireMutation>(environment, {
@@ -47,7 +49,11 @@ const commit = (
                     updatedAt: new Date().toString(),
                     step: null,
                     adminUrl: '',
-                    owner,
+                    owner: {
+                        __typename: owner.__typename,
+                        id: owner.id,
+                        username: owner.username,
+                    },
                     creator: {
                         id: viewer.id,
                         username: viewer.username,
