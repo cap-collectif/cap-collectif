@@ -772,6 +772,10 @@ div.embeddedContent {
         max-width: 100%;
     }
 
+    table.table td {
+        border: 1px solid;
+    }
+
     table:not(.table) > tbody > tr {
         margin-bottom: 15px;
         display: flex;
