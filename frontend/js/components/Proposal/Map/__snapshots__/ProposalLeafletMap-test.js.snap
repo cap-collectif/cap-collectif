@@ -39,7 +39,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
     doubleClickZoom={false}
     dragging={true}
     gestureHandling={true}
-    maxZoom={22}
+    maxZoom={18}
     style={
       Object {
         "height": "50vw",
@@ -320,7 +320,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
     doubleClickZoom={false}
     dragging={true}
     gestureHandling={true}
-    maxZoom={22}
+    maxZoom={18}
     style={
       Object {
         "height": "50vw",

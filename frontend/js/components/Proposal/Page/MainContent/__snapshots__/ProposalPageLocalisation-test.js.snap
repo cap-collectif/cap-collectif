@@ -36,7 +36,7 @@ exports[`<ProposalPageLocalisation /> should render correctly 1`] = `
           }
           doubleClickZoom={false}
           gestureHandling={true}
-          maxZoom={22}
+          maxZoom={18}
           style={
             Object {
               "height": 175,

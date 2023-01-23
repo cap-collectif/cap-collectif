@@ -25,4 +25,4 @@ export const BASE_INPUT = css`
   }
 `;
 
-export const MAX_MAP_ZOOM = 22;
+export const MAX_MAP_ZOOM = 18;

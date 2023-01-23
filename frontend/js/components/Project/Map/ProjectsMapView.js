@@ -26,6 +26,7 @@ import type { MapProps } from '../../Proposal/Map/Map.types';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import { ICON_NAME as DSICON } from '~ds/Icon/Icon';
 import useIsMobile from '~/utils/hooks/useIsMobile';
+import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import { BlankPopup, MapContainer } from '~/components/Proposal/Map/ProposalLeafletMap.style';
 import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson';
 import typography from '~/styles/theme/typography';
@@ -215,7 +216,7 @@ export const ProjectsMapView = ({
                   lng: homePageProjectsMapSectionConfiguration.centerLongitude,
                 }}
                 zoom={homePageProjectsMapSectionConfiguration.zoomMap}
-                maxZoom={20}
+                maxZoom={MAX_MAP_ZOOM}
                 style={{
                   height: isMobile ? '100vw' : '33vw',
                   // We don't want the map to be bigger than the screen

@@ -63,9 +63,7 @@ export const zoomLevels = [
   { id: 15, name: 'map.zoom.street' },
   { id: 16 },
   { id: 17 },
-  { id: 18 },
-  { id: 19 },
-  { id: 20, name: 'map.zoom.building' },
+  { id: 18, name: 'map.zoom.building' },
 ];
 
 const getStepsDependOfView = (

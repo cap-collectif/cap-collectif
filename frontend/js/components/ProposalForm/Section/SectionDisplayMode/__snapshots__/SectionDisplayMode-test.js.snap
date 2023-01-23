@@ -420,19 +420,7 @@ exports[`<SectionDisplayMode /> should render correctly 1`] = `
                 key="18"
                 value={18}
               >
-                18 
-              </option>
-              <option
-                key="19"
-                value={19}
-              >
-                19 
-              </option>
-              <option
-                key="20"
-                value={20}
-              >
-                20 - map.zoom.building
+                18 - map.zoom.building
               </option>
             </Field>
           </div>
