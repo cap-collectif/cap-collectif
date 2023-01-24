@@ -108,7 +108,7 @@ class PreConfigureProjectMutation implements MutationInterface
     {
         $ownerId = GlobalId::toGlobalId('User', $viewer->getId());
         if ($viewer->getOrganizationId()) {
-            $ownerId = GlobalId::toGlobalId('Organization', $viewer->getOrganizationId());
+            $ownerId = $viewer->getOrganizationId();
         }
         $owner = $this->globalIdResolver->resolve($ownerId, $viewer);
         return [$ownerId, $owner];
