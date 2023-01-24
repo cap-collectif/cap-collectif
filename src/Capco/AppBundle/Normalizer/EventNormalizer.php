@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Twig\MediaExtension;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -70,14 +69,10 @@ class EventNormalizer implements
             ),
         ];
 
-        try {
-            $data['media']['url'] = $this->mediaExtension->getMediaUrl(
-                $object->getMedia(),
-                'default_slider'
-            );
-        } catch (RouteNotFoundException $e) {
-            // Avoid some SonataMedia problems
-        }
+        $data['media']['url'] = $this->mediaExtension->getMediaUrl(
+            $object->getMedia(),
+            'default_slider'
+        );
 
         return $data;
     }

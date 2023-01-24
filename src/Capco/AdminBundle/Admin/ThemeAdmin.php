@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
+use Capco\MediaBundle\Provider\MediaProvider;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -27,16 +28,19 @@ class ThemeAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
-    private $indexer;
+    private Indexer $indexer;
+    private MediaProvider $mediaProvider;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        Indexer $indexer
+        Indexer $indexer,
+        MediaProvider $mediaProvider
     ) {
-        $this->indexer = $indexer;
         parent::__construct($code, $class, $baseControllerName);
+        $this->indexer = $indexer;
+        $this->mediaProvider = $mediaProvider;
     }
 
     // For mosaic view
@@ -44,13 +48,14 @@ class ThemeAdmin extends AbstractAdmin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()
-                ->getContainer()
-                ->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), $object->getBody(), $url);
+            return new Metadata(
+                $object->getTitle(),
+                null,
+                $this->mediaProvider->generatePublicUrl(
+                    $media,
+                    $this->mediaProvider->getFormatName($media, 'form')
+                )
+            );
         }
 
         return parent::getObjectMetadata($object);

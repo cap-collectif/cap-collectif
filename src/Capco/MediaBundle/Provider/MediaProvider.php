@@ -4,21 +4,10 @@ namespace Capco\MediaBundle\Provider;
 
 use Capco\MediaBundle\Entity\Media;
 use Gaufrette\Filesystem;
-use Imagine\Imagick\Imagine;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\Form\Validator\ErrorElement;
-use Sonata\MediaBundle\Metadata\ProxyMetadataBuilder;
-use Sonata\MediaBundle\Model\MediaInterface;
-use Sonata\MediaBundle\Provider\MediaProviderInterface;
-use Sonata\MediaBundle\Provider\Metadata;
-use Sonata\MediaBundle\Resizer\SimpleResizer;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Response;
 
-class MediaProvider implements MediaProviderInterface
+class MediaProvider
 {
     protected CacheManager $cacheManager;
     protected Filesystem $filesystem;
@@ -29,7 +18,7 @@ class MediaProvider implements MediaProviderInterface
         $this->cacheManager = $cacheManager;
     }
 
-    public function generatePublicUrl(MediaInterface $media, $format): string
+    public function generatePublicUrl($media, $format): string
     {
         $path = $this->prefixSlash($this->getImagePath($media));
 
@@ -40,7 +29,7 @@ class MediaProvider implements MediaProviderInterface
         return $path;
     }
 
-    public function getFormatName(MediaInterface $media, $format): string
+    public function getFormatName($media, $format): string
     {
         if ('admin' === $format || 'reference' === $format || 'default' === $format) {
             return $format;
@@ -70,151 +59,9 @@ class MediaProvider implements MediaProviderInterface
     }
 
     /**
-     * Stubs for Sonata MediaProviderInterface, to remove when not needed anymore.
+     * Stubs for Sonata, to remove when not needed anymore.
      */
     public function addFormat($name, $format)
-    {
-    }
-
-    public function getFormat($name)
-    {
-        return false;
-    }
-
-    public function requireThumbnails()
-    {
-        return false;
-    }
-
-    public function generateThumbnails(MediaInterface $media)
-    {
-    }
-
-    public function removeThumbnails(MediaInterface $media, $formats = null)
-    {
-    }
-
-    public function getReferenceFile(MediaInterface $media)
-    {
-        return new \Gaufrette\File('', $this->filesystem);
-    }
-
-    public function getReferenceImage(MediaInterface $media)
-    {
-        return '';
-    }
-
-    public function preUpdate(MediaInterface $media)
-    {
-    }
-
-    public function postUpdate(MediaInterface $media)
-    {
-    }
-
-    public function preRemove(MediaInterface $media)
-    {
-    }
-
-    public function postRemove(MediaInterface $media)
-    {
-    }
-
-    public function buildCreateForm(FormMapper $formMapper)
-    {
-    }
-
-    public function buildEditForm(FormMapper $formMapper)
-    {
-    }
-
-    public function prePersist(MediaInterface $media)
-    {
-    }
-
-    public function postPersist(MediaInterface $media)
-    {
-    }
-
-    public function getHelperProperties(MediaInterface $media, $format, $options = [])
-    {
-    }
-
-    public function generatePath(MediaInterface $media)
-    {
-        return '';
-    }
-
-    public function generatePrivateUrl(MediaInterface $media, $format)
-    {
-        return '';
-    }
-
-    public function getFormats()
-    {
-        return [];
-    }
-
-    public function setName($name)
-    {
-    }
-
-    public function getName()
-    {
-        return '';
-    }
-
-    public function getProviderMetadata()
-    {
-        return new Metadata('');
-    }
-
-    public function setTemplates(array $templates)
-    {
-    }
-
-    public function getTemplates()
-    {
-        return [];
-    }
-
-    public function getTemplate($name)
-    {
-        return '';
-    }
-
-    public function getDownloadResponse(MediaInterface $media, $format, $mode, array $headers = [])
-    {
-        return new Response();
-    }
-
-    public function getResizer()
-    {
-        return new SimpleResizer(new Imagine(), '', new ProxyMetadataBuilder(new Container()));
-    }
-
-    public function getFilesystem()
-    {
-        return $this->filesystem;
-    }
-
-    public function getCdnPath($relativePath, $isFlushable)
-    {
-    }
-
-    public function transform(MediaInterface $media)
-    {
-    }
-
-    public function validate(ErrorElement $errorElement, MediaInterface $media)
-    {
-    }
-
-    public function buildMediaType(FormBuilder $formBuilder)
-    {
-    }
-
-    public function updateMetadata(MediaInterface $media, $force = false)
     {
     }
 

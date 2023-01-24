@@ -9,7 +9,6 @@ use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Resolver\StepResolver;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -142,16 +141,9 @@ class ProjectNormalizer implements
             $data['steps'] = $steps;
         }
         if (\in_array('Projects', $groups, true) && $object->getCover()) {
-            try {
-                $data['cover'] = [
-                    'url' => $this->mediaExtension->getMediaUrl(
-                        $object->getCover(),
-                        'default_project'
-                    ),
-                ];
-            } catch (RouteNotFoundException $e) {
-                // Avoid some SonataMedia problems
-            }
+            $data['cover'] = [
+                'url' => $this->mediaExtension->getMediaUrl($object->getCover(), 'default_project'),
+            ];
         }
 
         return $data;

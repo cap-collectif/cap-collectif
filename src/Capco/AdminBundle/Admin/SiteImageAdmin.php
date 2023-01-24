@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\MediaBundle\Provider\MediaProvider;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -15,6 +16,13 @@ class SiteImageAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'isEnabled',
     ];
+    private MediaProvider $mediaProvider;
+
+    public function __construct($code, $class, $baseControllerName, MediaProvider $mediaProvider)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->mediaProvider = $mediaProvider;
+    }
 
     public function toString($object)
     {
@@ -46,13 +54,14 @@ class SiteImageAdmin extends AbstractAdmin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()
-                ->getContainer()
-                ->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
+            return new Metadata(
+                $object->getTitle(),
+                null,
+                $this->mediaProvider->generatePublicUrl(
+                    $media,
+                    $this->mediaProvider->getFormatName($media, 'form')
+                )
+            );
         }
 
         return parent::getObjectMetadata($object);

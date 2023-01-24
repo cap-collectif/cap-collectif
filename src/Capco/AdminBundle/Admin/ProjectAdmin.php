@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\MediaBundle\Provider\MediaProvider;
 use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Entity\Project;
@@ -11,9 +12,7 @@ use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\Form\Validator\ErrorElement;
-use Doctrine\ORM\EntityManagerInterface;
 use Sonata\Form\Type\DateTimePickerType;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -39,10 +38,9 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected $formOptions = ['cascade_validation' => true];
     private TokenStorageInterface $tokenStorage;
-    private Indexer $indexer;
     private ProjectDistrictRepository $projectDistrictRepository;
-    private EntityManagerInterface $entityManager;
     private Manager $manager;
+    private MediaProvider $mediaProvider;
 
     public function __construct(
         string $code,
@@ -50,16 +48,14 @@ final class ProjectAdmin extends CapcoAdmin
         string $baseControllerName,
         TokenStorageInterface $tokenStorage,
         ProjectDistrictRepository $projectDistrictRepository,
-        Indexer $indexer,
-        EntityManagerInterface $entityManager,
-        Manager $manager
+        Manager $manager,
+        MediaProvider $mediaProvider
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
-        $this->indexer = $indexer;
         $this->projectDistrictRepository = $projectDistrictRepository;
-        $this->entityManager = $entityManager;
         $this->manager = $manager;
+        $this->mediaProvider = $mediaProvider;
     }
 
     public function validate(ErrorElement $errorElement, $object)
@@ -115,13 +111,14 @@ final class ProjectAdmin extends CapcoAdmin
     {
         $cover = $object->getcover();
         if ($cover) {
-            $provider = $this->getConfigurationPool()
-                ->getContainer()
-                ->get($cover->getProviderName());
-            $format = $provider->getFormatName($cover, 'form');
-            $url = $provider->generatePublicUrl($cover, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
+            return new Metadata(
+                $object->getTitle(),
+                null,
+                $this->mediaProvider->generatePublicUrl(
+                    $cover,
+                    $this->mediaProvider->getFormatName($cover, 'form')
+                )
+            );
         }
 
         return parent::getObjectMetadata($object);

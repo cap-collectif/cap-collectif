@@ -162,8 +162,6 @@ services:
                 Capco\AdminBundle\Controller\ProjectController,
                 '@security.token_storage',
                 '@Capco\AppBundle\Repository\ProjectDistrictRepository',
-                '@Capco\AppBundle\Elasticsearch\Indexer',
-                '@doctrine.orm.entity_manager',
                 '@Capco\AppBundle\Toggle\Manager',
             ]
         tags:
@@ -1008,3 +1006,16 @@ services:
         arguments: [~, ~, Capco\AdminBundle\Controller\AnalyticsController]
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-analytics }
+
+    Capco\AdminBundle\Admin\MediaAdmin:
+        arguments: [~, Capco\MediaBundle\Entity\Media, Capco\AdminBundle\Controller\CRUDController]
+        tags:
+            - {
+                  name: sonata.admin,
+                  manager_type: orm,
+                  group: admin.group.content,
+                  label: page-media--add,
+                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
+              }
+        calls:
+            - [setTranslationDomain, [CapcoAppBundle]]

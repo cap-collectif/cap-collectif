@@ -47,7 +47,6 @@ return [
     Sonata\ClassificationBundle\SonataClassificationBundle::class => ['all' => true],
 
     // sonata media
-    Sonata\MediaBundle\SonataMediaBundle::class => ['all' => true],
     Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle::class => ['all' => true],
     Sonata\Form\Bridge\Symfony\SonataFormBundle::class => ['all' => true],
     Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true], // project bundles

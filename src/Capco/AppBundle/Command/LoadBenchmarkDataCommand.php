@@ -11,8 +11,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-//use Sonata\Doctrine\Mapper\ORM\DoctrineORMMapper;
-use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
 use Capco\AppBundle\Sluggable\SluggableListener;
 
 class LoadBenchmarkDataCommand extends Command
@@ -46,13 +44,11 @@ class LoadBenchmarkDataCommand extends Command
             );
             $output->writeln('Please set the --force option to run this command');
 
-            return;
+            return 0;
         }
 
         $this->disableListeners($output, [
             TimestampableListener::class,
-            MediaEventSubscriber::class,
-            //            DoctrineORMMapper::class,
             UserListener::class,
             SluggableListener::class,
         ]);

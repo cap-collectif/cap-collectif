@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\MediaBundle\Provider\MediaProvider;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,18 +20,27 @@ class SocialNetworkAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
+    private MediaProvider $mediaProvider;
+
+    public function __construct($code, $class, $baseControllerName, MediaProvider $mediaProvider)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->mediaProvider = $mediaProvider;
+    }
+
     // For mosaic view
     public function getObjectMetadata($object)
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()
-                ->getContainer()
-                ->get($media->getProviderName());
-            $format = $provider->getFormatName($media, 'form');
-            $url = $provider->generatePublicUrl($media, $format);
-
-            return new Metadata($object->getTitle(), null, $url);
+            return new Metadata(
+                $object->getTitle(),
+                null,
+                $this->mediaProvider->generatePublicUrl(
+                    $media,
+                    $this->mediaProvider->getFormatName($media, 'form')
+                )
+            );
         }
 
         return parent::getObjectMetadata($object);

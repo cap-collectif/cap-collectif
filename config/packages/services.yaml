@@ -395,8 +395,6 @@ services:
     Capco\MediaBundle\Provider\MediaProvider:
         public: true
         autowire: true
-        tags:
-            - { name: sonata.media.provider }
 
     Capco\AppBundle\Service\AddStepService:
         autowire: true

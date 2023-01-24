@@ -20,7 +20,6 @@ abstract class BaseDeleteMutation implements MutationInterface
 
     public function removeMedia(Media $media): void
     {
-        $this->mediaProvider->removeThumbnails($media);
         $this->em->remove($media);
     }
 }

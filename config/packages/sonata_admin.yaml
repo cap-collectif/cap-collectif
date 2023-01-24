@@ -52,7 +52,7 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\ThemeAdmin
                     - Capco\AdminBundle\Admin\VideoAdmin
                     - Capco\AdminBundle\Admin\PageAdmin
-                    - sonata.media.admin.media
+                    - Capco\AdminBundle\Admin\MediaAdmin
             admin.group.project:
                 items:
                     - Capco\AdminBundle\Admin\ProjectAdmin

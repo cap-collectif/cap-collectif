@@ -119,7 +119,7 @@ class ApplicationContext extends UserContext
         }
 
         // This tag is useful when you analyze the medias folder (e.g: counting number of files)
-        // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
+        // Indeed, we have no way to only copy paste medias.
         // It launch a complete reinit. Use it carefully !
         if ($scenario->hasTag('media')) {
             $jobs[] = Process::fromShellCommandline('rm -rf public/media/*');
