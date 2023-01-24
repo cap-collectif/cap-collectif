@@ -30,7 +30,7 @@ class Media
     protected string $copyright;
     protected string $authorName;
     protected string $context;
-    protected bool $cdnIsFlushable = false;
+    protected ?bool $cdnIsFlushable = false;
     protected string $cdnFlushIdentifier;
     protected \DateTime $cdnFlushAt;
     protected int $cdnStatus;
