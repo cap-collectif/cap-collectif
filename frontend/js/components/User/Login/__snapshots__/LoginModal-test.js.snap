@@ -27,6 +27,11 @@ exports[`<LoginModal /> renders a visible modal if shown 1`] = `
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
+  style={
+    Object {
+      "zIndex": 9000,
+    }
+  }
 >
   <form
     id="login-form"
@@ -108,6 +113,11 @@ exports[`<LoginModal /> renders modal without connection button 1`] = `
   renderBackdrop={[Function]}
   restoreFocus={true}
   show={true}
+  style={
+    Object {
+      "zIndex": 9000,
+    }
+  }
 >
   <form
     id="login-form"

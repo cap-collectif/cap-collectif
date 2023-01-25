@@ -23,6 +23,7 @@ export const LoginModal = ({ submitting, show, onClose, onSubmit, byPassAuth }: 
 
   return (
     <Modal
+      style={{ zIndex: 9000 }}
       animation={false}
       show={show}
       onHide={onClose}
