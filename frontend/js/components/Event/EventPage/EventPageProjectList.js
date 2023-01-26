@@ -106,7 +106,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
         fontWeight={CapUIFontWeight.Normal}
         color="neutral-gray.900"
         mb={6}>
-        {intl.formatMessage({ id: 'event.page.project.list' })}
+        {intl.formatMessage({ id: 'event.page.project.list' }, { num: projects.length })}
       </Heading>
       <Box display="flex" flexDirection="column" gap={4}>
         {projects.map(project => (
@@ -122,7 +122,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
               display="flex"
               boxShadow="small"
               position="relative"
-              style={{ borderRadius: '8px' }}>
+              style={{ borderRadius: '8px', boxShadow: 'none' }}>
               <Box
                 overflow="hidden"
                 css={{
@@ -136,115 +136,95 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                 }}
                 position="relative"
                 height="78px"
-                width="112px"
-                p={3}>
+                width="112px">
                 {!project.cover?.url && <DefaultProjectImage isNewCard />}
               </Box>
-              <Flex direction="column" m={4} bg="white" flex={1} overflow="hidden">
+              <Flex direction="column" bg="white" ml={4} flex={1} overflow="hidden">
                 <Heading
                   truncate={100}
+                  height="24px"
                   as="h4"
                   fontSize="3"
                   fontWeight={FontWeight.Semibold}
-                  color={project.archived ? 'gray.500' : 'gray.900'}
-                  lineHeight={LineHeight.Base}>
+                  color={project.archived ? 'gray.500' : 'neutral-gray.900'}
+                  lineHeight={LineHeight.Base}
+                  mb={2}>
                   {project.title}
                 </Heading>
-                <Flex direction="column" justifyContent="space-between" height="100%">
-                  {!isMobile && (
-                    <Flex direction="row" flexWrap="wrap" color="neutral-gray.700">
-                      {project.districts && project.districts?.totalCount > 0 && (
-                        <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
-                          <Icon name={CapUIIcon.PinO} size={CapUIIconSize.MD} mr={1} />
-                          <Text
-                            as="span"
-                            css={{
-                              whiteSpace: 'nowrap',
-                              fontSize: '13px',
-                              fontWeight: '400',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              color: project.archived
-                                ? colors['neutral-gray']['400']
-                                : colors['neutral-gray']['700'],
-                            }}>
-                            {project.districts.edges
-                              ?.map(district => district?.node?.name)
-                              .join(' • ') || null}
-                          </Text>
-                        </Flex>
-                      )}
-                      {project.type && (
-                        <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
-                          <Icon name={CapUIIcon.BookStarO} size={CapUIIconSize.MD} mr={1} />
-                          <Text
-                            as="span"
-                            css={{
-                              whiteSpace: 'nowrap',
-                              fontSize: '13px',
-                              fontWeight: '400',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              color: project.archived
-                                ? colors['neutral-gray']['400']
-                                : project.type?.color,
-                            }}>
-                            {intl.formatMessage({ id: project.type.title })}
-                          </Text>
-                        </Flex>
-                      )}
-                      {project.themes && project.themes?.length > 0 && (
-                        <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
-                          <Icon name={CapUIIcon.FolderO} size={CapUIIconSize.MD} mr={1} />
-                          <Text
-                            as="span"
-                            css={{
-                              whiteSpace: 'nowrap',
-                              fontSize: '13px',
-                              fontWeight: '400',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              color: project.archived
-                                ? colors['neutral-gray']['400']
-                                : colors['neutral-gray']['700'],
-                            }}>
-                            {project.themes?.map(({ title }) => title).join(', ') || ''}
-                          </Text>
-                        </Flex>
-                      )}
-                    </Flex>
-                  )}
-                  {(project.hasParticipativeStep || project.isExternal) && (
-                    <Flex direction="row" spacing={8} mt={2}>
-                      {(project.isVotesCounterDisplayable &&
-                        ((project.isExternal && project.externalVotesCount) ||
-                          project.votes.totalCount) && (
-                          <Flex direction="row" alignItems="center">
-                            <Icon
-                              name={CapUIIcon.ThumbUpO}
-                              size={CapUIIconSize.Md}
-                              color={project.archived ? 'gray.500' : 'gray.700'}
-                              mr={1}
-                            />
-                            <Text
-                              fontSize={14}
-                              color={project.archived ? 'gray.500' : 'gray.900'}
-                              as="div">
-                              <FormattedNumber
-                                number={
-                                  project.isExternal
-                                    ? project.externalVotesCount || 0
-                                    : project.votes.totalCount
-                                }
-                              />
-                            </Text>
-                          </Flex>
-                        )) ||
-                        null}
-                      {(project.isContributionsCounterDisplayable && (
+                {!isMobile && (
+                  <Flex
+                    direction="row"
+                    flexWrap="wrap"
+                    color="neutral-gray.700"
+                    mb={2}
+                    height="16px">
+                    {project.districts && project.districts?.totalCount > 0 && (
+                      <Flex maxWidth="100%" direction="row" alignItems="center" mr={2}>
+                        <Icon name={CapUIIcon.PinO} size={CapUIIconSize.Sm} />
+                        <Text
+                          as="span"
+                          css={{
+                            whiteSpace: 'nowrap',
+                            fontSize: '13px',
+                            fontWeight: '400',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            color: project.archived
+                              ? colors['neutral-gray']['400']
+                              : colors.gray['700'],
+                          }}>
+                          {project.districts.edges
+                            ?.map(district => district?.node?.name)
+                            .join(' • ') || null}
+                        </Text>
+                      </Flex>
+                    )}
+                    {project.type && (
+                      <Flex maxWidth="100%" direction="row" alignItems="center" mr={2}>
+                        <Icon name={CapUIIcon.BookStarO} size={CapUIIconSize.Sm} />
+                        <Text
+                          as="span"
+                          css={{
+                            whiteSpace: 'nowrap',
+                            fontSize: '13px',
+                            fontWeight: '400',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            color: project.archived ? colors.gray['700'] : project.type?.color,
+                          }}>
+                          {intl.formatMessage({ id: project.type.title })}
+                        </Text>
+                      </Flex>
+                    )}
+                    {project.themes && project.themes?.length > 0 && (
+                      <Flex maxWidth="100%" direction="row" alignItems="center" mr={2}>
+                        <Icon name={CapUIIcon.FolderO} size={CapUIIconSize.Sm} />
+                        <Text
+                          as="span"
+                          css={{
+                            whiteSpace: 'nowrap',
+                            fontSize: '13px',
+                            fontWeight: '400',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            color: project.archived
+                              ? colors['neutral-gray']['400']
+                              : colors.gray['700'],
+                          }}>
+                          {project.themes?.map(({ title }) => title).join(', ') || ''}
+                        </Text>
+                      </Flex>
+                    )}
+                  </Flex>
+                )}
+                {(project.hasParticipativeStep || project.isExternal) && (
+                  <Flex direction="row" spacing={8} height="24px">
+                    {(project.isVotesCounterDisplayable &&
+                      ((project.isExternal && project.externalVotesCount) ||
+                        project.votes.totalCount) && (
                         <Flex direction="row" alignItems="center">
                           <Icon
-                            name={CapUIIcon.BubbleO}
+                            name={CapUIIcon.ThumbUpO}
                             size={CapUIIconSize.Md}
                             color={project.archived ? 'gray.500' : 'gray.700'}
                             mr={1}
@@ -256,42 +236,64 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                             <FormattedNumber
                               number={
                                 project.isExternal
-                                  ? project.externalContributionsCount || 0
-                                  : project.contributions.totalCount
+                                  ? project.externalVotesCount || 0
+                                  : project.votes.totalCount
                               }
                             />
                           </Text>
                         </Flex>
                       )) ||
-                        null}
-                      {(project.isParticipantsCounterDisplayable && (
-                        <Flex direction="row" alignItems="center">
-                          <Icon
-                            name={CapUIIcon.UserO}
-                            size={CapUIIconSize.Md}
-                            color={project.archived ? 'gray.500' : 'gray.700'}
-                            mr={1}
+                      null}
+                    {(project.isContributionsCounterDisplayable && (
+                      <Flex direction="row" alignItems="center">
+                        <Icon
+                          name={CapUIIcon.BubbleO}
+                          size={CapUIIconSize.Md}
+                          color={project.archived ? 'gray.500' : 'gray.700'}
+                          mr={1}
+                        />
+                        <Text
+                          fontSize={14}
+                          color={project.archived ? 'gray.500' : 'gray.900'}
+                          as="div">
+                          <FormattedNumber
+                            number={
+                              project.isExternal
+                                ? project.externalContributionsCount || 0
+                                : project.contributions.totalCount
+                            }
                           />
-                          <Text
-                            fontSize={14}
-                            color={project.archived ? 'gray.500' : 'gray.900'}
-                            as="div">
-                            <FormattedNumber
-                              number={
-                                project.isExternal
-                                  ? project.externalParticipantsCount || 0
-                                  : project.contributors.totalCount +
-                                    project.anonymousVotes.totalCount +
-                                    project.anonymousReplies?.totalCount
-                              }
-                            />
-                          </Text>
-                        </Flex>
-                      )) ||
-                        null}
-                    </Flex>
-                  )}
-                </Flex>
+                        </Text>
+                      </Flex>
+                    )) ||
+                      null}
+                    {(project.isParticipantsCounterDisplayable && (
+                      <Flex direction="row" alignItems="center">
+                        <Icon
+                          name={CapUIIcon.UserO}
+                          size={CapUIIconSize.Md}
+                          color={project.archived ? 'gray.500' : 'gray.700'}
+                          mr={1}
+                        />
+                        <Text
+                          fontSize={14}
+                          color={project.archived ? 'gray.500' : 'gray.900'}
+                          as="div">
+                          <FormattedNumber
+                            number={
+                              project.isExternal
+                                ? project.externalParticipantsCount || 0
+                                : project.contributors.totalCount +
+                                  project.anonymousVotes.totalCount +
+                                  project.anonymousReplies?.totalCount
+                            }
+                          />
+                        </Text>
+                      </Flex>
+                    )) ||
+                      null}
+                  </Flex>
+                )}
               </Flex>
             </Card>
           </Box>
