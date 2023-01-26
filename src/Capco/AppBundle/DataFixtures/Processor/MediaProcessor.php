@@ -7,7 +7,6 @@ namespace Capco\AppBundle\DataFixtures\Processor;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Fidry\AliceDataFixtures\ProcessorInterface;
-use Sonata\ClassificationBundle\Model\ContextInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
@@ -44,7 +43,7 @@ class MediaProcessor implements ProcessorInterface
         if ($object instanceof Media) {
             $this->referenceMap[$id] = $object->getProviderReference();
 
-            $object->setContext(ContextInterface::DEFAULT_CONTEXT);
+            $object->setContext('default');
 
             $object->setBinaryContent(
                 $this->projectDir . '/fixtures/files/' . $object->getBinaryContent()

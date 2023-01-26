@@ -2,31 +2,6 @@ sonata_doctrine_orm_admin:
     templates:
         form: [CapcoAdminBundle:Form:form_admin_fields.html.twig]
 
-sonata_classification:
-    class:
-        tag: Capco\ClassificationBundle\Entity\Tag
-        category: Capco\ClassificationBundle\Entity\Category
-        collection: Capco\ClassificationBundle\Entity\Collection
-        context: Capco\ClassificationBundle\Entity\Context
-        media: Capco\MediaBundle\Entity\Media
-    admin:
-        tag:
-            class: Sonata\ClassificationBundle\Admin\TagAdmin
-            controller: Sonata\ClassificationBundle\Controller\CRUDController
-            translation: SonataClassificationBundle
-        category:
-            class: Sonata\ClassificationBundle\Admin\CategoryAdmin
-            controller: Sonata\ClassificationBundle\Controller\CategoryAdminController
-            translation: SonataClassificationBundle
-        collection:
-            class: Sonata\ClassificationBundle\Admin\CollectionAdmin
-            controller: Sonata\ClassificationBundle\Controller\CRUDController
-            translation: SonataClassificationBundle
-        context:
-            class: Sonata\ClassificationBundle\Admin\ContextAdmin
-            controller: Sonata\ClassificationBundle\Controller\CRUDController
-            translation: SonataClassificationBundle
-
 sonata_intl:
     timezone:
         detectors:

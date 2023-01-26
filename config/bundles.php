@@ -44,7 +44,6 @@ return [
     Http\HttplugBundle\HttplugBundle::class => ['all' => true],
     // oauth user
     HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
-    Sonata\ClassificationBundle\SonataClassificationBundle::class => ['all' => true],
 
     // sonata media
     Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle::class => ['all' => true],
