@@ -84,9 +84,8 @@ class ProposalVoter extends AbstractOwnerableVoter
     private static function canFusion(array $proposals, User $viewer): bool
     {
         foreach ($proposals as $proposal) {
-            if (!$proposal->viewerIsAdminOrOwner($viewer)) {
-                return false;
-            }
+            $project = $proposal->getProject();
+            return self::isAdminOrOwnerOrMember($project, $viewer);
         }
 
         return true;
