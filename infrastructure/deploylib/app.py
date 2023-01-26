@@ -56,7 +56,7 @@ SYMFONY_ELASTICSEARCH_HOST={host}
 SYMFONY_RABBITMQ_HOST={host}
 SYMFONY_RABBITMQ_NODENAME={host}
 SYMFONY_ASSETS_HOST={asset_host}""" \
-        .format(host=Config.local_ip, asset_host=Config.asset_host)
+        .format(host=Config.local_ip, asset_host=Config.assets_host)
     print('Generating your default environment variables...')
     run('echo "%s" > .env.local' % variables)
     print(color_white + 'Created ' + color_cyan + '.env.local' + color_white + ' file')
