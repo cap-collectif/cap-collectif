@@ -4,19 +4,22 @@ namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CategoryImage;
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Exception\ViewConfigurationException;
+use Capco\AppBundle\Form\ProposalDistrictType;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -44,6 +47,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private QueryCategoryImagesResolver $categoryImagesResolver;
     private CategoryImageRepository $categoryImageRepository;
     private MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private ProposalDistrictRepository $proposalDistrictRepository;
     private Indexer $indexer;
     private ValidatorInterface $colorValidator;
     private Manager $toggleManager;
@@ -93,7 +97,10 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         $arguments = $this->districtsProcess($proposalForm, $arguments);
         $arguments = $this->categoriesProcess($proposalForm, $arguments);
 
-        $hasViewConfigurationChanged = $this->getViewConfigurationChanged($arguments, $proposalForm);
+        $hasViewConfigurationChanged = $this->getViewConfigurationChanged(
+            $arguments,
+            $proposalForm
+        );
 
         if (isset($arguments['questions'])) {
             $oldChoices = $this->getQuestionChoicesValues($proposalForm->getId());
@@ -103,7 +110,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $this->logger->error(__METHOD__.$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . $form->getErrors(true, false));
 
             throw GraphQLException::fromFormErrors($form);
         }
@@ -130,9 +137,8 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
 
     private function getViewConfigurationChanged(array $arguments, ProposalForm $proposalForm): bool
     {
-        return
-            (\array_key_exists('isGridViewEnabled', $arguments) &&
-                $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
+        return (\array_key_exists('isGridViewEnabled', $arguments) &&
+            $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
             (\array_key_exists('isListViewEnabled', $arguments) &&
                 $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
             (\array_key_exists('isMapViewEnabled', $arguments) &&
@@ -162,8 +168,10 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         }
     }
 
-    private function associateNewCategoryImageToProposalCategory(ProposalForm $proposalForm, array $arguments): array
-    {
+    private function associateNewCategoryImageToProposalCategory(
+        ProposalForm $proposalForm,
+        array $arguments
+    ): array {
         if (isset($arguments['categories'])) {
             $proposalCategories = $proposalForm->getCategories();
             /** @var ProposalCategory $proposalCategory */
@@ -196,31 +204,52 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private function districtsProcess(ProposalForm $proposalForm, array $arguments): array
     {
         if (isset($arguments['districts'])) {
-            $districtsIds= array_map(function ($districtGlobalId) {
-                return GlobalId::fromGlobalId($districtGlobalId)['id'];
-            }, $arguments['districts']);
-
-            foreach ($proposalForm->getDistricts() as $position => $district) {
-                if (!\in_array($district->getId(), $districtsIds, true)) {
-                    $deletedDistrict = [
-                        'id' => $district->getId(),
-                        'name' => 'NULL',
-                    ];
-                    array_splice($arguments['districts'], $position, 0, [$deletedDistrict]);
+            $updateDistricts = [];
+            $newDistricts = [];
+            foreach ($arguments['districts'] as $district) {
+                if (isset($district['id'])) {
+                    $id = GlobalId::fromGlobalId($district['id'])['id'];
+                    $updateDistricts[$id] = $district;
+                } else {
+                    $newDistricts[] = $district;
                 }
             }
 
-            foreach ($arguments['districts'] as $districtKey => $dataDistrict) {
-                if (isset($dataDistrict['translations'])) {
-                    foreach ($dataDistrict['translations'] as $translation) {
-                        $dataDistrict['translations'][$translation['locale']] = $translation;
+            foreach ($proposalForm->getDistricts() as $district) {
+                if (isset($updateDistricts[$district->getId()])) {
+                    $districtData = $updateDistricts[$district->getId()];
+                    unset($districtData['id']);
+                    LocaleUtils::indexTranslations($districtData);
+                    $form = $this->formFactory->create(ProposalDistrictType::class, $district);
+                    $form->submit($districtData, false);
+                    if (!$form->isValid()) {
+                        $this->logger->error(__METHOD__ . $form->getErrors(true, false));
+
+                        throw GraphQLException::fromFormErrors($form);
                     }
+                } else {
+                    $this->em->remove($district);
                 }
-                $dataDistrict = $this->defaultBorderIfEnabled($dataDistrict);
-                $dataDistrict = $this->defaultBackgroundIfEnabled($dataDistrict);
-
-                $arguments['districts'][$districtKey] = $dataDistrict;
             }
+
+            foreach ($newDistricts as $districtData) {
+                $district = new ProposalDistrict();
+                $proposalForm->addDistrict($district);
+                $form = $this->formFactory->create(ProposalDistrictType::class, $district);
+                LocaleUtils::indexTranslations($districtData);
+                $form->submit($districtData, false);
+                if (!$form->isValid()) {
+                    $this->logger->error(__METHOD__ . $form->getErrors(true, false));
+
+                    throw GraphQLException::fromFormErrors($form);
+                }
+
+                $this->em->persist($district);
+            }
+
+            $this->em->flush();
+
+            unset($arguments['districts']);
         }
 
         return $arguments;
