@@ -13,8 +13,6 @@ class ShieldListener
 {
     const AVAILABLE_ROUTES = [
         // Basics
-        'sonata_media_view',
-        'sonata_media_download',
         '_wdt',
 
         // Login

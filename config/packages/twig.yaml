@@ -60,8 +60,6 @@ services:
     Capco\AppBundle\Twig\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Twig/*'
 
-    sonata.media.twig.extension: '@Capco\AppBundle\Twig\MediaExtension'
-
     Sonata\Doctrine\Adapter\ORM\DoctrineORMAdapter: ~
 
     Sonata\Twig\Extension\TemplateExtension:
@@ -104,6 +102,6 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
-    
+
     Capco\AppBundle\Twig\SiteParameterRuntime:
         public: true

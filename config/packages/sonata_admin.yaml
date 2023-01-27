@@ -106,9 +106,6 @@ sonata_block:
         sonata.user.block.menu: ~ # used to display the menu in profile pages
         sonata.user.block.account: ~ # used to display menu option (login option)
 
-        sonata.media.block.media: ~
-        sonata.media.block.gallery: ~
-        sonata.media.block.feature_media: ~
         Capco\AdminBundle\Block\RecentPostBlockService: ~
         Capco\AdminBundle\Block\RecentContributionsBlockService: ~
         Capco\AdminBundle\Block\HelpBlockService: ~

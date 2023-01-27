@@ -5,7 +5,7 @@
     <div class="media-body">
         <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
             {% if source.media %}
-                <a href="{{ path('sonata_media_download', {'id': source.media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+                <a href={{ media_public_url(source.media, 'default_small') }}>{{ source.title }}</a>
             {% endif %}
             {% if source.link %}
                 <a rel="nofollow" href="{{ source.link }}" class="external-link">{{ source.title }}</a>

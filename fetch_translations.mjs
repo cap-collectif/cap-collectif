@@ -11,7 +11,6 @@ const locales = ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 
 const domains = [
     'CapcoAppBundle',
     'SonataAdminBundle',
-    'SonataMediaBundle',
     'messages',
 ];
 
