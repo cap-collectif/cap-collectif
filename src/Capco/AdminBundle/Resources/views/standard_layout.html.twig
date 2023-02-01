@@ -54,20 +54,12 @@
                     </div>
                     {% block sonata_top_nav_menu %}
                         {% include '@CapcoApp/redux_store.html.twig' %}
-                        {% set localesData = [] %}
-                        {% if is_feature_enabled('multilangue') %}
-                            {% set locales = availableLocales(app.user) %}
-                            {% for locale in locales %}
-                                {% set localesData = localesData|merge([{ 'locale': locale.code,  'path': path('sonata.translation.locale', {'locale': locale.code})}]) %}
-                            {% endfor %}
-                        {% endif %}
                         {{ react_render_component('ToastsContainerApp', {
                             'rendering': 'client_side'
                         }) }}
                         <div class="navbar-custom-menu">
                             {{ react_render_component('AdminRightNavbarApp', {
                                 'props': {
-                                    'localesData': localesData,
                                     'currentLocale': app.request.locale,
                                 }
                             })

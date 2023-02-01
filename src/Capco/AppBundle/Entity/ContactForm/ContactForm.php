@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Entity\ContactForm;
 
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -14,12 +12,11 @@ use Capco\AppBundle\Traits\UuidTrait;
  * @ORM\Table(name="contact_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ContactFormRepository")
  */
-class ContactForm implements Translatable, SonataTranslatableInterface
+class ContactForm implements Translatable
 {
-    use UuidTrait;
-    use SonataTranslatableTrait;
-    use TranslatableTrait;
     use BodyUsingJoditWysiwygTrait;
+    use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
@@ -42,9 +39,11 @@ class ContactForm implements Translatable, SonataTranslatableInterface
         return $this->confidentialityUsingJoditWysiwyg;
     }
 
-    public function setConfidentialityUsingJoditWysiwyg(bool $confidentialityUsingJoditWysiwyg): ContactForm
-    {
+    public function setConfidentialityUsingJoditWysiwyg(
+        bool $confidentialityUsingJoditWysiwyg
+    ): self {
         $this->confidentialityUsingJoditWysiwyg = $confidentialityUsingJoditWysiwyg;
+
         return $this;
     }
 
@@ -112,7 +111,7 @@ class ContactForm implements Translatable, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getBodyTextExcerpt($nb);
     }
 
-    public function setBody(string $body = null): self
+    public function setBody(?string $body = null): self
     {
         $this->translate(null, false)->setBody($body);
 

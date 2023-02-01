@@ -17,15 +17,6 @@ sonata_intl:
             oc-OC: Europe/Berlin
             ur-IN: Europe/Berlin
 
-sonata_translation:
-    locale_switcher: true
-    gedmo:
-        enabled: false
-    knplabs:
-        enabled: true
-        implements:
-            - 'Capco\AppBundle\Model\SonataTranslatableInterface'
-
 knp_doctrine_behaviors:
     translatable: true
     geocodable: false

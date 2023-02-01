@@ -3,27 +3,30 @@
 namespace Capco\AdminBundle\Admin\Extension;
 
 use Capco\AppBundle\Toggle\Manager;
+use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Capco\AppBundle\Repository\LocaleRepository;
-use Capco\AppBundle\Repository\SiteParameterRepository;
-use Sonata\TranslationBundle\Checker\TranslatableChecker;
-use Sonata\TranslationBundle\Admin\Extension\Knplabs\TranslatableAdminExtension as Base;
 
-class TranslatableAdminExtension extends Base
+/**
+ * @deprecated
+ *
+ * Extends SonataAdmin to add locale switcher on translatable entities.
+ * You can remove it once sonata admin is no more used.
+ */
+class TranslatableAdminExtension extends AbstractAdminExtension
 {
-    protected $toggleManager;
-    protected $siteParamRepository;
-    protected $localeRepository;
+    /**
+     * Locale of the content currently edited.
+     */
+    public const TRANSLATABLE_LOCALE_PARAMETER = 'tl';
 
-    public function __construct(
-        TranslatableChecker $translatableChecker,
-        Manager $toggleManager,
-        SiteParameterRepository $siteParamRepository,
-        LocaleRepository $localeRepository
-    ) {
-        $this->translatableChecker = $translatableChecker;
+    protected Manager $toggleManager;
+    protected LocaleRepository $localeRepository;
+    protected ?string $translatableLocale = null;
+
+    public function __construct(Manager $toggleManager, LocaleRepository $localeRepository)
+    {
         $this->toggleManager = $toggleManager;
-        $this->siteParamRepository = $siteParamRepository;
         $this->localeRepository = $localeRepository;
     }
 
@@ -45,23 +48,81 @@ class TranslatableAdminExtension extends Base
         return $localesAsArray;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getTranslationLocales(AdminInterface $admin): array
+    public function alterNewInstance(AdminInterface $admin, $object)
     {
-        return $this->getEnabledTranslationLocales();
+        $this->setLocale($admin, $object);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefaultTranslationLocale(AdminInterface $admin): string
+    public function alterObject(AdminInterface $admin, $object)
+    {
+        $this->setLocale($admin, $object);
+    }
+
+    public function preUpdate(AdminInterface $admin, $object)
+    {
+        self::mergeNewTranslations($object);
+    }
+
+    public function prePersist(AdminInterface $admin, $object)
+    {
+        self::mergeNewTranslations($object);
+    }
+
+    public function getTranslatableLocale(AdminInterface $admin): string
+    {
+        if (null === $this->translatableLocale) {
+            $this->translatableLocale =
+                $this->getLocaleFromRequest($admin) ?? $this->getDefaultTranslationLocale($admin);
+        }
+
+        return $this->translatableLocale;
+    }
+
+    public function getPersistentParameters(AdminInterface $admin): array
+    {
+        return [self::TRANSLATABLE_LOCALE_PARAMETER => $this->getTranslatableLocale($admin)];
+    }
+
+    private function getDefaultTranslationLocale(AdminInterface $admin): string
     {
         if ($admin->hasRequest() && $admin->getRequest()->getLocale()) {
             return $admin->getRequest()->getLocale();
         }
 
         return $this->localeRepository->getDefaultCode();
+    }
+
+    private static function getLocaleFromRequest(AdminInterface $admin): ?string
+    {
+        return $admin->hasRequest()
+            ? $admin->getRequest()->get(self::TRANSLATABLE_LOCALE_PARAMETER)
+            : null;
+    }
+
+    private function setLocale(AdminInterface $admin, $object): void
+    {
+        if (method_exists($object, 'setLocale')) {
+            $object->setLocale($this->getTranslatableLocale($admin));
+        }
+    }
+
+    private static function mergeNewTranslations($object): void
+    {
+        self::checkMethodMergeNewTranslation($object);
+
+        $object->mergeNewTranslations();
+    }
+
+    private static function checkMethodMergeNewTranslation($object): void
+    {
+        if (!method_exists($object, 'mergeNewTranslations')) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The object passed to "%s()" method MUST be properly configured using' .
+                        ' "knplabs/doctrine-behaviors" in order to have a "mergeNewTranslations" method.',
+                    __METHOD__
+                )
+            );
+        }
     }
 }

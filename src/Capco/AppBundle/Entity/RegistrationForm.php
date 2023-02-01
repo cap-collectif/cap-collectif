@@ -4,9 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -17,11 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="registration_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
-class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface, Translatable
+class RegistrationForm implements QuestionnableForm, Translatable
 {
-    use UuidTrait;
-    use SonataTranslatableTrait;
     use TranslatableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion", mappedBy="registrationForm", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -54,21 +51,20 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
      */
     private bool $bottomTextUsingJoditWysiwyg = false;
 
-
     public function __construct()
     {
         $this->questions = new ArrayCollection();
     }
-
 
     public function isTopTextUsingJoditWysiwyg(): bool
     {
         return $this->topTextUsingJoditWysiwyg;
     }
 
-    public function setTopTextUsingJoditWysiwyg(bool $topTextUsingJoditWysiwyg): RegistrationForm
+    public function setTopTextUsingJoditWysiwyg(bool $topTextUsingJoditWysiwyg): self
     {
         $this->topTextUsingJoditWysiwyg = $topTextUsingJoditWysiwyg;
+
         return $this;
     }
 
@@ -77,9 +73,10 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
         return $this->bottomTextUsingJoditWysiwyg;
     }
 
-    public function setBottomTextUsingJoditWysiwyg(bool $bottomTextUsingJoditWysiwyg): RegistrationForm
+    public function setBottomTextUsingJoditWysiwyg(bool $bottomTextUsingJoditWysiwyg): self
     {
         $this->bottomTextUsingJoditWysiwyg = $bottomTextUsingJoditWysiwyg;
+
         return $this;
     }
 
@@ -107,7 +104,7 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
         return $this;
     }
 
-    public function setTopText(string $topText = null): self
+    public function setTopText(?string $topText = null): self
     {
         $this->translate(null, false)->setTopText($topText);
 
@@ -119,7 +116,7 @@ class RegistrationForm implements QuestionnableForm, SonataTranslatableInterface
         return $this->translate($locale, $fallbackToDefault)->getTopText();
     }
 
-    public function setBottomText(string $bottomText = null): self
+    public function setBottomText(?string $bottomText = null): self
     {
         $this->translate(null, false)->setBottomText($bottomText);
 

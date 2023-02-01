@@ -22,10 +22,6 @@ _sonata_admin:
     prefix: /admin
     options: { i18n: false }
 
-sonata_translation:
-    resource: '@SonataTranslationBundle/Resources/config/routes.yaml'
-    options: { i18n: false }
-
 # GraphQL
 capco_graphql:
     resource: '@CapcoAppBundle/Controller/Api/GraphQLController.php'

@@ -2,8 +2,6 @@ sonata_admin:
     title: Cap Collectif
     title_logo: favicon-64x64.png
     assets:
-        extra_stylesheets:
-            - bundles/sonatatranslation/css/sonata-translation.css
         remove_javascripts:
             - bundles/sonatacore/js/base.js
             - bundles/sonatacore/vendor/jquery/dist/jquery.min.js

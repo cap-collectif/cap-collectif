@@ -10,7 +10,6 @@ parameters:
     jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
     webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN']
-    sonata_translation.admin.extension.knplabs_translatable.class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
     knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
     knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
     knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER

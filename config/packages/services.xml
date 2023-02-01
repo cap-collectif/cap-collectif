@@ -22,13 +22,17 @@
         <service id="Capco\AdminBundle\Resolver\FeaturesCategoryResolver" autowire="true" public="true">
         </service>
 
-        <service id="sonata_translation.listener.locale_switcher" class="Capco\AdminBundle\EventListener\LocaleSwitcherListener" autowire="true">
+        <service id="Capco\AdminBundle\EventListener\LocaleSwitcherListener" autowire="true" public="true">
             <tag name="kernel.event_listener" event="sonata.block.event.sonata.admin.edit.form.top" method="onBlock"/>
             <tag name="kernel.event_listener" event="sonata.block.event.sonata.admin.show.top" method="onBlock"/>
             <tag name="kernel.event_listener" event="sonata.block.event.sonata.admin.list.table.top" method="onBlock"/>
         </service>
 
         <service id="Capco\AdminBundle\Twig\FeaturesCategoryExtension" autowire="true">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="Capco\AdminBundle\Twig\TranslationExtension" autowire="true">
             <tag name="twig.extension" />
         </service>
 
@@ -58,7 +62,6 @@
         <service id="Capco\AdminBundle\Block\LocaleSwitcherBlockService" >
             <argument>Capco\AdminBundle\Block\LocaleSwitcherBlockService</argument>
             <argument type="service" id="templating" />
-            <argument>%sonata_translation.locale_switcher_show_country_flags%</argument>
             <tag name="sonata.block" />
         </service>
 

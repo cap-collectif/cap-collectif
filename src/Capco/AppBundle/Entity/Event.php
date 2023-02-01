@@ -7,7 +7,6 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
@@ -15,7 +14,6 @@ use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -53,7 +51,6 @@ class Event implements
     TimeRangeable,
     Authorable,
     Translatable,
-    SonataTranslatableInterface,
     Ownerable,
     CreatableInterface
 {
@@ -65,7 +62,6 @@ class Event implements
     use DateHelperTrait;
     use OwnerableTrait;
     use SoftDeleteTrait;
-    use SonataTranslatableTrait;
     use TimeRangeableTrait;
     use TimestampableTrait;
     use TranslatableTrait;

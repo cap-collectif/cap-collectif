@@ -7,14 +7,12 @@ use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -34,7 +32,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Post implements
     CommentableInterface,
     IndexableInterface,
-    SonataTranslatableInterface,
     Ownerable,
     Translatable,
     CreatableInterface
@@ -44,7 +41,6 @@ class Post implements
     use CreatableTrait;
     use CustomCodeTrait;
     use OwnerableTrait;
-    use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;

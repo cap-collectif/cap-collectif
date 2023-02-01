@@ -916,11 +916,11 @@ services:
 
     Capco\AdminBundle\Resolver\FeaturesCategoryResolver: ~
 
-    sonata_translation.listener.locale_switcher: '@Capco\AdminBundle\EventListener\LocaleSwitcherListener'
-
     Capco\AdminBundle\EventListener\LocaleSwitcherListener: ~
 
     Capco\AdminBundle\Twig\FeaturesCategoryExtension: ~
+
+    Capco\AdminBundle\Twig\TranslationExtension: ~
 
     Capco\AdminBundle\Form\Extension\ModelTypeExtension: ~
 
@@ -943,21 +943,12 @@ services:
         arguments:
             - Capco\AdminBundle\Block\LocaleSwitcherBlockService
             - '@templating'
-            - '%sonata_translation.locale_switcher_show_country_flags%'
 
     Capco\AdminBundle\Twig\VarsExtension: ~
 
     Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector: ~
 
-    sonata_translation.admin.extension.knplabs_translatable:
-        class: Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension
-        arguments:
-            [
-                '@sonata_translation.checker.translatable',
-                '@Capco\AppBundle\Toggle\Manager',
-                '@Capco\AppBundle\Repository\SiteParameterRepository',
-                '@Capco\AppBundle\Repository\LocaleRepository',
-            ]
+    Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension:
         public: true
         tags:
             - { name: sonata.admin.extension }

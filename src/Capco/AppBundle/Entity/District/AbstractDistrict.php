@@ -10,9 +10,7 @@ use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Entity\Styles\BorderStyle;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Entity\Styles\BackgroundStyle;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 
 /**
  * @ORM\Table(name="district")
@@ -24,12 +22,8 @@ use Capco\AppBundle\Model\SonataTranslatableInterface;
  *      "project"         = "ProjectDistrict",
  * })
  */
-abstract class AbstractDistrict implements
-    IndexableInterface,
-    Translatable,
-    SonataTranslatableInterface
+abstract class AbstractDistrict implements IndexableInterface, Translatable
 {
-    use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;

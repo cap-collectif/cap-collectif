@@ -33,11 +33,6 @@ class LocaleSwitcherListener
         if ('sonata.block.event.sonata.admin.show.top' === $eventName) {
             $settings['locale_switcher_route'] = 'show';
         }
-        if ('sonata.block.event.sonata.admin.list.table.top' === $eventName) {
-            $settings['locale_switcher_route'] = 'list';
-
-            return;
-        }
 
         $block = new Block();
         $block->setSettings($settings);

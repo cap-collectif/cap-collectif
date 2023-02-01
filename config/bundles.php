@@ -35,7 +35,6 @@ return [
     Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     Sonata\AdminBundle\SonataAdminBundle::class => ['all' => true],
     // Translations
-    Sonata\TranslationBundle\SonataTranslationBundle::class => ['all' => true],
     Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle::class => ['all' => true],
     // sonata user admin
     //    Sonata\EasyExtendsBundle\SonataEasyExtendsBundle::class => ['all' => true],
