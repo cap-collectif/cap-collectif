@@ -85,9 +85,6 @@ sonata_admin:
                 items:
                     - Capco\AdminBundle\Admin\EmailingCampaignAdmin
                     - Capco\AdminBundle\Admin\EmailingListAdmin
-            admin.group.analytics:
-                items:
-                    - Capco\AdminBundle\Admin\AnalyticsAdmin
 
 sonata_block:
     default_contexts: [cms]
