@@ -978,11 +978,6 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-campaign-list }
 
-    Capco\AdminBundle\Admin\EmailingParametersAdmin:
-        arguments: [~, ~, Capco\AdminBundle\Controller\EmailingParametersController]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin-menu-parameters }
-
     Capco\AdminBundle\Admin\UserInviteAdmin:
         arguments:
             [
