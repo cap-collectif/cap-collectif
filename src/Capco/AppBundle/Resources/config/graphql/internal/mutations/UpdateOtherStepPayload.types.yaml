@@ -1,0 +1,7 @@
+UpdateOtherStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            step:
+                type: 'OtherStep!'
+                description: 'The updated step.'

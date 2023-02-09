@@ -1,0 +1,8 @@
+DeleteStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            stepId:
+                type: 'ID!'
+                description: 'The step ID to delete.'
+

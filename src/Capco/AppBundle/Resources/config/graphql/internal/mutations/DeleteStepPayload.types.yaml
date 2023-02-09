@@ -1,0 +1,8 @@
+DeleteStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            stepId:
+                type: 'ID!'
+                description: 'The deleted step ID.'
+

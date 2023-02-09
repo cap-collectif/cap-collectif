@@ -20,6 +20,11 @@ export interface TextEditorProps {
     required?: boolean;
     selectedLanguage: string;
     platformLanguage?: string;
+
+    buttonLabels?: {
+        cancel?: string
+        submit?: string
+    }
 }
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -29,6 +34,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
     required = false,
     selectedLanguage,
     platformLanguage = 'fr',
+    buttonLabels
 }) => {
     const intl = useIntl();
     const [isOpen, setIsOpen] = React.useState(false);
@@ -90,7 +96,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                                 variant="secondary"
                                 variantColor="hierarchy"
                                 onClick={() => setIsOpen(false)}>
-                                {intl.formatMessage({ id: 'cancel' })}
+                                {buttonLabels?.cancel ?? intl.formatMessage({ id: 'cancel' })}
                             </Button>
                             <Button
                                 variantSize="big"
@@ -100,7 +106,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                                     setValue(name, inModalValue);
                                     setIsOpen(false);
                                 }}>
-                                {intl.formatMessage({ id: 'global.validate' })}
+                                {buttonLabels?.submit ?? intl.formatMessage({ id: 'global.validate' })}
                             </Button>
                         </ButtonGroup>
                     </Modal.Footer>

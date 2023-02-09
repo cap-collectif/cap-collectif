@@ -1,8 +1,11 @@
 import React, { useRef, useMemo } from 'react';
-import JoditEditor from 'jodit-react';
-import localConfig from '~/config';
+import dynamic from 'next/dynamic';
+const importJodit = () => import('jodit-react');
+const JoditEditor = dynamic(importJodit, {
+    ssr: false,
+});
 import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui';
-import { useEffect } from '@storybook/addons';
+import {getApiUrl} from "config";
 
 type Props = {
     textAreaOnly?: boolean,
@@ -65,7 +68,7 @@ const getConfig = (
         language: platformLanguage?.substr(0, 2) || 'fr',
         placeholder,
         uploader: {
-            url: `${localConfig.getApiUrl()}/files`,
+            url: `${getApiUrl()}/files`,
             format: 'json',
             credentials: 'same-origin',
             headers: {},

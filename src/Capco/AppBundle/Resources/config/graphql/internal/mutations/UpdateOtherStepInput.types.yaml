@@ -1,0 +1,32 @@
+UpdateOtherStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            title:
+                type: 'String!'
+                description: 'The step title.'
+            stepId:
+                type: 'ID!'
+                description: 'The step ID to update.'
+            label:
+                type: 'String!'
+                description: 'The step label.'
+            body:
+                type: 'String'
+                description: 'The step description.'
+            startAt:
+                type: 'DateTime'
+                description: 'When the step start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the step end.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not the step is enabled.'
+            metaDescription:
+                type: 'DateTime'
+                description: 'Step metadescription.'
+            customCode:
+                type: 'String'
+                description: 'Step custom code.'
+

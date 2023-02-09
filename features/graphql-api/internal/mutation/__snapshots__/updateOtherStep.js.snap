@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addOtherStepMutation admin should be able to edit other step. 1`] = `
+Object {
+  "updateOtherStep": Object {
+    "step": Object {
+      "adminUrl": "/admin-next/project/UHJvamVjdDpwcm9qZWN0MQ==/update-step/other-step/T3RoZXJTdGVwOm9zdGVwMQ==",
+      "body": "updated body",
+      "customCode": "updated custom code",
+      "enabled": false,
+      "label": "updated label",
+      "metaDescription": "updated metadescription",
+      "timeRange": Object {
+        "endAt": "2023-01-03 16:29:17",
+        "startAt": "2023-01-03 16:29:17",
+      },
+      "title": "updated title",
+    },
+  },
+}
+`;

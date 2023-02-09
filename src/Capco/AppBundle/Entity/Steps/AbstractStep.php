@@ -331,7 +331,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
      */
     public function canDisplay($user = null): bool
     {
-        return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay($user);
+        return $this->getProject() && $this->getProject()->canDisplay($user);
     }
 
     public function viewerCanSeeInBo($user = null): bool

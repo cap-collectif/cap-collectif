@@ -5429,6 +5429,18 @@ type DeleteSourcePayload {
   clientMutationId: String
 }
 
+input DeleteStepInput {
+  """The step ID to delete."""
+  stepId: ID!
+  clientMutationId: String
+}
+
+type DeleteStepPayload {
+  """The deleted step ID."""
+  stepId: ID!
+  clientMutationId: String
+}
+
 """Available errors in deleteUserIdentificationCodeList mutation."""
 enum DeleteUserIdentificationCodeListErrorCode {
   """No UserIdentificationCodeList match the given global id."""
@@ -8118,6 +8130,8 @@ type Mutation {
   addQuestionnaireStep(input: AddStepInput!): AddStepPayload
   addConsultationStep(input: AddStepInput!): AddStepPayload
   addOtherStep(input: AddStepInput!): AddStepPayload
+  updateOtherStep(input: UpdateOtherStepInput!): UpdateOtherStepPayload
+  deleteStep(input: DeleteStepInput!): DeleteStepPayload
 }
 
 """A connection to a list of items."""
@@ -16904,6 +16918,42 @@ input UpdateOrganizationTranslationInput {
 
   """the locale of the translation"""
   locale: TranslationLocale!
+  clientMutationId: String
+}
+
+input UpdateOtherStepInput {
+  """The step title."""
+  title: String!
+
+  """The step ID to update."""
+  stepId: ID!
+
+  """The step label."""
+  label: String!
+
+  """The step description."""
+  body: String
+
+  """When the step start."""
+  startAt: DateTime
+
+  """When the step end."""
+  endAt: DateTime
+
+  """Whether or not the step is enabled."""
+  isEnabled: Boolean!
+
+  """Step metadescription."""
+  metaDescription: DateTime
+
+  """Step custom code."""
+  customCode: String
+  clientMutationId: String
+}
+
+type UpdateOtherStepPayload {
+  """The updated step."""
+  step: OtherStep!
   clientMutationId: String
 }
 

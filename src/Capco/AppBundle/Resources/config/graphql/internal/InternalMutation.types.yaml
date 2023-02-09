@@ -1696,3 +1696,18 @@ InternalMutation:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOtherStepMutation", [value, getUser()])'
+            updateOtherStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOtherStepMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateOtherStepInput
+                    payloadType: UpdateOtherStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOtherStepMutation", [value, getUser()])'
+            deleteStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteStepMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteStepInput
+                    payloadType: DeleteStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteStepMutation", [value, getUser()])'
+
