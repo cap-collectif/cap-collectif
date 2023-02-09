@@ -112,11 +112,13 @@ class ProjectRepository extends EntityRepository
         ProjectOwner $owner,
         int $offset,
         int $limit,
-        ?User $viewer = null
+        ?User $viewer = null,
+        array $orderBy = ['field' => 'publishedAt', 'direction' => 'DESC']
     ): array {
         return $this->getByOwnerQueryBuilder($owner, $viewer)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
+            ->orderBy("p.{$orderBy['field']}", $orderBy['direction'])
             ->getQuery()->getResult();
     }
 

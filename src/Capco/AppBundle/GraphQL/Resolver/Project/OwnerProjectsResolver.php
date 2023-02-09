@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
+use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -25,15 +26,28 @@ class OwnerProjectsResolver implements ResolverInterface
         ?User $viewer = null
     ): ConnectionInterface {
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $viewer) {
+        $orderBy = $this->getOrderBy($args);
+
+        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $viewer, $orderBy) {
             return $this->repository->getByOwnerPaginated(
                 $owner,
                 $offset,
                 $limit,
-                $viewer
+                $viewer,
+                $orderBy
             );
         });
 
         return $paginator->auto($args, $this->repository->countByOwner($owner, $viewer));
+    }
+
+    private function getOrderBy($args): ?array
+    {
+        $orderBy = $args->offsetGet('orderBy');
+        if (!$orderBy) return null;
+
+        $field = ProjectOrderField::MAP[$orderBy['field']];
+        $orderBy['field'] = $field;
+        return $orderBy;
     }
 }
