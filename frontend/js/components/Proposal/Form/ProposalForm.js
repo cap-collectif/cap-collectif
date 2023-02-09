@@ -60,6 +60,7 @@ import UserListField from '~/components/Admin/Field/UserListField';
 import { mapOpenPopup } from '~/components/Proposal/Map/Map.events';
 import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql';
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql';
+import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey';
 
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
@@ -217,7 +218,9 @@ const onSubmit = (
   if (!proposalForm.step) {
     return;
   }
-  const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
+  const availableQuestions = memoizeAvailableQuestions.cache.get(
+    getAvailabeQuestionsCacheKey(proposalForm.id),
+  );
   const responsesError = validateProposalContent(
     values,
     proposalForm,
@@ -335,7 +338,9 @@ const validate = (
   values: FormValues,
   { proposalForm, features, intl, geoJsons, isBackOfficeInput }: Props,
 ) => {
-  const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
+  const availableQuestions = memoizeAvailableQuestions.cache.get(
+    getAvailabeQuestionsCacheKey(proposalForm.id),
+  );
 
   const errors = validateProposalContent(
     values,
@@ -509,7 +514,9 @@ export class ProposalForm extends React.Component<Props, State> {
       change: changeProps,
       isBackOfficeInput,
     } = this.props;
-    const availableQuestions = memoizeAvailableQuestions.cache.get('availableQuestions');
+    const availableQuestions = memoizeAvailableQuestions.cache.get(
+      getAvailabeQuestionsCacheKey(proposalForm.id),
+    );
     const titleFieldTradKey =
       proposalForm.objectType === 'PROPOSAL'
         ? 'global.title'
@@ -788,6 +795,7 @@ export class ProposalForm extends React.Component<Props, State> {
           responses={responses}
           availableQuestions={availableQuestions}
           memoize={memoizeAvailableQuestions}
+          memoizeId={proposalForm.id}
           unstable__enableCapcoUiDs
         />
         {proposalForm.usingIllustration && (

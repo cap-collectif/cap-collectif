@@ -267,6 +267,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
@@ -671,6 +672,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
@@ -1114,6 +1116,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
@@ -1518,6 +1521,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
@@ -1922,6 +1926,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
@@ -2326,6 +2331,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       }
     }
     memoize={[Function]}
+    memoizeId="proposalForm1"
     name="responses"
     questions={
       Array [
