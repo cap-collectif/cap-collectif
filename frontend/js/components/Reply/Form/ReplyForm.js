@@ -530,14 +530,6 @@ export class ReplyForm extends React.Component<Props, State> {
                     component={renderComponent}
                     disabled={disabled}
                   />
-                  <Text color="neutral.gray.700" fontFamily="inherit">
-                    {intl.formatMessage(
-                      { id: 'information-for-the-newsletter-registration-form' },
-                      {
-                        organisationName: platformName,
-                      },
-                    )}
-                  </Text>
                 </ParticipantEmailWrapper>
               </>
             )}
