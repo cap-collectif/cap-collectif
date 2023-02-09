@@ -4,10 +4,11 @@ namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GroupController extends Controller
 {
-    public function exportAction(Request $request)
+    public function exportAction(Request $request): Response
     {
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');

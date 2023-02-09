@@ -57,13 +57,13 @@ class KnpTranslationFieldFilter extends Filter
                     $queryBuilder
                         ->expr()
                         ->like(
-                            $joinAlias . ".$field",
+                            $joinAlias . ".${field}",
                             $queryBuilder->expr()->literal('%' . $data['value'] . '%')
                         )
                 )
         );
 
-        $this->active = true;
+        $this->setActive(true);
     }
 
     /**

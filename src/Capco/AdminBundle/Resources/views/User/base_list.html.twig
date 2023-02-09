@@ -65,9 +65,7 @@ file that was distributed with this source code.
                                             {% set sortable = false %}
                                             {% if field_description.options.sortable is defined and field_description.options.sortable %}
                                                 {% set sortable             = true %}
-                                                {# NEXT_MAJOR: Remove next line and uncomment the other one #}
-                                                {% set sort_parameters      = sonata_sort_parameters(field_description, admin) %}
-                                                {# {% set sort_parameters      = admin.datagrid.sortparameters(field_description) %} #}
+                                                 {% set sort_parameters      = admin.datagrid.sortparameters(field_description) %}
                                                 {% set current              = admin.datagrid.values._sort_by is defined
                                                     and (admin.datagrid.values._sort_by == field_description
                                                         or admin.datagrid.values._sort_by.name == sort_parameters.filter._sort_by) %}
@@ -175,8 +173,7 @@ file that was distributed with this source code.
                                             <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
                                                 <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
                                                 {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
-                                                {# NEXT_MAJOR: remove the attribute check and just use .countResults() #}
-                                                ({{ attribute(admin.datagrid.pager, 'countResults') is defined ? admin.datagrid.pager.countResults() : admin.datagrid.pager.getNbResults() }})
+                                                ({{ admin.datagrid.pager.countResults() }})
                                             </label>
 
                                             <select name="action" style="width: auto; height: auto" class="form-control">
@@ -191,10 +188,6 @@ file that was distributed with this source code.
                                     {% endif %}
                                 </div>
 
-
-                                {# NEXT_MAJOR : remove this assignment #}
-                                {% set export_formats = export_formats|default(admin.exportFormats) %}
-
                                 <div class="pull-right">
                                     {% if admin.hasRoute('export') and admin.hasAccess('export') and export_formats|length %}
                                         <div class="btn-group">
@@ -206,31 +199,17 @@ file that was distributed with this source code.
                                             <ul class="dropdown-menu">
                                                 {% for format in export_formats %}
                                                 <li>
-                                                    {# NEXT_MAJOR: Remove completely next "<a>" element and uncomment the other one #}
-                                                    <a href="{{ admin.generateUrl('export', sonata_pagination_parameters(admin, 0) + {'format' : format}) }}">
-                                                        <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                                                        {{ ("export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
-                                                    </a>
-                                                    {#
                                                     <a href="{{ admin.generateUrl('export', admin.datagrid.paginationparameters(0) + {'format' : format}) }}">
                                                         <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
                                                         {{ ("export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
                                                     </a>
-                                                    #}
                                                 </li>
                                                 {%if is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::export_legacy_users')) %}
                                                     <li>
-                                                        {# NEXT_MAJOR: Remove completely next "<a>" element and uncomment the other one #}
-                                                        <a href="{{ admin.generateUrl('exportLegacyUsers', sonata_pagination_parameters(admin, 0) + {'format' : format}) }}">
-                                                            <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                                                            {{ ("secret_export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
-                                                        </a>
-                                                        {#
                                                         <a href="{{ admin.generateUrl('export', admin.datagrid.paginationparameters(0) + {'format' : format}) }}">
                                                             <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
                                                             {{ ("export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
                                                         </a>
-                                                        #}
                                                     </li>
                                                 {% endif %}
                                                 {% endfor %}
@@ -308,10 +287,7 @@ file that was distributed with this source code.
                         action="{{ admin.generateUrl('list') }}"
                         method="GET"
                         role="form"
-                        {# NEXT_MAJOR: Remove condition #}
-                        {% if attribute(admin, 'getDefaultFilterParameters') is defined %}
-                            data-default-values="{{ admin.defaultFilterParameters|json_encode }}"
-                        {% endif %}
+                        data-default-values="{{ admin.defaultFilterParameters|json_encode }}"
                     >
                         {{ form_errors(form) }}
 

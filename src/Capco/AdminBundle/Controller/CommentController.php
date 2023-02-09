@@ -5,14 +5,15 @@ namespace Capco\AdminBundle\Controller;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends CRUDController
 {
     // same as Sonata\AdminBundle\Controller\CRUDController:deleteAction
     // But we check if we are super admin or author
-    public function deleteAction($id)
+    public function deleteAction(Request $request): Response
     {
-        $request = $this->getRequest();
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
         $viewer = $this->getUser();
@@ -34,16 +35,16 @@ class CommentController extends CRUDController
             return $preResponse;
         }
 
-        if ('DELETE' == $this->getRestMethod()) {
+        if ('DELETE' == $request->getMethod()) {
             // check the csrf token
-            $this->validateCsrfToken('sonata.delete');
+            $this->validateCsrfToken($request, 'sonata.delete');
 
             $objectName = $this->admin->toString($object);
 
             try {
                 $this->admin->delete($object);
 
-                if ($this->isXmlHttpRequest()) {
+                if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(['result' => 'ok'], 200, []);
                 }
 
@@ -58,7 +59,7 @@ class CommentController extends CRUDController
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
-                if ($this->isXmlHttpRequest()) {
+                if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(['result' => 'error'], 200, []);
                 }
 
@@ -72,7 +73,7 @@ class CommentController extends CRUDController
                 );
             }
 
-            return $this->redirectTo($object);
+            return $this->redirectTo($request, $object);
         }
 
         $template = $this->get('sonata.admin.global_template_registry')->getTemplate('delete');

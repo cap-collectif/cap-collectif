@@ -3,33 +3,24 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Reporting;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReportingAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'reporting';
+    protected ?string $classnameLabel = 'reporting';
 
-    public function getFeatures()
+    public function getFeatures(): array
     {
         return ['reporting'];
     }
 
-    public function getTemplate($name)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        if ('show' === $name) {
-            return 'CapcoAdminBundle:Reporting:show.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
+        $filter
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
             ])
@@ -51,10 +42,9 @@ class ReportingAdmin extends AbstractAdmin
                 [
                     'label' => 'global.author',
                 ],
-                null,
                 [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity, $property) {
+                    'to_string_callback' => function ($entity) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
                 ]
@@ -67,11 +57,10 @@ class ReportingAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        //$this->setTemplate(
+        $list
             ->addIdentifier('object', null, [
                 'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_list_field.html.twig',
@@ -104,23 +93,19 @@ class ReportingAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
-            ->add('object', null, [
+        $show
+            ->add('relatedObject', null, [
                 'label' => 'global.contribution',
                 'template' => 'CapcoAdminBundle:Reporting:object_show_field.html.twig',
                 'mapped' => false,
             ])
-            ->add('link', null, [
-                'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:Reporting:link_show_field.html.twig',
-            ])
-            ->add('type', null, [
-                'label' => 'admin.fields.reporting.type',
-                'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
-                'mapped' => false,
-            ])
+            //            ->add('type', null, [
+            //                'label' => 'admin.fields.reporting.type',
+            //                'template' => 'CapcoAdminBundle:Reporting:type_show_field.html.twig',
+            //                'mapped' => false,
+            //            ])
             ->add('status', null, [
                 'label' => 'admin.fields.reporting.status',
                 'template' => 'CapcoAdminBundle:Reporting:status_show_field.html.twig',
@@ -143,7 +128,7 @@ class ReportingAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('edit');

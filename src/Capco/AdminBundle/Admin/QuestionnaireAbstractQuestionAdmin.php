@@ -2,34 +2,43 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
 {
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    public function postRemove($object)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->entityManager = $entityManager;
+    }
+
+    public function postRemove($object): void
     {
         // delete linked question
         if ($object->getQuestion()) {
-            $em = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager();
-            $em->remove($object->getQuestion());
+            $this->entityManager->remove($object->getQuestion());
         }
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $questionnaireId = null;
 
@@ -43,7 +52,7 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
             }
         }
 
-        $formMapper
+        $form
             ->add('position', null, [
                 'label' => 'global.position',
                 'required' => true,
@@ -64,7 +73,7 @@ class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
             );
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'delete', 'edit']);
     }

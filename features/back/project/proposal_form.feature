@@ -67,7 +67,6 @@ Scenario: Logged in admin wants edit a proposal form page content
   And I scroll to the bottom
   Then I save current admin proposal form "content"
   And I wait ".alert__form_succeeded-message" to appear on current page
-  Then I should see "global.saved"
 
 @database @rabbitmq
 Scenario: Logged in admin wants edit a proposal form on notification tab

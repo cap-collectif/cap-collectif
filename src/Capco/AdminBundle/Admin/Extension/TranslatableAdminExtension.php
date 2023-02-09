@@ -48,22 +48,22 @@ class TranslatableAdminExtension extends AbstractAdminExtension
         return $localesAsArray;
     }
 
-    public function alterNewInstance(AdminInterface $admin, $object)
+    public function alterNewInstance(AdminInterface $admin, object $object): void
     {
         $this->setLocale($admin, $object);
     }
 
-    public function alterObject(AdminInterface $admin, $object)
+    public function alterObject(AdminInterface $admin, object $object): void
     {
         $this->setLocale($admin, $object);
     }
 
-    public function preUpdate(AdminInterface $admin, $object)
+    public function preUpdate(AdminInterface $admin, object $object): void
     {
         self::mergeNewTranslations($object);
     }
 
-    public function prePersist(AdminInterface $admin, $object)
+    public function prePersist(AdminInterface $admin, object $object): void
     {
         self::mergeNewTranslations($object);
     }

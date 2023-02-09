@@ -44,11 +44,11 @@ class ProposalController extends CRUDController
         return $response;
     }
 
-    public function editAction($id = null)
+    public function editAction(Request $request): Response
     {
         $this->throwIfNoAccess();
 
-        return parent::editAction($id);
+        return parent::editAction($request);
     }
 
     private function throwIfNoAccess()

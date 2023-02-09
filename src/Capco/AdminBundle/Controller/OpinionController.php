@@ -7,18 +7,17 @@ use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
-use Sonata\AdminBundle\Templating\TemplateRegistry;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class OpinionController extends Controller
+class OpinionController extends AbstractSonataCrudController
 {
-    public function listAction(Request $request = null)
+    public function listAction(Request $request): Response
     {
         if (false === $this->admin->isGranted('LIST')) {
             throw $this->createAccessDeniedException();
@@ -58,7 +57,7 @@ class OpinionController extends Controller
         );
     }
 
-    public function createAction(Request $request = null)
+    public function createAction(Request $request): Response
     {
         // the key used to lookup the template
         $templateKey = 'edit';
@@ -125,15 +124,17 @@ class OpinionController extends Controller
 
                     $this->addFlash(
                         'sonata_flash_success',
-                        $this->admin->trans(
-                            'success.creation.flash',
-                            ['name' => $this->escapeHtml($this->admin->toString($object))],
-                            'CapcoAppBundle'
-                        )
+                        $this->admin
+                            ->getTranslator()
+                            ->trans(
+                                'success.creation.flash',
+                                ['name' => $this->escapeHtml($this->admin->toString($object))],
+                                'CapcoAppBundle'
+                            )
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($object, $request);
+                    return $this->redirectTo($request, $object);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -146,11 +147,13 @@ class OpinionController extends Controller
                 if (!$this->isXmlHttpRequest($request)) {
                     $this->addFlash(
                         'sonata_flash_error',
-                        $this->admin->trans(
-                            'error.creation.flash',
-                            ['name' => $this->escapeHtml($this->admin->toString($object))],
-                            'CapcoAppBundle'
-                        )
+                        $this->admin
+                            ->getTranslator()
+                            ->trans(
+                                'error.creation.flash',
+                                ['name' => $this->escapeHtml($this->admin->toString($object))],
+                                'CapcoAppBundle'
+                            )
                     );
                 }
             } elseif ($this->isPreviewRequested($request)) {
@@ -180,7 +183,7 @@ class OpinionController extends Controller
         );
     }
 
-    public function editAction($id = null, Request $request = null)
+    public function editAction(Request $request): Response
     {
         // the key used to lookup the template
         $templateKey = 'edit';
@@ -239,15 +242,17 @@ class OpinionController extends Controller
 
                     $this->addFlash(
                         'sonata_flash_success',
-                        $this->admin->trans(
-                            'success.edition.flash',
-                            ['%name%' => $this->escapeHtml($this->admin->toString($object))],
-                            'CapcoAppBundle'
-                        )
+                        $this->admin
+                            ->getTranslator()
+                            ->trans(
+                                'success.edition.flash',
+                                ['%name%' => $this->escapeHtml($this->admin->toString($object))],
+                                'CapcoAppBundle'
+                            )
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($object, $request);
+                    return $this->redirectTo($request, $object);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -255,7 +260,7 @@ class OpinionController extends Controller
                 } catch (LockException $e) {
                     $this->addFlash(
                         'sonata_flash_error',
-                        $this->admin->trans(
+                        $this->admin->getTranslator()->trans(
                             'flash_lock_error',
                             [
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
@@ -276,7 +281,7 @@ class OpinionController extends Controller
                 if (!$this->isXmlHttpRequest($request)) {
                     $this->addFlash(
                         'sonata_flash_error',
-                        $this->admin->trans(
+                        $this->trans(
                             'error.edition.flash',
                             ['%name%' => $this->escapeHtml($this->admin->toString($object))],
                             'CapcoAppBundle'
@@ -309,44 +314,7 @@ class OpinionController extends Controller
         );
     }
 
-    public function showAction($id = null, Request $request = null)
-    {
-        $id = $request->get($this->admin->getIdParameter());
-
-        $object = $this->admin->getObject($id);
-
-        if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id : %s', $id)
-            );
-        }
-        if (!$object->canDisplay($this->getUser())) {
-            throw new ProjectAccessDeniedException();
-        }
-        if (false === $this->admin->isGranted('VIEW', $object)) {
-            throw $this->createAccessDeniedException();
-        }
-
-        $preResponse = $this->preShow($request, $object);
-        if (null !== $preResponse) {
-            return $preResponse;
-        }
-
-        $this->admin->setSubject($object);
-
-        return $this->renderWithExtraParams(
-            $this->get(TemplateRegistry::class)->getTemplate('show'),
-            [
-                'action' => 'show',
-                'object' => $object,
-                'elements' => $this->admin->getShow(),
-                'consultations' => $this->getConsultations(),
-            ],
-            null
-        );
-    }
-
-    public function deleteAction($id, Request $request = null)
+    public function deleteAction(?Request $request = null): Response
     {
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -368,9 +336,9 @@ class OpinionController extends Controller
             return $preResponse;
         }
 
-        if ('DELETE' === $this->getRestMethod($request)) {
+        if ('DELETE' === $request->getMethod()) {
             // check the csrf token
-            $this->validateCsrfToken('sonata.delete', $request);
+            $this->validateCsrfToken($request, 'sonata.delete');
             $objectName = $this->admin->toString($object);
 
             try {
@@ -381,7 +349,7 @@ class OpinionController extends Controller
 
                 $this->addFlash(
                     'sonata_flash_success',
-                    $this->admin->trans(
+                    $this->trans(
                         'success.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'CapcoAppBundle'
@@ -396,7 +364,7 @@ class OpinionController extends Controller
 
                 $this->addFlash(
                     'sonata_flash_error',
-                    $this->admin->trans(
+                    $this->trans(
                         'error.delete.flash',
                         ['%name%' => $this->escapeHtml($objectName)],
                         'CapcoAppBundle'
@@ -404,7 +372,7 @@ class OpinionController extends Controller
                 );
             }
 
-            return $this->redirectTo($object, $request);
+            return $this->redirectTo($request, $object);
         }
 
         return $this->renderWithExtraParams(

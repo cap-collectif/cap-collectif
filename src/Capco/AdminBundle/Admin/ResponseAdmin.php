@@ -3,17 +3,17 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ResponseAdmin extends CapcoAdmin
 {
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('question', null, [
                 'label' => 'admin.fields.response.question',
                 'required' => false,
@@ -26,7 +26,7 @@ class ResponseAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['edit', 'delete', 'show']);
     }

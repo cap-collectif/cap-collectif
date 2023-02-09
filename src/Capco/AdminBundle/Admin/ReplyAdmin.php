@@ -2,11 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Doctrine\DBAL\Query\QueryBuilder;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -15,8 +14,8 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ReplyAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'reply';
-    private $tokenStorage;
+    protected ?string $classnameLabel = 'reply';
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
@@ -31,15 +30,14 @@ class ReplyAdmin extends AbstractAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query
             ->leftJoin($query->getRootAliases()[0] . '.questionnaire', 'q')
             ->leftJoin('q.step', 's')
@@ -62,15 +60,18 @@ class ReplyAdmin extends AbstractAdmin
         return $query;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('questionnaire.step', null, ['label' => 'global.questionnaire'])
@@ -81,11 +82,10 @@ class ReplyAdmin extends AbstractAdmin
             ->add('published', null, ['label' => 'global.published']);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        //$this->setTemplate(
+        $list
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
@@ -104,9 +104,9 @@ class ReplyAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
@@ -124,7 +124,7 @@ class ReplyAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('list');

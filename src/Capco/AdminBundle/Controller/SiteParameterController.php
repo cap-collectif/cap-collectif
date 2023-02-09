@@ -16,7 +16,7 @@ class SiteParameterController extends Controller
      *
      * @return RedirectResponse
      */
-    protected function redirectTo($object, ?Request $request = null)
+    protected function redirectTo(Request $request, object $object): RedirectResponse
     {
         $url = $this->generateUrl('capco_admin_settings', ['category' => $object->getCategory()]);
 

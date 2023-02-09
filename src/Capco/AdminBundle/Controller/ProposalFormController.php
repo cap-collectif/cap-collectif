@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProposalFormController extends CRUDController
@@ -69,11 +70,11 @@ class ProposalFormController extends CRUDController
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $filters]));
     }
 
-    public function editAction($id = null)
+    public function editAction(Request $request): Response
     {
         $this->throwIfNoAccess();
 
-        return parent::editAction($id);
+        return parent::editAction($request);
     }
 
     private function throwIfNoAccess()

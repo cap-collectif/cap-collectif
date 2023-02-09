@@ -10,14 +10,15 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 class RecentContributionsBlockService extends AbstractBlockService
 {
     protected RecentContributionsResolver $resolver;
 
-    public function __construct($name, $templating, RecentContributionsResolver $resolver)
+    public function __construct(Environment $templating, RecentContributionsResolver $resolver)
     {
-        parent::__construct($name, $templating);
+        parent::__construct($templating);
         $this->resolver = $resolver;
     }
 
@@ -34,8 +35,10 @@ class RecentContributionsBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
-    {
+    public function execute(
+        BlockContextInterface $blockContext,
+        ?Response $response = null
+    ): Response {
         $contributions = $this->resolver->getRecentContributions(10);
 
         $parameters = [
@@ -56,7 +59,7 @@ class RecentContributionsBlockService extends AbstractBlockService
     /**
      * {@inheritdoc}
      */
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'number' => 10,

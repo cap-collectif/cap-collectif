@@ -1,7 +1,11 @@
-{% extends admin.getTemplate('base_list_field') %}
+{% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
     {% spaceless %}
-        {{ value | trans({}, 'CapcoAppBundle') }}
+        {% if value %}
+            <a href="{{ path('admin_capco_user_user_edit', {id: object.id}) }}">
+                {{ value | trans({}, 'CapcoAppBundle') }}
+            </a>
+        {% endif %}
     {% endspaceless %}
 {% endblock %}

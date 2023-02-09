@@ -3,23 +3,23 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
 class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
 {
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('position', null, [
                 'label' => 'global.position',
             ])
@@ -29,7 +29,7 @@ class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'edit', 'delete', 'show']);
     }

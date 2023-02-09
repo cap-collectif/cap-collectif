@@ -25,7 +25,7 @@ class OpinionNormalizer implements
     private $router;
     private ObjectNormalizer $normalizer;
     private $toggleManager;
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
     private $voteRepository;
     private $voteSearch;
     private ArgumentRepository $argumentRepository;

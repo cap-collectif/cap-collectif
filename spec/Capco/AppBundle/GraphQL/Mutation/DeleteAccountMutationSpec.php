@@ -35,7 +35,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\Translator;
+use Translation\Bundle\Translator\TranslatorInterface;
 
 class DeleteAccountMutationSpec extends ObjectBehavior
 {
@@ -67,7 +71,8 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         EventManager $eventManager,
         User $user,
         AnonymizeUser $anonymizeUser,
-        Publisher $publisher
+        Publisher $publisher,
+        SessionInterface $session
     ) {
         $em->getFilters()->willReturn($filterCollection);
         $em->getEventManager()->willReturn($eventManager);
@@ -106,7 +111,8 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             $mailingListRepository,
             $logger,
             $anonymizeUser,
-            $publisher
+            $publisher,
+            $session
         );
     }
 
@@ -160,7 +166,10 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         User $viewer,
         UserRepository $userRepository,
         FilterCollection $filterCollection,
-        SQLFilter $sqlFilter
+        SQLFilter $sqlFilter,
+        Session $session,
+        TranslatorInterface $translator,
+        FlashBag $flashBag
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
         $input = new Arg(['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD]);
@@ -200,6 +209,17 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             ->disable('softdeleted')
             ->shouldBeCalledOnce()
             ->willReturn($sqlFilter);
+
+        $session->getFlashBag()
+            ->shouldBeCalledOnce()
+            ->willReturn($flashBag);
+
+        $translator->trans('deleted-user', [], 'CapcoAppBundle')
+            ->shouldBeCalledOnce()
+            ->willReturn('deleted-user');
+
+        $flashBag->add('success', 'deleted-user')
+            ->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);

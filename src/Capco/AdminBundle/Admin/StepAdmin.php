@@ -23,7 +23,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,14 +33,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Sonata\Form\Type\CollectionType;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class StepAdmin extends CapcoAdmin
 {
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
-
-    protected $formOptions = ['cascade_validation' => true];
-
-    protected $labels = [
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected array $formOptions = ['cascade_validation' => true];
+    protected array $labels = [
         PresentationStep::class => 'proposal.tabs.content',
         QuestionnaireStep::class => 'global.questionnaire',
         OtherStep::class => '',
@@ -50,12 +49,33 @@ class StepAdmin extends CapcoAdmin
         CollectStep::class => 'global.collect.step.label',
     ];
 
-    public function getNewInstance()
+    private Manager $manager;
+    private ProposalFormRepository $proposalFormRepository;
+    private QuestionnaireRepository $questionnaireRepository;
+    private StatusRepository $statusRepository;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        Manager $manager,
+        ProposalFormRepository $proposalFormRepository,
+        QuestionnaireRepository $questionnaireRepository,
+        StatusRepository $statusRepository
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->manager = $manager;
+        $this->proposalFormRepository = $proposalFormRepository;
+        $this->questionnaireRepository = $questionnaireRepository;
+        $this->statusRepository = $statusRepository;
+    }
+
+    public function getNewInstance(): object
     {
         $subClass = $this->getRequest()->query->get('subclass');
         // Workaround for proposals autocompletion
         $subClass = $subClass ?: 'selection_step';
-        $object = $this->getModelManager()->getModelInstance($this->getSubClass($subClass));
+        $object = $this->createNewInstance($subClass);
 
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
@@ -64,13 +84,12 @@ class StepAdmin extends CapcoAdmin
         return $object;
     }
 
-    public function getPersistentParameters()
+    public function getPersistentParameters(): array
     {
-        $subject = $this->getSubject();
         $projectId = null;
 
-        if ($subject && $subject->getProject()) {
-            $project = $subject->getProject();
+        if ($this->hasSubject() && $this->getSubject()->getProject()) {
+            $project = $this->getSubject()->getProject();
             if ($project) {
                 $projectId = $project->getId();
             }
@@ -81,27 +100,24 @@ class StepAdmin extends CapcoAdmin
         return ['projectId' => $projectId];
     }
 
-    public function getTemplate($name)
+    protected function configure(): void
     {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Step:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
+        //$this->setTemplate('edit', 'CapcoAdminBundle:Step:edit.html.twig');
+        parent::configure();
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filter)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter->add('title', null, ['label' => 'global.title']);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $subject = $this->getSubject();
         $translator = $this->getTranslator();
         $label = $this->getLabelKey($subject);
         $title = empty($subject->getTitle()) ? $translator->trans($label) : $subject->getTitle();
-        $formMapper
+        $form
             ->with('admin.fields.step.group_general')
             ->add('title', null, [
                 'label' => 'admin.fields.step.label',
@@ -114,19 +130,19 @@ class StepAdmin extends CapcoAdmin
                 'required' => true,
             ]);
 
-        $formMapper->add('isEnabled', null, [
+        $form->add('isEnabled', null, [
             'label' => 'global.published',
             'required' => false,
         ]);
 
         if ($subject instanceof ParticipativeStepInterface) {
-            $formMapper->add('timeless', CheckboxType::class, [
+            $form->add('timeless', CheckboxType::class, [
                 'label' => 'admin.fields.step.timeless',
                 'required' => false,
             ]);
         }
         if (!$subject instanceof PresentationStep) {
-            $formMapper
+            $form
                 ->add('startAt', DateTimePickerType::class, [
                     'label' => 'admin.fields.event.start_at',
                     'format' => 'dd/MM/yyyy HH:mm',
@@ -149,7 +165,7 @@ class StepAdmin extends CapcoAdmin
             $subject instanceof CollectStep ||
             $subject instanceof QuestionnaireStep
         ) {
-            $formMapper->add('body', CKEditorType::class, [
+            $form->add('body', CKEditorType::class, [
                 'config_name' => 'admin_editor',
                 'label' => 'global.intro',
                 'required' => false,
@@ -157,7 +173,7 @@ class StepAdmin extends CapcoAdmin
         }
 
         if ($subject instanceof ConsultationStep) {
-            $formMapper
+            $form
                 ->getFormBuilder()
                 ->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event) {
                     // We get the order from the submitted data from user
@@ -186,7 +202,7 @@ class StepAdmin extends CapcoAdmin
                         ++$position;
                     }
                 });
-            $formMapper
+            $form
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'global.intro',
@@ -235,7 +251,7 @@ class StepAdmin extends CapcoAdmin
                 ])
                 ->end();
         } elseif ($subject instanceof RankingStep) {
-            $formMapper
+            $form
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'global.intro',
@@ -250,7 +266,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => true,
                 ]);
         } elseif ($subject instanceof SelectionStep) {
-            $formMapper
+            $form
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'global.intro',
@@ -263,19 +279,14 @@ class StepAdmin extends CapcoAdmin
         }
 
         if ($subject instanceof QuestionnaireStep) {
-            $formMapper->add('footer', CKEditorType::class, [
+            $form->add('footer', CKEditorType::class, [
                 'config_name' => 'admin_editor',
                 'label' => 'global.footer',
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
             ]);
-            if (
-                $this->getConfigurationPool()
-                    ->getContainer()
-                    ->get(Manager::class)
-                    ->isActive('phone_confirmation')
-            ) {
-                $formMapper->add('verification', ChoiceType::class, [
+            if ($this->manager->isActive('phone_confirmation')) {
+                $form->add('verification', ChoiceType::class, [
                     'label' => 'admin.fields.step.verification',
                     'choices' => QuestionnaireStep::$verificationLabels,
                     'translation_domain' => 'CapcoAppBundle',
@@ -283,10 +294,10 @@ class StepAdmin extends CapcoAdmin
             }
         }
 
-        $formMapper->end();
+        $form->end();
 
         if ($subject instanceof SelectionStep || $subject instanceof CollectStep) {
-            $formMapper
+            $form
                 ->with('global.vote')
                 ->add('voteType', ChoiceType::class, [
                     'label' => 'vote.type',
@@ -327,7 +338,7 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                 ])
                 ->end();
-            $formMapper
+            $form
                 ->with('admin.fields.step.group_statuses')
                 ->add(
                     'statuses',
@@ -336,7 +347,7 @@ class StepAdmin extends CapcoAdmin
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
                 ->end();
-            $formMapper
+            $form
                 ->with('requirements')
                 ->add(
                     'requirements',
@@ -354,7 +365,7 @@ class StepAdmin extends CapcoAdmin
                 ])
                 ->end();
             if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
-                $formMapper->add('defaultStatus', ModelType::class, [
+                $form->add('defaultStatus', ModelType::class, [
                     'label' => 'admin.fields.step.default_status',
                     'query' => $this->createQueryForDefaultStatus(),
                     'by_reference' => false,
@@ -363,10 +374,10 @@ class StepAdmin extends CapcoAdmin
                     'class' => Status::class,
                     'placeholder' => 'global.none',
                 ]);
-                $formMapper->end();
+                $form->end();
             }
             if ($subject instanceof CollectStep) {
-                $formMapper
+                $form
                     ->with('admin.fields.step.group_selections')
                     ->add('private', CheckboxType::class, [
                         'label' => 'admin.fields.step.private',
@@ -379,11 +390,11 @@ class StepAdmin extends CapcoAdmin
                         'required' => true,
                     ]);
             }
-            $formMapper->end();
+            $form->end();
         }
 
         if ($subject instanceof SelectionStep) {
-            $formMapper
+            $form
                 ->with('admin.fields.step.group_selections')
                 ->add('defaultSort', ChoiceType::class, [
                     'label' => 'admin.fields.step.default_sort',
@@ -395,7 +406,7 @@ class StepAdmin extends CapcoAdmin
         }
 
         if ($subject instanceof CollectStep) {
-            $formMapper
+            $form
                 ->with('admin.fields.step.group_form')
                 ->add('proposalForm', ModelType::class, [
                     'label' => 'global.formulaire',
@@ -420,7 +431,7 @@ class StepAdmin extends CapcoAdmin
         }
 
         if ($subject instanceof QuestionnaireStep) {
-            $formMapper
+            $form
                 ->with('admin.fields.step.group_form')
                 ->add('questionnaire', ModelType::class, [
                     'label' => 'global.questionnaire',
@@ -430,7 +441,7 @@ class StepAdmin extends CapcoAdmin
                 ])
                 ->end();
         }
-        $formMapper
+        $form
             ->with('admin.fields.step.advanced')
             ->add('metaDescription', null, [
                 'label' => 'global.meta.description',
@@ -449,48 +460,42 @@ class StepAdmin extends CapcoAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
-    private function createQueryForProposalForms()
+    private function createQueryForProposalForms(): ProxyQuery
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(ProposalFormRepository::class)
+        $qb = $this->proposalFormRepository
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject);
 
-        return $qb->getQuery();
+        return new ProxyQuery($qb);
     }
 
-    private function createQueryForQuestionnaires()
+    private function createQueryForQuestionnaires(): ProxyQuery
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(QuestionnaireRepository::class)
+        $qb = $this->questionnaireRepository
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
             ->setParameter('step', $subject);
 
-        return $qb->getQuery();
+        return new ProxyQuery($qb);
     }
 
-    private function createQueryForDefaultStatus()
+    private function createQueryForDefaultStatus(): ProxyQuery
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(StatusRepository::class)
+        $qb = $this->statusRepository
             ->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $subject);
 
-        return $qb->getQuery();
+        return new ProxyQuery($qb);
     }
 
     private function getLabelKey(AbstractStep $step): string

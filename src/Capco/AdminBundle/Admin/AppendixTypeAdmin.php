@@ -5,23 +5,24 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class AppendixTypeAdmin extends CapcoAdmin
 {
-    protected $classnameLabel = 'appendix_type';
-    protected $formOptions = [
+    protected ?string $classnameLabel = 'appendix_type';
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -30,11 +31,9 @@ class AppendixTypeAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
@@ -44,16 +43,15 @@ class AppendixTypeAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -62,9 +60,9 @@ class AppendixTypeAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('title', null, [
                 'label' => 'global.title',
                 'required' => true,
@@ -73,5 +71,10 @@ class AppendixTypeAdmin extends CapcoAdmin
                 'label' => 'global.help.text',
                 'required' => false,
             ]);
+    }
+
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->clearExcept(['create', 'delete', 'list', 'edit']);
     }
 }

@@ -2,16 +2,16 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectTypeController extends CRUDController
 {
-    public function editAction($id = null)
+    public function editAction(Request $request): Response
     {
-        $request = $this->getRequest();
         // the key used to lookup the template
         $templateKey = 'edit';
 
@@ -45,14 +45,17 @@ class ProjectTypeController extends CRUDController
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
 
                 try {
                     $existingObject = $this->admin->update($submittedObject);
 
-                    if ($this->isXmlHttpRequest()) {
+                    if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(
                             [
                                 'result' => 'ok',
@@ -88,7 +91,7 @@ class ProjectTypeController extends CRUDController
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($existingObject);
+                    return $this->redirectTo($request, $existingObject);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -120,7 +123,7 @@ class ProjectTypeController extends CRUDController
 
             // show an error message if the form failed validation
             if (!$isFormValid) {
-                if (!$this->isXmlHttpRequest()) {
+                if (!$this->isXmlHttpRequest($request)) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(
@@ -138,7 +141,7 @@ class ProjectTypeController extends CRUDController
                         )
                     );
                 }
-            } elseif ($this->isPreviewRequested()) {
+            } elseif ($this->isPreviewRequested($request)) {
                 // enable the preview template if the form was valid and preview was requested
                 $templateKey = 'preview';
                 $this->admin->getShow();
@@ -149,10 +152,7 @@ class ProjectTypeController extends CRUDController
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFormTheme());
 
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate($templateKey);
-
-        // $template = $this->templateRegistry->getTemplate($templateKey);
+        $template = $this->admin->getTemplateRegistry()->getTemplate($templateKey);
 
         return $this->renderWithExtraParams(
             $template,

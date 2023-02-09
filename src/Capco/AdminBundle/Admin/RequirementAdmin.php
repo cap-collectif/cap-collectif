@@ -11,19 +11,19 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RequirementAdmin extends CapcoAdmin
 {
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
     // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('position', null, [
                 'label' => 'global.position',
             ])
@@ -49,20 +49,11 @@ class RequirementAdmin extends CapcoAdmin
     }
 
     // Fields to be shown on show page
-
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-    }
+    protected function configureShowFields(ShowMapper $show): void {}
 
     // Fields to be shown on filter forms
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-    }
+    protected function configureDatagridFilters(DatagridMapper $filter): void {}
 
     // Fields to be shown on lists
-
-    protected function configureListFields(ListMapper $listMapper)
-    {
-    }
+    protected function configureListFields(ListMapper $list): void {}
 }

@@ -4,7 +4,10 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,15 +29,14 @@ class ProjectController extends \Sonata\AdminBundle\Controller\CRUDController
         }
 
         $argument = new Argument(['id' => $id]);
-        $this->get(DuplicateProjectMutation::class)->__invoke($argument);
+        $this->get(DuplicateProjectMutation::class)->__invoke($argument, $this->getUser());
 
         $this->addFlash('sonata_flash_success', 'your-project-has-been-duplicated');
 
         return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $filters]));
     }
 
-    /** @var Project */
-    public function preDelete($request, $object)
+    public function preDelete(Request $request, object $object): Response
     {
         $entityManager = $this->container->get('doctrine')->getManager();
         $indexer = $this->container->get(Indexer::class);

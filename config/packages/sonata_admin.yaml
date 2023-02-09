@@ -11,6 +11,7 @@ sonata_admin:
         layout: CapcoAdminBundle::standard_layout.html.twig
         list_block: CapcoAdminBundle:Block:block_admin_list.html.twig
         add_block: CapcoAdminBundle:Core:add_block.html.twig
+    show_mosaic_button: false
     dashboard:
         blocks:
             - {
@@ -73,9 +74,6 @@ sonata_admin:
                     - Capco\AdminBundle\Admin\SocialNetworkAdmin
                     - Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
                     - Capco\AdminBundle\Admin\ProjectDistrictAdmin
-                    - Capco\AdminBundle\Admin\MapTokenAdmin
-                    - Capco\AdminBundle\Admin\LocaleAdmin
-                    - Capco\AdminBundle\Admin\SiteFaviconAdmin
                     - Capco\AdminBundle\Admin\FontAdmin
             admin.group.pages:
                 items:
@@ -119,3 +117,8 @@ services:
     sonata.admin.action.dashboard:
         alias: 'Capco\AdminBundle\Action\DashboardAction'
         public: true
+
+    sonata.admin.request.fetcher:
+        class: 'Sonata\AdminBundle\Request\AdminFetcher'
+        public: true
+        autowire: true

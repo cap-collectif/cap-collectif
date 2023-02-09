@@ -13,7 +13,6 @@ class ViewerCanDecideProposalDecisionResolver implements ResolverInterface
     use ResolverTrait;
 
     private $authorizationChecker;
-    private $tokenStorage;
 
     public function __construct(AuthorizationChecker $authorizationChecker)
     {

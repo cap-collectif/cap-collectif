@@ -4,12 +4,11 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -19,9 +18,9 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ArgumentAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'argument';
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
-    private $tokenStorage;
+    protected ?string $classnameLabel = 'argument';
+    protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
@@ -30,21 +29,21 @@ class ArgumentAdmin extends AbstractAdmin
         TokenStorageInterface $tokenStorage
     ) {
         parent::__construct($code, $class, $baseControllerName);
+        //$this->setTemplate('edit', 'CapcoAdminBundle:Argument:edit.html.twig');
         $this->tokenStorage = $tokenStorage;
     }
 
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query
             ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
             ->innerJoin('op.consultation', 'opc')
@@ -68,25 +67,19 @@ class ArgumentAdmin extends AbstractAdmin
         return $query;
     }
 
-    public function getTemplate($name)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Argument:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
+        $filter
             ->add('type', null, ['label' => 'admin.fields.argument.type'])
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'username,email',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('published', null, ['label' => 'global.published'])
@@ -96,11 +89,9 @@ class ArgumentAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
                 'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
@@ -138,9 +129,9 @@ class ArgumentAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('type', ChoiceType::class, [
                 'label' => 'admin.fields.argument.type',
                 'choices' => array_flip(Argument::$argumentTypesLabels),
@@ -158,7 +149,7 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
+                'to_string_callback' => function ($entity) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
@@ -172,7 +163,7 @@ class ArgumentAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
     }
 }

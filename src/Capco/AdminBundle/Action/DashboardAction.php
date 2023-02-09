@@ -29,7 +29,7 @@ final class DashboardAction
     private $templateRegistry;
     private $pool;
     private $twig;
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
     private $router;
 
     public function __construct(

@@ -22,7 +22,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
     private $proposalCollectVoteRepository;
     private $proposalSelectionVoteRepository;
     private $globalIdResolver;
-    private $tokenStorage;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,

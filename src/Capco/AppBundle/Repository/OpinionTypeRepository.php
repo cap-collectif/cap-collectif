@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * OpinionTypeRepository.
@@ -47,7 +48,7 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOrderedRootNodesQuery(?Consultation $consultation = null)
+    public function getOrderedRootNodesQueryBuilder(?Consultation $consultation = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('ot')
             ->andWhere('ot.parent is NULL')
@@ -58,7 +59,7 @@ class OpinionTypeRepository extends EntityRepository
             $qb->andWhere('ot.consultation IS NULL');
         }
 
-        return $qb->getQuery();
+        return $qb;
     }
 
     /**

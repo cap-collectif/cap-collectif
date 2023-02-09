@@ -14,8 +14,10 @@ class HelpBlockService extends AbstractBlockService
         return 'Besoin d\'aide ?';
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
-    {
+    public function execute(
+        BlockContextInterface $blockContext,
+        ?Response $response = null
+    ): Response {
         return $this->renderResponse(
             $blockContext->getTemplate(),
             ['settings' => $blockContext->getSettings(), 'block' => $blockContext->getBlock()],
@@ -23,7 +25,7 @@ class HelpBlockService extends AbstractBlockService
         );
     }
 
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'title' => 'Besoin d\'aide ?',

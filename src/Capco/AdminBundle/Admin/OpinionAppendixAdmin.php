@@ -3,24 +3,23 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OpinionAppendixAdmin extends AbstractAdmin
 {
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'type',
     ];
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $subject = $this->getSubject();
 
-        $formMapper
+        $form
             ->add('type', TextType::class, [
                 'label' => 'global.type',
                 'mapped' => false,
@@ -40,7 +39,7 @@ class OpinionAppendixAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'delete', 'edit', 'show']);
     }

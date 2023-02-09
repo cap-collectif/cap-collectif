@@ -2,34 +2,33 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class NewsletterSubscriptionAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'newsletter_subscription';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'newsletter_subscription';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'email',
     ];
 
-    public function getFeatures()
+    public function getFeatures(): array
     {
         return ['newsletter'];
     }
 
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return ['csv'];
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('email', null, [
                 'label' => 'share.mail',
             ])
@@ -41,11 +40,9 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('email', null, [
                 'label' => 'share.mail',
             ])
@@ -66,9 +63,9 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('email', null, [
                 'label' => 'share.mail',
             ])
@@ -78,9 +75,9 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('email', null, [
                 'label' => 'share.mail',
             ])
@@ -93,7 +90,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
+        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
     }
 }

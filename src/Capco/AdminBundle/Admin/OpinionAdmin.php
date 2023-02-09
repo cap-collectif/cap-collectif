@@ -6,14 +6,14 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Doctrine\ORM\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Sonata\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,12 +21,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class OpinionAdmin extends CapcoAdmin
 {
-    protected $classnameLabel = 'proposal';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected ?string $classnameLabel = 'proposal';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    protected $formOptions = ['cascade_validation' => true];
-    private $tokenStorage;
-    private $opinionTypeRepository;
+    protected array $formOptions = ['cascade_validation' => true];
+    private TokenStorageInterface $tokenStorage;
+    private OpinionTypeRepository $opinionTypeRepository;
 
     public function __construct(
         string $code,
@@ -40,36 +40,19 @@ class OpinionAdmin extends CapcoAdmin
         $this->opinionTypeRepository = $opinionTypeRepository;
     }
 
-    public function getTemplate($name)
+    public function getPersistentParameters(): array
     {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Opinion:list.html.twig';
-        }
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Opinion:edit.html.twig';
-        }
-        if ('delete' === $name) {
-            return 'CapcoAdminBundle:Opinion:delete.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
-    }
-
-    public function getPersistentParameters()
-    {
-        $subject = $this->getSubject();
-        $opinionTypeId = null;
-
-        if ($subject && $subject->getOpinionType()) {
-            $opinionTypeId = $subject->getOpinionType()->getId();
-        } else {
-            $opinionTypeId = $this->getRequest()->get('opinion_type_id');
-        }
+        $opinionTypeId =
+            $this->hasSubject() && $this->getSubject()->getOpinionType()
+                ? $this->getSubject()
+                    ->getOpinionType()
+                    ->getId()
+                : $this->getRequest()->get('opinion_type_id');
 
         return ['opinion_type' => $opinionTypeId];
     }
 
-    public function getBatchActions()
+    public function getBatchActions(): array
     {
         return [];
     }
@@ -77,15 +60,14 @@ class OpinionAdmin extends CapcoAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         if ($user && $user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
 
         $query
             ->innerJoin($query->getRootAliases()[0] . '.consultation', 'oc')
@@ -109,12 +91,12 @@ class OpinionAdmin extends CapcoAdmin
         return $query;
     }
 
-    public function getNewInstance()
+    public function getNewInstance(): object
     {
         /** @var Opinion $opinion */
         $opinion = parent::getNewInstance();
 
-        if ($opinionTypeId = $this->request->get('opinion_type')) {
+        if ($opinionTypeId = $this->getRequest()->get('opinion_type')) {
             $opinionType = $this->opinionTypeRepository->find($opinionTypeId);
             $opinion->setConsultation($opinionType ? $opinionType->getConsultation() : null);
         }
@@ -122,16 +104,19 @@ class OpinionAdmin extends CapcoAdmin
         return $opinion;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->add('title', null, ['label' => 'global.title'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('consultation.step.projectAbstractStep.project', null, [
                 'label' => 'global.participative.project.label',
@@ -144,11 +129,9 @@ class OpinionAdmin extends CapcoAdmin
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
@@ -166,7 +149,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('consultation', ModelType::class, [
                 'label' => 'global.consultation',
             ])
-            ->add('voteCountTotal', IntegerType::class, [
+            ->add('dummy', IntegerType::class, [
                 'label' => 'global.vote',
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
@@ -184,20 +167,20 @@ class OpinionAdmin extends CapcoAdmin
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
+                'actions' => ['edit' => [], 'delete' => []],
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $subjectHasAppendices = $this->getSubject()
+        $subjectHasAppendices = $this->hasSubject()
             ? $this->getSubject()
                     ->getAppendices()
                     ->count() > 0
             : null;
-        $disabled = $this->getSubject() && null !== $this->getSubject()->getId();
+        $disabled = $this->hasSubject() && null !== $this->getSubject()->getId();
         $classname = $subjectHasAppendices ? '' : 'hidden';
-        $formMapper
+        $form
             ->with('admin.fields.opinion.group_content', ['class' => 'col-md-12'])
             ->end()
             ->with('admin.fields.opinion.group_appendices', ['class' => 'col-md-12 ' . $classname])
@@ -211,7 +194,7 @@ class OpinionAdmin extends CapcoAdmin
         // Appendices
         // Publication
         // Answer
-        $formMapper
+        $form
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
             ->add('author', null, ['label' => 'global.author'])
@@ -263,8 +246,8 @@ class OpinionAdmin extends CapcoAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
-        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export', 'show']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
     }
 }

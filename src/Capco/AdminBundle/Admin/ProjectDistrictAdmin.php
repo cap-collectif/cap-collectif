@@ -2,14 +2,19 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 
 class ProjectDistrictAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'project_district';
+    protected ?string $classnameLabel = 'project_district';
 
-    public function getTemplate($name)
+    public function __construct(string $code, string $class, string $baseControllerName)
     {
-        return 'CapcoAdminBundle:ProjectDistrict:list.html.twig';
+        parent::__construct($code, $class, $baseControllerName);
+    }
+
+    protected function configure(): void
+    {
+        //$this->setTemplate('list', 'CapcoAdminBundle:ProjectDistrict:list.html.twig');
+        parent::configure();
     }
 }

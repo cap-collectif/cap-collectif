@@ -3,73 +3,80 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\MenuItem;
-use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\MenuItemRepository;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MenuItemAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'menu_item';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'menu_item';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    public function createQuery($context = 'list')
-    {
-        $resolver = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(MenuItemResolver::class);
+    private MenuItemResolver $resolver;
+    private MenuItemRepository $repository;
 
-        $all = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(MenuItemRepository::class)
-            ->findAll();
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        MenuItemResolver $resolver,
+        MenuItemRepository $repository
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->resolver = $resolver;
+        $this->repository = $repository;
+    }
+
+    public function createQuery(): ProxyQueryInterface
+    {
+        $all = $this->repository->findAll();
 
         $ids = [];
         foreach ($all as $mi) {
-            if ($resolver->hasEnabledFeatures($mi)) {
+            if ($this->resolver->hasEnabledFeatures($mi)) {
                 $ids[] = $mi->getId();
             }
         }
 
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':ids'));
         $query->setParameter('ids', $ids);
 
         return $query;
     }
 
-    public function prePersist($menuItem)
+    public function prePersist($object): void
     {
-        $this->manageLink($menuItem);
+        $this->manageLink($object);
     }
 
-    public function preUpdate($menuItem)
+    public function preUpdate($object): void
     {
-        $this->manageLink($menuItem);
+        $this->manageLink($object);
     }
 
-    public function getBatchActions()
+    public function getBatchActions(): array
     {
         return [];
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
-            ->add('title', KnpTranslationFieldFilter::class, [
+        $filter
+            ->add('title', null, [
                 'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
@@ -84,7 +91,6 @@ class MenuItemAdmin extends AbstractAdmin
                 [
                     'label' => 'admin.fields.menu_item.parent',
                 ],
-                EntityType::class,
                 [
                     'query_builder' => $this->createParentsItemQuery(),
                 ]
@@ -92,16 +98,14 @@ class MenuItemAdmin extends AbstractAdmin
             ->add('Page', null, [
                 'label' => 'admin.fields.menu_item.page',
             ])
-            ->add('link', KnpTranslationFieldFilter::class, [
+            ->add('link', null, [
                 'label' => 'global.link',
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
@@ -142,9 +146,9 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('title', TextType::class, [
                 'label' => 'global.title',
             ])
@@ -170,7 +174,7 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
         $subject = $this->getSubject();
 
-        $formMapper
+        $form
             ->add('Page', ModelType::class, [
                 'label' => 'admin.fields.menu_item.page',
                 'required' => false,
@@ -185,10 +189,10 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
         $subject = $this->getSubject();
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -211,13 +215,13 @@ class MenuItemAdmin extends AbstractAdmin
                 'label' => 'admin.fields.menu_item.page',
             ]);
         if (null === $subject->getPage()) {
-            $showMapper->add('link', null, [
+            $show->add('link', null, [
                 'label' => 'global.link',
                 'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
             ]);
         }
 
-        $showMapper
+        $show
             ->add('createdAt', null, [
                 'label' => 'global.creation',
             ])
@@ -226,8 +230,9 @@ class MenuItemAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
+        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
     }
 
     private function manageLink($menuItem)
@@ -256,9 +261,9 @@ class MenuItemAdmin extends AbstractAdmin
         }
     }
 
-    private function createParentsItemQuery()
+    private function createParentsItemQuery(): QueryBuilder
     {
-        return $this->modelManager
+        return $this->getModelManager()
             ->createQuery($this->getClass(), 'mi')
             ->leftJoin('mi.translations', 'mit')
             ->where('mi.parent IS NULL')
@@ -268,9 +273,9 @@ class MenuItemAdmin extends AbstractAdmin
             ->setParameter('blankLink', '');
     }
 
-    private function createPageQuery()
+    private function createPageQuery(): QueryBuilder
     {
-        return $this->modelManager
+        return $this->getModelManager()
             ->createQuery('CapcoAppBundle:Page', 'p')
             ->where('p.isEnabled = :enabled')
             ->setParameter('enabled', true);

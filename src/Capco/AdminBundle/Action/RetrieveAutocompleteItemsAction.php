@@ -17,6 +17,7 @@ use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\AdminBundle\Filter\FilterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ final class RetrieveAutocompleteItemsAction
      */
     private $pool;
 
-    /** @var UserSearch $userSearch */
+    /** @var UserSearch */
     private $userSearch;
 
     public function __construct(Pool $pool, UserSearch $userSearch)
@@ -48,7 +49,9 @@ final class RetrieveAutocompleteItemsAction
      */
     public function __invoke(Request $request)
     {
-        $admin = $this->pool->getInstance($request->get('admin_code'));
+        $admin = $this->pool->getInstance(
+            $request->get('admin_code') ?? $request->get('_sonata_admin')
+        );
         $admin->setRequest($request);
         $context = $request->get('_context', '');
 
@@ -123,18 +126,20 @@ final class RetrieveAutocompleteItemsAction
 
                     foreach ($properties as $property) {
                         $getter = 'get' . ucfirst($property);
-                        $label .= $user->$getter() . ' - ';
+                        $label .= $user->{$getter}() . ' - ';
                     }
 
                     $items[] = ['id' => $user->getId(), 'label' => rtrim($label, ' - ')];
                 }
+
+                return new JsonResponse([
+                    'status' => 'OK',
+                    'more' => false,
+                    'items' => $items,
+                ]);
             }
 
-            return new JsonResponse([
-                'status' => 'OK',
-                'more' => false,
-                'items' => $items,
-            ]);
+            $property = 'username';
         }
         // END CUSTOM CAPCO CODE
 
@@ -203,10 +208,11 @@ final class RetrieveAutocompleteItemsAction
         $datagrid->setValue('_page', null, $request->query->get($reqParamPageNumber, 1));
         $datagrid->buildPager();
 
+        /** @var Pager $pager */
         $pager = $datagrid->getPager();
 
         $items = [];
-        $results = $pager->getResults();
+        $results = $pager->getCurrentPageResults();
 
         foreach ($results as $entity) {
             if (null !== $toStringCallback) {

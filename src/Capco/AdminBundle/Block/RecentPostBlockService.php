@@ -4,33 +4,40 @@ namespace Capco\AdminBundle\Block;
 
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
+use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\Form\Validator\ErrorElement;
-use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
-class RecentPostBlockService extends AbstractAdminBlockService
+class RecentPostBlockService extends AbstractBlockService implements EditableBlockService
 {
     protected PostRepository $postRepository;
     protected Manager $toggleManager;
 
     public function __construct(
-        $name,
-        EngineInterface $templating,
+        Environment $templating,
         PostRepository $repository,
         Manager $manager
     ) {
-        parent::__construct($name, $templating);
+        parent::__construct($templating);
 
         $this->postRepository = $repository;
         $this->toggleManager = $manager;
     }
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
+    {
+        $this->configureEditForm($form, $block);
+    }
+
+    public function configureEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $formMapper->add('settings', 'sonata_type_immutable_array', [
             'keys' => [
@@ -44,8 +51,10 @@ class RecentPostBlockService extends AbstractAdminBlockService
     /**
      * {@inheritdoc}
      */
-    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
-    {
+    public function execute(
+        BlockContextInterface $blockContext,
+        ?Response $response = null
+    ): Response {
         if (
             $blockContext->getSetting('toggle') &&
             !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
@@ -68,7 +77,7 @@ class RecentPostBlockService extends AbstractAdminBlockService
         return 'Recent Posts';
     }
 
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'number' => 5,
@@ -80,5 +89,14 @@ class RecentPostBlockService extends AbstractAdminBlockService
 
     public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
     {
+    }
+
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
+    {
+    }
+
+    public function getMetadata(): MetadataInterface
+    {
+        return new Metadata($this->getName());
     }
 }

@@ -5,96 +5,93 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'proposal';
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
-    private $tokenStorage;
-    private $indexer;
+    protected ?string $classnameLabel = 'proposal';
+    protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
+    private TokenStorageInterface $tokenStorage;
+    private Indexer $indexer;
+    private ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage,
-        Indexer $indexer
+        Indexer $indexer,
+        ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
+        EntityManagerInterface $entityManager
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
         $this->indexer = $indexer;
+        $this->elasticsearchDoctrineListener = $elasticsearchDoctrineListener;
+        $this->entityManager = $entityManager;
     }
 
-    public function preRemove($object)
+    public function preRemove($object): void
     {
         $this->indexer->remove(\get_class($object), $object->getId());
         $this->indexer->finishBulk();
         parent::preRemove($object);
     }
 
-    public function postUpdate($object)
+    public function postUpdate($object): void
     {
-        /** @var Proposal $object */
-        $container = $this->getConfigurationPool()->getContainer();
-        if ($container) {
-            $elasticsearchDoctrineListener = $container->get(ElasticsearchDoctrineListener::class);
+        // @var Proposal $object
 
-            // Index Proposal
-            $elasticsearchDoctrineListener->addToMessageStack($object);
+        // Index Proposal
+        $this->elasticsearchDoctrineListener->addToMessageStack($object);
 
-            // Index Comments
-            $comments = $object->getComments();
-            if (null !== $comments) {
-                array_map(static function ($comment) use ($elasticsearchDoctrineListener) {
-                    return $elasticsearchDoctrineListener->addToMessageStack($comment);
-                }, $comments->toArray());
-            }
-
-            // Index votes
-            $collectVotes = $object->getCollectVotes()->toArray();
-            $selectionVotes = $object->getSelectionVotes()->toArray();
-            $votes = array_merge($collectVotes, $selectionVotes);
-            if (!empty($votes)) {
-                array_map(static function ($vote) use ($elasticsearchDoctrineListener) {
-                    $elasticsearchDoctrineListener->addToMessageStack($vote);
-                }, $votes);
-            }
+        // Index Comments
+        $comments = $object->getComments();
+        if (null !== $comments) {
+            array_map(static function ($comment) {
+                $this->elasticsearchDoctrineListener->addToMessageStack($comment);
+            }, $comments->toArray());
         }
+
+        // Index votes
+        $collectVotes = $object->getCollectVotes()->toArray();
+        $selectionVotes = $object->getSelectionVotes()->toArray();
+        $votes = array_merge($collectVotes, $selectionVotes);
+        if (!empty($votes)) {
+            array_map(static function ($vote) {
+                $this->elasticsearchDoctrineListener->addToMessageStack($vote);
+            }, $votes);
+        }
+
         parent::postUpdate($object);
     }
 
-    public function getList()
+    public function getList(): FieldDescriptionCollection
     {
         // Remove APC Cache for soft delete
-        $em = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
-        $em->getConfiguration()
+        $this->entityManager
+            ->getConfiguration()
             ->getResultCacheImpl()
             ->deleteAll();
 
         return parent::getList();
     }
 
-    public function getObject($id)
+    public function getObject($id): ?object
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            $em = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager();
-            $filters = $em->getFilters();
+            $filters = $this->entityManager->getFilters();
             if ($filters->isEnabled('softdeleted')) {
                 $filters->disable('softdeleted');
             }
@@ -106,24 +103,19 @@ class ProposalAdmin extends AbstractAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN') || $user->hasRole('ROLE_ADMIN')) {
-            $em = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager();
-            $filters = $em->getFilters();
+            $filters = $this->entityManager->getFilters();
             if ($filters->isEnabled('softdeleted')) {
                 $filters->disable('softdeleted');
             }
 
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         // Not published are not visible
         // Others depends on project visibility
         $query
@@ -153,11 +145,9 @@ class ProposalAdmin extends AbstractAdmin
         return $query;
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('fullReference', null, ['label' => 'global.reference'])
             ->add('titleInfo', null, [
                 'label' => 'global.title',
@@ -177,7 +167,7 @@ class ProposalAdmin extends AbstractAdmin
                 'label' => 'global.status',
                 'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
             ])
-            ->add('state', null, [
+            ->add('publicationStatus', null, [
                 'mapped' => false,
                 'label' => 'global.state',
                 'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
@@ -191,57 +181,50 @@ class ProposalAdmin extends AbstractAdmin
     }
 
     // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $currentUser = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('security.token_storage')
-            ->getToken()
-            ->getUser();
+        $currentUser = $this->tokenStorage->getToken()->getUser();
 
-        $datagridMapper
+        $filter
             ->add('title', null, ['label' => 'global.title'])
             ->add('reference', null, ['label' => 'global.ref'])
             ->add('published', null, ['label' => 'global.published'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('trashedStatus', null, ['label' => 'project.trash'])
             ->add('draft', null, ['label' => 'proposal.state.draft'])
-            ->add(
-                'updateAuthor',
-                ModelAutocompleteFilter::class,
-                ['label' => 'admin.fields.proposal.updateAuthor'],
-                null,
-                [
+            ->add('updateAuthor', ModelAutocompleteFilter::class, [
+                'field_options' => [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity, $property) {
+                    'label' => 'admin.fields.proposal.updateAuthor',
+                    'to_string_callback' => function ($entity) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
-                ]
-            )
-            ->add('district', null, ['label' => 'proposal.district'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                ],
             ])
-            ->add(
-                'likers',
-                ModelAutocompleteFilter::class,
-                ['label' => 'admin.fields.proposal.likers'],
-                null,
-                [
+            ->add('district', null, ['label' => 'proposal.district'])
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity, $property) {
+                    'to_string_callback' => function ($entity) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
-                ]
-            )
+                ],
+            ])
+            ->add('likers', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'admin.fields.proposal.likers',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
+            ])
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $datagridMapper->add('deletedAt', null, ['label' => 'global.deleted']);
+            $filter->add('deletedAt', null, ['label' => 'global.deleted']);
         }
-        $datagridMapper
+        $filter
             ->add('status', null, ['label' => 'global.status'])
             ->add('estimation', null, ['label' => 'admin.fields.proposal.estimation'])
             ->add('proposalForm.step.projectAbstractStep.project', null, [
@@ -250,7 +233,7 @@ class ProposalAdmin extends AbstractAdmin
             ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['batch', 'list', 'edit']);
     }

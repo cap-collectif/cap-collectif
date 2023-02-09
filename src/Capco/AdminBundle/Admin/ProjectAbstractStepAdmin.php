@@ -2,34 +2,43 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ProjectAbstractStepAdmin extends CapcoAdmin
 {
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    public function postRemove($object)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->entityManager = $entityManager;
+    }
+
+    public function postRemove($object): void
     {
         // delete linked step
         if ($object->getStep()) {
-            $em = $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager();
-            $em->remove($object->getStep());
+            $this->entityManager->remove($object->getStep());
         }
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $projectId = null;
 
@@ -43,7 +52,7 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
             }
         }
 
-        $formMapper
+        $form
             ->add('position', null, [
                 'label' => 'global.position',
             ])
@@ -63,7 +72,7 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
             );
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'delete', 'edit', 'show']);
     }

@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\Form\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -19,28 +19,36 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class OpinionTypeAdmin extends AbstractAdmin
 {
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
+    private ConsultationRepository $consultationRepository;
+    private OpinionTypeRepository $repository;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        ConsultationRepository $consultationRepository,
+        OpinionTypeRepository $repository
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
+        $this->consultationRepository = $consultationRepository;
+        $this->repository = $repository;
+        if (!$this->hasSubject()) {
+            $this->setSubject(new OpinionType());
+        }
     }
 
-    public function getPersistentParameters()
+    public function getPersistentParameters(): array
     {
         $subject = $this->getSubject();
         $consultationId = null;
-        $consultationName = null;
 
         if (
             $this->hasParentFieldDescription() &&
@@ -72,28 +80,24 @@ class OpinionTypeAdmin extends AbstractAdmin
         ];
     }
 
-    public function getTemplate($name)
+    public function prePersist($object): void
     {
-        if ('edit' === $name || 'create' === $name) {
-            return 'CapcoAdminBundle:OpinionType:edit.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
-    }
-
-    public function prePersist($type)
-    {
-        if (!$type->getConsultation()) {
-            $consultationId = $this->getPersistentParameter('consultation_id');
-            $consultation = $this->getConfigurationPool()
-                ->getContainer()
-                ->get(ConsultationRepository::class)
-                ->find($consultationId);
-            $type->setConsultation($consultation);
+        if (!$object->getConsultation()) {
+            $object->setConsultation(
+                $this->consultationRepository->find(
+                    $this->getPersistentParameter('consultation_id')
+                )
+            );
         }
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configure(): void
+    {
+        // $this->setTemplate('edit', 'CapcoAdminBundle:OpinionType:edit.html.twig');
+        parent::configure();
+    }
+
+    protected function configureFormFields(FormMapper $form): void
     {
         $commentSystemChoices = OpinionType::$commentSystemLabels;
         $user = $this->tokenStorage->getToken()->getUser();
@@ -101,7 +105,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             unset($commentSystemChoices['opinion_type.comment_system.ok']);
         }
 
-        $formMapper
+        $form
             ->with('admin.fields.opinion_type.group_info', ['class' => 'col-md-12'])
             ->end()
             ->with('admin.fields.opinion_type.group_options', ['class' => 'col-md-12'])
@@ -117,7 +121,7 @@ class OpinionTypeAdmin extends AbstractAdmin
         // Info
         // Options
         // Appendices
-        $formMapper
+        $form
             ->with('admin.fields.opinion_type.group_info')
             ->add('title', null, [
                 'label' => 'global.title',
@@ -162,7 +166,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_type.group_votes');
 
         if ($user->isSuperAdmin()) {
-            $formMapper->add('voteWidgetType', ChoiceType::class, [
+            $form->add('voteWidgetType', ChoiceType::class, [
                 'label' => 'vote.type',
                 'label_attr' => ['id' => 'voteWidgetType'],
                 'choices' => OpinionType::$voteWidgetLabels,
@@ -171,7 +175,7 @@ class OpinionTypeAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper
+        $form
             ->add('votesHelpText', TextareaType::class, [
                 'label' => 'admin.fields.opinion_type.votes_help_text',
                 'required' => false,
@@ -199,7 +203,7 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => false,
             ]);
         if ($user->isSuperAdmin()) {
-            $formMapper->add('commentSystem', ChoiceType::class, [
+            $form->add('commentSystem', ChoiceType::class, [
                 'label' => 'comment.type',
                 'label_attr' => ['id' => 'commentSystem'],
                 'choices' => $commentSystemChoices,
@@ -207,7 +211,7 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'required' => true,
             ]);
         }
-        $formMapper
+        $form
             ->end()
             ->with('admin.fields.opinion_type.group_appendices')
             ->add(
@@ -227,18 +231,16 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
     }
 
-    private function createQueryForParent()
+    private function createQueryForParent(): ProxyQuery
     {
         $consultationId = $this->getPersistentParameter('consultation_id');
 
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(OpinionTypeRepository::class)
+        $qb = $this->repository
             ->createQueryBuilder('ot')
             ->leftJoin('ot.consultation', 'consultation')
             ->where('consultation.id = :consultationId')
@@ -248,28 +250,6 @@ class OpinionTypeAdmin extends AbstractAdmin
             $qb->andWhere('ot.id != :otId')->setParameter('otId', $this->getSubject()->getId());
         }
 
-        return $qb->getQuery();
-    }
-
-    public function create($object)
-    {
-        $this->prePersist($object);
-        foreach ($this->getExtensions() as $extension) {
-            $extension->prePersist($this, $object);
-        }
-        $result = $this->getModelManager()->create($object);
-        // BC compatibility
-        if (null !== $result) {
-            $object = $result;
-        }
-
-        $this->postPersist($object);
-        foreach ($this->getExtensions() as $extension) {
-            $extension->postPersist($this, $object);
-        }
-
-        $this->createObjectSecurity($object);
-
-        return $object;
+        return new ProxyQuery($qb);
     }
 }

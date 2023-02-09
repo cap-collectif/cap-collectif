@@ -7,7 +7,7 @@
     <li>{% include 'SonataAdminBundle:Button:create_button.html.twig' %}</li>
 {% endblock %}
 
-{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
+{#{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}#}
 
 {% block show %}
     <div class="sonata-ba-view row">
@@ -21,7 +21,7 @@
                         <div class="box-header with-border">
                             <h4 class="box-title">
                                 {% block show_title %}
-                                    {{ admin.trans(name) }}
+                                    {{ admin.translator.trans(name) }}
                                 {% endblock %}
                             </h4>
                         </div>
@@ -29,6 +29,40 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table">
                             <tbody>
+                            <tr class="sonata-ba-view-container">
+                                <th>{{ 'global.link' | trans({}, 'CapcoAppBundle') }}</th>
+                                <td>
+                                    <div>
+                                        <p>
+                                            <a href="{{ object | capco_url(true) }}">
+                                                {{ object | capco_url(true) }}
+                                            </a>
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="sonata-ba-view-container">
+                                <th>{{ 'admin.fields.reporting.type' | trans({}, 'CapcoAppBundle') }}</th>
+                                <td>
+                                    <div>
+                                        {% if(object.Opinion is not null) %}
+                                            <span>{{ 'admin.fields.reporting.opinion'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.opinionVersion is not null) %}
+                                            <span>{{ 'global.version'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.Source is not null) %}
+                                            <span>{{ 'admin.fields.reporting.source'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.Argument is not null) %}
+                                            <span>{{ 'global.argument.label'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.Comment is not null) %}
+                                            <span>{{ 'global.comment'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.Proposal is not null) %}
+                                            <span>{{ 'admin.fields.reporting.proposal'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% elseif (object.debateArgument is not null) %}
+                                            <span>{{ 'admin.fields.reporting.debateArgument'|trans({}, 'CapcoAppBundle') }}</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
                             {% for field_name in view_group.fields %}
                                 {% block show_field %}
                                     <tr class="sonata-ba-view-container">

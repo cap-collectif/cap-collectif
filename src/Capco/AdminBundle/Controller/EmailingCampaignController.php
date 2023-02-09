@@ -7,11 +7,12 @@ use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDController
 {
-    public function listAction()
+    public function listAction(Request $request): Response
     {
         return $this->isFeatureActivated()
             ? $this->renderWithExtraParams('CapcoAdminBundle:Emailing:emailingCampaign.html.twig')

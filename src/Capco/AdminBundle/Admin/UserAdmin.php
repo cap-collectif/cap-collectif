@@ -4,15 +4,20 @@ namespace Capco\AdminBundle\Admin;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class UserAdmin extends CapcoAdmin
 {
     protected UserManagerInterface $userManager;
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
+    protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
-    public function getBatchActions()
+    public function __construct(string $code, string $class, string $baseControllerName)
+    {
+        parent::__construct($code, $class, $baseControllerName);
+    }
+
+    public function getBatchActions(): array
     {
         // have to get at least one batch action to display number of users
         $actions = parent::getBatchActions();
@@ -25,34 +30,15 @@ class UserAdmin extends CapcoAdmin
         return $actions;
     }
 
-    public function getTemplate($name)
-    {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:User:list.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
-    }
-
-    public function getExportFormats()
+    public function getExportFormats(): array
     {
         return ['csv'];
     }
 
-    public function setUserManager(UserManagerInterface $userManager): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $this->userManager = $userManager;
-    }
-
-    public function getUserManager(): UserManagerInterface
-    {
-        return $this->userManager;
-    }
-
-    protected function configureListFields(ListMapper $listMapper): void
-    {
-        unset($this->listModes['mosaic']);
-        $listMapper
+        //$this->setTemplate(
+        $list
             ->addIdentifier('username', null, [
                 'label' => 'global.fullname',
                 'template' => 'CapcoAdminBundle:User:username_list_field.html.twig',
@@ -62,7 +48,7 @@ class UserAdmin extends CapcoAdmin
                 'label' => 'global.role',
                 'template' => 'CapcoAdminBundle:User:roles_list_field.html.twig',
             ])
-            ->add('enabled', null)
+            ->add('enabled')
             ->add('isEmailConfirmed', null, [
                 'label' => 'confirmed-by-email',
                 'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig',
@@ -72,9 +58,9 @@ class UserAdmin extends CapcoAdmin
             ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at']);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filterMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $filterMapper
+        $filter
             ->add('id')
             ->add('username')
             ->add('email')
@@ -83,7 +69,7 @@ class UserAdmin extends CapcoAdmin
             ->add('phone', null, ['translation_domain' => 'CapcoAppBundle']);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->add('exportLegacyUsers', 'export_legacy_users');
 

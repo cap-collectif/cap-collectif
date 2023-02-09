@@ -4,9 +4,8 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -17,56 +16,62 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
 
 class SiteParameterAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'site_parameter';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
+    protected ?string $classnameLabel = 'site_parameter';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
 
-    public function toString($object)
+    private UpdateSiteParameterMutation $updateSiteParameterMutation;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        UpdateSiteParameterMutation $updateSiteParameterMutation
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->updateSiteParameterMutation = $updateSiteParameterMutation;
+    }
+
+    public function toString($object): string
     {
         if (!\is_object($object)) {
             return '';
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()
-                ->getContainer()
-                ->get('translator')
-                ->trans((string) $object, [], 'CapcoAppBundle');
+            return $this->getTranslator()->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
     }
 
-    public function postPersist($object)
+    public function postPersist($object): void
     {
-        $this->getConfigurationPool()->getContainer()->get(UpdateSiteParameterMutation::class)->invalidateCache($object);
+        $this->updateSiteParameterMutation->invalidateCache($object);
     }
 
-    public function postUpdate($object)
+    public function postUpdate($object): void
     {
-        $this->getConfigurationPool()->getContainer()->get(UpdateSiteParameterMutation::class)->invalidateCache($object);
+        $this->updateSiteParameterMutation->invalidateCache($object);
     }
 
     protected function getHelpText(?string $text = null): ?string
     {
         $txt = '';
-        $translator = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('translator');
         $texts = explode(' ', $text);
         if (\count($texts) > 1) {
             foreach ($texts as $splittedText) {
-                $txt .= ' ' . $translator->trans($splittedText, [], 'CapcoAppBundle');
+                $txt .= ' ' . $this->getTranslator()->trans($splittedText, [], 'CapcoAppBundle');
             }
 
             return $txt;
         }
 
-        return $translator->trans($text, [], 'CapcoAppBundle');
+        return $this->getTranslator()->trans($text, [], 'CapcoAppBundle');
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper->add('isEnabled', null, [
+        $form->add('isEnabled', null, [
             'label' => 'global.published',
             'required' => false,
         ]);
@@ -77,7 +82,7 @@ class SiteParameterAdmin extends AbstractAdmin
         // Some parameters are very specific
         switch ($subject->getKeyname()) {
             case 'homepage.jumbotron.margin':
-                $formMapper->add('value', ChoiceType::class, [
+                $form->add('value', ChoiceType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'choices' => [
@@ -92,10 +97,8 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 return;
-
-                break;
             case 'global.timezone':
-                $formMapper->add('value', ChoiceType::class, [
+                $form->add('value', ChoiceType::class, [
                     'label' => 'global.timezone',
                     'required' => false,
                     'choices' => $this->getTimezonesList(),
@@ -103,8 +106,6 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 return;
-
-                break;
             default:
                 break;
         }
@@ -121,13 +122,13 @@ class SiteParameterAdmin extends AbstractAdmin
                     $options['help'] = 'admin.help.metadescription';
                     $options['attr']['max_length'] = 160;
                 }
-                $formMapper->add('value', TextType::class, $options);
+                $form->add('value', TextType::class, $options);
 
                 break;
             case SiteParameter::TYPE_RICH_TEXT:
                 // Decode the html to be display in BO
                 // $subject->setValue(html_entity_decode($subject->getValue()));
-                $formMapper->add('value', CKEditorType::class, [
+                $form->add('value', CKEditorType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'config_name' => 'admin_editor',
@@ -136,7 +137,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
                 break;
             case SiteParameter::TYPE_INTEGER:
-                $formMapper->add('value', IntegerType::class, [
+                $form->add('value', IntegerType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'help' => $this->getHelpText($subject->getHelpText()),
@@ -144,7 +145,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
                 break;
             case SiteParameter::TYPE_JS:
-                $formMapper->add('value', TextareaType::class, [
+                $form->add('value', TextareaType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'help' => $this->getHelpText($subject->getHelpText()),
@@ -156,7 +157,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
                 break;
             case SiteParameter::TYPE_EMAIL:
-                $formMapper->add('value', EmailType::class, [
+                $form->add('value', EmailType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'attr' => ['placeholder' => 'hello@exemple.com'],
@@ -166,7 +167,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 break;
             case SiteParameter::TYPE_INTERN_URL:
             case SiteParameter::TYPE_URL:
-                $formMapper->add('value', UrlType::class, [
+                $form->add('value', UrlType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'help' => $this->getHelpText($subject->getHelpText()),
@@ -174,7 +175,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
                 break;
             case SiteParameter::TYPE_TEL_NB:
-                $formMapper->add('value', null, [
+                $form->add('value', null, [
                     'label' => 'global.value',
                     'required' => false,
                     'help' => $this->getHelpText($subject->getHelpText()),
@@ -182,7 +183,7 @@ class SiteParameterAdmin extends AbstractAdmin
 
                 break;
             case SiteParameter::TYPE_BOOLEAN:
-                $formMapper->add('value', ChoiceType::class, [
+                $form->add('value', ChoiceType::class, [
                     'label' => 'global.value',
                     'required' => false,
                     'translation_domain' => 'CapcoAppBundle',
@@ -193,12 +194,10 @@ class SiteParameterAdmin extends AbstractAdmin
                 break;
             default:
                 throw new \RuntimeException('Could not guess how to render your parameter.', 1);
-
-                break;
         }
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['edit']);
     }

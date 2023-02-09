@@ -2,47 +2,53 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Capco\AppBundle\Repository\SiteColorRepository;
 
 class SiteColorAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'site_color';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'site_color';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'isEnabled',
     ];
 
-    public function toString($object)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->entityManager = $entityManager;
+    }
+
+    public function toString($object): string
     {
         if (!\is_object($object)) {
             return '';
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()
-                ->getContainer()
-                ->get('translator')
-                ->trans((string) $object, [], 'CapcoAppBundle');
+            return $this->getTranslator()->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
     }
 
-    public function postUpdate($object)
+    public function postUpdate($object): void
     {
-        $entityManager = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager');
-        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver = $this->entityManager->getConfiguration()->getResultCacheImpl();
         $cacheDriver->delete(SiteColorRepository::getValuesIfEnabledCacheKey());
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('isEnabled', null, [
                 'label' => 'global.published',
                 'required' => false,
@@ -53,7 +59,7 @@ class SiteColorAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['edit']);
     }

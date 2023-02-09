@@ -2,29 +2,28 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class PageAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'page';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'page';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
     // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             // We can no more use `null` here because sonata
             // can not guess type on translation entity
             // but it's propably better like that :-)
@@ -33,14 +32,14 @@ class PageAdmin extends AbstractAdmin
             ]);
 
         if ($this->getSubject()->getId()) {
-            $formMapper->add('slug', TextType::class, [
+            $form->add('slug', TextType::class, [
                 'disabled' => true,
                 'attr' => ['readonly' => true],
                 'label' => 'global.link',
             ]);
         }
 
-        $formMapper
+        $form
             ->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
@@ -50,7 +49,7 @@ class PageAdmin extends AbstractAdmin
                 'required' => false,
             ])
             ->end();
-        $formMapper
+        $form
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', PurifiedTextType::class, [
                 'label' => 'global.meta.description',
@@ -78,10 +77,10 @@ class PageAdmin extends AbstractAdmin
     }
 
     // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
-            ->add('title', KnpTranslationFieldFilter::class, [
+        $filter
+            ->add('title', null, [
                 'label' => 'global.title',
             ])
             ->add('isEnabled', null, [
@@ -96,11 +95,9 @@ class PageAdmin extends AbstractAdmin
     }
 
     // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
@@ -124,5 +121,10 @@ class PageAdmin extends AbstractAdmin
                     'delete' => [],
                 ],
             ]);
+    }
+
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->clearExcept(['create', 'delete', 'list', 'edit']);
     }
 }

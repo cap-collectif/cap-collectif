@@ -25,7 +25,7 @@ class PostController extends AbstractController
      * @Route("/admin/capco/app/post/create", name="capco_admin_create_post")
      * @Security("has_role('ROLE_USER')")
      */
-    public function createAction(?Request $request = null)
+    public function createAction(Request $request)
     {
         $proposalId = $request->query->get('proposalId', null);
         $post = new Post();

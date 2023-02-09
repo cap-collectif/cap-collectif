@@ -2,15 +2,21 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class PositionableController extends CRUDController
+abstract class PositionableController extends CRUDController
 {
-    private $resolverName;
+    private string $resolverName;
 
-    public function __construct($resolverName)
-    {
+    public function __construct(
+        string $resolverName,
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool
+    ) {
+        parent::__construct($breadcrumbsBuilder, $pool);
         $this->resolverName = $resolverName;
     }
 

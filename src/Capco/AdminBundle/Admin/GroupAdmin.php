@@ -2,23 +2,19 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class GroupAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'group';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'group';
+    protected array $datagridValues = [
         '_sort_order' => 'DESC',
         '_sort_by' => 'createdAt',
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExportFields(): array
     {
         return ['title', 'description', 'countUserGroups', 'createdAt', 'updatedAt'];
@@ -29,14 +25,9 @@ class GroupAdmin extends AbstractAdmin
         return ['csv'];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('titleInfo', null, [
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
@@ -52,9 +43,9 @@ class GroupAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -66,18 +57,18 @@ class GroupAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('delete');
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         // Content
-        $formMapper->with('global.contenu', ['class' => 'col-md-12'])->end();
+        $form->with('global.contenu', ['class' => 'col-md-12'])->end();
 
-        $formMapper
+        $form
             ->with('global.contenu')
             ->add('title', null, ['label' => 'global.title'])
             ->end();

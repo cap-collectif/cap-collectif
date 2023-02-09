@@ -2,25 +2,25 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\MediaBundle\Provider\MediaProvider;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VideoAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'video';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'video';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
@@ -34,7 +34,7 @@ class VideoAdmin extends AbstractAdmin
     }
 
     // For mosaic view
-    public function getObjectMetadata($object)
+    public function getObjectMetadata($object): MetadataInterface
     {
         $media = $object->getMedia();
         if ($media) {
@@ -51,26 +51,21 @@ class VideoAdmin extends AbstractAdmin
         return parent::getObjectMetadata($object);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
-            ->add('title', KnpTranslationFieldFilter::class, [
+        $filter
+            ->add('title', null, [
                 'label' => 'global.title',
             ])
-            ->add(
-                'author',
-                ModelAutocompleteFilter::class,
-                [
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
                     'label' => 'global.author',
-                ],
-                null,
-                [
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity, $property) {
+                    'to_string_callback' => function ($entity) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
-                ]
-            )
+                ],
+            ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
             ])
@@ -82,16 +77,16 @@ class VideoAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
+                'to_string_callback' => function ($entity) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
@@ -108,16 +103,15 @@ class VideoAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('title', TextType::class, [
                 'label' => 'global.title',
             ])
@@ -151,9 +145,9 @@ class VideoAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -177,5 +171,10 @@ class VideoAdmin extends AbstractAdmin
             ->add('createdAt', null, [
                 'label' => 'global.creation',
             ]);
+    }
+
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->clearExcept(['create', 'delete', 'list', 'edit']);
     }
 }

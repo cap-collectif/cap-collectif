@@ -5,12 +5,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <defaults autowire="true" autoconfigure="true"/>
 
         <service id="Capco\AdminBundle\Block\RecentPostBlockService">
-            <argument>Capco\AdminBundle\Block\RecentPostBlockService</argument>
-            <argument type="service" id="templating" />
-            <argument type="service" id="Capco\AppBundle\Repository\PostRepository" />
-            <argument type="service" id="Capco\AppBundle\Toggle\Manager" />
             <tag name="sonata.block" />
         </service>
 
@@ -47,21 +44,14 @@
         </service>
 
         <service id="Capco\AdminBundle\Block\RecentContributionsBlockService" >
-            <argument>Capco\AdminBundle\Block\RecentContributionsBlockService</argument>
-            <argument type="service" id="templating" />
-            <argument type="service" id="Capco\AdminBundle\Resolver\RecentContributionsResolver" />
             <tag name="sonata.block" />
         </service>
 
         <service id="Capco\AdminBundle\Block\HelpBlockService" >
-            <argument>Capco\AdminBundle\Block\HelpBlockService</argument>
-            <argument type="service" id="templating" />
             <tag name="sonata.block" />
         </service>
 
         <service id="Capco\AdminBundle\Block\LocaleSwitcherBlockService" >
-            <argument>Capco\AdminBundle\Block\LocaleSwitcherBlockService</argument>
-            <argument type="service" id="templating" />
             <tag name="sonata.block" />
         </service>
 

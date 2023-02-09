@@ -4,24 +4,25 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ConsultationAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'consultation';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'consultation';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
-    private $opinionTypeRepository;
+    private OpinionTypeRepository $opinionTypeRepository;
 
     public function __construct(
         $code,
@@ -33,18 +34,15 @@ class ConsultationAdmin extends AbstractAdmin
         $this->opinionTypeRepository = $opinionTypeRepository;
     }
 
-    public function getTemplate($name)
+    protected function configure(): void
     {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Consultation:edit.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
+        $this->setTemplate('edit', 'CapcoAdminBundle:Consultation:edit.html.twig');
+        parent::configure();
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -59,18 +57,16 @@ class ConsultationAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
             ->add('step', null, [
                 'label' => 'global.participative.project.label',
             ])
-            ->add('opinionTypes', ModelType::class, [
+            ->add('opinionTypes', null, [
                 'label' => 'admin.fields.consultation.opinion_types',
             ])
             ->add('updatedAt', null, [
@@ -79,20 +75,19 @@ class ConsultationAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper->with('admin.fields.step.group_general')->add('title', null, [
+        $form->with('admin.fields.step.group_general')->add('title', null, [
             'label' => 'global.title',
         ]);
         if ($this->getSubject()->getId()) {
-            $formMapper
+            $form
                 ->add('description', CKEditorType::class, [
                     'label' => 'global.description',
                     'config_name' => 'admin_editor',
@@ -108,9 +103,9 @@ class ConsultationAdmin extends AbstractAdmin
                     'required' => false,
                 ]);
         }
-        $formMapper->end();
+        $form->end();
         if ($this->getSubject()->getId()) {
-            $formMapper
+            $form
                 ->with('plan-consultation')
                 ->add('opinionCountShownBySection', null, [
                     'label' => 'admin.fields.step.opinionCountShownBySection',
@@ -123,8 +118,6 @@ class ConsultationAdmin extends AbstractAdmin
                     'multiple' => true,
                     'expanded' => true,
                     'required' => true,
-                    'tree' => true,
-
                     'disabled' => true,
                 ])
                 ->end()
@@ -174,9 +167,9 @@ class ConsultationAdmin extends AbstractAdmin
         }
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -191,10 +184,16 @@ class ConsultationAdmin extends AbstractAdmin
             ]);
     }
 
-    private function createQueryForOpinionTypes()
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->clearExcept(['create', 'delete', 'list', 'edit']);
+    }
+
+    private function createQueryForOpinionTypes(): ProxyQuery
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
+        $qb = $this->opinionTypeRepository->getOrderedRootNodesQueryBuilder($subject);
 
-        return $this->opinionTypeRepository->getOrderedRootNodesQuery($subject);
+        return new ProxyQuery($qb);
     }
 }

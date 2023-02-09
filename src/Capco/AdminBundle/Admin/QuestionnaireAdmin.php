@@ -3,40 +3,42 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
-use Doctrine\DBAL\Query\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class QuestionnaireAdmin extends CapcoAdmin
 {
-    protected $classnameLabel = 'questionnaire';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected ?string $classnameLabel = 'questionnaire';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    protected $formOptions = ['cascade_validation' => true];
-    private $tokenStorage;
+    protected array $formOptions = ['cascade_validation' => true];
+    private TokenStorageInterface $tokenStorage;
+    private QuestionnaireAbstractQuestionRepository $questionnaireAbstractQuestionRepository;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        QuestionnaireAbstractQuestionRepository $questionnaireAbstractQuestionRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
+        $this->questionnaireAbstractQuestionRepository = $questionnaireAbstractQuestionRepository;
     }
 
-    public function preUpdate($object)
+    public function preUpdate($object): void
     {
         // We must make sure a question position by questionnaire is unique
-        $questionRepo = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(QuestionnaireAbstractQuestionRepository::class);
-        $delta = $questionRepo->getCurrentMaxPositionForQuestionnaire($object->getId());
+        $delta = $this->questionnaireAbstractQuestionRepository->getCurrentMaxPositionForQuestionnaire(
+            $object->getId()
+        );
 
         foreach ($object->getQuestions() as $question) {
             $question->setPosition($question->getPosition() + $delta);
@@ -46,15 +48,14 @@ class QuestionnaireAdmin extends CapcoAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query
             ->leftJoin($query->getRootAliases()[0] . '.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
@@ -78,34 +79,29 @@ class QuestionnaireAdmin extends CapcoAdmin
         return $query;
     }
 
-    public function getTemplate($name)
+    protected function configure(): void
     {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Questionnaire:list.html.twig';
-        }
-
-        return parent::getTemplate($name);
+        //$this->setTemplate('list', 'CapcoAdminBundle:Questionnaire:list.html.twig');
+        parent::configure();
     }
 
     // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
     }
 
     // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
@@ -114,16 +110,16 @@ class QuestionnaireAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, ['label' => 'global.title'])
             ->add('enabled', null, ['label' => 'admin.fields.questionnaire.enabled'])
             ->add('createdAt', null, ['label' => 'global.maj'])
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
     }

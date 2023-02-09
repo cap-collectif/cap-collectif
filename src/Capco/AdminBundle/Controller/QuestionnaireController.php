@@ -3,10 +3,12 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuestionnaireController extends CRUDController
 {
-    public function editAction($id = null)
+    public function editAction(Request $request): Response
     {
         $this->throwIfNoAccess();
 

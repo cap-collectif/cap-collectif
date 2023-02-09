@@ -2,33 +2,17 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-
 class EventAdmin extends AbstractAdmin
 {
-    public function __construct(
-        string $code,
-        string $class,
-        string $baseControllerName
-    ) {
-        parent::__construct($code, $class, $baseControllerName);
+    protected function configure(): void
+    {
+        //$this->setTemplate('create', 'CapcoAdminBundle:Event:create.html.twig');
+        //$this->setTemplate('edit', 'CapcoAdminBundle:Event:edit.html.twig');
+        parent::configure();
     }
 
     public function getFeatures()
     {
         return ['calendar'];
-    }
-
-    // While route en template are not totally managed by admin next, we need to keep it
-    public function getTemplate($name)
-    {
-        if ('create' === $name) {
-            return 'CapcoAdminBundle:Event:create.html.twig';
-        }
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:Event:edit.html.twig';
-        }
-
-        return $this->getTemplateRegistry()->getTemplate($name);
     }
 }

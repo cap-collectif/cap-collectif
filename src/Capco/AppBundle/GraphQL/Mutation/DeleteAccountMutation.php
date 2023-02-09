@@ -28,6 +28,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
@@ -36,6 +37,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
     public const CANNOT_FIND_USER = 'Can not find this userId !';
 
     private UserRepository $userRepository;
+    private SessionInterface $session;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -59,7 +61,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
         AnonymizeUser $anonymizeUser,
-        Publisher $publisher
+        Publisher $publisher,
+        SessionInterface $session
     ) {
         parent::__construct(
             $em,
@@ -85,6 +88,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $publisher
         );
         $this->userRepository = $userRepository;
+        $this->session = $session;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -96,6 +100,10 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         }
 
         $this->deleteAccount($input['type'], $user);
+
+        $this->session
+            ->getFlashBag()
+            ->add('success', $this->translator->trans('deleted-user', [], 'CapcoAppBundle'));
 
         return ['userId' => $userId];
     }

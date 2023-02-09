@@ -547,4 +547,9 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
             'ElasticsearchOpinionNestedOpinionType',
         ];
     }
+
+    public function dummy(): string
+    {
+        return 'TODO : DELETE ME WHEN OUT OF SONATA ADMIN';
+    }
 }

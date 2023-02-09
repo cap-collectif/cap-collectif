@@ -1,20 +1,24 @@
 {% extends 'CapcoAdminBundle:CRUD:edit.html.twig' %}
 
+{# This is used to allow edition on opinion types #}
+
 {% block form %}
     {{ parent() }}
-    {% if admin.subject.id is null %}
+    {{ admin.uniqid }}
         <script type="text/javascript">
             $(document).ready( function() {
-                $("#field_actions_{{ admin.uniqid }}_opinionTypes .btn-success").on('click', function(e) {
-                    var name = $("#{{ admin.uniqid }}_title").val();
-                    if (name !== null && name !== '') {
-                        var url = $(this).attr('href') + '&consultation_name=' + name;
-                        $(this).attr('href', url);
-                        $("#{{ admin.uniqid }}_title").val('');
-                    }
+                $("#{{ admin.uniqid }}_opinionTypes .checkbox").on('click', function(e) {
+                    console.log('cc');
+                    var opinionTypeId = $(this).find('input').val();
+                    var getUrl = window.location;
+                    var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1];
+                    var url = baseUrl + "/capco/app/opiniontype/" + opinionTypeId + "/edit";
+                    console.log(url);
+                    window.location = new URL(url);
+
+
                     return true;
                 });
             });
         </script>
-    {% endif %}
 {% endblock %}

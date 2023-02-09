@@ -102,44 +102,46 @@
                                                 </div>
                                             {% endif %}
                                             {% block sonata_admin_content_actions_wrappers %}
-                                                {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
-                                                    <ul class="nav navbar-nav navbar-right">
-                                                        <li>
-                                                            {{ react_render_component('ProposalCreateFusionButtonApp') }}
-                                                        </li>
-                                                    </ul>
-                                                {% endif %}
-                                                {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and action == 'list' %}
-                                                    <ul class="nav navbar-nav navbar-right">
-                                                        <li class="mr-5">
-                                                            {{ react_render_component('AdminImportEventsApp') }}
-                                                        </li>
-                                                        <li class="mr-5">
-                                                            {{ react_render_component('AdminExportButtonApp') }}
-                                                        </li>
-                                                    </ul>
-                                                {% endif %}
-                                                {% if admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
-                                                    <ul class="nav navbar-nav navbar-right">
-                                                        <li>
-                                                            {{ react_render_component('GroupCreateButtonApp') }}
-                                                        </li>
-                                                    </ul>
-                                                {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
-                                                    {# TODO redux store in global #}
-                                                    {% include '@CapcoApp/redux_store.html.twig' %}
-                                                    <ul class="nav navbar-nav navbar-right">
-                                                        <li>
-                                                            {{ react_render_component('UserAdminCreateButtonApp') }}
-                                                        </li>
-                                                    </ul>
-                                                {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Project' and admin.hasSubject == false %}
-                                                    {% include '@CapcoApp/redux_store.html.twig' %}
-                                                    <ul class="nav navbar-nav navbar-right">
-                                                        <li>
-                                                            {{ react_render_component('ProjectCreateButtonApp') }}
-                                                        </li>
-                                                    </ul>
+                                                {% if admin is defined %}
+                                                    {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li>
+                                                                {{ react_render_component('ProposalCreateFusionButtonApp') }}
+                                                            </li>
+                                                        </ul>
+                                                    {% endif %}
+                                                    {% if admin.class == 'Capco\\AppBundle\\Entity\\Event' and action == 'list' %}
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li class="mr-5">
+                                                                {{ react_render_component('AdminImportEventsApp') }}
+                                                            </li>
+                                                            <li class="mr-5">
+                                                                {{ react_render_component('AdminExportButtonApp') }}
+                                                            </li>
+                                                        </ul>
+                                                    {% endif %}
+                                                    {% if admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li>
+                                                                {{ react_render_component('GroupCreateButtonApp') }}
+                                                            </li>
+                                                        </ul>
+                                                    {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
+                                                        {# TODO redux store in global #}
+                                                        {% include '@CapcoApp/redux_store.html.twig' %}
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li>
+                                                                {{ react_render_component('UserAdminCreateButtonApp') }}
+                                                            </li>
+                                                        </ul>
+                                                    {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Project' and admin.hasSubject == false %}
+                                                        {% include '@CapcoApp/redux_store.html.twig' %}
+                                                        <ul class="nav navbar-nav navbar-right">
+                                                            <li>
+                                                                {{ react_render_component('ProjectCreateButtonApp') }}
+                                                            </li>
+                                                        </ul>
+                                                    {% endif %}
                                                 {% endif %}
                                                 {% if _actions|replace({ '
                   <li>': '', '</li>
@@ -292,9 +294,11 @@
     {{ parent() }}
     <script type="text/javascript">
         $(window).on('load', function() {
-            $('.minicolors-input').minicolors({
-                theme: 'bootstrap',
-            });
+            if ($('.minicolors-input').minicolors) {
+                $('.minicolors-input').minicolors({
+                    theme: 'bootstrap',
+                });
+            }
         });
     </script>
     {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}

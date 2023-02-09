@@ -7,11 +7,42 @@ use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Symfony\Component\HttpFoundation\Response;
 
-class ReportingController extends Controller
+class ReportingController extends AbstractSonataCrudController
 {
+    public function showAction(Request $request): Response
+    {
+        $this->assertObjectExists($request, true);
+
+        $id = $request->get($this->admin->getIdParameter());
+        \assert(null !== $id);
+        $object = $this->admin->getObject($id);
+        \assert(null !== $object);
+
+        $this->checkParentChildAssociation($request, $object);
+
+        $this->admin->checkAccess('show', $object);
+
+        $preResponse = $this->preShow($request, $object);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($object);
+
+        $fields = $this->admin->getShow();
+
+        return $this->renderWithExtraParams('CapcoAdminBundle:Reporting:show.html.twig', [
+            'action' => 'show',
+            'object' => $object,
+            'elements' => $fields,
+            'admin_pool' => $this->pool,
+            'breadcrumbs_builder' => $this->breadcrumbsBuilder,
+        ]);
+    }
+
     public function disableAction(Request $request)
     {
         $id = $request->get($this->admin->getIdParameter());

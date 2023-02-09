@@ -2,57 +2,51 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class CommentVoteAdmin extends AbstractAdmin
 {
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
+    protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('comment', null, ['label' => 'global.comment'])
-            ->add(
-                'user',
-                ModelAutocompleteFilter::class,
-                ['label' => 'admin.fields.comment_vote.voter'],
-                null,
-                [
+            ->add('user', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'admin.fields.comment_vote.voter',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity, $property) {
+                    'to_string_callback' => function ($entity) {
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
-                ]
-            );
+                ],
+            ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('comment', ModelType::class, ['label' => 'global.comment'])
             ->add('user', ModelType::class, ['label' => 'admin.fields.comment_vote.voter'])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('comment', ModelType::class, ['label' => 'global.comment'])
             ->add('user', ModelType::class, ['label' => 'admin.fields.comment_vote.voter'])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('delete');
         $collection->remove('create');

@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
@@ -11,42 +10,58 @@ use Capco\AppBundle\GraphQL\Resolver\Query\QueryVotesResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class SectionAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'section';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'section';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    public function createQuery($context = 'list')
+    private Manager $manager;
+    private SectionRepository $repository;
+    private QueryVotesResolver $queryVotesResolver;
+    private QueryEventsResolver $queryEventsResolver;
+    private CollectStepRepository $collectStepRepository;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        Manager $manager,
+        SectionRepository $repository,
+        QueryVotesResolver $queryVotesResolver,
+        QueryEventsResolver $queryEventsResolver,
+        CollectStepRepository $collectStepRepository
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->manager = $manager;
+        $this->repository = $repository;
+        $this->queryVotesResolver = $queryVotesResolver;
+        $this->queryEventsResolver = $queryEventsResolver;
+        $this->collectStepRepository = $collectStepRepository;
+    }
+
+    public function createQuery(): ProxyQueryInterface
     {
-        $manager = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(Manager::class);
-
-        $all = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(SectionRepository::class)
-            ->findAll();
-
         $ids = [];
-        foreach ($all as $section) {
-            if ($manager->containsEnabledFeature($section->getAssociatedFeatures())) {
+        foreach ($this->repository->findAll() as $section) {
+            if ($this->manager->containsEnabledFeature($section->getAssociatedFeatures())) {
                 $ids[] = $section->getId();
             }
         }
 
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query->andWhere($query->expr()->in($query->getRootAliases()[0] . '.id', ':ids'));
         $query->setParameter('ids', $ids);
 
@@ -58,19 +73,19 @@ class SectionAdmin extends AbstractAdmin
         return [];
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
-            ->add('title', KnpTranslationFieldFilter::class, [
+        $filter
+            ->add('title', null, [
                 'label' => 'global.title',
             ])
             ->add('position', null, [
                 'label' => 'global.position',
             ])
-            ->add('teaser', KnpTranslationFieldFilter::class, [
+            ->add('teaser', null, [
                 'label' => 'global.subtitle',
             ])
-            ->add('body', KnpTranslationFieldFilter::class, [
+            ->add('body', null, [
                 'label' => 'global.contenu',
             ])
             ->add('enabled', null, [
@@ -84,11 +99,9 @@ class SectionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('move_actions', 'actions', [
                 'label' => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
@@ -127,27 +140,27 @@ class SectionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $fields = Section::$fieldsForType[$this->getSubject()->getType()];
         $subject = $this->getSubject();
 
-        $formMapper->with('admin.label.settings.global');
+        $form->with('admin.label.settings.global');
         if ($fields['title']) {
-            $formMapper->add('title', TextType::class, [
+            $form->add('title', TextType::class, [
                 'label' => 'global.title',
                 'required' => true,
                 'help' => 'be-concise-1-or-2-words',
             ]);
         } else {
-            $formMapper->add('title', TextType::class, [
+            $form->add('title', TextType::class, [
                 'label' => 'global.title',
                 'attr' => ['readonly' => true],
             ]);
         }
 
         if ($fields['teaser']) {
-            $formMapper->add('teaser', TextType::class, [
+            $form->add('teaser', TextType::class, [
                 'label' => 'global.subtitle',
                 'required' => false,
                 'help' => 'support-your-title',
@@ -155,40 +168,36 @@ class SectionAdmin extends AbstractAdmin
         }
 
         if ($fields['body']) {
-            $formMapper->add('body', CKEditorType::class, [
+            $form->add('body', CKEditorType::class, [
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
             ]);
         }
 
         if ($fields['nbObjects']) {
-            $formMapper->add('nbObjects', null, [
+            $form->add('nbObjects', null, [
                 'label' => 'admin.fields.section.nb_objects',
             ]);
         }
 
         if ($subject && 'proposals' === $subject->getType()) {
-            $formMapper->add('step', ModelType::class, [
+            $form->add('step', ModelType::class, [
                 'label' => 'global.collect.step.label',
                 'required' => true,
                 'query' => $this->createQueryForCollectSteps(),
             ]);
         }
-        $formMapper->end();
+        $form->end();
 
         if ($subject && 'metrics' === $subject->getType()) {
             $args = new Argument(['first' => 100]);
 
-            $votes = $this->getConfigurationPool()
-                ->getContainer()
-                ->get(QueryVotesResolver::class)
-                ->__invoke($args);
             $basicsMetricsLabel =
-                $votes->getTotalCount() > 0
+                $this->queryVotesResolver->__invoke($args)->getTotalCount() > 0
                     ? 'admin.fields.section.basicsMetrics'
                     : 'admin.fields.section.basicsMetricsNoVotes';
 
-            $formMapper
+            $form
                 ->with('admin.label.section.display.metrics')
                 ->add('metricsToDisplayBasics', null, [
                     'label' => $basicsMetricsLabel,
@@ -197,19 +206,15 @@ class SectionAdmin extends AbstractAdmin
                     'label' => 'admin.fields.section.projectsMetrics',
                 ]);
 
-            $events = $this->getConfigurationPool()
-                ->getContainer()
-                ->get(QueryEventsResolver::class)
-                ->getEventsConnection($args);
-            if ($events->getTotalCount() > 0) {
-                $formMapper->add('metricsToDisplayEvents', null, [
+            if ($this->queryEventsResolver->getEventsConnection($args)->getTotalCount() > 0) {
+                $form->add('metricsToDisplayEvents', null, [
                     'label' => 'global.events',
                 ]);
             }
-            $formMapper->end();
+            $form->end();
         }
 
-        $formMapper
+        $form
             ->with('admin.label.section.publication')
             ->add('position', null, [
                 'label' => 'global.position',
@@ -221,9 +226,9 @@ class SectionAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -252,21 +257,19 @@ class SectionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->add('down', $this->getRouterIdParameter() . '/down');
         $collection->add('up', $this->getRouterIdParameter() . '/up');
     }
 
-    private function createQueryForCollectSteps()
+    private function createQueryForCollectSteps(): ProxyQuery
     {
-        $qb = $this->getConfigurationPool()
-            ->getContainer()
-            ->get(CollectStepRepository::class)
+        $qb = $this->collectStepRepository
             ->createQueryBuilder('cs')
             ->where('cs.isEnabled = :enabled')
             ->setParameter('enabled', true);
 
-        return $qb->getQuery();
+        return new ProxyQuery($qb);
     }
 }

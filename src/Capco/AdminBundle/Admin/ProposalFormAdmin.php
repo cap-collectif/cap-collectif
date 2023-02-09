@@ -3,24 +3,23 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Enum\UserRole;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
-    protected $classnameLabel = 'proposal_form';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected ?string $classnameLabel = 'proposal_form';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    protected $formOptions = ['cascade_validation' => true];
-    private $tokenStorage;
+    protected array $formOptions = ['cascade_validation' => true];
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
@@ -35,15 +34,14 @@ class ProposalFormAdmin extends CapcoAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query
             ->leftJoin($query->getRootAliases()[0] . '.step', 's')
             ->leftJoin('s.projectAbstractStep', 'pAs')
@@ -74,27 +72,30 @@ class ProposalFormAdmin extends CapcoAdmin
     }
 
     // Fields to be shown on create/edit forms
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
     }
 
     // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, ['label' => 'global.title'])
-            ->add('step', null, ['label' => 'project'], EntityType::class, [
-                'query_builder' => $this->filterByCollectStepQuery(),
-            ])
+            ->add(
+                'step',
+                null,
+                ['label' => 'project'],
+                [
+                    'query_builder' => $this->filterByCollectStepQuery(),
+                ]
+            )
             ->add('updatedAt', null, ['label' => 'global.maj']);
     }
 
     // Fields to be shown on lists
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('project', ModelType::class, [
                 'label' => 'project',
@@ -114,7 +115,7 @@ class ProposalFormAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->add('duplicate');
         $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'duplicate']);
@@ -122,6 +123,8 @@ class ProposalFormAdmin extends CapcoAdmin
 
     private function filterByCollectStepQuery(): QueryBuilder
     {
-        return $this->modelManager->createQuery(CollectStep::class, 'p')->select('p');
+        return $this->getModelManager()
+            ->createQuery(CollectStep::class, 'p')
+            ->select('p');
     }
 }

@@ -2,9 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Capco\AppBundle\Entity\FooterSocialNetwork;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -13,24 +14,33 @@ use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 
 class FooterSocialNetworkAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'social_network';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'social_network';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
-    public function postUpdate($object)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->entityManager = $entityManager;
+    }
+
+    public function postUpdate($object): void
     {
-        $entityManager = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager');
-        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver = $this->entityManager->getConfiguration()->getResultCacheImpl();
         $cacheDriver->delete(FooterSocialNetworkRepository::getEnabledCacheKey());
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -51,11 +61,9 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
             ])
@@ -79,16 +87,15 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => [
-                    'show' => [],
                     'edit' => [],
                     'delete' => [],
                 ],
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -108,9 +115,9 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('title', null, [
                 'label' => 'global.title',
             ])
@@ -133,5 +140,10 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
             ]);
+    }
+
+    protected function configureRoutes(RouteCollectionInterface $collection): void
+    {
+        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
     }
 }

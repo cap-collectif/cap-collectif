@@ -7,10 +7,11 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDController
+class AlphaProjectController extends CRUDController
 {
     public function createProposalAction(string $stepId): Response
     {
@@ -131,12 +132,17 @@ class AlphaProjectController extends \Sonata\AdminBundle\Controller\CRUDControll
         ]);
     }
 
-    public function editAction($deprecatedId = null)
+    public function editAction(Request $request): Response
     {
         if (!$this->isGranted(ProjectVoter::EDIT, $this->admin->getSubject())) {
             throw $this->createAccessDeniedException();
         }
-        return parent::editAction($deprecatedId);
+
+        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+            'object' => $this->admin->getSubject(),
+            'form' => $this->admin->getForm()->createView(),
+            'action' => 'edit',
+        ]);
     }
 
     private function throwIfNoAccess()

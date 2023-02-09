@@ -4,24 +4,19 @@ namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\District\ProjectDistrictPositioner;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormRenderer;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyPath;
 
-class CRUDController extends Controller
+class CRUDController extends AbstractSonataCrudController
 {
-    public function editAction($id = null)
+    public function editAction(Request $request): Response
     {
-        $request = $this->getRequest();
         // the key used to lookup the template
         $templateKey = 'edit';
 
@@ -55,7 +50,10 @@ class CRUDController extends Controller
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 $submittedObject = $form->getData();
                 if ($form->has('districts')) {
                     $submittedDistricts = $form->get('districts')
@@ -88,7 +86,7 @@ class CRUDController extends Controller
                 try {
                     $existingObject = $this->admin->update($submittedObject);
 
-                    if ($this->isXmlHttpRequest()) {
+                    if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(
                             [
                                 'result' => 'ok',
@@ -116,7 +114,7 @@ class CRUDController extends Controller
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($existingObject);
+                    return $this->redirectTo($request, $existingObject);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -144,7 +142,7 @@ class CRUDController extends Controller
 
             // show an error message if the form failed validation
             if (!$isFormValid) {
-                if (!$this->isXmlHttpRequest()) {
+                if (!$this->isXmlHttpRequest($request)) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(
@@ -158,7 +156,7 @@ class CRUDController extends Controller
                         )
                     );
                 }
-            } elseif ($this->isPreviewRequested()) {
+            } elseif ($this->isPreviewRequested($request)) {
                 // enable the preview template if the form was valid and preview was requested
                 $templateKey = 'preview';
                 $this->admin->getShow();
@@ -169,10 +167,7 @@ class CRUDController extends Controller
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFormTheme());
 
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate($templateKey);
-
-        // $template = $this->templateRegistry->getTemplate($templateKey);
+        $template = $this->admin->getTemplateRegistry()->getTemplate($templateKey);
 
         return $this->renderWithExtraParams(
             $template,
@@ -186,9 +181,8 @@ class CRUDController extends Controller
         );
     }
 
-    public function createAction()
+    public function createAction(Request $request): Response
     {
-        $request = $this->getRequest();
         // the key used to lookup the template
         $templateKey = 'edit';
 
@@ -230,7 +224,10 @@ class CRUDController extends Controller
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
                 $this->admin->checkAccess('create', $submittedObject);
@@ -238,7 +235,7 @@ class CRUDController extends Controller
                 try {
                     $newObject = $this->admin->create($submittedObject);
 
-                    if ($this->isXmlHttpRequest()) {
+                    if ($this->isXmlHttpRequest($request)) {
                         return $this->renderJson(
                             [
                                 'result' => 'ok',
@@ -262,7 +259,7 @@ class CRUDController extends Controller
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($newObject);
+                    return $this->redirectTo($request, $newObject);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -280,7 +277,7 @@ class CRUDController extends Controller
                         'SonataAdminBundle'
                     )
                 );
-            } elseif ($this->isPreviewRequested()) {
+            } elseif ($this->isPreviewRequested($request)) {
                 // pick the preview template if the form was valid and preview was requested
                 $templateKey = 'preview';
                 $this->admin->getShow();
@@ -290,9 +287,7 @@ class CRUDController extends Controller
         $formView = $form->createView();
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFormTheme());
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate($templateKey);
-        // $template = $this->templateRegistry->getTemplate($templateKey);
+        $template = $this->admin->getTemplateRegistry()->getTemplate($templateKey);
 
         return $this->renderWithExtraParams(
             $template,
@@ -306,10 +301,9 @@ class CRUDController extends Controller
         );
     }
 
-    public function deleteAction($id)
+    public function deleteAction(Request $request): Response
     {
         // NEXT_MAJOR: Remove the unused $id parameter
-        $request = $this->getRequest();
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
@@ -328,16 +322,16 @@ class CRUDController extends Controller
             return $preResponse;
         }
 
-        if (Request::METHOD_DELETE === $this->getRestMethod()) {
+        if (Request::METHOD_DELETE === $request->getMethod()) {
             // check the csrf token
-            $this->validateCsrfToken('sonata.delete');
+            $this->validateCsrfToken($request, 'sonata.delete');
 
             $objectName = $this->admin->toString($object);
 
             try {
                 $this->admin->delete($object);
 
-                if ($this->isXmlHttpRequest()) {
+                if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(['result' => 'ok'], Response::HTTP_OK, []);
                 }
 
@@ -352,7 +346,7 @@ class CRUDController extends Controller
             } catch (ModelManagerException $e) {
                 $this->handleModelManagerException($e);
 
-                if ($this->isXmlHttpRequest()) {
+                if ($this->isXmlHttpRequest($request)) {
                     return $this->renderJson(['result' => 'error'], Response::HTTP_OK, []);
                 }
 
@@ -369,9 +363,7 @@ class CRUDController extends Controller
             return $this->redirectToList();
         }
 
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate('delete');
-        // $template = $this->templateRegistry->getTemplate('delete');
+        $template = $this->admin->getTemplateRegistry()->getTemplate('delete');
 
         return $this->renderWithExtraParams(
             $template,
@@ -560,13 +552,12 @@ class CRUDController extends Controller
     }
 
     /**
-     * @param $field
-     *
-     * @return \Sonata\AdminBundle\Admin\FieldDescriptionInterface
-     *                                                             Method from Sonata Admin HelperController
+     * Method from Sonata Admin HelperController.
      */
-    protected function retrieveFormFieldDescription(AdminInterface $admin, $field)
-    {
+    protected function retrieveFormFieldDescription(
+        AdminInterface $admin,
+        $field
+    ): FieldDescriptionInterface {
         $admin->getFormFieldDescriptions();
 
         $fieldDescription = $admin->getFormFieldDescription($field);
@@ -595,30 +586,24 @@ class CRUDController extends Controller
     /**
      * @throws \Exception
      */
-    protected function handleModelManagerException(\Exception $e)
+    protected function handleModelManagerException(\Exception $exception): void
     {
         if ($this->get('kernel')->isDebug()) {
-            throw $e;
+            throw $exception;
         }
 
-        $context = ['exception' => $e];
-        if ($e->getPrevious()) {
-            $context['previous_exception_message'] = $e->getPrevious()->getMessage();
+        $context = ['exception' => $exception];
+        if ($exception->getPrevious()) {
+            $context['previous_exception_message'] = $exception->getPrevious()->getMessage();
         }
-        $this->getLogger()->error($e->getMessage(), $context);
+        $this->getLogger()->error($exception->getMessage(), $context);
     }
 
     /**
      * Redirect the user depend on this choice.
-     *
-     * @param object $object
-     *
-     * @return RedirectResponse
      */
-    protected function redirectTo($object)
+    protected function redirectTo(Request $request, object $object): RedirectResponse
     {
-        $request = $this->getRequest();
-
         $url = false;
 
         if (null !== $request->get('btn_update_and_list')) {
@@ -636,7 +621,7 @@ class CRUDController extends Controller
             $url = $this->admin->generateUrl('create', $params);
         }
 
-        if ('DELETE' === $this->getRestMethod()) {
+        if ('DELETE' === $request->getMethod()) {
             return $this->redirectToList();
         }
 
@@ -655,46 +640,5 @@ class CRUDController extends Controller
         }
 
         return new RedirectResponse($url);
-    }
-
-    protected function checkParentChildAssociation(Request $request, $object)
-    {
-        if (!($parentAdmin = $this->admin->getParent())) {
-            return;
-        }
-
-        // NEXT_MAJOR: remove this check
-        if (!$this->admin->getParentAssociationMapping()) {
-            return;
-        }
-
-        $parentId = $request->get($parentAdmin->getIdParameter());
-
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $propertyPath = new PropertyPath($this->admin->getParentAssociationMapping());
-
-        if (
-            $parentAdmin->getObject($parentId) !==
-            $propertyAccessor->getValue($object, $propertyPath)
-        ) {
-            // NEXT_MAJOR: make this exception
-            @trigger_error(
-                "Accessing a child that isn't connected to a given parent is deprecated since 3.34" .
-                    " and won't be allowed in 4.0.",
-                \E_USER_DEPRECATED
-            );
-        }
-    }
-
-    /**
-     * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
-     *
-     * @param string $theme
-     */
-    protected function setFormTheme(FormView $formView, $theme)
-    {
-        $twig = $this->get('twig');
-
-        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }

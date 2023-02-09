@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Capco\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Controller\CRUDController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Process\Process;
 

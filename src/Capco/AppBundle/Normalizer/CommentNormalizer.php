@@ -21,7 +21,7 @@ class CommentNormalizer implements
 {
     use SerializerAwareTrait;
     private $router;
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
     private ObjectNormalizer $normalizer;
 
     public function __construct(

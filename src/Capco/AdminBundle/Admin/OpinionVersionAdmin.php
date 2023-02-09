@@ -5,13 +5,13 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
@@ -20,9 +20,9 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 
 class OpinionVersionAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'opinion_version';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
-    private $tokenStorage;
+    protected ?string $classnameLabel = 'opinion_version';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
@@ -34,7 +34,7 @@ class OpinionVersionAdmin extends AbstractAdmin
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function getBatchActions()
+    public function getBatchActions(): array
     {
         return [];
     }
@@ -42,15 +42,14 @@ class OpinionVersionAdmin extends AbstractAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         if ($user && $user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var \Doctrine\ORM\QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
 
         $query
             ->leftJoin($query->getRootAliases()[0] . '.parent', 'pa')
@@ -75,17 +74,20 @@ class OpinionVersionAdmin extends AbstractAdmin
         return $query;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('title', null, ['label' => 'global.title'])
             ->add('body', null, ['label' => 'global.contenu'])
             ->add('comment', null, ['label' => 'global.explanation'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function (User $entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function (User $entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('published', null, ['label' => 'global.published'])
@@ -96,11 +98,9 @@ class OpinionVersionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
@@ -137,9 +137,9 @@ class OpinionVersionAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('global.contenu', ['class' => 'col-md-12'])
             ->end()
             ->with('admin.fields.opinion_version.group_publication', ['class' => 'col-md-12'])
@@ -147,13 +147,13 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->with('admin.fields.opinion_version.group_answer', ['class' => 'col-md-12'])
             ->end()
             ->end();
-        $formMapper
+        $form
             ->with('global.contenu')
             ->add('title', null, ['label' => 'global.title'])
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function (User $entity, $property) {
+                'to_string_callback' => function (User $entity) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
@@ -189,12 +189,12 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'show']);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
     }
 }

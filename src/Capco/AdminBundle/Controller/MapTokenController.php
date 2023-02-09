@@ -6,11 +6,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SiteFaviconController extends AbstractController
+class MapTokenController extends AbstractController
 {
     /**
-     * @Route("admin/favicon/list", name="capco_admin_site_favicon_list")
-     * @Template("CapcoAdminBundle:SiteFavicon:list.html.twig")
+     * @Route("admin/map/list", name="capco_admin_map_list_list")
+     * @Template("CapcoAdminBundle:Map:list.html.twig")
      */
     public function listAction()
     {

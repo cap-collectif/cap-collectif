@@ -4,29 +4,22 @@ namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class AnswerAdmin extends CapcoAdmin
 {
-    protected $formOptions = [
+    protected array $formOptions = [
         'cascade_validation' => true,
     ];
 
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
 
-    public function getBatchActions()
+    protected function configureFormFields(FormMapper $form): void
     {
-        return [];
-    }
-
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
+        $form
             ->add('title', null, [
                 'label' => 'global.title',
                 'required' => false,
@@ -41,7 +34,7 @@ class AnswerAdmin extends CapcoAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'edit', 'delete']);
     }

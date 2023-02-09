@@ -6,38 +6,38 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Capco\AppBundle\Entity\OpinionVote;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 
 class OpinionVoteAdmin extends AbstractAdmin
 {
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'opinion.title'];
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'opinion.title'];
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('opinion', null, ['label' => 'global.proposal'])
-            ->add('user', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('user', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('value', null, ['label' => 'global.value'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
@@ -52,9 +52,9 @@ class OpinionVoteAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
@@ -67,14 +67,14 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('opinion', ModelType::class, ['label' => 'global.proposal'])
             ->add('user', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
+                'to_string_callback' => function ($entity) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
@@ -85,7 +85,7 @@ class OpinionVoteAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
     }

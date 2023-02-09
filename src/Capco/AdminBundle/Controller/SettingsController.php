@@ -15,23 +15,53 @@ use Capco\AppBundle\Security\SettingsVoter;
 use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SettingsController extends Controller
 {
     protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
     private AbstractSSOConfigurationRepository $SSOConfigurationRepository;
     private MenuItemRepository $menuItemRepository;
+    private FeaturesCategoryResolver $featuresCategoryResolver;
+    private BreadcrumbsBuilderInterface $breadcrumbsBuilder;
+    private Pool $pool;
+    private SiteParameterRepository $siteParameterRepository;
+    private SiteParameterAdmin $siteParameterAdmin;
+    private SiteImageRepository $siteImageRepository;
+    private SiteColorRepository $siteColorRepository;
+    private Manager $manager;
+    private TranslatorInterface $translator;
 
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,
-        MenuItemRepository $menuItemRepository
+        MenuItemRepository $menuItemRepository,
+        FeaturesCategoryResolver $featuresCategoryResolver,
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool,
+        SiteParameterRepository $siteParameterRepository,
+        SiteParameterAdmin $siteParameterAdmin,
+        SiteImageRepository $siteImageRepository,
+        SiteColorRepository $siteColorRepository,
+        Manager $manager,
+        TranslatorInterface $translator
     ) {
         $this->SSOConfigurationRepository = $SSOConfigurationRepository;
         $this->menuItemRepository = $menuItemRepository;
+        $this->featuresCategoryResolver = $featuresCategoryResolver;
+        $this->breadcrumbsBuilder = $breadcrumbsBuilder;
+        $this->pool = $pool;
+        $this->siteParameterRepository = $siteParameterRepository;
+        $this->siteParameterAdmin = $siteParameterAdmin;
+        $this->siteImageRepository = $siteImageRepository;
+        $this->siteColorRepository = $siteColorRepository;
+        $this->manager = $manager;
+        $this->translator = $translator;
     }
 
     /**
@@ -41,13 +71,11 @@ class SettingsController extends Controller
      */
     public function registrationAction(Request $request): array
     {
-        $adminPool = $this->get('sonata.admin.pool');
-
         return [
-            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'breadcrumbs_builder' => $this->breadcrumbsBuilder,
             'action' => 'list',
-            'admin' => $this->get(SiteParameterAdmin::class),
-            'admin_pool' => $adminPool,
+            'admin' => $this->siteParameterAdmin,
+            'admin_pool' => $this->pool,
         ];
     }
 
@@ -60,13 +88,11 @@ class SettingsController extends Controller
      */
     public function shieldAction()
     {
-        $adminPool = $this->get('sonata.admin.pool');
-
         return [
-            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'breadcrumbs_builder' => $this->breadcrumbsBuilder,
+            'admin_pool' => $this->pool,
             'action' => 'list',
-            'admin' => $this->get(SiteParameterAdmin::class),
-            'admin_pool' => $adminPool,
+            'admin' => $this->siteParameterAdmin,
         ];
     }
 
@@ -76,37 +102,34 @@ class SettingsController extends Controller
      */
     public function listAction(Request $request, $category)
     {
-        $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
         if (!$this->isGranted(SettingsVoter::VIEW, $category)) {
             throw $this->createAccessDeniedException();
         }
 
-        if (!$featuresCategoryResolver->isCategoryEnabled($category)) {
+        if (!$this->featuresCategoryResolver->isCategoryEnabled($category)) {
             throw $this->createNotFoundException();
         }
-        $admin_pool = $this->get('sonata.admin.pool');
         $parameters = $this->getFeaturedParameters($category);
-        $images = $this->get(SiteImageRepository::class)->findBy(
+        $images = $this->siteImageRepository->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
-        $colors = $this->get(SiteColorRepository::class)->findBy(
+        $colors = $this->siteColorRepository->findBy(
             [
                 'category' => $category,
             ],
             ['position' => 'ASC']
         );
-        $featuresCategoryResolver = $this->get(FeaturesCategoryResolver::class);
-        $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
-        $group = $featuresCategoryResolver->getGroupNameForCategory($category);
+        $toggles = $this->featuresCategoryResolver->getTogglesByCategory($category);
+        $group = $this->featuresCategoryResolver->getGroupNameForCategory($category);
 
         return [
-            'breadcrumbs_builder' => $this->get('sonata.admin.breadcrumbs_builder'),
+            'breadcrumbs_builder' => $this->breadcrumbsBuilder,
+            'admin_pool' => $this->pool,
             'action' => 'list',
-            'admin' => $this->get(SiteParameterAdmin::class),
-            'admin_pool' => $admin_pool,
+            'admin' => $this->siteParameterAdmin,
             'category' => $category,
             'parameters' => $parameters,
             'colors' => $colors,
@@ -138,8 +161,7 @@ class SettingsController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $toggleManager = $this->get(Manager::class);
-        $value = $toggleManager->switchValue($toggle);
+        $value = $this->manager->switchValue($toggle);
         if ('developer_documentation' === $toggle) {
             /** Create a service that handle the `isEnabled` value of
              * the associated entities which is trigger when value is switched.
@@ -167,22 +189,14 @@ class SettingsController extends Controller
                 ->flush();
         }
         if ($value) {
-            $message = $this->get('translator')->trans(
-                'features.switch.enabled',
-                [],
-                'CapcoAppBundle'
-            );
+            $message = $this->translator->trans('features.switch.enabled', [], 'CapcoAppBundle');
         } else {
-            $message = $this->get('translator')->trans(
-                'features.switch.disabled',
-                [],
-                'CapcoAppBundle'
-            );
+            $message = $this->translator->trans('features.switch.disabled', [], 'CapcoAppBundle');
         }
         $this->get('session')
             ->getFlashBag()
             ->add('success', $message);
-        $category = $this->get(FeaturesCategoryResolver::class)->findCategoryForToggle($toggle);
+        $category = $this->featuresCategoryResolver->findCategoryForToggle($toggle);
 
         return $this->redirect(
             $this->generateUrl('capco_admin_settings', [
@@ -193,7 +207,7 @@ class SettingsController extends Controller
 
     private function getFeaturedParameters(string $category): array
     {
-        $parameters = $this->get(SiteParameterRepository::class)->findBy(
+        $parameters = $this->siteParameterRepository->findBy(
             [
                 'category' => $category,
             ],

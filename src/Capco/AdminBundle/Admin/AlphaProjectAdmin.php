@@ -2,67 +2,27 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Security\ProjectVoter;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class AlphaProjectAdmin extends CapcoAdmin
 {
     protected $baseRouteName = 'capco_admin_alpha_project';
     protected $baseRoutePattern = 'alpha/project';
-    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        $code,
-        $class,
-        $baseControllerName,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        parent::__construct($code, $class, $baseControllerName);
-        $this->authorizationChecker = $authorizationChecker;
-    }
+    protected function configureListFields(ListMapper $list): void {}
 
-    public function getObject($id)
-    {
-        return $this->getConfigurationPool()
-            ->getContainer()
-            ->get(ProjectRepository::class)
-            ->find($id);
-    }
-
-    public function getTemplate($name)
-    {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:AlphaProject:create.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    public function isGranted($name, $object = null)
-    {
-        return $this->authorizationChecker->isGranted(ProjectVoter::VIEW, $object);
-    }
-
-    protected function configureListFields(ListMapper $listMapper): void
-    {
-    }
-
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
         // Hack: We need at least one field to display the edit page.
-        $formMapper->add('id');
+        $form->add('id');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filterMapper): void
-    {
-    }
+    protected function configureDatagridFilters(DatagridMapper $filter): void {}
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->add('editAnalysis', $this->getRouterIdParameter() . '/analysis');
         $collection->add('editContributors', $this->getRouterIdParameter() . '/contributors');

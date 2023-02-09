@@ -2,29 +2,25 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class EmailingCampaignAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'capco_admin_emailing_campaign';
     protected $baseRoutePattern = 'mailingCampaign';
 
+    protected function configure(): void
+    {
+        //$this->setTemplate('list', 'CapcoAdminBundle:Emailing:emailingCampaign.html.twig');
+        parent::configure();
+    }
+
     public function getFeatures(): array
     {
         return ['beta__emailing'];
     }
 
-    public function getTemplate($name)
-    {
-        if ('list' === $name) {
-            return 'CapcoAdminBundle:Emailing:emailingCampaign.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list']);
         $collection->add('editParameters', 'edit/' . $this->getRouterIdParameter());

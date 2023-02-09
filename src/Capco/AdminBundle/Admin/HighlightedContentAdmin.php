@@ -10,32 +10,28 @@ use Capco\AppBundle\Entity\HighlightedTheme;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class HighlightedContentAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'highlighted_content';
-    protected $datagridValues = [
+    protected ?string $classnameLabel = 'highlighted_content';
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
 
-    public function getTemplate($name)
+    protected function configure(): void
     {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:HighlightedContent:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
+        //$this->setTemplate('edit', 'CapcoAdminBundle:HighlightedContent:edit.html.twig');
+        parent::configure();
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->add('move_actions', 'actions', [
                 'label' => 'admin.action.highlighted_content.move_actions.label',
                 'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
@@ -52,7 +48,7 @@ class HighlightedContentAdmin extends AbstractAdmin
                     ],
                 ],
             ])
-            ->add('object', null, [
+            ->add('currentObjectType', null, [
                 'label' => 'global.contenu',
                 'mapped' => false,
                 'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
@@ -66,38 +62,38 @@ class HighlightedContentAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
         $subject = $this->getSubject();
 
-        $formMapper->add('position', null, [
+        $form->add('position', null, [
             'label' => 'global.position',
         ]);
 
         if ($subject instanceof HighlightedPost) {
-            $formMapper->add('post', ModelType::class, [
+            $form->add('post', ModelType::class, [
                 'label' => 'global.article',
                 'class' => Post::class,
             ]);
         } elseif ($subject instanceof HighlightedProject) {
-            $formMapper->add('project', ModelType::class, [
+            $form->add('project', ModelType::class, [
                 'label' => 'global.project',
                 'class' => Project::class,
             ]);
         } elseif ($subject instanceof HighlightedEvent) {
-            $formMapper->add('event', ModelType::class, [
+            $form->add('event', ModelType::class, [
                 'label' => 'admin.fields.highlighted_content.event',
                 'class' => Event::class,
             ]);
         } elseif ($subject instanceof HighlightedTheme) {
-            $formMapper->add('theme', ModelType::class, [
+            $form->add('theme', ModelType::class, [
                 'label' => 'global.theme',
                 'class' => Theme::class,
             ]);
         }
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->add('down', $this->getRouterIdParameter() . '/down');
         $collection->add('up', $this->getRouterIdParameter() . '/up');

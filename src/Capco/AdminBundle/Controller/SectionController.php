@@ -5,9 +5,10 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Resolver\SectionResolver;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerException;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,13 +16,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends PositionableController
 {
-    public function __construct()
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool)
     {
-        parent::__construct(SectionResolver::class);
+        parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool);
     }
 
     /**
-     * @param array $selectedIds
      * @param $allEntitiesSelected
      *
      * @return bool|string
@@ -41,15 +41,10 @@ class SectionController extends PositionableController
     /**
      * Delete action.
      *
-     * @param int|string|null $id
-     * @param Request         $request
-     *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
-     *
-     * @return Response|RedirectResponse
      */
-    public function deleteAction($id, Request $request = null)
+    public function deleteAction(Request $request): Response
     {
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
@@ -58,21 +53,16 @@ class SectionController extends PositionableController
             throw $this->createAccessDeniedException();
         }
 
-        return parent::deleteAction($id, $request);
+        return parent::deleteAction($request);
     }
 
     /**
      * Edit action.
      *
-     * @param int|string|null $deprecatedId
-     *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
-     *
-     * @return Response|RedirectResponse
-     *
      */
-    public function editAction($deprecatedId = null)
+    public function editAction(Request $request): Response
     {
         // NEXT_MAJOR: Remove the unused $id parameter
         if (isset(\func_get_args()[0])) {
@@ -90,7 +80,6 @@ class SectionController extends PositionableController
         // the key used to lookup the template
         $templateKey = 'edit';
 
-        $request = $this->getRequest();
         $id = $request->get($this->admin->getIdParameter());
 
         /**
@@ -104,7 +93,7 @@ class SectionController extends PositionableController
             );
         }
 
-        if ($existingObject->getType() === 'projects') {
+        if ('projects' === $existingObject->getType()) {
             return $this->renderWithExtraParams(
                 'CapcoAdminBundle:Section:edit_projects.html.twig',
                 [
@@ -113,7 +102,7 @@ class SectionController extends PositionableController
                 ]
             );
         }
-        elseif ($existingObject->getType() === 'projectsMap') {
+        if ('projectsMap' === $existingObject->getType()) {
             return $this->renderWithExtraParams(
                 'CapcoAdminBundle:Section:edit_projects_map.html.twig',
                 [
@@ -145,7 +134,10 @@ class SectionController extends PositionableController
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 /** @phpstan-var T $submittedObject */
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
@@ -153,7 +145,7 @@ class SectionController extends PositionableController
                 try {
                     $existingObject = $this->admin->update($submittedObject);
 
-                    if ($this->isXmlHttpRequest()) {
+                    if ($this->isXmlHttpRequest($request)) {
                         return $this->handleXmlHttpRequestSuccessResponse(
                             $request,
                             $existingObject
@@ -174,7 +166,7 @@ class SectionController extends PositionableController
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($existingObject);
+                    return $this->redirectTo($request, $existingObject);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -203,7 +195,7 @@ class SectionController extends PositionableController
             // show an error message if the form failed validation
             if (!$isFormValid) {
                 if (
-                    $this->isXmlHttpRequest() &&
+                    $this->isXmlHttpRequest($request) &&
                     null !== ($response = $this->handleXmlHttpRequestErrorResponse($request, $form))
                 ) {
                     return $response;
@@ -217,7 +209,7 @@ class SectionController extends PositionableController
                         'SonataAdminBundle'
                     )
                 );
-            } elseif ($this->isPreviewRequested()) {
+            } elseif ($this->isPreviewRequested($request)) {
                 // enable the preview template if the form was valid and preview was requested
                 $templateKey = 'preview';
                 $this->admin->getShow();
@@ -228,9 +220,7 @@ class SectionController extends PositionableController
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFormTheme());
 
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate($templateKey);
-        // $template = $this->templateRegistry->getTemplate($templateKey);
+        $template = $this->admin->getTemplateRegistry()->getTemplate($templateKey);
 
         return $this->renderWithExtraParams(
             $template,

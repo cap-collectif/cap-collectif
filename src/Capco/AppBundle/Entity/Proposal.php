@@ -9,10 +9,12 @@ use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
+use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
@@ -1661,5 +1663,30 @@ class Proposal implements
         return $this->getForm()
             ? $this->getForm()->getObjectType()
             : ProposalFormObjectType::PROPOSAL;
+    }
+
+    public function getPublicationStatus(): string
+    {
+        if ($this->isDeleted()) {
+            return ProposalPublicationStatus::DELETED;
+        }
+
+        if ($this->isDraft()) {
+            return ProposalPublicationStatus::DRAFT;
+        }
+
+        if ($this->isTrashed()) {
+            if (Trashable::STATUS_VISIBLE === $this->getTrashedStatus()) {
+                return ProposalPublicationStatus::TRASHED;
+            }
+
+            return ProposalPublicationStatus::TRASHED_NOT_VISIBLE;
+        }
+
+        if (!$this->isPublished()) {
+            return ProposalPublicationStatus::UNPUBLISHED;
+        }
+
+        return ProposalPublicationStatus::PUBLISHED;
     }
 }

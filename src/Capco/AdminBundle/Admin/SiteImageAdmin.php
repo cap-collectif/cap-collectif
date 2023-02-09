@@ -3,54 +3,57 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\MediaBundle\Provider\MediaProvider;
-use Sonata\BlockBundle\Meta\Metadata;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Capco\AppBundle\Repository\SiteImageRepository;
 
 class SiteImageAdmin extends AbstractAdmin
 {
-    protected $datagridValues = [
+    protected array $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'isEnabled',
     ];
     private MediaProvider $mediaProvider;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct($code, $class, $baseControllerName, MediaProvider $mediaProvider)
-    {
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        MediaProvider $mediaProvider,
+        EntityManagerInterface $entityManager
+    ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->mediaProvider = $mediaProvider;
+        $this->entityManager = $entityManager;
     }
 
-    public function toString($object)
+    public function toString($object): string
     {
         if (!\is_object($object)) {
             return '';
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()
-                ->getContainer()
-                ->get('translator')
+            return $this->getTranslator()
                 ->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
     }
 
-    public function postUpdate($object)
+    public function postUpdate($object): void
     {
-        $entityManager = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('doctrine.orm.entity_manager');
-        $cacheDriver = $entityManager->getConfiguration()->getResultCacheImpl();
+        $cacheDriver = $this->entityManager->getConfiguration()->getResultCacheImpl();
         $cacheDriver->delete(SiteImageRepository::getValuesIfEnabledCacheKey());
     }
 
     // For mosaic view
-    public function getObjectMetadata($object)
+    public function getObjectMetadata($object): MetadataInterface
     {
         $media = $object->getMedia();
         if ($media) {
@@ -67,9 +70,9 @@ class SiteImageAdmin extends AbstractAdmin
         return parent::getObjectMetadata($object);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('isEnabled', null, [
                 'label' => 'global.published',
                 'required' => false,
@@ -77,13 +80,11 @@ class SiteImageAdmin extends AbstractAdmin
             ->add('media', ModelListType::class, [
                 'required' => false,
                 'label' => 'global.image',
+                'help' => 'admin.help.social_network_thumbnail'
             ]);
-        if ($this->subject->isSocialNetworkThumbnail()) {
-            $formMapper->addHelp('Media', 'admin.help.social_network_thumbnail');
-        }
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['edit']);
     }

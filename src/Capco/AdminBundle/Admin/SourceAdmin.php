@@ -3,12 +3,11 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Form\Type\TrashedStatusType;
-use Doctrine\DBAL\Query\QueryBuilder;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -17,10 +16,10 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SourceAdmin extends AbstractAdmin
 {
-    protected $classnameLabel = 'source';
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+    protected ?string $classnameLabel = 'source';
+    protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    private $tokenStorage;
+    private TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
@@ -35,15 +34,14 @@ class SourceAdmin extends AbstractAdmin
     /**
      * if user is supper admin return all else return only what I can see.
      */
-    public function createQuery($context = 'list')
+    public function createQuery(): ProxyQueryInterface
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return parent::createQuery($context);
+            return parent::createQuery();
         }
 
-        /** @var QueryBuilder $query */
-        $query = parent::createQuery($context);
+        $query = parent::createQuery();
         $query
             ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
             ->innerJoin('op.consultation', 'opc')
@@ -67,25 +65,19 @@ class SourceAdmin extends AbstractAdmin
         return $query;
     }
 
-    public function getTemplate($name)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        if ('edit' === $name) {
-            return 'CapcoAdminBundle:common:edit.html.twig';
-        }
-
-        return parent::getTemplate($name);
-    }
-
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
+        $filter
             ->add('title', null, ['label' => 'global.title'])
             ->add('body', null, ['label' => 'global.contenu'])
-            ->add('author', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('author', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ])
             ->add('opinion', null, ['label' => 'global.proposal'])
             ->add('category', null, ['label' => 'global.type'])
@@ -99,11 +91,9 @@ class SourceAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
@@ -137,10 +127,9 @@ class SourceAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $form): void
     {
-        $currentUser = $this->tokenStorage->getToken()->getUser();
-        $formMapper
+        $form
             ->add('title', null, ['label' => 'global.title'])
             ->add('published', null, [
                 'label' => 'global.published',
@@ -151,7 +140,7 @@ class SourceAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity, $property) {
+                'to_string_callback' => function ($entity) {
                     return $entity->getEmail() . ' - ' . $entity->getUsername();
                 },
             ])
@@ -170,7 +159,7 @@ class SourceAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
     }
 }

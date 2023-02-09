@@ -7,13 +7,13 @@ use Sonata\AdminBundle\Exception\ModelManagerException;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends Controller
 {
-    public function createAction()
+    public function createAction(Request $request): Response
     {
-        $request = $this->getRequest();
-
         $this->admin->checkAccess('create');
 
         $newPage = $this->admin->getNewInstance();
@@ -47,7 +47,7 @@ class PageController extends Controller
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($newPage);
+                    return $this->redirectTo($request, $newPage);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -75,9 +75,7 @@ class PageController extends Controller
             ->getRuntime(FormRenderer::class)
             ->setTheme($formView, $this->admin->getFormTheme());
 
-        // NEXT_MAJOR: Remove this line and use commented line below it instead
-        $template = $this->admin->getTemplate('edit');
-        // $template = $this->templateRegistry->getTemplate($templateKey);
+        $template = $this->admin->getTemplateRegistry()->getTemplate('edit');
 
         return $this->renderWithExtraParams(
             $template,

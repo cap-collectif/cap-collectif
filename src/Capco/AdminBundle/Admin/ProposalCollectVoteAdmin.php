@@ -2,34 +2,34 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class ProposalCollectVoteAdmin extends AbstractAdmin
 {
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('proposal', null, ['label' => 'admin.fields.opinion_vote.opinion'])
-            ->add('user', ModelAutocompleteFilter::class, ['label' => 'global.author'], null, [
-                'property' => 'email,username',
-                'to_string_callback' => function ($entity, $property) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+            ->add('user', ModelAutocompleteFilter::class, [
+                'field_options' => [
+                    'label' => 'global.author',
+                    'property' => 'email,username',
+                    'to_string_callback' => function ($entity, $property) {
+                        return $entity->getEmail() . ' - ' . $entity->getUsername();
+                    },
+                ],
             ]);
     }
 
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $list): void
     {
-        unset($this->listModes['mosaic']);
-
-        $listMapper
+        $list
             ->add('proposal', ModelType::class, ['label' => 'admin.fields.proposal'])
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('collectStep', ModelType::class, ['label' => 'admin.fields.step'])
@@ -40,9 +40,9 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
             ->add('_action', 'actions', ['actions' => ['show' => []]]);
     }
 
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $show): void
     {
-        $showMapper
+        $show
             ->add('proposal', ModelType::class, [
                 'label' => 'global.argument.label',
             ])
@@ -50,7 +50,7 @@ class ProposalCollectVoteAdmin extends AbstractAdmin
             ->add('createdAt', null, ['label' => 'global.creation']);
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->remove('create');
         $collection->remove('edit');
