@@ -20,7 +20,7 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
-  swcMinify: true,
+
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -28,19 +28,21 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-  compiler: {
-    relay: {
-      language: 'typescript',
-      src: './',
-      artifactDirectory: './__generated__',
-      excludes: ['**/.next/**', '**/node_modules/**', '**/schema/**', '**/__generated__/**'],
-    },
-  },
+
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.(js|ts)x?$/,
       use: ['@svgr/webpack'],
+    });
+    config.module.rules.push({
+      test: /\.(js|jsx)$/,
+      include: /..\/node_modules\/(?=(react-leaflet|@react-leaflet\/core)\/).*/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+        plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
+      },
     });
 
     if (!isServer) {

@@ -1,0 +1,13 @@
+{
+    "presets": [
+        "@babel/preset-flow",
+        [
+            "@babel/preset-react", {
+            "runtime": "classic"
+        }],
+        "next/babel"
+    ],
+    "plugins": [
+        ["relay", { "artifactDirectory": "./__generated__" }]
+    ]
+}
