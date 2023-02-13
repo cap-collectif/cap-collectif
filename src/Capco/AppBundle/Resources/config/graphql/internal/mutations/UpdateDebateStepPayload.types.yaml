@@ -1,0 +1,6 @@
+UpdateDebateStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            debateStep:
+                type: 'InternalDebateStep!'

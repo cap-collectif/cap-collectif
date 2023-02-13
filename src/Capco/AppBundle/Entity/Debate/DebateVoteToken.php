@@ -24,7 +24,7 @@ class DebateVoteToken extends AbstractUserToken
 {
     /**
      * @ORM\ManyToOne(targetEntity=Debate::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Debate $debate;
 

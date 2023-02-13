@@ -10,7 +10,7 @@ import { StepTypeEnum } from "./defaultStepConfig";
 
 const createStep = async (intl: IntlShape, projectId: string, stepType: StepType) => {
     const input = {
-        title: `${intl.formatMessage({id: 'global.title'})} - ${stepType}`,
+        title: '',
         projectId,
     };
     switch (stepType) {

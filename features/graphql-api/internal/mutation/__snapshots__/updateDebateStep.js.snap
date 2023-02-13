@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateDebateStep admin should be able to edit debate step. 1`] = `
+Object {
+  "updateDebateStep": Object {
+    "debateStep": Object {
+      "body": "body",
+      "customCode": "custom code",
+      "debate": Object {
+        "articles": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "RGViYXRlQXJ0aWNsZTpjYW5hYmlzQXJ0aWNsZUJmbQ==",
+                "url": "https://www.bfmtv.com/economie/estime-a-3-2-milliards-d-euros-en-france-le-marche-du-cannabis-serait-bien-plus-gros-que-ce-qu-on-pensait_AN-202010200002.html",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "RGViYXRlQXJ0aWNsZTpjYW5hYmlzQXJ0aWNsZU91ZXN0RnJhbmNlMQ==",
+                "url": "https://www.ouest-france.fr/societe/cannabis/cannabis-therapeutique-le-cahier-des-charges-des-futurs-medicaments-publie-7020873",
+              },
+            },
+          ],
+        },
+        "id": "RGViYXRlOmRlYmF0ZUNhbm5hYmlz",
+      },
+      "debateContent": "content",
+      "debateType": "FACE_TO_FACE",
+      "enabled": true,
+      "isAnonymousParticipationAllowed": false,
+      "label": "Débatzz",
+      "metaDescription": "meta description",
+      "timeRange": Object {
+        "endAt": "2024-10-01 12:00:00",
+        "startAt": "2023-10-01 14:00:00",
+      },
+      "timeless": false,
+      "title": "Pour ou contre la légalisation du Cannabis ?",
+    },
+  },
+}
+`;

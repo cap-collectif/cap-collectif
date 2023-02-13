@@ -1,0 +1,32 @@
+UpdateDebateStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            id:
+                type: 'ID!'
+            title:
+                type: 'String!'
+            label:
+                type: 'String!'
+            startAt:
+                type: 'DateTime'
+            endAt:
+                type: 'DateTime'
+            body:
+                type: 'HTML'
+            metaDescription:
+                type: 'String'
+            customCode:
+                type: 'String'
+            isEnabled:
+                type: 'Boolean!'
+            timeless:
+                type: 'Boolean'
+            articles:
+                type: '[DebateArticleInput]'
+            debateType:
+                type: 'DebateType!'
+            debateContent:
+                type: 'HTML'
+            isAnonymousParticipationAllowed:
+                type: 'Boolean'

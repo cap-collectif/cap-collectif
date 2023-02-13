@@ -63,10 +63,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             },
             "_executeSchema": [Function],
             "_fields": Object {},
+            "_focusError": [Function],
             "_formState": Object {
               "dirtyFields": Object {},
               "errors": Object {},
               "isDirty": false,
+              "isLoading": true,
               "isSubmitSuccessful": false,
               "isSubmitted": false,
               "isSubmitting": false,
@@ -105,6 +107,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               "touchedFields": false,
             },
             "_removeUnmounted": [Function],
+            "_reset": [Function],
             "_stateFlags": Object {
               "action": false,
               "mount": false,
@@ -119,11 +122,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "state": Object {
                 "next": [Function],
-                "observers": Array [
-                  Object {
-                    "next": [Function],
-                  },
-                ],
+                "observers": Array [],
                 "subscribe": [Function],
                 "unsubscribe": [Function],
               },
@@ -135,7 +134,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
             },
             "_updateFieldArray": [Function],
+            "_updateFormState": [Function],
             "_updateValid": [Function],
+            "getFieldState": [Function],
             "register": [Function],
             "unregister": [Function],
           }
@@ -155,10 +156,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "_executeSchema": [Function],
               "_fields": Object {},
+              "_focusError": [Function],
               "_formState": Object {
                 "dirtyFields": Object {},
                 "errors": Object {},
                 "isDirty": false,
+                "isLoading": true,
                 "isSubmitSuccessful": false,
                 "isSubmitted": false,
                 "isSubmitting": false,
@@ -197,6 +200,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 "touchedFields": false,
               },
               "_removeUnmounted": [Function],
+              "_reset": [Function],
               "_stateFlags": Object {
                 "action": false,
                 "mount": false,
@@ -211,11 +215,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
                 "state": Object {
                   "next": [Function],
-                  "observers": Array [
-                    Object {
-                      "next": [Function],
-                    },
-                  ],
+                  "observers": Array [],
                   "subscribe": [Function],
                   "unsubscribe": [Function],
                 },
@@ -227,7 +227,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
               },
               "_updateFieldArray": [Function],
+              "_updateFormState": [Function],
               "_updateValid": [Function],
+              "getFieldState": [Function],
               "register": [Function],
               "unregister": [Function],
             }
@@ -246,10 +248,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             },
             "_executeSchema": [Function],
             "_fields": Object {},
+            "_focusError": [Function],
             "_formState": Object {
               "dirtyFields": Object {},
               "errors": Object {},
               "isDirty": false,
+              "isLoading": true,
               "isSubmitSuccessful": false,
               "isSubmitted": false,
               "isSubmitting": false,
@@ -288,6 +292,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               "touchedFields": false,
             },
             "_removeUnmounted": [Function],
+            "_reset": [Function],
             "_stateFlags": Object {
               "action": false,
               "mount": false,
@@ -302,11 +307,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "state": Object {
                 "next": [Function],
-                "observers": Array [
-                  Object {
-                    "next": [Function],
-                  },
-                ],
+                "observers": Array [],
                 "subscribe": [Function],
                 "unsubscribe": [Function],
               },
@@ -318,7 +319,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
             },
             "_updateFieldArray": [Function],
+            "_updateFormState": [Function],
             "_updateValid": [Function],
+            "getFieldState": [Function],
             "register": [Function],
             "unregister": [Function],
           }
@@ -338,10 +341,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "_executeSchema": [Function],
               "_fields": Object {},
+              "_focusError": [Function],
               "_formState": Object {
                 "dirtyFields": Object {},
                 "errors": Object {},
                 "isDirty": false,
+                "isLoading": true,
                 "isSubmitSuccessful": false,
                 "isSubmitted": false,
                 "isSubmitting": false,
@@ -380,6 +385,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 "touchedFields": false,
               },
               "_removeUnmounted": [Function],
+              "_reset": [Function],
               "_stateFlags": Object {
                 "action": false,
                 "mount": false,
@@ -394,11 +400,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
                 "state": Object {
                   "next": [Function],
-                  "observers": Array [
-                    Object {
-                      "next": [Function],
-                    },
-                  ],
+                  "observers": Array [],
                   "subscribe": [Function],
                   "unsubscribe": [Function],
                 },
@@ -410,7 +412,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
               },
               "_updateFieldArray": [Function],
+              "_updateFormState": [Function],
               "_updateValid": [Function],
+              "getFieldState": [Function],
               "register": [Function],
               "unregister": [Function],
             }
@@ -428,10 +432,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
             },
             "_executeSchema": [Function],
             "_fields": Object {},
+            "_focusError": [Function],
             "_formState": Object {
               "dirtyFields": Object {},
               "errors": Object {},
               "isDirty": false,
+              "isLoading": true,
               "isSubmitSuccessful": false,
               "isSubmitted": false,
               "isSubmitting": false,
@@ -470,6 +476,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               "touchedFields": false,
             },
             "_removeUnmounted": [Function],
+            "_reset": [Function],
             "_stateFlags": Object {
               "action": false,
               "mount": false,
@@ -484,11 +491,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "state": Object {
                 "next": [Function],
-                "observers": Array [
-                  Object {
-                    "next": [Function],
-                  },
-                ],
+                "observers": Array [],
                 "subscribe": [Function],
                 "unsubscribe": [Function],
               },
@@ -500,7 +503,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
             },
             "_updateFieldArray": [Function],
+            "_updateFormState": [Function],
             "_updateValid": [Function],
+            "getFieldState": [Function],
             "register": [Function],
             "unregister": [Function],
           }
@@ -520,10 +525,12 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
               },
               "_executeSchema": [Function],
               "_fields": Object {},
+              "_focusError": [Function],
               "_formState": Object {
                 "dirtyFields": Object {},
                 "errors": Object {},
                 "isDirty": false,
+                "isLoading": true,
                 "isSubmitSuccessful": false,
                 "isSubmitted": false,
                 "isSubmitting": false,
@@ -562,6 +569,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 "touchedFields": false,
               },
               "_removeUnmounted": [Function],
+              "_reset": [Function],
               "_stateFlags": Object {
                 "action": false,
                 "mount": false,
@@ -576,11 +584,7 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
                 "state": Object {
                   "next": [Function],
-                  "observers": Array [
-                    Object {
-                      "next": [Function],
-                    },
-                  ],
+                  "observers": Array [],
                   "subscribe": [Function],
                   "unsubscribe": [Function],
                 },
@@ -592,7 +596,9 @@ exports[`<ProposalContactModal /> renders correctly 1`] = `
                 },
               },
               "_updateFieldArray": [Function],
+              "_updateFormState": [Function],
               "_updateValid": [Function],
+              "getFieldState": [Function],
               "register": [Function],
               "unregister": [Function],
             }

@@ -8,7 +8,6 @@ import {CreateStepPageQuery} from "@relay/CreateStepPageQuery.graphql";
 import {useNavBarContext} from "@components/NavBar/NavBar.context";
 import {getDefaultStepConfig, StepTypeEnum} from "@components/CreateStep/defaultStepConfig";
 import {createStep} from "@components/CreateStep/createStep";
-import {mutationErrorToast} from "@utils/mutation-error-toast";
 
 export type StepType = 'COLLECT' | 'VOTE' | 'DEBATE' | 'QUESTIONNAIRE' | 'CONSULTATION' | 'ANALYSIS' | 'RESULT' | 'CUSTOM'
 
@@ -18,6 +17,10 @@ export type Step = {
     description: string
     spotIcon: CapUISpotIcon,
     helpText: string
+}
+
+type Props = {
+    projectId: string
 }
 
 export const PROJECT_QUERY = graphql`
@@ -36,7 +39,7 @@ export const PROJECT_QUERY = graphql`
     }
 `;
 
-const CreateStepPage = ({projectId}: { projectId: string }) => {
+const CreateStepPage: React.FC<Props> = ({projectId}) => {
     const intl = useIntl();
     const query = useLazyLoadQuery<CreateStepPageQuery>(PROJECT_QUERY, {id: projectId});
     const {setBreadCrumbItems} = useNavBarContext();
@@ -47,7 +50,8 @@ const CreateStepPage = ({projectId}: { projectId: string }) => {
     const hasCollectStep = steps?.some(step => step.__typename === 'CollectStep');
 
     if (!canEdit) {
-        return window.location.href = '/admin-next/projects';
+        window.location.href = '/admin-next/projects';
+        return null;
     }
 
     

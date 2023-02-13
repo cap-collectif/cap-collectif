@@ -1710,4 +1710,10 @@ InternalMutation:
                     inputType: DeleteStepInput
                     payloadType: DeleteStepPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteStepMutation", [value, getUser()])'
-
+            updateDebateStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateDebateStepMutation").isGranted(args["input"]["id"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateDebateStepInput
+                    payloadType: UpdateDebateStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateDebateStepMutation", [value, getUser()])'

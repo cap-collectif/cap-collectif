@@ -8132,6 +8132,7 @@ type Mutation {
   addOtherStep(input: AddStepInput!): AddStepPayload
   updateOtherStep(input: UpdateOtherStepInput!): UpdateOtherStepPayload
   deleteStep(input: DeleteStepInput!): DeleteStepPayload
+  updateDebateStep(input: UpdateDebateStepInput!): UpdateDebateStepPayload
 }
 
 """A connection to a list of items."""
@@ -16458,6 +16459,29 @@ type UpdateDebateOpinionPayload {
 
   """An unsuccessful mutation will return an error."""
   errorCode: UpdateDebateOpinionErrorCode
+  clientMutationId: String
+}
+
+input UpdateDebateStepInput {
+  id: ID!
+  title: String!
+  label: String!
+  startAt: DateTime
+  endAt: DateTime
+  body: HTML
+  metaDescription: String
+  customCode: String
+  isEnabled: Boolean!
+  timeless: Boolean
+  articles: [DebateArticleInput]
+  debateType: DebateType!
+  debateContent: HTML
+  isAnonymousParticipationAllowed: Boolean
+  clientMutationId: String
+}
+
+type UpdateDebateStepPayload {
+  debateStep: DebateStep!
   clientMutationId: String
 }
 
