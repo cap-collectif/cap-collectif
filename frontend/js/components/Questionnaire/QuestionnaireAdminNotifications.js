@@ -1,17 +1,17 @@
 // @flow
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import { useSelector } from 'react-redux';
 import { graphql, useFragment } from 'react-relay';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import component from '~/components/Form/Field';
 import AlertForm from '~/components/Alert/AlertForm';
-import type { Dispatch, GlobalState } from '~/types';
+import type {Dispatch} from '~/types';
 import UpdateQuestionnaireNotificationConfigurationMutation from '~/mutations/UpdateQuestionnaireNotificationConfigurationMutation';
 import type { QuestionnaireAdminNotifications_questionnaire } from '~relay/QuestionnaireAdminNotifications_questionnaire.graphql';
 import AppBox from '~ui/Primitives/AppBox';
 import { type QuestionnaireAdminNotifications_questionnaire$key } from '~relay/QuestionnaireAdminNotifications_questionnaire.graphql';
+import type {QuestionnaireAdminNotifications_viewer$key} from "~relay/QuestionnaireAdminNotifications_viewer.graphql";
 
 const formName = 'questionnaire-admin-notifications';
 
@@ -21,6 +21,7 @@ type QuestionnaireProps = {|
 
 type QuestionnaireFragmentProps = {|
   +questionnaire: QuestionnaireAdminNotifications_questionnaire$key,
+  +viewer: QuestionnaireAdminNotifications_viewer$key,
 |};
 
 type Props = {|
@@ -39,7 +40,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: QuestionnaireProps)
   });
 };
 
-const FRAGMENT = graphql`
+const QUESTIONNAIRE_FRAGMENT = graphql`
   fragment QuestionnaireAdminNotifications_questionnaire on Questionnaire {
     id
     creator {
@@ -54,6 +55,16 @@ const FRAGMENT = graphql`
   }
 `;
 
+const VIEWER_FRAGMENT = graphql`
+  fragment QuestionnaireAdminNotifications_viewer on User {
+    isOnlyProjectAdmin
+    organizations {
+      id
+    }
+  }
+`
+
+
 const QuestionnaireAdminNotifications = ({
   handleSubmit,
   valid,
@@ -62,13 +73,12 @@ const QuestionnaireAdminNotifications = ({
   submitting,
   submitFailed,
   submitSucceeded,
+  viewer: viewerRef
 }: Props) => {
   const intl = useIntl();
 
-  const showEmailField: boolean = useSelector((state: GlobalState) => {
-    const user = state.user?.user;
-    return (user?.isProjectAdmin || !!user?.organizationId) ?? false;
-  });
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+  const showEmailField = viewer?.isOnlyProjectAdmin || viewer?.organizations?.[0];
 
   return (
     <div className="box box-primary container-fluid">
@@ -143,12 +153,16 @@ const form = reduxForm({
 
 function injectProp(Component) {
   return function WrapperComponent(props: QuestionnaireFragmentProps) {
-    const { questionnaire: questionnaireFragment } = props;
-    const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
+    const { questionnaire: questionnaireFragment, viewer: viewerFragment } = props;
+    const questionnaire = useFragment(QUESTIONNAIRE_FRAGMENT, questionnaireFragment);
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
     const { notificationsConfiguration } = questionnaire;
     const creator = questionnaire?.creator;
+
+    const showEmailField = (viewer?.isOnlyProjectAdmin || !!viewer?.organizations?.[0]) ?? false;
+
     const initialValues = {
-      email: notificationsConfiguration.email ?? creator?.email,
+      email: showEmailField ? notificationsConfiguration.email ?? creator?.email : null,
       onQuestionnaireReplyCreate: notificationsConfiguration.onQuestionnaireReplyCreate,
       onQuestionnaireReplyUpdate: notificationsConfiguration.onQuestionnaireReplyUpdate,
       onQuestionnaireReplyDelete: notificationsConfiguration.onQuestionnaireReplyDelete,

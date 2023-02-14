@@ -89,10 +89,7 @@ class ProposalNotifier extends BaseNotifier
                     'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
                 ],
                 null,
-                $proposal
-                    ->getProposalForm()
-                    ->getNotificationsConfiguration()
-                    ->getEmail()
+                $this->getRecipientEmail($proposal)
             );
         }
 
@@ -152,10 +149,7 @@ class ProposalNotifier extends BaseNotifier
                     'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
                 ],
                 null,
-                $proposal
-                    ->getProposalForm()
-                    ->getNotificationsConfiguration()
-                    ->getEmail()
+                $this->getRecipientEmail($proposal)
             );
         }
 
@@ -184,10 +178,7 @@ class ProposalNotifier extends BaseNotifier
                     'authorURL' => $this->userUrlResolver->__invoke($proposal->getAuthor()),
                 ],
                 null,
-                $proposal
-                    ->getProposalForm()
-                    ->getNotificationsConfiguration()
-                    ->getEmail()
+                $this->getRecipientEmail($proposal)
             );
         }
 
@@ -472,5 +463,15 @@ class ProposalNotifier extends BaseNotifier
             ? ProposalDeleteMessage::class
             : ProposalUpdateMessage::class;
         $this->mailer->createAndSendMessage($messageType, $proposal, $params, $analyst);
+    }
+
+    private function getRecipientEmail(Proposal $proposal): ?string
+    {
+        $owner = $proposal->getProposalForm()->getOwner();
+
+        if ($owner instanceof User && $owner->isAdmin()) {
+            return null;
+        }
+        return $proposal->getProposalForm()->getNotificationsConfiguration()->getEmail();
     }
 }

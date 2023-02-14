@@ -126,7 +126,7 @@ class AddUserReplyMutation implements MutationInterface
         $this->indexer->index(Reply::class, $reply->getId());
         $this->indexer->finishBulk();
 
-        if ($questionnaire->isAcknowledgeReplies() && !$reply->isDraft()) {
+        if (!$reply->isDraft()) {
             $this->publisher->publish(
                 'questionnaire.reply',
                 new Message(

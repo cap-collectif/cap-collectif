@@ -105,7 +105,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         ];
 
         if ($questionnaire->isNotifyResponseCreate()) {
-            $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
             $messageType = $isAnonReply
                 ? QuestionnaireReplyAnonymousCreateAdminMessage::class
                 : QuestionnaireReplyCreateAdminMessage::class;
@@ -115,7 +114,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 $reply,
                 $params,
                 null,
-                $recipientEmail
+                $this->getRecipientEmail($questionnaire)
             );
         }
 
@@ -190,7 +189,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         );
 
         if ($questionnaire->isNotifyResponseUpdate()) {
-            $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
             $messageType = $isAnonReply
                 ? QuestionnaireReplyAnonymousUpdateAdminMessage::class
                 : QuestionnaireReplyUpdateAdminMessage::class;
@@ -209,7 +207,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                     'configURL' => $configUrl,
                 ],
                 null,
-                $recipientEmail
+                $this->getRecipientEmail($questionnaire)
             );
         }
         if ($questionnaire->isAcknowledgeReplies() && !$isAnonReply) {
@@ -258,7 +256,6 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     public function onDelete(array $reply): bool
     {
         $questionnaire = $this->questionnaireRepository->find($reply['questionnaire_id']);
-        $recipientEmail = $questionnaire->getNotificationsConfiguration()->getEmail();
         $isAnonReply = $reply['is_anon_reply'];
 
         $userUrl = !$isAnonReply
@@ -294,7 +291,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 'time' => $this->getTime($date),
             ],
             null,
-            $recipientEmail
+            $this->getRecipientEmail($questionnaire)
         );
     }
 
@@ -351,5 +348,15 @@ class QuestionnaireReplyNotifier extends BaseNotifier
                 (new User())->setEmail($replyAnonymous->getParticipantEmail())
             );
         }
+    }
+
+    private function getRecipientEmail(Questionnaire $questionnaire): ?string
+    {
+        $owner = $questionnaire->getOwner();
+
+        if ($owner instanceof User && $owner->isAdmin()) {
+            return null;
+        }
+        return $questionnaire->getNotificationsConfiguration()->getEmail();
     }
 }

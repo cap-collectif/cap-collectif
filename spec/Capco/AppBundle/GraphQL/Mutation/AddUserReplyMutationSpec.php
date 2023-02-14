@@ -131,7 +131,6 @@ class AddUserReplyMutationSpec extends ObjectBehavior
         $indexer->index(Reply::class, Argument::any())->shouldBeCalledOnce();
         $indexer->finishBulk()->shouldBeCalledOnce();
 
-        $questionnaire->isAcknowledgeReplies()->shouldBeCalledOnce()->willReturn(true);
         $publisher->publish('questionnaire.reply', Argument::type(Message::class))->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input, $user);

@@ -1,6 +1,454 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
+exports[`<ProposalFormAdminNotificationForm /> should hide email field if viewer is admin or super admin 1`] = `
+<div
+  className="box box-primary container-fluid mt-10"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal_form.admin.notification"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.form.notifications"
+      rel="noopener noreferrer"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+            "marginTop": 0,
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_form.notifications.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_create"
+        name="onCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications.on_create"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_update"
+        name="onUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.modified"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_delete"
+        name="onDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted.feminine"
+          values={Object {}}
+        />
+      </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_create"
+        name="onCommentCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_create"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_update"
+        name="onCommentUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_update"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_delete"
+        name="onCommentDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted"
+          values={Object {}}
+        />
+      </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_news.notification.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_create"
+        name="onProposalNewsCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="fast.filter.skeleton.published"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_update"
+        name="onProposalNewsUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_update"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_delete"
+        name="onProposalNewsDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted"
+          values={Object {}}
+        />
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="notification-submit"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={false}
+        />
+      </ButtonToolbar>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`<ProposalFormAdminNotificationForm /> should show email field if viewer belongs to an organization 1`] = `
+<div
+  className="box box-primary container-fluid mt-10"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal_form.admin.notification"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.form.notifications"
+      rel="noopener noreferrer"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+            "marginTop": 0,
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_form.notifications.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_create"
+        name="onCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications.on_create"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_update"
+        name="onUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.modified"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_on_delete"
+        name="onDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted.feminine"
+          values={Object {}}
+        />
+      </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_create"
+        name="onCommentCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_create"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_update"
+        name="onCommentUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_update"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_comment_on_delete"
+        name="onCommentDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted"
+          values={Object {}}
+        />
+      </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="proposal_news.notification.label"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_create"
+        name="onProposalNewsCreate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="fast.filter.skeleton.published"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_update"
+        name="onProposalNewsUpdate"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.notifications_comment.on_update"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_proposal_news_on_delete"
+        name="onProposalNewsDelete"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="global.deleted"
+          values={Object {}}
+        />
+      </Field>
+      <h4
+        style={
+          Object {
+            "fontWeight": "bold",
+          }
+        }
+      >
+        <FormattedMessage
+          id="admin.mail.notifications.receive_address"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_notification_email"
+        name="email"
+        type="text"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="notification-submit"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={false}
+        />
+      </ButtonToolbar>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`<ProposalFormAdminNotificationForm /> should show email field if viewer is only project admin 1`] = `
 <div
   className="box box-primary container-fluid mt-10"
 >

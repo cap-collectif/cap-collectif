@@ -10,16 +10,18 @@ import QuestionnaireAdminResults from './QuestionnaireAdminResults';
 import QuestionnaireAdminNotifications from './QuestionnaireAdminNotifications';
 import type { QuestionnaireAdminPageTabs_questionnaire } from '~relay/QuestionnaireAdminPageTabs_questionnaire.graphql';
 import type { State } from '~/types';
+import type {QuestionnaireAdminPageTabs_viewer} from "~relay/QuestionnaireAdminPageTabs_viewer.graphql";
 
 type Props = {|
   enableResultsTab: boolean,
   questionnaire: QuestionnaireAdminPageTabs_questionnaire,
+  viewer: QuestionnaireAdminPageTabs_viewer,
   intl: IntlShape,
 |};
 
 export class QuestionnaireAdminPageTabs extends Component<Props> {
   render() {
-    const { intl, questionnaire, enableResultsTab } = this.props;
+    const { intl, questionnaire, enableResultsTab, viewer } = this.props;
 
     return (
       <div>
@@ -41,7 +43,7 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
             </Tab>
           ) : null}
           <Tab eventKey={4} title={intl.formatMessage({ id: 'global.notifications' })}>
-            <QuestionnaireAdminNotifications questionnaire={questionnaire} />
+            <QuestionnaireAdminNotifications questionnaire={questionnaire} viewer={viewer} />
           </Tab>
         </Tabs>
       </div>
@@ -66,4 +68,9 @@ export default createFragmentContainer(container, {
       ...QuestionnaireAdminNotifications_questionnaire
     }
   `,
+  viewer: graphql`
+    fragment QuestionnaireAdminPageTabs_viewer on User {
+      ...QuestionnaireAdminNotifications_viewer
+    }
+  `
 });

@@ -23,7 +23,7 @@ const component = ({
     return graphqlError;
   }
   if (props) {
-    if (props.questionnaire) {
+    if (props.questionnaire && props.viewer) {
       if (!props.questionnaire.isIndexationDone) {
         if (retry) {
           setTimeout(() => {
@@ -32,8 +32,8 @@ const component = ({
         }
         return <Loader />;
       }
-      const { questionnaire } = props;
-      return <QuestionnaireAdminPageTabs questionnaire={questionnaire} />;
+      const { questionnaire, viewer } = props;
+      return <QuestionnaireAdminPageTabs questionnaire={questionnaire} viewer={viewer} />;
     }
 
     return graphqlError;
@@ -56,6 +56,9 @@ export class QuestionnaireAdminPage extends Component<Props> {
                 ... on Questionnaire {
                   isIndexationDone
                 }
+              }
+              viewer {
+                ...QuestionnaireAdminPageTabs_viewer
               }
             }
           `}

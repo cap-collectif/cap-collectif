@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { ButtonToolbar, Button } from 'react-bootstrap';
@@ -9,7 +9,7 @@ import component from '../Form/Field';
 import AlertForm from '../Alert/AlertForm';
 import UpdateProposalFormNotificationsConfigurationMutation from '../../mutations/UpdateProposalFormNotificationsConfigurationMutation';
 import type { ProposalFormAdminNotificationForm_proposalForm } from '~relay/ProposalFormAdminNotificationForm_proposalForm.graphql';
-import type { State, Dispatch } from '../../types';
+import type {State, Dispatch} from '../../types';
 
 type RelayProps = {|
   proposalForm: ProposalFormAdminNotificationForm_proposalForm,
@@ -24,6 +24,8 @@ type Props = {|
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
+  isOnlyProjectAdmin: boolean,
+  organizationId: string | null
 |};
 
 const formName = 'proposal-form-admin-notification';
@@ -49,7 +51,12 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
+      isOnlyProjectAdmin,
+      organizationId
     } = this.props;
+
+    const showEmailField: boolean = (isOnlyProjectAdmin || !!organizationId) ?? false;
+
     return (
       <div className="box box-primary container-fluid mt-10">
         <div className="box-header">
@@ -137,17 +144,21 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               id="proposal_form_notification_proposal_news_on_delete">
               <FormattedMessage id="global.deleted" />
             </Field>
-            <>
-              <h4 style={{ fontWeight: 'bold' }}>
-                <FormattedMessage id="admin.mail.notifications.receive_address" />
-              </h4>
-              <Field
-                name="email"
-                id="proposal_form_notification_email"
-                type="text"
-                component={component}
-              />
-            </>
+            {
+              showEmailField && (
+                <>
+                  <h4 style={{ fontWeight: 'bold' }}>
+                    <FormattedMessage id="admin.mail.notifications.receive_address" />
+                  </h4>
+                  <Field
+                    name="email"
+                    id="proposal_form_notification_email"
+                    type="text"
+                    component={component}
+                  />
+                </>
+              )
+            }
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -183,11 +194,18 @@ const form = reduxForm({
 
 const mapStateToProps = (state: State, props: RelayProps) => {
   const { notificationsConfiguration } = props.proposalForm;
+  const {user} = state.user;
+  const isOnlyProjectAdmin = user?.isOnlyProjectAdmin;
+  const organizationId = user?.organizationId;
+  const showEmailField: boolean = (isOnlyProjectAdmin || !!organizationId) ?? false;
+
   return {
     initialValues: {
       ...notificationsConfiguration,
-      email: notificationsConfiguration.email ?? props.proposalForm.creator?.email,
+      email: showEmailField ? notificationsConfiguration.email ?? props.proposalForm.creator?.email : null,
     },
+    isOnlyProjectAdmin,
+    organizationId,
   };
 };
 

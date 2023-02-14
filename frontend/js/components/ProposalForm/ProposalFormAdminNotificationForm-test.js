@@ -34,10 +34,22 @@ describe('<ProposalFormAdminNotificationForm />', () => {
         email: null,
       },
     },
+    isOnlyProjectAdmin: false,
+    organizationId: null,
   };
 
-  it('render correctly', () => {
+  it('should hide email field if viewer is admin or super admin', () => {
     const wrapper = shallow(<ProposalFormAdminNotificationForm {...props} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should show email field if viewer is only project admin', () => {
+    const wrapper = shallow(<ProposalFormAdminNotificationForm {...props} isOnlyProjectAdmin />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should show email field if viewer belongs to an organization', () => {
+    const wrapper = shallow(<ProposalFormAdminNotificationForm {...props} organizationId="organizationId" />);
     expect(wrapper).toMatchSnapshot();
   });
 });
