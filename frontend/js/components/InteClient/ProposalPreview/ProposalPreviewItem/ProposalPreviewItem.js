@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Container, Header, Footer, type Colors } from './ProposalPreviewItem.style';
+import Image from '~ui/Primitives/Image';
 
 export type Props = {|
   content: {
@@ -32,7 +33,7 @@ const ProposalPreviewItem = ({
   <Container>
     <Header btnColor={colors.button}>
       <div className="avatar-wrapper">
-        <img src={img} alt="" />
+        <Image src={img} alt="" />
       </div>
       {link && link[lang] && <a href={link[lang]}>{buttonLabel[lang]}</a>}
     </Header>

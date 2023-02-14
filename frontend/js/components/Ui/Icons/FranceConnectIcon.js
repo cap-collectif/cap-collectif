@@ -5,6 +5,7 @@ import { baseUrl } from '~/config';
 const FranceConnectIcon = () => {
   return (
     <img
+      loading="lazy"
       width="82px"
       height="40px"
       src={`${baseUrl}/image/fc_transparent_colored.png`}

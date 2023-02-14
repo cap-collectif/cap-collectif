@@ -8,7 +8,7 @@ exports[`<RatioMediaContainer /> should render correctly default RatioMediaConta
   <div
     className="ratio-media-container__content"
   >
-    <img
+    <Image
       alt=""
       src=""
     />
@@ -24,7 +24,7 @@ exports[`<RatioMediaContainer /> should render correctly with other props 1`] = 
   <div
     className="ratio-media-container__content"
   >
-    <img
+    <Image
       alt=""
       src=""
     />

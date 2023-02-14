@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
+// eslint-disable-next-line import/no-named-default
+import { default as StyledImage } from '~ui/Primitives/Image';
 
 type Props = {|
   src: string,
@@ -25,7 +27,7 @@ const ImageContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
 export const Image = ({ src, alt }: Props) => {
   return (
     <ImageContainer>
-      <img src={src} alt={alt} />
+      <StyledImage src={src} alt={alt} />
     </ImageContainer>
   );
 };

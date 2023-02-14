@@ -4,9 +4,9 @@ import ColorHash from 'color-hash';
 import { variant } from 'styled-system';
 import styled from 'styled-components';
 import { colorContrast } from '~/utils/colorContrast';
-import AppBox from '~ui/Primitives/AppBox';
 import Flex from '~ui/Primitives/Layout/Flex';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import Image from '~ui/Primitives/Image';
 
 const hash = new ColorHash();
 
@@ -135,12 +135,11 @@ export const Avatar = ({
       {shouldDisplayName && children}
       {shouldDisplayName && !children && getInitials(name)}
       {!shouldDisplayName && (
-        <AppBox
-          as="img"
+        <Image
           width="100%"
           height="100%"
           css={{ objectFit: 'cover' }}
-          src={src}
+          src={src || ''}
           alt={alt ?? name}
           title={alt ?? name}
         />

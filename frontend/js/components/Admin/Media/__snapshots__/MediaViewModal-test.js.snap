@@ -23,7 +23,7 @@ exports[`<MediaViewModal /> renders correctly 1`] = `
       />
     </button>
     <div>
-      <img
+      <Image
         alt="displayed media"
         src="/media/photoCompromettanteDeOmarNaked.exe"
       />

@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import styled, { type StyledComponent } from 'styled-components';
 import { Label } from '~/components/Ui/Labels/Label';
 import { baseUrl } from '~/config';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   show: boolean,
@@ -75,16 +76,16 @@ export const AlphaProjectModal = ({ id, show, onClose, hasAnalysis = false }: Pr
       </Body>
       <Pictures>
         <div>
-          <img src={`${imagesPath}/configuration.png`} alt="Configuration de Projet" />
+          <Image src={`${imagesPath}/configuration.png`} alt="Configuration de Projet" />
           <FormattedMessage tagName="p" id="caption.project.setup" />
         </div>
         <div>
-          <img src={`${imagesPath}/participants.png`} alt="Gestion des participants" />
+          <Image src={`${imagesPath}/participants.png`} alt="Gestion des participants" />
           <FormattedMessage tagName="p" id="caption.manage.participants" />
         </div>
         {hasAnalysis && (
           <div>
-            <img src={`${imagesPath}/planification.png`} alt="Gestion des participants" />
+            <Image src={`${imagesPath}/planification.png`} alt="Gestion des participants" />
             <FormattedMessage tagName="p" id="caption.manage.analysis" />
           </div>
         )}

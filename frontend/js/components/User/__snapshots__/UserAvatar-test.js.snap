@@ -10,7 +10,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
   onMouseOver={[Function]}
   style={Object {}}
 >
-  <img
+  <Image
     alt="toto"
     className="img-circle object-cover user-avatar mr-10 mr-10"
     src="http://media12/profileAvatar.jpg"
@@ -51,7 +51,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
   onMouseOver={[Function]}
   style={Object {}}
 >
-  <img
+  <Image
     alt="toto"
     className="img-circle object-cover user-avatar mr-10 "
     src="http://avatar/customAvatar.jpg"

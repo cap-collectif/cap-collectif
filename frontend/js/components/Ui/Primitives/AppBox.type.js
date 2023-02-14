@@ -254,10 +254,12 @@ type HTML = {|
   id?: string,
   className?: string,
   src?: ?string,
+  loading?: 'eager' | 'lazy',
   role?: string,
   type?: 'submit' | 'reset' | 'button',
   alt?: ?string,
   title?: ?string,
+  'data-type'?: ?string,
   dangerouslySetInnerHTML?: {| __html: any |},
 |};
 

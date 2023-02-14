@@ -13,6 +13,7 @@ import { Link as Url } from '~ui/Link/Link';
 import MediaAdminFileView from './MediaAdminFileView';
 import MediaViewModal from './MediaViewModal';
 import DeleteModal from '~/components/Modal/DeleteModal';
+import Image from '~ui/Primitives/Image';
 
 export const MEDIA_PAGINATION = 50;
 
@@ -120,7 +121,7 @@ export const MediaAdminList = ({ query, relay }: Props) => {
                   <S.MediaColumnImage size={400}>
                     <div>
                       {isImage(media.providerReference) ? (
-                        <img src={media.url} alt={media.name} />
+                        <Image src={media.url} alt={media.name} />
                       ) : (
                         <MediaAdminFileView extension={getFileExtension(media.providerReference)} />
                       )}
@@ -179,11 +180,11 @@ export default createPaginationContainer(
   {
     query: graphql`
       fragment MediaAdminList_query on Query
-        @argumentDefinitions(
-          count: { type: "Int" }
-          cursor: { type: "String" }
-          term: { type: "String", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        count: { type: "Int" }
+        cursor: { type: "String" }
+        term: { type: "String", defaultValue: null }
+      ) {
         medias(first: $count, after: $cursor, term: $term)
           @connection(key: "MediaAdminList_medias", filters: ["term"]) {
           totalCount

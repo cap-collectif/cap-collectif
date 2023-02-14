@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { number, text } from 'storybook-addon-knobs';
 
 import RatioMediaContainer from '../../../components/Ui/Medias/RatioMediaContainer';
+import Image from '~ui/Primitives/Image';
 
 storiesOf('Core/Images/RatioMediaContainer', module).add(
   'default',
@@ -15,7 +16,7 @@ storiesOf('Core/Images/RatioMediaContainer', module).add(
 
     return (
       <RatioMediaContainer ratioX={ratioX} ratioY={ratioY}>
-        <img src={url} alt={alt} />
+        <Image src={url} alt={alt} />
       </RatioMediaContainer>
     );
   },

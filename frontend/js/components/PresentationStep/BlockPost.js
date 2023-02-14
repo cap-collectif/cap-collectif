@@ -5,6 +5,7 @@ import { graphql, useFragment } from 'react-relay';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import type { BlockPost_post$key } from '~relay/BlockPost_post.graphql';
+import Image from '~ui/Primitives/Image';
 
 type Props = {| +post: BlockPost_post$key |};
 
@@ -52,7 +53,7 @@ export const BlockPost = ({ post: dataPost }: Props) => {
     <li className="media media--news block block--bordered box">
       {media ? (
         <a href={url} className="pull-left">
-          <img
+          <Image
             src={media.url}
             className="media-object"
             alt={media.name}

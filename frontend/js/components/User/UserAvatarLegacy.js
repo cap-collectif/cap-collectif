@@ -8,6 +8,7 @@ import DefaultAvatar from './DefaultAvatar';
 import type { State, FeatureToggles } from '~/types';
 import type { UserAvatarLegacy_user } from '~relay/UserAvatarLegacy_user.graphql';
 import { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style';
+import Image from '~ui/Primitives/Image';
 
 export type Badge = {|
   color: string,
@@ -80,7 +81,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
 
     if (user && user.media && !needDefaultAvatar) {
       return (
-        <img
+        <Image
           src={user.media.url}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
@@ -91,7 +92,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
 
     if (user && defaultAvatar) {
       return (
-        <img
+        <Image
           src={defaultAvatar}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}

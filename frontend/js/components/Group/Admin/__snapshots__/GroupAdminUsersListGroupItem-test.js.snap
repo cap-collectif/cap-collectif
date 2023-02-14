@@ -22,7 +22,7 @@ exports[`<GroupAdminUsers /> render correctly 1`] = `
       componentClass="div"
       xs={3}
     >
-      <img
+      <Image
         alt="toto"
         className="img-circle mr-15"
         src="https://capco.dev"

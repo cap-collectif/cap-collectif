@@ -127,6 +127,7 @@ storiesOf('Core/Select/SearchableDropdownSelect', module)
           results.map(r => (
             <DropdownSelect.Choice key={r.mal_id} value={r.mal_id}>
               <img
+                loading="lazy"
                 width={32}
                 height={32}
                 style={{

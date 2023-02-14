@@ -5,7 +5,7 @@ exports[`<DefaultImage /> should render correctly 1`] = `
   height="100%"
   width="100%"
 >
-  <img
+  <Image
     alt=""
     src=""
   />
@@ -17,7 +17,7 @@ exports[`<DefaultImage /> should render correctly with other size 1`] = `
   height="400px"
   width="600px"
 >
-  <img
+  <Image
     alt=""
     src=""
   />

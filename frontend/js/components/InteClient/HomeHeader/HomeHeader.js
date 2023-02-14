@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Container, Tag, Content, Illustration, type Colors } from './HomeHeader.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import config from '~/config';
+import Image from '~ui/Primitives/Image';
 
 export type Props = {
   title: string,
@@ -58,7 +59,7 @@ const HomeHeader = ({ title, description, img, tag, mainLink, secondLink, style 
     </Content>
 
     <Illustration img={img}>
-      {!config.isMobile && <img src={img} alt="" className="illustration" />}
+      {!config.isMobile && <Image src={img} alt="" className="illustration" />}
     </Illustration>
   </Container>
 );

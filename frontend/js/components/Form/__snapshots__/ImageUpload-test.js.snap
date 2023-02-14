@@ -51,7 +51,7 @@ exports[`<ImageUpload /> render correctly 1`] = `
     <div
       className="image-uploader__preview text-center"
     >
-      <img
+      <Image
         alt=""
         className="img-responsive"
         src="http://capco.dev"

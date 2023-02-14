@@ -18,7 +18,8 @@ import type { UserInvitationPage_query$key } from '~relay/UserInvitationPage_que
 import type { UserInvitationPage_logo$key } from '~relay/UserInvitationPage_logo.graphql';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Icon from '~ds/Icon/Icon';
-import ChartModal from "~/components/User/Registration/ChartModal";
+import ChartModal from '~/components/User/Registration/ChartModal';
+import Image from '~ui/Primitives/Image';
 
 type RelayProps = {|
   +queryFragmentRef: UserInvitationPage_query$key,
@@ -115,7 +116,7 @@ export const UserInvitationPage = ({
 
       <LogoContainer bgColor={backgroundColor}>
         <Symbols />
-        {logo.media?.url && <img src={logo.media.url} alt={`logo ${organizationName}`} />}
+        {logo.media?.url && <Image src={logo.media.url} alt={`logo ${organizationName}`} />}
       </LogoContainer>
     </Container>
   );

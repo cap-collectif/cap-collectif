@@ -29,7 +29,7 @@ storiesOf('Cap Collectif/Accordion', module)
             `<li>Question <a href='#'>Carrières longues</a> </li>` +
             `<li>Question <a href='#'>Retraite des élus</a> </li>` +
             `</ul></div>` +
-            `<div style='text-align: center;'><img src='https://source.unsplash.com/random/300x200'/><p>Réponse de Jean Paul Delevoye, haut-comissaire aux Retraites</p></div>` +
+            `<div style='text-align: center;'><img loading="lazy" src='https://source.unsplash.com/random/300x200'/><p>Réponse de Jean Paul Delevoye, haut-comissaire aux Retraites</p></div>` +
             `</div>`,
         },
         {

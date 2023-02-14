@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +video: Object,
@@ -69,7 +70,7 @@ export const Video = (props: Props) => {
       <VideoThumbnail video={video} ref={thumbnail}>
         {video.media ? (
           <React.Fragment>
-            <img
+            <Image
               title={video.media.name}
               className="img-responsive"
               src={video.media.thumbnailLink}

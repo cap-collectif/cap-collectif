@@ -9,6 +9,7 @@ import colors from '~/utils/colors';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import { type CategoryImage } from '../ProposalFormAdminCategoriesStepModal';
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +color: ?string,
@@ -89,7 +90,7 @@ export const ProposalFormCategoryBackgroundPreview = ({
   return (
     <Container hasTitle={!!name}>
       {customCategoryImage ? (
-        <img
+        <Image
           src={customCategoryImage?.url || customCategoryImage.image?.url}
           alt="Category background"
         />

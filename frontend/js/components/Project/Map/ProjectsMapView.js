@@ -35,6 +35,7 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type';
 import Text from '~/components/Ui/Primitives/Text';
 import { formatCounter } from '~/components/Ui/Project/ProjectCard.utils';
 import { flyToPosition } from '~/components/Proposal/Map/ProposalLeafletMap';
+import Image from '~ui/Primitives/Image';
 
 const getDistrict = (geoJSON: any) => {
   try {
@@ -255,7 +256,7 @@ export const ProjectsMapView = ({
                             <Flex p={4} direction="column">
                               <Flex spacing={2}>
                                 {mark.cover?.url ? (
-                                  <img
+                                  <Image
                                     src={mark.cover?.url}
                                     style={{
                                       width: 90,

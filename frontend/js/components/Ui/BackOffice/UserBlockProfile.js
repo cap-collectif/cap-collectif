@@ -9,6 +9,7 @@ import IconLinkBar from '../Icons/IconLinkBar';
 import colors from '../../../utils/colors';
 import DefaultAvatar from '../../User/DefaultAvatar';
 import { MenuListItem } from '~ds/Menu';
+import Image from '~ui/Primitives/Image';
 
 export type Props = {|
   +query: UserBlockProfile_query,
@@ -41,7 +42,7 @@ export const UserBlockProfile = ({ query }: Props) => (
     <MenuListItem as="div" style={{ padding: 0 }}>
       <ProfileInfo>
         {!query.user.media ? (
-          <img src={query.user.media?.url} alt="admin profile" />
+          <Image src={query.user.media?.url} alt="admin profile" />
         ) : (
           <DefaultAvatar size={60} className="img-circle avatar" />
         )}

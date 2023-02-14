@@ -160,6 +160,7 @@ export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => {
             {features.display_pictures_in_depository_proposals_list &&
               (proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
                 <img
+                  loading="lazy"
                   src={
                     proposal.media
                       ? proposal.media.url

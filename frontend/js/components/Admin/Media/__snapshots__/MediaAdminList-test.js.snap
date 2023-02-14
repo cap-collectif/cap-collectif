@@ -82,7 +82,7 @@ exports[`<MediaAdminList /> renders correctly with medias 1`] = `
             size={400}
           >
             <div>
-              <img
+              <Image
                 alt="oui"
                 src="/url/ok"
               />
@@ -150,7 +150,7 @@ exports[`<MediaAdminList /> renders correctly with medias 1`] = `
             size={400}
           >
             <div>
-              <img
+              <Image
                 alt="ayaaaaa"
                 src="/url/nonoon"
               />

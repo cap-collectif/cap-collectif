@@ -8,6 +8,7 @@ import ProjectAnalysisPreviewContainer, {
 import Card from '~ui/Card/Card';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import InlineList from '~ui/List/InlineList';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   project: {
@@ -44,7 +45,7 @@ const ProjectAnalysisPreview = ({ project }: Props) => {
       <Card isHorizontal>
         <Card.Cover height="100%" width="120px">
           {cover?.url ? (
-            <img src={cover.url} alt="" aria-hidden />
+            <Image src={cover.url} alt="" aria-hidden />
           ) : (
             <DefaultCoverPreview>
               <Icon name={ICON_NAME.doubleMessageBubble} size={55} />

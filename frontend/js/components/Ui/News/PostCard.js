@@ -10,6 +10,7 @@ import Card from '~ds/Card/Card';
 import Flex from '../Primitives/Layout/Flex';
 import Heading from '../Primitives/Heading';
 import { formatInfo } from '../Project/ProjectCard.utils';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   ...AppBoxProps,
@@ -212,8 +213,7 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
         position="relative"
         {...props}>
         {post.media?.url ? (
-          <Card
-            as="img"
+          <Image
             src={post.media?.url}
             alt="banner"
             width="112px"

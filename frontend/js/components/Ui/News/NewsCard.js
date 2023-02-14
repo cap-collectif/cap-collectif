@@ -9,6 +9,7 @@ import { Card } from '~/components/Proposal/Page/ProposalPage.style';
 import type { NewsCard_post } from '~relay/NewsCard_post.graphql';
 import DatesInterval from '~/components/Utils/DatesInterval';
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   post: ?NewsCard_post,
@@ -85,7 +86,7 @@ export const NewsCard = ({ post, withContent }: Props) => {
   return (
     <Card>
       <NewsContainer withContent={withContent || false}>
-        <img src={post?.media?.url || '/svg/preview-proposal-image.svg'} alt="news cover" />
+        <Image src={post?.media?.url || '/svg/preview-proposal-image.svg'} alt="news cover" />
         <div>
           <h4>
             <a href={post.url}>{post.title}</a>

@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
-import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex } from '@cap-collectif/ui'
+import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex } from '@cap-collectif/ui';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
+import Image from '~ui/Primitives/Image';
 
 export const DebateArticleCardTitle: StyledComponent<{}, {}, typeof Heading> = styled(
   Heading,
@@ -45,13 +46,7 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
     <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" {...props}>
       <Box overflow="hidden" height={14}>
         {illustration ? (
-          <Box
-            src={illustration}
-            width="100%"
-            height="100%"
-            as="img"
-            css={{ objectFit: 'cover' }}
-          />
+          <Image src={illustration} width="100%" height="100%" css={{ objectFit: 'cover' }} />
         ) : (
           <Flex justify="center" align="center" width="100%" height="100%" bg="neutral-gray.150">
             <Icon name={CapUIIcon.Newspaper} size={CapUIIconSize.Xxl} color="gray.500" />

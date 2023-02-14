@@ -15,6 +15,7 @@ import MapAdminStyleListItem from './MapAdminStyleListItem';
 import Loader from '~ui/FeedbacksIndicators/Loader';
 import AlertForm from '~/components/Alert/AlertForm';
 import type { MapboxAdminConfig_mapToken } from '~relay/MapboxAdminConfig_mapToken.graphql';
+import Image from '~ui/Primitives/Image';
 
 type FormValues = {|
   +publicToken: string,
@@ -184,7 +185,7 @@ export const MapboxAdminConfig = (props: Props) => {
   return (
     <form className="mapbox__config" onSubmit={handleSubmit}>
       <TitleContainer>
-        <img src="/svg/mapbox_logo.svg" width={32} height={32} alt="Mapbox" />
+        <Image src="/svg/mapbox_logo.svg" width={32} height={32} alt="Mapbox" />
         <h3>Mapbox</h3>
       </TitleContainer>
       <p className="help-block sonata-ba-field-help">

@@ -3,15 +3,16 @@ import * as React from 'react';
 import cn from 'classnames';
 import { Container } from './ImageSlider.style';
 import type { SettingsSlider } from '~/types';
+import Image from '~ui/Primitives/Image';
 
-type Image = {|
+type ImageType = {|
   url: string,
   alt: string,
   link?: string,
 |};
 
 export type Props = {
-  images: Image[],
+  images: ImageType[],
   settingsSlider: SettingsSlider,
   className?: string,
 };
@@ -21,11 +22,11 @@ const ImageSlider = ({ images, className, settingsSlider }: Props) => (
     {images.map((img, idx) =>
       img.link ? (
         <a href={img.link} key={`image-slide-${idx}`} className="image-slide">
-          <img src={img.url} alt={img.alt} />
+          <Image src={img.url} alt={img.alt} />
         </a>
       ) : (
         <div key={`image-slide-${idx}`} className="image-slide">
-          <img src={img.url} alt={img.alt} />
+          <Image src={img.url} alt={img.alt} />
         </div>
       ),
     )}

@@ -7,6 +7,7 @@ import Card from '../../Ui/Card/Card';
 import DefaultProjectImage from '../../Project/Preview/DefaultProjectImage';
 import ProjectPreviewCounter from '../../Project/Preview/ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
+import Image from '~ui/Primitives/Image';
 
 type RelayProps = {|
   +consultation: ConsultationPreview_consultation,
@@ -24,7 +25,7 @@ export const ConsultationPreviewCover = ({
   <Card.Cover>
     <a href={url} alt={title}>
       {illustration && illustration.url ? (
-        <img src={illustration.url} alt={title} className="img-responsive" />
+        <Image src={illustration.url} alt={title} className="img-responsive" />
       ) : (
         <div className="bg--project">
           <DefaultProjectImage />

@@ -151,6 +151,7 @@ export const Navbar = ({
                     <S.Brand id="brand">
                       <a href={home} title={intl.formatMessage({ id: 'navbar.homepage' })}>
                         <img
+                          loading="lazy"
                           src={logo}
                           alt={siteName}
                           onLoad={handleLoading}

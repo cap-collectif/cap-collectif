@@ -799,7 +799,16 @@ exports[`<PostForm/> should render correctly 1`] = `
               <img
                 alt=""
                 className="img-responsive"
-                src="https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif"
+                loading="lazy"
+                srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif 3x,
+         "
               />
             </div>
             <div

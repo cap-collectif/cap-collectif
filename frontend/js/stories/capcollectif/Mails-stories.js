@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled, { type StyledComponent } from 'styled-components';
+import Image from '~ui/Primitives/Image';
 
 const importAll = r => r.keys().map(r);
 
@@ -33,10 +34,10 @@ images.map((image, i) => {
       () => (
         <Container>
           <div>
-            <img src={images[i + 1]} alt="web view" />
+            <Image src={images[i + 1]} alt="web view" />
           </div>
           <div>
-            <img src={image} alt="mobile view" />
+            <Image src={image} alt="mobile view" />
           </div>
         </Container>
       ),

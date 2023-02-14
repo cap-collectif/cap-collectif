@@ -19,6 +19,7 @@ import Heading from '~ui/Primitives/Heading';
 import Flex from '~ui/Primitives/Layout/Flex';
 import Modal from '~ds/Modal/Modal';
 import Play from './SVG/Play';
+import Image from '~ui/Primitives/Image';
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -135,8 +136,7 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
       opacity: isArchived ? '50%' : null,
     }}
     {...rest}>
-    <AppBox
-      as="img"
+    <Image
       src={src}
       alt={alt}
       width={['100%', '405px']}
@@ -160,8 +160,7 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
     if (src) {
       return (
         <AppBox minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
-          <AppBox
-            as="img"
+          <Image
             src={src}
             alt={alt}
             width={['100%', '405px']}

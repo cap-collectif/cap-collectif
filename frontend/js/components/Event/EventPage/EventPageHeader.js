@@ -15,6 +15,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import EventActions from './EventActions';
 import { EventQuickActions } from './EventQuickActions';
 import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +queryRef: ?EventPageHeader_query$key,
@@ -90,8 +91,7 @@ export const Cover = ({ src, alt }: {| +src?: ?string, +alt?: ?string |}) =>
       overflow="hidden"
       minHeight="270px"
       maxHeight="315px">
-      <Box
-        as="img"
+      <Image
         src={src}
         alt={alt}
         width={['100%', '405px']}

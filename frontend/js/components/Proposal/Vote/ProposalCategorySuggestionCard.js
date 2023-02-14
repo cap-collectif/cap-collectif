@@ -4,6 +4,7 @@ import { Box, Text, Flex } from '@cap-collectif/ui';
 import styled from 'styled-components';
 import type { StyledComponent } from 'styled-components';
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +category: {|
@@ -48,7 +49,7 @@ const ProposalCategorySuggestionCard = ({ category, stepUrl }: Props) => {
         border="normal"
         borderColor="gray.200">
         {image?.url ? (
-          <img src={image.url} alt="" css="object-fit: cover; height: 127px;" />
+          <Image src={image.url} alt="" css="object-fit: cover; height: 127px;" />
         ) : (
           <Box flexGrow={1} overflow="hidden" css="border-radius: 4px 4px 0 0">
             <CategoryBackground color={category.color} height="100%" />

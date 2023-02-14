@@ -20,6 +20,7 @@ import { features as defaultFeatures } from '~/redux/modules/default';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
+import Image from '~ui/Primitives/Image';
 
 // TODO: mieux typer l'ensemble du storybook
 type Props = {
@@ -69,7 +70,7 @@ export const ProposalMapPopover = (props: Props) => {
                 </h4>
                 <div>
                   {features.display_pictures_in_depository_proposals_list && (
-                    <img src={proposal.media.url} alt="proposal-illustration" />
+                    <Image src={proposal.media.url} alt="proposal-illustration" />
                   )}
                   <div>
                     {proposal.category && (

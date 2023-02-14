@@ -14,6 +14,7 @@ import {
 } from '../../../redux/modules/user';
 import type { GroupAdminUsersListGroupItem_user } from '~relay/GroupAdminUsersListGroupItem_user.graphql';
 import type { Uuid, Dispatch } from '../../../types';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   groupId: string,
@@ -71,7 +72,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
         <Row>
           <Col xs={3}>
             {user.media ? (
-              <img className="img-circle mr-15" src={user.media.url} alt={user.displayName} />
+              <Image className="img-circle mr-15" src={user.media.url} alt={user.displayName} />
             ) : (
               <DefaultAvatar className="img-circle avatar mr-15" />
             )}

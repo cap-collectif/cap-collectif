@@ -10,6 +10,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import type { HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery.graphql';
 import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql';
 import type { HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration } from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +paginatedProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key,
@@ -50,8 +51,8 @@ export const HomePageProjectsSectionConfigurationPageDisplayMostRecent = ({
   >(
     graphql`
       fragment HomePageProjectsSectionConfigurationPageDisplayMostRecent_query on Query
-        @refetchable(queryName: "HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery")
-        @argumentDefinitions(first: { type: "Int", defaultValue: 3 }, cursor: { type: "String" }) {
+      @refetchable(queryName: "HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery")
+      @argumentDefinitions(first: { type: "Int", defaultValue: 3 }, cursor: { type: "String" }) {
         paginatedProjects: projects(first: $first, after: $cursor)
           @connection(
             key: "HomePageProjectsSectionConfigurationPageDisplayMostRecent_paginatedProjects"
@@ -100,7 +101,7 @@ export const HomePageProjectsSectionConfigurationPageDisplayMostRecent = ({
                 {project?.node?.cover === null ? (
                   imagePlaceholder
                 ) : (
-                  <img src={project?.node?.cover?.url} alt={project?.node?.title} />
+                  <Image src={project?.node?.cover?.url} alt={project?.node?.title} />
                 )}
                 <p>{project?.node?.title}</p>
               </Flex>

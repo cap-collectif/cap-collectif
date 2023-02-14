@@ -11,6 +11,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import Play from './SVG/Play';
 import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
+import Image from '~ui/Primitives/Image';
 import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
@@ -126,8 +127,7 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
       opacity: isArchived ? '50%' : null,
     }}
     {...rest}>
-    <Box
-      as="img"
+    <Image
       src={src}
       alt={alt}
       width={['100%', '405px']}
@@ -150,8 +150,7 @@ export const CoverVideo = ({ url, src, alt, isArchived, ...rest }: CoverVideoPro
     if (src) {
       return (
         <Box minHeight="270px" maxHeight="315px" width="100%" height="100%" position="relative">
-          <Box
-            as="img"
+          <Image
             src={src}
             alt={alt}
             width={['100%', '405px']}

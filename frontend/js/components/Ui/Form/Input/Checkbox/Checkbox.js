@@ -5,6 +5,7 @@ import Label from '~/components/Ui/Form/Label/Label';
 import { sharedStyleCheckboxRadio, type PropsCommonCheckboxRadio } from '../commonCheckboxRadio';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   ...PropsCommonCheckboxRadio,
@@ -40,7 +41,7 @@ const Checkbox = ({
       id={`label-checkbox-${id}`}
       hasImage={!!image}
       typeForm={typeForm}>
-      {image && <img src={image} alt="" />}
+      {image && <Image src={image} alt="" />}
       <Icon
         name={checked ? ICON_NAME.checkboxChecked : ICON_NAME.checkbox}
         size={isQuestionnaire(typeForm) ? 20 : 16}

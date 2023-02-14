@@ -79,12 +79,28 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       >
         <img
           alt="Media Food"
-          className="sc-bdvvtL bdbrhN"
-          src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
+          height="100%"
+          loading="lazy"
+          minHeight="270px"
+          srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 3x,
+         "
           style={
             Object {
               "objectFit": "cover",
             }
+          }
+          width={
+            Array [
+              "100%",
+              "405px",
+            ]
           }
         />
         <svg

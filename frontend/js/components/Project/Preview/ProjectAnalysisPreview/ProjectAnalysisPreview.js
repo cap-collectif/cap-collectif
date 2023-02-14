@@ -10,6 +10,7 @@ import type { ProjectAnalysisPreview_project } from '~relay/ProjectAnalysisPrevi
 import ProjectAnalysisPreviewContainer, {
   DefaultCoverPreview,
 } from '~/components/Project/Preview/ProjectAnalysisPreview/ProjectAnalysisPreview.style';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   project: ProjectAnalysisPreview_project,
@@ -24,7 +25,7 @@ const ProjectAnalysisPreview = ({ project, url }: Props) => {
       <Card isHorizontal>
         <Card.Cover height="100%" width="120px">
           {cover?.url ? (
-            <img src={cover.url} alt="" aria-hidden />
+            <Image src={cover.url} alt="" aria-hidden />
           ) : (
             <DefaultCoverPreview>
               <Icon name={ICON_NAME.doubleMessageBubble} size={55} />

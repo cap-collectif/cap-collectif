@@ -99,7 +99,16 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
               <img
                 alt="<mock-value-for-field-\\"username\\">"
                 className="img-circle object-cover user-avatar mr-10 "
-                src="<mock-value-for-field-\\"url\\">"
+                loading="lazy"
+                srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
                 style={
                   Object {
                     "height": "45px",
@@ -239,7 +248,16 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
               <img
                 alt="<mock-value-for-field-\\"username\\">"
                 className="img-circle object-cover user-avatar mr-10 "
-                src="<mock-value-for-field-\\"url\\">"
+                loading="lazy"
+                srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
                 style={
                   Object {
                     "height": "45px",
@@ -379,7 +397,16 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
               <img
                 alt="<mock-value-for-field-\\"username\\">"
                 className="img-circle object-cover user-avatar mr-10 "
-                src="<mock-value-for-field-\\"url\\">"
+                loading="lazy"
+                srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
                 style={
                   Object {
                     "height": "45px",

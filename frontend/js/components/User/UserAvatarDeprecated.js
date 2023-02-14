@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { State } from '../../types';
 import DefaultAvatar from './DefaultAvatar';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   user: ?{
@@ -43,7 +44,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
     const mediaSize = size && `${size}px`;
     if (user && user.media) {
       return (
-        <img
+        <Image
           src={user.media.url}
           alt=""
           className="img-circle object-cover mr-10"
@@ -54,7 +55,7 @@ export class UserAvatarDeprecated extends React.Component<Props> {
 
     if (user && defaultAvatar) {
       return (
-        <img
+        <Image
           src={defaultAvatar}
           alt=""
           className="img-circle object-cover mr-10"

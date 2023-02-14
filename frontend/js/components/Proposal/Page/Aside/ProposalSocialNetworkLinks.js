@@ -10,6 +10,7 @@ import Help from '~/components/Ui/Form/Help/Help';
 import { Card } from '~/components/Proposal/Page/ProposalPage.style';
 import type { ProposalSocialNetworkLinks_proposal$key } from '~relay/ProposalSocialNetworkLinks_proposal.graphql';
 import ModalProposalSocialNetworks from './ModalProposalSocialNetworks';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +proposal: ProposalSocialNetworkLinks_proposal$key,
@@ -17,7 +18,7 @@ type Props = {|
 
 const FRAGMENT = graphql`
   fragment ProposalSocialNetworkLinks_proposal on Proposal
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
     viewerDidAuthor @include(if: $isAuthenticated)
     twitterUrl
     webPageUrl
@@ -116,7 +117,7 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
             )}
             {proposal.form.usingInstagram && proposal.instagramUrl && (
               <a href={proposal.instagramUrl} rel="noreferrer" target="_blank">
-                <img src="/rs-instagram.png" alt="instagram" />
+                <Image src="/rs-instagram.png" alt="instagram" />
               </a>
             )}
             {proposal.form.usingLinkedIn && proposal.linkedInUrl && (

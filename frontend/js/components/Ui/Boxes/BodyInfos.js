@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BodyText, { DEFAULT_MAX_LINES, LINE_HEIGHT } from './BodyText';
 import { Card } from '../Card/Card';
+import Image from '~ui/Primitives/Image';
 
 type Media = {|
   +name: string,
@@ -38,7 +39,7 @@ export class BodyInfos extends React.Component<Props> {
       <Card>
         <CardBodyInfos maxLines={maxLines || DEFAULT_MAX_LINES}>
           {illustration && (
-            <img
+            <Image
               className="body__infos--illustration"
               src={illustration.url}
               alt={illustration.name || ''}

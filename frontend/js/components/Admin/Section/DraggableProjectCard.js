@@ -6,6 +6,7 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import Text from '~ui/Primitives/Text';
 import type { Project } from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom';
 import Icon from '~ds/Icon/Icon';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +project: Project,
@@ -41,7 +42,7 @@ const DraggableProjectCard = ({ project, index, removeProject }: Props) => {
               {project.cover === null ? (
                 imagePlaceholder
               ) : (
-                <img src={project?.cover?.url} alt={project.value} />
+                <Image src={project?.cover?.url} alt={project.value} />
               )}
             </div>
             <Text maxWidth={16} mx={4} color="gray.900">

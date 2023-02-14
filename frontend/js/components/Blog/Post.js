@@ -7,6 +7,7 @@ import moment from 'moment';
 import type { Post_post } from '~relay/Post_post.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import type { State } from '../../types';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   post: Post_post,
@@ -21,7 +22,7 @@ export class Post extends React.Component<Props> {
       <li className="media media--news block block--bordered box">
         <a href={post.url} className="pull-left" alt="Post 8">
           {post.media ? (
-            <img src={post.media.url} alt="" className="media-object" />
+            <Image src={post.media.url} alt="" className="media-object" />
           ) : (
             <div className="bg--post  media-object">
               <svg

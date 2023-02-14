@@ -8,6 +8,7 @@ import moment from 'moment';
 import colors from '../../../utils/colors';
 import ChangeMapStyleMutation from '../../../mutations/ChangeMapStyleMutation';
 import type { ChangeMapStyleMutationResponse } from '../../../mutations/ChangeMapStyleMutation';
+import Image from '~ui/Primitives/Image';
 
 const ListGroupItemInner = styled.div`
   display: flex;
@@ -107,7 +108,7 @@ const MapAdminStyleListItem = (props: Props) => {
         <div className={classNames('map__check', { checked: style.isCurrent })}>
           <i className="cap cap-check-4" />
         </div>
-        <img src={style.previewUrl} alt={`${style.name} preview`} className="map__preview" />
+        <Image src={style.previewUrl} alt={`${style.name} preview`} className="map__preview" />
         <div className="map__infos">
           <p className="map__title">{style.name}</p>
           <p className="help-block sonata-ba-field-help">

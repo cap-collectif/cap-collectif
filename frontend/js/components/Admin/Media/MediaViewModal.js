@@ -4,6 +4,7 @@ import styled, { type StyledComponent } from 'styled-components';
 import { Modal } from 'react-bootstrap';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   show: boolean,
@@ -48,7 +49,7 @@ export const MediaViewModal = ({ show, closeModal, url }: Props) => (
         <Icon name={ICON_NAME.close} size={15} />
       </button>
       <div>
-        <img src={url} alt="displayed media" />
+        <Image src={url || ''} alt="displayed media" />
       </div>
     </Modal.Body>
   </ViewModal>

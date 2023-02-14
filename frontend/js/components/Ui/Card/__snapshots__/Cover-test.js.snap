@@ -5,7 +5,7 @@ exports[`<Cover /> should render correctly 1`] = `
   height="175px"
   width="auto"
 >
-  <img
+  <Image
     alt=""
     src=""
   />
@@ -17,7 +17,7 @@ exports[`<Cover /> should render correctly with other size 1`] = `
   height="300px"
   width="400px"
 >
-  <img
+  <Image
     alt=""
     src=""
   />

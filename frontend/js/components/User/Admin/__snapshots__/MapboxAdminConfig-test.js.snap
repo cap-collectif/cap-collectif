@@ -6,7 +6,7 @@ exports[`<MapboxAdminConfig/> should render 1`] = `
   onSubmit={[MockFunction]}
 >
   <MapboxAdminConfig__TitleContainer>
-    <img
+    <Image
       alt="Mapbox"
       height={32}
       src="/svg/mapbox_logo.svg"
@@ -115,7 +115,7 @@ exports[`<MapboxAdminConfig/> should render with styles 1`] = `
   onSubmit={[MockFunction]}
 >
   <MapboxAdminConfig__TitleContainer>
-    <img
+    <Image
       alt="Mapbox"
       height={32}
       src="/svg/mapbox_logo.svg"

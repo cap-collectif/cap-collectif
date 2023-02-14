@@ -91,6 +91,7 @@ exports[`<ProposalMapPopover /> should render popover with a picture given the f
       <div>
         <img
           alt="proposal-illustration"
+          loading="lazy"
           src="media.jpg"
         />
         <div>

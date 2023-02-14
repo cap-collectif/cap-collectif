@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Container, type Colors } from './UserSlide.style';
+import Image from '~ui/Primitives/Image';
 
 export type Props = {|
   name: string,
@@ -13,7 +14,7 @@ export type Props = {|
 const UserSlide = ({ name, job, img, lang, colors }: Props) => (
   <Container nameColor={colors.name}>
     <div className="avatar-wrapper">
-      <img src={img} alt="" />
+      <Image src={img} alt="" />
     </div>
 
     <div>

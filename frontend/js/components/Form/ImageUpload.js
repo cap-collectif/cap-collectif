@@ -10,6 +10,7 @@ import Fetcher, { json } from '../../services/Fetcher';
 import AppBox from '~ui/Primitives/AppBox';
 import { colors } from '~/utils/colors';
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   value: Object | Array<Object>,
@@ -93,17 +94,8 @@ export class ImageUpload extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      className,
-      id,
-      multiple,
-      accept,
-      maxSize,
-      minSize,
-      disablePreview,
-      value,
-      disabled,
-    } = this.props;
+    const { className, id, multiple, accept, maxSize, minSize, disablePreview, value, disabled } =
+      this.props;
     const { error, size } = this.state;
     const classes = {
       'image-uploader': true,
@@ -186,10 +178,10 @@ export class ImageUpload extends React.Component<Props, State> {
             <div className="image-uploader__preview text-center">
               {value && Array.isArray(value) ? (
                 value.map(media => (
-                  <img alt="" key={media.id} src={media.url} className="img-responsive" />
+                  <Image alt="" key={media.id} src={media.url} className="img-responsive" />
                 ))
               ) : (
-                <img alt="" src={value.url} className="img-responsive" />
+                <Image alt="" src={value.url} className="img-responsive" />
               )}
             </div>
             {value && (

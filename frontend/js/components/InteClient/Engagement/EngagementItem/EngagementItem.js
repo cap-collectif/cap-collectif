@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import EngagementItemContainer from './EngagementItem.style';
+import Image from '~ui/Primitives/Image';
 
 export type EngagementItemProps = {
   icon: string,
@@ -11,7 +12,7 @@ export type EngagementItemProps = {
 
 const EngagementItem = ({ icon, description, link, linkText }: EngagementItemProps) => (
   <EngagementItemContainer>
-    <img src={icon} alt="" aria-hidden />
+    <Image src={icon} alt="" aria-hidden />
     <p>{description}</p>
     {link && linkText && <a href={link}>{linkText}</a>}
   </EngagementItemContainer>

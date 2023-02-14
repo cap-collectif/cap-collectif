@@ -5,6 +5,7 @@ import { type PropsCommonCheckboxRadio } from '../commonCheckboxRadio';
 import RadioContainer, { LabelRadioButtonContainer } from './Radio.style';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 import isQuestionnaire from '~/utils/isQuestionnaire';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   ...PropsCommonCheckboxRadio,
@@ -43,7 +44,7 @@ const Radio = ({
         hasImage={!!image}
         type="radio"
         typeForm={typeForm}>
-        {image && <img src={image} alt="" />}
+        {image && <Image src={image} alt="" />}
 
         <Icon
           name={checked ? ICON_NAME.radioButtonChecked : ICON_NAME.radioButton}

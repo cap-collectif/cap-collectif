@@ -122,7 +122,16 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "b
       <img
         alt="<mock-value-for-field-\\"username\\">"
         className="img-circle object-cover user-avatar mr-10 "
-        src="<mock-value-for-field-\\"url\\">"
+        loading="lazy"
+        srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
         style={
           Object {
             "height": "42px",
@@ -262,7 +271,16 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "beta_
       <img
         alt="<mock-value-for-field-\\"username\\">"
         className="img-circle object-cover user-avatar mr-10 "
-        src="<mock-value-for-field-\\"url\\">"
+        loading="lazy"
+        srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
         style={
           Object {
             "height": "42px",

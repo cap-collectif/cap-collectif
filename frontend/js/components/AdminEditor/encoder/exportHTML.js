@@ -279,9 +279,9 @@ export default (currentContent: DraftEditorState) => ({
           const attributes = `${entityData.width ? `width="${entityData.width}"` : ''} ${
             entityData.height ? `height="${entityData.height}"` : ''
           }`;
-          const img = `<div style="${style.trim()}"><img src="${entityData.src}" alt="${
-            entityData.alt
-          }" ${attributes} style="${imgStyle.trim()}" /></div>`;
+          const img = `<div style="${style.trim()}"><img loading="lazy" src="${
+            entityData.src
+          }" alt="${entityData.alt}" ${attributes} style="${imgStyle.trim()}" /></div>`;
           return entityData.href?.length
             ? `<a href="${entityData.href}"${
                 entityData.targetBlank ? ' target="_blank" rel="noopener noreferrer"' : ''
