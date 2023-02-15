@@ -1,6 +1,6 @@
 {% extends 'CapcoAdminBundle:CRUD:edit.html.twig' %}
 {% block title %}
-        {{ 'title_create'|trans({}, 'SonataAdminBundle')|truncate(15) }}
+    {{ 'title_create'|trans({}, 'SonataAdminBundle')|truncate(15) }}
 {% endblock %}
 
 {%- block tab_menu -%}
@@ -26,12 +26,12 @@
 
 {% block form %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-        {{ react_render_component('AdminPostCreateFormApp', {
-            'props': {
-                'postId':'',
-                'isAdmin': app.user.isAdmin or app.user.isSuperAdmin,
-                'proposalId': proposalId
-            }
-        }) }}
+    {{ react_render_component('AdminPostCreateFormApp', {
+        'props': {
+            'postId':'',
+            'isAdmin': app.user.isAdmin or app.user.isSuperAdmin,
+            'proposalId': proposalId
+        }
+    }) }}
 {% endblock %}
 
