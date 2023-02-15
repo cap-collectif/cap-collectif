@@ -26,7 +26,6 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
         }
 
         $emailingCampaign = $this->getEmailingCampaignFromGlobalId($id);
-        $this->admin->setSubject($emailingCampaign);
 
         return $emailingCampaign ? $this->renderEdit($emailingCampaign) : $this->redirectToList();
     }
@@ -66,6 +65,8 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
 
     private function renderEdit(EmailingCampaign $emailingCampaign): Response
     {
+        $this->admin->setSubject($emailingCampaign);
+        
         return $this->renderWithExtraParams(
             'CapcoAdminBundle:Emailing:emailingCampaignEdit.html.twig',
             [
