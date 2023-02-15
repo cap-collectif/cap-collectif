@@ -26,6 +26,7 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
         }
 
         $emailingCampaign = $this->getEmailingCampaignFromGlobalId($id);
+        $this->admin->setSubject($emailingCampaign);
 
         return $emailingCampaign ? $this->renderEdit($emailingCampaign) : $this->redirectToList();
     }
