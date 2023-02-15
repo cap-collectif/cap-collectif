@@ -118,6 +118,9 @@ class SectionAdmin extends AbstractAdmin
             ])
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('enabled', null, [
                 'label' => 'global.published',
