@@ -4,6 +4,7 @@ exports[`<Status /> should render correctly 1`] = `
 <Status__Container
   bgColor="#707070"
   bsStyle="DEFAULT"
+  className="ellipsis card__status"
 >
   My Status
 </Status__Container>
@@ -11,8 +12,9 @@ exports[`<Status /> should render correctly 1`] = `
 
 exports[`<Status /> should render correctly with other bgColor 1`] = `
 <Status__Container
-  bgColor="#dc3545"
+  bgColor="#f75d56"
   bsStyle="DANGER"
+  className="ellipsis card__status"
 >
   My Status
 </Status__Container>

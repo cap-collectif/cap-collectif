@@ -3,11 +3,11 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
-import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
 import type { ProposalDetailAdvancement_proposal } from '~relay/ProposalDetailAdvancement_proposal.graphql';
+import { colorsData } from '~/utils/colors';
 
 const grey = '#d9d9d9';
-const green = '#5cb85c';
+const green = colorsData.SUCCESS;
 
 const consideredCurrentProgressStep = (progressSteps: $ReadOnlyArray<Object>) => {
   let lastStarting = null;
@@ -56,26 +56,26 @@ const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<O
       ) {
         // $FlowFixMe
         data.status = { name: 'En cours', color: 'warning' };
-        data.roundColor = bootstrapToHex('warning');
+        data.roundColor = colorsData.WARNING;
         data.borderColor = grey;
       }
 
       if (!progressStep.endAt && moment(progressStep.startAt) <= currentTime) {
         // $FlowFixMe
         data.status = { name: 'Terminé', color: 'success' };
-        data.roundColor = bootstrapToHex('success');
+        data.roundColor = colorsData.SUCCESS;
       }
 
       if (!progressStep.endAt && moment(progressStep.startAt) > currentTime) {
         // $FlowFixMe
         data.status = { name: 'A venir', color: 'info' };
-        data.roundColor = bootstrapToHex('info');
+        data.roundColor = colorsData.SUCCESS;
       }
 
       if (progressStep.endAt && moment(progressStep.endAt) < currentTime) {
         // $FlowFixMe
         data.status = { name: 'Terminé', color: 'success' };
-        data.roundColor = bootstrapToHex('success');
+        data.roundColor = colorsData.SUCCESS;
       }
 
       isPastCurrent = true;
@@ -134,7 +134,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
           let roundColor = grey;
           if (step.isCurrent) {
             const status = this.getStatus(step);
-            roundColor = status ? bootstrapToHex(status.color) : green;
+            roundColor = status ? colorsData[status.color] : green;
           } else if (step.isPast) {
             roundColor = green;
           }

@@ -3,6 +3,8 @@ import React from 'react';
 import moment from 'moment';
 import { Label } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
+import { useSelector } from 'react-redux';
+import type { GlobalState } from '~/types';
 
 type Props = {
   step: Object,
@@ -12,10 +14,18 @@ type Props = {
   children?: $FlowFixMe,
 };
 
-class ProposalDetailAdvancementStep extends React.Component<Props> {
-  renderDate = () => {
-    const { step } = this.props;
+const ProposalDetailAdvancementStep = ({
+  borderColor,
+  roundColor,
+  step,
+  status,
+  children,
+}: Props) => {
+  const { bgColor } = useSelector((state: GlobalState) => ({
+    bgColor: state.default.parameters['color.btn.primary.bg'],
+  }));
 
+  const renderDate = () => {
     if (step.timeless && !step.endAt && !step.startAt) {
       return <FormattedMessage id="proposal.detail.intervals.continuously" />;
     }
@@ -42,61 +52,61 @@ class ProposalDetailAdvancementStep extends React.Component<Props> {
     );
   };
 
-  render() {
-    const { borderColor, roundColor, step, status, children } = this.props;
-    return (
-      <span>
+  return (
+    <span>
+      <div
+        style={
+          borderColor
+            ? {
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                borderLeftStyle: 'solid',
+                borderLeftColor: borderColor,
+                borderLeftWidth: '4px',
+                paddingLeft: '8px',
+                marginLeft: '5px',
+              }
+            : {
+                paddingTop: '5px',
+                paddingLeft: '8px',
+                marginLeft: '9px',
+              }
+        }>
         <div
-          style={
-            borderColor
-              ? {
-                  paddingTop: '10px',
-                  paddingBottom: '10px',
-                  borderLeftStyle: 'solid',
-                  borderLeftColor: borderColor,
-                  borderLeftWidth: '4px',
-                  paddingLeft: '8px',
-                  marginLeft: '5px',
-                }
-              : {
-                  paddingTop: '5px',
-                  paddingLeft: '8px',
-                  marginLeft: '9px',
-                }
-          }>
-          <div
-            style={{
-              float: 'left',
-              width: '16px',
-              height: '16px',
-              marginTop: '-10px',
-              marginLeft: '-18px',
-              lineHeight: '28px',
-              color: '#767676',
-              textAlign: 'center',
-              backgroundColor: roundColor,
-              borderRadius: '50%',
-            }}
-          />
-          <div style={{ marginTop: '-15px', marginLeft: '15px' }}>
-            <div>{step.title}</div>
-            <div className="excerpt small">
-              <span>{this.renderDate()}</span>
-            </div>
-            {status && (
-              <Label
-                bsStyle={status.color.toLowerCase()}
-                style={{ marginTop: '5px', borderRadius: '15px' }}>
-                {status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name}
-              </Label>
-            )}
+          style={{
+            float: 'left',
+            width: '16px',
+            height: '16px',
+            marginTop: '-10px',
+            marginLeft: '-18px',
+            lineHeight: '28px',
+            color: '#767676',
+            textAlign: 'center',
+            backgroundColor: roundColor || bgColor,
+            borderRadius: '50%',
+          }}
+        />
+        <div style={{ marginTop: '-15px', marginLeft: '15px' }}>
+          <div>{step.title}</div>
+          <div className="excerpt small">
+            <span>{renderDate()}</span>
           </div>
-          <br />
+          {status && (
+            <Label
+              css={{
+                marginTop: '5px',
+                borderRadius: '15px',
+                background: `${roundColor || bgColor} !important`,
+              }}>
+              {status.name.length > 25 ? `${status.name.substr(0, 25)}...` : status.name}
+            </Label>
+          )}
         </div>
-        {children}
-      </span>
-    );
-  }
-}
+        <br />
+      </div>
+      {children}
+    </span>
+  );
+};
 
 export default ProposalDetailAdvancementStep;

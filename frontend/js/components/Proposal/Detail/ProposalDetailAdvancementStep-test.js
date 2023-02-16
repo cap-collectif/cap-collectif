@@ -3,6 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
+import MockProviders from '~/testUtils';
 
 describe('<ProposalDetailAdvancementStep />', () => {
   const step = {
@@ -17,13 +18,19 @@ describe('<ProposalDetailAdvancementStep />', () => {
   const roundColor = '#hexCode';
 
   it('can render a step without status', () => {
-    const wrapper = shallow(<ProposalDetailAdvancementStep step={step} roundColor={roundColor} />);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProposalDetailAdvancementStep step={step} roundColor={roundColor} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('can render a step with status', () => {
     const wrapper = shallow(
-      <ProposalDetailAdvancementStep step={step} roundColor={roundColor} status={status} />,
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProposalDetailAdvancementStep step={step} roundColor={roundColor} status={status} />
+      </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
   });

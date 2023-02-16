@@ -1,7 +1,7 @@
 // @flow
 import styled, { type StyledComponent } from 'styled-components';
 import * as React from 'react';
-import { BsStyleColors } from '../../../utils/colors';
+import { colorsData } from '../../../utils/colors';
 import type { ProposalStepStatusColor } from '~relay/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
@@ -9,12 +9,7 @@ type Props = {
   children: React.Node,
 };
 
-const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
-  className: props =>
-    props.bsStyle === 'PRIMARY'
-      ? 'ellipsis card__status custom-primary-bgcolor'
-      : 'ellipsis card__status',
-})`
+const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div`
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   padding: 3px;
@@ -28,10 +23,17 @@ const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
 export const Status = (props: Props) => {
   const { bgColor, children } = props;
 
-  const getBgColor = BsStyleColors[bgColor];
+  const getBgColor = colorsData[bgColor];
 
   return (
-    <Container bsStyle={bgColor} bgColor={getBgColor}>
+    <Container
+      bsStyle={bgColor}
+      bgColor={getBgColor}
+      className={
+        props.bgColor === 'PRIMARY'
+          ? 'ellipsis card__status custom-primary-bgcolor'
+          : 'ellipsis card__status'
+      }>
       {children}
     </Container>
   );

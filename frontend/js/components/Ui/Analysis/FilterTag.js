@@ -1,7 +1,7 @@
 // @flow
 import styled, { css, type StyledComponent } from 'styled-components';
 import * as React from 'react';
-import colors, { BsStyleColors } from '~/utils/colors';
+import colors, { colorsData } from '~/utils/colors';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';
 
 type FilterTagProps = {|
@@ -25,7 +25,7 @@ const FilterTagContainer: StyledComponent<{ bgColor?: ?string }, {}, HTMLDivElem
   ${props =>
     props.bgColor
       ? css`
-          background-color: ${BsStyleColors[props.bgColor] || props.bgColor};
+          background-color: ${colorsData[props.bgColor] || props.bgColor};
         `
       : css`
           background-color: ${colors.darkGray};

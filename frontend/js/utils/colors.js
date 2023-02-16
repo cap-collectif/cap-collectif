@@ -88,7 +88,6 @@ export const styleGuideColors = {
   red100: '#FEFBFB',
   red200: '#F6CBCF',
   red500: '#dd3c4c',
-
 };
 
 export const socialColors = {
@@ -117,6 +116,15 @@ export const BsStyleColors = {
   WARNING: colors.warningColor,
   DANGER: colors.dangerColor,
   DEFAULT: colors.darkGray,
+};
+
+export const colorsData = {
+  PRIMARY: '', // platform primary color, leaving empty
+  SUCCESS: '#399a39',
+  WARNING: '#f4b721',
+  DANGER: '#f75d56',
+  INFO: '#77b5fe',
+  DEFAULT: '#707070',
 };
 
 export const AlertColors = {

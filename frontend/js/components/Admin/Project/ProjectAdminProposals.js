@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedHTMLMessage, FormattedMessage, useIntl, type IntlShape } from 'react-intl';
 import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { createPaginationContainer, graphql, type RelayPaginationProp } from 'react-relay';
 import { useState } from 'react';
 import type { ProjectAdminProposals_project } from '~relay/ProjectAdminProposals_project.graphql';
@@ -77,6 +77,7 @@ import ButtonGroup from '~ds/ButtonGroup/ButtonGroup';
 import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils';
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import { colorsData } from '~/utils/colors';
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30;
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100;
@@ -234,6 +235,10 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
   const { selectedRows, rowsCount } = usePickableList();
   const { parameters, dispatch, firstCollectStepId } = useProjectAdminProposalsContext();
   const intl = useIntl();
+
+  const { bgColor } = useSelector((state: State) => ({
+    bgColor: state.default.parameters['color.btn.primary.bg'],
+  }));
 
   const {
     categories,
@@ -759,7 +764,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                     key={id}
                     onClose={action ? () => dispatch((({ type: action }: any): Action)) : null}
                     icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
-                    bgColor={color}>
+                    bgColor={color === 'PRIMARY' ? bgColor : color}>
                     {name}
                   </FilterTag>
                 ))}
@@ -791,6 +796,10 @@ export const ProjectAdminProposals = ({
     () => getStepDisplay(project, parameters.filters.step),
     [project, parameters.filters.step],
   );
+
+  const { bgColor } = useSelector((state: State) => ({
+    bgColor: state.default.parameters['color.btn.primary.bg'],
+  }));
 
   const steps = getFormattedStepsChoicesForProject(project);
   const selectedStepId: ProposalsStepValues = parameters.filters.step;
@@ -1003,44 +1012,47 @@ export const ProjectAdminProposals = ({
                 ?.filter(Boolean)
                 .map(edge => edge.node)
                 .filter(Boolean)
-                .map(proposal => (
-                  <AnalysisProposal
-                    isAdminView
-                    hasRegroupTag
-                    proposal={proposal}
-                    isVoteRanking={selectedStep?.votesRanking || false}
-                    isVotable={selectedStep?.votable || false}
-                    votes={proposal.proposalVotes.totalCount}
-                    paperVotes={proposal.paperVotesTotalCount}
-                    points={proposal.proposalVotes.totalPointsCount}
-                    paperPoints={proposal.paperVotesTotalPointsCount}
-                    rowId={proposal.id}
-                    key={proposal.id}
-                    dispatch={dispatch}
-                    hasStateTag={parameters.filters.state === 'ALL'}
-                    setProposalModalDelete={setProposalModalDelete}
-                    proposalSelected={proposalSelected || null}
-                    setProposalSelected={setProposalSelected}
-                    hasThemeEnabled={selectedStep?.hasTheme || false}>
-                    <S.ProposalListRowInformationsStepState>
-                      {stepDisplay && (
-                        <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
-                      )}
+                .map(proposal => {
+                  const color = proposal.status?.color ? colorsData[proposal.status?.color] : '';
+                  return (
+                    <AnalysisProposal
+                      isAdminView
+                      hasRegroupTag
+                      proposal={proposal}
+                      isVoteRanking={selectedStep?.votesRanking || false}
+                      isVotable={selectedStep?.votable || false}
+                      votes={proposal.proposalVotes.totalCount}
+                      paperVotes={proposal.paperVotesTotalCount}
+                      points={proposal.proposalVotes.totalPointsCount}
+                      paperPoints={proposal.paperVotesTotalPointsCount}
+                      rowId={proposal.id}
+                      key={proposal.id}
+                      dispatch={dispatch}
+                      hasStateTag={parameters.filters.state === 'ALL'}
+                      setProposalModalDelete={setProposalModalDelete}
+                      proposalSelected={proposalSelected || null}
+                      setProposalSelected={setProposalSelected}
+                      hasThemeEnabled={selectedStep?.hasTheme || false}>
+                      <S.ProposalListRowInformationsStepState>
+                        {stepDisplay && (
+                          <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
+                        )}
 
-                      <S.Label
-                        bsStyle={proposal.status?.color.toLowerCase() || 'default'}
-                        onClick={() =>
-                          dispatch({
-                            type: 'CHANGE_STATUS_FILTER',
-                            payload: ((proposal.status?.id: any): ProposalsStatusValues),
-                          })
-                        }>
-                        {proposal.status?.name ||
-                          intl.formatMessage({ id: 'admin.fields.proposal.no_status' })}
-                      </S.Label>
-                    </S.ProposalListRowInformationsStepState>
-                  </AnalysisProposal>
-                ))
+                        <S.Label
+                          css={{ background: `${color || bgColor} !important` }}
+                          onClick={() =>
+                            dispatch({
+                              type: 'CHANGE_STATUS_FILTER',
+                              payload: ((proposal.status?.id: any): ProposalsStatusValues),
+                            })
+                          }>
+                          {proposal.status?.name ||
+                            intl.formatMessage({ id: 'admin.fields.proposal.no_status' })}
+                        </S.Label>
+                      </S.ProposalListRowInformationsStepState>
+                    </AnalysisProposal>
+                  );
+                })
             ) : (
               <AnalysisNoProposal
                 state={hasSelectedFilters ? 'CONTRIBUTION' : parameters.filters.state}>

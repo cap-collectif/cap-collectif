@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useIntl, FormattedMessage } from 'react-intl';
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -11,7 +11,7 @@ import type { ProposalStepStatusColor } from '~relay/UpdateProjectAlphaMutation.
 import CircleColor, { type Color } from '~/components/Ui/CircleColor/CircleColor';
 import { RequirementDragItem } from './ProjectAdminStepForm.style';
 import { NoStepsPlaceholder } from '../Form/ProjectAdminForm.style';
-import type { Dispatch } from '~/types';
+import type { Dispatch, GlobalState } from '~/types';
 
 export type ProposalStepStatus = {|
   id?: ?string,
@@ -29,17 +29,22 @@ type Props = {|
   onInputDelete: (index: number) => void,
 |};
 
-const colorsData: Array<Color> = [
-  { label: 'global.primary', name: 'PRIMARY', hexValue: '#3b88fd' },
-  { label: 'global.green', name: 'SUCCESS', hexValue: '#399a39' },
-  { label: 'global.orange', name: 'WARNING', hexValue: '#f4b721' },
-  { label: 'global.red', name: 'DANGER', hexValue: '#f75d56' },
-  { label: 'opinion_type.colors.blue', name: 'INFO', hexValue: '#77b5fe' },
-  { label: 'opinion_type.colors.white', name: 'DEFAULT', hexValue: '#fff' },
-];
-
 export function StepStatusesList({ fields, statuses, onInputChange, onInputDelete }: Props) {
   const intl = useIntl();
+
+  const { bgColor } = useSelector((state: GlobalState) => ({
+    bgColor: state.default.parameters['color.btn.primary.bg'],
+  }));
+
+  const colorsData: Array<Color> = [
+    { label: 'global.primary', name: 'PRIMARY', hexValue: bgColor },
+    { label: 'global.green', name: 'SUCCESS', hexValue: '#399a39' },
+    { label: 'global.orange', name: 'WARNING', hexValue: '#f4b721' },
+    { label: 'global.red', name: 'DANGER', hexValue: '#f75d56' },
+    { label: 'opinion_type.colors.blue', name: 'INFO', hexValue: '#77b5fe' },
+    { label: 'opinion_type.colors.default', name: 'DEFAULT', hexValue: '#707070' },
+  ];
+
   return (
     <ListGroup>
       {fields.length === 0 && (

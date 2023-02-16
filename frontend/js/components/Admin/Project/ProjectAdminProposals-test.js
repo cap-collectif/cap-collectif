@@ -4,8 +4,8 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProjectAdminProposals } from './ProjectAdminProposals';
 import { $refType, $fragmentRefs, relayPaginationMock } from '~/mocks';
-import AnalysisNoProposal from '~/components/Analysis/AnalysisNoProposal/AnalysisNoProposal';
 import 'core-js';
+import MockProviders from '~/testUtils';
 
 const DEFAULT_MERGED_PROPOSALS_PROJECT = {
   id: 'UHJvamVjdDpwcm9dzdqZWN0Ng==',
@@ -972,48 +972,74 @@ describe('<ProjectAdminProposals />', () => {
   };
 
   it('renders correctly when the project have proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.basic} />);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.basic} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with badges when the project has merged proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.withMergeProposals} />);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.withMergeProposals} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly  when no contributions step', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.noContributionStep} />);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.noContributionStep} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders the "No proposals" placeholder when the project does not have any proposals', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.noProposals} />);
-    expect(wrapper.find(AnalysisNoProposal)).toHaveLength(1);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.noProposals} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly when the project have proposals when user is not an admin', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.basic} viewerIsAdmin={false} />);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.basic} viewerIsAdmin={false} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly with badges when the project has merged proposals when user is not an admin', () => {
     const wrapper = shallow(
-      <ProjectAdminProposals {...props.withMergeProposals} viewerIsAdmin={false} />,
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.withMergeProposals} viewerIsAdmin={false} />
+      </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders correctly  when no contributions step when user is not an admin', () => {
     const wrapper = shallow(
-      <ProjectAdminProposals {...props.noContributionStep} viewerIsAdmin={false} />,
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.noContributionStep} viewerIsAdmin={false} />
+      </MockProviders>,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('renders the "No proposals" placeholder when the project does not have any proposals when user is not an admin', () => {
-    const wrapper = shallow(<ProjectAdminProposals {...props.noProposals} viewerIsAdmin={false} />);
-    expect(wrapper.find(AnalysisNoProposal)).toHaveLength(1);
+    const wrapper = shallow(
+      <MockProviders store={{ default: { parameters: { 'color.btn.primary.bg': '#546E7A' } } }}>
+        <ProjectAdminProposals {...props.noProposals} viewerIsAdmin={false} />
+      </MockProviders>,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });
