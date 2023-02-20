@@ -18,13 +18,12 @@ exports[`<ProjectCard /> should render correctly 1`] = `
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
+    <ProjectCard___StyledImage
+      _css={null}
       _css2={null}
-      _css3={null}
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ForwardRef
@@ -165,13 +164,12 @@ exports[`<ProjectCard /> should render correctly an archived project 1`] = `
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
-      _css2="grayscale(1)"
-      _css3="50%"
+    <ProjectCard___StyledImage
+      _css="grayscale(1)"
+      _css2="50%"
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ProjectCardutils___StyledFlex
@@ -341,13 +339,12 @@ exports[`<ProjectCard /> should render correctly an external project 1`] = `
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
+    <ProjectCard___StyledImage
+      _css={null}
       _css2={null}
-      _css3={null}
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ForwardRef
@@ -488,13 +485,12 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
+    <ProjectCard___StyledImage
+      _css={null}
       _css2={null}
-      _css3={null}
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ProjectCardutils___StyledFlex
@@ -664,13 +660,12 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
+    <ProjectCard___StyledImage
+      _css={null}
       _css2={null}
-      _css3={null}
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ProjectCardutils___StyledFlex
@@ -877,9 +872,9 @@ exports[`<ProjectCard /> should render correctly without cover 1`] = `
     position="relative"
   >
     <ProjectCard___StyledAppBox2
-      _css="#e5e5e5"
-      _css2={null}
-      _css3={null}
+      _css3="#e5e5e5"
+      _css4={null}
+      _css5={null}
       overflow="hidden"
       position="relative"
       pt="66.66%"
@@ -1056,13 +1051,12 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
     p={0}
     position="relative"
   >
-    <ProjectCard___StyledAppBox2
-      _css="url(/cover.jpg)"
+    <ProjectCard___StyledImage
+      _css={null}
       _css2={null}
-      _css3={null}
       overflow="hidden"
       position="relative"
-      pt="66.66%"
+      src="/cover.jpg"
       width="100%"
     />
     <ProjectCardutils___StyledFlex

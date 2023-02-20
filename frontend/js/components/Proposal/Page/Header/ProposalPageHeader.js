@@ -22,6 +22,7 @@ import { isInterpellationContextFromProposal } from '~/utils/interpellationLabel
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router';
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
+import Image from '~ui/Primitives/Image';
 
 type Props = {
   title: ?string,
@@ -79,7 +80,7 @@ const Header: StyledComponent<{}, {}, HTMLElement> = styled.header`
   }
 `;
 
-const Cover: StyledComponent<{}, {}, HTMLImageElement> = styled.img`
+const Cover: StyledComponent<{}, {}, typeof Image> = styled(Image)`
   width: 100%;
   height: 310px;
   border-radius: 6px;

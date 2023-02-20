@@ -16,6 +16,7 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { bootstrapGrid } from '~/utils/sizes';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   +proposal: ProposalPreview_proposal,
@@ -51,14 +52,12 @@ const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
   }
 `;
 
-const ProposalImage: StyledComponent<{ bgImage: string }, {}, HTMLDivElement> = styled.div`
+const ProposalImage: StyledComponent<{}, {}, typeof Image> = styled(Image)`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${props => props.bgImage});
+  object-position: center;
+  object-fit: cover;
 
   @media (max-width: ${bootstrapGrid.mdMax}px) {
     max-width: 293px;
@@ -97,10 +96,10 @@ export class ProposalPreview extends React.Component<Props> {
           {proposal.media &&
           proposal.media.url &&
           features.display_pictures_in_depository_proposals_list ? (
-            <ProposalImage bgImage={proposal.media.url} />
+            <ProposalImage src={proposal.media.url} />
           ) : features.display_pictures_in_depository_proposals_list ? (
             getCategoryImage(proposal) ? (
-              <ProposalImage bgImage={getCategoryImage(proposal)} />
+              <ProposalImage src={getCategoryImage(proposal)} />
             ) : (
               <>
                 <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />

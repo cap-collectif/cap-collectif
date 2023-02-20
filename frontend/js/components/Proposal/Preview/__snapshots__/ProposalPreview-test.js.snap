@@ -113,7 +113,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     id="proposal-1"
   >
     <ProposalPreview__ProposalImage
-      bgImage="http://image.mypicture.jpg"
+      src="http://image.mypicture.jpg"
     />
     <Relay(ProposalPreviewBody)
       proposal={
@@ -215,7 +215,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
     id="proposal-1"
   >
     <ProposalPreview__ProposalImage
-      bgImage="/svg/img.svg"
+      src="/svg/img.svg"
     />
     <Relay(ProposalPreviewBody)
       proposal={

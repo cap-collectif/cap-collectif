@@ -15,6 +15,7 @@ import { FontWeight, LineHeight } from '~ui/Primitives/constants';
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import { formatInfo, formatCounter, renderTag } from './ProjectCard.utils';
+import Image from '~ui/Primitives/Image';
 
 type Props = {|
   ...AppBoxProps,
@@ -64,20 +65,37 @@ export const ProjectCard = ({
         boxShadow="small"
         position="relative"
         {...props}>
-        <AppBox
-          overflow="hidden"
-          css={{
-            background: project.cover?.url ? `url(${project.cover?.url})` : backgroundColor,
-            backgroundSize: 'cover',
-            filter: project.archived ? 'grayscale(1)' : null,
-            opacity: project.archived ? '50%' : null,
-          }}
-          position="relative"
-          width={variantSize === 'L' ? '50%' : '100%'}
-          pt={variantSize === 'L' ? '300px' : variantSize === 'M' ? '33.33%' : '66.66%'} // 3:2 aspect ratio trick
-        >
-          {!project.cover?.url && <DefaultProjectImage isNewCard />}
-        </AppBox>
+        {project.cover?.url ? (
+          <Image
+            overflow="hidden"
+            src={project.cover?.url}
+            css={{
+              objectFit: 'cover',
+              objectPosition: 'left top',
+              aspectRatio: '3 / 2',
+              filter: project.archived ? 'grayscale(1)' : null,
+              opacity: project.archived ? '50%' : null,
+            }}
+            position="relative"
+            width={variantSize === 'L' ? '50%' : '100%'}
+          />
+        ) : (
+          <AppBox
+            overflow="hidden"
+            css={{
+              background: backgroundColor,
+              backgroundSize: 'cover',
+              filter: project.archived ? 'grayscale(1)' : null,
+              opacity: project.archived ? '50%' : null,
+            }}
+            position="relative"
+            width={variantSize === 'L' ? '50%' : '100%'}
+            pt={variantSize === 'L' ? '300px' : variantSize === 'M' ? '33.33%' : '66.66%'} // 3:2 aspect ratio trick
+          >
+            {!project.cover?.url && <DefaultProjectImage isNewCard />}
+          </AppBox>
+        )}
+
         {renderTag(project, intl, isProjectsPage)}
         <Flex direction="column" m={4} bg="white" flex={1} overflow="hidden">
           <Heading

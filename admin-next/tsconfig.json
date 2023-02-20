@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,15 +19,38 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["../frontend/js/*"],
-      "@relay/*": ["./__generated__/*"],
-      "@ui/*": ["./components/UI/*"],
-      "@utils/*": ["./utils/*"],
-      "@mutations/*": ["./mutations/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@components/*": ["./components/*"]
-    }
+      "~/*": [
+        "../frontend/js/*"
+      ],
+      "@relay/*": [
+        "./__generated__/*"
+      ],
+      "@ui/*": [
+        "./components/UI/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+      "@mutations/*": [
+        "./mutations/*"
+      ],
+      "@hooks/*": [
+        "./hooks/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ]
+    },
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.graphql", "**/*.json"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.graphql",
+    "**/*.json"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
