@@ -492,6 +492,15 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
 
             $parameters = ParametersManipulator::merge($parameters, $filters);
 
+            if ($this->datagridValues) {
+                $orderKeys = [DatagridInterface::SORT_ORDER, DatagridInterface::SORT_BY];
+                foreach ($this->datagridValues as $key => $datagridValue) {
+                    if (in_array($key, $orderKeys)) {
+                        $parameters[$key] = $datagridValue;
+                    }
+                }
+            }
+
             // always force the parent value
             if ($this->isChild()) {
                 $parentAssociationMapping = $this->getParentAssociationMapping();
