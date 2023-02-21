@@ -16,9 +16,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SectionController extends PositionableController
 {
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool)
+    private SectionResolver $sectionResolver;
+
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, SectionResolver $sectionResolver)
     {
-        parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool);
+        parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool, $sectionResolver);
+        $this->sectionResolver = $sectionResolver;
     }
 
     /**
@@ -233,4 +236,10 @@ class SectionController extends PositionableController
             null
         );
     }
+
+    protected function move($object, $relativePosition, $resolver = null) {
+        parent::move($object, $relativePosition, $this->sectionResolver);
+    }
+
+
 }

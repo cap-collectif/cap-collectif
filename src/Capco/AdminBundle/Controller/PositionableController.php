@@ -44,7 +44,7 @@ abstract class PositionableController extends CRUDController
         );
     }
 
-    private function move($object, $relativePosition)
+    protected function move($object, $relativePosition, $resolver = null)
     {
         if (!$object) {
             throw $this->createNotFoundException('Unable to find the object');
@@ -54,7 +54,9 @@ abstract class PositionableController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        $resolver = $this->get($this->resolverName);
+        if (!$resolver) {
+            $resolver = $this->resolverName;
+        }
 
         // Object to switch position with
         $objectToSwitch = $resolver->getObjectToSwitch($object, $relativePosition);
