@@ -1,0 +1,104 @@
+<?php
+
+namespace Capco\AppBundle\GraphQL\Mutation;
+
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Security\ProjectVoter;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+
+class UpdateQuestionnaireStepMutation implements MutationInterface
+{
+    private GlobalIdResolver $globalIdResolver;
+    private EntityManagerInterface $em;
+    private AuthorizationCheckerInterface $authorizationChecker;
+    private FormFactoryInterface $formFactory;
+    private LoggerInterface $logger;
+
+    public function __construct(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        AuthorizationCheckerInterface $authorizationChecker,
+        FormFactoryInterface $formFactory,
+        LoggerInterface $logger
+    ) {
+        $this->globalIdResolver = $globalIdResolver;
+        $this->em = $em;
+        $this->authorizationChecker = $authorizationChecker;
+        $this->formFactory = $formFactory;
+        $this->logger = $logger;
+    }
+
+    public function __invoke(Argument $input, User $viewer): array
+    {
+        $data = $input->getArrayCopy();
+        $questionnaireStepId = $input->offsetGet('stepId');
+        $questionnaireStep = $this->getQuestionnaireStep($questionnaireStepId, $viewer);
+
+        // since title is no longer required we set empty string to not break existing steps
+        $questionnaireStep->setTitle('');
+
+        unset($data['stepId']);
+        $this->handleAnonParticipation($data);
+
+        $form = $this->formFactory->create(QuestionnaireStepFormType::class, $questionnaireStep);
+        $form->submit($data, false);
+
+        if (!$form->isValid()) {
+            $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+            throw GraphQLException::fromFormErrors($form);
+        }
+
+        $this->em->flush();
+
+        return ['questionnaireStep' => $questionnaireStep];
+    }
+
+    private function handleAnonParticipation(array &$data)
+    {
+        $isAnonymousParticipationAllowed = $data['isAnonymousParticipationAllowed'] ?? null;
+
+        if ($isAnonymousParticipationAllowed) {
+            $data['requirements'] = [];
+            return;
+        }
+
+        $data['collectParticipantsEmail'] = false;
+    }
+
+
+    public function isGranted(string $questionnaireStepId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $questionnaireStep = $this->getQuestionnaireStep($questionnaireStepId, $viewer);
+        $project = $questionnaireStep->getProject();
+
+        return $this->authorizationChecker->isGranted(
+            ProjectVoter::EDIT,
+            $project
+        );
+    }
+
+    public function getQuestionnaireStep(string $questionnaireStepId, User $viewer): QuestionnaireStep
+    {
+        $questionnaireStep = $this->globalIdResolver->resolve($questionnaireStepId, $viewer);
+        if (!$questionnaireStep instanceof QuestionnaireStep) {
+            throw new UserError("Given questionnaireStep id : {$questionnaireStepId} is not valid");
+        }
+        return $questionnaireStep;
+    }
+
+
+}

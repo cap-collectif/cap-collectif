@@ -1,0 +1,7 @@
+UpdateQuestionnaireStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            questionnaireStep:
+                type: 'InternalQuestionnaireStep!'
+                description: 'The updated step.'

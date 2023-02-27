@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateQuestionnaireStep admin should be able to edit questionnaireStep step. 1`] = `
+Object {
+  "updateQuestionnaireStep": Object {
+    "questionnaireStep": Object {
+      "body": "updated body",
+      "collectParticipantsEmail": false,
+      "customCode": "updated custom code",
+      "enabled": true,
+      "footer": "updated footer",
+      "id": "qStepProjectAnonymousQuestionnaire",
+      "isAnonymousParticipationAllowed": false,
+      "label": "updated label",
+      "metaDescription": "updated metadescription",
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "FirstnameRequirement",
+            },
+          },
+          Object {
+            "node": Object {
+              "__typename": "LastnameRequirement",
+            },
+          },
+        ],
+        "reason": null,
+      },
+      "timeRange": Object {
+        "endAt": "2024-01-03 16:29:17",
+        "startAt": "2023-01-03 16:29:17",
+      },
+      "timeless": false,
+      "title": "",
+    },
+  },
+}
+`;

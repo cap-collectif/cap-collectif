@@ -104,7 +104,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotNull()
      */
     private $title;
 

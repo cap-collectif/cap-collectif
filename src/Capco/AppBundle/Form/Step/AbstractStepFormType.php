@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\RequirementType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Capco\AppBundle\Validator\Constraints\CheckboxRequirementHasLabel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -23,7 +24,9 @@ abstract class AbstractStepFormType extends AbstractType
             ])
             ->add('body')
             ->add('bodyUsingJoditWysiwyg')
-            ->add('title')
+            ->add('title', TextType::class, [
+                'empty_data' => ''
+            ])
             ->add('label')
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',

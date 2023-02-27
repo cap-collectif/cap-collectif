@@ -8133,6 +8133,7 @@ type Mutation {
   updateOtherStep(input: UpdateOtherStepInput!): UpdateOtherStepPayload
   deleteStep(input: DeleteStepInput!): DeleteStepPayload
   updateDebateStep(input: UpdateDebateStepInput!): UpdateDebateStepPayload
+  updateQuestionnaireStep(input: UpdateQuestionnaireStepInput!): UpdateQuestionnaireStepPayload
 }
 
 """A connection to a list of items."""
@@ -17662,6 +17663,60 @@ input UpdateQuestionnaireParametersInput {
 
 type UpdateQuestionnaireParametersPayload {
   questionnaire: Questionnaire
+  clientMutationId: String
+}
+
+input UpdateQuestionnaireStepInput {
+  """The questionnaire linked to the step."""
+  questionnaire: ID!
+
+  """The step ID to update."""
+  stepId: ID!
+
+  """The step label."""
+  label: String!
+
+  """The step description."""
+  body: String
+
+  """When the step start."""
+  startAt: DateTime
+
+  """When the step end."""
+  endAt: DateTime
+  timeless: Boolean
+
+  """Whether or not the step is enabled."""
+  isEnabled: Boolean!
+
+  """Step metadescription."""
+  metaDescription: DateTime
+
+  """Step custom code."""
+  customCode: HTML
+
+  """Step footer code."""
+  footer: HTML
+
+  """Requirements to answer the questionnaire."""
+  requirements: [StepRequirementInput!]!
+
+  """Reasons to require these requirements."""
+  requirementsReason: String
+
+  """
+  If anonymous participation is allowed whether or not we collect participants email.
+  """
+  collectParticipantsEmail: Boolean
+
+  """Wether or not anonymous user can participate."""
+  isAnonymousParticipationAllowed: Boolean
+  clientMutationId: String
+}
+
+type UpdateQuestionnaireStepPayload {
+  """The updated step."""
+  questionnaireStep: QuestionnaireStep!
   clientMutationId: String
 }
 

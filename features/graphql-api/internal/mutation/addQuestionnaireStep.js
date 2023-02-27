@@ -7,6 +7,11 @@ const AddQuestionnaireStep = /* GraphQL*/ `
       step {
         __typename
         title
+        ...on QuestionnaireStep {
+          questionnaire {
+            title
+          }
+        }
       }
     }
   }

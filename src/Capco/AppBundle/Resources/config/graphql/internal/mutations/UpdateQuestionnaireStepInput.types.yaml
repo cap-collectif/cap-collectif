@@ -1,0 +1,48 @@
+UpdateQuestionnaireStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            questionnaire:
+                type: 'ID!'
+                description: 'The questionnaire linked to the step.'
+            stepId:
+                type: 'ID!'
+                description: 'The step ID to update.'
+            label:
+                type: 'String!'
+                description: 'The step label.'
+            body:
+                type: 'String'
+                description: 'The step description.'
+            startAt:
+                type: 'DateTime'
+                description: 'When the step start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the step end.'
+            timeless:
+                type: 'Boolean'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not the step is enabled.'
+            metaDescription:
+                type: 'DateTime'
+                description: 'Step metadescription.'
+            customCode:
+                type: 'HTML'
+                description: 'Step custom code.'
+            footer:
+                type: 'HTML'
+                description: 'Step footer code.'
+            requirements:
+                type: '[StepRequirementInput!]!'
+                description: 'Requirements to answer the questionnaire.'
+            requirementsReason:
+                type: 'String'
+                description: 'Reasons to require these requirements.'
+            collectParticipantsEmail:
+                type: 'Boolean'
+                description: 'If anonymous participation is allowed whether or not we collect participants email.'
+            isAnonymousParticipationAllowed:
+                type: 'Boolean'
+                description: 'Wether or not anonymous user can participate.'
