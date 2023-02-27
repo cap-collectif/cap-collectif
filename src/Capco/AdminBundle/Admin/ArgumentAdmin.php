@@ -95,6 +95,9 @@ class ArgumentAdmin extends AbstractAdmin
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
                 'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.argument.type',

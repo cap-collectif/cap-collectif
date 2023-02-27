@@ -97,6 +97,9 @@ class SourceAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',

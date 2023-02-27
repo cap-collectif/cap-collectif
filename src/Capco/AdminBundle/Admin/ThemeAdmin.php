@@ -115,6 +115,9 @@ class ThemeAdmin extends AbstractAdmin
         $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('author', null, [
                 'label' => 'global.author',

@@ -104,6 +104,9 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('body', null, [
                 'label' => 'global.contenu',

@@ -94,6 +94,9 @@ class CommentAdmin extends AbstractAdmin
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
                 'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
+                'route' => [
+                    'name' => 'edit'
+                ]
             ])
             ->add('relatedObject', null, [
                 'label' => 'admin.fields.comment.object',
