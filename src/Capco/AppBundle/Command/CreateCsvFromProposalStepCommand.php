@@ -472,9 +472,7 @@ EOF;
                 $this->generateSheet($this->currentStep, $input, $output, $fileName);
             }
         }
-
-        //trigger CI
-
+        
         return 0;
     }
 
