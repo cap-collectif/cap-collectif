@@ -6,6 +6,7 @@ use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\BooleanCell;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\UserBundle\Entity\User;
 use Psr\Log\LoggerInterface;
@@ -401,7 +402,7 @@ EOF;
     public static function getFilename(
         AbstractStep $selectionStep,
         string $extension = '.csv',
-        bool $projectAdmin = false
+        bool $ownerNotAdmin = false
     ): string {
         return self::getShortenedFilename(
             sprintf(
@@ -412,7 +413,7 @@ EOF;
                 $selectionStep->getSlug()
             ),
             $extension,
-            $projectAdmin
+            $ownerNotAdmin
         );
     }
 
@@ -449,23 +450,24 @@ EOF;
             );
         }
 
-        $isProjectAdmin = false;
+        $isProjectAdmin = $project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin();
+        $belongsToOrga = $project->getOwner() instanceof Organization;
+        $ownerNotAdmin = $isProjectAdmin || $belongsToOrga;
+
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
             $project = $step ? $step->getProject() : null;
             if (!$project) {
                 continue;
             }
-            if ($project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin()) {
-                $isProjectAdmin = true;
-            }
-            $fileName = self::getFilename($step, '.csv', $isProjectAdmin);
+
+            $fileName = self::getFilename($step, '.csv', $ownerNotAdmin);
             $this->currentStep = $step;
-            $this->generateSheet($this->currentStep, $input, $output, $fileName, $isProjectAdmin);
+            $this->generateSheet($this->currentStep, $input, $output, $fileName, $ownerNotAdmin);
             $this->executeSnapshot($input, $output, $fileName);
             $this->printMemoryUsage($output);
 
-            if ($isProjectAdmin) {
+            if ($ownerNotAdmin) {
                 $fileName = self::getFilename($step);
                 $this->generateSheet($this->currentStep, $input, $output, $fileName);
             }
@@ -479,7 +481,7 @@ EOF;
         InputInterface $input,
         OutputInterface $output,
         string $fileName,
-        bool $projectAdmin = false
+        bool $ownerNotAdmin = false
     ): void {
         if (!isset($this->currentData['data']) && isset($this->currentData['error'])) {
             $this->logger->error('GraphQL Query Error: ' . $this->currentData['error']);
@@ -488,7 +490,7 @@ EOF;
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep(
             $this->currentStep,
-            $projectAdmin
+            $ownerNotAdmin
         );
         $proposals = $this->executor
             ->execute('internal', [
@@ -508,7 +510,7 @@ EOF;
             if ($totalCount > 0) {
                 $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
 
-                $this->headersMap = $this->createHeadersMap($proposals, $projectAdmin);
+                $this->headersMap = $this->createHeadersMap($proposals, $ownerNotAdmin);
                 $this->writer->addRow(
                     WriterEntityFactory::createRowFromArray(
                         array_merge(['contribution_type'], array_keys($this->headersMap))
@@ -523,10 +525,10 @@ EOF;
                         $this->addProposalRow($proposal, $output);
                         $progress->advance();
                     },
-                    function ($pageInfo) use ($projectAdmin) {
+                    function ($pageInfo) use ($ownerNotAdmin) {
                         return $this->getContributionsGraphQLQueryByProposalStep(
                             $this->currentStep,
-                            $projectAdmin,
+                            $ownerNotAdmin,
                             $pageInfo['endCursor']
                         );
                     }
@@ -1136,13 +1138,13 @@ EOF;
         }
     }
 
-    protected function createHeadersMap(array $proposals, bool $projectAdmin = false): array
+    protected function createHeadersMap(array $proposals, bool $ownerNotAdmin = false): array
     {
         $questionNumber = 0;
 
         $headers = self::PROPOSAL_HEADER;
         $columnMappingExceptProposalHeader = self::COLUMN_MAPPING_EXCEPT_PROPOSAL_HEADER;
-        if ($projectAdmin) {
+        if ($ownerNotAdmin) {
             $excludedHeaders = ['proposal_author_email', 'proposal_author_isEmailConfirmed'];
             $columnMappingExceptProposalExcludedHeaders = [
                 'proposal_comments_author_email',
@@ -1547,7 +1549,7 @@ EOF;
 
     protected function getContributionsGraphQLQueryByProposalStep(
         AbstractStep $proposalStep,
-        bool $projectAdmin = false,
+        bool $ownerNotAdmin = false,
         ?string $proposalAfter = null,
         ?string $votesAfter = null,
         ?string $newsAfter = null,
@@ -1561,7 +1563,7 @@ EOF;
     ): string {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_TYPE_INFOS_FRAGMENT;
-        $AUTHOR_INFOS_FRAGMENT = $projectAdmin
+        $AUTHOR_INFOS_FRAGMENT = $ownerNotAdmin
             ? GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_ANONYMOUS_FRAGMENT
             : GraphqlQueryAndCsvHeaderHelper::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
