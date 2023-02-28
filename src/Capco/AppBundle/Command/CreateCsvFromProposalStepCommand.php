@@ -450,16 +450,16 @@ EOF;
             );
         }
 
-        $isProjectAdmin = $project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin();
-        $belongsToOrga = $project->getOwner() instanceof Organization;
-        $ownerNotAdmin = $isProjectAdmin || $belongsToOrga;
-
         /** @var AbstractStep $step */
         foreach ($steps as $step) {
             $project = $step ? $step->getProject() : null;
             if (!$project) {
                 continue;
             }
+
+            $isProjectAdmin = $project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin();
+            $belongsToOrga = $project->getOwner() instanceof Organization;
+            $ownerNotAdmin = $isProjectAdmin || $belongsToOrga;
 
             $fileName = self::getFilename($step, '.csv', $ownerNotAdmin);
             $this->currentStep = $step;
@@ -472,6 +472,8 @@ EOF;
                 $this->generateSheet($this->currentStep, $input, $output, $fileName);
             }
         }
+
+        //trigger CI
 
         return 0;
     }
