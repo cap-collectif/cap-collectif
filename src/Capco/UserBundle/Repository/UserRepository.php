@@ -1254,9 +1254,8 @@ class UserRepository extends EntityRepository
         bool $includeSuperAdmin = false
     ): array {
         $qb = $this->createQueryBuilder('u');
-        $qb->select('u')
-            ->where('u.email IS NOT NULL')
-            ->where('u.enabled = 1');
+        $qb->select('u')->where('u.email IS NOT NULL');
+        $qb->andWhere('u.enabled = 1');
 
         if (!$includeUnsubscribed) {
             $qb->andWhere('u.consentInternalCommunication = 1');
