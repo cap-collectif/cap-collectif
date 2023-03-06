@@ -4,7 +4,7 @@ exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
 Array [
   <div
     aria-describedby="id-g"
-    className="sc-bdvvtL TpZGZ sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM jBIFPT sc-fXazdy llVDbw cap-tag"
     id="restricted-access"
     onBlur={[Function]}
     onFocus={[Function]}
@@ -15,7 +15,7 @@ Array [
     title=""
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 10 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
 Array [
   <div
     aria-describedby="id-g"
-    className="sc-bdvvtL TpZGZ sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM jBIFPT sc-fXazdy llVDbw cap-tag"
     id="restricted-access"
     onBlur={[Function]}
     onFocus={[Function]}
@@ -63,7 +63,7 @@ Array [
     title=""
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 10 12"
       xmlns="http://www.w3.org/2000/svg"

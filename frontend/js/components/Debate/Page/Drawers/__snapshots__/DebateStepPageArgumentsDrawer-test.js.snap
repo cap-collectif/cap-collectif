@@ -2,14 +2,14 @@
 
 exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
   style={Object {}}
 >
   <div
-    className="sc-bdvvtL dWwSdG"
+    className="sc-bdnxRM jySDaE"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ vMWyQ dhRlrh cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+      className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       fill="none"
       onClick={[MockFunction]}
       viewBox="0 0 12 6"
@@ -24,15 +24,15 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
       />
     </svg>
     <div
-      className="sc-bdvvtL hMajps"
+      className="sc-bdnxRM MKAHO"
     >
       <p
-        className="sc-bdvvtL fXllCy cap-text"
+        className="sc-bdnxRM gjUaQI cap-text"
       >
         shortcut.opinion {"num":42}
       </p>
       <p
-        className="sc-bdvvtL csUdNw cap-text"
+        className="sc-bdnxRM lmUNnm cap-text"
       >
         vote-count-for-and-against {"for":42,"against":42}
       </p>
@@ -41,7 +41,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
       aria-controls="id-g"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdvvtL sc-lcepkR bNJgaA elkPgU cap-button"
+      className="sc-bdnxRM sc-lbVvki gNxXhS fKaghU cap-button"
       onClick={[Function]}
       onClickCapture={[Function]}
       onKeyDown={[Function]}
@@ -53,7 +53,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
     >
       argument.sort.label
       <svg
-        className="sc-bdvvtL sc-eJwWfJ iPkWup jsDA-DM cap-icon"
+        className="sc-bdnxRM sc-eJocfa gzFqiT kuPXuU cap-icon"
         fill="none"
         viewBox="0 0 12 7"
         xmlns="http://www.w3.org/2000/svg"
@@ -84,47 +84,47 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
     />
   </div>
   <div
-    className="sc-bdvvtL kJThCA"
+    className="sc-bdnxRM koUlpS"
     onClose={[MockFunction]}
   >
     <div
-      className="sc-bdvvtL eRTqHr"
+      className="sc-bdnxRM vurJR"
     >
       <div>
         <div
-          className="sc-bdvvtL exHfdr"
+          className="sc-bdnxRM jwnHNZ"
         >
           <div
-            className="sc-bdvvtL lKbSu cap-card"
+            className="sc-bdnxRM fymZNQ cap-card"
           >
             <div
-              className="sc-bdvvtL fkMSMm"
+              className="sc-bdnxRM hfbfLc"
             >
               <div
-                className="sc-bdvvtL vXbpu"
+                className="sc-bdnxRM lmXwIA"
               >
                 <div
-                  className="sc-bdvvtL bxTDSL"
+                  className="sc-bdnxRM hOVHbZ"
                 >
                   <p
-                    className="sc-bdvvtL leHKUF cap-text"
+                    className="sc-bdnxRM fxCElj cap-text"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdvvtL jgBhMA sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM jfWHIy sc-fXazdy llVDbw cap-tag"
                     style={Object {}}
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       global.against
                     </span>
                   </div>
                   <div
                     aria-describedby="id-g"
-                    className="sc-bdvvtL cZafmt sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM cPhKjT sc-fXazdy llVDbw cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onMouseEnter={[Function]}
@@ -134,7 +134,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       post_is_not_public
                     </span>
@@ -159,21 +159,21 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   />
                 </div>
                 <div
-                  className="sc-bdvvtL eOtkDA"
+                  className="sc-bdnxRM bWSfcu"
                 />
               </div>
               <p
-                className="sc-bdvvtL ciyRZw cap-text"
+                className="sc-bdnxRM ipdWIi cap-text"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdvvtL cAQwMv"
+                className="sc-bdnxRM fAXYRJ"
               >
                 <div
                   aria-describedby="id-g"
-                  className="sc-bdvvtL"
+                  className="sc-bdnxRM"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
@@ -182,13 +182,13 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+                    className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <svg
-                      className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+                      className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
                       fill="none"
                       viewBox="0 0 10 12"
                       xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 />
                 <span
-                  className="sc-bdvvtL kKNQyh cap-text"
+                  className="sc-bdnxRM iDQLNz cap-text"
                 >
                   42
                 </span>
@@ -246,39 +246,39 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           </div>
         </div>
         <div
-          className="sc-bdvvtL exHfdr"
+          className="sc-bdnxRM jwnHNZ"
         >
           <div
-            className="sc-bdvvtL lKbSu cap-card"
+            className="sc-bdnxRM fymZNQ cap-card"
           >
             <div
-              className="sc-bdvvtL fkMSMm"
+              className="sc-bdnxRM hfbfLc"
             >
               <div
-                className="sc-bdvvtL vXbpu"
+                className="sc-bdnxRM lmXwIA"
               >
                 <div
-                  className="sc-bdvvtL bxTDSL"
+                  className="sc-bdnxRM hOVHbZ"
                 >
                   <p
-                    className="sc-bdvvtL leHKUF cap-text"
+                    className="sc-bdnxRM fxCElj cap-text"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdvvtL jgBhMA sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM jfWHIy sc-fXazdy llVDbw cap-tag"
                     style={Object {}}
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       global.against
                     </span>
                   </div>
                   <div
                     aria-describedby="id-g"
-                    className="sc-bdvvtL cZafmt sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM cPhKjT sc-fXazdy llVDbw cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onMouseEnter={[Function]}
@@ -288,7 +288,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       post_is_not_public
                     </span>
@@ -313,21 +313,21 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   />
                 </div>
                 <div
-                  className="sc-bdvvtL eOtkDA"
+                  className="sc-bdnxRM bWSfcu"
                 />
               </div>
               <p
-                className="sc-bdvvtL ciyRZw cap-text"
+                className="sc-bdnxRM ipdWIi cap-text"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdvvtL cAQwMv"
+                className="sc-bdnxRM fAXYRJ"
               >
                 <div
                   aria-describedby="id-g"
-                  className="sc-bdvvtL"
+                  className="sc-bdnxRM"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
@@ -336,13 +336,13 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+                    className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <svg
-                      className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+                      className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
                       fill="none"
                       viewBox="0 0 10 12"
                       xmlns="http://www.w3.org/2000/svg"
@@ -373,7 +373,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 />
                 <span
-                  className="sc-bdvvtL kKNQyh cap-text"
+                  className="sc-bdnxRM iDQLNz cap-text"
                 >
                   42
                 </span>
@@ -400,39 +400,39 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
           </div>
         </div>
         <div
-          className="sc-bdvvtL exHfdr"
+          className="sc-bdnxRM jwnHNZ"
         >
           <div
-            className="sc-bdvvtL lKbSu cap-card"
+            className="sc-bdnxRM fymZNQ cap-card"
           >
             <div
-              className="sc-bdvvtL fkMSMm"
+              className="sc-bdnxRM hfbfLc"
             >
               <div
-                className="sc-bdvvtL vXbpu"
+                className="sc-bdnxRM lmXwIA"
               >
                 <div
-                  className="sc-bdvvtL bxTDSL"
+                  className="sc-bdnxRM hOVHbZ"
                 >
                   <p
-                    className="sc-bdvvtL leHKUF cap-text"
+                    className="sc-bdnxRM fxCElj cap-text"
                   >
                     &lt;mock-value-for-field-"username"&gt;
                   </p>
                   <div
-                    className="sc-bdvvtL jgBhMA sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM jfWHIy sc-fXazdy llVDbw cap-tag"
                     style={Object {}}
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       global.against
                     </span>
                   </div>
                   <div
                     aria-describedby="id-g"
-                    className="sc-bdvvtL cZafmt sc-fWCJzd rNujt cap-tag"
+                    className="sc-bdnxRM cPhKjT sc-fXazdy llVDbw cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onMouseEnter={[Function]}
@@ -442,7 +442,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                     title=""
                   >
                     <span
-                      className="sc-bdvvtL OPGjj cap-text"
+                      className="sc-bdnxRM KpOXB cap-text"
                     >
                       post_is_not_public
                     </span>
@@ -467,21 +467,21 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   />
                 </div>
                 <div
-                  className="sc-bdvvtL eOtkDA"
+                  className="sc-bdnxRM bWSfcu"
                 />
               </div>
               <p
-                className="sc-bdvvtL ciyRZw cap-text"
+                className="sc-bdnxRM ipdWIi cap-text"
               >
                 &lt;mock-value-for-field-"body"&gt;
                  
               </p>
               <div
-                className="sc-bdvvtL cAQwMv"
+                className="sc-bdnxRM fAXYRJ"
               >
                 <div
                   aria-describedby="id-g"
-                  className="sc-bdvvtL"
+                  className="sc-bdnxRM"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
@@ -490,13 +490,13 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                 >
                   <button
                     aria-label="vote.add"
-                    className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+                    className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
                     disabled={true}
                     onClick={[Function]}
                     type="button"
                   >
                     <svg
-                      className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+                      className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
                       fill="none"
                       viewBox="0 0 10 12"
                       xmlns="http://www.w3.org/2000/svg"
@@ -527,7 +527,7 @@ exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
                   }
                 />
                 <span
-                  className="sc-bdvvtL kKNQyh cap-text"
+                  className="sc-bdnxRM iDQLNz cap-text"
                 >
                   42
                 </span>

@@ -6,7 +6,7 @@ Array [
     aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -27,7 +27,7 @@ Array [
   </div>,
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -55,7 +55,7 @@ Array [
     aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -76,7 +76,7 @@ Array [
   </div>,
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -104,7 +104,7 @@ Array [
     aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -125,7 +125,7 @@ Array [
   </div>,
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-<Node-mock-id-1>-not-accounted-popover"
@@ -153,7 +153,7 @@ Array [
     aria-controls="publishable-<Node-mock-id-1>-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -174,7 +174,7 @@ Array [
   </div>,
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-<Node-mock-id-1>-not-accounted-popover"

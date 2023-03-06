@@ -2,14 +2,14 @@
 
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
 <div
-  className="sc-bdvvtL"
+  className="sc-bdnxRM"
   id="DebateStepPageNotYetStarted"
 >
   <div
-    className="sc-bdvvtL hehOWr"
+    className="sc-bdnxRM cefOPV"
   >
     <div
-      className="sc-bdvvtL ielpPC sc-fWCJzd cixfEG cap-tag"
+      className="sc-bdnxRM zqsiY sc-fXazdy hCrgT cap-tag"
       style={
         Object {
           "marginLeft": 0,
@@ -21,7 +21,7 @@ exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] =
       count.daysUntil {"count":725}
     </div>
     <h2
-      className="sc-bdvvtL hYSiQD cap-heading"
+      className="sc-bdnxRM kYuusp cap-heading"
     >
       &lt;mock-value-for-field-"title"&gt;
     </h2>

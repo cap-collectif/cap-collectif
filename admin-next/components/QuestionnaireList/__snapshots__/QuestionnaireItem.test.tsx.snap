@@ -3,25 +3,25 @@
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -29,14 +29,14 @@ Array [
     }
   >
     <a
-      className="sc-bdvvtL jtXLLM cap-link"
+      className="sc-bdnxRM bjOoai cap-link"
       href="/admin/questionnaire/questionnaire-1"
     >
       Combien font 0 + 0 ?
     </a>
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -44,14 +44,14 @@ Array [
     }
   >
     <a
-      className="sc-bdvvtL jtXLLM cap-link"
+      className="sc-bdnxRM bjOoai cap-link"
       href="<mock-value-for-field-\\"adminAlphaUrl\\">"
     >
       Le projet de la vie
     </a>
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -61,7 +61,7 @@ Array [
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -71,7 +71,7 @@ Array [
     01/03/2050
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -81,7 +81,7 @@ Array [
     01/03/2050
   </td>,
   <td
-    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -94,25 +94,25 @@ Array [
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -120,14 +120,14 @@ Array [
     }
   >
     <a
-      className="sc-bdvvtL jtXLLM cap-link"
+      className="sc-bdnxRM bjOoai cap-link"
       href="/admin/questionnaire/questionnaire-1"
     >
       Combien font 0 + 0 ?
     </a>
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -135,14 +135,14 @@ Array [
     }
   >
     <a
-      className="sc-bdvvtL jtXLLM cap-link"
+      className="sc-bdnxRM bjOoai cap-link"
       href="<mock-value-for-field-\\"adminAlphaUrl\\">"
     >
       Le projet de la vie
     </a>
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -152,7 +152,7 @@ Array [
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -162,7 +162,7 @@ Array [
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -172,7 +172,7 @@ Array [
     01/03/2050
   </td>,
   <td
-    className="sc-bdvvtL gJUzIT cap-table__td"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -182,7 +182,7 @@ Array [
     01/03/2050
   </td>,
   <td
-    className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -195,7 +195,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="dialog"
       aria-label="global.delete"
-      className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+      className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -211,7 +211,7 @@ Array [
       type="button"
     >
       <svg
-        className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+        className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
         fill="none"
         viewBox="0 0 12 12"
         xmlns="http://www.w3.org/2000/svg"

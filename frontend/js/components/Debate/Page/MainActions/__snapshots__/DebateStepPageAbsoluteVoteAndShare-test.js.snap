@@ -3,34 +3,34 @@
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL eYSNaB"
+    className="sc-bdnxRM iNCmBD"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
-        className="sc-bdvvtL blbeDV"
+        className="sc-bdnxRM uWtbD"
       >
         <p
-          className="sc-bdvvtL etAIZY cap-text"
+          className="sc-bdnxRM jWVfLO cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -41,7 +41,7 @@ Array [
           &lt;mock-value-for-field-"title"&gt;
         </p>
         <div
-          className="sc-bdvvtL dVKRbo"
+          className="sc-bdnxRM bxTzxK"
           style={
             Object {
               "opacity": 0,
@@ -52,7 +52,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdvvtL bOAaxo"
+            className="sc-bdnxRM jXtrwG"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -65,10 +65,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bdvvtL djSMSy"
+              className="sc-bdnxRM gLsJsI"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bdvvtL dgPHnB cap-text"
+                className="sc-bdnxRM WTDFb cap-text"
               >
                 global.for
               </p>
@@ -87,7 +87,7 @@ Array [
           </button>
           <div
             aria-label="vote.popover.title"
-            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
             data-dialog={true}
             hidden={true}
             id="login-popover"
@@ -107,7 +107,7 @@ Array [
             tabIndex={0}
           >
             <div
-              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
+              className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
               style={
                 Object {
                   "bottom": "100%",
@@ -137,18 +137,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bdvvtL fxVUoH"
+              className="sc-bdnxRM htoMAJ"
             >
               <p
-                className="sc-bdvvtL gCcJmA cap-text"
+                className="sc-bdnxRM kUmORS cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bdvvtL czpQVi"
+                className="sc-bdnxRM jaCxns"
               >
                 <p
-                  className="sc-bdvvtL civIyF cap-text"
+                  className="sc-bdnxRM dNfCSD cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -163,7 +163,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -191,7 +191,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdvvtL jJYLYJ"
+            className="sc-bdnxRM qRJsX"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -204,10 +204,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bdvvtL djSMSy"
+              className="sc-bdnxRM gLsJsI"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
                 viewBox="0 0 12 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -217,7 +217,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bdvvtL dgPHnB cap-text"
+                className="sc-bdnxRM WTDFb cap-text"
               >
                 global.against
               </p>
@@ -225,7 +225,7 @@ Array [
           </button>
           <div
             aria-label="vote.popover.title"
-            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
             data-dialog={true}
             hidden={true}
             id="login-popover"
@@ -245,7 +245,7 @@ Array [
             tabIndex={0}
           >
             <div
-              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
+              className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
               style={
                 Object {
                   "bottom": "100%",
@@ -275,18 +275,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bdvvtL fxVUoH"
+              className="sc-bdnxRM htoMAJ"
             >
               <p
-                className="sc-bdvvtL gCcJmA cap-text"
+                className="sc-bdnxRM kUmORS cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bdvvtL czpQVi"
+                className="sc-bdnxRM jaCxns"
               >
                 <p
-                  className="sc-bdvvtL civIyF cap-text"
+                  className="sc-bdnxRM dNfCSD cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -301,7 +301,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -335,28 +335,28 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when argumented 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL eYSNaB"
+    className="sc-bdnxRM iNCmBD"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
         style={
@@ -366,7 +366,7 @@ Array [
         }
       >
         <div
-          className="sc-bdvvtL bypsMk"
+          className="sc-bdnxRM gVYpzS"
         >
           <span
             aria-label="vote"
@@ -383,7 +383,7 @@ Array [
             }
           />
           <button
-            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            className="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -391,7 +391,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bdvvtL pFRrx"
+          className="sc-bdnxRM eSZtmj"
         >
           <iframe
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -418,7 +418,7 @@ Array [
           </a>
           <button
             aria-describedby="id-g"
-            className="sc-bdvvtL sc-lcepkR jSSwTC bBchHc cap-button"
+            className="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -428,7 +428,7 @@ Array [
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ iyEUKQ icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
               fill="none"
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
@@ -472,28 +472,28 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL kSKRZH"
+    className="sc-bdnxRM bOKqrl"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
         style={
@@ -503,7 +503,7 @@ Array [
         }
       >
         <div
-          className="sc-bdvvtL bypsMk"
+          className="sc-bdnxRM gVYpzS"
         >
           <span
             aria-label="vote"
@@ -520,7 +520,7 @@ Array [
             }
           />
           <button
-            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            className="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -528,7 +528,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bdvvtL fPoqcI cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+          className="sc-bdnxRM kKbndS cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
         >
           <form
             className="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
@@ -589,34 +589,34 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL bJNqZn"
+    className="sc-bdnxRM bDGKNp"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
-        className="sc-bdvvtL blbeDV"
+        className="sc-bdnxRM uWtbD"
       >
         <p
-          className="sc-bdvvtL etAIZY cap-text"
+          className="sc-bdnxRM jWVfLO cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -627,7 +627,7 @@ Array [
           &lt;mock-value-for-field-"title"&gt;
         </p>
         <div
-          className="sc-bdvvtL dVKRbo"
+          className="sc-bdnxRM bxTzxK"
           style={
             Object {
               "opacity": 0,
@@ -638,7 +638,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdvvtL bOAaxo"
+            className="sc-bdnxRM jXtrwG"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -651,10 +651,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bdvvtL djSMSy"
+              className="sc-bdnxRM gLsJsI"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -665,7 +665,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bdvvtL dgPHnB cap-text"
+                className="sc-bdnxRM WTDFb cap-text"
               >
                 global.for
               </p>
@@ -673,7 +673,7 @@ Array [
           </button>
           <div
             aria-label="vote.popover.title"
-            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
             data-dialog={true}
             hidden={true}
             id="login-popover"
@@ -693,7 +693,7 @@ Array [
             tabIndex={0}
           >
             <div
-              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg gbmMky juLQlw"
+              className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg gvLGCI juLQlw"
               style={
                 Object {
                   "fontSize": 30,
@@ -723,18 +723,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bdvvtL fxVUoH"
+              className="sc-bdnxRM htoMAJ"
             >
               <p
-                className="sc-bdvvtL gCcJmA cap-text"
+                className="sc-bdnxRM kUmORS cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bdvvtL czpQVi"
+                className="sc-bdnxRM jaCxns"
               >
                 <p
-                  className="sc-bdvvtL civIyF cap-text"
+                  className="sc-bdnxRM dNfCSD cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -749,7 +749,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -777,7 +777,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdvvtL jJYLYJ"
+            className="sc-bdnxRM qRJsX"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -790,10 +790,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bdvvtL djSMSy"
+              className="sc-bdnxRM gLsJsI"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+                className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
                 viewBox="0 0 12 11"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -803,7 +803,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bdvvtL dgPHnB cap-text"
+                className="sc-bdnxRM WTDFb cap-text"
               >
                 global.against
               </p>
@@ -811,7 +811,7 @@ Array [
           </button>
           <div
             aria-label="vote.popover.title"
-            className="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+            className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
             data-dialog={true}
             hidden={true}
             id="login-popover"
@@ -831,7 +831,7 @@ Array [
             tabIndex={0}
           >
             <div
-              className="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg gbmMky juLQlw"
+              className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg gvLGCI juLQlw"
               style={
                 Object {
                   "fontSize": 30,
@@ -861,18 +861,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bdvvtL fxVUoH"
+              className="sc-bdnxRM htoMAJ"
             >
               <p
-                className="sc-bdvvtL gCcJmA cap-text"
+                className="sc-bdnxRM kUmORS cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bdvvtL czpQVi"
+                className="sc-bdnxRM jaCxns"
               >
                 <p
-                  className="sc-bdvvtL civIyF cap-text"
+                  className="sc-bdnxRM dNfCSD cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -887,7 +887,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdvvtL sc-lcepkR johlmz igzsNu cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -921,28 +921,28 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL eYSNaB"
+    className="sc-bdnxRM iNCmBD"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
         style={
@@ -952,7 +952,7 @@ Array [
         }
       >
         <div
-          className="sc-bdvvtL bypsMk"
+          className="sc-bdnxRM gVYpzS"
         >
           <span
             aria-label="vote"
@@ -969,7 +969,7 @@ Array [
             }
           />
           <button
-            className="sc-bdvvtL sc-lcepkR bZkUKR cxpeMM cap-button"
+            className="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -977,7 +977,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bdvvtL pFRrx"
+          className="sc-bdnxRM eSZtmj"
         >
           <iframe
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -1004,7 +1004,7 @@ Array [
           </a>
           <button
             aria-describedby="id-g"
-            className="sc-bdvvtL sc-lcepkR jSSwTC bBchHc cap-button"
+            className="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
             onBlur={[Function]}
             onClick={[Function]}
             onFocus={[Function]}
@@ -1014,7 +1014,7 @@ Array [
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ iyEUKQ icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
               fill="none"
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
@@ -1058,28 +1058,28 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL bJNqZn"
+    className="sc-bdnxRM bDGKNp"
   >
     <div
-      className="sc-bdvvtL TRpZk container"
+      className="sc-bdnxRM fOiTFO container"
     >
       <div
         style={
@@ -1089,10 +1089,10 @@ Array [
         }
       >
         <div
-          className="sc-bdvvtL bypsMk"
+          className="sc-bdnxRM gVYpzS"
         >
           <p
-            className="sc-bdvvtL raPRS cap-text"
+            className="sc-bdnxRM fPGzgI cap-text"
           >
             <span
               aria-label="vote"
@@ -1111,7 +1111,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bdvvtL sc-lcepkR jvGbMS igzsNu cap-button"
+          className="sc-bdnxRM sc-lbVvki ivaZSg cgYPRG cap-button"
           onClick={[Function]}
           type="button"
         >

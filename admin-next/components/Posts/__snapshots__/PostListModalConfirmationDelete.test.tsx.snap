@@ -3,22 +3,22 @@
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
@@ -26,7 +26,7 @@ Array [
     aria-expanded={false}
     aria-haspopup="dialog"
     aria-label="admin.global.delete"
-    className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+    className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -42,7 +42,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -95,22 +95,22 @@ Array [
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
@@ -118,7 +118,7 @@ Array [
     aria-expanded={true}
     aria-haspopup="dialog"
     aria-label="admin.global.delete"
-    className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+    className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -134,7 +134,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL cjNftN sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -186,7 +186,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL dYRnRy sc-bXTejn fAMVJm cap-modal"
+        className="sc-bdnxRM lfZFgo sc-bXexck bWODgZ cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -195,13 +195,13 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL ijabiQ cap-modal__header"
+          className="sc-bdnxRM jjfrHe cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hJgXxS"
+            className="sc-bdnxRM kjxros"
           >
             <h2
-              className="sc-bdvvtL geLhUw cap-heading"
+              className="sc-bdnxRM hZqJQu cap-heading"
               style={
                 Object {
                   "marginLeft": 0,
@@ -213,12 +213,12 @@ Array [
             </h2>
           </div>
           <button
-            className="sc-bdvvtL cYwHQC"
+            className="sc-bdnxRM eVPzhQ"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -234,19 +234,19 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__body"
+          className="sc-bdnxRM bVOKYS cap-modal__body"
         >
           <p
-            className="sc-bdvvtL dgPHnB cap-text"
+            className="sc-bdnxRM WTDFb cap-text"
           >
             are-you-sure-to-delete-something {"element":"Post FR 12"}
           </p>
         </main>
         <footer
-          className="sc-bdvvtL cnmiif cap-modal__footer"
+          className="sc-bdnxRM gaOscV cap-modal__footer"
         >
           <div
-            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            className="sc-bdnxRM faBWgd cap-buttonGroup"
             style={
               Object {
                 "marginLeft": 0,
@@ -255,7 +255,7 @@ Array [
             }
           >
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN hFZdnJ cap-button"
               onClick={[Function]}
               style={
                 Object {
@@ -268,7 +268,7 @@ Array [
               cancel
             </button>
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb ixkmkg cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN kYiFxM cap-button"
               onClick={[Function]}
               type="button"
             >

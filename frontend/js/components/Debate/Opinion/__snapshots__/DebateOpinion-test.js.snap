@@ -2,30 +2,30 @@
 
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 <div
-  className="sc-bdvvtL kHGcPq cap-card"
+  className="sc-bdnxRM gYjpOg cap-card"
 >
   <div
-    className="sc-bdvvtL htsjLE sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
     style={Object {}}
     title=""
   >
     <span
-      className="sc-bdvvtL OPGjj cap-text"
+      className="sc-bdnxRM KpOXB cap-text"
     >
       opinion.for
     </span>
   </div>
   <div
-    className="sc-bdvvtL cBtkiE"
+    className="sc-bdnxRM dPstku"
   />
   <div
-    className="sc-bdvvtL jiIFbU"
+    className="sc-bdnxRM bqcJNK"
   >
     <div
-      className="sc-bdvvtL gnFHBK"
+      className="sc-bdnxRM xxmyc"
     >
       <div
-        className="sc-bdvvtL csVBNw sc-clIzBv eqbzZb cap-avatar"
+        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
         style={
           Object {
             "marginLeft": 0,
@@ -36,7 +36,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdvvtL gEWnzg"
+          className="sc-bdnxRM jVCZhC"
           src="<mock-value-for-field-\\"url\\">"
           style={
             Object {
@@ -47,25 +47,25 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
         />
       </div>
       <div
-        className="sc-bdvvtL hMajps"
+        className="sc-bdnxRM MKAHO"
       >
         <p
-          className="sc-bdvvtL kfIMJ cap-text"
+          className="sc-bdnxRM dWfVYr cap-text"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdvvtL iwHQxl cap-text"
+          className="sc-bdnxRM giDgev cap-text"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdvvtL tiMdF"
+      className="sc-bdnxRM dZUplD"
     >
       <h4
-        className="sc-bdvvtL ixkJHe cap-heading"
+        className="sc-bdnxRM iJMGcs cap-heading"
         style={
           Object {
             "marginLeft": 0,
@@ -76,7 +76,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
         Je suis pour
       </h4>
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -97,30 +97,30 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
 
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 <div
-  className="sc-bdvvtL kHGcPq cap-card"
+  className="sc-bdnxRM gYjpOg cap-card"
 >
   <div
-    className="sc-bdvvtL htsjLE sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
     style={Object {}}
     title=""
   >
     <span
-      className="sc-bdvvtL OPGjj cap-text"
+      className="sc-bdnxRM KpOXB cap-text"
     >
       opinion.for
     </span>
   </div>
   <div
-    className="sc-bdvvtL cBtkiE"
+    className="sc-bdnxRM dPstku"
   />
   <div
-    className="sc-bdvvtL jiIFbU"
+    className="sc-bdnxRM bqcJNK"
   >
     <div
-      className="sc-bdvvtL gnFHBK"
+      className="sc-bdnxRM xxmyc"
     >
       <div
-        className="sc-bdvvtL csVBNw sc-clIzBv eqbzZb cap-avatar"
+        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
         style={
           Object {
             "marginLeft": 0,
@@ -131,7 +131,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdvvtL gEWnzg"
+          className="sc-bdnxRM jVCZhC"
           src="<mock-value-for-field-\\"url\\">"
           style={
             Object {
@@ -142,25 +142,25 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
         />
       </div>
       <div
-        className="sc-bdvvtL hMajps"
+        className="sc-bdnxRM MKAHO"
       >
         <p
-          className="sc-bdvvtL kfIMJ cap-text"
+          className="sc-bdnxRM dWfVYr cap-text"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdvvtL iwHQxl cap-text"
+          className="sc-bdnxRM giDgev cap-text"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdvvtL tiMdF"
+      className="sc-bdnxRM dZUplD"
     >
       <h4
-        className="sc-bdvvtL ixkJHe cap-heading"
+        className="sc-bdnxRM iJMGcs cap-heading"
         style={
           Object {
             "marginLeft": 0,
@@ -171,7 +171,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
         Je suis pour
       </h4>
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -192,27 +192,27 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
 
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 <div
-  className="sc-bdvvtL gsmzaI cap-card"
+  className="sc-bdnxRM kcSrfm cap-card"
 >
   <div
-    className="sc-bdvvtL htsjLE sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
     style={Object {}}
     title=""
   >
     <span
-      className="sc-bdvvtL OPGjj cap-text"
+      className="sc-bdnxRM KpOXB cap-text"
     >
       opinion.for
     </span>
   </div>
   <div
-    className="sc-bdvvtL jiIFbU"
+    className="sc-bdnxRM bqcJNK"
   >
     <div
-      className="sc-bdvvtL gnFHBK"
+      className="sc-bdnxRM xxmyc"
     >
       <div
-        className="sc-bdvvtL csVBNw sc-clIzBv eqbzZb cap-avatar"
+        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
         style={
           Object {
             "marginLeft": 0,
@@ -223,7 +223,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdvvtL gEWnzg"
+          className="sc-bdnxRM jVCZhC"
           src="<mock-value-for-field-\\"url\\">"
           style={
             Object {
@@ -234,25 +234,25 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
         />
       </div>
       <div
-        className="sc-bdvvtL hMajps"
+        className="sc-bdnxRM MKAHO"
       >
         <p
-          className="sc-bdvvtL kfIMJ cap-text"
+          className="sc-bdnxRM dWfVYr cap-text"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdvvtL iwHQxl cap-text"
+          className="sc-bdnxRM giDgev cap-text"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdvvtL tiMdF"
+      className="sc-bdnxRM dZUplD"
     >
       <h4
-        className="sc-bdvvtL ixkJHe cap-heading"
+        className="sc-bdnxRM iJMGcs cap-heading"
         style={
           Object {
             "marginLeft": 0,
@@ -263,7 +263,7 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
         Je suis pour
       </h4>
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -284,30 +284,30 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
 
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 <div
-  className="sc-bdvvtL kHGcPq cap-card"
+  className="sc-bdnxRM gYjpOg cap-card"
 >
   <div
-    className="sc-bdvvtL htsjLE sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
     style={Object {}}
     title=""
   >
     <span
-      className="sc-bdvvtL OPGjj cap-text"
+      className="sc-bdnxRM KpOXB cap-text"
     >
       opinion.for
     </span>
   </div>
   <div
-    className="sc-bdvvtL cBtkiE"
+    className="sc-bdnxRM dPstku"
   />
   <div
-    className="sc-bdvvtL jiIFbU"
+    className="sc-bdnxRM bqcJNK"
   >
     <div
-      className="sc-bdvvtL gnFHBK"
+      className="sc-bdnxRM xxmyc"
     >
       <div
-        className="sc-bdvvtL csVBNw sc-clIzBv eqbzZb cap-avatar"
+        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
         style={
           Object {
             "marginLeft": 0,
@@ -318,7 +318,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdvvtL gEWnzg"
+          className="sc-bdnxRM jVCZhC"
           src="<mock-value-for-field-\\"url\\">"
           style={
             Object {
@@ -329,25 +329,25 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
         />
       </div>
       <div
-        className="sc-bdvvtL hMajps"
+        className="sc-bdnxRM MKAHO"
       >
         <p
-          className="sc-bdvvtL kfIMJ cap-text"
+          className="sc-bdnxRM dWfVYr cap-text"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdvvtL iwHQxl cap-text"
+          className="sc-bdnxRM giDgev cap-text"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdvvtL tiMdF"
+      className="sc-bdnxRM dZUplD"
     >
       <h4
-        className="sc-bdvvtL ixkJHe cap-heading"
+        className="sc-bdnxRM iJMGcs cap-heading"
         style={
           Object {
             "marginLeft": 0,
@@ -358,7 +358,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
         Je suis pour
       </h4>
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -373,7 +373,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
         />
       </p>
       <button
-        className="sc-bdvvtL sc-lcepkR iYtYR izhULq cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+        className="sc-bdnxRM sc-lbVvki hEEahL gAloIW cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
         onClick={[Function]}
         type="button"
       >
@@ -386,27 +386,27 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
 
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 <div
-  className="sc-bdvvtL gsmzaI cap-card"
+  className="sc-bdnxRM kcSrfm cap-card"
 >
   <div
-    className="sc-bdvvtL htsjLE sc-fWCJzd rNujt cap-tag"
+    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
     style={Object {}}
     title=""
   >
     <span
-      className="sc-bdvvtL OPGjj cap-text"
+      className="sc-bdnxRM KpOXB cap-text"
     >
       opinion.for
     </span>
   </div>
   <div
-    className="sc-bdvvtL jiIFbU"
+    className="sc-bdnxRM bqcJNK"
   >
     <div
-      className="sc-bdvvtL gnFHBK"
+      className="sc-bdnxRM xxmyc"
     >
       <div
-        className="sc-bdvvtL csVBNw sc-clIzBv eqbzZb cap-avatar"
+        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
         style={
           Object {
             "marginLeft": 0,
@@ -417,7 +417,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
       >
         <img
           alt="Agui le penseur"
-          className="sc-bdvvtL gEWnzg"
+          className="sc-bdnxRM jVCZhC"
           src="<mock-value-for-field-\\"url\\">"
           style={
             Object {
@@ -428,25 +428,25 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
         />
       </div>
       <div
-        className="sc-bdvvtL hMajps"
+        className="sc-bdnxRM MKAHO"
       >
         <p
-          className="sc-bdvvtL kfIMJ cap-text"
+          className="sc-bdnxRM dWfVYr cap-text"
         >
           Agui le penseur
         </p>
         <p
-          className="sc-bdvvtL iwHQxl cap-text"
+          className="sc-bdnxRM giDgev cap-text"
         >
           Jsuis né dans les favela au brésil
         </p>
       </div>
     </div>
     <div
-      className="sc-bdvvtL tiMdF"
+      className="sc-bdnxRM dZUplD"
     >
       <h4
-        className="sc-bdvvtL ixkJHe cap-heading"
+        className="sc-bdnxRM iJMGcs cap-heading"
         style={
           Object {
             "marginLeft": 0,
@@ -457,7 +457,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
         Je suis pour
       </h4>
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -472,7 +472,7 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
         />
       </p>
       <button
-        className="sc-bdvvtL sc-lcepkR iYtYR izhULq cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+        className="sc-bdnxRM sc-lbVvki hEEahL gAloIW cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
         onClick={[Function]}
         type="button"
       >

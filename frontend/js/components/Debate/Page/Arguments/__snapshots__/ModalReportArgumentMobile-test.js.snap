@@ -23,21 +23,21 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   tabindex="-1"
 >
   <div
-    class="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+    class="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     style="opacity:0"
   >
     <div
-      class="sc-bdvvtL krEzRq sc-bXTejn cap-modal"
+      class="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
       style="opacity:0;transform:translateY(-20px) translateZ(0)"
     >
       <header
-        class="sc-bdvvtL jfdhIH cap-modal__header"
+        class="sc-bdnxRM ihArod cap-modal__header"
       >
         <div
-          class="sc-bdvvtL hEjsJA"
+          class="sc-bdnxRM bPpvLW"
         >
           <h4
-            class="sc-bdvvtL jtLwVb cap-heading"
+            class="sc-bdnxRM leidOV cap-heading"
             style="margin-left:0;margin-top:0"
           >
             global.modal.report.title
@@ -45,7 +45,7 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
         </div>
       </header>
       <main
-        class="sc-bdvvtL gWVjgj cap-modal__body"
+        class="sc-bdnxRM dRVyGd cap-modal__body"
       >
         <form
           id="report-form"
@@ -147,10 +147,10 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
         </form>
       </main>
       <footer
-        class="sc-bdvvtL eAeyKU cap-modal__footer"
+        class="sc-bdnxRM IKIFa cap-modal__footer"
       >
         <button
-          class="sc-bdvvtL sc-lcepkR dFIOER jVZifq cap-button"
+          class="sc-bdnxRM sc-lbVvki jwWkj bdqOWy cap-button"
           style="margin-left:0;margin-top:0"
           type="button"
         >

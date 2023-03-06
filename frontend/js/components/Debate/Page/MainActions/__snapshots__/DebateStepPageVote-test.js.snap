@@ -2,17 +2,17 @@
 
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 <div
-  class="sc-bdvvtL gnQsba"
+  class="sc-bdnxRM gmUUoo"
   style="opacity:0"
 >
   <button
-    class="sc-bdvvtL bwZmwA"
+    class="sc-bdnxRM omwMO"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         fill="none"
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,20 +23,20 @@ exports[`<DebateStepPageVote/> should renders correctly 1`] = `
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.for
       </p>
     </div>
   </button>
   <button
-    class="sc-bdvvtL dMPniQ"
+    class="sc-bdnxRM fpzkOi"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         viewBox="0 0 12 11"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -46,7 +46,7 @@ exports[`<DebateStepPageVote/> should renders correctly 1`] = `
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.against
       </p>
@@ -57,21 +57,21 @@ exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 <div
-  class="sc-bdvvtL gnQsba"
+  class="sc-bdnxRM gmUUoo"
   style="opacity:0"
 >
   <button
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdvvtL bwZmwA"
+    class="sc-bdnxRM omwMO"
     type="button"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         fill="none"
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.for
       </p>
@@ -90,7 +90,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+    class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -99,7 +99,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
+      class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -117,18 +117,18 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdvvtL iEmlgw"
+      class="sc-bdnxRM jgfvhW"
     >
       <p
-        class="sc-bdvvtL gfzBSV cap-text"
+        class="sc-bdnxRM hdVRdr cap-text"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdvvtL grUqXo"
+        class="sc-bdnxRM jRHUGW"
       >
         <p
-          class="sc-bdvvtL egrZXz cap-text"
+          class="sc-bdnxRM bhbXgN cap-text"
           style="margin-left:0;margin-top:0"
         >
           vote.popover.body
@@ -138,7 +138,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
+            class="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
             type="button"
           >
             global.close
@@ -161,14 +161,14 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     aria-controls="popover-overlay"
     aria-expanded="false"
     aria-haspopup="dialog"
-    class="sc-bdvvtL dMPniQ"
+    class="sc-bdnxRM fpzkOi"
     type="button"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         viewBox="0 0 12 11"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -178,7 +178,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.against
       </p>
@@ -186,7 +186,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
   </button>
   <div
     aria-label="vote.popover.title"
-    class="sc-bdvvtL NewLoginOverlay__PopoverContainer-hazOKr gUNRRV ehiDfV"
+    class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
     data-dialog="true"
     hidden=""
     id="login-popover"
@@ -195,7 +195,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
     tabindex="0"
   >
     <div
-      class="sc-bdvvtL NewLoginOverlay__Arrow-csxmwg huXWwm ipxCrt"
+      class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
       style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
     >
       <svg
@@ -213,18 +213,18 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
       </svg>
     </div>
     <div
-      class="sc-bdvvtL iEmlgw"
+      class="sc-bdnxRM jgfvhW"
     >
       <p
-        class="sc-bdvvtL gfzBSV cap-text"
+        class="sc-bdnxRM hdVRdr cap-text"
       >
         vote.popover.title
       </p>
       <div
-        class="sc-bdvvtL grUqXo"
+        class="sc-bdnxRM jRHUGW"
       >
         <p
-          class="sc-bdvvtL egrZXz cap-text"
+          class="sc-bdnxRM bhbXgN cap-text"
           style="margin-left:0;margin-top:0"
         >
           vote.popover.body
@@ -234,7 +234,7 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            class="sc-bdvvtL sc-lcepkR iPfbxu elkPgU cap-button"
+            class="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
             type="button"
           >
             global.close
@@ -258,17 +258,17 @@ exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1
 
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 <div
-  class="sc-bdvvtL gnQsba"
+  class="sc-bdnxRM gmUUoo"
   style="opacity:0"
 >
   <button
-    class="sc-bdvvtL bwZmwA"
+    class="sc-bdnxRM omwMO"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         fill="none"
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
@@ -279,20 +279,20 @@ exports[`<DebateStepPageVote/> should renders correctly with anonymous participa
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.for
       </p>
     </div>
   </button>
   <button
-    class="sc-bdvvtL dMPniQ"
+    class="sc-bdnxRM fpzkOi"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         viewBox="0 0 12 11"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -302,7 +302,7 @@ exports[`<DebateStepPageVote/> should renders correctly with anonymous participa
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.against
       </p>
@@ -313,17 +313,17 @@ exports[`<DebateStepPageVote/> should renders correctly with anonymous participa
 
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 <div
-  class="sc-bdvvtL gnQsba"
+  class="sc-bdnxRM gmUUoo"
   style="opacity:0"
 >
   <button
-    class="sc-bdvvtL bwZmwA"
+    class="sc-bdnxRM omwMO"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         fill="none"
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
@@ -334,20 +334,20 @@ exports[`<DebateStepPageVote/> should renders correctly with email not confirmed
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.for
       </p>
     </div>
   </button>
   <button
-    class="sc-bdvvtL dMPniQ"
+    class="sc-bdnxRM fpzkOi"
   >
     <div
-      class="sc-bdvvtL iDVMyE"
+      class="sc-bdnxRM IoRUe"
     >
       <svg
-        class="sc-bdvvtL sc-eJwWfJ jdTcS jsDA-DM cap-icon"
+        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
         viewBox="0 0 12 11"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -357,7 +357,7 @@ exports[`<DebateStepPageVote/> should renders correctly with email not confirmed
         />
       </svg>
       <p
-        class="sc-bdvvtL ciyRZw cap-text"
+        class="sc-bdnxRM ipdWIi cap-text"
       >
         global.against
       </p>

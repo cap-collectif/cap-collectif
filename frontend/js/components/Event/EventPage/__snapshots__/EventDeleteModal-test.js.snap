@@ -6,7 +6,7 @@ Array [
     aria-controls="id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL sc-lcepkR dsJymO imMyBh cap-button"
+    className="sc-bdnxRM sc-lbVvki cRcndE hDXagx cap-button"
     id="btn-delete-event"
     onClick={[Function]}
     onClickCapture={[Function]}

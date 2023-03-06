@@ -25,6 +25,7 @@ import colors from '~/styles/modules/colors';
 import ProposalOtherPanelsModal from '../Create/ProposalOtherPanelsModal';
 import ProposalErrorModal from '~/components/Proposal/Create/ProposalErrorModal';
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql';
+import isIos from '~/utils/isIos';
 
 type Props = {|
   +intl: IntlShape,
@@ -174,6 +175,7 @@ export const ProposalEditModal = ({
       hideCloseButton={modalState === 'LEAVE'}
       hideOnEsc={modalState !== 'LEAVE'}
       hideOnClickOutside={false}
+      forceModalDialogToFalse={isIos()}
       onClose={() => {
         if (modalState !== 'LEAVE') setModalState('LEAVE');
         onClose();

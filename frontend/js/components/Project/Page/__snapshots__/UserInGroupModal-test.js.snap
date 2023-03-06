@@ -15,7 +15,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+    className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
     }
   >
     <div
-      className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
+      className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -37,13 +37,13 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         className="ResetCss-jmHeCe hpqhdm"
       >
         <header
-          className="sc-bdvvtL jfdhIH cap-modal__header"
+          className="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hEjsJA"
+            className="sc-bdnxRM bPpvLW"
           >
             <h2
-              className="sc-bdvvtL jlybEY cap-heading"
+              className="sc-bdnxRM ffVrmi cap-heading"
               id="contained-modal-title-lg"
               style={
                 Object {
@@ -56,12 +56,12 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
             </h2>
           </div>
           <button
-            className="sc-bdvvtL bFJghn"
+            className="sc-bdnxRM chwkeB"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__body"
+        className="sc-bdnxRM eJnfvU cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -128,10 +128,10 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
         </ul>
       </main>
       <footer
-        className="sc-bdvvtL eAeyKU cap-modal__footer"
+        className="sc-bdnxRM IKIFa cap-modal__footer"
       >
         <button
-          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+          className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
           onClick={[MockFunction]}
           style={
             Object {
@@ -164,7 +164,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+    className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -173,7 +173,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
     }
   >
     <div
-      className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
+      className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -186,13 +186,13 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         className="ResetCss-jmHeCe hpqhdm"
       >
         <header
-          className="sc-bdvvtL jfdhIH cap-modal__header"
+          className="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hEjsJA"
+            className="sc-bdnxRM bPpvLW"
           >
             <h2
-              className="sc-bdvvtL jlybEY cap-heading"
+              className="sc-bdnxRM ffVrmi cap-heading"
               id="contained-modal-title-lg"
               style={
                 Object {
@@ -205,12 +205,12 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
             </h2>
           </div>
           <button
-            className="sc-bdvvtL bFJghn"
+            className="sc-bdnxRM chwkeB"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -227,7 +227,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__body"
+        className="sc-bdnxRM eJnfvU cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -277,10 +277,10 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
         </ul>
       </main>
       <footer
-        className="sc-bdvvtL eAeyKU cap-modal__footer"
+        className="sc-bdnxRM IKIFa cap-modal__footer"
       >
         <button
-          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+          className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
           onClick={[MockFunction]}
           style={
             Object {
@@ -313,7 +313,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+    className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -322,7 +322,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
     }
   >
     <div
-      className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
+      className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
       id="<Node-mock-id-1>-modal"
       style={
         Object {
@@ -335,13 +335,13 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
         className="ResetCss-jmHeCe hpqhdm"
       >
         <header
-          className="sc-bdvvtL jfdhIH cap-modal__header"
+          className="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hEjsJA"
+            className="sc-bdnxRM bPpvLW"
           >
             <h2
-              className="sc-bdvvtL jlybEY cap-heading"
+              className="sc-bdnxRM ffVrmi cap-heading"
               id="contained-modal-title-lg"
               style={
                 Object {
@@ -354,12 +354,12 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
             </h2>
           </div>
           <button
-            className="sc-bdvvtL bFJghn"
+            className="sc-bdnxRM chwkeB"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -376,7 +376,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__body"
+        className="sc-bdnxRM eJnfvU cap-modal__body"
       >
         <ul
           className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -426,10 +426,10 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
         </ul>
       </main>
       <footer
-        className="sc-bdvvtL eAeyKU cap-modal__footer"
+        className="sc-bdnxRM IKIFa cap-modal__footer"
       >
         <button
-          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+          className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
           onClick={[MockFunction]}
           style={
             Object {

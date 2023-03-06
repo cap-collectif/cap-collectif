@@ -8,7 +8,7 @@ Array [
     aria-expanded={false}
     aria-haspopup="menu"
     aria-label="global.plus"
-    className="sc-bdvvtL efRUHH cap-buttonQuickAction cap-menu__disclosure"
+    className="sc-bdnxRM euyNTt cap-buttonQuickAction cap-menu__disclosure"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -24,7 +24,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ hHMOTv jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa eapaKB kuPXuU cap-icon"
       fill="currentColor"
       viewBox="0 0 12 4"
       xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ Array [
   />,
   <div
     aria-orientation="vertical"
-    className="sc-bdvvtL caytJI sc-fbyfCU cap-menu__list cap-menu__list"
+    className="sc-bdnxRM fjLEpq sc-fcmMJX cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -80,7 +80,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL erVdis cap-menu__item"
+      className="sc-bdnxRM gmUple cap-menu__item"
       id="download-event-registration"
       loop={false}
       onClick={[Function]}
@@ -89,7 +89,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
          
         export-registered
@@ -100,7 +100,7 @@ Array [
       aria-controls="id-g"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdvvtL erVdis cap-menu__item"
+      className="sc-bdnxRM gmUple cap-menu__item"
       loop={false}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -114,7 +114,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdvvtL ciyRZw cap-text"
+        className="sc-bdnxRM ipdWIi cap-text"
       >
          
         global.delete

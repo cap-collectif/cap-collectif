@@ -15,7 +15,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
   tabIndex={-1}
 >
   <div
-    className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+    className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     onClick={[Function]}
     style={
       Object {
@@ -24,7 +24,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
     }
   >
     <div
-      className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
+      className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
       id="show-authors-modal"
       style={
         Object {
@@ -37,13 +37,13 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
         className="ResetCss-jmHeCe hpqhdm"
       >
         <header
-          className="sc-bdvvtL jfdhIH cap-modal__header"
+          className="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hEjsJA"
+            className="sc-bdnxRM bPpvLW"
           >
             <h2
-              className="sc-bdvvtL jlybEY cap-heading"
+              className="sc-bdnxRM ffVrmi cap-heading"
               style={
                 Object {
                   "marginLeft": 0,
@@ -55,12 +55,12 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
             </h2>
           </div>
           <button
-            className="sc-bdvvtL bFJghn"
+            className="sc-bdnxRM chwkeB"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
         </header>
       </div>
       <main
-        className="sc-bdvvtL vunmq cap-modal__body"
+        className="sc-bdnxRM eJnfvU cap-modal__body"
       >
         <div
           className="ListGroupFlush__Container-eGshRq kTxvA-D ProjectHeaderAuthorsModal__ProjectAuthorList-ewUUPt gcaloH mb-0 list-group-flush list-group"
@@ -154,10 +154,10 @@ exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
         </div>
       </main>
       <footer
-        className="sc-bdvvtL jKTObj cap-modal__footer"
+        className="sc-bdnxRM jqwNtJ cap-modal__footer"
       >
         <button
-          className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+          className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
           onClick={[MockFunction]}
           style={
             Object {

@@ -155,7 +155,7 @@
         },
         {
             "path": "./public/js/commons.js",
-            "maxSize": "1100 KB"
+            "maxSize": "1200 KB"
         },
         {
             "path": "./public/js/app.js",
@@ -189,7 +189,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
         "@cap-collectif/form": "^0.5.0",
-        "@cap-collectif/ui": "^1.5.8",
+        "@cap-collectif/ui": "^1.6.0",
         "@emotion/cache": "^10.0.29",
         "@emotion/core": "^10.0.35",
         "@formatjs/intl-pluralrules": "^4.1.0",

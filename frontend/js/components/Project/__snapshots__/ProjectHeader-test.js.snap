@@ -2,19 +2,19 @@
 
 exports[`<ProjectHeader /> should render correctly 1`] = `
 <div
-  className="sc-bdvvtL bYbjUV projectHeader"
+  className="sc-bdnxRM kbtnrb projectHeader"
 >
   <div
-    className="sc-bdvvtL kykDne projectHeader__cover"
+    className="sc-bdnxRM eExfRE projectHeader__cover"
   >
     <div
-      className="sc-bdvvtL fDVfuT projectHeader__cover__content"
+      className="sc-bdnxRM koNNPB projectHeader__cover__content"
     >
       <div
-        className="sc-bdvvtL jChgrW"
+        className="sc-bdnxRM bfWgxk"
       >
         <div
-          className="sc-bdvvtL hSqYWf cap-avatar-group projectHeader__authors platform__body"
+          className="sc-bdnxRM ckdMax cap-avatar-group projectHeader__authors platform__body"
           id="project-header"
           onClick={[Function]}
           role="group"
@@ -25,15 +25,15 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           }
         >
           <div
-            className="sc-bdvvtL dZFYjr"
+            className="sc-bdnxRM iBUlEp"
           >
             <div
-              className="sc-bdvvtL QtoVT sc-clIzBv fnLKtc cap-avatar"
+              className="sc-bdnxRM kWKQGR sc-ckTSus gtiRfi cap-avatar"
               title="Vince"
             >
               <img
                 alt="Vince"
-                className="sc-bdvvtL gEWnzg"
+                className="sc-bdnxRM jVCZhC"
                 src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
                 style={
                   Object {
@@ -46,7 +46,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           </div>
         </div>
         <p
-          className="sc-bdvvtL coKxPj cap-text platform__body"
+          className="sc-bdnxRM ifbFlZ cap-text platform__body"
           id="authors-credit"
           onClick={[Function]}
         >
@@ -54,20 +54,20 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         </p>
       </div>
       <h3
-        className="sc-bdvvtL eXdgpL cap-text projectHeader__title platform__title"
+        className="sc-bdnxRM aIhTV cap-text projectHeader__title platform__title"
         title="Food project"
       >
         Food project
       </h3>
     </div>
     <div
-      className="sc-bdvvtL hpGpvm projectHeader__coverVideo"
+      className="sc-bdnxRM kvVkjE projectHeader__coverVideo"
     >
       <div
         aria-controls="project-header-cover-modal"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdvvtL kLLhjw"
+        className="sc-bdnxRM gAYeYG"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}
@@ -150,11 +150,11 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       />
     </div>
     <div
-      className="sc-bdvvtL kFZckT"
+      className="sc-bdnxRM cYcgUp"
     >
       <div
         aria-describedby="id-g"
-        className="sc-bdvvtL TpZGZ sc-fWCJzd rNujt cap-tag"
+        className="sc-bdnxRM jBIFPT sc-fXazdy llVDbw cap-tag"
         id="restricted-access"
         onBlur={[Function]}
         onFocus={[Function]}
@@ -165,7 +165,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
         title=""
       >
         <svg
-          className="sc-bdvvtL sc-eJwWfJ kuPGYc jsDA-DM cap-icon"
+          className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon"
           fill="none"
           viewBox="0 0 10 12"
           xmlns="http://www.w3.org/2000/svg"

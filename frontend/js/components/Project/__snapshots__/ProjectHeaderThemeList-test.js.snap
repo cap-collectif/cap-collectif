@@ -3,11 +3,11 @@
 exports[`<ProjectHeaderThemeList /> should render correctly 1`] = `
 Array [
   <a
-    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa clyCXy kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 12 10"
       xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -54,11 +54,11 @@ Array [
 exports[`<ProjectHeaderThemeList /> should render correctly when project is archived 1`] = `
 Array [
   <a
-    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV fOWBro p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderThemeList__ThemesButton-hsKMqV fOWBro p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa clyCXy kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 12 10"
       xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -105,11 +105,11 @@ Array [
 exports[`<ProjectHeaderThemeList /> should render correctly with the display of modal 1`] = `
 Array [
   <a
-    className="sc-bdvvtL cAlSLs ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderThemeList__ThemesButton-hsKMqV iWEtxc p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ elfRAM jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa clyCXy kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 12 10"
       xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +124,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -146,7 +146,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -155,7 +155,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL krEzRq sc-bXTejn cap-modal"
+        className="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -164,20 +164,20 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL jfdhIH cap-modal__header"
+          className="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hEjsJA"
+            className="sc-bdnxRM bPpvLW"
           >
             count-themes {"count":4}
           </div>
           <button
-            className="sc-bdvvtL bFJghn"
+            className="sc-bdnxRM chwkeB"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +193,7 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL vunmq cap-modal__body"
+          className="sc-bdnxRM eJnfvU cap-modal__body"
         >
           <ul
             className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -238,10 +238,10 @@ Array [
           </ul>
         </main>
         <footer
-          className="sc-bdvvtL eAeyKU cap-modal__footer"
+          className="sc-bdnxRM IKIFa cap-modal__footer"
         >
           <button
-            className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
             onClick={[Function]}
             style={
               Object {

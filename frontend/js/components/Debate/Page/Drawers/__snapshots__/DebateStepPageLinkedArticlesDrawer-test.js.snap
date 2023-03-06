@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,10 +11,10 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
   }
 >
   <div
-    className="sc-bdvvtL cFjuwK"
+    className="sc-bdnxRM ftKnHk"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ vMWyQ dhRlrh cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+      className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       fill="none"
       onClick={[MockFunction]}
       viewBox="0 0 12 6"
@@ -29,17 +29,17 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
       />
     </svg>
     <h3
-      className="sc-bdvvtL hCsBrY cap-heading"
+      className="sc-bdnxRM cCNfJy cap-heading"
     >
       related.articles
     </h3>
   </div>
   <div
-    className="sc-bdvvtL kJThCA"
+    className="sc-bdnxRM koUlpS"
     onClose={[MockFunction]}
   >
     <div
-      className="sc-bdvvtL jVyMvf"
+      className="sc-bdnxRM iqUWAZ"
     >
       <a
         href="https://www.generationlibre.eu/medias/non-au-passeport-vaccinal-gaspard-koenig/"
@@ -53,10 +53,10 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
         target="_blank"
       >
         <div
-          className="sc-bdvvtL ifijdB cap-card"
+          className="sc-bdnxRM dqOFEn cap-card"
         >
           <div
-            className="sc-bdvvtL kaBLIF"
+            className="sc-bdnxRM clwTpP"
           >
             <img
               className="DebateArticleCard___StyledImage-dblqpE gVCHpR"
@@ -75,16 +75,16 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
             />
           </div>
           <div
-            className="sc-bdvvtL lnSgqo"
+            className="sc-bdnxRM xcrha"
           >
             <h2
-              className="sc-bdvvtL jpfDud cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
+              className="sc-bdnxRM kVKpHn cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="« Non au passeport vaccinal » Gaspard Koenig - GenerationLibre"
             >
               « Non au passeport vaccinal » Gaspard Koenig - GenerationLibre
             </h2>
             <p
-              className="sc-bdvvtL hmqgyt cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
+              className="sc-bdnxRM kygsQz cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               GenerationLibre
             </p>
@@ -97,10 +97,10 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
         target="_blank"
       >
         <div
-          className="sc-bdvvtL ifijdB cap-card"
+          className="sc-bdnxRM dqOFEn cap-card"
         >
           <div
-            className="sc-bdvvtL kaBLIF"
+            className="sc-bdnxRM clwTpP"
           >
             <img
               className="DebateArticleCard___StyledImage-dblqpE gVCHpR"
@@ -119,21 +119,21 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
             />
           </div>
           <div
-            className="sc-bdvvtL lnSgqo"
+            className="sc-bdnxRM xcrha"
           >
             <h2
-              className="sc-bdvvtL jpfDud cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
+              className="sc-bdnxRM kVKpHn cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="Macron: ceux qui disent \\"on aura un vaccin en mars ou avril prochain, vous trompent\\""
             >
               Macron: ceux qui disent "on aura un vaccin en mars ou avril prochain, vous trompent"
             </h2>
             <p
-              className="sc-bdvvtL hmqgyt cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
+              className="sc-bdnxRM kygsQz cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               Orange Actualités
             </p>
             <p
-              className="sc-bdvvtL bDiWDG cap-text"
+              className="sc-bdnxRM hAuUns cap-text"
             >
               2 avr. 2021
             </p>
@@ -146,10 +146,10 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
         target="_blank"
       >
         <div
-          className="sc-bdvvtL ifijdB cap-card"
+          className="sc-bdnxRM dqOFEn cap-card"
         >
           <div
-            className="sc-bdvvtL kaBLIF"
+            className="sc-bdnxRM clwTpP"
           >
             <img
               className="DebateArticleCard___StyledImage-dblqpE gVCHpR"
@@ -168,21 +168,21 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
             />
           </div>
           <div
-            className="sc-bdvvtL lnSgqo"
+            className="sc-bdnxRM xcrha"
           >
             <h2
-              className="sc-bdvvtL jpfDud cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
+              className="sc-bdnxRM kVKpHn cap-heading DebateArticleCard__DebateArticleCardTitle-hRgxQk"
               title="Covid-19 : passeport vaccinal, \\"pass sanitaire\\", \\"certificat vert\\"... L'article à lire pour comprendre le débat qui agite la France et l'Europe"
             >
               Covid-19 : passeport vaccinal, "pass sanitaire", "certificat vert"... L'article à lire pour comprendre le débat qui agite la France et l'Europe
             </h2>
             <p
-              className="sc-bdvvtL hmqgyt cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
+              className="sc-bdnxRM kygsQz cap-text DebateArticleCard__DebateArticleCardOrigin-okDwU"
             >
               Franceinfo
             </p>
             <p
-              className="sc-bdvvtL bDiWDG cap-text"
+              className="sc-bdnxRM hAuUns cap-text"
             >
               11 mars 2021
             </p>

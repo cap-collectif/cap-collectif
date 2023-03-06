@@ -2,10 +2,10 @@
 
 exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
 <div
-  className="sc-bdvvtL fgAItv frise"
+  className="sc-bdnxRM iisAqJ frise"
 >
   <ul
-    className="sc-bdvvtL hoKwSg frise__stepList"
+    className="sc-bdnxRM ldKNCK frise__stepList"
   >
     <div
       className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
@@ -49,7 +49,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL gckJqb frise__stepItem"
+                  className="sc-bdnxRM hJQsKZ frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -82,7 +82,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -90,13 +90,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   >
                     <p
-                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
                       title="Présentation"
                     >
                       Présentation
                     </p>
                     <p
-                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
                     >
                       
                     </p>
@@ -120,7 +120,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
           >
             <div>
               <li
-                className="sc-bdvvtL eQuOKu frise__stepItem"
+                className="sc-bdnxRM dSYUnY frise__stepItem"
                 onClick={[Function]}
                 style={
                   Object {
@@ -154,7 +154,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   />
                 </svg>
                 <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
+                  className="sc-bdnxRM iPFbeP frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -163,13 +163,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   }
                 >
                   <p
-                    className="sc-bdvvtL gkCKCF cap-text frise__stepItem__link__title platform__body"
+                    className="sc-bdnxRM gnOSmT cap-text frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
                   </p>
                   <p
-                    className="sc-bdvvtL feWHWz cap-text frise__stepItem__link__content platform__body"
+                    className="sc-bdnxRM gmGkaB cap-text frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -196,7 +196,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL gjaEAB frise__stepItem"
+                  className="sc-bdnxRM hYAsWX frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -230,7 +230,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -238,13 +238,13 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   >
                     <p
-                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
                       title="Dépôt"
                     >
                       Dépôt
                     </p>
                     <p
-                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
                     >
                       <div
                         aria-describedby="id-g"
@@ -299,7 +299,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL lcHpFn frise__stepItem"
+                  className="sc-bdnxRM fCkZpF frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -333,7 +333,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -342,7 +342,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                   >
                     <p
                       aria-describedby="id-g"
-                      className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM fnGKEC cap-text frise__stepItem__link__title platform__body"
                       onBlur={[Function]}
                       onFocus={[Function]}
                       onMouseEnter={[Function]}
@@ -371,7 +371,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                       }
                     />
                     <p
-                      className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM gFxpes cap-text frise__stepItem__link__content platform__body"
                     />
                   </a>
                 </li>
@@ -389,10 +389,10 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
 
 exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
 <div
-  className="sc-bdvvtL fgAItv frise"
+  className="sc-bdnxRM iisAqJ frise"
 >
   <ul
-    className="sc-bdvvtL hoKwSg frise__stepList"
+    className="sc-bdnxRM ldKNCK frise__stepList"
   >
     <div
       className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
@@ -436,7 +436,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL gckJqb frise__stepItem"
+                  className="sc-bdnxRM hJQsKZ frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -469,7 +469,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -477,13 +477,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   >
                     <p
-                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
                       title="Présentation"
                     >
                       Présentation
                     </p>
                     <p
-                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
                     >
                       
                     </p>
@@ -507,7 +507,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
           >
             <div>
               <li
-                className="sc-bdvvtL eQuOKu frise__stepItem"
+                className="sc-bdnxRM dSYUnY frise__stepItem"
                 onClick={[Function]}
                 style={
                   Object {
@@ -541,7 +541,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   />
                 </svg>
                 <a
-                  className="sc-bdvvtL ciajHx frise__stepItem__link"
+                  className="sc-bdnxRM iPFbeP frise__stepItem__link"
                   href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                   style={
                     Object {
@@ -550,13 +550,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   }
                 >
                   <p
-                    className="sc-bdvvtL gkCKCF cap-text frise__stepItem__link__title platform__body"
+                    className="sc-bdnxRM gnOSmT cap-text frise__stepItem__link__title platform__body"
                     title="Consultation"
                   >
                     Consultation
                   </p>
                   <p
-                    className="sc-bdvvtL feWHWz cap-text frise__stepItem__link__content platform__body"
+                    className="sc-bdnxRM gmGkaB cap-text frise__stepItem__link__content platform__body"
                   >
                     step.status.closed
                   </p>
@@ -583,7 +583,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL gjaEAB frise__stepItem"
+                  className="sc-bdnxRM hYAsWX frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -617,7 +617,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -625,13 +625,13 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   >
                     <p
-                      className="sc-bdvvtL gDYsqk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
                       title="Dépôt"
                     >
                       Dépôt
                     </p>
                     <p
-                      className="sc-bdvvtL gXIztG cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
                     >
                       <div
                         aria-describedby="id-g"
@@ -686,7 +686,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                 onClick={[Function]}
               >
                 <li
-                  className="sc-bdvvtL lcHpFn frise__stepItem"
+                  className="sc-bdnxRM fCkZpF frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -720,7 +720,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     />
                   </svg>
                   <a
-                    className="sc-bdvvtL ciajHx frise__stepItem__link"
+                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -729,7 +729,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                   >
                     <p
                       aria-describedby="id-g"
-                      className="sc-bdvvtL dttrVk cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bdnxRM fnGKEC cap-text frise__stepItem__link__title platform__body"
                       onBlur={[Function]}
                       onFocus={[Function]}
                       onMouseEnter={[Function]}
@@ -758,7 +758,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                       }
                     />
                     <p
-                      className="sc-bdvvtL kJbqTC cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bdnxRM gFxpes cap-text frise__stepItem__link__content platform__body"
                     />
                   </a>
                 </li>

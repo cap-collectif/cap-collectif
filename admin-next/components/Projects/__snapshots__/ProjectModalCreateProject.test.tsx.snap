@@ -3,28 +3,28 @@
 exports[`<ProjectModalCreateProject /> <TestModalCreateProject /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    className="sc-bdnxRM sc-lbVvki hXdukr cgYPRG cap-button"
     data-cy="create-project-button"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -36,7 +36,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -75,28 +75,28 @@ Array [
 exports[`<ProjectModalCreateProject /> <TestModalCreateProject /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-bdvvtL sc-lcepkR choMAJ igzsNu cap-button"
+    className="sc-bdnxRM sc-lbVvki hXdukr cgYPRG cap-button"
     data-cy="create-project-button"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -108,7 +108,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL cjNftN sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -146,7 +146,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL dGOcva sc-bXTejn bJAvtn cap-modal"
+        className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -155,13 +155,13 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL ijabiQ cap-modal__header"
+          className="sc-bdnxRM jjfrHe cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hJgXxS"
+            className="sc-bdnxRM kjxros"
           >
             <h2
-              className="sc-bdvvtL geLhUw cap-heading"
+              className="sc-bdnxRM hZqJQu cap-heading"
               style={
                 Object {
                   "marginLeft": 0,
@@ -173,12 +173,12 @@ Array [
             </h2>
           </div>
           <button
-            className="sc-bdvvtL cYwHQC"
+            className="sc-bdnxRM eVPzhQ"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -194,14 +194,14 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__body"
+          className="sc-bdnxRM bVOKYS cap-modal__body"
         >
           <form
-            className="sc-bdvvtL cHxxHH"
+            className="sc-bdnxRM jWvjdR"
             id="form-create-project"
           >
             <div
-              className="sc-bdvvtL iXOAiz cap-form-control"
+              className="sc-bdnxRM gEeIKB cap-form-control"
               role="group"
               style={
                 Object {
@@ -211,7 +211,7 @@ Array [
               }
             >
               <label
-                className="sc-bdvvtL dYOOYb cap-form-label"
+                className="sc-bdnxRM kGZvuB cap-form-label"
                 htmlFor="title"
                 style={
                   Object {
@@ -221,7 +221,7 @@ Array [
                 }
               >
                 <p
-                  className="sc-bdvvtL bQcuRG cap-text"
+                  className="sc-bdnxRM WxzeU cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -234,7 +234,7 @@ Array [
               </label>
               <input
                 aria-required={true}
-                className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
+                className="sc-bdnxRM sc-TtZnY dUfREC hOdGym cap-input"
                 data-cy="create-project-modal-title"
                 disabled={false}
                 id="title"
@@ -249,12 +249,12 @@ Array [
               />
             </div>
             <div
-              className="sc-bdvvtL iXOAiz cap-form-control"
+              className="sc-bdnxRM gEeIKB cap-form-control"
               data-cy="create-project-modal-authors"
               role="group"
             >
               <label
-                className="sc-bdvvtL dYOOYb cap-form-label"
+                className="sc-bdnxRM kGZvuB cap-form-label"
                 style={
                   Object {
                     "marginLeft": 0,
@@ -263,7 +263,7 @@ Array [
                 }
               >
                 <p
-                  className="sc-bdvvtL bQcuRG cap-text"
+                  className="sc-bdnxRM WxzeU cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -275,7 +275,7 @@ Array [
                 </p>
               </label>
               <div
-                className="sc-bdvvtL iWnVea"
+                className="sc-bdnxRM gyUktw"
               >
                 <div
                   className="cap-async-select css-b62m3t-container"
@@ -300,18 +300,18 @@ Array [
                       className="cap-async-select__value-container cap-async-select__value-container--is-multi cap-async-select__value-container--has-value css-1ajcqt1-ValueContainer"
                     >
                       <div
-                        className="sc-bdvvtL icmLmQ sc-fWCJzd eCIVdF cap-tag"
+                        className="sc-bdnxRM fDtUXK sc-fXazdy fmGqjI cap-tag"
                         style={Object {}}
                         title="lbrunet"
                       >
                         <p
-                          className="sc-bdvvtL kwYNUY cap-text cap-tag__label"
+                          className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
                         >
                           lbrunet
                         </p>
                         <div
                           aria-label="close"
-                          className="sc-bdvvtL eYHSJG cap-tag__closeButton"
+                          className="sc-bdnxRM hJRjaE cap-tag__closeButton"
                           onClick={[Function]}
                           role="button"
                           style={
@@ -322,7 +322,7 @@ Array [
                           }
                         >
                           <svg
-                            className="sc-bdvvtL sc-eJwWfJ kfbHGA dMCrXP cap-icon"
+                            className="sc-bdnxRM sc-eJocfa jkKNnK iyiXbf cap-icon"
                             fill="none"
                             viewBox="0 0 12 12"
                             xmlns="http://www.w3.org/2000/svg"
@@ -381,7 +381,7 @@ Array [
                       </div>
                     </div>
                     <svg
-                      className="sc-bdvvtL sc-eJwWfJ jBXXhP bAqwkc cap-icon sc-nVkyK biuFCx"
+                      className="sc-bdnxRM sc-eJocfa eaoUYV iiyXFY cap-icon sc-oeezt cZMCmK"
                       fill="none"
                       viewBox="0 0 12 12"
                       xmlns="http://www.w3.org/2000/svg"
@@ -406,11 +406,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bdvvtL iXOAiz cap-form-control"
+              className="sc-bdnxRM gEeIKB cap-form-control"
               role="group"
             >
               <label
-                className="sc-bdvvtL dYOOYb cap-form-label"
+                className="sc-bdnxRM kGZvuB cap-form-label"
                 style={
                   Object {
                     "marginLeft": 0,
@@ -419,7 +419,7 @@ Array [
                 }
               >
                 <p
-                  className="sc-bdvvtL bQcuRG cap-text"
+                  className="sc-bdnxRM WxzeU cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -431,7 +431,7 @@ Array [
                 </p>
               </label>
               <div
-                className="sc-bdvvtL iWnVea"
+                className="sc-bdnxRM gyUktw"
               >
                 <div
                   className="cap-select css-b62m3t-container"
@@ -506,7 +506,7 @@ Array [
                       </div>
                     </div>
                     <svg
-                      className="sc-bdvvtL sc-eJwWfJ cZVbcU icfuGT cap-icon"
+                      className="sc-bdnxRM sc-eJocfa dErYja igzNGz cap-icon"
                       fill="none"
                       onClick={[Function]}
                       style={
@@ -534,10 +534,10 @@ Array [
           </form>
         </main>
         <footer
-          className="sc-bdvvtL cnmiif cap-modal__footer"
+          className="sc-bdnxRM gaOscV cap-modal__footer"
         >
           <div
-            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            className="sc-bdnxRM faBWgd cap-buttonGroup"
             style={
               Object {
                 "marginLeft": 0,
@@ -546,7 +546,7 @@ Array [
             }
           >
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN hFZdnJ cap-button"
               onClick={[Function]}
               style={
                 Object {
@@ -559,7 +559,7 @@ Array [
               cancel
             </button>
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN cgYPRG cap-button"
               data-cy="create-project-modal-create-button"
               disabled={true}
               onClick={[Function]}

@@ -3,22 +3,22 @@
 exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
     aria-label="delete-custom-domain"
@@ -34,7 +34,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL cjNftN sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -43,7 +43,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL dYRnRy sc-bXTejn fAMVJm cap-modal"
+        className="sc-bdnxRM lfZFgo sc-bXexck bWODgZ cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -52,13 +52,13 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL ijabiQ cap-modal__header"
+          className="sc-bdnxRM jjfrHe cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hJgXxS"
+            className="sc-bdnxRM kjxros"
           >
             <h2
-              className="sc-bdvvtL bTHMhT cap-heading"
+              className="sc-bdnxRM jwcPBF cap-heading"
               style={
                 Object {
                   "marginLeft": 0,
@@ -70,12 +70,12 @@ Array [
             </h2>
           </div>
           <button
-            className="sc-bdvvtL cYwHQC"
+            className="sc-bdnxRM eVPzhQ"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -91,19 +91,19 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__body"
+          className="sc-bdnxRM bVOKYS cap-modal__body"
         >
           <p
-            className="sc-bdvvtL fSiVqj cap-text"
+            className="sc-bdnxRM hekgA-d cap-text"
           >
             custom-domain-delete-confirmation-message
           </p>
           <label
-            className="sc-bdvvtL kGdEVS"
+            className="sc-bdnxRM iEnndE"
             htmlFor="agree-checkbox"
           >
             <div
-              className="sc-bdvvtL RvMdm cap-checkbox"
+              className="sc-bdnxRM hXoPrw cap-checkbox"
               style={
                 Object {
                   "marginLeft": 0,
@@ -113,7 +113,7 @@ Array [
             >
               <input
                 checked={false}
-                className="sc-bdvvtL fgNIRM cap-checkbox__input"
+                className="sc-bdnxRM hSdaGq cap-checkbox__input"
                 id="agree-checkbox"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -121,21 +121,21 @@ Array [
                 type="checkbox"
               />
               <div
-                className="sc-bdvvtL ialReI cap-checkbox__box"
+                className="sc-bdnxRM lpsDJe cap-checkbox__box"
               />
             </div>
             <span
-              className="sc-bdvvtL dPuepn cap-text"
+              className="sc-bdnxRM isLILN cap-text"
             >
               admin.project.delete.confirm
             </span>
           </label>
         </main>
         <footer
-          className="sc-bdvvtL cnmiif cap-modal__footer"
+          className="sc-bdnxRM gaOscV cap-modal__footer"
         >
           <div
-            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            className="sc-bdnxRM faBWgd cap-buttonGroup"
             style={
               Object {
                 "marginLeft": 0,
@@ -144,7 +144,7 @@ Array [
             }
           >
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN hFZdnJ cap-button"
               onClick={[Function]}
               style={
                 Object {
@@ -157,7 +157,7 @@ Array [
               cancel
             </button>
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb ixkmkg cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN kYiFxM cap-button"
               disabled={true}
               onClick={[Function]}
               type="button"

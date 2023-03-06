@@ -13,6 +13,7 @@ import ProposalOtherPanelsModal from './ProposalOtherPanelsModal';
 import ResetCss from '~/utils/ResetCss';
 import ProposalErrorModal from '~/components/Proposal/Create/ProposalErrorModal';
 import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql';
+import isIos from '~/utils/isIos';
 
 type Props = {|
   +proposalForm: ProposalCreateModal_proposalForm$key,
@@ -91,6 +92,7 @@ const ProposalCreateModal = ({
       onOpen={onOpen}
       onClose={onClose}
       fullPageScrollable
+      forceModalDialogToFalse={isIos()}
       ariaLabel={intl.formatMessage({ id: title })}
       size={CapUIModalSize.Xl}>
       {() => (

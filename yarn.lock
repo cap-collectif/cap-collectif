@@ -2293,10 +2293,10 @@
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.5.8":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.5.8.tgz#7d719dab41dee9ca8df017856aedd7733328cd3b"
-  integrity sha512-gaTNlhaD0TrKa9ully9H1HbvL1QnqXjX4zK1aB5vKen+ADh+juKuYeZxltxXm4IgRwnVG80ppz0hS6/ZrW1crA==
+"@cap-collectif/ui@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.6.0.tgz#58dea10296cb4b0a1719e251ddcd9feaaa6ebadb"
+  integrity sha512-ZkUkopYAWFOUHkxv0ktjsz3IcXvztKd6gnpMea7IZp30ECRF7PtjoxgIN5vtoRmfEkCow7SEvGxwwMJ5w7NVrg==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -2304,6 +2304,7 @@
     classnames "^2.3.1"
     deepmerge "^4.2.2"
     framer-motion "^4.1.17"
+    react-beautiful-dnd "^13.1.1"
     react-color "^2.19.3"
     react-dates "^21.8.0"
     react-dropzone "^11.4.2"
@@ -5683,6 +5684,16 @@
   version "7.1.18"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.18.tgz#2bf8fd56ebaae679a90ebffe48ff73717c438e04"
   integrity sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ==
+  dependencies:
+    "@types/hoist-non-react-statics" "^3.3.0"
+    "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
+    redux "^4.0.0"
+
+"@types/react-redux@^7.1.20":
+  version "7.1.25"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.25.tgz#de841631205b24f9dfb4967dd4a7901e048f9a88"
+  integrity sha512-bAGh4e+w5D8dajd6InASVIyCo4pZLJ66oLb80F9OBLO1gKESbZcRCJpTT6uLXX+HAB57zw1WTdwJdAsewuTweg==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -18339,6 +18350,19 @@ react-axe@^3.0.2:
     axe-core "^3.5.0"
     requestidlecallback "^0.3.0"
 
+react-beautiful-dnd@^13.1.1:
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-13.1.1.tgz#b0f3087a5840920abf8bb2325f1ffa46d8c4d0a2"
+  integrity sha512-0Lvs4tq2VcrEjEgDXHjT98r+63drkKEgqyxdA7qD3mvKwga6a5SscbdLPO2IExotU1jW8L0Ksdl0Cj2AF67nPQ==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    css-box-model "^1.2.0"
+    memoize-one "^5.1.1"
+    raf-schd "^4.0.2"
+    react-redux "^7.2.0"
+    redux "^4.0.4"
+    use-memo-one "^1.1.1"
+
 "react-beautiful-dnd@https://github.com/cap-collectif/react-beautiful-dnd/tarball/runtime-update":
   version "12.2.0"
   resolved "https://github.com/cap-collectif/react-beautiful-dnd/tarball/runtime-update#0b4f23700fa47eb5585503dfa16237190e57a057"
@@ -18809,6 +18833,18 @@ react-redux@^7.1.1, react-redux@^7.2.2:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.13.1"
+
+react-redux@^7.2.0:
+  version "7.2.9"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.9.tgz#09488fbb9416a4efe3735b7235055442b042481d"
+  integrity sha512-Gx4L3uM182jEEayZfRbI/G11ZpYdNAnBs70lFVMNdHJI76XYtR+7m0MN+eAs7UHBPhWXcnFPaS+9owSCJQHNpQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    "@types/react-redux" "^7.1.20"
+    hoist-non-react-statics "^3.3.2"
+    loose-envify "^1.4.0"
+    prop-types "^15.7.2"
+    react-is "^17.0.2"
 
 react-refresh@^0.11.0:
   version "0.11.0"

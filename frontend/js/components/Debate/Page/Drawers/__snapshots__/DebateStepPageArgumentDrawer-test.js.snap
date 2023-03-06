@@ -2,7 +2,7 @@
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
 <div
-  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -11,10 +11,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
   }
 >
   <div
-    className="sc-bdvvtL hGqsRg"
+    className="sc-bdnxRM hUDJOG"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ vMWyQ dhRlrh cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+      className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       fill="none"
       onClick={[MockFunction]}
       viewBox="0 0 12 6"
@@ -29,10 +29,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
       />
     </svg>
     <div
-      className="sc-bdvvtL eHevuV"
+      className="sc-bdnxRM emydlX"
     >
       <p
-        className="sc-bdvvtL fXllCy cap-text"
+        className="sc-bdnxRM gjUaQI cap-text"
         style={
           Object {
             "marginLeft": 0,
@@ -43,12 +43,12 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
         Agui le penseur
       </p>
       <div
-        className="sc-bdvvtL kgciBz sc-fWCJzd rNujt cap-tag"
+        className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
         style={Object {}}
         title=""
       >
         <h5
-          className="sc-bdvvtL dUCohE cap-heading"
+          className="sc-bdnxRM jxtjkG cap-heading"
         >
           global.for
         </h5>
@@ -56,28 +56,28 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdvvtL kJThCA"
+    className="sc-bdnxRM koUlpS"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdvvtL ciyRZw cap-text"
+      className="sc-bdnxRM ipdWIi cap-text"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdvvtL tTejM"
+    className="sc-bdnxRM dSwOMW"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+      className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <svg
-        className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+        className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
         fill="none"
         viewBox="0 0 10 12"
         xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
       </svg>
     </button>
     <span
-      className="sc-bdvvtL jlFTkf cap-text"
+      className="sc-bdnxRM jELONJ cap-text"
     >
       10
     </span>
@@ -117,7 +117,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has vote 1`] = `
 <div
-  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -126,10 +126,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
   }
 >
   <div
-    className="sc-bdvvtL hGqsRg"
+    className="sc-bdnxRM hUDJOG"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ vMWyQ dhRlrh cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+      className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       fill="none"
       onClick={[MockFunction]}
       viewBox="0 0 12 6"
@@ -144,10 +144,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
       />
     </svg>
     <div
-      className="sc-bdvvtL eHevuV"
+      className="sc-bdnxRM emydlX"
     >
       <p
-        className="sc-bdvvtL fXllCy cap-text"
+        className="sc-bdnxRM gjUaQI cap-text"
         style={
           Object {
             "marginLeft": 0,
@@ -158,12 +158,12 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
         Agui le penseur
       </p>
       <div
-        className="sc-bdvvtL kgciBz sc-fWCJzd rNujt cap-tag"
+        className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
         style={Object {}}
         title=""
       >
         <h5
-          className="sc-bdvvtL dUCohE cap-heading"
+          className="sc-bdnxRM jxtjkG cap-heading"
         >
           global.for
         </h5>
@@ -171,28 +171,28 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
     </div>
   </div>
   <div
-    className="sc-bdvvtL kJThCA"
+    className="sc-bdnxRM koUlpS"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdvvtL ciyRZw cap-text"
+      className="sc-bdnxRM ipdWIi cap-text"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdvvtL tTejM"
+    className="sc-bdnxRM dSwOMW"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+      className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <svg
-        className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+        className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
         fill="none"
         viewBox="0 0 10 12"
         xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +204,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
       </svg>
     </button>
     <span
-      className="sc-bdvvtL jlFTkf cap-text"
+      className="sc-bdnxRM jELONJ cap-text"
     >
       10
     </span>
@@ -232,7 +232,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is the author 1`] = `
 <div
-  className="sc-bdvvtL jkvOqu DetailDrawer__DetailDrawerInner-iBqxvi"
+  className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
   style={
     Object {
       "opacity": 0,
@@ -241,10 +241,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
   }
 >
   <div
-    className="sc-bdvvtL hGqsRg"
+    className="sc-bdnxRM hUDJOG"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ vMWyQ dhRlrh cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+      className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
       fill="none"
       onClick={[MockFunction]}
       viewBox="0 0 12 6"
@@ -259,10 +259,10 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
       />
     </svg>
     <div
-      className="sc-bdvvtL eHevuV"
+      className="sc-bdnxRM emydlX"
     >
       <p
-        className="sc-bdvvtL fXllCy cap-text"
+        className="sc-bdnxRM gjUaQI cap-text"
         style={
           Object {
             "marginLeft": 0,
@@ -273,12 +273,12 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
         Agui le penseur
       </p>
       <div
-        className="sc-bdvvtL kgciBz sc-fWCJzd rNujt cap-tag"
+        className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
         style={Object {}}
         title=""
       >
         <h5
-          className="sc-bdvvtL dUCohE cap-heading"
+          className="sc-bdnxRM jxtjkG cap-heading"
         >
           global.for
         </h5>
@@ -286,28 +286,28 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
     </div>
   </div>
   <div
-    className="sc-bdvvtL kJThCA"
+    className="sc-bdnxRM koUlpS"
     onClose={[MockFunction]}
   >
     <p
-      className="sc-bdvvtL ciyRZw cap-text"
+      className="sc-bdnxRM ipdWIi cap-text"
     >
       coucou
     </p>
   </div>
   <div
-    className="sc-bdvvtL tTejM"
+    className="sc-bdnxRM dSwOMW"
     onClose={[MockFunction]}
   >
     <button
       aria-label="vote.add"
-      className="sc-bdvvtL sc-lcepkR fjYDno grtNlY cap-button"
+      className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
       disabled={true}
       onClick={[Function]}
       type="button"
     >
       <svg
-        className="sc-bdvvtL sc-eJwWfJ iVHezq dhRlrh cap-icon"
+        className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
         fill="none"
         viewBox="0 0 10 12"
         xmlns="http://www.w3.org/2000/svg"
@@ -319,7 +319,7 @@ exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is 
       </svg>
     </button>
     <span
-      className="sc-bdvvtL jlFTkf cap-text"
+      className="sc-bdnxRM jELONJ cap-text"
     >
       10
     </span>

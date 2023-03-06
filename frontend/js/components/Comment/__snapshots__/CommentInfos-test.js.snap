@@ -2,7 +2,7 @@
 
 exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
 <div
-  className="sc-bdvvtL gVkApI opinion__user"
+  className="sc-bdnxRM dbhavy opinion__user"
 >
   <span>
     Toto
@@ -48,7 +48,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
     aria-controls="publishable-commentId-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -69,7 +69,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
   </div>
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-commentId-not-accounted-popover"
@@ -93,7 +93,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
 
 exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no author 1`] = `
 <div
-  className="sc-bdvvtL gVkApI opinion__user"
+  className="sc-bdnxRM dbhavy opinion__user"
 >
   <span>
     Toto
@@ -139,7 +139,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no a
     aria-controls="publishable-commentId-not-accounted-popover"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL kFsDuk cap-popover__disclosure"
+    className="sc-bdnxRM xLFUW cap-popover__disclosure"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -160,7 +160,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no a
   </div>
   <div
     aria-modal={true}
-    className="sc-Galmp bYcNna"
+    className="sc-FRrlG efxEan"
     data-dialog={true}
     hidden={true}
     id="publishable-commentId-not-accounted-popover"

@@ -3,28 +3,28 @@
 exports[`<PostList /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdvvtL hPNXYx"
+    className="sc-bdnxRM kuZhqT"
   >
     <table
-      className="sc-bdvvtL buEspG"
+      className="sc-bdnxRM cRMMXk"
       onReset={[Function]}
       style={
         Object {
@@ -33,69 +33,69 @@ Array [
       }
     >
       <thead
-        className="sc-bdvvtL czCMnW"
+        className="sc-bdnxRM kMzwfc"
       >
         <tr
-          className="sc-bdvvtL eJBvtu cap-table__tr"
+          className="sc-bdnxRM dwXJfE cap-table__tr"
         >
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <p
-              className="sc-bdvvtL bhcRpW cap-text"
+              className="sc-bdnxRM cRlrvQ cap-text"
             >
               global.title
             </p>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <p
-              className="sc-bdvvtL bhcRpW cap-text"
+              className="sc-bdnxRM cRlrvQ cap-text"
             >
               global.authors
             </p>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             global.owner
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <p
-              className="sc-bdvvtL bhcRpW cap-text"
+              className="sc-bdnxRM cRlrvQ cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <p
-              className="sc-bdvvtL bhcRpW cap-text"
+              className="sc-bdnxRM cRlrvQ cap-text"
             >
               global.participative.project
             </p>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <p
-              className="sc-bdvvtL bhcRpW cap-text"
+              className="sc-bdnxRM cRlrvQ cap-text"
             >
               global.publication
             </p>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           >
             <button
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bdvvtL sc-lcepkR eMUpru kLKTxD cap-button cap-menu__disclosure"
+              className="sc-bdnxRM sc-lbVvki hVrRZE xuFkD cap-button cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -108,7 +108,7 @@ Array [
               type="button"
             >
               <p
-                className="sc-bdvvtL bhcRpW cap-text"
+                className="sc-bdnxRM cRlrvQ cap-text"
                 style={
                   Object {
                     "whiteSpace": "nowrap",
@@ -118,7 +118,7 @@ Array [
                 global.update
               </p>
               <svg
-                className="sc-bdvvtL sc-eJwWfJ xiyur bAqwkc cap-icon"
+                className="sc-bdnxRM sc-eJocfa jpucIR iiyXFY cap-icon"
                 fill="none"
                 viewBox="0 0 12 7"
                 xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ Array [
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bdvvtL cXiVDo sc-fbyfCU cap-menu__list cap-menu__list"
+              className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -160,16 +160,16 @@ Array [
               tabIndex={-1}
             >
               <div
-                className="sc-bdvvtL Xwmcd cap-menu__optionGroup"
+                className="sc-bdnxRM figREX cap-menu__optionGroup"
                 role="group"
               >
                 <p
-                  className="sc-bdvvtL iBXIdl cap-text cap-menu__optionGroup--title"
+                  className="sc-bdnxRM kXNmPb cap-text cap-menu__optionGroup--title"
                 >
                   sort-by
                 </p>
                 <button
-                  className="sc-bdvvtL kwhLRS cap-menu__item cap-menu__optionItem"
+                  className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -189,16 +189,16 @@ Array [
                 >
                   <input
                     checked={true}
-                    className="sc-bdvvtL dhVuKh"
+                    className="sc-bdnxRM koXhAn"
                     type="radio"
                   />
                   <p
-                    className="sc-bdvvtL dgPHnB cap-text"
+                    className="sc-bdnxRM WTDFb cap-text"
                   >
                     global.filter_last
                   </p>
                   <svg
-                    className="sc-bdvvtL sc-eJwWfJ jtmOqS bAqwkc cap-icon"
+                    className="sc-bdnxRM sc-eJocfa jfxVSE iiyXFY cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,7 @@ Array [
                   </svg>
                 </button>
                 <button
-                  className="sc-bdvvtL kwhLRS cap-menu__item cap-menu__optionItem"
+                  className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -233,16 +233,16 @@ Array [
                 >
                   <input
                     checked={false}
-                    className="sc-bdvvtL dhVuKh"
+                    className="sc-bdnxRM koXhAn"
                     type="radio"
                   />
                   <p
-                    className="sc-bdvvtL dgPHnB cap-text"
+                    className="sc-bdnxRM WTDFb cap-text"
                   >
                     global.filter_old
                   </p>
                   <svg
-                    className="sc-bdvvtL sc-eJwWfJ jtmOqS bAqwkc cap-icon"
+                    className="sc-bdnxRM sc-eJocfa jfxVSE iiyXFY cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
                     xmlns="http://www.w3.org/2000/svg"
@@ -260,20 +260,20 @@ Array [
             </div>
           </th>
           <th
-            className="sc-bdvvtL hVXTPE cap-table__th"
+            className="sc-bdnxRM jcBQPC cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bdvvtL gAlKky cap-table__tbody"
+        className="sc-bdnxRM gboeoA cap-table__tbody"
       >
         <tr
-          className="sc-bdvvtL fuBSjA cap-table__tr"
+          className="sc-bdnxRM hgMoZa cap-table__tr"
           data-cy="post-item"
           id="UG9zdDpwb3N0MTI="
         >
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -281,14 +281,14 @@ Array [
             }
           >
             <a
-              className="sc-bdvvtL jtXLLM cap-link"
+              className="sc-bdnxRM bjOoai cap-link"
               href="<mock-value-for-field-\\"adminUrl\\">"
             >
               Post FR 12
             </a>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -296,14 +296,14 @@ Array [
             }
           >
             <a
-              className="sc-bdvvtL jtXLLM cap-link"
+              className="sc-bdnxRM bjOoai cap-link"
               href="<mock-value-for-field-\\"url\\">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -313,7 +313,7 @@ Array [
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -323,7 +323,7 @@ Array [
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -331,13 +331,13 @@ Array [
             }
           >
             <div
-              className="sc-bdvvtL eRYtWO"
+              className="sc-bdnxRM dXNwuA"
             >
               <div
-                className="sc-bdvvtL fIfDCJ"
+                className="sc-bdnxRM bAjkiX"
               >
                 <a
-                  className="sc-bdvvtL UJLXz cap-link"
+                  className="sc-bdnxRM kVmaBt cap-link"
                   href="<mock-value-for-field-\\"url\\">"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -346,7 +346,7 @@ Array [
             </div>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -356,7 +356,7 @@ Array [
             global.no.published
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -366,7 +366,7 @@ Array [
             Invalid Date
           </td>
           <td
-            className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+            className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -374,12 +374,12 @@ Array [
             }
           >
             <div
-              className="sc-bdvvtL frIHrh"
+              className="sc-bdnxRM junMSj"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.preview"
-                className="sc-bdvvtL flFGQt cap-buttonQuickAction"
+                className="sc-bdnxRM cefOTL cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -388,7 +388,7 @@ Array [
                 tabIndex={0}
               >
                 <svg
-                  className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+                  className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -430,7 +430,7 @@ Array [
                 aria-expanded={false}
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+                className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -446,7 +446,7 @@ Array [
                 type="button"
               >
                 <svg
-                  className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+                  className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -497,12 +497,12 @@ Array [
           </td>
         </tr>
         <tr
-          className="sc-bdvvtL fuBSjA cap-table__tr"
+          className="sc-bdnxRM hgMoZa cap-table__tr"
           data-cy="post-item"
           id="UG9zdDpwb3N0MTM="
         >
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -510,14 +510,14 @@ Array [
             }
           >
             <a
-              className="sc-bdvvtL jtXLLM cap-link"
+              className="sc-bdnxRM bjOoai cap-link"
               href="<mock-value-for-field-\\"adminUrl\\">"
             >
               Post FR 13
             </a>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -525,14 +525,14 @@ Array [
             }
           >
             <a
-              className="sc-bdvvtL jtXLLM cap-link"
+              className="sc-bdnxRM bjOoai cap-link"
               href="<mock-value-for-field-\\"url\\">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -542,7 +542,7 @@ Array [
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -552,7 +552,7 @@ Array [
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -560,13 +560,13 @@ Array [
             }
           >
             <div
-              className="sc-bdvvtL eRYtWO"
+              className="sc-bdnxRM dXNwuA"
             >
               <div
-                className="sc-bdvvtL fIfDCJ"
+                className="sc-bdnxRM bAjkiX"
               >
                 <a
-                  className="sc-bdvvtL UJLXz cap-link"
+                  className="sc-bdnxRM kVmaBt cap-link"
                   href="<mock-value-for-field-\\"url\\">"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -575,7 +575,7 @@ Array [
             </div>
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -585,7 +585,7 @@ Array [
             global.no.published
           </td>
           <td
-            className="sc-bdvvtL gJUzIT cap-table__td"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -595,7 +595,7 @@ Array [
             Invalid Date
           </td>
           <td
-            className="sc-bdvvtL iQezhP cap-table__td visible-on-hover"
+            className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -603,12 +603,12 @@ Array [
             }
           >
             <div
-              className="sc-bdvvtL frIHrh"
+              className="sc-bdnxRM junMSj"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.preview"
-                className="sc-bdvvtL flFGQt cap-buttonQuickAction"
+                className="sc-bdnxRM cefOTL cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -617,7 +617,7 @@ Array [
                 tabIndex={0}
               >
                 <svg
-                  className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+                  className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -659,7 +659,7 @@ Array [
                 aria-expanded={false}
                 aria-haspopup="dialog"
                 aria-label="admin.global.delete"
-                className="sc-bdvvtL jBnaym cap-buttonQuickAction"
+                className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onClickCapture={[Function]}
@@ -675,7 +675,7 @@ Array [
                 type="button"
               >
                 <svg
-                  className="sc-bdvvtL sc-eJwWfJ deYNKu bAqwkc cap-icon"
+                  className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -728,10 +728,10 @@ Array [
       </tbody>
     </table>
     <div
-      className="sc-bdvvtL fyyJfr"
+      className="sc-bdnxRM kqhhXZ"
     >
       <p
-        className="sc-bdvvtL fBFbTN cap-text"
+        className="sc-bdnxRM iNlgqP cap-text"
         style={
           Object {
             "marginLeft": 0,
@@ -742,12 +742,12 @@ Array [
         no-result-found
       </p>
       <p
-        className="sc-bdvvtL FJTkI cap-text"
+        className="sc-bdnxRM AXuEq cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bdvvtL sc-lcepkR johlmz dOpNld cap-button"
+        className="sc-bdnxRM sc-lbVvki cMVVDx dlFdcl cap-button"
         onClick={[Function]}
         type="button"
       >

@@ -2,18 +2,18 @@
 
 exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render correctly 1`] = `
 <div
-  className="sc-bdvvtL iKnbti"
+  className="sc-bdnxRM bSoPmM"
 >
   <h2
-    className="sc-bdvvtL lgTyZH cap-heading"
+    className="sc-bdnxRM syEqp cap-heading"
   >
     event.page.project.list
   </h2>
   <div
-    className="sc-bdvvtL bqsvzy"
+    className="sc-bdnxRM ivDAhI"
   >
     <a
-      className="sc-bdvvtL tSdyx"
+      className="sc-bdnxRM dCkJPX"
       href="https://capco.dev/project/croissance-innovation-disruption/presentation/presentation-1"
       style={
         Object {
@@ -22,7 +22,7 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
       }
     >
       <div
-        className="sc-bdvvtL kNYeVh cap-card"
+        className="sc-bdnxRM cZRHtv cap-card"
         style={
           Object {
             "borderRadius": "8px",
@@ -31,25 +31,25 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
         }
       >
         <div
-          className="sc-bdvvtL EventPageProjectList___StyledBox-eWbyLV bHgQe dFYqSf"
+          className="sc-bdnxRM EventPageProjectList___StyledBox-eWbyLV iknDBY dFYqSf"
         />
         <div
-          className="sc-bdvvtL lfXVZA"
+          className="sc-bdnxRM eZGWOu"
         >
           <h4
-            className="sc-bdvvtL kuUktY cap-heading"
+            className="sc-bdnxRM dIePFG cap-heading"
             title="Croissance, innovation, disruption"
           >
             Croissance, innovation, disruption
           </h4>
           <div
-            className="sc-bdvvtL ewNdED"
+            className="sc-bdnxRM ecsnjt"
           >
             <div
-              className="sc-bdvvtL jdLKtA"
+              className="sc-bdnxRM foDgsC"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
                 fill="none"
                 viewBox="0 0 9 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,10 +76,10 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
               </span>
             </div>
             <div
-              className="sc-bdvvtL jdLKtA"
+              className="sc-bdnxRM foDgsC"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,10 +107,10 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
               </span>
             </div>
             <div
-              className="sc-bdvvtL jdLKtA"
+              className="sc-bdnxRM foDgsC"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
                 fill="none"
                 viewBox="0 0 12 10"
                 xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +132,10 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
             </div>
           </div>
           <div
-            className="sc-bdvvtL iMfYKM"
+            className="sc-bdnxRM fDKtMC"
           >
             <div
-              className="sc-bdvvtL eOtkDA"
+              className="sc-bdnxRM bWSfcu"
               style={
                 Object {
                   "marginLeft": 0,
@@ -144,7 +144,7 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
               }
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                className="sc-bdnxRM sc-eJocfa zoogp kuPXuU cap-icon"
                 fill="none"
                 viewBox="0 0 14 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -168,16 +168,16 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <div
-                className="sc-bdvvtL hEezwl cap-text"
+                className="sc-bdnxRM lmxFqr cap-text"
               >
                 10
               </div>
             </div>
             <div
-              className="sc-bdvvtL eOtkDA"
+              className="sc-bdnxRM bWSfcu"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                className="sc-bdnxRM sc-eJocfa zoogp kuPXuU cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
                 xmlns="http://www.w3.org/2000/svg"
@@ -191,16 +191,16 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <div
-                className="sc-bdvvtL hEezwl cap-text"
+                className="sc-bdnxRM lmxFqr cap-text"
               >
                 264
               </div>
             </div>
             <div
-              className="sc-bdvvtL eOtkDA"
+              className="sc-bdnxRM bWSfcu"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ huoAuf jsDA-DM cap-icon"
+                className="sc-bdnxRM sc-eJocfa zoogp kuPXuU cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
                 xmlns="http://www.w3.org/2000/svg"
@@ -220,7 +220,7 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <div
-                className="sc-bdvvtL hEezwl cap-text"
+                className="sc-bdnxRM lmxFqr cap-text"
               >
                 41
               </div>

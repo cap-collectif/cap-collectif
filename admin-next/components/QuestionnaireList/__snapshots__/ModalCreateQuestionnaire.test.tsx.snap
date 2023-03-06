@@ -3,28 +3,28 @@
 exports[`<ModalCreateQuestionnaire /> <TestModalCreateProject /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    className="sc-bdnxRM sc-lbVvki cdItED cgYPRG cap-button"
     data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
@@ -37,7 +37,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -76,28 +76,28 @@ Array [
 exports[`<ModalCreateQuestionnaire /> <TestModalCreateProject /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bdvvtL ctPErd toasts-container toasts-container--top"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdvvtL kcNDnj toasts-container toasts-container--top-left"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdvvtL hPJnAA toasts-container toasts-container--top-right"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdvvtL iymCIs toasts-container toasts-container--bottom"
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdvvtL dkEYeG toasts-container toasts-container--bottom-left"
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdvvtL gxyimV toasts-container toasts-container--bottom-right"
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-bdvvtL sc-lcepkR kXXdah igzsNu cap-button"
+    className="sc-bdnxRM sc-lbVvki cdItED cgYPRG cap-button"
     data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
@@ -110,7 +110,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ bTOGKk bAqwkc cap-icon"
+      className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL cjNftN sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -148,7 +148,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL dYRnRy sc-bXTejn fAMVJm cap-modal"
+        className="sc-bdnxRM lfZFgo sc-bXexck bWODgZ cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -157,13 +157,13 @@ Array [
         }
       >
         <header
-          className="sc-bdvvtL ijabiQ cap-modal__header"
+          className="sc-bdnxRM jjfrHe cap-modal__header"
         >
           <div
-            className="sc-bdvvtL hJgXxS"
+            className="sc-bdnxRM kjxros"
           >
             <h2
-              className="sc-bdvvtL geLhUw cap-heading"
+              className="sc-bdnxRM hZqJQu cap-heading"
               style={
                 Object {
                   "marginLeft": 0,
@@ -175,12 +175,12 @@ Array [
             </h2>
           </div>
           <button
-            className="sc-bdvvtL cYwHQC"
+            className="sc-bdnxRM eVPzhQ"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bdvvtL sc-eJwWfJ jxcAbw icfuGT cap-icon"
+              className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -196,24 +196,24 @@ Array [
           </button>
         </header>
         <main
-          className="sc-bdvvtL kAxhVk cap-modal__body"
+          className="sc-bdnxRM bVOKYS cap-modal__body"
         >
           <form
             id="form-create-questionnaire"
           >
             <div
-              className="sc-bdvvtL iXOAiz cap-form-control"
+              className="sc-bdnxRM gEeIKB cap-form-control"
               role="group"
             >
               <div
-                className="sc-bdvvtL kaMTIB cap-radio-group"
+                className="sc-bdnxRM gyHslL cap-radio-group"
               >
                 <label
-                  className="sc-bdvvtL kGdEVS"
+                  className="sc-bdnxRM iEnndE"
                   htmlFor="type_choice-VOTING"
                 >
                   <div
-                    className="sc-bdvvtL RvMdm cap-radio"
+                    className="sc-bdnxRM hXoPrw cap-radio"
                     style={
                       Object {
                         "marginLeft": 0,
@@ -224,7 +224,7 @@ Array [
                     <input
                       aria-required={true}
                       checked={false}
-                      className="sc-bdvvtL fgNIRM cap-radio__input"
+                      className="sc-bdnxRM hSdaGq cap-radio__input"
                       disabled={false}
                       id="type_choice-VOTING"
                       name="choices-for-field-type"
@@ -241,21 +241,21 @@ Array [
                       type="radio"
                     />
                     <div
-                      className="sc-bdvvtL ckvAqI cap-radio__box"
+                      className="sc-bdnxRM fwekZu cap-radio__box"
                     />
                   </div>
                   <span
-                    className="sc-bdvvtL dPuepn cap-text"
+                    className="sc-bdnxRM isLILN cap-text"
                   >
                     voting
                   </span>
                 </label>
                 <label
-                  className="sc-bdvvtL kGdEVS"
+                  className="sc-bdnxRM iEnndE"
                   htmlFor="type_choice-QUESTIONNAIRE"
                 >
                   <div
-                    className="sc-bdvvtL RvMdm cap-radio"
+                    className="sc-bdnxRM hXoPrw cap-radio"
                     style={
                       Object {
                         "marginLeft": 0,
@@ -266,7 +266,7 @@ Array [
                     <input
                       aria-required={true}
                       checked={true}
-                      className="sc-bdvvtL fgNIRM cap-radio__input"
+                      className="sc-bdnxRM hSdaGq cap-radio__input"
                       disabled={false}
                       id="type_choice-QUESTIONNAIRE"
                       name="choices-for-field-type"
@@ -283,11 +283,11 @@ Array [
                       type="radio"
                     />
                     <div
-                      className="sc-bdvvtL ckvAqI cap-radio__box"
+                      className="sc-bdnxRM fwekZu cap-radio__box"
                     />
                   </div>
                   <span
-                    className="sc-bdvvtL dPuepn cap-text"
+                    className="sc-bdnxRM isLILN cap-text"
                   >
                     global.questionnaire
                   </span>
@@ -295,11 +295,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bdvvtL iXOAiz cap-form-control"
+              className="sc-bdnxRM gEeIKB cap-form-control"
               role="group"
             >
               <label
-                className="sc-bdvvtL dYOOYb cap-form-label"
+                className="sc-bdnxRM kGZvuB cap-form-label"
                 htmlFor="title"
                 style={
                   Object {
@@ -309,7 +309,7 @@ Array [
                 }
               >
                 <p
-                  className="sc-bdvvtL bQcuRG cap-text"
+                  className="sc-bdnxRM WxzeU cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -322,7 +322,7 @@ Array [
               </label>
               <input
                 aria-required={true}
-                className="sc-bdvvtL sc-TBWPX eBJHkE dtkaZV cap-input"
+                className="sc-bdnxRM sc-TtZnY dUfREC hOdGym cap-input"
                 data-cy="create-questionnaire-modal-title"
                 disabled={false}
                 id="title"
@@ -341,10 +341,10 @@ Array [
           </form>
         </main>
         <footer
-          className="sc-bdvvtL jPEMWG cap-modal__footer"
+          className="sc-bdnxRM kpDJRM cap-modal__footer"
         >
           <div
-            className="sc-bdvvtL gFvFYr cap-buttonGroup"
+            className="sc-bdnxRM faBWgd cap-buttonGroup"
             style={
               Object {
                 "marginLeft": 0,
@@ -353,7 +353,7 @@ Array [
             }
           >
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb itSeml cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN hFZdnJ cap-button"
               onClick={[Function]}
               style={
                 Object {
@@ -366,7 +366,7 @@ Array [
               cancel
             </button>
             <button
-              className="sc-bdvvtL sc-lcepkR fzwTIb igzsNu cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN cgYPRG cap-button"
               data-cy="create-questionnaire-modal-create-button"
               id="confirm-questionnaire-create"
               onClick={[Function]}

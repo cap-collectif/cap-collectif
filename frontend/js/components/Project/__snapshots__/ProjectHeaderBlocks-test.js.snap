@@ -2,11 +2,11 @@
 
 exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 <ul
-  className="sc-bdvvtL egRzVz projectHeader__blocks"
+  className="sc-bdnxRM ikWoxB projectHeader__blocks"
 >
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -14,13 +14,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -45,7 +45,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -53,13 +53,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       47
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
@@ -84,7 +84,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -92,13 +92,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>
@@ -126,11 +126,11 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 <ul
-  className="sc-bdvvtL egRzVz projectHeader__blocks"
+  className="sc-bdnxRM ikWoxB projectHeader__blocks"
 >
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -138,13 +138,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -169,7 +169,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -177,13 +177,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       47
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
@@ -208,7 +208,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -216,13 +216,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>
@@ -250,11 +250,11 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 
 exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`] = `
 <ul
-  className="sc-bdvvtL egRzVz projectHeader__blocks"
+  className="sc-bdnxRM ikWoxB projectHeader__blocks"
 >
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -262,13 +262,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       16
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Contribution-plural
     </p>
@@ -293,7 +293,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -301,13 +301,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id="votes-counter-pill"
     >
       47
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Vote-plural
     </p>
@@ -332,7 +332,7 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
   />
   <li
     aria-describedby="id-g"
-    className="sc-bdvvtL cEMvUo projectHeader__block"
+    className="sc-bdnxRM dPbInG projectHeader__block"
     onBlur={[Function]}
     onFocus={[Function]}
     onMouseEnter={[Function]}
@@ -340,13 +340,13 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
     tabIndex={0}
   >
     <h2
-      className="sc-bdvvtL bvrVZN cap-heading projectHeader__block__content platform__body"
+      className="sc-bdnxRM boarCH cap-heading projectHeader__block__content platform__body"
       id=""
     >
       88
     </h2>
     <p
-      className="sc-bdvvtL dxfctg cap-text projectHeader__block__title platform__body"
+      className="sc-bdnxRM eFacxe cap-text projectHeader__block__title platform__body"
     >
       Project.preview.counters.contributors
     </p>

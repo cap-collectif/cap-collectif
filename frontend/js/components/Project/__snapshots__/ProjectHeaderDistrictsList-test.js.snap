@@ -3,11 +3,11 @@
 exports[`<ProjectHeaderDistrictsList /> should render correctly 1`] = `
 Array [
   <li
-    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa hkYiRo kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -60,11 +60,11 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly when project is archived 1`] = `
 Array [
   <li
-    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa hkYiRo kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -117,11 +117,11 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly with the display of modal 1`] = `
 Array [
   <li
-    className="sc-bdvvtL cAlSLs ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
+    className="sc-bdnxRM kfZbuK ProjectHeaderDistrictsList__DistrictsButton-hEbEQu eHIdgX p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bdvvtL sc-eJwWfJ haWjdS jsDA-DM cap-icon"
+      className="sc-bdnxRM sc-eJocfa hkYiRo kuPXuU cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bdvvtL iWabdg cap-text platform__body"
+      className="sc-bdnxRM gwszfm cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -164,7 +164,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdvvtL bSKXj sc-gsNilK cap-modal__overlay"
+      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
       onClick={[Function]}
       style={
         Object {
@@ -173,7 +173,7 @@ Array [
       }
     >
       <div
-        className="sc-bdvvtL krWFkn sc-bXTejn bJAvtn cap-modal"
+        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
         style={
           Object {
             "opacity": 0,
@@ -185,20 +185,20 @@ Array [
           className="ResetCss-jmHeCe hpqhdm"
         >
           <header
-            className="sc-bdvvtL jfdhIH cap-modal__header"
+            className="sc-bdnxRM ihArod cap-modal__header"
           >
             <div
-              className="sc-bdvvtL hEjsJA"
+              className="sc-bdnxRM bPpvLW"
             >
               count-area {"count":5}
             </div>
             <button
-              className="sc-bdvvtL bFJghn"
+              className="sc-bdnxRM chwkeB"
               onClick={[Function]}
               type="button"
             >
               <svg
-                className="sc-bdvvtL sc-eJwWfJ ewVhss kiGavP cap-icon"
+                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +215,7 @@ Array [
           </header>
         </div>
         <main
-          className="sc-bdvvtL vunmq cap-modal__body"
+          className="sc-bdnxRM eJnfvU cap-modal__body"
         >
           <ul
             className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
@@ -249,10 +249,10 @@ Array [
           </ul>
         </main>
         <footer
-          className="sc-bdvvtL eAeyKU cap-modal__footer"
+          className="sc-bdnxRM IKIFa cap-modal__footer"
         >
           <button
-            className="sc-bdvvtL sc-lcepkR cUZrgi elkPgU cap-button"
+            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
             onClick={[Function]}
             style={
               Object {
