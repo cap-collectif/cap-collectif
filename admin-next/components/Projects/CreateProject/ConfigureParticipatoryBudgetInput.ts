@@ -136,15 +136,15 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
             "isExternal": false,
             "steps": [
                 {
-                    "body": `<p>- ${intl.formatMessage({id: "what-is-a-bp" })}</p><p>- ${intl.formatMessage({id: "schedule-approach" })}</p><p>- ${intl.formatMessage({id: "rules" })}</p>`,
+                    "body": `<p>- ${intl.formatMessage({id: "what-is-a-bp" })}</p><p>- ${intl.formatMessage({id: "amount-of-the-dedicated-budget" })}</p><p>- ${intl.formatMessage({id: "schedule-approach" })}</p><p>- ${intl.formatMessage({id: "rules" })}</p>`,
                     "title": intl.formatMessage({id: "presentation-of-your-project" }),
-                    "label": intl.formatMessage({id: "presentation-of-your-project" }),
+                    "label": intl.formatMessage({id: "presentation_step" }),
                     "isEnabled": true,
                     "requirements": [],
                     "type": "PRESENTATION"
                 },
                 {
-                    "body": `<p>- ${intl.formatMessage({id: "reminder-of-how-it-works" })}</p><p>- ${intl.formatMessage({id: "criteria-for-ideas" })}</p><p>- ${intl.formatMessage({id: "example-of-an-eligible-non-eligible-project" })}</p>`,
+                    "body": `<p>- ${intl.formatMessage({id: "reminder-of-how-it-works" })}</p><p>- ${intl.formatMessage({id: "criteria-for-ideas" })}</p><p>- ${intl.formatMessage({id: "distinction-between-operations-and-investment" })}</p><p>- ${intl.formatMessage({id: "example-of-an-eligible-non-eligible-project" })}</p>`,
                     "title": intl.formatMessage({id: "submit-your-projects" }),
                     "startAt": stepsDates.collectStep.startAt(),
                     "endAt": stepsDates.collectStep.endAt(),
@@ -160,7 +160,7 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                 },
                 {
                     "label": intl.formatMessage({id: "proposal_form.admin.evaluation" }),
-                    "body": null,
+                    "body": `<p>- ${intl.formatMessage({id: "criteria-for-the-analysis-of-projects-by-the-services" })}</p><p>- ${intl.formatMessage({id: "official-responses-to-unsuccessful-projects" })}</p><p>- ${intl.formatMessage({id: "rules" })}</p>`,
                     "title": intl.formatMessage({id: "project-analysis" }),
                     "startAt": stepsDates.selectionStep1.startAt(),
                     "endAt": stepsDates.selectionStep1.endAt(),
@@ -201,6 +201,7 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                 {
                     "label": intl.formatMessage({id: "vote-capitalize" }),
                     "title": intl.formatMessage({id: "vote-for-your-favourite-projects" }),
+                    "body": `<p>- ${intl.formatMessage({id: "number-of-votes-and-other-modalities" })}</p><p>- ${intl.formatMessage({id: "if-paper-voting-list-and-locations-of-ballot-boxes" })}</p><p>- ${intl.formatMessage({id: "selection-mode-number-of-vote-points" })}</p>`,
                     "startAt": stepsDates.selectionStep2.startAt(),
                     "endAt": stepsDates.selectionStep2.endAt(),
                     "isEnabled": true,
@@ -242,6 +243,7 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                 {
                     "label": intl.formatMessage({id: "award-winning-projects" }),
                     "title": intl.formatMessage({id: "list-of-selected-projects" }),
+                    "body": `<p>- ${intl.formatMessage({id: "timeframe-for-completion-of-winning-projects" })}</p>`,
                     "startAt": stepsDates.selectionStep3.startAt(),
                     "endAt": stepsDates.selectionStep3.endAt(),
                     "isEnabled": true,
@@ -285,7 +287,7 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
             "selectionStepStatusId": intl.formatMessage({id: "put-to-the-vote" }),
             "unfavourableStatuses": [intl.formatMessage({id: "not-achievable" }), intl.formatMessage({id: "out-of-scope" }), intl.formatMessage({id: "already-planned" })],
             "favourableStatus": intl.formatMessage({id: "put-to-the-vote" }),
-            "costEstimationEnabled": false,
+            "costEstimationEnabled": true,
         }
     }
 

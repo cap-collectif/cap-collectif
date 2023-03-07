@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Persister\PreConfigureProjectAnalysisFormPersister;
@@ -13,7 +14,9 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Elastica\Index;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -34,6 +37,7 @@ class PreConfigureProjectMutation implements MutationInterface
     private DeleteProjectMutation $deleteProjectMutation;
     private AuthorizationCheckerInterface $authorizationChecker;
     private ProjectTypeRepository $projectTypeRepository;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface                    $em,
@@ -46,7 +50,8 @@ class PreConfigureProjectMutation implements MutationInterface
         DeleteProposalFormMutation                $deleteProposalFormMutation,
         DeleteProjectMutation                     $deleteProjectMutation,
         AuthorizationCheckerInterface             $authorizationChecker,
-        ProjectTypeRepository                     $projectTypeRepository
+        ProjectTypeRepository                     $projectTypeRepository,
+        Indexer                                   $indexer
     )
     {
         $this->em = $em;
@@ -60,6 +65,7 @@ class PreConfigureProjectMutation implements MutationInterface
         $this->deleteProjectMutation = $deleteProjectMutation;
         $this->authorizationChecker = $authorizationChecker;
         $this->projectTypeRepository = $projectTypeRepository;
+        $this->indexer = $indexer;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -101,6 +107,10 @@ class PreConfigureProjectMutation implements MutationInterface
         $project = (new Project())->setTitle($title)->setOwner($owner);
         $this->em->persist($project);
         $this->em->flush();
+
+        $this->indexer->index(ClassUtils::getClass($project), $project->getId());
+        $this->indexer->finishBulk();
+
         return $project;
     }
 

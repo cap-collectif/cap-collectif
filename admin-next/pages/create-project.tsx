@@ -46,7 +46,6 @@ const CreateProjectPage: React.FC<CreateProjectPageProps> = ({queryReference}) =
 }
 
 const CreateProject: NextPage<PageProps> = () => {
-    const isNewProjectCreateEnabled = useFeatureFlag('unstable__new_create_project');
     const [queryReference, loadQuery, disposeQuery] = useQueryLoader<createProjectQueryType>(CreateProjectQuery);
     const intl = useIntl();
     React.useEffect(() => {
@@ -56,11 +55,6 @@ const CreateProject: NextPage<PageProps> = () => {
             disposeQuery();
         };
     }, [disposeQuery, loadQuery]);
-
-    if (!isNewProjectCreateEnabled) {
-        throw new Error('You need to enable unstable__new_create_project feature to access this page.')
-    }
-
 
     return (
         <Layout navTitle={intl.formatMessage({id: 'new-project'})}>

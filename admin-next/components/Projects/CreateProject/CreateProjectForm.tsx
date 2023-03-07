@@ -160,6 +160,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                         label={intl.formatMessage({id: 'global.project.name'})}
                     />
                     <FieldInput
+                        data-cy="create-project-modal-title"
                         id="title"
                         name="title"
                         control={control}
@@ -168,8 +169,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                             setShowHelpMessage(true);
                         }}
                         onBlur={() => {
-                            // TODO : uncomment when onBlur is handled by the input
-                            // setShowHelpMessage(false);
+                            setShowHelpMessage(false);
                         }}
                     />
                 </FormControl>
@@ -178,6 +178,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                     control={control}
                     isRequired
                     isDisabled={isOnlyProjectAdmin || !!organization}
+                    data-cy="create-project-modal-authors"
                 >
                     <FormLabel
                         htmlFor="authors"
@@ -202,6 +203,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                     />
                 </FormControl>
                 <Button
+                    data-cy="create-project-create-button"
                     mt={5}
                     variant="primary"
                     variantColor="primary"

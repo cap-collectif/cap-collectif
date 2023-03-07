@@ -19,15 +19,17 @@ describe('Organization Project', () => {
 
       // open create project modal
       cy.getByDataCy('create-project-button').click()
-      cy.getByDataCy('create-project-modal-create-button').should('be.disabled')
+      cy.contains('customize-your-new-project')
       cy.getByDataCy('create-project-modal-title').type('my new project')
+      cy.getByDataCy('create-project-create-button').should('be.disabled')
       cy.getByDataCy('create-project-modal-authors')
         .children('div')
         .children()
         .should('have.class', 'cap-async-select--is-disabled')
-      cy.getByDataCy('create-project-modal-create-button').should('not.be.disabled').click()
+      cy.getByDataCy('create-project-create-button').should('not.be.disabled').click()
       cy.wait('@CreateProjectMutation')
       cy.contains('project-successfully-created')
+
       // update project
       cy.contains('my new project').click()
       cy.wait('@ProjectAdminPageQuery')

@@ -7,16 +7,14 @@ import type {
     projectsQuery as projectsQueryType,
     OrderDirection,
 } from '@relay/projectsQuery.graphql';
-import {Flex, Search, Spinner, CapUIIconSize, CapUIIcon, Button} from '@cap-collectif/ui';
+import { Flex, Search, Spinner, CapUIIconSize, CapUIIcon, Button } from '@cap-collectif/ui';
 import { PageProps } from '../types';
 import Layout from '../components/Layout/Layout';
 import { useIntl } from 'react-intl';
 import ProjectListNoResult from 'components/Projects/ProjectListNoResult';
-import ProjectModalCreateProject from 'components/Projects/ProjectModalCreateProject';
 import TablePlaceholder from 'components/UI/Table/TablePlaceholder';
 import ProjectList from 'components/Projects/ProjectList';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
-import useFeatureFlag from "@hooks/useFeatureFlag";
 
 export const projectsQuery = graphql`
     query projectsQuery(
@@ -26,7 +24,6 @@ export const projectsQuery = graphql`
         $affiliations: [ProjectAffiliation!]
         $orderBy: ProjectOwnerProjectOrder
     ) {
-        ...ProjectModalCreateProject_query
         viewer {
             allProjects: projects(affiliations: $affiliations) {
                 totalCount
@@ -45,8 +42,6 @@ export const projectsQuery = graphql`
                     )
             }
             ...ProjectList_viewer
-            ...ProjectModalCreateProject_viewer
-            ...ProjectListNoResult_viewer
             ...ProjectList_projectOwner
                 @arguments(
                     count: $count
@@ -69,7 +64,6 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
     const intl = useIntl();
     const [term, setTerm] = React.useState('');
     const [orderBy, setOrderBy] = React.useState<OrderDirection>('DESC');
-    const isNewProjectCreateEnabled = useFeatureFlag('unstable__new_create_project');
     const query = usePreloadedQuery<projectsQueryType>(projectsQuery, queryReference);
     const { viewer } = query;
     const organization = viewer.organizations?.[0];
@@ -89,28 +83,16 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                     borderRadius="normal"
                     overflow="hidden">
                     <Flex direction="row">
-                        {isNewProjectCreateEnabled ?
-                            <Button
-                                as="a"
-                                href="/admin-next/create-project"
-                                variant="primary"
-                                variantColor="primary"
-                                variantSize="small"
-                                leftIcon={CapUIIcon.Add}
-                                mr={8}
-                            >
-                                {intl.formatMessage({ id: 'create-a-project' })}
-                            </Button>
-                                :
-                            <ProjectModalCreateProject
-                                orderBy={orderBy}
-                                term={term}
-                                viewer={viewer}
-                                query={query}
-                                noResult={false}
-                                hasProjects={hasProjects}
-                            />
-                        }
+                        <Button
+                            as="a"
+                            href="/admin-next/create-project"
+                            variant="primary"
+                            variantColor="primary"
+                            variantSize="small"
+                            leftIcon={CapUIIcon.Add}
+                            mr={8}>
+                            {intl.formatMessage({ id: 'create-a-project' })}
+                        </Button>
                         <Search
                             id="search-post"
                             onChange={onTermChange}
@@ -130,13 +112,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                     </React.Suspense>
                 </Flex>
             ) : (
-                <ProjectListNoResult
-                    term={term}
-                    orderBy={orderBy}
-                    viewer={viewer}
-                    query={query}
-                    hasProjects={hasProjects}
-                />
+                <ProjectListNoResult />
             )}
         </Flex>
     );
@@ -168,9 +144,7 @@ const Projects: NextPage<PageProps> = ({ viewerSession }) => {
                             <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
                         </Flex>
                     }>
-                    <ProjectListPage
-                        queryReference={queryReference}
-                    />
+                    <ProjectListPage queryReference={queryReference} />
                 </React.Suspense>
             ) : null}
         </Layout>
