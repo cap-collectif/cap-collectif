@@ -355,7 +355,7 @@ class ImportProposalsFromCsv
     {
         if (!$this->lastEntity) {
             $this->lastEntity = $this->proposalRepository->findOneBy(
-                [],
+                ['proposalForm' => $proposal->getProposalForm()],
                 ['createdAt' => 'DESC', 'reference' => 'DESC']
             );
         }

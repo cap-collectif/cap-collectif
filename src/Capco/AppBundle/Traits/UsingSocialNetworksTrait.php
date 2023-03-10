@@ -132,7 +132,10 @@ trait UsingSocialNetworksTrait
             'youtubeUrl',
         ];
         foreach ($socialNetworks as $socialNetwork) {
-            if (isset($row[$socialNetwork]) && empty($row[$socialNetwork])) {
+            if (!isset($row[$socialNetwork])) {
+                continue;
+            }
+            if (empty($row[$socialNetwork])) {
                 continue;
             }
             /** @var ConstraintViolationListInterface $isValid */
