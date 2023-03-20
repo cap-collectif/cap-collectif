@@ -5,10 +5,9 @@ namespace Capco\AppBundle\Security;
 use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class ReplyVoter extends Voter
+class ReplyVoter extends AbstractOwnerableVoter
 {
     const DELETE_REPLY = 'DELETE_REPLY';
 
@@ -38,13 +37,13 @@ class ReplyVoter extends Voter
 
         switch ($attribute) {
             case self::DELETE_REPLY:
-                return $this->canDelete($reply, $viewer);
+                return $this->canDeleteReply($reply, $viewer);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canDelete(AbstractReply $reply, ?User $viewer): bool
+    private function canDeleteReply(AbstractReply $reply, ?User $viewer): bool
     {
         if (!$viewer) {
             return false;
@@ -63,6 +62,6 @@ class ReplyVoter extends Voter
             return true;
         }
 
-        return false;
+        return self::isAdminOrOwnerOrMember($reply->getQuestionnaire(), $viewer);
     }
 }
