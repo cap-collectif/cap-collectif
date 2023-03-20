@@ -407,3 +407,14 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
         title: Quelle est conditions requise favorite ?
         required: true
         type: 3
+    questionJump1:
+        id: 3946
+        title: Q1
+        required: false
+        type: 8
+        temporaryId: 'e3e19281-48bb-48ec-a5c6-1eb2d1804276'
+    questionJump2:
+        id: 3947
+        title: Q2
+        required: false
+        type: 8

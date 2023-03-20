@@ -19,6 +19,12 @@ Object {
         },
         Object {
           "node": Object {
+            "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlSnVtcHM=",
+            "title": "Questionnaire pour tester les sauts conditionnels",
+          },
+        },
+        Object {
+          "node": Object {
             "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlT3JnYVdpdGhvdXRTdGVw",
             "title": "Questionnaire owner orga non rattaché à une step",
           },
@@ -30,7 +36,7 @@ Object {
           },
         },
       ],
-      "totalCount": 4,
+      "totalCount": 5,
     },
   },
 }

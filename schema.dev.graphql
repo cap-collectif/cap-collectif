@@ -7218,6 +7218,21 @@ input LogicJumpInput {
   conditions: [LogicJumpConditionInput]
 }
 
+input LogicJumpInputNew {
+  id: ID
+  always: Boolean
+
+  """
+  The id of the question where the logic jump end if the conditions are fulfilled
+  """
+  destination: ID!
+
+  """
+  A collection of conditions that you have to fulfill for displaying the destination question
+  """
+  conditions: [LogicJumpConditionInput!]!
+}
+
 """A list of users to send email"""
 type MailingList implements Node {
   """uuid of the mailing list"""
@@ -8134,6 +8149,7 @@ type Mutation {
   deleteStep(input: DeleteStepInput!): DeleteStepPayload
   updateDebateStep(input: UpdateDebateStepInput!): UpdateDebateStepPayload
   updateQuestionnaireStep(input: UpdateQuestionnaireStepInput!): UpdateQuestionnaireStepPayload
+  updateJumps(input: UpdateJumpsInput!): UpdateJumpsPayload
 }
 
 """A connection to a list of items."""
@@ -12919,6 +12935,9 @@ input QuestionChoiceInput {
   """The color assign with the question choice"""
   color: Color
   image: ID
+
+  """Used to reference choice in logic jump."""
+  temporaryId: ID
 }
 
 """The choice ranking"""
@@ -12973,6 +12992,20 @@ input QuestionInput {
 
   """Does the questions have disabled the responses colors"""
   responseColorsDisabled: Boolean
+
+  """Used to reference question in logic jump."""
+  temporaryId: ID
+}
+
+input QuestionJumpInput {
+  """The question ID."""
+  questionId: ID!
+
+  """The question to display if no conditions are met."""
+  alwaysJumpDestinationQuestion: ID
+
+  """The logic jumps associated to the question."""
+  jumps: [LogicJumpInputNew]!
 }
 
 """Value of type of question"""
@@ -13019,7 +13052,10 @@ type Questionnaire implements Node {
   ): UserConnection!
 
   """The list of questions of the questionnaire."""
-  questions: [Question!]!
+  questions(
+    """Filter questions by a given filter."""
+    filter: QuestionsFilterType
+  ): [Question!]!
 
   """A list of replies to the questionnaire."""
   replies(
@@ -13319,6 +13355,12 @@ enum QuestionnaireType {
 
   """Questionnaire that are used in analysis step."""
   QUESTIONNAIRE_ANALYSIS
+}
+
+"""Possible ways to filter a list of questions"""
+enum QuestionsFilterType {
+  """Filter questions that contains jumps or redirection."""
+  JUMPS_ONLY
 }
 
 """A step inside a project."""
@@ -16734,6 +16776,20 @@ type UpdateHomePageProjectsSectionConfigurationPayload {
 
   """An unsuccessful mutation will return an error."""
   errorCode: UpdateHomePageProjectsSectionConfigurationErrorCode
+  clientMutationId: String
+}
+
+input UpdateJumpsInput {
+  questionsJumps: [QuestionJumpInput]!
+
+  """The questionnaire associated to the jump."""
+  questionnaireId: ID!
+  clientMutationId: String
+}
+
+type UpdateJumpsPayload {
+  """The updated questions."""
+  questions: [Question!]!
   clientMutationId: String
 }
 

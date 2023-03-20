@@ -53,4 +53,17 @@ class AbstractQuestionRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleResult();
     }
+
+    public function findWithJumpsOrWithAlwaysJumpDestination(Questionnaire $questionnaire): array
+    {
+        $qb = $this->createQueryBuilder('aq')
+            ->join('aq.questionnaireAbstractQuestion', 'qaq')
+            ->leftJoin('aq.jumps', 'j')
+            ->where('qaq.questionnaire = :questionnaire')
+            ->andWhere('j.id IS NOT NULL OR aq.alwaysJumpDestinationQuestion IS NOT NULL')
+            ->setParameter('questionnaire', $questionnaire)
+            ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

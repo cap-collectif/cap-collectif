@@ -249,3 +249,15 @@ Capco\AppBundle\Entity\Questionnaire:
         creator: '@ChristopheCassou'
         createdAt: <(new \DateTime('2022-09-11'))>
         notificationsConfiguration: '@questionnaireNotificationConfigurationOrganization2'
+    questionnaireJumps:
+        id: questionnaireJumps
+        title: Questionnaire pour tester les sauts conditionnels
+        multipleRepliesAllowed: true
+        anonymousAllowed: true
+        acknowledgeReplies: 1
+        type: 'QUESTIONNAIRE'
+        privateResult: true
+        owner: '@user1'
+        creator: '@user1'
+        createdAt: <(new \DateTime('2022-09-11'))>
+        notificationsConfiguration: '@questionnaireNotificationConfigurationJumps'

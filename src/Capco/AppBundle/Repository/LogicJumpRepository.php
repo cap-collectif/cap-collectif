@@ -3,6 +3,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -21,5 +22,16 @@ class LogicJumpRepository extends EntityRepository
             ->setParameter('question', $question)
             ->getQuery()
             ->getResult();
+    }
+
+    public function findJumpsByQuestions(array $questionsId): array
+    {
+        $query = $this->createQueryBuilder('j')
+            ->where('j.origin IN (:questionsId)')
+            ->orWhere('j.destination IN (:questionsId)')
+            ->setParameter('questionsId', $questionsId)
+            ->getQuery();
+
+        return $query->getResult();
     }
 }

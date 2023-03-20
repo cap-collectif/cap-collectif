@@ -68,7 +68,11 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public static $questionTypesLabels = [];
 
     //field used to the position assignation
-    public $temporaryId;
+    /**
+     * @ORM\Column(name="temporary_id", type="guid", nullable=true)
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    public ?string $temporaryId = null;
 
     /**
      * Needed by sonata admin.
@@ -390,6 +394,17 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     {
         $this->hidden = $hidden;
 
+        return $this;
+    }
+
+    public function getTemporaryId(): ?string
+    {
+        return $this->temporaryId;
+    }
+
+    public function setTemporaryId(?string $temporaryId = null): self
+    {
+        $this->temporaryId = $temporaryId;
         return $this;
     }
 }

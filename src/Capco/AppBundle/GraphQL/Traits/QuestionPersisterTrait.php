@@ -43,8 +43,9 @@ trait QuestionPersisterTrait
 
         foreach ($arguments['questions'] as $key => &$dataQuestion) {
             // we create a unique identifier for the question because new questions didn't have id
-            $dataQuestion['question']['temporaryId'] = uniqid('', false);
-            $questionsOrderedById[] = $dataQuestion['question']['temporaryId'];
+            $temporaryId = $dataQuestion['question']['temporaryId'] ?? uniqid('', false);
+            $dataQuestion['question']['temporaryId'] = $temporaryId;
+            $questionsOrderedById[] = $temporaryId;
 
             //we are updating a question
             if (isset($dataQuestion['question']['id'])) {
@@ -347,6 +348,7 @@ trait QuestionPersisterTrait
                     }
                 } else {
                     $choice = new QuestionChoice();
+                    $choice->setTemporaryId($choiceData['temporaryId'] ?? null);
                     $question->addChoice($choice);
                 }
                 $choice->setTitle($choiceData['title']);

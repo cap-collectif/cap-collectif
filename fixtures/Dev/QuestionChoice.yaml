@@ -1072,3 +1072,29 @@ Capco\AppBundle\Entity\QuestionChoice:
         title: Date de naissance
         position: 5
         question: '@xQuestionConditionRequise1'
+    questionChoiceJumpQuestionR1:
+        id: questionChoiceJumpQuestionR1
+        title: R1
+        position: 1
+        question: '@questionJump1'
+    questionChoiceJumpQuestionR2:
+        id: questionChoiceJumpQuestionR2
+        title: R2
+        position: 2
+        question: '@questionJump1'
+    questionChoiceJumpQuestionR3:
+        id: questionChoiceJumpQuestionR3
+        title: R3
+        position: 3
+        question: '@questionJump1'
+    questionChoiceJumpQuestionR4:
+        id: questionChoiceJumpQuestionR4
+        title: R4
+        position: 1
+        question: '@questionJump2'
+        temporaryId: '97d1d830-40fa-4e30-96c9-1a225250c0d3'
+    questionChoiceJumpQuestionR5:
+        id: questionChoiceJumpQuestionR5
+        title: R5
+        position: 2
+        question: '@questionJump2'

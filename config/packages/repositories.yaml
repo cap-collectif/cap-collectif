@@ -749,3 +749,9 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:DistrictTranslation']
+
+    Capco\AppBundle\Repository\MultipleChoiceQuestionLogicJumpConditionRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:MultipleChoiceQuestionLogicJumpCondition']

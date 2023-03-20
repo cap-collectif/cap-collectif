@@ -1,4 +1,4 @@
-LogicJumpInput:
+LogicJumpInputNew:
     type: input-object
     config:
         fields:
@@ -6,12 +6,9 @@ LogicJumpInput:
                 type: 'ID'
             always:
                 type: 'Boolean'
-            origin:
-                type: 'ID!'
-                description: 'The id of the question where the logic jump start'
             destination:
                 type: 'ID!'
                 description: 'The id of the question where the logic jump end if the conditions are fulfilled'
             conditions:
-                type: '[LogicJumpConditionInput]'
+                type: '[LogicJumpConditionInput!]!'
                 description: 'A collection of conditions that you have to fulfill for displaying the destination question'

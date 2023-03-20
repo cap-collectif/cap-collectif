@@ -16,3 +16,6 @@ QuestionChoiceInput:
                 description: 'The color assign with the question choice'
             image:
                 type: 'ID'
+            temporaryId:
+                type: 'ID'
+                description: 'Used to reference choice in logic jump.'

@@ -155,3 +155,9 @@ Capco\AppBundle\Entity\LogicJump:
         origin: '@xQuestionIdfProjetLocal1'
         destination: '@simplequestionIdfProjetLocalOrgPublic1'
         conditions: ['@ljcIdfProjectLocalOrgPublic']
+    logicjumpQ1:
+        id: logicjumpQ1
+        position: 1
+        origin: '@questionJump1'
+        destination: '@questionJump3'
+        conditions: ['@ljcLogicjumpQ1-1', '@ljcLogicjumpQ1-2']

@@ -505,8 +505,13 @@ Capco\AppBundle\Entity\Questions\SimpleQuestion:
     simpleQuestionAnonymousQuestionnaire:
         id: 1403
         title: Comment ça va ?
-        type: 0 # number
+        type: 0
     simpleQuestionOwnerAnonymousQuestionnaire:
         id: 1404
         title: Comment ça va ?
-        type: 0 # number
+        type: 0
+    questionJump3:
+        id: 1405
+        title: Q3
+        type: 0
+        temporaryId: 'a2bce3ce-0524-4884-a03a-4a9acea60dfe'

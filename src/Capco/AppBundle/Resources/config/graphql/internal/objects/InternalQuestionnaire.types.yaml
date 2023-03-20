@@ -27,6 +27,11 @@ InternalQuestionnaire:
                 resolve: '@=value.isPhoneConfirmationRequired()'
             questions:
                 type: '[InternalQuestion!]!'
+                args:
+                    filter:
+                        type: 'QuestionsFilterType'
+                        description: 'Filter questions by a given filter.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value, args])'
             viewerReplies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'

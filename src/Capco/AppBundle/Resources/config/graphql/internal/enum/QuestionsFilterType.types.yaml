@@ -1,0 +1,8 @@
+QuestionsFilterType:
+    type: enum
+    config:
+        description: 'Possible ways to filter a list of questions'
+        values:
+            JUMPS_ONLY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionsFilterType::JUMPS_ONLY")'
+                description: 'Filter questions that contains jumps or redirection.'

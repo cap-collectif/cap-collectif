@@ -54,3 +54,6 @@ QuestionInput:
             responseColorsDisabled:
                 type: 'Boolean'
                 description: 'Does the questions have disabled the responses colors'
+            temporaryId:
+                type: 'ID'
+                description: 'Used to reference question in logic jump.'

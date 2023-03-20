@@ -735,3 +735,15 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
         questionnaire: '@questionnaireProjectOwnerAnonymous'
         question: '@simpleQuestionOwnerAnonymousQuestionnaire'
         position: 1
+    qaqJumps1:
+        questionnaire: '@questionnaireJumps'
+        question: '@questionJump1'
+        position: 1
+    qaqJumps2:
+        questionnaire: '@questionnaireJumps'
+        question: '@questionJump2'
+        position: 2
+    qaqJumps3:
+        questionnaire: '@questionnaireJumps'
+        question: '@questionJump3'
+        position: 3

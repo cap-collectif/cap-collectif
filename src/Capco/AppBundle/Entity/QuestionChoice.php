@@ -48,6 +48,12 @@ class QuestionChoice implements IndexableInterface
      */
     private $color;
 
+    /**
+     * @ORM\Column(name="temporary_id", type="guid", nullable=true)
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    private ?string $temporaryId = null;
+
     public function __clone()
     {
         if ($this->id) {
@@ -118,6 +124,17 @@ class QuestionChoice implements IndexableInterface
     {
         $this->image = $image;
 
+        return $this;
+    }
+
+    public function getTemporaryId(): ?string
+    {
+        return $this->temporaryId;
+    }
+
+    public function setTemporaryId(?string $temporaryId): QuestionChoice
+    {
+        $this->temporaryId = $temporaryId;
         return $this;
     }
 

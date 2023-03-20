@@ -108,3 +108,7 @@ Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfi
         onQuestionnaireReplyCreate: false
         onQuestionnaireReplyUpdate: false
         onQuestionnaireReplyDelete: false
+    questionnaireNotificationConfigurationJumps:
+        onQuestionnaireReplyCreate: false
+        onQuestionnaireReplyUpdate: false
+        onQuestionnaireReplyDelete: false

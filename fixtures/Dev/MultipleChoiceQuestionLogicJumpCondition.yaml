@@ -162,3 +162,15 @@ Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition:
     operator: IS
     question: '@xQuestionIdfProjetLocal1'
     value: '@idfProjetLocal1ChoiceOrgPriv'
+  ljcLogicjumpQ1-1:
+    id: ljcLogicjumpQ1-1
+    position: 1
+    operator: IS
+    question: '@questionJump1'
+    value: '@questionChoiceJumpQuestionR2'
+  ljcLogicjumpQ1-2:
+    id: ljcLogicjumpQ1-2
+    position: 2
+    operator: IS
+    question: '@questionJump1'
+    value: '@questionChoiceJumpQuestionR3'

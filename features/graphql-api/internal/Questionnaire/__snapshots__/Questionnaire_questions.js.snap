@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Questionnaire.questions should fetch all questions 1`] = `
+Object {
+  "node": Object {
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlSnVtcHM=",
+    "questions": Array [
+      Object {
+        "alwaysJumpDestinationQuestion": null,
+        "id": "UXVlc3Rpb246Mzk0Ng==",
+        "jumps": Array [
+          Object {
+            "conditions": Array [
+              Object {
+                "id": "ljcLogicjumpQ1-1",
+              },
+              Object {
+                "id": "ljcLogicjumpQ1-2",
+              },
+            ],
+            "origin": Object {
+              "title": "Q1",
+            },
+          },
+        ],
+        "title": "Q1",
+      },
+      Object {
+        "alwaysJumpDestinationQuestion": null,
+        "id": "UXVlc3Rpb246Mzk0Nw==",
+        "jumps": Array [],
+        "title": "Q2",
+      },
+      Object {
+        "alwaysJumpDestinationQuestion": null,
+        "id": "UXVlc3Rpb246MTQwNQ==",
+        "jumps": Array [],
+        "title": "Q3",
+      },
+    ],
+    "title": "Questionnaire pour tester les sauts conditionnels",
+  },
+}
+`;
+
+exports[`Internal|Questionnaire.questions should fetch all questions with at least one jump or redirection 1`] = `
+Object {
+  "node": Object {
+    "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlSnVtcHM=",
+    "questions": Array [
+      Object {
+        "alwaysJumpDestinationQuestion": null,
+        "id": "UXVlc3Rpb246Mzk0Ng==",
+        "jumps": Array [
+          Object {
+            "conditions": Array [
+              Object {
+                "id": "ljcLogicjumpQ1-1",
+              },
+              Object {
+                "id": "ljcLogicjumpQ1-2",
+              },
+            ],
+            "origin": Object {
+              "title": "Q1",
+            },
+          },
+        ],
+        "title": "Q1",
+      },
+    ],
+    "title": "Questionnaire pour tester les sauts conditionnels",
+  },
+}
+`;
