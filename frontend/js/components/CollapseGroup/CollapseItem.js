@@ -17,10 +17,12 @@ export default class CollapseItem extends React.Component<Props> {
       <>
         <Button
           className="w-100 block--bordered"
-          style={{ borderRadius: '2px', borderBottom: isOpen ? 0 : '' }}
+          style={{ borderRadius: '2px', borderBottom: isOpen ? 0 : '', whiteSpace: 'normal' }}
           onClick={onClick.bind(this, id)}
           aria-expanded={isOpen}>
-          <h4 className="pull-left font-weight-bold mt-10" style={{ color: '#0782C1' }}>
+          <h4
+            className="pull-left font-weight-bold mt-10"
+            style={{ color: '#0782C1', textAlign: 'left' }}>
             {label}
           </h4>
         </Button>
