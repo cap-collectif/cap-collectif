@@ -5,7 +5,7 @@ const JoditEditor = dynamic(importJodit, {
     ssr: false,
 });
 import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui';
-import {getApiUrl} from "config";
+import { getApiUrl } from 'config';
 
 type Props = {
     textAreaOnly?: boolean,

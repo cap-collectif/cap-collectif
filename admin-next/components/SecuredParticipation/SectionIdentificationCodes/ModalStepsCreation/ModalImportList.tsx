@@ -22,13 +22,13 @@ import { CreateUserIdentificationCodeListMutationResponse } from '@relay/CreateU
 import CreateUserIdentificationCodeListMutation from '@mutations/CreateUserIdentificationCodeListMutation';
 
 type ModalImportListProps = {
-    connectionName: string;
-    isFirst?: boolean;
-    name: string;
-    setName: (name: string) => void;
-    setData: (data: DataType) => void;
-    setResponse: (data: CreateUserIdentificationCodeListMutationResponse) => void;
-    data: DataType | null;
+    connectionName: string,
+    isFirst?: boolean,
+    name: string,
+    setName: (name: string) => void,
+    setData: (data: DataType) => void,
+    setResponse: (data: CreateUserIdentificationCodeListMutationResponse) => void,
+    data: DataType | null,
 };
 
 const DEFAULT_CODE_LENGTH = 8;
@@ -130,7 +130,11 @@ const ModalImportList: FC<ModalImportListProps> = ({
                 </Flex>
             </MultiStepModal.Body>
             <MultiStepModal.Footer>
-                <Button variant="secondary" variantColor="hierarchy" variantSize="medium" onClick={hide}>
+                <Button
+                    variant="secondary"
+                    variantColor="hierarchy"
+                    variantSize="medium"
+                    onClick={hide}>
                     {intl.formatMessage({ id: 'cancel' })}
                 </Button>
                 <Button

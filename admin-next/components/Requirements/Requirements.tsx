@@ -7,7 +7,6 @@ import CheckBoxRequirementsList from "@components/Requirements/CheckBoxRequireme
 import {Requirements_requirementStep$key} from "@relay/Requirements_requirementStep.graphql";
 import ToggleRequirementsList from "@components/Requirements/ToggleRequirementsList";
 import RequirementsReason from "@components/Requirements/RequirementsReason";
-import requirements from "../../pages/requirements";
 import {useFranceConnectRequirement} from "@components/Requirements/useFranceConnectRequirement";
 
 type Props = {

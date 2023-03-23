@@ -106,7 +106,7 @@ const DEBATE_QUERY = graphql`
     }
 `;
 
-const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDurationTypeUnion> = {
+export const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDurationTypeUnion> = {
     CUSTOM: 'CUSTOM',
     TIMELESS: 'TIMELESS',
 } as const
