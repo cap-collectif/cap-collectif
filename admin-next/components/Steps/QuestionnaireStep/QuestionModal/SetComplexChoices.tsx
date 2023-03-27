@@ -124,9 +124,7 @@ const SetComplexChoices: React.FC = () => {
                     mb={4}
                     mt={choices.length ? 4 : 0}
                     onClick={() => {
-                        append({
-                            id: '',
-                        });
+                        append({});
                     }}>
                     {intl.formatMessage({ id: 'add-choice' })}
                 </Button>

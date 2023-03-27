@@ -26,6 +26,7 @@ import type { ProjectStepAdminList_query } from '~relay/ProjectStepAdminList_que
 export type Step = {|
   +id: ?string,
   +title: string,
+  +label: string,
   +__typename: ?string,
   +url: ?string,
   +slug: ?string,

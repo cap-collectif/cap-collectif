@@ -84,9 +84,7 @@ const SetButtonsChoices: React.FC = () => {
                     variant="tertiary"
                     mb={4}
                     onClick={() => {
-                        append({
-                            id: '',
-                        });
+                        append({});
                     }}>
                     {intl.formatMessage({ id: 'add-choice' })}
                 </Button>

@@ -106,7 +106,7 @@ export const config: Record<RequirementTypeName, {
 
 export type RequirementsFormValues = {
     requirementsReason: string
-    requirements: Array<Requirement | null>
+    requirements: Array<Requirement>
 }
 
 export const getRequirementsInput = <FormValues extends RequirementsFormValues>(values: FormValues) => {
@@ -117,7 +117,7 @@ export const getRequirementsInput = <FormValues extends RequirementsFormValues>(
             .filter(requirement => {
                 if (requirement?.typename === 'CHECKBOX') return !!requirement.label
                 return requirement
-            })
+            }).map(requirement => ({id: requirement.id, label: requirement.label, type: requirement.typename}))
     }
 }
 

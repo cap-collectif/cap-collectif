@@ -19,7 +19,7 @@ import { UpdateQuestionnaireStepInput } from '@relay/UpdateQuestionnaireStepMuta
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import { useNavBarContext } from '@components/NavBar/NavBar.context';
 import DeleteStepMutation from '@mutations/DeleteStepMutation';
-import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm';
+import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm';
 import QuestionnaireStepRequirementsTabs from '@components/Requirements/QuestionnaireStepRequirementsTabs';
 import {
     getRequirementsInput,
@@ -27,27 +27,38 @@ import {
 } from '@components/Requirements/Requirements';
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters';
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab';
-import { formatQuestions } from './utils';
+import { formatQuestions, formatQuestionsInput } from './utils';
+import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation';
+import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql';
 
 type Props = {
     stepId: string,
 };
 
 type FormValues = {
-    id: string,
+    stepId: string,
     label: string,
     body: string | null,
-    title: string,
     startAt: string | null,
     endAt: string | null,
     timeless: boolean,
+    isEnabled: {
+        labels: Array<string>,
+    },
     isAnonymousParticipationAllowed: boolean,
     metaDescription: string | null,
     customCode: string | null,
     stepDurationType?: {
         labels: Array<string>,
     },
-    questionnaire: { id: string, title: string, description: string, questions: Array<any> },
+    questionnaire: {
+        questionnaireId: string,
+        title: string,
+        description: string,
+        questions: Array<QuestionInput>,
+    },
+    temporaryQuestion?: any,
+    __typename?: string,
 } & RequirementsFormValues;
 
 const QUESTIONNAIRE_STEP_QUERY = graphql`
@@ -146,22 +157,26 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                 : [StepDurationTypeEnum.CUSTOM]
             : [StepDurationTypeEnum.TIMELESS];
 
+        const isEnabled = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT];
+
         return {
-            id: stepId,
+            stepId,
             label: step?.label ?? '',
             body: step?.body ?? '',
-            title: step?.title ?? '',
             startAt: step?.timeRange?.startAt ?? null,
             endAt: step?.timeRange?.endAt ?? null,
             timeless: step ? step?.timeless ?? false : true,
             stepDurationType: {
                 labels: stepDurationType,
             },
+            isEnabled: {
+                labels: isEnabled,
+            },
             isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
             metaDescription: step?.metaDescription ?? '',
             customCode: step?.customCode ?? '',
             questionnaire: {
-                id: step?.questionnaire?.id ?? '',
+                questionnaireId: step?.questionnaire?.id ?? '',
                 title: step?.questionnaire?.title ?? '',
                 description: step?.questionnaire?.description ?? '',
                 questions: step?.questionnaire ? formatQuestions(step.questionnaire) : [],
@@ -180,25 +195,46 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
     const { handleSubmit, formState, control, watch } = formMethods;
     const { isSubmitting, isValid } = formState;
 
-    const onSubmit = async (values: FormValues) => {
-        console.log('onSubmit: ', values);
-        // TODO : correctly format values with temporary ids, should I do two mutations ?
-        /*  
-        const input: UpdateQuestionnaireStepInput = {
+    const onSubmit = async ({ questionnaire, ...values }: FormValues) => {
+        const timeless =
+            values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false;
+        delete values.stepDurationType;
+        delete values.temporaryQuestion;
+
+        const stepInput: UpdateQuestionnaireStepInput = {
             ...values,
+            timeless,
+            isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+            questionnaire: questionnaire.questionnaireId,
             ...getRequirementsInput(values),
         };
-      
-        try {
-            const response = await UpdateQuestionnaireStepMutation.commit({ input });
-            const adminAlphaUrl =
-                response.updateQuestionnaireStep?.questionnaireStep?.project?.adminAlphaUrl;
-            if (adminAlphaUrl) {
-                return (window.location.href = adminAlphaUrl);
-            }
-        } catch (error) {
-            return mutationErrorToast(intl);
-        }*/
+
+        return UpdateQuestionnaireStepMutation.commit({ input: stepInput })
+            .then(async response => {
+                const adminAlphaUrl =
+                    response.updateQuestionnaireStep?.questionnaireStep?.project?.adminAlphaUrl;
+                try {
+                    return UpdateQuestionnaireMutation.commit({
+                        input: {
+                            ...questionnaire,
+                            questions: formatQuestionsInput(questionnaire.questions),
+                        },
+                    })
+                        .then(() => {
+                            if (adminAlphaUrl) {
+                                return (window.location.href = adminAlphaUrl);
+                            }
+                        })
+                        .catch(() => {
+                            return mutationErrorToast(intl);
+                        });
+                } catch (error) {
+                    return mutationErrorToast(intl);
+                }
+            })
+            .catch(() => {
+                mutationErrorToast(intl);
+            });
     };
 
     const onBack = async () => {
@@ -334,6 +370,30 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                         defaultLocale={defaultLocale}
                         selectedLocale={defaultLocale}
                     />
+                    <FormControl name="isEnabled" control={control} my={6}>
+                        <FormLabel
+                            htmlFor="isEnabled"
+                            label={intl.formatMessage({ id: 'admin.fields.project.published_at' })}
+                        />
+                        <FieldInput
+                            id="isEnabled"
+                            name="isEnabled"
+                            control={control}
+                            type="radio"
+                            choices={[
+                                {
+                                    id: EnabledEnum.PUBLISHED,
+                                    label: intl.formatMessage({ id: 'global.published' }),
+                                    useIdAsValue: true,
+                                },
+                                {
+                                    id: EnabledEnum.DRAFT,
+                                    label: intl.formatMessage({ id: 'global-draft' }),
+                                    useIdAsValue: true,
+                                },
+                            ]}
+                        />
+                    </FormControl>
                     <Flex mt={6}>
                         <Button
                             variantSize="big"

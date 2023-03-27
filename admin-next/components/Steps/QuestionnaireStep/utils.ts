@@ -1,7 +1,13 @@
+import { QuestionChoiceInput } from '@relay/PreConfigureProjectMutation.graphql';
 import {
     QuestionnaireStepFormQueryResponse,
     QuestionTypeValue,
 } from '@relay/QuestionnaireStepFormQuery.graphql';
+import {
+    QuestionInput,
+    QuestionnaireAbstractQuestionInput,
+} from '@relay/UpdateQuestionnaireMutation.graphql';
+import uuid from '@utils/uuid';
 
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
     switch (type) {
@@ -36,6 +42,8 @@ export const questionTypeToLabel = (type: QuestionTypeValue) => {
             return 'global.question.types.section';
     }
 };
+
+const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 export const QuestionTypes = {
     TEXT: {
@@ -103,3 +111,63 @@ export const formatQuestions = (
     });
     return questions;
 };
+
+type Condition = { value: { id: string }, question: { id: string } };
+
+// Copied from the flow file. TODO: better types once jumps are in
+const convertJump = (jump: any) => ({
+    id: jump.id,
+    conditions:
+        jump.conditions &&
+        jump.conditions.map((condition: Condition) => ({
+            ...condition,
+            question: condition.question.id,
+            value: condition.value ? condition.value.id : null,
+        })),
+    origin: jump.origin.id,
+    destination: jump.destination.id,
+});
+
+// Copied from the flow file. TODO: better types once jumps are in
+export const formatQuestionsInput = (
+    questions: Array<QuestionInput & { __typename?: string }>,
+): Array<QuestionnaireAbstractQuestionInput> =>
+    questions.map(question => {
+        const questionInput = {
+            question: {
+                ...question,
+                temporaryId: question?.id ? undefined : uuid(),
+                alwaysJumpDestinationQuestion: question.alwaysJumpDestinationQuestion
+                    ? question.alwaysJumpDestinationQuestion.id
+                    : null,
+                jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
+                validationRule:
+                    question.validationRule && question.validationRule.type.length
+                        ? question.validationRule
+                        : question.__typename === 'MultipleChoiceQuestion'
+                        ? null
+                        : undefined,
+                // List of not send properties to server
+                __typename: undefined,
+                kind: undefined,
+                number: undefined,
+                position: undefined,
+                choices: undefined,
+                destinationJumps: undefined,
+            },
+        };
+        if (
+            multipleChoiceQuestions.indexOf(question.type) !== -1 &&
+            typeof question.choices !== 'undefined'
+        ) {
+            questionInput.question.choices = question.choices
+                ? question.choices.map(choice => ({
+                      ...choice,
+                      temporaryId: choice?.id ? undefined : uuid(),
+                      image: choice?.image ? choice.image?.id : null,
+                      kind: undefined,
+                  }))
+                : [];
+        }
+        return questionInput;
+    });

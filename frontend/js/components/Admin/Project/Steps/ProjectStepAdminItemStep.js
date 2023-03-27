@@ -73,7 +73,7 @@ export const ProjectStepAdminItemStep = ({
           <i className="cap cap-android-menu" style={{ color: '#aaa', fontSize: '20px' }} />
         </ItemQuestionWrapper>
         <ItemQuestionWrapper>
-          <strong>{step.title}</strong>
+          <strong>{step.title || step.label}</strong>
           <br />
           <span className="excerpt">
             {step.__typename && <FormattedMessage id={getWordingStep(step.__typename)} />}

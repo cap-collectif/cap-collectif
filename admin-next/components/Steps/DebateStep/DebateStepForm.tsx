@@ -111,7 +111,7 @@ export const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDur
     TIMELESS: 'TIMELESS',
 } as const
 
-const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
+export const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
     PUBLISHED: 'PUBLISHED',
     DRAFT: 'DRAFT',
 } as const

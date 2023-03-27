@@ -671,6 +671,7 @@ export default createFragmentContainer(injectIntl(container), {
       }
       steps {
         id
+        label
         body
         bodyUsingJoditWysiwyg
         timeless

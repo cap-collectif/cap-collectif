@@ -70,7 +70,7 @@ export const QuestionAdminFragment = {
             descriptionUsingJoditWysiwyg
             type
             ... on MultipleChoiceQuestion {
-                isOtherAllowed
+                otherAllowed: isOtherAllowed
                 randomQuestionChoices
                 groupedResponsesEnabled
                 responseColorsDisabled

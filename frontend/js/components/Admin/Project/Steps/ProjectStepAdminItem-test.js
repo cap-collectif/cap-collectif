@@ -8,6 +8,7 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const defaultStep = {
   id: '1',
   title: 'testStep',
+  label: 'label',
   __typename: 'typeTest',
   url: 'urlTest',
   slug: 'urlTest',
