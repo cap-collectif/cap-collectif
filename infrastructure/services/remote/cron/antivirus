@@ -2,7 +2,7 @@
 
 service clamav-freshclam start
 sleep 30
-scan_result=$(clamscan --suppress-ok-results --remove=no --scan-archive=yes -r /var/www/public/media)
+scan_result=$(clamscan --suppress-ok-results --remove=no --scan-archive=yes -r /var/www/public/media/default)
 
 if [[ $scan_result == *"FOUND"* ]]; then
   curl -X POST -H 'Content-type: application/json' --data '{"text":"['"$SYMFONY_INSTANCE_NAME"'] Virus found in instance\n'"$scan_result"'"}' $SLACK_WEBHOOK_ANTIVIRUS
