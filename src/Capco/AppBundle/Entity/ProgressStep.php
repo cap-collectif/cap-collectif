@@ -30,7 +30,7 @@ class ProgressStep
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="progressSteps", cascade={"persist"})
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $proposal;
 
