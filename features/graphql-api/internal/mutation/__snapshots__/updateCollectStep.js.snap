@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateCollectStep admin should be able to edit collectStep step. 1`] = `
+Object {
+  "updateCollectStep": Object {
+    "collectStep": Object {
+      "allowAuthorsToAddNews": true,
+      "body": "updated body",
+      "bodyUsingJoditWysiwyg": true,
+      "budget": 30000,
+      "customCode": "updated custom code",
+      "defaultSort": "old",
+      "defaultStatus": null,
+      "enabled": true,
+      "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx",
+      "isProposalSmsVoteEnabled": false,
+      "isSecretBallot": false,
+      "label": "upated label",
+      "mainView": "LIST",
+      "metaDescription": "updated metadescription",
+      "private": false,
+      "publishedVoteDate": null,
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "FirstnameRequirement",
+            },
+          },
+          Object {
+            "node": Object {
+              "__typename": "LastnameRequirement",
+            },
+          },
+        ],
+        "reason": null,
+      },
+      "statuses": Array [
+        Object {
+          "name": "status",
+        },
+      ],
+      "timeRange": Object {
+        "endAt": "2024-05-30 11:22:00",
+        "startAt": "2024-03-30 11:22:00",
+      },
+      "timeless": true,
+      "title": "",
+      "voteThreshold": 30,
+      "voteType": "DISABLED",
+      "votesHelpText": "help text",
+      "votesLimit": 20,
+      "votesMin": 1,
+      "votesRanking": true,
+    },
+  },
+}
+`;

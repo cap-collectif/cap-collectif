@@ -1,0 +1,7 @@
+UpdateCollectStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            collectStep:
+                type: 'InternalCollectStep!'
+                description: 'The updated step.'

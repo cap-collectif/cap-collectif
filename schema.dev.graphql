@@ -8150,6 +8150,8 @@ type Mutation {
   updateDebateStep(input: UpdateDebateStepInput!): UpdateDebateStepPayload
   updateQuestionnaireStep(input: UpdateQuestionnaireStepInput!): UpdateQuestionnaireStepPayload
   updateJumps(input: UpdateJumpsInput!): UpdateJumpsPayload
+  updateCollectStep(input: UpdateCollectStepInput!): UpdateCollectStepPayload
+  updateSelectionStep(input: UpdateSelectionStepInput!): UpdateSelectionStepPayload
 }
 
 """A connection to a list of items."""
@@ -16349,6 +16351,101 @@ type UpdateCivicIAPayload {
   clientMutationId: String
 }
 
+input UpdateCollectStepInput {
+  """The proposalForm linked to the step."""
+  proposalForm: ID!
+
+  """The step ID to update."""
+  stepId: ID!
+
+  """The step label."""
+  label: String!
+
+  """The step description."""
+  body: String
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
+  """When the step start."""
+  startAt: DateTime
+
+  """When the step end."""
+  endAt: DateTime
+  timeless: Boolean
+
+  """Whether or not the step is enabled."""
+  isEnabled: Boolean!
+
+  """Step metadescription."""
+  metaDescription: DateTime
+
+  """Step custom code."""
+  customCode: HTML
+
+  """Step footer code."""
+  footer: HTML
+
+  """Requirements to answer the questionnaire."""
+  requirements: [StepRequirementInput!]!
+
+  """Reasons to require these requirements."""
+  requirementsReason: String
+
+  """
+  If anonymous participation is allowed whether or not we collect participants email.
+  """
+  collectParticipantsEmail: Boolean
+
+  """Wether or not anonymous user can participate."""
+  isAnonymousParticipationAllowed: Boolean
+
+  """
+  Whether or not authors can add news on proposals selected in this step.
+  """
+  allowAuthorsToAddNews: Boolean!
+
+  """Default way to sort proposals."""
+  defaultSort: ProposalSort
+
+  """the default view : GRID, LIST or MAP"""
+  mainView: MainView
+  statuses: [StepStatusInput]
+  defaultStatus: ID
+  votesHelpText: String
+
+  """Maximum number of votes a user can submit."""
+  votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
+
+  """If enabled, allow voters to order their votes by point"""
+  votesRanking: Boolean!
+  voteThreshold: Int
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
+  voteType: ProposalStepVoteType
+  budget: Float
+
+  """Whether or not sms vote is enabled."""
+  isProposalSmsVoteEnabled: Boolean
+
+  """Whether or not secret ballot is enable"""
+  secretBallot: Boolean
+  private: Boolean
+  clientMutationId: String
+}
+
+type UpdateCollectStepPayload {
+  """The updated step."""
+  collectStep: CollectStep!
+  clientMutationId: String
+}
+
 input UpdateContactFormInput {
   """ID of the contact form to update."""
   id: ID!
@@ -17840,6 +17937,98 @@ input UpdateRequirementInput {
 type UpdateRequirementPayload {
   viewer: User
   requirement: Requirement
+  clientMutationId: String
+}
+
+input UpdateSelectionStepInput {
+  """The step ID to update."""
+  stepId: ID!
+
+  """The step label."""
+  label: String!
+
+  """The step description."""
+  body: String
+
+  """Is the body using Jodit Wysiwyg."""
+  bodyUsingJoditWysiwyg: Boolean!
+
+  """When the step start."""
+  startAt: DateTime
+
+  """When the step end."""
+  endAt: DateTime
+  timeless: Boolean
+
+  """Whether or not the step is enabled."""
+  isEnabled: Boolean!
+
+  """Step metadescription."""
+  metaDescription: DateTime
+
+  """Step custom code."""
+  customCode: HTML
+
+  """Step footer code."""
+  footer: HTML
+
+  """Requirements to answer the questionnaire."""
+  requirements: [StepRequirementInput!]!
+
+  """Reasons to require these requirements."""
+  requirementsReason: String
+
+  """
+  If anonymous participation is allowed whether or not we collect participants email.
+  """
+  collectParticipantsEmail: Boolean
+
+  """Wether or not anonymous user can participate."""
+  isAnonymousParticipationAllowed: Boolean
+
+  """
+  Whether or not authors can add news on proposals selected in this step.
+  """
+  allowAuthorsToAddNews: Boolean!
+
+  """Default way to sort proposals."""
+  defaultSort: ProposalSort
+
+  """the default view : GRID, LIST or MAP"""
+  mainView: MainView
+  statuses: [StepStatusInput]
+  defaultStatus: ID
+  votesHelpText: String
+
+  """Maximum number of votes a user can submit."""
+  votesLimit: Int
+
+  """
+  Minimum number of votes a user must submit for his votes to be counted.
+  """
+  votesMin: Int
+
+  """If enabled, allow voters to order their votes by point"""
+  votesRanking: Boolean!
+  voteThreshold: Int
+
+  """If not null, the date to display vote count"""
+  publishedVoteDate: DateTime
+  voteType: ProposalStepVoteType
+  budget: Float
+
+  """Whether or not sms vote is enabled."""
+  isProposalSmsVoteEnabled: Boolean
+
+  """Whether or not secret ballot is enable"""
+  secretBallot: Boolean
+  private: Boolean
+  clientMutationId: String
+}
+
+type UpdateSelectionStepPayload {
+  """The updated step."""
+  selectionStep: SelectionStep!
   clientMutationId: String
 }
 

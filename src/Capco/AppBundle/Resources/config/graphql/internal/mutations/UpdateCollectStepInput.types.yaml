@@ -1,0 +1,92 @@
+UpdateCollectStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            proposalForm:
+                type: 'ID!'
+                description: 'The proposalForm linked to the step.'
+            stepId:
+                type: 'ID!'
+                description: 'The step ID to update.'
+            label:
+                type: 'String!'
+                description: 'The step label.'
+            body:
+                type: 'String'
+                description: 'The step description.'
+            bodyUsingJoditWysiwyg:
+                description: 'Is the body using Jodit Wysiwyg.'
+                type: 'Boolean!'
+            startAt:
+                type: 'DateTime'
+                description: 'When the step start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the step end.'
+            timeless:
+                type: 'Boolean'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not the step is enabled.'
+            metaDescription:
+                type: 'DateTime'
+                description: 'Step metadescription.'
+            customCode:
+                type: 'HTML'
+                description: 'Step custom code.'
+            footer:
+                type: 'HTML'
+                description: 'Step footer code.'
+            requirements:
+                type: '[StepRequirementInput!]!'
+                description: 'Requirements to answer the questionnaire.'
+            requirementsReason:
+                type: 'String'
+                description: 'Reasons to require these requirements.'
+            collectParticipantsEmail:
+                type: 'Boolean'
+                description: 'If anonymous participation is allowed whether or not we collect participants email.'
+            isAnonymousParticipationAllowed:
+                type: 'Boolean'
+                description: 'Wether or not anonymous user can participate.'
+            allowAuthorsToAddNews:
+                type: 'Boolean!'
+                description: 'Whether or not authors can add news on proposals selected in this step.'
+            defaultSort:
+                type: 'ProposalSort'
+                description: 'Default way to sort proposals.'
+            mainView:
+                type: 'MainView'
+                description: 'the default view : GRID, LIST or MAP'
+            statuses:
+                type: '[StepStatusInput]'
+            defaultStatus:
+                type: 'ID'
+            votesHelpText:
+                type: 'String'
+            votesLimit:
+                type: 'Int'
+                description: 'Maximum number of votes a user can submit.'
+            votesMin:
+                type: 'Int'
+                description: 'Minimum number of votes a user must submit for his votes to be counted.'
+            votesRanking:
+                type: 'Boolean!'
+                description: 'If enabled, allow voters to order their votes by point'
+            voteThreshold:
+                type: 'Int'
+            publishedVoteDate:
+                type: 'DateTime'
+                description: 'If not null, the date to display vote count'
+            voteType:
+                type: 'ProposalStepVoteType'
+            budget:
+                type: 'Float'
+            isProposalSmsVoteEnabled:
+                type: 'Boolean'
+                description: 'Whether or not sms vote is enabled.'
+            secretBallot:
+                type: 'Boolean'
+                description: 'Whether or not secret ballot is enable'
+            private:
+                type: 'Boolean'

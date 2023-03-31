@@ -1,0 +1,7 @@
+UpdateSelectionStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            selectionStep:
+                type: 'InternalSelectionStep!'
+                description: 'The updated step.'

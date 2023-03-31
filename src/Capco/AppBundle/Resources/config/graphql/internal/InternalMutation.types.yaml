@@ -1731,3 +1731,17 @@ InternalMutation:
                     inputType: UpdateJumpsInput
                     payloadType: UpdateJumpsPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateJumpsMutation", [value, getUser()])'
+            updateCollectStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCollectStepMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateCollectStepInput
+                    payloadType: UpdateCollectStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCollectStepMutation", [value, getUser()])'
+            updateSelectionStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSelectionStepMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateSelectionStepInput
+                    payloadType: UpdateSelectionStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSelectionStepMutation", [value, getUser()])'
