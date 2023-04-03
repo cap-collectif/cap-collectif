@@ -110,11 +110,11 @@ class ReplyAdmin extends AbstractAdmin
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:Reply:author_list_field.html.twig',
+                'template' => 'CapcoAdminBundle:Reply:author_show_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('state', null, [
+            ->add('status', null, [
                 'label' => 'global.state',
                 'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
             ])
