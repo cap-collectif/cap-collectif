@@ -10,6 +10,7 @@ import { closeOpinionEditModal } from '~/redux/modules/opinion';
 import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql';
 import { isHTML } from '~/utils/isHtml';
 import UpdateOpinionMutation from '~/mutations/UpdateOpinionMutation';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 
 type RelayProps = {|
   opinion: OpinionEditForm_opinion,
@@ -52,8 +53,14 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     const errorCode = response?.updateOpinion?.errorCode;
     const url = response?.updateOpinion?.opinion?.url;
     if (url) {
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'proposal-edit' },
+      });
       dispatch(closeOpinionEditModal());
-      window.location.href = url;
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
     }
 
     switch (errorCode) {

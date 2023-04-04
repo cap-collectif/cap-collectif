@@ -33,6 +33,7 @@ exports[`<ArgumentCreate /> renders correctly 1`] = `
       />
       <Button
         active={false}
+        aria-label="argument.publication.email.button"
         block={false}
         bsClass="btn"
         bsStyle="primary"

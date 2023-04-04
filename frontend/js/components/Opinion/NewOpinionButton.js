@@ -2,6 +2,7 @@
 import React from 'react';
 import cn from 'classnames';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import NewLoginOverlay from '../Utils/NewLoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
@@ -20,7 +21,7 @@ type Props = {|
 
 const NewOpinionButton = ({ dispatch, label, consultation, section, className }: Props) => {
   const disabled = !consultation.contribuable;
-
+  const intl = useIntl();
   return (
     <React.Fragment>
       <NewLoginOverlay>
@@ -28,6 +29,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
           type="button"
           disabled={disabled}
           id={`btn-add--${section.slug}`}
+          aria-label={intl.formatMessage({ id: 'add-proposal' })}
           className={cn('btn btn-primary', className)}
           onClick={() => {
             dispatch(openOpinionCreateModal(section.id));

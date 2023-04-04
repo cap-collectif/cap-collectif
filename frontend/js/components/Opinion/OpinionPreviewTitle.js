@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import Card from '../Ui/Card/Card';
 import OpinionTypeLabel from './OpinionTypeLabel';
 import type { OpinionPreviewTitle_opinion } from '~relay/OpinionPreviewTitle_opinion.graphql';
@@ -12,26 +12,28 @@ type Props = {
   showTypeLabel: boolean,
 };
 
-export class OpinionPreviewTitle extends React.Component<Props> {
-  render() {
-    const { opinion, showTypeLabel } = this.props;
-
-    return (
-      <Card.Title tagName="div" firstElement={false}>
-        {opinion.trashed && (
-          <span className="label label-default mr-5">
-            <FormattedMessage id="global.is_trashed" />
-          </span>
-        )}
-        {/* $FlowFixMe */}
-        {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
-        {showTypeLabel ? ' ' : null}
-        {/* $FlowFixMe */}
-        <a href={opinion.url}>{translateContent(opinion.title)}</a>
-      </Card.Title>
-    );
-  }
-}
+export const OpinionPreviewTitle = ({ opinion, showTypeLabel }: Props) => {
+  const intl = useIntl();
+  return (
+    <Card.Title tagName="div" firstElement={false}>
+      {opinion.trashed && (
+        <span className="label label-default mr-5">
+          {intl.formatMessage({ id: 'global.is_trashed' })}
+        </span>
+      )}
+      {/* $FlowFixMe */}
+      {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
+      {showTypeLabel ? ' ' : null}
+      {/* $FlowFixMe */}
+      <a
+        href={opinion.url}
+        aria-label={intl.formatMessage({ id: 'admin.fields.selection.proposal' })}
+        title={translateContent(opinion.title)}>
+        {translateContent(opinion.title)}
+      </a>
+    </Card.Title>
+  );
+};
 
 export default createFragmentContainer(OpinionPreviewTitle, {
   opinion: graphql`

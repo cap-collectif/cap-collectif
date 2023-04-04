@@ -90,19 +90,31 @@ const ShareButtonDropdown = ({
     <Menu
       disclosure={
         <Button
-          style={{ color: '#333', borderColor: '#333' }}
-          className=" btn btn-default dropdown-button custom-dropdown-button share-dropdown-button"
+          style={{
+            color: '#333',
+            borderColor: '#333',
+            fontSize: bsSize === 'xs' ? '12px' : '14px',
+            lineHeight: bsSize === 'xs' ? '1.5' : '24px',
+            padding: bsSize === 'xs' ? '1px 5px' : '4px 8px',
+          }}
+          className={`btn btn-default dropdown-button custom-dropdown-button share-dropdown-button ${
+            bsSize === 'xs' ? 'btn-xs' : ''
+          }`}
           variant="secondary"
           variantColor="hierarchy"
           id={id}
           disabled={disabled}
           rightIcon={
-            <Icon name={CapUIIcon.ArrowDownO} size={CapUIIconSize.SM} color={colors.black} />
+            <Icon
+              name={CapUIIcon.ArrowDownO}
+              size={bsSize === 'xs' ? CapUIIconSize.Xs : CapUIIconSize.Sm}
+              color={colors.black}
+            />
           }
           leftIcon={
             <Icon
               name={CapUIIcon.Share}
-              size={bsSize === 'xs' ? CapUIIconSize.XS : CapUIIconSize.SM}
+              size={bsSize === 'xs' ? CapUIIconSize.Xs : CapUIIconSize.Sm}
             />
           }>
           {intl.formatMessage({ id: 'global.share' })}

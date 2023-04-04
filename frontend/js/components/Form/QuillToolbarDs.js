@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { useMenuBarState, MenuItem, MenuGroup, MenuBar } from 'reakit/Menu';
+import { useMenuBarState, MenuItem, MenuBar } from 'reakit/Menu';
 import { useIntl } from 'react-intl';
 import { Flex, Button } from '@cap-collectif/ui';
 import VisuallyHidden from '~ds/VisuallyHidden/VisuallyHidden';
@@ -33,75 +33,55 @@ const QuillToolbar = ({ onFocus }: Props): React.Node => {
         <option value="large">{intl.formatMessage({ id: 'editor.size.large' })}</option>
       </MenuItem>
 
-      <MenuGroup
-        {...menu}
+      <Flex
         className="ql-formats ql-editor-button"
-        as={Flex}
         direction="row"
         aria-label={intl.formatMessage({ id: 'aria-editor-tools-style' })}>
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.bold' })}
           className="ql-bold ql-editor-button"
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.italic' })}
           className="ql-italic ql-editor-button"
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.underline' })}
           className="ql-underline ql-editor-button"
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.strike' })}
           className="ql-strike ql-editor-button"
         />
-      </MenuGroup>
+      </Flex>
 
-      <MenuGroup
-        {...menu}
+      <Flex
         className="ql-formats"
-        as={Flex}
         direction="row"
         aria-label={intl.formatMessage({ id: 'aria-editor-tools-alignment' })}>
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           className="ql-list ql-editor-button"
           value="ordered"
           aria-label={intl.formatMessage({ id: 'editor.list' })}
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           className="ql-list ql-editor-button"
           value="bullet"
           aria-label={intl.formatMessage({ id: 'global.list' })}
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           className="ql-indent ql-editor-button"
           value="-1"
           aria-label={intl.formatMessage({ id: 'global.delete.indent' })}
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           className="ql-indent ql-editor-button"
           value="+1"
@@ -117,36 +97,28 @@ const QuillToolbar = ({ onFocus }: Props): React.Node => {
           <option value="right" aria-label={intl.formatMessage({ id: 'editor.align.right' })} />
           <option value="justify" aria-label={intl.formatMessage({ id: 'editor.align.justify' })} />
         </MenuItem>
-      </MenuGroup>
+      </Flex>
 
-      <MenuGroup
-        {...menu}
+      <Flex
         className="ql-formats"
-        as={Flex}
         direction="row"
         aria-label={intl.formatMessage({ id: 'aria-editor-tools-insertion' })}>
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.link' })}
           className="ql-link ql-editor-button"
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.image' })}
           className="ql-image ql-editor-button"
         />
-        <MenuItem
-          {...menu}
-          as="button"
+        <button
           type="button"
           aria-label={intl.formatMessage({ id: 'global.video' })}
           className="ql-video ql-editor-button"
         />
-      </MenuGroup>
+      </Flex>
     </MenuBar>
   );
 };

@@ -13,6 +13,7 @@ import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateFor
 import RequirementsFormLegacy from '../../Requirements/RequirementsFormLegacy';
 import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql';
 import CreateOpinionMutation from '~/mutations/CreateOpinionMutation';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 
 type RelayProps = {|
   section: OpinionCreateForm_section,
@@ -49,8 +50,14 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
     const errorCode = response?.createOpinion?.errorCode;
     const url = response?.createOpinion?.opinion?.url;
     if (url) {
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'proposal-create' },
+      });
       dispatch(closeOpinionCreateModal());
-      window.location.href = url;
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
     }
 
     switch (errorCode) {

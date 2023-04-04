@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { reduxForm, Field, submit, SubmissionError, clearSubmitErrors } from 'redux-form';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, useIntl } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
@@ -83,6 +83,7 @@ export const ArgumentCreate = ({
   submitting,
   error,
 }: Props) => {
+  const intl = useIntl();
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const openModal = () => {
@@ -134,6 +135,7 @@ export const ArgumentCreate = ({
           />
           {!disabled && (
             <Button
+              aria-label={intl.formatMessage({ id: 'argument.publication.email.button' })}
               disabled={submitting}
               onClick={() => {
                 if (

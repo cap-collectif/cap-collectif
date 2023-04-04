@@ -114,7 +114,7 @@ class OpinionTabs extends React.Component<Props> {
       return (
         <Tab.Container id="opinion-page-tabs" defaultActiveKey={this.getDefaultKey()}>
           <div>
-            <Nav bsStyle="tabs">
+            <Nav bsStyle="tabs" role="list">
               {this.isCommentable() && (
                 <NavItem className="opinion-tabs" eventKey="arguments">
                   <FormattedMessage
@@ -206,7 +206,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(OpinionTabs);
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionTabs_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       __typename
       ... on Opinion {
         __typename

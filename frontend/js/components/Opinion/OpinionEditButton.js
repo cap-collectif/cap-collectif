@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -13,24 +13,23 @@ type Props = {
   opinion: OpinionEditButton_opinion,
 };
 
-export class OpinionEditButton extends React.Component<Props> {
-  render() {
-    const { opinion, dispatch } = this.props;
-    return (
-      <>
-        <Button
-          id="opinion-edit-btn"
-          className="opinion__action--edit pull-right btn--outline btn-dark-gray"
-          onClick={() => {
-            dispatch(openOpinionEditModal(opinion.id));
-          }}>
-          <i className="cap cap-pencil-1" /> <FormattedMessage id="global.edit" />
-        </Button>{' '}
-        <OpinionEditModal opinion={opinion} />
-      </>
-    );
-  }
-}
+export const OpinionEditButton = ({ opinion, dispatch }: Props) => {
+  const intl = useIntl();
+  return (
+    <>
+      <Button
+        id="opinion-edit-btn"
+        className="opinion__action--edit pull-right btn--outline btn-dark-gray"
+        onClick={() => {
+          dispatch(openOpinionEditModal(opinion.id));
+        }}
+        aria-label={intl.formatMessage({ id: 'edit-proposal' })}>
+        <i className="cap cap-pencil-1" /> <FormattedMessage id="global.edit" />
+      </Button>
+      <OpinionEditModal opinion={opinion} />
+    </>
+  );
+};
 
 const container = connect<any, any, _, _, _, _>()(OpinionEditButton);
 

@@ -12,6 +12,7 @@ type Props = {
   style?: Object,
   id?: string,
   user?: Object,
+  ariaLabel?: string,
 };
 
 class DeleteButton extends React.Component<Props> {
@@ -34,7 +35,7 @@ class DeleteButton extends React.Component<Props> {
   };
 
   render() {
-    const { className, id, onClick, style } = this.props;
+    const { className, id, onClick, style, ariaLabel } = this.props;
     if (this.isDeletable()) {
       const classes = {
         btn: true,
@@ -49,7 +50,8 @@ class DeleteButton extends React.Component<Props> {
           type="button"
           style={style}
           className={classNames(classes)}
-          onClick={() => onClick()}>
+          onClick={() => onClick()}
+          aria-label={ariaLabel}>
           <i className="cap cap-bin-2" />
           <FormattedMessage id="global.delete" />
         </button>

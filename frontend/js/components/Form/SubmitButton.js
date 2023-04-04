@@ -21,6 +21,7 @@ type Props = {
   loginOverlay: boolean,
   user?: User,
   children?: any,
+  ariaLabel?: string,
 };
 
 class SubmitButton extends React.Component<Props> {
@@ -56,6 +57,7 @@ class SubmitButton extends React.Component<Props> {
       style,
       children,
       loading,
+      ariaLabel,
     } = this.props;
     return (
       <LoginOverlay enabled={loginOverlay}>
@@ -65,7 +67,8 @@ class SubmitButton extends React.Component<Props> {
           disabled={isSubmitting || disabled}
           onClick={this.onClick}
           className={cn(`btn btn-${bsStyle}`, className)}
-          style={style}>
+          style={style}
+          aria-label={ariaLabel}>
           {children}
           <FormattedMessage id={isSubmitting ? loading : label} />
         </button>

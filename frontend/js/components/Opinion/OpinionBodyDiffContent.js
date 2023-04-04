@@ -7,14 +7,15 @@ import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 type Props = {
   opinion: OpinionBodyDiffContent_opinion,
+  ariaLabel?: string,
 };
 
 class OpinionBodyDiffContent extends React.Component<Props> {
   render() {
-    const { opinion } = this.props;
+    const { opinion, ariaLabel } = this.props;
 
     if (!opinion.modals || opinion.modals.length < 1) {
-      return <WYSIWYGRender className="mb-15" value={opinion.body} />;
+      return <WYSIWYGRender className="mb-15" value={opinion.body} ariaLabel={ariaLabel} />;
     }
 
     const { modals } = opinion;

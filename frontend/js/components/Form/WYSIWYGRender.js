@@ -9,10 +9,11 @@ type Props = {
   tagName?: string,
   className?: string,
   raw?: boolean,
+  ariaLabel?: string,
 };
 
 export const WYSIWYGRender = (props: Props) => {
-  const { value, tagName, className, truncate, raw, ...rest } = props;
+  const { value, tagName, className, truncate, raw, ariaLabel, ...rest } = props;
 
   // sorry for that: https://github.com/quilljs/quill/issues/1235
   if (!value || value === '<p><br /></p>') {
@@ -24,7 +25,9 @@ export const WYSIWYGRender = (props: Props) => {
   if (typeof value === 'string' && isPredefinedTraductionKey(value)) {
     // $FlowFixMe value may be a number.
     return (
-      <div className={`${className || ''} ql-editor wysiwyg-render`}>{translateContent(value)}</div>
+      <div aria-label={ariaLabel} className={`${className || ''} ql-editor wysiwyg-render`}>
+        {translateContent(value)}
+      </div>
     );
   }
 
@@ -42,13 +45,16 @@ export const WYSIWYGRender = (props: Props) => {
     return raw ? (
       child
     ) : (
-      <div className={`${className || ''} ql-editor wysiwyg-render`}>{child}</div>
+      <div aria-label={ariaLabel} className={`${className || ''} ql-editor wysiwyg-render`}>
+        {child}
+      </div>
     );
   }
 
   return (
     <div
       {...rest}
+      aria-label={ariaLabel}
       className={`${className || ''} ql-editor wysiwyg-render`}
       dangerouslySetInnerHTML={{ __html: truncatedValue }}
     />

@@ -4,7 +4,9 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
 <div
   className="sc-bdnxRM dbhavy opinion__user"
 >
-  <span>
+  <span
+    title="Toto"
+  >
     Toto
   </span>
   <span
@@ -95,7 +97,9 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no a
 <div
   className="sc-bdnxRM dbhavy opinion__user"
 >
-  <span>
+  <span
+    title="Toto"
+  >
     Toto
   </span>
   <span

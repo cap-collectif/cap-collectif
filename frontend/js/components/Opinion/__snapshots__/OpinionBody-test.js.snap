@@ -6,21 +6,20 @@ exports[`<OpinionBody /> should render correctly when the opinion is a version 1
     <p
       className="control-label"
     >
-      <FormattedMessage
-        id="global.explanation"
-        values={Object {}}
-      />
+      global.explanation
     </p>
     <Well
       bsClass="well"
       bsSize="small"
     >
       <WYSIWYGRender
+        ariaLabel="proposal-content"
         value="comment"
       />
     </Well>
   </div>
   <WYSIWYGRender
+    ariaLabel="proposal-content"
     className="diff mb-15"
   />
 </div>

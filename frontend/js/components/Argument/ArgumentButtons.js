@@ -1,6 +1,7 @@
 // @flow
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
@@ -24,6 +25,7 @@ type Props = {|
 
 const ArgumentButtons = ({ argument, dispatch }: Props) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const intl = useIntl();
 
   const openDeleteModal = () => {
     setIsDeleting(true);
@@ -50,6 +52,7 @@ const ArgumentButtons = ({ argument, dispatch }: Props) => {
         onClick={openDeleteModal}
         author={{ uniqueId: argument.author.slug }}
         className="argument__btn--delete btn-xs"
+        ariaLabel={intl.formatMessage({ id: 'delete-argument' })}
       />
       <ArgumentDeleteModal argument={argument} show={isDeleting} onClose={closeDeleteModal} />{' '}
       <ShareButtonDropdown

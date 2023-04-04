@@ -47,7 +47,8 @@ const OpinionDelete = ({ opinion, user }: Props) => {
         id="opinion-delete"
         className="pull-right btn--outline btn-danger"
         onClick={onOpen}
-        style={{ marginLeft: '5px' }}>
+        style={{ marginLeft: '5px' }}
+        aria-label={intl.formatMessage({ id: 'delete-proposal' })}>
         <i className="cap cap-bin-2" /> <FormattedMessage id="global.delete" />
       </Button>
       <Modal

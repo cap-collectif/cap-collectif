@@ -136,7 +136,9 @@ class OpinionInfos extends React.Component<Props> {
     const { opinion } = this.props;
     return (
       <div className="opinion__user">
-        {opinion.author && <UserLink user={opinion.author} className="excerpt_dark" />}
+        {opinion.author && (
+          <UserLink user={opinion.author} className="excerpt_dark" ariaLabel="proposal-author" />
+        )}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
