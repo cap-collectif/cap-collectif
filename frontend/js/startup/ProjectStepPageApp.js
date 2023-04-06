@@ -107,6 +107,12 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             <CustomStepPage stepId={props.stepId} />
           </Suspense>
         </Route>
+        <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+          <Suspense fallback={<BasicStepFallback />}>
+            <CustomStepPage stepId={props.stepId} />
+          </Suspense>
+        </Route>
         <Route
           exact
           path={[

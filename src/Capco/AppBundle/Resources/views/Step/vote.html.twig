@@ -1,0 +1,41 @@
+{% extends '@CapcoApp/Project/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
+    {% set image %}
+        {% if project.cover %}
+            {{ media_public_url(project.cover, 'default_blockHeader') }}
+        {% endif %}
+    {% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       title,
+        'type':        'project',
+        'image':       image,
+        'author':      is_feature_enabled('profiles') ? url('capco_user_profile_show_all', {'slug': project.firstAuthor.slug}) : null,
+        'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
+        'url':         url('app_project_show_selection', {'projectSlug': project.slug, 'stepSlug': currentStep.slug})
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ project.title }}
+{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block details %}
+    {{ react_render_component('ProjectStepPageApp', { 'props': {
+        'stepId': currentStep.id|toGlobalId('SelectionStep'),
+        'projectId': project.id|toGlobalId('Project'),
+        'projectSlug': project.slug,
+        'platformLocale': capco_default_locale_code(),
+    } }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+{% endblock %}

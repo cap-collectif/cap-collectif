@@ -55,6 +55,7 @@ app_project_show_questionnaire_reply: '/project/{projectSlug}/questionnaire/{ste
 app_project_show_questionnaire_trailing_slash: '/project/{projectSlug}/questionnaire/{stepSlug}/'
 app_project_show_ranking: '/project/{projectSlug}/ranking/{stepSlug}'
 app_project_show_selection: '/project/{projectSlug}/selection/{stepSlug}'
+app_project_show_vote: '/project/{projectSlug}/vote/{stepSlug}'
 app_project_show_stats: '/projects/{projectSlug}/stats'
 app_project_show_step: '/project/{projectSlug}/step/{stepSlug}'
 app_project_show_synthesis: '/project/{projectSlug}/synthesis/{stepSlug}'

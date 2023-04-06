@@ -395,6 +395,32 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}/vote/{stepSlug}", name="app_project_show_vote")
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     * @Entity("step", class="CapcoAppBundle:Steps\SelectionStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     * @Template("CapcoAppBundle:Step:vote.html.twig")
+     */
+    public function showVoteStepAction(Project $project, SelectionStep $step)
+    {
+
+        $viewer = $this->getUser();
+        if (!$project->viewerCanSee($viewer)) {
+            return $this->redirect403();
+        }
+
+        return [
+            'project' => $project,
+            'currentStep' => $step,
+            'proposalForm' => null,
+            'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
+        ];
+    }
+
+    /**
      * @Route("/project/{projectSlug}/consultation/{stepSlug}/consultation/{consultationSlug}", name="app_project_consultations_show_consultation")
      * @Route("/projects/{projectSlug}/consultation/{stepSlug}", name="app_project_show")
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
