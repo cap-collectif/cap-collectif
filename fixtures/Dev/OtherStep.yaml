@@ -26,3 +26,12 @@ Capco\AppBundle\Entity\Steps\OtherStep:
         endAt: <(new \DateTime('2015-11-20'))>
         #TODO Fix Fixture Body without segFaulting on M1 configuration
         body: 'Insert Long Text here'
+    otherStepHiddenWithoutEndDate:
+        id: otherStepHiddenWithoutEndDate
+        title: Etape caché non publié sans date de fin
+        label: Etape caché non publié sans date de fin
+        isEnabled: false
+        startAt: <(new \DateTime('2015-10-20'))>
+        endAt: null
+        #TODO Fix Fixture Body without segFaulting on M1 configuration
+        body: 'Insert Long Text here'

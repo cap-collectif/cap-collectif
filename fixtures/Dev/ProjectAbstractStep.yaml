@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         id: pas3
         step: '@cstep3'
         project: '@p3'
-        position: 1
+        position: 2
     pas4:
         id: pas4
         step: '@cstep4'
@@ -33,7 +33,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         id: pas7
         step: '@ostep3'
         project: '@p3'
-        position: 2
+        position: 3
     pas8:
         id: pas8
         step: '@pstep1'
@@ -479,3 +479,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectstepOrga'
         project: '@rapportEvaluation'
         position: 2
+    pasOtherStepHiddenWithoutEndDate:
+        id: pasOtherStepHiddenWithoutEndDate
+        step: '@otherStepHiddenWithoutEndDate'
+        project: '@p3'
+        position: 1

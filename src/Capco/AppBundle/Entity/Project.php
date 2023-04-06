@@ -405,7 +405,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     public function getFirstAuthor(): ?Owner
     {
         if ($this->authors && isset($this->authors[0])) {
-                return $this->authors[0]->getAuthor();
+            return $this->authors[0]->getAuthor();
         }
 
         return null;
@@ -760,35 +760,28 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
     public function getCurrentStep(): ?AbstractStep
     {
-        foreach ($this->steps as $step) {
-            if (
-                null !== $step &&
-                $step->getStep() &&
-                $step->getStep()->isOpen() &&
-                'presentation' !== $step->getStep()->getType()
-            ) {
-                return $step->getStep();
+        $steps = $this->getEnabledStepsExcludingPresentationStep();
+
+        if (empty($steps)) {
+            return null;
+        }
+
+        foreach ($steps as $step) {
+            if ($step->isOpen()) {
+                return $step;
             }
         }
-        foreach ($this->steps as $step) {
-            if (
-                null !== $step &&
-                $step->getStep() &&
-                $step->getStep()->isFuture() &&
-                'presentation' !== $step->getStep()->getType()
-            ) {
-                return $step->getStep();
+
+        foreach ($steps as $step) {
+            if ($step->isFuture()) {
+                return $step;
             }
         }
-        $reversedSteps = array_reverse($this->steps->toArray());
+
+        $reversedSteps = array_reverse($steps);
         foreach ($reversedSteps as $step) {
-            if (
-                null !== $step &&
-                $step->getStep() &&
-                $step->getStep()->isClosed() &&
-                'presentation' !== $step->getStep()->getType()
-            ) {
-                return $step->getStep();
+            if ($step->isClosed()) {
+                return $step;
             }
         }
 
@@ -1398,5 +1391,21 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         $this->emailingCampaigns = $emailingCampaigns;
 
         return $this;
+    }
+
+    private function getEnabledStepsExcludingPresentationStep(): array
+    {
+        $steps = [];
+        foreach ($this->steps as $projectStep) {
+            $step = $projectStep->getStep();
+            $isEnabled = $step->getEnabled();
+            $isPresentationStep = 'presentation' === $step->getType();
+            if ($isPresentationStep || !$isEnabled) {
+                continue;
+            }
+            $steps[] = $step;
+        }
+
+        return $steps;
     }
 }

@@ -173,6 +173,70 @@ Object {
 }
 `;
 
+exports[`Internal|Query projects fetches closed projects 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",
+          "title": "Débat du mois",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0V3lzaXd5Zw==",
+          "title": "Débat Wysiwyg",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0TXVsdGlEZWJhdGU=",
+          "title": "Débats sur la vie",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
+          "title": "Solidarité Covid-19",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0Mw==",
+          "title": "Transformation numérique des relations",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0R3JvdXAy",
+          "title": "Projet pour le group2",
+        },
+      },
+    ],
+    "totalCount": 6,
+  },
+}
+`;
+
 exports[`Internal|Query projects fetches non archived projects 1`] = `
 Object {
   "projects": Object {
