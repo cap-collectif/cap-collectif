@@ -94,7 +94,7 @@
                                             <tr>
                                                 <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
                                                     <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">
-                                                        {{ 'opinion' == proposal.type ? 'global.opinion' : 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
+                                                        {{ proposal.type is defined and 'opinion' == proposal.type ? 'global.opinion' : 'global.proposal'|trans({}, 'CapcoAppBundle', user_locale) }}
                                                     </span>
                                                     <ul style="list-style: none; padding:0; color: #000000;">
                                                         <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
@@ -116,7 +116,11 @@
                                                         {% if proposal.posts > 0 %}
                                                             <li>
                                                                 <span style="color: #000000;">
-                                                                    {{ 'new-article-count' | trans({'count': nbPosts, 'num': nbPosts}, 'CapcoAppBundle') }}
+                                                                    {% if nbPosts > 1 %}
+                                                                        {{ 'new-article-count' | trans({'count': nbPosts, 'num': nbPosts}, 'CapcoAppBundle') }}
+                                                                    {% else %}
+                                                                        <a href='{{ url('app_blog_show', { 'slug': proposal.posts[0].slug }) }}'>{{ 'new-article-count' | trans({'count': nbPosts, 'num': nbPosts}, 'CapcoAppBundle') }}</a>
+                                                                    {% endif %}
                                                                 </span>
                                                             </li>
                                                         {% endif %}

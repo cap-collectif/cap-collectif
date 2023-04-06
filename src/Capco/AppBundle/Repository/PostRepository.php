@@ -53,7 +53,7 @@ class PostRepository extends EntityRepository
             ->setParameter('from', $from)
             ->setParameter('to', $to);
 
-        return $query->getQuery()->getArrayResult();
+        return $query->getQuery()->getResult();
     }
 
     public function getOrderedPublishedPostsByProposal(
@@ -319,22 +319,6 @@ class PostRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
-    {
-        return $this->createQueryBuilder($alias)
-            ->andWhere($alias . '.isPublished = true')
-            ->andWhere($alias . '.publishedAt <= :now')
-            ->setParameter('now', new \DateTime());
-    }
-
-    private function createPublishedPostsByProposalQB(Proposal $proposal): QueryBuilder
-    {
-        return $this->getIsPublishedQueryBuilder()
-            ->leftJoin('p.proposals', 'proposal')
-            ->andWhere('proposal.id = :id')
-            ->setParameter('id', $proposal->getId());
-    }
-
     public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
     {
         return $this->getByOwnerQueryBuilder($owner, $options)
@@ -351,6 +335,23 @@ class PostRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
+    {
+        return $this->createQueryBuilder($alias)
+            ->andWhere($alias . '.isPublished = true')
+            ->andWhere($alias . '.publishedAt <= :now')
+            ->setParameter('now', new \DateTime());
+    }
+
+    private function createPublishedPostsByProposalQB(Proposal $proposal): QueryBuilder
+    {
+        return $this->getIsPublishedQueryBuilder()
+            ->leftJoin('p.proposals', 'proposal')
+            ->andWhere('proposal.id = :id')
+            ->setParameter('id', $proposal->getId());
+    }
+
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
     {
         $ownerField = $owner instanceof User ? 'p.owner' : 'p.organizationOwner';
@@ -378,5 +379,4 @@ class PostRepository extends EntityRepository
 
         return $qb;
     }
-
 }
