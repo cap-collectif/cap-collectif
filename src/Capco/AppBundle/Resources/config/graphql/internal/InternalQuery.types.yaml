@@ -320,7 +320,7 @@ InternalQuery:
                         description: 'Filter by name.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
             allContributors:
-                description: 'List all the contributors in the platform.'
+                description: 'List all the contributors in the platform, totalCount includes anon replies and votes.'
                 type: 'InternalUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'

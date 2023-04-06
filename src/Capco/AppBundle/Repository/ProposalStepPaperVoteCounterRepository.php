@@ -38,4 +38,12 @@ class ProposalStepPaperVoteCounterRepository extends EntityRepository
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project);
     }
+
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('pspvc')
+            ->select('SUM(pspvc.totalCount)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
 }

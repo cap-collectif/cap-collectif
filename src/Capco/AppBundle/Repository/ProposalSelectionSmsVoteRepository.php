@@ -10,7 +10,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalSelectionSmsVoteRepository extends EntityRepository
 {
-
     public function getByTokenAndStep(
         SelectionStep $step,
         string $token,
@@ -59,9 +58,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countPublishedSelectionVoteByStep(
-        SelectionStep $step
-    ): int {
+    public function countPublishedSelectionVoteByStep(SelectionStep $step): int
+    {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv.id)')
             ->andWhere('pv.selectionStep = :step')
@@ -79,9 +77,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function countDistinctPhonePublishedSelectionVoteByStep(
-        SelectionStep $step
-    ): int {
+    public function countDistinctPhonePublishedSelectionVoteByStep(SelectionStep $step): int
+    {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(DISTINCT pv.phone)')
             ->andWhere('pv.selectionStep = :step')
@@ -97,5 +94,13 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
     }
 }

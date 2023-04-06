@@ -10,6 +10,10 @@ use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\Enum\UserOrderField;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserRepository;
 use Elastica\Index;
@@ -26,18 +30,30 @@ class UserSearch extends Search
     private UserRepository $userRepo;
     private EventSearch $eventSearch;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private ReplyAnonymousRepository $replyAnonymousRepository;
+    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository;
 
     public function __construct(
         Index $index,
         UserRepository $userRepo,
         EventSearch $eventSearch,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        ReplyAnonymousRepository $replyAnonymousRepository,
+        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository
     ) {
         parent::__construct($index);
         $this->userRepo = $userRepo;
         $this->eventSearch = $eventSearch;
         $this->type = 'user';
         $this->authorizationChecker = $authorizationChecker;
+        $this->replyAnonymousRepository = $replyAnonymousRepository;
+        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
+        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
+        $this->paperVoteCounterRepository = $paperVoteCounterRepository;
     }
 
     public function getRegisteredUsers(
@@ -456,10 +472,39 @@ class UserSearch extends Search
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
+        $questionnaireAnonymousRepliesCount = $this->getAnonymousQuestionnaireRepliesCount();
+        $proposalSmsAnonymousVotesCount = $this->getProposalSmsAnonymousVotesCount();
+        $paperVotesCount = $this->getPaperVotesCount();
+
+        $totalCount =
+            $resultSet->getTotalHits() +
+            $questionnaireAnonymousRepliesCount +
+            $proposalSmsAnonymousVotesCount +
+            $paperVotesCount
+        ;
+
         return [
             'results' => $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet),
-            'totalCount' => $resultSet->getTotalHits(),
+            'totalCount' => $totalCount,
         ];
+    }
+
+    private function getAnonymousQuestionnaireRepliesCount(): int
+    {
+        return $this->replyAnonymousRepository->countAll();
+    }
+
+    private function getProposalSmsAnonymousVotesCount(): int
+    {
+        $selectionTotalCount = $this->proposalSelectionSmsVoteRepository->countAll();
+        $collectTotalCount = $this->proposalCollectSmsVoteRepository->countAll();
+
+        return $selectionTotalCount + $collectTotalCount;
+    }
+
+    private function getPaperVotesCount(): int
+    {
+        return $this->paperVoteCounterRepository->countAll();
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult

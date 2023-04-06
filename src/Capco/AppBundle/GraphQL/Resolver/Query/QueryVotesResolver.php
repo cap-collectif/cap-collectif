@@ -3,10 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepPointsVotesCountResolver;
+use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -25,6 +27,7 @@ class QueryVotesResolver implements ResolverInterface
     protected StepPointsVotesCountResolver $stepPointsVotesCountResolver;
     protected PromiseAdapterInterface $adapter;
     private VoteSearch $voteSearch;
+    private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
 
     public function __construct(
         AbstractVoteRepository $votesRepository,
@@ -32,7 +35,8 @@ class QueryVotesResolver implements ResolverInterface
         StepVotesCountResolver $stepVotesCountResolver,
         StepPointsVotesCountResolver $stepPointsVotesCountResolver,
         VoteSearch $voteSearch,
-        PromiseAdapterInterface $adapter
+        PromiseAdapterInterface $adapter,
+        ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository
     ) {
         $this->votesRepository = $votesRepository;
         $this->projectsResolver = $projectsResolver;
@@ -40,6 +44,7 @@ class QueryVotesResolver implements ResolverInterface
         $this->stepPointsVotesCountResolver = $stepPointsVotesCountResolver;
         $this->adapter = $adapter;
         $this->voteSearch = $voteSearch;
+        $this->proposalStepPaperVoteCounterRepository = $proposalStepPaperVoteCounterRepository;
     }
 
     public function __invoke(Argument $args): Connection
@@ -50,6 +55,9 @@ class QueryVotesResolver implements ResolverInterface
         foreach ($this->projectsResolver->resolve($projectArgs)->getEdges() as $edge) {
             $totalCount += $this->countProjectVotes($edge->getNode(), $onlyAccounted);
         }
+
+        $paperVotesCount = $this->proposalStepPaperVoteCounterRepository->countAll();
+        $totalCount += $paperVotesCount;
 
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];

@@ -47,7 +47,6 @@ class ProposalCollectSmsVoteRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-
     public function countByTokenAndStep(CollectStep $step, string $token): int
     {
         return $this->createQueryBuilder('pv')
@@ -87,4 +86,11 @@ class ProposalCollectSmsVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
 }

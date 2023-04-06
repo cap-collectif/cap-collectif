@@ -29,4 +29,12 @@ class ReplyAnonymousRepository extends EntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('q')
+            ->select('COUNT(q.id)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
 }

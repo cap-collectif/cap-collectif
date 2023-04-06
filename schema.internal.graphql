@@ -12543,7 +12543,9 @@ type Query {
     name: String = null
   ): ProjectDistrictConnection!
 
-  """List all the contributors in the platform."""
+  """
+  List all the contributors in the platform, totalCount includes anon replies and votes.
+  """
   allContributors(
     """
     Returns the elements in the list that come after the specified cursor.
