@@ -17,6 +17,7 @@ import ProposalPage from '~/components/Proposal/Page/ProposalPage';
 import { getBaseLocale } from '~/utils/router';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import ProjectTrashButton from '~/components/Project/ProjectTrashButton';
+import VoteStepPage from '~/components/VoteStep/VoteStepPage';
 
 const ProjectHeader = ({
   projectId,
@@ -107,12 +108,6 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             <CustomStepPage stepId={props.stepId} />
           </Suspense>
         </Route>
-        <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
-          <Suspense fallback={<BasicStepFallback />}>
-            <CustomStepPage stepId={props.stepId} />
-          </Suspense>
-        </Route>
         <Route
           exact
           path={[
@@ -142,6 +137,10 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             currentVotableStepId={props.currentVotableStepId}
             platformLocale={platformLocale}
           />
+        </Route>
+        <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
+          <ScrollToTop />
+          <VoteStepPage stepId={props.stepId} projectId={props.projectId} />
         </Route>
       </Switch>
     </>

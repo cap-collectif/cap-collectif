@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepHeader /> <TestProjectStepHeader /> should render correctly 1`] = `
+<div
+  className="sc-bdnxRM cvogHf"
+  id="step-header"
+>
+  <div
+    className="sc-bdnxRM bWSfcu"
+  >
+    <div
+      className="sc-bdnxRM"
+    >
+      <h2
+        className="sc-bdnxRM btZBcP cap-heading"
+      >
+        Budget participatif 2022
+      </h2>
+      <h1
+        className="sc-bdnxRM jzNpJS cap-heading"
+      >
+        Votez pour vos projets favoris
+      </h1>
+    </div>
+    <div
+      className="sc-bdnxRM fIXKle"
+    >
+      <div
+        className="sc-bdnxRM fGHGuM"
+      >
+        <div
+          className="sc-bdnxRM cugjYu cap-text"
+        >
+          global.vote
+        </div>
+        <div
+          className="sc-bdnxRM jSAkBW cap-text"
+        >
+          147529
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM fGHGuM"
+      >
+        <div
+          className="sc-bdnxRM cugjYu cap-text"
+        >
+          capco.section.metrics.participants
+        </div>
+        <div
+          className="sc-bdnxRM jSAkBW cap-text"
+        >
+          51472
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM fGHGuM"
+      >
+        <div
+          className="sc-bdnxRM cugjYu cap-text"
+        >
+          admin.group.moderation
+        </div>
+        <div
+          className="sc-bdnxRM jSAkBW cap-text"
+        >
+          8488
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    id="step-header__nav"
+  />
+</div>
+`;
