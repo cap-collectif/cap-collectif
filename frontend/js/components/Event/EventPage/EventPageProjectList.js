@@ -113,7 +113,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
           <Box as="a" flexDirection="row" href={getUrl(project)} style={{ textDecoration: 'none' }}>
             <Card
               bg="white"
-              p={2}
+              p={isMobile ? 0 : 2}
               height="94px"
               width="100%"
               flexDirection="row"
@@ -125,7 +125,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
               style={{ borderRadius: '8px', boxShadow: 'none' }}>
               <Box
                 overflow="hidden"
-                css={{
+                style={{
                   background: project.cover?.url
                     ? `url(${project.cover?.url})`
                     : colors['neutral-gray']['700'],
@@ -139,15 +139,22 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                 width="112px">
                 {!project.cover?.url && <DefaultProjectImage isNewCard />}
               </Box>
-              <Flex direction="column" bg="white" ml={4} flex={1} overflow="hidden">
+              <Flex
+                direction="column"
+                bg="white"
+                ml={4}
+                flex={1}
+                overflow="hidden"
+                height={isMobile ? '100%' : 'auto'}
+                justifyContent={isMobile ? 'space-around' : 'initial'}>
                 <Heading
-                  truncate={100}
+                  truncate={isMobile ? 30 : 70}
                   height="24px"
                   as="h4"
                   fontSize="3"
                   fontWeight={FontWeight.Semibold}
                   color={project.archived ? 'gray.500' : 'neutral-gray.900'}
-                  lineHeight={LineHeight.Base}
+                  lineHeight={isMobile ? 'initial' : LineHeight.Base}
                   mb={2}>
                   {project.title}
                 </Heading>
@@ -163,12 +170,11 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                         <Icon name={CapUIIcon.PinO} size={CapUIIconSize.Sm} />
                         <Text
                           as="span"
-                          css={{
+                          truncate={30}
+                          style={{
                             whiteSpace: 'nowrap',
                             fontSize: '13px',
                             fontWeight: '400',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
                             color: project.archived
                               ? colors['neutral-gray']['400']
                               : colors.gray['700'],
@@ -184,12 +190,11 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                         <Icon name={CapUIIcon.BookStarO} size={CapUIIconSize.Sm} />
                         <Text
                           as="span"
-                          css={{
+                          truncate={20}
+                          style={{
                             whiteSpace: 'nowrap',
                             fontSize: '13px',
                             fontWeight: '400',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
                             color: project.archived ? colors.gray['700'] : project.type?.color,
                           }}>
                           {intl.formatMessage({ id: project.type.title })}
@@ -201,12 +206,11 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                         <Icon name={CapUIIcon.FolderO} size={CapUIIconSize.Sm} />
                         <Text
                           as="span"
-                          css={{
+                          truncate={20}
+                          style={{
                             whiteSpace: 'nowrap',
                             fontSize: '13px',
                             fontWeight: '400',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
                             color: project.archived
                               ? colors['neutral-gray']['400']
                               : colors.gray['700'],

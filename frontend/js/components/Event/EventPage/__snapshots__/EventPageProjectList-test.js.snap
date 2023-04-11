@@ -31,10 +31,19 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
         }
       >
         <div
-          className="sc-bdnxRM EventPageProjectList___StyledBox-eWbyLV iknDBY dFYqSf"
+          className="sc-bdnxRM iknDBY"
+          style={
+            Object {
+              "background": "url(https://capco.dev/media/default/0001/01/providerReference1.jpg)",
+              "backgroundSize": "cover",
+              "borderRadius": "8px",
+              "filter": null,
+              "opacity": null,
+            }
+          }
         />
         <div
-          className="sc-bdnxRM eZGWOu"
+          className="sc-bdnxRM jvZZvC"
         >
           <h4
             className="sc-bdnxRM dIePFG cap-heading"
@@ -70,9 +79,18 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <span
-                className="EventPageProjectList___StyledText-eFGTA-d kDiuuX"
+                className="sc-bdnxRM ipdWIi cap-text"
+                style={
+                  Object {
+                    "color": "#545E68",
+                    "fontSize": "13px",
+                    "fontWeight": "400",
+                    "whiteSpace": "nowrap",
+                  }
+                }
+                title="Premier Quartier • Deuxième Quartier"
               >
-                Premier Quartier • Deuxième Quartier
+                Premier Quartier • Deuxième Qu…
               </span>
             </div>
             <div
@@ -101,9 +119,18 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <span
-                className="EventPageProjectList___StyledText2-lhirYX bCCroO"
+                className="sc-bdnxRM ipdWIi cap-text"
+                style={
+                  Object {
+                    "color": "#5cb85c",
+                    "fontSize": "13px",
+                    "fontWeight": "400",
+                    "whiteSpace": "nowrap",
+                  }
+                }
+                title="project.types.interpellation"
               >
-                project.types.interpellation
+                project.types.interp…
               </span>
             </div>
             <div
@@ -125,7 +152,16 @@ exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render cor
                 />
               </svg>
               <span
-                className="EventPageProjectList___StyledText3-dRNZYq bxTibm"
+                className="sc-bdnxRM ipdWIi cap-text"
+                style={
+                  Object {
+                    "color": "#545E68",
+                    "fontSize": "13px",
+                    "fontWeight": "400",
+                    "whiteSpace": "nowrap",
+                  }
+                }
+                title="Immobilier, Justice"
               >
                 Immobilier, Justice
               </span>
