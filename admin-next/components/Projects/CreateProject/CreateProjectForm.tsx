@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box, Button, FormLabel, Text, toast } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useForm } from 'react-hook-form';
@@ -18,8 +18,8 @@ import { PreConfigureProjectMutationResponse } from '@relay/PreConfigureProjectM
 type ProjectModelType = 'PARTICIPATORY_BUDGET';
 
 type Props = {
-    viewer: CreateProjectForm_viewer$key,
-    setShowHelpMessage: (showHelpMessage: boolean) => void,
+    viewer: CreateProjectForm_viewer$key;
+    setShowHelpMessage: (showHelpMessage: boolean) => void;
 };
 
 type ProjectResponse = { adminAlphaUrl: string } | null | undefined;
@@ -27,9 +27,9 @@ type ProjectResponse = { adminAlphaUrl: string } | null | undefined;
 type MutationResponse = CreateProjectMutationResponse | PreConfigureProjectMutationResponse | null;
 
 type FormValues = {
-    title: string,
-    authors: Array<{ label: string, value: string }>,
-    model: ProjectModelType | null,
+    title: string;
+    authors: Array<{ label: string; value: string }>;
+    model: ProjectModelType | null;
 };
 
 const VIEWER_FRAGMENT = graphql`
@@ -50,6 +50,8 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
     const intl = useIntl();
     const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
     const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext();
+
+    const inputTitleRef = useRef<HTMLInputElement | null>(null);
 
     const { isOnlyProjectAdmin } = viewer;
     const organization = viewer?.organizations?.[0];
@@ -92,7 +94,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
         },
     ];
 
-    React.useEffect(() => {
+    useEffect(() => {
         setBreadCrumbItems(breadCrumbItems);
         return () => setBreadCrumbItems([]);
     }, [setBreadCrumbItems, title]);
@@ -100,6 +102,12 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
     useEffect(() => {
         triggerNavBarSaving(isSubmitting);
     }, [isSubmitting]);
+
+    useEffect(() => {
+        if (inputTitleRef.current) {
+            inputTitleRef.current.focus();
+        }
+    }, []);
 
     const onSubmit = async (values: FormValues) => {
         const authors = formatSubmitted(values.authors);
@@ -149,74 +157,79 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
     };
 
     return (
-        <Box width="50%">
-            <Text color="blue.900" fontSize={5} fontWeight={600} mb={4}>
-                {intl.formatMessage({ id: 'customize-your-new-project' })}
-            </Text>
-            <Text color="blue.900" fontSize={4} fontWeight={400}>
-                {intl.formatMessage({ id: 'create-project-help-text' })}
-            </Text>
-            <Box mt={5} as="form" maxWidth="437px" onSubmit={handleSubmit(onSubmit)}>
-                <FormControl name="title" control={control} isRequired>
-                    <FormLabel
-                        htmlFor="title"
-                        label={intl.formatMessage({ id: 'global.project.name' })}
-                    />
-                    <FieldInput
-                        data-cy="create-project-modal-title"
-                        id="title"
-                        name="title"
+        <Box>
+            <Box maxWidth="437px">
+                <Text color="blue.900" fontSize={5} fontWeight={600} mb={4}>
+                    {intl.formatMessage({ id: 'customize-your-new-project' })}
+                </Text>
+                <Text color="blue.900" fontSize={4} fontWeight={400} width="100%">
+                    {intl.formatMessage({ id: 'create-project-help-text' })}
+                </Text>
+                <Box mt={5} as="form" onSubmit={handleSubmit(onSubmit)}>
+                    <FormControl name="title" control={control} isRequired>
+                        <FormLabel
+                            htmlFor="title"
+                            label={intl.formatMessage({ id: 'global.project.name' })}
+                        />
+                        <FieldInput
+                            ref={inputTitleRef}
+                            data-cy="create-project-modal-title"
+                            id="title"
+                            name="title"
+                            control={control}
+                            type="text"
+                            onFocus={() => {
+                                setShowHelpMessage(true);
+                            }}
+                            onBlur={() => {
+                                setShowHelpMessage(false);
+                            }}
+                        />
+                    </FormControl>
+                    <FormControl
+                        name="authors"
                         control={control}
-                        type="text"
-                        onFocus={() => {
-                            setShowHelpMessage(true);
-                        }}
-                        onBlur={() => {
-                            setShowHelpMessage(false);
-                        }}
-                    />
-                </FormControl>
-                <FormControl
-                    name="authors"
-                    control={control}
-                    isRequired
-                    isDisabled={isOnlyProjectAdmin || !!organization}
-                    data-cy="create-project-modal-authors">
-                    <FormLabel
-                        htmlFor="authors"
-                        label={intl.formatMessage({ id: 'project.owner' })}
-                    />
-                    <UserListField name="authors" control={control} isMulti />
-                </FormControl>
-                <FormControl name="model" control={control}>
-                    <FormLabel htmlFor="model" label={intl.formatMessage({ id: 'global.model' })}>
-                        <Text color="gray.500">
-                            {intl.formatMessage({ id: 'global.optional' })}
-                        </Text>
-                    </FormLabel>
-                    <FieldInput
-                        name="model"
-                        control={control}
-                        options={modelOptions}
-                        type="select"
-                        clearable
-                        placeholder={intl.formatMessage({
-                            id: 'global.model',
-                        })}
-                    />
-                </FormControl>
-                <Button
-                    data-cy="create-project-create-button"
-                    mt={5}
-                    variant="primary"
-                    variantColor="primary"
-                    variantSize="big"
-                    mr={8}
-                    type="submit"
-                    isLoading={isSubmitting}
-                    disabled={!isValid}>
-                    {intl.formatMessage({ id: 'lets-go' })}
-                </Button>
+                        isRequired
+                        isDisabled={isOnlyProjectAdmin || !!organization}
+                        data-cy="create-project-modal-authors">
+                        <FormLabel
+                            htmlFor="authors"
+                            label={intl.formatMessage({ id: 'project.owner' })}
+                        />
+                        <UserListField name="authors" control={control} isMulti />
+                    </FormControl>
+                    <FormControl name="model" control={control}>
+                        <FormLabel
+                            htmlFor="model"
+                            label={intl.formatMessage({ id: 'global.model' })}>
+                            <Text color="gray.500">
+                                {intl.formatMessage({ id: 'global.optional' })}
+                            </Text>
+                        </FormLabel>
+                        <FieldInput
+                            name="model"
+                            control={control}
+                            options={modelOptions}
+                            type="select"
+                            clearable
+                            placeholder={intl.formatMessage({
+                                id: 'global.model',
+                            })}
+                        />
+                    </FormControl>
+                    <Button
+                        data-cy="create-project-create-button"
+                        mt={5}
+                        variant="primary"
+                        variantColor="primary"
+                        variantSize="big"
+                        mr={8}
+                        type="submit"
+                        isLoading={isSubmitting}
+                        disabled={!isValid}>
+                        {intl.formatMessage({ id: 'lets-go' })}
+                    </Button>
+                </Box>
             </Box>
         </Box>
     );

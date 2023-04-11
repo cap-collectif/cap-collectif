@@ -11,10 +11,10 @@ import { Flex, Search, Spinner, CapUIIconSize, CapUIIcon, Button } from '@cap-co
 import { PageProps } from '../types';
 import Layout from '../components/Layout/Layout';
 import { useIntl } from 'react-intl';
-import ProjectListNoResult from 'components/Projects/ProjectListNoResult';
 import TablePlaceholder from 'components/UI/Table/TablePlaceholder';
 import ProjectList from 'components/Projects/ProjectList';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
+import CreateProject from "@components/Projects/CreateProject/CreateProject";
 
 export const projectsQuery = graphql`
     query projectsQuery(
@@ -41,6 +41,7 @@ export const projectsQuery = graphql`
                         orderBy: $orderBy
                     )
             }
+            ...CreateProject_viewer
             ...ProjectList_viewer
             ...ProjectList_projectOwner
                 @arguments(
@@ -112,7 +113,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                     </React.Suspense>
                 </Flex>
             ) : (
-                <ProjectListNoResult />
+                <CreateProject viewer={viewer}/>
             )}
         </Flex>
     );

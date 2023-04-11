@@ -511,4 +511,4 @@ const CreateProjectIllustration: React.FC = () => {
     )
 }
 
-export default CreateProjectIllustration
+export default CreateProjectIllustration;
