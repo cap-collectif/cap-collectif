@@ -140,6 +140,7 @@ Scenario: Admin wants to get votes for a question in a selection step
   }
   """
 
+@dev
 Scenario: Admin wants to get votes for a proposal with secret ballot
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -182,46 +183,49 @@ Scenario: Admin wants to get votes for a proposal with secret ballot
   Then the JSON response should match:
   """
   {
-     "data":{
-        "selectionStep":{
-           "id":"U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
-           "isSecretBallot":true,
-           "canDisplayBallot":false,
-           "proposals":{
-              "totalCount":2,
-              "edges":[
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
-                       "votes":{
-                          "totalCount":0,
-                          "edges":[
-
-                          ]
-                       }
+    "data": {
+      "selectionStep": {
+        "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+        "isSecretBallot": true,
+        "canDisplayBallot": false,
+        "proposals": {
+          "totalCount": 2,
+          "edges": [
+            {
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
+                "votes": {
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
+                "votes": {
+                  "totalCount": 2,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1063"
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1065"
+                      }
                     }
-                 },
-                 {
-                    "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
-                       "votes":{
-                          "totalCount":1,
-                          "edges":[
-                             {
-                                "node":{
-                                   "id":"@string@"
-                                }
-                             }
-                          ]
-                       }
-                    }
-                 }
-              ]
-           },
-           "form":{
-              "objectType":"PROPOSAL"
-           }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "form": {
+          "objectType": "PROPOSAL"
         }
-     }
+      }
+    }
   }
   """

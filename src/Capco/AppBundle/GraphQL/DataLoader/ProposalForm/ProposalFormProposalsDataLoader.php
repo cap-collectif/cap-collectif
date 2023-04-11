@@ -142,6 +142,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['status'],
             $filters['trashedStatus'],
             $filters['includeDraft'],
+            $filters['excludeViewerVotes'],
         ) = [
             $args->offsetGet('term'),
             $args->offsetGet('includeUnpublished'),
@@ -158,6 +159,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('status'),
             $args->offsetGet('trashedStatus'),
             $args->offsetGet('includeDraft'),
+            $args->offsetGet('excludeViewerVotes'),
         ];
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
         if (!$form->getStep()) {

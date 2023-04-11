@@ -1,5 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Preview|SelectionStep.proposals fetches the proposals from a selection step with excludeViewerVotes filter 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "userType": Object {
+                "id": "1",
+                "name": "Citoyen",
+              },
+            },
+            "status": null,
+            "title": "Proposition pour tester le doublon",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "author": Object {
+              "userType": null,
+            },
+            "status": null,
+            "title": "Proposition par un utilisateur France Connect",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "email": "user@test.com",
+                      "id": "VXNlcjp1c2VyNQ==",
+                    },
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "email": "lbrunet@cap-collectif.com",
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+    "title": "Vote des Franciliens",
+  },
+}
+`;
+
+exports[`Preview|SelectionStep.proposals fetches the proposals from a selection step with excludeViewerVotes filter 2`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "author": Object {
+              "userType": Object {
+                "id": "1",
+                "name": "Citoyen",
+              },
+            },
+            "status": null,
+            "title": "Proposition pour tester le doublon",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+    "title": "Vote des Franciliens",
+  },
+}
+`;
+
 exports[`Preview|SelectionStep.proposals fetches the proposals from a selection step with status 4 & type 1 filters 1`] = `
 Object {
   "node": Object {
@@ -19,6 +106,9 @@ Object {
               "name": "Soumis au vote",
             },
             "title": "Ravalement de la façade de la bibliothèque municipale",
+            "votes": Object {
+              "edges": Array [],
+            },
           },
         },
       ],
@@ -48,6 +138,18 @@ Object {
               "name": "Vote gagné",
             },
             "title": "Rénovation du gymnase",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "email": null,
+                      "id": "VXNlcjp1c2VyQWRtaW4=",
+                    },
+                  },
+                },
+              ],
+            },
           },
         },
       ],

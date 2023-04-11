@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
                 ]
             serialized_name: proposal
         user:
-            groups: [ProposalSelectionVotes]
+            groups: [ProposalSelectionVotes, ElasticsearchProposal]
         username:
             groups: [ProposalSelectionVotes]
         private:

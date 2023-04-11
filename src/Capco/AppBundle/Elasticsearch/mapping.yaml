@@ -201,6 +201,9 @@ mappings:
             properties:
                 id: { type: keyword }
                 slug: { type: keyword }
+        selection_votes:
+            properties:
+                user: *Author
         translations:
             properties:
                 locale: { type: keyword }

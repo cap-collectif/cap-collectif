@@ -51,6 +51,9 @@ InternalWithProposals:
                     orderBy:
                         type: 'InternalProposalOrder'
                         defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
+                    excludeViewerVotes:
+                        type: 'Boolean'
+                        defaultValue: false
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'

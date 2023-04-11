@@ -9,6 +9,9 @@ Capco\AppBundle\Entity\Proposal:
                     ElasticsearchNestedProposal,
                     ElasticsearchVoteNestedProposal,
                 ]
+        getSelectionVotes:
+            serialized_name: selection_votes
+            groups: [ElasticsearchProposal]
         title:
             serialized_name: proposalTitle
             groups: [Proposals, ElasticsearchProposal]

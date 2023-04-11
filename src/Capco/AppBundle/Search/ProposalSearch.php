@@ -11,6 +11,7 @@ use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Enum\ProposalTrashedStatus;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
@@ -18,6 +19,7 @@ use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\ResultSet;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalSearch extends Search
 {
@@ -47,12 +49,14 @@ class ProposalSearch extends Search
     ];
 
     private ProposalRepository $proposalRepo;
+    private TokenStorageInterface $tokenStorage;
 
-    public function __construct(Index $index, ProposalRepository $proposalRepo)
+    public function __construct(Index $index, ProposalRepository $proposalRepo, TokenStorageInterface $tokenStorage)
     {
         parent::__construct($index);
         $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function searchProposalsByProject(
@@ -213,6 +217,14 @@ class ProposalSearch extends Search
                 ]);
             }
         }
+
+
+        $excludeViewerVotesFilter = $providedFilters['excludeViewerVotes'] ?? null;
+        if ($excludeViewerVotesFilter) {
+            $this->applyExcludeViewerVotesFilter($boolQuery);
+        }
+
+
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
@@ -761,5 +773,14 @@ class ProposalSearch extends Search
                     )
                 )
         );
+    }
+
+    private function applyExcludeViewerVotesFilter(BoolQuery $boolQuery): void
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if (!$user instanceof User) {
+            return;
+        }
+        $boolQuery->addMustNot(new Term(['selection_votes.user.id' => $user->getId()]));
     }
 }

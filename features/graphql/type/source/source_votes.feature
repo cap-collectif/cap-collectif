@@ -38,12 +38,12 @@ Scenario: Admin wants to get votes for a source
                 "edges": [
                     {
                         "node": {
-                            "id": "60002"
+                            "id": "60003"
                         }
                     },
                     {
                         "node": {
-                            "id": "60003"
+                            "id": "60002"
                         }
                     }
                 ]

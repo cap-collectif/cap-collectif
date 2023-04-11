@@ -1,11 +1,11 @@
-//* eslint-env jest */
+  //* eslint-env jest */
 const SelectionStepProposalsQuery = /* GraphQL */ `
-  query SelectionStepProposalsQuery($id: ID!, $userType: ID, $status: ID) {
+  query SelectionStepProposalsQuery($id: ID!, $userType: ID, $status: ID, $excludeViewerVotes: Boolean) {
     node(id: $id) {
       ... on SelectionStep {
         id
         title
-        proposals(first: 5, userType: $userType, status: $status) {
+        proposals(first: 5, userType: $userType, status: $status, excludeViewerVotes: $excludeViewerVotes) {
           totalCount
           edges {
             node {
@@ -20,6 +20,18 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
                 }
               }
               title
+              votes {
+                edges {
+                  node {
+                    ...on ProposalUserVote {
+                      author {
+                        id
+                        email
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -53,6 +65,37 @@ describe('Preview|SelectionStep.proposals', () => {
           status: 'status5',
         },
         'internal',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches the proposals from a selection step with excludeViewerVotes filter', async () => {
+
+    const variables = {
+      id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=',
+      userType: null,
+      status: null
+    };
+
+    await expect(
+      graphql(
+        SelectionStepProposalsQuery,
+        {
+          ...variables,
+          excludeViewerVotes: false
+        },
+        'internal_super_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+
+    await expect(
+      graphql(
+        SelectionStepProposalsQuery,
+        {
+          ...variables,
+          excludeViewerVotes: true
+        },
+        'internal_super_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

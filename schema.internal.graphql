@@ -2268,6 +2268,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
+    excludeViewerVotes: Boolean = false
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -9970,6 +9971,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
+    excludeViewerVotes: Boolean = false
 
     """
     ID of a Step to filter by. If non-null, filters proposals with the given step.
@@ -11253,6 +11255,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
+    excludeViewerVotes: Boolean = false
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -11952,6 +11955,7 @@ interface ProposalStep {
 
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
+    excludeViewerVotes: Boolean = false
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -14831,6 +14835,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
+    excludeViewerVotes: Boolean = false
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
