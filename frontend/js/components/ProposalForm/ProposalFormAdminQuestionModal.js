@@ -252,12 +252,16 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                 <option value="medias">
                   {intl.formatMessage({ id: 'global.question.types.medias' })}
                 </option>
-                <option value="siret">
-                  {intl.formatMessage({ id: 'global.question.types.siret' })}
-                </option>
-                <option value="rna">
-                  {intl.formatMessage({ id: 'global.question.types.rna' })}
-                </option>
+                {isSuperAdmin ? (
+                  <>
+                    <option value="siret">
+                      {intl.formatMessage({ id: 'global.question.types.siret' })}
+                    </option>
+                    <option value="rna">
+                      {intl.formatMessage({ id: 'global.question.types.rna' })}
+                    </option>
+                  </>
+                ) : null}
               </optgroup>
               <optgroup label={intl.formatMessage({ id: 'global.question.types.multiple_unique' })}>
                 <option value="button">
