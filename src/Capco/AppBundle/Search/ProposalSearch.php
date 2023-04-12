@@ -211,10 +211,18 @@ class ProposalSearch extends Search
             }
 
             if ($order) {
-                $query->setSort([
-                    $this->getProposalSort($order, $stepid),
-                    ['id' => new \stdClass()],
-                ]);
+                $sortParams = [];
+
+                $location = $providedFilters['location'] ?? null;
+                if ($location) {
+                    $locationSortParams = $this->applySortByLocation($location);
+                    $sortParams[] = $locationSortParams;
+                }
+
+                $sortParams[] = $this->getProposalSort($order, $stepid);
+                $sortParams[] = ['id' => new \stdClass()];
+
+                $query->setSort($sortParams);
             }
         }
 
@@ -782,5 +790,22 @@ class ProposalSearch extends Search
             return;
         }
         $boolQuery->addMustNot(new Term(['selection_votes.user.id' => $user->getId()]));
+    }
+
+    private function applySortByLocation(array $location): array
+    {
+        return [
+            '_geo_distance' => [
+                'location' => [
+                    'lat' => $location['lat'],
+                    'lon' => $location['lng']
+                ],
+                'order' => 'asc',
+                'unit' => 'km',
+                'mode' => 'min',
+                'distance_type' => 'arc',
+                'ignore_unmapped' => true
+            ]
+        ];
     }
 }

@@ -54,6 +54,9 @@ InternalWithProposals:
                     excludeViewerVotes:
                         type: 'Boolean'
                         defaultValue: false
+                    location:
+                        type: 'Location'
+                        description: 'Order proposals by proximity given a lat/lng to serve as a center.'
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'

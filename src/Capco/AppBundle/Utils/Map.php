@@ -45,6 +45,30 @@ final class Map
         return $address[0]['formatted_address'];
     }
 
+    public static function getLocation(string $addressString): ?array
+    {
+        $address = json_decode($addressString, true);
+        if (!\is_array($address)) {
+            return null;
+        }
+
+        return $address[0]['geometry']['location'] ?? null;
+    }
+
+    public static function getFormattedESLocation(string $addressString): ?array
+    {
+        $location = self::getLocation($addressString);
+
+        if (!$location) {
+            return null;
+        }
+
+        return [
+            'lat' => $location['lat'],
+            'lon' => $location['lng'],
+        ];
+    }
+
     public function reverserGeocodingAddress(float $lat, float $lng)
     {
         $this->checkApiKey();

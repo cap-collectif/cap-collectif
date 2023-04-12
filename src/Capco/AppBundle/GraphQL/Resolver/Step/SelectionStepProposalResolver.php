@@ -45,6 +45,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['progressStatus'],
             $filters['selectionStep'],
             $filters['excludeViewerVotes'],
+            $filters['location'],
             ) = [
             $args->offsetGet('orderBy')['field'],
             $args->offsetGet('orderBy')['direction'],
@@ -58,6 +59,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $args->offsetGet('progressStatus'),
             $selectionStep->getId(),
             $args->offsetGet('excludeViewerVotes'),
+            $args->offsetGet('location'),
         ];
 
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);

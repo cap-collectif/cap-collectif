@@ -2269,6 +2269,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
+
+    """Order proposals by proximity given a lat/lng to serve as a center."""
+    location: Location
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -7146,6 +7149,15 @@ input LocaleStatusInput {
   clientMutationId: String
 }
 
+"""A location lat/lng."""
+input Location {
+  """The latitude of this address."""
+  lat: Float!
+
+  """The longitude of this address."""
+  lng: Float!
+}
+
 """A logic jump in a question."""
 type LogicJump {
   id: ID!
@@ -9973,6 +9985,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
+    """Order proposals by proximity given a lat/lng to serve as a center."""
+    location: Location
+
     """
     ID of a Step to filter by. If non-null, filters proposals with the given step.
     """
@@ -11256,6 +11271,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
+
+    """Order proposals by proximity given a lat/lng to serve as a center."""
+    location: Location
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -11956,6 +11974,9 @@ interface ProposalStep {
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
+
+    """Order proposals by proximity given a lat/lng to serve as a center."""
+    location: Location
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -14836,6 +14857,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """The decision-maker's id assigned to the proposal"""
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
+
+    """Order proposals by proximity given a lat/lng to serve as a center."""
+    location: Location
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""

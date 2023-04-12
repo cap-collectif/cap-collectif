@@ -34,4 +34,13 @@ trait AddressableTrait
 
         return $value ?? '';
     }
+
+    public function getLocation(): ?array
+    {
+        if (!$this->address) {
+            return null;
+        }
+
+        return Map::getFormattedESLocation($this->address);
+    }
 }

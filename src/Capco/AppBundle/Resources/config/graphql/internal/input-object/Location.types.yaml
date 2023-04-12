@@ -1,0 +1,12 @@
+Location:
+    type: input-object
+    config:
+        name: Location
+        description: 'A location lat/lng.'
+        fields:
+            lat:
+                description: 'The latitude of this address.'
+                type: 'Float!'
+            lng:
+                description: 'The longitude of this address.'
+                type: 'Float!'

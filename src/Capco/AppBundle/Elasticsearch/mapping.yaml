@@ -191,7 +191,8 @@ mappings:
                 project: *Project
                 author: *Author
                 visible: { type: boolean }
-
+                location: { type: geo_point }
+        location: { type: geo_point }
         fullAddress: *text_analysis_highlighted
         startAt: { type: date }
         endAt: { type: date }
@@ -382,6 +383,7 @@ mappings:
         followedAt: { type: date }
 
         replyStatus: { type: keyword }
+
         #
         # This allow ous to monitore the usage of our API.
         #
