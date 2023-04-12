@@ -51,7 +51,6 @@ class OpinionTypeRepository extends EntityRepository
     public function getOrderedRootNodesQueryBuilder(?Consultation $consultation = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('ot')
-            ->andWhere('ot.parent is NULL')
             ->orderBy('ot.position', 'ASC');
         if ($consultation) {
             $qb->andWhere('ot.consultation = :c')->setParameter('c', $consultation);
