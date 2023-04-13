@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -51,7 +52,15 @@ class OpinionTypeRepository extends EntityRepository
     public function getOrderedRootNodesQueryBuilder(?Consultation $consultation = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('ot')
-            ->orderBy('ot.position', 'ASC');
+            ->addSelect('(COALESCE(p.position, ot.position) * 100 + (
+                    CASE
+                    WHEN p.position IS NULL THEN 0
+                    ELSE ot.position
+                END)) AS HIDDEN computed_position')
+            ->leftJoin('ot.parent', 'p', 'ot.parent = p.id')
+            ->addOrderBy('computed_position')
+            ->addOrderBy('ot.parent');
+
         if ($consultation) {
             $qb->andWhere('ot.consultation = :c')->setParameter('c', $consultation);
         } else {
