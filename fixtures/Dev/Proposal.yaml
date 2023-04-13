@@ -1151,3 +1151,191 @@ Capco\AppBundle\Entity\Proposal:
         reference: 143
         publishedAt: $createdAt
         undraftAt: $createdAt
+    proposalLocation1:
+        id: 'proposalLocation1'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : {"location" : {"lat" : 48.851456,"lng" : 2.396041},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 1'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2024-05-13 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation2:
+        id: 'proposalLocation2'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : {"location" : {"lat" : 48.835287,"lng" : 2.351826},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 2'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2020-05-18 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation3:
+        id: 'proposalLocation3'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : {"location" : {"lat" : 48.871362,"lng" : 2.372036},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 3'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2021-05-21 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation4:
+        id: 'proposalLocation4'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" : 
+        {"location" : {"lat" : 48.852045,"lng" : 2.3786136},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 4'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2021-01-20 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation5:
+        id: 'proposalLocation5'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :{"location" : {"lat" : 48.864754,"lng" : 2.402955},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 5'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2023-05-05 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation6:
+        id: 'proposalLocation6'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :{"location" : {"lat" : 48.871395,"lng" : 2.342379},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 6'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2020-03-23 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation7:
+        id: 'proposalLocation7'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :{"location" : {"lat" : 48.864754,"lng" : 2.402955},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 7'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation8:
+        id: 'proposalLocation8'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.891902,"lng" : 2.326378},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 8'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation9:
+        id: 'proposalLocation9'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.844897,"lng" : 2.282928},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 9'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2026-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation10:
+        id: 'proposalLocation10'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.882457,"lng" : 2.435540},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 10'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation11:
+        id: 'proposalLocation11'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.900754,"lng" : 2.296573},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 11'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation12:
+        id: 'proposalLocation12'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.816469,"lng" : 2.291482},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 12'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocation13:
+        id: 'proposalLocation13'
+        address: '[{"address_components" : [{"long_name" : "155","short_name" : "155","types" : [ "street_number" ]},{"long_name" : "Boulevard Saint-Germain","short_name" : "Boulevard Saint-Germain","types" : [ "route" ]},{"long_name" : "Paris","short_name" : "Paris","types" : [ "locality", "political" ]},{"long_name" : "Département de Paris","short_name" : "Département de Paris","types" : [ "administrative_area_level_2", "political" ]},{"long_name" : "Île-de-France","short_name" : "IDF","types" : [ "administrative_area_level_1", "political" ]},{"long_name" : "France","short_name" : "FR","types" : [ "country", "political" ]},{"long_name" : "75006","short_name" : "75006","types" : [ "postal_code" ]}],"formatted_address" : "155 Boulevard Saint-Germain, 75006 Paris, France","geometry" :
+        {"location" : {"lat" : 48.797863,"lng" : 2.598171},"location_type" : "ROOFTOP","viewport" : {"northeast" : {"lat" : 48.8551896802915,"lng" : 2.333450380291502},"southwest" : {"lat" : 48.8524917197085,"lng" : 2.330752419708498}}},"place_id" : "ChIJq9_ddtdx5kcRRoIJStYdLlA","plus_code" : {"compound_code" : "V83J+GR Paris, France","global_code" : "8FW4V83J+GR"},"types" : [ "street_address" ]}]'
+        title: 'Proposition avec adresse 13'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+    proposalLocationWithoutAddress:
+        id: 'proposalLocationWithoutAddress'
+        title: 'Proposition sans adresse'
+        district: '@districtIdf3'
+        body: ''
+        author: '@user5'
+        proposalForm: '@proposalformIdfBP3'
+        createdAt: <(new \DateTime('2022-04-15 10:30:00'))>
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        undraftAt: $createdAt

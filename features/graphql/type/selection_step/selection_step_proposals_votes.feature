@@ -140,7 +140,6 @@ Scenario: Admin wants to get votes for a question in a selection step
   }
   """
 
-@dev
 Scenario: Admin wants to get votes for a proposal with secret ballot
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -189,11 +188,11 @@ Scenario: Admin wants to get votes for a proposal with secret ballot
         "isSecretBallot": true,
         "canDisplayBallot": false,
         "proposals": {
-          "totalCount": 2,
+          "totalCount": 16,
           "edges": [
             {
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjY=",
                 "votes": {
                   "totalCount": 0,
                   "edges": []
@@ -202,21 +201,19 @@ Scenario: Admin wants to get votes for a proposal with secret ballot
             },
             {
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjI=",
                 "votes": {
-                  "totalCount": 2,
-                  "edges": [
-                    {
-                      "node": {
-                        "id": "1063"
-                      }
-                    },
-                    {
-                      "node": {
-                        "id": "1065"
-                      }
-                    }
-                  ]
+                  "totalCount": 0,
+                  "edges": []
+                }
+              }
+            },
+            {
+              "node": {
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjQ=",
+                "votes": {
+                  "totalCount": 0,
+                  "edges": []
                 }
               }
             }

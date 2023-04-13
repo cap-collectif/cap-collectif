@@ -40,14 +40,19 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
   }
 `;
 
+const variables = {
+  id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
+  userType: 1,
+  status: null,
+};
+
 describe('Preview|SelectionStep.proposals', () => {
   it('fetches the proposals from a selection step with status 4 & type 1 filters', async () => {
     await expect(
       graphql(
         SelectionStepProposalsQuery,
         {
-          id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
-          userType: 1,
+          ...variables,
           status: 'status4',
         },
         'internal',
@@ -60,42 +65,10 @@ describe('Preview|SelectionStep.proposals', () => {
       graphql(
         SelectionStepProposalsQuery,
         {
-          id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ',
-          userType: 1,
-          status: 'status5',
+          ...variables,
+          status: 'status5'
         },
         'internal',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
-  it('fetches the proposals from a selection step with excludeViewerVotes filter', async () => {
-
-    const variables = {
-      id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=',
-      userType: null,
-      status: null
-    };
-
-    await expect(
-      graphql(
-        SelectionStepProposalsQuery,
-        {
-          ...variables,
-          excludeViewerVotes: false
-        },
-        'internal_super_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-
-    await expect(
-      graphql(
-        SelectionStepProposalsQuery,
-        {
-          ...variables,
-          excludeViewerVotes: true
-        },
-        'internal_super_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

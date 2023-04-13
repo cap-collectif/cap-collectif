@@ -8,9 +8,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 23,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 23,
           "contributors": Object {
             "totalCount": 3,
           },
@@ -218,9 +218,9 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 9,
+            "totalCount": 23,
           },
-          "contributionsCount": 9,
+          "contributionsCount": 23,
           "contributors": Object {
             "totalCount": 3,
           },

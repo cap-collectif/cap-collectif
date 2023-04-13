@@ -396,6 +396,7 @@ Capco\AppBundle\Entity\ProposalForm:
         themeMandatory: false
         descriptionMandatory: true
         categoryMandatory: true
+        isMapViewEnabled: true
         zoomMap: 9
         mapCenter: '[{"address_components":[{"long_name":"Paris","short_name":"Paris","types":["locality", "political"]},{"long_name":"Ile-de-France","short_name":"Ile-de-France","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]}],"formatted_address":"Paris,France","geometry":{"location":{"lat":48.8499198,"lng":2.6370411},"location_type":"APPROXIMATE"},"types":["locality","political"]}]'
         reference: 22

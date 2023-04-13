@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetches the proposals from a selection step with excludeViewerVotes filter 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 6",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 2",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 4",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 3",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition pour tester le doublon",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition par un utilisateur France Connect",
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "email": "user@test.com",
+                      "id": "VXNlcjp1c2VyNQ==",
+                    },
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "author": Object {
+                      "email": "lbrunet@cap-collectif.com",
+                      "id": "VXNlcjp1c2VyMQ==",
+                    },
+                  },
+                },
+              ],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 10",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 11",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 12",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 13",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 7",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 8",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition sans adresse",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 5",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 1",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 9",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+      "totalCount": 16,
+    },
+    "title": "Vote des Franciliens",
+  },
+}
+`;
+
+exports[`fetches the proposals from a selection step with excludeViewerVotes filter 2`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 6",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 2",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 4",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 3",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition pour tester le doublon",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 10",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 11",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 12",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 13",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 7",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 8",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition sans adresse",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 5",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 1",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Proposition avec adresse 9",
+            "votes": Object {
+              "edges": Array [],
+            },
+          },
+        },
+      ],
+      "totalCount": 15,
+    },
+    "title": "Vote des Franciliens",
+  },
+}
+`;
