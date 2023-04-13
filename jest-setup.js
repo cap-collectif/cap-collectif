@@ -220,3 +220,12 @@ jest.mock('@cap-collectif/ui', () => {
     ...jest.requireActual('@cap-collectif/ui'),
   };
 });
+
+jest.mock('react-leaflet', () => {
+  const MapContainer = props => <div data-testid="map">{props.children}</div>;
+  return {
+    ...jest.requireActual('react-leaflet'),
+    useMapEvents: jest.fn(),
+    MapContainer,
+  };
+});

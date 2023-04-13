@@ -1,10 +1,10 @@
 // @flow
 /* eslint-env jest */
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
+import { MapContainer } from 'react-leaflet';
 import { LeafletMap } from './LeafletMap';
 import { $fragmentRefs, $refType } from '~/mocks';
-import { MockProviders } from '~/testUtils';
 
 describe('<LeafletMap />', () => {
   const defaultMapOptions = {
@@ -41,10 +41,10 @@ describe('<LeafletMap />', () => {
   };
 
   it('should render a map with markers', () => {
-    const wrapper = render(
-      <MockProviders store={{}}>
+    const wrapper = shallow(
+      <MapContainer>
         <LeafletMap defaultMapOptions={defaultMapOptions} loading={false} query={query} />,
-      </MockProviders>,
+      </MapContainer>,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LeafletControl /> should render correctly 1`] = `
+<div
+  className="leaflet-bottom leaflet-right"
+>
+  <div
+    className="leaflet-control"
+  >
+    <div>
+      content
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ViewChangePanel /> should render correctly on mobile 1`] = `
+<div
+  className="sc-bdnxRM ezlTdG"
+>
+  <button
+    className="sc-bdnxRM fhLieA"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa btWyHl MmfJJ cap-icon"
+      fill="none"
+      viewBox="0 0 14 13"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.5 1.5h8M5.5 11.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={0.5}
+      />
+      <path
+        d="M5.5 6.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={5.5}
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={10.5}
+      />
+    </svg>
+  </button>
+  <button
+    className="sc-bdnxRM kDCPjP"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa Tjiez MmfJJ cap-icon"
+      fill="none"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 7.6V4.12a1.2 1.2 0 00-.755-1.114l-4.8-1.92a1.2 1.2 0 00-.89 0L7.444 3.13a1.2 1.2 0 01-.89 0L1.822 1.237a.6.6 0 00-.823.56v11.498a1.2 1.2 0 00.754 1.114l4.8 1.92a1.2 1.2 0 00.891 0l2.305-.922M7 3.216v13.2M13 1v6M15.4 12.76a.3.3 0 01.3.3M15.1 13.06a.3.3 0 01.3-.3M15.4 13.36a.3.3 0 01-.3-.3M15.7 13.059a.3.3 0 01-.3.3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.3}
+      />
+      <path
+        d="M15.4 9.459a3.6 3.6 0 013.6 3.6c0 1.537-2.15 4.46-3.127 5.71a.6.6 0 01-.945 0c-.977-1.249-3.127-4.173-3.127-5.71a3.6 3.6 0 013.6-3.6z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.3}
+      />
+    </svg>
+  </button>
+  <button
+    className="sc-bdnxRM bgazDV"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa Tjiez MmfJJ cap-icon"
+      fill="none"
+      viewBox="0 0 20 19"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.274 9.153l-1.38-1.457a4.045 4.045 0 01-.706-4.53 3.693 3.693 0 016.038-1.018l1.04 1.082 1.041-1.082a3.693 3.693 0 016.038 1.019 4.044 4.044 0 01-.706 4.529l-6.372 6.528-1.594-1.634"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+      <path
+        d="M6.667 11.924l1.282-.963a1.204 1.204 0 011.723 1.63l-1.261 1.891a3.45 3.45 0 01-1.591 1.29l-1.879.752v1.726M5.717 8.564c-5.043 2.162-4.227 6.8-4.227 9.686"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`<ViewChangePanel /> should render correctly on web 1`] = `
+<div
+  className="sc-bdnxRM iqWMMu"
+>
+  <button
+    className="sc-bdnxRM faKUyb"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa eZPlJD kuPXuU cap-icon"
+      fill="none"
+      viewBox="0 0 14 13"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.5 1.5h8M5.5 11.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={0.5}
+      />
+      <path
+        d="M5.5 6.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={5.5}
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={10.5}
+      />
+    </svg>
+  </button>
+  <button
+    className="sc-bdnxRM kZpwOM"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa cboDFJ kuPXuU cap-icon"
+      fill="none"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M19 7.6V4.12a1.2 1.2 0 00-.755-1.114l-4.8-1.92a1.2 1.2 0 00-.89 0L7.444 3.13a1.2 1.2 0 01-.89 0L1.822 1.237a.6.6 0 00-.823.56v11.498a1.2 1.2 0 00.754 1.114l4.8 1.92a1.2 1.2 0 00.891 0l2.305-.922M7 3.216v13.2M13 1v6M15.4 12.76a.3.3 0 01.3.3M15.1 13.06a.3.3 0 01.3-.3M15.4 13.36a.3.3 0 01-.3-.3M15.7 13.059a.3.3 0 01-.3.3"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.3}
+      />
+      <path
+        d="M15.4 9.459a3.6 3.6 0 013.6 3.6c0 1.537-2.15 4.46-3.127 5.71a.6.6 0 01-.945 0c-.977-1.249-3.127-4.173-3.127-5.71a3.6 3.6 0 013.6-3.6z"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.3}
+      />
+    </svg>
+  </button>
+  <button
+    className="sc-bdnxRM khycDw"
+    onClick={[Function]}
+  >
+    <svg
+      className="sc-bdnxRM sc-eJocfa eZPlJD kuPXuU cap-icon"
+      fill="none"
+      viewBox="0 0 20 19"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.274 9.153l-1.38-1.457a4.045 4.045 0 01-.706-4.53 3.693 3.693 0 016.038-1.018l1.04 1.082 1.041-1.082a3.693 3.693 0 016.038 1.019 4.044 4.044 0 01-.706 4.529l-6.372 6.528-1.594-1.634"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+      <path
+        d="M6.667 11.924l1.282-.963a1.204 1.204 0 011.723 1.63l-1.261 1.891a3.45 3.45 0 01-1.591 1.29l-1.879.752v1.726M5.717 8.564c-5.043 2.162-4.227 6.8-4.227 9.686"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+      />
+    </svg>
+  </button>
+</div>
+`;

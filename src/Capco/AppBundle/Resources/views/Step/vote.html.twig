@@ -26,7 +26,7 @@
 {% block jumbotron %}
 {% endblock %}
 
-{% block details %}
+{% block body %}
     {{ react_render_component('ProjectStepPageApp', { 'props': {
         'stepId': currentStep.id|toGlobalId('SelectionStep'),
         'projectId': project.id|toGlobalId('Project'),
