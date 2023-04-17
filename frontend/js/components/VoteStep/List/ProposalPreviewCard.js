@@ -124,7 +124,7 @@ export const ProposalPreviewCard = ({
 
   return (
     <Card
-      boxShadow={['medium', isHighlighted ? '0 10px 30px rgba(0, 0, 0, 0.15)' : '']}
+      boxShadow={['medium', isHighlighted ? '0 10px 30px rgba(0, 0, 0, 0.15)' : 'unset']}
       height={['unset', '22.5rem']}
       id={`proposal-${proposal.id}`}>
       <Flex justify="space-between">

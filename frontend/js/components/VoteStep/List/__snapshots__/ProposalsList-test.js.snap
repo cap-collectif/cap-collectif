@@ -25,7 +25,7 @@ Array [
     id="proposals-list"
   >
     <div
-      className="sc-bdnxRM gZqDCG cap-card"
+      className="sc-bdnxRM dEskHY cap-card"
       id="proposal-proposal1"
     >
       <div
@@ -224,7 +224,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-bdnxRM gZqDCG cap-card"
+      className="sc-bdnxRM dEskHY cap-card"
       id="proposal-proposal2"
     >
       <div
@@ -451,7 +451,7 @@ Array [
     id="proposals-list"
   >
     <div
-      className="sc-bdnxRM gZqDCG cap-card"
+      className="sc-bdnxRM dEskHY cap-card"
       id="proposal-proposal1"
     >
       <div
@@ -626,7 +626,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-bdnxRM gZqDCG cap-card"
+      className="sc-bdnxRM dEskHY cap-card"
       id="proposal-proposal2"
     >
       <div

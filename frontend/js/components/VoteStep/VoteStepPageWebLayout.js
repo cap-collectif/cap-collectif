@@ -37,7 +37,7 @@ export const VoteStepPageWebLayout = ({ stepId, setLatlng, latlng, isMapView }: 
       </Box>
       {view === 'card' ? (
         <Box width="40%">
-          <React.Suspense fallback="ui">
+          <React.Suspense fallback="TODO : skeleton">
             <VoteStepMapQuery
               stepId={stepId}
               handleMapPositionChange={(newLatlng: string) => {
