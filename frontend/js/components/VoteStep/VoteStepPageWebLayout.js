@@ -5,6 +5,7 @@ import VoteStepMapQuery from './Map/VoteStepMapQuery';
 import ViewChangePanel, { type VIEW } from './ViewChangePanel';
 import ProposalsList from './List/ProposalsList';
 import ProposalsListSkeleton from './List/ProposalsListSkeleton';
+import VotesList from './List/VotesList';
 
 type Props = {|
   +stepId: string,
@@ -31,8 +32,13 @@ export const VoteStepPageWebLayout = ({ stepId, setLatlng, latlng, isMapView }: 
           <Box>TODO Search bar</Box>
           <ViewChangePanel view={view} setView={setView} />
         </Flex>
+
         <React.Suspense fallback={<ProposalsListSkeleton showImages={view !== 'card'} />}>
-          <ProposalsList stepId={stepId} showImages={view !== 'card'} />
+          {view === 'votes' ? (
+            <VotesList stepId={stepId} />
+          ) : (
+            <ProposalsList stepId={stepId} showImages={view !== 'card'} />
+          )}
         </React.Suspense>
       </Box>
       {view === 'card' ? (

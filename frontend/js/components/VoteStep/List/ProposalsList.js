@@ -22,7 +22,7 @@ const FRAGMENT = graphql`
   fragment ProposalsList_step on SelectionStep
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "ProposalsListPaginationQuery") {
-    proposals(first: $count, after: $cursor)
+    proposals(first: $count, after: $cursor, excludeViewerVotes: true)
       @connection(key: "ProposalsList_proposals", filters: ["query", "orderBy"]) {
       edges {
         node {
@@ -39,8 +39,49 @@ type Props = {|
   +showImages: boolean,
 |};
 
-export const ProposalsList = ({ stepId, showImages }: Props) => {
+export const List = ({
+  hasNext,
+  isLoadingNext,
+  children,
+  id,
+  loadCount,
+  loadNext,
+}: {|
+  +hasNext: boolean,
+  +isLoadingNext: boolean,
+  +children: React.Node,
+  loadCount: number,
+  id: string,
+  loadNext: number => {},
+|}) => {
   const intl = useIntl();
+  return (
+    <Box
+      maxHeight={['100%', 'calc(100vh - 15rem)']}
+      overflowY="scroll"
+      pt={['7rem', 8]}
+      px={[4, 8]}
+      pb={[8, '']}
+      id={id}>
+      {children}
+      {hasNext ? (
+        <Flex mt={6} mb={8}>
+          <Button
+            onClick={() => loadNext(loadCount)}
+            isLoading={isLoadingNext}
+            margin="auto"
+            variantSize="big"
+            variantColor="hierarchy"
+            variant="secondary">
+            {intl.formatMessage({ id: 'global.more' })}
+          </Button>
+        </Flex>
+      ) : null}
+    </Box>
+  );
+};
+
+export const ProposalsList = ({ stepId, showImages }: Props) => {
   const isMobile = useIsMobile();
 
   const LOAD_PROPOSAL_COUNT = isMobile ? 25 : 50;
@@ -78,13 +119,12 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
   const proposals = data.proposals.edges?.map(edge => edge?.node).filter(Boolean);
 
   return (
-    <Box
-      maxHeight={['100%', 'calc(100vh - 15rem)']}
-      overflowY="scroll"
-      pt={['7rem', 8]}
-      px={[4, 8]}
-      pb={[8, '']}
-      id="proposals-list">
+    <List
+      hasNext={hasNext}
+      loadNext={loadNext}
+      isLoadingNext={isLoadingNext}
+      id="proposals-list"
+      loadCount={LOAD_PROPOSAL_COUNT}>
       {proposals.map(proposal => (
         <ProposalPreviewCard
           proposal={proposal}
@@ -93,20 +133,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
           isHighlighted={hoveredProposalId === proposal.id}
         />
       ))}
-      {hasNext ? (
-        <Flex mt={6} mb={8}>
-          <Button
-            onClick={() => loadNext(LOAD_PROPOSAL_COUNT)}
-            isLoading={isLoadingNext}
-            margin="auto"
-            variantSize="big"
-            variantColor="hierarchy"
-            variant="secondary">
-            {intl.formatMessage({ id: 'global.more' })}
-          </Button>
-        </Flex>
-      ) : null}
-    </Box>
+    </List>
   );
 };
 
