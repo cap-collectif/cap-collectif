@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPreviewCard /> <TestProposalPreviewCard /> should render correctly 1`] = `
+Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM gZqDCG cap-card"
+    id="proposal-<Node-mock-id-1>"
+  >
+    <div
+      className="sc-bdnxRM bjVYRI"
+    >
+      <div
+        className="sc-bdnxRM erLbUX"
+      >
+        <div
+          className="sc-bdnxRM coMIwU"
+        >
+          <div
+            className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            title="En cours"
+          >
+            <p
+              className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+            >
+              En cours
+            </p>
+          </div>
+          <div
+            className="sc-bdnxRM ebamQQ"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              fill="#85919D"
+              height={13}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              width={13}
+            />
+            <span
+              className="sc-bdnxRM cYARDV cap-text"
+            >
+              Argenteuil
+            </span>
+          </div>
+          <div
+            className="sc-bdnxRM ebamQQ"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              fill="#85919D"
+              height={13}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              width={13}
+            />
+            <span
+              className="sc-bdnxRM cYARDV cap-text"
+            >
+              Ecologie
+            </span>
+          </div>
+        </div>
+        <h3
+          className="sc-bdnxRM hjhoZx cap-heading"
+        >
+          Installation d'une serre dans le Jardin partagé du Val des Oiseaux - Argenteuil
+        </h3>
+        <div
+          className="sc-bdnxRM GHddu cap-text"
+        >
+          En accord avec la municipalité...
+        </div>
+        <div
+          className="sc-bdnxRM hFScP"
+        >
+          <div
+            className="sc-bdnxRM lkiVWk"
+          >
+            <div
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              TODO votebtn
+            </div>
+            <div
+              className="sc-bdnxRM kapipF"
+            >
+              <div
+                className="sc-bdnxRM ebamQQ"
+              >
+                <IconMock
+                  aria-hidden={true}
+                  className="icon"
+                  fill="#85919D"
+                  height={16}
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                  width={16}
+                />
+                <span
+                  className="sc-bdnxRM sHwtO cap-text"
+                >
+                  400
+                </span>
+              </div>
+              <div
+                className="sc-bdnxRM ebamQQ"
+              >
+                <IconMock
+                  aria-hidden={true}
+                  className="icon"
+                  fill="#85919D"
+                  height={16}
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                  width={16}
+                />
+                <span
+                  className="sc-bdnxRM sHwtO cap-text"
+                >
+                  50
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-bdnxRM ebamQQ"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              fill="#85919D"
+              height={13}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              width={13}
+            />
+            <span
+              className="sc-bdnxRM sHwtO cap-text"
+            >
+              Jane Doe
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

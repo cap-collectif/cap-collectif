@@ -14,7 +14,6 @@ import { isSafari } from '~/config';
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer';
 import { MapContainer } from './Map.style';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
-import colors from '~/utils/colors';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import LocateAndZoomControl from './LocateAndZoomControl';
 import ProposalMapLoaderPane from '~/components/Proposal/Map/ProposalMapLoaderPane';
@@ -50,6 +49,7 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
 `;
 
 const DEFAULT_CENTER = { lat: 48.8586047, lng: 2.3137325 };
+const ICON_COLOR = '#5E5E5E';
 
 export const VoteStepMap = ({ voteStep, handleMapPositionChange, defaultCenter }: Props) => {
   const mapRef = useRef(null);
@@ -104,14 +104,13 @@ export const VoteStepMap = ({ voteStep, handleMapPositionChange, defaultCenter }
           spiderfyOnMaxZoom
           showCoverageOnHover={false}
           zoomToBoundsOnClick
-          onClick={() => {}}
           spiderfyDistanceMultiplier={4}
           maxClusterRadius={30}>
           {markers?.length > 0 &&
             markers.map((mark, idx) => {
-              const size = 29;
+              const size = 48;
               const icon = mark.category?.icon;
-              const color = mark.category?.color || '#1E88E5';
+              let delay;
               return (
                 <Marker
                   key={idx}
@@ -120,8 +119,8 @@ export const VoteStepMap = ({ voteStep, handleMapPositionChange, defaultCenter }
                     className: 'preview-icn',
                     html: renderToString(
                       <>
-                        <Icon name={ICON_NAME.pin3} size={40} color={color} />
-                        {icon && <Icon name={ICON_NAME[icon]} size={16} color={colors.white} />}
+                        <Icon name={ICON_NAME.pin3} size={size} color={ICON_COLOR} />
+                        {icon && <Icon name={ICON_NAME[icon]} size={19} color="white" />}
                       </>,
                     ),
                     iconSize: [size, size],
@@ -129,7 +128,17 @@ export const VoteStepMap = ({ voteStep, handleMapPositionChange, defaultCenter }
                     popupAnchor: [0, -size],
                   })}
                   eventHandlers={{
-                    click: () => {},
+                    mouseover: () => {
+                      delay = setTimeout(() => {
+                        // eslint-disable-next-line no-undef
+                        const event = new MessageEvent('hover-proposal', {
+                          bubbles: true,
+                          data: { id: mark.id },
+                        });
+                        document.dispatchEvent(event);
+                      }, 200);
+                    },
+                    mouseout: () => clearTimeout(delay),
                   }}
                 />
               );

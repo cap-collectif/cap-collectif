@@ -61,7 +61,9 @@ type Props = {|
   // QuestionnaireStep needs this
   +questionnaireId?: string,
   // ProposalPage needs this
-  currentVotableStepId?: string,
+  +currentVotableStepId?: string,
+  // VoteStep needs this
+  +isMapView?: string,
 |};
 
 const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
@@ -140,7 +142,11 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
           <ScrollToTop />
-          <VoteStepPage stepId={props.stepId} projectId={props.projectId} />
+          <VoteStepPage
+            stepId={props.stepId}
+            projectId={props.projectId}
+            isMapView={!!props.isMapView}
+          />
         </Route>
       </Switch>
     </>

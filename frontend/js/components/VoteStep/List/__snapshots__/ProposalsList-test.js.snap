@@ -1,0 +1,805 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalsList /> <TestProposalsList /> should render correctly with images 1`] = `
+Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM kGUVhJ"
+    id="proposals-list"
+  >
+    <div
+      className="sc-bdnxRM gZqDCG cap-card"
+      id="proposal-proposal1"
+    >
+      <div
+        className="sc-bdnxRM bjVYRI"
+      >
+        <div
+          className="sc-bdnxRM gtDasA"
+        >
+          <div
+            className="sc-bdnxRM coMIwU"
+          >
+            <div
+              className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              title="<mock-value-for-field-\\"name\\">"
+            >
+              <p
+                className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </p>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <div
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+          </div>
+          <h3
+            className="sc-bdnxRM hjhoZx cap-heading"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h3>
+          <div
+            className="sc-bdnxRM GHddu cap-text"
+          >
+            &lt;mock-value-for-field-"summaryOrBodyExcerpt"&gt;
+          </div>
+          <div
+            className="sc-bdnxRM hFScP"
+          >
+            <div
+              className="sc-bdnxRM lkiVWk"
+            >
+              <div
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                TODO votebtn
+              </div>
+              <div
+                className="sc-bdnxRM kapipF"
+              >
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM sHwtO cap-text"
+              >
+                &lt;mock-value-for-field-"displayName"&gt;
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="sc-bdnxRM bjPtL"
+        >
+          <div
+            className="sc-bdnxRM enfYRc"
+          >
+            <img
+              alt="<mock-value-for-field-\\"name\\">"
+              height="100%"
+              loading="lazy"
+              objectFit="cover"
+              srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
+              width="100%"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM gZqDCG cap-card"
+      id="proposal-proposal2"
+    >
+      <div
+        className="sc-bdnxRM bjVYRI"
+      >
+        <div
+          className="sc-bdnxRM gtDasA"
+        >
+          <div
+            className="sc-bdnxRM coMIwU"
+          >
+            <div
+              className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              title="<mock-value-for-field-\\"name\\">"
+            >
+              <p
+                className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </p>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <div
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+          </div>
+          <h3
+            className="sc-bdnxRM hjhoZx cap-heading"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h3>
+          <div
+            className="sc-bdnxRM GHddu cap-text"
+          >
+            &lt;mock-value-for-field-"summaryOrBodyExcerpt"&gt;
+          </div>
+          <div
+            className="sc-bdnxRM hFScP"
+          >
+            <div
+              className="sc-bdnxRM lkiVWk"
+            >
+              <div
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                TODO votebtn
+              </div>
+              <div
+                className="sc-bdnxRM kapipF"
+              >
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM sHwtO cap-text"
+              >
+                &lt;mock-value-for-field-"displayName"&gt;
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="sc-bdnxRM bjPtL"
+        >
+          <div
+            className="sc-bdnxRM enfYRc"
+          >
+            <img
+              alt="<mock-value-for-field-\\"name\\">"
+              height="100%"
+              loading="lazy"
+              objectFit="cover"
+              srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
+         "
+              width="100%"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<ProposalsList /> <TestProposalsList /> should render correctly without images 1`] = `
+Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM kGUVhJ"
+    id="proposals-list"
+  >
+    <div
+      className="sc-bdnxRM gZqDCG cap-card"
+      id="proposal-proposal1"
+    >
+      <div
+        className="sc-bdnxRM bjVYRI"
+      >
+        <div
+          className="sc-bdnxRM erLbUX"
+        >
+          <div
+            className="sc-bdnxRM coMIwU"
+          >
+            <div
+              className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              title="<mock-value-for-field-\\"name\\">"
+            >
+              <p
+                className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </p>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <div
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+          </div>
+          <h3
+            className="sc-bdnxRM hjhoZx cap-heading"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h3>
+          <div
+            className="sc-bdnxRM GHddu cap-text"
+          >
+            &lt;mock-value-for-field-"summaryOrBodyExcerpt"&gt;
+          </div>
+          <div
+            className="sc-bdnxRM hFScP"
+          >
+            <div
+              className="sc-bdnxRM lkiVWk"
+            >
+              <div
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                TODO votebtn
+              </div>
+              <div
+                className="sc-bdnxRM kapipF"
+              >
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM sHwtO cap-text"
+              >
+                &lt;mock-value-for-field-"displayName"&gt;
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bdnxRM gZqDCG cap-card"
+      id="proposal-proposal2"
+    >
+      <div
+        className="sc-bdnxRM bjVYRI"
+      >
+        <div
+          className="sc-bdnxRM erLbUX"
+        >
+          <div
+            className="sc-bdnxRM coMIwU"
+          >
+            <div
+              className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              title="<mock-value-for-field-\\"name\\">"
+            >
+              <p
+                className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </p>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <div
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM cYARDV cap-text"
+              >
+                &lt;mock-value-for-field-"name"&gt;
+              </span>
+            </div>
+          </div>
+          <h3
+            className="sc-bdnxRM hjhoZx cap-heading"
+          >
+            &lt;mock-value-for-field-"title"&gt;
+          </h3>
+          <div
+            className="sc-bdnxRM GHddu cap-text"
+          >
+            &lt;mock-value-for-field-"summaryOrBodyExcerpt"&gt;
+          </div>
+          <div
+            className="sc-bdnxRM hFScP"
+          >
+            <div
+              className="sc-bdnxRM lkiVWk"
+            >
+              <div
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                TODO votebtn
+              </div>
+              <div
+                className="sc-bdnxRM kapipF"
+              >
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+                <div
+                  className="sc-bdnxRM ebamQQ"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    fill="#85919D"
+                    height={16}
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                    width={16}
+                  />
+                  <span
+                    className="sc-bdnxRM sHwtO cap-text"
+                  >
+                    42
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bdnxRM ebamQQ"
+            >
+              <IconMock
+                aria-hidden={true}
+                className="icon"
+                fill="#85919D"
+                height={13}
+                style={
+                  Object {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+                width={13}
+              />
+              <span
+                className="sc-bdnxRM sHwtO cap-text"
+              >
+                &lt;mock-value-for-field-"displayName"&gt;
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

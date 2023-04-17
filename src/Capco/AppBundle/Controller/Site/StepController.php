@@ -30,6 +30,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Capco\AppBundle\Enum\ViewConfiguration;
 
 class StepController extends Controller
 {
@@ -417,6 +418,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'proposalForm' => null,
             'isProposalSmsVoteEnabled' => $step->isProposalSmsVoteEnabled(),
+            'isMapView' => ViewConfiguration::MAP === $step->getMainView(),
         ];
     }
 

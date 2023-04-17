@@ -10,10 +10,12 @@ import useUrlState from '~/utils/hooks/useUrlState';
 type Props = {|
   +stepId: string,
   +projectId: string,
+  +isMapView: boolean,
 |};
 
-export const VoteStepPage = ({ stepId }: Props) => {
+export const VoteStepPage = ({ stepId, isMapView }: Props) => {
   const isMobile = useIsMobile();
+  // TODO : use a context for filters
   const [latlng, setLatlng] = useUrlState('latlng', '');
 
   React.useEffect(() => {
@@ -26,11 +28,20 @@ export const VoteStepPage = ({ stepId }: Props) => {
       <React.Suspense fallback={<Flex bg={BACKGROUND_COLOR} width="100%" p={9} />}>
         <ProjectStepHeader stepId={stepId} />
       </React.Suspense>
-      {/** TODO : Page layouts for mobile */}
       {isMobile ? (
-        <VoteStepPageMobileLayout stepId={stepId} setLatlng={setLatlng} latlng={latlng} />
+        <VoteStepPageMobileLayout
+          stepId={stepId}
+          setLatlng={setLatlng}
+          latlng={latlng}
+          isMapView={isMapView}
+        />
       ) : (
-        <VoteStepPageWebLayout stepId={stepId} setLatlng={setLatlng} latlng={latlng} />
+        <VoteStepPageWebLayout
+          stepId={stepId}
+          setLatlng={setLatlng}
+          latlng={latlng}
+          isMapView={isMapView}
+        />
       )}
     </Flex>
   );

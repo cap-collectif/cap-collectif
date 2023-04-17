@@ -33,7 +33,12 @@ export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .preview-icn svg:nth-child(2) {
     position: absolute;
     top: 7px;
-    left: 12px;
+    left: 14px;
+    pointer-events: none;
+  }
+
+  .leaflet-marker-icon svg:first-child:hover {
+    fill: #e97657;
   }
 
   /**
