@@ -113,7 +113,7 @@
                             {% endfor %}
                         </ul>
 
-                        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {q: q}} only %}
+                        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {search: search}} only %}
                     </div>
 
                 </div>

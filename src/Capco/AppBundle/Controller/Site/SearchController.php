@@ -77,7 +77,7 @@ class SearchController extends Controller
         return [
             'form' => $form->createView(),
             'page' => $page,
-            'q' => $searchParams,
+            'search' => $searchParams,
             'count' => $searchResults['count'],
             'results' => $searchResults['results'],
             'nbPages' => $searchResults['pages'],
