@@ -170,7 +170,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                         <Icon name={CapUIIcon.PinO} size={CapUIIconSize.Sm} />
                         <Text
                           as="span"
-                          truncate={30}
+                          truncate={project.themes && project.themes?.length > 0 ? 30 : 50}
                           style={{
                             whiteSpace: 'nowrap',
                             fontSize: '13px',
@@ -206,7 +206,9 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                         <Icon name={CapUIIcon.FolderO} size={CapUIIconSize.Sm} />
                         <Text
                           as="span"
-                          truncate={20}
+                          truncate={
+                            project.districts && project.districts?.totalCount > 0 ? 20 : 50
+                          }
                           style={{
                             whiteSpace: 'nowrap',
                             fontSize: '13px',
