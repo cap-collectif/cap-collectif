@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
@@ -454,7 +455,13 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         if ($this instanceof VotableStepInterface && $this->canDisplayBallot()) {
             return true;
         }
+
         if ($viewer instanceof User && ($viewer->isAdmin() || $this->getOwner() === $viewer)) {
+            return true;
+        }
+
+        $project = $this->getProject();
+        if ($project->getOwner() instanceof Organization && $viewer->isMemberOfOrganization($project->getOwner())) {
             return true;
         }
 
