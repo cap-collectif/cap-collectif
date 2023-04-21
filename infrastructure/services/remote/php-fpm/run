@@ -77,6 +77,17 @@ else
     
 fi
 
+SYMFONY_REDIS_HOST="${SYMFONY_REDIS_HOST:-127.0.0.1}"
+echo "[$(date -u)][PHP-FPM] Waiting Redis..."
+while ! (redis-cli -h "${SYMFONY_REDIS_HOST}" PING > /dev/null)
+do
+    sleep $timeout
+    timeout=$(( $timeout + 1 ))
+done
+echo "[$(date -u)][PHP-FPM] Purging doctrine/pools cache in redis..."
+gosu capco php bin/console cache:pool:clear cache.global_clearer
+echo "[$(date -u)][PHP-FPM] Purged doctrine/pools cache in redis done"
+
 echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/ 
 gosu capco php -d memory_limit=-1 bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
