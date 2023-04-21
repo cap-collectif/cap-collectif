@@ -155,6 +155,7 @@ class ImportProposalsFromCsv
         if (!$this->isValidHeaders($rows->current()->toArray())) {
             if ($isCli) {
                 $missing = $this->getMissingHeaders($rows->current()->toArray());
+                $headersJoined = implode(',', $rows->current()->toArray());
 
                 throw new \RuntimeException(
                     \count($missing) .
@@ -162,7 +163,7 @@ class ImportProposalsFromCsv
                         implode(', ', $missing) .
                         "file {$this->filePath} , header expected" .
                         implode(', ', $this->headers) .
-                        " header filled {$rows->current()->toArray()} count ${countRows}"
+                        " header filled {$headersJoined} count ${countRows}"
                 );
             }
 
