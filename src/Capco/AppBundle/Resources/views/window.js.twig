@@ -1,6 +1,7 @@
 window.locale = "{{ intl_locale() }}";
 window.timeZone = "{{ intl_timeZone() }}";
 window.recaptchaOptions = {lang: "{{ intl_locale() }}"};
+window.TURNSTILE_PUBLIC_KEY = "{{ turnstile_public_key }}";
 window._capco_featureFlags = {{ features_flags_for_relay()|json_encode()|raw }};
 {% set mapToken =  mapTokenResolver.__invoke() %}
 window.MAPBOX_PUBLIC_TOKEN = "{{ mapToken.publicToken }}";

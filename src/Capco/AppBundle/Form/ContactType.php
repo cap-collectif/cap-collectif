@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Form;
 
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
-use Capco\UserBundle\Form\Type\ReCaptchaType;
+use Capco\UserBundle\Form\Type\CaptchaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Email;
@@ -49,7 +49,7 @@ class ContactType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']])
+            ->add('captcha', CaptchaType::class, ['validation_groups' => ['registration']])
             ->add('body', TextType::class, [
                 'label' => 'contact.form.message',
                 'required' => false,

@@ -3,9 +3,8 @@ Feature: Registration
 
 @database
 Scenario: Anonymous wants to register with user type and zipcode
-  Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
+  Given features "registration", "user_type", "zipcode_at_register", "captcha", "turnstile_captcha" are enabled
   And I visited "home page"
-  And I wait "#main-navbar" to appear on current page
   When I press "global.registration"
   And I wait "#username" to appear on current page
   And I fill in the following:
@@ -17,7 +16,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
   And I check element "charte"
-  And should see an "#recaptcha" element
+  And should see an "#turnstile_captcha" element
   And I press "global.register"
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"

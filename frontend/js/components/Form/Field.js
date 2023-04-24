@@ -110,6 +110,7 @@ type Props = {|
   fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
   onKeyDown?: Function,
+  captchaRef?: React.Ref<*>,
 |};
 
 const canCheckValidation = (check, typeForm, disableValidation) =>
@@ -173,6 +174,7 @@ class Field extends React.Component<Props> {
       fieldUsingJoditWysiwygName,
       noCode,
       onKeyDown,
+      captchaRef,
     } = this.props;
     const check = touched || (dirty && !disableValidation);
 
@@ -256,6 +258,7 @@ class Field extends React.Component<Props> {
         fieldUsingJoditWysiwygName={fieldUsingJoditWysiwygName}
         noCode={noCode}
         onKeyDown={onKeyDown}
+        captchaRef={captchaRef}
         {...input}>
         {children}
       </Input>

@@ -73,8 +73,6 @@ services:
                   class: Capco\AppBundle\EventListener\PriorAuthenticationHandler,
                   priority: 14,
               }
-        arguments:
-            $apiKey: '%recaptcha_private_key%'
     fidry_alice_data_fixtures.loader.simple: '@Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader'
     Capco\AppBundle\DataFixtures\ORM\CustomOrderLoader:
         arguments:
@@ -259,7 +257,8 @@ services:
 
     Capco\AppBundle\Security\CaptchaChecker:
         arguments:
-            $apiKey: '%recaptcha_private_key%'
+            $turnstilePrivateKey: '%turnstile_private_key%'
+            $recaptchaPrivateKey: '%recaptcha_private_key%'
 
     Capco\AppBundle\RedirectionIO\ProjectKeyDataloader:
         autowire: true

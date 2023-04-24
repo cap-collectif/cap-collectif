@@ -34,11 +34,9 @@ services:
     Capco\AppBundle\Validator\Constraints\HasEnoughCreditsToVoteValidator:
         tags:
             - { name: validator.constraint_validator, alias: has_enough_credits.validator }
-    Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
-        arguments:
-            $privateKey: '%recaptcha_private_key%'
+    Capco\AppBundle\Validator\Constraints\CaptchaValidator:
         tags:
-            - { name: validator.constraint_validator, alias: recaptcha.validator }
+            - { name: validator.constraint_validator, alias: captcha.validator }
     Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator:
         tags:
             - { name: validator.constraint_validator, alias: has_theme_if_mandatory.validator }

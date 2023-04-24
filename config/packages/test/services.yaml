@@ -32,13 +32,12 @@ services:
         public: true
 
     # We disable captcha validation
-    Capco\AppBundle\Validator\Constraints\ReCaptchaValidator:
+    Capco\AppBundle\Validator\Constraints\CaptchaValidator:
         autowire: true
         arguments:
-            $privateKey: '%recaptcha_private_key%'
             $enabled: false
         tags:
-            - { name: validator.constraint_validator, alias: recaptcha.validator }
+            - { name: validator.constraint_validator, alias: captcha.validator }
     # We disable translation
     no_translator:
         class: Capco\AppBundle\Translator\NoTranslator

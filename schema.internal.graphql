@@ -6375,6 +6375,9 @@ enum FeatureFlagType {
   blog
   calendar
   captcha
+
+  """Whether to use Turnstile captcha instead of Google Recaptcha"""
+  turnstile_captcha
   consent_external_communication
   developer_documentation
   public_api

@@ -103,6 +103,8 @@ parameters:
     openid_backchannel_secret: '%env(SYMFONY_OPENID_BACKCHANNEL_SECRET)%'
     openid_test_username: '%env(SYMFONY_OPENID_TEST_USERNAME)%'
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
+    turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
+    turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
 
     #
     # Default env values :
@@ -143,6 +145,11 @@ parameters:
     env(SYMFONY_ASSETS_HOST): null
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
     env(SYMFONY_REMEMBER_SECRET): secretRemember
+    # Turnstile testing tokens that forces an interactive challenge (same as Google Recaptcha)
+    # see https://developers.cloudflare.com/turnstile/frequently-asked-questions/
+    # /!\ In production you must use your own tokens /!\
+    env(SYMFONY_TURNSTILE_PUBLIC_KEY): '1x00000000000000000000AA'
+    env(SYMFONY_TURNSTILE_PRIVATE_KEY): '1x0000000000000000000000000000000AA'
     # To be deleted
     # Todo inject only on occitanie instance with service pass
     env(SYMFONY_OCCITANIE_USERNAME): INSERT_A_REAL_SECRET

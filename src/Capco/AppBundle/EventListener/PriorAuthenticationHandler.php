@@ -4,11 +4,11 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
 use Psr\Log\LoggerInterface;
-use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Capco\AppBundle\Repository\UserConnectionRepository;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Security\CaptchaChecker;
 
 class PriorAuthenticationHandler
 {
@@ -17,26 +17,26 @@ class PriorAuthenticationHandler
     private UserConnectionRepository $userConnectionRepository;
     private Manager $toggleManager;
     private LoggerInterface $logger;
-    private string $apiKey;
+    private CaptchaChecker $captchaChecker;
 
     public function __construct(
         UserConnectionRepository $userConnectionRepository,
         Manager $toggleManager,
         LoggerInterface $logger,
-        string $apiKey
+        CaptchaChecker $captchaChecker
     ) {
         $this->userConnectionRepository = $userConnectionRepository;
         $this->toggleManager = $toggleManager;
         $this->logger = $logger;
-        $this->apiKey = $apiKey;
+        $this->captchaChecker = $captchaChecker;
     }
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if ($this->toggleManager->isActive('restrict_connection')) {
-            $request = $event->getRequest();
+        $request = $event->getRequest();
 
-            if ('login_check' === $request->get('_route')) {
+        if ('login_check' === $request->get('_route')) {
+            if ($this->toggleManager->isActive('restrict_connection')) {
                 $data = json_decode($request->getContent(), true);
 
                 $email = $data['username'];
@@ -66,10 +66,8 @@ class PriorAuthenticationHandler
                             )
                         );
                     } else {
-                        $recaptcha = new ReCaptcha($this->apiKey);
-                        $resp = $recaptcha->verify($data['captcha'], $ip);
-
-                        if (!$resp->isSuccess()) {
+                        $success = $this->captchaChecker->__invoke($data['captcha'], $ip);
+                        if (!$success) {
                             $event->setResponse(
                                 new JsonResponse(['reason' => 'Invalid captcha.'], 401)
                             );

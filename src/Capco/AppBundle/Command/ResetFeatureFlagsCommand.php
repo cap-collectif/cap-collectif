@@ -48,6 +48,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::calendar);
         $this->manager->activate(Manager::newsletter);
         $this->manager->activate(Manager::captcha);
+        $this->manager->activate(Manager::turnstile_captcha);
         $this->manager->activate(Manager::versions);
         $this->manager->activate(Manager::themes);
         $this->manager->activate(Manager::registration);
@@ -129,6 +130,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::search);
             $this->manager->deactivate(Manager::http_redirects);
             $this->manager->activate(Manager::captcha);
+            $this->manager->deactivate(Manager::turnstile_captcha);
             $this->manager->activate(Manager::consent_internal_communication);
             $this->manager->activate(Manager::export);
             $this->manager->activate(Manager::shield_mode);

@@ -12,6 +12,7 @@ twig:
         locales: '%locales%'
         app_version: '%app_version%'
         google_map_public_key: '%google_map_public_key%'
+        turnstile_public_key: '%turnstile_public_key%'
         # Register here any services accessibles in templates
         #
         # Please use this only for legacy pages, because it's **very bad** for perfomance.

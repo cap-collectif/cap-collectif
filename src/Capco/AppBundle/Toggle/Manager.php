@@ -17,6 +17,7 @@ class Manager
     public const blog = 'blog';
     public const calendar = 'calendar';
     public const captcha = 'captcha';
+    public const turnstile_captcha = 'turnstile_captcha';
     public const consent_external_communication = 'consent_external_communication';
     public const developer_documentation = 'developer_documentation';
     public const public_api = 'public_api';
@@ -122,6 +123,7 @@ class Manager
         self::blog,
         self::calendar,
         self::captcha,
+        self::turnstile_captcha,
         self::consent_external_communication,
         self::developer_documentation,
         self::public_api,
@@ -189,7 +191,7 @@ class Manager
         self::proposal_sms_vote,
         self::unstable__organizations,
         self::moderation_comment,
-        self::unstable__new_create_project
+        self::unstable__new_create_project,
     ];
 
     protected ToggleManager $toggleManager;

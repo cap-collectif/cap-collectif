@@ -226,6 +226,7 @@ declare interface Window extends EventTarget, IDBEnvironment, HTMLElement {
   MAPBOX_INITIAL_PUBLIC_TOKEN: string;
   MAPBOX_PUBLIC_STYLE_OWNER: string;
   MAPBOX_PUBLIC_STYLE_ID: string;
+  TURNSTILE_PUBLIC_KEY: string;
 
   // hack to avoid error flow because of react-beautiful-dnd
   Element: any;

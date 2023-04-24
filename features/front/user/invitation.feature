@@ -1,8 +1,8 @@
-@core
+@core @invitation
 Feature: User invitation
 
 Background:
-  Given features "registration", "user_type", "zipcode_at_register", "captcha" are enabled
+  Given features "registration", "user_type", "zipcode_at_register", "captcha", "turnstile_captcha" are enabled
   Given I disable features "login_facebook", "login_saml", "login_cas", "login_openid", "login_franceconnect"
 
 @database
@@ -25,7 +25,7 @@ Scenario: A user which has been invited should be able to register
   And I select "Sangohan" from react "#registration-form-responses2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
-  And should see an "#recaptcha" element
+  And should see an "#turnstile_captcha" element
   And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"
@@ -47,7 +47,7 @@ Scenario: A user which has been invited should be able to register even with shi
   And I select "Sangohan" from react "#registration-form-responses2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
-  And should see an "#recaptcha" element
+  And should see an "#turnstile_captcha" element
   And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"
@@ -69,7 +69,7 @@ Scenario: A user which has been invited should be able to register even when reg
   And I select "Sangohan" from react "#registration-form-responses2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
-  And should see an "#recaptcha" element
+  And should see an "#turnstile_captcha" element
   And I press "confirm-register"
   And I wait ".flash-notif" to appear on current page
   Then I should see "alert.success.add.user"

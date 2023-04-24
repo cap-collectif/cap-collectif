@@ -3,39 +3,40 @@
 namespace Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Toggle\Manager;
-use ReCaptcha\ReCaptcha;
+use Capco\AppBundle\Security\CaptchaChecker;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Capco\AppBundle\Utils\RequestGuesser;
 
-class ReCaptchaValidator extends ConstraintValidator
+class CaptchaValidator extends ConstraintValidator
 {
     protected RequestGuesser $requestGuesser;
-    protected ReCaptcha $recaptcha;
     protected Manager $toggle;
+    protected CaptchaChecker $captchaChecker;
     // used to disable in functional testing
     protected bool $enabled;
 
+
     public function __construct(
         RequestGuesser $requestGuesser,
-        string $privateKey,
         Manager $toggle,
+        CaptchaChecker $captchaChecker,
         bool $enabled = true
     ) {
         $this->requestGuesser = $requestGuesser;
-        $this->recaptcha = new ReCaptcha($privateKey);
         $this->toggle = $toggle;
+        $this->captchaChecker = $captchaChecker;
         $this->enabled = $enabled;
     }
 
     public function validate($value, Constraint $constraint)
     {
+        if (!$this->enabled || !$this->toggle->isActive('captcha')) {
+            return;
+        }
+
         $ip = $this->requestGuesser->getClientIp();
-        if (
-            $this->enabled &&
-            $this->toggle->isActive('captcha') &&
-            !$this->recaptcha->verify($value, $ip)->isSuccess()
-        ) {
+        if (!$this->captchaChecker->__invoke($value, $ip)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

@@ -17,6 +17,7 @@ import { userActions } from './user_actions';
 export const accountForm = 'accountForm';
 
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.';
+const MISSING_CAPTCHA = 'You must provide a captcha to login.';
 
 export type User = {
   +id: string,
@@ -238,6 +239,11 @@ export const login = (
           });
         }
         throw new SubmissionError({ _error: 'your-email-address-or-password-is-incorrect' });
+      } else if (response.reason === MISSING_CAPTCHA) {
+        throw new SubmissionError({
+          _error: response.reason,
+          showCaptcha: true,
+        });
       } else if (response.reason) {
         throw new SubmissionError({ _error: response.reason });
       } else {
@@ -266,13 +272,10 @@ export const register = async (
     input: form,
   });
 
-  if (response.register?.errorsCode) {
-    if (typeof window.grecaptcha !== 'undefined') {
-      window.grecaptcha.reset();
-      dispatch(change('registration-form', 'captcha', null));
-    }
+  const errorsCode = response.register?.errorsCode;
+  if (errorsCode) {
     let errors = {};
-    response.register.errorsCode.forEach(errorCode => {
+    errorsCode.forEach(errorCode => {
       if (errorCode === 'CAPTCHA_INVALID') {
         errors = { ...errors, captcha: 'registration.constraints.captcha.invalid' };
       }

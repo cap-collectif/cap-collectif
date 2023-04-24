@@ -116,6 +116,7 @@ export type ParentProps = {|
   fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
   onKeyDown?: Function,
+  captchaRef?: React.Ref<*>,
 |};
 
 type Props = {|
@@ -203,6 +204,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     maxSize,
     accept,
     noCode,
+    captchaRef,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -268,7 +270,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'captcha') {
-      return <Captcha value={value} {...props} />;
+      return <Captcha captchaRef={captchaRef} {...props} />;
     }
     if (type === 'image') {
       return (

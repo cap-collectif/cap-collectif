@@ -129,7 +129,7 @@ export const ProposalContactModal = ({
           </FormControl>
 
           {addCaptchaField && (
-            <Captcha onChange={captchaKey => setCaptcha(captchaKey)} value={captcha} />
+            <Captcha onChange={captchaKey => setCaptcha(captchaKey)} />
           )}
         </Modal.Body>
         <Modal.Footer>

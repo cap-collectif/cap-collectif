@@ -21,6 +21,23 @@ class HomePage extends Page
      */
     protected $path = '/';
 
+    /**
+     * Overload to verify if we're on an expected page. Throw an exception otherwise.
+     */
+    public function verifyPage()
+    {
+        if (
+            !$this->getSession()->wait(
+                10000,
+                "($('#main-navbar').length + $('#shield-mode').length) > 0"
+            )
+        ) {
+            throw new \RuntimeException(
+                'HomePage did not fully load, check selector in "verifyPage".'
+            );
+        }
+    }
+
     public function openLoginModal()
     {
         $this->getElement('Login button')->click();

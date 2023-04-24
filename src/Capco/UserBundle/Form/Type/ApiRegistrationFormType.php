@@ -47,7 +47,7 @@ class ApiRegistrationFormType extends AbstractType
             ->add('email', EmailType::class, ['required' => true])
             ->add('roles', CollectionType::class, ['entry_type' => TextType::class]);
 
-        $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
+        $builder->add('captcha', CaptchaType::class, ['validation_groups' => ['registration']]);
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', EntityType::class, [

@@ -246,13 +246,12 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
               mb: `${SPACES_SCALES[6]} !important`,
             }}
             textAlign="center"
-            className="recaptcha-message"
+            className="captcha-message"
             color="neutral-gray.700">
             {intl.formatMessage({ id: 'publish-anonymous-debate-vote-bot' })}
           </Text>
           <Captcha
             style={{ transformOrigin: 'center' }}
-            value={captcha.value}
             onChange={value => setCaptcha(c => ({ ...c, value }))}
           />
         </Flex>

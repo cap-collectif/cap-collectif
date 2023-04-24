@@ -53,7 +53,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       {/** I dont like this but for now we have to use the bootstrap container max-width, waiting for the DS one */}
       <Box
         className="container"
-        sx={{ padding: '0 !important', '& .recaptcha-message': { display: 'none' } }}>
+        sx={{ padding: '0 !important', '& .captcha-message': { display: 'none' } }}>
         {value.includes('none') && (
           <Flex direction={['column', 'row']} spacing={4} justify="center" align="center">
             <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>

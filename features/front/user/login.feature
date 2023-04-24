@@ -33,9 +33,9 @@ Scenario: User has lost password and email should be sent
   And I open mail to "user@test.com"
   And I should see "email-content-resetting-password" in mail
 
-@database
-Scenario: Anonymous wants to register with user type and zipcode
-  Given features "restrict_connection", "captcha" are enabled
+@database @turnstile_challenge
+Scenario: User fails to login many times (turnstile captcha gate)
+  Given features "restrict_connection", "captcha", "turnstile_captcha" are enabled
   And I visited "home page"
   When I press "global.login"
   And I fill in the following:
@@ -43,7 +43,7 @@ Scenario: Anonymous wants to register with user type and zipcode
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
-  Then I should see a ".hide-captcha" element
+  Then I should not see a "#turnstile_captcha" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
@@ -64,7 +64,48 @@ Scenario: Anonymous wants to register with user type and zipcode
     | password             | tot                     |
   When I press "global.login_me"
   And I wait 3 seconds
-  Then I should not see a ".hide-captcha" element
+  Then I should see a "#turnstile_captcha" element
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | toto                    |
+  When I press "global.login_me"
+  Then I should see "registration.constraints.captcha.invalid"
+
+@database
+Scenario: User fails to login many times (google captcha gate)
+  Given features "restrict_connection", "captcha" are enabled
+  Given I disable feature "turnstile_captcha"
+  And I visited "home page"
+  When I press "global.login"
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  Then I should not see a "#recaptcha" element
+  Then I should not see a "#turnstile_captcha" element
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  Then I wait "#login-error" to appear on current page
+  And I fill in the following:
+    | username             | lbrunet@cap-collectif.com    |
+    | password             | tot                     |
+  When I press "global.login_me"
+  And I wait 3 seconds
+  Then I should see a "#recaptcha" element
+  Then I should not see a "#turnstile_captcha" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | toto                    |

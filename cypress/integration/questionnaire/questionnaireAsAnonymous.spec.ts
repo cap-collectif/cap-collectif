@@ -28,7 +28,7 @@ describe('Questionnaire Anonymous', () => {
       cy.interceptGraphQLOperation({ operationName: 'DeleteAnonymousReplyMutation' })
 
       QuestionnairePage.fillAnonymousQuestionnaire()
-      cy.confirmRecaptcha()
+      cy.confirmCaptcha()
       cy.wait(1000)
       QuestionnairePage.submitForm()
       cy.wait('@AddAnonymousReplyMutation')

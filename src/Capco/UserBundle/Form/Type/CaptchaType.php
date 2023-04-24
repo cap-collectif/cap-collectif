@@ -1,11 +1,11 @@
 <?php
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
+use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ReCaptchaType extends AbstractType
+class CaptchaType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -13,7 +13,7 @@ class ReCaptchaType extends AbstractType
             'mapped' => false,
             'required' => true,
             'compound' => false,
-            'constraints' => [new ReCaptchaConstraint(['groups' => ['registration']])],
+            'constraints' => [new CaptchaConstraint(['groups' => ['registration']])],
         ]);
     }
 }

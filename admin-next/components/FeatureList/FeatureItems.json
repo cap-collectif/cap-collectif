@@ -338,6 +338,11 @@
                         "description": "",
                         "onlySuperAdmin": false
                     },
+                    "turnstile_captcha": {
+                        "title": "turnstile_captcha",
+                        "description": "",
+                        "onlySuperAdmin": false
+                    },
                     "secure_password": {
                         "title": "capco.module.secure_password",
                         "description": "",

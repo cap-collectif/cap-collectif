@@ -97,6 +97,7 @@ class ApplicationContext extends UserContext
         $jobs = [
             Process::fromShellCommandline('curl -sS -XBAN http://capco.test:8181'),
             Process::fromShellCommandline('redis-cli -h redis FLUSHALL'),
+            Process::fromShellCommandline('rm -f .env.test.local'),
         ];
 
         $scenario = $scope->getScenario();
@@ -125,6 +126,13 @@ class ApplicationContext extends UserContext
             $jobs[] = Process::fromShellCommandline('rm -rf public/media/*');
             $jobs[] = Process::fromShellCommandline(
                 'php -d memory_limit=-1 bin/console capco:reinit --force --env=test'
+            );
+        }
+
+        if ($scenario->hasTag('turnstile_challenge')) {
+            // Turnstile captcha is configured to force challenge mode: https://developers.cloudflare.com/turnstile/reference/testing/
+            $jobs[] = Process::fromShellCommandline(
+                'echo \'SYMFONY_TURNSTILE_PUBLIC_KEY="3x00000000000000000000FF"\' >> .env.test.local'
             );
         }
 

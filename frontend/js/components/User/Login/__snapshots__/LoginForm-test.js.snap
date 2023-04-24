@@ -43,18 +43,18 @@ exports[`<LoginForm /> renders a form with inputs and connection not restricted 
       values={Object {}}
     />
   </a>
-  <LoginForm__StyledContainer>
-    <div
-      className="hide-captcha"
-    >
-      <Field
-        component={[Function]}
-        id="captcha"
-        name="captcha"
-        type="captcha"
-      />
-    </div>
-  </LoginForm__StyledContainer>
+  <Field
+    captchaRef={
+      Object {
+        "current": null,
+      }
+    }
+    component={[Function]}
+    disabled={true}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
 </div>
 `;
 
@@ -101,17 +101,17 @@ exports[`<LoginForm /> renders a form with inputs and connection restricted 1`] 
       values={Object {}}
     />
   </a>
-  <LoginForm__StyledContainer>
-    <div
-      className="hide-captcha"
-    >
-      <Field
-        component={[Function]}
-        id="captcha"
-        name="captcha"
-        type="captcha"
-      />
-    </div>
-  </LoginForm__StyledContainer>
+  <Field
+    captchaRef={
+      Object {
+        "current": null,
+      }
+    }
+    component={[Function]}
+    disabled={true}
+    id="captcha"
+    name="captcha"
+    type="captcha"
+  />
 </div>
 `;

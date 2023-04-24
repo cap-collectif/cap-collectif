@@ -52,7 +52,7 @@ declare namespace Cypress {
     selectReactSelectFirstOption(selector: string): Chainable<any>
     checkAccessDenied(url: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
-    confirmRecaptcha(): Chainable<void>
+    confirmCaptcha(): Chainable<void>
     getByDataCy(name: string): Chainable<void>
     loginAs(username: LoginAsUsernames): Chainable<any>
     directLoginAs(username: LoginAsUsernames): Chainable<any>

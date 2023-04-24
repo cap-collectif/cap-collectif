@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
-use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
+use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -67,7 +67,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
         }
 
         $captcha = $input->offsetGet('captcha');
-        $errors = $this->validator->validate($captcha, [new ReCaptchaConstraint()]);
+        $errors = $this->validator->validate($captcha, [new CaptchaConstraint()]);
         if (\count($errors) > 0) {
             return $this->generateErrorPayload(self::INVALID_CAPTCHA);
         }

@@ -11,7 +11,8 @@ function getRulesConf() {
             path.resolve('node_modules/react-intl'),
             path.resolve('node_modules/intl-messageformat'),
             path.resolve('node_modules/intl-messageformat-parser'),
-            /\.(js|jsx)$/i,
+            path.resolve('node_modules/@marsidev/react-turnstile'),
+            /\.(js|jsx|mjs)$/i,
           ],
           exclude: [/(-test\.js|\.snap|-stories\.js)$/],
           use: [
@@ -24,6 +25,10 @@ function getRulesConf() {
                 cacheDirectory: true,
                 // Don't waste time on Gzipping the cache
                 cacheCompression: false,
+                plugins: [
+                  '@babel/plugin-proposal-optional-chaining',
+                  '@babel/plugin-proposal-nullish-coalescing-operator',
+                ],
               },
             },
           ],

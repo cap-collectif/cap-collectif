@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b89db9c9371a0fb2ff9d73617449a5d",
+    "content-hash": "5f63ea60f4d1eb8765e8d29dd88b1147",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -19667,5 +19667,5 @@
         "ext-simplexml": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

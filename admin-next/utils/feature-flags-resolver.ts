@@ -12,6 +12,7 @@ export const defaultFeatureFlags: FeatureFlags = {
     privacy_policy: false,
     members_list: false,
     captcha: false,
+    turnstile_captcha: false,
     beta__admin_editor: false,
     beta__questionnaire_result: false,
     consent_external_communication: false,

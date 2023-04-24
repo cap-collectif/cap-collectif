@@ -564,13 +564,12 @@ export class ReplyForm extends React.Component<Props, State> {
                   mb: `${SPACES_SCALES[6]} !important`,
                 })}
                 textAlign="center"
-                className="recaptcha-message"
+                className="captcha-message"
                 color="neutral-gray.700">
                 {intl.formatMessage({ id: 'captcha.check' })}
               </Text>
               <Captcha
                 style={{ transformOrigin: 'center' }}
-                value={this.state.captcha.value}
                 onChange={value => {
                   this.setState(state => ({
                     captcha: { ...state.captcha, value },

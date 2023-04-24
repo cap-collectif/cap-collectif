@@ -28,6 +28,10 @@ Object {
       "type": "captcha",
     },
     Object {
+      "enabled": true,
+      "type": "turnstile_captcha",
+    },
+    Object {
       "enabled": false,
       "type": "consent_external_communication",
     },

@@ -4,16 +4,9 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Field, formValueSelector, isSubmitting, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
-import styled, { type StyledComponent } from 'styled-components';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
-import type { GlobalState } from '../../../types';
-
-const StyledContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  .hide-captcha {
-    display: none;
-  }
-`;
+import type { GlobalState } from '~/types';
 
 type ReduxProps = {|
   +restrictConnection: boolean,
@@ -37,6 +30,13 @@ export class LoginForm extends React.Component<Props, State> {
     displayCaptcha: false,
   };
 
+  captchaRef: any;
+
+  constructor(props: Props) {
+    super(props);
+    this.captchaRef = React.createRef();
+  }
+
   state = {
     error: null,
   };
@@ -47,6 +47,12 @@ export class LoginForm extends React.Component<Props, State> {
       // https://reactjs.org/docs/react-component.html#componentdidupdate
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ error });
+    }
+    if (error === 'your-email-address-or-password-is-incorrect') {
+      if (this.captchaRef) {
+        // eslint-disable-next-line no-unused-expressions
+        this.captchaRef?.current?.reset();
+      }
     }
   }
 
@@ -92,11 +98,14 @@ export class LoginForm extends React.Component<Props, State> {
           <FormattedMessage id="global.forgot_password" />
         </a>
 
-        <StyledContainer>
-          <div className={restrictConnection && displayCaptcha ? '' : 'hide-captcha'}>
-            <Field id="captcha" component={renderInput} name="captcha" type="captcha" />
-          </div>
-        </StyledContainer>
+        <Field
+          disabled={!restrictConnection || !displayCaptcha}
+          id="captcha"
+          component={renderInput}
+          name="captcha"
+          type="captcha"
+          captchaRef={this.captchaRef}
+        />
       </div>
     );
   }
