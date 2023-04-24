@@ -12,7 +12,7 @@ import Play from './SVG/Play';
 import { type Props as AvatarGroupProps } from '~ds/AvatarGroup/AvatarGroup';
 import { type AppBoxProps } from '~ui/Primitives/AppBox.type';
 import Image from '~ui/Primitives/Image';
-import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {
   const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg']);
@@ -244,13 +244,13 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
   };
 
   return (
-    <Flex alignItems="center" zIndex={2}>
+    <Flex alignItems="center" zIndex={2} flexWrap="wrap" width="85%">
       <AvatarGroup
         id="project-header"
         className="projectHeader__authors platform__body"
         minHeight={isMobile ? 13 : 9}
         marginTop={[-8, 0]}
-        flexWrap="wrap"
+        flexWrap="nowrap"
         size={isMobile ? 'xl' : 'lg'}
         max={3}
         sx={
@@ -280,8 +280,7 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
             textDecoration: showProfileLink ? 'underline' : 'none',
             cursor: showProfileLink ? 'pointer' : 'default',
           },
-        }}
-      >
+        }}>
         {getTextValue()}
       </Text>
     </Flex>
@@ -503,7 +502,7 @@ export const Socials = ({ children, ...rest }: SocialsProps) => (
     width="100%"
     flexBasis="100%"
     alignItems="center"
-    marginTop={[9, 6]}
+    marginTop={[3, 6]}
     zIndex={2}
     {...rest}>
     {children}

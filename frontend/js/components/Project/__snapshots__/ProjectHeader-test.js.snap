@@ -11,10 +11,10 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       className="sc-bdnxRM koNNPB projectHeader__cover__content"
     >
       <div
-        className="sc-bdnxRM bfWgxk"
+        className="sc-bdnxRM fhbsqI"
       >
         <div
-          className="sc-bdnxRM ckdMax cap-avatar-group projectHeader__authors platform__body"
+          className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
           id="project-header"
           onClick={[Function]}
           role="group"
