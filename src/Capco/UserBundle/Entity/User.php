@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\EmailingCampaignUser;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
@@ -121,6 +122,7 @@ class User extends AbstractUser implements
 
     private Collection $starredResponses;
 
+    private Collection $emailingCampaignUsers;
     public function __construct()
     {
         parent::__construct();
@@ -143,6 +145,7 @@ class User extends AbstractUser implements
         $this->userPhoneVerificationSms = new ArrayCollection();
         $this->starredResponses = new ArrayCollection();
         $this->memberOfOrganizations = new ArrayCollection();
+        $this->emailingCampaignUsers = new ArrayCollection();
     }
 
     public function isAdminOrganization(): bool
@@ -1158,5 +1161,32 @@ class User extends AbstractUser implements
                 ->getOrganization()
                 ->getId()
         );
+    }
+
+    public function getEmailingCampaignUsers(): Collection
+    {
+        return $this->emailingCampaignUsers;
+    }
+
+    public function addEmailingCampaignUser(EmailingCampaignUser $emailingCampaignUser): self
+    {
+        if (!$this->emailingCampaignUsers->contains($emailingCampaignUser)) {
+            $this->emailingCampaignUsers[] = $emailingCampaignUser;
+            $emailingCampaignUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmailingCampaignUser(EmailingCampaignUser $emailingCampaignUser): self
+    {
+        if ($this->emailingCampaignUsers->removeElement($emailingCampaignUser)) {
+            // set the owning side to null (unless already changed)
+            if ($emailingCampaignUser->getUser() === $this) {
+                $emailingCampaignUser->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

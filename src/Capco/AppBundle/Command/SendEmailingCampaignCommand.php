@@ -19,12 +19,14 @@ class SendEmailingCampaignCommand extends Command
     private EmailingCampaignRepository $repository;
     private EntityManagerInterface $entityManager;
     private OmarDjinn $omarDjinn;
+    private EmailingCampaignRepository $emailingCampaignRepository;
 
     public function __construct(
         EmailingCampaignSender $sender,
         EmailingCampaignRepository $repository,
         EntityManagerInterface $entityManager,
-        OmarDjinn $omarDjinn
+        OmarDjinn $omarDjinn,
+        EmailingCampaignRepository $emailingCampaignRepository
     ) {
         $this->sender = $sender;
         $this->repository = $repository;
@@ -32,6 +34,7 @@ class SendEmailingCampaignCommand extends Command
         $this->omarDjinn = $omarDjinn;
 
         parent::__construct();
+        $this->emailingCampaignRepository = $emailingCampaignRepository;
     }
 
     protected function configure()
@@ -44,16 +47,34 @@ class SendEmailingCampaignCommand extends Command
                 '/!\ Should be used for CI only /!\ .The relative time you want to send email.',
                 'now'
             )
-            ->setDescription('Send all emailing campaigns planned with past date.');
+            ->addOption('campaignId', null, InputOption::VALUE_OPTIONAL, 'Send a single campaign by giving an id')
+            ->setDescription('Send all emailing campaigns planned with past date or send a single one by giving an id');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $campaignId = $input->getOption('campaignId');
+        if ($campaignId) {
+            $this->sendSingleCampaign($campaignId, $output);
+            return 0;
+        }
+
         foreach ($this->getEmailingCampaignsToBeSend($input) as $emailingCampaign) {
             $this->send($emailingCampaign, $output);
         }
 
         return 0;
+    }
+
+    private function sendSingleCampaign(string $emailingCampaignId, OutputInterface $output)
+    {
+        $emailingCampaign = $this->emailingCampaignRepository->find($emailingCampaignId);
+
+        if (!$emailingCampaign) {
+            throw new \Exception("EmailingCampaign with id : {$emailingCampaignId} not found");
+        }
+
+        $this->send($emailingCampaign, $output);
     }
 
     private function getEmailingCampaignsToBeSend(InputInterface $input): array

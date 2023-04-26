@@ -10,6 +10,8 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -84,6 +86,16 @@ class EmailingCampaign implements Ownerable, CreatableInterface
      * @ORM\Column(type="string", length=255)
      */
     private string $status = EmailingCampaignStatus::DRAFT;
+
+    /**
+     * @ORM\OneToMany(targetEntity=EmailingCampaignUser::class, mappedBy="emailingCampaign", orphanRemoval=true)
+     */
+    private Collection $emailingCampaignUsers;
+
+    public function __construct()
+    {
+        $this->emailingCampaignUsers = new ArrayCollection();
+    }
 
     public function getName(): ?string
     {
@@ -258,6 +270,33 @@ class EmailingCampaign implements Ownerable, CreatableInterface
     public function setEmailingGroup(?Group $emailingGroup): self
     {
         $this->emailingGroup = $emailingGroup;
+
+        return $this;
+    }
+
+    public function getEmailingCampaignUsers(): Collection
+    {
+        return $this->emailingCampaignUsers;
+    }
+
+    public function addEmailingCampaignUser(EmailingCampaignUser $emailingCampaignUser): self
+    {
+        if (!$this->emailingCampaignUsers->contains($emailingCampaignUser)) {
+            $this->emailingCampaignUsers[] = $emailingCampaignUser;
+            $emailingCampaignUser->setEmailingCampaign($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmailingCampaignUser(EmailingCampaignUser $emailingCampaignUser): self
+    {
+        if ($this->emailingCampaignUsers->removeElement($emailingCampaignUser)) {
+            // set the owning side to null (unless already changed)
+            if ($emailingCampaignUser->getEmailingCampaign() === $this) {
+                $emailingCampaignUser->setEmailingCampaign(null);
+            }
+        }
 
         return $this;
     }

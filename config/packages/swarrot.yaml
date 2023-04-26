@@ -951,7 +951,7 @@ swarrot:
                 - configurator: swarrot.processor.ack
                 - configurator: swarrot.processor.retry
                   extras:
-                      retry_attempts: 3
+                      retry_attempts: 10
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'emailing_campaign_%%attempt%%'
         sendinblue:
