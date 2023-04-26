@@ -5823,8 +5823,10 @@ interface EmailingCampaignOwner {
     orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
 
     """
-    Array of viewer's affiliation options for mailing campaigns returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [EmailingCampaignAffiliation!]
 
@@ -7329,8 +7331,10 @@ interface MailingListOwner {
     first: Int = 100
 
     """
-    Array of viewer's affiliation options for mailing lists returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [MailingListAffiliation!]
 
@@ -8842,8 +8846,10 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     first: Int = 100
 
     """
-    Array of viewer's affiliation options for mailing lists returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [MailingListAffiliation!]
 
@@ -8868,8 +8874,10 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
 
     """
-    Array of viewer's affiliation options for mailing campaigns returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [EmailingCampaignAffiliation!]
 
@@ -18454,8 +18462,10 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     first: Int = 100
 
     """
-    Array of viewer's affiliation options for mailing lists returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [MailingListAffiliation!]
 
@@ -18480,8 +18490,10 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     orderBy: EmailingCampaignOrder = {field: SEND_AT, direction: DESC}
 
     """
-    Array of viewer's affiliation options for mailing campaigns returned from the connection.
-    For example, OWNER will include only mailing lists that the current viewer owns.
+    Array of viewer's affiliation options for mailing campaigns returned from
+    the connection. For example, OWNER will include only mailing lists that the
+    current viewer owns.
+    
     """
     affiliations: [EmailingCampaignAffiliation!]
 

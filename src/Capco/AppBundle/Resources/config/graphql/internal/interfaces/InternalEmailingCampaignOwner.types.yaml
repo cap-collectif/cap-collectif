@@ -31,8 +31,9 @@ InternalEmailingCampaignOwner:
                     affiliations:
                         type: '[InternalEmailingCampaignAffiliation!]'
                         description: |
-                            Array of viewer's affiliation options for mailing campaigns returned from the connection.
-                            For example, OWNER will include only mailing lists that the current viewer owns.
+                            Array of viewer's affiliation options for mailing campaigns returned from
+                            the connection. For example, OWNER will include only mailing lists that the
+                            current viewer owns.
                     term:
                         type: 'String'
                         description: 'If provided, filter campaigns by name'
