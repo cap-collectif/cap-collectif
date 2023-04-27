@@ -581,7 +581,7 @@ InternalQuery:
                 args:
                     search:
                         type: 'String'
-                        description: 'search an organization'
+                        description: 'search an organization by its name or by member email'
                     affiliations:
                         type: '[OrganizationAffiliation!]'
                         description: |

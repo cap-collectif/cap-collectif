@@ -166,9 +166,18 @@ class OrganizationRepositorySpec extends ObjectBehavior
             Expr\Join::WITH,
             'o.id = ot.translatable'
         )->shouldBeCalled()->willReturn($qb);
+
+        $qb->leftJoin('o.members', 'm')->shouldBeCalled()->willReturn($qb);
+        $qb->leftJoin('m.user', 'u')->shouldBeCalled()->willReturn($qb);
+
         $qb->andWhere('ot.title LIKE :title')
             ->shouldBeCalled()
             ->willReturn($qb);
+
+        $qb->orWhere('u.email LIKE :title')
+            ->shouldBeCalled()
+            ->willReturn($qb);
+
         $qb->setParameter('title', "%${search}%")
             ->shouldBeCalled()
             ->willReturn($qb);

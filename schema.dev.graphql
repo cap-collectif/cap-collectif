@@ -12810,7 +12810,7 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
 
-    """search an organization"""
+    """search an organization by its name or by member email"""
     search: String
 
     """

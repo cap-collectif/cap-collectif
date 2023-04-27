@@ -1,14 +1,16 @@
 import * as React from 'react';
 import CardOrg from '@ui/CardOrg/CardOrg';
-import {Button, Flex, Text, Box} from '@cap-collectif/ui';
-import {graphql, usePaginationFragment} from 'react-relay';
+import { Button, Flex, Text, Box, Spinner } from '@cap-collectif/ui';
+import { graphql, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
-import {OrganizationList_query$key} from "@relay/OrganizationList_query.graphql";
-import {ORGANIZATION_PAGINATION_COUNT} from "../../pages/organizations";
-import CreateOrganizationButton from "../Organizations/CreateOrganizationButton";
+import { OrganizationList_query$key } from '@relay/OrganizationList_query.graphql';
+import { ORGANIZATION_PAGINATION_COUNT } from '../../pages/organizations';
+import CreateOrganizationButton from '../Organizations/CreateOrganizationButton';
+import EmptyMessage from '@ui/Table/EmptyMessage';
 
 export interface OrganizationListProps {
-    query: OrganizationList_query$key
+    query: OrganizationList_query$key;
+    onReset: () => void;
 }
 export const FRAGMENT = graphql`
     fragment OrganizationList_query on Query
@@ -19,9 +21,8 @@ export const FRAGMENT = graphql`
         cursor: { type: "String" }
     )
     @refetchable(queryName: "OrganizationListQuery") {
-        organizations(after: $cursor, first: $count, search: $term, affiliations: $affiliations) 
-        @connection(key: "OrganizationList_organizations", filters: [])
-        {
+        organizations(after: $cursor, first: $count, search: $term, affiliations: $affiliations)
+            @connection(key: "OrganizationList_organizations", filters: []) {
             totalCount
             edges {
                 node {
@@ -43,27 +44,35 @@ export const FRAGMENT = graphql`
     }
 `;
 
-const OrganizationList: React.FC<OrganizationListProps> = ({ query: queryRef }) => {
+const OrganizationList: React.FC<OrganizationListProps> = ({ query: queryRef, onReset }) => {
     const intl = useIntl();
-    const { data: query, loadNext, hasNext, isLoadingNext } = usePaginationFragment(FRAGMENT, queryRef);
+    const {
+        data: query,
+        loadNext,
+        hasNext,
+        isLoadingNext,
+    } = usePaginationFragment(FRAGMENT, queryRef);
     const organizations = query.organizations?.edges
         ?.filter(Boolean)
         .map(edge => edge?.node)
         .filter(Boolean);
 
+    const hasOrganizations = (query?.organizations?.totalCount ?? 0) > 0;
+
     return (
         <>
             <Flex direction="row" wrap="wrap">
                 <CreateOrganizationButton />
-                {organizations &&
-                    organizations.map(organization => {
+                {!hasOrganizations && <EmptyMessage onReset={onReset} />}
+                {hasOrganizations &&
+                    organizations?.map(organization => {
                         const hasLogo = !!organization?.logo;
                         return (
                             <CardOrg key={organization?.id} marginBottom={4} marginRight={4}>
                                 <CardOrg.Header>
                                     {hasLogo ? (
                                         <img
-                                            style={{ objectFit: 'cover' }}
+                                            style={{ objectFit: 'cover', width: '50%' }}
                                             src={organization?.logo?.url}
                                             alt={organization?.logo?.description || ''}
                                         />
@@ -94,19 +103,16 @@ const OrganizationList: React.FC<OrganizationListProps> = ({ query: queryRef }) 
                         );
                     })}
             </Flex>
-            {
-                hasNext && (
-                    <Box>
-                        <Button
-                            variant="tertiary"
-                            onClick={() => loadNext(ORGANIZATION_PAGINATION_COUNT)}
-                            isLoading={isLoadingNext}
-                        >
-                            {intl.formatMessage({id: 'global.more'})}
-                        </Button>
-                    </Box>
-                )
-            }
+            {hasNext && (
+                <Box>
+                    <Button
+                        variant="tertiary"
+                        onClick={() => loadNext(ORGANIZATION_PAGINATION_COUNT)}
+                        isLoading={isLoadingNext}>
+                        {intl.formatMessage({ id: 'global.more' })}
+                    </Button>
+                </Box>
+            )}
         </>
     );
 };

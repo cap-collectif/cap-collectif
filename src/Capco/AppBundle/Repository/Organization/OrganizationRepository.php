@@ -8,8 +8,6 @@ use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Enum\OrganizationAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr;
 
 /**
@@ -76,7 +74,12 @@ class OrganizationRepository extends EntityRepository
                 Expr\Join::WITH,
                 'o.id = ot.translatable'
             );
-            $qb->andWhere('ot.title LIKE :title')->setParameter('title', "%${search}%");
+
+            $qb->leftJoin('o.members', 'm')->leftJoin('m.user', 'u');
+
+            $qb->andWhere('ot.title LIKE :title')
+                ->orWhere('u.email LIKE :title')
+                ->setParameter('title', "%${search}%");
         }
         if ($affiliations && $viewer) {
             if (\in_array(OrganizationAffiliation::USER, $affiliations)) {
@@ -99,6 +102,7 @@ class OrganizationRepository extends EntityRepository
         $qb = $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->where('o.deletedAt IS NOT NULL');
+
         return (int) $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
 }

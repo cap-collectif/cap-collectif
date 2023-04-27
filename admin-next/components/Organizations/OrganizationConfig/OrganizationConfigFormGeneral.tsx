@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Control } from 'react-hook-form';
 import { FormValues } from './OrganizationConfigForm';
-import { Card, Flex, FormLabel, Heading, Text } from '@cap-collectif/ui';
+import { CapUIIcon, Card, Flex, FormLabel, Heading, Icon, Link, Text } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useIntl } from 'react-intl';
 import debounce from '@utils/debounce-promise';
@@ -20,6 +20,7 @@ export interface OrganizationConfigFormGeneralProps {
 const ORGANIZATION_FRAGMENT = graphql`
     fragment OrganizationConfigFormGeneral_organization on Organization {
         id
+        url
     }
 `;
 
@@ -66,9 +67,24 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
                 border: 'none',
             }}
             backgroundColor="white">
-            <Heading as="h4" fontWeight="semibold" color="blue.800">
-                {intl.formatMessage({ id: 'global.general' })}
-            </Heading>
+            <Flex justifyContent="space-between">
+                <Heading as="h4" fontWeight="semibold" color="blue.800">
+                    {intl.formatMessage({ id: 'global.general' })}
+                </Heading>
+                <Flex color="blue.500">
+                    <Icon name={CapUIIcon.Eye} />
+                    <Link
+                        href={organization?.url ?? ''}
+                        target="_blank"
+                        ml={1}
+                        fontWeight={600}
+                        sx={{
+                            textDecoration: 'none !important',
+                        }}>
+                        {intl.formatMessage({ id: 'global.preview' })}
+                    </Link>
+                </Flex>
+            </Flex>
             <Flex direction="column" spacing={6} mt={6}>
                 <FormControl name="title" control={control} isRequired mb={0}>
                     <FormLabel

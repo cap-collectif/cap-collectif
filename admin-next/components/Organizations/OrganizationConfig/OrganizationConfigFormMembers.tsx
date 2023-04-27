@@ -12,6 +12,7 @@ import {
     Text,
     Tag,
     toast,
+    Tooltip,
 } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { Control, useForm } from 'react-hook-form';
@@ -263,12 +264,13 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                                     <Table.Tr>
                                         <Table.Td>
                                             <Flex direction="row" spacing={1}>
-                                                <Text>
-                                                    {invite.user.username &&
-                                                    invite.user.username !== ''
-                                                        ? invite.user.username
-                                                        : invite?.email}
-                                                </Text>
+                                                {invite?.status === 'PENDING' ? (
+                                                    <Text>{invite.email}</Text>
+                                                ) : (
+                                                    <Tooltip label={invite.user.email}>
+                                                        <Text>{invite.user.username}</Text>
+                                                    </Tooltip>
+                                                )}
                                                 {invite?.status === 'PENDING' && (
                                                     <Tag variantColor="orange">
                                                         {intl.formatMessage({ id: 'waiting' })}
