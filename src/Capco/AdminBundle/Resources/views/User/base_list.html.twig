@@ -206,9 +206,9 @@ file that was distributed with this source code.
                                                 </li>
                                                 {%if is_feature_enabled(constant('Capco\\AppBundle\\Toggle\\Manager::export_legacy_users')) %}
                                                     <li>
-                                                        <a href="{{ admin.generateUrl('export', admin.datagrid.paginationparameters(0) + {'format' : format}) }}">
+                                                        <a href="{{ admin.generateUrl('exportLegacyUsers', admin.datagrid.paginationparameters(0) + {'format' : format}) }}">
                                                             <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
-                                                            {{ ("export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
+                                                            {{ ("secret_export_format_" ~ format)|trans({}, 'SonataAdminBundle') }}
                                                         </a>
                                                     </li>
                                                 {% endif %}

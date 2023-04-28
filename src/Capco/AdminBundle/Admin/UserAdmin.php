@@ -35,6 +35,11 @@ class UserAdmin extends CapcoAdmin
         return ['csv'];
     }
 
+    protected function configure(): void
+    {
+        $this->setTemplate('list', 'CapcoAdminBundle:User:list.html.twig');
+    }
+
     protected function configureListFields(ListMapper $list): void
     {
         //$this->setTemplate(
