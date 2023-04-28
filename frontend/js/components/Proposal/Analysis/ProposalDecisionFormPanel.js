@@ -128,7 +128,7 @@ export const ProposalDecisionFormPanel = ({
                   min={0}
                   id="proposalDecision-estimatedCost"
                   name="estimatedCost"
-                  normalize={val => val && parseFloat(val)}
+                  normalize={val => val ? parseFloat(val) : null}
                 />
               </InputGroup>
             </>

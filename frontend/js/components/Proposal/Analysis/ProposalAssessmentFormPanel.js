@@ -132,7 +132,7 @@ export const ProposalAssessmentFormPanel = ({
                   min={0}
                   id="proposalAssessment-estimatedCost"
                   name="estimatedCost"
-                  normalize={val => val && parseFloat(val)}
+                  normalize={val => val ? parseFloat(val) : null}
                 />
               </InputGroup>
             </>
