@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Flex, FlexProps } from '@cap-collectif/ui';
 import SideBarHeader from './header/SideBarHeader';
 import SideBarMenu from './menu/SideBarMenu';
@@ -16,7 +16,7 @@ type SubComponents = {
     Version: typeof SideBarVersion,
 };
 
-const SideBarAnimated = motion.custom(Flex);
+const SideBarAnimated = motion(Flex);
 
 export const SideBar: React.FC<SideBarProps> & SubComponents = ({ children }) => {
     const { fold } = useSideBarContext();

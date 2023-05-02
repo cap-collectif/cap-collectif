@@ -100,7 +100,7 @@ const buttonColor = (styleColor: string, disabled: boolean) => ({
   },
 });
 
-const Container = motion.custom(Flex);
+const Container = motion(Flex);
 
 export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
   const isEmailConfirmed: boolean = useSelector(

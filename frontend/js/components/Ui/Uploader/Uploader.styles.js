@@ -1,7 +1,7 @@
 // @flow
 import type { StyledComponent } from 'styled-components';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import colors from '~/styles/modules/colors';
 import { UPLOADER_SIZE } from './Uploader';
 import type { Responsive } from '~ui/Primitives/AppBox.type';

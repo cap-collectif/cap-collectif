@@ -2,7 +2,7 @@
 import * as React from 'react';
 import css from '@styled-system/css';
 import Tippy from '@tippyjs/react/headless';
-import { motion, useSpring } from 'framer-motion';
+import { m as motion, useSpring } from 'framer-motion';
 import styled from 'styled-components';
 import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
@@ -26,7 +26,7 @@ type Props = {|
   +onHide?: (instance: any) => void | false,
 |};
 
-const PopoverInner = styled(motion.custom(AppBox))`
+const PopoverInner = styled(motion(AppBox))`
   &[data-placement^='top'] > #arrow {
     bottom: -4px;
   }

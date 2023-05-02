@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { MotionConfig, AnimationFeature, ExitFeature } from 'framer-motion';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import * as Sentry from '@sentry/browser';
 import { ThemeProvider } from 'styled-components';
 import { AnalyticsProvider } from 'use-analytics';
@@ -64,7 +64,7 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
             <Theme
               theme={designSystem ? undefined : theme}
               resetCSS={designSystem ? resetCSS : undefined}>
-              <MotionConfig features={[AnimationFeature, ExitFeature]}>{children}</MotionConfig>
+              <LazyMotion features={domAnimation}>{children}</LazyMotion>
             </Theme>
           </AnalyticsProvider>
         </RelayEnvironmentProvider>

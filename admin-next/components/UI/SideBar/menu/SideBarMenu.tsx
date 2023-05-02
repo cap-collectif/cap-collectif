@@ -11,7 +11,7 @@ import {
 } from '@cap-collectif/ui';
 import { useSideBarContext } from '@ui/SideBar/SideBar.context';
 import SideBarItem from './SideBarItem';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 
 interface SideBarMenuProps extends FlexProps {
     id: string;
@@ -23,7 +23,7 @@ type SubComponents = {
     Item: typeof SideBarItem,
 };
 
-const SideBarMenuAnimated = motion.custom(Flex);
+const SideBarMenuAnimated = motion(Flex);
 
 export const SideBarMenu: FC<SideBarMenuProps> & SubComponents = ({
     id,

@@ -3,7 +3,12 @@
 exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
 <div
   className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-  style={Object {}}
+  style={
+    Object {
+      "opacity": 0,
+      "transform": "translateX(100vw) translateZ(0)",
+    }
+  }
 >
   <div
     className="sc-bdnxRM jySDaE"

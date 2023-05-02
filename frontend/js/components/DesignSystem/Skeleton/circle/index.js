@@ -4,7 +4,7 @@ import { m as motion } from 'framer-motion';
 import AppBox from '~ui/Primitives/AppBox';
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type';
 
-const SkeletonCircleInner = motion.custom(AppBox);
+const SkeletonCircleInner = motion(AppBox);
 
 export type SkeletonCircleProps = {|
   ...AppBoxProps,

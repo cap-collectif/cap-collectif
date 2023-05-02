@@ -14,7 +14,7 @@ type Props = {|
 |};
 
 // Need wrapper for animation 'cause of https://github.com/framer/motion/issues/368#issuecomment-782098174
-const ActionBarWrapper = motion.custom(AppBox);
+const ActionBarWrapper = motion(AppBox);
 
 const ActionBar = ({ children, ...props }: Props) => {
   const intl = useIntl();

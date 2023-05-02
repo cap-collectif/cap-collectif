@@ -2,14 +2,14 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import Toast, { type ToastProps } from './Toast';
 import { Emitter } from '~/config';
 import { UIEvents } from '~/dispatchers/enums';
 import AppBox from '~ui/Primitives/AppBox';
 import { LAYOUT_TRANSITION_SPRING } from '~/utils/motion';
 
-const ToastWrapper = styled(motion.custom(AppBox)).attrs({
+const ToastWrapper = styled(motion(AppBox)).attrs({
   width: ['100%', 'auto'],
 })``;
 

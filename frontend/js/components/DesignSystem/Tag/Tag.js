@@ -157,7 +157,7 @@ const TagInner = styled(AppBox).attrs({
   }),
 );
 
-const IconContainer = motion.custom(AppBox);
+const IconContainer = motion(AppBox);
 
 const Tag = React.forwardRef<Props, HTMLSpanElement>(
   (

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m as motion } from 'framer-motion';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Button as BsButton } from 'react-bootstrap';

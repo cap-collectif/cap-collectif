@@ -939,7 +939,12 @@ exports[`<PostForm/> should render correctly 1`] = `
         </button>
         <div
           className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieKotb PostForm___StyledPanel-btvJdQ heNzHw"
-          style={Object {}}
+          style={
+            Object {
+              "height": "0px",
+              "opacity": 0,
+            }
+          }
         />
       </div>
       <div
@@ -966,7 +971,12 @@ exports[`<PostForm/> should render correctly 1`] = `
         </button>
         <div
           className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel2-dfYcjq jIITek"
-          style={Object {}}
+          style={
+            Object {
+              "height": "0px",
+              "opacity": 0,
+            }
+          }
         >
           <div
             className="form-group"
@@ -1513,7 +1523,12 @@ exports[`<PostForm/> should render correctly 1`] = `
         </button>
         <div
           className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel3-ggFZcn iuKuEp"
-          style={Object {}}
+          style={
+            Object {
+              "height": "0px",
+              "opacity": 0,
+            }
+          }
         >
           <div
             className="form-group"

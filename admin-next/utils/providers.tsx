@@ -6,6 +6,7 @@ import { CapUIProvider } from '@cap-collectif/ui';
 import { FeatureFlags, IntlType, ViewerSession } from '../types';
 import getEnvironment from './relay-environement';
 import { AppProvider } from '../components/AppProvider/AppProvider';
+import { LazyMotion, domAnimation } from 'framer-motion';
 
 type ProvidersProps = {
     featureFlags: FeatureFlags
@@ -20,7 +21,7 @@ const Providers: React.FC<ProvidersProps> = ({ children,  intl, featureFlags , v
             <IntlProvider locale={intl.locale} messages={intl.messages}>
                 <CapUIProvider>
                     <AppProvider viewerSession={viewerSession} appVersion={appVersion}>
-                        {children}
+                        <LazyMotion features={domAnimation}>{children}</LazyMotion>
                     </AppProvider>
                 </CapUIProvider>
             </IntlProvider>

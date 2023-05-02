@@ -41,7 +41,7 @@ const MIN_TIMEOUT = 1500;
 // styled-component is wrongly type for styled-system,
 // then we have an error when we use it with this one
 // $FlowFixMe
-const ToastInner = styled(motion.custom(AppBox)).attrs({
+const ToastInner = styled(motion(AppBox)).attrs({
   m: 2,
   p: 4,
   pr: 5,

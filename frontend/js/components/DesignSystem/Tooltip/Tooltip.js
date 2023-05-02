@@ -26,7 +26,7 @@ type TooltipProps = {|
   +zIndex?: number,
 |};
 
-const ContainerAnimate = motion.custom(AppBox);
+const ContainerAnimate = motion(AppBox);
 
 const Arrow = styled(TooltipArrow)`
   svg {

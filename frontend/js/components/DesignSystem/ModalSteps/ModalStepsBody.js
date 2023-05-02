@@ -28,7 +28,7 @@ const variants = {
   }),
 };
 
-const Content = motion.custom(AppBox);
+const Content = motion(AppBox);
 
 const ModalStepsBody = ({ children, ...rest }: Props) => {
   const { currentStep, steps, registerSteps } = useModalSteps();

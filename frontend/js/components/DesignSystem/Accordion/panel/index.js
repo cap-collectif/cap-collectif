@@ -9,7 +9,7 @@ type Props = {|
   children: React.Node,
 |};
 
-const Container = motion.custom(Flex);
+const Container = motion(Flex);
 
 const AccordionPanel = ({ children, ...props }: Props) => {
   const { open } = React.useContext(AccordionItemContext);

@@ -34,7 +34,7 @@ export type ModalProps = {|
   +fullSizeOnMobile?: boolean,
   +fullPageScrollable?: boolean,
 |};
-const ModalContainerInner = styled(motion.custom(AppBox)).attrs(({ zIndex }) => ({
+const ModalContainerInner = styled(motion(AppBox)).attrs(({ zIndex }) => ({
   position: 'fixed',
   left: 0,
   right: 0,
@@ -47,7 +47,7 @@ const ModalContainerInner = styled(motion.custom(AppBox)).attrs(({ zIndex }) => 
   flexDirection: 'column',
   alignItems: 'center',
 }))``;
-const ModalInner = styled(motion.custom(AppBox)).attrs(
+const ModalInner = styled(motion(AppBox)).attrs(
   ({ fullSizeOnMobile, fullPageScrollable, ...rest }) => ({
     display: 'flex',
     bg: 'white',

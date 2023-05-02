@@ -12,7 +12,7 @@ export type SkeletonTextProps = {|
   size?: 'sm' | 'md' | 'lg',
 |};
 
-const SkeletonTextInner: StyledComponent<{}, {}, any> = styled(motion.custom(AppBox))(
+const SkeletonTextInner: StyledComponent<{}, {}, any> = styled(motion(AppBox))(
   variant({
     variants: {
       sm: {

@@ -13,7 +13,7 @@ type Props = {|
   ...AppBoxProps,
 |};
 
-const MenuItems = styled(motion.custom(Flex)).attrs(props => ({
+const MenuItems = styled(motion(Flex)).attrs(props => ({
   direction: 'column',
   minWidth: '200px',
   bg: 'white',

@@ -361,6 +361,7 @@ Array [
       <div
         style={
           Object {
+            "opacity": 0,
             "width": "100%",
           }
         }
@@ -498,6 +499,7 @@ Array [
       <div
         style={
           Object {
+            "opacity": 0,
             "width": "100%",
           }
         }
@@ -947,6 +949,7 @@ Array [
       <div
         style={
           Object {
+            "opacity": 0,
             "width": "100%",
           }
         }
@@ -1084,6 +1087,7 @@ Array [
       <div
         style={
           Object {
+            "opacity": 1,
             "width": "100%",
           }
         }

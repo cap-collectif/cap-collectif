@@ -6,7 +6,7 @@ import { useModalSteps } from '~ds/ModalSteps/ModalSteps.context';
 import AppBox from '~ui/Primitives/AppBox';
 import { ease } from '~/utils/motion';
 
-const ItemFillProgressBar = motion.custom(AppBox);
+const ItemFillProgressBar = motion(AppBox);
 
 const variants = {
   empty: { width: 0 },

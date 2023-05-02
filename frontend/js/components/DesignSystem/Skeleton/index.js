@@ -16,7 +16,7 @@ export type SkeletonProps = {|
   +animate?: boolean,
 |};
 
-const SkeletonInner = styled(motion.custom(AppBox))``;
+const SkeletonInner = styled(motion(AppBox))``;
 
 const Skeleton = ({
   isLoaded = false,
