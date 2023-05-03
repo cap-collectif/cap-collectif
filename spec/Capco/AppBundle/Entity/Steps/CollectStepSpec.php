@@ -76,4 +76,18 @@ class CollectStepSpec extends ObjectBehavior
 
         $this->canResolverDisplayBallot($viewer)->shouldReturn(true);
     }
+
+    function it_can_not_display_ballot_if_viewer_is_null(
+        User $viewer,
+        ProjectAbstractStep $projectAbstractStep,
+        Project $project,
+        Organization $organization
+    )
+    {
+        $this->setSecretBallot(true);
+        $this->setPublishedVoteDate(new \DateTime('2050-03-01'));
+        $this->canDisplayBallot()->shouldReturn(false);
+
+        $this->canResolverDisplayBallot(null)->shouldReturn(false);
+    }
 }

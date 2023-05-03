@@ -456,7 +456,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
             return true;
         }
 
-        if ($viewer instanceof User && ($viewer->isAdmin() || $this->getOwner() === $viewer)) {
+        if(!$viewer instanceof User) {
+            return false;
+        }
+
+        if ($viewer->isAdmin() || $this->getOwner() === $viewer) {
             return true;
         }
 
