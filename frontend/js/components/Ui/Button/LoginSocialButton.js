@@ -200,7 +200,8 @@ export const FranceConnectButton: StyledComponent<
   }
   .loginIcon {
     & > svg {
-      height: 45px;
+      height: 60px;
+      width: 228px;
     }
   }
 `;
