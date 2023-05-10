@@ -398,3 +398,7 @@ services:
     Capco\AppBundle\Service\AddStepService:
         autowire: true
         public: true
+
+    sonata.admin.admin_exporter:
+        class: 'Sonata\AdminBundle\Bridge\Exporter\AdminExporter'
+        public: true

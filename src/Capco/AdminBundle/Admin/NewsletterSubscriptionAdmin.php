@@ -92,6 +92,6 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
-        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
     }
 }
