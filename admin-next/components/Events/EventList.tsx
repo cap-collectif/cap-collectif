@@ -2,11 +2,12 @@ import * as React from 'react';
 import { graphql, useFragment, usePaginationFragment } from 'react-relay';
 import { useIntl } from 'react-intl';
 import EventItem from './EventItem';
-import {Table, Text, Icon, CapUIIcon, Link} from '@cap-collectif/ui';
+import { Table, Text, Icon, CapUIIcon, Link } from '@cap-collectif/ui';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import { EventList_viewer$key } from '@relay/EventList_viewer.graphql';
 import { EventList_eventOwner$key } from '@relay/EventList_eventOwner.graphql';
 import { EventListQueryVariables } from '@relay/EventListQuery.graphql';
+import { useLayoutContext } from 'components/Layout/Layout.context';
 
 export const EVENT_LIST_PAGINATION = 20;
 
@@ -77,6 +78,7 @@ const EventList: React.FC<EventListProps> = ({
     const [orderBy, setOrderBy] = React.useState('DESC');
     const { events } = data;
     const firstRendered = React.useRef<boolean | null>(null);
+    const { contentRef } = useLayoutContext();
     const hasEvents = events ? events.totalCount > 0 : false;
     const affiliations: EventAffiliations = React.useMemo(
         () => (isAdmin ? null : ['OWNER']),
@@ -163,7 +165,8 @@ const EventList: React.FC<EventListProps> = ({
                 onScrollToBottom={() => {
                     loadNext(EVENT_LIST_PAGINATION);
                 }}
-                hasMore={hasNext}>
+                hasMore={hasNext}
+                scrollParentRef={contentRef || undefined}>
                 {events?.edges
                     ?.filter(Boolean)
                     .map(edge => edge?.node)
