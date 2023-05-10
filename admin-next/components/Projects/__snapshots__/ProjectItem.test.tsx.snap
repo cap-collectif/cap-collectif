@@ -100,7 +100,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -412,7 +412,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -724,7 +724,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -972,7 +972,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bdnxRM jWrtJR cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",

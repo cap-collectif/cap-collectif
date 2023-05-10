@@ -191,7 +191,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                         year: 'numeric',
                     })}
             </Table.Td>
-            <Table.Td visibleOnHover>
+            <Table.Td>
                 <Menu
                     disclosure={
                         <ButtonQuickAction
