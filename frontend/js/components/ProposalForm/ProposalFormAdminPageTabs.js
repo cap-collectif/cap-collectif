@@ -25,7 +25,7 @@ const TABS = {
 };
 
 const setIntialIndex = (): number => {
-  const openModal = window.location.hash.includes('#openAnalysisStep') ? 2 : 0;
+  const openModal = window.location.hash.includes('#openAnalysisStep') ? 1 : 0;
   if (openModal > 0) {
     const newUrl = window.location.href.replace('#openAnalysisStep', '');
     window.history.pushState('', '', newUrl);
