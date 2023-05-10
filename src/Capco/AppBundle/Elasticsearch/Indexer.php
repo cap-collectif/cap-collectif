@@ -280,7 +280,10 @@ class Indexer
                 return 'comment';
             }
 
-            if (AbstractVote::class === $parentClass->getName() || AbstractProposalVote::class === $parentClass->getName()) {
+            if (
+                AbstractVote::class === $parentClass->getName() ||
+                AbstractProposalVote::class === $parentClass->getName()
+            ) {
                 return 'vote';
             }
 
@@ -342,6 +345,14 @@ class Indexer
         $correctlyIndexed = 0;
         $correctlyDeleted = 0;
         foreach ($iterableResult as $key => $row) {
+            if ($key < $offset) {
+                if (isset($progress)) {
+                    $progress->advance();
+                }
+
+                continue;
+            }
+
             /** @var IndexableInterface $object */
             $object = $row[0];
 
