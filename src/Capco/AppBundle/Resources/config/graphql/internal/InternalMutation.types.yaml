@@ -1560,13 +1560,6 @@ InternalMutation:
                     inputType: AddSmsCreditInput
                     payloadType: AddSmsCreditPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\AddSmsCreditMutation", [value, getUser()])'
-            updateSmsCredit:
-                access: '@=hasRole("ROLE_ADMIN")'
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: UpdateSmsCreditInput
-                    payloadType: UpdateSmsCreditPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\UpdateSmsCreditMutation", [value, getUser()])'
             updatePaperVote:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Proposal\\UpdatePaperVoteMutation").isGranted(args["input"]["proposal"], getUser())'
                 builder: 'Relay::Mutation'

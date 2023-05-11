@@ -8145,7 +8145,6 @@ type Mutation {
   createSmsOrder(input: CreateSmsOrderInput!): CreateSmsOrderPayload
   deleteSmsOrder(input: DeleteSmsOrderInput!): DeleteSmsOrderPayload
   addSmsCredit(input: AddSmsCreditInput!): AddSmsCreditPayload
-  updateSmsCredit(input: UpdateSmsCreditInput!): UpdateSmsCreditPayload
   updatePaperVote(input: UpdatePaperVoteInput!): UpdatePaperVotePayload
   updateProjectSlug(input: UpdateProjectSlugInput!): UpdateProjectSlugPayload
   updateCivicIA(input: UpdateCivicIAInput!): UpdateCivicIAPayload
@@ -18133,29 +18132,6 @@ type UpdateSiteParameterPayload {
 
   """The error generated, if any."""
   errorCode: UpdateSiteParameterErrorCode
-  clientMutationId: String
-}
-
-"""Available errors for an `updateSmsCredit` mutation."""
-enum UpdateSmsCreditErrorCode {
-  """No `SmsCredit` match your `id`."""
-  SMS_CREDIT_NOT_FOUND
-}
-
-input UpdateSmsCreditInput {
-  """The id of smsCredit to update."""
-  id: ID!
-
-  """The amount of credit to update."""
-  amount: Int!
-  clientMutationId: String
-}
-
-type UpdateSmsCreditPayload {
-  smsCredit: SmsCredit
-
-  """The error generated, if any."""
-  errorCode: UpdateSmsCreditErrorCode
   clientMutationId: String
 }
 
