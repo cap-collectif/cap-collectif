@@ -2,11 +2,10 @@
 import React, { useState, type Node } from 'react';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Box, Skeleton, Button, Flex, Heading } from '@cap-collectif/ui'
+import { Box, Skeleton, Button, Flex, Heading } from '@cap-collectif/ui';
 import type { DebateStepPageFaceToFace_step } from '~relay/DebateStepPageFaceToFace_step.graphql';
 import DebateOpinionPlaceholder from '~/components/Debate/Opinion/DebateOpinionPlaceholder';
 import DebateOpinion from '~/components/Debate/Opinion/DebateOpinion';
-
 
 type Props = {|
   +step: ?DebateStepPageFaceToFace_step,
@@ -57,19 +56,21 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
               />
             </Flex>
             {hasMore && (
-              <Button
-                onClick={() => setReadMore(!readMore)}
-                variant="link"
-                variantColor="primary"
-                variantSize="small"
-                rightIcon="ARROW_DOWN_O"
-                m="auto"
-                mt={7}>
-                <FormattedMessage
-                  tagName={React.Fragment}
-                  id={readMore ? 'read-less-opinions' : 'capco.module.read_more'}
-                />
-              </Button>
+              <Flex width="100%" justify="center">
+                <Button
+                  onClick={() => setReadMore(!readMore)}
+                  variant="link"
+                  variantColor="primary"
+                  variantSize="small"
+                  rightIcon="ARROW_DOWN_O"
+                  m="auto"
+                  mt={7}>
+                  <FormattedMessage
+                    tagName={React.Fragment}
+                    id={readMore ? 'read-less-opinions' : 'capco.module.read_more'}
+                  />
+                </Button>
+              </Flex>
             )}
           </>
         ) : null}
@@ -81,7 +82,7 @@ export const DebateStepPageFaceToFace = ({ step, isMobile }: Props): Node => {
 export default (createFragmentContainer(DebateStepPageFaceToFace, {
   step: graphql`
     fragment DebateStepPageFaceToFace_step on DebateStep
-      @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+    @argumentDefinitions(isMobile: { type: "Boolean!" }) {
       debate {
         opinions {
           edges {
