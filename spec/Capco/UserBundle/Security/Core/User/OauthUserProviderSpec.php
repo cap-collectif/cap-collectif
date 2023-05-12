@@ -2,6 +2,7 @@
 
 namespace spec\Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
@@ -19,8 +20,11 @@ use Capco\UserBundle\Security\Core\User\OauthUserProvider;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OauthUserProviderSpec extends ObjectBehavior
 {
@@ -38,7 +42,11 @@ class OauthUserProviderSpec extends ObjectBehavior
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
         LoggerInterface $logger,
         UserInvitationHandler $userInvitationHandler,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        RequestStack $requestStack,
+        RedisCache $redisCache,
+        FlashBagInterface $flashBag,
+        TranslatorInterface $translator
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -47,10 +55,15 @@ class OauthUserProviderSpec extends ObjectBehavior
             $indexer,
             [],
             $groupMutation,
-            $franceConnectSSOConfigurationRepository,
+            $franceConnectSSOConfigurationRepository
+            ,
             $logger,
             $userInvitationHandler,
-            $tokenStorage
+            $tokenStorage,
+            $requestStack,
+            $redisCache,
+            $flashBag,
+            $translator
         );
     }
 

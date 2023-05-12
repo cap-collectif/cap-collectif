@@ -402,3 +402,25 @@ services:
     sonata.admin.admin_exporter:
         class: 'Sonata\AdminBundle\Bridge\Exporter\AdminExporter'
         public: true
+
+    hwi_oauth.resource_owner.franceconnect:
+        class: 'Capco\UserBundle\FranceConnect\FranceConnectResourceOwner'
+        public: true
+        autowire: true
+        arguments:
+            $httpClient: '@hwi_oauth.http_client'
+            $httpUtils: '@Symfony\Component\Security\Http\HttpUtils'
+            $options:
+                client_id: 'fake'
+                client_secret: 'fake'
+                access_token_url: 'fake'
+                authorization_url: 'fake'
+                infos_url: 'fake'
+                options:
+                    'logout_url': 'fake'
+                    'csrf': true
+                'paths': []
+            $name: 'franceconnect'
+            $optionsModifier: '@Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier'
+            $storage: '@hwi_oauth.storage.session'
+            $redisCache: '@Capco\AppBundle\Cache\RedisCache'

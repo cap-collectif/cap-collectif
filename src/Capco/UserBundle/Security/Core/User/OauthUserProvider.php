@@ -2,7 +2,10 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
+use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\Common\Util\ClassUtils;
 use Capco\AppBundle\Elasticsearch\Indexer;
@@ -11,11 +14,15 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OauthUserProvider extends FOSUBUserProvider
 {
@@ -28,6 +35,10 @@ class OauthUserProvider extends FOSUBUserProvider
     private UserInvitationHandler $userInvitationHandler;
     private TokenStorageInterface $tokenStorage;
     private bool $isNewUser = false;
+    private RequestStack $requestStack;
+    private RedisCache $redisCache;
+    private FlashBagInterface $flashBag;
+    private TranslatorInterface $translator;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -39,7 +50,11 @@ class OauthUserProvider extends FOSUBUserProvider
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
         LoggerInterface $logger,
         UserInvitationHandler $userInvitationHandler,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        RequestStack $requestStack,
+        RedisCache $redisCache,
+        FlashBagInterface $flashBag,
+        TranslatorInterface $translator
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
@@ -49,7 +64,10 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->logger = $logger;
         $this->userInvitationHandler = $userInvitationHandler;
         $this->tokenStorage = $tokenStorage;
-
+        $this->requestStack = $requestStack;
+        $this->redisCache = $redisCache;
+        $this->flashBag = $flashBag;
+        $this->translator = $translator;
         parent::__construct($userManager, $properties);
     }
 
@@ -77,9 +95,17 @@ class OauthUserProvider extends FOSUBUserProvider
     }
 
     // TODO we need a unit test on France Connect behavior
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response): ?UserInterface
     {
         $ressourceOwner = $response->getResourceOwner();
+
+        if ($ressourceOwner instanceof FranceConnectResourceOwner) {
+            $redirectResponse = $this->verifyFranceConnectStateAndNonce($response);
+            if ($redirectResponse instanceof RedirectResponse) {
+                return null;
+            }
+        }
+
         $serviceName = $ressourceOwner->getName();
         $viewer = $this->tokenStorage->getToken()
             ? $this->tokenStorage->getToken()->getUser()
@@ -150,6 +176,33 @@ class OauthUserProvider extends FOSUBUserProvider
         }
 
         return $user;
+    }
+
+    private function verifyFranceConnectStateAndNonce(UserResponseInterface $response)
+    {
+        $request = $this->requestStack->getCurrentRequest();
+
+        $state = $request->query->get('state');
+        $rawToken = $response->getOAuthToken()->getRawToken();
+        $franceConnectJwtToken = $rawToken['id_token'];
+
+        $tokenParts = explode('.', $franceConnectJwtToken);
+        $tokenPayload = json_decode(base64_decode($tokenParts[1]), true) ?? null;
+        $nonce = $tokenPayload['nonce'] ?? null;
+
+        $tokens = $this->redisCache
+            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY)
+            ->get();
+
+        if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $state) {
+            $this->flashBag->add(
+                'danger',
+                $this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle')
+            );
+            $this->logger->error('state or nonce token does not match the one given by the server');
+
+            return new RedirectResponse('/');
+        }
     }
 
     private function debug(UserResponseInterface $response)

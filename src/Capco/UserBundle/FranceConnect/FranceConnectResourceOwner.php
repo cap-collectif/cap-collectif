@@ -2,9 +2,15 @@
 
 namespace Capco\UserBundle\FranceConnect;
 
+use Capco\AppBundle\Cache\RedisCache;
+use Http\Client\Common\HttpMethodsClient;
+use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\AbstractOptionsModifier;
+use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Http\HttpUtils;
 
 class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 {
@@ -16,12 +22,38 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         'nickname' => 'preferred_username',
         'birthplace' => 'birthplace',
     ];
+    private RedisCache $redisCache;
+
+    public function __construct(
+        HttpMethodsClient $httpClient,
+        HttpUtils $httpUtils,
+        array $options,
+        $name,
+        AbstractOptionsModifier $optionsModifier,
+        RequestDataStorageInterface $storage,
+        RedisCache $redisCache
+    ) {
+        parent::__construct($httpClient, $httpUtils, $options, $name, $optionsModifier, $storage);
+        $this->redisCache = $redisCache;
+    }
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
     {
         // https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#glossary
+        $nonce = $this->generateNonce();
+
+        /** * @var CacheItem $tokens  */
+        $tokens = $this->redisCache
+            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY)
+            ->get();
+
+        if (!empty($tokens)) {
+            $nonce = $tokens['nonce'];
+            $this->state = $tokens['state'] ?? null;
+        }
+
         $extraParameters = array_merge($extraParameters, [
-            'nonce' => $this->generateNonce(),
+            'nonce' => $nonce,
             'acr_values' => 'eidas1',
         ]);
 
@@ -36,6 +68,14 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         return parent::getAccessToken($request, $redirectUri, $extraParameters);
     }
 
+    public function getScope(): string
+    {
+        $allowedData = $this->optionsModifier->getAllowedData();
+        $scope = array_merge(['openid'], $allowedData);
+
+        return implode(' ', $scope);
+    }
+
     protected function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
@@ -45,13 +85,5 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
                 'scope' => $this->getScope(),
             ])
             ->setRequired('logout_url');
-    }
-
-    public function getScope(): string
-    {
-        $allowedData = $this->optionsModifier->getAllowedData();
-        $scope = array_merge(['openid'], $allowedData);
-
-        return implode(' ', $scope);
     }
 }
