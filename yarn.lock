@@ -4263,6 +4263,28 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-knobs@5.1.8":
+  version "5.1.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-knobs/-/addon-knobs-5.1.8.tgz#f0b7cf1e14e647e2030055a8f9eb9e09e595fd5d"
+  integrity sha512-GCcjc3iO8YQOKdOaA1pr4INzNA3gU/0qIpYg0En3CbNH9LodfBha3l91G64AH06rCqhAYWp5D482kptKRaFxOA==
+  dependencies:
+    "@storybook/addons" "5.1.8"
+    "@storybook/client-api" "5.1.8"
+    "@storybook/components" "5.1.8"
+    "@storybook/core-events" "5.1.8"
+    "@storybook/theming" "5.1.8"
+    copy-to-clipboard "^3.0.8"
+    core-js "^3.0.1"
+    escape-html "^1.0.3"
+    fast-deep-equal "^2.0.1"
+    global "^4.3.2"
+    lodash "^4.17.11"
+    prop-types "^15.7.2"
+    qs "^6.6.0"
+    react-color "^2.17.0"
+    react-lifecycles-compat "^3.0.4"
+    react-select "^2.2.0"
+
 "@storybook/addon-measure@6.5.9":
   version "6.5.9"
   resolved "https://registry.yarnpkg.com/@storybook/addon-measure/-/addon-measure-6.5.9.tgz#f949d4f5f4025c839634114365f1399ea04bd0ae"
@@ -20808,27 +20830,6 @@ storybook-addon-intl@^2.4.1:
   integrity sha512-07CofbUQcx8axTWd2/x0CNyaNJzRFW+/idHg2W3fnimy9w56A088kJwQzefjVFVSJELFDL2kjG19pP3MJ2A0ng==
   dependencies:
     prop-types "^15.5.0"
-
-"storybook-addon-knobs@https://github.com/cap-collectif/knob/tarball/23e3e6573111a7c4f1620852c4d1b70bc3413c8b":
-  version "5.1.8"
-  resolved "https://github.com/cap-collectif/knob/tarball/23e3e6573111a7c4f1620852c4d1b70bc3413c8b#11c7d83f5b6c76b99a58fb6f09e61abf57fdd902"
-  dependencies:
-    "@storybook/addons" "5.1.8"
-    "@storybook/client-api" "5.1.8"
-    "@storybook/components" "5.1.8"
-    "@storybook/core-events" "5.1.8"
-    "@storybook/theming" "5.1.8"
-    copy-to-clipboard "^3.0.8"
-    core-js "^3.0.1"
-    escape-html "^1.0.3"
-    fast-deep-equal "^2.0.1"
-    global "^4.3.2"
-    lodash "^4.17.11"
-    prop-types "^15.7.2"
-    qs "^6.6.0"
-    react-color "^2.17.0"
-    react-lifecycles-compat "^3.0.4"
-    react-select "^2.2.0"
 
 stream-browserify@^2.0.1:
   version "2.0.2"

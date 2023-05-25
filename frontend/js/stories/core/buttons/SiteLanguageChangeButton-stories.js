@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { number, color } from 'storybook-addon-knobs';
+import { number, color } from '@storybook/addon-knobs';
 
 import SiteLanguageChangeButton from '../../../components/Ui/Button/SiteLanguageChangeButton';
 

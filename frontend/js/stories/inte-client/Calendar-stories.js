@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject, text, number, boolean } from 'storybook-addon-knobs';
+import { text, number, boolean } from '@storybook/addon-knobs';
 import Calendar from '~/components/InteClient/Calendar/Calendar';
 
 const inputs = [
@@ -31,7 +31,7 @@ storiesOf('Inté client/Calendar', module)
         <Calendar
           defaultColor={text('defaultColor', '#1C671C')}
           backgroundColor={text('backgroundColor', '#FFF')}
-          inputs={arrayObject('inputs', inputs)}
+          inputs={inputs}
         />
       </div>
     ),
@@ -49,7 +49,7 @@ storiesOf('Inté client/Calendar', module)
           withBorder={boolean('withBorder', true)}
           defaultColor={text('defaultColor', '#EE6132')}
           backgroundColor={text('backgroundColor', '#FFF')}
-          inputs={arrayObject('inputs', inputs)}
+          inputs={inputs}
         />
       </div>
     ),
@@ -69,7 +69,7 @@ storiesOf('Inté client/Calendar', module)
           activeNumber={number('activeNumber', 1)}
           backgroundColor={text('backgroundColor', '#F3F3F3')}
           withBorder={boolean('withBorder', false)}
-          inputs={arrayObject('inputs', inputs)}
+          inputs={inputs}
         />
       </div>
     ),

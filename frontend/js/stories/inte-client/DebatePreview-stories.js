@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject, text } from 'storybook-addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import DebatePreviewItem from '~/components/InteClient/DebatePreview/DebatePreviewItem/DebatePreviewItem';
 import DebatePreviewList from '~/components/InteClient/DebatePreview/DebatePreviewList/DebatePreviewList';
 
@@ -20,6 +20,7 @@ const inputs = [
       fr: 'https://gogo.com',
       en: 'https://gogo.com',
     },
+    lang: 'fr',
   },
   {
     title: {
@@ -35,6 +36,7 @@ const inputs = [
       fr: 'https://gogo.com',
       en: 'https://gogo.com',
     },
+    lang: 'fr',
   },
   {
     title: {
@@ -50,12 +52,13 @@ const inputs = [
       fr: 'https://gogo.com',
       en: 'https://gogo.com',
     },
+    lang: 'fr',
   },
 ];
 
 storiesOf('Inté client/DebatePreview/List', module).add(
   'Default',
-  () => <DebatePreviewList debates={arrayObject('debates', inputs)} lang={text('lang', 'fr')} />,
+  () => <DebatePreviewList debates={inputs} lang={text('lang', 'fr')} />,
   {
     knobsToBo: {
       componentName: 'DebatePreviewApp',

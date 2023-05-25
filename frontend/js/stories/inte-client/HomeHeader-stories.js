@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, object } from 'storybook-addon-knobs';
+import { text, object } from '@storybook/addon-knobs';
 import HomeHeader from '~/components/InteClient/HomeHeader/HomeHeader';
 
 storiesOf('Inté client/HomeHeader', module).add(

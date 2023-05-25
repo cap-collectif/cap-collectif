@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean, arrayObject } from 'storybook-addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import CircleColor, { type Color } from '../../../components/Ui/CircleColor/CircleColor';
 
@@ -15,11 +15,6 @@ storiesOf('Core/Form/CircleColor', module).add('CircleColor', () => {
   const editable = boolean('editable', true);
 
   return (
-    <CircleColor
-      editable={editable}
-      onChange={() => {}}
-      defaultColor={colors[0]}
-      colors={arrayObject('colors', colors)}
-    />
+    <CircleColor editable={editable} onChange={() => {}} defaultColor={colors[0]} colors={colors} />
   );
 });

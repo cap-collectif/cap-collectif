@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject, text } from 'storybook-addon-knobs';
+import { text } from '@storybook/addon-knobs';
 import ParticipationMotivation from '~/components/InteClient/ParticipationMotivation/ParticipationMotivation';
 
 const inputs = [
@@ -13,12 +13,7 @@ const inputs = [
 
 storiesOf('Inté client/ParticipationMotivation', module).add(
   'Default',
-  () => (
-    <ParticipationMotivation
-      motivations={arrayObject('motivations', inputs)}
-      color={text('color', '#4211D0')}
-    />
-  ),
+  () => <ParticipationMotivation motivations={inputs} color={text('color', '#4211D0')} />,
   {
     knobsToBo: {
       componentName: 'ParticipationMotivationApp',

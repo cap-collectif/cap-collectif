@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Label as BsLabel } from 'react-bootstrap';
-import { text, select, boolean, color, number } from 'storybook-addon-knobs';
+import { text, select, boolean, color, number } from '@storybook/addon-knobs';
 import { Label } from '~/components/Ui/Labels/Label';
 
 const bsStyleOptions = {

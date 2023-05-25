@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { number, text } from 'storybook-addon-knobs';
+import { number, text } from '@storybook/addon-knobs';
 import SearchableDropdownSelect from '~ui/SearchableDropdownSelect';
 import DropdownSelect from '~ui/DropdownSelect';
 import Icon, { ICON_NAME } from '~ui/Icons/Icon';

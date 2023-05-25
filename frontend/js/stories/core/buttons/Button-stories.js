@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, boolean, select } from 'storybook-addon-knobs';
+import { text, boolean, select } from '@storybook/addon-knobs';
 import { Button } from 'react-bootstrap';
 
 const bsStyleOptions = {

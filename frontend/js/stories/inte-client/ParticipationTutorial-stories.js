@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject } from 'storybook-addon-knobs';
 import { ICON_NAME } from '~ui/Icons/Icon';
 import ParticipationTutorial from '~/components/InteClient/ParticipationTutorial/ParticipationTutorial';
 
@@ -37,7 +36,7 @@ const inputs = [
 
 storiesOf('Inté client/ParticipationTutorial', module).add(
   'Default',
-  () => <ParticipationTutorial instructions={arrayObject('instructions', inputs)} />,
+  () => <ParticipationTutorial instructions={inputs} />,
   {
     knobsToBo: {
       componentName: 'ParticipationTutorialApp',

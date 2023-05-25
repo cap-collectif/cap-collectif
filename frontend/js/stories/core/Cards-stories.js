@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, select, text } from 'storybook-addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import Card from '../../components/Ui/Card/Card';
 import Image from '../../components/Ui/Medias/Image';
 

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { arrayObject } from 'storybook-addon-knobs';
 import EngagementItem from '~/components/InteClient/Engagement/EngagementItem/EngagementItem';
 import EngagementList from '~/components/InteClient/Engagement/EngagementList/EngagementList';
 
@@ -10,8 +9,7 @@ const inputs = [
     icon: 'https://image.flaticon.com/icons/png/512/114/114245.png',
     description: 'Main',
     linkText: 'Laver ses mains ?',
-    link:
-      'https://www.dettol.fr/nos-conseils-hygiegravene/des-mains-propres/comment-devez-vous-vous-laver-les-mains/',
+    link: 'https://www.dettol.fr/nos-conseils-hygiegravene/des-mains-propres/comment-devez-vous-vous-laver-les-mains/',
   },
   {
     icon: 'https://image.flaticon.com/icons/png/512/45/45898.png',
@@ -27,12 +25,7 @@ const inputs = [
 
 storiesOf('Inté client/Engagement/List', module).add(
   'Default',
-  () => (
-    <EngagementList
-      engagements={arrayObject('engagements', inputs)}
-      style={{ maxWidth: 600, margin: 'auto' }}
-    />
-  ),
+  () => <EngagementList engagements={inputs} style={{ maxWidth: 600, margin: 'auto' }} />,
   {
     knobsToBo: {
       componentName: 'EngagementApp',

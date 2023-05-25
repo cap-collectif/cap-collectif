@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { boolean } from 'storybook-addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import ProgressListItem from '../../../components/Ui/List/ProgressListItem';
 import ProgressList from '../../../components/Ui/List/ProgressList';

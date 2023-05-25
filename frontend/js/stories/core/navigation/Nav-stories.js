@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean } from 'storybook-addon-knobs';
+import { boolean } from '@storybook/addon-knobs';
 import { NavContainer, NavItem, Count } from '~/components/Admin/Project/ProjectAdminContent.style';
 
 storiesOf('Core/Navigation/Nav', module)
