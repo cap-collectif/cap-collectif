@@ -4,9 +4,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -88,6 +91,7 @@ class CreateProjectMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+
         try {
             $this->em->persist($project);
             $this->em->flush();
@@ -126,7 +130,6 @@ class CreateProjectMutation implements MutationInterface
 
         return ['project' => $project];
     }
-
     public function isGranted(): bool
     {
         return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());

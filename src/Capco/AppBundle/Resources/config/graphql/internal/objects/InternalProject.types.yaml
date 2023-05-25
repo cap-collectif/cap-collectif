@@ -273,3 +273,6 @@ InternalProject:
                 description: 'Wether or not the logged in user has the authorization to edit'
                 type: 'Boolean'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCanEditResolver", [value, getUser()])'
+            description:
+                type: 'String'
+                description: 'The project description.'

@@ -1,0 +1,78 @@
+UpdateNewProjectInput:
+    type: relay-mutation-input
+    config:
+        description: 'Create a project'
+        fields:
+            projectId:
+                type: 'ID!'
+            title:
+                type: 'String!'
+                description: 'The project title'
+            description:
+                type: 'String'
+                description: 'The project description'
+            authors:
+                type: '[ID!]!'
+                description: 'The project authors IDs'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the project, user or organization. If null, fallback on the viewer.'
+            projectType:
+                type: 'ID'
+                description: 'The project type ID'
+            cover:
+                type: 'ID'
+                description: 'The project cover'
+            video:
+                type: 'String'
+                description: 'The project video link'
+            themes:
+                type: '[ID!]!'
+                description: 'The project themes IDs'
+            districts:
+                type: '[ID!]!'
+                description: 'The project districts IDs'
+            metaDescription:
+                type: 'String'
+                description: 'The project metadescription'
+            isExternal:
+                type: 'Boolean!'
+                description: 'Is the project external'
+            externalLink:
+                type: 'String'
+                description: 'The project external link'
+            externalParticipantsCount:
+                type: 'Int'
+                description: 'The project external participants count'
+            externalContributionsCount:
+                type: 'Int'
+                description: 'The project external contributions count'
+            externalVotesCount:
+                type: 'Int'
+                description: 'The project external votes count'
+            publishedAt:
+                type: 'DateTime!'
+                description: 'The project publication date'
+            visibility:
+                type: 'ProjectVisibility!'
+                description: 'The project visibility'
+            opinionCanBeFollowed:
+                type: 'Boolean!'
+            steps:
+                type: '[ID!]!'
+            headerType:
+                type: 'ProjectHeaderType'
+            coverFilterOpacityPercent:
+                type: 'Int'
+            locale:
+                type: 'ID'
+                description: 'The locale id of the project. Null if visible by all languages'
+            restrictedViewerGroups:
+                type: '[ID!]'
+                description: 'Groups id.'
+            archived:
+                type: 'Boolean!'
+                description: 'if it is archived'
+            address:
+                type: 'String'
+                description: 'The project address, geocoded by google'

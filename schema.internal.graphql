@@ -8171,6 +8171,7 @@ type Mutation {
   updateJumps(input: UpdateJumpsInput!): UpdateJumpsPayload
   updateCollectStep(input: UpdateCollectStepInput!): UpdateCollectStepPayload
   updateSelectionStep(input: UpdateSelectionStepInput!): UpdateSelectionStepPayload
+  updateNewProject(input: UpdateNewProjectInput!): UpdateNewProjectPayload
 }
 
 """A connection to a list of items."""
@@ -10222,6 +10223,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Wether or not the logged in user has the authorization to edit"""
   canEdit: Boolean
+
+  """The project description."""
+  description: String
 }
 
 """A project abstract step."""
@@ -16938,6 +16942,85 @@ input UpdateLocaleStatusInput {
 
 type UpdateLocaleStatusPayload {
   locales: LocaleConnection!
+  clientMutationId: String
+}
+
+input UpdateNewProjectInput {
+  projectId: ID!
+
+  """The project title"""
+  title: String!
+
+  """The project description"""
+  description: String
+
+  """The project authors IDs"""
+  authors: [ID!]!
+
+  """
+  ID of the owner of the project, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
+
+  """The project type ID"""
+  projectType: ID
+
+  """The project cover"""
+  cover: ID
+
+  """The project video link"""
+  video: String
+
+  """The project themes IDs"""
+  themes: [ID!]!
+
+  """The project districts IDs"""
+  districts: [ID!]!
+
+  """The project metadescription"""
+  metaDescription: String
+
+  """Is the project external"""
+  isExternal: Boolean!
+
+  """The project external link"""
+  externalLink: String
+
+  """The project external participants count"""
+  externalParticipantsCount: Int
+
+  """The project external contributions count"""
+  externalContributionsCount: Int
+
+  """The project external votes count"""
+  externalVotesCount: Int
+
+  """The project publication date"""
+  publishedAt: DateTime!
+
+  """The project visibility"""
+  visibility: ProjectVisibility!
+  opinionCanBeFollowed: Boolean!
+  steps: [ID!]!
+  headerType: ProjectHeaderType
+  coverFilterOpacityPercent: Int
+
+  """The locale id of the project. Null if visible by all languages"""
+  locale: ID
+
+  """Groups id."""
+  restrictedViewerGroups: [ID!]
+
+  """if it is archived"""
+  archived: Boolean!
+
+  """The project address, geocoded by google"""
+  address: String
+  clientMutationId: String
+}
+
+type UpdateNewProjectPayload {
+  project: Project!
   clientMutationId: String
 }
 

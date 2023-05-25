@@ -544,7 +544,12 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     public function addStep(ProjectAbstractStep $step)
     {
         $step->setProject($this);
-        $this->steps[] = $step;
+
+        if ($this->steps->contains($step)) {
+            return $this;
+        }
+
+        $this->steps->add($step);
 
         return $this;
     }

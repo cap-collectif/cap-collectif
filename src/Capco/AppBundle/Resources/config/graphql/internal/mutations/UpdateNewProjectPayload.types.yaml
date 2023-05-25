@@ -1,0 +1,6 @@
+UpdateNewProjectPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            project:
+                type: 'InternalProject!'

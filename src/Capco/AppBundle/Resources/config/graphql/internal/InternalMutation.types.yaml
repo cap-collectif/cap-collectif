@@ -1738,3 +1738,10 @@ InternalMutation:
                     inputType: UpdateSelectionStepInput
                     payloadType: UpdateSelectionStepPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSelectionStepMutation", [value, getUser()])'
+            updateNewProject:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateNewProjectMutation").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateNewProjectInput
+                    payloadType: UpdateNewProjectPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateNewProjectMutation", [value, getUser()])'
