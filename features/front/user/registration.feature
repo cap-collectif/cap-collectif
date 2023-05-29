@@ -16,7 +16,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   And I select "Citoyen" from "user_type"
   And I select "Sangohan" from react "#registration-form-responses2"
   And I check element "charte"
-  And should see an "#turnstile_captcha" element
+  And should see an "div[id^=turnstile_captcha-]" element
   And I press "global.register"
   Then I wait 6 seconds
   Then I can see I am logged in as "Naruto42"

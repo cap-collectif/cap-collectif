@@ -4,6 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { Turnstile } from '@marsidev/react-turnstile';
 import config from '~/config';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import uuid from '~/utils/uuid';
 
 /**
  * Allow Google ReCaptcha to work in test mode
@@ -39,12 +40,11 @@ const Captcha = ({ onChange, style, disabled = false, captchaRef }: Props) => {
       <Turnstile
         ref={captchaRef}
         siteKey={siteKey}
-        id="turnstile_captcha"
+        id={`turnstile_captcha-${uuid()}`}
         style={{ transform: 'scale(0.85)', transformOrigin: '0 0', ...style }}
         onSuccess={token => {
           onChange(token);
         }}
-        autoResetOnExpire
         onError={() => onChange('')}
       />
     );

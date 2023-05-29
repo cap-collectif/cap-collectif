@@ -197,7 +197,7 @@
         "@formatjs/intl-utils": "^3.8.4",
         "@hookform/resolvers": "^2.8.8",
         "@liinkiing/react-hooks": "^1.7.1",
-        "@marsidev/react-turnstile": "^0.1.2",
+        "@marsidev/react-turnstile": "^0.2.1",
         "@react-leaflet/core": "^1.1.1",
         "@react-pdf/renderer": "^2.0.4",
         "@sentry/browser": "^5.15.5",

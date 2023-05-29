@@ -3525,10 +3525,10 @@
   resolved "https://registry.yarnpkg.com/@liinkiing/react-hooks/-/react-hooks-1.10.3.tgz#a66c65ed7cb892bfd558810447d05d259cde4930"
   integrity sha512-eKFRiIuSQxJ5BJwq26qI5DOJwlq5fwjZalcZdSDrikqpB0fqEQIwBwPmb/W/41MXIoyKC/5aYnoFsEkLuEBz2w==
 
-"@marsidev/react-turnstile@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@marsidev/react-turnstile/-/react-turnstile-0.1.2.tgz#45a5c24814341b081169c8d76f08a2dba0524723"
-  integrity sha512-aL1/AdES53yxPJKodT20qwJ9Fs0ZcnYRS+Z7yA8iGGFAi4roOS9iB12Ss7GJrm896hXW/YnW1aAPxc079Sad7A==
+"@marsidev/react-turnstile@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@marsidev/react-turnstile/-/react-turnstile-0.2.1.tgz#7e284207c8ee4ca00cb0e6a095c4f6d7ec87ae4a"
+  integrity sha512-W/jxe6nn55wvbAwCOAtrm+tIg90/1oqBlbWwWaWJ2zuo3pmEBoaz3cnkU5PO5Hhi7NL51H46qL1syrkq/5CN0Q==
 
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"

@@ -43,7 +43,7 @@ Scenario: User fails to login many times (turnstile captcha gate)
     | password             | tot                     |
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
-  Then I should not see a "#turnstile_captcha" element
+  Then I should not see a "div[id^=turnstile_captcha-]" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
@@ -64,7 +64,7 @@ Scenario: User fails to login many times (turnstile captcha gate)
     | password             | tot                     |
   When I press "global.login_me"
   And I wait 3 seconds
-  Then I should see a "#turnstile_captcha" element
+  Then I should see a "div[id^=turnstile_captcha-]" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | toto                    |
@@ -83,7 +83,7 @@ Scenario: User fails to login many times (google captcha gate)
   When I press "global.login_me"
   Then I wait "#login-error" to appear on current page
   Then I should not see a "#recaptcha" element
-  Then I should not see a "#turnstile_captcha" element
+  Then I should not see a "div[id^=turnstile_captcha-]" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
@@ -105,7 +105,7 @@ Scenario: User fails to login many times (google captcha gate)
   When I press "global.login_me"
   And I wait 3 seconds
   Then I should see a "#recaptcha" element
-  Then I should not see a "#turnstile_captcha" element
+  Then I should not see a "div[id^=turnstile_captcha-]" element
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | toto                    |
