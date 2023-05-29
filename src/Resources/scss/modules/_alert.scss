@@ -25,5 +25,6 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10010
+    z-index: 10010;
+    max-width: calc(100vw - 25px);
 }
