@@ -798,7 +798,7 @@ exports[`<PostForm/> should render correctly 1`] = `
             >
               <img
                 alt=""
-                className="img-responsive"
+                className="sc-bdnxRM img-responsive"
                 loading="lazy"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   320w,

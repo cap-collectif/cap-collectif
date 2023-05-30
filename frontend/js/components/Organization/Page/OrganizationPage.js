@@ -10,6 +10,7 @@ import OrganizationPageProjectList from './OrganizationPageProjectList';
 import OrganizationPageEventList from './OrganizationPageEventList';
 import OrganizationPagePostList from './OrganizationPagePostList';
 import ProjectHeader from '~/components/Ui/Project/ProjectHeaderLegacy';
+import Image from '~ui/Primitives/Image';
 
 const QUERY = graphql`
   query OrganizationPageQuery(
@@ -145,7 +146,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
               position="relative"
               overflow="hidden"
               css={{ filter: 'drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.15))' }}>
-              <AppBox
+              <Image
                 as="img"
                 src={cover || logo}
                 alt="banner"
@@ -168,7 +169,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                   top={0}
                   right={0}
                   css={{ borderBottomLeftRadius: 8 }}>
-                  <AppBox
+                  <Image
                     as="img"
                     src={logo}
                     alt="logo"

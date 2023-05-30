@@ -83,7 +83,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
           >
             <img
               alt="<mock-value-for-field-\\"displayName\\">"
-              className="img-circle mr-15"
+              className="sc-bdnxRM img-circle mr-15"
               loading="lazy"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -156,15 +156,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       invitation.pending
     </h3>
     <div
-      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
+      className="sc-bdnxRM GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbkJK fPiBNh"
+        className="sc-bdnxRM isZYbz"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbkJK bWIQdi"
+        className="sc-bdnxRM dyDWxE"
       >
         roles.user
       </p>
@@ -256,7 +256,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
           >
             <img
               alt="<mock-value-for-field-\\"displayName\\">"
-              className="img-circle mr-15"
+              className="sc-bdnxRM img-circle mr-15"
               loading="lazy"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -329,15 +329,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
       invitation.pending
     </h3>
     <div
-      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
+      className="sc-bdnxRM GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbkJK fPiBNh"
+        className="sc-bdnxRM isZYbz"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbkJK bWIQdi"
+        className="sc-bdnxRM dyDWxE"
       >
         roles.user
       </p>
@@ -435,7 +435,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
           >
             <img
               alt="<mock-value-for-field-\\"displayName\\">"
-              className="img-circle mr-15"
+              className="sc-bdnxRM img-circle mr-15"
               loading="lazy"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -508,15 +508,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       invitation.pending
     </h3>
     <div
-      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
+      className="sc-bdnxRM GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbkJK fPiBNh"
+        className="sc-bdnxRM isZYbz"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbkJK bWIQdi"
+        className="sc-bdnxRM dyDWxE"
       >
         roles.user
       </p>
@@ -595,7 +595,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
           >
             <img
               alt="<mock-value-for-field-\\"displayName\\">"
-              className="img-circle mr-15"
+              className="sc-bdnxRM img-circle mr-15"
               loading="lazy"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -668,15 +668,15 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
       invitation.pending
     </h3>
     <div
-      className="sc-bkbkJK GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
+      className="sc-bdnxRM GroupAdminPendingInvitationsList__UserInvitePendingList-jLmjxS  hyLqim"
     >
       <p
-        className="sc-bkbkJK fPiBNh"
+        className="sc-bdnxRM isZYbz"
       >
         &lt;mock-value-for-field-"email"&gt;
       </p>
       <p
-        className="sc-bkbkJK bWIQdi"
+        className="sc-bdnxRM dyDWxE"
       >
         roles.user
       </p>

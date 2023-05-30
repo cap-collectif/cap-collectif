@@ -98,7 +98,7 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="img-circle object-cover user-avatar mr-10 "
+                className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
                 loading="lazy"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -247,7 +247,7 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="img-circle object-cover user-avatar mr-10 "
+                className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
                 loading="lazy"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -396,7 +396,7 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="img-circle object-cover user-avatar mr-10 "
+                className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
                 loading="lazy"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,

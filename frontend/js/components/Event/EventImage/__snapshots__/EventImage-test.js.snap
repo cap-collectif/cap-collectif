@@ -3,10 +3,8 @@
 exports[`<EventImage /> should render correctly 1`] = `
 <EventImage__EventImageContainer>
   <Image
-    alt=""
-    ariaHidden={true}
+    aria-hidden={true}
     height="100%"
-    objectFit="cover"
     src="https://picsum.photos/300/400"
     width="100%"
   />

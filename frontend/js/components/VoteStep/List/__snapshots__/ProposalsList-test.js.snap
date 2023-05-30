@@ -205,9 +205,8 @@ Array [
           >
             <img
               alt="<mock-value-for-field-\\"name\\">"
-              height="100%"
+              className="sc-bdnxRM lkWbVD"
               loading="lazy"
-              objectFit="cover"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
@@ -217,7 +216,6 @@ Array [
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
          "
-              width="100%"
             />
           </div>
         </div>
@@ -404,9 +402,8 @@ Array [
           >
             <img
               alt="<mock-value-for-field-\\"name\\">"
-              height="100%"
+              className="sc-bdnxRM lkWbVD"
               loading="lazy"
-              objectFit="cover"
               srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
@@ -416,7 +413,6 @@ Array [
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
          "
-              width="100%"
             />
           </div>
         </div>

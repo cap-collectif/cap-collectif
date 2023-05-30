@@ -92,6 +92,7 @@ export const Cover = ({ src, alt }: {| +src?: ?string, +alt?: ?string |}) =>
       minHeight="270px"
       maxHeight="315px">
       <Image
+        useDs
         src={src}
         alt={alt}
         width={['100%', '405px']}

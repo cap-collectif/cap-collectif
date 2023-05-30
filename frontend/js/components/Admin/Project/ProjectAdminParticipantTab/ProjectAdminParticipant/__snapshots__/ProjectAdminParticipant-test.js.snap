@@ -121,7 +121,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "b
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="img-circle object-cover user-avatar mr-10 "
+        className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
@@ -270,7 +270,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "beta_
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="img-circle object-cover user-avatar mr-10 "
+        className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,

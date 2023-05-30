@@ -3,10 +3,10 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import styled, { type StyledComponent } from 'styled-components';
 import type { EventImage_event } from '~relay/EventImage_event.graphql';
-import Image from '~/components/Ui/Medias/Image';
 import DefaultEventCover from '../DefaultEventCover';
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables';
 import config from '~/config';
+import Image from '~ui/Primitives/Image';
 
 type EventImageProps = {|
   +event: EventImage_event,
@@ -37,7 +37,7 @@ export const EventImage = ({ event, enabled }: EventImageProps) => {
   return enabled ? (
     <EventImageContainer>
       {imgURL ? (
-        <Image src={imgURL} width="100%" height="100%" ariaHidden />
+        <Image src={imgURL} width="100%" height="100%" aria-hidden />
       ) : (
         <DefaultEventCover isMobile={config.isMobile} />
       )}
