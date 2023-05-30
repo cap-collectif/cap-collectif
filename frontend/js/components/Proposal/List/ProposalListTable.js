@@ -97,12 +97,11 @@ export class ProposalListTable extends React.Component<Props, State> {
             implementationPhase: {
               text: 'implementation-phase',
               value: {
-                list: node.progressSteps,
-                title:
-                  node.progressSteps &&
-                  node.progressSteps.length > 0 &&
-                  // $FlowFixMe
-                  this.getPhaseTitle(node.progressSteps),
+                list: node.progressSteps || [],
+                title: node?.progressSteps?.length
+                  ? // $FlowFixMe
+                    this.getPhaseTitle(node.progressSteps)
+                  : false,
               },
               width: '250px',
             },

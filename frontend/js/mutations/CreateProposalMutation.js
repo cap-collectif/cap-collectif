@@ -21,6 +21,7 @@ const mutation = graphql`
         id
         url
         publicationStatus
+        reference
         ...interpellationLabelHelper_proposal @relay(mask: false)
       }
       userErrors {
