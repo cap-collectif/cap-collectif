@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, CapUIIcon, Flex, FormLabel, Icon, Input, Text, Tooltip} from "@cap-collectif/ui";
+import {Box, CapUIIcon, Flex, FormLabel, Icon, Input, Text, toast, Tooltip} from "@cap-collectif/ui";
 import {FieldInput, FormControl} from "@cap-collectif/form";
 import {useIntl} from "react-intl";
 import {useForm} from "react-hook-form";
@@ -120,7 +120,15 @@ const DebateWidgetIntegrationForm: React.FC<Props> = ({ debate: debateRef }) => 
                             </Box>
                         </Tooltip>
                     </Flex>
-                    <Input type="text" value={getWidgetUrl()} />
+                    <Input type="text" value={getWidgetUrl()} onClickActions={[{
+                        icon: CapUIIcon.Duplicate,
+                        onClick: () => navigator.clipboard.writeText(getWidgetUrl()).then(() => {
+                            toast({
+                                variant: 'info',
+                                content: intl.formatMessage({ id: 'copied-link' }),
+                            });
+                        })
+                    }]} />
                 </FormControl>
             </Box>
         </form>

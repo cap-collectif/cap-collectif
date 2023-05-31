@@ -52,11 +52,10 @@ const DEBATE_FRAGMENT = graphql`
 
 
 type FormValues = {
-    // TODO => remove Array
-    author: Array<{
+    author: {
         label: string
         value: string
-    }>
+    } | null
     title: string
     body: string
     bodyUsingJoditWysiwyg: boolean
@@ -78,7 +77,7 @@ const getTitle = (type: ForOrAgainstValue, isCreating?: boolean): string => {
 };
 
 const addDebateOpinion = async (input: FormValues, debateId: string, onClose: () => void, connections: Array<string>, intl: IntlShape) => {
-    const author = input.author.map(author => author.value)[0];
+    const author = input.author?.value ?? '';
     try {
         const response = await AddDebateOpinionMutation.commit({
             input: {
@@ -100,7 +99,7 @@ const addDebateOpinion = async (input: FormValues, debateId: string, onClose: ()
 };
 
 const updateDebateOpinion = async (input: FormValues, debateOpinionId: string, onClose: () => void, intl: IntlShape) => {
-    const author = input.author.map(author => author.value)[0];
+    const author = input.author?.value ?? '';
     try {
         const response = await UpdateDebateOpinionMutation.commit({
             input: {...input, debateOpinionId, author},
@@ -128,14 +127,16 @@ export const ModalDebateOpinion: React.FC<Props> = ({
 
     const isCreating = !opinion;
 
+    console.log(opinion);
+
     const defaultValues: FormValues = {
         title: opinion?.title ?? '',
         body: opinion?.body ?? '',
         bodyUsingJoditWysiwyg: opinion?.bodyUsingJoditWysiwyg ?? false,
-        author: !isCreating ? [{
+        author: !isCreating ? {
             value: opinion?.author?.id ?? '',
             label: opinion?.author?.username ?? '',
-        }] : [],
+        } : null,
         type,
     };
 
@@ -178,7 +179,7 @@ export const ModalDebateOpinion: React.FC<Props> = ({
                             htmlFor="author"
                             label={intl.formatMessage({id: 'global.author'})}
                         />
-                        <UserListField name="author" control={control} isMulti />
+                        <UserListField name="author" control={control} />
                     </FormControl>
                     <FormControl name="title" control={control} isRequired>
                         <FormLabel

@@ -258,7 +258,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
     }
 
     return (
-        <Box bg="white" width="100%" p={6} borderRadius="8px">
+        <Box bg="white" width="70%" p={6} borderRadius={2}>
             <Text fontWeight={600} color="blue.800" fontSize={4}>
                 {intl.formatMessage({id: 'customize-your-debate-step'})}
             </Text>
@@ -316,7 +316,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
                         </Tabs.Panel>
                         <Tabs.Panel>
                             {debate && <FaceToFace debate={debate}/>}
-                            <Box my={6} fontWeight={600}>
+                            <Box mt={6} fontWeight={600}>
                                 <Text mb={4}>{intl.formatMessage({id: 'related.articles'})}</Text>
                                 {
                                     articles.map((article, index) => {
