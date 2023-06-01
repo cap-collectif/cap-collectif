@@ -1,11 +1,11 @@
 //* eslint-env jest */
 const SelectionStepProposalsQuery = /* GraphQL */ `
-  query SelectionStepProposalsQuery($id: ID!, $location: Location) {
+  query SelectionStepProposalsQuery($id: ID!, $geoBoundingBox: GeoBoundingBox) {
     node(id: $id) {
       ... on SelectionStep {
         id
         title
-        proposals(location: $location) {
+        proposals(geoBoundingBox: $geoBoundingBox) {
           totalCount
           edges {
             node {
@@ -24,20 +24,26 @@ const SelectionStepProposalsQuery = /* GraphQL */ `
 
 const variables = {
   id: 'U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=',
-  location: null,
-}
+  geoBoundingBox: null,
+};
 
 describe('Internal|SelectionStep.proposals location argument', () => {
-  it('fetches the proposals from a selection step sorted by distance given capco office as central point', async () => {
+  it('fetches the proposals from a selection step filtered by a given bounding box', async () => {
     await expect(
       graphql(
         SelectionStepProposalsQuery,
         {
           ...variables,
-          location: {
-            "lat": 48.8485326,
-            "lng": 2.3838816
-          }
+          geoBoundingBox: {
+            topLeft: {
+              lat: 48.819734,
+              lng: 2.569435,
+            },
+            bottomRight: {
+              lat: 48.753003,
+              lng: 2.673633,
+            },
+          },
         },
         'internal_super_admin',
       ),

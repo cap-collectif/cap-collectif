@@ -11,7 +11,6 @@ Array [
     onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    style={Object {}}
     tabIndex={0}
     title=""
   >

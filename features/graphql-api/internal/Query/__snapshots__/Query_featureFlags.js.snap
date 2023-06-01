@@ -303,6 +303,10 @@ Object {
       "enabled": false,
       "type": "unstable__new_create_project",
     },
+    Object {
+      "enabled": false,
+      "type": "new_vote_step",
+    },
   ],
 }
 `;

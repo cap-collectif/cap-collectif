@@ -2,13 +2,18 @@
 import styled, { type StyledComponent } from 'styled-components';
 
 export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
-  position: relative;
+  position: sticky;
+  top: 0;
 
-  .marker-cluster-small {
-    background: rgba(41, 144, 51, 0.3);
+  .marker-cluster-small,
+  .marker-cluster-medium,
+  .marker-cluster-large {
+    background: rgba(62, 51, 97, 0.3);
   }
-  .marker-cluster-small div {
-    background: #299033;
+  .marker-cluster-small div,
+  .marker-cluster-medium div,
+  .marker-cluster-large div {
+    background: #3e3361;
   }
 
   .location-circle circle {
@@ -33,12 +38,23 @@ export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .preview-icn svg:nth-child(2) {
     position: absolute;
     top: 7px;
-    left: 14px;
+    left: 12px;
     pointer-events: none;
   }
 
-  .leaflet-marker-icon svg:first-child:hover {
-    fill: #e97657;
+  .preview-icn.active svg,
+  .preview-icn > svg:hover,
+  .preview-icn > svg:hover + svg {
+    animation: expand-pin 0.1s forwards;
+  }
+
+  @keyframes expand-pin {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.2);
+    }
   }
 
   /**
@@ -48,5 +64,27 @@ export const MapContainer: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   .leaflet-bottom.leaflet-left {
     left: 50%;
     transform: translate(-50%, 0%);
+  }
+
+  @media (max-width: 767px) {
+    .leaflet-bottom.leaflet-left {
+      transform: translate(-50%, -20px);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .leaflet-bottom.leaflet-left {
+      top: 1.7rem;
+    }
+    .leaflet-bottom.leaflet-left * {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  @media (min-width: 1366px) {
+    .leaflet-bottom.leaflet-left {
+      width: max-content;
+    }
   }
 `;

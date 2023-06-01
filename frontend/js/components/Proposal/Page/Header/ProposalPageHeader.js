@@ -23,6 +23,7 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router';
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration';
 import Image from '~ui/Primitives/Image';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
   title: ?string,
@@ -171,14 +172,20 @@ const BackUrl = ({
   tradKeyToBack,
   stepId,
   platformLocale,
+  currentVotableStep,
 }: {
   originStepUrl?: ?string,
   defaultStepUrl: string,
   tradKeyToBack: ?string,
   stepId?: string,
   platformLocale: string,
+  currentVotableStep?: ?string,
 }) => {
-  const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
+  const new_vote_step = useFeatureFlag('new_vote_step');
+  const url =
+    new_vote_step && currentVotableStep
+      ? `vote/${currentVotableStep}`
+      : getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl);
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage);
   const baseUrl = getBaseLocale(currentLanguage, platformLocale);
   const { projectSlug } = useParams();
@@ -242,6 +249,7 @@ export const ProposalPageHeader = ({
       <div>
         <HeaderActions>
           <BackUrl
+            currentVotableStep={proposal?.currentVotableStep?.slug}
             originStepUrl={state?.stepUrl}
             defaultStepUrl={proposal?.form?.step?.url?.replace(getBaseUrl(), '') || ''}
             tradKeyToBack={tradKeyToBack}
@@ -379,6 +387,9 @@ export default createFragmentContainer(container, {
           url
           state
         }
+      }
+      currentVotableStep {
+        slug
       }
       ...interpellationLabelHelper_proposal @relay(mask: false)
     }

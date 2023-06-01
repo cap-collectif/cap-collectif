@@ -8839,7 +8839,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "1ad47864069258e9c237cbb212fd3319",
+        "cacheID": "950f63dc34f107293a584df3b0c52678",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -10420,6 +10420,11 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
       state
       id
     }
+    id
+  }
+  currentVotableStep {
+    __typename
+    slug
     id
   }
   project {

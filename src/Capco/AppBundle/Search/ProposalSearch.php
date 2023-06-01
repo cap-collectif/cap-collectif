@@ -15,6 +15,7 @@ use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\GeoBoundingBox;
 use Elastica\Query\Term;
 use Elastica\Query\Terms;
 use Elastica\ResultSet;
@@ -51,8 +52,11 @@ class ProposalSearch extends Search
     private ProposalRepository $proposalRepo;
     private TokenStorageInterface $tokenStorage;
 
-    public function __construct(Index $index, ProposalRepository $proposalRepo, TokenStorageInterface $tokenStorage)
-    {
+    public function __construct(
+        Index $index,
+        ProposalRepository $proposalRepo,
+        TokenStorageInterface $tokenStorage
+    ) {
         parent::__construct($index);
         $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
@@ -197,9 +201,18 @@ class ProposalSearch extends Search
             $boolQuery->addFilter($subBoolQuery);
         }
 
+        $geoBoundingBox = $providedFilters['geoBoundingBox'] ?? null;
+        if ($geoBoundingBox) {
+            $boundingBox = $this->getGeoBoundingBoxFilter($geoBoundingBox);
+            $boolQuery->addFilter($boundingBox);
+        }
+
+        $sortParams = [];
         if ('random' === $order) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
-            $query->setSort(['_score' => new \stdClass(), 'id' => new \stdClass()]);
+            $sortParams[] = ['_score' => new \stdClass()];
+            $sortParams[] = ['id' => new \stdClass()];
+            $query->setSort($sortParams);
         } else {
             $query = new Query($boolQuery);
             $stepid = $providedFilters['collectStep'] ?? $providedFilters['selectionStep'];
@@ -211,14 +224,6 @@ class ProposalSearch extends Search
             }
 
             if ($order) {
-                $sortParams = [];
-
-                $location = $providedFilters['location'] ?? null;
-                if ($location) {
-                    $locationSortParams = $this->applySortByLocation($location);
-                    $sortParams[] = $locationSortParams;
-                }
-
                 $sortParams[] = $this->getProposalSort($order, $stepid);
                 $sortParams[] = ['id' => new \stdClass()];
 
@@ -226,13 +231,10 @@ class ProposalSearch extends Search
             }
         }
 
-
         $excludeViewerVotesFilter = $providedFilters['excludeViewerVotes'] ?? null;
         if ($excludeViewerVotesFilter) {
             $this->applyExcludeViewerVotesFilter($boolQuery);
         }
-
-
 
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
@@ -792,20 +794,14 @@ class ProposalSearch extends Search
         $boolQuery->addMustNot(new Term(['selection_votes.user.id' => $user->getId()]));
     }
 
-    private function applySortByLocation(array $location): array
+    private function getGeoBoundingBoxFilter(array $geoBoundingBox): GeoBoundingBox
     {
-        return [
-            '_geo_distance' => [
-                'location' => [
-                    'lat' => $location['lat'],
-                    'lon' => $location['lng']
-                ],
-                'order' => 'asc',
-                'unit' => 'km',
-                'mode' => 'min',
-                'distance_type' => 'arc',
-                'ignore_unmapped' => true
-            ]
-        ];
+        $topLeft = $geoBoundingBox['topLeft'];
+        $bottomRight = $geoBoundingBox['bottomRight'];
+
+        return new GeoBoundingBox('location', [
+            ['lat' => $topLeft['lat'], 'lon' => $topLeft['lng']],
+            ['lat' => $bottomRight['lat'], 'lon' => $bottomRight['lng']],
+        ]);
     }
 }

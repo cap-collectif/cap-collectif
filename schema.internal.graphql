@@ -2270,8 +2270,8 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
-    """Order proposals by proximity given a lat/lng to serve as a center."""
-    location: Location
+    """Filter proposals by a given geo bounding box"""
+    geoBoundingBox: GeoBoundingBox
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -2326,6 +2326,8 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Order votes."""
     orderBy: ProposalVoteOrder = {direction: DESC}
 
     """If anonymous user the token used to vote."""
@@ -6482,6 +6484,9 @@ enum FeatureFlagType {
 
   """Whether or not project create rework is enabled"""
   unstable__new_create_project
+
+  """Whether or not new voting step is enabled"""
+  new_vote_step
 }
 
 """Require a firstname"""
@@ -6725,6 +6730,15 @@ enum GenderValue {
   MALE
   FEMALE
   OTHER
+}
+
+"""A geo bounding box"""
+input GeoBoundingBox {
+  """The topleft coordinate to set the box."""
+  topLeft: Location!
+
+  """The bottomRight coordinate to set the box."""
+  bottomRight: Location!
 }
 
 """A string containing GeoJSON code."""
@@ -9996,8 +10010,8 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
-    """Order proposals by proximity given a lat/lng to serve as a center."""
-    location: Location
+    """Filter proposals by a given geo bounding box"""
+    geoBoundingBox: GeoBoundingBox
 
     """
     ID of a Step to filter by. If non-null, filters proposals with the given step.
@@ -11286,8 +11300,8 @@ type ProposalForm implements Node & UniformResourceLocatable {
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
-    """Order proposals by proximity given a lat/lng to serve as a center."""
-    location: Location
+    """Filter proposals by a given geo bounding box"""
+    geoBoundingBox: GeoBoundingBox
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -11989,8 +12003,8 @@ interface ProposalStep {
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
-    """Order proposals by proximity given a lat/lng to serve as a center."""
-    location: Location
+    """Filter proposals by a given geo bounding box"""
+    geoBoundingBox: GeoBoundingBox
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -12045,6 +12059,8 @@ interface ProposalStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Order votes."""
     orderBy: ProposalVoteOrder = {direction: DESC}
 
     """If anonymous user the token used to vote."""
@@ -14872,8 +14888,8 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     decisionMaker: ID
     excludeViewerVotes: Boolean = false
 
-    """Order proposals by proximity given a lat/lng to serve as a center."""
-    location: Location
+    """Filter proposals by a given geo bounding box"""
+    geoBoundingBox: GeoBoundingBox
   ): ProposalConnection!
 
   """The viewer unpublished proposals (only visible by viewer)."""
@@ -14928,6 +14944,8 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
+
+    """Order votes."""
     orderBy: ProposalVoteOrder = {direction: DESC}
 
     """If anonymous user the token used to vote."""

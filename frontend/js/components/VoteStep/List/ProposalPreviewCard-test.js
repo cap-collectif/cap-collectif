@@ -16,7 +16,7 @@ describe('<ProposalPreviewCard />', () => {
     query ProposalPreviewCardTestQuery($id: ID = "<default>") @relay_test_operation {
       proposal: node(id: $id) {
         ... on Proposal {
-          ...ProposalPreviewCard_proposal
+          ...ProposalPreviewCard_proposal @arguments(stepId: "<stepId>")
         }
       }
     }
@@ -28,7 +28,14 @@ describe('<ProposalPreviewCard />', () => {
     const TestRenderer = () => {
       const data = useLazyLoadQuery<ProposalPreviewCardTestQuery>(query, {});
       if (data) {
-        return <ProposalPreviewCard proposal={data.proposal} />;
+        return (
+          <ProposalPreviewCard
+            proposal={data.proposal}
+            hasVoted={false}
+            stepId="<stepId>"
+            disabled={false}
+          />
+        );
       }
 
       return null;

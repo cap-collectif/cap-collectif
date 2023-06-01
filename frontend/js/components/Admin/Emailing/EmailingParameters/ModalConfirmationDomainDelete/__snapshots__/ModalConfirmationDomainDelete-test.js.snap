@@ -123,76 +123,80 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
-      onClick={[Function]}
-      style={
-        Object {
-          "opacity": 0,
-        }
-      }
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+        className="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
+        onClick={[Function]}
         style={
           Object {
             "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
           }
         }
       >
-        <header
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+        <div
+          className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+          style={
+            Object {
+              "opacity": 0,
+              "transform": "translateY(-20px) translateZ(0)",
+            }
+          }
         >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+          <header
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
           >
-            <h2
-              className="sc-bdnxRM fenvOW"
+            <div
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
             >
-              delete-confirmation
-            </h2>
-          </div>
-          <button
-            className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
-            onClick={[Function]}
-            type="button"
-          >
-            <IconMock
-              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
-            />
-          </button>
-        </header>
-        <main
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
-        >
-          <p
-            className="sc-bdnxRM isZYbz"
-          >
-            are-you-sure-to-delete-something
-          </p>
-        </main>
-        <footer
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM fvBSZY"
-        >
-          <div
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
-          >
+              <h2
+                className="sc-bdnxRM fenvOW"
+              >
+                delete-confirmation
+              </h2>
+            </div>
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kHicjK"
+              className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
               onClick={[Function]}
               type="button"
             >
-              cancel
+              <IconMock
+                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+              />
             </button>
-            <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf dwbTkh"
-              onClick={[Function]}
-              type="button"
+          </header>
+          <main
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+          >
+            <p
+              className="sc-bdnxRM isZYbz"
             >
-              global.delete
-            </button>
-          </div>
-        </footer>
+              are-you-sure-to-delete-something
+            </p>
+          </main>
+          <footer
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM fvBSZY"
+          >
+            <div
+              className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+            >
+              <button
+                className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf kHicjK"
+                onClick={[Function]}
+                type="button"
+              >
+                cancel
+              </button>
+              <button
+                className="sc-bdnxRM Button__ButtonInner-dWPVNG lgfOqf dwbTkh"
+                onClick={[Function]}
+                type="button"
+              >
+                global.delete
+              </button>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
   </div>,

@@ -32,4 +32,4 @@ export default new (class ProposalStepPage {
       stepType: 'selection',
     })
   }
-})
+})()

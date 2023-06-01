@@ -587,7 +587,7 @@ Object {
         },
         Object {
           "key": "2020-03-01T00:00:00.000Z",
-          "totalCount": 41,
+          "totalCount": 40,
         },
         Object {
           "key": "2020-04-01T00:00:00.000Z",
@@ -595,7 +595,7 @@ Object {
         },
         Object {
           "key": "2020-05-01T00:00:00.000Z",
-          "totalCount": 32,
+          "totalCount": 31,
         },
         Object {
           "key": "2020-06-01T00:00:00.000Z",
@@ -627,7 +627,7 @@ Object {
         },
         Object {
           "key": "2021-01-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 0,
         },
         Object {
           "key": "2021-02-01T00:00:00.000Z",
@@ -643,7 +643,7 @@ Object {
         },
         Object {
           "key": "2021-05-01T00:00:00.000Z",
-          "totalCount": 2,
+          "totalCount": 1,
         },
         Object {
           "key": "2021-06-01T00:00:00.000Z",
@@ -919,7 +919,7 @@ Object {
         },
         Object {
           "key": "2020-05-01T00:00:00.000Z",
-          "totalCount": 32,
+          "totalCount": 31,
         },
         Object {
           "key": "2020-06-01T00:00:00.000Z",
@@ -951,7 +951,7 @@ Object {
         },
         Object {
           "key": "2021-01-01T00:00:00.000Z",
-          "totalCount": 1,
+          "totalCount": 0,
         },
         Object {
           "key": "2021-02-01T00:00:00.000Z",

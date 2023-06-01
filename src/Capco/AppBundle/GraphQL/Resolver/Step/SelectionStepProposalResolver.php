@@ -45,8 +45,8 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['progressStatus'],
             $filters['selectionStep'],
             $filters['excludeViewerVotes'],
-            $filters['location'],
-            ) = [
+            $filters['geoBoundingBox'],
+        ) = [
             $args->offsetGet('orderBy')['field'],
             $args->offsetGet('orderBy')['direction'],
             $args->offsetGet('term'),
@@ -59,7 +59,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $args->offsetGet('progressStatus'),
             $selectionStep->getId(),
             $args->offsetGet('excludeViewerVotes'),
-            $args->offsetGet('location'),
+            $args->offsetGet('geoBoundingBox'),
         ];
 
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);
@@ -77,7 +77,9 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['analysts'] = $analysts;
         }
         if (null !== $args->offsetGet('supervisor')) {
-            $filters['supervisor'] = GlobalIdResolver::getDecodedId($args->offsetGet('supervisor'))['id'];
+            $filters['supervisor'] = GlobalIdResolver::getDecodedId($args->offsetGet('supervisor'))[
+                'id'
+            ];
         }
         if (null !== $args->offsetGet('decisionMaker')) {
             $filters['decisionMaker'] = GlobalIdResolver::getDecodedId(
@@ -111,7 +113,7 @@ class SelectionStepProposalResolver implements ResolverInterface
 
             return $connection;
         } catch (\RuntimeException $exception) {
-            $this->logger->critical(__METHOD__.' : '.$exception->getMessage());
+            $this->logger->critical(__METHOD__ . ' : ' . $exception->getMessage());
 
             return $emptyConnection;
         }

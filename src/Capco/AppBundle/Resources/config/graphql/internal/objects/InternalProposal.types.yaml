@@ -276,6 +276,7 @@ InternalProposal:
                 description: 'Viewer can contribute to the proposal'
             selections:
                 type: '[InternalProposalSelection!]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalSelectionsResolver", [value])'
             isProposalAuthorAllowedToAddNews:
                 type: 'Boolean!'
             isProposalUsingAnySocialNetworks:

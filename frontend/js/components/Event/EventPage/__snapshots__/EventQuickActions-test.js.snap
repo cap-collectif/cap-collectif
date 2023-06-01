@@ -68,15 +68,6 @@ Array [
     onKeyUpCapture={[Function]}
     onTransitionEnd={[Function]}
     role="menu"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "opacity": 0,
-        "position": "fixed",
-        "top": "100%",
-      }
-    }
     tabIndex={-1}
   >
     <div

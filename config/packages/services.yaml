@@ -424,3 +424,8 @@ services:
             $optionsModifier: '@Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier'
             $storage: '@hwi_oauth.storage.session'
             $redisCache: '@Capco\AppBundle\Cache\RedisCache'
+
+    Capco\AppBundle\Faker\AddressProvider:
+        arguments:
+            - '@Faker\Generator'
+        tags: [ { name: nelmio_alice.faker.provider } ]

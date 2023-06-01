@@ -1,11 +1,11 @@
 // @flow
-import { Box, CapUILineHeight, Flex, Heading, Text } from '@cap-collectif/ui';
+import { Box, Flex, Heading, Text } from '@cap-collectif/ui';
 import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { useLazyLoadQuery, graphql } from 'react-relay';
 import type { ProjectStepHeaderQuery as ProjectStepHeaderQueryType } from '~relay/ProjectStepHeaderQuery.graphql';
 
-export const BACKGROUND_COLOR = '#2F6A35';
+export const BACKGROUND_COLOR = '#9CD8D9';
 
 const QUERY = graphql`
   query ProjectStepHeaderQuery($stepId: ID!) {
@@ -33,12 +33,12 @@ type Props = {|
   +stepId: string,
 |};
 
-const Counter = ({ title, count }: { title: string, count: number }) => (
-  <Box color="white" mr={8}>
-    <Text as="div" fontSize={2} fontWeight="600">
+const Counter = ({ title, count, dataCy }: { title: string, count: number, dataCy?: string }) => (
+  <Box color="gray.900" mr={8} data-cy={dataCy}>
+    <Text as="div" fontSize={2} fontWeight="600" lineHeight="initial">
       {title}
     </Text>
-    <Text as="div" fontSize={4} fontWeight="700">
+    <Text as="div" fontSize={4} fontWeight="700" lineHeight="initial">
       {count}
     </Text>
   </Box>
@@ -69,16 +69,17 @@ export const ProjectStepHeader = ({ stepId }: Props) => {
       id="step-header"
       justifyContent="space-between">
       <Flex alignItems="center">
-        <Box>
-          <Heading color="white" as="h2" fontSize={2} lineHeight={CapUILineHeight.Base}>
+        <Box mr={[0, 6]}>
+          <Heading color="gray.900" as="h2" fontSize={2} lineHeight="initial">
             {voteStep.project?.title}
           </Heading>
-          <Heading color="white" as="h1" fontSize={4} lineHeight={CapUILineHeight.M}>
+          <Heading color="gray.900" as="h1" fontSize={4} lineHeight="initial">
             {voteStep.title}
           </Heading>
         </Box>
-        <Flex display={['none', 'flex']} ml={12}>
+        <Flex display={['none', 'flex']} ml={6}>
           <Counter
+            dataCy="project-vote-count"
             title={intl.formatMessage({ id: 'global.vote' })}
             count={voteStep.project?.votes.totalCount || 0}
           />

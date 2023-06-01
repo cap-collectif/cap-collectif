@@ -10,7 +10,9 @@ type Props = {|
 const CardSkeleton = ({ showImages }: Props) => (
   <Card>
     <Flex justify="space-between">
-      <Flex direction="column" width={showImages ? 'calc(50% - 4rem)' : '100%'}>
+      <Flex
+        direction="column"
+        width={['100%', '100%', '100%', showImages ? 'calc(50% - 4rem)' : '100%']}>
         <Flex mb={2} justify={['space-between', 'start']}>
           <Skeleton.Text height={4} width="10rem" mr={6} />
           <Skeleton.Text height={4} width="5rem" />
@@ -39,9 +41,9 @@ const CardSkeleton = ({ showImages }: Props) => (
 
 export const ProposalsListSkeleton = ({ showImages = false }: Props) => (
   <Box
-    maxHeight={['100%', 'calc(100vh - 15rem)']}
-    overflowY="scroll"
-    pt={['7rem', 8]}
+    maxHeight={['100%', '100vh']}
+    overflowY="hidden"
+    pt={['7rem', 0]}
     px={[4, 8]}
     id="proposals-list-skeleton">
     <CardSkeleton showImages={showImages} />

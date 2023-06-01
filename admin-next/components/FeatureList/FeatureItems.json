@@ -95,6 +95,11 @@
                         "title": "capco.module.unstable__new_create_project",
                         "description": "",
                         "onlySuperAdmin": true
+                    },
+                    "new_vote_step": {
+                        "title": "capco.module.new_vote_step",
+                        "description": "",
+                        "onlySuperAdmin": true
                     }
                 }
             }

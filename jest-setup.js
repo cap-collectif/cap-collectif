@@ -24,7 +24,6 @@ import { IntlProvider, type IntlShape, type MessageDescriptor } from 'react-intl
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { createStore } from 'redux';
 import { initialState as initialDefaultState } from './frontend/js/redux/modules/default';
-
 configure({ adapter: new Adapter() });
 
 moment.locale('fr');
@@ -227,5 +226,43 @@ jest.mock('react-leaflet', () => {
     ...jest.requireActual('react-leaflet'),
     useMapEvents: jest.fn(),
     MapContainer,
+  };
+});
+
+jest.mock('framer-motion', () => {
+  const actual = jest.requireActual('framer-motion');
+  const { forwardRef } = jest.requireActual('react');
+
+  const custom = Component => {
+    return forwardRef((props, ref) => {
+      const regularProps = Object.fromEntries(
+        // do not pass framer props to DOM element
+        Object.entries(props).filter(([key]) => !actual.isValidMotionProp(key)),
+      );
+      return typeof Component === 'string' ? (
+        // $FlowFixMe
+        <div ref={ref} {...regularProps} />
+      ) : (
+        // $FlowFixMe
+        <Component ref={ref} {...regularProps} />
+      );
+    });
+  };
+
+  const componentCache = new Map();
+  const motion = new Proxy(custom, {
+    get: (_target, key: string) => {
+      if (!componentCache.has(key)) {
+        componentCache.set(key, custom(key));
+      }
+
+      return componentCache.get(key) !== null;
+    },
+  });
+  return {
+    ...actual,
+    AnimatePresence: ({ children }) =>
+      children ? <div data-testid="AnimatePresence">{children}</div> : null,
+    motion,
   };
 });

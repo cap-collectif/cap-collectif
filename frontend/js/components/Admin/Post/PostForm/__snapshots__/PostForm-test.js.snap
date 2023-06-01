@@ -938,14 +938,18 @@ exports[`<PostForm/> should render correctly 1`] = `
           </div>
         </button>
         <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieKotb PostForm___StyledPanel-btvJdQ heNzHw"
-          style={
-            Object {
-              "height": "0px",
-              "opacity": 0,
+          data-testid="AnimatePresence"
+        >
+          <div
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX ieKotb PostForm___StyledPanel-btvJdQ heNzHw"
+            style={
+              Object {
+                "height": "0px",
+                "opacity": 0,
+              }
             }
-          }
-        />
+          />
+        </div>
       </div>
       <div
         className="sc-bdnxRM dNNlfC"
@@ -970,531 +974,535 @@ exports[`<PostForm/> should render correctly 1`] = `
           </div>
         </button>
         <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel2-dfYcjq jIITek"
-          style={
-            Object {
-              "height": "0px",
-              "opacity": 0,
-            }
-          }
+          data-testid="AnimatePresence"
         >
           <div
-            className="form-group"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel2-dfYcjq jIITek"
+            style={
+              Object {
+                "height": "0px",
+                "opacity": 0,
+              }
+            }
           >
-            <label
-              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
-              htmlFor=""
-              id=""
-              type="label"
-            >
-              <p
-                className="sc-bdnxRM koXPa"
-              >
-                global.admin.published_at
-              </p>
-            </label>
             <div
-              className="rdt DateTime__BasicDateTime-pKfBS hINnoB"
+              className="form-group"
             >
-              <input
-                className="form-control"
-                onChange={[Function]}
-                onClick={[Function]}
-                onFocus={[Function]}
-                onKeyDown={[Function]}
-                type="text"
-                value="2018-11-03 00:00:00"
-              />
-              <div
-                className="rdtPicker"
+              <label
+                className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                htmlFor=""
+                id=""
+                type="label"
               >
-                <div
-                  className="rdtDays"
+                <p
+                  className="sc-bdnxRM koXPa"
                 >
-                  <table>
-                    <thead>
-                      <tr>
-                        <th
-                          className="rdtPrev"
-                          onClick={[Function]}
-                        >
-                          <span>
-                            ‹
-                          </span>
-                        </th>
-                        <th
-                          className="rdtSwitch"
-                          colSpan={5}
-                          data-value={10}
-                          onClick={[Function]}
-                        >
-                          novembre 2018
-                        </th>
-                        <th
-                          className="rdtNext"
-                          onClick={[Function]}
-                        >
-                          <span>
-                            ›
-                          </span>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th
-                          className="dow"
-                        >
-                          lu
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          ma
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          me
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          je
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          ve
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          sa
-                        </th>
-                        <th
-                          className="dow"
-                        >
-                          di
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td
-                          className="rdtDay rdtOld"
-                          data-value={29}
-                          onClick={[Function]}
-                        >
-                          29
-                        </td>
-                        <td
-                          className="rdtDay rdtOld"
-                          data-value={30}
-                          onClick={[Function]}
-                        >
-                          30
-                        </td>
-                        <td
-                          className="rdtDay rdtOld"
-                          data-value={31}
-                          onClick={[Function]}
-                        >
-                          31
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={1}
-                          onClick={[Function]}
-                        >
-                          1
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={2}
-                          onClick={[Function]}
-                        >
-                          2
-                        </td>
-                        <td
-                          className="rdtDay rdtActive"
-                          data-value={3}
-                          onClick={[Function]}
-                        >
-                          3
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={4}
-                          onClick={[Function]}
-                        >
-                          4
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-value={5}
-                          onClick={[Function]}
-                        >
-                          5
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={6}
-                          onClick={[Function]}
-                        >
-                          6
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={7}
-                          onClick={[Function]}
-                        >
-                          7
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={8}
-                          onClick={[Function]}
-                        >
-                          8
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={9}
-                          onClick={[Function]}
-                        >
-                          9
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={10}
-                          onClick={[Function]}
-                        >
-                          10
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={11}
-                          onClick={[Function]}
-                        >
-                          11
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-value={12}
-                          onClick={[Function]}
-                        >
-                          12
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={13}
-                          onClick={[Function]}
-                        >
-                          13
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={14}
-                          onClick={[Function]}
-                        >
-                          14
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={15}
-                          onClick={[Function]}
-                        >
-                          15
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={16}
-                          onClick={[Function]}
-                        >
-                          16
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={17}
-                          onClick={[Function]}
-                        >
-                          17
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={18}
-                          onClick={[Function]}
-                        >
-                          18
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-value={19}
-                          onClick={[Function]}
-                        >
-                          19
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={20}
-                          onClick={[Function]}
-                        >
-                          20
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={21}
-                          onClick={[Function]}
-                        >
-                          21
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={22}
-                          onClick={[Function]}
-                        >
-                          22
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={23}
-                          onClick={[Function]}
-                        >
-                          23
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={24}
-                          onClick={[Function]}
-                        >
-                          24
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={25}
-                          onClick={[Function]}
-                        >
-                          25
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay"
-                          data-value={26}
-                          onClick={[Function]}
-                        >
-                          26
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={27}
-                          onClick={[Function]}
-                        >
-                          27
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={28}
-                          onClick={[Function]}
-                        >
-                          28
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={29}
-                          onClick={[Function]}
-                        >
-                          29
-                        </td>
-                        <td
-                          className="rdtDay"
-                          data-value={30}
-                          onClick={[Function]}
-                        >
-                          30
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={1}
-                          onClick={[Function]}
-                        >
-                          1
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={2}
-                          onClick={[Function]}
-                        >
-                          2
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={3}
-                          onClick={[Function]}
-                        >
-                          3
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={4}
-                          onClick={[Function]}
-                        >
-                          4
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={5}
-                          onClick={[Function]}
-                        >
-                          5
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={6}
-                          onClick={[Function]}
-                        >
-                          6
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={7}
-                          onClick={[Function]}
-                        >
-                          7
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={8}
-                          onClick={[Function]}
-                        >
-                          8
-                        </td>
-                        <td
-                          className="rdtDay rdtNew"
-                          data-value={9}
-                          onClick={[Function]}
-                        >
-                          9
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td
-                          className="rdtTimeToggle"
-                          colSpan={7}
-                          onClick={[Function]}
-                        >
-                          00:00:00
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
+                  global.admin.published_at
+                </p>
+              </label>
+              <div
+                className="rdt DateTime__BasicDateTime-pKfBS hINnoB"
+              >
+                <input
+                  className="form-control"
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  type="text"
+                  value="2018-11-03 00:00:00"
+                />
+                <div
+                  className="rdtPicker"
+                >
+                  <div
+                    className="rdtDays"
+                  >
+                    <table>
+                      <thead>
+                        <tr>
+                          <th
+                            className="rdtPrev"
+                            onClick={[Function]}
+                          >
+                            <span>
+                              ‹
+                            </span>
+                          </th>
+                          <th
+                            className="rdtSwitch"
+                            colSpan={5}
+                            data-value={10}
+                            onClick={[Function]}
+                          >
+                            novembre 2018
+                          </th>
+                          <th
+                            className="rdtNext"
+                            onClick={[Function]}
+                          >
+                            <span>
+                              ›
+                            </span>
+                          </th>
+                        </tr>
+                        <tr>
+                          <th
+                            className="dow"
+                          >
+                            lu
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            ma
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            me
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            je
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            ve
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            sa
+                          </th>
+                          <th
+                            className="dow"
+                          >
+                            di
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td
+                            className="rdtDay rdtOld"
+                            data-value={29}
+                            onClick={[Function]}
+                          >
+                            29
+                          </td>
+                          <td
+                            className="rdtDay rdtOld"
+                            data-value={30}
+                            onClick={[Function]}
+                          >
+                            30
+                          </td>
+                          <td
+                            className="rdtDay rdtOld"
+                            data-value={31}
+                            onClick={[Function]}
+                          >
+                            31
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={1}
+                            onClick={[Function]}
+                          >
+                            1
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={2}
+                            onClick={[Function]}
+                          >
+                            2
+                          </td>
+                          <td
+                            className="rdtDay rdtActive"
+                            data-value={3}
+                            onClick={[Function]}
+                          >
+                            3
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={4}
+                            onClick={[Function]}
+                          >
+                            4
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="rdtDay"
+                            data-value={5}
+                            onClick={[Function]}
+                          >
+                            5
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={6}
+                            onClick={[Function]}
+                          >
+                            6
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={7}
+                            onClick={[Function]}
+                          >
+                            7
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={8}
+                            onClick={[Function]}
+                          >
+                            8
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={9}
+                            onClick={[Function]}
+                          >
+                            9
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={10}
+                            onClick={[Function]}
+                          >
+                            10
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={11}
+                            onClick={[Function]}
+                          >
+                            11
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="rdtDay"
+                            data-value={12}
+                            onClick={[Function]}
+                          >
+                            12
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={13}
+                            onClick={[Function]}
+                          >
+                            13
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={14}
+                            onClick={[Function]}
+                          >
+                            14
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={15}
+                            onClick={[Function]}
+                          >
+                            15
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={16}
+                            onClick={[Function]}
+                          >
+                            16
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={17}
+                            onClick={[Function]}
+                          >
+                            17
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={18}
+                            onClick={[Function]}
+                          >
+                            18
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="rdtDay"
+                            data-value={19}
+                            onClick={[Function]}
+                          >
+                            19
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={20}
+                            onClick={[Function]}
+                          >
+                            20
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={21}
+                            onClick={[Function]}
+                          >
+                            21
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={22}
+                            onClick={[Function]}
+                          >
+                            22
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={23}
+                            onClick={[Function]}
+                          >
+                            23
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={24}
+                            onClick={[Function]}
+                          >
+                            24
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={25}
+                            onClick={[Function]}
+                          >
+                            25
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="rdtDay"
+                            data-value={26}
+                            onClick={[Function]}
+                          >
+                            26
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={27}
+                            onClick={[Function]}
+                          >
+                            27
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={28}
+                            onClick={[Function]}
+                          >
+                            28
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={29}
+                            onClick={[Function]}
+                          >
+                            29
+                          </td>
+                          <td
+                            className="rdtDay"
+                            data-value={30}
+                            onClick={[Function]}
+                          >
+                            30
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={1}
+                            onClick={[Function]}
+                          >
+                            1
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={2}
+                            onClick={[Function]}
+                          >
+                            2
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={3}
+                            onClick={[Function]}
+                          >
+                            3
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={4}
+                            onClick={[Function]}
+                          >
+                            4
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={5}
+                            onClick={[Function]}
+                          >
+                            5
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={6}
+                            onClick={[Function]}
+                          >
+                            6
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={7}
+                            onClick={[Function]}
+                          >
+                            7
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={8}
+                            onClick={[Function]}
+                          >
+                            8
+                          </td>
+                          <td
+                            className="rdtDay rdtNew"
+                            data-value={9}
+                            onClick={[Function]}
+                          >
+                            9
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td
+                            className="rdtTimeToggle"
+                            colSpan={7}
+                            onClick={[Function]}
+                          >
+                            00:00:00
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="form-group"
-          >
-            <span
-              className="visible-print-block help-block"
-            >
-              several-possible-answers
-            </span>
             <div
-              checked={true}
-              className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+              className="form-group"
             >
-              <label
-                className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
-                htmlFor="is_published"
-                id="label-checkbox-is_published"
-                type="checkbox"
+              <span
+                className="visible-print-block help-block"
               >
-                <IconMock
-                  aria-hidden={true}
-                  className="icon"
-                  height={16}
-                  style={
-                    Object {
-                      "flexShrink": "0",
-                      "verticalAlign": "middle",
-                    }
-                  }
-                  width={16}
-                />
-                <p
-                  className="sc-bdnxRM koXPa"
-                >
-                  global.published
-                </p>
-              </label>
-              <input
+                several-possible-answers
+              </span>
+              <div
                 checked={true}
-                disabled={false}
-                id="is_published"
-                name="is_published"
-                onBlur={[Function]}
-                onChange={[Function]}
-                type="checkbox"
-                value={true}
-              />
+                className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+              >
+                <label
+                  className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
+                  htmlFor="is_published"
+                  id="label-checkbox-is_published"
+                  type="checkbox"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    height={16}
+                    style={
+                      Object {
+                        "flexShrink": "0",
+                        "verticalAlign": "middle",
+                      }
+                    }
+                    width={16}
+                  />
+                  <p
+                    className="sc-bdnxRM koXPa"
+                  >
+                    global.published
+                  </p>
+                </label>
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="is_published"
+                  name="is_published"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value={true}
+                />
+              </div>
             </div>
-          </div>
-          <div
-            className="form-group"
-          >
-            <span
-              className="visible-print-block help-block"
-            >
-              several-possible-answers
-            </span>
             <div
-              checked={true}
-              className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+              className="form-group"
             >
-              <label
-                className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
-                htmlFor="has_comments"
-                id="label-checkbox-has_comments"
-                type="checkbox"
+              <span
+                className="visible-print-block help-block"
               >
-                <IconMock
-                  aria-hidden={true}
-                  className="icon"
-                  height={16}
-                  style={
-                    Object {
-                      "flexShrink": "0",
-                      "verticalAlign": "middle",
-                    }
-                  }
-                  width={16}
-                />
-                <p
-                  className="sc-bdnxRM koXPa"
-                >
-                  admin.post.comments_authorised
-                </p>
-              </label>
-              <input
+                several-possible-answers
+              </span>
+              <div
                 checked={true}
-                disabled={false}
-                id="has_comments"
-                name="has_comments"
-                onBlur={[Function]}
-                onChange={[Function]}
-                type="checkbox"
-                value={true}
-              />
+                className="Checkbox__CheckboxContainer-eHTpAn kBRCEu checkbox-container"
+              >
+                <label
+                  className="Labelstyle__LabelContainer-jXVmhf bYtGjU label-container"
+                  htmlFor="has_comments"
+                  id="label-checkbox-has_comments"
+                  type="checkbox"
+                >
+                  <IconMock
+                    aria-hidden={true}
+                    className="icon"
+                    height={16}
+                    style={
+                      Object {
+                        "flexShrink": "0",
+                        "verticalAlign": "middle",
+                      }
+                    }
+                    width={16}
+                  />
+                  <p
+                    className="sc-bdnxRM koXPa"
+                  >
+                    admin.post.comments_authorised
+                  </p>
+                </label>
+                <input
+                  checked={true}
+                  disabled={false}
+                  id="has_comments"
+                  name="has_comments"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="checkbox"
+                  value={true}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -1522,115 +1530,119 @@ exports[`<PostForm/> should render correctly 1`] = `
           </div>
         </button>
         <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel3-ggFZcn iuKuEp"
-          style={
-            Object {
-              "height": "0px",
-              "opacity": 0,
-            }
-          }
+          data-testid="AnimatePresence"
         >
           <div
-            className="form-group"
+            className="sc-bdnxRM Flex___StyledAppBox-RSPpX jWnvqp PostForm___StyledPanel3-ggFZcn iuKuEp"
+            style={
+              Object {
+                "height": "0px",
+                "opacity": 0,
+              }
+            }
           >
-            <label
-              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
-              htmlFor="FR_FR-meta_description"
-              id="label-FR_FR-meta_description"
-              type="label"
-            >
-              <p
-                className="sc-bdnxRM fvWedV"
-              >
-                post.metadescription
-              </p>
-            </label>
-            <textarea
-              aria-describedby="label-FR_FR-meta_description "
-              aria-invalid={false}
-              autoFocus={false}
-              className="form-control"
-              id="FR_FR-meta_description"
-              name="FR_FR.FR_FR-meta_description"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onDragStart={[Function]}
-              onDrop={[Function]}
-              onFocus={[Function]}
-              placeholder={null}
-              type="textarea"
-              value=""
-              warnings={null}
-            />
             <div
-              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              className="form-group"
             >
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <label
+                className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                htmlFor="FR_FR-meta_description"
+                id="label-FR_FR-meta_description"
+                type="label"
+              >
+                <p
+                  className="sc-bdnxRM fvWedV"
+                >
+                  post.metadescription
+                </p>
+              </label>
+              <textarea
+                aria-describedby="label-FR_FR-meta_description "
+                aria-invalid={false}
+                autoFocus={false}
+                className="form-control"
+                id="FR_FR-meta_description"
+                name="FR_FR.FR_FR-meta_description"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onDragStart={[Function]}
+                onDrop={[Function]}
+                onFocus={[Function]}
+                placeholder={null}
+                type="textarea"
+                value=""
+                warnings={null}
+              />
+              <div
+                className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
             </div>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
-              htmlFor=""
-              id=""
-              type="label"
-            >
-              <p
-                className="sc-bdnxRM fvWedV"
-              >
-                admin.customcode
-              </p>
-            </label>
-            <textarea
-              aria-describedby=" "
-              aria-invalid={false}
-              autoFocus={false}
-              className="form-control"
-              name="custom_code"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onDragStart={[Function]}
-              onDrop={[Function]}
-              onFocus={[Function]}
-              placeholder="admin.customcode.placeholder"
-              type="textarea"
-              value=""
-              warnings={null}
-            />
             <div
-              className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              className="form-group"
             >
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <label
+                className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                htmlFor=""
+                id=""
+                type="label"
+              >
+                <p
+                  className="sc-bdnxRM fvWedV"
+                >
+                  admin.customcode
+                </p>
+              </label>
+              <textarea
+                aria-describedby=" "
+                aria-invalid={false}
+                autoFocus={false}
+                className="form-control"
+                name="custom_code"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onDragStart={[Function]}
+                onDrop={[Function]}
+                onFocus={[Function]}
+                placeholder="admin.customcode.placeholder"
+                type="textarea"
+                value=""
+                warnings={null}
+              />
+              <div
+                className="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
             </div>
           </div>
         </div>

@@ -44,7 +44,7 @@ const PROPOSAL_FRAGMENT = graphql`
 `;
 const STEP_FRAGMENT = graphql`
   fragment ProposalVoteButtonWrapperFragment_step on ProposalStep
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: {type: "String"} ) {
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     id
     votesLimit
     voteType
@@ -66,13 +66,13 @@ const STEP_FRAGMENT = graphql`
 `;
 
 export const ProposalVoteButtonWrapperFragment = ({
-   viewer: viewerRef,
-   proposal: proposalRef,
-   step: stepRef,
-   id = '',
-   className = '',
-   disabled,
- }: Props) => {
+  viewer: viewerRef,
+  proposal: proposalRef,
+  step: stepRef,
+  id = '',
+  className = '',
+  disabled,
+}: Props) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef);
   const step = useFragment(STEP_FRAGMENT, stepRef);
@@ -96,7 +96,10 @@ export const ProposalVoteButtonWrapperFragment = ({
     ? 'global.support.for'
     : 'global.vote.for';
 
-  const hasVoted = (viewer && proposal?.viewerHasVote) ? proposal.viewerHasVote : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false;
+  const hasVoted =
+    viewer && proposal?.viewerHasVote
+      ? proposal.viewerHasVote
+      : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false;
 
   if (proposal && !step?.open) {
     return null;

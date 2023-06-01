@@ -86,15 +86,40 @@ const commit = (
       }
       const proposalProxy = store.get(variables.input.proposalId);
       if (!proposalProxy) return;
+      const stepProxy = store.get(variables.input.stepId);
+      if (stepProxy) {
+        const connectionRecordList = ConnectionHandler.getConnection(
+          stepProxy,
+          'ProposalsList_proposals',
+          {},
+        );
+        const connectionRecordMap = ConnectionHandler.getConnection(
+          stepProxy,
+          'VoteStepMap_proposals',
+          {},
+        );
 
+        if (connectionRecordList)
+          ConnectionHandler.deleteNode(connectionRecordList, variables.input.proposalId);
+
+        if (connectionRecordMap)
+          ConnectionHandler.deleteNode(connectionRecordMap, variables.input.proposalId);
+
+        const project = stepProxy?.getLinkedRecord('project', {});
+        if (project) {
+          const votes = project?.getLinkedRecord('votes', {});
+          if (votes) {
+            const previousValue = parseInt(votes.getValue('totalCount'), 10);
+            votes.setValue(previousValue + 1, 'totalCount');
+          }
+        }
+      }
       const votesArgs = {
         first: 0,
         stepId: variables.input.stepId,
       };
 
       proposalProxy.setValue(true, 'viewerHasVote', { step: variables.input.stepId });
-
-      const stepProxy = store.get(variables.input.stepId);
 
       if (!stepProxy) return;
       const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {

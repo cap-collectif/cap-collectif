@@ -1,0 +1,12 @@
+GeoBoundingBox:
+    type: input-object
+    config:
+        name: GeoBoundingBox
+        description: 'A geo bounding box'
+        fields:
+            topLeft:
+                description: 'The topleft coordinate to set the box.'
+                type: 'Location!'
+            bottomRight:
+                description: 'The bottomRight coordinate to set the box.'
+                type: 'Location!'

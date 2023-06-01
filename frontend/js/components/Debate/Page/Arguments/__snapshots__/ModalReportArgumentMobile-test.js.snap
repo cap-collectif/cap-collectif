@@ -23,140 +23,142 @@ exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`]
   tabindex="-1"
 >
   <div
-    class="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-    style="opacity:0"
+    data-testid="AnimatePresence"
   >
     <div
-      class="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
-      style="opacity:0;transform:translateY(-20px) translateZ(0)"
+      class="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
     >
-      <header
-        class="sc-bdnxRM ihArod cap-modal__header"
+      <div
+        class="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
       >
-        <div
-          class="sc-bdnxRM bPpvLW"
-        >
-          <h4
-            class="sc-bdnxRM leidOV cap-heading"
-            style="margin-left:0;margin-top:0"
-          >
-            global.modal.report.title
-          </h4>
-        </div>
-      </header>
-      <main
-        class="sc-bdnxRM dRVyGd cap-modal__body"
-      >
-        <form
-          id="report-form"
+        <header
+          class="sc-bdnxRM ihArod cap-modal__header"
         >
           <div
-            class="form-group"
+            class="sc-bdnxRM bPpvLW"
           >
-            <label
-              class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
-              for="reportType"
-              id="label-reportType"
-              type="label"
+            <h4
+              class="sc-bdnxRM leidOV cap-heading"
+              style="margin-left:0;margin-top:0"
             >
-              global.modal.report.form.status
-            </label>
-            <span
-              class="visible-print-block help-block"
-            >
-              one-possible-answer
-            </span>
-            <select
-              aria-describedby="label-reportType "
-              aria-invalid="false"
-              class="form-control"
-              id="reportType"
-              name="status"
-            >
-              <option
-                value="-1"
-              >
-                global.select
-              </option>
-              <option
-                value="1"
-              >
-                reporting.status.offending
-              </option>
-              <option
-                value="2"
-              >
-                reporting.status.spam
-              </option>
-              <option
-                value="3"
-              >
-                reporting.status.error
-              </option>
-              <option
-                value="4"
-              >
-                reporting.status.sexual
-              </option>
-              <option
-                value="5"
-              >
-                reporting.status.off_topic
-              </option>
-            </select>
+              global.modal.report.title
+            </h4>
           </div>
-          <div
-            class="form-group"
+        </header>
+        <main
+          class="sc-bdnxRM dRVyGd cap-modal__body"
+        >
+          <form
+            id="report-form"
           >
-            <label
-              class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
-              for="reportBody"
-              id="label-reportBody"
-              type="label"
-            >
-              global.modal.report.form.body
-            </label>
-            <textarea
-              aria-describedby="label-reportBody "
-              aria-invalid="false"
-              class="form-control"
-              id="reportBody"
-              name="body"
-              type="textarea"
-            />
             <div
-              class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              class="form-group"
             >
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
+              <label
+                class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                for="reportType"
+                id="label-reportType"
+                type="label"
+              >
+                global.modal.report.form.status
+              </label>
+              <span
+                class="visible-print-block help-block"
+              >
+                one-possible-answer
+              </span>
+              <select
+                aria-describedby="label-reportType "
+                aria-invalid="false"
+                class="form-control"
+                id="reportType"
+                name="status"
+              >
+                <option
+                  value="-1"
+                >
+                  global.select
+                </option>
+                <option
+                  value="1"
+                >
+                  reporting.status.offending
+                </option>
+                <option
+                  value="2"
+                >
+                  reporting.status.spam
+                </option>
+                <option
+                  value="3"
+                >
+                  reporting.status.error
+                </option>
+                <option
+                  value="4"
+                >
+                  reporting.status.sexual
+                </option>
+                <option
+                  value="5"
+                >
+                  reporting.status.off_topic
+                </option>
+              </select>
             </div>
-          </div>
-        </form>
-      </main>
-      <footer
-        class="sc-bdnxRM IKIFa cap-modal__footer"
-      >
-        <button
-          class="sc-bdnxRM sc-lbVvki jwWkj bdqOWy cap-button"
-          style="margin-left:0;margin-top:0"
-          type="button"
+            <div
+              class="form-group"
+            >
+              <label
+                class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                for="reportBody"
+                id="label-reportBody"
+                type="label"
+              >
+                global.modal.report.form.body
+              </label>
+              <textarea
+                aria-describedby="label-reportBody "
+                aria-invalid="false"
+                class="form-control"
+                id="reportBody"
+                name="body"
+                type="textarea"
+              />
+              <div
+                class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+              >
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+            </div>
+          </form>
+        </main>
+        <footer
+          class="sc-bdnxRM IKIFa cap-modal__footer"
         >
-          global.report.submit
-        </button>
-      </footer>
+          <button
+            class="sc-bdnxRM sc-lbVvki jwWkj bdqOWy cap-button"
+            style="margin-left:0;margin-top:0"
+            type="button"
+          >
+            global.report.submit
+          </button>
+        </footer>
+      </div>
     </div>
   </div>
 </div>

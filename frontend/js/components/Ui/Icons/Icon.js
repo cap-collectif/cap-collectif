@@ -224,6 +224,7 @@ type Props = {|
   viewBox?: string,
   opacity?: number,
   style?: { [property: string]: any },
+  css?: { [property: string]: any },
   onClick?: () => void,
 |};
 
@@ -639,7 +640,7 @@ const getIcon = name => {
   }
 };
 
-const Icon = ({
+export const Icon = ({
   name,
   title,
   color,

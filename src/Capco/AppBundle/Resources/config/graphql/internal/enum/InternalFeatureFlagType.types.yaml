@@ -173,3 +173,6 @@ InternalFeatureFlagType:
             unstable__new_create_project:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_create_project")'
                 description: 'Whether or not project create rework is enabled'
+            new_vote_step:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_vote_step")'
+                description: 'Whether or not new voting step is enabled'

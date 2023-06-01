@@ -164,107 +164,100 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
-      style={
-        Object {
-          "opacity": 0,
-        }
-      }
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
-        style={
-          Object {
-            "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
-          }
-        }
+        className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM ihArod cap-modal__header"
             >
-              count-area {"count":5}
-            </div>
+              <div
+                className="sc-bdnxRM bPpvLW"
+              >
+                count-area {"count":5}
+              </div>
+              <button
+                className="sc-bdnxRM chwkeB"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+              </button>
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM eJnfvU cap-modal__body"
+          >
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+              striped={false}
+            >
+              <li
+                className="list-group-item"
+              >
+                zone 1
+              </li>
+              <li
+                className="list-group-item"
+              >
+                zone 2
+              </li>
+              <li
+                className="list-group-item"
+              >
+                zone 3
+              </li>
+              <li
+                className="list-group-item"
+              >
+                zone 4
+              </li>
+              <li
+                className="list-group-item"
+              >
+                zone 5
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM IKIFa cap-modal__footer"
+          >
             <button
-              className="sc-bdnxRM chwkeB"
+              className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
               onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
               type="button"
             >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
+              global.close
             </button>
-          </header>
+          </footer>
         </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
-            striped={false}
-          >
-            <li
-              className="list-group-item"
-            >
-              zone 1
-            </li>
-            <li
-              className="list-group-item"
-            >
-              zone 2
-            </li>
-            <li
-              className="list-group-item"
-            >
-              zone 3
-            </li>
-            <li
-              className="list-group-item"
-            >
-              zone 4
-            </li>
-            <li
-              className="list-group-item"
-            >
-              zone 5
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[Function]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
-          >
-            global.close
-          </button>
-        </footer>
       </div>
     </div>
   </div>,

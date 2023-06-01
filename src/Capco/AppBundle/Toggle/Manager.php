@@ -87,6 +87,7 @@ class Manager
     public const unstable__organizations = 'unstable__organizations';
     public const moderation_comment = 'moderation_comment';
     public const unstable__new_create_project = 'unstable__new_create_project';
+    public const new_vote_step = 'new_vote_step';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -192,6 +193,7 @@ class Manager
         self::unstable__organizations,
         self::moderation_comment,
         self::unstable__new_create_project,
+        self::new_vote_step
     ];
 
     protected ToggleManager $toggleManager;

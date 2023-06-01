@@ -38,6 +38,7 @@ describe('<ProposalPageHeader />', () => {
         },
       },
     },
+    currentVotableStep: null,
   };
 
   const proposalWithoutTheme = {
@@ -64,6 +65,7 @@ describe('<ProposalPageHeader />', () => {
     },
     media: null,
     category: null,
+    currentVotableStep: null,
   };
 
   const proposalInDraft = {
@@ -90,6 +92,7 @@ describe('<ProposalPageHeader />', () => {
     },
     media: null,
     category: null,
+    currentVotableStep: null,
   };
 
   const props = {
@@ -160,6 +163,7 @@ describe('<ProposalPageHeader />', () => {
     },
     media: null,
     category: null,
+    currentVotableStep: null,
   };
   const establishment = {
     $refType,
@@ -185,6 +189,7 @@ describe('<ProposalPageHeader />', () => {
     },
     media: null,
     category: null,
+    currentVotableStep: null,
   };
 
   it('should render an interpellation', () => {

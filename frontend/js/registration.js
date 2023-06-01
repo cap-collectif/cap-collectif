@@ -84,6 +84,7 @@ import AccessDeniedAuthApp from './startup/AccessDeniedAuthApp';
 import AccessDeniedApp from './startup/AccessDeniedApp';
 import OrganizationPageApp from './startup/OrganizationPageApp';
 import DistrictPageApp from './startup/DistrictPageApp';
+import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -172,4 +173,5 @@ ReactOnRails.register({
   ParticipationMotivationApp,
   DebateCardApp,
   WhatsNewApp,
+  IDFGeoSearchBarApp,
 });

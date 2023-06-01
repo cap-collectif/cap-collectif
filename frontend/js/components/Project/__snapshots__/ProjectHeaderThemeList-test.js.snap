@@ -146,114 +146,107 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
-      style={
-        Object {
-          "opacity": 0,
-        }
-      }
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
-        style={
-          Object {
-            "opacity": 0,
-            "transform": "translateY(-20px) translateZ(0)",
-          }
-        }
+        className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
-        <header
-          className="sc-bdnxRM ihArod cap-modal__header"
+        <div
+          className="sc-bdnxRM jLtCSE sc-bXexck cap-modal"
         >
-          <div
-            className="sc-bdnxRM bPpvLW"
+          <header
+            className="sc-bdnxRM ihArod cap-modal__header"
           >
-            count-themes {"count":4}
-          </div>
-          <button
-            className="sc-bdnxRM chwkeB"
-            onClick={[Function]}
-            type="button"
+            <div
+              className="sc-bdnxRM bPpvLW"
+            >
+              count-themes {"count":4}
+            </div>
+            <button
+              className="sc-bdnxRM chwkeB"
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
+                fill="none"
+                viewBox="0 0 12 12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 11L11 1M1 1l10 10"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={0.8}
+                />
+              </svg>
+            </button>
+          </header>
+          <main
+            className="sc-bdnxRM eJnfvU cap-modal__body"
           >
-            <svg
-              className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-              fill="none"
-              viewBox="0 0 12 12"
-              xmlns="http://www.w3.org/2000/svg"
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+              striped={false}
             >
-              <path
-                d="M1 11L11 1M1 1l10 10"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={0.8}
-              />
-            </svg>
-          </button>
-        </header>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
-            striped={false}
+              <li
+                className="list-group-item"
+              >
+                <a
+                  href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+                >
+                  Immobilier
+                </a>
+              </li>
+              <li
+                className="list-group-item"
+              >
+                <a
+                  href="https://capco.dev/themes/justice?_locale=fr-FR"
+                >
+                  Justice
+                </a>
+              </li>
+              <li
+                className="list-group-item"
+              >
+                <a
+                  href="https://capco.dev/themes/transport?_locale=fr-FR"
+                >
+                  Transport
+                </a>
+              </li>
+              <li
+                className="list-group-item"
+              >
+                <a
+                  href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
+                >
+                  Thème vide
+                </a>
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM IKIFa cap-modal__footer"
           >
-            <li
-              className="list-group-item"
-            >
-              <a
-                href="https://capco.dev/themes/immobilier?_locale=fr-FR"
-              >
-                Immobilier
-              </a>
-            </li>
-            <li
-              className="list-group-item"
-            >
-              <a
-                href="https://capco.dev/themes/justice?_locale=fr-FR"
-              >
-                Justice
-              </a>
-            </li>
-            <li
-              className="list-group-item"
-            >
-              <a
-                href="https://capco.dev/themes/transport?_locale=fr-FR"
-              >
-                Transport
-              </a>
-            </li>
-            <li
-              className="list-group-item"
-            >
-              <a
-                href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
-              >
-                Thème vide
-              </a>
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[Function]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
+            <button
+              className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
+              onClick={[Function]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
               }
-            }
-            type="button"
-          >
-            global.close
-          </button>
-        </footer>
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
   </div>,

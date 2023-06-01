@@ -1,6 +1,6 @@
 // @flow
 import { toast } from '@cap-collectif/ui';
-import type {IntlShape} from "react-intl";
+import type { IntlShape } from 'react-intl';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
@@ -199,7 +199,15 @@ export const stopVoting = (): VoteFailedAction => ({
   type: 'proposal/VOTE_FAILED',
 });
 
-export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymously: boolean, intl: IntlShape) => {
+export const vote = (
+  dispatch: Dispatch,
+  stepId: Uuid,
+  proposalId: Uuid,
+  anonymously: boolean,
+  intl: IntlShape,
+  onSuccess?: () => void,
+  onError?: () => void,
+) => {
   dispatch(startVoting());
   return addVote
     .commit({
@@ -208,7 +216,8 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
     })
     .then(response => {
       dispatch(closeVoteModal());
-      const successTranslationKey = response.addProposalVote &&
+      const successTranslationKey =
+        response.addProposalVote &&
         response.addProposalVote.voteEdge &&
         isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
           ? 'support.add_success'
@@ -217,9 +226,11 @@ export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymo
         variant: 'success',
         content: intl.formatMessage({ id: successTranslationKey }),
       });
+      if (onSuccess) onSuccess();
       return response;
     })
     .catch(e => {
+      if (onError) onError();
       console.log(e); // eslint-disable-line no-console
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
@@ -249,15 +260,15 @@ export type ProposalAction =
   | CloseDetailLikersModalAction
   | { type: 'proposal/POSTS_FETCH_FAILED', error: Error }
   | {
-  type: 'proposal/FETCH_SUCCEEDED',
-  proposals: Array<Object>,
-  count: number,
-}
+      type: 'proposal/FETCH_SUCCEEDED',
+      proposals: Array<Object>,
+      count: number,
+    }
   | {
-  type: 'proposal/POSTS_FETCH_SUCCEEDED',
-  posts: Array<Object>,
-  proposalId: Uuid,
-};
+      type: 'proposal/POSTS_FETCH_SUCCEEDED',
+      posts: Array<Object>,
+      proposalId: Uuid,
+    };
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

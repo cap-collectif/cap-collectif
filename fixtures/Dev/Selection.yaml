@@ -129,58 +129,10 @@ Capco\AppBundle\Entity\Selection:
         selectionStep: '@selectionStepIdf3Winners'
         createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
     selectionstepVoteIdf36:
-        proposal: '@proposalLocation1'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf37:
-        proposal: '@proposalLocation2'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf38:
-        proposal: '@proposalLocation3'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf39:
-        proposal: '@proposalLocation4'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf40:
-        proposal: '@proposalLocation5'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf41:
-        proposal: '@proposalLocation6'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf42:
-        proposal: '@proposalLocation7'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf43:
-        proposal: '@proposalLocation8'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf44:
-        proposal: '@proposalLocation9'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf45:
-        proposal: '@proposalLocation10'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf46:
-        proposal: '@proposalLocation11'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf47:
-        proposal: '@proposalLocation12'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf48:
-        proposal: '@proposalLocation13'
-        selectionStep: '@selectionStepIdf3Vote'
-        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
-    selectionstepVoteIdf49:
         proposal: '@proposalLocationWithoutAddress'
+        selectionStep: '@selectionStepIdf3Vote'
+        createdAt: <(new \DateTime('2022-01-01 00:00:10'))>
+    selectionstepVoteIdfLocation{1..300}:
+        proposal: '@proposalLocation<current()>'
         selectionStep: '@selectionStepIdf3Vote'
         createdAt: <(new \DateTime('2022-01-01 00:00:10'))>

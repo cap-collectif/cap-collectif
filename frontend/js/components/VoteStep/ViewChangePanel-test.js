@@ -8,8 +8,8 @@ import MockProviders from '~/testUtils';
 describe('<ViewChangePanel />', () => {
   it('should render correctly on web', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
-        <ViewChangePanel view="card" setView={jest.fn()} />
+      <MockProviders useCapUIProvider>
+        <ViewChangePanel />
       </MockProviders>,
     );
     expect(testComponentTree).toMatchSnapshot();
@@ -17,8 +17,8 @@ describe('<ViewChangePanel />', () => {
 
   it('should render correctly on mobile', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
-        <ViewChangePanel view="list" setView={jest.fn()} isMobile />
+      <MockProviders useCapUIProvider>
+        <ViewChangePanel isMobile />
       </MockProviders>,
     );
     expect(testComponentTree).toMatchSnapshot();

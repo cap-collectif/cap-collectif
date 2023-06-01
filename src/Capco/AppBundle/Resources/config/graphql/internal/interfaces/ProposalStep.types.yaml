@@ -45,6 +45,7 @@ ProposalStep:
                     orderBy:
                         type: 'InternalProposalVoteOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
+                        description: 'Order votes.'
                     token:
                         type: 'String'
                         description: 'If anonymous user the token used to vote.'

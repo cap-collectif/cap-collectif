@@ -21,58 +21,65 @@ Array [
     className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM dEskHY cap-card"
+    className="sc-bdnxRM bmfVZA cap-card"
     id="proposal-<Node-mock-id-1>"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
-      className="sc-bdnxRM bjVYRI"
+      className="sc-bdnxRM iWefQu"
     >
       <div
-        className="sc-bdnxRM erLbUX"
+        className="sc-bdnxRM jKonkw"
       >
         <div
-          className="sc-bdnxRM coMIwU"
+          className="sc-bdnxRM iRwfor"
         >
           <div
-            className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
+            className="sc-bdnxRM leHKWD sc-fXazdy fmGqjI cap-tag"
             title="En cours"
           >
-            <p
-              className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
-            >
-              En cours
-            </p>
+            En cours
           </div>
           <div
-            className="sc-bdnxRM ebamQQ"
+            className="sc-bdnxRM ewqWBY"
           >
-            <IconMock
-              aria-hidden={true}
-              className="icon"
-              fill="#85919D"
-              height={13}
+            <svg
+              className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+              fill="none"
               style={
                 Object {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
               }
-              width={13}
-            />
+              viewBox="0 0 9 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+              <path
+                d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
             <span
               className="sc-bdnxRM cYARDV cap-text"
+              title="Argenteuil"
             >
               Argenteuil
             </span>
           </div>
           <div
-            className="sc-bdnxRM ebamQQ"
+            className="sc-bdnxRM ewqWBY"
           >
             <IconMock
               aria-hidden={true}
@@ -89,102 +96,253 @@ Array [
             />
             <span
               className="sc-bdnxRM cYARDV cap-text"
+              title="Ecologie"
             >
               Ecologie
             </span>
           </div>
         </div>
-        <h3
-          className="sc-bdnxRM hjhoZx cap-heading"
+        <a
+          href="/project///<mock-value-for-field-\\"slug\\">"
+          onClick={[Function]}
         >
-          Installation d'une serre dans le Jardin partagé du Val des Oiseaux - Argenteuil
-        </h3>
+          <h3
+            className="sc-bdnxRM hxcxCL cap-heading"
+          >
+            Installation d'une serre dans le Jardin partagé du Val des Oiseaux - Argenteuil
+          </h3>
+          <div
+            className="sc-bdnxRM eerSQ cap-text"
+          >
+            &lt;mock-value-for-field-"summary"&gt;
+          </div>
+        </a>
         <div
-          className="sc-bdnxRM GHddu cap-text"
-        >
-          En accord avec la municipalité...
-        </div>
-        <div
-          className="sc-bdnxRM hFScP"
+          className="sc-bdnxRM Evvok"
         >
           <div
             className="sc-bdnxRM lkiVWk"
           >
             <div
-              style={
-                Object {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
+              className="sc-bdnxRM DwDmK"
             >
-              TODO votebtn
+              <button
+                aria-controls="popover-overlay"
+                aria-expanded={false}
+                aria-haspopup="dialog"
+                className="sc-bdnxRM dxOXkI"
+                disabled={false}
+                id="proposal-vote-button-<Node-mock-id-1>"
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                type="button"
+              >
+                <div
+                  className="sc-bdnxRM jKrcqA toggle-btn"
+                >
+                  <span
+                    className="sc-bdnxRM eLfIMN cap-text"
+                  >
+                    global.vote.for
+                  </span>
+                  <div
+                    className="sc-bdnxRM rYDSf inner-circle"
+                  >
+                    <svg
+                      className="sc-bdnxRM sc-eJocfa zBqSO dUIXVZ cap-icon"
+                      fill="none"
+                      viewBox="0 0 20 19"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.274 9.153l-1.38-1.457a4.045 4.045 0 01-.706-4.53 3.693 3.693 0 016.038-1.018l1.04 1.082 1.041-1.082a3.693 3.693 0 016.038 1.019 4.044 4.044 0 01-.706 4.529l-6.372 6.528-1.594-1.634"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                      />
+                      <path
+                        d="M6.667 11.924l1.282-.963a1.204 1.204 0 011.723 1.63l-1.261 1.891a3.45 3.45 0 01-1.591 1.29l-1.879.752v1.726M5.717 8.564c-5.043 2.162-4.227 6.8-4.227 9.686"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+              <div
+                aria-label="vote.popover.title"
+                className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
+                data-dialog={true}
+                hidden={true}
+                id="login-popover"
+                onAnimationEnd={[Function]}
+                onBlur={[Function]}
+                onKeyDown={[Function]}
+                onTransitionEnd={[Function]}
+                role="dialog"
+                style={
+                  Object {
+                    "display": "none",
+                    "left": "100%",
+                    "position": "fixed",
+                    "top": "100%",
+                  }
+                }
+                tabIndex={0}
+              >
+                <div
+                  className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+                  style={
+                    Object {
+                      "auto": "100%",
+                      "fontSize": 30,
+                      "height": "1em",
+                      "pointerEvents": "none",
+                      "width": "1em",
+                    }
+                  }
+                >
+                  <svg
+                    style={
+                      Object {
+                        "transform": undefined,
+                      }
+                    }
+                    viewBox="0 0 30 30"
+                  >
+                    <path
+                      className="stroke"
+                      d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+                    />
+                    <path
+                      className="fill"
+                      d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+                    />
+                  </svg>
+                </div>
+                <div
+                  className="sc-bdnxRM htoMAJ"
+                >
+                  <p
+                    className="sc-bdnxRM kUmORS cap-text"
+                  >
+                    vote.popover.title
+                  </p>
+                  <div
+                    className="sc-bdnxRM jaCxns"
+                  >
+                    <p
+                      className="sc-bdnxRM dNfCSD cap-text"
+                      style={
+                        Object {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                    >
+                      vote.popover.body
+                    </p>
+                    <span
+                      className="sc-bdnxRM hptjof"
+                      clip="rect(0px, 0px, 0px, 0px)"
+                    >
+                      <button
+                        className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        global.close
+                      </button>
+                    </span>
+                    <span
+                      style={Object {}}
+                    >
+                      <button
+                        aria-label="open.connection_modal"
+                        className="center-block btn-block login-button btn btn-success"
+                        destination="http://localhost"
+                        disabled={false}
+                        onClick={[Function]}
+                        type="button"
+                      >
+                        global.login
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
-              className="sc-bdnxRM kapipF"
+              className="sc-bdnxRM yYmQM"
             >
               <div
-                className="sc-bdnxRM ebamQQ"
+                className="sc-bdnxRM bFLtGa"
               >
-                <IconMock
-                  aria-hidden={true}
-                  className="icon"
-                  fill="#85919D"
-                  height={16}
+                <svg
+                  className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                  fill="none"
                   style={
                     Object {
                       "marginLeft": 0,
                       "marginTop": 0,
                     }
                   }
-                  width={16}
-                />
+                  viewBox="0 0 19 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.21 15.095C6.042 12.583-.552 6.473 1.333 3.025A3.943 3.943 0 012.6 1.65 4.413 4.413 0 014.413.955a4.573 4.573 0 011.96.136 4.28 4.28 0 011.678.937L9.21 3.086l1.158-1.058c.47-.429 1.045-.75 1.677-.936a4.572 4.572 0 011.96-.136 4.413 4.413 0 011.812.695c.535.36.97.83 1.266 1.373 1.877 3.427-4.7 9.588-7.872 12.071z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                  />
+                </svg>
                 <span
                   className="sc-bdnxRM sHwtO cap-text"
                 >
                   400
                 </span>
               </div>
-              <div
-                className="sc-bdnxRM ebamQQ"
-              >
-                <IconMock
-                  aria-hidden={true}
-                  className="icon"
-                  fill="#85919D"
-                  height={16}
-                  style={
-                    Object {
-                      "marginLeft": 0,
-                      "marginTop": 0,
-                    }
-                  }
-                  width={16}
-                />
-                <span
-                  className="sc-bdnxRM sHwtO cap-text"
-                >
-                  50
-                </span>
-              </div>
             </div>
           </div>
           <div
-            className="sc-bdnxRM ebamQQ"
+            className="sc-bdnxRM iRwWVh"
           >
-            <IconMock
-              aria-hidden={true}
-              className="icon"
-              fill="#85919D"
-              height={13}
+            <svg
+              className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+              fill="none"
               style={
                 Object {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
               }
-              width={13}
-            />
+              viewBox="0 0 13 14"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clipRule="evenodd"
+                d="M3.75 3.261a2.75 2.75 0 105.5 0 2.75 2.75 0 00-5.5 0z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M1 12.611a5.5 5.5 0 0111 0"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             <span
               className="sc-bdnxRM sHwtO cap-text"
             >

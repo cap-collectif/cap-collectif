@@ -76,6 +76,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "QUESTION",
             "step": Object {
@@ -184,6 +185,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             "icon": null,
           },
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "PROPOSAL",
             "step": Object {
@@ -306,6 +308,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             "icon": null,
           },
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "PROPOSAL",
             "step": Object {
@@ -412,6 +415,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "QUESTION",
             "step": Object {
@@ -516,6 +520,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "ESTABLISHMENT",
             "step": Object {
@@ -620,6 +625,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           },
           "category": null,
           "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
           "form": Object {
             "objectType": "PROPOSAL",
             "step": Object {

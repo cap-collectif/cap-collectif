@@ -2,67 +2,68 @@
 
 exports[`<ProjectStepHeader /> <TestProjectStepHeader /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM cvogHf"
+  className="sc-bdnxRM cSrFjJ"
   id="step-header"
 >
   <div
     className="sc-bdnxRM bWSfcu"
   >
     <div
-      className="sc-bdnxRM"
+      className="sc-bdnxRM gTwBJL"
     >
       <h2
-        className="sc-bdnxRM btZBcP cap-heading"
+        className="sc-bdnxRM hkGCwF cap-heading"
       >
         Budget participatif 2022
       </h2>
       <h1
-        className="sc-bdnxRM jzNpJS cap-heading"
+        className="sc-bdnxRM buhSIU cap-heading"
       >
         Votez pour vos projets favoris
       </h1>
     </div>
     <div
-      className="sc-bdnxRM fIXKle"
+      className="sc-bdnxRM fLFoAq"
     >
       <div
-        className="sc-bdnxRM fGHGuM"
+        className="sc-bdnxRM bgooXx"
+        data-cy="project-vote-count"
       >
         <div
-          className="sc-bdnxRM cugjYu cap-text"
+          className="sc-bdnxRM cGcpzJ cap-text"
         >
           global.vote
         </div>
         <div
-          className="sc-bdnxRM jSAkBW cap-text"
+          className="sc-bdnxRM jAtDzd cap-text"
         >
           147529
         </div>
       </div>
       <div
-        className="sc-bdnxRM fGHGuM"
+        className="sc-bdnxRM bgooXx"
       >
         <div
-          className="sc-bdnxRM cugjYu cap-text"
+          className="sc-bdnxRM cGcpzJ cap-text"
         >
           capco.section.metrics.participants
         </div>
         <div
-          className="sc-bdnxRM jSAkBW cap-text"
+          className="sc-bdnxRM jAtDzd cap-text"
         >
           51472
         </div>
       </div>
       <div
-        className="sc-bdnxRM fGHGuM"
+        className="sc-bdnxRM bgooXx"
       >
         <div
-          className="sc-bdnxRM cugjYu cap-text"
+          className="sc-bdnxRM cGcpzJ cap-text"
         >
           admin.group.moderation
         </div>
         <div
-          className="sc-bdnxRM jSAkBW cap-text"
+          className="sc-bdnxRM jAtDzd cap-text"
         >
           8488
         </div>

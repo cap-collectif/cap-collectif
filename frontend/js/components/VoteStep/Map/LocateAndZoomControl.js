@@ -53,7 +53,7 @@ const LocateAndZoomControl = () => {
   return (
     <>
       <LeafletControl position="topright">
-        <Flex direction="column">
+        <Flex direction="column" m="1rem">
           <ControlButton
             mb={4}
             onClick={() => {

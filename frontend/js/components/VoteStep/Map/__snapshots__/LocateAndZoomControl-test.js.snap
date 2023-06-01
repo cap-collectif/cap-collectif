@@ -11,7 +11,7 @@ exports[`<LocateAndZoomControl /> should render correctly 1`] = `
       className="leaflet-control"
     >
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM fXHFXK"
       >
         <button
           className="sc-bdnxRM ewQzxq"

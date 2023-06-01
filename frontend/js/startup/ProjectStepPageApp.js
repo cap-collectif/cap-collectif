@@ -133,6 +133,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
           path={[
             `/project/:projectSlug/collect/:stepSlug/proposals/:proposalSlug`,
             `/project/:projectSlug/selection/:stepSlug/proposals/:proposalSlug`,
+            `/project/:projectSlug/vote/:stepSlug/proposals/:proposalSlug`,
           ]}>
           <ScrollToTop />
           <ProposalPage

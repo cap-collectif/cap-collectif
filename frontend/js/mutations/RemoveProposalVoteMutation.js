@@ -22,8 +22,10 @@ const mutation = graphql`
       step {
         id
         ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-        ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) @include(if: $isAuthenticated) {
+        ...ProposalVoteButtonWrapperFragment_step
+          @arguments(isAuthenticated: $isAuthenticated, token: $token)
+        viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token)
+          @include(if: $isAuthenticated) {
           ...ProposalsUserVotesTable_votes
           totalCount
           edges {
@@ -57,11 +59,38 @@ const commit = (
     variables,
     updater: (store: RecordSourceSelectorProxy) => {
       const payload = store.getRootField('removeProposalVote');
+      const previousVoteId = payload?.getValue('previousVoteId');
 
-      if (!payload || !payload.getValue('previousVoteId')) return;
+      if (!payload || !previousVoteId) return;
 
       const proposalProxy = store.get(variables.input.proposalId);
       if (!proposalProxy) return;
+
+      const stepProxy = store.get(variables.input.stepId);
+      if (stepProxy) {
+        const connectionRecord = ConnectionHandler.getConnection(
+          stepProxy,
+          'VotesList_viewerVotes',
+          {},
+        );
+
+        if (connectionRecord) {
+          ConnectionHandler.deleteNode(connectionRecord, String(previousVoteId));
+          const viewerVotes = stepProxy?.getLinkedRecord('viewerVotes', {});
+          if (viewerVotes) {
+            const previousValue = parseInt(viewerVotes.getValue('totalCount'), 10);
+            viewerVotes.setValue(previousValue - 1, 'totalCount');
+          }
+        }
+        const project = stepProxy?.getLinkedRecord('project', {});
+        if (project) {
+          const votes = project?.getLinkedRecord('votes', {});
+          if (votes) {
+            const previousValue = parseInt(votes.getValue('totalCount'), 10);
+            votes.setValue(previousValue - 1, 'totalCount');
+          }
+        }
+      }
 
       const votesArgs = {
         first: 0,
@@ -70,7 +99,6 @@ const commit = (
 
       proposalProxy.setValue(false, 'viewerHasVote', { step: variables.input.stepId });
 
-      const stepProxy = store.get(variables.input.stepId);
       if (!stepProxy) return;
       const stepConnection = stepProxy.getLinkedRecord('viewerVotes', {
         orderBy: { field: 'POSITION', direction: 'ASC' },
@@ -95,10 +123,7 @@ const commit = (
         const ids =
           stepConnection.getLinkedRecords('edges')?.map(edge => {
             return String(
-              edge
-                ?.getLinkedRecord('node')
-                ?.getLinkedRecord('proposal')
-                ?.getValue('id'),
+              edge?.getLinkedRecord('node')?.getLinkedRecord('proposal')?.getValue('id'),
             );
           }) || [];
 

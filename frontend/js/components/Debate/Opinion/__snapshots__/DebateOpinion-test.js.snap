@@ -6,7 +6,6 @@ exports[`<DebateOpinion /> when the query is on desktop should render a FOR opin
 >
   <div
     className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    style={Object {}}
     title=""
   >
     <span
@@ -101,7 +100,6 @@ exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST
 >
   <div
     className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    style={Object {}}
     title=""
   >
     <span
@@ -196,7 +194,6 @@ exports[`<DebateOpinion /> when the query is on desktop should render with a rea
 >
   <div
     className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    style={Object {}}
     title=""
   >
     <span
@@ -288,7 +285,6 @@ exports[`<DebateOpinion /> when the query is on mobile should render a FOR opini
 >
   <div
     className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    style={Object {}}
     title=""
   >
     <span
@@ -390,7 +386,6 @@ exports[`<DebateOpinion /> when the query is on mobile should render with a read
 >
   <div
     className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    style={Object {}}
     title=""
   >
     <span

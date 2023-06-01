@@ -54,9 +54,9 @@ InternalWithProposals:
                     excludeViewerVotes:
                         type: 'Boolean'
                         defaultValue: false
-                    location:
-                        type: 'Location'
-                        description: 'Order proposals by proximity given a lat/lng to serve as a center.'
+                    geoBoundingBox:
+                        type: 'GeoBoundingBox'
+                        description: 'Filter proposals by a given geo bounding box'
             viewerProposalsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'InternalProposalConnection'

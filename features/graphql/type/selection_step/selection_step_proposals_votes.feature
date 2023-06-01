@@ -188,11 +188,11 @@ Scenario: Admin wants to get votes for a proposal with secret ballot
         "isSecretBallot": true,
         "canDisplayBallot": false,
         "proposals": {
-          "totalCount": 16,
+          "totalCount": 303,
           "edges": [
             {
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjY=",
+                "id": "UHJvcG9zYWw6cHJvcG9zaXRpb25Qb3VyVGVzdExlRG91Ymxvbg==",
                 "votes": {
                   "totalCount": 0,
                   "edges": []
@@ -201,16 +201,27 @@ Scenario: Admin wants to get votes for a proposal with secret ballot
             },
             {
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjI=",
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxCeUZyYW5jZUNvbm5lY3RVc2Vy",
                 "votes": {
-                  "totalCount": 0,
-                  "edges": []
+                  "totalCount": 2,
+                  "edges": [
+                    {
+                      "node": {
+                        "id": "1063"
+                      }
+                    },
+                    {
+                      "node": {
+                        "id": "1065"
+                      }
+                    }
+                  ]
                 }
               }
             },
             {
               "node": {
-                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbjQ=",
+                "id": "UHJvcG9zYWw6cHJvcG9zYWxMb2NhdGlvbldpdGhvdXRBZGRyZXNz",
                 "votes": {
                   "totalCount": 0,
                   "edges": []
