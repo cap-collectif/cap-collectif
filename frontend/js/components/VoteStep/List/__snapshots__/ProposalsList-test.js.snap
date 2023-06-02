@@ -383,6 +383,7 @@ Array [
                       alt="<mock-value-for-field-\\"name\\">"
                       className="sc-bdnxRM lkWbVD"
                       loading="lazy"
+                      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                       srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,

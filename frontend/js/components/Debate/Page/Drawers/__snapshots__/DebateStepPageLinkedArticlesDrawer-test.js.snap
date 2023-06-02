@@ -64,6 +64,7 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
               <img
                 className="sc-bdnxRM gYudlT DebateArticleCard___StyledImage-dblqpE gVCHpR"
                 loading="lazy"
+                sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://www.generationlibre.eu/wp-content/uploads/2021/03/markus-winkler-eNyIi0oS7P4-unsplash-e1616584197949-1024x576.jpg   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/https://www.generationlibre.eu/wp-content/uploads/2021/03/markus-winkler-eNyIi0oS7P4-unsplash-e1616584197949-1024x576.jpg   640w,
@@ -106,6 +107,7 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
               <img
                 className="sc-bdnxRM gYudlT DebateArticleCard___StyledImage-dblqpE gVCHpR"
                 loading="lazy"
+                sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/http://media1.woopic.com/api/v1/images/1039%2Fmulti%2F3ukfr%2Fmacron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent%7Cfzqpqs-H.jpg?format=470x264&facedetect=1&quality=85   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/http://media1.woopic.com/api/v1/images/1039%2Fmulti%2F3ukfr%2Fmacron-ceux-qui-disent-on-aura-un-vaccin-en-mars-ou-avril-prochain-vous-trompent%7Cfzqpqs-H.jpg?format=470x264&facedetect=1&quality=85   640w,
@@ -153,6 +155,7 @@ exports[`<DebateStepPageLinkedArticlesDrawer /> should render when open 1`] = `
               <img
                 className="sc-bdnxRM gYudlT DebateArticleCard___StyledImage-dblqpE gVCHpR"
                 loading="lazy"
+                sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://www.francetvinfo.fr/pictures/XG0eIHnEfHnOuHCFy2xOQse_Um4/1500x843/2021/03/09/phplNpe9r.jpg   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/https://www.francetvinfo.fr/pictures/XG0eIHnEfHnOuHCFy2xOQse_Um4/1500x843/2021/03/09/phplNpe9r.jpg   640w,

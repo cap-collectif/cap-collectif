@@ -81,6 +81,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
           alt="Media Food"
           className="sc-bdnxRM bnKRvo"
           loading="lazy"
+          sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
           srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   640w,

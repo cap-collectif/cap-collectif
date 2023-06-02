@@ -123,6 +123,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "b
         alt="<mock-value-for-field-\\"username\\">"
         className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
+        sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
@@ -272,6 +273,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "beta_
         alt="<mock-value-for-field-\\"username\\">"
         className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
+        sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,

@@ -255,6 +255,7 @@ type HTML = {|
   className?: string,
   src?: ?string,
   srcSet?: ?string,
+  sizes?: ?string,
   loading?: 'eager' | 'lazy',
   role?: string,
   type?: 'submit' | 'reset' | 'button',

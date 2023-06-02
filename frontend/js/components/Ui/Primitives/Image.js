@@ -29,6 +29,11 @@ const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
          ${baseUrl}/cdn-cgi/image/dpr=2,format=auto/${src} 2x,
          ${baseUrl}/cdn-cgi/image/dpr=3,format=auto/${src} 3x,
          `}
+        sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 960px,
+        (max-width: 1280px) 1280px,
+        (max-width: 2560px) 2560px,"
         alt={alt}
         {...props}
       />
@@ -49,6 +54,11 @@ const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
          ${baseUrl}/cdn-cgi/image/dpr=2,format=auto/${src} 2x,
          ${baseUrl}/cdn-cgi/image/dpr=3,format=auto/${src} 3x,
          `}
+      sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 960px,
+        (max-width: 1280px) 1280px,
+        (max-width: 2560px) 2560px,"
       alt={alt}
       {...props}
     />

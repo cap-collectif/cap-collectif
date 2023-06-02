@@ -800,6 +800,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                 alt=""
                 className="sc-bdnxRM img-responsive"
                 loading="lazy"
+                sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                 srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/https://assets.cap.co/media/default/0001/01/2c0e4a9c2ed93fb48a8725daf753accc04e4c993.gif   640w,
