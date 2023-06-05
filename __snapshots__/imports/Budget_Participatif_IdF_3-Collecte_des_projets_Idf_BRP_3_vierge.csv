@@ -1,3 +1,3 @@
-﻿title,author,cost,address,category,theme,body,summary,webPageUrl,linkedInUrl,youtubeUrl,facebookUrl,twitterUrl,instagramUrl,"No Mes Démarches","No IRIS","Raison sociale"
-"texte brut",jean.dupont@email.com,nombre,"Format Geocoding","Énergies renouvelables et efficacité énergétique",Immobilier,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,nombre,"texte brut","texte brut"
-"texte brut",julie.martin@email.com,nombre,"Tour Eiffel, 75007 Paris","Espaces verts et biodiversité",Justice,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,nombre,"texte brut","texte brut"
+﻿title,author,cost,address,category,theme,body,summary,webPageUrl,linkedInUrl,youtubeUrl,facebookUrl,twitterUrl,instagramUrl,status,"No Mes Démarches","No IRIS","Raison sociale"
+"texte brut",jean.dupont@email.com,nombre,"Format Geocoding","Énergies renouvelables et efficacité énergétique",Immobilier,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,"Nouveau projet",nombre,"texte brut","texte brut"
+"texte brut",julie.martin@email.com,nombre,"Tour Eiffel, 75007 Paris","Espaces verts et biodiversité",Justice,"texte brut ou html","texte brut",URL,URL,URL,URL,URL,URL,"Nouveau projet",nombre,"texte brut","texte brut"

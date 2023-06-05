@@ -169,6 +169,10 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
         if (isset($header['instagramUrl'])) {
             $example = array_merge($example, ['URL']);
         }
+        if (isset($header['status'])) {
+            $status = $proposalForm->getStep()->getStatuses()->first();
+            $example = array_merge($example, [$status->getName()]);
+        }
         foreach (
             $proposalForm->getFieldsType($proposalForm->getRealQuestions(), $next, $isCliModel)
             as $field => $type

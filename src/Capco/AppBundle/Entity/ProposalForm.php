@@ -1014,6 +1014,11 @@ class ProposalForm implements
             $fields = array_merge($fields, ['instagramUrl']);
         }
 
+        $step = $this->getStep();
+        if ($step && $step->getStatuses()->count() > 0) {
+            $fields = array_merge($fields, ['status']);
+        }
+
         return $fields;
     }
 

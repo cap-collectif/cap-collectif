@@ -1,3 +1,3 @@
-﻿title,author,cost,address,category,theme,district,body,"Evaluez l'importance de votre proposition","Evaluez le coût de votre proposition"
-"texte brut",jean.dupont@email.com,nombre,"Format Geocoding",Aménagement,Immobilier,Beauregard,"texte brut ou html","texte brut","texte brut"
-"texte brut",julie.martin@email.com,nombre,"Tour Eiffel, 75007 Paris",Politique,Justice,"Le Blosne","texte brut ou html","texte brut","texte brut"
+﻿title,author,cost,address,category,theme,district,body,status,"Evaluez l'importance de votre proposition","Evaluez le coût de votre proposition"
+"texte brut",jean.dupont@email.com,nombre,"Format Geocoding",Aménagement,Immobilier,Beauregard,"texte brut ou html","En cours","texte brut","texte brut"
+"texte brut",julie.martin@email.com,nombre,"Tour Eiffel, 75007 Paris",Politique,Justice,"Le Blosne","texte brut ou html","En cours","texte brut","texte brut"

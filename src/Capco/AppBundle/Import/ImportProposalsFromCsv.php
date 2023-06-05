@@ -161,8 +161,8 @@ class ImportProposalsFromCsv
                     \count($missing) .
                         ' missing headers : ' .
                         implode(', ', $missing) .
-                        "file {$this->filePath} , header expected" .
-                        implode(', ', $this->headers) .
+                        "file {$this->filePath} , header expected " .
+                        implode(',', array_keys($this->headers)) .
                         " header filled {$headersJoined} count ${countRows}"
                 );
             }
@@ -233,7 +233,7 @@ class ImportProposalsFromCsv
                 case AbstractQuestion::QUESTION_TYPE_BUTTON:
                     if (
                         $question instanceof MultipleChoiceQuestion &&
-                        ($question->isRequired() &&
+                        (($question->isRequired() || !empty($row[$questionTitle])) &&
                             !$question->isChoiceValid(trim($row[$questionTitle])) &&
                             !$question->isOtherAllowed())
                     ) {
