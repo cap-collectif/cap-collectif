@@ -120,7 +120,7 @@ const IconAndText = ({
           as="span"
           fontSize={2}
           color={color || 'gray.500'}
-          truncate={truncate ? 30 : undefined}>
+          truncate={truncate ? 80 : undefined}>
           {children}
         </Text>
       ) : null}
