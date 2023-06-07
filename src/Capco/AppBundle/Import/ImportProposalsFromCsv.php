@@ -645,7 +645,7 @@ class ImportProposalsFromCsv
         ?string $address
     ): Proposal {
         $proposal = (new Proposal())
-            ->setTitle(Text::escapeHtml($row['title']))
+            ->setTitle($row['title'])
             ->setAuthor($author)
             ->setProposalForm($this->proposalForm)
             ->setDistrict($district)
@@ -672,7 +672,7 @@ class ImportProposalsFromCsv
         }
 
         if ($this->proposalForm->getUsingSummary() && !empty($row['summary'])) {
-            $proposal->setSummary(Text::escapeHtml($row['summary']));
+            $proposal->setSummary($row['summary']);
         }
         if ($this->proposalForm->getUsingDescription() && !empty($row['body'])) {
             $proposal->setBody($row['body']);
