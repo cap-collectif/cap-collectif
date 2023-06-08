@@ -45,6 +45,7 @@ const Captcha = ({ onChange, style, disabled = false, captchaRef }: Props) => {
         onSuccess={token => {
           onChange(token);
         }}
+        options={{ theme: 'light' }}
         onError={() => onChange('')}
       />
     );
