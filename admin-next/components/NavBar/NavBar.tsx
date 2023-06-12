@@ -9,6 +9,7 @@ import { useIntl } from 'react-intl';
 import useFeatureFlag from '../../hooks/useFeatureFlag';
 import { useNavBarContext } from './NavBar.context';
 import BreadCrumbItems from '../BreadCrumb/BreadCrumbItems';
+import UpdateLocaleMutation from "@mutations/UpdateLocaleMutation";
 
 const QUERY = graphql`
     query NavBarQuery {
@@ -113,8 +114,15 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
                                     <Menu.Item
                                         key={locale.id}
                                         onClick={() => {
-                                            setLocaleCookie(formatCodeToLocale(locale.code));
-                                            window.location.reload();
+                                            const formattedLocale = formatCodeToLocale(locale.code);
+                                            UpdateLocaleMutation.commit({
+                                                input: {
+                                                    locale: formattedLocale
+                                                }
+                                            }).then((response) => {
+                                                setLocaleCookie(formattedLocale);
+                                                window.location.reload();
+                                            })
                                         }}
                                         value={{
                                             value: locale.id,

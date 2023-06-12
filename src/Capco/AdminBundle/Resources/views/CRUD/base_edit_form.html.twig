@@ -12,7 +12,7 @@
         <form
                 role="form"
                 {# NEXT_MAJOR: remove default filter #}
-                action="{% block sonata_form_action_url %}{{ admin.generateUrl(url, {'id': objectId|default(admin.id(object)), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}) }}{% endblock %}"
+                action="{% block sonata_form_action_url %}{{ admin.generateUrl(url, {'id': objectId|default(admin.id(object)), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass'), 'tl': app.request.get('tl')}) }}{% endblock %}"
                 {% if form.vars.multipart %} enctype="multipart/form-data"{% endif %}
                 method="POST"
                 {% block sonata_form_attributes %}{% endblock %}

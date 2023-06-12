@@ -1,0 +1,7 @@
+UpdateLocalePayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Update locale mutation input.'
+        fields:
+            locale:
+                type: 'String!'

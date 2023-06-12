@@ -1745,3 +1745,9 @@ InternalMutation:
                     inputType: UpdateNewProjectInput
                     payloadType: UpdateNewProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateNewProjectMutation", [value, getUser()])'
+            updateLocale:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateLocaleInput
+                    payloadType: UpdateLocalePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateLocaleMutation", [value, serv("request_stack")])'

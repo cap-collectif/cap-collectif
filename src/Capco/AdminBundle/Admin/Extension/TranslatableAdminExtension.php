@@ -33,7 +33,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     public function getEnabledTranslationLocales(): array
     {
         $locales = $this->toggleManager->isActive('multilangue')
-            ? $this->localeRepository->findEnabledLocales()
+            ? $this->localeRepository->findBy(['enabled' => true, 'published' => true])
             : [$this->localeRepository->findDefaultLocale()];
 
         $localesAsArray = [];

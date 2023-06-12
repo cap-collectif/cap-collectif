@@ -8186,6 +8186,7 @@ type Mutation {
   updateCollectStep(input: UpdateCollectStepInput!): UpdateCollectStepPayload
   updateSelectionStep(input: UpdateSelectionStepInput!): UpdateSelectionStepPayload
   updateNewProject(input: UpdateNewProjectInput!): UpdateNewProjectPayload
+  updateLocale(input: UpdateLocaleInput!): UpdateLocalePayload
 }
 
 """A connection to a list of items."""
@@ -16950,6 +16951,16 @@ input UpdateJumpsInput {
 type UpdateJumpsPayload {
   """The updated questions."""
   questions: [Question!]!
+  clientMutationId: String
+}
+
+input UpdateLocaleInput {
+  locale: String!
+  clientMutationId: String
+}
+
+type UpdateLocalePayload {
+  locale: String!
   clientMutationId: String
 }
 

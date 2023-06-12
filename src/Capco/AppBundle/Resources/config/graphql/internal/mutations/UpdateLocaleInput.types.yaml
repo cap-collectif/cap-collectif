@@ -1,0 +1,7 @@
+UpdateLocaleInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update locale mutation input.'
+        fields:
+            locale:
+                type: 'String!'

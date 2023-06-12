@@ -16,7 +16,10 @@ export function getLocaleFromReq(req: NextApiRequest): string | undefined | null
 }
 
 export function setLocaleCookie(locale: string): void {
-    CookieHelper.setCookie(LOCALE_COOKIE_NAME, locale);
+    // since admin-next is a different domain than the normal one we need to force the path to be `/` so we don't duplicate the `locale` cookie
+    CookieHelper.setCookie(LOCALE_COOKIE_NAME, locale, {
+        path: '/'
+    });
 }
 
 // from fr-FR to FR_FR
