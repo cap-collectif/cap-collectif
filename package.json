@@ -412,7 +412,7 @@
         "prismjs": "^1.27.0",
         "lodash": "^4.17.21",
         "electron": "^11.0.1",
-        "parse-url": "^6.0.1",
+        "parse-url": "^8.1.0",
         "tmpl": "^1.0.5",
         "highlight.js": "^10.4.1",
         "parse-path": "^5.0.0",
@@ -430,7 +430,8 @@
         "jpeg-js": "^0.4.4",
         "moment": "^2.29.4",
         "shell-quote": "^1.7.3",
-        "@react-leaflet/core": "1.1.1"
+        "@react-leaflet/core": "1.1.1",
+        "loader-utils": "^2.0.3"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.16.0",
