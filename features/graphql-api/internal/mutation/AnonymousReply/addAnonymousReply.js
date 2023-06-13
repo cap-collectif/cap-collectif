@@ -13,6 +13,7 @@ const AddAnonymousReplyMutation = /* GraphQL*/ `
                 id
             }
             token
+            errorCode
         }
     }
 `;
@@ -50,7 +51,7 @@ describe('mutations.addAnonymousReply', () => {
     expect(response).toMatchSnapshot(propertyMatchers);
   });
 
-  it('should create an anonymous reply with participantEmail', async () => {
+  it('should create an anonymous reply with an email', async () => {
     const response = await graphql(
       AddAnonymousReplyMutation,
       {
@@ -63,5 +64,35 @@ describe('mutations.addAnonymousReply', () => {
     );
 
     expect(response).toMatchSnapshot(propertyMatchers);
+  });
+
+  it('should create an anonymous reply with a complex email', async () => {
+    const response = await graphql(
+      AddAnonymousReplyMutation,
+      {
+        input: {
+          ...input,
+          participantEmail: 'Cécile.péon@laposte.net'
+        }
+      },
+      'internal'
+    );
+
+    expect(response).toMatchSnapshot(propertyMatchers);
+  });
+
+  it('should not create an anonymous reply with an invalid email', async () => {
+    const response = await graphql(
+      AddAnonymousReplyMutation,
+      {
+        input: {
+          ...input,
+          participantEmail: 'i am an invalid email'
+        }
+      },
+      'internal'
+    );
+
+    expect(response).toMatchSnapshot();
   });
 });

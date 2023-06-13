@@ -1,0 +1,9 @@
+AddAnonymousReplyErrorCode:
+    type: enum
+    config:
+        name: AddAnonymousReplyErrorCode
+        description: 'Available errors on `AddAnonymousReply` mutation.'
+        values:
+            INVALID_FORM:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddAnonymousReplyMutation::INVALID_FORM")'
+                description: 'The submited reply is not valid.'

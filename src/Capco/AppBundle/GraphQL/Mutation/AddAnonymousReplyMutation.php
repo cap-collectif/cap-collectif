@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -26,12 +25,14 @@ class AddAnonymousReplyMutation implements MutationInterface
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
-    private LoggerInterface $logger;
     private RequestGuesser $requestGuesser;
     private TokenGeneratorInterface $tokenGenerator;
     private GlobalIdResolver $globalIdResolver;
     private Publisher $publisher;
     private Indexer $indexer;
+    private LoggerInterface $logger;
+
+    public const INVALID_FORM = 'INVALID_FORM';
 
     public function __construct(
         EntityManagerInterface $em,
@@ -81,7 +82,8 @@ class AddAnonymousReplyMutation implements MutationInterface
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            $this->handleErrors($form);
+            $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
+            return ['questionnaire' => $questionnaire, 'reply' => null, 'token' => null, 'errorCode' => self::INVALID_FORM];
         }
 
         $this->em->persist($replyAnonymous);
@@ -101,19 +103,6 @@ class AddAnonymousReplyMutation implements MutationInterface
             );
         }
 
-        return ['questionnaire' => $questionnaire, 'reply' => $replyAnonymous, 'token' => $token];
-    }
-
-    private function handleErrors(FormInterface $form): void
-    {
-        $errors = [];
-        foreach ($form->getErrors() as $error) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $error->getMessage());
-            $this->logger->error(implode('', $form->getExtraData()));
-            $errors[] = (string) $error->getMessage();
-        }
-        if (!empty($errors)) {
-            throw new UserErrors($errors);
-        }
+        return ['questionnaire' => $questionnaire, 'reply' => $replyAnonymous, 'token' => $token, 'errorCode' => null];
     }
 }

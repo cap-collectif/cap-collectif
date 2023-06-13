@@ -9,5 +9,8 @@ AddAnonymousReplyPayload:
                 type: 'InternalQuestionnaire'
                 description: 'The associated questionnaire'
             token:
-                type: 'String!'
+                type: 'String'
                 description: 'The reply token'
+            errorCode:
+                type: 'AddAnonymousReplyErrorCode'
+                description: 'An error'

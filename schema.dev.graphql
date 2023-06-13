@@ -128,6 +128,12 @@ interface AbstractDebateVote {
   widgetOriginUrl: URI
 }
 
+"""Available errors on `AddAnonymousReply` mutation."""
+enum AddAnonymousReplyErrorCode {
+  """The submited reply is not valid."""
+  INVALID_FORM
+}
+
 input AddAnonymousReplyInput {
   """The id of the questionnaire"""
   questionnaireId: ID!
@@ -148,7 +154,10 @@ type AddAnonymousReplyPayload {
   questionnaire: Questionnaire
 
   """The reply token"""
-  token: String!
+  token: String
+
+  """An error"""
+  errorCode: AddAnonymousReplyErrorCode
   clientMutationId: String
 }
 

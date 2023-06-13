@@ -3,6 +3,7 @@
 exports[`mutations.addAnonymousReply should create an anonymous reply 1`] = `
 Object {
   "addAnonymousReply": Object {
+    "errorCode": null,
     "questionnaire": Object {
       "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
     },
@@ -16,9 +17,10 @@ Object {
 }
 `;
 
-exports[`mutations.addAnonymousReply should create an anonymous reply with participantEmail 1`] = `
+exports[`mutations.addAnonymousReply should create an anonymous reply with an email 1`] = `
 Object {
   "addAnonymousReply": Object {
+    "errorCode": null,
     "questionnaire": Object {
       "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
     },
@@ -28,6 +30,36 @@ Object {
       "participantEmail": "abc@cap-collectif.com",
     },
     "token": Any<String>,
+  },
+}
+`;
+
+exports[`mutations.addAnonymousReply should create an anonymous reply with a complex email 1`] = `
+Object {
+  "addAnonymousReply": Object {
+    "errorCode": null,
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
+    },
+    "reply": Object {
+      "__typename": "AnonymousReply",
+      "id": Any<String>,
+      "participantEmail": "Cécile.péon@laposte.net",
+    },
+    "token": Any<String>,
+  },
+}
+`;
+
+exports[`mutations.addAnonymousReply should not create an anonymous reply with an invalid email 1`] = `
+Object {
+  "addAnonymousReply": Object {
+    "errorCode": "INVALID_FORM",
+    "questionnaire": Object {
+      "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlQW5vbnltb3Vz",
+    },
+    "reply": null,
+    "token": null,
   },
 }
 `;

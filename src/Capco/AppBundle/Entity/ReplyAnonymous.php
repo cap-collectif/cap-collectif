@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\ReplyStatus;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +24,7 @@ class ReplyAnonymous extends AbstractReply
     use TokenTrait;
 
     /**
+     * @Assert\Email()
      * @ORM\Column(name="participant_email", type="string", nullable=true)
      */
     private ?string $participantEmail;

@@ -134,11 +134,12 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $questionnaire->isNotifyResponseCreate()->willReturn(false);
 
         $payload = $this->__invoke($input);
-        $payload->shouldHaveCount(3);
+        $payload->shouldHaveCount(4);
         $payload['questionnaire']->shouldBe($questionnaire);
         $payload['questionnaire']->shouldHaveType(Questionnaire::class);
         $payload['reply']->shouldHaveType(ReplyAnonymous::class);
         $payload['token']->shouldBe($token);
+        $payload['errorCode']->shouldBe(null);
     }
 
     public function it_should_notify_admin(
@@ -234,10 +235,11 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce();
 
         $payload = $this->__invoke($input);
-        $payload->shouldHaveCount(3);
+        $payload->shouldHaveCount(4);
         $payload['questionnaire']->shouldBe($questionnaire);
         $payload['questionnaire']->shouldHaveType(Questionnaire::class);
         $payload['reply']->shouldHaveType(ReplyAnonymous::class);
         $payload['token']->shouldBe($token);
+        $payload['errorCode']->shouldBe(null);
     }
 }

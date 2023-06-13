@@ -199,6 +199,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: G
     })
       .then(response => {
         const anonymousReply = response.addAnonymousReply;
+        if (!anonymousReply || anonymousReply.errorCode) {
+          return mutationErrorToast(intl);
+        }
+
         if (
           anonymousReply?.token &&
           anonymousReply?.reply?.id &&

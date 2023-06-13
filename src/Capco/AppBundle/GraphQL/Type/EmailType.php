@@ -6,6 +6,8 @@ use GraphQL\Error\Error;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
 
 class EmailType extends ScalarType implements AliasedInterface
 {
@@ -13,10 +15,6 @@ class EmailType extends ScalarType implements AliasedInterface
 
     public function serialize($value): string
     {
-        if (!is_scalar($value)) {
-            throw new Error('Email cannot represent non scalar value: ' . Utils::printSafe($value));
-        }
-
         return self::coerceEmail($value);
     }
 
@@ -27,11 +25,7 @@ class EmailType extends ScalarType implements AliasedInterface
 
     public function parseLiteral($valueNode, ?array $variables = null)
     {
-        if (false !== filter_var($valueNode->value, \FILTER_VALIDATE_EMAIL)) {
-            return $valueNode->value;
-        }
-
-        throw new \Exception();
+        return self::coerceEmail($valueNode->value);
     }
 
     public static function getAliases(): array
@@ -41,16 +35,17 @@ class EmailType extends ScalarType implements AliasedInterface
 
     private static function coerceEmail($value): string
     {
-        // to trigger EMAIL_BLANK in mutation
+        // We return an empty string to trigger EMAIL_BLANK in mutation
         if (!$value) {
             return '';
         }
-        if (false === filter_var($value, \FILTER_VALIDATE_EMAIL)) {
-            throw new Error('Value : ' . Utils::printSafe($value) . ' is not valid');
+
+        if (!\is_string($value)) {
+            throw new Error('Email cannot represent a non string value: ' . Utils::printSafe($value));
         }
 
-        if (\is_array($value)) {
-            throw new Error('Email cannot represent an array value: ' . Utils::printSafe($value));
+        if (!(new EmailValidator())->isValid($value, new RFCValidation())) {
+            return 'INVALID_EMAIL';
         }
 
         return (string) $value;

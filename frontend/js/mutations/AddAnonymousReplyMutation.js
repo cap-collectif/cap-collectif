@@ -29,6 +29,7 @@ const mutation = graphql`
                 ...ReplyLink_questionnaire
             }
             token
+            errorCode
         }
     }
 `;
