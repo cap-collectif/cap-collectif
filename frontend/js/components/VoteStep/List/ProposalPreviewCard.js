@@ -48,6 +48,9 @@ const FRAGMENT = graphql`
       color
       icon
     }
+    theme {
+      title
+    }
     media {
       url
       name
@@ -150,7 +153,8 @@ export const ProposalPreviewCard = ({
 
   if (!proposal) return null;
 
-  const { media, author, category, title, district, summary, body, votes, status } = proposal;
+  const { media, author, category, title, district, summary, body, votes, status, theme } =
+    proposal;
 
   const url = getBaseUrlFromProposalUrl(proposal.url);
 
@@ -179,14 +183,14 @@ export const ProposalPreviewCard = ({
                 {district.name}
               </IconAndText>
             ) : null}
-            {category ? (
+            {theme ? (
               <IconAndText
                 truncate
                 useOldIcons
-                icon={category?.icon || null}
+                icon={null}
                 size={isMobile ? 16 : 13}
                 mr={isMobile ? 0 : 6}>
-                {isMobile ? null : category.name}
+                {isMobile ? null : theme.title}
               </IconAndText>
             ) : null}
           </Flex>

@@ -99,24 +99,17 @@ Array [
                   <div
                     className="sc-bdnxRM ewqWBY"
                   >
-                    <div
-                      aria-hidden={true}
-                      className="icon"
-                      fill="#85919D"
-                      height={13}
+                    <span
+                      className="sc-bdnxRM cYARDV cap-text"
                       style={
                         Object {
                           "marginLeft": 0,
                           "marginTop": 0,
                         }
                       }
-                      width={13}
-                    />
-                    <span
-                      className="sc-bdnxRM cYARDV cap-text"
-                      title="<mock-value-for-field-\\"name\\">"
+                      title="<mock-value-for-field-\\"title\\">"
                     >
-                      &lt;mock-value-for-field-"name"&gt;
+                      &lt;mock-value-for-field-"title"&gt;
                     </span>
                   </div>
                 </div>
@@ -505,24 +498,17 @@ Array [
                   <div
                     className="sc-bdnxRM ewqWBY"
                   >
-                    <div
-                      aria-hidden={true}
-                      className="icon"
-                      fill="#85919D"
-                      height={13}
+                    <span
+                      className="sc-bdnxRM cYARDV cap-text"
                       style={
                         Object {
                           "marginLeft": 0,
                           "marginTop": 0,
                         }
                       }
-                      width={13}
-                    />
-                    <span
-                      className="sc-bdnxRM cYARDV cap-text"
-                      title="<mock-value-for-field-\\"name\\">"
+                      title="<mock-value-for-field-\\"title\\">"
                     >
-                      &lt;mock-value-for-field-"name"&gt;
+                      &lt;mock-value-for-field-"title"&gt;
                     </span>
                   </div>
                 </div>
