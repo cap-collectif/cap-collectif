@@ -10,11 +10,14 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
+use DG\BypassFinals;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -27,6 +30,8 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Prophecy\Argument;
+
+BypassFinals::enable();
 
 class RegisterMutationSpec extends ObjectBehavior
 {
@@ -42,7 +47,9 @@ class RegisterMutationSpec extends ObjectBehavior
         ResponsesFormatter $responsesFormatter,
         UserInvitationHandler $userInvitationHandler,
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        RateLimiter $rateLimiter,
+        RequestGuesser $requestGuesser
     ) {
         $this->beConstructedWith(
             $toggleManager,
@@ -56,13 +63,42 @@ class RegisterMutationSpec extends ObjectBehavior
             $responsesFormatter,
             $userInvitationHandler,
             $organizationInvitationRepository,
-            $em
+            $em,
+            $rateLimiter,
+            $requestGuesser
         );
     }
 
     public function it_is_initializable()
     {
         $this->shouldHaveType(RegisterMutation::class);
+    }
+
+    public function it_should_check_rate_limit(
+        Arg $args,
+        RateLimiter $rateLimiter,
+        RequestGuesser $requestGuesser
+    ) {
+        $args->getArrayCopy()->willReturn([
+            'invitationToken' => 'theToken',
+            'email' => 'toto@test.com',
+            'locale' => null,
+        ]);
+
+        $requestGuesser
+            ->getClientIp()
+            ->shouldBeCalled()
+            ->willReturn('any-ip');
+        $rateLimiter->setLimit(Argument::type('int'))->shouldBeCalled();
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
+            ->shouldBeCalled()
+            ->willReturn(false);
+
+        $payload = $this->__invoke($args);
+        $payload->shouldHaveCount(2);
+        $payload['errorsCode']->shouldBe(RegisterMutation::RATE_LIMIT_REACHED);
+        $payload['user']->shouldBe(null);
     }
 
     public function it_register_a_user_invited_to_an_organization_and_join_it(
@@ -77,15 +113,25 @@ class RegisterMutationSpec extends ObjectBehavior
         Form $form,
         UserInviteRepository $userInviteRepository,
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
-        UserInvitationHandler $userInvitationHandler
+        UserInvitationHandler $userInvitationHandler,
+        RateLimiter $rateLimiter,
+        RequestGuesser $requestGuesser
     ) {
-        $args
-            ->getArrayCopy()
-            ->willReturn([
-                'invitationToken' => 'theToken',
-                'email' => 'toto@test.com',
-                'locale' => null,
-            ]);
+        $args->getArrayCopy()->willReturn([
+            'invitationToken' => 'theToken',
+            'email' => 'toto@test.com',
+            'locale' => null,
+        ]);
+
+        $requestGuesser
+            ->getClientIp()
+            ->shouldBeCalled()
+            ->willReturn('any-ip');
+        $rateLimiter->setLimit(Argument::type('int'))->shouldBeCalled();
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
+            ->shouldBeCalled()
+            ->willReturn(true);
 
         $userInviteRepository
             ->findOneByTokenNotExpiredAndEmail('theToken', 'toto@test.com')

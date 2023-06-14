@@ -1,0 +1,18 @@
+SubscribeNewsletterErrorCode:
+    type: enum
+    config:
+        name: SubscribeNewsletterErrorCode
+        description: 'Available errors for an `subscribeNewsletter` mutation.'
+        values:
+            FEATURE_NOT_ENABLED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Newsletter\\SubscribeNewsletterMutation::FEATURE_NOT_ENABLED")'
+                description: 'The newsletter feature is not enabled.'
+            INVALID_CAPTCHA:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Newsletter\\SubscribeNewsletterMutation::INVALID_CAPTCHA")'
+                description: 'Invalid captcha.'
+            EMAIL_ALREADY_SUBSCRIBED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Newsletter\\SubscribeNewsletterMutation::EMAIL_ALREADY_SUBSCRIBED")'
+                description: 'Email already subscribed to newsletter.'
+            RATE_LIMIT_REACHED:
+                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Newsletter\\SubscribeNewsletterMutation::RATE_LIMIT_REACHED")'
+                description: 'Rate limit reached.'

@@ -11,6 +11,7 @@ Cypress.Commands.add('confirmCaptcha', () => {
     if ($captcha) {
       // @ts-ignore
       $captcha.contentDocument.getElementById('challenge-stage').click()
+      cy.get($captcha.contentDocument.getElementById('success')).should('be.visible')
     }
   })
 })

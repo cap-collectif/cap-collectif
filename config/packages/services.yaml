@@ -429,3 +429,7 @@ services:
         arguments:
             - '@Faker\Generator'
         tags: [ { name: nelmio_alice.faker.provider } ]
+
+    Capco\AppBundle\Security\RateLimiter:
+        autowire: true
+        public: true

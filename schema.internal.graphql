@@ -8094,6 +8094,9 @@ type Mutation {
   addDebateAnonymousVote(input: AddDebateAnonymousVoteInput!): AddDebateAnonymousVotePayload
   removeDebateAnonymousVote(input: RemoveDebateAnonymousVoteInput!): RemoveDebateAnonymousVotePayload
 
+  """Subscribe to newsletter"""
+  subscribeNewsletter(input: SubscribeNewsletterInput!): SubscribeNewsletterPayload
+
   """Edit projects section in admin"""
   updateHomePageProjectsSectionConfiguration(input: UpdateHomePageProjectsSectionConfigurationInput!): UpdateHomePageProjectsSectionConfigurationPayload
 
@@ -15908,6 +15911,39 @@ type Style {
   size: Int
 }
 
+"""Available errors for an `subscribeNewsletter` mutation."""
+enum SubscribeNewsletterErrorCode {
+  """The newsletter feature is not enabled."""
+  FEATURE_NOT_ENABLED
+
+  """Invalid captcha."""
+  INVALID_CAPTCHA
+
+  """Email already subscribed to newsletter."""
+  EMAIL_ALREADY_SUBSCRIBED
+
+  """Rate limit reached."""
+  RATE_LIMIT_REACHED
+}
+
+input SubscribeNewsletterInput {
+  """The email to subcribe."""
+  email: Email!
+
+  """The captcha verification."""
+  captcha: String
+  clientMutationId: String
+}
+
+type SubscribeNewsletterPayload {
+  """The subscribed email"""
+  email: Email
+
+  """The subscribed email"""
+  errorCode: SubscribeNewsletterErrorCode
+  clientMutationId: String
+}
+
 input SubscribeToEventAsNonRegisteredInput {
   eventId: ID!
 
@@ -18304,6 +18340,9 @@ enum UpdateUserEmailErrorCode {
 
   """Unauthorized email domain."""
   UNAUTHORIZED_EMAIL_DOMAIN
+
+  """Rate limit reached."""
+  RATE_LIMIT_REACHED
 }
 
 input UpdateUserReplyInput {

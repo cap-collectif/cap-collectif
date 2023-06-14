@@ -9,7 +9,9 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
@@ -33,6 +35,8 @@ class RegisterMutation implements MutationInterface
     public const PASSWORD_BLANK = 'PASSWORD_BLANK';
     public const EMAIL_THROWABLE = 'EMAIL_THROWABLE';
     public const NO_EXTRA_FIELDS = 'NO_EXTRA_FIELDS';
+    public const RATE_LIMITER_ACTION = 'RegisterMutation';
+    public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
     private UserInviteRepository $userInviteRepository;
     private LoggerInterface $logger;
@@ -46,6 +50,8 @@ class RegisterMutation implements MutationInterface
     private UserInvitationHandler $userInvitationHandler;
     private PendingOrganizationInvitationRepository $organizationInvitationRepository;
     private EntityManagerInterface $em;
+    private RateLimiter $rateLimiter;
+    private RequestGuesser $requestGuesser;
 
     public function __construct(
         Manager $toggleManager,
@@ -59,7 +65,9 @@ class RegisterMutation implements MutationInterface
         ResponsesFormatter $responsesFormatter,
         UserInvitationHandler $userInvitationHandler,
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        RateLimiter $rateLimiter,
+        RequestGuesser $requestGuesser
     ) {
         $this->toggleManager = $toggleManager;
         $this->userInviteRepository = $userInviteRepository;
@@ -73,10 +81,27 @@ class RegisterMutation implements MutationInterface
         $this->userInvitationHandler = $userInvitationHandler;
         $this->organizationInvitationRepository = $organizationInvitationRepository;
         $this->em = $em;
+        $this->rateLimiter = $rateLimiter;
+        $this->requestGuesser = $requestGuesser;
     }
 
     public function __invoke(Argument $args): array
     {
+        $this->rateLimiter->setLimit(3);
+
+        if (
+            false ===
+            $this->rateLimiter->canDoAction(
+                self::RATE_LIMITER_ACTION,
+                $this->requestGuesser->getClientIp()
+            )
+        ) {
+            return [
+                'user' => null,
+                'errorsCode' => self::RATE_LIMIT_REACHED,
+            ];
+        }
+
         $data = $args->getArrayCopy();
         $invitationToken = $data['invitationToken'] ?? '';
         unset($data['invitationToken']);

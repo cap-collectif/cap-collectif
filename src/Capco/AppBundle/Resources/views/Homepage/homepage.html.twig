@@ -86,7 +86,7 @@
         {% elseif section.type == 'events' %}
             {% include 'CapcoAppBundle:Homepage:lastEvents.html.twig' with {'section': section} %}
         {% elseif section.type == 'newsletter' %}
-            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section, 'form': form} only %}
+            {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section} only %}
         {% elseif section.type == 'social-networks' %}
             {{ get_social_networks(section) }}
         {% elseif section.type == 'custom' %}

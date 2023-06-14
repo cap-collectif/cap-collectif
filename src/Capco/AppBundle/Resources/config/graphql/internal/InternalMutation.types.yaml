@@ -1310,6 +1310,14 @@ InternalMutation:
                     inputType: RemoveDebateAnonymousVoteInput
                     payloadType: RemoveDebateAnonymousVotePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateAnonymousVoteMutation", [value])'
+            # Newsletter
+            subscribeNewsletter:
+                description: 'Subscribe to newsletter'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SubscribeNewsletterInput
+                    payloadType: SubscribeNewsletterPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Newsletter\\SubscribeNewsletterMutation", [value])'
             # HomePageProjectsSectionConfiguration
             updateHomePageProjectsSectionConfiguration:
                 description: 'Edit projects section in admin'

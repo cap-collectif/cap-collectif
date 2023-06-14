@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewsLetterInput /> renders correctly 1`] = `
+<ForwardRef
+  justifyContent="center"
+>
+  <ForwardRef
+    direction="column"
+    padding={4}
+  >
+    <form
+      id="newsletterSubscriptionForm"
+      onSubmit={[Function]}
+    >
+      <ForwardRef
+        mb={2}
+      >
+        <NewsLetterInput__Input
+          aria-label="homepage.newsletter.enter_email"
+          className="form-control"
+          id="newsletter_subscription_email"
+          onChange={[Function]}
+          placeholder="homepage.newsletter.enter_email"
+          type="email"
+          value=""
+        />
+        <button
+          className="btn btn-primary"
+          disabled={true}
+          type="submit"
+        >
+          global.register
+        </button>
+      </ForwardRef>
+      <div
+        className="form-group hidden "
+      >
+        <Captcha
+          disabled={true}
+          onChange={[Function]}
+        />
+        <span
+          className="error-block hidden-print hidden"
+        >
+          registration.constraints.captcha.invalid
+        </span>
+      </div>
+    </form>
+  </ForwardRef>
+</ForwardRef>
+`;

@@ -21,7 +21,7 @@ describe('Project', () => {
       AdminProjectPage.toggleSecretBallot()
       cy.wait(1000)
       AdminProjectPage.submitStepModal()
-      AdminProjectPage.checkStepListLength(6)
+      AdminProjectPage.checkStepListLength(7)
       AdminProjectPage.save()
       cy.wait('@UpdateProjectAlphaMutation')
       cy.contains('global.saved')

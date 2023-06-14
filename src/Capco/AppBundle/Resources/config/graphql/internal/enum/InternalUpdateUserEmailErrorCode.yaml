@@ -13,3 +13,6 @@ InternalUpdateUserEmailErrorCode:
             UNAUTHORIZED_EMAIL_DOMAIN:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::UNAUTHORIZED_EMAIL_DOMAIN")'
                 description: 'Unauthorized email domain.'
+            RATE_LIMIT_REACHED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::RATE_LIMIT_REACHED")'
+                description: 'Rate limit reached.'

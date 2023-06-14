@@ -1,0 +1,10 @@
+SubscribeNewsletterPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            email:
+                type: 'Email'
+                description: 'The subscribed email'
+            errorCode:
+                type: 'SubscribeNewsletterErrorCode'
+                description: 'The subscribed email'

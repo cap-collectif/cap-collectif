@@ -1,0 +1,11 @@
+SubscribeNewsletterInput:
+    type: relay-mutation-input
+    config:
+        description: 'Subscribe an email to newsletter'
+        fields:
+            email:
+                type: 'Email!'
+                description: 'The email to subcribe.'
+            captcha:
+                type: 'String'
+                description: 'The captcha verification.'

@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\GraphQL\Mutation\CheckIdentificationCodeMutation;
+use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use DG\BypassFinals;
 use PhpSpec\ObjectBehavior;
@@ -11,7 +11,6 @@ use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -20,9 +19,12 @@ BypassFinals::enable();
 
 class CheckIdentificationCodeMutationSpec extends ObjectBehavior
 {
-    public function let(LoggerInterface $logger, ValidatorInterface $validator, RedisCache $cache)
-    {
-        $this->beConstructedWith($logger, $validator, $cache);
+    public function let(
+        LoggerInterface $logger,
+        ValidatorInterface $validator,
+        RateLimiter $rateLimiter
+    ) {
+        $this->beConstructedWith($logger, $validator, $rateLimiter);
     }
 
     public function it_is_initializable()
@@ -36,15 +38,17 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $error,
         ConstraintViolation $violation,
-        CacheItem $cachedItem,
-        RedisCache $cache,
+        RateLimiter $rateLimiter,
         ConstraintViolationList $violationList
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $this->firstCallOfCache($cachedItem, $cache);
+        $this->firstCallOfCache($rateLimiter, $viewer);
         $error->count()->willReturn(0);
         $validator
-            ->validate('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS_QUI_FAIT_AU_MOINS_32_CHARS', Argument::type(CheckIdentificationCode::class))
+            ->validate(
+                'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS_QUI_FAIT_AU_MOINS_32_CHARS',
+                Argument::type(CheckIdentificationCode::class)
+            )
             ->willReturn($error);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
@@ -59,11 +63,12 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        CacheItem $cachedItem,
-        RedisCache $cache
+        RateLimiter $rateLimiter
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $viewer->getUserIdentificationCodeValue()->willReturn('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS');
+        $viewer
+            ->getUserIdentificationCodeValue()
+            ->willReturn('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS');
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -77,11 +82,10 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        CacheItem $cachedItem,
-        RedisCache $cache
+        RateLimiter $rateLimiter
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $this->firstCallOfCache($cachedItem, $cache);
+        $this->firstCallOfCache($rateLimiter, $viewer);
 
         $violationList->count()->willReturn(1);
         $violationList->offsetGet(0)->willReturn($violation);
@@ -99,14 +103,16 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        CacheItem $cachedItem,
-        RedisCache $cache
+        RateLimiter $rateLimiter
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $validator
-            ->validate('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS', Argument::type(CheckIdentificationCode::class))
+            ->validate(
+                'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
+                Argument::type(CheckIdentificationCode::class)
+            )
             ->willReturn($violationList);
-        $this->firstCallOfCache($cachedItem, $cache);
+        $this->firstCallOfCache($rateLimiter, $viewer);
 
         $violationList->count()->willReturn(1);
         $violationList->offsetGet(0)->willReturn($violation);
@@ -123,20 +129,18 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         User $viewer,
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
-        CacheItem $cachedItem,
-        RedisCache $cache
+        RateLimiter $rateLimiter
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $cache
-            ->getItem('userCacheKey-viewerId')
-            ->willReturn($cachedItem)
-            ->shouldBeCalled();
-        $cachedItem->isHit()->willReturn(true);
-        $cachedItem->get()->willReturn('LIMIT_REACHED');
+
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
+            ->shouldBeCalled()
+            ->willReturn(false);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
-            'errorCode' => 'LIMIT_REACHED',
+            'errorCode' => 'RATE_LIMIT_REACHED',
         ]);
     }
 
@@ -146,32 +150,18 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        CacheItem $cachedItem,
-        RedisCache $cache
+        RateLimiter $rateLimiter
     ) {
         $this->initMutation($arguments, $viewer, $validator, $violationList);
-        $cache
-            ->getItem('userCacheKey-viewerId')
-            ->willReturn($cachedItem)
-            ->shouldBeCalled();
-        $cachedItem->get()->willReturn(11);
-        $cachedItem->isHit()->willReturn(true);
-        $cachedItem
-            ->set('LIMIT_REACHED')
+
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
-        $cachedItem
-            ->expiresAfter(300)
-            ->shouldBeCalled()
-            ->willReturn($cachedItem);
-        $cache
-            ->save($cachedItem)
-            ->willReturn(true)
-            ->shouldBeCalled();
+            ->willReturn(false);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
-            'errorCode' => 'LIMIT_REACHED',
+            'errorCode' => 'RATE_LIMIT_REACHED',
         ]);
     }
 
@@ -186,31 +176,18 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('viewerId');
         $viewer->getUserIdentificationCodeValue()->willReturn(null);
         $validator
-            ->validate('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS', Argument::type(CheckIdentificationCode::class))
+            ->validate(
+                'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
+                Argument::type(CheckIdentificationCode::class)
+            )
             ->willReturn($violationList);
     }
 
-    private function firstCallOfCache(
-        CacheItem $cachedItem,
-        RedisCache $cache
-    ) {
-        $cache
-            ->getItem('userCacheKey-viewerId')
-            ->willReturn($cachedItem)
-            ->shouldBeCalled();
-        $cachedItem->get()->willReturn(null);
-        $cachedItem->isHit()->willReturn(false);
-        $cachedItem
-            ->set(1)
+    private function firstCallOfCache(RateLimiter $rateLimiter, User $viewer)
+    {
+        $rateLimiter
+            ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
-        $cachedItem
-            ->expiresAfter(RedisCache::ONE_MINUTE)
-            ->shouldBeCalled()
-            ->willReturn($cachedItem);
-        $cache
-            ->save($cachedItem)
-            ->willReturn(true)
-            ->shouldBeCalled();
+            ->willReturn(true);
     }
 }

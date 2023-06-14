@@ -85,6 +85,7 @@ import AccessDeniedApp from './startup/AccessDeniedApp';
 import OrganizationPageApp from './startup/OrganizationPageApp';
 import DistrictPageApp from './startup/DistrictPageApp';
 import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp';
+import NewsLetterPageApp from './startup/NewsLetterPageApp';
 
 ReactOnRails.registerStore({ appStore });
 
@@ -157,6 +158,7 @@ ReactOnRails.register({
   AccessDeniedApp,
   OrganizationPageApp,
   DistrictPageApp,
+  NewsLetterPageApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

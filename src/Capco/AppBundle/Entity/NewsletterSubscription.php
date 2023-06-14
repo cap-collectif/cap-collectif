@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,6 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="newsletter_subscription")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\NewsletterSubscriptionRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="newsletter.already_subscribed"
+ * )
  */
 class NewsletterSubscription
 {
