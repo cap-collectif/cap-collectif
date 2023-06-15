@@ -147,7 +147,6 @@ export const OrganizationPage = ({ organizationId }: Props) => {
               overflow="hidden"
               css={{ filter: 'drop-shadow(0px 10px 50px rgba(0, 0, 0, 0.15))' }}>
               <Image
-                as="img"
                 src={cover || logo}
                 alt="banner"
                 width={['100%', '405px']}
@@ -170,7 +169,6 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                   right={0}
                   css={{ borderBottomLeftRadius: 8 }}>
                   <Image
-                    as="img"
                     src={logo}
                     alt="logo"
                     width="104px"
