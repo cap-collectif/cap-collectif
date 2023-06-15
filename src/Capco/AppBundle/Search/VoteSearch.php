@@ -527,7 +527,7 @@ class VoteSearch extends Search
             $projectViewerCanSeeShouldQuery->addShould($filter);
         }
 
-        if ($viewer !== $author && !$viewer->isSuperAdmin()) {
+        if ($viewer !== $author && !$viewer->isAdmin()) {
             $conditions[] = new Term(['private' => ['value' => false]]);
             $firstShouldQuery = (new BoolQuery())
                 ->addMustNot(new Exists('proposal'))
