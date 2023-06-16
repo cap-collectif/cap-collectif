@@ -1,0 +1,5 @@
+volumes:
+  php_sf_cache:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

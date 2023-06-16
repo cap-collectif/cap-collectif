@@ -35,6 +35,8 @@ def local():
         localmac_dockerformac()
     Connection.host = 'docker@localhost'
     Config.compose_files = ['infrastructure/environments/base.yml', 'infrastructure/environments/development.yml']
+    if _platform == "linux" or _platform == "linux2":
+        Config.compose_files.append('infrastructure/environments/development_linux.yml')
     Config.shell = "/bin/sh -c"
     Config.directory = Config.root_dir
 
@@ -80,9 +82,9 @@ def compose(command_name):
     merge_infra_files()
     os.chdir(Config.directory)
     if Config.docker_machine:
-        run('eval "$(docker-machine env capco)" && docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+        run('eval "$(docker-machine env capco)" && docker compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
     else:
-        run('docker-compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
+        run('docker compose -p %s -f %s/%s %s' % (Config.project_name, Config.directory, Config.temporary_file, command_name))
 
 
 def pull(revision, directory, remote='origin'):

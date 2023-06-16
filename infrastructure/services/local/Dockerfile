@@ -1,4 +1,7 @@
+# syntax=docker/dockerfile:1
 FROM debian:buster AS base
+
+ENV PHP_VERSION 7.4
 
 # Install basic
 RUN apt-get update && \
@@ -18,6 +21,8 @@ RUN apt-get update && \
         gnupg2 \
         ca-certificates \
         dnsutils \
+        vim \
+        htop \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -28,32 +33,58 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
-        php7.4-apcu \
-        php7.4-cli \
-        php7.4-mbstring \
-        php7.4-common \
-        php7.4-curl \
-        php7.4-dev \
-        php7.4-fpm \
-        php7.4-gd \
-        php7.4-imagick \
-        php7.4-intl \
-        php7.4-json \
-        php7.4-sqlite3 \
-        php7.4-mysql \
-        php7.4-opcache \
-        php7.4-redis \
-        php7.4-xsl \
-        php7.4-zip \
-        php7.4-amqp \
-        php7.4-simplexml \
+        php${PHP_VERSION}-apcu \
+        php${PHP_VERSION}-cli \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-common \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-dev \
+        php${PHP_VERSION}-fpm \
+        php${PHP_VERSION}-gd \
+        php${PHP_VERSION}-imagick \
+        php${PHP_VERSION}-intl \
+        php${PHP_VERSION}-json \
+        php${PHP_VERSION}-sqlite3 \
+        php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-opcache \
+        php${PHP_VERSION}-redis \
+        php${PHP_VERSION}-xsl \
+        php${PHP_VERSION}-zip \
+        php${PHP_VERSION}-amqp \
+        php${PHP_VERSION}-simplexml \
+        php${PHP_VERSION}-xdebug \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN echo "extension=apcu.so" > /etc/php/7.4/php.ini
-RUN echo "apc.enable_cli=1" > /etc/php/7.4/php.ini
-RUN echo "apc.enable=1" > /etc/php/7.4//php.ini
+RUN <<EOF
+echo "
+apc.enable_cli=1
+apc.enable=1
+" >> /etc/php/${PHP_VERSION}/mods-available/apcu.ini
+EOF
+
+RUN <<EOF
+echo "
+xdebug.mode=debug
+xdebug.discover_client_host=true
+xdebug.force_display_errors=1
+xdebug.force_error_reporting=1
+" >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini
+EOF
+
+RUN <<EOF
+echo "
+export LS_OPTIONS='--color=auto'
+alias ls='ls \$LS_OPTIONS'
+alias ll='ls \$LS_OPTIONS -l'
+alias l='ls \$LS_OPTIONS -lA'
+" >> /root/.bashrc
+mkdir /home/capco/
+chown capco: /home/capco/
+cp /root/.bashrc /home/capco/
+EOF
+
 
 # NodeJS
 ENV NODE_VERSION 16.10.0
@@ -129,10 +160,10 @@ RUN yarn global add pm2
 #    && rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz
 #
 #COPY blackfire/blackfire-agent.ini /etc/blackfire/agent
-#COPY blackfire/blackfire-agent.ini /etc/php/7.4/fpm/conf.d/90-blackfire-agent.ini
-#COPY blackfire/blackfire-agent.ini /etc/php/7.4/cli/conf.d/90-blackfire-agent.ini
-#COPY blackfire/blackfire-php.ini /etc/php/7.4/fpm/conf.d/92-blackfire-config.ini
-#COPY blackfire/blackfire-php.ini /etc/php/7.4/cli/conf.d/92-blackfire-config.ini
+#COPY blackfire/blackfire-agent.ini /etc/php/${PHP_VERSION}/fpm/conf.d/90-blackfire-agent.ini
+#COPY blackfire/blackfire-agent.ini /etc/php/${PHP_VERSION}/cli/conf.d/90-blackfire-agent.ini
+#COPY blackfire/blackfire-php.ini /etc/php/${PHP_VERSION}/fpm/conf.d/92-blackfire-config.ini
+#COPY blackfire/blackfire-php.ini /etc/php/${PHP_VERSION}/cli/conf.d/92-blackfire-config.ini
 
 # Install RabbitMQ
 RUN apt update -y && apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
@@ -213,8 +244,8 @@ COPY nginx/fastcgi.conf             /etc/nginx/fastcgi.conf
 COPY nginx/default_headers.conf     /etc/nginx/default_headers.conf
 COPY nginx/fastcgi_forward.conf     /etc/nginx/fastcgi_forward.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/${PHP_VERSION}/fpm/conf.d/capco.ini
+COPY php-fpm/capco.ini              /etc/php/${PHP_VERSION}/cli/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config

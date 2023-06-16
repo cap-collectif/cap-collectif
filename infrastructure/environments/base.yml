@@ -1,10 +1,12 @@
-version: '3.7'
+version: '3.8'
 
 services:
   application:
     container_name: capco_application_1
     build:
       context: ../services/local
+      args:
+        DOCKER_BUILDKIT: 1
       cache_from:
         - 'capco_application'
     ports:

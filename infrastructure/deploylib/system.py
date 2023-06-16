@@ -26,7 +26,7 @@ def doctor():
     if _platform == "darwin":
         print(color_yellow + "On MacOS, please use 'Docker Desktop for Mac' and dedicate at least 6GB of memory (Preferences > Resources > Memory)." + color_white)
     run('echo "Docker: ' + color_yellow + '`docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
-    run('echo "Docker compose: ' + color_yellow + '`docker-compose -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Docker compose: ' + color_yellow + '`docker compose version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
     run('echo "Node: ' + color_yellow + '`node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
     run('echo "Yarn: ' + color_yellow + '`yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
     if _platform == 'darwin':
