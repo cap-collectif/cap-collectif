@@ -431,7 +431,10 @@
         "moment": "^2.29.4",
         "shell-quote": "^1.7.3",
         "@react-leaflet/core": "1.1.1",
-        "loader-utils": "^2.0.3"
+        "loader-utils": "^2.0.3",
+        "json5": "^1.0.2",
+        "decode-uri-component": "^0.2.1",
+        "qs": "^6.10.3"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.16.0",
