@@ -98,10 +98,7 @@ const VoteStepFilterSearchBar = () => {
   };
 
   const onChange = _address => {
-    if (_address === '') {
-      setFilters('latlng', '');
-      setFilters('address', '');
-    }
+    setFilters('latlng', '');
     setFilters('address', _address);
   };
 
