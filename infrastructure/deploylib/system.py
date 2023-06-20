@@ -127,8 +127,11 @@ def generate_ssl():
     print("Installing browser local certificate...")
     try:
         os.makedirs("infrastructure/services/local/nginx/ssl")
-    except:
-        print(color_yellow + "Directory `infrastructure/services/local/nginx/ssl` already exists, skipping generation." + color_white)
+    except FileExistsError:
+        print(color_yellow + "Directory `infrastructure/services/local/nginx/ssl` already exists, skipping creation." + color_white)
+
+    if os.path.exists("infrastructure/services/local/nginx/ssl/capco.pem"):
+        print(color_yellow + "Certificate `infrastructure/services/local/nginx/ssl/capco.pem` already exists, skipping generation." + color_white)
         return
 
     if subprocess.call(['which', 'mkcert']) != 0:
