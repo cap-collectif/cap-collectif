@@ -10,6 +10,7 @@ export type MapProps = {
   flyTo: (Array<number> | MapCenterObject, ?number) => void,
   setView: (Array<number>, ?number) => void,
   setZoom: (?number) => void,
+  getZoom: () => number,
   fitBounds: (Array<number | MapCenterObject>) => void,
   locate: () => void,
   zoomIn: () => void,

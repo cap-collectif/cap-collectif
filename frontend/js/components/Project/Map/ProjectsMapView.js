@@ -3,14 +3,7 @@ import * as React from 'react';
 import L from 'leaflet';
 import { useLazyLoadQuery, graphql } from 'react-relay';
 import noop from 'lodash/noop';
-import {
-  MapContainer as Map,
-  Marker,
-  ZoomControl,
-  GeoJSON,
-  Tooltip,
-  Rectangle,
-} from 'react-leaflet';
+import { MapContainer as Map, Marker, ZoomControl } from 'react-leaflet';
 import { useIntl } from 'react-intl';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import { renderToString } from 'react-dom/server';
@@ -28,7 +21,7 @@ import { ICON_NAME as DSICON } from '~ds/Icon/Icon';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables';
 import { BlankPopup, MapContainer } from '~/components/Proposal/Map/ProposalLeafletMap.style';
-import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson';
+import { formatGeoJsons } from '~/utils/geojson';
 import typography from '~/styles/theme/typography';
 import Address from '~/components/Form/Address/Address';
 import type { AddressComplete } from '~/components/Form/Address/Address.type';
@@ -36,14 +29,7 @@ import Text from '~/components/Ui/Primitives/Text';
 import { formatCounter } from '~/components/Ui/Project/ProjectCard.utils';
 import { flyToPosition } from '~/components/Proposal/Map/ProposalLeafletMap';
 import Image from '~ui/Primitives/Image';
-
-const getDistrict = (geoJSON: any) => {
-  try {
-    return L.geoJson(geoJSON.district);
-  } catch (e) {
-    return null;
-  }
-};
+import GeoJSONView from './GeoJSONView';
 
 const QUERY = graphql`
   query ProjectsMapViewQuery {
@@ -137,6 +123,8 @@ export const ProjectsMapView = ({
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
   }, []);
 
+  const [zoom, setZoom] = React.useState(query?.homePageProjectsMapSectionConfiguration.zoomMap);
+
   if (!query) return null;
 
   const { homePageProjectsMapSectionConfiguration } = query;
@@ -162,13 +150,14 @@ export const ProjectsMapView = ({
               '.titleTooltip': {
                 opacity: '1 !important',
                 fontFamily: typography.fonts.openSans,
-                fontSize: '14px',
+                fontSize: zoom < 13 ? '11px' : '14px',
                 fontWeight: 600,
                 marginLeft: '50%',
                 zIndex: 99,
                 width: 'fit-content',
                 '::before': { display: 'none' },
               },
+              '.rect': { pointerEvents: 'none !important' },
             }}>
             <Flex justifyContent="space-between" alignItems="center" pl={[4, 0]}>
               <h2 className="h2">{homePageProjectsMapSectionConfiguration.title}</h2>
@@ -211,6 +200,7 @@ export const ProjectsMapView = ({
               <Map
                 whenCreated={(map: MapProps) => {
                   mapRef.current = map;
+                  map.on('zoomend', () => setZoom(mapRef?.current?.getZoom() || 0));
                 }}
                 center={{
                   lat: homePageProjectsMapSectionConfiguration.centerLatitude,
@@ -319,32 +309,11 @@ export const ProjectsMapView = ({
                     })}
                 </MarkerClusterGroup>
                 {geoJsons &&
-                  geoJsons.map((geoJson, idx) => {
-                    const districtGeoJSON = getDistrict(geoJson);
-                    return (
-                      <React.Fragment key={idx}>
-                        <GeoJSON
-                          style={convertToGeoJsonStyle(geoJson.style)}
-                          key={idx}
-                          data={geoJson.district}
-                        />
-                        {geoJson.titleOnMap ? (
-                          <Rectangle
-                            bounds={districtGeoJSON?.getBounds()}
-                            pathOptions={{ color: 'transparent' }}
-                            interactive>
-                            <Tooltip interactive permanent className="titleTooltip">
-                              <a
-                                href={`/project-district/${geoJson.slug || ''}`}
-                                style={{ color: 'black', textDecoration: 'none' }}>
-                                {geoJson.titleOnMap}
-                              </a>
-                            </Tooltip>
-                          </Rectangle>
-                        ) : null}
-                      </React.Fragment>
-                    );
-                  })}
+                  geoJsons.map((geoJson, idx) => (
+                    <React.Fragment key={idx}>
+                      <GeoJSONView geoJson={geoJson} zoom={zoom || 0} mapRef={mapRef} />
+                    </React.Fragment>
+                  ))}
                 {!isMobile && <ZoomControl position="bottomright" />}
               </Map>
             </MapContainer>
