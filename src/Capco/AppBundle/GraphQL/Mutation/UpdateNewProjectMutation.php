@@ -229,6 +229,10 @@ class UpdateNewProjectMutation implements MutationInterface
 
     private function handleDescription(array &$arguments, Project $project)
     {
+        if (array_key_exists('description', $arguments) === false) {
+            return;
+        }
+
         $description = $arguments['description'] ? $this->HTMLPurifier->purify($arguments['description']) : null;
         unset($arguments['description']);
 

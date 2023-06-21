@@ -24,7 +24,7 @@ Object {
         },
       ],
       "cover": null,
-      "description": null,
+      "description": "Project Description",
       "districts": Object {
         "edges": Array [
           Object {
@@ -58,30 +58,37 @@ Object {
       "steps": Array [
         Object {
           "__typename": "PresentationStep",
+          "body": "Project Description",
           "title": "presentation_step",
         },
         Object {
           "__typename": "CollectStep",
+          "body": "Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.",
           "title": "Collecte des projets Idf BRP 3",
         },
         Object {
           "__typename": "CollectStep",
+          "body": "Encore une super étape de dépôt",
           "title": "Étape fermée, mais on peut modifier les réseaux sociaux des propositions",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "La pré-sélection est en cours ! Les votes seront ouverts le 27 juin, un peu de patience...",
           "title": "Etudes des projets",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "Franciliens, prêts à voter",
           "title": "Vote des Franciliens",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "Gardez un oeil sur les projets !",
           "title": "Le suivi des projets lauréats",
         },
         Object {
           "__typename": "CollectStep",
+          "body": "Collecte vote par sms",
           "title": "Collecte vote par sms",
         },
       ],
@@ -159,26 +166,32 @@ Object {
       "steps": Array [
         Object {
           "__typename": "CollectStep",
+          "body": "Avec un saut conditionel sur le formulaire de dépôt, et oui rien que ça.",
           "title": "Collecte des projets Idf BRP 3",
         },
         Object {
           "__typename": "CollectStep",
+          "body": "Encore une super étape de dépôt",
           "title": "Étape fermée, mais on peut modifier les réseaux sociaux des propositions",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "La pré-sélection est en cours ! Les votes seront ouverts le 27 juin, un peu de patience...",
           "title": "Etudes des projets",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "Franciliens, prêts à voter",
           "title": "Vote des Franciliens",
         },
         Object {
           "__typename": "SelectionStep",
+          "body": "Gardez un oeil sur les projets !",
           "title": "Le suivi des projets lauréats",
         },
         Object {
           "__typename": "CollectStep",
+          "body": "Collecte vote par sms",
           "title": "Collecte vote par sms",
         },
       ],

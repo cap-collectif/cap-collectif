@@ -70,6 +70,10 @@ InternalProject:
                     orderBy:
                         type: 'StepOrder'
                         defaultValue: { field: POSITION, direction: ASC }
+                    excludePresentationStep:
+                        type: 'Boolean'
+                        defaultValue: false
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", [value, args])'
                 type: '[InternalStep!]!'
             cover:
                 type: 'InternalMedia'
@@ -276,3 +280,5 @@ InternalProject:
             description:
                 type: 'String'
                 description: 'The project description.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDescriptionResolver", [value, getUser()])'
+

@@ -38,6 +38,7 @@ const UpdateNewProjectMutation = /* GraphQL */ `
         steps {
           __typename
           title
+          body
         }
         visibility 
         restrictedViewers {

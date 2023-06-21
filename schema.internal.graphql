@@ -9937,7 +9937,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   type: ProjectType
 
   """The different steps associated with the project."""
-  steps(orderBy: StepOrder = {field: POSITION, direction: ASC}): [Step!]!
+  steps(orderBy: StepOrder = {field: POSITION, direction: ASC}, excludePresentationStep: Boolean = false): [Step!]!
 
   """The list of users who authored the project."""
   authors: [Author!]!

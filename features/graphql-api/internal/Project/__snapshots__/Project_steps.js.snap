@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.project.steps should exclude presentation step if excludePresentationStep is set to true 1`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "steps": Array [
+      Object {
+        "__typename": "PresentationStep",
+        "title": "Présentation",
+      },
+      Object {
+        "__typename": "ConsultationStep",
+        "title": "Collecte des avis",
+      },
+      Object {
+        "__typename": "OtherStep",
+        "title": "Proposition",
+      },
+      Object {
+        "__typename": "RankingStep",
+        "title": "Classement des propositions et modifications",
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal.project.steps should exclude presentation step if excludePresentationStep is set to true 2`] = `
+Object {
+  "project": Object {
+    "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+    "steps": Array [
+      Object {
+        "__typename": "ConsultationStep",
+        "title": "Collecte des avis",
+      },
+      Object {
+        "__typename": "OtherStep",
+        "title": "Proposition",
+      },
+      Object {
+        "__typename": "RankingStep",
+        "title": "Classement des propositions et modifications",
+      },
+    ],
+  },
+}
+`;
