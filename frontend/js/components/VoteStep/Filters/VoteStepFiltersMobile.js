@@ -69,7 +69,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
       </Flex>
       <VoteStepFilterSearchBar />
       <VoteStepFiltersAccordions filters={filters} isMobile />
-      <Flex justifyContent="center" mt={8}>
+      <Flex justifyContent="center" mt={8} mb="50%">
         <SaveButton onClick={onClose}>{intl.formatMessage({ id: 'global.save' })}</SaveButton>
       </Flex>
     </Box>
