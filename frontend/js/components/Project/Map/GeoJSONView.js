@@ -31,7 +31,7 @@ export const GeoJSONView = ({
   };
 
   const openTooltip = () => {
-    if (tooltipRef?.current) tooltipRef.current.openOn(mapRef?.current);
+    if (tooltipRef?.current && mapRef?.current) tooltipRef.current.openOn(mapRef?.current);
   };
 
   const districtGeoJSON = getDistrict(geoJson);
