@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\UserBundle\Repository\UserTypeRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\RuntimeExtensionInterface;
 

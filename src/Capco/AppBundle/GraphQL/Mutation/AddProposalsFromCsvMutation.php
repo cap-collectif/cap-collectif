@@ -14,7 +14,6 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
-use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\AppBundle\Utils\Map;
 use Capco\MediaBundle\Entity\Media;
@@ -183,7 +182,10 @@ class AddProposalsFromCsvMutation implements MutationInterface
         $proposalform = $this->globalIdResolver->resolve($proposalformId, $viewer);
 
         if ($proposalform) {
-            return $this->authorizationChecker->isGranted(ProposalFormVoter::IMPORT_PROPOSALS, $proposalform);
+            return $this->authorizationChecker->isGranted(
+                ProposalFormVoter::IMPORT_PROPOSALS,
+                $proposalform
+            );
         }
 
         return false;

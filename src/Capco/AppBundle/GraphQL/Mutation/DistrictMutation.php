@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Form\ProposalDistrictAdminType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Doctrine\ORM\EntityManagerInterface;

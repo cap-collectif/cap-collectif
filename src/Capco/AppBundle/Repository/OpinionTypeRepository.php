@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -49,14 +48,17 @@ class OpinionTypeRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOrderedRootNodesQueryBuilder(?Consultation $consultation = null): QueryBuilder
-    {
+    public function getOrderedRootNodesQueryBuilder(
+        ?Consultation $consultation = null
+    ): QueryBuilder {
         $qb = $this->createQueryBuilder('ot')
-            ->addSelect('(COALESCE(p.position, ot.position) * 100 + (
+            ->addSelect(
+                '(COALESCE(p.position, ot.position) * 100 + (
                     CASE
                     WHEN p.position IS NULL THEN 0
                     ELSE ot.position
-                END)) AS HIDDEN computed_position')
+                END)) AS HIDDEN computed_position'
+            )
             ->leftJoin('ot.parent', 'p', 'ot.parent = p.id')
             ->addOrderBy('computed_position')
             ->addOrderBy('ot.parent');

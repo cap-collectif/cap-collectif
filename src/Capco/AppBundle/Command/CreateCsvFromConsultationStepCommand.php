@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Utils\Arr;

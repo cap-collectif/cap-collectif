@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Toggle\Manager;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;

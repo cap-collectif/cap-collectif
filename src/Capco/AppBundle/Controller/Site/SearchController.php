@@ -6,7 +6,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Search\GlobalSearch;
 use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Elasticsearch\HybridResult;
 use Capco\AppBundle\Form\SearchType as SearchForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Routing\Annotation\Route;

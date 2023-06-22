@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
@@ -63,14 +62,25 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         Form $form
     ): void {
-        $this->fixtures($viewer, $authorizationChecker, $analysisRepository, $proposalRepository, $proposal, $responsesFormatter, $formFactory, $form);
+        $this->fixtures(
+            $viewer,
+            $authorizationChecker,
+            $analysisRepository,
+            $proposalRepository,
+            $proposal,
+            $responsesFormatter,
+            $formFactory,
+            $form
+        );
 
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::FAVOURABLE);
         $argument->offsetGet('responses')->willReturn([]);
         $argument->offsetGet('comment')->willReturn(null);
 
-        $publisher->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())->shouldBeCalled();
+        $publisher
+            ->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())
+            ->shouldBeCalled();
 
         $this->__invoke($argument, $viewer);
     }
@@ -87,20 +97,39 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         Form $form
     ): void {
-        $this->fixtures($viewer, $authorizationChecker, $analysisRepository, $proposalRepository, $proposal, $responsesFormatter, $formFactory, $form);
+        $this->fixtures(
+            $viewer,
+            $authorizationChecker,
+            $analysisRepository,
+            $proposalRepository,
+            $proposal,
+            $responsesFormatter,
+            $formFactory,
+            $form
+        );
 
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::IN_PROGRESS);
         $argument->offsetGet('responses')->willReturn([]);
         $argument->offsetGet('comment')->willReturn(null);
 
-        $publisher->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())->shouldNotBeCalled();
+        $publisher
+            ->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())
+            ->shouldNotBeCalled();
 
         $this->__invoke($argument, $viewer);
     }
 
-    private static function fixtures($viewer, $authorizationChecker, $analysisRepository, $proposalRepository, $proposal, $responsesFormatter, $formFactory, $form): void
-    {
+    private static function fixtures(
+        $viewer,
+        $authorizationChecker,
+        $analysisRepository,
+        $proposalRepository,
+        $proposal,
+        $responsesFormatter,
+        $formFactory,
+        $form
+    ): void {
         $authorizationChecker
             ->isGranted(ProposalAnalysisRelatedVoter::ANALYSE, $proposal)
             ->willReturn(true);
@@ -116,7 +145,13 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         $proposal->addAnalysis(\Prophecy\Argument::any())->willReturn($proposal);
         $proposal->getId()->willReturn('proposalId');
         $responsesFormatter->format([])->willReturn([]);
-        $formFactory->create(\Prophecy\Argument::any(), \Prophecy\Argument::any(), \Prophecy\Argument::any())->willReturn($form);
+        $formFactory
+            ->create(
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any(),
+                \Prophecy\Argument::any()
+            )
+            ->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->submit(\Prophecy\Argument::any(), \Prophecy\Argument::any())->willReturn($form);
     }

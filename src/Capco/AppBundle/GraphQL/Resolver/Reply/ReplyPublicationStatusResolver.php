@@ -1,8 +1,8 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
 use Capco\AppBundle\Entity\Reply;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Enum\ReplyPublicationStatus;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 

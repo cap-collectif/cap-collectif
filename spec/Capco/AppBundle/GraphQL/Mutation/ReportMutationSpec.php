@@ -6,7 +6,6 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\GraphQL\Mutation\ReportMutation;
-use Capco\AppBundle\Notifier\ReportNotifier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -51,7 +50,9 @@ class ReportMutationSpec extends ObjectBehavior
 
         $em->persist(Argument::type(Reporting::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
-        $publisher->publish(CapcoAppBundleMessagesTypes::REPORT, Argument::type(Message::class))->shouldBeCalled();
+        $publisher
+            ->publish(CapcoAppBundleMessagesTypes::REPORT, Argument::type(Message::class))
+            ->shouldBeCalled();
 
         $payload = $this->__invoke($input, $viewer);
         $payload['report']->getReporter()->shouldBe($viewer);

@@ -6,7 +6,6 @@ use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
 class MailCatcherContext extends Base implements KernelAwareContext
 {

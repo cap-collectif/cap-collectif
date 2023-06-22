@@ -1,8 +1,8 @@
 <?php
+
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\UserHasReplyResolver;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 
 class UserHasReplySpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ReplyRepository $replyRepository,
         UserRepository $userRepo,
         LoggerInterface $logger
@@ -21,12 +21,12 @@ class UserHasReplySpec extends ObjectBehavior
         $this->beConstructedWith($replyRepository, $userRepo, $logger);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(UserHasReplyResolver::class);
     }
 
-    function it_return_true_if_user_exists_and_user_has_reply(
+    public function it_return_true_if_user_exists_and_user_has_reply(
         User $user,
         UserRepository $userRepo,
         ReplyRepository $replyRepository,
@@ -42,7 +42,7 @@ class UserHasReplySpec extends ObjectBehavior
         $this->__invoke($questionnaire, $args)->shouldReturn(true);
     }
 
-    function it_return_false_if_user_not_found(
+    public function it_return_false_if_user_not_found(
         UserRepository $userRepo,
         Questionnaire $questionnaire,
         Arg $args

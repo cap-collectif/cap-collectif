@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
-use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;

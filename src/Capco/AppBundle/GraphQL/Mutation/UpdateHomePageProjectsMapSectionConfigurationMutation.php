@@ -2,15 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\SectionType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\SectionRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationInterface

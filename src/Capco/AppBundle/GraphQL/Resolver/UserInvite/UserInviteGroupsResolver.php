@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\UserInvite;
 
-use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;

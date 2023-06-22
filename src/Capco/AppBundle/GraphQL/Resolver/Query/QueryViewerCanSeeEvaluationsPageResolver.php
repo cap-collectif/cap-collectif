@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Repository\PageRepository;
 use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalSupervisorRepository;
@@ -39,15 +38,15 @@ class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
     {
         $this->preventNullableViewer($viewer);
 
-        if (count($this->analystRepo->findBy(['analyst' => $viewer])) > 0) {
+        if (\count($this->analystRepo->findBy(['analyst' => $viewer])) > 0) {
             return true;
         }
 
-        if (count($this->supervisorRepo->findBy(['supervisor' => $viewer])) > 0) {
+        if (\count($this->supervisorRepo->findBy(['supervisor' => $viewer])) > 0) {
             return true;
         }
 
-        if (count($this->decisionMakerRepo->findBy(['decisionMaker' => $viewer])) > 0) {
+        if (\count($this->decisionMakerRepo->findBy(['decisionMaker' => $viewer])) > 0) {
             return true;
         }
 

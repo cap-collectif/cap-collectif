@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\Locale;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

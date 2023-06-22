@@ -8,7 +8,7 @@ use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryVotesResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -119,8 +119,8 @@ class SectionAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'route' => [
-                    'name' => 'edit'
-                ]
+                    'name' => 'edit',
+                ],
             ])
             ->add('enabled', null, [
                 'label' => 'global.published',

@@ -12,7 +12,7 @@ parameters:
         maximumNumberOfProcesses: 16
         minimumNumberOfJobsPerProcess: 2
         processTimeout: 300.0
-    excludes_analyse:
+    excludePaths:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ModerableTrait.php
         - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/config/packages/admin.yaml
@@ -52,6 +52,8 @@ parameters:
 
 # Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php
+
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Helper/GeometryHelper.php
     symfony:
         constant_hassers: true
 

@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -58,7 +57,7 @@ class ProposalAdmin extends AbstractAdmin
         // Index Comments
         $comments = $object->getComments();
         if (null !== $comments) {
-            array_map(static function ($comment) {
+            array_map(function ($comment) {
                 $this->elasticsearchDoctrineListener->addToMessageStack($comment);
             }, $comments->toArray());
         }
@@ -68,7 +67,7 @@ class ProposalAdmin extends AbstractAdmin
         $selectionVotes = $object->getSelectionVotes()->toArray();
         $votes = array_merge($collectVotes, $selectionVotes);
         if (!empty($votes)) {
-            array_map(static function ($vote) {
+            array_map(function ($vote) {
                 $this->elasticsearchDoctrineListener->addToMessageStack($vote);
             }, $votes);
         }

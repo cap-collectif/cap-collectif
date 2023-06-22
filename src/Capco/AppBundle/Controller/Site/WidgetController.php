@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 

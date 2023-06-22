@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Entity\User;
@@ -34,6 +34,7 @@ class ViewerFollowingConfigurationOpinionResolver implements ResolverInterface
             return null;
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException('Find following opinion by user failed');
         }
     }

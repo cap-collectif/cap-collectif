@@ -2,7 +2,6 @@
 
 namespace spec\Capco\AppBundle\GraphQL;
 
-use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use GraphQL\Executor\ExecutionResult;
@@ -27,7 +26,7 @@ class ConnectionTraversorSpec extends ObjectBehavior
         MockeryCallableMock $onEdgeTraversed
     ): void {
         $initialData = [
-            'errors' => [ [ 'some errors']],
+            'errors' => [['some errors']],
             'data' => [
                 'node' => [
                     'title' => 'Consultation step',
@@ -38,13 +37,18 @@ class ConnectionTraversorSpec extends ObjectBehavior
                             'endCursor' => 'cursor4',
                             'hasNextPage' => true,
                         ],
-                        'edges' => null
+                        'edges' => null,
                     ],
                 ],
             ],
         ];
 
-        $logger->error("The GraphQL request resulted in `null` edges.", ["path" => "contributionConnection", "errors" => [["some errors"]]])->shouldBeCalled();
+        $logger
+            ->error('The GraphQL request resulted in `null` edges.', [
+                'path' => 'contributionConnection',
+                'errors' => [['some errors']],
+            ])
+            ->shouldBeCalled();
         $this->traverse($initialData, 'contributionConnection', $onEdgeTraversed, null);
     }
 

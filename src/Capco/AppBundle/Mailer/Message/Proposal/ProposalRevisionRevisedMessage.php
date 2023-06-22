@@ -7,7 +7,6 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Capco\AppBundle\Repository\SiteColorRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Capco\UserBundle\Repository\UserRepository;
 use Psr\Container\ContainerInterface;
 
 class ProposalRevisionRevisedMessage extends AbstractExternalMessage

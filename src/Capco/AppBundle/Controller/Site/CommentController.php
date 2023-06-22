@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Enum\ModerationStatus;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType as CommentForm;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
@@ -70,11 +69,7 @@ class CommentController extends Controller
 
         $isAuthorAdmin = $comment->getAuthor() ? $comment->getAuthor()->isAdmin() : false;
         $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
-        if (
-            $isModerationEnabled &&
-            $comment->isApproved() &&
-            !$isAuthorAdmin
-        ) {
+        if ($isModerationEnabled && $comment->isApproved() && !$isAuthorAdmin) {
             throw new ProjectAccessDeniedException(
                 $this->translator->trans(
                     'cannot-edit-already-approved-comment',

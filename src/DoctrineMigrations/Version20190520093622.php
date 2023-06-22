@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
-use Capco\AppBundle\Helper\EnvHelper;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\Id\UuidGenerator;
@@ -19,7 +18,7 @@ final class Version20190520093622 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();

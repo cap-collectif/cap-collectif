@@ -1,12 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\PublicApi;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 
@@ -22,8 +21,8 @@ class PublicApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         $apiKey = null;
         $prefix = 'Bearer ';
 
-        if (substr($authorization, 0, strlen($prefix)) == $prefix) {
-            $apiKey = substr($authorization, strlen($prefix));
+        if (substr($authorization, 0, \strlen($prefix)) == $prefix) {
+            $apiKey = substr($authorization, \strlen($prefix));
         }
 
         if (!$apiKey) {
@@ -47,7 +46,7 @@ class PublicApiKeyAuthenticator implements SimplePreAuthenticatorInterface
             throw new \InvalidArgumentException(
                 sprintf(
                     'The user provider must be an instance of PublicApiKeyUserProvider (%s was given).',
-                    get_class($userProvider)
+                    \get_class($userProvider)
                 )
             );
         }

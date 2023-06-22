@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\EntityRepository;
@@ -39,8 +38,22 @@ class StatusRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    private function getByProjectAndStepQueryBuilder(Project $project, AbstractStep $step): QueryBuilder
-    {
+    public function getByProjectAndStepAndStatusTitle(
+        Project $project,
+        AbstractStep $step,
+        array $statusesTitle
+    ): array {
+        $qb = $this->getByProjectAndStepQueryBuilder($project, $step);
+        $qb->andWhere('s.name IN (:statusesTitle)');
+        $qb->setParameter('statusesTitle', $statusesTitle);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    private function getByProjectAndStepQueryBuilder(
+        Project $project,
+        AbstractStep $step
+    ): QueryBuilder {
         return $this->createQueryBuilder('s')
             ->leftJoin('s.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'pas')
@@ -50,14 +63,4 @@ class StatusRepository extends EntityRepository
             ->setParameter('step', $step)
             ->orderBy('s.position', 'ASC');
     }
-    public function getByProjectAndStepAndStatusTitle(Project $project, AbstractStep $step, array $statusesTitle): array
-    {
-        $qb = $this->getByProjectAndStepQueryBuilder($project, $step);
-        $qb->andWhere('s.name IN (:statusesTitle)');
-        $qb->setParameter('statusesTitle', $statusesTitle);
-
-        return $qb->getQuery()->getResult();
-    }
-
-
 }

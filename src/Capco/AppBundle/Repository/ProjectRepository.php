@@ -11,7 +11,6 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
@@ -119,20 +118,22 @@ class ProjectRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->orderBy("p.{$orderBy['field']}", $orderBy['direction'])
-            ->getQuery()->getResult();
+            ->getQuery()
+            ->getResult();
     }
 
     public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int
     {
         return $this->getByOwnerQueryBuilder($owner, $viewer)
             ->select('count(p.id)')
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
-            ->leftJoin(($owner instanceof User) ? 'p.owner' : 'p.organizationOwner', 'o')
+            ->leftJoin($owner instanceof User ? 'p.owner' : 'p.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
             ->orderBy('p.updatedAt', 'DESC');
@@ -140,6 +141,7 @@ class ProjectRepository extends EntityRepository
         if ($owner instanceof Organization && $viewer && $viewer->isMemberOfOrganization($owner)) {
             $qb->orWhere('authors.organization = :ownerId');
         }
+
         return $qb;
     }
 

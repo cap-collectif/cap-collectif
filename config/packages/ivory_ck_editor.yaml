@@ -1,4 +1,4 @@
-ivory_ck_editor:
+fos_ck_editor:
     base_path: 'js/ckeditor/'
     js_path: 'js/ckeditor/ckeditor.js'
     default_config: user_editor

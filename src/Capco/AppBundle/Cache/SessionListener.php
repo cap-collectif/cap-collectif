@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Cache;
 
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\EventListener\SessionListener as SymfonySessionListener;
 

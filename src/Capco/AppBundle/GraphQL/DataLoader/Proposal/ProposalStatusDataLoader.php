@@ -6,7 +6,6 @@ use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Entity\Selection;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;

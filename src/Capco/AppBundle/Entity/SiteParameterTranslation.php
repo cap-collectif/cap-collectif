@@ -2,12 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Page;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translation;
-use Capco\AppBundle\Traits\TitleTrait;
-use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Traits\TranslationTrait;
 
 /**
@@ -23,8 +20,8 @@ use Capco\AppBundle\Traits\TranslationTrait;
  */
 class SiteParameterTranslation implements Translation
 {
-    use UuidTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="value", type="text")

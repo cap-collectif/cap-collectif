@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 trait CustomCodeTrait
 {
@@ -17,7 +16,7 @@ trait CustomCodeTrait
         return $this->customCode;
     }
 
-    public function setCustomCode(string $customCode = null): self
+    public function setCustomCode(?string $customCode = null): self
     {
         $this->customCode = $customCode;
 

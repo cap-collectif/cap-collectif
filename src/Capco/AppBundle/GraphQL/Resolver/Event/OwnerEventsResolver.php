@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
-use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +23,6 @@ class OwnerEventsResolver implements ResolverInterface
 
     public function __invoke(Owner $owner, Argument $args): ConnectionInterface
     {
-
         $status = $args->offsetGet('status');
         $query = $args->offsetGet('search');
         $hideDeletedEvents = $args->offsetGet('hideDeletedEvents');
@@ -37,9 +35,15 @@ class OwnerEventsResolver implements ResolverInterface
         }
 
         $options = [];
-        if ($status) $options['status'] = $status;
-        if ($query) $options['query'] = $query;
-        if ($hideUnpublishedEvents) $options['hideUnpublishedEvents'] = $hideUnpublishedEvents;
+        if ($status) {
+            $options['status'] = $status;
+        }
+        if ($query) {
+            $options['query'] = $query;
+        }
+        if ($hideUnpublishedEvents) {
+            $options['hideUnpublishedEvents'] = $hideUnpublishedEvents;
+        }
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {
             return $this->repository->getByOwnerPaginated($owner, $offset, $limit, $options);
@@ -49,7 +53,7 @@ class OwnerEventsResolver implements ResolverInterface
 
         $paginatedEvents = $paginator->auto($args, $count);
 
-        if ($emFilters->isEnabled('softdeleted') === false) {
+        if (false === $emFilters->isEnabled('softdeleted')) {
             $emFilters->enable('softdeleted');
         }
 

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait SelfLinkableTrait
@@ -61,7 +60,7 @@ trait SelfLinkableTrait
         return $this;
     }
 
-    public function addParentConnection(SelfLinkableInterface $parentConnection = null)
+    public function addParentConnection(?SelfLinkableInterface $parentConnection = null)
     {
         if ($parentConnection && !$this->parentConnections->contains($parentConnection)) {
             $this->parentConnections->add($parentConnection);

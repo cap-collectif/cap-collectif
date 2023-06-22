@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Object\Metadata;
@@ -92,7 +91,7 @@ final class ProjectAdmin extends CapcoAdmin
         // Index comments
         $comments = $this->proposalCommentRepository->getCommentsByProject($object) ?? [];
         if (!empty($comments)) {
-            array_map(static function ($comment) {
+            array_map(function ($comment) {
                 $this->elasticsearchDoctrineListener->addToMessageStack($comment);
             }, $comments);
         }
@@ -102,7 +101,7 @@ final class ProjectAdmin extends CapcoAdmin
         $collectVotes = $this->proposalCollectVoteRepository->getVotesByProject($object) ?? [];
         $votes = array_merge($collectVotes, $selectionVotes);
         if (!empty($votes)) {
-            array_map(static function ($vote) {
+            array_map(function ($vote) {
                 $this->elasticsearchDoctrineListener->addToMessageStack($vote);
             }, $votes);
         }

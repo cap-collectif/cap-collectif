@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Security;
 
-use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -21,13 +20,7 @@ class OrganizationVoter extends Voter
         if ($subject instanceof Organization) {
             return \in_array(
                 $attribute,
-                [
-                    self::VIEW,
-                    self::EDIT,
-                    self::CREATE,
-                    self::DELETE,
-                    self::KICK,
-                ],
+                [self::VIEW, self::EDIT, self::CREATE, self::DELETE, self::KICK],
                 true
             );
         }

@@ -10,10 +10,8 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Enum\VersionOrderField;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
 /**

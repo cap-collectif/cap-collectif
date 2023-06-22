@@ -2,13 +2,9 @@
 
 namespace spec\Capco\AppBundle\Resolver\Project;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Resolver\Project\JsonProjectSerializer;
 use Capco\AppBundle\Resolver\Project\ProjectSerializerInterface;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\Serializer;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class JsonProjectSerializerSpec extends ObjectBehavior
 {

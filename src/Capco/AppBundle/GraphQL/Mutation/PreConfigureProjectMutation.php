@@ -16,7 +16,6 @@ use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use Elastica\Index;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -40,20 +39,19 @@ class PreConfigureProjectMutation implements MutationInterface
     private Indexer $indexer;
 
     public function __construct(
-        EntityManagerInterface                    $em,
-        GlobalIdResolver                          $globalIdResolver,
+        EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
         PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister,
-        PreConfigureProjectProposalFormPersister  $preConfigureProjectProposalFormPersister,
-        PreConfigureProjectProjectPersister       $preConfigureProjectProjectPersister,
-        PreConfigureProjectAnalysisFormPersister  $preConfigureProjectAnalysisFormPersister,
-        DeleteQuestionnaireMutation               $deleteQuestionnaireMutation,
-        DeleteProposalFormMutation                $deleteProposalFormMutation,
-        DeleteProjectMutation                     $deleteProjectMutation,
-        AuthorizationCheckerInterface             $authorizationChecker,
-        ProjectTypeRepository                     $projectTypeRepository,
-        Indexer                                   $indexer
-    )
-    {
+        PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister,
+        PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister,
+        PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister,
+        DeleteQuestionnaireMutation $deleteQuestionnaireMutation,
+        DeleteProposalFormMutation $deleteProposalFormMutation,
+        DeleteProjectMutation $deleteProjectMutation,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ProjectTypeRepository $projectTypeRepository,
+        Indexer $indexer
+    ) {
         $this->em = $em;
         $this->preConfigureProjectQuestionnairePersister = $preConfigureProjectQuestionnairePersister;
         $this->preConfigureProjectProposalFormPersister = $preConfigureProjectProposalFormPersister;
@@ -75,32 +73,63 @@ class PreConfigureProjectMutation implements MutationInterface
         $projectInput = $input->offsetGet('project');
         $analysisFormInput = $input->offsetGet('analysisForm') ?? [];
 
-
         $questionnaireTitleToIdMap = [];
         $proposalFormTitleToIdMap = [];
-        [$ownerId, $owner] = $this->getOwner($viewer);
+        list($ownerId, $owner) = $this->getOwner($viewer);
         $project = $this->createProject($projectInput['title'], $owner);
 
         if ($projectInput['projectType'] ?? null) {
-            $projectInput['projectType'] = $this->projectTypeRepository->findOneBy(['slug' => $projectInput['projectType']])->getId();
+            $projectInput['projectType'] = $this->projectTypeRepository
+                ->findOneBy(['slug' => $projectInput['projectType']])
+                ->getId();
         }
 
         try {
-            $questionnaireTitleToIdMap = $this->preConfigureProjectQuestionnairePersister->addQuestionnaire($questionnairesInput, $ownerId, $viewer);
-            $proposalFormTitleToIdMap = $this->preConfigureProjectProposalFormPersister->addProposalForm($proposalFormsInput, $ownerId, $viewer);
+            $questionnaireTitleToIdMap = $this->preConfigureProjectQuestionnairePersister->addQuestionnaire(
+                $questionnairesInput,
+                $ownerId,
+                $viewer
+            );
+            $proposalFormTitleToIdMap = $this->preConfigureProjectProposalFormPersister->addProposalForm(
+                $proposalFormsInput,
+                $ownerId,
+                $viewer
+            );
 
-            $this->preConfigureProjectProjectPersister->updateProject($projectInput, $viewer, $project, $proposalFormTitleToIdMap, $questionnaireTitleToIdMap);
-            $this->preConfigureProjectAnalysisFormPersister->configureAnalysisForm($analysisFormInput, $viewer, $project, $proposalFormTitleToIdMap, $questionnaireTitleToIdMap);
+            $this->preConfigureProjectProjectPersister->updateProject(
+                $projectInput,
+                $viewer,
+                $project,
+                $proposalFormTitleToIdMap,
+                $questionnaireTitleToIdMap
+            );
+            $this->preConfigureProjectAnalysisFormPersister->configureAnalysisForm(
+                $analysisFormInput,
+                $viewer,
+                $project,
+                $proposalFormTitleToIdMap,
+                $questionnaireTitleToIdMap
+            );
 
             $this->em->flush();
 
             return ['project' => $project];
         } catch (\Exception $exception) {
-            $this->rollback($questionnaireTitleToIdMap, $proposalFormTitleToIdMap, $project, $viewer);
+            $this->rollback(
+                $questionnaireTitleToIdMap,
+                $proposalFormTitleToIdMap,
+                $project,
+                $viewer
+            );
+
             throw new UserError($exception->getMessage());
         }
     }
 
+    public function isGranted(): bool
+    {
+        return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
+    }
 
     private function createProject(string $title, Owner $owner): Project
     {
@@ -121,29 +150,34 @@ class PreConfigureProjectMutation implements MutationInterface
             $ownerId = $viewer->getOrganizationId();
         }
         $owner = $this->globalIdResolver->resolve($ownerId, $viewer);
+
         return [$ownerId, $owner];
     }
 
-    private function rollback(array $questionnaireTitleToIdMap, array $proposalFormTitleToIdMap, Project $project, User $viewer): void
-    {
+    private function rollback(
+        array $questionnaireTitleToIdMap,
+        array $proposalFormTitleToIdMap,
+        Project $project,
+        User $viewer
+    ): void {
         $this->em->clear();
         foreach ($proposalFormTitleToIdMap as $proposalFormId) {
-            $this->deleteProposalFormMutation->__invoke(new Argument(['id' => $proposalFormId]), $viewer);
+            $this->deleteProposalFormMutation->__invoke(
+                new Argument(['id' => $proposalFormId]),
+                $viewer
+            );
         }
 
         $this->em->clear();
         foreach ($questionnaireTitleToIdMap as $questionnaireId) {
             $questionnaireGlobalId = GlobalId::toGlobalId('Questionnaire', $questionnaireId);
-            $this->deleteQuestionnaireMutation->__invoke(new Argument(['id' => $questionnaireGlobalId]), $viewer);
+            $this->deleteQuestionnaireMutation->__invoke(
+                new Argument(['id' => $questionnaireGlobalId]),
+                $viewer
+            );
         }
 
         $projectGlobalId = GlobalId::toGlobalId('Project', $project->getId());
         $this->deleteProjectMutation->__invoke(new Argument(['id' => $projectGlobalId]), $viewer);
     }
-
-    public function isGranted(): bool
-    {
-        return $this->authorizationChecker->isGranted(ProjectVoter::CREATE, new Project());
-    }
-
 }

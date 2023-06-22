@@ -10,7 +10,6 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\MediaBundle\Entity\Media;
 use Sonata\AdminBundle\Form\Type\CollectionType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

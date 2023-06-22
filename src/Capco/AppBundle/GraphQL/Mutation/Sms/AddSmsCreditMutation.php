@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\Form\SmsCreditType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioClient;
-use Capco\AppBundle\Notifier\SmsNotifier;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -24,10 +23,10 @@ use Twilio\Exceptions\TwilioException;
 
 class AddSmsCreditMutation implements MutationInterface
 {
-    private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
     public const ORDER_ALREADY_PROCESSED = 'ORDER_ALREADY_PROCESSED';
     public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
+    private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
 
     private EntityManagerInterface $em;
     private SmsCreditRepository $smsCreditRepository;
@@ -81,7 +80,7 @@ class AddSmsCreditMutation implements MutationInterface
         if (!$form->isValid()) {
             $errors = $form->getErrors(true, true);
             foreach ($errors as $error) {
-                if ($error->getMessageTemplate() === 'This value is already used.') {
+                if ('This value is already used.' === $error->getMessageTemplate()) {
                     return ['errorCode' => self::ORDER_ALREADY_PROCESSED];
                 }
             }
@@ -103,9 +102,9 @@ class AddSmsCreditMutation implements MutationInterface
                     ])
                 )
             );
-            
+
             return ['smsCredit' => $smsCredit];
-        } 
+        }
         $twilioConfig = $this->externalServiceConfigurationRepository->findTwilioConfig();
         if (!$twilioConfig) {
             $subAccountErrorCode = $this->createTwilioSubAccount();
@@ -113,16 +112,15 @@ class AddSmsCreditMutation implements MutationInterface
             if ($subAccountErrorCode || $verifyServiceErrorCode) {
                 return ['errorCode' => self::TWILIO_API_ERROR];
             }
-         }
-         $this->publisher->publish(
-             'sms_credit.initial_credit',
-              new Message(
-                  json_encode([
-                      'smsCreditId' => $smsCredit->getId(),
-                   ])
-                )
-          );
-        
+        }
+        $this->publisher->publish(
+            'sms_credit.initial_credit',
+            new Message(
+                json_encode([
+                    'smsCreditId' => $smsCredit->getId(),
+                ])
+            )
+        );
 
         return ['smsCredit' => $smsCredit];
     }
@@ -130,14 +128,21 @@ class AddSmsCreditMutation implements MutationInterface
     private function createTwilioSubAccount(): ?string
     {
         try {
-            $organizationName = $this->siteParameterResolver->getValue('global.site.organization_name');
+            $organizationName = $this->siteParameterResolver->getValue(
+                'global.site.organization_name'
+            );
             $subAccount = $this->twilioClient->createSubAccount($organizationName);
             $this->persistExternalServiceConfiguration('twilio_subaccount_sid', $subAccount->sid);
-            $this->persistExternalServiceConfiguration('twilio_subaccount_auth_token', $subAccount->authToken);
+            $this->persistExternalServiceConfiguration(
+                'twilio_subaccount_auth_token',
+                $subAccount->authToken
+            );
             $this->em->flush();
+
             return null;
         } catch (TwilioException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             return self::TWILIO_API_ERROR;
         }
     }
@@ -150,21 +155,20 @@ class AddSmsCreditMutation implements MutationInterface
         $response = $this->twilioClient->createVerifyService($organizationName);
         $statusCode = $response['statusCode'];
 
-        if ($statusCode !== 201) {
+        if (201 !== $statusCode) {
             $this->logger->error(__METHOD__ . ' : ' . $response['data']['message']);
+
             return self::TWILIO_API_ERROR;
         }
 
         $service = $response['data'];
-        $this->persistExternalServiceConfiguration(
-            'twilio_verify_service_sid',
-            $service['sid']
-        );
+        $this->persistExternalServiceConfiguration('twilio_verify_service_sid', $service['sid']);
         $this->persistExternalServiceConfiguration(
             'twilio_verify_service_name',
             $service['friendly_name']
         );
         $this->em->flush();
+
         return null;
     }
 

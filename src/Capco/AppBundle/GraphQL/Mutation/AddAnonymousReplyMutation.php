@@ -17,11 +17,11 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddAnonymousReplyMutation implements MutationInterface
 {
+    public const INVALID_FORM = 'INVALID_FORM';
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
@@ -31,8 +31,6 @@ class AddAnonymousReplyMutation implements MutationInterface
     private Publisher $publisher;
     private Indexer $indexer;
     private LoggerInterface $logger;
-
-    public const INVALID_FORM = 'INVALID_FORM';
 
     public function __construct(
         EntityManagerInterface $em,
@@ -83,7 +81,13 @@ class AddAnonymousReplyMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . (string) $form->getErrors(true, false));
-            return ['questionnaire' => $questionnaire, 'reply' => null, 'token' => null, 'errorCode' => self::INVALID_FORM];
+
+            return [
+                'questionnaire' => $questionnaire,
+                'reply' => null,
+                'token' => null,
+                'errorCode' => self::INVALID_FORM,
+            ];
         }
 
         $this->em->persist($replyAnonymous);
@@ -103,6 +107,11 @@ class AddAnonymousReplyMutation implements MutationInterface
             );
         }
 
-        return ['questionnaire' => $questionnaire, 'reply' => $replyAnonymous, 'token' => $token, 'errorCode' => null];
+        return [
+            'questionnaire' => $questionnaire,
+            'reply' => $replyAnonymous,
+            'token' => $token,
+            'errorCode' => null,
+        ];
     }
 }

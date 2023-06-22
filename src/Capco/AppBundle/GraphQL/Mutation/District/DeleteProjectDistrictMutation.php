@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;

@@ -3,20 +3,16 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use ArrayIterator;
-use Capco\AppBundle\Entity\AnonymousUserProposalSmsVote;
 use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalSmsVoteMutation;
-use Capco\AppBundle\Helper\TwilioClient;
-use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
@@ -84,44 +80,85 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         ConstraintViolationListInterface $violationList,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $proposal->getProposalForm()->shouldBeCalledOnce()->willReturn($proposalForm);
+        $proposal
+            ->getProposalForm()
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalForm);
         $proposalForm->getStep()->willReturn($step);
         $countUserVotes = 0;
-        $proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token)
-            ->shouldBeCalledOnce()->willReturn($countUserVotes);
-        $step->canContribute()->shouldBeCalledOnce()->shouldBeCalledOnce()->willReturn(true);
-        $step->isVotable()->shouldBeCalledOnce()->shouldBeCalledOnce()->willReturn(true);
-        $step->isNumberOfVotesLimitted()->shouldBeCalledOnce()->willReturn(false);
+        $proposalCollectSmsVoteRepository
+            ->countByTokenAndStep($step, $token)
+            ->shouldBeCalledOnce()
+            ->willReturn($countUserVotes);
+        $step
+            ->canContribute()
+            ->shouldBeCalledOnce()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $step
+            ->isVotable()
+            ->shouldBeCalledOnce()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $step
+            ->isNumberOfVotesLimitted()
+            ->shouldBeCalledOnce()
+            ->willReturn(false);
 
-        $proposal->addCollectSmsVote(Argument::type(ProposalCollectSmsVote::class))->shouldBeCalledOnce()->willReturn($proposal);
+        $proposal
+            ->addCollectSmsVote(Argument::type(ProposalCollectSmsVote::class))
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
 
-        $validator->validate(Argument::type(ProposalCollectSmsVote::class))->shouldBeCalledOnce()->willReturn($violationList);
+        $validator
+            ->validate(Argument::type(ProposalCollectSmsVote::class))
+            ->shouldBeCalledOnce()
+            ->willReturn($violationList);
         $em->persist(Argument::type(ProposalCollectSmsVote::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalled();
 
         $proposalVotesDataLoader->invalidate($proposal)->shouldBeCalledOnce();
         $proposalViewerVoteDataLoader->invalidate($proposal)->shouldBeCalledOnce();
         $proposalViewerHasVoteDataLoader->invalidate($proposal)->shouldBeCalledOnce();
-
 
         $payload = $this->__invoke($input);
         $payload['vote']->shouldHaveType(ProposalCollectSmsVote::class);
@@ -135,26 +172,49 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         CollectStep $step,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn(null);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn(null);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $this->shouldThrow(new UserError('Unknown proposal with id: proposalId'))->during('__invoke', [$input]);
+        $this->shouldThrow(new UserError('Unknown proposal with id: proposalId'))->during(
+            '__invoke',
+            [$input]
+        );
     }
 
     public function it_should_throw_wrong_step_with_id_user_error(
@@ -164,26 +224,48 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         AbstractStep $step,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $this->shouldThrow(new UserError('Wrong step with id: stepId'))->during('__invoke', [$input]);
+        $this->shouldThrow(new UserError('Wrong step with id: stepId'))->during('__invoke', [
+            $input,
+        ]);
     }
 
     public function it_should_throw_this_step_is_no_longer_contribuable_user_error(
@@ -195,33 +277,64 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $proposal->getProposalForm()->shouldBeCalledOnce()->willReturn($proposalForm);
+        $proposal
+            ->getProposalForm()
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalForm);
         $proposalForm->getStep()->willReturn($step);
-        $proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token)
-            ->shouldBeCalledOnce()->willReturn(0);
+        $proposalCollectSmsVoteRepository
+            ->countByTokenAndStep($step, $token)
+            ->shouldBeCalledOnce()
+            ->willReturn(0);
 
-        $step->canContribute()->shouldBeCalledOnce()->willReturn(false);
+        $step
+            ->canContribute()
+            ->shouldBeCalledOnce()
+            ->willReturn(false);
 
-        $this->shouldThrow(new UserError('This step is no longer contributable.'))->during('__invoke', [$input]);
+        $this->shouldThrow(new UserError('This step is no longer contributable.'))->during(
+            '__invoke',
+            [$input]
+        );
     }
 
     public function it_should_throw_this_step_is_not_votable_user_error(
@@ -233,34 +346,67 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $proposal->getProposalForm()->shouldBeCalledOnce()->willReturn($proposalForm);
+        $proposal
+            ->getProposalForm()
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalForm);
         $proposalForm->getStep()->willReturn($step);
-        $proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token)
-            ->shouldBeCalledOnce()->willReturn(0);
+        $proposalCollectSmsVoteRepository
+            ->countByTokenAndStep($step, $token)
+            ->shouldBeCalledOnce()
+            ->willReturn(0);
 
-        $step->canContribute()->shouldBeCalledOnce()->willReturn(true);
-        $step->isVotable()->shouldBeCalledOnce()->willReturn(false);
+        $step
+            ->canContribute()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $step
+            ->isVotable()
+            ->shouldBeCalledOnce()
+            ->willReturn(false);
 
-        $this->shouldThrow(new UserError('This step is not votable.'))->during('__invoke', [$input]);
+        $this->shouldThrow(new UserError('This step is not votable.'))->during('__invoke', [
+            $input,
+        ]);
     }
 
     public function it_should_return_VOTE_LIMIT_REACHED_user_error(
@@ -274,40 +420,82 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         PhoneToken $phoneToken,
         Paginator $paginator,
         ArrayIterator $arrayIterator
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $phone = '33611111111';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn($phoneToken);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn($phoneToken);
         $phoneToken->getPhone()->willReturn($phone);
 
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('consentSmsCommunication')->shouldBeCalledOnce()->willReturn($consentSmsCommunication);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('consentSmsCommunication')
+            ->shouldBeCalledOnce()
+            ->willReturn($consentSmsCommunication);
 
-        $globalIdResolver->resolve($proposalId, null)->shouldBeCalledOnce()->willReturn($proposal);
-        $globalIdResolver->resolve($stepId, null)->shouldBeCalledOnce()->willReturn($step);
+        $globalIdResolver
+            ->resolve($proposalId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($proposal);
+        $globalIdResolver
+            ->resolve($stepId, null)
+            ->shouldBeCalledOnce()
+            ->willReturn($step);
 
-        $proposal->getProposalForm()->shouldBeCalledOnce()->willReturn($proposalForm);
+        $proposal
+            ->getProposalForm()
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalForm);
         $proposalForm->getStep()->willReturn($step);
-        $proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token)
-            ->shouldBeCalledOnce()->willReturn(3);
+        $proposalCollectSmsVoteRepository
+            ->countByTokenAndStep($step, $token)
+            ->shouldBeCalledOnce()
+            ->willReturn(3);
 
-        $step->canContribute()->shouldBeCalledOnce()->willReturn(true);
-        $step->isVotable()->shouldBeCalledOnce()->willReturn(true);
+        $step
+            ->canContribute()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $step
+            ->isVotable()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
 
-        $step->isNumberOfVotesLimitted()->shouldBeCalledOnce()->willReturn(true);
-        $step->getVotesLimit()->shouldBeCalledOnce()->willReturn(3);
+        $step
+            ->isNumberOfVotesLimitted()
+            ->shouldBeCalledOnce()
+            ->willReturn(true);
+        $step
+            ->getVotesLimit()
+            ->shouldBeCalledOnce()
+            ->willReturn(3);
 
-        $proposalCollectSmsVoteRepository->getByTokenAndStep($step, $token)->shouldBeCalledOnce()->willReturn($paginator);
-        $paginator->getIterator()->shouldBeCalledOnce()->willReturn($arrayIterator);
+        $proposalCollectSmsVoteRepository
+            ->getByTokenAndStep($step, $token)
+            ->shouldBeCalledOnce()
+            ->willReturn($paginator);
+        $paginator
+            ->getIterator()
+            ->shouldBeCalledOnce()
+            ->willReturn($arrayIterator);
         $arrayIterator->getArrayCopy()->willReturn([]);
-
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(2);
@@ -318,20 +506,30 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
     public function it_should_return_phone_PHONE_NOT_FOUND_error_code(
         Arg $input,
         PhoneTokenRepository $phoneTokenRepository
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
-        $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
-        $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
-        $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
+        $input
+            ->offsetGet('proposalId')
+            ->shouldBeCalledOnce()
+            ->willReturn($proposalId);
+        $input
+            ->offsetGet('stepId')
+            ->shouldBeCalledOnce()
+            ->willReturn($stepId);
+        $input
+            ->offsetGet('token')
+            ->shouldBeCalledOnce()
+            ->willReturn($token);
 
-        $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn(null);
+        $phoneTokenRepository
+            ->findOneBy(['token' => $token])
+            ->shouldBeCalledOnce()
+            ->willReturn(null);
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => 'PHONE_NOT_FOUND'
+            'errorCode' => 'PHONE_NOT_FOUND',
         ]);
     }
-
 }

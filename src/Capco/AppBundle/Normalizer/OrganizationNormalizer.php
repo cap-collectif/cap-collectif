@@ -10,7 +10,6 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
 class OrganizationNormalizer implements
@@ -51,7 +50,7 @@ class OrganizationNormalizer implements
         return true;
     }
 
-    /** @var $object Organization */
+    /** @var Organization */
     public function normalize($object, $format = null, array $context = [])
     {
         return $this->normalizer->normalize($object, $format, $context);
@@ -61,5 +60,4 @@ class OrganizationNormalizer implements
     {
         return $data instanceof Organization;
     }
-
 }

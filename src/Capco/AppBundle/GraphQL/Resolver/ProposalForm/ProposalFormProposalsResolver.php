@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Enum\OrderDirection;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

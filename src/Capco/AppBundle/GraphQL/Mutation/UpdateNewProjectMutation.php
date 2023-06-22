@@ -13,11 +13,9 @@ use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\AlphaProjectFormType;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use GraphQL\Error\Error;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -32,7 +30,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateNewProjectMutation implements MutationInterface
 {
-
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
@@ -94,6 +91,7 @@ class UpdateNewProjectMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 
@@ -117,19 +115,10 @@ class UpdateNewProjectMutation implements MutationInterface
         if (!$project) {
             throw new UserError(sprintf('Unknown project "%d"', $projectId));
         }
+
         return $project;
     }
 
-    private function setRestrictedViewerGroups(array &$arguments): void
-    {
-        if (empty($arguments['restrictedViewerGroups'])) {
-            return;
-        }
-
-        $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
-            return GlobalId::fromGlobalId($groupGlobalId)['id'];
-        }, $arguments['restrictedViewerGroups']);
-    }
     public function setAuthors(array &$arguments, User $viewer, Project $project): void
     {
         if ($viewer->isOnlyProjectAdmin()) {
@@ -140,7 +129,10 @@ class UpdateNewProjectMutation implements MutationInterface
 
         $form = $this->formFactory->create(ProjectAuthorsFormType::class, $project);
 
-        $form->submit(['authors' => $this->transformer->transformUsers($arguments['authors'])], false);
+        $form->submit(
+            ['authors' => $this->transformer->transformUsers($arguments['authors'])],
+            false
+        );
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
@@ -177,6 +169,65 @@ class UpdateNewProjectMutation implements MutationInterface
         }
     }
 
+    public function handleSteps(&$arguments, Project $project, User $viewer): void
+    {
+        $steps = $project->getRealSteps();
+        // the deletion of the presentation step is handled in handleDescription method, so we can filter it here
+        $oldStepsIdWithoutPresentationStep = array_filter($steps, function ($step) {
+            return false === $step instanceof PresentationStep;
+        });
+
+        $oldStepsId = array_map(function ($step) {
+            return $step->getId();
+        }, $oldStepsIdWithoutPresentationStep);
+
+        $stepsIdToDelete = array_diff($oldStepsId, $arguments['steps']);
+
+        foreach ($stepsIdToDelete as $stepId) {
+            $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy([
+                'step' => $stepId,
+            ]);
+            $project->removeStep($projectAbstractStep);
+        }
+
+        $stepIds = $arguments['steps'];
+        foreach ($stepIds as $index => $stepId) {
+            $step = $this->globalIdResolver->resolve($stepId, $viewer);
+            $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy([
+                'project' => $project,
+                'step' => $step,
+            ]);
+            if (!$projectAbstractStep) {
+                $projectAbstractStep = (new ProjectAbstractStep())
+                    ->setProject($project)
+                    ->setStep($step);
+                $this->em->persist($projectAbstractStep);
+            }
+            $projectAbstractStep->setPosition($index + 1);
+            $project->addStep($projectAbstractStep);
+        }
+
+        unset($arguments['steps']);
+    }
+
+    public function isGranted(string $projectId, ?User $viewer): bool
+    {
+        $project = $this->getProject($projectId, $viewer);
+
+        return $this->authorizationChecker->isGranted(ProjectVoter::EDIT, $project);
+    }
+
+    private function setRestrictedViewerGroups(array &$arguments): void
+    {
+        if (empty($arguments['restrictedViewerGroups'])) {
+            return;
+        }
+
+        $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
+            return GlobalId::fromGlobalId($groupGlobalId)['id'];
+        }, $arguments['restrictedViewerGroups']);
+    }
+
     private function notifyOnNewProjectInDistrict(array $projectDistrictsId, Project $project): void
     {
         $projectDistrictsId = array_values($projectDistrictsId);
@@ -193,40 +244,6 @@ class UpdateNewProjectMutation implements MutationInterface
         }
     }
 
-    public function handleSteps(&$arguments, Project $project, User $viewer): void
-    {
-        $steps = $project->getRealSteps();
-        // the deletion of the presentation step is handled in handleDescription method, so we can filter it here
-        $oldStepsIdWithoutPresentationStep = array_filter($steps, function($step) {
-           return $step instanceof PresentationStep === false;
-        });
-
-        $oldStepsId = array_map(function($step) {
-            return $step->getId();
-        }, $oldStepsIdWithoutPresentationStep);
-
-        $stepsIdToDelete = array_diff($oldStepsId, $arguments['steps']);
-
-        foreach ($stepsIdToDelete as $stepId) {
-            $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy(['step' => $stepId]);
-            $project->removeStep($projectAbstractStep);
-        }
-
-        $stepIds = $arguments['steps'];
-        foreach ($stepIds as $index => $stepId) {
-            $step = $this->globalIdResolver->resolve($stepId, $viewer);
-            $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy(['project' => $project, 'step' => $step]);
-            if (!$projectAbstractStep) {
-                $projectAbstractStep = (new ProjectAbstractStep())->setProject($project)->setStep($step);
-                $this->em->persist($projectAbstractStep);
-            }
-            $projectAbstractStep->setPosition($index + 1);
-            $project->addStep($projectAbstractStep);
-        }
-
-        unset($arguments['steps']);
-    }
-
     private function handleDescription(array &$arguments, Project $project)
     {
         if (array_key_exists('description', $arguments) === false) {
@@ -241,17 +258,20 @@ class UpdateNewProjectMutation implements MutationInterface
         foreach ($steps as $step) {
             if ($step instanceof PresentationStep) {
                 $presentationStep = $step;
+
                 break;
             }
         }
 
         if ($presentationStep && !$description) {
             $project->removeStep($presentationStep->getProjectAbstractStep());
+
             return;
         }
 
         if ($presentationStep && $description) {
             $presentationStep->setBody($description);
+
             return;
         }
 
@@ -260,18 +280,18 @@ class UpdateNewProjectMutation implements MutationInterface
         }
 
         $title = $this->translator->trans('presentation_step', [], 'CapcoAppBundle');
-        $presentationStep = (new PresentationStep())->setTitle($title)->setLabel($title)->setBody($description);
-        $presentationProjectAbstractStep = (new ProjectAbstractStep())->setStep($presentationStep)->setProject($project)->setPosition(1);
+        $presentationStep = (new PresentationStep())
+            ->setTitle($title)
+            ->setLabel($title)
+            ->setBody($description);
+        $presentationProjectAbstractStep = (new ProjectAbstractStep())
+            ->setStep($presentationStep)
+            ->setProject($project)
+            ->setPosition(1);
 
         $this->em->persist($presentationStep);
         $this->em->persist($presentationProjectAbstractStep);
 
         $project->addStep($presentationProjectAbstractStep);
-    }
-
-    public function isGranted(string $projectId, ?User $viewer): bool
-    {
-        $project = $this->getProject($projectId, $viewer);
-        return $this->authorizationChecker->isGranted(ProjectVoter::EDIT, $project);
     }
 }

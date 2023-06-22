@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Psr\Log\LoggerInterface;

@@ -2,13 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
-use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Enum\JumpsOrderField;
-use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\GraphQL\DataLoader\Question\QuestionJumpsDataLoader;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

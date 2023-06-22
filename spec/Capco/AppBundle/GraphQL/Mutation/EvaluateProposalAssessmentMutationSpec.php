@@ -2,13 +2,9 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalStatementState;
-use Capco\AppBundle\GraphQL\Mutation\AnalyseProposalAnalysisMutation;
 use Capco\AppBundle\GraphQL\Mutation\EvaluateProposalAssessmentMutation;
-use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
@@ -17,9 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
@@ -61,9 +55,7 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
 
         $this->fixtures($proposalRepository, $authorizationChecker, $proposal);
 
-        $publisher
-            ->publish(\Prophecy\Argument::any(), \Prophecy\Argument::any())
-            ->shouldBeCalled();
+        $publisher->publish(\Prophecy\Argument::any(), \Prophecy\Argument::any())->shouldBeCalled();
 
         $this->__invoke($argument, $viewer);
     }
@@ -91,11 +83,8 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
         $this->__invoke($argument, $viewer);
     }
 
-    private function fixtures(
-        $proposalRepository,
-        $authorizationChecker,
-        $proposal
-    ): void {
+    private function fixtures($proposalRepository, $authorizationChecker, $proposal): void
+    {
         $proposalRepository->find(\Prophecy\Argument::any())->willReturn($proposal);
         $authorizationChecker
             ->isGranted(ProposalAnalysisRelatedVoter::EVALUATE, $proposal)

@@ -1,9 +1,9 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**

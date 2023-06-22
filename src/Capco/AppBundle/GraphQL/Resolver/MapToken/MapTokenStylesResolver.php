@@ -6,7 +6,6 @@ use Capco\AppBundle\Client\MapboxClient;
 use Capco\AppBundle\DTO\MapboxStyle;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Enum\MapProviderEnum;
-use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
@@ -16,8 +15,11 @@ class MapTokenStylesResolver implements ResolverInterface
     private ?string $defaultMapboxPublicToken = null;
     private ?string $defaultMapboxSecretKey = null;
 
-    public function __construct(MapboxClient $mapboxClient, string $defaultMapboxPublicToken, string $defaultMapboxSecretKey)
-    {
+    public function __construct(
+        MapboxClient $mapboxClient,
+        string $defaultMapboxPublicToken,
+        string $defaultMapboxSecretKey
+    ) {
         $this->mapboxClient = $mapboxClient;
         $this->defaultMapboxPublicToken = $defaultMapboxPublicToken;
         $this->defaultMapboxSecretKey = $defaultMapboxSecretKey;

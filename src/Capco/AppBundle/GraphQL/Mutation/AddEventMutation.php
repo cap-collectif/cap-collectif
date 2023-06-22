@@ -5,8 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\EventTranslation;
-use Capco\AppBundle\Entity\Interfaces\Author;
-use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\Repository\LocaleRepository;

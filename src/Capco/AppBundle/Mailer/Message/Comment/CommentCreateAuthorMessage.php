@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
-use Capco\UserBundle\Entity\User;
 
 final class CommentCreateAuthorMessage extends AbstractExternalMessage
 {

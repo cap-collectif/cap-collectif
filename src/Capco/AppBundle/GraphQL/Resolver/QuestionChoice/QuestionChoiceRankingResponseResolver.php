@@ -1,7 +1,7 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
-use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

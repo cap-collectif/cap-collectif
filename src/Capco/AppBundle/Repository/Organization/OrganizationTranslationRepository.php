@@ -3,9 +3,7 @@
 namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\OrganizationTranslation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method OrganizationTranslation|null find($id, $lockMode = null, $lockVersion = null)

@@ -5,7 +5,7 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Theme;
 use Capco\MediaBundle\Provider\MediaProvider;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -116,8 +116,8 @@ class ThemeAdmin extends AbstractAdmin
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
                 'route' => [
-                    'name' => 'edit'
-                ]
+                    'name' => 'edit',
+                ],
             ])
             ->add('author', null, [
                 'label' => 'global.author',

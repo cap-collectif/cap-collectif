@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,10 +11,9 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository ;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Doctrine\Common\Util\ClassUtils;
@@ -69,7 +67,6 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
             return ['errorCode' => self::PHONE_NOT_FOUND];
         }
         $phone = $phoneToken->getPhone();
-
 
         if (!$proposal) {
             throw new UserError('Unknown proposal with id: ' . $proposalId);

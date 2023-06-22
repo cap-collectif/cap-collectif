@@ -3,7 +3,6 @@
 namespace spec\Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
@@ -55,8 +54,7 @@ class OauthUserProviderSpec extends ObjectBehavior
             $indexer,
             [],
             $groupMutation,
-            $franceConnectSSOConfigurationRepository
-            ,
+            $franceConnectSSOConfigurationRepository,
             $logger,
             $userInvitationHandler,
             $tokenStorage,

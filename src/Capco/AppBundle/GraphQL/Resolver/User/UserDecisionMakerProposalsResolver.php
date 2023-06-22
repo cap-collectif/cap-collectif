@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
-use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
-use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;

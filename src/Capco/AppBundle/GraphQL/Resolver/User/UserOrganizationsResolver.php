@@ -4,8 +4,6 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\UserBundle\Entity\User;
-use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserOrganizationsResolver implements ResolverInterface
@@ -16,6 +14,7 @@ class UserOrganizationsResolver implements ResolverInterface
             ->getMemberOfOrganizations()
             ->map(function (OrganizationMember $organizationMember) {
                 return $organizationMember->getOrganization();
-            })->toArray();
+            })
+            ->toArray();
     }
 }

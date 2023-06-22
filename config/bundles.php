@@ -19,7 +19,6 @@ return [
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
     // Doctrine candies
-    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
     // Doctrine migrations
@@ -59,7 +58,7 @@ return [
     // typography concerns
     JoliTypo\Bridge\Symfony\JoliTypoBundle::class => ['all' => true],
     // CKEditor
-    Ivory\CKEditorBundle\IvoryCKEditorBundle::class => ['all' => true],
+    FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     Caxy\HtmlDiffBundle\CaxyHtmlDiffBundle::class => ['all' => true],
     // GraphQL
     Overblog\GraphQLBundle\OverblogGraphQLBundle::class => ['all' => true],

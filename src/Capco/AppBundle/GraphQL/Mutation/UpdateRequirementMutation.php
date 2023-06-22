@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Requirement;
 use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\UserRequirement;
 use Overblog\GraphQLBundle\Error\UserError;

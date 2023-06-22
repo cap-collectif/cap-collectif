@@ -3,13 +3,11 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AlphaProjectController extends CRUDController
 {
@@ -23,12 +21,13 @@ class AlphaProjectController extends CRUDController
             if (!$step) {
                 throw $this->createAccessDeniedException();
             }
-            $stepEqualSelectedStep = $step->getId() === $stepId ;
+            $stepEqualSelectedStep = $step->getId() === $stepId;
             $stepIsNotCollectStep = $stepEqualSelectedStep && !$step->isCollectStep();
             if ($stepIsNotCollectStep) {
                 throw $this->createAccessDeniedException();
             }
-            $collectStepDontHaveProposalForm = $step->isCollectStep() && $stepEqualSelectedStep && !$step->getProposalForm();
+            $collectStepDontHaveProposalForm =
+                $step->isCollectStep() && $stepEqualSelectedStep && !$step->getProposalForm();
             if ($collectStepDontHaveProposalForm) {
                 throw $this->createAccessDeniedException();
             }

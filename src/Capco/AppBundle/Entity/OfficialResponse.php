@@ -8,7 +8,6 @@ use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,10 +19,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OfficialResponse
 {
+    use BodyUsingJoditWysiwygTrait;
     use NullableTextableTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="is_published", type="boolean", options={"default": false})

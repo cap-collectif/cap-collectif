@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\UserBundle\Entity\User;
-
 abstract class AbstractModeratorMessage extends AbstractAdminMessage
 {
     public const FOOTER = 'notification.email.moderator_footer';

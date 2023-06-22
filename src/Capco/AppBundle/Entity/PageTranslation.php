@@ -2,11 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Page;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translation;
-use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -25,11 +23,11 @@ use Capco\AppBundle\Traits\MetaDescriptionTrait;
  */
 class PageTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
+    use MetaDescriptionTrait;
     use SluggableTitleTrait;
     use TextableTrait;
-    use MetaDescriptionTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     public static function getTranslatableEntityClass(): string
     {

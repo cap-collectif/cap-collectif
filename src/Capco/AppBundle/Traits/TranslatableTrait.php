@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Traits\UuidTrait;
 use Knp\DoctrineBehaviors\Model\Translatable\Translatable;
 
 /**

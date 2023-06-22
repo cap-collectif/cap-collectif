@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\GraphQL\Mutation\Locale\SetUserDefaultLocaleMutation;
-use Capco\AppBundle\Locale\DefaultLocaleCodeDataloader;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\PageRepository;
 use Psr\Log\LoggerInterface;

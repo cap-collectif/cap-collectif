@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Enum\ModerationStatus;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -161,9 +160,9 @@ class AddCommentMutation implements MutationInterface
         bool $isModerationEnabled,
         ?User $viewer = null
     ): void {
-
         if (!$isModerationEnabled) {
             $comment->approve();
+
             return;
         }
 
@@ -173,6 +172,7 @@ class AddCommentMutation implements MutationInterface
 
         if ($viewer->isAdmin()) {
             $comment->approve();
+
             return;
         }
 
@@ -181,6 +181,7 @@ class AddCommentMutation implements MutationInterface
         );
         if ($doesRelatedObjectBelongsToProjectAdmin) {
             $comment->approve();
+
             return;
         }
 
