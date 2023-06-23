@@ -18,7 +18,7 @@ export interface TextEditorProps {
     name: string;
     placeholder?: string;
     required?: boolean;
-    selectedLanguage: string;
+    selectedLanguage?: string;
     platformLanguage?: string;
 
     buttonLabels?: {
@@ -32,7 +32,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
     name,
     placeholder,
     required = false,
-    selectedLanguage,
+    selectedLanguage = 'fr',
     platformLanguage = 'fr',
     buttonLabels
 }) => {
@@ -61,7 +61,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                         </Text>
                     )}
                 </FormLabel>
-                <Button variant="link" onClick={() => setIsOpen(true)}>
+                <Button variant="link" onClick={() => setIsOpen(true)} type="button">
                     {intl.formatMessage({ id: 'advanced-editor' })}
                 </Button>
 
@@ -92,6 +92,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                     <Modal.Footer spacing={2}>
                         <ButtonGroup>
                             <Button
+                                type="button"
                                 variantSize="big"
                                 variant="secondary"
                                 variantColor="hierarchy"
@@ -99,6 +100,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                                 {buttonLabels?.cancel ?? intl.formatMessage({ id: 'cancel' })}
                             </Button>
                             <Button
+                                type="button"
                                 variantSize="big"
                                 variant="primary"
                                 variantColor="primary"

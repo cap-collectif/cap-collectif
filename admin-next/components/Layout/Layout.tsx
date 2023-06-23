@@ -35,7 +35,6 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
             return sideBarItem.items.some(item => item.href.includes(pathname));
     });
     const defaultSideBarFold = CookieHelper.getCookie(SIDE_BAR_COOKIE);
-
     return (
         <NavBarProvider>
             <SideBarProvider
@@ -58,13 +57,14 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             }`,
                         }}
                     />
-
                     <script
                         type="text/javascript"
                         src="https://app.getbeamer.com/js/beamer-embed.js"
                         defer
                     />
-
+                    <script
+                        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.SYMFONY_GOOGLE_MAP_PUBLIC_KEY}&libraries=places`}
+                    />
                     {helpscoutBeacon && (
                         <>
                             <script
@@ -88,7 +88,6 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             />
                         </>
                     )}
-
                     <link
                         rel="preload"
                         href={`${FONT_PATH}/OpenSans-Regular.ttf`}
