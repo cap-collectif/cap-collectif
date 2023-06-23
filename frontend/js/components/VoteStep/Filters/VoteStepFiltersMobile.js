@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Flex, Box, Text, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import ResetCss from '~/utils/ResetCss';
-import VoteStepFilterSearchBar from '~/components/VoteStep/Filters/VoteStepFilterSearchBar';
 import VoteStepFiltersAccordions from '~/components/VoteStep/Filters/VoteStepFiltersAccordions';
 import useVoteStepFilters from '~/components/VoteStep/Filters/useVoteStepFilters';
 import { ACTIVE_COLOR } from '../utils';
+import VoteStepPageSearchBar from "~/components/VoteStep/VoteStepPageSearchBar";
 
 type Props = {
   stepId: string,
@@ -67,7 +67,9 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
           </Box>
         </ResetCss>
       </Flex>
-      <VoteStepFilterSearchBar />
+      <Box mb={4}>
+        <VoteStepPageSearchBar />
+      </Box>
       <VoteStepFiltersAccordions filters={filters} isMobile />
       <Flex justifyContent="center" mt={8} mb="50%">
         <SaveButton onClick={onClose}>{intl.formatMessage({ id: 'global.save' })}</SaveButton>

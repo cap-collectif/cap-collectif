@@ -3,11 +3,8 @@ import * as React from 'react';
 import {
   Box,
   CapUIFontFamily,
-  CapUIIcon,
-  CapUIIconSize,
   CapUILineHeight,
   Flex,
-  Icon,
 } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import {useVoteStepContext} from "~/components/VoteStep/Context/VoteStepContext";
@@ -38,27 +35,12 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
         bg: 'white',
       }}>
       <Box
-        as="button"
-        onClick={e => {
-          e.preventDefault();
-        }}
-        type="button"
-        sx={{
-          cursor: 'pointer',
-          background: 'inherit',
-          borderWidth: '0px',
-          display: 'flex',
-          alignItems: 'center',
-        }}>
-        <Icon name={CapUIIcon.LocationTarget} size={CapUIIconSize.Lg} color="gray.900" />
-      </Box>
-      <Box
         as="input"
         disableFocusStyles
         width="100%"
         bg="inherit"
         className="geo-search-bar-input"
-        placeholder={address || intl.formatMessage({ id: 'geo.search.bar.placeholder' })}
+        placeholder={address || intl.formatMessage({ id: 'vote.step.search' })}
         sx={{ background: 'inherit', borderWidth: '0px', fontSize: '14px !important' }}
       />
     </Flex>
