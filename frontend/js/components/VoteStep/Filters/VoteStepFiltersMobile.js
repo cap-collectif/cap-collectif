@@ -7,6 +7,8 @@ import VoteStepFiltersAccordions from '~/components/VoteStep/Filters/VoteStepFil
 import useVoteStepFilters from '~/components/VoteStep/Filters/useVoteStepFilters';
 import { ACTIVE_COLOR } from '../utils';
 import VoteStepPageSearchBar from "~/components/VoteStep/VoteStepPageSearchBar";
+import VoteStepFilterSearchBar from "~/components/VoteStep/Filters/VoteStepFilterSearchBar";
+import {useVoteStepContext} from "~/components/VoteStep/Context/VoteStepContext";
 
 type Props = {
   stepId: string,
@@ -38,6 +40,7 @@ const SaveButton = ({children, onClick}) => {
 const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
   const intl = useIntl();
   const voteStepFilters = useVoteStepFilters(stepId);
+  const {view} = useVoteStepContext();
 
   if (!voteStepFilters) {
     return null;
@@ -67,9 +70,12 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
           </Box>
         </ResetCss>
       </Flex>
-      <Box mb={4}>
-        <VoteStepPageSearchBar />
-      </Box>
+      {view === 'map' && <VoteStepFilterSearchBar />}
+      {view === 'list' && (
+        <Box mb={4}>
+          <VoteStepPageSearchBar />
+        </Box>
+      )}
       <VoteStepFiltersAccordions filters={filters} isMobile />
       <Flex justifyContent="center" mt={8} mb="50%">
         <SaveButton onClick={onClose}>{intl.formatMessage({ id: 'global.save' })}</SaveButton>

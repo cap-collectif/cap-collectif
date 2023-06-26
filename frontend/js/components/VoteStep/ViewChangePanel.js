@@ -76,7 +76,7 @@ export const ViewChangePanel = ({ isMobile = false }: {| +isMobile?: boolean |})
   const intl = useIntl();
   const [hasNewVote, setHasNewVote] = React.useState(false);
   const { user } = useSelector((state: GlobalState) => state.user);
-  const { view, setView } = useVoteStepContext();
+  const { view, setView, setFilters } = useVoteStepContext();
   const { colors } = useTheme();
 
   useEventListener(VoteStepEvent.AddVote, () => setHasNewVote(true));
@@ -115,7 +115,12 @@ export const ViewChangePanel = ({ isMobile = false }: {| +isMobile?: boolean |})
       />
       <ViewButton
         isMobile={isMobile}
-        onClick={() => setView(View.Map)}
+        onClick={() => {
+          setView(View.Map)
+          if (isMobile) {
+            setFilters('term', '')
+          }
+        }}
         active={view === View.Map}
         icon={CapUIIcon.Map}
         borderRight={view === View.Map && !isMobile ? 'normal' : 'none'}
