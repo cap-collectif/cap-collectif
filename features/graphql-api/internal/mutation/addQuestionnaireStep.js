@@ -7,25 +7,20 @@ const AddQuestionnaireStep = /* GraphQL*/ `
       step {
         __typename
         title
-        ...on QuestionnaireStep {
-          questionnaire {
-            title
-          }
-        }
       }
     }
   }
-`
+`;
 
 const input = {
-  title: 'My questionnaire step'
-}
+  title: 'My questionnaire step',
+};
 
 describe('mutations.addQuestionnaireStepMutation', () => {
   it('admin should be able to add questionnaire step.', async () => {
     const response = await graphql(
       AddQuestionnaireStep,
-      {input: {...input, projectId: toGlobalId('Project', 'project9')}},
+      { input: { ...input, projectId: toGlobalId('Project', 'project9') } },
       'internal_admin',
     );
     expect(response).toMatchSnapshot();
@@ -33,7 +28,7 @@ describe('mutations.addQuestionnaireStepMutation', () => {
   it('admin project should be able to add questionnaire step.', async () => {
     const response = await graphql(
       AddQuestionnaireStep,
-      {input: { ...input, projectId: toGlobalId('Project', 'projectWithOwner') }},
+      { input: { ...input, projectId: toGlobalId('Project', 'projectWithOwner') } },
       'internal_theo',
     );
     expect(response).toMatchSnapshot();
@@ -41,7 +36,7 @@ describe('mutations.addQuestionnaireStepMutation', () => {
   it('orga member should be able to add questionnaire step.', async () => {
     const response = await graphql(
       AddQuestionnaireStep,
-      {input: { ...input, projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') }},
+      { input: { ...input, projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') } },
       'internal_christophe',
     );
     expect(response).toMatchSnapshot();

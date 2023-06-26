@@ -45,7 +45,6 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({
                     <TextEditor
                         name="footer"
                         label={intl.formatMessage({ id: 'global.footer' })}
-                        required
                         platformLanguage={defaultLocale}
                         selectedLanguage={selectedLocale}
                         buttonLabels={{
@@ -56,7 +55,6 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({
                     />
                     <TextEditor
                         name="customCode"
-                        required
                         label={intl.formatMessage({ id: 'admin.customcode' })}
                         platformLanguage={defaultLocale}
                         selectedLanguage={selectedLocale}

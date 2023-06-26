@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateQuestionnaireConfigurationMutation;
+use Capco\AppBundle\Helper\QuestionJumpsHandler;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
@@ -36,7 +37,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         Indexer $indexer,
         ValidatorInterface $colorValidator,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        QuestionJumpsHandler $questionJumpsHandler
     ) {
         $this->beConstructedWith(
             $em,
@@ -48,7 +50,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             $logger,
             $indexer,
             $colorValidator,
-            $authorizationChecker
+            $authorizationChecker,
+            $questionJumpsHandler
         );
     }
 

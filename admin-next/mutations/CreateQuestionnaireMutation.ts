@@ -25,6 +25,7 @@ const mutation = graphql`
                 @prependNode(connections: $connections, edgeTypeName: "QuestionnaireEdge") {
                 ...QuestionnaireItem_questionnaire
                 adminUrl
+                id
             }
         }
     }
@@ -33,8 +34,8 @@ const mutation = graphql`
 const commit = (
     variables: CreateQuestionnaireMutationVariables,
     isAdmin: boolean,
-    owner: Owner,
-    viewer: Viewer,
+    owner: Owner | null,
+    viewer: Viewer | null,
     hasQuestionnaire: boolean,
 ): Promise<CreateQuestionnaireMutationResponse> =>
     commitMutation<CreateQuestionnaireMutation>(environment, {
@@ -50,13 +51,13 @@ const commit = (
                     step: null,
                     adminUrl: '',
                     owner: {
-                        __typename: owner.__typename,
-                        id: owner.id,
-                        username: owner.username,
+                        __typename: owner?.__typename || '',
+                        id: owner?.id || '',
+                        username: owner?.username || '',
                     },
                     creator: {
-                        id: viewer.id,
-                        username: viewer.username,
+                        id: viewer?.id || '',
+                        username: viewer?.username || '',
                     },
                 },
             },

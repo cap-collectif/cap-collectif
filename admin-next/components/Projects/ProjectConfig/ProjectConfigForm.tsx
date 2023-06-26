@@ -101,8 +101,7 @@ const FRAGMENT = graphql`
         url
         steps(excludePresentationStep: true) {
             id
-            title
-
+            label
             __typename
         }
         ...ProjectConfigFormSide_project

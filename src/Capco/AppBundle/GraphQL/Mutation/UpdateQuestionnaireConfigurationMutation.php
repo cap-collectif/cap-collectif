@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Helper\QuestionJumpsHandler;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
@@ -38,6 +39,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private Indexer $indexer;
     private MultipleChoiceQuestionRepository $choiceQuestionRepository;
     private ValidatorInterface $colorValidator;
+    private QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -49,7 +51,8 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         LoggerInterface $logger,
         Indexer $indexer,
         ValidatorInterface $colorValidator,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        QuestionJumpsHandler $questionJumpsHandler
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -61,11 +64,15 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         $this->choiceQuestionRepository = $choiceQuestionRepository;
         $this->authorizationChecker = $authorizationChecker;
         $this->globalIdResolver = $globalIdResolver;
+        $this->questionJumpsHandler = $questionJumpsHandler;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getArrayCopy();
+        // we remove jumps from this array to handle it later when questions are already saved
+        $this->questionJumpsHandler->unsetJumps($arguments);
+
         $questionnaire = $this->getQuestionnaire($arguments['questionnaireId'], $viewer);
         $oldChoices = null;
         unset($arguments['questionnaireId']);
@@ -91,6 +98,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
         }
         $this->em->flush();
 
+        $this->questionJumpsHandler->saveJumps($input->getArrayCopy(), $questionnaire);
         $this->reIndex($oldChoices, $questionnaire->getId());
 
         return ['questionnaire' => $questionnaire];

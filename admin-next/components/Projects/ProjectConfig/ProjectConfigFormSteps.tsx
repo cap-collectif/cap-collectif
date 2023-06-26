@@ -72,7 +72,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                                 })}
                                             </Text>
                                             <Text color="blue.900" fontSize={2} fontWeight={600}>
-                                                {stepsValues[index].title}
+                                                {stepsValues[index].label}
                                             </Text>
                                         </Flex>
                                         <ButtonGroup>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tabs } from '@cap-collectif/ui';
+import React, { Suspense } from 'react';
+import { Spinner, Tabs } from '@cap-collectif/ui';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
@@ -35,40 +35,42 @@ const QuestionnaireStepRequirementsTabs: React.FC<Props> = ({
     const voteType = isAnonymousParticipationAllowed ? WITHOUT_ACCOUNT : WITH_ACCOUNT;
 
     return (
-        <FormProvider {...formMethods}>
-            <Tabs
-                mb={6}
-                selectedId={voteType}
-                onChange={selectedTab => {
-                    if (selectedTab !== voteType) {
-                        const isAnonymousParticipationAllowed = selectedTab === WITHOUT_ACCOUNT;
-                        setValue(
-                            'isAnonymousParticipationAllowed',
-                            isAnonymousParticipationAllowed,
-                        );
-                    }
-                }}>
-                <Tabs.ButtonList ariaLabel="debateType">
-                    <Tabs.Button id={WITH_ACCOUNT}>
-                        {intl.formatMessage({ id: 'with-account' })}
-                    </Tabs.Button>
-                    <Tabs.Button id={WITHOUT_ACCOUNT}>
-                        {intl.formatMessage({ id: 'without-account' })}
-                    </Tabs.Button>
-                </Tabs.ButtonList>
-                <Tabs.PanelList>
-                    <Tabs.Panel>
-                        <QuestionnaireStepRequirements
-                            questionnaireStep={questionnaireStep}
-                            formMethods={formMethods}
-                        />
-                    </Tabs.Panel>
-                    <Tabs.Panel>
-                        <QuestionnaireStepWithoutAccountRequirements />
-                    </Tabs.Panel>
-                </Tabs.PanelList>
-            </Tabs>
-        </FormProvider>
+        <Suspense fallback={<Spinner />}>
+            <FormProvider {...formMethods}>
+                <Tabs
+                    mb={6}
+                    selectedId={voteType}
+                    onChange={selectedTab => {
+                        if (selectedTab !== voteType) {
+                            const isAnonymousParticipationAllowed = selectedTab === WITHOUT_ACCOUNT;
+                            setValue(
+                                'isAnonymousParticipationAllowed',
+                                isAnonymousParticipationAllowed,
+                            );
+                        }
+                    }}>
+                    <Tabs.ButtonList ariaLabel="debateType">
+                        <Tabs.Button id={WITH_ACCOUNT}>
+                            {intl.formatMessage({ id: 'with-account' })}
+                        </Tabs.Button>
+                        <Tabs.Button id={WITHOUT_ACCOUNT}>
+                            {intl.formatMessage({ id: 'without-account' })}
+                        </Tabs.Button>
+                    </Tabs.ButtonList>
+                    <Tabs.PanelList>
+                        <Tabs.Panel>
+                            <QuestionnaireStepRequirements
+                                questionnaireStep={questionnaireStep}
+                                formMethods={formMethods}
+                            />
+                        </Tabs.Panel>
+                        <Tabs.Panel>
+                            <QuestionnaireStepWithoutAccountRequirements />
+                        </Tabs.Panel>
+                    </Tabs.PanelList>
+                </Tabs>
+            </FormProvider>
+        </Suspense>
     );
 };
 

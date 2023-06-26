@@ -6,4 +6,10 @@ const uuid = (): string => {
     return _p8() + _p8(true) + _p8(true) + _p8();
 };
 
+export const isUuid = (id: string) => {
+    const regexExp =
+        /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+    return regexExp.test(id);
+};
+
 export default uuid;

@@ -26,13 +26,6 @@ class AddQuestionnaireStepMutation implements MutationInterface
 
         /** * @var $step QuestionnaireStep  */
         ['step' => $step] = $this->addStepService->addStep($input, $viewer);
-
-        $questionnaireTitle = "{$step->getTitle()} - Questionnaire";
-        $questionnaire = (new Questionnaire())->setTitle($questionnaireTitle);
-        $step->setQuestionnaire($questionnaire);
-
-        $this->em->flush();
-
         return ['step' => $step];
     }
 

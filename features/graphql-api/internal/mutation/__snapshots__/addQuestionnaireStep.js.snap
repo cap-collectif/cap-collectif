@@ -5,9 +5,6 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "questionnaire": Object {
-        "title": "My questionnaire step - Questionnaire",
-      },
       "title": "My questionnaire step",
     },
   },
@@ -19,9 +16,6 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "questionnaire": Object {
-        "title": "My questionnaire step - Questionnaire",
-      },
       "title": "My questionnaire step",
     },
   },
@@ -33,9 +27,6 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "questionnaire": Object {
-        "title": "My questionnaire step - Questionnaire",
-      },
       "title": "My questionnaire step",
     },
   },

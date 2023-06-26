@@ -7,7 +7,7 @@ import {
     QuestionInput,
     QuestionnaireAbstractQuestionInput,
 } from '@relay/UpdateQuestionnaireMutation.graphql';
-import uuid from '@utils/uuid';
+import uuid, { isUuid } from '@utils/uuid';
 
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
     switch (type) {
@@ -95,6 +95,8 @@ export type QuestionCategory =
     | 'MULTIPLE_CHOICE'
     | 'LEGAL';
 
+export type QuestionIds = { id: string | null, temporaryId: string | null, title: string };
+
 export const formatQuestions = (
     questionnaire: NonNullable<QuestionnaireStepFormQueryResponse['step']>['questionnaire'],
 ): any => {
@@ -116,16 +118,16 @@ type Condition = { value: { id: string }, question: { id: string } };
 
 // Copied from the flow file. TODO: better types once jumps are in
 const convertJump = (jump: any) => ({
-    id: jump.id,
-    conditions:
-        jump.conditions &&
-        jump.conditions.map((condition: Condition) => ({
-            ...condition,
-            question: condition.question.id,
-            value: condition.value ? condition.value.id : null,
-        })),
-    origin: jump.origin.id,
-    destination: jump.destination.id,
+        id: jump.id,
+        conditions:
+            jump.conditions &&
+            jump.conditions.map((condition: Condition) => ({
+                ...condition,
+                question: condition.question.id,
+                value: condition.value ? condition.value.id : null,
+            })),
+        origin: jump.origin.id,
+        destination: jump.destination.id,
 });
 
 // Copied from the flow file. TODO: better types once jumps are in
@@ -136,7 +138,8 @@ export const formatQuestionsInput = (
         const questionInput = {
             question: {
                 ...question,
-                temporaryId: question?.id ? undefined : uuid(),
+                id: isUuid(question.id || '') ? undefined : question.id,
+                temporaryId: isUuid(question.id || '') ? question.id : undefined,
                 alwaysJumpDestinationQuestion: question.alwaysJumpDestinationQuestion
                     ? question.alwaysJumpDestinationQuestion.id
                     : null,
@@ -163,7 +166,8 @@ export const formatQuestionsInput = (
             questionInput.question.choices = question.choices
                 ? question.choices.map(choice => ({
                       ...choice,
-                      temporaryId: choice?.id ? undefined : uuid(),
+                      id: isUuid(choice?.id || '') ? undefined : choice?.id,
+                      temporaryId: isUuid(choice?.id || '') ? choice?.id : undefined,
                       image: choice?.image ? choice.image?.id : null,
                       kind: undefined,
                   }))

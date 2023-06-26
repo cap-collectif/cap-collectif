@@ -30,6 +30,8 @@ import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuesti
 import { formatQuestions, formatQuestionsInput } from './utils';
 import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation';
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql';
+import CreateQuestionnaireMutation from '@mutations/CreateQuestionnaireMutation';
+import { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graphql';
 
 type Props = {
     stepId: string,
@@ -56,8 +58,12 @@ type FormValues = {
         title: string,
         description: string,
         questions: Array<QuestionInput>,
+        questionsWithJumps: Array<any>,
     },
     temporaryQuestion?: any,
+    temporaryJump?: any,
+    isUsingModel?: boolean,
+    questionnaireModel?: { label: string, value: string },
     __typename?: string,
 } & RequirementsFormValues;
 
@@ -92,6 +98,51 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
                     questions {
                         id
                         ...responsesHelper_adminQuestion @relay(mask: false)
+                    }
+                    questionsWithJumps: questions(filter: JUMPS_ONLY) {
+                        id
+                        title
+                        jumps(orderBy: { field: POSITION, direction: ASC }) {
+                            id
+                            origin {
+                                id
+                                title
+                            }
+                            destination {
+                                id
+                                title
+                                number
+                            }
+                            conditions {
+                                id
+                                operator
+                                question {
+                                    id
+                                    title
+                                    type
+                                }
+                                ... on MultipleChoiceQuestionLogicJumpCondition {
+                                    value {
+                                        id
+                                        title
+                                    }
+                                }
+                            }
+                        }
+                        # unused for now, will be usefull when we'll add error and warning messages
+                        destinationJumps {
+                            id
+                            origin {
+                                id
+                                title
+                            }
+                        }
+
+                        alwaysJumpDestinationQuestion {
+                            id
+                            title
+                            number
+                        }
                     }
                 }
                 ...QuestionnaireStepRequirementsTabs_questionnaireStep
@@ -180,6 +231,8 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                 title: step?.questionnaire?.title ?? '',
                 description: step?.questionnaire?.description ?? '',
                 questions: step?.questionnaire ? formatQuestions(step.questionnaire) : [],
+                // @ts-ignore I'll fix that next PR, need to start recette
+                questionsWithJumps: step.questionnaire ? step.questionnaire.questionsWithJumps : [],
             },
             requirements: [],
             requirementsReason: '',
@@ -195,11 +248,19 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
     const { handleSubmit, formState, control, watch } = formMethods;
     const { isSubmitting, isValid } = formState;
 
-    const onSubmit = async ({ questionnaire, ...values }: FormValues) => {
+    const onSubmit = async ({
+        questionnaire,
+        isUsingModel,
+        questionnaireModel,
+        ...values
+    }: FormValues) => {
         const timeless =
             values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false;
         delete values.stepDurationType;
         delete values.temporaryQuestion;
+        delete values.temporaryJump;
+
+        const isNewStep = !questionnaire.questionnaireId;
 
         const stepInput: UpdateQuestionnaireStepInput = {
             ...values,
@@ -209,21 +270,62 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
             ...getRequirementsInput(values),
         };
 
+        const mergedArr = questionnaire.questions.map(q => {
+            const j = questionnaire.questionsWithJumps.find(
+                jump => q.id && jump.id && q.id === jump.id,
+            );
+            return { ...q, ...j };
+        });
+
+        // @ts-ignore I'll fix that next PR, need to start recette
+        delete questionnaire.questionsWithJumps;
+
+        if (isUsingModel) stepInput.questionnaire = questionnaireModel?.value || '';
+
+        if (isNewStep && !isUsingModel) {
+            const qInput = {
+                title: `${stepInput.label} - ${intl.formatMessage({
+                    id: 'global.questionnaire',
+                })}`,
+                type: 'QUESTIONNAIRE' as QuestionnaireType,
+            };
+            const response = await CreateQuestionnaireMutation.commit(
+                {
+                    input: qInput,
+                    connections: [],
+                },
+                false,
+                null,
+                null,
+                false,
+            );
+            stepInput.questionnaire = response.createQuestionnaire?.questionnaire?.id || '';
+        }
+
+        if (!stepInput.questionnaire) return mutationErrorToast(intl);
+
         return UpdateQuestionnaireStepMutation.commit({ input: stepInput })
             .then(async response => {
                 const adminAlphaUrl =
                     response.updateQuestionnaireStep?.questionnaireStep?.project?.adminAlphaUrl;
                 try {
+                    if (isUsingModel) {
+                        if (adminAlphaUrl) return (window.location.href = adminAlphaUrl);
+                        else return;
+                    }
                     return UpdateQuestionnaireMutation.commit({
                         input: {
                             ...questionnaire,
-                            questions: formatQuestionsInput(questionnaire.questions),
+                            questionnaireId:
+                                questionnaire?.questionnaireId || stepInput.questionnaire,
+                            title: `${stepInput.label} - ${intl.formatMessage({
+                                id: 'global.questionnaire',
+                            })}`,
+                            questions: formatQuestionsInput(mergedArr),
                         },
                     })
                         .then(() => {
-                            if (adminAlphaUrl) {
-                                return (window.location.href = adminAlphaUrl);
-                            }
+                            if (adminAlphaUrl) return (window.location.href = adminAlphaUrl);
                         })
                         .catch(() => {
                             return mutationErrorToast(intl);
@@ -233,7 +335,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                 }
             })
             .catch(() => {
-                mutationErrorToast(intl);
+                return mutationErrorToast(intl);
             });
     };
 
@@ -351,7 +453,11 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                         </Flex>
                     ) : null}
                     <QuestionnaireStepFormQuestionnaireTab />
-                    <Accordion color={CapUIAccordionColor.Transparent}>
+                    <Accordion
+                        color={CapUIAccordionColor.Transparent}
+                        defaultAccordion={intl.formatMessage({
+                            id: 'required-infos-to-participate',
+                        })}>
                         <Accordion.Item
                             id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
                             <Accordion.Button>

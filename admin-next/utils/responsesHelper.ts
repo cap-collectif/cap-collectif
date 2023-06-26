@@ -3,7 +3,6 @@ import { graphql } from 'react-relay';
 /**
  * The fragment responsesHelper_adminQuestion can be used with the "@relay(mask: false)" option
  * on questionnaires where you need responses
- * TODO : Remove jumps and create a separate fragment ?
  */
 export const QuestionAdminFragment = {
     adminQuestion: graphql`
@@ -26,46 +25,6 @@ export const QuestionAdminFragment = {
                 rangeMax
             }
 
-            jumps(orderBy: { field: POSITION, direction: ASC }) {
-                id
-                origin {
-                    id
-                }
-                destination {
-                    id
-                    title
-                    number
-                }
-                conditions {
-                    id
-                    operator
-                    question {
-                        id
-                        title
-                        type
-                    }
-                    ... on MultipleChoiceQuestionLogicJumpCondition {
-                        value {
-                            id
-                            title
-                        }
-                    }
-                }
-            }
-
-            destinationJumps {
-                id
-                origin {
-                    id
-                    title
-                }
-            }
-
-            alwaysJumpDestinationQuestion {
-                id
-                title
-                number
-            }
             description
             descriptionUsingJoditWysiwyg
             type
