@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b916ea6a1c90d59ed6196770e2d93f71",
+    "content-hash": "ca458653e91adb81761219f0acdef8f3",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -12403,49 +12403,48 @@
         },
         {
             "name": "sonata-project/doctrine-extensions",
-            "version": "1.18.1",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/sonata-doctrine-extensions.git",
-                "reference": "692b7e3387deaa7c4d1412c3f1a5497fe8a00f14"
+                "reference": "2967d6e7558b9f47c9dd291f8061302c35d36b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/692b7e3387deaa7c4d1412c3f1a5497fe8a00f14",
-                "reference": "692b7e3387deaa7c4d1412c3f1a5497fe8a00f14",
+                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/2967d6e7558b9f47c9dd291f8061302c35d36b43",
+                "reference": "2967d6e7558b9f47c9dd291f8061302c35d36b43",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.13 || ^3.1",
-                "doctrine/persistence": "^1.3.6 || ^2.0 || ^3.0",
-                "php": "^7.4 || ^8.0"
+                "doctrine/persistence": "^1.3.6 || ^2.0",
+                "php": "^7.3 || ^8.0"
             },
             "conflict": {
-                "doctrine/annotations": "<1.7",
                 "doctrine/doctrine-bundle": "<2.0",
                 "doctrine/mongodb-odm": "<2.0",
-                "doctrine/orm": "<2.5"
+                "doctrine/orm": "<2.5",
+                "doctrine/phpcr-odm": "<1.5.2"
             },
             "require-dev": {
                 "doctrine/common": "^2.7 || ^3.0",
                 "doctrine/doctrine-bundle": "^2.0",
                 "doctrine/mongodb-odm": "^2.0",
                 "doctrine/orm": "^2.5",
-                "friendsofphp/php-cs-fixer": "^3.4",
+                "doctrine/phpcr-odm": "^1.5.2",
                 "jackalope/jackalope-doctrine-dbal": "^1.0",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5.13",
+                "phpstan/phpstan": "^0.12.54",
+                "phpstan/phpstan-phpunit": "^0.12.16",
+                "phpstan/phpstan-strict-rules": "^0.12.10",
+                "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.16",
-                "rector/rector": "^0.13",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-                "symfony/expression-language": "^4.4 || ^5.4 || ^6.0",
-                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/phpunit-bridge": "^6.1",
+                "symfony/dependency-injection": "^4.4 || ^5.1",
+                "symfony/expression-language": "^4.4 || ^5.1",
+                "symfony/framework-bundle": "^4.4 || ^5.1",
+                "symfony/phpunit-bridge": "^5.1.8",
                 "vimeo/psalm": "^4.1"
             },
             "suggest": {
@@ -12489,9 +12488,13 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/sonata-doctrine-extensions/issues",
-                "source": "https://github.com/sonata-project/sonata-doctrine-extensions/tree/1.18.1"
+                "source": "https://github.com/sonata-project/sonata-doctrine-extensions/tree/1.15.0"
             },
             "funding": [
+                {
+                    "url": "https://github.com/OskarStark",
+                    "type": "github"
+                },
                 {
                     "url": "https://github.com/VincentLanglet",
                     "type": "github"
@@ -12503,13 +12506,9 @@
                 {
                     "url": "https://github.com/greg0ire",
                     "type": "github"
-                },
-                {
-                    "url": "https://github.com/jordisala1991",
-                    "type": "github"
                 }
             ],
-            "time": "2022-09-02T07:07:59+00:00"
+            "time": "2021-11-06T15:00:56+00:00"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
