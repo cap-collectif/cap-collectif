@@ -3,6 +3,7 @@
 exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`] = `
 <Flex
   direction="column"
+  id="debateStep-debateStep123"
   spacing={8}
 >
   <Relay(DebateStepPageMainActions)
@@ -10,6 +11,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
     step={
       Object {
         "$fragmentRefs": null,
+        "id": "debateStep123",
         "timeRange": Object {
           "hasStarted": true,
         },
@@ -21,6 +23,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
     step={
       Object {
         "$fragmentRefs": null,
+        "id": "debateStep123",
         "timeRange": Object {
           "hasStarted": true,
         },
@@ -39,6 +42,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
 exports[`<DebateStepPageLogic /> should renders correctly when not authenticated 1`] = `
 <Flex
   direction="column"
+  id="debateStep-debateStep123"
   spacing={8}
 >
   <Relay(DebateStepPageMainActions)
@@ -46,6 +50,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when not authenticated
     step={
       Object {
         "$fragmentRefs": null,
+        "id": "debateStep123",
         "timeRange": Object {
           "hasStarted": true,
         },
@@ -57,6 +62,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when not authenticated
     step={
       Object {
         "$fragmentRefs": null,
+        "id": "debateStep123",
         "timeRange": Object {
           "hasStarted": true,
         },
@@ -73,6 +79,7 @@ exports[`<DebateStepPageLogic /> should renders correctly when step not started 
   step={
     Object {
       "$fragmentRefs": null,
+      "id": "debateStep123",
       "timeRange": Object {
         "hasStarted": false,
       },

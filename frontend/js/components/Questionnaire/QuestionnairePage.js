@@ -53,7 +53,9 @@ export const QuestionnairePage = ({ questionnaire, query }: Props) => {
   const showCreateForm = (questionnaire?.multipleRepliesAllowed && isShow) || !hasReplies;
 
   return questionnaire && query ? (
-    <QuestionnaireContainer id="questionnaire-page">
+    <QuestionnaireContainer
+      className="questionnaire-page"
+      id={`questionnaire-${questionnaire.id || ''}`}>
       {questionnaire.step && <QuestionnaireHeader step={questionnaire.step} />}
       <UserReplies questionnaire={questionnaire} query={query} />
 
@@ -86,6 +88,7 @@ export default createFragmentContainer(container, {
     fragment QuestionnairePage_questionnaire on Questionnaire
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       multipleRepliesAllowed
+      id
       step {
         ...QuestionnaireHeader_step
         ... on QuestionnaireStep {

@@ -62,7 +62,7 @@ class SelectionPage extends Page
         if (
             !$this->getSession()->wait(
                 10000,
-                "window.jQuery && $('#ProposalStepPage-rendered').length > 0"
+                "window.jQuery && $('.ProposalStepPage-rendered').length > 0"
             )
         ) {
             throw new \RuntimeException(

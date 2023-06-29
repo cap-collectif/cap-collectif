@@ -3,7 +3,8 @@
 exports[`<ProposalStepPage /> renders correctly with invalid GeoJson 1`] = `
 <Fragment>
   <div
-    id="ProposalStepPage-rendered"
+    className="ProposalStepPage-rendered"
+    id="proposalsStep-U2VsZWN0aW9uU3RlcDoyNDRlYzlkOS03NzEyLTExZTktOTkwZC0wMjQyYWMxMTAwMDc="
   >
     <StepPageHeader
       step={

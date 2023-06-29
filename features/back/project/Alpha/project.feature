@@ -94,7 +94,7 @@ Scenario: Logged in admin wants to add collect step to a project
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/collect/collectsteptitle"
-  And I wait "#ProposalStepPage-rendered" to appear on current page
+  And I wait ".ProposalStepPage-rendered" to appear on current page
   Then I should see "CollectStepTitle"
   Then I should see "CollectStepBody"
 

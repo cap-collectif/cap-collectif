@@ -2,7 +2,8 @@
 
 exports[`<QuestionnairePage /> renders correctly 1`] = `
 <QuestionnairePage__QuestionnaireContainer
-  id="questionnaire-page"
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
 >
   <QuestionnaireHeader
     step={
@@ -22,6 +23,7 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "id": "questionnaire1",
         "multipleRepliesAllowed": false,
         "step": Object {
           "$fragmentRefs": null,
@@ -57,7 +59,8 @@ exports[`<QuestionnairePage /> renders correctly 1`] = `
 
 exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
 <QuestionnairePage__QuestionnaireContainer
-  id="questionnaire-page"
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
 >
   <QuestionnaireHeader
     step={
@@ -77,6 +80,7 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "id": "questionnaire1",
         "multipleRepliesAllowed": true,
         "step": Object {
           "$fragmentRefs": null,
@@ -109,7 +113,8 @@ exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`]
 
 exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
 <QuestionnairePage__QuestionnaireContainer
-  id="questionnaire-page"
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
 >
   <QuestionnaireHeader
     step={
@@ -129,6 +134,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "id": "questionnaire1",
         "multipleRepliesAllowed": false,
         "step": Object {
           "$fragmentRefs": null,
@@ -144,6 +150,7 @@ exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
       Object {
         "$fragmentRefs": null,
         "$refType": null,
+        "id": "questionnaire1",
         "multipleRepliesAllowed": false,
         "step": Object {
           "$fragmentRefs": null,

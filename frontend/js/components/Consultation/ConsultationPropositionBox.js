@@ -110,7 +110,7 @@ export const ConsultationPropositionBox = (props: Props) => {
   };
 
   return (
-    <div className="row">
+    <div className="row" id={`consultationStep-${id}`}>
       <QueryRenderer
         fetchPolicy="store-and-network"
         environment={environment}

@@ -8,6 +8,7 @@ import { $fragmentRefs, $refType } from '~/mocks';
 const props = {
   questionnaire: {
     multipleRepliesAllowed: false,
+    id: 'questionnaire1',
     step: {
       $fragmentRefs,
     },

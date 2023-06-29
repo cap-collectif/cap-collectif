@@ -9,6 +9,7 @@ const baseProps = {
   query: {
     $refType,
     step: {
+      id: 'debateStep123',
       $fragmentRefs,
       timeRange: {
         hasStarted: true,

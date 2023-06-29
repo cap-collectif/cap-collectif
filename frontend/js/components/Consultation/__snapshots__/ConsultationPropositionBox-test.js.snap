@@ -3,6 +3,7 @@
 exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
 <div
   className="row"
+  id="consultationStep-stepId"
 >
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}
@@ -2928,6 +2929,7 @@ fragment UserLink_user on User {
 exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
 <div
   className="row"
+  id="consultationStep-stepId"
 >
   <ReactRelayQueryRenderer
     environment={"RelayModernEnvironment()"}

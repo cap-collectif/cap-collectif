@@ -58,7 +58,7 @@ export const CustomStepPage = ({ stepId }: Props) => {
   const { title, body, timeRange } = customStep;
 
   return (
-    <section className="section--alt">
+    <section className="section--alt" id={`customStep-${customStep.id || ''}`}>
       <div className="container">
         {customStep.events && customStep.events.totalCount > 0 && hasFeatureFlagCalendar && (
           <StepEvents step={customStep} />

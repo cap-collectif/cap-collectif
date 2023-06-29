@@ -197,7 +197,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
         activeKey={tabKey}
         onSelect={key => setTabKey(key)}
         className="tabs__container">
-        <PageContainer>
+        <PageContainer id={`proposal-${proposal?.id || ''}`}>
           <ProposalPageHeader
             hasAnalysingButton={hasAnalysis && !isAnalysing && !isMobile}
             onAnalysisClick={() => setIsAnalysing(true)}

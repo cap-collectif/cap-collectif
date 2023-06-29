@@ -35,7 +35,7 @@ export const DebateStepPageLogic = ({ query }: Props): React.Node => {
   if (!hasStarted && step) return <DebateStepPageNotYetStarted step={step} />;
 
   return (
-    <Flex direction="column" spacing={8}>
+    <Flex direction="column" spacing={8} id={`debateStep-${step?.id || ''}`}>
       <DebateStepPageMainActions isMobile={isMobile} step={step} />
       {showContent && <WYSIWYGRender value={step?.debateContent || ''} />}
       {(showFaceToFace || !step) && (

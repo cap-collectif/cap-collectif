@@ -86,7 +86,7 @@ export const PresentationStepPage = ({ stepId, projectId }: Props) => {
   const { contributors, url, posts, consultationStepOpen, slug } = project;
 
   return (
-    <section className="section--alt">
+    <section className="section--alt" id={`presentationStep-${presentationStep.id || ''}`}>
       <div className="container" style={{ paddingTop: 48 }}>
         <h2 className="h2">{title}</h2>
         <div className="block ">

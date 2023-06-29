@@ -1924,7 +1924,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "dd4daa8efd477fb284a371f0566c02cb",
+        "cacheID": "caaa74d1ca03d0bba71b18107bb501d1",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -2009,6 +2009,7 @@ fragment QuestionnairePage_query_2uEJPD on Query {
 
 fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   multipleRepliesAllowed
+  id
   step {
     ...QuestionnaireHeader_step
     ...QuestionnaireFooter_step
@@ -4269,7 +4270,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
         ],
       },
       "params": Object {
-        "cacheID": "dd4daa8efd477fb284a371f0566c02cb",
+        "cacheID": "caaa74d1ca03d0bba71b18107bb501d1",
         "id": null,
         "metadata": Object {},
         "name": "QuestionnaireStepPageQuery",
@@ -4354,6 +4355,7 @@ fragment QuestionnairePage_query_2uEJPD on Query {
 
 fragment QuestionnairePage_questionnaire_39ngnn on Questionnaire {
   multipleRepliesAllowed
+  id
   step {
     ...QuestionnaireHeader_step
     ...QuestionnaireFooter_step
