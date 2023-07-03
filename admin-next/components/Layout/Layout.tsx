@@ -63,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                         defer
                     />
                     <script
-                        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.SYMFONY_GOOGLE_MAP_PUBLIC_KEY}&libraries=places`}
+                        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_SYMFONY_GOOGLE_MAP_PUBLIC_KEY}&libraries=places`}
                     />
                     {helpscoutBeacon && (
                         <>
