@@ -3,24 +3,25 @@
 namespace spec\Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
+use Capco\UserBundle\OpenID\OpenIDExtraMapper;
+use Capco\UserBundle\OpenID\OpenIDResourceOwner;
+use Capco\UserBundle\Repository\UserRepository;
+use Capco\UserBundle\Security\Core\User\OauthUserProvider;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\UserBundle\OpenID\OpenIDExtraMapper;
-use FOS\UserBundle\Model\UserManagerInterface;
-use Capco\UserBundle\Repository\UserRepository;
-use Capco\UserBundle\OpenID\OpenIDResourceOwner;
-use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Capco\UserBundle\Security\Core\User\OauthUserProvider;
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -45,7 +46,8 @@ class OauthUserProviderSpec extends ObjectBehavior
         RequestStack $requestStack,
         RedisCache $redisCache,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SessionInterface $session
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -61,7 +63,8 @@ class OauthUserProviderSpec extends ObjectBehavior
             $requestStack,
             $redisCache,
             $flashBag,
-            $translator
+            $translator,
+            $session
         );
     }
 

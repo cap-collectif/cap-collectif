@@ -120,6 +120,10 @@ class OauthConnectController extends ConnectController
      */
     public function redirectToServiceAction(Request $request, $service)
     {
+        if (!$this->container->get('session')->isStarted()) {
+            $this->container->get('session')->start();
+        }
+
         if (!$this->serviceHasEnabledFeature($service)) {
             $message = $this->translator->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
 

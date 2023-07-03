@@ -52,7 +52,8 @@ return PhpCsFixer\Config::create()
         'strict_param' => false,
         'string_line_ending' => true,
         'yoda_style' => true,
-        'nullable_type_declaration_for_default_null_value' => true
+        'nullable_type_declaration_for_default_null_value' => true,
+        'concat_space' => ['spacing' => 'one'],
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

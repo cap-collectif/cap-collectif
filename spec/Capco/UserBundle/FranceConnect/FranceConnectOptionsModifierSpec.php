@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FranceConnectOptionsModifierSpec extends ObjectBehavior
 {
@@ -14,9 +15,10 @@ class FranceConnectOptionsModifierSpec extends ObjectBehavior
         FranceConnectSSOConfigurationRepository $repository,
         RedisCache $redisCache,
         Manager $toggleManager,
+        SessionInterface $session,
         FranceConnectSSOConfiguration $fc
     ) {
-        $this->beConstructedWith($repository, $redisCache, $toggleManager);
+        $this->beConstructedWith($repository, $redisCache, $toggleManager, $session);
         $toggleManager->isActive('login_franceconnect')->willReturn(true);
         $repository->find('franceConnect')->willReturn($fc);
         $data = [
@@ -39,9 +41,10 @@ class FranceConnectOptionsModifierSpec extends ObjectBehavior
         FranceConnectSSOConfigurationRepository $repository,
         RedisCache $redisCache,
         Manager $toggleManager,
+        SessionInterface $session,
         FranceConnectSSOConfiguration $fc
     ) {
-        $this->beConstructedWith($repository, $redisCache, $toggleManager);
+        $this->beConstructedWith($repository, $redisCache, $toggleManager, $session);
         $toggleManager->isActive('login_franceconnect')->willReturn(false);
 
         $this->getAllowedData()->shouldReturn([]);

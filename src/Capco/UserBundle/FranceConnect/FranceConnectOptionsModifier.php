@@ -9,9 +9,9 @@ use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\AbstractOptionsModifier;
 use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\OptionsModifierInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use Symfony\Component\Cache\CacheItem;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
-    OptionsModifierInterface
+class FranceConnectOptionsModifier extends AbstractOptionsModifier implements OptionsModifierInterface
 {
     public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
@@ -19,15 +19,18 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
     protected FranceConnectSSOConfigurationRepository $repository;
     protected RedisCache $redisCache;
     protected Manager $toggleManager;
+    protected SessionInterface $session;
 
     public function __construct(
         FranceConnectSSOConfigurationRepository $repository,
         RedisCache $redisCache,
-        Manager $toggleManager
+        Manager $toggleManager,
+        SessionInterface $session
     ) {
         $this->repository = $repository;
         $this->redisCache = $redisCache;
         $this->toggleManager = $toggleManager;
+        $this->session = $session;
     }
 
     public function getAllowedData(): array
@@ -48,7 +51,8 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
         }
 
         /** * @var $fcTokens CacheItem  */
-        $fcTokens = $this->redisCache->getItem(self::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY);
+        $fcTokens = $this->redisCache->getItem(self::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId());
+
         if (!$fcTokens->isHit()) {
             $nonce = $this->generateRandomValue();
             $state = $this->generateRandomValue();
@@ -60,7 +64,7 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
 
         /** * @var $ssoConfigurationCachedItem CacheItem  */
         $ssoConfigurationCachedItem = $this->redisCache->getItem(
-            self::REDIS_CACHE_KEY . ' - ' . $resourceOwner->getName()
+            self::REDIS_CACHE_KEY . '-' . $resourceOwner->getName() . '-' . $this->session->getId()
         );
 
         if (!$ssoConfigurationCachedItem->isHit()) {
@@ -84,6 +88,7 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements
                     ])
                     ->expiresAfter($this->redisCache::ONE_DAY);
             }
+            $this->redisCache->save($ssoConfigurationCachedItem);
         }
 
         return array_merge($options, $ssoConfigurationCachedItem->get());

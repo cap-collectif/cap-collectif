@@ -3,25 +3,26 @@
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
-use Doctrine\Common\Util\ClassUtils;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
-use FOS\UserBundle\Model\UserManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
-use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Util\ClassUtils;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
-use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OauthUserProvider extends FOSUBUserProvider
@@ -39,6 +40,7 @@ class OauthUserProvider extends FOSUBUserProvider
     private RedisCache $redisCache;
     private FlashBagInterface $flashBag;
     private TranslatorInterface $translator;
+    private SessionInterface $session;
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -54,7 +56,8 @@ class OauthUserProvider extends FOSUBUserProvider
         RequestStack $requestStack,
         RedisCache $redisCache,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SessionInterface $session
     ) {
         $this->userRepository = $userRepository;
         $this->extraMapper = $extraMapper;
@@ -68,6 +71,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->redisCache = $redisCache;
         $this->flashBag = $flashBag;
         $this->translator = $translator;
+        $this->session = $session;
         parent::__construct($userManager, $properties);
     }
 
@@ -191,7 +195,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $nonce = $tokenPayload['nonce'] ?? null;
 
         $tokens = $this->redisCache
-            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY)
+            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
             ->get();
 
         if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $state) {

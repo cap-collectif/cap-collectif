@@ -9,6 +9,7 @@ use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Http\HttpUtils;
 
@@ -23,6 +24,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         'birthplace' => 'birthplace',
     ];
     private RedisCache $redisCache;
+    private SessionInterface $session;
 
     public function __construct(
         HttpMethodsClient $httpClient,
@@ -31,10 +33,12 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         $name,
         AbstractOptionsModifier $optionsModifier,
         RequestDataStorageInterface $storage,
-        RedisCache $redisCache
+        RedisCache $redisCache,
+        SessionInterface $session
     ) {
         parent::__construct($httpClient, $httpUtils, $options, $name, $optionsModifier, $storage);
         $this->redisCache = $redisCache;
+        $this->session = $session;
     }
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
@@ -44,7 +48,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 
         /** * @var CacheItem $tokens  */
         $tokens = $this->redisCache
-            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY)
+            ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
             ->get();
 
         if (!empty($tokens)) {
