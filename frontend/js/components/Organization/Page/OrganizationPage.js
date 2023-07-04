@@ -11,6 +11,7 @@ import OrganizationPageEventList from './OrganizationPageEventList';
 import OrganizationPagePostList from './OrganizationPagePostList';
 import ProjectHeader from '~/components/Ui/Project/ProjectHeaderLegacy';
 import Image from '~ui/Primitives/Image';
+import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 
 const QUERY = graphql`
   query OrganizationPageQuery(
@@ -119,7 +120,9 @@ export const OrganizationPage = ({ organizationId }: Props) => {
             <Heading as="h1" mb={6} fontSize="32px" lineHeight="44px">
               {title}
             </Heading>
-            <Text as="div">{body}</Text>
+            <Text as="div">
+              <WYSIWYGRender value={body} />
+            </Text>
             {socialNetworks ? (
               <Flex
                 flexDirection="row"

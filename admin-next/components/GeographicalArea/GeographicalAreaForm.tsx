@@ -1,7 +1,7 @@
 import * as React from 'react';
 import L from 'leaflet';
 import { useIntl, IntlShape } from 'react-intl';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import dynamic from 'next/dynamic';
 import {
@@ -33,7 +33,7 @@ import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import UpdateProjectDistrictMutation from '@mutations/UpdateProjectDistrictMutation';
 import { UPLOAD_PATH } from '@utils/config';
-//import TextEditor from 'components/Form/TextEditor/TextEditor';
+import TextEditor from 'components/Form/TextEditor/TextEditor';
 
 const GeographicalAreaMap = dynamic(() => import('./GeographicalAreaMap'), { ssr: false });
 
@@ -286,26 +286,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                     maxLength={255}
                                 />
                             </FormControl>
-                            <FormControl name="description" control={control}>
-                                <FormLabel
-                                    htmlFor="description"
-                                    label={intl.formatMessage({ id: 'global.description' })}>
-                                    <Text fontSize={2} color="gray.500">
-                                        {intl.formatMessage({ id: 'global.optional' })}
-                                    </Text>
-                                </FormLabel>
-                                <FieldInput
-                                    id="description"
-                                    name="description"
-                                    control={control}
-                                    type="textarea"
-                                    rows={3}
-                                    placeholder={intl.formatMessage({
-                                        id: 'city-neighbourhood-placeholder',
-                                    })}
-                                />
-                            </FormControl>
-                            {/*<FormProvider {...methods}>
+                            <FormProvider {...methods}>
                                 <TextEditor
                                     name="description"
                                     placeholder={intl.formatMessage({
@@ -315,7 +296,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                     platformLanguage={defaultLocale?.code}
                                     selectedLanguage={localeSelected.value}
                                 />
-                                </FormProvider>*/}
+                            </FormProvider>
                             <FormControl name="cover" control={control}>
                                 <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
                                     {' '}

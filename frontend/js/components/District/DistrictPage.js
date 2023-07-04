@@ -7,13 +7,13 @@ import { baseUrl } from '~/config';
 import type { DistrictPageQuery as DistrictPageQueryType } from '~relay/DistrictPageQuery.graphql';
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import type { GlobalState } from '~/types';
-// import WYSIWYGRender from '~/components/Form/WYSIWYGRender';
 import ProjectHeaderShareButtonsLegacy from '../Project/ProjectHeaderShareButtonsLegacy';
 import AppBox from '../Ui/Primitives/AppBox';
 import Heading from '../Ui/Primitives/Heading';
 import Flex from '../Ui/Primitives/Layout/Flex';
 import DistrictPageMap from './DistrictPageMap';
 import DistrictPageProjectList from './DistrictPageProjectList';
+import WYSIWYGRender from '../Form/WYSIWYGRender';
 
 export type Props = {| districtId: string |};
 
@@ -88,7 +88,7 @@ export const DistrictPageLayout = ({
       <Flex maxWidth="1200px" margin="auto" mb={6} px={[3]} justify="space-between">
         <Flex direction="column" minWidth={['100%', '60%']} maxWidth={['100%', '60%']}>
           <AppBox maxWidth={['100%', '90%']} mb={[8, 0]}>
-            {district.description}
+            <WYSIWYGRender value={district.description} />
           </AppBox>
           {!isMobile ? (
             <ProjectHeaderShareButtonsLegacy

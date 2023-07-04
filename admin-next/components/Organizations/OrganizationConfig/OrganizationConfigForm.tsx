@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Flex, toast } from '@cap-collectif/ui';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import OrganizationConfigFormGeneral from './OrganizationConfigFormGeneral';
 import { useIntl } from 'react-intl';
 import OrganizationConfigFormSide from './OrganizationConfigFormSide';
@@ -94,11 +94,13 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
     const query = useLazyLoadQuery<OrganizationConfigFormQuery>(QUERY, {});
     const defaultLocale = query.availableLocales.find(locale => locale.isDefault);
     const organization = useFragment(FRAGMENT, orgRef);
-
-    const { handleSubmit, formState, control } = useForm<FormValues>({
+    const methods= useForm<FormValues>({
         mode: 'onChange',
         defaultValues: getInitialValues(organization, intl),
     });
+
+    const { handleSubmit, formState, control } = methods;
+
     const onSubmit = (values: FormValues) => {
         const input: UpdateOrganizationInput = {
             organizationId: organization?.id || '',
@@ -133,11 +135,13 @@ const OrganizationConfigForm: React.FC<OrganizationConfigFormProps> = ({
             spacing={6}>
             <Flex direction="row" width="100%" spacing={6}>
                 <Flex direction="column" spacing={6} width="70%">
-                    <OrganizationConfigFormGeneral
-                        control={control}
-                        organization={organization}
-                        query={query}
-                    />
+                    <FormProvider {...methods}>
+                        <OrganizationConfigFormGeneral
+                            control={control}
+                            organization={organization}
+                            query={query}
+                        />
+                    </FormProvider>
                     <OrganizationConfigFormMembers organization={organization} />
                     <Flex direction="row" spacing={4}>
                         <Button type="submit" isLoading={isSubmitting}>

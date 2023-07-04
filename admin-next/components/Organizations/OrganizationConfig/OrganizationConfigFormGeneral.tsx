@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Control } from 'react-hook-form';
+import { Control, useFormContext } from 'react-hook-form';
 import { FormValues } from './OrganizationConfigForm';
 import { CapUIIcon, Card, Flex, FormLabel, Heading, Icon, Link, Text } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
@@ -10,6 +10,7 @@ import { graphql, useFragment } from 'react-relay';
 import { OrganizationConfigFormGeneral_organization$key } from '@relay/OrganizationConfigFormGeneral_organization.graphql';
 import { OrganizationConfigFormGeneral_query$key } from '@relay/OrganizationConfigFormGeneral_query.graphql';
 import { mutationErrorToast } from 'utils/mutation-error-toast';
+import TextEditor from '@components/Form/TextEditor/TextEditor';
 
 export interface OrganizationConfigFormGeneralProps {
     control: Control<FormValues>;
@@ -43,6 +44,7 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
     const organization = useFragment(ORGANIZATION_FRAGMENT, organizationRef);
     const query = useFragment(QUERY_FRAGMENT, queryRef);
     const defaultLocale = query.availableLocales.find(locale => locale.isDefault);
+    const methods = useFormContext();
 
     const onTitleChange = debounce(async (title: string) => {
         try {
@@ -105,26 +107,15 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
                         })}
                     />
                 </FormControl>
-                <FormControl name="body" control={control}>
-                    <FormLabel
-                        htmlFor="body"
-                        label={intl.formatMessage({ id: 'organisation.description' })}>
-                        <Text fontSize={2} color="gray.500">
-                            {intl.formatMessage({ id: 'global.optional' })}
-                        </Text>
-                    </FormLabel>
-
-                    <FieldInput
-                        id="body"
-                        name="body"
-                        control={control}
-                        type="textarea"
-                        maxLength={280}
-                        placeholder={intl.formatMessage({
-                            id: 'admiun.project.create.title.placeholder',
-                        })}
-                    />
-                </FormControl>
+                <TextEditor
+                    name="body"
+                    placeholder={intl.formatMessage({
+                        id: 'city-neighbourhood-placeholder',
+                    })}
+                    label={intl.formatMessage({ id: 'organisation.description' })}
+                    platformLanguage={defaultLocale?.code}
+                    selectedLanguage={defaultLocale?.code || 'fr'}
+                />
             </Flex>
         </Flex>
     );

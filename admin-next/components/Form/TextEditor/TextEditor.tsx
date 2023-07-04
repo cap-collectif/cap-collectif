@@ -70,7 +70,8 @@ const TextEditor: React.FC<TextEditorProps> = ({
                     hideOnClickOutside={false}
                     size={CapUIModalSize.Xl}
                     ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
-                    onClose={() => setIsOpen(false)}>
+                    onClose={() => setIsOpen(false)}
+                    forceModalDialogToFalse>
                     <Modal.Header>
                         <Modal.Header.Label>
                             {intl.formatMessage({ id: 'advanced-editor' })}
