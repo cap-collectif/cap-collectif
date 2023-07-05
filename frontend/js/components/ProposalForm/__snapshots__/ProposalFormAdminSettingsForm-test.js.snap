@@ -1,5 +1,130 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProposalFormAdminSettingsForm /> organizationMember can toggle comments 1`] = `
+<div
+  className="box box-primary container-fluid mt-10"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="global.params"
+        values={Object {}}
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.form.settings"
+      rel="noopener noreferrer"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <h4>
+        <FormattedMessage
+          id="global.general"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="global.title"
+        label={
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        }
+        name="title"
+        type="text"
+      />
+      <h4>
+        <FormattedMessage
+          id="global.options"
+          values={Object {}}
+        />
+      </h4>
+      <Field
+        component={[Function]}
+        id="proposal_form_commentable"
+        name="commentable"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.commentable"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_costable"
+        name="costable"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="proposal_form.costable"
+          values={Object {}}
+        />
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="parameters-submit"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </form>
+  </div>
+</div>
+`;
+
 exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
 <div
   className="box box-primary container-fluid mt-10"

@@ -6,11 +6,12 @@ import { ProposalFormAdminSettingsForm } from './ProposalFormAdminSettingsForm';
 import { $refType, intlMock, formMock } from '../../mocks';
 
 describe('<ProposalFormAdminSettingsForm />', () => {
-  const props = {
+  const defaultProps = {
     intl: intlMock,
     ...formMock,
     isSuperAdmin: true,
     isAdmin: true,
+    isOrganizationMember: false,
     proposalForm: {
       $refType,
       id: 'proposalFormId',
@@ -22,6 +23,17 @@ describe('<ProposalFormAdminSettingsForm />', () => {
   };
 
   it('render correctly', () => {
+    const wrapper = shallow(<ProposalFormAdminSettingsForm {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('organizationMember can toggle comments', () => {
+    const props = {
+      ...defaultProps,
+      isSuperAdmin: false,
+      isAdmin: false,
+      isOrganizationMember: true,
+    };
     const wrapper = shallow(<ProposalFormAdminSettingsForm {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
