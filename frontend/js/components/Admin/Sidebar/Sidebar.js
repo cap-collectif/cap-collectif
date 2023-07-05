@@ -421,7 +421,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
               </SidebarAccordionItem>
             ) : null}
           </Accordion>
-          {features.unstable__organizations && (isAdmin || isAdminOrganization) ? (
+          {features.organizations && (isAdmin || isAdminOrganization) ? (
             <SidebarLink
               text="admin.label.organizations"
               href={
@@ -434,11 +434,10 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
               fontSize={3}
               p={3}
               width="100%"
-              beta
             />
           ) : null}
 
-          {(features.beta__analytics_page && !organizationId) ? (
+          {features.analytics_page && !organizationId ? (
             <SidebarLink
               text="admin.label.analytics"
               href="/admin-next/dashboard"
@@ -447,7 +446,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): React.Node => 
               fontSize={3}
               p={3}
               width="100%"
-              beta
             />
           ) : null}
         </Flex>

@@ -95,7 +95,7 @@ export const features: FeatureToggles = {
   unstable__new_consultation_page: false,
   new_project_card: false,
   import_proposals: false,
-  beta__analytics_page: false,
+  analytics_page: false,
   http_redirects: false,
   unstable__project_admin: false,
   noindex_on_profiles: false,
@@ -104,7 +104,7 @@ export const features: FeatureToggles = {
   unstable__paper_vote: false,
   helpscout_beacon: false,
   proposal_sms_vote: false,
-  unstable__organizations: false,
+  organizations: false,
   moderation_comment: false,
 };
 

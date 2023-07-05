@@ -76,7 +76,7 @@ class Manager
     public const new_project_card = 'new_project_card';
     public const export_legacy_users = 'export_legacy_users';
     public const import_proposals = 'import_proposals';
-    public const beta__analytics_page = 'beta__analytics_page';
+    public const analytics_page = 'analytics_page';
     public const unstable__project_admin = 'unstable__project_admin';
     public const unstable__anonymous_questionnaire = 'unstable__anonymous_questionnaire';
     public const twilio = 'twilio';
@@ -84,7 +84,7 @@ class Manager
     public const helpscout_beacon = 'helpscout_beacon';
     public const api_sendinblue = 'api_sendinblue';
     public const proposal_sms_vote = 'proposal_sms_vote';
-    public const unstable__organizations = 'unstable__organizations';
+    public const organizations = 'organizations';
     public const moderation_comment = 'moderation_comment';
     public const unstable__new_create_project = 'unstable__new_create_project';
     public const new_vote_step = 'new_vote_step';
@@ -182,7 +182,7 @@ class Manager
         self::new_project_card,
         self::export_legacy_users,
         self::import_proposals,
-        self::beta__analytics_page,
+        self::analytics_page,
         self::unstable__project_admin,
         self::unstable__anonymous_questionnaire,
         self::twilio,
@@ -190,7 +190,7 @@ class Manager
         self::helpscout_beacon,
         self::api_sendinblue,
         self::proposal_sms_vote,
-        self::unstable__organizations,
+        self::organizations,
         self::moderation_comment,
         self::unstable__new_create_project,
         self::new_vote_step,

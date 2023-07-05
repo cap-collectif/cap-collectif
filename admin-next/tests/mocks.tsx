@@ -73,7 +73,7 @@ export const features: FeatureFlags = {
     unstable__new_consultation_page: false,
     new_project_card: false,
     import_proposals: false,
-    beta__analytics_page: false,
+    analytics_page: false,
     http_redirects: false,
     unstable__project_admin: false,
     noindex_on_profiles: false,

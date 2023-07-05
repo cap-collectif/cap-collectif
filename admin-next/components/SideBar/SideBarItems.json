@@ -195,10 +195,10 @@
         "id": "organizations",
         "title": "admin.label.organizations",
         "icon": "ORGANIZATION",
-        "featuresRequired": ["unstable__organizations"],
+        "featuresRequired": ["organizations"],
         "rolesRequired": [],
         "href": "/admin-next/organizations",
-        "beta": true,
+        "beta": false,
         "items": []
     },
     {
@@ -436,10 +436,10 @@
         "id": "analytics",
         "title": "admin.label.analytics",
         "icon": "PIE_CHART",
-        "featuresRequired": ["beta__analytics_page"],
+        "featuresRequired": ["analytics_page"],
         "rolesRequired": [],
         "href": "/admin-next/dashboard",
-        "beta": true,
+        "beta": false,
         "items": []
     }
 ]

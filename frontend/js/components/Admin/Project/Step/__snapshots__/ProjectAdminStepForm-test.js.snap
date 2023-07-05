@@ -288,8 +288,8 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
             features={
               Object {
                 "allow_users_to_propose_events": false,
+                "analytics_page": false,
                 "beta__admin_editor": false,
-                "beta__analytics_page": false,
                 "beta__emailing": false,
                 "beta__emailing_parameters": false,
                 "beta__questionnaire_result": false,
@@ -319,6 +319,7 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                 "newsletter": false,
                 "noindex_on_profiles": false,
                 "oauth2_switch_user": false,
+                "organizations": false,
                 "phone_confirmation": false,
                 "privacy_policy": false,
                 "profiles": false,
@@ -342,7 +343,6 @@ exports[`<ProjectAdminStepForm /> renders correctly 1`] = `
                 "twilio": false,
                 "unstable__anonymous_questionnaire": false,
                 "unstable__new_consultation_page": false,
-                "unstable__organizations": false,
                 "unstable__paper_vote": false,
                 "unstable__project_admin": false,
                 "user_type": false,
@@ -718,8 +718,8 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
             features={
               Object {
                 "allow_users_to_propose_events": false,
+                "analytics_page": false,
                 "beta__admin_editor": false,
-                "beta__analytics_page": false,
                 "beta__emailing": false,
                 "beta__emailing_parameters": false,
                 "beta__questionnaire_result": false,
@@ -749,6 +749,7 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
                 "newsletter": false,
                 "noindex_on_profiles": false,
                 "oauth2_switch_user": false,
+                "organizations": false,
                 "phone_confirmation": false,
                 "privacy_policy": false,
                 "profiles": false,
@@ -772,7 +773,6 @@ exports[`<ProjectAdminStepForm /> renders correctly when form creating 1`] = `
                 "twilio": false,
                 "unstable__anonymous_questionnaire": false,
                 "unstable__new_consultation_page": false,
-                "unstable__organizations": false,
                 "unstable__paper_vote": false,
                 "unstable__project_admin": false,
                 "user_type": false,

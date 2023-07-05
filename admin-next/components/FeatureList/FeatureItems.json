@@ -81,7 +81,7 @@
                         "description": "description.module.helpscout-beacon",
                         "onlySuperAdmin": true
                     },
-                    "unstable__organizations": {
+                    "organizations": {
                         "title": "capco.module.organizations",
                         "description": "description.module.organizations",
                         "onlySuperAdmin": true
@@ -288,7 +288,7 @@
                         "description": "description.module.report_browers_errors_to_sentry",
                         "onlySuperAdmin": false
                     },
-                    "beta__analytics_page": {
+                    "analytics_page": {
                         "title": "capco.module.analytics_page",
                         "description": "",
                         "onlySuperAdmin": false

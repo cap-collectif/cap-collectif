@@ -135,8 +135,8 @@ InternalFeatureFlagType:
             import_proposals:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::import_proposals")'
                 description: 'Whether or not admin can mass import proposals in BO.'
-            beta__analytics_page:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__analytics_page")'
+            analytics_page:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::analytics_page")'
                 description: 'Whether or not the analytics page is visible in BO.'
             unstable__project_admin:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__project_admin")'
@@ -164,8 +164,8 @@ InternalFeatureFlagType:
             proposal_sms_vote:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_sms_vote")'
                 description: 'Whether or not proposal sms vote is enabled'
-            unstable__organizations:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__organizations")'
+            organizations:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::organizations")'
                 description: 'Whether or not organizations are enabled'
             moderation_comment:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::moderation_comment")'

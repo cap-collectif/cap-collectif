@@ -95,7 +95,7 @@ export type FeatureToggles = {
   unstable__new_consultation_page: ?boolean,
   new_project_card: ?boolean,
   import_proposals: ?boolean,
-  beta__analytics_page: ?boolean,
+  analytics_page: ?boolean,
   unstable__project_admin: ?boolean,
   http_redirects: ?boolean,
   noindex_on_profiles: ?boolean,
@@ -104,7 +104,7 @@ export type FeatureToggles = {
   unstable__paper_vote: ?boolean,
   helpscout_beacon: ?boolean,
   proposal_sms_vote: ?boolean,
-  unstable__organizations: ?boolean,
+  organizations: ?boolean,
   moderation_comment: ?boolean,
 };
 

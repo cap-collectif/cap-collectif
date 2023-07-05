@@ -99,7 +99,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::new_project_card);
         $this->manager->deactivate(Manager::export_legacy_users);
         $this->manager->activate(Manager::import_proposals);
-        $this->manager->deactivate(Manager::beta__analytics_page);
+        $this->manager->deactivate(Manager::analytics_page);
         $this->manager->activate(Manager::unstable__project_admin);
         $this->manager->deactivate(Manager::noindex_on_profiles);
         $this->manager->activate(Manager::unstable__paper_vote);
@@ -113,7 +113,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::sentry_log);
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
-            $this->manager->deactivate(Manager::beta__analytics_page);
+            $this->manager->deactivate(Manager::analytics_page);
             $this->manager->deactivate(Manager::unstable__paper_vote);
         }
 
@@ -138,7 +138,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::unstable__new_consultation_page);
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
-            $this->manager->deactivate(Manager::beta__analytics_page);
+            $this->manager->deactivate(Manager::analytics_page);
             $this->manager->deactivate(Manager::unstable__project_admin);
             $this->manager->deactivate(Manager::unstable__paper_vote);
             $this->manager->activate(Manager::secure_password);
