@@ -6,6 +6,7 @@ use Capco\AppBundle\Enum\UpdateUserEmailErrorCode;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Security\RateLimiter;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
@@ -14,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Toggle\Manager;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -63,8 +63,8 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         $password = $arguments['passwordConfirm'];
         $encoder = $this->encoderFactory->getEncoder($viewer);
         if (
-            $viewer->hasPassword() &&
-            !$encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt())
+            $viewer->hasPassword()
+            && !$encoder->isPasswordValid($viewer->getPassword(), $password, $viewer->getSalt())
         ) {
             return ['error' => UpdateUserEmailErrorCode::SPECIFY_PASSWORD];
         }
@@ -82,8 +82,8 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         }
 
         if (
-            $this->toggleManager->isActive('restrict_registration_via_email_domain') &&
-            !$this->emailDomainRepository->findOneBy([
+            $this->toggleManager->isActive('restrict_registration_via_email_domain')
+            && !$this->emailDomainRepository->findOneBy([
                 'value' => explode('@', $newEmailToConfirm)[1],
             ])
         ) {

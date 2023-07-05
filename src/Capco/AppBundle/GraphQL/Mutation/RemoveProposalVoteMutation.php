@@ -2,25 +2,25 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class RemoveProposalVoteMutation implements MutationInterface
 {

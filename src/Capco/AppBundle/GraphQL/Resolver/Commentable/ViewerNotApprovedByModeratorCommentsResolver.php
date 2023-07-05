@@ -73,12 +73,15 @@ class ViewerNotApprovedByModeratorCommentsResolver implements ResolverInterface
             case $commentable instanceof Proposal:
             case $commentable instanceof ProposalComment:
                 return $this->proposalCommentRepository;
+
             case $commentable instanceof Event:
             case $commentable instanceof EventComment:
                 return $this->eventCommentRepository;
+
             case $commentable instanceof Post:
             case $commentable instanceof PostComment:
                 return $this->postCommentRepository;
+
             default:
                 return null;
         }

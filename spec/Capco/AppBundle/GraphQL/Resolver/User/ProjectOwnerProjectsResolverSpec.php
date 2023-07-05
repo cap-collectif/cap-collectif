@@ -7,8 +7,8 @@ use Capco\AppBundle\GraphQL\Resolver\User\ProjectOwnerProjectsResolver;
 use Capco\AppBundle\Search\ProjectSearch;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use PhpSpec\ObjectBehavior;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 
 class ProjectOwnerProjectsResolverSpec extends ObjectBehavior
 {
@@ -56,7 +56,8 @@ class ProjectOwnerProjectsResolverSpec extends ObjectBehavior
         $projectSearch
             ->searchProjects($offset, $limit, $orderBy, $query, $filters, $affiliations, $user)
             ->shouldBeCalled()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $this->__invoke($user, $args)->shouldReturnConnection();
     }

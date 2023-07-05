@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Enum\OpinionOrderField;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OpinionVotesResolver implements ResolverInterface
 {
@@ -67,7 +67,8 @@ class OpinionVotesResolver implements ResolverInterface
                         $direction
                     )
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $totalCount = $repo->countByContributionAndValue($contribution, $value);
 
@@ -83,7 +84,8 @@ class OpinionVotesResolver implements ResolverInterface
             return $repo
                 ->getByContribution($contribution, $limit, $offset, $field, $direction)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
         $totalCount = $repo->countByContribution($contribution);
 

@@ -62,7 +62,8 @@ abstract class AbstractImportCsvCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'True to test the file with no real import',
                 false
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -127,7 +128,7 @@ abstract class AbstractImportCsvCommand extends Command
         if (!empty($errors)) {
             foreach ($errors as $line => $rowErrors) {
                 $output->writeln(
-                    "<error>On line ${line} : " . implode(', ', $rowErrors) . '</error>'
+                    "<error>On line {$line} : " . implode(', ', $rowErrors) . '</error>'
                 );
             }
             $output->writeln('<error>' . \count($errors) . ' lines with errors</error>');

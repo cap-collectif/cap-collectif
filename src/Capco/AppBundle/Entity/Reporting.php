@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
-use Capco\AppBundle\Model\ReportableInterface;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\IdTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Enum\ReportingStatus;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Enum\ReportingStatus;
+use Capco\AppBundle\Model\CreatableInterface;
+use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

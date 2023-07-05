@@ -59,13 +59,15 @@ class CommentResolver
         if ($object instanceof Event) {
             return $this->em
                 ->getRepository('CapcoAppBundle:EventComment')
-                ->getEnabledByEvent($object);
+                ->getEnabledByEvent($object)
+            ;
         }
 
         if ($object instanceof Post) {
             return $this->em
                 ->getRepository('CapcoAppBundle:PostComment')
-                ->getEnabledByPost($object);
+                ->getEnabledByPost($object)
+            ;
         }
     }
 

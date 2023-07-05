@@ -2,20 +2,20 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Type;
 
-use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
-use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
-use PhpSpec\ObjectBehavior;
-use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
+use Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
+use PhpSpec\ObjectBehavior;
 
 class NodeTypeResolverSpec extends ObjectBehavior
 {
@@ -49,7 +49,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $typeResolver
             ->resolve('InternalDebate')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
         $this->__invoke($debate)->shouldReturn($type);
     }
 
@@ -62,7 +63,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $typeResolver
             ->resolve('InternalDebateStep')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
         $this->__invoke($debateStep)->shouldReturn($type);
     }
 
@@ -75,7 +77,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $typeResolver
             ->resolve('InternalDebateOpinion')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
         $this->__invoke($debateOpinion)->shouldReturn($type);
     }
 
@@ -88,7 +91,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $typeResolver
             ->resolve('InternalDebateArgument')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
         $this->__invoke($debateArgument)->shouldReturn($type);
     }
 
@@ -101,7 +105,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $typeResolver
             ->resolve('InternalDebateArticle')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
         $this->__invoke($article)->shouldReturn($type);
     }
 
@@ -115,7 +120,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         $responseTypeResolver
             ->__invoke($response)
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
 
         $this->__invoke($response)->shouldReturn($type);
     }

@@ -33,12 +33,12 @@ use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\SocialNetworksValueTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\SocialNetworksValueTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -66,15 +66,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasAddressIfMandatory()
  * @CapcoAssert\HasAuthor()
  */
-class Proposal implements
-    Publishable,
-    Contribution,
-    CommentableInterface,
-    SelfLinkableInterface,
-    SoftDeleteable,
-    DisplayableInBOInterface,
-    DraftableInterface,
-    ReportableInterface
+class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface
 {
     use AddressableTrait;
     use AuthorableTrait;
@@ -810,6 +802,8 @@ class Proposal implements
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
@@ -851,8 +845,8 @@ class Proposal implements
                 return true;
             }
             if (
-                $this->getDecisionMaker() &&
-                $viewer->getId() === $this->getDecisionMaker()->getId()
+                $this->getDecisionMaker()
+                && $viewer->getId() === $this->getDecisionMaker()->getId()
             ) {
                 return true;
             }
@@ -898,7 +892,7 @@ class Proposal implements
     public function isInRevision(): bool
     {
         $revisions = $this->getRevisions()->filter(
-            fn(ProposalRevision $revision) => ProposalRevisionStateType::PENDING ===
+            fn (ProposalRevision $revision) => ProposalRevisionStateType::PENDING ===
                 $revision->getState()
         );
 
@@ -908,21 +902,21 @@ class Proposal implements
     public function canContribute($viewer = null): bool
     {
         $canContribute =
-            ($this->isPublished() || $this->isDraft()) &&
-            !$this->isTrashed() &&
-            $this->getStep() &&
-            $this->getStep()->canContribute($viewer);
+            ($this->isPublished() || $this->isDraft())
+            && !$this->isTrashed()
+            && $this->getStep()
+            && $this->getStep()->canContribute($viewer);
 
         return $canContribute || ($viewer === $this->getAuthor() && $this->isInRevision());
     }
 
     public function acceptNewComments(): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->proposalForm &&
-            $this->proposalForm->isCommentable() &&
-            $this->isCommentable();
+        return $this->isPublished()
+            && !$this->isTrashed()
+            && $this->proposalForm
+            && $this->proposalForm->isCommentable()
+            && $this->isCommentable();
     }
 
     public function getEstimation(): ?float
@@ -972,15 +966,16 @@ class Proposal implements
     public function getProject(): ?Project
     {
         if (
-            $this->getProposalForm() &&
-            $this->getProposalForm()->getStep() &&
             $this->getProposalForm()
+            && $this->getProposalForm()->getStep()
+            && $this->getProposalForm()
                 ->getStep()
                 ->getProject()
         ) {
             return $this->getProposalForm()
                 ->getStep()
-                ->getProject();
+                ->getProject()
+            ;
         }
 
         return null;
@@ -989,15 +984,16 @@ class Proposal implements
     public function getProjectId(): ?string
     {
         if (
-            $this->getProposalForm() &&
-            $this->getProposalForm()->getStep() &&
             $this->getProposalForm()
+            && $this->getProposalForm()->getStep()
+            && $this->getProposalForm()
                 ->getStep()
                 ->getProject()
         ) {
             return $this->getProposalForm()
                 ->getStep()
-                ->getProjectId();
+                ->getProjectId()
+            ;
         }
 
         return null;
@@ -1178,19 +1174,20 @@ class Proposal implements
             return false;
         }
 
-        return $this->getProposalForm() &&
-            $this->getProposalForm()->getStep() &&
-            $this->getProposalForm()
+        return $this->getProposalForm()
+            && $this->getProposalForm()->getStep()
+            && $this->getProposalForm()
                 ->getStep()
-                ->getProject() &&
-            $this->getProposalForm()
+                ->getProject()
+            && $this->getProposalForm()
                 ->getStep()
                 ->getProject()
                 ->getSteps()
                 ->exists(function ($key, $step) {
-                    return $step->getStep()->isSelectionStep() &&
-                        $step->getStep()->isAllowingProgressSteps();
-                });
+                    return $step->getStep()->isSelectionStep()
+                        && $step->getStep()->isAllowingProgressSteps();
+                })
+            ;
     }
 
     public function getMedia(): ?Media
@@ -1598,17 +1595,17 @@ class Proposal implements
             $step = $pas->getStep();
 
             if (
-                $step instanceof CollectStep &&
-                $step->isAllowAuthorsToAddNews() &&
-                $step->isOpen()
+                $step instanceof CollectStep
+                && $step->isAllowAuthorsToAddNews()
+                && $step->isOpen()
             ) {
                 return true;
             }
             if (
-                $step instanceof SelectionStep &&
-                $selectionSteps->contains($step) &&
-                $step->isAllowAuthorsToAddNews() &&
-                $step->isOpen()
+                $step instanceof SelectionStep
+                && $selectionSteps->contains($step)
+                && $step->isAllowAuthorsToAddNews()
+                && $step->isOpen()
             ) {
                 return true;
             }

@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method ProposalStepPaperVoteCounter|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProposalStepPaperVoteCounter|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|ProposalStepPaperVoteCounter find($id, $lockMode = null, $lockVersion = null)
+ * @method null|ProposalStepPaperVoteCounter findOneBy(array $criteria, array $orderBy = null)
  * @method ProposalStepPaperVoteCounter[]    findAll()
  * @method ProposalStepPaperVoteCounter[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -29,6 +29,14 @@ class ProposalStepPaperVoteCounterRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function countAll(): int
+    {
+        return $this->createQueryBuilder('pspvc')
+            ->select('SUM(pspvc.totalCount)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
+
     private function createByProjectQueryBuilder(Project $project): QueryBuilder
     {
         return $this->createQueryBuilder('pspvc')
@@ -36,14 +44,7 @@ class ProposalStepPaperVoteCounterRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'project')
             ->andWhere('pas.project = :project')
-            ->setParameter('project', $project);
-    }
-
-    public function countAll(): int
-    {
-        return $this->createQueryBuilder('pspvc')
-            ->select('SUM(pspvc.totalCount)')
-            ->getQuery()
-            ->getSingleScalarResult() ?? 0;
+            ->setParameter('project', $project)
+        ;
     }
 }

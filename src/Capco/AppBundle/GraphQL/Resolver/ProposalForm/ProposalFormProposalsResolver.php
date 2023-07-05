@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\ProposalForm;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {

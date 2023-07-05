@@ -18,7 +18,8 @@ class ProposalNotationType extends AbstractType
             ])
             ->add('likers', null, [
                 'by_reference' => false,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

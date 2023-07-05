@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UnstarResponseMutation extends StarResponseMutation
 {
-    const NOT_STARRED = 'NOT_STARRED';
+    public const NOT_STARRED = 'NOT_STARRED';
 
     public function __invoke(Argument $argument, User $viewer): array
     {

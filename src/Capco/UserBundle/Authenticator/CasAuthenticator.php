@@ -17,26 +17,12 @@ use Symfony\Component\Security\Http\HttpUtils;
  */
 class CasAuthenticator implements SimplePreAuthenticatorInterface
 {
-    /**
-     * @var HttpUtils
-     */
     protected HttpUtils $httpUtils;
 
-    /**
-     * @var LoggerInterface
-     */
     protected LoggerInterface $logger;
 
-    /**
-     * @var CasHandler
-     */
     protected CasHandler $casHandler;
 
-    /**
-     * @param HttpUtils $httpUtils
-     * @param LoggerInterface $logger
-     * @param CasHandler $casHandler
-     */
     public function __construct(
         HttpUtils $httpUtils,
         LoggerInterface $logger,
@@ -48,8 +34,8 @@ class CasAuthenticator implements SimplePreAuthenticatorInterface
     }
 
     /**
-     * @param Request $request
      * @param $providerKey
+     *
      * @return CASToken|void
      */
     public function createToken(Request $request, $providerKey)
@@ -75,6 +61,7 @@ class CasAuthenticator implements SimplePreAuthenticatorInterface
 
         if (empty($casId)) {
             $this->logger->debug('no cas authentication used');
+
             return;
         }
 
@@ -88,10 +75,7 @@ class CasAuthenticator implements SimplePreAuthenticatorInterface
     }
 
     /**
-     * @param TokenInterface $token
-     * @param UserProviderInterface $userProvider
      * @param $providerKey
-     * @return CASToken
      */
     public function authenticateToken(
         TokenInterface $token,
@@ -113,9 +97,7 @@ class CasAuthenticator implements SimplePreAuthenticatorInterface
     }
 
     /**
-     * @param TokenInterface $token
      * @param $providerKey
-     * @return bool
      */
     public function supportsToken(TokenInterface $token, $providerKey): bool
     {

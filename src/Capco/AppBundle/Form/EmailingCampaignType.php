@@ -8,9 +8,9 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Form\Type\RelayNodeType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -75,6 +75,7 @@ class EmailingCampaignType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',
-            ]);
+            ])
+        ;
     }
 }

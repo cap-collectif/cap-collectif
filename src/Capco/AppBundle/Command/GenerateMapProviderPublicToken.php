@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Client\MapboxClient;
-use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Enum\MapProviderEnum;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Capco\AppBundle\Repository\MapTokenRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateMapProviderPublicToken extends Command
 {
     public const MAPBOX_USERNAME = 'capcollectif';
 
-    const MAPBOX_PUBLIC_TOKEN_SCOPES = [
+    public const MAPBOX_PUBLIC_TOKEN_SCOPES = [
         'styles:tiles',
         'styles:read',
         'fonts:read',
@@ -124,7 +124,8 @@ class GenerateMapProviderPublicToken extends Command
             ->post([
                 'scopes' => self::MAPBOX_PUBLIC_TOKEN_SCOPES,
                 'note' => 'Public token for ' . $sitename,
-            ]);
+            ])
+        ;
 
         if (isset($response['token'])) {
             $provider->setPublicToken($response['token'])->setSecretToken($this->mapboxSecretKey);

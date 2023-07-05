@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Doctrine\DBAL\Driver\DriverException;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Debate\DebateVote;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\DebateVoteRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 
 class AddDebateVoteMutation implements MutationInterface
 {
@@ -115,7 +115,8 @@ class AddDebateVoteMutation implements MutationInterface
         return $vote
             ->setUser($viewer)
             ->setNavigator($this->requestGuesser->getUserAgent())
-            ->setIpAddress($this->requestGuesser->getClientIp());
+            ->setIpAddress($this->requestGuesser->getClientIp())
+        ;
     }
 
     private static function setOrigin(DebateVote $vote, Arg $input): DebateVote

@@ -95,10 +95,10 @@ class ExportDebateCommand extends BaseExportCommand
         bool $projectAdmin = false
     ): string {
         if ($projectAdmin) {
-            return self::getShortenedFilename("debate-${debateId}-${type}-project-admin");
+            return self::getShortenedFilename("debate-{$debateId}-{$type}-project-admin");
         }
 
-        return self::getShortenedFilename("debate-${debateId}-${type}");
+        return self::getShortenedFilename("debate-{$debateId}-{$type}");
     }
 
     protected function configure(): void
@@ -138,7 +138,7 @@ class ExportDebateCommand extends BaseExportCommand
 
             $debate = $this->debateRepository->find($debateId);
             $owner = $debate ? $debate->getProject()->getOwner() : null;
-            $isProjectAdmin = $owner instanceOf User && $owner->isOnlyProjectAdmin();
+            $isProjectAdmin = $owner instanceof User && $owner->isOnlyProjectAdmin();
             $geoIp = $input->getOption('geoip');
 
             $url = $this->loadDataAndGetUrl(
@@ -238,7 +238,7 @@ class ExportDebateCommand extends BaseExportCommand
         bool $projectAdmin = false,
         bool $geoIp = false
     ): void {
-        $output->writeln("<info>Generating ${type} of debate ${debateId}...</info>");
+        $output->writeln("<info>Generating {$type} of debate {$debateId}...</info>");
         $path = $this->getPath($debateId, $type, $projectAdmin);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
@@ -269,7 +269,7 @@ class ExportDebateCommand extends BaseExportCommand
         }
 
         if ($isVerbose) {
-            $output->writeln("<info>\tPath : ${path}</info>");
+            $output->writeln("<info>\tPath : {$path}</info>");
         }
     }
 
@@ -314,8 +314,8 @@ class ExportDebateCommand extends BaseExportCommand
         }
 
         if ($isVerbose) {
-            $output->writeln("\t<info>Adding ${forCount} ${type} FOR.</info>");
-            $output->writeln("\t<info>Adding ${againstCount} ${type} AGAINST.</info>");
+            $output->writeln("\t<info>Adding {$forCount} {$type} FOR.</info>");
+            $output->writeln("\t<info>Adding {$againstCount} {$type} AGAINST.</info>");
         }
     }
 
@@ -430,12 +430,13 @@ class ExportDebateCommand extends BaseExportCommand
                     ),
                     'variables' => [],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
             if (isset($data['errors']) && !empty($data['errors'])) {
                 throw new \RuntimeException($data['errors'][0]['message']);
             }
             if (null === $data) {
-                throw new \RuntimeException("debate not found : ${debateId}");
+                throw new \RuntimeException("debate not found : {$debateId}");
             }
 
             $url = $data['data']['node']['url'];
@@ -509,83 +510,83 @@ class ExportDebateCommand extends BaseExportCommand
             : '';
 
         return <<<EOF
-{$USER_TYPE_FRAGMENT}
-{$AUTHOR_INFOS_FRAGMENT}
-{
-  node(id: "${debateId}") {
-    ... on Debate {
-      id
-      url
-      arguments ${argumentsOptions} {
-        edges {
-          node {
-            createdAt
-            publishedAt
-            updatedAt
-            trashedAt
-            trashedReason
-            ${geoIpPart}
-            ... on DebateArgument {
-              author {
-                zipCode
-                ...authorInfos
-                consentInternalCommunication
-                consentExternalCommunication
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {
+              node(id: "{$debateId}") {
+                ... on Debate {
+                  id
+                  url
+                  arguments {$argumentsOptions} {
+                    edges {
+                      node {
+                        createdAt
+                        publishedAt
+                        updatedAt
+                        trashedAt
+                        trashedReason
+                        {$geoIpPart}
+                        ... on DebateArgument {
+                          author {
+                            zipCode
+                            ...authorInfos
+                            consentInternalCommunication
+                            consentExternalCommunication
+                          }
+                        }
+                        ... on DebateAnonymousArgument {
+                            username
+                            email
+                            consentInternalCommunication
+                        }
+                        body
+                        type
+                        votes {
+                          totalCount
+                        }
+                      }
+                    }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
+                  }
+                  votes {$votesOptions} {
+                    edges {
+                      node {
+                        publishedAt
+                        type
+                        origin
+                        widgetOriginUrl
+                        ...on DebateAnonymousVote {
+                          geoip {
+                            countryName
+                            regionName
+                            cityName
+                          }
+                        }
+                        ...on DebateVote {
+                          geoip {
+                            countryName
+                            regionName
+                            cityName
+                          }
+                          author {
+                            zipCode
+                            ...authorInfos
+                          }
+                        }
+                      }
+                    }
+                    pageInfo {
+                      hasNextPage
+                      endCursor
+                    }
+                  }
+                }
               }
             }
-            ... on DebateAnonymousArgument {
-                username
-                email
-                consentInternalCommunication
-            }
-            body
-            type
-            votes {
-              totalCount
-            }
-          }
-        }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-      }
-      votes ${votesOptions} {
-        edges {
-          node {
-            publishedAt
-            type
-            origin
-            widgetOriginUrl
-            ...on DebateAnonymousVote {
-              geoip {
-                countryName
-                regionName
-                cityName
-              }
-            }
-            ...on DebateVote {
-              geoip {
-                countryName
-                regionName
-                cityName
-              }
-              author {
-                zipCode
-                ...authorInfos
-              }
-            }
-          }
-        }
-        pageInfo {
-          hasNextPage
-          endCursor
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     private static function getQueryOptions(?string $cursor, ?string $order): string
@@ -615,18 +616,25 @@ EOF;
         switch ($orderOption) {
             case null:
                 return null;
+
             case 'PUBLICATION_DESC':
                 return 'orderBy: {field:PUBLISHED_AT, direction: DESC}';
+
             case 'PUBLICATION_ASC':
                 return 'orderBy: {field:PUBLISHED_AT, direction: ASC}';
+
             case 'CREATION_DESC':
                 return 'orderBy: {field:CREATED_AT, direction: DESC}';
+
             case 'CREATION_ASC':
                 return 'orderBy: {field:CREATED_AT, direction: ASC}';
+
             case 'VOTES_DESC':
                 return 'orderBy: {field:VOTE_COUNT, direction: DESC}';
+
             case 'VOTES_ASC':
                 return 'orderBy: {field:VOTE_COUNT, direction: ASC}';
+
             default:
                 throw new \RuntimeException('unknown order value ' . $orderOption);
         }

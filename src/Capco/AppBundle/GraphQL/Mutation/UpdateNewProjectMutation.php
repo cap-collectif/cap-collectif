@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -15,7 +16,6 @@ use Capco\UserBundle\Form\Type\AlphaProjectFormType;
 use Capco\UserBundle\Form\Type\ProjectAuthorsFormType;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -200,7 +200,8 @@ class UpdateNewProjectMutation implements MutationInterface
             if (!$projectAbstractStep) {
                 $projectAbstractStep = (new ProjectAbstractStep())
                     ->setProject($project)
-                    ->setStep($step);
+                    ->setStep($step)
+                ;
                 $this->em->persist($projectAbstractStep);
             }
             $projectAbstractStep->setPosition($index + 1);
@@ -246,7 +247,7 @@ class UpdateNewProjectMutation implements MutationInterface
 
     private function handleDescription(array &$arguments, Project $project)
     {
-        if (array_key_exists('description', $arguments) === false) {
+        if (false === \array_key_exists('description', $arguments)) {
             return;
         }
 
@@ -283,11 +284,13 @@ class UpdateNewProjectMutation implements MutationInterface
         $presentationStep = (new PresentationStep())
             ->setTitle($title)
             ->setLabel($title)
-            ->setBody($description);
+            ->setBody($description)
+        ;
         $presentationProjectAbstractStep = (new ProjectAbstractStep())
             ->setStep($presentationStep)
             ->setProject($project)
-            ->setPosition(1);
+            ->setPosition(1)
+        ;
 
         $this->em->persist($presentationStep);
         $this->em->persist($presentationProjectAbstractStep);

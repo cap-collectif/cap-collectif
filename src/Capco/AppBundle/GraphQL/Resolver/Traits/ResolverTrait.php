@@ -38,9 +38,9 @@ trait ResolverTrait
     private function isACLDisabled(?\ArrayObject $context = null): bool
     {
         $skipVerification =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         if ($skipVerification) {
             return true;
@@ -51,12 +51,9 @@ trait ResolverTrait
 
     private function isAdminOrAuthorized(?\ArrayObject $context = null, $viewer = null): bool
     {
-        $isAuthorized =
-            ($viewer instanceof User && $viewer->isAdmin()) ||
-            ($context &&
-                $context->offsetExists('disable_acl') &&
-                true === $context->offsetGet('disable_acl'));
-
-        return $isAuthorized;
+        return ($viewer instanceof User && $viewer->isAdmin())
+            || ($context
+                && $context->offsetExists('disable_acl')
+                && true === $context->offsetGet('disable_acl'));
     }
 }

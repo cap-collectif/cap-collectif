@@ -6,12 +6,12 @@ use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Provider\AllowedExtensions;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -57,8 +57,7 @@ class MediasController extends AbstractController
                 'name' => $media->getName(),
                 'id' => $media->getId(),
                 'size' => self::formatBytes($media->getSize()),
-                'url' =>
-                    $request->getUriForPath('/media') .
+                'url' => $request->getUriForPath('/media') .
                     $this->mediaExtension->getMediaUrl($media, 'reference'),
                 'type' => $media->getContentType(),
             ],

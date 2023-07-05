@@ -14,7 +14,7 @@ class FixOpinionTypesTreeCommand extends Command
     private $repository;
 
     public function __construct(
-        string $name = null,
+        ?string $name = null,
         EntityManagerInterface $em,
         OpinionTypeRepository $repository
     ) {

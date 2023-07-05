@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use PhpSpec\ObjectBehavior;
 
 class StepHelperSpec extends ObjectBehavior
 {

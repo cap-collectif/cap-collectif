@@ -60,10 +60,11 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     {
         return $this->debateContentUsingJoditWysiwyg;
     }
-    
-    public function setDebateContentUsingJoditWysiwyg(bool $debateContentUsingJoditWysiwyg): DebateStep
+
+    public function setDebateContentUsingJoditWysiwyg(bool $debateContentUsingJoditWysiwyg): self
     {
         $this->debateContentUsingJoditWysiwyg = $debateContentUsingJoditWysiwyg;
+
         return $this;
     }
 

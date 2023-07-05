@@ -6,25 +6,25 @@ use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationCo
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostTranslation;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProposalNewsMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Prophecy\Argument;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class UpdateProposalNewsMutationSpec extends ObjectBehavior
 {
@@ -117,7 +117,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(false);
         $formFactory
             ->create(ProposalPostType::class, Argument::type(Post::class))
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $arguments->getArrayCopy()->willReturn($values);
 
         $payload = $this->__invoke($arguments, $viewer);
@@ -158,7 +159,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
 
@@ -200,7 +202,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(\Prophecy\Argument::any(), Argument::type(Message::class))
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
 
@@ -237,7 +240,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
 
         $proposalPost
             ->getTranslations()
-            ->willReturn(new ArrayCollection([$proposalPostTranslation->getWrappedObject()]));
+            ->willReturn(new ArrayCollection([$proposalPostTranslation->getWrappedObject()]))
+        ;
 
         $translation = [
             'fr-FR' => [
@@ -260,7 +264,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $formFactory
             ->create(ProposalPostType::class, Argument::type(Post::class))
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $arguments->getArrayCopy()->willReturn($values);
         $localeRepository->findEnabledLocalesCodes()->willReturn(['fr-FR']);
         $em->flush()->shouldBeCalled();

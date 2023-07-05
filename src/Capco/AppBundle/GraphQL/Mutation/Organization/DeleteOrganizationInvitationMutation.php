@@ -26,8 +26,7 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         UserInviteRepository $userInviteRepository
-    )
-    {
+    ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
@@ -38,7 +37,7 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
     {
         $pendingOrganizationInvitationId = $input->offsetGet('invitationId');
 
-        /** * @var $pendingOrganizationInvitation PendingOrganizationInvitation  */
+        /** * @var PendingOrganizationInvitation $pendingOrganizationInvitation  */
         $pendingOrganizationInvitation = $this->globalIdResolver->resolve($pendingOrganizationInvitationId, $viewer);
 
         if (!$pendingOrganizationInvitation) {
@@ -58,7 +57,7 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
 
     public function isGranted(string $pendingOrganizationInvitationId, User $viewer): bool
     {
-        $pendingOrganizationInvitation = $this->globalIdResolver->resolve($pendingOrganizationInvitationId , $viewer);
+        $pendingOrganizationInvitation = $this->globalIdResolver->resolve($pendingOrganizationInvitationId, $viewer);
         if (!$pendingOrganizationInvitation) {
             return false;
         }

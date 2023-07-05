@@ -34,7 +34,8 @@ class PostSearchType extends AbstractType
                     return $tr
                         ->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
-                        ->setParameter('enabled', true);
+                        ->setParameter('enabled', true)
+                    ;
                 },
                 'placeholder' => 'global.select_themes',
                 'attr' => ['onchange' => 'this.form.submit()'],

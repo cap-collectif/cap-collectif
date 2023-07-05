@@ -10,23 +10,23 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\RouterInterface;
-use Doctrine\Common\Util\ClassUtils;
 
 class StepAdminUrlResolver implements ResolverInterface
 {
-    private RouterInterface $router;
     private const ADMIN_NEXT_STEP_TYPE = [
-            OtherStep::class => 'other-step',
-            QuestionnaireStep::class => 'questionnaire-step',
-            ConsultationStep::class => 'consultation-step',
-            CollectStep::class => 'collect-step',
-            SelectionStep::class => 'selection-step',
-            DebateStep::class => 'debate-step',
-            RankingStep::class => 'ranking-step',
-        ];
+        OtherStep::class => 'other-step',
+        QuestionnaireStep::class => 'questionnaire-step',
+        ConsultationStep::class => 'consultation-step',
+        CollectStep::class => 'collect-step',
+        SelectionStep::class => 'selection-step',
+        DebateStep::class => 'debate-step',
+        RankingStep::class => 'ranking-step',
+    ];
+    private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {
@@ -42,11 +42,10 @@ class StepAdminUrlResolver implements ResolverInterface
         $project = $step->getProject();
         $projectId = GlobalId::toGlobalId('Project', $project->getId());
 
-        $splittedClassName = explode("\\", $className);
+        $splittedClassName = explode('\\', $className);
         $classNameWithoutNameSpace = end($splittedClassName);
         $stepId = GlobalId::toGlobalId($classNameWithoutNameSpace, $step->getId());
 
-        $url = "{$baseUrl}/admin-next/project/{$projectId}/update-step/{$stepType}/{$stepId}";
-        return $url;
+        return "{$baseUrl}/admin-next/project/{$projectId}/update-step/{$stepType}/{$stepId}";
     }
 }

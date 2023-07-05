@@ -50,7 +50,8 @@ class OrderedCollectionType extends CollectionType
                         ->filter(static function ($i) use ($item) {
                             return $item->getId() && $i->getId() === $item->getId();
                         })
-                        ->first();
+                        ->first()
+                    ;
                     if ($match) {
                         // If the submitted data contains an item in DB, update it with submitted data
                         // TODO: Maybe find a way to automatically detect change between item from db and submitted item

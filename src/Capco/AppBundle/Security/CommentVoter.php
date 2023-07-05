@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class CommentVoter extends Voter
 {
-    const DELETE = 'delete';
+    public const DELETE = 'delete';
 
     protected function supports($attribute, $subject): bool
     {

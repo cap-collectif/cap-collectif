@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Response;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class ResponseResolver implements ResolverInterface
 {

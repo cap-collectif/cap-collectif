@@ -3,30 +3,30 @@
 namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
+use Capco\AppBundle\Traits\DebatableTrait;
+use Capco\AppBundle\Traits\ForAgainstTrait;
+use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\ReportableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\DebatableTrait;
-use Capco\AppBundle\Traits\ModerableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Traits\ForAgainstTrait;
-use Capco\AppBundle\Traits\ReportableTrait;
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 use Doctrine\ORM\Mapping\Index;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\ORM\Mapping\UniqueConstraint;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * An argument in a debate.

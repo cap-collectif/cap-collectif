@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use GraphQL\Error\UserError;
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class BaseUpdateProfile implements MutationInterface
 {
@@ -43,14 +43,10 @@ abstract class BaseUpdateProfile implements MutationInterface
         $userId = GlobalId::fromGlobalId($this->arguments[self::USER_ID])['id'];
         if (!empty($this->arguments[self::USER_ID])) {
             if ($viewer->isAdmin() && !$viewer->isSuperAdmin() && $viewer->getId() !== $userId) {
-                throw new UserError(
-                    'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
-                );
+                throw new UserError('Only a SUPER_ADMIN can edit data from another user. Or the account owner');
             }
             if (!$viewer->isAdmin() && !$viewer->isSuperAdmin() && $viewer->getId() !== $userId) {
-                throw new UserError(
-                    'Only a SUPER_ADMIN can edit data from another user. Or the account owner'
-                );
+                throw new UserError('Only a SUPER_ADMIN can edit data from another user. Or the account owner');
             }
         }
 

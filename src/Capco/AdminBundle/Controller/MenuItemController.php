@@ -2,8 +2,8 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AppBundle\Repository\MenuItemRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class MenuItemController extends Controller
 {
     /**
-     * @param array $selectedIds
      * @param $allEntitiesSelected
      *
      * @return bool|string
@@ -33,12 +32,10 @@ class MenuItemController extends Controller
     /**
      * Delete action.
      *
-     * @param Request         $request
-     *
      * @throws NotFoundHttpException If the object does not exist
      * @throws AccessDeniedException If access is not granted
      *
-     * @return Response|RedirectResponse
+     * @return RedirectResponse|Response
      */
     public function deleteAction(Request $request): Response
     {

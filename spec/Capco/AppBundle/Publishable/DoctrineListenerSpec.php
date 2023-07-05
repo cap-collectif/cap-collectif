@@ -4,16 +4,15 @@ namespace spec\Capco\AppBundle\Publishable;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
-use Capco\AppBundle\Toggle\Manager;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Publishable\DoctrineListener;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class DoctrineListenerSpec extends ObjectBehavior
 {
-
     public function let(Manager $manager)
     {
         $this->beConstructedWith($manager);
@@ -55,8 +54,7 @@ class DoctrineListenerSpec extends ObjectBehavior
         Comment $comment,
         Manager $manager,
         User $author
-    )
-    {
+    ) {
         $manager->isActive(Manager::moderation_comment)->shouldBeCalledOnce()->willReturn(false);
         $comment->getAuthor()->shouldBeCalledTimes(2)->willReturn($author);
         $comment->getAuthorEmail()->willReturn(null);
@@ -70,8 +68,7 @@ class DoctrineListenerSpec extends ObjectBehavior
     public function it_should_not_publish_comment_if_moderation_is_enabled_and_author_is_anonymous(
         Comment $comment,
         Manager $manager
-    )
-    {
+    ) {
         $manager->isActive(Manager::moderation_comment)->shouldBeCalledOnce()->willReturn(true);
         $comment->getAuthorEmail()->willReturn('abc@cap-collectif.com');
         $comment->getAuthor()->willReturn(null);

@@ -12,7 +12,6 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
-use Capco\AppBundle\Validator\Constraints\CheckColorValidator;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
@@ -45,9 +44,7 @@ class QuestionJumpsHandler
         ValidatorInterface $colorValidator,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         Indexer $indexer
-
-    )
-    {
+    ) {
         $this->questionChoiceRepository = $questionChoiceRepository;
         $this->questionRepository = $questionRepository;
         $this->formFactory = $formFactory;
@@ -115,7 +112,6 @@ class QuestionJumpsHandler
                 $questionData['question']['alwaysJumpDestinationQuestion'] = $this->getQuestionGlobalId($alwaysJumpDestinationQuestion);
             }
 
-
             $jumps = $questionData['question']['jumps'] ?? null;
             if ($jumps) {
                 foreach ($questionData['question']['jumps'] as &$jump) {
@@ -142,10 +138,9 @@ class QuestionJumpsHandler
         }
     }
 
-
     private function getQuestionChoiceGlobalId(string $questionChoiceId): string
     {
-        $isGlobalId = !!GlobalId::fromGlobalId($questionChoiceId)['type'];
+        $isGlobalId = (bool) GlobalId::fromGlobalId($questionChoiceId)['type'];
 
         if ($isGlobalId) {
             return $questionChoiceId;
@@ -162,7 +157,7 @@ class QuestionJumpsHandler
 
     private function getQuestionGlobalId(string $questionId): string
     {
-        $isGlobalId = !!GlobalId::fromGlobalId($questionId)['type'];
+        $isGlobalId = (bool) GlobalId::fromGlobalId($questionId)['type'];
 
         if ($isGlobalId) {
             return $questionId;
@@ -176,7 +171,4 @@ class QuestionJumpsHandler
 
         return GlobalId::toGlobalId('Question', $question->getId());
     }
-
-
-
 }

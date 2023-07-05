@@ -21,8 +21,8 @@ class QuestionNumberResolver implements ResolverInterface
                 return $index;
             }
 
-            if ($q->getType() !== AbstractQuestion::QUESTION_TYPE_SECTION) {
-                $index++;
+            if (AbstractQuestion::QUESTION_TYPE_SECTION !== $q->getType()) {
+                ++$index;
             }
         }
 

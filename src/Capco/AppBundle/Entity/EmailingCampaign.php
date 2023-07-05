@@ -20,8 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EmailingCampaign implements Ownerable, CreatableInterface
 {
-    use OwnerableTrait;
     use CreatableTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**
@@ -238,18 +238,18 @@ class EmailingCampaign implements Ownerable, CreatableInterface
 
     public function hasReceipt(): bool
     {
-        return $this->mailingList ||
-            $this->mailingInternal ||
-            $this->emailingGroup ||
-            $this->project;
+        return $this->mailingList
+            || $this->mailingInternal
+            || $this->emailingGroup
+            || $this->project;
     }
 
     public function isComplete(): bool
     {
-        return $this->senderName &&
-            $this->senderEmail &&
-            '' !== $this->object &&
-            '' !== $this->content;
+        return $this->senderName
+            && $this->senderEmail
+            && '' !== $this->object
+            && '' !== $this->content;
     }
 
     public function canBeSent(): bool

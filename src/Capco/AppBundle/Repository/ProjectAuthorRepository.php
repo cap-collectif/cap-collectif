@@ -22,7 +22,8 @@ class ProjectAuthorRepository extends EntityRepository
                     )
             )
             ->setParameter('author', $author)
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Capco\AppBundle\Validator\Constraints;
+
 use Symfony\Component\Validator\Constraint;
 
 /**

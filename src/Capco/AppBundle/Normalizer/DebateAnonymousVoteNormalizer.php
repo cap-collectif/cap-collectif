@@ -3,16 +3,13 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
-use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class DebateAnonymousVoteNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class DebateAnonymousVoteNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 

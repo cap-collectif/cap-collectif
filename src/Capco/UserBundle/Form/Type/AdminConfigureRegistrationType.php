@@ -2,12 +2,12 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Form\TranslationCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\RegistrationForm;
 
 class AdminConfigureRegistrationType extends AbstractType
 {
@@ -27,7 +27,8 @@ class AdminConfigureRegistrationType extends AbstractType
             ->add('bottomTextDisplayed', null, ['required' => false])
             ->add('bottomText', null, ['required' => false])
             ->add('topTextDisplayed', null, ['required' => false])
-            ->add('topText', null, ['required' => false]);
+            ->add('topText', null, ['required' => false])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

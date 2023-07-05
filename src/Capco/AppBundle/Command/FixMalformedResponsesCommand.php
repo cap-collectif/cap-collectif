@@ -34,7 +34,8 @@ class FixMalformedResponsesCommand extends Command
         $responses = $this->abstractResponseRepository
             ->createQueryBuilder('r')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
         $count = 0;
         foreach ($responses as $response) {
             $value = $response['value'];
@@ -49,7 +50,8 @@ class FixMalformedResponsesCommand extends Command
                     ->executeStatement('UPDATE response SET value = ? where id = ?', [
                         $value,
                         $response['id'],
-                    ]);
+                    ])
+                ;
             }
         }
 

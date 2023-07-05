@@ -14,7 +14,7 @@ trait ProjectOpinionSubscriptionGuard
 
     protected function versionCanBeFollowed(OpinionVersion $opinionVersion): bool
     {
-        return $opinionVersion->getProject() &&
-            $opinionVersion->getProject()->isOpinionCanBeFollowed();
+        return $opinionVersion->getProject()
+            && $opinionVersion->getProject()->isOpinionCanBeFollowed();
     }
 }

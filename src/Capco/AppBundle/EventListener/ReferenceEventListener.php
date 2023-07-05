@@ -9,7 +9,7 @@ use Doctrine\ORM\Event\PreFlushEventArgs;
 
 class ReferenceEventListener
 {
-    const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
+    public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
     private $lastProposals = [];
     private $lastProposalFormsReferences = [];
@@ -24,8 +24,8 @@ class ReferenceEventListener
 
             // if entity has Reference Trait & has not already a reference (specific case in fixtures)
             if (
-                $this->hasTrait($classMetaData->getReflectionClass()) &&
-                !$entityInsertion->getReference()
+                $this->hasTrait($classMetaData->getReflectionClass())
+                && !$entityInsertion->getReference()
             ) {
                 $this->updateReferenceIsNecessary($om, $entityInsertion);
             }
@@ -58,7 +58,8 @@ class ReferenceEventListener
 
         $lastEntity = $om
             ->getRepository(\get_class($entity))
-            ->findOneBy([], ['reference' => 'DESC']);
+            ->findOneBy([], ['reference' => 'DESC'])
+        ;
 
         if ($entity instanceof ProposalForm) {
             if (!empty($this->lastProposalFormsReferences)) {

@@ -46,7 +46,8 @@ class ProposalRevisionsResolver implements ResolverInterface
                     return $this->proposalRevisionRepository
                         ->getRevisionsByProposalPaginated($proposal, $offset, $limit)
                         ->getIterator()
-                        ->getArrayCopy();
+                        ->getArrayCopy()
+                    ;
                 }
 
                 if (ProposalRevisionStateType::PENDING === $state) {
@@ -60,7 +61,8 @@ class ProposalRevisionsResolver implements ResolverInterface
                     return $this->proposalRevisionRepository
                         ->findRevisionsPaginatedInPendingNotExpired($proposal, $offset, $limit)
                         ->getIterator()
-                        ->getArrayCopy();
+                        ->getArrayCopy()
+                    ;
                 }
                 if (ProposalRevisionStateType::EXPIRED === $state) {
                     $state = ProposalRevisionStateType::PENDING;

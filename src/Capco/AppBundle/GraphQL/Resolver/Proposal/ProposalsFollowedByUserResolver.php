@@ -28,9 +28,11 @@ class ProposalsFollowedByUserResolver implements ResolverInterface
                 $proposals = $this->proposalRepository
                     ->findFollowingProposalByUser($user, $offset, $limit)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException('Find following proposal by user failed');
             }
 

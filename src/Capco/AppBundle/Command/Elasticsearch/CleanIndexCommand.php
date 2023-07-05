@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
-use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Command\Command;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
-use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 class CleanIndexCommand extends Command
 {
@@ -28,7 +28,8 @@ class CleanIndexCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to delete all indexes'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -37,7 +38,7 @@ class CleanIndexCommand extends Command
             $job = Process::fromShellCommandline(
                 'curl -sS -XDELETE http://elasticsearch:9200/_all'
             );
-            echo $job->getCommandLine() . PHP_EOL;
+            echo $job->getCommandLine() . \PHP_EOL;
             $job->mustRun();
 
             return 0;

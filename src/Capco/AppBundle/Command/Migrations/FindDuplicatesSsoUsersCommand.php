@@ -52,18 +52,22 @@ class FindDuplicatesSsoUsersCommand extends Command
                 $users = $this->userRepository->findSameFranceConnectId($ssoId);
 
                 break;
+
             case 'facebook':
                 $users = $this->userRepository->findSameFacebookId($ssoId);
 
                 break;
+
             case 'twitter':
                 $users = $this->userRepository->findSameTwitterId($ssoId);
 
                 break;
+
             case 'openId':
                 $users = $this->userRepository->findSameOpenId($ssoId);
 
                 break;
+
             default:
                 $users = $this->userRepository->findSameFranceConnectId($ssoId);
         }
@@ -94,8 +98,8 @@ class FindDuplicatesSsoUsersCommand extends Command
         $default = $duplicatesUsers[0][$ssoId];
 
         $question = new Question(
-            "Please enter the ${ssoId} from the table ⬆, default : ${default} (row 1)" . \PHP_EOL,
-            "${default}"
+            "Please enter the {$ssoId} from the table ⬆, default : {$default} (row 1)" . \PHP_EOL,
+            "{$default}"
         );
 
         $ssoId = $helper->ask($input, $output, $question);
@@ -336,8 +340,10 @@ class FindDuplicatesSsoUsersCommand extends Command
         switch ($sso) {
             case 'franceConnect':
                 return 'franceConnectId';
+
             case 'openId':
                 return 'openId';
+
             default:
                 return $sso . '_id';
         }

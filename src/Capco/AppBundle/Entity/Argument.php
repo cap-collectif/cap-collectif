@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Enum\ForOrAgainstType;
-use Capco\AppBundle\Model\ReportableInterface;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\ModerableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Enum\ForOrAgainstType;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\Publishable;
+use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="argument", indexes={
@@ -117,7 +117,8 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         if ($this->getParent() && $this->getParent()->getStep()) {
             return $this->getParent()
                 ->getStep()
-                ->getProject();
+                ->getProject()
+            ;
         }
 
         return null;
@@ -163,6 +164,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         switch ($this->type) {
             case 0:
                 return 'argument.show.type.against';
+
             case 1:
                 return 'argument.show.type.for';
         }
@@ -259,15 +261,15 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
-            ($user && $user->isAdmin());
+        return ($this->isPublished() && $this->getParent()->canDisplay($user))
+            || ($user && $user->isAdmin());
     }
 
     public function canContribute($user = null): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->getParent()->canContribute($user);
+        return $this->isPublished()
+            && !$this->isTrashed()
+            && $this->getParent()->canContribute($user);
     }
 
     public function canBeDeleted($user = null): bool

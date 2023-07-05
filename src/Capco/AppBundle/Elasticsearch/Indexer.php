@@ -3,25 +3,25 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\AbstractProposalVote;
-use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\District\AbstractDistrict;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Bulk;
-use Elastica\Index;
 use Elastica\Client;
 use Elastica\Document;
+use Elastica\Index;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManager;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\AbstractVote;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 /**
  * Handle indexation of entities.
@@ -281,8 +281,8 @@ class Indexer
             }
 
             if (
-                AbstractVote::class === $parentClass->getName() ||
-                AbstractProposalVote::class === $parentClass->getName()
+                AbstractVote::class === $parentClass->getName()
+                || AbstractProposalVote::class === $parentClass->getName()
             ) {
                 return 'vote';
             }
@@ -312,7 +312,8 @@ class Indexer
             $query = $repository
                 ->createQueryBuilder('a')
                 ->orderBy('a.id')
-                ->getQuery();
+                ->getQuery()
+            ;
         }
 
         $replies = [];
@@ -336,9 +337,10 @@ class Indexer
                     ->createQueryBuilder('a')
                     ->select('count(a)')
                     ->getQuery()
-                    ->getSingleScalarResult();
+                    ->getSingleScalarResult()
+                ;
             }
-            $output->writeln(\PHP_EOL . "<info> Indexing ${count} ${class}</info>");
+            $output->writeln(\PHP_EOL . "<info> Indexing {$count} {$class}</info>");
             $progress = new ProgressBar($output, $count);
             $progress->start();
         }
@@ -410,8 +412,8 @@ class Indexer
         }
 
         if (
-            \count($this->currentInsertBulk) >= self::BULK_SIZE ||
-            \count($this->currentDeleteBulk) >= self::BULK_SIZE
+            \count($this->currentInsertBulk) >= self::BULK_SIZE
+            || \count($this->currentDeleteBulk) >= self::BULK_SIZE
         ) {
             $this->finishBulk();
         }

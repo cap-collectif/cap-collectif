@@ -5,10 +5,10 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -54,7 +54,6 @@ class DebateStepType extends AbstractType
                 },
             ])
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

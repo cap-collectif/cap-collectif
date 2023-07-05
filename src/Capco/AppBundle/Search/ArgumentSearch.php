@@ -43,16 +43,15 @@ class ArgumentSearch extends Search
                 $limit,
                 $includeUnpublished,
                 $includeTrashed,
-                $aclDisabled,
-            ) = [
-                $key['args']->offsetGet('after'),
-                $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
-                $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
-                $key['args']->offsetGet('first'),
-                $key['args']->offsetGet('includeUnpublished') ?? false,
-                $key['args']->offsetGet('includeTrashed') ?? false,
-                $key['args']->offsetGet('aclDisabled') ?? false,
-            ];
+                $aclDisabled) = [
+                    $key['args']->offsetGet('after'),
+                    $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
+                    $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
+                    $key['args']->offsetGet('first'),
+                    $key['args']->offsetGet('includeUnpublished') ?? false,
+                    $key['args']->offsetGet('includeTrashed') ?? false,
+                    $key['args']->offsetGet('aclDisabled') ?? false,
+                ];
 
             if (!$aclDisabled) {
                 $this->getFiltersForProjectViewerCanSee('project', $viewer);
@@ -61,7 +60,8 @@ class ArgumentSearch extends Search
             $boolQuery
                 ->addMustNot(new Query\Term(['published' => ['value' => false]]))
                 ->addMustNot(new Query\Exists('comment'))
-                ->addMustNot(new Query\Term(['draft' => ['value' => true]]));
+                ->addMustNot(new Query\Term(['draft' => ['value' => true]]))
+            ;
 
             if (!$includeTrashed) {
                 $boolQuery->addMustNot(new Query\Exists('trashedAt'));
@@ -141,9 +141,11 @@ class ArgumentSearch extends Search
         if (null === $field) {
             return 'createdAt';
         }
+
         switch ($field) {
             case 'PUBLISHED_AT':
                 return 'publishedAt';
+
             default:
                 return 'createdAt';
         }

@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Traits\AuthorableTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -74,7 +74,7 @@ class PostAuthor implements Authorable
         return $this;
     }
 
-    public static function create(Post $post, Author $author): PostAuthor
+    public static function create(Post $post, Author $author): self
     {
         return (new self())->setPost($post)->setAuthor($author);
     }

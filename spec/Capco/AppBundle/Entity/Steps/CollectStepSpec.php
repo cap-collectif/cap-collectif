@@ -11,16 +11,15 @@ use PhpSpec\ObjectBehavior;
 
 class CollectStepSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(CollectStep::class);
     }
 
-    function it_resolver_cant_display_ballot(
+    public function it_resolver_cant_display_ballot(
         ProjectAbstractStep $projectAbstractStep,
         Project $project
-    )
-    {
+    ) {
         $viewer = '.anon';
         $this->setSecretBallot(true);
         $this->setPublishedVoteDate(new \DateTime('2050-03-01'));
@@ -35,7 +34,7 @@ class CollectStepSpec extends ObjectBehavior
         $this->canResolverDisplayBallot($viewer)->shouldReturn(false);
     }
 
-    function it_resolver_can_display_ballot()
+    public function it_resolver_can_display_ballot()
     {
         $viewer = '.anon';
         $this->setSecretBallot(true);
@@ -45,7 +44,7 @@ class CollectStepSpec extends ObjectBehavior
         $this->canResolverDisplayBallot($viewer)->shouldReturn(true);
     }
 
-    function it_can_display_ballot_for_admin(User $viewer)
+    public function it_can_display_ballot_for_admin(User $viewer)
     {
         $viewer->isAdmin()->willReturn(true);
         $this->setSecretBallot(true);
@@ -55,13 +54,12 @@ class CollectStepSpec extends ObjectBehavior
         $this->canResolverDisplayBallot($viewer)->shouldReturn(true);
     }
 
-    function it_can_display_ballot_for_organization(
+    public function it_can_display_ballot_for_organization(
         User $viewer,
         ProjectAbstractStep $projectAbstractStep,
         Project $project,
         Organization $organization
-    )
-    {
+    ) {
         $viewer->isAdmin()->willReturn(false);
         $this->setSecretBallot(true);
         $this->setPublishedVoteDate(new \DateTime('2050-03-01'));
@@ -77,13 +75,12 @@ class CollectStepSpec extends ObjectBehavior
         $this->canResolverDisplayBallot($viewer)->shouldReturn(true);
     }
 
-    function it_can_not_display_ballot_if_viewer_is_null(
+    public function it_can_not_display_ballot_if_viewer_is_null(
         User $viewer,
         ProjectAbstractStep $projectAbstractStep,
         Project $project,
         Organization $organization
-    )
-    {
+    ) {
         $this->setSecretBallot(true);
         $this->setPublishedVoteDate(new \DateTime('2050-03-01'));
         $this->canDisplayBallot()->shouldReturn(false);

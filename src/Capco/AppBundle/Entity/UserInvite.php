@@ -235,6 +235,7 @@ class UserInvite implements Expirable, Invitation
             ->setToken($token)
             ->setMessage($message)
             ->setRedirectionUrl($redirectionUrl)
-            ->setExpiresAt((new \DateTimeImmutable())->modify(Expirable::EXPIRES_AT_PERIOD));
+            ->setExpiresAt((new \DateTimeImmutable())->modify(Expirable::EXPIRES_AT_PERIOD))
+        ;
     }
 }

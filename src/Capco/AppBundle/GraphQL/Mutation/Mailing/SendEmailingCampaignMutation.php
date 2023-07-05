@@ -47,6 +47,20 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         return compact('emailingCampaign', 'error');
     }
 
+    public function isGranted(string $id, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
+        if (!$emailCampaign) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::SEND, $emailCampaign);
+    }
+
     private function planEmailingCampaign(EmailingCampaign $emailingCampaign): EmailingCampaign
     {
         $emailingCampaign->setStatus(EmailingCampaignStatus::PLANNED);
@@ -67,19 +81,5 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 
         $emailingCampaign->setSendAt(new \DateTime());
         $emailingCampaign->setStatus(EmailingCampaignStatus::SENT);
-    }
-
-    public function isGranted(string $id, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-
-        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
-        if (!$emailCampaign) {
-            return false;
-        }
-
-        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::SEND, $emailCampaign);
     }
 }

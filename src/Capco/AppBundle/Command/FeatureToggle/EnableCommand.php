@@ -27,7 +27,8 @@ class EnableCommand extends Command
         $this->setName('capco:toggle:enable')
             ->setDescription('Enable a given feature toggle')
             ->addArgument('toggle', InputArgument::OPTIONAL, 'A feature toggle name to activate')
-            ->addOption('all');
+            ->addOption('all')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

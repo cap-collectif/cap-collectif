@@ -45,7 +45,8 @@ class DebateAnonymousVote implements IndexableInterface, AnonymousParticipationI
     {
         return $this->getDebate()
             ->getStep()
-            ->getProject();
+            ->getProject()
+        ;
     }
 
     public function isIndexable(): bool

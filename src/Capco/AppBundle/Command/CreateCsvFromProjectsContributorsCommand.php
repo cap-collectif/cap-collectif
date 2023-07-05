@@ -4,20 +4,20 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
-use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Utils\Arr;
-use Capco\AppBundle\Toggle\Manager;
 use Box\Spout\Writer\WriterInterface;
-use Overblog\GraphQLBundle\Request\Executor;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Utils\Arr;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
@@ -110,7 +110,8 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                     'query' => $this->getContributorsProjectGraphQLQuery($id),
                     'variables' => [],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
 
             $fileName = self::getFilename($data['slug']);
             $delimiter = $input->getOption('delimiter');
@@ -192,27 +193,27 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         $userFragment = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
-        query {
-            node(id: "${projectId}") {
-                ... on Project {
-                    slug
-                    contributors(first: 100${userCursor}) {
-                      totalCount
-                      pageInfo {
-                        startCursor
-                        endCursor
-                        hasNextPage
-                      }
-                      edges {
-                        cursor
-                        node {
-                          ${userFragment}
+                    query {
+                        node(id: "{$projectId}") {
+                            ... on Project {
+                                slug
+                                contributors(first: 100{$userCursor}) {
+                                  totalCount
+                                  pageInfo {
+                                    startCursor
+                                    endCursor
+                                    hasNextPage
+                                  }
+                                  edges {
+                                    cursor
+                                    node {
+                                      {$userFragment}
+                                    }
+                                  }
+                                }
+                            }
                         }
-                      }
                     }
-                }
-            }
-        }
-EOF;
+            EOF;
     }
 }

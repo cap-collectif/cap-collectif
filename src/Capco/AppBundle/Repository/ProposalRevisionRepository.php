@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method ProposalRevision|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProposalRevision|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|ProposalRevision find($id, $lockMode = null, $lockVersion = null)
+ * @method null|ProposalRevision findOneBy(array $criteria, array $orderBy = null)
  * @method ProposalRevision[]    findAll()
  * @method ProposalRevision[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -25,7 +25,8 @@ class ProposalRevisionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pr')
             ->leftJoin('pr.proposal', 'p')
             ->andWhere('p.id = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         if ($state) {
             $qb->andWhere('pr.state = :state')->setParameter('state', $state);
@@ -50,7 +51,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->select('COUNT(pr.id)')
             ->leftJoin('pr.proposal', 'p')
             ->andWhere('p.id = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         if ($state) {
             $qb->andWhere('pr.state = :state')->setParameter('state', $state);
@@ -81,7 +83,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->setParameter('state', 'pending')
             ->setParameter('expiresAt', $expiresAt)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -101,7 +104,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->andWhere('pr.id != :currentRevision')
             ->setParameter('state', 'pending')
             ->setParameter('currentRevision', $revision)
-            ->setParameter('expiresAt', $expiresAt);
+            ->setParameter('expiresAt', $expiresAt)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -117,7 +121,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->andWhere('pr.state = :state')
             ->andWhere('pr.expiresAt > :expiresAt')
             ->setParameter('state', 'pending')
-            ->setParameter('expiresAt', $expiresAt);
+            ->setParameter('expiresAt', $expiresAt)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -128,7 +133,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->select('COUNT(pr.id)')
             ->leftJoin('pr.proposal', 'p')
             ->andWhere('p.id = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -143,7 +149,8 @@ class ProposalRevisionRepository extends EntityRepository
             ->andWhere('p.id = :proposal')
             ->setParameter('proposal', $proposal)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }

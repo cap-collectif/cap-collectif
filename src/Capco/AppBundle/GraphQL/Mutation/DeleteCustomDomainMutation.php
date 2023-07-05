@@ -38,10 +38,11 @@ class DeleteCustomDomainMutation implements MutationInterface
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];
         }
 
-        if ($statusCode === 201) {
+        if (201 === $statusCode) {
             $siteSettings->setCustomDomain(null);
             $siteSettings->setStatus(SiteSettingsStatus::IDLE);
             $this->em->flush();
+
             return ['siteSettings' => $siteSettings, 'errorCode' => null];
         }
 

@@ -13,8 +13,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
 
 /**
- * @method DebateArgument|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateArgument|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateArgument find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateArgument findOneBy(array $criteria, array $orderBy = null)
  * @method DebateArgument[]    findAll()
  * @method DebateArgument[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -36,7 +36,8 @@ class DebateArgumentRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getByDebateQueryBuilder($debate, $filters)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
         if ($orderBy) {
             $qb->orderBy('argument.' . $orderBy['field'], $orderBy['direction']);
         }
@@ -48,7 +49,8 @@ class DebateArgumentRepository extends EntityRepository
     {
         $qb = $this->getByDebateQueryBuilder($debate, [])
             ->andWhere('argument.author = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         try {
             return $qb->getQuery()->getOneOrNullResult();
@@ -69,7 +71,8 @@ class DebateArgumentRepository extends EntityRepository
             'isTrashed' => false,
         ])
             ->andWhere('argument.author = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         try {
             return $qb->getQuery()->getOneOrNullResult();
@@ -87,7 +90,8 @@ class DebateArgumentRepository extends EntityRepository
     {
         $query = $this->getByDebateQueryBuilder($debate, $filters)
             ->select('COUNT(argument)')
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return (int) $query->getSingleScalarResult();
     }
@@ -101,7 +105,8 @@ class DebateArgumentRepository extends EntityRepository
             ->setParameter('debate', $debate)
             ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function hydrateFromIds(array $ids): array
@@ -129,14 +134,16 @@ class DebateArgumentRepository extends EntityRepository
             ->setParameter('project', $project)
             ->orderBy('da.trashedAt', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     private function getByDebateQueryBuilder(Debate $debate, array $filters = []): QueryBuilder
     {
         $qb = $this->createQueryBuilder('argument')
             ->where('argument.debate = :debate')
-            ->setParameter('debate', $debate);
+            ->setParameter('debate', $debate)
+        ;
         if (isset($filters['value'])) {
             $qb->andWhere('argument.type = :value')->setParameter('value', $filters['value']);
         }

@@ -2,25 +2,25 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Form\ApiSourceType;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Model\Sourceable;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Model\Sourceable;
-use Capco\AppBundle\Form\ApiSourceType;
 use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 
 class AddSourceMutation implements MutationInterface
 {
@@ -83,8 +83,8 @@ class AddSourceMutation implements MutationInterface
         $step = $sourceable->getStep();
 
         if (
-            $step &&
-            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
+            $step
+            && !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
         ) {
             $this->logger->error('You dont meets all the requirements.');
             $error = ['message' => 'You dont meets all the requirements.'];

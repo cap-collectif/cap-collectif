@@ -97,7 +97,7 @@ class CheckGeoJsonValidatorSpec extends ObjectBehavior
             {
               "type": "Feature",
               "geometry": {
-                "type": "MultiPoint", 
+                "type": "MultiPoint",
                 "coordinates": [
                   [10, 40], [40, 30], [20, 20], [30, 10]
                 ]
@@ -107,9 +107,9 @@ class CheckGeoJsonValidatorSpec extends ObjectBehavior
             {
               "type": "Feature",
               "geometry": {
-                "type": "MultiLineString", 
+                "type": "MultiLineString",
                 "coordinates": [
-                  [[10, 10], [20, 20], [10, 40]], 
+                  [[10, 10], [20, 20], [10, 40]],
                   [[40, 40], [30, 30], [40, 20], [30, 10]]
                 ]
               },
@@ -118,21 +118,21 @@ class CheckGeoJsonValidatorSpec extends ObjectBehavior
             {
               "type": "Feature",
               "geometry": {
-                "type": "MultiPolygon", 
+                "type": "MultiPolygon",
                 "coordinates": [
                   [
                     [[40, 40], [20, 45], [45, 30], [40, 40]]
-                  ], 
+                  ],
                   [
-                    [[20, 35], [10, 30], [10, 10], [30, 5], [45, 20], [20, 35]], 
+                    [[20, 35], [10, 30], [10, 10], [30, 5], [45, 20], [20, 35]],
                     [[30, 20], [20, 15], [20, 25], [30, 20]]
                   ]
                 ]
               },
               "properties": {}
             }
-          ]          
-        }'
+          ]
+        }',
     ];
 
     public function it_is_initializable()
@@ -150,7 +150,8 @@ class CheckGeoJsonValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->validate('ce_test_ne_marche_pas', $constraint);
     }
 
@@ -164,7 +165,8 @@ class CheckGeoJsonValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->validate(json_encode('ce_test_ne_marche_pas'), $constraint);
     }
 

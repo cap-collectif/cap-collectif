@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationC
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\QuestionnaireType;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
@@ -21,7 +22,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Enum\QuestionnaireType;
 
 /**
  * @ORM\Table(name="questionnaire")
@@ -29,9 +29,9 @@ use Capco\AppBundle\Enum\QuestionnaireType;
  */
 class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
 {
+    use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;
     use OwnerableTrait;
-    use CreatableTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
     use UuidTrait;
@@ -146,8 +146,8 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
             foreach ($this->questions as $question) {
                 $clonedQaq = $this->getCloneQuestionReference($cloneReferences, $question);
                 if (
-                    $clonedQaq->getQuestion() instanceof MultipleChoiceQuestion &&
-                    !empty($clonedQaq->getQuestion()->getJumps())
+                    $clonedQaq->getQuestion() instanceof MultipleChoiceQuestion
+                    && !empty($clonedQaq->getQuestion()->getJumps())
                 ) {
                     foreach ($clonedQaq->getQuestion()->getJumps() as $jump) {
                         $clonedJump = clone $jump;
@@ -261,7 +261,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
     /**
      * Add question.
      *
-     *
      * @return $this
      */
     public function addQuestion(QuestionnaireAbstractQuestion $question)
@@ -276,7 +275,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
 
     /**
      * Remove question.
-     *
      *
      * @return $this
      */
@@ -319,6 +317,8 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
@@ -398,7 +398,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
     /**
      * Add reply.
      *
-     *
      * @return $this
      */
     public function addReply(Reply $reply)
@@ -413,7 +412,6 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
 
     /**
      * Remove reply.
-     *
      *
      * @return $this
      */

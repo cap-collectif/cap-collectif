@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryProposalFromSlugResolver implements ResolverInterface

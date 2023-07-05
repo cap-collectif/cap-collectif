@@ -3,17 +3,15 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\EmailingCampaignUserRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use \Capco\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass=EmailingCampaignUserRepository::class)
  * @ORM\Table(name="emailing_campaign_user")
- *
  */
 class EmailingCampaignUser
 {
-
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity=EmailingCampaign::class, inversedBy="emailingCampaignUsers")
@@ -62,9 +60,10 @@ class EmailingCampaignUser
         return $this->sentAt;
     }
 
-    public function setSentAt(\DateTime $sentAt): EmailingCampaignUser
+    public function setSentAt(\DateTime $sentAt): self
     {
         $this->sentAt = $sentAt;
+
         return $this;
     }
 }

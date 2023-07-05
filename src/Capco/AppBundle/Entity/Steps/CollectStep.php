@@ -13,9 +13,9 @@ use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="collect_step")
@@ -27,9 +27,9 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
     use AllowAuthorsToAddNewsTrait;
     use SecretBallotTrait;
     use TimelessStepTrait;
+    use VoteSmsTrait;
     use VoteThresholdTrait;
     use VoteTypeTrait;
-    use VoteSmsTrait;
     public const TYPE = 'collect';
 
     public static $sort = [

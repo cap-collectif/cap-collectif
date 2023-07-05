@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\QuestionnaireAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -21,9 +21,9 @@ class QuestionnaireRepository extends EntityRepository
     /**
      * @param $id
      *
-     * @return mixed
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed
      */
     public function getOne($id)
     {
@@ -32,7 +32,8 @@ class QuestionnaireRepository extends EntityRepository
             ->leftJoin('q.questions', 'qaq')
             ->leftJoin('qaq.question', 'qt')
             ->andWhere('q.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -52,7 +53,8 @@ class QuestionnaireRepository extends EntityRepository
                         $qb->expr()->isNull('prf.evaluationForm'),
                         $qb->expr()->isNull('ac.evaluationForm')
                     )
-            );
+            )
+        ;
 
         if (null !== $term) {
             $qb->where('q.title LIKE :query');
@@ -99,7 +101,8 @@ class QuestionnaireRepository extends EntityRepository
                             $qb->expr()->isNull('prf.evaluationForm'),
                             $qb->expr()->isNull('ac.evaluationForm')
                         )
-                );
+                )
+            ;
         }
 
         if ($types) {
@@ -145,7 +148,8 @@ class QuestionnaireRepository extends EntityRepository
             $types
         )
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getAllCount(
@@ -175,7 +179,24 @@ class QuestionnaireRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
+    public function countByOwner(Owner $owner, array $options): int
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
     {
@@ -183,7 +204,8 @@ class QuestionnaireRepository extends EntityRepository
 
         $qb = $this->createQueryBuilder('p')
             ->where("{$ownerField} = :owner")
-            ->setParameter('owner', $owner);
+            ->setParameter('owner', $owner)
+        ;
 
         if ($query = $options['query']) {
             $qb->andWhere('p.title LIKE :query');
@@ -195,21 +217,4 @@ class QuestionnaireRepository extends EntityRepository
 
         return $qb;
     }
-    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
-    {
-        return $this->getByOwnerQueryBuilder($owner, $options)
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function countByOwner(Owner $owner, array $options): int
-    {
-        return $this->getByOwnerQueryBuilder($owner, $options)
-            ->select('count(p.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
 }

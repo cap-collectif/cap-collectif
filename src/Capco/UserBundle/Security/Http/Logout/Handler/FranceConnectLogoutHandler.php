@@ -32,10 +32,10 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         // This if statement help to not trigger France Connect logout redirection
         // when a user was logged in with another workflow (classic auth, facebook, etc...).
         if (
-            $token &&
-            $token instanceof OAuthToken &&
-            'franceconnect' === $token->getResourceOwnerName() &&
-            $this->toggleManager->isActive('login_franceconnect')
+            $token
+            && $token instanceof OAuthToken
+            && 'franceconnect' === $token->getResourceOwnerName()
+            && $this->toggleManager->isActive('login_franceconnect')
         ) {
             $logoutURL = $this->getLogoutUrl($responseWithRequest->getResponse()->getTargetUrl());
 

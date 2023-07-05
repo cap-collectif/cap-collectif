@@ -26,7 +26,7 @@ class QuestionnaireController extends AbstractController
         $token = $request->get('token') ?? '';
         $reply = $repository->findOneByToken($token);
         if (null === $reply) {
-            $logger->info("invalid token ${token} used to confirm anonymous email");
+            $logger->info("invalid token {$token} used to confirm anonymous email");
             $this->addFlash('danger', $translator->trans('invalid-token', [], 'CapcoAppBundle'));
 
             return $this->redirectToRoute('app_homepage');

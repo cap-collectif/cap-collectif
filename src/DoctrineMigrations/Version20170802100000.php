@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -32,9 +32,9 @@ class Version20170802100000 extends AbstractMigration
             }
 
             if (
-                '""' === $proposal['address'] ||
-                'null' === $proposal['address'] ||
-                '' === $proposal['address']
+                '""' === $proposal['address']
+                || 'null' === $proposal['address']
+                || '' === $proposal['address']
             ) {
                 $newAddressField = null;
                 $query = $this->connection->prepare('UPDATE proposal SET address = ? WHERE id = ?');

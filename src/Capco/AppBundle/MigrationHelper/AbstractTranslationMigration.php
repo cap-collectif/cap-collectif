@@ -8,15 +8,14 @@ use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractTranslationMigration extends AbstractMigration implements
-    ContainerAwareInterface
+abstract class AbstractTranslationMigration extends AbstractMigration implements ContainerAwareInterface
 {
     protected static $entities = [];
     protected static $translations;
 
     protected $entityManager;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->entityManager = $container->get('doctrine')->getManager();
     }

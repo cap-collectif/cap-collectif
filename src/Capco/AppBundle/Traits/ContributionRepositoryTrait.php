@@ -20,7 +20,8 @@ trait ContributionRepositoryTrait
         $qb = $this->createQueryBuilder('o');
         $qb->andWhere($qb->expr()->between('o.createdAt', ':from', ':to'))
             ->andWhere('o.' . $authorField . ' = :author')
-            ->setParameters(['from' => $from, 'to' => $now, 'author' => $author]);
+            ->setParameters(['from' => $from, 'to' => $now, 'author' => $author])
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -61,7 +62,8 @@ trait ContributionRepositoryTrait
         $qb->leftJoin('v.proposal', 'p')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 'pfs')
-            ->andWhere($qb->expr()->in('pfs.id', ':stepIds'));
+            ->andWhere($qb->expr()->in('pfs.id', ':stepIds'))
+        ;
 
         $qb->setParameters([
             ':stepIds' => $stepIds,

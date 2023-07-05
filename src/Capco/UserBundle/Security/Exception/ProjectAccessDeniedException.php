@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Exception;
 
 class ProjectAccessDeniedException extends \RuntimeException
@@ -8,7 +9,7 @@ class ProjectAccessDeniedException extends \RuntimeException
 
     public function __construct(
         string $message = 'Project Access Denied.',
-        \Exception $previous = null
+        ?\Exception $previous = null
     ) {
         parent::__construct($message, 403, $previous);
     }

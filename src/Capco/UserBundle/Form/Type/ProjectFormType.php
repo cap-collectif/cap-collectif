@@ -5,10 +5,10 @@ namespace Capco\UserBundle\Form\Type;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectType;
-use Symfony\Component\Form\AbstractType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProjectFormType extends AbstractType
@@ -29,7 +29,8 @@ class ProjectFormType extends AbstractType
             ->add('locale', EntityType::class, [
                 'required' => false,
                 'class' => Locale::class,
-            ]);
+            ])
+        ;
     }
 
     /**

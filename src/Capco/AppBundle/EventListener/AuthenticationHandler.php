@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Repository\UserConnectionRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {

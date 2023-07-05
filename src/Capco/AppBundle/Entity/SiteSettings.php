@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SiteSettings
 {
-
     use UuidTrait;
 
     private string $capcoDomain;
@@ -35,7 +34,6 @@ class SiteSettings
         return getenv('SYMFONY_INSTANCE_NAME') . '.cap-collectif.com';
     }
 
-
     public function getCustomDomain(): ?string
     {
         return $this->customDomain;
@@ -48,21 +46,15 @@ class SiteSettings
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     * @return SiteSettings
-     */
-    public function setStatus(string $status): SiteSettings
+    public function setStatus(string $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 }

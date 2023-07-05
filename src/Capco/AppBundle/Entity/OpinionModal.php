@@ -15,10 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OpinionModal implements HasDiffInterface
 {
-    use UuidTrait;
-    use TimestampableTrait;
-    use SluggableTitleTrait;
     use DiffableTrait;
+    use SluggableTitleTrait;
+    use TimestampableTrait;
+    use UuidTrait;
     public $updatedAt;
 
     /**

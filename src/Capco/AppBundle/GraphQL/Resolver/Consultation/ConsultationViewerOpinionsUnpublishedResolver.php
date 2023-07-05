@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
 {

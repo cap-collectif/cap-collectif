@@ -22,31 +22,27 @@ trait OpinionStepsTrait
     protected static $opinionWithVersions = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' =>
-            'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
     ];
     protected static $opinionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' =>
-            'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
     ];
 
     protected static $version = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' =>
-            'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
         'versionSlug' => 'modification-1',
     ];
     protected static $opinionVersionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' =>
-            'chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-1',
         'versionSlug' => 'modification-2',
     ];
@@ -54,8 +50,7 @@ trait OpinionStepsTrait
     protected static $versionWithLoadsOfVotes = [
         'projectSlug' => 'projet-de-loi-renseignement',
         'stepSlug' => 'elaboration-de-la-loi',
-        'opinionTypeSlug' =>
-            'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
+        'opinionTypeSlug' => 'titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques',
         'opinionSlug' => 'article-2',
         'versionSlug' => 'modification-2',
     ];
@@ -137,7 +132,8 @@ trait OpinionStepsTrait
         );
         $votesInModalSelector = $this->navigationContext
             ->getPage('opinion page')
-            ->getVotesInModalSelector();
+            ->getVotesInModalSelector()
+        ;
         $this->assertNumElements(46, $votesInModalSelector);
     }
 
@@ -253,7 +249,8 @@ trait OpinionStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('opinion page')
-            ->getUnpublishedArgumentsYesBoxSelector();
+            ->getUnpublishedArgumentsYesBoxSelector()
+        ;
         $this->assertElementContainsText($selector, 'Texte de mon argument');
     }
 
@@ -547,7 +544,8 @@ trait OpinionStepsTrait
     {
         $buttonSelector = $this->navigationContext
             ->getPage('opinion version page')
-            ->getDeleteButtonSelector();
+            ->getDeleteButtonSelector()
+        ;
         $this->assertElementNotOnPage($buttonSelector);
     }
 
@@ -646,7 +644,8 @@ trait OpinionStepsTrait
     {
         $votesInModalSelector = $this->navigationContext
             ->getPage('opinion version page')
-            ->getVotesInModalSelector();
+            ->getVotesInModalSelector()
+        ;
         $this->assertNumElements(50, $votesInModalSelector);
     }
 
@@ -659,7 +658,8 @@ trait OpinionStepsTrait
     {
         return $this->navigationContext
             ->getPage('opinion page')
-            ->isOpen(self::$opinionInClosedStep);
+            ->isOpen(self::$opinionInClosedStep)
+        ;
     }
 
     protected function clickArgumentVoteButtonWithLabel($label)
@@ -684,6 +684,7 @@ trait OpinionStepsTrait
     {
         return $this->navigationContext
             ->getPage('opinion version page')
-            ->isOpen(self::$versionInClosedStep);
+            ->isOpen(self::$versionInClosedStep)
+        ;
     }
 }

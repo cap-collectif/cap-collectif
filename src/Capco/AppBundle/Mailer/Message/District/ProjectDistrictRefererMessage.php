@@ -34,8 +34,7 @@ final class ProjectDistrictRefererMessage extends AbstractExternalMessage
     public static function mockData(): array
     {
         return [
-            'logoUrl' =>
-                'https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png',
+            'logoUrl' => 'https://capco.dev/media/cache/default_logo/default/0001/01/providerReferenceForLogo.png',
             'siteName' => 'Capco',
             'siteUrl' => 'https://capco.dev',
             'baseUrl' => 'https://capco.dev',

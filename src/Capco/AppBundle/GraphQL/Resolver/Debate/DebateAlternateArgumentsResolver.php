@@ -72,7 +72,8 @@ class DebateAlternateArgumentsResolver implements ResolverInterface
                 null,
                 DebateArgumentsResolver::getFilters($args, $viewer)
             )
-            ->getTotalCount();
+            ->getTotalCount()
+        ;
     }
 
     private static function generateResults(

@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\Steps\DebateStep;
 
 /**
  * A like on an argument in a debate.

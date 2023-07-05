@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentVotesResolver;
 use Capco\AppBundle\Search\VoteSearch;
-use PhpSpec\ObjectBehavior;
 use Overblog\GraphQLBundle\Definition\Argument;
+use PhpSpec\ObjectBehavior;
 
 class DebateArgumentVotesResolverSpec extends ObjectBehavior
 {
@@ -40,7 +40,8 @@ class DebateArgumentVotesResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn($elasticsearchPaginatedResult)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $elasticsearchPaginatedResult->getEntities()->willReturn([]);
         $elasticsearchPaginatedResult->getCursors()->willReturn([]);
         $elasticsearchPaginatedResult->getTotalCount()->willReturn(0);
@@ -67,7 +68,8 @@ class DebateArgumentVotesResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn($elasticsearchPaginatedResult)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $elasticsearchPaginatedResult->getEntities()->willReturn([$a, $b]);
         $elasticsearchPaginatedResult->getCursors()->willReturn([['a'], ['b']]);
         $elasticsearchPaginatedResult->getTotalCount()->willReturn(2);

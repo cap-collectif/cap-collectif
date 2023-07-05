@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Capco\AppBundle\Security\DebateOpinionVoter;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Form\DebateOpinionType;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Capco\AppBundle\Form\DebateOpinionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\DebateOpinionVoter;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddDebateOpinionMutation implements MutationInterface

@@ -3,12 +3,12 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateAlternateArgumentsResolver;
 use Capco\AppBundle\Search\DebateSearch;
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Debate\Debate;
 use Overblog\GraphQLBundle\Definition\Argument;
+use PhpSpec\ObjectBehavior;
 
 class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
 {
@@ -42,7 +42,8 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn(new ElasticsearchPaginatedResult([], [], 0))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection([]);
     }
 
@@ -89,7 +90,8 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
         $debateSearch
             ->searchDebateArguments($debate, 11, $orderBy, $forFilters, \Prophecy\Argument::any())
             ->willReturn($forPaginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $debateSearch
             ->searchDebateArguments(
                 $debate,
@@ -99,11 +101,13 @@ class DebateAlternateArgumentsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn($againstPaginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $debateSearch
             ->searchDebateArguments($debate, 0, null, $filters, \Prophecy\Argument::any())
             ->willReturn($bothPaginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $forPaginator->getEntities()->willReturn([$a, $b]);
         $forPaginator->getTotalCount()->willReturn(2);
         $againstPaginator->getEntities()->willReturn([$c]);

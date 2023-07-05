@@ -70,12 +70,14 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
 
         $formFactory
             ->create(QuestionnaireNotificationConfigurationType::class, $notificationConfiguration)
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($data, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $em->flush()->shouldBeCalled();
 
         $this->__invoke($arguments, $viewer)->shouldReturn([
@@ -111,12 +113,14 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
 
         $formFactory
             ->create(QuestionnaireNotificationConfigurationType::class, $notificationConfiguration)
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($data, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $em->flush()->shouldNotBeCalled();
 
         $form->getErrors(true, false)->willReturn($formErrorIterator);
@@ -140,7 +144,8 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->isGranted($id, $viewer)->shouldReturn(false);
     }
@@ -156,7 +161,8 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->isGranted($id, $viewer);
     }

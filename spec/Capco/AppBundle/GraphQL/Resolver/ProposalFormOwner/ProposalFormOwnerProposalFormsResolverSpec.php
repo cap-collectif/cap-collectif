@@ -59,7 +59,8 @@ class ProposalFormOwnerProposalFormsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any(),
                 false
             )
-            ->willReturn([$proposalForm]);
+            ->willReturn([$proposalForm])
+        ;
         $repository->countAll($input['affiliations'], $viewer, null, false)->willReturn(1);
 
         $return = $this->__invoke($args, $viewer);
@@ -133,7 +134,8 @@ class ProposalFormOwnerProposalFormsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any(),
                 false
             )
-            ->willReturn([$proposalForm]);
+            ->willReturn([$proposalForm])
+        ;
         $repository->countAll($input['affiliations'], $viewer, null, false)->willReturn(1);
 
         $return = $this->__invoke($args, $viewer);

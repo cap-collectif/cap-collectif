@@ -9,14 +9,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class MailingListVoter extends AbstractOwnerableVoter
 {
-    const CREATE = 'create';
-    const VIEW = 'view';
-    const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const VIEW = 'view';
+    public const DELETE = 'delete';
 
     protected function supports($attribute, $subject): bool
     {
-        return $subject instanceof MailingList &&
-            \in_array($attribute, [self::CREATE, self::VIEW, self::DELETE]);
+        return $subject instanceof MailingList
+            && \in_array($attribute, [self::CREATE, self::VIEW, self::DELETE]);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
@@ -30,8 +30,10 @@ class MailingListVoter extends AbstractOwnerableVoter
         switch ($attribute) {
             case self::CREATE:
                 return self::canCreate($viewer);
+
             case self::VIEW:
                 return self::canView($subject, $viewer);
+
             case self::DELETE:
                 return self::canDelete($subject, $viewer);
         }

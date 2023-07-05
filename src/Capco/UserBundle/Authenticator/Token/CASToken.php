@@ -5,14 +5,12 @@ namespace Capco\UserBundle\Authenticator\Token;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
- * Class CASToken
- *
+ * Class CASToken.
  */
 class CASToken extends AbstractToken
 {
     /**
      * @param $user
-     * @param array $roles
      */
     public function __construct($user, array $roles = [])
     {
@@ -25,12 +23,8 @@ class CASToken extends AbstractToken
         }
     }
 
-    /**
-     * @return null
-     */
     public function getCredentials()
     {
         return null;
     }
-
 }

@@ -32,22 +32,26 @@ class CheckExternalLinkValidatorSpec extends ObjectBehavior
         $router
             ->getContext()
             ->willReturn($requestContext)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $requestContext
             ->getHost()
             ->willReturn('capco.dev')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->initialize($context);
         $builder->addViolation()->shouldBeCalled();
         $builder
             ->atPath('externalLink')
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->validate('http://capco.dev/test', $constraint);
     }
 
@@ -61,11 +65,13 @@ class CheckExternalLinkValidatorSpec extends ObjectBehavior
         $router
             ->getContext()
             ->willReturn($requestContext)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $requestContext
             ->getHost()
             ->willReturn('capco.dev')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->initialize($context);
         $builder->addViolation()->shouldNotBeCalled();

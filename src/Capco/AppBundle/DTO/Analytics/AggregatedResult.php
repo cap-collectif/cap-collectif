@@ -20,6 +20,7 @@ class AggregatedResult
         if ($customAggregation) {
             return new self($response[$key], $response[$customAggregation]['value']);
         }
+
         return new self($response[$key], $response['doc_count']);
     }
 

@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Traits\UuidTrait;
-use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A debate.

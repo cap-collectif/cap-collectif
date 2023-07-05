@@ -137,12 +137,12 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
 
     private function getViewConfigurationChanged(array $arguments, ProposalForm $proposalForm): bool
     {
-        return (\array_key_exists('isGridViewEnabled', $arguments) &&
-            $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled()) ||
-            (\array_key_exists('isListViewEnabled', $arguments) &&
-                $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled()) ||
-            (\array_key_exists('isMapViewEnabled', $arguments) &&
-                $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
+        return (\array_key_exists('isGridViewEnabled', $arguments)
+            && $arguments['isGridViewEnabled'] !== $proposalForm->isGridViewEnabled())
+            || (\array_key_exists('isListViewEnabled', $arguments)
+                && $arguments['isListViewEnabled'] !== $proposalForm->isListViewEnabled())
+            || (\array_key_exists('isMapViewEnabled', $arguments)
+                && $arguments['isMapViewEnabled'] !== $proposalForm->isMapViewEnabled());
     }
 
     private function getProposalFormFromUUID(string $uuid): ProposalForm
@@ -178,12 +178,12 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
             foreach ($proposalCategories as $proposalCategory) {
                 foreach ($arguments['categories'] as &$category) {
                     if (
-                        isset($category['newCategoryImage']) &&
-                        null !== $category['newCategoryImage'] &&
-                        !$this->categoryImageRepository->findByImage(
+                        isset($category['newCategoryImage'])
+                        && null !== $category['newCategoryImage']
+                        && !$this->categoryImageRepository->findByImage(
                             $category['newCategoryImage']
-                        ) &&
-                        $category['name'] === $proposalCategory->getName()
+                        )
+                        && $category['name'] === $proposalCategory->getName()
                     ) {
                         $image = $this->mediaRepository->find($category['newCategoryImage']);
                         if (null !== $image) {
@@ -283,9 +283,9 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private function defaultBorderIfEnabled(array $dataDistrict): array
     {
         if (
-            !isset($dataDistrict['border']) ||
-            !isset($dataDistrict['border']['enabled']) ||
-            !$dataDistrict['border']['enabled']
+            !isset($dataDistrict['border'])
+            || !isset($dataDistrict['border']['enabled'])
+            || !$dataDistrict['border']['enabled']
         ) {
             return $dataDistrict;
         }
@@ -306,16 +306,16 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private function defaultBackgroundIfEnabled(array $dataDistrict): array
     {
         if (
-            !isset($dataDistrict['background']) ||
-            !isset($dataDistrict['background']['enabled']) ||
-            !$dataDistrict['background']['enabled']
+            !isset($dataDistrict['background'])
+            || !isset($dataDistrict['background']['enabled'])
+            || !$dataDistrict['background']['enabled']
         ) {
             return $dataDistrict;
         }
 
         if (
-            !isset($dataDistrict['background']['opacity']) ||
-            !$dataDistrict['background']['opacity']
+            !isset($dataDistrict['background']['opacity'])
+            || !$dataDistrict['background']['opacity']
         ) {
             $dataDistrict['background']['opacity'] = 0.2;
         }

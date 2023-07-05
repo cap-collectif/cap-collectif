@@ -40,7 +40,8 @@ class RelaunchUserInvitationsMutation implements MutationInterface
             $invitation
                 ->setExpiresAt((new \DateTimeImmutable())->modify(UserInvite::EXPIRES_AT_PERIOD))
                 ->setToken($this->tokenGenerator->generateToken())
-                ->addEmailMessage(new UserInviteEmailMessage($invitation));
+                ->addEmailMessage(new UserInviteEmailMessage($invitation))
+            ;
 
             ++$insertions;
             if (0 === $insertions % self::BATCH_SIZE) {

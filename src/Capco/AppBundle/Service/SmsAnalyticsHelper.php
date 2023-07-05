@@ -55,8 +55,8 @@ class SmsAnalyticsHelper
         );
 
         if (
-            $remainingCreditsPercentOfLastRefill <= 25 &&
-            $remainingCreditsPercentOfLastRefill >= 10
+            $remainingCreditsPercentOfLastRefill <= 25
+            && $remainingCreditsPercentOfLastRefill >= 10
         ) {
             return RemainingSmsCreditStatus::LOW;
         }

@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
 use Capco\AppBundle\Entity\Comment;
-use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class CommentEditUrlResolver implements ResolverInterface
 {

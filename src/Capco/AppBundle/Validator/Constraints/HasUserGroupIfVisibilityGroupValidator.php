@@ -14,14 +14,14 @@ class HasUserGroupIfVisibilityGroupValidator extends ConstraintValidator
         $groups = $project->getRestrictedViewerGroups();
 
         if (
-            ProjectVisibilityMode::VISIBILITY_CUSTOM === $visibility &&
-            (!$groups || 0 === \count($groups))
+            ProjectVisibilityMode::VISIBILITY_CUSTOM === $visibility
+            && (!$groups || 0 === \count($groups))
         ) {
             $this->context->buildViolation($constraint->noGroupMessage)->addViolation();
         }
         if (
-            ProjectVisibilityMode::VISIBILITY_CUSTOM !== $visibility &&
-            ($groups && \count($groups) > 0)
+            ProjectVisibilityMode::VISIBILITY_CUSTOM !== $visibility
+            && ($groups && \count($groups) > 0)
         ) {
             $this->context->buildViolation($constraint->groupButNotCustom)->addViolation();
         }

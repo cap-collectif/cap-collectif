@@ -20,8 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MenuItemTranslation implements Translation
 {
-    use UuidTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)

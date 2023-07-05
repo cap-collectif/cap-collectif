@@ -26,7 +26,8 @@ class Oauth2SSOConfigurationFormType extends AbstractType
             ->add('clientId', PurifiedTextType::class, ['strip_tags' => true])
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
             ->add('profileUrl', UrlType::class)
-            ->add('logoutUrl', UrlType::class);
+            ->add('logoutUrl', UrlType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

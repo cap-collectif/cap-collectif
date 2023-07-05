@@ -51,15 +51,16 @@ class OpinionTypeAdmin extends AbstractAdmin
         $consultationId = null;
 
         if (
-            $this->hasParentFieldDescription() &&
-            $this->getParentFieldDescription()
+            $this->hasParentFieldDescription()
+            && $this->getParentFieldDescription()
                 ->getAdmin()
                 ->getSubject()
         ) {
             $consultationId = $this->getParentFieldDescription()
                 ->getAdmin()
                 ->getSubject()
-                ->getId();
+                ->getId()
+            ;
         } elseif ($subject && $subject->getConsultation()) {
             $consultationId = $subject->getConsultation()->getId();
         } elseif ($subject && $subject->getParent()) {
@@ -116,7 +117,8 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->end()
             ->with('admin.fields.opinion_type.group_appendices', ['class' => 'col-md-12'])
             ->end()
-            ->end();
+            ->end()
+        ;
 
         // Info
         // Options
@@ -163,7 +165,8 @@ class OpinionTypeAdmin extends AbstractAdmin
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->end()
-            ->with('admin.fields.opinion_type.group_votes');
+            ->with('admin.fields.opinion_type.group_votes')
+        ;
 
         if ($user->isSuperAdmin()) {
             $form->add('voteWidgetType', ChoiceType::class, [
@@ -201,7 +204,8 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->add('sourceable', null, [
                 'label' => 'admin.fields.opinion_type.sourceable',
                 'required' => false,
-            ]);
+            ])
+        ;
         if ($user->isSuperAdmin()) {
             $form->add('commentSystem', ChoiceType::class, [
                 'label' => 'comment.type',
@@ -228,7 +232,8 @@ class OpinionTypeAdmin extends AbstractAdmin
                     'sortable' => 'position',
                 ]
             )
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -244,7 +249,8 @@ class OpinionTypeAdmin extends AbstractAdmin
             ->createQueryBuilder('ot')
             ->leftJoin('ot.consultation', 'consultation')
             ->where('consultation.id = :consultationId')
-            ->setParameter('consultationId', $consultationId);
+            ->setParameter('consultationId', $consultationId)
+        ;
 
         if ($this->getSubject()->getId()) {
             $qb->andWhere('ot.id != :otId')->setParameter('otId', $this->getSubject()->getId());

@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class AbstractLogicJumpCondition
 {
-    use UuidTrait;
     use PositionableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=false)

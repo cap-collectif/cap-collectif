@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Manager\AnalysisConfigurationManager;
+use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 
 class ProcessingProposalCommand extends Command
 {
@@ -47,7 +47,8 @@ class ProcessingProposalCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'The message option is used to know if a message should be sent using RabbitMQ',
                 self::MESSAGE_YES
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -72,7 +73,7 @@ class ProcessingProposalCommand extends Command
             );
         }
 
-        $output->write("${count} proposals have been processed.", true);
+        $output->write("{$count} proposals have been processed.", true);
 
         return 0;
     }

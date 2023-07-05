@@ -15,7 +15,8 @@ class RequirementType extends AbstractType
         $builder
             ->add('id', RelayGlobalIdType::class)
             ->add('type')
-            ->add('label', null, ['required' => false]);
+            ->add('label', null, ['required' => false])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

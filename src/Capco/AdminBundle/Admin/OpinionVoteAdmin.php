@@ -2,16 +2,16 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Capco\AppBundle\Entity\OpinionVote;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OpinionVoteAdmin extends AbstractAdmin
 {
@@ -32,7 +32,8 @@ class OpinionVoteAdmin extends AbstractAdmin
             ])
             ->add('value', null, ['label' => 'global.value'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -49,7 +50,8 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -64,7 +66,8 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'styles' => OpinionVote::$voteTypesStyles,
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -82,7 +85,8 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'label' => 'global.value',
                 'choices' => OpinionVote::$voteTypesLabels,
                 'translation_domain' => 'CapcoAppBundle',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

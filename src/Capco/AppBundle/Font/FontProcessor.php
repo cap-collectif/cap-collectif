@@ -36,16 +36,16 @@ class FontProcessor
                 $filename = $zip->getNameIndex($i);
                 $fileinfo = pathinfo($filename);
                 if (
-                    isset($fileinfo['extension']) &&
-                    \in_array($fileinfo['extension'], self::ALLOWED_EXTENSIONS, true) &&
+                    isset($fileinfo['extension'])
+                    && \in_array($fileinfo['extension'], self::ALLOWED_EXTENSIONS, true)
                     // Needs to filter out some temp files created by ZipArchive in macOS. See https://stackoverflow.com/questions/49985338/how-to-remove-macosx-while-using-ziparchive
-                    !preg_match(
+                    && !preg_match(
                         '/(' . implode('|', self::EXCLUDED_FILE_PATTERNS) . ')/i',
                         $filename
                     )
                 ) {
                     $file = $tmp . \DIRECTORY_SEPARATOR . $fileinfo['basename'];
-                    copy("zip://{$archive->getRealPath()}#${filename}", $file);
+                    copy("zip://{$archive->getRealPath()}#{$filename}", $file);
                     $fonts[] = $this->processFont(new UploadedFile($file, $fileinfo['basename']));
                 }
             }
@@ -59,13 +59,7 @@ class FontProcessor
     {
         $extension = $file->getClientOriginalExtension();
         if (!\in_array($extension, self::ALLOWED_EXTENSIONS, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The file extension ("%s") must be one of the followings: %s',
-                    $file->getClientOriginalExtension(),
-                    implode(', ', self::ALLOWED_EXTENSIONS)
-                )
-            );
+            throw new \InvalidArgumentException(sprintf('The file extension ("%s") must be one of the followings: %s', $file->getClientOriginalExtension(), implode(', ', self::ALLOWED_EXTENSIONS)));
         }
         $font = Font::load($file->getRealPath());
         if (!$font) {

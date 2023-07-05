@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader;
 
 class ProposalStatusResolver implements ResolverInterface
 {

@@ -85,7 +85,8 @@ class EmptyUsernameListenerSpec extends ObjectBehavior
 
         $templating
             ->render('CapcoAppBundle:Default:choose_a_username.html.twig')
-            ->willReturn('choose_a_username.html.twig');
+            ->willReturn('choose_a_username.html.twig')
+        ;
 
         $response = new Response('choose_a_username.html.twig');
         $event->setResponse($response)->shouldBeCalled();
@@ -109,7 +110,8 @@ class EmptyUsernameListenerSpec extends ObjectBehavior
 
         $templating
             ->render('CapcoAppBundle:Default:choose_a_username.html.twig')
-            ->willReturn('choose_a_username.html.twig');
+            ->willReturn('choose_a_username.html.twig')
+        ;
 
         $response = new Response('choose_a_username.html.twig');
         $event->setResponse($response)->shouldBeCalled();

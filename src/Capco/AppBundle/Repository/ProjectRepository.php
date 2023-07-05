@@ -17,7 +17,7 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method Project[]|null findAll()
+ * @method null|Project[] findAll()
  */
 class ProjectRepository extends EntityRepository
 {
@@ -30,7 +30,8 @@ class ProjectRepository extends EntityRepository
         return $qb
             ->select('p.id', 'p.slug')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function findAllWithSteps()
@@ -44,7 +45,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('step.statuses', 'status')
             ->leftJoin('p.themes', 'theme')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function hydrateFromIds(array $ids): array
@@ -59,7 +61,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->where('p.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -84,13 +87,15 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.steps', 'pas')
             ->leftJoin('pas.step', 'step')
             ->andWhere('p.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getOneWithoutVisibilityCacheKey($slug))
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getByUser(User $user, $viewer = null)
@@ -102,7 +107,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('a.user', 'u')
             ->andWhere('u = :user')
             ->setParameter('user', $user)
-            ->orderBy('p.updatedAt', 'DESC');
+            ->orderBy('p.updatedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -119,7 +125,8 @@ class ProjectRepository extends EntityRepository
             ->setMaxResults($limit)
             ->orderBy("p.{$orderBy['field']}", $orderBy['direction'])
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int
@@ -127,7 +134,8 @@ class ProjectRepository extends EntityRepository
         return $this->getByOwnerQueryBuilder($owner, $viewer)
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByOwnerQueryBuilder(ProjectOwner $owner, ?User $viewer = null): QueryBuilder
@@ -136,7 +144,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin($owner instanceof User ? 'p.owner' : 'p.organizationOwner', 'o')
             ->andWhere('o.id = :ownerId')
             ->setParameter('ownerId', $owner->getId())
-            ->orderBy('p.updatedAt', 'DESC');
+            ->orderBy('p.updatedAt', 'DESC')
+        ;
 
         if ($owner instanceof Organization && $viewer && $viewer->isMemberOfOrganization($owner)) {
             $qb->orWhere('authors.organization = :ownerId');
@@ -154,7 +163,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.authors', 'authors')
             ->leftJoin('p.restrictedViewerGroups', 'pvg')
             ->orWhere('p.visibility IN (:visibility)')
-            ->setParameter('visibility', $visibility);
+            ->setParameter('visibility', $visibility)
+        ;
         // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
         /** @var User $viewer */
         $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
@@ -213,7 +223,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('pa.organization', 'organization')
             ->leftJoin('pa.user', 'u')
             ->andWhere('u.id IS NOT NULL OR organization.id IS NOT NULL')
-            ->orderBy('pa.createdAt', $order);
+            ->orderBy('pa.createdAt', $order)
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -228,9 +239,7 @@ class ProjectRepository extends EntityRepository
         $viewer = null
     ): Paginator {
         if ($page < 1) {
-            throw new \InvalidArgumentException(
-                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
-            );
+            throw new \InvalidArgumentException(sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page));
         }
 
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($viewer);
@@ -242,7 +251,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('pas.step', 's')
             ->leftJoin('p.cover', 'pov')
             ->leftJoin('p.projectType', 'projectType')
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if (null !== $theme && Theme::FILTER_ALL !== $theme) {
             $qb->andWhere('translations.slug = :theme')->setParameter('theme', $theme);
@@ -257,8 +267,8 @@ class ProjectRepository extends EntityRepository
         }
 
         if (
-            isset(Project::$sortOrder[$sort]) &&
-            Project::SORT_ORDER_CONTRIBUTIONS_COUNT === Project::$sortOrder[$sort]
+            isset(Project::$sortOrder[$sort])
+            && Project::SORT_ORDER_CONTRIBUTIONS_COUNT === Project::$sortOrder[$sort]
         ) {
             $qb->orderBy('p.contributionsCount', 'DESC');
         } else {
@@ -283,7 +293,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('pas.step', 's')
             ->leftJoin('p.cover', 'pov')
             ->leftJoin('p.projectType', 'type')
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -313,7 +324,8 @@ class ProjectRepository extends EntityRepository
             ->leftJoin('p.projectType', 'type')
             ->andWhere('t = :theme')
             ->setParameter('theme', $theme)
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         return $query->getQuery()->getResult();
     }
@@ -329,7 +341,8 @@ class ProjectRepository extends EntityRepository
     {
         $projects = $this->getProjectsViewerCanSeeQueryBuilder($viewer)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         return $this->createQueryBuilder('p')
             ->select('DISTINCT(p.projectType) as id')
@@ -341,7 +354,8 @@ class ProjectRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->useResultCache(true, 60)
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function getAssignedProjects(User $user): array
@@ -382,14 +396,16 @@ class ProjectRepository extends EntityRepository
                    OR  decision_maker.decision_maker_id = :userId',
                 $rsm
             )
-            ->setParameter('userId', $user->getId());
+            ->setParameter('userId', $user->getId())
+        ;
         $projectIds = $query->getResult();
 
         return $this->createQueryBuilder('p')
             ->andWhere('p.id IN (:projectIds)')
             ->setParameter('projectIds', $projectIds)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findByDistrict(
@@ -402,12 +418,14 @@ class ProjectRepository extends EntityRepository
 
         $qb->leftJoin('p.projectDistrictPositioners', 'pd')
             ->andWhere('pd.district = :district')
-            ->setParameter('district', $district);
+            ->setParameter('district', $district)
+        ;
 
         $query = $qb
             ->getQuery()
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($query);
     }
@@ -419,7 +437,8 @@ class ProjectRepository extends EntityRepository
         $qb->select('COUNT(p.id)')
             ->leftJoin('p.projectDistrictPositioners', 'pd')
             ->andWhere('pd.district = :district')
-            ->setParameter('district', $district);
+            ->setParameter('district', $district)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -430,6 +449,7 @@ class ProjectRepository extends EntityRepository
             ->innerJoin('authors.user', 'u', Expr\Join::WITH, 'u = :user')
             ->andWhere('p.visibility = :visibility')
             ->setParameter('user', $user)
-            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+        ;
     }
 }

@@ -2,21 +2,21 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
-use Prophecy\Prophet;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\LogicJump;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\QuestionChoice;
-use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Repository\RegistrationFormRepository;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
+use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\AppBundle\Validator\Constraints\HasResponsesToRequiredQuestions;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Prophet;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
@@ -204,6 +204,9 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
      * This is an helper function to prepare a form with questions and jumps for our unit tests.
      *
      * It avoid duplicating code for all our tests.
+     *
+     * @param mixed      $firstValue
+     * @param null|mixed $secondValue
      */
     private function prepareFormWithLogicJumps(
         Reply $reply,
@@ -345,15 +348,18 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
         $builder
             ->setParameter('missing', $questionId)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $builder
             ->atPath('responses')
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $builder->addViolation()->shouldBeCalled();
         $context
             ->buildViolation('global.missing_required_responses')
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
     }
 }

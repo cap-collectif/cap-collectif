@@ -37,9 +37,9 @@ class ChangeEventMutation extends AbstractEventMutation
 
         // a user want to edit his refused event
         if (
-            !$viewer->isAdmin() &&
-            EventReviewStatusType::REFUSED === $event->getStatus() &&
-            $event->getReview()
+            !$viewer->isAdmin()
+            && EventReviewStatusType::REFUSED === $event->getStatus()
+            && $event->getReview()
         ) {
             $event->getReview()->setStatus(EventReviewStatusType::AWAITING);
         }

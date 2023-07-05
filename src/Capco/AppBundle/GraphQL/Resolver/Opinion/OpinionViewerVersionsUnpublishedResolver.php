@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Opinion;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Psr\Log\LoggerInterface;
 
 class OpinionViewerVersionsUnpublishedResolver implements ResolverInterface
 {

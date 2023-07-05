@@ -19,11 +19,13 @@ class OpenIDReferrerResolver
                 $this->refererResolver = new OccitanieReferrerResolver();
 
                 break;
+
             case 'grand-lyon':
             case 'grand-lyon-preprod':
                 $this->refererResolver = new GrandLyonReferrerResolver();
 
                 break;
+
             default:
                 $this->refererResolver = new DefaultReferrerResolver();
         }

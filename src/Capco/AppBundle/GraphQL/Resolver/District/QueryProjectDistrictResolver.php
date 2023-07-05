@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\District;
 
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;

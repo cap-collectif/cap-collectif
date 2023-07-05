@@ -22,12 +22,11 @@ class QuestionsListResolver implements ResolverInterface
         $filter = $args->offsetGet('filter');
 
         switch ($filter) {
-            case QuestionsFilterType::JUMPS_ONLY: {
+            case QuestionsFilterType::JUMPS_ONLY:
                 return $this->repository->findWithJumpsOrWithAlwaysJumpDestination($questionnaire);
-            }
-            default: {
+
+            default:
                 return $this->repository->findByQuestionnaire($questionnaire);
-            }
         }
     }
 }

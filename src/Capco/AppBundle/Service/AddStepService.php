@@ -12,10 +12,10 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -73,28 +73,28 @@ class AddStepService
     private function createStepObject(string $stepType): AbstractStep
     {
         switch ($stepType) {
-            case 'COLLECT': {
+            case 'COLLECT':
                 return new CollectStep();
-            }
-            case 'SELECTION': {
+
+            case 'SELECTION':
                 return new SelectionStep();
-            }
-            case 'DEBATE': {
+
+            case 'DEBATE':
                 $debate = new Debate();
+
                 return new DebateStep($debate);
-            }
-            case 'QUESTIONNAIRE': {
+
+            case 'QUESTIONNAIRE':
                 return new QuestionnaireStep();
-            }
-            case 'CONSULTATION': {
+
+            case 'CONSULTATION':
                 return new ConsultationStep();
-            }
-            case 'OTHER': {
+
+            case 'OTHER':
                 return new OtherStep();
-            }
-            default: {
+
+            default:
                 throw new UserError('Please select a valid step type');
-            }
         }
     }
 

@@ -27,6 +27,7 @@ final class Version20220727183904 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_15C473AF61220EA6 ON mailing_list');
         $this->addSql('ALTER TABLE mailing_list DROP creator_id');
     }
+
     public function postUp(Schema $schema): void
     {
         $this->connection->executeQuery(

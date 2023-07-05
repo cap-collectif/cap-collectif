@@ -9,8 +9,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -45,20 +45,25 @@ class OrganizationRepositorySpec extends ObjectBehavior
             'o.id = ot.translatable'
         )
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere('ot.slug = :slug')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setParameter('slug', $goodSlug)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->getQuery()
             ->shouldBeCalled()
-            ->willReturn($query);
+            ->willReturn($query)
+        ;
         $query
             ->getOneOrNullResult()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
 
         $this->findOneBySlug($goodSlug)->shouldReturn($organization);
     }
@@ -73,20 +78,25 @@ class OrganizationRepositorySpec extends ObjectBehavior
             'o.id = ot.translatable'
         )
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere('ot.slug = :slug')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setParameter('slug', $badSlug)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->getQuery()
             ->shouldBeCalled()
-            ->willReturn($query);
+            ->willReturn($query)
+        ;
         $query
             ->getOneOrNullResult()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->findOneBySlug($badSlug)->shouldReturn(null);
     }
@@ -96,20 +106,25 @@ class OrganizationRepositorySpec extends ObjectBehavior
         $result = [];
         $qb->setFirstResult(0)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setMaxResults(50)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->addOrderBy('o.createdAt', 'DESC')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->getQuery()
             ->shouldBeCalled()
-            ->willReturn($query);
+            ->willReturn($query)
+        ;
         $query
             ->getResult()
             ->shouldBeCalled()
-            ->willReturn($result);
+            ->willReturn($result)
+        ;
 
         $this->findPaginated(null, null)->shouldReturn($result);
     }
@@ -123,22 +138,27 @@ class OrganizationRepositorySpec extends ObjectBehavior
         $offSet = 42;
         $qb->setFirstResult($offSet)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setMaxResults($limit)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->addOrderBy('o.createdAt', 'DESC')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere(Argument::any())->shouldNotBeCalled();
         $qb->setParameter(Argument::any(), Argument::any())->shouldNotBeCalled();
         $qb->getQuery()
             ->shouldBeCalled()
-            ->willReturn($query);
+            ->willReturn($query)
+        ;
         $query
             ->getResult()
             ->shouldBeCalled()
-            ->willReturn($result);
+            ->willReturn($result)
+        ;
 
         $this->findPaginated($limit, $offSet)->shouldReturn($result);
     }
@@ -153,13 +173,16 @@ class OrganizationRepositorySpec extends ObjectBehavior
         $viewer->__toString()->willReturn('user');
         $qb->setFirstResult(0)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setMaxResults(50)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->addOrderBy('o.createdAt', 'DESC')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->innerJoin(
             OrganizationTranslation::class,
             'ot',
@@ -172,30 +195,38 @@ class OrganizationRepositorySpec extends ObjectBehavior
 
         $qb->andWhere('ot.title LIKE :title')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
 
         $qb->orWhere('u.email LIKE :title')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
 
-        $qb->setParameter('title', "%${search}%")
+        $qb->setParameter('title', "%{$search}%")
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->join('o.members', 'm')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere('m.user = :viewer')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setParameter('viewer', $viewer)
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->getQuery()
             ->shouldBeCalled()
-            ->willReturn($query);
+            ->willReturn($query)
+        ;
         $query->getResult()
             ->shouldBeCalled()
-            ->willReturn($result);
+            ->willReturn($result)
+        ;
 
         $this->findPaginated(null, null, $search, ['user'], $viewer)->shouldReturn($result);
     }

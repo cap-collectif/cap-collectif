@@ -68,6 +68,27 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
         return $payload;
     }
 
+    public function isGranted(array $proposalIds, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        foreach ($proposalIds as $proposalId) {
+            /** * @var Proposal $proposal  */
+            $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
+            if (!$proposal) {
+                return false;
+            }
+            $isGranted = $this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER, $proposal);
+            if (!$isGranted) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private function revokeDecisionMakerToProposals(array $proposals, Arg $input): array
     {
         $this->proposalDecisionMakerRepository->deleteByProposals($proposals);
@@ -175,27 +196,4 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
             'revokations' => $revokations,
         ];
     }
-
-
-    public function isGranted(array $proposalIds, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-
-        foreach ($proposalIds as $proposalId) {
-            /** * @var $proposal Proposal  */
-            $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
-            if (!$proposal) {
-                return false;
-            }
-            $isGranted = $this->authorizationChecker->isGranted(ProposalAnalysisRelatedVoter::ASSIGN_DECISION_MAKER, $proposal);
-            if (!$isGranted) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
 }

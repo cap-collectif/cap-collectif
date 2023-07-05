@@ -4,11 +4,11 @@ namespace Capco\UserBundle\Security;
 
 // TODO: We could switch no native Symfony but it does not support locking, and we are using it…
 // Please, one day use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler instead.
-use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler as BaseHandler;
-use Predis\ClientInterface;
-use Symfony\Component\Security\Core\Security;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Predis\ClientInterface;
+use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler as BaseHandler;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * SessionWithJsonHandler add a Json string used by our NodeJS apps.
@@ -46,6 +46,9 @@ class SessionWithJsonHandler extends BaseHandler
      *
      * We must return 1 to avoid session_close errors
      *
+     * @param mixed $sessionId
+     * @param mixed $data
+     *
      * @return bool
      */
     public function write($sessionId, $data)
@@ -67,6 +70,8 @@ class SessionWithJsonHandler extends BaseHandler
 
     /**
      * $sessionId: string.
+     *
+     * @param mixed $sessionId
      *
      * @return string
      */

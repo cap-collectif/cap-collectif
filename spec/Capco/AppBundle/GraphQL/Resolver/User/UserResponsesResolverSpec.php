@@ -2,14 +2,14 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\User\UserResponsesResolver;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use PhpSpec\ObjectBehavior;
 
 class UserResponsesResolverSpec extends ObjectBehavior
 {
@@ -41,7 +41,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $builder
             ->connectionFromArray($responses->toArray())
             ->willReturn($connection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($subject, $viewer, $context)->shouldReturn($connection);
     }
 
@@ -64,7 +65,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $builder
             ->connectionFromArray($responses->toArray())
             ->willReturn($connection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($subject, $viewer, $context)->shouldReturn($connection);
     }
 
@@ -87,7 +89,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $builder
             ->connectionFromArray([])
             ->willReturn($emptyConnection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($subject, $viewer, $context)->shouldReturn($emptyConnection);
     }
 
@@ -109,7 +112,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $builder
             ->connectionFromArray([])
             ->willReturn($emptyConnection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($subject, $viewer, $context)->shouldReturn($emptyConnection);
     }
 
@@ -132,7 +136,8 @@ class UserResponsesResolverSpec extends ObjectBehavior
         $builder
             ->connectionFromArray([])
             ->willReturn($emptyConnection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($subject, $viewer, $context)->shouldReturn($emptyConnection);
     }
 }

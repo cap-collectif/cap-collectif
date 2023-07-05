@@ -16,7 +16,6 @@ final class Version20211228144641 extends AbstractFeatureFlagMigration
         return 'Remove feature flag app_news';
     }
 
-
     protected function getOldFlag(): ?string
     {
         return 'app_news';

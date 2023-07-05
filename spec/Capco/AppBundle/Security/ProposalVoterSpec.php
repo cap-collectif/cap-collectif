@@ -37,7 +37,8 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
             ProposalVoter::ACCESS_DENIED
         );
@@ -55,7 +56,8 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($admin);
+            ->willReturn($admin)
+        ;
         $subject->getProject()->willReturn($project);
         $admin->isAdmin()->willReturn(true);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
@@ -72,7 +74,8 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($admin);
+            ->willReturn($admin)
+        ;
         $subject->getProject()->willReturn($project);
         $admin->isAdmin()->willReturn(true);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_STATUS])->shouldReturn(
@@ -89,15 +92,18 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($author);
+            ->willReturn($author)
+        ;
         $subject
             ->viewerCanUpdate($author)
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject
             ->canContribute($author)
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject->getProject()->willReturn($project);
         $author->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(
@@ -114,7 +120,8 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($author);
+            ->willReturn($author)
+        ;
         $subject->getProject()->willReturn($project);
         $author->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_STATUS])->shouldReturn(
@@ -131,11 +138,13 @@ class ProposalVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $subject
             ->viewerCanUpdate($viewer)
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject->getProject()->willReturn($project);
         $viewer->isAdmin()->willReturn(false);
         $this->vote($token, $subject, [ProposalVoter::CHANGE_CONTENT])->shouldReturn(

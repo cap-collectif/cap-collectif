@@ -25,6 +25,7 @@ class ConsultationStepConsultationBySlugResolver implements ResolverInterface
         return $step
             ->getConsultations()
             ->matching(ConsultationRepository::createSlugCriteria($slug))
-            ->first();
+            ->first()
+        ;
     }
 }

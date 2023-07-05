@@ -20,7 +20,7 @@ trait VoteThresholdTrait
         return $this->voteThreshold;
     }
 
-    public function setVoteThreshold(int $voteThreshold = null): self
+    public function setVoteThreshold(?int $voteThreshold = null): self
     {
         $this->voteThreshold = $voteThreshold;
 

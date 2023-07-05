@@ -8,8 +8,8 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
@@ -132,6 +132,7 @@ class ProjectStatsResolver
                 }
 
                 break;
+
             case 'districts':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getDistrictsWithProposalsCountForStep(
@@ -143,6 +144,7 @@ class ProjectStatsResolver
                 }
 
                 break;
+
             case 'userTypes':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getUserTypesWithProposalsCountForStep(
@@ -154,6 +156,7 @@ class ProjectStatsResolver
                 }
 
                 break;
+
             case 'costs':
                 if ('collect' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithCostsForStep($step, $limit);
@@ -161,6 +164,7 @@ class ProjectStatsResolver
                 }
 
                 break;
+
             case 'votes':
                 if ('selection' === $step->getType()) {
                     $data['values'] = $this->getProposalsWithVotesCountForSelectionStep(
@@ -179,6 +183,7 @@ class ProjectStatsResolver
                 }
 
                 break;
+
             case 'categories':
                 $data['values'] = $this->getCategoriesWithProposalsCountForStep(
                     $step,

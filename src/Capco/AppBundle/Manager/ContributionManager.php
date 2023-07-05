@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Model\Publishable;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Psr\Log\LoggerInterface;
 

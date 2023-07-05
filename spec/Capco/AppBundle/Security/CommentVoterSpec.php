@@ -24,7 +24,8 @@ class CommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $comment, [CommentVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -40,7 +41,8 @@ class CommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(false);
 
@@ -59,7 +61,8 @@ class CommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $comment->getAuthor()->willReturn($viewer);
 
@@ -76,7 +79,8 @@ class CommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $comment->getAuthor()->willReturn(null);
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(true);

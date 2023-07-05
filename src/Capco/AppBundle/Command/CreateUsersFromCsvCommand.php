@@ -70,7 +70,7 @@ class CreateUsersFromCsvCommand extends AbstractImportCsvCommand
 
     protected function successMessage(int $successCount, OutputInterface $output): int
     {
-        $output->writeln("<info>${successCount} users successfully created.</info>");
+        $output->writeln("<info>{$successCount} users successfully created.</info>");
 
         return 0;
     }
@@ -93,7 +93,7 @@ class CreateUsersFromCsvCommand extends AbstractImportCsvCommand
         if (empty($email)) {
             $errors[] = 'missing email';
         } elseif ($this->isEmailAlreadyUsed($email)) {
-            $errors[] = "email ${email} is already used";
+            $errors[] = "email {$email} is already used";
         }
     }
 

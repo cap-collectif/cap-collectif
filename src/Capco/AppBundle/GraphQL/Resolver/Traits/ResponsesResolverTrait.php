@@ -3,18 +3,18 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
 use Capco\AppBundle\Entity\AbstractReply;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
-use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Entity\ProposalEvaluation;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 trait ResponsesResolverTrait
 {
@@ -36,9 +36,9 @@ trait ResponsesResolverTrait
         bool $isAnalyst = false
     ): iterable {
         $skipVerification =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
         $isAuthor = $author === $viewer;
         $isAnalystOrAdmin = $skipVerification;
         if (!$skipVerification) {

@@ -28,7 +28,8 @@ class MediaResponseType extends AbstractType
                         'maxMessage' => 'You must add 20 files or less.',
                     ]),
                 ],
-            ]);
+            ])
+        ;
 
         $builder->add('position', HiddenType::class, [
             'mapped' => false,

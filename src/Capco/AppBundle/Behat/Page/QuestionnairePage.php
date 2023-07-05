@@ -19,8 +19,7 @@ class QuestionnairePage extends Page
         'submit reply button' => '#CreateReplyForm-submit-create-reply',
         'submit draft button' => '#CreateReplyForm-submit-create-draft-reply',
         'submit update reply button' => '#UpdateReplyForm-UmVwbHk6cmVwbHky-submit-create-reply',
-        'submit update draft button' =>
-            '#UpdateReplyForm-UmVwbHk6cmVwbHk1-submit-create-draft-reply',
+        'submit update draft button' => '#UpdateReplyForm-UmVwbHk6cmVwbHk1-submit-create-draft-reply',
         'user replies' => '.userReplies',
         'user reply' => '.userReplies .replyLink',
         'user first reply link' => '.userReplies .reply:first-child a',
@@ -34,19 +33,13 @@ class QuestionnairePage extends Page
         'confirm delete last reply button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHky',
         'confirm delete reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk5',
         'confirm delete 2nd reply draft button' => '#reply-confirm-delete-buttonUmVwbHk6cmVwbHk1',
-        'first ranking choice button pick' =>
-            '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
-        'update first ranking choice button pick' =>
-            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
-        'update second ranking choice button pick' =>
-            '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item',
+        'first ranking choice button pick' => '#ranking__choices [data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
+        'update first ranking choice button pick' => '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMg=="] .btn-pick-item',
+        'update second ranking choice button pick' => '[data-rbd-draggable-id="UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2UxMw=="] .btn-pick-item',
         'button answer again' => '.btn-answer-again',
-        'first checkbox' =>
-            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux]',
-        'second checkbox' =>
-            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy]',
-        'third checkbox' =>
-            '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz]',
+        'first checkbox' => '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Ux]',
+        'second checkbox' => '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uy]',
+        'third checkbox' => '[for=CreateReplyForm-responses1_choice-UXVlc3Rpb25DaG9pY2U6cXVlc3Rpb25jaG9pY2Uz]',
     ];
 
     /**

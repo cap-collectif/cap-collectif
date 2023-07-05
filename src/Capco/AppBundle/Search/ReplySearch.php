@@ -96,7 +96,8 @@ class ReplySearch extends Search
         $boolQuery = (new BoolQuery())
             ->addFilter(new Term(['step.id' => $stepId]))
             ->addFilter(new Term(['draft' => false]))
-            ->addFilter(new Term(['published' => true]));
+            ->addFilter(new Term(['published' => true]))
+        ;
 
         $query = new Query($boolQuery);
 
@@ -105,7 +106,8 @@ class ReplySearch extends Search
         $query
             ->setSource(['id'])
             ->setSize(0)
-            ->setTrackTotalHits(true);
+            ->setTrackTotalHits(true)
+        ;
 
         $authenticatedParticipantsAggs = new Cardinality('authenticatedParticipants');
         $authenticatedParticipantsAggs->setField('author.id');
@@ -132,7 +134,7 @@ class ReplySearch extends Search
     public function getRepliesHydratedResults(ResultSet $set, ?string $term = null): array
     {
         $informations = array_map(
-            static fn(Result $result) => [
+            static fn (Result $result) => [
                 'id' => $result->getDocument()->get('id'),
                 'objectType' => $result->getDocument()->get('objectType'),
                 'geoip' => $result->getDocument()->has('geoip')
@@ -141,19 +143,19 @@ class ReplySearch extends Search
             ],
             $set->getResults()
         );
-        $ids = array_map(static fn(array $information) => $information['id'], $informations);
+        $ids = array_map(static fn (array $information) => $information['id'], $informations);
 
         $types = array_unique(
-            array_map(static fn(array $information) => $information['objectType'], $informations)
+            array_map(static fn (array $information) => $information['objectType'], $informations)
         );
         $map = [];
         foreach ($types as $type) {
             $typeInformations = array_filter(
                 $informations,
-                static fn(array $information) => $information['objectType'] === $type
+                static fn (array $information) => $information['objectType'] === $type
             );
             $typeIds = array_map(
-                static fn(array $information) => $information['id'],
+                static fn (array $information) => $information['id'],
                 $typeInformations
             );
             $map[$type] = $typeIds;

@@ -21,7 +21,7 @@ final class Version20200206102839 extends AbstractTranslationMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 
@@ -40,7 +40,7 @@ final class Version20200206102839 extends AbstractTranslationMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            $this->connection->getDatabasePlatform()->getName() !== 'mysql',
+            'mysql' !== $this->connection->getDatabasePlatform()->getName(),
             'Migration can only be executed safely on \'mysql\'.'
         );
 

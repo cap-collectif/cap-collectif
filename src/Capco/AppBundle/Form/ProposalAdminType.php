@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Capco\AppBundle\Form\Type\RelayNodeType;
 
 class ProposalAdminType extends ProposalType
 {
@@ -26,7 +26,8 @@ class ProposalAdminType extends ProposalType
             ])
             ->add('likers', null, [
                 'by_reference' => false,
-            ]);
+            ])
+        ;
 
         parent::buildForm($builder, $options);
     }

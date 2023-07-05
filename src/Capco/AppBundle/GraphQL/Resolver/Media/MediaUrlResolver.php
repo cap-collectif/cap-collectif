@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Media;
 
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Provider\MediaProvider;
-use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class MediaUrlResolver implements ResolverInterface
 {
@@ -31,9 +31,9 @@ class MediaUrlResolver implements ResolverInterface
     {
         $format = $args && $args['format'] ? $args['format'] : 'reference';
         $isExportContext =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         $routingContext = $this->router->getContext();
 

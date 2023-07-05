@@ -30,7 +30,8 @@ class EventParticipantsResolver implements ResolverInterface
                 $registrationEvents = $this->eventRegistrationRepository
                     ->getParticipantsInEvent($event, $limit, $offset)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
 
                 foreach ($registrationEvents as $key => $registration) {
                     if ($registration && $registration->getUser()) {

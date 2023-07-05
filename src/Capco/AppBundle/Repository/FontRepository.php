@@ -7,8 +7,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
 /**
- * @method Font|null find($id, $lockMode = null, $lockVersion = null)
- * @method Font|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Font find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Font findOneBy(array $criteria, array $orderBy = null)
  * @method Font[]    findAll()
  * @method Font[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -17,7 +17,7 @@ class FontRepository extends EntityRepository
     private const DEFAULT_FONT = 'Open Sans';
 
     /**
-     * @return iterable|Font[]
+     * @return Font[]|iterable
      */
     public function findAllGroupedByName(): iterable
     {
@@ -26,7 +26,8 @@ class FontRepository extends EntityRepository
             ->addOrderBy('f.isCustom', 'ASC')
             ->addOrderBy('f.name', 'ASC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findOneByUploadedFont(array $font): ?Font
@@ -45,7 +46,8 @@ class FontRepository extends EntityRepository
                 'fullname' => $font['fullname'],
             ])
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getCurrentHeadingFont(): ?Font
@@ -57,7 +59,8 @@ class FontRepository extends EntityRepository
             ->addGroupBy('f.name')
             ->setMaxResults(1)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         return \count($results) > 0 ? $results[0] : null;
     }
@@ -71,15 +74,16 @@ class FontRepository extends EntityRepository
             ->addGroupBy('f.name')
             ->setMaxResults(1)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         return \count($results) > 0 ? $results[0] : null;
     }
 
     /**
-     * @return Font[]
-     *
      * @throws NonUniqueResultException
+     *
+     * @return Font[]
      */
     public function getActiveHeadingFonts(): iterable
     {
@@ -88,13 +92,14 @@ class FontRepository extends EntityRepository
         return $qb
             ->where($qb->expr()->eq('f.useAsHeading', true))
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     /**
-     * @return Font[]
-     *
      * @throws NonUniqueResultException
+     *
+     * @return Font[]
      */
     public function getActiveBodyFonts(): iterable
     {
@@ -103,7 +108,8 @@ class FontRepository extends EntityRepository
         return $qb
             ->where($qb->expr()->eq('f.useAsBody', true))
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     /**
@@ -118,7 +124,8 @@ class FontRepository extends EntityRepository
                 'f.isCustom = 1 AND f.file IS NOT NULL AND (f.useAsBody = 1 OR f.useAsHeading = 1)'
             )
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     /**
@@ -131,19 +138,22 @@ class FontRepository extends EntityRepository
         return $qb
             ->where('f.isCustom = 1 AND f.file IS NOT NULL')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getLastUploadedFont(): ?Font
     {
         $baseQuery = $this->createQueryBuilder('f')
             ->setMaxResults(1)
-            ->addOrderBy('f.createdAt', 'DESC');
+            ->addOrderBy('f.createdAt', 'DESC')
+        ;
 
         $lastFont = (clone $baseQuery)
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
 
         $normalFont = (clone $baseQuery)
             ->where('f.name = :name AND f.weight = :weight AND f.style = :style')
@@ -153,7 +163,8 @@ class FontRepository extends EntityRepository
                 'weight' => 400,
             ])
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         if (0 === \count($normalFont)) {
             $result = (clone $baseQuery)
@@ -165,7 +176,8 @@ class FontRepository extends EntityRepository
                 ])
                 ->addOrderBy('f.weight', 'DESC')
                 ->getQuery()
-                ->getResult();
+                ->getResult()
+            ;
 
             return \count($result) > 0 ? $result[0] : $lastFont;
         }
@@ -181,11 +193,12 @@ class FontRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('f.name', ':name'))
             ->setParameter('name', self::DEFAULT_FONT)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
-     * @return iterable|Font[]
+     * @return Font[]|iterable
      */
     public function getSameFamilyFonts(Font $font): iterable
     {
@@ -195,6 +208,7 @@ class FontRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('f.name', ':name'))
             ->setParameter('name', $font->getName())
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

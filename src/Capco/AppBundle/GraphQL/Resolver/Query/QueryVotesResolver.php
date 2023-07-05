@@ -3,20 +3,20 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepPointsVotesCountResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
+use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class QueryVotesResolver implements ResolverInterface
 {
@@ -91,7 +91,8 @@ class QueryVotesResolver implements ResolverInterface
                 ->__invoke($step, $onlyAccounted)
                 ->then(function ($value) use (&$count) {
                     $count += $value;
-                });
+                })
+            ;
 
             $this->adapter->await($promise);
         }

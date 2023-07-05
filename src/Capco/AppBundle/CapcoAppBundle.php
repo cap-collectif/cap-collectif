@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Capco\AppBundle\DependencyInjection\Compiler\MailerServicePass;
 use Capco\AppBundle\DependencyInjection\Compiler\SimpleSAMLServicePass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class CapcoAppBundle extends Bundle
 {

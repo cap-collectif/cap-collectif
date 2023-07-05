@@ -36,17 +36,14 @@ class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParti
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;
-
     use DebatableTrait;
     use ForAgainstTrait;
     use ModerableTrait;
     use PublishableTrait;
     use ReportableTrait;
-
     use TextableTrait;
     use TimestampableTrait;
     use TokenTrait;
-
     use TrashableTrait;
     use UuidTrait;
     use VotableOkTrait;

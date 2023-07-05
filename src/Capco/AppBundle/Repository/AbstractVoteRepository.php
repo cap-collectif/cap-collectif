@@ -19,7 +19,8 @@ class AbstractVoteRepository extends EntityRepository
             ->select('COUNT(DISTINCT v.id)')
             ->andWhere('v.published = true')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countUnpublished(): int
@@ -28,7 +29,8 @@ class AbstractVoteRepository extends EntityRepository
             ->select('COUNT(DISTINCT v.id)')
             ->andWhere('v.published = false')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countAllByAuthor(User $user): int
@@ -36,7 +38,8 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('v');
         $qb->select('count(DISTINCT v)')
             ->andWhere('v.user = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -92,7 +95,8 @@ class AbstractVoteRepository extends EntityRepository
             ->createNativeQuery($sqlRequest, $rsm)
             ->setParameter('user_id', $user->getId())
             ->setParameter('offset', $offset)
-            ->setParameter('limit', $limit);
+            ->setParameter('limit', $limit)
+        ;
 
         return $nativeQuery->execute();
     }
@@ -109,12 +113,14 @@ class AbstractVoteRepository extends EntityRepository
             ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
             ->andWhere('v.published = true')
-            ->addOrderBy('v.createdAt', 'ASC');
+            ->addOrderBy('v.createdAt', 'ASC')
+        ;
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb->addOrderBy('v.updatedAt', 'ASC')
                 ->addSelect('v.updatedAt', 'v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
-                ->setParameter('object', $object);
+                ->setParameter('object', $object)
+            ;
         }
 
         $votes = $qb->getQuery()->getScalarResult();
@@ -150,7 +156,8 @@ class AbstractVoteRepository extends EntityRepository
             ->leftJoin('u.media', 'm')
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
-            ->orderBy('v.createdAt', 'ASC');
+            ->orderBy('v.createdAt', 'ASC')
+        ;
 
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
@@ -158,8 +165,8 @@ class AbstractVoteRepository extends EntityRepository
         foreach ($votes as $vote) {
             try {
                 if (
-                    !method_exists($vote, 'getProposal') ||
-                    ($vote->getProposal() && !$vote->getProposal()->isDeleted())
+                    !method_exists($vote, 'getProposal')
+                    || ($vote->getProposal() && !$vote->getProposal()->isDeleted())
                 ) {
                     if (!method_exists($vote, 'isPrivate') || !$vote->isPrivate()) {
                         $publicVotes[] = $vote;
@@ -177,13 +184,15 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.published = true');
+            ->andWhere('v.published = true')
+        ;
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb->addSelect('v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->andWhere('v.user = :user')
                 ->setParameter('user', $user)
-                ->setParameter('object', $object);
+                ->setParameter('object', $object)
+            ;
         }
 
         $result = $qb->getQuery()->getOneOrNullResult();
@@ -225,28 +234,28 @@ class AbstractVoteRepository extends EntityRepository
                 SELECT COUNT(v.id) as nb , 'opi' as entity
                 FROM votes v
                 LEFT JOIN opinion o ON v.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'args' as entity
                 FROM votes v
                 LEFT JOIN argument a ON v.argument_id = a.id
                 LEFT JOIN opinion o ON a.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'src' as entity
                 FROM votes v
                 LEFT JOIN source s ON v.source_id = s.id
                 LEFT JOIN opinion o ON s.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'opv' as entity
                 FROM votes v
                 LEFT JOIN opinion_version ov ON v.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'aropv' as entity
@@ -254,7 +263,7 @@ class AbstractVoteRepository extends EntityRepository
                 LEFT JOIN argument a ON v.argument_id = a.id
                 LEFT JOIN opinion_version ov ON a.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
                 UNION
                 SELECT COUNT(v.id) as nb, 'srcopv'  as entity
@@ -262,7 +271,7 @@ class AbstractVoteRepository extends EntityRepository
                 LEFT JOIN source s ON v.source_id = s.id
                 LEFT JOIN opinion_version ov ON s.opinion_version_id = ov.id
                 LEFT JOIN opinion o ON ov.opinion_id = o.id
-                WHERE o.consultation_id =\"${cId}\"
+                WHERE o.consultation_id =\"{$cId}\"
                 AND v.published = true
             ) res
         ";

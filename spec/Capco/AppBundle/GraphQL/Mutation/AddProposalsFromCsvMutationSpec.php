@@ -67,7 +67,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $mediaRepository->find('MediaUUID')->willReturn($media);
         $importProposalsFromCsv
             ->setFilePath('/public/media/default/0001/01/filename.csv')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $input->offsetGet('delimiter')->willReturn(';');
         $importProposalsFromCsv->setDelimiter(';')->shouldBeCalled();
@@ -79,7 +80,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $connectionBuilder
             ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
             ->willReturn($connection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $fail = [
             'importableProposals' => 0,
             'importedProposals' => $connection,
@@ -113,7 +115,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $mediaRepository->find('MediaUUID')->willReturn($media);
         $importProposalsFromCsv
             ->setFilePath('/public/media/default/0001/01/filename.csv')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $input->offsetGet('delimiter')->willReturn(';');
         $input->offsetGet('dryRun')->willReturn(false);
@@ -126,13 +129,15 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
             ->import(false, true, false)
-            ->willThrow(new \RuntimeException('EMPTY_FILE'));
+            ->willThrow(new \RuntimeException('EMPTY_FILE'))
+        ;
         $connection->setTotalCount(0)->shouldBeCalled();
 
         $connectionBuilder
             ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
             ->willReturn($connection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $fail = [
             'importableProposals' => 0,
@@ -167,7 +172,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $mediaRepository->find('MediaUUID')->willReturn($media);
         $importProposalsFromCsv
             ->setFilePath('/public/media/default/0001/01/filename.csv')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $input->offsetGet('delimiter')->willReturn(';');
         $input->offsetGet('dryRun')->willReturn(false);
@@ -180,14 +186,16 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
             ->import(false, true, false)
-            ->willThrow(new \RuntimeException('BAD_DATA_MODEL'));
+            ->willThrow(new \RuntimeException('BAD_DATA_MODEL'))
+        ;
 
         $connection->setTotalCount(0)->shouldBeCalled();
 
         $connectionBuilder
             ->connectionFromArray([], \Prophecy\Argument::type(Arg::class))
             ->willReturn($connection)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $fail = [
             'importableProposals' => 0,
@@ -220,7 +228,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $mediaRepository->find('MediaUUID')->willReturn($media);
         $importProposalsFromCsv
             ->setFilePath('/public/media/default/0001/01/filename.csv')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $input->offsetGet('delimiter')->willReturn(';');
         $input->offsetGet('dryRun')->willReturn(false);
@@ -233,7 +242,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         $proposalForm->getStep()->willReturn($step);
         $importProposalsFromCsv
             ->import(false, true, false)
-            ->willThrow(new \RuntimeException('STEP_NOT_FOUND'));
+            ->willThrow(new \RuntimeException('STEP_NOT_FOUND'))
+        ;
 
         $this->shouldThrow(new \RuntimeException('STEP_NOT_FOUND'))->during('__invoke', [
             $input,

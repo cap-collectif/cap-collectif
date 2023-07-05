@@ -57,10 +57,10 @@ class FooterRuntime implements RuntimeExtensionInterface
 
     public function isNextLinkEnabled(array $links, int $index): bool
     {
-        return $links[$index] instanceof MenuItem &&
-            $links[$index] &&
-            $links[$index]->getIsEnabled() &&
-            $links[$index]->getLink();
+        return $links[$index] instanceof MenuItem
+            && $links[$index]
+            && $links[$index]->getIsEnabled()
+            && $links[$index]->getLink();
     }
 
     public static function generateFooterLegalCacheKey(string $locale): string

@@ -100,7 +100,8 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('link', null, [
                 'label' => 'global.link',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -143,7 +144,8 @@ class MenuItemAdmin extends AbstractAdmin
                         'template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig',
                     ],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -171,7 +173,8 @@ class MenuItemAdmin extends AbstractAdmin
                 'required' => false,
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => [],
-            ]);
+            ])
+        ;
         $subject = $this->getSubject();
 
         $form
@@ -186,7 +189,8 @@ class MenuItemAdmin extends AbstractAdmin
                 'required' => false,
                 'disabled' => !$subject->getIsFullyModifiable(),
                 'help' => 'admin.help.menu_item.link',
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -213,7 +217,8 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('Page', AdminType::class, [
                 'label' => 'admin.fields.menu_item.page',
-            ]);
+            ])
+        ;
         if (null === $subject->getPage()) {
             $show->add('link', null, [
                 'label' => 'global.link',
@@ -227,7 +232,8 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -270,7 +276,8 @@ class MenuItemAdmin extends AbstractAdmin
             ->andWhere('mi.menu = :header')
             ->setParameter('header', MenuItem::TYPE_HEADER)
             ->andWhere('mit.link IS NULL OR mit.link = :blankLink')
-            ->setParameter('blankLink', '');
+            ->setParameter('blankLink', '')
+        ;
     }
 
     private function createPageQuery(): QueryBuilder
@@ -278,6 +285,7 @@ class MenuItemAdmin extends AbstractAdmin
         return $this->getModelManager()
             ->createQuery('CapcoAppBundle:Page', 'p')
             ->where('p.isEnabled = :enabled')
-            ->setParameter('enabled', true);
+            ->setParameter('enabled', true)
+        ;
     }
 }

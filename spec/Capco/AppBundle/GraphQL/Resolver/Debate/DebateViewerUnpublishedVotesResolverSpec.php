@@ -40,11 +40,13 @@ class DebateViewerUnpublishedVotesResolverSpec extends ObjectBehavior
         $repository
             ->getUnpublishedByDebateAndUser($debate, $viewer, 11, 0)
             ->willReturn($paginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $repository
             ->countUnpublishedByDebateAndUser($debate, $viewer)
             ->willReturn(2)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $paginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
 
         $connection = $this->__invoke($debate, $args, $viewer);

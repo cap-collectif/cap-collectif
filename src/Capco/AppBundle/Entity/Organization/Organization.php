@@ -109,7 +109,7 @@ class Organization implements Translatable, Author, ProjectOwner, IndexableInter
     public function getUsersMember(): Collection
     {
         return $this->members->map(
-            fn(OrganizationMember $organizationMember) => $organizationMember->getUser()
+            fn (OrganizationMember $organizationMember) => $organizationMember->getUser()
         );
     }
 

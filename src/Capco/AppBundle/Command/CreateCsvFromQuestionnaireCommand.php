@@ -5,15 +5,15 @@ namespace Capco\AppBundle\Command;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\Resolver\ProjectDownloadResolver;
-use Symfony\Component\Console\Output\OutputInterface;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Resolver\ProjectDownloadResolver;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
@@ -134,7 +134,8 @@ class CreateCsvFromQuestionnaireCommand extends BaseExportCommand
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force export if feature toggle "export" is disabled'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

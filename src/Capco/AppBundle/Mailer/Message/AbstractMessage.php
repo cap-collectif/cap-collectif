@@ -151,9 +151,7 @@ abstract class AbstractMessage
     final public function getRecipient($key /*:?MessageRecipient*/)
     {
         if (!\is_int($key) && !\is_string($key)) {
-            throw new \InvalidArgumentException(
-                'Recipient key must be an integer index or valid email address string.'
-            );
+            throw new \InvalidArgumentException('Recipient key must be an integer index or valid email address string.');
         }
 
         if (\is_string($key) && isset($this->recipients[($key = mb_strtolower($key))])) {
@@ -256,7 +254,7 @@ abstract class AbstractMessage
 
     final public static function escape(string $string): string
     {
-        return htmlspecialchars($string, ENT_NOQUOTES, 'UTF-8', false);
+        return htmlspecialchars($string, \ENT_NOQUOTES, 'UTF-8', false);
     }
 
     final protected static function cleanHtml(string $string): string

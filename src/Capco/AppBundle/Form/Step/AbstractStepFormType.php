@@ -9,10 +9,10 @@ use Capco\AppBundle\Form\RequirementType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Capco\AppBundle\Validator\Constraints\CheckboxRequirementHasLabel;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 abstract class AbstractStepFormType extends AbstractType
 {
@@ -25,7 +25,7 @@ abstract class AbstractStepFormType extends AbstractType
             ->add('body')
             ->add('bodyUsingJoditWysiwyg')
             ->add('title', TextType::class, [
-                'empty_data' => ''
+                'empty_data' => '',
             ])
             ->add('label')
             ->add('startAt', DateTimeType::class, [
@@ -48,10 +48,12 @@ abstract class AbstractStepFormType extends AbstractType
                 ) {
                     $itemFromDb
                         ->setLabel($itemFromUser->getLabel())
-                        ->setType($itemFromUser->getType());
+                        ->setType($itemFromUser->getType())
+                    ;
                 },
                 'constraints' => [new CheckboxRequirementHasLabel()],
-            ]);
+            ])
+        ;
         if ($builder->getData() instanceof ParticipativeStepInterface) {
             $builder->add('timeless');
         }

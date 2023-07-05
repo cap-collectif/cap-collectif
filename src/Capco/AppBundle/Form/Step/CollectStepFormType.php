@@ -8,9 +8,9 @@ use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Form\StatusFormType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class CollectStepFormType extends AbstractStepFormType
 {
@@ -32,7 +32,8 @@ class CollectStepFormType extends AbstractStepFormType
                 'on_update' => static function (Status $itemFromDb, Status $itemFromUser) {
                     $itemFromDb
                         ->setName($itemFromUser->getName())
-                        ->setColor($itemFromUser->getColor());
+                        ->setColor($itemFromUser->getColor())
+                    ;
                 },
             ])
             ->add('secretBallot')
@@ -46,7 +47,8 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('mainView', ChoiceType::class, [
                 'choices' => ViewConfiguration::ALL,
             ])
-            ->add('isProposalSmsVoteEnabled');
+            ->add('isProposalSmsVoteEnabled')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

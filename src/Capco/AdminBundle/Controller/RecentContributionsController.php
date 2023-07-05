@@ -2,14 +2,14 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Notifier\ContributionNotifier;
 use Capco\AdminBundle\Resolver\RecentContributionsResolver;
-use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Notifier\ContributionNotifier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class RecentContributionsController extends Controller
 {
@@ -87,6 +87,9 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/unpublish", name="capco_admin_contributions_unpublish")
+     *
+     * @param mixed $type
+     * @param mixed $id
      */
     public function unpublishAction(Request $request, $type, $id)
     {

@@ -17,7 +17,7 @@ class AnalyticsPageViews implements Aggregatable
     public static function fromEs(ResultSet $set): self
     {
         $documents = array_map(
-            static fn(array $document) => AggregatedResult::fromEs($document),
+            static fn (array $document) => AggregatedResult::fromEs($document),
             $set->getAggregation('page_view_per_interval')['buckets']
         );
 

@@ -29,7 +29,7 @@ final class Version20190604231806 extends AbstractMigration
         $table = 'fos_user';
         /** @var User[] $users */
         $users = $this->connection->fetchAllAssociative(
-            "SELECT id, website FROM ${table} WHERE website IS NOT NULL"
+            "SELECT id, website FROM {$table} WHERE website IS NOT NULL"
         );
         foreach ($users as $user) {
             echo 'Updating website_url for user : ' . $user['id'] . \PHP_EOL;

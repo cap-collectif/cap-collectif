@@ -19,6 +19,7 @@ trait BodyUsingJoditWysiwygTrait
     public function setBodyUsingJoditWysiwyg(bool $bodyUsingJoditWysiwyg): self
     {
         $this->bodyUsingJoditWysiwyg = $bodyUsingJoditWysiwyg;
+
         return $this;
     }
 }

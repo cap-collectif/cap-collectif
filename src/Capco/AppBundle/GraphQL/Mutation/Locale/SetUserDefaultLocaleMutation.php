@@ -39,7 +39,7 @@ class SetUserDefaultLocaleMutation implements MutationInterface
         }
         $updatedUser = $this->setUserDefaultLocale($user ?? $viewer, $code);
         if (null === $updatedUser) {
-            throw new BadRequestHttpException("The locale with code ${code} does not exist.");
+            throw new BadRequestHttpException("The locale with code {$code} does not exist.");
         }
 
         return compact('code');
@@ -52,7 +52,7 @@ class SetUserDefaultLocaleMutation implements MutationInterface
         }
 
         if ($code && !$this->localeRepository->findOneBy(['code' => $code, 'published' => true])) {
-            throw new BadRequestHttpException("The locale with code ${code} does not exist or is not enabled.");
+            throw new BadRequestHttpException("The locale with code {$code} does not exist or is not enabled.");
         }
 
         $user->setLocale($code);

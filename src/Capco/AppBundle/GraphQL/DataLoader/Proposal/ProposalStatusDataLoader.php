@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Cache\RedisCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalStatusDataLoader extends BatchDataLoader
 {

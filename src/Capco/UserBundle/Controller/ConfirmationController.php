@@ -5,22 +5,22 @@ namespace Capco\UserBundle\Controller;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Routing\RouterInterface;
-use Capco\UserBundle\Doctrine\UserManager;
-use Capco\UserBundle\Repository\UserRepository;
-use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Manager\ContributionManager;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
@@ -79,7 +79,8 @@ class ConfirmationController extends Controller
     {
         $step = $stepId ? $this->stepRepo->find($stepId) : null;
 
-        $response = new RedirectResponse($step ?
+        $response = new RedirectResponse(
+            $step ?
             $this->stepUrlResolver->__invoke($step) :
             $this->router->generate('app_homepage')
         );

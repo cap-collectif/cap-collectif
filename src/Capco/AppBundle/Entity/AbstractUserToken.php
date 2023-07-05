@@ -55,6 +55,7 @@ abstract class AbstractUserToken
     public function setConsumptionDate(?\DateTime $consumptionDate): self
     {
         $this->consumptionDate = $consumptionDate;
+
         return $this;
     }
 

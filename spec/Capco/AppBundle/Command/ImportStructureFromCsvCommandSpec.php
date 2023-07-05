@@ -3,10 +3,10 @@
 namespace spec\Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\ImportStructureFromCsvCommand;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\OpinionType;
 
 class ImportStructureFromCsvCommandSpec extends ObjectBehavior
 {

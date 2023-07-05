@@ -3,20 +3,20 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Doctrine\DBAL\Driver\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Debate\DebateVote;
-use Capco\AppBundle\Repository\DebateVoteRepository;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateVoteMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 
 class AddDebateVoteMutationSpec extends ObjectBehavior
 {
@@ -59,7 +59,8 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('widgetOriginURI')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);
@@ -67,7 +68,8 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         $repository
             ->getOneByDebateAndUser($debate, $viewer)
             ->willReturn(null)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $debate->viewerCanParticipate($viewer)->willReturn(true);
 
@@ -96,7 +98,8 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('widgetOriginURI')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $input->offsetGet('type')->willReturn('AGAINST');
 
         $globalIdResolver->resolve($debateId, $viewer)->willReturn($debate);

@@ -14,7 +14,8 @@ class ProjectDistrictRepository extends EntityRepository
         $query
             ->andWhere('d.id IN (:ids)')
             ->leftJoin('d.translations', 'dt')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $query->getQuery()->getResult();
     }
@@ -49,7 +50,8 @@ class ProjectDistrictRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pd')
             ->leftJoin('pd.translations', 'pdt')
             ->andWhere('pdt.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -65,7 +67,8 @@ class ProjectDistrictRepository extends EntityRepository
             ->setParameter('projectId', $projectId)
             ->orderBy('positioner.position')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
         //Get districts not linked to the project (There are projects already appearing in $in)
         $out = $this->createQueryBuilder('d')
             ->leftJoin('d.projectDistrictPositioners', 'positioner')
@@ -73,7 +76,8 @@ class ProjectDistrictRepository extends EntityRepository
             ->leftJoin('d.translations', 'dt')
             ->setParameter('projectId', $projectId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
         foreach (array_diff($out, $in) as $item) {
             $in[] = $item;
         }

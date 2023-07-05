@@ -18,7 +18,8 @@ class SectionProjectType extends AbstractType
             ->add('id')
             ->add('position')
             ->add('project', RelayNodeType::class, ['class' => Project::class])
-            ->add('section', RelayNodeType::class, ['class' => Section::class]);
+            ->add('section', RelayNodeType::class, ['class' => Section::class])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -11,12 +11,11 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-
 
 class MigrateProjectAdminToOrganization extends Command
 {
@@ -27,12 +26,11 @@ class MigrateProjectAdminToOrganization extends Command
     private LoggerInterface $logger;
 
     public function __construct(
-        EntityManagerInterface  $em,
+        EntityManagerInterface $em,
         AddOrganizationMutation $addOrganizationMutation,
-        UserRepository          $userRepository,
-        LoggerInterface         $logger
-    )
-    {
+        UserRepository $userRepository,
+        LoggerInterface $logger
+    ) {
         parent::__construct();
 
         $this->userRepository = $userRepository;
@@ -46,24 +44,24 @@ class MigrateProjectAdminToOrganization extends Command
     protected function configure()
     {
         $this->setName('capco:migrate_project_admin_to_organization')
-            ->setDescription('A command to migrate existing user with ROLE_PROJECT_ADMIN to an organization.');
+            ->setDescription('A command to migrate existing user with ROLE_PROJECT_ADMIN to an organization.')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $users = $this->userRepository->findByRole(UserRole::ROLE_PROJECT_ADMIN);
-        $countUsers = count($users);
+        $countUsers = \count($users);
 
-        /** * @var $user User */
+        /** * @var User $user */
         foreach ($users as $index => $user) {
             $countIndex = $index + 1;
-            $output->writeln("migrating user => {$user->getUsername()} ({$countIndex}/$countUsers)");
+            $output->writeln("migrating user => {$user->getUsername()} ({$countIndex}/{$countUsers})");
 
             $user->removeRole(UserRole::ROLE_PROJECT_ADMIN);
             $organization = $this->createOrganization($user);
             $this->migrateUserInfos($user, $organization);
             $this->addOrganizationMember($organization, $user);
-
 
             try {
                 $this->updateProjects($user->getId(), $organization->getId());
@@ -75,6 +73,7 @@ class MigrateProjectAdminToOrganization extends Command
                 $this->updatePosts($user->getId(), $organization->getId());
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
+
                 return 1;
             }
         }
@@ -83,8 +82,6 @@ class MigrateProjectAdminToOrganization extends Command
 
         return 0;
     }
-
-
 
     private function migrateUserInfos(User $user, Organization $organization)
     {
@@ -103,8 +100,8 @@ class MigrateProjectAdminToOrganization extends Command
             [
                 'title' => $user->getUsername(),
                 'body' => '',
-                'locale' => 'fr-FR'
-            ]
+                'locale' => 'fr-FR',
+            ],
         ];
 
         $input = new Arg(['translations' => $translations]);
@@ -122,7 +119,6 @@ class MigrateProjectAdminToOrganization extends Command
         $this->em->persist($organizationMember);
         $this->em->flush();
     }
-
 
     private function updateProjects(string $ownerId, string $organizationId): void
     {
@@ -165,8 +161,9 @@ class MigrateProjectAdminToOrganization extends Command
     {
         $authorizedTables = ['project', 'questionnaire', 'proposal_form', 'blog_post', 'event', 'mailing_list', 'emailing_campaign'];
 
-        if (!in_array($table, $authorizedTables)) {
-            $authorizedTablesString = join('/', $authorizedTables);
+        if (!\in_array($table, $authorizedTables)) {
+            $authorizedTablesString = implode('/', $authorizedTables);
+
             throw new \Exception("table {$table} does not belong to authorized tables {$authorizedTablesString}");
         }
 
@@ -174,7 +171,7 @@ class MigrateProjectAdminToOrganization extends Command
         $stmt = $this->connection->prepare($sql);
         $stmt->executeStatement([
             'ownerId' => $ownerId,
-            'organizationId' => $organizationId
+            'organizationId' => $organizationId,
         ]);
     }
 
@@ -182,8 +179,9 @@ class MigrateProjectAdminToOrganization extends Command
     {
         $authorizedTables = ['blog_post_authors', 'project_author'];
 
-        if (!in_array($table, $authorizedTables)) {
-            $authorizedTablesString = join('/', $authorizedTables);
+        if (!\in_array($table, $authorizedTables)) {
+            $authorizedTablesString = implode('/', $authorizedTables);
+
             throw new \Exception("table {$table} does not belong to authorized tables {$authorizedTablesString}");
         }
 
@@ -191,9 +189,7 @@ class MigrateProjectAdminToOrganization extends Command
         $stmt1 = $this->connection->prepare($sql);
         $stmt1->executeStatement([
             'userId' => $userId,
-            'organizationId' => $organizationId
+            'organizationId' => $organizationId,
         ]);
     }
-
-
 }

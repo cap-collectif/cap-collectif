@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\Mailer\SendInBlue;
 
 use GuzzleHttp\Client;
+use SendinBlue\Client\Api\ContactsApi as SendInBlueApi;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
 use SendinBlue\Client\Configuration;
-use SendinBlue\Client\Api\ContactsApi as SendInBlueApi;
 
 class ContactsApi
 {

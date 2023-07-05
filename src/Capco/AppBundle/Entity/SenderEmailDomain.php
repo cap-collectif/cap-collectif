@@ -51,7 +51,7 @@ class SenderEmailDomain
     public function setService(string $service): self
     {
         if (!\in_array($service, ExternalServiceConfiguration::AVAILABLE_VALUES['mailer'])) {
-            throw new \Exception(__METHOD__ . " : invalid service ${service}");
+            throw new \Exception(__METHOD__ . " : invalid service {$service}");
         }
         $this->service = $service;
 

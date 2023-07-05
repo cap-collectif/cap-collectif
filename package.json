@@ -41,13 +41,13 @@
         "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
         "prettier:js": "prettier --parser flow --no-error-on-unmatched-pattern --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:ts": "prettier --parser typescript --no-error-on-unmatched-pattern --write 'admin-next/**/*.{ts,tsx}'",
-        "prettier:php": "prettier --parser php --no-error-on-unmatched-pattern --write 'src/**/*.php'",
         "prettier:yaml": "prettier --parser yaml --no-error-on-unmatched-pattern --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
-        "prettier": "yarn run prettier:js && yarn run prettier:ts && yarn run prettier:php && yarn run prettier:yaml",
+        "prettier": "yarn run prettier:js && yarn run prettier:ts && yarn run prettier:yaml",
         "precommit": "flow status && lint-staged",
         "cy:open": "yarn --cwd cypress cy:open",
         "cy:run": "yarn --cwd cypress cy:run",
-        "cy:run:ci": "yarn --cwd cypress cy:run:ci"
+        "cy:run:ci": "yarn --cwd cypress cy:run:ci",
+        "php:quality": "bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v && php -dmemory_limit=-1 bin/phpstan analyse && bin/phpspec run --format=progress --no-interaction"
     },
     "workspaces": [
         "packages/*",
@@ -123,10 +123,10 @@
             "prettier --parser yaml --write"
         ],
         "*.php": [
-            "./bin/php-cs-fixer fix --config=.php_cs --verbose",
+            "./bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose",
             "prettier --parser php --write",
-            "git add",
-            "php -d memory_limit=-1 bin/phpstan analyse -c phpstan.neon src/"
+            "php -dmemory_limit=-1 bin/phpstan analyse -c phpstan.neon src",
+            "git add"
         ],
         "*.py": [
             "pycodestyle --ignore=E501,W605",

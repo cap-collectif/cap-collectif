@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Question;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Search\QuestionChoiceSearch;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Search\QuestionChoiceSearch;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class QuestionChoicesDataLoader extends BatchDataLoader
 {

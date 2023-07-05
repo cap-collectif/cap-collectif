@@ -13,7 +13,8 @@ class CommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.id)')
-            ->where('c.published = true');
+            ->where('c.published = true')
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -22,7 +23,8 @@ class CommentRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c')
             ->select('count(DISTINCT c.authorEmail)')
-            ->where('c.author IS NULL');
+            ->where('c.author IS NULL')
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -38,7 +40,8 @@ class CommentRepository extends EntityRepository
                 'c.published',
                 'c.trashedAt as trashed'
             )
-            ->leftJoin('c.author', 'a');
+            ->leftJoin('c.author', 'a')
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -57,7 +60,8 @@ class CommentRepository extends EntityRepository
             )
             ->leftJoin('c.author', 'a')
             ->where('c.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
@@ -73,7 +77,8 @@ class CommentRepository extends EntityRepository
             ->andWhere('c.id = :comment')
             ->setParameter('comment', $comment)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function countAllByAuthor(User $user): int
@@ -83,7 +88,8 @@ class CommentRepository extends EntityRepository
             ->andWhere('c.author = :author')
             ->setParameter('author', $user)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findAllByAuthor(User $user): array
@@ -111,7 +117,8 @@ class CommentRepository extends EntityRepository
             ->setParameter('user', $user)
             ->orderBy('c.updatedAt', 'ASC')
             ->setMaxResults($limit)
-            ->setFirstResult($offset);
+            ->setFirstResult($offset)
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -144,7 +151,8 @@ class CommentRepository extends EntityRepository
             WHERE c.author_id = :userId AND c.published = 1 AND e.is_enabled = 1',
                 $rsm
             )
-            ->setParameter('userId', $user->getId());
+            ->setParameter('userId', $user->getId())
+        ;
 
         return (int) $query->getSingleScalarResult();
     }

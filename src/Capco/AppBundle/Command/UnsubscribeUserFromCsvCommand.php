@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\UserBundle\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Helper\ConvertCsvToArray;
 
 class UnsubscribeUserFromCsvCommand extends Command
 {
@@ -66,9 +66,8 @@ class UnsubscribeUserFromCsvCommand extends Command
                     $this->pushToSendinblue(['email' => $user->getEmail()]);
                     $user->setConsentInternalCommunication(false);
                 }
-
             } else {
-                $output->writeln('<info>User not found with email: '.$row['EMAIL'].'</info>');
+                $output->writeln('<info>User not found with email: ' . $row['EMAIL'] . '</info>');
             }
         }
 

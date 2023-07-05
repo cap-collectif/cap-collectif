@@ -92,8 +92,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
         }
 
         if (
-            ($decision = $proposal->getDecision()) &&
-            ProposalStatementState::DONE === $decision->getState()
+            ($decision = $proposal->getDecision())
+            && ProposalStatementState::DONE === $decision->getState()
         ) {
             return [
                 'analysis' => null,
@@ -113,7 +113,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
 
         $proposalAnalysis
             ->setUpdatedBy($viewer)
-            ->setState(ProposalStatementState::IN_PROGRESS);
+            ->setState(ProposalStatementState::IN_PROGRESS)
+        ;
         $proposal->addAnalysis($proposalAnalysis);
 
         // Handle responses
@@ -174,8 +175,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
             'date' => $proposalAnalysis->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
-            $proposalAnalysis->getState() !== $oldState &&
-            \in_array($proposalAnalysis->getState(), ProposalStatementState::getDecisionalTypes())
+            $proposalAnalysis->getState() !== $oldState
+            && \in_array($proposalAnalysis->getState(), ProposalStatementState::getDecisionalTypes())
         ) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,

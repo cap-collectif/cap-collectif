@@ -2,16 +2,16 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Opinion;
 
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Opinion;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 
 class OpinionUrlResolverSpec extends ObjectBehavior
 {
@@ -56,11 +56,12 @@ class OpinionUrlResolverSpec extends ObjectBehavior
                     'projectSlug' => 'myproject',
                     'stepSlug' => 'mystep',
                     'opinionTypeSlug' => 'opiniontype',
-                    'opinionSlug' => 'myopinion'
+                    'opinionSlug' => 'myopinion',
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             )
-            ->willReturn('http://capco.test/myproject/mystep/opiniontype/myopinion');
+            ->willReturn('http://capco.test/myproject/mystep/opiniontype/myopinion')
+        ;
 
         $this->__invoke($contribution)->shouldNotReturn('');
     }

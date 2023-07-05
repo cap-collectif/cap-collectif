@@ -37,9 +37,7 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
 
                 $reply = $this->getReply($replyId);
                 if (!$reply) {
-                    throw new \RuntimeException(
-                        'Unable to find reply/replyAnonymous with id : ' . $replyId
-                    );
+                    throw new \RuntimeException('Unable to find reply/replyAnonymous with id : ' . $replyId);
                 }
 
                 QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_CREATE_STATE === $state
@@ -47,15 +45,15 @@ class QuestionnaireReplyProcessor implements ProcessorInterface
                     : $this->notifier->onUpdate($reply);
 
                 break;
+
             case QuestionnaireReplyNotifier::QUESTIONNAIRE_REPLY_DELETE_STATE:
                 $reply = $json['reply'];
                 $this->notifier->onDelete($reply);
 
                 break;
+
             default:
-                throw new \LogicException(
-                    sprintf('Unknown questionnaire reply state: "%s"', $state)
-                );
+                throw new \LogicException(sprintf('Unknown questionnaire reply state: "%s"', $state));
         }
 
         return true;

@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Enum\SortField;
-use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Enum\OrderDirection;
-use GraphQL\Type\Definition\ResolveInfo;
+use Capco\AppBundle\Enum\SortField;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Search\UserSearch;
+use Capco\UserBundle\Repository\UserRepository;
+use GraphQL\Type\Definition\ResolveInfo;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class QueryUsersResolver implements ResolverInterface
 {

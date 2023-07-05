@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,8 +15,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProposalSelectionSmsVote extends AbstractProposalVote
 {
-
     use PositionableTrait;
+
+    /**
+     * @ORM\Column(name="ip_address", type="string", nullable=true)
+     * @Assert\Ip(version="all")
+     */
+    protected ?string $ipAddress = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionSmsVotes", cascade={"persist"})
@@ -39,12 +44,6 @@ class ProposalSelectionSmsVote extends AbstractProposalVote
      * @ORM\Column(name="phone", type="string")
      */
     private string $phone;
-
-    /**
-     * @ORM\Column(name="ip_address", type="string", nullable=true)
-     * @Assert\Ip(version="all")
-     */
-    protected ?string $ipAddress = null;
 
     public function setProposal(Proposal $proposal): self
     {
@@ -94,6 +93,7 @@ class ProposalSelectionSmsVote extends AbstractProposalVote
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -143,22 +143,15 @@ class ProposalSelectionSmsVote extends AbstractProposalVote
         return null;
     }
 
-    /**
-     * @return string
-     */
     public function getConsentSmsCommunication(): string
     {
         return $this->consentSmsCommunication;
     }
 
-    /**
-     * @param string $consentSmsCommunication
-     */
     public function setConsentSmsCommunication(string $consentSmsCommunication): void
     {
         $this->consentSmsCommunication = $consentSmsCommunication;
     }
-    
 
     public function getVoteTypeName(): string
     {

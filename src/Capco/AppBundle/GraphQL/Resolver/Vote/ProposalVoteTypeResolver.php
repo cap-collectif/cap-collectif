@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class ProposalVoteTypeResolver implements ResolverInterface
 {
@@ -36,7 +36,6 @@ class ProposalVoteTypeResolver implements ResolverInterface
         if ($vote instanceof ProposalCollectSmsVote || $vote instanceof ProposalSelectionSmsVote) {
             return $this->typeResolver->resolve('InternalProposalSmsVote');
         }
-
 
         throw new UserError('Could not resolve type of ProposalVote.');
     }

@@ -66,7 +66,8 @@ class ProjectPersister
 
         $project = (new Project())
             ->setOwner($this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer))
-            ->setCreator($viewer);
+            ->setCreator($viewer)
+        ;
         if (isset($arguments['owner'])) {
             unset($arguments['owner']);
         }
@@ -162,8 +163,8 @@ class ProjectPersister
             throw new UserError(sprintf('Unknown project "%d"', $projectId));
         }
         if (
-            ProjectVisibilityMode::VISIBILITY_ADMIN === $arguments['visibility'] &&
-            $viewer->isOnlyProjectAdmin()
+            ProjectVisibilityMode::VISIBILITY_ADMIN === $arguments['visibility']
+            && $viewer->isOnlyProjectAdmin()
         ) {
             throw new UserError('Access denied to this field.');
         }

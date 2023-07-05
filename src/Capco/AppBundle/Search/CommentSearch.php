@@ -88,7 +88,8 @@ class CommentSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Term(['published' => ['value' => true]]))
-            ->addFilter(new Term(['author.id' => ['value' => $user->getId()]]));
+            ->addFilter(new Term(['author.id' => ['value' => $user->getId()]]))
+        ;
         $query = new Query($boolQuery);
         $query->addSort(['createdAt' => ['order' => 'DESC'], 'id' => new \stdClass()]);
 
@@ -115,7 +116,8 @@ class CommentSearch extends Search
         );
         $boolQuery
             ->addFilter(new Term(['published' => ['value' => true]]))
-            ->addFilter(new Term(['author.id' => ['value' => $author->getId()]]));
+            ->addFilter(new Term(['author.id' => ['value' => $author->getId()]]))
+        ;
 
         $boolQuery->addMustNot(new Exists('trashedStatus'));
         $query = new Query($boolQuery);
@@ -148,7 +150,8 @@ class CommentSearch extends Search
             }
             $conditions[] = (new BoolQuery())
                 ->addShould((new BoolQuery())->addMustNot(new Exists('proposal')))
-                ->addShould($subBoolQuery);
+                ->addShould($subBoolQuery)
+            ;
         }
 
         foreach ($conditions as $condition) {

@@ -6,12 +6,12 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\GraphQL\Mutation\ReportMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
@@ -52,7 +52,8 @@ class ReportMutationSpec extends ObjectBehavior
         $em->flush()->shouldBeCalled();
         $publisher
             ->publish(CapcoAppBundleMessagesTypes::REPORT, Argument::type(Message::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload['report']->getReporter()->shouldBe($viewer);

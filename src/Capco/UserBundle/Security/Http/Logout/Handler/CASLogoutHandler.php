@@ -33,14 +33,15 @@ class CASLogoutHandler implements LogoutHandlerInterface
         RedirectResponseWithRequest $responseWithRequest
     ): RedirectResponseWithRequest {
         if (
-            $this->toggleManager->isActive('login_cas') &&
-            $this->configuration &&
-            $this->configuration->isEnabled()
+            $this->toggleManager->isActive('login_cas')
+            && $this->configuration
+            && $this->configuration->isEnabled()
         ) {
             $responseWithRequest
                 ->getRequest()
                 ->getSession()
-                ->invalidate();
+                ->invalidate()
+            ;
 
             $this->casHandler->logout($responseWithRequest->getResponse()->getTargetUrl());
         }

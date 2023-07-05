@@ -15,43 +15,27 @@ class SelectionPage extends Page
     protected $elements = [
         'proposal login button' => '#login-popover button',
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy',
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--votes .card__counters__value',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwy',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwy' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--comments .card__counters__value',
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==']",
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--votes .card__counters__value'",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA'",
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMA' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--comments .card__counters__value'",
-        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "#[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ=='",
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--votes .card__counters__value'",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMQ',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' =>
-            "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--comments .card__counters__value'",
+        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--votes .card__counters__value',
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwy' => 'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwy',
+        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwy' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWwy .card__counters__item--comments .card__counters__value',
+        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMA' => "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA==']",
+        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMA' => "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--votes .card__counters__value'",
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMA' => "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMA'",
+        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMA' => "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMA== .card__counters__item--comments .card__counters__value'",
+        'proposal preview UHJvcG9zYWw6cHJvcG9zYWwxMQ' => "#[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ=='",
+        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' => "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--votes .card__counters__value'",
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxMQ' => 'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMQ',
+        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWwxMQ' => "[id='proposal-UHJvcG9zYWw6cHJvcG9zYWwxMQ== .card__counters__item--comments .card__counters__value'",
         'proposal preview UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4',
-        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--votes .card__counters__value',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWw4',
-        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWw4' =>
-            '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--comments .card__counters__value',
+        'proposal votes counter UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--votes .card__counters__value',
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWw4' => 'button#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWw4',
+        'proposal comments counter UHJvcG9zYWw6cHJvcG9zYWw4' => '#proposal-UHJvcG9zYWw6cHJvcG9zYWw4 .card__counters__item--comments .card__counters__value',
         'proposal' => '.proposal-preview',
         'proposal vote button to hover' => '#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwx',
         'sorting select' => 'select#proposal-filter-sorting-button',
         'proposal vote form submit button' => '#confirm-proposal-vote',
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxOA==' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==']",
-        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxNw==' =>
-            "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==']",
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxOA==' => "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxOA==']",
+        'proposal vote button UHJvcG9zYWw6cHJvcG9zYWwxNw==' => "button[id='proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxNw==']",
     ];
 
     /**
@@ -65,9 +49,7 @@ class SelectionPage extends Page
                 "window.jQuery && $('.ProposalStepPage-rendered').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'SelectionPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('SelectionPage did not fully load, check selector in "verifyPage".');
         }
     }
 
@@ -93,12 +75,12 @@ class SelectionPage extends Page
 
     public function getVoteButton(string $id)
     {
-        return $this->getElement("proposal vote button ${id}");
+        return $this->getElement("proposal vote button {$id}");
     }
 
     public function getVoteButtonSelector(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): string
     {
-        return $this->getSelector("proposal vote button ${id}");
+        return $this->getSelector("proposal vote button {$id}");
     }
 
     public function getLoginRedirectDestinationFromVoteButton()
@@ -116,14 +98,16 @@ class SelectionPage extends Page
                 ->getParent()
                 ->getParent()
                 ->getParent()
-                ->mouseOver();
+                ->mouseOver()
+            ;
             $button->click();
         } catch (\Exception $e) {
             $button
                 ->getParent()
                 ->getParent()
                 ->getParent()
-                ->click();
+                ->click()
+            ;
         }
     }
 
@@ -139,7 +123,7 @@ class SelectionPage extends Page
 
     public function getVotesCount(string $id = 'UHJvcG9zYWw6cHJvcG9zYWwy'): int
     {
-        return (int) filter_var($this->getVotesCounter($id)->getText(), FILTER_SANITIZE_NUMBER_INT);
+        return (int) filter_var($this->getVotesCounter($id)->getText(), \FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsCounter(string $id)
@@ -151,7 +135,7 @@ class SelectionPage extends Page
     {
         return (int) filter_var(
             $this->getCommentsCounter($id)->getText(),
-            FILTER_SANITIZE_NUMBER_INT
+            \FILTER_SANITIZE_NUMBER_INT
         );
     }
 
@@ -173,13 +157,7 @@ class SelectionPage extends Page
 
         if ($currentUrl !== $expectedUrl) {
             if (false === strrpos($currentUrl, $proposalsUrl)) {
-                throw new UnexpectedPageException(
-                    sprintf(
-                        'Expected to be on "%s" but found "%s" instead',
-                        $this->getUrl($urlParameters),
-                        $this->getSession()->getCurrentUrl()
-                    )
-                );
+                throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
             }
         }
     }

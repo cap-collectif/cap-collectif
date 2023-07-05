@@ -4,11 +4,11 @@ namespace Capco\UserBundle\Handler;
 
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
+use phpCAS;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use phpCAS;
 
 /**
  * Used for any case server manipulation.

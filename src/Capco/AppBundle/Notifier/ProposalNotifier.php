@@ -78,8 +78,7 @@ class ProposalNotifier extends BaseNotifier
                 $proposal,
                 [
                     'proposal' => $proposal,
-                    'proposalSummary' =>
-                        $proposal->getSummary() ??
+                    'proposalSummary' => $proposal->getSummary() ??
                         $this->translator->trans('project.votes.widget.no_value'),
                     'proposalURL' => $this->proposalUrlResolver->__invoke(
                         $proposal,
@@ -129,12 +128,12 @@ class ProposalNotifier extends BaseNotifier
         ?User $decisionMaker = null
     ) {
         if (
-            $proposal->getProposalForm()->getNotificationsConfiguration() &&
-            $proposal
+            $proposal->getProposalForm()->getNotificationsConfiguration()
+            && $proposal
                 ->getProposalForm()
                 ->getNotificationsConfiguration()
-                ->isOnDelete() &&
-            !$proposal->isDraft()
+                ->isOnDelete()
+            && !$proposal->isDraft()
         ) {
             $this->mailer->createAndSendMessage(
                 ProposalDeleteAdminMessage::class,
@@ -159,8 +158,8 @@ class ProposalNotifier extends BaseNotifier
     public function onUpdate(Proposal $proposal, \DateTimeInterface $updateDateTime)
     {
         if (
-            !$proposal->isDraft() &&
-            $proposal
+            !$proposal->isDraft()
+            && $proposal
                 ->getProposalForm()
                 ->getNotificationsConfiguration()
                 ->isOnUpdate()
@@ -472,6 +471,7 @@ class ProposalNotifier extends BaseNotifier
         if ($owner instanceof User && $owner->isAdmin()) {
             return null;
         }
+
         return $proposal->getProposalForm()->getNotificationsConfiguration()->getEmail();
     }
 }

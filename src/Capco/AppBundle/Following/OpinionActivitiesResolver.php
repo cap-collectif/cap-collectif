@@ -3,18 +3,18 @@
 namespace Capco\AppBundle\Following;
 
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\Model\UserActivity;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Resolver\UrlArrayResolver;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
-use Capco\AppBundle\Resolver\UrlArrayResolver;
 
 class OpinionActivitiesResolver extends ActivitiesResolver
 {
@@ -66,9 +66,7 @@ class OpinionActivitiesResolver extends ActivitiesResolver
         $followers = $this->followerRepository->findAllWithOpinion();
         $followersWithActivities = [];
 
-        /**
-         * @var Follower
-         */
+        // @var Follower
         foreach ($followers as $follower) {
             try {
                 $opinionId = $follower->getOpinion()->getId();

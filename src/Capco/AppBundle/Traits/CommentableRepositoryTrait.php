@@ -15,13 +15,15 @@ trait CommentableRepositoryTrait
     ): array {
         $qb = $this->getByCommentableIdsQueryBuilder($type, $commentableIds, true, $viewer)
             ->select('p.id as commentable_id, count(c.id) AS totalCount')
-            ->groupBy('p.id');
+            ->groupBy('p.id')
+        ;
         $qb->andWhere("c.moderationStatus = 'APPROVED'");
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function countCommentsAndAnswersByCommentableIds(
@@ -32,12 +34,14 @@ trait CommentableRepositoryTrait
         $qb = $this->getByCommentableIdsQueryBuilder($type, $ids, false, $viewer)
             ->select('p.id as commentable_id, count(c.id) AS totalCount')
             ->andWhere("c.moderationStatus = 'APPROVED'")
-            ->groupBy('p.id');
+            ->groupBy('p.id')
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function getByCommentableIds(
@@ -57,7 +61,7 @@ trait CommentableRepositoryTrait
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('c.publishedAt', $direction);
-            if ($type === ProposalComment::class || $type === Proposal::class) {
+            if (ProposalComment::class === $type || Proposal::class === $type) {
                 $qb->addOrderBy('c.createdAt', $direction);
             }
         }
@@ -73,6 +77,7 @@ trait CommentableRepositoryTrait
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
         $qb = $qb->getQuery();
+
         return $qb->getResult();
     }
 }

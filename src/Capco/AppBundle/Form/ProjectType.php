@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Project;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -19,7 +19,8 @@ class ProjectType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
             ])
-            ->add('author', null, ['required' => true]);
+            ->add('author', null, ['required' => true])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

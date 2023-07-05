@@ -4,16 +4,16 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionCollection;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalAdmin extends AbstractAdmin
 {
@@ -81,7 +81,8 @@ class ProposalAdmin extends AbstractAdmin
         $this->entityManager
             ->getConfiguration()
             ->getResultCacheImpl()
-            ->deleteAll();
+            ->deleteAll()
+        ;
 
         return parent::getList();
     }
@@ -138,7 +139,8 @@ class ProposalAdmin extends AbstractAdmin
                             ),
                         $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
                     )
-            );
+            )
+        ;
         $query->setParameter('author', $user);
 
         return $query;
@@ -176,7 +178,8 @@ class ProposalAdmin extends AbstractAdmin
             ->add('updatedInfo', 'datetime', [
                 'label' => 'global.maj',
                 'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
-            ]);
+            ])
+        ;
     }
 
     // Fields to be shown on filter forms
@@ -219,7 +222,8 @@ class ProposalAdmin extends AbstractAdmin
                     },
                 ],
             ])
-            ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at']);
+            ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at'])
+        ;
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $filter->add('deletedAt', null, ['label' => 'global.deleted']);
         }
@@ -229,7 +233,8 @@ class ProposalAdmin extends AbstractAdmin
             ->add('proposalForm.step.projectAbstractStep.project', null, [
                 'label' => 'global.participative.project.label',
             ])
-            ->add('evaluers', null, ['label' => 'admin.global.evaluers']);
+            ->add('evaluers', null, ['label' => 'admin.global.evaluers'])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

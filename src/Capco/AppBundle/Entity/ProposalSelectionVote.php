@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\EntityNotFoundException;
-use Capco\AppBundle\Traits\PrivatableTrait;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\AnonymousableTrait;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\ORM\EntityNotFoundException;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionVoteRepository")
@@ -24,10 +24,10 @@ class ProposalSelectionVote extends AbstractProposalVote
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
 
     use AnonymousableTrait;
-    use PrivatableTrait;
     use PositionableTrait;
+    use PrivatableTrait;
 
-    const ANONYMOUS = 'ANONYMOUS';
+    public const ANONYMOUS = 'ANONYMOUS';
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="selectionVotes", cascade={"persist"})

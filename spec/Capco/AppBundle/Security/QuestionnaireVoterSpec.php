@@ -27,7 +27,8 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $subject, [QuestionnaireVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -48,11 +49,13 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $subject->getOwner()->willReturn(null);
 
@@ -75,11 +78,13 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $subject->getOwner()->willReturn($user);
 
@@ -102,11 +107,13 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $subject, [QuestionnaireVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -129,35 +136,43 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection([$organization]));
+            ->willReturn(new ArrayCollection([$organization]))
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $questionnaire
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $questionnaire
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $questionnaire, [QuestionnaireVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -186,27 +201,33 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $questionnaire
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $questionnaire
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $this->vote($token, $questionnaire, [QuestionnaireVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -223,23 +244,28 @@ class QuestionnaireVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $questionnaire
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
 
         $this->vote($token, $questionnaire, [QuestionnaireVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED

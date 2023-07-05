@@ -4,15 +4,15 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Mailer\Message\MessagesList;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
+use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\SiteParameterRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
@@ -22,8 +22,8 @@ class DefaultController extends Controller
     public function loginAction(Request $request)
     {
         if (
-            $this->get(Manager::class)->isActive('shield_mode') &&
-            !$this->getUser()->isEmailConfirmed()
+            $this->get(Manager::class)->isActive('shield_mode')
+            && !$this->getUser()->isEmailConfirmed()
         ) {
             if ($request->getSession()) {
                 $request->getSession()->invalidate();
@@ -152,7 +152,7 @@ class DefaultController extends Controller
             return $this->render(MessagesList::TEMPLATE_LIST[$messageType], $data);
         }
 
-        throw new NotFoundHttpException("${messageType} message doesnt exist");
+        throw new NotFoundHttpException("{$messageType} message doesnt exist");
     }
 
     /**

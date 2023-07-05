@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Psr\Log\LoggerInterface;
 use Capco\MediaBundle\Repository\MediaRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class MediaQueryResolver implements ResolverInterface
 {
@@ -28,7 +28,8 @@ class MediaQueryResolver implements ResolverInterface
                 return $this->mediaRepository
                     ->getWithoutCategoryPaginated($offset, $limit, $args->offsetGet('term'))
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

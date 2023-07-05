@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Entity\Questionnaire;
-use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 class QuestionnaireAdminUrlResolver implements ResolverInterface
 {

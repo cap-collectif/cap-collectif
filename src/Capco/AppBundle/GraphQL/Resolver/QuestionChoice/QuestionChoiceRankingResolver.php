@@ -18,8 +18,8 @@ class QuestionChoiceRankingResolver implements ResolverInterface
     public function __invoke(QuestionChoice $questionChoice): ?array
     {
         if (
-            $questionChoice->getQuestion() &&
-            'ranking' !== $questionChoice->getQuestion()->getInputType()
+            $questionChoice->getQuestion()
+            && 'ranking' !== $questionChoice->getQuestion()->getInputType()
         ) {
             return null;
         }

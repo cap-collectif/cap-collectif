@@ -2,13 +2,13 @@
 
 namespace spec\Capco\AppBundle\Manager;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Cache\RedisCache;
-use Symfony\Component\Routing\Router;
 use Capco\AppBundle\Repository\MenuItemRepository;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Capco\AppBundle\Toggle\Manager;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MenuItemResolverSpec extends ObjectBehavior
 {

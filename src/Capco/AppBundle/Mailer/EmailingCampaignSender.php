@@ -59,14 +59,14 @@ class EmailingCampaignSender
         $emailingCampaignUsers = $this->getEmailingCampaingUsers($emailingCampaign);
 
         $count = 0;
-        /** * @var $emailingCampaignUser EmailingCampaignUser  */
+        /** * @var EmailingCampaignUser $emailingCampaignUser  */
         foreach ($emailingCampaignUsers as $emailingCampaignUser) {
-            $count++;
+            ++$count;
             $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getUser());
 
             $emailingCampaignUser->setSentAt(new \DateTime());
             $this->em->persist($emailingCampaignUser);
-            if ($count % 10 === 0) {
+            if (0 === $count % 10) {
                 $this->em->flush();
             }
         }
@@ -75,6 +75,27 @@ class EmailingCampaignSender
         $this->setCampaignAsSent($emailingCampaign);
 
         return $emailingCampaignUsers->count();
+    }
+
+    public function getEmailingCampaingUsers(EmailingCampaign $emailingCampaign): ArrayCollection
+    {
+        $allRecipients = $this->getRecipients($emailingCampaign);
+
+        $emailingCampaignUsersCount = $this->emailingCampaignUserRepository->countAllByEmailingCampaign($emailingCampaign);
+
+        if (0 === $emailingCampaignUsersCount) {
+            $emailingCampaignUsers = new ArrayCollection();
+            foreach ($allRecipients as $recipient) {
+                $emailingCampaignUser = (new EmailingCampaignUser())->setEmailingCampaign($emailingCampaign)->setUser($recipient);
+                $emailingCampaignUsers->add($emailingCampaignUser);
+                $this->em->persist($emailingCampaignUser);
+            }
+            $this->em->flush();
+
+            return $emailingCampaignUsers;
+        }
+
+        return $this->emailingCampaignUserRepository->findUnSentByEmailingCampaign($emailingCampaign);
     }
 
     private function createAndSendMessage(
@@ -151,26 +172,6 @@ class EmailingCampaignSender
         }
 
         throw new UserError(SendEmailingCampaignErrorCode::CANNOT_BE_SENT);
-    }
-
-    public function getEmailingCampaingUsers(EmailingCampaign $emailingCampaign): ArrayCollection
-    {
-        $allRecipients = $this->getRecipients($emailingCampaign);
-
-        $emailingCampaignUsersCount = $this->emailingCampaignUserRepository->countAllByEmailingCampaign($emailingCampaign);
-
-        if ($emailingCampaignUsersCount === 0) {
-            $emailingCampaignUsers = new ArrayCollection();
-            foreach ($allRecipients as $recipient) {
-                $emailingCampaignUser = (new EmailingCampaignUser())->setEmailingCampaign($emailingCampaign)->setUser($recipient);
-                $emailingCampaignUsers->add($emailingCampaignUser);
-                $this->em->persist($emailingCampaignUser);
-            }
-            $this->em->flush();
-            return $emailingCampaignUsers;
-        }
-
-        return $this->emailingCampaignUserRepository->findUnSentByEmailingCampaign($emailingCampaign);
     }
 
     private function getRecipientsFromInternalList(string $internalList): Collection

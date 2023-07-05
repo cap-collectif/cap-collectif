@@ -35,7 +35,8 @@ class CreateAccountsFromEmailsCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force the creation'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -53,7 +54,8 @@ class CreateAccountsFromEmailsCommand extends Command
         $finder
             ->files()
             ->in('.')
-            ->name('mails.txt');
+            ->name('mails.txt')
+        ;
 
         $contents = '';
         foreach ($finder as $file) {
@@ -64,7 +66,7 @@ class CreateAccountsFromEmailsCommand extends Command
         $emails = explode(' ', $contents);
         $dump = '';
         foreach ($emails as $key => $email) {
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $email = filter_var($email, \FILTER_SANITIZE_EMAIL);
             $output->writeln('Creating account for ' . $email);
 
             $username = 'DRIVE' . ($key + 1);

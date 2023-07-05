@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method LogicJump|null find($id, $lockMode = null, $lockVersion = null)
- * @method LogicJump|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|LogicJump find($id, $lockMode = null, $lockVersion = null)
+ * @method null|LogicJump findOneBy(array $criteria, array $orderBy = null)
  * @method LogicJump[]    findAll()
  * @method LogicJump[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -21,7 +21,8 @@ class LogicJumpRepository extends EntityRepository
             ->where('j.destination = :question')
             ->setParameter('question', $question)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findJumpsByQuestions(array $questionsId): array
@@ -30,7 +31,8 @@ class LogicJumpRepository extends EntityRepository
             ->where('j.origin IN (:questionsId)')
             ->orWhere('j.destination IN (:questionsId)')
             ->setParameter('questionsId', $questionsId)
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $query->getResult();
     }

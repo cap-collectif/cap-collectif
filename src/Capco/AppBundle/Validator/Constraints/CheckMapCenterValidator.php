@@ -14,10 +14,10 @@ class CheckMapCenterValidator extends ConstraintValidator
         }
         $decoded = json_decode($string, true);
         if (
-            $decoded &&
-            isset($decoded[0]) &&
-            \is_array($decoded[0]) &&
-            self::isValidMapCenter($decoded[0])
+            $decoded
+            && isset($decoded[0])
+            && \is_array($decoded[0])
+            && self::isValidMapCenter($decoded[0])
         ) {
             return;
         }
@@ -27,12 +27,12 @@ class CheckMapCenterValidator extends ConstraintValidator
 
     public static function isValidMapCenter(array $address): bool
     {
-        return isset($address['geometry']) &&
-            isset($address['geometry']['location_type']) &&
-            \is_string($address['geometry']['location_type']) &&
-            isset($address['geometry']['location'], $address['geometry']['location']['lat']) &&
-            is_numeric($address['geometry']['location']['lat']) &&
-            isset($address['geometry']['location']['lng']) &&
-            is_numeric($address['geometry']['location']['lng']);
+        return isset($address['geometry'])
+            && isset($address['geometry']['location_type'])
+            && \is_string($address['geometry']['location_type'])
+            && isset($address['geometry']['location'], $address['geometry']['location']['lat'])
+            && is_numeric($address['geometry']['location']['lat'])
+            && isset($address['geometry']['location']['lng'])
+            && is_numeric($address['geometry']['location']['lng']);
     }
 }

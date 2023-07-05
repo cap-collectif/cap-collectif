@@ -36,7 +36,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         ContainerInterface $container,
         $resource,
         array $options = [],
-        RequestContext $context = null
+        ?RequestContext $context = null
     ) {
         $this->manager = $manager;
         $this->localeRepository = $localeRepository;
@@ -58,13 +58,13 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
     ): ?string {
         $defaultLocalePrefix = DefaultPatternGenerationStrategy::getLocalePrefix($defaultLocale);
         $baseUrl = $scheme . '://' . $host;
-        if (preg_match("/^\\/${defaultLocalePrefix}\\/?/", $url)) {
+        if (preg_match("/^\\/{$defaultLocalePrefix}\\/?/", $url)) {
             $url = substr($url, 3);
         } else {
             $escapedHost = preg_quote($host, '/');
             $url = preg_replace(
-                "/^https?:\\/\\/(www)?${escapedHost}.*\\/${defaultLocalePrefix}\\//",
-                "${baseUrl}/",
+                "/^https?:\\/\\/(www)?{$escapedHost}.*\\/{$defaultLocalePrefix}\\//",
+                "{$baseUrl}/",
                 $url
             );
         }
@@ -124,31 +124,31 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         //TODO keep in cache ?
         $defaultLocalePrefix = $this->localeResolver->getDefaultLocaleRoutePrefix();
         if (
-            'capco_app_cms' === $params['_route'] &&
-            isset($params['url']) &&
-            false === strpos($params['url'], "/${defaultLocalePrefix}/")
+            'capco_app_cms' === $params['_route']
+            && isset($params['url'])
+            && false === strpos($params['url'], "/{$defaultLocalePrefix}/")
         ) {
             $isHomePage = false;
             //Test beforehand if it is a locale since with cms routes, it doesn't easily find the homecontroller
             if (2 === \strlen($params['url'])) {
                 try {
                     $paramsUrl = $params['url'];
-                    $routeMatch = $this->match("/${paramsUrl}/");
+                    $routeMatch = $this->match("/{$paramsUrl}/");
                     $params = $routeMatch;
                     $url = isset($params['url'])
-                        ? "/${defaultLocalePrefix}/" . $params['url']
-                        : "/${defaultLocalePrefix}/";
+                        ? "/{$defaultLocalePrefix}/" . $params['url']
+                        : "/{$defaultLocalePrefix}/";
                     $isHomePage = true;
                 } catch (\Exception $e) {
                 }
             }
             if (!$isHomePage) {
                 try {
-                    $routeMatch = $this->match("/${defaultLocalePrefix}/" . $params['url']);
+                    $routeMatch = $this->match("/{$defaultLocalePrefix}/" . $params['url']);
                     $params = $routeMatch;
                     $url = isset($params['url'])
-                        ? "/${defaultLocalePrefix}/" . $params['url']
-                        : "/${defaultLocalePrefix}/";
+                        ? "/{$defaultLocalePrefix}/" . $params['url']
+                        : "/{$defaultLocalePrefix}/";
                 } catch (\Exception $e) {
                     //No route exists with the default local prefix
                 }
@@ -210,14 +210,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
                     }
 
                     if ($differentHost) {
-                        throw new ResourceNotFoundException(
-                            sprintf(
-                                'The route "%s" is not available on the current host "%s", but only on these hosts "%s".',
-                                $params['_route'],
-                                $this->hostMap[$currentLocale],
-                                implode(', ', $availableHosts)
-                            )
-                        );
+                        throw new ResourceNotFoundException(sprintf('The route "%s" is not available on the current host "%s", but only on these hosts "%s".', $params['_route'], $this->hostMap[$currentLocale], implode(', ', $availableHosts)));
                     }
                 }
 
@@ -228,8 +221,8 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
             unset($params['_locales']);
             $params['_locale'] = $currentLocale;
         } elseif (
-            isset($params['_locale']) &&
-            0 < ($pos = strpos($params['_route'], I18nLoader::ROUTING_PREFIX))
+            isset($params['_locale'])
+            && 0 < ($pos = strpos($params['_route'], I18nLoader::ROUTING_PREFIX))
         ) {
             $params['_route'] = substr(
                 $params['_route'],
@@ -238,22 +231,15 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         }
 
         if (
-            isset($params['_locale'], $this->hostMap[$params['_locale']]) &&
-            $this->context->getHost() !== ($host = $this->hostMap[$params['_locale']])
+            isset($params['_locale'], $this->hostMap[$params['_locale']])
+            && $this->context->getHost() !== ($host = $this->hostMap[$params['_locale']])
         ) {
             if (!$this->redirectToHost) {
-                throw new ResourceNotFoundException(
-                    sprintf(
-                        'Resource corresponding to pattern "%s" not found for locale "%s".',
-                        $url,
-                        $this->getContext()->getParameter('_locale')
-                    )
-                );
+                throw new ResourceNotFoundException(sprintf('Resource corresponding to pattern "%s" not found for locale "%s".', $url, $this->getContext()->getParameter('_locale')));
             }
 
             return [
-                '_controller' =>
-                    'JMS\I18nRoutingBundle\Controller\RedirectController::redirectAction',
+                '_controller' => 'JMS\I18nRoutingBundle\Controller\RedirectController::redirectAction',
                 'path' => $url,
                 'host' => $host,
                 'permanent' => true,
@@ -264,9 +250,9 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
             ];
         }
         if (
-            !isset($params['_locale']) &&
-            null !== $request &&
-            ($locale = $this->jmsLocaleResolver->resolveLocale(
+            !isset($params['_locale'])
+            && null !== $request
+            && ($locale = $this->jmsLocaleResolver->resolveLocale(
                 $request,
                 $this->container->getParameter('jms_i18n_routing.locales')
             ))
@@ -283,8 +269,8 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         if ($this->container->has('request_stack')) {
             $request = $this->container->get('request_stack')->getCurrentRequest();
         } elseif (
-            method_exists($this->container, 'isScopeActive') &&
-            $this->container->isScopeActive('request')
+            method_exists($this->container, 'isScopeActive')
+            && $this->container->isScopeActive('request')
         ) {
             $request = $this->container->get('request');
         }

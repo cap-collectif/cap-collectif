@@ -12,13 +12,7 @@ class MapTokenRepository extends EntityRepository
     public function getCurrentMapTokenForProvider(string $provider): ?MapToken
     {
         if (!MapProviderEnum::isProviderValid($provider)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid provider '%s'. Available providers : %s",
-                    $provider,
-                    implode(', ', MapProviderEnum::getAvailableProviders())
-                )
-            );
+            throw new \InvalidArgumentException(sprintf("Invalid provider '%s'. Available providers : %s", $provider, implode(', ', MapProviderEnum::getAvailableProviders())));
         }
 
         $qb = $this->getQueryBuilder();
@@ -27,7 +21,8 @@ class MapTokenRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('mt.provider', ':provider'))
             ->setParameter('provider', $provider)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     /**
@@ -40,7 +35,8 @@ class MapTokenRepository extends EntityRepository
         return $qb
             ->groupBy('mt.provider')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     private function getQueryBuilder(): QueryBuilder

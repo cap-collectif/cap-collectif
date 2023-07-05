@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -67,8 +67,8 @@ class Version20170905121057 extends AbstractMigration implements ContainerAwareI
                 $proposals = $this->connection->fetchAllAssociative('SELECT * from proposal');
                 foreach ($proposals as $proposal) {
                     if (
-                        $proposal['district_id'] === $previousDistrictId &&
-                        $proposal['proposal_form_id'] === $proposalForm['id']
+                        $proposal['district_id'] === $previousDistrictId
+                        && $proposal['proposal_form_id'] === $proposalForm['id']
                     ) {
                         $this->connection->update(
                             'proposal',

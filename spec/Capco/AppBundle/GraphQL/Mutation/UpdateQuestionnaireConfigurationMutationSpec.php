@@ -7,18 +7,18 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateQuestionnaireConfigurationMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\QuestionJumpsHandler;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -76,7 +76,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $input->getArrayCopy()->willReturn($arguments);
         $globalIdResolver
             ->resolve($arguments['questionnaireId'], $viewer)
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
         $questionnaire->getId()->willReturn('abc');
         $arguments = ['title' => 'abc'];
 
@@ -84,7 +85,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
 
         $formFactory
             ->create(QuestionnaireConfigurationUpdateType::class, $questionnaire)
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($arguments, false)->shouldBeCalled();
         $form->isValid()->willReturn(true);
 
@@ -113,18 +115,21 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $input->getArrayCopy()->willReturn($arguments);
         $globalIdResolver
             ->resolve($arguments['questionnaireId'], $viewer)
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $arguments = ['title' => 'abc'];
         $questionnaire->getId()->willReturn('abc');
         $questionnaire
             ->setUpdatedAt(Argument::type(\DateTime::class))
             ->shouldBeCalled()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $formFactory
             ->create(QuestionnaireConfigurationUpdateType::class, $questionnaire)
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($arguments, false)->shouldBeCalled();
         $form->isValid()->willReturn(false);
 
@@ -150,7 +155,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->isGranted($id, $viewer)->shouldReturn(false);
     }
@@ -166,7 +172,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->isGranted($id, $viewer);
     }

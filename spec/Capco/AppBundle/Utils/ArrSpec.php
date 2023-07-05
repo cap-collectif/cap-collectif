@@ -7,15 +7,15 @@ use PhpSpec\ObjectBehavior;
 
 class ArrSpec extends ObjectBehavior
 {
-
-    public function it_is_initializable(): void {
+    public function it_is_initializable(): void
+    {
         $this->shouldHaveType(Arr::class);
     }
 
     public function it_should_return_correct_value_based_on_simple_path(): void
     {
         $array = [
-            'test' => 'My value'
+            'test' => 'My value',
         ];
 
         $this::path($array, 'test')->shouldReturn('My value');
@@ -27,10 +27,10 @@ class ArrSpec extends ObjectBehavior
             'nested' => [
                 'complex' => [
                     'path' => [
-                        'value' => 'Que fais tu ici ?'
-                    ]
-                ]
-            ]
+                        'value' => 'Que fais tu ici ?',
+                    ],
+                ],
+            ],
         ];
 
         $this::path($array, 'nested.complex.path.value')->shouldReturn('Que fais tu ici ?');
@@ -43,15 +43,15 @@ class ArrSpec extends ObjectBehavior
                 'complex' => [
                     'path' => [
                         'value' => [
-                            'test' => 'My value'
-                        ]
-                    ]
-                ]
-            ]
+                            'test' => 'My value',
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $this::path($array, 'nested.complex.path.value')->shouldReturn([
-            'test' => 'My value'
+            'test' => 'My value',
         ]);
     }
 
@@ -61,10 +61,10 @@ class ArrSpec extends ObjectBehavior
             'nested' => [
                 'complex' => [
                     'path' => [
-                        'value' => 'Que fais tu ici ?'
-                    ]
-                ]
-            ]
+                        'value' => 'Que fais tu ici ?',
+                    ],
+                ],
+            ],
         ];
 
         $this::path($array, 'nested.complex.path.inexistant')->shouldReturn(null);

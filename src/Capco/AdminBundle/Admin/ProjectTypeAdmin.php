@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ProjectTypeAdmin extends AbstractAdmin
 {
@@ -58,7 +58,8 @@ class ProjectTypeAdmin extends AbstractAdmin
                 'label' => 'global.color',
                 'template' => 'CapcoAdminBundle:ProjectType:list_color.html.twig',
                 'header_style' => 'width: 13%',
-            ]);
+            ])
+        ;
         $list->add('_action', 'actions', [
             'label' => 'link_actions',
             'actions' => ['edit' => ['header_style' => 'width: 5%; text-align: center']],

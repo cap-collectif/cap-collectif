@@ -18,16 +18,16 @@ class KnpTranslationFieldFilter extends Filter
     public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
     {
         if (
-            !$data ||
-            !\is_array($data) ||
-            !\array_key_exists('value', $data) ||
-            null === $data['value']
+            !$data
+            || !\is_array($data)
+            || !\array_key_exists('value', $data)
+            || null === $data['value']
         ) {
             return;
         }
 
         $data['value'] = trim($data['value']);
-        if (0 === \strlen($data['value'])) {
+        if ('' === $data['value']) {
             return;
         }
 
@@ -57,7 +57,7 @@ class KnpTranslationFieldFilter extends Filter
                     $queryBuilder
                         ->expr()
                         ->like(
-                            $joinAlias . ".${field}",
+                            $joinAlias . ".{$field}",
                             $queryBuilder->expr()->literal('%' . $data['value'] . '%')
                         )
                 )

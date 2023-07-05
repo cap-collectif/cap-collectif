@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
-use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
@@ -29,12 +29,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements
-    CommentableInterface,
-    IndexableInterface,
-    Ownerable,
-    Translatable,
-    CreatableInterface
+class Post implements CommentableInterface, IndexableInterface, Ownerable, Translatable, CreatableInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;
@@ -266,8 +261,8 @@ class Post implements
     public function addAuthor(PostAuthor $postAuthor): self
     {
         if (
-            !$this->authors->contains($postAuthor) &&
-            !$this->containAuthor($postAuthor->getAuthor())
+            !$this->authors->contains($postAuthor)
+            && !$this->containAuthor($postAuthor->getAuthor())
         ) {
             $this->authors->add($postAuthor);
         }

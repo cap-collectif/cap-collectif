@@ -4,19 +4,19 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\HttpFoundation\Request;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
+use Capco\AppBundle\Resolver\UrlResolver;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class ProposalController extends Controller
@@ -41,12 +41,7 @@ class ProposalController extends Controller
         $viewer = $this->getUser();
 
         if ($proposal->isDraft() && $proposal->getAuthor() !== $viewer) {
-            throw new NotFoundHttpException(
-                sprintf(
-                    'The proposal `%s` is in draft state and current user is not the creator.',
-                    $proposal->getId()
-                )
-            );
+            throw new NotFoundHttpException(sprintf('The proposal `%s` is in draft state and current user is not the creator.', $proposal->getId()));
         }
 
         if (!$proposal->viewerCanSee($viewer)) {
@@ -63,12 +58,13 @@ class ProposalController extends Controller
                     UrlGeneratorInterface::ABSOLUTE_URL
                 );
             })
-            ->toArray();
+            ->toArray()
+        ;
 
         $referer = $request->headers->get('referer');
         if (
-            $request->headers->has('referer') &&
-            false !==
+            $request->headers->has('referer')
+            && false !==
                 strpos(
                     $referer,
                     $this->get('router')->generate(
@@ -76,8 +72,8 @@ class ProposalController extends Controller
                         [],
                         RouterInterface::ABSOLUTE_URL
                     )
-                ) &&
-            (false !== strpos($referer, '/selection/') || false !== strpos($referer, '/collect/'))
+                )
+            && (false !== strpos($referer, '/selection/') || false !== strpos($referer, '/collect/'))
         ) {
             $refererUri = $referer;
         } else {
@@ -117,7 +113,6 @@ class ProposalController extends Controller
     public function showProposalActionDeprecated(
         Request $request
     ) {
-       return $this->redirect(preg_replace('/\/projects\//', '/project/', $request->getUri()));
+        return $this->redirect(preg_replace('/\/projects\//', '/project/', $request->getUri()));
     }
-
 }

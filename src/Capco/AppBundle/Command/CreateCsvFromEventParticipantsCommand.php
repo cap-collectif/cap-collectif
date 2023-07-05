@@ -22,14 +22,14 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
-    const PUBLIC_USER_HEADERS_EVENTS = [
+    public const PUBLIC_USER_HEADERS_EVENTS = [
         'user_email',
         'user_firstname',
         'user_lastname',
         'user_privateRegistration',
     ];
 
-    const USER_FRAGMENT = '
+    public const USER_FRAGMENT = '
         id
         email
         username
@@ -131,7 +131,8 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
                 'query' => $this->getEventParticipantsGraphQLQuery($event['id']),
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         if (!isset($data['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $data['errors']);
@@ -198,33 +199,33 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
         $USER_FRAGMENT = self::USER_FRAGMENT;
 
         return <<<EOF
-        query {
-          node(id: "${eventId}") {
-            ... on Event {
-              participants(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  registeredAt
-                  registeredAnonymously
-                  node {
-                    ... on User {
-                        ${USER_FRAGMENT}
+                    query {
+                      node(id: "{$eventId}") {
+                        ... on Event {
+                          participants(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              registeredAt
+                              registeredAnonymously
+                              node {
+                                ... on User {
+                                    {$USER_FRAGMENT}
+                                }
+                                ... on NotRegistered {
+                                  username
+                                  notRegisteredEmail: email
+                                }
+                              }
+                            }
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                      }
                     }
-                    ... on NotRegistered {
-                      username
-                      notRegisteredEmail: email
-                    }
-                  }
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-          }
-        }
-EOF;
+            EOF;
     }
 }

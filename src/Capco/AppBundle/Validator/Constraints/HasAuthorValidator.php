@@ -14,7 +14,8 @@ class HasAuthorValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath($path)
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

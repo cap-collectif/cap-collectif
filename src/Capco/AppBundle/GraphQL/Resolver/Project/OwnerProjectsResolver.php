@@ -25,7 +25,6 @@ class OwnerProjectsResolver implements ResolverInterface
         Argument $args,
         ?User $viewer = null
     ): ConnectionInterface {
-
         $orderBy = $this->getOrderBy($args);
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $viewer, $orderBy) {
@@ -44,10 +43,13 @@ class OwnerProjectsResolver implements ResolverInterface
     private function getOrderBy($args): ?array
     {
         $orderBy = $args->offsetGet('orderBy');
-        if (!$orderBy) return null;
+        if (!$orderBy) {
+            return null;
+        }
 
         $field = ProjectOrderField::MAP[$orderBy['field']];
         $orderBy['field'] = $field;
+
         return $orderBy;
     }
 }

@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Search\ReplySearch;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Questionnaire;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -36,17 +36,17 @@ class QuestionnaireRepliesResolver implements ResolverInterface
         ];
 
         if (
-            $viewer &&
-            $args->offsetExists('includeUnpublished') &&
-            true === $args->offsetGet('includeUnpublished')
+            $viewer
+            && $args->offsetExists('includeUnpublished')
+            && true === $args->offsetGet('includeUnpublished')
         ) {
             unset($filters['published']);
         }
 
         if (
-            $viewer &&
-            $args->offsetExists('includeDraft') &&
-            true === $args->offsetGet('includeDraft')
+            $viewer
+            && $args->offsetExists('includeDraft')
+            && true === $args->offsetGet('includeDraft')
         ) {
             unset($filters['draft']);
         }

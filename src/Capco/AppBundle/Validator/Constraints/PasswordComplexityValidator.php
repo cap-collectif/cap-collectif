@@ -35,10 +35,10 @@ class PasswordComplexityValidator extends ConstraintValidator
         }
 
         if (
-            !$hasDigit ||
-            !$hasLowercase ||
-            !$hasUppercase ||
-            \strlen($password) < self::MIN_PASSWORD_LENGTH
+            !$hasDigit
+            || !$hasLowercase
+            || !$hasUppercase
+            || \strlen($password) < self::MIN_PASSWORD_LENGTH
         ) {
             $this->context
                 ->buildViolation(
@@ -48,32 +48,42 @@ class PasswordComplexityValidator extends ConstraintValidator
                         \strlen($password) >= self::MIN_PASSWORD_LENGTH
                     )
                 )
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 
     public function getErrorMessage(bool $hasDigit, bool $hasUpperLower, bool $length): ?string
     {
         $sum = ($length ? 0 : 1) + ($hasUpperLower ? 0 : 2) + ($hasDigit ? 0 : 4);
+
         switch ($sum) {
             case 0:
                 return null;
+
             case 1:
                 return 'registration.constraints.password.min';
 
                 break;
+
             case 2:
                 return 'at-least-one-uppercase-one-lowercase';
+
             case 3:
                 return 'at-least-8-characters-one-uppercase-one-lowercase';
+
             case 4:
                 return 'at-least-one-digit';
+
             case 5:
                 return 'at-least-8-characters-one-digit';
+
             case 6:
                 return 'at-least-one-digit-one-uppercase-one-lowercase';
+
             case 7:
                 return 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
+
             default:
                 return null;
         }

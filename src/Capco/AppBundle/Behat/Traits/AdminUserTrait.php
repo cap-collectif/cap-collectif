@@ -16,7 +16,7 @@ trait AdminUserTrait
             3000,
             "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0"
         );
-        $page->clickOnTab("user $tab");
+        $page->clickOnTab("user {$tab}");
         $this->iWait(1);
     }
 
@@ -28,7 +28,8 @@ trait AdminUserTrait
         $element = '#user-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
         $this->getCurrentPage()
             ->find('css', $element)
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -39,7 +40,8 @@ trait AdminUserTrait
         $this->getSession()
             ->getDriver()
             ->getWebDriverSession()
-            ->accept_alert();
+            ->accept_alert()
+        ;
     }
 
     /**

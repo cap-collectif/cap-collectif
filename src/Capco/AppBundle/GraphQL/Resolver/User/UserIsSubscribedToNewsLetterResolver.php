@@ -18,7 +18,7 @@ class UserIsSubscribedToNewsLetterResolver implements ResolverInterface
 
     public function __invoke(User $user): bool
     {
-        /** @var $newsLetter NewsletterSubscription */
+        /** @var NewsletterSubscription $newsLetter */
         $subscription = $this->newLetterRepository->findOneBy(['email' => $user->getEmail()]);
         if (!$subscription) {
             return false;

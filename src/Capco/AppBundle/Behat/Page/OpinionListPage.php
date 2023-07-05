@@ -17,9 +17,7 @@ class OpinionListPage extends Page
     public function verifyPage()
     {
         if (!$this->getSession()->wait(6000, "$('#opinion-ordering-selector').length > 0")) {
-            throw new \RuntimeException(
-                'OpinionListPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('OpinionListPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

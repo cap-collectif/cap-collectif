@@ -2,9 +2,9 @@
 
 namespace Capco\UserBundle\OpenID\ExtraMapper;
 
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use Psr\Log\LoggerInterface;
 
 class GrandLyonExtraMapper
 {

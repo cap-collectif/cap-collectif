@@ -9,18 +9,18 @@ declare(strict_types=1);
 
 namespace Capco\AdminBundle\Action;
 
-use Twig\Environment;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\UserBundle\Entity\User;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
-use Sonata\AdminBundle\Templating\TemplateRegistryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
 final class DashboardAction
 {
@@ -54,11 +54,11 @@ final class DashboardAction
     {
         $token = $this->tokenStorage->getToken();
         if (
-            $token &&
-            $token->getUser() instanceof User &&
-            $token->getUser()->hasRole(UserRole::ROLE_PROJECT_ADMIN) &&
-            (!$token->getUser()->hasRole(UserRole::ROLE_ADMIN) ||
-                !$token->getUser()->hasRole(UserRole::ROLE_SUPER_ADMIN))
+            $token
+            && $token->getUser() instanceof User
+            && $token->getUser()->hasRole(UserRole::ROLE_PROJECT_ADMIN)
+            && (!$token->getUser()->hasRole(UserRole::ROLE_ADMIN)
+                || !$token->getUser()->hasRole(UserRole::ROLE_SUPER_ADMIN))
         ) {
             return new RedirectResponse(
                 $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL) .

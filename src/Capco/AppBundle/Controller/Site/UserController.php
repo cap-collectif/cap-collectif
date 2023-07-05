@@ -164,9 +164,9 @@ class UserController extends AbstractController
 
     private function hasAnyEnabledSSO(array $ssoList): bool
     {
-        return $this->isFacebookEnabled() ||
-            $this->isFranceConnectEnabled() ||
-            \count($ssoList) > 0;
+        return $this->isFacebookEnabled()
+            || $this->isFranceConnectEnabled()
+            || \count($ssoList) > 0;
     }
 
     private function isFacebookEnabled(): bool
@@ -176,8 +176,8 @@ class UserController extends AbstractController
 
     private function isFranceConnectEnabled(): bool
     {
-        return $this->toggleManager->isActive('login_franceconnect') &&
-            $this->ssoConfigurationRepository->findOneActiveByType('franceconnect');
+        return $this->toggleManager->isActive('login_franceconnect')
+            && $this->ssoConfigurationRepository->findOneActiveByType('franceconnect');
     }
 
     private function isSAMLEnabled(): bool

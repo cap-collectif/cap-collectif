@@ -2,58 +2,58 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Elastica\Snapshot;
-use Elasticsearch\Endpoints\Indices\Open;
-use PHPUnit\Framework\Assert;
-use Behat\Testwork\Suite\Suite;
-use Capco\AppBundle\Utils\Text;
-use Joli\JoliNotif\Notification;
-use Behat\Gherkin\Node\TableNode;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Locale;
-use Capco\AppBundle\Toggle\Manager;
-use Joli\JoliNotif\NotifierFactory;
-use http\Exception\RuntimeException;
-use Behat\Mink\Driver\Selenium2Driver;
-use Symfony\Component\Process\Process;
-use Behat\Mink\Element\DocumentElement;
-use Capco\AppBundle\Elasticsearch\Client;
-use Behat\Testwork\Tester\Result\TestResult;
-use Capco\AppBundle\Behat\Traits\AdminTrait;
-use Capco\AppBundle\Behat\Traits\DebateTrait;
-use Capco\AppBundle\Behat\Traits\LocaleTrait;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Capco\AppBundle\Elasticsearch\IndexBuilder;
+use Behat\Testwork\Suite\Suite;
+use Behat\Testwork\Tester\Result\TestResult;
+use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
 use Capco\AppBundle\Behat\Traits\AdminEventTrait;
-use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
-use Behat\Mink\Exception\ElementNotFoundException;
 use Capco\AppBundle\Behat\Traits\AdminGeneralTait;
 use Capco\AppBundle\Behat\Traits\AdminOpinionTait;
-use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
-use Capco\AppBundle\Behat\Traits\UserProfileTrait;
+use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
 use Capco\AppBundle\Behat\Traits\AdminProjectTrait;
 use Capco\AppBundle\Behat\Traits\AdminSectionTrait;
+use Capco\AppBundle\Behat\Traits\AdminShieldTrait;
+use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
+use Capco\AppBundle\Behat\Traits\DebateTrait;
+use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
+use Capco\AppBundle\Behat\Traits\LocaleTrait;
+use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
-use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
-use Capco\AppBundle\Behat\Traits\AdminDashboardTait;
-use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
-use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
-use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
-use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
-use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
-use Capco\AppBundle\Behat\Traits\AdminOpinionTypeTrait;
-use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\ProposalEvaluationTrait;
+use Capco\AppBundle\Behat\Traits\ProposalStepsTrait;
 use Capco\AppBundle\Behat\Traits\QuestionnaireStepsTrait;
-use Capco\AppBundle\Command\CreateStepContributorsCommand;
-use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
+use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
+use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
+use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Capco\AppBundle\Behat\Traits\UserProfileTrait;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
+use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
+use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
+use Capco\AppBundle\Elasticsearch\Client;
+use Capco\AppBundle\Elasticsearch\IndexBuilder;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\Text;
+use Elastica\Snapshot;
+use Elasticsearch\Endpoints\Indices\Open;
+use http\Exception\RuntimeException;
+use Joli\JoliNotif\Notification;
+use Joli\JoliNotif\NotifierFactory;
+use PHPUnit\Framework\Assert;
+use Symfony\Component\Process\Process;
 
 const REPOSITORY_NAME = 'repository_qa';
 const SNAPSHOT_NAME = 'snap_qa';
@@ -281,7 +281,7 @@ class ApplicationContext extends UserContext
         // Make sure we are not using virtual file system, because here we want to see real files in path
         $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
         $filename = str_replace('vfs://', '', $filename);
-        Assert::assertFileExists("${directory}/${filename}");
+        Assert::assertFileExists("{$directory}/{$filename}");
     }
 
     /**
@@ -294,7 +294,8 @@ class ApplicationContext extends UserContext
         // https://stackoverflow.com/questions/39646444/how-to-handle-a-javascript-alert-window-using-php-behat-mink-selenium2-chrome-we
         $session = $this->getSession()
             ->getDriver()
-            ->getWebDriverSession();
+            ->getWebDriverSession()
+        ;
         // See message with $session->getAlert_text()
         $session->accept_alert();
     }
@@ -367,7 +368,8 @@ class ApplicationContext extends UserContext
                     ->setTitle('Behat suite ended successfully')
                     ->setBody(
                         'Suite "' . $suiteName . '" has ended without errors (for once). Congrats !'
-                    );
+                    )
+                ;
             } elseif (TestResult::SKIPPED === $resultCode) {
                 $notification
                     ->setTitle('Behat suite ended with skipped steps')
@@ -375,7 +377,8 @@ class ApplicationContext extends UserContext
                         'Suite "' .
                             $suiteName .
                             '" has ended successfully but some steps have been skipped.'
-                    );
+                    )
+                ;
             } else {
                 $notification
                     ->setTitle('Behat suite ended with errors')
@@ -383,7 +386,8 @@ class ApplicationContext extends UserContext
                         'Suite "' .
                             $suiteName .
                             '" has ended with errors. Go check it out you moron !'
-                    );
+                    )
+                ;
             }
             $notifier->send($notification);
         }
@@ -541,7 +545,7 @@ class ApplicationContext extends UserContext
     public function iSetMyCurrentLocaleTo(string $locale)
     {
         $localePath = substr($locale, 0, strpos($locale, '-'));
-        $this->visitPath("/${localePath}");
+        $this->visitPath("/{$localePath}");
     }
 
     /**
@@ -551,13 +555,15 @@ class ApplicationContext extends UserContext
     {
         $newDefaultLocale = $this->getEntityManager()
             ->getRepository(Locale::class)
-            ->findOneByCode($locale);
+            ->findOneByCode($locale)
+        ;
         if (null === $newDefaultLocale || !$newDefaultLocale->isPublished()) {
-            throw new RuntimeException("cannot set ${locale} as default locale");
+            throw new RuntimeException("cannot set {$locale} as default locale");
         }
         $oldDefaultLocale = $this->getEntityManager()
             ->getRepository(Locale::class)
-            ->findDefaultLocale();
+            ->findDefaultLocale()
+        ;
         $oldDefaultLocale->unsetDefault();
         $newDefaultLocale->setDefault();
 
@@ -582,7 +588,8 @@ class ApplicationContext extends UserContext
     {
         echo $this->getSession()
             ->getPage()
-            ->getHtml();
+            ->getHtml()
+        ;
     }
 
     /**
@@ -621,7 +628,7 @@ class ApplicationContext extends UserContext
         string $selector = 'body',
         int $timeout = 10000
     ) {
-        $text = "'${text}'";
+        $text = "'{$text}'";
         $this->waitAndThrowOnFailure(
             $timeout,
             '$("' . $selector . ':contains(' . $text . ')").length > 0'
@@ -637,7 +644,7 @@ class ApplicationContext extends UserContext
         string $selector = 'body',
         int $timeout = 10000
     ) {
-        $text = "'${text}'";
+        $text = "'{$text}'";
         $this->waitAndThrowOnFailure(
             $timeout,
             '$("' . $selector . ':contains(' . $text . ')").length == 0'
@@ -712,7 +719,8 @@ class ApplicationContext extends UserContext
         $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
         }
@@ -727,18 +735,22 @@ class ApplicationContext extends UserContext
         $list .= ' input[type=checkbox]';
         $driver = $this->getSession()->getDriver();
         for ($i = 0; $i < $number; ++$i) {
-            $driver->executeScript("$('${list}')[${i}].click();");
+            $driver->executeScript("$('{$list}')[{$i}].click();");
         }
     }
 
     /**
      * @When I trigger element :element with action :action
+     *
+     * @param mixed $element
+     * @param mixed $action
      */
     public function iTriggerElementWithAction($element, $action)
     {
         $this->getSession()
             ->getDriver()
-            ->executeScript("$('${element}').trigger('${action}');");
+            ->executeScript("$('{$element}').trigger('{$action}');")
+        ;
     }
 
     /**
@@ -749,7 +761,8 @@ class ApplicationContext extends UserContext
         $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -766,7 +779,8 @@ class ApplicationContext extends UserContext
         $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -784,7 +798,8 @@ class ApplicationContext extends UserContext
 
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $element);
+            ->find('css', $element)
+        ;
 
         $element->setValue('');
     }
@@ -798,7 +813,8 @@ class ApplicationContext extends UserContext
 
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $element);
+            ->find('css', $element)
+        ;
 
         $element->setValue($value);
     }
@@ -818,17 +834,19 @@ class ApplicationContext extends UserContext
         try {
             $this->getSession()
                 ->getPage()
-                ->fillField($field, $value);
+                ->fillField($field, $value)
+            ;
         } catch (ElementNotFoundException $e) {
             // Try to get corresponding wysiwyg field
             $wrapper = $this->getSession()
                 ->getPage()
-                ->find('named', ['id_or_name', $field]);
+                ->find('named', ['id_or_name', $field])
+            ;
             if (
-                !$wrapper ||
-                !$wrapper->hasClass(
-                    'joditEditor' &&
-                        (!$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor'))
+                !$wrapper
+                || !$wrapper->hasClass(
+                    'joditEditor'
+                        && (!$wrapper->hasClass('editor') || !$wrapper->has('css', '.ql-editor'))
                 )
             ) {
                 throw $e;
@@ -846,6 +864,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When The field :field should be disabled
+     *
+     * @param mixed $field
      */
     public function theFieldShouldBeDisabled($field)
     {
@@ -859,6 +879,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When The field :field should be enabled
+     *
+     * @param mixed $field
      */
     public function theFieldShouldBeEnabled($field)
     {
@@ -889,7 +911,8 @@ class ApplicationContext extends UserContext
     {
         $this->getSession()
             ->getDriver()
-            ->executeScript("document.querySelector('${selector}').scrollIntoView()");
+            ->executeScript("document.querySelector('{$selector}').scrollIntoView()")
+        ;
     }
 
     /**
@@ -897,12 +920,13 @@ class ApplicationContext extends UserContext
      */
     public function checkElement(string $value)
     {
-        $input = "[name='${value}'], [value='${value}'], [id='${value}']";
+        $input = "[name='{$value}'], [value='{$value}'], [id='{$value}']";
 
         $inputId = $this->getSession()
             ->getPage()
             ->find('css', $input)
-            ->getAttribute('id');
+            ->getAttribute('id')
+        ;
 
         $this->checkElementWithId($inputId);
     }
@@ -912,12 +936,13 @@ class ApplicationContext extends UserContext
      */
     public function checkElementWithId(string $inputId)
     {
-        $selector = "[for='${inputId}']";
+        $selector = "[for='{$inputId}']";
         $this->iWaitElementToAppearOnPage($selector);
 
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
         }
@@ -934,7 +959,7 @@ class ApplicationContext extends UserContext
     ): void {
         $this->assertSession()->elementTextContains(
             'css',
-            "${element} .react-select__value-container .react-select__multi-value:nth-child(${number}) .react-select__multi-value__label",
+            "{$element} .react-select__value-container .react-select__multi-value:nth-child({$number}) .react-select__multi-value__label",
             $this->fixStepArgument($text)
         );
     }
@@ -944,12 +969,13 @@ class ApplicationContext extends UserContext
      */
     public function iRemoveTheOptionOfTheReactElement(int $number, string $element): void
     {
-        $selector = "${element} .react-select__value-container .react-select__multi-value:nth-child(${number}) .react-select__multi-value__remove";
+        $selector = "{$element} .react-select__value-container .react-select__multi-value:nth-child({$number}) .react-select__multi-value__remove";
         $this->iWaitElementToAppearOnPage($selector);
 
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
         }
@@ -1130,7 +1156,7 @@ class ApplicationContext extends UserContext
     {
         $this->iWaitElementToAppearOnPage('#changeLanguageProposalContainer');
         $this->iClickElement('#language-change-button-dropdown');
-        $this->iClickElement("#language-choice-${locale}");
+        $this->iClickElement("#language-choice-{$locale}");
         $this->iClickElement('#language-header-continue-button');
         $this->iWaitElementToDisappearOnPage('#changeLanguageProposalContainer');
         $this->iWaitElementToAppearOnPage('#main-navbar-toggle');
@@ -1143,8 +1169,8 @@ class ApplicationContext extends UserContext
     {
         $this->iWaitElementToAppearOnPage('#footer-links #language-change-button-dropdown');
         $this->iClickElement('#footer-links #language-change-button-dropdown');
-        $this->iWaitElementToAppearOnPage("#language-change-menu-list #language-choice-${locale}");
-        $this->iClickElement("#language-change-menu-list #language-choice-${locale}");
+        $this->iWaitElementToAppearOnPage("#language-change-menu-list #language-choice-{$locale}");
+        $this->iClickElement("#language-change-menu-list #language-choice-{$locale}");
     }
 
     /**
@@ -1191,15 +1217,11 @@ class ApplicationContext extends UserContext
         $locator = $this->fixStepArgument($locator);
         $button = $this->getSession()
             ->getPage()
-            ->findButton($locator);
+            ->findButton($locator)
+        ;
 
         if (null === $button) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'button',
-                'id|name|title|alt|value',
-                $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
         }
 
         Assert::assertTrue($button->hasAttribute('disabled'));
@@ -1213,15 +1235,11 @@ class ApplicationContext extends UserContext
         $locator = $this->fixStepArgument($locator);
         $button = $this->getSession()
             ->getPage()
-            ->findButton($locator);
+            ->findButton($locator)
+        ;
 
         if (null === $button) {
-            throw new ElementNotFoundException(
-                $this->getSession(),
-                'button',
-                'id|name|title|alt|value',
-                $locator
-            );
+            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
         }
 
         Assert::assertFalse($button->hasAttribute('disabled'));
@@ -1241,7 +1259,8 @@ class ApplicationContext extends UserContext
 
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -1291,11 +1310,12 @@ class ApplicationContext extends UserContext
      */
     public function iDisableElement($value)
     {
-        $input = ".checked[for='${value}']";
+        $input = ".checked[for='{$value}']";
 
         $inputId = $this->getSession()
             ->getPage()
-            ->find('css', $input);
+            ->find('css', $input)
+        ;
 
         if (null !== $inputId) {
             $this->checkElement($value);
@@ -1309,11 +1329,12 @@ class ApplicationContext extends UserContext
      */
     public function iEnableElement($value)
     {
-        $input = ".unchecked[for='${value}']";
+        $input = ".unchecked[for='{$value}']";
 
         $inputId = $this->getSession()
             ->getPage()
-            ->find('css', $input);
+            ->find('css', $input)
+        ;
 
         if (null !== $inputId) {
             $this->checkElement($value);
@@ -1329,19 +1350,25 @@ class ApplicationContext extends UserContext
     {
         $input = $this->getSession()
             ->getPage()
-            ->find('css', $element);
+            ->find('css', $element)
+        ;
 
         Assert::assertTrue($input->hasAttribute('disabled'));
     }
 
     /**
      * @Then the number :number element in :list should contain :value
+     *
+     * @param mixed $number
+     * @param mixed $list
+     * @param mixed $value
      */
     public function assertListElementContains($number, $list, $value)
     {
         $elements = $this->getSession()
             ->getPage()
-            ->findAll('css', $list);
+            ->findAll('css', $list)
+        ;
         $element = $elements[$number - 1];
         Assert::assertContains($element->getText(), $value);
     }
@@ -1372,10 +1399,11 @@ class ApplicationContext extends UserContext
      */
     public function selectOptionFromReact(string $select, string $option): void
     {
-        $selector = "${select} .react-select__input input";
+        $selector = "{$select} .react-select__input input";
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
 
         if (null === $element) {
             throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
@@ -1392,12 +1420,13 @@ class ApplicationContext extends UserContext
      */
     public function checkSelectAccessibleOption(string $select, string $option): void
     {
-        $selector = "${select}-button";
+        $selector = "{$select}-button";
 
         $this->iWaitElementToAppearOnPage($selector);
         $element = $this->getSession()
             ->getPage()
-            ->find('css', $selector);
+            ->find('css', $selector)
+        ;
 
         Assert::assertEquals($element->getText(), $option);
     }
@@ -1406,12 +1435,14 @@ class ApplicationContext extends UserContext
      * @Then The element :element should contain :number sub-elements
      *
      * @param mixed $element
+     * @param mixed $number
      */
     public function checkCountChildren($element, $number): void
     {
         $container = $this->getSession()
             ->getPage()
-            ->find('css', $element);
+            ->find('css', $element)
+        ;
         $children = $container->findAll('xpath', './span');
         $count = 0;
         foreach ($children as $child) {
@@ -1443,12 +1474,14 @@ class ApplicationContext extends UserContext
      */
     public function selectOptionAccessible(string $select, string $option): void
     {
-        $selector = "${select} .select__option button[value=${option}]";
+        $selector = "{$select} .select__option button[value={$option}]";
         $this->iClickElement($selector);
     }
 
     /**
      * @When I fill the theme filter with value :value
+     *
+     * @param mixed $value
      */
     public function iFillThemeFilterWithValue($value)
     {
@@ -1467,6 +1500,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the project filter with value :value
+     *
+     * @param mixed $value
      */
     public function iFillProjectFilterWithValue($value)
     {
@@ -1490,14 +1525,16 @@ class ApplicationContext extends UserContext
     {
         $calendar = $this->getSession()
             ->getPage()
-            ->find('css', '.rdt');
+            ->find('css', '.rdt')
+        ;
         if (null === $calendar) {
             throw new ElementNotFoundException($this->getSession(), 'calendar', 'css', '.rdt');
         }
         $calendar->click();
         $day = $this->getSession()
             ->getPage()
-            ->find('css', '.rdtToday');
+            ->find('css', '.rdtToday')
+        ;
         if (null === $day) {
             throw new ElementNotFoundException($this->getSession(), 'day', 'css', '.rdtToday');
         }
@@ -1506,19 +1543,23 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the date field in :selector
+     *
+     * @param mixed $selector
      */
     public function iFillDateFieldIn($selector)
     {
         $calendar = $this->getSession()
             ->getPage()
-            ->find('css', "${selector} .rdt");
+            ->find('css', "{$selector} .rdt")
+        ;
         if (null === $calendar) {
             throw new ElementNotFoundException($this->getSession(), 'calendar', 'css', '.rdt');
         }
         $calendar->click();
         $day = $this->getSession()
             ->getPage()
-            ->find('css', '.rdtToday');
+            ->find('css', '.rdtToday')
+        ;
         if (null === $day) {
             throw new ElementNotFoundException($this->getSession(), 'day', 'css', '.rdtToday');
         }

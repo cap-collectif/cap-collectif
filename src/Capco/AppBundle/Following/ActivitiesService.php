@@ -50,8 +50,6 @@ class ActivitiesService
             unset($followedActivitiesRight[$userId]);
         }
 
-        $followedActivities = array_merge($followedActivities, $followedActivitiesRight);
-
-        return $followedActivities;
+        return array_merge($followedActivities, $followedActivitiesRight);
     }
 }

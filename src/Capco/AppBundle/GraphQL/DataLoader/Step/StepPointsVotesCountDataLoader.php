@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class StepPointsVotesCountDataLoader extends BatchDataLoader
 {
@@ -80,9 +80,7 @@ class StepPointsVotesCountDataLoader extends BatchDataLoader
             );
         }
 
-        throw new \InvalidArgumentException(
-            sprintf('"%s" Unknown collect or selection step "%s" for .', __METHOD__, $step->getId())
-        );
+        throw new \InvalidArgumentException(sprintf('"%s" Unknown collect or selection step "%s" for .', __METHOD__, $step->getId()));
     }
 
     protected function getCacheTag($key): array

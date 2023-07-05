@@ -2,21 +2,21 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteAnonymousReplyMutation;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\Elasticsearch\Indexer;
 use Prophecy\Argument;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
 {
@@ -46,25 +46,30 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn($reply);
+            ->willReturn($reply)
+        ;
         $reply
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('replyId');
+            ->willReturn('replyId')
+        ;
         $reply
             ->getQuestionnaire()
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $questionnaire
             ->isNotifyResponseDelete()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $replyId = GlobalId::toGlobalId('Reply', 'replyId');
 
@@ -93,34 +98,41 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn($reply);
+            ->willReturn($reply)
+        ;
         $reply
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('replyId');
+            ->willReturn('replyId')
+        ;
         $reply
             ->getQuestionnaire()
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $questionnaire
             ->isNotifyResponseDelete()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $questionnaire->getId()->shouldBeCalledOnce();
         $reply
             ->getStep()
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
         $step
             ->getProject()
             ->shouldBeCalledOnce()
-            ->willReturn($project);
+            ->willReturn($project)
+        ;
         $step->getTitle()->shouldBeCalledOnce();
         $project->getTitle()->shouldBeCalledOnce();
         $publisher->publish('questionnaire.reply', Argument::type(Message::class));
@@ -146,12 +158,14 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->shouldThrow(new UserError('Reply not found'))->during('__invoke', [$input]);
     }

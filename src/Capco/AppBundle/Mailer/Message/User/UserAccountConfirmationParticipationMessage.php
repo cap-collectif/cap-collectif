@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Mailer\Message\User;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
+use Capco\UserBundle\Entity\User;
 
 final class UserAccountConfirmationParticipationMessage extends AbstractAdminMessage
 {

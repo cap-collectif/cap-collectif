@@ -17,7 +17,7 @@ class AnalyticsAnonymousContributors implements Aggregatable
     public static function fromEs(ResultSet $set): self
     {
         $documents = array_map(
-            static fn(array $document) => AggregatedResult::fromEs(
+            static fn (array $document) => AggregatedResult::fromEs(
                 $document,
                 'anonymous_participants_per_interval'
             ),

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Model;
 
 use Capco\AppBundle\Entity\Interfaces\Trashable;

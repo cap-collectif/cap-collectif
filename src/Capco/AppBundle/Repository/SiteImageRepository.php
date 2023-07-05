@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\SiteImage;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method SiteImage|null findOneBy(array $criteria, array $orderBy = null)
- * @method SiteImage|null find($id, $lockMode = null, $lockVersion = null)
+ * @method null|SiteImage findOneBy(array $criteria, array $orderBy = null)
+ * @method null|SiteImage find($id, $lockMode = null, $lockVersion = null)
  */
 class SiteImageRepository extends EntityRepository
 {
@@ -19,7 +19,8 @@ class SiteImageRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('si.keyname', ':keyname'))
             ->setParameter('keyname', 'favicon')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getAppLogo(): ?SiteImage
@@ -30,7 +31,8 @@ class SiteImageRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('si.keyname', ':keyname'))
             ->setParameter('keyname', 'image.logo')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public static function getValuesIfEnabledCacheKey()
@@ -50,6 +52,7 @@ class SiteImageRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getValuesIfEnabledCacheKey())
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

@@ -33,7 +33,8 @@ class UserTypeAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -51,7 +52,8 @@ class UserTypeAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -72,7 +74,8 @@ class UserTypeAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

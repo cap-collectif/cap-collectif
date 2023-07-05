@@ -19,7 +19,8 @@ class TranslationCollectionTypeSubscriber implements EventSubscriberInterface
         $formOptions = $event
             ->getForm()
             ->getConfig()
-            ->getOptions();
+            ->getOptions()
+        ;
 
         foreach ($formOptions['locales'] as $locale) {
             $event->getForm()->add($locale, TranslationType::class, [
@@ -37,7 +38,7 @@ class TranslationCollectionTypeSubscriber implements EventSubscriberInterface
     {
         return $form
             ->getConfig()
-            ->getDataClass()
-            ::getTranslationEntityClass();
+            ->getDataClass()::getTranslationEntityClass()
+        ;
     }
 }

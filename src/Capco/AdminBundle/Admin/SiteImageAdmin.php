@@ -2,14 +2,14 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\AdminBundle\Form\Type\ModelListType;
-use Capco\AppBundle\Repository\SiteImageRepository;
 
 class SiteImageAdmin extends AbstractAdmin
 {
@@ -40,7 +40,8 @@ class SiteImageAdmin extends AbstractAdmin
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
             return $this->getTranslator()
-                ->trans((string) $object, [], 'CapcoAppBundle');
+                ->trans((string) $object, [], 'CapcoAppBundle')
+            ;
         }
 
         return parent::toString($object);
@@ -80,8 +81,9 @@ class SiteImageAdmin extends AbstractAdmin
             ->add('media', ModelListType::class, [
                 'required' => false,
                 'label' => 'global.image',
-                'help' => 'admin.help.social_network_thumbnail'
-            ]);
+                'help' => 'admin.help.social_network_thumbnail',
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

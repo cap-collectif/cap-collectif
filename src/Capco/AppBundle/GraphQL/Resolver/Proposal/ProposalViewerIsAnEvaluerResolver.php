@@ -8,7 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 class ProposalViewerIsAnEvaluerResolver implements ResolverInterface
 {

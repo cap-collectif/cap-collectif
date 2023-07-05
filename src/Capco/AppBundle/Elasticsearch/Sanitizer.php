@@ -13,7 +13,7 @@ class Sanitizer
      *
      * @param $query
      */
-    public static function escape($query, array $exclude = null): string
+    public static function escape($query, ?array $exclude = null): string
     {
         self::ensureString($query);
 
@@ -40,11 +40,11 @@ class Sanitizer
      * Returns array of ElasticSearch reserved characters.
      * Characters can be excluded from the result by passing them in the $exclude argument.
      *
-     * @param string[]|null $excludeCharacters
+     * @param null|string[] $excludeCharacters
      *
      * @return string[]
      */
-    protected static function reservedCharacters(array $excludeCharacters = null): array
+    protected static function reservedCharacters(?array $excludeCharacters = null): array
     {
         $reservedCharacters = self::prepareReservedCharacters();
 
@@ -145,7 +145,7 @@ class Sanitizer
             function ($reservedCharacter) use ($excludeCharacters) {
                 return !\in_array($reservedCharacter, $excludeCharacters, true);
             },
-            ARRAY_FILTER_USE_KEY
+            \ARRAY_FILTER_USE_KEY
         );
     }
 }

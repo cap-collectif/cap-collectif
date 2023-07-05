@@ -22,9 +22,7 @@ class SectionPage extends Page
                 "window.jQuery && $('.opinion-list-rendered').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'SectionPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('SectionPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

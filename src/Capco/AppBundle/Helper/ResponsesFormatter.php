@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Helper;
 
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ResponsesFormatter
 {

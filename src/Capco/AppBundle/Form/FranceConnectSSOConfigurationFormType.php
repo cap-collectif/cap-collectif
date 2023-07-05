@@ -34,7 +34,8 @@ class FranceConnectSSOConfigurationFormType extends AbstractType
             ->add('clientId', PurifiedTextType::class, ['strip_tags' => true])
             ->add('secret', PurifiedTextType::class, ['strip_tags' => true])
             ->add('logoutUrl', UrlType::class)
-            ->add('allowedData');
+            ->add('allowedData')
+        ;
 
         // This listener's goal is to set complete right URL based on environment sent from request.
         $builder->addEventListener(FormEvents::PRE_SUBMIT, static function (FormEvent $event) {

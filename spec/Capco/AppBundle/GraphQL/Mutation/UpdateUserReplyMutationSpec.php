@@ -13,6 +13,7 @@ use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
+use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -23,7 +24,6 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
-use DG\BypassFinals;
 use Symfony\Component\Form\FormInterface;
 
 BypassFinals::enable();
@@ -79,7 +79,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $viewer
             ->isEmailConfirmed()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         // https://github.com/phpspec/prophecy/issues/213#issuecomment-145499760
         $reply->isDraft()->willReturn(true, false);
@@ -88,7 +89,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $reply
             ->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))
             ->shouldBeCalled()
-            ->willReturn($reply);
+            ->willReturn($reply)
+        ;
 
         $questionnaire->isNotifyResponseUpdate()->willReturn(false);
         $questionnaire->isAcknowledgeReplies()->willReturn(true);
@@ -99,7 +101,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $step
             ->isOpen()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $step->getSlug()->willReturn('questionnaire-step');
         $project->getId()->willReturn('projectQuestionnaireId');
         $project->getSlug()->willReturn('project1');
@@ -113,14 +116,16 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
 
         $formFactory
             ->create(ReplyType::class, $reply, ['anonymousAllowed' => true])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit(['draft' => false, 'responses' => []], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $reply->getQuestionnaire()->willReturn($questionnaire);
 
         $publisher
             ->publish('questionnaire.reply', \Prophecy\Argument::type(Message::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $em->flush()->shouldBeCalled();
 
         $this->__invoke($arguments, $viewer)->shouldBe(['reply' => $reply]);
@@ -229,7 +234,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
 
         $formFactory
             ->create(ReplyType::class, $reply, ['anonymousAllowed' => true])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit(['draft' => false, 'responses' => []], false)->willReturn(null);
         $form->isValid()->willReturn(false);
         $form->getErrors()->willReturn([]);

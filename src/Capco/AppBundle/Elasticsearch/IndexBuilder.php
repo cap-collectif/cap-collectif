@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Elasticsearch;
 
 use Elastica\Client;
 use Elastica\Index;
+use Elastica\Reindex;
 use Elastica\Request;
 use Elastica\Response;
-use Elastica\Reindex;
 use Elastica\Task;
 use Elasticsearch\Endpoints\Get;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -40,9 +40,7 @@ class IndexBuilder
         $index = $this->client->getIndex($this->generateIndexName());
 
         if ($index->exists()) {
-            throw new \RuntimeException(
-                sprintf('Index %s is already created, something is wrong.', $index->getName())
-            );
+            throw new \RuntimeException(sprintf('Index %s is already created, something is wrong.', $index->getName()));
         }
         $index->create($mapping);
 

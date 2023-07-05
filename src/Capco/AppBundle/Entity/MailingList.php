@@ -19,8 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MailingList implements Ownerable, CreatableInterface
 {
-    use OwnerableTrait;
     use CreatableTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**

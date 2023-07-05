@@ -81,9 +81,7 @@ class Locale
     public function disable(): self
     {
         if ($this->isPublished()) {
-            throw new LocaleConfigurationException(
-                $this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_DISABLE_PUBLISHED
-            );
+            throw new LocaleConfigurationException($this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_DISABLE_PUBLISHED);
         }
         $this->enabled = false;
 
@@ -98,9 +96,7 @@ class Locale
     public function publish(): self
     {
         if (!$this->isEnabled()) {
-            throw new LocaleConfigurationException(
-                $this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_PUBLISH_DISABLED
-            );
+            throw new LocaleConfigurationException($this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_PUBLISH_DISABLED);
         }
         $this->published = true;
 
@@ -122,9 +118,7 @@ class Locale
     public function setDefault(): self
     {
         if (!$this->isPublished()) {
-            throw new LocaleConfigurationException(
-                $this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_DEFAULT_UNPUBLISHED
-            );
+            throw new LocaleConfigurationException($this->getCode() . ' : ' . LocaleConfigurationException::MESSAGE_DEFAULT_UNPUBLISHED);
         }
         $this->default = true;
 

@@ -60,7 +60,8 @@ class ImportIDFProposalsFromCsvCommand extends Command
             )
             ->addOption('delimiter', 'd', InputOption::VALUE_OPTIONAL, 'Delimiter used in csv', ';')
             ->addOption('dryRun', 'dr', InputOption::VALUE_OPTIONAL, '', false)
-            ->addOption('skipDuplicateLines', 'idl', InputOption::VALUE_OPTIONAL, '', false);
+            ->addOption('skipDuplicateLines', 'idl', InputOption::VALUE_OPTIONAL, '', false)
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
@@ -129,6 +130,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
                     $output->writeln('<error>Import cancelled. No proposal was created.</error>');
 
                     return 1;
+
                 case AddProposalsFromCsvMutation::BAD_DATA_MODEL:
                     $output->writeln('<error>CSV header is not valid</error>');
                     $output->writeln('<error>Import cancelled. No proposal was created.</error>');
@@ -136,7 +138,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
                     return 1;
             }
             $this->logger->error($exception->getMessage());
-            $output->writeln('<error>Something is wrong contact an administrator</error>' .  $exception->getMessage());
+            $output->writeln('<error>Something is wrong contact an administrator</error>' . $exception->getMessage());
 
             return 1;
         }

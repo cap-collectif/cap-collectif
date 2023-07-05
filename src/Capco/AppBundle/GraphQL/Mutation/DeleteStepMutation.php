@@ -23,7 +23,6 @@ class DeleteStepMutation implements MutationInterface
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
@@ -39,24 +38,24 @@ class DeleteStepMutation implements MutationInterface
         return ['stepId' => $stepId];
     }
 
-    private function getStep(string $stepId, User $viewer): AbstractStep
-    {
-        $step = $this->globalIdResolver->resolve($stepId, $viewer);
-        if (!$step instanceof AbstractStep) {
-            throw new UserError("Given step is not of type AbstractStep");
-        }
-        return $step;
-    }
-
     public function isGranted(string $stepId, ?User $viewer = null): bool
     {
-        if (!$viewer) return false;
+        if (!$viewer) {
+            return false;
+        }
         $step = $this->getStep($stepId, $viewer);
         $project = $step->getProject();
 
         return $this->authorizationChecker->isGranted(ProjectVoter::DELETE, $project);
     }
 
+    private function getStep(string $stepId, User $viewer): AbstractStep
+    {
+        $step = $this->globalIdResolver->resolve($stepId, $viewer);
+        if (!$step instanceof AbstractStep) {
+            throw new UserError('Given step is not of type AbstractStep');
+        }
 
-
+        return $step;
+    }
 }

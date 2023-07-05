@@ -28,7 +28,8 @@ class AppendixTypeAdmin extends CapcoAdmin
             ])
             ->add('helpText', null, [
                 'label' => 'global.help.text',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -46,7 +47,8 @@ class AppendixTypeAdmin extends CapcoAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -57,7 +59,8 @@ class AppendixTypeAdmin extends CapcoAdmin
             ])
             ->add('helpText', null, [
                 'label' => 'global.help.text',
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -70,7 +73,8 @@ class AppendixTypeAdmin extends CapcoAdmin
             ->add('helpText', null, [
                 'label' => 'global.help.text',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

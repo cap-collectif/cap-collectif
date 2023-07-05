@@ -557,7 +557,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     /**
      * Remove step.
      *
-     *
      * @return $this
      */
     public function removeStep(ProjectAbstractStep $step)
@@ -620,7 +619,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     /**
      * Add Post.
      *
-     *
      * @return $this
      */
     public function addPost(Post $post)
@@ -634,7 +632,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
     /**
      * Remove post.
-     *
      *
      * @return $this
      */
@@ -697,6 +694,8 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
@@ -715,9 +714,9 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
             $first = $this->steps[0];
             foreach ($this->steps as $step) {
                 if (
-                    null !== $first &&
-                    null !== $step &&
-                    $step->getPosition() < $first->getPosition()
+                    null !== $first
+                    && null !== $step
+                    && $step->getPosition() < $first->getPosition()
                 ) {
                     $first = $step;
                 }
@@ -730,7 +729,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     public function getStartAt(): ?\DateTime
     {
         $startAt = null;
-        /** * @var $step ProjectAbstractStep  */
+        /** * @var ProjectAbstractStep $step  */
         foreach ($this->steps as $step) {
             if (!$startAt) {
                 $startAt = $step->getStep()->getStartAt();
@@ -748,7 +747,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     public function getEndAt(): ?\DateTime
     {
         $endAt = null;
-        /** * @var $step ProjectAbstractStep  */
+        /** * @var ProjectAbstractStep $step  */
         foreach ($this->steps as $step) {
             if (!$endAt) {
                 $endAt = $step->getStep()->getEndAt();
@@ -874,10 +873,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     {
         foreach ($this->getSteps() as $step) {
             if (
-                $step->getStep() &&
-                $step->getStep()->isCollectStep() &&
-                $step->getStep()->getProposalForm() &&
-                $step
+                $step->getStep()
+                && $step->getStep()->isCollectStep()
+                && $step->getStep()->getProposalForm()
+                && $step
                     ->getStep()
                     ->getProposalForm()
                     ->getAnalysisConfiguration()
@@ -886,7 +885,8 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
                     ->getStep()
                     ->getProposalForm()
                     ->getAnalysisConfiguration()
-                    ->getAnalysisStep();
+                    ->getAnalysisStep()
+                ;
             }
         }
 
@@ -901,11 +901,11 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
             /** @var AbstractStep $step */
             $step = $pas->getStep();
             if (
-                $step->isConsultationStep() ||
-                $step->isCollectStep() ||
-                $step->isSelectionStep() ||
-                $step->isQuestionnaireStep() ||
-                $step->isDebateStep()
+                $step->isConsultationStep()
+                || $step->isCollectStep()
+                || $step->isSelectionStep()
+                || $step->isQuestionnaireStep()
+                || $step->isDebateStep()
             ) {
                 $steps[] = $pas;
             }
@@ -1105,10 +1105,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         $steps = $this->getRealSteps();
         foreach ($steps as $step) {
             if (
-                $step instanceof ConsultationStep ||
-                $step instanceof SelectionStep ||
-                $step instanceof CollectStep ||
-                $step instanceof DebateStep
+                $step instanceof ConsultationStep
+                || $step instanceof SelectionStep
+                || $step instanceof CollectStep
+                || $step instanceof DebateStep
             ) {
                 if ($step->isVotable()) {
                     return true;
@@ -1124,10 +1124,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         $steps = $this->getRealSteps();
         foreach ($steps as $step) {
             if (
-                $step instanceof ConsultationStep ||
-                $step instanceof QuestionnaireStep ||
-                $step instanceof CollectStep ||
-                $step instanceof DebateStep
+                $step instanceof ConsultationStep
+                || $step instanceof QuestionnaireStep
+                || $step instanceof CollectStep
+                || $step instanceof DebateStep
             ) {
                 return true;
             }
@@ -1146,10 +1146,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
                 }
             }
             if (
-                $step instanceof CollectStep ||
-                $step instanceof ConsultationStep ||
-                $step instanceof QuestionnaireStep ||
-                $step instanceof DebateStep
+                $step instanceof CollectStep
+                || $step instanceof ConsultationStep
+                || $step instanceof QuestionnaireStep
+                || $step instanceof DebateStep
             ) {
                 return true;
             }
@@ -1338,6 +1338,8 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
     /**
      * check if viewer is allowed the project.
+     *
+     * @param null|mixed $viewer
      */
     public function viewerCanSee($viewer = null): bool
     {
@@ -1347,13 +1349,13 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
         $isOwner = $this->owner && $this->owner === $viewer;
         if (
-            $viewer &&
-            ($viewer->isAdmin() || \in_array($viewer, $this->getUserAuthors()) || $isOwner)
+            $viewer
+            && ($viewer->isAdmin() || \in_array($viewer, $this->getUserAuthors()) || $isOwner)
         ) {
             return true;
         }
 
-        /** @var $viewer User */
+        /** @var User $viewer */
         if (ProjectVisibilityMode::VISIBILITY_CUSTOM === $this->getVisibility() && $viewer) {
             $viewerGroups = $viewer->getUserGroups()->toArray();
             $allowedGroups = $this->getRestrictedViewerGroups()->toArray();
@@ -1370,8 +1372,8 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
         $viewerVisibility = $this->getVisibilityForViewer($viewer);
 
-        return \in_array($this->getVisibility(), $viewerVisibility) &&
-            $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
+        return \in_array($this->getVisibility(), $viewerVisibility)
+            && $this->getVisibility() < ProjectVisibilityMode::VISIBILITY_CUSTOM;
     }
 
     public function isArchived(): bool

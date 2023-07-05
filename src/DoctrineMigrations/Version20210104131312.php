@@ -23,7 +23,8 @@ final class Version20210104131312 extends AbstractMigration
             ->setParameter(0, 'global.debate')
             ->setParameter(1, 'debate')
             ->setParameter(2, '#7ED6DF')
-            ->execute();
+            ->execute()
+        ;
     }
 
     public function down(Schema $schema): void

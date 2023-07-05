@@ -87,8 +87,8 @@ class OfficialResponse
     public function addAuthor(OfficialResponseAuthor $officialResponseAuthor): self
     {
         if (
-            !$this->authors->contains($officialResponseAuthor) &&
-            !$this->containAuthor($officialResponseAuthor->getAuthor())
+            !$this->authors->contains($officialResponseAuthor)
+            && !$this->containAuthor($officialResponseAuthor->getAuthor())
         ) {
             $this->authors->add($officialResponseAuthor);
         }

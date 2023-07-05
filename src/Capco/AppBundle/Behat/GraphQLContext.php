@@ -272,6 +272,8 @@ class GraphQLContext implements Context
 
     /**
      * @Then /^the GraphQL response status code should be (?P<code>\d+)$/
+     *
+     * @param mixed $statusCode
      */
     public function theGraphQLResponseStatusCodeShouldBe($statusCode)
     {

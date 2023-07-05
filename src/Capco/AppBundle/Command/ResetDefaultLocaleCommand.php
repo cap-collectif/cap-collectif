@@ -24,7 +24,8 @@ class ResetDefaultLocaleCommand extends Command
         $this->setName('capco:reset:default-locale')
             ->setDescription('Set default locale while reinit')
             ->addOption('code', 'c', InputOption::VALUE_REQUIRED, 'Locale code use by default.')
-            ->addOption('locale', 'l', InputOption::VALUE_REQUIRED, 'Language translation key.');
+            ->addOption('locale', 'l', InputOption::VALUE_REQUIRED, 'Language translation key.')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

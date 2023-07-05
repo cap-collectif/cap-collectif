@@ -17,12 +17,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class Version20220905103557 extends AbstractMigration implements ContainerAwareInterface
 {
-
     private EntityManagerInterface $em;
     private UuidGenerator $generator;
     private TokenGeneratorInterface $tokenGenerator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->tokenGenerator = $container->get('capco.fos_user.util.token_generator.default');
@@ -37,8 +36,8 @@ final class Version20220905103557 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        $rows = $this->connection->fetchAll("SELECT updated_by, comment from proposal_analysis WHERE comment IS NOT NULL");
-        if (count($rows) > 0) {
+        $rows = $this->connection->fetchAll('SELECT updated_by, comment from proposal_analysis WHERE comment IS NOT NULL');
+        if (\count($rows) > 0) {
             foreach ($rows as $row) {
                 $uuid = $this->generator->generate($this->em, null);
                 $token = $this->tokenGenerator->generateToken();
@@ -54,7 +53,7 @@ final class Version20220905103557 extends AbstractMigration implements Container
                     'pinned' => '1',
                     'publishedAt' => $createdAt,
                     'published' => '1',
-                    'moderation_token' => $token
+                    'moderation_token' => $token,
                 ]);
             }
         }

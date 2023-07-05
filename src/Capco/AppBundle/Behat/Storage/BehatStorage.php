@@ -8,18 +8,20 @@ class BehatStorage
 
     protected $storage = [];
 
+    public static function __callStatic($method, $args)
+    {
+        $instance = static::getInstance();
+
+        return \call_user_func_array([$instance, '_' . $method], $args);
+    }
+
     public static function getInstance(): self
     {
         if (!self::$instance) {
             self::$instance = new static();
         }
-        return self::$instance;
-    }
 
-    public static function __callStatic($method, $args)
-    {
-        $instance = static::getInstance();
-        return call_user_func_array([$instance, '_' . $method], $args);
+        return self::$instance;
     }
 
     public function _get(string $key): ?string

@@ -2,30 +2,30 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalVoteMutation implements MutationInterface
 {
@@ -135,7 +135,8 @@ class AddProposalVoteMutation implements MutationInterface
             ->setIpAddress($this->requestGuesser->getClientIp())
             ->setUser($user)
             ->setPrivate($input->offsetGet('anonymously'))
-            ->setProposal($proposal);
+            ->setProposal($proposal)
+        ;
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
             $this->logger->error((string) $error->getMessage());

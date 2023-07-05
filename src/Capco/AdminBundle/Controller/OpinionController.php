@@ -90,7 +90,7 @@ class OpinionController extends AbstractSonataCrudController
             return $preResponse;
         }
 
-        /** @var $form \Symfony\Component\Form\Form */
+        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->admin->getForm();
         $form->setData($object);
         $form->handleRequest($request);
@@ -100,8 +100,8 @@ class OpinionController extends AbstractSonataCrudController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 if (false === $this->admin->isGranted('CREATE', $object)) {
                     throw $this->createAccessDeniedException();
@@ -171,7 +171,7 @@ class OpinionController extends AbstractSonataCrudController
         $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFormTheme());
 
         return $this->renderWithExtraParams(
-            "CapcoAdminBundle:Opinion:${templateKey}.html.twig",
+            "CapcoAdminBundle:Opinion:{$templateKey}.html.twig",
             [
                 'action' => 'create',
                 'form' => $view,
@@ -211,7 +211,7 @@ class OpinionController extends AbstractSonataCrudController
 
         $this->admin->setSubject($object);
 
-        /** @var $form \Symfony\Component\Form\Form */
+        /** @var \Symfony\Component\Form\Form $form */
         $form = $this->admin->getForm();
         $form->setData($object);
         $form->handleRequest($request);
@@ -221,8 +221,8 @@ class OpinionController extends AbstractSonataCrudController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 try {
                     $object = $this->admin->update($object);
@@ -264,8 +264,7 @@ class OpinionController extends AbstractSonataCrudController
                             'flash_lock_error',
                             [
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
-                                '%link_start%' =>
-                                    '<a href="' .
+                                '%link_start%' => '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $object) .
                                     '">',
                                 '%link_end%' => '</a>',
@@ -303,7 +302,7 @@ class OpinionController extends AbstractSonataCrudController
         $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFormTheme());
 
         return $this->renderWithExtraParams(
-            "CapcoAdminBundle:Opinion:${templateKey}.html.twig",
+            "CapcoAdminBundle:Opinion:{$templateKey}.html.twig",
             [
                 'action' => 'edit',
                 'form' => $view,
@@ -397,7 +396,8 @@ class OpinionController extends AbstractSonataCrudController
             ->andWhere('ot.parent is null')
             ->orderBy('c.id', 'asc')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
         $otRepo = $this->get(OpinionTypeRepository::class);
         $consultations = [];
 
@@ -419,7 +419,8 @@ class OpinionController extends AbstractSonataCrudController
         $appendixTypes = $this->get('doctrine')
             ->getManager()
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-            ->findBy(['opinionType' => $opinion->getOpinionType()], ['position' => 'ASC']);
+            ->findBy(['opinionType' => $opinion->getOpinionType()], ['position' => 'ASC'])
+        ;
         $newAppendices = new ArrayCollection();
         $currentAppendices = $opinion->getAppendices();
         foreach ($appendixTypes as $otat) {

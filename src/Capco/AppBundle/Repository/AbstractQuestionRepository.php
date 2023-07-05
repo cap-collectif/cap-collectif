@@ -20,9 +20,10 @@ class AbstractQuestionRepository extends EntityRepository
             ->leftJoin('aq.questionnaireAbstractQuestion', 'qaq')
             ->andWhere($qb->expr()->eq('qaq.proposalForm', ':proposalForm'))
             ->setParameter('proposalForm', $form)
-            ->addOrderBy("qaq.${field}", $direction)
+            ->addOrderBy("qaq.{$field}", $direction)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findByQuestionnaire(
@@ -36,9 +37,10 @@ class AbstractQuestionRepository extends EntityRepository
             ->leftJoin('aq.questionnaireAbstractQuestion', 'qaq')
             ->andWhere($qb->expr()->eq('qaq.questionnaire', ':questionnaire'))
             ->setParameter('questionnaire', $questionnaire)
-            ->addOrderBy("qaq.${field}", $direction)
+            ->addOrderBy("qaq.{$field}", $direction)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findOneByQuestionnaireAndTitle(Questionnaire $questionnaire, string $questionTitle): AbstractQuestion

@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Publishable;
 
-use GraphQL\Type\Definition\Type;
-use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use Capco\AppBundle\Model\Publishable;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class PublishableTypeResolver implements ResolverInterface
 {

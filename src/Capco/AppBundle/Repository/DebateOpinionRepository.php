@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method DebateOpinion|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateOpinion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateOpinion find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateOpinion findOneBy(array $criteria, array $orderBy = null)
  * @method DebateOpinion[]    findAll()
  * @method DebateOpinion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -19,7 +19,8 @@ class DebateOpinionRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->andWhere('o.debate = :debate')
-            ->setParameter('debate', $debate);
+            ->setParameter('debate', $debate)
+        ;
 
         $qb->setFirstResult($offset);
         $qb->setMaxResults($limit);
@@ -32,7 +33,8 @@ class DebateOpinionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('o')
             ->select('COUNT(o)')
             ->andWhere('o.debate = :debate')
-            ->setParameter('debate', $debate);
+            ->setParameter('debate', $debate)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

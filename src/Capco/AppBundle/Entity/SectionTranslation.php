@@ -21,9 +21,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SectionTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
     use TextableTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="title", type="string", length=100, nullable=true)

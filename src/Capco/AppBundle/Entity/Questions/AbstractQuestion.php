@@ -28,10 +28,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractQuestion implements DisplayableInBOInterface
 {
+    use DescriptionUsingJoditWysiwygTrait;
     use IdTrait;
     use SluggableUpdatableTitleTrait;
     use TimestampableTrait;
-    use DescriptionUsingJoditWysiwygTrait;
 
     public const QUESTION_TYPE_SIMPLE_TEXT = 0;
     public const QUESTION_TYPE_MULTILINE_TEXT = 1;
@@ -353,12 +353,13 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         $this->setUpdatedAt($now);
 
         if (
-            $this->getQuestionnaireAbstractQuestion() &&
-            $this->getQuestionnaireAbstractQuestion()->getProposalForm()
+            $this->getQuestionnaireAbstractQuestion()
+            && $this->getQuestionnaireAbstractQuestion()->getProposalForm()
         ) {
             $this->getQuestionnaireAbstractQuestion()
                 ->getProposalForm()
-                ->setUpdatedAt($now);
+                ->setUpdatedAt($now)
+            ;
         }
     }
 
@@ -405,6 +406,7 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
     public function setTemporaryId(?string $temporaryId = null): self
     {
         $this->temporaryId = $temporaryId;
+
         return $this;
     }
 }

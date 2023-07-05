@@ -10,9 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateRedirectIOProjectIdMutation implements MutationInterface
 {
+    private const REDIRECTION_IO_PROJECT_ID_PARAM_KEY = 'redirectionio.project.id';
     private $siteParameterRepository;
     private $em;
-    private const REDIRECTION_IO_PROJECT_ID_PARAM_KEY = 'redirectionio.project.id';
 
     public function __construct(
         SiteParameterRepository $siteParameterRepository,
@@ -51,6 +51,7 @@ class UpdateRedirectIOProjectIdMutation implements MutationInterface
     private function updateSiteParameterValue(SiteParameter $parameter, string $value): string
     {
         $parameter->setValue($value);
+
         return $parameter->getValue();
     }
 }

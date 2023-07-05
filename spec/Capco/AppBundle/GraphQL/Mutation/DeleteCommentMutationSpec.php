@@ -3,17 +3,17 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Capco\AppBundle\GraphQL\Mutation\DeleteCommentMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Mutation\DeleteCommentMutation;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteCommentMutationSpec extends ObjectBehavior

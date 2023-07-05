@@ -21,7 +21,8 @@ class EventRegistrationRepository extends EntityRepository
             ->andWhere('registration.event = :event')
             ->setParameter('event', $event)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getParticipantsInEvent(
@@ -35,7 +36,8 @@ class EventRegistrationRepository extends EntityRepository
             ->andWhere('registration.event = :event')
             ->setParameter('event', $event)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -47,7 +49,8 @@ class EventRegistrationRepository extends EntityRepository
         $qb->select('er.email, er.username', 'user.username as u_username', 'user.email as u_email')
             ->leftJoin('er.user', 'user')
             ->andWhere('er.event = :event')
-            ->setParameter('event', $event);
+            ->setParameter('event', $event)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -67,7 +70,8 @@ class EventRegistrationRepository extends EntityRepository
             ->andWhere('registration.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getOneByUserEmailAndEvent(string $email, Event $event): ?EventRegistration
@@ -78,7 +82,8 @@ class EventRegistrationRepository extends EntityRepository
             ->andWhere('registration.email = :email')
             ->setParameter('email', $email)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getOneByUsernameAndEvent(string $username, Event $event): ?EventRegistration
@@ -89,6 +94,7 @@ class EventRegistrationRepository extends EntityRepository
             ->andWhere('registration.username = :username')
             ->setParameter('username', $username)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 }

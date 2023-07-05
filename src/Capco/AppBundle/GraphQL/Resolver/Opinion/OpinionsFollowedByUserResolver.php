@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -27,9 +28,11 @@ class OpinionsFollowedByUserResolver implements ResolverInterface
                 $opinions = $this->opinionRepository
                     ->findFollowingOpinionByUser($user, $offset, $limit)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
                 throw new \RuntimeException('Find following opinion by user failed');
             }
 

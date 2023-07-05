@@ -9,17 +9,17 @@ use Symfony\Component\Routing\Router;
 
 class UrlArrayResolverSpec extends ObjectBehavior
 {
-    function let(Router $router)
+    public function let(Router $router)
     {
         $this->beConstructedWith($router);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Resolver\UrlArrayResolver');
     }
 
-    function it_should_generate_a_string_route_for_a_proposal(AbstractStep $step, Project $project, Router $router)
+    public function it_should_generate_a_string_route_for_a_proposal(AbstractStep $step, Project $project, Router $router)
     {
         $project->getSlug()->willReturn('projet-1');
         $step->getProject()->willReturn($project);
@@ -43,7 +43,7 @@ class UrlArrayResolverSpec extends ObjectBehavior
         $this->getRoute($proposal)->shouldReturn($expectedUrl);
     }
 
-    function it_should_generate_a_string_route_for_an_opinion(AbstractStep $step, Project $project, Router $router)
+    public function it_should_generate_a_string_route_for_an_opinion(AbstractStep $step, Project $project, Router $router)
     {
         $project->getSlug()->willReturn('projet-1');
         $step->getProject()->willReturn($project);
@@ -69,7 +69,7 @@ class UrlArrayResolverSpec extends ObjectBehavior
         $this->getRoute($opinion)->shouldReturn($expectedUrl);
     }
 
-    function it_should_generate_a_string_route_for_an_opinion_version(AbstractStep $step, Project $project, Router $router)
+    public function it_should_generate_a_string_route_for_an_opinion_version(AbstractStep $step, Project $project, Router $router)
     {
         $project->getSlug()->willReturn('projet-1');
         $step->getProject()->willReturn($project);

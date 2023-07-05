@@ -4,17 +4,17 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Helper\ResponsesFormatter;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateAnonymousReplyMutation implements MutationInterface
 {

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class DebateArticlesResolver implements ResolverInterface
 {
@@ -28,7 +28,8 @@ class DebateArticlesResolver implements ResolverInterface
             return $this->repository
                 ->getByDebate($debate, $limit, $offset)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
         $totalCount = $this->repository->countByDebate($debate);
 

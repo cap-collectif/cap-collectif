@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class CollectStepRepository extends AbstractStepRepository
 {
@@ -22,7 +22,8 @@ class CollectStepRepository extends AbstractStepRepository
             ->addSelect('pas', 'p')
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
@@ -37,7 +38,8 @@ class CollectStepRepository extends AbstractStepRepository
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
-            ->orderBy('pas.position', 'ASC');
+            ->orderBy('pas.position', 'ASC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -54,6 +56,7 @@ class CollectStepRepository extends AbstractStepRepository
     {
         return $this->createQueryBuilder('cs')
             ->andWhere('cs.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->setParameter('isEnabled', true)
+        ;
     }
 }

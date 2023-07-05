@@ -69,13 +69,15 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         $manager->isActive('oauth2_switch_user')->willReturn(true);
         $router
             ->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $resourceOwner
             ->getOption('logout_url')
             ->willReturn(
                 'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout'
-            );
+            )
+        ;
 
         $parameters = [
             'next' => 'https://capco.dev/login/openid?_destination=https://capco.dev/',
@@ -89,7 +91,8 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
             ->willReturn(
                 'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout?' .
                     http_build_query($parameters, '', '&')
-            );
+            )
+        ;
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn($responseWithRequest);
     }
@@ -118,13 +121,15 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         $manager->isActive('oauth2_switch_user')->willReturn(true);
         $router
             ->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $resourceOwner
             ->getOption('logout_url')
             ->willReturn(
                 'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout'
-            );
+            )
+        ;
         $dummyRedirectResponseWithRequest->getRequest()->willReturn($request);
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $dummyRedirectResponseWithRequest

@@ -27,7 +27,8 @@ class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
                     $this->context
                         ->buildViolation($constraint->message)
                         ->atPath('appendices')
-                        ->addViolation();
+                        ->addViolation()
+                    ;
 
                     return;
                 }

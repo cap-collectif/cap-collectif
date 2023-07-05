@@ -67,7 +67,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
     private function getParameterId(string $parameterKey): ?string
     {
         $id = $this->connection->fetchOne(
-            "SELECT id FROM site_parameter WHERE keyname = '${parameterKey}'"
+            "SELECT id FROM site_parameter WHERE keyname = '{$parameterKey}'"
         );
         if (!$id) {
             return null;
@@ -85,7 +85,7 @@ final class Version20200818134317 extends AbstractMigration implements Container
     {
         $existingTranslations = [];
         $query = $this->connection->query(
-            "SELECT id, value, locale FROM site_parameter_translation WHERE translatable_id = '${parameterId}'"
+            "SELECT id, value, locale FROM site_parameter_translation WHERE translatable_id = '{$parameterId}'"
         );
         while ($row = $query->fetch()) {
             $existingTranslations[$row['locale']] = $row['value'];
@@ -113,6 +113,6 @@ final class Version20200818134317 extends AbstractMigration implements Container
         $uuid = $this->uuidGenerator->generate($this->entityManager, null);
 
         return 'INSERT INTO `site_parameter_translation` (`id`, `translatable_id`, `value`, `locale`)' .
-            " VALUES ('${uuid}', '${translatableId}', '${value}', '${locale}')";
+            " VALUES ('{$uuid}', '{$translatableId}', '{$value}', '{$locale}')";
     }
 }

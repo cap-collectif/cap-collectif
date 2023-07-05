@@ -27,9 +27,9 @@ use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommentNotifier extends BaseNotifier
 {
@@ -126,8 +126,8 @@ class CommentNotifier extends BaseNotifier
 
             $user = $comment->getProposal()->getAuthor();
             if (
-                $user->getNotificationsConfiguration()->isOnProposalCommentMail() &&
-                $user !== $comment->getAuthor()
+                $user->getNotificationsConfiguration()->isOnProposalCommentMail()
+                && $user !== $comment->getAuthor()
             ) {
                 if ($isAnonymous) {
                     if (empty($comment->getAuthorName())) {

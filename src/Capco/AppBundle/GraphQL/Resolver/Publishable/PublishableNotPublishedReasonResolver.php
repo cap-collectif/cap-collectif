@@ -13,8 +13,8 @@ class PublishableNotPublishedReasonResolver implements ResolverInterface
     public function __invoke(Publishable $publishable): ?string
     {
         if (
-            $publishable->isPublished() ||
-            ($publishable instanceof DraftableInterface && $publishable->isDraft())
+            $publishable->isPublished()
+            || ($publishable instanceof DraftableInterface && $publishable->isDraft())
         ) {
             return null;
         }

@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
@@ -12,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
 
 class SiteParameterAdmin extends AbstractAdmin
 {
@@ -97,6 +97,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 return;
+
             case 'global.timezone':
                 $form->add('value', ChoiceType::class, [
                     'label' => 'global.timezone',
@@ -106,6 +107,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 return;
+
             default:
                 break;
         }
@@ -125,6 +127,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 $form->add('value', TextType::class, $options);
 
                 break;
+
             case SiteParameter::TYPE_RICH_TEXT:
                 // Decode the html to be display in BO
                 // $subject->setValue(html_entity_decode($subject->getValue()));
@@ -136,6 +139,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_INTEGER:
                 $form->add('value', IntegerType::class, [
                     'label' => 'global.value',
@@ -144,6 +148,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_JS:
                 $form->add('value', TextareaType::class, [
                     'label' => 'global.value',
@@ -156,6 +161,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_EMAIL:
                 $form->add('value', EmailType::class, [
                     'label' => 'global.value',
@@ -165,6 +171,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_INTERN_URL:
             case SiteParameter::TYPE_URL:
                 $form->add('value', UrlType::class, [
@@ -174,6 +181,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_TEL_NB:
                 $form->add('value', null, [
                     'label' => 'global.value',
@@ -182,6 +190,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             case SiteParameter::TYPE_BOOLEAN:
                 $form->add('value', ChoiceType::class, [
                     'label' => 'global.value',
@@ -192,6 +201,7 @@ class SiteParameterAdmin extends AbstractAdmin
                 ]);
 
                 break;
+
             default:
                 throw new \RuntimeException('Could not guess how to render your parameter.', 1);
         }

@@ -13,6 +13,8 @@ interface Sourceable
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool;
 

@@ -45,7 +45,8 @@ class PublicDataType extends AbstractType
             ->add('biography', TextareaType::class, [
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
-            ]);
+            ])
+        ;
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', EntityType::class, [
                 'required' => false,

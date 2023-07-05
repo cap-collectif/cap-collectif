@@ -4,15 +4,15 @@ namespace Capco\AppBundle\Repository\Debate;
 
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
+use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\Debate\DebateVote;
 
 /**
- * @method DebateVote|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateVote|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateVote find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateVote findOneBy(array $criteria, array $orderBy = null)
  * @method DebateVote[]    findAll()
  * @method DebateVote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,7 +26,8 @@ class DebateArgumentVoteRepository extends EntityRepository
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getByDebateArgument(
@@ -38,7 +39,8 @@ class DebateArgumentVoteRepository extends EntityRepository
         $qb = $this->getByDebateArgumentQueryBuilder($debateArgument)
             ->addOrderBy('v.' . $orderBy['field'], $orderBy['direction'])
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -48,7 +50,8 @@ class DebateArgumentVoteRepository extends EntityRepository
         return (int) $this->getByDebateArgumentQueryBuilder($debateArgument)
             ->select('COUNT(v)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     private function getByDebateArgumentQueryBuilder(
@@ -57,7 +60,8 @@ class DebateArgumentVoteRepository extends EntityRepository
     ): QueryBuilder {
         $qb = $this->createQueryBuilder('v')
             ->andWhere('v.debateArgument = :debateArgument')
-            ->setParameter('debateArgument', $debateArgument);
+            ->setParameter('debateArgument', $debateArgument)
+        ;
 
         if ($onlyPublished) {
             $qb->andWhere('v.published = true');

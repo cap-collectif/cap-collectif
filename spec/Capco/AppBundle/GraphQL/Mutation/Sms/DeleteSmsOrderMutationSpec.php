@@ -33,11 +33,13 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('id')
             ->shouldBeCalledOnce()
-            ->willReturn($id);
+            ->willReturn($id)
+        ;
         $globalIdResolver
             ->resolve($id, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrder);
+            ->willReturn($smsOrder)
+        ;
 
         $em->remove($smsOrder)->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
@@ -54,15 +56,17 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('id')
             ->shouldBeCalledOnce()
-            ->willReturn($id);
+            ->willReturn($id)
+        ;
         $globalIdResolver
             ->resolve($id, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->__invoke($input, $viewer)->shouldReturn([
             'errorCode' => DeleteSmsOrderMutation::SMS_ORDER_NOT_FOUND,
-            'deletedSmsOrderId' => $id
+            'deletedSmsOrderId' => $id,
         ]);
     }
 }

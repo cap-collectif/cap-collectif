@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Twig;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Twig\Extension\RuntimeExtensionInterface;
 
-
 class DefaultLanguageRuntime implements RuntimeExtensionInterface
 {
     protected LocaleRepository $repo;

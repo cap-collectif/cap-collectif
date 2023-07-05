@@ -74,7 +74,8 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add('position', null, [
                 'label' => 'global.position',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -106,7 +107,8 @@ class VideoAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -142,7 +144,8 @@ class VideoAdmin extends AbstractAdmin
             ->add('isEnabled', null, [
                 'label' => 'global.published',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -170,7 +173,8 @@ class VideoAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

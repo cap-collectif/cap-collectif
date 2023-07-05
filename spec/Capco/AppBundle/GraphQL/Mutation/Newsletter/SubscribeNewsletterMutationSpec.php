@@ -98,10 +98,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $toggleManager->isActive(Manager::newsletter)->willReturn(true);
         $toggleManager
             ->hasOneActive([Manager::captcha, Manager::turnstile_captcha])
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $captchaChecker
             ->__invoke(Argument::type('string'), Argument::type('string'))
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
         $args->getArrayCopy()->willReturn(['email' => $email]);
 
         $payload = $this->__invoke($args);
@@ -142,11 +144,13 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $toggleManager->isActive(Manager::newsletter)->willReturn(true);
         $toggleManager
             ->hasOneActive([Manager::captcha, Manager::turnstile_captcha])
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $captchaChecker
             ->__invoke($captcha, '')
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $args->getArrayCopy()->willReturn(['email' => $email, 'captcha' => $captcha]);
 
         $payload = $this->__invoke($args);
@@ -217,7 +221,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $toggleManager->isActive(Manager::newsletter)->willReturn(true);
         $toggleManager
             ->hasOneActive([Manager::captcha, Manager::turnstile_captcha])
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $args->getArrayCopy()->willReturn(['email' => $email]);
 
         $formFactory
@@ -226,7 +231,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
                 Argument::type(NewsletterSubscription::class)
             )
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit(['email' => $email], false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(false);
         $form->getErrors(Argument::any(), Argument::any())->willReturn([]);
@@ -264,7 +270,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(Argument::type('string'), Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(1);
@@ -304,11 +311,13 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $newsletterSubscriptionRepository
             ->findOneBy(Argument::type('array'))
             ->shouldBeCalledOnce()
-            ->willReturn($newsletterSubscription);
+            ->willReturn($newsletterSubscription)
+        ;
 
         $publisher
             ->publish(Argument::type('string'), Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(1);
@@ -349,11 +358,13 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $userRepository
             ->findOneBy(Argument::type('array'))
             ->shouldBeCalledOnce()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $publisher
             ->publish(Argument::type('string'), Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(1);
@@ -390,7 +401,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
 
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(1);
@@ -415,7 +427,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->beConstructedWith(
             $toggleManager,
@@ -465,22 +478,26 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         $args->getArrayCopy()->willReturn(['email' => $email]);
         $toggleManager
             ->hasOneActive([Manager::captcha, Manager::turnstile_captcha])
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $captchaChecker
             ->__invoke(Argument::type('string'), Argument::type('string'))
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
         $formFactory
             ->create(
                 NewsletterSubscriptionType::class,
                 Argument::type(NewsletterSubscription::class)
             )
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit(['email' => $email], false)->shouldBeCalledOnce();
         $form
             ->isValid()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         return $email;
     }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
@@ -20,8 +21,8 @@ use Capco\AppBundle\Traits\Map\ZoomTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
-use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,7 +31,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\District\ProposalDistrict;
 
 /**
  * @ORM\Table(
@@ -48,11 +48,7 @@ use Capco\AppBundle\Entity\District\ProposalDistrict;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements
-    DisplayableInBOInterface,
-    QuestionnableForm,
-    Ownerable,
-    CreatableInterface
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;
@@ -473,6 +469,8 @@ class ProposalForm implements
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
@@ -721,20 +719,20 @@ class ProposalForm implements
 
     public function isNotifyingCommentOnCreate(): bool
     {
-        return $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentCreate();
+        return $this->notificationsConfiguration
+            && $this->notificationsConfiguration->isOnCommentCreate();
     }
 
     public function isNotifyingCommentOnUpdate(): bool
     {
-        return $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentUpdate();
+        return $this->notificationsConfiguration
+            && $this->notificationsConfiguration->isOnCommentUpdate();
     }
 
     public function isNotifyingCommentOnDelete(): bool
     {
-        return $this->notificationsConfiguration &&
-            $this->notificationsConfiguration->isOnCommentDelete();
+        return $this->notificationsConfiguration
+            && $this->notificationsConfiguration->isOnCommentDelete();
     }
 
     public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
@@ -1038,8 +1036,8 @@ class ProposalForm implements
             $fields = array_merge($fields, ['body' => $this->descriptionMandatory]);
         }
         if (
-            $this->getAnalysisConfiguration() &&
-            $this->getAnalysisConfiguration()->isCostEstimationEnabled()
+            $this->getAnalysisConfiguration()
+            && $this->getAnalysisConfiguration()->isCostEstimationEnabled()
         ) {
             $fields = array_merge($fields, ['estimation' => false]);
         }
@@ -1059,16 +1057,16 @@ class ProposalForm implements
         /** @var AbstractQuestion $question */
         foreach ($this->getRealQuestions() as $question) {
             if (
-                !\in_array($question->getTitle(), $fields) &&
-                ($question instanceof SimpleQuestion ||
-                    ($question instanceof MediaQuestion && $isCliModel))
+                !\in_array($question->getTitle(), $fields)
+                && ($question instanceof SimpleQuestion
+                    || ($question instanceof MediaQuestion && $isCliModel))
             ) {
                 $fields = array_merge($fields, [$question->getTitle()]);
             }
             if (
-                !\in_array($question->getTitle(), $fields) &&
-                $question instanceof MultipleChoiceQuestion &&
-                \in_array($question->getType(), [
+                !\in_array($question->getTitle(), $fields)
+                && $question instanceof MultipleChoiceQuestion
+                && \in_array($question->getType(), [
                     AbstractQuestion::QUESTION_TYPE_RADIO,
                     AbstractQuestion::QUESTION_TYPE_SELECT,
                     AbstractQuestion::QUESTION_TYPE_BUTTON,
@@ -1090,20 +1088,20 @@ class ProposalForm implements
         /** @var AbstractQuestion $question */
         foreach ($questions as $question) {
             if (
-                $question instanceof SimpleQuestion ||
-                ($question instanceof MediaQuestion && $isCliModel)
+                $question instanceof SimpleQuestion
+                || ($question instanceof MediaQuestion && $isCliModel)
             ) {
                 $type = 'texte brut';
                 if ($question instanceof MediaQuestion) {
                     $type = 'URL';
                 } elseif (
-                    $question instanceof SimpleQuestion &&
-                    'editor' === $question->getInputType()
+                    $question instanceof SimpleQuestion
+                    && 'editor' === $question->getInputType()
                 ) {
                     $type = 'texte brut ou html';
                 } elseif (
-                    $question instanceof SimpleQuestion &&
-                    'number' === $question->getInputType()
+                    $question instanceof SimpleQuestion
+                    && 'number' === $question->getInputType()
                 ) {
                     $type = 'nombre';
                 } elseif (
@@ -1117,8 +1115,8 @@ class ProposalForm implements
                 continue;
             }
             if (
-                $question instanceof MultipleChoiceQuestion &&
-                \in_array($question->getType(), [
+                $question instanceof MultipleChoiceQuestion
+                && \in_array($question->getType(), [
                     AbstractQuestion::QUESTION_TYPE_RADIO,
                     AbstractQuestion::QUESTION_TYPE_SELECT,
                     AbstractQuestion::QUESTION_TYPE_BUTTON,
@@ -1131,7 +1129,8 @@ class ProposalForm implements
                         : $question
                             ->getChoices()
                             ->first()
-                            ->getTitle();
+                            ->getTitle()
+                        ;
 
                 $fields[$question->getTitle()] = $type;
             }
@@ -1142,8 +1141,8 @@ class ProposalForm implements
 
     public function isUsingEstimation(): bool
     {
-        return $this->getAnalysisConfiguration() &&
-            $this->getAnalysisConfiguration()->isCostEstimationEnabled();
+        return $this->getAnalysisConfiguration()
+            && $this->getAnalysisConfiguration()->isCostEstimationEnabled();
     }
 
     private function getCloneQuestionReference(
@@ -1232,7 +1231,8 @@ class ProposalForm implements
                         } else {
                             $clonedJumpQaq = clone $jump
                                 ->getDestination()
-                                ->getQuestionnaireAbstractQuestion();
+                                ->getQuestionnaireAbstractQuestion()
+                            ;
                             $clonedJumpQaq->setProposalForm($this);
                             $clonedJump->setDestination($clonedJumpQaq->getQuestion());
                             $cloneReferences[

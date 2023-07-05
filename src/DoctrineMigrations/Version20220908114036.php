@@ -60,7 +60,7 @@ final class Version20220908114036 extends AbstractMigration implements Container
                     'id' => $frId,
                     'translatable_id' => $id,
                     'title' => 'Carte des projets participatifs',
-                    'locale' => 'fr-FR'
+                    'locale' => 'fr-FR',
                 ]
             );
 
@@ -71,7 +71,7 @@ final class Version20220908114036 extends AbstractMigration implements Container
                     'id' => $enId,
                     'translatable_id' => $id,
                     'title' => 'Participatory projects map',
-                    'locale' => 'en-GB'
+                    'locale' => 'en-GB',
                 ]
             );
         }

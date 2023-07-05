@@ -44,18 +44,22 @@ class ProposalRevisionMessage extends AbstractExternalMessage
     {
         $revision = $container
             ->get(ProposalRevisionRepository::class)
-            ->find('proposalRevisionInPending2');
+            ->find('proposalRevisionInPending2')
+        ;
         $otherRevisions = $container
             ->get(ProposalRevisionRepository::class)
-            ->findByProposal('proposalIdf4');
+            ->findByProposal('proposalIdf4')
+        ;
         $btnColor = $container
             ->get(SiteColorRepository::class)
             ->findOneByKeyname('color.btn.primary.bg')
-            ->getValue();
+            ->getValue()
+        ;
         $btnTextColor = $container
             ->get(SiteColorRepository::class)
             ->findOneByKeyname('color.btn.text')
-            ->getValue();
+            ->getValue()
+        ;
         $proposalURL = $container->get(UrlResolver::class)->getObjectUrl($revision->getProposal());
 
         return [

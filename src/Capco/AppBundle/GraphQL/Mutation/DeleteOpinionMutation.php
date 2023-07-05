@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteOpinionMutation implements MutationInterface
@@ -34,7 +34,7 @@ class DeleteOpinionMutation implements MutationInterface
         $opinion = $this->opinionRepo->find($opinionId);
 
         if (!$opinion) {
-            throw new UserError("Unknown opinion with id: ${opinionId}");
+            throw new UserError("Unknown opinion with id: {$opinionId}");
         }
 
         if ($user !== $opinion->getAuthor()) {

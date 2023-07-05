@@ -89,9 +89,7 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
     {
         $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {
-            throw new NotFoundHttpException(
-                sprintf('The user with "confirmation token" does not exist for value "%s"', $token)
-            );
+            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
         }
         if (
             !$user->isPasswordRequestNonExpired(
@@ -112,7 +110,8 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
             $user->setPassword($password);
             $this->getDoctrine()
                 ->getManager()
-                ->flush();
+                ->flush()
+            ;
             $this->addFlash(
                 'fos_user_success',
                 $this->translator->trans('resetting.flash.success', [], 'CapcoAppBundle')
@@ -153,8 +152,8 @@ class ResettingController extends \FOS\UserBundle\Controller\ResettingController
         $user = $this->userManager->findUserByEmail($email);
 
         if (
-            null !== $user &&
-            !$user->isPasswordRequestNonExpired(
+            null !== $user
+            && !$user->isPasswordRequestNonExpired(
                 $this->container->getParameter('fos_user.resetting.token_ttl')
             )
         ) {

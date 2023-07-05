@@ -39,6 +39,7 @@ class KickFromOrganizationMutation implements MutationInterface
             $user = $this->getUser($input, $viewer);
             self::checkIsMemberOfOrganization($organization, $user);
             $deletedMemberShipId = $this->doKick($organization, $user);
+
             return compact('deletedMemberShipId');
         } catch (UserError $exception) {
             return ['errorCode' => $exception->getMessage()];
@@ -51,6 +52,7 @@ class KickFromOrganizationMutation implements MutationInterface
         foreach ($organization->getMembers() as $memberShip) {
             if ($memberShip->getUser() === $user) {
                 $memberShipToCancel = $memberShip;
+
                 break;
             }
         }
@@ -85,7 +87,7 @@ class KickFromOrganizationMutation implements MutationInterface
             $viewer
         );
 
-        if (is_null($user)) {
+        if (null === $user) {
             throw new UserError(self::USER_NOT_MEMBER);
         }
 

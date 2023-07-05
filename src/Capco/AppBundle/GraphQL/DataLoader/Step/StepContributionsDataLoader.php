@@ -2,28 +2,28 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
-use Psr\Log\LoggerInterface;
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireRepliesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class StepContributionsDataLoader extends BatchDataLoader
 {
@@ -120,14 +120,15 @@ class StepContributionsDataLoader extends BatchDataLoader
             $totalCount += $this->sourceRepository->countTrashedSourcesByStep($step);
         } elseif ($step instanceof CollectStep) {
             $totalCount += $this->proposalCountResolver->__invoke($step);
-            // We do not account votes as a contribution, maybe this will change
+        // We do not account votes as a contribution, maybe this will change
             // $totalCount += $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
             //     $step
             // );
         } elseif ($step instanceof QuestionnaireStep && $step->getQuestionnaire()) {
             $totalCount += $this->questionnaireRepliesResolver
                 ->__invoke($step->getQuestionnaire(), new Argument(['first' => 0]))
-                ->getTotalCount();
+                ->getTotalCount()
+            ;
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) {

@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -53,6 +53,6 @@ class PostTranslation implements Translation
 
     public function getBody(): ?string
     {
-        return html_entity_decode($this->body, ENT_QUOTES, 'UTF-8');
+        return html_entity_decode($this->body, \ENT_QUOTES, 'UTF-8');
     }
 }

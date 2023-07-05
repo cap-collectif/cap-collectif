@@ -51,8 +51,8 @@ class OrganizationController extends AbstractController
         $response = new RedirectResponse('/');
         $viewerIsConnected = $this->getUser() instanceof User;
         if (
-            null === $invitation ||
-            ($viewerIsConnected && $invitation->getUser() !== $this->getUser())
+            null === $invitation
+            || ($viewerIsConnected && $invitation->getUser() !== $this->getUser())
         ) {
             $this->addFlash(
                 'danger',

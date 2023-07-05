@@ -27,7 +27,8 @@ class RateLimiterSpec extends ObjectBehavior
         $cachedItem
             ->expiresAfter(60)
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
 
         $this->canDoAction('someAction', '123456')->shouldBe(true);
     }
@@ -45,7 +46,8 @@ class RateLimiterSpec extends ObjectBehavior
         $cachedItem
             ->expiresAfter(300)
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
 
         $this->canDoAction('someAction', '123456')->shouldBe(false);
     }
@@ -57,7 +59,8 @@ class RateLimiterSpec extends ObjectBehavior
         $cachedItem
             ->expiresAfter(300)
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
 
         $this->setLimit($specificLimit);
         $this->canDoAction('someAction', '123456')->shouldBe(false);
@@ -72,7 +75,8 @@ class RateLimiterSpec extends ObjectBehavior
         $cachedItem
             ->expiresAfter(60)
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
 
         $this->canDoAction('someAction', '123:456')->shouldBe(true);
     }
@@ -90,12 +94,14 @@ class RateLimiterSpec extends ObjectBehavior
         $cachedItem
             ->set($newCachedValue)
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
 
         $cache
             ->getItem(RateLimiter::USER_CACHE_KEY . '-someAction-123456')
             ->shouldBeCalled()
-            ->willReturn($cachedItem);
+            ->willReturn($cachedItem)
+        ;
         $cache->save(Argument::type(ItemInterface::class))->shouldBeCalled();
     }
 }

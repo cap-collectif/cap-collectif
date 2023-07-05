@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-
 class ProjectDistrictAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'project_district';

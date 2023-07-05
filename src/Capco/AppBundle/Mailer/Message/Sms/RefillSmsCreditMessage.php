@@ -14,31 +14,30 @@ final class RefillSmsCreditMessage extends AbstractAdminMessage
     public static function getMyTemplateVars(SmsCredit $smsCredit, array $params): array
     {
         return [
-            "amount" => $smsCredit->getAmount(),
-            "baseUrl" => $params['baseURL'],
-            "platformName" => $params['platformName'],
+            'amount' => $smsCredit->getAmount(),
+            'baseUrl' => $params['baseURL'],
+            'platformName' => $params['platformName'],
             'platformLink' => $params['platformLink'],
-            "adminUrl" => $params['adminUrl'],
+            'adminUrl' => $params['adminUrl'],
         ];
     }
 
     public static function getMySubjectVars(SmsCredit $smsCredit, array $params): array
     {
         return [
-            'platformName' => $params['platformName']
+            'platformName' => $params['platformName'],
         ];
     }
 
     public static function mockData()
     {
         return [
-            "amount" => 1000,
-            "baseUrl" => "/capco",
-            "platformName" => "capco",
+            'amount' => 1000,
+            'baseUrl' => '/capco',
+            'platformName' => 'capco',
             'platformLink' => 'https://cap-collectif.com',
-            "user_locale" => "fr",
-            "adminUrl" => "/admin,",
+            'user_locale' => 'fr',
+            'adminUrl' => '/admin,',
         ];
     }
-
 }

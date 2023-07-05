@@ -34,7 +34,6 @@ final class OrganizationMemberNotifier extends BaseNotifier
 
     public function onNewInvitation(PendingOrganizationInvitation $invitation): bool
     {
-
         return $this->mailer->createAndSendMessage(
             InvitationMessage::class,
             $invitation,

@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Comment;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -46,7 +46,8 @@ class CommentType extends AbstractType
                     'purify_html' => true,
                     'purify_html_profile' => 'admin',
                 ])
-                ->add('authorEmail', EmailType::class, ['required' => true]);
+                ->add('authorEmail', EmailType::class, ['required' => true])
+            ;
         }
     }
 

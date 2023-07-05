@@ -45,7 +45,8 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
         $sessionId = $responseWithRequest
             ->getRequest()
             ->getSession()
-            ->getId();
+            ->getId()
+        ;
         if ($token && $token instanceof OAuthToken && 'openid' === $token->getResourceOwnerName()) {
             $oauth2 = $this->repository->findASsoByType('oauth2');
 
@@ -59,8 +60,7 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
 
                 if ($responseWithRequest->getRequest()->query->get('ssoSwitchUser')) {
                     $parameters = [
-                        $this->refererResolver->getRefererParameterForLogout() =>
-                            $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
+                        $this->refererResolver->getRefererParameterForLogout() => $homepageUrl . '/login/openid?_destination=' . $homepageUrl,
                     ];
                 } else {
                     $parameters = [

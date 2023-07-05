@@ -3,17 +3,17 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\PostRepository;
-use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\ThemeRepository;
-use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 class SitemapsController extends Controller
 {
@@ -33,7 +33,8 @@ class SitemapsController extends Controller
         $urls = [];
         $hostname = $this->get('request_stack')
             ->getCurrentRequest()
-            ->getHost();
+            ->getHost()
+        ;
 
         // Homepage
         $urls[] = [

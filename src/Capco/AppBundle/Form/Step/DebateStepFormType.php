@@ -47,7 +47,8 @@ class DebateStepFormType extends AbstractStepFormType
                 ) {
                     $itemFromDb->setUrl($itemFromUser->getUrl());
                 },
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

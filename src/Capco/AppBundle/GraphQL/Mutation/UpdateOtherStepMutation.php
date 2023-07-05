@@ -31,7 +31,6 @@ class UpdateOtherStepMutation implements MutationInterface
         FormFactoryInterface $formFactory,
         LoggerInterface $logger
     ) {
-
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
@@ -43,7 +42,6 @@ class UpdateOtherStepMutation implements MutationInterface
     {
         $data = $input->getArrayCopy();
 
-
         $step = $this->getStep($data['stepId'], $viewer);
 
         unset($data['stepId']);
@@ -52,6 +50,7 @@ class UpdateOtherStepMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 
@@ -60,24 +59,24 @@ class UpdateOtherStepMutation implements MutationInterface
         return ['step' => $step];
     }
 
-    private function getStep(string $stepId, User $viewer): OtherStep
-    {
-        $step = $this->globalIdResolver->resolve($stepId, $viewer);
-        if (!$step instanceof OtherStep) {
-            throw new UserError("Given step is not of type OtherStep");
-        }
-        return $step;
-    }
-
     public function isGranted(string $stepId, ?User $viewer = null): bool
     {
-        if (!$viewer) return false;
+        if (!$viewer) {
+            return false;
+        }
         $step = $this->getStep($stepId, $viewer);
         $project = $step->getProject();
 
         return $this->authorizationChecker->isGranted(ProjectVoter::EDIT, $project);
     }
 
+    private function getStep(string $stepId, User $viewer): OtherStep
+    {
+        $step = $this->globalIdResolver->resolve($stepId, $viewer);
+        if (!$step instanceof OtherStep) {
+            throw new UserError('Given step is not of type OtherStep');
+        }
 
-
+        return $step;
+    }
 }

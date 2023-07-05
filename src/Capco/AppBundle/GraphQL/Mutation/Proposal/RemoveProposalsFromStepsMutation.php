@@ -7,8 +7,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation implements
-    MutationInterface
+class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation implements MutationInterface
 {
     public function __invoke(Argument $args, User $user): array
     {
@@ -28,7 +27,7 @@ class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation impl
         return [
             'proposals' => $this->getConnection($proposals, $args),
             'error' => $error,
-            'steps' => $steps
+            'steps' => $steps,
         ];
     }
 

@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SimpleQuestionType extends AbstractQuestionType
 {

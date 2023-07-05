@@ -22,6 +22,7 @@ class ProposalFormNotificationConfigurationAdmin extends AbstractAdmin
                 'label' => 'global.deleted.feminine',
                 'required' => false,
             ])
-            ->end();
+            ->end()
+        ;
     }
 }

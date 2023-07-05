@@ -15,10 +15,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionAppendix
 {
+    use BodyUsingJoditWysiwygTrait;
     use TextableTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @var \DateTime

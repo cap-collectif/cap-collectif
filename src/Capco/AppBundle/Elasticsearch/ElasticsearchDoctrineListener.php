@@ -23,11 +23,11 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Resolver\EntityChangeSetResolver;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
-use Doctrine\Common\Util\ClassUtils;
 
 /**
  *  Listen any persist, update or delete operations happening in Doctrine, in order to:
@@ -113,20 +113,20 @@ class ElasticsearchDoctrineListener implements EventSubscriber
             $this->addToMessageStack($entity);
         }
         if (
-            $indexAuthor &&
-            ($entity instanceof Authorable ||
-                ($entity instanceof Contribution && method_exists($entity, 'getAuthor'))) &&
-            $entity->getAuthor()
+            $indexAuthor
+            && ($entity instanceof Authorable
+                || ($entity instanceof Contribution && method_exists($entity, 'getAuthor')))
+            && $entity->getAuthor()
         ) {
             $this->addToMessageStack($entity->getAuthor());
         }
         if (
-            $entity instanceof ProposalAnalyst ||
-            $entity instanceof ProposalDecisionMaker ||
-            $entity instanceof ProposalSupervisor ||
-            $entity instanceof ProposalAssessment ||
-            $entity instanceof ProposalDecision ||
-            $entity instanceof ProposalAnalysis
+            $entity instanceof ProposalAnalyst
+            || $entity instanceof ProposalDecisionMaker
+            || $entity instanceof ProposalSupervisor
+            || $entity instanceof ProposalAssessment
+            || $entity instanceof ProposalDecision
+            || $entity instanceof ProposalAnalysis
         ) {
             $this->process($entity->getProposal(), false);
         }

@@ -13,7 +13,8 @@ class EmailingCampaignUserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ecu')
             ->select('COUNT(ecu.emailingCampaign)')
             ->where('ecu.emailingCampaign = :emailingCampaign')
-            ->setParameter('emailingCampaign', $emailingCampaign);
+            ->setParameter('emailingCampaign', $emailingCampaign)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
@@ -23,11 +24,10 @@ class EmailingCampaignUserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ecu')
             ->where('ecu.emailingCampaign = :emailingCampaign')
             ->andWhere('ecu.sentAt IS NULL')
-            ->setParameter('emailingCampaign', $emailingCampaign);
+            ->setParameter('emailingCampaign', $emailingCampaign)
+        ;
         $results = $qb->getQuery()->getResult();
 
         return new ArrayCollection($results);
     }
-
-
 }

@@ -6,33 +6,33 @@ use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\BooleanCell;
+use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
-use Capco\UserBundle\Entity\User;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\GraphQL\InfoResolver;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\Repository\CollectStepRepository;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Repository\SelectionStepRepository;
 
 class CreateCsvFromProposalStepCommand extends BaseExportCommand
 {
@@ -45,142 +45,142 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     protected const REPORTINGS_PER_PAGE = 100;
 
     protected const COMMENT_INFOS_FRAGMENT = <<<'EOF'
-fragment commentInfos on Comment {
-  id
-  body
-  parent {
-    id
-  }
-  createdAt
-  publishedAt
-  updatedAt
-  author {
-    ... authorInfos
-  }
-  pinned
-  publicationStatus
-  votes {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-    }
-    edges {
-      node {
-         ... commentVoteInfos
-      }
-    }
-  }
-  reportings {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        ... reportingInfos
-      }
-    }
-  }
-  kind
-  answers {
-      id
-      body
-      parent {
-        id
-      }
-      createdAt
-      publishedAt
-      updatedAt
-      author {
-        ... authorInfos
-      }
-      pinned
-      publicationStatus
-      votes {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          node {
-            ... commentVoteInfos
+        fragment commentInfos on Comment {
+          id
+          body
+          parent {
+            id
+          }
+          createdAt
+          publishedAt
+          updatedAt
+          author {
+            ... authorInfos
+          }
+          pinned
+          publicationStatus
+          votes {
+            totalCount
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              node {
+                 ... commentVoteInfos
+              }
+            }
+          }
+          reportings {
+            totalCount
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                ... reportingInfos
+              }
+            }
+          }
+          kind
+          answers {
+              id
+              body
+              parent {
+                id
+              }
+              createdAt
+              publishedAt
+              updatedAt
+              author {
+                ... authorInfos
+              }
+              pinned
+              publicationStatus
+              votes {
+                totalCount
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+                edges {
+                  node {
+                    ... commentVoteInfos
+                  }
+                }
+              }
+              reportings {
+                totalCount
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+                edges {
+                  cursor
+                  node {
+                    ... reportingInfos
+                  }
+                }
+              }
+              kind
           }
         }
-      }
-      reportings {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... reportingInfos
-          }
-        }
-      }
-      kind
-  }
-}
-EOF;
+        EOF;
     protected const PROPOSAL_VOTE_INFOS_FRAGMENT = <<<'EOF'
-fragment proposalVoteInfos on ProposalVote {
-  __typename
-  id
-  createdAt
-  publishedAt
-  published
-  ...on ProposalUserVote {
-      isAccounted
-      anonymous
-      ranking
-        author {
-        ... authorInfos
-      }
-  }
-}
-EOF;
+        fragment proposalVoteInfos on ProposalVote {
+          __typename
+          id
+          createdAt
+          publishedAt
+          published
+          ...on ProposalUserVote {
+              isAccounted
+              anonymous
+              ranking
+                author {
+                ... authorInfos
+              }
+          }
+        }
+        EOF;
     protected const COMMENT_VOTE_INFOS_FRAGMENT = <<<'EOF'
-fragment voteInfos on CommentVote{
-  id
-  createdAt
-  publishedAt
-  author {
-    ... authorInfos
-  }
-}
-EOF;
+        fragment voteInfos on CommentVote{
+          id
+          createdAt
+          publishedAt
+          author {
+            ... authorInfos
+          }
+        }
+        EOF;
     protected const REPORTING_INFOS_FRAGMENT = <<<'EOF'
-fragment reportingInfos on Reporting {
-  id
-  author {
-    ... authorInfos
-  }
-  type
-  bodyText
-  createdAt
-}
-EOF;
+        fragment reportingInfos on Reporting {
+          id
+          author {
+            ... authorInfos
+          }
+          type
+          bodyText
+          createdAt
+        }
+        EOF;
     protected const COMMENT_VOTE_INFOS = <<<'EOF'
-fragment commentVoteInfos on CommentVote {
-  id
-  createdAt
-  publishedAt
-  kind
-  author {
-    ... authorInfos
-  }
-}
-EOF;
+        fragment commentVoteInfos on CommentVote {
+          id
+          createdAt
+          publishedAt
+          kind
+          author {
+            ... authorInfos
+          }
+        }
+        EOF;
     protected const PROPOSAL_HEADER = [
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
@@ -296,23 +296,17 @@ EOF;
         'proposal_news_comments_vote_publishedAt' => 'news_comment_vote.publishedAt',
         'proposal_news_comments_vote_author_id' => 'news_comment_vote.author.id',
         'proposal_news_comments_vote_author_username' => 'news_comment_vote.author.username',
-        'proposal_news_comments_vote_author_isEmailConfirmed' =>
-            'news_comment_vote.author.isEmailConfirmed',
+        'proposal_news_comments_vote_author_isEmailConfirmed' => 'news_comment_vote.author.isEmailConfirmed',
         'proposal_news_comments_vote_author_userType_id' => 'news_comment_vote.author.userType.id',
-        'proposal_news_comments_vote_author_userType_name' =>
-            'news_comment_vote.author.userType.name',
+        'proposal_news_comments_vote_author_userType_name' => 'news_comment_vote.author.userType.name',
         //news comments reportings
         'proposal_news_comments_reportings_id' => 'news_comment_reporting.id',
         'proposal_news_comments_reportings_createdAt' => 'news_comment_reporting.createdAt',
         'proposal_news_comments_reportings_author_id' => 'news_comment_reporting.author.id',
-        'proposal_news_comments_reportings_author_username' =>
-            'news_comment_reporting.author.username',
-        'proposal_news_comments_reportings_author_isEmailConfirmed' =>
-            'news_comment_reporting.author.isEmailConfirmed',
-        'proposal_news_comments_reportings_author_userType_id' =>
-            'news_comment_reporting.author.userType.id',
-        'proposal_news_comments_reportings_author_userType_name' =>
-            'news_comment_reporting.author.userType.name',
+        'proposal_news_comments_reportings_author_username' => 'news_comment_reporting.author.username',
+        'proposal_news_comments_reportings_author_isEmailConfirmed' => 'news_comment_reporting.author.isEmailConfirmed',
+        'proposal_news_comments_reportings_author_userType_id' => 'news_comment_reporting.author.userType.id',
+        'proposal_news_comments_reportings_author_userType_name' => 'news_comment_reporting.author.userType.name',
         //reporting
         'proposal_reportings_id' => 'reporting.id',
         'proposal_reportings_body' => 'reporting.bodyText',
@@ -472,7 +466,7 @@ EOF;
                 $this->generateSheet($this->currentStep, $input, $output, $fileName);
             }
         }
-        
+
         return 0;
     }
 
@@ -497,7 +491,8 @@ EOF;
                 'query' => $proposalsQuery,
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
@@ -636,7 +631,7 @@ EOF;
         if ($totalCount > 0) {
             $progress = new ProgressBar($output, (int) $totalCount);
             $output->writeln(
-                "<info>Importing ${totalCount} reportings for proposal " .
+                "<info>Importing {$totalCount} reportings for proposal " .
                     $proposal['title'] .
                     '</info>'
             );
@@ -667,7 +662,7 @@ EOF;
             $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
-                "<info>Importing ${totalCount} votes for proposal " . $proposal['title'] . '</info>'
+                "<info>Importing {$totalCount} votes for proposal " . $proposal['title'] . '</info>'
             );
 
             $this->connectionTraversor->traverse(
@@ -698,7 +693,7 @@ EOF;
             $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
-                "<info>Importing ${totalCount} comments for proposal " .
+                "<info>Importing {$totalCount} comments for proposal " .
                     $proposal['title'] .
                     '</info>'
             );
@@ -733,7 +728,7 @@ EOF;
             $progress = new ProgressBar($output, (int) $totalCount);
 
             $output->writeln(
-                "<info>Importing ${totalCount} news for proposal " . $proposal['title'] . '</info>'
+                "<info>Importing {$totalCount} news for proposal " . $proposal['title'] . '</info>'
             );
 
             $this->connectionTraversor->traverse(
@@ -795,12 +790,12 @@ EOF;
 
                 continue;
             }
-            if (!$this->isSubdataBlocColumn($path, "${submodulePath}.")) {
+            if (!$this->isSubdataBlocColumn($path, "{$submodulePath}.")) {
                 $row[] = '';
 
                 continue;
             }
-            $arr = explode('.', substr($path, \strlen("${submodulePath}.")));
+            $arr = explode('.', substr($path, \strlen("{$submodulePath}.")));
             $val = $entity;
             foreach ($arr as $a) {
                 if (isset($val[$a])) {
@@ -1009,7 +1004,8 @@ EOF;
                 'query' => $commentVotesQuery,
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         if ($comment['reportings']['totalCount'] > 0) {
             $this->connectionTraversor->traverse(
@@ -1183,27 +1179,28 @@ EOF;
         );
 
         foreach ($questions as $question) {
-            $this->proposalHeaderMap[$question] = "responses.${questionNumber}";
+            $this->proposalHeaderMap[$question] = "responses.{$questionNumber}";
             ++$questionNumber;
         }
 
         /** @var Questionnaire $evaluationForm */
         if (
-            $this->currentStep->getProposalForm() &&
-            ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm())
+            $this->currentStep->getProposalForm()
+            && ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm())
         ) {
             $evaluationFormAsArray = $evaluationForm
                 ->getRealQuestions()
                 ->filter(function (AbstractQuestion $question) {
                     return AbstractQuestion::QUESTION_TYPE_SECTION !== $question->getType();
                 })
-                ->toArray();
+                ->toArray()
+            ;
             /** @var AbstractQuestion $question */
             $questionNumber = 0;
             foreach ($evaluationFormAsArray as $question) {
                 $this->proposalHeaderMap[
                     $question->getTitle()
-                ] = "evaluation.responses.${questionNumber}";
+                ] = "evaluation.responses.{$questionNumber}";
                 ++$questionNumber;
             }
         }
@@ -1235,31 +1232,31 @@ EOF;
         }
 
         return <<<EOF
-${VOTE_INFOS_FRAGMENT}
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-{
-  node(id: "${proposalId}") {
-    ... on Proposal {
-      votes(includeUnpublished: true, includeNotAccounted: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter},                     includeSecretBallot: true) {
-        totalCount
-        totalPointsCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... proposalVoteInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$VOTE_INFOS_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {
+              node(id: "{$proposalId}") {
+                ... on Proposal {
+                  votes(includeUnpublished: true, includeNotAccounted: true, stepId: "{$stepId}", first: {$VOTES_PER_PAGE}{$votesAfter},                     includeSecretBallot: true) {
+                    totalCount
+                    totalPointsCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ... proposalVoteInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getProposalReportingsGraphQLQuery(
@@ -1276,30 +1273,30 @@ EOF;
         }
 
         return <<<EOF
-${REPORTING_INFOS_FRAGMENT}
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-{
-  node(id: "${proposalId}") {
-    ... on Proposal {
-      reportings(first: ${REPORTING_PER_PAGE}{$reportingsAfter}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...reportingInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$REPORTING_INFOS_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {
+              node(id: "{$proposalId}") {
+                ... on Proposal {
+                  reportings(first: {$REPORTING_PER_PAGE}{$reportingsAfter}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...reportingInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getProposalCommentsGraphQLQuery(
@@ -1318,33 +1315,33 @@ EOF;
         }
 
         return <<<EOF
-${COMMENTS_INFO_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-${REPORTING_INFOS_FRAGMENT}
-${USER_TYPE_INFOS_FRAGMENT}
-${COMMENT_VOTE_INFOS}
+            {$COMMENTS_INFO_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$REPORTING_INFOS_FRAGMENT}
+            {$USER_TYPE_INFOS_FRAGMENT}
+            {$COMMENT_VOTE_INFOS}
 
-{
-  node(id: "${proposalId}") {
-    ... on Proposal {
-      comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... commentInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {
+              node(id: "{$proposalId}") {
+                ... on Proposal {
+                  comments(first: {$COMMENTS_PER_PAGE}{$commentsAfter}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ... commentInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getProposalNewsGraphQLQuery(
@@ -1368,62 +1365,15 @@ EOF;
         }
 
         return <<<EOF
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-${REPORTING_INFOS_FRAGMENT}
-${VOTES_INFOS_FRAGMENT}
-{
-  node(id: "${proposalId}") {
-    ... on Proposal {
-      news(first: ${NEWS_PER_PAGE}${newsAfter}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            id
-            title
-            authors {
-              ... authorInfos
-            }
-            relatedContent {
-              __typename
-              ... on Proposal {
-                title
-              }
-              ... on Theme {
-                title
-              }
-              ... on Project {
-                title
-              }
-            }
-            comments(first: ${COMMENTS_PER_PAGE}${commentsAfter}) {
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
-              edges {
-                cursor
-                node {
-                  id
-                  body
-                  parent {
-                    id
-                  }
-                  createdAt
-                  updatedAt
-                  author {
-                    ... authorInfos
-                  }
-                  pinned
-                  publicationStatus
-                  votes(first: ${VOTES_PER_PAGE}${votesAfter}) {
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$REPORTING_INFOS_FRAGMENT}
+            {$VOTES_INFOS_FRAGMENT}
+            {
+              node(id: "{$proposalId}") {
+                ... on Proposal {
+                  news(first: {$NEWS_PER_PAGE}{$newsAfter}) {
+                    totalCount
                     pageInfo {
                       startCursor
                       endCursor
@@ -1432,40 +1382,87 @@ ${VOTES_INFOS_FRAGMENT}
                     edges {
                       cursor
                       node {
-                        ... voteInfos
-                      }
-                    }
-                  }
-                  reportings(first: ${REPORTINGS_PER_PAGE}${reportingsAfter}) {
-                    pageInfo {
-                      startCursor
-                      endCursor
-                      hasNextPage
-                    }
-                    edges {
-                      cursor
-                      node {
-                        ... reportingInfos
+                        id
+                        title
+                        authors {
+                          ... authorInfos
+                        }
+                        relatedContent {
+                          __typename
+                          ... on Proposal {
+                            title
+                          }
+                          ... on Theme {
+                            title
+                          }
+                          ... on Project {
+                            title
+                          }
+                        }
+                        comments(first: {$COMMENTS_PER_PAGE}{$commentsAfter}) {
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                          edges {
+                            cursor
+                            node {
+                              id
+                              body
+                              parent {
+                                id
+                              }
+                              createdAt
+                              updatedAt
+                              author {
+                                ... authorInfos
+                              }
+                              pinned
+                              publicationStatus
+                              votes(first: {$VOTES_PER_PAGE}{$votesAfter}) {
+                                pageInfo {
+                                  startCursor
+                                  endCursor
+                                  hasNextPage
+                                }
+                                edges {
+                                  cursor
+                                  node {
+                                    ... voteInfos
+                                  }
+                                }
+                              }
+                              reportings(first: {$REPORTINGS_PER_PAGE}{$reportingsAfter}) {
+                                pageInfo {
+                                  startCursor
+                                  endCursor
+                                  hasNextPage
+                                }
+                                edges {
+                                  cursor
+                                  node {
+                                    ... reportingInfos
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                        createdAt
+                        updatedAt
+                        commentable
+                        displayedOnBlog
+                        publishedAt
+                        abstract
+                        publicationStatus
                       }
                     }
                   }
                 }
               }
             }
-            createdAt
-            updatedAt
-            commentable
-            displayedOnBlog
-            publishedAt
-            abstract
-            publicationStatus
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getProposalCommentReportingsGraphQLQuery(
@@ -1482,30 +1479,30 @@ EOF;
         }
 
         return <<<EOF
-${REPORTING_INFOS_FRAGMENT}
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-{
-  node(id: "${commentId}") {
-    ... on Comment {
-      reportings(first: ${REPORTINGS_PER_PAGE}${reportsAfter}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... reportingInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$REPORTING_INFOS_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {
+              node(id: "{$commentId}") {
+                ... on Comment {
+                  reportings(first: {$REPORTINGS_PER_PAGE}{$reportsAfter}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ... reportingInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getProposalCommentVotesGraphQLQuery(
@@ -1522,29 +1519,29 @@ EOF;
         }
 
         return <<<EOF
-${VOTE_INFOS_FRAGMENT}
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-{
-  node(id: "${commentId}") {
-    ... on Comment {
-      votes(first: ${VOTES_PER_PAGE}${votesAfter}) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... commentVoteInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$VOTE_INFOS_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {
+              node(id: "{$commentId}") {
+                ... on Comment {
+                  votes(first: {$VOTES_PER_PAGE}{$votesAfter}) {
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ... commentVoteInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getContributionsGraphQLQueryByProposalStep(
@@ -1582,127 +1579,80 @@ EOF;
         }
 
         return <<<EOF
-${COMMENTS_INFO_FRAGMENT}
-${USER_TYPE_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-${REPORTING_INFOS_FRAGMENT}
-${VOTE_INFOS_FRAGMENT}
-${VOTES_INFOS_FRAGMENT}
-${COMMENT_VOTE_INFOS}
-{
-  node(id: "{$proposalStep->getId()}") {
-    ... on ProposalStep {
-      proposals(orderBy: {field: CREATED_AT, direction: ASC}, includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null, includeDraft: true) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            id
-            reference
-            id
-            title
-            allVotes: votes(stepId: "{$proposalStep->getId()}", includeUnpublished: false, first: 0) {
-                totalCount
-                totalPointsCount
-            }
-            paperVotesTotalCount(stepId: "{$proposalStep->getId()}")
-            paperVotesTotalPointsCount(stepId: "{$proposalStep->getId()}")
-            createdAt
-            publishedAt
-            updatedAt
-            publicationStatus
-            undraftAt
-            trashedAt
-            trashedReason
-            url
-            author {
-              ...authorInfos
-            }
-            status(step: "{$proposalStep->getId()}") {
-              name
-            }
-            estimation
-            category {
-              name
-            }
-            theme {
-              title
-            }
-            address {
-              formatted
-              lat
-              lng
-            }
-            district {
-              name (locale: FR_FR)
-            }
-            media {
-              url
-            }
-            summary
-            bodyText
-            officialResponse {
-              body
-              isPublished
-              publishedAt
-              authors {
-                ... authorInfos
-              }
-            }
-            news(first: ${NEWS_PER_PAGE}${newsAfter}) {
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    id
-                    title
-                    authors {
-                      ... authorInfos
+            {$COMMENTS_INFO_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$REPORTING_INFOS_FRAGMENT}
+            {$VOTE_INFOS_FRAGMENT}
+            {$VOTES_INFOS_FRAGMENT}
+            {$COMMENT_VOTE_INFOS}
+            {
+              node(id: "{$proposalStep->getId()}") {
+                ... on ProposalStep {
+                  proposals(orderBy: {field: CREATED_AT, direction: ASC}, includeUnpublished: true, first: {$PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null, includeDraft: true) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
                     }
-                    relatedContent {
-                      __typename
-                      ... on Proposal {
+                    edges {
+                      cursor
+                      node {
+                        id
+                        reference
+                        id
                         title
-                      }
-                      ... on Theme {
-                        title
-                      }
-                      ... on Project {
-                        title
-                      }
-                    }
-                    comments(first: ${COMMENTS_PER_PAGE}${commentsAfter}) {
-                      pageInfo {
-                        startCursor
-                        endCursor
-                        hasNextPage
-                      }
-                      edges {
-                        cursor
-                        node {
-                          id
+                        allVotes: votes(stepId: "{$proposalStep->getId()}", includeUnpublished: false, first: 0) {
+                            totalCount
+                            totalPointsCount
+                        }
+                        paperVotesTotalCount(stepId: "{$proposalStep->getId()}")
+                        paperVotesTotalPointsCount(stepId: "{$proposalStep->getId()}")
+                        createdAt
+                        publishedAt
+                        updatedAt
+                        publicationStatus
+                        undraftAt
+                        trashedAt
+                        trashedReason
+                        url
+                        author {
+                          ...authorInfos
+                        }
+                        status(step: "{$proposalStep->getId()}") {
+                          name
+                        }
+                        estimation
+                        category {
+                          name
+                        }
+                        theme {
+                          title
+                        }
+                        address {
+                          formatted
+                          lat
+                          lng
+                        }
+                        district {
+                          name (locale: FR_FR)
+                        }
+                        media {
+                          url
+                        }
+                        summary
+                        bodyText
+                        officialResponse {
                           body
-                          parent {
-                            id
-                          }
-                          createdAt
-                          updatedAt
-                          author {
+                          isPublished
+                          publishedAt
+                          authors {
                             ... authorInfos
                           }
-                          pinned
-                          publicationStatus
-                          votes(first: ${VOTES_PER_PAGE}${votesAfter}) {
+                        }
+                        news(first: {$NEWS_PER_PAGE}{$newsAfter}) {
+                            totalCount
                             pageInfo {
                               startCursor
                               endCursor
@@ -1711,11 +1661,85 @@ ${COMMENT_VOTE_INFOS}
                             edges {
                               cursor
                               node {
-                                ... voteInfos
+                                id
+                                title
+                                authors {
+                                  ... authorInfos
+                                }
+                                relatedContent {
+                                  __typename
+                                  ... on Proposal {
+                                    title
+                                  }
+                                  ... on Theme {
+                                    title
+                                  }
+                                  ... on Project {
+                                    title
+                                  }
+                                }
+                                comments(first: {$COMMENTS_PER_PAGE}{$commentsAfter}) {
+                                  pageInfo {
+                                    startCursor
+                                    endCursor
+                                    hasNextPage
+                                  }
+                                  edges {
+                                    cursor
+                                    node {
+                                      id
+                                      body
+                                      parent {
+                                        id
+                                      }
+                                      createdAt
+                                      updatedAt
+                                      author {
+                                        ... authorInfos
+                                      }
+                                      pinned
+                                      publicationStatus
+                                      votes(first: {$VOTES_PER_PAGE}{$votesAfter}) {
+                                        pageInfo {
+                                          startCursor
+                                          endCursor
+                                          hasNextPage
+                                        }
+                                        edges {
+                                          cursor
+                                          node {
+                                            ... voteInfos
+                                          }
+                                        }
+                                      }
+                                      reportings(first: {$REPORTING_PER_PAGE}{$reportsAfter}) {
+                                        pageInfo {
+                                          startCursor
+                                          endCursor
+                                          hasNextPage
+                                        }
+                                        edges {
+                                          cursor
+                                          node {
+                                            ... reportingInfos
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                                createdAt
+                                updatedAt
+                                commentable
+                                displayedOnBlog
+                                publishedAt
+                                abstract
+                                publicationStatus
                               }
                             }
                           }
-                          reportings(first: ${REPORTING_PER_PAGE}${reportsAfter}) {
+                        comments(first: {$COMMENTS_PER_PAGE}{$commentsAfter}) {
+                            totalCount
                             pageInfo {
                               startCursor
                               endCursor
@@ -1724,115 +1748,88 @@ ${COMMENT_VOTE_INFOS}
                             edges {
                               cursor
                               node {
-                                ... reportingInfos
+                                ... commentInfos
+                              }
+                            }
+                          }
+                        votes(includeUnpublished: true, includeNotAccounted: true, stepId: "{$proposalStep->getId()}", first: {$VOTES_PER_PAGE}{$votesAfter}) {
+                            totalCount
+                            totalPointsCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                            edges {
+                              cursor
+                              node {
+                                ... proposalVoteInfos
+                              }
+                            }
+                          }
+                          reportings(first: {$REPORTING_PER_PAGE}) {
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                            edges {
+                              cursor
+                              node {
+                                ...reportingInfos
+                              }
+                            }
+                          }
+
+
+                        responses {
+                          ... on ValueResponse {
+                            question {
+                              title
+                              kind
+                            }
+                            formattedValue
+                          }
+                          ... on MediaResponse {
+                            question {
+                              title
+                              kind
+                            }
+                            medias {
+                              url
+                            }
+                          }
+                        }
+                        evaluation {
+                          responses {
+                            ... on ValueResponse {
+                              question {
+                                id
+                                title
+                                kind
+                              }
+                              formattedValue
+                            }
+                            ... on MediaResponse {
+                              question {
+                                id
+                                title
+                                kind
+                              }
+                              medias {
+                                url
                               }
                             }
                           }
                         }
                       }
                     }
-                    createdAt
-                    updatedAt
-                    commentable
-                    displayedOnBlog
-                    publishedAt
-                    abstract
-                    publicationStatus
-                  }
-                }
-              }
-            comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    ... commentInfos
-                  }
-                }
-              }
-            votes(includeUnpublished: true, includeNotAccounted: true, stepId: "{$proposalStep->getId()}", first: ${VOTES_PER_PAGE}${votesAfter}) {
-                totalCount
-                totalPointsCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    ... proposalVoteInfos
-                  }
-                }
-              }
-              reportings(first: ${REPORTING_PER_PAGE}) {
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    ...reportingInfos
-                  }
-                }
-              }
-
-
-            responses {
-              ... on ValueResponse {
-                question {
-                  title
-                  kind
-                }
-                formattedValue
-              }
-              ... on MediaResponse {
-                question {
-                  title
-                  kind
-                }
-                medias {
-                  url
-                }
-              }
-            }
-            evaluation {
-              responses {
-                ... on ValueResponse {
-                  question {
-                    id
-                    title
-                    kind
-                  }
-                  formattedValue
-                }
-                ... on MediaResponse {
-                  question {
-                    id
-                    title
-                    kind
-                  }
-                  medias {
-                    url
                   }
                 }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     private function printMemoryUsage(OutputInterface $output): void

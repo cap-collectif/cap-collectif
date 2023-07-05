@@ -63,7 +63,7 @@ class TokenController extends AbstractController
         $tokenId = $request->get('token') ?? '';
         $voteToken = $this->debateVoteTokenRepository->find($tokenId);
         if (null === $voteToken) {
-            $this->logger->info("invalid token ${tokenId} used to vote on debate");
+            $this->logger->info("invalid token {$tokenId} used to vote on debate");
             $this->addFlash(
                 'danger',
                 $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
@@ -73,7 +73,7 @@ class TokenController extends AbstractController
         }
 
         if (self::isTokenConsumed($voteToken)) {
-            $this->logger->info("already used token ${tokenId} used to vote on debate");
+            $this->logger->info("already used token {$tokenId} used to vote on debate");
             $this->addFlash(
                 'danger',
                 $this->translator->trans('already-used-token', [], 'CapcoAppBundle')
@@ -120,7 +120,7 @@ class TokenController extends AbstractController
         $tokenId = $request->get('token') ?? '';
         $token = $repository->find($tokenId);
         if (null === $token) {
-            $this->logger->info(__METHOD__ . " : invalid token ${tokenId}");
+            $this->logger->info(__METHOD__ . " : invalid token {$tokenId}");
             $this->addFlash(
                 'danger',
                 $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
@@ -130,7 +130,7 @@ class TokenController extends AbstractController
         }
 
         if (self::isTokenConsumed($token)) {
-            $this->logger->info("already used token ${tokenId} used to make action");
+            $this->logger->info("already used token {$tokenId} used to make action");
             $this->addFlash(
                 'danger',
                 $this->translator->trans('already-used-token', [], 'CapcoAppBundle')
@@ -166,7 +166,7 @@ class TokenController extends AbstractController
         /** @var DebateAnonymousArgument $argument */
         $argument = $repository->findOneByToken($token);
         if (null === $argument) {
-            $this->logger->info("invalid token ${token} used to publish argument");
+            $this->logger->info("invalid token {$token} used to publish argument");
             $this->addFlash(
                 'danger',
                 $this->translator->trans('invalid-token', [], 'CapcoAppBundle')

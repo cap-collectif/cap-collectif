@@ -192,7 +192,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 $args->offsetGet('isDone') ?? false
                     ? ProposalStatementState::DONE
                     : ProposalStatementState::IN_PROGRESS
-            );
+            )
+        ;
     }
 
     private function handleDecisionOfficialResponse(
@@ -207,7 +208,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 $officialResponse = new OfficialResponse();
                 $officialResponse
                     ->setProposal($proposalDecision->getProposal())
-                    ->setIsPublished(false);
+                    ->setIsPublished(false)
+                ;
             }
             $officialResponse->setBody($args->offsetGet('body'));
             $this->updateDecisionOfficialResponseAuthors($officialResponse, $args, $viewer);
@@ -231,7 +233,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
                 $author = $this->globalIdResolver->resolve($authorId, $viewer);
                 $officialResponseAuthor = (new OfficialResponseAuthor())
                     ->setAuthor($author)
-                    ->setOfficialResponse($officialResponse);
+                    ->setOfficialResponse($officialResponse)
+                ;
                 $officialResponse->addAuthor($officialResponseAuthor);
             }
         }
@@ -255,8 +258,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
     {
         $proposalAssessment = $proposal->getAssessment();
         if (
-            $proposalAssessment &&
-            ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()
+            $proposalAssessment
+            && ProposalStatementState::IN_PROGRESS === $proposalAssessment->getState()
         ) {
             $proposalAssessment->setState(ProposalStatementState::TOO_LATE);
         }
@@ -301,8 +304,8 @@ class ChangeProposalDecisionMutation implements MutationInterface
             'date' => $proposalDecision->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
-            ProposalStatementState::DONE === $proposalDecision->getState() &&
-            $proposalDecision->getState() != $oldState
+            ProposalStatementState::DONE === $proposalDecision->getState()
+            && $proposalDecision->getState() != $oldState
         ) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,

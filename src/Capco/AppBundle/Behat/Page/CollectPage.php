@@ -42,9 +42,7 @@ class CollectPage extends Page
                 "window.jQuery && $('.ProposalStepPage-rendered').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'CollectPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('CollectPage did not fully load, check selector in "verifyPage".');
         }
     }
 
@@ -110,14 +108,14 @@ class CollectPage extends Page
 
     public function isFollowedAs(string $type)
     {
-        $element = $this->elements['type of follow proposal'] . "__${type}";
+        $element = $this->elements['type of follow proposal'] . "__{$type}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function changeTypeOfProposalFollow(string $type)
     {
-        $element = $this->elements['type of follow proposal'] . "__${type}";
+        $element = $this->elements['type of follow proposal'] . "__{$type}";
 
         return $this->find('css', $element)->click();
     }
@@ -129,7 +127,7 @@ class CollectPage extends Page
 
     public function iClickOnUserGroupModal(string $groupId)
     {
-        $selector = "#${groupId}" . $this->getSelector('restricted-group-link');
+        $selector = "#{$groupId}" . $this->getSelector('restricted-group-link');
 
         $element = $this->find('css', $selector);
         if (!$element) {
@@ -147,13 +145,7 @@ class CollectPage extends Page
 
         if ($currentUrl !== $expectedUrl) {
             if (false === strrpos($currentUrl, $opinionTypeUrl)) {
-                throw new UnexpectedPageException(
-                    sprintf(
-                        'Expected to be on "%s" but found "%s" instead',
-                        $this->getUrl($urlParameters),
-                        $this->getSession()->getCurrentUrl()
-                    )
-                );
+                throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
             }
         }
     }

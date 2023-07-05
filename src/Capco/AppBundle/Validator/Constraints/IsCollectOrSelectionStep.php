@@ -13,6 +13,6 @@ class IsCollectOrSelectionStep extends Constraint
 
     public function validatedBy()
     {
-        return \get_class($this) . 'Validator';
+        return static::class . 'Validator';
     }
 }

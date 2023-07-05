@@ -11,7 +11,7 @@ trait NotificationsStepTrait
      */
     public function iGoToAnEmailNotificationsPreferencesLinkWithToken($token)
     {
-        $this->visitPath("/profile/notifications/$token");
+        $this->visitPath("/profile/notifications/{$token}");
     }
 
     /**
@@ -21,7 +21,7 @@ trait NotificationsStepTrait
      */
     public function iGoToEmailDisableNotificationPreferencesLink($token)
     {
-        $this->visitPath("/profile/notifications/disable/$token");
+        $this->visitPath("/profile/notifications/disable/{$token}");
     }
 
     /**
@@ -36,9 +36,7 @@ trait NotificationsStepTrait
         )->findOneBy(['unsubscribeToken' => $token]);
         foreach ($userNotifications->getNotificationsValues() as $key => $notificationsValue) {
             if (true === $notificationsValue) {
-                throw new \Exception(
-                    "User has at least one notifications enabled : $key -> $notificationsValue"
-                );
+                throw new \Exception("User has at least one notifications enabled : {$key} -> {$notificationsValue}");
             }
         }
 

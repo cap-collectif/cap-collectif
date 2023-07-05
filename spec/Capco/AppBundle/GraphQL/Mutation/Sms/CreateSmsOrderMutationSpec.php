@@ -8,9 +8,9 @@ use Capco\AppBundle\Repository\SmsOrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Prophecy\Argument;
 
 class CreateSmsOrderMutationSpec extends ObjectBehavior
 {
@@ -37,7 +37,8 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('amount')
             ->shouldBeCalledOnce()
-            ->willReturn($amount);
+            ->willReturn($amount)
+        ;
 
         $smsOrder = new SmsOrder();
         $smsOrder->setAmount($amount);
@@ -48,7 +49,8 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         $smsOrderRepository
             ->countAll()
             ->shouldBeCalledOnce()
-            ->willReturn(0);
+            ->willReturn(0)
+        ;
 
         $publisher->publish(
             'sms_credit.initial_order',
@@ -70,7 +72,8 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('amount')
             ->shouldBeCalledOnce()
-            ->willReturn($amount);
+            ->willReturn($amount)
+        ;
 
         $smsOrder = new SmsOrder();
         $smsOrder->setAmount($amount);
@@ -81,7 +84,8 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         $smsOrderRepository
             ->countAll()
             ->shouldBeCalledOnce()
-            ->willReturn(1);
+            ->willReturn(1)
+        ;
 
         $publisher->publish(
             'sms_credit.refill_order',

@@ -95,31 +95,31 @@ class GraphqlQueryAndCsvHeaderHelper
     ];
 
     public const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
-fragment userTypeInfos on UserType {
-  id
-  name
-}
-EOF;
+        fragment userTypeInfos on UserType {
+          id
+          name
+        }
+        EOF;
     public const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
-fragment authorInfos on User {
-  id
-  username
-  isEmailConfirmed
-  phoneConfirmed
-  email
-  userType {
-    ...userTypeInfos
-  }
-}
-EOF;
+        fragment authorInfos on User {
+          id
+          username
+          isEmailConfirmed
+          phoneConfirmed
+          email
+          userType {
+            ...userTypeInfos
+          }
+        }
+        EOF;
 
     public const AUTHOR_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
-fragment authorInfos on User {
-  id
-  username
-  userType {
-    ...userTypeInfos
-  }
-}
-EOF;
+        fragment authorInfos on User {
+          id
+          username
+          userType {
+            ...userTypeInfos
+          }
+        }
+        EOF;
 }

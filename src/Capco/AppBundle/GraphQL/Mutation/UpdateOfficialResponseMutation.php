@@ -41,6 +41,23 @@ class UpdateOfficialResponseMutation implements MutationInterface
         return compact('officialResponse');
     }
 
+    public function isGranted(string $proposalId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        /** * @var Proposal $proposal  */
+        $proposal = $this->resolver->resolve($proposalId, $viewer);
+        if (!$proposal) {
+            return false;
+        }
+
+        $proposalForm = $proposal->getProposalForm();
+
+        return $this->authorizationChecker->isGranted(ProposalFormVoter::EDIT, $proposalForm);
+    }
+
     private function updateOfficialResponse(
         OfficialResponse $officialResponse,
         Argument $input,
@@ -97,11 +114,12 @@ class UpdateOfficialResponseMutation implements MutationInterface
             $organization = $this->resolver->resolve($user->getOrganizationId(), $user);
             $officialResponseAuthor = (new OfficialResponseAuthor())
                 ->setAuthor($organization)
-                ->setOfficialResponse($officialResponse);
+                ->setOfficialResponse($officialResponse)
+            ;
             $officialResponse->addAuthor($officialResponseAuthor);
+
             return $officialResponse;
         }
-
 
         $officialResponse->getAuthors()->clear();
         foreach ($authorsIds as $authorsId) {
@@ -111,7 +129,8 @@ class UpdateOfficialResponseMutation implements MutationInterface
             }
             $officialResponseAuthor = (new OfficialResponseAuthor())
                 ->setAuthor($author)
-                ->setOfficialResponse($officialResponse);
+                ->setOfficialResponse($officialResponse)
+            ;
             $officialResponse->addAuthor($officialResponseAuthor);
         }
 
@@ -128,8 +147,8 @@ class UpdateOfficialResponseMutation implements MutationInterface
             throw new UserError(UpdateOfficialResponseErrorCode::PROPOSAL_NOT_FOUND);
         }
         if (
-            $proposal->getOfficialResponse() &&
-            $proposal->getOfficialResponse() !== $officialResponse
+            $proposal->getOfficialResponse()
+            && $proposal->getOfficialResponse() !== $officialResponse
         ) {
             throw new UserError(UpdateOfficialResponseErrorCode::PROPOSAL_HAS_RESPONSE);
         }
@@ -153,21 +172,4 @@ class UpdateOfficialResponseMutation implements MutationInterface
 
         return $officialResponse;
     }
-
-    public function isGranted(string $proposalId, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-        
-        /** * @var $proposal Proposal  */
-        $proposal = $this->resolver->resolve($proposalId, $viewer);
-        if (!$proposal) {
-            return false;
-        }
-
-        $proposalForm = $proposal->getProposalForm();
-        return $this->authorizationChecker->isGranted(ProposalFormVoter::EDIT, $proposalForm);
-    }
-
 }

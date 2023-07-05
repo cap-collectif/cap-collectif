@@ -3,23 +3,20 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Search\VoteSearch;
 use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Search\VoteSearch;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class OpinionNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
@@ -60,10 +57,10 @@ class OpinionNormalizer implements
         $data = $this->normalizer->normalize($object, $format, $context);
 
         if (
-            \in_array('ElasticsearchArgumentNestedOpinion', $groups, true) ||
-            \in_array('ElasticsearchVoteNestedOpinion', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedOpinion', $groups, true) ||
-            \in_array('ElasticsearchFollowerNestedOpinion', $groups, true)
+            \in_array('ElasticsearchArgumentNestedOpinion', $groups, true)
+            || \in_array('ElasticsearchVoteNestedOpinion', $groups, true)
+            || \in_array('ElasticsearchSourceNestedOpinion', $groups, true)
+            || \in_array('ElasticsearchFollowerNestedOpinion', $groups, true)
         ) {
             return $data;
         }

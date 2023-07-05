@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AnonymizeUser
 {
-    const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
+    public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
 
     protected EntityManagerInterface $em;
     protected UserGroupRepository $groupRepository;

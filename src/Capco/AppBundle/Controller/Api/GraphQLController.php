@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Toggle\Manager;
-use Overblog\GraphQLBundle\Request\Parser;
+use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 use Overblog\GraphQLBundle\Request\Executor;
+use Overblog\GraphQLBundle\Request\Parser;
+use Overblog\GraphQLBundle\Request\ParserInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Overblog\GraphQLBundle\Request\ParserInterface;
-use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
 
 class GraphQLController extends BaseController
 {
@@ -177,7 +177,8 @@ class GraphQLController extends BaseController
                     'query' => $query['query'],
                     'variables' => $query['variables'],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
             if (!$this->useApolloBatchingMethod) {
                 $payload = ['id' => $query['id'], 'payload' => $payload];
             }

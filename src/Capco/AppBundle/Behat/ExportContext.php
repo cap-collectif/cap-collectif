@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Box\Spout\Common\Type;
-use PHPUnit\Framework\Assert;
-use Box\Spout\Common\Entity\Row;
-use Box\Spout\Reader\CSV\Reader;
 use Behat\Gherkin\Node\PyStringNode;
-use Box\Spout\Reader\ReaderInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Box\Spout\Reader\Common\Creator\ReaderFactory;
-use Behat\Symfony2Extension\Context\KernelDictionary;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Common\Type;
+use Box\Spout\Reader\Common\Creator\ReaderFactory;
+use Box\Spout\Reader\CSV\Reader;
+use Box\Spout\Reader\ReaderInterface;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use PHPUnit\Framework\Assert;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ExportContext implements KernelAwareContext
 {
@@ -42,7 +42,7 @@ class ExportContext implements KernelAwareContext
     ): void {
         $this->setConfigParameter('readerType', $fileType);
 
-        $path = $this->getExportDir() . "/${name}";
+        $path = $this->getExportDir() . "/{$name}";
 
         Assert::assertFileExists($path);
 
@@ -67,7 +67,7 @@ class ExportContext implements KernelAwareContext
     ): void {
         $this->setConfigParameter('readerType', $fileType);
 
-        $path = $this->getExportDir() . "/${name}";
+        $path = $this->getExportDir() . "/{$name}";
 
         Assert::assertFileExists($path);
 
@@ -83,7 +83,8 @@ class ExportContext implements KernelAwareContext
         $steps = $this->kernel
             ->getContainer()
             ->get(AbstractStepRepository::class)
-            ->findAll();
+            ->findAll()
+        ;
         foreach ($steps as $step) {
             if ($step->isParticipative()) {
                 $fileName = CreateStepContributorsCommand::getFilename($step);
@@ -102,8 +103,8 @@ class ExportContext implements KernelAwareContext
     ): void {
         $this->setConfigParameter('readerType', $fileType);
 
-        $realPath = $this->getExportDir() . "/${name}";
-        $snapshotPath = $this->getSnapshotsDir() . "/${name}";
+        $realPath = $this->getExportDir() . "/{$name}";
+        $snapshotPath = $this->getSnapshotsDir() . "/{$name}";
 
         $this->compareFileWithSnapshot($realPath, $snapshotPath);
     }
@@ -117,8 +118,8 @@ class ExportContext implements KernelAwareContext
     ): void {
         $this->setConfigParameter('readerType', $fileType);
 
-        $realPath = "/tmp/${name}";
-        $snapshotPath = $this->getKernel()->getRootDir() . '/../__snapshots__/imports' . "/${name}";
+        $realPath = "/tmp/{$name}";
+        $snapshotPath = $this->getKernel()->getRootDir() . '/../__snapshots__/imports' . "/{$name}";
 
         $this->compareFileWithSnapshot($realPath, $snapshotPath);
     }
@@ -150,7 +151,7 @@ class ExportContext implements KernelAwareContext
     ): void {
         $this->setConfigParameter('readerType', $fileType);
 
-        $path = $this->getExportDir() . "/${name}";
+        $path = $this->getExportDir() . "/{$name}";
 
         Assert::assertFileExists($path);
 
@@ -206,7 +207,8 @@ class ExportContext implements KernelAwareContext
         if (Type::CSV === $readerType && $reader instanceof Reader) {
             $reader
                 ->setFieldDelimiter($this->getConfigParameter('delimiter'))
-                ->setFieldEnclosure($this->getConfigParameter('enclosure'));
+                ->setFieldEnclosure($this->getConfigParameter('enclosure'))
+            ;
         } elseif (Type::XLSX === $readerType && $reader instanceof \Box\Spout\Reader\XLSX\Reader) {
             $reader->setShouldPreserveEmptyRows(true);
         }
@@ -230,33 +232,16 @@ class ExportContext implements KernelAwareContext
     {
         $diff = array_diff($actual, $expected);
         if (0 !== \count($diff)) {
-            throw new \RuntimeException(
-                sprintf(
-                    "\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nNon expected headers: %s",
-                    implode(' | ', $actual),
-                    implode(' | ', $diff)
-                )
-            );
+            throw new \RuntimeException(sprintf("\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nNon expected headers: %s", implode(' | ', $actual), implode(' | ', $diff)));
         }
 
         $diff = array_diff($expected, $actual);
         if (0 !== \count($diff)) {
-            throw new \RuntimeException(
-                sprintf(
-                    "\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nMissing headers: %s",
-                    implode(' | ', $actual),
-                    implode(' | ', $diff)
-                )
-            );
+            throw new \RuntimeException(sprintf("\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nMissing headers: %s", implode(' | ', $actual), implode(' | ', $diff)));
         }
 
         if (\count($expected) !== \count($actual)) {
-            throw new \RuntimeException(
-                sprintf(
-                    "\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nDuplicated fields detected.",
-                    implode(' | ', $actual)
-                )
-            );
+            throw new \RuntimeException(sprintf("\n\nHeader in the file does not match the expected one. Given:\n\n\t%s\n\nDuplicated fields detected.", implode(' | ', $actual)));
         }
 
         $this->compareHeaderOrder($expected, $actual);
@@ -285,24 +270,10 @@ class ExportContext implements KernelAwareContext
                     continue;
                 }
                 if (!isset($actual[$i])) {
-                    throw new \RuntimeException(
-                        sprintf(
-                            "\n\nMissing line %s. \n\n\t%s\n\n",
-                            $i + 1,
-                            implode(' | ', $expected[$i])
-                        )
-                    );
+                    throw new \RuntimeException(sprintf("\n\nMissing line %s. \n\n\t%s\n\n", $i + 1, implode(' | ', $expected[$i])));
                 }
                 if ($actual[$i][$columnName] !== $cellValue) {
-                    throw new \RuntimeException(
-                        sprintf(
-                            "\n\nRow %s does not match the expected one. Given:\n\n\t%s\n\nExpected:\n\n\t%s\n\nInvalid cell value: %s",
-                            $i + 1,
-                            implode(' | ', $actual[$i]),
-                            implode(' | ', $expected[$i]),
-                            "${cellValue} (${columnName})"
-                        )
-                    );
+                    throw new \RuntimeException(sprintf("\n\nRow %s does not match the expected one. Given:\n\n\t%s\n\nExpected:\n\n\t%s\n\nInvalid cell value: %s", $i + 1, implode(' | ', $actual[$i]), implode(' | ', $expected[$i]), "{$cellValue} ({$columnName})"));
                 }
             }
         }

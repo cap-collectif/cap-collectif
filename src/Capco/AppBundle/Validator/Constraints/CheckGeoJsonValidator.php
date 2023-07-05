@@ -28,11 +28,11 @@ class CheckGeoJsonValidator extends ConstraintValidator
     private static function isValidFeatureCollection($featureCollection): bool
     {
         if (
-            !isset($featureCollection->type) ||
-            !isset($featureCollection->features) ||
-            'FeatureCollection' !== $featureCollection->type ||
-            !\is_array($featureCollection->features) ||
-            empty($featureCollection->features)
+            !isset($featureCollection->type)
+            || !isset($featureCollection->features)
+            || 'FeatureCollection' !== $featureCollection->type
+            || !\is_array($featureCollection->features)
+            || empty($featureCollection->features)
         ) {
             return false;
         }
@@ -47,10 +47,10 @@ class CheckGeoJsonValidator extends ConstraintValidator
 
     private static function isValidFeature($feature): bool
     {
-        return isset($feature->type) &&
-            isset($feature->geometry) &&
-            'Feature' === $feature->type &&
-            self::isValidGeometryType($feature->geometry);
+        return isset($feature->type)
+            && isset($feature->geometry)
+            && 'Feature' === $feature->type
+            && self::isValidGeometryType($feature->geometry);
     }
 
     private static function isValidGeometryType($geometry): bool
@@ -58,17 +58,23 @@ class CheckGeoJsonValidator extends ConstraintValidator
         if (!isset($geometry->type) || !isset($geometry->coordinates)) {
             return false;
         }
+
         switch ($geometry->type) {
             case 'Point':
                 return self::isValidPoint($geometry);
+
             case 'LineString':
                 return self::isValidLineString($geometry);
+
             case 'Polygon':
                 return self::isValidPolygon($geometry);
+
             case 'MultiPoint':
                 return self::isValidMultiPoint($geometry);
+
             case 'MultiLineString':
                 return self::isValidMultiLineString($geometry);
+
             case 'MultiPolygon':
                 return self::isValidMultiPolygon($geometry);
         }
@@ -151,9 +157,9 @@ class CheckGeoJsonValidator extends ConstraintValidator
 
     private static function isValidCoordinates($coordinates): bool
     {
-        return \is_array($coordinates) &&
-            2 <= \count($coordinates) &&
-            is_numeric($coordinates[0]) &&
-            is_numeric($coordinates[1]);
+        return \is_array($coordinates)
+            && 2 <= \count($coordinates)
+            && is_numeric($coordinates[0])
+            && is_numeric($coordinates[1]);
     }
 }

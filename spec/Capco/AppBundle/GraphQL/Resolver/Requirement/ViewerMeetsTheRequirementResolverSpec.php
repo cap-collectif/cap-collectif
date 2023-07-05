@@ -3,9 +3,9 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Requirement;
 
 use Capco\AppBundle\Entity\Requirement;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementViewerValueResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerMeetsTheRequirementResolver;
+use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 
 class ViewerMeetsTheRequirementResolverSpec extends ObjectBehavior

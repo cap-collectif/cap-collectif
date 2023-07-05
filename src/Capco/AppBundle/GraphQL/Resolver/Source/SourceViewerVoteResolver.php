@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\SourceVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Entity\SourceVote;
 
 class SourceViewerVoteResolver implements ResolverInterface
 {

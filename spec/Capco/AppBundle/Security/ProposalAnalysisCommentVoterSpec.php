@@ -2,9 +2,9 @@
 
 namespace spec\Capco\AppBundle\Security;
 
-use Capco\AppBundle\Entity\ProposalAnalysisComment;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\ProposalAnalysisComment;
 use Capco\AppBundle\Security\ProposalAnalysisCommentVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -26,7 +26,8 @@ class ProposalAnalysisCommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $comment, [ProposalAnalysisCommentVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -43,7 +44,8 @@ class ProposalAnalysisCommentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $comment->getProposalAnalysis()->willReturn($proposalAnalysis);
 

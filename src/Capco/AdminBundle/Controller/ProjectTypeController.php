@@ -19,9 +19,7 @@ class ProjectTypeController extends CRUDController
         $existingObject = $this->admin->getObject($id);
 
         if (!$existingObject) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
         }
 
         $this->checkParentChildAssociation($request, $existingObject);
@@ -36,7 +34,7 @@ class ProjectTypeController extends CRUDController
         $this->admin->setSubject($existingObject);
         $objectId = $this->admin->getNormalizedIdentifier($existingObject);
 
-        /** @var $form Form */
+        /** @var Form $form */
         $form = $this->admin->getForm();
         $form->setData($existingObject);
         $form->handleRequest($request);
@@ -46,8 +44,8 @@ class ProjectTypeController extends CRUDController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
@@ -109,8 +107,7 @@ class ProjectTypeController extends CRUDController
                                         'SonataAdminBundle'
                                     )
                                 ),
-                                'link_start' =>
-                                    '<a href="' .
+                                'link_start' => '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $existingObject) .
                                     '">',
                                 'link_end' => '</a>',

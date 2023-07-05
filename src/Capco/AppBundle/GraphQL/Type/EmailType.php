@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Type;
 
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\RFCValidation;
 use GraphQL\Error\Error;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
 use Overblog\GraphQLBundle\Definition\Resolver\AliasedInterface;
-use Egulias\EmailValidator\EmailValidator;
-use Egulias\EmailValidator\Validation\RFCValidation;
 
 class EmailType extends ScalarType implements AliasedInterface
 {

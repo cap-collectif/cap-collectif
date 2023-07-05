@@ -52,7 +52,7 @@ final class Version20201012110216 extends AbstractMigration
     private function getUndraftedEntities(string $type): array
     {
         return $this->connection->fetchAllAssociative(
-            "SELECT id, publishedAt, created_at FROM ${type} WHERE is_draft = false"
+            "SELECT id, publishedAt, created_at FROM {$type} WHERE is_draft = false"
         );
     }
 

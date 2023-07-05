@@ -17,7 +17,7 @@ class AnalyticsVisitors implements Aggregatable
     public static function fromEs(ResultSet $set): self
     {
         $documents = array_map(
-            static fn(array $document) => AggregatedResult::fromEs(
+            static fn (array $document) => AggregatedResult::fromEs(
                 $document,
                 'unique_visitors_per_interval'
             ),

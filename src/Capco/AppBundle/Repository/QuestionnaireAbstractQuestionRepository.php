@@ -11,7 +11,8 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('n');
         $qb->select('COALESCE(MAX(n.position),0)')
             ->where('n.questionnaire = :questionnaire')
-            ->setParameter('questionnaire', $id);
+            ->setParameter('questionnaire', $id)
+        ;
         $query = $qb->getQuery();
         $query->useQueryCache(false);
         $query->useResultCache(false);
@@ -24,7 +25,8 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('qaq');
         $qb->select('COALESCE(MAX(qaq.position),0)')
             ->where('qaq.registrationForm = :registrationForm')
-            ->setParameter('registrationForm', $id);
+            ->setParameter('registrationForm', $id)
+        ;
         $query = $qb->getQuery();
         $query->useQueryCache(false);
         $query->useResultCache(false);
@@ -37,7 +39,8 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
         $qb = $this->createQueryBuilder('qaq');
         $qb->select('COALESCE(MAX(qaq.position),0)')
             ->where('qaq.proposalForm = :proposalForm')
-            ->setParameter('proposalForm', $id);
+            ->setParameter('proposalForm', $id)
+        ;
         $query = $qb->getQuery();
         $query->useQueryCache(false);
         $query->useResultCache(false);

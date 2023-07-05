@@ -12,25 +12,14 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class CasAuthenticationExceptionListener
- *
+ * Class CasAuthenticationExceptionListener.
  */
 class CasAuthenticationExceptionListener
 {
-    /**
-     * @var LoggerInterface
-     */
     protected LoggerInterface $logger;
 
-    /**
-     * @var Environment
-     */
     private Environment $templating;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param Environment $templating
-     */
     public function __construct(
         LoggerInterface $logger,
         Environment $templating
@@ -40,7 +29,6 @@ class CasAuthenticationExceptionListener
     }
 
     /**
-     * @param ExceptionEvent $event
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
@@ -60,5 +48,4 @@ class CasAuthenticationExceptionListener
             $event->setResponse($response);
         }
     }
-
 }

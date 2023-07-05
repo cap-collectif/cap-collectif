@@ -57,7 +57,8 @@ class EventOwnerEventsResolverSpec extends ObjectBehavior
                 true
             )
             ->shouldBeCalled()
-            ->willReturn($paginatedResult);
+            ->willReturn($paginatedResult)
+        ;
 
         $this->__invoke($args, $viewer)->shouldReturnConnection();
     }

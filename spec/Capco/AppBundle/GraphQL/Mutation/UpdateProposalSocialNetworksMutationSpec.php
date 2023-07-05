@@ -2,16 +2,16 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProposalSocialNetworksMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
 {
@@ -78,6 +78,7 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
             'errorCode' => 'ACCESS_DENIED',
         ]);
     }
+
     public function it_works(
         GlobalIdResolver $globalIdResolver,
         Arg $arguments,
@@ -103,7 +104,6 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(false);
         $arguments->getArrayCopy()->willReturn(['proposalId' => '123456', 'facebookUrl' => 'https://facebook.com/user']);
         $proposalSocialNetworks->setFacebookUrl('https://facebook.com/user')->shouldBeCalled();
-
 
         $this->__invoke($arguments, $viewer)->shouldBe(['proposal' => $proposal, 'errorCode' => null]);
     }

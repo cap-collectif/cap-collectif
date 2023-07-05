@@ -16,8 +16,8 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -95,8 +95,8 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         $values = $input->getArrayCopy();
         $media = null;
         if (
-            !empty($values['media']) &&
-            !($media = $this->mediaRepository->find($values['media']))
+            !empty($values['media'])
+            && !($media = $this->mediaRepository->find($values['media']))
         ) {
             throw new UserError(self::MEDIA_NOT_FOUND);
         }

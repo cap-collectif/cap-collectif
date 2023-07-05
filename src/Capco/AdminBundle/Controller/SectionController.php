@@ -86,14 +86,12 @@ class SectionController extends PositionableController
         $id = $request->get($this->admin->getIdParameter());
 
         /**
-         * @var $existingObject Section
+         * @var Section $existingObject
          */
         $existingObject = $this->admin->getObject($id);
 
         if (!$existingObject) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
         }
 
         if ('projects' === $existingObject->getType()) {
@@ -138,8 +136,8 @@ class SectionController extends PositionableController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 /** @phpstan-var T $submittedObject */
                 $submittedObject = $form->getData();
@@ -198,8 +196,8 @@ class SectionController extends PositionableController
             // show an error message if the form failed validation
             if (!$isFormValid) {
                 if (
-                    $this->isXmlHttpRequest($request) &&
-                    null !== ($response = $this->handleXmlHttpRequestErrorResponse($request, $form))
+                    $this->isXmlHttpRequest($request)
+                    && null !== ($response = $this->handleXmlHttpRequestErrorResponse($request, $form))
                 ) {
                     return $response;
                 }
@@ -237,9 +235,8 @@ class SectionController extends PositionableController
         );
     }
 
-    protected function move($object, $relativePosition, $resolver = null) {
+    protected function move($object, $relativePosition, $resolver = null)
+    {
         parent::move($object, $relativePosition, $this->sectionResolver);
     }
-
-
 }

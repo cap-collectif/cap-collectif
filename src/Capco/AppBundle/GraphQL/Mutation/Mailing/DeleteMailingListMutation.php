@@ -79,8 +79,8 @@ class DeleteMailingListMutation implements MutationInterface
     {
         $mailingList = $this->repository->find($id);
         if (
-            null === $mailingList ||
-            !$this->authorizationChecker->isGranted(MailingListVoter::VIEW, $mailingList)
+            null === $mailingList
+            || !$this->authorizationChecker->isGranted(MailingListVoter::VIEW, $mailingList)
         ) {
             throw new UserError(DeleteMailingListErrorCode::ID_NOT_FOUND);
         }

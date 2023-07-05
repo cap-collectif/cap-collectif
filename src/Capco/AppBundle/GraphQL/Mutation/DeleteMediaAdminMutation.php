@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Entity\Media;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\MediaBundle\Repository\MediaRepository;
-use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class DeleteMediaAdminMutation implements MutationInterface
 {
@@ -49,7 +49,7 @@ class DeleteMediaAdminMutation implements MutationInterface
                     'userErrors' => ['Media with id ' . $mediaId . ' not found!'],
                 ];
             }
-            array_push($deleteMediaIds, $deleteMediaId);
+            $deleteMediaIds[] = $deleteMediaId;
         }
         $this->em->flush();
 

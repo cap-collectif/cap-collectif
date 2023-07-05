@@ -23,10 +23,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class EventRegistration
 {
-    use ConfirmableTrait;
     use AnonymousableTrait;
-    use PrivatableTrait;
+    use ConfirmableTrait;
     use IdTrait;
+    use PrivatableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
@@ -55,7 +55,7 @@ class EventRegistration
      */
     private $updatedAt;
 
-    public function __construct(Event $event = null)
+    public function __construct(?Event $event = null)
     {
         $this->event = $event;
         $this->updatedAt = new \DateTime();

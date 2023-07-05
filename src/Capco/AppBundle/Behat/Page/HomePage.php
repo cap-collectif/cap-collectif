@@ -32,9 +32,7 @@ class HomePage extends Page
                 "($('#main-navbar').length + $('#shield-mode').length) > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'HomePage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('HomePage did not fully load, check selector in "verifyPage".');
         }
     }
 

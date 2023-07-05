@@ -64,9 +64,9 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
             return $this->samlAuthenticator;
         }
         if (
-            $this->toggleManager->isActive('login_cas') &&
-            $this->casConfiguration &&
-            $this->casConfiguration->isEnabled()
+            $this->toggleManager->isActive('login_cas')
+            && $this->casConfiguration
+            && $this->casConfiguration->isEnabled()
         ) {
             return $this->casAuthenticator;
         }

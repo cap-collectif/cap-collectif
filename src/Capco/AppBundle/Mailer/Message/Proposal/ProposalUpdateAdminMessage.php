@@ -16,12 +16,10 @@ final class ProposalUpdateAdminMessage extends AbstractAdminMessage
             'userUrl' => $params['authorURL'],
             'username' => self::escape($proposal->getAuthor()->getDisplayName()),
             'proposal' => self::escape($proposal->getTitle()),
-            'date' =>
-                null === $proposal->getUpdatedAt()
+            'date' => null === $proposal->getUpdatedAt()
                     ? $proposal->getCreatedAt()->format('d/m/Y')
                     : $proposal->getUpdatedAt()->format('d/m/Y'),
-            'time' =>
-                null === $proposal->getUpdatedAt()
+            'time' => null === $proposal->getUpdatedAt()
                     ? $proposal->getCreatedAt()->format('H:i:s')
                     : $proposal->getUpdatedAt()->format('H:i:s'),
             'proposalExcerpt' => self::escape($proposal->getBodyTextExcerpt()),

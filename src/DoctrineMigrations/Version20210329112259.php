@@ -32,7 +32,7 @@ final class Version20210329112259 extends AbstractMigration
         if (empty($fc['allowed_data'])) {
             $this->connection->executeQuery(
                 "UPDATE sso_configuration SET allowed_data = ? WHERE ssoType = 'franceconnect'",
-                ["${allowedData}"]
+                ["{$allowedData}"]
             );
         }
     }

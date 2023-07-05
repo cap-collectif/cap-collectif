@@ -59,7 +59,8 @@ class MailjetClientSpec extends ObjectBehavior
                     'content-type' => 'application/json',
                 ],
             ])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $senderEmailDomain = $this->getSenderEmailDomain('cap-collectif.com');
 
@@ -83,7 +84,8 @@ class MailjetClientSpec extends ObjectBehavior
                     'content-type' => 'application/json',
                 ],
             ])
-            ->willThrow($exception);
+            ->willThrow($exception)
+        ;
 
         $this->getSenderEmailDomain('cap-collectif-test.com')->shouldBeNull();
     }
@@ -113,7 +115,8 @@ class MailjetClientSpec extends ObjectBehavior
                     'content-type' => 'application/json',
                 ],
             ])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $senderEmailDomains = $this->getSenderEmailDomains();
 
@@ -153,7 +156,8 @@ class MailjetClientSpec extends ObjectBehavior
                 ],
             ])
             ->willThrow($exception)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $client
             ->post('https://api.mailjet.com/v3/REST/sender', [
                 'auth' => ['publicKey', 'privateKey'],
@@ -163,7 +167,8 @@ class MailjetClientSpec extends ObjectBehavior
                 'body' => json_encode(['Email' => '*@cap-collectif.com']),
             ])
             ->willReturn(new Response('201'))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $domain = new SenderEmailDomain();
         $domain->setValue('cap-collectif.com');
         $domain->setService('mailjet');
@@ -196,7 +201,8 @@ class MailjetClientSpec extends ObjectBehavior
                 ],
             ])
             ->willReturn($response)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $domain = new SenderEmailDomain();
         $domain->setValue('cap-collectif.com');
         $domain->setService('mailjet');

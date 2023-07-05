@@ -33,5 +33,4 @@ class QuestionChoiceRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleResult();
     }
-
 }

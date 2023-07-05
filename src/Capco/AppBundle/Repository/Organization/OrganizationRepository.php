@@ -11,8 +11,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
 
 /**
- * @method Organization|null find($id, $lockMode = null, $lockVersion = null)
- * @method Organization|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Organization find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Organization findOneBy(array $criteria, array $orderBy = null)
  * @method Organization[]    findAll()
  * @method Organization[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -28,7 +28,8 @@ class OrganizationRepository extends EntityRepository
             'o.id = ot.translatable'
         )
             ->andWhere('ot.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -40,7 +41,8 @@ class OrganizationRepository extends EntityRepository
             ->where('pa.project = :id')
             ->setParameter('id', $projectId)
             ->orderBy('o.createdAt')
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $qb->getResult();
     }
@@ -51,7 +53,8 @@ class OrganizationRepository extends EntityRepository
         $qb->addSelect('media')
             ->leftJoin('o.logo', 'media')
             ->where('o.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -66,7 +69,8 @@ class OrganizationRepository extends EntityRepository
         $qb = $this->createQueryBuilder('o')
             ->setFirstResult($offset ?? 0)
             ->setMaxResults($limit ?? 50)
-            ->addOrderBy('o.createdAt', 'DESC');
+            ->addOrderBy('o.createdAt', 'DESC')
+        ;
         if ($search) {
             $qb->innerJoin(
                 OrganizationTranslation::class,
@@ -79,7 +83,8 @@ class OrganizationRepository extends EntityRepository
 
             $qb->andWhere('ot.title LIKE :title')
                 ->orWhere('u.email LIKE :title')
-                ->setParameter('title', "%${search}%");
+                ->setParameter('title', "%{$search}%")
+            ;
         }
         if ($affiliations && $viewer) {
             if (\in_array(OrganizationAffiliation::USER, $affiliations)) {
@@ -101,7 +106,8 @@ class OrganizationRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
-            ->where('o.deletedAt IS NOT NULL');
+            ->where('o.deletedAt IS NOT NULL')
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult() ?? 0;
     }

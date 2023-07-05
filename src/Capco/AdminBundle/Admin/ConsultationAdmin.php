@@ -54,7 +54,8 @@ class ConsultationAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -78,7 +79,8 @@ class ConsultationAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -101,7 +103,8 @@ class ConsultationAdmin extends AbstractAdmin
                 ->add('step', null, [
                     'label' => 'admin.label.step',
                     'required' => false,
-                ]);
+                ])
+            ;
         }
         $form->end();
         if ($this->getSubject()->getId()) {
@@ -163,7 +166,8 @@ class ConsultationAdmin extends AbstractAdmin
                         'placeholder' => '<script type="text/javascript"> </script>',
                     ],
                 ])
-                ->end();
+                ->end()
+            ;
         }
     }
 
@@ -181,7 +185,8 @@ class ConsultationAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

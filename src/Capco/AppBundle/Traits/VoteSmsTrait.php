@@ -19,7 +19,7 @@ trait VoteSmsTrait
     public function setIsProposalSmsVoteEnabled(bool $isProposalSmsVoteEnabled): self
     {
         $this->isProposalSmsVoteEnabled = $isProposalSmsVoteEnabled;
+
         return $this;
     }
-
 }

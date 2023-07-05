@@ -59,10 +59,10 @@ abstract class AbstractEventMutation implements MutationInterface
     protected static function checkCustomCode(array $values, User $viewer): void
     {
         if (
-            isset($values['customCode']) &&
-            !empty($values['customCode']) &&
-            !$viewer->isAdmin() &&
-            !$viewer->isProjectAdmin()
+            isset($values['customCode'])
+            && !empty($values['customCode'])
+            && !$viewer->isAdmin()
+            && !$viewer->isProjectAdmin()
         ) {
             throw new UserError('You are not authorized to add customCode field.');
         }
@@ -71,11 +71,11 @@ abstract class AbstractEventMutation implements MutationInterface
     protected function checkDates(array $values): void
     {
         if (
-            isset($values['startAt']) &&
-            !empty($values['startAt']) &&
-            isset($values['endAt']) &&
-            !empty($values['endAt']) &&
-            new \DateTime($values['startAt']) > new \DateTime($values['endAt'])
+            isset($values['startAt'])
+            && !empty($values['startAt'])
+            && isset($values['endAt'])
+            && !empty($values['endAt'])
+            && new \DateTime($values['startAt']) > new \DateTime($values['endAt'])
         ) {
             throw new UserError($this->translator->trans('event-before-date-error'));
         }
@@ -86,9 +86,7 @@ abstract class AbstractEventMutation implements MutationInterface
         if (isset($values['guestListEnabled']) && !empty($values['guestListEnabled'])) {
             foreach ($values['translations'] as $translation) {
                 if (isset($translation['link']) && !empty($translation['link'])) {
-                    throw new UserError(
-                        $this->translator->trans('error-alert-choosing-subscription-mode')
-                    );
+                    throw new UserError($this->translator->trans('error-alert-choosing-subscription-mode'));
                 }
             }
         }
@@ -103,7 +101,6 @@ abstract class AbstractEventMutation implements MutationInterface
         }
 
         $author = $this->globalIdResolver->resolve($authorId, $viewer);
-
 
         if (!$author) {
             throw new UserError("No user or organization matching id : {$authorId}");

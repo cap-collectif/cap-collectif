@@ -116,8 +116,8 @@ class CreateMailingListMutation implements MutationInterface
 
         $project = $this->projectRepository->find($projectId);
         if (
-            null === $project ||
-            !$this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)
+            null === $project
+            || !$this->authorizationChecker->isGranted(ProjectVoter::VIEW, $project)
         ) {
             throw new UserError(CreateMailingListErrorCode::ID_NOT_FOUND_PROJECT);
         }

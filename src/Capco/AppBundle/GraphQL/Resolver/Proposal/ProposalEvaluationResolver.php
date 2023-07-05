@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\Entity\ProposalEvaluation;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
+use Capco\AppBundle\Repository\AbstractQuestionRepository;
+use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Entity\ProposalEvaluation;
-use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -54,10 +54,10 @@ class ProposalEvaluationResolver implements ResolverInterface
         }
 
         $viewerCanSeePrivateResponses =
-            $isLegacyAnalyst ||
-            $isAnalyst ||
-            ($viewer instanceof User && $viewer->isAdmin()) ||
-            ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+            $isLegacyAnalyst
+            || $isAnalyst
+            || ($viewer instanceof User && $viewer->isAdmin())
+            || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
 
         return $this->getResponsesForEvaluation($evaluation)->filter(function ($response) use (
             $viewerCanSeePrivateResponses

@@ -9,8 +9,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method AbstractSSOConfiguration|null find($id, $lockMode = null, $lockVersion = null)
- * @method AbstractSSOConfiguration|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|AbstractSSOConfiguration find($id, $lockMode = null, $lockVersion = null)
+ * @method null|AbstractSSOConfiguration findOneBy(array $criteria, array $orderBy = null)
  * @method AbstractSSOConfiguration[]    findAll()
  * @method AbstractSSOConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class AbstractSSOConfigurationRepository extends EntityRepository
@@ -19,7 +19,8 @@ class AbstractSSOConfigurationRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('sso')
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -30,7 +31,8 @@ class AbstractSSOConfigurationRepository extends EntityRepository
             ->andWhere('sso INSTANCE OF :type')
             ->setParameter('type', $type)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -39,7 +41,8 @@ class AbstractSSOConfigurationRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('sso')
             ->andWhere('sso INSTANCE OF :type')
-            ->setParameter('type', $type);
+            ->setParameter('type', $type)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }

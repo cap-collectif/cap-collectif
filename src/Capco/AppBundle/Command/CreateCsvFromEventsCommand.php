@@ -105,7 +105,8 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                 'query' => $this->getEventsGraphQLQuery(),
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         if (!isset($data['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
@@ -177,56 +178,56 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
         }
 
         return <<<EOF
-        {
-          events(first: 100 ${userCursor}) {
-            totalCount
-            pageInfo {
-              startCursor
-              endCursor
-              hasNextPage
-            }
-            edges {
-              cursor
-              node {
-                _id
-                id
-                title
-                body
-                media {
-                  id
-                  url
-                }
-                author {
-                  id
-                  email
-                }
-                createdAt
-                updatedAt
-                enabled
-                startAt
-                endAt
-                googleMapsAddress {
-                  json
-                }
-                zipCode
-                address
-                city
-                country
-                lat
-                lng
-                link
-                guestListEnabled
-                comments {
-                  totalCount
-                }
-                commentable
-                metaDescription
-                customCode
-              }
-            }
-          }
-        }
-EOF;
+                    {
+                      events(first: 100 {$userCursor}) {
+                        totalCount
+                        pageInfo {
+                          startCursor
+                          endCursor
+                          hasNextPage
+                        }
+                        edges {
+                          cursor
+                          node {
+                            _id
+                            id
+                            title
+                            body
+                            media {
+                              id
+                              url
+                            }
+                            author {
+                              id
+                              email
+                            }
+                            createdAt
+                            updatedAt
+                            enabled
+                            startAt
+                            endAt
+                            googleMapsAddress {
+                              json
+                            }
+                            zipCode
+                            address
+                            city
+                            country
+                            lat
+                            lng
+                            link
+                            guestListEnabled
+                            comments {
+                              totalCount
+                            }
+                            commentable
+                            metaDescription
+                            customCode
+                          }
+                        }
+                      }
+                    }
+            EOF;
     }
 
     private function handleAddressFormat(array &$event): void

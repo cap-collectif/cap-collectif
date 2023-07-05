@@ -26,7 +26,7 @@ trait AnswerableTrait
      *
      * @return $this
      */
-    public function setAnswer(Answer $answer = null)
+    public function setAnswer(?Answer $answer = null)
     {
         $this->answer = $answer;
 

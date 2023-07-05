@@ -28,7 +28,8 @@ class ConsultationStepConsultationsResolver implements ResolverInterface
             return $this->repository
                 ->getByConsultationStepPaginated($step, $offset, $limit)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
 
         $totalCount = $this->repository->countByStep($step);

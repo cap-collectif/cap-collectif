@@ -45,7 +45,8 @@ class ApiRegistrationFormType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('email', EmailType::class, ['required' => true])
-            ->add('roles', CollectionType::class, ['entry_type' => TextType::class]);
+            ->add('roles', CollectionType::class, ['entry_type' => TextType::class])
+        ;
 
         $builder->add('captcha', CaptchaType::class, ['validation_groups' => ['registration']]);
 
@@ -70,7 +71,8 @@ class ApiRegistrationFormType extends AbstractType
                 // Suppression d'index_property lors de l'inscription car il posait problème, pourquoi ? Seul le mystère nous le dira
                 'types' => [ValueResponseType::class, MediaResponseType::class],
                 'type_name' => AbstractResponse::TYPE_FIELD_NAME,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

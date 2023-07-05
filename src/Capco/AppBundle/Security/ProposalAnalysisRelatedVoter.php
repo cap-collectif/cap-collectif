@@ -56,18 +56,25 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
             case self::VIEW:
             case self::REVISE:
                 return $this->canSee($subject, $viewer);
+
             case self::ANALYSE:
                 return $this->canAnalyse($subject, $viewer);
+
             case self::EVALUATE:
                 return $this->canEvaluate($subject, $viewer);
+
             case self::DECIDE:
                 return $this->canDecide($subject, $viewer);
+
             case self::ASSIGN_SUPERVISOR:
                 return $this->canAssignSupervisor($subject, $viewer);
+
             case self::ASSIGN_DECISION_MAKER:
                 return $this->canAssignDecisionMaker($subject, $viewer);
+
             case self::ASSIGN_ANALYST:
                 return $this->canAssignAnalyst($subject, $viewer);
+
             default:
                 return false;
         }
@@ -75,10 +82,10 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
 
     private function canSee(Proposal $subject, User $viewer): bool
     {
-        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
-            $subject->getDecisionMaker() === $viewer ||
-            $subject->getSupervisor() === $viewer ||
-            $subject->getAnalysts()->contains($viewer);
+        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer)
+            || $subject->getDecisionMaker() === $viewer
+            || $subject->getSupervisor() === $viewer
+            || $subject->getAnalysts()->contains($viewer);
     }
 
     private function canAnalyse(Proposal $subject, User $viewer): bool
@@ -89,8 +96,8 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
     private function canEvaluate(Proposal $subject, User $viewer): bool
     {
         if (
-            ($decision = $subject->getDecision()) &&
-            ProposalStatementState::DONE === $decision->getState()
+            ($decision = $subject->getDecision())
+            && ProposalStatementState::DONE === $decision->getState()
         ) {
             return false;
         }
@@ -105,8 +112,8 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
 
     private function canAssignSupervisor(Proposal $subject, User $viewer): bool
     {
-        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
-            $subject->getDecisionMaker() === $viewer;
+        return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer)
+            || $subject->getDecisionMaker() === $viewer;
     }
 
     private function canAssignDecisionMaker(Proposal $subject, User $viewer): bool
@@ -117,9 +124,9 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
     private function canAssignAnalyst(Proposal $subject, User $viewer): bool
     {
         if (
-            self::isAdminOrOwnerOrMember($subject->getProject(), $viewer) ||
-            $subject->getDecisionMaker() === $viewer ||
-            $subject->getSupervisor() === $viewer
+            self::isAdminOrOwnerOrMember($subject->getProject(), $viewer)
+            || $subject->getDecisionMaker() === $viewer
+            || $subject->getSupervisor() === $viewer
         ) {
             return true;
         }

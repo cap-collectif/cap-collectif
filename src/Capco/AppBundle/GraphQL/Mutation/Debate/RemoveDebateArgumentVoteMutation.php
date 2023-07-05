@@ -5,13 +5,12 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements
-    MutationInterface
+class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements MutationInterface
 {
     public const NOT_VOTED = 'NOT_VOTED';
 

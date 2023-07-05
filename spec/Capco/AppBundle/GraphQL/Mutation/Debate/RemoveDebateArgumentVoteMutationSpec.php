@@ -64,11 +64,13 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $repository
             ->getOneByDebateArgumentAndUser($debateArgument, $viewer)
-            ->willReturn($debateArgumentVote);
+            ->willReturn($debateArgumentVote)
+        ;
 
         $debateArgument->removeVote($debateArgumentVote)->shouldBeCalled();
 
@@ -112,7 +114,8 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->__invoke($input, $viewer)->shouldBe(['errorCode' => 'CLOSED_DEBATE']);
     }
@@ -132,7 +135,8 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $repository->getOneByDebateArgumentAndUser($debateArgument, $viewer)->willReturn(null);
 

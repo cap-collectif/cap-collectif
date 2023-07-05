@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\DBAL\Enum;
 
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\Type;
 
 abstract class AbstractEnumType extends Type
 {

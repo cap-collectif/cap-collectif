@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Persister\ProjectPersister;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Project;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;

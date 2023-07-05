@@ -4,13 +4,13 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
+use InvalidArgumentException;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Data\DataManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use InvalidArgumentException;
 
 class CropMediaMutation implements MutationInterface
 {

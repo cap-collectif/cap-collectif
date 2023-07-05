@@ -45,7 +45,8 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
                 $registrationForm
                     ->translate($translation['locale'], false)
                     ->setTopText($translation['topText'] ?? '')
-                    ->setBottomText($translation['bottomText'] ?? '');
+                    ->setBottomText($translation['bottomText'] ?? '')
+                ;
             }
             $registrationForm->mergeNewTranslations();
         }

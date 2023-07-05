@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\RequirementRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class StepRequirementsResolver implements ResolverInterface
 {
@@ -43,10 +43,10 @@ class StepRequirementsResolver implements ResolverInterface
         $connection->setTotalCount(\count($requirements));
 
         if (
-            $step instanceof QuestionnaireStep ||
-            $step instanceof SelectionStep ||
-            $step instanceof CollectStep ||
-            $step instanceof ConsultationStep
+            $step instanceof QuestionnaireStep
+            || $step instanceof SelectionStep
+            || $step instanceof CollectStep
+            || $step instanceof ConsultationStep
         ) {
             $connection->{'reason'} = $step->getRequirementsReason();
         }

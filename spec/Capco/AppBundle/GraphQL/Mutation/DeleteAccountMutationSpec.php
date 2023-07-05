@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -25,14 +25,14 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Doctrine\ORM\Query\FilterCollection;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use phpDocumentor\Reflection\Types\Void_;
 use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
@@ -43,7 +43,7 @@ use Translation\Bundle\Translator\TranslatorInterface;
 
 class DeleteAccountMutationSpec extends ObjectBehavior
 {
-    const USER_ID = 'USER-ID';
+    public const USER_ID = 'USER-ID';
 
     public function let(
         EntityManagerInterface $em,
@@ -79,7 +79,8 @@ class DeleteAccountMutationSpec extends ObjectBehavior
 
         $eventManager
             ->getListeners()
-            ->willReturn(['soft_delete_event' => $softDeleteEventListener]);
+            ->willReturn(['soft_delete_event' => $softDeleteEventListener])
+        ;
 
         $em->flush()->willReturn(Void_::class);
         $em->refresh($user)->willReturn(Void_::class);
@@ -133,27 +134,32 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         $userRepository
             ->find(self::USER_ID)
             ->shouldBeCalledOnce()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $viewer
             ->isAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $viewer
             ->isSuperAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $user
             ->getId()
             ->shouldBeCalledOnce()
-            ->willReturn(self::USER_ID);
+            ->willReturn(self::USER_ID)
+        ;
 
         $user
             ->isSuperAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(2);
@@ -178,48 +184,58 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         $userRepository
             ->find(self::USER_ID)
             ->shouldBeCalledOnce()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $viewer
             ->isAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $viewer
             ->isSuperAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $user
             ->getId()
             ->shouldBeCalledOnce()
-            ->willReturn(self::USER_ID);
+            ->willReturn(self::USER_ID)
+        ;
 
         $user
             ->isSuperAdmin()
             ->shouldNotBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $filterCollection
             ->isEnabled('softdeleted')
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $filterCollection
             ->disable('softdeleted')
             ->shouldBeCalledOnce()
-            ->willReturn($sqlFilter);
+            ->willReturn($sqlFilter)
+        ;
 
         $session->getFlashBag()
             ->shouldBeCalledOnce()
-            ->willReturn($flashBag);
+            ->willReturn($flashBag)
+        ;
 
         $translator->trans('deleted-user', [], 'CapcoAppBundle')
             ->shouldBeCalledOnce()
-            ->willReturn('deleted-user');
+            ->willReturn('deleted-user')
+        ;
 
         $flashBag->add('success', 'deleted-user')
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);
@@ -236,12 +252,14 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $userRepository
             ->find(self::USER_ID)
             ->shouldBeCalledOnce()
-            ->willThrow(new UserError(DeleteAccountMutation::CANNOT_FIND_USER));
+            ->willThrow(new UserError(DeleteAccountMutation::CANNOT_FIND_USER))
+        ;
 
         $this->shouldThrow(UserError::class)->during('__invoke', [$input, $viewer]);
     }

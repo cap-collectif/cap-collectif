@@ -14,7 +14,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 class MigrateOrganizationToPlatformCommand extends Command
 {
     private EntityManagerInterface $em;
@@ -27,7 +26,7 @@ class MigrateOrganizationToPlatformCommand extends Command
     private UserRepository $userRepository;
 
     public function __construct(
-        EntityManagerInterface  $em,
+        EntityManagerInterface $em,
         ProjectRepository $projectRepository,
         QuestionnaireRepository $questionnaireRepository,
         ProposalFormRepository $proposalFormRepository,
@@ -35,8 +34,7 @@ class MigrateOrganizationToPlatformCommand extends Command
         EmailingCampaignRepository $emailingCampaignRepository,
         MailingListRepository $mailingListRepository,
         UserRepository $userRepository
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->em = $em;
@@ -48,75 +46,6 @@ class MigrateOrganizationToPlatformCommand extends Command
         $this->mailingListRepository = $mailingListRepository;
         $this->userRepository = $userRepository;
     }
-
-
-    protected function configure()
-    {
-        $this->setName('capco:migrate:orga-to-platform')
-            ->setDescription('A command to migrate project data from an organization to a standalone platform.');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $orgaId = ''; // fill with the orga id from where you are moving the projects
-        $owner = $this->userRepository->findOneBy(['email' => '']); // fill with the owner that will own the projets
-        $ownerId = $owner->getId();
-
-        $this->deleteProjects($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE PROJECTS</info>');
-
-        $this->deleteProposalForms($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE PROPOSALFORMS</info>');
-
-        $this->deleteQuestionnaires($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE QUESTIONNAIRES</info>');
-
-        $this->deleteEvents($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE EVENTS</info>');
-
-        $this->deletePosts($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE POSTS</info>');
-
-        $this->deleteMailingList($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE MAILING_LIST</info>');
-
-        $this->deleteEmailingCampaign($orgaId);
-        $this->em->clear();
-        $output->writeln('<info>DELETE EMAILING_CAMPAIGN</info>');
-        
-        $this->deleteDistrict();
-        $output->writeln('<info>DELETE DISTRICT</info>');
-        
-
-        $this->migrateOrganizationToUser($orgaId, $ownerId);
-        $output->writeln('<info>MIGRATING ORGA TO USER</info>');
-
-        $this->migrateAuthor($orgaId, $ownerId);
-        $output->writeln('<info>MIGRATING ORGA AUTHOR TO USER</info>');
-
-        $this->emptyUnusedTable();
-        $output->writeln('<info>EMPTY UNUSED TABLE</info>');
-
-        $this->deleteUsers();
-        $output->writeln('<info>DELETE USERS</info>');
-
-        $this->deleteOrphanMedia();
-        $output->writeln('<info>DELETE MEDIAS</info>');
-
-        $this->dropUnUsedTable();
-        $output->writeln('<info>DROPPING UNUSED TABLE</info>');
-
-        $output->writeln('DONE');
-
-        return 0;
-    }
-
 
     public function deleteProjects(string $orgaId): void
     {
@@ -156,7 +85,6 @@ class MigrateOrganizationToPlatformCommand extends Command
         // I don't know why passing as params does not work
         $sql = "DELETE FROM event WHERE id IN ({$idsJoined})";
         $this->executeStatement($sql);
-
     }
 
     public function deletePosts(string $orgaId)
@@ -168,6 +96,7 @@ class MigrateOrganizationToPlatformCommand extends Command
         }
         $this->em->flush();
     }
+
     public function deleteEmailingCampaign(string $orgaId)
     {
         $ids = $this->getTableIdsExcludingOrganization('emailing_campaign', $orgaId);
@@ -196,20 +125,7 @@ class MigrateOrganizationToPlatformCommand extends Command
             $sql = "UPDATE {$table} SET owner_id = :ownerId, creator_id = :ownerId, organizationOwner_id = null WHERE organizationOwner_id = :organizationId";
             $this->executeStatement($sql, [
                 'ownerId' => $ownerId,
-                'organizationId' => $organizationId
-            ]);
-        }
-    }
-
-    private function migrateAuthor(string $organizationId, string $userId)
-    {
-        $tablesWithOrganizationOwner = ['blog_post_authors', 'project_author'];
-
-        foreach ($tablesWithOrganizationOwner as $table) {
-            $sql = "UPDATE {$table} SET user_id = :userId, organization_id = null WHERE organization_id = :organizationId";
-            $this->executeStatement($sql, [
-                'userId' => $userId,
-                'organizationId' => $organizationId
+                'organizationId' => $organizationId,
             ]);
         }
     }
@@ -374,65 +290,6 @@ class MigrateOrganizationToPlatformCommand extends Command
         $this->setForeignKeyChecks(true);
     }
 
-    private function getTableIdsExcludingOrganization(string $table, string $orgaId): array
-    {
-        $sql = "SELECT id FROM {$table} WHERE organizationOwner_id != :orgaId OR organizationOwner_id IS NULL";
-
-        if ($table === 'event') {
-            $sql = "SELECT id FROM event WHERE (organizationOwner_id != :orgaId OR organization_id != :orgaId) OR (organizationOwner_id IS NULL AND organization_id IS NULL)";
-        }
-
-
-        $connection = $this->em->getConnection();
-        $statement = $connection->prepare($sql);
-        $query = $statement->executeQuery([
-            'orgaId' => $orgaId
-        ]);
-        $row = $query->fetchAllAssociative();
-
-        $ids = array_map(function ($row) {
-            return $row['id'];
-        }, $row);
-
-        return $ids;
-    }
-
-    private function deleteUsers()
-    {
-        $users = $this->userRepository->findAll();
-
-        $usersIdThatHasContributed = [];
-
-        foreach ($users as $user) {
-            if (count($user->getContributions()) === 0) {
-                continue;
-            }
-            $usersIdThatHasContributed[] = $user->getId();
-        }
-
-        // was originally used for annecy who needed to keep a list of users given a csv file, I let it like it is if we need to reuse the same logic someday
-        $emailsFromCSV = [];
-
-        $csvUsersId = array_map(function ($email) {
-            $user = $this->userRepository->findOneBy(['email' => $email]);
-            if (!$user) {
-                return null;
-            }
-            return $user->getId();
-        }, $emailsFromCSV);
-
-        $usersToKeepEmail = array_unique(array_merge(
-            $usersIdThatHasContributed, $csvUsersId)
-        );
-
-        $capcoAdminUser = $this->userRepository->findOneBy(['email' => 'admin@cap-collectif.com']);
-        $usersToKeepEmail[] = $capcoAdminUser->getId();
-        $usersToKeepEmail = sprintf("'%s'", implode("','", $usersToKeepEmail));
-
-        $this->executeStatement("DELETE FROM action_token WHERE user_id NOT IN ({$usersToKeepEmail})");
-        $this->executeStatement("DELETE FROM fos_user WHERE id NOT IN ({$usersToKeepEmail}) OR email IS NULL");
-    }
-
     public function deleteOrphanMedia()
     {
         $defaultMedias = ['Media Urbanisme', 'Media Santé', 'Media Sport', 'Media Scolarité', 'Media Securité', 'MediaSolidarite', 'Media Qualité De Vie', 'Media Propreté', 'Media Mobilité', 'Media Jeunesse', 'Media Environnement', 'Media Culture', 'Media PMR', 'Media Attractivité', 'Media Agriculture', 'Titre du média', 'Titre du média', 'Titre du média', 'Image de la barre de votes', 'Instagram', 'Capco', 'Youtube', 'Twitter', 'RSS', 'LinkedIn', 'Google', 'Facebook', 'Flickr', 'Picto', 'Header', 'Logo'];
@@ -484,7 +341,7 @@ class MigrateOrganizationToPlatformCommand extends Command
             return $row['provider_reference'];
         }, $rows);
 
-        $allFiles = scandir("public/media/default/0001/01");
+        $allFiles = scandir('public/media/default/0001/01');
         unset($allFiles[0], $allFiles[1]);
 
         $filesToRemove = array_diff($allFiles, $filesToKeep);
@@ -496,11 +353,11 @@ class MigrateOrganizationToPlatformCommand extends Command
 
     public function deleteDistrict()
     {
-        $sql = "SELECT d.id
+        $sql = 'SELECT d.id
                 FROM district d
                 LEFT JOIN project_district_positioner pdp ON d.id = pdp.district_id
                 LEFT JOIN proposal p ON d.id = p.district_id
-                WHERE pdp.district_id IS NOT NULL OR p.district_id IS NOT NULL";
+                WHERE pdp.district_id IS NOT NULL OR p.district_id IS NOT NULL';
 
         $connection = $this->em->getConnection();
         $statement = $connection->prepare($sql);
@@ -516,11 +373,147 @@ class MigrateOrganizationToPlatformCommand extends Command
         $this->executeStatement("DELETE FROM district_translation WHERE translatable_id NOT IN ({$ids})");
         $this->executeStatement("DELETE FROM district WHERE id NOT IN ({$ids})");
     }
+
+    protected function configure()
+    {
+        $this->setName('capco:migrate:orga-to-platform')
+            ->setDescription('A command to migrate project data from an organization to a standalone platform.')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $orgaId = ''; // fill with the orga id from where you are moving the projects
+        $owner = $this->userRepository->findOneBy(['email' => '']); // fill with the owner that will own the projets
+        $ownerId = $owner->getId();
+
+        $this->deleteProjects($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE PROJECTS</info>');
+
+        $this->deleteProposalForms($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE PROPOSALFORMS</info>');
+
+        $this->deleteQuestionnaires($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE QUESTIONNAIRES</info>');
+
+        $this->deleteEvents($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE EVENTS</info>');
+
+        $this->deletePosts($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE POSTS</info>');
+
+        $this->deleteMailingList($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE MAILING_LIST</info>');
+
+        $this->deleteEmailingCampaign($orgaId);
+        $this->em->clear();
+        $output->writeln('<info>DELETE EMAILING_CAMPAIGN</info>');
+
+        $this->deleteDistrict();
+        $output->writeln('<info>DELETE DISTRICT</info>');
+
+        $this->migrateOrganizationToUser($orgaId, $ownerId);
+        $output->writeln('<info>MIGRATING ORGA TO USER</info>');
+
+        $this->migrateAuthor($orgaId, $ownerId);
+        $output->writeln('<info>MIGRATING ORGA AUTHOR TO USER</info>');
+
+        $this->emptyUnusedTable();
+        $output->writeln('<info>EMPTY UNUSED TABLE</info>');
+
+        $this->deleteUsers();
+        $output->writeln('<info>DELETE USERS</info>');
+
+        $this->deleteOrphanMedia();
+        $output->writeln('<info>DELETE MEDIAS</info>');
+
+        $this->dropUnUsedTable();
+        $output->writeln('<info>DROPPING UNUSED TABLE</info>');
+
+        $output->writeln('DONE');
+
+        return 0;
+    }
+
+    private function migrateAuthor(string $organizationId, string $userId)
+    {
+        $tablesWithOrganizationOwner = ['blog_post_authors', 'project_author'];
+
+        foreach ($tablesWithOrganizationOwner as $table) {
+            $sql = "UPDATE {$table} SET user_id = :userId, organization_id = null WHERE organization_id = :organizationId";
+            $this->executeStatement($sql, [
+                'userId' => $userId,
+                'organizationId' => $organizationId,
+            ]);
+        }
+    }
+
+    private function getTableIdsExcludingOrganization(string $table, string $orgaId): array
+    {
+        $sql = "SELECT id FROM {$table} WHERE organizationOwner_id != :orgaId OR organizationOwner_id IS NULL";
+
+        if ('event' === $table) {
+            $sql = 'SELECT id FROM event WHERE (organizationOwner_id != :orgaId OR organization_id != :orgaId) OR (organizationOwner_id IS NULL AND organization_id IS NULL)';
+        }
+
+        $connection = $this->em->getConnection();
+        $statement = $connection->prepare($sql);
+        $query = $statement->executeQuery([
+            'orgaId' => $orgaId,
+        ]);
+        $row = $query->fetchAllAssociative();
+
+        return array_map(function ($row) {
+            return $row['id'];
+        }, $row);
+    }
+
+    private function deleteUsers()
+    {
+        $users = $this->userRepository->findAll();
+
+        $usersIdThatHasContributed = [];
+
+        foreach ($users as $user) {
+            if (0 === \count($user->getContributions())) {
+                continue;
+            }
+            $usersIdThatHasContributed[] = $user->getId();
+        }
+
+        // was originally used for annecy who needed to keep a list of users given a csv file, I let it like it is if we need to reuse the same logic someday
+        $emailsFromCSV = [];
+
+        $csvUsersId = array_map(function ($email) {
+            $user = $this->userRepository->findOneBy(['email' => $email]);
+            if (!$user) {
+                return null;
+            }
+
+            return $user->getId();
+        }, $emailsFromCSV);
+
+        $usersToKeepEmail = array_unique(array_merge($usersIdThatHasContributed, $csvUsersId));
+
+        $capcoAdminUser = $this->userRepository->findOneBy(['email' => 'admin@cap-collectif.com']);
+        $usersToKeepEmail[] = $capcoAdminUser->getId();
+        $usersToKeepEmail = sprintf("'%s'", implode("','", $usersToKeepEmail));
+
+        $this->executeStatement("DELETE FROM action_token WHERE user_id NOT IN ({$usersToKeepEmail})");
+        $this->executeStatement("DELETE FROM fos_user WHERE id NOT IN ({$usersToKeepEmail}) OR email IS NULL");
+    }
+
     private function executeStatement(string $sql, array $params = []): int
     {
         $connection = $this->em->getConnection();
         $statement = $connection->prepare($sql);
+
         return $statement->executeStatement($params);
     }
-
 }

@@ -15,6 +15,7 @@ class UserOrganizationsResolver implements ResolverInterface
             ->map(function (OrganizationMember $organizationMember) {
                 return $organizationMember->getOrganization();
             })
-            ->toArray();
+            ->toArray()
+        ;
     }
 }

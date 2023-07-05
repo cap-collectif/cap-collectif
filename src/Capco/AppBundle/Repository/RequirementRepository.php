@@ -14,6 +14,7 @@ class RequirementRepository extends EntityRepository
             ->addOrderBy('r.position', 'ASC')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

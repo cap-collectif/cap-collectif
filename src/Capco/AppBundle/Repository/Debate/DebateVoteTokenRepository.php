@@ -8,8 +8,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method DebateVoteToken|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateVoteToken|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateVoteToken find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateVoteToken findOneBy(array $criteria, array $orderBy = null)
  * @method DebateVoteToken[]    findAll()
  * @method DebateVoteToken[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

@@ -1,7 +1,8 @@
-<?php 
+<?php
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Exception\CasAuthenticationException;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
@@ -9,7 +10,6 @@ use Capco\UserBundle\Security\Service\CapebUserFilter;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Capco\AppBundle\Exception\CasAuthenticationException;
 
 /**
  * Our only CAS for now is CAPEB.
@@ -43,7 +43,6 @@ class CasUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['casId' => $casId]);
 
         if (!$user) {
-
             $user = $this->userManager->createUser();
             $user->setCasId($casId);
             $user->setUsername($casId);
@@ -52,12 +51,10 @@ class CasUserProvider implements UserProviderInterface
             if ('capcapeb' === getenv('SYMFONY_INSTANCE_NAME')) {
                 $userType = $this->capebUserFilter->getUserType($casId);
 
-                if (is_null($userType)) {
+                if (null === $userType) {
                     $this->logger->error('Access denied for ' . $casId . ' as invalidate cas user');
-        
-                    throw new CasAuthenticationException(
-                        'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
-                    );
+
+                    throw new CasAuthenticationException('Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau');
                 }
 
                 $user->setUserType($userType);

@@ -43,7 +43,8 @@ class OpenIDBackchannel
     public function __invoke(Request $request, string $token): JsonResponse
     {
         if (!$this->checkToken($token)) {
-            $this->logger->error(__METHOD__ . "token $token UNAUTHORIZED");
+            $this->logger->error(__METHOD__ . "token {$token} UNAUTHORIZED");
+
             return $this->json(
                 [
                     'success' => false,
@@ -60,6 +61,7 @@ class OpenIDBackchannel
         list($user, $openIdSID) = $this->findUser($accessToken);
         if (!$user instanceof User) {
             $this->logger->error(__METHOD__ . 'USER_NOT_FOUND');
+
             return $this->json(
                 [
                     'success' => false,
@@ -69,7 +71,8 @@ class OpenIDBackchannel
             );
         }
         if (!$user->hasOpenIdSession($openIdSID)) {
-            $this->logger->error(__METHOD__ . "$openIdSID BAD_CREDENTIAL");
+            $this->logger->error(__METHOD__ . "{$openIdSID} BAD_CREDENTIAL");
+
             return $this->json(
                 [
                     'success' => false,
@@ -95,7 +98,7 @@ class OpenIDBackchannel
         $userInfo = self::getUserInfoFromAccessToken($accessToken);
 
         return [
-             $this->userRepository->findOneByOpenIdSID($userInfo['sid']),
+            $this->userRepository->findOneByOpenIdSID($userInfo['sid']),
             $userInfo['sid'],
         ];
     }

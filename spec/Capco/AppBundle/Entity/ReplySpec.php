@@ -2,9 +2,9 @@
 
 namespace spec\Capco\AppBundle\Entity;
 
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Model\Publishable;
+use PhpSpec\ObjectBehavior;
 
 class ReplySpec extends ObjectBehavior
 {

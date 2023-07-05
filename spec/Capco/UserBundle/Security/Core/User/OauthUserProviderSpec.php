@@ -84,36 +84,43 @@ class OauthUserProviderSpec extends ObjectBehavior
         // We try to find a user that match the criterias, but could not find one.
         $userRepository
             ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $userRepository->findOneByEmail('openid_user@test.com')->willReturn(null);
 
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         // Here we assert right values are set for the user.
         $user
             ->setOpenId('openid_id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setOpenIdAccessToken('openid_access_token')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setUsername('openid_user')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEmail('openid_user@test.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $extraMapper->map($user, $response)->shouldBeCalled();
 
         // We flush the new values.
@@ -138,36 +145,43 @@ class OauthUserProviderSpec extends ObjectBehavior
         // We try to find a user that match the criterias, but could not find one.
         $userRepository
             ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $userRepository->findOneByEmail('openid_user@test.com')->willReturn(null);
 
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         // Here we assert right values are set for the user.
         $user
             ->setOpenId('openid_id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setOpenIdAccessToken('openid_access_token')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setUsername('openid_user')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEmail('openid_user@test.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $extraMapper->map($user, $response)->shouldBeCalled();
 
         // We flush the new values.
@@ -190,13 +204,15 @@ class OauthUserProviderSpec extends ObjectBehavior
         $token->getUser()->willReturn(null); // We try to find a user that match the criterias, but could not find one.
         $userRepository
             ->findByAccessTokenOrUsername('facebook_access_token', '2081576388576162')
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $userRepository->findOneByEmail('facebook_2081576388576162')->willReturn(null);
 
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         // Here we assert right values are set for the user.
@@ -205,15 +221,18 @@ class OauthUserProviderSpec extends ObjectBehavior
         $user
             ->setUsername('facebook_user')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEmail(null)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         // We flush the new values.
         $userManager->updateUser($user)->shouldBeCalled();
@@ -239,18 +258,21 @@ class OauthUserProviderSpec extends ObjectBehavior
         // We try to find a user that match the criterias, and find one.
         $userRepository
             ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         // Here we assert right values are set for the user.
         $user
             ->setOpenId('openid_id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setOpenIdAccessToken('openid_access_token')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         // We flush the new values.
         $userManager->updateUser($user)->shouldBeCalled();
@@ -327,26 +349,31 @@ class OauthUserProviderSpec extends ObjectBehavior
         // We try to find a user that match the criterias, and find one.
         $userRepository
             ->findByAccessTokenOrUsername('openid_access_token', 'openid_id')
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         // Here we assert right values are set for the user.
         $user
             ->setOpenId('openid_id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setOpenIdAccessToken('openid_access_token')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setUsername('openid_user')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEmail('openid_user@test.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $extraMapper->map($user, $response)->shouldBeCalled();
 
         // We flush the new values.

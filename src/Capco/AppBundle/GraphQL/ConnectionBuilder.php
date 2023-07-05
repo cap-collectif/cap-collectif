@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL;
 
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionBuilder as ParentBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionBuilder as ParentBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 final class ConnectionBuilder
@@ -25,7 +25,7 @@ final class ConnectionBuilder
     {
         $connectionBuilder = new ParentBuilder();
 
-        return $connectionBuilder->connectionFromArray($array, $args ? $args : []);
+        return $connectionBuilder->connectionFromArray($array, $args ?: []);
     }
 
     public static function offsetToCursor(int $offset): string

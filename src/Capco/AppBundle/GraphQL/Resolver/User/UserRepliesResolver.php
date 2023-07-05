@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserRepliesResolver implements ResolverInterface
 {

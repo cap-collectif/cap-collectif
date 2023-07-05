@@ -37,8 +37,7 @@ class OwnerableCreatorAccessResolverSpec extends ObjectBehavior
         User $viewer,
         Organization $organization,
         OrganizationAdminAccessResolver $organizationAdminAccessResolver
-    )
-    {
+    ) {
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(false);
         $project->getOwner()->shouldBeCalledOnce()->willReturn($organization);
         $project->getCreator()->shouldBeCalledOnce()->willReturn(null);
@@ -49,12 +48,10 @@ class OwnerableCreatorAccessResolverSpec extends ObjectBehavior
     public function it_should_return_false_if_no_condition_is_met(
         Project $project,
         User $viewer
-    )
-    {
+    ) {
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(false);
         $project->getOwner()->shouldBeCalledOnce()->willReturn($viewer);
         $project->getCreator()->shouldBeCalledOnce()->willReturn(null);
         $this->__invoke($project, $viewer)->shouldReturn(false);
     }
-
 }

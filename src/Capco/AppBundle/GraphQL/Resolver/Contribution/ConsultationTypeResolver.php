@@ -19,10 +19,10 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Vote\VoteTypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ConsultationTypeResolver implements ResolverInterface
 {

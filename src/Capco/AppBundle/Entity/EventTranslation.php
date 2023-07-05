@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
-use Capco\AppBundle\Traits\TranslationTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TranslationTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,11 +25,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class EventTranslation implements Translation
 {
-    use UuidTrait;
-    use TextableTrait;
     use MetaDescriptionTrait;
     use SluggableTitleTrait;
+    use TextableTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
@@ -43,14 +43,14 @@ class EventTranslation implements Translation
      */
     private $link;
 
-    public static function getTranslatableEntityClass(): string
-    {
-        return Event::class;
-    }
-
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New event';
+    }
+
+    public static function getTranslatableEntityClass(): string
+    {
+        return Event::class;
     }
 
     public function setLink(?string $link = null): self

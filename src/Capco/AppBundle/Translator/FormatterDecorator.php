@@ -107,7 +107,7 @@ class FormatterDecorator implements TranslatorInterface
      *
      * @param string      $id      the translation message ID
      * @param string      $message the message pattern that will be used for formatting
-     * @param string|null $locale
+     * @param null|string $locale
      *
      * @return string the formatted message
      */
@@ -146,7 +146,7 @@ class FormatterDecorator implements TranslatorInterface
      * If a correct locale is provided that one is used.
      * Otherwise, the default locale is returned.
      *
-     * @param string|null $locale
+     * @param null|string $locale
      *
      * @return string
      */

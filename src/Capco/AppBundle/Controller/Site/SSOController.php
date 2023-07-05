@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 
 class SSOController extends Controller
 {

@@ -56,10 +56,10 @@ class MailerFactory
         /** @var AbstractMessage $message */
         $message = new $type(
             $recipientEmail,
-            \constant("${type}::SUBJECT"),
-            \call_user_func("${type}::getMySubjectVars", $element, $params),
-            \constant("${type}::TEMPLATE"),
-            \call_user_func("${type}::getMyTemplateVars", $element, $params),
+            \constant("{$type}::SUBJECT"),
+            \call_user_func("{$type}::getMySubjectVars", $element, $params),
+            \constant("{$type}::TEMPLATE"),
+            \call_user_func("{$type}::getMyTemplateVars", $element, $params),
             $recipient,
             $replyTo
         );
@@ -69,8 +69,8 @@ class MailerFactory
         $message->setSiteUrl($params['siteURL']);
 
         if (
-            AbstractModeratorMessage::class === $subType &&
-            ReportingCreateMessage::class !== $type
+            AbstractModeratorMessage::class === $subType
+            && ReportingCreateMessage::class !== $type
         ) {
             $this->setModerationLinks($message, $element);
         }
@@ -109,9 +109,9 @@ class MailerFactory
         string $email,
         array $params
     ): void {
-        $footer = \constant("${type}::FOOTER"); //twig or trad key
+        $footer = \constant("{$type}::FOOTER"); //twig or trad key
         $footerVars = \call_user_func(
-            "${type}::getMyFooterVars",
+            "{$type}::getMyFooterVars",
             $email,
             $params['siteName'],
             $params['baseURL']
@@ -135,7 +135,7 @@ class MailerFactory
             return AbstractEmailingCampaignMessage::class;
         }
 
-        throw new MailerException("${class} is not an known type of message");
+        throw new MailerException("{$class} is not an known type of message");
     }
 
     private function setModerationLinks(AbstractModeratorMessage $message, $moderable): void

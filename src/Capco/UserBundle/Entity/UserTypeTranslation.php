@@ -19,8 +19,8 @@ use Capco\AppBundle\Traits\UuidTrait;
  */
 class UserTypeTranslation implements Translation
 {
-    use UuidTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     private $name;
     private $slug;

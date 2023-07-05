@@ -365,31 +365,39 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 $proposal
                     ->setTrashedStatus(Trashable::STATUS_VISIBLE)
                     ->setTrashedReason($values['trashedReason'])
-                    ->setDeletedAt(null);
+                    ->setDeletedAt(null)
+                ;
 
                 break;
+
             case ProposalPublicationStatus::PUBLISHED:
                 $proposal
                     ->setPublishedAt(new DateTime())
                     ->setDraft(false)
                     ->setTrashedStatus(null)
-                    ->setDeletedAt(null);
+                    ->setDeletedAt(null)
+                ;
 
                 break;
+
             case ProposalPublicationStatus::TRASHED_NOT_VISIBLE:
                 $proposal
                     ->setTrashedStatus(Trashable::STATUS_INVISIBLE)
                     ->setTrashedReason($values['trashedReason'])
-                    ->setDeletedAt(null);
+                    ->setDeletedAt(null)
+                ;
 
                 break;
+
             case ProposalPublicationStatus::DRAFT:
                 $proposal
                     ->setDraft(true)
                     ->setTrashedStatus(null)
-                    ->setDeletedAt(null);
+                    ->setDeletedAt(null)
+                ;
 
                 break;
+
             default:
                 break;
         }
@@ -433,7 +441,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             ? $proposal
                 ->getRevisions()
                 ->filter(
-                    fn(ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
+                    fn (ProposalRevision $revision) => ProposalRevisionStateType::REVISED !==
                         $revision->getState()
                 )
             : [];
@@ -539,8 +547,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['webPageUrl'])) {
                 $socialNetworks->setWebPageUrl(null);
             } elseif (
-                !empty($values['webPageUrl']) &&
-                filter_var($values['webPageUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['webPageUrl'])
+                && filter_var($values['webPageUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setWebPageUrl($values['webPageUrl']);
             }
@@ -549,8 +557,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['facebookUrl'])) {
                 $socialNetworks->setFacebookUrl(null);
             } elseif (
-                !empty($values['facebookUrl']) &&
-                filter_var($values['facebookUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['facebookUrl'])
+                && filter_var($values['facebookUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setFacebookUrl($values['facebookUrl']);
             }
@@ -559,8 +567,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['twitterUrl'])) {
                 $socialNetworks->setTwitterUrl(null);
             } elseif (
-                !empty($values['twitterUrl']) &&
-                filter_var($values['twitterUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['twitterUrl'])
+                && filter_var($values['twitterUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setTwitterUrl($values['twitterUrl']);
             }
@@ -569,8 +577,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['instagramUrl'])) {
                 $socialNetworks->setInstagramUrl(null);
             } elseif (
-                !empty($values['instagramUrl']) &&
-                filter_var($values['instagramUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['instagramUrl'])
+                && filter_var($values['instagramUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setInstagramUrl($values['instagramUrl']);
             }
@@ -579,8 +587,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['linkedInUrl'])) {
                 $socialNetworks->setLinkedInUrl(null);
             } elseif (
-                !empty($values['linkedInUrl']) &&
-                filter_var($values['linkedInUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['linkedInUrl'])
+                && filter_var($values['linkedInUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setLinkedInUrl($values['linkedInUrl']);
             }
@@ -589,8 +597,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             if (empty($values['youtubeUrl'])) {
                 $socialNetworks->setYoutubeUrl(null);
             } elseif (
-                !empty($values['youtubeUrl']) &&
-                filter_var($values['youtubeUrl'], \FILTER_VALIDATE_URL)
+                !empty($values['youtubeUrl'])
+                && filter_var($values['youtubeUrl'], \FILTER_VALIDATE_URL)
             ) {
                 $socialNetworks->setYoutubeUrl($values['youtubeUrl']);
             }

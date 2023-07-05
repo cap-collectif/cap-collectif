@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -412,7 +412,8 @@ class ProjectStatsResolverSpec extends ObjectBehavior
                     'name' => 'Proposal 2',
                     'value' => 60,
                 ],
-            ]);
+            ])
+        ;
         $this->beConstructedWith(
             $selectionStepRepo,
             $collectStepRepo,

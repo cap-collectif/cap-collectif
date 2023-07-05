@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Validator\Constraints\HasAddressIfMandatory;
 use Capco\AppBundle\Validator\Constraints\HasAddressIfMandatoryValidator;
@@ -68,30 +68,36 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isProposalInAZoneRequired()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->getDistricts()
             ->willReturn($districts)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isUsingDistrict()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         // Paris
         $proposal
             ->getAddress()
             ->willReturn('[{"geometry": { "location": {"lat": 48.866667, "lng": 2.333333 }}}]')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldNotBeCalled();
         $context->buildViolation()->shouldNotBeCalled();
@@ -150,34 +156,41 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isProposalInAZoneRequired()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->getDistricts()
             ->willReturn($districts)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isUsingDistrict()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getAddress()
             ->willReturn('[{"geometry": { "location": {"lat": 0, "lng": 0 }}}]')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldBeCalled();
         $context
             ->buildViolation($constraint->addressNotInZoneMessage)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->initialize($context);
         $this->validate($proposal, $constraint);
@@ -193,22 +206,26 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getAddress()
             ->willReturn('popo')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldBeCalled();
         $context
             ->buildViolation($constraint->noValidJsonAddressMessage)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->initialize($context);
         $this->validate($proposal, $constraint);
     }
@@ -223,19 +240,23 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isUsingDistrict()
             ->willReturn(false)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getAddress()
             ->willReturn('[{}]')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldNotBeCalled();
         $context->buildViolation()->shouldNotBeCalled();
@@ -253,22 +274,26 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getAddress()
             ->willReturn(null)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldBeCalled();
         $context
             ->buildViolation($constraint->noAddressMessage)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->initialize($context);
         $this->validate($proposal, $constraint);
     }
@@ -309,29 +334,35 @@ class HasAddressIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->getUsingAddress()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isProposalInAZoneRequired()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->getDistricts()
             ->willReturn([$district])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isUsingDistrict()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $proposal
             ->getAddress()
             ->willReturn('[{"geometry": { "location": {"lat": 25, "lng": 25 }}}]')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $builder->addViolation()->shouldNotBeCalled();
         $context->buildViolation()->shouldNotBeCalled();

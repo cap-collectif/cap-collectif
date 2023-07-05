@@ -133,7 +133,8 @@ class BrowserLanguageRuntimeSpec extends ObjectBehavior
                 new Locale('en-GB', 'english'),
                 new Locale('es-ES', 'spanish'),
                 new Locale('de-DE', 'deutsch'),
-            ]);
+            ])
+        ;
         $bag->has('locale')->willReturn(true);
         // This locale does exist but is not currently published in our platform
         $bag->get('locale')->willReturn('ja-JP');

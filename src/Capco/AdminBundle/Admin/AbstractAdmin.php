@@ -41,7 +41,7 @@ use Symfony\Component\Security\Acl\Model\DomainObjectInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * copy of Sonata\AdminBundle\Admin\AbstractAdmin to remove the final of methods
+ * copy of Sonata\AdminBundle\Admin\AbstractAdmin to remove the final of methods.
  */
 abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterface, DomainObjectInterface, AdminTreeInterface
 {
@@ -90,14 +90,14 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * The base route name used to generate the routing information.
      *
-     * @var string|null
+     * @var null|string
      */
     protected $baseRouteName;
 
     /**
      * The base route pattern used to generate the routing information.
      *
-     * @var string|null
+     * @var null|string
      */
     protected $baseRoutePattern;
 
@@ -160,14 +160,14 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * Array of routes related to this admin.
      *
-     * @var RouteCollectionInterface|null
+     * @var null|RouteCollectionInterface
      */
     private $routes;
 
     /**
      * The subject only set in edit/update/create mode.
      *
-     * @var object|null
+     * @var null|object
      *
      * @phpstan-var T|null
      */
@@ -183,7 +183,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * Reference the parent admin.
      *
-     * @var AdminInterface<object>|null
+     * @var null|AdminInterface<object>
      */
     private $parent;
 
@@ -191,7 +191,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      * Reference the parent FieldDescription related to this admin
      * only set for FieldDescription which is associated to an Sub Admin instance.
      *
-     * @var FieldDescriptionInterface|null
+     * @var null|FieldDescriptionInterface
      */
     private $parentFieldDescription;
 
@@ -206,26 +206,26 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      * The uniqId is used to avoid clashing with 2 admin related to the code
      * ie: a Block linked to a Block.
      *
-     * @var string|null
+     * @var null|string
      */
     private $uniqId;
 
     /**
      * The current request object.
      *
-     * @var Request|null
+     * @var null|Request
      */
     private $request;
 
     /**
      * The datagrid instance.
      *
-     * @var DatagridInterface<ProxyQueryInterface>|null
+     * @var null|DatagridInterface<ProxyQueryInterface>
      */
     private $datagrid;
 
     /**
-     * @var ItemInterface|null
+     * @var null|ItemInterface
      */
     private $menu;
 
@@ -266,31 +266,31 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     /**
      * The list collection.
      *
-     * @var FieldDescriptionCollection<FieldDescriptionInterface>|null
+     * @var null|FieldDescriptionCollection<FieldDescriptionInterface>
      */
     private $list;
 
     /**
-     * @var FieldDescriptionCollection<FieldDescriptionInterface>|null
+     * @var null|FieldDescriptionCollection<FieldDescriptionInterface>
      */
     private $show;
 
     /**
-     * @var FormInterface|null
+     * @var null|FormInterface
      */
     private $form;
 
     /**
      * The cached base route name.
      *
-     * @var string|null
+     * @var null|string
      */
     private $cachedBaseRouteName;
 
     /**
      * The cached base route pattern.
      *
-     * @var string|null
+     * @var null|string
      */
     private $cachedBaseRoutePattern;
 
@@ -495,7 +495,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
             if ($this->datagridValues) {
                 $orderKeys = [DatagridInterface::SORT_ORDER, DatagridInterface::SORT_BY];
                 foreach ($this->datagridValues as $key => $datagridValue) {
-                    if (in_array($key, $orderKeys)) {
+                    if (\in_array($key, $orderKeys)) {
                         $parameters[$key] = $datagridValue;
                     }
                 }
@@ -537,10 +537,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getParentAssociationMapping(): ?string
     {
         if (!$this->isChild()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no parent.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no parent.', static::class));
         }
 
         $parent = $this->getParent()->getCode();
@@ -560,10 +557,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
                 preg_match(self::CLASS_REGEX, $this->class, $matches);
 
                 if (!$matches) {
-                    throw new \LogicException(sprintf(
-                        'Please define a default `baseRoutePattern` value for the admin class `%s`',
-                        static::class
-                    ));
+                    throw new \LogicException(sprintf('Please define a default `baseRoutePattern` value for the admin class `%s`', static::class));
                 }
                 $baseRoutePattern = $this->urlize($matches[5], '-');
             }
@@ -580,15 +574,12 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
             preg_match(self::CLASS_REGEX, $this->class, $matches);
 
             if (!$matches) {
-                throw new \LogicException(sprintf(
-                    'Please define a default `baseRoutePattern` value for the admin class `%s`',
-                    static::class
-                ));
+                throw new \LogicException(sprintf('Please define a default `baseRoutePattern` value for the admin class `%s`', static::class));
             }
 
             $this->cachedBaseRoutePattern = sprintf(
                 '/%s%s/%s',
-                '' === $matches[1] ? '' : $this->urlize($matches[1], '-').'/',
+                '' === $matches[1] ? '' : $this->urlize($matches[1], '-') . '/',
                 $this->urlize($matches[3], '-'),
                 $this->urlize($matches[5], '-')
             );
@@ -614,11 +605,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
                 preg_match(self::CLASS_REGEX, $this->class, $matches);
 
                 if (!$matches) {
-                    throw new \LogicException(sprintf(
-                        'Cannot automatically determine base route name,'
-                        .' please define a default `baseRouteName` value for the admin class `%s`',
-                        static::class
-                    ));
+                    throw new \LogicException(sprintf('Cannot automatically determine base route name,' . ' please define a default `baseRouteName` value for the admin class `%s`', static::class));
                 }
                 $baseRouteName = $this->urlize($matches[5]);
             }
@@ -634,16 +621,12 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
             preg_match(self::CLASS_REGEX, $this->class, $matches);
 
             if (!$matches) {
-                throw new \LogicException(sprintf(
-                    'Cannot automatically determine base route name,'
-                    .' please define a default `baseRouteName` value for the admin class `%s`',
-                    static::class
-                ));
+                throw new \LogicException(sprintf('Cannot automatically determine base route name,' . ' please define a default `baseRouteName` value for the admin class `%s`', static::class));
             }
 
             $this->cachedBaseRouteName = sprintf(
                 'admin_%s%s_%s',
-                '' === $matches[1] ? '' : $this->urlize($matches[1]).'_',
+                '' === $matches[1] ? '' : $this->urlize($matches[1]) . '_',
                 $this->urlize($matches[3]),
                 $this->urlize($matches[5])
             );
@@ -652,6 +635,9 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         return $this->cachedBaseRouteName;
     }
 
+    /**
+     * @return class-string<T>
+     */
     final public function getClass(): string
     {
         if ($this->hasActiveSubClass()) {
@@ -670,12 +656,9 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         }
 
         // Do not use `$this->hasSubject()` and `$this->getSubject()` here to avoid infinite loop.
-        // `getSubject` use `hasSubject()` which use `getObject()` which use `getClass()`.
+        // `getSubject` uses `hasSubject()` which uses `getObject()` which uses `getClass()`.
         if (null !== $this->subject) {
-            /** @phpstan-var class-string<T> $class */
-            $class = ClassUtils::getClass($this->subject);
-
-            return $class;
+            return ClassUtils::getClass($this->subject);
         }
 
         return $this->class;
@@ -708,10 +691,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getActiveSubClass(): string
     {
         if (!$this->hasActiveSubClass()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no active subclass.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no active subclass.', static::class));
         }
 
         return $this->getSubClass($this->getActiveSubclassCode());
@@ -720,19 +700,13 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getActiveSubclassCode(): string
     {
         if (!$this->hasActiveSubClass()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no active subclass.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no active subclass.', static::class));
         }
 
         $subClass = (string) $this->getRequest()->query->get('subclass');
 
         if (!$this->hasSubClass($subClass)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no active subclass.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no active subclass.', static::class));
         }
 
         return $subClass;
@@ -874,10 +848,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function defineFormBuilder(FormBuilderInterface $formBuilder): void
     {
         if (!$this->hasSubject()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no subject.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no subject.', static::class));
         }
 
         $mapper = new FormMapper($this->getFormContractor(), $formBuilder, $this);
@@ -909,7 +880,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     }
 
     /**
-     * @param string|int|null $id
+     * @param null|int|string $id
      *
      * @phpstan-return T|null
      */
@@ -1113,10 +1084,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getParentFieldDescription(): FieldDescriptionInterface
     {
         if (!$this->hasParentFieldDescription()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no parent field description.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no parent field description.', static::class));
         }
         \assert(null !== $this->parentFieldDescription);
 
@@ -1131,12 +1099,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function setSubject(?object $subject): void
     {
         if (null !== $subject && !is_a($subject, $this->getClass(), true)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" does not allow this subject: %s, use the one register with this admin class %s',
-                static::class,
-                \get_class($subject),
-                $this->getClass()
-            ));
+            throw new \LogicException(sprintf('Admin "%s" does not allow this subject: %s, use the one register with this admin class %s', static::class, \get_class($subject), $this->getClass()));
         }
 
         $this->subject = $subject;
@@ -1145,10 +1108,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getSubject(): object
     {
         if (!$this->hasSubject()) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no subject.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no subject.', static::class));
         }
         \assert(null !== $this->subject);
 
@@ -1180,11 +1140,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $this->buildForm();
 
         if (!$this->hasFormFieldDescription($name)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no form field description for the field %s.',
-                static::class,
-                $name
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no form field description for the field %s.', static::class, $name));
         }
 
         return $this->formFieldDescriptions[$name];
@@ -1233,11 +1189,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $this->buildShow();
 
         if (!$this->hasShowFieldDescription($name)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no show field description for the field %s.',
-                static::class,
-                $name
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no show field description for the field %s.', static::class, $name));
         }
 
         return $this->showFieldDescriptions[$name];
@@ -1272,11 +1224,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $this->buildList();
 
         if (!$this->hasListFieldDescription($name)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no list field description for %s.',
-                static::class,
-                $name
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no list field description for %s.', static::class, $name));
         }
 
         return $this->listFieldDescriptions[$name];
@@ -1304,11 +1252,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $this->buildDatagrid();
 
         if (!$this->hasFilterFieldDescription($name)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no filter field description for the field %s.',
-                static::class,
-                $name
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no filter field description for the field %s.', static::class, $name));
         }
 
         return $this->filterFieldDescriptions[$name];
@@ -1346,11 +1290,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         }
 
         if ($parentAdmin->getCode() === $child->getCode()) {
-            throw new \LogicException(sprintf(
-                'Circular reference detected! The child admin `%s` is already in the parent tree of the `%s` admin.',
-                $child->getCode(),
-                $this->getCode()
-            ));
+            throw new \LogicException(sprintf('Circular reference detected! The child admin `%s` is already in the parent tree of the `%s` admin.', $child->getCode(), $this->getCode()));
         }
 
         $this->children[$child->getCode()] = $child;
@@ -1371,11 +1311,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getChild(string $code): AdminInterface
     {
         if (!$this->hasChild($code)) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no child for the code %s.',
-                static::class,
-                $code
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no child for the code %s.', static::class, $code));
         }
 
         return $this->getChildren()[$code];
@@ -1390,10 +1326,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getParent(): AdminInterface
     {
         if (null === $this->parent) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no parent.',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no parent.', static::class));
         }
 
         return $this->parent;
@@ -1468,10 +1401,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getClassnameLabel(): string
     {
         if (null === $this->classnameLabel) {
-            throw new \LogicException(sprintf(
-                'Admin "%s" has no classname label. Did you forgot to initialize the admin ?',
-                static::class
-            ));
+            throw new \LogicException(sprintf('Admin "%s" has no classname label. Did you forgot to initialize the admin ?', static::class));
         }
 
         return $this->classnameLabel;
@@ -1561,7 +1491,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function getBaseCodeRoute(): string
     {
         if ($this->isChild()) {
-            return $this->getParent()->getBaseCodeRoute().'|'.$this->getCode();
+            return $this->getParent()->getBaseCodeRoute() . '|' . $this->getCode();
         }
 
         return $this->getCode();
@@ -1585,7 +1515,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function isGranted($name, ?object $object = null): bool
     {
         $objectRef = null !== $object ? sprintf('/%s#%s', spl_object_hash($object), $this->id($object) ?? '') : '';
-        $key = md5(json_encode($name).$objectRef);
+        $key = md5(json_encode($name) . $objectRef);
 
         if (!\array_key_exists($key, $this->cacheIsGranted)) {
             $this->cacheIsGranted[$key] = $this->getSecurityHandler()->isGranted($this, $name, $object ?? $this);
@@ -1716,11 +1646,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
         $access = $this->getAccess();
 
         if (!\array_key_exists($action, $access)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Action "%s" could not be found in access mapping.'
-                .' Please make sure your action is defined into your admin class accessMapping property.',
-                $action
-            ));
+            throw new \InvalidArgumentException(sprintf('Action "%s" could not be found in access mapping.' . ' Please make sure your action is defined into your admin class accessMapping property.', $action));
         }
 
         if (!\is_array($access[$action])) {
@@ -1998,7 +1924,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      */
     final protected function urlize(string $word, string $sep = '_'): string
     {
-        return strtolower(preg_replace('/[^a-z0-9_]/i', $sep.'$1', $word) ?? '');
+        return strtolower(preg_replace('/[^a-z0-9_]/i', $sep . '$1', $word) ?? '');
     }
 
     /**
@@ -2228,7 +2154,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
      *   $sortValues[DatagridInterface::SORT_BY] = 'foo'
      *   $sortValues[DatagridInterface::SORT_ORDER] = 'DESC'
      *
-     * @param array<string, string|int> $sortValues
+     * @param array<string, int|string> $sortValues
      * @phpstan-param array{
      *     _page?: int,
      *     _per_page?: int,
@@ -2281,7 +2207,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     }
 
     /**
-     * @return DatagridInterface<ProxyQueryInterface>|null
+     * @return null|DatagridInterface<ProxyQueryInterface>
      */
     private function buildDatagrid(): ?DatagridInterface
     {
@@ -2343,7 +2269,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     }
 
     /**
-     * @return FieldDescriptionCollection<FieldDescriptionInterface>|null
+     * @return null|FieldDescriptionCollection<FieldDescriptionInterface>
      */
     private function buildShow(): ?FieldDescriptionCollection
     {
@@ -2366,7 +2292,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     }
 
     /**
-     * @return FieldDescriptionCollection<FieldDescriptionInterface>|null
+     * @return null|FieldDescriptionCollection<FieldDescriptionInterface>
      */
     private function buildList(): ?FieldDescriptionCollection
     {

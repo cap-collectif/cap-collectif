@@ -10,8 +10,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method MailingList|null find($id, $lockMode = null, $lockVersion = null)
- * @method MailingList|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|MailingList find($id, $lockMode = null, $lockVersion = null)
+ * @method null|MailingList findOneBy(array $criteria, array $orderBy = null)
  * @method MailingList[]    findAll()
  * @method MailingList[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -27,9 +27,10 @@ class MailingListRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ml')
             ->setFirstResult($offset ?? 0)
             ->setMaxResults($limit ?? 50)
-            ->addOrderBy('ml.createdAt', 'DESC');
+            ->addOrderBy('ml.createdAt', 'DESC')
+        ;
         if ($search) {
-            $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%${search}%");
+            $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%{$search}%");
         }
         if ($affiliations && \in_array(MailingListAffiliation::OWNER, $affiliations) && $user) {
             $qb->join('ml.owner', 'o');
@@ -46,7 +47,8 @@ class MailingListRepository extends EntityRepository
             ->where(':user MEMBER OF ml.users')
             ->setParameter('user', $user)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findPaginatedByOwner(
@@ -58,10 +60,11 @@ class MailingListRepository extends EntityRepository
         $qb = $this->getByOwnerQueryBuilder($owner)
             ->setFirstResult($offset ?? 0)
             ->setMaxResults($limit ?? 50)
-            ->addOrderBy('ml.createdAt', 'DESC');
+            ->addOrderBy('ml.createdAt', 'DESC')
+        ;
 
         if ($search) {
-            $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%${search}%");
+            $qb->andWhere('ml.name LIKE :name')->setParameter('name', "%{$search}%");
         }
 
         return $qb->getQuery()->getResult();
@@ -72,7 +75,8 @@ class MailingListRepository extends EntityRepository
         return $this->getByOwnerQueryBuilder($owner)
             ->select('count(ml.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     private function getByOwnerQueryBuilder(Owner $owner): QueryBuilder
@@ -81,6 +85,7 @@ class MailingListRepository extends EntityRepository
 
         return $this->createQueryBuilder('ml')
             ->where("{$ownerField} = :owner")
-            ->setParameter('owner', $owner);
+            ->setParameter('owner', $owner)
+        ;
     }
 }

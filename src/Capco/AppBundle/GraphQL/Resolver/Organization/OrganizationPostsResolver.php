@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostOrderField;
-use Capco\AppBundle\Repository\PostRepository ;
+use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -33,7 +33,7 @@ class OrganizationPostsResolver implements ResolverInterface
             $orderByDirection = $argument->offsetGet('orderBy')['direction'] ?? OrderDirection::DESC;
             $hideUnpublishedPosts = $argument->offsetGet('hideUnpublishedPosts');
 
-            $options =  compact('query', 'orderByField', 'orderByDirection', 'hideUnpublishedPosts');
+            $options = compact('query', 'orderByField', 'orderByDirection', 'hideUnpublishedPosts');
 
             $results = $this->repository->getByOwner(
                 $organization,

@@ -26,7 +26,8 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $list, [
             MailingListVoter::VIEW,
@@ -43,19 +44,23 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection());
+            ->willReturn(new ArrayCollection())
+        ;
 
         $this->vote($token, $list, [
             MailingListVoter::VIEW,
@@ -72,11 +77,13 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $list, [MailingListVoter::VIEW])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -92,19 +99,23 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $ownedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $notOwnedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $notOwnedList, [MailingListVoter::VIEW])->shouldBe(
             MailingListVoter::ACCESS_DENIED
@@ -125,23 +136,28 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $ownedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $notOwnedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $notOwnedList, [MailingListVoter::VIEW])->shouldBe(
             MailingListVoter::ACCESS_DENIED
@@ -156,11 +172,13 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, new MailingList(), [MailingListVoter::CREATE])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -172,15 +190,18 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, new MailingList(), [MailingListVoter::CREATE])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -195,19 +216,23 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection([$memberShip]));
+            ->willReturn(new ArrayCollection([$memberShip]))
+        ;
 
         $this->vote($token, new MailingList(), [MailingListVoter::CREATE])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -223,19 +248,23 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $deletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $undeletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->vote($token, $deletableList, [MailingListVoter::DELETE])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -255,31 +284,38 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $deletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $deletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $undeletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $undeletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $notOwnedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $deletableList, [MailingListVoter::DELETE])->shouldBe(
             MailingListVoter::ACCESS_GRANTED
@@ -304,40 +340,49 @@ class MailingListVoterSpec extends ObjectBehavior
         $tokenAdmin
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($admin);
+            ->willReturn($admin)
+        ;
         $admin
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization
             ->getMembership($admin)
             ->shouldBeCalled()
-            ->willReturn($adminMemberShip);
+            ->willReturn($adminMemberShip)
+        ;
         $adminMemberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
 
         $notOwnedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $undeletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $undeletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $deletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $deletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($tokenAdmin, $notOwnedList, [MailingListVoter::DELETE])->shouldBe(
             MailingListVoter::ACCESS_DENIED
@@ -363,56 +408,69 @@ class MailingListVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($creator);
+            ->willReturn($creator)
+        ;
         $creator
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization
             ->getMembership($creator)
             ->shouldBeCalled()
-            ->willReturn($membership);
+            ->willReturn($membership)
+        ;
         $membership
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
 
         $notOwnedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $notCreatedList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $notCreatedList
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $undeletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $undeletableList
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($creator);
+            ->willReturn($creator)
+        ;
         $undeletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $deletableList
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $deletableList
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($creator);
+            ->willReturn($creator)
+        ;
         $deletableList
             ->isDeletable()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $notOwnedList, [MailingListVoter::DELETE])->shouldBe(
             MailingListVoter::ACCESS_DENIED

@@ -32,18 +32,15 @@ class AdminProposalFormPage extends Page
         'proposal form address zoom' => '#proposal_form_zoom_map',
         'proposal form category mandatory' => '#proposal_form_category_mandatory',
         'proposal form category mandatory help' => '#proposal_form_category_help_text',
-        'proposal form category add' =>
-            '#proposal_form_admin_category_panel_body .form-group button',
+        'proposal form category add' => '#proposal_form_admin_category_panel_body .form-group button',
         'proposal form category add popup title' => '#categories[0].name',
         'proposal form category add popup save' => '#ProposalFormAdminCategoriesStepModal-submit',
         'proposal form personal-field add' => '#js-btn-create-question',
         'proposal form personal-field add popup required' => 'input[name="questions[0]\.required"]',
         'proposal form personal-field add popup private' => 'input[name="questions[0]\.private"]',
         'proposal form personal-field add popup save' => '.modal-content .btn-primary',
-        'proposal form notification proposition modified' =>
-            '#proposal_form_notification_on_update',
-        'proposal form notification commentary created' =>
-            '#proposal_form_notification_comment_on_create',
+        'proposal form notification proposition modified' => '#proposal_form_notification_on_update',
+        'proposal form notification commentary created' => '#proposal_form_notification_comment_on_create',
         'proposal form evaluation question' => '#evaluation-form',
         'proposal form parameters commentable' => '#proposal_form_commentable',
         'proposal form parameters costable' => '#proposal_form_costable',
@@ -74,22 +71,27 @@ class AdminProposalFormPage extends Page
                 $this->getElement('link tab configuration')->click();
 
                 break;
+
             case 'analysis':
                 $this->getElement('link tab analysis')->click();
 
                 break;
+
             case 'new-analysis':
                 $this->getElement('link tab new analysis')->click();
 
                 break;
+
             case 'notification':
                 $this->getElement('link tab notification')->click();
 
                 break;
+
             case 'settings':
                 $this->getElement('link tab settings')->click();
 
                 break;
+
             default:
                 return;
         }
@@ -116,9 +118,7 @@ class AdminProposalFormPage extends Page
     public function verifyPage()
     {
         if (!$this->getSession()->wait(10000, "$('.admin_proposal_form').length > 0")) {
-            throw new \RuntimeException(
-                'AdminProposalFormPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('AdminProposalFormPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

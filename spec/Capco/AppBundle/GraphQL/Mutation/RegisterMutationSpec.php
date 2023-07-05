@@ -24,12 +24,12 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Prophecy\Argument;
 
 BypassFinals::enable();
 
@@ -88,12 +88,14 @@ class RegisterMutationSpec extends ObjectBehavior
         $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
-            ->willReturn('any-ip');
+            ->willReturn('any-ip')
+        ;
         $rateLimiter->setLimit(Argument::type('int'))->shouldBeCalled();
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(2);
@@ -126,19 +128,23 @@ class RegisterMutationSpec extends ObjectBehavior
         $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
-            ->willReturn('any-ip');
+            ->willReturn('any-ip')
+        ;
         $rateLimiter->setLimit(Argument::type('int'))->shouldBeCalled();
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $userInviteRepository
             ->findOneByTokenNotExpiredAndEmail('theToken', 'toto@test.com')
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $organizationInvitationRepository
             ->findOneBy(['token' => 'theToken', 'email' => 'toto@test.com'])
-            ->willReturn($organizationInvitation);
+            ->willReturn($organizationInvitation)
+        ;
         $organizationInvitation->getEmail()->willReturn('toto@test.com');
         $organizationInvitation->getToken()->willReturn('theToken');
         $organizationInvitation->getOrganization()->willReturn($organization);
@@ -149,11 +155,13 @@ class RegisterMutationSpec extends ObjectBehavior
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $formFactory
             ->create(ApiRegistrationFormType::class, Argument::type(User::class))
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit(['email' => 'toto@test.com'], false)->willReturn(null);
 
         $form->isValid()->willReturn(true);
@@ -163,7 +171,8 @@ class RegisterMutationSpec extends ObjectBehavior
         $userInvitationHandler->handleUserInvite($user->getWrappedObject())->shouldBeCalled();
         $userInvitationHandler
             ->handleUserOrganizationInvite($user->getWrappedObject())
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $userManager->updatePassword($user->getWrappedObject())->shouldBeCalled();
         $organizationsMembers = new ArrayCollection([$organizationMember->getWrappedObject()]);
         $user->getMemberOfOrganizations()->willReturn($organizationsMembers);

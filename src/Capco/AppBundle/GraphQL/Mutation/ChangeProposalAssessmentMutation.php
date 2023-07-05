@@ -78,10 +78,10 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             ];
         }
 
-        /** @var $proposalDecision ProposalDecision */
+        /** @var ProposalDecision $proposalDecision */
         if (
-            ($proposalDecision = $proposal->getDecision()) &&
-            ProposalStatementState::DONE === $proposalDecision->getState()
+            ($proposalDecision = $proposal->getDecision())
+            && ProposalStatementState::DONE === $proposalDecision->getState()
         ) {
             return [
                 'assessment' => null,
@@ -101,7 +101,8 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             ->setUpdatedBy($viewer)
             ->setBody($body)
             ->setOfficialResponse($officialResponse)
-            ->setEstimatedCost($estimatedCost);
+            ->setEstimatedCost($estimatedCost)
+        ;
 
         try {
             $this->entityManager->persist($proposalAssessment);
@@ -138,8 +139,8 @@ class ChangeProposalAssessmentMutation implements MutationInterface
             'date' => $proposalAssessment->getUpdatedAt()->format('Y-m-d H:i:s'),
         ];
         if (
-            $proposalAssessment->getState() !== $oldState &&
-            \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
+            $proposalAssessment->getState() !== $oldState
+            && \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
         ) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,

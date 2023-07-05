@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Repository\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
-use Doctrine\ORM\EntityRepository;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * @method PendingOrganizationInvitation|null find($id, $lockMode = null, $lockVersion = null)
- * @method PendingOrganizationInvitation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|PendingOrganizationInvitation find($id, $lockMode = null, $lockVersion = null)
+ * @method null|PendingOrganizationInvitation findOneBy(array $criteria, array $orderBy = null)
  * @method PendingOrganizationInvitation[]    findAll()
  * @method PendingOrganizationInvitation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,7 +26,8 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->setMaxResults($limit)
             ->setParameter('organization', $organization)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOrganization(Organization $organization): int
@@ -60,6 +61,7 @@ class PendingOrganizationInvitationRepository extends EntityRepository
             ->orWhere('p.email = :email')
             ->setParameters(['organization' => $organization, 'user' => $user, 'email' => $email])
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

@@ -2,18 +2,18 @@
 
 namespace spec\Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use Capco\AppBundle\Repository\FollowerRepository;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
@@ -71,13 +71,15 @@ class ProposalViewerIsFollowingDataLoaderSpec extends ObjectBehavior
 
         $followerRepository
             ->getByProposalIdsAndUser(['proposal1', 'proposal2'], $viewer)
-            ->willReturn([$follower1, $follower2]);
+            ->willReturn([$follower1, $follower2])
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll([true, true])
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }

@@ -17,7 +17,8 @@ class ProposalDecisionMakerRepository extends EntityRepository
             ->andWhere('pdm.proposal IN (:proposals)')
             ->setParameter('proposals', $proposalIds)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function deleteByProposals(array $proposals)
@@ -27,6 +28,7 @@ class ProposalDecisionMakerRepository extends EntityRepository
             ->andWhere('proposalDecisionMaker.proposal IN (:proposals)')
             ->setParameter(':proposals', $proposals)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

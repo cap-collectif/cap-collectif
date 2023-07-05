@@ -10,9 +10,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
 class ReportableReportingResolver implements ResolverInterface
@@ -32,7 +32,7 @@ class ReportableReportingResolver implements ResolverInterface
         $countFor = '';
         $getBy = '';
         // contains $getBy $countFor and can contains $contributionType
-        extract($this->getTypeOfContribution($contribution), EXTR_OVERWRITE);
+        extract($this->getTypeOfContribution($contribution), \EXTR_OVERWRITE);
 
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use (
@@ -55,13 +55,15 @@ class ReportableReportingResolver implements ResolverInterface
                             $direction
                         )
                         ->getIterator()
-                        ->getArrayCopy();
+                        ->getArrayCopy()
+                    ;
                 }
 
                 return $this->repository
                     ->{$getBy}($contribution, $offset, $limit, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             if ($contributionType) {

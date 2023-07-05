@@ -97,7 +97,8 @@ class ProjectContributionResolver implements ResolverInterface
         $counters = [];
         $response = $this->contributionSearch
             ->getContributionsCountsByProject($projectId, $objectTypes)
-            ->getAggregation('contributionsCountsByType');
+            ->getAggregation('contributionsCountsByType')
+        ;
         foreach ($objectTypes as $objectType) {
             $counters[$objectType] = 0;
             foreach ($response['buckets'] as $bucket) {

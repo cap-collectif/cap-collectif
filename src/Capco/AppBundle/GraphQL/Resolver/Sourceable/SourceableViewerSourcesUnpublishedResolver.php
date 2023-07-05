@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\Sourceable;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\SourceRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class SourceableViewerSourcesUnpublishedResolver implements ResolverInterface
 {

@@ -9,7 +9,7 @@ class EventAccessDeniedException extends \RuntimeException
 
     public function __construct(
         string $message = 'Event Access Denied.',
-        \Exception $previous = null
+        ?\Exception $previous = null
     ) {
         parent::__construct($message, 403, $previous);
     }

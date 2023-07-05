@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;

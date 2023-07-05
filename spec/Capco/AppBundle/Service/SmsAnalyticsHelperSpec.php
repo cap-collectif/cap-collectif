@@ -13,24 +13,22 @@ use PhpSpec\ObjectBehavior;
 
 class SmsAnalyticsHelperSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         SmsCreditRepository $smsCreditRepository,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $this->beConstructedWith($smsCreditRepository, $userPhoneVerificationSmsRepository, $anonymousUserProposalSmsVoteRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(SmsAnalyticsHelper::class);
     }
 
     public function it_should_call_sum_all(
         SmsCreditRepository $smsCreditRepository
-    )
-    {
+    ) {
         $total = 5000;
         $smsCreditRepository->sumAll()->shouldBeCalledOnce()->willReturn($total);
         $this->getTotalCredits()->shouldReturn($total);
@@ -39,8 +37,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
     public function it_should_call_count_phone_confirmed_users(
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $confirmedUsersCount = 100;
         $anonVoteConfirmedUsersCount = 50;
         $userPhoneVerificationSmsRepository->countApprovedSms()->shouldBeCalledOnce()->willReturn($confirmedUsersCount);
@@ -52,8 +49,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         SmsCreditRepository $smsCreditRepository,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $total = 5000;
         $smsCreditRepository->sumAll()->shouldBeCalledOnce()->willReturn($total);
 
@@ -72,8 +68,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         SmsCredit $mostRecentRefill,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $totalCredits = 5000;
         $status = RemainingSmsCreditStatus::IDLE;
 
@@ -82,7 +77,8 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         $anonymousUserProposalSmsVoteRepository->countApprovedSms()->shouldBeCalledOnce()->willReturn(50);
 
         $smsCreditRepository->findMostRecent()->shouldBeCalledOnce()
-            ->willReturn($mostRecentRefill);
+            ->willReturn($mostRecentRefill)
+        ;
         $mostRecentRefill->getAmount()->willReturn(1000);
 
         $this->getRemainingCreditsStatus()->shouldReturn($status);
@@ -93,8 +89,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         SmsCredit $mostRecentRefill,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $totalCredits = 5000;
         $status = RemainingSmsCreditStatus::LOW;
 
@@ -103,7 +98,8 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         $anonymousUserProposalSmsVoteRepository->countApprovedSms()->shouldBeCalledOnce()->willReturn(50);
 
         $smsCreditRepository->findMostRecent()->shouldBeCalledOnce()
-            ->willReturn($mostRecentRefill);
+            ->willReturn($mostRecentRefill)
+        ;
         $mostRecentRefill->getAmount()->willReturn(1000);
 
         $this->getRemainingCreditsStatus()->shouldReturn($status);
@@ -114,8 +110,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         SmsCredit $mostRecentRefill,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $totalCredits = 5000;
         $consumedCredits = 4910;
         $status = RemainingSmsCreditStatus::VERY_LOW;
@@ -125,7 +120,8 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         $anonymousUserProposalSmsVoteRepository->countApprovedSms()->shouldBeCalledOnce()->willReturn(10);
 
         $smsCreditRepository->findMostRecent()->shouldBeCalledOnce()
-            ->willReturn($mostRecentRefill);
+            ->willReturn($mostRecentRefill)
+        ;
         $mostRecentRefill->getAmount()->willReturn(1000);
 
         $this->getRemainingCreditsStatus()->shouldReturn($status);
@@ -136,8 +132,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         SmsCredit $mostRecentRefill,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $totalCredits = 5000;
         $status = RemainingSmsCreditStatus::TOTAL;
 
@@ -146,7 +141,8 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         $anonymousUserProposalSmsVoteRepository->countApprovedSms()->shouldBeCalledOnce()->willReturn(100);
 
         $smsCreditRepository->findMostRecent()->shouldBeCalledOnce()
-            ->willReturn($mostRecentRefill);
+            ->willReturn($mostRecentRefill)
+        ;
         $mostRecentRefill->getAmount()->willReturn(1000);
 
         $this->getRemainingCreditsStatus()->shouldReturn($status);
@@ -158,8 +154,7 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         SmsCredit $mostRecentRefill,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    )
-    {
+    ) {
         $totalCredits = 5000;
         $status = RemainingSmsCreditStatus::TOTAL;
 
@@ -169,13 +164,10 @@ class SmsAnalyticsHelperSpec extends ObjectBehavior
 
         $smsCreditRepository->findMostRecent()
             ->shouldBeCalledOnce()
-            ->willReturn($mostRecentRefill);
+            ->willReturn($mostRecentRefill)
+        ;
         $mostRecentRefill->getAmount()->willReturn(1000);
 
         $this->getRemainingCreditsStatus()->shouldReturn($status);
     }
-
-
-
-
 }

@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Repository\SiteColorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Capco\AppBundle\Repository\SiteColorRepository;
 
 class SiteColorAdmin extends AbstractAdmin
 {
@@ -56,7 +56,8 @@ class SiteColorAdmin extends AbstractAdmin
             ->add('value', null, [
                 'label' => 'global.value',
                 'attr' => ['class' => 'minicolors-input'],
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

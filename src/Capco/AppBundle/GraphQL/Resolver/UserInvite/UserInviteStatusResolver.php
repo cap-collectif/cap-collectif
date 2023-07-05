@@ -37,8 +37,8 @@ class UserInviteStatusResolver implements ResolverInterface
             ($lastEmailMessage = $this->emailMessageRepository->findOneBy(
                 ['invitation' => $userInvite],
                 ['createdAt' => 'DESC']
-            )) &&
-            UserInviteEmailMessage::SEND_FAILURE === $lastEmailMessage->getInternalStatus()
+            ))
+            && UserInviteEmailMessage::SEND_FAILURE === $lastEmailMessage->getInternalStatus()
         ) {
             return UserInviteStatus::FAILED;
         }

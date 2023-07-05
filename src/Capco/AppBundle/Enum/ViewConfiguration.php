@@ -19,9 +19,9 @@ class ViewConfiguration implements EnumType
     public static function checkProposalForm(ProposalForm $proposalForm): void
     {
         if (
-            !$proposalForm->isGridViewEnabled() &&
-            !$proposalForm->isListViewEnabled() &&
-            !$proposalForm->isMapViewEnabled()
+            !$proposalForm->isGridViewEnabled()
+            && !$proposalForm->isListViewEnabled()
+            && !$proposalForm->isMapViewEnabled()
         ) {
             throw new ViewConfigurationException(ViewConfigurationException::NO_VIEW_ACTIVE);
         }
@@ -35,8 +35,8 @@ class ViewConfiguration implements EnumType
         if ($proposalForm->getProject()) {
             foreach ($proposalForm->getProject()->getSteps() as $projectStep) {
                 if (
-                    $projectStep->getStep() instanceof CollectStep ||
-                    $projectStep->getStep() instanceof SelectionStep
+                    $projectStep->getStep() instanceof CollectStep
+                    || $projectStep->getStep() instanceof SelectionStep
                 ) {
                     self::updateOneStepFromItsProposal($proposalForm, $projectStep->getStep());
                 }
@@ -64,9 +64,9 @@ class ViewConfiguration implements EnumType
         AbstractStep $step
     ): void {
         if (
-            (self::GRID === $step->getMainView() && !$proposalForm->isGridViewEnabled()) ||
-            (self::LIST === $step->getMainView() && !$proposalForm->isListViewEnabled()) ||
-            (self::MAP === $step->getMainView() && !$proposalForm->isMapViewEnabled())
+            (self::GRID === $step->getMainView() && !$proposalForm->isGridViewEnabled())
+            || (self::LIST === $step->getMainView() && !$proposalForm->isListViewEnabled())
+            || (self::MAP === $step->getMainView() && !$proposalForm->isMapViewEnabled())
         ) {
             if ($proposalForm->isGridViewEnabled()) {
                 $step->setMainView(self::GRID);

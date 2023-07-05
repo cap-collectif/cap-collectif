@@ -4,11 +4,11 @@ namespace spec\Capco\UserBundle\Security;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\SessionWithJsonHandler;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Predis\ClientInterface;
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Security as SymfonySecurity;
 
 class SessionWithJsonHandlerSpec extends ObjectBehavior

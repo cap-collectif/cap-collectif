@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step;
 
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
-use Capco\AppBundle\Search\VoteSearch;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Search\VoteSearch;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class StepVotesCountDataLoader extends BatchDataLoader
 {
@@ -82,13 +82,13 @@ class StepVotesCountDataLoader extends BatchDataLoader
         if ($step instanceof CollectStep) {
             $smsVotes = $this->proposalCollectSmsVoteRepository->countPublishedCollectVoteByStep($step, $onlyAccounted);
             if ($anonymous) {
-                
                 return $this->proposalCollectSmsVoteRepository->countDistinctPhonePublishedCollectVoteByStep($step, $onlyAccounted);
             }
             $votes = $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
                 $step,
                 $onlyAccounted
             );
+
             return $votes + $smsVotes;
         }
 
@@ -101,6 +101,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
                 $step,
                 $onlyAccounted
             );
+
             return $votes + $smsVotes;
         }
 

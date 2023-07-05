@@ -237,7 +237,8 @@ trait QuestionnaireStepsTrait
     {
         $qlEditors = $this->getSession()
             ->getPage()
-            ->findAll('css', '.ql-editor.ql-blank');
+            ->findAll('css', '.ql-editor.ql-blank')
+        ;
         /** @var NodeElement $qlEditor */
         foreach ($qlEditors as $qlEditor) {
             if ($qlEditor->hasAttribute('contenteditable')) {
@@ -246,7 +247,8 @@ trait QuestionnaireStepsTrait
         }
         $inputs = $this->getSession()
             ->getPage()
-            ->findAll('css', 'input');
+            ->findAll('css', 'input')
+        ;
         foreach ($inputs as $input) {
             if ($input->hasAttribute('data-video')) {
                 continue;
@@ -255,7 +257,8 @@ trait QuestionnaireStepsTrait
         }
         $textareas = $this->getSession()
             ->getPage()
-            ->findAll('css', 'textarea');
+            ->findAll('css', 'textarea')
+        ;
         foreach ($textareas as $textarea) {
             Assert::assertTrue($textarea->hasAttribute('disabled'));
         }
@@ -274,7 +277,8 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
-            ->getSelectorForUserReply();
+            ->getSelectorForUserReply()
+        ;
         $this->waitAndThrowOnFailure(10000, "$('" . $userReplySelector . "').length == " . $nb);
     }
 
@@ -286,7 +290,8 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
-            ->getSelectorForUserReply();
+            ->getSelectorForUserReply()
+        ;
         $this->waitAndThrowOnFailure(10000, "$('" . $userReplySelector . "').length === 2");
         $this->assertElementContainsText($userReplySelector, 'reply.private');
     }
@@ -299,7 +304,8 @@ trait QuestionnaireStepsTrait
         $this->iShouldSeeElementOnPage('user replies', 'questionnaire page');
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
-            ->getSelectorForUserReply();
+            ->getSelectorForUserReply()
+        ;
         $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length === 1");
         $this->waitAndThrowOnFailure(3000, "$('#reply-form-container').length === 0");
     }
@@ -311,7 +317,8 @@ trait QuestionnaireStepsTrait
     {
         $userReplySelector = $this->navigationContext
             ->getPage('questionnaire page')
-            ->getSelectorForUserReply();
+            ->getSelectorForUserReply()
+        ;
         $this->waitAndThrowOnFailure(3000, "$('" . $userReplySelector . "').length == 0");
     }
 
@@ -323,7 +330,8 @@ trait QuestionnaireStepsTrait
         $this->scrollToElement('#CreateReplyForm-responses4');
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceButtonPick();
+            ->clickFirstRankingChoiceButtonPick()
+        ;
     }
 
     public function iClickOnRankingChoicesButtonPickUpdate()
@@ -331,10 +339,12 @@ trait QuestionnaireStepsTrait
         $this->scrollToElement('#UpdateReplyForm-UmVwbHk6cmVwbHky-responses4');
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickFirstRankingChoiceButtonPickUpdate();
+            ->clickFirstRankingChoiceButtonPickUpdate()
+        ;
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickSecondRankingChoiceButtonPickUpdate();
+            ->clickSecondRankingChoiceButtonPickUpdate()
+        ;
     }
 
     /**
@@ -423,7 +433,8 @@ trait QuestionnaireStepsTrait
     {
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickConfirmDeleteLastReplyButton();
+            ->clickConfirmDeleteLastReplyButton()
+        ;
     }
 
     /**
@@ -449,7 +460,8 @@ trait QuestionnaireStepsTrait
     {
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickConfirmDeleteReplyDraftButton();
+            ->clickConfirmDeleteReplyDraftButton()
+        ;
     }
 
     /**
@@ -459,7 +471,8 @@ trait QuestionnaireStepsTrait
     {
         $this->navigationContext
             ->getPage('questionnaire page')
-            ->clickConfirmDelete2ndReplyDraftButton();
+            ->clickConfirmDelete2ndReplyDraftButton()
+        ;
     }
 
     /**
@@ -469,7 +482,8 @@ trait QuestionnaireStepsTrait
     {
         $deleteButtonSelector = $this->navigationContext
             ->getPage('questionnaire page')
-            ->getDeleteReplyButtonSelector();
+            ->getDeleteReplyButtonSelector()
+        ;
         $this->assertElementNotOnPage($deleteButtonSelector);
     }
 

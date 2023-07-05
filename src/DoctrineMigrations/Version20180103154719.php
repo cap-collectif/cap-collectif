@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -119,7 +119,7 @@ class Version20180103154719 extends AbstractMigration
 
     private function setPosition($keyname, $position)
     {
-        echo "-> Updating ${keyname} with position ${position} " . PHP_EOL;
+        echo "-> Updating {$keyname} with position {$position} " . \PHP_EOL;
         echo $this->connection->update(
             'site_parameter',
             ['position' => $position],

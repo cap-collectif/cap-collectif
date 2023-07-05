@@ -5,20 +5,20 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 use Capco\AppBundle\DTO\DebateAnonymousParticipationHashData;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Encoder\DebateAnonymousParticipationHashEncoder;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Debate\Debate;
 use Doctrine\DBAL\Driver\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RemoveDebateAnonymousVoteMutation implements MutationInterface

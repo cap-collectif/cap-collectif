@@ -2,9 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -14,19 +15,18 @@ use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
+use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Doctrine\UserManager;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\UserGroupRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -103,7 +103,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
 
         $this->session
             ->getFlashBag()
-            ->add('success', $this->translator->trans('deleted-user', [], 'CapcoAppBundle'));
+            ->add('success', $this->translator->trans('deleted-user', [], 'CapcoAppBundle'))
+        ;
 
         return ['userId' => $userId];
     }

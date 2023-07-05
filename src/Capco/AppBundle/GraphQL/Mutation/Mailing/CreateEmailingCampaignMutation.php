@@ -11,8 +11,8 @@ use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

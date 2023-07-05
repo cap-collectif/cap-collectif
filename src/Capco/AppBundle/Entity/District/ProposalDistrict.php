@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\Proposal;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDistrictRepository")

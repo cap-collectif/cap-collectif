@@ -10,25 +10,25 @@ use Capco\AppBundle\DTO\Analytics\AnalyticsComments;
 use Capco\AppBundle\DTO\Analytics\AnalyticsContributions;
 use Capco\AppBundle\DTO\Analytics\AnalyticsContributors;
 use Capco\AppBundle\DTO\Analytics\AnalyticsFollowers;
+use Capco\AppBundle\DTO\Analytics\AnalyticsMostVisitedPages;
 use Capco\AppBundle\DTO\Analytics\AnalyticsPageViews;
 use Capco\AppBundle\DTO\Analytics\AnalyticsRegistrations;
 use Capco\AppBundle\DTO\Analytics\AnalyticsTrafficSources;
-use Capco\AppBundle\DTO\Analytics\AnalyticsMostVisitedPages;
 use Capco\AppBundle\DTO\Analytics\AnalyticsVisitors;
 use Capco\AppBundle\DTO\Analytics\AnalyticsVotes;
-use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\Elasticsearch\AnalyticsMostUsedProposalCategories;
+use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Search\AnalyticsSearch;
 use DateTimeInterface;
 use GraphQL\Error\UserError;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
-use GraphQL\Executor\Promise\Promise;
 
 class QueryAnalyticsDataLoader extends BatchDataLoader
 {
@@ -91,7 +91,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
 
         $projectSlug = null;
         if ($projectId) {
-            /** @var $project Project */
+            /** @var Project $project */
             $project = $this->projectRepository->find($projectId);
             if (!$project) {
                 throw new UserError('This project id does not exist.');
@@ -158,7 +158,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
             if (isset($sets['topContributors'])) {
                 $results['topContributors'] = $this->analyticsTopContributors
                     ->fromEs($sets['topContributors'])
-                    ->getContributors();
+                    ->getContributors()
+                ;
             }
             if (isset($sets['anonymousContributors'])) {
                 $results['anonymousContributors'] = AnalyticsAnonymousContributors::fromEs(
@@ -175,8 +176,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         }
 
         if (
-            !empty(array_intersect($requestedFields, $externalAnalyticKeys)) &&
-            ($externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
+            !empty(array_intersect($requestedFields, $externalAnalyticKeys))
+            && ($externalSets = $this->cloudflareElasticClient->getExternalAnalyticsResultSet(
                 $start,
                 $end,
                 $projectSlug,
@@ -198,8 +199,8 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         }
 
         if (
-            \in_array('trafficSources', $requestedFields, true) &&
-            ($trafficSources = $this->cloudflareElasticClient->getTrafficSourcesAnalyticsResultSet(
+            \in_array('trafficSources', $requestedFields, true)
+            && ($trafficSources = $this->cloudflareElasticClient->getTrafficSourcesAnalyticsResultSet(
                 $start,
                 $end,
                 $projectSlug

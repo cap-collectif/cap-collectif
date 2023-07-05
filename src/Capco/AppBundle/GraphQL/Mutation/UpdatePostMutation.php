@@ -60,6 +60,7 @@ class UpdatePostMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             return ['post' => null, 'errorCode' => self::INVALID_FORM];
         }
 

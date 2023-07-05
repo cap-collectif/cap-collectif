@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Form\DebateStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -51,6 +51,7 @@ class UpdateDebateStepMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 
@@ -80,8 +81,7 @@ class UpdateDebateStepMutation implements MutationInterface
         if (!$debate instanceof DebateStep) {
             throw new UserError("Given debateStep id : {$debateStepId} is not valid");
         }
+
         return $debate;
     }
-
-
 }

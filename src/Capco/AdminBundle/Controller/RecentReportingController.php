@@ -5,12 +5,12 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AdminBundle\Admin\ReportingAdmin;
 use Capco\AdminBundle\Resolver\RecentReportingResolver;
 use Capco\AppBundle\Entity\Reporting;
-use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
-use Sonata\AdminBundle\Admin\Pool;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class RecentReportingController extends Controller
 {

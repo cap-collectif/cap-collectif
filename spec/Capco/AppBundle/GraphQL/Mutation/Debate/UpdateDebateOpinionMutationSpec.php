@@ -2,16 +2,16 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Form\DebateOpinionType;
+use Capco\AppBundle\GraphQL\Mutation\Debate\UpdateDebateOpinionMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Form\DebateOpinionType;
-use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Mutation\Debate\UpdateDebateOpinionMutation;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateOpinionMutationSpec extends ObjectBehavior
@@ -65,7 +65,8 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
 
         $formFactory->create(DebateOpinionType::class, $debateOpinion)->willReturn($form);
@@ -117,7 +118,8 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
         $form->all()->willReturn([]);
         $logger
             ->error('Invalid `DebateOpinionType` form data.', ['errors' => []])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $formFactory->create(DebateOpinionType::class, $debateOpinion)->willReturn($form);
 
         $payload = $this->__invoke($input);

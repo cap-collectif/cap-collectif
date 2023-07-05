@@ -38,7 +38,7 @@ class ProgressBarProcessor implements ProcessorInterface
                 $this->progressBar->start();
             }
             $this->progressBar->setMessage(
-                'Pre processing…<info>' . \get_class($object) . '</info>' . PHP_EOL
+                'Pre processing…<info>' . \get_class($object) . '</info>' . \PHP_EOL
             );
             $this->progressBar->advance();
         }
@@ -51,7 +51,7 @@ class ProgressBarProcessor implements ProcessorInterface
     {
         if ($this->output) {
             $this->progressBar->setMessage(
-                'Post processing…<info>' . \get_class($object) . '</info>' . PHP_EOL
+                'Post processing…<info>' . \get_class($object) . '</info>' . \PHP_EOL
             );
             $this->progressBar->advance();
         }

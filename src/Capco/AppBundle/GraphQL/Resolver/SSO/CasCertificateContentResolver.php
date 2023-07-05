@@ -3,19 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Helper\SplFileInfo;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class CasCertificateContentResolver implements ResolverInterface
 {
     /**
-     * @var SplFileInfo The SplFileInfo service.
+     * @var SplFileInfo the SplFileInfo service
      */
     protected SplFileInfo $splFileInfo;
 
-    /**
-     * @param SplFileInfo $splFileInfo
-     */
     public function __construct(SplFileInfo $splFileInfo)
     {
         $this->splFileInfo = $splFileInfo;
@@ -29,8 +26,6 @@ class CasCertificateContentResolver implements ResolverInterface
             return $content;
         }
 
-        throw new \RuntimeException(
-            'certificate not found : ' . $configuration->getCasCertificateFile()
-        );
+        throw new \RuntimeException('certificate not found : ' . $configuration->getCasCertificateFile());
     }
 }

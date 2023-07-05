@@ -22,9 +22,7 @@ class ContactPage extends Page
                 "document.querySelectorAll('.contact__form').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'ContactPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('ContactPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

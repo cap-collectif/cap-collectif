@@ -42,7 +42,8 @@ class ProjectDistrictsFieldSubscriber implements EventSubscriberInterface
             ->map(static function (ProjectDistrict $district) {
                 return $district->getId();
             })
-            ->toArray();
+            ->toArray()
+        ;
         $this->persister->persist($districtIds, $project);
     }
 }

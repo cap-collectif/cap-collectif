@@ -37,7 +37,8 @@ class MailingListUsersConnection implements ResolverInterface
                     $limit
                 )
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
 
         return $paginator->auto(

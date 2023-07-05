@@ -2,29 +2,29 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Swarrot\Broker\Message;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Form\ArgumentType;
-use Capco\AppBundle\Model\Argumentable;
-use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Model\Argumentable;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class AddArgumentMutation implements MutationInterface
 {
@@ -97,8 +97,8 @@ class AddArgumentMutation implements MutationInterface
         $step = $argumentable->getStep();
 
         if (
-            $step &&
-            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)
+            $step
+            && !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($author, $step)
         ) {
             $this->logger->error('You dont meets all the requirements.');
             $error = ['message' => 'You dont meets all the requirements.'];

@@ -4,11 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class MailingListOwnerTypeResolver implements ResolverInterface
 {
@@ -23,7 +23,7 @@ class MailingListOwnerTypeResolver implements ResolverInterface
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
-        if (!in_array($currentSchemaName, ['internal', 'dev']) && !$data instanceof Author) {
+        if (!\in_array($currentSchemaName, ['internal', 'dev']) && !$data instanceof Author) {
             throw new UserError('Could not resolve type of MailingListOwner.');
         }
 

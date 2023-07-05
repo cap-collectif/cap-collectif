@@ -3,8 +3,8 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
 {
@@ -26,7 +26,8 @@ class OpinionTypeAppendixTypeAdmin extends CapcoAdmin
             ->add('appendixType', ModelType::class, [
                 'label' => 'admin.fields.opiniontype_appendixtype.appendix_type',
                 'required' => true,
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

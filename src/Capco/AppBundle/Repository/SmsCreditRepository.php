@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\SmsCredit;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method SmsCredit|null find($id, $lockMode = null, $lockVersion = null)
- * @method SmsCredit|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|SmsCredit find($id, $lockMode = null, $lockVersion = null)
+ * @method null|SmsCredit findOneBy(array $criteria, array $orderBy = null)
  * @method SmsCredit[]    findAll()
  * @method SmsCredit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -41,6 +41,7 @@ class SmsCreditRepository extends EntityRepository
             ->orderBy('s.createdAt', 'DESC')
             ->getQuery()
             ->setMaxResults(1)
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 }

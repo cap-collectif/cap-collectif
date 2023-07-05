@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class QuestionTypeResolver implements ResolverInterface
 {
@@ -27,8 +27,8 @@ class QuestionTypeResolver implements ResolverInterface
 
         if ($question instanceof SimpleQuestion) {
             if (
-                'preview' === $currentSchemaName &&
-                AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
+                'preview' === $currentSchemaName
+                && AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
             ) {
                 return $this->typeResolver->resolve('PreviewMajorityQuestion');
             }

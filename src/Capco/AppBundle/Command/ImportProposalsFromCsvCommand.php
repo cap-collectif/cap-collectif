@@ -11,8 +11,8 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Utils\Map;
@@ -118,7 +118,8 @@ class ImportProposalsFromCsvCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'Delimiter used in csv',
                 ';'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int
@@ -212,7 +213,8 @@ class ImportProposalsFromCsvCommand extends Command
                 }
 
                 $district = $this->districtRepository->findDistrictByName(
-                    trim($row[$this->headers['district_name']]), $this->proposalForm
+                    trim($row[$this->headers['district_name']]),
+                    $this->proposalForm
                 );
 
                 $status = $this->statusRepository->findOneBy([
@@ -263,8 +265,8 @@ class ImportProposalsFromCsvCommand extends Command
                             $filePath .= '.jpg';
                         }
                         if (
-                            '' !== $row[$this->headers['proposal_illustration']] &&
-                            file_exists($filePath)
+                            '' !== $row[$this->headers['proposal_illustration']]
+                            && file_exists($filePath)
                         ) {
                             $thumbnail = $this->mediaManager->createImageFromPath($filePath);
                             $proposal->setMedia($thumbnail);
@@ -278,7 +280,8 @@ class ImportProposalsFromCsvCommand extends Command
                     foreach ($this->customFields as $questionTitle) {
                         $reponse = (new ValueResponse())
                             ->setQuestion($this->questionsMap[$questionTitle])
-                            ->setValue($row[$this->headers[$questionTitle]] ?? '');
+                            ->setValue($row[$this->headers[$questionTitle]] ?? '')
+                        ;
                         $proposal->addResponse($reponse);
                     }
                 }

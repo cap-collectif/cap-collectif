@@ -16,10 +16,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Vote\VoteTypeResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class AuthorableTypeResolver implements ResolverInterface
 {
@@ -100,6 +100,7 @@ class AuthorableTypeResolver implements ResolverInterface
         if ($data instanceof DebateAnonymousArgument) {
             return $this->typeResolver->resolve('InternalDebateAnonymousArgument');
         }
+
         throw new UserError('Could not resolve type of Authorable.');
     }
 }

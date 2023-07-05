@@ -20,8 +20,7 @@ class PreConfigureProjectAnalysisFormPersister
         ConfigureAnalysisMutation $configureAnalysisMutation,
         AbstractStepRepository $abstractStepRepository,
         StatusRepository $statusRepository
-    )
-    {
+    ) {
         $this->configureAnalysisMutation = $configureAnalysisMutation;
         $this->abstractStepRepository = $abstractStepRepository;
         $this->statusRepository = $statusRepository;
@@ -40,7 +39,7 @@ class PreConfigureProjectAnalysisFormPersister
         $input['analysisStepId'] = GlobalId::toGlobalId('SelectionStep', $analysisStep->getId());
 
         $selectionStep = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $input['moveToSelectionStepId']);
-        $input['moveToSelectionStepId'] = GlobalId::toGlobalId('SelectionStep', $selectionStep->getId());;
+        $input['moveToSelectionStepId'] = GlobalId::toGlobalId('SelectionStep', $selectionStep->getId());
 
         $selectionStepStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $selectionStep, [$input['selectionStepStatusId']]);
         if ($selectionStepStatuses) {
@@ -59,5 +58,4 @@ class PreConfigureProjectAnalysisFormPersister
 
         $this->configureAnalysisMutation->__invoke(new Argument($input), $viewer);
     }
-
 }

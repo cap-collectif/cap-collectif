@@ -82,6 +82,6 @@ class LogManager
             );
         }
 
-        return $this->translator->trans("synthesis.logs.sentence.${action}", [], 'CapcoAppBundle');
+        return $this->translator->trans("synthesis.logs.sentence.{$action}", [], 'CapcoAppBundle');
     }
 }

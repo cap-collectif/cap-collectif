@@ -1,6 +1,6 @@
 <?php
-namespace Capco\AppBundle\Form\Persister;
 
+namespace Capco\AppBundle\Form\Persister;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\UpdateAlphaProjectMutation;
@@ -13,8 +13,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class PreConfigureProjectProjectPersister {
-
+class PreConfigureProjectProjectPersister
+{
     private UpdateAlphaProjectMutation $updateAlphaProjectMutation;
     private AbstractStepRepository $abstractStepRepository;
     private StatusRepository $statusRepository;
@@ -29,8 +29,7 @@ class PreConfigureProjectProjectPersister {
         ProposalFormRepository $proposalFormRepository,
         QuestionnaireRepository $questionnaireRepository,
         EntityManagerInterface $em
-    )
-    {
+    ) {
         $this->updateAlphaProjectMutation = $updateAlphaProjectMutation;
         $this->abstractStepRepository = $abstractStepRepository;
         $this->statusRepository = $statusRepository;
@@ -38,7 +37,6 @@ class PreConfigureProjectProjectPersister {
         $this->em = $em;
         $this->questionnaireRepository = $questionnaireRepository;
     }
-
 
     public function updateProject(array $projectInput, User $viewer, Project $project, array $proposalFormTitleToIdMap, array $questionnaireTitleToIdMap): Project
     {
@@ -49,7 +47,7 @@ class PreConfigureProjectProjectPersister {
         $stepsWithProposalForm = $this->getStepsWithProposalForm($projectInput['steps']);
         $stepsWithQuestionnaire = $this->getStepsWithQuestionnaire($projectInput['steps']);
 
-        ['project' => $updatedProject] = $this->updateAlphaProjectMutation->__invoke(new Argument($projectInput), $viewer);
+        list('project' => $updatedProject) = $this->updateAlphaProjectMutation->__invoke(new Argument($projectInput), $viewer);
 
         $this->addDefaultStatus($updatedProject, $stepsWithDefaultStatus);
         $this->addProposalFormToProject($updatedProject, $stepsWithProposalForm, $proposalFormTitleToIdMap);
@@ -69,7 +67,7 @@ class PreConfigureProjectProjectPersister {
             if (($step['defaultStatus'] ?? null) !== null) {
                 $stepsWithDefaultStatus[] = [
                     'stepTitle' => $step['title'],
-                    'defaultStatus' => $step['defaultStatus']
+                    'defaultStatus' => $step['defaultStatus'],
                 ];
                 $step['defaultStatus'] = null;
             }
@@ -89,11 +87,12 @@ class PreConfigureProjectProjectPersister {
             if (($step['proposalForm'] ?? null) !== null) {
                 $stepsWithProposalForm[] = [
                     'stepTitle' => $step['title'],
-                    'proposalFormTitle' => $step['proposalForm']
+                    'proposalFormTitle' => $step['proposalForm'],
                 ];
                 $step['proposalForm'] = null;
             }
         }
+
         return $stepsWithProposalForm;
     }
 
@@ -145,7 +144,7 @@ class PreConfigureProjectProjectPersister {
             if (($step['questionnaire'] ?? null) !== null) {
                 $stepsWithQuestionnaire[] = [
                     'stepTitle' => $step['title'],
-                    'questionnaireTitle' => $step['questionnaire']
+                    'questionnaireTitle' => $step['questionnaire'],
                 ];
                 $step['questionnaire'] = null;
             }

@@ -12,7 +12,7 @@ trait LocalizableTrait
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Locale")
      * @ORM\JoinColumn(name="locale", referencedColumnName="id", nullable=true)
      */
-    private $locale = null;
+    private $locale;
 
     public function getLocale(): ?Locale
     {
@@ -21,7 +21,7 @@ trait LocalizableTrait
 
     public function getLocaleCode(): ?string
     {
-        if (is_null($this->locale)) {
+        if (null === $this->locale) {
             return null;
         }
 
@@ -37,11 +37,11 @@ trait LocalizableTrait
 
     public function isLocalized(): bool
     {
-        return !is_null($this->locale);
+        return null !== $this->locale;
     }
 
     public function matchLocale(?string $locale): bool
     {
-        return is_null($this->locale) || is_null($locale) || $locale === $this->locale->getCode();
+        return null === $this->locale || null === $locale || $locale === $this->locale->getCode();
     }
 }

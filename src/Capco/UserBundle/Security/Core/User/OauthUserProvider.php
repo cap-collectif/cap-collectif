@@ -196,7 +196,8 @@ class OauthUserProvider extends FOSUBUserProvider
 
         $tokens = $this->redisCache
             ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
-            ->get();
+            ->get()
+        ;
 
         if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $state) {
             $this->flashBag->add(
@@ -282,8 +283,8 @@ class OauthUserProvider extends FOSUBUserProvider
             }
         }
         if (
-            'franceconnect' === $serviceName &&
-            ($this->isNewUser || !$user->getFranceConnectId())
+            'franceconnect' === $serviceName
+            && ($this->isNewUser || !$user->getFranceConnectId())
         ) {
             $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');
 

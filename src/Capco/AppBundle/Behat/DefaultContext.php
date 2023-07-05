@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Utils\Text;
 use Behat\Behat\Context\Context;
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\MinkExtension\Context\MinkContext;
-use Behat\Testwork\Tester\Result\TestResult;
-use Doctrine\Common\Persistence\ObjectManager;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Behat\Testwork\Tester\Result\TestResult;
+use Capco\AppBundle\Utils\Text;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
 {
@@ -22,15 +22,15 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 
     protected $symfonySession;
 
-    public function __construct(?Session $session = null)
-    {
-        $this->symfonySession = $session;
-    }
-
     /**
      * @var KernelInterface
      */
     protected $kernel;
+
+    public function __construct(?Session $session = null)
+    {
+        $this->symfonySession = $session;
+    }
 
     /** @BeforeScenario */
     public function gatherContexts(BeforeScenarioScope $scope)
@@ -59,6 +59,8 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 
     /**
      * @Then save a screenshot
+     *
+     * @param null|mixed $stepName
      */
     public function saveDebugScreenshot($stepName = null)
     {
@@ -83,16 +85,17 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
         }
         $this->saveScreenshot($filename, $path);
 
-        echo 'New screenshot generated ! Checkout `open "coverage/' . $filename . '"`' . PHP_EOL;
+        echo 'New screenshot generated ! Checkout `open "coverage/' . $filename . '"`' . \PHP_EOL;
 
         $html = $this->getSession()
             ->getDriver()
-            ->getContent();
+            ->getContent()
+        ;
 
         $htmlFilename = str_replace('.png', '.html', $filename);
         file_put_contents($path . $htmlFilename, $html);
 
-        echo 'New HTML generated ! Checkout `open "coverage/' . $htmlFilename . '"`' . PHP_EOL;
+        echo 'New HTML generated ! Checkout `open "coverage/' . $htmlFilename . '"`' . \PHP_EOL;
     }
 
     /**
@@ -121,9 +124,7 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
     public function waitAndThrowOnFailure(int $timeout, string $condition): void
     {
         if (!$this->getSession()->wait($timeout, $condition)) {
-            throw new \RuntimeException(
-                'Condition "' . $condition . '" failed after ' . $timeout . 'ms.'
-            );
+            throw new \RuntimeException('Condition "' . $condition . '" failed after ' . $timeout . 'ms.');
         }
     }
 

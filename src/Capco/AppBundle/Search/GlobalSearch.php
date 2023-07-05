@@ -8,7 +8,7 @@ use Elastica\Query;
 
 class GlobalSearch extends Search
 {
-    const SEARCH_FIELDS = [
+    public const SEARCH_FIELDS = [
         'title',
         'title.std',
         'reference',
@@ -29,7 +29,7 @@ class GlobalSearch extends Search
         'proposalBody.std',
     ];
 
-    const FILTERED_OUT_TYPES = ['reply'];
+    public const FILTERED_OUT_TYPES = ['reply'];
 
     protected $transformer;
 

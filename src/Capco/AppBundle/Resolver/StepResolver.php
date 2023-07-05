@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;

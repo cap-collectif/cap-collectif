@@ -51,7 +51,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getThemeStatsItemsSelector();
+            ->getThemeStatsItemsSelector()
+        ;
         $this->assertNumElements(4, $selector);
     }
 
@@ -62,7 +63,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getDistrictStatsItemsSelector();
+            ->getDistrictStatsItemsSelector()
+        ;
         $this->assertNumElements(10, $selector);
     }
 
@@ -73,7 +75,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getUserTypeStatsItemsSelector();
+            ->getUserTypeStatsItemsSelector()
+        ;
         $this->assertNumElements(4, $selector);
     }
 
@@ -84,7 +87,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getCostsStatsItemsSelector();
+            ->getCostsStatsItemsSelector()
+        ;
         $this->assertNumElements(3, $selector);
     }
 
@@ -95,7 +99,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getVotesStatsItemsSelector();
+            ->getVotesStatsItemsSelector()
+        ;
         $this->assertNumElements(3, $selector);
     }
 
@@ -208,12 +213,15 @@ trait ProjectStepsTrait
 
     /**
      * @Then I should see :all districts stats
+     *
+     * @param mixed $all
      */
     public function iShouldSeeAllDistrictsStats($all)
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getDistrictStatsModalItemsSelector();
+            ->getDistrictStatsModalItemsSelector()
+        ;
         $this->assertNumElements($all, $selector);
     }
 
@@ -244,7 +252,8 @@ trait ProjectStepsTrait
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
-            ->getVotesStatsItemsSelector();
+            ->getVotesStatsItemsSelector()
+        ;
         $this->assertNumElements($number, $selector);
     }
 

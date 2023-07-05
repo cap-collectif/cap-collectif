@@ -27,21 +27,25 @@ class HasUserGroupIfVisibilityGroupValidatorSpec extends ObjectBehavior
         $project
             ->getVisibility()
             ->willReturn(ProjectVisibilityMode::VISIBILITY_CUSTOM)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $group1 = new Group();
         $group1
             ->setTitle('group1')
             ->setDescription('group1')
-            ->setSlug('group-1');
+            ->setSlug('group-1')
+        ;
         $group2 = new Group();
         $group2
             ->setTitle('group2')
             ->setDescription('group2')
-            ->setSlug('group-2');
+            ->setSlug('group-2')
+        ;
         $project
             ->getRestrictedViewerGroups()
             ->willReturn(new ArrayCollection([$group1, $group2]))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $context->addViolation($constraint->noGroupMessage, [])->shouldNotBeCalled();
         $this->initialize($context);
@@ -57,11 +61,13 @@ class HasUserGroupIfVisibilityGroupValidatorSpec extends ObjectBehavior
         $project
             ->getVisibility()
             ->willReturn(ProjectVisibilityMode::VISIBILITY_CUSTOM)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $project
             ->getRestrictedViewerGroups()
             ->willReturn(new ArrayCollection([]))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->initialize($context);
 
@@ -69,7 +75,8 @@ class HasUserGroupIfVisibilityGroupValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->noGroupMessage)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->validate($project, $constraint);
     }
@@ -83,28 +90,33 @@ class HasUserGroupIfVisibilityGroupValidatorSpec extends ObjectBehavior
         $project
             ->getVisibility()
             ->willReturn(ProjectVisibilityMode::VISIBILITY_ME)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $group1 = new Group();
         $group1
             ->setTitle('group1')
             ->setDescription('group1')
-            ->setSlug('group-1');
+            ->setSlug('group-1')
+        ;
         $group2 = new Group();
         $group2
             ->setTitle('group2')
             ->setDescription('group2')
-            ->setSlug('group-2');
+            ->setSlug('group-2')
+        ;
         $project
             ->getRestrictedViewerGroups()
             ->willReturn(new ArrayCollection([$group1, $group2]))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->initialize($context);
         $builder->addViolation()->shouldBeCalled();
         $context
             ->buildViolation($constraint->groupButNotCustom)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->validate($project, $constraint);
     }
 }

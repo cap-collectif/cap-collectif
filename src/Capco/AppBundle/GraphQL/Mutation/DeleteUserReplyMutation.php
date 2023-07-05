@@ -4,16 +4,16 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractReply;
-use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteUserReplyMutation implements MutationInterface
 {

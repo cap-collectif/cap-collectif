@@ -2,18 +2,18 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Prophecy\Argument;
+use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Form\DebateOpinionType;
+use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateOpinionMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Form\DebateOpinionType;
-use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateOpinionMutation;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddDebateOpinionMutationSpec extends ObjectBehavior
@@ -67,12 +67,14 @@ class AddDebateOpinionMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
 
         $formFactory
             ->create(DebateOpinionType::class, Argument::type(DebateOpinion::class))
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $input->getArrayCopy()->willReturn($values);
 
         $em->persist(Argument::type(DebateOpinion::class))->shouldBeCalled();
@@ -128,10 +130,12 @@ class AddDebateOpinionMutationSpec extends ObjectBehavior
         $form->all()->willReturn([]);
         $logger
             ->error('Invalid `DebateOpinionType` form data.', ['errors' => []])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $formFactory
             ->create(DebateOpinionType::class, Argument::type(DebateOpinion::class))
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(2);

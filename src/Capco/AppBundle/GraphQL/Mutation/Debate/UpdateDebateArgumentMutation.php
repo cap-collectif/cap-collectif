@@ -8,8 +8,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class UpdateDebateArgumentMutation extends AbstractDebateArgumentMutation implements
-    MutationInterface
+class UpdateDebateArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
     public function __invoke(Arg $input, User $viewer): array
     {

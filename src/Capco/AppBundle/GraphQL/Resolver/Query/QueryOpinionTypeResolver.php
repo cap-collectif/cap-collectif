@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class QueryOpinionTypeResolver implements ResolverInterface
 {

@@ -31,9 +31,7 @@ class ProposalFormMutation
         $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
 
         if (!$proposalForm) {
-            throw new UserError(
-                sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId'])
-            );
+            throw new UserError(sprintf('Unknown proposal form with id "%d"', $arguments['proposalFormId']));
         }
 
         $evaluationForm = $this->questionnaireRepository->find(

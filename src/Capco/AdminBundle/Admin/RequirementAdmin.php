@@ -45,15 +45,22 @@ class RequirementAdmin extends CapcoAdmin
                     'disabled' => true,
                     'class' => 'checkbox-label',
                 ],
-            ]);
+            ])
+        ;
     }
 
     // Fields to be shown on show page
-    protected function configureShowFields(ShowMapper $show): void {}
+    protected function configureShowFields(ShowMapper $show): void
+    {
+    }
 
     // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $filter): void {}
+    protected function configureDatagridFilters(DatagridMapper $filter): void
+    {
+    }
 
     // Fields to be shown on lists
-    protected function configureListFields(ListMapper $list): void {}
+    protected function configureListFields(ListMapper $list): void
+    {
+    }
 }

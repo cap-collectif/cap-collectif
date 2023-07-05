@@ -76,11 +76,13 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('smsOrder')
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrderId);
+            ->willReturn($smsOrderId)
+        ;
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrder);
+            ->willReturn($smsOrder)
+        ;
 
         $values = [
             'amount' => 1000,
@@ -89,18 +91,21 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $smsCredit = new SmsCredit();
         $formFactory
             ->create(SmsCreditType::class, Argument::type(SmsCredit::class))
             ->willReturn($form)
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form
             ->isValid()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $smsOrder->setIsProcessed(true)->shouldBeCalledOnce();
         $em->persist($smsOrder)->shouldBeCalledOnce();
@@ -110,18 +115,21 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $smsCreditRepository
             ->countAll()
             ->shouldBeCalledOnce()
-            ->willReturn(0);
+            ->willReturn(0)
+        ;
         $externalServiceConfigurationRepository->findTwilioConfig()->willReturn([]);
 
         $organizationName = 'organizationName';
         $siteParameterResolver
             ->getValue('global.site.organization_name')
             ->shouldBeCalledTimes(2)
-            ->willReturn($organizationName);
+            ->willReturn($organizationName)
+        ;
         $twilioClient
             ->createSubAccount($organizationName)
             ->shouldBeCalledOnce()
-            ->willReturn($subAccount);
+            ->willReturn($subAccount)
+        ;
 
         $subAccount->sid = 'XXXX';
         $subAccount->authToken = 'XXXX';
@@ -137,14 +145,16 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $twilioClient
             ->createVerifyService($organizationName)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $em->persist(Argument::type(ExternalServiceConfiguration::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $publisher
             ->publish('sms_credit.initial_credit', Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);
@@ -166,11 +176,13 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('smsOrder')
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrderId);
+            ->willReturn($smsOrderId)
+        ;
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrder);
+            ->willReturn($smsOrder)
+        ;
 
         $values = [
             'amount' => 1000,
@@ -179,18 +191,21 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $smsCredit = new SmsCredit();
         $formFactory
             ->create(SmsCreditType::class, Argument::type(SmsCredit::class))
             ->willReturn($form)
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form
             ->isValid()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $smsOrder->setIsProcessed(true)->shouldBeCalledOnce();
         $em->persist($smsOrder)->shouldBeCalledOnce();
@@ -200,11 +215,13 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $smsCreditRepository
             ->countAll()
             ->shouldBeCalledOnce()
-            ->willReturn(1);
+            ->willReturn(1)
+        ;
 
         $publisher
             ->publish('sms_credit.refill_credit', Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);
@@ -220,11 +237,13 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('smsOrder')
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrderId);
+            ->willReturn($smsOrderId)
+        ;
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);
@@ -243,11 +262,13 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('smsOrder')
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrderId);
+            ->willReturn($smsOrderId)
+        ;
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsOrder);
+            ->willReturn($smsOrder)
+        ;
 
         $values = [
             'amount' => 1000,
@@ -256,24 +277,28 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $formFactory
             ->create(SmsCreditType::class, Argument::type(SmsCredit::class))
             ->willReturn($form)
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form
             ->isValid()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $formError = new FormError('', 'This value is already used.');
         $formErrorIterator = new FormErrorIterator($form->getWrappedObject(), [$formError]);
         $form
             ->getErrors(true, true)
             ->shouldBeCalledOnce()
-            ->willReturn($formErrorIterator);
+            ->willReturn($formErrorIterator)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(1);

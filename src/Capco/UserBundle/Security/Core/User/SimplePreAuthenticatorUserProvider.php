@@ -5,10 +5,10 @@ namespace Capco\UserBundle\Security\Core\User;
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SimplePreAuthenticatorUserProvider implements UserProviderInterface
 {
@@ -64,9 +64,9 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
             return $this->samlProvider;
         }
         if (
-            $this->toggleManager->isActive('login_cas') &&
-            $this->casConfiguration &&
-            $this->casConfiguration->isEnabled()
+            $this->toggleManager->isActive('login_cas')
+            && $this->casConfiguration
+            && $this->casConfiguration->isEnabled()
         ) {
             return $this->casProvider;
         }

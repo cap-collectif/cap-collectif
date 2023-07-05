@@ -27,19 +27,19 @@ class UserConnectionResolver implements ResolverInterface
         $userId = $user->getId();
         $email = $args->offsetGet('email');
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         if (!$aclDisabled) {
             $this->preventNullableViewer($viewer);
         }
 
         if (
-            !$aclDisabled &&
-            !$viewer->isAdmin() &&
-            ((null !== $userId && $userId !== $viewer->getId()) ||
-                (null !== $email && $email !== $viewer->getEmail()))
+            !$aclDisabled
+            && !$viewer->isAdmin()
+            && ((null !== $userId && $userId !== $viewer->getId())
+                || (null !== $email && $email !== $viewer->getEmail()))
         ) {
             throw new UserWarning('Cannot call this resolver with this user.');
         }

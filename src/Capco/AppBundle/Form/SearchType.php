@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -44,7 +45,8 @@ class SearchType extends AbstractType
                     'global.date.text' => 'date',
                 ],
                 'attr' => ['onchange' => 'this.form.submit()'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

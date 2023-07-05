@@ -74,6 +74,7 @@ class OrganizationMember
     public function setRole(string $role): self
     {
         $this->role = $role;
+
         return $this;
     }
 

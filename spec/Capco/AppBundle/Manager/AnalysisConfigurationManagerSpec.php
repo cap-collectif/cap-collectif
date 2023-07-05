@@ -58,15 +58,18 @@ class AnalysisConfigurationManagerSpec extends ObjectBehavior
         $proposalRepository
             ->findByProposalForm($proposalForm)
             ->shouldBeCalled()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
         $config->setEffectiveDateProcessed(true)->shouldBeCalled();
         $entityManager
             ->persist(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $entityManager->flush()->shouldBeCalled();
         $jpecGhost
             ->generateAndSendMessage(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->processAnalysisConfiguration($config, true)->shouldReturn(0);
     }
@@ -83,19 +86,23 @@ class AnalysisConfigurationManagerSpec extends ObjectBehavior
         $proposalRepository
             ->findByProposalForm($proposalForm)
             ->shouldBeCalled()
-            ->willReturn(['proposalId']);
+            ->willReturn(['proposalId'])
+        ;
         $proposalDecisionRepository
             ->findUserProcessedProposalByIds(['proposalId'])
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection());
+            ->willReturn(new ArrayCollection())
+        ;
         $config->setEffectiveDateProcessed(true)->shouldBeCalled();
         $entityManager
             ->persist(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $entityManager->flush()->shouldBeCalled();
         $jpecGhost
             ->generateAndSendMessage(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->processAnalysisConfiguration($config, true)->shouldReturn(0);
     }
@@ -122,7 +129,8 @@ class AnalysisConfigurationManagerSpec extends ObjectBehavior
         $proposalRepository
             ->findByProposalForm($proposalForm)
             ->shouldBeCalled()
-            ->willReturn(['proposalPositive', 'proposalNegative', 'proposalUndecided']);
+            ->willReturn(['proposalPositive', 'proposalNegative', 'proposalUndecided'])
+        ;
         $proposalDecisionRepository
             ->findUserProcessedProposalByIds([
                 'proposalPositive',
@@ -130,30 +138,36 @@ class AnalysisConfigurationManagerSpec extends ObjectBehavior
                 'proposalUndecided',
             ])
             ->shouldBeCalled()
-            ->willReturn([$proposalDecisionPositive, $proposalDecisionNegative]);
+            ->willReturn([$proposalDecisionPositive, $proposalDecisionNegative])
+        ;
         $config->setEffectiveDateProcessed(true)->shouldBeCalled();
         $entityManager
             ->persist(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $entityManager->flush()->shouldBeCalled();
         $jpecGhost
             ->generateAndSendMessage(Argument::type(AnalysisConfigurationProcess::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $eventDispatcher
             ->dispatch(
                 CapcoAppBundleEvents::DECISION_APPROVED,
                 Argument::type(DecisionEvent::class)
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $eventDispatcher
             ->dispatch(CapcoAppBundleEvents::DECISION_REFUSED, Argument::type(DecisionEvent::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $publisher
             ->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
                 Argument::type(Message::class)
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->processAnalysisConfiguration($config, true)->shouldReturn(2);
     }

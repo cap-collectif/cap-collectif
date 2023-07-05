@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Psr\Log\LoggerInterface;
 
 class ProposalViewerVoteResolver implements ResolverInterface
 {

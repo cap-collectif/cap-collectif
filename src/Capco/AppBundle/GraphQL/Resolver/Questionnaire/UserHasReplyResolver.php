@@ -37,6 +37,7 @@ class UserHasReplyResolver implements ResolverInterface
 
         return !$this->replyRepository
             ->getForUserAndQuestionnaire($questionnaire, $user, true)
-            ->isEmpty();
+            ->isEmpty()
+        ;
     }
 }

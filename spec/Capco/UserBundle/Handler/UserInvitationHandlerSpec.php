@@ -2,13 +2,13 @@
 
 namespace spec\Capco\UserBundle\Handler;
 
+use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\Group;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -75,7 +75,8 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $invitation = (new UserInvite())
             ->setEmail($email)
             ->setIsProjectAdmin(true)
-            ->setIsAdmin(false);
+            ->setIsAdmin(false)
+        ;
         $user->isConsentInternalCommunication()->willReturn(true);
 
         $userInviteRepository->findOneByEmailAndNotExpired($email)->willReturn($invitation);
@@ -84,7 +85,6 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $user->addRole(UserRole::ROLE_ADMIN)->shouldNotBeCalled();
 
         $user->confirmAccount()->shouldBeCalled();
-
 
         $this->handleUserInvite($user);
     }
@@ -101,7 +101,8 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $invitation = (new UserInvite())
             ->setEmail($email)
             ->setIsProjectAdmin(false)
-            ->setIsAdmin(true);
+            ->setIsAdmin(true)
+        ;
 
         $manager->isActive(Manager::unstable__project_admin)->willReturn(false);
 
@@ -144,7 +145,8 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         $invitation
             ->getGroups()
             ->shouldBeCalled()
-            ->willReturn($groups);
+            ->willReturn($groups)
+        ;
 
         $em->persist(Argument::type(UserGroup::class))->shouldBeCalled();
 

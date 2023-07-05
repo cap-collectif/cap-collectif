@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Client\OccitanieClient;
+use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class QueryContributorsResolver implements ResolverInterface
 {
@@ -32,7 +32,7 @@ class QueryContributorsResolver implements ResolverInterface
             $value = $this->userSearch->getAllContributors($offset, $limit);
             $totalCount = (int) $value['totalCount'];
 
-            if (strpos(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie') !== false) {
+            if (false !== strpos(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie')) {
                 $totalCount = $this->occitanieClient->getUserCounters();
             }
 

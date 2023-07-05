@@ -3,17 +3,17 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Enum\EventOrderField;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\GraphQL\QueryAnalyzer;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Search\EventSearch;
 use GraphQL\Type\Definition\ResolveInfo;
-use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Enum\EventOrderField;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class QueryEventsResolver implements ResolverInterface

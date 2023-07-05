@@ -41,7 +41,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
     public function __invoke(Argument $args): array
     {
         /**
-         * @var $section Section
+         * @var Section $section
          */
         $section = $this->sectionRepository->findOneBy(['type' => 'projects']);
 

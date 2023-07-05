@@ -4,17 +4,17 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Source;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ApiSourceType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Repository\SourceRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class ChangeSourceMutation implements MutationInterface
 {
@@ -42,7 +42,7 @@ class ChangeSourceMutation implements MutationInterface
         $source = $this->sourceRepo->find($sourceId);
 
         if (!$source) {
-            throw new UserError("Unknown source with id: ${sourceId}");
+            throw new UserError("Unknown source with id: {$sourceId}");
         }
 
         if ($viewer !== $source->getAuthor()) {

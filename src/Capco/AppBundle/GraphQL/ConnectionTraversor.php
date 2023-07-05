@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL;
 
 use Capco\AppBundle\Utils\Arr;
-use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
 
 class ConnectionTraversor
 {
@@ -27,18 +27,19 @@ class ConnectionTraversor
         do {
             $connection =
                 Arr::path($copied, $path) ??
-                (Arr::path($copied, "data.node.${path}") ?? Arr::path($copied, "data.${path}"));
+                (Arr::path($copied, "data.node.{$path}") ?? Arr::path($copied, "data.{$path}"));
             $edges = Arr::path($connection, 'edges');
             $pageInfo = Arr::path($connection, 'pageInfo');
             $endCursor = $pageInfo['endCursor'];
 
             // In the relay spec, "edges" field is nullable
             // See https://relay.dev/graphql/connections.htm#sec-Edges
-            if (!$edges || !is_array($edges)) {
+            if (!$edges || !\is_array($edges)) {
                 $this->logger->error('The GraphQL request resulted in `null` edges.', [
                     'path' => $path,
-                    'errors' => isset($data['errors']) ? $data['errors'] : [],
+                    'errors' => $data['errors'] ?? [],
                 ]);
+
                 return;
             }
 
@@ -54,7 +55,8 @@ class ConnectionTraversor
                                 'query' => $renewalQuery($pageInfo),
                                 'variables' => [],
                             ])
-                            ->toArray();
+                            ->toArray()
+                        ;
                     }
                 }
             }

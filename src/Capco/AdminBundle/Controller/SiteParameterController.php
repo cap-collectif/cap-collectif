@@ -10,11 +10,6 @@ class SiteParameterController extends Controller
 {
     /**
      * Redirect the user depending on his choice.
-     *
-     * @param object  $object
-     * @param Request $request
-     *
-     * @return RedirectResponse
      */
     protected function redirectTo(Request $request, object $object): RedirectResponse
     {

@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Form\ProjectAuthorTransformer;
-use Capco\UserBundle\Form\Type\UpdateProjectFormType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
+use Capco\AppBundle\Form\ProjectAuthorTransformer;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Form\Type\UpdateProjectFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
@@ -53,8 +53,8 @@ class UpdateProjectMutation implements MutationInterface
         $projectId = GlobalId::fromGlobalId($arguments['id'])['id'];
 
         $arguments['isExternal'] =
-            isset($arguments['externalLink']) ||
-            (isset($arguments['isExternal']) && $arguments['isExternal']);
+            isset($arguments['externalLink'])
+            || (isset($arguments['isExternal']) && $arguments['isExternal']);
 
         $project = $this->projectRepository->find($projectId);
 
@@ -64,8 +64,8 @@ class UpdateProjectMutation implements MutationInterface
         $this->transformer->setProject($project);
 
         if (
-            (isset($arguments['authors']) && \count($arguments['authors']) <= 0) ||
-            (0 === \count($project->getUserAuthors()) && !isset($arguments['authors']))
+            (isset($arguments['authors']) && \count($arguments['authors']) <= 0)
+            || (0 === \count($project->getUserAuthors()) && !isset($arguments['authors']))
         ) {
             throw new UserError('You must specify at least one author.');
         }

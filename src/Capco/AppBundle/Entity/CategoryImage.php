@@ -15,8 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CategoryImage
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})

@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
+use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\Repository\DebateVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class AuthorVotesResolver implements ResolverInterface
 {
@@ -32,7 +32,8 @@ class AuthorVotesResolver implements ResolverInterface
             return $this->repository
                 ->getPublishedByAuthor($author, $limit, $offset)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
         $totalCount = $this->repository->countPublishedByAuthor($author);
 

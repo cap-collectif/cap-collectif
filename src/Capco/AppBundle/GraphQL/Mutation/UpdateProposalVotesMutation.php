@@ -3,22 +3,22 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Doctrine\Common\Util\ClassUtils;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Psr\Log\LoggerInterface;
 
 class UpdateProposalVotesMutation implements MutationInterface
 {
@@ -69,11 +69,13 @@ class UpdateProposalVotesMutation implements MutationInterface
         if ($step instanceof SelectionStep) {
             $votes = $this->proposalSelectionVoteRepository
                 ->getByAuthorAndStep($viewer, $step, -1, 0)
-                ->getIterator();
+                ->getIterator()
+            ;
         } elseif ($step instanceof CollectStep) {
             $votes = $this->proposalCollectVoteRepository
                 ->getByAuthorAndStep($viewer, $step, -1, 0)
-                ->getIterator();
+                ->getIterator()
+            ;
         } else {
             throw new UserError(sprintf('Not good step with id "%s"', $stepId));
         }

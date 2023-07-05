@@ -198,7 +198,7 @@
         "bossa/phpspec2-expect": "^3.2",
         "phpunit/phpunit": "^8.0",
         "bex/behat-step-time-logger": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3",
         "dg/bypass-finals": "^1.1",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3",
         "symfony/profiler-pack": "^1.0",

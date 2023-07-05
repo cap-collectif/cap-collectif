@@ -49,7 +49,8 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
     {
         $this->setName('capco:remind-user-account-confirmation-before-step-close')
             ->setDescription('Remind users by email to confirm their account before step close')
-            ->addOption('date', null, InputOption::VALUE_OPTIONAL);
+            ->addOption('date', null, InputOption::VALUE_OPTIONAL)
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -81,8 +82,8 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
             if ($step instanceof DebateStep) {
                 foreach ($step->getDebate()->getAnonymousArguments() as $argument) {
                     if (
-                        !$argument->isPublished() &&
-                        !\array_key_exists($argument->getEmail(), $users)
+                        !$argument->isPublished()
+                        && !\array_key_exists($argument->getEmail(), $users)
                     ) {
                         $users[$argument->getEmail()] = [
                             'username' => $argument->getUsername() ?? '',
@@ -153,8 +154,8 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
         $filteredOut = [];
         foreach ($users as $user) {
             if (
-                \array_key_exists($user->getUsername(), $filteredUsers) ||
-                \array_key_exists($user->getUsername(), $filteredOut)
+                \array_key_exists($user->getUsername(), $filteredUsers)
+                || \array_key_exists($user->getUsername(), $filteredOut)
             ) {
                 break;
             }
@@ -188,10 +189,10 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
             if ($step->isParticipative()) {
                 foreach ($user->getContributions() as $contribution) {
                     if (
-                        $contribution instanceof Publishable &&
-                        !$contribution->isPublished() &&
-                        $contribution->getStep() === $step &&
-                        !$this->isVoteMissingMinimalNumber($contribution, $step, $user)
+                        $contribution instanceof Publishable
+                        && !$contribution->isPublished()
+                        && $contribution->getStep() === $step
+                        && !$this->isVoteMissingMinimalNumber($contribution, $step, $user)
                     ) {
                         return $step;
                     }
@@ -207,10 +208,10 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
         AbstractStep $step,
         User $user
     ): bool {
-        return $contribution instanceof AbstractVote &&
-            $step instanceof SelectionStep &&
-            $step->getVotesMin() &&
-            $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step) <
+        return $contribution instanceof AbstractVote
+            && $step instanceof SelectionStep
+            && $step->getVotesMin()
+            && $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step) <
                 $step->getVotesMin();
     }
 

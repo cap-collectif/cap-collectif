@@ -113,7 +113,7 @@ class SenderEmailDomainsManager
         SenderEmailDomain $domain,
         SenderEmailDomain $serviceDomain
     ): bool {
-        return $domain->getSpfValidation() !== $serviceDomain->getSpfValidation() ||
-            $domain->getDkimValidation() !== $serviceDomain->getDkimValidation();
+        return $domain->getSpfValidation() !== $serviceDomain->getSpfValidation()
+            || $domain->getDkimValidation() !== $serviceDomain->getDkimValidation();
     }
 }

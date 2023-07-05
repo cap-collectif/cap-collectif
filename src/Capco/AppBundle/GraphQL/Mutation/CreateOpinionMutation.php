@@ -121,7 +121,8 @@ class CreateOpinionMutation implements MutationInterface
         $opinion = (new Opinion())
             ->setAuthor($viewer)
             ->setConsultation($type->getConsultation())
-            ->setOpinionType($type);
+            ->setOpinionType($type)
+        ;
         $form = $this->formFactory->create(OpinionForm::class, $opinion);
         $form->submit($data, false);
 

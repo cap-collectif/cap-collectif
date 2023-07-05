@@ -15,7 +15,7 @@ class LogicJumpConditionOperator
     public static function getOperatorValue(string $operatorShortName): string
     {
         if (!isset(static::$operatorName[$operatorShortName])) {
-            throw new \RuntimeException("Unknown operator '${operatorShortName}'");
+            throw new \RuntimeException("Unknown operator '{$operatorShortName}'");
         }
 
         return static::$operatorName[$operatorShortName];

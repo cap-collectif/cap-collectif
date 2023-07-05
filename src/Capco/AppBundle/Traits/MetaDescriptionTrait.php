@@ -19,7 +19,7 @@ trait MetaDescriptionTrait
         return $this->metaDescription;
     }
 
-    public function setMetaDescription(string $metaDescription = null): self
+    public function setMetaDescription(?string $metaDescription = null): self
     {
         $this->metaDescription = $metaDescription;
 

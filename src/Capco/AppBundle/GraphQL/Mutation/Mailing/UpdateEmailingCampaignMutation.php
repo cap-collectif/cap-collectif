@@ -72,8 +72,8 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (
-            null === $emailingCampaign ||
-            !$this->authorizationChecker->isGranted(
+            null === $emailingCampaign
+            || !$this->authorizationChecker->isGranted(
                 [EmailingCampaignVoter::EDIT],
                 $emailingCampaign
             )
@@ -128,8 +128,8 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
             $this->findGroup($groupListGlobalId, $viewer);
         }
         if (
-            $mailingInternal &&
-            (!$viewer->isAdmin() || !EmailingCampaignInternalList::isValid($mailingInternal))
+            $mailingInternal
+            && (!$viewer->isAdmin() || !EmailingCampaignInternalList::isValid($mailingInternal))
         ) {
             throw new UserError(UpdateEmailingCampaignErrorCode::ID_NOT_FOUND_MAILING_LIST);
         }

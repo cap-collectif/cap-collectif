@@ -27,12 +27,12 @@ use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
-use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -142,7 +142,8 @@ class ProposalMutationSpec extends ObjectBehavior
         // we set the proposal as non draft
         $proposal
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal->setDraft(false)->shouldBeCalled();
         $proposal->setPublishedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
@@ -151,7 +152,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
             ])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
 
         $form
             ->submit(
@@ -160,7 +162,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
@@ -177,7 +180,8 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal21')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
@@ -286,7 +290,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
         $proposal
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $globalidResolver->resolve($values['id'], $user)->willReturn($proposal);
 
@@ -302,7 +307,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
             ])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
 
         $form
             ->submit(
@@ -311,7 +317,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
@@ -328,7 +335,8 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $user)->shouldBe(['proposal' => $proposal]);
@@ -370,7 +378,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $owner
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $input->getArrayCopy()->willReturn($values);
 
@@ -400,7 +409,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
         $proposal
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $globalidResolver->resolve($values['id'], $owner)->willReturn($proposal);
 
@@ -409,13 +419,15 @@ class ProposalMutationSpec extends ObjectBehavior
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
             ])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $publisher
             ->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
                 \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
             )
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
         $form
             ->submit(
                 [
@@ -423,7 +435,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
 
@@ -440,7 +453,8 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $owner)->shouldBe(['proposal' => $proposal]);
@@ -510,7 +524,8 @@ class ProposalMutationSpec extends ObjectBehavior
         $proposalSocialNetworks->getProposal()->willReturn($proposal);
         $proposal
             ->setProposalSocialNetworks(\Prophecy\Argument::type(ProposalSocialNetworks::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $globalidResolver->resolve($values['id'], $admin)->willReturn($proposal);
 
@@ -519,13 +534,15 @@ class ProposalMutationSpec extends ObjectBehavior
                 'proposalForm' => $proposalForm,
                 'validation_groups' => ['Default'],
             ])
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $publisher
             ->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE,
                 \Prophecy\Argument::type(\Swarrot\Broker\Message::class)
             )
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
         $form
             ->submit(
                 [
@@ -533,7 +550,8 @@ class ProposalMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $proposal->setUpdatedAt(\Prophecy\Argument::type(\DateTime::class))->shouldNotBeCalled();
 
@@ -550,7 +568,8 @@ class ProposalMutationSpec extends ObjectBehavior
 
         $indexer
             ->index(ClassUtils::getClass($proposal->getWrappedObject()), 'proposal10')
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $indexer->finishBulk()->shouldBeCalled();
 
         $this->changeContent($input, $admin)->shouldBe(['proposal' => $proposal]);

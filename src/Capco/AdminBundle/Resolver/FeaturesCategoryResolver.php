@@ -116,8 +116,8 @@ class FeaturesCategoryResolver
 
         // If all the category have the same structure remove those conditions about the category name.
         if (
-            isset(self::$categories[$category]) &&
-            ('settings.modules' === $category || 'pages.events' === $category)
+            isset(self::$categories[$category])
+            && ('settings.modules' === $category || 'pages.events' === $category)
         ) {
             foreach (self::$categories[$category]['features'] as $access => $features) {
                 if ($this->authorizationChecker->isGranted($access)) {
@@ -146,8 +146,8 @@ class FeaturesCategoryResolver
     {
         foreach (self::$categories as $name => $category) {
             if (
-                ('settings.modules' === $name || 'pages.events' === $name) &&
-                \in_array(
+                ('settings.modules' === $name || 'pages.events' === $name)
+                && \in_array(
                     $toggle,
                     array_merge(
                         $category['features'][UserRole::ROLE_ADMIN],
@@ -171,8 +171,8 @@ class FeaturesCategoryResolver
         $categories = [];
         foreach (self::$categories as $name => $cat) {
             if (
-                0 === strrpos($name, 'pages.') &&
-                $this->manager->hasOneActive($cat['conditions'])
+                0 === strrpos($name, 'pages.')
+                && $this->manager->hasOneActive($cat['conditions'])
             ) {
                 $categories[] = $name;
             }
@@ -186,8 +186,8 @@ class FeaturesCategoryResolver
         $categories = [];
         foreach (self::$categories as $name => $cat) {
             if (
-                0 === strrpos($name, 'settings.') &&
-                $this->manager->hasOneActive($cat['conditions'])
+                0 === strrpos($name, 'settings.')
+                && $this->manager->hasOneActive($cat['conditions'])
             ) {
                 $categories[] = $name;
             }

@@ -3,15 +3,18 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Utils\Text;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * We use full FQCN imports here because annotations are not correctly transmitted with trait nesting,
+ * see for example:
+ * https://github.com/doctrine/annotations/issues/268.
+ */
 trait TitleTrait
 {
     /**
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
+     * @Doctrine\ORM\Mapping\Column(name="title", type="string", length=255, nullable=false)
+     * @Symfony\Component\Validator\Constraints\NotBlank()
+     * @Symfony\Component\Validator\Constraints\Length(max=255)
      */
     protected $title;
 

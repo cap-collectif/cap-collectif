@@ -89,7 +89,8 @@ class DebateInvitationCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'To send the email to a tester.'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -116,9 +117,9 @@ class DebateInvitationCommand extends Command
                 try {
                     $voteToken = $this->getVoteToken($user, $debate);
                     if (
-                        null === $voteToken ||
-                        ($isReminder && $voteToken->isValid()) ||
-                        $testEmail
+                        null === $voteToken
+                        || ($isReminder && $voteToken->isValid())
+                        || $testEmail
                     ) {
                         $this->sendInvitation(
                             $user,
@@ -155,7 +156,7 @@ class DebateInvitationCommand extends Command
         $this->em->flush();
         $progressBar->finish();
 
-        $output->writeln("\n${mailSent} email(s) sent to invite to debate " . $debate->getId());
+        $output->writeln("\n{$mailSent} email(s) sent to invite to debate " . $debate->getId());
 
         return 0;
     }
@@ -211,7 +212,7 @@ class DebateInvitationCommand extends Command
         $debateId = $input->getArgument(self::ARG_DEBATE);
         $debate = $this->debateRepository->find($debateId);
         if (null === $debate) {
-            throw new \RuntimeException("debate ${debateId} not found");
+            throw new \RuntimeException("debate {$debateId} not found");
         }
 
         return $debate;

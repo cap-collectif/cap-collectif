@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SmsOrder
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="amount", type="integer")
@@ -25,7 +25,6 @@ class SmsOrder
      * @ORM\Column(name="is_processed", type="boolean", options={"default": false})
      */
     private bool $isProcessed = false;
-
 
     public function getAmount(): int
     {
@@ -39,21 +38,15 @@ class SmsOrder
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isProcessed(): bool
     {
         return $this->isProcessed;
     }
 
-    /**
-     * @param bool $isProcessed
-     * @return SmsOrder
-     */
-    public function setIsProcessed(bool $isProcessed): SmsOrder
+    public function setIsProcessed(bool $isProcessed): self
     {
         $this->isProcessed = $isProcessed;
+
         return $this;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Processor\Sms;
 
-use Capco\AppBundle\Notifier\SmsNotifier ;
-use Capco\AppBundle\Repository\SmsOrderRepository ;
+use Capco\AppBundle\Notifier\SmsNotifier;
+use Capco\AppBundle\Repository\SmsOrderRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
 

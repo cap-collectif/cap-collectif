@@ -23,7 +23,8 @@ class ResponseAdmin extends CapcoAdmin
                 'label' => 'admin.fields.response.value',
                 'required' => false,
                 'attr' => ['readonly' => true],
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

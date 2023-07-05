@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Enum\EventOrderField;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Search\EventSearch;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Search\EventSearch;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Enum\EventOrderField;
 
 class EventOwnerEventsResolver implements ResolverInterface
 {

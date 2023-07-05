@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\MediaBundle\Entity\Media;
-use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\CustomCodeTrait;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="page")

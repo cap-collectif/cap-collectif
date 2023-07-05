@@ -158,14 +158,7 @@ class UserActivity implements FollowerNotifiedOfInterface
     public function setNotifiedOf(string $notifiedOf): self
     {
         if (!\in_array($notifiedOf, self::NOTIFICATIONS, true)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    '%s is not valide value for notified of follower %s -> %s',
-                    $notifiedOf,
-                    $this->getId(),
-                    $this->getUsername()
-                )
-            );
+            throw new InvalidArgumentException(sprintf('%s is not valide value for notified of follower %s -> %s', $notifiedOf, $this->getId(), $this->getUsername()));
         }
         $this->notifiedOf = $notifiedOf;
 

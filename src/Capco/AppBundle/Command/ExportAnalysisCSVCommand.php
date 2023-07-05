@@ -74,81 +74,80 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_decision-maker_email' => 'decision.decisionMaker.email',
         'proposal_decision-maker_CostEstimated' => 'decision.estimatedCost',
         'proposal_decision-maker_OfficialResponseDraft' => 'decision.officialResponse.isPublished',
-        'proposal_decision-maker_OfficialResponseDraft_Author' =>
-            'decision.officialResponse.authors',
+        'proposal_decision-maker_OfficialResponseDraft_Author' => 'decision.officialResponse.authors',
         'proposal_decision-maker_OfficialResponseDraft_Content' => 'decision.officialResponse.body',
         'proposal_decision-maker_decision' => 'decision.state',
         'proposal_decision-maker_decision_reason' => 'decision.refusedReason.name',
     ];
 
     protected const USER_INFOS_FRAGMENT = <<<'EOF'
-fragment userInfos on User {
-    id
-    username
-    isEmailConfirmed
-    email
-}
-EOF;
+        fragment userInfos on User {
+            id
+            username
+            isEmailConfirmed
+            email
+        }
+        EOF;
 
     protected const USER_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
-fragment userInfos on User {
-    id
-    username
-}
-EOF;
+        fragment userInfos on User {
+            id
+            username
+        }
+        EOF;
 
     protected const PROPOSAL_ANALYSIS_FRAGMENT = <<<'EOF'
 
-fragment proposalInfos on Proposal {
-  id
-  reference
-  adminUrl
-  title
-  createdAt
-  publishedAt
-  updatedAt
-  publicationStatus
-  trashedAt
-  trashedReason
-  author {
-    ...userInfos
-    userType{name}
-  }
-  status{
-    name
-  }
-  category{name}
-  address{formatted}
-  district{name}
-  summary
-  bodyText
-  estimation
-  analyses {
-    analyst {
-      ...userInfos
-    }
-    state
-    estimatedCost
-    responses {
-      id
-      __typename
-      ...on ValueResponse{
-        formattedValue
-      }
-      ... on MediaResponse {
-        medias {
+        fragment proposalInfos on Proposal {
           id
-          url
+          reference
+          adminUrl
+          title
+          createdAt
+          publishedAt
+          updatedAt
+          publicationStatus
+          trashedAt
+          trashedReason
+          author {
+            ...userInfos
+            userType{name}
+          }
+          status{
+            name
+          }
+          category{name}
+          address{formatted}
+          district{name}
+          summary
+          bodyText
+          estimation
+          analyses {
+            analyst {
+              ...userInfos
+            }
+            state
+            estimatedCost
+            responses {
+              id
+              __typename
+              ...on ValueResponse{
+                formattedValue
+              }
+              ... on MediaResponse {
+                medias {
+                  id
+                  url
+                }
+              }
+              question {
+                id
+                title
+              }
+            }
+          }
         }
-      }
-      question {
-        id
-        title
-      }
-    }
-  }
-}
-EOF;
+        EOF;
 
     protected static $defaultName = 'capco:export:analysis';
     protected EntityManagerInterface $em;
@@ -194,7 +193,7 @@ EOF;
         $projectId = $project['node']['id'];
         if (!$firstAnalysisStep) {
             if ($isVerbose) {
-                $output->writeln("<fg=red>No firstAnalysisStep for project ${projectSlug}!</>");
+                $output->writeln("<fg=red>No firstAnalysisStep for project {$projectSlug}!</>");
             }
 
             return;
@@ -225,8 +224,8 @@ EOF;
         );
 
         if (
-            isset($firstAnalysisStep['proposals']['edges']) &&
-            0 !== \count($firstAnalysisStep['proposals']['edges'])
+            isset($firstAnalysisStep['proposals']['edges'])
+            && 0 !== \count($firstAnalysisStep['proposals']['edges'])
         ) {
             $this->connectionTraversor->traverse(
                 $project['node'],
@@ -280,13 +279,13 @@ EOF;
     ): string {
         if ($isOnlyDecision) {
             return self::getShortenedFilename(
-                "project-${projectSlug}-decision",
+                "project-{$projectSlug}-decision",
                 '.csv',
                 $projectAdmin
             );
         }
 
-        return self::getShortenedFilename("project-${projectSlug}-analysis", '.csv', $projectAdmin);
+        return self::getShortenedFilename("project-{$projectSlug}-analysis", '.csv', $projectAdmin);
     }
 
     public function writeHeader(
@@ -402,19 +401,21 @@ EOF;
         $match = array_values(
             array_filter(
                 $proposal['responses'],
-                static fn(array $response) => isset($response['question']['id']) &&
-                    $response['question']['id'] === $questionId
+                static fn (array $response) => isset($response['question']['id'])
+                    && $response['question']['id'] === $questionId
             )
         );
 
         if (\count($match) > 0) {
             $response = $match[0];
+
             switch ($response['__typename']) {
                 case 'ValueResponse':
                     return $response['formattedValue'] ?? '';
+
                 case 'MediaResponse':
                     $urls = array_map(
-                        static fn(array $media) => $media['url'],
+                        static fn (array $media) => $media['url'],
                         $response['medias']
                     );
 
@@ -552,70 +553,70 @@ EOF;
         }
 
         return <<<EOF
-${AUTHOR_INFOS_FRAGMENT}
-${PROPOSAL_FRAGMENT}
-{
-  node(id: "${projectId}") {
-    ...on Project {
-        id
-        slug
-        firstAnalysisStep {
-          form {
-            analysisConfiguration {
-              evaluationForm {
-                questions {
-                  id
-                  title
-                }
-              }
-            }
-          }
-          proposals(includeUnpublished: true${cursor}) {
-            pageInfo {
-                hasNextPage
-                endCursor
-            }
-            edges {
-              cursor
-              node {
-                ...proposalInfos
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$PROPOSAL_FRAGMENT}
+            {
+              node(id: "{$projectId}") {
+                ...on Project {
+                    id
+                    slug
+                    firstAnalysisStep {
+                      form {
+                        analysisConfiguration {
+                          evaluationForm {
+                            questions {
+                              id
+                              title
+                            }
+                          }
+                        }
+                      }
+                      proposals(includeUnpublished: true{$cursor}) {
+                        pageInfo {
+                            hasNextPage
+                            endCursor
+                        }
+                        edges {
+                          cursor
+                          node {
+                            ...proposalInfos
 
-                assessment{
-                  body
-                  estimatedCost
-                  officialResponse
-                  state
-                  body
-                  supervisor{
-                    ...userInfos
-                  }
-                }
+                            assessment{
+                              body
+                              estimatedCost
+                              officialResponse
+                              state
+                              body
+                              supervisor{
+                                ...userInfos
+                              }
+                            }
 
-                decision {
-                  state
-                  refusedReason{
-                    name
-                  }
-                  estimatedCost
-                  isApproved
-                  officialResponse {
-                    body
-                    authors{
-                      username
+                            decision {
+                              state
+                              refusedReason{
+                                name
+                              }
+                              estimatedCost
+                              isApproved
+                              officialResponse {
+                                body
+                                authors{
+                                  username
+                                }
+                              }
+                              decisionMaker{
+                                ...userInfos
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
-                  }
-                  decisionMaker{
-                    ...userInfos
-                  }
                 }
               }
             }
-          }
-        }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getAnalysisGraphQLQuery(
@@ -634,41 +635,41 @@ EOF;
         }
 
         return <<<EOF
-${AUTHOR_INFOS_FRAGMENT}
-${PROPOSAL_FRAGMENT}
-{
-  node(id: "${projectId}") {
-    ...on Project {
-        id
-        slug
-        firstAnalysisStep {
-          proposals(includeUnpublished: true${cursor}) {
-            pageInfo {
-               hasNextPage
-               endCursor
-            }
-            edges {
-              cursor
-              node {
-                ...proposalInfos
-              }
-            }
-          }
-          form {
-            analysisConfiguration {
-              evaluationForm {
-                questions {
-                  id
-                  title
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$PROPOSAL_FRAGMENT}
+            {
+              node(id: "{$projectId}") {
+                ...on Project {
+                    id
+                    slug
+                    firstAnalysisStep {
+                      proposals(includeUnpublished: true{$cursor}) {
+                        pageInfo {
+                           hasNextPage
+                           endCursor
+                        }
+                        edges {
+                          cursor
+                          node {
+                            ...proposalInfos
+                          }
+                        }
+                      }
+                      form {
+                        analysisConfiguration {
+                          evaluationForm {
+                            questions {
+                              id
+                              title
+                            }
+                          }
+                        }
+                      }
+                    }
                 }
               }
             }
-          }
-        }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getPath(
@@ -712,14 +713,16 @@ EOF;
                     'query' => $this->getDecisionGraphQLQuery($projectId, $cursor, $projectAdmin),
                     'variables' => [],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
         } else {
             $data = $this->executor
                 ->execute('internal', [
                     'query' => $this->getAnalysisGraphQLQuery($projectId, $cursor, $projectAdmin),
                     'variables' => [],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
         }
 
         return $data;

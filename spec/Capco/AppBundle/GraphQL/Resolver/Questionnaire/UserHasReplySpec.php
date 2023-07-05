@@ -38,7 +38,8 @@ class UserHasReplySpec extends ObjectBehavior
         $replyRepository
             ->getForUserAndQuestionnaire($questionnaire, $user)
             ->isEmpty()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $this->__invoke($questionnaire, $args)->shouldReturn(true);
     }
 

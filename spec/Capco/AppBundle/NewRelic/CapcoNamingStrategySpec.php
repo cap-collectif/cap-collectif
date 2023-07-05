@@ -2,12 +2,12 @@
 
 namespace spec\Capco\AppBundle\NewRelic;
 
-use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\NewRelic\CapcoNamingStrategy;
 use GraphQL\Error\SyntaxError;
 use Overblog\GraphQLBundle\Request\Parser;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\NewRelic\CapcoNamingStrategy;
 use Overblog\GraphQLBundle\Request\ParserInterface;
+use PhpSpec\ObjectBehavior;
+use Symfony\Component\HttpFoundation\Request;
 
 class CapcoNamingStrategySpec extends ObjectBehavior
 {
@@ -49,7 +49,6 @@ class CapcoNamingStrategySpec extends ObjectBehavior
 
         $this->getTransactionName($request)->shouldReturn('GraphQL::getProjects');
     }
-
 
     public function it_should_return_syntax_error_query_if_invalid_graphql_query(
         Request $request,

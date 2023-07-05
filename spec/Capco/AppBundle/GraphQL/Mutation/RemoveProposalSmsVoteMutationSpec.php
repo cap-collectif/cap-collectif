@@ -12,15 +12,15 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\RemoveProposalSmsVoteMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
-use GraphQL\Error\UserError;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Prophecy\Argument;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
 {
@@ -67,8 +67,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalCollectSmsVote $currentVote,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
@@ -87,7 +86,8 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $proposalCollectSmsVoteRepository
             ->findOneBy(['phone' => $phone, 'proposal' => $proposal, 'collectStep' => $step])
             ->shouldBeCalledOnce()
-            ->willReturn($currentVote);
+            ->willReturn($currentVote)
+        ;
 
         $currentVoteId = 'currentVoteId';
         $currentVote->getId()->shouldBeCalledOnce()->willReturn($currentVoteId);
@@ -118,8 +118,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         CollectStep $step,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
@@ -144,8 +143,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         Proposal $proposal,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
@@ -171,8 +169,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         AbstractStep $step,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
@@ -199,8 +196,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    )
-    {
+    ) {
         $phone = '+336111111111';
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
@@ -219,10 +215,12 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $proposalCollectSmsVoteRepository
             ->findOneBy(['phone' => $phone, 'proposal' => $proposal, 'collectStep' => $step])
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->shouldThrow(new UserError('You have not voted for this proposal in this step.'))
-            ->during('__invoke', [$input]);
+            ->during('__invoke', [$input])
+        ;
     }
 
     public function it_should_return_phone_PHONE_NOT_FOUND_error_code(
@@ -231,8 +229,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step
-    )
-    {
+    ) {
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -246,8 +243,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
 
         $phoneTokenRepository->findOneBy(['token' => $token])->shouldBeCalledOnce()->willReturn(null);
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => 'PHONE_NOT_FOUND'
+            'errorCode' => 'PHONE_NOT_FOUND',
         ]);
     }
-
 }

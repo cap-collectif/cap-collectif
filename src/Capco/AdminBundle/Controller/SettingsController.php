@@ -99,6 +99,8 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
      * @Template("CapcoAdminBundle:Settings:list.html.twig")
+     *
+     * @param mixed $category
      */
     public function listAction(Request $request, $category)
     {
@@ -155,8 +157,8 @@ class SettingsController extends Controller
             Manager::allow_users_to_propose_events,
         ]);
         if (
-            !\in_array($toggle, $adminAllowedFeatures) &&
-            !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
+            !\in_array($toggle, $adminAllowedFeatures)
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -171,22 +173,24 @@ class SettingsController extends Controller
             $developerDocumentation->setIsEnabled($value);
             $this->getDoctrine()
                 ->getManager()
-                ->flush();
+                ->flush()
+            ;
         }
         /*  We set the `enabled` value of the SSOConfiguration as the same value as the feature toggle
          *  This can be moved to a listener or a service that handle all the actions that must be trigger
          *  by the feature toggle but it's not disturbing for now.
          */
         if (
-            false === $value &&
-            'login_franceconnect' === $toggle &&
-            ($franceConnectConfiguration = $this->SSOConfigurationRepository->find('franceConnect'))
+            false === $value
+            && 'login_franceconnect' === $toggle
+            && ($franceConnectConfiguration = $this->SSOConfigurationRepository->find('franceConnect'))
         ) {
             // @var $franceConnectConfiguration FranceConnectSSOConfiguration
             $franceConnectConfiguration->setEnabled($value);
             $this->getDoctrine()
                 ->getManager()
-                ->flush();
+                ->flush()
+            ;
         }
         if ($value) {
             $message = $this->translator->trans('features.switch.enabled', [], 'CapcoAppBundle');
@@ -195,7 +199,8 @@ class SettingsController extends Controller
         }
         $this->get('session')
             ->getFlashBag()
-            ->add('success', $message);
+            ->add('success', $message)
+        ;
         $category = $this->featuresCategoryResolver->findCategoryForToggle($toggle);
 
         return $this->redirect(

@@ -78,7 +78,8 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(\Prophecy\Argument::any(), \Prophecy\Argument::any())
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->__invoke($argument, $viewer);
     }
@@ -88,7 +89,8 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
         $proposalRepository->find(\Prophecy\Argument::any())->willReturn($proposal);
         $authorizationChecker
             ->isGranted(ProposalAnalysisRelatedVoter::EVALUATE, $proposal)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $proposal->getAnalyses()->willReturn(new ArrayCollection([]));
         $proposal->getAssessment()->willReturn(null);
         $proposal->getDecision()->willReturn(null);

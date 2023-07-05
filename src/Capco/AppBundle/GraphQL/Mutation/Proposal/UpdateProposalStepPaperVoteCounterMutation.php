@@ -53,13 +53,27 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
             $paperVote->setTotalCount($input->offsetGet('totalCount'));
             $paperVote->setTotalPointsCount($input->offsetGet('totalPointsCount'));
             $this->em->flush();
-            $this->indexer->index(get_class($proposal), $proposal->getId());
+            $this->indexer->index(\get_class($proposal), $proposal->getId());
             $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['error' => $error->getMessage()];
         }
 
         return ['proposal' => $proposal];
+    }
+
+    public function isGranted(string $proposalId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+        $proposal = $this->resolver->resolve($proposalId, $viewer);
+
+        if ($proposal) {
+            return $this->authorizationChecker->isGranted(ProposalVoter::EDIT, $proposal);
+        }
+
+        return false;
     }
 
     private function getOrCreatePaperVote(
@@ -113,21 +127,7 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
             ->setProposal($proposal)
             ->setStep($step)
             ->setTotalCount(0)
-            ->setTotalPointsCount(0);
+            ->setTotalPointsCount(0)
+        ;
     }
-
-    public function isGranted(string $proposalId, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-        $proposal = $this->resolver->resolve($proposalId, $viewer);
-
-        if ($proposal) {
-            return $this->authorizationChecker->isGranted(ProposalVoter::EDIT, $proposal);
-        }
-
-        return false;
-    }
-
 }

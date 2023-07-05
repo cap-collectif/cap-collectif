@@ -24,9 +24,7 @@ class ConsultationPage extends Page
                 "window.jQuery && ($('.section-list_container').length > 0 || $('.opinion-list-rendered').length > 0)"
             )
         ) {
-            throw new \RuntimeException(
-                'ConsultationPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('ConsultationPage did not fully load, check selector in "verifyPage".');
         }
     }
 
@@ -38,13 +36,7 @@ class ConsultationPage extends Page
 
         if ($currentUrl !== $expectedUrl) {
             if (false === strrpos($currentUrl, $opinionTypeUrl)) {
-                throw new UnexpectedPageException(
-                    sprintf(
-                        'Expected to be on "%s" but found "%s" instead',
-                        $this->getUrl($urlParameters),
-                        $this->getSession()->getCurrentUrl()
-                    )
-                );
+                throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getSession()->getCurrentUrl()));
             }
         }
     }

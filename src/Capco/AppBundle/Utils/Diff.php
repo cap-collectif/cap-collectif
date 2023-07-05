@@ -29,7 +29,8 @@ class Diff
                         ->filter(static function ($entity) use ($id) {
                             return (\is_array($entity) ? $entity['id'] : $entity->getId()) === $id;
                         })
-                        ->first();
+                        ->first()
+                    ;
                 }, $deletedIds)
             )
         );

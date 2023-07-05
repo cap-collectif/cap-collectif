@@ -2,25 +2,25 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ReportableInterface;
+use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Model\Sourceable;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="source", indexes={
@@ -330,7 +330,8 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         if ($this->getParent() && $this->getParent()->getStep()) {
             return $this->getParent()
                 ->getStep()
-                ->getProject();
+                ->getProject()
+            ;
         }
 
         return null;
@@ -338,19 +339,21 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() &&
-            ($this->getParent() && $this->getParent()->canDisplay($user))) ||
-            ($user && $user->isAdmin());
+        return ($this->isPublished()
+            && ($this->getParent() && $this->getParent()->canDisplay($user)))
+            || ($user && $user->isAdmin());
     }
 
     public function canContribute($user = null): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            ($this->getParent() && $this->getParent()->canContribute($user));
+        return $this->isPublished()
+            && !$this->isTrashed()
+            && ($this->getParent() && $this->getParent()->canContribute($user));
     }
 
     // ******************** Lifecycle ************************************

@@ -82,7 +82,8 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $postAuthorFactory
             ->findOrCreatePostAuthors($post, ['VXNlcjp1c2VyVGhlbw=='], $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn(['postAuthorId']);
+            ->willReturn(['postAuthorId'])
+        ;
 
         $data = $this->data;
         $data['authors'] = ['postAuthorId'];
@@ -121,7 +122,8 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $postAuthorFactory
             ->findOrCreatePostAuthors($post, ['VXNlcjp1c2VyVGhlbw=='], $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn(['postAuthorId']);
+            ->willReturn(['postAuthorId'])
+        ;
 
         $data = $this->data;
         $data['authors'] = ['postAuthorId'];

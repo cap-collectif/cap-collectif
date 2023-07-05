@@ -34,7 +34,8 @@ class ProposalReportingsResolver implements ResolverInterface
                 return $this->repository
                     ->getByProposal($proposal, $offset, $limit, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             $totalCount = $this->repository->countForProposal($proposal);

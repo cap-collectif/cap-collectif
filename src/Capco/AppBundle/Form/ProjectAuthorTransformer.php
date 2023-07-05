@@ -4,10 +4,10 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\ProjectAuthor;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectAuthorRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectAuthorTransformer

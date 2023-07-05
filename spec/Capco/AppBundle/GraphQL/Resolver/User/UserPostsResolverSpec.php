@@ -8,9 +8,9 @@ use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\GraphQL\Resolver\User\UserPostsResolver;
 use Capco\AppBundle\Search\PostSearch;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class UserPostsResolverSpec extends ObjectBehavior
 {
@@ -65,7 +65,8 @@ class UserPostsResolverSpec extends ObjectBehavior
                 $orderByDirection
             )
             ->shouldBeCalled()
-            ->willReturn($paginatedResult);
+            ->willReturn($paginatedResult)
+        ;
 
         $this->__invoke($user, $args)->shouldReturnConnection();
     }
@@ -96,7 +97,8 @@ class UserPostsResolverSpec extends ObjectBehavior
                 OrderDirection::DESC
             )
             ->shouldBeCalled()
-            ->willReturn($paginatedResult);
+            ->willReturn($paginatedResult)
+        ;
 
         $this->__invoke($user, $args)->shouldReturnConnection();
     }

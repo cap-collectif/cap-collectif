@@ -2,24 +2,24 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Twig\TwigFilter;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
-use Twig\Extension\AbstractExtension;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\ProposalCollectVote;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\CollectStepRepository;
-use Capco\AppBundle\Repository\SelectionStepRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCurrentVotableStepResolver;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Capco\UserBundle\Entity\User;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 class ProposalStepVotesResolver extends AbstractExtension
 {
@@ -77,8 +77,8 @@ class ProposalStepVotesResolver extends AbstractExtension
         $creditsLeftByStepId = [];
         foreach ($steps as $step) {
             if (
-                ($step instanceof SelectionStep || $step instanceof CollectStep) &&
-                $step->isBudgetVotable()
+                ($step instanceof SelectionStep || $step instanceof CollectStep)
+                && $step->isBudgetVotable()
             ) {
                 $creditsLeft = $step->getBudget();
                 if ($creditsLeft > 0 && $user) {
@@ -98,7 +98,7 @@ class ProposalStepVotesResolver extends AbstractExtension
         if (\count($collectSteps) > 0) {
             $step = $collectSteps[0];
             if ($step->isVotable()) {
-                array_push($collection, $step);
+                $collection[] = $step;
             }
         }
 
@@ -124,7 +124,8 @@ class ProposalStepVotesResolver extends AbstractExtension
             ->__invoke($proposal)
             ->then(function ($value) use (&$step) {
                 $step = $value;
-            });
+            })
+        ;
         $this->promiseAdapter->await($promise);
 
         return $step;
@@ -152,6 +153,7 @@ class ProposalStepVotesResolver extends AbstractExtension
     private function checkIntanceOfProposalVote($vote): bool
     {
         $connected = $anonymous = $step = null;
+
         switch (true) {
             case $vote instanceof ProposalSelectionVote:
                 $step = $vote->getSelectionStep();
@@ -168,6 +170,7 @@ class ProposalStepVotesResolver extends AbstractExtension
                 ]);
 
                 break;
+
             case $vote instanceof ProposalCollectVote:
                 $step = $vote->getCollectStep();
                 if (!$step->isBudgetVotable()) {
@@ -183,6 +186,7 @@ class ProposalStepVotesResolver extends AbstractExtension
                 ]);
 
                 break;
+
             default:
                 throw new NotFoundHttpException();
         }

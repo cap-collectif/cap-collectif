@@ -51,9 +51,7 @@ class ProposalPage extends Page
     public function verifyPage()
     {
         if (!$this->getSession()->wait(10000, "$('#ProposalPageMainContent').length > 0")) {
-            throw new \RuntimeException(
-                'Proposal page did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('Proposal page did not fully load, check selector in "verifyPage".');
         }
     }
 
@@ -84,7 +82,7 @@ class ProposalPage extends Page
 
     public function getVotesCount(): int
     {
-        return (int) filter_var($this->getVotesCounter()->getText(), FILTER_SANITIZE_NUMBER_INT);
+        return (int) filter_var($this->getVotesCounter()->getText(), \FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsCounter()
@@ -94,7 +92,7 @@ class ProposalPage extends Page
 
     public function getCommentsCount(): int
     {
-        return (int) filter_var($this->getCommentsCounter()->getText(), FILTER_SANITIZE_NUMBER_INT);
+        return (int) filter_var($this->getCommentsCounter()->getText(), \FILTER_SANITIZE_NUMBER_INT);
     }
 
     public function getCommentsListSelector()
@@ -109,12 +107,12 @@ class ProposalPage extends Page
 
     public function getFirstSelector($selector)
     {
-        return $this->getSelector("first ${selector}");
+        return $this->getSelector("first {$selector}");
     }
 
     public function getLastSelector($selector)
     {
-        return $this->getSelector("last ${selector}");
+        return $this->getSelector("last {$selector}");
     }
 
     public function getVoteButton()
@@ -207,7 +205,7 @@ class ProposalPage extends Page
 
     public function clickEditCommentButton(string $id)
     {
-        $this->find('css', "[id='CommentEdit-${id}']")->click();
+        $this->find('css', "[id='CommentEdit-{$id}']")->click();
     }
 
     public function getProposalButtonsSelector()
@@ -242,42 +240,42 @@ class ProposalPage extends Page
 
     public function followMinimalIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow minimal'] . "-${proposalId}";
+        $element = $this->elements['proposal follow minimal'] . "-{$proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function followEssentialIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow essential'] . "-${proposalId}";
+        $element = $this->elements['proposal follow essential'] . "-{$proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function followAllIsChecked(string $proposalId)
     {
-        $element = $this->elements['proposal follow all'] . "-${proposalId}";
+        $element = $this->elements['proposal follow all'] . "-{$proposalId}";
 
         return $this->find('css', $element)->isChecked();
     }
 
     public function clickFollowChoice(string $choice, $proposalId)
     {
-        $element = $this->elements[$choice] . "-${proposalId}";
+        $element = $this->elements[$choice] . "-{$proposalId}";
 
         return $this->find('css', $element)->click();
     }
 
     public function clickFollowButton(string $proposalId)
     {
-        $element = $this->elements['proposal follow button'] . "-${proposalId}";
+        $element = $this->elements['proposal follow button'] . "-{$proposalId}";
 
         return $this->find('css', $element)->click();
     }
 
     public function clickUnfollowButton(string $proposalId)
     {
-        $element = $this->elements['proposal unfollow button'] . "-${proposalId}";
+        $element = $this->elements['proposal unfollow button'] . "-{$proposalId}";
 
         return $this->find('css', $element)->click();
     }

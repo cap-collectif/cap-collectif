@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Opinion;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,7 +31,8 @@ class OpinionForm extends AbstractType
                 'required' => false,
                 'allow_add' => true,
                 'by_reference' => false,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

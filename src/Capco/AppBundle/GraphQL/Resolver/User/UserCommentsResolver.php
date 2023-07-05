@@ -22,7 +22,7 @@ class UserCommentsResolver implements ResolverInterface
     public function __invoke(
         $viewer,
         User $user,
-        Argument $args = null,
+        ?Argument $args = null,
         ?\ArrayObject $context = null
     ): ConnectionInterface {
         if (!$args) {
@@ -30,9 +30,9 @@ class UserCommentsResolver implements ResolverInterface
         }
 
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (

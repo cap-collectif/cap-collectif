@@ -48,7 +48,8 @@ class MandrillClient
             ->setSpfValidation($data->spf->valid)
             ->setTxtKey('mandrill_verify')
             ->setTxtValue($data->verify_txt_key)
-            ->setTxtValidation($data->valid_signing);
+            ->setTxtValidation($data->valid_signing)
+        ;
 
         return $serviceDomain;
     }
@@ -94,7 +95,8 @@ class MandrillClient
             ->setDkimValidation($data->dkim->valid)
             ->setTxtKey('mandrill_verify')
             ->setTxtValue($data->verify_txt_key)
-            ->setTxtValidation($data->valid_signing);
+            ->setTxtValidation($data->valid_signing)
+        ;
     }
 
     private function getAuth(): string

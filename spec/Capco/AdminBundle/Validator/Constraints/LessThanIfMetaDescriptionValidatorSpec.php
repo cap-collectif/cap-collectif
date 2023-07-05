@@ -2,7 +2,6 @@
 
 namespace spec\Capco\AdminBundle\Validator\Constraints;
 
-
 use Capco\AdminBundle\Validator\Constraints\LessThanIfMetaDescription;
 use Capco\AdminBundle\Validator\Constraints\LessThanIfMetaDescriptionValidator;
 use Capco\AppBundle\Entity\SiteParameter;
@@ -12,7 +11,6 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class LessThanIfMetaDescriptionValidatorSpec extends ObjectBehavior
 {
-
     public function it_is_initializable()
     {
         $this->shouldHaveType(LessThanIfMetaDescriptionValidator::class);
@@ -26,7 +24,7 @@ class LessThanIfMetaDescriptionValidatorSpec extends ObjectBehavior
     ) {
         $parameter->isSocialNetworkDescription()->willReturn(true)->shouldBeCalled();
         $str = '';
-        for($i = 0; $i < $constraint->max + 10; $i++) {
+        for ($i = 0; $i < $constraint->max + 10; ++$i) {
             $str .= $i;
         }
         $parameter->getValue()->willReturn($str)->shouldBeCalled();
@@ -49,5 +47,4 @@ class LessThanIfMetaDescriptionValidatorSpec extends ObjectBehavior
         $this->initialize($context);
         $this->validate($parameter, $constraint);
     }
-
 }

@@ -62,15 +62,15 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         if ((!$publicToken || '' === $publicToken) && !(!$secretToken || '' === $secretToken)) {
             throw new UserError(self::ERROR_PROVIDE_BOTH_TOKENS);
         }
-        
+
         if (!(!$publicToken || '' === $publicToken) && (!$secretToken || '' === $secretToken)) {
             throw new UserError(self::ERROR_PROVIDE_BOTH_TOKENS);
         }
 
         if (
-            $publicToken &&
-            '' !== $publicToken &&
-            !$this->mapboxClient->isValidToken($publicToken)
+            $publicToken
+            && '' !== $publicToken
+            && !$this->mapboxClient->isValidToken($publicToken)
         ) {
             $this->logger->error(
                 'Invalid public token given for provider ' . MapProviderEnum::MAPBOX
@@ -80,9 +80,9 @@ class ChangeMapProviderTokenMutation implements MutationInterface
         }
 
         if (
-            $secretToken &&
-            '' !== $secretToken &&
-            !$this->mapboxClient->isValidToken($secretToken, true)
+            $secretToken
+            && '' !== $secretToken
+            && !$this->mapboxClient->isValidToken($secretToken, true)
         ) {
             $this->logger->error(
                 'Invalid secret token given for provider ' . MapProviderEnum::MAPBOX

@@ -18,7 +18,8 @@ class MultipleChoiceQuestionType extends AbstractQuestionType
             ->add('groupedResponsesEnabled')
             ->add('responseColorsDisabled')
             ->add('otherAllowed', CheckboxType::class)
-            ->add('validationRule', QuestionValidationRuleType::class);
+            ->add('validationRule', QuestionValidationRuleType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -13,10 +13,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAnalyseProcessor implements ProcessorInterface
 {
-    const TYPE_ANALYSIS = 'analysis';
-    const TYPE_ASSESSMENT = 'assessment';
-    const TYPE_DECISION = 'decision';
-    const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
+    public const TYPE_ANALYSIS = 'analysis';
+    public const TYPE_ASSESSMENT = 'assessment';
+    public const TYPE_DECISION = 'decision';
+    public const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
 
     private ProposalRepository $proposalRepository;
     private ProposalAnalysisRepository $analysisRepository;
@@ -61,8 +61,10 @@ class ProposalAnalyseProcessor implements ProcessorInterface
         switch ($jsonDecoded['type']) {
             case self::TYPE_ANALYSIS:
                 return $this->notifyAnalysis($proposal, $date, $jsonDecoded);
+
             case self::TYPE_ASSESSMENT:
                 return $this->notifyAssessment($proposal, $date);
+
             case self::TYPE_DECISION:
                 return $this->notifyDecision($proposal, $date);
         }
@@ -73,8 +75,8 @@ class ProposalAnalyseProcessor implements ProcessorInterface
     private function notifyAnalysis(Proposal $proposal, \DateTime $date, array $jsonDecoded): bool
     {
         if (
-            $proposal->getAnalyses()->count() >= $proposal->getAnalysts()->count() &&
-            $proposal->getAnalyses()->count() >= 2
+            $proposal->getAnalyses()->count() >= $proposal->getAnalysts()->count()
+            && $proposal->getAnalyses()->count() >= 2
         ) {
             $this->notifier->onLastAnalysisPublication($proposal);
         } else {

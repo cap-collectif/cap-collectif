@@ -81,7 +81,8 @@ class PreConfigureProjectMutation implements MutationInterface
         if ($projectInput['projectType'] ?? null) {
             $projectInput['projectType'] = $this->projectTypeRepository
                 ->findOneBy(['slug' => $projectInput['projectType']])
-                ->getId();
+                ->getId()
+            ;
         }
 
         try {

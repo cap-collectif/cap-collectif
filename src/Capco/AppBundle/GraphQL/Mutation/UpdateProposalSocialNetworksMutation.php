@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use GraphQL\Error\UserError;
 
 class UpdateProposalSocialNetworksMutation implements MutationInterface
 {

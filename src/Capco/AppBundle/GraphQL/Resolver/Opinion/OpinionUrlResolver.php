@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,11 +30,11 @@ class OpinionUrlResolver implements ResolverInterface
         $step = $this->consultationStepRepository->getByOpinionId($contribution->getId());
         $project = $step ? $step->getProject() : null;
         if (
-            $project &&
-            $project->getSlug() &&
-            $step->getSlug() &&
-            $contribution->getSlug() &&
-            $contribution->getOpinionType()->getSlug()
+            $project
+            && $project->getSlug()
+            && $step->getSlug()
+            && $contribution->getSlug()
+            && $contribution->getOpinionType()->getSlug()
         ) {
             return $this->router->generate(
                 'app_consultation_show_opinion',

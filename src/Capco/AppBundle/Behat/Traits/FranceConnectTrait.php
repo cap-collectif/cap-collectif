@@ -37,7 +37,8 @@ trait FranceConnectTrait
         $this->getSession()
             ->getPage()
             ->find('css', 'button.content__continue')
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -86,12 +87,14 @@ trait FranceConnectTrait
         $this->getSession()
             ->getPage()
             ->find('css', $id)
-            ->click();
+            ->click()
+        ;
         $this->IShouldSeeTheFranceConnectInteractionScreen();
 
         $this->getSession()
             ->getPage()
             ->find('css', '[value="Valider"]')
-            ->click();
+            ->click()
+        ;
     }
 }

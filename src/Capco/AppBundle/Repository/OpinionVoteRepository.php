@@ -27,12 +27,14 @@ class OpinionVoteRepository extends EntityRepository
                     return $step->isConsultationStep();
                 })
             )
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByAuthorAndOpinion(User $author, Opinion $opinion): ?OpinionVote
@@ -41,7 +43,8 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.opinion = :opinion')
             ->andWhere('v.user = :author')
             ->setParameter('author', $author)
-            ->setParameter('opinion', $opinion);
+            ->setParameter('opinion', $opinion)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -51,7 +54,8 @@ class OpinionVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->select('COUNT (DISTINCT v)')
             ->andWhere('v.user = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -65,7 +69,8 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('o.published = 1')
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -79,7 +84,8 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('o.consultation = :consultation')
             ->andWhere('v.user = :author')
             ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -98,7 +104,8 @@ class OpinionVoteRepository extends EntityRepository
         $qb->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $votable->getId())
             ->andWhere('v.value = :value')
-            ->setParameter('value', $value);
+            ->setParameter('value', $value)
+        ;
 
         return $qb;
     }
@@ -172,7 +179,8 @@ class OpinionVoteRepository extends EntityRepository
             ->leftJoin('v.opinion', 'o')
             ->andWhere('v.opinion = :opinion')
             ->setParameter('opinion', $opinionId)
-            ->orderBy('v.updatedAt', 'ASC');
+            ->orderBy('v.updatedAt', 'ASC')
+        ;
         if ($limit > 0) {
             $qb->setMaxResults($limit);
             $qb->setFirstResult($offset);
@@ -187,7 +195,8 @@ class OpinionVoteRepository extends EntityRepository
 
         $qb->select('count(ov.id)')
             ->where('ov.opinion = :opinion')
-            ->setParameter('opinion', $opinion);
+            ->setParameter('opinion', $opinion)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -260,7 +269,8 @@ class OpinionVoteRepository extends EntityRepository
                 'to' => $to,
                 'id' => $opinionId,
                 'vote' => $voteValue,
-            ]);
+            ])
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }

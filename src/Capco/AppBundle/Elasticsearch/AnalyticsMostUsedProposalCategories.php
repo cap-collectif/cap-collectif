@@ -30,7 +30,7 @@ class AnalyticsMostUsedProposalCategories
     public function fromEs(ResultSet $set): self
     {
         $categories = array_map(
-            static fn(array $bucket) => [
+            static fn (array $bucket) => [
                 'id' => $bucket['key'],
                 'doc_count' => $bucket['doc_count'],
             ],
@@ -38,10 +38,10 @@ class AnalyticsMostUsedProposalCategories
         );
         $this->totalCount = array_reduce(
             $categories,
-            static fn(int $acc, array $category) => $acc + $category['doc_count'],
+            static fn (int $acc, array $category) => $acc + $category['doc_count'],
             0
         );
-        $ids = array_map(static fn(array $category) => $category['id'], $categories);
+        $ids = array_map(static fn (array $category) => $category['id'], $categories);
         $categoriesFromDb = $this->repository->hydrateFromIdsOrdered($ids);
 
         $this->values = array_map(

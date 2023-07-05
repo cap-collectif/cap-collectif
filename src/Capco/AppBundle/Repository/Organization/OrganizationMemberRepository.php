@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method OrganizationMember|null find($id, $lockMode = null, $lockVersion = null)
- * @method OrganizationMember|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|OrganizationMember find($id, $lockMode = null, $lockVersion = null)
+ * @method null|OrganizationMember findOneBy(array $criteria, array $orderBy = null)
  * @method OrganizationMember[]    findAll()
  * @method OrganizationMember[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -25,7 +25,8 @@ class OrganizationMemberRepository extends EntityRepository
             ->setMaxResults($limit)
             ->setParameter('organization', $organization)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOrganization(Organization $organization): int

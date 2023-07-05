@@ -6,16 +6,13 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class OrganizationNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class OrganizationNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 

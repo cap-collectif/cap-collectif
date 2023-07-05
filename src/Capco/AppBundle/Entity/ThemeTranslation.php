@@ -23,11 +23,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ThemeTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
+    use MetaDescriptionTrait;
     use SluggableTitleTrait;
     use TextableTrait;
-    use MetaDescriptionTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="teaser", type="string", length=255, nullable=true)

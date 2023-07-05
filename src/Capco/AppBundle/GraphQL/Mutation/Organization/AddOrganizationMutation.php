@@ -24,8 +24,7 @@ class AddOrganizationMutation implements MutationInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         SluggerInterface $slugger
-    )
-    {
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->slugger = $slugger;
@@ -65,6 +64,7 @@ class AddOrganizationMutation implements MutationInterface
             if ($translation['title']) {
                 $slug = strtolower($this->slugger->slug($translation['title'])->toString());
                 $organization->setSlug($slug);
+
                 return;
             }
         }

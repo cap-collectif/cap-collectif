@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalPaperVotesResolver implements ResolverInterface

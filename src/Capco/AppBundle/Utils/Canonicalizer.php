@@ -17,10 +17,9 @@ class Canonicalizer implements CanonicalizerInterface
             return null;
         }
         $encoding = mb_detect_encoding($string, mb_detect_order(), true);
-        $result = $encoding
-            ? mb_convert_case($string, MB_CASE_LOWER, $encoding)
-            : mb_convert_case($string, MB_CASE_LOWER);
 
-        return $result;
+        return $encoding
+            ? mb_convert_case($string, \MB_CASE_LOWER, $encoding)
+            : mb_convert_case($string, \MB_CASE_LOWER);
     }
 }

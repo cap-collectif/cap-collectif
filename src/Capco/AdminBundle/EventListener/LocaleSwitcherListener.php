@@ -4,8 +4,8 @@ namespace Capco\AdminBundle\EventListener;
 
 use Capco\AdminBundle\Block\LocaleSwitcherBlockService;
 use Capco\AppBundle\Toggle\Manager;
-use Sonata\BlockBundle\Model\Block;
 use Sonata\BlockBundle\Event\BlockEvent;
+use Sonata\BlockBundle\Model\Block;
 
 class LocaleSwitcherListener
 {

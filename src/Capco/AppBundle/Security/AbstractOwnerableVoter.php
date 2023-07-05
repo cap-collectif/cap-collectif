@@ -17,9 +17,9 @@ abstract class AbstractOwnerableVoter extends Voter
 
     protected static function canCreate(User $viewer): bool
     {
-        return $viewer->isAdmin() ||
-            $viewer->isProjectAdmin() ||
-            self::isMemberOfAnyOrganisation($viewer);
+        return $viewer->isAdmin()
+            || $viewer->isProjectAdmin()
+            || self::isMemberOfAnyOrganisation($viewer);
     }
 
     protected static function canEdit(Ownerable $ownerable, User $viewer): bool
@@ -29,14 +29,14 @@ abstract class AbstractOwnerableVoter extends Voter
 
     protected static function canDelete(Ownerable $ownerable, User $viewer): bool
     {
-        return self::isAdminOrOwner($ownerable, $viewer) ||
-            self::isAdminOrCreatorInTheOwningOrganisation($ownerable, $viewer);
+        return self::isAdminOrOwner($ownerable, $viewer)
+            || self::isAdminOrCreatorInTheOwningOrganisation($ownerable, $viewer);
     }
 
     protected static function isAdminOrOwnerOrMember(Ownerable $ownerable, User $viewer): bool
     {
-        return self::isAdminOrOwner($ownerable, $viewer) ||
-            self::isMemberOfTheOwningOrganisation($ownerable, $viewer);
+        return self::isAdminOrOwner($ownerable, $viewer)
+            || self::isMemberOfTheOwningOrganisation($ownerable, $viewer);
     }
 
     protected static function isAdminOrOwner(Ownerable $ownerable, User $viewer): bool
@@ -56,8 +56,8 @@ abstract class AbstractOwnerableVoter extends Voter
         if ($ownerable->getOwner() instanceof Organization) {
             $membership = $ownerable->getOwner()->getMembership($viewer);
             if ($membership) {
-                return OrganizationMemberRoleType::ADMIN === $membership->getRole() ||
-                    self::isCreator($ownerable, $viewer);
+                return OrganizationMemberRoleType::ADMIN === $membership->getRole()
+                    || self::isCreator($ownerable, $viewer);
             }
         }
 

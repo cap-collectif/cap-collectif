@@ -14,6 +14,7 @@ class ProjectDistrictPositionerRepository extends EntityRepository
             ->where('p.project = :project')
             ->setParameter('project', $projectId)
             ->getQuery()
-            ->execute();
+            ->execute()
+        ;
     }
 }

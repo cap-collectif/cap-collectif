@@ -17,7 +17,8 @@ class QuestionnaireNotificationConfigurationType extends AbstractType
             ->add('email', EmailType::class)
             ->add('onQuestionnaireReplyCreate', CheckboxType::class)
             ->add('onQuestionnaireReplyUpdate', CheckboxType::class)
-            ->add('onQuestionnaireReplyDelete', CheckboxType::class);
+            ->add('onQuestionnaireReplyDelete', CheckboxType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

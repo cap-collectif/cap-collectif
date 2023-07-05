@@ -54,6 +54,7 @@ class ProposalVoter extends AbstractOwnerableVoter
         if (!$viewer instanceof User) {
             return false;
         }
+
         switch ($attribute) {
             case self::CHANGE_STATUS:
             case self::EDIT:
@@ -62,11 +63,14 @@ class ProposalVoter extends AbstractOwnerableVoter
             case self::CHANGE_PROPOSAL_NOTATION:
             case self::CHANGE_PROPOSAL_PROGRESS_STEPS:
                 return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer);
+
             case self::CHANGE_CONTENT:
                 return self::canChangeContent($subject, $viewer);
+
             case self::CREATE_PROPOSAL_FUSION:
             case self::UPDATE_PROPOSAL_FUSION:
                 return self::canFusion($subject, $viewer);
+
             default:
                 return false;
         }
@@ -85,6 +89,7 @@ class ProposalVoter extends AbstractOwnerableVoter
     {
         foreach ($proposals as $proposal) {
             $project = $proposal->getProject();
+
             return self::isAdminOrOwnerOrMember($project, $viewer);
         }
 

@@ -46,23 +46,27 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $args
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         unset($input['owner']);
         $form->submit($input, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $response = $this->__invoke($args, $viewer);
         $response['proposalForm']->shouldHaveType(ProposalForm::class);
@@ -86,23 +90,27 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $args
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn($organizationId);
+            ->willReturn($organizationId)
+        ;
 
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         unset($input['owner']);
         $form->submit($input, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $em->persist(\Prophecy\Argument::type(ProposalForm::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $settableOwnerResolver
             ->__invoke($organizationId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
 
         $response = $this->__invoke($args, $viewer);
         $response['proposalForm']->shouldHaveType(ProposalForm::class);
@@ -123,12 +131,14 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
 
         $formFactory
             ->create(ProposalFormCreateType::class, \Prophecy\Argument::any())
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($input, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $form->getErrors(true, false)->willReturn('ceci est une erreur');
         $em->flush()->shouldNotBeCalled();
 

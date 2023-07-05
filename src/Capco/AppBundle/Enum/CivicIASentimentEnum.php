@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Enum;
 
 class CivicIASentimentEnum implements EnumType
 {
-    const POSITIVE = 'POSITIVE';
-    const NEUTRAL = 'NEUTRAL';
-    const NEGATIVE = 'NEGATIVE';
-    const MIXED = 'MIXED';
+    public const POSITIVE = 'POSITIVE';
+    public const NEUTRAL = 'NEUTRAL';
+    public const NEGATIVE = 'NEGATIVE';
+    public const MIXED = 'MIXED';
 
-    const SENTIMENTS = [self::POSITIVE, self::NEUTRAL, self::NEGATIVE, self::MIXED];
+    public const SENTIMENTS = [self::POSITIVE, self::NEUTRAL, self::NEGATIVE, self::MIXED];
 
     public static function isValid($value): bool
     {

@@ -7,8 +7,8 @@ use Capco\AppBundle\GraphQL\Mutation\Sms\UpdateTwilioVerifyServiceMutation;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PhpSpec\ObjectBehavior;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 
 class UpdateTwilioVerifyServiceMutationSpec extends ObjectBehavior
 {
@@ -44,7 +44,8 @@ class UpdateTwilioVerifyServiceMutationSpec extends ObjectBehavior
                 'type' => 'twilio_verify_service_name',
             ])
             ->shouldBeCalledOnce()
-            ->willReturn($externalServiceConfiguration);
+            ->willReturn($externalServiceConfiguration)
+        ;
 
         $externalServiceConfiguration->setValue('udpatedServiceName')->shouldBeCalledOnce();
 

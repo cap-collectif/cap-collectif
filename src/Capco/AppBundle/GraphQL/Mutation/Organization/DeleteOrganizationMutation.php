@@ -39,8 +39,7 @@ class DeleteOrganizationMutation implements MutationInterface
         OrganizationRepository $organizationRepository,
         PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
         UserInviteRepository $userInviteRepository
-    )
-    {
+    ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
         $this->projectRepository = $projectRepository;
@@ -58,7 +57,7 @@ class DeleteOrganizationMutation implements MutationInterface
         if (!$organization instanceof Organization) {
             return ['errorCode' => self::ORGANIZATION_NOT_FOUND];
         }
-        if ($organization->getDeletedAt() !== null) {
+        if (null !== $organization->getDeletedAt()) {
             return ['errorCode' => self::ORGANIZATION_ALREADY_ANONYMIZED];
         }
 
@@ -69,6 +68,18 @@ class DeleteOrganizationMutation implements MutationInterface
         $this->em->flush();
 
         return ['deletedOrganization' => $organization];
+    }
+
+    public function removePendingOrganizationsInvitations(Organization $organization): void
+    {
+        $pendingOrganizationInvitations = $this->pendingOrganizationInvitationRepository->findBy(['organization' => $organization]);
+        foreach ($pendingOrganizationInvitations as $pendingOrganizationInvitation) {
+            $userInvite = $this->userInviteRepository->findOneBy(['token' => $pendingOrganizationInvitation->getToken()]);
+            if ($userInvite) {
+                $this->em->remove($userInvite);
+            }
+            $this->em->remove($pendingOrganizationInvitation);
+        }
     }
 
     private function anonymize(Organization $organization): void
@@ -85,7 +96,8 @@ class DeleteOrganizationMutation implements MutationInterface
             ->setDeletedAt(new \DateTime())
             ->setLogo(null)
             ->setBanner(null)
-            ->setOrganizationSocialNetworks(null);
+            ->setOrganizationSocialNetworks(null)
+        ;
     }
 
     private function handleProjectsAfterOrganizationAnonymization(Organization $organization): void
@@ -97,17 +109,4 @@ class DeleteOrganizationMutation implements MutationInterface
             $project->setVisibility(ProjectVisibilityMode::VISIBILITY_ADMIN);
         }
     }
-
-    public function removePendingOrganizationsInvitations(Organization $organization): void
-    {
-        $pendingOrganizationInvitations = $this->pendingOrganizationInvitationRepository->findBy(['organization' => $organization]);
-        foreach ($pendingOrganizationInvitations as $pendingOrganizationInvitation) {
-            $userInvite = $this->userInviteRepository->findOneBy(['token' => $pendingOrganizationInvitation->getToken()]);
-            if ($userInvite) {
-                $this->em->remove($userInvite);
-            }
-            $this->em->remove($pendingOrganizationInvitation);
-        }
-    }
-
 }

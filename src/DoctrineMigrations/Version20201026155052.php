@@ -87,15 +87,16 @@ final class Version20201026155052 extends AbstractMigration
         $categoriesWithDefaultImage = $this->connection
             ->executeQuery(
                 <<<'SQL'
-SELECT proposal_category.id AS proposal_category_id, media__media.provider_metadata FROM proposal_category
-LEFT JOIN category_image ON proposal_category.category_media_id = category_image.id
-LEFT JOIN media__media ON category_image.image_id = media__media.id
-WHERE category_image.is_default = 1
-SQL
+                    SELECT proposal_category.id AS proposal_category_id, media__media.provider_metadata FROM proposal_category
+                    LEFT JOIN category_image ON proposal_category.category_media_id = category_image.id
+                    LEFT JOIN media__media ON category_image.image_id = media__media.id
+                    WHERE category_image.is_default = 1
+                    SQL
             )
-            ->fetchAllAssociative();
+            ->fetchAllAssociative()
+        ;
         $informations = array_map(
-            static fn(array $category) => [
+            static fn (array $category) => [
                 'proposal_category_id' => $category['proposal_category_id'],
                 'filename' => json_decode($category['provider_metadata'], true)['filename'],
             ],

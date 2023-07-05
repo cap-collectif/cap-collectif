@@ -48,7 +48,7 @@ abstract class AbstractResponse implements IndexableInterface
     use TimestampableTrait;
     use UuidTrait;
 
-    const TYPE_FIELD_NAME = '_type';
+    public const TYPE_FIELD_NAME = '_type';
 
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)

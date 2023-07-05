@@ -28,6 +28,8 @@ class EmailingCampaignPreviewResolver implements ResolverInterface
 
     /**
      * @todo set user_locale to localize the campaign
+     *
+     * @param mixed $campaign
      */
     public function __invoke($campaign): string
     {

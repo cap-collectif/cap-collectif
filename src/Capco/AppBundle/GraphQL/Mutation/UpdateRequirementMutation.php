@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\UserRequirement;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 
 class UpdateRequirementMutation implements MutationInterface
 {

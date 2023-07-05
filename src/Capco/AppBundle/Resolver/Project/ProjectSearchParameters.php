@@ -14,10 +14,10 @@ class ProjectSearchParameters
     public function __construct(
         int $elements = 0,
         int $page = 1,
-        string $term = null,
-        string $type = null,
+        ?string $term = null,
+        ?string $type = null,
         string $orderBy = 'date',
-        string $theme = null
+        ?string $theme = null
     ) {
         $this->elements = $elements;
         $this->page = $page;
@@ -27,14 +27,14 @@ class ProjectSearchParameters
         $this->theme = $theme;
     }
 
-    public function setTerm(string $term = null): self
+    public function setTerm(?string $term = null): self
     {
         $this->term = $term;
 
         return $this;
     }
 
-    public function setType(string $type = null)
+    public function setType(?string $type = null)
     {
         $this->type = $type;
 
@@ -48,7 +48,7 @@ class ProjectSearchParameters
         return $this;
     }
 
-    public function setTheme(string $theme = null): self
+    public function setTheme(?string $theme = null): self
     {
         $this->theme = $theme;
 

@@ -41,7 +41,8 @@ class TranslateBasicParameters extends Command
                 'c',
                 InputOption::VALUE_REQUIRED,
                 'code of the default locale'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -68,7 +69,7 @@ class TranslateBasicParameters extends Command
     ): ?SiteParameter {
         $siteParameter = $this->getSiteParameter($parameterKey);
         if (null === $siteParameter) {
-            $output->writeln("<error>Parameter ${parameterKey} not found</error>");
+            $output->writeln("<error>Parameter {$parameterKey} not found</error>");
         } else {
             self::translateSiteParameter($siteParameter, $defaultValue, $locales);
             $this->entityManager->persist($siteParameter);

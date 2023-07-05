@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Entity\District;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\AppBundle\Entity\Styles\BorderStyle;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Entity\Styles\BackgroundStyle;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Styles\BackgroundStyle;
+use Capco\AppBundle\Entity\Styles\BorderStyle;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="district")

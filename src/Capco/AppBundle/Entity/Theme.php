@@ -27,11 +27,11 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     use TranslatableTrait;
     use UuidTrait;
 
-    const STATUS_CLOSED = 0;
-    const STATUS_OPENED = 1;
-    const STATUS_FUTURE = 2;
+    public const STATUS_CLOSED = 0;
+    public const STATUS_OPENED = 1;
+    public const STATUS_FUTURE = 2;
 
-    const FILTER_ALL = 'all';
+    public const FILTER_ALL = 'all';
 
     public static $statuses = [
         'closed' => self::STATUS_CLOSED,
@@ -298,7 +298,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * Add proposal.
      *
-     *
      * @return Theme
      */
     public function addProposal(Proposal $proposal)
@@ -373,7 +372,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * Add Post.
      *
-     *
      * @return $this
      */
     public function addPost(Post $post)
@@ -387,7 +385,6 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
 
     /**
      * Remove post.
-     *
      *
      * @return $this
      */
@@ -451,7 +448,8 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
             ->filter(function (Project $project) {
                 return $project->isPublic();
             })
-            ->count();
+            ->count()
+        ;
     }
 
     public function countEnabledPosts(): int
@@ -460,7 +458,8 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
             ->filter(function (Post $post) {
                 return $post->canDisplay() && $post->getIsPublished();
             })
-            ->count();
+            ->count()
+        ;
     }
 
     public function countEnabledEvents(): int
@@ -469,7 +468,8 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
             ->filter(function (Event $event) {
                 return $event->isEnabled();
             })
-            ->count();
+            ->count()
+        ;
     }
 
     public function isOpened()

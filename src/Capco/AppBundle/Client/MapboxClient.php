@@ -95,7 +95,8 @@ class MapboxClient
             ->setEndpoint('styles')
             ->setPath($owner)
             ->addParameter('access_token', $token)
-            ->get();
+            ->get()
+        ;
     }
 
     public function isValidToken(string $token, ?bool $isSecret = false): bool

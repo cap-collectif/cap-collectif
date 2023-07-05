@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method SimpleQuestion|null findOneBy(array $criteria, array $orderBy = null)
- * @method SimpleQuestion|null find($id, $lockMode = null, $lockVersion = null)
+ * @method null|SimpleQuestion findOneBy(array $criteria, array $orderBy = null)
+ * @method null|SimpleQuestion find($id, $lockMode = null, $lockVersion = null)
  */
 class SimpleQuestionRepository extends EntityRepository
 {

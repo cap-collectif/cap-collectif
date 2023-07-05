@@ -27,7 +27,8 @@ class ChangePasswordFormType extends AbstractType
             ->add('new_password', TextType::class, [
                 'mapped' => false,
                 'constraints' => [new PasswordComplexity(), new NotBlank()],
-            ]);
+            ])
+        ;
     }
 
     public function getParent()

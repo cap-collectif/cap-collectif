@@ -56,8 +56,8 @@ class ProjectSearch extends Search
         );
 
         if (
-            isset($providedFilters['withEventOnly']) &&
-            true === $providedFilters['withEventOnly']
+            isset($providedFilters['withEventOnly'])
+            && true === $providedFilters['withEventOnly']
         ) {
             $withEventOnlyBoolQuery = new Query\BoolQuery();
             $withEventOnlyBoolQuery->addShould(new Query\Range('eventCount', ['gt' => 0]));
@@ -69,7 +69,8 @@ class ProjectSearch extends Search
             $localeBoolQuery = new Query\BoolQuery();
             $localeBoolQuery
                 ->addShould(new Term(['locale.id' => ['value' => $providedFilters['locale']]]))
-                ->addShould((new Query\BoolQuery())->addMustNot(new Exists('locale')));
+                ->addShould((new Query\BoolQuery())->addMustNot(new Exists('locale')))
+            ;
             $boolQuery->addFilter($localeBoolQuery);
             unset($providedFilters['locale']);
         }
@@ -106,7 +107,8 @@ class ProjectSearch extends Search
         $query
             ->setSource(['id'])
             ->setFrom($offset)
-            ->setSize($limit);
+            ->setSize($limit)
+        ;
 
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
@@ -147,13 +149,15 @@ class ProjectSearch extends Search
                     'contributionsCount' => ['order' => $orderBy['direction']],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             case self::PUBLISHED_AT:
                 $sortField = 'publishedAt';
                 $sortOrder = $orderBy['direction'];
 
                 break;
+
             default:
-                throw new \RuntimeException("Unknown order: ${orderBy}");
+                throw new \RuntimeException("Unknown order: {$orderBy}");
         }
 
         return [$sortField => ['order' => $sortOrder]];

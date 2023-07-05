@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Gherkin\Node\PyStringNode;
+use Behat\Gherkin\Node\TableNode;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Coduo\PHPMatcher\PHPMatcher;
 use LogicException;
 use PHPUnit\Framework\Assert;
-use Coduo\PHPMatcher\PHPMatcher;
-use Behat\Gherkin\Node\TableNode;
-use Behat\Gherkin\Node\PyStringNode;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Swarrot\Broker\Message;
 use Swarrot\Broker\MessageProvider\MessageProviderInterface;
 use Swarrot\Broker\MessagePublisher\MessagePublisherInterface;
-use Swarrot\Broker\Message;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class RabbitMQContext implements KernelAwareContext
 {
@@ -48,23 +48,10 @@ class RabbitMQContext implements KernelAwareContext
                 $d = json_decode($queuedMessage, true);
                 foreach ($decoded as $key => $value) {
                     if (!isset($d[$key])) {
-                        throw new LogicException(
-                            sprintf(
-                                'Message mismatch. Unknown property : "%s" %s%s',
-                                $key,
-                                \PHP_EOL,
-                                json_encode($queuedMessages)
-                            )
-                        );
+                        throw new LogicException(sprintf('Message mismatch. Unknown property : "%s" %s%s', $key, \PHP_EOL, json_encode($queuedMessages)));
                     }
                     if (!$matcher->match($d[$key], $decoded[$key])) {
-                        throw new LogicException(
-                            sprintf(
-                                'Message mismatch. Queue contains:%s%s',
-                                \PHP_EOL,
-                                json_encode($queuedMessages)
-                            )
-                        );
+                        throw new LogicException(sprintf('Message mismatch. Queue contains:%s%s', \PHP_EOL, json_encode($queuedMessages)));
                     }
                 }
             }
@@ -168,14 +155,14 @@ class RabbitMQContext implements KernelAwareContext
         $channel = $this->getSwarrotMessageProvider($producerName);
 
         $queuedMessages = [];
-        do {
+        while (true) {
             $message = $channel->get();
             if (!$message instanceof Message) {
                 break;
             }
 
             $queuedMessages[] = $this->replaceDynamicValues($message->getBody());
-        } while (true);
+        }
 
         return $queuedMessages;
     }

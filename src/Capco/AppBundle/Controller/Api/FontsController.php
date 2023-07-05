@@ -114,7 +114,7 @@ class FontsController extends AbstractController
         }
         $this->em->flush();
 
-        if (count($uploadedFonts) > 0) {
+        if (\count($uploadedFonts) > 0) {
             $lastUploadedFont = $this->fontRepository->getLastUploadedFont();
 
             if (!$lastUploadedFont) {

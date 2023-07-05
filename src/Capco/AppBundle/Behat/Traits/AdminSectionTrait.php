@@ -27,7 +27,7 @@ trait AdminSectionTrait
 
         $this->iWaitElementToAppearOnPage($dropdownButton);
         $this->iClickElement($dropdownButton);
-        $this->iWaitElementToAppearOnPage("${dropdown}  > a:nth-of-type(${nth}) ");
-        $this->iClickElement("${dropdown} > a:nth-of-type(${nth}) ");
+        $this->iWaitElementToAppearOnPage("{$dropdown}  > a:nth-of-type({$nth}) ");
+        $this->iClickElement("{$dropdown} > a:nth-of-type({$nth}) ");
     }
 }

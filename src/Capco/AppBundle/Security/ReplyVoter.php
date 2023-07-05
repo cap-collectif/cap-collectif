@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ReplyVoter extends AbstractOwnerableVoter
 {
-    const DELETE_REPLY = 'DELETE_REPLY';
+    public const DELETE_REPLY = 'DELETE_REPLY';
 
     protected function supports($attribute, $subject): bool
     {
@@ -52,7 +52,6 @@ class ReplyVoter extends AbstractOwnerableVoter
         if ($viewer->isAdmin()) {
             return true;
         }
-
 
         if ($reply->isViewerProjectOwner($viewer)) {
             return true;

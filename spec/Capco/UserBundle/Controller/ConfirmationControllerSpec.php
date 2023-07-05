@@ -4,23 +4,23 @@ namespace spec\Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
+use Capco\UserBundle\Controller\ConfirmationController;
+use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Security\LoginManager;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Router;
-use FOS\UserBundle\Security\LoginManager;
-use Capco\UserBundle\Doctrine\UserManager;
-use Capco\UserBundle\Repository\UserRepository;
-use Capco\AppBundle\Manager\ContributionManager;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Capco\UserBundle\Controller\ConfirmationController;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -78,11 +78,13 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $userManager
             ->findUserByConfirmationToken('unknowntoken')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $translator
             ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
-            ->willReturn('global.alert.already_email_confirmed');
+            ->willReturn('global.alert.already_email_confirmed')
+        ;
         $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->emailAction(
             'unknowntoken',
@@ -110,11 +112,13 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $userManager
             ->findUserByConfirmationToken('validtoken')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $userManager
             ->updateUser($user)
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $user->setConfirmedAccountAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
         $user->isConsentInternalCommunication()->willReturn(true);
@@ -122,27 +126,32 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setLastLogin(Argument::any())
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setConfirmationToken(null)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->getPassword()->willReturn('already existing password');
 
         $contributionManager
             ->publishContributions($user)
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $translator
             ->trans('global.alert.email_confirmed_with_republish', [], 'CapcoAppBundle')
             ->shouldBeCalled()
-            ->willReturn('global.alert.email_confirmed_with_republish');
+            ->willReturn('global.alert.email_confirmed_with_republish')
+        ;
         $flashBag->add('success', 'global.alert.email_confirmed_with_republish')->shouldBeCalled();
 
         $this->emailAction(
@@ -172,11 +181,13 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $userRepo
             ->findUserByNewEmailConfirmationToken('invalidtoken')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $translator
             ->trans('global.alert.already_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
-            ->willReturn('global.alert.already_email_confirmed');
+            ->willReturn('global.alert.already_email_confirmed')
+        ;
         $flashBag->add('success', 'global.alert.already_email_confirmed')->shouldBeCalled();
         $this->newEmailAction(
             'invalidtoken',
@@ -206,13 +217,15 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $userRepo
             ->findUserByNewEmailConfirmationToken('validtoken')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->getNewEmailToConfirm()->willReturn('newemail@gmail.com');
         $user
             ->setEmail('newemail@gmail.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->setNewEmailConfirmationToken(null)->willReturn($user);
         $user->setNewEmailToConfirm(null)->willReturn($user);
         $user->isEmailConfirmed()->willReturn(false);
@@ -220,26 +233,31 @@ class ConfirmationControllerSpec extends ObjectBehavior
         $contributionManager
             ->publishContributions($user)
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $user
             ->setConfirmationToken(null)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->setConfirmedAccountAt(\Prophecy\Argument::type(\DateTime::class))->shouldBeCalled();
 
         $userManager
             ->updateUser($user)
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $translator
             ->trans('global.alert.new_email_confirmed', [], 'CapcoAppBundle')
             ->shouldBeCalled()
-            ->willReturn('global.alert.new_email_confirmed');
+            ->willReturn('global.alert.new_email_confirmed')
+        ;
         $flashBag->add('success', 'global.alert.new_email_confirmed')->shouldBeCalled();
 
         $this->newEmailAction(
@@ -262,8 +280,7 @@ class ConfirmationControllerSpec extends ObjectBehavior
         Comment $comment,
         EntityManagerInterface $em,
         FlashBagInterface $flashBag
-    )
-    {
+    ) {
         $token = 'token';
         $router->generate('app_homepage')->shouldBeCalledOnce()->willReturn('/');
         $session->getFlashBag()->willReturn($flashBag);
@@ -280,6 +297,4 @@ class ConfirmationControllerSpec extends ObjectBehavior
 
         $this->commentConfirmAnonymousEmail($token);
     }
-
-
 }

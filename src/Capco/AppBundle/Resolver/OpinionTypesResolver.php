@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

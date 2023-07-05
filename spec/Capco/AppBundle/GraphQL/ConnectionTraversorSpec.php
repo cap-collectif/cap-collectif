@@ -2,12 +2,12 @@
 
 namespace spec\Capco\AppBundle\GraphQL;
 
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
+use Akamon\MockeryCallableMock\MockeryCallableMock;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use GraphQL\Executor\ExecutionResult;
 use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Akamon\MockeryCallableMock\MockeryCallableMock;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 
 class ConnectionTraversorSpec extends ObjectBehavior
 {
@@ -48,7 +48,8 @@ class ConnectionTraversorSpec extends ObjectBehavior
                 'path' => 'contributionConnection',
                 'errors' => [['some errors']],
             ])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->traverse($initialData, 'contributionConnection', $onEdgeTraversed, null);
     }
 
@@ -205,7 +206,8 @@ class ConnectionTraversorSpec extends ObjectBehavior
                 'query' => $this->getContributionsGraphqlQuery(),
                 'variables' => [],
             ])
-            ->willReturn($initialResult);
+            ->willReturn($initialResult)
+        ;
 
         $middleResut->toArray()->willReturn($middleData);
         $executor
@@ -213,7 +215,8 @@ class ConnectionTraversorSpec extends ObjectBehavior
                 'query' => $this->getContributionsGraphqlQuery('cursor4'),
                 'variables' => [],
             ])
-            ->willReturn($middleResut);
+            ->willReturn($middleResut)
+        ;
 
         $finalResult->toArray()->willReturn($finalData);
         $executor
@@ -221,7 +224,8 @@ class ConnectionTraversorSpec extends ObjectBehavior
                 'query' => $this->getContributionsGraphqlQuery('cursor8'),
                 'variables' => [],
             ])
-            ->willReturn($finalResult);
+            ->willReturn($finalResult)
+        ;
 
         $onEdgeTraversed->shouldBeCalled()->withArguments([
             'cursor' => 'cursor1',
@@ -286,32 +290,32 @@ class ConnectionTraversorSpec extends ObjectBehavior
         }
 
         return <<<EOF
-query {
-  node(id: "cstep5" ) {
-    ... on Consultation {
-      id
-      contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${afterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            id
-            ... on Opinion {
-              id
-              title
-              kind
+            query {
+              node(id: "cstep5" ) {
+                ... on Consultation {
+                  id
+                  contributionConnection(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: {$contributionPerPage}{$afterCursor}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        id
+                        ... on Opinion {
+                          id
+                          title
+                          kind
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 }

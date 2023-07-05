@@ -73,7 +73,7 @@ class LocaleRepository extends EntityRepository
      */
     public function findDefaultLocale(): Locale
     {
-        /** @var $defaultLocale Locale */
+        /** @var Locale $defaultLocale */
         $defaultLocale = $this->findOneBy(['default' => true]);
         if (!$defaultLocale) {
             $defaultLocale = new Locale('fr-FR', 'french');
@@ -84,9 +84,7 @@ class LocaleRepository extends EntityRepository
             $em->persist($defaultLocale);
             $em->flush();
 
-            throw new LocaleConfigurationException(
-                LocaleConfigurationException::MESSAGE_DEFAULT_NONE
-            );
+            throw new LocaleConfigurationException(LocaleConfigurationException::MESSAGE_DEFAULT_NONE);
         }
 
         return $defaultLocale;
@@ -100,13 +98,9 @@ class LocaleRepository extends EntityRepository
         try {
             return $qb->getQuery()->getSingleResult()['code'];
         } catch (NoResultException $e) {
-            throw new LocaleConfigurationException(
-                LocaleConfigurationException::MESSAGE_DEFAULT_NONE
-            );
+            throw new LocaleConfigurationException(LocaleConfigurationException::MESSAGE_DEFAULT_NONE);
         } catch (NonUniqueResultException $e) {
-            throw new LocaleConfigurationException(
-                LocaleConfigurationException::MESSAGE_DEFAULT_SEVERAL
-            );
+            throw new LocaleConfigurationException(LocaleConfigurationException::MESSAGE_DEFAULT_SEVERAL);
         }
     }
 
@@ -116,7 +110,8 @@ class LocaleRepository extends EntityRepository
         $qb->select('COUNT(l.id)')
             ->where('l.code = :userCode')
             ->andWhere('l.published = true')
-            ->setParameter('userCode', $userLocaleCode);
+            ->setParameter('userCode', $userLocaleCode)
+        ;
 
         return 0 < $qb->getQuery()->getSingleScalarResult();
     }
@@ -127,7 +122,8 @@ class LocaleRepository extends EntityRepository
         $qb->select('COUNT(l.id)')
             ->where('l.code = :userCode')
             ->andWhere('l.enabled = true')
-            ->setParameter('userCode', $userLocaleCode);
+            ->setParameter('userCode', $userLocaleCode)
+        ;
 
         return 0 < $qb->getQuery()->getSingleScalarResult();
     }
@@ -143,7 +139,8 @@ class LocaleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('l');
         $qb->select('l.code')
             ->where('l.code LIKE :firstPartOfCode')
-            ->setParameter('firstPartOfCode', substr($userCode, 0, 2));
+            ->setParameter('firstPartOfCode', substr($userCode, 0, 2))
+        ;
 
         try {
             return $qb->getQuery()->getOneOrNullResult();

@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepContributorResolver;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class CollectStepContributorCountDataLoader extends BatchDataLoader
 {
@@ -75,6 +75,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
     {
         return $this->stepContributorResolver
             ->__invoke($step, new Argument(['first' => 0]))
-            ->getTotalCount();
+            ->getTotalCount()
+        ;
     }
 }

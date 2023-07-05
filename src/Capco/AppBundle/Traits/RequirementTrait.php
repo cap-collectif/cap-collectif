@@ -51,7 +51,7 @@ trait RequirementTrait
     }
 
     /**
-     * @return Collection|Requirement[]|null
+     * @return null|Collection|Requirement[]
      */
     public function getRequirements(): ?Collection
     {

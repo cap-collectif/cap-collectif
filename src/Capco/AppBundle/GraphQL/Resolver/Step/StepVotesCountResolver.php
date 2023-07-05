@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class StepVotesCountResolver implements ResolverInterface
 {

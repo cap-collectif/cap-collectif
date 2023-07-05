@@ -2,10 +2,10 @@
 
 namespace spec\Capco\AppBundle\Entity;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Model\Publishable;
+use PhpSpec\ObjectBehavior;
 
 class OpinionVersionSpec extends ObjectBehavior
 {

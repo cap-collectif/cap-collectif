@@ -49,7 +49,7 @@ final class Version20210312153909 extends AbstractMigration implements Container
         $query->setParameter(':translatable', $translationId);
         $result = $query->getArrayResult();
 
-        if (count($result) === 0) {
+        if (0 === \count($result)) {
             $this->connection->insert('site_parameter_translation', [
                 'id' => (new UuidGenerator())->generate(
                     $this->container->get('doctrine')->getManager(),

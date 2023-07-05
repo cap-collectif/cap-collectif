@@ -79,7 +79,8 @@ class Font
             ->setWeight($font['weight'])
             ->setName($font['name'])
             ->setStyle($font['style'])
-            ->setFullname($font['fullname']);
+            ->setFullname($font['fullname'])
+        ;
 
         return $instance;
     }

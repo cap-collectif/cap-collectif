@@ -3,11 +3,11 @@
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteParameter;
-use Doctrine\Migrations\AbstractMigration;
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Capco\AppBundle\Toggle\Manager;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -19,7 +19,7 @@ class Version20150218164337 extends AbstractMigration implements ContainerAwareI
     /**
      * Sets the Container.
      *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     * @param null|ContainerInterface $container A ContainerInterface instance or null
      *
      * @api
      */

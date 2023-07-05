@@ -6,7 +6,7 @@ use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 class EvaluationsPage extends Page
 {

@@ -7,14 +7,14 @@ use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gedmo\Timestampable\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Timestampable;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalAnalysisRepository")
@@ -67,6 +67,11 @@ class ProposalAnalysis implements Timestampable
     {
         $this->responses = new ArrayCollection();
         $this->comments = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? $this->getProposal()->getTitle() : '';
     }
 
     public function getResponsesQuestions(): Collection
@@ -166,10 +171,5 @@ class ProposalAnalysis implements Timestampable
         $this->comments->removeElement($comment);
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getId() ? $this->getProposal()->getTitle() : '';
     }
 }

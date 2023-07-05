@@ -2,22 +2,22 @@
 
 namespace spec\Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Symfony\Component\Stopwatch\Stopwatch;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
 {
@@ -84,13 +84,15 @@ class ProposalViewerVoteDataLoaderSpec extends ObjectBehavior
         $globalIdResolver->resolve('step1', $user1)->willReturn($step);
         $proposalCollectVoteRepository
             ->getByProposalIdsAndStepAndUser(['proposal1', 'proposal2'], $step, $user1)
-            ->willReturn([$vote1, $vote2]);
+            ->willReturn([$vote1, $vote2])
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll([$vote2, $vote1])
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }

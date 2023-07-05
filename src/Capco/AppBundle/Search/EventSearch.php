@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\EventAffiliation;
+use Capco\AppBundle\Enum\EventOrderField;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,12 +14,11 @@ use Elastica\Query;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
-use Capco\AppBundle\Enum\EventOrderField;
 use Elastica\ResultSet;
 
 class EventSearch extends Search
 {
-    const SEARCH_FIELDS = [
+    public const SEARCH_FIELDS = [
         'title',
         'title.std',
         'reference',
@@ -67,10 +67,10 @@ class EventSearch extends Search
         );
 
         $hasOwnerAffiliation =
-            $user &&
-            !$onlyWhenAuthor &&
-            $affiliations &&
-            \in_array(EventAffiliation::OWNER, $affiliations, true);
+            $user
+            && !$onlyWhenAuthor
+            && $affiliations
+            && \in_array(EventAffiliation::OWNER, $affiliations, true);
         if ($hasOwnerAffiliation) {
             $boolQuery->addFilter(new Term(['owner.id' => $user->getId()]));
         }
@@ -188,6 +188,7 @@ class EventSearch extends Search
                     'endAt' => ['order' => $orderBy['direction']],
                     'createdAt' => ['order' => $orderBy['direction']],
                 ];
+
             default:
                 throw new \RuntimeException("Unknown order: ${$orderBy['field']}");
         }

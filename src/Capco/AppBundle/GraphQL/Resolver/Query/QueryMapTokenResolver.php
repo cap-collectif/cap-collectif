@@ -28,7 +28,7 @@ class QueryMapTokenResolver implements ResolverInterface
         $mapToken = $this->repository->getCurrentMapTokenForProvider($provider);
 
         // We assign default values, if needed…
-        if ($setDefaultIfNull && $mapToken && !$mapToken->getPublicToken() && $provider === 'MAPBOX') {
+        if ($setDefaultIfNull && $mapToken && !$mapToken->getPublicToken() && 'MAPBOX' === $provider) {
             $mapToken->setPublicToken($this->defaultMapboxPublicToken);
             $mapToken->setSecretToken($this->defaultMapboxSecretKey);
         }

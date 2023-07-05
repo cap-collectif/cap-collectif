@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class DebateViewerUnpublishedVotesResolver implements ResolverInterface
 {
@@ -32,7 +32,8 @@ class DebateViewerUnpublishedVotesResolver implements ResolverInterface
             return $this->repository
                 ->getUnpublishedByDebateAndUser($debate, $user, $limit, $offset)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
         $totalCount = $this->repository->countUnpublishedByDebateAndUser($debate, $user);
 

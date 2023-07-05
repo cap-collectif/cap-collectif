@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CollectStepProposalResolver implements ResolverInterface
 {

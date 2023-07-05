@@ -5,8 +5,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class StepEventsResolver implements ResolverInterface
 {
@@ -24,7 +24,8 @@ class StepEventsResolver implements ResolverInterface
             ->filter(function ($event) {
                 return $event->isEnabledOrApproved();
             })
-            ->toArray();
+            ->toArray()
+        ;
 
         usort($events, function ($a, $b) {
             return $a->getStartAt() <=> $b->getStartAt();

@@ -9,8 +9,8 @@ use PhpSpec\ObjectBehavior;
 
 class CasCertificateContentResolverSpec extends ObjectBehavior
 {
-    const CERTIFICATE_FILE_FAKE = 'tmpCertFake.crt';
-    const CERTIFICATE_CONTENT_FAKE = '-----BEGIN CERTIFICATE-----
+    public const CERTIFICATE_FILE_FAKE = 'tmpCertFake.crt';
+    public const CERTIFICATE_CONTENT_FAKE = '-----BEGIN CERTIFICATE-----
                                       MIIF6zCCA9OgAwIBAgIUe15TY4qN55eAHOcsBQXSz6Nld9cwDQYJKoZIhvcNAQEL
                                       m9spquST2E0RRiKp4DmGoX7oiSpV/VlI5yC6D9b1JQ==
                                       -----END CERTIFICATE-----
@@ -29,13 +29,13 @@ class CasCertificateContentResolverSpec extends ObjectBehavior
 
     public function it_should_invoke_and_return_content(
         CASSSOConfiguration $casSSOConfiguration,
-        SplFileInfo         $splFileInfo
+        SplFileInfo $splFileInfo
     ) {
-
         $casSSOConfiguration
             ->getCasCertificateFile()
             ->shouldBeCalled()
-            ->willReturn(self::CERTIFICATE_FILE_FAKE);
+            ->willReturn(self::CERTIFICATE_FILE_FAKE)
+        ;
 
         $splFileInfo->buildFile(self::CERTIFICATE_FILE_FAKE)->willReturn($splFileInfo);
         $splFileInfo->getContents()->willReturn(self::CERTIFICATE_CONTENT_FAKE);
@@ -47,12 +47,13 @@ class CasCertificateContentResolverSpec extends ObjectBehavior
 
     public function it_should_invoke_and_throw_exception(
         CASSSOConfiguration $casSSOConfiguration,
-        SplFileInfo         $splFileInfo
+        SplFileInfo $splFileInfo
     ) {
         $casSSOConfiguration
             ->getCasCertificateFile()
             ->shouldBeCalled()
-            ->willReturn(self::CERTIFICATE_FILE_FAKE);
+            ->willReturn(self::CERTIFICATE_FILE_FAKE)
+        ;
 
         $splFileInfo->buildFile(self::CERTIFICATE_FILE_FAKE)->willReturn($splFileInfo);
         $splFileInfo->getContents()->willReturn('');
@@ -60,7 +61,7 @@ class CasCertificateContentResolverSpec extends ObjectBehavior
         $this->shouldThrow(new \RuntimeException(
             'certificate not found : ' . self::CERTIFICATE_FILE_FAKE
         ))->during('__invoke', [
-            $casSSOConfiguration, $splFileInfo
+            $casSSOConfiguration, $splFileInfo,
         ]);
     }
 }

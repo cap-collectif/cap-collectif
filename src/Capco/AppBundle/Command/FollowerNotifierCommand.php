@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Following\ActivitiesService;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Notifier\FollowerNotifier;
-use Capco\AppBundle\Following\ProposalActivitiesResolver;
 use Capco\AppBundle\Following\OpinionActivitiesResolver;
-use Symfony\Component\Console\Command\Command;
+use Capco\AppBundle\Following\ProposalActivitiesResolver;
+use Capco\AppBundle\Notifier\FollowerNotifier;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class FollowerNotifierCommand extends Command
 {
@@ -48,7 +48,8 @@ class FollowerNotifierCommand extends Command
                 '/!\ Should be used for CI only /!\ .The relative time you want to send email.',
                 'yesterday'
             )
-            ->setDescription('Send an email to followers');
+            ->setDescription('Send an email to followers')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

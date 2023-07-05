@@ -29,6 +29,7 @@ class PhoneToken
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -40,6 +41,7 @@ class PhoneToken
     public function setToken(string $token): self
     {
         $this->token = $token;
+
         return $this;
     }
 }

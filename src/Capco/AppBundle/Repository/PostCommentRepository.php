@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Traits\CommentableRepositoryTrait;
-use Doctrine\ORM\QueryBuilder;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\CommentableRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\PostComment;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Model\CommentableInterface;
 
 class PostCommentRepository extends EntityRepository
 {
@@ -79,7 +79,8 @@ class PostCommentRepository extends EntityRepository
             ->setParameters([
                 'post' => $post,
                 'user' => $user,
-            ]);
+            ])
+        ;
 
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
@@ -93,7 +94,8 @@ class PostCommentRepository extends EntityRepository
             ->where("c.moderationStatus = 'PENDING'")
             ->andWhere('c.post = :post')
             ->andWhere('c.author = :user')
-            ->setParameters(['post' => $post, 'user' => $user]);
+            ->setParameters(['post' => $post, 'user' => $user])
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }

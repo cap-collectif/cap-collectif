@@ -11,8 +11,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * ConsultationRepository. *.
  *
- * @method Consultation|null find($id, $lockMode = null, $lockVersion = null)
- * @method Consultation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Consultation find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Consultation findOneBy(array $criteria, array $orderBy = null)
  * @method Consultation[]    findAll()
  * @method Consultation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -39,7 +39,8 @@ class ConsultationRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('s.slug', ':stepSlug'))
             ->setParameters(compact('stepSlug', 'projectSlug', 'consultationSlug'))
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getByConsultationStepPaginated(
@@ -54,7 +55,8 @@ class ConsultationRepository extends EntityRepository
             ->addOrderBy('c.position')
             ->setParameter('cs', $cs)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($query);
     }
@@ -68,7 +70,8 @@ class ConsultationRepository extends EntityRepository
             ->andWhere($qb->expr()->eq('c.step', ':cs'))
             ->setParameter('cs', $cs)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function searchByTerm(string $term): array

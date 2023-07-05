@@ -5,16 +5,16 @@ namespace Capco\AppBundle\Entity\Debate;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\TitleTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
+use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TitleTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Opinion of experts on a debate.

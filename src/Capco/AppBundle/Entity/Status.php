@@ -23,10 +23,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Status
 {
-    use UuidTrait;
-    use TimestampableTrait;
-    use PositionableTrait;
     use ColorableTrait;
+    use PositionableTrait;
+    use TimestampableTrait;
+    use UuidTrait;
 
     public static $statuses = [
         'normal' => StatusColor::NORMAL,

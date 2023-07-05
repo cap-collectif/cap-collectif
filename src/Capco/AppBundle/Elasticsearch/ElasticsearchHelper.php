@@ -17,7 +17,7 @@ final class ElasticsearchHelper
             : ['query' => $query->getQuery()->toArray()];
 
         if (false === $asYaml) {
-            return json_encode($debug, JSON_PRETTY_PRINT);
+            return json_encode($debug, \JSON_PRETTY_PRINT);
         }
 
         $dumper = new Dumper();

@@ -11,7 +11,7 @@ use Twig\Environment;
 
 class ShieldListener
 {
-    const AVAILABLE_ROUTES = [
+    public const AVAILABLE_ROUTES = [
         // Basics
         '_wdt',
 

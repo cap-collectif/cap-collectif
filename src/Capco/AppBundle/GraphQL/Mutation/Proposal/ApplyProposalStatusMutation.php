@@ -34,8 +34,8 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
         if ($statusId) {
             $status = $this->entityManager->getRepository(Status::class)->find($statusId);
             if (
-                null === $status ||
-                !$this->authorizationChecker->isGranted(
+                null === $status
+                || !$this->authorizationChecker->isGranted(
                     $accessType,
                     $status->getStep()->getProject()
                 )
@@ -107,8 +107,8 @@ class ApplyProposalStatusMutation extends AbstractProposalStepMutation implement
     private function applyStatusToSelection(Selection $selection, ?Status $status): bool
     {
         if (
-            (null === $status || $status->getStep() === $selection->getStep()) &&
-            $selection->getStatus() !== $status
+            (null === $status || $status->getStep() === $selection->getStep())
+            && $selection->getStatus() !== $status
         ) {
             $selection->setStatus($status);
             $this->entityManager->persist($selection);

@@ -8,13 +8,13 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class EmailingCampaignVoter extends AbstractOwnerableVoter
 {
-    const CREATE = 'CREATE';
-    const VIEW = 'view';
-    const EDIT = 'edit';
-    const DELETE = 'delete';
-    const SEND = 'send';
-    const TEST = 'test';
-    const CANCEL = 'cancel';
+    public const CREATE = 'CREATE';
+    public const VIEW = 'view';
+    public const EDIT = 'edit';
+    public const DELETE = 'delete';
+    public const SEND = 'send';
+    public const TEST = 'test';
+    public const CANCEL = 'cancel';
 
     protected function supports($attribute, $subject): bool
     {
@@ -40,18 +40,25 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
         switch ($attribute) {
             case self::CREATE:
                 return self::canCreate($viewer);
+
             case self::VIEW:
                 return self::canView($subject, $viewer);
+
             case self::EDIT:
                 return self::canEdit($subject, $viewer);
+
             case self::DELETE:
                 return self::canDelete($subject, $viewer);
+
             case self::SEND:
                 return self::canSend($subject, $viewer);
+
             case self::TEST:
                 return self::canTest($subject, $viewer);
+
             case self::CANCEL:
                 return self::canCancel($subject, $viewer);
+
             default:
                 return false;
         }

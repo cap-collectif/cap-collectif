@@ -57,9 +57,7 @@ class UserDecisionMakerProposalsResolver implements ResolverInterface
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
-                throw new UserError(
-                    'Error during fetching supervised proposals of ' . $viewer->getLastname()
-                );
+                throw new UserError('Error during fetching supervised proposals of ' . $viewer->getLastname());
             }
 
             return $decisionMakerProposals;

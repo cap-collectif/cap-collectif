@@ -53,12 +53,12 @@ class MediaAdminController extends AbstractController
             } catch (\RuntimeException $exception) {
                 return new JsonResponse([
                     'result' => 'error',
-                    'errors' => $exception->getMessage()
+                    'errors' => $exception->getMessage(),
                 ], Response::HTTP_BAD_REQUEST);
             }
         }
 
-        return $this->render("CapcoAdminBundle:Media:create.html.twig");
+        return $this->render('CapcoAdminBundle:Media:create.html.twig');
     }
 
     private function getUploadedFile(Request $request): UploadedFile

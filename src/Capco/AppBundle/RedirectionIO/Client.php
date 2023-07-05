@@ -10,7 +10,7 @@ use RedirectionIO\Client\Sdk\Exception\TimeoutException;
 
 class Client
 {
-    const VERSION = '0.3.0';
+    public const VERSION = '0.3.0';
 
     private $projectKeyDataloader;
     private $connections;
@@ -189,7 +189,7 @@ class Client
             $errNo,
             $errMsg,
             1, // This value is not used but it should not be 0
-            STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT,
+            \STREAM_CLIENT_CONNECT | \STREAM_CLIENT_PERSISTENT,
             $context
         );
 
@@ -223,9 +223,7 @@ class Client
 
             // Timeout
             if (0 === $modified) {
-                throw new TimeoutException(
-                    'Timeout reached when trying to read stream (' . $this->timeout . 'ms)'
-                );
+                throw new TimeoutException('Timeout reached when trying to read stream (' . $this->timeout . 'ms)');
             }
 
             // Error

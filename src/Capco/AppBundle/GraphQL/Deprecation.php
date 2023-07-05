@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL;
 
 /**
- * This class represents a GraphQL API deprecation
+ * This class represents a GraphQL API deprecation.
  */
 final class Deprecation
 {

@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Entity\Requirement;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ViewerMeetsTheRequirementResolver implements ResolverInterface
@@ -30,8 +30,8 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
             return true;
         }
         if (
-            Requirement::POSTAL_ADDRESS === $requirement->getType() &&
-            $value instanceof GoogleMapsAddress
+            Requirement::POSTAL_ADDRESS === $requirement->getType()
+            && $value instanceof GoogleMapsAddress
         ) {
             return true;
         }

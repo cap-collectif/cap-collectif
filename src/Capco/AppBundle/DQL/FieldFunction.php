@@ -1,5 +1,7 @@
 <?php
+
 // from Beberlei/DoctrineExtensions
+
 namespace Capco\AppBundle\DQL;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -10,7 +12,7 @@ use Doctrine\ORM\Query\Lexer;
  */
 class FieldFunction extends FunctionNode
 {
-    private $field = null;
+    private $field;
 
     private $values = [];
 
@@ -28,8 +30,8 @@ class FieldFunction extends FunctionNode
         $lexer = $parser->getLexer();
 
         while (
-            count($this->values) < 1 ||
-            $lexer->lookahead['type'] != Lexer::T_CLOSE_PARENTHESIS
+            \count($this->values) < 1
+            || Lexer::T_CLOSE_PARENTHESIS != $lexer->lookahead['type']
         ) {
             $parser->match(Lexer::T_COMMA);
             $this->values[] = $parser->ArithmeticPrimary();

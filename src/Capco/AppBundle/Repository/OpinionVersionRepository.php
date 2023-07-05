@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method find($id, $lockMode = null, $lockVersion = null): OpinionVersion
@@ -43,7 +43,8 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->setParameter('stepSlug', $stepSlug)
             ->setParameter('projectSlug', $projectSlug)
-            ->setParameter('opinionSlug', $opinionSlug);
+            ->setParameter('opinionSlug', $opinionSlug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -64,7 +65,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.trashedStatus IS NULL')
             ->leftJoin('o.sources', 'source', 'WITH', 'source.trashedStatus IS NULL')
             ->andWhere('o.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -87,7 +89,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('op.consultation', 'opc')
             ->leftJoin('opc.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c');
+            ->leftJoin('cas.project', 'c')
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -113,7 +116,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
@@ -135,7 +139,8 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('pas.project = :project')
             ->andWhere('o.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
-            ->orderBy('o.trashedAt', 'DESC');
+            ->orderBy('o.trashedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -145,7 +150,8 @@ class OpinionVersionRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('opinion', $opinion);
+            ->setParameter('opinion', $opinion)
+        ;
     }
 
     public function countByContribution(Opinion $opinion): int
@@ -165,7 +171,8 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('author', $author)
             ->setParameter('opinion', $opinion)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getByUser(User $user, ?User $viewer = null)
@@ -186,7 +193,8 @@ class OpinionVersionRepository extends EntityRepository
             ->addSelect('votes')
             ->andWhere('ov.author = :author')
             ->addOrderBy('ov.createdAt', 'ASC')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
@@ -206,7 +214,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->leftJoin('ov.author', 'author')
             ->andWhere('ov.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
@@ -227,12 +236,14 @@ class OpinionVersionRepository extends EntityRepository
                     return $step->isConsultationStep();
                 })
             )
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -244,7 +255,8 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('oc.step = :step')
             ->andWhere('version.author = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -257,7 +269,8 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('opinion.consultation = :consultation')
             ->andWhere('version.author = :author')
             ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -274,7 +287,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('version.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
@@ -294,7 +308,8 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->andWhere('version.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $qb = $this->handleOpinionVersionVisibility($qb, $viewer);
 
@@ -310,7 +325,8 @@ class OpinionVersionRepository extends EntityRepository
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('ov.published = 1')
             ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('cs', $cs);
+            ->setParameter('cs', $cs)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -324,7 +340,8 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('ov.published = 1')
             ->andWhere('o.consultation = :consultation')
             ->andWhere('o.trashedAt IS NULL')
-            ->setParameter('consultation', $consultation);
+            ->setParameter('consultation', $consultation)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -338,7 +355,8 @@ class OpinionVersionRepository extends EntityRepository
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step = :cs')
             ->andWhere('ov.published = 1')
             ->andWhere('o.trashedAt IS NOT NULL')
-            ->setParameter('cs', $cs);
+            ->setParameter('cs', $cs)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -352,7 +370,8 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('ov.published = 1')
             ->andWhere('o.consultation = :consultation')
             ->andWhere('o.trashedAt IS NOT NULL')
-            ->setParameter('consultation', $consultation);
+            ->setParameter('consultation', $consultation)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }

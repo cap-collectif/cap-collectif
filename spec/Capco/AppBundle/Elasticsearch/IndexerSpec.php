@@ -19,12 +19,12 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\SourceVote;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
+use Doctrine\Persistence\Mapping\ClassMetadataFactory;
 use Elastica\Index;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Doctrine\Persistence\ManagerRegistry as RegistryInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use Doctrine\Persistence\Mapping\ClassMetadataFactory;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class IndexerSpec extends ObjectBehavior
@@ -59,7 +59,8 @@ class IndexerSpec extends ObjectBehavior
                 new ClassMetadata(ArgumentVote::class),
                 new ClassMetadata(OpinionVote::class),
                 new ClassMetadata(OpinionVersionVote::class),
-            ]);
+            ])
+        ;
 
         $this->beConstructedWith($registry, $serializer, $index, $logger, $stopwatch);
     }
@@ -141,6 +142,7 @@ class IndexerSpec extends ObjectBehavior
         $document = $this->__get('currentDeleteBulk')[0];
         $document
             ->getId()
-            ->shouldBe(\call_user_func([$class, 'getElasticsearchTypeName']) . ':' . $id);
+            ->shouldBe(\call_user_func([$class, 'getElasticsearchTypeName']) . ':' . $id)
+        ;
     }
 }

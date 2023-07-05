@@ -147,7 +147,8 @@ class CreateProposalMutation implements MutationInterface
             ->setDraft($draft)
             ->setAuthor($author)
             ->setProposalForm($proposalForm)
-            ->addFollower($follower);
+            ->addFollower($follower)
+        ;
 
         if (isset($values['publishedAt'])) {
             $publishedAt =
@@ -159,8 +160,8 @@ class CreateProposalMutation implements MutationInterface
         }
 
         if (
-            $proposalForm->getStep() &&
-            ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
+            $proposalForm->getStep()
+            && ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
         ) {
             $proposal->setStatus($defaultStatus);
         }
@@ -192,8 +193,8 @@ class CreateProposalMutation implements MutationInterface
     protected function fixValues(array $values, ProposalForm $proposalForm): array
     {
         if (
-            isset($values['theme']) &&
-            (!$this->toggleManager->isActive('themes') || !$proposalForm->isUsingThemes())
+            isset($values['theme'])
+            && (!$this->toggleManager->isActive('themes') || !$proposalForm->isUsingThemes())
         ) {
             unset($values['theme']);
         }
@@ -203,8 +204,8 @@ class CreateProposalMutation implements MutationInterface
         }
 
         if (
-            isset($values['districts']) &&
-            (!$this->toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict())
+            isset($values['districts'])
+            && (!$this->toggleManager->isActive('districts') || !$proposalForm->isUsingDistrict())
         ) {
             unset($values['district']);
         }

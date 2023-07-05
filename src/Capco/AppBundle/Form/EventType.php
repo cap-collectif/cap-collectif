@@ -9,13 +9,13 @@ use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EventType extends AbstractType
 {
@@ -65,7 +65,8 @@ class EventType extends AbstractType
             ->add('authorAgreeToUsePersonalDataForEventOnly', CheckboxType::class)
             ->add('adminAuthorizeDataTransfer', CheckboxType::class)
             ->add('measurable', CheckboxType::class)
-            ->add('maxRegistrations', NumberType::class);
+            ->add('maxRegistrations', NumberType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

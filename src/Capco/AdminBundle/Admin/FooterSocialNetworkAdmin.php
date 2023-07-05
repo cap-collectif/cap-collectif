@@ -2,15 +2,15 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\FooterSocialNetwork;
+use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Capco\AppBundle\Entity\FooterSocialNetwork;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Capco\AppBundle\Repository\FooterSocialNetworkRepository;
 
 class FooterSocialNetworkAdmin extends AbstractAdmin
 {
@@ -58,7 +58,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -90,7 +91,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -112,7 +114,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('position', null, [
                 'label' => 'global.position',
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -139,7 +142,8 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

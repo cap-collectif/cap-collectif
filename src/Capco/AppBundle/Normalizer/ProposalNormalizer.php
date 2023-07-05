@@ -9,17 +9,14 @@ use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ProposalNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private ObjectNormalizer $normalizer;
@@ -71,8 +68,8 @@ class ProposalNormalizer implements
             as $publicResponse
         ) {
             if (
-                !($publicResponse instanceof MediaResponse) &&
-                ($publicResponseValue['id'] = $publicResponse->getId())
+                !($publicResponse instanceof MediaResponse)
+                && ($publicResponseValue['id'] = $publicResponse->getId())
             ) {
                 $responseValue = $publicResponse->getValue();
                 if (!\is_array($responseValue)) {

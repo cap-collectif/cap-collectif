@@ -17,9 +17,7 @@ class ProjectPostsPage extends Page
     public function verifyPage()
     {
         if (!$this->getSession()->wait(10000, "window.jQuery && $('.media-list').length > 0")) {
-            throw new \RuntimeException(
-                'ProjectPostsPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('ProjectPostsPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

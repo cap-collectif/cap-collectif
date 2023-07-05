@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -42,7 +42,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.callForProject')
             ->setParameter(1, 'call-for-projects')
             ->setParameter(2, '#d9534f')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -50,7 +51,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'global.consultation')
             ->setParameter(1, 'consultation')
             ->setParameter(2, '#337ab7')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -58,7 +60,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.interpellation')
             ->setParameter(1, 'interpellation')
             ->setParameter(2, '#5cb85c')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -66,7 +69,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.participatoryBudgeting')
             ->setParameter(1, 'participatory-budgeting')
             ->setParameter(2, '#5bc0de')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -74,7 +78,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.petition')
             ->setParameter(1, 'petition')
             ->setParameter(2, '#f0ad4e')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -82,7 +87,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.publicInquiry')
             ->setParameter(1, 'public-inquiry')
             ->setParameter(2, '#337ab7')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -90,7 +96,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'global.questionnaire')
             ->setParameter(1, 'questionnaire')
             ->setParameter(2, '#999999')
-            ->execute();
+            ->execute()
+        ;
         $this->connection
             ->createQueryBuilder()
             ->insert('project_type')
@@ -98,7 +105,8 @@ class Version20161114173009 extends AbstractMigration
             ->setParameter(0, 'project.types.suggestionBox')
             ->setParameter(1, 'suggestion-box')
             ->setParameter(2, '#f0ad4e')
-            ->execute();
+            ->execute()
+        ;
     }
 
     public function down(Schema $schema): void

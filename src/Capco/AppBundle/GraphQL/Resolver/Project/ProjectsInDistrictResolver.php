@@ -28,7 +28,8 @@ class ProjectsInDistrictResolver implements ResolverInterface
             return $this->projectRepository
                 ->findByDistrict($district, $viewer, $offset, $limit)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
 
         return $paginator->auto($args, $totalCount);

@@ -41,6 +41,5 @@ class ReactIntlRuntimeSpec extends ObjectBehavior
         $resolver->getValue('global.timezone')->willReturn('Europe/Paris');
 
         $this->getTimeZone()->shouldReturn('Europe/Paris');
-
     }
 }

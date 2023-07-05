@@ -48,7 +48,8 @@ class SendEmailingCampaignCommand extends Command
                 'now'
             )
             ->addOption('campaignId', null, InputOption::VALUE_OPTIONAL, 'Send a single campaign by giving an id')
-            ->setDescription('Send all emailing campaigns planned with past date or send a single one by giving an id');
+            ->setDescription('Send all emailing campaigns planned with past date or send a single one by giving an id')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -56,6 +57,7 @@ class SendEmailingCampaignCommand extends Command
         $campaignId = $input->getOption('campaignId');
         if ($campaignId) {
             $this->sendSingleCampaign($campaignId, $output);
+
             return 0;
         }
 
@@ -109,7 +111,7 @@ class SendEmailingCampaignCommand extends Command
 
     private function logAfter(OutputInterface $output, int $count): void
     {
-        $output->writeln("<info>Sent to ${count} recipients</info>");
+        $output->writeln("<info>Sent to {$count} recipients</info>");
         $this->omarDjinn->sendAfter($count);
     }
 

@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Validator\Constraints\CheckMapCenter;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
-use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
-use Capco\AppBundle\Entity\ProposalCategory;
 
 class ProposalFormUpdateType extends AbstractType
 {
@@ -116,9 +116,9 @@ class ProposalFormUpdateType extends AbstractType
                 'delete_empty' => function (
                     ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
-                    return null === $questionnaireAbstractQuestion ||
-                        null === $questionnaireAbstractQuestion->getQuestion()->getTitle() ||
-                        '' === $questionnaireAbstractQuestion->getQuestion()->getTitle();
+                    return null === $questionnaireAbstractQuestion
+                        || null === $questionnaireAbstractQuestion->getQuestion()->getTitle()
+                        || '' === $questionnaireAbstractQuestion->getQuestion()->getTitle();
                 },
             ])
 
@@ -127,7 +127,8 @@ class ProposalFormUpdateType extends AbstractType
             ->add('canContact', CheckboxType::class)
             ->add('isGridViewEnabled', CheckboxType::class)
             ->add('isListViewEnabled', CheckboxType::class)
-            ->add('isMapViewEnabled', CheckboxType::class);
+            ->add('isMapViewEnabled', CheckboxType::class)
+        ;
 
         $builder
             ->add('usingWebPage', CheckboxType::class)
@@ -135,7 +136,8 @@ class ProposalFormUpdateType extends AbstractType
             ->add('usingTwitter', CheckboxType::class)
             ->add('usingLinkedIn', CheckboxType::class)
             ->add('usingInstagram', CheckboxType::class)
-            ->add('usingYoutube', CheckboxType::class);
+            ->add('usingYoutube', CheckboxType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

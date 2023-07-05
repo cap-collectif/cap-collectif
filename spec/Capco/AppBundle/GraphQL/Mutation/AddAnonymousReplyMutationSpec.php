@@ -7,19 +7,19 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Mutation\AddAnonymousReplyMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Utils\RequestGuesser;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Prophecy\Argument;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\Utils\RequestGuesser;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class AddAnonymousReplyMutationSpec extends ObjectBehavior
@@ -82,24 +82,29 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $requestGuesser
             ->getUserAgent()
             ->shouldBeCalledOnce()
-            ->willReturn($userAgent);
+            ->willReturn($userAgent)
+        ;
         $requestGuesser
             ->getClientIp()
             ->shouldBeCalledOnce()
-            ->willReturn($ip);
+            ->willReturn($ip)
+        ;
         $tokenGenerator
             ->generateToken()
             ->shouldBeCalledOnce()
-            ->willReturn($token);
+            ->willReturn($token)
+        ;
 
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
         $globalIdResolver
             ->resolve('abc', null)
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $formattedResponses = [
             0 => [
@@ -112,7 +117,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $responsesFormatter
             ->format($values['responses'])
             ->shouldBeCalledOnce()
-            ->willReturn($formattedResponses);
+            ->willReturn($formattedResponses)
+        ;
 
         $values = [
             'responses' => $formattedResponses,
@@ -122,7 +128,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 
@@ -172,24 +179,29 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $requestGuesser
             ->getUserAgent()
             ->shouldBeCalledOnce()
-            ->willReturn($userAgent);
+            ->willReturn($userAgent)
+        ;
         $requestGuesser
             ->getClientIp()
             ->shouldBeCalledOnce()
-            ->willReturn($ip);
+            ->willReturn($ip)
+        ;
         $tokenGenerator
             ->generateToken()
             ->shouldBeCalledOnce()
-            ->willReturn($token);
+            ->willReturn($token)
+        ;
 
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
         $globalIdResolver
             ->resolve('abc', null)
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $formattedResponses = [
             0 => [
@@ -202,7 +214,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $responsesFormatter
             ->format($values['responses'])
             ->shouldBeCalledOnce()
-            ->willReturn($formattedResponses);
+            ->willReturn($formattedResponses)
+        ;
 
         $values = [
             'responses' => $formattedResponses,
@@ -212,7 +225,8 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 
@@ -224,15 +238,18 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         $questionnaire
             ->isNotifyResponseCreate()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $questionnaire
             ->isNotifyResponseCreate()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $publisher
             ->publish('questionnaire.reply', Argument::type(Message::class))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(4);

@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Timestampable;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Timestampable;
 
 /**
  * @ORM\Table(name="proposal_supervisor")

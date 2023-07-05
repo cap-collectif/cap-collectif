@@ -4,8 +4,8 @@ namespace Capco\AdminBundle\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ProjectAbstractStepAdmin extends CapcoAdmin
 {
@@ -46,7 +46,8 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
             // this Admin is embedded
             $project = $this->getParentFieldDescription()
                 ->getAdmin()
-                ->getSubject();
+                ->getSubject()
+            ;
             if ($project) {
                 $projectId = $project->getId();
             }
@@ -69,7 +70,8 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
                 [
                     'link_parameters' => ['projectId' => $projectId],
                 ]
-            );
+            )
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

@@ -34,21 +34,23 @@ class CleanDistrictFieldSubscriber implements EventSubscriberInterface
 
     private static function unsetIfContainsNothing(string $key, array &$data): void
     {
-        if (array_key_exists($key, $data) && self::containsNothing($key, $data)) {
+        if (\array_key_exists($key, $data) && self::containsNothing($key, $data)) {
             unset($data[$key]);
         }
     }
 
     private static function containsNothing(string $key, array $data): bool
     {
-        if (is_array($data[$key])) {
+        if (\is_array($data[$key])) {
             foreach ($data[$key] as $elt) {
-                if (!is_null($elt)) {
+                if (null !== $elt) {
                     return false;
                 }
             }
+
             return true;
         }
-        return is_null($data[$key]);
+
+        return null === $data[$key];
     }
 }

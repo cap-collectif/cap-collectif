@@ -22,14 +22,15 @@ class TypeResolverSpec extends ObjectBehavior
     }
 
     public function it_should_invoke_and_return_cas_sso_type(
-        BaseTypeResolver    $typeResolver,
+        BaseTypeResolver $typeResolver,
         CASSSOConfiguration $data,
-        Type                $type
+        Type $type
     ) {
         $typeResolver
             ->resolve('InternalCASSSOConfiguration')
             ->shouldBeCalled()
-            ->willReturn($type);
+            ->willReturn($type)
+        ;
 
         $this->__invoke($data)->shouldReturn(
             $type

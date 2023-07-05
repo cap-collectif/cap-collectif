@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 // This is a helper not a pure GraphQL resolver
 class CollectStepProposalCountResolver implements ResolverInterface
@@ -44,7 +44,8 @@ class CollectStepProposalCountResolver implements ResolverInterface
                 ])
                 ->then(function ($connection) use (&$count) {
                     $count = $connection->getTotalCount();
-                });
+                })
+            ;
             $this->adapter->await($promise);
         }
 

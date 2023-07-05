@@ -2,18 +2,18 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Enum\ContributionOrderField;
+use Capco\AppBundle\Enum\OpinionOrderField;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\Term;
-use Elastica\Query\Exists;
 use Elastica\Query\BoolQuery;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Enum\OpinionOrderField;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Enum\ContributionOrderField;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Elastica\Query\Exists;
+use Elastica\Query\Term;
 
 class VersionSearch extends Search
 {
@@ -100,6 +100,7 @@ class VersionSearch extends Search
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = OpinionOrderField::RANDOM;
+
         switch ($field) {
             case OpinionOrderField::CREATED_AT:
                 if (OrderDirection::ASC === $direction) {
@@ -109,6 +110,7 @@ class VersionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
@@ -117,11 +119,13 @@ class VersionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::COMMENT_COUNT:
             case OpinionOrderField::COMMENTS:
                 $order = 'comments';
 
                 break;
+
             case ContributionOrderField::VOTE_COUNT:
             case OpinionOrderField::VOTES:
                 if (OrderDirection::ASC === $direction) {
@@ -131,6 +135,7 @@ class VersionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::POPULAR:
             case OpinionOrderField::VOTES_OK:
                 if (OrderDirection::ASC === $direction) {
@@ -140,6 +145,7 @@ class VersionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::POSITION:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-position';

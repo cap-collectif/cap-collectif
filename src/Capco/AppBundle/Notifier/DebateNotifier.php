@@ -97,9 +97,9 @@ class DebateNotifier extends BaseNotifier
     private function getCoverUrl(Debate $debate): ?string
     {
         if (
-            $debate->getStep() &&
-            $debate->getStep()->getProject() &&
-            $debate
+            $debate->getStep()
+            && $debate->getStep()->getProject()
+            && $debate
                 ->getStep()
                 ->getProject()
                 ->getCover()

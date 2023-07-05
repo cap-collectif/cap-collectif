@@ -5,9 +5,9 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -31,7 +31,8 @@ class PostRepository extends EntityRepository
             ->addOrderBy('p.publishedAt', 'DESC')
             ->setParameter('id', $proposal->getId())
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getProposalBlogPostPublishedBetween(
@@ -46,12 +47,14 @@ class PostRepository extends EntityRepository
             ->addSelect('pa', 'm', 't')
             ->leftJoin('p.authors', 'pa')
             ->leftJoin('p.media', 'm')
-            ->leftJoin('p.themes', 't');
+            ->leftJoin('p.themes', 't')
+        ;
 
         $query
             ->andWhere($query->expr()->between('p.publishedAt', ':from', ':to'))
             ->setParameter('from', $from)
-            ->setParameter('to', $to);
+            ->setParameter('to', $to)
+        ;
 
         return $query->getQuery()->getResult();
     }
@@ -68,7 +71,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.authors', 'pa')
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't')
-            ->setParameter('id', $proposal->getId());
+            ->setParameter('id', $proposal->getId())
+        ;
 
         if ('CREATED_AT' === $field) {
             $query->orderBy('p.createdAt', $direction);
@@ -95,7 +99,8 @@ class PostRepository extends EntityRepository
         return (int) $this->createPublishedPostsByProposalQB($proposal)
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getSearchResults(
@@ -107,9 +112,7 @@ class PostRepository extends EntityRepository
         ?UserInterface $viewer = null
     ): Paginator {
         if ($page < 1) {
-            throw new \InvalidArgumentException(
-                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
-            );
+            throw new \InvalidArgumentException(sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page));
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
@@ -122,7 +125,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('project.authors', 'projectAuthor')
             ->leftJoin('p.proposals', 'proposal')
             ->leftJoin('project.restrictedViewerGroups', 'crvg')
-            ->orderBy('p.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
 
         if (!$viewer) {
             $qb->andWhere(
@@ -204,13 +208,15 @@ class PostRepository extends EntityRepository
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug);
+                ->setParameter('theme', $themeSlug)
+            ;
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb->innerJoin('p.projects', 'c')
                 ->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug);
+                ->setParameter('project', $projectSlug)
+            ;
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -225,7 +231,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'c')
             ->leftJoin('p.themes', 't')
             ->andWhere('p.displayedOnBlog = true')
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -248,7 +255,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->andWhere('c.slug = :project')
             ->setParameter('project', $projectSlug)
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -266,7 +274,8 @@ class PostRepository extends EntityRepository
         $qb = $this->getIsPublishedQueryBuilder()
             ->select('COUNT(p.id)')
             ->andWhere(':project MEMBER OF p.projects')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -285,7 +294,8 @@ class PostRepository extends EntityRepository
             ->andWhere('translations.slug = :slug')
             ->setParameter('slug', $slug)
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            ->orderBy('p.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -300,7 +310,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'c')
             ->orderBy('p.createdAt', 'DESC')
             ->addOrderBy('p.publishedAt', 'DESC')
-            ->setMaxResults($count);
+            ->setMaxResults($count)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -314,7 +325,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'projects')
             ->leftJoin('p.themes', 't')
             ->where('p.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -325,7 +337,8 @@ class PostRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOwner(Owner $owner, array $options): int
@@ -333,7 +346,8 @@ class PostRepository extends EntityRepository
         return $this->getByOwnerQueryBuilder($owner, $options)
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
@@ -341,7 +355,8 @@ class PostRepository extends EntityRepository
         return $this->createQueryBuilder($alias)
             ->andWhere($alias . '.isPublished = true')
             ->andWhere($alias . '.publishedAt <= :now')
-            ->setParameter('now', new \DateTime());
+            ->setParameter('now', new \DateTime())
+        ;
     }
 
     private function createPublishedPostsByProposalQB(Proposal $proposal): QueryBuilder
@@ -349,7 +364,8 @@ class PostRepository extends EntityRepository
         return $this->getIsPublishedQueryBuilder()
             ->leftJoin('p.proposals', 'proposal')
             ->andWhere('proposal.id = :id')
-            ->setParameter('id', $proposal->getId());
+            ->setParameter('id', $proposal->getId())
+        ;
     }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
@@ -358,7 +374,8 @@ class PostRepository extends EntityRepository
 
         $qb = $this->createQueryBuilder('p')
             ->where("{$ownerField} = :owner")
-            ->setParameter('owner', $owner);
+            ->setParameter('owner', $owner)
+        ;
 
         if ($query = $options['query']) {
             $qb->join('p.translations', 'pt');

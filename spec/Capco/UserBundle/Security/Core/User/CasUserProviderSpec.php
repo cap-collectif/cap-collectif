@@ -21,27 +21,32 @@ class CasUserProviderSpec extends ObjectBehavior
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         $user
             ->setCasId('fake-cas-id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setUsername('fake-cas-id')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user
             ->setEmail('fake-cas-id@fake-email-cap-collectif.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $userManager->updateUser($user)->shouldBeCalled();
         $userManager->findUserBy(['casId' => 'fake-cas-id'])->shouldBeCalled();
@@ -53,44 +58,47 @@ class CasUserProviderSpec extends ObjectBehavior
         UserManager $userManager,
         User $user
     ) {
-
         $casId = 'RomaneA';
         $userManager
             ->createUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->getId()->willReturn('<some uuid>');
 
         $user
             ->setCasId($casId)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->setUsername($casId)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user
-            ->setEmail($casId.'@fake-email-cap-collectif.com')
+            ->setEmail($casId . '@fake-email-cap-collectif.com')
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user
             ->setEnabled(true)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $userManager->updateUser($user)->shouldBeCalled();
         $userManager->findUserBy(['casId' => $casId])->shouldBeCalled();
 
         $this->loadUserByUsername($casId)->shouldReturn($user);
 
-       $this->shouldNotThrow(
+        $this->shouldNotThrow(
             new CasAuthenticationException(
-
                 'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
             )
-      )->during('loadUserByUsername', [$casId]);
+        )->during('loadUserByUsername', [$casId]);
     }
 
     public function it_can_check_if_the_user_class_is_supported()

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\DBAL\Enum;
 
-class SSOType  extends AbstractEnumType
+class SSOType extends AbstractEnumType
 {
     public const FRANCE_CONNECT = 'franceconnect';
     public const OAUTH2 = 'oauth2';

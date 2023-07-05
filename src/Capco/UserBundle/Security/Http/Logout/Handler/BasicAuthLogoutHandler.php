@@ -28,7 +28,8 @@ class BasicAuthLogoutHandler implements LogoutHandlerInterface
             $responseWithRequest
                 ->getRequest()
                 ->getSession()
-                ->invalidate();
+                ->invalidate()
+            ;
         }
 
         return $responseWithRequest;

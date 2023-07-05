@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ResponsesOrderField;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Search\ResponseSearch;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Psr\Log\LoggerInterface;
 
 class QuestionResponsesResolver implements ResolverInterface
 {
@@ -29,10 +29,10 @@ class QuestionResponsesResolver implements ResolverInterface
         $emptyConnection = ConnectionBuilder::empty();
 
         if (
-            $question->getQuestionnaire() &&
-            $question->getQuestionnaire()->isPrivateResult() &&
-            (!$viewer || !$viewer->isAdmin()) &&
-            $question->getQuestionnaire()->getOwner() !== $viewer
+            $question->getQuestionnaire()
+            && $question->getQuestionnaire()->isPrivateResult()
+            && (!$viewer || !$viewer->isAdmin())
+            && $question->getQuestionnaire()->getOwner() !== $viewer
         ) {
             return $emptyConnection;
         }
@@ -43,8 +43,8 @@ class QuestionResponsesResolver implements ResolverInterface
 
         $arguments = $args->getArrayCopy();
         $withNotConfirmedUser =
-            isset($arguments['withNotConfirmedUser']) &&
-            true === $arguments['withNotConfirmedUser'];
+            isset($arguments['withNotConfirmedUser'])
+            && true === $arguments['withNotConfirmedUser'];
         $term = $arguments['term'] ?? null;
         $sentimentFilter = $args->offsetGet('iaSentiment');
         $category = $arguments['iaCategory'] ?? null;

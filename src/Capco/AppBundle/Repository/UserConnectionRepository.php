@@ -15,7 +15,8 @@ class UserConnectionRepository extends EntityRepository
     {
         return $this->findByUserRequest($userId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByUserId(string $userId): int
@@ -36,7 +37,8 @@ class UserConnectionRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countAttemptByEmail(
@@ -65,7 +67,8 @@ class UserConnectionRepository extends EntityRepository
             ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
             ->andWhere('c.datetime BETWEEN :from AND :to')
             ->setParameter('from', new \DateTime('-1 hour'))
-            ->setParameter('to', new \DateTime());
+            ->setParameter('to', new \DateTime())
+        ;
 
         if ($ip) {
             $qb->setParameter('ip', $ip)->andWhere('c.ipAddress = :ip');
@@ -79,7 +82,8 @@ class UserConnectionRepository extends EntityRepository
         return $this->createQueryBuilder('c')
             ->where('c.user = :user')
             ->setParameter('user', $userId)
-            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR);
+            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
+        ;
     }
 
     private function findByAttemptRequest(
@@ -92,11 +96,13 @@ class UserConnectionRepository extends EntityRepository
             ->andWhere('c.success = :successful')
             ->setParameter('email', $email)
             ->setParameter('successful', $successful)
-            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR);
+            ->orderBy(self::ORDER_BY_COL, self::ORDER_BY_DIR)
+        ;
         if ($lastHour) {
             $qb->andWhere('c.datetime BETWEEN :from AND :to')
                 ->setParameter('from', new \DateTime('-1 hour'))
-                ->setParameter('to', new \DateTime());
+                ->setParameter('to', new \DateTime())
+            ;
         }
 
         return $qb;

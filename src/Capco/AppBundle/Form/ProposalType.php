@@ -8,11 +8,11 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Form\Type\RelayNodeType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Toggle\Manager;
 use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -53,7 +53,8 @@ class ProposalType extends AbstractType
                 'purify_html' => true,
                 'purify_html_profile' => 'user',
             ])
-            ->add('bodyUsingJoditWysiwyg');
+            ->add('bodyUsingJoditWysiwyg')
+        ;
 
         if ($this->toggleManager->isActive(Manager::themes) && $form->isUsingThemes()) {
             $builder->add('theme');

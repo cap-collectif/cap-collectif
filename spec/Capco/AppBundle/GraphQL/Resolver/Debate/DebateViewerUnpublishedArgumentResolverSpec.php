@@ -31,7 +31,8 @@ class DebateViewerUnpublishedArgumentResolverSpec extends ObjectBehavior
         $repository
             ->getUnpublishedByDebateAndUser($debate, $viewer)
             ->willReturn($argument)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->__invoke($debate, $viewer)->shouldReturn($argument);
     }

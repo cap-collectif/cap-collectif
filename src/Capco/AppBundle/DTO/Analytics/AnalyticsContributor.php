@@ -8,7 +8,7 @@ class AnalyticsContributor
 {
     private User $user;
     /**
-     * @var iterable|AnalyticsContributorContribution[]
+     * @var AnalyticsContributorContribution[]|iterable
      */
     private iterable $contributions = [];
 
@@ -20,7 +20,7 @@ class AnalyticsContributor
     public function fromEs(array $contributions): self
     {
         $this->contributions = array_map(
-            static fn(array $contribution) => AnalyticsContributorContribution::fromEs(
+            static fn (array $contribution) => AnalyticsContributorContribution::fromEs(
                 $contribution
             ),
             $contributions
@@ -36,8 +36,8 @@ class AnalyticsContributor
 
     public function getContributions(?int $first): iterable
     {
-        if ($first !== null && $first >= 0) {
-            return array_slice($this->contributions, 0, $first);
+        if (null !== $first && $first >= 0) {
+            return \array_slice($this->contributions, 0, $first);
         }
 
         return $this->contributions;

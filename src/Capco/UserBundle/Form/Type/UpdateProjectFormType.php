@@ -4,20 +4,20 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
 use Capco\MediaBundle\Entity\Media;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Capco\AppBundle\Entity\ProjectAuthor;
-use Capco\AppBundle\Form\Type\PurifiedTextType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UpdateProjectFormType extends AbstractType
@@ -73,7 +73,8 @@ class UpdateProjectFormType extends AbstractType
                 'strip_tags' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
-            ]);
+            ])
+        ;
     }
 
     /**

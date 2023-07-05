@@ -74,7 +74,8 @@ class CreateProposalFusionMutation implements MutationInterface
         $proposal = (new Proposal())
             ->setAuthor($author)
             ->setTitle($title ?? $defaultTitle)
-            ->setProposalForm($proposalForm);
+            ->setProposalForm($proposalForm)
+        ;
 
         if ($body) {
             $proposal->setBody($body);
@@ -90,8 +91,8 @@ class CreateProposalFusionMutation implements MutationInterface
         }
 
         if (
-            $proposalForm->getStep() &&
-            ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
+            $proposalForm->getStep()
+            && ($defaultStatus = $proposalForm->getStep()->getDefaultStatus())
         ) {
             $proposal->setStatus($defaultStatus);
         }

@@ -59,8 +59,7 @@ final class Version20211116165925 extends AbstractMigration implements Container
             $this->connection->update(
                 'fos_user',
                 [
-                    'france_connect_id' =>
-                        '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1-duplicated',
+                    'france_connect_id' => '3e3a3c86b26a5d67b015409f4ea2c0258f5014717136811eac432053bc2c9740v1-duplicated',
                 ],
                 ['id' => 'duplicatesUserConnectedFranceConnect']
             );

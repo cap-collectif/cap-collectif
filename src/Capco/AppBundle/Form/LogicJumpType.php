@@ -28,7 +28,8 @@ class LogicJumpType extends AbstractType
                 'delete_empty' => static function (?AbstractLogicJumpCondition $condition = null) {
                     return null === $condition || null === $condition->getOperator();
                 },
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

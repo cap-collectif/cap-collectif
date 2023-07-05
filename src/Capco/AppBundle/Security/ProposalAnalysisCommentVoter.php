@@ -4,12 +4,12 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\ProposalAnalysisComment;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class ProposalAnalysisCommentVoter extends Voter
 {
-    const CREATE = 'create';
+    public const CREATE = 'create';
 
     protected function supports($attribute, $subject): bool
     {
@@ -49,6 +49,6 @@ class ProposalAnalysisCommentVoter extends Voter
         $proposalAnalysis = $proposalAnalysisComment->getProposalAnalysis();
         $concernedUsers = $proposalAnalysis->getConcernedUsers()->toArray();
 
-        return in_array($viewer, $concernedUsers);
+        return \in_array($viewer, $concernedUsers);
     }
 }

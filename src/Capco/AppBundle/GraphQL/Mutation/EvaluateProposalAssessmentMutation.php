@@ -88,11 +88,12 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             ->setBody($body)
             ->setOfficialResponse($officialResponse)
             ->setState($decision)
-            ->setUpdatedBy($viewer);
+            ->setUpdatedBy($viewer)
+        ;
 
         if (
-            null !== $proposal->getAnalyses() &&
-            \in_array(
+            null !== $proposal->getAnalyses()
+            && \in_array(
                 $proposalAssessment->getState(),
                 ProposalStatementState::getDecisionalTypes(),
                 true
@@ -135,7 +136,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         ProposalAssessment $proposalAssessment
     ): void {
         $updateDate = $proposalAssessment->getUpdatedAt();
-        if (is_null($updateDate)) {
+        if (null === $updateDate) {
             $updateDate = new \DateTime();
         }
 
@@ -145,8 +146,8 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
             'date' => $updateDate->format('Y-m-d H:i:s'),
         ];
         if (
-            $proposalAssessment->getState() != $oldState &&
-            \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
+            $proposalAssessment->getState() != $oldState
+            && \in_array($proposalAssessment->getState(), ProposalStatementState::getDecisionalTypes())
         ) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE,

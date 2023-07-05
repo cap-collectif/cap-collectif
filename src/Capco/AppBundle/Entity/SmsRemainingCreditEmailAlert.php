@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SmsRemainingCreditEmailAlert
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="status", type="string")
@@ -27,21 +27,15 @@ class SmsRemainingCreditEmailAlert
      */
     private SmsCredit $smsCredit;
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     * @return SmsRemainingCreditEmailAlert
-     */
-    public function setStatus(string $status): SmsRemainingCreditEmailAlert
+    public function setStatus(string $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 

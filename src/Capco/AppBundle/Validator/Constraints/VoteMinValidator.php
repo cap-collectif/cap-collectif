@@ -25,13 +25,15 @@ class VoteMinValidator extends ConstraintValidator
                     $this->context
                         ->buildViolation($constraint->messageMin1)
                         ->atPath('votesMin')
-                        ->addViolation();
+                        ->addViolation()
+                    ;
                 }
                 if (null !== $max && $max < $min) {
                     $this->context
                         ->buildViolation($constraint->message)
                         ->atPath('votesLimit')
-                        ->addViolation();
+                        ->addViolation()
+                    ;
                 }
             }
         }
@@ -39,7 +41,8 @@ class VoteMinValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->messageMax1)
                 ->atPath('votesLimit')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

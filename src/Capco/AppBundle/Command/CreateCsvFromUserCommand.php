@@ -6,23 +6,23 @@ use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\BooleanCell;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
+use Capco\AppBundle\Repository\UserArchiveRepository;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Process\Process;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\InfoResolver;
-use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Console\Input\InputOption;
+use Overblog\GraphQLBundle\Request\Executor;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\Repository\UserArchiveRepository;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Process\Process;
 
 class CreateCsvFromUserCommand extends BaseExportCommand
 {
@@ -55,44 +55,44 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     protected const COMMENTS_PER_PAGE = 150;
 
     protected const COMMENT_INFOS_FRAGMENT = <<<'EOF'
-fragment commentInfos on Comment {
-  id
-  body
-  parent {
-    id
-  }
-  related {
-    id
-  }
-  createdAt
-  publishedAt
-  updatedAt
-  author {
-    ... authorInfos
-    email
-  }
-  pinned
-  publicationStatus
-  kind
-  answers {
-      id
-      body
-      parent {
-        id
-      }
-      createdAt
-      publishedAt
-      updatedAt
-      author {
-        ... authorInfos
-        email
-      }
-      pinned
-      publicationStatus
-      kind
-  }
-}
-EOF;
+        fragment commentInfos on Comment {
+          id
+          body
+          parent {
+            id
+          }
+          related {
+            id
+          }
+          createdAt
+          publishedAt
+          updatedAt
+          author {
+            ... authorInfos
+            email
+          }
+          pinned
+          publicationStatus
+          kind
+          answers {
+              id
+              body
+              parent {
+                id
+              }
+              createdAt
+              publishedAt
+              updatedAt
+              author {
+                ... authorInfos
+                email
+              }
+              pinned
+              publicationStatus
+              kind
+          }
+        }
+        EOF;
 
     protected static $defaultName = 'capco:export:user';
     protected UserRepository $userRepository;
@@ -124,7 +124,7 @@ EOF;
 
     public static function getSnapshotDir(string $userId): string
     {
-        return "/var/www/__snapshots__/rgpd_user_archives/${userId}/";
+        return "/var/www/__snapshots__/rgpd_user_archives/{$userId}/";
     }
 
     public static function updateSnapshot(string $userId, string $zipPath): void
@@ -141,12 +141,10 @@ EOF;
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $matchTo));
         }
         if (
-            !mkdir($concurrentDirectory = $matchTo . '/pictures', 0755) &&
-            !is_dir($concurrentDirectory)
+            !mkdir($concurrentDirectory = $matchTo . '/pictures', 0755)
+            && !is_dir($concurrentDirectory)
         ) {
-            throw new \RuntimeException(
-                sprintf('Directory "%s" was not created', $concurrentDirectory)
-            );
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
         }
 
         $extractTo = '/var/www/__unziped_tmp_dir__/';
@@ -271,7 +269,8 @@ EOF;
                 'u',
                 InputOption::VALUE_NONE,
                 '/!\ Dev only. This will re-generate snapshot artifacts for current RGPD archive.'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -334,7 +333,8 @@ EOF;
                     'query' => $query,
                     'variables' => [],
                 ])
-                ->toArray();
+                ->toArray()
+            ;
         }
 
         return $datas;
@@ -344,7 +344,7 @@ EOF;
     {
         $hash = sha1($userId . time());
 
-        return "${hash}.zip";
+        return "{$hash}.zip";
     }
 
     protected function createZipArchive(
@@ -437,7 +437,7 @@ EOF;
         } else {
             foreach ($header as $value) {
                 $value = str_replace('_', '.', $value);
-                $value = Arr::path($data, "data.node.${value}") ?? '';
+                $value = Arr::path($data, "data.node.{$value}") ?? '';
                 $rows[] = $value;
             }
         }
@@ -459,7 +459,7 @@ EOF;
         $writer->close();
 
         if ($header) {
-            $this->createZipArchive($zipPath, [["${type}.csv" => $this->getPath()]]);
+            $this->createZipArchive($zipPath, [["{$type}.csv" => $this->getPath()]]);
         }
     }
 
@@ -496,8 +496,8 @@ EOF;
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false !== strpos($columnName, 'responses_') &&
-                        false === $responsesInserted
+                        false !== strpos($columnName, 'responses_')
+                        && false === $responsesInserted
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(
                             $content,
@@ -537,8 +537,8 @@ EOF;
         foreach ($responses as $response) {
             if (isset($response['question']['title'])) {
                 if (
-                    'ValueResponse' === $response['__typename'] &&
-                    isset($response['formattedValue'])
+                    'ValueResponse' === $response['__typename']
+                    && isset($response['formattedValue'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
                     $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
@@ -547,9 +547,9 @@ EOF;
                 }
 
                 if (
-                    'MediaResponse' === $response['__typename'] &&
-                    isset($response['medias']) &&
-                    !empty($response['medias'])
+                    'MediaResponse' === $response['__typename']
+                    && isset($response['medias'])
+                    && !empty($response['medias'])
                 ) {
                     $rows[$rowCounter][$columnKey] = $response['question']['title'];
                     if (\is_array($response['medias'])) {
@@ -593,19 +593,23 @@ EOF;
     protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
+
         switch ($type) {
             case 'proposals':
                 $header = self::PROPOSAL_EXPORT_PATHS;
 
                 break;
+
             case 'connections':
                 $header = self::CONNECTIONS_EXPORT_PATHS;
 
                 break;
+
             case 'comments':
                 $header = array_keys(self::COMMENTS_EXPORT_PATHS);
 
                 break;
+
             default:
                 $header = array_map(
                     function (string $header) use ($type) {
@@ -654,121 +658,121 @@ EOF;
     protected function getUserGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      id
-      email
-      username
-      userType {
-        name
-      }
-      createdAt
-      updatedAt
-      lastLogin
-      rolesText
-      consentExternalCommunication
-      enabled
-      locked
-      phoneConfirmed
-      phoneConfirmationSentAt
-      gender
-      firstname
-      lastname
-      dateOfBirth
-      websiteUrl
-      biography
-      address
-      address2
-      neighborhood
-      zipCode
-      city
-      phone
-      url
-      samlId
-      facebookId
-      facebookUrl
-      twitterUrl
-      linkedInUrl
-      opinionVotesCount
-      arguments(includeTrashed: true) {
-        totalCount
-      }
-      argumentVotesCount
-      proposals {
-        totalCount
-      }
-      proposalVotesCount
-      commentVotes {
-        totalCount
-      }
-      sources {
-        totalCount
-      }
-      opinions {
-        totalCount
-      }
-      opinionVersions {
-        totalCount
-      }
-      replies {
-        totalCount
-      }
-      projects(affiliations: [AUTHOR]) {
-        totalCount
-      }
-      comments {
-        totalCount
-      }
-      userIdentificationCode
-    }
-  }
-}
-EOF;
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  id
+                  email
+                  username
+                  userType {
+                    name
+                  }
+                  createdAt
+                  updatedAt
+                  lastLogin
+                  rolesText
+                  consentExternalCommunication
+                  enabled
+                  locked
+                  phoneConfirmed
+                  phoneConfirmationSentAt
+                  gender
+                  firstname
+                  lastname
+                  dateOfBirth
+                  websiteUrl
+                  biography
+                  address
+                  address2
+                  neighborhood
+                  zipCode
+                  city
+                  phone
+                  url
+                  samlId
+                  facebookId
+                  facebookUrl
+                  twitterUrl
+                  linkedInUrl
+                  opinionVotesCount
+                  arguments(includeTrashed: true) {
+                    totalCount
+                  }
+                  argumentVotesCount
+                  proposals {
+                    totalCount
+                  }
+                  proposalVotesCount
+                  commentVotes {
+                    totalCount
+                  }
+                  sources {
+                    totalCount
+                  }
+                  opinions {
+                    totalCount
+                  }
+                  opinionVersions {
+                    totalCount
+                  }
+                  replies {
+                    totalCount
+                  }
+                  projects(affiliations: [AUTHOR]) {
+                    totalCount
+                  }
+                  comments {
+                    totalCount
+                  }
+                  userIdentificationCode
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getOpinionGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: OPINION, includeTrashed: true) {
-        edges {
-          node {
-            ... on Opinion {
-              title
-              bodyText
-              section {
-                title
-              }
-              createdAt
-              updatedAt
-              url
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votes(first: 0) {
-                totalCount
-              }
-              arguments(first: 0) {
-                totalCount
-              }
-              sources(first: 0) {
-                totalCount
-              }
-              versions(first: 0) {
-                totalCount
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: OPINION, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Opinion {
+                          title
+                          bodyText
+                          section {
+                            title
+                          }
+                          createdAt
+                          updatedAt
+                          url
+                          published
+                          trashed
+                          trashedAt
+                          trashedReason
+                          votes(first: 0) {
+                            totalCount
+                          }
+                          arguments(first: 0) {
+                            totalCount
+                          }
+                          sources(first: 0) {
+                            totalCount
+                          }
+                          versions(first: 0) {
+                            totalCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getCommentsGraphQLQuery(
@@ -784,390 +788,390 @@ EOF;
         }
 
         return <<<EOF
-${COMMENTS_INFO_FRAGMENT}
-${AUTHOR_INFOS_FRAGMENT}
-${USER_TYPE_FRAGMENT}
+            {$COMMENTS_INFO_FRAGMENT}
+            {$AUTHOR_INFOS_FRAGMENT}
+            {$USER_TYPE_FRAGMENT}
 
-{
-  node(id: "${userId}") {
-    ... on User {
-      comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
-        edges {
-          node {
-            ... commentInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  comments(first: {$COMMENTS_PER_PAGE}{$commentsAfter}) {
+                    edges {
+                      node {
+                        ... commentInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     protected function getOpinionVersionGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: OPINIONVERSION, includeTrashed: true) {
-        edges {
-          node {
-            ... on Version {
-              title
-              bodyText
-              kind
-              related {
-                url
-              }
-              comment
-              createdAt
-              updatedAt
-              url
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votes(first: 0) {
-                totalCount
-              }
-              arguments(first: 0) {
-                totalCount
-              }
-              sources(first: 0) {
-                totalCount
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: OPINIONVERSION, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Version {
+                          title
+                          bodyText
+                          kind
+                          related {
+                            url
+                          }
+                          comment
+                          createdAt
+                          updatedAt
+                          url
+                          published
+                          trashed
+                          trashedAt
+                          trashedReason
+                          votes(first: 0) {
+                            totalCount
+                          }
+                          arguments(first: 0) {
+                            totalCount
+                          }
+                          sources(first: 0) {
+                            totalCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getArgumentGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: ARGUMENT, includeTrashed: true) {
-        edges {
-          node {
-            ... on Argument {
-              body
-              kind
-              related {
-                url
-              }
-              type
-              createdAt
-              updatedAt
-              url
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votes(first: 0) {
-                totalCount
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: ARGUMENT, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Argument {
+                          body
+                          kind
+                          related {
+                            url
+                          }
+                          type
+                          createdAt
+                          updatedAt
+                          url
+                          published
+                          trashed
+                          trashedAt
+                          trashedReason
+                          votes(first: 0) {
+                            totalCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getSourceGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: SOURCE, includeTrashed: true) {
-        edges {
-          node {
-            ... on Source {
-              kind
-              related {
-                url
-              }
-              url
-              body
-              createdAt
-              updatedAt
-              published
-              trashed
-              trashedAt
-              trashedReason
-              votes(first: 0) {
-                totalCount
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: SOURCE, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Source {
+                          kind
+                          related {
+                            url
+                          }
+                          url
+                          body
+                          createdAt
+                          updatedAt
+                          published
+                          trashed
+                          trashedAt
+                          trashedReason
+                          votes(first: 0) {
+                            totalCount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getVotesGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      votes(first: 100, onlyAccounted: false) {
-        edges {
-          node {
-            kind
-            related {
-              url
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  votes(first: 100, onlyAccounted: false) {
+                    edges {
+                      node {
+                        kind
+                        related {
+                          url
+                        }
+                        createdAt
+                        isAccounted
+                        ... on PrivatableVote {
+                            private
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
-            createdAt
-            isAccounted
-            ... on PrivatableVote {
-                private
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
-EOF;
+            EOF;
     }
 
     protected function getRepliesGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: REPLY, includeTrashed: true) {
-        edges {
-          node {
-            ... on Reply {
-              questionnaire {
-                title
-              }
-              createdAt
-              updatedAt
-              responses {
-                __typename
-                ... on ValueResponse {
-                  question {
-                    title
-                  }
-                  formattedValue
-                }
-                ... on MediaResponse {
-                  question {
-                    title
-                  }
-                  medias {
-                    url
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: REPLY, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Reply {
+                          questionnaire {
+                            title
+                          }
+                          createdAt
+                          updatedAt
+                          responses {
+                            __typename
+                            ... on ValueResponse {
+                              question {
+                                title
+                              }
+                              formattedValue
+                            }
+                            ... on MediaResponse {
+                              question {
+                                title
+                              }
+                              medias {
+                                url
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getMediasGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      medias {
-        id
-        name
-        enabled
-        authorName
-        description
-        contentType
-        size
-        url
-        providerReference
-      }
-    }
-  }
-}
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  medias {
+                    id
+                    name
+                    enabled
+                    authorName
+                    description
+                    contentType
+                    size
+                    url
+                    providerReference
+                  }
+                }
+              }
+            }
 
-EOF;
+            EOF;
     }
 
     protected function getGroupsGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      groups {
-        edges {
-          node {
-            title
-            description
-            users {
-              totalCount
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  groups {
+                    edges {
+                      node {
+                        title
+                        description
+                        users {
+                          totalCount
+                        }
+                        createdAt
+                        updatedAt
+                      }
+                    }
+                  }
+                }
+              }
             }
-            createdAt
-            updatedAt
-          }
-        }
-      }
-    }
-  }
-}
 
-EOF;
+            EOF;
     }
 
     protected function getReportsGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      reports {
-        edges {
-          node {
-            kind
-            type
-            body
-            createdAt
-          }
-        }
-      }
-    }
-  }
-}
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  reports {
+                    edges {
+                      node {
+                        kind
+                        type
+                        body
+                        createdAt
+                      }
+                    }
+                  }
+                }
+              }
+            }
 
-EOF;
+            EOF;
     }
 
     protected function getEventsGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      events(onlyWhenAuthor: true) {
-        edges {
-          node {
-            title
-            timeRange {
-              startAt
-              endAt
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  events(onlyWhenAuthor: true) {
+                    edges {
+                      node {
+                        title
+                        timeRange {
+                          startAt
+                          endAt
+                        }
+                        themes {
+                          title
+                        }
+                        projects {
+                          title
+                        }
+                        commentable
+                        createdAt
+                        updatedAt
+                        body
+                        link
+                        address
+                        zipCode
+                        city
+                        country
+                      }
+                    }
+                  }
+                }
+              }
             }
-            themes {
-              title
-            }
-            projects {
-              title
-            }
-            commentable
-            createdAt
-            updatedAt
-            body
-            link
-            address
-            zipCode
-            city
-            country
-          }
-        }
-      }
-    }
-  }
-}
 
-EOF;
+            EOF;
     }
 
     protected function getProposalsGraphQLQuery(string $userId): string
     {
         return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      contributions(type: PROPOSAL, includeTrashed: true) {
-        edges {
-          node {
-            ... on Proposal {
-              url
-              title
-              bodyText
-              address {
-                formatted
-              }
-              createdAt
-              updatedAt
-              trashedAt
-              trashedReason
-              responses {
-                __typename
-                ... on ValueResponse {
-                    question {
-                        title
+            {
+              node(id: "{$userId}") {
+                ... on User {
+                  contributions(type: PROPOSAL, includeTrashed: true) {
+                    edges {
+                      node {
+                        ... on Proposal {
+                          url
+                          title
+                          bodyText
+                          address {
+                            formatted
+                          }
+                          createdAt
+                          updatedAt
+                          trashedAt
+                          trashedReason
+                          responses {
+                            __typename
+                            ... on ValueResponse {
+                                question {
+                                    title
+                                }
+                                formattedValue
+                            }
+                            ... on MediaResponse {
+                                question {
+                                    title
+                                }
+                                medias {
+                                  url
+                                }
+                            }
+                          }
+                        }
+                      }
                     }
-                    formattedValue
-                }
-                ... on MediaResponse {
-                    question {
-                        title
-                    }
-                    medias {
-                      url
-                    }
+                  }
                 }
               }
             }
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     protected function getConnectionsGraphQLQuery(string $userId): string
     {
         return <<<EOF
-    {
-      node(id: "${userId}") {
-        ... on User {
-            connectionAttempt(success: true){
-              edges{
-                node{
-                  user{
-                    id
+                {
+                  node(id: "{$userId}") {
+                    ... on User {
+                        connectionAttempt(success: true){
+                          edges{
+                            node{
+                              user{
+                                id
+                              }
+                              ipAddress
+                              datetime
+                              email
+                            }
+                          }
+                      }
+                    }
                   }
-                  ipAddress
-                  datetime
-                  email
                 }
-              }
-          }
-        }
-      }
-    }
-EOF;
+            EOF;
     }
 }

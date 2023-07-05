@@ -22,10 +22,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VideoTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
     use SluggableTitleTrait;
     use TextableTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     public static function getTranslatableEntityClass(): string
     {

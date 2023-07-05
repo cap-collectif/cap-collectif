@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
-use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class AbstractDebateVoteTypeResolver implements ResolverInterface
 {
@@ -19,7 +19,7 @@ class AbstractDebateVoteTypeResolver implements ResolverInterface
     }
 
     /**
-     * @param DebateVote|DebateAnonymousVote $vote
+     * @param DebateAnonymousVote|DebateVote $vote
      */
     public function __invoke($vote): Type
     {

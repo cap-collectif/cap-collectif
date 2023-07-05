@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class EventOwnerTypeResolver implements ResolverInterface
 {
@@ -22,11 +22,11 @@ class EventOwnerTypeResolver implements ResolverInterface
     {
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
-        if (in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof User) {
+        if (\in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof User) {
             return $this->typeResolver->resolve('InternalUser');
         }
 
-        if (in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof Organization) {
+        if (\in_array($currentSchemaName, ['dev', 'internal']) && $data instanceof Organization) {
             return $this->typeResolver->resolve('InternalOrganization');
         }
 

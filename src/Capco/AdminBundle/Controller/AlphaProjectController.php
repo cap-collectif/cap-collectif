@@ -118,8 +118,9 @@ class AlphaProjectController extends CRUDController
         $project = $this->admin->getSubject();
         $matching = $project
             ->getSteps()
-            ->map(fn(ProjectAbstractStep $pas) => $pas->getStep())
-            ->matching(AbstractStepRepository::createSlugCriteria($slug));
+            ->map(fn (ProjectAbstractStep $pas) => $pas->getStep())
+            ->matching(AbstractStepRepository::createSlugCriteria($slug))
+        ;
         if (0 === $matching->count()) {
             throw $this->createNotFoundException();
         }

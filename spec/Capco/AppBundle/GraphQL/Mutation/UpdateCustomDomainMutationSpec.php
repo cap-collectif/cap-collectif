@@ -8,12 +8,12 @@ use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Validator\Constraints\CheckCustomDomainConstraint;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -52,11 +52,13 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($customDomain)
+        ;
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
         $siteSettings->setStatus(SiteSettingsStatus::IDLE)->shouldBeCalledOnce();
@@ -82,11 +84,13 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($customDomain)
+        ;
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
         $siteSettings->setStatus(SiteSettingsStatus::IDLE)->shouldNotBeCalled();
@@ -97,11 +101,13 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $validator
             ->validate($customDomain, Argument::type(CheckCustomDomainConstraint::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violations);
+            ->willReturn($violations)
+        ;
         $violation
             ->getMessage()
             ->shouldBeCalledOnce()
-            ->willReturn(UpdateCustomDomainMutation::CUSTOM_DOMAIN_SYNTAX_NOT_VALID);
+            ->willReturn(UpdateCustomDomainMutation::CUSTOM_DOMAIN_SYNTAX_NOT_VALID)
+        ;
 
         $payload = $this->__invoke($input, $user);
         $payload->shouldHaveCount(2);
@@ -121,22 +127,26 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($customDomain)
+        ;
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
         $violations = new ConstraintViolationList([$violation->getWrappedObject()]);
         $validator
             ->validate($customDomain, Argument::type(CheckCustomDomainConstraint::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violations);
+            ->willReturn($violations)
+        ;
         $violation
             ->getMessage()
             ->shouldBeCalledOnce()
-            ->willReturn(UpdateCustomDomainMutation::CNAME_NOT_VALID);
+            ->willReturn(UpdateCustomDomainMutation::CNAME_NOT_VALID)
+        ;
 
         $payload = $this->__invoke($input, $user);
         $payload->shouldHaveCount(2);
@@ -157,18 +167,21 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($customDomain)
+        ;
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
         $violations = new ConstraintViolationList([]);
         $validator
             ->validate($customDomain, Argument::type(CheckCustomDomainConstraint::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violations);
+            ->willReturn($violations)
+        ;
 
         $deployerClient->updateCurrentDomain($customDomain)->willReturn(400);
         $em->persist(Argument::type(SiteSettings::class))->shouldNotBeCalled();
@@ -193,23 +206,27 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
-            ->willReturn($customDomain);
+            ->willReturn($customDomain)
+        ;
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings->setCustomDomain($customDomain)->shouldBeCalledOnce();
 
         $violations = new ConstraintViolationList([]);
         $validator
             ->validate($customDomain, Argument::type(CheckCustomDomainConstraint::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violations);
+            ->willReturn($violations)
+        ;
 
         $deployerClient
             ->updateCurrentDomain($customDomain)
             ->shouldBeCalledOnce()
-            ->willReturn(201);
+            ->willReturn(201)
+        ;
         $siteSettings->setStatus(SiteSettingsStatus::ACTIVE)->shouldBeCalledOnce();
         $em->persist(Argument::type(SiteSettings::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();

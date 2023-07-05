@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProposalFormAffiliation;
 use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class ProposalFormRepository extends EntityRepository
 {
@@ -24,7 +24,8 @@ class ProposalFormRepository extends EntityRepository
             ->leftJoin('pf.proposals', 'p')
             ->leftJoin('pf.questions', 'q')
             ->andWhere('pf.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -50,7 +51,8 @@ class ProposalFormRepository extends EntityRepository
             ->select('MAX(p.reference) AS last_reference')
             ->leftJoin('f.proposals', 'p')
             ->where('f.id = :form_id')
-            ->setParameter('form_id', $formId);
+            ->setParameter('form_id', $formId)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
@@ -108,7 +110,8 @@ class ProposalFormRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOwner(Owner $owner): int
@@ -116,7 +119,8 @@ class ProposalFormRepository extends EntityRepository
         return $this->getByOwnerQueryBuilder($owner)
             ->select('count(p.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     private function allQueryBuilder(
@@ -150,6 +154,7 @@ class ProposalFormRepository extends EntityRepository
 
         return $this->createQueryBuilder('p')
             ->where("{$ownerField} = :owner")
-            ->setParameter('owner', $owner);
+            ->setParameter('owner', $owner)
+        ;
     }
 }

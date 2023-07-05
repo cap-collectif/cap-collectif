@@ -2,27 +2,26 @@
 
 namespace Capco\AppBundle\DependencyInjection\Compiler;
 
-use SimpleSAML\Auth\Simple;
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\UserBundle\Authenticator\SamlAuthenticator;
-use Capco\UserBundle\Security\Core\User\SamlUserProvider;
 use Capco\UserBundle\Authenticator\SimplePreAuthenticator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler;
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Capco\UserBundle\Security\Core\User\SamlUserProvider;
 use Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider;
+use Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler;
+use SimpleSAML\Auth\Simple;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SimpleSAMLServicePass implements CompilerPassInterface
 {
     /**
      * You can modify the container here before it is dumped to PHP code.
      *
-     *
      * @api
      */
     public function process(ContainerBuilder $container)
     {
-        /**
+        /*
          * If SAML is not enabled which is the case 99% of time,
          * we disable all SAML services.
          */

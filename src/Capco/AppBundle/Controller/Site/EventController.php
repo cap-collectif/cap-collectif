@@ -7,6 +7,7 @@ use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class EventController extends Controller
 {
@@ -84,9 +84,7 @@ class EventController extends Controller
     public function downloadAction(Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw new ProjectAccessDeniedException(
-                $this->tranlator->trans('project.error.not_exportable')
-            );
+            throw new ProjectAccessDeniedException($this->tranlator->trans('project.error.not_exportable'));
         }
 
         $path = sprintf('%s/public/export/', $this->projectDir);
@@ -112,6 +110,8 @@ class EventController extends Controller
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
      * @Template("CapcoAppBundle:Event:show.html.twig")
+     *
+     * @param mixed $slug
      */
     public function showAction(Request $request, $slug)
     {

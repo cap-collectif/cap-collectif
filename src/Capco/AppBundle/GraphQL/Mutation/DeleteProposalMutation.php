@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Swarrot\Broker\Message;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Overblog\GraphQLBundle\Error\UserError;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
+use Overblog\GraphQLBundle\Error\UserError;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteProposalMutation implements MutationInterface
 {

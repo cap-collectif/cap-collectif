@@ -16,6 +16,7 @@ class JsonProjectSerializer extends AbstractProjectSerializer
                 $withKey ? [$this->serializeKey => $projects] : $projects,
                 $this->outputFormat,
                 SerializationContext::create()->setGroups($this->serializeGroups)
-            );
+            )
+        ;
     }
 }

@@ -7,8 +7,8 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method ReplyAnonymous|null find($id, $lockMode = null, $lockVersion = null)
- * @method ReplyAnonymous|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|ReplyAnonymous find($id, $lockMode = null, $lockVersion = null)
+ * @method null|ReplyAnonymous findOneBy(array $criteria, array $orderBy = null)
  * @method ReplyAnonymous[]    findAll()
  * @method ReplyAnonymous[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class ReplyAnonymousRepository extends EntityRepository
@@ -25,7 +25,8 @@ class ReplyAnonymousRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('replyAnonymous')
             ->andWhere('replyAnonymous.questionnaire = :questionnaire')
-            ->setParameter('questionnaire', $questionnaire);
+            ->setParameter('questionnaire', $questionnaire)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }

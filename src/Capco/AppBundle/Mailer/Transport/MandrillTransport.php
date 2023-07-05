@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Mailer\Transport;
 
 use Mandrill;
+use Swift_Attachment;
 use Swift_Events_EventDispatcher;
 use Swift_Events_EventListener;
 use Swift_Events_SendEvent;
 use Swift_Mime_SimpleMessage;
-use Swift_Transport;
-use Swift_Attachment;
 use Swift_MimePart;
+use Swift_Transport;
 
 /**
  * Copied from https://github.com/AccordGroup/MandrillSwiftMailer.
@@ -171,9 +171,9 @@ class MandrillTransport implements Swift_Transport
     /**
      * https://mandrillapp.com/api/docs/messages.php.html#method-send.
      *
-     * @return array Mandrill Send Message
-     *
      * @throws \Swift_SwiftException
+     *
+     * @return array Mandrill Send Message
      */
     public function getMandrillMessage(Swift_Mime_SimpleMessage $message)
     {
@@ -249,8 +249,8 @@ class MandrillTransport implements Swift_Transport
                     'content' => base64_encode($child->getBody()),
                 ];
             } elseif (
-                $child instanceof Swift_MimePart &&
-                $this->supportsContentType($child->getContentType())
+                $child instanceof Swift_MimePart
+                && $this->supportsContentType($child->getContentType())
             ) {
                 if ('text/html' == $child->getContentType()) {
                     $bodyHtml = $child->getBody();
@@ -296,24 +296,29 @@ class MandrillTransport implements Swift_Transport
                     $mandrillMessage['return_path_domain'] = 'track.cap-collectif.com';
 
                     break;
+
                 case 'puy-de-dome.fr':
                     $mandrillMessage['return_path_domain'] = 'mail.budgetecocitoyen.puy-de-dome.fr';
 
                     break;
+
                 case 'soisy-sous-montmorency.fr':
                     $mandrillMessage['return_path_domain'] =
                         'mail.budgetparticipatif.soisy-sous-montmorency.fr';
 
                     break;
+
                 case 'canejan.fr':
                     $mandrillMessage['return_path_domain'] = 'mail.budgetparticipatif.canejan.fr';
 
                     break;
+
                 case 'iledefrance.fr':
                     $mandrillMessage['return_path_domain'] =
                         'mail.budgetparticipatif.iledefrance.fr';
 
                     break;
+
                 default:
             }
         }
@@ -334,10 +339,12 @@ class MandrillTransport implements Swift_Transport
                         $mandrillMessage['headers'] = $headers;
 
                         break;
+
                     case 'X-MC-InlineCSS':
                         $mandrillMessage['inline_css'] = $header->getValue();
 
                         break;
+
                     case 'X-MC-Tags':
                         $tags = $header->getValue();
                         if (!\is_array($tags)) {
@@ -346,6 +353,7 @@ class MandrillTransport implements Swift_Transport
                         $mandrillMessage['tags'] = $tags;
 
                         break;
+
                     case 'X-MC-Autotext':
                         $autoText = $header->getValue();
                         if (\in_array($autoText, ['true', 'on', 'yes', 'y', true], true)) {
@@ -356,6 +364,7 @@ class MandrillTransport implements Swift_Transport
                         }
 
                         break;
+
                     case 'X-MC-GoogleAnalytics':
                         $analyticsDomains = explode(',', $header->getValue());
                         if (\is_array($analyticsDomains)) {
@@ -363,14 +372,17 @@ class MandrillTransport implements Swift_Transport
                         }
 
                         break;
+
                     case 'X-MC-GoogleAnalyticsCampaign':
                         $mandrillMessage['google_analytics_campaign'] = $header->getValue();
 
                         break;
+
                     case 'X-MC-TrackingDomain':
                         $mandrillMessage['tracking_domain'] = $header->getValue();
 
                         break;
+
                     default:
                         if (0 === strncmp($header->getFieldName(), 'X-', 2)) {
                             $headers[$header->getFieldName()] = $header->getValue();
@@ -403,16 +415,14 @@ class MandrillTransport implements Swift_Transport
     }
 
     /**
-     * @return Mandrill
-     *
      * @throws \Swift_TransportException
+     *
+     * @return Mandrill
      */
     protected function createMandrill()
     {
         if (null === $this->apiKey) {
-            throw new \Swift_TransportException(
-                'Cannot create instance of \Mandrill while API key is NULL'
-            );
+            throw new \Swift_TransportException('Cannot create instance of \Mandrill while API key is NULL');
         }
 
         return new Mandrill($this->apiKey);

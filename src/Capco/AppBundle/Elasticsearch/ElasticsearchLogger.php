@@ -10,7 +10,7 @@ class ElasticsearchLogger implements LoggerInterface
 
     protected $queries = [];
 
-    public function __construct(LoggerInterface $logger = null)
+    public function __construct(?LoggerInterface $logger = null)
     {
         $this->logger = $logger;
     }
@@ -24,7 +24,7 @@ class ElasticsearchLogger implements LoggerInterface
         array $query = [],
         float $engineTime = 0.0,
         int $itemCount = 0,
-        array $response = null
+        ?array $response = null
     ): void {
         $e = new \Exception();
 

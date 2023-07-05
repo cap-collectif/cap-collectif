@@ -9,18 +9,15 @@ use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Resolver\StepResolver;
+use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Capco\AppBundle\Twig\MediaExtension;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class ProjectNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private UrlGeneratorInterface $router;
@@ -90,17 +87,17 @@ class ProjectNormalizer implements
 
         // We do not need all fields
         if (
-            \in_array('ElasticsearchNestedProject', $groups, true) ||
-            \in_array('ElasticsearchVoteNestedProject', $groups, true) ||
-            \in_array('ElasticsearchCommentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchArgumentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchDebateArgumentNestedProject', $groups, true) ||
-            \in_array('ElasticsearchSourceNestedProject', $groups, true) ||
-            \in_array('ElasticsearchReplyNestedProject', $groups, true) ||
-            \in_array('ElasticsearchOpinionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchVersionNestedProject', $groups, true) ||
-            \in_array('ElasticsearchProposalNestedProject', $groups, true) ||
-            \in_array('ElasticsearchEventNestedProject', $groups, true)
+            \in_array('ElasticsearchNestedProject', $groups, true)
+            || \in_array('ElasticsearchVoteNestedProject', $groups, true)
+            || \in_array('ElasticsearchCommentNestedProject', $groups, true)
+            || \in_array('ElasticsearchArgumentNestedProject', $groups, true)
+            || \in_array('ElasticsearchDebateArgumentNestedProject', $groups, true)
+            || \in_array('ElasticsearchSourceNestedProject', $groups, true)
+            || \in_array('ElasticsearchReplyNestedProject', $groups, true)
+            || \in_array('ElasticsearchOpinionNestedProject', $groups, true)
+            || \in_array('ElasticsearchVersionNestedProject', $groups, true)
+            || \in_array('ElasticsearchProposalNestedProject', $groups, true)
+            || \in_array('ElasticsearchEventNestedProject', $groups, true)
         ) {
             $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
             $data['authors'] = [];

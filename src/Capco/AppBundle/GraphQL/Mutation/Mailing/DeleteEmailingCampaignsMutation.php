@@ -94,8 +94,8 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
         foreach ($input->offsetGet('ids') as $globalId) {
             $emailingCampaign = $this->findCampaignFromGlobalId($globalId, $viewer);
             if (
-                $emailingCampaign &&
-                $this->authorizationChecker->isGranted(
+                $emailingCampaign
+                && $this->authorizationChecker->isGranted(
                     EmailingCampaignVoter::DELETE,
                     $emailingCampaign
                 )

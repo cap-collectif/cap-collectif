@@ -40,7 +40,6 @@ class ProposalAdminUrlResolver implements ResolverInterface
             }
         }
 
-
         if (!$isAuthorized) {
             throw new UserWarning('Access denied to this field.');
         }

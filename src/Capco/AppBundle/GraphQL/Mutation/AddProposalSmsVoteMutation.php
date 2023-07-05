@@ -4,26 +4,26 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 
 class AddProposalSmsVoteMutation implements MutationInterface
 {
@@ -139,7 +139,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
                 return $repository
                     ->getByTokenAndStep($step, $token)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $connection = $paginator->auto(new Argument(), $countUserVotes);
 
@@ -150,7 +151,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
             ->setIpAddress($this->requestGuesser->getClientIp())
             ->setPhone($phone)
             ->setProposal($proposal)
-            ->setConsentSmsCommunication($consentSmsCommunication);
+            ->setConsentSmsCommunication($consentSmsCommunication)
+        ;
 
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {

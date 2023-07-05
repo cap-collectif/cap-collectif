@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\CommentVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\CommentVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveCommentVoteMutation implements MutationInterface
 {

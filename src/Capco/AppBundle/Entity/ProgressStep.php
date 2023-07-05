@@ -26,7 +26,7 @@ class ProgressStep
     /**
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt = null;
+    private $endAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="progressSteps", cascade={"persist"})
@@ -68,7 +68,7 @@ class ProgressStep
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTime $endAt = null): self
+    public function setEndAt(?\DateTime $endAt = null): self
     {
         $this->endAt = $endAt;
 

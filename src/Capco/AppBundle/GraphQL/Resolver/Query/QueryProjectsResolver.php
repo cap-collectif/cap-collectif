@@ -2,24 +2,24 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Enum\ProjectArchiveFilter;
-use Capco\AppBundle\Repository\LocaleRepository;
-use Overblog\GraphQLBundle\Error\UserError;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\OrderDirection;
-use GraphQL\Type\Definition\ResolveInfo;
-use Capco\AppBundle\Search\ProjectSearch;
-use Capco\AppBundle\GraphQL\QueryAnalyzer;
+use Capco\AppBundle\Enum\ProjectArchiveFilter;
 use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Search\ProjectSearch;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Type\Definition\ResolveInfo;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class QueryProjectsResolver implements ResolverInterface
@@ -146,7 +146,7 @@ class QueryProjectsResolver implements ResolverInterface
             $filters['locale'] = $args['locale'];
         }
         if ($args->offsetExists('archived') && !empty($args->offsetGet('archived'))) {
-            $filters['archived'] = $args->offsetGet('archived') === ProjectArchiveFilter::ARCHIVED;
+            $filters['archived'] = ProjectArchiveFilter::ARCHIVED === $args->offsetGet('archived');
         }
 
         return $filters;
@@ -163,7 +163,7 @@ class QueryProjectsResolver implements ResolverInterface
             if ($locale && $locale->isEnabled()) {
                 $argument->offsetSet('locale', $locale->getId());
             } else {
-                throw new UserError("the locale ${locale} is not enabled");
+                throw new UserError("the locale {$locale} is not enabled");
             }
         }
     }

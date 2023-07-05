@@ -27,10 +27,10 @@ class SetDefaultLocaleMutation implements MutationInterface
         $localeId = $args->offsetGet('id');
         $locale = $this->localeRepository->find($localeId);
         if (!($locale instanceof Locale)) {
-            throw new UserError("unknown locale : ${localeId}");
+            throw new UserError("unknown locale : {$localeId}");
         }
         if (!$locale->isPublished()) {
-            throw new UserError("The locale ${localeId} is not published");
+            throw new UserError("The locale {$localeId} is not published");
         }
 
         $locale = $this->changeDefaultLocale($locale);

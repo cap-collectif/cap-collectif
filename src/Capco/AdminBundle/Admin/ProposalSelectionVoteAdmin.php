@@ -4,9 +4,9 @@ namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 
 class ProposalSelectionVoteAdmin extends AbstractAdmin
@@ -25,7 +25,8 @@ class ProposalSelectionVoteAdmin extends AbstractAdmin
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -38,7 +39,8 @@ class ProposalSelectionVoteAdmin extends AbstractAdmin
             ->add('private', null, ['label' => 'admin.global.private'])
             ->add('username', null, ['label' => 'admin.global.username'])
             ->add('email', null, ['label' => 'admin.global.email'])
-            ->add('_action', 'actions', ['actions' => ['show' => []]]);
+            ->add('_action', 'actions', ['actions' => ['show' => []]])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -48,7 +50,8 @@ class ProposalSelectionVoteAdmin extends AbstractAdmin
                 'label' => 'global.argument.label',
             ])
             ->add('user', ModelType::class, ['label' => 'global.author'])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

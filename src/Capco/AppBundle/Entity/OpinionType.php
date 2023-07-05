@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Table(name="opinion_type")
@@ -18,13 +18,13 @@ class OpinionType
     use DescriptionTrait;
     use UuidTrait;
 
-    const VOTE_WIDGET_DISABLED = 0;
-    const VOTE_WIDGET_OK = 1;
-    const VOTE_WIDGET_BOTH = 2;
+    public const VOTE_WIDGET_DISABLED = 0;
+    public const VOTE_WIDGET_OK = 1;
+    public const VOTE_WIDGET_BOTH = 2;
 
-    const COMMENT_SYSTEM_DISABLED = 0;
-    const COMMENT_SYSTEM_OK = 1;
-    const COMMENT_SYSTEM_BOTH = 2;
+    public const COMMENT_SYSTEM_DISABLED = 0;
+    public const COMMENT_SYSTEM_OK = 1;
+    public const COMMENT_SYSTEM_BOTH = 2;
 
     public static $colorsType = [
         'opinion_type.colors.white' => 'white',

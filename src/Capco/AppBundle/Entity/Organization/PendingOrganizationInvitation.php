@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Entity\Organization;
 use Capco\AppBundle\Entity\Interfaces\DateTime\Expirable;
 use Capco\AppBundle\Entity\Interfaces\Invitation;
 use Capco\AppBundle\Traits\DateTime\ExpirableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="pending_organization_invitation",
@@ -152,7 +152,8 @@ class PendingOrganizationInvitation implements Expirable, Invitation
             ->setToken($token)
             ->setCreatedAt($now)
             ->setExpiresAt($now->modify(Expirable::EXPIRES_AT_PERIOD))
-            ->setCreator($creator);
+            ->setCreator($creator)
+        ;
     }
 
     public static function makeInvitation(
@@ -165,6 +166,7 @@ class PendingOrganizationInvitation implements Expirable, Invitation
     ): self {
         return static::create($organization, $role, $token, $creator)
             ->setUser($user)
-            ->setEmail($email);
+            ->setEmail($email)
+        ;
     }
 }

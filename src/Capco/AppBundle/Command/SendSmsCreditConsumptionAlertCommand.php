@@ -29,8 +29,7 @@ class SendSmsCreditConsumptionAlertCommand extends Command
         SmsRemainingCreditEmailAlertRepository $smsRemainingCreditEmailAlertRepository,
         SmsAnalyticsHelper $smsAnalyticsHelper,
         Publisher $publisher
-    )
-    {
+    ) {
         parent::__construct($name);
         $this->em = $em;
         $this->smsCreditRepository = $smsCreditRepository;
@@ -52,6 +51,7 @@ class SendSmsCreditConsumptionAlertCommand extends Command
 
         if (!$remainingCreditsAmount) {
             $output->writeln('no remaining credits found');
+
             return 1;
         }
 
@@ -60,6 +60,7 @@ class SendSmsCreditConsumptionAlertCommand extends Command
 
         if ($error) {
             $output->writeln($error);
+
             return 1;
         }
 
@@ -70,21 +71,31 @@ class SendSmsCreditConsumptionAlertCommand extends Command
     {
         $mostRecentRefill = $this->smsCreditRepository->findMostRecent();
         // we check if we already sent an alert for the most recent credit re-fill and this status
-        $emailAlreadySent = $this->smsRemainingCreditEmailAlertRepository->findOneBy(["status" => $status, "smsCredit" => $mostRecentRefill]);
+        $emailAlreadySent = $this->smsRemainingCreditEmailAlertRepository->findOneBy(['status' => $status, 'smsCredit' => $mostRecentRefill]);
 
         $percent = null;
-        if ($emailAlreadySent) return 'email already sent for this credit re-fill and status';
-        if ($status === RemainingSmsCreditStatus::IDLE) return 'status IDLE';
-        if ($status === RemainingSmsCreditStatus::LOW) $percent = 75;
-        if ($status === RemainingSmsCreditStatus::VERY_LOW) $percent = 90;
-        if ($status === RemainingSmsCreditStatus::TOTAL) $percent = 100;
+        if ($emailAlreadySent) {
+            return 'email already sent for this credit re-fill and status';
+        }
+        if (RemainingSmsCreditStatus::IDLE === $status) {
+            return 'status IDLE';
+        }
+        if (RemainingSmsCreditStatus::LOW === $status) {
+            $percent = 75;
+        }
+        if (RemainingSmsCreditStatus::VERY_LOW === $status) {
+            $percent = 90;
+        }
+        if (RemainingSmsCreditStatus::TOTAL === $status) {
+            $percent = 100;
+        }
 
         $this->publisher->publish(
             'sms_credit.alert_consumed_credit',
             new Message(
                 json_encode([
                     'remainingCreditsAmount' => $remainingCreditsAmount,
-                    'percent' => $percent
+                    'percent' => $percent,
                 ])
             )
         );

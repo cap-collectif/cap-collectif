@@ -19,9 +19,7 @@ class CommentController extends CRUDController
         $viewer = $this->getUser();
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
         }
         if (!$this->isViewerAdminAuthor($object, $viewer) && !$viewer->isSuperAdmin()) {
             throw new ProjectAccessDeniedException();

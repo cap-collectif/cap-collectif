@@ -50,5 +50,4 @@ class FacebookSSOConfiguration extends AbstractSSOConfiguration
 
         return $this;
     }
-
 }

@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
- * @method ConsultationStep|null find($id, $lockMode = null, $lockVersion = null)
- * @method ConsultationStep|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|ConsultationStep find($id, $lockMode = null, $lockVersion = null)
+ * @method null|ConsultationStep findOneBy(array $criteria, array $orderBy = null)
  * @method ConsultationStep[]    findAll()
  * @method ConsultationStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -19,7 +19,8 @@ class ConsultationStepRepository extends AbstractStepRepository
             ->addSelect('pas')
             ->leftJoin('cs.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'p')
-            ->andWhere('pas.project IS NOT NULL');
+            ->andWhere('pas.project IS NOT NULL')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -33,7 +34,8 @@ class ConsultationStepRepository extends AbstractStepRepository
             ->leftJoin('cs.consultations', 'csc')
             ->innerJoin('csc.opinions', 'opinions')
             ->andWhere('opinions.id = :opinionId')
-            ->setParameter('opinionId', $opinionId);
+            ->setParameter('opinionId', $opinionId)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -57,7 +59,8 @@ class ConsultationStepRepository extends AbstractStepRepository
             ->andWhere(':now BETWEEN cs.startAt AND ps.endAt')
             ->setParameter('now', new \DateTime())
             ->groupBy('pas.project')
-            ->addOrderBy('ps.endAt', 'DESC');
+            ->addOrderBy('ps.endAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -89,7 +92,8 @@ class ConsultationStepRepository extends AbstractStepRepository
             ->andWhere(':now < ps.startAt')
             ->setParameter('now', new \DateTime())
             ->groupBy('pas.project')
-            ->addOrderBy('ps.startAt', 'DESC');
+            ->addOrderBy('ps.startAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -121,7 +125,8 @@ class ConsultationStepRepository extends AbstractStepRepository
             ->andWhere(':now > ps.endAt')
             ->setParameter('now', new \DateTime())
             ->groupBy('pas.project')
-            ->addOrderBy('ps.startAt', 'ASC');
+            ->addOrderBy('ps.startAt', 'ASC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -138,6 +143,7 @@ class ConsultationStepRepository extends AbstractStepRepository
     {
         return $this->createQueryBuilder('cs')
             ->andWhere('cs.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->setParameter('isEnabled', true)
+        ;
     }
 }

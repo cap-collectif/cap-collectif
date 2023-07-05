@@ -16,7 +16,7 @@ trait TimelessStepTrait
         return $this->timeless;
     }
 
-    public function setTimeless(bool $timeless = null): self
+    public function setTimeless(?bool $timeless = null): self
     {
         $this->timeless = $timeless;
 

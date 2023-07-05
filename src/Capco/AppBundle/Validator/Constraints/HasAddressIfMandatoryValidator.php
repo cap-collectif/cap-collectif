@@ -47,7 +47,8 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
             if (!self::isInAnyDistrict($latitude, $longitude, $form)) {
                 $this->context
                     ->buildViolation($constraint->addressNotInZoneMessage)
-                    ->addViolation();
+                    ->addViolation()
+                ;
             }
         }
     }
@@ -71,7 +72,7 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         float $longitude,
         ProposalDistrict $district
     ): bool {
-        return $district->getGeojson() &&
-            GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
+        return $district->getGeojson()
+            && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
     }
 }

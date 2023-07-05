@@ -87,9 +87,7 @@ trait CivicIATrait
     protected static function checkIaReadability(?int $iaReadability): void
     {
         if (null !== $iaReadability && (0 > $iaReadability || $iaReadability > 100)) {
-            throw new \RuntimeException(
-                'civic ia readability must be in 0-100, cannot be ' . $iaReadability
-            );
+            throw new \RuntimeException('civic ia readability must be in 0-100, cannot be ' . $iaReadability);
         }
     }
 

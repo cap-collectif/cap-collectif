@@ -8,12 +8,12 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class ContactProposalAuthorMutation implements MutationInterface
 {

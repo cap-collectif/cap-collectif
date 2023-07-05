@@ -35,7 +35,8 @@ class CheckColorValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->validate('#ff0000D', $constraint);
     }
 }

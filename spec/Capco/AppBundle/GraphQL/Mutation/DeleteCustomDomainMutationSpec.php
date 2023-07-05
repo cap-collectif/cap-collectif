@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\GraphQL\Mutation\DeleteCustomDomainMutation;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 
 class DeleteCustomDomainMutationSpec extends ObjectBehavior
 {
@@ -37,11 +37,13 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings
             ->getCapcoDomain()
             ->shouldBeCalledOnce()
-            ->willReturn($capcoDomain);
+            ->willReturn($capcoDomain)
+        ;
 
         $statusCode = '400';
         $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);
@@ -67,11 +69,13 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
         $siteSettingsRepository
             ->findSiteSetting()
             ->shouldBeCalledOnce()
-            ->willReturn($siteSettings);
+            ->willReturn($siteSettings)
+        ;
         $siteSettings
             ->getCapcoDomain()
             ->shouldBeCalledOnce()
-            ->willReturn($capcoDomain);
+            ->willReturn($capcoDomain)
+        ;
 
         $statusCode = '201';
         $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);

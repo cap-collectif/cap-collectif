@@ -20,7 +20,8 @@ class QuestionnaireStepFormType extends AbstractStepFormType
             ->add('footer')
             ->add('footerUsingJoditWysiwyg')
             ->add('isAnonymousParticipationAllowed')
-            ->add('collectParticipantsEmail');
+            ->add('collectParticipantsEmail')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

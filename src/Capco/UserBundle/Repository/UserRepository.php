@@ -24,8 +24,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|User find($id, $lockMode = null, $lockVersion = null)
+ * @method null|User findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -40,7 +40,8 @@ class UserRepository extends EntityRepository
         return $qb
             ->where('u.facebook_id IS NOT NULL')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function hydrateFromIds(array $ids): array
@@ -50,7 +51,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.media', 'media')
             ->leftJoin('u.userType', 'userType')
             ->where('u.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -63,7 +65,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('u.userType', 'userType')
             ->addOrderBy('FIELD(u.id, :ids)')
             ->where('u.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -75,7 +78,8 @@ class UserRepository extends EntityRepository
             ->where('pa.project = :id')
             ->setParameter('id', $projectId)
             ->orderBy('u.createdAt')
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $qb->getResult();
     }
@@ -87,7 +91,8 @@ class UserRepository extends EntityRepository
             ->where('t.value = :apiKey')
             ->setParameter('apiKey', $apiKey)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function countUsersInGroup(
@@ -99,7 +104,8 @@ class UserRepository extends EntityRepository
         $qb->select('COUNT(u.id)')
             ->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
-            ->setParameter('group', $group);
+            ->setParameter('group', $group)
+        ;
         if (null !== $consentInternalCommunication) {
             $qb->andWhere(
                 'u.consentInternalCommunication = :consentInternalCommunication'
@@ -124,7 +130,8 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb->innerJoin('u.userGroups', 'ug')
             ->andWhere('ug.group = :group')
-            ->setParameter('group', $group);
+            ->setParameter('group', $group)
+        ;
         if (null !== $consentInternalCommunication) {
             $qb->andWhere(
                 'u.consentInternalCommunication = :consentInternalCommunication'
@@ -150,7 +157,8 @@ class UserRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getRegisteredNotConfirmedByEmailCount(): int
@@ -163,7 +171,8 @@ class UserRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getRegisteredContributorCount(): int
@@ -173,27 +182,32 @@ class UserRepository extends EntityRepository
         $qbOpinion = $this->createQueryBuilder('userOpinion');
         $qbOpinion
             ->select('userOpinion.id')
-            ->innerJoin('userOpinion.opinions', 'opinion', 'WITH', 'opinion.published = true');
+            ->innerJoin('userOpinion.opinions', 'opinion', 'WITH', 'opinion.published = true')
+        ;
 
         $qbSource = $this->createQueryBuilder('userSource');
         $qbSource
             ->select('userSource.id')
-            ->innerJoin('userSource.sources', 'source', 'WITH', 'source.published = true');
+            ->innerJoin('userSource.sources', 'source', 'WITH', 'source.published = true')
+        ;
 
         $qbComment = $this->createQueryBuilder('userComment');
         $qbComment
             ->select('userComment.id')
-            ->innerJoin('userComment.comments', 'comment', 'WITH', 'comment.published = true');
+            ->innerJoin('userComment.comments', 'comment', 'WITH', 'comment.published = true')
+        ;
 
         $qbVote = $this->createQueryBuilder('userVote');
         $qbVote
             ->select('userVote.id')
-            ->innerJoin('userVote.votes', 'vote', 'WITH', 'vote.published = true');
+            ->innerJoin('userVote.votes', 'vote', 'WITH', 'vote.published = true')
+        ;
 
         $qbArgument = $this->createQueryBuilder('userArgument');
         $qbArgument
             ->select('userArgument.id')
-            ->innerJoin('userArgument.arguments', 'argument', 'WITH', 'argument.published = true');
+            ->innerJoin('userArgument.arguments', 'argument', 'WITH', 'argument.published = true')
+        ;
 
         $qbOpinionVersions = $this->createQueryBuilder('userOpinionVersions');
         $qbOpinionVersions
@@ -203,7 +217,8 @@ class UserRepository extends EntityRepository
                 'version',
                 'WITH',
                 'version.published = true'
-            );
+            )
+        ;
 
         $qbProposal = $this->createQueryBuilder('userProposal');
         $qbProposal
@@ -213,12 +228,14 @@ class UserRepository extends EntityRepository
                 'proposal',
                 'WITH',
                 'proposal.published = true AND proposal.draft = false'
-            );
+            )
+        ;
 
         $qbReply = $this->createQueryBuilder('userReply');
         $qbReply
             ->select('userReply.id')
-            ->innerJoin('userReply.replies', 'reply', 'WITH', 'reply.published = true');
+            ->innerJoin('userReply.replies', 'reply', 'WITH', 'reply.published = true')
+        ;
 
         $qb->select('count(DISTINCT u.id)')
             ->orWhere($qb->expr()->in('u.id', $qbReply->getDQL()))
@@ -228,12 +245,14 @@ class UserRepository extends EntityRepository
             ->orWhere($qb->expr()->in('u.id', $qbOpinionVersions->getDQL()))
             ->orWhere($qb->expr()->in('u.id', $qbVote->getDQL()))
             ->orWhere($qb->expr()->in('u.id', $qbComment->getDQL()))
-            ->orWhere($qb->expr()->in('u.id', $qbSource->getDQL()));
+            ->orWhere($qb->expr()->in('u.id', $qbSource->getDQL()))
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countConfirmedUsersWithoutVoteInDebate(Debate $debate): int
@@ -257,7 +276,8 @@ class UserRepository extends EntityRepository
                 '
             )
             ->setParameter('debate', $debate)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getConfirmedUsersWithoutVoteInDebate(
@@ -287,7 +307,8 @@ class UserRepository extends EntityRepository
             ->setFirstResult($firstResult)
             ->setMaxResults($maxResult)
             ->setParameter('debate', $debate)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findProjectSourceContributorsWithCount(Project $project): array
@@ -315,7 +336,8 @@ class UserRepository extends EntityRepository
           GROUP BY u.id
         '
             )
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $query->getResult();
     }
@@ -345,7 +367,8 @@ class UserRepository extends EntityRepository
           GROUP BY u.id
         '
             )
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $query->getResult();
     }
@@ -387,7 +410,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -403,7 +427,8 @@ class UserRepository extends EntityRepository
             ->where('pas.project = :project')
             ->andWhere('proposals.draft = 0')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -423,7 +448,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->where('pas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -439,7 +465,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -470,7 +497,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('opinions_votes_opinion_consultation_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -510,7 +538,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('versions_votes_version_parent_consultation_step.projectAbstractStep', 'cas')
             ->where('cas.project = :project')
             ->groupBy('u.id')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -538,7 +567,8 @@ class UserRepository extends EntityRepository
           )
           GROUP BY av.user'
             )
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $query->getResult();
     }
@@ -567,7 +597,8 @@ class UserRepository extends EntityRepository
           GROUP BY sv.user
         '
             )
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $query->getResult();
     }
@@ -601,7 +632,8 @@ class UserRepository extends EntityRepository
         $qb->addSelect('m')
             ->leftJoin('u.media', 'm')
             ->where('u.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -648,7 +680,8 @@ class UserRepository extends EntityRepository
           GROUP BY u.id
         '
             )
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $query->getResult();
     }
@@ -676,7 +709,8 @@ class UserRepository extends EntityRepository
           GROUP BY u.id
         '
             )
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $query->getResult();
     }
@@ -693,7 +727,8 @@ class UserRepository extends EntityRepository
                 'consultation.step = :step'
             )
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -711,7 +746,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('proposals.proposalForm', 'proposalForm')
             ->where('proposalForm.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -724,7 +760,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('replies.questionnaire', 'questionnaire')
             ->where('questionnaire.step = :step')
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -742,7 +779,8 @@ class UserRepository extends EntityRepository
                 'consultation.step = :step'
             )
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -771,7 +809,8 @@ class UserRepository extends EntityRepository
                 'opinions_votes_opinion_consultation.step = :step'
             )
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -809,7 +848,8 @@ class UserRepository extends EntityRepository
                 'versions_votes_version_parent_consultation.step = :step'
             )
             ->groupBy('u.id')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -838,7 +878,8 @@ class UserRepository extends EntityRepository
           GROUP BY av.user
         '
             )
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $query->getResult();
     }
@@ -867,7 +908,8 @@ class UserRepository extends EntityRepository
           GROUP BY sv.user
         '
             )
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $query->getResult();
     }
@@ -885,7 +927,8 @@ class UserRepository extends EntityRepository
           GROUP BY pv.user
         '
             )
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $query->getResult();
     }
@@ -903,7 +946,8 @@ class UserRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->setMaxResults($offset)
             ->setFirstResult($first)
-            ->addOrderBy('f.followedAt', 'ASC');
+            ->addOrderBy('f.followedAt', 'ASC')
+        ;
 
         return new Paginator($query);
     }
@@ -920,7 +964,8 @@ class UserRepository extends EntityRepository
             ->setParameter('opinion', $opinion)
             ->setMaxResults($offset)
             ->setFirstResult($first)
-            ->addOrderBy('f.followedAt', 'ASC');
+            ->addOrderBy('f.followedAt', 'ASC')
+        ;
 
         return new Paginator($query);
     }
@@ -944,7 +989,8 @@ class UserRepository extends EntityRepository
             ->andWhere('utt.locale = :locale')
             ->orderBy('f.followedAt', 'ASC')
             ->setParameter('proposalId', $proposalId)
-            ->setParameter('locale', $locale);
+            ->setParameter('locale', $locale)
+        ;
 
         return $query->getQuery()->getResult();
     }
@@ -976,25 +1022,29 @@ class UserRepository extends EntityRepository
             $qb->join('f.proposal', 'p')
                 ->andWhere('p.deletedAt IS NULL')
                 ->andWhere('p.id = :proposalId')
-                ->setParameter('proposalId', $criteria['proposal']->getId());
+                ->setParameter('proposalId', $criteria['proposal']->getId())
+            ;
         }
 
         if (isset($criteria['opinion'])) {
             $qb->join('f.opinion', 'o')
                 ->andWhere('o.id = :opinionId')
-                ->setParameter('opinionId', $criteria['opinion']->getId());
+                ->setParameter('opinionId', $criteria['opinion']->getId())
+            ;
         }
 
         if (isset($criteria['opinionVersion'])) {
             $qb->join('f.opinionVersion', 'ov')
                 ->andWhere('ov.id = :opinionVersionId')
-                ->setParameter('opinionVersionId', $criteria['opinionVersion']->getId());
+                ->setParameter('opinionVersionId', $criteria['opinionVersion']->getId())
+            ;
         }
 
         if (isset($criteria['projectDistrict'])) {
             $qb->join('f.projectDistrict', 'pd')
                 ->andWhere('pd.id = :projectDistrict')
-                ->setParameter('projectDistrict', $criteria['projectDistrict']->getId());
+                ->setParameter('projectDistrict', $criteria['projectDistrict']->getId())
+            ;
         }
 
         $sortField = array_keys($orderBy)[0];
@@ -1006,10 +1056,12 @@ class UserRepository extends EntityRepository
                 $qb->addOrderBy('u.username', $direction);
 
                 break;
+
             case 'RANDOM':
                 $qb->addSelect('RAND() AS HIDDEN rand')->addOrderBy('rand');
 
                 break;
+
             case 'FOLLOWED_AT':
                 $qb->addOrderBy('f.followedAt', $direction);
             // no break
@@ -1022,7 +1074,8 @@ class UserRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true);
+            ->useQueryCache(true)
+        ;
 
         return new Paginator($query);
     }
@@ -1035,7 +1088,8 @@ class UserRepository extends EntityRepository
             ->join('f.proposal', 'p')
             ->andWhere('f.proposal = :proposal')
             ->andWhere('p.deletedAt IS NULL')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1047,7 +1101,8 @@ class UserRepository extends EntityRepository
             ->join('u.followingContributions', 'f')
             ->join('f.opinion', 'p')
             ->andWhere('f.opinion = :opinion')
-            ->setParameter('opinion', $opinion);
+            ->setParameter('opinion', $opinion)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1059,7 +1114,8 @@ class UserRepository extends EntityRepository
             ->join('u.followingContributions', 'f')
             ->join('f.opinionVersion', 'ov')
             ->andWhere('f.opinionVersion = :opinionVersion')
-            ->setParameter('opinionVersion', $opinionVersion);
+            ->setParameter('opinionVersion', $opinionVersion)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1074,7 +1130,8 @@ class UserRepository extends EntityRepository
             ->andWhere('p.deletedAt IS NULL')
             ->andWhere('u.id = :userId')
             ->setParameter('proposalId', $proposal->getId())
-            ->setParameter('userId', $user->getId());
+            ->setParameter('userId', $user->getId())
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1088,7 +1145,8 @@ class UserRepository extends EntityRepository
             ->andWhere('o.id = :opinionId')
             ->andWhere('u.id = :userId')
             ->setParameter('opinionId', $opinion->getId())
-            ->setParameter('userId', $user->getId());
+            ->setParameter('userId', $user->getId())
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1102,7 +1160,8 @@ class UserRepository extends EntityRepository
             ->andWhere('ov.id = :versionId')
             ->andWhere('u.id = :userId')
             ->setParameter('versionId', $version->getId())
-            ->setParameter('userId', $user->getId());
+            ->setParameter('userId', $user->getId())
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -1116,7 +1175,8 @@ class UserRepository extends EntityRepository
             ->join('u.followingContributions', 'f1')
             ->join('f1.proposal', 'p')
             ->andWhere('p.deletedAt IS NULL')
-            ->andWhere('p IS NOT NULL');
+            ->andWhere('p IS NOT NULL')
+        ;
         $qb->where($qb->expr()->in('u.id', $followerQuery->getDQL()));
 
         return $qb->getQuery()->getResult();
@@ -1131,7 +1191,8 @@ class UserRepository extends EntityRepository
             ->andWhere('f.user = :user')
             ->andWhere('f.proposal IS NOT NULL')
             ->andWhere('p.deletedAt IS NULL')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -1144,7 +1205,8 @@ class UserRepository extends EntityRepository
             ->andWhere('u.createdAt < :oneDayAgo AND u.createdAt > :oneWeekAgo')
             ->andWhere('u.remindedAccountConfirmationAfter24Hours = false')
             ->setParameter('oneDayAgo', new \DateTime('-1 day'))
-            ->setParameter('oneWeekAgo', new \DateTime('-7 day'));
+            ->setParameter('oneWeekAgo', new \DateTime('-7 day'))
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -1154,7 +1216,8 @@ class UserRepository extends EntityRepository
         return $this->createQueryBuilder('u')
             ->andWhere('u.confirmationToken IS NOT NULL')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countAllowedViewersForProject(Project $project): int
@@ -1166,7 +1229,8 @@ class UserRepository extends EntityRepository
             ->leftJoin('uG.group', 'g')
             ->leftJoin('g.projectsVisibleByTheGroup', 'p')
             ->andWhere('p.id = :project')
-            ->setParameter('project', $project->getId());
+            ->setParameter('project', $project->getId())
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -1181,7 +1245,8 @@ class UserRepository extends EntityRepository
             ->where('p.id IN (:ids)')
             ->setParameter('ids', $proposalsId)
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function findByRole(string $role): array
@@ -1189,7 +1254,8 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('u');
         $qb->where('u.roles LIKE :roles')
             ->orderBy('u.email', 'ASC')
-            ->setParameter('roles', '%"' . $role . '"%');
+            ->setParameter('roles', '%"' . $role . '"%')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -1216,9 +1282,10 @@ class UserRepository extends EntityRepository
             ->where('u.email IN (:emails)')
             ->setParameter('emails', $emails)
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
 
-        return array_map(fn(array $row) => $row['email'], $results);
+        return array_map(fn (array $row) => $row['email'], $results);
     }
 
     public function findByAccessTokenOrUsername(
@@ -1240,7 +1307,8 @@ class UserRepository extends EntityRepository
             ->setParameter('accessToken', $accessToken)
             ->setParameter('accessId', $accessId)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getAllAdmin(): array
@@ -1277,26 +1345,27 @@ class UserRepository extends EntityRepository
     public function getAssignedUsersOnProposal(Proposal $proposal, string $revisedAt)
     {
         $sql = <<<'EOF'
-    SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
-    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
-    WHERE proposal_id = :proposalId
-    UNION
-    SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
-    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
-    WHERE proposal_id = :proposalId
-    UNION
-    SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
-    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
-    WHERE proposal_id = :proposalId
-    UNION
-    SELECT pr.author_id AS "assignedUser" FROM proposal_revision pr
-    LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id
-    WHERE proposal_id = :proposalId and revised_at = :revisedAt
-EOF;
+                SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
+                LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
+                WHERE proposal_id = :proposalId
+                UNION
+                SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
+                LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
+                WHERE proposal_id = :proposalId
+                UNION
+                SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
+                LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
+                WHERE proposal_id = :proposalId
+                UNION
+                SELECT pr.author_id AS "assignedUser" FROM proposal_revision pr
+                LEFT JOIN fos_user fu4 ON pr.author_id = fu4.id
+                WHERE proposal_id = :proposalId and revised_at = :revisedAt
+            EOF;
 
         $stmt = $this->getEntityManager()
             ->getConnection()
-            ->prepare($sql);
+            ->prepare($sql)
+        ;
         $stmt->bindValue('proposalId', $proposal->getId());
         $stmt->bindValue('revisedAt', new \DateTime($revisedAt), 'datetime');
         $stmt->execute();
@@ -1307,30 +1376,31 @@ EOF;
     public function findDuplicatesUsers()
     {
         $sql = <<<'EOF'
-    SELECT u.id AS userId, u.france_connect_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'franceConnect' SSO  FROM fos_user u
-    WHERE france_connect_id IS NOT NULL
-    GROUP BY u.france_connect_id
-    HAVING duplicates > 1
-    UNION
-    SELECT u.id AS userId, u.twitter_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'twitter' SSO  FROM fos_user u
-    WHERE twitter_id IS NOT NULL
-    GROUP BY u.twitter_id
-    HAVING duplicates > 1
-    UNION
-    SELECT u.id AS userId, u.facebook_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'facebook' SSO  FROM fos_user u
-    WHERE facebook_id IS NOT NULL
-    GROUP BY u.facebook_id
-    HAVING duplicates > 1
-    UNION
-    SELECT u.id AS userId, u.openid_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'openId'  SSO  FROM fos_user u
-    WHERE openid_id IS NOT NULL
-    GROUP BY u.openid_id
-    HAVING duplicates > 1
-EOF;
+                SELECT u.id AS userId, u.france_connect_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'franceConnect' SSO  FROM fos_user u
+                WHERE france_connect_id IS NOT NULL
+                GROUP BY u.france_connect_id
+                HAVING duplicates > 1
+                UNION
+                SELECT u.id AS userId, u.twitter_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'twitter' SSO  FROM fos_user u
+                WHERE twitter_id IS NOT NULL
+                GROUP BY u.twitter_id
+                HAVING duplicates > 1
+                UNION
+                SELECT u.id AS userId, u.facebook_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'facebook' SSO  FROM fos_user u
+                WHERE facebook_id IS NOT NULL
+                GROUP BY u.facebook_id
+                HAVING duplicates > 1
+                UNION
+                SELECT u.id AS userId, u.openid_id AS sso_id, u.email AS email, COUNT(u.id) AS duplicates, 'openId'  SSO  FROM fos_user u
+                WHERE openid_id IS NOT NULL
+                GROUP BY u.openid_id
+                HAVING duplicates > 1
+            EOF;
 
         $stmt = $this->getEntityManager()
             ->getConnection()
-            ->prepare($sql);
+            ->prepare($sql)
+        ;
         $result = $stmt->executeQuery();
 
         return $result->fetchAllAssociative();
@@ -1344,12 +1414,13 @@ EOF;
             ->update()
             ->set(
                 'u.' . $ssoFieldName,
-                $qb->expr()->concat($qb->expr()->literal("duplicate-${key}-"), 'u.' . $ssoFieldName)
+                $qb->expr()->concat($qb->expr()->literal("duplicate-{$key}-"), 'u.' . $ssoFieldName)
             )
             ->where('u.id = :userId')
             ->setParameter('userId', $userId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findDuplicateFranceConnect(): array
@@ -1367,7 +1438,8 @@ EOF;
             ->groupBy('u.franceConnectId')
             ->having('duplicates > 1')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findDuplicateFacebook(): array
@@ -1380,7 +1452,8 @@ EOF;
             ->groupBy('u.facebook_id')
             ->having('duplicates > 1')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findDuplicateTwitter(): array
@@ -1393,7 +1466,8 @@ EOF;
             ->groupBy('u.twitter_id')
             ->having('duplicates > 1')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findDuplicateOpenId(): array
@@ -1411,7 +1485,8 @@ EOF;
             ->groupBy('u.openId')
             ->having('duplicates > 1')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findSameFranceConnectId(string $franceConnectId): array
@@ -1423,7 +1498,8 @@ EOF;
             ->where('u.franceConnectId = :fcId')
             ->setParameter('fcId', $franceConnectId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findSameFacebookId(string $facebookId): array
@@ -1435,7 +1511,8 @@ EOF;
             ->where('u.facebook_id = :fbId')
             ->setParameter('fbId', $facebookId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findSameTwitterId(string $twitterId): array
@@ -1447,7 +1524,8 @@ EOF;
             ->where('u.twitter_id = :twitterId')
             ->setParameter('twitterId', $twitterId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findSameOpenId(string $samlId): array
@@ -1459,28 +1537,30 @@ EOF;
             ->where('u.openId = :openId')
             ->setParameter('openId', $samlId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function isAssignedUsersOnProposal(User $user): bool
     {
         $sql = <<<'EOF'
-    SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
-    LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
-    WHERE supervisor_id = :userid
-    UNION
-    SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
-    LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
-    WHERE analyst_id = :userid
-    UNION
-    SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
-    LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
-    WHERE decision_maker_id = :userid
-EOF;
+                SELECT ps.supervisor_id AS "assignedUser" FROM proposal_supervisor ps
+                LEFT JOIN fos_user fu ON ps.supervisor_id = fu.id
+                WHERE supervisor_id = :userid
+                UNION
+                SELECT pa.analyst_id AS "assignedUser"  FROM proposal_analyst pa
+                LEFT JOIN fos_user fu2 ON pa.analyst_id = fu2.id
+                WHERE analyst_id = :userid
+                UNION
+                SELECT pdm.decision_maker_id AS "assignedUser" FROM proposal_decision_maker pdm
+                LEFT JOIN fos_user fu3 ON pdm.decision_maker_id = fu3.id
+                WHERE decision_maker_id = :userid
+            EOF;
 
         $stmt = $this->getEntityManager()
             ->getConnection()
-            ->prepare($sql);
+            ->prepare($sql)
+        ;
         $stmt->bindValue('userid', $user->getId());
 
         return \count($stmt->executeQuery()->fetchAllAssociative()) > 0;
@@ -1497,7 +1577,8 @@ EOF;
             ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
             ->where('ml = :mailingList')
             ->orderBy('u.createdAt')
-            ->setParameter('mailingList', $mailingList);
+            ->setParameter('mailingList', $mailingList)
+        ;
         if ($validEmailOnly) {
             $qb->andWhere('u.email IS NOT NULL');
         }
@@ -1523,7 +1604,8 @@ EOF;
             ->select('count(u.id)')
             ->leftJoin('CapcoAppBundle:MailingList', 'ml', 'WITH', 'u MEMBER OF ml.users')
             ->where('ml = :mailingList')
-            ->setParameter('mailingList', $mailingList);
+            ->setParameter('mailingList', $mailingList)
+        ;
         if ($validEmailOnly) {
             $qb->andWhere('u.email IS NOT NULL');
         }
@@ -1538,7 +1620,8 @@ EOF;
     {
         $qb = $this->createQueryBuilder('u')
             ->select('count(u.id)')
-            ->where('u.phoneConfirmed = true');
+            ->where('u.phoneConfirmed = true')
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }

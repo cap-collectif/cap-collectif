@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Reply;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyViewerCanUpdateResolver;
+use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 
 class ReplyViewerCanUpdateResolverSpec extends ObjectBehavior
 {

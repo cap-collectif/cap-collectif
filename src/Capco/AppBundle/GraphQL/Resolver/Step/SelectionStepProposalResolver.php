@@ -4,13 +4,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -32,7 +32,7 @@ class SelectionStepProposalResolver implements ResolverInterface
         RequestStack $request
     ): ConnectionInterface {
         $filters = [];
-        list(
+        [
             $field,
             $direction,
             $term,
@@ -46,7 +46,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['selectionStep'],
             $filters['excludeViewerVotes'],
             $filters['geoBoundingBox'],
-        ) = [
+        ] = [
             $args->offsetGet('orderBy')['field'],
             $args->offsetGet('orderBy')['direction'],
             $args->offsetGet('term'),

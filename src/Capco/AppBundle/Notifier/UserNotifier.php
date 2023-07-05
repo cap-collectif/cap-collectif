@@ -6,15 +6,15 @@ use Capco\AppBundle\GraphQL\Resolver\User\UserConfirmNewEmailUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationParticipationMessage;
+use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationStepReminderMessage;
+use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
+use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
+use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
 use Capco\AppBundle\Mailer\Message\User\UserNewPasswordConfirmationMessage;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Mailer\Message\User\UserAdminConfirmationMessage;
-use Capco\AppBundle\Mailer\Message\User\UserConfirmEmailChangedMessage;
-use Capco\AppBundle\Mailer\Message\User\UserNewEmailConfirmationMessage;
-use Capco\AppBundle\Mailer\Message\User\UserAccountConfirmationReminderMessage;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -126,6 +126,7 @@ final class UserNotifier extends BaseNotifier
             $user
         );
     }
+
     public function remindingEmailConfirmationBeforeStepEnd(
         string $email,
         string $username,

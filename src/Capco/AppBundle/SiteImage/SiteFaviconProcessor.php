@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\SiteImage;
 
+use Capco\AppBundle\Entity\SiteImage;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Twig\SiteFaviconRuntime;
-use ColorThief\ColorThief;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Utils\Text;
 use Capco\MediaBundle\Entity\Media;
-use Capco\AppBundle\Entity\SiteImage;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use ColorThief\ColorThief;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\SerializerInterface;
-use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 
 class SiteFaviconProcessor
 {
@@ -89,9 +89,7 @@ class SiteFaviconProcessor
     private $filesystem;
     private $siteResolver;
     private $urlResolver;
-    /**
-     * @var LoggerInterface
-     */
+
     private LoggerInterface $logger;
 
     public function __construct(

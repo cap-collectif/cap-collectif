@@ -88,8 +88,8 @@ class RequestResponseListener
         $symfonyResponse = $event->getResponse();
 
         if (
-            0 === $rioResponse->getMatchOnResponseStatus() ||
-            $rioResponse->getMatchOnResponseStatus() !== $symfonyResponse->getStatusCode()
+            0 === $rioResponse->getMatchOnResponseStatus()
+            || $rioResponse->getMatchOnResponseStatus() !== $symfonyResponse->getStatusCode()
         ) {
             return;
         }

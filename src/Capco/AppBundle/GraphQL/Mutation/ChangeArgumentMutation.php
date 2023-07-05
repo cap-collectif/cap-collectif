@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Form\ArgumentType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Form\ArgumentType;
-use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeArgumentMutation implements MutationInterface
 {

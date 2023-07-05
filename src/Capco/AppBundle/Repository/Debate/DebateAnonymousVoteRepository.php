@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method DebateAnonymousVote|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateAnonymousVote|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateAnonymousVote find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateAnonymousVote findOneBy(array $criteria, array $orderBy = null)
  * @method DebateAnonymousVote[]    findAll()
  * @method DebateAnonymousVote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

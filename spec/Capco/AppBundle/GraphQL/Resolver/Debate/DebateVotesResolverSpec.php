@@ -3,12 +3,12 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
-use Capco\AppBundle\Search\VoteSearch;
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateVotesResolver;
+use Capco\AppBundle\Search\VoteSearch;
+use Overblog\GraphQLBundle\Definition\Argument;
+use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
 class DebateVotesResolverSpec extends ObjectBehavior
@@ -50,7 +50,8 @@ class DebateVotesResolverSpec extends ObjectBehavior
                 null
             )
             ->willReturn($paginatedResult)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($debate, $args, null)->shouldReturnEmptyConnection([]);
     }
 
@@ -85,7 +86,8 @@ class DebateVotesResolverSpec extends ObjectBehavior
                 null
             )
             ->willReturn($paginatedResult)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($debate, $args, null)->shouldReturnConnection();
     }
 }

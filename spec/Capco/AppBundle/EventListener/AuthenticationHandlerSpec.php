@@ -4,12 +4,12 @@ namespace spec\Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\EventListener\AuthenticationHandler;
 use Capco\AppBundle\Repository\UserConnectionRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationHandlerSpec extends ObjectBehavior
 {
@@ -35,17 +35,20 @@ class AuthenticationHandlerSpec extends ObjectBehavior
         $requestGuesser
             ->getJsonContent()
             ->shouldBeCalled()
-            ->willReturn(['username' => 'lbrunet@cap-collectif.com']);
+            ->willReturn(['username' => 'lbrunet@cap-collectif.com'])
+        ;
 
         $requestGuesser
             ->getClientIp()
             ->shouldBeCalled()
-            ->willReturn('192.168.64.2');
+            ->willReturn('192.168.64.2')
+        ;
 
         $test = $userConnectionRepository
             ->countFailedAttemptByEmailAndIPInLastHour('lbrunet@cap-collectif.com', '192.168.64.2')
             ->shouldBeCalled()
-            ->getObjectProphecy();
+            ->getObjectProphecy()
+        ;
         $this->onAuthenticationFailure($request, $exception)->shouldBeAnInstanceOf(
             new JsonResponse(
                 ['reason' => AuthenticationHandler::BAD_CREDENTIALS, 'failedAttempts' => $test],

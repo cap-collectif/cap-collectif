@@ -3,8 +3,8 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\GraphQL\Resolver\User\UserRegistrationConfirmationUrlResolver;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
 
 class UserRegistrationConfirmationUrlResolverSpec extends ObjectBehavior
@@ -28,7 +28,8 @@ class UserRegistrationConfirmationUrlResolverSpec extends ObjectBehavior
     ): void {
         $router
             ->generate('account_confirm_email', ['token' => self::FAKE_TOKEN], 0)
-            ->willReturn(self::FAKE_URL);
+            ->willReturn(self::FAKE_URL)
+        ;
         $user->getConfirmationToken()->willReturn(self::FAKE_TOKEN);
 
         $this->__invoke($user)->shouldReturn(self::FAKE_URL);

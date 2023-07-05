@@ -8,14 +8,14 @@ use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Mutation\UpdateAnonymousReplyMutation;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
-use Prophecy\Argument;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
@@ -64,17 +64,20 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn($reply);
+            ->willReturn($reply)
+        ;
 
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $formattedResponses = [
             0 => [
@@ -87,7 +90,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $responsesFormatter
             ->format($values['responses'])
             ->shouldBeCalledOnce()
-            ->willReturn($formattedResponses);
+            ->willReturn($formattedResponses)
+        ;
 
         $values = [
             'responses' => $formattedResponses,
@@ -96,7 +100,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 
@@ -133,17 +138,20 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn($reply);
+            ->willReturn($reply)
+        ;
 
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $formattedResponses = [
             0 => [
@@ -156,7 +164,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $responsesFormatter
             ->format($values['responses'])
             ->shouldBeCalledOnce()
-            ->willReturn($formattedResponses);
+            ->willReturn($formattedResponses)
+        ;
 
         $values = [
             'responses' => $formattedResponses,
@@ -165,7 +174,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ReplyAnonymousType::class, Argument::type(ReplyAnonymous::class))
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 
@@ -174,7 +184,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $reply
             ->getQuestionnaire()
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
         $questionnaire->isNotifyResponseUpdate()->willReturn(true);
         $reply->getId()->shouldBeCalledOnce();
         $publisher->publish('questionnaire.reply', Argument::type(Message::class));
@@ -194,12 +205,14 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
-            ->willReturn($hashedToken);
+            ->willReturn($hashedToken)
+        ;
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->shouldThrow(new UserError('Reply not found.'))->during('__invoke', [$input]);
     }

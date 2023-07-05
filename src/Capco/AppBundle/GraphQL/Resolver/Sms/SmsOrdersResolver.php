@@ -23,7 +23,7 @@ class SmsOrdersResolver implements ResolverInterface
     public function __invoke(Argument $args): ConnectionInterface
     {
         $filter = $args->offsetGet('filter') ?? null;
-        $paginator = new Paginator(function (int $offset, int $limit) use($filter) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($filter) {
             return $this->repository->findPaginated(
                 $offset,
                 $limit,

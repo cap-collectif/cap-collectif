@@ -8,7 +8,7 @@ use Elastica\Multi\ResultSet;
 class AnalyticsTrafficSources
 {
     /**
-     * @var iterable|AnalyticsTrafficSource[]
+     * @var AnalyticsTrafficSource[]|iterable
      */
     private iterable $sources;
     private int $totalCount;
@@ -25,7 +25,7 @@ class AnalyticsTrafficSources
         $sources = [];
 
         foreach ($multiSet->getResultSets() as $type => $set) {
-            if ($type === PlatformAnalyticsTrafficSourceType::SEARCH_ENGINE) {
+            if (PlatformAnalyticsTrafficSourceType::SEARCH_ENGINE === $type) {
                 $count = $set->getAggregation('search_engine_entries')['value'];
                 $totalCount += $count;
                 $sources[] = AnalyticsTrafficSource::create($count, $type);

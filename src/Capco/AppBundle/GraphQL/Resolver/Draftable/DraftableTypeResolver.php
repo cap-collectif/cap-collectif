@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Draftable;
 
-use GraphQL\Type\Definition\Type;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class DraftableTypeResolver implements ResolverInterface
 {

@@ -21,7 +21,8 @@ class SectionRepository extends EntityRepository implements PositionableReposito
             ->leftJoin('s.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'project')
-            ->orderBy('s.position', 'ASC');
+            ->orderBy('s.position', 'ASC')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -38,7 +39,8 @@ class SectionRepository extends EntityRepository implements PositionableReposito
             ->leftJoin('s.step', 'step')
             ->leftJoin('step.projectAbstractStep', 'pas')
             ->leftJoin('pas.project', 'project')
-            ->orderBy('s.position', 'ASC');
+            ->orderBy('s.position', 'ASC')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -50,6 +52,7 @@ class SectionRepository extends EntityRepository implements PositionableReposito
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.enabled = :enabled')
-            ->setParameter('enabled', true);
+            ->setParameter('enabled', true)
+        ;
     }
 }

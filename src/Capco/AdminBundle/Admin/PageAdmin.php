@@ -7,10 +7,10 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class PageAdmin extends AbstractAdmin
 {
@@ -29,7 +29,8 @@ class PageAdmin extends AbstractAdmin
             // but it's propably better like that :-)
             ->add('title', TextType::class, [
                 'label' => 'global.title',
-            ]);
+            ])
+        ;
 
         if ($this->getSubject()->getId()) {
             $form->add('slug', TextType::class, [
@@ -48,7 +49,8 @@ class PageAdmin extends AbstractAdmin
                 'label' => 'global.published',
                 'required' => false,
             ])
-            ->end();
+            ->end()
+        ;
         $form
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', PurifiedTextType::class, [
@@ -73,7 +75,8 @@ class PageAdmin extends AbstractAdmin
                     'placeholder' => '<script type="text/javascript"> </script>',
                 ],
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     // Fields to be shown on filter forms
@@ -91,7 +94,8 @@ class PageAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     // Fields to be shown on lists
@@ -120,7 +124,8 @@ class PageAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

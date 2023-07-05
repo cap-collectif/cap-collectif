@@ -5,21 +5,21 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteProposalNewsMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Prophecy\Argument;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Proposal;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeleteProposalNewsMutationSpec extends ObjectBehavior
@@ -111,7 +111,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposalUrlResolver
             ->__invoke($proposal, Argument::type(RequestStack::class))
-            ->willReturn('test');
+            ->willReturn('test')
+        ;
 
         $em->remove(Argument::type(Post::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -128,7 +129,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
                     ])
                 )
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
 
@@ -171,7 +173,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         $proposal->getProposalForm()->willReturn($proposalForm);
         $proposalUrlResolver
             ->__invoke($proposal, Argument::type(RequestStack::class))
-            ->willReturn('test');
+            ->willReturn('test')
+        ;
         $em->remove(Argument::type(Post::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
@@ -187,7 +190,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
                     ])
                 )
             )
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
 

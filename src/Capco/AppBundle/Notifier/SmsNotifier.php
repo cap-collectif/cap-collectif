@@ -100,7 +100,7 @@ class SmsNotifier extends BaseNotifier
         $users = $this->userRepository->findByRoleAdminOrSuperAdmin();
 
         $platformLink = "{$this->context->getScheme()}://{$this->context->getHost()}";
-        $adminUrl = "{$platformLink}/admin-next/secure-participation"; 
+        $adminUrl = "{$platformLink}/admin-next/secure-participation";
 
         foreach ($users as $user) {
             $this->mailer->createAndSendMessage(
@@ -122,9 +122,11 @@ class SmsNotifier extends BaseNotifier
         $users = $this->userRepository->findByRoleAdminOrSuperAdmin();
 
         $platformLink = "{$this->context->getScheme()}://{$this->context->getHost()}";
-        $adminUrl = "{$platformLink}/admin-next/secure-participation"; 
+        $adminUrl = "{$platformLink}/admin-next/secure-participation";
 
-        $emails = array_map(function($user) { return $user->getEmail(); }, $users);
+        $emails = array_map(function ($user) {
+            return $user->getEmail();
+        }, $users);
         $emails[] = self::BUSINESS_TEAM_EMAIL;
         foreach ($emails as $email) {
             $this->mailer->createAndSendMessage(
@@ -140,8 +142,5 @@ class SmsNotifier extends BaseNotifier
                 $email
             );
         }
-
     }
-
-
 }

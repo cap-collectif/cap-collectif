@@ -15,9 +15,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class AppendixType
 {
-    use UuidTrait;
     use SluggableTitleTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @var \DateTime

@@ -18,7 +18,8 @@ class ProposalSupervisorRepository extends EntityRepository
             ->andWhere('ps.proposal IN (:proposals)')
             ->setParameter('proposals', $proposalIds)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function deleteByProposalIds(array $proposalIds)
@@ -28,6 +29,7 @@ class ProposalSupervisorRepository extends EntityRepository
             ->andWhere('proposalSupervisor.proposal IN (:proposals)')
             ->setParameter('proposals', $proposalIds)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

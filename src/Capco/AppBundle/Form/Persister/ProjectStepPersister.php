@@ -2,40 +2,40 @@
 
 namespace Capco\AppBundle\Form\Persister;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Enum\ViewConfiguration;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\Collection;
-use GraphQL\Error\UserError;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Utils\Diff;
-use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Form\Step\OtherStepFormType;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\Form\Step\DebateStepFormType;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Form\Step\CollectStepFormType;
-use Capco\AppBundle\Form\Step\RankingStepFormType;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Form\Step\SelectionStepFormType;
-use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
+use Capco\AppBundle\Form\Step\DebateStepFormType;
+use Capco\AppBundle\Form\Step\OtherStepFormType;
 use Capco\AppBundle\Form\Step\PresentationStepFormType;
 use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
+use Capco\AppBundle\Form\Step\RankingStepFormType;
+use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
+use Capco\AppBundle\Utils\Diff;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ProjectStepPersister
 {
@@ -142,7 +142,8 @@ class ProjectStepPersister
             $pas = new ProjectAbstractStep();
             $pas->setPosition($loopCount + 1)
                 ->setProject($project)
-                ->setStep($stepFromData);
+                ->setStep($stepFromData)
+            ;
             $project->addStep($pas);
         } else {
             $pasMatch->setPosition($loopCount + 1);

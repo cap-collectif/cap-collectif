@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -21,7 +21,7 @@ class ImportStructureFromCsvCommand extends Command
     private $convertCsvToArray;
 
     public function __construct(
-        string $name = null,
+        ?string $name = null,
         EntityManagerInterface $em,
         ConvertCsvToArray $convertCsvToArray
     ) {
@@ -64,7 +64,8 @@ class ImportStructureFromCsvCommand extends Command
                 'name',
                 InputArgument::REQUIRED,
                 'Please provide the name of the structure to create.'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -86,7 +87,8 @@ class ImportStructureFromCsvCommand extends Command
 
         $appendixType = $this->em
             ->getRepository('CapcoAppBundle:AppendixType')
-            ->findOneBySlug('expose-des-motifs');
+            ->findOneBySlug('expose-des-motifs')
+        ;
 
         $consultation = new Consultation();
         $consultation->setTitle($name);

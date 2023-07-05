@@ -118,32 +118,34 @@ class ContributionSearch extends Search
                                 'consultation.id' => ['value' => $contribuableDecodedId],
                             ])
                         )
-                        ->addFilter(new Query\Exists('consultation'));
+                        ->addFilter(new Query\Exists('consultation'))
+                    ;
                     $inConsultation = true;
 
                     break;
+
                 case 'Project':
                     $boolQuery
                         ->addFilter(
                             new Query\Term(['project.id' => ['value' => $contribuableDecodedId]])
                         )
-                        ->addFilter(new Query\Exists('project'));
+                        ->addFilter(new Query\Exists('project'))
+                    ;
 
                     break;
+
                 case false !== strpos($contribuableType, 'Step'):
                     $boolQuery
                         ->addFilter(
                             new Query\Term(['step.id' => ['value' => $contribuableDecodedId]])
                         )
-                        ->addFilter(new Query\Exists('step'));
+                        ->addFilter(new Query\Exists('step'))
+                    ;
 
                     break;
+
                 default:
-                    throw new UserError(
-                        'The contribuableId "' .
-                            $contribuableId .
-                            '" does not match any Project, Step or Consultation'
-                    );
+                    throw new UserError('The contribuableId "' . $contribuableId . '" does not match any Project, Step or Consultation');
             }
         }
 
@@ -154,8 +156,8 @@ class ContributionSearch extends Search
         }
 
         if (
-            $type &&
-            ($contributionClassName = self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)])
+            $type
+            && ($contributionClassName = self::CONTRIBUTION_TYPE_CLASS_MAPPING[strtoupper($type)])
         ) {
             $contributionTypes = [$contributionClassName::getElasticsearchTypeName()];
         }
@@ -191,7 +193,8 @@ class ContributionSearch extends Search
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
-            ->addFilter(new Query\Exists('consultation'));
+            ->addFilter(new Query\Exists('consultation'))
+        ;
 
         if (!empty($filters)) {
             foreach ($filters as $filter) {
@@ -296,6 +299,7 @@ class ContributionSearch extends Search
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = ContributionOrderField::RANDOM;
+
         switch ($field) {
             case ContributionOrderField::CREATED_AT:
                 $order = 'last';
@@ -304,6 +308,7 @@ class ContributionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::PUBLISHED_AT:
                 $order = 'last-published';
                 if (OrderDirection::ASC === $direction) {
@@ -311,10 +316,12 @@ class ContributionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::COMMENT_COUNT:
                 $order = 'comments';
 
                 break;
+
             case ContributionOrderField::VOTE_COUNT:
                 $order = 'voted';
                 if (OrderDirection::ASC === $direction) {
@@ -322,6 +329,7 @@ class ContributionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::POPULAR:
                 $order = 'popular';
                 if (OrderDirection::ASC === $direction) {
@@ -329,6 +337,7 @@ class ContributionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::POSITION:
                 $order = 'position';
                 if (OrderDirection::ASC === $direction) {
@@ -388,7 +397,8 @@ class ContributionSearch extends Search
         if ($contributionTypes && \in_array('replyAnonymous', $contributionTypes)) {
             $query
                 ->addFilter(new Query\Terms('objectType', ['reply']))
-                ->addFilter(new Query\Term(['replyType' => ['value' => 'replyAnonymous']]));
+                ->addFilter(new Query\Term(['replyType' => ['value' => 'replyAnonymous']]))
+            ;
         } else {
             $query->addFilter(
                 new Query\Terms(
@@ -401,7 +411,8 @@ class ContributionSearch extends Search
         $query
             ->addMustNot(new Query\Term(['published' => ['value' => false]]))
             ->addMustNot(new Query\Exists('comment'))
-            ->addMustNot(new Query\Term(['draft' => ['value' => true]]));
+            ->addMustNot(new Query\Term(['draft' => ['value' => true]]))
+        ;
 
         if (!$includeTrashed) {
             $query->addMustNot(new Query\Exists('trashedAt'));

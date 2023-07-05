@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Psr\Log\LoggerInterface;
 
 class OpinionViewerVoteResolver implements ResolverInterface
 {

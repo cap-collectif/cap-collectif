@@ -25,7 +25,7 @@ final class UserAccountConfirmationStepReminderMessage extends AbstractExternalM
             'organizationName' => 'Cap Collectif',
             'siteUrl' => $params['siteURL'],
             'baseUrl' => $params['siteURL'],
-            'projectTitle' => $params['projectTitle']
+            'projectTitle' => $params['projectTitle'],
         ];
     }
 

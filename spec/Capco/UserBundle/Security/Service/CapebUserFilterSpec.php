@@ -2,13 +2,14 @@
 
 namespace spec\Capco\UserBundle\Security\Service;
 
+use Capco\UserBundle\Repository\UserTypeRepository;
 use Capco\UserBundle\Security\Service\CapebUserFilter;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 
 class CapebUserFilterSpec extends ObjectBehavior
 {
@@ -44,9 +45,9 @@ class CapebUserFilterSpec extends ObjectBehavior
         $this->shouldHaveType(CapebUserFilter::class);
     }
 
-    public function let(LoggerInterface $logger)
+    public function let(LoggerInterface $logger, UserTypeRepository $userTypeRepository)
     {
         $url = 'https://CAS_URL/WebService/call';
-        $this->beConstructedWith($logger, $url);
+        $this->beConstructedWith($logger, $userTypeRepository, $url);
     }
 }

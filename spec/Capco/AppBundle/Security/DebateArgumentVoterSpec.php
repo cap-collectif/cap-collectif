@@ -27,7 +27,8 @@ class DebateArgumentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $debateArgument, [DebateArgumentVoter::UPDATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -48,7 +49,8 @@ class DebateArgumentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->isAdmin()->willReturn(false);
         $debateArgument->getAuthor()->willReturn($user);
 
@@ -68,7 +70,8 @@ class DebateArgumentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->isAdmin()->willReturn(true);
 
         $this->vote($token, $debateArgument, [DebateArgumentVoter::DELETE])->shouldBe(
@@ -85,7 +88,8 @@ class DebateArgumentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->isAdmin()->willReturn(true);
         $debateArgument->getDebate()->willReturn($debate);
         $debate->viewerCanParticipate($user)->willReturn(true);
@@ -104,7 +108,8 @@ class DebateArgumentVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user->isAdmin()->willReturn(true);
         $debateArgument->getDebate()->willReturn($debate);
         $debate->viewerCanParticipate($user)->willReturn(false);

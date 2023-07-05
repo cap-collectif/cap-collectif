@@ -3,20 +3,20 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Capco\UserBundle\Entity\User;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 
 class OpinionVersionAdmin extends AbstractAdmin
 {
@@ -65,7 +65,8 @@ class OpinionVersionAdmin extends AbstractAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -95,7 +96,8 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('parent.consultation.step.projectAbstractStep.project', null, [
                 'label' => 'global.participative.project.label',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -137,7 +139,8 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -149,7 +152,8 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->end()
             ->with('admin.fields.opinion_version.group_answer', ['class' => 'col-md-12'])
             ->end()
-            ->end();
+            ->end()
+        ;
         $form
             ->with('global.contenu')
             ->add('title', null, ['label' => 'global.title'])
@@ -189,7 +193,8 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'btn_list' => false,
                 'required' => false,
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

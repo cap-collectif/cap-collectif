@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Locale;
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\FormatDateTrait;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocaleSubscriber implements EventSubscriberInterface
 {

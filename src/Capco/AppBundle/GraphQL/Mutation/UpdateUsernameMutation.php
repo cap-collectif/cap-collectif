@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Form\Type\UsernameType;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Form\Type\UsernameType;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;

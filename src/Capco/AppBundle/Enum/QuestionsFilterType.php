@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Enum;
 
 class QuestionsFilterType

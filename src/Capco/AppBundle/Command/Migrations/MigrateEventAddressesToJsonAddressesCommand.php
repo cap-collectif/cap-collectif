@@ -37,7 +37,8 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
                 InputArgument::OPTIONAL,
                 'use this if you want to migrate all address',
                 false
-            );
+            )
+        ;
         $this->setHelp(
             'To receive output in file use the native linux syntax as bin/console y:command > output.txt'
         );
@@ -75,8 +76,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
                     'event',
                     [
                         'address_json' => $jsonAddress,
-                        'similarity_of_new_address' =>
-                            ($similarity['percLat'] + $similarity['percLng']) / 2,
+                        'similarity_of_new_address' => ($similarity['percLat'] + $similarity['percLng']) / 2,
                         'new_address_is_similar' => $similarity['newAddressIsSimilar'],
                     ],
                     ['id' => $event['id']]

@@ -56,8 +56,8 @@ class RecentPostBlockService extends AbstractBlockService implements EditableBlo
         ?Response $response = null
     ): Response {
         if (
-            $blockContext->getSetting('toggle') &&
-            !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
+            $blockContext->getSetting('toggle')
+            && !$this->toggleManager->isActive($blockContext->getSetting('toggle'))
         ) {
             return new Response();
         }

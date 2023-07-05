@@ -85,16 +85,19 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
                 'token' => $decoded->getWrappedObject()->getToken(),
                 'type' => $decoded->getWrappedObject()->getType(),
             ])
-            ->willReturn($anonymousVote);
+            ->willReturn($anonymousVote)
+        ;
 
         $globalIdResolver
             ->resolve($id, null)
             ->willReturn($debate)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $validator
             ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $em->remove($anonymousVote)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
@@ -153,21 +156,25 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
                 'token' => $decoded->getWrappedObject()->getToken(),
                 'type' => $decoded->getWrappedObject()->getType(),
             ])
-            ->willReturn($anonymousVote);
+            ->willReturn($anonymousVote)
+        ;
         $argumentRepository->findOneByHashData($decodedArgument)->willReturn($anonymousArgument);
 
         $globalIdResolver
             ->resolve($id, null)
             ->willReturn($debate)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $validator
             ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $validator
             ->validate($argumentHash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $em->remove($anonymousVote)->shouldBeCalled();
         $em->remove($anonymousArgument)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -219,13 +226,15 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $validator
             ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn([])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $repository
             ->findOneBy([
                 'token' => $decoded->getWrappedObject()->getToken(),
                 'type' => $decoded->getWrappedObject()->getType(),
             ])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(3);
@@ -260,13 +269,15 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $validator
             ->validate($hash, [new CheckDebateAnonymousParticipationHashConstraint()])
             ->willReturn(['invalid-debate-anonymous-hash'])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $repository
             ->findOneBy([
                 'token' => $decoded->getWrappedObject()->getToken(),
                 'type' => $decoded->getWrappedObject()->getType(),
             ])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $payload = $this->__invoke($input);
         $payload->shouldHaveCount(3);

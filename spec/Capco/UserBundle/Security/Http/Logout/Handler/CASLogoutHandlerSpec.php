@@ -2,9 +2,9 @@
 
 namespace spec\Capco\UserBundle\Security\Http\Logout\Handler;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 use Capco\UserBundle\Security\Http\Logout\Handler\CASLogoutHandler;
 use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequest;
@@ -31,7 +31,8 @@ class CASLogoutHandlerSpec extends ObjectBehavior
         $session->set('cas_login', 'fake-cas-id');
         $router
             ->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $parameters = [
             'service' => 'https://capco.dev',
@@ -47,7 +48,8 @@ class CASLogoutHandlerSpec extends ObjectBehavior
 
         $expectedRedirectResponseWithRequest
             ->getResponse()
-            ->setTargetUrl('https://CAS_URL/cas/logout?' . http_build_query($parameters, '', '&'));
+            ->setTargetUrl('https://CAS_URL/cas/logout?' . http_build_query($parameters, '', '&'))
+        ;
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $expectedRedirectResponseWithRequest
@@ -66,7 +68,8 @@ class CASLogoutHandlerSpec extends ObjectBehavior
         $configuration->isEnabled()->willReturn(false);
         $router
             ->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $request = new Request();
         $expectedRedirectResponseWithRequest = $dummyRedirectResponseWithRequest = new RedirectResponseWithRequest(
@@ -76,7 +79,8 @@ class CASLogoutHandlerSpec extends ObjectBehavior
 
         $expectedRedirectResponseWithRequest
             ->getResponse()
-            ->setTargetUrl('https://CAS_URL/cas/logout');
+            ->setTargetUrl('https://CAS_URL/cas/logout')
+        ;
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $expectedRedirectResponseWithRequest

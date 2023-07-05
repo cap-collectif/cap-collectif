@@ -2,9 +2,9 @@
 
 namespace spec\Capco\AppBundle\Entity;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Model\Publishable;
+use PhpSpec\ObjectBehavior;
 
 class ProposalSelectionVoteSpec extends ObjectBehavior
 {

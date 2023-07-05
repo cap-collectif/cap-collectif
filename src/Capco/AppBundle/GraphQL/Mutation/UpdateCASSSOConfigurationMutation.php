@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateCASSSOConfigurationMutation implements MutationInterface
 {
-    const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
+    public const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
 
     private EntityManagerInterface $em;
     private GlobalIdResolver $resolver;

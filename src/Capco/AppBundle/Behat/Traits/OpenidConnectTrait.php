@@ -29,7 +29,8 @@ trait OpenidConnectTrait
         $this->getSession()
             ->getPage()
             ->find('css', '#kc-login')
-            ->click();
+            ->click()
+        ;
     }
 
     /**

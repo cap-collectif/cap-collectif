@@ -23,7 +23,8 @@ class ProposalFormNotificationsConfigurationType extends AbstractType
             ->add('onProposalNewsCreate', CheckboxType::class, ['required' => false])
             ->add('onProposalNewsUpdate', CheckboxType::class, ['required' => false])
             ->add('onProposalNewsDelete', CheckboxType::class, ['required' => false])
-            ->add('email', EmailType::class, ['required' => false]);
+            ->add('email', EmailType::class, ['required' => false])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

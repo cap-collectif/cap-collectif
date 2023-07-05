@@ -2,36 +2,36 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
+use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\MediaBundle\Entity\Media;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\DateHelperTrait;
-use Doctrine\Common\Collections\Collection;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Model\CommentableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="event", indexes={
@@ -44,15 +44,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
  * @CapcoAssert\CheckRegister()
  * @CapcoAssert\HasAuthor()
  */
-class Event implements
-    CommentableInterface,
-    IndexableInterface,
-    DisplayableInBOInterface,
-    TimeRangeable,
-    Authorable,
-    Translatable,
-    Ownerable,
-    CreatableInterface
+class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, Translatable, Ownerable, CreatableInterface
 {
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
@@ -375,7 +367,7 @@ class Event implements
     }
 
     /**
-     * @param string|float|int $lat
+     * @param float|int|string $lat
      */
     public function setLat($lat): self
     {
@@ -469,8 +461,8 @@ class Event implements
 
     public function canContribute($user = null): bool
     {
-        return EventReviewStatusType::APPROVED === $this->getStatus() ||
-            EventReviewStatusType::PUBLISHED === $this->getStatus();
+        return EventReviewStatusType::APPROVED === $this->getStatus()
+            || EventReviewStatusType::PUBLISHED === $this->getStatus();
     }
 
     public function getStartYear()

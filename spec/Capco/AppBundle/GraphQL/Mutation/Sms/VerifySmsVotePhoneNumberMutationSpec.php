@@ -63,35 +63,42 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($this->code);
+            ->willReturn($this->code)
+        ;
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($this->phone);
+            ->willReturn($this->phone)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->proposalId);
+            ->willReturn($this->proposalId)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->stepId);
+            ->willReturn($this->stepId)
+        ;
 
         $globalIdResolver
             ->resolve($this->proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($this->stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $twilioHelper->verifySms($this->phone, $this->code)->willReturn(null);
 
         $anonymousUserProposalSmsVoteRepository
             ->findMostRecentSmsByCollectStep($this->phone, $proposal, $step)
             ->shouldBeCalledOnce()
-            ->willReturn($anonymousUserProposalSmsVote);
+            ->willReturn($anonymousUserProposalSmsVote)
+        ;
 
         $anonymousUserProposalSmsVote->setApproved()->shouldBeCalledOnce();
         $em->flush()->shouldBeCalled();
@@ -119,28 +126,34 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($this->code);
+            ->willReturn($this->code)
+        ;
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($this->phone);
+            ->willReturn($this->phone)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->proposalId);
+            ->willReturn($this->proposalId)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->stepId);
+            ->willReturn($this->stepId)
+        ;
 
         $globalIdResolver
             ->resolve($this->proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($this->stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $twilioHelper->verifySms($this->phone, $this->code)->willReturn(TwilioHelper::CODE_EXPIRED);
 
@@ -160,32 +173,39 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($this->code);
+            ->willReturn($this->code)
+        ;
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($this->phone);
+            ->willReturn($this->phone)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->proposalId);
+            ->willReturn($this->proposalId)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->stepId);
+            ->willReturn($this->stepId)
+        ;
 
         $globalIdResolver
             ->resolve($this->proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($this->stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $twilioHelper
             ->verifySms($this->phone, $this->code)
-            ->willReturn(TwilioHelper::CODE_NOT_VALID);
+            ->willReturn(TwilioHelper::CODE_NOT_VALID)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => TwilioHelper::CODE_NOT_VALID,
@@ -203,32 +223,39 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($this->code);
+            ->willReturn($this->code)
+        ;
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($this->phone);
+            ->willReturn($this->phone)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->proposalId);
+            ->willReturn($this->proposalId)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($this->stepId);
+            ->willReturn($this->stepId)
+        ;
 
         $globalIdResolver
             ->resolve($this->proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($this->stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $twilioHelper
             ->verifySms($this->phone, $this->code)
-            ->willReturn(TwilioHelper::TWILIO_API_ERROR);
+            ->willReturn(TwilioHelper::TWILIO_API_ERROR)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => TwilioHelper::TWILIO_API_ERROR,

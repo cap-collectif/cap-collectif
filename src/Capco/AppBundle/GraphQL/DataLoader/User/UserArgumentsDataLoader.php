@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
-use Capco\AppBundle\Search\ArgumentSearch;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Search\ArgumentSearch;
+use Capco\UserBundle\Entity\User;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {

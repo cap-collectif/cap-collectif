@@ -498,7 +498,7 @@ trait ProposalStepsTrait
     {
         $this->waitAndThrowOnFailure(
             3000,
-            "$('#proposal-filter-sorting-button[aria-label=\"global.filter_f_${type}\"]').length > 0"
+            "$('#proposal-filter-sorting-button[aria-label=\"global.filter_f_{$type}\"]').length > 0"
         );
     }
 
@@ -681,7 +681,7 @@ trait ProposalStepsTrait
      */
     public function iClickTheEditCommentButton(string $id)
     {
-        $this->iWaitElementToAppearOnPage("[id='CommentEdit-${id}']");
+        $this->iWaitElementToAppearOnPage("[id='CommentEdit-{$id}']");
         $this->navigationContext->getPage('proposal page')->clickEditCommentButton($id);
     }
 
@@ -914,19 +914,22 @@ trait ProposalStepsTrait
 
         $field1 = $this->getSession()
             ->getPage()
-            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx'), null);
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx'), null)
+        ;
         while (!$field1->isChecked()) {
             $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx');
         }
         $field2 = $this->getSession()
             ->getPage()
-            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy'), null);
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy'), null)
+        ;
         while (!$field2->isChecked()) {
             $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQy');
         }
         $field3 = $this->getSession()
             ->getPage()
-            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz'), null);
+            ->findField($this->fixStepArgument('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz'), null)
+        ;
         while (!$field3->isChecked()) {
             $this->checkElement('UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz');
         }
@@ -951,7 +954,8 @@ trait ProposalStepsTrait
         $this->getSession()
             ->getPage()
             ->find('css', '#confirm-proposal-vote')
-            ->click();
+            ->click()
+        ;
         $this->waitAndThrowOnFailure(2000, "$('.cap-heading').length > 0");
     }
 
@@ -1193,7 +1197,7 @@ trait ProposalStepsTrait
     {
         if ($id) {
             $id = $id ? GlobalId::toGlobalId('Proposal', $id) : $this->getProposalId();
-            $search = "[id='proposal-vote-btn-${id}']";
+            $search = "[id='proposal-vote-btn-{$id}']";
         } else {
             $search = "[id='proposal-vote-btn']";
         }
@@ -1218,7 +1222,7 @@ trait ProposalStepsTrait
             : '"proposal vote button" element is not present on the page';
 
         try {
-            $search = "[id='proposal-${id}']";
+            $search = "[id='proposal-{$id}']";
 
             $this->getSession()->wait(2000, '$("' . $search . '").length > 0');
             $button = $this->getCurrentPage()->getVoteButton($this->getProposalId());
@@ -1501,35 +1505,40 @@ trait ProposalStepsTrait
     {
         return $this->navigationContext
             ->getPage('collect page')
-            ->isOpen(self::$collectStepOpenParams);
+            ->isOpen(self::$collectStepOpenParams)
+        ;
     }
 
     protected function closedCollectStepIsOpen()
     {
         return $this->navigationContext
             ->getPage('collect page')
-            ->isOpen(self::$collectStepClosedParams);
+            ->isOpen(self::$collectStepClosedParams)
+        ;
     }
 
     protected function proposalPageIsOpen()
     {
         return $this->navigationContext
             ->getPage('proposal page')
-            ->isOpen(self::$proposalWithSimpleVoteParams);
+            ->isOpen(self::$proposalWithSimpleVoteParams)
+        ;
     }
 
     protected function proposalNotYetVotablePageIsOpen()
     {
         return $this->navigationContext
             ->getPage('proposal page')
-            ->isOpen(self::$proposalNotYetVotable);
+            ->isOpen(self::$proposalNotYetVotable)
+        ;
     }
 
     protected function proposalNotVotableAnymoreIsOpen()
     {
         return $this->navigationContext
             ->getPage('proposal page')
-            ->isOpen(self::$proposalNotVotableAnymore);
+            ->isOpen(self::$proposalNotVotableAnymore)
+        ;
     }
 
     protected function proposalBeforeProposal($proposal1, $proposal2)
@@ -1590,35 +1599,40 @@ trait ProposalStepsTrait
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithSimpleVoteParams);
+            ->isOpen(self::$selectionStepWithSimpleVoteParams)
+        ;
     }
 
     protected function selectionStepWithBudgetVoteIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithBudgetVoteParams);
+            ->isOpen(self::$selectionStepWithBudgetVoteParams)
+        ;
     }
 
     protected function selectionStepNotYetOpenIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepNotYetOpen);
+            ->isOpen(self::$selectionStepNotYetOpen)
+        ;
     }
 
     protected function selectionStepClosedIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepClosed);
+            ->isOpen(self::$selectionStepClosed)
+        ;
     }
 
     protected function proposalPageWithBudgetVoteIsOpen()
     {
         return $this->navigationContext
             ->getPage('proposal page')
-            ->isOpen(self::$proposalWithBudgetVoteParams);
+            ->isOpen(self::$proposalWithBudgetVoteParams)
+        ;
     }
 
     protected function getProposalId(): string
@@ -1627,8 +1641,8 @@ trait ProposalStepsTrait
             return 'UHJvcG9zYWw6cHJvcG9zYWwy';
         }
         if (
-            $this->proposalPageWithBudgetVoteIsOpen() ||
-            $this->selectionStepWithBudgetVoteIsOpen()
+            $this->proposalPageWithBudgetVoteIsOpen()
+            || $this->selectionStepWithBudgetVoteIsOpen()
         ) {
             return 'UHJvcG9zYWw6cHJvcG9zYWw4';
         }
@@ -1661,7 +1675,8 @@ trait ProposalStepsTrait
     {
         $firstVoteSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getCommentsListSelector();
+            ->getCommentsListSelector()
+        ;
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
@@ -1669,7 +1684,8 @@ trait ProposalStepsTrait
     {
         $firstVoteSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getFirstVoteSelector();
+            ->getFirstVoteSelector()
+        ;
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
@@ -1678,7 +1694,8 @@ trait ProposalStepsTrait
     {
         $lastFollowerSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getLastSelector('follower');
+            ->getLastSelector('follower')
+        ;
         $this->assertElementContainsText($lastFollowerSelector, $text);
     }
 
@@ -1686,7 +1703,8 @@ trait ProposalStepsTrait
     {
         $firstVoteSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getFirstVoteSelector();
+            ->getFirstVoteSelector()
+        ;
         $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 
@@ -1694,7 +1712,8 @@ trait ProposalStepsTrait
     {
         $lastFollowerSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getLastSelector('follower');
+            ->getLastSelector('follower')
+        ;
         if ('null' === $text) {
             $this->assertElementNotOnPage($lastFollowerSelector);
         } else {
@@ -1706,7 +1725,8 @@ trait ProposalStepsTrait
     {
         $lastFollowerSelector = $this->navigationContext
             ->getPage('proposal page')
-            ->getLastSelector('follower');
+            ->getLastSelector('follower')
+        ;
         $this->assertElementNotOnPage($lastFollowerSelector);
     }
 }

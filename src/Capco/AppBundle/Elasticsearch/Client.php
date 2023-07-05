@@ -14,7 +14,7 @@ class Client extends BaseClient
     public function __construct(
         array $config = [],
         ?callable $callback = null,
-        LoggerInterface $logger = null,
+        ?LoggerInterface $logger = null,
         bool $debug = false
     ) {
         parent::__construct($config, $callback, $logger);
@@ -67,7 +67,7 @@ class Client extends BaseClient
         $start,
         float $engineMS = 0.0,
         int $itemCount = 0,
-        array $response = null
+        ?array $response = null
     ): void {
         if ($this->_logger instanceof ElasticsearchLogger) {
             $time = microtime(true) - $start;

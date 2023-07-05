@@ -3,17 +3,17 @@
 namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DebateArgumentVoter extends Voter
 {
-    const UPDATE = 'update';
-    const DELETE = 'delete';
-    const PARTICIPATE = 'participate';
+    public const UPDATE = 'update';
+    public const DELETE = 'delete';
+    public const PARTICIPATE = 'participate';
 
     protected function supports($attribute, $subject)
     {
@@ -38,8 +38,10 @@ class DebateArgumentVoter extends Voter
         switch ($attribute) {
             case self::DELETE:
                 return $this->canDelete($subject, $viewer);
+
             case self::UPDATE:
                 return $this->canUpdate($subject, $viewer);
+
             case self::PARTICIPATE:
                 return self::canParticipate($subject, $viewer);
         }

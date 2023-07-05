@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Project;
 
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Search\ProposalSearch;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Project;
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {

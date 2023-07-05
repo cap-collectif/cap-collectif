@@ -21,8 +21,7 @@ final class Version20190730085647 extends AbstractMigration
                 'consultation',
                 [
                     'title_help_text' => $consultationStep['title_help_text'],
-                    'opinion_count_shown_by_section' =>
-                        (int) $consultationStep['opinion_count_shown_by_section'],
+                    'opinion_count_shown_by_section' => (int) $consultationStep['opinion_count_shown_by_section'],
                     'description_help_text' => $consultationStep['description_help_text'],
                     'moderating_on_create' => $consultationStep['moderating_on_create'],
                     'moderating_on_update' => $consultationStep['moderating_on_update'],

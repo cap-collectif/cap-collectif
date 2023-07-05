@@ -56,7 +56,7 @@ final class Version20200602184401 extends AbstractMigration implements Container
     {
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();

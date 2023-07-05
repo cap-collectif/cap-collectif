@@ -29,7 +29,7 @@ final class Version20190911075248 extends AbstractMigration implements Container
             $consultation->setSlug(null); // Allows Gedmo to regenerate itself the slugs
         }
         $em->flush();
-        echo '-> Finished adding consultations slug' . PHP_EOL;
+        echo '-> Finished adding consultations slug' . \PHP_EOL;
     }
 
     public function up(Schema $schema): void
@@ -58,7 +58,7 @@ final class Version20190911075248 extends AbstractMigration implements Container
         );
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }

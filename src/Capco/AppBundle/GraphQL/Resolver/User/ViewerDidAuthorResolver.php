@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ViewerDidAuthorResolver implements ResolverInterface

@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\ProposalEvaluation;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 class ProposalAnswerEvaluationResolver implements ResolverInterface
 {

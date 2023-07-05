@@ -24,7 +24,8 @@ class CanSetOwnerSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->check($otherUser, $viewer)->shouldBe(true);
         $this->check($organization, $viewer)->shouldBe(true);
@@ -35,7 +36,8 @@ class CanSetOwnerSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->check($viewer, $viewer)->shouldBe(true);
     }
@@ -45,7 +47,8 @@ class CanSetOwnerSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->check($otherUser, $viewer)->shouldBe(false);
     }
@@ -59,7 +62,8 @@ class CanSetOwnerSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization->getMembership($viewer)->willReturn($memberShip);
 
         $this->check($organization, $viewer)->shouldBe(true);
@@ -73,7 +77,8 @@ class CanSetOwnerSpec extends ObjectBehavior
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization->getMembership($viewer)->willReturn(null);
 
         $this->check($organization, $viewer)->shouldBe(false);

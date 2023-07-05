@@ -47,7 +47,8 @@ class CreateSenderEmailMutation implements MutationInterface
     {
         return (new SenderEmail())
             ->setLocale($input->offsetGet('locale'))
-            ->setDomain($input->offsetGet('domain'));
+            ->setDomain($input->offsetGet('domain'))
+        ;
     }
 
     private function checkDomainExists(string $domain): void

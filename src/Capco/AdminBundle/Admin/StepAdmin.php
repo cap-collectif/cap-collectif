@@ -24,6 +24,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\DateTimePickerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,8 +34,6 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Sonata\Form\Type\CollectionType;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class StepAdmin extends CapcoAdmin
 {
@@ -128,7 +128,8 @@ class StepAdmin extends CapcoAdmin
                 'label' => 'color.main_menu.text',
                 'data' => $translator->trans($label),
                 'required' => true,
-            ]);
+            ])
+        ;
 
         $form->add('isEnabled', null, [
             'label' => 'global.published',
@@ -156,14 +157,15 @@ class StepAdmin extends CapcoAdmin
                     'dp_use_current' => false,
                     'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
                     'required' => false,
-                ]);
+                ])
+            ;
         }
 
         if (
-            $subject instanceof PresentationStep ||
-            $subject instanceof OtherStep ||
-            $subject instanceof CollectStep ||
-            $subject instanceof QuestionnaireStep
+            $subject instanceof PresentationStep
+            || $subject instanceof OtherStep
+            || $subject instanceof CollectStep
+            || $subject instanceof QuestionnaireStep
         ) {
             $form->add('body', CKEditorType::class, [
                 'config_name' => 'admin_editor',
@@ -181,7 +183,8 @@ class StepAdmin extends CapcoAdmin
                     $normalizedConsultations = $event
                         ->getForm()
                         ->get('consultations')
-                        ->getNormData();
+                        ->getNormData()
+                    ;
                     /** @var ConsultationStep $step */
                     $step = $event->getData();
                     $position = 1;
@@ -194,14 +197,16 @@ class StepAdmin extends CapcoAdmin
                             ) {
                                 return $c->getId() === $normalizedConsultation->getId();
                             })
-                            ->first();
+                            ->first()
+                        ;
                         /** @var Consultation $consultation */
                         if ($consultation) {
                             $consultation->setPosition($position);
                         }
                         ++$position;
                     }
-                });
+                })
+            ;
             $form
                 ->add('body', CKEditorType::class, [
                     'config_name' => 'admin_editor',
@@ -222,7 +227,8 @@ class StepAdmin extends CapcoAdmin
                             ->andWhere(
                                 $queryBuilder->getRootAlias() . '.step IS NULL OR s.id = :stepId'
                             )
-                            ->setParameter('stepId', $admin->getRequest()->get('stepId'));
+                            ->setParameter('stepId', $admin->getRequest()->get('stepId'))
+                        ;
                         $datagrid->setValue($property, null, $value);
                     },
                     'req_params' => [
@@ -249,7 +255,8 @@ class StepAdmin extends CapcoAdmin
                     'purify_html' => true,
                     'purify_html_profile' => 'admin',
                 ])
-                ->end();
+                ->end()
+            ;
         } elseif ($subject instanceof RankingStep) {
             $form
                 ->add('body', CKEditorType::class, [
@@ -264,7 +271,8 @@ class StepAdmin extends CapcoAdmin
                 ->add('nbVersionsToDisplay', null, [
                     'label' => 'admin.fields.step.nb_versions_to_display',
                     'required' => true,
-                ]);
+                ])
+            ;
         } elseif ($subject instanceof SelectionStep) {
             $form
                 ->add('body', CKEditorType::class, [
@@ -275,7 +283,8 @@ class StepAdmin extends CapcoAdmin
                 ->add('allowingProgressSteps', null, [
                     'label' => 'admin.fields.step.allowingProgressSteps',
                     'required' => false,
-                ]);
+                ])
+            ;
         }
 
         if ($subject instanceof QuestionnaireStep) {
@@ -337,7 +346,8 @@ class StepAdmin extends CapcoAdmin
                     'label' => 'admin.fields.step.votesHelpText',
                     'required' => false,
                 ])
-                ->end();
+                ->end()
+            ;
             $form
                 ->with('admin.fields.step.group_statuses')
                 ->add(
@@ -346,7 +356,8 @@ class StepAdmin extends CapcoAdmin
                     ['label' => 'admin.fields.step.group_statuses', 'by_reference' => false],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
-                ->end();
+                ->end()
+            ;
             $form
                 ->with('requirements')
                 ->add(
@@ -363,7 +374,8 @@ class StepAdmin extends CapcoAdmin
                     'purify_html' => true,
                     'purify_html_profile' => 'admin',
                 ])
-                ->end();
+                ->end()
+            ;
             if ($subject instanceof CollectStep || $subject instanceof SelectionStep) {
                 $form->add('defaultStatus', ModelType::class, [
                     'label' => 'admin.fields.step.default_status',
@@ -388,7 +400,8 @@ class StepAdmin extends CapcoAdmin
                         'choices' => CollectStep::$sortLabels,
                         'translation_domain' => 'CapcoAppBundle',
                         'required' => true,
-                    ]);
+                    ])
+                ;
             }
             $form->end();
         }
@@ -402,7 +415,8 @@ class StepAdmin extends CapcoAdmin
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => true,
                 ])
-                ->end();
+                ->end()
+            ;
         }
 
         if ($subject instanceof CollectStep) {
@@ -427,7 +441,8 @@ class StepAdmin extends CapcoAdmin
                     ],
                     ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
                 )
-                ->end();
+                ->end()
+            ;
         }
 
         if ($subject instanceof QuestionnaireStep) {
@@ -439,7 +454,8 @@ class StepAdmin extends CapcoAdmin
                     'required' => false,
                     'placeholder' => 'admin.fields.step.no_questionnaire',
                 ])
-                ->end();
+                ->end()
+            ;
         }
         $form
             ->with('admin.fields.step.advanced')
@@ -457,7 +473,8 @@ class StepAdmin extends CapcoAdmin
                     'placeholder' => '<script type="text/javascript"> </script>',
                 ],
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -471,7 +488,8 @@ class StepAdmin extends CapcoAdmin
         $qb = $this->proposalFormRepository
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
-            ->setParameter('step', $subject);
+            ->setParameter('step', $subject)
+        ;
 
         return new ProxyQuery($qb);
     }
@@ -482,7 +500,8 @@ class StepAdmin extends CapcoAdmin
         $qb = $this->questionnaireRepository
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
-            ->setParameter('step', $subject);
+            ->setParameter('step', $subject)
+        ;
 
         return new ProxyQuery($qb);
     }
@@ -493,7 +512,8 @@ class StepAdmin extends CapcoAdmin
         $qb = $this->statusRepository
             ->createQueryBuilder('s')
             ->where('s.step = :step')
-            ->setParameter('step', $subject);
+            ->setParameter('step', $subject)
+        ;
 
         return new ProxyQuery($qb);
     }

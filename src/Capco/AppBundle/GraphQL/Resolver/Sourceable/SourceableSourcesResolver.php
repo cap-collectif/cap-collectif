@@ -1,12 +1,13 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 
 use Capco\AppBundle\Model\Sourceable;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\SourceRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SourceableSourcesResolver implements ResolverInterface
 {
@@ -26,7 +27,8 @@ class SourceableSourcesResolver implements ResolverInterface
             return $this->sourceRepository
                 ->getByContribution($sourceable, $limit, $offset, $field, $direction)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
         $totalCount = $this->sourceRepository->countByContribution($sourceable);
 

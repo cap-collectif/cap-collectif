@@ -86,7 +86,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $postAuthorFactory
             ->findOrCreatePostAuthors(
@@ -95,7 +96,8 @@ class CreatePostMutationSpec extends ObjectBehavior
                 $viewer
             )
             ->shouldBeCalledOnce()
-            ->willReturn(['postAuthorId']);
+            ->willReturn(['postAuthorId'])
+        ;
 
         $data = $this->data;
         $data['authors'] = ['postAuthorId'];
@@ -134,7 +136,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $postAuthorFactory
             ->findOrCreatePostAuthors(
@@ -143,7 +146,8 @@ class CreatePostMutationSpec extends ObjectBehavior
                 $viewer
             )
             ->shouldBeCalledOnce()
-            ->willReturn(['postAuthorId']);
+            ->willReturn(['postAuthorId'])
+        ;
 
         $data = $this->data;
         $data['authors'] = ['postAuthorId'];
@@ -179,7 +183,8 @@ class CreatePostMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $postAuthorFactory
             ->findOrCreatePostAuthors(
@@ -188,7 +193,8 @@ class CreatePostMutationSpec extends ObjectBehavior
                 $viewer
             )
             ->shouldBeCalledOnce()
-            ->willReturn(['postAuthorId']);
+            ->willReturn(['postAuthorId'])
+        ;
 
         $data = $this->data;
         $data['authors'] = ['postAuthorId'];
@@ -227,11 +233,13 @@ class CreatePostMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalled()
-            ->willReturn($data);
+            ->willReturn($data)
+        ;
         $settableOwnerResolver
             ->__invoke($data['owner'], $viewer)
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         unset($data['owner']);
         $formFactory->create(PostType::class, Argument::type(Post::class))->willReturn($form);
         $form->submit($data, false)->shouldBeCalled();
@@ -254,7 +262,8 @@ class CreatePostMutationSpec extends ObjectBehavior
     {
         $authorizationChecker
             ->isGranted(PostVoter::CREATE, Argument::type(Post::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->isGranted();
     }
 }

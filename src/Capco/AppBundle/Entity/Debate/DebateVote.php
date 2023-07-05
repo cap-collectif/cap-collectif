@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
+use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Traits\DebatableTrait;
-use Capco\AppBundle\Entity\Steps\DebateStep;
 
 /**
  * A vote on a debate.
@@ -39,7 +39,8 @@ class DebateVote extends AbstractVote
     {
         return $this->getDebate()
             ->getStep()
-            ->getProject();
+            ->getProject()
+        ;
     }
 
     public function isIndexable(): bool

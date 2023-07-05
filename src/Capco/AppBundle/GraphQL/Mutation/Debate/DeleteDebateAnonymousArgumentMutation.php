@@ -9,8 +9,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements
-    MutationInterface
+class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
     public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
 

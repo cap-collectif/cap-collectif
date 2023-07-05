@@ -19,19 +19,6 @@ class UserVotesResolver implements ResolverInterface
         $this->voteSearch = $voteSearch;
     }
 
-    /**
-     * A small function just for twig.
-     * Do not use it.
-     */
-    public function getAccountedVotes($viewer, User $user)
-    {
-        return $this->__invoke(
-            $viewer,
-            $user,
-            new Argument(['first' => 0, 'onlyAccounted' => true])
-        );
-    }
-
     public function __invoke(
         $viewer,
         User $user,
@@ -45,9 +32,9 @@ class UserVotesResolver implements ResolverInterface
         $onlyAccounted = true === $args->offsetGet('onlyAccounted');
         $contribuableId = $args->offsetGet('contribuableId');
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
@@ -81,5 +68,20 @@ class UserVotesResolver implements ResolverInterface
         });
 
         return $paginator->auto($args);
+    }
+
+    /**
+     * A small function just for twig.
+     * Do not use it.
+     *
+     * @param mixed $viewer
+     */
+    public function getAccountedVotes($viewer, User $user)
+    {
+        return $this->__invoke(
+            $viewer,
+            $user,
+            new Argument(['first' => 0, 'onlyAccounted' => true])
+        );
     }
 }

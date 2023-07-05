@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\District;
 
-use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\AbstractDistrict;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class DistrictTypeResolver implements ResolverInterface
 {

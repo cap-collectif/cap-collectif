@@ -4,8 +4,8 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Command\CreateCsvFromQuestionnaireCommand;
 use Capco\AppBundle\Entity\Questionnaire;
-use Symfony\Component\Routing\RouterInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * This handle the logic of export results file generated for admin.

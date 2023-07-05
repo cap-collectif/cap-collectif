@@ -39,22 +39,26 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($to);
+            ->willReturn($to)
+        ;
 
         $smsList = [$sms];
         $userPhoneVerificationSmsRepository
             ->findByUserWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsList);
+            ->willReturn($smsList)
+        ;
 
         $twilioHelper
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $em->persist(Argument::type(UserPhoneVerificationSms::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();
@@ -83,7 +87,8 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $userPhoneVerificationSmsRepository
             ->findByUserWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsList);
+            ->willReturn($smsList)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload['errorCode']->shouldBe('RETRY_LIMIT_REACHED');
@@ -100,22 +105,26 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($to);
+            ->willReturn($to)
+        ;
 
         $smsList = [$sms];
         $userPhoneVerificationSmsRepository
             ->findByUserWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsList);
+            ->willReturn($smsList)
+        ;
 
         $twilioHelper
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::TWILIO_API_ERROR);
+            ->willReturn(TwilioHelper::TWILIO_API_ERROR)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload['errorCode']->shouldBe(TwilioHelper::TWILIO_API_ERROR);
@@ -132,22 +141,26 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($to);
+            ->willReturn($to)
+        ;
 
         $smsList = [$sms];
         $userPhoneVerificationSmsRepository
             ->findByUserWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($smsList);
+            ->willReturn($smsList)
+        ;
 
         $twilioHelper
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::INVALID_NUMBER);
+            ->willReturn(TwilioHelper::INVALID_NUMBER)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload['errorCode']->shouldBe(TwilioHelper::INVALID_NUMBER);

@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Sluggable;
 
+use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
 use Doctrine\ORM\Query;
+use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
-use Capco\AppBundle\Entity\Proposal;
 
 /**
  * Doctrine event adapter for ORM adapted
@@ -37,7 +37,8 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
 
         $qb->select('rec.' . $config['slug'])
             ->from($config['useObjectClass'], 'rec')
-            ->where($whereClause);
+            ->where($whereClause)
+        ;
 
         // use the unique_base to restrict the uniqueness check
         if ($config['unique'] && isset($config['unique_base'])) {
@@ -56,9 +57,9 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
                 $qb->andWhere('rec.' . $config['unique_base'] . ' = :unique_base');
                 $qb->setParameter(':unique_base', $ubase);
             } elseif (
-                $ubase &&
-                $mapping &&
-                \in_array($mapping['type'], [
+                $ubase
+                && $mapping
+                && \in_array($mapping['type'], [
                     ClassMetadataInfo::ONE_TO_ONE,
                     ClassMetadataInfo::MANY_TO_ONE,
                 ])
@@ -109,7 +110,8 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
             )
             ->where(
                 $qb->expr()->like('rec.' . $config['slug'], $qb->expr()->literal($target . '%'))
-            );
+            )
+        ;
         // update in memory
         $q = $qb->getQuery();
 
@@ -139,7 +141,8 @@ class CapcoORMSluggableAdapter extends BaseAdapterORM implements SluggableAdapte
                 $qb
                     ->expr()
                     ->like('rec.' . $config['slug'], $qb->expr()->literal($replacement . '%'))
-            );
+            )
+        ;
         $q = $qb->getQuery();
 
         return $q->execute();

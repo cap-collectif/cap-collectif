@@ -46,8 +46,8 @@ class ProjectHelper
         $steps = $this->getAbstractSteps($project);
         foreach ($steps as $step) {
             if (
-                $step instanceof ConsultationStep ||
-                ($step instanceof SelectionStep && true === $step->isVotable())
+                $step instanceof ConsultationStep
+                || ($step instanceof SelectionStep && true === $step->isVotable())
             ) {
                 return true;
             }

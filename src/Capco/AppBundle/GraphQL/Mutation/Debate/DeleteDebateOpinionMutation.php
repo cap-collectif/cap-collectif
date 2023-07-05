@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Capco\AppBundle\Security\DebateOpinionVoter;
-use Capco\UserBundle\Entity\User;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Security\DebateOpinionVoter;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutation implements MutationInterface

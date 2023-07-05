@@ -5,13 +5,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\EventRepository;
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class ViewerAwaitingOrRefusedEventResolver implements ResolverInterface
 {

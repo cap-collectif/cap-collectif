@@ -7,9 +7,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class SendConfirmationEmailDebateAnonymousArgumentMutation
-    extends AbstractDebateArgumentMutation
-    implements MutationInterface
+class SendConfirmationEmailDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
     public const ALREADY_PUBLISHED_ARGUMENT = 'ALREADY_PUBLISHED_ARGUMENT';
 

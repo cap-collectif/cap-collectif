@@ -107,11 +107,11 @@ class CivicIAMassUpdater
     private function checkDatumFields(object $datum): void
     {
         if (
-            !isset($datum->value_id) ||
-            !isset($datum->categories) ||
-            !isset($datum->lisibilite) ||
-            !isset($datum->sentiment) ||
-            !CivicIASentimentEnum::isValid($datum->sentiment)
+            !isset($datum->value_id)
+            || !isset($datum->categories)
+            || !isset($datum->lisibilite)
+            || !isset($datum->sentiment)
+            || !CivicIASentimentEnum::isValid($datum->sentiment)
         ) {
             throw new UserError(self::INVALID_JSON);
         }

@@ -30,7 +30,7 @@ class UserPhoneVerificationSms
      * @ORM\Column(name="status", nullable=false, type="string")
      */
     private string $status;
-    
+
     public function getStatus(): string
     {
         return $this->status;

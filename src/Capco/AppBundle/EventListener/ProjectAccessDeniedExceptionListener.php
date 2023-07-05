@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Twig\Environment;
 

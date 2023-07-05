@@ -12,7 +12,9 @@ class AlphaProjectAdmin extends CapcoAdmin
     protected $baseRouteName = 'capco_admin_alpha_project';
     protected $baseRoutePattern = 'alpha/project';
 
-    protected function configureListFields(ListMapper $list): void {}
+    protected function configureListFields(ListMapper $list): void
+    {
+    }
 
     protected function configureFormFields(FormMapper $form): void
     {
@@ -20,7 +22,9 @@ class AlphaProjectAdmin extends CapcoAdmin
         $form->add('id');
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filter): void {}
+    protected function configureDatagridFilters(DatagridMapper $filter): void
+    {
+    }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {

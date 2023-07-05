@@ -255,9 +255,9 @@ class UserSearch extends Search
             );
             $boolQuery->addFilter($nestedQueryStep);
             if (
-                !empty($orderBy) &&
-                $orderBy['direction'] &&
-                UserOrderField::ACTIVITY === $orderBy['field']
+                !empty($orderBy)
+                && $orderBy['direction']
+                && UserOrderField::ACTIVITY === $orderBy['field']
             ) {
                 $sort = [
                     'participationsCountByStep.count' => [
@@ -320,18 +320,18 @@ class UserSearch extends Search
             $boolQuery->addFilter(new Term(['isEmailConfirmed' => true]));
         }
         if (
-            isset($providedFilters['consentInternalCommunication']) &&
-            $providedFilters['consentInternalCommunication']
+            isset($providedFilters['consentInternalCommunication'])
+            && $providedFilters['consentInternalCommunication']
         ) {
             $boolQuery->addFilter(new Term(['isConsentInternalCommunication' => true]));
         }
 
         $query = new Query($boolQuery);
         if (
-            empty($sort) &&
-            !empty($orderBy) &&
-            $orderBy['direction'] &&
-            UserOrderField::ACTIVITY === $orderBy['field']
+            empty($sort)
+            && !empty($orderBy)
+            && $orderBy['direction']
+            && UserOrderField::ACTIVITY === $orderBy['field']
         ) {
             $sort = [
                 'participationsCountByProject.count' => [
@@ -355,11 +355,10 @@ class UserSearch extends Search
                     !empty($orderBy) && $orderBy['field']
                         ? SortField::SORT_FIELD[$orderBy['field']]
                         : 'createdAt' => [
-                        'order' =>
-                            !empty($orderBy) && $orderBy['direction']
-                                ? OrderDirection::SORT_DIRECTION[$orderBy['direction']]
-                                : 'DESC',
-                    ],
+                            'order' => !empty($orderBy) && $orderBy['direction']
+                                    ? OrderDirection::SORT_DIRECTION[$orderBy['direction']]
+                                    : 'DESC',
+                        ],
                     'id' => new \stdClass(),
                 ]
                 : $sort
@@ -467,7 +466,8 @@ class UserSearch extends Search
         $query
             ->setFrom($offset)
             ->setSize($limit)
-            ->setSource(['id']);
+            ->setSource(['id'])
+        ;
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
@@ -523,8 +523,9 @@ class UserSearch extends Search
                 $sortField = SortField::SORT_FIELD[SortField::CREATED_AT];
 
                 break;
+
             default:
-                throw new \RuntimeException("Unknown order: ${orderBy}");
+                throw new \RuntimeException("Unknown order: {$orderBy}");
 
                 break;
         }

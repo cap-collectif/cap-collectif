@@ -6,12 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait DescriptionUsingJoditWysiwygTrait
 {
-
     /**
      * @ORM\Column(name="description_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})
      */
     protected bool $descriptionUsingJoditWysiwyg = false;
-
 
     public function isDescriptionUsingJoditWysiwyg(): bool
     {
@@ -21,6 +19,7 @@ trait DescriptionUsingJoditWysiwygTrait
     public function setDescriptionUsingJoditWysiwyg(bool $descriptionUsingJoditWysiwyg): self
     {
         $this->descriptionUsingJoditWysiwyg = $descriptionUsingJoditWysiwyg;
+
         return $this;
     }
 }

@@ -38,18 +38,21 @@ trait AdminTrait
         //Does not work if we do not try to enter something in the field
         $searchInput = $this->getSession()
             ->getPage()
-            ->find('css', "${element} .react-select__value-container .react-select__input input");
+            ->find('css', "{$element} .react-select__value-container .react-select__input input")
+        ;
         $searchInput->setValue('');
         $this->iWait(3);
         $this->getSession()
             ->getPage()
             ->find('css', $element)
-            ->click();
+            ->click()
+        ;
         $this->iWait(3);
         $this->getSession()
             ->getPage()
-            ->find('css', "${element}-menuList .react-select__option:nth-child(${number})")
-            ->click();
+            ->find('css', "{$element}-menuList .react-select__option:nth-child({$number})")
+            ->click()
+        ;
     }
 
     /**
@@ -143,7 +146,8 @@ trait AdminTrait
         $this->iWaitElementToAppearOnPage($selector);
         $this->getCurrentPage()
             ->find('css', $selector)
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -151,7 +155,7 @@ trait AdminTrait
      */
     public function iDuplicateProposalForm(string $proposalFormId)
     {
-        $this->visitPath("/admin/capco/app/proposalform/duplicate?id=${proposalFormId}");
+        $this->visitPath("/admin/capco/app/proposalform/duplicate?id={$proposalFormId}");
     }
 
     /**

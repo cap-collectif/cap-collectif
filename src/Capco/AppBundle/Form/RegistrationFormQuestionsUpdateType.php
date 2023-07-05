@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\RegistrationForm;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
-use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 
 class RegistrationFormQuestionsUpdateType extends AbstractType
 {
@@ -20,10 +20,10 @@ class RegistrationFormQuestionsUpdateType extends AbstractType
             'entry_type' => QuestionnaireAbstractQuestionType::class,
             'by_reference' => false,
             'delete_empty' => function (
-                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
+                ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
             ) {
-                return null === $questionnaireAbstractQuestion ||
-                    empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
+                return null === $questionnaireAbstractQuestion
+                    || empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
             },
         ]);
     }

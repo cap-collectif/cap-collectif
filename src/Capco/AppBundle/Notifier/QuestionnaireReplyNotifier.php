@@ -6,25 +6,25 @@ use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
+use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousCreateConfirmMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyAnonymousUpdateAdminMessage;
-use Capco\UserBundle\Entity\User;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyCreateMessage;
-use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireAcknowledgeReplyUpdateMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Questionnaire\QuestionnaireReplyUpdateAdminMessage;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Resolver\LocaleResolver;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Traits\FormatDateTrait;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
 
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
@@ -357,6 +357,7 @@ class QuestionnaireReplyNotifier extends BaseNotifier
         if ($owner instanceof User && $owner->isAdmin()) {
             return null;
         }
+
         return $questionnaire->getNotificationsConfiguration()->getEmail();
     }
 }

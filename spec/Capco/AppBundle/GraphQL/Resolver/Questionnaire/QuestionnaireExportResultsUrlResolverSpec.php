@@ -2,12 +2,12 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Project;
 
 class QuestionnaireExportResultsUrlResolverSpec extends ObjectBehavior
 {

@@ -38,7 +38,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         if (isset($row[self::HEADER_USER_TYPE])) {
             $userType = trim($row[self::HEADER_USER_TYPE]);
             if ($userType && !\in_array($userType, $this->userTypes)) {
-                $errors[] = "userType ${userType} not found.";
+                $errors[] = "userType {$userType} not found.";
             }
         }
 

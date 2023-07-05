@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver as BaseTypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver as BaseTypeResolver;
 use Overblog\GraphQLBundle\Error\UserError;
 
 class TypeResolver implements ResolverInterface

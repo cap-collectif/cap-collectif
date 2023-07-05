@@ -58,7 +58,8 @@ class ProposalStepPaperVoteTotalCountResolverSpec extends ObjectBehavior
 
         $repository
             ->findBy(['proposal' => $proposal, 'step' => $step])
-            ->willReturn([$vote1->getWrappedObject(), $vote2->getWrappedObject()]);
+            ->willReturn([$vote1->getWrappedObject(), $vote2->getWrappedObject()])
+        ;
 
         $vote1->getTotalCount()->willReturn(3);
         $vote2->getTotalCount()->willReturn(7);

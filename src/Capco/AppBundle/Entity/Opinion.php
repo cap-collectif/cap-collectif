@@ -11,13 +11,13 @@ use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -403,19 +403,21 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user)) ||
-            $this->getAuthor() === $user ||
-            ($user && $user->isAdmin());
+        return ($this->isPublished() && $this->getStep() && $this->getStep()->canDisplay($user))
+            || $this->getAuthor() === $user
+            || ($user && $user->isAdmin());
     }
 
     public function viewerCanSeeInBo($user = null): bool
     {
-        return ($this->getStep() && $this->getStep()->viewerCanSeeInBo($user)) ||
-            $this->getAuthor() === $user ||
-            ($user && $user->isAdmin());
+        return ($this->getStep() && $this->getStep()->viewerCanSeeInBo($user))
+            || $this->getAuthor() === $user
+            || ($user && $user->isAdmin());
     }
 
     public function canContribute($viewer = null): bool

@@ -15,8 +15,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class StarResponseMutation implements MutationInterface
 {
-    const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
-    const ALREADY_STARRED = 'ALREADY_STARRED';
+    public const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
+    public const ALREADY_STARRED = 'ALREADY_STARRED';
 
     protected EntityManagerInterface $entityManager;
     protected GlobalIdResolver $globalIdResolver;

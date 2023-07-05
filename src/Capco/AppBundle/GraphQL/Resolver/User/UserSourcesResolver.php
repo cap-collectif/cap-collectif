@@ -23,7 +23,7 @@ class UserSourcesResolver implements ResolverInterface
     public function __invoke(
         $viewer,
         User $user,
-        Argument $args = null,
+        ?Argument $args = null,
         ?ArrayObject $context = null
     ): Connection {
         if (!$args) {
@@ -31,9 +31,9 @@ class UserSourcesResolver implements ResolverInterface
         }
 
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {

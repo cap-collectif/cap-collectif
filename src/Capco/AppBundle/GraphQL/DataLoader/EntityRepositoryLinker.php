@@ -34,6 +34,7 @@ class EntityRepositoryLinker
     public function setType(string $type): self
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ class EntityRepositoryLinker
     public function setRepository(EntityRepository $repository): self
     {
         $this->repository = $repository;
+
         return $this;
     }
 
@@ -56,6 +58,7 @@ class EntityRepositoryLinker
     public function setEntities(array $entities): self
     {
         $this->entities = $entities;
+
         return $this;
     }
 

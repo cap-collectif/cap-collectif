@@ -173,7 +173,7 @@ final class Version20200120121351 extends AbstractMigration implements Container
         $this->addSql('DROP TABLE font');
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->em = $container->get('doctrine')->getManager();
         $this->generator = new UuidGenerator();

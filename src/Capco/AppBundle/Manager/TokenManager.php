@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\Debate\DebateVoteToken;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Repository\ActionTokenRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class TokenManager
 {
@@ -87,7 +87,8 @@ class TokenManager
             ->setDebate($voteToken->getDebate())
             ->setNavigator($this->requestGuesser->getUserAgent())
             ->setIpAddress($this->requestGuesser->getClientIp())
-            ->setMailOrigin();
+            ->setMailOrigin()
+        ;
         $this->em->persist($vote);
 
         return $vote;
@@ -96,9 +97,9 @@ class TokenManager
     private function checkValue(string $value): void
     {
         if (!ForOrAgainstType::isValid($value)) {
-            $this->logger->info("invalid value ${value} used to vote on debate");
+            $this->logger->info("invalid value {$value} used to vote on debate");
 
-            throw new \RuntimeException("invalid value ${value}");
+            throw new \RuntimeException("invalid value {$value}");
         }
     }
 

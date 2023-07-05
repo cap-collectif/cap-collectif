@@ -2,14 +2,14 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Capco\AppBundle\GraphQL\Mutation\Debate\DeleteDebateOpinionMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutationSpec extends ObjectBehavior

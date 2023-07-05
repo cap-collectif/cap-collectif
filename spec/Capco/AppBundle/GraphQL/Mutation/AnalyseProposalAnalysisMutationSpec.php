@@ -80,7 +80,8 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->__invoke($argument, $viewer);
     }
@@ -115,7 +116,8 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish(CapcoAppBundleMessagesTypes::PROPOSAL_ANALYSE, \Prophecy\Argument::any())
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $this->__invoke($argument, $viewer);
     }
@@ -132,13 +134,15 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
     ): void {
         $authorizationChecker
             ->isGranted(ProposalAnalysisRelatedVoter::ANALYSE, $proposal)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $analysisRepository
             ->findOneBy([
                 'proposal' => $proposal,
                 'updatedBy' => $viewer,
             ])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $proposalRepository->find('proposalId')->willReturn($proposal);
         $proposalRepository->find(null)->willReturn($proposal);
         $proposal->getDecision()->willReturn(null);
@@ -151,7 +155,8 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
                 \Prophecy\Argument::any(),
                 \Prophecy\Argument::any()
             )
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->isValid()->willReturn(true);
         $form->submit(\Prophecy\Argument::any(), \Prophecy\Argument::any())->willReturn($form);
     }

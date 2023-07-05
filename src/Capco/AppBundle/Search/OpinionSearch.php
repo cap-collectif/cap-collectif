@@ -5,15 +5,15 @@ namespace Capco\AppBundle\Search;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Enum\ContributionOrderField;
 use Capco\AppBundle\Enum\OpinionOrderField;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\Term;
 use Elastica\Query\Exists;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\UserBundle\Entity\User;
+use Elastica\Query\Term;
 
 class OpinionSearch extends Search
 {
@@ -76,7 +76,8 @@ class OpinionSearch extends Search
                 $query
                     ->addSort(['pinned' => ['order' => 'desc']])
                     ->addSort($this->getSort($order))
-                    ->addSort(['id' => new \stdClass()]);
+                    ->addSort(['id' => new \stdClass()])
+                ;
             }
         }
         $this->applyCursor($query, $cursor);
@@ -124,7 +125,8 @@ class OpinionSearch extends Search
         $query
             ->setSource(['id'])
             ->setFrom($offset)
-            ->setSize($limit);
+            ->setSize($limit)
+        ;
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
@@ -140,7 +142,8 @@ class OpinionSearch extends Search
         $functionScore = new Query\FunctionScore();
         $functionScore
             ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
-            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM);
+            ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM)
+        ;
 
         $functionScore
             ->addFieldValueFactorFunction(
@@ -152,7 +155,8 @@ class OpinionSearch extends Search
                 new Term(['pinned' => true])
             )
             ->addFunction('filter', [], new Term(['pinned' => true]), 35)
-            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 20);
+            ->addRandomScoreFunction($seed, new Term(['pinned' => false]), 20)
+        ;
 
         $functionScore->setQuery($query);
 
@@ -162,6 +166,7 @@ class OpinionSearch extends Search
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = OpinionOrderField::RANDOM;
+
         switch ($field) {
             case OpinionOrderField::CREATED_AT:
                 if (OrderDirection::ASC === $direction) {
@@ -171,6 +176,7 @@ class OpinionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
@@ -179,11 +185,13 @@ class OpinionSearch extends Search
                 }
 
                 break;
+
             case ContributionOrderField::COMMENT_COUNT:
             case OpinionOrderField::COMMENTS:
                 $order = 'comments';
 
                 break;
+
             case ContributionOrderField::VOTE_COUNT:
             case OpinionOrderField::VOTES:
                 if (OrderDirection::ASC === $direction) {
@@ -193,6 +201,7 @@ class OpinionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::POPULAR:
             case OpinionOrderField::VOTES_OK:
                 if (OrderDirection::ASC === $direction) {
@@ -202,6 +211,7 @@ class OpinionSearch extends Search
                 }
 
                 break;
+
             case OpinionOrderField::POSITION:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-position';

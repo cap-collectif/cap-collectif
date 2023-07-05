@@ -37,8 +37,7 @@ class OpinionPage extends Page
         'argument confirm delete button' => '#confirm-argument-delete',
         'argument votes counter' => '#arg-QXJndW1lbnQ6YXJndW1lbnQx .opinion__votes-nb',
         'argument vote button' => '#arg-QXJndW1lbnQ6YXJndW1lbnQx .argument__btn--vote',
-        'argument vote button in closed step' =>
-            '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDE="] .argument__btn--vote',
+        'argument vote button in closed step' => '[id="arg-QXJndW1lbnQ6YXJndW1lbnQyMDE="] .argument__btn--vote',
         'argument report button' => '#report-argument-QXJndW1lbnQ6YXJndW1lbnQx-button',
         // Sources
         'sources list' => '#sources-list',
@@ -75,9 +74,7 @@ class OpinionPage extends Page
                 "$('#OpinionBox').length > 0 && $('#opinion__arguments--AGAINST').length > 0 && $('#opinion-page-tabs').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'OpinionPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('OpinionPage did not fully load, check selector in "verifyPage".');
         }
     }
 
@@ -238,8 +235,8 @@ class OpinionPage extends Page
 
     public function submitArgument($type, $text)
     {
-        $field = $this->getElement("argument ${type} field");
-        $button = $this->getElement("argument ${type} button");
+        $field = $this->getElement("argument {$type} field");
+        $button = $this->getElement("argument {$type} button");
         $field->setValue($text);
         $button->press();
     }

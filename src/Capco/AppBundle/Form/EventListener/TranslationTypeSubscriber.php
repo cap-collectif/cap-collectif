@@ -19,7 +19,8 @@ class TranslationTypeSubscriber implements EventSubscriberInterface
         $options = $event
             ->getForm()
             ->getConfig()
-            ->getOptions();
+            ->getOptions()
+        ;
 
         $fields = $options['fields'];
         $fieldOptions = $options['fields_options'];

@@ -46,7 +46,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.progressSteps', 'progressSteps')
             ->leftJoin('p.proposalEvaluation', 'proposalEvaluation')
             ->where('p.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -67,7 +68,8 @@ class ProposalRepository extends EntityRepository
 
         $query = $this->_em
             ->createNativeQuery('SELECT p.id as id FROM proposal p WHERE p.slug = :slug', $rsm)
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         $id = $query->getSingleScalarResult();
 
@@ -78,13 +80,15 @@ class ProposalRepository extends EntityRepository
         // This query will hydrate the proposal
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $id);
+            ->setParameter('proposalId', $id)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getOneBySlugCacheKey($slug))
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
@@ -97,7 +101,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'form')
             ->leftJoin('form.step', 'step')
             ->andWhere('proposal.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $results = $qb->getQuery()->getResult();
 
@@ -133,7 +138,8 @@ class ProposalRepository extends EntityRepository
         return $this->qbProposalsByFormAndEvaluer($form, $user)
             ->select('COUNT(proposal.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function isViewerAnEvaluer(Proposal $proposal, User $user): bool
@@ -174,7 +180,8 @@ class ProposalRepository extends EntityRepository
             ->setParameter('form', $form)
             ->setParameter('author', $author)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getProposalsByFormAndEvaluer(
@@ -187,7 +194,8 @@ class ProposalRepository extends EntityRepository
     ): Paginator {
         $qb = $this->qbProposalsByFormAndEvaluer($form, $user)
             ->setFirstResult($first)
-            ->setMaxResults($offset);
+            ->setMaxResults($offset)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('proposal.publishedAt', $direction);
@@ -203,7 +211,8 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(proposal)')
             ->andWhere('proposal.proposalForm = :form')
             ->andWhere('SIZE(proposal.childConnections) > 0')
-            ->setParameter('form', $form);
+            ->setParameter('form', $form)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -213,7 +222,8 @@ class ProposalRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(proposal.id)')
             ->andWhere('proposal.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -224,7 +234,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.author = :author')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -234,7 +245,8 @@ class ProposalRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p');
         $qb->select('count(DISTINCT p)')
             ->andWhere('p.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -259,15 +271,14 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.responses', 'responses')
             ->leftJoin('responses.question', 'questions')
             ->andWhere('proposal.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getLast(?int $limit = null, ?int $offset = null)
+    public function getLast(?int $limit = 1, ?int $offset = 0)
     {
-        $limit = $limit ?? 1;
-        $offset = $offset ?? 0;
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('author', 'amedia', 'theme', 'status', 'district')
             ->leftJoin('proposal.author', 'author')
@@ -277,7 +288,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.district', 'district')
             ->andWhere('proposal.trashedStatus IS NULL')
             ->addOrderBy('proposal.createdAt', 'DESC')
-            ->addGroupBy('proposal.id');
+            ->addGroupBy('proposal.id')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -306,7 +318,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('f.step = :step')
             ->setParameter('step', $step)
             ->addOrderBy('proposal.createdAt', 'DESC')
-            ->addGroupBy('proposal.id');
+            ->addGroupBy('proposal.id')
+        ;
 
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);
@@ -327,12 +340,14 @@ class ProposalRepository extends EntityRepository
                 })
             )
             ->andWhere('proposal.author = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, CollectStep $step): int
@@ -343,7 +358,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.author = :author')
             ->andWhere('f.step =:step')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -355,7 +371,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'proposalForm')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('proposalForm.step = :step')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
         $qb = $this->getWithFilledAddressQueryBuilder($qb);
 
         return $qb->getQuery()->getArrayResult();
@@ -368,7 +385,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('proposal.author', 'author')
             ->andWhere('selections.selectionStep = :step')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
         $qb = $this->getWithFilledAddressQueryBuilder($qb);
 
         return $qb->getQuery()->getArrayResult();
@@ -381,7 +399,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.proposalForm', 'proposalForm')
             ->andWhere('proposalForm.step = :step')
             ->setParameter('step', $step)
-            ->orderBy('proposal.estimation', 'DESC');
+            ->orderBy('proposal.estimation', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -412,18 +431,21 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'selectionStep')
             ->andWhere('selectionStep.id = :stepId')
-            ->setParameter('stepId', $step->getId());
+            ->setParameter('stepId', $step->getId())
+        ;
 
         if ($themeId) {
             $qb->leftJoin('proposal.theme', 't')
                 ->andWhere('t.id = :themeId')
-                ->setParameter('themeId', $themeId);
+                ->setParameter('themeId', $themeId)
+            ;
         }
 
         if ($districtId) {
             $qb->leftJoin('proposal.district', 'd')
                 ->andWhere('d.id = :districtId')
-                ->setParameter('districtId', $districtId);
+                ->setParameter('districtId', $districtId)
+            ;
         }
 
         if ($categoryId) {
@@ -448,7 +470,8 @@ class ProposalRepository extends EntityRepository
             ->select('SUM(p.estimation)')
             ->leftJoin('p.proposalForm', 'pf')
             ->andWhere('pf.step = :step')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -464,24 +487,28 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.selections', 'selections')
             ->leftJoin('selections.selectionStep', 'ss')
             ->andWhere('ss.id = :stepId')
-            ->setParameter('stepId', $step->getId());
+            ->setParameter('stepId', $step->getId())
+        ;
 
         if ($themeId) {
             $qb->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
-                ->setParameter('themeId', $themeId);
+                ->setParameter('themeId', $themeId)
+            ;
         }
 
         if ($districtId) {
             $qb->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
-                ->setParameter('districtId', $districtId);
+                ->setParameter('districtId', $districtId)
+            ;
         }
 
         if ($categoryId) {
             $qb->leftJoin('p.category', 'category')
                 ->andWhere('category.id = :categoryId')
-                ->setParameter('categoryId', $categoryId);
+                ->setParameter('categoryId', $categoryId)
+            ;
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -505,7 +532,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('user', $user)
             ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setFirstResult($first)
+        ;
 
         return new Paginator($query);
     }
@@ -518,7 +546,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.followers', 'f')
             ->andWhere('f.user = :user')
             ->andWhere('p.deletedAt IS NULL')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -536,7 +565,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere($qb->expr()->between('selectionVotes.createdAt', ':from', ':to'))
             ->orWhere($qb->expr()->between('collectVotes.createdAt', ':from', ':to'))
             ->andWhere($qb->expr()->eq('proposal.id', ':id'))
-            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId])
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -552,7 +582,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('proposal.comments', 'comments')
             ->andWhere($qb->expr()->between('comments.createdAt', ':from', ':to'))
             ->andWhere($qb->expr()->eq('proposal.id', ':id'))
-            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId])
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -571,7 +602,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere($qb->expr()->between('selections.createdAt', ':from', ':to'))
             ->andWhere($qb->expr()->eq('proposal.id', ':id'))
             ->orderBy('selections.createdAt', 'DESC')
-            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId]);
+            ->setParameters(['from' => $from, 'to' => $to, 'id' => $proposalId])
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -599,7 +631,8 @@ class ProposalRepository extends EntityRepository
     ): array {
         $qb = $this->createProposalsByAuthorViewerCanSeeQuery($viewer, $user)
             ->setMaxResults($limit)
-            ->setFirstResult($offset);
+            ->setFirstResult($offset)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -637,7 +670,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('p.id IN (:proposals)')
             ->setParameter('proposals', $proposalIds)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getAssignedProposalsByProject(
@@ -651,7 +685,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.proposalAnalysts', 'analysts')
             ->leftJoin('p.decisionMaker', 'decisionMaker')
             ->leftJoin('p.supervisor', 'supervisor')
-            ->andWhere('pas.project = :project');
+            ->andWhere('pas.project = :project')
+        ;
         $qb->andWhere(
             $qb
                 ->expr()
@@ -664,7 +699,8 @@ class ProposalRepository extends EntityRepository
             ->setParameter('project', $project)
             ->setParameter('viewer', $viewer)
             ->setFirstResult($first)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -677,7 +713,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('p.proposalAnalysts', 'analysts')
             ->leftJoin('p.decisionMaker', 'decisionMaker')
             ->leftJoin('p.supervisor', 'supervisor')
-            ->andWhere('pas.project = :project');
+            ->andWhere('pas.project = :project')
+        ;
         $qb->andWhere(
             $qb
                 ->expr()
@@ -688,7 +725,8 @@ class ProposalRepository extends EntityRepository
                 )
         )
             ->setParameter('project', $project)
-            ->setParameter('viewer', $viewer);
+            ->setParameter('viewer', $viewer)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -700,7 +738,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.proposalForm = :form')
             ->setParameter('form', $form)
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function getProposalByEmailAndTitleOnProposalForm(
@@ -718,7 +757,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.trashedAt IS NULL')
             ->setParameter('form', $proposalForm)
             ->setParameter('title', $title)
-            ->setParameter('user', $authorEmail);
+            ->setParameter('user', $authorEmail)
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -740,7 +780,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.draft = false')
             ->andWhere($alias . '.trashedAt IS NULL')
             ->andWhere($alias . '.deletedAt IS NULL')
-            ->andWhere($alias . '.published = true');
+            ->andWhere($alias . '.published = true')
+        ;
     }
 
     protected function getQueryProposalWithProject(): QueryBuilder
@@ -748,7 +789,8 @@ class ProposalRepository extends EntityRepository
         return $this->createQueryBuilder('p')
             ->leftJoin('p.proposalForm', 'pf')
             ->leftJoin('pf.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas');
+            ->leftJoin('s.projectAbstractStep', 'pas')
+        ;
     }
 
     // This return the query used to retrieve all the proposals of an author the logged user can see.
@@ -765,7 +807,8 @@ class ProposalRepository extends EntityRepository
             ->leftJoin('pabs.project', 'pro')
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
-            ->orderBy('p.createdAt', 'DESC');
+            ->orderBy('p.createdAt', 'DESC')
+        ;
         if ($viewer !== $user && !$viewer->isSuperAdmin()) {
             // The call of the function below filters the contributions according to the visibility
             // of the project containing it, as well as the privileges of the connected user.
@@ -834,7 +877,8 @@ class ProposalRepository extends EntityRepository
             ->setParameters([
                 ':author' => $author,
                 ':collectStep' => $this->_em->getClassMetadata(CollectStep::class),
-            ]);
+            ])
+        ;
 
         return $qb;
     }
@@ -851,7 +895,8 @@ class ProposalRepository extends EntityRepository
             ->andWhere('p.trashedAt IS NULL')
             ->andWhere('p.deletedAt IS NULL')
             ->andWhere('p.published = 1')
-            ->setParameter('cs', $cs);
+            ->setParameter('cs', $cs)
+        ;
     }
 
     private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user): QueryBuilder
@@ -862,6 +907,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposal.proposalForm = :form')
             ->andWhere('userGroup.user = :user')
             ->setParameter('form', $form)
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
     }
 }

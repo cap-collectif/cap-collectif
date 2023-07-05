@@ -9,11 +9,18 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class PendingOrganizationInvitationVoter extends Voter
 {
-    const DELETE = 'delete';
+    public const DELETE = 'delete';
+
+    public function canDelete(PendingOrganizationInvitation $invitation, User $viewer): bool
+    {
+        $organization = $invitation->getOrganization();
+
+        return $viewer->isAdmin() || $organization->isUserAdmin($viewer);
+    }
 
     protected function supports($attribute, $subject): bool
     {
-        if ($attribute != self::DELETE) {
+        if (self::DELETE != $attribute) {
             return false;
         }
 
@@ -35,14 +42,9 @@ class PendingOrganizationInvitationVoter extends Voter
         switch ($attribute) {
             case self::DELETE:
                 return $this->canDelete($subject, $viewer);
+
             default:
                 return false;
         }
-    }
-
-    public function canDelete(PendingOrganizationInvitation $invitation, User $viewer): bool
-    {
-        $organization = $invitation->getOrganization();
-        return $viewer->isAdmin() || $organization->isUserAdmin($viewer);
     }
 }

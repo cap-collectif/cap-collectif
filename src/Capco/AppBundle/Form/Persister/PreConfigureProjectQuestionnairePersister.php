@@ -59,20 +59,19 @@ class PreConfigureProjectQuestionnairePersister
 
             $questionsWithJumps = $this->getQuestionsWithJumps($questionnaireInput);
 
-            /** * @var $updatedQuestionnaire Questionnaire */
+            /** * @var Questionnaire $updatedQuestionnaire */
             list(
-                'questionnaire' => $updatedQuestionnaire,
-            ) = $this->updateQuestionnaireConfigurationMutation->__invoke(
-                new Argument([
-                    'questionnaireId' => GlobalId::toGlobalId(
-                        'Questionnaire',
-                        $questionnaire->getId()
-                    ),
-                    'questions' => $questionnaireInput['questions'],
-                    'description' => $questionnaireInput['description'],
-                ]),
-                $viewer
-            );
+                'questionnaire' => $updatedQuestionnaire) = $this->updateQuestionnaireConfigurationMutation->__invoke(
+                    new Argument([
+                        'questionnaireId' => GlobalId::toGlobalId(
+                            'Questionnaire',
+                            $questionnaire->getId()
+                        ),
+                        'questions' => $questionnaireInput['questions'],
+                        'description' => $questionnaireInput['description'],
+                    ]),
+                    $viewer
+                );
 
             $this->addJumpsToQuestionnaire($updatedQuestionnaire, $questionsWithJumps);
 
@@ -88,8 +87,7 @@ class PreConfigureProjectQuestionnairePersister
         foreach ($questionnaireInput['questions'] as &$question) {
             $questionsWithJumps[] = [
                 'title' => $question['question']['title'],
-                'alwaysJumpDestinationQuestion' =>
-                    $question['question']['alwaysJumpDestinationQuestion'],
+                'alwaysJumpDestinationQuestion' => $question['question']['alwaysJumpDestinationQuestion'],
                 'jumps' => $question['question']['jumps'],
             ];
             $question['question']['alwaysJumpDestinationQuestion'] = null;
@@ -109,7 +107,7 @@ class PreConfigureProjectQuestionnairePersister
 
         foreach ($questionsWithJumps as $questionsWithJump) {
             $title = $questionsWithJump['title'];
-            /** * @var $question MultipleChoiceQuestion */
+            /** * @var MultipleChoiceQuestion $question */
             $question = $this->abstractQuestionRepository->findOneByQuestionnaireAndTitle(
                 $questionnaire,
                 $title
@@ -169,7 +167,8 @@ class PreConfigureProjectQuestionnairePersister
                 ->setOperator($operator)
                 ->setQuestion($jumpQuestion)
                 ->setPosition($conditionIndex)
-                ->setJump($jump);
+                ->setJump($jump)
+            ;
             $this->em->persist($logicJumpCondition);
         }
     }

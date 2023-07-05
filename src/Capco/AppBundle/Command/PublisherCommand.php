@@ -35,7 +35,8 @@ class PublisherCommand extends Command
                 '/!\ Should be used for CI only /!\ .The relative time you want to publish.',
                 'now'
             )
-            ->setDescription('Publish all official responses planned with past date.');
+            ->setDescription('Publish all official responses planned with past date.')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -53,9 +54,7 @@ class PublisherCommand extends Command
         $dateTime = new \DateTime($input->getOption('time'));
         $items = [];
 
-        $items = array_merge($items, $this->officialResponseRepository->findPlanned($dateTime));
-
-        return $items;
+        return array_merge($items, $this->officialResponseRepository->findPlanned($dateTime));
     }
 
     private function publish($item, OutputInterface $output): void
@@ -68,6 +67,6 @@ class PublisherCommand extends Command
 
     private function log(OutputInterface $output, string $title, string $type): void
     {
-        $output->writeln("<info>Publishing $type \"$title\"</info>");
+        $output->writeln("<info>Publishing {$type} \"{$title}\"</info>");
     }
 }

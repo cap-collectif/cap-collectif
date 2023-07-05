@@ -36,7 +36,8 @@ class UserInviteGroupsResolver implements ResolverInterface
                     ->map(function ($group) {
                         return $group;
                     })
-                    ->toArray();
+                    ->toArray()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

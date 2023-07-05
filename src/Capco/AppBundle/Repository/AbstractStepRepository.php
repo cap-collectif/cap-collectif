@@ -30,7 +30,8 @@ class AbstractStepRepository extends EntityRepository
             ->andWhere('s.slug = :slug')
             ->andWhere('p.slug = :projectSlug')
             ->setParameter('slug', $slug)
-            ->setParameter('projectSlug', $projectSlug);
+            ->setParameter('projectSlug', $projectSlug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -39,13 +40,15 @@ class AbstractStepRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->andWhere('s.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
             ->useResultCache(true, 60)
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getByProjectSlug(string $slug): array
@@ -56,7 +59,8 @@ class AbstractStepRepository extends EntityRepository
             ->leftJoin('pas.project', 'p')
             ->andWhere('p.slug = :project')
             ->setParameter('project', $slug)
-            ->addOrderBy('pas.position', 'ASC');
+            ->addOrderBy('pas.position', 'ASC')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -69,14 +73,8 @@ class AbstractStepRepository extends EntityRepository
             ->setParameter('before', $before)
             ->setParameter('after', $after)
             ->getQuery()
-            ->execute();
-    }
-
-    protected function getIsEnabledQueryBuilder()
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->execute()
+        ;
     }
 
     public function findOneByProjectAndStepTitle(Project $project, string $stepTitle): AbstractStep
@@ -86,8 +84,17 @@ class AbstractStepRepository extends EntityRepository
             ->where('asStep.title = :title')
             ->andWhere('paStep.project = :project')
             ->setParameter('project', $project)
-            ->setParameter('title', $stepTitle);
+            ->setParameter('title', $stepTitle)
+        ;
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    protected function getIsEnabledQueryBuilder()
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+        ;
     }
 }

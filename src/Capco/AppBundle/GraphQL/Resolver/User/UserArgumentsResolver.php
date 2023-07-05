@@ -5,12 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\GraphQL\DataLoader\User\UserArgumentsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use GraphQL\Executor\Promise\Promise;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class UserArgumentsResolver implements ResolverInterface
 {
@@ -29,20 +29,6 @@ class UserArgumentsResolver implements ResolverInterface
         $this->promiseAdapter = $promiseAdapter;
     }
 
-    public function getArgumentTotalCount(
-        ?User $viewer,
-        User $user,
-        ?\ArrayObject $context = null
-    ): int {
-        $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
-        return $aclDisabled
-            ? $this->argumentRepository->countAllByUser($user)
-            : $this->argumentRepository->countByUser($user, $viewer);
-    }
-
     public function __invoke(
         ?User $viewer,
         User $user,
@@ -50,16 +36,32 @@ class UserArgumentsResolver implements ResolverInterface
         ?\ArrayObject $context = null
     ): Promise {
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         if (!$args) {
             $args = new Argument(['first' => 0]);
         }
+
         return $this->userArgumentsDataLoader->load(
             compact('viewer', 'user', 'args', 'aclDisabled')
         );
+    }
+
+    public function getArgumentTotalCount(
+        ?User $viewer,
+        User $user,
+        ?\ArrayObject $context = null
+    ): int {
+        $aclDisabled =
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
+
+        return $aclDisabled
+            ? $this->argumentRepository->countAllByUser($user)
+            : $this->argumentRepository->countByUser($user, $viewer);
     }
 
     public function resolveSync(

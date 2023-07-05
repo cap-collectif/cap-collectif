@@ -52,7 +52,7 @@ class SendSmsProposalVoteMutation implements MutationInterface
         $step = $this->globalIdResolver->resolve($stepId, null);
 
         $violations = $this->validator->validate($phone, new CheckPhoneNumber());
-        /** * @var $violation ConstraintViolation  */
+        /** * @var ConstraintViolation $violation  */
         foreach ($violations as $violation) {
             return ['errorCode' => $violation->getMessage()];
         }
@@ -70,7 +70,8 @@ class SendSmsProposalVoteMutation implements MutationInterface
             ->setProposal($proposal)
             ->setCollectStep($step instanceof CollectStep ? $step : null)
             ->setSelectionStep($step instanceof SelectionStep ? $step : null)
-            ->setPending();
+            ->setPending()
+        ;
 
         $this->em->persist($anonUserProposalSmsVote);
         $this->em->flush();

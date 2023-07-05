@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Capco\UserBundle\Entity\User;
 
 class ProjectAuthorsResolver implements ResolverInterface
 {

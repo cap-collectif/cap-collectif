@@ -2,25 +2,25 @@
 
 namespace Capco\AppBundle\Resolver;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Theme;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
 {

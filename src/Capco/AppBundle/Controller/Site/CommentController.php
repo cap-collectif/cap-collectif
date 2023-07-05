@@ -55,37 +55,27 @@ class CommentController extends Controller
      * @Entity("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
      * @Security("has_role('ROLE_USER')")
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @throws ProjectAccessDeniedException
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function updateCommentAction(Request $request, Comment $comment)
     {
         if (false === $comment->canContribute($this->getUser())) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $isAuthorAdmin = $comment->getAuthor() ? $comment->getAuthor()->isAdmin() : false;
         $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
         if ($isModerationEnabled && $comment->isApproved() && !$isAuthorAdmin) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans(
-                    'cannot-edit-already-approved-comment',
-                    [],
-                    'CapcoAppBundle'
-                )
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('cannot-edit-already-approved-comment', [], 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser();
         $userPostComment = $comment->getAuthor();
 
         if ($userCurrent !== $userPostComment) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle'));
         }
 
         $form = $this->createForm(CommentForm::class, $comment, ['actionType' => 'edit']);
@@ -120,25 +110,21 @@ class CommentController extends Controller
      * @Template("CapcoAppBundle:Comment:delete.html.twig")
      * @Security("has_role('ROLE_USER')")
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
      * @throws ProjectAccessDeniedException
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteCommentAction(Request $request, Comment $comment)
     {
         if (false === $comment->canContribute($this->getUser())) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('comment.error.no_contribute', [], 'CapcoAppBundle'));
         }
 
         $userCurrent = $this->getUser()->getId();
         $userPostComment = $comment->getAuthor()->getId();
 
         if ($userCurrent !== $userPostComment) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('comment.error.not_author', [], 'CapcoAppBundle'));
         }
 
         //Champ CSRF

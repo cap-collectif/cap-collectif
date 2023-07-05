@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
-use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Form\OpinionVersionType;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class AddVersionMutation implements MutationInterface
 {
@@ -46,7 +46,7 @@ class AddVersionMutation implements MutationInterface
         $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($opinionId)['id']);
 
         if (!$opinion || !$opinion instanceof Opinion) {
-            $this->logger->error("Unknown opinion with id: ${opinionId}");
+            $this->logger->error("Unknown opinion with id: {$opinionId}");
             $error = ['message' => 'Unknown opinion.'];
 
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];

@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\Entity\ArgumentVote;
 
 class ArgumentViewerVoteResolver implements ResolverInterface
 {

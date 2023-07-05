@@ -11,8 +11,8 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method UserInvite|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserInvite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|UserInvite find($id, $lockMode = null, $lockVersion = null)
+ * @method null|UserInvite findOneBy(array $criteria, array $orderBy = null)
  * @method UserInvite[]    findAll()
  * @method UserInvite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -47,9 +47,10 @@ class UserInviteRepository extends EntityRepository
         $results = $this->createQueryBuilder('ui')
             ->select('ui.email')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
 
-        return array_map(fn($row) => $row['email'], $results);
+        return array_map(fn ($row) => $row['email'], $results);
     }
 
     public function getNotExpiredInvitationsByStatus(
@@ -74,7 +75,8 @@ class UserInviteRepository extends EntityRepository
             ->setParameters([
                 ':now' => new \DateTimeImmutable(),
                 ':status' => $status,
-            ]);
+            ])
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -89,7 +91,8 @@ class UserInviteRepository extends EntityRepository
             ->addOrderBy('ui.createdAt')
             ->setParameter('emails', $emails)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findOneByToken(string $token): ?UserInvite
@@ -98,7 +101,8 @@ class UserInviteRepository extends EntityRepository
             ->andWhere('ui.token = :token')
             ->setParameters(['token' => $token])
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function findOneByEmailAndNotExpired(string $email): ?UserInvite
@@ -111,7 +115,8 @@ class UserInviteRepository extends EntityRepository
                 'email' => $email,
             ])
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function findOneByTokenNotExpiredAndEmail(string $token, string $email): ?UserInvite
@@ -126,7 +131,8 @@ class UserInviteRepository extends EntityRepository
                 'email' => $email,
             ])
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getPendingInvitations(?int $limit, ?int $offset, Group $group): array
@@ -139,7 +145,8 @@ class UserInviteRepository extends EntityRepository
             ->andWhere('g = :group')
             ->setParameter('group', $group)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getExpiredInvitationByEmails(array $emails): array
@@ -233,7 +240,8 @@ class UserInviteRepository extends EntityRepository
                     )
             )
                 ->setParameter(':pending', UserInviteEmailMessage::WAITING_SENDING)
-                ->setParameter(':sent', UserInviteEmailMessage::SENT);
+                ->setParameter(':sent', UserInviteEmailMessage::SENT)
+            ;
         }
 
         if (UserInviteStatus::ACCEPTED === $status) {

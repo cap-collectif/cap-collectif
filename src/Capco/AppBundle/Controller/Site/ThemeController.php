@@ -8,10 +8,10 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
@@ -85,9 +85,7 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (!$theme->canDisplay()) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('restricted-access', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('restricted-access', [], 'CapcoAppBundle'));
         }
 
         return [

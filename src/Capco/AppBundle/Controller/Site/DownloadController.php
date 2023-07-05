@@ -69,7 +69,8 @@ class DownloadController extends Controller
         if (!file_exists($filePath)) {
             $this->session
                 ->getFlashBag()
-                ->add('danger', $this->translator->trans('project.download.not_yet_generated'));
+                ->add('danger', $this->translator->trans('project.download.not_yet_generated'))
+            ;
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -89,10 +90,10 @@ class DownloadController extends Controller
     public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
     {
         if (
-            !$mediaResponse->getQuestion() ||
-            !$mediaResponse->getQuestion()->isPrivate() ||
-            $this->getUser() === $mediaResponse->getProposal()->getAuthor() ||
-            $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$mediaResponse->getQuestion()
+            || !$mediaResponse->getQuestion()->isPrivate()
+            || $this->getUser() === $mediaResponse->getProposal()->getAuthor()
+            || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
             // Depending on the file type we redirect to the file or download it
             $type = $media->getContentType();

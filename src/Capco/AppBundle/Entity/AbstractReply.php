@@ -90,8 +90,8 @@ abstract class AbstractReply implements Contribution, VoteContribution
 
     public function isViewerProjectOwner(User $viewer): bool
     {
-        return $viewer->isProjectAdmin() &&
-            $this->getQuestionnaire()
+        return $viewer->isProjectAdmin()
+            && $this->getQuestionnaire()
                 ->getStep()
                 ->getProject()
                 ->getOwner() === $viewer;

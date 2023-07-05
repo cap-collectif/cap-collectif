@@ -4,22 +4,22 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventReview;
+use Capco\AppBundle\Form\EventType;
+use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\UserBundle\Entity\User;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormFactory;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\Translator;
@@ -92,7 +92,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
         $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
@@ -150,7 +151,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
         $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
@@ -231,7 +233,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
                 ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'New body']]],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
 
@@ -264,7 +267,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $authorizationChecker
             ->isGranted(EventVoter::EDIT, $event)
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->isGranted($eventId, $viewer);
     }
 }

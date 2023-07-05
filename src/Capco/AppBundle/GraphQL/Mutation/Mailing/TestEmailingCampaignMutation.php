@@ -59,6 +59,20 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         return compact('html', 'error');
     }
 
+    public function isGranted(string $id, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+
+        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
+        if (!$emailCampaign) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::TEST, $emailCampaign);
+    }
+
     /**
      * @TODO : add user_locale to localize email
      */
@@ -86,19 +100,5 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     private function getTestEmail(Argument $input): string
     {
         return $input->offsetGet('email');
-    }
-
-    public function isGranted(string $id, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-
-        $emailCampaign = $this->findCampaignFromGlobalId($id, $viewer);
-        if (!$emailCampaign) {
-            return false;
-        }
-
-        return $this->authorizationChecker->isGranted(EmailingCampaignVoter::TEST, $emailCampaign);
     }
 }

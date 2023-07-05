@@ -43,26 +43,17 @@ class PublicApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         $providerKey
     ) {
         if (!$userProvider instanceof PublicApiKeyUserProvider) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The user provider must be an instance of PublicApiKeyUserProvider (%s was given).',
-                    \get_class($userProvider)
-                )
-            );
+            throw new \InvalidArgumentException(sprintf('The user provider must be an instance of PublicApiKeyUserProvider (%s was given).', \get_class($userProvider)));
         }
 
         $apiKey = $token->getCredentials();
         if (!$apiKey) {
-            throw new CustomUserMessageAuthenticationException(
-                sprintf('API Key "%s" does not exist.', $apiKey)
-            );
+            throw new CustomUserMessageAuthenticationException(sprintf('API Key "%s" does not exist.', $apiKey));
         }
 
         $user = $userProvider->loadUserByUsername($apiKey);
         if (!$user) {
-            throw new CustomUserMessageAuthenticationException(
-                sprintf('API Key "%s" does not exist.', $apiKey)
-            );
+            throw new CustomUserMessageAuthenticationException(sprintf('API Key "%s" does not exist.', $apiKey));
         }
 
         return new PreAuthenticatedToken($user, $apiKey, $providerKey, $user->getRoles());

@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -17,7 +18,6 @@ use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddAnonymousReplyMutation implements MutationInterface
 {
@@ -72,7 +72,8 @@ class AddAnonymousReplyMutation implements MutationInterface
             ->setIpAddress($this->requestGuesser->getClientIp())
             ->setToken($token)
             ->setParticipantEmail($participantEmail)
-            ->setPublishedAt(new \DateTime('now'));
+            ->setPublishedAt(new \DateTime('now'))
+        ;
 
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use ArrayObject;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalRepository;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserProposalsResolver implements ResolverInterface
 {
@@ -33,9 +33,9 @@ class UserProposalsResolver implements ResolverInterface
         }
 
         $aclDisabled =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
         $validViewer = $viewer instanceof UserInterface;
 
         // Sometimes we only use `totalCount` and we don't need to fetch edges.

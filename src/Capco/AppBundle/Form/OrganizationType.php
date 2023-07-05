@@ -20,7 +20,7 @@ class OrganizationType extends AbstractType
                     'body' => [
                         'purify_html' => true,
                         'purify_html_profile' => 'admin',
-                    ]
+                    ],
                 ],
             ])
             ->add('logo', EntityType::class, [
@@ -28,7 +28,8 @@ class OrganizationType extends AbstractType
             ])
             ->add('banner', EntityType::class, [
                 'class' => Media::class,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

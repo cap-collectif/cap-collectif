@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\SourceVote;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class SourceVoteRepository extends EntityRepository
 {
@@ -31,12 +31,14 @@ class SourceVoteRepository extends EntityRepository
                 })
             )
             ->andWhere('v.user = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -57,7 +59,8 @@ class SourceVoteRepository extends EntityRepository
             )
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -78,7 +81,8 @@ class SourceVoteRepository extends EntityRepository
             )
             ->andWhere('v.user = :author')
             ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -88,7 +92,8 @@ class SourceVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('v.source = :source')
             ->setParameter('source', $source)
-            ->orderBy('v.publishedAt', 'ASC');
+            ->orderBy('v.publishedAt', 'ASC')
+        ;
 
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
@@ -102,7 +107,8 @@ class SourceVoteRepository extends EntityRepository
             ->andWhere('v.source = :source')
             ->setParameter('source', $source)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getBySourceAndUser(Source $source, User $author): ?SourceVote
@@ -111,7 +117,8 @@ class SourceVoteRepository extends EntityRepository
             ->andWhere('v.source = :source')
             ->andWhere('v.user = :author')
             ->setParameter('source', $source)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }

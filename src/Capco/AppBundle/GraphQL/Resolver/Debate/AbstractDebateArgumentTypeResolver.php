@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
-use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class AbstractDebateArgumentTypeResolver implements ResolverInterface
 {

@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Doctrine\ORM\QueryBuilder;
-use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Capco\AppBundle\Entity\Questionnaire;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method Reply|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reply|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Reply find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Reply findOneBy(array $criteria, array $orderBy = null)
  * @method Reply[]    findAll()
  * @method Reply[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class ReplyRepository extends EntityRepository
@@ -33,7 +33,8 @@ class ReplyRepository extends EntityRepository
                 'SELECT COUNT(r.id) as sclr FROM reply r USE INDEX (idx_questionnaire_published) WHERE r.published = 1 AND r.is_draft = 0 AND r.questionnaire_id = :questionnaireId',
                 $rsm
             )
-            ->setParameter('questionnaireId', $questionnaire->getId());
+            ->setParameter('questionnaireId', $questionnaire->getId())
+        ;
 
         return (int) $query->getSingleScalarResult();
     }
@@ -57,7 +58,8 @@ class ReplyRepository extends EntityRepository
                     ' r.questionnaire_id = :questionnaireId',
                 $rsm
             )
-            ->setParameter('questionnaireId', $questionnaire->getId());
+            ->setParameter('questionnaireId', $questionnaire->getId())
+        ;
 
         return (int) $query->getSingleScalarResult();
     }
@@ -68,7 +70,8 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.questionnaire = :questionnaire')
             ->andWhere('reply.author = :user')
             ->setParameter('questionnaire', $questionnaire)
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -77,7 +80,8 @@ class ReplyRepository extends EntityRepository
     {
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('reply.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -92,8 +96,8 @@ class ReplyRepository extends EntityRepository
         $qb = $this->setPublicityConstraints($viewer, $qb);
 
         if (
-            null === $viewer ||
-            (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
+            null === $viewer
+            || (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
         ) {
             $qb = $qb->andWhere('reply.private = false');
         }
@@ -111,8 +115,8 @@ class ReplyRepository extends EntityRepository
         $qb = $this->setPublicityConstraints($viewer, $qb);
 
         if (
-            null === $viewer ||
-            (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
+            null === $viewer
+            || (null !== $viewer && ($viewer->getId() !== $user->getId() && !$viewer->isAdmin()))
         ) {
             $qb = $qb->andWhere('reply.private = false');
         }
@@ -151,6 +155,7 @@ class ReplyRepository extends EntityRepository
             ->andWhere('a.username LIKE :term')
             ->setParameters(['ids' => $ids, 'term' => "%{$term}%"])
         ;
+
         return $qb->getQuery()->getResult();
     }
 
@@ -179,7 +184,8 @@ class ReplyRepository extends EntityRepository
             )
             ->setParameter('questionnaire', $questionnaire)
             ->setParameter('offset', $offset)
-            ->setParameter('limit', $limit);
+            ->setParameter('limit', $limit)
+        ;
 
         $result = $nativeQuery->execute();
         $ids = array_map(function ($data) {
@@ -209,7 +215,8 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.author = :user')
             ->addOrderBy('reply.publishedAt', 'DESC')
             ->setParameter('questionnaire', $questionnaire)
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -231,7 +238,8 @@ class ReplyRepository extends EntityRepository
             ->addSelect('author')
             ->leftJoin('reply.author', 'author')
             ->andWhere('reply.questionnaire = :questionnaire')
-            ->setParameter('questionnaire', $questionnaire);
+            ->setParameter('questionnaire', $questionnaire)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -250,12 +258,14 @@ class ReplyRepository extends EntityRepository
                     return $step instanceof QuestionnaireStep;
                 })
             )
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, QuestionnaireStep $step): int
@@ -268,7 +278,8 @@ class ReplyRepository extends EntityRepository
             ->andWhere('questionnaire.step = :step')
             ->andWhere('reply.author = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -280,7 +291,8 @@ class ReplyRepository extends EntityRepository
             ->select('COUNT(reply)')
             ->leftJoin('reply.questionnaire', 'questionnaire')
             ->andWhere('questionnaire.step = :step')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -303,7 +315,8 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.published = true')
             ->andWhere('reply.author = :author')
             ->andWhere('reply.draft = false')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
     }
 
     private function setPublicityConstraints(?User $viewer, QueryBuilder $qb): QueryBuilder
@@ -326,6 +339,7 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.published = true')
             ->andWhere('reply.author = :author')
             ->andWhere('reply.draft = false')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
     }
 }

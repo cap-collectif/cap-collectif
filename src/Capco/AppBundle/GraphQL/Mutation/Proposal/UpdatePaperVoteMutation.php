@@ -58,6 +58,20 @@ class UpdatePaperVoteMutation implements MutationInterface
         return ['proposal' => $proposal];
     }
 
+    public function isGranted(string $proposalId, ?User $viewer = null): bool
+    {
+        if (!$viewer) {
+            return false;
+        }
+        $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
+
+        if ($proposal) {
+            return $this->authorizationChecker->isGranted(ProposalVoter::EDIT, $proposal);
+        }
+
+        return false;
+    }
+
     private function getOrCreatePaperVote(
         Proposal $proposal,
         AbstractStep $step
@@ -100,21 +114,7 @@ class UpdatePaperVoteMutation implements MutationInterface
             ->setProposal($proposal)
             ->setStep($step)
             ->setTotalCount(0)
-            ->setTotalPointsCount(0);
+            ->setTotalPointsCount(0)
+        ;
     }
-
-    public function isGranted(string $proposalId, ?User $viewer = null): bool
-    {
-        if (!$viewer) {
-            return false;
-        }
-        $proposal = $this->globalIdResolver->resolve($proposalId, $viewer);
-
-        if ($proposal) {
-            return $this->authorizationChecker->isGranted(ProposalVoter::EDIT, $proposal);
-        }
-
-        return false;
-    }
-
 }

@@ -44,7 +44,8 @@ class ProjectDistrictsPersister
             $positioner
                 ->setProject($project)
                 ->setDistrict($district)
-                ->setPosition(array_search($district->getId(), $districtsIds, true));
+                ->setPosition(array_search($district->getId(), $districtsIds, true))
+            ;
             $this->em->persist($positioner);
         }
     }

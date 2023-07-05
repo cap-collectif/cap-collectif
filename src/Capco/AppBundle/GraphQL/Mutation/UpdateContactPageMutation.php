@@ -6,13 +6,13 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\Twig\SiteParameterRuntime;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\AppBundle\Twig\SiteParameterRuntime;
+use Capco\MediaBundle\Repository\MediaRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Cache\CacheItemInterface;
 
@@ -139,7 +139,8 @@ class UpdateContactPageMutation implements MutationInterface
 
         $oldTranslation = $this->em
             ->getRepository(SiteParameterTranslation::class)
-            ->findOneBy(['translatable' => $parameter, 'locale' => $locale]);
+            ->findOneBy(['translatable' => $parameter, 'locale' => $locale])
+        ;
         if ($oldTranslation) {
             if ($oldTranslation->getLocale() === $locale) {
                 $oldTranslation->setValue($newTranslation);
@@ -172,7 +173,8 @@ class UpdateContactPageMutation implements MutationInterface
         $newTranslation = (new SiteParameterTranslation())
             ->setTranslatable($parameter)
             ->setLocale($locale)
-            ->setValue($newValue);
+            ->setValue($newValue)
+        ;
         $this->em->persist($newTranslation);
 
         return $newTranslation;

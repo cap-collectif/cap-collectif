@@ -7,8 +7,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method UserPhoneVerificationSms|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserPhoneVerificationSms|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|UserPhoneVerificationSms find($id, $lockMode = null, $lockVersion = null)
+ * @method null|UserPhoneVerificationSms findOneBy(array $criteria, array $orderBy = null)
  * @method UserPhoneVerificationSms[]    findAll()
  * @method UserPhoneVerificationSms[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -26,7 +26,8 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
                 'user' => $user,
                 'fromDate' => $fromDate,
                 'toDate' => $toDate,
-            ]);
+            ])
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -36,7 +37,8 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s')
             ->where('s.user = :user')
             ->orderBy('s.createdAt', 'DESC')
-            ->setParameters(['user' => $user]);
+            ->setParameters(['user' => $user])
+        ;
 
         $results = $qb->getQuery()->getResult();
 
@@ -52,6 +54,7 @@ class UserPhoneVerificationSmsRepository extends EntityRepository
             ->where('s.status = :status')
             ->setParameter('status', $status)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 }

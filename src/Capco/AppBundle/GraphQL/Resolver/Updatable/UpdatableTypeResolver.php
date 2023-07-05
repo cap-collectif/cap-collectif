@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Updatable;
 
-use GraphQL\Type\Definition\Type;
 use Capco\AppBundle\Entity\Reply;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdatableTypeResolver implements ResolverInterface
 {

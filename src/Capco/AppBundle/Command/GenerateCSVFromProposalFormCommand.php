@@ -6,6 +6,7 @@ use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Text;
@@ -13,7 +14,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Repository\ProposalFormRepository;
 
 class GenerateCSVFromProposalFormCommand extends BaseExportCommand
 {
@@ -60,7 +60,8 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
                 false,
                 InputOption::VALUE_NONE,
                 'if true, generate model for cli import'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): ?int

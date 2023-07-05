@@ -24,14 +24,14 @@ class AnalyticsTopContributors
     public function fromEs(ResultSet $set): self
     {
         $contributions = array_map(
-            static fn(array $bucket) => [
+            static fn (array $bucket) => [
                 'contributorId' => $bucket['key'],
                 'contributions' => $bucket['objectType']['buckets'],
             ],
             $set->getAggregation('author')['buckets']
         );
         $ids = array_map(
-            static fn(array $contribution) => $contribution['contributorId'],
+            static fn (array $contribution) => $contribution['contributorId'],
             $contributions
         );
         $users = $this->repository->hydrateFromIdsOrdered($ids);

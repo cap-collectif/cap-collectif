@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\Traits;
 
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Traits\ProjectVisibilityStub;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use PhpSpec\ObjectBehavior;
 
 class ProjectVisibilityStubSpec extends ObjectBehavior
 {

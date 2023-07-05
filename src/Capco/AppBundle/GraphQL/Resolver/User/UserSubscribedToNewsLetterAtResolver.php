@@ -18,7 +18,7 @@ class UserSubscribedToNewsLetterAtResolver implements ResolverInterface
 
     public function __invoke(User $user): ?\DateTime
     {
-        /** @var $newsLetter NewsletterSubscription */
+        /** @var NewsletterSubscription $newsLetter */
         $subscription = $this->newLetterRepository->findOneBy(['email' => $user->getEmail()]);
         if (!$subscription) {
             return null;

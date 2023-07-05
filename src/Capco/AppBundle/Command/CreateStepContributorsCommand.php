@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Toggle\Manager;
-use Overblog\GraphQLBundle\Request\Executor;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Symfony\Component\Console\Input\InputInterface;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateStepContributorsCommand extends BaseExportCommand
 {
@@ -78,16 +78,17 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 'query' => $this->getStepContributorsGraphQLQuery($step->getId()),
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         if (!isset($data['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $data['error']);
             $this->logger->info('GraphQL query: ' . json_encode($data));
         }
         if (
-            $isVerbose &&
-            isset($data['data']['node']['contributors']['totalCount']) &&
-            0 === $data['data']['node']['contributors']['totalCount']
+            $isVerbose
+            && isset($data['data']['node']['contributors']['totalCount'])
+            && 0 === $data['data']['node']['contributors']['totalCount']
         ) {
             $output->writeln("\t<fg=magenta>Empty export: there is no contributor.</>");
         }
@@ -177,11 +178,11 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $type = $step->getType();
             if ($isVerbose) {
                 $stepSlug = $step->getSlug();
-                $output->writeln("<fg=white>Examining step ${stepSlug} of type ${type}</>");
+                $output->writeln("<fg=white>Examining step {$stepSlug} of type {$type}</>");
             }
             if ($step->isParticipative()) {
                 $fileName = self::getFilename($step);
-                $output->writeln("\t<info>Generating ${fileName} sheet as ${type}</info>");
+                $output->writeln("\t<info>Generating {$fileName} sheet as {$type}</info>");
                 $this->generateSheet($output, $step, $fileName, $delimiter, $isVerbose);
                 $this->executeSnapshot($input, $output, $fileName);
             }
@@ -207,106 +208,106 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
-        query {
-          node(id: "${stepId}") {
-           ... on Consultation {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on ConsultationStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on CollectStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on SelectionStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on QuestionnaireStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-            ... on DebateStep {
-              contributors(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  node {
-                    ${USER_FRAGMENT}
-                  }
-                }
-                totalCount
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-          }
-        }
-EOF;
+                    query {
+                      node(id: "{$stepId}") {
+                       ... on Consultation {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on ConsultationStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on CollectStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on SelectionStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on QuestionnaireStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on DebateStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$USER_FRAGMENT}
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                      }
+                    }
+            EOF;
     }
 }

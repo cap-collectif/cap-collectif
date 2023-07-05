@@ -25,7 +25,8 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $subject, [PostVoter::CREATE])->shouldBe(VoterInterface::ACCESS_DENIED);
         $this->vote($token, $subject, [PostVoter::EDIT])->shouldBe(VoterInterface::ACCESS_DENIED);
@@ -41,15 +42,18 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject->getOwner()->willReturn(null);
         $subject->getProjects()->willReturn(new ArrayCollection());
         $subject->getAuthorsObject()->willReturn(new ArrayCollection());
@@ -70,15 +74,18 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject->getOwner()->willReturn($user);
 
         $this->vote($token, $subject, [PostVoter::CREATE])->shouldBe(
@@ -99,11 +106,13 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $subject, [PostVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -125,28 +134,34 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
 
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $subject
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
 
         $subject->getAuthorsObject()->willReturn(new ArrayCollection());
         $subject->getProjects()->willReturn(new ArrayCollection());
@@ -167,24 +182,29 @@ class PostVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
 
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
 
         $this->vote($token, $subject, [PostVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED

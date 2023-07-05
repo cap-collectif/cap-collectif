@@ -26,8 +26,7 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
             'siteUrl' => $params['siteURL'],
             'username' => $event->getAuthor()->getUsername(),
             'eventStatus' => $event->getStatus(),
-            'color' =>
-                EventReviewStatusType::APPROVED === $event->getStatus() ? '#088A20' : '#dc3445',
+            'color' => EventReviewStatusType::APPROVED === $event->getStatus() ? '#088A20' : '#dc3445',
         ];
 
         if (EventReviewStatusType::REFUSED === $event->getStatus()) {
@@ -36,8 +35,7 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
                     ->getReview()
                     ->getReviewer()
                     ->getEmail(),
-                'eventRefusedReason' =>
-                    EventReviewRefusedReasonType::$refusedReasonsLabels[
+                'eventRefusedReason' => EventReviewRefusedReasonType::$refusedReasonsLabels[
                         $event->getReview()->getRefusedReason()
                     ],
                 'eventComment' => $event->getReview()->getComment(),

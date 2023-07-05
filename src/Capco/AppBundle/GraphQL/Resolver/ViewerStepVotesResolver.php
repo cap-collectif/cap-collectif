@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 
 class ViewerStepVotesResolver implements ResolverInterface
 {

@@ -12,10 +12,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Abstract class to handle feature flag migrations :
  * * to change a flag, provide old and new flags
  * * to crate a flag, provide the new flag
- * * to remove a flag, provide the old flag
+ * * to remove a flag, provide the old flag.
  */
-abstract class AbstractFeatureFlagMigration extends AbstractMigration implements
-    ContainerAwareInterface
+abstract class AbstractFeatureFlagMigration extends AbstractMigration implements ContainerAwareInterface
 {
     protected Manager $manager;
 

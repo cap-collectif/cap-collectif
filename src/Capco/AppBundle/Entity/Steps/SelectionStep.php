@@ -14,10 +14,10 @@ use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteSmsTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
@@ -33,9 +33,9 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     use VoteTypeTrait;
 
     public const TYPE = 'selection';
-    const VOTE_TYPE_DISABLED = 0;
-    const VOTE_TYPE_SIMPLE = 1;
-    const VOTE_TYPE_BUDGET = 2;
+    public const VOTE_TYPE_DISABLED = 0;
+    public const VOTE_TYPE_SIMPLE = 1;
+    public const VOTE_TYPE_BUDGET = 2;
 
     public static $voteTypeLabels = [
         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
@@ -172,16 +172,15 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
                 ->filter(function (ProjectAbstractStep $step) {
                     return $step->getStep()->isCollectStep();
                 })
-                ->first();
+                ->first()
+            ;
 
             if ($step && $step->getStep() && $step->getStep()->getProposalForm()) {
                 return $step->getStep()->getProposalForm();
             }
         }
 
-        throw new \RuntimeException(
-            $this->getId() . ' : no proposalForm found for this selection step'
-        );
+        throw new \RuntimeException($this->getId() . ' : no proposalForm found for this selection step');
     }
 
     public function getProposalFormId()

@@ -36,11 +36,12 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'delete_empty' => function (
                     ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
-                    return null === $questionnaireAbstractQuestion ||
-                        null === $questionnaireAbstractQuestion->getQuestion() ||
-                        empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
+                    return null === $questionnaireAbstractQuestion
+                        || null === $questionnaireAbstractQuestion->getQuestion()
+                        || empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
                 },
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

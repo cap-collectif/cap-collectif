@@ -49,7 +49,8 @@ class ResponseSearch extends Search
         $query
             ->setSource(['id'])
             ->setSize(0)
-            ->setTrackTotalHits(true);
+            ->setTrackTotalHits(true)
+        ;
         $this->addObjectTypeFilter($query, $this->type);
 
         $authenticatedParticipantsAggs = new Cardinality('authenticatedParticipants');
@@ -141,7 +142,8 @@ class ResponseSearch extends Search
         $boolQuery = $this->getNoEmptyResultQueryBuilder($question, false);
         $boolQuery
             ->addFilter(new Exists('objectValue'))
-            ->addFilter(new Exists('objectValue.other'));
+            ->addFilter(new Exists('objectValue.other'))
+        ;
 
         $query = new Query($boolQuery);
         $this->setSortWithId($query, ['createdAt' => ['order' => 'desc']]);
@@ -192,7 +194,8 @@ class ResponseSearch extends Search
 
         $boolQuery
             ->addFilter(new Exists('reply'))
-            ->addMustNot(new Term(['reply.draft' => ['value' => true]]));
+            ->addMustNot(new Term(['reply.draft' => ['value' => true]]))
+        ;
 
         $query = new Query($boolQuery);
 
@@ -238,14 +241,17 @@ class ResponseSearch extends Search
                 $agg->setMinimumDocumentCount(2);
 
                 break;
+
             case $responsesCount <= 20:
                 $agg->setMinimumDocumentCount(3);
 
                 break;
+
             case $responsesCount <= 25:
                 $agg->setMinimumDocumentCount(4);
 
                 break;
+
             default:
                 $agg->setMinimumDocumentCount(5);
 
@@ -264,20 +270,22 @@ class ResponseSearch extends Search
         $boolQuery
             ->addFilter(new Exists('reply'))
             ->addMustNot(new Term(['reply.draft' => ['value' => true]]))
-            ->addFilter(new Term(['question.id' => ['value' => $question->getId()]]));
+            ->addFilter(new Term(['question.id' => ['value' => $question->getId()]]))
+        ;
 
         if (!$withNotConfirmedUser) {
             $boolQuery->addFilter(new Term(['reply.published' => ['value' => true]]));
         }
 
         if (
-            $question instanceof MultipleChoiceQuestion ||
-            ($question instanceof MultipleChoiceQuestion &&
-                AbstractQuestion::QUESTION_TYPE_SELECT === $question->getType())
+            $question instanceof MultipleChoiceQuestion
+            || ($question instanceof MultipleChoiceQuestion
+                && AbstractQuestion::QUESTION_TYPE_SELECT === $question->getType())
         ) {
             $boolQuery
                 ->addShould((new BoolQuery())->addFilter(new Exists('objectValue')))
-                ->addShould((new BoolQuery())->addFilter(new Exists('textValue')));
+                ->addShould((new BoolQuery())->addFilter(new Exists('textValue')))
+            ;
         }
 
         if ($question instanceof SimpleQuestion) {

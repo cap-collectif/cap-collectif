@@ -13,7 +13,6 @@ final class Version20211228180708 extends AbstractFeatureFlagMigration
         return 'Remove feature flag unstable__analysis';
     }
 
-
     protected function getOldFlag(): ?string
     {
         return 'unstable__analysis';

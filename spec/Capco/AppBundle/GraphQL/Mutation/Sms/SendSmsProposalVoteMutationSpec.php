@@ -7,17 +7,17 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\UserPhoneErrors;
 use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsProposalVoteMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class SendSmsProposalVoteMutationSpec extends ObjectBehavior
 {
@@ -58,38 +58,46 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $validator
             ->validate($phone, new CheckPhoneNumber())
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
         $anonymousUserProposalSmsVoteRepository
             ->findByPhoneAndCollectStepWithinOneMinuteRange($phone, $proposal, $step)
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
 
         $twilioHelper
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $em->persist(Argument::type(AnonymousUserProposalSmsVote::class));
         $em->flush();
@@ -113,35 +121,42 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $violation
             ->getMessage()
             ->shouldBeCalledOnce()
-            ->willReturn('PHONE_ALREADY_USED_BY_ANOTHER_USER');
+            ->willReturn('PHONE_ALREADY_USED_BY_ANOTHER_USER')
+        ;
 
         $violationList = new ConstraintViolationList([$violation->getWrappedObject()]);
         $validator
             ->validate($phone, Argument::type(CheckPhoneNumber::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violationList);
+            ->willReturn($violationList)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => 'PHONE_ALREADY_USED_BY_ANOTHER_USER',
@@ -162,35 +177,42 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $violation
             ->getMessage()
             ->shouldBeCalledOnce()
-            ->willReturn('INVALID_LENGTH');
+            ->willReturn('INVALID_LENGTH')
+        ;
 
         $violationList = new ConstraintViolationList([$violation->getWrappedObject()]);
         $validator
             ->validate($phone, Argument::type(CheckPhoneNumber::class))
             ->shouldBeCalledOnce()
-            ->willReturn($violationList);
+            ->willReturn($violationList)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => 'INVALID_LENGTH',
@@ -213,33 +235,40 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $validator
             ->validate($phone, new CheckPhoneNumber())
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
         $anonymousUserProposalSmsVoteRepository
             ->findByPhoneAndCollectStepWithinOneMinuteRange($phone, $proposal, $step)
             ->shouldBeCalledOnce()
-            ->willReturn([$anonymousUserProposalSmsVote1, $anonymousUserProposalSmsVote2]);
+            ->willReturn([$anonymousUserProposalSmsVote1, $anonymousUserProposalSmsVote2])
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => 'RETRY_LIMIT_REACHED',
@@ -261,38 +290,46 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $validator
             ->validate($phone, new CheckPhoneNumber())
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
         $anonymousUserProposalSmsVoteRepository
             ->findByPhoneAndCollectStepWithinOneMinuteRange($phone, $proposal, $step)
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
 
         $twilioHelper
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
-            ->willReturn(UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER);
+            ->willReturn(UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER,
@@ -314,38 +351,46 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
         $input
             ->offsetGet('stepId')
             ->shouldBeCalledOnce()
-            ->willReturn($stepId);
+            ->willReturn($stepId)
+        ;
         $input
             ->offsetGet('proposalId')
             ->shouldBeCalledOnce()
-            ->willReturn($proposalId);
+            ->willReturn($proposalId)
+        ;
 
         $globalIdResolver
             ->resolve($proposalId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($proposal);
+            ->willReturn($proposal)
+        ;
         $globalIdResolver
             ->resolve($stepId, null)
             ->shouldBeCalledOnce()
-            ->willReturn($step);
+            ->willReturn($step)
+        ;
 
         $validator
             ->validate($phone, new CheckPhoneNumber())
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
         $anonymousUserProposalSmsVoteRepository
             ->findByPhoneAndCollectStepWithinOneMinuteRange($phone, $proposal, $step)
             ->shouldBeCalledOnce()
-            ->willReturn([]);
+            ->willReturn([])
+        ;
 
         $twilioHelper
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::INVALID_NUMBER);
+            ->willReturn(TwilioHelper::INVALID_NUMBER)
+        ;
 
         $this->__invoke($input)->shouldReturn([
             'errorCode' => TwilioHelper::INVALID_NUMBER,

@@ -60,9 +60,9 @@ abstract class AbstractProposalStepMutation
         foreach ($stepsIds as $stepId) {
             $step = $this->globalIdResolver->resolve($stepId, $viewer);
             if (
-                !$step ||
-                !$step->getProject() ||
-                !$this->authorizationChecker->isGranted($accessType, $step->getProject())
+                !$step
+                || !$step->getProject()
+                || !$this->authorizationChecker->isGranted($accessType, $step->getProject())
             ) {
                 return false;
             }
@@ -168,11 +168,11 @@ abstract class AbstractProposalStepMutation
     private function addProposalIfValid(?Proposal $proposal, array &$proposals): void
     {
         if (
-            $proposal &&
-            (null === $this->project || $proposal->getProject() === $this->project) &&
-            (null === $this->step ||
-                $proposal->getStep() === $this->step ||
-                \in_array($this->step, $proposal->getSelectionSteps()))
+            $proposal
+            && (null === $this->project || $proposal->getProject() === $this->project)
+            && (null === $this->step
+                || $proposal->getStep() === $this->step
+                || \in_array($this->step, $proposal->getSelectionSteps()))
         ) {
             $proposals[$proposal->getId()] = $proposal;
             $this->project = $proposal->getProject();

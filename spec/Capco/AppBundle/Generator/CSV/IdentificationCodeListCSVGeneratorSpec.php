@@ -32,7 +32,8 @@ class IdentificationCodeListCSVGeneratorSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn(
                 new ArrayCollection([$codeA->getWrappedObject(), $codeB->getWrappedObject()])
-            );
+            )
+        ;
         $codeA
             ->toArray()
             ->willReturn([
@@ -46,7 +47,8 @@ class IdentificationCodeListCSVGeneratorSpec extends ObjectBehavior
                 'Fleur-sur-prés',
                 'France',
                 'XXXXXX',
-            ]);
+            ])
+        ;
         $codeB
             ->toArray()
             ->willReturn([
@@ -60,7 +62,8 @@ class IdentificationCodeListCSVGeneratorSpec extends ObjectBehavior
                 'Fleur-sur-prés',
                 'France',
                 'XXXXXY',
-            ]);
+            ])
+        ;
 
         $response = $this->generateFromList($list);
         $response->shouldBeAnInstanceOf(Response::class);
@@ -74,6 +77,7 @@ class IdentificationCodeListCSVGeneratorSpec extends ObjectBehavior
                     'm.;Jean;Dupuis;"12 rue des Marguerites";;;42001;Fleur-sur-prés;France;XXXXXX' .
                     "\n" .
                     'mme.;Jeanne;Dupuis;"12 rue des Marguerites";;;42001;Fleur-sur-prés;France;XXXXXY'
-            );
+            )
+        ;
     }
 }

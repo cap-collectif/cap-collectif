@@ -39,7 +39,7 @@ class ValueResponse extends AbstractResponse implements CivicIAAnalyzableInterfa
         }
 
         if (is_numeric($value)) {
-            $this->value = "${value}";
+            $this->value = "{$value}";
         }
 
         return $this;

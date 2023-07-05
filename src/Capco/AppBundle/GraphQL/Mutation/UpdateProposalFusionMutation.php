@@ -33,7 +33,7 @@ class UpdateProposalFusionMutation implements MutationInterface
 
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);
         if (!$proposal) {
-            throw new UserError("Unknown proposal to merge with id: ${proposalId}");
+            throw new UserError("Unknown proposal to merge with id: {$proposalId}");
         }
 
         $beforeChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
@@ -45,7 +45,7 @@ class UpdateProposalFusionMutation implements MutationInterface
         foreach ($proposalIds as $key => $id) {
             $child = $this->globalIdResolver->resolve($id, $user);
             if (!$child) {
-                throw new UserError("Unknown proposal to merge with globalId: ${id}");
+                throw new UserError("Unknown proposal to merge with globalId: {$id}");
             }
             if ($child->getProposalForm() !== $proposalForm) {
                 throw new UserError('All proposals to merge should have the same proposalForm.');

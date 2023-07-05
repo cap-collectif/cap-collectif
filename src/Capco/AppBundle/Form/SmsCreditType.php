@@ -17,8 +17,9 @@ class SmsCreditType extends AbstractStepFormType
         $builder
             ->add('amount', IntegerType::class)
             ->add('smsOrder', RelayNodeType::class, [
-                'class' => SmsOrder::class
-            ]);
+                'class' => SmsOrder::class,
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

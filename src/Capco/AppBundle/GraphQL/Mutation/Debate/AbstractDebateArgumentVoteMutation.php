@@ -4,14 +4,14 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractDebateArgumentVoteMutation
@@ -49,8 +49,8 @@ abstract class AbstractDebateArgumentVoteMutation
             $viewer
         );
         if (
-            !($debateArgument instanceof DebateArgumentInterface) ||
-            !$debateArgument->isPublished()
+            !($debateArgument instanceof DebateArgumentInterface)
+            || !$debateArgument->isPublished()
         ) {
             throw new UserError(self::UNKNOWN_DEBATE_ARGUMENT);
         }

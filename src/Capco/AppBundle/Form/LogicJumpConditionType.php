@@ -18,7 +18,8 @@ class LogicJumpConditionType extends AbstractType
             ->add('position')
             ->add('operator')
             ->add('question', RelayNodeType::class, ['class' => AbstractQuestion::class])
-            ->add('value');
+            ->add('value')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

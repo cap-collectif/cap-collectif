@@ -2,12 +2,12 @@
 
 namespace Capco\AdminBundle\Controller;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Notifier\ContributionNotifier;
 use Doctrine\Common\Util\ClassUtils;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Capco\AppBundle\Elasticsearch\Indexer;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ReportingController extends AbstractSonataCrudController
@@ -49,9 +49,7 @@ class ReportingController extends AbstractSonataCrudController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id : %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $related = $object->getRelatedObject();
@@ -84,9 +82,7 @@ class ReportingController extends AbstractSonataCrudController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id : %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $related = $object->getRelatedObject();
@@ -119,9 +115,7 @@ class ReportingController extends AbstractSonataCrudController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id : %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
 
         $object->setIsArchived(true);

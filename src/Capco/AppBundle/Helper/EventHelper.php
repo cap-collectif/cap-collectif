@@ -10,10 +10,10 @@ class EventHelper
 {
     public function isRegistrationPossible(Event $event): bool
     {
-        return $event->canContribute() &&
-            $event->isFuture() &&
-            $event->isGuestListEnabled() &&
-            null === $event->getLink();
+        return $event->canContribute()
+            && $event->isFuture()
+            && $event->isGuestListEnabled()
+            && null === $event->getLink();
     }
 
     public function isCompleteAndRegistrationPossibleResolver(Event $event): bool

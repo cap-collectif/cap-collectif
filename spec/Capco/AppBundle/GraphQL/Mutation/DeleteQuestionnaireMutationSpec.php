@@ -7,14 +7,14 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteQuestionnaireMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class DeleteQuestionnaireMutationSpec extends ObjectBehavior
@@ -96,7 +96,8 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
 
         $analysisConfigurationRepository
             ->findOneBy(['evaluationForm' => $questionnaire])
-            ->willReturn($analysisConfiguration);
+            ->willReturn($analysisConfiguration)
+        ;
         $analysisConfiguration->setEvaluationForm(null)->shouldBeCalled();
 
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
@@ -127,7 +128,8 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         $globalIdResolver->resolve($postId, $viewer)->willReturn($questionnaire);
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::DELETE, $questionnaire)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->isGranted($postId, $viewer);
     }
@@ -140,8 +142,7 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         Questionnaire $questionnaire,
         ProposalForm $proposalForm,
         QuestionnaireStep $questionnaireStep
-    )
-    {
+    ) {
         $id = 'abc';
         $arguments->offsetGet('id')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
@@ -155,5 +156,4 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
             'deletedQuestionnaireId' => $id,
         ]);
     }
-
 }

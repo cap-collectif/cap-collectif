@@ -29,7 +29,8 @@ trait QuestionPersisterTrait
         $questionsOrderedByBase = $form
             ->getData()
             ->getRealQuestions()
-            ->toArray();
+            ->toArray()
+        ;
 
         $questionsOrderedByIdInDb = [];
         foreach ($questionsOrderedByBase as $question) {
@@ -222,15 +223,15 @@ trait QuestionPersisterTrait
                 if (isset($question['question']['choices'])) {
                     // delete duplicate choices
                     $question['question']['choices'] = \is_array($question['question']['choices'])
-                        ? array_unique($question['question']['choices'], SORT_REGULAR)
+                        ? array_unique($question['question']['choices'], \SORT_REGULAR)
                         : $question['question']['choices'];
                     foreach ($question['question']['choices'] as &$choice) {
                         // We need to check if the choice id is null in which case we cannot retrieve from a global Id
                         // If we use a global id for the Question Entity we will need to fix this part of code
                         if (
-                            isset($choice['id']) &&
-                            '' !== $choice['id'] &&
-                            (int) $question['question']['id'] !== $choice['id']
+                            isset($choice['id'])
+                            && '' !== $choice['id']
+                            && (int) $question['question']['id'] !== $choice['id']
                         ) {
                             $choice['id'] = GlobalId::fromGlobalId($choice['id'])['id'];
                         }
@@ -250,7 +251,7 @@ trait QuestionPersisterTrait
             );
         }
 
-        /** @var $entity Questionnaire */
+        /** @var Questionnaire $entity */
         $qaq = $entity->getQuestions();
 
         // We make sure a question position by questionnaire is unique
@@ -336,10 +337,7 @@ trait QuestionPersisterTrait
                         }
                     }
                     if (!$choice) {
-                        throw new \RuntimeException(
-                            'Choice not found, this should never happen.',
-                            1
-                        );
+                        throw new \RuntimeException('Choice not found, this should never happen.', 1);
                     }
                     if (isset($choiceData['deleteMe'])) {
                         $question->removeChoice($choice);

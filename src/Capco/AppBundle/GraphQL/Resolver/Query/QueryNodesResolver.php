@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use GraphQL\Type\Definition\ResolveInfo;
 use Capco\AppBundle\GraphQL\QueryAnalyzer;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryNodesResolver implements ResolverInterface

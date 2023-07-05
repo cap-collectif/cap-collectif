@@ -18,7 +18,7 @@ final class Map
         $this->checkApiKey();
         $updatedAddress = null;
 
-        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key={$this->apiServerKey}";
+        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key={$this->apiServerKey}";
 
         $client = new Client();
         $res = $client->request('GET', $endpoint);
@@ -74,7 +74,7 @@ final class Map
         $this->checkApiKey();
         $updatedAddress = null;
 
-        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key={$this->apiServerKey}";
+        $endpoint = "https://maps.googleapis.com/maps/api/geocode/json?latlng={$lat},{$lng}&key={$this->apiServerKey}";
 
         $client = new Client();
         $res = $client->request('GET', $endpoint);
@@ -91,9 +91,7 @@ final class Map
     private function checkApiKey(): void
     {
         if (empty($this->apiServerKey) || 'INSERT_A_REAL_SECRET' === $this->apiServerKey) {
-            throw new \RuntimeException(
-                'You must provide an API key. Use `SYMFONY_GOOGLE_MAP_SERVER_KEY` with valid Google Map server API key.'
-            );
+            throw new \RuntimeException('You must provide an API key. Use `SYMFONY_GOOGLE_MAP_SERVER_KEY` with valid Google Map server API key.');
         }
     }
 }

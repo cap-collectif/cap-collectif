@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\Argumentable;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ArgumentableViewerArgumentsUnpublishedResolver implements ResolverInterface
 {

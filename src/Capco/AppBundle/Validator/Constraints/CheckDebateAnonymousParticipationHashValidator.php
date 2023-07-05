@@ -20,10 +20,7 @@ class CheckDebateAnonymousParticipationHashValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof CheckDebateAnonymousParticipationHashConstraint) {
-            throw new UnexpectedTypeException(
-                $constraint,
-                CheckDebateAnonymousParticipationHashConstraint::class
-            );
+            throw new UnexpectedTypeException($constraint, CheckDebateAnonymousParticipationHashConstraint::class);
         }
 
         if (!\is_string($value)) {

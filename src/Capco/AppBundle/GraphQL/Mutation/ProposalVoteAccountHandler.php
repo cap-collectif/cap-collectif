@@ -24,20 +24,6 @@ class ProposalVoteAccountHandler
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
-    private function getVotesFromSpecificClass(AbstractStep $step, User $user): ?Paginator
-    {
-        if ($step instanceof SelectionStep) {
-            return $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step);
-        }
-        if ($step instanceof CollectStep) {
-            return $this->proposalCollectVoteRepository->getByAuthorAndStep($user, $step);
-        }
-        $class = get_class($step);
-        throw new \RuntimeException(
-            "AbstractStep type $class not handled in getVotesFromSpecificClass"
-        );
-    }
-
     //Use this method after validation but before effective creation or deletion
     public function checkIfUserVotesAreStillAccounted(
         AbstractStep $step,
@@ -52,13 +38,27 @@ class ProposalVoteAccountHandler
             if (($min = $step->getVotesMin()) !== null) {
                 $userVotes = $this->getVotesFromSpecificClass($step, $user);
                 //-1 or +1 corresponds to the vote being removed or added
-                $isAccounted = $min <= count($userVotes) + ($isAddingVote ? 1 : -1);
+                $isAccounted = $min <= \count($userVotes) + ($isAddingVote ? 1 : -1);
                 foreach ($userVotes as $userVote) {
                     $userVote->setIsAccounted($isAccounted);
                 }
                 $vote->setIsAccounted($isAccounted);
             }
         }
+
         return $isAccounted;
+    }
+
+    private function getVotesFromSpecificClass(AbstractStep $step, User $user): ?Paginator
+    {
+        if ($step instanceof SelectionStep) {
+            return $this->proposalSelectionVoteRepository->getByAuthorAndStep($user, $step);
+        }
+        if ($step instanceof CollectStep) {
+            return $this->proposalCollectVoteRepository->getByAuthorAndStep($user, $step);
+        }
+        $class = \get_class($step);
+
+        throw new \RuntimeException("AbstractStep type {$class} not handled in getVotesFromSpecificClass");
     }
 }

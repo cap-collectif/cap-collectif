@@ -60,9 +60,7 @@ class InviteUsersMutation implements MutationInterface
 
         $hostname = getenv('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
         if ($redirectionUrl && !preg_match('/' . $hostname . '/i', $redirectionUrl)) {
-            throw new UserError(
-                'The hostname provided does not match a platform name from Cap Collectif'
-            );
+            throw new UserError('The hostname provided does not match a platform name from Cap Collectif');
         }
 
         if (null !== $message && mb_strlen($message) > 500) {
@@ -71,8 +69,8 @@ class InviteUsersMutation implements MutationInterface
 
         $isAdmin = UserRole::ROLE_ADMIN === $role;
         $isProjectAdmin =
-            $this->manager->isActive(Manager::unstable__project_admin) &&
-            UserRole::ROLE_PROJECT_ADMIN === $role;
+            $this->manager->isActive(Manager::unstable__project_admin)
+            && UserRole::ROLE_PROJECT_ADMIN === $role;
 
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
@@ -117,7 +115,7 @@ class InviteUsersMutation implements MutationInterface
                 $this->em->clear(UserInvite::class);
             }
         }
-        // to delete 
+        // to delete
 
         $this->em->flush();
         $this->em->clear(UserInvite::class);
@@ -131,7 +129,8 @@ class InviteUsersMutation implements MutationInterface
                     ->setIsProjectAdmin($isProjectAdmin)
                     ->setGroups(new ArrayCollection($groupEntities))
                     ->setMessage($message)
-                    ->setRedirectionUrl($redirectionUrl);
+                    ->setRedirectionUrl($redirectionUrl)
+                ;
             }
             $this->em->flush();
         }

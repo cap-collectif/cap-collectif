@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Processor\Proposal;
 
-use Capco\UserBundle\Repository\UserRepository;
-use Swarrot\Broker\Message;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Swarrot\Processor\ProcessorInterface;
 use Capco\AppBundle\Notifier\ProposalNotifier;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\Processor\ProcessorInterface;
 
 class ProposalDeleteProcessor implements ProcessorInterface
 {

@@ -18,12 +18,12 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="opinion_version", indexes={
@@ -306,27 +306,29 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
-        return ($this->isPublished() && $this->getParent()->canDisplay($user)) ||
-            $this->getAuthor() === $user;
+        return ($this->isPublished() && $this->getParent()->canDisplay($user))
+            || $this->getAuthor() === $user;
     }
 
     public function canContribute($user = null): bool
     {
-        return ($this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->getParent()->canContribute($user)) ||
-            ($this->getParent()->canContribute($user) && $this->getAuthor() === $user);
+        return ($this->isPublished()
+            && !$this->isTrashed()
+            && $this->getParent()->canContribute($user))
+            || ($this->getParent()->canContribute($user) && $this->getAuthor() === $user);
     }
 
     public function canBeDeleted($user = null): bool
     {
-        return ($this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->getParent()->canBeDeleted($user)) ||
-            $this->getAuthor() === $user;
+        return ($this->isPublished()
+            && !$this->isTrashed()
+            && $this->getParent()->canBeDeleted($user))
+            || $this->getAuthor() === $user;
     }
 
     public function isIndexable(): bool

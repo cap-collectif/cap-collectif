@@ -3,9 +3,9 @@
 namespace Capco\AdminBundle\Admin;
 
 use FOS\UserBundle\Model\UserManagerInterface;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 
 class UserAdmin extends CapcoAdmin
 {
@@ -60,7 +60,8 @@ class UserAdmin extends CapcoAdmin
             ])
             ->add('locked', null, ['editable' => true])
             ->add('createdAt', null, ['label' => 'global.creation'])
-            ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at']);
+            ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at'])
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -71,7 +72,8 @@ class UserAdmin extends CapcoAdmin
             ->add('email')
             ->add('confirmationToken')
             ->add('locked')
-            ->add('phone', null, ['translation_domain' => 'CapcoAppBundle']);
+            ->add('phone', null, ['translation_domain' => 'CapcoAppBundle'])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

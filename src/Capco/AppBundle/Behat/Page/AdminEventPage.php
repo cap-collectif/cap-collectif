@@ -14,9 +14,7 @@ class AdminEventPage extends Page
     public function verifyPage()
     {
         if (!$this->getSession()->wait(10000, "window.jQuery && $('#event_title').length > 0")) {
-            throw new \RuntimeException(
-                'AdminEventPage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('AdminEventPage did not fully load, check selector in "verifyPage".');
         }
     }
 }

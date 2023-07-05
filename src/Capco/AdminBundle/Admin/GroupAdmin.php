@@ -40,7 +40,8 @@ class GroupAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', 'datetime', [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter): void
@@ -54,7 +55,8 @@ class GroupAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -71,6 +73,7 @@ class GroupAdmin extends AbstractAdmin
         $form
             ->with('global.contenu')
             ->add('title', null, ['label' => 'global.title'])
-            ->end();
+            ->end()
+        ;
     }
 }

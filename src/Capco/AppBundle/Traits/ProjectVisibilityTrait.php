@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
@@ -14,11 +15,11 @@ trait ProjectVisibilityTrait
 
         /** @var User $viewer */
         if ($viewer) {
-            if (is_object($viewer) && $viewer->hasRole('ROLE_SUPER_ADMIN')) {
+            if (\is_object($viewer) && $viewer->hasRole('ROLE_SUPER_ADMIN')) {
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_CUSTOM;
-            } elseif (is_object($viewer) && $viewer->hasRole('ROLE_ADMIN')) {
+            } elseif (\is_object($viewer) && $viewer->hasRole('ROLE_ADMIN')) {
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ME;
                 $visibility[] = ProjectVisibilityMode::VISIBILITY_ADMIN;
             }

@@ -2,12 +2,12 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateViewerHasArgumentResolver;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserWarning;
+use PhpSpec\ObjectBehavior;
 
 class DebateViewerHasArgumentResolverSpec extends ObjectBehavior
 {
@@ -29,7 +29,8 @@ class DebateViewerHasArgumentResolverSpec extends ObjectBehavior
         $repository
             ->countByDebateAndUser($debate, $viewer)
             ->willReturn(1)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->__invoke($debate, $viewer)->shouldReturn(true);
     }
@@ -42,7 +43,8 @@ class DebateViewerHasArgumentResolverSpec extends ObjectBehavior
         $repository
             ->countByDebateAndUser($debate, $viewer)
             ->willReturn(0)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->__invoke($debate, $viewer)->shouldReturn(false);
     }

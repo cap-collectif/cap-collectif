@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -55,6 +55,7 @@ class UpdateSelectionStepMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 
@@ -62,22 +63,6 @@ class UpdateSelectionStepMutation implements MutationInterface
 
         return ['selectionStep' => $selectionStep];
     }
-
-    private function handleAnonParticipation(array &$data)
-    {
-        $isAnonymousParticipationAllowed = $data['isProposalSmsVoteEnabled'] ?? null;
-
-        if (!$isAnonymousParticipationAllowed) return;
-
-        $data['votesLimit'] = null;
-        $data['votesMin'] = null;
-        $data['voteThreshold'] = null;
-        $data['requirements'] = [
-            ['type' => 'PHONE'],
-            ['type' => 'PHONE_VERIFIED'],
-        ];
-    }
-
 
     public function isGranted(string $selectionStepId, ?User $viewer = null): bool
     {
@@ -100,6 +85,24 @@ class UpdateSelectionStepMutation implements MutationInterface
         if (!$selectionStep instanceof SelectionStep) {
             throw new UserError("Given selectionStep id : {$selectionStepId} is not valid");
         }
+
         return $selectionStep;
+    }
+
+    private function handleAnonParticipation(array &$data)
+    {
+        $isAnonymousParticipationAllowed = $data['isProposalSmsVoteEnabled'] ?? null;
+
+        if (!$isAnonymousParticipationAllowed) {
+            return;
+        }
+
+        $data['votesLimit'] = null;
+        $data['votesMin'] = null;
+        $data['voteThreshold'] = null;
+        $data['requirements'] = [
+            ['type' => 'PHONE'],
+            ['type' => 'PHONE_VERIFIED'],
+        ];
     }
 }

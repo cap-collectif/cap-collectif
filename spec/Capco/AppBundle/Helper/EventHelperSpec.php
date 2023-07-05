@@ -2,10 +2,10 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
-use PhpSpec\ObjectBehavior;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Event;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use PhpSpec\ObjectBehavior;
 
 class EventHelperSpec extends ObjectBehavior
 {

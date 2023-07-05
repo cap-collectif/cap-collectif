@@ -11,7 +11,8 @@ class AddSelectionStepMutation implements MutationInterface
 {
     private AddStepService $addStepService;
 
-    public function __construct(AddStepService $addStepService) {
+    public function __construct(AddStepService $addStepService)
+    {
         $this->addStepService = $addStepService;
     }
 
@@ -19,9 +20,8 @@ class AddSelectionStepMutation implements MutationInterface
     {
         $input->offsetSet('stepType', 'SELECTION');
 
-        ['step' => $step] = $this->addStepService->addStep($input, $viewer);
+        list('step' => $step) = $this->addStepService->addStep($input, $viewer);
 
         return ['step' => $step];
     }
-
 }

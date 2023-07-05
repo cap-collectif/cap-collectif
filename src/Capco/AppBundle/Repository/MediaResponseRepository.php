@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -18,7 +18,8 @@ class MediaResponseRepository extends EntityRepository
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -37,7 +38,8 @@ class MediaResponseRepository extends EntityRepository
             ->select('COUNT(r.id)')
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -58,7 +60,8 @@ class MediaResponseRepository extends EntityRepository
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -70,7 +73,8 @@ class MediaResponseRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true);
+            ->useQueryCache(true)
+        ;
 
         return new Paginator($query);
     }
@@ -84,6 +88,7 @@ class MediaResponseRepository extends EntityRepository
                 ->leftJoin('r.reply', 'reply')
                 ->andWhere('(reply.draft = false')
                 ->leftJoin('r.medias', 'media')
-                ->andWhere('media.id IS NOT NULL)');
+                ->andWhere('media.id IS NOT NULL)')
+            ;
     }
 }

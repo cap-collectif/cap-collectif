@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ProposalVotesResolver implements ResolverInterface
 {
@@ -32,11 +32,11 @@ class ProposalVotesResolver implements ResolverInterface
     ) {
         $includeNotAccounted = true === $args->offsetGet('includeNotAccounted');
         $includeUnpublished =
-            true === $args->offsetGet('includeUnpublished') ||
-            ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+            true === $args->offsetGet('includeUnpublished')
+            || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
         $includeSecretBallot =
-            true === $args->offsetGet('includeSecretBallot') ||
-            ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
+            true === $args->offsetGet('includeSecretBallot')
+            || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
         $step = null;
         if ($args->offsetExists('stepId') && $args->offsetGet('stepId')) {
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $viewer, $context);

@@ -13,13 +13,9 @@ class ElasticsearchPaginator
     /** @var ElasticsearchConnectionBuilder */
     private $elasticsearchConnectionBuilder;
 
-    /**
-     * @param callable                            $fetcher
-     * @param ElasticsearchConnectionBuilder|null $elasticsearchConnectionBuilder
-     */
     public function __construct(
         callable $fetcher,
-        ElasticsearchConnectionBuilder $elasticsearchConnectionBuilder = null
+        ?ElasticsearchConnectionBuilder $elasticsearchConnectionBuilder = null
     ) {
         $this->fetcher = $fetcher;
         $this->elasticsearchConnectionBuilder =
@@ -27,8 +23,6 @@ class ElasticsearchPaginator
     }
 
     /**
-     * @param ArgumentInterface $args
-     *
      * @return ConnectionInterface|object A connection or a promise
      */
     public function backward(ArgumentInterface $args): ConnectionInterface
@@ -86,8 +80,6 @@ class ElasticsearchPaginator
     }
 
     /**
-     * @param ArgumentInterface $args
-     *
      * @return ConnectionInterface|object A connection or a promise
      */
     public function auto(ArgumentInterface $args): ConnectionInterface
@@ -113,7 +105,6 @@ class ElasticsearchPaginator
 
     /**
      * @param array|object $entities An array of entities to paginate or a promise
-     * @param callable     $callback
      *
      * @return ConnectionInterface|object A connection or a promise
      */

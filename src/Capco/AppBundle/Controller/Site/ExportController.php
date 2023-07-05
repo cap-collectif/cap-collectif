@@ -15,6 +15,8 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -26,7 +28,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,18 +39,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ExportController extends Controller
 {
@@ -116,7 +116,8 @@ class ExportController extends Controller
                 'query' => $this->getEventContributorsGraphQLQuery($event->getId()),
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         if (!isset($data['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $data['errors']);
@@ -219,7 +220,7 @@ class ExportController extends Controller
         });
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', "attachment; filename=${fileName}");
+        $response->headers->set('Content-Disposition', "attachment; filename={$fileName}");
 
         return $response;
     }
@@ -279,6 +280,8 @@ class ExportController extends Controller
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
      * @Security("has_role('ROLE_ADMIN')")
+     *
+     * @param mixed $stepId
      */
     public function downloadStepContributorsAction(Request $request, $stepId): Response
     {
@@ -325,7 +328,7 @@ class ExportController extends Controller
 
         $proposalFormId = $step->getProposalFormId();
         $proposalForm = $step->getProposalForm();
-        /** * @var $viewer User  */
+        /** * @var User $viewer  */
         $viewer = $this->getUser();
 
         if (!$viewer) {
@@ -385,34 +388,34 @@ class ExportController extends Controller
         $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
 
         return <<<EOF
-        query {
-          node(id: "${eventId}") {
-            ... on Event {
-              participants(first: 50 ${userCursor}) {
-                edges {
-                  cursor
-                  registeredAt
-                  registeredAnonymously
-                  node {
-                    ... on User {
-                        ${USER_FRAGMENT}
+                    query {
+                      node(id: "{$eventId}") {
+                        ... on Event {
+                          participants(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              registeredAt
+                              registeredAnonymously
+                              node {
+                                ... on User {
+                                    {$USER_FRAGMENT}
+                                }
+                                ... on NotRegistered {
+                                  username
+                                  notRegisteredEmail: email
+                                }
+                              }
+                            }
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                      }
                     }
-                    ... on NotRegistered {
-                      username
-                      notRegisteredEmail: email
-                    }
-                  }
-                }
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-              }
-            }
-          }
-        }
-EOF;
+            EOF;
     }
 
     private function runCommands(array $commands, $output)

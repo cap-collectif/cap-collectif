@@ -50,7 +50,7 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements Op
             return $options;
         }
 
-        /** * @var $fcTokens CacheItem  */
+        /** * @var CacheItem $fcTokens  */
         $fcTokens = $this->redisCache->getItem(self::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId());
 
         if (!$fcTokens->isHit()) {
@@ -58,11 +58,12 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements Op
             $state = $this->generateRandomValue();
             $fcTokens
                 ->set(['nonce' => $nonce, 'state' => $state])
-                ->expiresAfter($this->redisCache::ONE_MINUTE);
+                ->expiresAfter($this->redisCache::ONE_MINUTE)
+            ;
             $this->redisCache->save($fcTokens);
         }
 
-        /** * @var $ssoConfigurationCachedItem CacheItem  */
+        /** * @var CacheItem $ssoConfigurationCachedItem  */
         $ssoConfigurationCachedItem = $this->redisCache->getItem(
             self::REDIS_CACHE_KEY . '-' . $resourceOwner->getName() . '-' . $this->session->getId()
         );
@@ -75,7 +76,8 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements Op
             if (!$newSsoConfiguration) {
                 $ssoConfigurationCachedItem
                     ->set($options)
-                    ->expiresAfter($this->redisCache::ONE_MINUTE);
+                    ->expiresAfter($this->redisCache::ONE_MINUTE)
+                ;
             } else {
                 $ssoConfigurationCachedItem
                     ->set([
@@ -86,7 +88,8 @@ class FranceConnectOptionsModifier extends AbstractOptionsModifier implements Op
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
                         'logout_url' => $newSsoConfiguration->getLogoutUrl(),
                     ])
-                    ->expiresAfter($this->redisCache::ONE_DAY);
+                    ->expiresAfter($this->redisCache::ONE_DAY)
+                ;
             }
             $this->redisCache->save($ssoConfigurationCachedItem);
         }

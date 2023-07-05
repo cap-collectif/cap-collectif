@@ -56,10 +56,10 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         ?string $theToken
     ): TokenInterface {
         if (
-            $currentToken instanceof OAuthToken &&
-            '.anon' !== $currentToken->getUser() &&
-            null === $currentToken->getResourceOwnerName() &&
-            $theToken
+            $currentToken instanceof OAuthToken
+            && '.anon' !== $currentToken->getUser()
+            && null === $currentToken->getResourceOwnerName()
+            && $theToken
         ) {
             $data = unserialize($theToken);
             $currentToken->setResourceOwnerName($data[5]);

@@ -4,17 +4,17 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Helper\RedisStorageHelper;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\ArgumentVoteRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveArgumentVoteMutation implements MutationInterface
 {
@@ -56,8 +56,8 @@ class RemoveArgumentVoteMutation implements MutationInterface
         $step = $argument->getStep();
 
         if (
-            $step &&
-            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
+            $step
+            && !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($viewer, $step)
         ) {
             throw new UserError('You dont meets all the requirements.');
         }

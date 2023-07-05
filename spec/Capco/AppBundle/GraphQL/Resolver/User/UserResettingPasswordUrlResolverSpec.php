@@ -3,8 +3,8 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\GraphQL\Resolver\User\UserResettingPasswordUrlResolver;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
 
 class UserResettingPasswordUrlResolverSpec extends ObjectBehavior
@@ -28,7 +28,8 @@ class UserResettingPasswordUrlResolverSpec extends ObjectBehavior
     ): void {
         $router
             ->generate('fos_user_resetting_reset', ['token' => self::FAKE_TOKEN], 0)
-            ->willReturn(self::FAKE_URL);
+            ->willReturn(self::FAKE_URL)
+        ;
         $user->getResetPasswordToken()->willReturn(self::FAKE_TOKEN);
 
         $this->__invoke($user)->shouldReturn(self::FAKE_URL);

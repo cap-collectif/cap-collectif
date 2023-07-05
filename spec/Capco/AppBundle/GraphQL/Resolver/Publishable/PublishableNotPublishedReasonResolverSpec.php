@@ -3,12 +3,12 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Publishable;
 
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
-use PhpSpec\ObjectBehavior;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\GraphQL\Resolver\Publishable\PublishableNotPublishedReasonResolver;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\NotPublishedReason;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\GraphQL\Resolver\Publishable\PublishableNotPublishedReasonResolver;
+use Capco\AppBundle\Model\Publishable;
+use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 
 class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
 {

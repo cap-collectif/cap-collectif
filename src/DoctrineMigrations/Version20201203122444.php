@@ -277,7 +277,7 @@ final class Version20201203122444 extends AbstractMigration implements Container
         $blogPostTranslationData = [
             'id' => $id,
             'translatable_id' => $blogPostId,
-            'slug' => "Réponse officielle ${id}",
+            'slug' => "Réponse officielle {$id}",
             'title' => 'Réponse officielle',
             'body' => $data['body'],
             'locale' => $this->em->getRepository(Locale::class)->findDefaultLocale(),

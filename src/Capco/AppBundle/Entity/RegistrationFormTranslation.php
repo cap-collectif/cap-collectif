@@ -21,8 +21,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class RegistrationFormTranslation implements Translation
 {
-    use UuidTrait;
     use TranslationTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="top_text", type="text")
@@ -42,6 +42,7 @@ class RegistrationFormTranslation implements Translation
     public function setTopText(string $topText): self
     {
         $this->topText = $topText;
+
         return $this;
     }
 
@@ -53,6 +54,7 @@ class RegistrationFormTranslation implements Translation
     public function setBottomText(string $bottomText): self
     {
         $this->bottomText = $bottomText;
+
         return $this;
     }
 

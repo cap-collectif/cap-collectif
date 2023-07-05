@@ -2,22 +2,22 @@
 
 namespace spec\Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\Search\VoteSearch;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\Search\VoteSearch;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalVotesDataLoaderSpec extends ObjectBehavior
 {
@@ -85,21 +85,23 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
         $voteSearch
             ->searchProposalVotes($keys)
             ->shouldBeCalled()
-            ->willReturn([$res1, $res2]);
+            ->willReturn([$res1, $res2])
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
                 Argument::that(function ($connections): bool {
-                    return 2 === \count($connections) &&
-                        1 === $connections[0]->totalCount &&
-                        3 === $connections[0]->totalPointsCount &&
-                        2 === $connections[1]->totalCount &&
-                        7 === $connections[1]->totalPointsCount;
+                    return 2 === \count($connections)
+                        && 1 === $connections[0]->totalCount
+                        && 3 === $connections[0]->totalPointsCount
+                        && 2 === $connections[1]->totalCount
+                        && 7 === $connections[1]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }
@@ -142,21 +144,23 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
         $voteSearch
             ->searchProposalVotes($keys)
             ->shouldBeCalled()
-            ->willReturn([$res1, $res2]);
+            ->willReturn([$res1, $res2])
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
                 Argument::that(function ($connections): bool {
-                    return 2 === \count($connections) &&
-                        1 === $connections[0]->totalCount &&
-                        3 === $connections[0]->totalPointsCount &&
-                        2 === $connections[1]->totalCount &&
-                        7 === $connections[1]->totalPointsCount;
+                    return 2 === \count($connections)
+                        && 1 === $connections[0]->totalCount
+                        && 3 === $connections[0]->totalPointsCount
+                        && 2 === $connections[1]->totalCount
+                        && 7 === $connections[1]->totalPointsCount;
                 })
             )
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }

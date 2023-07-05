@@ -7,8 +7,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method ActionToken|null find($id, $lockMode = null, $lockVersion = null)
- * @method ActionToken|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|ActionToken find($id, $lockMode = null, $lockVersion = null)
+ * @method null|ActionToken findOneBy(array $criteria, array $orderBy = null)
  * @method ActionToken[]    findAll()
  * @method ActionToken[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

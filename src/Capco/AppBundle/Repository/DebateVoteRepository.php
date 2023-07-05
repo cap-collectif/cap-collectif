@@ -14,8 +14,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
 
 /**
- * @method DebateVote|null find($id, $lockMode = null, $lockVersion = null)
- * @method DebateVote|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|DebateVote find($id, $lockMode = null, $lockVersion = null)
+ * @method null|DebateVote findOneBy(array $criteria, array $orderBy = null)
  * @method DebateVote[]    findAll()
  * @method DebateVote[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -35,7 +35,8 @@ class DebateVoteRepository extends EntityRepository
                 ->andWhere('v.debate = :debate')
                 ->andWhere('v.user = :user')
                 ->setParameter('debate', $debate)
-                ->setParameter('user', $user);
+                ->setParameter('user', $user)
+            ;
 
             return $qb->getQuery()->getOneOrNullResult();
         } catch (NonUniqueResultException $e) {
@@ -56,7 +57,8 @@ class DebateVoteRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getUnpublishedByDebateAndUserQB($debate, $user)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -96,7 +98,8 @@ class DebateVoteRepository extends EntityRepository
         $qb = $this->getPublishedByAuthorQB($author)
             ->addOrderBy('v.publishedAt', 'DESC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -122,7 +125,8 @@ class DebateVoteRepository extends EntityRepository
             ->andWhere('v.debate = :debate')
             ->andWhere('v.user = :user')
             ->setParameter('debate', $debate)
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
     }
 
     private function getByDebateAndFilters(Debate $debate, ?array $filters = []): QueryBuilder
@@ -147,7 +151,8 @@ class DebateVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.debate = :debate')
-            ->setParameter('debate', $debate);
+            ->setParameter('debate', $debate)
+        ;
     }
 
     private function getPublishedByAuthorQB(User $author): QueryBuilder
@@ -155,6 +160,7 @@ class DebateVoteRepository extends EntityRepository
         return $this->createQueryBuilder('v')
             ->andWhere('v.user = :author')
             ->andWhere('v.published = true')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
     }
 }

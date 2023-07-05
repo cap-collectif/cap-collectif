@@ -26,7 +26,7 @@ class ElasticsearchConnectionBuilder
      */
     protected $edgeCallback;
 
-    public function __construct(callable $connectionCallback = null, callable $edgeCallback = null)
+    public function __construct(?callable $connectionCallback = null, ?callable $edgeCallback = null)
     {
         $this->connectionCallback = $connectionCallback;
         $this->edgeCallback = $edgeCallback;
@@ -37,10 +37,7 @@ class ElasticsearchConnectionBuilder
      * a connection object for use in GraphQL. It uses array offsets as pagination,
      * so pagination will only work if the array is static.
      *
-     * @param array                   $data
-     * @param array|ArgumentInterface $args
-     *
-     * @return ConnectionInterface
+     * @param ArgumentInterface|array $args
      */
     public function connectionFromArray(array $data, $args = []): ConnectionInterface
     {
@@ -59,11 +56,7 @@ class ElasticsearchConnectionBuilder
      * to materialize the entire array, and instead wish pass in a slice of the
      * total result large enough to cover the range specified in `args`.
      *
-     * @param array                   $arraySlice
-     * @param array|ArgumentInterface $args
-     * @param array                   $meta
-     *
-     * @return ConnectionInterface
+     * @param ArgumentInterface|array $args
      */
     public function connectionFromArraySlice(
         array $arraySlice,
@@ -95,18 +88,14 @@ class ElasticsearchConnectionBuilder
 
         if (is_numeric($first)) {
             if ($first < 0) {
-                throw new \InvalidArgumentException(
-                    'Argument "first" must be a non-negative integer'
-                );
+                throw new \InvalidArgumentException('Argument "first" must be a non-negative integer');
             }
             $endOffset = min($endOffset, $startOffset + $first);
         }
 
         if (is_numeric($last)) {
             if ($last < 0) {
-                throw new \InvalidArgumentException(
-                    'Argument "last" must be a non-negative integer'
-                );
+                throw new \InvalidArgumentException('Argument "last" must be a non-negative integer');
             }
 
             $startOffset = max($startOffset, $endOffset - $last);
@@ -141,11 +130,7 @@ class ElasticsearchConnectionBuilder
             if ($this->edgeCallback) {
                 $edge = ($this->edgeCallback)($cursor, $value, $index);
                 if (!($edge instanceof EdgeInterface)) {
-                    throw new \InvalidArgumentException(
-                        sprintf(
-                            'The $edgeCallback of the ConnectionBuilder must return an instance of EdgeInterface'
-                        )
-                    );
+                    throw new \InvalidArgumentException('The $edgeCallback of the ConnectionBuilder must return an instance of EdgeInterface');
                 }
             } else {
                 $edge = new Edge($cursor, $value);
@@ -161,11 +146,7 @@ class ElasticsearchConnectionBuilder
         if ($this->connectionCallback) {
             $connection = ($this->connectionCallback)($edges, $pageInfo);
             if (!($connection instanceof ConnectionInterface)) {
-                throw new \InvalidArgumentException(
-                    sprintf(
-                        'The $connectionCallback of the ConnectionBuilder must return an instance of ConnectionInterface'
-                    )
-                );
+                throw new \InvalidArgumentException('The $connectionCallback of the ConnectionBuilder must return an instance of ConnectionInterface');
             }
 
             return $connection;

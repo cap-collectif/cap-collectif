@@ -22,7 +22,8 @@ trait ReportingStepsTrait
         $this->getSession()
             ->getPage()
             ->find('css', '#report-button-submit')
-            ->click();
+            ->click()
+        ;
         $this->iWait(2);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace spec\Matcher;
 
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\Matcher\Matcher;
 use PhpSpec\Wrapper\DelayedCall;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class BeAConnectionMatcher implements Matcher
 {
@@ -17,9 +17,7 @@ class BeAConnectionMatcher implements Matcher
     public function positiveMatch(string $name, $subject, array $arguments): ?DelayedCall
     {
         if (!$subject instanceof Connection) {
-            throw new FailureException(
-                sprintf('the return value "%s" should be a Connection.', $subject)
-            );
+            throw new FailureException(sprintf('the return value "%s" should be a Connection.', $subject));
         }
 
         return null;
@@ -28,9 +26,7 @@ class BeAConnectionMatcher implements Matcher
     public function negativeMatch(string $name, $subject, array $arguments): ?DelayedCall
     {
         if ($subject instanceof Connection) {
-            throw new FailureException(
-                sprintf('the return value "%s" should not be a Connection.', $subject)
-            );
+            throw new FailureException(sprintf('the return value "%s" should not be a Connection.', $subject));
         }
 
         return null;

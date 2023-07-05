@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Project;
-use GraphQL\Executor\Promise\Promise;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
+use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectProposalsResolver implements ResolverInterface
 {

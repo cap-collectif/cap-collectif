@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
 {
@@ -39,7 +39,7 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($eventId, $viewer);
         if (!$event) {
-            throw new BadRequestHttpException("Not valid event id ${eventId}");
+            throw new BadRequestHttpException("Not valid event id {$eventId}");
         }
         $email = $input->offsetGet('email');
         $username = $input->offsetGet('username');
@@ -60,7 +60,8 @@ class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
             ->setPrivate($isPrivate)
             ->setIpAddress($this->requestGuesser->getClientIp())
             ->setEmail($email)
-            ->setConfirmed(true);
+            ->setConfirmed(true)
+        ;
 
         $this->entityManager->persist($eventRegistration);
         $this->entityManager->flush();

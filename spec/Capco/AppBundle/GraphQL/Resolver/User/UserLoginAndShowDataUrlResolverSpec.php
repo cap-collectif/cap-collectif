@@ -4,8 +4,8 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\User\UserLoginAndShowDataUrlResolver;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
 
 class UserLoginAndShowDataUrlResolverSpec extends ObjectBehavior
@@ -30,7 +30,8 @@ class UserLoginAndShowDataUrlResolverSpec extends ObjectBehavior
     ): void {
         $router
             ->generate('capco_profile_data_login', ['token' => self::FAKE_TOKEN], 0)
-            ->willReturn(self::FAKE_URL);
+            ->willReturn(self::FAKE_URL)
+        ;
         $user->getNotificationsConfiguration()->willReturn($userNotificationsConfiguration);
         $userNotificationsConfiguration->getUnsubscribeToken()->willReturn(self::FAKE_TOKEN);
 

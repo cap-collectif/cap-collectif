@@ -16,9 +16,8 @@ class NamespaceResolver
         $namespaceLine = array_shift($array);
         $match = [];
         preg_match('/^namespace (.*);$/', $namespaceLine, $match);
-        $fullNamespace = array_pop($match);
 
-        return $fullNamespace;
+        return array_pop($match);
     }
 
     private static function getClassname(string $filename): string
@@ -26,8 +25,7 @@ class NamespaceResolver
         $directoriesAndFilename = explode('/', $filename);
         $filename = array_pop($directoriesAndFilename);
         $nameAndExtension = explode('.', $filename);
-        $className = array_shift($nameAndExtension);
 
-        return $className;
+        return array_shift($nameAndExtension);
     }
 }

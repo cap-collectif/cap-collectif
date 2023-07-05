@@ -15,7 +15,8 @@ class UserArchiveRepository extends EntityRepository
             ->addOrderBy('ua.requestedAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function getArchivesToDelete(\DateTime $date): array
@@ -26,6 +27,7 @@ class UserArchiveRepository extends EntityRepository
             ->andWhere('ua.deletedAt IS NULL')
             ->setParameter('date', $date)
             ->getQuery()
-            ->execute();
+            ->execute()
+        ;
     }
 }

@@ -6,19 +6,10 @@ use Symfony\Component\Finder\SplFileInfo as BaseSplFileInfo;
 
 class SplFileInfo
 {
-    /**
-     * @var BaseSplFileInfo
-     */
     public BaseSplFileInfo $file;
 
     /**
      * Builds a file.
-     *
-     * @param string $fileName
-     * @param string $relativePath
-     * @param string $relativePathname
-     *
-     * @return self
      */
     public function buildFile(string $fileName, string $relativePath = '', string $relativePathname = ''): self
     {
@@ -29,8 +20,6 @@ class SplFileInfo
 
     /**
      * Gets the file contents.
-     *
-     * @return string
      */
     public function getContents(): string
     {

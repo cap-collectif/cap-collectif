@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Sentry;
 
-use Sentry\State\Hub;
 use Sentry\ClientBuilder;
-use Sentry\State\HubInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Sentry\Integration\RequestIntegration;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sentry\State\Hub;
+use Sentry\State\HubInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SentryFactory
 {
@@ -25,13 +25,13 @@ class SentryFactory
             'dsn' => $dsn,
             'environment' => $environment, // I.e.: staging, testing, production, etc.
             'project_root' => $projectRoot,
-            'in_app_exclude' => [$cacheDir, "${projectRoot}/vendor"],
+            'in_app_exclude' => [$cacheDir, "{$projectRoot}/vendor"],
             'prefixes' => [$projectRoot],
             'release' => $release,
             'default_integrations' => true,
             'capture_silenced_errors' => false,
             'enable_compression' => true,
-            'error_types' => E_ALL & ~E_NOTICE & ~E_DEPRECATED,
+            'error_types' => \E_ALL & ~\E_NOTICE & ~\E_DEPRECATED,
             'excluded_exceptions' => [
                 AccessDeniedException::class,
                 NotFoundHttpException::class,

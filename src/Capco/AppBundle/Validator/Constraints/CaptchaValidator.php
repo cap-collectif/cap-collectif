@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Security\CaptchaChecker;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class CaptchaValidator extends ConstraintValidator
 {
@@ -15,7 +15,6 @@ class CaptchaValidator extends ConstraintValidator
     protected CaptchaChecker $captchaChecker;
     // used to disable in functional testing
     protected bool $enabled;
-
 
     public function __construct(
         RequestGuesser $requestGuesser,

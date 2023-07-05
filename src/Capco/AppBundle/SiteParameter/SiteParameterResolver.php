@@ -43,7 +43,8 @@ class SiteParameterResolver
         if (!$this->parameters) {
             $this->parameters = $this->entityManager
                 ->getRepository(SiteParameter::class)
-                ->getValuesIfEnabled($locale);
+                ->getValuesIfEnabled($locale)
+            ;
         }
 
         if (!isset($this->parameters[$key])) {
@@ -75,6 +76,7 @@ class SiteParameterResolver
         return $this->entityManager
             ->getRepository(Locale::class)
             ->findDefaultLocale()
-            ->getCode();
+            ->getCode()
+        ;
     }
 }

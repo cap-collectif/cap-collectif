@@ -25,6 +25,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'occitanie':
             case 'occitanie-dedicated':
                 return true;
+
             default:
                 return false;
         }
@@ -37,6 +38,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'pe':
             case 'parlons-energies':
                 return true;
+
             default:
                 return false;
         }
@@ -48,9 +50,11 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         switch ($this->getInstanceName()) {
             case 'carpentras':
                 return 'openid email family_name given_name';
+
             case 'pe':
             case 'parlons-energies':
                 return 'openid email givenName';
+
             default:
                 return 'openid email profile';
         }
@@ -66,15 +70,15 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
         $content = JWT::getPayloadFromJWT($accessToken['access_token']);
 
-        if (is_null($content) && $this->options['use_bearer_authorization']) {
+        if (null === $content && $this->options['use_bearer_authorization']) {
             $content = $this->httpRequest(
                 $this->normalizeUrl($this->options['infos_url'], $extraParameters),
                 null,
-                ['Authorization' => 'Bearer '.$accessToken['access_token']]
+                ['Authorization' => 'Bearer ' . $accessToken['access_token']]
             );
         }
 
-        if (is_null($content)) {
+        if (null === $content) {
             $content = $this->doGetUserInformationRequest(
                 $this->normalizeUrl(
                     $this->options['infos_url'],
@@ -101,6 +105,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
                 ]);
 
                 break;
+
             default:
                 break;
         }
@@ -123,9 +128,11 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
                         'csrf' => true,
                         'scope' => $scope,
                     ])
-                    ->setRequired('logout_url');
+                    ->setRequired('logout_url')
+                ;
 
                 break;
+
             case 'pe':
             case 'parlons-energies':
                 $resolver
@@ -135,15 +142,18 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
                         'csrf' => true,
                         'nonce' => $this->generateNonce(),
                     ])
-                    ->setRequired('logout_url');
+                    ->setRequired('logout_url')
+                ;
 
                 break;
+
             default:
                 $resolver
                     ->setDefaults([
                         'scope' => $scope,
                     ])
-                    ->setRequired('logout_url');
+                    ->setRequired('logout_url')
+                ;
 
                 break;
         }

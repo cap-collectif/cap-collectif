@@ -45,7 +45,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
         if (!$group instanceof Group) {
             $error = sprintf(
                 '%s addUsersToGroupFromEmail: Cannot find the group "%g"',
-                \get_class($this),
+                static::class,
                 $groupId
             );
             $this->logger->error($error);
@@ -91,7 +91,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
             ];
         } catch (\Exception $e) {
             $this->logger->error(
-                \get_class($this) .
+                static::class .
                     ' addUsersToGroupFromEmail: ' .
                     sprintf('Cannot add users in group with id "%g"', $groupId)
             );

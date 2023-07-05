@@ -34,7 +34,7 @@ trait AdminProposalTrait
             5000,
             "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0"
         );
-        $page->clickOnTab("proposal ${tab}");
+        $page->clickOnTab("proposal {$tab}");
         // Wait delay of tab being shown
         $this->iWait(1);
     }
@@ -87,26 +87,32 @@ trait AdminProposalTrait
         $this->iWait(2);
         $this->getCurrentPage()
             ->find('css', '#evaluers .react-select__input input')
-            ->setValue($analyst1);
+            ->setValue($analyst1)
+        ;
         $this->iWait(3);
         $this->getCurrentPage()
             ->find('css', '#evaluers')
-            ->click();
+            ->click()
+        ;
         $this->getCurrentPage()
             ->find('css', '#evaluers .react-select__option:first-child')
-            ->click();
+            ->click()
+        ;
         $this->iWait(3);
         $this->getCurrentPage()
             ->find('css', '#evaluers .react-select__input input')
-            ->setValue($analyst2);
+            ->setValue($analyst2)
+        ;
         $this->iWait(2);
         $this->getCurrentPage()
             ->find('css', '#evaluers')
-            ->click();
+            ->click()
+        ;
         $this->iWait(2);
         $this->getCurrentPage()
             ->find('css', '#evaluers .react-select__option:first-child')
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -152,7 +158,8 @@ trait AdminProposalTrait
             '"]+span';
         $this->getCurrentPage()
             ->find('css', $element)
-            ->click();
+            ->click()
+        ;
         $this->iWait(1);
     }
 
@@ -165,7 +172,8 @@ trait AdminProposalTrait
             '#proposal-admin-page-tabs-pane-6 button[type="submit"][class="btn btn-primary"]';
         $this->getCurrentPage()
             ->find('css', $element)
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -176,7 +184,8 @@ trait AdminProposalTrait
         $element = '#proposal-admin-page-tabs-pane-6 button[type="button"][class="btn btn-danger"]';
         $this->getCurrentPage()
             ->find('css', $element)
-            ->click();
+            ->click()
+        ;
     }
 
     /**
@@ -187,7 +196,8 @@ trait AdminProposalTrait
         $this->getSession()
             ->getDriver()
             ->getWebDriverSession()
-            ->accept_alert();
+            ->accept_alert()
+        ;
     }
 
     /**

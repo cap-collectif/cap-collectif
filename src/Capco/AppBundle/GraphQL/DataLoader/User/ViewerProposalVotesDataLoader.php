@@ -2,30 +2,30 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\User;
 
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
-use DeepCopy\DeepCopy;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
+use Capco\UserBundle\Entity\User;
+use DeepCopy\DeepCopy;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
@@ -128,7 +128,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 return $this->proposalCollectVoteRepository
                     ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $totalCount = $this->proposalCollectVoteRepository->countByAuthorAndStep($user, $step);
         } elseif ($step instanceof SelectionStep) {
@@ -141,7 +142,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 return $this->proposalSelectionVoteRepository
                     ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $totalCount = $this->proposalSelectionVoteRepository->countByAuthorAndStep(
                 $user,
@@ -172,11 +174,11 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 $direction,
                 $token
             ) {
-
                 return $this->proposalCollectSmsVoteRepository
                     ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $totalCount = $this->proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token);
         } elseif ($step instanceof SelectionStep) {
@@ -189,7 +191,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 return $this->proposalSelectionSmsVoteRepository
                     ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
             $totalCount = $this->proposalSelectionSmsVoteRepository->countByTokenAndStep(
                 $step,
@@ -198,9 +201,8 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         } else {
             throw new \RuntimeException('Expected a proposal step got :' . \get_class($step));
         }
-        $connection = $paginator->auto($args, $totalCount);
 
-        return $connection;
+        return $paginator->auto($args, $totalCount);
     }
 
     protected function normalizeValue($value)
@@ -245,7 +247,9 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
     private function resolve(?User $user, Argument $args): ConnectionInterface
     {
         try {
-            if (!$user && !$args->offsetGet('token')) return ConnectionBuilder::empty();
+            if (!$user && !$args->offsetGet('token')) {
+                return ConnectionBuilder::empty();
+            }
 
             $step = $this->globalIdResolver->resolve($args->offsetGet('stepId'), $user);
 

@@ -77,7 +77,8 @@ class MandrillClientSpec extends ObjectBehavior
                 ],
                 'body' => json_encode(['key' => 'key']),
             ])
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $senderEmailDomains = $this->getSenderEmailDomains();
 
@@ -128,7 +129,8 @@ class MandrillClientSpec extends ObjectBehavior
                     ])
                 )
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $domain = new SenderEmailDomain();
         $domain->setValue('cap-collectif.com');

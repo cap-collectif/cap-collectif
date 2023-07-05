@@ -28,7 +28,8 @@ class UserEventCommentsCountResolver implements ResolverInterface
         if (!$eventCommentsCountCachedItem->isHit()) {
             $eventCommentsCountCachedItem
                 ->set($this->commentRepository->getEventCommentsCount($viewer))
-                ->expiresAfter($this->redisCache::ONE_MINUTE);
+                ->expiresAfter($this->redisCache::ONE_MINUTE)
+            ;
         }
 
         return $eventCommentsCountCachedItem->get();

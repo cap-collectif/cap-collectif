@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -90,7 +90,8 @@ class Version20151125103922 extends AbstractMigration implements ContainerAwareI
                 $em = $this->container->get('doctrine.orm.entity_manager');
                 $opinionTypes = $em
                     ->getRepository('CapcoAppBundle:OpinionType')
-                    ->findBy(['slug' => $ots['slug']]);
+                    ->findBy(['slug' => $ots['slug']])
+                ;
                 foreach ($opinionTypes as $ot) {
                     $ot->setSlug(null);
                 }

@@ -8,7 +8,7 @@
 
 namespace Capco\AppBundle\Processor<?php if (
     isset($command_entity_name)
-): ?>\<?php echo $command_entity_name;endif; ?>;
+) { ?>\<?php echo $command_entity_name; } ?>;
 
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;

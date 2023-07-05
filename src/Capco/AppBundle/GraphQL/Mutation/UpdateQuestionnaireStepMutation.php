@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Form\Step\QuestionnaireStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -55,6 +55,7 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . $form->getErrors(true, false));
+
             throw GraphQLException::fromFormErrors($form);
         }
 
@@ -62,19 +63,6 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
 
         return ['questionnaireStep' => $questionnaireStep];
     }
-
-    private function handleAnonParticipation(array &$data)
-    {
-        $isAnonymousParticipationAllowed = $data['isAnonymousParticipationAllowed'] ?? null;
-
-        if ($isAnonymousParticipationAllowed) {
-            $data['requirements'] = [];
-            return;
-        }
-
-        $data['collectParticipantsEmail'] = false;
-    }
-
 
     public function isGranted(string $questionnaireStepId, ?User $viewer = null): bool
     {
@@ -97,8 +85,20 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         if (!$questionnaireStep instanceof QuestionnaireStep) {
             throw new UserError("Given questionnaireStep id : {$questionnaireStepId} is not valid");
         }
+
         return $questionnaireStep;
     }
 
+    private function handleAnonParticipation(array &$data)
+    {
+        $isAnonymousParticipationAllowed = $data['isAnonymousParticipationAllowed'] ?? null;
 
+        if ($isAnonymousParticipationAllowed) {
+            $data['requirements'] = [];
+
+            return;
+        }
+
+        $data['collectParticipantsEmail'] = false;
+    }
 }

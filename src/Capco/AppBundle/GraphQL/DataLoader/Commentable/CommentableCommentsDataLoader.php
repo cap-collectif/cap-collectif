@@ -2,30 +2,30 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Commentable;
 
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Proposal;
-use Doctrine\Common\Proxy\Proxy;
-use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Entity\EventComment;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Model\CommentableInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Capco\AppBundle\Repository\PostCommentRepository;
-use Capco\AppBundle\Repository\EventCommentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\DataLoaderUtils;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\GraphQL\DataLoader\EntityRepositoryLinker;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Repository\EventCommentRepository;
+use Capco\AppBundle\Repository\PostCommentRepository;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Proxy\Proxy;
+use Doctrine\ORM\EntityRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class CommentableCommentsDataLoader extends BatchDataLoader
 {
@@ -112,12 +112,14 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
             $totalCounts[$type] = $entityLinker
                 ->getRepository()
-                ->countByCommentableIdsComments($type, $batchCommentableIds, $viewer);
+                ->countByCommentableIdsComments($type, $batchCommentableIds, $viewer)
+            ;
             $totalCountWithAnswersArray[
                 $type
             ] = $entityLinker
                 ->getRepository()
-                ->countCommentsAndAnswersByCommentableIds($type, $batchCommentableIds, $viewer);
+                ->countCommentsAndAnswersByCommentableIds($type, $batchCommentableIds, $viewer)
+            ;
             $commentables[$type] = $entityLinker
                 ->getRepository()
                 ->getByCommentableIds(
@@ -128,7 +130,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
                     $field,
                     $direction,
                     $viewer
-                );
+                )
+            ;
         }
 
         //We loop over $keys as we want to keep the same order for the answer as the user requested
@@ -221,7 +224,8 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             return $repository
                 ->getByCommentable($commentable, $offset, $limit, $field, $direction, $viewer)
                 ->getIterator()
-                ->getArrayCopy();
+                ->getArrayCopy()
+            ;
         });
 
         $totalCount = $repository->countCommentsByCommentable($commentable, $viewer);
@@ -257,16 +261,22 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         switch ($type) {
             case Proposal::class:
                 return $commentable->getProposal()->getId();
+
             case ProposalComment::class:
                 return $commentable->getParent()->getId();
+
             case Event::class:
                 return $commentable->getEvent()->getId();
+
             case EventComment::class:
                 return $commentable->getParent()->getId();
+
             case Post::class:
                 return $commentable->getPost()->getId();
+
             case PostComment::class:
                 return $commentable->getParent()->getId();
+
             default:
                 return null;
         }
@@ -278,12 +288,15 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             case Proposal::class:
             case ProposalComment::class:
                 return $this->proposalCommentRepository;
+
             case Event::class:
             case EventComment::class:
                 return $this->eventCommentRepository;
+
             case Post::class:
             case PostComment::class:
                 return $this->postCommentRepository;
+
             default:
                 return null;
         }
@@ -295,12 +308,15 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             case $commentable instanceof Proposal:
             case $commentable instanceof ProposalComment:
                 return $this->proposalCommentRepository;
+
             case $commentable instanceof Event:
             case $commentable instanceof EventComment:
                 return $this->eventCommentRepository;
+
             case $commentable instanceof Post:
             case $commentable instanceof PostComment:
                 return $this->postCommentRepository;
+
             default:
                 return null;
         }

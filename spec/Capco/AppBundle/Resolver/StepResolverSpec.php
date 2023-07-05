@@ -7,12 +7,12 @@ use PhpSpec\ObjectBehavior;
 
 class StepResolverSpec extends ObjectBehavior
 {
-    function let(UrlResolver $urlResolver)
+    public function let(UrlResolver $urlResolver)
     {
         $this->beConstructedWith($urlResolver);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Resolver\StepResolver');
     }

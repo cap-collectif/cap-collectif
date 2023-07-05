@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,8 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProposalCategory
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})

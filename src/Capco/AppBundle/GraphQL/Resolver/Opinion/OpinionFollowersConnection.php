@@ -41,7 +41,8 @@ class OpinionFollowersConnection implements ResolverInterface
                 $followers = $this->userRepository
                     ->getByCriteriaOrdered($criteria, $orderBy, $limit, $offset)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

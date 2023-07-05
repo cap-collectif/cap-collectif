@@ -29,11 +29,13 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
 
         $router
             ->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $resourceOwner
             ->getOption('logout_url')
-            ->willReturn('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout');
+            ->willReturn('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout')
+        ;
 
         $parameters = [
             'post_logout_redirect_uri' => 'https://capco.dev',
@@ -53,7 +55,8 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
             ->setTargetUrl(
                 'https://fcp.integ01.dev-franceconnect.fr/api/v1/logout?' .
                     http_build_query($parameters, '', '&')
-            );
+            )
+        ;
 
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $expectedRedirectResponseWithRequest
@@ -75,11 +78,13 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
 
         $router
             ->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
-            ->willReturn('https://capco.dev');
+            ->willReturn('https://capco.dev')
+        ;
 
         $resourceOwner
             ->getOption('logout_url')
-            ->willReturn('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout');
+            ->willReturn('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout')
+        ;
 
         $request = new Request();
 

@@ -31,11 +31,13 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
         $subject
             ->isEnabledOrApproved()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->vote($token, $subject, [EventVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -62,7 +64,8 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
         $subject->isEnabledOrApproved()->willReturn(true);
 
         $this->vote($token, $subject, [EventVoter::VIEW_FRONT])->shouldBe(
@@ -89,19 +92,23 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $subject->isEnabledOrApproved()->willReturn(false);
 
         $this->vote($token, $subject, [EventVoter::VIEW_FRONT])->shouldBe(
@@ -127,19 +134,23 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $subject->isEnabledOrApproved()->willReturn(false);
 
         $this->vote($token, $subject, [EventVoter::VIEW_FRONT])->shouldBe(
@@ -166,15 +177,18 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $subject
             ->isEnabledOrApproved()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->vote($token, $subject, [EventVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -203,23 +217,28 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection());
+            ->willReturn(new ArrayCollection())
+        ;
         $manager
             ->isActive('allow_users_to_propose_events')
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $subject, [EventVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -235,23 +254,28 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection());
+            ->willReturn(new ArrayCollection())
+        ;
         $manager
             ->isActive('allow_users_to_propose_events')
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->vote($token, $subject, [EventVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -267,19 +291,23 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject
             ->isEnabledOrApproved()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject->getOwner()->willReturn($user);
 
         $this->vote($token, $subject, [EventVoter::VIEW_FRONT])->shouldBe(
@@ -307,39 +335,48 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection([$memberShip]));
+            ->willReturn(new ArrayCollection([$memberShip]))
+        ;
         $subject
             ->isEnabledOrApproved()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $subject
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $organization
             ->getMembership($viewer)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
 
         $this->vote($token, $subject, [EventVoter::CREATE])->shouldReturn(
             VoterInterface::ACCESS_GRANTED
@@ -371,31 +408,38 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $subject
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $organization
             ->getMembership($viewer)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
 
         $this->vote($token, $subject, [EventVoter::VIEW_ADMIN])->shouldReturn(
             VoterInterface::ACCESS_DENIED
@@ -415,27 +459,33 @@ class EventVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $subject
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $organization
             ->getMembership($viewer)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
 
         $this->vote($token, $subject, [EventVoter::VIEW_ADMIN])->shouldReturn(
             VoterInterface::ACCESS_DENIED

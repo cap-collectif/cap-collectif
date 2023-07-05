@@ -2,15 +2,15 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ReplyAdmin extends AbstractAdmin
 {
@@ -51,7 +51,8 @@ class ReplyAdmin extends AbstractAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -79,7 +80,8 @@ class ReplyAdmin extends AbstractAdmin
                 'label' => 'global.participative.project.label',
             ])
             ->add('draft', null, ['label' => 'proposal.state.draft'])
-            ->add('published', null, ['label' => 'global.published']);
+            ->add('published', null, ['label' => 'global.published'])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -101,7 +103,8 @@ class ReplyAdmin extends AbstractAdmin
                 'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -121,7 +124,8 @@ class ReplyAdmin extends AbstractAdmin
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
                 'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

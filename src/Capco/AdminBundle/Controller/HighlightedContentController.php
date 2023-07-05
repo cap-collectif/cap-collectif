@@ -16,7 +16,8 @@ class HighlightedContentController extends PositionableController
         $this->resolver = $resolver;
     }
 
-    protected function move($object, $relativePosition, $resolver = null) {
+    protected function move($object, $relativePosition, $resolver = null)
+    {
         parent::move($object, $relativePosition, $this->resolver);
     }
 }

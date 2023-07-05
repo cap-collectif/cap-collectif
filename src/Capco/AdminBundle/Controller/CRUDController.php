@@ -24,9 +24,7 @@ class CRUDController extends AbstractSonataCrudController
         $existingObject = $this->admin->getObject($id);
 
         if (!$existingObject) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
         }
 
         $this->checkParentChildAssociation($request, $existingObject);
@@ -41,7 +39,7 @@ class CRUDController extends AbstractSonataCrudController
         $this->admin->setSubject($existingObject);
         $objectId = $this->admin->getNormalizedIdentifier($existingObject);
 
-        /** @var $form Form */
+        /** @var Form $form */
         $form = $this->admin->getForm();
         $form->setData($existingObject);
         $form->handleRequest($request);
@@ -51,8 +49,8 @@ class CRUDController extends AbstractSonataCrudController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 $submittedObject = $form->getData();
                 if ($form->has('districts')) {
@@ -73,7 +71,8 @@ class CRUDController extends AbstractSonataCrudController
                             $positioner
                                 ->setDistrict($district)
                                 ->setProject($existingObject)
-                                ->setPosition($position++);
+                                ->setPosition($position++)
+                            ;
 
                             $positioners[] = $positioner;
                         }
@@ -128,8 +127,7 @@ class CRUDController extends AbstractSonataCrudController
                                 'name' => $this->escapeHtml(
                                     $this->admin->toString($existingObject)
                                 ),
-                                'link_start' =>
-                                    '<a href="' .
+                                'link_start' => '<a href="' .
                                     $this->admin->generateObjectUrl('edit', $existingObject) .
                                     '">',
                                 'link_end' => '</a>',
@@ -225,8 +223,8 @@ class CRUDController extends AbstractSonataCrudController
 
             // persist if the form was valid and if in preview mode the preview was approved
             if (
-                $isFormValid &&
-                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+                $isFormValid
+                && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
             ) {
                 $submittedObject = $form->getData();
                 $this->admin->setSubject($submittedObject);
@@ -308,9 +306,7 @@ class CRUDController extends AbstractSonataCrudController
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                sprintf('unable to find the object with id: %s', $id)
-            );
+            throw $this->createNotFoundException(sprintf('unable to find the object with id: %s', $id));
         }
 
         $this->checkParentChildAssociation($request, $object);
@@ -395,9 +391,9 @@ class CRUDController extends AbstractSonataCrudController
         }
 
         if (
-            'filter' !== $context &&
-            false === $admin->isGranted('CREATE') &&
-            false === $admin->isGranted('EDIT')
+            'filter' !== $context
+            && false === $admin->isGranted('CREATE')
+            && false === $admin->isGranted('EDIT')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -428,20 +424,20 @@ class CRUDController extends AbstractSonataCrudController
             $formAutocomplete = $admin->getForm()->get($fieldDescription->getName());
 
             if ($formAutocomplete->getConfig()->getAttribute('disabled')) {
-                throw $this->createAccessDeniedException(
-                    'Autocomplete list can`t be retrieved because the form element is disabled or read_only.'
-                );
+                throw $this->createAccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
             }
 
             $property = $formAutocomplete->getConfig()->getAttribute('property');
             $callback = $formAutocomplete->getConfig()->getAttribute('callback');
             $minimumInputLength = $formAutocomplete
                 ->getConfig()
-                ->getAttribute('minimum_input_length');
+                ->getAttribute('minimum_input_length')
+            ;
             $itemsPerPage = $formAutocomplete->getConfig()->getAttribute('items_per_page');
             $reqParamPageNumber = $formAutocomplete
                 ->getConfig()
-                ->getAttribute('req_param_name_page_number');
+                ->getAttribute('req_param_name_page_number')
+            ;
             $toStringCallback = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
         }
 
@@ -475,13 +471,7 @@ class CRUDController extends AbstractSonataCrudController
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(
-                            sprintf(
-                                'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
-                                $prop,
-                                \get_class($targetAdmin)
-                            )
-                        );
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -491,13 +481,7 @@ class CRUDController extends AbstractSonataCrudController
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(
-                        sprintf(
-                            'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
-                            $property,
-                            \get_class($targetAdmin)
-                        )
-                    );
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
                 }
 
                 $datagrid->setValue($property, null, $searchText);
@@ -506,13 +490,7 @@ class CRUDController extends AbstractSonataCrudController
 
         foreach ($conditions as $field => $value) {
             if (!$datagrid->hasFilter($field)) {
-                throw new \RuntimeException(
-                    sprintf(
-                        'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
-                        $field,
-                        \get_class($targetAdmin)
-                    )
-                );
+                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, \get_class($targetAdmin)));
             }
             $datagrid->setValue($field, null, $value);
         }
@@ -530,9 +508,7 @@ class CRUDController extends AbstractSonataCrudController
         foreach ($results as $entity) {
             if (null !== $toStringCallback) {
                 if (!\is_callable($toStringCallback)) {
-                    throw new \RuntimeException(
-                        'Option "to_string_callback" does not contain callable function.'
-                    );
+                    throw new \RuntimeException('Option "to_string_callback" does not contain callable function.');
                 }
 
                 $label = \call_user_func($toStringCallback, $entity, $property);
@@ -553,6 +529,8 @@ class CRUDController extends AbstractSonataCrudController
 
     /**
      * Method from Sonata Admin HelperController.
+     *
+     * @param mixed $field
      */
     protected function retrieveFormFieldDescription(
         AdminInterface $admin,
@@ -567,13 +545,7 @@ class CRUDController extends AbstractSonataCrudController
         }
 
         if ('sonata_type_model_autocomplete' !== $fieldDescription->getType()) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Unsupported form type "%s" for field "%s".',
-                    $fieldDescription->getType(),
-                    $field
-                )
-            );
+            throw new \RuntimeException(sprintf('Unsupported form type "%s" for field "%s".', $fieldDescription->getType(), $field));
         }
 
         if (null === $fieldDescription->getTargetModel()) {

@@ -7,7 +7,7 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 
 class ModerationTokenListener
 {
-    const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ModerableTrait';
+    public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ModerableTrait';
     private TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(TokenGeneratorInterface $tokenGenerator)
@@ -25,8 +25,8 @@ class ModerationTokenListener
 
             // if entity has Moderabble Trait & has not already a moderation_token (specific case in fixtures)
             if (
-                $this->hasTrait($classMetaData->getReflectionClass()) &&
-                !$entityInsertion->getModerationToken()
+                $this->hasTrait($classMetaData->getReflectionClass())
+                && !$entityInsertion->getModerationToken()
             ) {
                 $token = $this->tokenGenerator->generateToken();
                 $entityInsertion->setModerationToken($token);

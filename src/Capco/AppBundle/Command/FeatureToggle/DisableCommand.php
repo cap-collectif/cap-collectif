@@ -15,7 +15,7 @@ class DisableCommand extends Command
     public $force;
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name = null, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -25,7 +25,8 @@ class DisableCommand extends Command
     {
         $this->setName('capco:toggle:disable')
             ->setDescription('Disable a given feature toggle')
-            ->addArgument('toggle', InputArgument::REQUIRED, 'A feature toggle name to disable');
+            ->addArgument('toggle', InputArgument::REQUIRED, 'A feature toggle name to disable')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\LogicJumpRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionLogicJumpConditionRepository;
@@ -16,7 +17,6 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -56,17 +56,16 @@ class UpdateJumpsMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
-
         $questionnaireId = $input->offsetGet('questionnaireId');
         $questionsJumps = $input->offsetGet('questionsJumps');
 
-        /** * @var $questionnaire Questionnaire  */
+        /** * @var Questionnaire $questionnaire  */
         $questionnaire = $this->questionnaireRepository->find($questionnaireId);
 
         foreach ($questionsJumps as $question) {
             $originId = $question['questionId'];
             $origin = $this->getQuestion($originId, $viewer);
-            if ($origin instanceof MultipleChoiceQuestion === false) {
+            if (false === $origin instanceof MultipleChoiceQuestion) {
                 throw new UserError("Origin question with id {$originId} should be an instance of MultipleChoiceQuestion");
             }
 
@@ -82,7 +81,34 @@ class UpdateJumpsMutation implements MutationInterface
         $this->em->flush();
 
         $questions = $questionnaire->getRealQuestions();
+
         return ['questions' => $questions];
+    }
+
+    public function removeOrphanJumps(MultipleChoiceQuestion $origin, array $jumps)
+    {
+        $existingJumps = $origin->getJumps();
+        $newJumpsIds = array_map(function ($jump) {
+            return $jump['id'] ?? null;
+        }, $jumps);
+
+        foreach ($existingJumps as $jump) {
+            $existingJumpBelongsToUpdatedJumps = \in_array($jump->getId(), $newJumpsIds);
+            if (!$existingJumpBelongsToUpdatedJumps) {
+                $this->em->remove($jump);
+            }
+        }
+    }
+
+    public function isGranted(string $questionnaireId): bool
+    {
+        $questionnaire = $this->questionnaireRepository->find($questionnaireId);
+
+        if (!$questionnaire instanceof Questionnaire) {
+            return false;
+        }
+
+        return $this->authorizationChecker->isGranted(QuestionnaireVoter::EDIT, $questionnaire);
     }
 
     private function updateJumps(array $jumps, MultipleChoiceQuestion $origin, User $viewer)
@@ -98,8 +124,9 @@ class UpdateJumpsMutation implements MutationInterface
             $this->updateConditions($jumpInput['conditions'], $viewer, $jump);
 
             $jump->setOrigin($origin)
-                 ->setDestination($destination)
-                 ->setPosition($index);
+                ->setDestination($destination)
+                ->setPosition($index)
+            ;
         }
 
         $this->removeOrphanJumps($origin, $jumps);
@@ -123,7 +150,7 @@ class UpdateJumpsMutation implements MutationInterface
         $existingConditions = $jump->getConditions();
 
         foreach ($existingConditions as $existingCondition) {
-            if (!in_array($existingCondition->getId(), $updatedConditionsIds)) {
+            if (!\in_array($existingCondition->getId(), $updatedConditionsIds)) {
                 $jump->removeCondition($existingCondition);
             }
         }
@@ -132,7 +159,7 @@ class UpdateJumpsMutation implements MutationInterface
     private function updateConditions(array $conditions, User $viewer, LogicJump $jump)
     {
         foreach ($conditions as $index => $conditionInput) {
-            ['operator' => $operator, 'question' => $questionId, 'value' => $questionChoiceId] = $conditionInput;
+            list('operator' => $operator, 'question' => $questionId, 'value' => $questionChoiceId) = $conditionInput;
             $id = $conditionInput['id'] ?? null;
 
             $condition = $id ? $this->multipleChoiceQuestionLogicJumpConditionRepository->find($id)
@@ -142,11 +169,12 @@ class UpdateJumpsMutation implements MutationInterface
             $questionChoice = $this->getQuestionChoice($questionChoiceId, $viewer);
 
             $condition->setOperator($operator)
-                      ->setQuestion($question)
-                      ->setValue($questionChoice)
-                      ->setPosition($index);
+                ->setQuestion($question)
+                ->setValue($questionChoice)
+                ->setPosition($index)
+            ;
 
-            if ($condition->getId() === null) {
+            if (null === $condition->getId()) {
                 $jump->addCondition($condition);
                 $this->em->persist($condition);
                 $this->em->persist($jump);
@@ -154,24 +182,9 @@ class UpdateJumpsMutation implements MutationInterface
         }
     }
 
-    public function removeOrphanJumps(MultipleChoiceQuestion $origin, array $jumps)
-    {
-        $existingJumps = $origin->getJumps();
-        $newJumpsIds = array_map(function ($jump) {
-            return $jump['id'] ?? null;
-        }, $jumps);
-
-        foreach ($existingJumps as $jump) {
-            $existingJumpBelongsToUpdatedJumps = in_array($jump->getId(), $newJumpsIds);
-            if (!$existingJumpBelongsToUpdatedJumps) {
-                $this->em->remove($jump);
-            }
-        }
-    }
-
     private function getQuestionChoice(string $questionChoiceId, User $viewer): QuestionChoice
     {
-        $isGlobalId = !!GlobalId::fromGlobalId($questionChoiceId)['type'];
+        $isGlobalId = (bool) GlobalId::fromGlobalId($questionChoiceId)['type'];
 
         if (!$isGlobalId) {
             $questionChoice = $this->questionChoiceRepository->findOneBy(['temporaryId' => $questionChoiceId]);
@@ -188,7 +201,7 @@ class UpdateJumpsMutation implements MutationInterface
 
     private function getQuestion(string $questionId, User $viewer): AbstractQuestion
     {
-        $isGlobalId = !!GlobalId::fromGlobalId($questionId)['type'];
+        $isGlobalId = (bool) GlobalId::fromGlobalId($questionId)['type'];
 
         if (!$isGlobalId) {
             $question = $this->questionRepository->findOneBy(['temporaryId' => $questionId]);
@@ -207,16 +220,4 @@ class UpdateJumpsMutation implements MutationInterface
     {
         return $id ? $this->logicJumpRepository->find($id) : new LogicJump();
     }
-
-    public function isGranted(string $questionnaireId): bool
-    {
-        $questionnaire = $this->questionnaireRepository->find($questionnaireId);
-
-        if (!$questionnaire instanceof Questionnaire) {
-            return false;
-        }
-
-        return $this->authorizationChecker->isGranted(QuestionnaireVoter::EDIT, $questionnaire);
-    }
-
 }

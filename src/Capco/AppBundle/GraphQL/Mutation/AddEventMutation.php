@@ -3,26 +3,26 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\EventTranslation;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\DBAL\Exception\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Event;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

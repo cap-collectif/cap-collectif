@@ -94,9 +94,7 @@ final class RetrieveAutocompleteItemsAction
             $entity = $formAutocompleteConfig->getOption('class');
 
             if ($formAutocompleteConfig->getAttribute('disabled')) {
-                throw new AccessDeniedException(
-                    'Autocomplete list can`t be retrieved because the form element is disabled or read_only.'
-                );
+                throw new AccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
             }
 
             $property = $formAutocompleteConfig->getAttribute('property');
@@ -169,14 +167,7 @@ final class RetrieveAutocompleteItemsAction
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(
-                            sprintf(
-                                'To retrieve autocomplete items,' .
-                                    ' you should add filter "%s" to "%s" in configureDatagridFilters() method.',
-                                $prop,
-                                \get_class($targetAdmin)
-                            )
-                        );
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -186,14 +177,7 @@ final class RetrieveAutocompleteItemsAction
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(
-                        sprintf(
-                            'To retrieve autocomplete items,' .
-                                ' you should add filter "%s" to "%s" in configureDatagridFilters() method.',
-                            $property,
-                            \get_class($targetAdmin)
-                        )
-                    );
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
                 }
 
                 $datagrid->setValue(
@@ -217,9 +201,7 @@ final class RetrieveAutocompleteItemsAction
         foreach ($results as $entity) {
             if (null !== $toStringCallback) {
                 if (!\is_callable($toStringCallback)) {
-                    throw new \RuntimeException(
-                        'Option "to_string_callback" does not contain callable function.'
-                    );
+                    throw new \RuntimeException('Option "to_string_callback" does not contain callable function.');
                 }
 
                 $label = \call_user_func($toStringCallback, $entity, $property);

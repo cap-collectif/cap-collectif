@@ -95,7 +95,8 @@ class CreateUserAccountsFromCSVCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'Delimiter used in csv',
                 ';'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -142,7 +143,7 @@ class CreateUserAccountsFromCSVCommand extends Command
             $progressBar->advance();
             $email = filter_var(
                 !$generateEmail ? $row['email'] : $this->generateEmail($row, $emailDomain),
-                FILTER_SANITIZE_EMAIL
+                \FILTER_SANITIZE_EMAIL
             );
 
             try {

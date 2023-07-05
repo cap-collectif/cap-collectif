@@ -23,9 +23,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class SubscribeNewsletterMutation implements MutationInterface
 {
-    const FEATURE_NOT_ENABLED = 'FEATURE_NOT_ENABLED';
-    const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
-    const EMAIL_ALREADY_SUBSCRIBED = 'EMAIL_ALREADY_SUBSCRIBED';
+    public const FEATURE_NOT_ENABLED = 'FEATURE_NOT_ENABLED';
+    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    public const EMAIL_ALREADY_SUBSCRIBED = 'EMAIL_ALREADY_SUBSCRIBED';
     public const RATE_LIMITER_ACTION = 'RegisterMutation';
     public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
@@ -84,8 +84,8 @@ class SubscribeNewsletterMutation implements MutationInterface
         $email = $data['email'];
 
         if (
-            $this->toggleManager->hasOneActive([Manager::captcha, Manager::turnstile_captcha]) &&
-            (!isset($data['captcha']) || !$this->captchaChecker->__invoke($data['captcha'], $ip))
+            $this->toggleManager->hasOneActive([Manager::captcha, Manager::turnstile_captcha])
+            && (!isset($data['captcha']) || !$this->captchaChecker->__invoke($data['captcha'], $ip))
         ) {
             $this->logger->warning('Someone is certainly trying to bruteforce an email', [
                 'email' => $email,

@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Command;
 
-use InvalidArgumentException;
 use Capco\AppBundle\Entity\OpinionModal;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,7 +17,7 @@ class ImportConsultationModalsCommand extends Command
 {
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name = null, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -36,7 +36,8 @@ class ImportConsultationModalsCommand extends Command
                 'step',
                 InputArgument::REQUIRED,
                 'Please provide the slug of the consultation step you want to use'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -50,15 +51,14 @@ class ImportConsultationModalsCommand extends Command
     {
         $em = $this->getContainer()
             ->get('doctrine')
-            ->getManager();
+            ->getManager()
+        ;
         $step = $this->getContainer()
             ->get(ConsultationStepRepository::class)
-            ->findOneBySlug($input->getArgument('step'));
+            ->findOneBySlug($input->getArgument('step'))
+        ;
         if (!\is_object($step)) {
-            throw new InvalidArgumentException(
-                'Unknown step with slug ' . $input->getArgument('step'),
-                1
-            );
+            throw new InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
         }
 
         $modals = $this->getModals($input->getArgument('filePath'));
@@ -68,7 +68,8 @@ class ImportConsultationModalsCommand extends Command
                 ->findOneBy([
                     'title' => $row['opinion'],
                     'step' => $step,
-                ]);
+                ])
+            ;
 
             if (!\is_object($opinion)) {
                 throw new InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
@@ -90,7 +91,8 @@ class ImportConsultationModalsCommand extends Command
     {
         return $this->getContainer()
             ->get(ConvertCsvToArray::class)
-            ->convert($filePath);
+            ->convert($filePath)
+        ;
     }
 
     private function getContainer()

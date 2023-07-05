@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Capco\AppBundle\Entity\Source;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\Source;
 
 class ApiSourceType extends AbstractType
 {
@@ -25,7 +25,8 @@ class ApiSourceType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('category', null, ['required' => true])
-            ->add('link', UrlType::class, ['required' => true, 'default_protocol' => 'http']);
+            ->add('link', UrlType::class, ['required' => true, 'default_protocol' => 'http'])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

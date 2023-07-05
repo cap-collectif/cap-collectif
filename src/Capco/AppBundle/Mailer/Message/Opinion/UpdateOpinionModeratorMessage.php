@@ -15,12 +15,10 @@ final class UpdateOpinionModeratorMessage extends AbstractModeratorMessage
         return [
             '{title}' => self::escape($moderable->getTitle()),
             '{body}' => self::escape(self::cleanHtml($moderable->getBody())),
-            '{updatedDate}' =>
-                null === $moderable->getUpdatedAt()
+            '{updatedDate}' => null === $moderable->getUpdatedAt()
                     ? $moderable->getCreatedAt()->format('d/m/Y')
                     : $moderable->getUpdatedAt()->format('d/m/Y'),
-            '{updatedTime}' =>
-                null === $moderable->getUpdatedAt()
+            '{updatedTime}' => null === $moderable->getUpdatedAt()
                     ? $moderable->getCreatedAt()->format('H:i:s')
                     : $moderable->getUpdatedAt()->format('H:i:s'),
             '{authorName}' => self::escape($moderable->getAuthor()->getUsername()),

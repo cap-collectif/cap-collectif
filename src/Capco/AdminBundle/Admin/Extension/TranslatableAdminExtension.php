@@ -2,10 +2,10 @@
 
 namespace Capco\AdminBundle\Admin\Extension;
 
+use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Admin\AbstractAdminExtension;
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Capco\AppBundle\Repository\LocaleRepository;
 
 /**
  * @deprecated
@@ -116,13 +116,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     private static function checkMethodMergeNewTranslation($object): void
     {
         if (!method_exists($object, 'mergeNewTranslations')) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'The object passed to "%s()" method MUST be properly configured using' .
-                        ' "knplabs/doctrine-behaviors" in order to have a "mergeNewTranslations" method.',
-                    __METHOD__
-                )
-            );
+            throw new \InvalidArgumentException(sprintf('The object passed to "%s()" method MUST be properly configured using' . ' "knplabs/doctrine-behaviors" in order to have a "mergeNewTranslations" method.', __METHOD__));
         }
     }
 }

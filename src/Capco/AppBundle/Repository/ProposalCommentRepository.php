@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Traits\CommentableRepositoryTrait;
-use Doctrine\ORM\QueryBuilder;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\Project;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\CommentableRepositoryTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalCommentRepository extends EntityRepository
 {
@@ -57,7 +57,8 @@ class ProposalCommentRepository extends EntityRepository
         return (int) $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countCommentsAndAnswersByCommentable(
@@ -71,7 +72,8 @@ class ProposalCommentRepository extends EntityRepository
         return (int) $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByProject(
@@ -86,7 +88,8 @@ class ProposalCommentRepository extends EntityRepository
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
             ->setFirstResult($first)
-            ->setMaxResults($offset);
+            ->setMaxResults($offset)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('c.publishedAt', $direction);
@@ -108,7 +111,8 @@ class ProposalCommentRepository extends EntityRepository
         $query = $this->getQueryCommentWithProject($onlyTrashed)
             ->select('COUNT(c.id)')
             ->andWhere('pas.project = :project')
-            ->setParameter('project', $project);
+            ->setParameter('project', $project)
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -145,7 +149,8 @@ class ProposalCommentRepository extends EntityRepository
             ->setParameters([
                 'proposal' => $proposal,
                 'user' => $user,
-            ]);
+            ])
+        ;
 
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
@@ -159,7 +164,8 @@ class ProposalCommentRepository extends EntityRepository
             ->where("c.moderationStatus = 'PENDING'")
             ->andWhere('c.proposal = :proposal')
             ->andWhere('c.author = :user')
-            ->setParameters(['proposal' => $proposal, 'user' => $user]);
+            ->setParameters(['proposal' => $proposal, 'user' => $user])
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -188,7 +194,8 @@ class ProposalCommentRepository extends EntityRepository
             ->leftJoin('c.proposal', 'p')
             ->leftJoin('p.proposalForm', 'f')
             ->leftJoin('f.step', 's')
-            ->leftJoin('s.projectAbstractStep', 'pas');
+            ->leftJoin('s.projectAbstractStep', 'pas')
+        ;
 
         if ($onlyTrashed) {
             $query = $query->andWhere('c.trashedAt IS NOT NULL')->orderBy('c.trashedAt', 'DESC');

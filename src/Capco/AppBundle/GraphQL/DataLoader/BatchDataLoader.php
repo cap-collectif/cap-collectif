@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Psr\Log\LoggerInterface;
-use Overblog\DataLoader\Option;
-use Overblog\DataLoader\DataLoader;
 use GraphQL\Executor\Promise\Promise;
+use Overblog\DataLoader\DataLoader;
+use Overblog\DataLoader\Option;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -92,11 +92,11 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      *
+     * @throws \Psr\Cache\InvalidArgumentException
+     *
      * @return Promise
      *
      * @see DataLoader
-     *
-     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function load($key)
     {
@@ -116,7 +116,7 @@ abstract class BatchDataLoader extends DataLoader
         if (!$this->enableCache || !$cacheItem->isHit()) {
             if ($this->debug && $this->enableCache) {
                 $this->logger->info(
-                    \get_class($this) .
+                    static::class .
                         ' Cache MISS for: ' .
                         var_export($this->serializeKey($key), true)
                 );
@@ -129,7 +129,8 @@ abstract class BatchDataLoader extends DataLoader
                     $subtype = array_pop($parts);
                     $duration = $this->stopwatch
                         ->stop(self::DATALOADER_PROFILING_EVENT_NAME . $this->cachePrefix)
-                        ->getDuration();
+                        ->getDuration()
+                    ;
 
                     if ($this->debug) {
                         $this->collector->addCacheMiss(
@@ -143,7 +144,8 @@ abstract class BatchDataLoader extends DataLoader
                     if ($this->enableCache) {
                         $cacheItem
                             ->set($this->normalizeValue($value))
-                            ->expiresAfter($this->cacheTtl);
+                            ->expiresAfter($this->cacheTtl)
+                        ;
                         if ($this->cache instanceof TagAwareAdapterInterface) {
                             $cacheItem->tag(
                                 array_merge($this->getCacheTag($key), [$this->cachePrefix])
@@ -170,7 +172,8 @@ abstract class BatchDataLoader extends DataLoader
                 $subtype = array_pop($parts);
                 $duration = $this->stopwatch
                     ->stop(self::DATALOADER_PROFILING_EVENT_NAME . $this->cachePrefix)
-                    ->getDuration();
+                    ->getDuration()
+                ;
                 $this->collector->addCacheHit(
                     $this->serializeKey($key),
                     $subtype,

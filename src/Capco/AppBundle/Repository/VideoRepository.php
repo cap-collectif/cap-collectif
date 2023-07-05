@@ -20,7 +20,8 @@ class VideoRepository extends EntityRepository
             ->addSelect('a, m')
             ->leftJoin('v.author', 'a')
             ->leftJoin('v.media', 'm')
-            ->orderBy('v.position', 'ASC');
+            ->orderBy('v.position', 'ASC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -39,7 +40,8 @@ class VideoRepository extends EntityRepository
             ->addSelect('a, m')
             ->leftJoin('v.author', 'a')
             ->leftJoin('v.media', 'm')
-            ->orderBy('v.position', 'ASC');
+            ->orderBy('v.position', 'ASC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -56,6 +58,7 @@ class VideoRepository extends EntityRepository
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true);
+            ->setParameter('isEnabled', true)
+        ;
     }
 }

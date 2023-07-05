@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 class ProposalViewerCanSeeEvaluationResolver implements ResolverInterface
 {
@@ -21,8 +21,8 @@ class ProposalViewerCanSeeEvaluationResolver implements ResolverInterface
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
-        return null !== $evalForm &&
-            (!$evalForm->isFullyPrivate() ||
-                $this->isViewerAnEvaluerResolver->__invoke($proposal, $viewer));
+        return null !== $evalForm
+            && (!$evalForm->isFullyPrivate()
+                || $this->isViewerAnEvaluerResolver->__invoke($proposal, $viewer));
     }
 }

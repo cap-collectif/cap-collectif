@@ -33,7 +33,8 @@ class ProjectSearchType extends AbstractType
                 'required' => false,
                 'choices' => Project::$sortOrderLabels,
                 'placeholder' => false,
-            ]);
+            ])
+        ;
 
         $builder->add('type', EntityType::class, [
             'required' => false,
@@ -50,7 +51,8 @@ class ProjectSearchType extends AbstractType
                     return $tr
                         ->createQueryBuilder('t')
                         ->where('t.isEnabled = :enabled')
-                        ->setParameter('enabled', true);
+                        ->setParameter('enabled', true)
+                    ;
                 },
                 'placeholder' => 'global.select_themes',
             ]);

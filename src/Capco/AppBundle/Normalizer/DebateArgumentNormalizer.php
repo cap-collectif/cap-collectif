@@ -30,7 +30,8 @@ class DebateArgumentNormalizer implements NormalizerInterface, SerializerAwareIn
         if (\in_array(self::GROUP, $context['groups'])) {
             $data['votesCount'] = $this->voteSearch
                 ->searchDebateArgumentVotes($object, 100)
-                ->getTotalCount();
+                ->getTotalCount()
+            ;
         }
 
         return $data;

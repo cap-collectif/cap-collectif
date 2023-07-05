@@ -28,13 +28,6 @@ class CancelEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         return compact('emailingCampaign', 'error');
     }
 
-    private static function cancelCampaign(EmailingCampaign $emailingCampaign): EmailingCampaign
-    {
-        $emailingCampaign->setStatus(EmailingCampaignStatus::DRAFT);
-
-        return $emailingCampaign;
-    }
-
     public function isGranted(string $id, ?User $viewer = null): bool
     {
         if (!$viewer) {
@@ -47,5 +40,12 @@ class CancelEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         }
 
         return $this->authorizationChecker->isGranted(EmailingCampaignVoter::CANCEL, $emailCampaign);
+    }
+
+    private static function cancelCampaign(EmailingCampaign $emailingCampaign): EmailingCampaign
+    {
+        $emailingCampaign->setStatus(EmailingCampaignStatus::DRAFT);
+
+        return $emailingCampaign;
     }
 }

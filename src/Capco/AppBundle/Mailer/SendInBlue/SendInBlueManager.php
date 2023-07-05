@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class SendInBlueManager
 {
-    const SKIPPED_ENV = 'test';
+    public const SKIPPED_ENV = 'test';
     protected static ?UpdateContact $updater = null;
     protected static ?CreateContact $contactMaker = null;
     private int $listId;

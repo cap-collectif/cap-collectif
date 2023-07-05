@@ -382,21 +382,22 @@ class Media
 
     /**
      * @TODO REMOVE
+     *
+     * @param mixed $context
      */
     public function isStatusErroneous($context): void
     {
         if ($this->getBinaryContent() && 4 === $this->getProviderStatus()) {
             // NEXT_MAJOR: Restore type hint
             if (!$context instanceof ExecutionContextInterface) {
-                throw new \InvalidArgumentException(
-                    'Argument 1 should be an instance of Symfony\Component\Validator\ExecutionContextInterface'
-                );
+                throw new \InvalidArgumentException('Argument 1 should be an instance of Symfony\Component\Validator\ExecutionContextInterface');
             }
 
             $context
                 ->buildViolation('invalid')
                 ->atPath('binaryContent')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 

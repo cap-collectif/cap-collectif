@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteVersionMutation implements MutationInterface
@@ -34,7 +34,7 @@ class DeleteVersionMutation implements MutationInterface
         $version = $this->versionRepo->find($versionId);
 
         if (!$version) {
-            throw new UserError("Unknown version with id: ${versionId}");
+            throw new UserError("Unknown version with id: {$versionId}");
         }
 
         if ($user !== $version->getAuthor()) {

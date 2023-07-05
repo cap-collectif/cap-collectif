@@ -73,7 +73,8 @@ class PageController extends Controller
         // set the theme for the current Admin Form
         $this->get('twig')
             ->getRuntime(FormRenderer::class)
-            ->setTheme($formView, $this->admin->getFormTheme());
+            ->setTheme($formView, $this->admin->getFormTheme())
+        ;
 
         $template = $this->admin->getTemplateRegistry()->getTemplate('edit');
 

@@ -56,27 +56,32 @@ class UpdateProfilePasswordMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalled()
-            ->willReturn($data);
+            ->willReturn($data)
+        ;
 
         $formFactory
             ->create(ChangePasswordFormType::class, null, ['csrf_protection' => false])
             ->shouldBeCalled()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($data, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $form
             ->getErrors(true, false)
             ->shouldBeCalled()
-            ->willReturn('shameOnYou');
+            ->willReturn('shameOnYou')
+        ;
 
         $logger
             ->error(
                 'Capco\AppBundle\GraphQL\Mutation\Profile\UpdateProfilePasswordMutation::__invoke : shameOnYou'
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(2);
@@ -101,32 +106,37 @@ class UpdateProfilePasswordMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalled()
-            ->willReturn($data);
+            ->willReturn($data)
+        ;
 
         $viewerId = 'viewerId';
         $viewer
             ->getId()
             ->shouldBeCalled()
-            ->willReturn($viewerId);
+            ->willReturn($viewerId)
+        ;
         $viewer->setPlainPassword($newPassword)->shouldBeCalled();
         $viewer->setUpdatedAt(\Prophecy\Argument::type('\DateTime'))->shouldBeCalled();
 
         $formFactory
             ->create(ChangePasswordFormType::class, null, ['csrf_protection' => false])
             ->shouldBeCalled()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($data, false)->shouldBeCalled();
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $logger
             ->debug(
                 'Capco\AppBundle\GraphQL\Mutation\Profile\UpdateProfilePasswordMutation::__invoke : ' .
                     $viewerId
             )
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $userManager->updateUser($viewer)->shouldBeCalled();
         $publisher->publish(
             'user.password',

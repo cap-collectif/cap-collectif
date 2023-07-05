@@ -5,10 +5,10 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProjectDistrictController extends Controller
 {
@@ -20,9 +20,9 @@ class ProjectDistrictController extends Controller
     }
 
     /**
-    * @Route("/project-district/{slug}", name="app_project_district_show", options={"i18n" = false})
-    * @Template("CapcoAppBundle:ProjectDistrict:show.html.twig")
-    */
+     * @Route("/project-district/{slug}", name="app_project_district_show", options={"i18n" = false})
+     * @Template("CapcoAppBundle:ProjectDistrict:show.html.twig")
+     */
     public function showAction(string $slug)
     {
         $district = $this->getDistrict($slug);
@@ -35,7 +35,7 @@ class ProjectDistrictController extends Controller
         $district = $this->repository->getBySlug($slug);
         if ($district instanceof ProjectDistrict) {
             return $district;
-        };
+        }
 
         throw new NotFoundHttpException('Could not find a district for this id.');
     }

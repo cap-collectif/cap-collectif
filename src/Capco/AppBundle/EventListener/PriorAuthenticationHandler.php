@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Repository\UserConnectionRepository;
+use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Capco\AppBundle\Repository\UserConnectionRepository;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Capco\AppBundle\Utils\RequestGuesser;
-use Capco\AppBundle\Security\CaptchaChecker;
 
 class PriorAuthenticationHandler
 {

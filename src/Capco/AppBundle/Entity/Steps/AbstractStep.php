@@ -3,30 +3,30 @@
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
+use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
-use Capco\AppBundle\Traits\TimeRangeableTrait;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Traits\RequirementTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
-use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Traits\RequirementTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimeRangeableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="step")
@@ -329,6 +329,8 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 
     /**
      * @deprecated: please consider using `viewerCanSee` instead.
+     *
+     * @param null|mixed $user
      */
     public function canDisplay($user = null): bool
     {
@@ -347,9 +349,9 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 
     public function isActive($user = null): bool
     {
-        return $this->getProject() &&
-            $this->getProject()->canContribute($user) &&
-            $this->getIsEnabled();
+        return $this->getProject()
+            && $this->getProject()->canContribute($user)
+            && $this->getIsEnabled();
     }
 
     public function isDebateStep(): bool
@@ -456,7 +458,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
             return true;
         }
 
-        if(!$viewer instanceof User) {
+        if (!$viewer instanceof User) {
             return false;
         }
 

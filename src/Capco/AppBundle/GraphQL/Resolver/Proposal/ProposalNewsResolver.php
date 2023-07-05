@@ -37,7 +37,8 @@ class ProposalNewsResolver implements ResolverInterface
                         $direction
                     )
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             $totalCount = $this->repository->countPublishedPostsByProposal($proposal);
@@ -45,6 +46,7 @@ class ProposalNewsResolver implements ResolverInterface
             return $paginator->auto($args, $totalCount);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException('Could not find proposals for selection step');
         }
     }

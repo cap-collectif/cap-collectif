@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method AnalysisConfiguration|null find($id, $lockMode = null, $lockVersion = null)
- * @method AnalysisConfiguration|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|AnalysisConfiguration find($id, $lockMode = null, $lockVersion = null)
+ * @method null|AnalysisConfiguration findOneBy(array $criteria, array $orderBy = null)
  * @method AnalysisConfiguration[]    findAll()
  * @method AnalysisConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -31,7 +31,8 @@ class AnalysisConfigurationRepository extends EntityRepository
                 'from' => $from,
                 'to' => $to,
             ])
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $qb->getResult();
     }

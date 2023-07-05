@@ -16,8 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class EventReview implements CreatableInterface
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="status", type="enum_event_review_status", nullable=true)

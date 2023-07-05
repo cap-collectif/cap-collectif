@@ -26,7 +26,7 @@ class JWT
     public static function getPayloadFromJWT(string $token): ?array
     {
         try {
-            return (new JWT($token))->getPayload();
+            return (new self($token))->getPayload();
         } catch (\RuntimeException $exception) {
             return null;
         }
@@ -43,7 +43,7 @@ class JWT
         $header = self::decode($split['header']);
         $payload = self::decode($split['payload']);
         $signature = $split['signature'];
-        if (is_array($header) && is_array($payload)) {
+        if (\is_array($header) && \is_array($payload)) {
             $this->header = $header;
             $this->payload = $payload;
             $this->signature = $signature;
@@ -60,19 +60,19 @@ class JWT
     private static function split(string $jwt): array
     {
         $data = explode('.', $jwt);
-        if (count($data) != 3) {
+        if (3 != \count($data)) {
             self::throwError($jwt);
         }
+
         return [
             'header' => $data[0],
             'payload' => $data[1],
-            'signature' => $data[2]
+            'signature' => $data[2],
         ];
     }
 
     private static function throwError(string $jwt): void
     {
-        throw new \RuntimeException("invalid JWT : ".$jwt);
+        throw new \RuntimeException('invalid JWT : ' . $jwt);
     }
-
 }

@@ -44,7 +44,8 @@ class HomepageController extends Controller
             ->getEventsConnection(
                 new Argument(['isFuture' => true, 'first' => 0, 'locale' => $locale])
             )
-            ->getTotalCount();
+            ->getTotalCount()
+        ;
 
         $deleteType = $request->get('deleteType');
 

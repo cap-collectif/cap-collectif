@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class ProjectCommentsResolver implements ResolverInterface
 {
@@ -49,7 +49,8 @@ class ProjectCommentsResolver implements ResolverInterface
                         $orderBy['direction']
                     )
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             $totalCount = $this->proposalCommentRepository->countByProject($project, $onlyTrashed);

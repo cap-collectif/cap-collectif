@@ -14,31 +14,30 @@ final class InitialSmsCreditMessage extends AbstractAdminMessage
     public static function getMyTemplateVars(SmsCredit $smsCredit, array $params): array
     {
         return [
-            "amount" => $smsCredit->getAmount(),
-            "baseUrl" => $params['baseURL'],
-            "platformName" => $params['platformName'],
+            'amount' => $smsCredit->getAmount(),
+            'baseUrl' => $params['baseURL'],
+            'platformName' => $params['platformName'],
             'platformLink' => $params['platformLink'],
-            "projectsUrl" => $params['projectsUrl'],
+            'projectsUrl' => $params['projectsUrl'],
         ];
     }
 
     public static function getMySubjectVars(SmsCredit $smsCredit, array $params): array
     {
         return [
-            'platformName' => $params['platformName']
+            'platformName' => $params['platformName'],
         ];
     }
 
     public static function mockData()
     {
         return [
-            "amount" => 1000,
-            "baseUrl" => "/capco",
-            "platformName" => "capco",
+            'amount' => 1000,
+            'baseUrl' => '/capco',
+            'platformName' => 'capco',
             'platformLink' => 'https://cap-collectif.com',
-            "user_locale" => "fr",
-            "projectsUrl" => "/projects",
+            'user_locale' => 'fr',
+            'projectsUrl' => '/projects',
         ];
     }
-
 }

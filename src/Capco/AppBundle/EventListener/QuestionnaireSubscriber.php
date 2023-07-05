@@ -39,7 +39,8 @@ class QuestionnaireSubscriber implements EventSubscriber
 
         $notificationConfiguration = $questionnaire
             ->getNotificationsConfiguration()
-            ->setEmail($email);
+            ->setEmail($email)
+        ;
 
         $questionnaire->setNotificationsConfiguration($notificationConfiguration);
     }

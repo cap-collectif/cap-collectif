@@ -2,20 +2,17 @@
 
 namespace Capco\AppBundle\Normalizer;
 
-use Capco\AppBundle\Search\VoteSearch;
-use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Repository\ArgumentRepository;
-use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Capco\AppBundle\Search\VoteSearch;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerAwareTrait;
 
-class OpinionVersionNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class OpinionVersionNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private ObjectNormalizer $normalizer;

@@ -16,7 +16,8 @@ class MenuItemRepository extends EntityRepository
         $qb = $this->createQueryBuilder('mi')
             ->leftJoin('mi.translations', 'mit')
             ->where('mit.link = :link')
-            ->setParameter('link', $link);
+            ->setParameter('link', $link)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -28,7 +29,8 @@ class MenuItemRepository extends EntityRepository
             ->andWhere('i.parent IS NULL')
             ->andWhere('i.menu = :menu')
             ->setParameter('menu', MenuItem::TYPE_FOOTER)
-            ->addOrderBy('i.position', 'ASC');
+            ->addOrderBy('i.position', 'ASC')
+        ;
         $qb = $this->whereIsEnabled($qb);
 
         return $qb->getQuery()->getResult();
@@ -41,14 +43,16 @@ class MenuItemRepository extends EntityRepository
             ->andWhere('i.parent IS NULL')
             ->andWhere('i.menu = :menu')
             ->setParameter('menu', $menu)
-            ->addOrderBy('i.position', 'ASC');
+            ->addOrderBy('i.position', 'ASC')
+        ;
 
         $qb = $this->whereIsEnabled($qb);
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getChildItems($menu)
@@ -59,7 +63,8 @@ class MenuItemRepository extends EntityRepository
             ->andWhere('i.parent IS NOT NULL')
             ->andWhere('i.menu = :menu')
             ->setParameter('menu', $menu)
-            ->addOrderBy('i.position', 'ASC');
+            ->addOrderBy('i.position', 'ASC')
+        ;
 
         $qb = $this->whereIsEnabled($qb);
 
@@ -72,7 +77,8 @@ class MenuItemRepository extends EntityRepository
             ->andWhere(
                 'i.isEnabled = :isEnabled AND (page.id IS NULL OR (page.id IS NOT NULL AND page.isEnabled = :isEnabled))'
             )
-            ->setParameter('isEnabled', true);
+            ->setParameter('isEnabled', true)
+        ;
 
         return $qb;
     }

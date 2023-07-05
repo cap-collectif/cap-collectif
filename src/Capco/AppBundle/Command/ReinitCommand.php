@@ -189,7 +189,8 @@ class ReinitCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -597,7 +598,8 @@ class ReinitCommand extends Command
             $input->setInteractive(false);
             $returnCode = $this->getApplication()
                 ->find($key)
-                ->run($input, $output);
+                ->run($input, $output)
+            ;
 
             if (0 !== $returnCode) {
                 throw new \RuntimeException('Command' . $key . 'failed…', 1);

@@ -17,5 +17,4 @@ class UsernameType extends AbstractType
             'purify_html_profile' => 'admin',
         ]);
     }
-
 }

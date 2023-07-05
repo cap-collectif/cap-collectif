@@ -31,7 +31,8 @@ class AnswerAdmin extends CapcoAdmin
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
                 'required' => true,
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

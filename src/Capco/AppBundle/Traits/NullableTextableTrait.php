@@ -22,7 +22,7 @@ trait NullableTextableTrait
         return strip_tags($this->body);
     }
 
-    public function setBody(string $body = null): self
+    public function setBody(?string $body = null): self
     {
         $this->body = $body;
 

@@ -2,13 +2,13 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\GraphQL\Resolver\Debate\DebateOpinionsResolver;
+use Capco\AppBundle\Repository\DebateOpinionRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Debate\DebateOpinion;
-use Capco\AppBundle\Repository\DebateOpinionRepository;
-use Capco\AppBundle\GraphQL\Resolver\Debate\DebateOpinionsResolver;
+use PhpSpec\ObjectBehavior;
 
 class DebateOpinionsResolverSpec extends ObjectBehavior
 {
@@ -28,7 +28,8 @@ class DebateOpinionsResolverSpec extends ObjectBehavior
         $repository
             ->countByDebate($debate)
             ->willReturn(0)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($debate, $args)->shouldReturnEmptyConnection([]);
     }
 
@@ -43,11 +44,13 @@ class DebateOpinionsResolverSpec extends ObjectBehavior
         $repository
             ->getByDebate($debate, 11, 0)
             ->willReturn($paginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $repository
             ->countByDebate($debate)
             ->willReturn(2)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $paginator->getIterator()->willReturn(new \ArrayIterator([$a, $b]));
         $this->__invoke($debate, $args)->shouldReturnConnection();
     }

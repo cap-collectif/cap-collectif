@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Consultation;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ArgumentVoteRepository extends EntityRepository
 {
@@ -31,12 +31,14 @@ class ArgumentVoteRepository extends EntityRepository
                 })
             )
             ->andWhere('v.user = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -57,7 +59,8 @@ class ArgumentVoteRepository extends EntityRepository
             )
             ->andWhere('v.user = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -78,7 +81,8 @@ class ArgumentVoteRepository extends EntityRepository
             )
             ->andWhere('v.user = :author')
             ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -89,7 +93,8 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('v.argument = :argument')
             ->andWhere('v.user = :author')
             ->setParameter('argument', $argument)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -99,7 +104,8 @@ class ArgumentVoteRepository extends EntityRepository
         $qb = $this->getPublishedQueryBuilder()
             ->andWhere('v.argument = :argument')
             ->setParameter('argument', $argument)
-            ->orderBy('v.publishedAt', 'ASC');
+            ->orderBy('v.publishedAt', 'ASC')
+        ;
 
         $qb->setFirstResult($offset)->setMaxResults($limit);
 
@@ -113,7 +119,8 @@ class ArgumentVoteRepository extends EntityRepository
             ->andWhere('v.argument = :argument')
             ->setParameter('argument', $argument)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     protected function getPublishedQueryBuilder()

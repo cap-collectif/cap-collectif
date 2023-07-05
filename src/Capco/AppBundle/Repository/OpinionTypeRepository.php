@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -12,8 +12,8 @@ use Doctrine\ORM\QueryBuilder;
 /**
  * OpinionTypeRepository.
  *
- * @method OpinionType|null find($id, $lockMode = null, $lockVersion = null)
- * @method OpinionType|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|OpinionType find($id, $lockMode = null, $lockVersion = null)
+ * @method null|OpinionType findOneBy(array $criteria, array $orderBy = null)
  * @method OpinionType[]    findAll()
  * @method OpinionType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -33,7 +33,8 @@ class OpinionTypeRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
     }
@@ -43,7 +44,8 @@ class OpinionTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ot')
             ->andWhere('ot.parent = :parent')
             ->orderBy('ot.position', 'ASC')
-            ->setParameter('parent', $parent);
+            ->setParameter('parent', $parent)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -61,7 +63,8 @@ class OpinionTypeRepository extends EntityRepository
             )
             ->leftJoin('ot.parent', 'p', 'ot.parent = p.id')
             ->addOrderBy('computed_position')
-            ->addOrderBy('ot.parent');
+            ->addOrderBy('ot.parent')
+        ;
 
         if ($consultation) {
             $qb->andWhere('ot.consultation = :c')->setParameter('c', $consultation);
@@ -94,7 +97,8 @@ class OpinionTypeRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
-            ->addOrderBy('o.createdAt', 'DESC');
+            ->addOrderBy('o.createdAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -122,7 +126,8 @@ class OpinionTypeRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->setParameter('author', $user)
             ->orderBy('ot.position', 'ASC')
-            ->addOrderBy('o.createdAt', 'DESC');
+            ->addOrderBy('o.createdAt', 'DESC')
+        ;
 
         return (int) $qb->getQuery()->getScalarResult();
     }
@@ -154,7 +159,8 @@ class OpinionTypeRepository extends EntityRepository
             ->setParameter('enabled', true)
             ->setParameter('allowedTypes', $allowedTypes)
             ->addGroupBy('ot')
-            ->orderBy('ot.position', 'ASC');
+            ->orderBy('ot.position', 'ASC')
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -175,7 +181,8 @@ class OpinionTypeRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ot')
             ->where('ot.parent IS NULL')
-            ->orderBy('ot.position', 'ASC');
+            ->orderBy('ot.position', 'ASC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -195,7 +202,8 @@ class OpinionTypeRepository extends EntityRepository
                 'slug' => $slug,
                 'stepSlug' => $step->getSlug(),
                 'consultationSlug' => $consultation->getSlug(),
-            ]);
+            ])
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -211,7 +219,8 @@ class OpinionTypeRepository extends EntityRepository
             ->andWhere('ot.consultation = :consultation')
             ->setParameter('enabled', true)
             ->setParameter('linkable', true)
-            ->setParameter('consultation', $consultation);
+            ->setParameter('consultation', $consultation)
+        ;
 
         return $qb->getQuery()->getResult();
     }

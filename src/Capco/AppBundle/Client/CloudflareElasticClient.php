@@ -4,17 +4,17 @@ namespace Capco\AppBundle\Client;
 
 use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Enum\PlatformAnalyticsTrafficSourceType;
-use Elastica\Aggregation\Cardinality;
 use DateTimeInterface;
+use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
 use Elastica\Aggregation\Terms;
 use Elastica\Connection;
 use Elastica\Exception\ClientException;
 use Elastica\Exception\Connection\HttpException;
 use Elastica\Multi\ResultSet;
+use Elastica\Multi\Search;
 use Elastica\Query;
 use Elastica\Query\Range;
-use Elastica\Multi\Search;
 use Psr\Log\LoggerInterface;
 
 class CloudflareElasticClient
@@ -167,7 +167,8 @@ class CloudflareElasticClient
                     'gte' => $start->format(DateTimeInterface::ATOM),
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
-            );
+            )
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -182,7 +183,8 @@ class CloudflareElasticClient
                 ))->addAggregation(
                     (new Cardinality('unique_visitors_per_interval'))->setField('clientIP.keyword')
                 )
-            );
+            )
+        ;
 
         return $this->createSearchQuery($query);
     }
@@ -200,7 +202,8 @@ class CloudflareElasticClient
                     'gte' => $start->format(DateTimeInterface::ATOM),
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
-            );
+            )
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -212,7 +215,8 @@ class CloudflareElasticClient
                     'edgeEndTimestamp',
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->createSearchQuery($query);
     }
@@ -230,7 +234,8 @@ class CloudflareElasticClient
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -241,7 +246,8 @@ class CloudflareElasticClient
                     ->setField('clientRequestURI.keyword')
                     ->setOrder('_count', 'desc')
                     ->setSize(10)
-            );
+            )
+        ;
 
         return $this->createSearchQuery($query);
     }
@@ -272,7 +278,8 @@ class CloudflareElasticClient
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
@@ -280,7 +287,8 @@ class CloudflareElasticClient
                 (new Cardinality('search_engine_entries'))->setField('clientIP.keyword')
             )
             ->setSize(0)
-            ->setTrackTotalHits(true);
+            ->setTrackTotalHits(true)
+        ;
 
         return $this->createSearchQuery($query);
     }
@@ -299,7 +307,8 @@ class CloudflareElasticClient
                 ])
             )
             ->addFilter(new Query\Term(['socialNetworkReferer' => true]))
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
@@ -322,7 +331,8 @@ class CloudflareElasticClient
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
             ->addMustNot(new Query\Exists('clientRequestReferer'))
-            ->addMustNot(new Query\Exists('socialNetworkReferer'));
+            ->addMustNot(new Query\Exists('socialNetworkReferer'))
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);
@@ -346,7 +356,8 @@ class CloudflareElasticClient
             ->addFilter(new Query\Exists('clientRequestReferer'))
             ->addMustNot(new Query\Term(['socialNetworkReferer' => true]))
             ->addMustNot(new Query\Term(['searchEngineReferer' => true]))
-            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]));
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+        ;
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query->setSize(0)->setTrackTotalHits(true);

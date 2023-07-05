@@ -50,21 +50,21 @@ class ElasticsearchRabbitMQListenerSpec extends ObjectBehavior
         $messageEvent = new Message(
             json_encode([
                 'class' => \get_class($event->getWrappedObject()),
-                'id' => 'event1'
+                'id' => 'event1',
             ])
         );
 
         $messageProposal = new Message(
             json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
-                'id' => 'proposal1'
+                'id' => 'proposal1',
             ])
         );
         $this->addToMessageStack($messageProposal, 6);
         $this->addToMessageStack($messageEvent, 5);
         $this->getMessageStack()->shouldReturn([
             ['message' => $messageProposal, 'priority' => 6],
-            ['message' => $messageEvent, 'priority' => 5]
+            ['message' => $messageEvent, 'priority' => 5],
         ]);
         $this->onKernelTerminate();
 

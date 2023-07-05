@@ -3,7 +3,9 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalAnalyst;
 use Capco\AppBundle\Entity\ProposalAssessment;
@@ -14,12 +16,10 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalStatementState;
+use Capco\AppBundle\Model\Publishable;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 
 class ProposalSpec extends ObjectBehavior
 {
@@ -196,15 +196,18 @@ class ProposalSpec extends ObjectBehavior
         $someoneElse
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $owner
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $admin
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->viewerIsAdminOrOwner(null)->shouldReturn(false);
         $this->viewerIsAdminOrOwner($someoneElse)->shouldReturn(false);
@@ -230,16 +233,19 @@ class ProposalSpec extends ObjectBehavior
         $someoneElse
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $author->isAdmin()->willReturn(false);
         $owner
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $admin
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->viewerCanUpdate(null)->shouldReturn(false);
         $this->viewerCanUpdate($someoneElse)->shouldReturn(false);
@@ -252,7 +258,8 @@ class ProposalSpec extends ObjectBehavior
     {
         $this->setDecision(null)
             ->setAssessment(null)
-            ->setAnalyses([]);
+            ->setAnalyses([])
+        ;
         $this->getGlobalProgressStatus()->shouldReturn(ProposalStatementState::TODO);
     }
 

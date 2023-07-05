@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Search\UserSearch;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Search\UserSearch;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
 
 class ProjectContributorResolver implements ResolverInterface
 {
@@ -52,7 +52,7 @@ class ProjectContributorResolver implements ResolverInterface
         }
         if (!$project->isExternal()) {
             $providedFilters = [];
-            list(
+            [
                 $providedFilters['step'],
                 $providedFilters['vip'],
                 $providedFilters['userType'],
@@ -60,7 +60,7 @@ class ProjectContributorResolver implements ResolverInterface
                 $providedFilters['emailConfirmed'],
                 $providedFilters['consentInternalCommunication'],
                 $orderBy,
-            ) = [
+            ] = [
                 GlobalId::fromGlobalId($args->offsetGet('step'))['id'],
                 $args->offsetGet('vip'),
                 $args->offsetGet('userType'),

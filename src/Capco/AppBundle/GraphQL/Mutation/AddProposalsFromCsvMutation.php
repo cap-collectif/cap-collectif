@@ -8,8 +8,8 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
@@ -137,6 +137,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
                         'mandatoryMissing' => [],
                         'errorCode' => self::EMPTY_FILE,
                     ];
+
                 case self::BAD_DATA_MODEL:
                     return [
                         'importableProposals' => 0,
@@ -147,6 +148,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
                         'mandatoryMissing' => [],
                         'errorCode' => self::BAD_DATA_MODEL,
                     ];
+
                 case self::TOO_MUCH_LINES:
                     return [
                         'importableProposals' => 0,

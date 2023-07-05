@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
-use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Timestampable;
-use Capco\AppBundle\Traits\TextableTrait;
-use Doctrine\Common\Collections\Collection;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnalysisConfigurationRepository")
@@ -20,10 +20,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class AnalysisConfiguration implements Timestampable
 {
+    use BodyUsingJoditWysiwygTrait;
     use TextableTrait;
     use TimestampableTrait;
     use UuidTrait;
-    use BodyUsingJoditWysiwygTrait;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", inversedBy="analysisConfiguration")
@@ -115,7 +115,8 @@ class AnalysisConfiguration implements Timestampable
                 $clonedEvaluationForm = clone $this->evaluationForm;
                 $clonedEvaluationForm
                     ->setProposalForm($this->proposalForm)
-                    ->setSlug('copy-of-' . $clonedEvaluationForm->getSlug());
+                    ->setSlug('copy-of-' . $clonedEvaluationForm->getSlug())
+                ;
                 $this->setEvaluationForm($clonedEvaluationForm);
             }
         }
@@ -222,8 +223,8 @@ class AnalysisConfiguration implements Timestampable
     {
         $now = new \DateTime();
 
-        return null == $this->getEffectiveDate() ||
-            $this->getEffectiveDate()->getTimestamp() < $now->getTimestamp();
+        return null == $this->getEffectiveDate()
+            || $this->getEffectiveDate()->getTimestamp() < $now->getTimestamp();
     }
 
     public function removeUnfavourableStatus(Status $favourableStatus): self

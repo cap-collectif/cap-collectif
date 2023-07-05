@@ -49,7 +49,8 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         /** * @var CacheItem $tokens  */
         $tokens = $this->redisCache
             ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
-            ->get();
+            ->get()
+        ;
 
         if (!empty($tokens)) {
             $nonce = $tokens['nonce'];
@@ -88,6 +89,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
             ->setDefaults([
                 'scope' => $this->getScope(),
             ])
-            ->setRequired('logout_url');
+            ->setRequired('logout_url')
+        ;
     }
 }

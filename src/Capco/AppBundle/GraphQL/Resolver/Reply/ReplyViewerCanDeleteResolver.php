@@ -14,7 +14,7 @@ class ReplyViewerCanDeleteResolver implements ResolverInterface
     {
         $viewer = $this->preventNullableViewer($viewer);
 
-        return $reply->getAuthor() === $viewer &&
-            $reply->getQuestionnaire()->canContribute($viewer);
+        return $reply->getAuthor() === $viewer
+            && $reply->getQuestionnaire()->canContribute($viewer);
     }
 }

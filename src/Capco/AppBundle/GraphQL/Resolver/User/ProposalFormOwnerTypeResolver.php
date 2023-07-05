@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ProposalFormOwnerTypeResolver implements ResolverInterface
 {

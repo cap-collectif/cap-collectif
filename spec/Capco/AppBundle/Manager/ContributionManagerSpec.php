@@ -2,19 +2,19 @@
 
 namespace spec\Capco\AppBundle\Manager;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Source;
+use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as Arg;
-use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Psr\Log\LoggerInterface;
 
 class ContributionManagerSpec extends ObjectBehavior
@@ -78,7 +78,8 @@ class ContributionManagerSpec extends ObjectBehavior
                 $debateArgument,
                 $source,
                 $reply,
-            ]);
+            ])
+        ;
 
         $this->publishContributions($user)->shouldReturn(true);
     }

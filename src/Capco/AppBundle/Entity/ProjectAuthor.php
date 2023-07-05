@@ -5,12 +5,12 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\MediaBundle\Entity\Media;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\MediaBundle\Entity\Media;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Project author.

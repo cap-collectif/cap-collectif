@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\MediaBundle\Entity\Media;
 use Capco\AppBundle\Twig\ParametersRuntime;
+use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -120,7 +120,8 @@ class UpdateShieldAdminFormMutation implements MutationInterface
 
         $oldTranslation = $this->em
             ->getRepository(SiteParameterTranslation::class)
-            ->findOneBy(['translatable' => $parameter, 'locale' => $locale]);
+            ->findOneBy(['translatable' => $parameter, 'locale' => $locale])
+        ;
         if ($oldTranslation) {
             $oldTranslation->setValue($translation);
             $parameter->addTranslation($oldTranslation);
@@ -128,13 +129,15 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             $newTranslation = (new SiteParameterTranslation())
                 ->setTranslatable($parameter)
                 ->setLocale($locale)
-                ->setValue($translation);
+                ->setValue($translation)
+            ;
             $parameter->addTranslation($newTranslation);
             $this->em->persist($newTranslation);
             $this->cache->deleteItem(ParametersRuntime::CACHE_KEY . $locale);
         }
 
         $this->updateSiteParameterMutation->invalidateCache($parameter);
+
         return $parameter;
     }
 

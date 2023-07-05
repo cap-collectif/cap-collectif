@@ -64,15 +64,18 @@ class LeaveOrganizationMutationSpec extends ObjectBehavior
         $organizationMember2->getOrganization()->willReturn($organization2);
         $repository
             ->findOneBy(['user' => $viewer, 'organization' => $organization])
-            ->willReturn($organizationMember1);
+            ->willReturn($organizationMember1)
+        ;
         $viewer
             ->getMemberOfOrganizations()
-            ->willReturn(new ArrayCollection([$organizationMember1, $organizationMember2]));
+            ->willReturn(new ArrayCollection([$organizationMember1, $organizationMember2]))
+        ;
 
         $viewer
             ->removeOrganization($organization)
             ->shouldBeCalled()
-            ->willReturn([$organization2]);
+            ->willReturn([$organization2])
+        ;
         $entityManager->remove($organizationMember1)->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 

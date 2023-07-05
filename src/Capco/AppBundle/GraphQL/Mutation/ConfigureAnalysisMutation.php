@@ -72,20 +72,19 @@ class ConfigureAnalysisMutation implements MutationInterface
             $selectionStepStatusId,
             $costEstimationEnabled,
             $body,
-            $bodyUsingJoditWysiwyg,
-        ) = [
-            $args->offsetGet('proposalFormId'),
-            $args->offsetGet('evaluationFormId'),
-            $args->offsetGet('analysisStepId'),
-            $args->offsetGet('effectiveDate'),
-            $args->offsetGet('favourableStatus'),
-            $args->offsetGet('unfavourableStatuses'),
-            $args->offsetGet('moveToSelectionStepId'),
-            $args->offsetGet('selectionStepStatusId'),
-            $args->offsetGet('costEstimationEnabled'),
-            $args->offsetGet('body'),
-            $args->offsetGet('bodyUsingJoditWysiwyg'),
-        ];
+            $bodyUsingJoditWysiwyg) = [
+                $args->offsetGet('proposalFormId'),
+                $args->offsetGet('evaluationFormId'),
+                $args->offsetGet('analysisStepId'),
+                $args->offsetGet('effectiveDate'),
+                $args->offsetGet('favourableStatus'),
+                $args->offsetGet('unfavourableStatuses'),
+                $args->offsetGet('moveToSelectionStepId'),
+                $args->offsetGet('selectionStepStatusId'),
+                $args->offsetGet('costEstimationEnabled'),
+                $args->offsetGet('body'),
+                $args->offsetGet('bodyUsingJoditWysiwyg'),
+            ];
 
         $evaluationForm = null;
         $favourableStatus = null;
@@ -98,12 +97,10 @@ class ConfigureAnalysisMutation implements MutationInterface
         if (
             !($analysisStep = $this->abstractStepRepository->find(
                 GlobalId::fromGlobalId($analysisStepId)['id']
-            )) &&
-            !($analysisStep instanceof CollectStep || $analysisStep instanceof SelectionStep)
+            ))
+            && !($analysisStep instanceof CollectStep || $analysisStep instanceof SelectionStep)
         ) {
-            throw new UserError(
-                'The analysis step is not an instance of a CollectStep or a SelectionStep.'
-            );
+            throw new UserError('The analysis step is not an instance of a CollectStep or a SelectionStep.');
         }
 
         if (!($analysisConfiguration = $proposalForm->getAnalysisConfiguration())) {
@@ -123,8 +120,8 @@ class ConfigureAnalysisMutation implements MutationInterface
 
         /** @var Questionnaire $evaluationForm */
         if (
-            $evaluationFormId &&
-            !($evaluationForm = $this->questionnaireRepository->find(
+            $evaluationFormId
+            && !($evaluationForm = $this->questionnaireRepository->find(
                 GlobalId::fromGlobalId($evaluationFormId)['id']
             ))
         ) {
@@ -159,7 +156,8 @@ class ConfigureAnalysisMutation implements MutationInterface
             ->setSelectionStepStatus($chosenSelectionStepStatus)
             ->setCostEstimationEnabled($costEstimationEnabled)
             ->setBody($body ?? '')
-            ->setBodyUsingJoditWysiwyg($bodyUsingJoditWysiwyg ?? false);
+            ->setBodyUsingJoditWysiwyg($bodyUsingJoditWysiwyg ?? false)
+        ;
 
         try {
             $this->entityManager->persist($analysisConfiguration);

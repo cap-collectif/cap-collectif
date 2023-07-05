@@ -16,11 +16,9 @@ trait EventMockDataTrait
             'eventStatus' => 'refused',
             'eventTitle' => 'blablbnla',
             'username' => 'Jean',
-            'eventComment' =>
-                'Votre évènement est en attente de correction de votre part. La date n’est pas conforme, veuillez en indiquer une autre.',
+            'eventComment' => 'Votre évènement est en attente de correction de votre part. La date n’est pas conforme, veuillez en indiquer une autre.',
             'eventRefusedReason' => 'Contenu erroné',
-            'comment' =>
-                'pas bien du tqsb qsjbd ojqshdqsod j iodsjm qhgqomhdgqjfgo rhqeo \n sqiodjqspdjqjdbfjsdfhzuofhz',
+            'comment' => 'pas bien du tqsb qsjbd ojqshdqsod j iodsjm qhgqomhdgqjfgo rhqeo \n sqiodjqspdjqjdbfjsdfhzuofhz',
             'adminEmail' => 'admin@test.com',
             'color' => '#dc3445',
         ];

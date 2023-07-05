@@ -110,7 +110,8 @@ class VoteSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Term(['opinion.id' => $opinionId]))
-            ->addFilter(new Term(['opinion.published' => true]));
+            ->addFilter(new Term(['opinion.published' => true]))
+        ;
 
         $query = new Query($boolQuery);
         $query->setSize(0);
@@ -128,7 +129,8 @@ class VoteSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Term(['opinionVersion.id' => $versionId]))
-            ->addFilter(new Term(['opinionVersion.published' => true]));
+            ->addFilter(new Term(['opinionVersion.published' => true]))
+        ;
 
         $query = new Query($boolQuery);
         $query->setSize(0);
@@ -146,6 +148,7 @@ class VoteSearch extends Search
         switch ($field) {
             case 'CREATED_AT':
                 return 'createdAt';
+
             case 'PUBLISHED_AT':
             default:
                 return 'publishedAt';
@@ -175,14 +178,14 @@ class VoteSearch extends Search
                             as $pointedSteps
                         ) {
                             if (
-                                isset($pointedSteps['step'], $keys[0]['step']) &&
-                                $pointedSteps['step']['id'] === $keys[0]['step']->getId()
+                                isset($pointedSteps['step'], $keys[0]['step'])
+                                && $pointedSteps['step']['id'] === $keys[0]['step']->getId()
                             ) {
                                 return $pointedSteps['numericPoints'];
                             }
                             if (
-                                isset($pointedSteps['step'], $keys[1]['step']) &&
-                                $pointedSteps['step']['id'] === $keys[1]['step']->getId()
+                                isset($pointedSteps['step'], $keys[1]['step'])
+                                && $pointedSteps['step']['id'] === $keys[1]['step']->getId()
                             ) {
                                 return $pointedSteps['numericPoints'];
                             }
@@ -495,7 +498,8 @@ class VoteSearch extends Search
                             'project.id' => ['value' => $id],
                         ])
                     )
-                    ->addFilter(new Query\Exists('project'));
+                    ->addFilter(new Query\Exists('project'))
+                ;
             } elseif (strpos($type, 'Step')) {
                 $boolQuery
                     ->addFilter(
@@ -503,13 +507,10 @@ class VoteSearch extends Search
                             'step.id' => ['value' => $id],
                         ])
                     )
-                    ->addFilter(new Query\Exists('step'));
+                    ->addFilter(new Query\Exists('step'))
+                ;
             } else {
-                throw new UserError(
-                    'The contribuableId "' .
-                        $contribuableId .
-                        '" does not match any Project or Step.'
-                );
+                throw new UserError('The contribuableId "' . $contribuableId . '" does not match any Project or Step.');
             }
         }
 
@@ -533,12 +534,14 @@ class VoteSearch extends Search
                 ->addMustNot(new Exists('proposal'))
                 ->addMustNot(new Exists('comment'))
                 ->addFilter(new Exists('project'))
-                ->addFilter($projectViewerCanSeeShouldQuery);
+                ->addFilter($projectViewerCanSeeShouldQuery)
+            ;
 
             $secondShouldQuery = (new BoolQuery())
                 ->addMustNot(new Exists('comment'))
                 ->addMust(new Exists('proposal'))
-                ->addMust($projectViewerCanSeeShouldQuery);
+                ->addMust($projectViewerCanSeeShouldQuery)
+            ;
 
             $thirdShouldQuerySubMustQuery = (new BoolQuery())->addMust(
                 $projectViewerCanSeeShouldQuery
@@ -558,12 +561,14 @@ class VoteSearch extends Search
                         ->addShould($thirdShouldQuerySubMustQuery)
                 )
                 ->addFilter(new Exists('comment'))
-                ->addMustNot(new Exists('comment.trashedStatus'));
+                ->addMustNot(new Exists('comment.trashedStatus'))
+            ;
 
             $conditions[] = (new BoolQuery())
                 ->addShould($firstShouldQuery)
                 ->addShould($secondShouldQuery)
-                ->addShould($thirdShouldQuery);
+                ->addShould($thirdShouldQuery)
+            ;
         }
 
         foreach ($conditions as $condition) {
@@ -624,8 +629,7 @@ class VoteSearch extends Search
                                                 (new BoolQuery())->addFilter(
                                                     new Term([
                                                         'project.visibility' => [
-                                                            'value' =>
-                                                                ProjectVisibilityMode::VISIBILITY_PUBLIC,
+                                                            'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
                                                         ],
                                                     ])
                                                 )
@@ -640,7 +644,8 @@ class VoteSearch extends Search
             )
             ->addFilter(new Term(['published' => ['value' => true]]))
             ->addFilter(new Term(['user.id' => ['value' => $author->getId()]]))
-            ->addFilter(new Term(['private' => ['value' => false]]));
+            ->addFilter(new Term(['private' => ['value' => false]]))
+        ;
 
         if ($onlyAccounted) {
             $boolQuery->addFilter(new Term(['isAccounted' => ['value' => true]]));
@@ -656,7 +661,8 @@ class VoteSearch extends Search
         $boolQuery = new BoolQuery();
         $boolQuery
             ->addFilter(new Term(['user.id' => ['value' => $user->getId()]]))
-            ->addFilter(new Term(['published' => ['value' => true]]));
+            ->addFilter(new Term(['published' => ['value' => true]]))
+        ;
         if ($onlyAccounted) {
             $boolQuery->addFilter(new Term(['isAccounted' => ['value' => true]]));
         }

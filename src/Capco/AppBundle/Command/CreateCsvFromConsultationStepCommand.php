@@ -3,21 +3,21 @@
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Utils\Arr;
-use Capco\AppBundle\Toggle\Manager;
-use Box\Spout\Writer\WriterInterface;
-use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
-use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\WriterInterface;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Utils\Arr;
+use Overblog\GraphQLBundle\Request\Executor;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromConsultationStepCommand extends BaseExportCommand
 {
@@ -31,176 +31,176 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
     protected const REPORTING_PER_PAGE = 100;
 
     protected const ARGUMENT_FRAGMENT = <<<'EOF'
-fragment argumentInfos on Argument {
-  ...relatedInfos
-  id
-  kind
-  ...authorInfos
-  type
-  body
-  createdAt
-  updatedAt
-  url
-  published
-  ...trashableInfos
-  votes(first: 0) {
-    totalCount
-  }
-}
-EOF;
+        fragment argumentInfos on Argument {
+          ...relatedInfos
+          id
+          kind
+          ...authorInfos
+          type
+          body
+          createdAt
+          updatedAt
+          url
+          published
+          ...trashableInfos
+          votes(first: 0) {
+            totalCount
+          }
+        }
+        EOF;
 
     protected const CONTRIBUTION_FRAGMENT = <<<'EOF'
-fragment relatedInfos on Contribution {
-  related {
-     id
-  }
-}
-EOF;
+        fragment relatedInfos on Contribution {
+          related {
+             id
+          }
+        }
+        EOF;
 
     protected const VOTE_FRAGMENT = <<<'EOF'
-fragment voteInfos on YesNoPairedVote {
- id
- author {
-    id
- }
- value
- createdAt
-}
-EOF;
+        fragment voteInfos on YesNoPairedVote {
+         id
+         author {
+            id
+         }
+         value
+         createdAt
+        }
+        EOF;
 
     protected const TRASHABLE_CONTRIBUTION_FRAGMENT = <<<'EOF'
-fragment trashableInfos on Trashable {
-  trashed
-  trashedStatus
-  trashedAt
-  trashedReason
-}
-EOF;
+        fragment trashableInfos on Trashable {
+          trashed
+          trashedStatus
+          trashedAt
+          trashedReason
+        }
+        EOF;
 
     protected const AUTHOR_FRAGMENT = <<<'EOF'
-fragment authorInfos on ContributionWithAuthor {
-  author {
-    id
-    userType{
-        name
-    }
-  }
-}
-EOF;
+        fragment authorInfos on ContributionWithAuthor {
+          author {
+            id
+            userType{
+                name
+            }
+          }
+        }
+        EOF;
 
     protected const REPORTING_FRAGMENT = <<<'EOF'
-fragment reportInfos on Reporting {
-  ...relatedInfos
-  id
-  ...authorInfos
-  type
-  body
-  createdAt
-}
-EOF;
+        fragment reportInfos on Reporting {
+          ...relatedInfos
+          id
+          ...authorInfos
+          type
+          body
+          createdAt
+        }
+        EOF;
 
     protected const SOURCE_FRAGMENT = <<<'EOF'
-fragment sourceInfos on Source {
-  ...relatedInfos
-  id
-  kind
-  ...authorInfos
-  body
-  createdAt
-  updatedAt
-  published
-  ...trashableInfos
-  votes(first: 0) {
-    totalCount
-  }
-}
-EOF;
+        fragment sourceInfos on Source {
+          ...relatedInfos
+          id
+          kind
+          ...authorInfos
+          body
+          createdAt
+          updatedAt
+          published
+          ...trashableInfos
+          votes(first: 0) {
+            totalCount
+          }
+        }
+        EOF;
 
     protected const VERSION_FRAGMENT = <<<'EOF'
-fragment versionInfos on Version {
-    ...relatedInfos
-    id
-    kind
-    ...authorInfos
-    title
-    bodyText
-    comment
-    createdAt
-    updatedAt
-    url
-    published
-    ...trashableInfos
-    votesOk: votes(first: 0, value: YES) {
-      totalCount
-    }
-    votesMitige: votes(first: 0, value: MITIGE) {
-        totalCount
-    }
-    votesNo: votes(first: 0, value: NO) {
-        totalCount
-    }
-    argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
-        totalCount
-    }
-    argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
-        totalCount
-    }
-    arguments {
-      totalCount
-      edges {
-        cursor
-        node {
-          ...argumentInfos
-        }
-      }
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-    }
-    sources {
-      totalCount
-      edges {
-        cursor
-        node {
-          ...sourceInfos
-        }
-      }
-      pageInfo {
-          endCursor
-          hasNextPage
-      }
-    }
-    reportings {
-      totalCount
-      edges {
-      cursor
-        node {
-          ...reportInfos
-        }
-      }
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-    }
-    votes {
-        totalCount
-        edges {
-            cursor
-            node {
-              ...voteInfos
+        fragment versionInfos on Version {
+            ...relatedInfos
+            id
+            kind
+            ...authorInfos
+            title
+            bodyText
+            comment
+            createdAt
+            updatedAt
+            url
+            published
+            ...trashableInfos
+            votesOk: votes(first: 0, value: YES) {
+              totalCount
+            }
+            votesMitige: votes(first: 0, value: MITIGE) {
+                totalCount
+            }
+            votesNo: votes(first: 0, value: NO) {
+                totalCount
+            }
+            argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
+                totalCount
+            }
+            argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
+                totalCount
+            }
+            arguments {
+              totalCount
+              edges {
+                cursor
+                node {
+                  ...argumentInfos
+                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
+            }
+            sources {
+              totalCount
+              edges {
+                cursor
+                node {
+                  ...sourceInfos
+                }
+              }
+              pageInfo {
+                  endCursor
+                  hasNextPage
+              }
+            }
+            reportings {
+              totalCount
+              edges {
+              cursor
+                node {
+                  ...reportInfos
+                }
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+              }
+            }
+            votes {
+                totalCount
+                edges {
+                    cursor
+                    node {
+                      ...voteInfos
+                    }
+                }
+                pageInfo {
+                  endCursor
+                  hasNextPage
+                }
             }
         }
-        pageInfo {
-          endCursor
-          hasNextPage
-        }
-    }
-}
-EOF;
+        EOF;
 
     protected const COLUMN_MAPPING = [
         'type' => '',
@@ -420,7 +420,8 @@ EOF;
                 'query' => $contributionsQuery,
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         $totalCount = Arr::path($contributions, 'data.node.contributions.totalCount');
         $progress = new ProgressBar($output, (int) $totalCount);
@@ -469,143 +470,143 @@ EOF;
         }
 
         return <<<EOF
-${argumentFragment}
-${authorFragment}
-${relatedInfoFragment}
-${voteFragment}
-${reportingFragment}
-${trashableFragment}
-${sourceFragment}
-${versionFragment}
-{
-  node(id: "{$consultationStep->getId()}") {
-    ... on ConsultationStep {
-      contributions(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: ${contributionPerPage}${contributionAfter}, includeTrashed: true) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-          ... on Opinion {
-            id
-            kind
-            ...authorInfos
-            section {
-              title
-              consultation {
-                title
-              }
-            }
-            title
-            bodyText
-            createdAt
-            updatedAt
-            url
-            published
-            ...trashableInfos
-            votesOk: votes(first: 0, value: YES) {
-                totalCount
-            }
-            votesMitige: votes(first: 0, value: MITIGE) {
-                totalCount
-            }
-            votesNo: votes(first: 0, value: NO) {
-                totalCount
-            }
-            argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
-                totalCount
-            }
-            argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
-                totalCount
-            }
-            appendices{
-              appendixType{
-                title
-              }
-              bodyText
-            }
-            votes(first: ${votePerPage}) {
-              totalCount
-              edges {
-                cursor
-                node {
-                  ...voteInfos
+            {$argumentFragment}
+            {$authorFragment}
+            {$relatedInfoFragment}
+            {$voteFragment}
+            {$reportingFragment}
+            {$trashableFragment}
+            {$sourceFragment}
+            {$versionFragment}
+            {
+              node(id: "{$consultationStep->getId()}") {
+                ... on ConsultationStep {
+                  contributions(orderBy: {field: PUBLISHED_AT, direction: DESC}, first: {$contributionPerPage}{$contributionAfter}, includeTrashed: true) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                      ... on Opinion {
+                        id
+                        kind
+                        ...authorInfos
+                        section {
+                          title
+                          consultation {
+                            title
+                          }
+                        }
+                        title
+                        bodyText
+                        createdAt
+                        updatedAt
+                        url
+                        published
+                        ...trashableInfos
+                        votesOk: votes(first: 0, value: YES) {
+                            totalCount
+                        }
+                        votesMitige: votes(first: 0, value: MITIGE) {
+                            totalCount
+                        }
+                        votesNo: votes(first: 0, value: NO) {
+                            totalCount
+                        }
+                        argumentsFor: arguments(first: 0, type: FOR, includeTrashed: true) {
+                            totalCount
+                        }
+                        argumentsAgainst: arguments(first: 0, type: AGAINST, includeTrashed: true) {
+                            totalCount
+                        }
+                        appendices{
+                          appendixType{
+                            title
+                          }
+                          bodyText
+                        }
+                        votes(first: {$votePerPage}) {
+                          totalCount
+                          edges {
+                            cursor
+                            node {
+                              ...voteInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        arguments(first: {$argumentPerPage}, includeTrashed: true) {
+                          totalCount
+                          edges {
+                            cursor
+                            node {
+                              ...argumentInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        sources(first: {$sourcePerPage}) {
+                          totalCount
+                          edges {
+                            cursor
+                            node {
+                              ...sourceInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        reportings(first: {$reportingPerPage}) {
+                          totalCount
+                          edges {
+                          cursor
+                            node {
+                              ...reportInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        versions(first: {$versionPerPage}) {
+                          totalCount
+                          edges {
+                            cursor
+                            node {
+                              ...versionInfos
+                            }
+                          }
+                          pageInfo {
+                            startCursor
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
             }
-            arguments(first: ${argumentPerPage}, includeTrashed: true) {
-              totalCount
-              edges {
-                cursor
-                node {
-                  ...argumentInfos
-                }
-              }
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
             }
-            sources(first: ${sourcePerPage}) {
-              totalCount
-              edges {
-                cursor
-                node {
-                  ...sourceInfos
-                }
-              }
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
-            }
-            reportings(first: ${reportingPerPage}) {
-              totalCount
-              edges {
-              cursor
-                node {
-                  ...reportInfos
-                }
-              }
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
-            }
-            versions(first: ${versionPerPage}) {
-              totalCount
-              edges {
-                cursor
-                node {
-                  ...versionInfos
-                }
-              }
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-}
-EOF;
+            EOF;
     }
 
     private function addContributionSourcesRow($source): void
@@ -754,44 +755,44 @@ EOF;
         }
 
         return <<<EOF
-${voteFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      votes(first: ${votesPerPage}${votesAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...voteInfos
-          }
-        }
-      }
-    }
-    ... on Version {
-        votes(first: ${votesPerPage}${votesAfterCursor}) {
-          totalCount
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...voteInfos
+            {$voteFragment}
+            {
+              node(id: "{$opinionId}") {
+                ... on Opinion {
+                  votes(first: {$votesPerPage}{$votesAfterCursor}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...voteInfos
+                      }
+                    }
+                  }
+                }
+                ... on Version {
+                    votes(first: {$votesPerPage}{$votesAfterCursor}) {
+                      totalCount
+                      pageInfo {
+                        startCursor
+                        endCursor
+                        hasNextPage
+                      }
+                      edges {
+                        cursor
+                        node {
+                          ...voteInfos
+                        }
+                      }
+                    }
+                  }
+              }
             }
-          }
-        }
-      }
-  }
-}
-EOF;
+            EOF;
     }
 
     private function getOpinionSourcesGraphQLQuery(
@@ -809,31 +810,31 @@ EOF;
         }
 
         return <<<EOF
-${authorFragment}
-${relatedFragment}
-${trashableFragment}
-${sourceFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Sourceable {
-      sources(first: ${sourcesPerPage}${sourcesAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...sourceInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$authorFragment}
+            {$relatedFragment}
+            {$trashableFragment}
+            {$sourceFragment}
+            {
+              node(id: "{$opinionId}") {
+                ... on Sourceable {
+                  sources(first: {$sourcesPerPage}{$sourcesAfterCursor}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...sourceInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     private function getOpinionReportingsGraphQLQuery(
@@ -850,30 +851,30 @@ EOF;
         }
 
         return <<<EOF
-${authorFragment}
-${relatedFragment}
-${reportingFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Reportable {
-      reportings(first: ${reportingPerPage}${reportingsAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...reportInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$authorFragment}
+            {$relatedFragment}
+            {$reportingFragment}
+            {
+              node(id: "{$opinionId}") {
+                ... on Reportable {
+                  reportings(first: {$reportingPerPage}{$reportingsAfterCursor}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...reportInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     private function getVersionsGraphQLQuery(
@@ -895,35 +896,35 @@ EOF;
         }
 
         return <<<EOF
-${authorFragment}
-${relatedFragment}
-${trashableFragment}
-${argumentFragment}
-${sourceFragment}
-${reportingFragment}
-${voteFragment}
-${versionFragment}
-{
-  node(id: "${opinionId}") {
-    ... on Opinion {
-      versions(first: ${versionPerPage}${versionsAfterCursor}) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...versionInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$authorFragment}
+            {$relatedFragment}
+            {$trashableFragment}
+            {$argumentFragment}
+            {$sourceFragment}
+            {$reportingFragment}
+            {$voteFragment}
+            {$versionFragment}
+            {
+              node(id: "{$opinionId}") {
+                ... on Opinion {
+                  versions(first: {$versionPerPage}{$versionsAfterCursor}) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...versionInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     private function getContributionsArgumentsGraphQLQuery(
@@ -941,31 +942,31 @@ EOF;
         }
 
         return <<<EOF
-${argumentFragment}
-${relatedInfoFragment}
-${authorFragment}
-${trashableFragment}
-{
-  node(id: "${contributionId}") {
-    ... on Argumentable {
-      arguments(first: ${argumentsPerPage}${argumentAfter}, includeTrashed: true) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...argumentInfos
-          }
-        }
-      }
-    }
-  }
-}
-EOF;
+            {$argumentFragment}
+            {$relatedInfoFragment}
+            {$authorFragment}
+            {$trashableFragment}
+            {
+              node(id: "{$contributionId}") {
+                ... on Argumentable {
+                  arguments(first: {$argumentsPerPage}{$argumentAfter}, includeTrashed: true) {
+                    totalCount
+                    pageInfo {
+                      startCursor
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      cursor
+                      node {
+                        ...argumentInfos
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            EOF;
     }
 
     private function addContributionVersionRow($version): void
@@ -1060,7 +1061,7 @@ EOF;
                     // Get relative path for "module" using convention "${type}." but still customizable to prevent
                     // a contribution from having path beginning like this as well
                     $arr = explode('.', substr($columnName, \strlen($submodulePath)));
-                    //In this case, we want to refer to the contribution link to the submodule
+                //In this case, we want to refer to the contribution link to the submodule
                 } elseif ($this->isSubdataBlocColumn($columnName, 'contribution.')) {
                     $arr = explode('.', substr($columnName, \strlen('contribution.')));
                     $this->recurviselySearchValue($arr, $contribution, $row);

@@ -35,7 +35,8 @@ class MakeProcessor extends AbstractMaker
                 'name',
                 InputArgument::REQUIRED,
                 "The name of your processor. You don't need to put the suffix Processor, it will be automatically added."
-            );
+            )
+        ;
     }
 
     protected function interact(InputInterface $input, OutputInterface $output)

@@ -2,37 +2,37 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
+use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\OfficialResponse;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
-use Capco\AppBundle\Repository\OfficialResponseRepository;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Event;
-use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Requirement;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Debate\Debate;
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Repository\EventRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Entity\Debate\DebateOpinion;
+use Capco\AppBundle\Repository\DebateOpinionRepository;
 use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\DebateOpinionRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GlobalIdResolverSpec extends ObjectBehavior
@@ -260,7 +260,7 @@ class GlobalIdResolverSpec extends ObjectBehavior
     ) {
         $id = 'Unknoownnnn1';
         $repository->find($id)->willReturn(null);
-        $logger->warning("Could not resolve node with uuid ${id}")->shouldBeCalled();
+        $logger->warning("Could not resolve node with uuid {$id}")->shouldBeCalled();
         $container->get(Argument::any())->willReturn($repository);
         $this->beConstructedWith($container, $logger, $entityManager);
         $this->resolve($id, null)->shouldReturn(null);

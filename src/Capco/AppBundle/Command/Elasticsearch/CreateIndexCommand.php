@@ -28,7 +28,8 @@ class CreateIndexCommand extends Command
             ->setDescription('Create the Elasticsearch Indexes.')
             ->setDefinition(
                 new InputDefinition([new InputOption('populate', 'p', InputOption::VALUE_NONE)])
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

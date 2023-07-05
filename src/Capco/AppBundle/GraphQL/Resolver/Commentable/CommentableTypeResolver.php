@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class CommentableTypeResolver implements ResolverInterface
 {

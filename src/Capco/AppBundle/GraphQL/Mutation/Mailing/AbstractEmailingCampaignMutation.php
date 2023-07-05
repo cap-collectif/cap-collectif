@@ -50,8 +50,8 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (
-            null === $emailingCampaign ||
-            !$this->authorizationChecker->isGranted(
+            null === $emailingCampaign
+            || !$this->authorizationChecker->isGranted(
                 [EmailingCampaignVoter::EDIT],
                 $emailingCampaign
             )
@@ -70,8 +70,8 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
     {
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (
-            null === $emailingCampaign ||
-            !$this->authorizationChecker->isGranted(
+            null === $emailingCampaign
+            || !$this->authorizationChecker->isGranted(
                 [EmailingCampaignVoter::SEND],
                 $emailingCampaign
             )

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
-use Symfony\Component\Console\Command\Command;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,7 +16,8 @@ class EncodeGlobalIdCommand extends Command
     {
         $this->setDescription('Get a Global ID.')
             ->addArgument('type', InputArgument::REQUIRED, 'The type')
-            ->addArgument('id', InputArgument::REQUIRED, 'The ID');
+            ->addArgument('id', InputArgument::REQUIRED, 'The ID')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

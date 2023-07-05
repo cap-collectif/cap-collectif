@@ -46,7 +46,7 @@ class ProposalUpdateProcessor implements ProcessorInterface
     {
         $proposal = $this->proposalRepository->find($json['proposalId']);
 
-        if (is_null($proposal)) {
+        if (null === $proposal) {
             $this->logger->error(
                 __CLASS__ . ' - Unable to find proposal with id: ' . $json['proposalId']
             );

@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\Form\EventType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -15,13 +16,12 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -126,7 +126,8 @@ class AddEventsMutation extends AbstractEventMutation
                                 $viewer
                             )
                         )
-                        ->setCreator($viewer);
+                        ->setCreator($viewer)
+                    ;
 
                     if (\is_array($eventInput['projects']) && !empty($eventInput['projects'])) {
                         foreach ($eventInput['projects'] as $key => $projectTitle) {
@@ -160,8 +161,8 @@ class AddEventsMutation extends AbstractEventMutation
                         as $availableLocale
                     ) {
                         if (
-                            isset($eventInput['translations'][$availableLocale]) &&
-                            null === $event->translate($availableLocale)
+                            isset($eventInput['translations'][$availableLocale])
+                            && null === $event->translate($availableLocale)
                         ) {
                             $translation = new EventTranslation();
                             $translation->setTranslatable($event);

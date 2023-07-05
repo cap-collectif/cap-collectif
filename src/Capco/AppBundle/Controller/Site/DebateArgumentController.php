@@ -41,7 +41,7 @@ class DebateArgumentController extends AbstractController
         /** @var DebateAnonymousArgument $argument */
         $argument = $repository->findOneByToken($token);
         if (null === $argument) {
-            $logger->info("invalid token ${token} used to publish argument");
+            $logger->info("invalid token {$token} used to publish argument");
             $this->addFlash('danger', $translator->trans('invalid-token', [], 'CapcoAppBundle'));
 
             return $this->redirectToRoute('app_homepage');

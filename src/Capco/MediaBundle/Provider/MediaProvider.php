@@ -60,6 +60,9 @@ class MediaProvider
 
     /**
      * Stubs for Sonata, to remove when not needed anymore.
+     *
+     * @param mixed $name
+     * @param mixed $format
      */
     public function addFormat($name, $format)
     {

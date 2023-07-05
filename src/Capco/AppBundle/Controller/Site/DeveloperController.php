@@ -4,20 +4,20 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Cache\RedisCache;
 use GraphQL\Type\Definition\EnumType;
-use GraphQL\Type\Definition\UnionType;
-use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\ScalarType;
-use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectType;
+use GraphQL\Type\Definition\InterfaceType;
+use GraphQL\Type\Definition\ObjectType;
+use GraphQL\Type\Definition\ScalarType;
+use GraphQL\Type\Definition\UnionType;
+use Overblog\GraphQLBundle\Resolver\TypeResolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
-use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
 class DeveloperController extends Controller
 {
@@ -62,6 +62,9 @@ class DeveloperController extends Controller
      * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Template("CapcoAppBundle:Developer:index.html.twig")
+     *
+     * @param null|mixed $category
+     * @param null|mixed $type
      */
     public function indexAction(
         Request $request,
@@ -154,10 +157,10 @@ class DeveloperController extends Controller
 
                 // We remove everything not in public or preview schema
                 if (
-                    !\in_array($aliases[0], $publicWhiteList) &&
-                    false === $solution->{'preview'} &&
-                    'Public' !== substr($aliases[0], 0, 6) &&
-                    (!$existsInPreviewDirectory && !$existsInPublicDirectory)
+                    !\in_array($aliases[0], $publicWhiteList)
+                    && false === $solution->{'preview'}
+                    && 'Public' !== substr($aliases[0], 0, 6)
+                    && (!$existsInPreviewDirectory && !$existsInPublicDirectory)
                 ) {
                     continue;
                 }
@@ -233,9 +236,7 @@ class DeveloperController extends Controller
 
             // If we could not find the the requested type, let's throw a 404.
             if ($type && !$selection) {
-                throw $this->createNotFoundException(
-                    'The requested type could not be found: ' . $type
-                );
+                throw $this->createNotFoundException('The requested type could not be found: ' . $type);
             }
 
             $data = [

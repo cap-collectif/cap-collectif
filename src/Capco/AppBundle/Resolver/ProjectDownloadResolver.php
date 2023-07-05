@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\Resolver;
 
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\ReplyAnonymous;
-use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
-use Capco\AppBundle\Utils\Text;
-use Liuggio\ExcelBundle\Factory;
-use Capco\AppBundle\Entity\Reply;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
+use Capco\AppBundle\Utils\Text;
+use Doctrine\ORM\EntityManagerInterface;
+use Liuggio\ExcelBundle\Factory;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
 {
@@ -114,11 +114,13 @@ class ProjectDownloadResolver
         $this->data = [];
         $userReplies = $this->em
             ->getRepository(Reply::class)
-            ->getEnabledByQuestionnaireAsArray($questionnaire);
+            ->getEnabledByQuestionnaireAsArray($questionnaire)
+        ;
 
         $anonymousReplies = $this->em
             ->getRepository(ReplyAnonymous::class)
-            ->getEnabledByQuestionnaireAsArray($questionnaire);
+            ->getEnabledByQuestionnaireAsArray($questionnaire)
+        ;
 
         $replies = array_merge($userReplies, $anonymousReplies);
 
@@ -138,7 +140,8 @@ class ProjectDownloadResolver
         foreach ($replies as $reply) {
             $responses = $this->em
                 ->getRepository(AbstractResponse::class)
-                ->getByReplyAsArray($reply['id']);
+                ->getByReplyAsArray($reply['id'])
+            ;
             $this->addItemToData($this->getReplyItem($reply, $responses, $projectAdmin));
         }
     }
@@ -230,8 +233,8 @@ class ProjectDownloadResolver
 
         if (
             AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
-                (int) $response['question']['type'] &&
-            null !== $response['value']
+                (int) $response['question']['type']
+            && null !== $response['value']
         ) {
             return $this->translator->trans(
                 MajorityVoteTypeEnum::toI18nKey($response['value']),

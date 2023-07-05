@@ -3,12 +3,12 @@
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentsResolver;
 use Capco\AppBundle\Search\DebateSearch;
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Debate\Debate;
 use Overblog\GraphQLBundle\Definition\Argument;
+use PhpSpec\ObjectBehavior;
 
 class DebateArgumentsResolverSpec extends ObjectBehavior
 {
@@ -41,7 +41,8 @@ class DebateArgumentsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn($result)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $result->getEntities()->willReturn([]);
         $result->getCursors()->willReturn([]);
         $result->getTotalCount()->willReturn(0);
@@ -69,7 +70,8 @@ class DebateArgumentsResolverSpec extends ObjectBehavior
                 \Prophecy\Argument::any()
             )
             ->willReturn($result)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $result->getEntities()->willReturn([$a, $b]);
         $result->getCursors()->willReturn([['a'], ['b']]);
         $result->getTotalCount()->willReturn(2);

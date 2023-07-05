@@ -23,7 +23,7 @@ class TranslationExtension extends AbstractExtension
     {
         return (\is_object($object)
             ? $object instanceof Translatable
-            : \in_array(Translatable::class, class_implements($object))) &&
-            (!method_exists($object, 'isTranslatable') || (new $object())->isTranslatable());
+            : \in_array(Translatable::class, class_implements($object)))
+            && (!method_exists($object, 'isTranslatable') || (new $object())->isTranslatable());
     }
 }

@@ -12,10 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionValidationRuleType extends AbstractType implements DataMapperInterface
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,7 +25,8 @@ class QuestionValidationRuleType extends AbstractType implements DataMapperInter
             ->add('number', IntegerType::class, [
                 'label' => 'admin.fields.validation_rule.number',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     public function mapDataToForms($data, $forms)

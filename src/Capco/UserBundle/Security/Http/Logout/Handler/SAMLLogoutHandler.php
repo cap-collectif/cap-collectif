@@ -24,7 +24,8 @@ class SAMLLogoutHandler implements LogoutHandlerInterface
             $responseWithRequest
                 ->getRequest()
                 ->getSession()
-                ->invalidate();
+                ->invalidate()
+            ;
 
             $this->samlClient->logout($responseWithRequest->getResponse()->getTargetUrl());
 

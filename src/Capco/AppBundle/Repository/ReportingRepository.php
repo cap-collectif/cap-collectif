@@ -19,7 +19,8 @@ class ReportingRepository extends EntityRepository
         $qb = $this->createQueryBuilder('r');
         $qb->select('count(DISTINCT r)')
             ->andWhere('r.Reporter = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
         $qb->andWhere('r.debateArgument = :argument')->setParameter('argument', $argument);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -37,7 +38,8 @@ class ReportingRepository extends EntityRepository
         $qb->andWhere('r.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -51,7 +53,8 @@ class ReportingRepository extends EntityRepository
         $qb = $this->createQueryBuilder('r');
         $qb->select('count(DISTINCT r)')
             ->andWhere('r.Reporter = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -71,7 +74,8 @@ class ReportingRepository extends EntityRepository
             ->where('r.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countForComment(Comment $comment): int
@@ -81,7 +85,8 @@ class ReportingRepository extends EntityRepository
             ->where('r.Comment = :comment')
             ->setParameter('comment', $comment)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByComment(
@@ -96,7 +101,8 @@ class ReportingRepository extends EntityRepository
         $qb->andWhere('r.Comment = :comment')
             ->setParameter('comment', $comment)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -117,7 +123,8 @@ class ReportingRepository extends EntityRepository
         $qb->andWhere('r.Opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -133,7 +140,8 @@ class ReportingRepository extends EntityRepository
             ->where('r.Opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByOpinionVersion(
@@ -148,7 +156,8 @@ class ReportingRepository extends EntityRepository
         $qb->andWhere('r.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -164,7 +173,8 @@ class ReportingRepository extends EntityRepository
             ->where('r.opinionVersion = :opinionVersion')
             ->setParameter('opinionVersion', $opinionVersion)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByDebateArgument(
@@ -179,7 +189,8 @@ class ReportingRepository extends EntityRepository
         $qb->andWhere('r.debateArgument = :debateArgument')
             ->setParameter('debateArgument', $debateArgument)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -195,7 +206,8 @@ class ReportingRepository extends EntityRepository
             ->where('r.debateArgument = :debateArgument')
             ->setParameter('debateArgument', $debateArgument)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getRecentOrdered(): array
@@ -209,7 +221,8 @@ class ReportingRepository extends EntityRepository
             ->leftJoin('r.Argument', 'a')
             ->leftJoin('r.Comment', 'c')
             ->leftJoin('r.proposal', 'p')
-            ->addOrderBy('r.createdAt', 'DESC');
+            ->addOrderBy('r.createdAt', 'DESC')
+        ;
 
         return $qb->getQuery()->execute();
     }
@@ -224,10 +237,11 @@ class ReportingRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('r');
 
-        $qb->andWhere("r.${contributionType} = :contribution")
+        $qb->andWhere("r.{$contributionType} = :contribution")
             ->setParameter('contribution', $contribution)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ('PUBLISHED_AT' === $field) {
             $qb->addOrderBy('r.createdAt', $direction);
@@ -242,9 +256,10 @@ class ReportingRepository extends EntityRepository
     ): int {
         return (int) $this->createQueryBuilder('r')
             ->select('COUNT(r.id)')
-            ->andWhere("r.${contributionType} = :contribution")
+            ->andWhere("r.{$contributionType} = :contribution")
             ->setParameter('contribution', $contribution)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 }

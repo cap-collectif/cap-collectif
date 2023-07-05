@@ -96,7 +96,7 @@ class OpinionController extends Controller
         if (null === $opinionType) {
             return $this->redirectToRoute('app_project_show', [
                 'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug()
+                'stepSlug' => $step->getSlug(),
             ]);
         }
 

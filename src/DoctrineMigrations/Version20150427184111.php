@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -31,14 +31,17 @@ class Version20150427184111 extends AbstractMigration
                     $step['step_type'] = 'other';
 
                     break;
+
                 case 1:
                     $step['step_type'] = 'consultation';
 
                     break;
+
                 case 2:
                     $step['step_type'] = 'presentation';
 
                     break;
+
                 default:
                     exit('unknown step type for step : ' . $step['id']);
             }
@@ -47,8 +50,8 @@ class Version20150427184111 extends AbstractMigration
         foreach ($this->types as &$type) {
             foreach ($this->steps as &$step) {
                 if (
-                    $step['consultation_id'] === $type['consultation_id'] &&
-                    'consultation' === $step['step_type']
+                    $step['consultation_id'] === $type['consultation_id']
+                    && 'consultation' === $step['step_type']
                 ) {
                     $type['step_id'] = $step['id'];
                 }
@@ -58,8 +61,8 @@ class Version20150427184111 extends AbstractMigration
         foreach ($this->opinions as &$opinion) {
             foreach ($this->steps as &$step) {
                 if (
-                    $step['consultation_id'] === $opinion['Consultation_id'] &&
-                    'consultation' === $step['step_type']
+                    $step['consultation_id'] === $opinion['Consultation_id']
+                    && 'consultation' === $step['step_type']
                 ) {
                     $opinion['step_id'] = $step['id'];
                 }
@@ -193,14 +196,17 @@ class Version20150427184111 extends AbstractMigration
                     $step['type'] = 0;
 
                     break;
+
                 case 'consultation':
                     $step['type'] = 1;
 
                     break;
+
                 case 'presentation':
                     $step['type'] = 2;
 
                     break;
+
                 default:
                     exit('unknown step type for step : ' . $step['id']);
             }

@@ -54,7 +54,8 @@ class ReportingAdmin extends AbstractAdmin
             ])
             ->add('isArchived', null, [
                 'label' => 'admin.fields.reporting.is_archived',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -90,7 +91,8 @@ class ReportingAdmin extends AbstractAdmin
                 'actions' => [
                     'show' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -125,7 +127,8 @@ class ReportingAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

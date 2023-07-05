@@ -1,10 +1,11 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
+use Capco\AppBundle\Entity\EmailDomain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Capco\AppBundle\Entity\EmailDomain;
 
 class EmailDomainType extends AbstractType
 {

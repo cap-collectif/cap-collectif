@@ -75,7 +75,8 @@ class MailerService extends MailerFactory
             $this->cacheLocalizedPartsIfNotYet($localizedParts, $message, $locale);
             $swiftMessage
                 ->setSubject($localizedParts[$locale]['subject'])
-                ->setBody($localizedParts[$locale]['body']);
+                ->setBody($localizedParts[$locale]['body'])
+            ;
             $this->sendSwiftMessageToRecipient($swiftMessage, $recipient);
         }
 

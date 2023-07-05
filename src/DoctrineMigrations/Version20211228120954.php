@@ -18,7 +18,7 @@ final class Version20211228120954 extends AbstractFeatureFlagMigration
 
     protected function getOldFlag(): ?string
     {
-        return "majority_vote_question";
+        return 'majority_vote_question';
     }
 
     protected function getNewFlag(): ?string

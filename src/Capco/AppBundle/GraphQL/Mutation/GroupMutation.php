@@ -107,9 +107,7 @@ class GroupMutation implements MutationInterface
             $group
         );
         if (!$group->isDeletable() && !$isGroupUsedInCampaign) {
-            throw new UserError(
-                sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId)
-            );
+            throw new UserError(sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId));
         }
 
         try {
@@ -161,7 +159,8 @@ class GroupMutation implements MutationInterface
                 ->setTitle($groupName)
                 ->setIsDeletable(false)
                 ->setDescription('Group for ' . $groupName . ' Users')
-                ->setSlug('group-' . $groupName);
+                ->setSlug('group-' . $groupName)
+            ;
 
             $this->entityManager->persist($group);
             $this->entityManager->flush();

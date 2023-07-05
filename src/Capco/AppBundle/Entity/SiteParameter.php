@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
+use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="site_parameter")
@@ -51,16 +51,16 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'redirectionio.project.id',
     ];
 
-    const TYPE_SIMPLE_TEXT = 0;
-    const TYPE_RICH_TEXT = 1;
-    const TYPE_INTEGER = 2;
-    const TYPE_JS = 3;
-    const TYPE_EMAIL = 4;
-    const TYPE_INTERN_URL = 5;
-    const TYPE_URL = 6;
-    const TYPE_TEL_NB = 7;
-    const TYPE_BOOLEAN = 8;
-    const TYPE_SELECT = 9;
+    public const TYPE_SIMPLE_TEXT = 0;
+    public const TYPE_RICH_TEXT = 1;
+    public const TYPE_INTEGER = 2;
+    public const TYPE_JS = 3;
+    public const TYPE_EMAIL = 4;
+    public const TYPE_INTERN_URL = 5;
+    public const TYPE_URL = 6;
+    public const TYPE_TEL_NB = 7;
+    public const TYPE_BOOLEAN = 8;
+    public const TYPE_SELECT = 9;
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,

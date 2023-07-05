@@ -20,7 +20,8 @@ class EventRepository extends EntityRepository
             ->leftJoin('a.media', 'm')
             ->leftJoin('e.themes', 't')
             ->where('e.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -33,7 +34,8 @@ class EventRepository extends EntityRepository
         $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e');
         $qb->select('count(DISTINCT e)')
             ->andWhere('e.author = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -49,7 +51,8 @@ class EventRepository extends EntityRepository
     ): array {
         $qb = $this->createAvailableOrApprovedEventsQueryBuilder('e')
             ->andWhere('e.author = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         if ($field && $direction && 'START_AT' === $field) {
             $qb->addOrderBy('e.startAt', $direction);
@@ -73,7 +76,8 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.translations', 'translation')
             ->andWhere('translation.slug = :slug')
             ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -90,11 +94,15 @@ class EventRepository extends EntityRepository
             ->where('p.id = :project')
             ->setParameter('project', $projectId)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     /**
      * @deprecated: Remove me when address migration is over.
+     *
+     * @param mixed $offset
+     * @param mixed $limit
      */
     public function getEventsWithAddress($offset = 0, $limit = 1): array
     {
@@ -103,7 +111,8 @@ class EventRepository extends EntityRepository
             ->orderBy('e.createdAt', 'ASC')
             ->andWhere('e.addressJson IS NULL')
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -117,7 +126,8 @@ class EventRepository extends EntityRepository
             ->select('count(e.id)')
             ->andWhere('e.addressJson IS NULL')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByUserAndReviewStatus(
@@ -139,7 +149,8 @@ class EventRepository extends EntityRepository
             ->setParameter('status', $status)
             ->setParameter('author', $user)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -154,7 +165,8 @@ class EventRepository extends EntityRepository
             ->orderBy('e.createdAt', 'ASC')
             ->leftJoin('e.review', 'r')
             ->andWhere('r.status IN (:status)')
-            ->setParameter('status', $status);
+            ->setParameter('status', $status)
+        ;
 
         if ($user) {
             $qb->andWhere('e.author = :author')->setParameter('author', $user);
@@ -171,7 +183,8 @@ class EventRepository extends EntityRepository
             ->addSelect('translation.slug, e.id')
             ->andWhere('e.guestListEnabled = true')
             ->andWhere('e.enabled = true OR r.status = :status')
-            ->setParameter('status', EventReviewStatusType::APPROVED);
+            ->setParameter('status', EventReviewStatusType::APPROVED)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -182,7 +195,8 @@ class EventRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOwner(Owner $owner, $options): int
@@ -190,7 +204,8 @@ class EventRepository extends EntityRepository
         return $this->getByOwnerQueryBuilder($owner, $options)
             ->select('count(e.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByOwnerQueryBuilder(Owner $owner, $options): QueryBuilder
@@ -215,12 +230,15 @@ class EventRepository extends EntityRepository
         switch ($options['status'] ?? false) {
             case EventReviewStatusType::DELETED:
                 $qb->andWhere('e.deletedAt IS NOT NULL');
+
                 break;
+
             case EventReviewStatusType::AWAITING:
             case EventReviewStatusType::APPROVED:
             case EventReviewStatusType::REFUSED:
                 $qb->leftJoin('e.review', 'review');
                 $qb->andWhere('e.review IS NOT NULL');
+
                 break;
         }
 
@@ -230,7 +248,7 @@ class EventRepository extends EntityRepository
     private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder
     {
         $qb = $this->createQueryBuilder($alias);
-        $qb->leftJoin("${alias}.review", 'review')
+        $qb->leftJoin("{$alias}.review", 'review')
             ->andWhere(
                 $qb
                     ->expr()
@@ -239,7 +257,8 @@ class EventRepository extends EntityRepository
                         $qb->expr()->eq('review.status', ':reviewStatus')
                     )
             )
-            ->setParameter('reviewStatus', EventReviewStatusType::APPROVED);
+            ->setParameter('reviewStatus', EventReviewStatusType::APPROVED)
+        ;
 
         return $qb;
     }

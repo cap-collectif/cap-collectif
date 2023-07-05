@@ -44,10 +44,8 @@ class SectionType extends AbstractType
             ])
             ->add('displayMode', ChoiceType::class, [
                 'choices' => [
-                    HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT =>
-                        HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT,
-                    HomePageProjectsSectionConfigurationDisplayMode::CUSTOM =>
-                        HomePageProjectsSectionConfigurationDisplayMode::CUSTOM,
+                    HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT => HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT,
+                    HomePageProjectsSectionConfigurationDisplayMode::CUSTOM => HomePageProjectsSectionConfigurationDisplayMode::CUSTOM,
                 ],
             ])
             ->add('sectionProjects', CollectionType::class, [
@@ -58,7 +56,8 @@ class SectionType extends AbstractType
             ])
             ->add('centerLatitude', NumberType::class)
             ->add('centerLongitude', NumberType::class)
-            ->add('zoomMap', NumberType::class);
+            ->add('zoomMap', NumberType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

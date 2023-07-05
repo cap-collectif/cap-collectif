@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -13,20 +15,18 @@ use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\ProposalEvaluationRepository;
 use Capco\AppBundle\Repository\ReportingRepository;
+use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\UserBundle\Doctrine\UserManager;
-use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use GraphQL\Error\UserError;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Repository\UserRepository;
-use Capco\AppBundle\Repository\UserGroupRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

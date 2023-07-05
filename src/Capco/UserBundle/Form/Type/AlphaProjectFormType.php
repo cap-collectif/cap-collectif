@@ -17,13 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AlphaProjectFormType extends AbstractType
 {
@@ -89,7 +89,8 @@ class AlphaProjectFormType extends AbstractType
             ->add('visibility')
             ->add('opinionCanBeFollowed')
             ->add('archived', CheckboxType::class)
-            ->add('address', TextType::class);
+            ->add('address', TextType::class)
+        ;
 
         $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));
 
@@ -104,7 +105,8 @@ class AlphaProjectFormType extends AbstractType
                     ])
                     ->add('externalParticipantsCount')
                     ->add('externalContributionsCount')
-                    ->add('externalVotesCount');
+                    ->add('externalVotesCount')
+                ;
             } else {
                 $form->add('externalLink', UrlType::class, [
                     'required' => false,

@@ -32,7 +32,7 @@ class DeleteSSOConfigurationMutation implements MutationInterface
         $ssoConfiguration = $this->repository->find($ssoConfigurationId);
 
         if (!$ssoConfiguration) {
-            $this->logger->error("Unknown SSO Configuration with id: ${ssoConfigurationId}");
+            $this->logger->error("Unknown SSO Configuration with id: {$ssoConfigurationId}");
 
             return [
                 'userErrors' => [

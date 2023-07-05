@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\IdTrait;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Project Type.
@@ -46,7 +46,7 @@ class ProjectType
         return $this->title;
     }
 
-    public function setTitle(string $title = null): self
+    public function setTitle(?string $title = null): self
     {
         $this->title = $title;
 
@@ -58,7 +58,7 @@ class ProjectType
         return $this->slug;
     }
 
-    public function setSlug(string $slug = null): self
+    public function setSlug(?string $slug = null): self
     {
         $this->slug = $slug;
 
@@ -70,7 +70,7 @@ class ProjectType
         return $this->color;
     }
 
-    public function setColor(string $color = null): self
+    public function setColor(?string $color = null): self
     {
         $this->color = $color;
 

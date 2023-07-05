@@ -7,16 +7,13 @@ use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepContributorCountResolver;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalCountResolver;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class CollectStepNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
@@ -62,7 +59,8 @@ class CollectStepNormalizer implements
             ->__invoke($object)
             ->then(function ($value) use (&$contributorsCount) {
                 $contributorsCount += $value;
-            });
+            })
+        ;
 
         $this->adapter->await($contributorPromise);
 

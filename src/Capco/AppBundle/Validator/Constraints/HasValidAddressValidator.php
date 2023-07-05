@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Validator\Constraints;
 
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Query\GeocodeQuery;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Geocoder\Query\GeocodeQuery;
 
 class HasValidAddressValidator extends ConstraintValidator
 {
@@ -40,7 +40,8 @@ class HasValidAddressValidator extends ConstraintValidator
             $coordinates = $this->geocoder
                 ->geocodeQuery(GeocodeQuery::create($address))
                 ->first()
-                ->getCoordinates();
+                ->getCoordinates()
+            ;
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             $coordinates = false;
@@ -53,19 +54,23 @@ class HasValidAddressValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('address')
-                ->addViolation();
+                ->addViolation()
+            ;
             $this->context
                 ->buildViolation('')
                 ->atPath('zipCode')
-                ->addViolation();
+                ->addViolation()
+            ;
             $this->context
                 ->buildViolation('')
                 ->atPath('city')
-                ->addViolation();
+                ->addViolation()
+            ;
             $this->context
                 ->buildViolation('')
                 ->atPath('country')
-                ->addViolation();
+                ->addViolation()
+            ;
 
             $object->setLat(null);
             $object->setLng(null);

@@ -23,9 +23,7 @@ class AdminProjectListQuestionnairePage extends Page
                 "$('#btn-add-questionnaire').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'AdminProjectListQuestionnairePage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('AdminProjectListQuestionnairePage did not fully load, check selector in "verifyPage".');
         }
     }
 

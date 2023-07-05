@@ -49,7 +49,8 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         $cache
             ->getItem('questionTagCloudData-question1-2')
             ->willReturn($cacheItem)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $cacheItem->isHit()->willReturn(false);
         $resultSet->getAggregation('tagCloud')->willReturn([
             'doc_count_error_upper_bound' => 0,
@@ -69,15 +70,18 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         $cacheItem
             ->expiresAfter(RedisCache::ONE_HOUR)
             ->shouldBeCalled()
-            ->willReturn($cacheItem);
+            ->willReturn($cacheItem)
+        ;
         $cacheItem
             ->set($results)
             ->shouldBeCalled()
-            ->willReturn($cacheItem);
+            ->willReturn($cacheItem)
+        ;
         $cache
             ->save($cacheItem)
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($question, $args)->shouldReturn($results);
     }
 
@@ -105,7 +109,8 @@ class QuestionTagCloudResolverSpec extends ObjectBehavior
         $cache
             ->getItem('questionTagCloudData-question2-2')
             ->willReturn($cacheItem)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $cacheItem->isHit()->willReturn(true);
         $cacheItem->get()->willReturn($results);
         $this->__invoke($question, $args)->shouldReturn($results);

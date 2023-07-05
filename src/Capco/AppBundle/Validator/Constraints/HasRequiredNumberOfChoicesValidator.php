@@ -27,7 +27,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                     ->buildViolation('error.answer.count.min')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
-                    ->addViolation();
+                    ->addViolation()
+                ;
 
                 return;
             }
@@ -36,7 +37,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                     ->buildViolation('error.answer.count.max')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
-                    ->addViolation();
+                    ->addViolation()
+                ;
 
                 return;
             }
@@ -45,7 +47,8 @@ class HasRequiredNumberOfChoicesValidator extends ConstraintValidator
                     ->buildViolation('error.answer.count.equal')
                     ->atPath('value')
                     ->setParameter('nb', $rule->getNumber())
-                    ->addViolation();
+                    ->addViolation()
+                ;
 
                 return;
             }

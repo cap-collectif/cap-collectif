@@ -3,27 +3,27 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Form\EventType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
-use Prophecy\Argument;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Form\EventType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactory;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Capco\AppBundle\GraphQL\Mutation\AddEventMutation;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\Translator;
 
@@ -109,7 +109,8 @@ class AddEventMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -117,7 +118,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $arguments
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -128,12 +130,14 @@ class AddEventMutationSpec extends ObjectBehavior
 
         $publisher
             ->publish('event.create', \Prophecy\Argument::type(Message::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -182,7 +186,8 @@ class AddEventMutationSpec extends ObjectBehavior
                 ['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']]],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -190,7 +195,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $arguments
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -202,7 +208,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -280,7 +287,8 @@ class AddEventMutationSpec extends ObjectBehavior
                 ],
                 false
             )
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->isValid()->willReturn(true);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -288,7 +296,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $arguments
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $em->persist(Argument::type(Event::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -300,7 +309,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -332,7 +342,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $arguments
             ->offsetGet('owner')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
@@ -346,7 +357,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $settableOwnerResolver
             ->__invoke(null, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $error->getMessage()->willReturn('Invalid data.');
         $form->getErrors()->willReturn([$error]);
@@ -354,7 +366,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $form->isValid()->willReturn(false);
         $form
             ->submit(['translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => '']]], false)
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $form->getExtraData()->willReturn([]);
 
         $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
@@ -369,7 +382,8 @@ class AddEventMutationSpec extends ObjectBehavior
         $authorizationChecker
             ->isGranted(EventVoter::CREATE, Argument::type(Event::class))
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $this->isGranted()->shouldReturn(true);
     }
 }

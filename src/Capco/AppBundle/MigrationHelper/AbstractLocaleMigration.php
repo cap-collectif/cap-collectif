@@ -14,7 +14,7 @@ abstract class AbstractLocaleMigration extends AbstractMigration implements Cont
     private $entityManager;
     private $uuidGenerator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->entityManager = $container->get('doctrine')->getManager();
         $this->uuidGenerator = new UuidGenerator();

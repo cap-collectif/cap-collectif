@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Behat\Traits;
 
 /**
- * @deprecated This is our legacy evaluation tool.
+ * @deprecated this is our legacy evaluation tool
  */
 trait ProposalEvaluationTrait
 {

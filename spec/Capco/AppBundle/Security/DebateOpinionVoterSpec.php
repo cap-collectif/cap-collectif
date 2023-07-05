@@ -25,7 +25,8 @@ class DebateOpinionVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $subject, [DebateOpinionVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -46,7 +47,8 @@ class DebateOpinionVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isProjectAdmin()->willReturn(true);
 
@@ -65,7 +67,8 @@ class DebateOpinionVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isAdmin()->willReturn(false);
 
@@ -91,7 +94,8 @@ class DebateOpinionVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isAdmin()->willReturn(false);
 

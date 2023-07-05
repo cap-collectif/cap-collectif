@@ -13,8 +13,7 @@ class RelayForwardConnection implements MappingInterface
         return [
             'after' => [
                 'type' => 'String',
-                'description' =>
-                    'Returns the elements in the list that come after the specified cursor.',
+                'description' => 'Returns the elements in the list that come after the specified cursor.',
             ],
             'first' => [
                 'type' => 'Int',

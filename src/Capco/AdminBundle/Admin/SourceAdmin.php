@@ -2,17 +2,17 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class SourceAdmin extends AbstractAdmin
 {
@@ -56,7 +56,8 @@ class SourceAdmin extends AbstractAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -88,7 +89,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
             ->add('opinion.consultation.step.projectAbstractStep.project', null, [
                 'label' => 'global.participative.project.label',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -98,8 +100,8 @@ class SourceAdmin extends AbstractAdmin
                 'label' => 'global.title',
                 'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
                 'route' => [
-                    'name' => 'edit'
-                ]
+                    'name' => 'edit',
+                ],
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
@@ -127,7 +129,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -159,7 +162,8 @@ class SourceAdmin extends AbstractAdmin
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.comment.trashed_reason',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

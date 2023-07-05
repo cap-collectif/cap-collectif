@@ -8,10 +8,10 @@ use Capco\AppBundle\Traits\DescriptionUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="question_choice")
@@ -19,10 +19,10 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  */
 class QuestionChoice implements IndexableInterface
 {
+    use DescriptionUsingJoditWysiwygTrait;
     use PositionableTrait;
     use TitleTrait;
     use UuidTrait;
-    use DescriptionUsingJoditWysiwygTrait;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -132,9 +132,10 @@ class QuestionChoice implements IndexableInterface
         return $this->temporaryId;
     }
 
-    public function setTemporaryId(?string $temporaryId): QuestionChoice
+    public function setTemporaryId(?string $temporaryId): self
     {
         $this->temporaryId = $temporaryId;
+
         return $this;
     }
 

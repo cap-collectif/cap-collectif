@@ -45,7 +45,7 @@ class UserNotificationsConfigurationMutation implements MutationInterface
         $form->submit($values);
         if (!$form->isValid()) {
             $this->logger->error(
-                \get_class($this) .
+                static::class .
                     ' changeUserNotification: ' .
                     (string) $form->getErrors(true, false)
             );

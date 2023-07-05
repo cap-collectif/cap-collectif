@@ -5,19 +5,19 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\EmailingCampaignUser;
+use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
-use Capco\AppBundle\Entity\Security\UserIdentificationCode;
-use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\User\UserAddressTrait;
 use Capco\AppBundle\Traits\User\UserSSOTrait;
@@ -25,16 +25,12 @@ use Capco\Capco\UserBundle\Entity\AbstractUser;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
-use Doctrine\ORM\Mapping as ORM;
 
-class User extends AbstractUser implements
-    ProjectOwner,
-    EquatableInterface,
-    IndexableInterface,
-    Author
+class User extends AbstractUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author
 {
     use UserAddressTrait;
     use UserSSOTrait;
@@ -123,6 +119,7 @@ class User extends AbstractUser implements
     private Collection $starredResponses;
 
     private Collection $emailingCampaignUsers;
+
     public function __construct()
     {
         parent::__construct();
@@ -210,9 +207,9 @@ class User extends AbstractUser implements
     // We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account
     public function isEqualTo(RealUserInterface $user): bool
     {
-        return $user instanceof self &&
-            $this->id === $user->getId() &&
-            null === $user->getDeletedAccountAt();
+        return $user instanceof self
+            && $this->id === $user->getId()
+            && null === $user->getDeletedAccountAt();
     }
 
     public function addResponse(AbstractResponse $response): self
@@ -1138,7 +1135,8 @@ class User extends AbstractUser implements
                     $this->memberOfOrganizations->removeElement($organizationMember);
                 }
             })
-            ->toArray();
+            ->toArray()
+        ;
     }
 
     public function confirmAccount(): void

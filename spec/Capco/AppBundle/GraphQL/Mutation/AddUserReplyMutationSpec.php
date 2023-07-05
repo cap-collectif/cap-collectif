@@ -12,33 +12,32 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
-use Prophecy\Argument;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\Utils\RequestGuesser;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 class AddUserReplyMutationSpec extends ObjectBehavior
 {
     public function let(
-        EntityManagerInterface   $em,
-        FormFactoryInterface     $formFactory,
-        ReplyRepository          $replyRepo,
-        GlobalIdResolver         $globalIdResolver,
-        ResponsesFormatter       $responsesFormatter,
-        LoggerInterface          $logger,
-        Publisher                $publisher,
-        RequestGuesser           $requestGuesser,
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        ReplyRepository $replyRepo,
+        GlobalIdResolver $globalIdResolver,
+        ResponsesFormatter $responsesFormatter,
+        LoggerInterface $logger,
+        Publisher $publisher,
+        RequestGuesser $requestGuesser,
         StepRequirementsResolver $stepRequirementsResolver,
-        Indexer                  $indexer
-    )
-    {
+        Indexer $indexer
+    ) {
         $this->beConstructedWith(
             $em,
             $formFactory,
@@ -59,20 +58,19 @@ class AddUserReplyMutationSpec extends ObjectBehavior
     }
 
     public function it_should_correctly_add_a_reply(
-        Arg                      $input,
-        Questionnaire            $questionnaire,
-        Publisher                $publisher,
-        User                     $user,
-        GlobalIdResolver         $globalIdResolver,
-        QuestionnaireStep        $step,
+        Arg $input,
+        Questionnaire $questionnaire,
+        Publisher $publisher,
+        User $user,
+        GlobalIdResolver $globalIdResolver,
+        QuestionnaireStep $step,
         StepRequirementsResolver $stepRequirementsResolver,
-        ResponsesFormatter       $responsesFormatter,
-        FormFactoryInterface     $formFactory,
-        FormInterface            $form,
-        EntityManagerInterface   $em,
-        Indexer                  $indexer
-    )
-    {
+        ResponsesFormatter $responsesFormatter,
+        FormFactoryInterface $formFactory,
+        FormInterface $form,
+        EntityManagerInterface $em,
+        Indexer $indexer
+    ) {
         $values = [
             'questionnaireId' => 'abc',
             'responses' => [
@@ -86,19 +84,20 @@ class AddUserReplyMutationSpec extends ObjectBehavior
         $input
             ->getArrayCopy()
             ->shouldBeCalledOnce()
-            ->willReturn($values);
+            ->willReturn($values)
+        ;
 
         $globalIdResolver
             ->resolve('abc', $user)
             ->shouldBeCalledOnce()
-            ->willReturn($questionnaire);
+            ->willReturn($questionnaire)
+        ;
 
         $questionnaire->canContribute($user)->shouldBeCalledOnce()->willReturn(true);
         $questionnaire->isMultipleRepliesAllowed()->shouldBeCalledOnce()->willReturn(false);
 
         $questionnaire->getStep()->shouldBeCalledOnce()->willReturn($step);
         $stepRequirementsResolver->viewerMeetsTheRequirementsResolver($user, $step)->willReturn(true);
-
 
         $formattedResponses = [
             0 => [
@@ -111,7 +110,8 @@ class AddUserReplyMutationSpec extends ObjectBehavior
         $responsesFormatter
             ->format($values['responses'])
             ->shouldBeCalledOnce()
-            ->willReturn($formattedResponses);
+            ->willReturn($formattedResponses)
+        ;
 
         $values = [
             'responses' => $formattedResponses,
@@ -122,7 +122,8 @@ class AddUserReplyMutationSpec extends ObjectBehavior
         $formFactory
             ->create(ReplyType::class, Argument::type(Reply::class), Argument::any())
             ->shouldBeCalledOnce()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $form->submit($values, false)->shouldBeCalledOnce();
         $form->isValid()->willReturn(true);
 

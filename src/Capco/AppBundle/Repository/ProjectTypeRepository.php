@@ -17,6 +17,7 @@ class ProjectTypeRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::findAllCacheKey())
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 }

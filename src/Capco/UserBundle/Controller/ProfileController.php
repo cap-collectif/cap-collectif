@@ -2,38 +2,38 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
-use Capco\AppBundle\Repository\Organization\OrganizationRepository;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\Organization\OrganizationRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\UserArchiveRepository;
+use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\UserArchiveRepository;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Capco\AppBundle\Repository\UserNotificationsConfigurationRepository;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -225,8 +225,8 @@ class ProfileController extends Controller
     public function showAction(?string $slug = null)
     {
         if (
-            !$slug &&
-            !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
+            !$slug
+            && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -260,8 +260,8 @@ class ProfileController extends Controller
     public function showOrganizationAction(?string $slug = null)
     {
         if (
-            !$slug &&
-            !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
+            !$slug
+            && !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')
         ) {
             throw $this->createAccessDeniedException();
         }

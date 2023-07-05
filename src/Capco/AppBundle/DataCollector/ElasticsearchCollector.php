@@ -18,15 +18,11 @@ class ElasticsearchCollector extends DataCollector
 
     /**
      * Collects data for the given Request and Response.
-     *
-     * @param Request         $request
-     * @param Response        $response
-     * @param \Exception|null $exception
      */
     public function collect(
         Request $request,
         Response $response,
-        \Exception $exception = null
+        ?\Exception $exception = null
     ): void {
         $this->data['queries_count'] = $this->logger->getQueriesCount();
         $this->data['queries'] = $this->logger->getQueries();

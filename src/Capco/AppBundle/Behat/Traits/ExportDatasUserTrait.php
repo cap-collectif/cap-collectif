@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Behat\Traits;
 
+use Capco\AppBundle\Command\CreateCsvFromUserCommand;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use Capco\AppBundle\Command\CreateCsvFromUserCommand;
 
 trait ExportDatasUserTrait
 {
@@ -17,16 +17,16 @@ trait ExportDatasUserTrait
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
         if (!$user) {
-            throw new \RuntimeException("User with id ${userId} does not exist.");
+            throw new \RuntimeException("User with id {$userId} does not exist.");
         }
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
         if (!$archive) {
-            throw new \RuntimeException("UserArchive with id ${userId} does not exist.");
+            throw new \RuntimeException("UserArchive with id {$userId} does not exist.");
         }
 
         $archiveFile = $archive->getPath();
         $directory = $this->getContainer()->getParameter('kernel.project_dir') . '/public/export/';
-        $exportedArchiveZipFile = "${directory}${archiveFile}";
+        $exportedArchiveZipFile = "{$directory}{$archiveFile}";
         Assert::assertFileExists($exportedArchiveZipFile);
 
         // Extract the .zip file
@@ -83,6 +83,6 @@ trait ExportDatasUserTrait
         $archiveFile = $archive->getPath();
         $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../public/export/';
 
-        Assert::assertFileNotExists("${directory}/${archiveFile}");
+        Assert::assertFileNotExists("{$directory}/{$archiveFile}");
     }
 }

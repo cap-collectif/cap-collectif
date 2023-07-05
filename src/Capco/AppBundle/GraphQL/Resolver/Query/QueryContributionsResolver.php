@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryContributionsResolver implements ResolverInterface
 {
@@ -24,11 +24,11 @@ class QueryContributionsResolver implements ResolverInterface
 
     public function __invoke(Argument $args): int
     {
-        $totalCount = array_sum(
+        return array_sum(
             array_map(function (Project $project) {
                 if (
-                    ProjectVisibilityMode::VISIBILITY_PUBLIC === $project->getVisibility() &&
-                    !$project->getIsExternal()
+                    ProjectVisibilityMode::VISIBILITY_PUBLIC === $project->getVisibility()
+                    && !$project->getIsExternal()
                 ) {
                     return $this->projectContributionResolver->__invoke($project)->getTotalCount();
                 }
@@ -36,7 +36,5 @@ class QueryContributionsResolver implements ResolverInterface
                 return 0;
             }, $this->projectRepository->findAll())
         );
-
-        return $totalCount;
     }
 }

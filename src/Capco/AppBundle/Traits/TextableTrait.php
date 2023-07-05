@@ -24,7 +24,7 @@ trait TextableTrait
         return Text::htmlToString($result);
     }
 
-    public function setBody(string $body = null): self
+    public function setBody(?string $body = null): self
     {
         $this->body = $body;
 

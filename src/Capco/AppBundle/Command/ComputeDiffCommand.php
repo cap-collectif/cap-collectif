@@ -42,7 +42,8 @@ class ComputeDiffCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force the recompute on non empty diff'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

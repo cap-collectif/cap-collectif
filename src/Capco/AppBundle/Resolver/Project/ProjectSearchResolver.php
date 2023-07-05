@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Resolver\Project;
 
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -21,8 +22,7 @@ class ProjectSearchResolver
         return [
             'projects' => $projects->getIterator()->getArrayCopy(),
             'page' => $projectSearchParameters->getPage(),
-            'pages' =>
-                $projectSearchParameters->getElements() > 0
+            'pages' => $projectSearchParameters->getElements() > 0
                     ? ceil($count / $projectSearchParameters->getElements())
                     : 1,
             'count' => $count,

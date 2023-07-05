@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,7 +23,6 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddUserReplyMutation implements MutationInterface
 {
@@ -85,8 +85,8 @@ class AddUserReplyMutation implements MutationInterface
         $step = $questionnaire->getStep();
 
         if (
-            $step &&
-            !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($user, $step)
+            $step
+            && !$this->stepRequirementsResolver->viewerMeetsTheRequirementsResolver($user, $step)
         ) {
             $this->logger->error(
                 sprintf(
@@ -108,7 +108,8 @@ class AddUserReplyMutation implements MutationInterface
             ->setAuthor($user)
             ->setQuestionnaire($questionnaire)
             ->setNavigator($this->requestGuesser->getUserAgent())
-            ->setIpAddress($this->requestGuesser->getClientIp());
+            ->setIpAddress($this->requestGuesser->getClientIp())
+        ;
 
         $values['responses'] = $this->responsesFormatter->format($values['responses']);
 

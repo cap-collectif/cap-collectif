@@ -27,9 +27,6 @@ class DynamicRelationSubscriber implements EventSubscriber
         return ['loadClassMetadata'];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadataInfo $metadata */
@@ -62,7 +59,9 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'mappedBy' => 'childConnections',
                         ]);
                     }
+
                     break;
+
                 case 'votable':
                     if (
                         \count(
@@ -72,7 +71,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             )
                         ) > 0
                     ) {
-                        if (array_key_exists('votes', $metadata->getReflectionProperties())) {
+                        if (\array_key_exists('votes', $metadata->getReflectionProperties())) {
                             break;
                         }
 
@@ -88,6 +87,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                             'mappedBy' => $fieldName,
                         ]);
                     }
+
                     break;
             }
         }

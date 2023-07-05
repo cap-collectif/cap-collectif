@@ -5,15 +5,15 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationSocialNetworks;
 use Capco\AppBundle\Form\OrganizationType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\OrganizationVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -71,18 +71,6 @@ class UpdateOrganizationMutation implements MutationInterface
         return ['organization' => $organization, 'errorCode' => null];
     }
 
-    private function updateSlug(Organization $organization, array $translations): void
-    {
-        foreach ($translations as $translation) {
-            if ($translation['title']) {
-                $slug = strtolower($this->slugger->slug($translation['title'])->toString());
-                $organization->setSlug($slug);
-                return;
-            }
-        }
-    }
-
-
     public function handleSocialNetworks(Organization $organization, array &$data): void
     {
         $socialNetworks = $organization->getOrganizationSocialNetworks();
@@ -124,5 +112,17 @@ class UpdateOrganizationMutation implements MutationInterface
         }
 
         return $this->authorizationChecker->isGranted(OrganizationVoter::EDIT, $organization);
+    }
+
+    private function updateSlug(Organization $organization, array $translations): void
+    {
+        foreach ($translations as $translation) {
+            if ($translation['title']) {
+                $slug = strtolower($this->slugger->slug($translation['title'])->toString());
+                $organization->setSlug($slug);
+
+                return;
+            }
+        }
     }
 }

@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\Sluggable;
 
 use Capco\AppBundle\Entity\Proposal;
-use Gedmo\Sluggable\SluggableListener as Base;
-use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Doctrine\Common\EventArgs;
 use Doctrine\Persistence\ObjectManager;
-use Gedmo\Tool\Wrapper\AbstractWrapper;
 use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
+use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
+use Gedmo\Sluggable\SluggableListener as Base;
+use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
  * The SluggableListener handles the generation of slugs
@@ -98,9 +98,7 @@ class SluggableListener extends Base
     public function setTransliterator($callable)
     {
         if (!\is_callable($callable)) {
-            throw new \Gedmo\Exception\InvalidArgumentException(
-                'Invalid transliterator callable parameter given'
-            );
+            throw new \Gedmo\Exception\InvalidArgumentException('Invalid transliterator callable parameter given');
         }
         $this->transliterator = $callable;
     }
@@ -114,9 +112,7 @@ class SluggableListener extends Base
     public function setUrlizer($callable)
     {
         if (!\is_callable($callable)) {
-            throw new \Gedmo\Exception\InvalidArgumentException(
-                'Invalid urlizer callable parameter given'
-            );
+            throw new \Gedmo\Exception\InvalidArgumentException('Invalid urlizer callable parameter given');
         }
         $this->urlizer = $callable;
     }
@@ -164,8 +160,6 @@ class SluggableListener extends Base
 
     /**
      * Mapps additional metadata.
-     *
-     * @param EventArgs $eventArgs
      */
     public function loadClassMetadata(EventArgs $eventArgs)
     {
@@ -175,8 +169,6 @@ class SluggableListener extends Base
 
     /**
      * Allows identifier fields to be slugged as usual.
-     *
-     * @param EventArgs $args
      */
     public function prePersist(EventArgs $args)
     {
@@ -196,8 +188,6 @@ class SluggableListener extends Base
     /**
      * Generate slug on objects being updated during flush
      * if they require changing.
-     *
-     * @param EventArgs $args
      */
     public function onFlush(EventArgs $args)
     {
@@ -234,8 +224,6 @@ class SluggableListener extends Base
      * Get an event adapter to handle event specific
      * methods.
      *
-     * @param EventArgs $args
-     *
      * @throws \Gedmo\Exception\InvalidArgumentException - if event is not recognized
      *
      * @return \Gedmo\Mapping\Event\AdapterInterface
@@ -252,9 +240,7 @@ class SluggableListener extends Base
             return $this->adapters[$m[1]];
         }
 
-        throw new \Gedmo\Exception\InvalidArgumentException(
-            'Event mapper does not support event arg class: ' . $class
-        );
+        throw new \Gedmo\Exception\InvalidArgumentException('Event mapper does not support event arg class: ' . $class);
     }
 
     /**
@@ -276,8 +262,7 @@ class SluggableListener extends Base
     /**
      * Creates the slug for object being flushed.
      *
-     * @param SluggableAdapter $ea
-     * @param object           $object
+     * @param object $object
      */
     private function generateSlug(SluggableAdapter $ea, $object)
     {
@@ -295,9 +280,9 @@ class SluggableListener extends Base
             $slug = $meta->getReflectionProperty($slugField)->getValue($object);
             // if slug should not be updated, skip it
             if (
-                !$options['updatable'] &&
-                !$isInsert &&
-                (!isset($changeSet[$slugField]) || '__id__' === $slug)
+                !$options['updatable']
+                && !$isInsert
+                && (!isset($changeSet[$slugField]) || '__id__' === $slug)
             ) {
                 continue;
             }
@@ -380,6 +365,7 @@ class SluggableListener extends Base
                         );
 
                         break;
+
                     case 'lower':
                         if (\function_exists('mb_strtolower')) {
                             $slug = mb_strtolower($slug);
@@ -388,6 +374,7 @@ class SluggableListener extends Base
                         }
 
                         break;
+
                     case 'upper':
                         if (\function_exists('mb_strtoupper')) {
                             $slug = mb_strtoupper($slug);
@@ -396,6 +383,7 @@ class SluggableListener extends Base
                         }
 
                         break;
+
                     default:
                         // leave it as is
                         break;
@@ -404,7 +392,7 @@ class SluggableListener extends Base
                 if (isset($mapping['length']) && \strlen($slug) > $mapping['length']) {
                     $slug = substr($slug, 0, $mapping['length']);
                 }
-                if (isset($mapping['nullable']) && $mapping['nullable'] && 0 === \strlen($slug)) {
+                if (isset($mapping['nullable']) && $mapping['nullable'] && '' === $slug) {
                     $slug = null;
                 }
                 // notify slug handlers --> beforeMakingUnique
@@ -441,11 +429,10 @@ class SluggableListener extends Base
      * Generates the unique slug.
      * This is overriden by @spyl94.
      *
-     * @param SluggableAdapter $ea
-     * @param object           $object
-     * @param string           $preferredSlug
-     * @param bool             $recursing
-     * @param array            $config[$slugField]
+     * @param object $object
+     * @param string $preferredSlug
+     * @param bool   $recursing
+     * @param array  $config[$slugField]
      *
      * @return string - unique slug
      */
@@ -469,8 +456,8 @@ class SluggableListener extends Base
         if (isset($this->persisted[($class = $ea->getRootObjectClass($meta))])) {
             foreach ($this->persisted[$class] as $obj) {
                 if (
-                    false !== $base &&
-                    $meta->getReflectionProperty($config['unique_base'])->getValue($obj) !== $base
+                    false !== $base
+                    && $meta->getReflectionProperty($config['unique_base'])->getValue($obj) !== $base
                 ) {
                     continue; // if unique_base field is not the same, do not take slug as similar
                 }
@@ -514,7 +501,7 @@ class SluggableListener extends Base
             foreach ((array) $result as $list) {
                 $sameSlugs[] = $list[$config['slug']];
             }
-            $i = pow(10, $this->exponent);
+            $i = 10 ** $this->exponent;
             if ($recursing || \in_array($generatedSlug, $sameSlugs)) {
                 do {
                     $generatedSlug = $preferredSlug . $config['separator'] . $i++;
@@ -591,8 +578,6 @@ class SluggableListener extends Base
             return $om->getFilterCollection();
         }
 
-        throw new \Gedmo\Exception\InvalidArgumentException(
-            'ObjectManager does not support filters'
-        );
+        throw new \Gedmo\Exception\InvalidArgumentException('ObjectManager does not support filters');
     }
 }

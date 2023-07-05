@@ -4,27 +4,27 @@ namespace spec\Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Resolver\EntityChangeSetResolver;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Events;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCollectVote;
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 {
@@ -126,7 +126,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             json_encode(
                 [
                     'class' => \get_class($response->getWrappedObject()),
-                    'id' => "10",
+                    'id' => '10',
                 ],
                 \JSON_THROW_ON_ERROR
             )

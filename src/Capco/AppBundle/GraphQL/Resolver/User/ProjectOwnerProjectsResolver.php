@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\Search\ProjectSearch;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProjectOwnerProjectsResolver implements ResolverInterface

@@ -13,6 +13,7 @@ use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,6 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AbstractDebateArgumentMutation
 {

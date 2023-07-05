@@ -11,7 +11,7 @@ class GraphQLException extends UserErrors
         array $errors,
         $message = '',
         $code = 0,
-        \Exception $previous = null
+        ?\Exception $previous = null
     ) {
         parent::__construct($errors, $message, $code, $previous);
     }

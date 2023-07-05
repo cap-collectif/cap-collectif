@@ -6,6 +6,10 @@ use Capco\AppBundle\Crawler\PantherServiceCaller;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use PhpSpec\ObjectBehavior;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class PantherServiceCallerTest extends ObjectBehavior
 {
     public function let()
@@ -30,7 +34,8 @@ class PantherServiceCallerTest extends ObjectBehavior
         $article
             ->getUrl()
             ->shouldBeCalled()
-            ->willReturn($testUrl);
+            ->willReturn($testUrl)
+        ;
 
         file_get_contents(
             'www.panther-test.com?capco-token=test-token&url=' . $testUrl
@@ -60,7 +65,8 @@ class PantherServiceCallerTest extends ObjectBehavior
         $article
             ->getUrl()
             ->shouldBeCalled()
-            ->willReturn($testUrl);
+            ->willReturn($testUrl)
+        ;
 
         file_get_contents(
             'www.panther-test.com?capco-token=test-token&url=' . $testUrl
@@ -85,7 +91,8 @@ class PantherServiceCallerTest extends ObjectBehavior
         $article
             ->getUrl()
             ->shouldBeCalled()
-            ->willReturn($testUrl);
+            ->willReturn($testUrl)
+        ;
 
         file_get_contents(
             'www.panther-test.com?capco-token=test-token&url=' . $testUrl

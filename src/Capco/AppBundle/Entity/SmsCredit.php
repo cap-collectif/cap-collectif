@@ -14,12 +14,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *   fields={"smsOrder"}
  * )
  * @ORM\Entity(repositoryClass=SmsCreditRepository::class)
- *
  */
 class SmsCredit
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
 
     public const RELAY_NODE_TYPE = 'SmsCredit';
 
@@ -46,21 +45,15 @@ class SmsCredit
         return $this;
     }
 
-    /**
-     * @return SmsOrder
-     */
     public function getSmsOrder(): SmsOrder
     {
         return $this->smsOrder;
     }
 
-    /**
-     * @param SmsOrder $smsOrder
-     * @return SmsCredit
-     */
-    public function setSmsOrder(SmsOrder $smsOrder): SmsCredit
+    public function setSmsOrder(SmsOrder $smsOrder): self
     {
         $this->smsOrder = $smsOrder;
+
         return $this;
     }
 }

@@ -2,70 +2,70 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\SmsCredit;
-use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
-use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
-use Capco\AppBundle\Repository\DebateArgumentRepository;
-use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
-use Capco\AppBundle\Repository\EmailingCampaignRepository;
-use Capco\AppBundle\Repository\MailingListRepository;
-use Capco\AppBundle\Repository\MediaResponseRepository;
-use Capco\AppBundle\Repository\OfficialResponseRepository;
-use Capco\AppBundle\Repository\Organization\OrganizationRepository;
-use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Capco\AppBundle\Repository\ProposalAnalysisRepository;
-use Capco\AppBundle\Repository\ProposalDistrictRepository;
-use Capco\AppBundle\Repository\ProposalRevisionRepository;
-use Capco\AppBundle\Repository\ReplyAnonymousRepository;
-use Capco\AppBundle\Repository\SmsCreditRepository;
-use Capco\AppBundle\Repository\SmsOrderRepository;
-use Capco\AppBundle\Repository\UserGroupRepository;
-use Capco\AppBundle\Repository\ValueResponseRepository;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Event;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Model\ModerableInterface;
+use Capco\AppBundle\Entity\SmsCredit;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\EventRepository;
-use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Repository\DebateRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\Repository\CommentRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ArgumentRepository;
-use Capco\AppBundle\Repository\FollowerRepository;
-use Capco\AppBundle\Repository\MapTokenRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\UserInviteRepository;
-use Capco\AppBundle\Repository\ContactFormRepository;
-use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Repository\RequirementRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ConsultationRepository;
-use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\AppBundle\Repository\DebateOpinionRepository;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Capco\AppBundle\Repository\QuestionChoiceRepository;
+use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\CASSSOConfigurationRepository;
+use Capco\AppBundle\Repository\CommentRepository;
+use Capco\AppBundle\Repository\ConsultationRepository;
+use Capco\AppBundle\Repository\ContactFormRepository;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
+use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\AppBundle\Repository\DebateOpinionRepository;
+use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\EmailingCampaignRepository;
+use Capco\AppBundle\Repository\EventRepository;
+use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\AppBundle\Repository\GroupRepository;
+use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\MapTokenRepository;
+use Capco\AppBundle\Repository\MediaResponseRepository;
+use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
+use Capco\AppBundle\Repository\OfficialResponseRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\Organization\OrganizationRepository;
+use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalAnalysisRepository;
+use Capco\AppBundle\Repository\ProposalDistrictRepository;
+use Capco\AppBundle\Repository\ProposalFormRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalRevisionRepository;
+use Capco\AppBundle\Repository\QuestionChoiceRepository;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Repository\SmsCreditRepository;
+use Capco\AppBundle\Repository\SmsOrderRepository;
+use Capco\AppBundle\Repository\SourceRepository;
+use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\AppBundle\Repository\UserInviteRepository;
+use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
 {
@@ -87,9 +87,9 @@ class GlobalIdResolver
     public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
     {
         $skipVerification =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         $user = null;
         if (empty($uuidOrGlobalId)) {
@@ -120,30 +120,37 @@ class GlobalIdResolver
                     $node = $this->container->get(PostRepository::class)->find($uuid);
 
                     break;
+
                 case 'Event':
                     $node = $this->container->get(EventRepository::class)->find($uuid);
 
                     break;
+
                 case 'User':
                     $node = $this->container->get(UserRepository::class)->find($uuid);
 
                     break;
+
                 case 'Questionnaire':
                     $node = $this->container->get(QuestionnaireRepository::class)->find($uuid);
 
                     break;
+
                 case 'Consultation':
                     $node = $this->container->get(ConsultationRepository::class)->find($uuid);
 
                     break;
+
                 case 'MapToken':
                     $node = $this->container->get(MapTokenRepository::class)->find($uuid);
 
                     break;
+
                 case 'Requirement':
                     $node = $this->container->get(RequirementRepository::class)->find($uuid);
 
                     break;
+
                 case 'ConsultationStep':
                 case 'OtherStep':
                 case 'QuestionnaireStep':
@@ -155,55 +162,68 @@ class GlobalIdResolver
                     $node = $this->container->get(AbstractStepRepository::class)->find($uuid);
 
                     break;
+
                 case 'Proposal':
                     $node = $this->container->get(ProposalRepository::class)->find($uuid);
 
                     break;
+
                 case 'ProposalRevision':
                     $node = $this->container->get(ProposalRevisionRepository::class)->find($uuid);
 
                     break;
+
                 case 'ProposalAnalysis':
                     $node = $this->container->get(ProposalAnalysisRepository::class)->find($uuid);
 
                     break;
+
                 case 'Debate':
                     $node = $this->container->get(DebateRepository::class)->find($uuid);
 
                     break;
+
                 case 'DebateOpinion':
                     $node = $this->container->get(DebateOpinionRepository::class)->find($uuid);
 
                     break;
+
                 case 'DebateArgument':
                     $node = $this->container->get(DebateArgumentRepository::class)->find($uuid);
                     if (!$node) {
                         $node = $this->container
                             ->get(DebateAnonymousArgumentRepository::class)
-                            ->find($uuid);
+                            ->find($uuid)
+                        ;
                     }
 
                     break;
+
                 case 'DebateArticle':
                     $node = $this->container->get(DebateArticleRepository::class)->find($uuid);
 
                     break;
+
                 case 'SmsOrder':
                     $node = $this->container->get(SmsOrderRepository::class)->find($uuid);
 
                     break;
+
                 case SmsCredit::RELAY_NODE_TYPE:
                     $node = $this->container->get(SmsCreditRepository::class)->find($uuid);
 
                     break;
+
                 case 'Question':
                     $node = $this->container->get(AbstractQuestionRepository::class)->find($uuid);
 
                     break;
+
                 case 'QuestionChoice':
                     $node = $this->container->get(QuestionChoiceRepository::class)->find($uuid);
 
                     break;
+
                 case 'Reply':
                     $node = $this->container->get(ReplyRepository::class)->find($uuid);
 
@@ -212,97 +232,122 @@ class GlobalIdResolver
                     }
 
                     break;
+
                 case 'ContactForm':
                     $node = $this->container->get(ContactFormRepository::class)->find($uuid);
 
                     break;
+
                 case 'Project':
                     $node = $this->container->get(ProjectRepository::class)->find($uuid);
 
                     break;
+
                 case 'Oauth2SSOConfiguration':
                     $node = $this->container
                         ->get(Oauth2SSOConfigurationRepository::class)
-                        ->find($uuid);
+                        ->find($uuid)
+                    ;
 
                     break;
+
                 case 'FranceConnectSSOConfiguration':
                     $node = $this->container
                         ->get(FranceConnectSSOConfigurationRepository::class)
-                        ->find($uuid);
+                        ->find($uuid)
+                    ;
 
                     break;
+
                 case 'CASSSOConfiguration':
                     $node = $this->container
                         ->get(CASSSOConfigurationRepository::class)
-                        ->find($uuid);
+                        ->find($uuid)
+                    ;
 
                     break;
+
                 case 'Comment':
                     $node = $this->container->get(CommentRepository::class)->find($uuid);
 
                     break;
+
                 case 'Source':
                     $node = $this->container->get(SourceRepository::class)->find($uuid);
 
                     break;
+
                 case 'Argument':
                     $node = $this->container->get(ArgumentRepository::class)->find($uuid);
 
                     break;
+
                 case 'Opinion':
                     $node = $this->container->get(OpinionRepository::class)->find($uuid);
 
                     break;
+
                 case 'Version':
                     $node = $this->container->get(OpinionVersionRepository::class)->find($uuid);
 
                     break;
+
                 case 'UserInvite':
                     $node = $this->container->get(UserInviteRepository::class)->find($uuid);
 
                     break;
+
                 case 'MailingList':
                     $node = $this->container->get(MailingListRepository::class)->find($uuid);
 
                     break;
+
                 case 'EmailingCampaign':
                     $node = $this->container->get(EmailingCampaignRepository::class)->find($uuid);
 
                     break;
+
                 case 'OfficialResponse':
                     $node = $this->container->get(OfficialResponseRepository::class)->find($uuid);
 
                     break;
+
                 case 'Group':
                     $node = $this->container->get(GroupRepository::class)->find($uuid);
 
                     break;
+
                 case 'ValueResponse':
                     $node = $this->container->get(ValueResponseRepository::class)->find($uuid);
 
                     break;
+
                 case 'MediaResponse':
                     $node = $this->container->get(MediaResponseRepository::class)->find($uuid);
 
                     break;
+
                 case 'District':
                     $node = $this->container->get(ProposalDistrictRepository::class)->find($uuid);
                     if (!$node) {
                         $node = $this->container
                             ->get(ProjectDistrictRepository::class)
-                            ->find($uuid);
+                            ->find($uuid)
+                        ;
                     }
 
                     break;
+
                 case 'Organization':
                     $node = $this->container->get(OrganizationRepository::class)->find($uuid);
 
                     break;
+
                 case 'PendingOrganizationInvitation':
                     $node = $this->container->get(PendingOrganizationInvitationRepository::class)->find($uuid);
 
                     break;
+
                 default:
                     break;
             }
@@ -379,7 +424,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $error = "Could not resolve node with uuid ${uuid}";
+            $error = "Could not resolve node with uuid {$uuid}";
             $this->logger->warning($error);
 
             return null;
@@ -395,9 +440,9 @@ class GlobalIdResolver
         ?\ArrayObject $context = null
     ) {
         $skipVerification =
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl');
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl');
 
         $user = null;
         if (empty($uuidOrGlobalIds)) {
@@ -434,10 +479,12 @@ class GlobalIdResolver
                     $node = $this->container->get(ProposalRepository::class)->findById($uuids);
 
                     break;
+
                 case 'User':
                     $node = $this->container->get(UserRepository::class)->findById($uuids);
 
                     break;
+
                 default:
                     break;
             }
@@ -479,8 +526,8 @@ class GlobalIdResolver
         // We try to decode the global id
         $decodeGlobalId = GlobalId::fromGlobalId($uuidOrGlobalId);
         if (
-            isset($decodeGlobalId['type'], $decodeGlobalId['id']) &&
-            null !== $decodeGlobalId['id']
+            isset($decodeGlobalId['type'], $decodeGlobalId['id'])
+            && null !== $decodeGlobalId['id']
         ) {
             return $returnId ? $decodeGlobalId['id'] : $decodeGlobalId;
         }

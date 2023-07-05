@@ -88,9 +88,9 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
 
         // Check if viewer is not analyst in proposal list
         if (
-            $this->isViewerAnalystOfProposals($proposals, $viewer) &&
-            !($viewer->isAdmin() || $viewer->isSuperAdmin()) &&
-            \in_array(GlobalId::toGlobalId('User', $viewer->getId()), $analystIds, true)
+            $this->isViewerAnalystOfProposals($proposals, $viewer)
+            && !($viewer->isAdmin() || $viewer->isSuperAdmin())
+            && \in_array(GlobalId::toGlobalId('User', $viewer->getId()), $analystIds, true)
         ) {
             return $this->buildPayload(
                 $connection,

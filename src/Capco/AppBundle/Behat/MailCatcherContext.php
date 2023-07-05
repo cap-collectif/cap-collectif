@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Capco\AppBundle\Helper\EnvHelper;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Capco\AppBundle\Helper\EnvHelper;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class MailCatcherContext extends Base implements KernelAwareContext
 {
@@ -44,7 +44,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
             fwrite($newSnapshot, $content);
             chmod(self::SNAPSHOTS_PATH . $file, 0777);
             fclose($newSnapshot);
-            echo "\"Snapshot writen at '${file}'. You can now relaunch the testsuite.\"";
+            echo "\"Snapshot writen at '{$file}'. You can now relaunch the testsuite.\"";
 
             return;
         }
@@ -56,7 +56,8 @@ class MailCatcherContext extends Base implements KernelAwareContext
             $diff = $this->kernel
                 ->getContainer()
                 ->get('caxy.html_diff')
-                ->diff($content, $text);
+                ->diff($content, $text)
+            ;
             $dir = self::SNAPSHOTS_DIFF_PATH;
             if (!file_exists($dir)) {
                 mkdir($dir, 0777);
@@ -87,16 +88,14 @@ class MailCatcherContext extends Base implements KernelAwareContext
     private function getCrawler(Message $message)
     {
         if (!class_exists('Symfony\Component\DomCrawler\Crawler')) {
-            throw new \RuntimeException(
-                'Can\'t crawl HTML: Symfony DomCrawler component is missing from autoloading.'
-            );
+            throw new \RuntimeException('Can\'t crawl HTML: Symfony DomCrawler component is missing from autoloading.');
         }
 
         return new Crawler($message->getPart('text/html')->getContent());
     }
 
     /**
-     * @return Message|null
+     * @return null|Message
      */
     private function getCurrentMessage()
     {

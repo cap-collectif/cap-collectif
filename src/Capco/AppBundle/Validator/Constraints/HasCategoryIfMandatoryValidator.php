@@ -11,11 +11,11 @@ class HasCategoryIfMandatoryValidator extends ConstraintValidator
     {
         $form = $object->getProposalForm();
         if (
-            !$object->getCategory() &&
-            $form &&
-            \count($form->getCategories()) > 0 &&
-            $form->isUsingCategories() &&
-            $form->isCategoryMandatory()
+            !$object->getCategory()
+            && $form
+            && \count($form->getCategories()) > 0
+            && $form->isUsingCategories()
+            && $form->isCategoryMandatory()
         ) {
             $this->context->buildViolation($constraint->message)->addViolation();
 

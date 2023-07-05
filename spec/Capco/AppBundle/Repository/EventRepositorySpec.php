@@ -34,20 +34,25 @@ class EventRepositorySpec extends ObjectBehavior
         $user
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('userId');
+            ->willReturn('userId')
+        ;
 
         $qb->leftJoin('e.owner', 'o')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere('o.id = :ownerId')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setParameter('ownerId', 'userId')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->orderBy('e.startAt', 'DESC')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $this->getByOwnerQueryBuilder($user, [])->shouldReturn($qb);
     }
 
@@ -59,20 +64,25 @@ class EventRepositorySpec extends ObjectBehavior
         $organization
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('organizationId');
+            ->willReturn('organizationId')
+        ;
 
         $qb->leftJoin('e.organizationOwner', 'o')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->andWhere('o.id = :ownerId')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->setParameter('ownerId', 'organizationId')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $qb->orderBy('e.startAt', 'DESC')
             ->shouldBeCalled()
-            ->willReturn($qb);
+            ->willReturn($qb)
+        ;
         $this->getByOwnerQueryBuilder($organization, [])->shouldReturn($qb);
     }
 }

@@ -16,7 +16,8 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('r.question', 'question')
             ->andWhere('r.reply = :reply')
             ->orWhere('r.replyAnonymous = :reply')
-            ->setParameter('reply', $replyId);
+            ->setParameter('reply', $replyId)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -29,7 +30,8 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
             ->andWhere('r.proposal = :proposal')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
-            ->setParameter('proposal', $proposal->getId());
+            ->setParameter('proposal', $proposal->getId())
+        ;
         if (!$showPrivate) {
             $qb->andWhere('question.private = false');
         }
@@ -45,7 +47,8 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
             ->andWhere('r.reply = :reply OR r.replyAnonymous = :reply')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
-            ->setParameter('reply', $reply->getId());
+            ->setParameter('reply', $reply->getId())
+        ;
         if (!$showPrivate) {
             $qb->andWhere('question.private = false');
         }
@@ -63,7 +66,8 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
             ->andWhere('r.proposalEvaluation = :evaluation')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
-            ->setParameter('evaluation', $evaluation->getId());
+            ->setParameter('evaluation', $evaluation->getId())
+        ;
         if (!$showPrivate) {
             $qb->andWhere('question.private = false');
         }

@@ -58,7 +58,6 @@ class OauthConnectController extends ConnectController
      * Action that handles the login 'form'. If connecting is enabled the
      * user will be redirected to the appropriate login urls or registration forms.
      *
-     *
      * @return Response
      */
     public function connectAction(Request $request)
@@ -96,9 +95,9 @@ class OauthConnectController extends ConnectController
      * @param Request $request The active request
      * @param string  $service Name of the resource owner to connect to
      *
-     * @return Response
-     *
      * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return Response
      */
     public function connectServiceAction(Request $request, $service)
     {
@@ -114,9 +113,9 @@ class OauthConnectController extends ConnectController
     /**
      * @param string $service
      *
-     * @return RedirectResponse
-     *
      * @throws NotFoundHttpException if features associated to web service are not enabled
+     *
+     * @return RedirectResponse
      */
     public function redirectToServiceAction(Request $request, $service)
     {
@@ -131,8 +130,8 @@ class OauthConnectController extends ConnectController
         }
 
         if (
-            $this->container->getParameter('hwi_oauth.connect') &&
-            $this->isGranted($this->container->getParameter('hwi_oauth.grant_rule'))
+            $this->container->getParameter('hwi_oauth.connect')
+            && $this->isGranted($this->container->getParameter('hwi_oauth.grant_rule'))
         ) {
             return $this->associateToService($request, $service);
         }
@@ -186,19 +185,19 @@ class OauthConnectController extends ConnectController
                 }
 
                 if (
-                    $this->container->getParameter('hwi_oauth.failed_use_referer') &&
-                    !$session->has($sessionKeyFailure) &&
-                    ($targetUrl = $request->headers->get('Referer')) &&
-                    $targetUrl !== $authorizationUrl
+                    $this->container->getParameter('hwi_oauth.failed_use_referer')
+                    && !$session->has($sessionKeyFailure)
+                    && ($targetUrl = $request->headers->get('Referer'))
+                    && $targetUrl !== $authorizationUrl
                 ) {
                     $session->set($sessionKeyFailure, $targetUrl);
                 }
 
                 if (
-                    $this->container->getParameter('hwi_oauth.use_referer') &&
-                    !$session->has($sessionKey) &&
-                    ($targetUrl = $request->headers->get('Referer')) &&
-                    $targetUrl !== $authorizationUrl
+                    $this->container->getParameter('hwi_oauth.use_referer')
+                    && !$session->has($sessionKey)
+                    && ($targetUrl = $request->headers->get('Referer'))
+                    && $targetUrl !== $authorizationUrl
                 ) {
                     $session->set($sessionKey, $targetUrl);
                 }

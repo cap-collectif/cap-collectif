@@ -34,7 +34,8 @@ class ProjectAllowedGroupsResolver implements ResolverInterface
                 return $this->groupRepository
                     ->getAllowedUserGroupForProject($project, $offset, $limit)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             $totalUsersInGroups = $this->userRepository->countAllowedViewersForProject($project);

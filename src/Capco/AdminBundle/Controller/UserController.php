@@ -6,12 +6,12 @@ use Capco\AppBundle\Command\CreateCsvFromLegacyUsersCommand;
 use Capco\AppBundle\Command\CreateCsvFromUsersCommand;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Security("has_role('ROLE_ADMIN')")
@@ -23,9 +23,7 @@ class UserController extends CRUDController
         $object = $this->get(UserRepository::class)->find($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(
-                'The user corresponding to this id doesn\'t exist.'
-            );
+            throw $this->createNotFoundException('The user corresponding to this id doesn\'t exist.');
         }
 
         return $this->renderWithExtraParams(

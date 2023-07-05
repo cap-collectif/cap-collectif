@@ -193,7 +193,7 @@ class Manager
         self::unstable__organizations,
         self::moderation_comment,
         self::unstable__new_create_project,
-        self::new_vote_step
+        self::new_vote_step,
     ];
 
     protected ToggleManager $toggleManager;

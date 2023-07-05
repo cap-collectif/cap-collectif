@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,7 +17,7 @@ class Version20150330130028 extends AbstractMigration implements ContainerAwareI
     /**
      * Sets the Container.
      *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     * @param null|ContainerInterface $container A ContainerInterface instance or null
      */
     public function setContainer(?ContainerInterface $container = null)
     {

@@ -10,12 +10,12 @@ use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
+use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -68,7 +68,8 @@ class DeleteEventMutation extends BaseDeleteMutation
                 ->andWhere('er.id = :id')
                 ->setParameter('id', $event->getReview()->getId())
                 ->getQuery()
-                ->getResult();
+                ->getResult()
+            ;
         }
         $event->softDelete();
         $this->em
@@ -77,7 +78,8 @@ class DeleteEventMutation extends BaseDeleteMutation
             ->andWhere('er.event = :event')
             ->setParameter('event', $event)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         $this->em
             ->createQueryBuilder()
@@ -85,7 +87,8 @@ class DeleteEventMutation extends BaseDeleteMutation
             ->andWhere('ec.Event = :event')
             ->setParameter('event', $event)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         if ($owner) {
             $event->setOwner($owner);
@@ -94,8 +97,8 @@ class DeleteEventMutation extends BaseDeleteMutation
         $highlightedContents = $this->highlightedContentRepository->findAll();
         foreach ($highlightedContents as $highlightedContent) {
             if (
-                $highlightedContent instanceof HighlightedEvent &&
-                $highlightedContent->getEvent()->getId() === $event->getId()
+                $highlightedContent instanceof HighlightedEvent
+                && $highlightedContent->getEvent()->getId() === $event->getId()
             ) {
                 $this->em->remove($highlightedContent);
             }

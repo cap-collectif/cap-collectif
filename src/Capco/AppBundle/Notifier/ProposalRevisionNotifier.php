@@ -53,7 +53,8 @@ class ProposalRevisionNotifier extends BaseNotifier
         );
         $btnColor = $this->siteColorRepository
             ->findOneByKeyname('color.btn.primary.bg')
-            ->getValue();
+            ->getValue()
+        ;
         $btnTextColor = $this->siteColorRepository->findOneByKeyname('color.btn.text')->getValue();
         $this->mailer->createAndSendMessage(
             ProposalRevisionMessage::class,
@@ -78,7 +79,8 @@ class ProposalRevisionNotifier extends BaseNotifier
     {
         $btnColor = $this->siteColorRepository
             ->findOneByKeyname('color.btn.primary.bg')
-            ->getValue();
+            ->getValue()
+        ;
         $btnTextColor = $this->siteColorRepository->findOneByKeyname('color.btn.text')->getValue();
         $usersToSendNotification = $this->userRepository->getAssignedUsersOnProposal(
             $proposal,

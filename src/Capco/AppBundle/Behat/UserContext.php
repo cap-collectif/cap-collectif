@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Behat;
 
-use PHPUnit\Framework\Assert;
-use Capco\AppBundle\Utils\Text;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Doctrine\UserManager;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Behat\Storage\BehatStorage;
 use Capco\AppBundle\Behat\Traits\FranceConnectTrait;
 use Capco\AppBundle\Behat\Traits\OpenidConnectTrait;
+use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Utils\Text;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\User;
+use PHPUnit\Framework\Assert;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class UserContext extends DefaultContext
@@ -92,12 +92,14 @@ class UserContext extends DefaultContext
 
     /**
      * @Then user :userId registered less than :time minutes ago
+     *
+     * @param mixed $time
      */
     public function userRegisteredLessThanXMinutesgo(string $userId, $time)
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        $user->setCreatedAt(new \DateTime("-${time} minutes"));
+        $user->setCreatedAt(new \DateTime("-{$time} minutes"));
         $this->getEntityManager()->flush();
     }
 
@@ -304,7 +306,8 @@ class UserContext extends DefaultContext
     {
         $alertCloseButton = $this->getSession()
             ->getPage()
-            ->find('css', '#current-alert .close');
+            ->find('css', '#current-alert .close')
+        ;
         $alertCloseButton->click();
     }
 
@@ -346,7 +349,8 @@ class UserContext extends DefaultContext
         $registration = (new EventRegistration($event))
             ->setEmail($email)
             ->setUsername($email)
-            ->setPrivate(false);
+            ->setPrivate(false)
+        ;
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
     }

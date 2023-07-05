@@ -33,7 +33,8 @@ class SourceCategoryAdmin extends AbstractAdmin
                 'editable' => true,
                 'label' => 'global.published',
             ])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -48,7 +49,8 @@ class SourceCategoryAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['edit' => [], 'delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -60,7 +62,8 @@ class SourceCategoryAdmin extends AbstractAdmin
                 'label' => 'global.published',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

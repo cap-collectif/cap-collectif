@@ -5,11 +5,11 @@ namespace spec\Capco\AppBundle\Factory;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Factory\PostAuthorFactory;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 
 class PostAuthorFactorySpec extends ObjectBehavior
 {
@@ -38,7 +38,8 @@ class PostAuthorFactorySpec extends ObjectBehavior
         $globalIdResolver
             ->resolve('author1', $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($author);
+            ->willReturn($author)
+        ;
         $post->containAuthor($author)->willReturn(true);
         $post->getPostAuthor($author)->willReturn($postAuthor);
         $postAuthor->getAuthor()->willReturn($author);
@@ -59,7 +60,8 @@ class PostAuthorFactorySpec extends ObjectBehavior
         $globalIdResolver
             ->resolve('author1', $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($author);
+            ->willReturn($author)
+        ;
         $post->containAuthor($author)->willReturn(false);
 
         $postAuthor->getAuthor()->willReturn($author);
@@ -67,7 +69,8 @@ class PostAuthorFactorySpec extends ObjectBehavior
         $post
             ->addAuthor(Argument::type(PostAuthor::class))
             ->shouldBeCalled()
-            ->willReturn($post);
+            ->willReturn($post)
+        ;
 
         $em->persist(Argument::type(PostAuthor::class))->shouldBeCalledOnce();
         $em->flush()->shouldBeCalledOnce();

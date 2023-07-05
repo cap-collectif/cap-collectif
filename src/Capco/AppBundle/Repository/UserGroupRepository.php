@@ -12,7 +12,8 @@ class UserGroupRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ug');
         $qb->select('count(DISTINCT ug)')
             ->andWhere('ug.user = :user')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }

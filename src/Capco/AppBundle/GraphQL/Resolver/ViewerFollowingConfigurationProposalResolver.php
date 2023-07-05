@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
-use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 
 class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
 {

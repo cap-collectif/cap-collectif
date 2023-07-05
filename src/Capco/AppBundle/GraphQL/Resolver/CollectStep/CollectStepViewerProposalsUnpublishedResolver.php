@@ -1,11 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\CollectStep;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormViewerProposalsUnpublishedResolver;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormViewerProposalsUnpublishedResolver;
 
 class CollectStepViewerProposalsUnpublishedResolver implements ResolverInterface
 {

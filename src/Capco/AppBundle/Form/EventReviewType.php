@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType;
-use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\EventReview;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,7 +23,8 @@ class EventReviewType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => EventReviewStatusType::$eventReviewStatus,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

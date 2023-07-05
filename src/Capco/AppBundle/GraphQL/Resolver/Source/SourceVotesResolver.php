@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
-use Capco\AppBundle\Search\VoteSearch;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class SourceVotesResolver implements ResolverInterface
 {

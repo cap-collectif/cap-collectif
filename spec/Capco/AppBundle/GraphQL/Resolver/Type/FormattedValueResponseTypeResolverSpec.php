@@ -23,8 +23,8 @@ class FormattedValueResponseTypeResolverSpec extends ObjectBehavior
         ValueResponse $response
     ): void {
         $value = <<<'EOF'
-{"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":null}
-EOF;
+            {"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":null}
+            EOF;
 
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn('Incohérente, Que de la publicité (mensongère en plus !)');
@@ -34,8 +34,8 @@ EOF;
         ValueResponse $response
     ): void {
         $value = <<<'EOF'
-{"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":"L'autre réponse"}
-EOF;
+            {"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":"L'autre réponse"}
+            EOF;
 
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn(
@@ -47,8 +47,8 @@ EOF;
         ValueResponse $response
     ): void {
         $value = <<<'EOF'
-{"labels":["<p>Incohérente</p>","<h1>Que de la <span class='ad'>publicité</span> (<em>mensongère</em> en plus !</h1>)"],"other":null}
-EOF;
+            {"labels":["<p>Incohérente</p>","<h1>Que de la <span class='ad'>publicité</span> (<em>mensongère</em> en plus !</h1>)"],"other":null}
+            EOF;
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn('Incohérente, Que de la publicité (mensongère en plus !)');
     }
@@ -57,8 +57,8 @@ EOF;
         ValueResponse $response
     ): void {
         $value = <<<'EOF'
-{"labels":["Incohérente"],"other": null}
-EOF;
+            {"labels":["Incohérente"],"other": null}
+            EOF;
 
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn('Incohérente');
@@ -68,15 +68,15 @@ EOF;
         ValueResponse $response
     ): void {
         $value = <<<'EOF'
-{"labels":null,"other": "L'autre c'est moi"}
-EOF;
+            {"labels":null,"other": "L'autre c'est moi"}
+            EOF;
 
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn("L'autre c'est moi");
 
         $value = <<<'EOF'
-{"labels":[],"other": "L'autre c'est moi"}
-EOF;
+            {"labels":[],"other": "L'autre c'est moi"}
+            EOF;
 
         $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
         $this($response)->shouldReturn("L'autre c'est moi");

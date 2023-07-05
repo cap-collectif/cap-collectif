@@ -22,7 +22,8 @@ class CommentVoteRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('cv')
             ->andWhere('cv.comment = :comment')
-            ->setParameter('comment', $comment);
+            ->setParameter('comment', $comment)
+        ;
         if ('PUBLISHED_AT' === $field) {
             $qb->orderBy('cv.createdAt', $direction);
         }
@@ -39,7 +40,8 @@ class CommentVoteRepository extends EntityRepository
             ->where('cv.comment = :comment')
             ->setParameter('comment', $comment)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countAllByVoter(User $voter): int
@@ -49,7 +51,8 @@ class CommentVoteRepository extends EntityRepository
         return (int) $qb
             ->select('COUNT(cv.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findAllByVoter(User $voter, int $offset = 0, int $limit = 100): array
@@ -60,7 +63,8 @@ class CommentVoteRepository extends EntityRepository
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function prepareVoterQuery(User $voter): QueryBuilder
@@ -71,6 +75,7 @@ class CommentVoteRepository extends EntityRepository
             ->leftJoin('cv.comment', 'c')
             ->where($qb->expr()->eq('cv.user', ':voter'))
             ->andWhere('c.published = true')
-            ->setParameter(':voter', $voter);
+            ->setParameter(':voter', $voter)
+        ;
     }
 }

@@ -16,6 +16,7 @@ class ProposalDecisionRepository extends EntityRepository
             ->setParameter('ids', $ids)
             ->setParameter('state', ProposalStatementState::DONE)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

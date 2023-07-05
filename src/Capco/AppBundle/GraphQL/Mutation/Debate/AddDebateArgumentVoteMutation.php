@@ -4,17 +4,16 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
-use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
+use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Overblog\GraphQLBundle\Error\UserError;
 
-class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements
-    MutationInterface
+class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements MutationInterface
 {
     public const ALREADY_VOTED = 'ALREADY_VOTED';
 

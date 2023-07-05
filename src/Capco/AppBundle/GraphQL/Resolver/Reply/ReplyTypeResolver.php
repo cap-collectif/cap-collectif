@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
-use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class ReplyTypeResolver implements ResolverInterface
 {

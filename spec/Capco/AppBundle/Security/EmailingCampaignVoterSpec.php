@@ -27,7 +27,8 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $campaign, [
             EmailingCampaignVoter::CREATE,
@@ -46,19 +47,23 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection());
+            ->willReturn(new ArrayCollection())
+        ;
 
         $this->vote($token, $campaign, [
             EmailingCampaignVoter::CREATE,
@@ -77,11 +82,13 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -108,19 +115,23 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $campaign
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -147,19 +158,23 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $campaign
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -188,35 +203,43 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn(new ArrayCollection([$organization]));
+            ->willReturn(new ArrayCollection([$organization]))
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $campaign
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $campaign
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -245,27 +268,33 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $campaign
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $campaign
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -282,23 +311,28 @@ class EmailingCampaignVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $campaign
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
 
         $this->vote($token, $campaign, [EmailingCampaignVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED

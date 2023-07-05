@@ -11,6 +11,7 @@ trait LocaleRepositoryTrait
         return $locale ??
             $this->getEntityManager()
                 ->getRepository(Locale::class)
-                ->getDefaultCode();
+                ->getDefaultCode()
+            ;
     }
 }

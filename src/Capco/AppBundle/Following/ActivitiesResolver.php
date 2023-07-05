@@ -9,7 +9,7 @@ abstract class ActivitiesResolver implements ActivitiesResolverInterface
     /**
      * You HAVE to define this const in child class.
      */
-    const ACTIVITIES = [];
+    public const ACTIVITIES = [];
 
     abstract public function getFollowedByUserId();
 

@@ -4,10 +4,10 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\Participant;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver;
 
 class IsViewerParticipatingAtEventResolverSpec extends ObjectBehavior
 {
@@ -30,7 +30,8 @@ class IsViewerParticipatingAtEventResolverSpec extends ObjectBehavior
         $eventRegistrationRepository
             ->getOneByUserAndEvent($viewer, $event)
             ->shouldBeCalled()
-            ->willReturn($eventRegistration);
+            ->willReturn($eventRegistration)
+        ;
         $this->__invoke($event, $viewer)->shouldReturn(true);
     }
 
@@ -42,7 +43,8 @@ class IsViewerParticipatingAtEventResolverSpec extends ObjectBehavior
         $eventRegistrationRepository
             ->getOneByUserAndEvent($viewer, $event)
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $this->__invoke($event, $viewer)->shouldReturn(false);
     }
 }

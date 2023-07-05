@@ -4,11 +4,11 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProjectSlugMutation;
-use Capco\UserBundle\Entity\User;
-use PhpSpec\ObjectBehavior;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -42,12 +42,14 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('projectId')
             ->shouldBeCalledOnce()
-            ->willReturn($projectId);
+            ->willReturn($projectId)
+        ;
 
         $globalIdResolver
             ->resolve($projectId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($project);
+            ->willReturn($project)
+        ;
 
         $rawSlug = 'my new slug';
         $input->offsetGet('slug')->willReturn($rawSlug);
@@ -56,11 +58,13 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         $slugger
             ->slug($rawSlug)
             ->shouldBeCalledOnce()
-            ->willReturn($abstractUnicodeString);
+            ->willReturn($abstractUnicodeString)
+        ;
         $abstractUnicodeString
             ->toString()
             ->shouldBeCalledOnce()
-            ->willReturn($slug);
+            ->willReturn($slug)
+        ;
 
         $project->setSlug($slug)->shouldBeCalledOnce();
 
@@ -81,12 +85,14 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('projectId')
             ->shouldBeCalledOnce()
-            ->willReturn($projectId);
+            ->willReturn($projectId)
+        ;
 
         $globalIdResolver
             ->resolve($projectId, $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload->shouldHaveCount(2);

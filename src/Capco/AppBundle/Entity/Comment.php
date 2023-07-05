@@ -3,30 +3,30 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Enum\ModerationStatus;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\PinnableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\PinnableTrait;
-use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\AppBundle\Entity\Interfaces\Author;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
@@ -50,13 +50,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
  * })
  * @CapcoAssert\CommentHasAuthor
  */
-abstract class Comment implements
-    Publishable,
-    Trashable,
-    Contribution,
-    VotableInterface,
-    CommentableInterface,
-    ReportableInterface
+abstract class Comment implements Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface
 {
     use AuthorableTrait;
     use ModerableTrait;
@@ -317,9 +311,9 @@ abstract class Comment implements
 
     public function canContribute($user = null): bool
     {
-        return $this->isPublished() &&
-            !$this->isTrashed() &&
-            $this->canContributeToRelatedObject($user);
+        return $this->isPublished()
+            && !$this->isTrashed()
+            && $this->canContributeToRelatedObject($user);
     }
 
     public function canVote(): bool
@@ -493,9 +487,9 @@ abstract class Comment implements
 
     public function isIndexable(): bool
     {
-        return $this->isPublished() &&
-            $this->getRelatedObject() instanceof IndexableInterface &&
-            $this->getRelatedObject()->isIndexable();
+        return $this->isPublished()
+            && $this->getRelatedObject() instanceof IndexableInterface
+            && $this->getRelatedObject()->isIndexable();
     }
 
     public static function getElasticsearchPriority(): int

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
 use Capco\AppBundle\Entity\Argument;

@@ -18,7 +18,8 @@ class ThemeRepository extends EntityRepository
             ->addSelect('c')
             ->leftJoin('t.projects', 'c')
             ->addOrderBy('t.position', 'ASC')
-            ->addOrderBy('t.updatedAt', 'DESC');
+            ->addOrderBy('t.updatedAt', 'DESC')
+        ;
         $query = $qb->getQuery();
 
         if ($limit) {
@@ -37,7 +38,8 @@ class ThemeRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
         $qb->leftJoin('t.translations', 'translation')
             ->andWhere('translation.title LIKE :term')
-            ->setParameter('term', '%' . $term . '%');
+            ->setParameter('term', '%' . $term . '%')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -47,7 +49,8 @@ class ThemeRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
         $qb->leftJoin('t.translations', 'translation')
             ->andWhere('translation.title = :term')
-            ->setParameter('term', $term);
+            ->setParameter('term', $term)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -58,9 +61,7 @@ class ThemeRepository extends EntityRepository
         ?string $term = null
     ): Paginator {
         if ($page < 1) {
-            throw new \InvalidArgumentException(
-                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
-            );
+            throw new \InvalidArgumentException(sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page));
         }
 
         $qb = $this->getIsEnabledQueryBuilder();
@@ -89,7 +90,8 @@ class ThemeRepository extends EntityRepository
             ->andWhere('translation.slug = :slug')
             ->setParameter('enabled', true)
             ->setParameter('slug', $slug)
-            ->orderBy('t.updatedAt', 'DESC');
+            ->orderBy('t.updatedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -119,7 +121,8 @@ class ThemeRepository extends EntityRepository
             )
             ->setParameter('step', $step)
             ->setParameter('locale', $locale)
-            ->orderBy('value', 'DESC');
+            ->orderBy('value', 'DESC')
+        ;
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -133,7 +136,8 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.translations', 'translation')
             ->andWhere('translation.locale = :locale')
             ->setParameter('locale', $locale)
-            ->select('COUNT(t.id)');
+            ->select('COUNT(t.id)')
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -142,6 +146,7 @@ class ThemeRepository extends EntityRepository
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.isEnabled = :enabled')
-            ->setParameter('enabled', true);
+            ->setParameter('enabled', true)
+        ;
     }
 }

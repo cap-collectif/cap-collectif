@@ -2,17 +2,17 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
+use Capco\AppBundle\GraphQL\Mutation\DuplicateProjectMutation;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Capco\AppBundle\GraphQL\Mutation\DuplicateProjectMutation;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 
 class ProjectController extends \Sonata\AdminBundle\Controller\CRUDController
 {

@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class StepContributionsResolver implements ResolverInterface
 {

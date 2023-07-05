@@ -1,6 +1,7 @@
 <?php
 
 namespace Capco\AppBundle\Validator\Constraints;
+
 use Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation;
 use Symfony\Component\Validator\Constraint;
 

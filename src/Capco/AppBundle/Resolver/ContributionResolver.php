@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepContributionsResolver;
+use Capco\UserBundle\Repository\UserRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class ContributionResolver
 {
@@ -271,7 +271,8 @@ class ContributionResolver
             if ($step->getStep()) {
                 $count += $this->stepContributionsResolver
                     ->resolveSync($step->getStep(), new Argument(['first' => 0]))
-                    ->getTotalCount();
+                    ->getTotalCount()
+                ;
             }
         }
 

@@ -22,7 +22,8 @@ class CheckExternalLinkValidator extends ConstraintValidator
             $this->context
                 ->buildViolation('available-external-link-required')
                 ->atPath('externalLink')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

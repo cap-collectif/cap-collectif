@@ -14,7 +14,8 @@ class UserNotificationsConfigurationType extends AbstractType
         $builder
             ->add('onProposalCommentMail', CheckboxType::class)
             ->add('consentExternalCommunication', CheckboxType::class)
-            ->add('consentInternalCommunication', CheckboxType::class);
+            ->add('consentInternalCommunication', CheckboxType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

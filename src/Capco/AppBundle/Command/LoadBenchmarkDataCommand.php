@@ -2,16 +2,16 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Sluggable\SluggableListener;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Doctrine\UserListener;
 use Gedmo\Timestampable\TimestampableListener;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Capco\AppBundle\Sluggable\SluggableListener;
 
 class LoadBenchmarkDataCommand extends Command
 {

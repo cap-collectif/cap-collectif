@@ -15,7 +15,8 @@ class SelectionStepRepository extends AbstractStepRepository
             ->andWhere($expr->neq('ss.voteType', VoteType::DISABLED))
             ->andWhere('pas.project = :project')
             ->setParameter('project', $project)
-            ->orderBy('pas.position');
+            ->orderBy('pas.position')
+        ;
 
         $query = $qb->getQuery();
 

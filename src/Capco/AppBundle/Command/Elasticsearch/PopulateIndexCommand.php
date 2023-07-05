@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Command\Elasticsearch;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

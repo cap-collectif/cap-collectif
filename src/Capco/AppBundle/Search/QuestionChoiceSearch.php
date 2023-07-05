@@ -52,7 +52,8 @@ class QuestionChoiceSearch extends Search
                     $functionScore = new Query\FunctionScore();
                     $functionScore
                         ->setBoostMode(Query\FunctionScore::BOOST_MODE_MAX)
-                        ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM);
+                        ->setScoreMode(Query\FunctionScore::SCORE_MODE_SUM)
+                    ;
                     $functionScore->addFieldValueFactorFunction(
                         'position',
                         null,
@@ -75,7 +76,8 @@ class QuestionChoiceSearch extends Search
                                 $sanitizedTerm . '~' . self::FUZZINNESS_LEVEL
                             ))->setFields(['label'])
                         )
-                        ->addShould(new Query\MatchQuery('label', $sanitizedTerm));
+                        ->addShould(new Query\MatchQuery('label', $sanitizedTerm))
+                    ;
                     $query->setQuery($boolQuery);
                     $query->setSort(['_score' => ['order' => 'desc'], 'id' => new \stdClass()]);
                     $query->setMinScore(0.1);

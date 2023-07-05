@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 
 use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 
 class ParticipantTypeResolver implements ResolverInterface
 {

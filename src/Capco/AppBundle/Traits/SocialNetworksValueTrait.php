@@ -61,11 +61,11 @@ trait SocialNetworksValueTrait
             return false;
         }
 
-        return (bool) ($proposalForm->isUsingYoutube() && $this->getYoutubeUrl()) ||
-            (bool) ($proposalForm->isUsingWebPage() && $this->getWebPageUrl()) ||
-            (bool) ($proposalForm->isUsingFacebook() && $this->getFacebookUrl()) ||
-            (bool) ($proposalForm->isUsingLinkedIn() && $this->getLinkedInUrl()) ||
-            (bool) ($proposalForm->isUsingTwitter() && $this->getTwitterUrl()) ||
-            (bool) ($proposalForm->isUsingInstagram() && $this->getInstagramUrl());
+        return (bool) ($proposalForm->isUsingYoutube() && $this->getYoutubeUrl())
+            || (bool) ($proposalForm->isUsingWebPage() && $this->getWebPageUrl())
+            || (bool) ($proposalForm->isUsingFacebook() && $this->getFacebookUrl())
+            || (bool) ($proposalForm->isUsingLinkedIn() && $this->getLinkedInUrl())
+            || (bool) ($proposalForm->isUsingTwitter() && $this->getTwitterUrl())
+            || (bool) ($proposalForm->isUsingInstagram() && $this->getInstagramUrl());
     }
 }

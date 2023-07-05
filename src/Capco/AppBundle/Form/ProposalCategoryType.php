@@ -30,7 +30,8 @@ class ProposalCategoryType extends AbstractType
             ->add('newCategoryImage', EntityType::class, [
                 'class' => Media::class,
                 'mapped' => false,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

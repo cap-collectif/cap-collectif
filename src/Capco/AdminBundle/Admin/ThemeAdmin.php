@@ -9,6 +9,8 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -17,8 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
 
 class ThemeAdmin extends AbstractAdmin
 {
@@ -107,7 +107,8 @@ class ThemeAdmin extends AbstractAdmin
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -152,7 +153,8 @@ class ThemeAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -206,7 +208,8 @@ class ThemeAdmin extends AbstractAdmin
                 'required' => false,
                 'label' => 'global.image',
             ])
-            ->end();
+            ->end()
+        ;
         $form
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', TextType::class, [
@@ -223,7 +226,8 @@ class ThemeAdmin extends AbstractAdmin
                     'placeholder' => '<script type="text/javascript"> </script>',
                 ],
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -270,6 +274,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
-            ]);
+            ])
+        ;
     }
 }

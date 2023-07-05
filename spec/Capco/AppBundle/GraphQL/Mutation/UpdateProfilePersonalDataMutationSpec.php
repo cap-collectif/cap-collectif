@@ -3,17 +3,17 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
 use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\FormFactory;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 
 class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 {
@@ -110,7 +110,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $userRepository
             ->find($userId)
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
@@ -162,7 +163,6 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->isSuperAdmin()->willReturn(false);
         $user->getUsername()->willReturn('Atos');
         $user->getId()->willReturn('theUserId');
-
 
         $user->getPhone()->willReturn('+3311111111');
         $user->setPhoneConfirmed(false);

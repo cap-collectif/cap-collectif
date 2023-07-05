@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
 /**
- * @method UserIdentificationCode|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserIdentificationCode|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|UserIdentificationCode find($id, $lockMode = null, $lockVersion = null)
+ * @method null|UserIdentificationCode findOneBy(array $criteria, array $orderBy = null)
  * @method UserIdentificationCode[]    findAll()
  * @method UserIdentificationCode[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -22,7 +22,8 @@ class UserIdentificationCodeRepository extends EntityRepository
             ->executeQuery(
                 'select uic.identification_code, fu.id as isUsed from user_identification_code uic left join fos_user fu ON fu.user_identification_code = uic.identification_code where uic.identification_code = ?',
                 [$code]
-            );
+            )
+        ;
 
         return $qb->fetchAssociative();
     }
@@ -32,7 +33,8 @@ class UserIdentificationCodeRepository extends EntityRepository
         $data = $this->createQueryBuilder('uic')
             ->select('uic.identificationCode')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
 
         return array_column($data, 'identificationCode');
     }
@@ -49,7 +51,8 @@ class UserIdentificationCodeRepository extends EntityRepository
             )
             ->where('fu.id is not null')
             ->andWhere('uic.list = :list')
-            ->setParameter('list', $list);
+            ->setParameter('list', $list)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }

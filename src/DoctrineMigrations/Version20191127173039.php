@@ -32,7 +32,8 @@ final class Version20191127173039 extends AbstractLocaleMigration
                 $locale
                     ->enable()
                     ->publish()
-                    ->setDefault();
+                    ->setDefault()
+                ;
 
                 break;
             }

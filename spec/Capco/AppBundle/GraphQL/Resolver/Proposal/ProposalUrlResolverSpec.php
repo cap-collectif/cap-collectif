@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
 
 class ProposalUrlResolverSpec extends ObjectBehavior
 {

@@ -13,19 +13,15 @@ class GraphQLCollector extends DataCollector
 
     /**
      * Collects data for the given Request and Response.
-     *
-     * @param Request         $request
-     * @param Response        $response
-     * @param \Exception|null $exception
      */
     public function collect(
         Request $request,
         Response $response,
-        \Exception $exception = null
+        ?\Exception $exception = null
     ): void {
         $graphqlQuery =
-            'graphql_multiple_endpoint' === $request->attributes->get('_route') ||
-            'graphql_endpoint'
+            'graphql_multiple_endpoint' === $request->attributes->get('_route')
+            || 'graphql_endpoint'
                 ? json_decode($request->getContent(), true)
                 : null;
         $this->data['graphql_query'] = $graphqlQuery;
@@ -33,11 +29,8 @@ class GraphQLCollector extends DataCollector
     }
 
     /**
-     * @param mixed  $key      The serialized value from the data loader
-     * @param string $subtype
-     * @param float  $duration
-     * @param mixed  $value    The normalized or denormalized value that was get from cache or from resolver
-     * @param string $cacheKey
+     * @param mixed $key   The serialized value from the data loader
+     * @param mixed $value The normalized or denormalized value that was get from cache or from resolver
      */
     public function addCacheHit(
         $key,
@@ -50,10 +43,8 @@ class GraphQLCollector extends DataCollector
     }
 
     /**
-     * @param mixed  $key      The serialized value from the data loader
-     * @param string $subtype
-     * @param float  $duration
-     * @param mixed  $value    The normalized or denormalized value that was get from cache or from resolver
+     * @param mixed $key   The serialized value from the data loader
+     * @param mixed $value The normalized or denormalized value that was get from cache or from resolver
      */
     public function addCacheMiss($key, string $subtype, float $duration, $value): void
     {
@@ -82,7 +73,7 @@ class GraphQLCollector extends DataCollector
 
     public function getCacheHitsMisses(): array
     {
-        return \array_merge($this->getCacheHits(), $this->getCacheMisses());
+        return array_merge($this->getCacheHits(), $this->getCacheMisses());
     }
 
     public function getCache(): array
@@ -102,7 +93,7 @@ class GraphQLCollector extends DataCollector
 
     public function getCacheHitsReadsPercentage(): float
     {
-        return \round(($this->getCacheHitsCount() / $this->getCacheTotalReads()) * 100, 2);
+        return round(($this->getCacheHitsCount() / $this->getCacheTotalReads()) * 100, 2);
     }
 
     public function getCacheMisses(): array

@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveOpinionVoteMutation implements MutationInterface
 {

@@ -20,7 +20,7 @@ final class Version20200330085715 extends AbstractMigration implements Container
     private $generator;
     private $em;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->em = $container->get('doctrine')->getManager();

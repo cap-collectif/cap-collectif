@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ArgumentViewerHasVoteResolver implements ResolverInterface

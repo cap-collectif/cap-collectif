@@ -2,14 +2,13 @@
 
 namespace Capco\AppBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class MailerServicePass implements CompilerPassInterface
 {
     /**
      * You can modify the container here before it is dumped to PHP code.
-     *
      *
      * @api
      */
@@ -17,8 +16,8 @@ class MailerServicePass implements CompilerPassInterface
     {
         // Let's use api mailer (mandrill or mailjet) if we are in production, and not on a custom smtp server
         if (
-            'prod' === $container->getParameter('kernel.environment') &&
-            true != getenv('SYMFONY_PRODUCTION_SMTP_MAILER')
+            'prod' === $container->getParameter('kernel.environment')
+            && true != getenv('SYMFONY_PRODUCTION_SMTP_MAILER')
            ) {
             $transportDefinition = $container->getDefinition('swiftmailer.mailer.transport.api');
             $transportDefinition->addMethodCall('setMandrillApiKey', [

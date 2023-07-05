@@ -60,7 +60,8 @@ class UpdateProposalNewsMutation implements MutationInterface
             /** @var ProposalFormNotificationConfiguration $config */
             $config = $firstProposal
                 ->getProposalForm()
-                ->getNotificationsConfiguration();
+                ->getNotificationsConfiguration()
+            ;
 
             if ($config->isOnProposalNewsUpdate()) {
                 $this->publisher->publish(

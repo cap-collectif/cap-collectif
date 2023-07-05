@@ -85,7 +85,8 @@ class DuplicateProjectMutation implements MutationInterface
                             $clonedAbstractStep,
                             $step->getId()
                         )
-                    );
+                    )
+                ;
             }
 
             if ($step instanceof CollectStep && ($proposalForm = $step->getProposalForm())) {
@@ -99,7 +100,8 @@ class DuplicateProjectMutation implements MutationInterface
                     $clonedAnalysisConfiguration = $clonedAbstractStep
                         ->getStep()
                         ->getProposalForm()
-                        ->getAnalysisConfiguration();
+                        ->getAnalysisConfiguration()
+                    ;
 
                     if ($proposalAnalysisConfiguration->getEvaluationForm()) {
                         $this->cloneQuestionnaireNotificationConfiguration(
@@ -166,14 +168,15 @@ class DuplicateProjectMutation implements MutationInterface
             }
 
             if (
-                $project->getFirstAnalysisStep() &&
-                $project->getFirstAnalysisStep()->getId() === $step->getId()
+                $project->getFirstAnalysisStep()
+                && $project->getFirstAnalysisStep()->getId() === $step->getId()
             ) {
                 $clonedAbstractStep
                     ->getStep()
                     ->getProposalForm()
                     ->getAnalysisConfiguration()
-                    ->setAnalysisStep($clonedAbstractStep->getStep());
+                    ->setAnalysisStep($clonedAbstractStep->getStep())
+                ;
             }
 
             $clonedProject->addStep($clonedAbstractStep);
@@ -209,7 +212,8 @@ class DuplicateProjectMutation implements MutationInterface
                 $notificationsConfiguration->isOnQuestionnaireReplyDelete()
             )
             ->setEmail($notificationsConfiguration->getEmail())
-            ->setQuestionnaire($clonedQuestionnaire);
+            ->setQuestionnaire($clonedQuestionnaire)
+        ;
 
         $clonedQuestionnaire->setNotificationsConfiguration($newNotificationsConfiguration);
     }

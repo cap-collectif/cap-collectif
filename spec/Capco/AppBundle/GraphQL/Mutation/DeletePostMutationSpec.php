@@ -4,13 +4,13 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\GraphQL\Mutation\DeletePostMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\PostVoter;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 class DeletePostMutationSpec extends ObjectBehavior

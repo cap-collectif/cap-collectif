@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Repository\MailingListRepository;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationMailingListsResolver implements ResolverInterface
 {

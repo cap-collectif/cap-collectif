@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class UserResponsesResolver implements ResolverInterface
 {

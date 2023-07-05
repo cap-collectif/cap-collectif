@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Capco\AppBundle\Repository\ProposalSupervisorRepository;
+use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
+use Capco\AppBundle\Repository\ProposalSupervisorRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
@@ -33,6 +33,8 @@ class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
     /**
      * A user that can access "Evaluations page" is a user that is assigned to at least
      * one proposal, as analyst, supervisor or decision marker.
+     *
+     * @param mixed $viewer
      */
     public function __invoke($viewer): bool
     {

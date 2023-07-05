@@ -3,19 +3,16 @@
 namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use Capco\AppBundle\Search\UserSearch;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class SelectionStepNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
@@ -54,7 +51,8 @@ class SelectionStepNormalizer implements
                 $counters['votes'] = $this->votesCountDataLoader->resolve($object);
                 $counters['voters'] = $this->userSearch
                     ->getContributorByStep($object, 0)
-                    ->getTotalCount();
+                    ->getTotalCount()
+                ;
             }
 
             $remainingTime = $object->getRemainingTime();

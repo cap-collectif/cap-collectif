@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
-use Capco\AppBundle\Twig\FooterRuntime;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\SiteParameter;
-use Capco\AppBundle\Twig\ParametersRuntime;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Twig\SiteParameterRuntime;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Repository\SiteParameterRepository;
+use Capco\AppBundle\Twig\FooterRuntime;
+use Capco\AppBundle\Twig\ParametersRuntime;
+use Capco\AppBundle\Twig\SiteParameterRuntime;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class UpdateSiteParameterMutation implements MutationInterface
 {

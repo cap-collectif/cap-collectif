@@ -11,17 +11,17 @@ use Prophecy\Argument;
 
 class ProjectSearchResolverSpec extends ObjectBehavior
 {
-    function let(ProjectRepository $repository)
+    public function let(ProjectRepository $repository)
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Resolver\Project\ProjectSearchResolver');
     }
 
-    function it_should_get_an_array_of_all_projects_with_default_filters(
+    public function it_should_get_an_array_of_all_projects_with_default_filters(
         ProjectRepository $projectRepository,
         ProjectSearchParameters $projectSearchParameters,
         Paginator $paginator,
@@ -35,14 +35,17 @@ class ProjectSearchResolverSpec extends ObjectBehavior
 
         $projectRepository
             ->getSearchResults(0, 1, null, null, null, null, null)
-            ->willReturn($paginator);
+            ->willReturn($paginator)
+        ;
 
         $projectSearchParameters
             ->setElements(Argument::type('int'))
-            ->willReturn($projectSearchParameters);
+            ->willReturn($projectSearchParameters)
+        ;
         $projectSearchParameters
             ->setPage(Argument::type('int'))
-            ->willReturn($projectSearchParameters);
+            ->willReturn($projectSearchParameters)
+        ;
 
         $projectSearchParameters->toArray()->willReturn([0, 1, null, null, null, null]);
 

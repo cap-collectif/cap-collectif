@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Form\ProjectDistrictType;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Form\ProjectDistrictType;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class CreateProjectDistrictMutation implements MutationInterface
 {

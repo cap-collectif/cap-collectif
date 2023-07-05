@@ -36,7 +36,8 @@ class OpinionAppendixAdmin extends AbstractAdmin
                 'label' => 'global.contenu',
                 'config_name' => 'admin_editor',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
-use Capco\AppBundle\Entity\ProposalAnalysis;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Capco\AppBundle\Entity\LogicJump;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraint;
+use Capco\AppBundle\Entity\ProposalAnalysis;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Enum\LogicJumpConditionOperator;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\Validator\ConstraintValidator;
-use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
+use Doctrine\Common\Collections\Collection;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
@@ -157,6 +157,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                 switch ($question->getType()) {
                     case AbstractQuestion::QUESTION_TYPE_SELECT:
                         return $value->getTitle() === $response->getValue();
+
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
                     case AbstractQuestion::QUESTION_TYPE_BUTTON:
@@ -166,23 +167,20 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                             $response->getValue()['labels'] ?? [],
                             true
                         );
+
                     default:
-                        throw new \RuntimeException(
-                            self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
-                                ' ' .
-                                $question->getType() .
-                                ' is not supported for operator ' .
-                                $condition->getOperator()
-                        );
+                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator());
 
                         break;
                 }
 
                 break;
+
             case LogicJumpConditionOperator::IS_NOT:
                 switch ($question->getType()) {
                     case AbstractQuestion::QUESTION_TYPE_SELECT:
                         return $value->getTitle() != $response->getValue();
+
                     case AbstractQuestion::QUESTION_TYPE_RADIO:
                     case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
                     case AbstractQuestion::QUESTION_TYPE_BUTTON:
@@ -192,25 +190,17 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                             $response->getValue()['labels'],
                             true
                         );
+
                     default:
-                        throw new \RuntimeException(
-                            self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
-                                ' ' .
-                                $question->getType() .
-                                ' is not supported for operator ' .
-                                $condition->getOperator()
-                        );
+                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator());
 
                         break;
                 }
 
                 break;
+
             default:
-                throw new \RuntimeException(
-                    self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED .
-                        ' Unknown operator: ' .
-                        $condition->getOperator()
-                );
+                throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' Unknown operator: ' . $condition->getOperator());
 
                 break;
         }
@@ -270,13 +260,14 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         Constraint $constraint
     ): void {
         if (
-            $this->context->getObject() instanceof ProposalAnalysis &&
-            null !== $this->context->getRoot()
+            $this->context->getObject() instanceof ProposalAnalysis
+            && null !== $this->context->getRoot()
         ) {
             $formOptions = $this->context
                 ->getRoot()
                 ->getConfig()
-                ->getOptions();
+                ->getOptions()
+            ;
             if (isset($formOptions['is_draft']) && true === $formOptions['is_draft']) {
                 return;
             }
@@ -288,7 +279,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                     ->buildViolation($constraint->message)
                     ->atPath('responses')
                     ->setParameter('missing', $question->getId())
-                    ->addViolation();
+                    ->addViolation()
+                ;
 
                 return;
             }
@@ -350,8 +342,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                 }
 
                 if (
-                    \is_array($value) &&
-                    (\count($value['labels']) > 0 || null !== $value['other'])
+                    \is_array($value)
+                    && (\count($value['labels']) > 0 || null !== $value['other'])
                 ) {
                     return true;
                 }

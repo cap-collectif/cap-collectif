@@ -15,8 +15,6 @@ class RecentReportingResolver
 
     public function getRecentReports(): array
     {
-        $reports = $this->reportingRepository->getRecentOrdered();
-
-        return $reports;
+        return $this->reportingRepository->getRecentOrdered();
     }
 }

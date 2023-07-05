@@ -27,7 +27,7 @@ class EmailingCampaignStatus
     public static function checkIsValid(string $value): void
     {
         if (!self::isValid($value)) {
-            throw new \Exception("${value} is not a valid emailing campaign status");
+            throw new \Exception("{$value} is not a valid emailing campaign status");
         }
     }
 }

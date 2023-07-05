@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 final class ResponsesOrderField
 {
-    const CREATED_AT = 'CREATED_AT';
-    const READABILITY = 'READABILITY';
-    const CATEGORY = 'CATEGORY';
+    public const CREATED_AT = 'CREATED_AT';
+    public const READABILITY = 'READABILITY';
+    public const CATEGORY = 'CATEGORY';
 
-    const SORT_FIELD = [
+    public const SORT_FIELD = [
         self::CREATED_AT => 'createdAt',
         self::READABILITY => 'iaReadability',
         self::CATEGORY => 'iaCategory',

@@ -11,12 +11,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\IsCollectOrSelectionStepValidator');
     }
 
-    function it_should_add_violation_if_step_is_consultation_step(
+    public function it_should_add_violation_if_step_is_consultation_step(
         ConsultationStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context
@@ -29,7 +29,7 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
         $this->validate($step, $constraint);
     }
 
-    function it_should_not_add_violation_if_step_is_selection_step(
+    public function it_should_not_add_violation_if_step_is_selection_step(
         SelectionStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context
@@ -40,7 +40,7 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
         $this->validate($step, $constraint);
     }
 
-    function it_should_not_add_violation_if_step_is_collect_step(
+    public function it_should_not_add_violation_if_step_is_collect_step(
         CollectStep $step,
         IsCollectOrSelectionStep $constraint,
         ExecutionContextInterface $context

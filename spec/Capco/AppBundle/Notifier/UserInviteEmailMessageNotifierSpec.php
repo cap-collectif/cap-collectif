@@ -69,7 +69,8 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SENT)
             ->shouldBeCalled()
-            ->willReturn($emailMessage);
+            ->willReturn($emailMessage)
+        ;
         $emailMessage->getId()->willReturn('123');
         $entityManager->flush()->shouldBeCalled();
         $this->onStatusCheckInvitation($emailMessage, MailjetTransport::class);
@@ -105,7 +106,8 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SEND_FAILURE)
             ->shouldBeCalled()
-            ->willReturn($emailMessage);
+            ->willReturn($emailMessage)
+        ;
         $entityManager->flush()->shouldBeCalled();
         $this->onStatusCheckInvitation($emailMessage, MailjetTransport::class);
     }
@@ -122,7 +124,8 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SENT)
             ->shouldBeCalled()
-            ->willReturn($emailMessage);
+            ->willReturn($emailMessage)
+        ;
         $emailMessage->getId()->willReturn('123');
         $emailMessage->getMailerId()->willReturn('456');
         $entityManager->flush()->shouldBeCalled();
@@ -157,7 +160,8 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $emailMessage
             ->setInternalStatus(UserInviteEmailMessage::SEND_FAILURE)
             ->shouldBeCalled()
-            ->willReturn($emailMessage);
+            ->willReturn($emailMessage)
+        ;
         $emailMessage->getMailerId()->willReturn('456');
         $emailMessage->getId()->willReturn('123');
         $entityManager->flush()->shouldBeCalled();
@@ -182,7 +186,8 @@ class UserInviteEmailMessageNotifierSpec extends ObjectBehavior
         $response
             ->getBody()
             ->shouldBeCalled()
-            ->willReturn($body);
+            ->willReturn($body)
+        ;
 
         return $response->getWrappedObject();
     }

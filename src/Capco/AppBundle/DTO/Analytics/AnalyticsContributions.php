@@ -17,7 +17,7 @@ class AnalyticsContributions implements Aggregatable
     public static function fromEs(ResultSet $set): self
     {
         $documents = array_map(
-            static fn(array $document) => AggregatedResult::fromEs($document),
+            static fn (array $document) => AggregatedResult::fromEs($document),
             $set->getAggregation('contributions')['buckets']
         );
 

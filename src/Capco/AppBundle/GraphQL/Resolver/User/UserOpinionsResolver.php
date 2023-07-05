@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Psr\Log\LoggerInterface;
 
 class UserOpinionsResolver implements ResolverInterface
 {

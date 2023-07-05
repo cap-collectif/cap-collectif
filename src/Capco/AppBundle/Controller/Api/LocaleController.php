@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocaleController extends AbstractController
@@ -73,9 +73,7 @@ class LocaleController extends AbstractController
     private function checkLocaleIsPublished(string $localeCode): void
     {
         if (!$this->localeRepository->isCodePublished($localeCode)) {
-            throw new BadRequestHttpException(
-                "The locale with code ${localeCode} does not exist or is not enabled."
-            );
+            throw new BadRequestHttpException("The locale with code {$localeCode} does not exist or is not enabled.");
         }
     }
 
@@ -102,9 +100,9 @@ class LocaleController extends AbstractController
     private function handlePageSlug(?string $routeName, array &$params): void
     {
         if (
-            $routeName &&
-            isset($params['slug'], $params['_locale']) &&
-            'app_page_show' === $routeName
+            $routeName
+            && isset($params['slug'], $params['_locale'])
+            && 'app_page_show' === $routeName
         ) {
             if (!$this->handleCharterSlug($params)) {
                 $page = $this->pageRepository->getBySlug($params['slug']);

@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * @method CASSSOConfiguration|null find($id, $lockMode = null, $lockVersion = null)
- * @method CASSSOConfiguration|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|CASSSOConfiguration find($id, $lockMode = null, $lockVersion = null)
+ * @method null|CASSSOConfiguration findOneBy(array $criteria, array $orderBy = null)
  * @method CASSSOConfiguration[]    findAll()
  * @method CASSSOConfiguration[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class CASSSOConfigurationRepository extends EntityRepository

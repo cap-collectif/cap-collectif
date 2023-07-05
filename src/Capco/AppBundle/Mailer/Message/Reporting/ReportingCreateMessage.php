@@ -18,6 +18,7 @@ final class ReportingCreateMessage extends AbstractModeratorMessage
     public static function getMyTemplateVars($report, array $params): array
     {
         $contribution = $report->getRelated();
+
         return [
             'user' => $report->getReporter(),
             'type' => $params['type'],

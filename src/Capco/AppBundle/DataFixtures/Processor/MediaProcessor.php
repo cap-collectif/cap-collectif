@@ -6,11 +6,11 @@ namespace Capco\AppBundle\DataFixtures\Processor;
 
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Provider\MediaProvider;
-use Fidry\AliceDataFixtures\ProcessorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Fidry\AliceDataFixtures\ProcessorInterface;
+use Liip\ImagineBundle\Service\FilterService;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
-use Liip\ImagineBundle\Service\FilterService;
 
 /**
  * This processor generate our medias with liip, to display in development
@@ -19,7 +19,7 @@ use Liip\ImagineBundle\Service\FilterService;
 class MediaProcessor implements ProcessorInterface
 {
     // TODO: Please investigate why this is slow since SF4.
-    const ENABLE_PROCESSOR = true;
+    public const ENABLE_PROCESSOR = true;
     private array $referenceMap = [];
     private EntityManagerInterface $em;
     private FilterService $filterService;
@@ -77,8 +77,8 @@ class MediaProcessor implements ProcessorInterface
         if ($object instanceof Media) {
             $newProviderReference = $this->referenceMap[$id];
             if (
-                !empty($newProviderReference) &&
-                $newProviderReference !== $object->getProviderReference()
+                !empty($newProviderReference)
+                && $newProviderReference !== $object->getProviderReference()
             ) {
                 Process::fromShellCommandline(
                     'mv /var/www/public/media/default/0001/01/' .

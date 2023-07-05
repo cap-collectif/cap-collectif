@@ -19,7 +19,8 @@ class PageRepository extends EntityRepository
         $qb = $this->createQueryBuilder('p')
             ->leftJoin('p.translations', 'pt')
             ->andWhere('pt.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }

@@ -27,7 +27,8 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $project, [ProjectVoter::VIEW])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -51,7 +52,8 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isAdmin()->willReturn(true);
 
@@ -80,7 +82,8 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isAdmin()->willReturn(false);
         $user->isProjectAdmin()->willReturn(true);
@@ -111,7 +114,8 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
 
         $user->isAdmin()->willReturn(false);
         $user->isProjectAdmin()->willReturn(true);
@@ -151,23 +155,28 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn($memberShips);
+            ->willReturn($memberShips)
+        ;
         $memberShips
             ->count()
             ->shouldBeCalled()
-            ->willReturn(42);
+            ->willReturn(42)
+        ;
         $this->vote($token, $project, [ProjectVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
         );
@@ -183,31 +192,38 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isSuperAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $project
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $project
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $this->vote($token, $project, [ProjectVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_GRANTED
         );
@@ -238,23 +254,28 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $project
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::ADMIN);
+            ->willReturn(OrganizationMemberRoleType::ADMIN)
+        ;
         $this->vote($token, $project, [ProjectVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
         );
@@ -270,27 +291,33 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $project
             ->getOwner()
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $organization
             ->getMembership($user)
             ->shouldBeCalled()
-            ->willReturn($memberShip);
+            ->willReturn($memberShip)
+        ;
         $memberShip
             ->getRole()
             ->shouldBeCalled()
-            ->willReturn(OrganizationMemberRoleType::USER);
+            ->willReturn(OrganizationMemberRoleType::USER)
+        ;
         $project
             ->getCreator()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $this->vote($token, $project, [ProjectVoter::DELETE])->shouldBe(
             VoterInterface::ACCESS_GRANTED
         );
@@ -305,23 +332,28 @@ class ProjectVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isProjectAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->getMemberOfOrganizations()
             ->shouldBeCalled()
-            ->willReturn($memberShips);
+            ->willReturn($memberShips)
+        ;
         $memberShips
             ->count()
             ->shouldBeCalled()
-            ->willReturn(0);
+            ->willReturn(0)
+        ;
         $this->vote($token, $project, [ProjectVoter::CREATE])->shouldBe(
             VoterInterface::ACCESS_DENIED
         );

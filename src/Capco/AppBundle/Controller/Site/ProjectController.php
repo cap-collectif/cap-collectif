@@ -4,37 +4,37 @@ namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
-use Capco\AppBundle\Repository\DebateArgumentRepository;
-use Capco\AppBundle\Security\ProjectVoter;
-use Capco\AppBundle\Security\QuestionnaireVoter;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Form\ProjectSearchType;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
-use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\Repository\ArgumentRepository;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\SourceRepository;
-use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Symfony\Component\HttpFoundation\Response;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Routing\Annotation\Route;
+use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -135,15 +135,11 @@ class ProjectController extends Controller
     public function showTrashedAction(Project $project)
     {
         if (!$project->viewerCanSee($this->getUser())) {
-            throw $this->createNotFoundException(
-                $this->translator->trans('project.error.not_found', [], 'CapcoAppBundle')
-            );
+            throw $this->createNotFoundException($this->translator->trans('project.error.not_found', [], 'CapcoAppBundle'));
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $opinions = $this->opinionRepository->getTrashedByProject($project);
@@ -259,6 +255,8 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_posts.html.twig")
+     *
+     * @param mixed $page
      */
     public function showPostsAction(Project $project, $page)
     {
@@ -294,6 +292,8 @@ class ProjectController extends Controller
      *    requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
+     *
+     * @param mixed $page
      */
     public function showContributorsAction(Project $project, $page)
     {
@@ -391,9 +391,7 @@ class ProjectController extends Controller
     public function downloadProjectAnalysisAction(Request $request, Project $project)
     {
         if (!$this->authorizationChecker->isGranted(ProjectVoter::EXPORT, $project)) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();
@@ -434,9 +432,7 @@ class ProjectController extends Controller
     public function downloadProjectDecisionAction(Request $request, Project $project)
     {
         if (!$this->authorizationChecker->isGranted(ProjectVoter::EXPORT, $project)) {
-            throw new ProjectAccessDeniedException(
-                $this->translator->trans('error.access_restricted', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException($this->translator->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
         $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();

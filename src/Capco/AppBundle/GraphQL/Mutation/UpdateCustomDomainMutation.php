@@ -5,10 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Client\DeployerClient;
 use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
-use Capco\AppBundle\Notifier\CustomDomainNotifier;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Validator\Constraints\CheckCustomDomainConstraint;
-use Capco\AppBundle\Validator\Constraints\CheckCustomDomainSyntaxConstraint;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -31,11 +29,10 @@ class UpdateCustomDomainMutation implements MutationInterface
     public function __construct(
         EntityManagerInterface $em,
         SiteSettingsRepository $siteSettingsRepository,
-        LoggerInterface        $logger,
-        DeployerClient         $deployerClient,
-        ValidatorInterface     $validator
-    )
-    {
+        LoggerInterface $logger,
+        DeployerClient $deployerClient,
+        ValidatorInterface $validator
+    ) {
         $this->em = $em;
         $this->siteSettingsRepository = $siteSettingsRepository;
         $this->logger = $logger;
@@ -54,9 +51,9 @@ class UpdateCustomDomainMutation implements MutationInterface
             $siteSettings->setStatus(SiteSettingsStatus::IDLE);
             $this->em->persist($siteSettings);
             $this->em->flush();
+
             return ['siteSettings' => $siteSettings, 'errorCode' => null];
         }
-
 
         $isCustomDomainSyntaxValid = true;
         $isCustomDomainCnameValid = true;
@@ -64,14 +61,13 @@ class UpdateCustomDomainMutation implements MutationInterface
 
         foreach ($violations as $violation) {
             $message = $violation->getMessage();
-            if ($message === self::CUSTOM_DOMAIN_SYNTAX_NOT_VALID) {
+            if (self::CUSTOM_DOMAIN_SYNTAX_NOT_VALID === $message) {
                 $isCustomDomainSyntaxValid = false;
             }
-            if ($message === self::CNAME_NOT_VALID) {
+            if (self::CNAME_NOT_VALID === $message) {
                 $isCustomDomainCnameValid = false;
             }
         }
-
 
         if (!$isCustomDomainSyntaxValid) {
             return ['siteSettings' => $siteSettings, 'errorCode' => self::CUSTOM_DOMAIN_SYNTAX_NOT_VALID];
@@ -83,17 +79,19 @@ class UpdateCustomDomainMutation implements MutationInterface
 
         try {
             $statusCode = $this->deployerClient->updateCurrentDomain($customDomain);
-            if ($statusCode === 201) {
+            if (201 === $statusCode) {
                 $siteSettings->setStatus(SiteSettingsStatus::ACTIVE);
                 $this->em->persist($siteSettings);
                 $this->em->flush();
+
                 return ['siteSettings' => $siteSettings, 'errorCode' => null];
             }
+
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];
         } catch (\Exception $e) {
             $this->logger->error(__METHOD__ . ' => ' . $e->getCode() . ' : ' . $e->getMessage());
+
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];
         }
     }
-
 }

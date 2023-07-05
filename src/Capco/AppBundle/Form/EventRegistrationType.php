@@ -41,7 +41,8 @@ class EventRegistrationType extends AbstractType
                 ->add('submit', SubmitType::class, [
                     'label' => 'global.register',
                     'attr' => ['class' => 'btn btn-success btn-block'],
-                ]);
+                ])
+            ;
 
             return;
         }
@@ -60,7 +61,8 @@ class EventRegistrationType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'global.register',
                 'attr' => ['class' => 'btn  btn-success  btn-block'],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\StatusBelongsToSelectionStepValidator');
     }
 
-    function it_should_add_violation_if_status_does_not_belong_to_selection_step(
+    public function it_should_add_violation_if_status_does_not_belong_to_selection_step(
         Selection $selection,
         SelectionStep $step,
         SelectionStep $otherStep,
@@ -37,7 +37,7 @@ class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
         $this->validate($selection, $constraint);
     }
 
-    function it_should_not_add_violation_if_status_belongs_to_selection_step(
+    public function it_should_not_add_violation_if_status_belongs_to_selection_step(
         Selection $selection,
         SelectionStep $step,
         Status $status,

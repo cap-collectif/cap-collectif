@@ -4,15 +4,15 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractReply;
-use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Reply;
+use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ReplyVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteRepliesMutation implements MutationInterface
@@ -38,7 +38,7 @@ class DeleteRepliesMutation implements MutationInterface
     {
         $replyIds = $args->offsetGet('replyIds');
         $decodedReplyIds = array_map(
-            fn(string $globalId) => GlobalId::fromGlobalId($globalId)['id'],
+            fn (string $globalId) => GlobalId::fromGlobalId($globalId)['id'],
             $replyIds
         );
 
@@ -79,11 +79,12 @@ class DeleteRepliesMutation implements MutationInterface
         $this->em
             ->createQuery(
                 <<<DQL
-    DELETE ${entity} ui WHERE ui.id IN (:ids)
-DQL
+                        DELETE {$entity} ui WHERE ui.id IN (:ids)
+                    DQL
             )
             ->execute([
                 'ids' => $ids,
-            ]);
+            ])
+        ;
     }
 }

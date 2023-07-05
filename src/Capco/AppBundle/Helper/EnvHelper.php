@@ -14,8 +14,6 @@ class EnvHelper
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
      *
-     * @param string $key
-     *
      * @return mixed
      */
     public static function get(string $key)
@@ -30,12 +28,15 @@ class EnvHelper
             case 'true':
             case '(true)':
                 return true;
+
             case 'false':
             case '(false)':
                 return false;
+
             case 'empty':
             case '(empty)':
                 return '';
+
             case 'null':
             case '(null)':
                 return;
@@ -51,10 +52,7 @@ class EnvHelper
     /**
      * Determine if a given string starts with a given substring.
      *
-     * @param string       $haystack
-     * @param string|array $needles
-     *
-     * @return bool
+     * @param array|string $needles
      */
     private static function startsWith(string $haystack, $needles): bool
     {
@@ -70,10 +68,7 @@ class EnvHelper
     /**
      * Determine if a given string ends with a given substring.
      *
-     * @param string       $haystack
-     * @param string|array $needles
-     *
-     * @return bool
+     * @param array|string $needles
      */
     private static function endsWith(string $haystack, $needles): bool
     {

@@ -2,10 +2,10 @@
 
 namespace spec\Capco\AppBundle\Client;
 
+use Capco\AppBundle\Client\CloudflareElasticClient;
+use Elastica\Multi\ResultSet;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Elastica\Multi\ResultSet;
-use Capco\AppBundle\Client\CloudflareElasticClient;
 
 class CloudflareElasticClientSpec extends ObjectBehavior
 {

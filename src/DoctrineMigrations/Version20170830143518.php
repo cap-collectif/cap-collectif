@@ -2,9 +2,9 @@
 
 namespace Application\Migrations;
 
-use Doctrine\Migrations\AbstractMigration;
-use Doctrine\DBAL\Schema\Schema;
 use Cocur\Slugify\Slugify;
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 class Version20170830143518 extends AbstractMigration
 {

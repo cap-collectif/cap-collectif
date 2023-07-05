@@ -41,7 +41,8 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
             if (!$newSsoConfiguration) {
                 $ssoConfigurationCachedItem
                     ->set($options)
-                    ->expiresAfter($this->redisCache::ONE_MINUTE);
+                    ->expiresAfter($this->redisCache::ONE_MINUTE)
+                ;
             } else {
                 $ssoConfigurationCachedItem
                     ->set([
@@ -52,7 +53,8 @@ class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsMo
                         'infos_url' => $newSsoConfiguration->getUserInfoUrl(),
                         'logout_url' => $newSsoConfiguration->getLogoutUrl(),
                     ])
-                    ->expiresAfter($this->redisCache::ONE_DAY);
+                    ->expiresAfter($this->redisCache::ONE_DAY)
+                ;
             }
         }
 

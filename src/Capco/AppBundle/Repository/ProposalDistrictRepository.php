@@ -28,7 +28,8 @@ class ProposalDistrictRepository extends EntityRepository
             ) as value'
             )
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC');
+            ->orderBy('value', 'DESC')
+        ;
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -51,7 +52,8 @@ class ProposalDistrictRepository extends EntityRepository
             ->andWhere('pd.form = :form')
             ->setParameter('name', $name)
             ->setParameter('form', $form)
-            ->orderBy('dt.name');
+            ->orderBy('dt.name')
+        ;
 
         return $builder->getQuery()->getOneOrNullResult();
     }

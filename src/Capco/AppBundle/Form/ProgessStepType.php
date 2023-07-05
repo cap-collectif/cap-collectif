@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Form;
 
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +27,8 @@ class ProgessStepType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'Y-MM-dd HH:mm:ss',
                 // 'required' => false
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

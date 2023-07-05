@@ -46,7 +46,8 @@ class ProposalPostType extends AbstractType
             ->add('bodyUsingJoditWysiwyg')
             ->add('media', EntityType::class, [
                 'class' => Media::class,
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -39,15 +39,18 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($code);
+            ->willReturn($code)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
 
         $twilioHelper->verifySms($phone, $code)->willReturn(null);
 
@@ -55,7 +58,8 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
         $userPhoneVerificationRepository
             ->findMostRecentSms($viewer)
-            ->willReturn($userPhoneVerificationSms);
+            ->willReturn($userPhoneVerificationSms)
+        ;
         $userPhoneVerificationSms->setApproved()->shouldBeCalledOnce();
 
         $em->flush()->shouldBeCalledOnce();
@@ -70,7 +74,8 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $payload = $this->__invoke($input, $viewer);
         $payload['errorCode']->shouldBe(VerifyUserPhoneNumberMutation::PHONE_ALREADY_CONFIRMED);
@@ -86,15 +91,18 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($code);
+            ->willReturn($code)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
 
         $twilioHelper->verifySms($phone, $code)->willReturn(TwilioHelper::CODE_NOT_VALID);
 
@@ -112,15 +120,18 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
-            ->willReturn($code);
+            ->willReturn($code)
+        ;
         $viewer
             ->getPhone()
             ->shouldBeCalledOnce()
-            ->willReturn($phone);
+            ->willReturn($phone)
+        ;
 
         $twilioHelper->verifySms($phone, $code)->willReturn(TwilioHelper::CODE_EXPIRED);
 

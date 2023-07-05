@@ -22,7 +22,8 @@ class UserTypeRepository extends EntityRepository
             ->select('utt.name as name, ut.id as id')
             ->leftJoin('ut.translations', 'utt')
             ->where('utt.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->setParameter('locale', $locale)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -32,7 +33,8 @@ class UserTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ut')
             ->leftJoin('ut.translations', 'utt')
             ->where('utt.slug = :slug')
-            ->setParameter('slug', $slug);
+            ->setParameter('slug', $slug)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -63,7 +65,8 @@ class UserTypeRepository extends EntityRepository
             ->where('utt.locale = :locale')
             ->setParameter('locale', $locale)
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC');
+            ->orderBy('value', 'DESC')
+        ;
         if ($limit) {
             $qb->setMaxResults($limit);
         }

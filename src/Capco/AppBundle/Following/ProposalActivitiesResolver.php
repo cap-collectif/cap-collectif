@@ -115,8 +115,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     {
         $currentVotableStep = $this->proposalCurrentVotableStepDataLoader->resolve($proposal);
         if (
-            $currentVotableStep &&
-            ($currentVotableStep->isCollectStep() || $currentVotableStep->isSelectionStep())
+            $currentVotableStep
+            && ($currentVotableStep->isCollectStep() || $currentVotableStep->isSelectionStep())
         ) {
             return $currentVotableStep->canDisplayBallot();
         }

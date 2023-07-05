@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Application\Migrations;
 
@@ -16,7 +16,6 @@ final class Version20220606113216 extends AbstractMigration
     {
         return 'fos_user.openid_sessions_id';
     }
-
 
     public function up(Schema $schema): void
     {

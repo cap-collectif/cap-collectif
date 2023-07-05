@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
@@ -12,6 +13,7 @@ class PublicApiTokenRepository extends EntityRepository
             ->where('t.user = :user')
             ->setParameter('user', $user)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

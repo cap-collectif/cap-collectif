@@ -51,7 +51,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike(
             iterator_to_array($responses->getIterator())
         );
@@ -81,7 +82,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike(
             iterator_to_array($responses->getIterator())
         );
@@ -111,7 +113,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike([]);
     }
 
@@ -138,7 +141,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike([]);
     }
 
@@ -165,7 +169,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike([]);
     }
 
@@ -193,7 +198,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike([]);
     }
 
@@ -221,7 +227,8 @@ class ReplyResponsesResolverSpec extends ObjectBehavior
         $abstractResponseRepository->getByReply($reply, true)->willReturn($responses->toArray());
         $abstractQuestionRepository
             ->findByQuestionnaire($reply->getWrappedObject()->getQuestionnaire())
-            ->willReturn($questions->toArray());
+            ->willReturn($questions->toArray())
+        ;
         $this->__invoke($reply, $viewer, $context)->shouldBeLike([]);
     }
 }

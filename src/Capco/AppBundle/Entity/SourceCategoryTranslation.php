@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\TranslationTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
 
 /**
  * @ORM\Entity()
@@ -21,9 +21,9 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
  */
 class SourceCategoryTranslation implements Translation
 {
-    use UuidTrait;
-    use TranslationTrait;
     use SluggableTitleTrait;
+    use TranslationTrait;
+    use UuidTrait;
 
     public static function getTranslatableEntityClass(): string
     {

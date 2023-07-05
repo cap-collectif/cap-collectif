@@ -71,18 +71,22 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $viewer
             ->hasPassword()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $viewer
             ->getPassword()
             ->shouldBeCalled()
-            ->willReturn('anything');
+            ->willReturn('anything')
+        ;
         $viewer
             ->getSalt()
             ->shouldBeCalled()
-            ->willReturn('');
+            ->willReturn('')
+        ;
         $passwordEncoder
             ->isPasswordValid(Argument::any(), Argument::any(), Argument::any())
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $encoderFactory->getEncoder($viewer)->willReturn($passwordEncoder);
 
         $payload = $this->__invoke($args, $viewer);
@@ -99,17 +103,20 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $viewer
             ->hasPassword()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('abc123');
+            ->willReturn('abc123')
+        ;
 
         $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $payload = $this->__invoke($args, $viewer);
         $payload->shouldHaveCount(1);
@@ -130,20 +137,24 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $viewer
             ->hasPassword()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('abc123');
+            ->willReturn('abc123')
+        ;
 
         $userRepository
             ->findOneByEmail('someone@email.com')
             ->shouldBeCalled()
-            ->willReturn($existingUser);
+            ->willReturn($existingUser)
+        ;
         $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $payload = $this->__invoke($args, $viewer);
         $payload->shouldHaveCount(1);
@@ -165,28 +176,34 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $viewer
             ->hasPassword()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('abc123');
+            ->willReturn('abc123')
+        ;
 
         $userRepository
             ->findOneByEmail('someone@email.com')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $toggleManager
             ->isActive('restrict_registration_via_email_domain')
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $emailDomainRepository
             ->findOneBy(Argument::type('array'))
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $payload = $this->__invoke($args, $viewer);
         $payload->shouldHaveCount(1);
@@ -212,47 +229,58 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         $viewer
             ->hasPassword()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $viewer
             ->getId()
             ->shouldBeCalled()
-            ->willReturn('abc123');
+            ->willReturn('abc123')
+        ;
         $viewer
             ->setNewEmailConfirmationToken(Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
 
         $userRepository
             ->findOneByEmail('someone@email.com')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $rateLimiter->setLimit(Argument::type('int'))->willReturn($rateLimiter);
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $toggleManager
             ->isActive('restrict_registration_via_email_domain')
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $form
             ->submit(Argument::type('array'), false)
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $form
             ->isValid()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $formFactory
             ->create(Argument::any(), Argument::any(), Argument::type('array'))
             ->shouldBeCalled()
-            ->willReturn($form);
+            ->willReturn($form)
+        ;
         $tokenGenerator
             ->generateToken()
             ->shouldBeCalled()
-            ->willReturn('some-token');
+            ->willReturn('some-token')
+        ;
         $publisher
             ->publish(Argument::type('string'), Argument::type(Message::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $userManager->updateUser($viewer)->shouldBeCalled();
 
         $payload = $this->__invoke($args, $viewer);

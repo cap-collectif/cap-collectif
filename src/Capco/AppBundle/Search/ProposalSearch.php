@@ -81,9 +81,9 @@ class ProposalSearch extends Search
         foreach ($filters as $key => $value) {
             $term = new Term([$key => ['value' => $value]]);
             if (
-                isset($providedFilters['state']) &&
-                ProposalsState::ALL === $providedFilters['state'] &&
-                \in_array($key, ['draft', 'published', 'trashed'], true)
+                isset($providedFilters['state'])
+                && ProposalsState::ALL === $providedFilters['state']
+                && \in_array($key, ['draft', 'published', 'trashed'], true)
             ) {
                 $stateTerms[] = $term;
             } else {
@@ -162,9 +162,9 @@ class ProposalSearch extends Search
             $term = new Term([$key => ['value' => $value]]);
 
             if (
-                \in_array($key, ['draft', 'published', 'trashed'], true) &&
-                (isset($providedFilters['state']) &&
-                    ProposalsState::ALL === $providedFilters['state'])
+                \in_array($key, ['draft', 'published', 'trashed'], true)
+                && (isset($providedFilters['state'])
+                    && ProposalsState::ALL === $providedFilters['state'])
             ) {
                 $stateTerms[] = $term;
             } else {
@@ -172,8 +172,8 @@ class ProposalSearch extends Search
             }
         }
         if (
-            isset($providedFilters['restrictedViewerId']) &&
-            $providedFilters['restrictedViewerId']
+            isset($providedFilters['restrictedViewerId'])
+            && $providedFilters['restrictedViewerId']
         ) {
             $terms = [
                 new Term([
@@ -264,6 +264,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             case ProposalOrderField::POINTS:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'least-points';
@@ -272,6 +273,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             case ProposalOrderField::REVISION_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-revisions';
@@ -280,6 +282,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             case ProposalOrderField::PUBLISHED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old-published';
@@ -288,6 +291,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             case ProposalOrderField::CREATED_AT:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'old';
@@ -296,10 +300,12 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             case ProposalOrderField::COMMENTS:
                 $order = 'comments';
 
                 break;
+
             case ProposalOrderField::COST:
                 if (OrderDirection::ASC === $direction) {
                     $order = 'cheap';
@@ -308,6 +314,7 @@ class ProposalSearch extends Search
                 }
 
                 break;
+
             default:
                 $order = 'random';
 
@@ -359,7 +366,8 @@ class ProposalSearch extends Search
             $shouldQuery
                 ->addShould(new Term(['proposalAnalysts.analyst.id' => ['value' => $viewerId]]))
                 ->addShould(new Term(['supervisor.id' => ['value' => $viewerId]]))
-                ->addShould(new Term(['decisionMaker.id' => ['value' => $viewerId]]));
+                ->addShould(new Term(['decisionMaker.id' => ['value' => $viewerId]]))
+            ;
         }
 
         $boolQuery->addFilter($shouldQuery);
@@ -462,7 +470,8 @@ class ProposalSearch extends Search
                             )
                             ->addShould((new BoolQuery())->addMustNot(new Query\Exists('decision')))
                     )
-            );
+            )
+        ;
     }
 
     private function addAssignedViewerProposalsDone(BoolQuery $boolQuery, string $viewerId): void
@@ -503,7 +512,8 @@ class ProposalSearch extends Search
                     ->addFilter(
                         new Term(['decision.state' => ['value' => ProposalStatementState::DONE]])
                     )
-            );
+            )
+        ;
     }
 
     private function getData(array $cursors, ResultSet $response): ElasticsearchPaginatedResult
@@ -523,21 +533,25 @@ class ProposalSearch extends Search
                 $sortOrder = 'asc';
 
                 break;
+
             case 'last':
                 $sortField = 'createdAt';
                 $sortOrder = 'desc';
 
                 break;
+
             case 'old-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'asc';
 
                 break;
+
             case 'last-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'desc';
 
                 break;
+
             case 'votes':
                 return [
                     'countByStep.votes' => [
@@ -547,6 +561,7 @@ class ProposalSearch extends Search
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             case 'points':
                 return [
                     'countByStep.points' => [
@@ -566,6 +581,7 @@ class ProposalSearch extends Search
                     ],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             case 'least-points':
                 return [
                     'countByStep.points' => [
@@ -603,11 +619,13 @@ class ProposalSearch extends Search
                     'estimation' => ['order' => 'desc'],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             case 'cheap':
                 return [
                     'estimation' => ['order' => 'asc'],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
         }
@@ -650,9 +668,9 @@ class ProposalSearch extends Search
         }
 
         if (
-            isset($providedFilters['status']) &&
-            !isset($filters['selections.status.id']) &&
-            Search::NONE_VALUE !== $providedFilters['status']
+            isset($providedFilters['status'])
+            && !isset($filters['selections.status.id'])
+            && Search::NONE_VALUE !== $providedFilters['status']
         ) {
             $filters['status.id'] = $providedFilters['status'];
         }
@@ -661,8 +679,8 @@ class ProposalSearch extends Search
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
         if (
-            isset($providedFilters['district']) &&
-            Search::NONE_VALUE !== $providedFilters['district']
+            isset($providedFilters['district'])
+            && Search::NONE_VALUE !== $providedFilters['district']
         ) {
             $filters['district.id'] = GlobalIdResolver::getDecodedId($providedFilters['district'])[
                 'id'
@@ -677,8 +695,8 @@ class ProposalSearch extends Search
             $filters['author.userType.id'] = $providedFilters['types'];
         }
         if (
-            isset($providedFilters['category']) &&
-            Search::NONE_VALUE !== $providedFilters['category']
+            isset($providedFilters['category'])
+            && Search::NONE_VALUE !== $providedFilters['category']
         ) {
             $filters['category.id'] = $providedFilters['category'];
         }
@@ -712,18 +730,21 @@ class ProposalSearch extends Search
                     $filters['trashed'] = true;
 
                     break;
+
                 case ProposalsState::DRAFT:
                     $filters['draft'] = true;
                     unset($filters['published']);
                     $filters['trashed'] = false;
 
                     break;
+
                 case ProposalsState::TRASHED:
                     $filters['draft'] = false;
                     $filters['published'] = true;
                     $filters['trashed'] = true;
 
                     break;
+
                 case ProposalsState::PUBLISHED:
                     $filters['draft'] = false;
                     $filters['published'] = true;
@@ -746,8 +767,8 @@ class ProposalSearch extends Search
         $existsFilters = [];
         foreach ($inapplicableFilters as $inapplicableFilter) {
             if (
-                isset($filters[$inapplicableFilter]) &&
-                Search::NONE_VALUE === $filters[$inapplicableFilter]
+                isset($filters[$inapplicableFilter])
+                && Search::NONE_VALUE === $filters[$inapplicableFilter]
             ) {
                 $existsFilters[] = new Query\Exists($inapplicableFilter);
                 unset($filters[$inapplicableFilter]);

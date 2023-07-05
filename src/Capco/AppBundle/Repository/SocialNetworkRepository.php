@@ -21,7 +21,8 @@ class SocialNetworkRepository extends EntityRepository
             ->addSelect('m')
             ->andWhere('s.isEnabled = :isEnabled')
             ->addOrderBy('s.position', 'ASC')
-            ->setParameter('isEnabled', true);
+            ->setParameter('isEnabled', true)
+        ;
 
         return $qb->getQuery()->getResult();
     }

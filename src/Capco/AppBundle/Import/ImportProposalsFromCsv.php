@@ -34,10 +34,10 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Maximal\Emoji\Detector;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
-use Maximal\Emoji\Detector;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -140,7 +140,8 @@ class ImportProposalsFromCsv
         $rows = $reader
             ->getSheetIterator()
             ->current()
-            ->getRowIterator();
+            ->getRowIterator()
+        ;
         $rows->rewind();
         $countRows = iterator_count($rows);
         if (!$isCli && $countRows > AddProposalsFromCsvMutation::MAX_LINES) {
@@ -157,14 +158,7 @@ class ImportProposalsFromCsv
                 $missing = $this->getMissingHeaders($rows->current()->toArray());
                 $headersJoined = implode(',', $rows->current()->toArray());
 
-                throw new \RuntimeException(
-                    \count($missing) .
-                        ' missing headers : ' .
-                        implode(', ', $missing) .
-                        "file {$this->filePath} , header expected " .
-                        implode(',', array_keys($this->headers)) .
-                        " header filled {$headersJoined} count ${countRows}"
-                );
+                throw new \RuntimeException(\count($missing) . ' missing headers : ' . implode(', ', $missing) . "file {$this->filePath} , header expected " . implode(',', array_keys($this->headers)) . " header filled {$headersJoined} count {$countRows}");
             }
 
             throw new \RuntimeException(AddProposalsFromCsvMutation::BAD_DATA_MODEL);
@@ -212,8 +206,7 @@ class ImportProposalsFromCsv
         }
 
         return [
-            'importedProposals' =>
-                !$dryRun && !empty($this->createdProposals) ? $this->createdProposals : [],
+            'importedProposals' => !$dryRun && !empty($this->createdProposals) ? $this->createdProposals : [],
             'importableProposals' => $this->importableProposals,
             'badLines' => $this->badData,
             'duplicates' => array_values($duplicateLinesToBeSkipped),
@@ -227,15 +220,16 @@ class ImportProposalsFromCsv
     {
         foreach ($this->customFields as $questionTitle) {
             $question = $this->proposalForm->getQuestionByTitle($questionTitle);
+
             switch ($question->getType()) {
                 case AbstractQuestion::QUESTION_TYPE_SELECT:
                 case AbstractQuestion::QUESTION_TYPE_RADIO:
                 case AbstractQuestion::QUESTION_TYPE_BUTTON:
                     if (
-                        $question instanceof MultipleChoiceQuestion &&
-                        (($question->isRequired() || !empty($row[$questionTitle])) &&
-                            !$question->isChoiceValid(trim($row[$questionTitle])) &&
-                            !$question->isOtherAllowed())
+                        $question instanceof MultipleChoiceQuestion
+                        && (($question->isRequired() || !empty($row[$questionTitle]))
+                            && !$question->isChoiceValid(trim($row[$questionTitle]))
+                            && !$question->isOtherAllowed())
                     ) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $this->logger->error(
@@ -251,6 +245,7 @@ class ImportProposalsFromCsv
                     }
 
                     break;
+
                 case AbstractQuestion::QUESTION_TYPE_NUMBER:
                     if (!empty($row[$questionTitle]) && !is_numeric($row[$questionTitle])) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
@@ -267,6 +262,7 @@ class ImportProposalsFromCsv
                     }
 
                     break;
+
                 case AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION:
                     if (!empty($row[$questionTitle])) {
                         $majorityJudgementKeys = MajorityVoteTypeEnum::getI18nKeys();
@@ -274,8 +270,8 @@ class ImportProposalsFromCsv
                         $translationExist = $this->doesTranslationExist($csvValue);
                         $translationsFlipped = array_flip($this->getAllTranslationKey());
                         if (
-                            !$translationExist ||
-                            !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
+                            !$translationExist
+                            || !\in_array($translationsFlipped[$csvValue], $majorityJudgementKeys)
                         ) {
                             $this->badData = $this->incrementBadData($this->badData, $key);
                             $this->logger->error(
@@ -444,8 +440,7 @@ class ImportProposalsFromCsv
                     'district' => $district,
                     'media' => $media,
                     'status' => $status,
-                    'address' => $address,
-                ) = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
+                    'address' => $address) = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
 
@@ -559,16 +554,16 @@ class ImportProposalsFromCsv
             }
         }
         if (
-            $this->proposalForm->isUsingAnySocialNetworks() &&
-            !$this->proposalForm->checkIfSocialNetworksAreGood($row, $this->validator)
+            $this->proposalForm->isUsingAnySocialNetworks()
+            && !$this->proposalForm->checkIfSocialNetworksAreGood($row, $this->validator)
         ) {
             $this->badData = $this->incrementBadData($this->badData, $key);
             $isCurrentLineFail = true;
             $this->logger->error('bad data social_networks_url in line ' . $key);
         }
         if (
-            \count($this->customFields) > 0 &&
-            !$this->checkIfCustomQuestionResponseIsValid($row, $key)
+            \count($this->customFields) > 0
+            && !$this->checkIfCustomQuestionResponseIsValid($row, $key)
         ) {
             $isCurrentLineFail = true;
         }
@@ -652,7 +647,8 @@ class ImportProposalsFromCsv
             ->setStatus($status)
             ->setTheme($theme)
             ->setMedia($media)
-            ->setPublishedAt(new \DateTime());
+            ->setPublishedAt(new \DateTime())
+        ;
         if (isset($row['cost']) && is_numeric($row['cost'])) {
             $proposal->setEstimation($row['cost']);
         }
@@ -660,9 +656,9 @@ class ImportProposalsFromCsv
             $proposal->setAddress($address);
         }
         if (
-            $this->proposalForm->isUsingEstimation() &&
-            !empty($row['estimation']) &&
-            is_numeric($row['estimation'])
+            $this->proposalForm->isUsingEstimation()
+            && !empty($row['estimation'])
+            && is_numeric($row['estimation'])
         ) {
             $proposal->setEstimation((float) $row['estimation']);
         }
@@ -695,8 +691,8 @@ class ImportProposalsFromCsv
                 $response = new ValueResponse();
                 $value = trim($row[$questionTitle]) ?? '';
                 if (
-                    $question instanceof MultipleChoiceQuestion &&
-                    \in_array($question->getType(), [
+                    $question instanceof MultipleChoiceQuestion
+                    && \in_array($question->getType(), [
                         AbstractQuestion::QUESTION_TYPE_RADIO,
                         AbstractQuestion::QUESTION_TYPE_BUTTON,
                     ])
@@ -718,8 +714,8 @@ class ImportProposalsFromCsv
                         $value = (float) trim($row[$questionTitle]);
                     } elseif (
                         AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
-                            $question->getType() &&
-                        !empty($row[$questionTitle])
+                            $question->getType()
+                        && !empty($row[$questionTitle])
                     ) {
                         $csvValue = ucfirst(strtolower($row[$questionTitle]));
                         $translationsFlipped = array_flip($this->getAllTranslationKey());

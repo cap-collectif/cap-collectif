@@ -36,7 +36,8 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($wrongId, $viewer)
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $this->shouldThrow(new UserError(SettableOwnerResolver::OWNER_NOT_FOUND))->during(
             '__invoke',
             [$wrongId, $viewer]
@@ -52,7 +53,8 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($projectId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($project);
+            ->willReturn($project)
+        ;
         $this->shouldThrow(new UserError(SettableOwnerResolver::OWNER_NOT_FOUND))->during(
             '__invoke',
             [$projectId, $viewer]
@@ -68,11 +70,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($otherUserId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($otherUser);
+            ->willReturn($otherUser)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $this->shouldThrow(new UserError(SettableOwnerResolver::OWNER_NOT_FOUND))->during(
             '__invoke',
             [$otherUserId, $viewer]
@@ -85,11 +89,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($viewerId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $this->__invoke($viewerId, $viewer)->shouldReturn($viewer);
     }
 
@@ -102,11 +108,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($otherUserId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($otherUser);
+            ->willReturn($otherUser)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $this->__invoke($otherUserId, $viewer)->shouldReturn($otherUser);
     }
 
@@ -119,15 +127,18 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($organizationId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization
             ->getMembership($viewer)
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $this->shouldThrow(new UserError(SettableOwnerResolver::OWNER_NOT_FOUND))->during(
             '__invoke',
             [$organizationId, $viewer]
@@ -144,11 +155,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($organizationId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $organization->getMembership($viewer)->willReturn($memberShip);
         $this->__invoke($organizationId, $viewer)->shouldReturn($organization);
     }
@@ -162,11 +175,13 @@ class SettableOwnerResolverSpec extends ObjectBehavior
         $resolver
             ->resolve($organizationId, $viewer)
             ->shouldBeCalled()
-            ->willReturn($organization);
+            ->willReturn($organization)
+        ;
         $viewer
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $this->__invoke($organizationId, $viewer)->shouldReturn($organization);
     }
 }

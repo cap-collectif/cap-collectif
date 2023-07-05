@@ -21,12 +21,12 @@ abstract class AbstractNotificationConfiguration
 {
     use IdTrait;
 
-    abstract public function getType();
-
     /**
      * @ORM\Column(name="email", type="string", nullable=true)
      */
     private ?string $email = null;
+
+    abstract public function getType();
 
     public function getEmail(): ?string
     {

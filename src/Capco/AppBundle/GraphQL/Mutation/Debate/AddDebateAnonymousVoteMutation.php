@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
-use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
-use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Entity\Debate\Debate;
-use Doctrine\DBAL\Driver\DriverException;
-use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
+use Doctrine\DBAL\Driver\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AddDebateAnonymousVoteMutation implements MutationInterface
 {
@@ -79,7 +79,8 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
             ->setDebate($debate)
             ->setType($type)
             ->setNavigator($this->requestGuesser->getUserAgent())
-            ->setIpAddress($this->requestGuesser->getClientIp());
+            ->setIpAddress($this->requestGuesser->getClientIp())
+        ;
         self::setOrigin($debateAnonymousVote, $input);
 
         $this->em->persist($debateAnonymousVote);

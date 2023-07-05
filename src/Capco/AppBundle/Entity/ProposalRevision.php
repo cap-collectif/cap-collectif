@@ -3,16 +3,16 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
-use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 
 /**
  * @ORM\Table(name="proposal_revision")
@@ -142,7 +142,7 @@ class ProposalRevision implements Authorable
 
     public function isExpired(): bool
     {
-        return $this->expiresAt < new \DateTime() &&
-            ProposalRevisionStateType::PENDING === $this->state;
+        return $this->expiresAt < new \DateTime()
+            && ProposalRevisionStateType::PENDING === $this->state;
     }
 }

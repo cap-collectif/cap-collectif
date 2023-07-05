@@ -9,10 +9,10 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class PostVoter extends AbstractOwnerableVoter
 {
-    const VIEW = 'view';
-    const CREATE = 'create';
-    const EDIT = 'edit';
-    const DELETE = 'delete';
+    public const VIEW = 'view';
+    public const CREATE = 'create';
+    public const EDIT = 'edit';
+    public const DELETE = 'delete';
 
     protected function supports($attribute, $subject)
     {
@@ -41,12 +41,16 @@ class PostVoter extends AbstractOwnerableVoter
         switch ($attribute) {
             case self::VIEW:
                 return self::canView($post, $viewer);
+
             case self::CREATE:
                 return self::canCreate($viewer);
+
             case self::EDIT:
                 return self::canEdit($post, $viewer);
+
             case self::DELETE:
                 return self::canDelete($post, $viewer);
+
             default:
                 return false;
         }

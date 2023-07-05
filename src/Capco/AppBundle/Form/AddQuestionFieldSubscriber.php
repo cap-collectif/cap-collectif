@@ -1,11 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Questions\MajorityQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
-use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use pmill\Doctrine\Hydrator\ArrayHydrator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -55,23 +55,23 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
             $question = new MediaQuestion();
         } elseif (
-            AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_NUMBER === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_SIRET === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_RNA === $data['question']['type']
+            AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_EDITOR === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_NUMBER === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_SIRET === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_RNA === $data['question']['type']
         ) {
             $question = new SimpleQuestion();
         } elseif (AbstractQuestion::QUESTION_TYPE_SECTION === $data['question']['type']) {
             $question = new SectionQuestion();
         } elseif (
-            AbstractQuestion::QUESTION_TYPE_RADIO === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_SELECT === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_CHECKBOX === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_RANKING === $data['question']['type'] ||
-            AbstractQuestion::QUESTION_TYPE_BUTTON === $data['question']['type']
+            AbstractQuestion::QUESTION_TYPE_RADIO === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_SELECT === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_CHECKBOX === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_RANKING === $data['question']['type']
+            || AbstractQuestion::QUESTION_TYPE_BUTTON === $data['question']['type']
         ) {
             $question = new MultipleChoiceQuestion();
         }

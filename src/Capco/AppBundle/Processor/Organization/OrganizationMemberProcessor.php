@@ -27,9 +27,7 @@ class OrganizationMemberProcessor implements ProcessorInterface
         $invitation = $this->repository->find($json['id']);
 
         if (!$invitation instanceof PendingOrganizationInvitation) {
-            throw new \RuntimeException(
-                'Unable to find invitation with id : ' . $json['invitationID']
-            );
+            throw new \RuntimeException('Unable to find invitation with id : ' . $json['invitationID']);
         }
 
         // $delivered is always true in UserInviteEmailMessageNotifier.

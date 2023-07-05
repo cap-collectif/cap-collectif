@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -11,7 +12,8 @@ class ProposalCategoryRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pc');
         $qb->addOrderBy('FIELD(pc.id, :ids)')
             ->where('pc.id IN (:ids)')
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -34,7 +36,8 @@ class ProposalCategoryRepository extends EntityRepository
             ) as value'
             )
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC');
+            ->orderBy('value', 'DESC')
+        ;
         if ($step->getProposalForm()) {
             $qb->andWhere('c.form = :form')->setParameter('form', $step->getProposalForm());
         }
@@ -49,6 +52,7 @@ class ProposalCategoryRepository extends EntityRepository
     public function countAll(): int
     {
         $qb = $this->createQueryBuilder('c')->select('COUNT(c.id)');
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

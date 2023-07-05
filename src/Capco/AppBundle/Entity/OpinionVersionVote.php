@@ -12,9 +12,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionVersionVote extends AbstractVote
 {
-    const VOTE_OK = 1;
-    const VOTE_NOK = -1;
-    const VOTE_MITIGE = 0;
+    public const VOTE_OK = 1;
+    public const VOTE_NOK = -1;
+    public const VOTE_MITIGE = 0;
 
     public static $voteTypes = [
         'ok' => self::VOTE_OK,
@@ -95,7 +95,7 @@ class OpinionVersionVote extends AbstractVote
         return $this->opinionVersion;
     }
 
-    public function setOpinionVersion(OpinionVersion $version = null): self
+    public function setOpinionVersion(?OpinionVersion $version = null): self
     {
         $this->opinionVersion = $version;
 

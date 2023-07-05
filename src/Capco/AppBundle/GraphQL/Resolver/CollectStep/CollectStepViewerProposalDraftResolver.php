@@ -3,14 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Resolver\CollectStep;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
 
 class CollectStepViewerProposalDraftResolver implements ResolverInterface
 {

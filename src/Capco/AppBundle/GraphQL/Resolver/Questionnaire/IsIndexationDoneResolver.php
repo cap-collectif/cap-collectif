@@ -17,8 +17,7 @@ class IsIndexationDoneResolver implements ResolverInterface
     public function __invoke(): bool
     {
         return true;
-
-        /**
+        /*
          * This condition is causing production issues.
          * It should not wait ALL elasticsearch messages.
          *

@@ -13,11 +13,11 @@ final class AlertSmsConsumedCreditMessage extends AbstractAdminMessage
     public static function getMyTemplateVars($element, array $params): array
     {
         return [
-            "platformName" => $params["platformName"],
-            "amount" => $params['remainingCredits'],
-            "adminUrl" => $params['adminUrl'],
-            "baseUrl" => $params['baseURL'],
-            "remainingCreditsPercent" => $params['remainingCreditsPercent'],
+            'platformName' => $params['platformName'],
+            'amount' => $params['remainingCredits'],
+            'adminUrl' => $params['adminUrl'],
+            'baseUrl' => $params['baseURL'],
+            'remainingCreditsPercent' => $params['remainingCreditsPercent'],
         ];
     }
 
@@ -25,21 +25,20 @@ final class AlertSmsConsumedCreditMessage extends AbstractAdminMessage
     {
         return [
             'platformName' => $params['platformName'],
-            "remainingCreditsPercent" => $params['remainingCreditsPercent'],
+            'remainingCreditsPercent' => $params['remainingCreditsPercent'],
         ];
     }
 
     public static function mockData()
     {
         return [
-            "amount" => 1000,
-            "remainingCreditsPercent" => "75",
-            "baseUrl" => "/capco",
-            "platformName" => "capco",
-            "adminUrl" => "/admin",
+            'amount' => 1000,
+            'remainingCreditsPercent' => '75',
+            'baseUrl' => '/capco',
+            'platformName' => 'capco',
+            'adminUrl' => '/admin',
             'platformLink' => 'https://cap-collectif.com',
-            "user_locale" => "fr",
+            'user_locale' => 'fr',
         ];
     }
-
 }

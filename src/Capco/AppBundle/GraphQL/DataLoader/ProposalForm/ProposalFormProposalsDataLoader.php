@@ -2,24 +2,24 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\ProposalForm;
 
-use Capco\AppBundle\Search\Search;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Cache\RedisTagCache;
+use Capco\AppBundle\DataCollector\GraphQLCollector;
+use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Search\ProposalSearch;
-use Symfony\Component\Stopwatch\Stopwatch;
 use Capco\AppBundle\Enum\ProposalAffiliations;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
-use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Search\ProposalSearch;
+use Capco\AppBundle\Search\Search;
+use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
@@ -108,8 +108,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         ];
 
         if (
-            $args->offsetExists('affiliations') ||
-            (null !== $proposalForm->getStep() && $proposalForm->getStep()->isPrivate())
+            $args->offsetExists('affiliations')
+            || (null !== $proposalForm->getStep() && $proposalForm->getStep()->isPrivate())
         ) {
             // we need viewer in cache key
             $cacheKey['viewerId'] = $viewer ? $viewer->getId() : null;
@@ -126,7 +126,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
     ): ConnectionInterface {
         $totalCount = 0;
         $filters = [];
-        list(
+        [
             $term,
             $isExporting,
             $author,
@@ -143,7 +143,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['trashedStatus'],
             $filters['includeDraft'],
             $filters['excludeViewerVotes'],
-        ) = [
+        ] = [
             $args->offsetGet('term'),
             $args->offsetGet('includeUnpublished'),
             $args->offsetGet('author'),
@@ -219,7 +219,8 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                             $direction
                         )
                         ->getIterator()
-                        ->getArrayCopy();
+                        ->getArrayCopy()
+                    ;
                 });
 
                 $connection = $paginator->auto($args, $totalCount);

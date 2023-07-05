@@ -7,7 +7,7 @@ interface IndexableInterface
     /**
      * Used as the Document ID in Elasticsearch.
      *
-     * @return string|int
+     * @return int|string
      */
     public function getId();
 

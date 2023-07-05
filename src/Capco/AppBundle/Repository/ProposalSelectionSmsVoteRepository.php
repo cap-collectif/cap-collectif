@@ -25,7 +25,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->andWhere('proposal.id IS NOT NULL')
             ->andWhere('proposal.deletedAt IS NULL')
             ->setParameter('step', $step)
-            ->setParameter('token', $token);
+            ->setParameter('token', $token)
+        ;
 
         if ($field && $direction) {
             if ('PUBLISHED_AT' === $field) {
@@ -55,7 +56,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->setParameter('token', $token)
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countPublishedSelectionVoteByStep(SelectionStep $step): int
@@ -65,7 +67,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
+            ->andWhere('pv.published = 1')
+        ;
 
         return $qb
             ->andWhere('pv.isAccounted = 1')
@@ -74,7 +77,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countDistinctPhonePublishedSelectionVoteByStep(SelectionStep $step): int
@@ -84,7 +88,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
+            ->andWhere('pv.published = 1')
+        ;
 
         return $qb
             ->andWhere('pv.isAccounted = 1')
@@ -93,7 +98,8 @@ class ProposalSelectionSmsVoteRepository extends EntityRepository
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countAll(): int

@@ -39,12 +39,10 @@ class HighlightedContentAdmin extends AbstractAdmin
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' =>
-                            'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' =>
-                            'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
+                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
                     ],
                 ],
             ])
@@ -59,7 +57,8 @@ class HighlightedContentAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void

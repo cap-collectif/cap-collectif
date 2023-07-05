@@ -2,9 +2,9 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Doctrine\UserManager;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
+use Capco\UserBundle\Doctrine\UserManager;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -38,7 +38,7 @@ class SamlUserProvider implements UserProviderInterface
                 $email = $id;
 
                 // If the id is not a valid email, we create a fake one...
-                if (false === filter_var($email, FILTER_SANITIZE_EMAIL)) {
+                if (false === filter_var($email, \FILTER_SANITIZE_EMAIL)) {
                     $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
                 }
 

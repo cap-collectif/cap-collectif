@@ -29,7 +29,8 @@ class MediaRepository extends EntityRepository
         ];
         $qb = $this->createQueryBuilder('m')
             ->andWhere('m.name IN (:names)')
-            ->setParameter('names', $mediaName);
+            ->setParameter('names', $mediaName)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -41,7 +42,8 @@ class MediaRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getQueryBuilderWithoutCategory($term)
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }
@@ -58,7 +60,8 @@ class MediaRepository extends EntityRepository
         $qb = $this->createQueryBuilder('m')
             ->leftJoin('CapcoAppBundle:CategoryImage', 'ci', 'WITH', 'm.id = ci.image')
             ->andWhere('ci.image IS NULL')
-            ->orderBy('m.createdAt', 'DESC');
+            ->orderBy('m.createdAt', 'DESC')
+        ;
 
         if ($term) {
             $qb->andWhere('m.name LIKE :term')->setParameter('term', '%' . $term . '%');

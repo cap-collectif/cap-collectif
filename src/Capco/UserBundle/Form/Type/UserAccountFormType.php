@@ -23,7 +23,8 @@ class UserAccountFormType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ]);
+            ])
+        ;
         if ($options['isAdmin']) {
             $builder->add('subscribedToProposalNews', CheckboxType::class);
         }

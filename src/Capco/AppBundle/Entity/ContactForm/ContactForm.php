@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Entity\ContactForm;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
-use Doctrine\ORM\Mapping as ORM;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="contact_form")

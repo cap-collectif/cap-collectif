@@ -12,8 +12,7 @@ class ProjectUserVotesPage extends Page
     public $elements = [
         'vote table' => '.proposals-user-votes__table',
         'vote' => '.proposals-user-votes__row',
-        'first vote button' =>
-            '.proposals-user-votes__table > div:nth-child(1) .proposal-vote__delete',
+        'first vote button' => '.proposals-user-votes__table > div:nth-child(1) .proposal-vote__delete',
         'confirm vote delete' => '.proposal-vote__delete-confirm',
         'toggle vote access' => ' > div > div > div label span.elegant-toggle',
     ];
@@ -44,7 +43,7 @@ class ProjectUserVotesPage extends Page
     public function deleteProposalVote($proposalId)
     {
         $element = $proposalId . '-delete';
-        $element = "[id='${element}']";
+        $element = "[id='{$element}']";
 
         return $this->find('css', $element)->click();
     }

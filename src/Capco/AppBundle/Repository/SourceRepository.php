@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
@@ -40,7 +40,8 @@ class SourceRepository extends EntityRepository
             ->leftJoin('a.userType', 'ut')
             ->leftJoin('ut.translations', 'utt')
             ->where('utt.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->setParameter('locale', $locale)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -77,7 +78,8 @@ class SourceRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s')
             ->andWhere('s.published = false')
             ->andWhere('s.author = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
         if ($sourceable instanceof Opinion) {
             $qb->andWhere('s.opinion = :opinion')->setParameter('opinion', $sourceable);
         }
@@ -125,7 +127,8 @@ class SourceRepository extends EntityRepository
             )
             ->leftJoin('s.author', 'a')
             ->where('s.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
@@ -146,12 +149,14 @@ class SourceRepository extends EntityRepository
             ->andWhere('opas.project = :project OR ovopas.project = :project')
             ->andWhere('s.author = :author')
             ->setParameter('project', $project)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -166,7 +171,8 @@ class SourceRepository extends EntityRepository
             ->andWhere('oc.step = :step OR ovoc.step = :step')
             ->andWhere('s.author = :author')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -181,7 +187,8 @@ class SourceRepository extends EntityRepository
             ->andWhere('o.consultation = :consultation OR ovo.consultation = :consultation')
             ->andWhere('s.author = :author')
             ->setParameter('consultation', $consultation)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -191,12 +198,13 @@ class SourceRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s');
         $qb->select('count(DISTINCT s)')
             ->andWhere('s.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAllByAuthor(User $user, int $limit = null, int $offset = null): array
+    public function findAllByAuthor(User $user, ?int $limit = null, ?int $offset = null): array
     {
         $qb = $this->createQueryBuilder('s');
         $qb->andWhere('s.author = :author');
@@ -217,7 +225,8 @@ class SourceRepository extends EntityRepository
     ): array {
         $qb = $this->createSourcesByAuthorViewerCanSeeQuery($viewer, $user)
             ->setMaxResults($limit)
-            ->setFirstResult($offset);
+            ->setFirstResult($offset)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -266,7 +275,8 @@ class SourceRepository extends EntityRepository
                         $qb->expr()->eq('pro2.visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
                     )
             )
-            ->setParameter(':author', $author);
+            ->setParameter(':author', $author)
+        ;
 
         return $qb;
     }
@@ -281,6 +291,8 @@ class SourceRepository extends EntityRepository
 
     /**
      * Get sources by user.
+     *
+     * @param mixed $user
      */
     public function getByUser($user)
     {
@@ -299,7 +311,8 @@ class SourceRepository extends EntityRepository
             ->andWhere('o.published = true')
             ->andWhere('cs.isEnabled = true')
             ->setParameter('author', $user)
-            ->orderBy('s.createdAt', 'DESC');
+            ->orderBy('s.createdAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -327,7 +340,8 @@ class SourceRepository extends EntityRepository
             ->andWhere('opas.project = :project OR ovopas.project = :project')
             ->andWhere('s.trashedAt IS NOT NULL')
             ->setParameter('project', $project)
-            ->orderBy('s.trashedAt', 'DESC');
+            ->orderBy('s.trashedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -357,7 +371,8 @@ class SourceRepository extends EntityRepository
                         's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs'
                     )
             )
-            ->setParameter('cs', $cs);
+            ->setParameter('cs', $cs)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -380,7 +395,8 @@ class SourceRepository extends EntityRepository
                         's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation'
                     )
             )
-            ->setParameter('consultation', $consultation);
+            ->setParameter('consultation', $consultation)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -405,7 +421,8 @@ class SourceRepository extends EntityRepository
                         's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovoc.step = :cs'
                     )
             )
-            ->setParameter('cs', $cs);
+            ->setParameter('cs', $cs)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -428,7 +445,8 @@ class SourceRepository extends EntityRepository
                         's.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1 AND ovo.consultation = :consultation'
                     )
             )
-            ->setParameter('consultation', $consultation);
+            ->setParameter('consultation', $consultation)
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -473,7 +491,8 @@ class SourceRepository extends EntityRepository
 
             ->leftJoin('pro.authors', 'pr_au')
             ->leftJoin('pro2.authors', 'pr_au2')
-            ->andWhere('s.author = :author');
+            ->andWhere('s.author = :author')
+        ;
         if (!$viewer->isSuperAdmin()) {
             $this->getContributionsViewerCanSee($qb, $viewer);
 

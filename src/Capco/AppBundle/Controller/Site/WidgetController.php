@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Debate\Debate;
-use Symfony\Component\Routing\Annotation\Route;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class WidgetController extends Controller
 {
@@ -26,10 +26,10 @@ class WidgetController extends Controller
         $debate = $this->globalIdResolver->resolve($debateId, $viewer);
 
         if (
-            !$debate ||
-            !($debate instanceof Debate) ||
-            !$debate->getStep() ||
-            !$debate->getProject()
+            !$debate
+            || !($debate instanceof Debate)
+            || !$debate->getStep()
+            || !$debate->getProject()
         ) {
             throw $this->createNotFoundException();
         }

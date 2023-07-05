@@ -64,7 +64,8 @@ class ImportConsultationFromCsvCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'Delimiter used in csv',
                 ';'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -81,14 +82,17 @@ class ImportConsultationFromCsvCommand extends Command
 
         $em = $this->getContainer()
             ->get('doctrine')
-            ->getManager();
+            ->getManager()
+        ;
 
         $user = $this->getContainer()
             ->get('fos_user.user_manager')
-            ->findUserByEmail($userEmail);
+            ->findUserByEmail($userEmail)
+        ;
         $consultationStep = $this->getContainer()
             ->get(ConsultationStepRepository::class)
-            ->findOneBy(['slug' => $consultationStepSlug]);
+            ->findOneBy(['slug' => $consultationStepSlug])
+        ;
         if (!$user) {
             $output->writeln(
                 '<error>Unknown user' .
@@ -146,7 +150,7 @@ class ImportConsultationFromCsvCommand extends Command
                 continue;
             }
             $row = $row->toArray();
-            /** @var OpinionType|null $opinionType */
+            /** @var null|OpinionType $opinionType */
             $opinionType = null;
             foreach (explode('|', $row[1]) as $index => $ot) {
                 if (0 === $index) {
@@ -156,11 +160,13 @@ class ImportConsultationFromCsvCommand extends Command
                             'title' => $ot,
                             'parent' => null,
                             'consultation' => $consultationStep->getFirstConsultation(),
-                        ]);
+                        ])
+                    ;
                 } else {
                     $opinionType = $this->getContainer()
                         ->get(OpinionTypeRepository::class)
-                        ->findOneBy(['title' => $ot, 'parent' => $opinionType]);
+                        ->findOneBy(['title' => $ot, 'parent' => $opinionType])
+                    ;
                 }
             }
 
@@ -182,7 +188,8 @@ class ImportConsultationFromCsvCommand extends Command
                 ->findOneBy([
                     'title' => $row[0],
                     'consultation' => $consultationStep->getFirstConsultation(),
-                ]);
+                ])
+            ;
             if (\is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "' .

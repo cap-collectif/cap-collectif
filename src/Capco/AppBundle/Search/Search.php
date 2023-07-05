@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Elastica\Index;
@@ -14,7 +15,6 @@ use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 abstract class Search
 {
@@ -73,7 +73,7 @@ abstract class Search
     public function getHydratedResultsFromRepositories(array $repositories, ResultSet $set): array
     {
         $informations = array_map(
-            static fn(Result $result) => [
+            static fn (Result $result) => [
                 'id' => $result->getDocument()->get('id'),
                 'objectType' => $result->getDocument()->get('objectType'),
                 'geoip' => $result->getDocument()->has('geoip')
@@ -82,19 +82,19 @@ abstract class Search
             ],
             $set->getResults()
         );
-        $ids = array_map(static fn(array $information) => $information['id'], $informations);
+        $ids = array_map(static fn (array $information) => $information['id'], $informations);
 
         $types = array_unique(
-            array_map(static fn(array $information) => $information['objectType'], $informations)
+            array_map(static fn (array $information) => $information['objectType'], $informations)
         );
         $map = [];
         foreach ($types as $type) {
             $typeInformations = array_filter(
                 $informations,
-                static fn(array $information) => $information['objectType'] === $type
+                static fn (array $information) => $information['objectType'] === $type
             );
             $typeIds = array_map(
-                static fn(array $information) => $information['id'],
+                static fn (array $information) => $information['id'],
                 $typeInformations
             );
             $map[$type] = $typeIds;
@@ -125,10 +125,8 @@ abstract class Search
         foreach ($results as $result) {
             if (!empty($informationsWithIdAsKey[$result->getId()])) {
                 $result->geoip = [
-                    'countryName' =>
-                        $informationsWithIdAsKey[$result->getId()]['country_name'] ?? null,
-                    'regionName' =>
-                        $informationsWithIdAsKey[$result->getId()]['region_name'] ?? null,
+                    'countryName' => $informationsWithIdAsKey[$result->getId()]['country_name'] ?? null,
+                    'regionName' => $informationsWithIdAsKey[$result->getId()]['region_name'] ?? null,
                     'cityName' => $informationsWithIdAsKey[$result->getId()]['city_name'] ?? null,
                 ];
             }
@@ -138,6 +136,8 @@ abstract class Search
     /**
      * Type does not exists anymore in Elasticsearch,
      * so we use this method to add a "objectType" filter.
+     *
+     * @param null|mixed $type
      */
     protected function addObjectTypeFilter(Query $query, $type = null): void
     {
@@ -231,7 +231,7 @@ abstract class Search
             return [
                 (new BoolQuery())->addShould(
                     new Term([
-                        "${projectPath}.visibility" => [
+                        "{$projectPath}.visibility" => [
                             'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
                         ],
                     ])
@@ -242,10 +242,10 @@ abstract class Search
 
         return [
             (new BoolQuery())
-                ->addShould(new Query\Terms("${projectPath}.authors.id", [$viewer->getId()]))
+                ->addShould(new Query\Terms("{$projectPath}.authors.id", [$viewer->getId()]))
                 ->addShould(
                     new Term([
-                        "${projectPath}.visibility" => [
+                        "{$projectPath}.visibility" => [
                             'value' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
                         ],
                     ])
@@ -253,18 +253,18 @@ abstract class Search
             (new BoolQuery())
                 ->addFilter(
                     new Term([
-                        "${projectPath}.visibility" => [
+                        "{$projectPath}.visibility" => [
                             'value' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
                         ],
                     ])
                 )
                 ->addFilter(
-                    new Query\Terms("${projectPath}.restrictedViewerIds", [$viewer->getId()])
+                    new Query\Terms("{$projectPath}.restrictedViewerIds", [$viewer->getId()])
                 ),
             (new BoolQuery())
-                ->addFilter(new Query\Terms("${projectPath}.visibility", $visibility))
+                ->addFilter(new Query\Terms("{$projectPath}.visibility", $visibility))
                 ->addFilter(
-                    new Query\Range("${projectPath}.visibility", [
+                    new Query\Range("{$projectPath}.visibility", [
                         'lt' => ProjectVisibilityMode::VISIBILITY_CUSTOM,
                     ])
                 ),
@@ -321,58 +321,69 @@ abstract class Search
                 $sortOrder = 'asc';
 
                 break;
+
             case 'last':
                 $sortField = 'createdAt';
                 $sortOrder = 'desc';
 
                 break;
+
             case 'old-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'asc';
 
                 break;
+
             case 'last-published':
                 $sortField = 'publishedAt';
                 $sortOrder = 'desc';
 
                 break;
+
             case 'comments':
                 return [
                     'commentsCount' => ['order' => 'desc'],
                     'createdAt' => ['order' => 'desc'],
                 ];
+
             case 'least-popular':
                 return [
                     'votesCountNok' => ['order' => 'DESC'],
                     'votesCountOk' => ['order' => 'ASC'],
                     'createdAt' => ['order' => 'DESC'],
                 ];
+
             case 'least-voted':
                 $sortField = 'votesCount';
                 $sortOrder = 'asc';
 
                 break;
+
             case 'position':
                 $sortField = 'position';
                 $sortOrder = 'desc';
 
                 break;
+
             case 'least-position':
                 $sortField = 'position';
                 $sortOrder = 'asc';
 
                 break;
+
             case 'popular':
                 return [
                     'votesCountOk' => ['order' => 'DESC'],
                     'votesCountNok' => ['order' => 'ASC'],
                     'createdAt' => ['order' => 'DESC'],
                 ];
+
             case 'voted':
                 $sortField = 'votesCount';
                 $sortOrder = 'desc';
 
                 break;
+
             default:
                 throw new \RuntimeException('Unknown order: ' . $order);
 

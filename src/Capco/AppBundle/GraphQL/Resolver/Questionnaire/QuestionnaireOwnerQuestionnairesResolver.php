@@ -3,13 +3,13 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Enum\QuestionnaireOrderField;
+use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Repository\QuestionnaireRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
 {

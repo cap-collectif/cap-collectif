@@ -5,12 +5,12 @@ namespace Capco\AppBundle\Security;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class EventReviewVoter extends Voter
 {
-    const EDIT = 'edit';
+    public const EDIT = 'edit';
 
     protected function supports($attribute, $subject): bool
     {

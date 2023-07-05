@@ -52,7 +52,8 @@ class ProposalFormController extends CRUDController
                     $notificationsConfiguration->isOnQuestionnaireReplyDelete()
                 )
                 ->setEmail($notificationsConfiguration->getEmail())
-                ->setQuestionnaire($evaluationForm);
+                ->setQuestionnaire($evaluationForm)
+            ;
 
             $evaluationForm->setNotificationsConfiguration($newNotificationsConfiguration);
         }

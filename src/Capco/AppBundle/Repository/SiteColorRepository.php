@@ -22,6 +22,7 @@ class SiteColorRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getValuesIfEnabledCacheKey())
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use GraphQL\Error\UserError;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Form\Type\UserAccountFormType;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Capco\UserBundle\Form\Type\UserAccountFormType;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 
 class UpdateUserAccountMutation extends BaseUpdateProfile
 {
@@ -28,9 +28,9 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         }
 
         if (
-            !$viewer->hasRole(self::ROLE_SUPER_ADMIN) &&
-            \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true) &&
-            !$user->hasRole(self::ROLE_SUPER_ADMIN)
+            !$viewer->hasRole(self::ROLE_SUPER_ADMIN)
+            && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true)
+            && !$user->hasRole(self::ROLE_SUPER_ADMIN)
         ) {
             throw new UserError('You are not able to add super_admin role to a user.');
         }
@@ -38,9 +38,9 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         // If the viewer is ROLE_ADMIN but update a user with ROLE_SUPER_ADMIN
         // we have to make sure the user doesn't lose his ROLE_SUPER_ADMIN
         if (
-            !$viewer->hasRole(self::ROLE_SUPER_ADMIN) &&
-            !\in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true) &&
-            $user->hasRole(self::ROLE_SUPER_ADMIN)
+            !$viewer->hasRole(self::ROLE_SUPER_ADMIN)
+            && !\in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true)
+            && $user->hasRole(self::ROLE_SUPER_ADMIN)
         ) {
             $arguments['roles'][] = self::ROLE_SUPER_ADMIN;
         }

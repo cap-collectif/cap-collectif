@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Search\Search;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Search\VersionSearch;
-use Capco\AppBundle\Enum\VersionOrderField;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\VersionOrderField;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Capco\AppBundle\Search\Search;
+use Capco\AppBundle\Search\VersionSearch;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class OpinionVersionsResolver implements ResolverInterface
 {

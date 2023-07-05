@@ -28,7 +28,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->sendVerificationCode($this->phone)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $this->sendVerificationSms($this->phone)->shouldReturn(null);
     }
@@ -42,7 +43,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->sendVerificationCode($this->phone)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $this->sendVerificationSms($this->phone)->shouldReturn(
             UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER
@@ -58,7 +60,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->sendVerificationCode($this->phone)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $this->sendVerificationSms($this->phone)->shouldReturn(TwilioHelper::INVALID_NUMBER);
     }
@@ -69,7 +72,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->sendVerificationCode($this->phone)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         $this->sendVerificationSms($this->phone)->shouldReturn(TwilioHelper::TWILIO_API_ERROR);
     }
@@ -80,7 +84,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->checkVerificationCode($this->phone, $this->code)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $this->verifySms($this->phone, $this->code)->shouldReturn(null);
     }
 
@@ -90,7 +95,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->checkVerificationCode($this->phone, $this->code)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioHelper::CODE_EXPIRED);
     }
 
@@ -100,7 +106,8 @@ class TwilioHelperSpec extends ObjectBehavior
         $twilioClient
             ->checkVerificationCode($this->phone, $this->code)
             ->shouldBeCalledOnce()
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
         $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioHelper::CODE_NOT_VALID);
     }
 }

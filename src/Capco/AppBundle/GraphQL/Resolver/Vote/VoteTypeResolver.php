@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Vote;
 
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\ArgumentVote;
+use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
-use Capco\AppBundle\Entity\ProposalCollectSmsVote;
-use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
-use Capco\AppBundle\Entity\SourceVote;
-use Capco\AppBundle\Entity\CommentVote;
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\OpinionVersionVote;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalCollectVote;
+use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
-use GraphQL\Error\UserError;
+use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use GraphQL\Error\UserError;
 use GraphQL\Type\Definition\Type;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class VoteTypeResolver implements ResolverInterface
 {

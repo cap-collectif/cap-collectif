@@ -66,7 +66,7 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
     private function renderEdit(EmailingCampaign $emailingCampaign): Response
     {
         $this->admin->setSubject($emailingCampaign);
-        
+
         return $this->renderWithExtraParams(
             'CapcoAdminBundle:Emailing:emailingCampaignEdit.html.twig',
             [

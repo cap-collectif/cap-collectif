@@ -5,8 +5,8 @@ namespace Capco\AppBundle\Command;
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
-use Capco\AppBundle\Entity\SourceCategory;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ContactForm\ContactForm;
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Entity\ProgressStep;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -40,12 +41,12 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\SourceCategory;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -56,7 +57,6 @@ use Capco\AppBundle\Entity\Styles\BackgroundStyle;
 use Capco\AppBundle\Entity\Styles\BorderStyle;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Entity\UserArchive;
-use Capco\AppBundle\Entity\ProjectType;
 use Capco\ClassificationBundle\Entity\Context;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -90,7 +90,8 @@ class LoadProdDataCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force the rebuild'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -223,7 +224,8 @@ class LoadProdDataCommand extends Command
             $input->setInteractive(false);
             $this->getApplication()
                 ->find($key)
-                ->run($input, $output);
+                ->run($input, $output)
+            ;
         }
     }
 }

@@ -19,28 +19,29 @@ class DiffSpec extends ObjectBehavior
         $a = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
-            ]
+                'title' => 'le beau titre 2',
+            ],
         ]);
 
         $b = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
-            ]
+                'title' => 'le beau titre 2',
+            ],
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([]);
+            ->shouldReturn([])
+        ;
     }
 
     public function it_should_return_an_array_when_differences_with_simple_array_collections(): void
@@ -48,19 +49,19 @@ class DiffSpec extends ObjectBehavior
         $a = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
-            ]
+                'title' => 'le beau titre 2',
+            ],
         ]);
 
         $b = new ArrayCollection([
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
-            ]
+                'title' => 'le beau titre 2',
+            ],
         ]);
 
         $this::fromCollectionsWithId($a, $b)
@@ -68,9 +69,10 @@ class DiffSpec extends ObjectBehavior
             ->shouldReturn([
                 [
                     'id' => 1,
-                    'title' => 'le beau titre 1'
-                ]
-            ]);
+                    'title' => 'le beau titre 1',
+                ],
+            ])
+        ;
     }
 
     public function it_should_return_an_empty_array_when_no_differences_with_complex_array_collections(): void
@@ -78,68 +80,69 @@ class DiffSpec extends ObjectBehavior
         $a = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
+                'title' => 'le beau titre 2',
             ],
             [
                 'id' => 3,
-                'title' => 'Hélas je vais être supprimé'
+                'title' => 'Hélas je vais être supprimé',
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que mon voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :(',
             ],
             [
                 'id' => 5,
-                'title' => 'le beau titre 5'
+                'title' => 'le beau titre 5',
             ],
             [
                 'id' => 6,
-                'title' => 'Oopsie moi aussi je vais dire adieu'
+                'title' => 'Oopsie moi aussi je vais dire adieu',
             ],
             [
                 'id' => 7,
-                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg'
-            ]
+                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
+            ],
         ]);
 
         $b = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
+                'title' => 'le beau titre 2',
             ],
             [
                 'id' => 3,
-                'title' => 'Hélas je vais être supprimé'
+                'title' => 'Hélas je vais être supprimé',
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que mon voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :(',
             ],
             [
                 'id' => 5,
-                'title' => 'le beau titre 5'
+                'title' => 'le beau titre 5',
             ],
             [
                 'id' => 6,
-                'title' => 'Oopsie moi aussi je vais dire adieu'
+                'title' => 'Oopsie moi aussi je vais dire adieu',
             ],
             [
                 'id' => 7,
-                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg'
-            ]
+                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
+            ],
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([]);
+            ->shouldReturn([])
+        ;
     }
 
     public function it_should_return_an_array_when_differences_with_complex_array_collections(): void
@@ -147,67 +150,67 @@ class DiffSpec extends ObjectBehavior
         $a = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
+                'title' => 'le beau titre 2',
             ],
             [
                 'id' => 3,
-                'title' => 'Hélas je vais être supprimé'
+                'title' => 'Hélas je vais être supprimé',
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que mon voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :(',
             ],
             [
                 'id' => 5,
-                'title' => 'le beau titre 5'
+                'title' => 'le beau titre 5',
             ],
             [
                 'id' => 6,
-                'title' => 'Oopsie moi aussi je vais dire adieu'
+                'title' => 'Oopsie moi aussi je vais dire adieu',
             ],
             [
                 'id' => 7,
-                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg'
-            ]
+                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
+            ],
         ]);
 
         $b = new ArrayCollection([
             [
                 'id' => 1,
-                'title' => 'le beau titre 1'
+                'title' => 'le beau titre 1',
             ],
             [
                 'id' => 2,
-                'title' => 'le beau titre 2'
+                'title' => 'le beau titre 2',
             ],
             [
                 'id' => 5,
-                'title' => 'le beau titre 5'
+                'title' => 'le beau titre 5',
             ],
             [
                 'id' => 7,
-                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg'
-            ]
+                'title' => 'https://www.youtube.com/watch?v=pjJ2w1FX_Wg',
+            ],
         ]);
 
         $subject = $this::fromCollectionsWithId($a, $b)->toArray();
         $subject->shouldReturn([
             [
                 'id' => 3,
-                'title' => 'Hélas je vais être supprimé'
+                'title' => 'Hélas je vais être supprimé',
             ],
             [
                 'id' => 4,
-                'title' => 'Pareil que mon voisin du dessus :('
+                'title' => 'Pareil que mon voisin du dessus :(',
             ],
             [
                 'id' => 6,
-                'title' => 'Oopsie moi aussi je vais dire adieu'
-            ]
+                'title' => 'Oopsie moi aussi je vais dire adieu',
+            ],
         ]);
     }
 
@@ -229,17 +232,18 @@ class DiffSpec extends ObjectBehavior
 
         $a = new ArrayCollection([
             $stepAFirst->getWrappedObject(),
-            $stepASecond->getWrappedObject()
+            $stepASecond->getWrappedObject(),
         ]);
 
         $b = new ArrayCollection([
             $stepBFirst->getWrappedObject(),
-            $stepBSecond->getWrappedObject()
+            $stepBSecond->getWrappedObject(),
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([]);
+            ->shouldReturn([])
+        ;
     }
 
     public function it_should_return_an_array_when_differences_with_simple_entity_collections(
@@ -258,17 +262,18 @@ class DiffSpec extends ObjectBehavior
 
         $a = new ArrayCollection([
             $stepAFirst->getWrappedObject(),
-            $stepASecond->getWrappedObject()
+            $stepASecond->getWrappedObject(),
         ]);
 
         $b = new ArrayCollection([
             $stepBFirst->getWrappedObject(),
-            $stepBSecond->getWrappedObject()
+            $stepBSecond->getWrappedObject(),
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([$stepAFirst->getWrappedObject()]);
+            ->shouldReturn([$stepAFirst->getWrappedObject()])
+        ;
     }
 
     public function it_should_return_an_empty_array_when_no_differences_with_complex_entity_collections(
@@ -310,7 +315,7 @@ class DiffSpec extends ObjectBehavior
             $stepASecond->getWrappedObject(),
             $stepAThird->getWrappedObject(),
             $stepAFourth->getWrappedObject(),
-            $stepAFifth->getWrappedObject()
+            $stepAFifth->getWrappedObject(),
         ]);
 
         $b = new ArrayCollection([
@@ -318,12 +323,13 @@ class DiffSpec extends ObjectBehavior
             $stepBSecond->getWrappedObject(),
             $stepBThird->getWrappedObject(),
             $stepBFourth->getWrappedObject(),
-            $stepBFifth->getWrappedObject()
+            $stepBFifth->getWrappedObject(),
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([]);
+            ->shouldReturn([])
+        ;
     }
 
     public function it_should_return_an_array_when_differences_with_complex_entity_collections(
@@ -359,17 +365,18 @@ class DiffSpec extends ObjectBehavior
             $stepASecond->getWrappedObject(),
             $stepAThird->getWrappedObject(),
             $stepAFourth->getWrappedObject(),
-            $stepAFifth->getWrappedObject()
+            $stepAFifth->getWrappedObject(),
         ]);
 
         $b = new ArrayCollection([
             $stepBFirst->getWrappedObject(),
             $stepBThird->getWrappedObject(),
-            $stepBFifth->getWrappedObject()
+            $stepBFifth->getWrappedObject(),
         ]);
 
         $this::fromCollectionsWithId($a, $b)
             ->toArray()
-            ->shouldReturn([$stepASecond->getWrappedObject(), $stepAFourth->getWrappedObject()]);
+            ->shouldReturn([$stepASecond->getWrappedObject(), $stepAFourth->getWrappedObject()])
+        ;
     }
 }

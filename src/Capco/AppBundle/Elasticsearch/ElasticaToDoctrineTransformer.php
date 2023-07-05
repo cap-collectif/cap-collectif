@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Result;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
@@ -70,9 +70,7 @@ class ElasticaToDoctrineTransformer
             list($type, $id) = explode(':', $elasticaObject->getId());
 
             if (!$type || !$id) {
-                throw new \RuntimeException(
-                    "Id format for current document is not type:id, can't hydrate to Doctrine!"
-                );
+                throw new \RuntimeException("Id format for current document is not type:id, can't hydrate to Doctrine!");
             }
             $ids[] = $type . '#' . $id;
             $toFetchByType[$type][] = $id;
@@ -194,7 +192,8 @@ class ElasticaToDoctrineTransformer
     {
         $repository = $this->registry
             ->getManagerForClass($objectClass)
-            ->getRepository($objectClass);
+            ->getRepository($objectClass)
+        ;
 
         return $repository->{$this->options['query_builder_method']}(static::ENTITY_ALIAS);
     }
@@ -226,8 +225,6 @@ class ElasticaToDoctrineTransformer
             return $classes[$type];
         }
 
-        throw new \Exception(
-            sprintf("Can't find the Doctrine class for Elastic document of type '%s'", $type)
-        );
+        throw new \Exception(sprintf("Can't find the Doctrine class for Elastic document of type '%s'", $type));
     }
 }

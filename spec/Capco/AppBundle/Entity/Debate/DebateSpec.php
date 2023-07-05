@@ -2,10 +2,10 @@
 
 namespace spec\Capco\AppBundle\Entity\Debate;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use PhpSpec\ObjectBehavior;
 
 class DebateSpec extends ObjectBehavior
 {

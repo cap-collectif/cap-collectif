@@ -22,7 +22,7 @@ class CreateResponsesFromCsvCommand extends Command
 {
     private $container;
 
-    public function __construct(string $name = null, ContainerInterface $container)
+    public function __construct(?string $name = null, ContainerInterface $container)
     {
         $this->container = $container;
         parent::__construct($name);
@@ -37,7 +37,8 @@ class CreateResponsesFromCsvCommand extends Command
                 false,
                 InputOption::VALUE_NONE,
                 'set this option to force the rebuild'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -55,16 +56,19 @@ class CreateResponsesFromCsvCommand extends Command
 
         $em = $this->getContainer()
             ->get('doctrine')
-            ->getManager();
+            ->getManager()
+        ;
 
         $responses = $this->getContainer()
             ->get(ConvertCsvToArray::class)
-            ->convert('pjl/responses.csv', ';');
+            ->convert('pjl/responses.csv', ';')
+        ;
         foreach ($responses as $row) {
             /** @var User $author */
             $author = $this->getContainer()
                 ->get(UserRepository::class)
-                ->findOneBy(['email' => $row['email']]);
+                ->findOneBy(['email' => $row['email']])
+            ;
             if (!$author) {
                 $output->writeln(
                     'Author ' .
@@ -77,7 +81,8 @@ class CreateResponsesFromCsvCommand extends Command
             /** @var Questionnaire $questionnaire */
             $questionnaire = $this->getContainer()
                 ->get(QuestionnaireRepository::class)
-                ->find($row['questionnaire_id']);
+                ->find($row['questionnaire_id'])
+            ;
             if (!$questionnaire) {
                 $output->writeln(
                     'Questionnaire ' .
@@ -92,7 +97,8 @@ class CreateResponsesFromCsvCommand extends Command
                 ->findOneBy([
                     'author' => $author,
                     'questionnaire' => $questionnaire,
-                ]);
+                ])
+            ;
             if (!$reply) {
                 $reply = new Reply();
                 $reply->setAuthor($author);
@@ -106,7 +112,8 @@ class CreateResponsesFromCsvCommand extends Command
             /** @var AbstractQuestion $question */
             $question = $this->getContainer()
                 ->get(AbstractQuestionRepository::class)
-                ->find($row['question_id']);
+                ->find($row['question_id'])
+            ;
             $response = new ValueResponse();
             $response->setReply($reply);
             $response->setQuestion($question);

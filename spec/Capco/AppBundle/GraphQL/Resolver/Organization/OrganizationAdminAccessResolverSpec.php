@@ -30,8 +30,7 @@ class OrganizationAdminAccessResolverSpec extends ObjectBehavior
     public function it_should_return_false_if_viewer_is_not_a_member(
         Organization $organization,
         User $viewer
-    )
-    {
+    ) {
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(false);
         $organization->getMembership($viewer)->shouldBeCalledOnce()->willReturn(null);
         $this->__invoke($organization, $viewer)->shouldReturn(false);
@@ -41,8 +40,7 @@ class OrganizationAdminAccessResolverSpec extends ObjectBehavior
         Organization $organization,
         User $viewer,
         OrganizationMember $organizationMember
-    )
-    {
+    ) {
         $viewer->isAdmin()->shouldBeCalledOnce()->willReturn(false);
         $organization->getMembership($viewer)->shouldBeCalledOnce()->willReturn($organizationMember);
         $organizationMember->getRole()->willReturn(OrganizationMemberRoleType::ADMIN);

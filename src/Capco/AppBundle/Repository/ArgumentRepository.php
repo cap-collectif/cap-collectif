@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Model\Argumentable;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Model\Argumentable;
-use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\OpinionVersion;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 
 class ArgumentRepository extends EntityRepository
 {
@@ -58,7 +58,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('ids', $ids)
             ->groupBy('aut.id')
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     public function countByUsersIds(array $ids, ?User $viewer): array
@@ -80,7 +81,8 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('aut.id IN (:ids)')
             ->groupBy('aut.id')
             ->setParameter('status', Trashable::STATUS_INVISIBLE)
-            ->setParameter('ids', $ids);
+            ->setParameter('ids', $ids)
+        ;
 
         $qb = $this->handleArgumentVisibility($qb, $viewer);
 
@@ -110,7 +112,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('cas.project', 'c')
             ->leftJoin('ut.translations', 'utt')
             ->where('utt.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->setParameter('locale', $locale)
+        ;
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -135,7 +138,8 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('a.id = :id')
-            ->setParameter('id', $id);
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
@@ -148,7 +152,8 @@ class ArgumentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.published = false')
             ->andWhere('a.author = :author')
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
         if (null !== $type) {
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
@@ -238,7 +243,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('project', $project)
             ->orderBy('a.trashedAt', 'DESC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countAllByAuthor(User $user): int
@@ -246,7 +252,8 @@ class ArgumentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('version');
         $qb->select('count(DISTINCT version)')
             ->andWhere('version.author = :author')
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -278,7 +285,8 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('step.isEnabled = true')
             ->andWhere('a.trashedStatus <> :status OR a.trashedStatus IS NULL')
             ->setParameter('status', Trashable::STATUS_INVISIBLE)
-            ->setParameter('author', $user);
+            ->setParameter('author', $user)
+        ;
 
         $qb = $this->handleArgumentVisibility($qb, $viewer);
 
@@ -319,7 +327,8 @@ class ArgumentRepository extends EntityRepository
                     )
             )
             ->setParameter('u', $user)
-            ->getQuery();
+            ->getQuery()
+        ;
 
         return $qb->getSingleScalarResult() ?? 0;
     }
@@ -344,7 +353,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('author', $author)
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
@@ -361,7 +371,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('author', $author)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countByAuthorAndConsultation(User $author, Consultation $consultation): int
@@ -376,7 +387,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('consultation', $consultation)
             ->setParameter('author', $author)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     /**
@@ -401,7 +413,8 @@ class ArgumentRepository extends EntityRepository
             ->setParameter('author', $user)
             ->setParameter('status', Trashable::STATUS_INVISIBLE)
             ->setMaxResults($offset)
-            ->setFirstResult($first);
+            ->setFirstResult($first)
+        ;
 
         $qb = $this->handleArgumentVisibility($qb, $viewer);
 
@@ -451,7 +464,8 @@ class ArgumentRepository extends EntityRepository
             )
             ->setParameter('cs', $cs)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countPublishedArgumentsByConsultation(Consultation $consultation): int
@@ -474,7 +488,8 @@ class ArgumentRepository extends EntityRepository
             )
             ->setParameter('consultation', $consultation)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countTrashedArgumentsByStep(ConsultationStep $cs): int
@@ -499,7 +514,8 @@ class ArgumentRepository extends EntityRepository
             )
             ->setParameter('cs', $cs)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countTrashedArgumentsByConsultation(Consultation $consultation): int
@@ -522,7 +538,8 @@ class ArgumentRepository extends EntityRepository
             )
             ->setParameter('consultation', $consultation)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function handleArgumentVisibility(QueryBuilder $qb, ?User $viewer = null): QueryBuilder
@@ -571,7 +588,8 @@ class ArgumentRepository extends EntityRepository
                 'to' => $to,
                 'id' => $opinionId,
                 'type' => $type,
-            ]);
+            ])
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }

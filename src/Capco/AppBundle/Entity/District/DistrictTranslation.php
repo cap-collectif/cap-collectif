@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\Entity\District;
 
-use Capco\AppBundle\Traits\Text\DescriptionTrait;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -28,6 +28,12 @@ class DistrictTranslation implements Translation
     use UuidTrait;
 
     /**
+     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
+     * @ORM\Column(length=255)
+     */
+    protected ?string $slug;
+
+    /**
      * @ORM\Column(name="name", type="string", length=255)
      */
     private ?string $name = null;
@@ -36,12 +42,6 @@ class DistrictTranslation implements Translation
      * @ORM\Column(name="title_on_map", type="string", length=255, nullable=true)
      */
     private ?string $titleOnMap = null;
-
-    /**
-     * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
-     * @ORM\Column(length=255)
-     */
-    protected ?string $slug;
 
     public function getName(): ?string
     {

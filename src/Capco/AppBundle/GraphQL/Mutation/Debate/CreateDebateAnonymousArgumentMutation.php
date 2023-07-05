@@ -22,7 +22,8 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
                 ->setEmail($input->offsetGet('email'))
                 ->setUsername($input->offsetGet('username'))
                 ->setConsentInternalCommunication($input->offsetGet('consentInternalCommunication'))
-                ->setToken($this->tokenGenerator->generateToken());
+                ->setToken($this->tokenGenerator->generateToken())
+            ;
             if (true === $input->offsetGet('consentInternalCommunication')) {
                 $this->pushToSendinblue([
                     'email' => $input->offsetGet('email'),

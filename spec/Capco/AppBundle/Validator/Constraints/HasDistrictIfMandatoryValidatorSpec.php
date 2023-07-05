@@ -4,11 +4,11 @@ namespace spec\Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Proposal;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatory;
 use PhpSpec\ObjectBehavior;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
@@ -31,7 +31,8 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         $proposal
             ->getDistrict()
             ->willReturn($district)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $context->buildViolation($constraint->message)->shouldNotBeCalled();
         $this->beConstructedWith($manager);
@@ -50,23 +51,28 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         $proposalForm
             ->isUsingDistrict()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposalForm
             ->isDistrictMandatory()
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getProposalForm()
             ->willReturn($proposalForm)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $proposal
             ->getDistrict()
             ->willReturn(null)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $manager
             ->isActive('districts')
             ->willReturn(true)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->beConstructedWith($manager);
         $this->initialize($context);
@@ -74,7 +80,8 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->validate($proposal, $constraint);
     }

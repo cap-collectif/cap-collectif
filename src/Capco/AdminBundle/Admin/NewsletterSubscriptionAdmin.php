@@ -37,7 +37,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -60,7 +61,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
                     'edit' => [],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -72,7 +74,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ->add('isEnabled', null, [
                 'label' => 'admin.fields.newsletter_subscription.is_enabled',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -87,7 +90,8 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
             ])
             ->add('createdAt', null, [
                 'label' => 'global.creation',
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

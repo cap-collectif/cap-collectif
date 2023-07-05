@@ -24,7 +24,7 @@ final class Version20190607121020 extends AbstractMigration
     {
         $table = 'proposal';
         $proposalDraft = $this->connection->fetchAllAssociative(
-            "SELECT id FROM ${table} where is_draft = 1"
+            "SELECT id FROM {$table} where is_draft = 1"
         );
         foreach ($proposalDraft as $proposal) {
             $this->connection->update(

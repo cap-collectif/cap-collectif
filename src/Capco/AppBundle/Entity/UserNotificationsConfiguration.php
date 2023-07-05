@@ -46,7 +46,7 @@ class UserNotificationsConfiguration
     }
 
     /**
-     * @return string|null
+     * @return null|string
      */
     public function getUnsubscribeToken()
     {
@@ -54,8 +54,6 @@ class UserNotificationsConfiguration
     }
 
     /**
-     * @param string $unsubscribeToken
-     *
      * @return $this
      */
     public function setUnsubscribeToken(string $unsubscribeToken)
@@ -65,9 +63,6 @@ class UserNotificationsConfiguration
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isOnProposalCommentMail(): bool
     {
         return $this->onProposalCommentMail;
@@ -80,17 +75,12 @@ class UserNotificationsConfiguration
         return $this;
     }
 
-    /**
-     * @return User
-     */
     public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
-     *
      * @return UserNotificationsConfiguration
      */
     public function setUser(User $user): self

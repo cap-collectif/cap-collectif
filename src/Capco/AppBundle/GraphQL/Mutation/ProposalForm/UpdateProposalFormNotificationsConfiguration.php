@@ -45,7 +45,7 @@ class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormM
 
         if (!$form->isValid()) {
             $this->logger->error(
-                \get_class($this) .
+                static::class .
                     ' updateNotificationsConfiguration: ' .
                     (string) $form->getErrors(true, false)
             );

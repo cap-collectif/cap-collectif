@@ -4,14 +4,14 @@ namespace Capco\AppBundle\Security;
 
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DebateOpinionVoter extends Voter
 {
-    const CREATE = 'create';
-    const EDIT = 'edit';
-    const DELETE = 'delete';
+    public const CREATE = 'create';
+    public const EDIT = 'edit';
+    public const DELETE = 'delete';
 
     protected function supports($attribute, $subject): bool
     {
@@ -40,10 +40,13 @@ class DebateOpinionVoter extends Voter
         switch ($attribute) {
             case self::CREATE:
                 return $this->canCreate($viewer);
+
             case self::EDIT:
                 return $this->canEdit($debateOpinion, $viewer);
+
             case self::DELETE:
                 return $this->canDelete($debateOpinion, $viewer);
+
             default:
                 return false;
         }
@@ -64,7 +67,8 @@ class DebateOpinionVoter extends Voter
         $owner = $debateOpinion
             ->getDebate()
             ->getProject()
-            ->getOwner();
+            ->getOwner()
+        ;
 
         if ($viewer->isAdmin()) {
             return true;

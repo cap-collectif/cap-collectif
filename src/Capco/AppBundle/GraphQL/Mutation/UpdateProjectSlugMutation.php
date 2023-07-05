@@ -37,7 +37,7 @@ class UpdateProjectSlugMutation implements MutationInterface
     {
         $projectId = $input->offsetGet('projectId');
 
-        /** * @var $project Project */
+        /** * @var Project $project */
         $project = $this->globalIdResolver->resolve($projectId, $viewer);
 
         if (!$project) {

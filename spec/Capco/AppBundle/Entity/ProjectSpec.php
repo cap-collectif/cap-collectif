@@ -3,12 +3,12 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Locale;
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use PhpSpec\ObjectBehavior;
 
 class ProjectSpec extends ObjectBehavior
 {

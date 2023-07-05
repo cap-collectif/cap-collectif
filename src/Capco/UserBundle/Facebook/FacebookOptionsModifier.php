@@ -46,7 +46,8 @@ class FacebookOptionsModifier extends AbstractOptionsModifier implements Options
                         'client_id' => $ssoConfiguration->getClientId(),
                         'client_secret' => $ssoConfiguration->getSecret(),
                     ])
-                    ->expiresAfter($this->redisCache::ONE_DAY);
+                    ->expiresAfter($this->redisCache::ONE_DAY)
+                ;
             }
         }
 

@@ -2,8 +2,8 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Type;
 
-use PhpSpec\ObjectBehavior;
 use Capco\AppBundle\GraphQL\Type\EmailType;
+use PhpSpec\ObjectBehavior;
 
 class EmailTypeSpec extends ObjectBehavior
 {

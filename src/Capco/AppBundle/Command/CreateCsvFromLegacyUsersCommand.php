@@ -4,18 +4,18 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Command\Utils\BooleanCell;
+use Capco\AppBundle\Command\Utils\ExportUtils;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
-use Capco\AppBundle\Toggle\Manager;
-use Box\Spout\Writer\WriterInterface;
 use Overblog\GraphQLBundle\Request\Executor;
-use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\GraphQL\ConnectionTraversor;
-use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
@@ -112,11 +112,11 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (
-            !$this->toggleManager->isActive(Manager::export) ||
-            !$this->toggleManager->isActive(Manager::export_legacy_users)
+            !$this->toggleManager->isActive(Manager::export)
+            || !$this->toggleManager->isActive(Manager::export_legacy_users)
         ) {
             $output->writeln('Feature "export" and "export_legacy_users" must be enabled.');
-            
+
             return 1;
         }
 
@@ -126,7 +126,8 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
                 'query' => $requestString,
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
         $this->writer->openToFile(
             sprintf('%s/public/export/%s', $this->projectRootDir, self::FILENAME)
@@ -216,120 +217,121 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         }
 
         return <<<EOF
-{
-  users(superAdmin: false, first: 100 ${userCursor}, withDisabled: true) {
-    totalCount
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        id
-        email
-        username
-        createdAt
-        updatedAt
-        lastLogin
-        rolesText
-        enabled
-        confirmedAccountAt
-        isEmailConfirmed
-        locked
-        phoneConfirmed
-        phoneConfirmationSentAt
-        userType {
-          name
-        }
-        responses {
-          edges {
-            node {
-              __typename
-              question {
-                title
-              }
-              ... on ValueResponse {
-                formattedValue
-              }
-              ... on MediaResponse {
-                medias {
-                  url
+            {
+              users(superAdmin: false, first: 100 {$userCursor}, withDisabled: true) {
+                totalCount
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+                edges {
+                  cursor
+                  node {
+                    id
+                    email
+                    username
+                    createdAt
+                    updatedAt
+                    lastLogin
+                    rolesText
+                    enabled
+                    confirmedAccountAt
+                    isEmailConfirmed
+                    locked
+                    phoneConfirmed
+                    phoneConfirmationSentAt
+                    userType {
+                      name
+                    }
+                    responses {
+                      edges {
+                        node {
+                          __typename
+                          question {
+                            title
+                          }
+                          ... on ValueResponse {
+                            formattedValue
+                          }
+                          ... on MediaResponse {
+                            medias {
+                              url
+                            }
+                          }
+                        }
+                      }
+                    }
+                    consentExternalCommunication
+                    consentInternalCommunication
+                    gender
+                    firstname
+                    lastname
+                    dateOfBirth
+                    websiteUrl
+                    biography
+                    postalAddress {
+                      formatted
+                    }
+                    address
+                    address2
+                    zipCode
+                    city
+                    phone
+                    url
+                    facebookId
+                    samlId
+                    contributions {
+                        totalCount
+                    }
+                    opinionVotesCount
+                    arguments(includeTrashed: true) {
+                        totalCount
+                    }
+                    argumentVotesCount
+                    proposals {
+                        totalCount
+                    }
+                    opinionVersions {
+                        totalCount
+                    }
+                    proposalVotesCount
+                    sources {
+                        totalCount
+                    }
+                    replies {
+                        totalCount
+                    }
+                    opinions {
+                        totalCount
+                    }
+                    deletedAccountAt
+                  }
                 }
               }
             }
-          }
-        }
-        consentExternalCommunication
-        consentInternalCommunication
-        gender
-        firstname
-        lastname
-        dateOfBirth
-        websiteUrl
-        biography
-        postalAddress {
-          formatted
-        }
-        address
-        address2
-        zipCode
-        city
-        phone
-        url
-        facebookId
-        samlId
-        contributions {
-            totalCount
-        }
-        opinionVotesCount
-        arguments(includeTrashed: true) {
-            totalCount
-        }
-        argumentVotesCount
-        proposals {
-            totalCount
-        }
-        opinionVersions {
-            totalCount
-        }
-        proposalVotesCount
-        sources {
-            totalCount
-        }
-        replies {
-            totalCount
-        }
-        opinions {
-            totalCount
-        }
-        deletedAccountAt
-      }
-    }
-  }
-}
-EOF;
+            EOF;
     }
 
     private function generateSheetHeaderQuestions(): array
     {
         $registrationFormQuestionsQuery = <<<'EOF'
-            {
-                registrationForm {
-                    questions {
-                        title
-                    }
-                }
-            }
-EOF;
+                        {
+                            registrationForm {
+                                questions {
+                                    title
+                                }
+                            }
+                        }
+            EOF;
 
         $questionsTitles = $this->executor
             ->execute('internal', [
                 'query' => $registrationFormQuestionsQuery,
                 'variables' => [],
             ])
-            ->toArray();
+            ->toArray()
+        ;
 
         return array_map(function (array $edge) {
             return $edge['title'];
@@ -346,6 +348,7 @@ EOF;
         switch ($response['__typename']) {
             case self::VALUE_RESPONSE_TYPENAME:
                 return $response['formattedValue'];
+
             case self::MEDIA_RESPONSE_TYPENAME:
                 return implode(
                     ', ',

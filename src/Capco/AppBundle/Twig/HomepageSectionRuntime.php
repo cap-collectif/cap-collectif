@@ -80,8 +80,8 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         ?int $offset = null,
         ?Section $section = null
     ): string {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
+        $max ??= 4;
+        $offset ??= 0;
         $videos = $this->videoRepository->getLast($max, $offset);
 
         return $this->twig->render(
@@ -95,7 +95,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         ?int $offset = null,
         ?Section $section = null
     ): string {
-        $max = $max ?? 3;
+        $max ??= 3;
         $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
         $count = $this->projectRepository->countPublished($user);
 
@@ -122,8 +122,8 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         ?int $offset = null,
         ?Section $section = null
     ): string {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
+        $max ??= 4;
+        $offset ??= 0;
         $topics = $this->themeRepository->getLast($max, $offset);
 
         return $this->twig->render(
@@ -137,8 +137,8 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         ?int $offset = null,
         ?Section $section = null
     ): string {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
+        $max ??= 4;
+        $offset ??= 0;
         $posts = $this->postRepository->getLast($max, $offset);
 
         return $this->twig->render(
@@ -158,12 +158,10 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
     }
 
     public function getLastProposals(
-        ?int $max = null,
-        ?int $offset = null,
+        ?int $max = 4,
+        ?int $offset = 0,
         ?Section $section = null
     ): string {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
         if ($section && $section->getStep() && $section->getStep()->isCollectStep()) {
             $results = $this->proposalRepository->getLastByStep($max, $offset, $section->getStep());
         } else {
@@ -193,6 +191,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
     {
         $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
         $count = $this->projectRepository->countPublished($user);
+
         return $this->twig->render('CapcoAppBundle:Homepage:projectsMap.html.twig', compact('count'));
     }
 }

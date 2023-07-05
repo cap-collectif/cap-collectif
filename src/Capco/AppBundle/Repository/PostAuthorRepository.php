@@ -16,6 +16,7 @@ class PostAuthorRepository extends EntityRepository
             ->andWhere('pa.author = :author OR pa.organization = :author')
             ->setParameters(['author' => $author, 'post' => $post])
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 }

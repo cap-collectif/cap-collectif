@@ -19,9 +19,7 @@ class WidgetDebatePage extends Page
                 "window.jQuery && $('#debate-step-page-app-widget').length > 0"
             )
         ) {
-            throw new \RuntimeException(
-                'WidgetDebatePage did not fully load, check selector in "verifyPage".'
-            );
+            throw new \RuntimeException('WidgetDebatePage did not fully load, check selector in "verifyPage".');
         }
     }
 }

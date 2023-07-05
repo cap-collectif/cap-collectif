@@ -14,7 +14,8 @@ class GroupRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('g')
             ->andWhere('g.title = :title')
-            ->setParameter('title', $title);
+            ->setParameter('title', $title)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -25,7 +26,8 @@ class GroupRepository extends EntityRepository
         $qb->leftJoin('g.userGroups', 'ug')
             ->andWhere('ug.user = :user')
             ->addOrderBy('g.createdAt', 'ASC')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -38,11 +40,13 @@ class GroupRepository extends EntityRepository
         $qb = $this->createQueryBuilder('g');
         $qb->leftJoin('g.projectsVisibleByTheGroup', 'p')
             ->andWhere('p.id = :project')
-            ->setParameter('project', $project->getId());
+            ->setParameter('project', $project->getId())
+        ;
         $query = $qb
             ->getQuery()
             ->setFirstResult($offset)
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($query);
     }
@@ -53,7 +57,8 @@ class GroupRepository extends EntityRepository
         $qb->select('COUNT(g.id)')
             ->leftJoin('g.projectsVisibleByTheGroup', 'p')
             ->andWhere('p.id = :project')
-            ->setParameter('project', $project->getId());
+            ->setParameter('project', $project->getId())
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -63,7 +68,8 @@ class GroupRepository extends EntityRepository
         return (int) $this->createQueryBuilder('g')
             ->select('count(g.id)')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByTerm(?string $term): array
@@ -76,6 +82,7 @@ class GroupRepository extends EntityRepository
             ->where('g.title LIKE :term')
             ->setParameters(['term' => "%{$term}%"])
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

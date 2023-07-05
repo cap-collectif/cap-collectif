@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
@@ -13,7 +14,6 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -145,8 +145,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         foreach ($events as $event) {
             foreach ($highlightedContents as $content) {
                 if (
-                    $content instanceof HighlightedEvent &&
-                    $content->getEvent()->getId() === $event->getId()
+                    $content instanceof HighlightedEvent
+                    && $content->getEvent()->getId() === $event->getId()
                 ) {
                     $this->em->remove($content);
                 }
@@ -225,12 +225,12 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
     {
         if (
-            ($proposal instanceof Proposal ||
-                $proposal instanceof Opinion ||
-                $proposal instanceof Source ||
-                $proposal instanceof Argument) &&
-            $proposal->getStep() &&
-            $proposal->getStep()->canContribute($user)
+            ($proposal instanceof Proposal
+                || $proposal instanceof Opinion
+                || $proposal instanceof Source
+                || $proposal instanceof Argument)
+            && $proposal->getStep()
+            && $proposal->getStep()->canContribute($user)
         ) {
             foreach (
                 $this->proposalEvaluationRepository->findBy(['proposal' => $proposal->getId()])
@@ -251,11 +251,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     private function shallContributionBeDeleted(User $user, $contribution): bool
     {
         if (
-            $contribution instanceof AbstractVote &&
-            method_exists($contribution->getRelated(), 'getStep') &&
-            $contribution->getRelated() &&
-            $contribution->getRelated()->getStep() &&
-            $contribution
+            $contribution instanceof AbstractVote
+            && method_exists($contribution->getRelated(), 'getStep')
+            && $contribution->getRelated()
+            && $contribution->getRelated()->getStep()
+            && $contribution
                 ->getRelated()
                 ->getStep()
                 ->canContribute($user)
@@ -267,12 +267,12 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 return true;
             }
         } elseif (
-            ($contribution instanceof Proposal ||
-                $contribution instanceof Opinion ||
-                $contribution instanceof Source ||
-                $contribution instanceof Argument) &&
-            $contribution->getStep() &&
-            $contribution->getStep()->canContribute($user)
+            ($contribution instanceof Proposal
+                || $contribution instanceof Opinion
+                || $contribution instanceof Source
+                || $contribution instanceof Argument)
+            && $contribution->getStep()
+            && $contribution->getStep()->canContribute($user)
         ) {
             return true;
         }
@@ -282,8 +282,8 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function shallContributionBeHidden($contribution): bool
     {
-        return $contribution instanceof Comment &&
-            $this->commentRepository->findOneBy(['parent' => $contribution->getId()]);
+        return $contribution instanceof Comment
+            && $this->commentRepository->findOneBy(['parent' => $contribution->getId()]);
     }
 
     private function enableListeners(): void

@@ -36,8 +36,7 @@ class AbstractSonataCrudController extends \Sonata\AdminBundle\Controller\CRUDCo
 
     protected function addRenderExtraParams(array $parameters = []): array
     {
-        $parameters['breadcrumbs_builder'] =
-            $parameters['breadcrumbs_builder'] ?? $this->breadcrumbsBuilder;
+        $parameters['breadcrumbs_builder'] ??= $this->breadcrumbsBuilder;
 
         return parent::addRenderExtraParams($parameters);
     }

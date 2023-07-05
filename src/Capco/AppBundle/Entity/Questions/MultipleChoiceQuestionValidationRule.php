@@ -36,7 +36,7 @@ final class MultipleChoiceQuestionValidationRule
     {
     }
 
-    public static function create(string $type = null, int $number = null): self
+    public static function create(?string $type = null, ?int $number = null): self
     {
         $rule = new self();
         $rule->type = $type;

@@ -10,8 +10,8 @@ class LessThanIfMetaDescriptionValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if (
-            $object->isSocialNetworkDescription() &&
-            \strlen($object->getValue()) > $constraint->max
+            $object->isSocialNetworkDescription()
+            && \strlen($object->getValue()) > $constraint->max
         ) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }

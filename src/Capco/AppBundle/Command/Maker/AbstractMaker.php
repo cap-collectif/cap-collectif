@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Command\Maker;
 
-use ReflectionClass;
-use RuntimeException;
 use Capco\AppBundle\Command\Maker\Exception\NullableException;
 use Capco\AppBundle\Utils\Text;
+use ReflectionClass;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 abstract class AbstractMaker extends Command
 {
-    const TEMPLATE_PATH = __DIR__ . '/templates';
+    public const TEMPLATE_PATH = __DIR__ . '/templates';
     protected $parser;
     protected $entity;
     protected $finder;
@@ -157,7 +157,7 @@ abstract class AbstractMaker extends Command
                     $this->askChoiceQuestion(
                         $input,
                         $output,
-                        "'${entity}' was found in many entities. Please choose one below",
+                        "'{$entity}' was found in many entities. Please choose one below",
                         $found,
                         null,
                         $found
@@ -180,7 +180,7 @@ abstract class AbstractMaker extends Command
         $autocompleteValues = null,
         $nullable = false
     ): ?string {
-        $question = new Question($questionLabel . PHP_EOL, $default);
+        $question = new Question($questionLabel . \PHP_EOL, $default);
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
         }
@@ -204,7 +204,7 @@ abstract class AbstractMaker extends Command
         $default = null,
         $autocompleteValues = null
     ): string {
-        $question = new ChoiceQuestion($questionLabel . PHP_EOL, $choices, $default);
+        $question = new ChoiceQuestion($questionLabel . \PHP_EOL, $choices, $default);
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
         }
@@ -222,7 +222,7 @@ abstract class AbstractMaker extends Command
         bool $nullable = true
     ): ?array {
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
-        $question = new Question($questionLabel . PHP_EOL);
+        $question = new Question($questionLabel . \PHP_EOL);
         $question->setNormalizer(function ($value) {
             return trim($value);
         });

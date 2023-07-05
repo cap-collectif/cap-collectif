@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\MenuItem;
+use Capco\AppBundle\Repository\MenuItemRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\Url;
-use Capco\AppBundle\Repository\MenuItemRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class MenuItemResolver
 {
@@ -132,7 +132,7 @@ class MenuItemResolver
             return $url ?? '';
         }
 
-        $routeMatch = $this->router->match("/${url}");
+        $routeMatch = $this->router->match("/{$url}");
         $routeParams = $this->getUrlParams($routeMatch);
 
         if ('capco_app_cms' === $routeMatch['_route']) {
@@ -157,7 +157,7 @@ class MenuItemResolver
             function ($value) {
                 return '_' !== $value[0];
             },
-            ARRAY_FILTER_USE_KEY
+            \ARRAY_FILTER_USE_KEY
         );
     }
 

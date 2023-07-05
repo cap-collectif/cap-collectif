@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -10,7 +11,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 class QuestionnaireAdmin extends CapcoAdmin
 {
@@ -68,7 +68,8 @@ class QuestionnaireAdmin extends CapcoAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -95,7 +96,8 @@ class QuestionnaireAdmin extends CapcoAdmin
     {
         $filter
             ->add('title', null, ['label' => 'global.title'])
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+        ;
     }
 
     // Fields to be shown on lists
@@ -107,7 +109,8 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -116,7 +119,8 @@ class QuestionnaireAdmin extends CapcoAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->add('enabled', null, ['label' => 'admin.fields.questionnaire.enabled'])
             ->add('createdAt', null, ['label' => 'global.maj'])
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

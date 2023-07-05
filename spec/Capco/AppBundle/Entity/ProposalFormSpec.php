@@ -85,17 +85,21 @@ class ProposalFormSpec extends ObjectBehavior
         $multipleChoiceQuestionMultiResponses = $prophet->prophesize(MultipleChoiceQuestion::class);
         $multipleChoiceQuestionMultiResponses
             ->getTitle()
-            ->willReturn('Question multiple à choix multiple');
+            ->willReturn('Question multiple à choix multiple')
+        ;
         $multipleChoiceQuestionMultiResponses
             ->getType()
-            ->willReturn(AbstractQuestion::QUESTION_TYPE_SELECT);
+            ->willReturn(AbstractQuestion::QUESTION_TYPE_SELECT)
+        ;
 
         $multipleChoiceQuestionSimpleResponse
             ->getTitle()
-            ->willReturn('Question multiple à choix unique');
+            ->willReturn('Question multiple à choix unique')
+        ;
         $multipleChoiceQuestionSimpleResponse
             ->getType()
-            ->willReturn(AbstractQuestion::QUESTION_TYPE_RADIO);
+            ->willReturn(AbstractQuestion::QUESTION_TYPE_RADIO)
+        ;
 
         $firstChoice->getTitle()->willReturn('choice 1');
         $secondChoice->getTitle()->willReturn('choice 2');
@@ -113,7 +117,8 @@ class ProposalFormSpec extends ObjectBehavior
         $abstractQuestion3->getQuestion()->willReturn($multipleChoiceQuestionMultiResponses);
         $abstractQuestion4
             ->getQuestion()
-            ->willReturn($multipleChoiceQuestionSimpleResponse->getWrappedObject());
+            ->willReturn($multipleChoiceQuestionSimpleResponse->getWrappedObject())
+        ;
         $abstractQuestion5->getQuestion()->willReturn($editorTypeQuestion->getWrappedObject());
         $abstractQuestion6->getQuestion()->willReturn($numberQuestion->getWrappedObject());
         $abstractQuestion7->getQuestion()->willReturn($buttonQuestion->getWrappedObject());

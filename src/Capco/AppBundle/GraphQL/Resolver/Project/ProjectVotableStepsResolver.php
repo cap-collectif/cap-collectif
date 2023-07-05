@@ -27,7 +27,7 @@ class ProjectVotableStepsResolver implements ResolverInterface
         if (\count($collectSteps) > 0) {
             $step = $collectSteps[0];
             if ($step->isVotable()) {
-                array_push($collection, $step);
+                $collection[] = $step;
             }
         }
 

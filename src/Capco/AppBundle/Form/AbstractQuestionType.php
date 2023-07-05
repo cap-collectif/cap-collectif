@@ -51,8 +51,8 @@ abstract class AbstractQuestionType extends AbstractType
             'by_reference' => false,
             'entry_type' => LogicJumpType::class,
             'delete_empty' => static function (?LogicJump $jump = null) {
-                return null === $jump ||
-                    (null === $jump->getOrigin() && null === $jump->getDestination());
+                return null === $jump
+                    || (null === $jump->getOrigin() && null === $jump->getDestination());
             },
         ]);
         $builder->add('private', CheckboxType::class);

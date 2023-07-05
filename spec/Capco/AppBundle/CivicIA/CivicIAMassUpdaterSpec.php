@@ -88,11 +88,13 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
         $globalIdResolver
             ->resolve('response1', $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($response1);
+            ->willReturn($response1)
+        ;
         $globalIdResolver
             ->resolve('response2', $viewer)
             ->shouldBeCalledOnce()
-            ->willReturn($response2);
+            ->willReturn($response2)
+        ;
         $entityManager->flush()->shouldBeCalledOnce();
         $indexer->index(Argument::any(), Argument::any())->shouldBeCalled();
         $indexer->finishBulk()->shouldBeCalled();
@@ -128,7 +130,8 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
         $response1->setIaSentiment($jsonData[0]['sentiment'])->shouldBeCalledOnce();
         $response1
             ->setIaCategoryDetails(json_encode($jsonData[0]['categories_details']))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
         $response1->setIaSentimentDetails(Argument::any())->shouldNotBeCalled();
 
         $response2->getId()->shouldBeCalled()->willReturn('response2');
@@ -138,7 +141,8 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
         $response2->setIaCategoryDetails(Argument::any())->shouldNotBeCalled();
         $response2
             ->setIaSentimentDetails(json_encode($jsonData[1]['sentiment_score']))
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledOnce()
+        ;
 
         $this->__invoke(json_encode($jsonData), $viewer);
     }

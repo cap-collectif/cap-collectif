@@ -25,6 +25,7 @@ class DeleteOfficialResponseMutation implements MutationInterface
     public function __invoke(Argument $input, User $user): array
     {
         $id = $input->offsetGet('id');
+
         try {
             $officialResponse = $this->getOfficialResponse($id, $user);
             $this->em->remove($officialResponse);

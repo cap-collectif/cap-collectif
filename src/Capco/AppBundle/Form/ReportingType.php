@@ -22,7 +22,8 @@ class ReportingType extends AbstractType
                 'required' => true,
                 'purify_html' => true,
                 'purify_html_profile' => 'admin',
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

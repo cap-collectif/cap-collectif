@@ -2,19 +2,19 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
-use GraphQL\Type\Definition\Type;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class StepTypeResolver implements ResolverInterface
 {

@@ -22,6 +22,9 @@ class UserIsGrantedResolver
      *  Check if user is viewer or admin. Protect data against other user or .anon
      *  Prevent other user to see other data
      *  For example : when it's called on user field, only owner and admin can access to the field
+     *
+     * @param mixed      $user
+     * @param null|mixed $viewer
      */
     public function isGranted(
         $user,
@@ -30,9 +33,9 @@ class UserIsGrantedResolver
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
     ): bool {
         if (
-            $context &&
-            $context->offsetExists('disable_acl') &&
-            true === $context->offsetGet('disable_acl')
+            $context
+            && $context->offsetExists('disable_acl')
+            && true === $context->offsetGet('disable_acl')
         ) {
             return true;
         }

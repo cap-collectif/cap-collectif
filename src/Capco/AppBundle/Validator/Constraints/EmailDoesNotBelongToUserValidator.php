@@ -23,7 +23,8 @@ class EmailDoesNotBelongToUserValidator extends ConstraintValidator
                 $this->context
                     ->buildViolation($constraint->message)
                     ->atPath('email')
-                    ->addViolation();
+                    ->addViolation()
+                ;
             }
         }
     }

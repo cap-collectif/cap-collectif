@@ -18,10 +18,10 @@ class ProposalVoteAuthorResolver implements ResolverInterface
 
     private function canSeeAnonymous(AbstractVote $vote, $viewer, \ArrayObject $context): bool
     {
-        return ($viewer instanceof User &&
-            $vote->getAuthor() &&
-            $viewer->getId() === $vote->getAuthor()->getId()) ||
-            !$vote->isPrivate() ||
-            $this->isACLDisabled($context);
+        return ($viewer instanceof User
+            && $vote->getAuthor()
+            && $viewer->getId() === $vote->getAuthor()->getId())
+            || !$vote->isPrivate()
+            || $this->isACLDisabled($context);
     }
 }

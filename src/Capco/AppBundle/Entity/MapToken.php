@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Enum\MapProviderEnum;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MapTokenRepository")
@@ -13,8 +13,8 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  */
 class MapToken
 {
-    use UuidTrait;
     use TimestampableTrait;
+    use UuidTrait;
     public const DEFAULT_STYLE_OWNER = 'mapbox';
     public const DEFAULT_STYLE_ID = 'streets-v10';
 
@@ -101,13 +101,7 @@ class MapToken
     public function setProvider(string $provider): self
     {
         if (!MapProviderEnum::isProviderValid($provider)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid provider '%s'. Available providers : %s",
-                    $provider,
-                    implode(', ', MapProviderEnum::getAvailableProviders())
-                )
-            );
+            throw new \InvalidArgumentException(sprintf("Invalid provider '%s'. Available providers : %s", $provider, implode(', ', MapProviderEnum::getAvailableProviders())));
         }
 
         $this->provider = $provider;

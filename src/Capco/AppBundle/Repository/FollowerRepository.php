@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FollowerRepository extends EntityRepository
@@ -21,7 +21,8 @@ class FollowerRepository extends EntityRepository
             ->setParameter('ids', $ids)
             ->getQuery()
             ->useQueryCache(true)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countFollowersOfProposal(Proposal $proposal): int
@@ -31,7 +32,8 @@ class FollowerRepository extends EntityRepository
             ->join('f.proposal', 'p')
             ->join('f.user', 'u')
             ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $proposal->getId());
+            ->setParameter('proposalId', $proposal->getId())
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -43,7 +45,8 @@ class FollowerRepository extends EntityRepository
             ->join('f.projectDistrict', 'p')
             ->join('f.user', 'u')
             ->andWhere('p.id = :districtId')
-            ->setParameter('districtId', $projectDistrict->getId());
+            ->setParameter('districtId', $projectDistrict->getId())
+        ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
@@ -55,7 +58,8 @@ class FollowerRepository extends EntityRepository
             ->join('f.opinion', 'o')
             ->join('f.user', 'u')
             ->andWhere('o.id = :opinionId')
-            ->setParameter('opinionId', $opinion->getId());
+            ->setParameter('opinionId', $opinion->getId())
+        ;
 
         return $query->getQuery()->getSingleScalarResult();
     }
@@ -66,7 +70,8 @@ class FollowerRepository extends EntityRepository
         $qb->select($qb->expr()->count('f.id'))
             ->leftJoin('f.opinionVersion', 'ov')
             ->where($qb->expr()->eq('ov.id', ':versionId'))
-            ->setParameter(':versionId', $version->getId());
+            ->setParameter(':versionId', $version->getId())
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -79,7 +84,8 @@ class FollowerRepository extends EntityRepository
     ): Paginator {
         $qb = $this->createQueryBuilder('f')
             ->join('f.proposal', 'p')
-            ->join('f.user', 'u');
+            ->join('f.user', 'u')
+        ;
 
         if (isset($criteria['proposal'])) {
             $qb->andWhere('p.id = :proposalId')->setParameter(
@@ -97,10 +103,12 @@ class FollowerRepository extends EntityRepository
                 $qb->addOrderBy('u.username', $direction);
 
                 break;
+
             case 'RANDOM':
                 $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
 
                 break;
+
             default:
                 $qb->addOrderBy('u.username', $direction);
 
@@ -110,7 +118,8 @@ class FollowerRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true);
+            ->useQueryCache(true)
+        ;
 
         return new Paginator($query);
     }
@@ -120,7 +129,8 @@ class FollowerRepository extends EntityRepository
         $qb = $this->createQueryBuilder('f')
             ->leftJoin('f.proposal', 'p')
             ->andWhere('p.deletedAt IS NULL')
-            ->andWhere('f.proposal IS NOT NULL');
+            ->andWhere('f.proposal IS NOT NULL')
+        ;
 
         return $qb->getQuery()->getResult();
     }
@@ -133,7 +143,8 @@ class FollowerRepository extends EntityRepository
         $qd = $this->createQueryBuilder('f')
             ->leftJoin('f.opinion', 'o')
             ->andWhere('f.opinion IS NOT NULL')
-            ->andWhere('o.published = 1');
+            ->andWhere('o.published = 1')
+        ;
 
         return $qd->getQuery()->getResult();
     }

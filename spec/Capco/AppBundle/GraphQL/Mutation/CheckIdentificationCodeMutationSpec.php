@@ -5,12 +5,12 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\GraphQL\Mutation\CheckIdentificationCodeMutation;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
+use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -49,7 +49,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
                 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS_QUI_FAIT_AU_MOINS_32_CHARS',
                 Argument::type(CheckIdentificationCode::class)
             )
-            ->willReturn($error);
+            ->willReturn($error)
+        ;
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -68,7 +69,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $viewer
             ->getUserIdentificationCodeValue()
-            ->willReturn('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS');
+            ->willReturn('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS')
+        ;
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -111,7 +113,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
                 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
                 Argument::type(CheckIdentificationCode::class)
             )
-            ->willReturn($violationList);
+            ->willReturn($violationList)
+        ;
         $this->firstCallOfCache($rateLimiter, $viewer);
 
         $violationList->count()->willReturn(1);
@@ -136,7 +139,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -157,7 +161,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -180,7 +185,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
                 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
                 Argument::type(CheckIdentificationCode::class)
             )
-            ->willReturn($violationList);
+            ->willReturn($violationList)
+        ;
     }
 
     private function firstCallOfCache(RateLimiter $rateLimiter, User $viewer)
@@ -188,6 +194,7 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
     }
 }

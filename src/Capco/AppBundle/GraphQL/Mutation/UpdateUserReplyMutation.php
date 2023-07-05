@@ -2,22 +2,22 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Publishable\DoctrineListener;
-use Swarrot\Broker\Message;
 use Capco\AppBundle\Entity\Reply;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Form\ReplyType;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Swarrot\SwarrotBundle\Broker\Publisher;
-use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Repository\ReplyRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
+use Capco\AppBundle\Publishable\DoctrineListener;
+use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateUserReplyMutation implements MutationInterface
 {
@@ -96,8 +96,8 @@ class UpdateUserReplyMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
         if (
-            $wasDraft &&
-            $reply
+            $wasDraft
+            && $reply
                 ->getQuestionnaire()
                 ->getStep()
                 ->isOpen()
@@ -119,8 +119,8 @@ class UpdateUserReplyMutation implements MutationInterface
 
     private static function shouldNotify(Reply $reply): bool
     {
-        return !$reply->isDraft() &&
-            $reply->getQuestionnaire() &&
-            $reply->getQuestionnaire()->isNotifyResponseUpdate();
+        return !$reply->isDraft()
+            && $reply->getQuestionnaire()
+            && $reply->getQuestionnaire()->isNotifyResponseUpdate();
     }
 }

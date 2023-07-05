@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Step;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Step\CollectStepProposalResolver;
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Overblog\GraphQLBundle\Definition\Argument;
+use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class CollectStepProposalResolverSpec extends ObjectBehavior

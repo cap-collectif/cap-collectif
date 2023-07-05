@@ -21,8 +21,8 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 class ActionToken extends AbstractUserToken
 {
-    const UNSUBSCRIBE = 'unsubscribe';
-    const AVAILABLE_ACTIONS = [self::UNSUBSCRIBE];
+    public const UNSUBSCRIBE = 'unsubscribe';
+    public const AVAILABLE_ACTIONS = [self::UNSUBSCRIBE];
 
     /**
      * @ORM\Column(name="action", type="string", nullable=false)
@@ -50,8 +50,8 @@ class ActionToken extends AbstractUserToken
 
     private static function checkAction(string $action): void
     {
-        if (!in_array($action, self::AVAILABLE_ACTIONS)) {
-            throw new \Exception(__CLASS__ . " : $action is not a valid action");
+        if (!\in_array($action, self::AVAILABLE_ACTIONS)) {
+            throw new \Exception(__CLASS__ . " : {$action} is not a valid action");
         }
     }
 }

@@ -15,9 +15,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInterface
 {
-    const STRATEGY_PREFIX = 'prefix';
-    const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
-    const STRATEGY_CUSTOM = 'custom';
+    public const STRATEGY_PREFIX = 'prefix';
+    public const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
+    public const STRATEGY_CUSTOM = 'custom';
 
     private $strategy;
     private $translator;
@@ -62,9 +62,9 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
 
             // prefix with locale if requested
             if (
-                self::STRATEGY_PREFIX === $this->strategy ||
-                (self::STRATEGY_PREFIX_EXCEPT_DEFAULT === $this->strategy &&
-                    $this->defaultLocale !== $locale)
+                self::STRATEGY_PREFIX === $this->strategy
+                || (self::STRATEGY_PREFIX_EXCEPT_DEFAULT === $this->strategy
+                    && $this->defaultLocale !== $locale)
             ) {
                 $i18nPattern = '/' . self::getLocalePrefix($locale) . $i18nPattern;
                 if (null !== $route->getOption('i18n_prefix')) {

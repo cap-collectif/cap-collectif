@@ -18,7 +18,8 @@ class ValueResponseType extends AbstractType
     {
         $builder
             ->add('value', TextType::class)
-            ->add('question', EntityType::class, ['class' => AbstractQuestion::class]);
+            ->add('question', EntityType::class, ['class' => AbstractQuestion::class])
+        ;
 
         $builder->add('position', HiddenType::class, [
             'mapped' => false,

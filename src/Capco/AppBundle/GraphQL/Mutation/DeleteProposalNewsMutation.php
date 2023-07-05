@@ -50,7 +50,7 @@ class DeleteProposalNewsMutation implements MutationInterface
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');
             $proposal = $proposalPost->getProposals()->first();
-            if(!$proposal) {
+            if (!$proposal) {
                 throw new UserError(UpdateProposalNewsMutation::PROPOSAL_NOT_FOUND);
             }
             $proposalName = $proposal->getTitle();
@@ -58,7 +58,8 @@ class DeleteProposalNewsMutation implements MutationInterface
             $proposalPostAuthor = $proposalPost
                 ->getAuthorsObject()
                 ->first()
-                ->getDisplayname();
+                ->getDisplayname()
+            ;
             $proposalUrl = $this->proposalUrlResolver->__invoke(
                 $proposalPost->getProposals()->first(),
                 $this->requestStack
@@ -69,7 +70,8 @@ class DeleteProposalNewsMutation implements MutationInterface
                 ->getProposals()
                 ->first()
                 ->getProposalForm()
-                ->getNotificationsConfiguration();
+                ->getNotificationsConfiguration()
+            ;
             $this->em->remove($proposalPost);
             $this->em->flush();
 

@@ -2,21 +2,21 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Repository\PhoneTokenRepository;
-use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Repository\PhoneTokenRepository;
+use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class RemoveProposalSmsVoteMutation implements MutationInterface
 {

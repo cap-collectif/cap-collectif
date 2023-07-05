@@ -20,12 +20,14 @@ class FooterSocialNetworkRepository extends EntityRepository
             ->select('s.title, s.link, s.style')
             ->andWhere('s.isEnabled = :enabled')
             ->addOrderBy('s.position', 'ASC')
-            ->setParameter('enabled', true);
+            ->setParameter('enabled', true)
+        ;
 
         return $qb
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getEnabledCacheKey())
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 }

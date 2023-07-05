@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\ProposalAnalysis;
-use Capco\AppBundle\Repository\ProposalAnalysisCommentRepository ;
+use Capco\AppBundle\Repository\ProposalAnalysisCommentRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
@@ -20,7 +20,7 @@ class ProposalAnalysisCommentsResolver implements ResolverInterface
 
     public function __invoke(
         ProposalAnalysis $proposalAnalysis,
-        Argument $args = null
+        ?Argument $args = null
     ): ConnectionInterface {
         if (!$args) {
             $args = new Argument(['first' => 0]);

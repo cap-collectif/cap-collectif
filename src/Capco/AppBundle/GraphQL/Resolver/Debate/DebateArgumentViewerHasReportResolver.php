@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\DebateArgument;
-use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class DebateArgumentViewerHasReportResolver implements ResolverInterface

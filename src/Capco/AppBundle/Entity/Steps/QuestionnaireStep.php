@@ -19,8 +19,8 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     use TimelessStepTrait;
 
     public const TYPE = 'questionnaire';
-    const VERIFICATION_NONE = 'none';
-    const VERIFICATION_SMS = 'sms';
+    public const VERIFICATION_NONE = 'none';
+    public const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
         'step.verification.none' => self::VERIFICATION_NONE,
         'step.verification.sms' => self::VERIFICATION_SMS,

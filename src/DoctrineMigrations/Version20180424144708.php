@@ -18,8 +18,8 @@ use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\VoteType;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -63,7 +63,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
                 ->setTimeless(true)
-                ->setVoteType(VoteType::SIMPLE);
+                ->setVoteType(VoteType::SIMPLE)
+            ;
             $project = (new Project())
                 ->setTitle('Boîte à idées')
                 ->setIsEnabled(true)
@@ -74,7 +75,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 )
                 ->setCreatedAt(new \DateTime('now'))
                 ->setPublishedAt(new \DateTime('now'))
-                ->setUpdatedAt(new \DateTime('now'));
+                ->setUpdatedAt(new \DateTime('now'))
+            ;
             $project->addStep(
                 (new ProjectAbstractStep())
                     ->setProject($project)
@@ -88,15 +90,18 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             $this->write('-> create proposalForm');
             $question = (new SimpleQuestion())
                 ->setTitle('Objectif')
-                ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT);
+                ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT)
+            ;
             $questionnaireQuestion = (new QuestionnaireAbstractQuestion())
                 ->setPosition(0)
-                ->setQuestion($question);
+                ->setQuestion($question)
+            ;
             $proposalForm = (new ProposalForm())
                 ->setTitle('Boîte à idées')
                 ->setDescription('Partagez vos idées !')
                 ->addQuestion($questionnaireQuestion)
-                ->setStep($project->getSteps()[0]->getStep());
+                ->setStep($project->getSteps()[0]->getStep())
+            ;
             $em->persist($proposalForm);
             // -----------------********************************-------------------
             // -----------------* import ideas into proposals  *-------------------
@@ -131,7 +136,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 ->setTheme($em->getRepository(Theme::class)->findOneBy(['id' => $idea['theme_id']]))
                 ->setCreatedAt(new \DateTime($idea['created_at']))
                 ->addResponse($response)
-                ->setUpdatedAt(new \DateTime($idea['updated_at']));
+                ->setUpdatedAt(new \DateTime($idea['updated_at']))
+            ;
             if ($idea['media_id']) {
                 $proposal->setMedia(
                     $em->getRepository(Media::class)->findOneBy(['id' => $idea['media_id']])
@@ -155,7 +161,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     )
                     ->setUsername($ideaVote['username'])
                     ->setEmail($ideaVote['email'])
-                    ->setIpAddress($ideaVote['ip_address']);
+                    ->setIpAddress($ideaVote['ip_address'])
+                ;
 
                 $proposal->addCollectVote($vote);
             }
@@ -182,7 +189,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setPinned($ideaComment['pinned'])
                     ->setCreatedAt(new \DateTime($ideaComment['created_at']))
                     ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
-                    ->setBody($ideaComment['body']);
+                    ->setBody($ideaComment['body'])
+                ;
                 $ideaCommentAnswers = $this->connection->fetchAllAssociative(
                     'SELECT author_name,author_email,author_id,author_ip,is_enabled,is_trashed,pinned,validated,created_at,updated_at,body  FROM comment WHERE parent_id = :id',
                     ['id' => $ideaComment['id']]
@@ -205,7 +213,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                             ->setCreatedAt(new \DateTime($ideaComment['created_at']))
                             ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
                             ->setParent($proposalComment)
-                            ->setBody($ideaComment['body']);
+                            ->setBody($ideaComment['body'])
+                        ;
                         $proposalComment->addAnswer($answer);
                     }
                 }
@@ -224,7 +233,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                             $em
                                 ->getRepository(User::class)
                                 ->findOneBy(['id' => $ideaCommentVote['voter_id']])
-                        );
+                        )
+                    ;
                     $proposalComment->addVote($commentVote);
                 }
                 $proposal->addComment($proposalComment);
@@ -249,7 +259,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 $users[$email]['object'] = (new User())
                     ->setEmail($email)
                     ->setUsername($username)
-                    ->setPassword('');
+                    ->setPassword('')
+                ;
                 $users[$email]['vote'][] = $anonymous['id'];
                 $em->persist($users[$email]['object']);
             } elseif (isset($users[$email])) {

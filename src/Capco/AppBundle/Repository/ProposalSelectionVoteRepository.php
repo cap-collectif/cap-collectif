@@ -4,13 +4,13 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
 
 class ProposalSelectionVoteRepository extends EntityRepository
 {
@@ -35,7 +35,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('author', $author)
             ->getQuery()
             ->useQueryCache(true)
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByProposalAndStepAndUser(
@@ -51,7 +52,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 
     public function countByAuthorAndStep(User $author, SelectionStep $step): int
@@ -65,7 +67,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('author', $author)
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getByAuthorAndStep(
@@ -83,7 +86,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.id IS NOT NULL')
             ->andWhere('proposal.deletedAt IS NULL')
             ->setParameter('step', $step)
-            ->setParameter('author', $author);
+            ->setParameter('author', $author)
+        ;
 
         if ($field && $direction) {
             if ('PUBLISHED_AT' === $field) {
@@ -116,7 +120,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('user', $user)
             ->setParameter('step', $step)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getUserVotesGroupedByStepIds(
@@ -134,7 +139,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
                     ->leftJoin('pv.proposal', 'proposal')
                     ->andWhere('proposal.deletedAt IS NULL')
                     ->setParameter('user', $user)
-                    ->setParameter('id', $id);
+                    ->setParameter('id', $id)
+                ;
                 $results = $qb->getQuery()->getScalarResult();
                 $userVotes[$id] = array_map(function ($id) {
                     return $id;
@@ -160,7 +166,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('selectionStep', $step)
             ->setParameter('user', $user)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function getCountsByProposalGroupedByStepsId(Proposal $proposal): array
@@ -182,7 +189,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
     ): Paginator {
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
         if ('PUBLISHED_AT' === $field) {
             $query->addOrderBy('pv.publishedAt', $direction);
         }
@@ -205,7 +213,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv.id)')
             ->leftJoin('pv.proposal', 'p')
             ->andWhere('p.id = :proposal')
-            ->setParameter('proposal', $proposalId);
+            ->setParameter('proposal', $proposalId)
+        ;
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -227,7 +236,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('step', $step)
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -254,7 +264,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->leftJoin('pv.proposal', 'proposal')
             ->groupBy('pv.proposal')
             ->setParameter('ids', $ids)
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -273,7 +284,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
 
         if (!$includeUnpublished) {
             $qb->andWhere('pv.published = true');
@@ -295,7 +307,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->andWhere('ss.id = :stepId')
             ->setParameter('stepId', $stepId)
-            ->addOrderBy('pv.createdAt', 'DESC');
+            ->addOrderBy('pv.createdAt', 'DESC')
+        ;
         if ($limit) {
             $qb->setMaxResults($limit);
             $qb->setFirstResult($offset);
@@ -314,23 +327,27 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv.id)')
             ->leftJoin('pv.proposal', 'p')
             ->andWhere('pv.selectionStep = :step')
-            ->setParameter('step', $step);
+            ->setParameter('step', $step)
+        ;
         if ($themeId) {
             $qb->leftJoin('p.theme', 't')
                 ->andWhere('t.id = :themeId')
-                ->setParameter('themeId', $themeId);
+                ->setParameter('themeId', $themeId)
+            ;
         }
 
         if ($districtId) {
             $qb->leftJoin('p.district', 'd')
                 ->andWhere('d.id = :districtId')
-                ->setParameter('districtId', $districtId);
+                ->setParameter('districtId', $districtId)
+            ;
         }
 
         if ($categoryId) {
             $qb->leftJoin('p.category', 'category')
                 ->andWhere('category.id = :categoryId')
-                ->setParameter('categoryId', $categoryId);
+                ->setParameter('categoryId', $categoryId)
+            ;
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -342,7 +359,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv.id)')
             ->andWhere('pv.private = true')
             ->andWhere('pv.selectionStep = :selectionStep')
-            ->setParameter('selectionStep', $selectionStep);
+            ->setParameter('selectionStep', $selectionStep)
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -356,7 +374,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
+            ->andWhere('pv.published = 1')
+        ;
         if ($onlyAccounted) {
             $qb->andWhere('pv.isAccounted = 1');
         }
@@ -368,7 +387,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function countPointsOnPublishedSelectionVoteByStep(
@@ -381,7 +401,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
             ->andWhere('pv.position IS NOT NULL')
-            ->andWhere('pv.published = 1');
+            ->andWhere('pv.published = 1')
+        ;
         if ($onlyAccounted) {
             $qb->andWhere('pv.isAccounted = 1');
         }
@@ -392,7 +413,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
 
         $pointsOnStep = 0;
         foreach ($results as $result) {
@@ -420,7 +442,8 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->setParameter('step', $step)
             ->setParameter('ids', $ids)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
@@ -451,12 +474,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.proposal = :proposal')
             ->andWhere('pv.published = true')
             ->andWhere('pv.isAccounted = 1')
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
 
         $results = $qb
             ->getQuery()
             ->useQueryCache(true)
-            ->getResult();
+            ->getResult()
+        ;
 
         $data = [];
         $data['votesBySteps'] = [];

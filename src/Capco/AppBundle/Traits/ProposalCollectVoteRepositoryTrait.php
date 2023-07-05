@@ -1,10 +1,11 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 
-trait ProposalCollectVoteRepositoryTrait {
-
+trait ProposalCollectVoteRepositoryTrait
+{
     public function countPublishedCollectVoteByStep(
         CollectStep $step,
         bool $onlyAccounted
@@ -14,7 +15,8 @@ trait ProposalCollectVoteRepositoryTrait {
             ->andWhere('pv.collectStep = :step')
             ->innerJoin('pv.proposal', 'proposal')
             ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.published = 1');
+            ->andWhere('pv.published = 1')
+        ;
 
         if ($onlyAccounted) {
             $qb->andWhere('pv.isAccounted = 1');
@@ -27,8 +29,7 @@ trait ProposalCollectVoteRepositoryTrait {
             ->andWhere('proposal.published = 1')
             ->setParameter('step', $step)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
-
-
 }

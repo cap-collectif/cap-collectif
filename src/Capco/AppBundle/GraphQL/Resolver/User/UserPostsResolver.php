@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Search\PostSearch;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Psr\Log\LoggerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Psr\Log\LoggerInterface;
 
 class UserPostsResolver implements ResolverInterface
 {

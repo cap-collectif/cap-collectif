@@ -5,15 +5,15 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Interfaces\Owner;
-use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\EmailingCampaignAffiliation;
+use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method EmailingCampaign|null find($id, $lockMode = null, $lockVersion = null)
- * @method EmailingCampaign|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|EmailingCampaign find($id, $lockMode = null, $lockVersion = null)
+ * @method null|EmailingCampaign findOneBy(array $criteria, array $orderBy = null)
  * @method EmailingCampaign[]    findAll()
  * @method EmailingCampaign[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -41,15 +41,15 @@ class EmailingCampaignRepository extends EntityRepository
             $qb->where('ec.status != :status')->setParameter('status', 'ARCHIVED');
         }
         if ($search) {
-            $qb->andWhere('ec.name LIKE :name')->setParameter('name', "%${search}%");
+            $qb->andWhere('ec.name LIKE :name')->setParameter('name', "%{$search}%");
         }
         if ($orderByField && $orderByDirection) {
             $qb->orderBy('ec.' . self::ORDERS[$orderByField], $orderByDirection);
         }
         if (
-            $affiliations &&
-            \in_array(EmailingCampaignAffiliation::OWNER, $affiliations) &&
-            $user
+            $affiliations
+            && \in_array(EmailingCampaignAffiliation::OWNER, $affiliations)
+            && $user
         ) {
             $qb->andWhere('ec.owner = :user')->setParameter('user', $user);
         }
@@ -58,7 +58,8 @@ class EmailingCampaignRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findPlanned(\DateTimeInterface $sendAt): array
@@ -69,7 +70,8 @@ class EmailingCampaignRepository extends EntityRepository
             ->setParameter('status', EmailingCampaignStatus::PLANNED)
             ->setParameter('sendAt', $sendAt)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countEmailingCampaignUsingGroup(Group $group): int
@@ -79,7 +81,8 @@ class EmailingCampaignRepository extends EntityRepository
             ->andWhere('ec.emailingGroup = :group')
             ->setParameter('group', $group)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     public function findByOwner(
@@ -99,7 +102,7 @@ class EmailingCampaignRepository extends EntityRepository
             $qb->andWhere('ec.status != :status')->setParameter('status', 'ARCHIVED');
         }
         if ($search) {
-            $qb->andWhere('ec.name LIKE :name')->setParameter('name', "%${search}%");
+            $qb->andWhere('ec.name LIKE :name')->setParameter('name', "%{$search}%");
         }
         if ($orderByField && $orderByDirection) {
             $qb->orderBy('ec.' . self::ORDERS[$orderByField], $orderByDirection);
@@ -109,7 +112,8 @@ class EmailingCampaignRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countByOwner(Owner $owner, ?string $status = null): int
@@ -131,6 +135,7 @@ class EmailingCampaignRepository extends EntityRepository
 
         return $this->createQueryBuilder('ec')
             ->where("{$ownerField} = :owner")
-            ->setParameter('owner', $owner);
+            ->setParameter('owner', $owner)
+        ;
     }
 }

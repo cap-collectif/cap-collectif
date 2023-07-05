@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Form\ApiToggleType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ToggleFeatureMutation implements MutationInterface

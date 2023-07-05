@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Resolver\ProposalResolver;
 use Capco\AppBundle\Security\ProposalVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProposalController extends CRUDController
 {

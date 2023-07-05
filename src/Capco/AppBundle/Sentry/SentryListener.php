@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Sentry;
 
-use Sentry\State\Scope;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Psr\Log\LoggerInterface;
 use Sentry\State\HubInterface;
+use Sentry\State\Scope;
 use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\Console\Event\ConsoleCommandEvent;
+use Symfony\Component\Console\Event\ConsoleErrorEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Event\TerminateEvent;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Console\Event\ConsoleErrorEvent;
-use Symfony\Component\Console\Event\ConsoleCommandEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Security\Core\Security;
 
 class SentryListener implements EventSubscriberInterface
 {

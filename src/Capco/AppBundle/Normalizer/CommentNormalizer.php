@@ -8,16 +8,13 @@ use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class CommentNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
     private $router;
@@ -65,9 +62,9 @@ class CommentNormalizer implements
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return $data instanceof PostComment ||
-            $data instanceof EventComment ||
-            $data instanceof ProposalComment;
+        return $data instanceof PostComment
+            || $data instanceof EventComment
+            || $data instanceof ProposalComment;
     }
 
     private function canEdit(Comment $comment): bool

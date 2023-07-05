@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\Proposal;
-use GraphQL\Executor\Promise\Promise;
-use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Psr\Log\LoggerInterface;
 
 class ViewerFollowProposalResolver implements ResolverInterface
 {

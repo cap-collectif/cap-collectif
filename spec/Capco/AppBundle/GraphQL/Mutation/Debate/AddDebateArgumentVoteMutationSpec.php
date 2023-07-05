@@ -6,15 +6,15 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateArgumentVoteMutation;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use PhpSpec\ObjectBehavior;
 use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -57,14 +57,16 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         $input
             ->offsetGet('widgetOriginURI')
             ->shouldBeCalled()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->setVotes(new ArrayCollection());
         $debateArgument->isPublished()->willReturn(true);
 
         $authorizationChecker
             ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $debateArgument->addVote(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
         $em->persist(Argument::type(DebateArgumentVote::class))->shouldBeCalled();
@@ -112,7 +114,8 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
 
         $authorizationChecker
             ->isGranted(DebateArgumentVoter::PARTICIPATE, $debateArgument)
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
 
         $this->__invoke($input, $viewer)->shouldBe([
             'errorCode' => 'CLOSED_DEBATE',

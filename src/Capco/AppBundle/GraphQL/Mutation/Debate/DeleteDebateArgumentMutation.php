@@ -8,8 +8,7 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implements
-    MutationInterface
+class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
     public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
     public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';

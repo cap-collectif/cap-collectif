@@ -50,8 +50,8 @@ class ProjectViewerAssignedProposalsResolver implements ResolverInterface
                 )['id'];
             }
             if (
-                $args->offsetExists('decisionMaker') &&
-                null !== $args->offsetGet('decisionMaker')
+                $args->offsetExists('decisionMaker')
+                && null !== $args->offsetGet('decisionMaker')
             ) {
                 $filters['decisionMaker'] = GlobalIdResolver::getDecodedId(
                     $args->offsetGet('decisionMaker')

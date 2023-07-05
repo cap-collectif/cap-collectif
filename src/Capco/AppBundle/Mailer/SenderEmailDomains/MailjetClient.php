@@ -74,7 +74,7 @@ class MailjetClient
     {
         try {
             return self::senderEmailDomainFromData(
-                json_decode($this->get("dns/${domain}")->getBody())->Data[0]
+                json_decode($this->get("dns/{$domain}")->getBody())->Data[0]
             );
         } catch (\Exception $exception) {
             if (404 === $exception->getCode()) {
@@ -121,7 +121,8 @@ class MailjetClient
                     $data->OwnerShipTokenRecordName,
                     $data->OwnerShipToken
                 )
-            );
+            )
+        ;
     }
 
     private function getAuth(): array

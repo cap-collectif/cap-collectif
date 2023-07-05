@@ -24,9 +24,11 @@ class ProposalFusionType extends AbstractType
                     return $er
                         ->createQueryBuilder('p')
                         ->where('p.proposalForm = :form')
-                        ->setParameter('form', $options['proposalForm']);
+                        ->setParameter('form', $options['proposalForm'])
+                    ;
                 },
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

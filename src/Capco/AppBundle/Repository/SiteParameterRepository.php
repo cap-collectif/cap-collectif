@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
 /**
- * @method SiteParameter|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|SiteParameter findOneBy(array $criteria, array $orderBy = null)
  */
 class SiteParameterRepository extends EntityRepository
 {
@@ -36,7 +36,8 @@ class SiteParameterRepository extends EntityRepository
             ->getQuery()
             ->useQueryCache(true)
             ->enableResultCache(60, self::getValuesIfEnabledCacheKey($locale))
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function getValue(string $keyname, string $locale): ?string
@@ -46,14 +47,16 @@ class SiteParameterRepository extends EntityRepository
             ->from($this->getClassName(), 'p')
             ->andWhere('p.isEnabled = 1')
             ->andWhere('p.keyname = :keyname')
-            ->setParameter('keyname', $keyname);
+            ->setParameter('keyname', $keyname)
+        ;
 
         if (\in_array($keyname, SiteParameter::NOT_TRANSLATABLE)) {
             $qb->select('p.value');
         } else {
             $qb->select('t.value')
                 ->leftJoin('p.translations', 't', Join::WITH, 't.locale = :locale')
-                ->setParameter('locale', $locale);
+                ->setParameter('locale', $locale)
+            ;
         }
 
         return $qb

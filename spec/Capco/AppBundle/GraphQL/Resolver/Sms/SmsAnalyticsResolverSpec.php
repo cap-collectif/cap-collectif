@@ -32,19 +32,23 @@ class SmsAnalyticsResolverSpec extends ObjectBehavior
         $smsAnalyticsHelper
             ->getRemainingCreditsAmount()
             ->shouldBeCalledOnce()
-            ->willReturn($remainingCredits);
+            ->willReturn($remainingCredits)
+        ;
         $smsAnalyticsHelper
             ->getRemainingCreditsStatus()
             ->shouldBeCalledOnce()
-            ->willReturn($status);
+            ->willReturn($status)
+        ;
         $smsAnalyticsHelper
             ->getTotalCredits()
             ->shouldBeCalledOnce()
-            ->willReturn($totalCredits);
+            ->willReturn($totalCredits)
+        ;
         $smsAnalyticsHelper
             ->getConsumedCredits()
             ->shouldBeCalledOnce()
-            ->willReturn($consumedCredits);
+            ->willReturn($consumedCredits)
+        ;
 
         $this->__invoke($args)->shouldReturn([
             'remainingCredits' => [

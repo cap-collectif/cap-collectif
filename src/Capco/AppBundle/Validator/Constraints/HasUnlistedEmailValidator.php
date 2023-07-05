@@ -26,7 +26,8 @@ class HasUnlistedEmailValidator extends ConstraintValidator
             ->findBy([
                 'event' => $value->getEvent(),
                 'email' => $value->getEmail(),
-            ]);
+            ])
+        ;
 
         $present = false;
         foreach ($registrations as $registration) {
@@ -39,7 +40,8 @@ class HasUnlistedEmailValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('email')
-                ->addViolation();
+                ->addViolation()
+            ;
 
             return false;
         }

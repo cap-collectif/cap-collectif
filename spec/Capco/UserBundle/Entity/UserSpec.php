@@ -2,9 +2,9 @@
 
 namespace spec\Capco\UserBundle\Entity;
 
-use PhpSpec\ObjectBehavior;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Entity\Opinion;
+use Doctrine\Common\Collections\ArrayCollection;
+use PhpSpec\ObjectBehavior;
 
 class UserSpec extends ObjectBehavior
 {

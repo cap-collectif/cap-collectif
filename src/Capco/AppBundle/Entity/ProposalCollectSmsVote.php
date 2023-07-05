@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,6 +16,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProposalCollectSmsVote extends AbstractProposalVote
 {
     use PositionableTrait;
+
+    /**
+     * @ORM\Column(name="ip_address", type="string", nullable=true)
+     * @Assert\Ip(version="all")
+     */
+    protected ?string $ipAddress = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="collectSmsVotes", cascade={"persist"})
@@ -33,12 +39,6 @@ class ProposalCollectSmsVote extends AbstractProposalVote
      * @ORM\Column(name="phone", type="string")
      */
     private string $phone;
-
-    /**
-     * @ORM\Column(name="ip_address", type="string", nullable=true)
-     * @Assert\Ip(version="all")
-     */
-    protected ?string $ipAddress = null;
 
     /**
      * @ORM\Column(name="consent_sms_communication", type="boolean")
@@ -93,6 +93,7 @@ class ProposalCollectSmsVote extends AbstractProposalVote
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
+
         return $this;
     }
 
@@ -135,12 +136,12 @@ class ProposalCollectSmsVote extends AbstractProposalVote
         return $this->consentSmsCommunication;
     }
 
-    public function setConsentSmsCommunication(string $consentSmsCommunication): ProposalCollectSmsVote
+    public function setConsentSmsCommunication(string $consentSmsCommunication): self
     {
         $this->consentSmsCommunication = $consentSmsCommunication;
+
         return $this;
     }
-
 
     public function getVoteTypeName(): string
     {

@@ -32,9 +32,7 @@ class CreateAnalyticsTestIndexCommand extends Command
         $mapping = Yaml::parse(file_get_contents(__DIR__ . '/config/mapping.yaml'));
         $index = $this->indexManager->getClient()->getIndex('analytics_test');
         if ($index->exists()) {
-            throw new \RuntimeException(
-                sprintf('Index %s is already created, something is wrong.', $index->getName())
-            );
+            throw new \RuntimeException(sprintf('Index %s is already created, something is wrong.', $index->getName()));
         }
         $index->create($mapping);
         $output->writeln(['Index created. Indexing documents...']);

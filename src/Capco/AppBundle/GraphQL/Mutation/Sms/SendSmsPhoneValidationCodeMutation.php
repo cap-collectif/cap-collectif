@@ -49,7 +49,8 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
 
         $userPhoneVerificationSms = (new UserPhoneVerificationSms())
             ->setUser($viewer)
-            ->setPending();
+            ->setPending()
+        ;
         $this->em->persist($userPhoneVerificationSms);
         $this->em->flush();
 

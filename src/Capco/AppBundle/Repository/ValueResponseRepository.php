@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ValueResponseRepository extends EntityRepository
@@ -17,7 +17,8 @@ class ValueResponseRepository extends EntityRepository
             ->select('COUNT(r.id)')
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -36,7 +37,8 @@ class ValueResponseRepository extends EntityRepository
             ->select('COUNT(DISTINCT reply.author)')
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
 
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
@@ -57,7 +59,8 @@ class ValueResponseRepository extends EntityRepository
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -69,7 +72,8 @@ class ValueResponseRepository extends EntityRepository
             ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true);
+            ->useQueryCache(true)
+        ;
 
         return new Paginator($query);
     }
@@ -81,7 +85,8 @@ class ValueResponseRepository extends EntityRepository
         $qb = $this->getNoEmptyResultQueryBuilder()
             ->leftJoin('r.question', 'question')
             ->leftJoin('reply.author', 'author')
-            ->andWhere('question.id = :question');
+            ->andWhere('question.id = :question')
+        ;
         if (!$withNotConfirmedUser) {
             $qb->andWhere(
                 'author.newEmailConfirmationToken IS NULL AND author.confirmationToken IS NULL'
@@ -105,7 +110,8 @@ class ValueResponseRepository extends EntityRepository
             ->groupBy('r.value')
             ->orderBy('r.value', 'ASC')
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function countCategories(?AbstractQuestion $question = null, ?int $limit = null): array
@@ -116,7 +122,8 @@ class ValueResponseRepository extends EntityRepository
             ->andWhere('r.iaCategory IS NOT NULL')
             ->groupBy('r.iaCategory')
             ->orderBy('counter', 'DESC')
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+        ;
 
         if ($question) {
             $qb->andWhere('r.question = :question')->setParameter('question', $question);
@@ -140,6 +147,7 @@ class ValueResponseRepository extends EntityRepository
                 ->andWhere('r.value NOT LIKE :emptyValueTree)')
                 ->setParameter('emptyValueOne', '{"labels":[],"other":null}')
                 ->setParameter('emptyValueTwo', '{"labels":[null],"other":null}')
-                ->setParameter('emptyValueTree', 'null');
+                ->setParameter('emptyValueTree', 'null')
+            ;
     }
 }

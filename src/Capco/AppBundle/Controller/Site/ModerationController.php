@@ -2,20 +2,20 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Argument;
-use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
-use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class ModerationController extends Controller
@@ -51,8 +51,8 @@ class ModerationController extends Controller
         $visibleReasons = ['reporting.status.off_topic', 'moderation-guideline-violation'];
 
         if (
-            !\in_array($reason, $visibleReasons, true) &&
-            !\in_array($reason, $hiddenReasons, true)
+            !\in_array($reason, $visibleReasons, true)
+            && !\in_array($reason, $hiddenReasons, true)
         ) {
             $this->logger->warn('Unknown trash reason: ' . $reason);
 
@@ -63,7 +63,8 @@ class ModerationController extends Controller
 
         $contribution
             ->setTrashedStatus(Trashable::STATUS_VISIBLE)
-            ->setTrashedReason($trashedReason);
+            ->setTrashedReason($trashedReason)
+        ;
         $redirectUrl = $this->get(UrlResolver::class)->getObjectUrl($contribution, true);
 
         if (\in_array($reason, $hiddenReasons, true)) {

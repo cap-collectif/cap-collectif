@@ -3,19 +3,19 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\CommentVote;
-use Doctrine\Common\Util\ClassUtils;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
-use Doctrine\DBAL\Exception\DriverException;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Helper\RedisStorageHelper;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\CommentVoteRepository;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
+use Doctrine\DBAL\Exception\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddCommentVoteMutation implements MutationInterface

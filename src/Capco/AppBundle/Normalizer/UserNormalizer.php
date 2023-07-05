@@ -6,17 +6,14 @@ use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerAwareTrait;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 
-class UserNormalizer implements
-    NormalizerInterface,
-    SerializerAwareInterface,
-    CacheableSupportsMethodInterface
+class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
 
@@ -153,8 +150,8 @@ class UserNormalizer implements
                         'step' => ['id' => $stepResults['key']],
                     ];
                     if (
-                        'participations' === $aggregatePrefix &&
-                        !empty($stepResults[$aggregatePrefix . 'ByConsultation']['buckets'])
+                        'participations' === $aggregatePrefix
+                        && !empty($stepResults[$aggregatePrefix . 'ByConsultation']['buckets'])
                     ) {
                         foreach (
                             $stepResults[$aggregatePrefix . 'ByConsultation']['buckets']

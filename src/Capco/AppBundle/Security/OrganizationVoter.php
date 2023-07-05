@@ -39,6 +39,7 @@ class OrganizationVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
                 return self::canEdit($subject, $viewer);
+
             case self::KICK:
                 return self::canKick($subject, $viewer);
         }

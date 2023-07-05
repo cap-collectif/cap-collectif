@@ -8,8 +8,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class SettingsVoter extends Voter
 {
-    const VIEW = 'view';
-    const SETTINGS_PERFORMANCE = 'settings.performance';
+    public const VIEW = 'view';
+    public const SETTINGS_PERFORMANCE = 'settings.performance';
 
     protected function supports($attribute, $subject)
     {

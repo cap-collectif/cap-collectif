@@ -5,11 +5,11 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Security\PostVoter;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController

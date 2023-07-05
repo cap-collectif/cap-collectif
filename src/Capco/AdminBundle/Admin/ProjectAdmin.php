@@ -2,34 +2,34 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalCommentRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\MediaBundle\Provider\MediaProvider;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
-use Sonata\Form\Type\CollectionType;
-use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\Form\Validator\ErrorElement;
-use Sonata\Form\Type\DateTimePickerType;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Form\Type\CollectionType;
+use Sonata\Form\Type\DateTimePickerType;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
-use Symfony\Component\Validator\Constraints\Required;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
-use Capco\AppBundle\Repository\ProposalCommentRepository;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Validator\Constraints\Required;
 
 final class ProjectAdmin extends CapcoAdmin
 {
@@ -77,7 +77,8 @@ final class ProjectAdmin extends CapcoAdmin
                 ->with('author')
                 ->addConstraint(new Required())
                 ->addViolation('global.required')
-                ->end();
+                ->end()
+            ;
         }
     }
 
@@ -152,14 +153,16 @@ final class ProjectAdmin extends CapcoAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
                     )
-            );
+            )
+        ;
         $query->orWhere($query->expr()->gte($query->getRootAliases()[0] . '.visibility', 1));
         $query->setParameter('author', $user);
 
         if ($user->hasRole(UserRole::ROLE_PROJECT_ADMIN)) {
             $query
                 ->andWhere($query->getRootAliases()[0] . '.owner = :owner')
-                ->setParameter('owner', $user);
+                ->setParameter('owner', $user)
+            ;
         }
 
         return $query;
@@ -190,7 +193,8 @@ final class ProjectAdmin extends CapcoAdmin
             ])
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -234,7 +238,8 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => $actions,
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
@@ -251,7 +256,8 @@ final class ProjectAdmin extends CapcoAdmin
             ->with('project-access', ['class' => 'col-md-6'])
             ->end()
             ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])
-            ->end();
+            ->end()
+        ;
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $form->with('group.admin.parameters', ['class' => 'col-md-6'])->end();
         }
@@ -263,7 +269,8 @@ final class ProjectAdmin extends CapcoAdmin
                 'required' => true,
                 'format' => 'dd/MM/yyyy HH:mm',
                 'attr' => ['data-date-format' => 'DD/MM/YYYY HH:mm'],
-            ]);
+            ])
+        ;
 
         if ($this->manager->isActive('themes')) {
             $form->add('themes', ModelType::class, [
@@ -287,7 +294,8 @@ final class ProjectAdmin extends CapcoAdmin
                     'help' => 'admin.help.project.video',
                 ],
                 ['link_parameters' => ['context' => 'project']]
-            );
+            )
+        ;
         if ($this->hasSubject()) {
             $form->add('districts', EntityType::class, [
                 'mapped' => false,
@@ -351,7 +359,8 @@ final class ProjectAdmin extends CapcoAdmin
                 ],
                 ['edit' => 'inline', 'inline' => 'table', 'sortable' => 'position']
             )
-            ->end();
+            ->end()
+        ;
 
         $form
             ->with('project-access')
@@ -375,7 +384,8 @@ final class ProjectAdmin extends CapcoAdmin
                 'required' => false,
                 'help' => 'admin.help.metadescription',
             ])
-            ->end();
+            ->end()
+        ;
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $form->with('group.admin.parameters');
             $form->add('opinionCanBeFollowed', null, [
@@ -399,7 +409,8 @@ final class ProjectAdmin extends CapcoAdmin
                 'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
                 'label' => 'global.image',
             ])
-            ->add('video', null, ['label' => 'admin.fields.project.video']);
+            ->add('video', null, ['label' => 'admin.fields.project.video'])
+        ;
 
         if ($this->manager->isActive('themes')) {
             $show->add('themes', null, ['label' => 'global.themes']);
@@ -420,7 +431,8 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Styles;
 
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ColorableTrait;
+use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,9 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class AbstractStyle
 {
-    use UuidTrait;
-    use EnableTrait;
     use ColorableTrait;
+    use EnableTrait;
+    use UuidTrait;
 
     /**
      * @ORM\Column(name="opacity", type="float")

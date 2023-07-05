@@ -2,17 +2,17 @@
 
 namespace Capco\AppBundle\GraphQL\DataLoader\Question;
 
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\LogicJump;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Capco\AppBundle\Enum\OrderDirection;
-use Capco\AppBundle\Enum\JumpsOrderField;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Capco\AppBundle\Repository\LogicJumpRepository;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Capco\AppBundle\Entity\LogicJump;
+use Capco\AppBundle\Enum\JumpsOrderField;
+use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Repository\LogicJumpRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class QuestionJumpsDataLoader extends BatchDataLoader
 {
@@ -66,9 +66,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
                         : $b->getPosition() <=> $a->getPosition();
                 }
 
-                throw new \InvalidArgumentException(
-                    sprintf('Unknown sort field "%s" for Logic Jump.', $field)
-                );
+                throw new \InvalidArgumentException(sprintf('Unknown sort field "%s" for Logic Jump.', $field));
             });
 
             return new ArrayCollection($filtered);

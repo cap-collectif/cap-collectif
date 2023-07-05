@@ -7,7 +7,7 @@ class GeometryHelper
     public static function isIncluded(float $lon, float $lat, string $geojson): bool
     {
         $geometry = \geoPHP::load($geojson, 'json');
-        $point = \geoPHP::load("POINT(${lon} ${lat})", 'wkt');
+        $point = \geoPHP::load("POINT({$lon} {$lat})", 'wkt');
 
         if ('MultiPolygon' === $geometry->getGeomType()) {
             return self::pointInMultiPolygon($geometry, $point);
@@ -16,9 +16,7 @@ class GeometryHelper
             return self::pointInPolygon($geometry, $point);
         }
 
-        throw new \Exception(
-            __CLASS__ . ' : geometry type not handled : ' . $geometry->getGeomType()
-        );
+        throw new \Exception(__CLASS__ . ' : geometry type not handled : ' . $geometry->getGeomType());
     }
 
     public static function pointInMultiPolygon(\MultiPolygon $multiPolygon, \Point $point): bool
@@ -73,19 +71,19 @@ class GeometryHelper
         \Point $vertexB,
         \Point $point
     ): bool {
-        return $vertexA->y() == $vertexB->y() &&
-            $vertexA->y() == $point->y() &&
-            $point->x() > min($vertexA->x(), $vertexB->x()) &&
-            $point->x() < max($vertexA->x(), $vertexB->x());
+        return $vertexA->y() == $vertexB->y()
+            && $vertexA->y() == $point->y()
+            && $point->x() > min($vertexA->x(), $vertexB->x())
+            && $point->x() < max($vertexA->x(), $vertexB->x());
     }
 
     private static function doesIntersect(\Point $vertexA, \Point $vertexB, \Point $point): bool
     {
         if (
-            $point->y() > min($vertexA->y(), $vertexB->y()) &&
-            $point->y() <= max($vertexA->y(), $vertexB->y()) &&
-            $point->x() <= max($vertexA->x(), $vertexB->x()) &&
-            $vertexA->y() != $vertexB->y()
+            $point->y() > min($vertexA->y(), $vertexB->y())
+            && $point->y() <= max($vertexA->y(), $vertexB->y())
+            && $point->x() <= max($vertexA->x(), $vertexB->x())
+            && $vertexA->y() != $vertexB->y()
         ) {
             $intersectionX =
                 (($point->y() - $vertexA->y()) * ($vertexB->x() - $vertexA->x())) /

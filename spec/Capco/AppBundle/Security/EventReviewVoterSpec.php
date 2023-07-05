@@ -24,7 +24,8 @@ class EventReviewVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -39,11 +40,13 @@ class EventReviewVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isSuperAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_GRANTED
@@ -58,20 +61,24 @@ class EventReviewVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($user);
+            ->willReturn($user)
+        ;
         $user
             ->isSuperAdmin()
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(false)
+        ;
         $user
             ->isAdmin()
             ->shouldBeCalled()
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
 
         $subject
             ->getStatus()
             ->shouldBeCalled()
-            ->willReturn(EventReviewStatusType::AWAITING);
+            ->willReturn(EventReviewStatusType::AWAITING)
+        ;
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_GRANTED
         );
@@ -79,7 +86,8 @@ class EventReviewVoterSpec extends ObjectBehavior
         $subject
             ->getStatus()
             ->shouldBeCalled()
-            ->willReturn(EventReviewStatusType::REFUSED);
+            ->willReturn(EventReviewStatusType::REFUSED)
+        ;
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_DENIED
         );
@@ -87,7 +95,8 @@ class EventReviewVoterSpec extends ObjectBehavior
         $subject
             ->getStatus()
             ->shouldBeCalled()
-            ->willReturn(EventReviewStatusType::APPROVED);
+            ->willReturn(EventReviewStatusType::APPROVED)
+        ;
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_DENIED
         );
@@ -95,7 +104,8 @@ class EventReviewVoterSpec extends ObjectBehavior
         $subject
             ->getStatus()
             ->shouldBeCalled()
-            ->willReturn(EventReviewStatusType::DELETED);
+            ->willReturn(EventReviewStatusType::DELETED)
+        ;
         $this->vote($token, $subject, [EventReviewVoter::EDIT])->shouldBe(
             VoterInterface::ACCESS_DENIED
         );

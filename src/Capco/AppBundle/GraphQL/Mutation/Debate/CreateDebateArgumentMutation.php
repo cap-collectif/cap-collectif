@@ -5,13 +5,12 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Util\ClassUtils;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Doctrine\Common\Util\ClassUtils;
 
-class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implements
-    MutationInterface
+class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
     public function __invoke(Arg $input, ?User $viewer = null): array
     {
@@ -50,7 +49,8 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
 
         $argument
             ->setNavigator($this->requestGuesser->getUserAgent())
-            ->setIpAddress($this->requestGuesser->getClientIp());
+            ->setIpAddress($this->requestGuesser->getClientIp())
+        ;
 
         return $argument;
     }

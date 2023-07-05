@@ -34,7 +34,8 @@ class CommentReportingsResolver implements ResolverInterface
                 return $this->repository
                     ->getByComment($comment, $offset, $limit, $field, $direction)
                     ->getIterator()
-                    ->getArrayCopy();
+                    ->getArrayCopy()
+                ;
             });
 
             $totalCount = $this->repository->countForComment($comment);
@@ -42,6 +43,7 @@ class CommentReportingsResolver implements ResolverInterface
             return $paginator->auto($arguments, $totalCount);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+
             throw new \RuntimeException('Could not find proposals for selection step');
         }
     }

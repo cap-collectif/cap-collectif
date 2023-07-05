@@ -23,6 +23,7 @@ class MultipleChoiceQuestionRepository extends EntityRepository
             )
             ->setParameter('questionnableId', $questionnableId)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 }

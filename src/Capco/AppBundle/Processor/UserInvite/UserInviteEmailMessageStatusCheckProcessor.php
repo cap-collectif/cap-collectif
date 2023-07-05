@@ -26,9 +26,7 @@ class UserInviteEmailMessageStatusCheckProcessor implements ProcessorInterface
         list($emailMessageId, $providerClass) = [$json['id'], $json['provider']];
 
         if (!($emailMessage = $this->repository->find($emailMessageId))) {
-            throw new \RuntimeException(
-                'Unable to find UserInviteEmailMessage with id : ' . $emailMessageId
-            );
+            throw new \RuntimeException('Unable to find UserInviteEmailMessage with id : ' . $emailMessageId);
         }
         $hasStatusFailed = $this->notifier->onStatusCheckInvitation($emailMessage, $providerClass);
 

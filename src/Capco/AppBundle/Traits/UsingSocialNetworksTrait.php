@@ -113,12 +113,12 @@ trait UsingSocialNetworksTrait
 
     public function isUsingAnySocialNetworks(): bool
     {
-        return $this->usingYoutube ||
-            $this->usingWebPage ||
-            $this->usingTwitter ||
-            $this->usingFacebook ||
-            $this->usingInstagram ||
-            $this->usingLinkedIn;
+        return $this->usingYoutube
+            || $this->usingWebPage
+            || $this->usingTwitter
+            || $this->usingFacebook
+            || $this->usingInstagram
+            || $this->usingLinkedIn;
     }
 
     public function checkIfSocialNetworksAreGood(array $row, ValidatorInterface $validator): bool

@@ -11,6 +11,7 @@ class RegistrationFormRepository extends EntityRepository
     {
         return $this->createQueryBuilder('f')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
 }

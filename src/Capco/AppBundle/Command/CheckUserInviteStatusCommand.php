@@ -37,14 +37,15 @@ class CheckUserInviteStatusCommand extends Command
     {
         $this->setName('capco:check:user-invite-status')
             ->setDescription('Check status of already sent UserInvite.')
-            ->addOption('status', 's', InputOption::VALUE_OPTIONAL, 'Filter invitations by status');
+            ->addOption('status', 's', InputOption::VALUE_OPTIONAL, 'Filter invitations by status')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (
-            ($optionStatus = $input->getOption('status')) &&
-            !\in_array(
+            ($optionStatus = $input->getOption('status'))
+            && !\in_array(
                 $optionStatus,
                 [
                     UserInviteEmailMessage::WAITING_SENDING,
@@ -54,9 +55,7 @@ class CheckUserInviteStatusCommand extends Command
                 true
             )
         ) {
-            throw new InvalidOptionException(
-                'The given status does not match anny existing UserInvite status.'
-            );
+            throw new InvalidOptionException('The given status does not match anny existing UserInvite status.');
         }
         /** @var UserInvite[] $invitations */
         $invitations = $this->inviteRepository->getNotExpiredInvitationsByStatus($optionStatus);

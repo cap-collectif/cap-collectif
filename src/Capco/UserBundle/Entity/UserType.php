@@ -4,9 +4,9 @@ namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Model\SonataTranslatableInterface;
 use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,11 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserType implements Translatable, SonataTranslatableInterface
 {
-    use UuidTrait;
-    use TranslatableTrait;
     use SonataTranslatableTrait;
+    use TranslatableTrait;
+    use UuidTrait;
 
-    const FILTER_ALL = 'all';
+    public const FILTER_ALL = 'all';
 
     /**
      * @var \DateTime

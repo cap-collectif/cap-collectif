@@ -10,10 +10,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * @method AnonymousUserProposalSmsVote |null find($id, $lockMode = null, $lockVersion = null)
- * @method AnonymousUserProposalSmsVote |null findOneBy(array $criteria, array $orderBy = null)
- * @method AnonymousUserProposalSmsVote []    findAll()
- * @method AnonymousUserProposalSmsVote []    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method null|AnonymousUserProposalSmsVote find($id, $lockMode = null, $lockVersion = null)
+ * @method null|AnonymousUserProposalSmsVote findOneBy(array $criteria, array $orderBy = null)
+ * @method AnonymousUserProposalSmsVote      []    findAll()
+ * @method AnonymousUserProposalSmsVote      []    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class AnonymousUserProposalSmsVoteRepository extends EntityRepository
 {
@@ -76,7 +76,8 @@ class AnonymousUserProposalSmsVoteRepository extends EntityRepository
             ->where('a.status = :status')
             ->setParameter('status', $status)
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     private function findByPhoneAndProposalWithinOneMinuteRangeQueryBuilder(
@@ -93,7 +94,8 @@ class AnonymousUserProposalSmsVoteRepository extends EntityRepository
             ->setParameter('phone', $phone)
             ->setParameter('proposal', $proposal)
             ->setParameter('fromDate', $fromDate)
-            ->setParameter('toDate', $toDate);
+            ->setParameter('toDate', $toDate)
+        ;
     }
 
     private function findMostRecentSmsQueryBuilder(string $phone, Proposal $proposal): QueryBuilder
@@ -103,6 +105,7 @@ class AnonymousUserProposalSmsVoteRepository extends EntityRepository
             ->andWhere('a.proposal = :proposal')
             ->orderBy('a.createdAt', 'DESC')
             ->setParameter('phone', $phone)
-            ->setParameter('proposal', $proposal);
+            ->setParameter('proposal', $proposal)
+        ;
     }
 }

@@ -2,35 +2,35 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Helper\ProjectHelper;
+use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
-use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\RankingStep;
-use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Capco\AppBundle\Repository\LocaleRepository;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
-use Capco\AppBundle\Enum\ViewConfiguration;
 
 class StepController extends Controller
 {
@@ -176,7 +176,8 @@ class StepController extends Controller
                 'popular',
                 500
             )
-            ->getEntities();
+            ->getEntities()
+        ;
 
         $nbOpinionsToDisplay = $step->getNbOpinionsToDisplay() ?? 10;
         $nbVersionsToDisplay = $step->getNbVersionsToDisplay() ?? 10;
@@ -189,7 +190,8 @@ class StepController extends Controller
                 'popular',
                 500
             )
-            ->getEntities();
+            ->getEntities()
+        ;
 
         return [
             'project' => $project,
@@ -211,6 +213,8 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
+     *
+     * @param mixed $page
      */
     public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
@@ -250,6 +254,8 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
+     *
+     * @param mixed $page
      */
     public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
@@ -407,7 +413,6 @@ class StepController extends Controller
      */
     public function showVoteStepAction(Project $project, SelectionStep $step)
     {
-
         $viewer = $this->getUser();
         if (!$project->viewerCanSee($viewer)) {
             return $this->redirect403();
@@ -535,6 +540,7 @@ class StepController extends Controller
         if (!$viewer) {
             return $this->render('@CapcoApp/Project/403_auth.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
         }
+
         throw new ProjectAccessDeniedException();
 //        return $this->render('@CapcoApp/Project/403_project.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
     }

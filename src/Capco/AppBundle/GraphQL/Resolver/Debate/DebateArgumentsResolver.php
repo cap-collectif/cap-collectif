@@ -8,8 +8,8 @@ use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class DebateArgumentsResolver implements ResolverInterface
 {

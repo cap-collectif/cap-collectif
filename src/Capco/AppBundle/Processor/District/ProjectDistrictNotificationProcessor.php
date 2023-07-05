@@ -35,9 +35,7 @@ class ProjectDistrictNotificationProcessor implements ProcessorInterface
         }
         $district = $this->projectDistrictRepository->find($json['projectDistrict']);
         if (!$district instanceof ProjectDistrict) {
-            throw new \RuntimeException(
-                'Unable to find district with id : ' . $json['projectDistrict']
-            );
+            throw new \RuntimeException('Unable to find district with id : ' . $json['projectDistrict']);
         }
 
         $this->notifier->onNewProjectInDistrict($district, $project);

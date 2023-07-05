@@ -3,15 +3,15 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Capco\AppBundle\Enum\ProjectVisibilityMode;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
@@ -54,7 +54,8 @@ class ProposalFormAdmin extends CapcoAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -65,7 +66,8 @@ class ProposalFormAdmin extends CapcoAdmin
         if (!$user->isAdmin()) {
             $query
                 ->andWhere($query->getRootAliases()[0] . '.owner = :owner')
-                ->setParameter('owner', $user);
+                ->setParameter('owner', $user)
+            ;
         }
 
         return $query;
@@ -89,7 +91,8 @@ class ProposalFormAdmin extends CapcoAdmin
                     'query_builder' => $this->filterByCollectStepQuery(),
                 ]
             )
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+        ;
     }
 
     // Fields to be shown on lists
@@ -107,12 +110,12 @@ class ProposalFormAdmin extends CapcoAdmin
                 'label' => 'link_actions',
                 'actions' => [
                     'duplicate' => [
-                        'template' =>
-                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
+                        'template' => 'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
                     ],
                     'delete' => [],
                 ],
-            ]);
+            ])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -125,6 +128,7 @@ class ProposalFormAdmin extends CapcoAdmin
     {
         return $this->getModelManager()
             ->createQuery(CollectStep::class, 'p')
-            ->select('p');
+            ->select('p')
+        ;
     }
 }

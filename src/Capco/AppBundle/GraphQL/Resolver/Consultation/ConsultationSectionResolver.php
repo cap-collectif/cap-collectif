@@ -22,7 +22,8 @@ class ConsultationSectionResolver implements ResolverInterface
                 ->filter(function (OpinionType $section) {
                     return null === $section->getParent();
                 })
-                ->getIterator();
+                ->getIterator()
+            ;
 
             $sectionsArray = iterator_to_array($iterator);
 

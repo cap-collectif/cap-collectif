@@ -2,21 +2,21 @@
 
 namespace spec\Capco\AppBundle\Helper;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use PhpSpec\ObjectBehavior;
 
 class ProjectHelperSpec extends ObjectBehavior
 {
-    function it_is_initializable(ProjectRepository $projectRepo, AbstractStepRepository $stepRepo)
+    public function it_is_initializable(ProjectRepository $projectRepo, AbstractStepRepository $stepRepo)
     {
         $this->beConstructedWith($projectRepo, $stepRepo);
         $this->shouldHaveType('Capco\AppBundle\Helper\ProjectHelper');
     }
 
-    function it_can_find_previous_steps(ProjectRepository $projectRepo, AbstractStepRepository $stepRepo, Project $project, AbstractStep $step, AbstractStep $stepA, AbstractStep $stepB)
+    public function it_can_find_previous_steps(ProjectRepository $projectRepo, AbstractStepRepository $stepRepo, Project $project, AbstractStep $step, AbstractStep $stepA, AbstractStep $stepB)
     {
         $this->beConstructedWith($projectRepo, $stepRepo);
 

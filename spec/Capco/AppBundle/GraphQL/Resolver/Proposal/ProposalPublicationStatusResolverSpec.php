@@ -2,11 +2,11 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use PhpSpec\ObjectBehavior;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalPublicationStatusResolver;
+use PhpSpec\ObjectBehavior;
 
 class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 {

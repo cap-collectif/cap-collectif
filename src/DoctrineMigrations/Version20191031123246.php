@@ -18,7 +18,7 @@ final class Version20191031123246 extends AbstractMigration implements Container
     protected $container;
     private $generator;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
         $this->generator = new UuidGenerator();

@@ -14,7 +14,8 @@ class StatusFormType extends AbstractStepFormType
         $builder
             ->add('id')
             ->add('color')
-            ->add('name');
+            ->add('name')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -189,7 +189,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+        ;
         $this->addProjectFilters($boolQuery, $projectId);
 
         $query = new Query($boolQuery);
@@ -205,7 +206,8 @@ class AnalyticsSearch
                     (new Cardinality('anonymous_participants_per_interval'))->setField('ipAddress')
                 )
             )
-            ->addAggregation((new Cardinality('anonymous_participants'))->setField('ipAddress'));
+            ->addAggregation((new Cardinality('anonymous_participants'))->setField('ipAddress'))
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -228,7 +230,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['enabled' => true]));
+            ->addFilter(new Query\Term(['enabled' => true]))
+        ;
 
         $query = new Query($boolQuery);
         $query
@@ -240,7 +243,8 @@ class AnalyticsSearch
                     'createdAt',
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -260,7 +264,8 @@ class AnalyticsSearch
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
-            ->addFilter(new Query\Term(['isAccounted' => true]));
+            ->addFilter(new Query\Term(['isAccounted' => true]))
+        ;
 
         if ($projectId) {
             $boolQuery->addFilter(
@@ -280,7 +285,8 @@ class AnalyticsSearch
                     'createdAt',
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -299,7 +305,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+        ;
 
         if ($projectId) {
             $boolQuery->addFilter(
@@ -327,7 +334,8 @@ class AnalyticsSearch
                     'createdAt',
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -390,7 +398,8 @@ class AnalyticsSearch
                     'followedAt',
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -428,7 +437,8 @@ class AnalyticsSearch
                             ->setSize(2)
                     )
             )
-            ->setSize(0);
+            ->setSize(0)
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -450,7 +460,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+        ;
 
         $this->addProjectFilters($boolQuery, $projectId);
 
@@ -464,7 +475,8 @@ class AnalyticsSearch
                     $aggregatedField,
                     $this->getDateHistogramInterval($start, $end)
                 )
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -483,7 +495,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+        ;
 
         if ($projectId) {
             $boolQuery->addFilter(new Query\Term(['project.id' => $projectId]));
@@ -498,7 +511,8 @@ class AnalyticsSearch
                     ->setField('category.id')
                     ->setOrder('_count', 'desc')
                     ->setSize(5)
-            );
+            )
+        ;
 
         return $this->index->createSearch($query);
     }
@@ -516,7 +530,8 @@ class AnalyticsSearch
                     'lte' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
-            ->addFilter(new Query\Term(['published' => true]));
+            ->addFilter(new Query\Term(['published' => true]))
+        ;
         $this->addContributionsAndVotesFilters($boolQuery);
 
         $this->addProjectFilters($boolQuery, $projectId);
@@ -534,7 +549,8 @@ class AnalyticsSearch
                     (new Cardinality('participants_per_interval'))->setField('author.id')
                 )
             )
-            ->addAggregation((new Cardinality('participants'))->setField('author.id'));
+            ->addAggregation((new Cardinality('participants'))->setField('author.id'))
+        ;
 
         return $this->index->createSearch($query);
     }

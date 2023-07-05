@@ -48,16 +48,22 @@ class ProjectVoter extends AbstractOwnerableVoter
         switch ($attribute) {
             case self::VIEW:
                 return self::canView($subject, $viewer);
+
             case self::EDIT:
                 return self::canEdit($subject, $viewer);
+
             case self::CREATE:
                 return self::canCreate($viewer);
+
             case self::DELETE:
                 return self::canDelete($subject, $viewer);
+
             case self::EXPORT:
                 return self::canDownloadExport($subject, $viewer);
+
             case self::CREATE_PROPOSAL_FROM_BO:
                 return self::canCreateProposalFromBo($subject, $viewer);
+
             case self::DUPLICATE:
                 return self::canDuplicate($viewer);
         }

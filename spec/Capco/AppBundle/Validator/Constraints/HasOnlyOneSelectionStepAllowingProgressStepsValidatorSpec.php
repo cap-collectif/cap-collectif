@@ -2,22 +2,22 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressSteps;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
-use Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressSteps;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 
 class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator');
     }
 
-    function it_should_add_violation_if_there_is_more_than_one_selection_allowing_progress_steps_in_a_given_project(
+    public function it_should_add_violation_if_there_is_more_than_one_selection_allowing_progress_steps_in_a_given_project(
         HasOnlyOneSelectionStepAllowingProgressSteps $constraint,
         ExecutionContextInterface $context,
         ConstraintViolationBuilderInterface $builder,
@@ -37,7 +37,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
         $this->validate([$selectionStep1, $selectionStep2], $constraint)->shouldReturn(false);
     }
 
-    function it_should_not_add_violation_if_there_is_not_more_than_one_selection_allowing_progress_steps_in_a_given_project(
+    public function it_should_not_add_violation_if_there_is_not_more_than_one_selection_allowing_progress_steps_in_a_given_project(
         HasOnlyOneSelectionStepAllowingProgressSteps $constraint,
         ExecutionContextInterface $context,
         SelectionStep $selectionStep,
@@ -56,7 +56,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
         $this->validate([$selectionStep, $selectionStepNotAllowing, $randomStep], $constraint)->shouldReturn(true);
     }
 
-    function  it_should_not_add_violation_if_there_is_no_step_in_a_given_project(
+    public function it_should_not_add_violation_if_there_is_no_step_in_a_given_project(
         HasOnlyOneSelectionStepAllowingProgressSteps $constraint,
         ExecutionContextInterface $context
     ) {

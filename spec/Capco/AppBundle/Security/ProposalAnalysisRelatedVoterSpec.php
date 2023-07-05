@@ -27,7 +27,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn('anon.');
+            ->willReturn('anon.')
+        ;
 
         $this->vote($token, $proposal, [ProposalAnalysisRelatedVoter::VIEW])->shouldBe(
             VoterInterface::ACCESS_DENIED
@@ -65,7 +66,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(true);
         $proposal->getProject()->willReturn($project);
 
@@ -86,7 +88,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn($viewer);
         $proposal->getProject()->willReturn($project);
@@ -109,7 +112,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn($viewer);
@@ -132,7 +136,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -157,7 +162,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -184,7 +190,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -210,7 +217,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $proposal->getAnalysts()->willReturn($analysts);
         $analysts->contains($viewer)->willReturn(true);
         $this->vote($token, $proposal, [ProposalAnalysisRelatedVoter::ANALYSE])->shouldBe(
@@ -227,7 +235,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $proposal->getAnalysts()->willReturn($analysts);
         $analysts->contains($viewer)->willReturn(false);
         $this->vote($token, $proposal, [ProposalAnalysisRelatedVoter::ANALYSE])->shouldBe(
@@ -244,7 +253,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $proposal->getDecision()->willReturn($decision);
         $decision->getState()->willReturn(ProposalStatementState::IN_PROGRESS);
 
@@ -264,7 +274,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $proposal->getDecision()->willReturn($decision);
         $decision->getState()->willReturn(ProposalStatementState::IN_PROGRESS);
 
@@ -296,7 +307,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $proposal->getDecisionMaker()->willReturn($viewer);
 
         $this->vote($token, $proposal, [ProposalAnalysisRelatedVoter::DECIDE])->shouldBe(
@@ -324,7 +336,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(true);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -344,7 +357,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn($viewer);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -365,7 +379,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn($viewer);
@@ -385,7 +400,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(true);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getProject()->willReturn($project);
@@ -404,7 +420,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn($viewer);
         $proposal->getProject()->willReturn($project);
@@ -424,7 +441,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(true);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -445,7 +463,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn($viewer);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -467,7 +486,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn($viewer);
@@ -488,7 +508,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);
@@ -510,7 +531,8 @@ class ProposalAnalysisRelatedVoterSpec extends ObjectBehavior
         $token
             ->getUser()
             ->shouldBeCalled()
-            ->willReturn($viewer);
+            ->willReturn($viewer)
+        ;
         $viewer->isAdmin()->willReturn(false);
         $proposal->getProjectOwner()->willReturn(null);
         $proposal->getDecisionMaker()->willReturn(null);

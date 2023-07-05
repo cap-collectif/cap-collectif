@@ -36,7 +36,8 @@ class HomePageProjectsSectionConfigurationProjectsResolver implements ResolverIn
                     ->map(function ($sectionProject) {
                         return $sectionProject->getProject();
                     })
-                    ->toArray();
+                    ->toArray()
+                ;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 

@@ -10,17 +10,17 @@ use Symfony\Component\Routing\Router;
 
 class ActivitiesServiceSpec extends ObjectBehavior
 {
-    function let(Logger $logger, Router $router)
+    public function let(Logger $logger, Router $router)
     {
         $this->beConstructedWith($logger, $router);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(ActivitiesService::class);
     }
 
-    function it_should_merge_activities_array(
+    public function it_should_merge_activities_array(
         UserActivity $user1Activity,
         UserActivity $user2Activity
     ) {
@@ -39,7 +39,7 @@ class ActivitiesServiceSpec extends ObjectBehavior
         ]);
     }
 
-    function it_should_merge_activities_proposals_and_opinions(
+    public function it_should_merge_activities_proposals_and_opinions(
         UserActivity $user1Activity,
         UserActivity $user2Activity
     ) {
@@ -78,7 +78,8 @@ class ActivitiesServiceSpec extends ObjectBehavior
                     'countActivities' => 6,
                 ],
             ])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $user2Activity->getUserProjects()->willReturn([
             'project1' => [
@@ -109,7 +110,7 @@ class ActivitiesServiceSpec extends ObjectBehavior
         );
     }
 
-    function it_should_merge_activities_proposals(
+    public function it_should_merge_activities_proposals(
         UserActivity $user1Activity,
         UserActivity $user2Activity
     ) {
@@ -146,7 +147,8 @@ class ActivitiesServiceSpec extends ObjectBehavior
                     'countActivities' => 6,
                 ],
             ])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $user2Activity->getUserProjects()->willReturn([
             'project1' => [

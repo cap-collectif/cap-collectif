@@ -28,13 +28,10 @@ class AdminProposalPage extends Page
         'proposal advancement selection status' => '#item_0 select',
         'proposal advancement save' => '#proposal_advancement_save',
         'proposal evaluation analysts groupes save' => '#proposal-evaluation-analysts-groupes-save',
-        'proposal evaluation evaluate' =>
-            '#proposal-admin-page-tabs-pane-6 input[type="text"][id="proposal-admin-evaluation-responses0"]',
-        'proposal evaluation evaluate more information' =>
-            '#proposal-admin-page-tabs-pane-6 textarea[type="textarea"][id="proposal-admin-evaluation-responses1"]',
+        'proposal evaluation evaluate' => '#proposal-admin-page-tabs-pane-6 input[type="text"][id="proposal-admin-evaluation-responses0"]',
+        'proposal evaluation evaluate more information' => '#proposal-admin-page-tabs-pane-6 textarea[type="textarea"][id="proposal-admin-evaluation-responses1"]',
         'proposal evaluation custom save' => '#proposal-evaluation-custom-save',
-        'proposal evaluation presentation' =>
-            '#proposal-admin-page-tabs-pane-6 div[id="proposal-admin-evaluation-responses2"]',
+        'proposal evaluation presentation' => '#proposal-admin-page-tabs-pane-6 div[id="proposal-admin-evaluation-responses2"]',
         'proposal export' => '#proposal-follower-dropdown-export',
     ];
 
@@ -75,7 +72,7 @@ class AdminProposalPage extends Page
             $child = 'last-child';
         }
 
-        $element = $this->elements['proposal evaluation presentation'] . " > div:${child}";
+        $element = $this->elements['proposal evaluation presentation'] . " > div:{$child}";
         $this->find('css', $element)->click();
     }
 }

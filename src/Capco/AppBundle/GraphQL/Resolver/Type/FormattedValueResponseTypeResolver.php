@@ -27,8 +27,8 @@ class FormattedValueResponseTypeResolver implements ResolverInterface
         if (\is_string($response->getValue())) {
             $question = $response->getQuestion();
             if (
-                $question &&
-                AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
+                $question
+                && AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION === $question->getType()
             ) {
                 return Text::htmlToString(
                     $this->translator->trans(

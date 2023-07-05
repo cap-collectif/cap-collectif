@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Toggle\Manager;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ResetFeatureFlagsCommand extends Command

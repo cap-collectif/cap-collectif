@@ -25,7 +25,7 @@ class CancelUserInvitationsMutation implements MutationInterface
         $invitationsEmails = $args->offsetGet('invitationsEmails');
         $invitations = $this->repository->findByEmails($invitationsEmails);
         $invitationsIds = array_map(
-            fn(UserInvite $invitation) => $invitation->getId(),
+            fn (UserInvite $invitation) => $invitation->getId(),
             $invitations
         );
 
@@ -33,15 +33,16 @@ class CancelUserInvitationsMutation implements MutationInterface
         $this->em
             ->createQuery(
                 <<<DQL
-DELETE ${entity} ui WHERE ui.id IN (:ids)
-DQL
+                    DELETE {$entity} ui WHERE ui.id IN (:ids)
+                    DQL
             )
             ->execute([
                 'ids' => $invitationsIds,
-            ]);
+            ])
+        ;
 
         $encodedInvitationsIds = array_map(
-            fn(string $invitationId) => GlobalId::toGlobalId('UserInvite', $invitationId),
+            fn (string $invitationId) => GlobalId::toGlobalId('UserInvite', $invitationId),
             $invitationsIds
         );
 

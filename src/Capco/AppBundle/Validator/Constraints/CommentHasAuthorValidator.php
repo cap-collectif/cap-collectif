@@ -10,13 +10,14 @@ class CommentHasAuthorValidator extends ConstraintValidator
     public function validate($protocol, Constraint $constraint)
     {
         if (
-            (null === $protocol->getAuthorName() || null === $protocol->getAuthorEmail()) &&
-            null === $protocol->getAuthor()
+            (null === $protocol->getAuthorName() || null === $protocol->getAuthorEmail())
+            && null === $protocol->getAuthor()
         ) {
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('authorName')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

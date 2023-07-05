@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Filter\KnpTranslationFieldFilter;
 use Capco\AppBundle\Toggle\Manager;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -21,7 +22,6 @@ use Sonata\Form\Type\DateTimePickerType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 
 class PostAdmin extends AbstractAdmin
 {
@@ -46,7 +46,8 @@ class PostAdmin extends AbstractAdmin
         if ($media) {
             $provider = $this->getConfigurationPool()
                 ->getContainer()
-                ->get($media->getProviderName());
+                ->get($media->getProviderName())
+            ;
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -68,7 +69,8 @@ class PostAdmin extends AbstractAdmin
             foreach ($object->getProposals() as $proposal) {
                 $this->getContainer()
                     ->get('capco.proposal_notifier')
-                    ->onOfficialAnswer($proposal, $object);
+                    ->onOfficialAnswer($proposal, $object)
+                ;
             }
         }
     }
@@ -125,7 +127,8 @@ class PostAdmin extends AbstractAdmin
                         return $entity->getEmail() . ' - ' . $entity->getUsername();
                     },
                 ]
-            );
+            )
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -134,7 +137,8 @@ class PostAdmin extends AbstractAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('Authors', CollectionType::class, [
                 'label' => 'admin.fields.blog_post.authors',
-            ]);
+            ])
+        ;
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -161,7 +165,8 @@ class PostAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $formMapper): void
@@ -209,7 +214,8 @@ class PostAdmin extends AbstractAdmin
                     ],
                 ]
             )
-            ->end();
+            ->end()
+        ;
         $formMapper
             ->with('admin.fields.page.advanced')
             ->add('metaDescription', TextType::class, [
@@ -226,7 +232,8 @@ class PostAdmin extends AbstractAdmin
                     'placeholder' => '<script type="text/javascript"> </script>',
                 ],
             ])
-            ->end();
+            ->end()
+        ;
 
         $formMapper->end()->with('admin.fields.blog_post.group_linked_content');
 
@@ -264,7 +271,8 @@ class PostAdmin extends AbstractAdmin
             ->add('displayedOnBlog', null, [
                 'label' => 'admin.fields.blog_post.displayedOnBlog',
                 'required' => false,
-            ]);
+            ])
+        ;
         $formMapper
             ->end()
             ->with('admin.fields.blog_post.group_meta')
@@ -281,14 +289,16 @@ class PostAdmin extends AbstractAdmin
             ->add('commentable', null, [
                 'label' => 'admin.fields.blog_post.is_commentable',
                 'required' => false,
-            ]);
+            ])
+        ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper
             ->add('title', null, ['label' => 'global.title'])
-            ->add('authors', null, ['label' => 'admin.fields.blog_post.authors']);
+            ->add('authors', null, ['label' => 'admin.fields.blog_post.authors'])
+        ;
         if (
             $this->getConfigurationPool()
                 ->getContainer()
@@ -315,6 +325,7 @@ class PostAdmin extends AbstractAdmin
             ->add('commentable', null, ['label' => 'admin.fields.blog_post.is_commentable'])
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
-            ->add('createdAt', null, ['label' => 'global.creation']);
+            ->add('createdAt', null, ['label' => 'global.creation'])
+        ;
     }
 }

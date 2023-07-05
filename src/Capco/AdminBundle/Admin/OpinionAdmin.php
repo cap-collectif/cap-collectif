@@ -82,7 +82,8 @@ class OpinionAdmin extends CapcoAdmin
                         $query->expr()->eq('authors.user', ':author'),
                         $query->expr()->eq('p.visibility', ProjectVisibilityMode::VISIBILITY_ME)
                     )
-            );
+            )
+        ;
         $query->orWhere(
             $query->expr()->gte('p.visibility', ProjectVisibilityMode::VISIBILITY_ADMIN)
         );
@@ -126,7 +127,8 @@ class OpinionAdmin extends CapcoAdmin
             ->add('published', null, ['label' => 'global.published'])
             ->add('pinned', null, ['label' => 'admin.fields.comment.pinned'])
             ->add('trashedStatus', null, ['label' => 'global.is_trashed'])
-            ->add('updatedAt', null, ['label' => 'global.maj']);
+            ->add('updatedAt', null, ['label' => 'global.maj'])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -168,15 +170,16 @@ class OpinionAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'label' => 'link_actions',
                 'actions' => ['edit' => [], 'delete' => []],
-            ]);
+            ])
+        ;
     }
 
     protected function configureFormFields(FormMapper $form): void
     {
         $subjectHasAppendices = $this->hasSubject()
             ? $this->getSubject()
-                    ->getAppendices()
-                    ->count() > 0
+                ->getAppendices()
+                ->count() > 0
             : null;
         $disabled = $this->hasSubject() && null !== $this->getSubject()->getId();
         $classname = $subjectHasAppendices ? '' : 'hidden';
@@ -189,7 +192,8 @@ class OpinionAdmin extends CapcoAdmin
             ->end()
             ->with('admin.fields.opinion.group_answer', ['class' => 'col-md-12'])
             ->end()
-            ->end();
+            ->end()
+        ;
         // Content
         // Appendices
         // Publication
@@ -243,7 +247,8 @@ class OpinionAdmin extends CapcoAdmin
                 'label' => 'official.answer',
                 'required' => false,
             ])
-            ->end();
+            ->end()
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

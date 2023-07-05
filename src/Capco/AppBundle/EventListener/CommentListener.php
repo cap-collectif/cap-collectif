@@ -166,7 +166,6 @@ class CommentListener
 
     private function handlePublishedComment(Comment $comment)
     {
-
         $uow = $this->em->getUnitOfWork();
         $changeSet = $uow->getEntityChangeSet($comment);
 
@@ -175,7 +174,7 @@ class CommentListener
         }
         $newValue = $changeSet['published'][1];
 
-        if ($newValue === false) {
+        if (false === $newValue) {
             return;
         }
 
@@ -195,12 +194,12 @@ class CommentListener
         }
         $newValue = $changeSet['confirmationToken'][1];
 
-        if ($newValue !== null) {
+        if (null !== $newValue) {
             return;
         }
 
         $moderationEnabled = $this->manager->isActive(Manager::moderation_comment);
-        if ($moderationEnabled && $comment->getModerationStatus() === ModerationStatus::PENDING) {
+        if ($moderationEnabled && ModerationStatus::PENDING === $comment->getModerationStatus()) {
             $this->sendModerationPendingNotificationEmail($comment);
         }
     }

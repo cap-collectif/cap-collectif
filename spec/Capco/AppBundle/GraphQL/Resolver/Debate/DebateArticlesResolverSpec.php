@@ -29,7 +29,8 @@ class DebateArticlesResolverSpec extends ObjectBehavior
         $repository
             ->countByDebate($debate)
             ->willReturn(0)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $this->__invoke($debate, $args)->shouldReturnEmptyConnection([]);
     }
 
@@ -44,11 +45,13 @@ class DebateArticlesResolverSpec extends ObjectBehavior
         $repository
             ->getByDebate($debate, 11, 0)
             ->willReturn($paginator)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $repository
             ->countByDebate($debate)
             ->willReturn(2)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
         $paginator->getIterator()->willReturn(new ArrayIterator([$a, $b]));
         $this->__invoke($debate, $args)->shouldReturnConnection();
     }

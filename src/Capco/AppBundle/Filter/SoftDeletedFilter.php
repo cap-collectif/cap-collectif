@@ -12,7 +12,7 @@ class SoftDeletedFilter extends SQLFilter
         if ($targetEntity->hasField('deletedAt')) {
             $currentDate = date('Y-m-d H:i:s');
 
-            return "${targetTableAlias}.deleted_at > '${currentDate}' OR ${targetTableAlias}.deleted_at IS NULL";
+            return "{$targetTableAlias}.deleted_at > '{$currentDate}' OR {$targetTableAlias}.deleted_at IS NULL";
         }
 
         return '';

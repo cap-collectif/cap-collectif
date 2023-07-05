@@ -27,16 +27,19 @@ class CheckboxRequirementHasLabelValidatorSpec extends ObjectBehavior
         $context
             ->buildViolation($constraint->message)
             ->willReturn($builder)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $requirement
             ->getType()
             ->shouldBeCalled()
-            ->willReturn(Requirement::CHECKBOX);
+            ->willReturn(Requirement::CHECKBOX)
+        ;
         $requirement
             ->getLabel()
             ->shouldBeCalled()
-            ->willReturn('');
+            ->willReturn('')
+        ;
 
         $this->validate([$requirement], $constraint);
     }
@@ -53,11 +56,13 @@ class CheckboxRequirementHasLabelValidatorSpec extends ObjectBehavior
         $requirement
             ->getType()
             ->shouldBeCalled()
-            ->willReturn(Requirement::CHECKBOX);
+            ->willReturn(Requirement::CHECKBOX)
+        ;
         $requirement
             ->getLabel()
             ->shouldBeCalled()
-            ->willReturn('a');
+            ->willReturn('a')
+        ;
 
         $this->validate([$requirement], $constraint);
     }
@@ -74,7 +79,8 @@ class CheckboxRequirementHasLabelValidatorSpec extends ObjectBehavior
         $requirement
             ->getType()
             ->shouldBeCalled()
-            ->willReturn(Requirement::FIRSTNAME);
+            ->willReturn(Requirement::FIRSTNAME)
+        ;
 
         $this->validate([$requirement], $constraint);
     }

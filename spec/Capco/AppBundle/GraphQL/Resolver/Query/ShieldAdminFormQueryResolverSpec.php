@@ -33,7 +33,8 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
 
         $siteParameterRepository
             ->findOneBy(['keyname' => 'shield.introduction'])
-            ->willReturn($siteParameter);
+            ->willReturn($siteParameter)
+        ;
         $siteImageRepository->findOneBy(['keyname' => 'image.shield'])->willReturn($siteImage);
 
         $toggleManager->isActive('shield_mode')->willReturn(true);
@@ -57,7 +58,8 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
 
         $siteParameterRepository
             ->findOneBy(['keyname' => 'shield.introduction'])
-            ->willReturn($siteParameter);
+            ->willReturn($siteParameter)
+        ;
         $siteImageRepository->findOneBy(['keyname' => 'image.shield'])->willReturn($siteImage);
 
         $toggleManager->isActive('shield_mode')->willReturn(true);

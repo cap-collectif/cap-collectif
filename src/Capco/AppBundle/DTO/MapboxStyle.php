@@ -33,7 +33,8 @@ class MapboxStyle implements MapTokenStyleInterface
             ->setName($response['name'])
             ->setOwner($response['owner'])
             ->setVisibility(strtoupper($response['visibility']))
-            ->setId($response['id']);
+            ->setId($response['id'])
+        ;
 
         return $instance;
     }
@@ -157,8 +158,8 @@ class MapboxStyle implements MapTokenStyleInterface
     public function isCurrent(): bool
     {
         return $this->getMapToken()
-            ? $this->getMapToken()->getStyleOwner() === $this->getOwner() &&
-                    $this->getMapToken()->getStyleId() === $this->getId()
+            ? $this->getMapToken()->getStyleOwner() === $this->getOwner()
+                    && $this->getMapToken()->getStyleId() === $this->getId()
             : false;
     }
 }

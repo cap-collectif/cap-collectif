@@ -82,10 +82,12 @@ class DebateSearch extends Search
                     $field = 'votesCount';
 
                     break;
+
                 case 'CREATED_AT':
                     $field = 'createdAt';
 
                     break;
+
                 case 'PUBLISHED_AT':
                 default:
                     $field = 'publishedAt';
@@ -109,7 +111,7 @@ class DebateSearch extends Search
         );
 
         $informations = array_map(
-            static fn(Result $result) => [
+            static fn (Result $result) => [
                 'id' => $result->getDocument()->get('id'),
                 'objectType' => $result->getDocument()->get('objectType'),
                 'geoip' => $result->getDocument()->has('geoip')

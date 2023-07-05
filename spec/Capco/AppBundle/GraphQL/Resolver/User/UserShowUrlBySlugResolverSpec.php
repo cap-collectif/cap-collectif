@@ -21,10 +21,12 @@ class UserShowUrlBySlugResolverSpec extends ObjectBehavior
         $this->shouldHaveType(UserShowUrlBySlugResolver::class);
     }
 
-    public function it_should_return_url_to_show_all_profile(RouterInterface $router): void {
+    public function it_should_return_url_to_show_all_profile(RouterInterface $router): void
+    {
         $router
             ->generate('capco_user_profile_show_all', ['slug' => 'fakeSlug'], 0)
-            ->willReturn(self::FAKE_URL);
+            ->willReturn(self::FAKE_URL)
+        ;
 
         $this->__invoke(self::FAKE_SLUG)->shouldReturn(self::FAKE_URL);
     }

@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
-use GraphQL\Executor\Promise\Promise;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 

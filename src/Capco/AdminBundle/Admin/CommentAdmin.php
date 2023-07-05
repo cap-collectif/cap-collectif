@@ -2,20 +2,20 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Capco\AppBundle\Toggle\Manager;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Sonata\AdminBundle\Form\Type\ModelType;
 
 class CommentAdmin extends AbstractAdmin
 {
@@ -79,7 +79,8 @@ class CommentAdmin extends AbstractAdmin
             ->add('type', null, [
                 'label' => 'comment.type',
                 'sub_classes' => $this->getSubClasses(),
-            ]);
+            ])
+        ;
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -95,8 +96,8 @@ class CommentAdmin extends AbstractAdmin
                 'label' => 'global.contenu',
                 'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
                 'route' => [
-                    'name' => 'edit'
-                ]
+                    'name' => 'edit',
+                ],
             ])
             ->add('relatedObject', null, [
                 'label' => 'admin.fields.comment.object',
@@ -112,7 +113,8 @@ class CommentAdmin extends AbstractAdmin
             ->add('published', null, [
                 'editable' => false,
                 'label' => 'global.published',
-            ]);
+            ])
+        ;
 
         if ($isModerationEnabled) {
             $list->add('moderationStatus', null, [
@@ -160,7 +162,8 @@ class CommentAdmin extends AbstractAdmin
                 'label' => 'global.published',
                 'disabled' => true,
                 'attr' => ['readonly' => true],
-            ]);
+            ])
+        ;
 
         $isAuthorAdmin = $subject->getAuthor() ? $subject->getAuthor()->isAdmin() : false;
         $doesRelatedObjectBelongsToProjectAdmin = $subject->getAuthor()
@@ -183,7 +186,8 @@ class CommentAdmin extends AbstractAdmin
                 'label' => 'global.is_trashed',
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.comment.trashed_reason'])
-            ->add('pinned', null, ['label' => 'admin.fields.comment.pinned', 'required' => false]);
+            ->add('pinned', null, ['label' => 'admin.fields.comment.pinned', 'required' => false])
+        ;
     }
 
     protected function configureRoutes(RouteCollectionInterface $collection): void

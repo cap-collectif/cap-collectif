@@ -7,10 +7,10 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Capco\UserBundle\Repository\UserTypeRepository;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class MembersController extends Controller
 {
@@ -28,6 +28,10 @@ class MembersController extends Controller
      * @Route("/members/{userType}/{page}", name="app_members_type", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "members_list"} )
      * @Route("/members/{userType}/{sort}/{page}", name="app_members_type_sorted", requirements={"page" = "\d+"}, defaults={"page" = 1, "userType" = null, "_feature_flags" = "members_list"} )
      * @Template("CapcoUserBundle:Members:index.html.twig")
+     *
+     * @param mixed      $page
+     * @param null|mixed $userType
+     * @param null|mixed $sort
      */
     public function indexAction(Request $request, $page, $userType = null, $sort = null)
     {
@@ -63,7 +67,7 @@ class MembersController extends Controller
 
         $pagination = $this->get(SiteParameterResolver::class)->getValue('members.pagination.size');
 
-        $sort = $sort ?? 'activity';
+        $sort ??= 'activity';
         $userType = $this->userTypeRepository->findOneBySlug($userType);
         $members = $this->userSearch->getRegisteredUsers($pagination, $page, $sort, $userType);
 

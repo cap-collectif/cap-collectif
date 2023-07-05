@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
@@ -20,7 +21,7 @@ class EmailDomain
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\RegistrationForm", inversedBy="domains", cascade={"persist"})
      * @ORM\JoinColumn(name="registration_form_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-     **/
+     */
     protected $registrationForm;
 
     public function getValue()
@@ -40,7 +41,7 @@ class EmailDomain
         return $this->registrationForm;
     }
 
-    public function setRegistrationForm(RegistrationForm $registrationForm = null)
+    public function setRegistrationForm(?RegistrationForm $registrationForm = null)
     {
         $this->registrationForm = $registrationForm;
 

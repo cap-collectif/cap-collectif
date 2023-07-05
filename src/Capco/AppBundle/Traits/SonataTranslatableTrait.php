@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Traits;
 /**
  * @deprecated
  *
- * This trait adds every methods required by SonataTranslatableInterface.
+ * This trait adds every methods required by SonataTranslatableInterface
  */
 trait SonataTranslatableTrait
 {

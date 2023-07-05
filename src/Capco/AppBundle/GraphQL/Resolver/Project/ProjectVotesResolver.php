@@ -3,18 +3,18 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Search\VoteSearch;
-use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
+use Capco\AppBundle\Search\VoteSearch;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectVotesResolver implements ResolverInterface
 {
@@ -71,29 +71,31 @@ class ProjectVotesResolver implements ResolverInterface
             if ($step instanceof ConsultationStep) {
                 $count = $this->voteSearch->searchConsultationStepVotes($step, 0)->getTotalCount();
             } elseif (
-                $step instanceof SelectionStep ||
-                $step instanceof CollectStep ||
-                $step instanceof DebateStep
+                $step instanceof SelectionStep
+                || $step instanceof CollectStep
+                || $step instanceof DebateStep
             ) {
                 $promise = $this->stepVotesCountResolver
                     ->__invoke($step, true, $anonymous)
                     ->then(function ($value) use (&$count) {
                         $count += $value;
-                    });
+                    })
+                ;
 
                 $this->adapter->await($promise);
             }
         } elseif (true === $anonymous) {
             if (
-                $step instanceof SelectionStep ||
-                $step instanceof CollectStep ||
-                $step instanceof DebateStep
+                $step instanceof SelectionStep
+                || $step instanceof CollectStep
+                || $step instanceof DebateStep
             ) {
                 $promise = $this->stepVotesCountResolver
                     ->__invoke($step, true, $anonymous)
                     ->then(function ($value) use (&$count) {
                         $count += $value;
-                    });
+                    })
+                ;
 
                 $this->adapter->await($promise);
             }

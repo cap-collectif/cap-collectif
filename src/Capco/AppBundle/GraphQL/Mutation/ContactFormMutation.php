@@ -2,23 +2,23 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\ContactForm\ContactFormTranslation;
-use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
-use Capco\AppBundle\Repository\LocaleRepository;
-use GraphQL\Error\UserError;
-use Psr\Log\LoggerInterface;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Form\ContactType;
-use Doctrine\ORM\EntityManagerInterface;
-use Capco\AppBundle\Form\ContactFormType;
-use Doctrine\DBAL\Exception\DriverException;
-use Capco\AppBundle\Notifier\ContactNotifier;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Form\FormFactoryInterface;
 use Capco\AppBundle\Entity\ContactForm\ContactForm;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Entity\ContactForm\ContactFormTranslation;
+use Capco\AppBundle\Form\ContactFormType;
+use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Notifier\ContactNotifier;
+use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Exception\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class ContactFormMutation implements MutationInterface
 {

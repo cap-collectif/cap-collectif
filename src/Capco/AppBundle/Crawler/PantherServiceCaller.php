@@ -66,7 +66,7 @@ class PantherServiceCaller
 
     private function createUrl(string $url): string
     {
-        if ($this->pantherUrl === 'INSERT_A_REAL_SECRET' || $this->pantherToken === 'INSERT_A_REAL_SECRET') {
+        if ('INSERT_A_REAL_SECRET' === $this->pantherUrl || 'INSERT_A_REAL_SECRET' === $this->pantherToken) {
             throw new \RuntimeException('pantherUrl or pantherToken is not set');
         }
 

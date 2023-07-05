@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Symfony\Component\Process\Process;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process;
 
 trait SnapshotCommandTrait
 {
@@ -37,13 +37,13 @@ trait SnapshotCommandTrait
         bool $import = false,
         bool $customPath = false
     ): void {
-        $generatedDirectory = $this->projectRootDir . "/public/export/${id}";
+        $generatedDirectory = $this->projectRootDir . "/public/export/{$id}";
         $gitDirectory = $import
-            ? $this->projectRootDir . "/__snapshots__/imports/${id}"
-            : $this->projectRootDir . "/__snapshots__/exports/${id}";
+            ? $this->projectRootDir . "/__snapshots__/imports/{$id}"
+            : $this->projectRootDir . "/__snapshots__/exports/{$id}";
 
         if ($customPath) {
-            $generatedDirectory = "/tmp/${id}";
+            $generatedDirectory = "/tmp/{$id}";
         }
 
         Process::fromShellCommandline('rm -rf ' . $gitDirectory)->mustRun();
@@ -51,6 +51,6 @@ trait SnapshotCommandTrait
             chmod($generatedDirectory, 0755);
         }
 
-        Process::fromShellCommandline("mv ${generatedDirectory} ${gitDirectory}")->mustRun();
+        Process::fromShellCommandline("mv {$generatedDirectory} {$gitDirectory}")->mustRun();
     }
 }

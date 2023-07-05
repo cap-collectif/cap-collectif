@@ -6,10 +6,10 @@ namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteParameter;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\ORM\Id\UuidGenerator;
 use Doctrine\Migrations\AbstractMigration;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\ORM\Id\UuidGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!

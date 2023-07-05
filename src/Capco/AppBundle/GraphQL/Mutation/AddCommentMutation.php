@@ -2,33 +2,33 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
-use Capco\AppBundle\Toggle\Manager;
-use Capco\UserBundle\Entity\User;
-use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Psr\Log\LoggerInterface;
-use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Form\CommentType;
-use Capco\AppBundle\Entity\PostComment;
-use Symfony\Component\Form\FormFactoryInterface;
-use Capco\AppBundle\Entity\EventComment;
-use Doctrine\ORM\EntityManagerInterface;
 use Capco\AppBundle\CapcoAppBundleEvents;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
-use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 class AddCommentMutation implements MutationInterface
 {
@@ -117,7 +117,8 @@ class AddCommentMutation implements MutationInterface
             ->setAuthor($viewer)
             ->setAuthorIp($this->requestGuesser->getClientIp())
             ->setRelatedObject($relatedCommentInstance)
-            ->setParent($commentable instanceof Comment ? $commentable : null);
+            ->setParent($commentable instanceof Comment ? $commentable : null)
+        ;
 
         $this->setModerationStatus($comment, $isModerationEnabled, $viewer);
 

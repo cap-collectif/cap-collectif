@@ -8,7 +8,8 @@ trait AnonymousVoteRepositoryTrait
     {
         $qb = $this->createQueryBuilder('v')
             ->select('count(DISTINCT v.email)')
-            ->where('v.user IS NULL');
+            ->where('v.user IS NULL')
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }

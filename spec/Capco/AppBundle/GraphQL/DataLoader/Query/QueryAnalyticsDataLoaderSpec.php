@@ -2,23 +2,23 @@
 
 namespace spec\Capco\AppBundle\GraphQL\DataLoader\Query;
 
-use DateTimeInterface;
-use Prophecy\Argument;
-use PhpSpec\ObjectBehavior;
-use Psr\Log\LoggerInterface;
-use Elastica\Multi\ResultSet;
-use GraphQL\Executor\Promise\Promise;
 use Capco\AppBundle\Cache\RedisTagCache;
-use Symfony\Component\Stopwatch\Stopwatch;
-use Capco\AppBundle\Search\AnalyticsSearch;
-use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Client\CloudflareElasticClient;
 use Capco\AppBundle\DataCollector\GraphQLCollector;
-use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
-use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\Elasticsearch\AnalyticsMostUsedProposalCategories;
+use Capco\AppBundle\Elasticsearch\AnalyticsTopContributors;
 use Capco\AppBundle\GraphQL\DataLoader\Query\QueryAnalyticsDataLoader;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Search\AnalyticsSearch;
+use DateTimeInterface;
+use Elastica\Multi\ResultSet;
+use GraphQL\Executor\Promise\Adapter\SyncPromiseAdapter;
+use GraphQL\Executor\Promise\Promise;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
 {
@@ -95,7 +95,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
                 $keys[0]['projectId']
             )
             ->shouldBeCalled()
-            ->willReturn($multiResultSet);
+            ->willReturn($multiResultSet)
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
@@ -105,7 +106,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
                 })
             )
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }
@@ -143,7 +145,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
                 $keys[0]['requestedFields']
             )
             ->shouldBeCalled()
-            ->willReturn($multiResultSet);
+            ->willReturn($multiResultSet)
+        ;
 
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
@@ -153,7 +156,8 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
                 })
             )
             ->shouldBeCalled()
-            ->willReturn($promise);
+            ->willReturn($promise)
+        ;
 
         $this->all($keys)->shouldReturn($promise);
     }

@@ -57,16 +57,14 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
     ): bool {
         $inviteStatus = null;
         if (
-            MailjetTransport::class === $providerClass &&
-            ($inviteMailjetId = $emailMessage->getMailerId())
+            MailjetTransport::class === $providerClass
+            && ($inviteMailjetId = $emailMessage->getMailerId())
         ) {
             $response = $this->mailjetClient->get('message/' . $inviteMailjetId);
             $responseBody = json_decode($response->getBody()->getContents(), true);
             $messageStatus = $responseBody['Data'][0]['Status'];
             if (MailjetClient::STATUS_QUEUED === $messageStatus) {
-                throw new UserInviteMessageQueuedException(
-                    UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED
-                );
+                throw new UserInviteMessageQueuedException(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED);
             }
 
             $inviteStatus = \in_array(
@@ -90,15 +88,13 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         }
 
         if (
-            MandrillTransport::class === $providerClass &&
-            ($inviteMandrillId = $emailMessage->getMailerId())
+            MandrillTransport::class === $providerClass
+            && ($inviteMandrillId = $emailMessage->getMailerId())
         ) {
             $response = $this->mandrillClient->post('messages/info', ['id' => $inviteMandrillId]);
             $messageStatus = json_decode($response->getBody()->getContents(), true)['state'];
             if (MandrillClient::STATUS_QUEUED === $messageStatus) {
-                throw new UserInviteMessageQueuedException(
-                    UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED
-                );
+                throw new UserInviteMessageQueuedException(UserInviteMessageQueuedException::MESSAGE_DEFAULT_QUEUED);
             }
 
             $inviteStatus =
@@ -124,7 +120,8 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         $invite = $emailMessage->getInvitation();
         $recipient = (new User())
             ->setLocale($this->siteParams->getDefaultLocale())
-            ->setEmail($invite->getEmail());
+            ->setEmail($invite->getEmail())
+        ;
 
         $delivered = $this->mailer->createAndSendMessage(
             UserInviteNewInvitation::class,
@@ -149,7 +146,8 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         $invite = $emailMessage->getInvitation();
         $recipient = (new User())
             ->setLocale($this->siteParams->getDefaultLocale())
-            ->setEmail($invite->getEmail());
+            ->setEmail($invite->getEmail())
+        ;
         $delivered = $this->mailer->createAndSendMessage(
             UserInviteNewInvitationByOrganization::class,
             $invite,
@@ -227,7 +225,7 @@ final class UserInviteEmailMessageNotifier extends BaseNotifier
         }
 
         $this->logger->error(
-            "The current transport instance does not implement `getLastMessageId` method."
+            'The current transport instance does not implement `getLastMessageId` method.'
         );
 
         return null;

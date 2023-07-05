@@ -78,13 +78,15 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->getIsEnabled()->willReturn(true);
         $siteImage
             ->getKeyname()
-            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY)
+        ;
 
         $siteImageRepository
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY,
             ])
-            ->willReturn($siteImage);
+            ->willReturn($siteImage)
+        ;
 
         $media->getId()->willReturn($mediaId);
         $mediaRepository->find($mediaId)->willReturn($media);
@@ -99,29 +101,35 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $toggleManager
             ->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $oldFrenchTranslation = new SiteParameterTranslation();
         $oldFrenchTranslation->setLocale('fr-FR');
         $oldFrenchTranslation->setValue($introduction);
         $currentIntroductionParameter
             ->getTranslations()
-            ->willReturn(new ArrayCollection([$oldFrenchTranslation]));
+            ->willReturn(new ArrayCollection([$oldFrenchTranslation]))
+        ;
         $currentIntroductionParameter->getValue()->willReturn($introduction);
         $siteParameterRepository
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY,
             ])
-            ->willReturn($currentIntroductionParameter);
+            ->willReturn($currentIntroductionParameter)
+        ;
         $siteParameterTranslationRepository
             ->findOneBy(['translatable' => $currentIntroductionParameter, 'locale' => 'fr-FR'])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $em
             ->getRepository(SiteParameterTranslation::class)
-            ->willReturn($siteParameterTranslationRepository);
+            ->willReturn($siteParameterTranslationRepository)
+        ;
 
         $em->flush()->shouldBeCalled();
 
@@ -159,13 +167,15 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->getIsEnabled()->willReturn(true);
         $siteImage
             ->getKeyname()
-            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY)
+        ;
 
         $siteImageRepository
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY,
             ])
-            ->willReturn($siteImage);
+            ->willReturn($siteImage)
+        ;
         $media = null;
         $mediaRepository->find('image')->willReturn(null);
         $siteImage->setMedia($media)->shouldBeCalled();
@@ -179,10 +189,12 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $toggleManager
             ->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $oldFrenchTranslation = new SiteParameterTranslation();
         $oldFrenchTranslation->setLocale('fr-FR');
@@ -193,13 +205,16 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY,
             ])
-            ->willReturn($currentIntroductionParameter);
+            ->willReturn($currentIntroductionParameter)
+        ;
         $siteParameterTranslationRepository
             ->findOneBy(['translatable' => $currentIntroductionParameter, 'locale' => 'fr-FR'])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $em
             ->getRepository(SiteParameterTranslation::class)
-            ->willReturn($siteParameterTranslationRepository);
+            ->willReturn($siteParameterTranslationRepository)
+        ;
 
         $em->flush()->shouldBeCalled();
 
@@ -242,13 +257,15 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $siteImage->getIsEnabled()->willReturn(true);
         $siteImage
             ->getKeyname()
-            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY);
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY)
+        ;
 
         $siteImageRepository
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_IMAGE_PARAMETER_KEY,
             ])
-            ->willReturn($siteImage);
+            ->willReturn($siteImage)
+        ;
         $media = null;
         $mediaRepository->find('image')->willReturn(null);
         $siteImage->setMedia($media)->shouldBeCalled();
@@ -262,10 +279,12 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 
         $toggleManager
             ->exists(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY)
-            ->willReturn(true);
+            ->willReturn(true)
+        ;
         $toggleManager
             ->set(UpdateShieldAdminFormMutation::SHIELD_MODE_TOGGLE_KEY, $shieldMode)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $frenchTranslation = new SiteParameterTranslation();
         $frenchTranslation->setLocale('fr-FR');
@@ -275,22 +294,27 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $englishTranslation->setValue('yes');
         $currentIntroductionParameter
             ->getTranslations()
-            ->willReturn(new ArrayCollection([$frenchTranslation, $englishTranslation]));
+            ->willReturn(new ArrayCollection([$frenchTranslation, $englishTranslation]))
+        ;
         $currentIntroductionParameter->getValue()->willReturn($introduction);
         $currentIntroductionParameter
             ->getKeyname()
-            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY);
+            ->willReturn(UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY)
+        ;
         $siteParameterRepository
             ->findOneBy([
                 'keyname' => UpdateShieldAdminFormMutation::SHIELD_INTRODUCTION_PARAMETER_KEY,
             ])
-            ->willReturn($currentIntroductionParameter);
+            ->willReturn($currentIntroductionParameter)
+        ;
         $siteParameterTranslationRepository
             ->findOneBy(['translatable' => $currentIntroductionParameter, 'locale' => 'fr-FR'])
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $em
             ->getRepository(SiteParameterTranslation::class)
-            ->willReturn($siteParameterTranslationRepository);
+            ->willReturn($siteParameterTranslationRepository)
+        ;
 
         $em->flush()->shouldBeCalled();
 

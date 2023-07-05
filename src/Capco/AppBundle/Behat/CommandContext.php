@@ -5,11 +5,11 @@ namespace Capco\AppBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
+use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
-use PHPUnit\Framework\Assert;
 
 class CommandContext implements KernelAwareContext
 {
@@ -48,6 +48,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run a command :command with parameters:
+     *
+     * @param mixed $command
      */
     public function runCommandWithParameters($command, TableNode $parameters)
     {
@@ -86,7 +88,8 @@ class CommandContext implements KernelAwareContext
             ->getKernel()
             ->getContainer()
             ->get('overblog_graphql.cache_compiler')
-            ->loadClasses(true);
+            ->loadClasses(true)
+        ;
         if (\count($parameters) > 0) {
             $arguments = array_merge(['command' => $command], $parameters);
             $input = new ArrayInput($arguments);

@@ -14,8 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionTypeAppendixType
 {
-    use UuidTrait;
     use PositionableTrait;
+    use UuidTrait;
 
     /**
      * @Gedmo\SortableGroup

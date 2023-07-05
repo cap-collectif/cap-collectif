@@ -4,6 +4,7 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\Service\OpenIDBackchannel;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -12,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Capco\AppBundle\Utils\RequestGuesser;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
@@ -43,7 +43,8 @@ class AuthenticationListener implements EventSubscriberInterface
             ->setSuccess(false)
             ->setEmail($email)
             ->setIpAddress($this->requestGuesser->getClientIp())
-            ->setNavigator($this->requestGuesser->getUserAgent());
+            ->setNavigator($this->requestGuesser->getUserAgent())
+        ;
         $this->em->persist($userConnection);
         $this->em->flush();
     }
@@ -68,7 +69,8 @@ class AuthenticationListener implements EventSubscriberInterface
             ->setEmail($email)
             ->setSuccess(true)
             ->setIpAddress($this->requestGuesser->getClientIp())
-            ->setNavigator($this->requestGuesser->getUserAgent());
+            ->setNavigator($this->requestGuesser->getUserAgent())
+        ;
 
         if ($user instanceof User && $request->query->get('session_state')) {
             $this->setUserOpenIdSID($request, $user);
