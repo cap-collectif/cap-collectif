@@ -40,11 +40,12 @@ const EventPreviewContainer: StyledComponent<
   }
 
   .eventImage {
-    width: 170px;
-    max-width: 170px;
-    min-width: 170px;
+    width: 150px;
+    max-width: 150px;
+    min-width: 150px;
     min-height: 110px;
-    max-height: 190px;
+    height: 110px;
+    aspect-ratio: 3 / 2;
     margin-right: 15px;
     flex: 1;
   }
