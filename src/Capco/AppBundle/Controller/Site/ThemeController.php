@@ -92,6 +92,7 @@ class ThemeController extends Controller
             'theme' => $theme,
             'themeId' => $theme->getId(),
             'max' => 12,
+            'archived' => null,
         ];
     }
 }

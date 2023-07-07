@@ -13,10 +13,8 @@ import ProjectsListFilterStatus from './ProjectListFilterStatus';
 import ProjectsListFilterDistricts from './ProjectListFilterDistricts';
 import type { ProjectType, ProjectAuthor, ProjectTheme } from './ProjectListFiltersContainer';
 import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectListFiltersContainerQuery.graphql';
-import ProjectsListFilterArchived from "~/components/Project/List/Filters/ProjectsListFilterArchived";
-import type {
-  ProjectArchiveFilter,
-} from '~relay/ProjectListViewRefetchQuery.graphql';
+import ProjectsListFilterArchived from '~/components/Project/List/Filters/ProjectsListFilterArchived';
+import type { ProjectArchiveFilter } from '~relay/ProjectListViewRefetchQuery.graphql';
 
 const formName = 'ProjectListFilters';
 
@@ -31,7 +29,7 @@ type Props = {
   theme: ?string,
   status: ?string,
   themes: ProjectTheme[],
-  archived: ?ProjectArchiveFilter
+  +archived?: ProjectArchiveFilter | null,
 };
 
 class ProjectListFilters extends React.Component<Props> {
@@ -70,7 +68,7 @@ class ProjectListFilters extends React.Component<Props> {
 
   renderStateFilter() {
     const { archived, intl } = this.props;
-    return <ProjectsListFilterArchived archived={archived} intl={intl}/>
+    return <ProjectsListFilterArchived archived={archived} intl={intl} />;
   }
 
   render() {
@@ -99,18 +97,6 @@ class ProjectListFilters extends React.Component<Props> {
 
 export const selector = formValueSelector(formName);
 
-const mapStateToProps = (state: GlobalState) => {
-  return {
-    features: state.default.features,
-    author: selector(state, 'author'),
-    theme: selector(state, 'theme'),
-    type: selector(state, 'type'),
-    status: selector(state, 'status'),
-    district: selector(state, 'district'),
-    archived: selector(state, 'archived'),
-  }
-};
-
 type FormValues = {|
   +author: ?string,
   +theme: ?string,
@@ -120,22 +106,50 @@ type FormValues = {|
   +archived: ?string,
 |};
 
-export const getInitialValues = (): FormValues => {
+export const getInitialValues = (props: {
+  +archived?: ProjectArchiveFilter | null,
+}): FormValues => {
   const urlSearch = new URLSearchParams(window.location.search);
+
+  const getArchived = () => {
+    if (window.location.pathname === '/projects/archived') {
+      return 'ARCHIVED';
+    }
+    if (urlSearch.get('archived')) {
+      return urlSearch.get('archived');
+    }
+    if (props.archived !== undefined) {
+      return props.archived;
+    }
+    return 'ACTIVE';
+  };
+
   return {
     status: urlSearch.get('status') || null,
     type: urlSearch.get('type') || null,
     author: urlSearch.get('author') || null,
     theme: urlSearch.get('theme') || null,
     district: urlSearch.get('district') || null,
-    archived: window.location.pathname === '/projects/archived' ? 'ARCHIVED' : (urlSearch.get('archived') || 'ACTIVE'),
+    archived: getArchived(),
+  };
+};
+
+const mapStateToProps = (state: GlobalState, props) => {
+  return {
+    features: state.default.features,
+    author: selector(state, 'author'),
+    theme: selector(state, 'theme'),
+    type: selector(state, 'type'),
+    status: selector(state, 'status'),
+    district: selector(state, 'district'),
+    archived: selector(state, 'archived'),
+    initialValues: getInitialValues(props),
   };
 };
 
 const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
-  initialValues: getInitialValues(),
 })(ProjectListFilters);
 
 export default connect<any, any, _, _, _, _>(mapStateToProps)(form);

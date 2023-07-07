@@ -9,6 +9,7 @@ import { type GlobalState, type FeatureToggles } from '../../../types';
 import ProjectListView from './ProjectListView';
 import { getInitialValues } from './Filters/ProjectListFilters';
 import ProjectsListPlaceholder from './ProjectsListPlaceholder';
+import type { ProjectArchiveFilter } from '~relay/ProjectListViewRefetchQuery.graphql';
 
 type Props = {|
   +authorId?: string,
@@ -25,6 +26,7 @@ type Props = {|
   +paginate: boolean,
   +isProjectsPage?: boolean,
   +features: FeatureToggles,
+  +archived?: ProjectArchiveFilter | null,
 |};
 
 class ProjectsList extends React.Component<Props> {
@@ -41,7 +43,7 @@ class ProjectsList extends React.Component<Props> {
     super(props);
 
     this.initialRenderVars = {
-      ...getInitialValues(),
+      ...getInitialValues(props),
       orderBy: props.orderBy,
       term: props.term,
       limit: props.limit,
@@ -80,17 +82,8 @@ class ProjectsList extends React.Component<Props> {
   };
 
   render() {
-    const {
-      orderBy,
-      type,
-      theme,
-      term,
-      limit,
-      status,
-      author,
-      onlyPublic,
-      archived
-    } = this.initialRenderVars;
+    const { orderBy, type, theme, term, limit, status, author, onlyPublic, archived } =
+      this.initialRenderVars;
 
     return (
       <QueryRenderer

@@ -54,7 +54,7 @@
             <h2 class="h2">{{ 'global.participative.project'|trans({}, 'CapcoAppBundle') }}</h2>
             {% set projectsCount = theme.projects | length %}
             {% if projectsCount > 0 %}
-                {{ react_render_component('ProjectsListApp', {'props': {'limit': max, 'themeId': themeId} }) }}
+                {{ react_render_component('ProjectsListApp', {'props': {'limit': max, 'themeId': themeId, 'archived': archived} }) }}
                 {% if projectsCount > max %}
                     <a href="{{ path('app_project', {'theme': themeId, 'sort': 'date'}) }}" class="btn  btn-primary  btn--outline">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
                 {% endif %}
