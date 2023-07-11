@@ -85,7 +85,11 @@ export const VoteItemContainer: StyledComponent<{}, {}, HTMLDivElement> = styled
       margin-bottom: 0 !important;
     }
   }
-
+  .proposal-vote__delete-container {
+    & > div[role='dialog'] {
+      z-index: 99999 !important;
+    }
+  }
   .form-group {
     margin-bottom: 0;
   }
