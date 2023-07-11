@@ -53,15 +53,21 @@ exports[`<PieChart /> renders PieChart 1`] = `
         itemStyle={Object {}}
         labelStyle={Object {}}
         offset={10}
+        reverseDirection={
+          Object {
+            "x": false,
+            "y": false,
+          }
+        }
         separator=" : "
         trigger="hover"
         useTranslate3d={false}
         viewBox={
           Object {
-            "x1": 0,
-            "x2": 0,
-            "y1": 0,
-            "y2": 0,
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0,
           }
         }
         wrapperStyle={Object {}}
@@ -181,15 +187,21 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
         itemStyle={Object {}}
         labelStyle={Object {}}
         offset={10}
+        reverseDirection={
+          Object {
+            "x": false,
+            "y": false,
+          }
+        }
         separator=" : "
         trigger="hover"
         useTranslate3d={false}
         viewBox={
           Object {
-            "x1": 0,
-            "x2": 0,
-            "y1": 0,
-            "y2": 0,
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0,
           }
         }
         wrapperStyle={Object {}}

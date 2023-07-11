@@ -45,12 +45,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         allowDataOverflow={false}
         allowDecimals={false}
         allowDuplicatedCategory={true}
-        domain={
-          Array [
-            0,
-            "auto",
-          ]
-        }
         height={30}
         hide={false}
         mirror={false}
@@ -74,12 +68,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly with other resp
         allowDecimals={true}
         allowDuplicatedCategory={true}
         dataKey="name"
-        domain={
-          Array [
-            0,
-            "auto",
-          ]
-        }
         height={0}
         hide={false}
         mirror={false}
@@ -183,12 +171,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         allowDataOverflow={false}
         allowDecimals={false}
         allowDuplicatedCategory={true}
-        domain={
-          Array [
-            0,
-            "auto",
-          ]
-        }
         height={30}
         hide={false}
         mirror={false}
@@ -212,12 +194,6 @@ exports[`<QuestionnaireAdminResultsBarChart /> renders correctly without other r
         allowDecimals={true}
         allowDuplicatedCategory={true}
         dataKey="name"
-        domain={
-          Array [
-            0,
-            "auto",
-          ]
-        }
         height={0}
         hide={false}
         mirror={false}
