@@ -33,9 +33,8 @@ class SelectionStepProposalResolver implements ResolverInterface
     ): ConnectionInterface {
         $filters = [];
         [
-            $field,
-            $direction,
             $term,
+            $ordersBy,
             $filters['district'],
             $filters['theme'],
             $filters['types'],
@@ -47,9 +46,8 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['excludeViewerVotes'],
             $filters['geoBoundingBox'],
         ] = [
-            $args->offsetGet('orderBy')['field'],
-            $args->offsetGet('orderBy')['direction'],
             $args->offsetGet('term'),
+            $args->offsetGet('orderBy'),
             $args->offsetGet('district'),
             $args->offsetGet('theme'),
             $args->offsetGet('userType'),
@@ -88,13 +86,16 @@ class SelectionStepProposalResolver implements ResolverInterface
         }
 
         try {
-            $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
+            $orders = array_map(function ($order) {
+                return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
+            }, $ordersBy);
+
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $filters,
                 $term,
                 $viewer,
                 $request,
-                $order
+                $orders
             ) {
                 $seed = Search::generateSeed($request, $viewer);
 
@@ -104,7 +105,7 @@ class SelectionStepProposalResolver implements ResolverInterface
                     $filters,
                     $seed,
                     $cursor,
-                    $order
+                    $orders
                 );
             });
 

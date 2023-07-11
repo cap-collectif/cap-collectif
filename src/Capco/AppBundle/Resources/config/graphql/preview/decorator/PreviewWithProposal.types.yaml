@@ -16,11 +16,9 @@ PreviewWithProposals:
                         type: 'ID'
                         description: 'ID of a User to filter by. If non-null, only proposals authored by this user will be returned.'
                     orderBy:
-                        # TODO we can change to an array to allow multiple orderBy (first by comment, then by votes if equal)
-                        # but this is not a BC thanks to the GraphQL spec
-                        type: 'PreviewProposalOrder'
+                        type: '[PreviewProposalOrder]'
                         description: 'Ordering options for proposals returned from the connection.'
-                        defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
+                        defaultValue: [ { field: 'PUBLISHED_AT', direction: 'ASC' } ]
                     includeDraft:
                         type: 'Boolean'
                         description: '(ROLE_ADMIN only) Select also draft proposals.'

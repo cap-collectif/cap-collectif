@@ -173,7 +173,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }:
           query ProposalStepPageQuery(
             $stepId: ID!
             $cursor: String
-            $orderBy: ProposalOrder
+            $orderBy: [ProposalOrder]
             $isAuthenticated: Boolean!
             $count: Int
             $term: String

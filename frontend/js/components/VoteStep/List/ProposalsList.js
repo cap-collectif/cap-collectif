@@ -30,7 +30,7 @@ const QUERY = graphql`
   query ProposalsListQuery(
     $stepId: ID!
     $count: Int!
-    $orderBy: ProposalOrder
+    $orderBy: [ProposalOrder]
     $cursor: String
     $userType: ID
     $theme: ID
@@ -67,7 +67,7 @@ const FRAGMENT = graphql`
   @argumentDefinitions(
     count: { type: "Int!" }
     cursor: { type: "String" }
-    orderBy: { type: "ProposalOrder" }
+    orderBy: { type: "[ProposalOrder]" }
     userType: { type: "ID" }
     theme: { type: "ID" }
     category: { type: "ID" }
@@ -177,7 +177,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
       stepId,
       count: LOAD_PROPOSAL_COUNT,
       cursor: null,
-      orderBy: getOrderByArgs(sort) || { field: 'RANDOM', direction: 'ASC' },
+      orderBy: getOrderByArgs(sort) || [{ field: 'RANDOM', direction: 'ASC' }],
       userType: userType || null,
       theme: theme || null,
       category: category || null,

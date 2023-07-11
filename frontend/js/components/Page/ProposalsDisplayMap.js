@@ -130,7 +130,7 @@ export default createPaginationContainer(
         $stepId: ID!
         $cursor: String
         $count: Int
-        $orderBy: ProposalOrder
+        $orderBy: [ProposalOrder]
         $term: String
         $district: ID
         $category: ID

@@ -9,3 +9,9 @@ InternalProposalOrderField:
             REVISION_AT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::REVISION_AT")'
                 description: 'Allows ordering a list of proposals by revision date.'
+            CATEGORY:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::CATEGORY")'
+                description: 'Allows ordering a list of proposals by categories.'
+            DISTRICT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::DISTRICT")'
+                description: 'Allows ordering a list of proposals by district.'

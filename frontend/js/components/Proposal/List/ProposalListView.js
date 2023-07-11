@@ -68,7 +68,7 @@ export const queryVariables = (filters: Filters, order: ?string) => {
   }
 
   return {
-    orderBy: { field, direction },
+    orderBy: [{ field, direction }],
     district: filters.districts && filters.districts !== '0' ? filters.districts : null,
     theme: filters.themes && filters.themes !== '0' ? filters.themes : null,
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
@@ -190,7 +190,7 @@ export default createRefetchContainer(
     query ProposalListViewRefetchQuery(
       $stepId: ID!
       $cursor: String
-      $orderBy: ProposalOrder
+      $orderBy: [ProposalOrder]
       $isAuthenticated: Boolean!
       $count: Int
       $term: String

@@ -141,7 +141,7 @@ class ProposalSearch extends Search
         array $providedFilters,
         int $seed,
         ?string $cursor,
-        ?string $order = null
+        ?array $orders = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if ($terms) {
@@ -208,7 +208,7 @@ class ProposalSearch extends Search
         }
 
         $sortParams = [];
-        if ('random' === $order) {
+        if (1 === \count($orders) && 'random' === $orders[0]) {
             $query = $this->getRandomSortedQuery($boolQuery, $seed);
             $sortParams[] = ['_score' => new \stdClass()];
             $sortParams[] = ['id' => new \stdClass()];
@@ -223,10 +223,11 @@ class ProposalSearch extends Search
                 }
             }
 
-            if ($order) {
-                $sortParams[] = $this->getProposalSort($order, $stepid);
+            if (\count($orders) > 0) {
+                foreach ($orders as $order) {
+                    $sortParams[] = $this->getProposalSort($order, $stepid);
+                }
                 $sortParams[] = ['id' => new \stdClass()];
-
                 $query->setSort($sortParams);
             }
         }
@@ -311,6 +312,24 @@ class ProposalSearch extends Search
                     $order = 'cheap';
                 } else {
                     $order = 'expensive';
+                }
+
+                break;
+
+            case ProposalOrderField::CATEGORY:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'category-asc';
+                } else {
+                    $order = 'category-desc';
+                }
+
+                break;
+
+            case ProposalOrderField::DISTRICT:
+                if (OrderDirection::ASC === $direction) {
+                    $order = 'district-asc';
+                } else {
+                    $order = 'district-desc';
                 }
 
                 break;
@@ -624,6 +643,26 @@ class ProposalSearch extends Search
                 return [
                     'estimation' => ['order' => 'asc'],
                     'createdAt' => ['order' => 'desc'],
+                ];
+
+            case 'category-asc':
+                return [
+                    'category.name' => ['order' => 'asc', 'unmapped_type' => 'long'],
+                ];
+
+            case 'category-desc':
+                return [
+                    'category.name' => ['order' => 'desc', 'unmapped_type' => 'long'],
+                ];
+
+            case 'district-asc':
+                return [
+                    'district.name.keyword' => ['order' => 'asc', 'unmapped_type' => 'long'],
+                ];
+
+            case 'district-desc':
+                return [
+                    'district.name.keyword' => ['order' => 'desc', 'unmapped_type' => 'long'],
                 ];
 
             default:

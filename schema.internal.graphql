@@ -2222,7 +2222,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false
@@ -9966,7 +9966,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false
@@ -11256,7 +11256,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false
@@ -11634,6 +11634,12 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by revision date."""
   REVISION_AT
+
+  """Allows ordering a list of proposals by categories."""
+  CATEGORY
+
+  """Allows ordering a list of proposals by district."""
+  DISTRICT
 }
 
 """Possible values of a proposal's global progress state."""
@@ -11959,7 +11965,7 @@ interface ProposalStep {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false
@@ -14844,7 +14850,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false

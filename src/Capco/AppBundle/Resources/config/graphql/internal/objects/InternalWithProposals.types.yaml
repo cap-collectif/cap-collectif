@@ -49,8 +49,9 @@ InternalWithProposals:
                         description: "The decision-maker's id assigned to the proposal"
                         type: 'ID'
                     orderBy:
-                        type: 'InternalProposalOrder'
-                        defaultValue: { field: 'PUBLISHED_AT', direction: 'ASC' }
+                        type: '[InternalProposalOrder]'
+                        description: 'Ordering options for proposals returned from the connection.'
+                        defaultValue: [ { field: 'PUBLISHED_AT', direction: 'ASC' } ]
                     excludeViewerVotes:
                         type: 'Boolean'
                         defaultValue: false

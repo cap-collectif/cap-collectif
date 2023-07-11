@@ -47,7 +47,7 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
   @argumentDefinitions(
     count: { type: "Int!" }
     cursor: { type: "String" }
-    orderBy: { type: "ProposalOrder" }
+    orderBy: { type: "[ProposalOrder]" }
     userType: { type: "ID" }
     theme: { type: "ID" }
     category: { type: "ID" }

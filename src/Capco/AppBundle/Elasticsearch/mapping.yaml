@@ -228,7 +228,13 @@ mappings:
         district:
             properties:
                 id: { type: keyword }
-                name: *text_analysis_highlighted
+                name:
+                    type: text
+                    analyzer: capco_french
+                    index_options: offsets
+                    fields:
+                        std: { type: text, analyzer: capco_standard }
+                        keyword: { type: keyword }
         status:
             properties:
                 id: { type: keyword }
@@ -238,6 +244,7 @@ mappings:
         category:
             properties:
                 id: { type: keyword }
+                name: { type: keyword }
         theme:
             properties:
                 id: { type: keyword }

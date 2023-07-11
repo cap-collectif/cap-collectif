@@ -7,7 +7,7 @@ const ProposalStepProposalsQuery = /* GraphQL */ `
     $district: ID
     $category: ID
     $cursor: String
-    $orderBy: ProposalOrder
+    $orderBy: [ProposalOrder]
   ) {
     node(id: $id) {
       ... on ProposalStep {
@@ -107,7 +107,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'COMMENTS', direction: 'DESC' },
+          orderBy: [{field: 'COMMENTS', direction: 'DESC'}],
         },
         'internal',
       ),
@@ -121,7 +121,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: { field: 'COMMENTS', direction: 'ASC' },
+          orderBy: [{field: 'COMMENTS', direction: 'ASC'}],
         },
         'internal',
       ),
@@ -135,7 +135,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'ASC' }],
         },
         'internal',
       ),
@@ -149,7 +149,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 2,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -163,7 +163,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 2,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: { field: 'POINTS', direction: 'DESC' },
+          orderBy: [{ field: 'POINTS', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -176,7 +176,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 2,
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: { field: 'VOTES', direction: 'DESC' },
+          orderBy: [{ field: 'VOTES', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -191,7 +191,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 100,
           status: 'status1',
           id: toGlobalId('CollectStep', 'collectstepVoteClassement'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -205,7 +205,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('CollectStep', 'collectQuestionVoteAvecClassement'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -219,7 +219,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
         {
           count: 100,
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -234,7 +234,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 100,
           status: 'status4',
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -249,7 +249,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 100,
           district: toGlobalId('District', 'district1'),
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),
@@ -264,7 +264,7 @@ describe('Internal|ProposalStep.proposals connection', () => {
           count: 100,
           category: 'pCategory1',
           id: toGlobalId('SelectionStep', 'selectionstep1'),
-          orderBy: { field: 'PUBLISHED_AT', direction: 'DESC' },
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'DESC' }],
         },
         'internal',
       ),

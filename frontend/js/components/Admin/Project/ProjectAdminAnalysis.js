@@ -979,7 +979,7 @@ export default createPaginationContainer(
         count: { type: "Int!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
         cursor: { type: "String" }
-        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        orderBy: { type: "[ProposalOrder!]", defaultValue: [{ field: PUBLISHED_AT, direction: DESC }] }
         category: { type: "ID", defaultValue: null }
         district: { type: "ID", defaultValue: null }
         theme: { type: "ID", defaultValue: null }
@@ -1160,7 +1160,7 @@ export default createPaginationContainer(
         $count: Int!
         $proposalRevisionsEnabled: Boolean!
         $cursor: String
-        $orderBy: ProposalOrder!
+        $orderBy: [ProposalOrder!]
         $category: ID
         $district: ID
         $theme: ID

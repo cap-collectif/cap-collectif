@@ -124,7 +124,7 @@ type CollectStep implements Node & Step {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false
@@ -1567,7 +1567,7 @@ type SelectionStep implements Node & Step {
     author: ID
 
     """Ordering options for proposals returned from the connection."""
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: [ProposalOrder] = [{field: PUBLISHED_AT, direction: ASC}]
 
     """(ROLE_ADMIN only) Select also draft proposals."""
     includeDraft: Boolean = false

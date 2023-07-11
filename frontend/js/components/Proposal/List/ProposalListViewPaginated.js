@@ -155,7 +155,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
       query ProposalListViewPaginatedQuery(
         $stepId: ID!
         $cursor: String
-        $orderBy: ProposalOrder
+        $orderBy: [ProposalOrder]
         $isAuthenticated: Boolean!
         $count: Int
         $term: String

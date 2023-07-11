@@ -5,7 +5,7 @@ const OpenDataProposalsQuery = /* GraphQL */ `
     $count: Int!
     $cursor: String
     $trashedStatus: ProposalTrashedStatus
-    $orderBy: ProposalOrder!
+    $orderBy: [ProposalOrder]!
   ) {
     node(id: $id) {
       id
@@ -67,7 +67,7 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
     $count: Int!
     $cursor: String
     $trashedStatus: ProposalTrashedStatus
-    $orderBy: ProposalOrder!
+    $orderBy: [ProposalOrder]!
     $draft: Boolean
   ) {
     node(id: $id) {
@@ -106,7 +106,7 @@ describe('Preview|Query.proposals connection', () => {
       graphql(OpenDataProposalsQuery, {
         id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
         count: 100,
-        orderBy: { field: 'PUBLISHED_AT', direction: 'ASC' },
+        orderBy: [{ field: 'PUBLISHED_AT', direction: 'ASC' }],
       }),
     ).resolves.toMatchSnapshot();
   });
@@ -118,7 +118,7 @@ describe('Preview|Query.proposals connection', () => {
         {
           id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
           count: 100,
-          orderBy: { field: 'CREATED_AT', direction: 'ASC' },
+          orderBy: [{ field: 'CREATED_AT', direction: 'ASC' }],
           draft: true,
         },
         'internal',

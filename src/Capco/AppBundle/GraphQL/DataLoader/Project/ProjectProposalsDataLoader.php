@@ -86,8 +86,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             $providedFilters['district'],
             $providedFilters['trashedStatus'],
             $providedFilters['theme'],
-            $field,
-            $direction,
+            $ordersBy,
             $isExporting,
         ] = [
             $args->offsetGet('term'),
@@ -98,8 +97,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('district'),
             $args->offsetGet('trashedStatus'),
             $args->offsetGet('theme'),
-            $args->offsetGet('orderBy')['field'],
-            $args->offsetGet('orderBy')['direction'],
+            $args->offsetGet('orderBy'),
             $args->offsetGet('includeUnpublished'),
         ];
 
@@ -109,15 +107,18 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             }
         }
 
-        $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
+        $orders = array_map(function ($order) {
+            return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
+        }, $ordersBy);
+
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $project,
-            $order,
+            $orders,
             $providedFilters
         ) {
             return $this->proposalSearch->searchProposalsByProject(
                 $project,
-                $order,
+                $orders[0],
                 $providedFilters,
                 $limit,
                 $cursor

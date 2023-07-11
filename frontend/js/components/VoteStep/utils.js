@@ -76,10 +76,10 @@ export const getOrderByArgs = (sort: string | null) => {
     },
   };
 
-  return {
+  return [{
     field: sortBy[sort].field,
     direction: sortBy[sort].direction,
-  };
+  }];
 };
 
 export const Link = ({

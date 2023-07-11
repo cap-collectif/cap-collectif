@@ -94,10 +94,10 @@ export const createQueryVariables = (
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   proposalRevisionsEnabled,
   cursor: null,
-  orderBy: {
+  orderBy: [{
     field: getSortField(parameters.sort),
     direction: getSortType(parameters.sort),
-  },
+  }],
   state: parameters.filters.state,
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
@@ -114,7 +114,7 @@ export const queryProposals = graphql`
     $count: Int!
     $proposalRevisionsEnabled: Boolean!
     $cursor: String
-    $orderBy: ProposalOrder!
+    $orderBy: [ProposalOrder!]
     $state: ProposalsState!
     $category: ID
     $district: ID

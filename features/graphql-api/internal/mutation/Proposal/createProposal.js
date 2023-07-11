@@ -31,7 +31,7 @@ const createProposalFromBackOffice = /* GraphQL */ `
   }
 `;
 
-describe('Internal|create proposal', () => {
+describe('Internal|create proposal', () => { 
   const input = {
     proposalFormId: 'proposalformCafetier',
     title: "Au ptit qu'a fait",

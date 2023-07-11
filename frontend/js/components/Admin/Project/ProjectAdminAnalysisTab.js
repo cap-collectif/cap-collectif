@@ -73,10 +73,10 @@ const createQueryVariables = (
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   proposalRevisionsEnabled,
   cursor: null,
-  orderBy: {
+  orderBy: [{
     field: getSortField(parameters.sort),
     direction: getSortType(parameters.sort),
-  },
+  }],
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
   theme: parameters.filters.theme === 'ALL' ? null : parameters.filters.theme,
@@ -94,7 +94,7 @@ export const queryAnalysis = graphql`
     $count: Int!
     $proposalRevisionsEnabled: Boolean!
     $cursor: String
-    $orderBy: ProposalOrder!
+    $orderBy: [ProposalOrder]!
     $category: ID
     $district: ID
     $theme: ID
@@ -141,10 +141,10 @@ export const queryAnalysis = graphql`
 export const initialVariables = {
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   cursor: null,
-  orderBy: {
+  orderBy: [{
     field: 'PUBLISHED_AT',
     direction: 'DESC',
-  },
+  }],
   category: null,
   district: null,
   theme: null,

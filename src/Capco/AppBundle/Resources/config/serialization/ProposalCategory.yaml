@@ -4,4 +4,4 @@ Capco\AppBundle\Entity\ProposalCategory:
             groups:
                 [ProposalForms, ProposalCategories, Proposals, Elasticsearch, ElasticsearchProposal]
         name:
-            groups: [ProposalForms, ProposalCategories, Proposals]
+            groups: [ProposalForms, ProposalCategories, Proposals, ElasticsearchProposal]

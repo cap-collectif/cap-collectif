@@ -131,8 +131,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $isExporting,
             $author,
             $affiliations,
-            $direction,
-            $field,
+            $ordersBy,
             $filters['step'],
             $filters['state'],
             $filters['district'],
@@ -148,8 +147,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $args->offsetGet('includeUnpublished'),
             $args->offsetGet('author'),
             $args->offsetGet('affiliations'),
-            $args->offsetGet('orderBy')['direction'],
-            $args->offsetGet('orderBy')['field'],
+            $args->offsetGet('orderBy'),
             $args->offsetGet('step'),
             $args->offsetGet('state'),
             $args->offsetGet('district'),
@@ -193,6 +191,9 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             $filters['author'] = $author;
         }
 
+        $direction = $ordersBy[0]['direction'] ?? 'DESC';
+        $field = $ordersBy[0]['field'] ?? 'PUBLISHED_AT';
+
         if ($affiliations) {
             if (\in_array(ProposalAffiliations::OWNER, $affiliations, true)) {
                 $filters['author'] = $viewer->getId();
@@ -230,10 +231,14 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 return $connection;
             }
         }
-        $order = ProposalSearch::findOrderFromFieldAndDirection($field, $direction);
+
+        $orders = array_map(function ($order) {
+            return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
+        }, $ordersBy);
+
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $form,
-            $order,
+            $orders,
             $viewer,
             $term,
             $request,
@@ -249,7 +254,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 $filters,
                 $seed,
                 $cursor,
-                $order
+                $orders
             );
         });
 

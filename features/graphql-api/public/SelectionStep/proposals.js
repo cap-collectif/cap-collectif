@@ -6,7 +6,7 @@ const ProposalsQuery = /* GraphQL */ `
     $count: Int!
     $cursor: String
     $trashedStatus: ProposalTrashedStatus
-    $orderBy: ProposalOrder!
+    $orderBy: [ProposalOrder]!
     $draft: Boolean
   ) {
     node(id: $id) {
@@ -59,7 +59,7 @@ describe('Preview|Query.proposals connection', () => {
         {
           id: toGlobalId('SelectionStep', 'selectionStepIdfAnalyse'),
           count: 100,
-          orderBy: { field: 'REVISION_AT', direction: 'ASC' },
+          orderBy: [{field: 'REVISION_AT', direction: 'ASC'}],
           draft: false,
         },
         'internal_admin',

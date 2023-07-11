@@ -217,6 +217,10 @@ export const ProjectAdminContent = ({
       projectId: project.id,
       proposalStep: firstCollectStepId,
       proposalRevisionsEnabled: hasProjectRevisionEnabled ?? false,
+      proposalOrderBy: [{
+        field: 'PUBLISHED_AT',
+        direction: 'DESC',
+      }],
       // DebateStep (argument)
       countArgumentPagination: ARGUMENT_PAGINATION,
       cursorArgumentPagination: null,

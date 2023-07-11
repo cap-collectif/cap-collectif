@@ -12,4 +12,6 @@ final class ProposalOrderField
     public const RANDOM = 'RANDOM';
     public const COST = 'COST';
     public const REVISION_AT = 'REVISION_AT';
+    public const CATEGORY = 'CATEGORY';
+    public const DISTRICT = 'DISTRICT';
 }

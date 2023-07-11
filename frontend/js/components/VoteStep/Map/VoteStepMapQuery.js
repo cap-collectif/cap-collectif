@@ -12,7 +12,7 @@ const QUERY = graphql`
   query VoteStepMapQueryQuery(
     $stepId: ID!
     $count: Int!
-    $orderBy: ProposalOrder
+    $orderBy: [ProposalOrder]
     $cursor: String
     $userType: ID
     $theme: ID
@@ -69,7 +69,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
       stepId,
       count: 50,
       cursor: null,
-      orderBy: getOrderByArgs(sort) || { field: 'RANDOM', direction: 'ASC' },
+      orderBy: getOrderByArgs(sort) || [{ field: 'RANDOM', direction: 'ASC' }],
       userType: userType || null,
       theme: theme || null,
       category: category || null,
