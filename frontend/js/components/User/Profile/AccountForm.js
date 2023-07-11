@@ -475,7 +475,7 @@ export const AccountForm = ({
                         <br />
                         {viewer.isFranceConnectAccount ? (
                           <a
-                            href="https://fcp.integ01.dev-franceconnect.fr/traces/"
+                            href="https://tableaudebord.franceconnect.gouv.fr/"
                             target="_blank"
                             rel="noopener noreferrer">
                             <FormattedMessage id="fc-archive-connection" />
