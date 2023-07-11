@@ -1,11 +1,15 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, forwardRef, LegacyRef } from 'react';
 import dynamic from 'next/dynamic';
-const importJodit = () => import('jodit-react');
-const JoditEditor = dynamic(importJodit, {
-    ssr: false,
-});
 import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui';
 import { getApiUrl } from 'config';
+import { JoditProps } from 'jodit-react';
+
+const Editor = dynamic(() => import('./JoditImport'), {
+    ssr: false,
+});
+const ForwardRefEditor = forwardRef((props: JoditProps, ref: LegacyRef<any>) => (
+    <Editor {...props} editorRef={ref} />
+));
 
 type Props = {
     textAreaOnly?: boolean,
@@ -65,7 +69,7 @@ const getConfig = (
         style: {
             background: 'white',
         },
-        language: platformLanguage?.substr(0, 2) || 'fr',
+        language: platformLanguage?.substr(0, 2)?.toLowerCase() || 'fr',
         placeholder,
         uploader: {
             url: `${getApiUrl()}/files`,
@@ -97,7 +101,7 @@ const getConfig = (
                 console.error(resp);
             },
             defaultHandlerSuccess: (data: any) => {
-                if (editor.current) {
+                if (editor.current && editor.current.component) {
                     if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(data.baseurl))
                         editor.current.component.selection.insertImage(data.baseurl);
                     else {
@@ -133,7 +137,7 @@ const Jodit = ({
               '.jodit-status-bar,.jodit-ui-group,.jodit-toolbar__box': { display: 'none' },
               '.jodit-workplace': { borderRadius: radii.normal },
               '.jodit-wysiwyg': {
-                  padding: `${space[3]} !important`,
+                  padding: `${space[4]} !important`,
                   paddingTop: `${space[1]} !important`,
                   paddingBottom: `${space[1]} !important`,
                   maxHeight: '100px',
@@ -141,7 +145,7 @@ const Jodit = ({
               'span.jodit-placeholder': {
                   color: colors.gray[500],
                   fontFamily: CapUIFontFamily.Input,
-                  padding: `${space[3]} !important`,
+                  padding: `${space[4]} !important`,
                   paddingTop: `${space[2]} !important`,
               },
               '.jodit-container.jodit': {
@@ -150,7 +154,14 @@ const Jodit = ({
                   '&:focus-within': { border: `1px solid ${colors.blue[500]}` },
               },
           }
-        : null;
+        : {
+              '.jodit-wysiwyg': {
+                  padding: `${space[5]} !important`,
+              },
+              'span.jodit-placeholder': {
+                  padding: `${space[5]}`,
+              },
+          };
 
     const config = useMemo(
         () => getConfig(platformLanguage, placeholder, editor, textAreaOnly),
@@ -159,8 +170,11 @@ const Jodit = ({
 
     return useMemo(
         () => (
-            <Box id={id} className="joditEditor" sx={styles}>
-                <JoditEditor ref={editor} value={value} config={config} onChange={onChange} />
+            <Box
+                id={id}
+                className="joditEditor"
+                sx={{ ...styles, '.jodit-wysiwyg a': { textDecoration: 'underline' } }}>
+                <ForwardRefEditor ref={editor} value={value} config={config} onChange={onChange} />
             </Box>
         ),
         // eslint-disable-next-line react-hooks/exhaustive-deps
