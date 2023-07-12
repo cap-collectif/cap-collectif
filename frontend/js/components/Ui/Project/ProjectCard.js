@@ -79,6 +79,11 @@ export const ProjectCard = ({
             }}
             position="relative"
             width={variantSize === 'L' ? '50%' : '100%'}
+            sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 960px,
+        (max-width: 1280px) 960px,
+        (max-width: 2560px) 960px,"
           />
         ) : (
           <AppBox

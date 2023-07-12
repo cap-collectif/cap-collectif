@@ -23,6 +23,7 @@ exports[`<ProjectCard /> should render correctly 1`] = `
       _css2={null}
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />
@@ -169,6 +170,7 @@ exports[`<ProjectCard /> should render correctly an archived project 1`] = `
       _css2="50%"
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />
@@ -344,6 +346,7 @@ exports[`<ProjectCard /> should render correctly an external project 1`] = `
       _css2={null}
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />
@@ -490,6 +493,7 @@ exports[`<ProjectCard /> should render correctly on project page 1`] = `
       _css2={null}
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />
@@ -665,6 +669,7 @@ exports[`<ProjectCard /> should render correctly with themes and districts 1`] =
       _css2={null}
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />
@@ -1056,6 +1061,7 @@ exports[`<ProjectCard /> should render correctly without participative step 1`] 
       _css2={null}
       overflow="hidden"
       position="relative"
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
       src="/cover.jpg"
       width="100%"
     />

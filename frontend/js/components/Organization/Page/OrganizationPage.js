@@ -160,6 +160,12 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                   objectFit: !cover ? 'contain' : 'cover',
                 }}
                 maxHeight="315px"
+                loading="eager"
+                sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 960px,
+        (max-width: 1280px) 960px,
+        (max-width: 2560px) 960px,"
               />
               {cover && logo ? (
                 <AppBox
@@ -179,6 +185,12 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                     css={{
                       objectFit: 'contain',
                     }}
+                    loading="eager"
+                    sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 320px,
+        (max-width: 960px) 320px,
+        (max-width: 1280px) 320px,
+        (max-width: 2560px) 320px,"
                   />
                 </AppBox>
               ) : null}

@@ -99,6 +99,12 @@ export const Cover = ({ src, alt }: {| +src?: ?string, +alt?: ?string |}) =>
         height="100%"
         minHeight="270px"
         style={{ objectFit: 'cover' }}
+        loading="eager"
+        sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 960px,
+        (max-width: 1280px) 960px,
+        (max-width: 2560px) 960px,"
       />
     </Box>
   ) : (

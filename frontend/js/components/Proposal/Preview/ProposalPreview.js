@@ -96,10 +96,24 @@ export class ProposalPreview extends React.Component<Props> {
           {proposal.media &&
           proposal.media.url &&
           features.display_pictures_in_depository_proposals_list ? (
-            <ProposalImage src={proposal.media.url} />
+            <ProposalImage
+              src={proposal.media.url}
+              sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 640px,
+        (max-width: 1280px) 640px,
+        (max-width: 2560px) 640px,"
+            />
           ) : features.display_pictures_in_depository_proposals_list ? (
             getCategoryImage(proposal) ? (
-              <ProposalImage src={getCategoryImage(proposal)} />
+              <ProposalImage
+                src={getCategoryImage(proposal)}
+                sizes="(max-width: 320px) 320px,
+        (max-width: 640px) 640px,
+        (max-width: 960px) 640px,
+        (max-width: 1280px) 640px,
+        (max-width: 2560px) 640px,"
+              />
             ) : (
               <>
                 <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />

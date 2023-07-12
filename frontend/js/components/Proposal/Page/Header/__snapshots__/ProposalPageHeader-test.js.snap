@@ -120,6 +120,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
       alt="proposal-illustration"
+      loading="eager"
       src="/image.exe"
     />
     <ProposalPageHeader__Informations>
@@ -243,6 +244,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
       alt="proposal-illustration"
+      loading="eager"
       src="/image.exe"
     />
     <ProposalPageHeader__Informations>

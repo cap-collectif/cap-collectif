@@ -291,6 +291,7 @@ export const ProposalPageHeader = ({
           <Cover
             src={proposal?.media?.url || proposal?.category?.categoryImage?.image?.url}
             alt="proposal-illustration"
+            loading="eager"
           />
         ) : (
           <div className="default-header">

@@ -113,6 +113,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     id="proposal-1"
   >
     <ProposalPreview__ProposalImage
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 640px, (max-width: 1280px) 640px, (max-width: 2560px) 640px,"
       src="http://image.mypicture.jpg"
     />
     <Relay(ProposalPreviewBody)
@@ -215,6 +216,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
     id="proposal-1"
   >
     <ProposalPreview__ProposalImage
+      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 640px, (max-width: 1280px) 640px, (max-width: 2560px) 640px,"
       src="/svg/img.svg"
     />
     <Relay(ProposalPreviewBody)
