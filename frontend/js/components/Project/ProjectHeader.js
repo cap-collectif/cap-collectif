@@ -11,6 +11,7 @@ import ProjectHeaderLayout from '~ui/Project/ProjectHeader';
 import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderAuthorList';
 import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList';
 import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 const FRAGMENT = graphql`
   fragment ProjectHeader_project on Project
@@ -74,7 +75,7 @@ const ProjectHeader = ({ project, isConsultation, platformLocale }: Props): Reac
       <ProjectHeaderLayout.Cover isArchived={data.archived}>
         <ProjectHeaderLayout.Content>
           <ProjectHeaderAuthorList project={data} />
-          <ProjectHeaderLayout.Title>{data.title}</ProjectHeaderLayout.Title>
+          <ProjectHeaderLayout.Title>{htmlDecode(data.title)} </ProjectHeaderLayout.Title>
           {data.hasParticipativeStep && <ProjectHeaderBlocks project={data} />}
           <ProjectHeaderLayout.Info>
             {data.districts?.totalCount !== 0 && (

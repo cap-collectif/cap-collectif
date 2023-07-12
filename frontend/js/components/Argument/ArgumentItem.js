@@ -16,6 +16,7 @@ import UnpublishedLabel from '../Publishable/UnpublishedLabel';
 import type { ArgumentItem_argument } from '~relay/ArgumentItem_argument.graphql';
 import TrashedMessage from '../Trashed/TrashedMessage';
 import { translateContent } from '~/utils/ContentTranslator';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 type Props = {|
   +argument: ArgumentItem_argument,
@@ -108,7 +109,7 @@ export class ArgumentItem extends React.Component<Props> {
             <TrashedMessage contribution={argument}>
               <p className="opinion__text">
                 <Linkify properties={{ className: 'external-link' }}>
-                  {translateContent(argument.body)}
+                  {translateContent(htmlDecode(argument.body))}
                 </Linkify>
               </p>
             </TrashedMessage>

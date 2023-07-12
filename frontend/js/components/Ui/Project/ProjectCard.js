@@ -16,6 +16,7 @@ import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImag
 import useIsMobile from '~/utils/hooks/useIsMobile';
 import { formatInfo, formatCounter, renderTag } from './ProjectCard.utils';
 import Image from '~ui/Primitives/Image';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 type Props = {|
   ...AppBoxProps,
@@ -105,7 +106,7 @@ export const ProjectCard = ({
             mb={4}
             color={project.archived ? 'gray.500' : 'gray.900'}
             lineHeight={LineHeight.Base}>
-            {project.title}
+            {htmlDecode(project.title)}
           </Heading>
           <Flex direction="column" justifyContent="space-between" height="100%">
             {(isProjectsPage || !isMobile) && (

@@ -55,9 +55,10 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
       </div>
       <h3
         className="sc-bdnxRM aIhTV cap-text projectHeader__title platform__title"
-        title="Food project"
+        title="Food project "
       >
         Food project
+         
       </h3>
     </div>
     <div

@@ -10,35 +10,36 @@ import type { ProjectHeaderLegacy_project$key } from '~relay/ProjectHeaderLegacy
 import ProjectHeaderLayout from '~ui/Project/ProjectHeaderLegacy';
 import ProjectHeaderAuthorListLegacy from '~/components/Project/Authors/ProjectHeaderAuthorListLegacy';
 import ProjectHeaderThemeListLegacy from '~/components/Project/ProjectHeaderThemeListLegacy';
-import ProjectArchivedTagLegacy from '~/components/Project/ProjectArchivedTagLegacy'
+import ProjectArchivedTagLegacy from '~/components/Project/ProjectArchivedTagLegacy';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 const FRAGMENT = graphql`
-    fragment ProjectHeaderLegacy_project on Project
-    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
-        id
-        title
-        url
-        hasParticipativeStep
-        video
-        cover {
-            url
-            name
-        }
-        districts {
-            totalCount
-        }
-        themes {
-            id
-        }
-        archived
-        visibility
-        ...ProjectHeaderThemeListLegacy_project
-        ...ProjectHeaderAuthorListLegacy_project
-        ...ProjectHeaderBlocksLegacy_project
-        ...ProjectHeaderDistrictsListLegacy_project
-        ...ProjectStepTabsLegacy_project
-        ...ProjectRestrictedAccessFragmentLegacy_project @arguments(count: $count, cursor: $cursor)
+  fragment ProjectHeaderLegacy_project on Project
+  @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+    id
+    title
+    url
+    hasParticipativeStep
+    video
+    cover {
+      url
+      name
     }
+    districts {
+      totalCount
+    }
+    themes {
+      id
+    }
+    archived
+    visibility
+    ...ProjectHeaderThemeListLegacy_project
+    ...ProjectHeaderAuthorListLegacy_project
+    ...ProjectHeaderBlocksLegacy_project
+    ...ProjectHeaderDistrictsListLegacy_project
+    ...ProjectStepTabsLegacy_project
+    ...ProjectRestrictedAccessFragmentLegacy_project @arguments(count: $count, cursor: $cursor)
+  }
 `;
 export type Props = {|
   +project: ProjectHeaderLegacy_project$key,
@@ -71,7 +72,7 @@ const ProjectHeaderLegacy = ({ project }: Props): React.Node => {
       <ProjectHeaderLayout.Cover isArchived={data.archived}>
         <ProjectHeaderLayout.Content>
           <ProjectHeaderAuthorListLegacy project={data} />
-          <ProjectHeaderLayout.Title>{data.title}</ProjectHeaderLayout.Title>
+          <ProjectHeaderLayout.Title>{htmlDecode(data.title)}</ProjectHeaderLayout.Title>
           {data.hasParticipativeStep && <ProjectHeaderBlocksLegacy project={data} />}
           <ProjectHeaderLayout.Info>
             {data.districts?.totalCount !== 0 && (
