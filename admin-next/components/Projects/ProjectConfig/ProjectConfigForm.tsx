@@ -16,9 +16,9 @@ import { mutationErrorToast } from '@utils/mutation-error-toast';
 import moment from 'moment';
 import { ProjectVisibility } from '@relay/CreateProjectMutation.graphql';
 
-export interface ProjectConfigFormProps {
-    project: ProjectConfigForm_project$key;
-}
+export type ProjectConfigFormProps = {
+    project: ProjectConfigForm_project$key,
+};
 
 export const QUERY = graphql`
     query ProjectConfigFormQuery {
@@ -48,11 +48,12 @@ const FRAGMENT = graphql`
         type {
             id
         }
-        cover: cover {
+        cover {
             id
             name
             size
-            url
+            type: contentType
+            url(format: "reference")
         }
         video
         themes {
@@ -122,10 +123,9 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
         defaultValues: getInitialValues(project, intl),
     });
 
-    const onSubmit = ({ isExternal, ...values }: FormValues) => {
+    const onSubmit = ({ isExternal, addressText, ...values }: FormValues) => {
         setIsSubmitting(true);
-        // TODO : Add customCode field and fix next env vars for address and image
-
+        // TODO : Add customCode field
         const input = {
             ...values,
             cover: values?.cover?.id || null,
@@ -146,10 +146,10 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
             isExternal,
             locale: values.locale?.value || null,
             projectId: project.id,
-
-
+            addressText: undefined,
+            address: values.address && addressText ? JSON.stringify([values.address]) : null,
         };
-        console.log('submit',input);
+
         return UpdateNewProjectMutation.commit({ input })
             .then(() => {
                 setIsSubmitting(false);
@@ -190,7 +190,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
 
     React.useEffect(() => {
         watch((value, { name, type }) => {
-            onValidFormChange(getValues());
+            if (name !== 'addressText') onValidFormChange(getValues());
         });
     }, [watch]);
 

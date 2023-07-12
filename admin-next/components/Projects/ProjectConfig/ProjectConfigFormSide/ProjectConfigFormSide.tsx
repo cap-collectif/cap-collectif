@@ -16,6 +16,9 @@ export interface ProjectConfigFormSideProps {
 
 const QUERY_FRAGMENT = graphql`
     fragment ProjectConfigFormSide_query on Query {
+        viewer {
+            isAdmin
+        }
         availableLocales(includeDisabled: false) {
             value: id
             label: traductionKey
@@ -49,7 +52,7 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({
                     <ProjectConfigFormPublication locales={locales} project={project} />
                 </Accordion.Item>
                 <Accordion.Item id="access">
-                    <ProjectConfigFormAccess />
+                    <ProjectConfigFormAccess isAdmin={query?.viewer?.isAdmin || false} />
                 </Accordion.Item>
                 <Accordion.Item id="parameters">
                     <ProjectConfigFormParameters />

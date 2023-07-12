@@ -15,6 +15,9 @@ export interface ProjectConfigFormGeneralProps {
 
 const QUERY_FRAGMENT = graphql`
     fragment ProjectConfigFormGeneral_query on Query {
+        viewer {
+            isAdmin
+        }
         availableLocales(includeDisabled: false) {
             code
             isDefault
@@ -31,6 +34,8 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
     const intl = useIntl();
     const query = useFragment(QUERY_FRAGMENT, queryRef);
     const defaultLocale = query.availableLocales.find(locale => locale.isDefault);
+
+    const isAdmin = query?.viewer?.isAdmin;
 
     const methods = useFormContext();
 
@@ -60,14 +65,12 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                                 })}
                             />
                         </FormControl>
-                        <FormControl
-                            name="authors"
-                            control={control}
-                            // isDisabled={viewer.isOnlyProjectAdmin || !!organization}
-                        >
-                            <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
-                            <UserListField name="authors" control={control} isMulti />
-                        </FormControl>
+                        {isAdmin ? (
+                            <FormControl name="authors" control={control}>
+                                <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
+                                <UserListField name="authors" control={control} isMulti />
+                            </FormControl>
+                        ) : null}
                         <FormControl name="projectType" control={control}>
                             <FormLabel
                                 label={intl.formatMessage({

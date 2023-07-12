@@ -5,12 +5,41 @@ import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useIntl } from 'react-intl';
 import GroupListField from 'components/Form/GroupListField';
 
-const ProjectConfigFormAccess: React.FC = () => {
+const ProjectConfigFormAccess: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
     const intl = useIntl();
 
     const { watch, control } = useFormContext();
 
     const visibility = watch('visibility');
+
+    const choices = [
+        {
+            id: 'ME',
+            useIdAsValue: true,
+            label: intl.formatMessage({
+                id: 'myself-visibility-only-me',
+            }),
+        },
+        {
+            id: 'PUBLIC',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'public-everybody' }),
+        },
+        {
+            id: 'CUSTOM',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'global.custom.feminine' }),
+        },
+    ];
+
+    if (isAdmin)
+        choices
+            .splice(1, 0, {
+                id: 'ADMIN',
+                useIdAsValue: true,
+                label: intl.formatMessage({ id: 'global-administrators' }),
+            })
+            .join();
 
     return (
         <>
@@ -22,30 +51,7 @@ const ProjectConfigFormAccess: React.FC = () => {
                         name="visibility"
                         id="visibility"
                         control={control}
-                        choices={[
-                            {
-                                id: 'ME',
-                                useIdAsValue: true,
-                                label: intl.formatMessage({
-                                    id: 'myself-visibility-only-me',
-                                }),
-                            },
-                            {
-                                id: 'ADMIN',
-                                useIdAsValue: true,
-                                label: intl.formatMessage({ id: 'global-administrators' }),
-                            },
-                            {
-                                id: 'PUBLIC',
-                                useIdAsValue: true,
-                                label: intl.formatMessage({ id: 'public-everybody' }),
-                            },
-                            {
-                                id: 'CUSTOM',
-                                useIdAsValue: true,
-                                label: intl.formatMessage({ id: 'global.custom.feminine' }),
-                            },
-                        ]}
+                        choices={choices}
                     />
                 </FormControl>
                 {visibility?.labels?.[0] === 'CUSTOM' ? (
