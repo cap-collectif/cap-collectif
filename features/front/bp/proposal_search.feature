@@ -55,7 +55,7 @@ Scenario: Anonymous user wants to see a private proposal in selection step
   And I should not see "unauthorized-access"
 
 @security
-Scenario: Logged in user wants to a private proposal not in selection step
+Scenario: Logged in user wants to see a private proposal not in selection step
   Given I am logged in as user
   Given I go to "/projects/budget-participatif-idf/collect/collecte-des-projets-idf-privee/proposals/mon-projet-qui-ne-sera-pas-analyse"
   And I should see "unauthorized-access"

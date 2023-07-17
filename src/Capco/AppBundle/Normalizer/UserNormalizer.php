@@ -90,6 +90,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
                         ? ['id' => $object->getUserType()->getId()]
                         : null,
                     'isOnlyProjectAdmin' => $object->isOnlyProjectAdmin(),
+                    'organizationId' => $object->getOrganizationId(),
                 ];
             }
         }

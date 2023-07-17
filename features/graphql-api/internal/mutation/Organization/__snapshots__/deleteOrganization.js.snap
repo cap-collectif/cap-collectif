@@ -18,6 +18,13 @@ Object {
           Object {
             "node": Object {
               "archived": true,
+              "title": "Budget Participatif d'organisation",
+              "visibility": "ADMIN",
+            },
+          },
+          Object {
+            "node": Object {
+              "archived": true,
               "title": "projectOrgaVisibilityMe",
               "visibility": "ADMIN",
             },

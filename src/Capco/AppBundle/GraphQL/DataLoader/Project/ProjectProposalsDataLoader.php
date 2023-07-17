@@ -105,6 +105,10 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             if (!$viewer instanceof User || ($viewer instanceof User && !$viewer->isAdmin())) {
                 $providedFilters['visible'] = true;
             }
+
+            if ($viewer instanceof User && null !== $viewer->getOrganizationId()) {
+                $providedFilters['organizationId'] = $viewer->getOrganizationId();
+            }
         }
 
         $orders = array_map(function ($order) {

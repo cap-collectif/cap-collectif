@@ -1179,3 +1179,18 @@ Capco\AppBundle\Entity\Proposal:
         publishedAt: $createdAt
         undraftAt: $createdAt
         theme: '@theme1'
+    proposalOnlyVisibleByAdminAndMe:
+        id: proposalOnlyVisibleByAdminAndMe
+        title: Proposition de Valérie
+        body: 'Cette proposition ne doit être visible que par Valérie, les administrateurs et les membres de son organisation'
+        author: '@valerieMassonDelmotte'
+        proposalForm: '@proposalFormOrgaMember2'
+        createdAt: <(new \DateTime('2022-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        district: '@districtIdf<numberBetween(3,4)>'
+        address: '<generateAddress()>'
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        theme: '@theme<numberBetween(1,4)>'
+        category: '@pCategoryBp3Idf<numberBetween(1,5)>'

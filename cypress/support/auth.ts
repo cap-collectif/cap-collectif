@@ -35,6 +35,11 @@ const LoginAsData = (email: string) => {
         email: 'valerie.massondelmotte@cap-collectif.com',
         password: 'toto',
       }
+    case 'christophe':
+      return {
+        email: 'christophe.cassou@cap-collectif.com',
+        password: 'toto',
+      }
     default:
       throw new Error(`Unsupported email: ${email}`)
   }

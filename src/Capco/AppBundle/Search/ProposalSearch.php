@@ -75,9 +75,26 @@ class ProposalSearch extends Search
             $this->searchTermsInMultipleNestedFields($boolQuery, $providedFilters['term']);
         }
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
+
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
+
+        if (isset($providedFilters['organizationId']) && $providedFilters['organizationId'] ?? null) {
+            $terms = [
+                new Term(['visible' => ['value' => true]]),
+                new Term(['author.organizationId' => ['value' => $providedFilters['organizationId']]]),
+            ];
+            $subBoolQuery = new BoolQuery();
+            foreach ($terms as $term) {
+                $subBoolQuery->addShould($term);
+            }
+            $boolQuery->addMust($subBoolQuery);
+
+            unset($providedFilters['visible'], $providedFilters['organizationId']);
+        }
+
         $filters = $this->getFilters($providedFilters);
+
         foreach ($filters as $key => $value) {
             $term = new Term([$key => ['value' => $value]]);
             if (
@@ -90,6 +107,7 @@ class ProposalSearch extends Search
                 $boolQuery->addFilter($term);
             }
         }
+
         if (\count($stateTerms) > 0) {
             $subBoolQuery = new BoolQuery();
             foreach ($stateTerms as $stateTerm) {
@@ -187,6 +205,11 @@ class ProposalSearch extends Search
                     'decisionMaker.id' => ['value' => $providedFilters['restrictedViewerId']],
                 ]),
             ];
+
+            if ($providedFilters['restrictedViewerOrganizationId'] ?? null) {
+                $terms[] = new Term(['author.organizationId' => ['value' => $providedFilters['restrictedViewerOrganizationId']]]);
+            }
+
             $subBoolQuery = new BoolQuery();
             foreach ($terms as $term) {
                 $subBoolQuery->addShould($term);
@@ -759,6 +782,10 @@ class ProposalSearch extends Search
         }
         if (isset($providedFilters['visible'])) {
             $filters['visible'] = $providedFilters['visible'];
+
+            if (isset($providedFilters['organizationId'])) {
+                $filters['organizationId'] = $providedFilters['organizationId'];
+            }
         }
 
         if (isset($providedFilters['state'])) {

@@ -186,6 +186,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             } elseif (!$viewer->isAdmin()) {
                 // When the step is private, only an author or an analyst can see proposals
                 $filters['restrictedViewerId'] = $viewer->getId();
+                $filters['restrictedViewerOrganizationId'] = $viewer->getOrganizationId();
             }
         } elseif ($author) {
             $filters['author'] = $author;

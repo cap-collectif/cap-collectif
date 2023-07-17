@@ -34,8 +34,23 @@ Object {
             "title": "Formulaire organisation crée par un membre",
           },
         },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "Valérie Masson Delmotte",
+            },
+            "owner": Object {
+              "__typename": "Organization",
+              "username": "GIEC",
+            },
+            "step": Object {
+              "title": "Collecte des propositions privée",
+            },
+            "title": "Formulaire organisation crée par valérie masson delmotte",
+          },
+        },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }
@@ -61,7 +76,7 @@ Object {
           },
         },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }

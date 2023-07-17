@@ -51,4 +51,13 @@ export default new (class ProposalPage {
       proposal: 'renovation-du-gymnase',
     })
   }
+
+  visitPrivateProposalPage() {
+    return this.visit({
+      project: 'budget-participatif-dorganisation',
+      step: 'collecte-des-propositions-privee',
+      stepType: 'collect',
+      proposal: 'proposition-de-valerie',
+    })
+  }
 })()

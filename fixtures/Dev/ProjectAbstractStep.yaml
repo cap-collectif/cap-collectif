@@ -484,3 +484,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@otherStepHiddenWithoutEndDate'
         project: '@p3'
         position: 1
+    pasVisibilityRestricted:
+        id: pasVisibilityRestricted
+        step: '@collectstepOrga2'
+        project: '@projectOrgaVisibilityAdminAndMe'
+        position: 1

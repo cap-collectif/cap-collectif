@@ -4,19 +4,21 @@ describe('Proposal Page', () => {
   describe('Project Page FO', () => {
     beforeEach(() => {
       cy.task('db:restore')
-      cy.directLoginAs('project_owner')
     })
     it('should see votes', () => {
+      cy.directLoginAs('project_owner')
       ProposalPage.visitSelectionStepWithOpenedVoteAndDisplayed()
       cy.get('#ProposalPageVoteThreshold').should('contain', 'proposal.vote.threshold.title')
       cy.get('#proposal-page-tabs-tab-votes').should('contain', 'global.vote')
     })
     it('should not see votes', () => {
+      cy.directLoginAs('project_owner')
       ProposalPage.visitSelectionStepWithOpenedVoteButNotDisplayed()
       cy.get('body').should('not.contain', '#ProposalPageVoteThreshold')
       cy.get('body').should('not.contain', '#proposal-page-tabs-tab-votes')
     })
     it('follow proposal and change type of following', () => {
+      cy.directLoginAs('project_owner')
       ProposalPage.visitProposalPage()
       cy.on('uncaught:exception', (err, runnable) => {
         console.log('ERROR', err)
@@ -47,5 +49,10 @@ describe('Proposal Page', () => {
       cy.get('#proposal-page-tabs-tab-followers').click()
       cy.get('#proposal-page-tabs-pane-followers').contains('Théo QP')
     })
+  })
+  it('should be possible ton see private proposal of the same organization', () => {
+    cy.directLoginAs('christophe');
+    ProposalPage.visitPrivateProposalPage()
+    cy.get('#ProposalPageMainContent').should('be.visible')
   })
 })

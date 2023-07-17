@@ -32,4 +32,12 @@ export default new (class ProposalStepPage {
       stepType: 'selection',
     })
   }
+
+  visitProposalStepWithPrivateProposal() {
+    return this.visit({
+      project: 'budget-participatif-dorganisation',
+      step: 'collecte-des-propositions-privee',
+      stepType: 'collect',
+    })
+  }
 })()

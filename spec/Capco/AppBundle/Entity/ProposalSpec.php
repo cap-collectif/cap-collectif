@@ -43,15 +43,20 @@ class ProposalSpec extends ObjectBehavior
         $this->shouldImplement(DisplayableInBOInterface::class);
     }
 
-    public function it_can_be_seen_in_BO_only_by_owner_admin_or_super_admin(
+    public function it_can_be_seen_in_BO_only_by_owner_admin_super_admin_and_organization(
         User $viewer,
         Project $project,
         CollectStep $step,
-        ProposalForm $proposalForm
+        ProposalForm $proposalForm,
+        User $author
     ): void {
         $step->getProject()->willReturn($project);
+        $step->isPrivate()->willReturn(false);
         $proposalForm->getStep()->willReturn($step);
+        $author->getOrganizationId()->willReturn('1');
+        $viewer->getOrganizationId()->willReturn('2');
         $this->setProposalForm($proposalForm);
+        $this->setAuthor($author);
 
         $viewer->isAdmin()->willReturn(false);
         $this->viewerCanSeeInBo($viewer)->shouldReturn(false);
@@ -62,11 +67,35 @@ class ProposalSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(false);
         $project->getOwner()->willReturn($viewer);
         $this->viewerCanSeeInBo($viewer)->shouldReturn(true);
+
+        $viewer->isAdmin()->willReturn(false);
+        $author->getOrganizationId()->willReturn('1');
+        $viewer->getOrganizationId()->willReturn('1');
+        $this->viewerCanSeeInBo($viewer)->shouldReturn(true);
     }
 
     public function it_can_be_seen_by_admin_or_super_admin(User $viewer): void
     {
         $viewer->isAdmin()->willReturn(true);
+        $this->viewerCanSee($viewer)->shouldReturn(true);
+    }
+
+    public function it_can_be_seen_by_organization_members(
+        User $viewer,
+        Project $project,
+        CollectStep $step,
+        ProposalForm $proposalForm,
+        User $author
+    ): void {
+        $step->getProject()->willReturn($project);
+        $step->isPrivate()->willReturn(true);
+        $proposalForm->getStep()->willReturn($step);
+        $this->setProposalForm($proposalForm);
+        $this->setAuthor($author);
+
+        $viewer->isAdmin()->willReturn(false);
+        $viewer->getOrganizationId()->willReturn('1');
+        $author->getOrganizationId()->willReturn('1');
         $this->viewerCanSee($viewer)->shouldReturn(true);
     }
 
@@ -80,6 +109,7 @@ class ProposalSpec extends ObjectBehavior
         $collectStep->getProject()->willReturn($project);
         $project->getOwner()->willReturn(null);
         $proposalForm->getStep()->willReturn($collectStep);
+        $viewer->getOrganizationId()->willReturn('1');
         $viewer->isAdmin()->willReturn(false);
         $this->setProposalForm($proposalForm);
         $this->setProposalDecisionMaker(null);
@@ -109,6 +139,7 @@ class ProposalSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
+        $author->getOrganizationId()->willReturn('1');
         $author->isAdmin()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
         $collectStep->getProject()->willReturn($project);

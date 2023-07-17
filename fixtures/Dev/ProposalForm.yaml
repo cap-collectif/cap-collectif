@@ -486,3 +486,12 @@ Capco\AppBundle\Entity\ProposalForm:
         owner: '@organization2'
         creator: '@ChristopheCassou'
         reference: 29
+    proposalFormOrgaMember2:
+        id: proposalFormOrgaMember2
+        title: Formulaire organisation crée par valérie masson delmotte
+        description: Formulaire appartenant à une organisation crée par un membre
+        step: '@collectstepOrga2'
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'
+        reference: 30
+        usingAddress: true

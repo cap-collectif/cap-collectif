@@ -13,6 +13,14 @@ Object {
         },
         Object {
           "node": Object {
+            "authors": Array [],
+            "owner": Object {
+              "username": "GIEC",
+            },
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [
               Object {
                 "username": "GIEC",
@@ -457,7 +465,7 @@ Object {
           },
         },
       ],
-      "totalCount": 46,
+      "totalCount": 47,
     },
   },
 }
@@ -829,6 +837,12 @@ Object {
         Object {
           "node": Object {
             "publishedAt": "2022-01-03 12:00:00",
+            "title": "Budget Participatif d'organisation",
+          },
+        },
+        Object {
+          "node": Object {
+            "publishedAt": "2022-01-03 12:00:00",
             "title": "projectOrgaVisibilityMe",
           },
         },
@@ -839,7 +853,7 @@ Object {
           },
         },
       ],
-      "totalCount": 46,
+      "totalCount": 47,
     },
   },
 }

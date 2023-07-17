@@ -6,6 +6,7 @@
 ### Sommaire
 1. [Présentation](#presentation)
 2. [Comment formater les données ?](#data)
+3. [Mettre à jour les snapshots](#update-snapshots)
 
 <a div="presentation"></a> 1 Présentation
 ---
@@ -37,4 +38,14 @@ Si possible donnez pour nom et id de votre fixture ce qu'elle représente, comme
         enabled: true
         owner: '@organization1'
         creator: '@user5'
+```
+
+<a div="update-snapshots"></a> 3 Mettre à jour les snapshots
+
+
+Pour mettre à jour les snapshots, il faut lancer les commande suivantes
+
+```bash
+yarn test-e2e-types -u;
+yarn test-e2e-mutations -u;
 ```

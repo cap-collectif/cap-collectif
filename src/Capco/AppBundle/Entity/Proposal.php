@@ -819,9 +819,20 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         return $viewer && ($viewer->isAdmin() || $this->getProjectOwner() === $viewer);
     }
 
+    public function viewerIsOfSameOrganization(?User $viewer): bool
+    {
+        $author = $this->getAuthor();
+
+        if (!$author instanceof User || null === $author->getOrganizationId()) {
+            return false;
+        }
+
+        return $viewer && $author->getOrganizationId() === $viewer->getOrganizationId();
+    }
+
     public function viewerCanSeeInBo($user = null): bool
     {
-        return $this->viewerIsAdminOrOwner($user);
+        return $this->viewerIsAdminOrOwner($user) || $this->viewerIsOfSameOrganization($user);
     }
 
     public function viewerCanUpdate(?User $viewer = null): bool
@@ -833,6 +844,10 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     {
         // Owner, Admin and SuperAdmin can always access
         if ($this->viewerIsAdminOrOwner($viewer)) {
+            return true;
+        }
+
+        if ($this->isPrivate() && $this->viewerIsOfSameOrganization($viewer)) {
             return true;
         }
 

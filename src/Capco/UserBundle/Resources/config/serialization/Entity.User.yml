@@ -64,3 +64,5 @@ Capco\UserBundle\Entity\User:
     isOnlyProjectAdmin:
       serialized_name: isOnlyProjectAdmin
       groups: [Elasticsearch]
+    organizationId:
+      groups: [Elasticsearch]

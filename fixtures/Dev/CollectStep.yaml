@@ -257,3 +257,13 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         body: Collecte step organisation body
         startAt: <identity((new \DateTime('2022-05-01 12:00:00')))>
         endAt: <identity((new \DateTime('2031-05-04 12:00:00')))>
+    collectstepOrga2:
+        id: collectstepOrga2
+        title: Collecte des propositions privée
+        label: Dépôt
+        body: Collecte des propositions privée
+        timeless: true
+        startAt: null
+        endAt: null
+        private: true
+        voteType: 2

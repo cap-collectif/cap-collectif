@@ -40,6 +40,7 @@ declare namespace Cypress {
     | 'pierre'
     | 'user_not_confirmed'
     | 'valerie'
+    | 'christophe'
   interface cy {
     appendOperationToGraphQLFetch(): void
   }

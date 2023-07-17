@@ -8,6 +8,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "title": "Budget Participatif d'organisation",
+            "visibility": "PUBLIC",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "projectOrgaVisibilityMe",
             "visibility": "ME",
           },
@@ -19,7 +25,7 @@ Object {
           },
         },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }
@@ -33,12 +39,18 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "title": "Budget Participatif d'organisation",
+            "visibility": "PUBLIC",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "Rapport d'évaluation 6 (AR6)",
             "visibility": "PUBLIC",
           },
         },
       ],
-      "totalCount": 1,
+      "totalCount": 2,
     },
   },
 }
@@ -52,6 +64,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "title": "Budget Participatif d'organisation",
+            "visibility": "PUBLIC",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "projectOrgaVisibilityMe",
             "visibility": "ME",
           },
@@ -63,7 +81,7 @@ Object {
           },
         },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }
@@ -77,6 +95,12 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "title": "Budget Participatif d'organisation",
+            "visibility": "PUBLIC",
+          },
+        },
+        Object {
+          "node": Object {
             "title": "projectOrgaVisibilityMe",
             "visibility": "ME",
           },
@@ -88,7 +112,7 @@ Object {
           },
         },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }

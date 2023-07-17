@@ -483,3 +483,13 @@ Capco\AppBundle\Entity\Project:
         visibility: 0
         owner: '@organization2'
         creator: '@valerieMassonDelmotte'
+    projectOrgaVisibilityAdminAndMe:
+        id: 'projectOrgaVisibilityAdminAndMe'
+        title: Budget Participatif d'organisation
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2022-01-03 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@organization2'
+        creator: '@valerieMassonDelmotte'
