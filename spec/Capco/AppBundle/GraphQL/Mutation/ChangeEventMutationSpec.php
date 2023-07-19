@@ -62,41 +62,82 @@ class ChangeEventMutationSpec extends ObjectBehavior
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
-        $values = [
-            'id' => 'base64id',
-            'customCode' => 'abc',
-            'startAt' => '2050-02-03 10:00:00',
-            'translations' => [
-                [
-                    'locale' => 'fr-FR',
-                    'body' => 'My body',
-                ],
-            ],
-        ];
+        $this->prepareTestData(
+            $viewer,
+            $arguments,
+            $globalIdResolver,
+            $event,
+            $formFactory,
+            $form,
+            $em,
+            $authorizationChecker
+        );
 
-        $viewer->isAdmin()->willReturn(true);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOrganizationMember()->willReturn(false);
+        $publisher->publish('event.update', Argument::type(Message::class))->shouldBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['event']->shouldBe($event);
+    }
+
+    public function it_updates_an_event_as_admin(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        Event $event,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $this->prepareTestData(
+            $viewer,
+            $arguments,
+            $globalIdResolver,
+            $event,
+            $formFactory,
+            $form,
+            $em,
+            $authorizationChecker
+        );
+
         $viewer->isProjectAdmin()->willReturn(true);
-        $viewer->getOrganizationId()->willReturn(false);
-        $arguments->getArrayCopy()->willReturn($values);
-        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
-        $event->getId()->willReturn('event1');
-        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
-        $event->getAuthor()->willReturn($viewer);
-        $event->setAuthor($viewer)->willReturn($event);
-        $formFactory->create(EventType::class, $event)->willReturn($form);
-        $form
-            ->submit(
-                [
-                    'customCode' => 'abc',
-                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']],
-                ],
-                false
-            )
-            ->willReturn(null)
-        ;
-        $form->isValid()->willReturn(true);
-        $em->flush()->shouldBeCalled();
-        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
+        $publisher->publish('event.update', Argument::type(Message::class))->shouldNotBeCalled();
+
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['event']->shouldBe($event);
+    }
+
+    public function it_updates_an_event_as_organization_member(
+        GlobalIdResolver $globalIdResolver,
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        Event $event,
+        Publisher $publisher,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $this->prepareTestData(
+            $viewer,
+            $arguments,
+            $globalIdResolver,
+            $event,
+            $formFactory,
+            $form,
+            $em,
+            $authorizationChecker
+        );
+
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOrganizationMember()->willReturn(true);
         $publisher->publish('event.update', Argument::type(Message::class))->shouldNotBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
@@ -208,6 +249,7 @@ class ChangeEventMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(false);
         $viewer->getOrganizationId()->willReturn(false);
         $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOrganizationMember()->willReturn(false);
         $arguments->getArrayCopy()->willReturn($values);
 
         $reviewer->isAdmin()->willReturn(true);
@@ -270,5 +312,50 @@ class ChangeEventMutationSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
         $this->isGranted($eventId, $viewer);
+    }
+
+    private function prepareTestData(
+        User $viewer,
+        Arg $arguments,
+        GlobalIdResolver $globalIdResolver,
+        Event $event,
+        FormFactory $formFactory,
+        Form $form,
+        EntityManagerInterface $em,
+        AuthorizationCheckerInterface $authorizationChecker
+    ): void {
+        $values = [
+            'id' => 'base64id',
+            'customCode' => 'abc',
+            'startAt' => '2050-02-03 10:00:00',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body',
+                ],
+            ],
+        ];
+
+        $viewer->isAdmin()->willReturn(true);
+        $arguments->getArrayCopy()->willReturn($values);
+        $globalIdResolver->resolve('base64id', $viewer)->willReturn($event);
+        $event->getId()->willReturn('event1');
+        $event->setStartAt(new DateTime('2050-02-03 10:00:00'))->willReturn($event);
+        $event->getAuthor()->willReturn($viewer);
+        $event->setAuthor($viewer)->willReturn($event);
+        $formFactory->create(EventType::class, $event)->willReturn($form);
+        $form
+            ->submit(
+                [
+                    'customCode' => 'abc',
+                    'translations' => ['fr-FR' => ['locale' => 'fr-FR', 'body' => 'My body']],
+                ],
+                false
+            )
+            ->willReturn(null)
+        ;
+        $form->isValid()->willReturn(true);
+        $em->flush()->shouldBeCalled();
+        $authorizationChecker->isGranted('edit', Argument::type(Event::class))->willReturn(true);
     }
 }

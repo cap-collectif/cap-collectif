@@ -51,7 +51,7 @@ class ChangeEventMutation extends AbstractEventMutation
         $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
 
-        if (!$viewer->isProjectAdmin() && !$viewer->getOrganizationId()) {
+        if (!$viewer->isProjectAdmin() && !$viewer->isOrganizationMember()) {
             $this->publisher->publish(
                 'event.update',
                 new Message(

@@ -57,6 +57,12 @@ def start_consumers(ctx):
 
 
 @task
+def stop_consumers(ctx):
+    environments.local()
+    app.stop_consumers()
+
+
+@task
 def toggle_disable(ctx, toggle='public_api', environment='test'):
     environments.local()
     app.toggle_disable(toggle, environment)

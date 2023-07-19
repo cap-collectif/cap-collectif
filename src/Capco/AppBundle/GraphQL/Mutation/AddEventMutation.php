@@ -116,7 +116,7 @@ class AddEventMutation extends AbstractEventMutation
 
         $this->indexer->index(ClassUtils::getClass($event), $event->getId());
         $this->indexer->finishBulk();
-        if (!$viewer->isProjectAdmin()) {
+        if (!$viewer->isProjectAdmin() && !$viewer->isOrganizationMember()) {
             $this->publisher->publish(
                 'event.create',
                 new Message(

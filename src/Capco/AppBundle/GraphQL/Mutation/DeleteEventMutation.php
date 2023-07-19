@@ -108,15 +108,17 @@ class DeleteEventMutation extends BaseDeleteMutation
         $this->indexer->index(Event::class, $event->getId());
         $this->indexer->finishBulk();
 
-        $this->publisher->publish(
-            'event.delete',
-            new Message(
-                json_encode([
-                    'eventId' => $event->getId(),
-                    'eventParticipants' => $eventParticipants,
-                ])
-            )
-        );
+        if (!$viewer->isProjectAdmin() && !$viewer->isOrganizationMember()) {
+            $this->publisher->publish(
+                'event.delete',
+                new Message(
+                    json_encode([
+                        'eventId' => $event->getId(),
+                        'eventParticipants' => $eventParticipants,
+                    ])
+                )
+            );
+        }
 
         return [
             'event' => $event,

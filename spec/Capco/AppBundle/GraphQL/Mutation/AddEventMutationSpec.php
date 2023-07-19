@@ -70,74 +70,56 @@ class AddEventMutationSpec extends ObjectBehavior
         SettableOwnerResolver $settableOwnerResolver,
         Publisher $publisher
     ) {
-        $values = [
-            'startAt' => '2019-04-09T22:00:23.000',
-            'translations' => [
-                [
-                    'locale' => 'fr-FR',
-                    'body' => 'My body',
-                    'title' => 'title',
-                    'metaDescription' => 'metaDescription',
-                    'link' => 'link',
-                ],
-            ],
-        ];
+        $this->prepareTestData(
+            $event,
+            $viewer,
+            $form,
+            $formFactory,
+            $arguments,
+            $em,
+            $indexer,
+            $publisher,
+            $settableOwnerResolver
+        );
 
-        $event->getBody()->willReturn('My body');
-        $viewer->getId()->willReturn('iMTheAuthor');
-        $viewer->getUsername()->willReturn('My username is toto');
-        $viewer->isAdmin()->willReturn(false);
-        $viewer->isSuperAdmin()->willReturn(false);
-        $viewer->isProjectAdmin()->willReturn(false);
-        $viewer->isOnlyUser()->willReturn(true);
         $viewer->isOrganizationMember()->willReturn(false);
 
-        $event->getAuthor()->willReturn($viewer);
+        $publisher->publish('event.create', Argument::type(Message::class))->shouldBeCalled();
 
-        $form
-            ->submit(
-                [
-                    'translations' => [
-                        'fr-FR' => [
-                            'locale' => 'fr-FR',
-                            'body' => 'My body',
-                            'title' => 'title',
-                            'metaDescription' => 'metaDescription',
-                            'link' => 'link',
-                        ],
-                    ],
-                ],
-                false
-            )
-            ->willReturn(null)
-        ;
-        $form->isValid()->willReturn(true);
+        $payload = $this->__invoke($arguments, $viewer);
+        $payload->shouldHaveCount(2);
+        $payload['userErrors']->shouldBe([]);
+        $payload['eventEdge']->shouldHaveType(Edge::class);
+        $payload['eventEdge']->node->shouldHaveType(Event::class);
+        $payload['eventEdge']->node->getAuthor()->shouldBe($viewer);
+    }
 
-        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
-        $arguments->getArrayCopy()->willReturn($values);
-        $arguments
-            ->offsetGet('owner')
-            ->shouldBeCalled()
-            ->willReturn(null)
-        ;
+    public function it_persists_new_event_for_organization_member(
+        EntityManagerInterface $em,
+        FormFactoryInterface $formFactory,
+        Arg $arguments,
+        User $viewer,
+        Form $form,
+        Indexer $indexer,
+        Event $event,
+        SettableOwnerResolver $settableOwnerResolver,
+        Publisher $publisher
+    ) {
+        $this->prepareTestData(
+            $event,
+            $viewer,
+            $form,
+            $formFactory,
+            $arguments,
+            $em,
+            $indexer,
+            $publisher,
+            $settableOwnerResolver
+        );
 
-        $em->persist(Argument::type(Event::class))->shouldBeCalled();
-        $em->flush()->shouldBeCalled();
+        $viewer->isOrganizationMember()->willReturn(true);
 
-        // we cant moke ID with phpSpec, but in reality there is an ID
-        $indexer->index(Event::class, null)->shouldBeCalled();
-        $indexer->finishBulk()->shouldBeCalled();
-
-        $publisher
-            ->publish('event.create', \Prophecy\Argument::type(Message::class))
-            ->shouldBeCalled()
-        ;
-
-        $settableOwnerResolver
-            ->__invoke(null, $viewer)
-            ->shouldBeCalled()
-            ->willReturn($viewer)
-        ;
+        $publisher->publish('event.create', Argument::type(Message::class))->shouldNotBeCalled();
 
         $payload = $this->__invoke($arguments, $viewer);
         $payload->shouldHaveCount(2);
@@ -175,6 +157,7 @@ class AddEventMutationSpec extends ObjectBehavior
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(true);
         $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOrganizationMember()->willReturn(false);
         $viewer->isOnlyUser()->willReturn(false);
 
         $globalIdResolver->resolve($values['author'], $viewer)->willReturn($author);
@@ -385,5 +368,80 @@ class AddEventMutationSpec extends ObjectBehavior
             ->willReturn(true)
         ;
         $this->isGranted()->shouldReturn(true);
+    }
+
+    private function prepareTestData(
+        Event $event,
+        User $viewer,
+        Form $form,
+        FormFactoryInterface $formFactory,
+        Arg $arguments,
+        EntityManagerInterface $em,
+        Indexer $indexer,
+        Publisher $publisher,
+        SettableOwnerResolver $settableOwnerResolver
+    ): void {
+        $values = [
+            'startAt' => '2019-04-09T22:00:23.000',
+            'translations' => [
+                [
+                    'locale' => 'fr-FR',
+                    'body' => 'My body',
+                    'title' => 'title',
+                    'metaDescription' => 'metaDescription',
+                    'link' => 'link',
+                ],
+            ],
+        ];
+
+        $event->getBody()->willReturn('My body');
+        $viewer->getId()->willReturn('iMTheAuthor');
+        $viewer->getUsername()->willReturn('My username is toto');
+        $viewer->isAdmin()->willReturn(false);
+        $viewer->isSuperAdmin()->willReturn(false);
+        $viewer->isProjectAdmin()->willReturn(false);
+        $viewer->isOnlyUser()->willReturn(true);
+
+        $event->getAuthor()->willReturn($viewer);
+
+        $form
+            ->submit(
+                [
+                    'translations' => [
+                        'fr-FR' => [
+                            'locale' => 'fr-FR',
+                            'body' => 'My body',
+                            'title' => 'title',
+                            'metaDescription' => 'metaDescription',
+                            'link' => 'link',
+                        ],
+                    ],
+                ],
+                false
+            )
+            ->willReturn(null)
+        ;
+        $form->isValid()->willReturn(true);
+
+        $formFactory->create(EventType::class, Argument::type(Event::class))->willReturn($form);
+        $arguments->getArrayCopy()->willReturn($values);
+        $arguments
+            ->offsetGet('owner')
+            ->shouldBeCalled()
+            ->willReturn(null)
+        ;
+
+        $em->persist(Argument::type(Event::class))->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        // we cant moke ID with phpSpec, but in reality there is an ID
+        $indexer->index(Event::class, null)->shouldBeCalled();
+        $indexer->finishBulk()->shouldBeCalled();
+
+        $settableOwnerResolver
+            ->__invoke(null, $viewer)
+            ->shouldBeCalled()
+            ->willReturn($viewer)
+        ;
     }
 }

@@ -113,9 +113,12 @@ def rabbitmq_queues():
 
 def start_consumers():
     "Start consumers"
-    command('if pgrep supervisord; then pkill supervisord; fi', 'application', Config.www_app, 'root')
+    command('if pgrep supervisord; then pkill supervisord; sleep 3; fi', 'application', Config.www_app, 'root')
     command('supervisord --configuration=/etc/supervisord/supervisord.conf', 'application', Config.www_app, 'root')
 
+def stop_consumers():
+    "Stop consumers"
+    command('if pgrep supervisord; then pkill supervisord; sleep 3; fi', 'application', Config.www_app, 'root')
 
 def ssh(user='capco'):
     "Ssh into application container"

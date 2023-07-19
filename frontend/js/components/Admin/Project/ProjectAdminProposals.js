@@ -506,7 +506,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       }
     }
   }
-  const areOpinions = selectedStep.form?.objectType === 'OPINION';
+  const areOpinions = selectedStep?.form?.objectType === 'OPINION';
   const { isLoading, startLoading, stopLoading } = useLoadingMachine();
   const { startToasting, stopToasting } = useToastingMachine();
 
@@ -1094,7 +1094,10 @@ const container = createPaginationContainer(
         count: { type: "Int!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
         cursor: { type: "String" }
-        orderBy: { type: "[ProposalOrder!]", defaultValue: [{ field: PUBLISHED_AT, direction: DESC }] }
+        orderBy: {
+          type: "[ProposalOrder!]"
+          defaultValue: [{ field: PUBLISHED_AT, direction: DESC }]
+        }
         state: { type: "ProposalsState!", defaultValue: ALL }
         category: { type: "ID", defaultValue: null }
         district: { type: "ID", defaultValue: null }
