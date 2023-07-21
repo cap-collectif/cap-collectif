@@ -81,6 +81,7 @@ graphql.config.json
 
 # VSCode History file
 .history
+.vscode
 
 # Sublime Text Project Manager
 *.sublime-project
