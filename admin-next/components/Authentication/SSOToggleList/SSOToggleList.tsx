@@ -9,6 +9,7 @@ import {
     Tag,
     Text,
     Checkbox,
+    ListCard,
 } from '@cap-collectif/ui';
 import { Section } from '@ui/Section';
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql';
@@ -16,7 +17,6 @@ import { useIntl } from 'react-intl';
 import { useNavBarContext } from '../../NavBar/NavBar.context';
 import { useFeatureFlags } from '@hooks/useFeatureFlag';
 import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation';
-import ListCard from '@ui/ListCard/ListCard';
 
 type SSOToggle = {
     label: string;
@@ -101,7 +101,7 @@ const SSOToggleList: FC = () => {
                                     onChange={e => {
                                         toggleFeatureFlag(
                                             'oauth2_switch_user',
-                                            e.target.checked,
+                                            (e.target as HTMLInputElement).checked,
                                             intl,
                                             setSaving,
                                         );

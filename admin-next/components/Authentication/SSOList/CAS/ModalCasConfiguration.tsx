@@ -6,6 +6,8 @@ import { graphql, useFragment } from 'react-relay';
 import CreateCASSSOConfigurationMutation from '@mutations/CreateCASSSOConfigurationMutation';
 import FormConfiguration, { casVersionOptions, FormValues } from './FormConfiguration';
 import UpdateCASSSOConfigurationMutation from '@mutations/UpdateCASSSOConfigurationMutation';
+import { ModalCasConfiguration_ssoConfiguration$key } from '@relay/ModalCasConfiguration_ssoConfiguration.graphql';
+import { CasVersion } from '@relay/UpdateCASSSOConfigurationMutation.graphql';
 
 type ModalCasConfigurationProps = {
     readonly ssoConfiguration: ModalCasConfiguration_ssoConfiguration$key | null;
@@ -35,7 +37,7 @@ const onSubmit = (
 ) => {
     const input = {
         name: data.name,
-        casVersion: data.casVersion,
+        casVersion: data.casVersion as CasVersion,
         casServerUrl: data.casServerUrl,
         casCertificate: data.casCertificate,
     };
@@ -71,7 +73,7 @@ const ModalCasConfiguration: FC<ModalCasConfigurationProps> = ({
                   name: ssoConfiguration.name,
                   casVersion: casVersionOptions.find(
                       option => option.value === ssoConfiguration.casVersion,
-                  ).value,
+                  )?.value,
                   casServerUrl: ssoConfiguration.casServerUrl,
                   casCertificate: ssoConfiguration.casCertificate,
               }

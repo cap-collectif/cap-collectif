@@ -15,8 +15,8 @@ interface QuestionnaireListFieldProps
 }
 
 type QuestionnaireListFieldValue = {
-    label: string,
-    value: string,
+    label: string;
+    value: string;
 };
 
 const getQuestionnaireList = graphql`
@@ -45,6 +45,7 @@ const getQuestionnaireList = graphql`
 `;
 
 const formatQuestionnairesData = (
+    // @ts-ignore
     questionnaires: QuestionnaireListFieldQueryResponse['questionnaireSearch'],
 ) => {
     if (!questionnaires) return [];
@@ -89,6 +90,7 @@ export const QuestionnaireListField: React.FC<QuestionnaireListFieldProps> = ({
     };
 
     return (
+        // @ts-ignore
         <FieldInput
             {...props}
             type="select"

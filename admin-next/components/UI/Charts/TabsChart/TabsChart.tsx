@@ -4,18 +4,21 @@ import { Flex } from '@cap-collectif/ui';
 import Tab, { ActiveTab } from './Tab/Tab';
 
 export type TabsChartProps = {
-    children: React.ReactElement<typeof Tab>[],
+    children: React.ReactElement<typeof Tab>[];
 };
 
 type SubComponents = {
-    Tab: typeof Tab,
+    Tab: typeof Tab;
 };
 
 const getFirstTab = (children: React.ReactElement<typeof Tab>[]): ActiveTab => {
     const firstTab = React.Children.toArray(children)[0] as React.ReactElement<typeof Tab>;
     return {
-        id: firstTab.props.id,
+        // @ts-ignore
+        id: firstTab?.props?.id,
+        // @ts-ignore
         label: firstTab.props.label,
+        // @ts-ignore
         data: firstTab.props.data,
     };
 };
@@ -27,6 +30,7 @@ const TabsChart: React.FC<TabsChartProps> & SubComponents = ({ children }) => {
         return React.Children.map(children, child => {
             if (React.isValidElement(child)) {
                 return React.cloneElement(child, {
+                    // @ts-ignore
                     active: activeTab?.id === child.props.id,
                     selectTab: setActiveTab,
                 });
@@ -35,8 +39,8 @@ const TabsChart: React.FC<TabsChartProps> & SubComponents = ({ children }) => {
     }, [activeTab, children]);
 
     React.useEffect(() => {
-        setActiveTab(getFirstTab(children))
-    }, [children])
+        setActiveTab(getFirstTab(children));
+    }, [children]);
 
     return (
         <Flex direction="column" spacing={8}>

@@ -19,7 +19,7 @@ import type {
 import downloadCSV from 'utils/download-csv';
 import { useForm } from 'react-hook-form';
 import { FormControl, FieldInput } from '@cap-collectif/form';
-import {ProjectModalExportSteps_viewer$key} from "@relay/ProjectModalExportSteps_viewer.graphql";
+import { ProjectModalExportSteps_viewer$key } from '@relay/ProjectModalExportSteps_viewer.graphql';
 
 const formName = 'form-export-project';
 
@@ -29,7 +29,7 @@ interface ProjectModalExportStepsProps {
 }
 
 type FormValues = {
-    export_list: any,
+    export_list: any;
 };
 
 const PROJECT_FRAGMENT = graphql`
@@ -81,7 +81,8 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
     const project = useFragment(PROJECT_FRAGMENT, projectFragment);
     const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
     const organization = viewer?.organizations?.[0];
-    const canExportContributors = viewer?.isAdmin && !(!!organization && viewer?.isOnlyProjectAdmin);
+    const canExportContributors =
+        viewer?.isAdmin && !(!!organization && viewer?.isOnlyProjectAdmin);
 
     const intl = useIntl();
     const exportChoices = !canExportContributors
@@ -167,6 +168,7 @@ const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
                                     name="export_list"
                                     type="checkbox"
                                     control={control}
+                                    // @ts-ignore https://github.com/cap-collectif/platform/issues/15972
                                     choices={exportChoices}
                                 />
                             </FormControl>

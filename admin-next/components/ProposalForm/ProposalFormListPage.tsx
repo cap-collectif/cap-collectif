@@ -1,10 +1,7 @@
 import { useState, FC, Suspense } from 'react';
 import { useIntl } from 'react-intl';
 import { graphql, GraphQLTaggedNode, useFragment } from 'react-relay';
-import {
-    Flex,
-    Search,
-} from '@cap-collectif/ui';
+import { Flex, Search } from '@cap-collectif/ui';
 import ModalCreateProposalForm from './ModalCreateProposalForm';
 import ProposalFormList from './ProposalFormList';
 import ProposalFormListPlaceholder from './ProposalFormListPlaceholder';
@@ -13,7 +10,7 @@ import { ProposalFormListPage_viewer$key } from '@relay/ProposalFormListPage_vie
 import debounce from '@utils/debounce-promise';
 
 type ProposalFormListPageProps = {
-    readonly viewer: ProposalFormListPage_viewer$key,
+    readonly viewer: ProposalFormListPage_viewer$key;
 };
 
 export const FRAGMENT: GraphQLTaggedNode = graphql`
@@ -24,8 +21,7 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
         term: { type: "String", defaultValue: null }
         affiliations: { type: "[ProposalFormAffiliation!]" }
         orderBy: { type: "ProposalFormOrder" }
-    )
-    {
+    ) {
         id
         username
         __typename
@@ -37,6 +33,18 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
                 totalCount
             }
             ...ProposalFormList_proposalFormOwner
+                @arguments(
+                    count: $count
+                    cursor: $cursor
+                    term: $term
+                    affiliations: $affiliations
+                    orderBy: $orderBy
+                )
+        }
+        ...ModalCreateProposalForm_viewer
+        ...ProposalFormListNoResult_viewer
+        ...ProposalFormList_viewer
+        ...ProposalFormList_proposalFormOwner
             @arguments(
                 count: $count
                 cursor: $cursor
@@ -44,18 +52,6 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
                 affiliations: $affiliations
                 orderBy: $orderBy
             )
-        }
-        ...ModalCreateProposalForm_viewer
-        ...ProposalFormListNoResult_viewer
-        ...ProposalFormList_viewer
-        ...ProposalFormList_proposalFormOwner
-        @arguments(
-            count: $count
-            cursor: $cursor
-            term: $term
-            affiliations: $affiliations
-            orderBy: $orderBy
-        )
     }
 `;
 
@@ -100,6 +96,7 @@ const ProposalFormListPage: FC<ProposalFormListPageProps> = ({ viewer: viewerFra
                     viewer={viewer}
                     term={term}
                     resetTerm={() => setTerm('')}
+                    // @ts-ignore
                     orderBy={orderBy}
                     setOrderBy={setOrderBy}
                 />
@@ -112,7 +109,7 @@ const ProposalFormListPage: FC<ProposalFormListPageProps> = ({ viewer: viewerFra
             orderBy={orderBy}
             hasProposalForm={hasProposalForm}
         />
-    )
+    );
 };
 
 export default ProposalFormListPage;

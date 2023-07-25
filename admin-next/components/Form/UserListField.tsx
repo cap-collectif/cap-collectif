@@ -7,14 +7,16 @@ import type {
 import { environment } from 'utils/relay-environement';
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form';
 
-interface UserListFieldProps extends Omit<BaseField, 'onChange'>, Omit<FieldSelect, 'type'> {
+interface UserListFieldProps
+    extends Omit<BaseField, 'onChange'>,
+        Omit<FieldSelect, 'type' | 'onChange'> {
     userIdsToNoSearch?: string[];
     authorOfEvent?: boolean;
 }
 
 type UserListFieldValue = {
-    label: string,
-    value: string,
+    label: string;
+    value: string;
 };
 
 const getUserList = graphql`
@@ -81,7 +83,7 @@ export const UserListField: React.FC<UserListFieldProps> = ({
         }).toPromise();
 
         if (usersData && usersData.userSearch) {
-            return (formatUsersData(usersData.userSearch) as UserListFieldValue[]);
+            return formatUsersData(usersData.userSearch) as UserListFieldValue[];
         }
 
         return [];

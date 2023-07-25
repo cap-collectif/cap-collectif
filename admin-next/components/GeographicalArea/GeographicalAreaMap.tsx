@@ -57,7 +57,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
                     width: '100%',
                     height: '100%',
                 }}
-                // @ts-ignore react-leaflet types not up to date
+                // @ts-ignore https://github.com/cap-collectif/platform/issues/15975
                 zoom="13"
                 zoomControl={false}
                 dragging={false}
@@ -69,7 +69,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
                 scrollWheelZoom={false}>
                 <CapcoTileLayer />
                 <GeoJSON
-                    // @ts-ignore react-leaflet types not up to date
+                    // @ts-ignore https://github.com/cap-collectif/platform/issues/15975
                     style={convertToGeoJsonStyle(geoJSON[0].style)}
                     data={geoJSON[0].district}
                 />
@@ -77,7 +77,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
                     <Rectangle
                         bounds={districtGeoJSON.getBounds()}
                         pathOptions={{ color: 'transparent' }}>
-                        {/** @ts-ignore react-leaflet types not up to date */}
+                        {/** @ts-ignore https://github.com/cap-collectif/platform/issues/15975 */}
                         <Tooltip permanent className="titleTooltip">
                             {district.titleOnMap}
                         </Tooltip>

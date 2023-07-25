@@ -38,6 +38,10 @@ const CardCAS: FC<CardCASProps> = ({
         'cas-delete': false,
     });
 
+    if (!ssoConfiguration) {
+        return null;
+    }
+
     return (
         <>
             <CardSSO onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>

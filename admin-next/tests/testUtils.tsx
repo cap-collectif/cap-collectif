@@ -5,57 +5,50 @@ import { RelayEnvironmentProvider } from 'react-relay';
 import type { FeatureFlags } from '../types';
 import { intlMock, features as mockFeatures } from './mocks';
 import GlobalCSS from 'styles/GlobalCSS';
+import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql';
+import { ReactPortal } from 'react';
 
 export const mockRandomValues = () => {
     global.Math.random = () => 0.5;
 };
 
-export const enableFeatureFlags = (flags: [FeatureFlags]) => {
-    // @ts-ignore
+export const enableFeatureFlags = (flags: [FeatureFlagType]) => {
     global.mockFeatureFlag.mockImplementation((flag: FeatureFlagType) => {
-        if (flags.includes(flag)) {
-            return true;
-        }
-        return false;
+        return flags.includes(flag as FeatureFlagType);
     });
 };
 
 export const disableFeatureFlags = () => {
-    // @ts-ignore
     global.mockFeatureFlag.mockImplementation(() => false);
 };
 
 export const mockUrl = (url: string) => {
-    // @ts-ignore assign new URL(...) to window.location because property location is not writable
     delete window.location;
-    // @ts-ignore assign new URL(...) to window.location because property location is not writable
+    // @ts-ignore fixme
     window.location = new URL(url);
 };
 
 export const addsSupportForPortals = () => {
-    // See: https://github.com/facebook/react/issues/11565
-    // @ts-ignore
     ReactDOM.createPortal = jest.fn(element => {
-        return element;
+        return element as ReactPortal;
     });
 };
 
 export const clearSupportForPortals = () => {
-    // @ts-ignore
+    // @ts-ignore fixme
     ReactDOM.createPortal.mockClear();
 };
 
 type Props = {
-    children: React.ReactNode,
-    viewerSession?: null | undefined | any,
-    features?: FeatureFlags,
+    children: React.ReactNode;
+    viewerSession?: null | undefined | any;
+    features?: FeatureFlags;
 };
 
 export const MockProviders = ({ children, viewerSession, features }: Props) => {
     return (
         <Providers
             featureFlags={{ ...mockFeatures, ...features }}
-            // @ts-ignore Types are a bit different since it's a mock
             intl={intlMock}
             viewerSession={viewerSession}
             appVersion="test">

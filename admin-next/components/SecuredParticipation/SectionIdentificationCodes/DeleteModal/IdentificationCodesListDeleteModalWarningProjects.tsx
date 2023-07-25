@@ -6,11 +6,16 @@ import {
 import { useLazyLoadQuery } from 'react-relay';
 import { InfoMessage, Text } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
+import { GetProjectNamesUsingCodesQueryResponse } from '@relay/GetProjectNamesUsingCodesQuery.graphql';
 
 const IdentificationCodesListDeleteModalWarningProjects: FC = () => {
     const intl = useIntl();
     const projects = useLazyLoadQuery(ProjectNamesUsingCodesQuery, {});
-    const projectsUsingCodes = useMemo(() => getProjectNamesUsingCodes(projects), [projects]);
+
+    const projectsUsingCodes = useMemo(
+        () => getProjectNamesUsingCodes(projects as GetProjectNamesUsingCodesQueryResponse),
+        [projects],
+    );
 
     if (projectsUsingCodes.length === 0) return null;
 

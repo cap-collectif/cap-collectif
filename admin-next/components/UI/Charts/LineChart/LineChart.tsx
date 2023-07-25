@@ -11,11 +11,11 @@ import {
     ReferenceLine,
 } from 'recharts';
 import { formatBigNumber } from '@utils/format-number';
-import type { Payload } from 'recharts/src/component/DefaultTooltipContent';
+import { Payload } from 'recharts/types/component/DefaultTooltipContent';
 
 type Data = {
-    date: string,
-    value: number,
+    date: string;
+    value: number;
 };
 
 export interface LineChartProps extends BoxProps {

@@ -88,7 +88,7 @@ export const extractAndSetData = (file: File, callback: (data: DataType) => void
     const reader = new window.FileReader();
     reader.onload = () => {
         const result = reader.result;
-        const lines = csvToArray(result);
+        const lines = csvToArray(String(result));
         lines.forEach((value: string, index: number) => {
             analyseRow(data, value, index);
         });

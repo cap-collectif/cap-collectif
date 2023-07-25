@@ -10,14 +10,15 @@ import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutati
 import { mutationErrorToast } from 'utils/mutation-error-toast';
 import { Table, Link, ButtonQuickAction, ButtonGroup, toast, CapUIIcon } from '@cap-collectif/ui';
 import { useAppContext } from '../AppProvider/App.context';
-import {ProposalFormItem_viewer$key} from "@relay/ProposalFormItem_viewer.graphql";
+import { ProposalFormItem_viewer$key } from '@relay/ProposalFormItem_viewer.graphql';
 
 export type Viewer = ProposalFormItem_proposalForm['owner'];
+export type Creator = ProposalFormItem_proposalForm['creator'];
 
 type ProposalFormItemProps = {
-    proposalForm: ProposalFormItem_proposalForm$key,
-    viewer: ProposalFormItem_viewer$key,
-    connectionName: string,
+    proposalForm: ProposalFormItem_proposalForm$key;
+    viewer: ProposalFormItem_viewer$key;
+    connectionName: string;
 };
 
 const PROPOSALFORM_FRAGMENT = graphql`
@@ -56,12 +57,13 @@ const VIEWER_FRAGMENT = graphql`
             id
         }
     }
-`
+`;
 
 const duplicateProposalForm = (
     proposalFormDuplicated: ProposalFormItem_proposalForm,
     intl: IntlShape,
     owner: Viewer,
+    creator: Creator,
     connectionName: string,
 ) => {
     const input = {
@@ -75,6 +77,7 @@ const duplicateProposalForm = (
         },
         proposalFormDuplicated,
         owner,
+        creator,
         intl,
     ).then(response => {
         if (response.duplicateProposalForm?.error) {
@@ -145,19 +148,18 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
                                 proposalForm,
                                 intl,
                                 proposalForm.owner,
+                                proposalForm.creator,
                                 connectionName,
                             )
                         }
                         className="btn-duplicate"
                     />
-                    {
-                        canDelete && (
-                            <ModalConfirmationDelete
-                                proposalForm={proposalForm}
-                                connectionName={connectionName}
-                            />
-                        )
-                    }
+                    {canDelete && (
+                        <ModalConfirmationDelete
+                            proposalForm={proposalForm}
+                            connectionName={connectionName}
+                        />
+                    )}
                 </ButtonGroup>
             </Table.Td>
         </>

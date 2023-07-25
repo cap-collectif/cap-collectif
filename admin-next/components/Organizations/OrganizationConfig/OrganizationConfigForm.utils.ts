@@ -3,7 +3,7 @@ import { FormValues } from './OrganizationConfigForm';
 import { IntlShape } from 'react-intl';
 import { OrganizationConfigForm_organization$data } from '@relay/OrganizationConfigForm_organization.graphql';
 import { OrganizationConfigFormMembers_organization$data } from '@relay/OrganizationConfigFormMembers_organization.graphql';
-import { Member } from './OrganizationConfigFormMembers';
+import { Member, StatusEnum } from './OrganizationConfigFormMembers';
 
 export const getInitialValues = (
     organization: OrganizationConfigForm_organization$data,
@@ -37,7 +37,7 @@ export const getMemberList = (
                     email: member?.user?.email || '',
                 },
                 role: member?.role,
-                status: 'ACCEPTED',
+                status: 'ACCEPTED' as StatusEnum,
             })),
         organization.pendingOrganizationInvitations?.edges
             ?.filter(Boolean)
@@ -46,12 +46,11 @@ export const getMemberList = (
             .map(pendingMember => ({
                 user: {
                     username: pendingMember?.user?.username || '',
-                    email: pendingMember?.user?.email || '',
+                    email: pendingMember?.user?.email || pendingMember.email || '',
+                    id: pendingMember.id,
                 },
-                email: pendingMember?.email,
                 role: pendingMember?.role,
-                status: 'PENDING',
-                id: pendingMember.id,
+                status: 'PENDING' as StatusEnum,
             })),
     ].flat();
 };

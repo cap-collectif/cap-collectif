@@ -20,7 +20,7 @@ interface SideBarMenuProps extends FlexProps {
 }
 
 type SubComponents = {
-    Item: typeof SideBarItem,
+    Item: typeof SideBarItem;
 };
 
 const SideBarMenuAnimated = motion(Flex);

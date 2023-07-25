@@ -1,12 +1,12 @@
 /* eslint-env jest */
-import { FeatureFlags } from '../types';
+import { FeatureFlags, Locale } from '../types';
 import { MessageDescriptor } from 'react-intl';
 
 export const $refType: any = null;
 export const $fragmentRefs: any = null;
 
 export const intlMock = {
-    locale: 'fr-FR',
+    locale: 'fr-FR' as Locale,
     formats: {},
     messages: {},
     now: () => 0,
@@ -69,7 +69,12 @@ export const features: FeatureFlags = {
     beta__emailing_parameters: false,
     beta__emailing_group: false,
     proposal_revisions: false,
-    unstable__tipsmeee: false,
+    api_sendinblue: false,
+    helpscout_beacon: false,
+    moderation_comment: false,
+    proposal_sms_vote: false,
+    unstable__new_create_project: false,
+    organizations: false,
     unstable__new_consultation_page: false,
     new_project_card: false,
     import_proposals: false,
@@ -90,6 +95,8 @@ export const features: FeatureFlags = {
     sentry_log: false,
     unstable__paper_vote: false,
     versions: false,
+    new_vote_step: false,
+    turnstile_captcha: false,
 };
 
 const environment = {

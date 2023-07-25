@@ -25,6 +25,7 @@ const executeFunction = (
     }
 
     return Fetcher.graphql({
+        // @ts-ignore fixme
         operationName: operation.name,
         query: operation.text,
         variables,

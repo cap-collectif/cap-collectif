@@ -61,13 +61,13 @@ const getDateRangeProject = (
 };
 
 type DashboardFiltersProps = {
-    viewer: DashboardFilters_viewer$key,
+    viewer: DashboardFilters_viewer$key;
 };
 
 type ProjectFormatted = {
-    id: string
-    label: string
-}
+    id: string;
+    label: string;
+};
 
 const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment }) => {
     const {
@@ -113,16 +113,17 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
         firstRendered.current = true;
     }, [viewerSession.isAdmin, refetch]);
 
-    const projectsFormatted: ProjectFormatted[] = projects?.edges
-        ?.filter(Boolean)
-        .map(edge => edge?.node)
-        .filter(Boolean)
-        .map(project => project && ({ id: project.id, label: project.title })) || [];
+    const projectsFormatted: ProjectFormatted[] =
+        projects?.edges
+            ?.filter(e => e)
+            .map(edge => edge?.node)
+            .filter(n => n !== null)
+            .map(n => ({ id: n.id, label: n.title })) ?? [];
 
     const defaultValue =
         projects?.totalCount > 0
             ? projectsFormatted.find(project => project && project.id === filters.projectId) ||
-              viewerSession.isProjectAdmin && !viewerSession.isAdmin
+              (viewerSession.isProjectAdmin && !viewerSession.isAdmin)
                 ? projectsFormatted[0]
                 : 'ALL'
             : 'ALL';

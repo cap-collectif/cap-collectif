@@ -1,19 +1,21 @@
-import { GetServerSideProps, NextApiResponse } from 'next';
+import { GetServerSideProps } from 'next';
+import { ServerResponse } from 'http';
 import getSessionCookieFromReq from './request-helper';
 import getSessionFromSessionCookie from './session-resolver';
 import getViewerJsonFromRedisSession from './session-decoder';
 import getFeatureFlags from './feature-flags-resolver';
-import frMessages from '~/../../translations/fr-FR.json';
-import enMessages from '~/../../translations/en-GB.json';
-import esMessages from '~/../../translations/es-ES.json';
-import nlMessages from '~/../../translations/nl-NL.json';
-import deMessages from '~/../../translations/de-DE.json';
-import svMessages from '~/../../translations/sv-SE.json';
-import ocMessages from '~/../../translations/oc-OC.json';
-import euMessages from '~/../../translations/eu-EU.json';
-import urMessages from '~/../../translations/ur-IN.json';
+import frMessages from '@translations/fr-FR.json';
+import enMessages from '@translations/en-GB.json';
+import esMessages from '@translations/es-ES.json';
+import nlMessages from '@translations/nl-NL.json';
+import deMessages from '@translations/de-DE.json';
+import svMessages from '@translations/sv-SE.json';
+import ocMessages from '@translations/oc-OC.json';
+import euMessages from '@translations/eu-EU.json';
+import urMessages from '@translations/ur-IN.json';
 import { __isDev__, __isTest__ } from '../config';
 import { getLocaleFromReq } from '../utils/locale-helper';
+import { IntlType, Locale, PageProps } from '../types';
 
 const messages = {
     'fr-FR': frMessages,
@@ -27,7 +29,7 @@ const messages = {
     'ur-IN': urMessages,
 };
 
-const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
+const redirectOnError = (res: ServerResponse, devErrorMessage: string) => {
     if (__isDev__) {
         throw new Error(devErrorMessage);
     }
@@ -41,11 +43,9 @@ const redirectOnError = (res: NextApiResponse, devErrorMessage: string) => {
 };
 
 const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
-    const pageProps = { intl: {} };
-
     // If we are on error page we skip this step.
     if (req.url === '/500' || req.url === '/400') {
-        return { props: pageProps };
+        return { props: {} };
     }
 
     // We fetch the value of session cookie
@@ -67,15 +67,19 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
     }
 
     // Yay we have a session, let's try to decode it to get the json data.
-    const viewerJson = getViewerJsonFromRedisSession(redisSession);
-    if (!viewerJson) {
+    const viewerSession = getViewerJsonFromRedisSession(redisSession);
+    if (!viewerSession) {
         return redirectOnError(
             res,
             'Failed to parse the JSON part of the session corresponding to your `PHPSESSID`, please try to refresh the page or login again on "https://capco.dev" to generate a new one.',
         );
     }
 
-    if (!viewerJson.isAdmin && !viewerJson.isProjectAdmin && !viewerJson.isOrganizationMember) {
+    if (
+        !viewerSession.isAdmin &&
+        !viewerSession.isProjectAdmin &&
+        !viewerSession.isOrganizationMember
+    ) {
         return redirectOnError(
             res,
             'Access denied: this viewer is not an admin or a project admin.',
@@ -83,17 +87,23 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
     }
 
     // Success ! We inject a `viewerSession` props on every page.
-    pageProps.viewerSession = viewerJson;
-
     const locale = getLocaleFromReq(req);
-    pageProps.intl = {
-        locale: locale || 'fr-FR',
+    const intl: IntlType = {
+        locale: locale || Locale.frFR,
         // For tests we disable translations
-        messages: __isTest__ ? {} : messages[locale] || messages['fr-FR'],
+        // @ts-ignore fixme
+        messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
     };
 
-    pageProps.featureFlags = await getFeatureFlags();
-    pageProps.appVersion = process.env.SYMFONY_APP_VERSION || 'dev';
+    const featureFlags = await getFeatureFlags();
+    const appVersion = process.env.SYMFONY_APP_VERSION || 'dev';
+
+    const pageProps: PageProps = {
+        intl,
+        viewerSession,
+        featureFlags,
+        appVersion,
+    };
 
     return { props: pageProps };
 };

@@ -16,18 +16,25 @@ function loadHotJarScript(id: string, sv: number) {
         let a = null;
         let r = null;
 
+        // @ts-ignore
         h.hj =
+            // @ts-ignore
             h.hj ||
             function () {
+                // @ts-ignore
                 (h.hj.q = h.hj.q || []).push(arguments);
             };
 
+        // @ts-ignore
         h._hjSettings = { hjid: id, hjsv: sv };
+        // @ts-ignore
         h._scriptPath = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        // @ts-ignore
         if (!document.querySelector('script[src*="' + h._scriptPath + '"]')) {
             a = o.getElementsByTagName('head')[0];
             r = o.createElement('script');
             r.async = true;
+            // @ts-ignore
             r.src = h._scriptPath;
             a.appendChild(r);
         }
@@ -36,20 +43,23 @@ function loadHotJarScript(id: string, sv: number) {
 
 function setHotJarConfig() {
     var params = Array.prototype.slice.call(arguments);
+    // @ts-ignore
     if (!window.hj) {
         throw new Error('Hotjar is not initialized');
     }
 
+    // @ts-ignore
     window.hj.apply(undefined, params);
 }
 
-const HotJar = () => {
+const HotJar = (): null => {
     const query = useLazyLoadQuery<HotJarQueryType>(QUERY, {});
     const { viewerSession } = useAppContext();
 
     React.useEffect(() => {
         if (query.hotjar?.value) {
             loadHotJarScript(query.hotjar?.value, 6);
+            // @ts-ignore
             setHotJarConfig('identify', viewerSession.id, {
                 email: viewerSession.email,
                 username: viewerSession.username,

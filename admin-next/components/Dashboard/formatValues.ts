@@ -13,7 +13,7 @@ type ValueFormatted = {
 
 const formatValues = (values: ReadonlyArray<Value> | Value[], intl: IntlShape): ValueFormatted[] =>
     values.map(value => ({
-        date: intl.formatDate(moment(value.key), {
+        date: intl.formatDate(moment(value.key).toDate(), {
             day: 'numeric',
             month: 'short',
             year: 'numeric',

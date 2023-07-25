@@ -122,7 +122,7 @@ const DeleteCustomDomainModal: React.FC<Props> = ({
                     <Checkbox
                         id="agree-checkbox"
                         checked={checked}
-                        onChange={e => setChecked(e.target.checked)}>
+                        onChange={e => setChecked((e.target as HTMLInputElement).checked)}>
                         {intl.formatMessage({ id: 'admin.project.delete.confirm' })}
                     </Checkbox>
                 </Modal.Body>

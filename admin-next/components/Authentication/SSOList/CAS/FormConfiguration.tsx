@@ -46,7 +46,6 @@ const FormConfiguration: FC = () => {
                     type="select"
                     control={control}
                     name="casVersion"
-                    id="casVersion"
                     defaultValue={control._defaultValues.casVersion}
                     options={casVersionOptions}
                     placeholder={intl.formatMessage({
@@ -61,7 +60,6 @@ const FormConfiguration: FC = () => {
                 />
                 <FormGuideline>{intl.formatMessage({ id: 'server-url-help' })}</FormGuideline>
                 <FieldInput
-                    id="casServerUrl"
                     name="casServerUrl"
                     control={control}
                     type="text"
@@ -79,7 +77,6 @@ const FormConfiguration: FC = () => {
                     label={intl.formatMessage({ id: 'server-certificate' })}
                 />
                 <FieldInput
-                    id="casCertificate"
                     type="textarea"
                     control={control}
                     name="casCertificate"
@@ -95,16 +92,16 @@ const FormConfiguration: FC = () => {
             </Box>
             <Box
                 as="input"
-                id="casCertificateFileInput"
                 type="file"
                 display="none"
                 onChange={e => {
                     const fileReader = new FileReader();
                     fileReader.onload = function () {
                         if (fileReader.result) {
-                            setValue('casCertificate', fileReader.result);
+                            setValue('casCertificate', String(fileReader.result));
                         }
                     };
+                    // @ts-ignore fixme
                     fileReader.readAsText(e.target.files[0]);
                 }}
             />

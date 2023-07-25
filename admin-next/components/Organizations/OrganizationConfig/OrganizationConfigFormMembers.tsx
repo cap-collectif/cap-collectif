@@ -32,6 +32,10 @@ import { getMemberList } from './OrganizationConfigForm.utils';
 export interface OrganizationConfigFormMembersProps {
     organization: OrganizationConfigFormMembers_organization$key;
 }
+export enum StatusEnum {
+    ACCEPTED = 'ACCEPTED',
+    PENDING = 'PENDING',
+}
 
 export interface Member {
     user: {
@@ -40,7 +44,7 @@ export interface Member {
         email: string;
     };
     role: OrganizationMemberRole;
-    status: 'ACCEPTED' | 'PENDING';
+    status: StatusEnum;
 }
 const formName = 'organization_invite_form';
 const FRAGMENT = graphql`
@@ -88,6 +92,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
     const intl = useIntl();
     const organization = useFragment(FRAGMENT, orgRef);
     const membersList = getMemberList(organization);
+    console.log(membersList);
 
     const organizationRoles = [
         {
@@ -264,14 +269,14 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                                     <Table.Tr>
                                         <Table.Td>
                                             <Flex direction="row" spacing={1}>
-                                                {invite?.status === 'PENDING' ? (
-                                                    <Text>{invite.email}</Text>
+                                                {invite?.status === StatusEnum.PENDING ? (
+                                                    <Text>{invite.user.email}</Text>
                                                 ) : (
                                                     <Tooltip label={invite.user.email}>
                                                         <Text>{invite.user.username}</Text>
                                                     </Tooltip>
                                                 )}
-                                                {invite?.status === 'PENDING' && (
+                                                {invite?.status === StatusEnum.PENDING && (
                                                     <Tag variantColor="orange">
                                                         {intl.formatMessage({ id: 'waiting' })}
                                                     </Tag>
@@ -287,13 +292,13 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                                             <OrganizationConfigFormDeleteMemberModal
                                                 status={invite?.status}
                                                 userName={
-                                                    invite?.email
-                                                        ? invite?.email
+                                                    invite?.user.email
+                                                        ? invite?.user.email
                                                         : invite?.user.username
                                                 }
                                                 userId={invite.user.id}
                                                 organization={organization}
-                                                inviteId={invite?.id}
+                                                inviteId={invite.user.id}
                                             />
                                         </Table.Td>
                                     </Table.Tr>

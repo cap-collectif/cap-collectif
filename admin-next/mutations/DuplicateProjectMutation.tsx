@@ -30,6 +30,7 @@ const commit = (
         variables,
         optimisticResponse: {
             duplicateProject: {
+                // @ts-ignore see with @AlexTea
                 newProject: {
                     ...projectDuplicated,
                     id: new Date().toISOString(),

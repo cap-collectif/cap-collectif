@@ -5,6 +5,8 @@ export type SymfonyEnv = 'dev' | 'prod' | 'test';
 export type PageProps = {
     viewerSession: ViewerSession;
     appVersion: string;
+    intl: IntlType;
+    featureFlags: FeatureFlags;
 };
 
 export enum Locale {

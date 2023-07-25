@@ -65,7 +65,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                 </Heading>
                 <Flex direction="column" spacing={3}>
                     {steps.length ? (
-                        // @ts-ignore DragnDrop typings not on point yet
+                        // @ts-ignore https://github.com/cap-collectif/ui/issues/367
                         <DragnDrop onDragEnd={onDragEnd}>
                             <DragnDrop.List droppableId="steps">
                                 {steps.map((step, index) => (

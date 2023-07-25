@@ -35,7 +35,7 @@ const OrganisationConfigPage: React.FC<OrganisationConfigPageProps> = ({ orgId }
 const OrganizationConfig: NextPage<PageProps> = ({ viewerSession }) => {
     const intl = useIntl();
     const router = useRouter();
-    const { orgId } = router.query;
+    const { orgId } = router.query as { orgId: string};
     if (orgId) {
         return (
             <Layout navTitle={intl.formatMessage({ id: 'global.all.organisation' })}>

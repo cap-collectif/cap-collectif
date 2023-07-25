@@ -10,10 +10,10 @@ import { useSideBarContext } from '@ui/SideBar/SideBar.context';
 export interface SideBarProps extends FlexProps {}
 
 type SubComponents = {
-    Header: typeof SideBarHeader,
-    Menu: typeof SideBarMenu,
-    Item: typeof SideBarItem,
-    Version: typeof SideBarVersion,
+    Header: typeof SideBarHeader;
+    Menu: typeof SideBarMenu;
+    Item: typeof SideBarItem;
+    Version: typeof SideBarVersion;
 };
 
 const SideBarAnimated = motion(Flex);

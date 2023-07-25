@@ -3,22 +3,22 @@ import { GetProjectNamesUsingCodesQueryResponse } from '@relay/GetProjectNamesUs
 
 type RequirementEdge = {
     node: {
-        __typename: string,
-    },
+        __typename: string;
+    };
 };
 
 type Step = {
-    state: string,
+    state: string;
     requirements: {
-        edges: Array<RequirementEdge>,
-    },
+        edges: Array<RequirementEdge>;
+    };
 };
 
 type ProjectEdge = {
     node: {
-        title: string,
-        steps: Array<Step>,
-    },
+        title: string;
+        steps: Array<Step>;
+    };
 };
 
 const isCodeRequirement = (requirementEdge: RequirementEdge): boolean => {
@@ -36,9 +36,13 @@ const isProjectEdgeUsingCodes = (projectEdge: ProjectEdge): boolean => {
 export const getProjectNamesUsingCodes = (
     response: GetProjectNamesUsingCodesQueryResponse,
 ): string[] => {
-    return response.viewer.projects.edges
-        .filter(isProjectEdgeUsingCodes)
-        .map((edge: ProjectEdge) => edge?.node.title);
+    return (
+        response.viewer.projects.edges
+            // @ts-ignore fixme
+            .filter(isProjectEdgeUsingCodes)
+            // @ts-ignore fixme
+            .map((edge: ProjectEdge) => edge?.node.title)
+    );
 };
 
 export const ProjectNamesUsingCodesQuery = graphql`

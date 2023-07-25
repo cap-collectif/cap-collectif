@@ -4,6 +4,7 @@ import executeFunction from 'network/executeFunction';
 import { FeatureFlags } from '../types';
 
 const store = new Store(new RecordSource());
+// @ts-ignore fixme
 const network = Network.create(executeFunction);
 
 export const environment = new Environment({
@@ -17,14 +18,14 @@ const getEnvironment = (featureFlags: FeatureFlags) => {
             // If features flags are already set, we don't need to do anything.
             return;
         }
-        const newfeatureFlagsRecords = Object.keys(featureFlags).map(key => {
+        const newFeatureFlagsRecords = Object.keys(featureFlags).map(key => {
             const enabled = featureFlags[key];
             const newRecord = storeProxy.create(`client:root:featureFlags:${key}`, 'FeatureFlag');
             newRecord.setValue(enabled, 'enabled');
             newRecord.setValue(key, 'type');
             return newRecord;
         });
-        storeProxy.getRoot().setLinkedRecords(newfeatureFlagsRecords, 'featureFlags');
+        storeProxy.getRoot().setLinkedRecords(newFeatureFlagsRecords, 'featureFlags');
     });
 
     return environment;

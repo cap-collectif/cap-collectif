@@ -5,6 +5,7 @@ import Providers from '../utils/providers';
 import GlobalCSS from '../styles/GlobalCSS';
 import Fonts from '../styles/Fonts';
 import { getOnlyLanguage } from '@utils/locale-helper';
+import { PageProps } from 'types';
 
 // We use this component to only render when window is available (it's used by our Redux store)
 const SafeHydrate: FC = ({ children }) => {
@@ -16,11 +17,11 @@ const SafeHydrate: FC = ({ children }) => {
 };
 
 // This is the entrypoint where we inject all providers and shared data
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<PageProps>) {
     if (pageProps.intl) moment.locale(getOnlyLanguage(pageProps.intl.locale));
 
     if (Object.keys(pageProps).length === 0) {
-        return <Component {...pageProps} />
+        return <Component {...pageProps} />;
     }
 
     return (

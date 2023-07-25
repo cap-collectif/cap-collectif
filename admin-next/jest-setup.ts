@@ -3,6 +3,7 @@
 
 import 'whatwg-fetch';
 
+// @ts-ignore
 global.console = {
     log: console.log,
     error: jest.fn(),
@@ -30,6 +31,7 @@ jest.mock('@cap-collectif/ui', () => {
     mockMath.random = () => 0.5;
     global.Math = mockMath;
     return {
+        // @ts-ignore
         ...jest.requireActual('@cap-collectif/ui'),
     };
 });

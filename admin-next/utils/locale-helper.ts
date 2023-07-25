@@ -1,15 +1,16 @@
 import type { ReactNode } from 'react';
 import cookie from 'cookie';
 import CookieHelper from './cookie-helper';
-import { NextApiRequest } from 'next';
+import { IncomingMessage } from 'http';
+import { Locale } from 'types';
 
 const LOCALE_COOKIE_NAME = 'locale';
 
-export function getLocaleFromReq(req: NextApiRequest): string | undefined | null {
+export function getLocaleFromReq(req: IncomingMessage): Locale | undefined | null {
     const cookieHeader = req && req.headers && req.headers.cookie;
     if (cookieHeader) {
         const cookies = cookie.parse(cookieHeader);
-        return cookies[LOCALE_COOKIE_NAME];
+        return cookies[LOCALE_COOKIE_NAME] as Locale;
     }
 
     return null;
@@ -18,7 +19,7 @@ export function getLocaleFromReq(req: NextApiRequest): string | undefined | null
 export function setLocaleCookie(locale: string): void {
     // since admin-next is a different domain than the normal one we need to force the path to be `/` so we don't duplicate the `locale` cookie
     CookieHelper.setCookie(LOCALE_COOKIE_NAME, locale, {
-        path: '/'
+        path: '/',
     });
 }
 
@@ -81,6 +82,7 @@ export function createOrReplaceTranslation(
     );
 
     if (translateAlreadyExist) {
+        // @ts-ignore
         return translations.map(translation => {
             if (translation.locale === locale) {
                 return {

@@ -69,7 +69,11 @@ const RedirectionIO: React.FC = () => {
                 </Heading>
                 <Flex align="center">
                     <Icon name={CapUIIcon.Info} size={CapUIIconSize.Md} color="blue.500" />
-                    <Button as="a" variant="link" href="https://aide.cap-collectif.com/article/168-configurer-des-urls-personnalisees" target="_blank">
+                    <Button
+                        as="a"
+                        variant="link"
+                        href="https://aide.cap-collectif.com/article/168-configurer-des-urls-personnalisees"
+                        target="_blank">
                         {intl.formatMessage({ id: 'global.help' })}
                     </Button>
                 </Flex>

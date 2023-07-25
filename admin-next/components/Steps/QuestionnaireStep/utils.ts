@@ -95,7 +95,7 @@ export type QuestionCategory =
     | 'MULTIPLE_CHOICE'
     | 'LEGAL';
 
-export type QuestionIds = { id: string | null, temporaryId: string | null, title: string };
+export type QuestionIds = { id: string | null; temporaryId: string | null; title: string };
 
 export const formatQuestions = (
     questionnaire: NonNullable<QuestionnaireStepFormQueryResponse['step']>['questionnaire'],
@@ -114,20 +114,20 @@ export const formatQuestions = (
     return questions;
 };
 
-type Condition = { value: { id: string }, question: { id: string } };
+type Condition = { value: { id: string }; question: { id: string } };
 
 // Copied from the flow file. TODO: better types once jumps are in
 const convertJump = (jump: any) => ({
-        id: jump.id,
-        conditions:
-            jump.conditions &&
-            jump.conditions.map((condition: Condition) => ({
-                ...condition,
-                question: condition.question.id,
-                value: condition.value ? condition.value.id : null,
-            })),
-        origin: jump.origin.id,
-        destination: jump.destination.id,
+    id: jump.id,
+    conditions:
+        jump.conditions &&
+        jump.conditions.map((condition: Condition) => ({
+            ...condition,
+            question: condition.question.id,
+            value: condition.value ? condition.value.id : null,
+        })),
+    origin: jump.origin.id,
+    destination: jump.destination.id,
 });
 
 // Copied from the flow file. TODO: better types once jumps are in
@@ -141,7 +141,8 @@ export const formatQuestionsInput = (
                 id: isUuid(question.id || '') ? undefined : question.id,
                 temporaryId: isUuid(question.id || '') ? question.id : undefined,
                 alwaysJumpDestinationQuestion: question.alwaysJumpDestinationQuestion
-                    ? question.alwaysJumpDestinationQuestion.id
+                    ? // @ts-ignore fixme
+                      question.alwaysJumpDestinationQuestion.id
                     : null,
                 jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
                 validationRule:
@@ -168,6 +169,7 @@ export const formatQuestionsInput = (
                       ...choice,
                       id: isUuid(choice?.id || '') ? undefined : choice?.id,
                       temporaryId: isUuid(choice?.id || '') ? choice?.id : undefined,
+                      // @ts-ignore fixme
                       image: choice?.image ? choice.image?.id : null,
                       kind: undefined,
                   }))

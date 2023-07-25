@@ -12,14 +12,14 @@ const ForwardRefEditor = forwardRef((props: JoditProps, ref: LegacyRef<any>) => 
 ));
 
 type Props = {
-    textAreaOnly?: boolean,
-    value?: any,
-    onChange: (value: string) => void,
-    id?: string,
-    disabled?: boolean,
-    platformLanguage: string,
-    selectedLanguage?: string,
-    placeholder?: string,
+    textAreaOnly?: boolean;
+    value?: any;
+    onChange: (value: string) => void;
+    id?: string;
+    disabled?: boolean;
+    platformLanguage: string;
+    selectedLanguage?: string;
+    placeholder?: string;
 };
 
 const getConfig = (

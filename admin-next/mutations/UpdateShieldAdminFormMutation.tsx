@@ -68,6 +68,7 @@ export const toggleShield = (
     return commit({
         input: {
             shieldMode: enabled,
+            // @ts-ignore
             translations,
             mediaId: mediaId || null,
         },

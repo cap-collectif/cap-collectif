@@ -206,7 +206,9 @@ const FeatureList: FC = () => {
                                                                     onChange={e =>
                                                                         toggleFeatureFlag(
                                                                             featureFlagName,
-                                                                            e.target.checked,
+                                                                            (
+                                                                                e.target as HTMLInputElement
+                                                                            ).checked,
                                                                             intl,
                                                                             setSaving,
                                                                         )

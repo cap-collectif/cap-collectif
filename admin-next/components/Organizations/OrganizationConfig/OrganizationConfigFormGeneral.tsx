@@ -95,7 +95,7 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
                     />
                     <FieldInput
                         onChange={event => {
-                            onTitleChange(event.target.value);
+                            onTitleChange((event.target as HTMLInputElement).value);
                         }}
                         id="title"
                         name="title"

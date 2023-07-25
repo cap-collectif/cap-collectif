@@ -1,22 +1,24 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import {usePaginationFragment, graphql, useFragment} from 'react-relay';
+import { usePaginationFragment, graphql, useFragment } from 'react-relay';
 import { Table, Menu, Icon, CapUIIcon, Text } from '@cap-collectif/ui';
 import type { ProposalFormList_viewer$key } from '@relay/ProposalFormList_viewer.graphql';
 import ProposalFormItem from './ProposalFormItem';
 import EmptyMessage from '@ui/Table/EmptyMessage';
 import { useAppContext } from '../AppProvider/App.context';
 import { useLayoutContext } from '../Layout/Layout.context';
-import {ProposalFormList_proposalFormOwner$key} from "@relay/ProposalFormList_proposalFormOwner.graphql";
-import {useState} from "react";
+import { ProposalFormList_proposalFormOwner$key } from '@relay/ProposalFormList_proposalFormOwner.graphql';
+import { useState } from 'react';
 
 export const PROPOSAL_FORM_LIST_PAGINATION = 20;
 
 type ProposalFormListProps = {
-    proposalFormOwner: ProposalFormList_proposalFormOwner$key,
-    viewer: ProposalFormList_viewer$key
-    term: string,
-    resetTerm: () => void,
+    proposalFormOwner: ProposalFormList_proposalFormOwner$key;
+    viewer: ProposalFormList_viewer$key;
+    term: string;
+    resetTerm: () => void;
+    orderBy: string;
+    setOrderBy: (order: string) => void;
 };
 
 export const PROPOSALFORM_OWNER_FRAGMENT = graphql`
@@ -56,20 +58,24 @@ const VIEWER_FRAGMENT = graphql`
     fragment ProposalFormList_viewer on User {
         ...ProposalFormItem_viewer
     }
-`
+`;
 
 const ProposalFormList: React.FC<ProposalFormListProps> = ({
     proposalFormOwner,
     viewer: viewerFragment,
     term,
     resetTerm,
+    orderBy,
+    setOrderBy,
 }) => {
-    const [orderBy, setOrderBy] = useState('DESC');
     const { viewerSession } = useAppContext();
     const intl = useIntl();
     const firstRendered = React.useRef<true | null>(null);
-    const { data, loadNext, hasNext, refetch } = usePaginationFragment(PROPOSALFORM_OWNER_FRAGMENT, proposalFormOwner);
-    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
+    const { data, loadNext, hasNext, refetch } = usePaginationFragment(
+        PROPOSALFORM_OWNER_FRAGMENT,
+        proposalFormOwner,
+    );
+    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
 
     const { proposalForms } = data;
     const { contentRef } = useLayoutContext();
@@ -101,9 +107,7 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
                 <Table.Tr>
                     <Table.Th width="50%">{intl.formatMessage({ id: 'global.title' })}</Table.Th>
                     <Table.Th>{intl.formatMessage({ id: 'global.project' })}</Table.Th>
-                    <Table.Th>
-                        {intl.formatMessage({ id: 'admin.projects.list.author' })}
-                    </Table.Th>
+                    <Table.Th>{intl.formatMessage({ id: 'admin.projects.list.author' })}</Table.Th>
                     {viewerSession.isAdmin || viewerSession.isAdminOrganization ? (
                         <Table.Th>{intl.formatMessage({ id: 'global.owner' })}</Table.Th>
                     ) : null}
@@ -146,7 +150,10 @@ const ProposalFormList: React.FC<ProposalFormListProps> = ({
                     .map(
                         proposalForm =>
                             proposalForm && (
-                                <Table.Tr key={proposalForm.id} rowId={proposalForm.id} data-cy="proposalform-item">
+                                <Table.Tr
+                                    key={proposalForm.id}
+                                    rowId={proposalForm.id}
+                                    data-cy="proposalform-item">
                                     <ProposalFormItem
                                         viewer={viewer}
                                         proposalForm={proposalForm}

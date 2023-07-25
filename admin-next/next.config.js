@@ -1,18 +1,17 @@
 // @ts-check
 
 /**
- * @type {import('next/dist/next-server/server/config').NextConfig}
- **/
+ * @type {import('next').NextConfig}
+*/
 const nextConfig = {
   // TODO enable this
   reactStrictMode: false,
   basePath:
     process.env.SYMFONY_ENV === 'prod' || process.env.SYMFONY_ENV === 'test' ? '/admin-next' : '',
   env: {
-    PRODUCTION: process.env.SYMFONY_ENV === 'prod',
+    PRODUCTION: String(process.env.SYMFONY_ENV === 'prod'),
   },
   i18n: {
-    localeDetection: true,
     defaultLocale: 'fr-FR',
     locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN'],
   },
@@ -20,14 +19,15 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
+  swcMinify: true,
+  compiler: {
+    relay: {
+      language: 'typescript',
+      src: './',
+      artifactDirectory: './__generated__',
+      excludes: ['**/.next/**', '**/node_modules/**', '**/schema/**', '**/__generated__/**'],
+    },
   },
-
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,

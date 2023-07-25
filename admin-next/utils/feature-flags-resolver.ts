@@ -89,7 +89,7 @@ export const decodePHPFlag = (encodedFlag: string): boolean => {
     return encodedFlag.includes(';i:2;');
 };
 
-const getFeatureFlags = async (): FeatureFlags => {
+const getFeatureFlags = async (): Promise<FeatureFlags> => {
     const redisClient = await getRedisClient();
 
     const featureFlags = defaultFeatureFlags;

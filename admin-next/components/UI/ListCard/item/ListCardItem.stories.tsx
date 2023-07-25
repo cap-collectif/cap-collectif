@@ -28,6 +28,7 @@ export const WithType: Story<ListCardProps> = args => (
 );
 
 export const WithSwitch: Story<ListCardProps> = args => (
+    // @ts-ignore
     <ListCard.Item as="label" htmlFor="hello-world">
         <Flex direction="column">
             <ListCard.Item.Type>Step</ListCard.Item.Type>
