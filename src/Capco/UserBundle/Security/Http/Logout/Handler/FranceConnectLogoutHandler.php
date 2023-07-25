@@ -7,6 +7,7 @@ use Capco\UserBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class FranceConnectLogoutHandler implements LogoutHandlerInterface
@@ -14,15 +15,18 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
     private Manager $toggleManager;
     private ResourceOwnerInterface $resourceOwner;
     private TokenStorageInterface $tokenStorage;
+    private RouterInterface $router;
 
     public function __construct(
         Manager $toggleManager,
         ResourceOwnerInterface $resourceOwner,
-        TokenStorageInterface $tokenStorage
+        TokenStorageInterface $tokenStorage,
+        RouterInterface $router
     ) {
         $this->toggleManager = $toggleManager;
         $this->resourceOwner = $resourceOwner;
         $this->tokenStorage = $tokenStorage;
+        $this->router = $router;
     }
 
     public function handle(
@@ -37,7 +41,7 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
             && 'franceconnect' === $token->getResourceOwnerName()
             && $this->toggleManager->isActive('login_franceconnect')
         ) {
-            $logoutURL = $this->getLogoutUrl($responseWithRequest->getResponse()->getTargetUrl());
+            $logoutURL = $this->getLogoutUrl();
 
             $responseWithRequest->setResponse(new RedirectResponse($logoutURL));
         }
@@ -45,10 +49,10 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
         return $responseWithRequest;
     }
 
-    public function getLogoutUrl(string $redirectUrl, ?User $user = null): string
+    public function getLogoutUrl(?User $user = null): string
     {
         $logoutURL = $this->resourceOwner->getOption('logout_url');
-
+        $redirectUrl = $this->router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);
         $parameters = [
             'post_logout_redirect_uri' => $redirectUrl,
             'state' => $this->generateNonce(),

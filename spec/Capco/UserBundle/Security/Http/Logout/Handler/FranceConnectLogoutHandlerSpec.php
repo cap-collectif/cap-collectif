@@ -14,14 +14,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class FranceConnectLogoutHandlerSpec extends ObjectBehavior
 {
-    public function it should redirect to france connect logout page with correct parameters(
+    public function it_should_redirect_to_france_connect_logout_page_with_correct_parameters(
         Manager $manager,
         FranceConnectResourceOwner $resourceOwner,
         RouterInterface $router,
         TokenStorage $tokenStorage,
         OAuthToken $token
     ) {
-        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage);
+        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage, $router);
 
         $manager->isActive('login_franceconnect')->willReturn(true);
         $token->getResourceOwnerName()->willReturn('franceconnect');
@@ -63,14 +63,14 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
         );
     }
 
-    public function it should not to touch redirect response when france connect is not enabled(
+    public function it_should_not_to_touch_redirect_response_when_france_connect_is_not_enabled(
         Manager $manager,
         FranceConnectResourceOwner $resourceOwner,
         RouterInterface $router,
         TokenStorage $tokenStorage,
         OAuthToken $token
     ) {
-        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage);
+        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage, $router);
 
         $manager->isActive('login_franceconnect')->willReturn(false);
         $token->getResourceOwnerName()->willReturn('franceconnect');
@@ -96,5 +96,38 @@ class FranceConnectLogoutHandlerSpec extends ObjectBehavior
         $this->handle($dummyRedirectResponseWithRequest)->shouldReturn(
             $dummyRedirectResponseWithRequest
         );
+    }
+
+    public function it_should_provide_a_simple_link_for_redirection_while_disconnecting(
+        Manager $manager,
+        FranceConnectResourceOwner $resourceOwner,
+        RouterInterface $router,
+        TokenStorage $tokenStorage,
+        OAuthToken $token
+    ) {
+        $this->beConstructedWith($manager, $resourceOwner, $tokenStorage, $router);
+
+        $manager->isActive('login_franceconnect')->willReturn(true);
+        $tokenStorage->getToken()->willReturn($token);
+        $token->getResourceOwnerName()->willReturn('franceconnect');
+        $token->getRawToken()->willReturn(['id_token' => 'abc123']);
+
+        $router
+            ->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL)
+            ->willReturn('https://capco.dev')
+        ;
+
+        $resourceOwner
+            ->getOption('logout_url')
+            ->willReturn('https://fcp.integ01.dev-franceconnect.fr/api/v1/logout')
+        ;
+
+        $expectedEncodedParameter = http_build_query(
+            ['post_logout_redirect_uri' => 'https://capco.dev'],
+            '',
+            '&'
+        );
+
+        $this->getLogoutUrl()->shouldContain($expectedEncodedParameter);
     }
 }

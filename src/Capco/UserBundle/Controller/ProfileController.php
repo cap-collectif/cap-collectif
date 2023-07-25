@@ -441,7 +441,7 @@ class ProfileController extends Controller
         );
         $user = $this->getUser();
         if ($user->isFranceConnectAccount()) {
-            $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($redirectUrl, $user);
+            $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($user);
         }
         $this->deleteAccountMutation->deleteAccount($type, $user);
 

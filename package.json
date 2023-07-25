@@ -124,7 +124,6 @@
         ],
         "*.php": [
             "./bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose",
-            "prettier --parser php --write",
             "php -dmemory_limit=-1 bin/phpstan analyse -c phpstan.neon src",
             "git add"
         ],
