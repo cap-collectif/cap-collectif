@@ -17,8 +17,7 @@
             "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__"
         },
         "files": [
-            "src/Kernel.php",
-            "src/functions.php"
+            "src/Kernel.php"
         ]
     },
     "repositories": [
