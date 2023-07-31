@@ -1,14 +1,12 @@
 import { AdminGroupPage } from '~e2e-pages/index'
-
-describe('User Admin', () => {
+  
   describe('User group', () => {
     beforeEach(() => {
       cy.directLoginAs('admin')
     })
-    it('Logged in super admin wants to edit a user profile', () => {
+    it('Logged in admin wants to create a group', () => {
       AdminGroupPage.visit()
       AdminGroupPage.clickButtonAddGroup()
       cy.contains('group.create.title').should('exist')
     })
   })
-})
