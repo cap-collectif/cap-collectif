@@ -106,8 +106,6 @@ type Props = {|
   dateProps?: DateProps,
   maxSize?: number,
   accept?: Array<string>,
-  fieldUsingJoditWysiwyg?: boolean,
-  fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
   onKeyDown?: Function,
   captchaRef?: React.Ref<*>,
@@ -170,8 +168,6 @@ class Field extends React.Component<Props> {
       selectedLanguage,
       maxSize,
       accept,
-      fieldUsingJoditWysiwyg,
-      fieldUsingJoditWysiwygName,
       noCode,
       onKeyDown,
       captchaRef,
@@ -254,8 +250,6 @@ class Field extends React.Component<Props> {
         selectedLanguage={selectedLanguage}
         maxSize={maxSize}
         accept={accept}
-        fieldUsingJoditWysiwyg={fieldUsingJoditWysiwyg}
-        fieldUsingJoditWysiwygName={fieldUsingJoditWysiwygName}
         noCode={noCode}
         onKeyDown={onKeyDown}
         captchaRef={captchaRef}

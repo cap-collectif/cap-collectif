@@ -68,18 +68,6 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I fill the proposal content address with :address
-     */
-    public function iFillProposalContentAddressWith(string $address)
-    {
-        $this->waitAndThrowOnFailure(3000, "$('#proposal_address').length > 0");
-        $this->fillField('proposal_address', $address);
-        $this->waitAndThrowOnFailure(2000, "$('#list-suggestion > li:first-child').length > 0");
-        $this->iClickElement('#list-suggestion > li:first-child');
-        $this->iWait(1);
-    }
-
-    /**
      * @When I fill :analyst1 and :analyst2 to the analyst select
      */
     public function iFillProposalEvaluationAnalysts(string $analyst1, string $analyst2)

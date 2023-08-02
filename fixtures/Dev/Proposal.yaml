@@ -190,7 +190,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal10:
         id: proposal10
         title: Proposition pas encore votable
-        body: 'TODO'
+        body: <stripslashes('\<p>TODO</p>\')>
         rating: 3
         author: '@user4'
         proposalForm: '@proposalform1'
@@ -676,7 +676,7 @@ Capco\AppBundle\Entity\Proposal:
     proposal105:
         id: proposal105
         title: Proposition qui va être jetée
-        body: 'TODO'
+        body: <stripslashes('<p>TODO</p>\')>
         author: '@user4'
         proposalForm: '@proposalform16'
         reference: 1105

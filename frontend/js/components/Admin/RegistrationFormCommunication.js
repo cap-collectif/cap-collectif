@@ -92,8 +92,6 @@ export const RegistrationFormCommunication = ({
   useBottomText,
   submitSucceeded,
   submitFailed,
-  topTextUsingJoditWysiwyg,
-  bottomTextUsingJoditWysiwyg,
 }: Props) => (
   <div className="box box-primary container-fluid">
     <div className="box-content box-content__content-form">
@@ -112,14 +110,7 @@ export const RegistrationFormCommunication = ({
           <FormattedMessage id="registration.admin.topText" />
         </Field>
         {useTopText && (
-          <Field
-            name="topText"
-            type="admin-editor"
-            fieldUsingJoditWysiwyg={topTextUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="topTextUsingJoditWysiwyg"
-            formName={formName}
-            component={renderInput}
-          />
+          <Field name="topText" type="admin-editor" formName={formName} component={renderInput} />
         )}
         <Field
           type="checkbox"
@@ -132,8 +123,6 @@ export const RegistrationFormCommunication = ({
           <Field
             name="bottomText"
             type="admin-editor"
-            fieldUsingJoditWysiwyg={bottomTextUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="bottomTextUsingJoditWysiwyg"
             formName={formName}
             component={renderInput}
           />
@@ -181,8 +170,6 @@ const mapStateToProps = (state: State, { registrationForm }: Props) => {
     },
     useTopText: formValueSelector(formName)(state, 'topTextDisplayed'),
     useBottomText: formValueSelector(formName)(state, 'bottomTextDisplayed'),
-    topTextUsingJoditWysiwyg: formValueSelector(formName)(state, 'topTextUsingJoditWysiwyg'),
-    bottomTextUsingJoditWysiwyg: formValueSelector(formName)(state, 'bottomTextUsingJoditWysiwyg'),
     features: state.default.features,
   };
 };

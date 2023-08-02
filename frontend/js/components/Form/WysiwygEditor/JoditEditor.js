@@ -4,7 +4,7 @@ import JoditEditor from 'jodit-react';
 import AppBox from '~/components/Ui/Primitives/AppBox';
 import localConfig from '~/config';
 
-type Props = {
+export type Props = {|
   value?: any,
   onChange: string => void,
   id?: string,
@@ -17,50 +17,81 @@ type Props = {
   maxLength?: string,
   selectedLanguage?: string,
   noCode?: boolean,
-};
+  +clientConfig?: boolean,
+|};
 
-const getConfig = (currentLanguage, noCode, editor) => {
-  const buttons = [
-    'bold',
-    'italic',
-    'underline',
-    'strikethrough',
-    'eraser',
-    '|',
-    'ul',
-    'ol',
-    '|',
-    'left',
-    'center',
-    'right',
-    'justify',
-    '|',
-    'fontsize',
-    'brush',
-    'paragraph',
-    '|',
-    'superscript',
-    'subscript',
-    '|',
-    'image',
-    'video',
-    'file',
-    'link',
-    'table',
-    '|',
-    'undo',
-    'redo',
-    '|',
-    'hr',
-    noCode ? '' : 'source',
-  ];
+const CLIENT_CONFIG = [
+  'bold',
+  'italic',
+  'underline',
+  'strikethrough',
+  'eraser',
+  '|',
+  'ul',
+  'ol',
+  '|',
+  'left',
+  'center',
+  'right',
+  'justify',
+  '|',
+  'fontsize',
+  'brush',
+  'paragraph',
+  '|',
+  'image',
+  'video',
+  'link',
+];
+
+const getConfig = (currentLanguage, noCode, editor, clientConfig, disabled) => {
+  const buttons = clientConfig
+    ? CLIENT_CONFIG
+    : [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'eraser',
+        '|',
+        'ul',
+        'ol',
+        '|',
+        'left',
+        'center',
+        'right',
+        'justify',
+        '|',
+        'fontsize',
+        'brush',
+        'paragraph',
+        '|',
+        'superscript',
+        'subscript',
+        '|',
+        'image',
+        'video',
+        'file',
+        'link',
+        'table',
+        '|',
+        'undo',
+        'redo',
+        '|',
+        'hr',
+        noCode ? '' : 'source',
+      ];
   return {
     readonly: false,
     minHeight: 300,
     style: {
       background: 'white',
     },
+    disabled,
     language: currentLanguage?.substr(0, 2) || 'fr',
+    askBeforePasteHTML: false,
+    askBeforePasteFromWord: false,
+    defaultActionOnPaste: 'insert_clear_html',
     uploader: {
       url: `${localConfig.getApiUrl()}/files`,
       format: 'json',
@@ -110,13 +141,22 @@ const getConfig = (currentLanguage, noCode, editor) => {
   };
 };
 
-const Jodit = ({ onChange, value, currentLanguage, id, selectedLanguage, noCode }: Props) => {
+const Jodit = ({
+  onChange,
+  value,
+  currentLanguage,
+  id,
+  selectedLanguage,
+  noCode,
+  clientConfig,
+  disabled = false,
+}: Props) => {
   // TODO : Flow types for Jodit ??
   const editor = useRef<any>(null);
 
   const config = useMemo(
-    () => getConfig(currentLanguage, noCode, editor),
-    [currentLanguage, noCode],
+    () => getConfig(currentLanguage, noCode, editor, clientConfig, disabled),
+    [currentLanguage, noCode, clientConfig, disabled],
   );
 
   return useMemo(

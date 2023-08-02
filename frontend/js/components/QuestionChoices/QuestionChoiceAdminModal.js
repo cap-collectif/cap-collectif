@@ -29,9 +29,7 @@ export const QuestionChoiceAdminModal = ({
   onSubmit,
   member,
   isCreating,
-  formName,
   type,
-  descriptionUsingJoditWysiwyg,
 }: Props) => {
   const intl = useIntl();
 
@@ -66,9 +64,6 @@ export const QuestionChoiceAdminModal = ({
             name={`${member}.description`}
             component={component}
             type="admin-editor"
-            fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
-            formName={formName}
             id={`${member}.description`}
             label={
               <span>
@@ -120,7 +115,6 @@ const mapStateToProps = (state: GlobalState, props) => {
   const selector = formValueSelector(props.formName);
   return {
     kind: selector(state, `${props.member}.kind`),
-    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 

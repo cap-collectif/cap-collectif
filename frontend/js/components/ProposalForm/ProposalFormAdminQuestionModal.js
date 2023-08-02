@@ -158,7 +158,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
       currentQuestion,
       formErrors,
       isSuperAdmin,
-      descriptionUsingJoditWysiwyg,
       dispatch,
     } = this.props;
     if (formErrors.questions !== undefined) {
@@ -215,9 +214,6 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
               name={`${member}.description`}
               component={component}
               type="admin-editor"
-              formName={formName}
-              fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
-              fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
               id={`${member}.description`}
               label={
                 <span>
@@ -540,7 +536,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
     validationRuleType: selector(state, `${props.member}.validationRule.type`),
     formErrors: getFormSyncErrors(props.formName)(state),
     isSuperAdmin: state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'),
-    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 

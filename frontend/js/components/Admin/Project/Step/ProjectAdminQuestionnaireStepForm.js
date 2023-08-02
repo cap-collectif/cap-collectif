@@ -67,7 +67,8 @@ export const loadQuestionnaireOptions = (
     term: term === '' ? null : term,
     affiliations: isAdmin ? null : ['OWNER'],
   }).then((data: ProjectAdminQuestionnaireStepFormQuestionnairesQueryResponse) => {
-    const questionnairesEdges = data.viewer.organizations?.[0]?.questionnaires?.edges ?? data.viewer.questionnaires?.edges;
+    const questionnairesEdges =
+      data.viewer.organizations?.[0]?.questionnaires?.edges ?? data.viewer.questionnaires?.edges;
 
     const questionnaires =
       questionnairesEdges
@@ -101,7 +102,6 @@ export const ProjectAdminQuestionnaireStepForm = ({
   isAnonymousParticipationAllowed,
   fcAllowedData,
   isFranceConnectConfigured,
-  footerUsingJoditWysiwyg,
 }: Props) => {
   const { user } = useSelector((state: GlobalState) => state.user);
   const intl = useIntl();
@@ -113,9 +113,6 @@ export const ProjectAdminQuestionnaireStepForm = ({
         type="admin-editor"
         name="footer"
         id="step-footer"
-        fieldUsingJoditWysiwyg={footerUsingJoditWysiwyg}
-        fieldUsingJoditWysiwygName="footerUsingJoditWysiwyg"
-        formName="stepForm"
         label={renderLabel('global.footer', intl)}
         component={component}
       />

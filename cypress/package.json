@@ -12,7 +12,7 @@
         "cy:run:debate:ci": "NODE_ENV=ci cypress run --spec 'integration/debate/*.cy.ts'",
         "cy:run:project-owner:ci": "NODE_ENV=ci cypress run --spec 'integration/projectOwner/*.cy.ts'",
         "cy:run:questionnaire:ci": "NODE_ENV=ci cypress run --spec 'integration/questionnaire/*.cy.ts'",
-        "cy:run:projects:ci": "NODE_ENV=ci cypress run --spec 'integration/project/*.cy.ts,integration/projects/*.cy.ts,integration/proposal/*.cy.ts,integration/rgpd/*.cy.ts,integration/consultation/*.cy.ts'",
+        "cy:run:projects:ci": "NODE_ENV=ci cypress run --spec 'integration/project/*.cy.ts,integration/projects/*.cy.ts,integration/proposal/*.cy.ts,integration/rgpd/*.cy.ts,integration/consultation/*.cy.ts,integration/proposalAdmin/*.cy.ts'",
         "cy:run:user:ci": "NODE_ENV=ci cypress run --spec 'integration/user/*.cy.ts'",
         "cy:run:moderation:ci": "NODE_ENV=ci cypress run --spec 'integration/moderation/*.cy.ts'",
         "cy:run:organization:ci": "NODE_ENV=ci cypress run --spec 'integration/organization/*.cy.ts'",

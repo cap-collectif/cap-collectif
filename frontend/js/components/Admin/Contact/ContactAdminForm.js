@@ -31,8 +31,6 @@ const ContactAdminForm = (props: Props): React.Element<'form'> => {
       <Field
         name="description"
         type="admin-editor"
-        fieldUsingJoditWysiwyg
-        fieldUsingJoditWysiwygName="siteParameter"
         component={renderComponent}
         label={
           <span>

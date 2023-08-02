@@ -97,7 +97,7 @@ describe('Questionnaire Logged-in as user', () => {
     })
     it('should show ended message when user attempt to reply to a closed questionnaire', () => {
       cy.contains('step.questionnaire.alert.ended.title').should('exist')
-      cy.get('.ql-editor.ql-blank').should('have.attr', 'contenteditable', 'false')
+      cy.get('.jodit-wysiwyg').should('not.have.attr', 'contenteditable')
     })
   })
 })

@@ -416,9 +416,6 @@ export function ProjectAdminStepForm({
   fcAllowedData,
   isFranceConnectConfigured,
   hasIdentificationCodeLists,
-  bodyUsingJoditWysiwyg,
-  debateContentUsingJoditWysiwyg,
-  footerUsingJoditWysiwyg,
 }: Props) {
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
@@ -523,9 +520,6 @@ export function ProjectAdminStepForm({
             <Field
               type="admin-editor"
               name="debateContent"
-              fieldUsingJoditWysiwyg={debateContentUsingJoditWysiwyg}
-              fieldUsingJoditWysiwygName="debateContentUsingJoditWysiwyg"
-              formName={stepFormName}
               id="step-debate-content"
               label={<FormattedMessage id="debate.content" />}
               placeholder={<FormattedMessage id="debate.content" />}
@@ -596,10 +590,6 @@ export function ProjectAdminStepForm({
             <Field
               type="admin-editor"
               name="body"
-              fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-              fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
-              formName={stepFormName}
-              fieldName="bodyUsingJoditWysiwyg"
               id="step-body"
               label={renderLabel('proposal.body', intl, undefined, true)}
               component={renderComponent}
@@ -622,7 +612,6 @@ export function ProjectAdminStepForm({
               fcAllowedData={fcAllowedData}
               isFranceConnectConfigured={isFranceConnectConfigured}
               isAnonymousParticipationAllowed={isAnonymousParticipationAllowed}
-              footerUsingJoditWysiwyg={footerUsingJoditWysiwyg}
             />
           )}
           {step.__typename === 'ConsultationStep' && (
@@ -953,13 +942,6 @@ const mapStateToProps = (
     isPrivate: formValueSelector(stepFormName)(state, 'private') || false,
     // DebateStep
     debateType: formValueSelector(stepFormName)(state, 'debateType') || 'FACE_TO_FACE',
-    // WYSIWYG Migration
-    bodyUsingJoditWysiwyg: formValueSelector(stepFormName)(state, 'bodyUsingJoditWysiwyg'),
-    footerUsingJoditWysiwyg: formValueSelector(stepFormName)(state, 'footerUsingJoditWysiwyg'),
-    debateContentUsingJoditWysiwyg: formValueSelector(stepFormName)(
-      state,
-      'debateContentUsingJoditWysiwyg',
-    ),
   };
 };
 

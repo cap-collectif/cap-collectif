@@ -59,8 +59,6 @@ exports[`<ProposalUserVoteItem /> should render correctly 1`] = `
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>
@@ -155,8 +153,6 @@ exports[`<ProposalUserVoteItem /> should render correctly button 1`] = `
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>
@@ -258,8 +254,6 @@ exports[`<ProposalUserVoteItem /> should render correctly radio 1`] = `
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>
@@ -372,8 +366,6 @@ exports[`<ProposalUserVoteItem /> should render correctly when not creating 1`] 
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>
@@ -468,8 +460,6 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show 1`] = `
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>
@@ -564,8 +554,6 @@ exports[`<ProposalUserVoteItem /> should render correctly when not show and not 
       />
       <Field
         component={[Function]}
-        fieldUsingJoditWysiwygName="string.descriptionUsingJoditWysiwyg"
-        formName="string"
         id="string.description"
         label={
           <span>

@@ -127,7 +127,6 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
   submitSucceeded,
   submitFailed,
   submitting,
-  bodyUsingJoditWysiwyg,
 }: Props) => {
   const intl = useIntl();
   const { user } = useSelector((state: GlobalState) => state.user);
@@ -183,9 +182,6 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             name="body"
             type="admin-editor"
             id="body"
-            formName={formName}
-            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
             component={component}
             label={
               <Flex>
@@ -268,7 +264,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
               if (props) {
                 const { viewer } = props;
                 const organization = viewer?.organizations?.[0];
-                const questionnaires = organization?.questionnaires ?? viewer.questionnaires
+                const questionnaires = organization?.questionnaires ?? viewer.questionnaires;
 
                 const availableQuestionnaires: QuestionnaireFormatted[] =
                   questionnaires.edges
@@ -579,7 +575,6 @@ const mapStateToProps = (state: State, props: RelayProps) => {
     moveToSelectionStep: formValueSelector(formName)(state, 'moveToSelectionStep'),
     moveToSelectionStatus: formValueSelector(formName)(state, 'moveToSelectionStatus'),
     effectiveDate: formValueSelector(formName)(state, 'effectiveDate'),
-    bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
     initialValues: {
       analysisStep: analysisConfiguration?.analysisStep?.id || null,
       evaluationForm: analysisConfiguration?.evaluationForm?.id || null,

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Field, reduxForm, submit, change, FormSection, formValueSelector } from 'redux-form';
+import { Field, reduxForm, submit, change, FormSection } from 'redux-form';
 import { useDispatch, connect } from 'react-redux';
 import { useIntl } from 'react-intl';
 import css from '@styled-system/css';
@@ -49,7 +49,6 @@ type FormValues = {|
   +isProjectAdmin?: ?boolean,
   +isSuperAdmin?: ?boolean,
   +proposalId?: ?string,
-  +bodyUsingJoditWysiwyg?: ?boolean,
   +organization?: {
     id: string,
     displayName: string,
@@ -65,7 +64,6 @@ type OwnProps = {|
 type AfterConnectProps = {|
   ...OwnProps,
   +dispatch: Dispatch,
-  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 type Props = {|
   ...AfterConnectProps,
@@ -156,7 +154,7 @@ const onSubmit = (values, dispatch, props) => {
       isPublished: values.is_published,
       commentable: values.has_comments,
       customCode: values.custom_code,
-      bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
+      bodyUsingJoditWysiwyg: false,
     };
     return UpdatePostMutation.commit({ input: vals })
       .then(() => {
@@ -180,7 +178,7 @@ const onSubmit = (values, dispatch, props) => {
     isPublished: values.is_published,
     commentable: values.has_comments,
     customCode: values.custom_code,
-    bodyUsingJoditWysiwyg: values.bodyUsingJoditWysiwyg ?? false,
+    bodyUsingJoditWysiwyg: false,
     owner,
   };
   return CreatePostMutation.commit({ input: vals })
@@ -205,7 +203,6 @@ const PostForm = ({
   submitting,
   initialValues,
   dirty,
-  bodyUsingJoditWysiwyg,
 }: Props): React.Node => {
   const intl = useIntl();
   const data = useFragment(FRAGMENT, query);
@@ -431,9 +428,6 @@ const PostForm = ({
             }
             component={component}
             disabled={false}
-            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
-            formName={formName}
             type="admin-editor"
           />
         </FormSection>
@@ -678,7 +672,6 @@ const mapStateToProps = (state: GlobalState, { initialValues, query }: OwnProps)
   // $FlowFixMe $key type does not have the data - need to refacto PostFormPage before
   const organization = query?.viewer?.organizations?.[0];
   return {
-    bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
     initialValues: {
       ...initialValues,
       organization,

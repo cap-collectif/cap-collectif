@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage, type IntlShape } from 'react-intl';
-import { reduxForm, Field, SubmissionError, submit, formValueSelector } from 'redux-form';
+import { reduxForm, Field, SubmissionError, submit } from 'redux-form';
 import { connect, useDispatch } from 'react-redux';
 import { createFragmentContainer, graphql, type RelayFragmentContainer } from 'react-relay';
 import type { Dispatch, State } from '~/types';
@@ -48,8 +48,6 @@ type StateProps = {|
   +initialValues: FormValues,
   +form: string,
   +dispatch: Dispatch,
-  +confidentialityUsingJoditWysiwyg?: ?boolean,
-  +bodyUsingJoditWysiwyg?: ?boolean,
 |};
 
 type AfterConnectProps = {|
@@ -158,8 +156,6 @@ export const ContactFormAdminForm = ({
   handleSubmit,
   pristine,
   invalid,
-  bodyUsingJoditWysiwyg,
-  confidentialityUsingJoditWysiwyg,
 }: Props): React.Node => {
   const optional = (
     <span className="excerpt">
@@ -184,9 +180,6 @@ export const ContactFormAdminForm = ({
           id={`${form}-contact-body`}
           type="admin-editor"
           name="body"
-          fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-          fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
-          formName={form}
           component={renderInput}
           label={
             <span>
@@ -209,9 +202,6 @@ export const ContactFormAdminForm = ({
           id={`${form}-confidentiality`}
           type="admin-editor"
           name="confidentiality"
-          fieldUsingJoditWysiwyg={confidentialityUsingJoditWysiwyg}
-          fieldUsingJoditWysiwygName="confidentialityUsingJoditWysiwyg"
-          formName={form}
           component={renderInput}
           label={
             <span>
@@ -267,12 +257,6 @@ const mapStateToProps = (state: State, { contactForm, intl }: BeforeConnectProps
           ? translation.confidentiality
           : intl.formatMessage({ id: 'contact-form-confidentiality-text' }),
     },
-    // WYSIWYG Migration
-    bodyUsingJoditWysiwyg: formValueSelector(form)(state, 'bodyUsingJoditWysiwyg'),
-    confidentialityUsingJoditWysiwyg: formValueSelector(form)(
-      state,
-      'confidentialityUsingJoditWysiwyg',
-    ),
   };
 };
 

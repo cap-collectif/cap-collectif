@@ -35,61 +35,55 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
   return <Loader />;
 };
 
-export class ProposalAdminPage extends React.Component<Props> {
-  componentDidUpdate(prevProps: Props) {
-    const { dirty } = this.props;
-    if (prevProps.dirty === false && dirty === true) {
-      window.addEventListener('beforeunload', onUnload);
-    }
+export const ProposalAdminPage = ({
+  proposalId,
+  proposalRevisionsEnabled,
+  viewerIsAdmin,
+  dirty,
+}: Props) => {
+  React.useEffect(() => {
+    if (dirty) window.addEventListener('beforeunload', onUnload);
+    else window.removeEventListener('beforeunload', onUnload);
 
-    if (dirty === false) {
-      window.removeEventListener('beforeunload', onUnload);
-    }
-  }
+    return () => window.removeEventListener('beforeunload', onUnload);
+  }, [dirty]);
 
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', onUnload);
-  }
-
-  render() {
-    const { proposalId, proposalRevisionsEnabled, viewerIsAdmin } = this.props;
-    return (
-      <div className="admin_proposal_form">
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query ProposalAdminPageQuery(
-              $id: ID!
-              $count: Int!
-              $proposalRevisionsEnabled: Boolean!
-              $viewerIsAdmin: Boolean!
-              $cursor: String
-            ) {
-              viewer {
-                ...ProposalAdminPageTabs_viewer
-              }
-              proposal: node(id: $id) {
-                ...ProposalAdminPageTabs_proposal
-                  @arguments(
-                    proposalRevisionsEnabled: $proposalRevisionsEnabled
-                    viewerIsAdmin: $viewerIsAdmin
-                  )
-              }
+  return (
+    <div className="admin_proposal_form">
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ProposalAdminPageQuery(
+            $id: ID!
+            $count: Int!
+            $proposalRevisionsEnabled: Boolean!
+            $viewerIsAdmin: Boolean!
+            $cursor: String
+          ) {
+            viewer {
+              ...ProposalAdminPageTabs_viewer
             }
-          `}
-          variables={{
-            id: proposalId,
-            count: PROPOSAL_FOLLOWERS_TO_SHOW,
-            proposalRevisionsEnabled,
-            viewerIsAdmin,
-            cursor: null,
-          }}
-          render={component}
-        />
-      </div>
-    );
-  }
-}
+            proposal: node(id: $id) {
+              ...ProposalAdminPageTabs_proposal
+                @arguments(
+                  proposalRevisionsEnabled: $proposalRevisionsEnabled
+                  viewerIsAdmin: $viewerIsAdmin
+                )
+            }
+          }
+        `}
+        variables={{
+          id: proposalId,
+          count: PROPOSAL_FOLLOWERS_TO_SHOW,
+          proposalRevisionsEnabled,
+          viewerIsAdmin,
+          cursor: null,
+        }}
+        render={component}
+      />
+    </div>
+  );
+};
 
 const mapStateToProps = (state: State, props: Props) => {
   return {

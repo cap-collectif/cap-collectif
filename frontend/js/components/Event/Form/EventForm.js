@@ -254,7 +254,6 @@ export const EventForm = ({
   event,
   query,
   currentValues,
-  bodyUsingJoditWysiwyg,
   dispatch,
   className,
   isFrontendView = false,
@@ -273,8 +272,8 @@ export const EventForm = ({
     if (
       query.viewer.isSuperAdmin ||
       query.viewer.isOnlyProjectAdmin ||
-      (query.viewer.isAdmin && !isFeatureUserEventEnabled)
-      || organization
+      (query.viewer.isAdmin && !isFeatureUserEventEnabled) ||
+      organization
     ) {
       return false;
     }
@@ -432,9 +431,6 @@ export const EventForm = ({
             id="event_body"
             type={isFrontendView ? 'admin-editor-ds' : 'admin-editor'}
             name="body"
-            fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
-            formName={formName}
             component={component}
             disabled={isDisabled()}
             label={intl.formatMessage({ id: 'global.description' })}
@@ -640,97 +636,100 @@ export const EventForm = ({
               </div>
             </div>
           )}
-          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin || organization) && isBackOfficeView && (
-            <div>
-              <div className="box-header pt-0">
-                <h3 className="box-title">{intl.formatMessage({ id: 'global.publication' })}</h3>
-              </div>
+          {(query.viewer.isAdmin || query.viewer.isOnlyProjectAdmin || organization) &&
+            isBackOfficeView && (
+              <div>
+                <div className="box-header pt-0">
+                  <h3 className="box-title">{intl.formatMessage({ id: 'global.publication' })}</h3>
+                </div>
 
-              {event &&
-              !event.author?.isAdmin &&
-              event.review?.status &&
-              isFeatureUserEventEnabled ? (
-                <>
-                  <span className="help-block">
-                    {intl.formatMessage({ id: 'author-will-be-notified-of-this-message' })}
-                  </span>
+                {event &&
+                !event.author?.isAdmin &&
+                event.review?.status &&
+                isFeatureUserEventEnabled ? (
+                  <>
+                    <span className="help-block">
+                      {intl.formatMessage({ id: 'author-will-be-notified-of-this-message' })}
+                    </span>
+                    <Field
+                      name="status"
+                      id="event_status"
+                      type="text"
+                      component={approve}
+                      approvedValue="APPROVED"
+                      refusedValue="REFUSED"
+                      disabled={isModerationDisable()}
+                      label={intl.formatMessage({
+                        id: 'admin.action.recent_contributions.unpublish.input_label',
+                      })}
+                    />
+                    {currentValues?.status === 'REFUSED' && (
+                      <>
+                        <Field
+                          name="refusedReason"
+                          id="event_refusedReason"
+                          type="select"
+                          required
+                          component={select}
+                          disabled={isModerationDisable()}
+                          label={intl.formatMessage({
+                            id: 'admin.action.recent_contributions.unpublish.input_label',
+                          })}
+                          options={refusedReasons}
+                        />
+                        <Field
+                          name="comment"
+                          id="event_comment"
+                          type="textarea"
+                          component={component}
+                          disabled={isModerationDisable()}
+                          label={intl.formatMessage({ id: 'details' })}
+                        />
+                      </>
+                    )}
+                  </>
+                ) : (
                   <Field
-                    name="status"
-                    id="event_status"
-                    type="text"
-                    component={approve}
-                    approvedValue="APPROVED"
-                    refusedValue="REFUSED"
-                    disabled={isModerationDisable()}
-                    label={intl.formatMessage({
-                      id: 'admin.action.recent_contributions.unpublish.input_label',
-                    })}
+                    name="enabled"
+                    id="event_enabled"
+                    type="checkbox"
+                    component={toggle}
+                    disabled={isDisabled()}
+                    label={intl.formatMessage({ id: 'global.published' })}
                   />
-                  {currentValues?.status === 'REFUSED' && (
-                    <>
-                      <Field
-                        name="refusedReason"
-                        id="event_refusedReason"
-                        type="select"
-                        required
-                        component={select}
-                        disabled={isModerationDisable()}
-                        label={intl.formatMessage({
-                          id: 'admin.action.recent_contributions.unpublish.input_label',
-                        })}
-                        options={refusedReasons}
-                      />
-                      <Field
-                        name="comment"
-                        id="event_comment"
-                        type="textarea"
-                        component={component}
-                        disabled={isModerationDisable()}
-                        label={intl.formatMessage({ id: 'details' })}
-                      />
-                    </>
-                  )}
-                </>
-              ) : (
+                )}
+                <div className="box-header">
+                  <h3 className="box-title">
+                    {intl.formatMessage({ id: 'global-customization' })}
+                  </h3>
+                </div>
                 <Field
-                  name="enabled"
-                  id="event_enabled"
-                  type="checkbox"
-                  component={toggle}
-                  disabled={isDisabled()}
-                  label={intl.formatMessage({ id: 'global.published' })}
-                />
-              )}
-              <div className="box-header">
-                <h3 className="box-title">{intl.formatMessage({ id: 'global-customization' })}</h3>
-              </div>
-              <Field
-                name="customcode"
-                type="textarea"
-                label={
-                  <Flex direction="row" wrap="nowrap">
-                    {intl.formatMessage({ id: 'admin.customcode' })}
-                    <Flex direction="row" wrap="nowrap" className="excerpt inline">
-                      {intl.formatMessage({ id: 'global.optional' })}{' '}
-                      <Tooltip
-                        placement="top"
-                        label={intl.formatMessage({ id: 'admin.help.customcode' })}
-                        id="tooltip-description"
-                        className="text-left"
-                        style={{ wordBreak: 'break-word' }}>
-                        <div>
-                          <InformationIcon />
-                        </div>
-                      </Tooltip>
+                  name="customcode"
+                  type="textarea"
+                  label={
+                    <Flex direction="row" wrap="nowrap">
+                      {intl.formatMessage({ id: 'admin.customcode' })}
+                      <Flex direction="row" wrap="nowrap" className="excerpt inline">
+                        {intl.formatMessage({ id: 'global.optional' })}{' '}
+                        <Tooltip
+                          placement="top"
+                          label={intl.formatMessage({ id: 'admin.help.customcode' })}
+                          id="tooltip-description"
+                          className="text-left"
+                          style={{ wordBreak: 'break-word' }}>
+                          <div>
+                            <InformationIcon />
+                          </div>
+                        </Tooltip>
+                      </Flex>
                     </Flex>
-                  </Flex>
-                }
-                component={component}
-                disabled={isDisabled(true)}
-                placeholder='<script type="text/javascript"> </script>"'
-              />
-            </div>
-          )}
+                  }
+                  component={component}
+                  disabled={isDisabled(true)}
+                  placeholder='<script type="text/javascript"> </script>"'
+                />
+              </div>
+            )}
         </div>
       </form>
     </FormContainer>
@@ -809,8 +808,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
           props.event && props.event.googleMapsAddress ? props.event.googleMapsAddress.json : null,
         translations: props.event && props.event.translations ? props.event.translations : [],
       },
-      // WYSIWYG Migration
-      bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
       currentValues: selector(
         state,
         'guestListEnabled',
@@ -826,8 +823,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     : null;
   return {
     currentLanguage: state.language.currentLanguage,
-    // WYSIWYG Migration
-    bodyUsingJoditWysiwyg: true,
     currentValues: selector(state, 'guestListEnabled', 'link', 'status', 'projects', 'measurable'),
 
     initialValues: {

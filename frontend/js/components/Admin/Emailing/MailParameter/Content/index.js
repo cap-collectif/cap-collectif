@@ -60,7 +60,6 @@ export const ContentPage = ({ disabled, showError, emailingCampaign }: Props) =>
         type="admin-editor"
         id="mailContent"
         name="mailContent"
-        fieldUsingJoditWysiwyg
         component={component}
         label={intl.formatMessage({ id: 'mail-content' })}
         disabled={disabled}

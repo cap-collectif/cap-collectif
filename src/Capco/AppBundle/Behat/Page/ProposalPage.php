@@ -42,7 +42,7 @@ class ProposalPage extends Page
         'publish proposal news button' => '#confirm-post-create',
         'publish updated proposal news button' => '#confirm-post-edit',
         'confirm delete proposal news' => '#confirm-post-delete',
-        'proposal news create body field' => '#ProposalNewsForm #proposal_news_body .ql-editor',
+        'proposal news create body field' => '#ProposalNewsForm #proposal_news_body .jodit-wysiwyg',
     ];
 
     /**

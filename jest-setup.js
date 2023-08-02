@@ -229,6 +229,10 @@ jest.mock('react-leaflet', () => {
   };
 });
 
+jest.mock('jodit-react', () => {
+  return props => <div data-testid="jodit-react">{props.children}</div>;
+});
+
 jest.mock('framer-motion', () => {
   const actual = jest.requireActual('framer-motion');
   const { forwardRef } = jest.requireActual('react');

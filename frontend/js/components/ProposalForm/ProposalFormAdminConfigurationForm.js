@@ -449,7 +449,6 @@ export const ProposalFormAdminConfigurationForm = ({
   isMapViewEnabled,
   proposalForm,
   dispatch,
-  descriptionUsingJoditWysiwyg,
 }: Props) => {
   const optional = (
     <span className="excerpt">
@@ -501,9 +500,6 @@ export const ProposalFormAdminConfigurationForm = ({
             name="description"
             component={component}
             type="admin-editor"
-            fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName="descriptionUsingJoditWysiwyg"
-            formName={formName}
             id="proposal_form_description"
             label={<FormattedMessage id="global.intro" />}
           />
@@ -965,7 +961,6 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     features: state.default.features,
     defaultLanguage: state.language.currentLanguage,
     isMapViewEnabled: selector(state, 'viewEnabled')?.isMapViewEnabled,
-    descriptionUsingJoditWysiwyg: selector(state, 'descriptionUsingJoditWysiwyg'),
   };
 };
 

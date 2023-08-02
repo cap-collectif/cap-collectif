@@ -11,8 +11,6 @@ import DateTime, {
   type DateTimeInputProps,
   type TimeConstraintsProps,
 } from './DateTime';
-import Editor from './Editor';
-import EditorDs from './EditorDs';
 import Ranking from './Ranking/Ranking';
 import MultipleCheckbox from './MultipleCheckbox/MultipleCheckbox';
 import MultipleRadio from './MultipleRadio/MultipleRadio';
@@ -112,8 +110,6 @@ export type ParentProps = {|
   selectedLanguage?: string,
   maxSize?: number,
   accept?: string | string[],
-  fieldUsingJoditWysiwyg?: boolean,
-  fieldUsingJoditWysiwygName?: string,
   noCode?: boolean,
   onKeyDown?: Function,
   captchaRef?: React.Ref<*>,
@@ -223,31 +219,37 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'editor') {
       return (
-        <React.Fragment>
-          <Editor
-            value={value}
-            className={wrapperClassName}
-            withCharacterCounter={withCharacterCounter}
-            maxLength={props.maxLength}
-            {...props}
-          />
-          <Notepad />
-        </React.Fragment>
+        <WYSIWYG
+          id={props.id}
+          name={props.name}
+          initialContent={value}
+          onChange={props.onChange}
+          withCharacterCounter={withCharacterCounter}
+          maxLength={props.maxLength}
+          unstable__enableCapcoUiDs={false}
+          clientConfig
+          selectedLanguage={selectedLanguage}
+          formName={formName}
+          {...props}
+        />
       );
     }
 
     if (type === 'editor-ds') {
       return (
-        <React.Fragment>
-          <EditorDs
-            value={value}
-            className={wrapperClassName}
-            withCharacterCounter={withCharacterCounter}
-            maxLength={props.maxLength}
-            {...props}
-          />
-          <Notepad />
-        </React.Fragment>
+        <WYSIWYG
+          id={props.id}
+          name={props.name}
+          initialContent={value}
+          onChange={props.onChange}
+          withCharacterCounter={withCharacterCounter}
+          maxLength={props.maxLength}
+          unstable__enableCapcoUiDs
+          clientConfig
+          selectedLanguage={selectedLanguage}
+          formName={formName}
+          {...props}
+        />
       );
     }
 

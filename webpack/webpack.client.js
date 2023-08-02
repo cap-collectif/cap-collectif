@@ -72,8 +72,6 @@ const devConf = {
       path.join(webpackConfig.frontendDir, 'js/googleCharts.js'),
       path.join(webpackConfig.frontendDir, 'js/browserUpdate.js'),
       path.join(webpackConfig.frontendDir, 'js/modernizr.js'),
-      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.core.css'),
-      path.join(webpackConfig.nodeModulesDir, 'quill/dist/quill.snow.css'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet-geosearch/dist/geosearch.css'),

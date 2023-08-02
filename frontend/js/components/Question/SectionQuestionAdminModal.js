@@ -73,7 +73,6 @@ const SectionQuestionAdminModal = ({
   dispatch,
   formName,
   questions,
-  descriptionUsingJoditWysiwyg,
 }: Props) => {
   const [initialSectionValues, changeInitialSection] = useState(currentSection);
 
@@ -110,9 +109,6 @@ const SectionQuestionAdminModal = ({
             id={`${member}.description`}
             name={`${member}.description`}
             type="admin-editor"
-            formName={formName}
-            fieldUsingJoditWysiwyg={descriptionUsingJoditWysiwyg}
-            fieldUsingJoditWysiwygName={`${member}.descriptionUsingJoditWysiwyg`}
             label={
               <span>
                 <FormattedMessage id="global.description" />
@@ -195,7 +191,6 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
     currentSection: selector(state, `${props.member}`),
     disabled: getFormSyncErrors(props.formName)(state).questions !== undefined,
     questions: selector(state, 'questions'),
-    descriptionUsingJoditWysiwyg: selector(state, `${props.member}.descriptionUsingJoditWysiwyg`),
   };
 };
 

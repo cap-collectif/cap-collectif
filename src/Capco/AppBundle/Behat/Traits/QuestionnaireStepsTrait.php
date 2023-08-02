@@ -237,13 +237,11 @@ trait QuestionnaireStepsTrait
     {
         $qlEditors = $this->getSession()
             ->getPage()
-            ->findAll('css', '.ql-editor.ql-blank')
+            ->findAll('css', '.jodit-wysiwyg')
         ;
         /** @var NodeElement $qlEditor */
         foreach ($qlEditors as $qlEditor) {
-            if ($qlEditor->hasAttribute('contenteditable')) {
-                Assert::assertEquals('false', $qlEditor->getAttribute('contenteditable'));
-            }
+            Assert::assertFalse($qlEditor->hasAttribute('contenteditable'));
         }
         $inputs = $this->getSession()
             ->getPage()

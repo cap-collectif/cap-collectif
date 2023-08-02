@@ -658,7 +658,7 @@ Scenario: User who decides to hard delete his account should have his content de
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMA==",
                 "title": "Proposition pas encore votable",
-                "body": "TODO",
+                "body": "<p>TODO</p>",
                 "createdAt": "2017-02-01 00:07:00",
                 "published": true,
                 "author": {

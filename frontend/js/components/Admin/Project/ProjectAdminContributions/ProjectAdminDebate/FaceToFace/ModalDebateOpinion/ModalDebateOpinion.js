@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
@@ -143,13 +143,7 @@ const onValidate = (values: Values) => {
 
 const formName = 'form-debate-opinion';
 
-export const ModalDebateOpinion = ({
-  isCreating,
-  onClose,
-  type,
-  handleSubmit,
-  bodyUsingJoditWysiwyg,
-}: Props) => (
+export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: Props) => (
   <ModalContainer
     show
     animation={false}
@@ -188,9 +182,6 @@ export const ModalDebateOpinion = ({
           type="admin-editor"
           name="body"
           id="body"
-          fieldUsingJoditWysiwyg={bodyUsingJoditWysiwyg}
-          fieldUsingJoditWysiwygName="bodyUsingJoditWysiwyg"
-          formName={formName}
           noCode
           label={<FormattedMessage id="global.review" />}
           component={component}
@@ -233,7 +224,6 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
     bodyUsingJoditWysiwyg: props.opinion?.bodyUsingJoditWysiwyg !== false,
     title: props.opinion?.title || '',
   },
-  bodyUsingJoditWysiwyg: formValueSelector(formName)(state, 'bodyUsingJoditWysiwyg'),
 });
 
 const ModalDebateOpinionConnected = connect<any, any, _, _, _, _>(mapStateToProps)(
