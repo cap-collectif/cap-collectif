@@ -15,7 +15,6 @@ import {
   Title,
   Info,
 } from './ProjectHeaderLegacy.Cover';
-import { Frise, Step, Steps } from './ProjectHeaderLegacy.Frise';
 import Flex from '~ui/Primitives/Layout/Flex';
 
 type Props = {|
@@ -31,7 +30,6 @@ const ProjectHeaderLegacy = ({ children, ...rest }: Props) => {
   );
 };
 ProjectHeaderLegacy.Cover = Cover;
-ProjectHeaderLegacy.Frise = Frise;
 ProjectHeaderLegacy.Title = Title;
 ProjectHeaderLegacy.Content = Content;
 ProjectHeaderLegacy.CoverImage = CoverImage;
@@ -42,7 +40,5 @@ ProjectHeaderLegacy.Block = Block;
 ProjectHeaderLegacy.Info = Info;
 ProjectHeaderLegacy.Socials = Socials;
 ProjectHeaderLegacy.Social = Social;
-ProjectHeaderLegacy.Steps = Steps;
-ProjectHeaderLegacy.Step = Step;
 
 export default ProjectHeaderLegacy;

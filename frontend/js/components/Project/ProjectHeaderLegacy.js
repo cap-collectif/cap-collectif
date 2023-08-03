@@ -3,7 +3,6 @@ import * as React from 'react';
 import { graphql, useFragment } from 'react-relay';
 import ProjectHeaderDistrictsListLegacy from '~/components/Project/ProjectHeaderDistrictsListLegacy';
 import ProjectRestrictedAccessFragmentLegacy from '~/components/Project/Page/ProjectRestrictedAccessFragmentLegacy';
-import ProjectStepTabsLegacy from '~/components/Project/ProjectStepTabsLegacy';
 import ProjectHeaderBlocksLegacy from '~/components/Project/ProjectHeaderBlocksLegacy';
 import ProjectHeaderShareButtonsLegacy from '~/components/Project/ProjectHeaderShareButtonsLegacy';
 import type { ProjectHeaderLegacy_project$key } from '~relay/ProjectHeaderLegacy_project.graphql';
@@ -37,7 +36,6 @@ const FRAGMENT = graphql`
     ...ProjectHeaderAuthorListLegacy_project
     ...ProjectHeaderBlocksLegacy_project
     ...ProjectHeaderDistrictsListLegacy_project
-    ...ProjectStepTabsLegacy_project
     ...ProjectRestrictedAccessFragmentLegacy_project @arguments(count: $count, cursor: $cursor)
   }
 `;
@@ -88,7 +86,6 @@ const ProjectHeaderLegacy = ({ project }: Props): React.Node => {
         <ProjectRestrictedAccessFragmentLegacy project={data} />
         {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTagLegacy />}
       </ProjectHeaderLayout.Cover>
-      <ProjectStepTabsLegacy project={data} />
     </ProjectHeaderLayout>
   );
 };
