@@ -160,7 +160,7 @@
         "phenx/php-font-lib": "^0.5.1",
         "mandrill/mandrill": "^1.0",
         "accord/mandrill-swiftmailer-bundle": "*",
-        "firebase/php-jwt": "^5.2",
+        "firebase/php-jwt": "^6.8",
         "ext-openssl": "*",
         "redirectionio/proxy-symfony": "^0.3",
         "doctrine/cache": "^1.10",

@@ -211,6 +211,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+
+# Install gosu binary (needs wget and ca-certificates).
+ENV GOSU_VERSION 1.10
+RUN set -ex; \
+	dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; \
+	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
+	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
+	chmod +x /usr/local/bin/gosu; \
+    # verify that the binary works
+	gosu nobody true
+
 # Install fake user 1000
 RUN groupadd --gid=1000 capco && \
     /usr/sbin/useradd --system --uid 1000 --home /home/capco --shell /bin/bash --gid 1000 capco

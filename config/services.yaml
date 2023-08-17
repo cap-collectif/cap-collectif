@@ -105,6 +105,7 @@ parameters:
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
     turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
     turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
+    magiclinks_duration_in_days: '%env(SYMFONY_MAGICLINKS_DURATION_IN_DAYS)%'
 
     #
     # Default env values :

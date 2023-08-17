@@ -23,6 +23,7 @@ class ShieldListener
         'hwi_oauth_service_redirect',
         'saml_login',
         'cas_login',
+        'capco_magic_link',
 
         // Public API
         'graphql_endpoint',

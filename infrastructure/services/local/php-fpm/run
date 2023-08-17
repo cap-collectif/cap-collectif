@@ -12,6 +12,7 @@ fi
 mkdir -m 777 -p /var/www/var
 chown -R capco:capco /var/www/var
 chown -R capco:capco /var/www/public/export
+chown -R capco:capco /var/www/config
 
 function test_mysqldatabase {
    mysqlshow --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --port=${SYMFONY_DATABASE_PORT:-3306} --user=${SYMFONY_DATABASE_USER:-root} --password=$SYMFONY_DATABASE_PASSWORD ${SYMFONY_DATABASE_NAME:-symfony} > /dev/null
@@ -40,5 +41,17 @@ while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
 done
 
 echo "[PHP-FPM] Rabbitmq booted !"
+
+# JWT
+if [[ ! -f /config/jwt/private.pem ]]; then
+    echo "=> An empty or uninitialized JWT keypair is detected"
+    echo "=> Generating ssh keys..."
+    gosu capco mkdir -p var/www/config/jwt
+    gosu capco openssl genrsa -passout pass:${SYMFONY_JWT_PASSPHRASE} -out /var/www/config/jwt/private.pem
+    gosu capco openssl rsa -in /var/www/config/jwt/private.pem -passin pass:${SYMFONY_JWT_PASSPHRASE} -pubout -out /var/www/config/jwt/public.pem
+    echo "=> Done!"
+else
+    echo "=> Using an existing keypair of JWT"
+fi
 
 exec /usr/sbin/php-fpm7.4 -y /etc/service/php-fpm/fpm.conf -O

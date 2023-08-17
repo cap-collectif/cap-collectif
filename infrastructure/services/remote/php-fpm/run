@@ -23,6 +23,7 @@ rm -rf var/cache/prod/*
 chown -R capco:capco var/cache
 chown -R capco:capco var/logs
 chown -R capco:capco var/log
+chown -R capco:capco /var/www/config
 echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
 timeout=1;
@@ -139,6 +140,12 @@ echo "[$(date -u)][PHP-FPM] Database is ready!"
 
 echo "[$(date -u)][PHP-FPM] Generating map token for Mapbox"
 gosu capco php bin/console capco:generate:map-token MAPBOX --no-debug --env=prod --no-interaction --quiet
+
+if [[ ! -f config/jwt/private.pem ]]; then
+    echo "[$(date -u)][PHP-FPM] Generating JWT keypair"
+    gosu capco openssl genrsa -passout pass:${SYMFONY_JWT_PASSPHRASE} -out config/jwt/private.pem
+    gosu capco openssl rsa -in config/jwt/private.pem -passin pass:${SYMFONY_JWT_PASSPHRASE} -pubout -out config/jwt/public.pem
+fi
 
 echo "[$(date -u)][PHP-FPM] Checking ES mapping..."
 gosu capco php bin/console capco:es:mapping

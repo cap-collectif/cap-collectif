@@ -33,6 +33,10 @@ coverage/*
 !/bin/symfony_requirements
 /bin/
 /app/config/parameters.yml
+/config/jwt/
+
+# Features
+src/Capco/AppBundle/Command/FeatureToggle/FeatureList/*
 
 # infra
 infrastructure/services/local/nginx/ssl

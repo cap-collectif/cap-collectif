@@ -144,6 +144,10 @@ services:
         arguments:
             $instanceName: '%instance_name%'
 
+    Capco\UserBundle\Authenticator\MagicLinkAuthenticator:
+        arguments:
+            $tokenLifetimeInDays: '%magiclinks_duration_in_days%'
+
     # Logout Handlers
     Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler: ~
 
@@ -391,6 +395,14 @@ services:
         arguments:
             $adapter: '@Gaufrette\Adapter\Local'
 
+    Capco\AppBundle\FileSystem\ConfigFileSystem:
+        public: true
+        autowire: true
+
+    Capco\AppBundle\FileSystem\ConfigLocalAdapter:
+        public: true
+        autowire: true
+
     Capco\MediaBundle\Provider\MediaProvider:
         public: true
         autowire: true
@@ -428,7 +440,7 @@ services:
     Capco\AppBundle\Faker\AddressProvider:
         arguments:
             - '@Faker\Generator'
-        tags: [ { name: nelmio_alice.faker.provider } ]
+        tags: [{ name: nelmio_alice.faker.provider }]
 
     Capco\AppBundle\Security\RateLimiter:
         autowire: true

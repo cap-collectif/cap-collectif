@@ -16,12 +16,14 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
+use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use ReflectionClass;
 
 /**
  * @method null|User find($id, $lockMode = null, $lockVersion = null)
@@ -1624,6 +1626,27 @@ class UserRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllNonAdmin(): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        /**
+         * This can be improved when php enums are implemented.
+         */
+        $allRoles = new ReflectionClass(UserRole::class);
+        $roles = $allRoles->getConstants();
+
+        $qb->select('u');
+
+        foreach ($roles as $role) {
+            if ('ROLE_USER' != $role) {
+                $qb->andWhere('u.roles NOT LIKE :' . strtolower($role))->setParameter(strtolower($role), '%' . $role . '%');
+            }
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
