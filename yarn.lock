@@ -3146,10 +3146,10 @@
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.7.2.tgz#0d2247280081aeac54cf8927bb098067da600704"
-  integrity sha512-lT3+1HQduHp8zf1KePJKJAb0U+WDnPJHEvZht46NLlXPguqPt3gF7eCS6aMTaR131w23Vgnpi/m6Vl2/hBX9QQ==
+"@cap-collectif/ui@^1.7.5":
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.7.5.tgz#2ae81d6411c856d29e31817a7c7e886ab7eb2c24"
+  integrity sha512-8eZIyW0WcHy5iOaVraFchpMTvCA1ZAi5qfxo/00X1mEEjM3XfOdf4KRgycgGCZNK0k/bf10bw387EKzfomQmdQ==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -18941,7 +18941,7 @@ prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.7,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-prop-types@^15.7.0:
+prop-types@^15.7.0, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -19073,6 +19073,11 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==
 
 qs@6.7.0, qs@^6.10.0, qs@^6.10.3, qs@^6.6.0, qs@~6.10.3:
   version "6.11.2"
@@ -19707,6 +19712,14 @@ react-prop-types@^0.4.0:
   integrity sha1-+ZsL+0AGkpya8gUefBQUpcdbk9A=
   dependencies:
     warning "^3.0.0"
+
+react-qr-code@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/react-qr-code/-/react-qr-code-2.0.11.tgz#444c759a2100424972e17135fbe0e32eaffa19e8"
+  integrity sha512-P7mvVM5vk9NjGdHMt4Z0KWeeJYwRAtonHTghZT2r+AASinLUUKQ9wfsGH2lPKsT++gps7hXmaiMGRvwTDEL9OA==
+  dependencies:
+    prop-types "^15.8.1"
+    qr.js "0.0.0"
 
 react-radio-buttons@^1.0.11:
   version "1.2.2"

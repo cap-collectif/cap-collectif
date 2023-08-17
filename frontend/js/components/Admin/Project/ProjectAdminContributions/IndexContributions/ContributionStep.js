@@ -13,11 +13,14 @@ const getIllustrationStep = (
   type: string,
 ):
   | typeof SPOT_ICON_NAME.BULB_SKETCH
+  | typeof SPOT_ICON_NAME.RATING_CLICK
   | typeof SPOT_ICON_NAME.USER_DISCUSS
   | typeof SPOT_ICON_NAME.QUESTIONNAIRE => {
   switch (type) {
     case 'CollectStep':
       return SPOT_ICON_NAME.BULB_SKETCH;
+    case 'SelectionStep':
+      return SPOT_ICON_NAME.RATING_CLICK;
     case 'DebateStep':
       return SPOT_ICON_NAME.USER_DISCUSS;
     case 'QuestionnaireStep':

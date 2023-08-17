@@ -37,6 +37,21 @@ exports[`<IndexContributions /> should render correctly 1`] = `
       />
     </Link>
     <Link
+      key="456"
+      to="/mock/url/proposals?step=456"
+    >
+      <Relay(ContributionStep)
+        step={
+          Object {
+            "$fragmentRefs": null,
+            "__typename": "SelectionStep",
+            "id": "456",
+            "slug": "jesuisunslug2",
+          }
+        }
+      />
+    </Link>
+    <Link
       key="789"
       to="/mock/url/debate/jesuisunslug3"
     >

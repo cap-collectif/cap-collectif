@@ -915,6 +915,14 @@ export const ProjectAdminProposals = ({
               selectedStep.votable && (
                 <>
                   <Button
+                    variant="tertiary"
+                    onClick={() =>
+                      window.open(`/admin-next/paper-catalog/${selectedStep.id}`, '_blank')
+                    }
+                    leftIcon="PRINT">
+                    {intl.formatMessage({ id: 'print-catalog' })}
+                  </Button>
+                  <Button
                     variantSize="small"
                     variant="secondary"
                     onClick={() => {
