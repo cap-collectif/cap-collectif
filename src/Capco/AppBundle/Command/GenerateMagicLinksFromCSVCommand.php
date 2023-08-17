@@ -294,14 +294,18 @@ class GenerateMagicLinksFromCSVCommand extends Command
         }, $this->users);
 
         foreach ($newData as $key => $user) {
-            $payload = (new MagicLinkPayload($user['email'], $user['username'], $homePageRedirect))->toArray();
-            $token = JWT::encode($payload, $privateKey, MagicLinkAuthenticator::JWT_ENCRYPTION_ALGORITHM);
-            $user['magic_link'] = $this->router
-                ->generate('capco_magic_link', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL)
-            ;
+            try {
+                $payload = (new MagicLinkPayload($user['email'], $user['username'], $homePageRedirect))->toArray();
+                $token = JWT::encode($payload, $privateKey, MagicLinkAuthenticator::JWT_ENCRYPTION_ALGORITHM);
+                $user['magic_link'] = $this->router
+                    ->generate('capco_magic_link', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL)
+                ;
+                $newData[$user['email']] = $user;
+                ++$count;
+            } catch (\Throwable $th) {
+                $this->unHandledUsers[] = $user;
+            }
             unset($newData[$key]);
-            $newData[$user['email']] = $user;
-            ++$count;
             $this->style->progressAdvance();
         }
 
@@ -327,6 +331,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
                 if (false === $headers) {
                     $headers = true;
                     fputcsv($output, $row);
+                    fputcsv($errorLogs, $row);
 
                     continue;
                 }
@@ -344,11 +349,14 @@ class GenerateMagicLinksFromCSVCommand extends Command
                     unset($newData[$email]);
                 } else {
                     $this->unHandledUsers[] = $row;
-                    fwrite($errorLogs, $email . ' could not be handled.' . \PHP_EOL);
                 }
             } catch (\Throwable $th) {
-                fwrite($errorLogs, $th->getMessage() . \PHP_EOL);
+                $this->unHandledUsers[] = $row;
             }
+        }
+
+        foreach ($this->unHandledUsers as $user) {
+            fputcsv($errorLogs, $user);
         }
 
         foreach ($newData as $user) {
@@ -365,7 +373,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
         fclose($input);
         fclose($output);
 
-        if (0 === filesize($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt')) {
+        if (1 === \count(file($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt'))) {
             unlink($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt');
         }
 
