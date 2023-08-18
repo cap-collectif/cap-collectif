@@ -38,6 +38,8 @@ PreviewProject:
                 type: 'PreviewProjectType'
                 resolve: '@=value.getProjectType()'
                 description: 'The type associated with the project.'
+            metaDescription:
+                type: 'String'
             # TODO: Maybe use a connection instead.
             steps:
                 type: '[PreviewStep!]!'

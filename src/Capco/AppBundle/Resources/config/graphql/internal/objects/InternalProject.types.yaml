@@ -83,8 +83,6 @@ InternalProject:
             type:
                 type: 'InternalProjectType'
             # Internal fields
-            metaDescription:
-                type: 'String'
             proposals:
                 type: 'InternalProposalConnection!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
@@ -281,4 +279,3 @@ InternalProject:
                 type: 'String'
                 description: 'The project description.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDescriptionResolver", [value, getUser()])'
-

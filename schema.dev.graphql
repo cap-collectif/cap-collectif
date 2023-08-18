@@ -9935,6 +9935,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The type associated with the project."""
   type: ProjectType
+  metaDescription: String
 
   """The different steps associated with the project."""
   steps(orderBy: StepOrder = {field: POSITION, direction: ASC}, excludePresentationStep: Boolean = false): [Step!]!
@@ -10085,7 +10086,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): Int!
-  metaDescription: String
 
   """Slug of a project"""
   slug: String!
@@ -12360,6 +12360,9 @@ type Query {
     """Ordering options for projects returning from the connection."""
     orderBy: ProjectOrder = {direction: DESC, field: PUBLISHED_AT}
 
+    """ID of a Theme to filter by. If non-null, filter projects by themes"""
+    theme: ID
+
     """
     ID of a User to filter by. If non-null, only projects authored by this user will be returned.
     """
@@ -12372,9 +12375,6 @@ type Query {
     ID of a Status to filter by. If non-null, filter projects by statuses.
     """
     status: ID
-
-    """ID of a Theme to filter by. If non-null, filter projects by themes"""
-    theme: ID
 
     """
     ID of a ProjectType to filter by. If non-null, filter projects by types

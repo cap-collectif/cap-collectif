@@ -107,11 +107,6 @@ InternalQuery:
                         type: 'ID'
                         description: 'ID of a Status to filter by. If non-null, filter projects by statuses.'
                     # TODO before preview
-                    # Release Theme to preview schema
-                    theme:
-                        type: 'ID'
-                        description: 'ID of a Theme to filter by. If non-null, filter projects by themes'
-                    # TODO before preview
                     # Release ProjectType to preview schema
                     type:
                         type: 'ID'

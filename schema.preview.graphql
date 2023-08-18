@@ -804,6 +804,7 @@ type Project implements Node & UniformResourceLocatable {
 
   """The type associated with the project."""
   type: ProjectType
+  metaDescription: String
 
   """The different steps associated with the project."""
   steps: [Step!]!
@@ -1317,6 +1318,9 @@ type Query {
 
     """Ordering options for projects returning from the connection."""
     orderBy: ProjectOrder = {direction: DESC, field: PUBLISHED_AT}
+
+    """ID of a Theme to filter by. If non-null, filter projects by themes"""
+    theme: ID
   ): ProjectConnection!
 
   """Lookup events."""
