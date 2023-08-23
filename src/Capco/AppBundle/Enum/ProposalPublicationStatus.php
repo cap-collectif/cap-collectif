@@ -10,4 +10,5 @@ final class ProposalPublicationStatus
     public const DELETED = 'DELETED';
     public const DRAFT = 'DRAFT';
     public const UNPUBLISHED = 'UNPUBLISHED';
+    public const ARCHIVED = 'ARCHIVED';
 }

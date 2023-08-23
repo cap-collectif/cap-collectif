@@ -169,7 +169,8 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         theme: $theme
         category: $category
         status: $status
-        userType: $userType
+        userType: $userType,
+        state: $state
       ) @connection(key: "ProposalStepPageHeader_proposals", filters: []) {
         totalCount
         edges {

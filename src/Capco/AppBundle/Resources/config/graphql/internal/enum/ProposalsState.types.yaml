@@ -15,3 +15,6 @@ ProposalsState:
             DRAFT:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::DRAFT")'
                 description: 'Show only drafted proposals'
+            ARCHIVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::ARCHIVED")'
+                description: 'Show only archived proposals'

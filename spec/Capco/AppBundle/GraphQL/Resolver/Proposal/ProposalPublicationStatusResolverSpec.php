@@ -17,12 +17,14 @@ class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 
     public function it_handle_deleted_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(true);
         $this->__invoke($proposal)->shouldBe(ProposalPublicationStatus::DELETED);
     }
 
     public function it_handle_draft_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(false);
         $proposal->isDraft()->willReturn(true);
         $this->__invoke($proposal)->shouldBe(ProposalPublicationStatus::DRAFT);
@@ -30,6 +32,7 @@ class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 
     public function it_handle_trashed_visible_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(false);
         $proposal->isDraft()->willReturn(false);
         $proposal->isTrashed()->willReturn(true);
@@ -39,6 +42,7 @@ class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 
     public function it_handle_trashed_invisible_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(false);
         $proposal->isDraft()->willReturn(false);
         $proposal->isTrashed()->willReturn(true);
@@ -48,6 +52,7 @@ class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 
     public function it_handle_unpublished_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(false);
         $proposal->isDraft()->willReturn(false);
         $proposal->isTrashed()->willReturn(false);
@@ -57,6 +62,7 @@ class ProposalPublicationStatusResolverSpec extends ObjectBehavior
 
     public function it_handle_published_proposal(Proposal $proposal): void
     {
+        $proposal->isArchived()->willReturn(false);
         $proposal->isDeleted()->willReturn(false);
         $proposal->isDraft()->willReturn(false);
         $proposal->isTrashed()->willReturn(false);

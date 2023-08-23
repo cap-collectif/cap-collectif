@@ -9,6 +9,7 @@ import { features } from '../../../redux/modules/default';
 describe('<ProposalPreviewBody />', () => {
   const props = {
     proposal: {
+      isArchived: false,
       id: 'proposal1',
       slug: 'proposal-title',
       title: 'proposalTitle',

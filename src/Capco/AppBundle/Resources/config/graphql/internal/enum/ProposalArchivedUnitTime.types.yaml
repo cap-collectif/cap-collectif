@@ -1,0 +1,12 @@
+ProposalArchivedUnitTime:
+    type: enum
+    config:
+        name: ProposalArchivedUnitTime
+        description: 'Available values for proposalArchivedUnitTime'
+        values:
+            DAYS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalArchivedUnitTime::DAYS")'
+                description: 'Set the archived value in days.'
+            MONTHS:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalArchivedUnitTime::MONTHS")'
+                description: 'Set the archived value in months.'

@@ -31,7 +31,7 @@ export const ORDER_BY: {
 
 export type SortValues = $Values<typeof ORDER_BY>;
 
-export type ProposalsStateValues = 'ALL' | 'PUBLISHED' | 'TRASHED' | 'DRAFT';
+export type ProposalsStateValues = 'ALL' | 'PUBLISHED' | 'TRASHED' | 'DRAFT' | 'ARCHIVED';
 
 export type ProposalsCategoryValues = 'ALL' | 'NONE' | Uuid;
 

@@ -125,6 +125,8 @@ type Props = {|
     debateContent?: string,
     debateContentUsingJoditWysiwyg?: ?boolean,
     collectParticipantsEmail?: boolean,
+    proposalArchivedTime: number,
+    proposalArchivedUnitTime: "DAYS" | "MONTHS"
   },
   intl: IntlShape,
   formName: string,
@@ -910,6 +912,8 @@ const mapStateToProps = (
       isSecretBallotEnabled: step?.isSecretBallotEnabled || false,
       isSecretBallot: step?.isSecretBallot || false,
       publishedVoteDate: step?.publishedVoteDate || null,
+      proposalArchivedTime: step?.proposalArchivedTime ?? 0,
+      proposalArchivedUnitTime: step?.proposalArchivedUnitTime ?? 'MONTHS',
       private: step?.private || false,
     },
     isBudgetEnabled: formValueSelector(stepFormName)(state, 'isBudgetEnabled') || false,

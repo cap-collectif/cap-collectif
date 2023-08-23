@@ -29,6 +29,7 @@ describe('<ProposalPageHeaderButtons />', () => {
     currentVotableStep: {
       id: 'stepid',
     },
+    isArchived: false,
   };
 
   const props = {

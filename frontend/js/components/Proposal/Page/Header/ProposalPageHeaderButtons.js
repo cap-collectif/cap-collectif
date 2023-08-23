@@ -111,9 +111,8 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
     <Buttons>
       {isOpen && <ProposalEditModal proposal={proposal} show={isOpen} onClose={onClose} />}
       <ProposalDeleteModal proposal={proposal} />
-
       <>
-        {((hasVotableStep && step?.open) || (opinionCanBeFollowed && !isAuthor)) && (
+        {((hasVotableStep && step?.open && !proposal.isArchived) || (opinionCanBeFollowed && !isAuthor && !proposal.isArchived)) && (
           <FixedButtons>
             {hasVotableStep && proposal?.publicationStatus !== 'DRAFT' && (
               <ProposalVoteButtonWrapperFragment
@@ -159,7 +158,7 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
             />
           </>
         )}
-        {proposal?.form?.canContact && (
+        {(proposal?.form?.canContact && !proposal.isArchived) && (
           <ProposalContactButton
             proposalId={proposal.id}
             authorName={proposal.author.displayName}
@@ -246,6 +245,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
         canContact
         contribuable
       }
+      isArchived
       publicationStatus
       ...ProposalSmsVoteModal_proposal
       ...ProposalVoteButtonWrapperFragment_proposal

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ type Props = {|
   themes: Array<themeOption>,
   setDisplayMode: () => void,
   displayMode: ProposalViewMode,
+  intl: IntlShape,
 |};
 
 type Options = {|
@@ -43,6 +44,7 @@ type Options = {|
   districts?: $ReadOnlyArray<defaultOption>,
   themes: $ReadOnlyArray<themeOption>,
   statuses: $ReadOnlyArray<defaultOption>,
+  state: $ReadOnlyArray<defaultOption>,
 |};
 
 export class ProposalListFilters extends React.Component<Props> {
@@ -73,7 +75,7 @@ export class ProposalListFilters extends React.Component<Props> {
   };
 
   render() {
-    const { features, step, filters, types, themes, setDisplayMode, displayMode } = this.props;
+    const { features, step, filters, types, themes, setDisplayMode, displayMode, intl } = this.props;
 
     const { form } = step;
 
@@ -83,6 +85,10 @@ export class ProposalListFilters extends React.Component<Props> {
       districts: form?.districts,
       themes,
       statuses: step.statuses,
+      state: [
+        { id: 'PUBLISHED', name: intl.formatMessage({ id: 'global.published' }) },
+        { id: 'ARCHIVED', name: intl.formatMessage({ id: 'global-archived' }) },
+      ]
     };
 
     const displayedFilters: string[] = []
@@ -101,7 +107,8 @@ export class ProposalListFilters extends React.Component<Props> {
           ? ['categories']
           : [],
       )
-      .concat(options.statuses.length > 0 ? ['statuses'] : []);
+      .concat(options.statuses.length > 0 ? ['statuses'] : [])
+      .concat(step?.proposalArchivedTime > 0 ? ['state'] : [])
 
     const orderByVotes = step.voteType !== 'DISABLED';
     const orderByPoints = step.votesRanking;
@@ -199,6 +206,7 @@ export default createFragmentContainer(container, {
         id
         name
       }
+      proposalArchivedTime
       form {
         usingDistrict
         usingAddress

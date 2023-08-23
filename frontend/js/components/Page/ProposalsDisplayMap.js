@@ -92,7 +92,8 @@ export default createPaginationContainer(
           theme: $theme
           category: $category
           status: $status
-          userType: $userType
+          userType: $userType,
+          state: $state
         ) @connection(key: "ProposalsDisplayMap_proposals", filters: []) {
           pageInfo {
             hasNextPage
@@ -137,6 +138,7 @@ export default createPaginationContainer(
         $status: ID
         $theme: ID
         $userType: ID
+        $state: ProposalsState
       ) {
         step: node(id: $stepId) {
           ...ProposalsDisplayMap_step

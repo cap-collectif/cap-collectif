@@ -30,6 +30,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "icon": "parking",
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },
@@ -60,6 +61,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "icon": "parking",
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },
@@ -89,6 +91,7 @@ exports[`<ProposalPreview /> should render a proposal preview 1`] = `
             "icon": "parking",
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },
@@ -112,7 +115,8 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
     className="bg-vip proposal-preview block--shadowed"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalImage
+    <ProposalImageContainer
+      isArchived={false}
       sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 640px, (max-width: 1280px) 640px, (max-width: 2560px) 640px,"
       src="http://image.mypicture.jpg"
     />
@@ -135,6 +139,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "icon": "cone",
           },
           "id": "1",
+          "isArchived": false,
           "media": null,
         }
       }
@@ -165,6 +170,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "icon": "cone",
           },
           "id": "1",
+          "isArchived": false,
           "media": null,
         }
       }
@@ -194,6 +200,7 @@ exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
             "icon": "cone",
           },
           "id": "1",
+          "isArchived": false,
           "media": null,
         }
       }
@@ -215,7 +222,8 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
     className="block--shadowed proposal-preview"
     id="proposal-1"
   >
-    <ProposalPreview__ProposalImage
+    <ProposalImageContainer
+      isArchived={false}
       sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 640px, (max-width: 1280px) 640px, (max-width: 2560px) 640px,"
       src="/svg/img.svg"
     />
@@ -233,6 +241,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "icon": null,
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },
@@ -260,6 +269,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "icon": null,
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },
@@ -286,6 +296,7 @@ exports[`<ProposalPreview /> should render a proposal preview with custom image 
             "icon": null,
           },
           "id": "1",
+          "isArchived": false,
           "media": Object {
             "url": "/svg/img.svg",
           },

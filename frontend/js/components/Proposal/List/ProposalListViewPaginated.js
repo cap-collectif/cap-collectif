@@ -112,7 +112,8 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
           theme: $theme
           category: $category
           status: $status
-          userType: $userType
+          userType: $userType,
+          state: $state
         ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
           ...ProposalList_proposals @arguments(token: $token)
           edges {
@@ -164,7 +165,8 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
         $status: ID
         $theme: ID
         $userType: ID
-        $token: String
+        $token: String,
+        $state: ProposalsState
       ) {
         step: node(id: $stepId) {
           ...ProposalListViewPaginated_step

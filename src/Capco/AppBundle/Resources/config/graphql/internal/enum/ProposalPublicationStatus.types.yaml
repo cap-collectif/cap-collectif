@@ -21,3 +21,6 @@ ProposalPublicationStatus:
             UNPUBLISHED:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::UNPUBLISHED")'
                 description: 'Visible by author only.'
+            ARCHIVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalPublicationStatus::ARCHIVED")'
+                description: 'Proposal archived.'

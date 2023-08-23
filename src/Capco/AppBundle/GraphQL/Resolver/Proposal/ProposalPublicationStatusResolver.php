@@ -11,6 +11,10 @@ class ProposalPublicationStatusResolver implements ResolverInterface
 {
     public function __invoke(Proposal $proposal): string
     {
+        if ($proposal->isArchived()) {
+            return ProposalPublicationStatus::ARCHIVED;
+        }
+
         if ($proposal->isDeleted()) {
             return ProposalPublicationStatus::DELETED;
         }

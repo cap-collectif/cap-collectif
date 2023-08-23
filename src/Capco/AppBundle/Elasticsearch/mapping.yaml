@@ -193,6 +193,7 @@ mappings:
                 author: *Author
                 visible: { type: boolean }
                 location: { type: geo_point }
+                archived: { type: boolean }
         location: { type: geo_point }
         fullAddress: *text_analysis_highlighted
         startAt: { type: date }

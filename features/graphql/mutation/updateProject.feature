@@ -443,7 +443,9 @@ Scenario: GraphQL client wants to update project with votesMin greater than vote
                   "label":"CollectStep",
                   "mainView":"GRID",
                   "votesMin":3,
-                  "votesLimit":1
+                  "votesLimit":1,
+                	"proposalArchivedTime": 0,
+                	"proposalArchivedUnitTime": "MONTHS"
                }
             ],
             "districts":[
@@ -547,7 +549,9 @@ Scenario: GraphQL client wants to update project with votesMin below 1
                   "label":"CollectStep",
                   "mainView":"GRID",
                   "votesMin":0,
-                  "votesLimit":1
+                  "votesLimit":1,
+                	"proposalArchivedTime": 0,
+                	"proposalArchivedUnitTime": "MONTHS"
                }
             ],
             "districts":[

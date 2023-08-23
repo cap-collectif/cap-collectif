@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
+use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteSmsTrait;
@@ -26,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface
 {
     use AllowAuthorsToAddNewsTrait;
+    use ProposalArchivedTrait;
     use SecretBallotTrait;
     use TimelessStepTrait;
     use VoteSmsTrait;

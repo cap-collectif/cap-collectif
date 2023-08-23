@@ -24,6 +24,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "objectType": "PROPOSAL",
           },
           "id": "proposal1",
+          "isArchived": false,
           "media": Object {
             "name": "media1",
             "url": "http://image.png",
@@ -89,6 +90,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
               "objectType": "PROPOSAL",
             },
             "id": "proposal1",
+            "isArchived": false,
             "media": Object {
               "name": "media1",
               "url": "http://image.png",
@@ -125,6 +127,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
               "objectType": "PROPOSAL",
             },
             "id": "proposal1",
+            "isArchived": false,
             "media": Object {
               "name": "media1",
               "url": "http://image.png",
@@ -165,6 +168,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "objectType": "PROPOSAL",
           },
           "id": "proposal1",
+          "isArchived": false,
           "media": Object {
             "name": "media1",
             "url": "http://image.png",
@@ -221,6 +225,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "objectType": "PROPOSAL",
           },
           "id": "proposal1",
+          "isArchived": false,
           "media": Object {
             "name": "media1",
             "url": "http://image.png",
@@ -264,6 +269,7 @@ exports[`<ProposalPreviewBody /> should render a proposal preview 1`] = `
             "objectType": "PROPOSAL",
           },
           "id": "proposal1",
+          "isArchived": false,
           "media": Object {
             "name": "media1",
             "url": "http://image.png",

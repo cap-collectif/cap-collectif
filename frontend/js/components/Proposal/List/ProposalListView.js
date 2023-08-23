@@ -10,7 +10,7 @@ import ProposalListViewPaginated from './ProposalListViewPaginated';
 import { graphqlError } from '../../../createRelayEnvironment';
 import type { ProposalViewMode } from '../../../redux/modules/proposal';
 import type { MapOptions } from '../Map/Map.types';
-import type { ProposalListViewRefetchQueryVariables } from '~relay/ProposalListViewRefetchQuery.graphql';
+import type { ProposalsState } from '~relay/ProposalListViewRefetchQuery.graphql';
 import type { GeoJson } from '~/utils/geojson';
 import CookieMonster from '~/CookieMonster';
 
@@ -20,6 +20,7 @@ type Filters = {|
   themes?: string,
   types?: string,
   statuses?: string,
+  state?: ProposalsState | '0',
 |};
 
 export const queryVariables = (filters: Filters, order: ?string) => {
@@ -75,6 +76,7 @@ export const queryVariables = (filters: Filters, order: ?string) => {
     userType: filters.types && filters.types !== '0' ? filters.types : null,
     status: filters.statuses && filters.statuses !== '0' ? filters.statuses : null,
     token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+    state: filters.state && filters.state !== '0' ? filters.state : null,
   };
 };
 
@@ -114,14 +116,15 @@ export class ProposalListView extends React.Component<Props, State> {
     this.setState({ isRefetching: true, hasRefetchError: false });
     const { filters, order, step, term, relay, viewer } = this.props;
 
-    const refetchVariables = fragmentVariables =>
-      ({
+    const refetchVariables = fragmentVariables => {
+      return {
         ...queryVariables(filters, order),
         stepId: step.id,
         isAuthenticated: !!viewer,
         count: fragmentVariables.count,
         term: term || null,
-      }: ProposalListViewRefetchQueryVariables);
+      };
+    };
 
     relay.refetch(
       refetchVariables,
@@ -134,6 +137,8 @@ export class ProposalListView extends React.Component<Props, State> {
       },
       { force: true },
     );
+
+    this.setState({ isRefetching: false });
   };
 
   render() {
@@ -180,7 +185,8 @@ export default createRefetchContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListView_step on ProposalStep @argumentDefinitions(count: { type: "Int" }, token: { type: "String" }) {
+      fragment ProposalListView_step on ProposalStep
+      @argumentDefinitions(count: { type: "Int" }, token: { type: "String" }) {
         id
         ...ProposalListViewPaginated_step @arguments(token: $token)
       }
@@ -198,8 +204,9 @@ export default createRefetchContainer(
       $category: ID
       $status: ID
       $theme: ID
-      $userType: ID,
+      $userType: ID
       $token: String
+      $state: ProposalsState
     ) {
       step: node(id: $stepId) {
         id

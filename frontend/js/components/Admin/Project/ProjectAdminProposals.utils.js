@@ -752,6 +752,8 @@ export const getWordingEmpty = (
       return 'help.text.section.draft.empty';
     case 'TRASHED':
       return 'help.text.section.bin.empty';
+    case 'ARCHIVED':
+      return 'help.text.section.archived.empty';
     default:
       return '';
   }

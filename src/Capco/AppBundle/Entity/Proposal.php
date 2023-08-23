@@ -335,6 +335,11 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
      */
     private Collection $paperVotes;
 
+    /**
+     * @ORM\Column(name="is_archived", type="boolean", nullable=false)
+     */
+    private bool $isArchived = false;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1700,5 +1705,47 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         }
 
         return ProposalPublicationStatus::PUBLISHED;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->isArchived;
+    }
+
+    public function setIsArchived(bool $isArchived): self
+    {
+        if ($isArchived) {
+            $this->setDraft(false);
+            $this->setDeletedAt(null);
+            $this->setTrashedStatus(null);
+            $this->setTrashedReason(null);
+            $this->setTrashedAt();
+        }
+
+        $this->isArchived = $isArchived;
+
+        return $this;
+    }
+
+    public function getArchivableStepConfig(): ?array
+    {
+        if ($this->getStep()->getProposalArchivedTime() > 0) {
+            return [
+                'step' => $this->getStep(),
+                'startDate' => $this->publishedAt,
+            ];
+        }
+
+        /** * @var Selection $selection  */
+        foreach ($this->selections as $selection) {
+            if ($selection->getStep()->getProposalArchivedTime() > 0) {
+                return [
+                    'step' => $selection->getSelectionStep(),
+                    'startDate' => $selection->getCreatedAt(),
+                ];
+            }
+        }
+
+        return null;
     }
 }

@@ -66,6 +66,12 @@ ProjectStepInput:
             isProposalSmsVoteEnabled:
                 type: 'Boolean'
                 description: 'Whether or not sms vote is enabled.'
+            proposalArchivedTime:
+                type: 'Int'
+                description: 'Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.'
+            proposalArchivedUnitTime:
+                type: 'ProposalArchivedUnitTime'
+                description: 'The unit chosen to set the archived duration can be either MONTHS or DAYS'
             # SelectionStep fields
             allowAuthorsToAddNews:
                 type: 'Boolean'

@@ -25,6 +25,7 @@ describe('<ProposalPreview />', () => {
         image: null,
       },
     },
+    isArchived: false,
   };
 
   const proposalVip = {
@@ -45,6 +46,7 @@ describe('<ProposalPreview />', () => {
         },
       },
     },
+    isArchived: false
   };
 
   const step = {

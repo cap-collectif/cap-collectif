@@ -8,6 +8,7 @@ final class ProposalsState implements EnumType
     public const PUBLISHED = 'published';
     public const TRASHED = 'trashed';
     public const DRAFT = 'draft';
+    public const ARCHIVED = 'archived';
 
     public static function isValid($value): bool
     {

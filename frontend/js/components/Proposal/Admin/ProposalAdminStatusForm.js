@@ -125,6 +125,12 @@ export class ProposalAdminStatusForm extends Component<Props> {
                 <FormattedMessage id="global.published" />
               </ToggleButton>
               <ToggleButton
+                id="proposal-archived-tab"
+                onClick={() => dispatch(change(formName, 'publicationStatus', 'ARCHIVED'))}
+                value="ARCHIVED">
+                <FormattedMessage id="global-archived" />
+              </ToggleButton>
+              <ToggleButton
                 id="proposal-trashed-tab"
                 onClick={() => dispatch(change(formName, 'publicationStatus', 'TRASHED'))}
                 value="TRASHED">

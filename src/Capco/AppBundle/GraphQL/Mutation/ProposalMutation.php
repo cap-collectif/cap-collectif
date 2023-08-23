@@ -366,6 +366,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setTrashedStatus(Trashable::STATUS_VISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null)
+                    ->setIsArchived(false)
                 ;
 
                 break;
@@ -376,6 +377,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setDraft(false)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null)
+                    ->setIsArchived(false)
                 ;
 
                 break;
@@ -385,6 +387,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setTrashedStatus(Trashable::STATUS_INVISIBLE)
                     ->setTrashedReason($values['trashedReason'])
                     ->setDeletedAt(null)
+                    ->setIsArchived(false)
                 ;
 
                 break;
@@ -394,6 +397,15 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setDraft(true)
                     ->setTrashedStatus(null)
                     ->setDeletedAt(null)
+                    ->setIsArchived(false)
+
+                ;
+
+                break;
+
+            case ProposalPublicationStatus::ARCHIVED:
+                $proposal
+                    ->setIsArchived(true)
                 ;
 
                 break;

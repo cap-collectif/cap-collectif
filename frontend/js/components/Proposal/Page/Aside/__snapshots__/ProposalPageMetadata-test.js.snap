@@ -7,39 +7,45 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
   <ProposalPageMetadata__ProposalPageMetadataContainer>
     <MetadataRow
       color="#0388cc"
-      content="Nom de la catégorie"
       name="tag"
       ready={true}
       size={10}
-    />
+    >
+      <Text>
+        Nom de la catégorie
+      </Text>
+    </MetadataRow>
     <MetadataRow
       color="#0388cc"
-      content="Nom du quartier"
       name="pin"
       ready={true}
       size={10}
-    />
+    >
+      <Text>
+        Nom du quartier
+      </Text>
+    </MetadataRow>
     <MetadataRow
       color="#0388cc"
-      content={
-        <FormattedNumber
-          currency="EUR"
-          minimumFractionDigits={0}
-          style="currency"
-          value={0}
-        />
-      }
       name="accounting"
       ready={true}
       size={10}
-    />
+    >
+      <FormattedNumber
+        currency="EUR"
+        minimumFractionDigits={0}
+        style="currency"
+        value={0}
+      />
+    </MetadataRow>
     <MetadataRow
       color="#0388cc"
-      content="Reference"
       name="hashtag"
       ready={true}
       size={10}
-    />
+    >
+      Reference
+    </MetadataRow>
   </ProposalPageMetadata__ProposalPageMetadataContainer>
 </ProposalPagestyle__Card>
 `;

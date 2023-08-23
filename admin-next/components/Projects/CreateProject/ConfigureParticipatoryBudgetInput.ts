@@ -157,6 +157,8 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                     "requirements": [],
                     "type": "COLLECT",
                     "voteType": "DISABLED",
+                    "proposalArchivedTime": 0,
+                    "proposalArchivedUnitTime": 'MONTHS',
                 },
                 {
                     "label": intl.formatMessage({id: "proposal_form.admin.evaluation" }),
@@ -197,6 +199,8 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                     "defaultSort": "RANDOM",
                     "type": "SELECTION",
                     "voteType": "DISABLED",
+                    "proposalArchivedTime": 0,
+                    "proposalArchivedUnitTime": 'MONTHS',
                 },
                 {
                     "label": intl.formatMessage({id: "vote-capitalize" }),
@@ -239,6 +243,8 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                     "allowAuthorsToAddNews": true,
                     "type": "SELECTION",
                     "voteType": "SIMPLE",
+                    "proposalArchivedTime": 0,
+                    "proposalArchivedUnitTime": 'MONTHS',
                 },
                 {
                     "label": intl.formatMessage({id: "award-winning-projects" }),
@@ -273,6 +279,8 @@ const getParticipatoryBudgetInput = ({ projectTitle, authors, intl }: Params): P
                     "defaultStatus": intl.formatMessage({id: "award-winning-projects" }),
                     "type": "SELECTION",
                     "voteType": "DISABLED",
+                    "proposalArchivedTime": 0,
+                    "proposalArchivedUnitTime": 'MONTHS',
                 }
             ],
             "locale": null,

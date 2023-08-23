@@ -4,12 +4,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalListFilters } from './ProposalListFilters';
 import { features } from '~/redux/modules/default';
-import { $refType, $fragmentRefs } from '~/mocks';
+import { $refType, $fragmentRefs, intlMock } from '~/mocks';
 
 describe('<ProposalListFilters />', () => {
   const defaultProps = {
     setDisplayMode: jest.fn(),
     dispatch: jest.fn(),
+    intl: intlMock,
     step: {
       $refType,
       $fragmentRefs,
@@ -40,6 +41,7 @@ describe('<ProposalListFilters />', () => {
         ],
         objectType: 'PROPOSAL',
       },
+      proposalArchivedTime: 0,
     },
     features: { ...features, user_type: true },
     themes: [],
@@ -50,6 +52,7 @@ describe('<ProposalListFilters />', () => {
       districts: null,
       statuses: null,
       types: null,
+      state: null,
     },
     displayMode: 'GRID',
   };

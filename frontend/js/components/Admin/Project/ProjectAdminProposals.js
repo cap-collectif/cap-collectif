@@ -1003,6 +1003,12 @@ export const ProjectAdminProposals = ({
                   { num: project.proposalsTrashed?.totalCount },
                 )}
               </InlineSelect.Choice>
+              <InlineSelect.Choice value="ARCHIVED">
+                {intl.formatMessage(
+                  { id: 'filter.count.status.archived' },
+                  { num: project.proposalsArchived?.totalCount },
+                )}
+              </InlineSelect.Choice>
             </InlineSelect>
           </div>
         </S.ProjectAdminProposalsHeader>
@@ -1267,6 +1273,9 @@ const container = createPaginationContainer(
           totalCount
         }
         proposalsTrashed: proposals(state: TRASHED) {
+          totalCount
+        }
+        proposalsArchived: proposals(state: ARCHIVED) {
           totalCount
         }
       }

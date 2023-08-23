@@ -774,6 +774,41 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findArchivableByStep(AbstractStep $step, int $voteThreshold): array
+    {
+        if (false === $step instanceof CollectStep && false === $step instanceof SelectionStep) {
+            throw new \Exception('Given step should be either Collect or Selection Step');
+        }
+
+        $isCollectStep = $step instanceof CollectStep;
+        $votesTable = $isCollectStep ? 'collectVotes' : 'selectionVotes';
+
+        $qb = $this
+            ->createQueryBuilder('p')
+        ;
+
+        if ($isCollectStep) {
+            $qb->join('p.proposalForm', 'pf')
+                ->join('pf.step', 's')
+            ;
+        } else {
+            $qb->join('p.selections', 'selections')
+                ->join('selections.selectionStep', 's')
+            ;
+        }
+
+        $qb->leftJoin("p.{$votesTable}", 'v', 'p.proposal = v.proposal')
+            ->where('s.id = :step')
+            ->andWhere('p.isArchived = false')
+            ->groupBy('p.id')
+            ->having('COUNT(v.id) < :voteThreshold')
+            ->setParameter('step', $step->getId())
+            ->setParameter('voteThreshold', $voteThreshold)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

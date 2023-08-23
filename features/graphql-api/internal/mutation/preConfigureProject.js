@@ -195,6 +195,8 @@ const participatoryBudgetInput = {
         "requirements": [],
         "type": "COLLECT",
         "voteType": "DISABLED",
+        "proposalArchivedTime": 0,
+        "proposalArchivedUnitTime": 'MONTHS',
       },
       {
         "label": "L'analyse des projets",
@@ -235,6 +237,8 @@ const participatoryBudgetInput = {
         "defaultSort": "RANDOM",
         "type": "SELECTION",
         "voteType": "DISABLED",
+        "proposalArchivedTime": 0,
+        "proposalArchivedUnitTime": 'MONTHS',
       },
       {
         "label": "Vote",
@@ -276,6 +280,8 @@ const participatoryBudgetInput = {
         "allowAuthorsToAddNews": true,
         "type": "SELECTION",
         "voteType": "SIMPLE",
+        "proposalArchivedTime": 0,
+        "proposalArchivedUnitTime": 'MONTHS',
       },
       {
         "label": "Projets lauréats",
@@ -308,6 +314,8 @@ const participatoryBudgetInput = {
         "defaultStatus": "Projet lauréats",
         "type": "SELECTION",
         "voteType": "DISABLED",
+        "proposalArchivedTime": 0,
+        "proposalArchivedUnitTime": 'MONTHS',
       }
     ],
     "locale": null,

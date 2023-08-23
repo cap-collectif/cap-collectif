@@ -648,6 +648,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                 "proposalsAll": Object {
                   "totalCount": 9,
                 },
+                "proposalsArchived": Object {
+                  "totalCount": 0,
+                },
                 "proposalsDraft": Object {
                   "totalCount": 2,
                 },
@@ -1470,6 +1473,9 @@ exports[`<ProjectAdminProposals /> renders correctly  when no contributions step
                 },
                 "proposalsAll": Object {
                   "totalCount": 9,
+                },
+                "proposalsArchived": Object {
+                  "totalCount": 0,
                 },
                 "proposalsDraft": Object {
                   "totalCount": 2,
@@ -2294,6 +2300,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 "proposalsAll": Object {
                   "totalCount": 9,
                 },
+                "proposalsArchived": Object {
+                  "totalCount": 0,
+                },
                 "proposalsDraft": Object {
                   "totalCount": 2,
                 },
@@ -3117,6 +3126,9 @@ exports[`<ProjectAdminProposals /> renders correctly when the project have propo
                 "proposalsAll": Object {
                   "totalCount": 9,
                 },
+                "proposalsArchived": Object {
+                  "totalCount": 0,
+                },
                 "proposalsDraft": Object {
                   "totalCount": 2,
                 },
@@ -3930,6 +3942,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 },
                 "proposalsAll": Object {
                   "totalCount": 9,
+                },
+                "proposalsArchived": Object {
+                  "totalCount": 4,
                 },
                 "proposalsDraft": Object {
                   "totalCount": 2,
@@ -4745,6 +4760,9 @@ exports[`<ProjectAdminProposals /> renders correctly with badges when the projec
                 "proposalsAll": Object {
                   "totalCount": 9,
                 },
+                "proposalsArchived": Object {
+                  "totalCount": 4,
+                },
                 "proposalsDraft": Object {
                   "totalCount": 2,
                 },
@@ -5209,6 +5227,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                 "proposalsAll": Object {
                   "totalCount": 0,
                 },
+                "proposalsArchived": Object {
+                  "totalCount": 0,
+                },
                 "proposalsDraft": Object {
                   "totalCount": 0,
                 },
@@ -5671,6 +5692,9 @@ exports[`<ProjectAdminProposals /> renders the "No proposals" placeholder when t
                   "totalCount": 0,
                 },
                 "proposalsAll": Object {
+                  "totalCount": 0,
+                },
+                "proposalsArchived": Object {
                   "totalCount": 0,
                 },
                 "proposalsDraft": Object {

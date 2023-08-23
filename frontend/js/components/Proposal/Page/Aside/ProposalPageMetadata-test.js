@@ -19,6 +19,16 @@ const proposal = {
   },
   reference: 'Reference',
   theme: null,
+  isArchived: false,
+  archiveLimitDate: null,
+  votes: {
+    totalCount: 0,
+  },
+  paperVotesTotalCount: 0,
+  currentVotableStep: {
+    title: 'step title',
+    voteThreshold: 0,
+  },
 };
 
 describe('<ProposalPageMetadata />', () => {

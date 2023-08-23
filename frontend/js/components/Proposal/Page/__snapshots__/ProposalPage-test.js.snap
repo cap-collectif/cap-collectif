@@ -448,6 +448,183 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               Object {
                 "alias": null,
                 "args": null,
+                "kind": "ScalarField",
+                "name": "archiveLimitDate",
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "isArchived",
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "currentVotableStep",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__typename",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "title",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "voteThreshold",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "votesRanking",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "voteType",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "canDisplayBallot",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "slug",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "votable",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "state",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isStep",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "ProposalForm",
+                            "kind": "LinkedField",
+                            "name": "form",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "objectType",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "CollectStep",
+                      },
+                    ],
+                    "type": "Step",
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "first",
+                    "value": 0,
+                  },
+                  Object {
+                    "kind": "Variable",
+                    "name": "stepId",
+                    "variableName": "stepId",
+                  },
+                ],
+                "concreteType": "ProposalVoteConnection",
+                "kind": "LinkedField",
+                "name": "votes",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalPointsCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "paperVotesTotalCount",
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
                 "concreteType": "ProposalStepStatus",
                 "kind": "LinkedField",
                 "name": "status",
@@ -719,49 +896,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                     "storageKey": null,
                   },
                 ],
-                "storageKey": null,
-              },
-              Object {
-                "alias": null,
-                "args": Array [
-                  Object {
-                    "kind": "Literal",
-                    "name": "first",
-                    "value": 0,
-                  },
-                  Object {
-                    "kind": "Variable",
-                    "name": "stepId",
-                    "variableName": "stepId",
-                  },
-                ],
-                "concreteType": "ProposalVoteConnection",
-                "kind": "LinkedField",
-                "name": "votes",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "totalCount",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "totalPointsCount",
-                    "storageKey": null,
-                  },
-                ],
-                "storageKey": null,
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "paperVotesTotalCount",
                 "storageKey": null,
               },
               Object {
@@ -1998,119 +2132,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       },
                     ],
                     "storageKey": null,
-                  },
-                ],
-                "storageKey": null,
-              },
-              Object {
-                "alias": null,
-                "args": null,
-                "concreteType": null,
-                "kind": "LinkedField",
-                "name": "currentVotableStep",
-                "plural": false,
-                "selections": Array [
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "votesRanking",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "voteType",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "canDisplayBallot",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "voteThreshold",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "slug",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "votable",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "state",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "abstractKey": "__isStep",
-                    "kind": "InlineFragment",
-                    "selections": Array [
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "ProposalForm",
-                            "kind": "LinkedField",
-                            "name": "form",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "objectType",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                            ],
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "CollectStep",
-                      },
-                    ],
-                    "type": "Step",
                   },
                 ],
                 "storageKey": null,
@@ -8839,7 +8860,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "950f63dc34f107293a584df3b0c52678",
+        "cacheID": "0bf677f4f8d8d8ee77084ddbffd99f8f",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -10351,6 +10372,7 @@ fragment ProposalPageHeaderButtons_proposal_2Ag0mE on Proposal {
     contribuable
     id
   }
+  isArchived
   publicationStatus
   ...ProposalSmsVoteModal_proposal
   ...ProposalVoteButtonWrapperFragment_proposal_Q37Wz
@@ -10567,6 +10589,18 @@ fragment ProposalPageMetadata_proposal on Proposal {
     id
   }
   reference
+  archiveLimitDate
+  isArchived
+  currentVotableStep {
+    __typename
+    title
+    voteThreshold
+    id
+  }
+  votes(stepId: $stepId, first: 0) {
+    totalCount
+  }
+  paperVotesTotalCount
 }
 
 fragment ProposalPageNews_proposal_39ngnn on Proposal {

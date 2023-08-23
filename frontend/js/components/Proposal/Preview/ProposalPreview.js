@@ -16,7 +16,7 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground';
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon';
 import colors from '~/utils/colors';
 import { bootstrapGrid } from '~/utils/sizes';
-import Image from '~ui/Primitives/Image';
+import ProposalImageContainer from "~/components/Proposal/Preview/ProposalImageContainer";
 
 type Props = {|
   +proposal: ProposalPreview_proposal,
@@ -52,31 +52,6 @@ const ProposalCard: StyledComponent<{}, {}, typeof Card> = styled(Card)`
   }
 `;
 
-const ProposalImage: StyledComponent<{}, {}, typeof Image> = styled(Image)`
-  border-radius: 4px 4px 0 0;
-  height: 83px;
-  max-width: 261px;
-  object-position: center;
-  object-fit: cover;
-
-  @media (max-width: ${bootstrapGrid.mdMax}px) {
-    max-width: 293px;
-  }
-
-  @media (max-width: ${bootstrapGrid.smMax}px) {
-    max-width: 345px;
-    height: 99px;
-  }
-
-  @media (max-width: 838px) {
-    max-width: 900px;
-  }
-
-  @media (max-width: ${bootstrapGrid.xsMax}px) {
-    height: 27.5vw;
-  }
-`;
-
 const getCategoryImage = (proposal: ProposalPreview_proposal) => {
   return proposal?.category?.categoryImage?.image?.url;
 };
@@ -96,27 +71,29 @@ export class ProposalPreview extends React.Component<Props> {
           {proposal.media &&
           proposal.media.url &&
           features.display_pictures_in_depository_proposals_list ? (
-            <ProposalImage
+            <ProposalImageContainer
               src={proposal.media.url}
+              isArchived={proposal.isArchived}
               sizes="(max-width: 320px) 320px,
-        (max-width: 640px) 640px,
-        (max-width: 960px) 640px,
-        (max-width: 1280px) 640px,
-        (max-width: 2560px) 640px,"
+                    (max-width: 640px) 640px,
+                    (max-width: 960px) 640px,
+                    (max-width: 1280px) 640px,
+                    (max-width: 2560px) 640px,"
             />
           ) : features.display_pictures_in_depository_proposals_list ? (
             getCategoryImage(proposal) ? (
-              <ProposalImage
+              <ProposalImageContainer
                 src={getCategoryImage(proposal)}
+                isArchived={proposal.isArchived}
                 sizes="(max-width: 320px) 320px,
-        (max-width: 640px) 640px,
-        (max-width: 960px) 640px,
-        (max-width: 1280px) 640px,
-        (max-width: 2560px) 640px,"
+                        (max-width: 640px) 640px,
+                        (max-width: 960px) 640px,
+                        (max-width: 1280px) 640px,
+                        (max-width: 2560px) 640px,"
               />
             ) : (
               <>
-                <CategoryBackground color={proposal?.category?.color || '#1E88E5'} />
+                <CategoryBackground color={proposal?.category?.color || '#1E88E5'} isArchived={proposal.isArchived} />
                 {proposal?.category?.icon && (
                   <Icon name={ICON_NAME[proposal?.category?.icon]} size={40} color={colors.white} />
                 )}
@@ -175,6 +152,7 @@ export default createFragmentContainer(
             }
           }
         }
+        isArchived
         ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
         ...ProposalPreviewBody_proposal
           @arguments(

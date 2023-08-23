@@ -23,6 +23,16 @@ class SelectionStepRepository extends AbstractStepRepository
         return $asArray ? $query->getArrayResult() : $query->getResult();
     }
 
+    public function findProposalArchivableSteps(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.proposalArchivedTime > 0')
+            ->andWhere('s.voteThreshold > 0')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function getEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('ss')->where('ss.isEnabled = 1');

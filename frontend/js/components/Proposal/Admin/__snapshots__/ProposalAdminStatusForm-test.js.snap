@@ -54,6 +54,16 @@ exports[`<ProposalAdminStatusForm /> render correctly if published 1`] = `
           />
         </ToggleButton>
         <ToggleButton
+          id="proposal-archived-tab"
+          onClick={[Function]}
+          value="ARCHIVED"
+        >
+          <FormattedMessage
+            id="global-archived"
+            values={Object {}}
+          />
+        </ToggleButton>
+        <ToggleButton
           id="proposal-trashed-tab"
           onClick={[Function]}
           value="TRASHED"
@@ -177,6 +187,16 @@ exports[`<ProposalAdminStatusForm /> render correctly if unpublished 1`] = `
         >
           <FormattedMessage
             id="global.published"
+            values={Object {}}
+          />
+        </ToggleButton>
+        <ToggleButton
+          id="proposal-archived-tab"
+          onClick={[Function]}
+          value="ARCHIVED"
+        >
+          <FormattedMessage
+            id="global-archived"
             values={Object {}}
           />
         </ToggleButton>

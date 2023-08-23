@@ -2,8 +2,9 @@
 import * as React from 'react';
 import styled, { type StyledComponent } from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedNumber } from 'react-intl';
-import { Box } from '@cap-collectif/ui';
+import { FormattedDate, FormattedNumber, useIntl } from 'react-intl';
+import { Box, Text, Tooltip } from '@cap-collectif/ui';
+import moment from 'moment';
 import colors from '~/utils/colors';
 import ProposalDetailLikers from '../../Detail/ProposalDetailLikers';
 import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql';
@@ -45,19 +46,19 @@ export const MetadataRow = ({
   size,
   ready,
   color,
-  content,
   categorySize = 24,
   categoryPaddingTop = 0,
   categoryPaddingLeft = 7,
+  children,
 }: {
   name: $Values<typeof ICON_NAME>,
   size: number,
   ready: boolean,
   color: string,
-  content: string | React.Element<typeof FormattedNumber>,
   categorySize?: number,
   categoryPaddingTop?: number,
   categoryPaddingLeft?: number,
+  children: React.Node,
 }) => (
   <Element>
     <CategoryCircledIcon
@@ -68,9 +69,7 @@ export const MetadataRow = ({
     </CategoryCircledIcon>
 
     <Box ml="15px">
-      <MetadataPlaceHolder ready={ready}>
-        <span>{content}</span>
-      </MetadataPlaceHolder>
+      <MetadataPlaceHolder ready={ready}>{children}</MetadataPlaceHolder>
     </Box>
   </Element>
 );
@@ -82,7 +81,36 @@ export const ProposalPageMetadata = ({
   showNullEstimation,
   showThemes,
 }: Props) => {
+  const intl = useIntl();
   const estimation = !proposal?.estimation && showNullEstimation ? 0 : proposal?.estimation;
+
+  const archivedDate = proposal.archiveLimitDate ? moment(proposal.archiveLimitDate) : null;
+  const getArchivedLabel = () => {
+    if (!archivedDate) {
+      return '';
+    }
+
+    if (proposal.isArchived) {
+      return `${intl.formatMessage(
+        { id: 'archived-the' },
+        { date: archivedDate.format('DD/MM/YYYY') },
+      )}`;
+    }
+
+    const now = moment().startOf('day');
+    const days = archivedDate.diff(now, 'days');
+
+    return `${intl.formatMessage({ id: 'count.block.daysLeft' }, { count: days })}`;
+  };
+
+  const numericVotesTotalCount = proposal?.votes?.totalCount ?? 0;
+  const paperVotesTotalCount = proposal?.paperVotesTotalCount ?? 0;
+  const votesTotalCount = numericVotesTotalCount + paperVotesTotalCount;
+  const voteThreshold = proposal.currentVotableStep?.voteThreshold ?? 0;
+  const hasReachedEnoughVotes = votesTotalCount >= voteThreshold;
+
+  const showArchiveLimitDate =
+    proposal.archiveLimitDate && getArchivedLabel() && !hasReachedEnoughVotes;
 
   return (
     <Card id="ProposalPageMetadata">
@@ -92,48 +120,81 @@ export const ProposalPageMetadata = ({
         (showNullEstimation && proposal?.estimation) ||
         !proposal) && (
         <ProposalPageMetadataContainer>
+          {showArchiveLimitDate && (
+            <MetadataRow
+              name={ICON_NAME.calendar}
+              size={10}
+              color={colors.primaryColor}
+              ready={!!proposal}>
+              {proposal.isArchived ? (
+                <Text>{getArchivedLabel()}</Text>
+              ) : (
+                <Tooltip
+                  label={
+                    <Text fontSize={1}>
+                      {intl.formatMessage(
+                        { id: 'will-be-closed-at' },
+                        {
+                          date: (
+                            <FormattedDate
+                              value={moment(archivedDate)}
+                              weekday="long"
+                              day="numeric"
+                              month="long"
+                              year="numeric"
+                              hour="numeric"
+                              minute="numeric"
+                            />
+                          ),
+                        },
+                      )}
+                    </Text>
+                  }>
+                  <Text>{getArchivedLabel()}</Text>
+                </Tooltip>
+              )}
+            </MetadataRow>
+          )}
           {!proposal || (showThemes && proposal?.theme?.title) ? (
             <MetadataRow
               name={ICON_NAME.tag}
               size={10}
               color={colors.primaryColor}
-              ready={!!proposal}
-              content={proposal?.theme?.title || ''}
-            />
+              ready={!!proposal}>
+              <Text>{proposal?.theme?.title || ''}</Text>
+            </MetadataRow>
           ) : null}
           {!proposal || (showCategories && proposal?.category) ? (
             <MetadataRow
               name={ICON_NAME.tag}
               size={10}
               color={colors.primaryColor}
-              ready={!!proposal}
-              content={proposal?.category?.name || ''}
-            />
+              ready={!!proposal}>
+              <Text>{proposal?.category?.name || ''}</Text>
+            </MetadataRow>
           ) : null}
           {!proposal || (showDistricts && proposal?.district) ? (
             <MetadataRow
               name={ICON_NAME.pin}
               size={10}
               color={colors.primaryColor}
-              ready={!!proposal}
-              content={proposal?.district?.name || ''}
-            />
+              ready={!!proposal}>
+              <Text>{proposal?.district?.name || ''}</Text>
+            </MetadataRow>
           ) : null}
           {!proposal || (estimation !== null && typeof estimation !== 'undefined') ? (
             <MetadataRow
               name={ICON_NAME.accounting}
               size={10}
               color={colors.primaryColor}
-              ready={!!proposal}
-              content={
-                <FormattedNumber
-                  minimumFractionDigits={0}
-                  value={estimation || 0}
-                  style="currency"
-                  currency="EUR"
-                />
-              }
-            />
+              ready={!!proposal}>
+              <FormattedNumber
+                minimumFractionDigits={0}
+                value={estimation || 0}
+                style="currency"
+                currency="EUR"
+              />
+            </MetadataRow>
           ) : null}
           {!proposal || proposal?.likers.length > 0 ? (
             <Element iconOnly>
@@ -145,9 +206,9 @@ export const ProposalPageMetadata = ({
             name={ICON_NAME.hashtag}
             size={10}
             color={colors.primaryColor}
-            ready={!!proposal}
-            content={proposal?.reference || ''}
-          />
+            ready={!!proposal}>
+            {proposal?.reference || ''}
+          </MetadataRow>
         </ProposalPageMetadataContainer>
       )}
     </Card>
@@ -174,6 +235,16 @@ export default createFragmentContainer(ProposalPageMetadata, {
         name
       }
       reference
+      archiveLimitDate
+      isArchived
+      currentVotableStep {
+        title
+        voteThreshold
+      }
+      votes(stepId: $stepId, first: 0) {
+        totalCount
+      }
+      paperVotesTotalCount
     }
   `,
 });

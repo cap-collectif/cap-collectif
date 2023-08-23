@@ -183,7 +183,8 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }:
             $theme: ID
             $userType: ID
             $isMapDisplay: Boolean!
-            $token: String
+            $token: String,
+            $state: ProposalsState
           ) {
             viewer @include(if: $isAuthenticated) {
               ...ProposalListView_viewer @arguments(stepId: $stepId)

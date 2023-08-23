@@ -47,6 +47,8 @@ class SelectionStepFormType extends AbstractStepFormType
                 'choices' => ViewConfiguration::ALL,
             ])
             ->add('isProposalSmsVoteEnabled')
+            ->add('proposalArchivedTime')
+            ->add('proposalArchivedUnitTime')
         ;
     }
 

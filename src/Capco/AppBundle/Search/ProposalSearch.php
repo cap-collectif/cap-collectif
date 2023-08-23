@@ -801,6 +801,7 @@ class ProposalSearch extends Search
                     $filters['draft'] = true;
                     unset($filters['published']);
                     $filters['trashed'] = false;
+                    $filters['archived'] = false;
 
                     break;
 
@@ -808,6 +809,7 @@ class ProposalSearch extends Search
                     $filters['draft'] = false;
                     $filters['published'] = true;
                     $filters['trashed'] = true;
+                    $filters['archived'] = false;
 
                     break;
 
@@ -815,6 +817,15 @@ class ProposalSearch extends Search
                     $filters['draft'] = false;
                     $filters['published'] = true;
                     $filters['trashed'] = false;
+                    $filters['archived'] = false;
+
+                    break;
+
+                case ProposalsState::ARCHIVED:
+                    $filters['draft'] = false;
+                    $filters['published'] = true;
+                    $filters['trashed'] = false;
+                    $filters['archived'] = true;
 
                     break;
             }

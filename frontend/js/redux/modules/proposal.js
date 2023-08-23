@@ -19,6 +19,7 @@ export type Filters = {|
   statuses: ?string,
   themes: ?string,
   districts: ?string,
+  state: ?string,
 |};
 
 type Status = { name: string, id: number, color: string };
@@ -100,6 +101,7 @@ export const initialState: State = {
     types: null,
     statuses: null,
     districts: null,
+    state: null,
   },
   terms: null,
   lastEditedProposalId: null,

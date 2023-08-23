@@ -52,6 +52,16 @@ class CollectStepRepository extends AbstractStepRepository
         return parent::getOneBySlugAndProjectSlug($slug, $projectSlug);
     }
 
+    public function findProposalArchivableSteps(): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.proposalArchivedTime > 0')
+            ->andWhere('s.voteThreshold > 0')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')

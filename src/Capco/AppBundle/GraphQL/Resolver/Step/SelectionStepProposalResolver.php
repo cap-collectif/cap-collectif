@@ -45,6 +45,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $filters['selectionStep'],
             $filters['excludeViewerVotes'],
             $filters['geoBoundingBox'],
+            $filters['state'],
         ] = [
             $args->offsetGet('term'),
             $args->offsetGet('orderBy'),
@@ -58,6 +59,7 @@ class SelectionStepProposalResolver implements ResolverInterface
             $selectionStep->getId(),
             $args->offsetGet('excludeViewerVotes'),
             $args->offsetGet('geoBoundingBox'),
+            $args->offsetGet('state'),
         ];
 
         $emptyConnection = ConnectionBuilder::empty(['fusionCount' => 0]);

@@ -122,7 +122,9 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
         {step &&
           proposal.currentVotableStep &&
           step.id === proposal.currentVotableStep.id &&
-          proposal.form.objectType !== 'ESTABLISHMENT' && (
+          proposal.form.objectType !== 'ESTABLISHMENT'
+          && !proposal.isArchived &&
+          (
             <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           )}
         {step &&
@@ -173,6 +175,7 @@ export default createFragmentContainer(ProposalPreviewBody, {
       stepId: { type: "ID!" }
       token: { type: "String" }
     ) {
+      isArchived
       id
       slug
       currentVotableStep {

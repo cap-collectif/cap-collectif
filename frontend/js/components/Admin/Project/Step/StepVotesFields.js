@@ -1,8 +1,8 @@
 // @flow
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { useIntl, FormattedHTMLMessage } from 'react-intl';
-import { Field, change, formValueSelector } from 'redux-form';
+import { Field, change, formValueSelector, getFormValues } from 'redux-form';
 import styled, { type StyledComponent } from 'styled-components';
 import toggle from '~/components/Form/Toggle';
 import component from '~/components/Form/Field';
@@ -14,8 +14,11 @@ import Flex from '~ui/Primitives/Layout/Flex';
 import { styleGuideColors } from '~/utils/colors';
 import AppBox from '~ui/Primitives/AppBox';
 import Text from '~ui/Primitives/Text';
+import Tooltip from '~ds/Tooltip/Tooltip';
+import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import TeaserServices from './TeaserServices';
+import select from '~/components/Form/Select';
 
 type Props = {|
   ...ReduxFormFieldArrayProps,
@@ -67,6 +70,23 @@ export function StepVotesFields(
   const intl = useIntl();
   const useVoteMin = useFeatureFlag('votes_min');
   const hasFeatureTwilio = useFeatureFlag('twilio');
+
+  const { steps, currentStep } = useSelector((globalState: GlobalState) => {
+    return {
+      steps: formValueSelector('projectAdminForm')(globalState, 'steps'),
+      currentStep: getFormValues(stepFormName)(globalState),
+    };
+  });
+
+  const stepWithProposalArchivedConfigured = steps.find(step => step.proposalArchivedTime > 0);
+  const [canConfigureProposalArchived] = React.useState(() => {
+    if (!stepWithProposalArchivedConfigured) {
+      return true;
+    }
+    return (
+      stepWithProposalArchivedConfigured?.proposalArchivedTime === currentStep?.proposalArchivedTime
+    );
+  });
 
   const voteSmsEnabled = hasEnabledFeaturesToVoteBySms && isProposalSmsVoteEnabled;
 
@@ -147,17 +167,67 @@ export function StepVotesFields(
                   helpText={intl.formatMessage({ id: 'ceil-help' })}
                   label={intl.formatMessage({ id: 'admin.fields.step.vote_threshold.input' })}
                   disabled={voteSmsEnabled}
+                  onChange={e => {
+                    if (!e.target.checked) {
+                      dispatch(change(stepFormName, 'proposalArchivedTime', 0));
+                    }
+                  }}
                 />
               </FieldContainer>
 
               {isTresholdEnabled && (
-                <Field
-                  type="number"
-                  min={0}
-                  name="voteThreshold"
-                  id="step-voteThreshold"
-                  component={component}
-                />
+                <>
+                  <Field
+                    type="number"
+                    min={0}
+                    name="voteThreshold"
+                    id="step-voteThreshold"
+                    component={component}
+                  />
+                  <AppBox>
+                    <Flex
+                      alignItems="center"
+                      color={!canConfigureProposalArchived ? 'gray.500' : 'inherit'}>
+                        <Text>{intl.formatMessage({ id: 'automatic-archiving' })}</Text>
+                        <Tooltip label={intl.formatMessage({ id: 'archive-proposals-help-text' })}>
+                          <AppBox>
+                            <Icon name={ICON_NAME.CIRCLE_INFO} size={ICON_SIZE.MD} color="blue.500" />
+                          </AppBox>
+                        </Tooltip>
+                    </Flex>
+                    <Flex alignItems="center" spacing="4">
+                      <Field
+                        type="number"
+                        min={0}
+                        name="proposalArchivedTime"
+                        id="step-proposalArchivedTime"
+                        component={component}
+                        disabled={!canConfigureProposalArchived}
+                      />
+                      <AppBox width="100px">
+                        <Field
+                          component={select}
+                          name="proposalArchivedUnitTime"
+                          id="step-proposalArchivedUnitTime"
+                          options={[
+                            { label: intl.formatMessage({ id: 'global.days' }), value: 'DAYS' },
+                            { label: intl.formatMessage({ id: 'global.months' }), value: 'MONTHS' },
+                          ]}
+                          clearable={false}
+                          disabled={!canConfigureProposalArchived}
+                        />
+                      </AppBox>
+                    </Flex>
+                  </AppBox>
+                  {!canConfigureProposalArchived && stepWithProposalArchivedConfigured && (
+                    <Text mb={4} color="gray.400">
+                      {intl.formatMessage(
+                        { id: 'archiving-already-configured-in-step' },
+                        { stepTitle: stepWithProposalArchivedConfigured.title },
+                      )}
+                    </Text>
+                  )}
+                </>
               )}
               <FieldContainer toggled={isLimitEnabled}>
                 <Field

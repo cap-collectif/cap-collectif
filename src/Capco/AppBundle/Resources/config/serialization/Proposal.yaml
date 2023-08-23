@@ -104,3 +104,6 @@ Capco\AppBundle\Entity\Proposal:
         getLocation:
             serialized_name: location
             groups: [ElasticsearchProposal]
+        isArchived:
+            serialized_name: archived
+            groups: [ElasticsearchProposal]

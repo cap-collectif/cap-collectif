@@ -319,6 +319,13 @@ exports[`<LastProposals /> should render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "isArchived",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "ProposalForm",
                       "kind": "LinkedField",
                       "name": "form",
@@ -676,7 +683,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "c7e617be7e20fa84f92e4b437b4adc0a",
+          "cacheID": "0c5b0119e5816e3f8595b74ee4c6d1b6",
           "id": null,
           "metadata": Object {},
           "name": "LastProposalsQuery",
@@ -739,6 +746,7 @@ fragment ProposalFollowButton_proposal_3HigpW on Proposal {
 }
 
 fragment ProposalPreviewBody_proposal_3xyD8p on Proposal {
+  isArchived
   id
   slug
   currentVotableStep {
@@ -840,6 +848,7 @@ fragment ProposalPreview_proposal_dUMnP on Proposal {
     }
     id
   }
+  isArchived
   ...ProposalPreviewFooter_proposal_2tPna9
   ...ProposalPreviewBody_proposal_3xyD8p
   ...ProposalPreviewStatus_proposal_2tPna9

@@ -199,6 +199,8 @@ const BASE_SELECTION_STEP = {
   mainView: 'LIST',
   secretBallot: true,
   publishedVoteDate: '2030-01-01 00:00:00',
+  proposalArchivedTime: 0,
+  proposalArchivedUnitTime: 'MONTHS',
 };
 
 const BASE_PRESENTATION_STEP = {
@@ -235,6 +237,8 @@ const BASE_COLLECT_STEP = {
   title: "Le beau titre de l'étape CollectStep",
   label: 'CollectStep',
   mainView: 'GRID',
+  proposalArchivedTime: 0,
+  proposalArchivedUnitTime: 'MONTHS',
 };
 
 describe('Internal|updateAlphaProject simple mutations', () => {
@@ -1130,6 +1134,8 @@ describe('project access control', () => {
         budget: null,
         requirements: [],
         requirementsReason: null,
+        proposalArchivedTime: 0,
+        proposalArchivedUnitTime: 'MONTHS',
       },
       {
         id: 'questionnaireStepProjectWithOwner',

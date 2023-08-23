@@ -15,6 +15,8 @@
                 <span class="label label-danger">{{ 'admin.fields.proposal.state.choices.hidden_content'|trans }}</span>
             {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::TRASHED') %}
                 <span class="label label-danger">{{ 'project.trash'|trans }}</span>
+            {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::ARCHIVED') %}
+                <span class="label label-default">{{ 'global-archived'|trans }}</span>
             {% endif %}
     {% endspaceless %}
 {% endblock %}

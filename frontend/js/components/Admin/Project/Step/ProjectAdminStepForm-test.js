@@ -46,6 +46,8 @@ describe('<ProjectAdminStepForm />', () => {
       metaDescription: 'oeoeoe',
       mainView: 'GRID',
       isSecretBallot: false,
+      proposalArchivedTime: 0,
+      proposalArchivedUnitTime: "DAYS"
     },
     fcAllowedData: { FIRSTNAME: true, LASTNAME: true, DATE_OF_BIRTH: false },
     isFranceConnectConfigured: true,

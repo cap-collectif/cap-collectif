@@ -21,6 +21,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "contribuable": true,
         },
         "id": "proposalId",
+        "isArchived": false,
         "pendingRevisions": Object {
           "totalCount": 0,
         },
@@ -56,6 +57,7 @@ exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
           "contribuable": true,
         },
         "id": "proposalId",
+        "isArchived": false,
         "pendingRevisions": Object {
           "totalCount": 0,
         },

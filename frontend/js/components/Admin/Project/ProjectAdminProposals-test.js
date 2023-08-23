@@ -447,6 +447,9 @@ const DEFAULT_MERGED_PROPOSALS_PROJECT = {
   proposalsPublished: {
     totalCount: 4,
   },
+  proposalsArchived: {
+    totalCount: 4,
+  },
 };
 
 const DEFAULT_PROJECT = {
@@ -898,6 +901,9 @@ const DEFAULT_PROJECT = {
   proposalsPublished: {
     totalCount: 4,
   },
+  proposalsArchived: {
+    totalCount: 0,
+  },
 };
 
 const themes = [
@@ -965,6 +971,9 @@ describe('<ProjectAdminProposals />', () => {
           totalCount: 0,
         },
         proposalsPublished: {
+          totalCount: 0,
+        },
+        proposalsArchived: {
           totalCount: 0,
         },
       },

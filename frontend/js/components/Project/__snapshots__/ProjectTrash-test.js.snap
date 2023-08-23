@@ -1339,6 +1339,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "isArchived",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
                                     "concreteType": "ProposalForm",
                                     "kind": "LinkedField",
                                     "name": "form",
@@ -1849,7 +1856,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "cf182da82ca77d00bcea218ee2b6b6fa",
+            "cacheID": "bdea8bb955682ac2d073ba1d83175527",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashQuery",
@@ -2089,6 +2096,7 @@ fragment ProposalFollowButton_proposal_39ngnn on Proposal {
 }
 
 fragment ProposalPreviewBody_proposal_4cQoTr on Proposal {
+  isArchived
   id
   slug
   currentVotableStep {
@@ -2190,6 +2198,7 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
     }
     id
   }
+  isArchived
   ...ProposalPreviewFooter_proposal_2tPna9
   ...ProposalPreviewBody_proposal_4cQoTr
   ...ProposalPreviewStatus_proposal_2tPna9

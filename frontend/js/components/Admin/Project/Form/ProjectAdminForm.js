@@ -258,6 +258,18 @@ const onSubmit = (
                   ? s.voteThreshold
                   : null
                 : undefined,
+            proposalArchivedTime:
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? (s.isTresholdEnabled && s.votable && s.proposalArchivedTime)
+                  ? parseInt(s.proposalArchivedTime, 10)
+                  : 0
+                : undefined,
+            proposalArchivedUnitTime:
+              sTypename === 'SelectionStep' || sTypename === 'CollectStep'
+                ? (s.isTresholdEnabled && s.votable && s.proposalArchivedUnitTime)
+                  ? s.proposalArchivedUnitTime
+                  : 'MONTHS'
+                : undefined,
             publishedVoteDate:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isSecretBallot && s.votable && s.publishedVoteDate
@@ -725,6 +737,10 @@ export default createFragmentContainer(injectIntl(container), {
           voteType
           budget
           isProposalSmsVoteEnabled
+        }
+        ... on ProposalStep{
+          proposalArchivedTime
+          proposalArchivedUnitTime
         }
         ... on SelectionStep {
           statuses {

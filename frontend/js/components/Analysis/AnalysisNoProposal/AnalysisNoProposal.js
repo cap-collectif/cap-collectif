@@ -43,6 +43,11 @@ const TYPE_STATE = {
     icon: ICON_NAME.messageBubbleCheck,
     idWording: 'help.title.all.proposition.analysed',
   },
+  ARCHIVED: {
+    icon: ICON_NAME.messageBubble,
+    idWording: 'help.title.section.empty',
+    variableWording: 'global-archived',
+  },
 };
 
 type Props = {|

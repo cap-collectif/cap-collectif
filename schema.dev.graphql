@@ -2355,6 +2355,16 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """Whether or not sms vote are enabled."""
   isProposalSmsVoteEnabled: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int!
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime!
   private: Boolean!
   defaultStatus: ProposalStepStatus
 
@@ -10524,6 +10534,16 @@ input ProjectStepInput {
 
   """Whether or not sms vote is enabled."""
   isProposalSmsVoteEnabled: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime
   allowAuthorsToAddNews: Boolean
   allowingProgressSteps: Boolean
   statuses: [StepStatusInput]
@@ -10921,6 +10941,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Is the body using Jodit Wysiwyg."""
   bodyUsingJoditWysiwyg: Boolean!
+
+  """Wether or not the proposal is archived."""
+  isArchived: Boolean!
+
+  """The limit date before automatically archiving the proposal"""
+  archiveLimitDate: DateTime
 }
 
 """The affiliation of a user to a proposal"""
@@ -11001,6 +11027,15 @@ enum ProposalAnalysisState {
 
   """The analysis has not begun."""
   NONE
+}
+
+"""Available values for proposalArchivedUnitTime"""
+enum ProposalArchivedUnitTime {
+  """Set the archived value in days."""
+  DAYS
+
+  """Set the archived value in months."""
+  MONTHS
 }
 
 """A proposal assessment."""
@@ -11679,6 +11714,9 @@ enum ProposalPublicationStatus {
 
   """Visible by author only."""
   UNPUBLISHED
+
+  """Proposal archived."""
+  ARCHIVED
 }
 
 """A proposal revision."""
@@ -12098,6 +12136,16 @@ interface ProposalStep {
 
   """Whether or not sms vote are enabled."""
   isProposalSmsVoteEnabled: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int!
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime!
 }
 
 type ProposalStepPaperVoteCounter {
@@ -12310,6 +12358,9 @@ enum ProposalsState {
 
   """Show only drafted proposals"""
   DRAFT
+
+  """Show only archived proposals"""
+  ARCHIVED
 }
 
 """Entities that can be published."""
@@ -14983,6 +15034,16 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """Whether or not sms vote are enabled."""
   isProposalSmsVoteEnabled: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int!
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime!
   position: Int!
 
   """

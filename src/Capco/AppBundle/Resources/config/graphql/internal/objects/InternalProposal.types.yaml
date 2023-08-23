@@ -285,3 +285,10 @@ InternalProposal:
             bodyUsingJoditWysiwyg:
                 description: 'Is the body using Jodit Wysiwyg.'
                 type: 'Boolean!'
+            isArchived:
+                description: 'Wether or not the proposal is archived.'
+                type: 'Boolean!'
+            archiveLimitDate:
+                description: 'The limit date before automatically archiving the proposal'
+                type: 'DateTime'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalArchiveLimitDateResolver", [value])'

@@ -60,6 +60,9 @@ const ProjectAdminProposalsPlaceholder = ({ hasError, fetchData, selectedTab }: 
           <Tab selected={selectedTab === 'TRASHED'}>
             {intl.formatMessage({ id: 'fast.filter.skeleton.trash' })}
           </Tab>
+          <Tab selected={selectedTab === 'ARCHIVED'}>
+            {intl.formatMessage({ id: 'fast.filter.skeleton.archived' })}
+          </Tab>
         </div>
         <div>
           <Skeleton.Text bg="white" width="100px" height="30px" mr={4} />
