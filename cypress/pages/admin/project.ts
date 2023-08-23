@@ -11,6 +11,21 @@ export default new (class AdminProjectPage {
     return this.cy.visit(this.path(projectName))
   }
 
+  visitContributionsPage({ projectSlug, state, stepId }: { projectSlug: string; state: string; stepId: string }) {
+    const url = `admin/alpha/project/${projectSlug}/contributions/proposals?state=${state}&step=${stepId}`
+    this.cy.visit(url)
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminParticipantTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+    this.cy.wait('@ProjectAdminParticipantTabQuery')
+    this.cy.wait('@ProjectAdminProposalsPageQuery')
+    this.cy.wait('@ProjectAdminContributionsPageQuery')
+    this.cy.wait('@ProjectAdminAnalysisTabQuery')
+    this.cy.wait('@ProjectAdminProposalsPageQuery')
+  }
+
   openAddModal() {
     this.addButton.click()
   }

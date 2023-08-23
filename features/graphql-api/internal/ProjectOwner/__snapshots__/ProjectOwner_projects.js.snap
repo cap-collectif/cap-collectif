@@ -7,6 +7,18 @@ Object {
       "edges": Array [
         Object {
           "node": Object {
+            "authors": Array [
+              Object {
+                "username": "lbrunet",
+              },
+            ],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
             "authors": Array [],
             "owner": null,
           },
@@ -465,7 +477,7 @@ Object {
           },
         },
       ],
-      "totalCount": 47,
+      "totalCount": 48,
     },
   },
 }
@@ -852,8 +864,14 @@ Object {
             "title": "Rapport d'évaluation 6 (AR6)",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2023-07-01 12:00:00",
+            "title": "BP avec archivage des propositions",
+          },
+        },
       ],
-      "totalCount": 47,
+      "totalCount": 48,
     },
   },
 }

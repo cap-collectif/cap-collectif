@@ -54,6 +54,8 @@ Object {
           "isSecretBallot": false,
           "mainView": "GRID",
           "private": false,
+          "proposalArchivedTime": 0,
+          "proposalArchivedUnitTime": "MONTHS",
           "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
@@ -104,6 +106,8 @@ Object {
           "id": Any<String>,
           "isSecretBallot": true,
           "mainView": "LIST",
+          "proposalArchivedTime": 0,
+          "proposalArchivedUnitTime": "MONTHS",
           "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
@@ -188,6 +192,8 @@ Object {
           "isSecretBallot": false,
           "mainView": "GRID",
           "private": false,
+          "proposalArchivedTime": 0,
+          "proposalArchivedUnitTime": "MONTHS",
           "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [
@@ -222,6 +228,8 @@ Object {
           "id": Any<String>,
           "isSecretBallot": true,
           "mainView": "LIST",
+          "proposalArchivedTime": 0,
+          "proposalArchivedUnitTime": "MONTHS",
           "publishedVoteDate": "2030-01-01 00:00:00",
           "requirements": Object {
             "edges": Array [],
@@ -306,6 +314,8 @@ Object {
           "isSecretBallot": false,
           "mainView": "GRID",
           "private": false,
+          "proposalArchivedTime": 0,
+          "proposalArchivedUnitTime": "MONTHS",
           "publishedVoteDate": null,
           "requirements": Object {
             "edges": Array [],
@@ -889,6 +899,81 @@ Object {
         "edges": Array [],
       },
       "steps": Array [],
+      "themes": Array [
+        Object {
+          "id": "theme3",
+          "title": "Transport",
+        },
+      ],
+      "title": "Je suis un projet simple",
+      "type": null,
+      "video": "https://www.youtube.com/watch?v=pjJ2w1FX_Wg",
+      "visibility": "PUBLIC",
+    },
+  },
+}
+`;
+
+exports[`project access control should update a collectStep with proposalArchivedTime and proposalArchivedUnitTime  1`] = `
+Object {
+  "updateAlphaProject": Object {
+    "project": Object {
+      "authors": Array [
+        Object {
+          "id": "VXNlcjp1c2VyMQ==",
+          "username": "lbrunet",
+        },
+        Object {
+          "id": "VXNlcjp1c2VyQWRtaW4=",
+          "username": "admin",
+        },
+      ],
+      "cover": Object {
+        "id": "media1",
+        "name": "Titre du média 1",
+      },
+      "districts": Object {
+        "edges": Array [],
+      },
+      "id": Any<String>,
+      "isExternal": false,
+      "opinionCanBeFollowed": true,
+      "owner": Object {
+        "id": "VXNlcjp1c2VyMQ==",
+        "url": "https://capco.test/profile/lbrunet",
+        "username": "lbrunet",
+      },
+      "publishedAt": "2019-03-01 12:00:00",
+      "restrictedViewers": Object {
+        "edges": Array [],
+      },
+      "steps": Array [
+        Object {
+          "__typename": "CollectStep",
+          "body": "Le beau body de l'étape CollectStep",
+          "defaultSort": "random",
+          "enabled": true,
+          "form": Object {
+            "title": "Formulaire attaché à aucun projet",
+          },
+          "id": Any<String>,
+          "isSecretBallot": false,
+          "mainView": "GRID",
+          "private": false,
+          "proposalArchivedTime": 2,
+          "proposalArchivedUnitTime": "DAYS",
+          "publishedVoteDate": null,
+          "requirements": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "statuses": Array [],
+          "timeless": false,
+          "title": "Le beau titre de l'étape CollectStep",
+          "votesLimit": null,
+          "votesMin": null,
+        },
+      ],
       "themes": Array [
         Object {
           "id": "theme3",

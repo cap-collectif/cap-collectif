@@ -493,3 +493,13 @@ Capco\AppBundle\Entity\Project:
         visibility: 2
         owner: '@organization2'
         creator: '@valerieMassonDelmotte'
+    projectProposalArchiving:
+        id: 'projectProposalArchiving'
+        title: BP avec archivage des propositions
+        projectType: '@projectType4'
+        createdAt: <identity((new \DateTime('2023-07-01 12:00:00')))>
+        updatedAt: $createdAt
+        publishedAt: $createdAt
+        visibility: 2
+        owner: '@user1'
+        creator: '@user1'

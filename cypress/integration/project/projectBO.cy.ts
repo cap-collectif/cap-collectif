@@ -33,4 +33,19 @@ describe('Project', () => {
       cy.checkAccessDenied('/admin/alpha/project/projectWithAnonymousQuestionnaire/edit')
     })
   })
+  describe('Contributions page', function () {
+    beforeEach(() => {
+      cy.directLoginAs('admin')
+    })
+    it('should display archived proposals', function () {
+      AdminProjectPage.visitContributionsPage({
+        projectSlug: 'projectProposalArchiving',
+        state: 'ARCHIVED',
+        stepId: 'Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw',
+      })
+      cy.contains('filter.count.status.archived {"num":1}')
+      cy.contains('1 global.proposals')
+      cy.contains('Proposition archivé')
+    })
+  })
 })

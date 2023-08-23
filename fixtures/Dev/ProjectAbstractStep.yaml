@@ -489,3 +489,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectstepOrga2'
         project: '@projectOrgaVisibilityAdminAndMe'
         position: 1
+    pasCollectStepProposalArchiving:
+        id: pasCollectStepProposalArchiving
+        step: '@collectStepProposalArchiving'
+        project: '@projectProposalArchiving'
+        position: 1

@@ -36,13 +36,7 @@ class ArchiveProposalsCommand extends Command
         $this->proposalArchiveLimitDateResolver = $proposalArchiveLimitDateResolver;
     }
 
-    protected function configure()
-    {
-        $this->setName('capco:archiving-proposals');
-        $this->setDescription('Archiving proposals that did not reach enough votes after a configured limit date.');
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $collectSteps = $this->collectStepRepository->findProposalArchivableSteps();
         $selectionSteps = $this->selectionStepRepository->findProposalArchivableSteps();
@@ -70,6 +64,12 @@ class ArchiveProposalsCommand extends Command
         }
 
         return 0;
+    }
+
+    protected function configure()
+    {
+        $this->setName('capco:archiving-proposals');
+        $this->setDescription('Archiving proposals that did not reach enough votes after a configured limit date.');
     }
 
     private function getProposalArchivedDateLimit(Proposal $proposal): \DateTime

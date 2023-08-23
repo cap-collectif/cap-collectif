@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalPublicationStatus should update the status to ARCHIVED 1`] = `
+Object {
+  "changeProposalPublicationStatus": Object {
+    "proposal": Object {
+      "publicationStatus": "ARCHIVED",
+    },
+  },
+}
+`;

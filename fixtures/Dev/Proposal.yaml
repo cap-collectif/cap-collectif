@@ -1194,3 +1194,27 @@ Capco\AppBundle\Entity\Proposal:
         updatedAt: $createdAt
         theme: '@theme<numberBetween(1,4)>'
         category: '@pCategoryBp3Idf<numberBetween(1,5)>'
+    proposalArchivingStepArchived:
+        id: proposalArchivingStepArchived
+        title: Proposition archivé
+        body: 'Proposition archivé'
+        author: '@user1'
+        proposalForm: '@proposalFormArchiving'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        isArchived: true
+    proposalArchivingStepNotArchived:
+        id: proposalArchivingStepNotArchived
+        title: Proposition non archivé
+        body: 'Proposition non archivé'
+        author: '@user1'
+        proposalForm: '@proposalFormArchiving'
+        createdAt: <(new \DateTime('2023-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        isArchived: false

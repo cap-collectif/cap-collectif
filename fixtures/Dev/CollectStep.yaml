@@ -267,3 +267,15 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         endAt: null
         private: true
         voteType: 2
+    collectStepProposalArchiving:
+        id: collectStepProposalArchiving
+        title: Collecte des propositions avec archivage
+        label: Dépôt
+        body: Collecte des propositions avec archivage
+        timeless: true
+        startAt: <identity((new \DateTime('2023-07-25 12:00:00')))>
+        endAt: null
+        voteType: 2
+        voteThreshold: 2
+        proposalArchivedTime: 10
+        proposalArchivedUnitTime: DAYS

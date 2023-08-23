@@ -495,3 +495,11 @@ Capco\AppBundle\Entity\ProposalForm:
         creator: '@valerieMassonDelmotte'
         reference: 30
         usingAddress: true
+    proposalFormArchiving:
+        id: proposalFormArchiving
+        title: Formulaire qui contient des propositions archivées
+        description: Formulaire qui contient des propositions archivées
+        step: '@collectStepProposalArchiving'
+        owner: '@user1'
+        creator: '@user1'
+        reference: 31

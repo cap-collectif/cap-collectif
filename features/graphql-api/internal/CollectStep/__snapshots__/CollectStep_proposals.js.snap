@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|CollectStep.proposals connection fetches archived and non archived proposals of a collect step 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "isArchived": true,
+            "published": true,
+            "title": "Proposition archivé",
+          },
+        },
+        Object {
+          "node": Object {
+            "isArchived": false,
+            "published": true,
+            "title": "Proposition non archivé",
+          },
+        },
+      ],
+    },
+    "title": "Collecte des propositions avec archivage",
+  },
+}
+`;
+
+exports[`Internal|CollectStep.proposals connection fetches archived proposals of a collect step 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "isArchived": true,
+            "published": true,
+            "title": "Proposition archivé",
+          },
+        },
+      ],
+    },
+    "title": "Collecte des propositions avec archivage",
+  },
+}
+`;
+
+exports[`Internal|CollectStep.proposals connection fetches non archived proposals of a collect step 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBQcm9wb3NhbEFyY2hpdmluZw==",
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "isArchived": false,
+            "published": true,
+            "title": "Proposition non archivé",
+          },
+        },
+      ],
+    },
+    "title": "Collecte des propositions avec archivage",
+  },
+}
+`;

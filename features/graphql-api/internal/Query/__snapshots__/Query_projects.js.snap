@@ -9,12 +9,21 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
+          "title": "BP avec archivage des propositions",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
           "title": "Débats ouvert sans vote",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -23,7 +32,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -32,7 +41,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -41,7 +50,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -50,7 +59,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -59,7 +68,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": true,
@@ -68,7 +77,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -77,7 +86,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -86,7 +95,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -95,7 +104,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -104,7 +113,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -113,7 +122,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -122,7 +131,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -131,7 +140,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -139,17 +148,8 @@ Object {
           "title": "Débats sur la vie",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0RXhwb3J0",
-          "title": "Projet pour consolider les exports",
-        },
-      },
     ],
-    "totalCount": 46,
+    "totalCount": 47,
   },
 }
 `;
@@ -246,12 +246,21 @@ Object {
         "node": Object {
           "__typename": "Project",
           "archived": false,
+          "id": "UHJvamVjdDpwcm9qZWN0UHJvcG9zYWxBcmNoaXZpbmc=",
+          "title": "BP avec archivage des propositions",
+        },
+      },
+      Object {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": Object {
+          "__typename": "Project",
+          "archived": false,
           "id": "UHJvamVjdDpwcm9qZWN0RGViYXRlT3BlbldpdGhvdXRWb3Rl",
           "title": "Débats ouvert sans vote",
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -260,7 +269,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -269,7 +278,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -278,7 +287,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -287,7 +296,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjU=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -296,7 +305,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjY=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -305,7 +314,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjc=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -314,7 +323,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjg=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -323,7 +332,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjk=",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -332,7 +341,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEw",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -341,7 +350,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEx",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -350,7 +359,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEy",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -359,7 +368,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjEz",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -368,7 +377,7 @@ Object {
         },
       },
       Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE0",
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
         "node": Object {
           "__typename": "Project",
           "archived": false,
@@ -376,17 +385,8 @@ Object {
           "title": "Projet pour consolider les exports",
         },
       },
-      Object {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE1",
-        "node": Object {
-          "__typename": "Project",
-          "archived": false,
-          "id": "UHJvamVjdDpwcm9qZWN0Q29yb25h",
-          "title": "Solidarité Covid-19",
-        },
-      },
     ],
-    "totalCount": 45,
+    "totalCount": 46,
   },
 }
 `;

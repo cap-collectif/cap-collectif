@@ -40,4 +40,12 @@ export default new (class ProposalStepPage {
       stepType: 'collect',
     })
   }
+
+  getFilterStateButton() {
+    return cy.get('#proposal-filter-state-button')
+  }
+
+  getProposalsCards() {
+    return cy.get('.media-list.proposal-preview-list.opinion__list').find('li')
+  }
 })()

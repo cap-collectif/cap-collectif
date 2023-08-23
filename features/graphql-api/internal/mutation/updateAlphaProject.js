@@ -105,6 +105,8 @@ const PROJECT_FRAGMENT = /* GraphQL */ `
         isSecretBallot
         publishedVoteDate
         defaultSort
+        proposalArchivedTime
+        proposalArchivedUnitTime
       }
       ... on QuestionnaireStep {
         questionnaire {
@@ -1205,5 +1207,34 @@ describe('project access control', () => {
     );
 
     expect(response.updateAlphaProject.project.owner.username).toBe('Théo QP');
+  });
+
+  it('should update a collectStep with proposalArchivedTime and proposalArchivedUnitTime ', async () => {
+    await expect(
+      graphql(
+        UpdateAlphaProjectMutation,
+        {
+          input: {
+            ...BASE_PROJECT,
+            steps: [
+              {...BASE_COLLECT_STEP, proposalArchivedTime: 2, proposalArchivedUnitTime: 'DAYS'}
+            ],
+            projectId: toGlobalId('Project', 'projectProposalArchiving'),
+          },
+        },
+        'internal_admin',
+      )
+    ).resolves.toMatchSnapshot({
+      updateAlphaProject: {
+        project: {
+          id: expect.any(String),
+          steps: [
+            {
+              id: expect.any(String),
+            },
+          ],
+        },
+      },
+    });
   });
 });

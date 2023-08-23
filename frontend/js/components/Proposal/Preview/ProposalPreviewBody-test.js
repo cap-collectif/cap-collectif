@@ -7,7 +7,7 @@ import { $refType, $fragmentRefs } from '../../../mocks';
 import { features } from '../../../redux/modules/default';
 
 describe('<ProposalPreviewBody />', () => {
-  const props = {
+  const defaultProps = {
     proposal: {
       isArchived: false,
       id: 'proposal1',
@@ -60,6 +60,18 @@ describe('<ProposalPreviewBody />', () => {
   };
 
   it('should render a proposal preview', () => {
+    const wrapper = shallow(<ProposalPreviewBody {...defaultProps} />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should hide vote button if proposal is archived', () => {
+    const props = {
+      ...defaultProps,
+      proposal: {
+        ...defaultProps.proposal,
+        isArchived: true
+      }
+    }
     const wrapper = shallow(<ProposalPreviewBody {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
