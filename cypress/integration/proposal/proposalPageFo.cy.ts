@@ -49,10 +49,22 @@ describe('Proposal Page', () => {
       cy.get('#proposal-page-tabs-tab-followers').click()
       cy.get('#proposal-page-tabs-pane-followers').contains('Théo QP')
     })
-  })
-  it('should be possible ton see private proposal of the same organization', () => {
-    cy.directLoginAs('christophe');
-    ProposalPage.visitPrivateProposalPage()
-    cy.get('#ProposalPageMainContent').should('be.visible')
+    it('should be possible ton see private proposal of the same organization', () => {
+      cy.directLoginAs('christophe');
+      ProposalPage.visitPrivateProposalPage()
+      cy.get('#ProposalPageMainContent').should('be.visible')
+    })
+    it('is possible to contact the author of a proposal', () => {
+      cy.interceptGraphQLOperation({operationName: 'ContactProposalAuthorMutation'})
+      ProposalPage.visitContactableProposalPage()
+      cy.get('#ProposalContactModal-show-button').click()
+      cy.get('#ProposalContactModalForm', { timeout: 10000 })
+      cy.get('#ProposalFormContactModal-senderName').type('John Doe')
+      cy.get('#ProposalFormContactModal-replyEmail').type('john.doe@email.test')
+      cy.get('#ProposalFormContactModal-message').type('Hello, I am John Doe')
+      cy.get('#ProposalFormContactModal-submit').click()
+      cy.wait('@ContactProposalAuthorMutation')
+      cy.contains('message-sent-with-success').should('exist')
+    })
   })
 })

@@ -340,6 +340,11 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
      */
     private bool $isArchived = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalStatistics", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private ?ProposalStatistics $statistics = null;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1550,6 +1555,8 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
             'ElasticsearchProposalNestedProject',
             'ElasticsearchProposalNestedTheme',
             'ElasticsearchProposalNestedDistrict',
+            'ElasticsearchProposalNestedProposalStatistics',
+            'ElasticsearchProposalStatistics',
             'ElasticsearchProposal',
         ];
     }
@@ -1598,6 +1605,23 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         // set the owning side of the relation if necessary
         if ($officialResponse->getProposal() !== $this) {
             $officialResponse->setProposal($this);
+        }
+
+        return $this;
+    }
+
+    public function getStatistics(): ?ProposalStatistics
+    {
+        return $this->statistics;
+    }
+
+    public function setStatistics(ProposalStatistics $statistics): self
+    {
+        $this->statistics = $statistics;
+
+        // set the owning side of the relation if necessary
+        if ($statistics->getProposal() !== $this) {
+            $statistics->setProposal($this);
         }
 
         return $this;

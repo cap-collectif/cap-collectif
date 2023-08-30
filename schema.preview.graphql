@@ -1156,6 +1156,11 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of points it have."""
   POINTS
+
+  """
+  Allows ordering a list of proposals by the number of messages it have received.
+  """
+  NUMBER_OF_MESSAGES_RECEIVED
 }
 
 """The selection of a proposal in a step."""

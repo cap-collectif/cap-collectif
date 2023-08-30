@@ -176,3 +176,7 @@ ProposalForm:
             socialNetworksUsed:
                 type: 'String!'
                 description: 'The social networks used as string.'
+            nbrOfMessagesSent:
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormMessagesSentResolver", [value])'
+                description: 'The number of email messages sent on this form proposals.'

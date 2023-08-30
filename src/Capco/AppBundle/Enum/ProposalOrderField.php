@@ -14,4 +14,5 @@ final class ProposalOrderField
     public const REVISION_AT = 'REVISION_AT';
     public const CATEGORY = 'CATEGORY';
     public const DISTRICT = 'DISTRICT';
+    public const NUMBER_OF_MESSAGES_RECEIVED = 'NUMBER_OF_MESSAGES_RECEIVED';
 }

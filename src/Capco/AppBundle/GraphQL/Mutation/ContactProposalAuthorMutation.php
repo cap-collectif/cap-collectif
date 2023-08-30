@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalStatistics;
 use Capco\AppBundle\Enum\ContactProposalAuthorErrorCode;
+use Capco\AppBundle\Mailer\MailerException;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -47,12 +49,16 @@ class ContactProposalAuthorMutation implements MutationInterface
         );
 
         if (null === $errorLog) {
-            $this->sendContactMail(
-                $proposal,
-                $argument->offsetGet('senderName'),
-                $argument->offsetGet('replyEmail'),
-                $argument->offsetGet('message')
-            );
+            try {
+                $this->sendContactMail(
+                    $proposal,
+                    $argument->offsetGet('senderName'),
+                    $argument->offsetGet('replyEmail'),
+                    $argument->offsetGet('message')
+                );
+            } catch (\Throwable $th) {
+                $errorLog = ContactProposalAuthorErrorCode::SENDING_FAILED;
+            }
         }
 
         return ['error' => $errorLog];
@@ -84,7 +90,7 @@ class ContactProposalAuthorMutation implements MutationInterface
         string $senderEmail,
         string $message
     ): void {
-        $this->mailerService->createAndSendMessage(
+        $sent = $this->mailerService->createAndSendMessage(
             ContactProposalAuthorMessage::class,
             $proposal,
             [
@@ -97,6 +103,18 @@ class ContactProposalAuthorMutation implements MutationInterface
             ],
             $proposal->getAuthor()
         );
+
+        if (!$sent) {
+            throw new MailerException('Le message n\'a pas pu être envoyé.');
+        }
+
+        if (!$proposal->getStatistics()) {
+            $proposal->setStatistics(new ProposalStatistics(1));
+        } else {
+            $proposal->getStatistics()->incrementNbrOfMessagesSentToAuthor();
+        }
+
+        $this->proposalRepository->save($proposal);
     }
 
     private function getProposal(Argument $argument): ?Proposal

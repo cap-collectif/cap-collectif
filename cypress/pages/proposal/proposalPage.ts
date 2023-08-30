@@ -60,4 +60,13 @@ export default new (class ProposalPage {
       proposal: 'proposition-de-valerie',
     })
   }
+
+  visitContactableProposalPage() {
+    return this.visitWithoutVotes({
+      project: 'solidarite-covid-19',
+      step: 'collecte-de-projets',
+      stepType: 'collect',
+      proposal: 'proposal-assigned-120',
+    })
+  }
 })()

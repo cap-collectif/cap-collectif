@@ -40,6 +40,8 @@ type Props = {
   hasRegroupTag?: boolean,
   isAdminView?: boolean,
   proposalSelected?: ?string,
+  canContactAuthor?: boolean,
+  nbrOfMessagesSentToAuthor?: number,
   setProposalModalDelete?: (proposal: AnalysisProposal_proposal) => void,
   setProposalSelected?: (proposalId: ?string) => void,
 };
@@ -59,6 +61,8 @@ const AnalysisProposal = ({
   proposalSelected,
   setProposalModalDelete,
   setProposalSelected,
+  canContactAuthor,
+  nbrOfMessagesSentToAuthor,
 }: Props) => {
   const isSelected = proposalSelected === proposal.id;
   const hasActionDisplay = isSelected && isAdminView;
@@ -237,6 +241,15 @@ const AnalysisProposal = ({
               </TagContainer>
             </Tooltip>
           )}
+          {canContactAuthor === true && (
+            <TagContainer title="proposal_stats_messages_received">
+              <Icon color={colors.darkGray} size="14" name={ICON_NAME.message} />
+              {intl.formatMessage(
+                { id: 'proposal.stats.messages.received' },
+                { num: nbrOfMessagesSentToAuthor },
+              )}
+            </TagContainer>
+          )}
         </AnalysisProposalListRowMeta>
 
         {hasActionDisplay && setProposalModalDelete && (
@@ -322,6 +335,8 @@ export default createFragmentContainer(AnalysisProposal, {
       }
       paperVotesTotalCount(stepId: $step)
       paperVotesTotalPointsCount(stepId: $step)
+      canContactAuthor
+      nbrOfMessagesSentToAuthor
       ...ModalDeleteProposal_proposal
     }
   `,

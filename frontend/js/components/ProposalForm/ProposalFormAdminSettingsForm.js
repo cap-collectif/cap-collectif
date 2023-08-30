@@ -10,6 +10,7 @@ import AlertForm from '../Alert/AlertForm';
 import ChangeProposalFormParametersMutation from '../../mutations/ChangeProposalFormParametersMutation';
 import type { ProposalFormAdminSettingsForm_proposalForm } from '~relay/ProposalFormAdminSettingsForm_proposalForm.graphql';
 import type { State, Dispatch } from '../../types';
+import TagCount from '~/components/Tag/TagCount/TagCount';
 
 type RelayProps = {|
   isSuperAdmin: boolean,
@@ -50,6 +51,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
+      proposalForm,
     } = this.props;
 
     return (
@@ -105,6 +107,16 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               id="proposal_form_costable">
               <FormattedMessage id="proposal_form.costable" />
             </Field>
+            {(isAdmin || isSuperAdmin || isOrganizationMember) && (
+              <Field
+                name="canContact"
+                component={component}
+                type="checkbox"
+                id="proposal_form_canContact_field">
+                <FormattedMessage id="allow-author-contact" />
+                <TagCount count={proposalForm.nbrOfMessagesSent} />
+              </Field>
+            )}
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -136,7 +148,6 @@ const form = reduxForm({
   enableReinitialize: true,
   form: formName,
 })(ProposalFormAdminSettingsForm);
-
 const mapStateToProps = (state: State, props: RelayProps) => {
   const { proposalForm } = props;
   return {
@@ -148,6 +159,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
       commentable: proposalForm.commentable,
       costable: proposalForm.costable,
       suggestingSimilarProposals: proposalForm.suggestingSimilarProposals,
+      canContact: proposalForm.canContact,
     },
   };
 };
@@ -163,6 +175,8 @@ export default createFragmentContainer(containerIntl, {
       commentable
       costable
       suggestingSimilarProposals
+      canContact
+      nbrOfMessagesSent
     }
   `,
 });

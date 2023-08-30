@@ -107,3 +107,6 @@ Capco\AppBundle\Entity\Proposal:
         isArchived:
             serialized_name: archived
             groups: [ElasticsearchProposal]
+        getStatistics:
+            serialized_name: statistics
+            groups: [Proposals, ElasticsearchProposalNestedProposalStatistics]

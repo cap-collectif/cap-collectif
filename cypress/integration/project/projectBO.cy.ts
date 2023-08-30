@@ -48,4 +48,41 @@ describe('Project', () => {
       cy.contains('Proposition archivé')
     })
   })
+  describe('Messages sent to author', () => {
+    beforeEach(() => {
+      cy.task('db:restore')
+      cy.directLoginAs('admin')
+    })
+    it('should display a number of messages sent to author if the proposal form allows it and it should be sortable', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+      AdminProjectPage.visitProposalsTab('projectCorona')
+      cy.wait('@ProjectAdminProposalsPageQuery')
+      AdminProjectPage.selectCollectStep('Collecte de projets')
+      cy.wait('@ProjectAdminProposalsPageQuery')
+      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('exist')
+      // Sort by most messages received
+      AdminProjectPage.sortSelect.click()
+      cy.wait('@ProjectAdminProposalsPageQuery')
+      AdminProjectPage.mostMessageReceivedFilter.should('exist').click()
+      cy.wait('@ProjectAdminProposalsPageQuery')
+      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received {"num":1}')
+
+      // Sort by least messages received
+      AdminProjectPage.sortSelect.click()
+      AdminProjectPage.leastMessageReceivedFilter.should('exist').click()
+      AdminProjectPage.firstNumberOfMessagesSentToAuthor.should('contain', 'proposal.stats.messages.received {"num":0}')
+    })
+    it('should not display nor messages number nor sorting if the proposal form does not allow it', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+      AdminProjectPage.visitProposalsTab('projectIdf')
+      cy.wait('@ProjectAdminProposalsPageQuery').then(() => {
+        AdminProjectPage.selectCollectStep('Collecte des projets Idf (privée)')
+      })
+      cy.get('span[title="proposal_stats_messages_received"]').should('not.exist')
+      AdminProjectPage.sortSelect.click({force: true})
+      cy.wait('@ProjectAdminProposalsPageQuery')
+      AdminProjectPage.mostMessageReceivedFilter.should('not.exist')
+      AdminProjectPage.leastMessageReceivedFilter.should('not.exist')
+    })
+  })
 })

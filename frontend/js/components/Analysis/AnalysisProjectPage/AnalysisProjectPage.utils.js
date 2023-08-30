@@ -37,6 +37,7 @@ type ProjectWithAllSteps = {
         +id: string,
         +name: string,
       |}>,
+      +canContact?: boolean,
     |},
     +proposals?: {|
       +totalCount: number,

@@ -11,6 +11,8 @@ export type ProposalType = {|
   +title: string,
   +paperVotesTotalCount: number,
   +paperVotesTotalPointsCount: number,
+  +canContactAuthor: boolean,
+  +nbrOfMessagesSentToAuthor: number,
 |};
 
 const getCsvHeaders = (isVoteRanking: boolean): Array<string> => {

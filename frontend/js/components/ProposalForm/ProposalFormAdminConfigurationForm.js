@@ -736,16 +736,6 @@ export const ProposalFormAdminConfigurationForm = ({
             </Panel.Collapse>
           </Panel>
         )}
-
-        {query.viewer.isSuperAdmin && (
-          <Field
-            id="proposal_form_canContact_field"
-            name="canContact"
-            component={toggle}
-            normalize={val => !!val}
-            label={<FormattedMessage id="allow-author-contact" />}
-          />
-        )}
       </div>
 
       <Flex

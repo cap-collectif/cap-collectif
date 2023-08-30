@@ -292,3 +292,11 @@ InternalProposal:
                 description: 'The limit date before automatically archiving the proposal'
                 type: 'DateTime'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalArchiveLimitDateResolver", [value])'
+            canContactAuthor:
+                description: 'Can contact the proposal author.'
+                type: 'Boolean!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCanContactAuthorResolver", [value])'
+            nbrOfMessagesSentToAuthor:
+                description: 'Number of messages sent to the proposal author.'
+                type: 'Int!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNumberOfMessagesSentToAuthorResolver", [value])'

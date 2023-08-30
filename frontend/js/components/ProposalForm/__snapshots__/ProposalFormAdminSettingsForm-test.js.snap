@@ -82,6 +82,20 @@ exports[`<ProposalFormAdminSettingsForm /> organizationMember can toggle comment
           values={Object {}}
         />
       </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_canContact_field"
+        name="canContact"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="allow-author-contact"
+          values={Object {}}
+        />
+        <TagCount
+          count={1}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
@@ -216,6 +230,20 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         <FormattedMessage
           id="proposal_form.costable"
           values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_canContact_field"
+        name="canContact"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="allow-author-contact"
+          values={Object {}}
+        />
+        <TagCount
+          count={1}
         />
       </Field>
       <ButtonToolbar

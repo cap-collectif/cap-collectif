@@ -1,3 +1,5 @@
+import { ProposalFormPage } from '~e2e-pages/index'
+
 describe('Organization Proposalform', () => {
   beforeEach(() => {
     cy.task('db:restore')
@@ -38,6 +40,18 @@ describe('Organization Proposalform', () => {
       cy.wait('@ProposalFormListQuery')
       cy.contains('my new proposalform')
       cy.getByDataCy('proposalform-item').should('have.length', 3)
+    })
+    it('is possible to activate contact_author', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ChangeProposalFormParametersMutation' })
+      ProposalFormPage.visit('proposalFormOrgaAdmin')
+      ProposalFormPage.settingsTab.click()
+      cy.wait(200);
+      ProposalFormPage.contactAuthorCheckbox.should('have.value', 'false')
+      ProposalFormPage.contactAuthorCheckbox.parent().click()
+      ProposalFormPage.contactAuthorCheckbox.should('have.value', 'true')
+      ProposalFormPage.saveParametersForm()
+      cy.wait('@ChangeProposalFormParametersMutation')
+      cy.contains('global.saved')
     })
   })
 })

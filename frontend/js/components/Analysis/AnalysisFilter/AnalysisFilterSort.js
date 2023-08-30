@@ -13,6 +13,8 @@ export const ORDER_BY: {
   LEAST_POINT: 'least-points',
   MOST_RECENT_REVISIONS: 'most-recent-revisions',
   LEAST_RECENT_REVISIONS: 'least-recent-revisions',
+  MOST_MESSAGES_RECEIVED: 'most-messages-received',
+  LEAST_MESSAGES_RECEIVED: 'least-messages-received',
 } = {
   OLDEST: 'oldest',
   NEWEST: 'newest',
@@ -22,6 +24,8 @@ export const ORDER_BY: {
   LEAST_POINT: 'least-points',
   MOST_RECENT_REVISIONS: 'most-recent-revisions',
   LEAST_RECENT_REVISIONS: 'least-recent-revisions',
+  MOST_MESSAGES_RECEIVED: 'most-messages-received',
+  LEAST_MESSAGES_RECEIVED: 'least-messages-received',
 };
 
 type Props = {|
@@ -31,6 +35,7 @@ type Props = {|
   hasRevisions?: boolean,
   isVotable?: boolean,
   isVoteRanking?: boolean,
+  canContactAuthor?: boolean,
 |};
 
 const AnalysisFilterSort = ({
@@ -40,11 +45,12 @@ const AnalysisFilterSort = ({
   hasRevisions = false,
   isVotable = false,
   isVoteRanking = false,
+  canContactAuthor = false,
 }: Props) => {
   const intl = useIntl();
 
   return (
-    <Collapsable align="right">
+    <Collapsable align="right" id="argument_sort_label">
       <Collapsable.Button>
         <FormattedMessage id="argument.sort.label" />
       </Collapsable.Button>
@@ -103,6 +109,20 @@ const AnalysisFilterSort = ({
               <DropdownSelect.Choice value={ORDER_BY.LEAST_POINT}>
                 {intl.formatMessage({
                   id: 'least-points',
+                })}
+              </DropdownSelect.Choice>
+            </>
+          )}
+          {canContactAuthor && (
+            <>
+              <DropdownSelect.Choice value={ORDER_BY.MOST_MESSAGES_RECEIVED}>
+                {intl.formatMessage({
+                  id: 'filter.messages_received.most',
+                })}
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice value={ORDER_BY.LEAST_MESSAGES_RECEIVED}>
+                {intl.formatMessage({
+                  id: 'filter.messages_received.least',
                 })}
               </DropdownSelect.Choice>
             </>

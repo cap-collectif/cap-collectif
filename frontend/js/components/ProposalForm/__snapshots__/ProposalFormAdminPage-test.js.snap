@@ -1633,6 +1633,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "nbrOfMessagesSent",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "AnalysisConfiguration",
                       "kind": "LinkedField",
                       "name": "analysisConfiguration",
@@ -2004,7 +2011,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "807753b5ae2ae243d26cb3924974fb44",
+          "cacheID": "4a97b3f6657bd4ab8024759f7ae25bdb",
           "id": null,
           "metadata": Object {},
           "name": "ProposalFormAdminPageQuery",
@@ -2355,6 +2362,8 @@ fragment ProposalFormAdminSettingsForm_proposalForm on ProposalForm {
   commentable
   costable
   suggestingSimilarProposals
+  canContact
+  nbrOfMessagesSent
 }
 
 fragment SectionDisplayMode_proposalForm on ProposalForm {

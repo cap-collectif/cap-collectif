@@ -1,0 +1,4 @@
+Capco\AppBundle\Entity\ProposalStatistics:
+    ps1:
+        proposal: '@proposal109'
+        nbrOfMessagesSentToAuthor: 1

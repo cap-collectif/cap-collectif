@@ -279,49 +279,31 @@ class ProposalSearch extends Search
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
+        $orderASC = OrderDirection::ASC === $direction;
+
         switch ($field) {
             case ProposalOrderField::VOTES:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'least-votes';
-                } else {
-                    $order = 'votes';
-                }
+                $orderASC ? $order = 'least-votes' : $order = 'votes';
 
                 break;
 
             case ProposalOrderField::POINTS:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'least-points';
-                } else {
-                    $order = 'points';
-                }
+                $orderASC ? $order = 'least-points' : $order = 'points';
 
                 break;
 
             case ProposalOrderField::REVISION_AT:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'old-revisions';
-                } else {
-                    $order = 'last-revisions';
-                }
+                $orderASC ? $order = 'old-revisions' : $order = 'last-revisions';
 
                 break;
 
             case ProposalOrderField::PUBLISHED_AT:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'old-published';
-                } else {
-                    $order = 'last-published';
-                }
+                $orderASC ? $order = 'old-published' : $order = 'last-published';
 
                 break;
 
             case ProposalOrderField::CREATED_AT:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'old';
-                } else {
-                    $order = 'last';
-                }
+                $orderASC ? $order = 'old' : $order = 'last';
 
                 break;
 
@@ -331,29 +313,22 @@ class ProposalSearch extends Search
                 break;
 
             case ProposalOrderField::COST:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'cheap';
-                } else {
-                    $order = 'expensive';
-                }
+                $orderASC ? $order = 'cheap' : $order = 'expensive';
 
                 break;
 
             case ProposalOrderField::CATEGORY:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'category-asc';
-                } else {
-                    $order = 'category-desc';
-                }
+                $orderASC ? $order = 'category-asc' : $order = 'category-desc';
 
                 break;
 
             case ProposalOrderField::DISTRICT:
-                if (OrderDirection::ASC === $direction) {
-                    $order = 'district-asc';
-                } else {
-                    $order = 'district-desc';
-                }
+                $orderASC ? $order = 'district-asc' : $order = 'district-desc';
+
+                break;
+
+            case ProposalOrderField::NUMBER_OF_MESSAGES_RECEIVED:
+                $orderASC ? $order = 'least-messages-received' : $order = 'most-messages-received';
 
                 break;
 
@@ -686,6 +661,22 @@ class ProposalSearch extends Search
             case 'district-desc':
                 return [
                     'district.name.keyword' => ['order' => 'desc', 'unmapped_type' => 'long'],
+                ];
+
+            case 'least-messages-received':
+                return [
+                    'statistics.nbrOfMessagesSentToAuthor' => [
+                        'order' => 'asc',
+                        'missing' => '_first',
+                    ],
+                ];
+
+            case 'most-messages-received':
+                return [
+                    'statistics.nbrOfMessagesSentToAuthor' => [
+                        'order' => 'desc',
+                        'missing' => '_last',
+                    ],
                 ];
 
             default:

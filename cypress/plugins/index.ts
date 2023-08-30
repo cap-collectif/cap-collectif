@@ -25,6 +25,7 @@ const rootDir = path.resolve('.')
 const appDir = path.resolve('..')
 const appConfigPath = path.resolve(appDir, '.env')
 const appLocalConfigPath = path.resolve(appDir, '.env.local')
+const appTestConfigPath = path.resolve(appDir, '.env.test')
 const defaultConfigPath = path.resolve(rootDir, 'cypress.json')
 const environmentConfigPath = path.resolve(rootDir, `cypress.${process.env.NODE_ENV ?? 'development'}.json`)
 
@@ -62,6 +63,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
   const environments = await readJsonFile<Cypress.ConfigOptions>(environmentConfigPath)
   const defaultEnvironment = await parseEnvFile(appConfigPath)
   const localEnvironment = await parseEnvFile(appLocalConfigPath)
+  const testEnvironment = await parseEnvFile(appTestConfigPath)
 
   on('task', {
     'db:restore': async () => {
@@ -148,6 +150,7 @@ const config: Cypress.PluginConfig = async (on, cypressConfig) => {
       ...cypressConfig.env,
       ...defaultEnvironment,
       ...localEnvironment,
+      ...testEnvironment,
     },
   }
 }

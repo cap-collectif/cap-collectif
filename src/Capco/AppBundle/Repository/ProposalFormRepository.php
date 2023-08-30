@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\ProposalFormAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -121,6 +122,21 @@ class ProposalFormRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function getNumberOfMessagesSent(ProposalForm $form): int
+    {
+        $result = $this->createQueryBuilder('pf')
+            ->select('SUM(ps.nbrOfMessagesSentToAuthor)')
+            ->leftJoin('pf.proposals', 'p')
+            ->leftJoin('p.statistics', 'ps')
+            ->andWhere('pf.id = :form_id')
+            ->setParameter('form_id', $form->getId())
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        return $result ?? 0;
     }
 
     private function allQueryBuilder(

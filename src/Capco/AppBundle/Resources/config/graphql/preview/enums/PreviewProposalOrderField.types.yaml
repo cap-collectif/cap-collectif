@@ -25,3 +25,6 @@ PreviewProposalOrderField:
             POINTS:
                 value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::POINTS")'
                 description: 'Allows ordering a list of proposals by the number of points it have.'
+            NUMBER_OF_MESSAGES_RECEIVED:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::NUMBER_OF_MESSAGES_RECEIVED")'
+                description: 'Allows ordering a list of proposals by the number of messages it have received.'

@@ -31,6 +31,8 @@ type Props = {|
     +title: string,
     +paperVotesTotalCount: number,
     +paperVotesTotalPointsCount: number,
+    +canContactAuthor: boolean,
+    +nbrOfMessagesSentToAuthor: number,
   |}>,
   projectTitle: string,
   projectId: string,

@@ -54,3 +54,5 @@ Capco\AppBundle\Entity\ProposalForm:
         getRealQuestions:
             serialized_name: fields
             groups: [ProposalForms]
+        canContact:
+            groups: [ProposalForms]

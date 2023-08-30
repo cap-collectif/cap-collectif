@@ -2,7 +2,7 @@
 Feature: Edit a proposal form
 
 @database @rabbitmq
-Scenario: Logged in admin wants edit a proposal form page content
+Scenario: Logged in admin wants to edit a proposal form page content
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
   And I wait "#proposal-form-admin-page" to appear on current page
@@ -69,7 +69,7 @@ Scenario: Logged in admin wants edit a proposal form page content
   And I wait ".alert__form_succeeded-message" to appear on current page
 
 @database @rabbitmq
-Scenario: Logged in admin wants edit a proposal form on notification tab
+Scenario: Logged in admin wants to edit a proposal form on notification tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
   Then I go to the admin proposal form notification tab
@@ -80,7 +80,7 @@ Scenario: Logged in admin wants edit a proposal form on notification tab
   Then I should see "global.saved"
 
 @database @rabbitmq
-Scenario: Logged in admin wants edit a proposal form on settings tab
+Scenario: Logged in admin wants to edit a proposal form on settings tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
   Then I go to the admin proposal form settings tab

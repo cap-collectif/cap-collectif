@@ -4,13 +4,13 @@ import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { connect } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { Button, FormLabel } from '@cap-collectif/ui';
+import { Button, FormLabel, toast } from '@cap-collectif/ui';
 import { FormControl, FieldInput } from '@cap-collectif/form';
 import { SubmissionError } from 'redux-form';
 import type { State } from '~/types';
-import FluxDispatcher from '~/dispatchers/AppDispatcher';
 import ContactProposalAuthorMutation from '~/mutations/ContactProposalAuthorMutation';
 import Captcha from '~/components/Form/Captcha';
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast';
 
 type Props = {|
   show: boolean,
@@ -50,26 +50,24 @@ export const ProposalContactModal = ({
   const onSubmit = (values: FormValues) => {
     if (!values) return;
     ContactProposalAuthorMutation.commit({ input: { ...values, captcha } })
-      .then(() => {
+      .then((response) => {
         onClose();
         reset();
         setCaptcha('');
 
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'message-sent-with-success',
-          },
-        });
-      })
-      .catch(error => {
-        if(error) {
+        if(response?.contactProposalAuthor?.error != null) {
           throw new SubmissionError({
-            _error: 'global.error.server.form',
+            _error: response.contactProposalAuthor.error,
           });
         }
 
+        toast({
+          variant: 'success',
+          content: intl.formatHTMLMessage({ id: 'message-sent-with-success' }),
+        });
+      })
+      .catch(() => {
+        mutationErrorToast(intl);
       });
   };
 

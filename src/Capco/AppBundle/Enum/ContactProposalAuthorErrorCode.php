@@ -8,6 +8,7 @@ class ContactProposalAuthorErrorCode implements EnumType
     public const NO_CONTACT_PROPOSAL = 'NO_CONTACT_PROPOSAL';
     public const INVALID_EMAIL_AUTHOR = 'INVALID_EMAIL_AUTHOR';
     public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    public const SENDING_FAILED = 'SENDING_FAILED';
 
     public static function isValid($value): bool
     {

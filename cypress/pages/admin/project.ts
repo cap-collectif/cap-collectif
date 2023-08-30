@@ -7,6 +7,10 @@ export default new (class AdminProjectPage {
     return `admin/alpha/project/${projectName}/edit`
   }
 
+  proposalsTabPath(projectName: string) {
+    return `admin/alpha/project/${projectName}/contributions/proposals?state=ALL`
+  }
+
   visit(projectName: string) {
     return this.cy.visit(this.path(projectName))
   }
@@ -26,8 +30,38 @@ export default new (class AdminProjectPage {
     this.cy.wait('@ProjectAdminProposalsPageQuery')
   }
 
+  visitProposalsTab(projectName: string) {
+    return this.cy.visit(this.proposalsTabPath(projectName))
+  }
+
   openAddModal() {
     this.addButton.click()
+  }
+
+  get sortSelect() {
+    return this.cy.get('#argument_sort_label')
+  }
+
+  get mostMessageReceivedFilter() {
+    return this.cy.get('span').contains('filter.messages_received.most')
+  }
+
+  get leastMessageReceivedFilter() {
+    return this.cy.get('span').contains('filter.messages_received.least')
+  }
+
+  get firstNumberOfMessagesSentToAuthor() {
+    return this.cy.get('span[title="proposal_stats_messages_received"]').first()
+  }
+
+  get stepFilterSelect() {
+    return this.cy.get('#admin_label_step')
+  }
+  
+  selectCollectStep(stepName: string) {
+    this.stepFilterSelect.click()
+    cy.wait(1000)
+    this.cy.get('span').contains(stepName).click()
   }
 
   get addButton() {

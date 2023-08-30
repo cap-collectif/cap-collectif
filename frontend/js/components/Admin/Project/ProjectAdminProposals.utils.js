@@ -46,6 +46,7 @@ export type StepFilter = {|
   +form: {
     id: Uuid,
     objectType: string,
+    canContact: boolean,
   },
   +label: string,
 |};

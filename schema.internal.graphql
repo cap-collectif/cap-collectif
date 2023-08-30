@@ -10947,6 +10947,12 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """The limit date before automatically archiving the proposal"""
   archiveLimitDate: DateTime
+
+  """Can contact the proposal author."""
+  canContactAuthor: Boolean!
+
+  """Number of messages sent to the proposal author."""
+  nbrOfMessagesSentToAuthor: Int!
 }
 
 """The affiliation of a user to a proposal"""
@@ -11482,6 +11488,9 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
   """The social networks used as string."""
   socialNetworksUsed: String!
+
+  """The number of email messages sent on this form proposals."""
+  nbrOfMessagesSent: Int!
 }
 
 """The affiliation of a user to a `ProposalForm.`"""
@@ -11666,6 +11675,11 @@ enum ProposalOrderField {
 
   """Allows ordering a list of proposals by the number of points it have."""
   POINTS
+
+  """
+  Allows ordering a list of proposals by the number of messages it have received.
+  """
+  NUMBER_OF_MESSAGES_RECEIVED
 
   """Allows ordering a list of proposals by revision date."""
   REVISION_AT

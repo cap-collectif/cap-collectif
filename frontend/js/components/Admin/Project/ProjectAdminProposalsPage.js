@@ -43,7 +43,7 @@ type VariableQuery = {|
   +count: number,
   +cursor: ?string,
   +orderBy: {|
-    +field: 'VOTES' | 'POINTS' | 'PUBLISHED_AT',
+    +field: 'VOTES' | 'POINTS' | 'PUBLISHED_AT' | 'NUMBER_OF_MESSAGES_RECEIVED',
     +direction: 'ASC' | 'DESC',
   |},
   +state: string,
@@ -58,13 +58,21 @@ type VariableQuery = {|
 const getSortField = (sortType: SortValues): ProposalOrderField => {
   switch (sortType) {
     case 'most-votes':
+      return `VOTES`;
     case 'least-votes':
       return `VOTES`;
     case 'most-points':
+      return `POINTS`;
     case 'least-points':
       return `POINTS`;
     case 'newest':
+      return `PUBLISHED_AT`;
     case 'oldest':
+      return `PUBLISHED_AT`;
+    case 'most-messages-received':
+      return `NUMBER_OF_MESSAGES_RECEIVED`;
+    case 'least-messages-received':
+      return `NUMBER_OF_MESSAGES_RECEIVED`;
     default:
       return `PUBLISHED_AT`;
   }
@@ -72,12 +80,21 @@ const getSortField = (sortType: SortValues): ProposalOrderField => {
 const getSortType = (sortType: SortValues): OrderDirection => {
   switch (sortType) {
     case 'oldest':
+      return 'ASC';
     case 'least-votes':
+      return 'ASC';
     case 'least-points':
       return 'ASC';
     case 'newest':
+      return 'DESC';
     case 'most-votes':
+      return 'DESC';
     case 'most-points':
+      return 'DESC';
+    case 'most-messages-received':
+      return 'DESC';
+    case 'least-messages-received':
+      return 'ASC';
     default:
       return 'DESC';
   }

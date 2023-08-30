@@ -35,7 +35,7 @@ class EnableCommand extends Command
             ->setDescription('Enable a given feature toggle')
             ->addArgument('toggle', InputArgument::OPTIONAL, 'A feature toggle name to activate')
             ->addOption('all')
-            ->addOption('test')
+            ->addOption('minimum')
             ->addOption('file', 'f', InputArgument::OPTIONAL, 'A file containing a list of feature toggles to activate. Located in ./FeatureList Ex: --file=uber')
         ;
     }
@@ -45,7 +45,7 @@ class EnableCommand extends Command
         $style = new SymfonyStyle($input, $output);
         $inputToggle = $input->getArgument('toggle');
         $all = $input->getOption('all');
-        $test = $input->getOption('test');
+        $minimum = $input->getOption('minimum');
         $fileName = \is_string($input->getOption('file')) ? $input->getOption('file') : null;
 
         if ($all && 'dev' === $this->kernel->getEnvironment()) {
@@ -66,7 +66,7 @@ class EnableCommand extends Command
             return $this->activateSpecificFeatures($fileName, $output, $style);
         }
 
-        if ($test) {
+        if ($minimum && 'test' === $this->kernel->getEnvironment()) {
             $this->toggleTestFeatures();
             $style->success($this->activated . ' feature toggles have been enabled for test environment.');
             $style->success($this->deactivated . ' feature toggles have been disabled for test environment.');

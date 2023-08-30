@@ -1010,6 +1010,7 @@ export default createPaginationContainer(
                 id
                 name
               }
+              canContact
             }
           }
           ... on SelectionStep {
@@ -1023,6 +1024,7 @@ export default createPaginationContainer(
                 id
                 name
               }
+              canContact
             }
           }
         }
@@ -1067,6 +1069,7 @@ export default createPaginationContainer(
                   step {
                     id
                   }
+                  canContact
                 }
                 ...AnalysisProposal_proposal
                   @arguments(isAdminView: true, proposalRevisionsEnabled: $proposalRevisionsEnabled)

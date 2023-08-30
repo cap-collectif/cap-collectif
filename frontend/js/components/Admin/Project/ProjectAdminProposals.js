@@ -445,7 +445,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
       )}
 
       {!isRestricted && (
-        <Collapsable align="right" key="step-filter">
+        <Collapsable align="right" key="step-filter" id="admin_label_step">
           <Collapsable.Button>
             <FormattedMessage tagName="p" id="admin.label.step" />
           </Collapsable.Button>
@@ -471,6 +471,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
         value={parameters.sort}
         isVoteRanking={selectedStep?.votesRanking || false}
         isVotable={selectedStep?.votable || false}
+        canContactAuthor={selectedStep?.form?.canContact}
         onChange={newValue => {
           dispatch({ type: 'CHANGE_SORT', payload: ((newValue: any): SortValues) });
         }}
@@ -809,12 +810,14 @@ export const ProjectAdminProposals = ({
     project.proposals.edges
       ?.map(edge => edge && edge.node)
       ?.filter(Boolean)
-      .map(({ id, fullReference, title, paperVotesTotalCount, paperVotesTotalPointsCount }) => ({
+      .map(({ id, fullReference, title, paperVotesTotalCount, paperVotesTotalPointsCount, canContactAuthor, nbrOfMessagesSentToAuthor }) => ({
         id,
         fullReference,
         title,
         paperVotesTotalCount,
         paperVotesTotalPointsCount,
+        canContactAuthor,
+        nbrOfMessagesSentToAuthor,
       })) ?? [];
   const areOpinions = selectedStep?.form?.objectType === 'OPINION';
 
@@ -1046,7 +1049,9 @@ export const ProjectAdminProposals = ({
                       setProposalModalDelete={setProposalModalDelete}
                       proposalSelected={proposalSelected || null}
                       setProposalSelected={setProposalSelected}
-                      hasThemeEnabled={selectedStep?.hasTheme || false}>
+                      hasThemeEnabled={selectedStep?.hasTheme || false}
+                      canContactAuthor={proposal.canContactAuthor}
+                      nbrOfMessagesSentToAuthor={proposal.nbrOfMessagesSentToAuthor}>
                       <S.ProposalListRowInformationsStepState>
                         {stepDisplay && (
                           <S.ProposalVotableStep>{stepDisplay.title}</S.ProposalVotableStep>
@@ -1162,6 +1167,7 @@ const container = createPaginationContainer(
                 id
                 name
               }
+              canContact
               objectType
             }
           }
@@ -1184,6 +1190,7 @@ const container = createPaginationContainer(
                 id
                 name
               }
+              canContact
             }
           }
         }
@@ -1253,6 +1260,8 @@ const container = createPaginationContainer(
               }
               paperVotesTotalCount(stepId: $step)
               paperVotesTotalPointsCount(stepId: $step)
+              canContactAuthor
+              nbrOfMessagesSentToAuthor
               ...AnalysisProposal_proposal
                 @arguments(
                   isAdminView: true

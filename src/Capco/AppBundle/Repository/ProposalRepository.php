@@ -809,6 +809,14 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function save(Proposal $proposal): bool
+    {
+        $this->_em->persist($proposal);
+        $this->_em->flush();
+
+        return true;
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)

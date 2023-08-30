@@ -19,6 +19,8 @@ describe('<ProposalFormAdminSettingsForm />', () => {
       commentable: true,
       costable: true,
       suggestingSimilarProposals: true,
+      canContact: false,
+      nbrOfMessagesSent: 1,
     },
   };
 

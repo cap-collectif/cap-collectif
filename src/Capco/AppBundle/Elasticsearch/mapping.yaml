@@ -194,6 +194,11 @@ mappings:
                 visible: { type: boolean }
                 location: { type: geo_point }
                 archived: { type: boolean }
+                statistics: &ProposalStatistics
+                    properties:
+                        proposalId: { type: keyword }
+                        nbrOfMessagesSentToAuthor: { type: long }
+        statistics: *ProposalStatistics
         location: { type: geo_point }
         fullAddress: *text_analysis_highlighted
         startAt: { type: date }
@@ -243,6 +248,7 @@ mappings:
         proposalForm:
             properties:
                 id: { type: keyword }
+                canContact: { type: boolean }
         category:
             properties:
                 id: { type: keyword }
