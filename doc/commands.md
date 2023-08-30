@@ -95,6 +95,16 @@ Pour les prochaines commandes d'export merci de ne pas utiliser graphQL, mais bi
       capco:make:notifier                         
       capco:make:processor 
 
+<a div="magiclinks"></a> Génération de Magic Links
+---  
+Cette commande permet de créer des comptes à partir d'une liste d'emails.
+Elle prend en paramètre un nom de fichier csv contenant une liste au même format que public/magiclinks/template.csv.
+Le fichier utilisé doit être placé dans le dossier public/magiclinks et permettra la création d'un fichier csv suffixé de _complete qui contiendra la liste des tous les comptes non admin existants et nouvellement créés ainsi que leur lien de connexion.
+Si des comptes ne peuvent pas être gérés (souvent des comptes softdeleted) ils seront placés dans un fichier .txt suffixé de _errors.
+
+      capco:generate:magiclinks <file>
+
+Les liens ainsi fournis ont une validitée déterminée par la variable d'environnement SYMFONY_MAGICLINKS_DURATION_IN_DAYS.
 
 <a div="autres"></a>Autres
 ---
