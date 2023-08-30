@@ -147,6 +147,7 @@ parameters:
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
     env(SYMFONY_REMEMBER_SECRET): secretRemember
     env(SYMFONY_INSTANCE_REMEMBER_SECRET): 'secretRemember'
+    env(SYMFONY_MAGICLINKS_DURATION_IN_DAYS): 1
     # Turnstile testing tokens that forces an interactive challenge (same as Google Recaptcha)
     # see https://developers.cloudflare.com/turnstile/frequently-asked-questions/
     # /!\ In production you must use your own tokens /!\
