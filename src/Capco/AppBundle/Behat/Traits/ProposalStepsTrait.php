@@ -566,6 +566,7 @@ trait ProposalStepsTrait
     public function iClickTheCreateProposalButton()
     {
         $this->iWaitElementToAppearOnPage('#add-proposal');
+        $this->scrollToElement('h3.projectHeader__title');
         $this->navigationContext->getPage('collect page')->clickCreateProposalButton();
         $this->iWait(1);
     }

@@ -15,12 +15,15 @@ Scenario: Events can be filtered by projects
   Given feature "projects_form" is enabled
   And I visited "events page"
   And I click the "#event-button-filter" element
-  And I select "UHJvamVjdDpwcm9qZWN0MQ==" from react "#SelectProject-filter-project"
+  And I select "Croissance, innovation, disruption" from react "#SelectProject-filter-project"
+  And I wait ".loader" to appear on current page
+  And I wait ".loader" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 3 ".eventPreview" elements
   And I click the "#event-status-filter-button-desktop" element
   And I check element "finished-events"
   And I wait ".loader" to appear on current page
+  And I wait ".loader" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
 

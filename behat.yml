@@ -45,6 +45,9 @@ e2e:
             capabilities:
               version: ''
               acceptSslCerts: true
+              extra_capabilities:
+                acceptSslCerts: true
+                acceptInsecureCerts: true
             wd_host: http://selenium:4444/wd/hub
     Bex\Behat\StepTimeLoggerExtension:
       output: [console, csv]
@@ -103,7 +106,15 @@ e2e:
       filters:
         tags: '~@randomly-failing'
     bo-pages:
-      paths: ['%paths.base%/features/back/parameter', '%paths.base%/features/back/post', '%paths.base%/features/back/content', '%paths.base%/features/back/pages', '%paths.base%/features/back/section', '%paths.base%/features/back/group']
+      paths:
+        [
+          '%paths.base%/features/back/parameter',
+          '%paths.base%/features/back/post',
+          '%paths.base%/features/back/content',
+          '%paths.base%/features/back/pages',
+          '%paths.base%/features/back/section',
+          '%paths.base%/features/back/group',
+        ]
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
@@ -169,6 +180,9 @@ commands:
             capabilities:
               version: ''
               acceptSslCerts: true
+              extra_capabilities:
+                acceptSslCerts: true
+                acceptInsecureCerts: true
             wd_host: http://selenium:4444/wd/hub
   suites:
     commands:
@@ -182,7 +196,7 @@ commands:
         - Capco\AppBundle\Behat\GraphQLContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
-        - SamParkinson\Behat\Context\FileSystemContext
+        - Capco\AppBundle\Behat\FileSystemContext
 
 api:
   extensions:
@@ -208,6 +222,9 @@ api:
             capabilities:
               version: ''
               acceptSslCerts: true
+              extra_capabilities:
+                acceptSslCerts: true
+                acceptInsecureCerts: true
             wd_host: http://selenium:4444/wd/hub
   suites:
     rest:

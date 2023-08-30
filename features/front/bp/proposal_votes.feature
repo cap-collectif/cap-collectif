@@ -29,6 +29,7 @@ Scenario: Logged in user wants to vote when he has not enough credits left in a 
 @security @elasticsearch @votes_from_selection_step
 Scenario: Anonymous user wants to vote on a selection step that has budget vote in a selection step
   Given I go to a selection step with budget vote enabled
+  And I wait ".proposal-list-view-paginated" to appear on current page
   When I click the proposal vote button
   Then I should see a "#login-popover" element
 

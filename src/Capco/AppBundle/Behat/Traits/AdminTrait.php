@@ -40,7 +40,7 @@ trait AdminTrait
             ->getPage()
             ->find('css', "{$element} .react-select__value-container .react-select__input input")
         ;
-        $searchInput->setValue('');
+        $searchInput->focus();
         $this->iWait(3);
         $this->getSession()
             ->getPage()

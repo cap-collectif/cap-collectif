@@ -44,6 +44,7 @@ Scenario: Cap Collectif wants to create some users account from a CSV with custo
   duplicated@cap-collectif.com;Duplicate;Duplicate;Duplicate;Vegeta
   admin@cap-collectif.com;Already Present;Already Present;Already Present;Vegeta
   """
+  Given a file "users_created.csv" is prepared to be written on vsf
   Given I run a command "capco:create-users-account-from-csv" with parameters:
     | input | vfs://users.csv |
     | output | vfs://users_created.csv |
@@ -73,6 +74,7 @@ Scenario: Cap Collectif wants to create some users account from a CSV with only 
   Johnny;Yadlidée
   Jean-Michel;Palaref
   """
+  Given a file "users_created.csv" is prepared to be written on vsf
   Given I run a command "capco:create-users-account-from-csv" with parameters:
     | input | vfs://users.csv |
     | output | vfs://users_created.csv |

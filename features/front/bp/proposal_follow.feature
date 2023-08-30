@@ -49,11 +49,9 @@ Scenario: On Proposal Preview, Proposal should stay followed after user refresh 
   Given I am logged in as user
   And I go to a collect step with vote
   And I follow the first proposal
-  And I wait 1 seconds
-  And I should see "following"
+  And I should see "following" before 3 seconds
   Then I go to a collect step with vote
-  And I wait 5 seconds
-  And I should see "following"
+  And I should see "following" before 5 seconds
 
 @security @elasticsearch @database
 Scenario: On Proposal Preview, I want to follow a proposal and change the type of following

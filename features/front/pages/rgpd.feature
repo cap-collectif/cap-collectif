@@ -110,7 +110,7 @@ Scenario: An anonymous wants to change locale through footer
 @international
 Scenario: An anonymous wants to change locale through footer in route with params
   Given feature "multilangue" is enabled
-  Given I visited homepage
+  Given I visited "home page"
   Then I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
   And I wait "#footer-links" to appear on current page
   And I should not see a cookie named "locale"

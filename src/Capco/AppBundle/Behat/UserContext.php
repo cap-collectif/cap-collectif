@@ -248,7 +248,7 @@ class UserContext extends DefaultContext
      */
     public function iCanSeeIamLoggedInAs(string $username)
     {
-        $this->waitAndThrowOnFailure(5000, "$('#navbar-username').length > 0");
+        $this->waitAndThrowOnFailure(8000, "$('#navbar-username').length > 0");
         $this->assertElementContainsText('#navbar-username', $username);
     }
 
@@ -259,7 +259,7 @@ class UserContext extends DefaultContext
     {
         $this->navigationContext->getPage('HomePage')->openUserDropdown();
         $selector = '#user-profile-1';
-        $this->waitAndThrowOnFailure(3000, "$('" . $selector . "').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('" . $selector . "').length > 0");
         $this->assertElementContainsText($selector, 'global.administration');
     }
 
@@ -402,6 +402,8 @@ class UserContext extends DefaultContext
      */
     private function iAmAuthenticatedAs(string $email): void
     {
+        $this->navigationContext->iVisitedPage('HomePage');
+
         $user = $this->getService(UserManager::class)->findUserByEmail($email);
         if (!$user) {
             throw new \RuntimeException('Could not find user associated with email:' . $email);

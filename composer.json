@@ -28,15 +28,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/behat-parallel-scenario"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/spyl94/GraphQLBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/BehatPageObjectExtension"
         },
         {
             "type": "vcs",
@@ -53,10 +45,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/HWIOAuthBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/Mink"
         },
         {
             "type": "vcs",
@@ -181,17 +169,12 @@
     },
     "require-dev": {
         "behat/behat": "^3.3",
-        "behat/mink": "1.7.2",
-        "behat/symfony2-extension": "dev-master",
-        "behat/mink-extension": "^2.2",
-        "behat/mink-selenium2-driver": "1.3.*",
-        "behat/mink-browserkit-driver": "^1.3",
+        "behat/symfony2-extension": "^2.1",
+        "behat/mink-browserkit-driver": "^2.1",
+        "behat/mink-selenium2-driver": "^1.6",
         "coduo/php-matcher": "^6.0",
         "pyrech/composer-changelogs": "^1.5",
-        "tonicforhealth/behat-parallel-scenario": "dev-master#65b5b4d1130d3c9c16097d172882781e839ecfc5",
-        "behat/gherkin": "^4.4",
-        "sensiolabs/behat-page-object-extension": "dev-master#0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
-        "sjparkinson/behat-file-system-context": "dev-master#25e398c4416797181f6ce807bc92bc572c8a9a7d",
+        "sensiolabs/behat-page-object-extension": "^2.3",
         "alexandresalome/mailcatcher": "dev-master#a982d42 as 1.3.0",
         "phpspec/phpspec": "^6.0",
         "bossa/phpspec2-expect": "^3.2",
@@ -208,7 +191,8 @@
         "rector/rector": "^0.17.1",
         "phpcompatibility/php-compatibility": "^9.3",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "icanhazstring/composer-unused": "^0.8.9"
+        "icanhazstring/composer-unused": "^0.8.9",
+        "mikey179/vfsstream": "^1.6"
     },
     "config": {
         "bin-dir": "bin",

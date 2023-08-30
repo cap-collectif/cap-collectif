@@ -73,15 +73,28 @@ services:
   seleniumhub:
     container_name: capco_seleniumhub_1
     image:
-      selenium/hub:3.141.0-actinium
-      # https://github.com/SeleniumHQ/selenium/wiki/Grid2
-      # GRID_TIMEOUT: 600 # (300 is default)
-    # GRID_BROWSER_TIMEOUT: 300
-    # environment:
+      selenium/hub:4.1.2
+      # https://github.com/SeleniumHQ/docker-selenium/blob/trunk/README.md
+      # You can browse http://0.0.0.0:4444/ui/ to check available browsers
     ports:
-      # You can browe http://192.168.64.6:4444/grid/console
-      # To check available browsers
+      - '4442:4442'
+      - '4443:4443'
       - '4444:4444'
+
+  chrome:
+    container_name: capco_chrome_1
+    image: selenium/node-chrome:4.1.2
+    environment:
+      - TZ='Europe/Paris'
+      - SE_EVENT_BUS_HOST=seleniumhub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    links:
+      - seleniumhub:seleniumhub
+      - application:capco.test
+    depends_on:
+      - seleniumhub
+    shm_size: 2gb
 
   mailcatcher:
     container_name: capco_mailcatcher_1
@@ -89,42 +102,6 @@ services:
     image: jderusse/mailcatcher:latest
     ports:
       - '25:25'
-
-  # firefox:
-  #   build: ../services/firefox
-  #   environment:
-  #     TZ: 'Europe/Paris'
-  #     HUB_HOST: seleniumhub
-  #     HUB_PORT: 4444
-  #   volumes:
-  #     - ../../:/var/www
-  #   links:
-  #     - seleniumhub:seleniumhub
-  #     - application:capco.test
-  #   ports:
-  #     # Port is used for VNC only
-  #     - '5901:5900'
-
-  chrome:
-    container_name: capco_chrome_1
-    image: selenium/node-chrome-debug:3.141.59-dubnium
-    environment:
-      # Right now, we maximize screen using `maximizeWindow()`
-      # SCREEN_WIDTH: 1920
-      # SCREEN_HEIGHT: 1080
-      # SCREEN_DEPTH: 24
-      TZ: 'Europe/Paris'
-      HUB_HOST: seleniumhub
-      HUB_PORT: 4444
-    volumes:
-      - /dev/shm:/dev/shm
-      - ../../:/var/www
-    links:
-      - seleniumhub:seleniumhub
-      - application:capco.test
-      # - /tmp
-  #  shm_size: 1G
-  #  tmpfs:
 
   # WE DONT need that for testing,
   # Please fix nginx when they are not available

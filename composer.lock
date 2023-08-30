@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41d798f9872794ee27c53a4098456f94",
+    "content-hash": "25f1e490415b20addc02bcf060715d18",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -607,16 +607,16 @@
         },
         {
             "name": "cocur/slugify",
-            "version": "v4.3.0",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "652234ef5f1be844a2ae1c36ad1b4c88b05160f9"
+                "reference": "4c6ed14a087ca061b220ffda640c07644946e2a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/652234ef5f1be844a2ae1c36ad1b4c88b05160f9",
-                "reference": "652234ef5f1be844a2ae1c36ad1b4c88b05160f9",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/4c6ed14a087ca061b220ffda640c07644946e2a0",
+                "reference": "4c6ed14a087ca061b220ffda640c07644946e2a0",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cocur/slugify/issues",
-                "source": "https://github.com/cocur/slugify/tree/v4.3.0"
+                "source": "https://github.com/cocur/slugify/tree/v4.4.0"
             },
-            "time": "2022-12-07T19:48:48+00:00"
+            "time": "2023-08-05T09:42:11+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -1608,28 +1608,28 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.6",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "d9d313a36c872fd6ee06d9a6cbcf713eaa40f024"
+                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/d9d313a36c872fd6ee06d9a6cbcf713eaa40f024",
-                "reference": "d9d313a36c872fd6ee06d9a6cbcf713eaa40f024",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
+                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^10",
+                "doctrine/coding-standard": "^11.0",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.1",
                 "phpstan/phpstan-strict-rules": "^1.3",
                 "phpunit/phpunit": "^8.5 || ^9.5",
-                "vimeo/psalm": "^4.25"
+                "vimeo/psalm": "^4.25 || ^5.4"
             },
             "type": "library",
             "autoload": {
@@ -1679,7 +1679,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.6"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.8"
             },
             "funding": [
                 {
@@ -1695,7 +1695,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-20T09:10:12+00:00"
+            "time": "2023-06-16T13:40:37+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -3072,16 +3072,16 @@
         },
         {
             "name": "friendsofsymfony/http-cache-bundle",
-            "version": "2.16.1",
+            "version": "2.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle.git",
-                "reference": "cdee9b94504067d0a9d0e5b2c3b076bf10347d0c"
+                "reference": "4308b5776d3e1c16cb8257429e55395e272ee0bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/cdee9b94504067d0a9d0e5b2c3b076bf10347d0c",
-                "reference": "cdee9b94504067d0a9d0e5b2c3b076bf10347d0c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSHttpCacheBundle/zipball/4308b5776d3e1c16cb8257429e55395e272ee0bb",
+                "reference": "4308b5776d3e1c16cb8257429e55395e272ee0bb",
                 "shasum": ""
             },
             "require": {
@@ -3163,9 +3163,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/2.16.1"
+                "source": "https://github.com/FriendsOfSymfony/FOSHttpCacheBundle/tree/2.16.2"
             },
-            "time": "2023-05-23T06:55:56+00:00"
+            "time": "2023-08-03T08:52:18+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -3486,16 +3486,16 @@
         },
         {
             "name": "gettext/gettext",
-            "version": "v4.8.8",
+            "version": "v4.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-gettext/Gettext.git",
-                "reference": "302a00aa9d6762c92c884d879c15d3ed05d6a37d"
+                "reference": "b632aaf5e4579d0b2ae8bc61785e238bff4c5156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-gettext/Gettext/zipball/302a00aa9d6762c92c884d879c15d3ed05d6a37d",
-                "reference": "302a00aa9d6762c92c884d879c15d3ed05d6a37d",
+                "url": "https://api.github.com/repos/php-gettext/Gettext/zipball/b632aaf5e4579d0b2ae8bc61785e238bff4c5156",
+                "reference": "b632aaf5e4579d0b2ae8bc61785e238bff4c5156",
                 "shasum": ""
             },
             "require": {
@@ -3547,7 +3547,7 @@
             "support": {
                 "email": "oom@oscarotero.com",
                 "issues": "https://github.com/oscarotero/Gettext/issues",
-                "source": "https://github.com/php-gettext/Gettext/tree/v4.8.8"
+                "source": "https://github.com/php-gettext/Gettext/tree/v4.8.11"
             },
             "funding": [
                 {
@@ -3563,7 +3563,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-12-08T11:59:50+00:00"
+            "time": "2023-08-14T15:15:05+00:00"
         },
         {
             "name": "gettext/languages",
@@ -3641,16 +3641,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.14",
+            "version": "8.13.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "31b94ef2aa349b76bb725f375e9cfa2e398a1620"
+                "reference": "7b60d1264ba806e68fb99b06e73e2ed07815689e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/31b94ef2aa349b76bb725f375e9cfa2e398a1620",
-                "reference": "31b94ef2aa349b76bb725f375e9cfa2e398a1620",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/7b60d1264ba806e68fb99b06e73e2ed07815689e",
+                "reference": "7b60d1264ba806e68fb99b06e73e2ed07815689e",
                 "shasum": ""
             },
             "require": {
@@ -3709,7 +3709,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2023-06-13T08:08:40+00:00"
+            "time": "2023-08-22T13:59:44+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -4464,6 +4464,12 @@
             "support": {
                 "source": "https://github.com/cap-collectif/HWIOAuthBundle/tree/0.6.5"
             },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/stloyd"
+                }
+            ],
             "time": "2020-07-16T09:17:51+00:00"
         },
         {
@@ -4648,6 +4654,7 @@
                 "issues": "https://github.com/apereo/phpCAS/issues",
                 "source": "https://github.com/apereo/phpCAS/tree/1.4.0"
             },
+            "abandoned": "apereo/phpcas",
             "time": "2021-05-30T19:53:34+00:00"
         },
         {
@@ -6034,16 +6041,16 @@
         },
         {
             "name": "mattketmo/email-checker",
-            "version": "2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MattKetmo/EmailChecker.git",
-                "reference": "2d3c78e221297c67efd9cd3940e515dc8721599f"
+                "reference": "b5dfae9c4a04676b1be315eca000f0534357c4aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/2d3c78e221297c67efd9cd3940e515dc8721599f",
-                "reference": "2d3c78e221297c67efd9cd3940e515dc8721599f",
+                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/b5dfae9c4a04676b1be315eca000f0534357c4aa",
+                "reference": "b5dfae9c4a04676b1be315eca000f0534357c4aa",
                 "shasum": ""
             },
             "require": {
@@ -6095,9 +6102,9 @@
             ],
             "support": {
                 "issues": "https://github.com/MattKetmo/EmailChecker/issues",
-                "source": "https://github.com/MattKetmo/EmailChecker/tree/2.1.2"
+                "source": "https://github.com/MattKetmo/EmailChecker/tree/v2.1.3"
             },
-            "time": "2023-01-10T17:35:32+00:00"
+            "time": "2023-04-17T07:24:45+00:00"
         },
         {
             "name": "maximal/emoji",
@@ -6412,16 +6419,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.5",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "11e2663a5bc9db5d714eedb4277ee300403b4a9e"
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/11e2663a5bc9db5d714eedb4277ee300403b4a9e",
-                "reference": "11e2663a5bc9db5d714eedb4277ee300403b4a9e",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
                 "shasum": ""
             },
             "require": {
@@ -6462,9 +6469,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.5"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
             },
-            "time": "2023-05-19T20:20:00+00:00"
+            "time": "2023-08-13T19:53:39+00:00"
         },
         {
             "name": "nyholm/dsn",
@@ -6586,16 +6593,16 @@
         },
         {
             "name": "odolbeau/phone-number-bundle",
-            "version": "v3.9.1",
+            "version": "v3.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/odolbeau/phone-number-bundle.git",
-                "reference": "a4c084d9709a416511234b49d6803d76b64dbc02"
+                "reference": "1564f190551bc275904687facb2af7590d5888d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/odolbeau/phone-number-bundle/zipball/a4c084d9709a416511234b49d6803d76b64dbc02",
-                "reference": "a4c084d9709a416511234b49d6803d76b64dbc02",
+                "url": "https://api.github.com/repos/odolbeau/phone-number-bundle/zipball/1564f190551bc275904687facb2af7590d5888d8",
+                "reference": "1564f190551bc275904687facb2af7590d5888d8",
                 "shasum": ""
             },
             "require": {
@@ -6615,6 +6622,7 @@
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "symfony/form": "^4.4|^5.3|^6.0",
+                "symfony/phpunit-bridge": "^6.2",
                 "symfony/property-access": "^4.4|^5.3|^6.0",
                 "symfony/serializer": "^4.4|^5.3|^6.0.1",
                 "symfony/twig-bundle": "^4.4|^5.3|^6.0",
@@ -6654,9 +6662,9 @@
             ],
             "support": {
                 "issues": "https://github.com/odolbeau/phone-number-bundle/issues",
-                "source": "https://github.com/odolbeau/phone-number-bundle/tree/v3.9.1"
+                "source": "https://github.com/odolbeau/phone-number-bundle/tree/v3.9.2"
             },
-            "time": "2023-01-16T11:06:41+00:00"
+            "time": "2023-07-06T18:41:41+00:00"
         },
         {
             "name": "odolbeau/rabbit-mq-admin-toolkit",
@@ -7296,16 +7304,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.18.1",
+            "version": "1.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "f258b3a1d16acb7b21f3b42d7a2494a733365237"
+                "reference": "57f3de01d32085fea20865f9b16fb0e69347c39e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/f258b3a1d16acb7b21f3b42d7a2494a733365237",
-                "reference": "f258b3a1d16acb7b21f3b42d7a2494a733365237",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/57f3de01d32085fea20865f9b16fb0e69347c39e",
+                "reference": "57f3de01d32085fea20865f9b16fb0e69347c39e",
                 "shasum": ""
             },
             "require": {
@@ -7368,9 +7376,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.18.1"
+                "source": "https://github.com/php-http/discovery/tree/1.19.1"
             },
-            "time": "2023-05-17T08:53:10+00:00"
+            "time": "2023-07-11T07:02:26+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -8542,16 +8550,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.0",
+            "version": "1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
+                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/846ae76eef31c6d7790fac9bc399ecee45160b26",
+                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26",
                 "shasum": ""
             },
             "require": {
@@ -8583,9 +8591,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.1"
             },
-            "time": "2023-06-01T12:35:21+00:00"
+            "time": "2023-08-03T16:32:59+00:00"
         },
         {
             "name": "pmill/doctrine-array-hydrator",
@@ -9832,6 +9840,7 @@
                 "issues": "https://github.com/sendinblue/APIv3-php-library/issues",
                 "source": "https://github.com/sendinblue/APIv3-php-library/tree/v7.4.4"
             },
+            "abandoned": "getbrevo/brevo-php",
             "time": "2021-08-25T08:49:42+00:00"
         },
         {
@@ -14612,16 +14621,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.22",
+            "version": "v5.4.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "8036a4c76c0dd29e60b6a7cafcacc50cf088ea62"
+                "reference": "1181fe9270e373537475e826873b5867b863883c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/8036a4c76c0dd29e60b6a7cafcacc50cf088ea62",
-                "reference": "8036a4c76c0dd29e60b6a7cafcacc50cf088ea62",
+                "url": "https://api.github.com/repos/symfony/string/zipball/1181fe9270e373537475e826873b5867b863883c",
+                "reference": "1181fe9270e373537475e826873b5867b863883c",
                 "shasum": ""
             },
             "require": {
@@ -14678,7 +14687,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.22"
+                "source": "https://github.com/symfony/string/tree/v5.4.26"
             },
             "funding": [
                 {
@@ -14694,7 +14703,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-14T06:11:53+00:00"
+            "time": "2023-06-28T12:46:07+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -15192,7 +15201,7 @@
         },
         {
             "name": "twig/string-extra",
-            "version": "v3.6.0",
+            "version": "v3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/string-extra.git",
@@ -15243,7 +15252,7 @@
                 "unicode"
             ],
             "support": {
-                "source": "https://github.com/twigphp/string-extra/tree/v3.6.0"
+                "source": "https://github.com/twigphp/string-extra/tree/v3.7.0"
             },
             "funding": [
                 {
@@ -15744,66 +15753,6 @@
     ],
     "packages-dev": [
         {
-            "name": "adlawson/vfs",
-            "version": "0.12.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/adlawson/php-vfs.git",
-                "reference": "e955034419d6a8f92c9a8ea2e626eeed96b41095"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/adlawson/php-vfs/zipball/e955034419d6a8f92c9a8ea2e626eeed96b41095",
-                "reference": "e955034419d6a8f92c9a8ea2e626eeed96b41095",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "psr/log": "^1.0"
-            },
-            "require-dev": {
-                "adlawson/timezone": "^1.0",
-                "fabpot/php-cs-fixer": "^1.9",
-                "mockery/mockery": "^0.9",
-                "phpunit/phpunit": "^4.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Vfs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrew Lawson",
-                    "homepage": "http://adlawson.com"
-                }
-            ],
-            "description": "Virtual file system",
-            "homepage": "https://github.com/adlawson/php-vfs",
-            "keywords": [
-                "dir",
-                "directory",
-                "file",
-                "fs",
-                "read",
-                "stream",
-                "system",
-                "virtual",
-                "wrapper",
-                "write"
-            ],
-            "support": {
-                "issues": "https://github.com/adlawson/php-vfs/issues",
-                "source": "https://github.com/adlawson/php-vfs/tree/develop"
-            },
-            "time": "2016-02-20T12:46:01+00:00"
-        },
-        {
             "name": "aeon-php/calendar",
             "version": "1.0.7",
             "source": {
@@ -16045,35 +15994,37 @@
         },
         {
             "name": "behat/mink",
-            "version": "v1.7.2",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/Mink.git",
-                "reference": "0cb43826e00e93fe3a53f8044cf2f16d21ec8860"
+                "url": "https://github.com/minkphp/Mink.git",
+                "reference": "19e58905632e7cfdc5b2bafb9b950a3521af32c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/Mink/zipball/0cb43826e00e93fe3a53f8044cf2f16d21ec8860",
-                "reference": "0cb43826e00e93fe3a53f8044cf2f16d21ec8860",
+                "url": "https://api.github.com/repos/minkphp/Mink/zipball/19e58905632e7cfdc5b2bafb9b950a3521af32c5",
+                "reference": "19e58905632e7cfdc5b2bafb9b950a3521af32c5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.1",
-                "symfony/css-selector": "~2.1|~3.0|~4.0"
+                "php": ">=7.2",
+                "symfony/css-selector": "^4.4 || ^5.0 || ^6.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~2.7|~3.0|~4.0"
+                "phpunit/phpunit": "^8.5.22 || ^9.5.11",
+                "symfony/error-handler": "^4.4 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.4 || ^6.0"
             },
             "suggest": {
-                "behat/mink-browserkit-driver": "extremely fast headless driver for Symfony\\Kernel-based apps (Sf2, Silex)",
-                "behat/mink-goutte-driver": "fast headless driver for any app without JS emulation",
+                "behat/mink-browserkit-driver": "fast headless driver for any app without JS emulation",
                 "behat/mink-selenium2-driver": "slow, but JS-enabled driver for any app (requires Selenium2)",
-                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)"
+                "behat/mink-zombie-driver": "fast and JS-enabled headless driver for any app (requires node.js)",
+                "dmore/chrome-mink-driver": "fast and JS-enabled driver for any app (requires chromium or google chrome)"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -16081,11 +16032,7 @@
                     "Behat\\Mink\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Behat\\Mink\\Tests\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -16097,48 +16044,51 @@
                 }
             ],
             "description": "Browser controller/emulator abstraction for PHP",
-            "homepage": "http://mink.behat.org/",
+            "homepage": "https://mink.behat.org/",
             "keywords": [
                 "browser",
                 "testing",
                 "web"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/Mink/tree/v1.7.2"
+                "issues": "https://github.com/minkphp/Mink/issues",
+                "source": "https://github.com/minkphp/Mink/tree/v1.10.0"
             },
-            "time": "2019-04-16T12:42:21+00:00"
+            "time": "2022-03-28T14:22:43+00:00"
         },
         {
             "name": "behat/mink-browserkit-driver",
-            "version": "v1.4.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkBrowserKitDriver.git",
-                "reference": "057926c9da452bac5bfcffb92eb4f3e1ce74dae9"
+                "reference": "d2768e6c17b293d86d8fcff54cbb9e6ad938fee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/057926c9da452bac5bfcffb92eb4f3e1ce74dae9",
-                "reference": "057926c9da452bac5bfcffb92eb4f3e1ce74dae9",
+                "url": "https://api.github.com/repos/minkphp/MinkBrowserKitDriver/zipball/d2768e6c17b293d86d8fcff54cbb9e6ad938fee1",
+                "reference": "d2768e6c17b293d86d8fcff54cbb9e6ad938fee1",
                 "shasum": ""
             },
             "require": {
-                "behat/mink": "^1.7.1@dev",
-                "php": ">=5.4",
-                "symfony/browser-kit": "~2.3|~3.0|~4.0",
-                "symfony/dom-crawler": "~2.3|~3.0|~4.0"
+                "behat/mink": "^1.9.0@dev",
+                "php": ">=7.2",
+                "symfony/browser-kit": "^4.4 || ^5.0 || ^6.0",
+                "symfony/dom-crawler": "^4.4 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "mink/driver-testsuite": "dev-master",
-                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.18 || ^8.5 || ^9.5",
-                "symfony/debug": "^2.7|^3.0|^4.0",
-                "symfony/http-kernel": "~2.3|~3.0|~4.0",
+                "phpunit/phpunit": "^8.5 || ^9.5",
+                "symfony/error-handler": "^4.4 || ^5.0 || ^6.0",
+                "symfony/http-client": "^4.4 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
+                "symfony/mime": "^4.4 || ^5.0 || ^6.0",
                 "yoast/phpunit-polyfills": "^1.0"
             },
             "type": "mink-driver",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -16167,99 +16117,39 @@
             ],
             "support": {
                 "issues": "https://github.com/minkphp/MinkBrowserKitDriver/issues",
-                "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v1.4.1"
+                "source": "https://github.com/minkphp/MinkBrowserKitDriver/tree/v2.1.0"
             },
-            "time": "2021-12-10T14:17:06+00:00"
-        },
-        {
-            "name": "behat/mink-extension",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Behat/MinkExtension.git",
-                "reference": "80f7849ba53867181b7e412df9210e12fba50177"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Behat/MinkExtension/zipball/80f7849ba53867181b7e412df9210e12fba50177",
-                "reference": "80f7849ba53867181b7e412df9210e12fba50177",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "^3.0.5",
-                "behat/mink": "^1.5",
-                "php": ">=5.3.2",
-                "symfony/config": "^2.7|^3.0|^4.0"
-            },
-            "require-dev": {
-                "behat/mink-goutte-driver": "^1.1",
-                "phpspec/phpspec": "^2.0"
-            },
-            "type": "behat-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Behat\\MinkExtension": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                },
-                {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com"
-                }
-            ],
-            "description": "Mink extension for Behat",
-            "homepage": "http://extensions.behat.org/mink",
-            "keywords": [
-                "browser",
-                "gui",
-                "test",
-                "web"
-            ],
-            "support": {
-                "issues": "https://github.com/Behat/MinkExtension/issues",
-                "source": "https://github.com/Behat/MinkExtension/tree/master"
-            },
-            "time": "2018-02-06T15:36:30+00:00"
+            "time": "2022-03-28T14:33:51+00:00"
         },
         {
             "name": "behat/mink-selenium2-driver",
-            "version": "v1.3.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minkphp/MinkSelenium2Driver.git",
-                "reference": "473a9f3ebe0c134ee1e623ce8a9c852832020288"
+                "reference": "e5f8421654930da725499fb92983e6948c6f973e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/473a9f3ebe0c134ee1e623ce8a9c852832020288",
-                "reference": "473a9f3ebe0c134ee1e623ce8a9c852832020288",
+                "url": "https://api.github.com/repos/minkphp/MinkSelenium2Driver/zipball/e5f8421654930da725499fb92983e6948c6f973e",
+                "reference": "e5f8421654930da725499fb92983e6948c6f973e",
                 "shasum": ""
             },
             "require": {
-                "behat/mink": "~1.7@dev",
-                "instaclick/php-webdriver": "~1.1",
-                "php": ">=5.3.1"
+                "behat/mink": "^1.9@dev",
+                "ext-json": "*",
+                "instaclick/php-webdriver": "^1.4",
+                "php": ">=7.2"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
+                "mink/driver-testsuite": "dev-master",
+                "phpunit/phpunit": "^8.5.22 || ^9.5.11",
+                "symfony/error-handler": "^4.4 || ^5.0"
             },
             "type": "mink-driver",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.x-dev"
                 }
             },
             "autoload": {
@@ -16273,18 +16163,18 @@
             ],
             "authors": [
                 {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com",
-                    "homepage": "http://everzet.com"
-                },
-                {
                     "name": "Pete Otaqui",
                     "email": "pete@otaqui.com",
                     "homepage": "https://github.com/pete-otaqui"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
                 }
             ],
             "description": "Selenium2 (WebDriver) driver for Mink framework",
-            "homepage": "http://mink.behat.org/",
+            "homepage": "https://mink.behat.org/",
             "keywords": [
                 "ajax",
                 "browser",
@@ -16295,22 +16185,22 @@
             ],
             "support": {
                 "issues": "https://github.com/minkphp/MinkSelenium2Driver/issues",
-                "source": "https://github.com/minkphp/MinkSelenium2Driver/tree/v1.3.1"
+                "source": "https://github.com/minkphp/MinkSelenium2Driver/tree/v1.6.0"
             },
-            "time": "2016-03-05T09:10:18+00:00"
+            "time": "2022-03-28T14:55:17+00:00"
         },
         {
             "name": "behat/symfony2-extension",
-            "version": "dev-master",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Symfony2Extension.git",
-                "reference": "fe4735d4035edab5f1fa827aded9239f58a6f2c5"
+                "reference": "d7c834487426a784665f9c1e61132274dbf2ea26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/fe4735d4035edab5f1fa827aded9239f58a6f2c5",
-                "reference": "fe4735d4035edab5f1fa827aded9239f58a6f2c5",
+                "url": "https://api.github.com/repos/Behat/Symfony2Extension/zipball/d7c834487426a784665f9c1e61132274dbf2ea26",
+                "reference": "d7c834487426a784665f9c1e61132274dbf2ea26",
                 "shasum": ""
             },
             "require": {
@@ -16326,7 +16216,6 @@
                 "phpunit/phpunit": "~4.0|~5.0",
                 "symfony/symfony": "~2.1|~3.0|~4.0"
             },
-            "default-branch": true,
             "type": "behat-extension",
             "extra": {
                 "branch-alias": {
@@ -16344,12 +16233,12 @@
             ],
             "authors": [
                 {
-                    "name": "Konstantin Kudryashov",
-                    "email": "ever.zet@gmail.com"
-                },
-                {
                     "name": "Christophe Coevoet",
                     "email": "stof@notk.org"
+                },
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com"
                 }
             ],
             "description": "Symfony2 framework extension for Behat",
@@ -16364,7 +16253,7 @@
                 "source": "https://github.com/Behat/Symfony2Extension/tree/master"
             },
             "abandoned": "friends-of-behat/symfony-extension",
-            "time": "2022-06-23T12:01:16+00:00"
+            "time": "2018-04-20T15:48:23+00:00"
         },
         {
             "name": "bex/behat-step-time-logger",
@@ -17059,6 +16948,71 @@
             "time": "2022-09-13T17:27:26+00:00"
         },
         {
+            "name": "friends-of-behat/mink-extension",
+            "version": "v2.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/MinkExtension.git",
+                "reference": "ffc5ee88aa8e5b430f0c417adb3f0c943ffeafed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/MinkExtension/zipball/ffc5ee88aa8e5b430f0c417adb3f0c943ffeafed",
+                "reference": "ffc5ee88aa8e5b430f0c417adb3f0c943ffeafed",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.0.5",
+                "behat/mink": "^1.5",
+                "php": ">=7.4",
+                "symfony/config": "^4.4 || ^5.0 || ^6.0"
+            },
+            "replace": {
+                "behat/mink-extension": "self.version"
+            },
+            "require-dev": {
+                "behat/mink-goutte-driver": "^1.1 || ^2.0",
+                "phpspec/phpspec": "^6.0 || ^7.0 || 7.1.x-dev"
+            },
+            "type": "behat-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Behat\\MinkExtension": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Mink extension for Behat",
+            "homepage": "http://extensions.behat.org/mink",
+            "keywords": [
+                "browser",
+                "gui",
+                "test",
+                "web"
+            ],
+            "support": {
+                "source": "https://github.com/FriendsOfBehat/MinkExtension/tree/v2.7.2"
+            },
+            "time": "2022-10-17T07:23:22+00:00"
+        },
+        {
             "name": "friends-of-phpspec/phpspec-code-coverage",
             "version": "v4.3.3",
             "source": {
@@ -17237,66 +17191,17 @@
             "time": "2021-12-11T16:25:08+00:00"
         },
         {
-            "name": "hamcrest/hamcrest-php",
-            "version": "v1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hamcrest/hamcrest-php.git",
-                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/b37020aa976fa52d3de9aa904aa2522dc518f79c",
-                "reference": "b37020aa976fa52d3de9aa904aa2522dc518f79c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "replace": {
-                "cordoval/hamcrest-php": "*",
-                "davedevelopment/hamcrest-php": "*",
-                "kodova/hamcrest-php": "*"
-            },
-            "require-dev": {
-                "phpunit/php-file-iterator": "1.3.3",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "hamcrest/Hamcrest.php"
-                ],
-                "classmap": [
-                    "hamcrest"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD"
-            ],
-            "description": "This is the PHP port of Hamcrest Matchers",
-            "keywords": [
-                "test"
-            ],
-            "support": {
-                "issues": "https://github.com/hamcrest/hamcrest-php/issues",
-                "source": "https://github.com/hamcrest/hamcrest-php/tree/master"
-            },
-            "time": "2015-05-11T14:41:42+00:00"
-        },
-        {
             "name": "icanhazstring/composer-unused",
-            "version": "0.8.9",
+            "version": "0.8.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/composer-unused.git",
-                "reference": "8d4046ed0b8ce9916d06f8a9a6e1fb2445204096"
+                "reference": "fd2624f49de2d8925355cfb8739e2b2a57017d10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/8d4046ed0b8ce9916d06f8a9a6e1fb2445204096",
-                "reference": "8d4046ed0b8ce9916d06f8a9a6e1fb2445204096",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/fd2624f49de2d8925355cfb8739e2b2a57017d10",
+                "reference": "fd2624f49de2d8925355cfb8739e2b2a57017d10",
                 "shasum": ""
             },
             "require": {
@@ -17380,7 +17285,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-05-29T05:28:09+00:00"
+            "time": "2023-07-06T05:41:37+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
@@ -17444,6 +17349,57 @@
                 "source": "https://github.com/instaclick/php-webdriver/tree/1.4.16"
             },
             "time": "2022-10-28T13:30:35+00:00"
+        },
+        {
+            "name": "mikey179/vfsstream",
+            "version": "v1.6.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bovigo/vfsStream.git",
+                "reference": "17d16a85e6c26ce1f3e2fa9ceeacdc2855db1e9f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/17d16a85e6c26ce1f3e2fa9ceeacdc2855db1e9f",
+                "reference": "17d16a85e6c26ce1f3e2fa9ceeacdc2855db1e9f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "org\\bovigo\\vfs\\": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Frank Kleine",
+                    "homepage": "http://frankkleine.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Virtual file system to mock the real file system in unit tests.",
+            "homepage": "http://vfs.bovigo.org/",
+            "support": {
+                "issues": "https://github.com/bovigo/vfsStream/issues",
+                "source": "https://github.com/bovigo/vfsStream/tree/master",
+                "wiki": "https://github.com/bovigo/vfsStream/wiki"
+            },
+            "time": "2022-02-23T02:02:42+00:00"
         },
         {
             "name": "ondram/ci-detector",
@@ -18113,16 +18069,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.19",
+            "version": "1.10.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "af5a296ff02610c1bfb4ddfac9fd4a08657b9046"
+                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/af5a296ff02610c1bfb4ddfac9fd4a08657b9046",
-                "reference": "af5a296ff02610c1bfb4ddfac9fd4a08657b9046",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2910afdd3fe33e5afd71c09f3fb0d0845b48c410",
+                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410",
                 "shasum": ""
             },
             "require": {
@@ -18171,20 +18127,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-14T15:26:58+00:00"
+            "time": "2023-08-22T13:48:25+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.3.40",
+            "version": "1.3.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "f741919a720af6f84249abc62befeb15eee7bc88"
+                "reference": "e4678fa1055bfd7fad052506b422aeae35fc6f63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/f741919a720af6f84249abc62befeb15eee7bc88",
-                "reference": "f741919a720af6f84249abc62befeb15eee7bc88",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/e4678fa1055bfd7fad052506b422aeae35fc6f63",
+                "reference": "e4678fa1055bfd7fad052506b422aeae35fc6f63",
                 "shasum": ""
             },
             "require": {
@@ -18212,8 +18168,8 @@
                 "nesbot/carbon": "^2.49",
                 "nikic/php-parser": "^4.13.2",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.3.13",
+                "phpstan/phpstan-strict-rules": "^1.5.1",
                 "phpunit/phpunit": "^9.5.10",
                 "ramsey/uuid-doctrine": "^1.5.0",
                 "symfony/cache": "^4.4.35"
@@ -18239,9 +18195,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.40"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.3.42"
             },
-            "time": "2023-05-11T11:26:04+00:00"
+            "time": "2023-08-09T08:21:24+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -18818,21 +18774,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.17.1",
+            "version": "0.17.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "11401dc1abba0a359fabbf98f1057f4e65129f86"
+                "reference": "e2003ba7c5bda06d7bb419cf4be8dae5f8672132"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/11401dc1abba0a359fabbf98f1057f4e65129f86",
-                "reference": "11401dc1abba0a359fabbf98f1057f4e65129f86",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/e2003ba7c5bda06d7bb419cf4be8dae5f8672132",
+                "reference": "e2003ba7c5bda06d7bb419cf4be8dae5f8672132",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.10.15"
+                "phpstan/phpstan": "^1.10.26"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -18844,11 +18800,6 @@
                 "bin/rector"
             ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "0.15-dev"
-                }
-            },
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -18867,7 +18818,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.17.1"
+                "source": "https://github.com/rectorphp/rector/tree/0.17.13"
             },
             "funding": [
                 {
@@ -18875,7 +18826,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-14T09:05:33+00:00"
+            "time": "2023-08-14T16:33:29+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -18997,16 +18948,16 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "de036ec91d55d2a9e0db2ba975b512cdb1c23921"
+                "reference": "66783ce213de415b451b904bfef9dda0cf9aeae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/de036ec91d55d2a9e0db2ba975b512cdb1c23921",
-                "reference": "de036ec91d55d2a9e0db2ba975b512cdb1c23921",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/66783ce213de415b451b904bfef9dda0cf9aeae0",
+                "reference": "66783ce213de415b451b904bfef9dda0cf9aeae0",
                 "shasum": ""
             },
             "require": {
@@ -19049,7 +19000,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/3.0.2"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/3.0.3"
             },
             "funding": [
                 {
@@ -19057,7 +19008,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-10T06:55:38+00:00"
+            "time": "2023-08-02T09:23:32+00:00"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -19328,46 +19279,54 @@
         },
         {
             "name": "sensiolabs/behat-page-object-extension",
-            "version": "dev-master",
+            "version": "v2.3.7",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cap-collectif/BehatPageObjectExtension.git",
-                "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2"
+                "url": "https://github.com/sensiolabs/BehatPageObjectExtension.git",
+                "reference": "1f06d054b61d12333a2d9a9e76473c392ef8bd65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/BehatPageObjectExtension/zipball/0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
-                "reference": "0da748bdb327c2da6afedca8b1d8a1a6f3da67d2",
+                "url": "https://api.github.com/repos/sensiolabs/BehatPageObjectExtension/zipball/1f06d054b61d12333a2d9a9e76473c392ef8bd65",
+                "reference": "1f06d054b61d12333a2d9a9e76473c392ef8bd65",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.0",
-                "behat/mink-extension": "^2.0",
-                "ocramius/proxy-manager": "^2.0",
-                "php": ">=5.3.0"
+                "behat/behat": "^3.8",
+                "behat/mink": "^1.7",
+                "friends-of-behat/mink-extension": "^2.2",
+                "friendsofphp/proxy-manager-lts": "^1.0.12",
+                "php": "^7.2 || ~8.0"
+            },
+            "conflict": {
+                "guzzlehttp/guzzle": "<6.3"
             },
             "require-dev": {
-                "behat/mink-goutte-driver": "~1.0",
-                "bossa/phpspec2-expect": "~1.0",
-                "phpspec/phpspec": "~2.0",
-                "symfony/filesystem": "^2.3|^3.0",
-                "symfony/process": "^2.3|^3.0"
+                "behat/mink-goutte-driver": "^1.2",
+                "fabpot/goutte": "^3.3.1",
+                "phpspec/phpspec": "^6.2 || ^7.0",
+                "symfony/config": "^4.4.12 || ^5.2",
+                "symfony/dependency-injection": "^4.4.12 || ^5.2",
+                "symfony/dom-crawler": "^4.4.12 || ^5.2",
+                "symfony/filesystem": "^4.4 || ^5.2",
+                "symfony/process": "^4.4 || ^5.2",
+                "symfony/yaml": "^4.4 || ^5.2"
             },
             "suggest": {
                 "bossa/phpspec2-expect": "Allows to use PHPSpec2 matchers in Behat context files"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "SensioLabs\\Behat\\PageObjectExtension\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -19378,70 +19337,21 @@
                 },
                 {
                     "name": "Jakub Zalas",
-                    "email": "jzalas@sensiolabs.co.uk"
+                    "email": "jakub@zalas.pl"
                 }
             ],
             "description": "Page object extension for Behat",
             "homepage": "https://github.com/sensiolabs/BehatPageObjectExtension",
             "keywords": [
-                "bdd",
-                "behat",
+                "BDD",
+                "Behat",
                 "page"
             ],
             "support": {
-                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
+                "issues": "https://github.com/sensiolabs/BehatPageObjectExtension/issues",
+                "source": "https://github.com/sensiolabs/BehatPageObjectExtension/tree/v2.3.7"
             },
-            "time": "2016-03-15T13:13:55+00:00"
-        },
-        {
-            "name": "sjparkinson/behat-file-system-context",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sjparkinson/behat-file-system-context.git",
-                "reference": "25e398c4416797181f6ce807bc92bc572c8a9a7d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sjparkinson/behat-file-system-context/zipball/25e398c4416797181f6ce807bc92bc572c8a9a7d",
-                "reference": "25e398c4416797181f6ce807bc92bc572c8a9a7d",
-                "shasum": ""
-            },
-            "require": {
-                "adlawson/vfs": "^0.12",
-                "behat/behat": "^3.0",
-                "hamcrest/hamcrest-php": "^1.0",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "leaphub/phpcs-symfony2-standard": "^2.0",
-                "phpunit/phpunit": "^4.0",
-                "squizlabs/php_codesniffer": "^2.0"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SamParkinson\\Behat\\Context\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Samuel Parkinson",
-                    "email": "sam.james.parkinson@gmail.com"
-                }
-            ],
-            "description": "An in memory filesystem context for behat.",
-            "support": {
-                "issues": "https://github.com/sjparkinson/behat-file-system-context/issues",
-                "source": "https://github.com/sjparkinson/behat-file-system-context/tree/master"
-            },
-            "abandoned": true,
-            "time": "2015-08-27T15:20:08+00:00"
+            "time": "2023-01-16T12:14:34+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -19599,94 +19509,6 @@
             "time": "2021-07-28T10:34:58+00:00"
         },
         {
-            "name": "tonicforhealth/behat-parallel-scenario",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cap-collectif/behat-parallel-scenario.git",
-                "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/behat-parallel-scenario/zipball/65b5b4d1130d3c9c16097d172882781e839ecfc5",
-                "reference": "65b5b4d1130d3c9c16097d172882781e839ecfc5",
-                "shasum": ""
-            },
-            "require": {
-                "behat/behat": "3.*",
-                "tonicforhealth/parallel-process-runner": "1.*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.1.*",
-                "symfony/finder": "3.*"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tonic\\Behat\\": "src/"
-                }
-            },
-            "authors": [
-                {
-                    "name": "oleksii.storozhylov",
-                    "email": "oleksii.storozhylov@tonicforhealth.com"
-                }
-            ],
-            "description": "Behat parallel scenario",
-            "keywords": [
-                "bdd",
-                "behat",
-                "parallel",
-                "process",
-                "testing"
-            ],
-            "support": {
-                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
-            },
-            "time": "2016-03-11T13:43:33+00:00"
-        },
-        {
-            "name": "tonicforhealth/parallel-process-runner",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tonicforhealth/parallel-process-runner.git",
-                "reference": "97b00aeefca0e09256a8196da2cdb67b383a48b9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tonicforhealth/parallel-process-runner/zipball/97b00aeefca0e09256a8196da2cdb67b383a48b9",
-                "reference": "97b00aeefca0e09256a8196da2cdb67b383a48b9",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
-                "symfony/process": "~2.8|~3.0|~4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.1.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tonic\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "oleksii.storozhylov",
-                    "email": "oleksii.storozhylov@tonicforhealth.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/tonicforhealth/parallel-process-runner/issues",
-                "source": "https://github.com/tonicforhealth/parallel-process-runner/tree/v1.1.0"
-            },
-            "time": "2019-01-14T15:57:38+00:00"
-        },
-        {
             "name": "webmozart/glob",
             "version": "4.6.0",
             "source": {
@@ -19758,10 +19580,6 @@
         "phayes/geophp": 20,
         "overblog/graphql-bundle": 20,
         "limenius/react-renderer": 20,
-        "behat/symfony2-extension": 20,
-        "tonicforhealth/behat-parallel-scenario": 20,
-        "sensiolabs/behat-page-object-extension": 20,
-        "sjparkinson/behat-file-system-context": 20,
         "alexandresalome/mailcatcher": 20
     },
     "prefer-stable": false,

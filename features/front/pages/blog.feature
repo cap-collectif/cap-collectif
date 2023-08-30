@@ -37,9 +37,8 @@ Scenario: Anonymous wants to comment a blogpost
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
-  And I wait 1 seconds
-  Then I should see "comment.submit_success" in the "#global-alert-box" element
-  And I should see "J'ai un truc à dire" in the ".comments__section" element
+  Then I should see "comment.submit_success" before 2 seconds in the "#global-alert-box" element
+  Then I should see "J'ai un truc à dire" before 2 seconds in the ".comments__section" element
 
 @database
 Scenario: Anonymous wants to comment a blogpost with moderation enabled
@@ -52,8 +51,7 @@ Scenario: Anonymous wants to comment a blogpost with moderation enabled
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
-  And I wait 1 seconds
-  Then I should see "confirm-email-address" in the "#global-alert-box" element
+  Then I should see "confirm-email-address" before 2 seconds in the "#global-alert-box" element
 
 @database
 Scenario: Logged in user wants to comment a blogpost
@@ -66,6 +64,5 @@ Scenario: Logged in user wants to comment a blogpost
   And I should not see "comment.with_my_account"
   And I should not see "comment.without_account"
   When I press "comment.submit"
-  And I wait 1 seconds
-  Then I should see "comment.submit_success" in the "#global-alert-box" element
-  Then I should see "J'ai un truc à dire" in the ".comments__section" element
+  Then I should see "comment.submit_success" before 2 seconds in the "#global-alert-box" element
+  Then I should see "J'ai un truc à dire" before 2 seconds in the ".comments__section" element

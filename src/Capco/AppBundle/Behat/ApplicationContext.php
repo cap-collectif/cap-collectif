@@ -7,6 +7,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\DocumentElement;
+use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
@@ -217,7 +218,6 @@ class ApplicationContext extends UserContext
     {
         $scenario = $scope->getScenario();
         if ($scenario->hasTags('multiple-windows')) {
-            /** @var Session $session */
             $session = $this->getSession();
             $windowsNames = $session->getWindowNames();
             $session->stop(array_pop($windowsNames));
@@ -226,15 +226,22 @@ class ApplicationContext extends UserContext
 
     /**
      * @BeforeScenario
+     *
+     * @throws DriverException
      */
     public function maximizeWindow(BeforeScenarioScope $scope)
     {
         if (!$this->isSuiteWithJS($scope->getSuite())) {
             return;
         }
+
         $driver = $this->getSession()->getDriver();
         if (!$driver instanceof Selenium2Driver) {
             return;
+        }
+
+        if (!$driver->isStarted()) {
+            $driver->start();
         }
 
         try {
@@ -412,8 +419,6 @@ class ApplicationContext extends UserContext
             --$timeout;
             sleep(1);
         }
-
-        throw new \RuntimeException("Redirect URL didn't match expected URL.");
     }
 
     /**
@@ -1399,18 +1404,18 @@ class ApplicationContext extends UserContext
      */
     public function selectOptionFromReact(string $select, string $option): void
     {
-        $selector = "{$select} .react-select__input input";
-        $element = $this->getSession()
+        $this->iClickElement($select);
+
+        $optionElement = $this->getSession()
             ->getPage()
-            ->find('css', $selector)
+            ->find('xpath', './/*[contains(concat(" ",normalize-space(@class)," ")," react-select__menu-portal ")]//*[text()="' . $option . '"]')
         ;
 
-        if (null === $element) {
-            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
+        if (null === $optionElement) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $option);
         }
 
-        $element->setValue($option);
-        $this->iWait(3);
+        $optionElement->click();
     }
 
     /**
@@ -1566,6 +1571,23 @@ class ApplicationContext extends UserContext
         $day->click();
     }
 
+    /**
+     * @Then I should see :output before :timeout seconds in the :parentSelector element
+     */
+    public function iShouldSeeOutputInElementBeforeTimeout(string $output, int $timeout, string $parentSelector)
+    {
+        $output = addslashes($output);
+        $this->waitAndThrowOnFailure($timeout * 1000, "$('{$parentSelector}').find('*:contains(\"{$output}\")').length > 0");
+    }
+
+    /**
+     * @Then I should see :output before :timeout seconds
+     */
+    public function iShouldSeeOutputBeforeTimeout(string $output, int $timeout)
+    {
+        $this->iShouldSeeOutputInElementBeforeTimeout($output, $timeout, '*');
+    }
+
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), [
@@ -1599,6 +1621,8 @@ class ApplicationContext extends UserContext
         if ($this->currentPage) {
             return $this->navigationContext->getPage($this->currentPage);
         }
+
+        return null;
     }
 
     private function moveDraggableElementTo($element, $key)

@@ -117,6 +117,7 @@ Scenario: Project can be filtered by status
   And I wait ".project-preview" to appear on current page
   Then I should see 5 ".project-preview" elements
   And I select "ongoing-and-future" from react "#project-status"
+  And I wait "#project-list .loader" to disappear on current page
   Then I should see 1 ".project-preview" elements
 
 @read-only
@@ -195,7 +196,7 @@ Scenario: Anonymous try to access to a project with restricted access and should
   Given I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
   Then I should see "global.login"
 
-  Scenario: Not allowed user can't access to a private project
+Scenario: Not allowed user can't access to a private project
   Given I am logged in as user
   And I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
   Then I should see 'unauthorized-access'
@@ -259,9 +260,8 @@ Scenario: Pierre can access to a restricted project to his user group
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
-  And I wait 1 seconds
-  And I should see "restrictedaccess"
+  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)" before 3 seconds
+  And I should see "restrictedaccess" before 3 seconds
   And I open restricted access modal
   Then I should see "people-with-access-to-project"
   And I should see "Agent de la ville"

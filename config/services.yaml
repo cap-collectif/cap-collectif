@@ -146,6 +146,7 @@ parameters:
     env(SYMFONY_ASSETS_HOST): null
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
     env(SYMFONY_REMEMBER_SECRET): secretRemember
+    env(SYMFONY_INSTANCE_REMEMBER_SECRET): 'secretRemember'
     # Turnstile testing tokens that forces an interactive challenge (same as Google Recaptcha)
     # see https://developers.cloudflare.com/turnstile/frequently-asked-questions/
     # /!\ In production you must use your own tokens /!\
@@ -193,6 +194,16 @@ parameters:
     env(SYMFONY_DEFAULT_REDIRECTIONIO_PROJECT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_OPENID_TEST_USERNAME): 'test'
     env(SYMFONY_OPENID_TEST_PASSWORD): 'test'
+    # Other
+    env(SYMFONY_MAPBOX_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_MAPBOX_SECRET_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_MAILJET_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_MAILJET_PRIVATE_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_MANDRILL_API_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_SENDINBLUE_API_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_SENDINBLUE_NL_LIST_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_GOOGLE_MAP_SERVER_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
