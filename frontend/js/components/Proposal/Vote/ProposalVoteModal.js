@@ -14,6 +14,7 @@ import {
   Tag,
   CapUIIcon,
   InfoMessage,
+  toast,
 } from '@cap-collectif/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -46,6 +47,7 @@ import {
 import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert';
 import formatPhoneNumber from '~/utils/formatPhoneNumber';
 import CookieMonster from '~/CookieMonster';
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 
 type Props = {
   proposal: ProposalVoteModal_proposal$key,
@@ -78,6 +80,10 @@ const STEP_FRAGMENT = graphql`
     id
     votesRanking
     votesHelpText
+    votesMin
+    project {
+      slug
+    }
     ...VoteMinAlert_step @arguments(token: $token)
     ... on RequirementStep {
       requirements {
@@ -162,6 +168,7 @@ export const ProposalVoteModal = ({
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const pristine = isPristine(getFormName(step))(localState);
   const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone();
+  const isVoteMin = useFeatureFlag('votes_min');
 
   // Create temp vote to display Proposal in ProposalsUserVotesTable
   const createTmpVote = React.useCallback(() => {
@@ -245,21 +252,52 @@ export const ProposalVoteModal = ({
     return 'global.vote.for';
   };
 
+  const votesMin: number = isVoteMin && step.votesMin ? step.votesMin : 1;
+  const viewerVotesBeforeValidation = step?.viewerVotes?.totalCount || 0;
+  const remainingVotesAfterValidation = votesMin - viewerVotesBeforeValidation - 1;
+
   const onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
     const tmpVote = values.votes.filter(v => v.id === null)[0];
     if (!tmpVote) return;
     // First we add the vote
     return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl).then(data => {
       if (
-        !data ||
-        !data.addProposalVote ||
-        !data.addProposalVote.voteEdge ||
-        !data.addProposalVote.voteEdge.node ||
+        !data?.addProposalVote?.voteEdge?.node ||
         typeof data.addProposalVote.voteEdge === 'undefined'
       ) {
         invariant(false, 'The vote id is missing.');
       }
       tmpVote.id = data.addProposalVote.voteEdge.node.id;
+
+      const hasFinished = remainingVotesAfterValidation < 0;
+      const hasJustFinished = remainingVotesAfterValidation === 0;
+
+      const isInterpellation = isInterpellationContextFromStep(step);
+
+      if (!isInterpellation && votesMin > 1 && (!hasFinished || hasJustFinished)) {
+        toast({
+          variant: hasJustFinished ? 'success' : 'warning',
+          content: intl.formatMessage(
+            {
+              id: hasJustFinished ? 'participation-validated' : 'vote-for-x-proposals',
+            },
+            {
+              num: remainingVotesAfterValidation,
+              div: (...chunks) => <div>{chunks}</div>,
+              b: (...chunks) => <b>{chunks}</b>,
+              a: (...chunks) => (
+                <span style={{ marginLeft: 4 }}>
+                  <a href={`/projects/${step.project?.slug || ''}/votes`}>{chunks}</a>
+                </span>
+              ),
+            },
+          ),
+        });
+      } else if (!isInterpellation)
+        toast({
+          variant: 'success',
+          content: intl.formatMessage({ id: 'vote.add_success' }),
+        });
 
       // If the user didn't reorder
       // or update any vote privacy
@@ -503,7 +541,9 @@ export const ProposalVoteModal = ({
                 });
                 hide();
               }}>
-              {intl.formatMessage({ id: 'proposal.validate.vote' })}
+              {intl.formatMessage({
+                id: !remainingVotesAfterValidation ? 'validate-participation' : 'keep-voting',
+              })}
             </Button>
           </Modal.Footer>
         </>

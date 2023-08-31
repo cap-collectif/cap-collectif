@@ -218,16 +218,21 @@ export const vote = (
     })
     .then(response => {
       dispatch(closeVoteModal());
+
+      const isInterpellation =
+        response.addProposalVote?.voteEdge &&
+        isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step);
+
       const successTranslationKey =
-        response.addProposalVote &&
-        response.addProposalVote.voteEdge &&
-        isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
+        response.addProposalVote && response.addProposalVote.voteEdge && isInterpellation
           ? 'support.add_success'
           : 'vote.add_success';
-      toast({
-        variant: 'success',
-        content: intl.formatMessage({ id: successTranslationKey }),
-      });
+
+      if (isInterpellation)
+        toast({
+          variant: 'success',
+          content: intl.formatMessage({ id: successTranslationKey }),
+        });
       if (onSuccess) onSuccess();
       return response;
     })

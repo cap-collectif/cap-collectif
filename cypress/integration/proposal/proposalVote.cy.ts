@@ -32,7 +32,7 @@ describe('Proposal Vote Page', () => {
       cy.wait(1000)
       cy.get('#confirm-proposal-vote').click({ force: true })
       cy.wait('@AddProposalVoteMutation')
-      cy.contains('vote.add_success')
+      cy.contains('vote-for-x-proposals {"num":2}')
     })
     it('Logged in user wants to vote and unvote for a proposal', () => {
       cy.directLoginAs('user')

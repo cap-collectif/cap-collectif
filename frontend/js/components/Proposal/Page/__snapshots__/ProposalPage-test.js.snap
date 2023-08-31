@@ -8860,7 +8860,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
         ],
       },
       "params": Object {
-        "cacheID": "0bf677f4f8d8d8ee77084ddbffd99f8f",
+        "cacheID": "be6e725dda97f0352274ec12b91f6630",
         "id": null,
         "metadata": Object {},
         "name": "ProposalPageQuery",
@@ -11237,6 +11237,15 @@ fragment ProposalVoteModal_step_2uzqnG on ProposalStep {
   id
   votesRanking
   votesHelpText
+  votesMin
+  project {
+    slug
+    id
+    type {
+      title
+      id
+    }
+  }
   ...VoteMinAlert_step_3Q7IHq
   ... on RequirementStep {
     __isRequirementStep: __typename
@@ -11287,13 +11296,6 @@ fragment ProposalVoteModal_step_2uzqnG on ProposalStep {
   publishedVoteDate
   form {
     objectType
-    id
-  }
-  project {
-    type {
-      title
-      id
-    }
     id
   }
   ...ProposalsUserVotesTable_step_3Q7IHq
@@ -11427,6 +11429,8 @@ fragment VoteMinAlert_step_3Q7IHq on ProposalStep {
     totalCount
   }
   votesMin
+  votesLimit
+  votesRanking
   form {
     objectType
     id
