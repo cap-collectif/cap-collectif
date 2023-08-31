@@ -25,6 +25,7 @@ export type TextEditorProps = {
         cancel?: string,
         submit?: string,
     },
+    limitChars?: number,
 };
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -35,6 +36,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
     selectedLanguage = 'fr',
     platformLanguage = 'fr',
     buttonLabels,
+    limitChars,
 }) => {
     const intl = useIntl();
     const [isOpen, setIsOpen] = React.useState(false);
@@ -89,6 +91,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                                 onChange={value => setInModalValue(value)}
                                 value={value}
                                 platformLanguage={platformLanguage}
+                                limitChars={limitChars}
                             />
                         </Modal.Body>
                         <Modal.Footer spacing={2}>
@@ -134,6 +137,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                                 isOpen || reloadContent ? '_suspend' : selectedLanguage
                             }
                             platformLanguage={platformLanguage}
+                            limitChars={limitChars}
                         />
                     );
                 }}

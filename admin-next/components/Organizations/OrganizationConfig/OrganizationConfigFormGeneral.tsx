@@ -115,6 +115,7 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
                     label={intl.formatMessage({ id: 'organisation.description' })}
                     platformLanguage={defaultLocale?.code}
                     selectedLanguage={defaultLocale?.code || 'fr'}
+                    limitChars={280}
                 />
             </Flex>
         </Flex>

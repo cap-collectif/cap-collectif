@@ -12,60 +12,93 @@ const ForwardRefEditor = forwardRef((props: JoditProps, ref: LegacyRef<any>) => 
 ));
 
 type Props = {
-    textAreaOnly?: boolean;
-    value?: any;
-    onChange: (value: string) => void;
-    id?: string;
-    disabled?: boolean;
-    platformLanguage: string;
-    selectedLanguage?: string;
-    placeholder?: string;
+    textAreaOnly?: boolean,
+    value?: any,
+    onChange: (value: string) => void,
+    id?: string,
+    disabled?: boolean,
+    platformLanguage: string,
+    selectedLanguage?: string,
+    placeholder?: string,
+    limitChars?: number,
 };
+
+const limitedConf = [
+    'bold',
+    'italic',
+    'underline',
+    'strikethrough',
+    'eraser',
+    '|',
+    'ul',
+    'ol',
+    '|',
+    'left',
+    'center',
+    'right',
+    'justify',
+    '|',
+    'fontsize',
+    'brush',
+    'paragraph',
+    '|',
+    'file',
+    'link',
+    '|',
+    'undo',
+    'redo',
+    '|',
+    'hr',
+];
 
 const getConfig = (
     platformLanguage: string | null,
     placeholder: string,
     editor: any,
     textAreaOnly: boolean,
+    limitChars?: number,
 ) => {
-    const buttons = [
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough',
-        'eraser',
-        '|',
-        'ul',
-        'ol',
-        '|',
-        'left',
-        'center',
-        'right',
-        'justify',
-        '|',
-        'fontsize',
-        'brush',
-        'paragraph',
-        '|',
-        'superscript',
-        'subscript',
-        '|',
-        'image',
-        'video',
-        'file',
-        'link',
-        'table',
-        '|',
-        'undo',
-        'redo',
-        '|',
-        'hr',
-        'source',
-    ];
+    const buttons = limitChars
+        ? limitedConf
+        : [
+              'bold',
+              'italic',
+              'underline',
+              'strikethrough',
+              'eraser',
+              '|',
+              'ul',
+              'ol',
+              '|',
+              'left',
+              'center',
+              'right',
+              'justify',
+              '|',
+              'fontsize',
+              'brush',
+              'paragraph',
+              '|',
+              'superscript',
+              'subscript',
+              '|',
+              'image',
+              'video',
+              'file',
+              'link',
+              'table',
+              '|',
+              'undo',
+              'redo',
+              '|',
+              'hr',
+              'source',
+          ];
     return {
         toolbarSticky: true,
         readonly: false,
         minHeight: textAreaOnly ? 100 : 300,
+        limitChars,
         style: {
             background: 'white',
         },
@@ -129,6 +162,7 @@ const Jodit = ({
     id,
     selectedLanguage,
     placeholder = '',
+    limitChars,
 }: Props) => {
     const { colors, radii, space } = useTheme();
     const editor = useRef<any>(null);
@@ -164,7 +198,7 @@ const Jodit = ({
           };
 
     const config = useMemo(
-        () => getConfig(platformLanguage, placeholder, editor, textAreaOnly),
+        () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, limitChars),
         [platformLanguage],
     );
 

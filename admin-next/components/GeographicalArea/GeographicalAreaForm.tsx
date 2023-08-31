@@ -295,11 +295,11 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                                     label={intl.formatMessage({ id: 'global.description' })}
                                     platformLanguage={defaultLocale?.code}
                                     selectedLanguage={localeSelected.value}
+                                    limitChars={280}
                                 />
                             </FormProvider>
                             <FormControl name="cover" control={control}>
                                 <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
-                                    {' '}
                                     <Text fontSize={2} color="gray.500">
                                         {intl.formatMessage({ id: 'global.optional' })}
                                     </Text>
