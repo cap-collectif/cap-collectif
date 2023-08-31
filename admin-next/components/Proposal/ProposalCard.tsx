@@ -50,9 +50,6 @@ const FRAGMENT = graphql`
         votes {
             totalCount
         }
-        currentVotableStep {
-            voteType
-        }
     }
 `;
 
@@ -147,21 +144,8 @@ export const ProposalCard = ({
 
     if (!proposal) return null;
 
-    const {
-        media,
-        author,
-        category,
-        title,
-        address,
-        summary,
-        body,
-        reference,
-        url,
-        estimation,
-        currentVotableStep,
-    } = proposal;
-
-    const showNullEstimation = !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET');
+    const { media, author, category, title, address, summary, body, reference, url, estimation } =
+        proposal;
 
     const summaryOrBodyExcerpt = stripHTML(summary ?? body ?? '') || '';
 
@@ -225,9 +209,7 @@ export const ProposalCard = ({
                     <Flex justifyContent="space-between" alignItems="center" direction="row" mt={6}>
                         <Flex alignItems="center" spacing={4} justifyContent="start" flex="none">
                             <Flex alignItems="center" spacing={2}>
-                                {estimation !== null &&
-                                typeof estimation !== 'undefined' &&
-                                showNullEstimation ? (
+                                {estimation !== null && typeof estimation !== 'undefined' ? (
                                     <Tag variantColor="neutral-gray" mr={4} sx={tagSx}>
                                         <Icon
                                             size={CapUIIconSize.Md}
