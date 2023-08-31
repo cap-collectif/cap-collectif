@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalArchiveLimitDateResolver;
@@ -20,13 +21,15 @@ class ArchiveProposalsCommand extends Command
     private SelectionStepRepository $selectionStepRepository;
     private EntityManagerInterface $em;
     private ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver;
+    private Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,
         ProposalRepository $proposalRepository,
         CollectStepRepository $collectStepRepository,
         SelectionStepRepository $selectionStepRepository,
-        ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver
+        ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver,
+        Indexer $indexer
     ) {
         parent::__construct();
         $this->proposalRepository = $proposalRepository;
@@ -34,6 +37,7 @@ class ArchiveProposalsCommand extends Command
         $this->selectionStepRepository = $selectionStepRepository;
         $this->em = $em;
         $this->proposalArchiveLimitDateResolver = $proposalArchiveLimitDateResolver;
+        $this->indexer = $indexer;
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -56,8 +60,11 @@ class ArchiveProposalsCommand extends Command
                 if ($dateLimit < $now) {
                     ++$count;
                     $proposal->setIsArchived(true);
+                    $this->indexer->index(Proposal::class, $proposal->getId());
                 }
             }
+
+            $this->indexer->finishBulk();
 
             $output->writeln("Archiving {$count} proposals for step : {$step->getTitle()}");
             $this->em->flush();

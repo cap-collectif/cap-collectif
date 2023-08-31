@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\ArchiveProposalsCommand;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalArchiveLimitDateResolver;
@@ -21,14 +22,16 @@ class ArchiveProposalsCommandSpec extends ObjectBehavior
         ProposalRepository $proposalRepository,
         CollectStepRepository $collectStepRepository,
         SelectionStepRepository $selectionStepRepository,
-        ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver
+        ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver,
+        Indexer $indexer
     ) {
         $this->beConstructedWith(
             $em,
             $proposalRepository,
             $collectStepRepository,
             $selectionStepRepository,
-            $proposalArchiveLimitDateResolver
+            $proposalArchiveLimitDateResolver,
+            $indexer
         );
     }
 
@@ -46,7 +49,8 @@ class ArchiveProposalsCommandSpec extends ObjectBehavior
         ProposalRepository $proposalRepository,
         ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver,
         CollectStep $collectStep,
-        Proposal $proposal
+        Proposal $proposal,
+        Indexer $indexer
     ) {
         $this->prepareData($collectStep, $collectStepRepository, $selectionStepRepository, $proposalRepository, $proposal);
 
@@ -55,6 +59,13 @@ class ArchiveProposalsCommandSpec extends ObjectBehavior
         $proposal->setIsArchived(true)
             ->shouldBeCalled()
         ;
+
+        $proposalId = 'proposalId';
+        $proposal->getId()->willReturn($proposalId);
+        $indexer->index(Proposal::class, $proposalId);
+
+        $indexer->finishBulk();
+
         $count = 1;
 
         $output->writeln("Archiving {$count} proposals for step : Step title")->shouldBeCalled();
@@ -93,7 +104,7 @@ class ArchiveProposalsCommandSpec extends ObjectBehavior
         $this->execute($input->getWrappedObject(), $output->getWrappedObject());
     }
 
-    public function prepareData(
+    private function prepareData(
         CollectStep $collectStep,
         CollectStepRepository $collectStepRepository,
         SelectionStepRepository $selectionStepRepository,
