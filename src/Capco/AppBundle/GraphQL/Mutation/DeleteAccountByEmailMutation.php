@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -55,7 +55,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         EventRepository $eventRepository,
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
-        AnonymizeUser $anonymizeUser,
+        UserAnonymizer $userAnonymiser,
         Publisher $publisher
     ) {
         parent::__construct(
@@ -78,7 +78,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $anonymizeUser,
+            $userAnonymiser,
             $publisher
         );
         $this->userRepository = $userRepository;
@@ -111,9 +111,9 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         $this->em->refresh($user);
 
         try {
-            $this->anonymizeUser->anonymize($user);
+            $this->userAnonymizer->anonymize($user);
             $this->em->refresh($user);
-            $this->softDelete($user);
+            $this->softDeleteContents($user);
             $this->em->flush();
         } catch (Exception $e) {
             $this->logger->error($e->getMessage(), ['context' => 'delete_user_account_by_email']);

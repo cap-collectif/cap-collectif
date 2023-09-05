@@ -2,7 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
@@ -70,7 +70,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         SoftDeleteEventListener $softDeleteEventListener,
         EventManager $eventManager,
         User $user,
-        AnonymizeUser $anonymizeUser,
+        UserAnonymizer $userAnonymizer,
         Publisher $publisher,
         SessionInterface $session
     ) {
@@ -111,7 +111,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $anonymizeUser,
+            $userAnonymizer,
             $publisher,
             $session
         );

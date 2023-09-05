@@ -372,7 +372,7 @@ services:
             $instanceName: '%instance_name%'
             $token: '%instance_auth_token%'
 
-    Capco\AppBundle\Anonymizer\AnonymizeUser:
+    Capco\AppBundle\Anonymizer\UserAnonymizer:
         public: true
 
     Symfony\Component\String\Slugger\AsciiSlugger:

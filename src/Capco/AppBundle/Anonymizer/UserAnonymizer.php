@@ -8,52 +8,48 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class AnonymizeUser
+class UserAnonymizer
 {
     public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
 
-    protected EntityManagerInterface $em;
-    protected UserGroupRepository $groupRepository;
-    protected NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    protected LoggerInterface $logger;
-    protected ProposalAuthorDataLoader $proposalAuthorDataLoader;
-    protected UserManager $userManager;
-    protected MediaRepository $mediaRepository;
-    protected MediaProvider $mediaProvider;
-    protected MailingListRepository $mailingListRepository;
-    private FormFactoryInterface $formFactory;
+    private EntityManagerInterface $em;
+    private UserGroupRepository $groupRepository;
+    private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
+    private LoggerInterface $logger;
+    private ProposalAuthorDataLoader $proposalAuthorDataLoader;
+    private UserManager $userManager;
+    private MediaRepository $mediaRepository;
+    private MailingListRepository $mailingListRepository;
+    private TranslatorInterface $translator;
 
     public function __construct(
         EntityManagerInterface $em,
         UserGroupRepository $groupRepository,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
         ProposalAuthorDataLoader $proposalAuthorDataLoader,
         UserManager $userManager,
         MediaRepository $mediaRepository,
-        MediaProvider $mediaProvider,
-        MailingListRepository $mailingListRepository
+        MailingListRepository $mailingListRepository,
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->groupRepository = $groupRepository;
         $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
         $this->logger = $logger;
-        $this->formFactory = $formFactory;
         $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
         $this->userManager = $userManager;
         $this->mediaRepository = $mediaRepository;
-        $this->mediaProvider = $mediaProvider;
         $this->mailingListRepository = $mailingListRepository;
+        $this->translator = $translator;
     }
 
     public function anonymize(User $user): void
@@ -75,7 +71,7 @@ class AnonymizeUser
 
         $user->setEmail(null);
         $user->setEmailCanonical(null);
-        $user->setUsername('deleted-user');
+        $user->setUsername($this->translator->trans('deleted-user'));
         $user->setDeletedAccountAt(new \DateTime());
         $user->setPlainPassword(null);
         $user->clearLastLogin();

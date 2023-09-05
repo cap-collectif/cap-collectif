@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -60,7 +60,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
-        AnonymizeUser $anonymizeUser,
+        UserAnonymizer $userAnonymizer,
         Publisher $publisher,
         SessionInterface $session
     ) {
@@ -84,7 +84,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $highlightedContentRepository,
             $mailingListRepository,
             $logger,
-            $anonymizeUser,
+            $userAnonymizer,
             $publisher
         );
         $this->userRepository = $userRepository;
@@ -111,14 +111,13 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
 
     public function deleteAccount(string $deleteType, User $user): void
     {
-        if (DeleteAccountType::HARD === $deleteType && $user) {
+        if (DeleteAccountType::HARD === $deleteType) {
             $this->hardDeleteUserContributionsInActiveSteps($user);
-            // in order not to reference dead relationships between entities
             $this->em->refresh($user);
+            $this->softDeleteContents($user);
         }
         $this->anonymizeUser($user);
         $this->em->refresh($user);
-        $this->softDelete($user);
 
         $this->em->flush();
     }

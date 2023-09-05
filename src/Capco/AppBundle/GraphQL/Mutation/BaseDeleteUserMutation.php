@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Anonymizer\AnonymizeUser;
+use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
@@ -56,7 +56,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected HighlightedContentRepository $highlightedContentRepository;
     protected MailingListRepository $mailingListRepository;
     protected LoggerInterface $logger;
-    protected AnonymizeUser $anonymizeUser;
+    protected UserAnonymizer $userAnonymizer;
     private Publisher $publisher;
 
     public function __construct(
@@ -79,7 +79,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
-        AnonymizeUser $anonymizeUser,
+        UserAnonymizer $userAnonymizer,
         Publisher $publisher
     ) {
         parent::__construct($em, $mediaProvider);
@@ -100,11 +100,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->highlightedContentRepository = $highlightedContentRepository;
         $this->mailingListRepository = $mailingListRepository;
         $this->logger = $logger;
-        $this->anonymizeUser = $anonymizeUser;
+        $this->userAnonymizer = $userAnonymizer;
         $this->publisher = $publisher;
     }
 
-    public function softDelete(User $user): void
+    public function softDeleteContents(User $user): void
     {
         $contributions = $user->getContributions();
         $reports = $this->reportingRepository->findBy(['Reporter' => $user]);
@@ -113,10 +113,10 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
-                $contribution->setTitle('deleted-title');
+                $contribution->setTitle($this->translator->trans('deleted-title'));
             }
             if (method_exists($contribution, 'setBody')) {
-                $contribution->setBody('deleted-content-by-author');
+                $contribution->setBody($this->translator->trans('deleted-content-by-author'));
             }
             if (method_exists($contribution, 'setSummary')) {
                 $contribution->setSummary(null);
@@ -129,7 +129,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 }
             }
             if ($contribution instanceof Proposal) {
-                $this->deleteResponsesContent($contribution, 'deleted-content-by-author');
+                $this->deleteResponsesContent($contribution, $this->translator->trans('deleted-content-by-author'));
                 $contribution->setAddress(null);
                 $contribution->setEstimation(null);
                 $contribution->setCategory(null);
@@ -139,7 +139,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         }
 
         foreach ($reports as $report) {
-            $report->setBody('deleted-content-by-author');
+            $report->setBody($this->translator->trans('deleted-content-by-author'));
         }
 
         foreach ($events as $event) {
@@ -154,6 +154,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
             $this->em->remove($event);
         }
 
+        $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
     }
 
@@ -173,7 +174,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 $toDeleteList[] = $contribution;
                 $this->deleteResponsesAndEvaluationsFromProposal($user, $contribution);
             } elseif ($this->shallContributionBeHidden($contribution)) {
-                $contribution->setBody('deleted-content-by-author');
+                $contribution->setBody($this->translator->trans('deleted-content-by-author'));
             }
 
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
@@ -209,7 +210,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     public function anonymizeUser(User $user): void
     {
         $email = $user->getEmail();
-        $this->anonymizeUser->anonymize($user);
+        $this->userAnonymizer->anonymize($user);
 
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::SENDINBLUE,
@@ -295,7 +296,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function removeObjectMedia($object): void
     {
-        $this->anonymizeUser->removeObjectMedia($object);
+        $this->userAnonymizer->removeObjectMedia($object);
     }
 
     private function deleteResponsesContent(Proposal $proposal, string $deletedBodyText): void
@@ -334,7 +335,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 
     private function removeFromMailingLists(User $user): void
     {
-        $this->anonymizeUser->removeFromMailingLists($user);
+        $this->userAnonymizer->removeFromMailingLists($user);
 
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::SENDINBLUE,

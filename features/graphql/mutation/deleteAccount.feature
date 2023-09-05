@@ -83,7 +83,6 @@ Scenario: User5 who decides to hard delete his account should have his content a
       "input": {
         "type": "HARD",
         "userId": "VXNlcjp1c2VyNQ=="
-
       }
     }
   }
@@ -443,7 +442,7 @@ Scenario: User who decides to hard delete his account should have his content de
   """
 
 @database @rabbitmq @softdelete
-Scenario: User5 who decides to hard delete his account should have his content anonymised (closed step).
+Scenario: User5 who decides to soft delete his account should have his content kept readable (closed step).
   Given I am logged in to graphql as super admin
   When I send a GraphQL POST request:
   """
@@ -457,7 +456,6 @@ Scenario: User5 who decides to hard delete his account should have his content a
       "input": {
         "type": "SOFT",
         "userId": "VXNlcjp1c2VyNQ=="
-
       }
     }
   }
@@ -512,8 +510,8 @@ Scenario: User5 who decides to hard delete his account should have his content a
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMg==",
-                "title": "deleted-title",
-                "body": "deleted-content-by-author",
+                "title": "Proposition plus votable",
+                "body": "TODO",
                 "createdAt": "2017-02-01 09:40:00",
                 "published": true,
                 "author": {
@@ -524,8 +522,8 @@ Scenario: User5 who decides to hard delete his account should have his content a
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwxMw==",
-                "title": "deleted-title",
-                "body": "deleted-content-by-author",
+                "title": "Proposition plus votable 2",
+                "body": "TODO",
                 "createdAt": "2017-02-01 09:50:00",
                 "published": true,
                 "author": {
@@ -541,7 +539,7 @@ Scenario: User5 who decides to hard delete his account should have his content a
   """
 
 @database @rabbitmq @softdelete
-Scenario: User who decides to hard delete his account should have his content deleted in open projects.
+Scenario: User who decides to soft delete his account should not have his content kept in open projects.
   Given I am logged in to graphql as super admin
   When I send a GraphQL POST request:
   """
@@ -621,8 +619,8 @@ Scenario: User who decides to hard delete his account should have his content de
             {
               "node": {
                 "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
-                "title": "deleted-title",
-                "body": "deleted-content-by-author",
+                "title": "Rénovation du gymnase",
+                "body": "<p>On va en faire un beau gymnase, promis :)</p>",
                 "createdAt": "2017-02-01 00:03:00",
                 "published": true,
                 "author": {
