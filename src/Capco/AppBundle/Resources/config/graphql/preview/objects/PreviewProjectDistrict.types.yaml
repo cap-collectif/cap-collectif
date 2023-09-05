@@ -1,23 +1,22 @@
-ProjectDistrict:
+PreviewProjectDistrict:
     type: object
     inherits:
-        - District
-        - WithFollowers
-        - InternalPrimaryKey
+        - PreviewDistrict
+        - PreviewWithFollowers
     config:
         name: ProjectDistrict
         interfaces:
-            - District
+            - PreviewDistrict
             - Node
         description: 'A project district'
         fields:
             projects:
-                type: 'InternalProjectConnection'
+                type: 'PreviewProjectConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsInDistrictResolver", [value, args, getUser()])'
                 description: 'The list of projects in district'
             followers:
-                type: 'InternalUserConnection!'
+                type: 'PreviewUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -27,6 +26,6 @@ ProjectDistrict:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\ProjectDistrictFollowerConnection", [value, args])'
                 description: 'The list of followers of the district'
             projectDistrictPositioners:
-                type: '[ProjectDistrictPositioner]'
+                type: '[PreviewProjectDistrictPositioner]'
             cover:
-                type: 'InternalMedia'
+                type: 'PreviewMedia'

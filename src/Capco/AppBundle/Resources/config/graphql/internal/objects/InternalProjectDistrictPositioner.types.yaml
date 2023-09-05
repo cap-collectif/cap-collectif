@@ -1,0 +1,11 @@
+InternalProjectDistrictPositioner:
+    type: object
+    inherits:
+        - PreviewProjectDistrictPositioner
+    config:
+        name: ProjectDistrictPositioner
+        fields:
+            district:
+                type: 'InternalProjectDistrict!'
+            project:
+                type: 'InternalProject!'

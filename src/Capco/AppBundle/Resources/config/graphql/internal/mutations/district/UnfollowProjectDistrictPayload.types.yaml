@@ -3,7 +3,7 @@ UnfollowProjectDistrictPayload:
     config:
         fields:
             projectDistrict:
-                type: 'ProjectDistrict'
+                type: 'InternalProjectDistrict'
                 description: 'The project district unfollowed'
             unfollowerId:
                 type: 'ID'

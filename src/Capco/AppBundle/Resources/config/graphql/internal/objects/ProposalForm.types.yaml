@@ -55,7 +55,7 @@ ProposalForm:
             proposalInAZoneRequired:
                 type: 'Boolean!'
             districts:
-                type: '[ProposalDistrict!]!'
+                type: '[InternalProposalDistrict!]!'
                 args:
                     order:
                         type: 'DistrictOrderField'

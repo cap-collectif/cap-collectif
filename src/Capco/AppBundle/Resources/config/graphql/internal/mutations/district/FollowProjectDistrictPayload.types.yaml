@@ -3,7 +3,7 @@ FollowProjectDistrictPayload:
     config:
         fields:
             projectDistrict:
-                type: 'ProjectDistrict'
+                type: 'InternalProjectDistrict'
             followerEdge:
                 type: 'FollowerEdge'
             errorCode:

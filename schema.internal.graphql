@@ -9953,6 +9953,17 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """The list of users who authored the project."""
   authors: [Author!]!
 
+  """Linking table with position for district"""
+  districts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectDistrictConnection
+
   """The admin URL to this resource."""
   adminUrl: URI!
 
@@ -10140,17 +10151,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): GroupConnection
-
-  """Linking table with position for district"""
-  districts(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): ProjectDistrictConnection
 
   """The comments related to the project."""
   comments(
@@ -10353,9 +10353,6 @@ type ProjectDistrict implements District & Node {
   """Identifies if the viewer is following the entity."""
   viewerIsFollowing: Boolean!
 
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
   """The list of projects in district"""
   projects(
     """
@@ -10368,6 +10365,9 @@ type ProjectDistrict implements District & Node {
   ): ProjectConnection
   projectDistrictPositioners: [ProjectDistrictPositioner]
   cover: Media
+
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
 }
 
 """A connection to a list of items."""
@@ -12541,6 +12541,20 @@ type Query {
     orderBy: UserOrder = {field: CREATED_AT, direction: DESC}
   ): UserConnection!
 
+  """List all the district project in the platform."""
+  projectDistricts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by name."""
+    name: String = null
+  ): ProjectDistrictConnection!
+
   """Lookup a proposal from its unique slug."""
   proposalFromSlug(slug: String!): Proposal
 
@@ -12667,20 +12681,6 @@ type Query {
     """the term to filter questions"""
     term: String
   ): [Questionnaire!]!
-
-  """List all the district project in the platform."""
-  projectDistricts(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """Filter by name."""
-    name: String = null
-  ): ProjectDistrictConnection!
 
   """
   List all the contributors in the platform, totalCount includes anon replies and votes.

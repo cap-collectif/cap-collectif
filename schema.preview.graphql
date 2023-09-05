@@ -143,6 +143,9 @@ type CollectStep implements Node & Step {
   state: StepState!
 }
 
+"""A color on hexadecimal format (#DDDDDD)."""
+scalar Color
+
 """A consultation"""
 type Consultation implements Node {
   """The ID of an object."""
@@ -300,6 +303,9 @@ enum ContributionOrderField {
   PUBLISHED_AT
 }
 
+"""A string containing CSS."""
+scalar CssJSON
+
 """A string containing a datetime."""
 scalar DateTime
 
@@ -337,6 +343,45 @@ type DeleteEventPayload {
   """The ID of the deleted event."""
   deletedEventId: ID
   clientMutationId: String
+}
+
+"""A district"""
+interface District {
+  """The ID of an object"""
+  id: ID!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+  border: Style
+  background: Style
+  translations: [DistrictTranslation!]!
+}
+
+"""A translation of a District."""
+type DistrictTranslation {
+  locale: String!
+  name: String!
+  slug: String!
+  titleOnMap: String
+
+  """The description of the district."""
+  description: String
 }
 
 """Entities that can be drafted."""
@@ -482,6 +527,30 @@ input EventTranslationInput {
   """the localized link of the event"""
   link: URI
 }
+
+"""Ways in which follower connections can be ordered."""
+input FollowerOrder {
+  """The field in which to order nodes by."""
+  field: FollowerOrderField!
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = ASC
+}
+
+"""Properties by which follower connections can be ordered"""
+enum FollowerOrderField {
+  """Allows ordering a list of followers namely."""
+  NAME
+
+  """Allows ordering a list of followers by when they were followed."""
+  FOLLOWED_AT
+
+  """Allows ordering a list of followers randomly."""
+  RANDOM
+}
+
+"""A string containing GeoJSON code."""
+scalar GeoJSON
 
 """An address from Google Maps."""
 type GoogleMapsAddress {
@@ -811,6 +880,17 @@ type Project implements Node & UniformResourceLocatable {
 
   """The list of users who authored the project."""
   authors: [User!]!
+
+  """Linking table with position for district"""
+  districts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectDistrictConnection
 }
 
 """A connection to a list of items."""
@@ -823,6 +903,93 @@ type ProjectConnection {
 
   """Information to aid in pagination."""
   edges: [ProjectEdge]
+}
+
+"""A project district"""
+type ProjectDistrict implements District & Node {
+  """The ID of an object"""
+  id: ID!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+  border: Style
+  background: Style
+  translations: [DistrictTranslation!]!
+
+  """The list of followers of the district"""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for followers returning from the connection"""
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  """Identifies the viewer following configuration on the entity."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Identifies if the viewer is following the entity."""
+  viewerIsFollowing: Boolean!
+
+  """The list of projects in district"""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectConnection
+  projectDistrictPositioners: [ProjectDistrictPositioner]
+  cover: Media
+}
+
+"""A connection to a list of items."""
+type ProjectDistrictConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ProjectDistrictEdge]
+}
+
+"""An edge in a connection."""
+type ProjectDistrictEdge {
+  """The item at the end of the edge."""
+  node: ProjectDistrict
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type ProjectDistrictPositioner {
+  district: ProjectDistrict!
+  project: Project!
+  position: Int!
 }
 
 """An edge in a connection."""
@@ -1357,6 +1524,20 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): UserConnection!
+
+  """List all the district project in the platform."""
+  projectDistricts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by name."""
+    name: String = null
+  ): ProjectDistrictConnection!
 }
 
 """All custom forms are build using questions."""
@@ -1702,6 +1883,35 @@ enum StepState {
 
   """The step has been closed."""
   CLOSED
+}
+
+"""A object style."""
+type Style {
+  id: ID
+
+  """Specify if the style is activated or not."""
+  enabled: Boolean!
+
+  """The color value in hexadecimal format for the border or background."""
+  color: Color
+
+  """The value of the opacity of the border or the background."""
+  opacity: Float
+
+  """The value of the border size."""
+  size: Int
+}
+
+"""3 possible values for a subscription."""
+enum SubscriptionTypeValue {
+  """Get all notifications for this subscription"""
+  ALL
+
+  """Get essentials notifications for this subscription"""
+  ESSENTIAL
+
+  """Get minimal notifications for this subscription"""
+  MINIMAL
 }
 
 """A theme."""

@@ -1,0 +1,10 @@
+InternalProposalDistrict:
+    type: object
+    inherits:
+        - PreviewDistrict
+    config:
+        name: ProposalDistrict
+        interfaces:
+            - PreviewDistrict
+            - Node
+        description: 'A proposal district'

@@ -1,7 +1,6 @@
 FollowerConnection:
     type: relay-connection
+    inherits:
+        - PreviewFollowerConnection
     config:
         nodeType: InternalUser!
-        connectionFields:
-            totalCount:
-                type: Int!

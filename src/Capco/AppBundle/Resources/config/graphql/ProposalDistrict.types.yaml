@@ -1,8 +1,0 @@
-ProposalDistrict:
-    type: object
-    inherits: [District]
-    config:
-        interfaces:
-            - District
-            - Node
-        description: 'A proposal district'

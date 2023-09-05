@@ -1,4 +1,4 @@
-InternalDistrictTranslation:
+PreviewDistrictTranslation:
     type: object
     config:
         name: DistrictTranslation

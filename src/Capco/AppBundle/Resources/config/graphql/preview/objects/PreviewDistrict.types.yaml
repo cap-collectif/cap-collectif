@@ -1,10 +1,11 @@
-District:
+PreviewDistrict:
     type: interface
     inherits:
         - Node
     config:
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictTypeResolver", [value])'
         description: 'A district'
+        name: District
         fields:
             id:
                 description: 'The ID of an object'
@@ -39,4 +40,4 @@ District:
             background:
                 type: 'Style'
             translations:
-                type: '[InternalDistrictTranslation!]!'
+                type: '[PreviewDistrictTranslation!]!'

@@ -3,9 +3,9 @@ CreateProjectDistrictPayload:
     config:
         fields:
             district:
-                type: 'ProjectDistrict'
+                type: 'InternalProjectDistrict'
             districtEdge:
-                type: 'ProjectDistrictEdge'
+                type: 'InternalProjectDistrictEdge'
                 description: 'The edge from the project district connection.'
             userErrors:
                 type: '[UserError!]!'

@@ -1,0 +1,7 @@
+InternalProjectDistrictConnection:
+    type: relay-connection
+    inherits:
+        - PreviewProjectDistrictConnection
+    config:
+        nodeType: InternalProjectDistrict
+        name: ProjectDistrictConnection

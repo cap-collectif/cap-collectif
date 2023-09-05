@@ -49,3 +49,8 @@ PreviewProject:
                 type: '[PreviewUser!]!'
                 resolve: '@=value.getUserAuthors()'
                 description: 'The list of users who authored the project.'
+            districts:
+                type: 'PreviewProjectDistrictConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictsResolver", [value, args])'
+                description: 'Linking table with position for district'

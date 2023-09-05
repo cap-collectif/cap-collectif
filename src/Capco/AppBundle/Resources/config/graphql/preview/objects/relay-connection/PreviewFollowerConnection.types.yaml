@@ -1,0 +1,8 @@
+PreviewFollowerConnection:
+    type: relay-connection
+    config:
+        name: FollowerConnection
+        nodeType: PreviewUser!
+        connectionFields:
+            totalCount:
+                type: Int!

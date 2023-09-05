@@ -21,11 +21,23 @@ class DistrictTypeResolver implements ResolverInterface
 
     public function __invoke(AbstractDistrict $district): Type
     {
+        $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
+
         if ($district instanceof ProposalDistrict) {
-            return $this->typeResolver->resolve('ProposalDistrict');
+            if ('internal' === $currentSchemaName) {
+                return $this->typeResolver->resolve('InternalProposalDistrict');
+            }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposalDistrict');
+            }
         }
         if ($district instanceof ProjectDistrict) {
-            return $this->typeResolver->resolve('ProjectDistrict');
+            if ('internal' === $currentSchemaName) {
+                return $this->typeResolver->resolve('InternalProjectDistrict');
+            }
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProjectDistrict');
+            }
         }
 
         throw new UserError('Could not resolve type of District.');

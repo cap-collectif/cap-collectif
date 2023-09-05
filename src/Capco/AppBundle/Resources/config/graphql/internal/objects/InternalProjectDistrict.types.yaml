@@ -1,0 +1,18 @@
+InternalProjectDistrict:
+    type: object
+    inherits:
+        - PreviewProjectDistrict
+        - PreviewDistrict
+        - WithFollowers
+        - InternalPrimaryKey
+    config:
+        name: ProjectDistrict
+        fields:
+            projects:
+                type: 'InternalProjectConnection'
+            followers:
+                type: 'InternalUserConnection!'
+            projectDistrictPositioners:
+                type: '[InternalProjectDistrictPositioner]'
+            cover:
+                type: 'InternalMedia'

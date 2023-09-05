@@ -46,6 +46,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\GraphQL\Resolver\District\DistrictTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
@@ -63,19 +64,22 @@ class NodeTypeResolver implements ResolverInterface
     private QuestionTypeResolver $questionTypeResolver;
     private ResponseResolver $responseTypeResolver;
     private ReplyTypeResolver $replyTypeResolver;
+    private DistrictTypeResolver $districtTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,
         RequirementTypeResolver $requirementTypeResolver,
         QuestionTypeResolver $questionTypeResolver,
         ResponseResolver $responseTypeResolver,
-        ReplyTypeResolver $replyTypeResolver
+        ReplyTypeResolver $replyTypeResolver,
+        DistrictTypeResolver $districtTypeResolver
     ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
         $this->questionTypeResolver = $questionTypeResolver;
         $this->responseTypeResolver = $responseTypeResolver;
         $this->replyTypeResolver = $replyTypeResolver;
+        $this->districtTypeResolver = $districtTypeResolver;
     }
 
     public function __invoke($node): Type
@@ -311,7 +315,7 @@ class NodeTypeResolver implements ResolverInterface
         }
 
         if ($node instanceof ProjectDistrict) {
-            return $this->typeResolver->resolve('ProjectDistrict');
+            return $this->districtTypeResolver->__invoke($node);
         }
 
         throw new UserError('Could not resolve type of Node.');

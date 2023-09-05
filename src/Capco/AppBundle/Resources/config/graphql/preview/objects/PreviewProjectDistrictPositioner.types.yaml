@@ -1,11 +1,11 @@
-ProjectDistrictPositioner:
+PreviewProjectDistrictPositioner:
     type: object
     config:
         name: ProjectDistrictPositioner
         fields:
             district:
-                type: 'ProjectDistrict!'
+                type: 'PreviewProjectDistrict!'
             project:
-                type: 'InternalProject!'
+                type: 'PreviewProject!'
             position:
                 type: 'Int!'
