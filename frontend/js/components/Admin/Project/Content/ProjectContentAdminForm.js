@@ -101,7 +101,7 @@ export const renderLabel = (
 );
 
 export const validate = (props: FormValues) => {
-  const { title, authors } = props;
+  const { title, authors, metaDescription } = props;
   const errors = {};
 
   if (!title || title.length < 2) {
@@ -110,6 +110,16 @@ export const validate = (props: FormValues) => {
 
   if (!authors || authors.length <= 0) {
     errors.authors = 'global.required';
+  }
+
+  const METADESCRIPTION_MAX_LENGTH = 160;
+  if (metaDescription && metaDescription.length > METADESCRIPTION_MAX_LENGTH) {
+    errors.metaDescription = {
+      id: 'characters-maximum-required',
+      values: {
+        length: METADESCRIPTION_MAX_LENGTH
+      }
+    }
   }
 
   return errors;
