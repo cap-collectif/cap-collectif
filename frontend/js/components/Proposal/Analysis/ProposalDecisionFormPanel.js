@@ -128,7 +128,7 @@ export const ProposalDecisionFormPanel = ({
                   min={0}
                   id="proposalDecision-estimatedCost"
                   name="estimatedCost"
-                  normalize={val => val ? parseFloat(val) : null}
+                  normalize={val => (val ? parseFloat(val) : null)}
                 />
               </InputGroup>
             </>
@@ -267,7 +267,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: Props) => {
         proposal?.decision?.officialResponse?.body ||
         proposal?.assessment?.officialResponse ||
         null,
-      estimatedCost: proposal?.decision?.estimatedCost || 0,
+      estimatedCost: proposal?.assessment?.estimatedCost || proposal?.decision?.estimatedCost || 0,
       authors: proposal?.decision?.officialResponse?.authors || [],
       isApproved: isApproved ? 'FAVOURABLE' : isApproved === false ? 'UNFAVOURABLE' : null,
       refusedReason: proposal?.decision?.refusedReason || null,
@@ -290,7 +290,7 @@ const container = connect<any, any, _, _, _, _>(mapStateToProps)(injectIntl(form
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDecisionFormPanel_proposal on Proposal
-      @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       ...ProposalRevisionPanel_proposal @include(if: $proposalRevisionsEnabled)
       ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
@@ -314,6 +314,7 @@ export default createFragmentContainer(container, {
       assessment {
         id
         officialResponse
+        estimatedCost
       }
       form {
         analysisConfiguration {

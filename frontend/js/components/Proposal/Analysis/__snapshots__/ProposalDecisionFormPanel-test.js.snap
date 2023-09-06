@@ -164,6 +164,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
           "$fragmentRefs": null,
           "$refType": null,
           "assessment": Object {
+            "estimatedCost": null,
             "id": "assessmentid2",
             "officialResponse": "ueueueueueue",
           },
@@ -351,6 +352,7 @@ exports[`<ProposalDecisionFormPanel  />  renders correctly with proposal revisio
             "$fragmentRefs": null,
             "$refType": null,
             "assessment": Object {
+              "estimatedCost": null,
               "id": "assessmentid2",
               "officialResponse": "ueueueueueue",
             },

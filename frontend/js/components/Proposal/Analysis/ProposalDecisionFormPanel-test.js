@@ -19,6 +19,7 @@ describe('<ProposalDecisionFormPanel  /> ', () => {
       assessment: {
         id: 'assessmentid2',
         officialResponse: 'ueueueueueue',
+        estimatedCost: null,
       },
       decision: {
         state: 'DONE',
