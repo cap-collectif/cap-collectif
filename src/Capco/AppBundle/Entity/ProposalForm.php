@@ -103,9 +103,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     private bool $commentable = true;
 
     /**
-     * @ORM\Column(name="costable", type="boolean", nullable=false, options={"default": true})
+     * @ORM\Column(name="costable", type="boolean", nullable=false, options={"default": false})
      */
-    private bool $costable = true;
+    private bool $costable = false;
 
     /**
      * @Assert\Valid
