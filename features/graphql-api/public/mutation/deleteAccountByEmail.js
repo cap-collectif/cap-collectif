@@ -11,16 +11,6 @@ const DeleteAccountByEmail = /* GraphQL */ `
 `;
 
 describe('Delete user by email', () => {
-  it('Delete existing user by email', async () => {
-    await expect(
-      graphql(
-        DeleteAccountByEmail,
-        { input: { email: 'userToDelete@cap-collectif.com' } },
-        'super_admin',
-      ),
-    ).resolves.toMatchSnapshot();
-  });
-
   it('Delete non-existing user by email', async () => {
     await expect(
       graphql(
@@ -39,5 +29,23 @@ describe('Delete user by email', () => {
         'super_admin',
       ),
     ).resolves.toMatchSnapshot();
+  });
+  it('Can delete user by email with admin role', async () => {
+    await expect(
+      graphql(
+        DeleteAccountByEmail,
+        { input: { email: 'userToDelete@cap-collectif.com' } },
+        'admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+  it('Cannot delete user by email with user role', async () => {
+    await expect(
+      graphql(
+        DeleteAccountByEmail,
+        { input: { email: 'userToDelete@cap-collectif.com' } },
+        'user',
+      ),
+    ).rejects.toMatchSnapshot();
   });
 });

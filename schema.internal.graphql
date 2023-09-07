@@ -4941,7 +4941,7 @@ input DeleteAccountInput {
   """You must chose a strategy to delete your account"""
   type: DeleteAccountType!
 
-  """(ROLE_SUPER_ADMIN only) The user to delete"""
+  """The user to delete"""
   userId: ID
   clientMutationId: String
 }

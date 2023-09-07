@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Delete user by email Delete existing user by email 1`] = `
+exports[`Delete user by email Can delete user by email with admin role 1`] = `
 Object {
   "deleteAccountByEmail": Object {
     "email": "userToDelete@cap-collectif.com",
@@ -8,6 +8,8 @@ Object {
   },
 }
 `;
+
+exports[`Delete user by email Cannot delete user by email with user role 1`] = `[Error: Access denied to this field.: {"response":{"errors":[{"message":"Access denied to this field.","extensions":{"category":"user"},"locations":[{"line":3,"column":5}],"path":["deleteAccountByEmail"]}],"data":{"deleteAccountByEmail":null},"status":200},"request":{"query":"\\n  mutation deleteAccountByEmail($input: DeleteAccountByEmailInput!) {\\n    deleteAccountByEmail(input: $input) {\\n      email\\n      errorCode\\n    }\\n  }\\n","variables":{"input":{"email":"userToDelete@cap-collectif.com"}}}}]`;
 
 exports[`Delete user by email Delete non-existing user by email 1`] = `
 Object {

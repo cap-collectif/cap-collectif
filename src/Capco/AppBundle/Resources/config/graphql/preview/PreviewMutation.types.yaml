@@ -26,7 +26,7 @@ PreviewMutation:
                     payloadType: PreviewDeleteEventPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'
             deleteAccountByEmail:
-                access: "@=hasRole('ROLE_SUPER_ADMIN')"
+                access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: PreviewDeleteAccountByEmailInput
