@@ -36,6 +36,7 @@ import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminCont
 import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab';
 import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 type Props = {|
   +viewerIsAdmin: boolean,
@@ -175,7 +176,6 @@ const formatNavbarLinks = (
         viewerIsAdmin={viewerIsAdmin}
         query={query}
         hasIdentificationCodeLists={hasIdentificationCodeLists}
-
       />
     ),
   });
@@ -217,10 +217,12 @@ export const ProjectAdminContent = ({
       projectId: project.id,
       proposalStep: firstCollectStepId,
       proposalRevisionsEnabled: hasProjectRevisionEnabled ?? false,
-      proposalOrderBy: [{
-        field: 'PUBLISHED_AT',
-        direction: 'DESC',
-      }],
+      proposalOrderBy: [
+        {
+          field: 'PUBLISHED_AT',
+          direction: 'DESC',
+        },
+      ],
       // DebateStep (argument)
       countArgumentPagination: ARGUMENT_PAGINATION,
       cursorArgumentPagination: null,
@@ -268,7 +270,7 @@ export const ProjectAdminContent = ({
         dataPrefetchPage,
         location.pathname,
         viewerIsAdmin,
-        hasIdentificationCodeLists
+        hasIdentificationCodeLists,
       ),
     [
       project,
@@ -279,7 +281,7 @@ export const ProjectAdminContent = ({
       dataPrefetchPage,
       location.pathname,
       viewerIsAdmin,
-      hasIdentificationCodeLists
+      hasIdentificationCodeLists,
     ],
   );
 
@@ -287,7 +289,7 @@ export const ProjectAdminContent = ({
     <div className="d-flex">
       <Header>
         <div>
-          <h1>{title}</h1>
+          <h1>{htmlDecode(title)}</h1>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
             <Icon name={ICON_NAME.externalLink} size="14px" />
             <FormattedMessage id="global.preview" />

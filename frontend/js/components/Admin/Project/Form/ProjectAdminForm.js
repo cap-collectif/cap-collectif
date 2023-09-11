@@ -41,6 +41,7 @@ import { toast } from '~ds/Toast';
 import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/IndexContributions';
 import { getProjectAdminPath } from '~/components/Admin/Project/ProjectAdminPage.utils';
 import { doesStepSupportRequirements } from '~/components/Admin/Project/Step/StepRequirementsList';
+import htmlDecode from '~/components/Utils/htmlDecode';
 
 type Props = {|
   ...ReduxFormFormProps,
@@ -260,13 +261,13 @@ const onSubmit = (
                 : undefined,
             proposalArchivedTime:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
-                ? (s.isTresholdEnabled && s.votable && s.proposalArchivedTime)
+                ? s.isTresholdEnabled && s.votable && s.proposalArchivedTime
                   ? parseInt(s.proposalArchivedTime, 10)
                   : 0
                 : undefined,
             proposalArchivedUnitTime:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
-                ? (s.isTresholdEnabled && s.votable && s.proposalArchivedUnitTime)
+                ? s.isTresholdEnabled && s.votable && s.proposalArchivedUnitTime
                   ? s.proposalArchivedUnitTime
                   : 'MONTHS'
                 : undefined,
@@ -528,7 +529,7 @@ const mapStateToProps = (state: GlobalState, { project, intl }: Props) => {
     initialValues: {
       archived: project?.archived,
       authors: project ? project.authors : [],
-      title: project ? project.title : null,
+      title: project ? htmlDecode(project.title) : null,
       projectType: project && project.type ? project.type.id : null,
       steps: project?.steps
         ? project.steps.map(step => ({
@@ -738,7 +739,7 @@ export default createFragmentContainer(injectIntl(container), {
           budget
           isProposalSmsVoteEnabled
         }
-        ... on ProposalStep{
+        ... on ProposalStep {
           proposalArchivedTime
           proposalArchivedUnitTime
         }
