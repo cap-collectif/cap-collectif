@@ -122,6 +122,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             // activate state when it is mandatory
             case 'carpentras':
             case 'debatpenly':
+            case 'debateauidf':
                 $resolver
                     ->setDefaults([
                         'state' => null,
