@@ -53,4 +53,7 @@ PreviewProject:
                 type: 'PreviewProjectDistrictConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictsResolver", [value, args])'
-                description: 'Linking table with position for district'
+                description: 'Linking table with districts'
+            themes:
+                type: '[PreviewTheme!]'
+                description: 'Themes associated with the project.'

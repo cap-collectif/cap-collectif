@@ -881,7 +881,7 @@ type Project implements Node & UniformResourceLocatable {
   """The list of users who authored the project."""
   authors: [User!]!
 
-  """Linking table with position for district"""
+  """Linking table with districts"""
   districts(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -891,6 +891,9 @@ type Project implements Node & UniformResourceLocatable {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProjectDistrictConnection
+
+  """Themes associated with the project."""
+  themes: [Theme!]
 }
 
 """A connection to a list of items."""
@@ -1921,6 +1924,9 @@ type Theme {
     """The locale to translate content (eg: FR_FR)."""
     locale: TranslationLocale
   ): String!
+
+  """Identifies the theme ID."""
+  id: ID!
 }
 
 """A time range that contains start date and end date."""

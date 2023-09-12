@@ -9953,7 +9953,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   """The list of users who authored the project."""
   authors: [Author!]!
 
-  """Linking table with position for district"""
+  """Linking table with districts"""
   districts(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -9963,6 +9963,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProjectDistrictConnection
+
+  """Themes associated with the project."""
+  themes: [Theme!]
 
   """The admin URL to this resource."""
   adminUrl: URI!
@@ -10131,7 +10134,6 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
     """
     exceptStepId: ID = null
   ): Boolean!
-  themes: [Theme!]
   votableSteps: [ProposalStep!]!
 
   """The visibility of the project."""
@@ -16107,9 +16109,11 @@ type Theme implements UniformResourceLocatable {
     locale: TranslationLocale
   ): String!
 
+  """Identifies the theme ID."""
+  id: ID!
+
   """The URL to this resource."""
   url: URI!
-  id: ID!
   translations: [ThemeTranslation!]!
 }
 

@@ -9,3 +9,7 @@ PreviewTheme:
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getTitle(args["locale"], true)'
                 description: 'Identifies the title of the theme.'
+            id:
+                type: 'ID!'
+                resolve: '@=value.getId()'
+                description: 'Identifies the theme ID.'
