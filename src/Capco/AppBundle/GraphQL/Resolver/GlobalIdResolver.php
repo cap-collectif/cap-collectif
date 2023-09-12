@@ -69,6 +69,55 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GlobalIdResolver
 {
+    private const AVAILABLE_TYPES = [
+        'Post',
+        'Event',
+        'User',
+        'Questionnaire',
+        'Consultation',
+        'MapToken',
+        'Requirement',
+        'ConsultationStep',
+        'OtherStep',
+        'QuestionnaireStep',
+        'PresentationStep',
+        'CollectStep',
+        'SelectionStep',
+        'RankingStep',
+        'DebateStep',
+        'Proposal',
+        'ProposalRevision',
+        'ProposalAnalysis',
+        'Debate',
+        'DebateOpinion',
+        'DebateArgument',
+        'DebateArticle',
+        'SmsOrder',
+        SmsCredit::RELAY_NODE_TYPE,
+        'Question',
+        'QuestionChoice',
+        'Reply',
+        'ContactForm',
+        'Project',
+        'Oauth2SSOConfiguration',
+        'FranceConnectSSOConfiguration',
+        'CASSSOConfiguration',
+        'Comment',
+        'Source',
+        'Argument',
+        'Opinion',
+        'Version',
+        'UserInvite',
+        'MailingList',
+        'EmailingCampaign',
+        'OfficialResponse',
+        'Group',
+        'ValueResponse',
+        'MediaResponse',
+        'District',
+        'Organization',
+        'PendingOrganizationInvitation',
+    ];
     private ContainerInterface $container;
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
@@ -110,7 +159,11 @@ class GlobalIdResolver
         // We try to decode the global id
         $decodeGlobalId = self::getDecodedId($uuidOrGlobalId);
 
-        if (\is_array($decodeGlobalId)) {
+        if (
+            \is_array($decodeGlobalId)
+            && isset($decodeGlobalId['type'], $decodeGlobalId['id'])
+            && \in_array($decodeGlobalId['type'], self::AVAILABLE_TYPES, true)
+        ) {
             // Good news, it's a GraphQL Global id !
             $uuid = $decodeGlobalId['id'];
             $node = null;

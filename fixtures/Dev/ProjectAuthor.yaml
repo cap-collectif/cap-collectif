@@ -167,3 +167,7 @@ Capco\AppBundle\Entity\ProjectAuthor:
         createdAt: <(new \DateTime('2022-07-20 00:00:01'))>
         user: '@user1'
         project: '@projectProposalArchiving'
+    pa43:
+        createdAt: <(new \DateTime('2022-07-20 00:00:01'))>
+        organization: '@organization2'
+        project: '@projectOrgaVisibilityAdminAndMe'

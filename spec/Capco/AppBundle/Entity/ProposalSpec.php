@@ -87,6 +87,7 @@ class ProposalSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         User $author
     ): void {
+        $viewer->isOrganizationMember()->willReturn(true);
         $step->getProject()->willReturn($project);
         $step->isPrivate()->willReturn(true);
         $proposalForm->getStep()->willReturn($step);
@@ -105,6 +106,7 @@ class ProposalSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
+        $viewer->isOrganizationMember()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
         $collectStep->getProject()->willReturn($project);
         $project->getOwner()->willReturn(null);
@@ -139,6 +141,7 @@ class ProposalSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
+        $author->isOrganizationMember()->willReturn(true);
         $author->getOrganizationId()->willReturn('1');
         $author->isAdmin()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
@@ -159,6 +162,7 @@ class ProposalSpec extends ObjectBehavior
         ProposalForm $proposalForm,
         CollectStep $collectStep
     ): void {
+        $analyst->isOrganizationMember()->willReturn(false);
         $analyst->isAdmin()->willReturn(false);
         $collectStep->isPrivate()->willReturn(true);
         $collectStep->getProject()->willReturn($project);

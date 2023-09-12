@@ -216,11 +216,11 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "contributions": Object {
-            "totalCount": 1,
+            "totalCount": 2,
           },
           "contributionsCount": 0,
           "contributors": Object {
-            "totalCount": 1,
+            "totalCount": 2,
           },
           "cover": null,
           "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",

@@ -25,7 +25,11 @@ Object {
         },
         Object {
           "node": Object {
-            "authors": Array [],
+            "authors": Array [
+              Object {
+                "username": "GIEC",
+              },
+            ],
             "owner": Object {
               "username": "GIEC",
             },

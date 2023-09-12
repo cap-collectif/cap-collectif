@@ -211,12 +211,15 @@ class GlobalIdResolverSpec extends ObjectBehavior
     public function it_can_not_resolve_an_unknown_global_id(
         ContainerInterface $container,
         LoggerInterface $logger,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        EntityRepository $repository
     ) {
         $id = 'Unknoownnnn1';
         $globalId = GlobalId::toGlobalId('Unknoownnnn', $id);
-
-        $logger->warning('Could not resolve node with globalId ' . $id)->shouldBeCalled();
+        $repository->find($id)->willReturn(null);
+        $repository->find($globalId)->willReturn(null);
+        $container->get(Argument::any())->willReturn($repository);
+        $logger->warning('Could not resolve node with uuid ' . $globalId)->shouldBeCalled();
         $this->beConstructedWith($container, $logger, $entityManager);
         $this->resolve($globalId, null)->shouldReturn(null);
     }

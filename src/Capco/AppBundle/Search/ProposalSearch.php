@@ -79,20 +79,6 @@ class ProposalSearch extends Search
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
 
-        if (isset($providedFilters['organizationId']) && $providedFilters['organizationId'] ?? null) {
-            $terms = [
-                new Term(['visible' => ['value' => true]]),
-                new Term(['author.organizationId' => ['value' => $providedFilters['organizationId']]]),
-            ];
-            $subBoolQuery = new BoolQuery();
-            foreach ($terms as $term) {
-                $subBoolQuery->addShould($term);
-            }
-            $boolQuery->addMust($subBoolQuery);
-
-            unset($providedFilters['visible'], $providedFilters['organizationId']);
-        }
-
         $filters = $this->getFilters($providedFilters);
 
         foreach ($filters as $key => $value) {
@@ -205,10 +191,6 @@ class ProposalSearch extends Search
                     'decisionMaker.id' => ['value' => $providedFilters['restrictedViewerId']],
                 ]),
             ];
-
-            if ($providedFilters['restrictedViewerOrganizationId'] ?? null) {
-                $terms[] = new Term(['author.organizationId' => ['value' => $providedFilters['restrictedViewerOrganizationId']]]);
-            }
 
             $subBoolQuery = new BoolQuery();
             foreach ($terms as $term) {

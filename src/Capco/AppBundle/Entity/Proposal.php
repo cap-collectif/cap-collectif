@@ -853,7 +853,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     public function viewerCanSee(?User $viewer = null): bool
     {
         // Owner, Admin and SuperAdmin can always access
-        if ($this->viewerIsAdminOrOwner($viewer)) {
+        if ($this->viewerIsAdminOrOwner($viewer) || $viewer && $viewer->isOrganizationMember()) {
             return true;
         }
 

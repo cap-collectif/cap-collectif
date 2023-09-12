@@ -1219,3 +1219,16 @@ Capco\AppBundle\Entity\Proposal:
         reference: <randomNumber(6, true)>
         updatedAt: $createdAt
         isArchived: false
+    proposalUserNotOrgaMember:
+        id: proposalUserNotOrgaMember
+        title: Proposition d'un utilisateur externe sur un formulaire d'organisation
+        body: Proposition d'un utilisateur externe sur un formulaire d'organisation
+        author: '@user5'
+        proposalForm: '@proposalFormOrgaMember2'
+        createdAt: <(new \DateTime('2022-07-05 14:55:00'))>
+        publishedAt: $createdAt
+        undraftAt: $createdAt
+        reference: <randomNumber(6, true)>
+        updatedAt: $createdAt
+        theme: '@theme<numberBetween(1,4)>'
+        category: '@pCategoryBp3Idf<numberBetween(1,5)>'
