@@ -10,11 +10,13 @@ import { useFormContext } from 'react-hook-form';
 
 interface ThemeListFieldProps
     extends Omit<BaseField, 'onChange' | 'control'>,
-        Omit<FieldSelect, 'onChange' | 'type'> {}
+        Omit<FieldSelect, 'onChange' | 'type'> {
+    id?: string;
+}
 
 type ThemeListFieldValue = {
-    label: string;
-    value: string;
+    label: string,
+    value: string,
 };
 
 const getThemeList = graphql`

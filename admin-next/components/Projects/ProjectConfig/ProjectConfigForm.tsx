@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Flex, toast } from '@cap-collectif/ui';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
+import * as yup from 'yup';
 import ProjectConfigFormSide from './ProjectConfigFormSide/ProjectConfigFormSide';
 import { FormValues, getInitialValues } from './ProjectConfigForm.utils';
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay';
@@ -15,6 +16,7 @@ import UpdateNewProjectMutation from '@mutations/UpdateNewProjectMutation';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import moment from 'moment';
 import { ProjectVisibility } from '@relay/CreateProjectMutation.graphql';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export type ProjectConfigFormProps = {
     project: ProjectConfigForm_project$key,
@@ -121,6 +123,15 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     const methods = useForm<FormValues>({
         mode: 'onChange',
         defaultValues: getInitialValues(project, intl),
+        resolver: yupResolver(
+            yup.object().shape({
+                externalLink: yup.string().when('isExternal', {
+                    is: (isExternal: boolean) => isExternal === true,
+                    then: yup.string().required(intl.formatMessage({ id: 'global.required' })),
+                    otherwise: yup.string().nullable().notRequired(),
+                }),
+            }),
+        ),
     });
 
     const onSubmit = ({ isExternal, addressText, ...values }: FormValues) => {
@@ -161,7 +172,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
             });
     };
 
-    const { handleSubmit, getValues, watch } = methods;
+    const { handleSubmit, getValues, watch, setValue, formState, trigger } = methods;
 
     const title = watch('title');
     const breadCrumbItems = [
@@ -181,7 +192,8 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     }, [setBreadCrumbItems, title]);
 
     React.useEffect(() => {
-        triggerNavBarSaving(isSubmitting);
+        if (!isSubmitting) setTimeout(() => triggerNavBarSaving(isSubmitting), 1000);
+        else triggerNavBarSaving(isSubmitting);
     }, [isSubmitting]);
 
     const onValidFormChange = debounce((values: FormValues) => {
@@ -189,8 +201,25 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     }, 500);
 
     React.useEffect(() => {
-        watch((value, { name, type }) => {
-            if (name !== 'addressText') onValidFormChange(getValues());
+        watch((value, { name }) => {
+            if (
+                name === 'visibility' &&
+                !value?.restrictedViewerGroups?.length &&
+                value?.visibility?.labels?.[0] === 'CUSTOM'
+            )
+                return;
+            if (name === 'publishedAt' && !value.publishedAt) return;
+            if (name === 'addressText') return;
+            if (name === 'isExternal' && value.isExternal) {
+                setValue('externalLink', value.externalLink || '', { shouldTouch: true });
+                return;
+            }
+            if (value.isExternal && !value.externalLink) {
+                trigger('externalLink');
+                return;
+            }
+
+            onValidFormChange(getValues());
         });
     }, [watch]);
 

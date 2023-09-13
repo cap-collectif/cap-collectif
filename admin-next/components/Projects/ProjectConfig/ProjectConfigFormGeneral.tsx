@@ -68,17 +68,27 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                         {isAdmin ? (
                             <FormControl name="authors" control={control}>
                                 <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
-                                <UserListField name="authors" control={control} isMulti />
+                                <UserListField
+                                    name="authors"
+                                    control={control}
+                                    isMulti
+                                    id="authors"
+                                />
                             </FormControl>
                         ) : null}
                         <FormControl name="projectType" control={control}>
                             <FormLabel
                                 label={intl.formatMessage({
                                     id: 'admin.fields.project.type.title',
-                                })}
-                            />
+                                })}>
+                                <Text fontSize={2} color="gray.500">
+                                    {intl.formatMessage({ id: 'global.optional' })}
+                                </Text>
+                            </FormLabel>
                             <FieldInput
                                 name="projectType"
+                                // @ts-ignore cap-collectif/form/issues/53
+                                id="projectType"
                                 control={control}
                                 options={
                                     query?.projectTypes?.filter(Boolean).map(type => ({
@@ -125,10 +135,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                 <FormProvider {...methods}>
                     <TextEditor
                         name="description"
-                        placeholder={intl.formatMessage({
-                            id: 'city-neighbourhood-placeholder',
-                        })}
-                        label={intl.formatMessage({ id: 'global.description' })}
+                        label={intl.formatMessage({ id: 'admin.project.presentation' })}
                         platformLanguage={defaultLocale?.code}
                         selectedLanguage={defaultLocale?.code}
                     />

@@ -104,6 +104,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                             </Flex>
                                             <ButtonGroup>
                                                 <ButtonQuickAction
+                                                    id={`edit-step-${stepsValues[index].label}`}
                                                     variantColor="blue"
                                                     icon={CapUIIcon.Pencil}
                                                     label={intl.formatMessage({
@@ -117,6 +118,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                                                     type="button"
                                                 />
                                                 <ButtonQuickAction
+                                                    id={`delete-step-${stepsValues[index].label}`}
                                                     onClick={() => {
                                                         setIndexToDelete(index);
                                                         onOpen();

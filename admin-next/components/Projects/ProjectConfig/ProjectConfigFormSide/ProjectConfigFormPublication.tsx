@@ -63,7 +63,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
             <Accordion.Panel>
                 <FormControl name="publishedAt" control={control}>
                     <FormLabel label={intl.formatMessage({ id: 'global.updated.date' })} />
-                    <FieldInput type="date" name="publishedAt" control={control} />
+                    <FieldInput type="date" name="publishedAt" control={control} isOutsideRange />
                 </FormControl>
                 {hasFeatureMultilangue ? (
                     <FormControl name="locale" control={control} width="100%">
@@ -71,8 +71,11 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
                         <FieldInput
                             type="select"
                             name="locale"
+                            placeholder={intl.formatMessage({ id: 'locale.all-locales' })}
                             control={control}
                             options={locales}
+                            // @ts-ignore cap-collectif/form/issues/53
+                            id="locale"
                         />
                     </FormControl>
                 ) : null}
@@ -87,6 +90,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
                     pl={2}>
                     <Text truncate={30}>{url}</Text>
                     <ButtonQuickAction
+                        id="edit-slug"
                         variantColor="blue"
                         icon={CapUIIcon.Pencil}
                         label={intl.formatMessage({

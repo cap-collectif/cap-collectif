@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { useFormContext } from 'react-hook-form';
-import { Flex, Heading, FormLabel, Text,  Switch } from '@cap-collectif/ui';
+import { Flex, Heading, FormLabel, Text, Switch } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useIntl } from 'react-intl';
+import useFeatureFlag from '@hooks/useFeatureFlag';
 
 const ProjectConfigFormExternal: React.FC = () => {
     const intl = useIntl();
+    const external_project = useFeatureFlag('external_project');
 
     const { watch, setValue, control } = useFormContext();
 
     const isExternal = watch('isExternal');
+
+    if (!external_project) return null;
 
     return (
         <Flex direction="column" bg="white" borderRadius="accordion" p={6} mt={6}>

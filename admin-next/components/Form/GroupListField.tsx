@@ -9,7 +9,7 @@ import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form';
 
 interface GroupListFieldProps
     extends Omit<BaseField, 'onChange'>,
-        Omit<FieldSelect, 'type' | 'onChange'> {}
+        Omit<FieldSelect, 'type' | 'onChange'> { id?: string }
 
 type GroupListFieldValue = {
     label: string;

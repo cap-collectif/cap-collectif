@@ -10,11 +10,13 @@ import { useFormContext } from 'react-hook-form';
 
 interface DistrictListFieldProps
     extends Omit<BaseField, 'onChange' | 'control'>,
-        Omit<FieldSelect, 'type' | 'onChange'> {}
+        Omit<FieldSelect, 'type' | 'onChange'> {
+    id?: string;
+}
 
 type DistrictListFieldValue = {
-    label: string;
-    value: string;
+    label: string,
+    value: string,
 };
 
 const getDistrictList = graphql`

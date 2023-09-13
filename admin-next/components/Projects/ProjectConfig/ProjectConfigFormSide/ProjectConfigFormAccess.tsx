@@ -55,7 +55,12 @@ const ProjectConfigFormAccess: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) =>
                     />
                 </FormControl>
                 {visibility?.labels?.[0] === 'CUSTOM' ? (
-                    <GroupListField name="restrictedViewerGroups" control={control} isMulti />
+                    <GroupListField
+                        name="restrictedViewerGroups"
+                        id="restrictedViewerGroups"
+                        control={control}
+                        isMulti
+                    />
                 ) : null}
             </Accordion.Panel>
         </>

@@ -12,6 +12,7 @@ interface UserListFieldProps
         Omit<FieldSelect, 'type' | 'onChange'> {
     userIdsToNoSearch?: string[];
     authorOfEvent?: boolean;
+    id?: string;
 }
 
 type UserListFieldValue = {
