@@ -12,29 +12,25 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrganizationController extends AbstractController
 {
-    private PendingOrganizationInvitationRepository $repository;
+    private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
     private TranslatorInterface $translator;
-    private RouterInterface $router;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private LoginManagerInterface $loginManager;
 
     public function __construct(
-        PendingOrganizationInvitationRepository $repository,
+        PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
         TranslatorInterface $translator,
-        RouterInterface $router,
         EntityManagerInterface $em,
         LoggerInterface $logger,
         LoginManagerInterface $loginManager
     ) {
-        $this->repository = $repository;
+        $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
         $this->translator = $translator;
-        $this->router = $router;
         $this->em = $em;
         $this->logger = $logger;
         $this->loginManager = $loginManager;
@@ -45,10 +41,10 @@ class OrganizationController extends AbstractController
      */
     public function acceptInvitation(string $token): RedirectResponse
     {
-        $invitation = $this->repository->findOneBy([
+        $invitation = $this->pendingOrganizationInvitationRepository->findOneBy([
             'token' => $token,
         ]);
-        $response = new RedirectResponse('/');
+        $response = new RedirectResponse('/admin-next/projects');
         $viewerIsConnected = $this->getUser() instanceof User;
         if (
             null === $invitation
@@ -59,6 +55,7 @@ class OrganizationController extends AbstractController
                 $this->translator->trans('invalid-token', [], 'CapcoAppBundle')
             );
             $this->logger->debug(__METHOD__ . ' : invalid token ' . $token);
+            $response->setTargetUrl('/');
 
             return $response;
         }

@@ -92,9 +92,13 @@ class UserController extends AbstractController
 
     private function redirectFollowingInvitation(UserInvite $invitation): RedirectResponse
     {
-        return $invitation->getRedirectionUrl()
-            ? $this->redirect($invitation->getRedirectionUrl())
-            : $this->redirectToHomepage();
+        if ($invitation->getRedirectionUrl()) {
+            return $this->redirect($invitation->getRedirectionUrl());
+        }
+
+        return (null === $invitation->getOrganization())
+            ? $this->redirectToHomepage()
+            : $this->redirect('/admin-next/projects');
     }
 
     private function getInvitationUrl(string $token): string
