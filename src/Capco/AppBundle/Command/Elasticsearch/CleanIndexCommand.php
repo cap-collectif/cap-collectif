@@ -44,10 +44,17 @@ class CleanIndexCommand extends Command
             return 0;
         }
 
-        $deleted = $this->indexManager->cleanOldIndices(1);
+        $indexNamesDeleted = $this->indexManager->cleanOldIndices();
+        if ([] === $indexNamesDeleted) {
+            $output->writeln('<bg=yellow>Nothing to clean all is up-to-date !</>');
 
-        foreach ($deleted as $delete) {
-            $output->writeln(['Cleaned :' . $delete]);
+            return 0;
+        }
+
+        $emojiEcoFriendly = '♻️';
+        $output->writeln('<bg=green;options=bold>' . \count($indexNamesDeleted) . ' old index(s)</><bg=green> has been</><bg=green;options=bold> deleted ' . $emojiEcoFriendly . '</>');
+        foreach ($indexNamesDeleted as $indexNameDeleted) {
+            $output->writeln(['<bg=green>Index: <bg=green;options=bold>' . $indexNameDeleted . '</></>']);
         }
 
         return 0;

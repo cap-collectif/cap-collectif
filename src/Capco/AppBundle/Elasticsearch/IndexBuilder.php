@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\Elasticsearch;
 
 use Elastica\Client;
+use Elastica\Cluster;
 use Elastica\Index;
 use Elastica\Reindex;
 use Elastica\Request;
 use Elastica\Response;
 use Elastica\Task;
-use Elasticsearch\Endpoints\Get;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
@@ -18,16 +18,16 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IndexBuilder
 {
-    /**
-     * @var Client
-     */
-    protected $client;
-    protected $indexName;
+    public const PREFIX_INDEX = 'capco_';
+    protected Client $client;
+    protected string $indexName;
+    private Cluster $cluster;
 
-    public function __construct(Client $client, string $indexName)
+    public function __construct(Client $client, Cluster $cluster, string $indexName)
     {
         $this->client = $client;
         $this->indexName = $indexName;
+        $this->cluster = $cluster;
     }
 
     /**
@@ -40,7 +40,9 @@ class IndexBuilder
         $index = $this->client->getIndex($this->generateIndexName());
 
         if ($index->exists()) {
-            throw new \RuntimeException(sprintf('Index %s is already created, something is wrong.', $index->getName()));
+            throw new \RuntimeException(
+                sprintf('Index %s is already created, something is wrong.', $index->getName())
+            );
         }
         $index->create($mapping);
 
@@ -84,51 +86,38 @@ class IndexBuilder
         return sprintf('%s_%s', $this->indexName, date('Y-m-d-H-i-s'));
     }
 
-    public function cleanOldIndices(int $afterLiveLimit = 2): array
+    public function cleanOldIndices(): array
     {
-        $indexes = $this->client->requestEndpoint(new Get());
-        $indexes = $indexes->getData();
+        $indexNames = $this->cluster->getIndexNames();
+        $indexNames = array_filter(
+            $indexNames,
+            fn ($indexName) => str_starts_with($indexName, self::PREFIX_INDEX)
+        );
 
-        foreach ($indexes as $indexName => &$data) {
-            if (0 !== strpos($indexName, 'capco_')) {
-                unset($indexes[$indexName]);
-
-                continue;
-            }
-
-            $date = \DateTime::createFromFormat(
-                'Y-m-d-H-i-s',
-                str_replace('capco_', '', $indexName)
-            );
-
-            $data['date'] = $date;
-            $data['is_live'] = isset($data['aliases'][$this->getLiveSearchIndexName()]);
+        if (1 === \count($indexNames)) {
+            return [];
         }
 
-        // Newest first
-        usort($indexes, function ($a, $b) {
-            return $a['date'] < $b['date'];
-        });
+        $indexNames = array_values($indexNames);
+        $indexNames = array_map(
+            fn ($item) => str_replace(self::PREFIX_INDEX, '', $item),
+            $indexNames
+        );
 
-        $afterLiveCounter = 0;
-        $livePassed = false;
-        $deleted = [];
-        foreach ($indexes as $indexName => $indexData) {
-            if ($livePassed) {
-                ++$afterLiveCounter;
-            }
-            if ($indexData['is_live']) {
-                $livePassed = true;
-            }
+        $lastIndexUpToDate = array_search(max($indexNames), $indexNames);
 
-            if ($livePassed && $afterLiveCounter > $afterLiveLimit) {
-                // Remove!
-                $this->client->getIndex($indexName)->delete();
-                $deleted[] = $indexName;
-            }
+        if (false !== $lastIndexUpToDate) {
+            unset($indexNames[$lastIndexUpToDate]);
         }
 
-        return $deleted;
+        $indexNamesDeleted = [];
+        foreach ($indexNames as $indexName) {
+            $indexName = self::PREFIX_INDEX . $indexName;
+            $this->client->getIndex($indexName)->delete();
+            $indexNamesDeleted[] = $indexName;
+        }
+
+        return $indexNamesDeleted;
     }
 
     public function getLiveSearchIndexName(): string
@@ -151,14 +140,14 @@ class IndexBuilder
         $indexNames = $this->client->getCluster()->getIndexNames();
         $indexes = [];
         foreach ($indexNames as $indexName) {
-            if (0 !== strpos($indexName, 'capco_')) {
+            if (0 !== strpos($indexName, self::PREFIX_INDEX)) {
                 unset($indexNames[$indexName]);
 
                 continue;
             }
             $date = \DateTime::createFromFormat(
                 'Y-m-d-H-i-s',
-                str_replace('capco_', '', $indexName)
+                str_replace(self::PREFIX_INDEX, '', $indexName)
             );
 
             $indexes[] = [
