@@ -127,7 +127,7 @@ export const ProposalsUserVotesStep = ({
 
       {step.viewerVotes && step.viewerVotes.totalCount > 0 && (
         <div>
-          <VoteMinAlert step={step} translationKey={keyTradProjectCount} />
+          <VoteMinAlert step={step} translationKey={keyTradProjectCount} isVotesPage />
           <ProposalsUserVotesTable
             onSubmit={onSubmit}
             deletable

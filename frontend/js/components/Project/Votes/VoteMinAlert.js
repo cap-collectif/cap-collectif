@@ -11,18 +11,19 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 type Props = {|
   step: VoteMinAlert_step,
   translationKey: string,
+  isVotesPage?: boolean,
 |};
 
-export const VoteMinAlert = ({ step, translationKey }: Props) => {
+export const VoteMinAlert = ({ step, translationKey, isVotesPage = false }: Props) => {
   const isInterpellation = isInterpellationContextFromStep(step);
   const isVoteMin = useFeatureFlag('votes_min');
   const votesMin: number = isVoteMin && step.votesMin ? step.votesMin : 1;
 
   const { votesRanking, votesLimit } = step;
 
-  const viewerVotesBeforeValidation = step?.viewerVotes?.totalCount;
+  const viewerVotesBeforeValidation = step?.viewerVotes?.totalCount - (isVotesPage ? 1 : 0);
   const remainingVotesAfterValidation = votesMin - viewerVotesBeforeValidation - 1;
-  const hasFinished = remainingVotesAfterValidation < 0;
+  const willFinish = remainingVotesAfterValidation < 0;
 
   if (isInterpellation) return null;
 
@@ -30,7 +31,7 @@ export const VoteMinAlert = ({ step, translationKey }: Props) => {
     <VoteMinAlertContainer>
       {!votesMin ||
       votesMin === 1 ||
-      hasFinished ||
+      willFinish ||
       (votesMin && !remainingVotesAfterValidation && !votesRanking) ? (
         <h4>
           <FormattedMessage
@@ -49,7 +50,9 @@ export const VoteMinAlert = ({ step, translationKey }: Props) => {
                 <FormattedMessage
                   id={
                     votesRanking && !remainingVotesAfterValidation
-                      ? 'rank-your-proposals'
+                      ? isVotesPage
+                        ? 'rank-your-proposals-vote'
+                        : 'rank-your-proposals'
                       : 'vote-for-x-proposals'
                   }
                   values={{ num: remainingVotesAfterValidation }}
@@ -63,7 +66,11 @@ export const VoteMinAlert = ({ step, translationKey }: Props) => {
               votesLimit !== votesMin ? (
                 <span>
                   <FormattedMessage
-                    id="you-can-keep-voting-for-x-proposals"
+                    id={
+                      isVotesPage
+                        ? 'you-can-keep-voting-for-x-proposals-vote'
+                        : 'you-can-keep-voting-for-x-proposals'
+                    }
                     values={{ num: votesLimit }}
                   />
                 </span>
