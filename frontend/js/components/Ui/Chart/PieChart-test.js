@@ -7,9 +7,9 @@ import { PieChart } from './PieChart';
 
 const propswithDefaultProps = {
   data: [
-    { name: 'ok', value: 896 },
-    { name: 'mixed', value: 0 },
-    { name: 'not ok', value: 9768678 },
+    { name: 'ok', value: 896, percent: '1' },
+    { name: 'mixed', value: 0, percent: '0' },
+    { name: 'not ok', value: 9768678, percent: '99' },
   ],
   colors: ['#fff', '#000', '#F9F9F9'],
 };

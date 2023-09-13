@@ -53,6 +53,25 @@ exports[`<PieChart /> renders PieChart 1`] = `
         itemStyle={Object {}}
         labelStyle={Object {}}
         offset={10}
+        payload={
+          Array [
+            Object {
+              "name": "ok",
+              "percent": "1",
+              "value": 896,
+            },
+            Object {
+              "name": "mixed",
+              "percent": "0",
+              "value": 0,
+            },
+            Object {
+              "name": "not ok",
+              "percent": "99",
+              "value": 9768678,
+            },
+          ]
+        }
         reverseDirection={
           Object {
             "x": false,
@@ -82,15 +101,69 @@ exports[`<PieChart /> renders PieChart 1`] = `
         data={
           Array [
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "ok",
+              "percent": "1",
               "value": 896,
             },
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "mixed",
+              "percent": "0",
               "value": 0,
             },
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "not ok",
+              "percent": "99",
               "value": 9768678,
             },
           ]
@@ -187,6 +260,25 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
         itemStyle={Object {}}
         labelStyle={Object {}}
         offset={10}
+        payload={
+          Array [
+            Object {
+              "name": "ok",
+              "percent": "1",
+              "value": 896,
+            },
+            Object {
+              "name": "mixed",
+              "percent": "0",
+              "value": 0,
+            },
+            Object {
+              "name": "not ok",
+              "percent": "99",
+              "value": 9768678,
+            },
+          ]
+        }
         reverseDirection={
           Object {
             "x": false,
@@ -216,15 +308,69 @@ exports[`<PieChart /> renders PieChart with default props 1`] = `
         data={
           Array [
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "ok",
+              "percent": "1",
               "value": 896,
             },
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "mixed",
+              "percent": "0",
               "value": 0,
             },
             Object {
+              "data": Array [
+                Object {
+                  "name": "ok",
+                  "percent": "1",
+                  "value": 896,
+                },
+                Object {
+                  "name": "mixed",
+                  "percent": "0",
+                  "value": 0,
+                },
+                Object {
+                  "name": "not ok",
+                  "percent": "99",
+                  "value": 9768678,
+                },
+              ],
               "name": "not ok",
+              "percent": "99",
               "value": 9768678,
             },
           ]

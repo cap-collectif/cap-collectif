@@ -23,10 +23,29 @@ class OpinionVersion extends React.Component<Props> {
   render() {
     const { version, rankingThreshold, isProfile, intl } = this.props;
 
+    const total =
+      version.votesOk.totalCount + version.votesMitige.totalCount + version.votesNok.totalCount;
+
+    const okPercent = ((version.votesOk.totalCount / total) * 100).toFixed(2);
+    const mitigePercent = ((version.votesMitige.totalCount / total) * 100).toFixed(2);
+    const nokPercent = (100 - (Number(okPercent) + Number(mitigePercent))).toFixed(2);
+
     const data = [
-      { name: intl.formatMessage({ id: 'global.ok' }), value: version.votesOk.totalCount },
-      { name: intl.formatMessage({ id: 'global.mitige' }), value: version.votesMitige.totalCount },
-      { name: intl.formatMessage({ id: 'global.nok' }), value: version.votesNok.totalCount },
+      {
+        name: intl.formatMessage({ id: 'global.ok' }),
+        value: version.votesOk.totalCount,
+        percent: okPercent,
+      },
+      {
+        name: intl.formatMessage({ id: 'global.mitige' }),
+        value: version.votesMitige.totalCount,
+        percent: mitigePercent,
+      },
+      {
+        name: intl.formatMessage({ id: 'global.nok' }),
+        value: version.votesNok.totalCount,
+        percent: nokPercent,
+      },
     ];
 
     return (

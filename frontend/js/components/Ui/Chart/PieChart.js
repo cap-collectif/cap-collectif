@@ -9,6 +9,7 @@ import config from '~/config';
 type Data = {|
   +name: string,
   +value: number,
+  +percent: string,
 |};
 
 type Props = {
@@ -20,7 +21,7 @@ type Props = {
   height?: string,
 };
 
-const TooltipWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
+export const TooltipWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div`
   background-color: #fff;
   padding: 3px 10px;
   border-radius: 4px;
@@ -46,6 +47,23 @@ const ContentWrapper: StyledComponent<{}, {}, HTMLDivElement> = styled.div.attrs
   }
 `;
 
+const renderTooltip = ({ payload }: { payload: Array<Object> }) => {
+  if (payload && payload.length > 0) {
+    return (
+      <TooltipWrapper>
+        {payload[0].payload.data.map((d, idx) => (
+          <React.Fragment key={idx}>
+            {d.name} - {d.value} - {d.percent}%
+            <br />
+          </React.Fragment>
+        ))}
+      </TooltipWrapper>
+    );
+  }
+
+  return null;
+};
+
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -54,29 +72,22 @@ const renderCustomizedLabel = ({
   outerRadius,
   index,
   value,
+  data,
 }: Object) => {
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+  const biggestValue = Math.max(...data.map(d => d.value));
+
+  if (value !== biggestValue) return null;
+
   return (
     <text x={x} y={y} fill="white" key={index} textAnchor="middle" dominantBaseline="central">
       {value > 0 ? value : ''}
     </text>
   );
-};
-
-const renderTooltip = ({ payload }: { payload: Array<Object> }) => {
-  if (payload && payload.length > 0) {
-    return (
-      <TooltipWrapper>
-        {payload[0].name} - {payload[0].value}
-      </TooltipWrapper>
-    );
-  }
-
-  return null;
 };
 
 export const PieChart = ({
@@ -88,14 +99,13 @@ export const PieChart = ({
   height = '95px',
 }: Props) => {
   const intl = useIntl();
-
   return (
     <ContentWrapper width={width} height={height}>
       <ResponsiveContainer>
         <PieChartRechart>
-          <Tooltip content={renderTooltip} />
+          <Tooltip content={renderTooltip} payload={data} />
           <Pie
-            data={data}
+            data={data.map(d => ({ ...d, data }))}
             innerRadius={innerRadius}
             outerRadius={outerRadius}
             paddingAngle={2}

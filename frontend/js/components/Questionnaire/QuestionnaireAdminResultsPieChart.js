@@ -2,10 +2,11 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape } from 'react-intl';
-import { Legend, ResponsiveContainer, Cell, Pie, PieChart } from 'recharts';
+import { Legend, ResponsiveContainer, Cell, Pie, PieChart, Tooltip } from 'recharts';
 import { type QuestionnaireAdminResultsPieChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsPieChart_multipleChoiceQuestion.graphql';
 import colors from '~/utils/colors';
 import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion';
+import { TooltipWrapper } from '../Ui/Chart/PieChart';
 
 type Props = {
   multipleChoiceQuestion: QuestionnaireAdminResultsPieChart_multipleChoiceQuestion,
@@ -16,6 +17,8 @@ type Props = {
 type State = {
   windowWidth: ?number,
 };
+
+const RADIAN = Math.PI / 180;
 
 export class QuestionnaireAdminResultsPieChart extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -45,7 +48,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
       return '300px';
     }
 
-    return '200px';
+    return '300px';
   };
 
   updateWindowsWidth = () => {
@@ -54,24 +57,83 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
     });
   };
 
-  renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-    index,
-  }: Object) => {
-    const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, fill, percent }: Object) => {
+    if (percent < 0.05) return null;
+
+    let angle = midAngle <= 91 && midAngle >= 89 ? 88 : midAngle;
+    angle = angle <= 271 && midAngle >= 269 ? 268 : angle;
+    const sin = Math.sin(-RADIAN * angle);
+    const cos = Math.cos(-RADIAN * angle);
+    const delta = Math.abs(1 / cos) + 10;
+    const sx = cx + outerRadius * cos;
+    const sy = cy + outerRadius * sin;
+    const mx = cx + (outerRadius + delta) * cos;
+    const my = cy + (outerRadius + delta) * sin;
+    const ex = mx + Number(cos.toFixed(1)) * 20;
+    const ey = my;
+    const textAnchor = cos >= 0 ? 'start' : 'end';
 
     return (
-      <text x={x} y={y} fill="white" key={index} textAnchor="middle" dominantBaseline="central">
-        {`${(percent * 100).toFixed(1)}%`}
-      </text>
+      <g>
+        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke="" fill="none" />
+        <text x={ex + (cos >= 0 ? 1 : -1)} y={ey + 4} textAnchor={textAnchor} fill={fill}>
+          {`${(percent * 100).toFixed(2)}%`}
+        </text>
+      </g>
+    );
+  };
+
+  renderCustomizedLabelLine = ({ points, stroke, percent }: Object) => {
+    return percent < 0.05 ? null : (
+      <path
+        stroke={stroke}
+        d={`M${points[0].x},${points[0].y}L${points[1].x},${points[1].y}`}
+        className="customized-label-line"
+      />
+    );
+  };
+
+  renderTooltip = ({ payload }: { payload: Array<Object> }) => {
+    if (payload && payload.length > 0) {
+      return (
+        <TooltipWrapper>
+          {payload[0].name} - {payload[0].value}
+        </TooltipWrapper>
+      );
+    }
+
+    return null;
+  };
+
+  renderLegend = ({ payload }: { payload: Array<Object> }) => {
+    return (
+      <ul>
+        {payload.map(({ payload: data }, index) => (
+          <li
+            key={`item-${index}`}
+            style={{
+              color: 'black',
+              display: 'flex',
+
+              listStyle: 'none',
+              marginBottom: '8px',
+            }}>
+            <div
+              style={{
+                background: data.fill,
+                width: '20px',
+                height: '14px',
+                marginRight: '5px',
+                flex: 'none',
+                marginTop: '4px',
+              }}
+            />
+            {data.name} -{' '}
+            {this.props.intl.formatMessage({ id: 'count-answers' }, { num: data.value })} -{' '}
+            {`${(data.percent * 100).toFixed(2)}%`}
+          </li>
+        ))}
+      </ul>
     );
   };
 
@@ -89,14 +151,17 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
             style={{ height: this.getHeight(data.length) }}>
             <ResponsiveContainer>
               <PieChart ref={innerRef}>
+                <Tooltip content={this.renderTooltip} />
+
                 {windowWidth && windowWidth < 992 ? (
-                  <Legend verticalAlign="bottom" />
+                  <Legend verticalAlign="bottom" content={this.renderLegend} />
                 ) : (
                   <Legend
                     layout="vertical"
                     align="right"
                     verticalAlign="middle"
-                    wrapperStyle={{ width: '60%' }}
+                    wrapperStyle={{ width: '60%', paddingLeft: 100 }}
+                    content={this.renderLegend}
                   />
                 )}
                 <Pie
@@ -108,7 +173,7 @@ export class QuestionnaireAdminResultsPieChart extends React.Component<Props, St
                   fontSize="16px"
                   isAnimationActive={false}
                   dataKey="value"
-                  labelLine={false}
+                  labelLine={this.renderCustomizedLabelLine}
                   label={this.renderCustomizedLabel}>
                   {data.map((entry, index) => (
                     <Cell

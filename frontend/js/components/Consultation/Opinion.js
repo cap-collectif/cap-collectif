@@ -49,6 +49,10 @@ export class Opinion extends React.Component<Props> {
   render() {
     const { opinion, showUpdatedDate } = this.props;
     const { author } = opinion;
+
+    const total =
+      opinion.votesOk.totalCount + opinion.votesMitige.totalCount + opinion.votesNok.totalCount;
+
     return (
       <ListGroupItem
         className={`list-group-item__opinion opinion text-left has-chart${
@@ -61,6 +65,7 @@ export class Opinion extends React.Component<Props> {
               ok={opinion.votesOk.totalCount}
               nok={opinion.votesNok.totalCount}
               mitige={opinion.votesMitige.totalCount}
+              total={total}
             />
           ) : null}
         </OpinionContainer>

@@ -13,6 +13,7 @@ type Props = {
   width?: string,
   innerRadius?: number,
   outerRadius?: number,
+  total: number,
 };
 
 class VotePiechart extends React.Component<Props> {
@@ -23,12 +24,28 @@ class VotePiechart extends React.Component<Props> {
   };
 
   render() {
-    const { intl, ok, mitige, nok, innerRadius, outerRadius, height, width } = this.props;
+    const { intl, ok, mitige, nok, innerRadius, outerRadius, height, width, total } = this.props;
+
+    const okPercent = ((ok / total) * 100).toFixed(2);
+    const mitigePercent = ((mitige / total) * 100).toFixed(2);
+    const nokPercent = (100 - (Number(okPercent) + Number(mitigePercent))).toFixed(2);
 
     const data = [
-      { name: intl.formatMessage({ id: 'global.ok' }), value: ok },
-      { name: intl.formatMessage({ id: 'global.mitige' }), value: mitige },
-      { name: intl.formatMessage({ id: 'global.nok' }), value: nok },
+      {
+        name: intl.formatMessage({ id: 'global.ok' }),
+        value: ok,
+        percent: okPercent,
+      },
+      {
+        name: intl.formatMessage({ id: 'global.mitige' }),
+        value: mitige,
+        percent: mitigePercent,
+      },
+      {
+        name: intl.formatMessage({ id: 'global.nok' }),
+        value: nok,
+        percent: nokPercent,
+      },
     ];
     // $FlowFixMe
     if (!__SERVER__ && ok + mitige + nok > 0) {

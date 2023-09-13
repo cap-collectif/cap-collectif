@@ -18,6 +18,12 @@ export class OpinionVotesBox extends React.Component<Props> {
     }
     const helpText = opinion.section.votesHelpText;
     const widgetType = opinion.section && opinion.section.voteWidgetType;
+
+    const total =
+      Number(opinion.votesYes?.totalCount) +
+      Number(opinion.votesMitige?.totalCount) +
+      Number(opinion.votesNo?.totalCount);
+
     return (
       <div className="opinion__votes__box">
         {helpText && (
@@ -44,6 +50,7 @@ export class OpinionVotesBox extends React.Component<Props> {
                   ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
                   nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
                   mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
+                  total={total}
                 />
               </div>
             </Col>
@@ -57,7 +64,7 @@ export class OpinionVotesBox extends React.Component<Props> {
 export default createFragmentContainer(OpinionVotesBox, {
   opinion: graphql`
     fragment OpinionVotesBox_opinion on OpinionOrVersion
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionVotesButtons_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionVotesBar_opinion
       ... on Opinion {

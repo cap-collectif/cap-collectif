@@ -38,13 +38,59 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
           startAngle={0}
           syncMethod="index"
         >
+          <Tooltip
+            active={false}
+            allowEscapeViewBox={
+              Object {
+                "x": false,
+                "y": false,
+              }
+            }
+            animationDuration={400}
+            animationEasing="ease"
+            content={[Function]}
+            contentStyle={Object {}}
+            coordinate={
+              Object {
+                "x": 0,
+                "y": 0,
+              }
+            }
+            cursor={true}
+            cursorStyle={Object {}}
+            filterNull={true}
+            isAnimationActive={true}
+            itemStyle={Object {}}
+            labelStyle={Object {}}
+            offset={10}
+            reverseDirection={
+              Object {
+                "x": false,
+                "y": false,
+              }
+            }
+            separator=" : "
+            trigger="hover"
+            useTranslate3d={false}
+            viewBox={
+              Object {
+                "height": 0,
+                "width": 0,
+                "x": 0,
+                "y": 0,
+              }
+            }
+            wrapperStyle={Object {}}
+          />
           <Legend
             align="right"
+            content={[Function]}
             iconSize={14}
             layout="vertical"
             verticalAlign="middle"
             wrapperStyle={
               Object {
+                "paddingLeft": 100,
                 "width": "60%",
               }
             }
@@ -104,7 +150,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly with other resp
             innerRadius={25}
             isAnimationActive={false}
             label={[Function]}
-            labelLine={false}
+            labelLine={[Function]}
             legendType="rect"
             minAngle={0}
             nameKey="name"
@@ -178,7 +224,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
       className="pie-chart__container mb-20"
       style={
         Object {
-          "height": "200px",
+          "height": "300px",
         }
       }
     >
@@ -205,13 +251,59 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
           startAngle={0}
           syncMethod="index"
         >
+          <Tooltip
+            active={false}
+            allowEscapeViewBox={
+              Object {
+                "x": false,
+                "y": false,
+              }
+            }
+            animationDuration={400}
+            animationEasing="ease"
+            content={[Function]}
+            contentStyle={Object {}}
+            coordinate={
+              Object {
+                "x": 0,
+                "y": 0,
+              }
+            }
+            cursor={true}
+            cursorStyle={Object {}}
+            filterNull={true}
+            isAnimationActive={true}
+            itemStyle={Object {}}
+            labelStyle={Object {}}
+            offset={10}
+            reverseDirection={
+              Object {
+                "x": false,
+                "y": false,
+              }
+            }
+            separator=" : "
+            trigger="hover"
+            useTranslate3d={false}
+            viewBox={
+              Object {
+                "height": 0,
+                "width": 0,
+                "x": 0,
+                "y": 0,
+              }
+            }
+            wrapperStyle={Object {}}
+          />
           <Legend
             align="right"
+            content={[Function]}
             iconSize={14}
             layout="vertical"
             verticalAlign="middle"
             wrapperStyle={
               Object {
+                "paddingLeft": 100,
                 "width": "60%",
               }
             }
@@ -247,7 +339,7 @@ exports[`<QuestionnaireAdminResultsPieChart /> renders correctly without other r
             innerRadius={25}
             isAnimationActive={false}
             label={[Function]}
-            labelLine={false}
+            labelLine={[Function]}
             legendType="rect"
             minAngle={0}
             nameKey="name"
