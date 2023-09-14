@@ -39,10 +39,10 @@ const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div
   className: 'majority-container',
 })`
   ${({ color, asPreview, hasMajoritySelected, checked, disabled, disableColors }: Props) => css`
-  position: relative;
+    position: relative;
     background-color: ${disableColors && !checked ? colors.darkerGray : color ?? colors.black};
     pointer-events: ${asPreview ? 'none' : 'initial'};
-    
+
     &:hover {
       cursor: pointer;
 
@@ -70,29 +70,30 @@ const MajorityContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div
 
     ${disabled && !asPreview && !checked && styleDisabled()};
     ${hasMajoritySelected && !checked && !disabled && styleMajorityNotSelected(color)};
-    
+
     ${disableColors &&
-      !checked &&
-      !disabled &&
-      css`
-        &:hover {
-          background-color: ${color};
-        }
-      `}
-    
+    !checked &&
+    !disabled &&
+    css`
+      &:hover {
+        background-color: ${color};
+      }
+    `}
+
     ${checked &&
-      css`
-        &::after {
-          width: 0 !important;
-        }
-        & + &::after {
-          width: 0 !important;
-        }
-      `}
+    css`
+      &::after {
+        width: 0 !important;
+      }
+      & + &::after {
+        width: 0 !important;
+      }
+    `}
 
     @media (max-width: ${mediaQueryMobile.maxWidth}) {
       .label-container {
         padding: 10px 24px;
+        width: 100%;
       }
     }
   `}
