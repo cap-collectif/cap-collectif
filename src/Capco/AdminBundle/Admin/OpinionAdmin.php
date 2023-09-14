@@ -6,11 +6,13 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\UserBundle\Entity\User;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
@@ -201,7 +203,13 @@ class OpinionAdmin extends CapcoAdmin
         $form
             ->with('admin.fields.opinion.group_content')
             ->add('title', null, ['label' => 'global.title'])
-            ->add('author', null, ['label' => 'global.author'])
+            ->add('author', ModelAutocompleteType::class, [
+                'label' => 'global.author',
+                'property' => 'username,email',
+                'to_string_callback' => function (User $entity) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
+                },
+            ])
             ->add('position', null, [
                 'label' => 'global.position',
                 'required' => false,
