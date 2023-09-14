@@ -8,9 +8,11 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Form\Type\TrashedStatusType;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\ModelAutocompleteFilter;
@@ -153,8 +155,12 @@ class CommentAdmin extends AbstractAdmin
 
         $form
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 8]])
-            ->add('author', null, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
+                'property' => 'username,email',
+                'to_string_callback' => function (User $entity) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
+                },
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
