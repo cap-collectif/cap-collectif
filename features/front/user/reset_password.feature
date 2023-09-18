@@ -10,8 +10,7 @@ Scenario: Admin wants to enable his account and set his password
   When I fill in the following:
     | password-form-new  | a |
     | password-form-confirmation | a |
-  And I wait 2 seconds
-  And I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase"
+  Then I should see "at-least-8-characters-one-digit-one-uppercase-one-lowercase" within 3 seconds
   When I fill in the following:
     | new_password  | a |
     | new_password_confirmation | q |

@@ -144,8 +144,7 @@ Scenario: Presentation step should display correct number of element
   Given feature "calendar" is enabled
   And feature "blog" is enabled
   And I go to "/project/croissance-innovation-disruption/presentation/presentation-1"
-  And I wait 10 seconds
-  Then I should see 2 ".media--news" elements
+  Then I wait ".media--news" to appear on current page 2 times
   And I wait "#PresentationStepEvents" to appear on current page
   And I should see 4 ".eventPreview" elements
 
@@ -239,18 +238,17 @@ Scenario: Admin access to a project accessible for admins only
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  Then I should see "Collecte des propositions pour conquérir le monde"
-  And I should see "only-visible-by-administrators"
+  Then I should see "Collecte des propositions pour conquérir le monde" within 5 seconds
+  And I should see "only-visible-by-administrators" within 5 seconds
 
 Scenario: Admin access to his project and click to edit it
   Given I am logged in as admin
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait 10 seconds
-  Then I should see "Collecte des propositions pour la capcoBeer"
-  And I should see "admin" in the "#authors-credit" element
-  And I should see "global.draft.only_visible_by_you"
+  Then I should see "Collecte des propositions pour la capcoBeer" within 10 seconds
+  And I should see "admin" within 3 seconds in the "#authors-credit" element
+  And I should see "global.draft.only_visible_by_you" within 3 seconds
   Then I follow "action_edit"
   And I should be redirected to "/admin/alpha/project/ProjectAccessibleForMeOnlyByAdmin/edit"
 
@@ -260,8 +258,8 @@ Scenario: Pierre can access to a restricted project to his user group
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)" before 3 seconds
-  And I should see "restrictedaccess" before 3 seconds
+  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)" within 3 seconds
+  And I should see "restrictedaccess" within 3 seconds
   And I open restricted access modal
   Then I should see "people-with-access-to-project"
   And I should see "Agent de la ville"
@@ -286,7 +284,7 @@ Scenario: Admin deletes a proposal ...
   When I visited "collect page" with:
     | projectSlug | projet-avec-beaucoup-dopinions   |
     | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |
-  And I wait 2 seconds
+  And I wait ".proposal-preview-list" to appear on current page
   Then I should see "Proposition qui va être jetée"
   When I go to the admin proposal page with proposalid "proposal105"
   And I wait "#proposal-admin-page-tabs-tab-6" to appear on current page
@@ -296,7 +294,7 @@ Scenario: Admin deletes a proposal ...
   And I fill in the following:
   | trashedReason| Pas intéressant désolé |
   And I click on button "[id='proposal-change-state']"
-  And I wait 4 seconds
+  Then I should see "global.saved" within 5 seconds
   When I visited "collect page" with:
     | projectSlug | projet-avec-beaucoup-dopinions   |
     | stepSlug | collecte-des-propositions-avec-questions-qui-va-etre-jetee   |

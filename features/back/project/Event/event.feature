@@ -28,7 +28,7 @@ Scenario: Logged in admin wants to add a new event
   And I fill in "metadescription" with "Common on a react event to speak about how to fire our president"
   And I fill in "customcode" with "<script>console.log('I m an xss fail');</script>"
   Then I click on button "#confirm-event-create"
-  And I wait 3 seconds
+  And I should be redirected to "|^/admin/capco/app/event/[0-9a-z-]+/edit$|" as regex
   Then I go to event page with slug "test"
   And I should see a ".eventContent" element
 
@@ -75,9 +75,8 @@ Scenario: Logged in super admin wants to delete an event
   And I go to admin event page with eventId "event10"
   And I wait "#delete-event" to appear on current page
   When I click on button "#delete-event"
-  Then I should see "event.alert.delete"
+  Then I should see "event.alert.delete" within 5 seconds
   And I click on button "#delete-modal-button-delete"
-  And I wait 3 seconds
   Then I should be redirected to "/admin-next/events"
   And I should not see "event10"
 
@@ -95,10 +94,9 @@ Scenario: Logged in admin wants to delete his event
   And I go to admin event page with eventId "event4"
   And I wait "#delete-event" to appear on current page
   When I click on button "#delete-event"
-  Then I should see "event.alert.delete"
+  Then I should see "event.alert.delete" within 5 seconds
   And I click on button "#delete-modal-button-delete"
-  And I wait 3 seconds
-  Then I should be redirected to "/admin-next/events"
+  Then I should be redirected to "/admin-next/events" within 5 seconds
   And I should not see "event4"
 
 @database @rabbimq

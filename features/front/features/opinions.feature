@@ -42,8 +42,7 @@ Scenario: An anonymous can paginate opinions inside a section
   And I wait ".card__header" to appear on current page
   Then I should see 50 ".list-group-item__opinion" element
   When I click the "#OpinionListPaginated-loadmore" element
-  And I wait 2 seconds
-  Then I should see 58 ".list-group-item__opinion" element
+  Then I wait ".list-group-item__opinion" to appear on current page 58 times
 
 @security
 Scenario: Can not create an opinion of non-contribuable type
@@ -97,7 +96,6 @@ Scenario: Author of an opinion lose their votes when updating it
   Then I check the checkbox to confirm
   And I press "confirm-opinion-update"
   And I wait "confirm-opinion-update" to disappear on current page
-  And I wait 1 seconds
   Then I should be redirected to "/consultations/croissance-innovation-disruption/consultation/collecte-des-avis/opinions/les-enjeux/opinion-3"
   And I wait "#OpinionBox" to appear on current page
   And I should see 'global.votes {"num":0}'

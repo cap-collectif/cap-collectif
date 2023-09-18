@@ -33,8 +33,7 @@ Scenario: Events can be filtered by theme
   And I visited "events page"
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
-  And I wait 1 seconds
-  Then I should see 1 ".eventPreview" elements
+  Then I wait ".eventPreview" to appear on current page 1 times
   And I should see "Event with registrations"
   And I should not see "ParisWeb2015"
 
@@ -49,7 +48,7 @@ Scenario: Archived events can be filtered by theme
   And I wait ".loader" to appear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "evenementPasseSansDateDeFin"
+  And I should see "evenementPasseSansDateDeFin" within 5 seconds
   And I should not see "PHPTourDuFuture"
 
 @read-only
@@ -60,7 +59,7 @@ Scenario: Events can be filtered by title
   And I wait ".eventPreview" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "Event without registrations"
+  And I should see "Event without registrations" within 5 seconds
   And I should not see "Event with registrations"
 
 @read-only
@@ -73,7 +72,7 @@ Scenario: Archived events can be filtered by title
   And I wait ".eventPreview" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "ParisWeb2014"
+  And I should see "ParisWeb2014" within 5 seconds
   And I should not see "evenementPasseSansDateDeFin"
 
 @database
@@ -86,8 +85,7 @@ Scenario: Anonymous wants to comment an event
     | authorName  | Naruto              |
     | authorEmail | naruto72@gmail.com  |
   When I press "comment.submit"
-  And I wait 2 seconds
-  Then I should see "J'ai un truc à dire" in the "#CommentListViewPaginated" element
+  Then I should see "J'ai un truc à dire" within 3 seconds in the "#CommentListViewPaginated" element
 
 @database
 Scenario: Logged in user wants to comment an event
@@ -162,9 +160,7 @@ Scenario: Logged in user wants to edit his refused event
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/event-create-by-user-with-review-refused'
   And I wait "#event-label-status" to appear on current page
-  # Not working without this. Maybe text is not already changed when the check is performed
-  And I wait 3 seconds
-  Then I wait "waiting-examination" to appear on current page in "#event-label-status"
+  Then I should see "waiting-examination" within 5 seconds in the "#event-label-status" element
 
 @read-only
 Scenario: Feature allow users to propose events is disabled

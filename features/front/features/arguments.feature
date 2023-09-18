@@ -9,16 +9,18 @@ Feature: Arguments
 Scenario: A confirmed user can create an argument in a contribuable opinion
   Given I am logged in as user
   And I go to an opinion
+  And I should see "count-arguments-for" within 5 seconds in the "#opinion__arguments--FOR" element
   When I submit an argument
-  Then I should see "alert.success.add.argument" in the "#global-alert-box" element
+  Then I should see "alert.success.add.argument" within 5 seconds in the "#global-alert-box" element
   And I should see my new published argument
 
 @database
 Scenario: An unconfirmed user can create an argument in a contribuable opinion
   Given I am logged in as user_not_confirmed
   And I go to an opinion
+  And I should see "count-arguments-for" within 5 seconds in the "#opinion__arguments--FOR" element
   When I submit an argument
-  Then I should see "alert.success.add.argument" in the "#global-alert-box" element
+  Then I should see "alert.success.add.argument" within 5 seconds in the "#global-alert-box" element
   And I should see my new unpublished argument
 
 @security
@@ -33,16 +35,18 @@ Scenario: Can not create an argument in opinion when step is closed
 Scenario: A confirmed user can create an argument in a contribuable version
   Given I am logged in as user
   And I go to a version
+  And I should see "count-arguments-for" within 5 seconds in the "#opinion__arguments--FOR" element
   When I submit an argument
-  Then I should see "alert.success.add.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.add.argument" within 5 seconds in the "#global-alert-box" element
   And I should see my new published argument
 
 @database
 Scenario: An unconfirmed user can create an argument in a contribuable version
   Given I am logged in as user_not_confirmed
   And I go to a version
+  And I should see "count-arguments-for" within 5 seconds in the "#opinion__arguments--FOR" element
   When I submit an argument
-  Then I should see "alert.success.add.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.add.argument" within 5 seconds in the "#global-alert-box" element
   And I should see my new unpublished argument
 
 @security
@@ -58,7 +62,7 @@ Scenario: Author of an argument on an opinion looses his votes when updating it
   Given I am logged in as user
   And I go to an opinion
   When I edit my argument
-  Then I should see "alert.success.update.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.update.argument" within 2 seconds in the "#global-alert-box" element
   And my argument should have changed
   And my argument should have lost its votes
 
@@ -67,7 +71,7 @@ Scenario: Author of an argument on an opinion wants to update it without checkin
   Given I am logged in as user
   And I go to an opinion
   When I edit my argument without confirming my votes lost
-  Then I should see "argument.constraints.confirm" before 2 seconds in the "#argument-form" element
+  Then I should see "argument.constraints.confirm" within 2 seconds in the "#argument-form" element
 
 @security
 Scenario: Non author of an argument on an opinion wants to update it
@@ -89,7 +93,7 @@ Scenario: Author of an argument on a version looses his votes when updating it
   And I wait 1 seconds
   When I edit my argument
   Then I should see "alert.success.update.argument" in the "#global-alert-box" element
-  Then I should see "alert.success.update.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.update.argument" within 2 seconds in the "#global-alert-box" element
   And my argument should have changed
   And my argument should have lost its votes
 
@@ -98,7 +102,7 @@ Scenario: Author of an argument on a version wants to update it without checking
   Given I am logged in as user
   And I go to a version
   When I edit my argument without confirming my votes lost
-  Then I should see "argument.constraints.confirm" before 2 seconds in the "#argument-form" element
+  Then I should see "argument.constraints.confirm" within 2 seconds in the "#argument-form" element
 
 @security
 Scenario: Non author of an argument on a version wants to update it
@@ -118,8 +122,7 @@ Scenario: Author of an argument on an opinion wants to delete it
   Given I am logged in as user
   And I go to an opinion
   When I delete my argument
-  And I wait 3 seconds
-  Then I should see "alert.success.delete.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.delete.argument" within 4 seconds in the "#global-alert-box" element
   And I should not see my argument anymore
 
 @security
@@ -140,7 +143,7 @@ Scenario: Author of an argument on a version wants to delete it
   Given I am logged in as user
   And I go to a version
   When I delete my argument
-  And I should see "alert.success.delete.argument" before 2 seconds in the "#global-alert-box" element
+  And I should see "alert.success.delete.argument" within 2 seconds in the "#global-alert-box" element
   And I should not see my argument anymore
 
 @security
@@ -192,4 +195,4 @@ Scenario: Non author of an argument can report it
   And I click the argument report button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.report.argument" before 2 seconds in the "#global-alert-box" element
+  Then I should see "alert.success.report.argument" within 2 seconds in the "#global-alert-box" element

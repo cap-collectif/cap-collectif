@@ -47,8 +47,7 @@ Scenario: Logged in user wants to change his password to a too short password
     | password-form-current      | user   |
     | password-form-new          | 1234   |
     | password-form-confirmation | 1234   |
-  And I wait 2 seconds
-  And I should see "at-least-8-characters-one-uppercase-one-lowercase"
+  Then I should see "at-least-8-characters-one-uppercase-one-lowercase" within 3 seconds
   And I should see "global.invalid.form"
 
 @database
@@ -137,9 +136,9 @@ Scenario: Logged in user wants to soft delete his account
 Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I should see "form.label_firstname" before 5 seconds
+  And I should see "form.label_firstname" within 5 seconds
   When I click the "#personal-data-firstname" element
-  And I should see "are-you-sure-you-want-to-delete-this-field" before 2 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-field" within 2 seconds
   Then I click on button "#btn-cancel-delete-field"
   And I should see "form.label_firstname"
 
@@ -147,9 +146,9 @@ Scenario: Logged as user, I want to delete my firstname, but I cancel it
 Scenario: Logged as user, I want to delete my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I should see "form.label_firstname" before 5 seconds
+  And I should see "form.label_firstname" within 5 seconds
   When I click the "#personal-data-firstname" element
-  And I should see "are-you-sure-you-want-to-delete-this-field" before 2 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-field" within 2 seconds
   Then I click on button "#btn-confirm-delete-field"
   And I should not see "form.label_firstname"
 
@@ -157,12 +156,11 @@ Scenario: Logged as user, I want to delete my firstname
 Scenario: Logged as user, I want to update my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I should see "form.label_firstname" before 4 seconds
+  And I should see "form.label_firstname" within 4 seconds
   When I fill the element "#personal-data-form-firstname" with empty value
   Then I should see "fill-or-delete-field"
-  And I wait 1 seconds
+  And I should see "global.invalid.form" within 2 seconds
   And the button "personal-data-form-save" should be disabled
-  And I should see "global.invalid.form"
   When I fill the element "#personal-data-form-firstname" with value "us"
   Then I should see "two-characters-minimum-required"
   And the button "personal-data-form-save" should be disabled
@@ -215,8 +213,7 @@ Scenario: Logged as user, I want to update my profile
   And I select "Organisation à but non lucratif" from "profile-form-userType"
   Then I fill the element "#public-data-form-biography" with value "I'm superman"
   And I press "profile-form-save"
-  And I wait 1 seconds
-  Then I should see "global.saved"
+  Then I should see "global.saved" within 2 seconds
 
 @database
 Scenario: Logged as user, I want to update my profile
@@ -228,7 +225,7 @@ Scenario: Logged as user, I want to update my profile
   And I wait "#profile-form-save" to appear on current page
   Then I fill the element "#public-data-form-biography" with value "I'm superman"
   And I press "profile-form-save"
-  Then I should see "global.saved" before 3 seconds
+  Then I should see "global.saved" within 3 seconds
 
 Scenario: Anonymous wants to see the profile of a user
   Given feature "user_type" is enabled

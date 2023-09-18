@@ -65,8 +65,7 @@ Scenario: Logged in admin wants to add consultation step to a project
   And I click the "#submit-project-content" element
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/consultation/consultationsteptitle"
-  And I wait 10 seconds
-  Then I should see "ConsultationStepBody"
+  Then I should see "ConsultationStepBody" within 10 seconds
 
 @database
 Scenario: Logged in admin wants to add collect step to a project
@@ -107,10 +106,9 @@ Scenario: Logged in admin wants to add a presentation step to a project
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/presentation/presentationsteptitle"
   And I wait "#details" to appear on current page
-  And I wait 10 seconds
-  Then I should see "PresentationStepTitle"
-  Then I should see "PresentationStepBody"
-  
+  Then I should see "PresentationStepTitle" within 10 seconds
+  Then I should see "PresentationStepBody" within 10 seconds
+
 @database
 Scenario: Logged in admin wants to add a debate step to a project
   Given I am logged in as admin
@@ -133,14 +131,22 @@ Scenario: Logged in admin wants to add a debate step to a project
 Scenario: Admin merges two proposals
   Given I am logged in as admin
   And I go to "/admin/alpha/project/projectCorona/contributions/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
-  And I wait ".analysis-pickable-list-container" to appear on current page
+  And I should see "loading-contributions" within 10 seconds in the ".toasts-container" element
+  And I wait ".toasts-container *:contains('loading-contributions')" to disappear on current page
+  And I wait ".analysis-pickable-list-container .pickableList-row input" to appear on current page
   Then I select the first 2 checkboxes in list ".pickableList-row"
+  And I wait "#merge-button" to appear on current page
   And I click on button "#merge-button"
+  And I wait "#modale-title" to appear on current page
+  And I wait "#merge\\.title" to appear on current page
+  And I should see "title.selected.propositions" within 2 seconds
   And I fill in the following:
     | title | Merged proposal |
+  And I wait "#merge-proposal-submit-button[disabled]" to disappear on current page
   And I click on button "#merge-proposal-submit-button"
   And I wait "#merge-proposal-submit-button" to disappear on current page
   And I go to "/admin/alpha/project/projectCorona/contributions/proposals?step=Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBDb3JvbmE%3D"
+  And I should see "loading-contributions" within 10 seconds in the ".toasts-container" element
   And I wait ".analysis-pickable-list-container" to appear on current page
   And the number 1 element in ".pickableList-row h2 a" should contain "Merged proposal"
   And I should see 2 ".merge-tag" elements

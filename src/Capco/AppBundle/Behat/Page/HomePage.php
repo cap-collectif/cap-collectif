@@ -44,12 +44,10 @@ class HomePage extends Page
     public function openUserDropdown()
     {
         $this->getElement('Logged user dropdown')->click();
-        sleep(1);
     }
 
     public function clickLogout(): void
     {
-        $this->openUserDropdown();
         $this->getElement('Logout button')->click();
     }
 }

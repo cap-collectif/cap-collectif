@@ -47,7 +47,7 @@ class QuestionnairePage extends Page
      */
     public function verifyPage()
     {
-        if (!$this->getSession()->wait(5000, "$('.questionnaire-page').length > 0")) {
+        if (!$this->getSession()->wait(10000, "$('.questionnaire-page').length > 0")) {
             throw new \RuntimeException(
                 'Proposal page did not fully load, check selector in "verifyPage".'
             );

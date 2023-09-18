@@ -101,6 +101,10 @@ Scenario: An anonymous wants to change locale through footer
   Given I visited "home page"
   And I wait "#footer-links" to appear on current page
   And I should not see a cookie named "locale"
+  And I should see "french" within 5 seconds in the "#footer-links" element
+  # On attend que le contenu asynchrone soit chargé sinon le test est flaky
+  And I wait "#projects .row .card__title" to appear on current page
+  And I wait "#proposals .row .card__title" to appear on current page
   And I scroll to the bottom
   And I select "de-DE" in the language footer
   And I should be redirected to "/de/" within 10 seconds
@@ -114,6 +118,9 @@ Scenario: An anonymous wants to change locale through footer in route with param
   Then I go to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
   And I wait "#footer-links" to appear on current page
   And I should not see a cookie named "locale"
+  And I should see "french" within 5 seconds in the "#footer-links" element
+  # On attend que le contenu asynchrone soit chargé sinon le test est flaky
+  And I wait ".proposal__step-page .body__infos__content" to appear on current page
   And I scroll to the bottom
   And I select "de-DE" in the language footer
   And I should be redirected to "/de/project/budget-participatif-rennes/collect/collecte-des-propositions" within 10 seconds

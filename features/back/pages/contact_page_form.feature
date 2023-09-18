@@ -8,8 +8,7 @@ Scenario: Logged in admin wants to update contact page title
   And I fill in the following:
     | title | Je suis le titre la page de contact |
   And I press "global.save"
-  And I wait 1 seconds
-  And I should see "global.saved"
+  And I should see "global.saved" within 3 seconds
 
 @database
 Scenario: Logged in admin wants to update contact page advanced properties
@@ -20,8 +19,7 @@ Scenario: Logged in admin wants to update contact page advanced properties
     | custom.metadescription | Je suis la metadescription la page de contact |
     | custom.customcode | <script> console.log("Je suis le code personnalisé de la page contact") |
   And I press "global.save"
-  And I wait 2 seconds
-  And I should see "global.saved"
+  And I should see "global.saved" within 3 seconds
 
 @database
 Scenario: Logged in admin wants to add a contact in /contact
@@ -30,7 +28,7 @@ Scenario: Logged in admin wants to add a contact in /contact
   And I wait "#openAddModalButton" to appear on current page
   And I click on button "[id='openAddModalButton']"
   When I fill the contact form
-  And I wait 2 seconds
+  And I wait "#CreateContactAdminForm-submit-create-contact" to appear on current page 1 times
   And I press "CreateContactAdminForm-submit-create-contact"
   And I wait "global.loading" to disappear on current page
   And I wait "#openAddModalButton" to disappear on current page

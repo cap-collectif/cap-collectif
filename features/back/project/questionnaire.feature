@@ -101,8 +101,7 @@ Scenario: Logged in admin edit questionnaire, import choices
   When I click on button "[id='questions[0].submit']"
   And I should see "your-question-has-been-registered"
   When I click on button "[id='parameters-submit']"
-  And I wait 7 seconds
-  And I should be redirected to "/admin/capco/app/questionnaire/questionnaireAdmin/edit"
+  And I should be redirected to "/admin/capco/app/questionnaire/questionnaireAdmin/edit" within 7 seconds
 
 @database @rabbitmq
 Scenario: Logged in admin edits questionnaire section and add specific color

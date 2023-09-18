@@ -478,6 +478,10 @@ trait ProposalStepsTrait
      */
     public function iSearchForProposalsWithTerms(string $terms)
     {
+        $this->waitAndThrowOnFailure(
+            3000,
+            "$('#proposal-search-input').length > 0"
+        );
         $this->fillField('proposal-search-input', $terms);
         $this->IwaitForSuccessfulRefetchQuery();
     }
@@ -1355,12 +1359,19 @@ trait ProposalStepsTrait
     /**
      * @When I click the proposal follow button on :proposalId
      */
-    public function iClickTheProposalFollowButton(string $proposalId)
+    public function iClickTheProposalFollowButtonAsUser(string $proposalId)
     {
-        $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
-        $page = $this->getCurrentPage();
-        $page->clickFollowButton($proposalId);
-        $this->iWait(2);
+        $this->iClickTheProposalFollowButton($proposalId);
+        $button = $this->getCurrentPage()->getFollowButtonId($this->getGlobalProposalId($proposalId));
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('following', 5, $button);
+    }
+
+    /**
+     * @When I click the proposal follow button on :proposalId as anonymous
+     */
+    public function iClickTheProposalFollowButtonAsAnonymous(string $proposalId)
+    {
+        $this->iClickTheProposalFollowButton($proposalId);
     }
 
     /**
@@ -1411,8 +1422,9 @@ trait ProposalStepsTrait
         $proposalId = GlobalId::toGlobalId('Proposal', $proposalId);
 
         $page = $this->getCurrentPage();
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('following', 5, $page->getFollowButtonId($proposalId));
         $page->clickUnfollowButton($proposalId);
-        $this->iWait(2);
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('follow', 5, $page->getFollowButtonId($proposalId));
     }
 
     /**
@@ -1729,5 +1741,16 @@ trait ProposalStepsTrait
             ->getLastSelector('follower')
         ;
         $this->assertElementNotOnPage($lastFollowerSelector);
+    }
+
+    protected function iClickTheProposalFollowButton(string $proposalId)
+    {
+        $page = $this->getCurrentPage();
+        $page->clickFollowButton($this->getGlobalProposalId($proposalId));
+    }
+
+    protected function getGlobalProposalId(string $proposalId): string
+    {
+        return GlobalId::toGlobalId('Proposal', $proposalId);
     }
 }

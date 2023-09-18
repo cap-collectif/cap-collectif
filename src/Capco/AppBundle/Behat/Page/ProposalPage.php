@@ -266,11 +266,14 @@ class ProposalPage extends Page
         return $this->find('css', $element)->click();
     }
 
+    public function getFollowButtonId(string $proposalId): string
+    {
+        return $this->elements['proposal follow button'] . "-{$proposalId}";
+    }
+
     public function clickFollowButton(string $proposalId)
     {
-        $element = $this->elements['proposal follow button'] . "-{$proposalId}";
-
-        return $this->find('css', $element)->click();
+        return $this->find('css', $this->getFollowButtonId($proposalId))->click();
     }
 
     public function clickUnfollowButton(string $proposalId)

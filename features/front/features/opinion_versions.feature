@@ -48,7 +48,6 @@ Scenario: Author of a version wants to edit it
   And I fill the edit version form
   Then I check the checkbox to confirm version
   And I click on button "[id='opinion-version-edit-update']"
-  And I wait 2 seconds
-  Then I should see "Updated title"
+  Then I should see "Updated title" within 4 seconds
   Then I should see "Updated body"
   Then I should see "Updated comment"

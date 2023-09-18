@@ -422,6 +422,27 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I should be redirected to :url as regex
+     * @Then I should be redirected to :url as regex within :timeout seconds
+     */
+    public function assertRegexRedirect(string $url, int $timeout = 10): void
+    {
+        while (true) {
+            try {
+                $this->assertUrlRegExp($url);
+
+                return;
+            } catch (ExpectationException $exception) {
+                if ($timeout <= 0) {
+                    throw $exception;
+                }
+            }
+            --$timeout;
+            sleep(1);
+        }
+    }
+
+    /**
      * @Then I should not be redirected to :url
      */
     public function assertNotRedirect(string $url)
@@ -1174,6 +1195,7 @@ class ApplicationContext extends UserContext
     {
         $this->iWaitElementToAppearOnPage('#footer-links #language-change-button-dropdown');
         $this->iClickElement('#footer-links #language-change-button-dropdown');
+        $this->scrollTo('bot');
         $this->iWaitElementToAppearOnPage("#language-change-menu-list #language-choice-{$locale}");
         $this->iClickElement("#language-change-menu-list #language-choice-{$locale}");
     }
@@ -1572,20 +1594,22 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then I should see :output before :timeout seconds in the :parentSelector element
+     * @Then I should see :output within :timeout seconds in the :parentSelector element
      */
-    public function iShouldSeeOutputInElementBeforeTimeout(string $output, int $timeout, string $parentSelector)
+    public function iShouldSeeOutputInElementWithinTimeoutSeconds(string $output, int $timeout, string $parentSelector)
     {
         $output = addslashes($output);
-        $this->waitAndThrowOnFailure($timeout * 1000, "$('{$parentSelector}').find('*:contains(\"{$output}\")').length > 0");
+        $condition = "$('{$parentSelector}').find('*:contains(\"{$output}\")').length > 0"
+            . " || $('{$parentSelector}:contains(\"{$output}\")').length > 0";
+        $this->waitAndThrowOnFailure($timeout * 1000, $condition);
     }
 
     /**
-     * @Then I should see :output before :timeout seconds
+     * @Then I should see :output within :timeout seconds
      */
     public function iShouldSeeOutputBeforeTimeout(string $output, int $timeout)
     {
-        $this->iShouldSeeOutputInElementBeforeTimeout($output, $timeout, '*');
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds($output, $timeout, '*');
     }
 
     private function isSuiteWithJS(Suite $suite): bool

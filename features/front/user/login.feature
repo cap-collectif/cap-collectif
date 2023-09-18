@@ -6,14 +6,15 @@ Scenario: A user wants to login and see he has successfully logged in.
   Then I can see I am logged in as "user"
 
 Scenario: An admin wants to login and see he has successfully logged in.
-  Given I am logged in as admin
+  Given I visited "home page"
+  And I am logged in as admin
   Then I can see I am logged in as "admin"
   And I can access admin in navbar
 
 Scenario: A logged user wants to logout
   Given I am logged in as user
   When I logout
-  Then I should see "global.login" before 3 seconds
+  Then I should see "global.login" within 3 seconds
 
 @database
 Scenario: User has lost password
@@ -63,8 +64,7 @@ Scenario: User fails to login many times (turnstile captcha gate)
     | username             | lbrunet@cap-collectif.com    |
     | password             | tot                     |
   When I press "global.login_me"
-  And I wait 3 seconds
-  Then I should see a "div[id^=turnstile_captcha-]" element
+  Then I wait "div[id^=turnstile_captcha-]" to appear on current page 1 times
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
     | password             | toto                    |

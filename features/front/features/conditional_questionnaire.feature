@@ -6,7 +6,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Hap ou Noel ? -> Hap and Marvel ou DC -> Marvel) of the questionnaire and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"
@@ -45,7 +45,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Hap ou Noel ? -> Hap and Marvel ou DC ? -> DC) of the questionnaire and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"
@@ -85,7 +85,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Marvel ou DC ? -> Marvel) and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"
@@ -136,7 +136,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Marvel ou DC ? -> DC) and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"
@@ -187,7 +187,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Hap ou Noel ? -> Hap) and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"
@@ -219,7 +219,7 @@ Scenario: Logged in user wants to fill a conditional questionnaire by going into
 (Hap ou Noel ? -> Noel) and should see the correct questions
   Given I am logged in as user
   And I go to a conditional questionnaire step
-  Then I should see "Hap ou Noel ?"
+  Then I should see "Hap ou Noel ?" within 8 seconds
   Then I should see "Votre fleuve préféré"
   Then I should not see "Comme tu as choisi Hap et le Gange, je t'affiche cette question (dsl jui pas inspiré)"
   Then I should not see "Par qui Hap a t-il été créé ?"

@@ -70,7 +70,8 @@ Scenario: Anonymous user wants to vote for a proposal that is not votable anymor
 Scenario: Logged in user wants to see his votes on a project and remove one
   Given I am logged in as admin
   When I go to the votes details page
-  Then I should have 3 votes
+  Then I should see "Rénovation du gymnase" within 5 seconds in the "#ProposalsUserVotesPage" element
+  And I should have 3 votes
   And I remove the first vote
   And I should have 2 votes
 

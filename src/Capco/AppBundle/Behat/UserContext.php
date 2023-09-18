@@ -24,10 +24,11 @@ class UserContext extends DefaultContext
     public function iLogout()
     {
         $home = $this->navigationContext->getPage('HomePage');
+        $this->iWaitElementToAppearOnPage('#navbar-username');
+        $home->openUserDropdown();
+        $this->iWaitElementToAppearOnPage('#logout-button');
         $home->clickLogout();
-
-        // Called only once, so it's ok
-        sleep(5);
+        $this->iWaitElementToAppearOnPage('.btn.btn--connection');
     }
 
     /**

@@ -239,7 +239,7 @@ trait OpinionStepsTrait
     {
         $this->iWaitElementToAppearOnPage('#opinion__arguments--FOR');
         $selector = $this->navigationContext->getPage('opinion page')->getArgumentsYesBoxSelector();
-        $this->assertElementContainsText($selector, 'Texte de mon argument');
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('Texte de mon argument', 10, $selector);
     }
 
     /**
@@ -251,7 +251,7 @@ trait OpinionStepsTrait
             ->getPage('opinion page')
             ->getUnpublishedArgumentsYesBoxSelector()
         ;
-        $this->assertElementContainsText($selector, 'Texte de mon argument');
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('Texte de mon argument', 10, $selector);
     }
 
     /**
@@ -260,7 +260,7 @@ trait OpinionStepsTrait
     public function myArgumentShouldHaveChanged()
     {
         $selector = $this->getCurrentPage()->getArgumentsNoBoxSelector();
-        $this->assertElementContainsText($selector, 'Je modifie mon argument !');
+        $this->iShouldSeeOutputInElementWithinTimeoutSeconds('Je modifie mon argument !', 10, $selector);
     }
 
     /**
