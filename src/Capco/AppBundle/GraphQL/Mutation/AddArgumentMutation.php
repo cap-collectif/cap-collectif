@@ -17,6 +17,7 @@ use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Maximal\Emoji\Detector;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -130,6 +131,8 @@ class AddArgumentMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        $argument->setBody($this->removeEmojis($argument->getBody()));
+
         $this->em->persist($argument);
         $this->em->flush();
 
@@ -143,5 +146,14 @@ class AddArgumentMutation implements MutationInterface
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $argument);
 
         return ['argument' => $argument, 'argumentEdge' => $edge, 'userErrors' => []];
+    }
+
+    private function removeEmojis(string $body): string
+    {
+        if (!Detector::containsEmoji($body)) {
+            return $body;
+        }
+
+        return Detector::removeEmoji($body);
     }
 }

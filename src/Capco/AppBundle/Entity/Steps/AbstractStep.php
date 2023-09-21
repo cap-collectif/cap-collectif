@@ -13,8 +13,9 @@ use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ViewConfiguration;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
+use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
@@ -48,8 +49,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 {
     use BodyUsingJoditWysiwygTrait;
+    use CustomCodeTrait;
     use DateHelperTrait;
-    use MetaDescriptionCustomCodeTrait;
+    use MetaDescriptionTrait;
     use RequirementTrait;
     use TextableTrait;
     use TimeRangeableTrait;

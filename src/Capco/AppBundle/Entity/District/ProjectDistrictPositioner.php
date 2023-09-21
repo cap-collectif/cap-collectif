@@ -28,12 +28,12 @@ class ProjectDistrictPositioner
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioners")
      */
-    private ProjectDistrict $district;
+    private ?ProjectDistrict $district = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners")
      */
-    private Project $project;
+    private ?Project $project = null;
 
     public function __toString(): string
     {
@@ -45,7 +45,7 @@ class ProjectDistrictPositioner
         return $this->district;
     }
 
-    public function setDistrict(ProjectDistrict $district): self
+    public function setDistrict(?ProjectDistrict $district): self
     {
         $this->district = $district;
 
@@ -57,7 +57,7 @@ class ProjectDistrictPositioner
         return $this->project;
     }
 
-    public function setProject(Project $project): self
+    public function setProject(?Project $project): self
     {
         $this->project = $project;
 

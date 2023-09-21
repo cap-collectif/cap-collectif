@@ -10,13 +10,6 @@ class ProjectDescriptionResolver implements ResolverInterface
 {
     public function __invoke(Project $project): ?string
     {
-        $steps = $project->getRealSteps();
-        $firstStep = $steps[0] ?? null;
-
-        if ($firstStep instanceof PresentationStep) {
-            return $firstStep->getBody();
-        }
-
-        return null;
+        return $project->getFirstStep() instanceof PresentationStep ? $project->getFirstStep()->getBody() : null;
     }
 }

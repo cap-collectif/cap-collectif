@@ -22,10 +22,11 @@ use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
+use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\LocalizableTrait;
 use Capco\AppBundle\Traits\Media\CoverTrait;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
@@ -52,9 +53,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     use AddressableTrait;
     use CoverTrait;
     use CreatableTrait;
+    use CustomCodeTrait;
     use DateHelperTrait;
     use LocalizableTrait;
-    use MetaDescriptionCustomCodeTrait;
+    use MetaDescriptionTrait;
     use OwnerableTrait;
     use ProjectVisibilityTrait;
     use TimeRangeableTrait;
@@ -711,7 +713,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     {
         $first = null;
         if (!empty($this->steps)) {
-            $first = $this->steps[0];
+            $first = false !== $this->steps->first() ? $this->steps->first() : null;
             foreach ($this->steps as $step) {
                 if (
                     null !== $first

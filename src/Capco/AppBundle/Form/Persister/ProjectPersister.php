@@ -75,23 +75,12 @@ class ProjectPersister
             $arguments = $this->getRestrictedViewerGroups($arguments);
         }
 
-        $previousDistricts = [];
         if ($editMode) {
             $project = $this->getProject($arguments, $input->offsetGet('projectId'), $viewer);
 
             unset($arguments['projectId']);
-            $previousDistricts = $project->getProjectDistrictPositionersIds();
         }
-
-        if (!empty($arguments['districts'])) {
-            $arguments['districts'] = array_map(function ($districtGlobalId) {
-                return GlobalId::fromGlobalId($districtGlobalId)['id'];
-            }, $arguments['districts']);
-        }
-        $newDistricts = array_diff($arguments['districts'], $previousDistricts);
-        if ($newDistricts) {
-            $this->notifyOnNewProjectInDistrict($newDistricts, $project);
-        }
+        $this->notifyOnNewProjectInDistrict($arguments, $project);
 
         $form = $this->formFactory->create(AlphaProjectFormType::class, $project);
 
@@ -172,19 +161,31 @@ class ProjectPersister
         return $project;
     }
 
-    private function notifyOnNewProjectInDistrict(array $projectDistrictsId, Project $project): void
+    private function notifyOnNewProjectInDistrict(array &$arguments, Project $project): void
     {
-        $projectDistrictsId = array_values($projectDistrictsId);
-        foreach ($projectDistrictsId as $projectDistrict) {
-            $this->publisher->publish(
-                CapcoAppBundleMessagesTypes::PROJECT_DISTRICT_NOTIFICATION,
-                new Message(
-                    json_encode([
-                        'projectDistrict' => $projectDistrict,
-                        'projectId' => $project->getId(),
-                    ])
-                )
+        $previousDistricts = $project->getProjectDistrictPositionersIds();
+
+        if (!empty($arguments['districts'])) {
+            $arguments['districts'] = array_map(
+                fn ($districtGlobalId) => GlobalId::fromGlobalId($districtGlobalId)['id'],
+                $arguments['districts']
             );
+        }
+
+        $newDistricts = array_diff($arguments['districts'], $previousDistricts);
+
+        if ($newDistricts) {
+            foreach ($newDistricts as $id) {
+                $this->publisher->publish(
+                    CapcoAppBundleMessagesTypes::PROJECT_DISTRICT_NOTIFICATION,
+                    new Message(
+                        json_encode([
+                            'projectDistrict' => $id,
+                            'projectId' => $project->getId(),
+                        ])
+                    )
+                );
+            }
         }
     }
 }

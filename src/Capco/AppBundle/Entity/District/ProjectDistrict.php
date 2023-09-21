@@ -39,6 +39,7 @@ class ProjectDistrict extends AbstractDistrict
     public function __construct()
     {
         $this->followers = new ArrayCollection();
+        $this->projectDistrictPositioners = new ArrayCollection();
         parent::__construct();
     }
 

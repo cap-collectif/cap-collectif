@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProjectDistrictPositionerRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProjectDistrictsPersister
@@ -31,21 +32,51 @@ class ProjectDistrictsPersister
             return GlobalIdResolver::getDecodedId($districtGlobalId, true);
         }, $districtsIds);
         $districtEntities = $this->projectDistrictRepository->findByIds($districtsIds);
+
         $oldPositioners = $this->districtPositionerRepository->findBy([
-            'project' => $project->getId(),
+            'project' => $project,
         ]);
-        foreach ($oldPositioners as $positioner) {
-            $this->em->remove($positioner);
+
+        foreach ($oldPositioners as $key => $oldPositioner) {
+            if (!\in_array($oldPositioner->getDistrict()->getId(), $districtsIds, true)) {
+                $oldPositioner->setProject(null);
+                $oldPositioner->setDistrict(null);
+                $this->em->remove($oldPositioner);
+                unset($oldPositioners[$key]);
+            }
         }
-        $this->em->flush();
-        $this->em->refresh($project);
+        $project->setProjectDistrictPositioners(new ArrayCollection($oldPositioners));
+        $this->recomputePositions($oldPositioners);
+
+        $nextPosition = $this->districtPositionerRepository->getNextAvailablePosition($project);
         foreach ($districtEntities as $district) {
+            $hasPosition = array_filter(
+                $oldPositioners,
+                fn (ProjectDistrictPositioner $positioner) => $positioner->getDistrict()->getId() === $district->getId()
+            );
+
+            if ($hasPosition) {
+                continue;
+            }
+
             $positioner = new ProjectDistrictPositioner();
             $positioner
                 ->setProject($project)
                 ->setDistrict($district)
-                ->setPosition(array_search($district->getId(), $districtsIds, true))
+                ->setPosition($nextPosition++)
             ;
+
+            $updatedPositioners[] = $positioner;
+            $this->em->persist($positioner);
+        }
+    }
+
+    private function recomputePositions(array $oldPositioners): void
+    {
+        $firstPosition = 1;
+        foreach ($oldPositioners as $key => $positioner) {
+            $positioner->setPosition($firstPosition++);
+
             $this->em->persist($positioner);
         }
     }

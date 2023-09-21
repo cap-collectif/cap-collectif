@@ -9,8 +9,7 @@ trait MetaDescriptionTrait
 {
     /**
      * @ORM\Column(name="meta_description", type="string", nullable=true, length=160)
-     * @Assert\Length(max=160,
-     *     maxMessage="argument.metadescription.max_length")
+     * @Assert\Length(max=160, maxMessage="argument.metadescription.max_length")
      */
     private $metaDescription;
 

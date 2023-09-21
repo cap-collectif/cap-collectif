@@ -4,7 +4,8 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -23,8 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Consultation implements IndexableInterface
 {
+    use CustomCodeTrait;
     use DescriptionTrait;
-    use MetaDescriptionCustomCodeTrait;
+    use MetaDescriptionTrait;
     use UuidTrait;
 
     /**

@@ -255,6 +255,10 @@ class UpdateNewProjectMutation implements MutationInterface
         unset($arguments['description']);
 
         $steps = $project->getRealSteps();
+        $abstractSteps = [];
+        foreach ($steps as $step) {
+            $abstractSteps[] = $step->getProjectAbstractStep();
+        }
         $presentationStep = null;
         foreach ($steps as $step) {
             if ($step instanceof PresentationStep) {
@@ -272,6 +276,8 @@ class UpdateNewProjectMutation implements MutationInterface
 
         if ($presentationStep && $description) {
             $presentationStep->setBody($description);
+            $presentationStep->getProjectAbstractStep()->setPosition(1);
+            $this->recomputePositions($abstractSteps, 0);
 
             return;
         }
@@ -292,9 +298,20 @@ class UpdateNewProjectMutation implements MutationInterface
             ->setPosition(1)
         ;
 
+        $this->recomputePositions($abstractSteps, 1);
+
         $this->em->persist($presentationStep);
         $this->em->persist($presentationProjectAbstractStep);
 
         $project->addStep($presentationProjectAbstractStep);
+    }
+
+    private function recomputePositions(array $objects, int $offset = 0): array
+    {
+        foreach ($objects as $object) {
+            $object->setPosition($object->getPosition() + $offset);
+        }
+
+        return $objects;
     }
 }
