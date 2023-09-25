@@ -23,6 +23,10 @@ services:
         arguments:
             $name: 'capco:es:create-analytics-test-index'
 
+    Capco\AppBundle\Command\Elasticsearch\CleanIndexCommand:
+        arguments:
+            $config: { host: '%elasticsearch_host%', port: '%elasticsearch_port%' }
+
     Capco\AppBundle\Command\GenerateMapProviderPublicToken:
         arguments:
             $mapboxSecretKey: '%mapbox_secret_key%'

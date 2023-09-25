@@ -38,8 +38,9 @@ parameters:
     redis_dsn: '%env(SYMFONY_REDIS_HOST)%'
     elasticsearch_host: '%env(SYMFONY_ELASTICSEARCH_HOST)%'
     elasticsearch_index: '%env(SYMFONY_ELASTICSEARCH_INDEX)%'
-    elasticsearch_password: '%env(SYMFONY_ELASTICSEARCH_PASSWORD)%'
     elasticsearch_username: '%env(SYMFONY_ELASTICSEARCH_USERNAME)%'
+    elasticsearch_password: '%env(SYMFONY_ELASTICSEARCH_PASSWORD)%'
+    elasticsearch_port: '%env(SYMFONY_ELASTICSEARCH_PORT)%'
     logpush_elasticsearch_host: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST)%'
     logpush_elasticsearch_index: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX)%'
     logpush_elasticsearch_username: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME)%'
@@ -131,6 +132,7 @@ parameters:
     env(SYMFONY_ELASTICSEARCH_INDEX): capco
     env(SYMFONY_ELASTICSEARCH_USERNAME): null
     env(SYMFONY_ELASTICSEARCH_PASSWORD): null
+    env(SYMFONY_ELASTICSEARCH_PORT): 9200
     env(SYMFONY_REDIS_PREFIX): ''
     env(SYMFONY_REDIS_PASSWORD): null
     env(SYMFONY_LOCALE): fr-FR

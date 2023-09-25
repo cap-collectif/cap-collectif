@@ -12,10 +12,12 @@ use Symfony\Component\Process\Process;
 class CleanIndexCommand extends Command
 {
     protected $indexManager;
+    private array $config;
 
-    public function __construct(IndexBuilder $indexManager)
+    public function __construct(IndexBuilder $indexManager, array $config)
     {
         $this->indexManager = $indexManager;
+        $this->config = $config;
         parent::__construct();
     }
 
@@ -36,7 +38,7 @@ class CleanIndexCommand extends Command
     {
         if ($input->getOption('all')) {
             $job = Process::fromShellCommandline(
-                'curl -sS -XDELETE http://elasticsearch:9200/_all'
+                sprintf('curl -sS -XDELETE http://%s:%s/_all', $this->config['host'], $this->config['port'])
             );
             echo $job->getCommandLine() . \PHP_EOL;
             $job->mustRun();

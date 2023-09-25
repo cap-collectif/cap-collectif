@@ -492,35 +492,13 @@ class ReinitCommand extends Command
 
     protected function populateElasticsearch(OutputInterface $output)
     {
-        $this->stopwatch->start('populate');
-
-        $this->runCommands(
-            [
-                'capco:es:clean' => ['--all' => true, '--no-debug' => true],
-            ],
-            $output
-        );
         // /!\ Do not use create --populate
         // Because for correct counters value we need to query ES
         $this->runCommands(
             [
+                'capco:es:clean' => ['--all' => true, '--no-debug' => true],
                 'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
-            ],
-            $output
-        );
-        $this->runCommands(
-            [
                 'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
-            ],
-            $output
-        );
-        $event = $this->stopwatch->stop('populate');
-        $output->writeln(
-            'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
-        );
-
-        $this->runCommands(
-            [
                 'capco:es:create-analytics-test-index' => ['--quiet' => true, '--no-debug' => true],
             ],
             $output

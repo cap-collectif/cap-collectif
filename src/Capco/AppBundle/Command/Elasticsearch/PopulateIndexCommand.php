@@ -8,16 +8,19 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class PopulateIndexCommand extends Command
 {
     protected $toggleManager;
     protected $indexer;
+    private Stopwatch $stopwatch;
 
-    public function __construct(Manager $toggleManager, Indexer $indexer)
+    public function __construct(Manager $toggleManager, Indexer $indexer, Stopwatch $stopwatch)
     {
         $this->toggleManager = $toggleManager;
         $this->indexer = $indexer;
+        $this->stopwatch = $stopwatch;
         parent::__construct();
     }
 
@@ -52,12 +55,17 @@ class PopulateIndexCommand extends Command
         $offset = $input->getArgument('offset');
 
         try {
+            $this->stopwatch->start('populate');
             if ($type) {
                 $this->indexer->indexAllForType($type, $offset, $output, true);
             } else {
                 $this->indexer->indexAll($output, true);
             }
             $this->indexer->finishBulk(true);
+            $event = $this->stopwatch->stop('populate');
+            $output->writeln(
+                'Populate Elasticsearch duration: <info>' . $event->getDuration() / 1000 . '</info>s'
+            );
         } catch (\RuntimeException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 
