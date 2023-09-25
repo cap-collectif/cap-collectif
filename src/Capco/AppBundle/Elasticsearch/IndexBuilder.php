@@ -86,7 +86,7 @@ class IndexBuilder
         return sprintf('%s_%s', $this->indexName, date('Y-m-d-H-i-s'));
     }
 
-    public function cleanOldIndices(): array
+    public function cleanOldIndices(int $numberOfIndicesKept = 1): array
     {
         $indexNames = $this->cluster->getIndexNames();
         $indexNames = array_filter(
@@ -94,30 +94,23 @@ class IndexBuilder
             fn ($indexName) => str_starts_with($indexName, self::PREFIX_INDEX)
         );
 
-        if (1 === \count($indexNames)) {
+        $indexNames = array_values($indexNames);
+
+        rsort($indexNames);
+        $indicesNamesKept = \array_slice($indexNames, 0, $numberOfIndicesKept);
+        array_splice($indexNames, 0, $numberOfIndicesKept);
+
+        if (0 === \count($indexNames)) {
             return [];
         }
 
-        $indexNames = array_values($indexNames);
-        $indexNames = array_map(
-            fn ($item) => str_replace(self::PREFIX_INDEX, '', $item),
-            $indexNames
-        );
-
-        $lastIndexUpToDate = array_search(max($indexNames), $indexNames);
-
-        if (false !== $lastIndexUpToDate) {
-            unset($indexNames[$lastIndexUpToDate]);
-        }
-
-        $indexNamesDeleted = [];
+        $indicesNamesDeleted = [];
         foreach ($indexNames as $indexName) {
-            $indexName = self::PREFIX_INDEX . $indexName;
             $this->client->getIndex($indexName)->delete();
-            $indexNamesDeleted[] = $indexName;
+            $indicesNamesDeleted[] = $indexName;
         }
 
-        return $indexNamesDeleted;
+        return [$indicesNamesDeleted, $indicesNamesKept];
     }
 
     public function getLiveSearchIndexName(): string
