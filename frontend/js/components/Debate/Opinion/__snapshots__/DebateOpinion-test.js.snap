@@ -1,479 +1,579 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
-<div
-  className="sc-bdnxRM gYjpOg cap-card"
->
+Array [
   <div
-    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    title=""
-  >
-    <span
-      className="sc-bdnxRM KpOXB cap-text"
-    >
-      opinion.for
-    </span>
-  </div>
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM dPstku"
-  />
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
   <div
-    className="sc-bdnxRM bqcJNK"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM bUeabV cap-card"
   >
     <div
-      className="sc-bdnxRM xxmyc"
+      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      title=""
+    >
+      <span
+        className="sc-bdnxRM kjQezm cap-text"
+      >
+        opinion.for
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM bTikNC"
+    />
+    <div
+      className="sc-bdnxRM bqbbdd"
     >
       <div
-        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-        title="Agui le penseur"
+        className="sc-bdnxRM bHbGcK"
       >
-        <img
-          alt="Agui le penseur"
-          className="sc-bdnxRM jVCZhC"
-          src="<mock-value-for-field-\\"url\\">"
+        <div
+          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
           style={
             Object {
-              "objectFit": "cover",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
           title="Agui le penseur"
-        />
+        >
+          <img
+            alt="Agui le penseur"
+            className="sc-bdnxRM jVCZhC"
+            src="<mock-value-for-field-\\"url\\">"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="Agui le penseur"
+          />
+        </div>
+        <div
+          className="sc-bdnxRM dXNwuA"
+        >
+          <p
+            className="sc-bdnxRM gQbCgt cap-text"
+          >
+            Agui le penseur
+          </p>
+          <p
+            className="sc-bdnxRM SwLGZ cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
       </div>
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM jWvjdR"
       >
-        <p
-          className="sc-bdnxRM dWfVYr cap-text"
-        >
-          Agui le penseur
-        </p>
-        <p
-          className="sc-bdnxRM giDgev cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM dZUplD"
-    >
-      <h4
-        className="sc-bdnxRM iJMGcs cap-heading"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        Je suis pour
-      </h4>
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
+        <h4
+          className="sc-bdnxRM Rdzhg cap-heading"
+          style={
             Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Je suis pour
+        </h4>
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
-      </p>
+          />
+        </p>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
-<div
-  className="sc-bdnxRM gYjpOg cap-card"
->
+Array [
   <div
-    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    title=""
-  >
-    <span
-      className="sc-bdnxRM KpOXB cap-text"
-    >
-      opinion.for
-    </span>
-  </div>
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM dPstku"
-  />
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
   <div
-    className="sc-bdnxRM bqcJNK"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM bUeabV cap-card"
   >
     <div
-      className="sc-bdnxRM xxmyc"
+      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      title=""
+    >
+      <span
+        className="sc-bdnxRM kjQezm cap-text"
+      >
+        opinion.for
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM bTikNC"
+    />
+    <div
+      className="sc-bdnxRM bqbbdd"
     >
       <div
-        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-        title="Agui le penseur"
+        className="sc-bdnxRM bHbGcK"
       >
-        <img
-          alt="Agui le penseur"
-          className="sc-bdnxRM jVCZhC"
-          src="<mock-value-for-field-\\"url\\">"
+        <div
+          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
           style={
             Object {
-              "objectFit": "cover",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
           title="Agui le penseur"
-        />
+        >
+          <img
+            alt="Agui le penseur"
+            className="sc-bdnxRM jVCZhC"
+            src="<mock-value-for-field-\\"url\\">"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="Agui le penseur"
+          />
+        </div>
+        <div
+          className="sc-bdnxRM dXNwuA"
+        >
+          <p
+            className="sc-bdnxRM gQbCgt cap-text"
+          >
+            Agui le penseur
+          </p>
+          <p
+            className="sc-bdnxRM SwLGZ cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
       </div>
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM jWvjdR"
       >
-        <p
-          className="sc-bdnxRM dWfVYr cap-text"
-        >
-          Agui le penseur
-        </p>
-        <p
-          className="sc-bdnxRM giDgev cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM dZUplD"
-    >
-      <h4
-        className="sc-bdnxRM iJMGcs cap-heading"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        Je suis pour
-      </h4>
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
+        <h4
+          className="sc-bdnxRM Rdzhg cap-heading"
+          style={
             Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Je suis pour
+        </h4>
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
-      </p>
+          />
+        </p>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
-<div
-  className="sc-bdnxRM kcSrfm cap-card"
->
+Array [
   <div
-    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    title=""
-  >
-    <span
-      className="sc-bdnxRM KpOXB cap-text"
-    >
-      opinion.for
-    </span>
-  </div>
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM bqcJNK"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM iPXmrH cap-card"
   >
     <div
-      className="sc-bdnxRM xxmyc"
+      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      title=""
+    >
+      <span
+        className="sc-bdnxRM kjQezm cap-text"
+      >
+        opinion.for
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM bqbbdd"
     >
       <div
-        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-        title="Agui le penseur"
+        className="sc-bdnxRM bHbGcK"
       >
-        <img
-          alt="Agui le penseur"
-          className="sc-bdnxRM jVCZhC"
-          src="<mock-value-for-field-\\"url\\">"
+        <div
+          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
           style={
             Object {
-              "objectFit": "cover",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
           title="Agui le penseur"
-        />
+        >
+          <img
+            alt="Agui le penseur"
+            className="sc-bdnxRM jVCZhC"
+            src="<mock-value-for-field-\\"url\\">"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="Agui le penseur"
+          />
+        </div>
+        <div
+          className="sc-bdnxRM dXNwuA"
+        >
+          <p
+            className="sc-bdnxRM gQbCgt cap-text"
+          >
+            Agui le penseur
+          </p>
+          <p
+            className="sc-bdnxRM SwLGZ cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
       </div>
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM jWvjdR"
       >
-        <p
-          className="sc-bdnxRM dWfVYr cap-text"
-        >
-          Agui le penseur
-        </p>
-        <p
-          className="sc-bdnxRM giDgev cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM dZUplD"
-    >
-      <h4
-        className="sc-bdnxRM iJMGcs cap-heading"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        Je suis pour
-      </h4>
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
+        <h4
+          className="sc-bdnxRM Rdzhg cap-heading"
+          style={
             Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Je suis pour
+        </h4>
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
-      </p>
+          />
+        </p>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
-<div
-  className="sc-bdnxRM gYjpOg cap-card"
->
+Array [
   <div
-    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    title=""
-  >
-    <span
-      className="sc-bdnxRM KpOXB cap-text"
-    >
-      opinion.for
-    </span>
-  </div>
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM dPstku"
-  />
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
   <div
-    className="sc-bdnxRM bqcJNK"
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM bUeabV cap-card"
   >
     <div
-      className="sc-bdnxRM xxmyc"
+      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      title=""
+    >
+      <span
+        className="sc-bdnxRM kjQezm cap-text"
+      >
+        opinion.for
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM bTikNC"
+    />
+    <div
+      className="sc-bdnxRM bqbbdd"
     >
       <div
-        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-        title="Agui le penseur"
+        className="sc-bdnxRM bHbGcK"
       >
-        <img
-          alt="Agui le penseur"
-          className="sc-bdnxRM jVCZhC"
-          src="<mock-value-for-field-\\"url\\">"
+        <div
+          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
           style={
             Object {
-              "objectFit": "cover",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
           title="Agui le penseur"
-        />
+        >
+          <img
+            alt="Agui le penseur"
+            className="sc-bdnxRM jVCZhC"
+            src="<mock-value-for-field-\\"url\\">"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="Agui le penseur"
+          />
+        </div>
+        <div
+          className="sc-bdnxRM dXNwuA"
+        >
+          <p
+            className="sc-bdnxRM gQbCgt cap-text"
+          >
+            Agui le penseur
+          </p>
+          <p
+            className="sc-bdnxRM SwLGZ cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
       </div>
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM jWvjdR"
       >
-        <p
-          className="sc-bdnxRM dWfVYr cap-text"
-        >
-          Agui le penseur
-        </p>
-        <p
-          className="sc-bdnxRM giDgev cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM dZUplD"
-    >
-      <h4
-        className="sc-bdnxRM iJMGcs cap-heading"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        Je suis pour
-      </h4>
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
+        <h4
+          className="sc-bdnxRM Rdzhg cap-heading"
+          style={
             Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Je suis pour
+        </h4>
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
-      </p>
-      <button
-        className="sc-bdnxRM sc-lbVvki hEEahL gAloIW cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
-        onClick={[Function]}
-        type="button"
-      >
-        capco.module.read_more
-      </button>
+          />
+        </p>
+        <button
+          className="sc-bdnxRM sc-lbVvki kOaFry imkXzK cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+          onClick={[Function]}
+          type="button"
+        >
+          capco.module.read_more
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
-<div
-  className="sc-bdnxRM kcSrfm cap-card"
->
+Array [
   <div
-    className="sc-bdnxRM fRDPLm sc-fXazdy llVDbw cap-tag"
-    title=""
-  >
-    <span
-      className="sc-bdnxRM KpOXB cap-text"
-    >
-      opinion.for
-    </span>
-  </div>
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM bqcJNK"
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM iPXmrH cap-card"
   >
     <div
-      className="sc-bdnxRM xxmyc"
+      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      title=""
+    >
+      <span
+        className="sc-bdnxRM kjQezm cap-text"
+      >
+        opinion.for
+      </span>
+    </div>
+    <div
+      className="sc-bdnxRM bqbbdd"
     >
       <div
-        className="sc-bdnxRM bDSBfS sc-ckTSus hqXPTB cap-avatar"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-        title="Agui le penseur"
+        className="sc-bdnxRM bHbGcK"
       >
-        <img
-          alt="Agui le penseur"
-          className="sc-bdnxRM jVCZhC"
-          src="<mock-value-for-field-\\"url\\">"
+        <div
+          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
           style={
             Object {
-              "objectFit": "cover",
+              "marginLeft": 0,
+              "marginTop": 0,
             }
           }
           title="Agui le penseur"
-        />
+        >
+          <img
+            alt="Agui le penseur"
+            className="sc-bdnxRM jVCZhC"
+            src="<mock-value-for-field-\\"url\\">"
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+            title="Agui le penseur"
+          />
+        </div>
+        <div
+          className="sc-bdnxRM dXNwuA"
+        >
+          <p
+            className="sc-bdnxRM gQbCgt cap-text"
+          >
+            Agui le penseur
+          </p>
+          <p
+            className="sc-bdnxRM SwLGZ cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
       </div>
       <div
-        className="sc-bdnxRM MKAHO"
+        className="sc-bdnxRM jWvjdR"
       >
-        <p
-          className="sc-bdnxRM dWfVYr cap-text"
-        >
-          Agui le penseur
-        </p>
-        <p
-          className="sc-bdnxRM giDgev cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM dZUplD"
-    >
-      <h4
-        className="sc-bdnxRM iJMGcs cap-heading"
-        style={
-          Object {
-            "marginLeft": 0,
-            "marginTop": 0,
-          }
-        }
-      >
-        Je suis pour
-      </h4>
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
+        <h4
+          className="sc-bdnxRM Rdzhg cap-heading"
+          style={
             Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Je suis pour
+        </h4>
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
-      </p>
-      <button
-        className="sc-bdnxRM sc-lbVvki hEEahL gAloIW cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
-        onClick={[Function]}
-        type="button"
-      >
-        capco.module.read_more
-      </button>
+          />
+        </p>
+        <button
+          className="sc-bdnxRM sc-lbVvki kOaFry imkXzK cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+          onClick={[Function]}
+          type="button"
+        >
+          capco.module.read_more
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

@@ -28,7 +28,7 @@ Array [
     hidden=""
     id="id-g"
     role="tooltip"
-    style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
+    style="display:none;position:fixed;left:100%;top:100%;z-index:1800;pointer-events:none"
   />,
   <div
     aria-label="global.report.submit"

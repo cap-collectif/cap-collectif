@@ -1,454 +1,514 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserGroupModal /> should render correctly with 2 groups 1`] = `
-<div
-  aria-label="groups-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="user-group-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="groups-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="user-group-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
-              >
-                people-with-access-to-project
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
-            striped={false}
-          >
-            <li
-              className="list-group-item"
-              id="<Group-mock-id-2>"
-            >
-              <svg
-                className="img-circle avatar avatar-group mr-10"
-                enableBackground="new 0 0 500 500"
-                height="35px"
-                role="img"
-                version="1.1"
-                viewBox="-200 -200 900 900"
-                width="35px"
-                x="0px"
-                xmlns="http://www.w3.org/2000/svg"
-                y="0px"
-              >
-                <path
-                  d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
-                  fill="white"
-                  stroke="#FFFFFF"
-                  strokeLinejoin="round"
-                  strokeMiterlimit="10"
-                  strokeWidth="3"
-                />
-              </svg>
+                >
+                  people-with-access-to-project
+                </h2>
+              </div>
               <button
-                className="sc-bdnxRM sc-lbVvki juQjuI gAloIW cap-button btn-md p-0"
+                className="sc-bdnxRM eVPzhQ"
                 onClick={[Function]}
-                title="persons-in-the-group"
                 type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
               </button>
-              <div
-                aria-label="people-with-access-to-project"
-                aria-modal={true}
-                data-dialog={true}
-                hidden={true}
-                id="<Group-mock-id-2>-modal"
-                onAnimationEnd={[Function]}
-                onBlur={[Function]}
-                onKeyDown={[Function]}
-                onTransitionEnd={[Function]}
-                role="dialog"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-                tabIndex={-1}
-              />
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            global.close
-          </button>
-        </footer>
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
+              striped={false}
+            >
+              <li
+                className="list-group-item"
+                id="<Group-mock-id-2>"
+              >
+                <svg
+                  className="img-circle avatar avatar-group mr-10"
+                  enableBackground="new 0 0 500 500"
+                  height="35px"
+                  role="img"
+                  version="1.1"
+                  viewBox="-200 -200 900 900"
+                  width="35px"
+                  x="0px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  y="0px"
+                >
+                  <path
+                    d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
+                    fill="white"
+                    stroke="#FFFFFF"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
+                  />
+                </svg>
+                <button
+                  className="sc-bdnxRM sc-lbVvki cMVVDx imkXzK cap-button btn-md p-0"
+                  onClick={[Function]}
+                  title="persons-in-the-group"
+                  type="button"
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </button>
+                <div
+                  aria-label="people-with-access-to-project"
+                  aria-modal={true}
+                  data-dialog={true}
+                  hidden={true}
+                  id="<Group-mock-id-2>-modal"
+                  onAnimationEnd={[Function]}
+                  onBlur={[Function]}
+                  onKeyDown={[Function]}
+                  onTransitionEnd={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
+                  tabIndex={-1}
+                />
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
+          >
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<UserGroupModal /> should render correctly with load more 1`] = `
-<div
-  aria-label="groups-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="user-group-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="groups-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="user-group-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
-              >
-                people-with-access-to-project
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
-            striped={false}
-          >
-            <li
-              className="list-group-item"
-              id="<Group-mock-id-2>"
-            >
-              <svg
-                className="img-circle avatar avatar-group mr-10"
-                enableBackground="new 0 0 500 500"
-                height="35px"
-                role="img"
-                version="1.1"
-                viewBox="-200 -200 900 900"
-                width="35px"
-                x="0px"
-                xmlns="http://www.w3.org/2000/svg"
-                y="0px"
-              >
-                <path
-                  d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
-                  fill="white"
-                  stroke="#FFFFFF"
-                  strokeLinejoin="round"
-                  strokeMiterlimit="10"
-                  strokeWidth="3"
-                />
-              </svg>
+                >
+                  people-with-access-to-project
+                </h2>
+              </div>
               <button
-                className="sc-bdnxRM sc-lbVvki juQjuI gAloIW cap-button btn-md p-0"
+                className="sc-bdnxRM eVPzhQ"
                 onClick={[Function]}
-                title="persons-in-the-group"
                 type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
               </button>
-              <div
-                aria-label="people-with-access-to-project"
-                aria-modal={true}
-                data-dialog={true}
-                hidden={true}
-                id="<Group-mock-id-2>-modal"
-                onAnimationEnd={[Function]}
-                onBlur={[Function]}
-                onKeyDown={[Function]}
-                onTransitionEnd={[Function]}
-                role="dialog"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-                tabIndex={-1}
-              />
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            global.close
-          </button>
-        </footer>
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
+              striped={false}
+            >
+              <li
+                className="list-group-item"
+                id="<Group-mock-id-2>"
+              >
+                <svg
+                  className="img-circle avatar avatar-group mr-10"
+                  enableBackground="new 0 0 500 500"
+                  height="35px"
+                  role="img"
+                  version="1.1"
+                  viewBox="-200 -200 900 900"
+                  width="35px"
+                  x="0px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  y="0px"
+                >
+                  <path
+                    d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
+                    fill="white"
+                    stroke="#FFFFFF"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
+                  />
+                </svg>
+                <button
+                  className="sc-bdnxRM sc-lbVvki cMVVDx imkXzK cap-button btn-md p-0"
+                  onClick={[Function]}
+                  title="persons-in-the-group"
+                  type="button"
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </button>
+                <div
+                  aria-label="people-with-access-to-project"
+                  aria-modal={true}
+                  data-dialog={true}
+                  hidden={true}
+                  id="<Group-mock-id-2>-modal"
+                  onAnimationEnd={[Function]}
+                  onBlur={[Function]}
+                  onKeyDown={[Function]}
+                  onTransitionEnd={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
+                  tabIndex={-1}
+                />
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
+          >
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<UserGroupModal /> should render correctly without group 1`] = `
-<div
-  aria-label="groups-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="user-group-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="groups-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="user-group-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
-              >
-                people-with-access-to-project
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
-            striped={false}
-          >
-            <li
-              className="list-group-item"
-              id="<Group-mock-id-2>"
-            >
-              <svg
-                className="img-circle avatar avatar-group mr-10"
-                enableBackground="new 0 0 500 500"
-                height="35px"
-                role="img"
-                version="1.1"
-                viewBox="-200 -200 900 900"
-                width="35px"
-                x="0px"
-                xmlns="http://www.w3.org/2000/svg"
-                y="0px"
-              >
-                <path
-                  d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
-                  fill="white"
-                  stroke="#FFFFFF"
-                  strokeLinejoin="round"
-                  strokeMiterlimit="10"
-                  strokeWidth="3"
-                />
-              </svg>
+                >
+                  people-with-access-to-project
+                </h2>
+              </div>
               <button
-                className="sc-bdnxRM sc-lbVvki juQjuI gAloIW cap-button btn-md p-0"
+                className="sc-bdnxRM eVPzhQ"
                 onClick={[Function]}
-                title="persons-in-the-group"
                 type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
               </button>
-              <div
-                aria-label="people-with-access-to-project"
-                aria-modal={true}
-                data-dialog={true}
-                hidden={true}
-                id="<Group-mock-id-2>-modal"
-                onAnimationEnd={[Function]}
-                onBlur={[Function]}
-                onKeyDown={[Function]}
-                onTransitionEnd={[Function]}
-                role="dialog"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-                tabIndex={-1}
-              />
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            global.close
-          </button>
-        </footer>
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D d-flex text-left list-group-flush list-group"
+              striped={false}
+            >
+              <li
+                className="list-group-item"
+                id="<Group-mock-id-2>"
+              >
+                <svg
+                  className="img-circle avatar avatar-group mr-10"
+                  enableBackground="new 0 0 500 500"
+                  height="35px"
+                  role="img"
+                  version="1.1"
+                  viewBox="-200 -200 900 900"
+                  width="35px"
+                  x="0px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  y="0px"
+                >
+                  <path
+                    d="M455 190c-14 4-31 9-45 15l0 22c9 5 25 17 26 45 8 5 11 17 11 30 0 4 0 11-3 17-1 2-3 4-4 5 5 10 13 25 7 42-7 22-38 30-62 30-21 0-48-6-59-23-11 1-16-4-19-8-8-11-2-28 3-40-2-1-4-4-5-6-3-6-4-13-4-17 0-12 4-25 11-30 2-26 18-39 29-45l0-22c-5-2-12-5-18-7 24-15 35-29 35-42l0-102 145 0c5 0 9 4 9 8l0 97c0 13-16 18-57 31z m-153 2c0 0 0-1-1-1-1 1-2 2-4 3-22 12-50 26-75 36l0 32c1 1 2 1 2 2 1 0 1 0 1 1 6 5 13 15 16 33 0 1 0 2 1 4 0 1 0 3 0 4 0 3 1 5 1 8 1 1 2 1 3 2 0 0 0 0 0 0 4 4 7 10 9 16 0 0 0 1 0 1 1 1 1 2 1 3 0 1 0 1 0 2 0 1 1 2 1 3 0 1 0 3 0 4 0 7-2 13-4 18 0 0 0 0-1 0-1 2-3 4-6 6 1 2 2 4 3 6 1 4 3 8 4 11 0 1 0 1 0 1 1 4 1 7 2 11 0 0 0 0 0 0 0 3 0 7 0 10 0 0 0 1 0 2 0 3-1 6-1 9-1 2-1 4-2 5 0 1-1 2-1 3 0 0-1 1-1 1-1 1-1 3-2 4 0 0 0 0 0 0-4 5-8 9-14 13 0 0 0 0 0 0-2 1-3 2-4 2-11 6-25 10-38 11 0 0 0 0 0 0-2 0-4 0-5 0-2 0-4 0-6 0-4 0-7 0-11 0-1 0-2 0-3-1-2 0-4 0-6 0-2-1-4-1-5-1-2-1-3-1-4-1-2-1-4-1-6-2-2 0-4-1-6-2-1 0-1 0-2-1-11-4-20-11-25-19 0 0 0 0 0-1-1-1-2-2-3-3-1 0-3 0-4 0-2 0-4-1-6-1 0 0-1 0-1 0-2-1-3-1-4-2-1 0-1 0-2-1-1 0-2-1-2-2-1 0-1 0-1-1-1 0-2-1-2-2-1-2-2-3-3-5 0-1 0-1 0-1 0-2 0-3-1-5 0 0 0-1 0-1 0-2 0-3 0-5 0 0 1-1 1-1 0-2 0-4 0-5 0-1 1-1 1-1 0-2 1-4 1-6 0 0 0-1 0-1 1-2 2-4 2-5 0-1 0-1 1-1 1-4 3-8 4-12 0 0 0 0 0 0-2-1-5-4-6-6-3-5-5-11-5-18 0-2 0-3 0-5 0 0 0-1 1-2 0-1 0-1 0-2 0-1 0-2 1-4 0 0 0 0 0 0 2-6 5-12 9-16 0 0 0 0 0 0 1-1 2-1 3-2 0-3 0-6 1-9 0-1 0-2 0-3 4-24 15-35 21-40l0-32c-25-10-53-24-75-36-8-5-15-9-20-12-16-12-24-20-24-26l0-94c0-4 4-8 9-8l332 0 0 102c0 7-12 20-39 36z"
+                    fill="white"
+                    stroke="#FFFFFF"
+                    strokeLinejoin="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
+                  />
+                </svg>
+                <button
+                  className="sc-bdnxRM sc-lbVvki cMVVDx imkXzK cap-button btn-md p-0"
+                  onClick={[Function]}
+                  title="persons-in-the-group"
+                  type="button"
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </button>
+                <div
+                  aria-label="people-with-access-to-project"
+                  aria-modal={true}
+                  data-dialog={true}
+                  hidden={true}
+                  id="<Group-mock-id-2>-modal"
+                  onAnimationEnd={[Function]}
+                  onBlur={[Function]}
+                  onKeyDown={[Function]}
+                  onTransitionEnd={[Function]}
+                  role="dialog"
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
+                  tabIndex={-1}
+                />
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
+          >
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

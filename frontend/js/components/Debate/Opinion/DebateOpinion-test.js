@@ -4,7 +4,7 @@ import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
-import { RelaySuspensFragmentTest } from '~/testUtils';
+import MockProviders, { RelaySuspensFragmentTest } from '~/testUtils';
 import type { DebateOpinionTestQuery } from '~relay/DebateOpinionTestQuery.graphql';
 import DebateOpinion from './DebateOpinion';
 
@@ -47,14 +47,18 @@ describe('<DebateOpinion />', () => {
       return <DebateOpinion opinion={data.opinion} {...componentProps} />;
     };
     MobileTestComponent = componentProps => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer componentProps={componentProps} queryVariables={mobileVariables} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer componentProps={componentProps} queryVariables={mobileVariables} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
     DesktopTestComponent = componentProps => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer componentProps={componentProps} queryVariables={desktopVariables} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer componentProps={componentProps} queryVariables={desktopVariables} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, defaultMockResolvers),

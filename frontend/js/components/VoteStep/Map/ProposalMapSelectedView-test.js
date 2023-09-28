@@ -4,7 +4,7 @@ import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import type { ProposalMapSelectedViewTestQuery } from '~relay/ProposalMapSelectedViewTestQuery.graphql';
-import { RelaySuspensFragmentTest } from '~/testUtils';
+import MockProviders, { RelaySuspensFragmentTest } from '~/testUtils';
 import ProposalMapSelectedView from './ProposalMapSelectedView';
 
 describe('<ProposalMapSelectedView />', () => {
@@ -42,9 +42,11 @@ describe('<ProposalMapSelectedView />', () => {
     };
 
     TestProposalMapSelectedView = () => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
   });
 

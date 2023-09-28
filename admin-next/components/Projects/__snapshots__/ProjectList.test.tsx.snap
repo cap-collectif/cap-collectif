@@ -379,7 +379,7 @@ Array [
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
-                  "zIndex": 1000,
+                  "zIndex": 1800,
                 }
               }
             />
@@ -673,7 +673,7 @@ Array [
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
-                  "zIndex": 1000,
+                  "zIndex": 1800,
                 }
               }
             />
@@ -967,7 +967,7 @@ Array [
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
-                  "zIndex": 1000,
+                  "zIndex": 1800,
                 }
               }
             />
@@ -1261,7 +1261,7 @@ Array [
                   "pointerEvents": "none",
                   "position": "fixed",
                   "top": "100%",
-                  "zIndex": 1000,
+                  "zIndex": 1800,
                 }
               }
             />
@@ -1440,7 +1440,7 @@ Array [
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bdnxRM sc-lbVvki cMVVDx dlFdcl cap-button"
+        className="sc-bdnxRM sc-lbVvki cMVVDx bA-duud cap-button"
         onClick={[Function]}
         type="button"
       >

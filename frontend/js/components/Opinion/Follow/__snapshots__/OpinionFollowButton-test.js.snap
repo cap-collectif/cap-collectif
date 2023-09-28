@@ -2,11 +2,29 @@
 
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
 Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
   <button
     aria-controls="popover-overlay id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdnxRM sc-lbVvki juQjuI bykxAV cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
+    className="sc-bdnxRM sc-lbVvki cMVVDx hFZdnJ cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -27,7 +45,7 @@ Array [
   >
     following
     <svg
-      className="sc-bdnxRM sc-eJocfa gzFqiT kuPXuU cap-icon"
+      className="sc-bdnxRM sc-eJocfa jpucIR iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 7"
       xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +61,7 @@ Array [
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bdnxRM clEweU sc-fcmMJX cap-menu__list cap-menu__list"
+    className="sc-bdnxRM fDbVgQ sc-fcmMJX cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -64,10 +82,10 @@ Array [
       role="group"
     >
       <p
-        className="sc-bdnxRM dDEEwH cap-text cap-menu__optionGroup--title"
+        className="sc-bdnxRM kXNmPb cap-text cap-menu__optionGroup--title"
       >
         <div
-          className="sc-bdnxRM ixEccY"
+          className="sc-bdnxRM hogYwF"
           style={
             Object {
               "marginBottom": "unset",
@@ -75,7 +93,7 @@ Array [
           }
         >
           <h4
-            className="sc-bdnxRM leidOV cap-heading"
+            className="sc-bdnxRM cqhMky cap-heading"
             style={
               Object {
                 "marginLeft": 0,
@@ -89,7 +107,7 @@ Array [
             aria-controls="id-g"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon cap-popover__disclosure"
+            className="sc-bdnxRM sc-eJocfa iwgCXe iiyXFY cap-icon cap-popover__disclosure"
             fill="none"
             onClick={[Function]}
             onClickCapture={[Function]}
@@ -130,7 +148,7 @@ Array [
         </div>
       </p>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__minimal"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__minimal"
         id="opinion-follow-btn-minimal-opinion1"
         name="minimal"
         onBlurCapture={[Function]}
@@ -161,26 +179,26 @@ Array [
       >
         <input
           checked={true}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             essential
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-and-news
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__essential"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__essential"
         id="opinion-follow-btn-essential-opinion1"
         name="essential"
         onBlurCapture={[Function]}
@@ -211,26 +229,26 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             intermediate
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-and-new-contributions
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__all"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__all"
         id="opinion-follow-btn-all-opinion1"
         name="all"
         onBlurCapture={[Function]}
@@ -261,19 +279,19 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             complete
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-new-contributions-votes-and-subscriptions
              
@@ -282,7 +300,7 @@ Array [
       </button>
     </div>
     <a
-      className="sc-bdnxRM gdFgQy cap-menu__item opinion__unfollow"
+      className="sc-bdnxRM fCgUxE cap-menu__item opinion__unfollow"
       href="#"
       id="opinion-unfollow-btn-opinion1"
       loop={false}
@@ -292,7 +310,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdnxRM hEGOlm cap-text"
+        className="sc-bdnxRM eypvmP cap-text"
       >
         unfollow
       </p>
@@ -350,18 +368,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bdnxRM jgfvhW"
+      className="sc-bdnxRM htoMAJ"
     >
       <p
-        className="sc-bdnxRM hdVRdr cap-text"
+        className="sc-bdnxRM kUmORS cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bdnxRM jRHUGW"
+        className="sc-bdnxRM jaCxns"
       >
         <p
-          className="sc-bdnxRM bhbXgN cap-text"
+          className="sc-bdnxRM dNfCSD cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -376,7 +394,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
+            className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -405,11 +423,29 @@ Array [
 
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render a button to unfollow a proposal when viewer is following  1`] = `
 Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
   <button
     aria-controls="popover-overlay id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdnxRM sc-lbVvki juQjuI bykxAV cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
+    className="sc-bdnxRM sc-lbVvki cMVVDx hFZdnJ cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -430,7 +466,7 @@ Array [
   >
     following
     <svg
-      className="sc-bdnxRM sc-eJocfa gzFqiT kuPXuU cap-icon"
+      className="sc-bdnxRM sc-eJocfa jpucIR iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 7"
       xmlns="http://www.w3.org/2000/svg"
@@ -446,7 +482,7 @@ Array [
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bdnxRM clEweU sc-fcmMJX cap-menu__list cap-menu__list"
+    className="sc-bdnxRM fDbVgQ sc-fcmMJX cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -467,10 +503,10 @@ Array [
       role="group"
     >
       <p
-        className="sc-bdnxRM dDEEwH cap-text cap-menu__optionGroup--title"
+        className="sc-bdnxRM kXNmPb cap-text cap-menu__optionGroup--title"
       >
         <div
-          className="sc-bdnxRM ixEccY"
+          className="sc-bdnxRM hogYwF"
           style={
             Object {
               "marginBottom": "unset",
@@ -478,7 +514,7 @@ Array [
           }
         >
           <h4
-            className="sc-bdnxRM leidOV cap-heading"
+            className="sc-bdnxRM cqhMky cap-heading"
             style={
               Object {
                 "marginLeft": 0,
@@ -492,7 +528,7 @@ Array [
             aria-controls="id-g"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon cap-popover__disclosure"
+            className="sc-bdnxRM sc-eJocfa iwgCXe iiyXFY cap-icon cap-popover__disclosure"
             fill="none"
             onClick={[Function]}
             onClickCapture={[Function]}
@@ -533,7 +569,7 @@ Array [
         </div>
       </p>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__minimal"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__minimal"
         id="opinion-follow-btn-minimal-opinion1"
         name="minimal"
         onBlurCapture={[Function]}
@@ -564,26 +600,26 @@ Array [
       >
         <input
           checked={true}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             essential
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-and-news
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__essential"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__essential"
         id="opinion-follow-btn-essential-opinion1"
         name="essential"
         onBlurCapture={[Function]}
@@ -614,26 +650,26 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             intermediate
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-and-new-contributions
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__all"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__all"
         id="opinion-follow-btn-all-opinion1"
         name="all"
         onBlurCapture={[Function]}
@@ -664,19 +700,19 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             complete
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-new-contributions-votes-and-subscriptions
              
@@ -685,7 +721,7 @@ Array [
       </button>
     </div>
     <a
-      className="sc-bdnxRM gdFgQy cap-menu__item opinion__unfollow"
+      className="sc-bdnxRM fCgUxE cap-menu__item opinion__unfollow"
       href="#"
       id="opinion-unfollow-btn-opinion1"
       loop={false}
@@ -695,7 +731,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdnxRM hEGOlm cap-text"
+        className="sc-bdnxRM eypvmP cap-text"
       >
         unfollow
       </p>
@@ -753,18 +789,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bdnxRM jgfvhW"
+      className="sc-bdnxRM htoMAJ"
     >
       <p
-        className="sc-bdnxRM hdVRdr cap-text"
+        className="sc-bdnxRM kUmORS cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bdnxRM jRHUGW"
+        className="sc-bdnxRM jaCxns"
       >
         <p
-          className="sc-bdnxRM bhbXgN cap-text"
+          className="sc-bdnxRM dNfCSD cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -779,7 +815,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
+            className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -808,11 +844,29 @@ Array [
 
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render correctly when not authenticated 1`] = `
 Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
   <button
     aria-controls="popover-overlay id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdnxRM sc-lbVvki juQjuI bykxAV cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
+    className="sc-bdnxRM sc-lbVvki cMVVDx hFZdnJ cap-button cap-menu__disclosure dropdown-button custom-dropdown-button opinion__button__follow_options"
     id="opinion-follow-btn-opinion1"
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -833,7 +887,7 @@ Array [
   >
     following
     <svg
-      className="sc-bdnxRM sc-eJocfa gzFqiT kuPXuU cap-icon"
+      className="sc-bdnxRM sc-eJocfa jpucIR iiyXFY cap-icon"
       fill="none"
       viewBox="0 0 12 7"
       xmlns="http://www.w3.org/2000/svg"
@@ -849,7 +903,7 @@ Array [
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bdnxRM clEweU sc-fcmMJX cap-menu__list cap-menu__list"
+    className="sc-bdnxRM fDbVgQ sc-fcmMJX cap-menu__list cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -870,10 +924,10 @@ Array [
       role="group"
     >
       <p
-        className="sc-bdnxRM dDEEwH cap-text cap-menu__optionGroup--title"
+        className="sc-bdnxRM kXNmPb cap-text cap-menu__optionGroup--title"
       >
         <div
-          className="sc-bdnxRM ixEccY"
+          className="sc-bdnxRM hogYwF"
           style={
             Object {
               "marginBottom": "unset",
@@ -881,7 +935,7 @@ Array [
           }
         >
           <h4
-            className="sc-bdnxRM leidOV cap-heading"
+            className="sc-bdnxRM cqhMky cap-heading"
             style={
               Object {
                 "marginLeft": 0,
@@ -895,7 +949,7 @@ Array [
             aria-controls="id-g"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon cap-popover__disclosure"
+            className="sc-bdnxRM sc-eJocfa iwgCXe iiyXFY cap-icon cap-popover__disclosure"
             fill="none"
             onClick={[Function]}
             onClickCapture={[Function]}
@@ -936,7 +990,7 @@ Array [
         </div>
       </p>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__minimal"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__minimal"
         id="opinion-follow-btn-minimal-opinion1"
         name="minimal"
         onBlurCapture={[Function]}
@@ -967,26 +1021,26 @@ Array [
       >
         <input
           checked={true}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             essential
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-and-news
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__essential"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__essential"
         id="opinion-follow-btn-essential-opinion1"
         name="essential"
         onBlurCapture={[Function]}
@@ -1017,26 +1071,26 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             intermediate
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-and-new-contributions
           </p>
         </div>
       </button>
       <button
-        className="sc-bdnxRM gdFgQy cap-menu__item cap-menu__optionItem opinion__follow__all"
+        className="sc-bdnxRM fCgUxE cap-menu__item cap-menu__optionItem opinion__follow__all"
         id="opinion-follow-btn-all-opinion1"
         name="all"
         onBlurCapture={[Function]}
@@ -1067,19 +1121,19 @@ Array [
       >
         <input
           checked={false}
-          className="sc-bdnxRM jumccy"
+          className="sc-bdnxRM koXhAn"
           type="radio"
         />
         <div
-          className="sc-bdnxRM fPDUGL"
+          className="sc-bdnxRM bjTPhm"
         >
           <p
-            className="sc-bdnxRM dxzAhg cap-text"
+            className="sc-bdnxRM hpxDkP cap-text"
           >
             complete
           </p>
           <p
-            className="sc-bdnxRM hEGOlm cap-text"
+            className="sc-bdnxRM eypvmP cap-text"
           >
             updates-news-new-contributions-votes-and-subscriptions
              
@@ -1088,7 +1142,7 @@ Array [
       </button>
     </div>
     <a
-      className="sc-bdnxRM gdFgQy cap-menu__item opinion__unfollow"
+      className="sc-bdnxRM fCgUxE cap-menu__item opinion__unfollow"
       href="#"
       id="opinion-unfollow-btn-opinion1"
       loop={false}
@@ -1098,7 +1152,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdnxRM hEGOlm cap-text"
+        className="sc-bdnxRM eypvmP cap-text"
       >
         unfollow
       </p>
@@ -1156,18 +1210,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bdnxRM jgfvhW"
+      className="sc-bdnxRM htoMAJ"
     >
       <p
-        className="sc-bdnxRM hdVRdr cap-text"
+        className="sc-bdnxRM kUmORS cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bdnxRM jRHUGW"
+        className="sc-bdnxRM jaCxns"
       >
         <p
-          className="sc-bdnxRM bhbXgN cap-text"
+          className="sc-bdnxRM dNfCSD cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -1182,7 +1236,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
+            className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
             onClick={[Function]}
             type="button"
           >

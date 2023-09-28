@@ -9,7 +9,7 @@ describe('<VoteButton />', () => {
   const props = { proposalId: '<proposalId>', stepId: '<stepId', disabled: false };
   it('should render correctly when voted', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <VoteButton {...props} hasVoted />
       </MockProviders>,
     );
@@ -18,7 +18,7 @@ describe('<VoteButton />', () => {
 
   it('should render correctly when not voted', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <VoteButton {...props} hasVoted={false} />
       </MockProviders>,
     );

@@ -1,99 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] = `
-<div
-  aria-label="people-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="<Node-mock-id-1>-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="people-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="<Node-mock-id-1>-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
-        id="<Node-mock-id-1>-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
+          id="<Node-mock-id-1>-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                id="contained-modal-title-lg"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  id="contained-modal-title-lg"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </h2>
+              </div>
+              <button
+                className="sc-bdnxRM eVPzhQ"
+                onClick={[Function]}
+                type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
-            striped={false}
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+              </button>
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            <li
-              className="d-flex text-left list-group-item"
-              id="<User-mock-id-2>"
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+              striped={false}
             >
-              <span
-                className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                onMouseOut={[Function]}
-                onMouseOver={[Function]}
-                style={Object {}}
+              <li
+                className="d-flex text-left list-group-item"
+                id="<User-mock-id-2>"
               >
-                <img
-                  alt="<mock-value-for-field-\\"username\\">"
-                  className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
-                  loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                  srcSet="
+                <span
+                  className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  onMouseOut={[Function]}
+                  onMouseOver={[Function]}
+                  style={Object {}}
+                >
+                  <img
+                    alt="<mock-value-for-field-\\"username\\">"
+                    className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
+                    loading="lazy"
+                    sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+                    srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
@@ -102,141 +121,161 @@ exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] 
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
          "
-                  style={
-                    Object {
-                      "height": "45px",
-                      "width": "45px",
+                    style={
+                      Object {
+                        "height": "45px",
+                        "width": "45px",
+                      }
                     }
-                  }
-                />
-              </span>
-              <a
-                className="align-self-center"
-                href="<mock-value-for-field-\\"url\\">"
-                title="usernames-profile"
-              >
-                &lt;mock-value-for-field-"username"&gt;
-              </a>
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+                  />
+                </span>
+                <a
+                  className="align-self-center"
+                  href="<mock-value-for-field-\\"url\\">"
+                  title="usernames-profile"
+                >
+                  &lt;mock-value-for-field-"username"&gt;
+                </a>
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
           >
-            global.close
-          </button>
-        </footer>
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<UserInGroupModal /> should render correctly with user in load more 1`] = `
-<div
-  aria-label="people-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="<Node-mock-id-1>-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="people-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="<Node-mock-id-1>-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
-        id="<Node-mock-id-1>-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
+          id="<Node-mock-id-1>-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                id="contained-modal-title-lg"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  id="contained-modal-title-lg"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </h2>
+              </div>
+              <button
+                className="sc-bdnxRM eVPzhQ"
+                onClick={[Function]}
+                type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
-            striped={false}
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+              </button>
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            <li
-              className="d-flex text-left list-group-item"
-              id="<User-mock-id-2>"
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+              striped={false}
             >
-              <span
-                className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                onMouseOut={[Function]}
-                onMouseOver={[Function]}
-                style={Object {}}
+              <li
+                className="d-flex text-left list-group-item"
+                id="<User-mock-id-2>"
               >
-                <img
-                  alt="<mock-value-for-field-\\"username\\">"
-                  className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
-                  loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                  srcSet="
+                <span
+                  className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  onMouseOut={[Function]}
+                  onMouseOver={[Function]}
+                  style={Object {}}
+                >
+                  <img
+                    alt="<mock-value-for-field-\\"username\\">"
+                    className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
+                    loading="lazy"
+                    sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+                    srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
@@ -245,141 +284,161 @@ exports[`<UserInGroupModal /> should render correctly with user in load more 1`]
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
          "
-                  style={
-                    Object {
-                      "height": "45px",
-                      "width": "45px",
+                    style={
+                      Object {
+                        "height": "45px",
+                        "width": "45px",
+                      }
                     }
-                  }
-                />
-              </span>
-              <a
-                className="align-self-center"
-                href="<mock-value-for-field-\\"url\\">"
-                title="usernames-profile"
-              >
-                &lt;mock-value-for-field-"username"&gt;
-              </a>
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+                  />
+                </span>
+                <a
+                  className="align-self-center"
+                  href="<mock-value-for-field-\\"url\\">"
+                  title="usernames-profile"
+                >
+                  &lt;mock-value-for-field-"username"&gt;
+                </a>
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
           >
-            global.close
-          </button>
-        </footer>
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<UserInGroupModal /> should render correctly without user in group 1`] = `
-<div
-  aria-label="people-with-access-to-project"
-  aria-modal={true}
-  data-dialog={true}
-  hidden={false}
-  id="<Node-mock-id-1>-modal"
-  onAnimationEnd={[Function]}
-  onBlur={[Function]}
-  onKeyDown={[Function]}
-  onTransitionEnd={[Function]}
-  role="dialog"
-  tabIndex={-1}
->
+Array [
   <div
-    data-testid="AnimatePresence"
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    aria-label="people-with-access-to-project"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="<Node-mock-id-1>-modal"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM iKXSnl sc-gsWcmt cap-modal__overlay"
-      onClick={[Function]}
+      data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM dGKUQV sc-bXexck fObdwY cap-modal"
-        id="<Node-mock-id-1>-modal"
+        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        onClick={[Function]}
       >
         <div
-          className="ResetCss-jmHeCe hpqhdm"
+          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
+          id="<Node-mock-id-1>-modal"
         >
-          <header
-            className="sc-bdnxRM ihArod cap-modal__header"
+          <div
+            className="ResetCss-jmHeCe hpqhdm"
           >
-            <div
-              className="sc-bdnxRM bPpvLW"
+            <header
+              className="sc-bdnxRM jjfrHe cap-modal__header"
             >
-              <h2
-                className="sc-bdnxRM ffVrmi cap-heading"
-                id="contained-modal-title-lg"
-                style={
-                  Object {
-                    "marginLeft": 0,
-                    "marginTop": 0,
+              <div
+                className="sc-bdnxRM kjxros"
+              >
+                <h2
+                  className="sc-bdnxRM hZqJQu cap-heading"
+                  id="contained-modal-title-lg"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
                   }
-                }
+                >
+                  &lt;mock-value-for-field-"title"&gt;
+                </h2>
+              </div>
+              <button
+                className="sc-bdnxRM eVPzhQ"
+                onClick={[Function]}
+                type="button"
               >
-                &lt;mock-value-for-field-"title"&gt;
-              </h2>
-            </div>
-            <button
-              className="sc-bdnxRM chwkeB"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bdnxRM sc-eJocfa ckWSjK gPDTUH cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-        </div>
-        <main
-          className="sc-bdnxRM eJnfvU cap-modal__body"
-        >
-          <ul
-            className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
-            striped={false}
+                <svg
+                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  fill="none"
+                  viewBox="0 0 12 12"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 11L11 1M1 1l10 10"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+              </button>
+            </header>
+          </div>
+          <main
+            className="sc-bdnxRM bVOKYS cap-modal__body"
           >
-            <li
-              className="d-flex text-left list-group-item"
-              id="<User-mock-id-2>"
+            <ul
+              className="ListGroupFlush__Container-eGshRq kTxvA-D list-group-flush list-group"
+              striped={false}
             >
-              <span
-                className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
-                onBlur={[Function]}
-                onFocus={[Function]}
-                onMouseOut={[Function]}
-                onMouseOver={[Function]}
-                style={Object {}}
+              <li
+                className="d-flex text-left list-group-item"
+                id="<User-mock-id-2>"
               >
-                <img
-                  alt="<mock-value-for-field-\\"username\\">"
-                  className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
-                  loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                  srcSet="
+                <span
+                  className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  onMouseOut={[Function]}
+                  onMouseOver={[Function]}
+                  style={Object {}}
+                >
+                  <img
+                    alt="<mock-value-for-field-\\"username\\">"
+                    className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
+                    loading="lazy"
+                    sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+                    srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
@@ -388,43 +447,44 @@ exports[`<UserInGroupModal /> should render correctly without user in group 1`] 
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
          "
-                  style={
-                    Object {
-                      "height": "45px",
-                      "width": "45px",
+                    style={
+                      Object {
+                        "height": "45px",
+                        "width": "45px",
+                      }
                     }
-                  }
-                />
-              </span>
-              <a
-                className="align-self-center"
-                href="<mock-value-for-field-\\"url\\">"
-                title="usernames-profile"
-              >
-                &lt;mock-value-for-field-"username"&gt;
-              </a>
-            </li>
-          </ul>
-        </main>
-        <footer
-          className="sc-bdnxRM IKIFa cap-modal__footer"
-        >
-          <button
-            className="sc-bdnxRM sc-lbVvki bmWTWY fKaghU cap-button"
-            onClick={[MockFunction]}
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-            type="button"
+                  />
+                </span>
+                <a
+                  className="align-self-center"
+                  href="<mock-value-for-field-\\"url\\">"
+                  title="usernames-profile"
+                >
+                  &lt;mock-value-for-field-"username"&gt;
+                </a>
+              </li>
+            </ul>
+          </main>
+          <footer
+            className="sc-bdnxRM kpDJRM cap-modal__footer"
           >
-            global.close
-          </button>
-        </footer>
+            <button
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              onClick={[MockFunction]}
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+              type="button"
+            >
+              global.close
+            </button>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

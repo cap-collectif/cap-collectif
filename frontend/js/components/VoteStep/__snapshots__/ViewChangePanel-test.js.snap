@@ -31,7 +31,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa jdlxts dUIXVZ cap-icon"
+        className="sc-bdnxRM sc-eJocfa dOHRRe dUIXVZ cap-icon"
         fill="none"
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ Array [
       </svg>
     </button>
     <div
-      className="sc-bdnxRM DAsla"
+      className="sc-bdnxRM ddAHpw"
     />
     <button
       aria-label="global.card"
@@ -82,7 +82,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa jdlxts dUIXVZ cap-icon"
+        className="sc-bdnxRM sc-eJocfa dOHRRe dUIXVZ cap-icon"
         fill="none"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ Array [
       </svg>
     </button>
     <div
-      className="sc-bdnxRM DAsla"
+      className="sc-bdnxRM ddAHpw"
     />
     <button
       aria-label="project.votes.title"
@@ -114,7 +114,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa iLzaNO dUIXVZ cap-icon"
+        className="sc-bdnxRM sc-eJocfa iaVuPM dUIXVZ cap-icon"
         fill="none"
         viewBox="0 0 20 19"
         xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +170,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa eFTqlI iiyXFY cap-icon"
+        className="sc-bdnxRM sc-eJocfa kGLuiq iiyXFY cap-icon"
         fill="none"
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +217,7 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bdnxRM DAsla"
+      className="sc-bdnxRM ddAHpw"
     />
     <button
       aria-label="global.card"
@@ -226,7 +226,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa eFTqlI iiyXFY cap-icon"
+        className="sc-bdnxRM sc-eJocfa kGLuiq iiyXFY cap-icon"
         fill="none"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +253,7 @@ Array [
       </span>
     </button>
     <div
-      className="sc-bdnxRM DAsla"
+      className="sc-bdnxRM ddAHpw"
     />
     <button
       aria-label="project.votes.title"
@@ -263,7 +263,7 @@ Array [
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa iNusfW iiyXFY cap-icon"
+        className="sc-bdnxRM sc-eJocfa icQMhU iiyXFY cap-icon"
         fill="none"
         viewBox="0 0 20 19"
         xmlns="http://www.w3.org/2000/svg"

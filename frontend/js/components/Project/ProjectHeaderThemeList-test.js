@@ -4,7 +4,7 @@ import * as React from 'react';
 import ReactTestRenderer, { act } from 'react-test-renderer';
 import { createMockEnvironment } from 'relay-test-utils';
 import ProjectHeaderThemeList, { ThemesButton } from '~/components/Project/ProjectHeaderThemeList';
-import {
+import MockProviders, {
   addsSupportForPortals,
   clearSupportForPortals,
   RelaySuspensFragmentTest,
@@ -44,13 +44,15 @@ describe('<ProjectHeaderThemeList />', () => {
 
   const environment = createMockEnvironment();
   const TestComponent = props => (
-    <RelaySuspensFragmentTest
-      store={{
-        default: { parameters: { 'color.link.hover': '#546E7A' } },
-      }}
-      environment={environment}>
-      <ProjectHeaderThemeList {...props} />
-    </RelaySuspensFragmentTest>
+    <MockProviders store={{}} useCapUIProvider>
+      <RelaySuspensFragmentTest
+        store={{
+          default: { parameters: { 'color.link.hover': '#546E7A' } },
+        }}
+        environment={environment}>
+        <ProjectHeaderThemeList {...props} />
+      </RelaySuspensFragmentTest>
+    </MockProviders>
   );
 
   it('should render correctly', () => {

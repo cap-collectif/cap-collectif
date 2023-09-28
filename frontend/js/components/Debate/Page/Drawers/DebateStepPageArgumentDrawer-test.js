@@ -4,7 +4,7 @@ import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
-import {
+import MockProviders, {
   RelaySuspensFragmentTest,
   addsSupportForPortals,
   clearSupportForPortals,
@@ -45,7 +45,7 @@ describe('<DebateStepPageArgumentDrawer />', () => {
 
   const query = graphql`
     query DebateStepPageArgumentDrawerTestQuery($id: ID = "<default>", $isAuthenticated: Boolean!)
-      @relay_test_operation {
+    @relay_test_operation {
       argument: node(id: $id) {
         ...DebateStepPageArgumentDrawer_argument @arguments(isAuthenticated: $isAuthenticated)
       }
@@ -75,9 +75,11 @@ describe('<DebateStepPageArgumentDrawer />', () => {
       );
     };
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer {...props} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer {...props} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, defaultMockResolvers),
@@ -122,6 +124,7 @@ describe('<DebateStepPageArgumentDrawer />', () => {
     testComponentTree = ReactTestRenderer.create(
       <TestComponent isOpen={false} onClose={onClose} />,
     );
-    expect(testComponentTree.toJSON()).toEqual(null);
+    // The @ui 6 toast containers, will find a way to remove that afterward
+    expect(testComponentTree.toJSON()).toHaveLength(6);
   });
 });

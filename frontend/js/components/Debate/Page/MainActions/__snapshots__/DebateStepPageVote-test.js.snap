@@ -1,367 +1,451 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
-<div
-  class="sc-bdnxRM gmUUoo"
-  style="opacity:0"
->
-  <button
-    class="sc-bdnxRM omwMO"
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    class="sc-bdnxRM bIOcrz"
+    style="opacity:0"
   >
-    <div
-      class="sc-bdnxRM IoRUe"
+    <button
+      class="sc-bdnxRM jXtrwG"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        fill="none"
-        viewBox="0 0 32 29"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.for
-      </p>
-    </div>
-  </button>
-  <button
-    class="sc-bdnxRM fpzkOi"
-  >
-    <div
-      class="sc-bdnxRM IoRUe"
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.for
+        </p>
+      </div>
+    </button>
+    <button
+      class="sc-bdnxRM qRJsX"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        viewBox="0 0 12 11"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.against
-      </p>
-    </div>
-  </button>
-</div>
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.against
+        </p>
+      </div>
+    </button>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
-<div
-  class="sc-bdnxRM gmUUoo"
-  style="opacity:0"
->
-  <button
-    aria-controls="popover-overlay"
-    aria-expanded="false"
-    aria-haspopup="dialog"
-    class="sc-bdnxRM omwMO"
-    type="button"
-  >
-    <div
-      class="sc-bdnxRM IoRUe"
-    >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        fill="none"
-        viewBox="0 0 32 29"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.for
-      </p>
-    </div>
-  </button>
+Array [
   <div
-    aria-label="vote.popover.title"
-    class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
-    data-dialog="true"
-    hidden=""
-    id="login-popover"
-    role="dialog"
-    style="display:none;position:fixed;left:100%;top:100%"
-    tabindex="0"
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    class="sc-bdnxRM bIOcrz"
+    style="opacity:0"
   >
-    <div
-      class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
-      style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
+    <button
+      aria-controls="popover-overlay"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      class="sc-bdnxRM jXtrwG"
+      type="button"
     >
-      <svg
-        style="transform:rotateZ(360deg)"
-        viewBox="0 0 30 30"
-      >
-        <path
-          class="stroke"
-          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-        />
-        <path
-          class="fill"
-          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-        />
-      </svg>
-    </div>
-    <div
-      class="sc-bdnxRM jgfvhW"
-    >
-      <p
-        class="sc-bdnxRM hdVRdr cap-text"
-      >
-        vote.popover.title
-      </p>
       <div
-        class="sc-bdnxRM jRHUGW"
+        class="sc-bdnxRM gLsJsI"
+      >
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.for
+        </p>
+      </div>
+    </button>
+    <div
+      aria-label="vote.popover.title"
+      class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      data-dialog="true"
+      hidden=""
+      id="login-popover"
+      role="dialog"
+      style="display:none;position:fixed;left:100%;top:100%"
+      tabindex="0"
+    >
+      <div
+        class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
+        style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
+      >
+        <svg
+          style="transform:rotateZ(360deg)"
+          viewBox="0 0 30 30"
+        >
+          <path
+            class="stroke"
+            d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+          />
+          <path
+            class="fill"
+            d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+          />
+        </svg>
+      </div>
+      <div
+        class="sc-bdnxRM htoMAJ"
       >
         <p
-          class="sc-bdnxRM bhbXgN cap-text"
-          style="margin-left:0;margin-top:0"
+          class="sc-bdnxRM kUmORS cap-text"
         >
-          vote.popover.body
+          vote.popover.title
         </p>
-        <span
-          class="sc-bdnxRM hptjof"
-          clip="rect(0px, 0px, 0px, 0px)"
+        <div
+          class="sc-bdnxRM jaCxns"
         >
-          <button
-            class="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
-            type="button"
+          <p
+            class="sc-bdnxRM dNfCSD cap-text"
+            style="margin-left:0;margin-top:0"
           >
-            global.close
-          </button>
-        </span>
-        <span>
-          <button
-            aria-label="open.connection_modal"
-            class="center-block btn-block login-button btn btn-success"
-            destination="http://localhost"
-            type="button"
+            vote.popover.body
+          </p>
+          <span
+            class="sc-bdnxRM hptjof"
+            clip="rect(0px, 0px, 0px, 0px)"
           >
-            global.login
-          </button>
-        </span>
+            <button
+              class="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              type="button"
+            >
+              global.close
+            </button>
+          </span>
+          <span>
+            <button
+              aria-label="open.connection_modal"
+              class="center-block btn-block login-button btn btn-success"
+              destination="http://localhost"
+              type="button"
+            >
+              global.login
+            </button>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <button
-    aria-controls="popover-overlay"
-    aria-expanded="false"
-    aria-haspopup="dialog"
-    class="sc-bdnxRM fpzkOi"
-    type="button"
-  >
-    <div
-      class="sc-bdnxRM IoRUe"
+    <button
+      aria-controls="popover-overlay"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      class="sc-bdnxRM qRJsX"
+      type="button"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        viewBox="0 0 12 11"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.against
-      </p>
-    </div>
-  </button>
-  <div
-    aria-label="vote.popover.title"
-    class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
-    data-dialog="true"
-    hidden=""
-    id="login-popover"
-    role="dialog"
-    style="display:none;position:fixed;left:100%;top:100%"
-    tabindex="0"
-  >
-    <div
-      class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
-      style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
-    >
-      <svg
-        style="transform:rotateZ(360deg)"
-        viewBox="0 0 30 30"
-      >
-        <path
-          class="stroke"
-          d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-        />
-        <path
-          class="fill"
-          d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-        />
-      </svg>
-    </div>
-    <div
-      class="sc-bdnxRM jgfvhW"
-    >
-      <p
-        class="sc-bdnxRM hdVRdr cap-text"
-      >
-        vote.popover.title
-      </p>
       <div
-        class="sc-bdnxRM jRHUGW"
+        class="sc-bdnxRM gLsJsI"
+      >
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.against
+        </p>
+      </div>
+    </button>
+    <div
+      aria-label="vote.popover.title"
+      class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      data-dialog="true"
+      hidden=""
+      id="login-popover"
+      role="dialog"
+      style="display:none;position:fixed;left:100%;top:100%"
+      tabindex="0"
+    >
+      <div
+        class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
+        style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
+      >
+        <svg
+          style="transform:rotateZ(360deg)"
+          viewBox="0 0 30 30"
+        >
+          <path
+            class="stroke"
+            d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
+          />
+          <path
+            class="fill"
+            d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
+          />
+        </svg>
+      </div>
+      <div
+        class="sc-bdnxRM htoMAJ"
       >
         <p
-          class="sc-bdnxRM bhbXgN cap-text"
-          style="margin-left:0;margin-top:0"
+          class="sc-bdnxRM kUmORS cap-text"
         >
-          vote.popover.body
+          vote.popover.title
         </p>
-        <span
-          class="sc-bdnxRM hptjof"
-          clip="rect(0px, 0px, 0px, 0px)"
+        <div
+          class="sc-bdnxRM jaCxns"
         >
-          <button
-            class="sc-bdnxRM sc-lbVvki juQjuI fKaghU cap-button"
-            type="button"
+          <p
+            class="sc-bdnxRM dNfCSD cap-text"
+            style="margin-left:0;margin-top:0"
           >
-            global.close
-          </button>
-        </span>
-        <span>
-          <button
-            aria-label="open.connection_modal"
-            class="center-block btn-block login-button btn btn-success"
-            destination="http://localhost"
-            type="button"
+            vote.popover.body
+          </p>
+          <span
+            class="sc-bdnxRM hptjof"
+            clip="rect(0px, 0px, 0px, 0px)"
           >
-            global.login
-          </button>
-        </span>
+            <button
+              class="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              type="button"
+            >
+              global.close
+            </button>
+          </span>
+          <span>
+            <button
+              aria-label="open.connection_modal"
+              class="center-block btn-block login-button btn btn-success"
+              destination="http://localhost"
+              type="button"
+            >
+              global.login
+            </button>
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
-<div
-  class="sc-bdnxRM gmUUoo"
-  style="opacity:0"
->
-  <button
-    class="sc-bdnxRM omwMO"
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    class="sc-bdnxRM bIOcrz"
+    style="opacity:0"
   >
-    <div
-      class="sc-bdnxRM IoRUe"
+    <button
+      class="sc-bdnxRM jXtrwG"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        fill="none"
-        viewBox="0 0 32 29"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.for
-      </p>
-    </div>
-  </button>
-  <button
-    class="sc-bdnxRM fpzkOi"
-  >
-    <div
-      class="sc-bdnxRM IoRUe"
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.for
+        </p>
+      </div>
+    </button>
+    <button
+      class="sc-bdnxRM qRJsX"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        viewBox="0 0 12 11"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.against
-      </p>
-    </div>
-  </button>
-</div>
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.against
+        </p>
+      </div>
+    </button>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
-<div
-  class="sc-bdnxRM gmUUoo"
-  style="opacity:0"
->
-  <button
-    class="sc-bdnxRM omwMO"
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    class="sc-bdnxRM bIOcrz"
+    style="opacity:0"
   >
-    <div
-      class="sc-bdnxRM IoRUe"
+    <button
+      class="sc-bdnxRM jXtrwG"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        fill="none"
-        viewBox="0 0 32 29"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.for
-      </p>
-    </div>
-  </button>
-  <button
-    class="sc-bdnxRM fpzkOi"
-  >
-    <div
-      class="sc-bdnxRM IoRUe"
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M32 13.09a3.334 3.334 0 00-3.333-3.333h-8.415a.333.333 0 01-.316-.437 11.58 11.58 0 00.693-5.876c-.784-2.8-2.445-3.6-3.744-3.42a2.667 2.667 0 00-2.218 2.733c0 3.662-2.839 7.662-5.379 9.415a.666.666 0 00-.288.55v13.487a.667.667 0 00.54.655c.476.09.908.18 1.316.267 1.794.427 3.633.637 5.477.628H25c2.61 0 3-1.467 3-2.334 0-.46-.105-.914-.308-1.326a3.001 3.001 0 001.333-4 3 3 0 001.279-4.104A3.334 3.334 0 0032 13.09zM7 12.757a1.333 1.333 0 00-1.333-1.333H1.333A1.333 1.333 0 000 12.757v14.667a1.333 1.333 0 001.333 1.333h4.334A1.334 1.334 0 007 27.424V12.757zM5 25.091a1 1 0 11-2 0 1 1 0 012 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.for
+        </p>
+      </div>
+    </button>
+    <button
+      class="sc-bdnxRM qRJsX"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa AbwPc kuPXuU cap-icon"
-        viewBox="0 0 12 11"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="sc-bdnxRM gLsJsI"
       >
-        <path
-          d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
-          fill="currentColor"
-        />
-      </svg>
-      <p
-        class="sc-bdnxRM ipdWIi cap-text"
-      >
-        global.against
-      </p>
-    </div>
-  </button>
-</div>
+        <svg
+          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          fill="none"
+          viewBox="0 0 32 29"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
+            fill="currentColor"
+          />
+        </svg>
+        <p
+          class="sc-bdnxRM WTDFb cap-text"
+        >
+          global.against
+        </p>
+      </div>
+    </button>
+  </div>,
+]
 `;

@@ -185,7 +185,7 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
             "pointerEvents": "none",
             "position": "fixed",
             "top": "100%",
-            "zIndex": 1000,
+            "zIndex": 1800,
           }
         }
       />

@@ -27,7 +27,7 @@ Array [
       className="sc-bdnxRM yMaRx container"
     >
       <div
-        className="sc-bdnxRM uWtbD"
+        className="sc-bdnxRM dPGPdA"
       >
         <p
           className="sc-bdnxRM jWVfLO cap-text"
@@ -163,7 +163,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -208,11 +208,12 @@ Array [
             >
               <svg
                 className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
-                viewBox="0 0 12 11"
+                fill="none"
+                viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+                  d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
                   fill="currentColor"
                 />
               </svg>
@@ -301,7 +302,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -459,7 +460,7 @@ Array [
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
-                "zIndex": 1000,
+                "zIndex": 1800,
               }
             }
           />
@@ -615,7 +616,7 @@ Array [
       className="sc-bdnxRM yMaRx container"
     >
       <div
-        className="sc-bdnxRM uWtbD"
+        className="sc-bdnxRM dPGPdA"
       >
         <p
           className="sc-bdnxRM jWVfLO cap-text"
@@ -751,7 +752,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -796,11 +797,12 @@ Array [
             >
               <svg
                 className="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
-                viewBox="0 0 12 11"
+                fill="none"
+                viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 5.875a1.25 1.25 0 001.25 1.25h3.155a.125.125 0 01.119.164 4.342 4.342 0 00-.26 2.204c.294 1.05.917 1.35 1.404 1.282A1 1 0 006.5 9.75c0-1.373 1.064-2.873 2.017-3.53a.25.25 0 00.108-.206V.956A.25.25 0 008.422.71c-.178-.034-.34-.067-.493-.1A8.68 8.68 0 005.875.375h-3.25C1.646.375 1.5.923 1.5 1.25c0 .173.039.344.115.5a1.125 1.125 0 00-.5 1.5 1.125 1.125 0 00-.479 1.539A1.25 1.25 0 000 5.875zM9.375 6a.5.5 0 00.5.5H11.5A.5.5 0 0012 6V.5a.5.5 0 00-.5-.5H9.875a.5.5 0 00-.5.5V6zm.75-4.625a.375.375 0 11.75 0 .375.375 0 01-.75 0z"
+                  d="M0 15.667A3.333 3.333 0 003.333 19h8.415a.333.333 0 01.316.437 11.58 11.58 0 00-.693 5.876c.784 2.8 2.445 3.6 3.744 3.42A2.666 2.666 0 0017.333 26c0-3.661 2.839-7.661 5.379-9.415a.667.667 0 00.288-.549V2.548a.667.667 0 00-.54-.655 62.62 62.62 0 01-1.316-.266 23.148 23.148 0 00-5.477-.628H7C4.39 1 4 2.46 4 3.333c-.002.463.104.919.308 1.334a3.001 3.001 0 00-1.333 4 3 3 0 00-1.279 4.104A3.333 3.333 0 000 15.667zM25 16a1.333 1.333 0 001.333 1.333h4.334A1.333 1.333 0 0032 16V1.333A1.334 1.334 0 0030.667 0h-4.334A1.333 1.333 0 0025 1.333V16zm2-12.333a1 1 0 112 0 1 1 0 01-2 0z"
                   fill="currentColor"
                 />
               </svg>
@@ -889,7 +891,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bdnxRM sc-lbVvki cMVVDx cgYPRG cap-button"
+                    className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1047,7 +1049,7 @@ Array [
                 "pointerEvents": "none",
                 "position": "fixed",
                 "top": "100%",
-                "zIndex": 1000,
+                "zIndex": 1800,
               }
             }
           />
@@ -1115,7 +1117,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bdnxRM sc-lbVvki ivaZSg cgYPRG cap-button"
+          className="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
           onClick={[Function]}
           type="button"
         >

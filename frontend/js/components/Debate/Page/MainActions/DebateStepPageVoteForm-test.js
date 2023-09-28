@@ -52,7 +52,7 @@ describe('<DebateStepPageVoteForm/>', () => {
 
   const renderComponent = (isMobile: boolean) => {
     const wrapper = render(
-      <MockProviders store={{}}>
+      <MockProviders store={{}} useCapUIProvider>
         <MachineContext.Provider value={{ ...Machine }}>
           <DebateStepPageVoteFormDecorated {...props} debate={debate} isMobile={isMobile} />
         </MachineContext.Provider>

@@ -24,6 +24,7 @@ import { IntlProvider, type IntlShape, type MessageDescriptor } from 'react-intl
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import { createStore } from 'redux';
 import { initialState as initialDefaultState } from './frontend/js/redux/modules/default';
+
 configure({ adapter: new Adapter() });
 
 moment.locale('fr');

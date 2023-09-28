@@ -270,7 +270,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                             "pointerEvents": "none",
                             "position": "fixed",
                             "top": "100%",
-                            "zIndex": 1000,
+                            "zIndex": 1800,
                           }
                         }
                       />
@@ -360,7 +360,7 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                           "pointerEvents": "none",
                           "position": "fixed",
                           "top": "100%",
-                          "zIndex": 1000,
+                          "zIndex": 1800,
                         }
                       }
                     />
@@ -651,7 +651,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                             "pointerEvents": "none",
                             "position": "fixed",
                             "top": "100%",
-                            "zIndex": 1000,
+                            "zIndex": 1800,
                           }
                         }
                       />
@@ -741,7 +741,7 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                           "pointerEvents": "none",
                           "position": "fixed",
                           "top": "100%",
-                          "zIndex": 1000,
+                          "zIndex": 1800,
                         }
                       }
                     />

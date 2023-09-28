@@ -16,7 +16,7 @@ describe('<EventDeleteModal />', () => {
 
   it('should render correctly', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <EventDeleteModal eventId="id" />
       </MockProviders>,
     );

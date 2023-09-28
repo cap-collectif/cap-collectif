@@ -4,7 +4,7 @@ import * as React from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import ReactTestRenderer from 'react-test-renderer';
-import {
+import MockProviders, {
   addsSupportForPortals,
   clearSupportForPortals,
   RelaySuspensFragmentTest,
@@ -20,7 +20,7 @@ describe('<UserInGroupModal />', () => {
   const defaultMockResolvers = {};
   const query = graphql`
     query UserInGroupModalTestQuery($id: ID = "<default>", $first: Int, $cursor: String)
-      @relay_test_operation {
+    @relay_test_operation {
       group: node(id: $id) {
         ...UserInGroupModal_group @arguments(count: $first, cursor: $cursor)
       }
@@ -41,9 +41,11 @@ describe('<UserInGroupModal />', () => {
       return <UserInGroupModal handleClose={handleClose} show group={data.group} {...props} />;
     };
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer {...props} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer {...props} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, defaultMockResolvers),

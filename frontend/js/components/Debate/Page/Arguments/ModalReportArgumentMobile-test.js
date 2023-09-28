@@ -38,7 +38,7 @@ global.Math.random = () => 0.5;
 describe('<ModalReportArgumentMobile />', () => {
   it('should renders correcty with argument', () => {
     const wrapper = render(
-      <MockProviders store={{}}>
+      <MockProviders store={{}} useCapUIProvider>
         <ModalReportArgumentMobile {...props.basic} />
       </MockProviders>,
     );
@@ -47,7 +47,7 @@ describe('<ModalReportArgumentMobile />', () => {
 
   it('should renders correcty when not show', () => {
     const wrapper = render(
-      <MockProviders store={{}}>
+      <MockProviders store={{}} useCapUIProvider>
         <ModalReportArgumentMobile {...props.notShow} />
       </MockProviders>,
     );

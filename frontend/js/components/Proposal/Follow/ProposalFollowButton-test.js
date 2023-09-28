@@ -6,7 +6,7 @@ import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
 import ProposalFollowButton from './ProposalFollowButton';
-import {
+import MockProviders, {
   addsSupportForPortals,
   clearSupportForPortals,
   RelaySuspensFragmentTest,
@@ -57,9 +57,11 @@ describe('<ProposalFollowButton />', () => {
     };
 
     TestProposalFollowButton = componentProps => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
 
     environment.mock.queueOperationResolver(operation =>

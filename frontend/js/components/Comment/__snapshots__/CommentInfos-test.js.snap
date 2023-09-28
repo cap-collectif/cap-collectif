@@ -37,7 +37,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
-          "zIndex": 1000,
+          "zIndex": 1800,
         }
       }
     />
@@ -130,7 +130,7 @@ exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no a
           "pointerEvents": "none",
           "position": "fixed",
           "top": "100%",
-          "zIndex": 1000,
+          "zIndex": 1800,
         }
       }
     />

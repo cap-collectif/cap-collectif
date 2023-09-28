@@ -1,355 +1,415 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
-<div
-  data-testid="AnimatePresence"
->
+Array [
   <div
-    className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-    style={
-      Object {
-        "opacity": 0,
-        "transform": "translateX(100vw) translateZ(0)",
-      }
-    }
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM hUDJOG"
+      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateX(100vw) translateZ(0)",
+        }
+      }
     >
-      <svg
-        className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
-        fill="none"
-        onClick={[MockFunction]}
-        viewBox="0 0 12 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-        />
-      </svg>
       <div
-        className="sc-bdnxRM emydlX"
-      >
-        <p
-          className="sc-bdnxRM gjUaQI cap-text"
-          style={
-            Object {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Agui le penseur
-        </p>
-        <div
-          className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
-          title=""
-        >
-          <h5
-            className="sc-bdnxRM jxtjkG cap-heading"
-          >
-            global.for
-          </h5>
-        </div>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM koUlpS"
-      onClose={[MockFunction]}
-    >
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        coucou
-      </p>
-    </div>
-    <div
-      className="sc-bdnxRM dSwOMW"
-      onClose={[MockFunction]}
-    >
-      <button
-        aria-label="vote.add"
-        className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
+        className="sc-bdnxRM fCTwzN"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
+          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
           fill="none"
-          viewBox="0 0 10 12"
+          onClick={[MockFunction]}
+          viewBox="0 0 12 6"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-            fill="currentColor"
+            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
           />
         </svg>
-      </button>
-      <span
-        className="sc-bdnxRM jELONJ cap-text"
+        <div
+          className="sc-bdnxRM kVIluv"
+        >
+          <p
+            className="sc-bdnxRM gcfCkn cap-text"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            Agui le penseur
+          </p>
+          <div
+            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            title=""
+          >
+            <h5
+              className="sc-bdnxRM eGzXIx cap-heading"
+            >
+              global.for
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM fPIidS"
+        onClose={[MockFunction]}
       >
-        10
-      </span>
-    </div>
-    <div
-      aria-label="global.report.submit"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        Object {
-          "display": "none",
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          coucou
+        </p>
+      </div>
+      <div
+        className="sc-bdnxRM fAmESm"
+        onClose={[MockFunction]}
+      >
+        <button
+          aria-label="vote.add"
+          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            fill="none"
+            viewBox="0 0 10 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <span
+          className="sc-bdnxRM bITUbm cap-text"
+        >
+          10
+        </span>
+      </div>
+      <div
+        aria-label="global.report.submit"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
         }
-      }
-      tabIndex={-1}
-    />
-  </div>
-</div>
+        tabIndex={-1}
+      />
+    </div>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has vote 1`] = `
-<div
-  data-testid="AnimatePresence"
->
+Array [
   <div
-    className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-    style={
-      Object {
-        "opacity": 0,
-        "transform": "translateX(100vw) translateZ(0)",
-      }
-    }
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM hUDJOG"
+      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateX(100vw) translateZ(0)",
+        }
+      }
     >
-      <svg
-        className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
-        fill="none"
-        onClick={[MockFunction]}
-        viewBox="0 0 12 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-        />
-      </svg>
       <div
-        className="sc-bdnxRM emydlX"
-      >
-        <p
-          className="sc-bdnxRM gjUaQI cap-text"
-          style={
-            Object {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Agui le penseur
-        </p>
-        <div
-          className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
-          title=""
-        >
-          <h5
-            className="sc-bdnxRM jxtjkG cap-heading"
-          >
-            global.for
-          </h5>
-        </div>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM koUlpS"
-      onClose={[MockFunction]}
-    >
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        coucou
-      </p>
-    </div>
-    <div
-      className="sc-bdnxRM dSwOMW"
-      onClose={[MockFunction]}
-    >
-      <button
-        aria-label="vote.add"
-        className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
+        className="sc-bdnxRM fCTwzN"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
+          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
           fill="none"
-          viewBox="0 0 10 12"
+          onClick={[MockFunction]}
+          viewBox="0 0 12 6"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-            fill="currentColor"
+            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
           />
         </svg>
-      </button>
-      <span
-        className="sc-bdnxRM jELONJ cap-text"
+        <div
+          className="sc-bdnxRM kVIluv"
+        >
+          <p
+            className="sc-bdnxRM gcfCkn cap-text"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            Agui le penseur
+          </p>
+          <div
+            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            title=""
+          >
+            <h5
+              className="sc-bdnxRM eGzXIx cap-heading"
+            >
+              global.for
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM fPIidS"
+        onClose={[MockFunction]}
       >
-        10
-      </span>
-    </div>
-    <div
-      aria-label="global.report.submit"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        Object {
-          "display": "none",
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          coucou
+        </p>
+      </div>
+      <div
+        className="sc-bdnxRM fAmESm"
+        onClose={[MockFunction]}
+      >
+        <button
+          aria-label="vote.add"
+          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            fill="none"
+            viewBox="0 0 10 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <span
+          className="sc-bdnxRM bITUbm cap-text"
+        >
+          10
+        </span>
+      </div>
+      <div
+        aria-label="global.report.submit"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
         }
-      }
-      tabIndex={-1}
-    />
-  </div>
-</div>
+        tabIndex={-1}
+      />
+    </div>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is the author 1`] = `
-<div
-  data-testid="AnimatePresence"
->
+Array [
   <div
-    className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-    style={
-      Object {
-        "opacity": 0,
-        "transform": "translateX(100vw) translateZ(0)",
-      }
-    }
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM hUDJOG"
+      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateX(100vw) translateZ(0)",
+        }
+      }
     >
-      <svg
-        className="sc-bdnxRM sc-eJocfa JEBRS MmfJJ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
-        fill="none"
-        onClick={[MockFunction]}
-        viewBox="0 0 12 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-        />
-      </svg>
       <div
-        className="sc-bdnxRM emydlX"
-      >
-        <p
-          className="sc-bdnxRM gjUaQI cap-text"
-          style={
-            Object {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Agui le penseur
-        </p>
-        <div
-          className="sc-bdnxRM hRHiEV sc-fXazdy llVDbw cap-tag"
-          title=""
-        >
-          <h5
-            className="sc-bdnxRM jxtjkG cap-heading"
-          >
-            global.for
-          </h5>
-        </div>
-      </div>
-    </div>
-    <div
-      className="sc-bdnxRM koUlpS"
-      onClose={[MockFunction]}
-    >
-      <p
-        className="sc-bdnxRM ipdWIi cap-text"
-      >
-        coucou
-      </p>
-    </div>
-    <div
-      className="sc-bdnxRM dSwOMW"
-      onClose={[MockFunction]}
-    >
-      <button
-        aria-label="vote.add"
-        className="sc-bdnxRM sc-lbVvki rZOLm hmtyqs cap-button"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
+        className="sc-bdnxRM fCTwzN"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa gCmxDI MmfJJ cap-icon"
+          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
           fill="none"
-          viewBox="0 0 10 12"
+          onClick={[MockFunction]}
+          viewBox="0 0 12 6"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-            fill="currentColor"
+            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
           />
         </svg>
-      </button>
-      <span
-        className="sc-bdnxRM jELONJ cap-text"
+        <div
+          className="sc-bdnxRM kVIluv"
+        >
+          <p
+            className="sc-bdnxRM gcfCkn cap-text"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            Agui le penseur
+          </p>
+          <div
+            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            title=""
+          >
+            <h5
+              className="sc-bdnxRM eGzXIx cap-heading"
+            >
+              global.for
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bdnxRM fPIidS"
+        onClose={[MockFunction]}
       >
-        10
-      </span>
-    </div>
-    <div
-      aria-label="global.report.submit"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        Object {
-          "display": "none",
+        <p
+          className="sc-bdnxRM WTDFb cap-text"
+        >
+          coucou
+        </p>
+      </div>
+      <div
+        className="sc-bdnxRM fAmESm"
+        onClose={[MockFunction]}
+      >
+        <button
+          aria-label="vote.add"
+          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          <svg
+            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            fill="none"
+            viewBox="0 0 10 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+        <span
+          className="sc-bdnxRM bITUbm cap-text"
+        >
+          10
+        </span>
+      </div>
+      <div
+        aria-label="global.report.submit"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-g"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
         }
-      }
-      tabIndex={-1}
-    />
-  </div>
-</div>
+        tabIndex={-1}
+      />
+    </div>
+  </div>,
+]
 `;

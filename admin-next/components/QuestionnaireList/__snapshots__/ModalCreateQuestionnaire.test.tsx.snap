@@ -24,7 +24,7 @@ Array [
     aria-controls="id-g"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdnxRM sc-lbVvki cdItED cgYPRG cap-button"
+    className="sc-bdnxRM sc-lbVvki cdItED edAWqw cap-button"
     data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
@@ -97,7 +97,7 @@ Array [
     aria-controls="id-g"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-bdnxRM sc-lbVvki cdItED cgYPRG cap-button"
+    className="sc-bdnxRM sc-lbVvki cdItED edAWqw cap-button"
     data-cy="create-questionnaire-button"
     id="btn-add-questionnaire"
     onClick={[Function]}
@@ -241,7 +241,7 @@ Array [
                       type="radio"
                     />
                     <div
-                      className="sc-bdnxRM fwekZu cap-radio__box"
+                      className="sc-bdnxRM kMHtTX cap-radio__box"
                     />
                   </div>
                   <span
@@ -283,7 +283,7 @@ Array [
                       type="radio"
                     />
                     <div
-                      className="sc-bdnxRM fwekZu cap-radio__box"
+                      className="sc-bdnxRM kMHtTX cap-radio__box"
                     />
                   </div>
                   <span
@@ -366,7 +366,7 @@ Array [
               cancel
             </button>
             <button
-              className="sc-bdnxRM sc-lbVvki liwAnN cgYPRG cap-button"
+              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
               data-cy="create-questionnaire-modal-create-button"
               id="confirm-questionnaire-create"
               onClick={[Function]}

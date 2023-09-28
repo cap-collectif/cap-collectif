@@ -4,7 +4,7 @@ import * as React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils';
-import {
+import MockProviders, {
   RelaySuspensFragmentTest,
   addsSupportForPortals,
   clearSupportForPortals,
@@ -37,7 +37,7 @@ describe('<DebateStepPageArgumentsDrawer />', () => {
 
   const query = graphql`
     query DebateStepPageArgumentsDrawerTestQuery($id: ID = "<default>", $isAuthenticated: Boolean!)
-      @relay_test_operation {
+    @relay_test_operation {
       debate: node(id: $id) {
         ...DebateStepPageArgumentsDrawer_debate @arguments(isAuthenticated: $isAuthenticated)
       }
@@ -63,9 +63,11 @@ describe('<DebateStepPageArgumentsDrawer />', () => {
       return <DebateStepPageArgumentsDrawer debate={data.debate} viewer={data.viewer} {...props} />;
     };
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
-        <TestRenderer {...props} />
-      </RelaySuspensFragmentTest>
+      <MockProviders store={{}} useCapUIProvider>
+        <RelaySuspensFragmentTest environment={environment}>
+          <TestRenderer {...props} />
+        </RelaySuspensFragmentTest>
+      </MockProviders>
     );
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, defaultMockResolvers),
@@ -81,6 +83,6 @@ describe('<DebateStepPageArgumentsDrawer />', () => {
     testComponentTree = ReactTestRenderer.create(
       <TestComponent isOpen={false} onClose={onClose} />,
     );
-    expect(testComponentTree.toJSON()).toEqual(null);
+    expect(testComponentTree.toJSON()).toHaveLength(6);
   });
 });

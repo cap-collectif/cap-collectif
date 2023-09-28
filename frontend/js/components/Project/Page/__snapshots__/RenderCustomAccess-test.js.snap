@@ -41,7 +41,7 @@ Array [
         "pointerEvents": "none",
         "position": "fixed",
         "top": "100%",
-        "zIndex": 1000,
+        "zIndex": 1800,
       }
     }
   />,

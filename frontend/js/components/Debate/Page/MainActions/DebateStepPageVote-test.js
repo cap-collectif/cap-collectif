@@ -41,7 +41,7 @@ const nonAuthenticated = { user: null };
 describe('<DebateStepPageVote/>', () => {
   it('should renders correctly', () => {
     const wrapper = render(
-      <MockProviders store={{ user: normalUser }}>
+      <MockProviders store={{ user: normalUser }} useCapUIProvider>
         <DebateStepPageVote {...props.basic} />
       </MockProviders>,
     );
@@ -50,7 +50,7 @@ describe('<DebateStepPageVote/>', () => {
 
   it('should renders correctly when not authenticated', () => {
     const wrapper = render(
-      <MockProviders store={{ user: nonAuthenticated }}>
+      <MockProviders store={{ user: nonAuthenticated }} useCapUIProvider>
         <DebateStepPageVote {...props.basic} />
       </MockProviders>,
     );
@@ -59,7 +59,7 @@ describe('<DebateStepPageVote/>', () => {
 
   it('should renders correctly with email not confirmed argument', () => {
     const wrapper = render(
-      <MockProviders store={{ user: nonConfirmedUser }}>
+      <MockProviders store={{ user: nonConfirmedUser }} useCapUIProvider>
         <DebateStepPageVote {...props.basic} />
       </MockProviders>,
     );
@@ -68,7 +68,7 @@ describe('<DebateStepPageVote/>', () => {
 
   it('should renders correctly with anonymous participation', () => {
     const wrapper = render(
-      <MockProviders store={{ user: normalUser }}>
+      <MockProviders store={{ user: normalUser }} useCapUIProvider>
         <DebateStepPageVote {...props.anonymousParticipationAllowed} />
       </MockProviders>,
     );

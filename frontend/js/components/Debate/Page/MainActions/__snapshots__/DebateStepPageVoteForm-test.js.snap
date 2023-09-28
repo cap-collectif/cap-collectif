@@ -1,275 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] = `
-<div
-  style="width:100%;opacity:0"
->
+Array [
   <div
-    class="sc-bdnxRM debFHz"
-  >
-    <span
-      aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-      role="img"
-    >
-      🎉
-    </span>
-    <span>
-      thanks-for-debate-richer
-    </span>
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-  </div>
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    class="sc-bdnxRM kHmqQK"
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:0"
   >
-    <a
-      class="twitter-share-button"
-      data-show-count="false"
-      href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-      style="margin-left:0;margin-top:0"
-    >
-      Tweet
-    </a>
-    <button
-      aria-describedby="id-g"
-      class="sc-bdnxRM sc-lbVvki hQINJy pvVQv cap-button"
-      tabindex="0"
-      type="button"
-    >
-      <svg
-        class="sc-bdnxRM sc-eJocfa dcNEPc gPDTUH cap-icon"
-        fill="none"
-        viewBox="0 0 32 32"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
-          fill="currentColor"
-        />
-        <path
-          d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
-          fill="currentColor"
-        />
-      </svg>
-      global.link
-    </button>
     <div
-      class="cap-tooltip-container"
-      hidden=""
-      id="id-g"
-      role="tooltip"
-      style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
-    />
-  </div>
-  <div
-    class="sc-bdnxRM dBoRNc cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
-  >
-    <form
-      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
-      id="debate-argument-form"
-    >
-      <div
-        class="form-group"
-      >
-        <textarea
-          aria-describedby="label-body "
-          aria-invalid="false"
-          autocomplete="off"
-          class="form-control"
-          id="body"
-          minlength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          type="textarea"
-        />
-        <div
-          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div
-        class="sc-bdnxRM kujXAg"
-      >
-        <button
-          class="sc-bdnxRM sc-lbVvki jKdoff gAloIW cap-button"
-          type="button"
-        >
-          global.cancel
-        </button>
-        <button
-          class="sc-bdnxRM sc-lbVvki jsYBkQ fKaghU cap-button"
-          type="submit"
-        >
-          argument.publish.mine
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed 1`] = `
-<div
-  style="width:100%;opacity:0"
->
-  <div
-    class="sc-bdnxRM debFHz"
-  >
-    <span
-      aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-      role="img"
-    >
-      🎉
-    </span>
-    <span>
-      publish.argument.validate.account
-    </span>
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-  </div>
-  <div
-    class="sc-bdnxRM dBoRNc cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
-  >
-    <form
-      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
-      id="debate-argument-form"
-    >
-      <div
-        class="form-group"
-      >
-        <textarea
-          aria-describedby="label-body "
-          aria-invalid="false"
-          autocomplete="off"
-          class="form-control"
-          id="body"
-          minlength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          type="textarea"
-        />
-        <div
-          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div
-        class="sc-bdnxRM kujXAg"
-      >
-        <button
-          class="sc-bdnxRM sc-lbVvki jKdoff gAloIW cap-button"
-          type="button"
-        >
-          global.cancel
-        </button>
-        <button
-          class="sc-bdnxRM sc-lbVvki jsYBkQ fKaghU cap-button"
-          type="submit"
-        >
-          argument.publish.mine
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed on mobile 1`] = `
-<div
-  style="width:100%;opacity:1"
->
-  <div
-    class="sc-bdnxRM debFHz"
-  >
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-    <p
-      class="sc-bdnxRM hDZDKh cap-text"
+      class="sc-bdnxRM cmylwr"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
-        role="img"
-      >
-        🎉
-      </span>
-      <span>
-        publish.argument.validate.account
-      </span>
-    </p>
-  </div>
-  <button
-    class="sc-bdnxRM sc-lbVvki eilrpR fKaghU cap-button"
-    type="button"
-  >
-    publish-argument
-  </button>
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
-<div
-  style="width:100%;opacity:1"
->
-  <div
-    class="sc-bdnxRM debFHz"
-  >
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-    <p
-      class="sc-bdnxRM hDZDKh cap-text"
-    >
-      <span
-        aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
         role="img"
       >
         🎉
@@ -277,313 +36,409 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on m
       <span>
         thanks-for-debate-richer
       </span>
-    </p>
-  </div>
-  <div
-    class="sc-bdnxRM kHmqQK"
-  >
-    <a
-      class="twitter-share-button"
-      data-show-count="false"
-      href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-      style="margin-left:0;margin-top:0"
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+    </div>
+    <div
+      class="sc-bdnxRM eSZtmj"
     >
-      Tweet
-    </a>
+      <a
+        class="twitter-share-button"
+        data-show-count="false"
+        href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        style="margin-left:0;margin-top:0"
+      >
+        Tweet
+      </a>
+      <button
+        aria-describedby="id-g"
+        class="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
+          fill="none"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+            fill="currentColor"
+          />
+          <path
+            d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+            fill="currentColor"
+          />
+        </svg>
+        global.link
+      </button>
+      <div
+        class="cap-tooltip-container"
+        hidden=""
+        id="id-g"
+        role="tooltip"
+        style="display:none;position:fixed;left:100%;top:100%;z-index:1800;pointer-events:none"
+      />
+    </div>
+    <div
+      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    >
+      <form
+        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        id="debate-argument-form"
+      >
+        <div
+          class="form-group"
+        >
+          <textarea
+            aria-describedby="label-body "
+            aria-invalid="false"
+            autocomplete="off"
+            class="form-control"
+            id="body"
+            minlength="1"
+            name="body"
+            placeholder="why-are-you-against"
+            type="textarea"
+          />
+          <div
+            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+        <div
+          class="sc-bdnxRM khSCne"
+        >
+          <button
+            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            type="submit"
+          >
+            argument.publish.mine
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:0"
+  >
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <span
+        aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        role="img"
+      >
+        🎉
+      </span>
+      <span>
+        publish.argument.validate.account
+      </span>
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+    </div>
+    <div
+      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    >
+      <form
+        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        id="debate-argument-form"
+      >
+        <div
+          class="form-group"
+        >
+          <textarea
+            aria-describedby="label-body "
+            aria-invalid="false"
+            autocomplete="off"
+            class="form-control"
+            id="body"
+            minlength="1"
+            name="body"
+            placeholder="why-are-you-against"
+            type="textarea"
+          />
+          <div
+            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+        <div
+          class="sc-bdnxRM khSCne"
+        >
+          <button
+            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            type="submit"
+          >
+            argument.publish.mine
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed on mobile 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:1"
+  >
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+      <p
+        class="sc-bdnxRM fPGzgI cap-text"
+      >
+        <span
+          aria-label="vote"
+          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          role="img"
+        >
+          🎉
+        </span>
+        <span>
+          publish.argument.validate.account
+        </span>
+      </p>
+    </div>
     <button
-      aria-describedby="id-g"
-      class="sc-bdnxRM sc-lbVvki hQINJy pvVQv cap-button"
-      tabindex="0"
+      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
       type="button"
     >
-      <svg
-        class="sc-bdnxRM sc-eJocfa dcNEPc gPDTUH cap-icon"
-        fill="none"
-        viewBox="0 0 32 32"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
-          fill="currentColor"
-        />
-        <path
-          d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
-          fill="currentColor"
-        />
-      </svg>
-      global.link
+      publish-argument
     </button>
-    <div
-      class="cap-tooltip-container"
-      hidden=""
-      id="id-g"
-      role="tooltip"
-      style="display:none;position:fixed;left:100%;top:100%;z-index:1000;pointer-events:none"
-    />
-  </div>
-  <button
-    class="sc-bdnxRM sc-lbVvki eilrpR fKaghU cap-button"
-    type="button"
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:1"
   >
-    publish-argument
-  </button>
-</div>
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+      <p
+        class="sc-bdnxRM fPGzgI cap-text"
+      >
+        <span
+          aria-label="vote"
+          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          role="img"
+        >
+          🎉
+        </span>
+        <span>
+          thanks-for-debate-richer
+        </span>
+      </p>
+    </div>
+    <div
+      class="sc-bdnxRM eSZtmj"
+    >
+      <a
+        class="twitter-share-button"
+        data-show-count="false"
+        href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+        style="margin-left:0;margin-top:0"
+      >
+        Tweet
+      </a>
+      <button
+        aria-describedby="id-g"
+        class="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
+        tabindex="0"
+        type="button"
+      >
+        <svg
+          class="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
+          fill="none"
+          viewBox="0 0 32 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+            fill="currentColor"
+          />
+          <path
+            d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+            fill="currentColor"
+          />
+        </svg>
+        global.link
+      </button>
+      <div
+        class="cap-tooltip-container"
+        hidden=""
+        id="id-g"
+        role="tooltip"
+        style="display:none;position:fixed;left:100%;top:100%;z-index:1800;pointer-events:none"
+      />
+    </div>
+    <button
+      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
+      type="button"
+    >
+      publish-argument
+    </button>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
-<div
-  style="width:100%;opacity:0"
->
+Array [
   <div
-    class="sc-bdnxRM debFHz"
-  >
-    <span
-      aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-      role="img"
-    >
-      🗳️
-    </span>
-    <span>
-      thanks-for-your-vote
-    </span>
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-  </div>
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
   <div
-    class="sc-bdnxRM dBoRNc cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
-  >
-    <form
-      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
-      id="debate-argument-form"
-    >
-      <div
-        class="form-group"
-      >
-        <textarea
-          aria-describedby="label-body "
-          aria-invalid="false"
-          autocomplete="off"
-          class="form-control"
-          id="body"
-          minlength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          type="textarea"
-        />
-        <div
-          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div
-        class="sc-bdnxRM kujXAg"
-      >
-        <button
-          class="sc-bdnxRM sc-lbVvki jKdoff gAloIW cap-button"
-          type="button"
-        >
-          global.cancel
-        </button>
-        <button
-          class="sc-bdnxRM sc-lbVvki jsYBkQ fKaghU cap-button"
-          type="submit"
-        >
-          argument.publish.mine
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously 1`] = `
-<div
-  style="width:100%;opacity:0"
->
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
   <div
-    class="sc-bdnxRM debFHz"
-  >
-    <span
-      aria-label="vote"
-      class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
-      role="img"
-    >
-      🗳️
-    </span>
-    <span>
-      thanks-for-your-vote {"instance":"CapCollectif"}
-    </span>
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-  </div>
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
   <div
-    class="sc-bdnxRM dBoRNc cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
-  >
-    <form
-      class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
-      id="debate-argument-form"
-    >
-      <div
-        class="form-group"
-      >
-        <textarea
-          aria-describedby="label-body "
-          aria-invalid="false"
-          autocomplete="off"
-          class="form-control"
-          id="body"
-          minlength="1"
-          name="body"
-          placeholder="why-are-you-against"
-          type="textarea"
-        />
-        <div
-          class="Notepad__Container-inQLrC cTBqFb visible-print-block"
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-      </div>
-      <div
-        class="sc-bdnxRM kujXAg"
-      >
-        <button
-          class="sc-bdnxRM sc-lbVvki jKdoff gAloIW cap-button"
-          type="button"
-        >
-          global.cancel
-        </button>
-        <button
-          aria-controls="id-g"
-          aria-expanded="false"
-          aria-haspopup="dialog"
-          class="sc-bdnxRM sc-lbVvki bKezrh fKaghU cap-button"
-          type="submit"
-        >
-          global.validate
-        </button>
-        <div
-          aria-label="global.menu"
-          aria-modal="true"
-          data-dialog="true"
-          hidden=""
-          id="id-g"
-          role="dialog"
-          style="display:none"
-          tabindex="-1"
-        />
-      </div>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously on mobile 1`] = `
-<div
-  style="width:100%;opacity:1"
->
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
   <div
-    class="sc-bdnxRM debFHz"
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:0"
   >
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-    <p
-      class="sc-bdnxRM hDZDKh cap-text"
+    <div
+      class="sc-bdnxRM cmylwr"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
-        role="img"
-      >
-        🗳️
-      </span>
-      <span>
-        thanks-for-your-vote {"instance":"CapCollectif"}
-      </span>
-    </p>
-  </div>
-  <button
-    aria-controls="id-g"
-    aria-expanded="false"
-    aria-haspopup="dialog"
-    class="sc-bdnxRM sc-lbVvki kqGorG fKaghU cap-button"
-    type="submit"
-  >
-    publish-argument
-  </button>
-  <div
-    aria-label="global.menu"
-    aria-modal="true"
-    data-dialog="true"
-    hidden=""
-    id="id-g"
-    role="dialog"
-    style="display:none"
-    tabindex="-1"
-  />
-</div>
-`;
-
-exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
-<div
-  style="width:100%;opacity:1"
->
-  <div
-    class="sc-bdnxRM debFHz"
-  >
-    <button
-      class="sc-bdnxRM sc-lbVvki eaOfYd hmtyqs cap-button"
-      type="button"
-    >
-      delete.vote.against
-    </button>
-    <p
-      class="sc-bdnxRM hDZDKh cap-text"
-    >
-      <span
-        aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
         role="img"
       >
         🗳️
@@ -591,13 +446,318 @@ exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile
       <span>
         thanks-for-your-vote
       </span>
-    </p>
-  </div>
-  <button
-    class="sc-bdnxRM sc-lbVvki eilrpR fKaghU cap-button"
-    type="button"
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+    </div>
+    <div
+      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    >
+      <form
+        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        id="debate-argument-form"
+      >
+        <div
+          class="form-group"
+        >
+          <textarea
+            aria-describedby="label-body "
+            aria-invalid="false"
+            autocomplete="off"
+            class="form-control"
+            id="body"
+            minlength="1"
+            name="body"
+            placeholder="why-are-you-against"
+            type="textarea"
+          />
+          <div
+            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+        <div
+          class="sc-bdnxRM khSCne"
+        >
+          <button
+            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            type="submit"
+          >
+            argument.publish.mine
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:0"
   >
-    publish-argument
-  </button>
-</div>
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <span
+        aria-label="vote"
+        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        role="img"
+      >
+        🗳️
+      </span>
+      <span>
+        thanks-for-your-vote {"instance":"CapCollectif"}
+      </span>
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+    </div>
+    <div
+      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+    >
+      <form
+        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        id="debate-argument-form"
+      >
+        <div
+          class="form-group"
+        >
+          <textarea
+            aria-describedby="label-body "
+            aria-invalid="false"
+            autocomplete="off"
+            class="form-control"
+            id="body"
+            minlength="1"
+            name="body"
+            placeholder="why-are-you-against"
+            type="textarea"
+          />
+          <div
+            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+          >
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </div>
+        <div
+          class="sc-bdnxRM khSCne"
+        >
+          <button
+            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            aria-controls="id-g"
+            aria-expanded="false"
+            aria-haspopup="dialog"
+            class="sc-bdnxRM sc-lbVvki bGeYeY edAWqw cap-button"
+            type="submit"
+          >
+            global.validate
+          </button>
+          <div
+            aria-label="global.menu"
+            aria-modal="true"
+            data-dialog="true"
+            hidden=""
+            id="id-g"
+            role="dialog"
+            style="display:none"
+            tabindex="-1"
+          />
+        </div>
+      </form>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously on mobile 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:1"
+  >
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+      <p
+        class="sc-bdnxRM fPGzgI cap-text"
+      >
+        <span
+          aria-label="vote"
+          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          role="img"
+        >
+          🗳️
+        </span>
+        <span>
+          thanks-for-your-vote {"instance":"CapCollectif"}
+        </span>
+      </p>
+    </div>
+    <button
+      aria-controls="id-g"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      class="sc-bdnxRM sc-lbVvki jA-dhit edAWqw cap-button"
+      type="submit"
+    >
+      publish-argument
+    </button>
+    <div
+      aria-label="global.menu"
+      aria-modal="true"
+      data-dialog="true"
+      hidden=""
+      id="id-g"
+      role="dialog"
+      style="display:none"
+      tabindex="-1"
+    />
+  </div>,
+]
+`;
+
+exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
+Array [
+  <div
+    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    style="width:100%;opacity:1"
+  >
+    <div
+      class="sc-bdnxRM cmylwr"
+    >
+      <button
+        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        type="button"
+      >
+        delete.vote.against
+      </button>
+      <p
+        class="sc-bdnxRM fPGzgI cap-text"
+      >
+        <span
+          aria-label="vote"
+          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          role="img"
+        >
+          🗳️
+        </span>
+        <span>
+          thanks-for-your-vote
+        </span>
+      </p>
+    </div>
+    <button
+      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
+      type="button"
+    >
+      publish-argument
+    </button>
+  </div>,
+]
 `;
