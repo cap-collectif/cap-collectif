@@ -542,6 +542,5 @@ class StepController extends Controller
         }
 
         throw new ProjectAccessDeniedException();
-//        return $this->render('@CapcoApp/Project/403_project.html.twig', [], new Response('', Response::HTTP_FORBIDDEN));
     }
 }
