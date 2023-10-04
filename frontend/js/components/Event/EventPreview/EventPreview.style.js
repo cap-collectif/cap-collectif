@@ -35,7 +35,7 @@ const EventPreviewContainer: StyledComponent<
 
   .card__body {
     padding: 0;
-    width: 100%;
+    width: calc(100% - 165px);
     flex: 1;
   }
 
@@ -64,6 +64,10 @@ const EventPreviewContainer: StyledComponent<
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     flex-direction: column;
+
+    .card__body {
+      width: 100%;
+    }
 
     .eventImage {
       width: 100%;
