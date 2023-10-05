@@ -224,7 +224,7 @@ class CreateProposalMutation implements MutationInterface
     protected function handleErrors(Form $form): void
     {
         $errors = [];
-        foreach ($form->getErrors() as $error) {
+        foreach ($form->getErrors(true) as $error) {
             $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
             $this->logger->error(
                 __METHOD__ .

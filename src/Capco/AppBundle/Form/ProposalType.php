@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\District\AbstractDistrict;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -20,12 +19,10 @@ use Symfony\Component\Validator\Constraints\Valid;
 class ProposalType extends AbstractType
 {
     protected Manager $toggleManager;
-    private RedisCache $cache;
 
-    public function __construct(RedisCache $cache, Manager $toggleManager)
+    public function __construct(Manager $toggleManager)
     {
         $this->toggleManager = $toggleManager;
-        $this->cache = $cache;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

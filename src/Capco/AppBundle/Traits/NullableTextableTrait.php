@@ -10,7 +10,7 @@ trait NullableTextableTrait
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body;
+    private ?string $body = null;
 
     public function getBody(): ?string
     {

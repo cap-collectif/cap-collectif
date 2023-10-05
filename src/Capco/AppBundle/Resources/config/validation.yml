@@ -32,8 +32,6 @@ Capco\AppBundle\Entity\PostTranslation:
 
 Capco\AppBundle\Entity\Proposal:
   properties:
-    body:
-      - NotBlank: ~
     title:
       - NotBlank: { groups: [Default, ProposalDraft] }
 
