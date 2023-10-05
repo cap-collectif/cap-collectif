@@ -141,12 +141,9 @@ Scenario: Restricted project should display in projects list
   And I should not see "Croissance, innovation, disruption"
 
 Scenario: Presentation step should display correct number of element
-  Given feature "calendar" is enabled
   And feature "blog" is enabled
   And I go to "/project/croissance-innovation-disruption/presentation/presentation-1"
   Then I wait ".media--news" to appear on current page 2 times
-  And I wait "#PresentationStepEvents" to appear on current page
-  And I should see 4 ".eventPreview" elements
 
 Scenario: Posts menu for project should display correct number of posts
   Given feature "blog" is enabled

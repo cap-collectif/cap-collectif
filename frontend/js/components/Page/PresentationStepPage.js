@@ -8,12 +8,12 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
 import type { PresentationStepPageQuery as PresentationStepPageQueryType } from '~relay/PresentationStepPageQuery.graphql';
 import WYSIWYGRender from '../Form/WYSIWYGRender';
 import BlockPost from '../PresentationStep/BlockPost';
-import PresentationStepEvents from '../PresentationStep/PresentationStepEvents';
+import StepEvents from '~/components/Steps/StepEvents';
 
-type Props = {| +stepId: string, +projectId: string |};
+type Props = {| +stepId: string |};
 
 const QUERY = graphql`
-  query PresentationStepPageQuery($stepId: ID!, $projectId: ID!) {
+  query PresentationStepPageQuery($stepId: ID!) {
     presentationStep: node(id: $stepId) {
       ... on PresentationStep {
         id
@@ -40,10 +40,11 @@ const QUERY = graphql`
             anonymousCount
           }
         }
+        events(orderBy: { field: START_AT, direction: DESC }) {
+          totalCount
+        }
+        ...StepEvents_step
       }
-    }
-    events(orderBy: { field: START_AT, direction: DESC }, project: $projectId, isFuture: null) {
-      totalCount
     }
   }
 `;
@@ -55,13 +56,12 @@ It is mandatory to allow frontend navigation within all steps of a project.
 This is neither a rework nor a DS migration. It may come later if/when we decide to
 refresh this page
 */
-export const PresentationStepPage = ({ stepId, projectId }: Props) => {
+export const PresentationStepPage = ({ stepId }: Props) => {
   const { state } = useLocation();
   const data = useLazyLoadQuery<PresentationStepPageQueryType>(
     QUERY,
     {
       stepId: state?.stepId || stepId,
-      projectId,
     },
     { fetchPolicy: 'store-and-network' },
   );
@@ -76,10 +76,10 @@ export const PresentationStepPage = ({ stepId, projectId }: Props) => {
   }, [data?.presentationStep?.id]);
 
   if (!data) return null;
-  const { presentationStep, events } = data;
+  const { presentationStep } = data;
   if (!presentationStep) return null;
 
-  const { title, body, project } = presentationStep;
+  const { title, body, project, events } = presentationStep;
 
   if (!project) return null;
 
@@ -128,7 +128,7 @@ export const PresentationStepPage = ({ stepId, projectId }: Props) => {
           </div>
         ) : null}
 
-        {events?.totalCount && calendar ? <PresentationStepEvents projectId={projectId} /> : null}
+        {(events?.totalCount ?? 0) > 0 && calendar ? <StepEvents step={presentationStep} /> : null}
         <div className="block">
           <h2 className="h2">
             {intl.formatMessage({ id: 'capco.section.metrics.participants' })}{' '}

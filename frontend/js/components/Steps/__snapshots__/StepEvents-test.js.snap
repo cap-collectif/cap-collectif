@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepEvents /> should render a sliders with 3 events 1`] = `
-<PresentationStepEventsstyle__Container
+<StepEventsstyle__Container
   className="block"
   id="StepEvents"
 >
@@ -64,11 +64,11 @@ exports[`<StepEvents /> should render a sliders with 3 events 1`] = `
       key="event1"
     />
   </Slider>
-</PresentationStepEventsstyle__Container>
+</StepEventsstyle__Container>
 `;
 
 exports[`<StepEvents /> should render full width and no arrows with 1 event 1`] = `
-<PresentationStepEventsstyle__Container
+<StepEventsstyle__Container
   className="block"
   id="StepEvents"
 >
@@ -131,13 +131,13 @@ exports[`<StepEvents /> should render full width and no arrows with 1 event 1`] 
       key="event1"
     />
   </Slider>
-</PresentationStepEventsstyle__Container>
+</StepEventsstyle__Container>
 `;
 
 exports[`<StepEvents /> should render nothing without events 1`] = `""`;
 
 exports[`<StepEvents /> should render without arrows with 2 events 1`] = `
-<PresentationStepEventsstyle__Container
+<StepEventsstyle__Container
   className="block"
   id="StepEvents"
 >
@@ -200,5 +200,5 @@ exports[`<StepEvents /> should render without arrows with 2 events 1`] = `
       key="event1"
     />
   </Slider>
-</PresentationStepEventsstyle__Container>
+</StepEventsstyle__Container>
 `;

@@ -9,7 +9,7 @@ import Arrow from '~ui/Slider/Arrow';
 import IconRounded from '~ui/Icons/IconRounded';
 import colors from '~/utils/colors';
 import config from '~/config';
-import { Container } from '../PresentationStep/PresentationStepEvents.style';
+import { Container } from './StepEvents.style';
 import type { StepEvents_step } from '~relay/StepEvents_step.graphql';
 
 // TODO There is a lot of duplicate code with <PresentationStepEvents />.
