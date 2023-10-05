@@ -48,6 +48,7 @@ import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert';
 import formatPhoneNumber from '~/utils/formatPhoneNumber';
 import CookieMonster from '~/CookieMonster';
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag';
+import isIos from '~/utils/isIos';
 
 type Props = {
   proposal: ProposalVoteModal_proposal$key,
@@ -416,6 +417,7 @@ export const ProposalVoteModal = ({
         aria-labelledby="contained-modal-title-lg"
         size={CapUIModalSize.Md}
         fullSizeOnMobile
+        forceModalDialogToFalse={isIos()}
         show={showModal}>
         <ProposalVoteRequirementsModal
           modalTitle={keyTradForModalVoteTitle}
