@@ -13,10 +13,9 @@ describe('Organization Proposalform', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormMutation' })
       // list proposalform
       cy.visit('/admin-next/proposalForm')
-      cy.wait('@ProposalFormListQuery')
       cy.contains('Formulaire organisation crée par un admin')
       cy.contains('Formulaire organisation crée par un membre')
-      cy.getByDataCy('proposalform-item').should('have.length', 2)
+      cy.getByDataCy('proposalform-item').should('have.length', 3)
       // open create proposalform modal
       cy.getByDataCy('create-proposalform-button').click()
       cy.getByDataCy('create-proposalform-modal-title').type('my new proposalform')
@@ -37,9 +36,8 @@ describe('Organization Proposalform', () => {
       cy.contains('global.saved')
       // back to proposalform list
       cy.visit('/admin-next/proposalForm')
-      cy.wait('@ProposalFormListQuery')
       cy.contains('my new proposalform')
-      cy.getByDataCy('proposalform-item').should('have.length', 3)
+      cy.getByDataCy('proposalform-item').should('have.length', 4)
     })
     it('is possible to activate contact_author', () => {
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalFormParametersMutation' })

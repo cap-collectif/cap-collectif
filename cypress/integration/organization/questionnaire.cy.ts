@@ -5,13 +5,13 @@ describe('Organization Questionnaire', () => {
   })
   describe('Questionnaire BO', () => {
     it('CRUD questionnaire', () => {
-      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListOldQuery' })
       cy.interceptGraphQLOperation({ operationName: 'CreateQuestionnaireMutation' })
       cy.interceptGraphQLOperation({ operationName: 'QuestionnaireAdminPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'UpdateQuestionnaireConfigurationMutation' })
       // list questionnaire
       cy.visit('/admin-next/questionnaireList')
-      cy.wait('@QuestionnaireListQuery')
+      cy.wait('@QuestionnaireListOldQuery')
       cy.contains('Questionnaire owner orga')
       cy.contains('Questionnaire owner orga non rattaché à une step')
       cy.getByDataCy('questionnaire-item').should('have.length', 2)
@@ -36,7 +36,7 @@ describe('Organization Questionnaire', () => {
       cy.contains('global.saved')
       // back to questionnaire list
       cy.visit('/admin-next/questionnaireList')
-      cy.wait('@QuestionnaireListQuery')
+      cy.wait('@QuestionnaireListOldQuery')
       cy.contains('my new questionnaire')
       cy.getByDataCy('questionnaire-item').should('have.length', 3)
     })

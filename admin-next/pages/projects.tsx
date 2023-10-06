@@ -14,7 +14,7 @@ import { useIntl } from 'react-intl';
 import TablePlaceholder from 'components/UI/Table/TablePlaceholder';
 import ProjectList from 'components/Projects/ProjectList';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
-import CreateProject from "@components/Projects/CreateProject/CreateProject";
+import CreateProject from '@components/Projects/CreateProject/CreateProject';
 
 export const projectsQuery = graphql`
     query projectsQuery(
@@ -87,6 +87,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                         <Button
                             as="a"
                             href="/admin-next/create-project"
+                            data-cy="create-project-button"
                             variant="primary"
                             variantColor="primary"
                             variantSize="small"
@@ -113,7 +114,7 @@ const ProjectListPage: React.FC<ProjectListPageProps> = ({ queryReference }) => 
                     </React.Suspense>
                 </Flex>
             ) : (
-                <CreateProject viewer={viewer}/>
+                <CreateProject viewer={viewer} />
             )}
         </Flex>
     );

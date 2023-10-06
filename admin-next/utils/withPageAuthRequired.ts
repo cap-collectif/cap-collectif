@@ -50,10 +50,12 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
 
     // We fetch the value of session cookie
     let sessionCookie = getSessionCookieFromReq(req);
+    let serverHostname = req.headers.host;
+
     if (!sessionCookie) {
         return redirectOnError(
             res,
-            'Please come back with a "PHPSESSID" cookie, login on "https://capco.dev" to generate one.',
+            `Please come back with a "PHPSESSID" cookie, login on "https://${serverHostname}" to generate one.`,
         );
     }
 
@@ -62,7 +64,7 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
     if (!redisSession) {
         return redirectOnError(
             res,
-            `This session key (${sessionCookie}) corresponding to your "PHPSESSID" could not be found in redis, please login again on "https://capco.dev" to generate a new one.`,
+            `This session key (${sessionCookie}) corresponding to your "PHPSESSID" could not be found in redis, please login again on "https://${serverHostname}" to generate a new one.`,
         );
     }
 
@@ -71,7 +73,7 @@ const withPageAuthRequired: GetServerSideProps = async ({ req, res }) => {
     if (!viewerSession) {
         return redirectOnError(
             res,
-            'Failed to parse the JSON part of the session corresponding to your `PHPSESSID`, please try to refresh the page or login again on "https://capco.dev" to generate a new one.',
+            'Failed to parse the JSON part of the session corresponding to your `PHPSESSID`, please try to refresh the page or login again on "https://${serverHostname}" to generate a new one.',
         );
     }
 
