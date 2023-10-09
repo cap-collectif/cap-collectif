@@ -18094,6 +18094,7 @@ input UpdateQuestionnaireParametersInput {
   acknowledgeReplies: Boolean
   anonymousAllowed: Boolean
   multipleRepliesAllowed: Boolean
+  type: QuestionnaireType!
   clientMutationId: String
 }
 

@@ -12,6 +12,7 @@ describe('<QuestionnaireAdminParametersForm />', () => {
       acknowledgeReplies: true,
       multipleRepliesAllowed: true,
       anonymousAllowed: true,
+      type: 'QUESTIONNAIRE',
       $refType,
     },
   };
@@ -20,12 +21,14 @@ describe('<QuestionnaireAdminParametersForm />', () => {
     anonymousAllowed: true,
     multipleRepliesAllowed: false,
     acknowledgeReplies: true,
+    type: 'QUESTIONNAIRE',
   };
 
   const initialValues2 = {
     anonymousAllowed: false,
     multipleRepliesAllowed: true,
     acknowledgeReplies: false,
+    type: 'QUESTIONNAIRE',
   };
 
   it('renders correctly with anonymous allowed', () => {

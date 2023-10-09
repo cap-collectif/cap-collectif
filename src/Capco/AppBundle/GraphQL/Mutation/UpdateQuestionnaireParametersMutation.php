@@ -20,10 +20,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
-    private $em;
-    private $formFactory;
-    private $questionnaireRepository;
-    private $logger;
+    private EntityManagerInterface $em;
+    private FormFactoryInterface $formFactory;
+    private QuestionnaireRepository $questionnaireRepository;
+    private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
 

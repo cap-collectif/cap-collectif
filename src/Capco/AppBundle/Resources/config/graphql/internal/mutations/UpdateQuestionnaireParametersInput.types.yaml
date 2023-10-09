@@ -11,3 +11,5 @@ UpdateQuestionnaireParametersInput:
                 type: 'Boolean'
             multipleRepliesAllowed:
                 type: 'Boolean'
+            type:
+                type: 'QuestionnaireType!'

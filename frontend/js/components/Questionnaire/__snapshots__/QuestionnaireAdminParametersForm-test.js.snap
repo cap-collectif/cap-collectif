@@ -79,6 +79,17 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with anonymous a
           values={Object {}}
         />
       </Field>
+      <Field
+        component={[Function]}
+        id="questionnaire_type"
+        name="type"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="allow-draft-save"
+          values={Object {}}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
@@ -198,6 +209,17 @@ exports[`<QuestionnaireAdminParametersForm /> renders correctly with anonymous n
       >
         <FormattedMessage
           id="answer-several-times"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="questionnaire_type"
+        name="type"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="allow-draft-save"
           values={Object {}}
         />
       </Field>

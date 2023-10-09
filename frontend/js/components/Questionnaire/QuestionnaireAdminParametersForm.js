@@ -37,8 +37,13 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   values.questionnaireId = questionnaire.id;
   delete values.id;
 
+  const questionnaireType = questionnaire.type === 'QUESTIONNAIRE_ANALYSIS' ? 'QUESTIONNAIRE_ANALYSIS' : 'QUESTIONNAIRE';
+
   return UpdateQuestionnaireParametersMutation.commit({
-    input: values,
+    input: {
+      ...values,
+      type: values.type === true ? questionnaireType: 'VOTING',
+    },
   });
 };
 
@@ -94,6 +99,14 @@ export const QuestionnaireAdminParametersForm = ({
             id="questionnaire_multiple">
             <FormattedMessage id="answer-several-times" />
           </Field>
+          <Field
+            name="type"
+            component={component}
+            type="checkbox"
+            id="questionnaire_type"
+          >
+            <FormattedMessage id="allow-draft-save" />
+          </Field>
 
           <ButtonToolbar className="box-content__toolbar">
             <Button
@@ -132,6 +145,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
     initialValues: {
       anonymousAllowed: questionnaire.anonymousAllowed,
       multipleRepliesAllowed: questionnaire.multipleRepliesAllowed,
+      type: ['QUESTIONNAIRE', 'QUESTIONNAIRE_ANALYSIS'].includes(questionnaire.type),
       acknowledgeReplies: questionnaire.acknowledgeReplies,
     },
   };
@@ -145,6 +159,7 @@ export default createFragmentContainer(container, {
       id
       anonymousAllowed
       multipleRepliesAllowed
+      type
       acknowledgeReplies
     }
   `,

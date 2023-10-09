@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\QuestionnaireType;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -142,6 +143,11 @@ class AnalysisConfiguration implements Timestampable
 
     public function setEvaluationForm(?Questionnaire $evaluationForm = null): self
     {
+        if ($evaluationForm) {
+            $type = QuestionnaireType::QUESTIONNAIRE_ANALYSIS;
+            $evaluationForm->setType($type);
+        }
+
         $this->evaluationForm = $evaluationForm;
 
         return $this;

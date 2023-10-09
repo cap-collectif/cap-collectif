@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Questionnaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -18,6 +19,7 @@ class QuestionnaireParametersUpdateType extends AbstractType
             ->add('anonymousAllowed', CheckboxType::class)
             ->add('multipleRepliesAllowed', CheckboxType::class)
             ->add('privateResult', CheckboxType::class)
+            ->add('type', TextType::class)
         ;
     }
 
