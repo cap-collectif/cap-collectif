@@ -53,17 +53,20 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({
                                 : intl.formatMessage({ id: 'global.add' }),
                         }}
                     />
-                    <TextEditor
-                        name="customCode"
-                        label={intl.formatMessage({ id: 'admin.customcode' })}
-                        platformLanguage={defaultLocale}
-                        selectedLanguage={selectedLocale}
-                        buttonLabels={{
-                            submit: isEditing
-                                ? intl.formatMessage({ id: 'global.edit' })
-                                : intl.formatMessage({ id: 'global.add' }),
-                        }}
-                    />
+                    <FormControl name="customCode" control={control}>
+                        <FormLabel
+                            htmlFor="customCode"
+                            label={intl.formatMessage({
+                                id: 'admin.customcode',
+                            })}
+                        />
+                        <FieldInput
+                            id="customCode"
+                            name="customCode"
+                            control={control}
+                            type="textarea"
+                        />
+                    </FormControl>
                 </Accordion.Panel>
             </Accordion.Item>
         </Accordion>

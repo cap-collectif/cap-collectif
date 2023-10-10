@@ -57,6 +57,19 @@ export const ConditionalJumpModal: React.FC<Props> = ({
 
     const selectedQuestionId = watch(`temporaryJump.jumps.0.conditions.0.question.id`);
 
+    const currentJump = watch('temporaryJump.jumps');
+
+    const isDisabled = currentJump.some(
+        j =>
+            j.conditions.some(c => !c.operator || !c.question?.id || !c.value?.id) ||
+            !j.destination?.id,
+    );
+
+    const isJumpComplete = !!(
+        currentJump[currentJump.length - 1]?.conditions[0]?.value?.id &&
+        currentJump[currentJump.length - 1]?.destination?.id
+    );
+
     return (
         <Modal
             show
@@ -85,10 +98,14 @@ export const ConditionalJumpModal: React.FC<Props> = ({
                 {selectedQuestionId || !jumps.length ? (
                     <Box bg="gray.100" p={2} borderRadius="accordion" mb={4} textAlign="center">
                         <Button
+                            disabled={!isJumpComplete && jumps.length}
                             variant="tertiary"
                             variantColor="primary"
                             onClick={() =>
-                                append({ conditions: [{ question: { id: selectedQuestionId } }] })
+                                append({
+                                    conditions: [{ question: { id: selectedQuestionId } }],
+                                    origin: { id: selectedQuestionId },
+                                })
                             }>
                             {intl.formatMessage({ id: 'global.add' })}
                         </Button>
@@ -139,7 +156,7 @@ export const ConditionalJumpModal: React.FC<Props> = ({
                         variant="primary"
                         variantColor="primary"
                         onClick={handleSuccess}
-                        disabled={!temporaryJump?.id || !temporaryJump.jumps.length}
+                        disabled={!temporaryJump?.id || !temporaryJump.jumps.length || isDisabled}
                         id="confirm-form-create">
                         {intl.formatMessage({ id: 'global.add' })}
                     </Button>

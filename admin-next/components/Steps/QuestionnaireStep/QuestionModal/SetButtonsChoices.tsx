@@ -13,6 +13,46 @@ import {
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
+const Wrapper = ({
+    formFieldName,
+    withColors,
+    children,
+    responseColorsDisabled,
+}: {
+    formFieldName: string,
+    withColors: boolean,
+    children: any,
+    responseColorsDisabled: boolean,
+}) => {
+    const { control } = useFormContext();
+
+    if (withColors)
+        return (
+            <InputGroup
+                mb={1}
+                wrap="nowrap"
+                sx={{
+                    '.cap-form-control:last-child': { width: '100% !important' },
+                }}>
+                <FormControl
+                    name={`${formFieldName}.color`}
+                    control={control}
+                    isRequired
+                    position="relative">
+                    <FieldInput
+                        type="colorPicker"
+                        id={`${formFieldName}.color`}
+                        name={`${formFieldName}.color`}
+                        control={control}
+                        disabled={responseColorsDisabled}
+                    />
+                </FormControl>
+                {children}
+            </InputGroup>
+        );
+    return children;
+};
+
 const SetButtonsChoices: React.FC = () => {
     const intl = useIntl();
     const { control, watch, setValue } = useFormContext();
@@ -28,6 +68,7 @@ const SetButtonsChoices: React.FC = () => {
 
     const responseColorsDisabled = watch(`temporaryQuestion.responseColorsDisabled`);
     const groupedResponsesEnabled = watch(`temporaryQuestion.groupedResponsesEnabled`);
+    const type = watch('temporaryQuestion.type');
 
     return (
         <Flex direction="column" borderRadius="normal" mt={0}>
@@ -40,31 +81,18 @@ const SetButtonsChoices: React.FC = () => {
                     const formFieldName = `temporaryQuestion.choices.${index}`;
                     return (
                         <Box key={choice.id} mb={4}>
-                            <InputGroup
-                                mb={1}
-                                wrap="nowrap"
-                                sx={{
-                                    '.cap-form-control:last-child': { width: '100% !important' },
-                                }}>
-                                <FormControl
-                                    name={`${formFieldName}.color`}
-                                    control={control}
-                                    isRequired
-                                    position="relative">
-                                    <FieldInput
-                                        type="colorPicker"
-                                        id={`${formFieldName}.color`}
-                                        name={`${formFieldName}.color`}
-                                        control={control}
-                                        disabled={responseColorsDisabled}
-                                    />
-                                </FormControl>
+                            <Wrapper
+                                formFieldName={formFieldName}
+                                withColors={type === 'button'}
+                                responseColorsDisabled={responseColorsDisabled}>
                                 <FormControl
                                     name={`${formFieldName}.title`}
                                     control={control}
                                     isRequired
                                     position="relative"
-                                    sx={{ width: '100% !important' }}>
+                                    sx={{
+                                        width: '100% !important',
+                                    }}>
                                     <FieldInput
                                         id={`${formFieldName}.title`}
                                         name={`${formFieldName}.title`}
@@ -76,6 +104,28 @@ const SetButtonsChoices: React.FC = () => {
                                         ]}
                                     />
                                 </FormControl>
+                            </Wrapper>
+                            <InputGroup
+                                mb={1}
+                                wrap="nowrap"
+                                sx={{
+                                    '.cap-form-control:last-child': { width: '100% !important' },
+                                }}>
+                                {type === 'button?' ? (
+                                    <FormControl
+                                        name={`${formFieldName}.color`}
+                                        control={control}
+                                        isRequired
+                                        position="relative">
+                                        <FieldInput
+                                            type="colorPicker"
+                                            id={`${formFieldName}.color`}
+                                            name={`${formFieldName}.color`}
+                                            control={control}
+                                            disabled={responseColorsDisabled}
+                                        />
+                                    </FormControl>
+                                ) : null}
                             </InputGroup>
                         </Box>
                     );

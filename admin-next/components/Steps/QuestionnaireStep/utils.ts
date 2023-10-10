@@ -1,4 +1,3 @@
-import { QuestionChoiceInput } from '@relay/PreConfigureProjectMutation.graphql';
 import {
     QuestionnaireStepFormQueryResponse,
     QuestionTypeValue,
@@ -7,7 +6,9 @@ import {
     QuestionInput,
     QuestionnaireAbstractQuestionInput,
 } from '@relay/UpdateQuestionnaireMutation.graphql';
-import uuid, { isUuid } from '@utils/uuid';
+import { isUuid } from '@utils/uuid';
+import { FormValues } from './QuestionnaireStepForm';
+import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm';
 
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
     switch (type) {
@@ -43,7 +44,7 @@ export const questionTypeToLabel = (type: QuestionTypeValue) => {
     }
 };
 
-const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
+export const multipleChoiceQuestions = ['button', 'radio', 'select', 'checkbox', 'ranking'];
 
 export const QuestionTypes = {
     TEXT: {
@@ -95,7 +96,7 @@ export type QuestionCategory =
     | 'MULTIPLE_CHOICE'
     | 'LEGAL';
 
-export type QuestionIds = { id: string | null; temporaryId: string | null; title: string };
+export type QuestionIds = { id: string | null, temporaryId: string | null, title: string };
 
 export const formatQuestions = (
     questionnaire: NonNullable<QuestionnaireStepFormQueryResponse['step']>['questionnaire'],
@@ -114,9 +115,8 @@ export const formatQuestions = (
     return questions;
 };
 
-type Condition = { value: { id: string }; question: { id: string } };
+type Condition = { value: { id: string }, question: { id: string } };
 
-// Copied from the flow file. TODO: better types once jumps are in
 const convertJump = (jump: any) => ({
     id: jump.id,
     conditions:
@@ -130,7 +130,6 @@ const convertJump = (jump: any) => ({
     destination: jump.destination.id,
 });
 
-// Copied from the flow file. TODO: better types once jumps are in
 export const formatQuestionsInput = (
     questions: Array<QuestionInput & { __typename?: string }>,
 ): Array<QuestionnaireAbstractQuestionInput> =>
@@ -146,8 +145,12 @@ export const formatQuestionsInput = (
                     : null,
                 jumps: question.jumps ? question.jumps.filter(Boolean).map(convertJump) : [],
                 validationRule:
-                    question.validationRule && question.validationRule.type.length
-                        ? question.validationRule
+                    question.validationRule?.type && // @ts-expect-error Multiple Checkbox typings works that way
+                    question.validationRule?.type?.labels?.[0] !== 'NONE'
+                        ? {
+                              ...question.validationRule, // @ts-expect-error Multiple Checkbox typings works that way
+                              type: question.validationRule.type.labels[0],
+                          }
                         : question.__typename === 'MultipleChoiceQuestion'
                         ? null
                         : undefined,
@@ -177,3 +180,41 @@ export const formatQuestionsInput = (
         }
         return questionInput;
     });
+
+export const getDefaultValues = (stepId, step, keepRequirements?: boolean): FormValues => {
+    const stepDurationType = step
+        ? step?.timeless
+            ? [StepDurationTypeEnum.TIMELESS]
+            : [StepDurationTypeEnum.CUSTOM]
+        : [StepDurationTypeEnum.TIMELESS];
+
+    const isEnabled = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT];
+
+    return {
+        stepId,
+        label: step?.label ?? '',
+        body: step?.body ?? '',
+        startAt: step?.timeRange?.startAt ?? null,
+        endAt: step?.timeRange?.endAt ?? null,
+        timeless: step ? step?.timeless ?? false : true,
+        stepDurationType: {
+            labels: stepDurationType,
+        },
+        isEnabled: {
+            labels: isEnabled,
+        },
+        isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
+        metaDescription: step?.metaDescription ?? '',
+        customCode: step?.customCode ?? '',
+        questionnaire: {
+            questionnaireId: step?.questionnaire?.id ?? '',
+            title: step?.questionnaire?.title ?? '',
+            description: step?.questionnaire?.description ?? '',
+            questions: step?.questionnaire ? formatQuestions(step.questionnaire) : [],
+            // @ts-ignore I'll fix that next PR, need to start recette
+            questionsWithJumps: step.questionnaire ? step.questionnaire.questionsWithJumps : [],
+        },
+        requirements: keepRequirements ? step.requirements : [],
+        requirementsReason: keepRequirements ? step.requirementsReason : '',
+    };
+};

@@ -24,8 +24,12 @@ const QuestionModal = ({ onSuccess, onClose, isNewQuestion }: Props) => {
             hideOnClickOutside={false}
             onClose={onClose}>
             <ChooseQuestionTypeModal onCancel={onClose} />
-            <CustomizeQuestionModal onCancel={onClose} />
-            <AdditionalParametersModal onSuccess={onSuccess} onCancel={onClose} />
+            <CustomizeQuestionModal onCancel={onClose} isNewQuestion={isNewQuestion} />
+            <AdditionalParametersModal
+                onSuccess={onSuccess}
+                onCancel={onClose}
+                isNewQuestion={isNewQuestion}
+            />
         </MultiStepModal>
     );
 };

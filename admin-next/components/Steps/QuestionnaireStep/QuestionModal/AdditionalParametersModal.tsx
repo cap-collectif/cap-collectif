@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { useIntl } from 'react-intl';
 import {
     MultiStepModal,
@@ -11,22 +11,87 @@ import {
 } from '@cap-collectif/ui';
 import { useFormContext } from 'react-hook-form';
 import { useAppContext } from '@components/AppProvider/App.context';
-import { FieldInput } from '@cap-collectif/form';
+import { FieldInput, FormControl } from '@cap-collectif/form';
+import { multipleChoiceQuestions } from '../utils';
 
 type ChooseQuestionTypeProps = {
     onSuccess: () => void,
     onCancel: () => void,
+    isNewQuestion: boolean,
 };
 
-const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onCancel }) => {
+const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({
+    onSuccess,
+    onCancel,
+    isNewQuestion,
+}) => {
     const intl = useIntl();
     const { viewerSession } = useAppContext();
-    const { hide } = useMultiStepModal();
-    const { watch, control } = useFormContext();
+    const { hide, goToPreviousStep } = useMultiStepModal();
+    const { watch, control, setValue } = useFormContext();
 
     const type = watch(`temporaryQuestion.type`);
+    const validationRule = watch(`temporaryQuestion.validationRule`);
+
+    const hasValidationRule = validationRule?.type?.labels?.[0] !== 'NONE' && validationRule;
 
     const isCollectStep = false; // TODO pass as a prop once integrated on collect step
+
+    const showLimits = ['checkbox', 'ranking'].includes(type);
+    const canSortRandomly = multipleChoiceQuestions.includes(type);
+
+    const choices = [
+        {
+            id: 'MIN',
+            useIdAsValue: true,
+            label: intl.formatMessage({
+                id: 'answer_number.min',
+            }),
+        },
+        {
+            id: 'MAX',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'answer_number.max' }),
+        },
+        {
+            id: 'EQUAL',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'answer_number.precise' }),
+        },
+        {
+            id: 'NONE',
+            useIdAsValue: true,
+            label: intl.formatMessage({ id: 'answer_number.none' }),
+        },
+    ];
+
+    const validationRuleNumber = () => (
+        <FormControl
+            name="temporaryQuestion.validationRule.number"
+            control={control}
+            mt={4}
+            position="relative">
+            <FormLabel
+                htmlFor="temporaryQuestion.validationRule.number"
+                label={intl.formatMessage({
+                    id: 'admin.fields.validation_rule.number',
+                })}
+            />
+            <FieldInput
+                id="temporaryQuestion.validationRule.number"
+                name="temporaryQuestion.validationRule.number"
+                control={control}
+                type="number"
+                step={1}
+                min={1}
+            />
+        </FormControl>
+    );
+
+    useEffect(() => {
+        if (showLimits && !validationRule)
+            setValue('temporaryQuestion.validationRule.type', { labels: ['NONE'] });
+    }, [showLimits]);
 
     return (
         <>
@@ -38,15 +103,17 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onC
             </MultiStepModal.Header>
             <Modal.Body>
                 <FormLabel label={intl.formatMessage({ id: 'global.options' })} mb={1} />
-                <FieldInput
-                    id={`temporaryQuestion.randomQuestionChoices`}
-                    name={`temporaryQuestion.randomQuestionChoices`}
-                    control={control}
-                    type="checkbox">
-                    {intl.formatMessage({
-                        id: 'admin.fields.question.random_question_choices',
-                    })}
-                </FieldInput>
+                {canSortRandomly ? (
+                    <FieldInput
+                        id={`temporaryQuestion.randomQuestionChoices`}
+                        name={`temporaryQuestion.randomQuestionChoices`}
+                        control={control}
+                        type="checkbox">
+                        {intl.formatMessage({
+                            id: 'admin.fields.question.random_question_choices',
+                        })}
+                    </FieldInput>
+                ) : null}
                 <FieldInput
                     id={`temporaryQuestion.required`}
                     name={`temporaryQuestion.required`}
@@ -67,7 +134,7 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onC
                         })}
                     </FieldInput>
                 ) : null}
-                {viewerSession.isAdmin ? (
+                {viewerSession.isSuperAdmin ? (
                     <FieldInput
                         id={`temporaryQuestion.hidden`}
                         name={`temporaryQuestion.hidden`}
@@ -78,6 +145,23 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onC
                         })}
                     </FieldInput>
                 ) : null}
+                {showLimits ? (
+                    <>
+                        <FormLabel
+                            label={intl.formatMessage({ id: 'customize_answer_number' })}
+                            mb={1}
+                            mt={4}
+                        />
+                        <FieldInput
+                            type="radio"
+                            name="temporaryQuestion.validationRule.type"
+                            id="temporaryQuestion.hidden"
+                            control={control}
+                            choices={choices}
+                        />
+                        {hasValidationRule ? validationRuleNumber() : null}
+                    </>
+                ) : null}
             </Modal.Body>
             <Modal.Footer>
                 <Button
@@ -85,22 +169,26 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onC
                     variantColor="primary"
                     variantSize="big"
                     onClick={() => {
-                        onCancel();
-                        hide();
+                        if (isNewQuestion) {
+                            goToPreviousStep();
+                        } else {
+                            if (onCancel) onCancel();
+                            hide();
+                        }
                     }}>
-                    {intl.formatMessage({ id: 'cancel' })}
+                    {intl.formatMessage({ id: isNewQuestion ? 'global.back' : 'cancel' })}
                 </Button>
                 <Button
                     variant="primary"
                     variantColor="primary"
                     variantSize="big"
-                    disabled={!type}
+                    disabled={!type || (hasValidationRule && !validationRule?.number)}
                     onClick={() => {
                         onSuccess();
                         hide();
                     }}
                     rightIcon={CapUIIcon.LongArrowRight}>
-                    {intl.formatMessage({ id: 'global.add' })}
+                    {intl.formatMessage({ id: isNewQuestion ? 'global.add' : 'global.edit' })}
                 </Button>
             </Modal.Footer>
         </>

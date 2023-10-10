@@ -18,6 +18,51 @@ const mutation = graphql`
                     id
                     ...responsesHelper_adminQuestion @relay(mask: false)
                 }
+                questionsWithJumps: questions(filter: JUMPS_ONLY) {
+                    id
+                    title
+                    jumps(orderBy: { field: POSITION, direction: ASC }) {
+                        id
+                        origin {
+                            id
+                            title
+                        }
+                        destination {
+                            id
+                            title
+                            number
+                        }
+                        conditions {
+                            id
+                            operator
+                            question {
+                                id
+                                title
+                                type
+                            }
+                            ... on MultipleChoiceQuestionLogicJumpCondition {
+                                value {
+                                    id
+                                    title
+                                }
+                            }
+                        }
+                    }
+                    # unused for now, will be usefull when we'll add error and warning messages
+                    destinationJumps {
+                        id
+                        origin {
+                            id
+                            title
+                        }
+                    }
+
+                    alwaysJumpDestinationQuestion {
+                        id
+                        title
+                        number
+                    }
+                }
             }
         }
     }

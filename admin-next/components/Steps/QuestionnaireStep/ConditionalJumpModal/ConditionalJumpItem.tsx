@@ -1,13 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import {
-    Box,
-    Button,
-    ButtonQuickAction,
-    CapUIIcon,
-    FormLabel,
-    InputGroup,
-} from '@cap-collectif/ui';
+import { Box, ButtonQuickAction, CapUIIcon, FormLabel, InputGroup } from '@cap-collectif/ui';
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { QuestionIds } from '../utils';
@@ -31,17 +24,22 @@ export const ConditionalJumpItem: React.FC<Props> = ({
     const questions = watch('questionnaire.questions');
     const temporaryJump = watch('temporaryJump');
 
-    const { fields: conditions, append } = useFieldArray({
+    const { fields: conditions } = useFieldArray({
         control,
         name: `${parentFormFieldName}.conditions`,
     });
 
     const selectedQuestionId = watch(`${parentFormFieldName}.conditions.0.question.id`);
+    const currentJump = watch(`${parentFormFieldName}.conditions.0`);
 
     const operators = [
         { label: intl.formatMessage({ id: 'votes.is' }), value: 'IS' },
         { label: intl.formatMessage({ id: 'is-not' }), value: 'IS_NOT' },
     ];
+
+    const usedChoices = temporaryJump.jumps
+        .filter(jump => jump.conditions[0].operator === currentJump.operator)
+        .map(j => j.conditions[0].value?.id);
 
     return (
         <Box bg="gray.100" p={6} borderRadius="accordion" mb={4} position="relative">
@@ -59,7 +57,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
             ) : null}
             {conditions.map((condition, index) => {
                 const formFieldName = `${parentFormFieldName}.conditions.${index}`;
-
+                const val = watch(`${formFieldName}.value.id`);
                 return (
                     <Box key={condition.id}>
                         <FormLabel
@@ -88,11 +86,10 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                                     onChange={val => {
                                         setValue(`${formFieldName}.value.id`, null);
                                         setValue(`${parentFormFieldName}.origin.id`, val);
-
                                         setValue('temporaryJump.id', val);
                                         setValue(
                                             'temporaryJump.title',
-                                            questions.find((q: QuestionIds) => q.id === val).title,
+                                            questions.find((q: QuestionIds) => q.id === val)?.title,
                                         );
                                     }}
                                 />
@@ -108,6 +105,9 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                                     type="select"
                                     disabled={false}
                                     options={operators}
+                                    onChange={() => {
+                                        setValue(`${formFieldName}.value.id`, null);
+                                    }}
                                 />
                             </FormControl>
                             <FormControl
@@ -116,32 +116,26 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                                 minWidth="40%"
                                 maxWidth="40%">
                                 <FieldInput
-                                    key={`key__${selectedQuestionId}`}
+                                    key={`key__${selectedQuestionId}_${currentJump.operator}`}
                                     name={`${formFieldName}.value.id`}
                                     control={control}
                                     type="select"
+                                    disabled={!currentJump.operator}
                                     options={questions
                                         .find((q: QuestionIds) => selectedQuestionId === q.id)
                                         ?.choices?.map((choice: QuestionIds) => ({
                                             label: choice.title,
                                             value: choice.id,
-                                        }))}
+                                        }))
+                                        .filter(
+                                            c => !usedChoices.includes(c.value) || val === c.value,
+                                        )}
                                 />
                             </FormControl>
                         </InputGroup>
                     </Box>
                 );
             })}
-            {selectedQuestionId ? (
-                <Button
-                    mb={6}
-                    variantColor="primary"
-                    variant="tertiary"
-                    leftIcon={CapUIIcon.Add}
-                    onClick={() => append({ question: { id: selectedQuestionId } })}>
-                    {intl.formatMessage({ id: 'add-condition' })}
-                </Button>
-            ) : null}
             <FormControl name={`${parentFormFieldName}.destination.id`} control={control}>
                 <FormLabel
                     htmlFor={`${parentFormFieldName}.destination.id`}

@@ -7,6 +7,7 @@ import {
     Flex,
     FormLabel,
     Text,
+    toast,
 } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -27,7 +28,7 @@ import {
 } from '@components/Requirements/Requirements';
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters';
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab';
-import { formatQuestions, formatQuestionsInput } from './utils';
+import { formatQuestions, formatQuestionsInput, getDefaultValues } from './utils';
 import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation';
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql';
 import CreateQuestionnaireMutation from '@mutations/CreateQuestionnaireMutation';
@@ -37,7 +38,7 @@ type Props = {
     stepId: string,
 };
 
-type FormValues = {
+export type FormValues = {
     stepId: string,
     label: string,
     body: string | null,
@@ -60,7 +61,7 @@ type FormValues = {
         questions: Array<QuestionInput>,
         questionsWithJumps: Array<any>,
     },
-    temporaryQuestion?: any,
+    temporaryQuestion?: QuestionInput | null,
     temporaryJump?: any,
     isUsingModel?: boolean,
     questionnaireModel?: { label: string, value: string },
@@ -201,51 +202,13 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
         return () => setBreadCrumbItems([]);
     }, []);
 
-    const getDefaultValues = (): FormValues => {
-        const stepDurationType = step
-            ? step?.timeless
-                ? [StepDurationTypeEnum.TIMELESS]
-                : [StepDurationTypeEnum.CUSTOM]
-            : [StepDurationTypeEnum.TIMELESS];
-
-        const isEnabled = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT];
-
-        return {
-            stepId,
-            label: step?.label ?? '',
-            body: step?.body ?? '',
-            startAt: step?.timeRange?.startAt ?? null,
-            endAt: step?.timeRange?.endAt ?? null,
-            timeless: step ? step?.timeless ?? false : true,
-            stepDurationType: {
-                labels: stepDurationType,
-            },
-            isEnabled: {
-                labels: isEnabled,
-            },
-            isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
-            metaDescription: step?.metaDescription ?? '',
-            customCode: step?.customCode ?? '',
-            questionnaire: {
-                questionnaireId: step?.questionnaire?.id ?? '',
-                title: step?.questionnaire?.title ?? '',
-                description: step?.questionnaire?.description ?? '',
-                questions: step?.questionnaire ? formatQuestions(step.questionnaire) : [],
-                // @ts-ignore I'll fix that next PR, need to start recette
-                questionsWithJumps: step.questionnaire ? step.questionnaire.questionsWithJumps : [],
-            },
-            requirements: [],
-            requirementsReason: '',
-        };
-    };
-
     const formMethods = useForm<FormValues>({
         mode: 'onChange',
-        defaultValues: getDefaultValues(),
+        defaultValues: getDefaultValues(stepId, step),
         shouldUnregister: false,
     });
 
-    const { handleSubmit, formState, control, watch } = formMethods;
+    const { handleSubmit, formState, control, watch, reset } = formMethods;
     const { isSubmitting, isValid } = formState;
 
     const onSubmit = async ({
@@ -306,12 +269,19 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
 
         return UpdateQuestionnaireStepMutation.commit({ input: stepInput })
             .then(async response => {
-                const adminAlphaUrl =
-                    response.updateQuestionnaireStep?.questionnaireStep?.project?.adminAlphaUrl;
                 try {
                     if (isUsingModel) {
-                        if (adminAlphaUrl) return (window.location.href = adminAlphaUrl);
-                        else return;
+                        toast({
+                            variant: 'success',
+                            content: intl.formatMessage({ id: 'global.changes.saved' }),
+                        });
+                        const newFormValues = {
+                            ...response.updateQuestionnaireStep.questionnaireStep,
+                            requirements: values.requirements,
+                            requirementsReason: values.requirementsReason
+                        }
+                        reset(getDefaultValues(stepId, newFormValues, true));
+                        return;
                     }
                     return UpdateQuestionnaireMutation.commit({
                         input: {
@@ -324,17 +294,33 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                             questions: formatQuestionsInput(mergedArr),
                         },
                     })
-                        .then(() => {
-                            if (adminAlphaUrl) return (window.location.href = adminAlphaUrl);
+                        .then(q => {
+                            toast({
+                                variant: 'success',
+                                content: intl.formatMessage({ id: 'global.changes.saved' }),
+                            });
+                            const newFormValues = {
+                                ...response.updateQuestionnaireStep.questionnaireStep,
+                                requirements: values.requirements,
+                                requirementsReason: values.requirementsReason,
+                                questionnaire: {
+                                    ...q.updateQuestionnaireConfiguration.questionnaire,
+                                },
+                            };
+                            reset(getDefaultValues(stepId, newFormValues, true));
+                            return;
                         })
-                        .catch(() => {
+                        .catch((questionnaireError) => {
+                            console.log(questionnaireError);
                             return mutationErrorToast(intl);
                         });
                 } catch (error) {
+                    console.log(error);
                     return mutationErrorToast(intl);
                 }
             })
-            .catch(() => {
+            .catch(e => {
+                console.log(e);
                 return mutationErrorToast(intl);
             });
     };

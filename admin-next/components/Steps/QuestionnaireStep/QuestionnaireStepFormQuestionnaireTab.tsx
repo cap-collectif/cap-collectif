@@ -98,7 +98,7 @@ const QuestionnaireStepFormQuestionnaire: React.FC = () => {
                             update(questionIndex, {
                                 ...temporaryQuestion,
                                 choices: temporaryQuestion.choices
-                                    ? temporaryQuestion.choice?.map(c => ({
+                                    ? temporaryQuestion.choices?.map(c => ({
                                           ...c,
                                           id: c.id ? c.id : uuid(),
                                       }))
@@ -150,90 +150,96 @@ const QuestionnaireStepFormQuestionnaire: React.FC = () => {
                 // @ts-ignore
                 <DragnDrop onDragEnd={onDragEnd} backgroundColor="red">
                     <DragnDrop.List droppableId="questions">
-                        {questions.map((question, index) => (
-                            <DragnDrop.Item
-                                draggableId={question.id}
-                                index={index}
-                                key={question.id}>
-                                <ListCard.Item
-                                    bg="white"
-                                    borderRadius="normal"
-                                    borderWidth="1px"
-                                    borderColor="gray.200"
-                                    mb={1}
-                                    mt={1}
-                                    py={2}
-                                    sx={{ '.cap-buttonGroup': { opacity: 0 } }}
-                                    _hover={{ '.cap-buttonGroup': { opacity: 1 } }}
-                                    draggable
-                                    width="100%">
-                                    <Flex direction="column">
-                                        <Text color="gray.500" fontSize={1} fontWeight={400}>
-                                            {questionsValues[index].level
-                                                ? intl.formatMessage({
-                                                      id: 'global.question.types.sub-section',
-                                                  })
-                                                : questionsValues[index].type
-                                                ? intl.formatMessage({
-                                                      id: questionTypeToLabel(
-                                                          questionsValues[index].type,
-                                                      ),
-                                                  })
-                                                : null}
-                                        </Text>
-                                        <Text color="blue.900" fontSize={2} fontWeight={600}>
-                                            {questionsValues[index].title}
-                                        </Text>
-                                    </Flex>
-                                    <ButtonGroup>
-                                        <ButtonQuickAction
-                                            variantColor="blue"
-                                            icon={CapUIIcon.Pencil}
-                                            label={intl.formatMessage({
-                                                id: 'global.edit',
-                                            })}
-                                            onClick={() => {
-                                                setValue(
-                                                    'temporaryQuestion',
-                                                    questionsValues[index],
-                                                );
-                                                setQuestionIndex(index);
-                                                if (questionsValues[index].type === 'section') {
-                                                    setIsSubSection(!!questionsValues[index].level);
-                                                    onOpen('section-modal')();
-                                                } else onOpen('question-modal')();
-                                            }}
-                                            type="button"
-                                        />
-                                        <ButtonQuickAction
-                                            onClick={() => {
-                                                remove(index);
-                                                const jumpIndex =
-                                                    questionsWithJumpsValues.findIndex(
-                                                        (q: QuestionIds) =>
-                                                            q.id === questionsValues[index].id,
+                        {questions.map((question, index) => {
+                            const type = questionsValues[index].type;
+                            const isSubSection = questionsValues[index].level;
+                            return (
+                                <DragnDrop.Item
+                                    draggableId={question.id}
+                                    index={index}
+                                    key={question.id}>
+                                    <ListCard.Item
+                                        bg="white"
+                                        borderRadius="normal"
+                                        borderWidth="1px"
+                                        borderColor="gray.200"
+                                        mb={1}
+                                        mt={1}
+                                        py={2}
+                                        pl={isSubSection ? 6 : type === 'section' ? 4 : 8}
+                                        sx={{ '.cap-buttonGroup': { opacity: 0 } }}
+                                        _hover={{ '.cap-buttonGroup': { opacity: 1 } }}
+                                        draggable
+                                        width="100%">
+                                        <Flex direction="column">
+                                            <Text color="gray.500" fontSize={1} fontWeight={400}>
+                                                {isSubSection
+                                                    ? intl.formatMessage({
+                                                          id: 'global.question.types.sub-section',
+                                                      })
+                                                    : type
+                                                    ? intl.formatMessage({
+                                                          id: questionTypeToLabel(type),
+                                                      })
+                                                    : null}
+                                            </Text>
+                                            <Text color="blue.900" fontSize={2} fontWeight={600}>
+                                                {questionsValues[index].title}
+                                            </Text>
+                                        </Flex>
+                                        <ButtonGroup>
+                                            <ButtonQuickAction
+                                                variantColor="blue"
+                                                icon={CapUIIcon.Pencil}
+                                                label={intl.formatMessage({
+                                                    id: 'global.edit',
+                                                })}
+                                                onClick={() => {
+                                                    setValue(
+                                                        'temporaryQuestion',
+                                                        questionsValues[index],
                                                     );
-                                                if (jumpIndex !== -1)
-                                                    dispatchEvent('removeJump', {
-                                                        index: jumpIndex,
-                                                    });
-                                            }}
-                                            variantColor="red"
-                                            icon={CapUIIcon.Trash}
-                                            label={intl.formatMessage({
-                                                id: 'global.delete',
-                                            })}
-                                            type="button"
-                                        />
-                                    </ButtonGroup>
-                                </ListCard.Item>
-                            </DragnDrop.Item>
-                        ))}
+                                                    setQuestionIndex(index);
+                                                    if (type === 'section') {
+                                                        setIsSubSection(
+                                                            !!questionsValues[index].level,
+                                                        );
+                                                        onOpen('section-modal')();
+                                                    } else onOpen('question-modal')();
+                                                }}
+                                                type="button"
+                                            />
+                                            <ButtonQuickAction
+                                                onClick={() => {
+                                                    remove(index);
+                                                    const jumpIndex =
+                                                        questionsWithJumpsValues.findIndex(
+                                                            (q: QuestionIds) =>
+                                                                q.id === questionsValues[index].id,
+                                                        );
+                                                    if (jumpIndex !== -1)
+                                                        dispatchEvent('removeJump', {
+                                                            index: jumpIndex,
+                                                        });
+                                                }}
+                                                variantColor="red"
+                                                icon={CapUIIcon.Trash}
+                                                label={intl.formatMessage({
+                                                    id: 'global.delete',
+                                                })}
+                                                type="button"
+                                            />
+                                        </ButtonGroup>
+                                    </ListCard.Item>
+                                </DragnDrop.Item>
+                            );
+                        })}
                     </DragnDrop.List>
                 </DragnDrop>
             ) : null}
             <Box mt={4}>
                 <Menu
+                    placement="bottom-start"
                     closeOnSelect={false}
                     disclosure={
                         <Button

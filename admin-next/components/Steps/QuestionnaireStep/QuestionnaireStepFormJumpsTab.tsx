@@ -163,6 +163,7 @@ const QuestionnaireStepFormJumpsTab: React.FC = () => {
                 : null}
             <Box mt={4}>
                 <Menu
+                    placement='bottom-start'
                     closeOnSelect={false}
                     disclosure={
                         <Button

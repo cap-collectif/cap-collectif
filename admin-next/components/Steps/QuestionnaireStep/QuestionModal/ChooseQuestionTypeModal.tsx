@@ -22,7 +22,9 @@ const ChooseQuestionTypeModal: FC<ChooseQuestionTypeProps> = ({ onCancel }) => {
     const { hide, goToNextStep } = useMultiStepModal();
     const { watch, setValue } = useFormContext();
 
-    const type = watch(`temporaryQuestion.type`);
+    const temporaryQuestion = watch(`temporaryQuestion`);
+
+    const type = temporaryQuestion?.type;
 
     const questionCategories: Array<QuestionCategory> = [
         'TEXT',
@@ -54,10 +56,12 @@ const ChooseQuestionTypeModal: FC<ChooseQuestionTypeProps> = ({ onCancel }) => {
                                     variant={type === value.type ? 'primary' : 'secondary'}
                                     variantColor="hierarchy"
                                     onClick={() => {
-                                        setValue(
-                                            `temporaryQuestion.type`,
-                                            value.type === type ? '' : value.type,
-                                        );
+                                        setValue('temporaryQuestion', {
+                                            type: value.type === type ? '' : value.type,
+                                            title: temporaryQuestion?.title,
+                                            description: temporaryQuestion?.description,
+                                            helpText: temporaryQuestion?.helpText,
+                                        });
                                     }}>
                                     {intl.formatMessage({ id: value.label })}
                                 </Button>

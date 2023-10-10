@@ -17,11 +17,11 @@ import NumberRange from './NumberRange';
 import SetButtonsChoices from './SetButtonsChoices';
 import SetComplexChoices from './SetComplexChoices';
 
-type CustomizeQuestionProps = { onCancel?: () => void };
+type CustomizeQuestionProps = { onCancel?: () => void, isNewQuestion: boolean };
 
-const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel }) => {
+const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQuestion }) => {
     const intl = useIntl();
-    const { hide, goToNextStep } = useMultiStepModal();
+    const { hide, goToNextStep, goToPreviousStep } = useMultiStepModal();
     const { control, watch } = useFormContext();
     const type = watch(`temporaryQuestion.type`);
     const title = watch(`temporaryQuestion.title`);
@@ -91,10 +91,14 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel }) => {
                     variantColor="primary"
                     variantSize="big"
                     onClick={() => {
-                        if (onCancel) onCancel();
-                        hide();
+                        if (isNewQuestion) {
+                            goToPreviousStep();
+                        } else {
+                            if (onCancel) onCancel();
+                            hide();
+                        }
                     }}>
-                    {intl.formatMessage({ id: 'cancel' })}
+                    {intl.formatMessage({ id: isNewQuestion ? 'global.back' : 'cancel' })}
                 </Button>
                 <Button
                     variant="primary"
