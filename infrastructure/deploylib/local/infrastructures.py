@@ -39,6 +39,6 @@ def stop(ctx, mode='symfony_bin'):
 
 
 @task
-def up(ctx, force_recreate='false', no_cache='false', mode='symfony_bin'):
+def up(ctx, force_recreate='false', no_cache='false', mode='symfony_bin', build_at_up=False):
     environments.local()
-    infrastructures.up(force_recreate, no_cache, mode)
+    infrastructures.up(force_recreate, no_cache, mode, build_at_up)

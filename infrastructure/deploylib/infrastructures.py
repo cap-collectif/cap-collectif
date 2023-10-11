@@ -13,12 +13,12 @@ def build(use_cache='true'):
     "Build services for infrastructure"
     ensure_vm_is_up()
     compose('build' + ('', '  --no-cache')[use_cache == 'false'])
+    compose('pull')
 
-
-def up(force_recreate='false', no_cache='false', mode='symfony_bin'):
+def up(force_recreate='false', no_cache='false', mode='symfony_bin', build_at_up=False):
     """Ensure infrastructure is sync and running"""
     ensure_vm_is_up()
-    if Config.build_at_up:
+    if build_at_up:
         compose('build' + ('', '  --no-cache')[no_cache == 'true'])
     compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
     if _platform == 'darwin' and mode == 'symfony_bin':

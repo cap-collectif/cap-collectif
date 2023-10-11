@@ -55,22 +55,19 @@ e2e:
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
     sso:
       paths: ['%paths.base%/features/sso', '%paths.base%/features/front/sso']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bp-config
       filters:
         tags: '@sso&&~@randomly-failing'
     consultation:
       paths: ['%paths.base%/features/front']
-      contexts:
-        - Capco\AppBundle\Behat\ApplicationContext
-        - Capco\AppBundle\Behat\RabbitMQContext
-        - Capco\AppBundle\Behat\NavigationContext
-        - Capco\AppBundle\Behat\MailCatcherContext
+      contexts: *bp-config
       filters:
         tags: '@consultation&&~@randomly-failing'
+    consultation-arguments:
+      paths: ['%paths.base%/features/front']
+      contexts: *bp-config
+      filters:
+        tags: '@consultation-arguments'
     bp:
       paths: ['%paths.base%/features/front/bp']
       contexts: *bp-config
@@ -100,8 +97,18 @@ e2e:
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
-    bo-project:
-      paths: ['%paths.base%/features/back/project']
+    bo-project-alpha-and-event:
+      paths: ['%paths.base%/features/back/project/AlphaAndEvent']
+      contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
+    bo-project-consultation-and-project:
+      paths: ['%paths.base%/features/back/project/ConsultationAndProject']
+      contexts: *bo-config
+      filters:
+        tags: '~@randomly-failing'
+    bo-project-proposal-form-and-questionnaire:
+      paths: ['%paths.base%/features/back/project/ProposalFormAndQuestionnaire']
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
@@ -115,11 +122,6 @@ e2e:
           '%paths.base%/features/back/section',
           '%paths.base%/features/back/group',
         ]
-      contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
-    bo-user:
-      paths: ['%paths.base%/features/back/user']
       contexts: *bo-config
       filters:
         tags: '~@randomly-failing'
@@ -140,8 +142,13 @@ e2e:
       contexts: *bp-config
       filters:
         tags: '@export&&~@randomly-failing'
-    core-user:
-      paths: ['%paths.base%/features/front/user']
+    core-user-split-1:
+      paths: ['%paths.base%/features/front/user/split1']
+      contexts: *core-config
+      filters:
+        tags: '@core&&~@event_registration&&~@randomly-failing'
+    core-user-split-2:
+      paths: ['%paths.base%/features/front/user/split2']
       contexts: *core-config
       filters:
         tags: '@core&&~@event_registration&&~@randomly-failing'
@@ -186,7 +193,19 @@ commands:
             wd_host: http://selenium:4444/wd/hub
   suites:
     commands:
-      paths: ['%paths.base%/features/commands']
+      paths: ['%paths.base%/features/commands/commands']
+      filters:
+        tags: '~@randomly-failing'
+      contexts:
+        - Capco\AppBundle\Behat\ApplicationContext
+        - Capco\AppBundle\Behat\ExportContext
+        - Capco\AppBundle\Behat\CommandContext
+        - Capco\AppBundle\Behat\GraphQLContext
+        - Capco\AppBundle\Behat\RabbitMQContext
+        - Capco\AppBundle\Behat\MailCatcherContext
+        - Capco\AppBundle\Behat\FileSystemContext
+    consumers:
+      paths: ['%paths.base%/features/commands/consumers']
       filters:
         tags: '~@randomly-failing'
       contexts:
@@ -233,16 +252,39 @@ api:
         - Capco\AppBundle\Behat\ApiContext
         - Capco\AppBundle\Behat\RabbitMQContext
         - Capco\AppBundle\Behat\MailCatcherContext
-    graphql-mutation-user:
-      paths: ['%paths.base%/features/graphql/mutation']
+
+    # E2E GRAPHQL MUTATION
+    #==== Front ====#
+    graphql-mutation-front-user-add:
+      paths: ['%paths.base%/features/graphql/mutation/front/add']
       contexts: *graphql-config
-      filters:
-        tags: '~@admin'
-    graphql-mutation-admin:
-      paths: ['%paths.base%/features/graphql/mutation']
+    graphql-mutation-front-user-change-remove-delete:
+      paths: ['%paths.base%/features/graphql/mutation/front/change','%paths.base%/features/graphql/mutation/front/remove', '%paths.base%/features/graphql/mutation/front/delete']
       contexts: *graphql-config
-      filters:
-        tags: '@admin'
+    graphql-mutation-front-user-update:
+      paths: ['%paths.base%/features/graphql/mutation/front/update']
+      contexts: *graphql-config
+    graphql-mutation-front-user-other:
+      paths: ['%paths.base%/features/graphql/mutation/front/other']
+      contexts: *graphql-config
+
+    #==== Admin ====#
+    graphql-mutation-admin-user-add:
+      paths: ['%paths.base%/features/graphql/mutation/admin/add']
+      contexts: *graphql-config
+    graphql-mutation-admin-user-change:
+      paths: ['%paths.base%/features/graphql/mutation/admin/change']
+      contexts: *graphql-config
+    graphql-mutation-admin-user-create:
+      paths: ['%paths.base%/features/graphql/mutation/admin/create']
+      contexts: *graphql-config
+    graphql-mutation-admin-user-update:
+      paths: ['%paths.base%/features/graphql/mutation/admin/update']
+      contexts: *graphql-config
+    graphql-mutation-admin-user-other:
+      paths: ['%paths.base%/features/graphql/mutation/admin/other']
+      contexts: *graphql-config
+
     graphql-query:
       paths: ['%paths.base%/features/graphql/query']
       contexts: *graphql-config
