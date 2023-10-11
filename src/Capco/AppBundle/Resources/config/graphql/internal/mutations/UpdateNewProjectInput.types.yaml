@@ -76,3 +76,6 @@ UpdateNewProjectInput:
             address:
                 type: 'String'
                 description: 'The project address, geocoded by google'
+            customCode:
+                type: 'String'
+                description: 'Custom code that will be applied to every steps.'

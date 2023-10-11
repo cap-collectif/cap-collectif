@@ -55,6 +55,7 @@ const UpdateNewProjectMutation = /* GraphQL */ `
         opinionCanBeFollowed
         isExternal
         externalLink
+        customCode
       }
     }
   }
@@ -96,7 +97,8 @@ const input = {
   ],
   "opinionCanBeFollowed": true,
   "locale": null,
-  "archived": true
+  "archived": true,
+  "customCode": "custom code"
 }
 
 describe('Internal|UpdateNewProject mutation', () => {

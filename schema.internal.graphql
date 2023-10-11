@@ -10265,6 +10265,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """The project description."""
   description: String
+
+  """Custom code that will be applied to every steps."""
+  customCode: String
 }
 
 """A project abstract step."""
@@ -17175,6 +17178,9 @@ input UpdateNewProjectInput {
 
   """The project address, geocoded by google"""
   address: String
+
+  """Custom code that will be applied to every steps."""
+  customCode: String
   clientMutationId: String
 }
 

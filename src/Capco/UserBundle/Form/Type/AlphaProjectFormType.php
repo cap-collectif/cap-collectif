@@ -90,6 +90,7 @@ class AlphaProjectFormType extends AbstractType
             ->add('opinionCanBeFollowed')
             ->add('archived', CheckboxType::class)
             ->add('address', TextType::class)
+            ->add('customCode', TextType::class)
         ;
 
         $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));

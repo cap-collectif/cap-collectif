@@ -276,3 +276,6 @@ InternalProject:
                 type: 'String'
                 description: 'The project description.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDescriptionResolver", [value, getUser()])'
+            customCode:
+                type: 'String'
+                description: 'Custom code that will be applied to every steps.'

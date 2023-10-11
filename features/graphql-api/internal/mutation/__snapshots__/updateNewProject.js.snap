@@ -24,6 +24,7 @@ Object {
         },
       ],
       "cover": null,
+      "customCode": "custom code",
       "description": "Project Description",
       "districts": Object {
         "edges": Array [
@@ -132,6 +133,7 @@ Object {
         },
       ],
       "cover": null,
+      "customCode": "custom code",
       "description": null,
       "districts": Object {
         "edges": Array [
