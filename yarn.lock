@@ -3139,17 +3139,17 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/form@^0.5.6":
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.5.6.tgz#71de8a91ea521371115879fd2350dc4a7f0def1f"
-  integrity sha512-NzYQc+pKnIBFi1NiEp9if42Os9sdQVmd4mx5xMH0hWVRwJqrKGhQzf9R/QYxmlEtJaFeqCgrXtU+uM1e7esjJA==
+"@cap-collectif/form@^0.5.7":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.5.7.tgz#d87a7c045f15cb2ef8565b7b4d7a762bd29f62ec"
+  integrity sha512-7b83TfuipbO5dZL+SCsR/uAsmukzgIKEyk2Ux+VmMl78LLs0hNeqYVoIZSJiPFzKOk/5ODdroi9JzAT4TODKHA==
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.8.2":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.8.2.tgz#880b4bf90e52ef0d7312b407818a7ad04a520b29"
-  integrity sha512-7bo57biZ9e426Ky6X5Kdlh4EmVNGDRXGkv2q01hSwH52n1MoOzQBR+xICSrxtFbIWFyMZVlkwOSvNxDHj5jJtQ==
+"@cap-collectif/ui@^1.8.3":
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.8.3.tgz#e781e43c0f102db48a3f97605cf9a86d7bb191b1"
+  integrity sha512-nx2rdGa+UTAIRvr5tjFsqihRV7MEkwY9kib1HBpUnxHvSaWLQZuxB/ozlc6zrLrN+OukkodFfsRwNAYzaBti5w==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
