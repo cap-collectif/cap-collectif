@@ -111,10 +111,12 @@ export const createQueryVariables = (
   count: PROJECT_ADMIN_PROPOSAL_PAGINATION,
   proposalRevisionsEnabled,
   cursor: null,
-  orderBy: [{
-    field: getSortField(parameters.sort),
-    direction: getSortType(parameters.sort),
-  }],
+  orderBy: [
+    {
+      field: getSortField(parameters.sort),
+      direction: getSortType(parameters.sort),
+    },
+  ],
   state: parameters.filters.state,
   category: parameters.filters.category === 'ALL' ? null : parameters.filters.category,
   district: parameters.filters.district === 'ALL' ? null : parameters.filters.district,
@@ -234,14 +236,14 @@ const ProjectAdminProposalsPage = ({
     queryVariablesWithParameters,
   );
 
-  const { props: data, error, retry }: PropsQuery = useQuery(
-    queryProposals,
-    queryVariablesWithParameters,
-    {
-      fetchPolicy: 'store-or-network',
-      skip: !hasFilters,
-    },
-  );
+  const {
+    props: data,
+    error,
+    retry,
+  }: PropsQuery = useQuery(queryProposals, queryVariablesWithParameters, {
+    fetchPolicy: 'store-or-network',
+    skip: !hasFilters,
+  });
 
   return (
     <Skeleton
@@ -273,24 +275,21 @@ export default createFragmentContainer(
   {
     query: graphql`
       fragment ProjectAdminProposalsPage_query on Query
-        @argumentDefinitions(
-          projectId: { type: "ID!" }
-          viewerIsAdmin: { type: "Boolean!" }
-          count: { type: "Int!" }
-          proposalRevisionsEnabled: { type: "Boolean!" }
-          cursor: { type: "String" }
-          orderBy: {
-            type: "ProposalOrder!"
-            defaultValue: { field: PUBLISHED_AT, direction: DESC }
-          }
-          state: { type: "ProposalsState!", defaultValue: ALL }
-          category: { type: "ID", defaultValue: null }
-          district: { type: "ID", defaultValue: null }
-          theme: { type: "ID", defaultValue: null }
-          status: { type: "ID", defaultValue: null }
-          step: { type: "ID", defaultValue: null }
-          term: { type: "String", defaultValue: null }
-        ) {
+      @argumentDefinitions(
+        projectId: { type: "ID!" }
+        viewerIsAdmin: { type: "Boolean!" }
+        count: { type: "Int!" }
+        proposalRevisionsEnabled: { type: "Boolean!" }
+        cursor: { type: "String" }
+        orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+        state: { type: "ProposalsState!", defaultValue: ALL }
+        category: { type: "ID", defaultValue: null }
+        district: { type: "ID", defaultValue: null }
+        theme: { type: "ID", defaultValue: null }
+        status: { type: "ID", defaultValue: null }
+        step: { type: "ID", defaultValue: null }
+        term: { type: "String", defaultValue: null }
+      ) {
         project: node(id: $projectId) {
           id
           ...ProjectAdminProposals_project

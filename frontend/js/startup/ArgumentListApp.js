@@ -6,18 +6,22 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import type { ArgumentListAppQueryResponse } from '~relay/ArgumentListAppQuery.graphql';
 import Loader from '../components/Ui/FeedbacksIndicators/Loader';
 
-const ArgumentListProfile = lazy(() =>
-  import(/* webpackChunkName: "ArgumentListProfile" */ '~/components/Argument/ArgumentListProfile'),
+const ArgumentListProfile = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ArgumentListProfile" */ '~/components/Argument/ArgumentListProfile'
+    ),
 );
-const DebateArgumentListProfile = lazy(() =>
-  import(
-    /* webpackChunkName: "DebateArgumentListProfile" */ '~/components/Argument/DebateArgumentListProfile'
-  ),
+const DebateArgumentListProfile = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "DebateArgumentListProfile" */ '~/components/Argument/DebateArgumentListProfile'
+    ),
 );
 
 export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <QueryRenderer
         variables={{ userId, count: 5, isAuthenticated }}
         environment={environment}

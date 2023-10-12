@@ -85,7 +85,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
           src={user.media.url}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
-          style={{ width: mediaSize, height: mediaSize }}
+          style={{ width: mediaSize, height: mediaSize, minWidth: mediaSize }}
         />
       );
     }
@@ -96,7 +96,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
           src={defaultAvatar}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
-          style={{ width: mediaSize, height: mediaSize }}
+          style={{ width: mediaSize, height: mediaSize, minWidth: mediaSize }}
         />
       );
     }

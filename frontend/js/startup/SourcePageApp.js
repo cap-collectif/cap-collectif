@@ -10,7 +10,7 @@ const SourcePage = lazy(() =>
 
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <SourcePage {...props} />
     </Providers>
   </Suspense>

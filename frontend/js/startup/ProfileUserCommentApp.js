@@ -15,7 +15,7 @@ const UserCommentsPaginated = lazy(() =>
 
 export default ({ userId, isAuthenticated }: { userId: string, isAuthenticated: boolean }) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <QueryRenderer
         variables={{
           userId,
