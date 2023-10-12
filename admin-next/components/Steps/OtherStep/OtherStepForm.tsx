@@ -4,7 +4,7 @@ import {graphql, useLazyLoadQuery} from "react-relay";
 import {OtherStepFormQuery} from "@relay/OtherStepFormQuery.graphql";
 import {useNavBarContext} from "@components/NavBar/NavBar.context";
 import {FormProvider, useForm} from "react-hook-form";
-import {Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text} from "@cap-collectif/ui";
+import {Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text, toast} from "@cap-collectif/ui";
 import {FieldInput, FormControl} from "@cap-collectif/form";
 import TextEditor from "@components/Form/TextEditor/TextEditor";
 import withPageAuthRequired from "@utils/withPageAuthRequired";
@@ -142,7 +142,10 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
             if (!response.updateOtherStep) {
                 return mutationErrorToast(intl);
             }
-            window.location.href = project.adminAlphaUrl ?? '';
+            toast({
+                variant: 'success',
+                content: intl.formatMessage({ id: 'global.saved' }),
+            })
         } catch (error) {
             return mutationErrorToast(intl);
         }

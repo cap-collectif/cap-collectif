@@ -11,6 +11,7 @@ import {
     CapUIIcon,
     Switch,
     Input,
+    toast,
 } from '@cap-collectif/ui';
 import {useIntl} from "react-intl";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
@@ -202,7 +203,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
     });
 
     const {handleSubmit, formState, control, watch, setValue, register} = formMethods;
-    const {isSubmitting, isValid} = formState;
+    const {isSubmitting} = formState;
 
     const {fields: articles, append} = useFieldArray({
         control,
@@ -228,11 +229,11 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
         };
 
         try {
-            const response = await UpdateDebateStepMutation.commit({input});
-            const adminAlphaUrl = response.updateDebateStep?.debateStep?.project?.adminAlphaUrl;
-            if (adminAlphaUrl) {
-                return window.location.href = adminAlphaUrl
-            }
+            await UpdateDebateStepMutation.commit({input});
+            toast({
+                variant: 'success',
+                content: intl.formatMessage({ id: 'global.saved' }),
+            })
         } catch (error) {
             return mutationErrorToast(intl);
         }
@@ -509,7 +510,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
                 </FormControl>
                 <Flex mt={6}>
                     <Button variantSize="big" variant="primary" type="submit"
-                            mr={4} isLoading={isSubmitting} disabled={!isValid}
+                            mr={4} isLoading={isSubmitting}
                     >
                         {isEditing ? intl.formatMessage({id: 'global.save'}) : intl.formatMessage({id: 'add-the-step'})}
                     </Button>

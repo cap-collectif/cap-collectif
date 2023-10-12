@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { Flex, Icon, CapUIIcon, CapUIIconSize, Tag, Text } from '@cap-collectif/ui';
 import { ForOrAgainstValue } from '@relay/FaceToFace_debate.graphql';
+import {SystemStyleObject} from "@styled-system/css";
 
 type Props = {
     type: ForOrAgainstValue;
@@ -21,8 +22,8 @@ const DebateEmptyOpinion = ({ type }: Props) => {
             position="relative">
             <Tag
                 variantColor={type === 'FOR' ? 'green' : 'red'}
-                css={{
-                    position: 'absolute !important',
+                sx={{
+                    position: 'absolute !important' as SystemStyleObject,
                 }}
                 top="0"
                 left="0"
