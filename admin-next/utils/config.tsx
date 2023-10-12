@@ -8,7 +8,7 @@ export const getBaseUrl = () =>
     }`;
 
 const isDev = () =>
-    getBaseUrl() === 'https://capco.dev' || getBaseUrl() === 'https://admin-next.capco.dev:3001';
+    getBaseUrl() === 'https://capco.dev';
 
 // This may not be up to date in admin-next
 export const baseUrl = getBaseUrl();
@@ -26,9 +26,6 @@ export const getBaseUrlWithAdminNextSupport = () => {
 };
 
 export const getAdminNextUrl = () => {
-    if (isDev()) {
-        return 'https://admin-next.capco.dev:3001';
-    }
     return `${getBaseUrl()}/admin-next`;
 };
 

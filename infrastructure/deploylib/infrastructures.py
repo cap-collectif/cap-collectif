@@ -21,17 +21,17 @@ def up(force_recreate='false', no_cache='false', mode='symfony_bin', build_at_up
     if build_at_up:
         compose('build' + ('', '  --no-cache')[no_cache == 'true'])
     compose('up --remove-orphans -d' + ('', ' --force-recreate')[force_recreate == 'true'])
-    if _platform == 'darwin' and mode == 'symfony_bin':
-        run('symfony local:proxy:start')
-        run('symfony local:server:start --daemon')
-        print(color_cyan + 'Some browsers (e.g. Chrome) require to re-apply proxy settings (clicking on "Re-apply settings" button on the "chrome://net-internals/#proxy" page) or a full restart after starting the proxy. Otherwise, you ll see a "This webpage is not available" error (ERR_NAME_NOT_RESOLVED).' + color_white)
+#     if _platform == 'darwin' and mode == 'symfony_bin':
+#         run('symfony local:proxy:start')
+#         run('symfony local:server:start --daemon')
+#         print(color_cyan + 'Some browsers (e.g. Chrome) require to re-apply proxy settings (clicking on "Re-apply settings" button on the "chrome://net-internals/#proxy" page) or a full restart after starting the proxy. Otherwise, you ll see a "This webpage is not available" error (ERR_NAME_NOT_RESOLVED).' + color_white)
 
 
 def stop(mode='symfony_bin'):
     """Stop the infrastructure"""
-    if _platform == 'darwin' and mode == 'symfony_bin':
-        run('symfony local:server:stop')
-        run('symfony local:proxy:stop')
+#     if _platform == 'darwin' and mode == 'symfony_bin':
+#         run('symfony local:server:stop')
+#         run('symfony local:proxy:stop')
     compose('stop')
 
 

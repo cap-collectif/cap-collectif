@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start-ssl-proxy": "local-ssl-proxy --source 3001 --target 3000 --hostname admin-next.capco.dev --cert ../infrastructure/services/local/nginx/ssl/capco.crt --key ../infrastructure/services/local/nginx/ssl/capco.key",
-    "dev": "SYMFONY_REDIS_PREFIX=dev next dev -H admin-next.capco.dev -p 3000",
+    "dev": "SYMFONY_REDIS_PREFIX=dev next dev -p 3000",
     "build": "next build",
     "start": "next start -p ${ADMIN_NEXT_PORT:=3000}",
     "local-build-and-serve": "SYMFONY_ENV=test next build && SYMFONY_ENV=test next start -p ${ADMIN_NEXT_PORT:=3000}",

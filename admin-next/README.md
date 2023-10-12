@@ -5,29 +5,9 @@ This is our [Next.js](https://nextjs.org/) implementation for our new administra
 
 ### Requirements
 
-First, make sure your `/etc/host` contains:
-
-```
-127.0.0.1 admin-next.capco.dev
-```
-
-Then check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis to access the user's session.
+Check all docker containers are running (`fab local.infrastructures.up`), because `admin-next` is using Redis to access the user's session.
 
 ### Daily commands
-
-Start the development Admin Next SSL proxy (you will need to keep it running, it adds HTTPS support):
-
-```bash
-yarn start-ssl-proxy
-```
-
-Then in an other tab you can start the NextJS development server:
-
-```bash
-yarn dev
-```
-
-Open [https://admin-next.capco.dev:3001/](https://admin-next.capco.dev:3001/) with your browser to see the result.
 
 The `pages/*` directory is mapped to `/*` with auto reloading. 
 

@@ -8,6 +8,7 @@ services:
       - seleniumhub:selenium
       - mailcatcher:mailcatchersmtp
       - cerebro:cerebro
+      - admin-next
     environment:
       DOCKER_GID: 100
       BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
@@ -19,6 +20,7 @@ services:
       SYMFONY_INSTANCE_NAME: dev
       SYMFONY_REDIS_PREFIX: dev
       PHP_XDEBUG_ENABLED: 0
+    hostname: capco.dev
     volumes:
       - ../../:/var/www
       - /tmp:/tmp
@@ -26,6 +28,23 @@ services:
       - /usr/local/bin/docker:/usr/bin/docker
       - /etc/localtime:/etc/localtime:ro
       - php_sf_cache:/var/www/var/cache
+
+  admin-next:
+    container_name: capco_admin_next_1
+    image: "node:16"
+    user: "node"
+    working_dir: /var/www/admin-next
+    links:
+      - redis:redis
+    environment:
+      - NODE_ENV=development
+      - SYMFONY_ENV=dev
+      - SYMFONY_REDIS_HOST=redis
+    volumes:
+      - ../../:/var/www
+    ports:
+      - '3000:3000'
+    command: ./run.sh
 
   database:
     ports:

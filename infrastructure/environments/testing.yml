@@ -1,5 +1,6 @@
 services:
   application:
+    hostname: capco.test
     environment:
       DOCKER_GID: 998
       BLACKFIRE_LOG_LEVEL: 1
@@ -52,6 +53,8 @@ services:
       SYMFONY_OPENID_TEST_PASSWORD: ${SYMFONY_OPENID_TEST_PASSWORD}
       SYMFONY_MAGICLINKS_DURATION_IN_DAYS: ${SYMFONY_MAGICLINKS_DURATION_IN_DAYS}
 
+    extra_hosts:
+      - "admin-next:127.0.0.1"
     volumes:
       - ../../:/var/www
       - /etc/localtime:/etc/localtime:ro

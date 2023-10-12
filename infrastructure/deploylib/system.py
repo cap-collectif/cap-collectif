@@ -90,7 +90,6 @@ def configure_vhosts(mode='symfony_bin'):
         'cerebro.cap.co',
     ]
     localhost_domains = [
-        'admin-next.capco.dev'
     ]
     if _platform == 'darwin' and mode == "symfony_bin":
         domains.remove('capco.dev')

@@ -17,6 +17,4 @@ if [[ -n "$CI" ]]; then
     else
         exec sleep 10
     fi
-#else
-#    exec pm2 start --no-daemon yarn --name "admin-next" --interpreter bash -- local-build-and-serve
 fi

@@ -54,8 +54,7 @@ class Fetcher {
   graphql(body: Object) {
     return fetch(config.getGraphqlUrl(), {
       method: 'POST',
-      // For `admin-next.capco.dev` we need to include cookies even if not on the same origin.
-      credentials: config.isDev ? 'include' : 'same-origin',
+      credentials: 'same-origin',
       headers: createHeaders(),
       body: JSON.stringify(body),
     })

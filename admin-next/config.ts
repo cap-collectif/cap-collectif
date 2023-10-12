@@ -2,17 +2,20 @@ import { SymfonyEnv } from './types';
 
 // We need to know if we are in dev or production.
 export const getEnv = (): SymfonyEnv => {
-    const env =
-        (process.env.NEXT_PUBLIC_SYMFONY_ENV as SymfonyEnv || process.env.SYMFONY_ENV as SymfonyEnv) || (process.env.SYMFONY_REDIS_HOST === 'redis' ? 'test'as SymfonyEnv : 'dev'as SymfonyEnv);
+    const symfonyEnv = (process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV);
+    const isTestEnv = process.env.SYMFONY_REDIS_HOST === 'redis';
 
-    return env;
+    if (symfonyEnv) return symfonyEnv as SymfonyEnv;
+    if (isTestEnv) return 'test'
+
+    return 'dev';
 };
 
 export const __isDev__ = getEnv() === 'dev';
 
 export const __isTest__ = getEnv() === 'test';
 
-export const BASE_PATH = process.env.PRODUCTION ? '/admin-next' : '';
+export const BASE_PATH = '/admin-next';
 
 export const getBaseUrl = (): string => {
 
