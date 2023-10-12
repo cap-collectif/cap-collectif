@@ -1,0 +1,7 @@
+UpdateConsultationStepPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            consultationStep:
+                type: 'InternalConsultationStep!'
+                description: 'The updated step.'

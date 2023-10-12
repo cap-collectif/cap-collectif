@@ -2820,7 +2820,7 @@ type Consultation implements Node {
   descriptionHelpText: String
 
   """The associated consultation step in which belongs this consultation"""
-  step: ConsultationStep!
+  step: ConsultationStep
 
   """Retrieves all the contributions of the current consultation."""
   contributions(
@@ -2858,6 +2858,26 @@ type ConsultationEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+input ConsultationInput {
+  """The consultation id."""
+  id: ID
+
+  """The consultation title."""
+  title: String!
+
+  """The consultation description."""
+  description: String
+
+  """The consultation sections."""
+  sections: [OpinionTypeInput!]!
+
+  """The consultation position."""
+  position: Int!
+
+  """The consultation illustration."""
+  illustration: ID
 }
 
 """A consultation step"""
@@ -3558,6 +3578,21 @@ type CreateOpinionPayload {
 
   """available errors if mutation fails"""
   errorCode: CreateOpinionErrorCode
+  clientMutationId: String
+}
+
+input CreateOrUpdateConsultationInput {
+  """List of consultations to create or update."""
+  consultations: [ConsultationInput]!
+
+  """If given determines if the consultations should be edited or copied"""
+  stepId: ID
+  clientMutationId: String
+}
+
+type CreateOrUpdateConsultationPayload {
+  """List of created or updated consultations."""
+  consultations: [Consultation]!
   clientMutationId: String
 }
 
@@ -8209,6 +8244,8 @@ type Mutation {
   updateSelectionStep(input: UpdateSelectionStepInput!): UpdateSelectionStepPayload
   updateNewProject(input: UpdateNewProjectInput!): UpdateNewProjectPayload
   updateLocale(input: UpdateLocaleInput!): UpdateLocalePayload
+  updateConsultationStep(input: UpdateConsultationStepInput!): UpdateConsultationStepPayload
+  createOrUpdateConsultation(input: CreateOrUpdateConsultationInput!): CreateOrUpdateConsultationPayload
 }
 
 """A connection to a list of items."""
@@ -8631,6 +8668,45 @@ enum OpinionOrderField {
 
   """Allows ordering a list of opinions by the number of comments it have."""
   COMMENTS
+}
+
+"""An OpinionType"""
+input OpinionTypeInput {
+  """If editing the corresponding id."""
+  id: ID
+
+  """The section title."""
+  title: String!
+
+  """The section description."""
+  description: String
+
+  """The section subtitle."""
+  subtitle: String
+
+  """Wether or not the section is contribuable."""
+  contribuable: Boolean
+
+  """Wether or not the section is sourceable."""
+  sourceable: Boolean
+
+  """Wether or not the section is versionable."""
+  versionable: Boolean
+
+  """The default section order."""
+  defaultOrderBy: SectionOrderBy
+
+  """The vote help text."""
+  votesHelpText: String
+
+  """The section position in the consultation."""
+  position: Int!
+
+  """The section color."""
+  color: String!
+
+  """The subsections attached to the section."""
+  sections: [OpinionTypeInput]
 }
 
 """Entities that can be published."""
@@ -14688,6 +14764,9 @@ type Section implements Node & UniformResourceLocatable {
     """Include trashed opinion or not"""
     includeTrashed: Boolean = false
   ): OpinionConnection!
+
+  """The section position within the consultation."""
+  position: Int!
 }
 
 """A section"""
@@ -16640,6 +16719,49 @@ input UpdateCollectStepInput {
 type UpdateCollectStepPayload {
   """The updated step."""
   collectStep: CollectStep!
+  clientMutationId: String
+}
+
+input UpdateConsultationStepInput {
+  """The step ID to update."""
+  stepId: ID!
+
+  """The step label."""
+  label: String!
+
+  """The step description."""
+  body: String
+
+  """When the step start."""
+  startAt: DateTime
+
+  """When the step end."""
+  endAt: DateTime
+  timeless: Boolean
+
+  """Whether or not the step is enabled."""
+  isEnabled: Boolean!
+
+  """Step metadescription."""
+  metaDescription: DateTime
+
+  """Step custom code."""
+  customCode: HTML
+
+  """Requirements to answer the questionnaire."""
+  requirements: [StepRequirementInput!]!
+
+  """Reasons to require these requirements."""
+  requirementsReason: String
+
+  """The list of consultations linked to the step."""
+  consultations: [ID]!
+  clientMutationId: String
+}
+
+type UpdateConsultationStepPayload {
+  """The updated step."""
+  consultationStep: ConsultationStep!
   clientMutationId: String
 }
 

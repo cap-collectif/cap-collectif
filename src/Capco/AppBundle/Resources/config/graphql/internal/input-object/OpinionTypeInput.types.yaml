@@ -1,0 +1,41 @@
+OpinionTypeInput:
+    type: input-object
+    config:
+        description: 'An OpinionType'
+        fields:
+            id:
+                type: 'ID'
+                description: 'If editing the corresponding id.'
+            title:
+                type: 'String!'
+                description: 'The section title.'
+            description:
+                type: 'String'
+                description: 'The section description.'
+            subtitle:
+                type: 'String'
+                description: 'The section subtitle.'
+            contribuable:
+                type: 'Boolean'
+                description: 'Wether or not the section is contribuable.'
+            sourceable:
+                type: 'Boolean'
+                description: 'Wether or not the section is sourceable.'
+            versionable:
+                type: 'Boolean'
+                description: 'Wether or not the section is versionable.'
+            defaultOrderBy:
+                type: 'SectionOrderBy'
+                description: 'The default section order.'
+            votesHelpText:
+                type: 'String'
+                description: 'The vote help text.'
+            position:
+                type: 'Int!'
+                description: 'The section position in the consultation.'
+            color:
+                type: 'String!'
+                description: 'The section color.'
+            sections:
+                type: '[OpinionTypeInput]'
+                description: 'The subsections attached to the section.'

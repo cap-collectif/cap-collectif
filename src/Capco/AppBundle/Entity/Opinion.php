@@ -113,7 +113,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionType", inversedBy="Opinions", cascade={"persist"})
-     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="opinion_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $OpinionType;
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Accordion,
     Box,
@@ -25,7 +25,7 @@ import FaceToFace from './FaceToFace'
 import {UpdateDebateStepInput} from "@relay/UpdateDebateStepMutation.graphql";
 import {mutationErrorToast} from "@utils/mutation-error-toast";
 import {useNavBarContext} from "@components/NavBar/NavBar.context";
-import DeleteStepMutation from "@mutations/DeleteStepMutation";
+import {onBack} from "@components/Steps/utils";
 
 type Props = {
     stepId: string
@@ -141,7 +141,9 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
     const debate = step?.debate;
     const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr';
 
-    const isEditing = !!step?.label;
+    const [isEditing, setIsEditing] = useState(() => {
+        return !!step?.label;
+    });
 
     const getBreadCrumbItems = () => {
         const breadCrumbItems = [
@@ -230,29 +232,11 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
 
         try {
             await UpdateDebateStepMutation.commit({input});
+            setIsEditing(false);
             toast({
                 variant: 'success',
                 content: intl.formatMessage({ id: 'global.saved' }),
             })
-        } catch (error) {
-            return mutationErrorToast(intl);
-        }
-    }
-
-    const onBack = async () => {
-        const adminAlphaUrl = project?.adminAlphaUrl;
-        if (!adminAlphaUrl) {
-            return;
-        }
-
-        if (!isEditing) {
-            window.location.href = adminAlphaUrl;
-            return;
-        }
-
-        try {
-            await DeleteStepMutation.commit({input: {stepId}})
-            window.location.href = adminAlphaUrl;
         } catch (error) {
             return mutationErrorToast(intl);
         }
@@ -516,7 +500,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
                     </Button>
                     <Button variantSize="big" variant="secondary"
                             disabled={isSubmitting}
-                            onClick={onBack}
+                            onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
                     >
                         {intl.formatMessage({id: 'global.back'})}
                     </Button>

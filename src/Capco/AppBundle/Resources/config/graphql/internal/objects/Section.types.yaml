@@ -93,3 +93,6 @@ Section:
                         type: 'Boolean'
                         description: 'Include trashed opinion or not'
                         defaultValue: false
+            position:
+                type: 'Int!'
+                description: 'The section position within the consultation.'

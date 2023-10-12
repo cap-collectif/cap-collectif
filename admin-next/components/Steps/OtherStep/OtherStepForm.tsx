@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useIntl} from "react-intl";
 import {graphql, useLazyLoadQuery} from "react-relay";
 import {OtherStepFormQuery} from "@relay/OtherStepFormQuery.graphql";
@@ -10,7 +10,7 @@ import TextEditor from "@components/Form/TextEditor/TextEditor";
 import withPageAuthRequired from "@utils/withPageAuthRequired";
 import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation';
 import {mutationErrorToast} from "@utils/mutation-error-toast";
-import DeleteStepMutation from "@mutations/DeleteStepMutation";
+import {onBack} from "@components/Steps/utils";
 
 type Props = {
     stepId: string
@@ -76,7 +76,9 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
         window.location.href = '/admin-next/projects';
     }
 
-    const isEditing = !!step.label;
+    const [isEditing, setIsEditing] = useState(() => {
+        return !!step.label;
+    });
     const getBreadCrumbItems = () => {
         const breadCrumbItems = [
             {
@@ -142,6 +144,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
             if (!response.updateOtherStep) {
                 return mutationErrorToast(intl);
             }
+            setIsEditing(false);
             toast({
                 variant: 'success',
                 content: intl.formatMessage({ id: 'global.saved' }),
@@ -150,24 +153,6 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
             return mutationErrorToast(intl);
         }
     };
-
-    const onBack = async () => {
-        if (!project.adminAlphaUrl) {
-            return;
-        }
-
-        if (!isEditing) {
-            window.location.href = project.adminAlphaUrl;
-            return;
-        }
-
-        try {
-            await DeleteStepMutation.commit({input: {stepId}})
-            window.location.href = project.adminAlphaUrl;
-        } catch (error) {
-            return mutationErrorToast(intl);
-        }
-    }
 
     return (
         <Box bg="white" width="70%" p={6} borderRadius="8px">
@@ -301,7 +286,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
                     </Button>
                     <Button variantSize="big" variant="secondary"
                             disabled={isSubmitting}
-                            onClick={onBack}
+                            onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
                     >
                         {intl.formatMessage({id: 'global.back'})}
                     </Button>

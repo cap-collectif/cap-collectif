@@ -1,0 +1,39 @@
+UpdateConsultationStepInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            stepId:
+                type: 'ID!'
+                description: 'The step ID to update.'
+            label:
+                type: 'String!'
+                description: 'The step label.'
+            body:
+                type: 'String'
+                description: 'The step description.'
+            startAt:
+                type: 'DateTime'
+                description: 'When the step start.'
+            endAt:
+                type: 'DateTime'
+                description: 'When the step end.'
+            timeless:
+                type: 'Boolean'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not the step is enabled.'
+            metaDescription:
+                type: 'DateTime'
+                description: 'Step metadescription.'
+            customCode:
+                type: 'HTML'
+                description: 'Step custom code.'
+            requirements:
+                type: '[StepRequirementInput!]!'
+                description: 'Requirements to answer the questionnaire.'
+            requirementsReason:
+                type: 'String'
+                description: 'Reasons to require these requirements.'
+            consultations:
+                type: '[ID]!'
+                description: 'The list of consultations linked to the step.'

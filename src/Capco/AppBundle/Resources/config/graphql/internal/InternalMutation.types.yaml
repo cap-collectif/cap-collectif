@@ -1759,3 +1759,17 @@ InternalMutation:
                     inputType: UpdateLocaleInput
                     payloadType: UpdateLocalePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateLocaleMutation", [value, serv("request_stack")])'
+            updateConsultationStep:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateConsultationStepMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateConsultationStepInput
+                    payloadType: UpdateConsultationStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateConsultationStepMutation", [value, getUser()])'
+            createOrUpdateConsultation:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOrUpdateConsultationMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateOrUpdateConsultationInput
+                    payloadType: CreateOrUpdateConsultationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOrUpdateConsultationMutation", [value, getUser()])'

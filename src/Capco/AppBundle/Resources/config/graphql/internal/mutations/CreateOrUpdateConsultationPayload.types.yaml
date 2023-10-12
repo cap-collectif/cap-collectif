@@ -1,0 +1,7 @@
+CreateOrUpdateConsultationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            consultations:
+                type: '[InternalConsultation]!'
+                description: 'List of created or updated consultations.'

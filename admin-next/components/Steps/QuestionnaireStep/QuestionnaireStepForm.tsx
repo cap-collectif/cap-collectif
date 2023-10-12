@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Accordion,
     Box,
@@ -33,6 +33,7 @@ import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql';
 import CreateQuestionnaireMutation from '@mutations/CreateQuestionnaireMutation';
 import { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graphql';
+import {onBack} from "@components/Steps/utils";
 
 type Props = {
     stepId: string,
@@ -172,7 +173,9 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
     const defaultLocale =
         availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr';
 
-    const isEditing = !!step?.label;
+    const [isEditing, setIsEditing] = useState(() => {
+        return !!step.label;
+    });
 
     const getBreadCrumbItems = () => {
         const breadCrumbItems = [
@@ -299,6 +302,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                                 variant: 'success',
                                 content: intl.formatMessage({ id: 'global.changes.saved' }),
                             });
+                            setIsEditing(false);
                             const newFormValues = {
                                 ...response.updateQuestionnaireStep.questionnaireStep,
                                 requirements: values.requirements,
@@ -325,24 +329,6 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
             });
     };
 
-    const onBack = async () => {
-        const adminAlphaUrl = project?.adminAlphaUrl;
-        if (!adminAlphaUrl) {
-            return;
-        }
-
-        if (!isEditing) {
-            window.location.href = adminAlphaUrl;
-            return;
-        }
-
-        try {
-            await DeleteStepMutation.commit({ input: { stepId } });
-            window.location.href = adminAlphaUrl;
-        } catch (error) {
-            return mutationErrorToast(intl);
-        }
-    };
 
     const stepDurationType = watch('stepDurationType');
     const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM;
@@ -502,7 +488,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                             variantSize="big"
                             variant="secondary"
                             disabled={isSubmitting}
-                            onClick={onBack}>
+                            onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}>
                             {intl.formatMessage({ id: 'global.back' })}
                         </Button>
                     </Flex>

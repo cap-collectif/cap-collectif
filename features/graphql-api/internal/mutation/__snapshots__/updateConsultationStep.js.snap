@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateConsultationStep should update the step 1`] = `
+Object {
+  "updateConsultationStep": Object {
+    "consultationStep": Object {
+      "body": "<p>Distinctio sunt exercitationem omnis quasi. Asperiores fugiat voluptatibus nihil sed vel ut.      Facere alias sunt voluptas quia qui expedita. Quaerat quia sunt impedit labore minima fugiat praesentium. Occaecati ad sunt officia rerum ex enim necessitatibus. Quia consequatur eos molestias voluptatem eum error. Voluptas id omnis cum voluptatem.</p>",
+      "consultations": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "sections": Array [
+                Object {
+                  "title": "Le problème constaté",
+                },
+                Object {
+                  "title": "Les causes",
+                },
+                Object {
+                  "title": "Les enjeux",
+                },
+              ],
+              "title": "Défaut",
+            },
+          },
+        ],
+      },
+      "customCode": null,
+      "enabled": true,
+      "label": "Consultation",
+      "metaDescription": null,
+      "requirements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "__typename": "FirstnameRequirement",
+            },
+          },
+          Object {
+            "node": Object {
+              "__typename": "LastnameRequirement",
+            },
+          },
+          Object {
+            "node": Object {
+              "__typename": "PhoneRequirement",
+            },
+          },
+        ],
+        "reason": null,
+      },
+      "timeRange": Object {
+        "endAt": "2032-11-01 12:00:00",
+        "startAt": "2018-11-01 12:00:00",
+      },
+      "timeless": false,
+    },
+  },
+}
+`;

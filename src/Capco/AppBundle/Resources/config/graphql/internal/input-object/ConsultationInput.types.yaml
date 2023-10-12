@@ -1,0 +1,22 @@
+ConsultationInput:
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+                description: 'The consultation id.'
+            title:
+                type: 'String!'
+                description: 'The consultation title.'
+            description:
+                type: 'String'
+                description: 'The consultation description.'
+            sections:
+                type: '[OpinionTypeInput!]!'
+                description: 'The consultation sections.'
+            position:
+                type: 'Int!'
+                description: 'The consultation position.'
+            illustration:
+                type: 'ID'
+                description: 'The consultation illustration.'
