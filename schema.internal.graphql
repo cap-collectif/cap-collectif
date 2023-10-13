@@ -750,7 +750,7 @@ input AddStepInput {
   projectId: ID!
 
   """The step title."""
-  title: String!
+  title: String
   clientMutationId: String
 }
 
@@ -3016,6 +3016,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
   ): ContributionConnection
+  opinionTypes: [OpinionType]!
 }
 
 """Fetches an object given its ID"""
@@ -8671,6 +8672,29 @@ enum OpinionOrderField {
 
   """Allows ordering a list of opinions by the number of comments it have."""
   COMMENTS
+}
+
+type OpinionType {
+  """The title of the opinion type."""
+  title: String!
+
+  """The position of the opinion type."""
+  position: Int!
+
+  """Is the opinion type enabled or not."""
+  isEnabled: Boolean!
+
+  """Is the opinion type sourceable or not."""
+  sourceable: Boolean!
+
+  """Is the opinion type versionable or not."""
+  versionable: Boolean!
+
+  """The color of the opinion type."""
+  color: String!
+
+  """The default filter of the opinion type."""
+  defaultFilter: String!
 }
 
 """An OpinionType"""
