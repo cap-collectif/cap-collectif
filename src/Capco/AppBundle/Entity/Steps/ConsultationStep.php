@@ -20,7 +20,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
     public const TYPE = 'consultation';
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step")
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step", cascade={"persist"})
      * @ORM\OrderBy({"position" = "ASC"})
      */
     private $consultations;

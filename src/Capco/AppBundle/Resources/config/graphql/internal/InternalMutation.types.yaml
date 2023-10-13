@@ -1661,42 +1661,63 @@ InternalMutation:
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddCollectStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddCollectStepMutation", [value, getUser()])'
             addSelectionStep:
                 access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSelectionStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddSelectionStepMutation", [value, getUser()])'
             addDebateStep:
                 access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddDebateStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddDebateStepMutation", [value, getUser()])'
             addQuestionnaireStep:
                 access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddQuestionnaireStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddQuestionnaireStepMutation", [value, getUser()])'
             addConsultationStep:
                 access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddConsultationStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddConsultationStepMutation", [value, getUser()])'
+            addAnalysisStep:
+                access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddStepInput
+                    payloadType: AddStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddAnalysisStepMutation", [value, getUser()])'
+            addResultStep:
+                access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddStepInput
+                    payloadType: AddStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddResultStepMutation", [value, getUser()])'
+            addVoteAndSelectionStep:
+                access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddStepInput
+                    payloadType: AddStepPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddVoteAndSelectionStepMutation", [value, getUser()])'
             addOtherStep:
                 access: '@=service("Capco\\AppBundle\\Service\\AddStepService").isGranted(args["input"]["projectId"], getUser())'
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: AddStepInput
                     payloadType: AddStepPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOtherStepMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Step\\AddOtherStepMutation", [value, getUser()])'
             updateOtherStep:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOtherStepMutation").isGranted(args["input"]["stepId"], getUser())'
                 builder: 'Relay::Mutation'

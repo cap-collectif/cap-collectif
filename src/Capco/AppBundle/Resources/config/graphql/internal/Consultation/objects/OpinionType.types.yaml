@@ -1,0 +1,25 @@
+OpinionType:
+    type: object
+    config:
+        fields:
+            title:
+                type: 'String!'
+                description: 'The title of the opinion type.'
+            position:
+                type: 'Int!'
+                description: 'The position of the opinion type.'
+            isEnabled:
+                type: 'Boolean!'
+                description: 'Is the opinion type enabled or not.'
+            sourceable:
+                type: 'Boolean!'
+                description: 'Is the opinion type sourceable or not.'
+            versionable:
+                type: 'Boolean!'
+                description: 'Is the opinion type versionable or not.'
+            color:
+                type: 'String!'
+                description: 'The color of the opinion type.'
+            defaultFilter:
+                type: 'String!'
+                description: 'The default filter of the opinion type.'

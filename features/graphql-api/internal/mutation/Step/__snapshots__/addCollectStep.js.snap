@@ -5,7 +5,7 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
-      "title": "My collect step",
+      "title": "Dépôt",
     },
   },
 }
@@ -16,7 +16,7 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
-      "title": "My collect step",
+      "title": "Dépôt",
     },
   },
 }
@@ -27,7 +27,7 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
-      "title": "My collect step",
+      "title": "Dépôt",
     },
   },
 }

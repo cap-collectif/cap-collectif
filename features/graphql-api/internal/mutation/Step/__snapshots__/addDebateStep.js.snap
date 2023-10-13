@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addDebateStepMutation admin project should be able to add debate step. 1`] = `
+Object {
+  "addDebateStep": Object {
+    "step": Object {
+      "__typename": "DebateStep",
+      "body": "Cette proposition devrait-elle être mise en place ?",
+      "debateType": "WYSIWYG",
+      "enabled": true,
+      "isAnonymousParticipationAllowed": false,
+      "label": "Espace de Débat",
+      "timeless": true,
+      "title": "Débat",
+    },
+  },
+}
+`;
+
+exports[`mutations.addDebateStepMutation admin should be able to add debate step. 1`] = `
+Object {
+  "addDebateStep": Object {
+    "step": Object {
+      "__typename": "DebateStep",
+      "body": "Cette proposition devrait-elle être mise en place ?",
+      "debateType": "WYSIWYG",
+      "enabled": true,
+      "isAnonymousParticipationAllowed": false,
+      "label": "Espace de Débat",
+      "timeless": true,
+      "title": "Débat",
+    },
+  },
+}
+`;
+
+exports[`mutations.addDebateStepMutation orga member should be able to add debate step. 1`] = `
+Object {
+  "addDebateStep": Object {
+    "step": Object {
+      "__typename": "DebateStep",
+      "body": "Cette proposition devrait-elle être mise en place ?",
+      "debateType": "WYSIWYG",
+      "enabled": true,
+      "isAnonymousParticipationAllowed": false,
+      "label": "Espace de Débat",
+      "timeless": true,
+      "title": "Débat",
+    },
+  },
+}
+`;

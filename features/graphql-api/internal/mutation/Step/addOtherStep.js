@@ -1,9 +1,9 @@
 /* eslint-env jest */
-import '../../../../_setup';
+import '../../../_setup';
 
-const AddSelectionStep = /* GraphQL*/ `
-  mutation AddSelectionStep($input: AddStepInput!) {
-    addSelectionStep(input: $input) {
+const AddOtherStep = /* GraphQL*/ `
+  mutation AddOtherStep($input: AddStepInput!) {
+    addOtherStep(input: $input) {
       step {
         __typename
         title
@@ -13,29 +13,29 @@ const AddSelectionStep = /* GraphQL*/ `
 `
 
 const input = {
-  title: 'My selection step'
+  title: 'My custom step'
 }
 
-describe('mutations.addSelectionStepMutation', () => {
-  it('admin should be able to add selection step.', async () => {
+describe('mutations.addOtherStepMutation', () => {
+  it('admin should be able to add other step.', async () => {
     const response = await graphql(
-      AddSelectionStep,
+      AddOtherStep,
       {input: {...input, projectId: toGlobalId('Project', 'project9')}},
       'internal_admin',
     );
     expect(response).toMatchSnapshot();
   });
-  it('admin project should be able to add selection step.', async () => {
+  it('admin project should be able to add other step.', async () => {
     const response = await graphql(
-      AddSelectionStep,
+      AddOtherStep,
       {input: { ...input, projectId: toGlobalId('Project', 'projectWithOwner') }},
       'internal_theo',
     );
     expect(response).toMatchSnapshot();
   });
-  it('orga member should be able to add selection step.', async () => {
+  it('orga member should be able to add other step.', async () => {
     const response = await graphql(
-      AddSelectionStep,
+      AddOtherStep,
       {input: { ...input, projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') }},
       'internal_christophe',
     );

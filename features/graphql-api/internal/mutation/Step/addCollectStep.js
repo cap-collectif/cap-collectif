@@ -12,15 +12,11 @@ const AddCollectStep = /* GraphQL*/ `
   }
 `
 
-const input = {
-  title: 'My collect step'
-}
-
 describe('mutations.addCollectStepMutation', () => {
   it('admin should be able to add collect step.', async () => {
     const response = await graphql(
       AddCollectStep,
-      {input: {...input, projectId: toGlobalId('Project', 'project9')}},
+      {input: {projectId: toGlobalId('Project', 'project9')}},
       'internal_admin',
     );
     expect(response).toMatchSnapshot();
@@ -28,7 +24,7 @@ describe('mutations.addCollectStepMutation', () => {
   it('admin project should be able to add collect step.', async () => {
     const response = await graphql(
       AddCollectStep,
-      {input: { ...input, projectId: toGlobalId('Project', 'projectWithOwner') }},
+      {input: {projectId: toGlobalId('Project', 'projectWithOwner') }},
       'internal_theo',
     );
     expect(response).toMatchSnapshot();
@@ -36,7 +32,7 @@ describe('mutations.addCollectStepMutation', () => {
   it('orga member should be able to add collect step.', async () => {
     const response = await graphql(
       AddCollectStep,
-      {input: { ...input, projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') }},
+      {input: {projectId: toGlobalId('Project', 'projectOrgaVisibilityMe') }},
       'internal_christophe',
     );
     expect(response).toMatchSnapshot();

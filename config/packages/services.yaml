@@ -10,8 +10,10 @@ services:
             $logger: '@logger'
             $projectDir: '%kernel.project_dir%'
             $env: '%kernel.environment%'
+            $locale: '%locale%'
             $backChannelSecret: '%openid_backchannel_secret%'
             $redisSessionHandler: '@Capco\UserBundle\Security\SessionWithJsonHandler'
+            $translator: '@translator.default'
 
     Capco\AppBundle\Import\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
@@ -231,7 +233,6 @@ services:
     Capco\AppBundle\Router\DefaultPatternGenerationStrategy:
         arguments:
             $strategy: prefix
-            $translator: '@translator.default'
             $locales: '%locales%'
             $cacheDir: '%kernel.cache_dir%'
             $translationDomain: 'routes'

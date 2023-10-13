@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Mutation;
+namespace Capco\AppBundle\GraphQL\Mutation\Step;
 
 use Capco\AppBundle\Service\AddStepService;
 use Capco\UserBundle\Entity\User;
@@ -18,10 +18,6 @@ class AddOtherStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $input->offsetSet('stepType', 'OTHER');
-
-        list('step' => $step) = $this->addStepService->addStep($input, $viewer);
-
-        return ['step' => $step];
+        return $this->addStepService->addStep($input, $viewer, 'OTHER');
     }
 }

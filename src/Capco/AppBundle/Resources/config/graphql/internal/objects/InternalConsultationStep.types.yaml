@@ -80,3 +80,6 @@ InternalConsultationStep:
                         description: 'The connection will return the trashed results too.'
                         defaultValue: false
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args, getUser(), serv("request_stack")])'
+            opinionTypes:
+                type: '[OpinionType]!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\ConsultationStepOpinionTypesResolver", [value])'

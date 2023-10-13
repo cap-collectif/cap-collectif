@@ -2,16 +2,10 @@
 
 namespace Capco\AppBundle\Service;
 
-use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Factory\StepFactory;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -25,27 +19,30 @@ class AddStepService
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private StepFactory $stepFactory;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        StepFactory $stepFactory
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
+        $this->stepFactory = $stepFactory;
     }
 
-    public function addStep(Argument $input, User $viewer): array
+    public function addStep(Argument $input, User $viewer, string $stepType): array
     {
         $projectId = $input->offsetGet('projectId');
         $title = $input->offsetGet('title');
-        $stepType = $input->offsetGet('stepType');
 
         $project = $this->getProject($projectId, $viewer);
         $stepsCount = $project->getSteps()->count();
 
-        $step = $this->createStepObject($stepType)->setTitle($title);
+        $step = $this->createStepObject($stepType);
+        !$title ?: $step->setTitle($title);
         $projectAbstractStep = (new ProjectAbstractStep())->setProject($project)->setStep($step)->setPosition($stepsCount + 1);
         $project->addStep($projectAbstractStep);
         $step->setProjectAbstractStep($projectAbstractStep);
@@ -74,24 +71,31 @@ class AddStepService
     {
         switch ($stepType) {
             case 'COLLECT':
-                return new CollectStep();
+                return $this->stepFactory->createCollectStep();
 
-            case 'SELECTION':
-                return new SelectionStep();
+            case 'VOTE_AND_SELECTION':
+                return $this->stepFactory->createVoteAndSelectionStep();
 
             case 'DEBATE':
-                $debate = new Debate();
-
-                return new DebateStep($debate);
+                return $this->stepFactory->createDebateStep();
 
             case 'QUESTIONNAIRE':
-                return new QuestionnaireStep();
+                return $this->stepFactory->createQuestionnaireStep();
 
             case 'CONSULTATION':
-                return new ConsultationStep();
+                return $this->stepFactory->createConsultationStep();
+
+            case 'ANALYSIS':
+                return $this->stepFactory->createAnalysisStep();
+
+            case 'RESULT':
+                return $this->stepFactory->createResultStep();
+
+            case 'SELECTION':
+                return $this->stepFactory->createSelectionStep();
 
             case 'OTHER':
-                return new OtherStep();
+                return $this->stepFactory->createOtherStep();
 
             default:
                 throw new UserError('Please select a valid step type');

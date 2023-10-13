@@ -8234,6 +8234,9 @@ type Mutation {
   addDebateStep(input: AddStepInput!): AddStepPayload
   addQuestionnaireStep(input: AddStepInput!): AddStepPayload
   addConsultationStep(input: AddStepInput!): AddStepPayload
+  addAnalysisStep(input: AddStepInput!): AddStepPayload
+  addResultStep(input: AddStepInput!): AddStepPayload
+  addVoteAndSelectionStep(input: AddStepInput!): AddStepPayload
   addOtherStep(input: AddStepInput!): AddStepPayload
   updateOtherStep(input: UpdateOtherStepInput!): UpdateOtherStepPayload
   deleteStep(input: DeleteStepInput!): DeleteStepPayload

@@ -83,7 +83,7 @@ class Consultation implements IndexableInterface
 
     /**
      * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $step;
@@ -342,6 +342,8 @@ class Consultation implements IndexableInterface
     {
         if (!$this->opinionTypes->contains($opinionType)) {
             $this->opinionTypes[] = $opinionType;
+
+            $opinionType->setConsultation($this);
         }
 
         return $this;

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addQuestionnaireStepMutation admin project should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "body": "Répondez à l'enquête",
+      "collectParticipantsEmail": true,
+      "enabled": true,
+      "isAnonymousParticipationAllowed": true,
+      "label": "Questionnaire",
+      "questionnaire": Object {
+        "description": "Répondez à l'enquête",
+        "questions": Array [
+          Object {
+            "position": 1,
+            "title": "Avez-vous une remarque à apporter ?",
+            "type": "editor",
+          },
+        ],
+        "title": "Questionnaire",
+      },
+      "title": "Questionnaire",
+    },
+  },
+}
+`;
+
+exports[`mutations.addQuestionnaireStepMutation admin should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "body": "Répondez à l'enquête",
+      "collectParticipantsEmail": true,
+      "enabled": true,
+      "isAnonymousParticipationAllowed": true,
+      "label": "Questionnaire",
+      "questionnaire": Object {
+        "description": "Répondez à l'enquête",
+        "questions": Array [
+          Object {
+            "position": 1,
+            "title": "Avez-vous une remarque à apporter ?",
+            "type": "editor",
+          },
+        ],
+        "title": "Questionnaire",
+      },
+      "title": "Questionnaire",
+    },
+  },
+}
+`;
+
+exports[`mutations.addQuestionnaireStepMutation orga member should be able to add questionnaire step. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "body": "Répondez à l'enquête",
+      "collectParticipantsEmail": true,
+      "enabled": true,
+      "isAnonymousParticipationAllowed": true,
+      "label": "Questionnaire",
+      "questionnaire": Object {
+        "description": "Répondez à l'enquête",
+        "questions": Array [
+          Object {
+            "position": 1,
+            "title": "Avez-vous une remarque à apporter ?",
+            "type": "editor",
+          },
+        ],
+        "title": "Questionnaire",
+      },
+      "title": "Questionnaire",
+    },
+  },
+}
+`;

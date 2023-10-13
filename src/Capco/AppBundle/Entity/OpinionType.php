@@ -448,9 +448,11 @@ class OpinionType
     /**
      * @param string $color
      */
-    public function setColor($color)
+    public function setColor($color): self
     {
         $this->color = $color;
+
+        return $this;
     }
 
     /**
@@ -464,9 +466,11 @@ class OpinionType
     /**
      * @param bool $isEnabled
      */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled($isEnabled): self
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
     }
 
     public function isVersionable()

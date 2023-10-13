@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addAnalysisStepMutation admin project should be able to add analysis step. 1`] = `
+Object {
+  "addAnalysisStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": false,
+      "body": "L’analyse des projets",
+      "defaultSort": "random",
+      "defaultStatus": Object {
+        "color": "PRIMARY",
+        "name": "Analyse des projets",
+      },
+      "label": "Analyse",
+      "statuses": Array [
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "SUCCESS",
+          "name": "Soumis au vote",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Non réalisable",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Hors cadre",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Déjà prévu",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Fusionné",
+        },
+      ],
+      "title": "Analyse",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;
+
+exports[`mutations.addAnalysisStepMutation admin should be able to add analysis step. 1`] = `
+Object {
+  "addAnalysisStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": false,
+      "body": "L’analyse des projets",
+      "defaultSort": "random",
+      "defaultStatus": Object {
+        "color": "PRIMARY",
+        "name": "Analyse des projets",
+      },
+      "label": "Analyse",
+      "statuses": Array [
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "SUCCESS",
+          "name": "Soumis au vote",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Non réalisable",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Hors cadre",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Déjà prévu",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Fusionné",
+        },
+      ],
+      "title": "Analyse",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;
+
+exports[`mutations.addAnalysisStepMutation orga member should be able to add analysis step. 1`] = `
+Object {
+  "addAnalysisStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": false,
+      "body": "L’analyse des projets",
+      "defaultSort": "random",
+      "defaultStatus": Object {
+        "color": "PRIMARY",
+        "name": "Analyse des projets",
+      },
+      "label": "Analyse",
+      "statuses": Array [
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "PRIMARY",
+          "name": "Analyse des projets",
+        },
+        Object {
+          "color": "SUCCESS",
+          "name": "Soumis au vote",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Non réalisable",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Hors cadre",
+        },
+        Object {
+          "color": "DANGER",
+          "name": "Déjà prévu",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Fusionné",
+        },
+      ],
+      "title": "Analyse",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;

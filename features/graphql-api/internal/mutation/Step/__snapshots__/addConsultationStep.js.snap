@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addConsultationStepMutation admin project should be able to add consultation step. 1`] = `
+Object {
+  "addConsultationStep": Object {
+    "step": Object {
+      "__typename": "ConsultationStep",
+      "body": "Espace de participation",
+      "enabled": true,
+      "label": "Consultation",
+      "opinionTypes": Array [
+        Object {
+          "color": "white",
+          "defaultFilter": "positions",
+          "isEnabled": false,
+          "position": 1,
+          "title": "Problèmes",
+        },
+        Object {
+          "color": "red",
+          "defaultFilter": "positions",
+          "isEnabled": true,
+          "position": 2,
+          "title": "Solutions",
+        },
+      ],
+      "timeless": false,
+      "title": "Consultation",
+    },
+  },
+}
+`;
+
+exports[`mutations.addConsultationStepMutation admin should be able to add consultation step. 1`] = `
+Object {
+  "addConsultationStep": Object {
+    "step": Object {
+      "__typename": "ConsultationStep",
+      "body": "Espace de participation",
+      "enabled": true,
+      "label": "Consultation",
+      "opinionTypes": Array [
+        Object {
+          "color": "white",
+          "defaultFilter": "positions",
+          "isEnabled": false,
+          "position": 1,
+          "title": "Problèmes",
+        },
+        Object {
+          "color": "red",
+          "defaultFilter": "positions",
+          "isEnabled": true,
+          "position": 2,
+          "title": "Solutions",
+        },
+      ],
+      "timeless": false,
+      "title": "Consultation",
+    },
+  },
+}
+`;
+
+exports[`mutations.addConsultationStepMutation orga member should be able to add consultation step. 1`] = `
+Object {
+  "addConsultationStep": Object {
+    "step": Object {
+      "__typename": "ConsultationStep",
+      "body": "Espace de participation",
+      "enabled": true,
+      "label": "Consultation",
+      "opinionTypes": Array [
+        Object {
+          "color": "white",
+          "defaultFilter": "positions",
+          "isEnabled": false,
+          "position": 1,
+          "title": "Problèmes",
+        },
+        Object {
+          "color": "red",
+          "defaultFilter": "positions",
+          "isEnabled": true,
+          "position": 2,
+          "title": "Solutions",
+        },
+      ],
+      "timeless": false,
+      "title": "Consultation",
+    },
+  },
+}
+`;

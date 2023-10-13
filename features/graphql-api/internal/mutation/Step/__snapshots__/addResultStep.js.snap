@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addResultStepMutation admin project should be able to add result step. 1`] = `
+Object {
+  "addResultStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Liste des projets retenus",
+      "defaultSort": "random",
+      "defaultStatus": null,
+      "label": "Projets lauréats",
+      "statuses": Array [
+        Object {
+          "color": "SUCCESS",
+          "name": "Projet réalisé",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours de réalisation",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours d'étude",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Projet lauréat",
+        },
+      ],
+      "title": "Projets lauréats",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;
+
+exports[`mutations.addResultStepMutation admin should be able to add result step. 1`] = `
+Object {
+  "addResultStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Liste des projets retenus",
+      "defaultSort": "random",
+      "defaultStatus": null,
+      "label": "Projets lauréats",
+      "statuses": Array [
+        Object {
+          "color": "SUCCESS",
+          "name": "Projet réalisé",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours de réalisation",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours d'étude",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Projet lauréat",
+        },
+      ],
+      "title": "Projets lauréats",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;
+
+exports[`mutations.addResultStepMutation orga member should be able to add result step. 1`] = `
+Object {
+  "addResultStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Liste des projets retenus",
+      "defaultSort": "random",
+      "defaultStatus": null,
+      "label": "Projets lauréats",
+      "statuses": Array [
+        Object {
+          "color": "SUCCESS",
+          "name": "Projet réalisé",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours de réalisation",
+        },
+        Object {
+          "color": "WARNING",
+          "name": "Projet en cours d'étude",
+        },
+        Object {
+          "color": "INFO",
+          "name": "Projet lauréat",
+        },
+      ],
+      "title": "Projets lauréats",
+      "voteType": "DISABLED",
+    },
+  },
+}
+`;

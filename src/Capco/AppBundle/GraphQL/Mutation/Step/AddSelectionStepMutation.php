@@ -1,13 +1,13 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Mutation;
+namespace Capco\AppBundle\GraphQL\Mutation\Step;
 
 use Capco\AppBundle\Service\AddStepService;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
-class AddCollectStepMutation implements MutationInterface
+class AddSelectionStepMutation implements MutationInterface
 {
     private AddStepService $addStepService;
 
@@ -18,10 +18,6 @@ class AddCollectStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
-        $input->offsetSet('stepType', 'COLLECT');
-
-        list('step' => $step) = $this->addStepService->addStep($input, $viewer);
-
-        return ['step' => $step];
+        return $this->addStepService->addStep($input, $viewer, 'SELECTION');
     }
 }

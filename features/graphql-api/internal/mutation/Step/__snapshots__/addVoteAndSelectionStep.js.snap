@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addVoteAndSelectionStepMutation admin project should be able to add vote and selection step. 1`] = `
+Object {
+  "addVoteAndSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Votez pour vos projets préférés",
+      "defaultSort": "random",
+      "label": "Vote",
+      "statuses": Array [
+        Object {
+          "color": "INFO",
+          "name": "Soumis au vote",
+        },
+      ],
+      "title": "Vote",
+      "voteType": "SIMPLE",
+      "votesLimit": 3,
+    },
+  },
+}
+`;
+
+exports[`mutations.addVoteAndSelectionStepMutation admin should be able to add vote and selection step. 1`] = `
+Object {
+  "addVoteAndSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Votez pour vos projets préférés",
+      "defaultSort": "random",
+      "label": "Vote",
+      "statuses": Array [
+        Object {
+          "color": "INFO",
+          "name": "Soumis au vote",
+        },
+      ],
+      "title": "Vote",
+      "voteType": "SIMPLE",
+      "votesLimit": 3,
+    },
+  },
+}
+`;
+
+exports[`mutations.addVoteAndSelectionStepMutation orga member should be able to add vote and selection step. 1`] = `
+Object {
+  "addVoteAndSelectionStep": Object {
+    "step": Object {
+      "__typename": "SelectionStep",
+      "allowAuthorsToAddNews": true,
+      "body": "Votez pour vos projets préférés",
+      "defaultSort": "random",
+      "label": "Vote",
+      "statuses": Array [
+        Object {
+          "color": "INFO",
+          "name": "Soumis au vote",
+        },
+      ],
+      "title": "Vote",
+      "voteType": "SIMPLE",
+      "votesLimit": 3,
+    },
+  },
+}
+`;

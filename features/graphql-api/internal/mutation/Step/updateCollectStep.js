@@ -118,3 +118,4 @@ describe('mutations.updateCollectStep', () => {
     ]);
   });
 });
+
