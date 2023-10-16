@@ -79,7 +79,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             <PresentationStepPage stepId={props.stepId} />
           </Suspense>
         </Route>
-        <Route exact path={`${baseUrl}/project/:projectSlug/questionnaire/:stepSlug`}>
+        <Route path={`${baseUrl}/project/:projectSlug/questionnaire/:stepSlug`}>
           <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <section className="section--alt">
             <div className="container" style={{ paddingTop: 48 }}>
