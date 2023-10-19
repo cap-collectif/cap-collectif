@@ -1,10 +1,11 @@
-import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox'
 
 type Props = {
-    readonly disabled?: boolean,
-    readonly id: string,
+  readonly disabled?: boolean
+  readonly id: string
 }
 
-declare const Item: PolymorphicComponent<Props>;
+declare const Item: PolymorphicComponent<Props>
 
-export default Item;
+export default Item

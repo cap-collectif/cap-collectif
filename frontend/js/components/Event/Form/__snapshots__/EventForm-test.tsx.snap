@@ -1,0 +1,1073 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventForm /> it renders correctly with event complete 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
+  >
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
+        global.general
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
+    />
+    <div
+      className="box-body"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_title"
+        label="global.title"
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <Field
+        addressProps={
+          Object {
+            "getAddress": [Function],
+          }
+        }
+        component={[Function]}
+        disabled={false}
+        formName="EventForm"
+        id="event_address"
+        label={
+          <div>
+            proposal_form.address
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label="global.description"
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label="start-date"
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              ending-date
+              <div
+                className="excerpt inline"
+              >
+                global.optional
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            global.illustration
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label={
+        <Flex
+          direction="row"
+          wrap="nowrap"
+        >
+          global.meta.description
+          <Flex
+            className="excerpt inline"
+            direction="row"
+            wrap="nowrap"
+          >
+            global.optional
+             
+            <Tooltip
+              className="text-left"
+              id="tooltip-top"
+              label="admin.help.metadescription"
+              placement="top"
+              style={
+                Object {
+                  "wordBreak": "break-word",
+                }
+              }
+            >
+              <div>
+                <ProjectContentAdminForm__InformationIcon />
+              </div>
+            </Tooltip>
+          </Flex>
+        </Flex>
+      }
+      name="metadescription"
+      type="textarea"
+    />
+    <div
+      className="box-header d-flex"
+    >
+      <h3
+        className="box-title"
+      >
+        form.label_category
+        <EventForm__TitleHint>
+            
+           
+          allow-event-linking
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <SelectProject
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <SelectStep
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global.options
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          groupClassName="guest-group"
+          id="event_registrable"
+          label="inscriptions-on-platform"
+          name="guestListEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label="authorize-transfer-of-data-to-event-organizer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          label="admin.fields.proposal.comments"
+          name="commentable"
+          type="checkbox"
+        />
+      </EventForm__OptionContainer>
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            global.publication
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_enabled"
+          label="global.published"
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global-customization
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <Flex
+              direction="row"
+              wrap="nowrap"
+            >
+              admin.customcode
+              <Flex
+                className="excerpt inline"
+                direction="row"
+                wrap="nowrap"
+              >
+                global.optional
+                 
+                <Tooltip
+                  className="text-left"
+                  id="tooltip-description"
+                  label="admin.help.customcode"
+                  placement="top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <div>
+                    <ProjectContentAdminForm__InformationIcon />
+                  </div>
+                </Tooltip>
+              </Flex>
+            </Flex>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
+    </div>
+  </form>
+</EventForm__FormContainer>
+`;
+
+exports[`<EventForm /> it renders correctly without default props 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
+  >
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
+        global.general
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
+    />
+    <div
+      className="box-body"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_title"
+        label="global.title"
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <Field
+        addressProps={
+          Object {
+            "getAddress": [Function],
+          }
+        }
+        component={[Function]}
+        disabled={false}
+        formName="EventForm"
+        id="event_address"
+        label={
+          <div>
+            proposal_form.address
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label="global.description"
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label="start-date"
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              ending-date
+              <div
+                className="excerpt inline"
+              >
+                global.optional
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            global.illustration
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label={
+        <Flex
+          direction="row"
+          wrap="nowrap"
+        >
+          global.meta.description
+          <Flex
+            className="excerpt inline"
+            direction="row"
+            wrap="nowrap"
+          >
+            global.optional
+             
+            <Tooltip
+              className="text-left"
+              id="tooltip-top"
+              label="admin.help.metadescription"
+              placement="top"
+              style={
+                Object {
+                  "wordBreak": "break-word",
+                }
+              }
+            >
+              <div>
+                <ProjectContentAdminForm__InformationIcon />
+              </div>
+            </Tooltip>
+          </Flex>
+        </Flex>
+      }
+      name="metadescription"
+      type="textarea"
+    />
+    <div
+      className="box-header d-flex"
+    >
+      <h3
+        className="box-title"
+      >
+        form.label_category
+        <EventForm__TitleHint>
+            
+           
+          allow-event-linking
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <SelectProject
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <SelectStep
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global.options
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          groupClassName="guest-group"
+          id="event_registrable"
+          label="inscriptions-on-platform"
+          name="guestListEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label="authorize-transfer-of-data-to-event-organizer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          label="admin.fields.proposal.comments"
+          name="commentable"
+          type="checkbox"
+        />
+      </EventForm__OptionContainer>
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            global.publication
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_enabled"
+          label="global.published"
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global-customization
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <Flex
+              direction="row"
+              wrap="nowrap"
+            >
+              admin.customcode
+              <Flex
+                className="excerpt inline"
+                direction="row"
+                wrap="nowrap"
+              >
+                global.optional
+                 
+                <Tooltip
+                  className="text-left"
+                  id="tooltip-description"
+                  label="admin.help.customcode"
+                  placement="top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <div>
+                    <ProjectContentAdminForm__InformationIcon />
+                  </div>
+                </Tooltip>
+              </Flex>
+            </Flex>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
+    </div>
+  </form>
+</EventForm__FormContainer>
+`;
+
+exports[`<EventForm /> it renders event form disabled 1`] = `
+<EventForm__FormContainer>
+  <form
+    className="eventForm "
+    onSubmit={[MockFunction]}
+  >
+    <EventForm__PageTitleContainer>
+      <h3
+        className="box-title"
+      >
+        global.general
+      </h3>
+      <span
+        className="mr-30 mt-15"
+      />
+    </EventForm__PageTitleContainer>
+    <div
+      className="color-dark-gray font-size-16"
+    />
+    <div
+      className="box-body"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_title"
+        label="global.title"
+        name="title"
+        type="text"
+      />
+      <UserListField
+        ariaControls="EventForm-filter-user-listbox"
+        authorOfEvent={false}
+        autoload={true}
+        className=""
+        clearable={false}
+        debounce={false}
+        disabled={false}
+        id="event_author"
+        inputClassName="fake-inputClassName"
+        label={
+          <FormattedMessage
+            id="global.author"
+            values={Object {}}
+          />
+        }
+        labelClassName={null}
+        multi={false}
+        name="author"
+        placeholder="select-author"
+        selectFieldIsObject={true}
+      />
+      <Field
+        addressProps={
+          Object {
+            "getAddress": [Function],
+          }
+        }
+        component={[Function]}
+        disabled={false}
+        formName="EventForm"
+        id="event_address"
+        label={
+          <div>
+            proposal_form.address
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="addressText"
+        placeholder="proposal.map.form.placeholder"
+        type="address"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="event_body"
+        label="global.description"
+        name="body"
+        type="admin-editor"
+      />
+      <div
+        className="datePickContainer"
+      >
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_startAt",
+            }
+          }
+          formName="EventForm"
+          id="event_startAt"
+          label="start-date"
+          name="startAt"
+          timeFormat={false}
+          type="datetime"
+        />
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          className="adminDate"
+          component={[Function]}
+          dateTimeInputProps={
+            Object {
+              "disabled": false,
+              "id": "event_input_endAt",
+            }
+          }
+          formName="EventForm"
+          id="event_endAt"
+          label={
+            <div>
+              ending-date
+              <div
+                className="excerpt inline"
+              >
+                global.optional
+              </div>
+            </div>
+          }
+          name="endAt"
+          type="datetime"
+        />
+      </div>
+      <Field
+        component={[Function]}
+        id="event_media"
+        label={
+          <div>
+            global.illustration
+            <div
+              className="excerpt inline"
+            >
+              global.optional
+            </div>
+          </div>
+        }
+        name="media"
+        type="image"
+      />
+    </div>
+    <Field
+      component={[Function]}
+      disabled={false}
+      label={
+        <Flex
+          direction="row"
+          wrap="nowrap"
+        >
+          global.meta.description
+          <Flex
+            className="excerpt inline"
+            direction="row"
+            wrap="nowrap"
+          >
+            global.optional
+             
+            <Tooltip
+              className="text-left"
+              id="tooltip-top"
+              label="admin.help.metadescription"
+              placement="top"
+              style={
+                Object {
+                  "wordBreak": "break-word",
+                }
+              }
+            >
+              <div>
+                <ProjectContentAdminForm__InformationIcon />
+              </div>
+            </Tooltip>
+          </Flex>
+        </Flex>
+      }
+      name="metadescription"
+      type="textarea"
+    />
+    <div
+      className="box-header d-flex"
+    >
+      <h3
+        className="box-title"
+      >
+        form.label_category
+        <EventForm__TitleHint>
+            
+           
+          allow-event-linking
+        </EventForm__TitleHint>
+      </h3>
+    </div>
+    <SelectProject
+      clearable={true}
+      disabled={false}
+      label="admin.fields.theme.projects_count"
+      multi={true}
+      name="projects"
+      optional={false}
+      placeholder="select-project"
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <SelectStep
+      clearable={true}
+      disabled={true}
+      label="project.show.meta.step.title"
+      multi={true}
+      name="steps"
+      optional={false}
+      projectIds={Array []}
+      projectOwner={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "Théo QP",
+          "id": "VXNlcjp1c2VyVGhlbw==",
+          "isAdmin": true,
+          "isOnlyProjectAdmin": false,
+          "isSuperAdmin": false,
+          "organizations": null,
+        }
+      }
+    />
+    <div>
+      <EventForm__OptionContainer
+        isFrontendView={false}
+      >
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global.options
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          groupClassName="guest-group"
+          id="event_registrable"
+          label="inscriptions-on-platform"
+          name="guestListEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          id="event_adminAuthorizeDataTransfer"
+          label="authorize-transfer-of-data-to-event-organizer"
+          name="adminAuthorizeDataTransfer"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_commentable"
+          label="admin.fields.proposal.comments"
+          name="commentable"
+          type="checkbox"
+        />
+        <Field
+          component={[Function]}
+          disabled={true}
+          groupClassName="registration-group"
+          id="event_maxRegistrations"
+          label="maximum-vote"
+          min="0"
+          name="maxRegistrations"
+          type="number"
+        />
+      </EventForm__OptionContainer>
+      <div>
+        <div
+          className="box-header pt-0"
+        >
+          <h3
+            className="box-title"
+          >
+            global.publication
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          id="event_enabled"
+          label="global.published"
+          name="enabled"
+          type="checkbox"
+        />
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
+            global-customization
+          </h3>
+        </div>
+        <Field
+          component={[Function]}
+          disabled={false}
+          label={
+            <Flex
+              direction="row"
+              wrap="nowrap"
+            >
+              admin.customcode
+              <Flex
+                className="excerpt inline"
+                direction="row"
+                wrap="nowrap"
+              >
+                global.optional
+                 
+                <Tooltip
+                  className="text-left"
+                  id="tooltip-description"
+                  label="admin.help.customcode"
+                  placement="top"
+                  style={
+                    Object {
+                      "wordBreak": "break-word",
+                    }
+                  }
+                >
+                  <div>
+                    <ProjectContentAdminForm__InformationIcon />
+                  </div>
+                </Tooltip>
+              </Flex>
+            </Flex>
+          }
+          name="customcode"
+          placeholder="<script type=\\"text/javascript\\"> </script>\\""
+          type="textarea"
+        />
+      </div>
+    </div>
+  </form>
+</EventForm__FormContainer>
+`;

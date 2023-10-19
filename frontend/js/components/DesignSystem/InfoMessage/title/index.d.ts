@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { FlexProps } from '../../Ui/Primitives/Layout/Flex';
+// @ts-nocheck
+import { FC } from 'react'
+import { FlexProps } from '~ui/Primitives/Layout/Flex'
 
 declare const InfoMessageTitle: FC<FlexProps>
 
-export default InfoMessageTitle;
+export default InfoMessageTitle

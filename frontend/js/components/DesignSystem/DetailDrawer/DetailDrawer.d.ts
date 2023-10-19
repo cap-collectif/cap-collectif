@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import DetailDrawerHeader from './DetailDrawerHeader';
-import DetailDrawerBody from './DetailDrawerBody';
+// @ts-nocheck
+import { FC } from 'react'
+import DetailDrawerHeader from './DetailDrawerHeader'
+import DetailDrawerBody from './DetailDrawerBody'
 
 export type Props = {
   readonly isOpen: boolean
@@ -12,4 +13,4 @@ declare const DetailDrawer: FC<Props> & {
   Body: typeof DetailDrawerBody
 }
 
-export default DetailDrawer;
+export default DetailDrawer

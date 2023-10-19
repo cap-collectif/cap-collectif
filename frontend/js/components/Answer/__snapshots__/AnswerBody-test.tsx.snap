@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AnswerBody /> renders correctly with an author 1`] = `
+<div>
+  <div
+    className="media media--user-thumbnail"
+    style={
+      Object {
+        "marginBottom": "10px",
+      }
+    }
+  >
+    <Relay(Connect(UserAvatarLegacy))
+      className="pull-left"
+      user={
+        Object {
+          " $fragmentRefs": null,
+        }
+      }
+    />
+    <div
+      className="media-body"
+    >
+      <p
+        className="media-heading media--macro__user"
+        style={
+          Object {
+            "marginBottom": "0",
+          }
+        }
+      >
+        <Relay(Connect(UserLink))
+          user={
+            Object {
+              " $fragmentRefs": null,
+            }
+          }
+        />
+      </p>
+      <span
+        className="excerpt"
+      >
+        <FormattedDate
+          day="numeric"
+          month="long"
+          value={"2014-12-31T23:00:00.000Z"}
+          year="numeric"
+        />
+      </span>
+    </div>
+  </div>
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
+  />
+</div>
+`;
+
+exports[`<AnswerBody /> renders correctly with authors 1`] = `
+<div>
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
+  />
+</div>
+`;
+
+exports[`<AnswerBody /> renders correctly without author 1`] = `
+<div>
+  <WYSIWYGRender
+    value="<div>My awesome content</div>"
+  />
+</div>
+`;

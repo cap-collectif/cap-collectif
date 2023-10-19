@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventEditModal /> it renders correctly 1`] = `
+<Modal
+  aria-labelledby="contained-modal-title-lg"
+  onClose={[MockFunction]}
+  show={false}
+  size="xl"
+>
+  <ResetCss>
+    <Modal.Header>
+      <Heading
+        as="h4"
+      >
+        edit-event
+      </Heading>
+    </Modal.Header>
+  </ResetCss>
+  <Modal.Body>
+    <EventCreateModal__EventFormInModal
+      event={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "participants": Object {
+            "totalCount": 0,
+          },
+        }
+      }
+      isFrontendView={true}
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+    />
+  </Modal.Body>
+  <Modal.Footer>
+    <Flex>
+      <Button
+        mr={2}
+        onClick={[MockFunction]}
+        variant="secondary"
+        variantColor="primary"
+        variantSize="big"
+      >
+        global.cancel
+      </Button>
+      <Button
+        disabled={false}
+        id="confirm-event-submit"
+        isLoading={false}
+        label="global.submit"
+        onClick={[Function]}
+        variant="primary"
+        variantColor="primary"
+        variantSize="big"
+      >
+        global.submit
+      </Button>
+    </Flex>
+  </Modal.Footer>
+</Modal>
+`;
+
+exports[`<EventEditModal /> it renders correctly with participants 1`] = `
+<Modal
+  aria-labelledby="contained-modal-title-lg"
+  onClose={[MockFunction]}
+  show={false}
+  size="xl"
+>
+  <ResetCss>
+    <Modal.Header>
+      <Heading
+        as="h4"
+      >
+        edit-event
+      </Heading>
+    </Modal.Header>
+  </ResetCss>
+  <Modal.Body>
+    <EventCreateModal__EventFormInModal
+      event={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "participants": Object {
+            "totalCount": 10,
+          },
+        }
+      }
+      isFrontendView={true}
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+    />
+  </Modal.Body>
+  <Modal.Footer>
+    <EventEditModal__NotifyInfoMessage>
+      event-modification-notification-to-members
+    </EventEditModal__NotifyInfoMessage>
+    <Flex>
+      <Button
+        mr={2}
+        onClick={[MockFunction]}
+        variant="secondary"
+        variantColor="primary"
+        variantSize="big"
+      >
+        global.cancel
+      </Button>
+      <Button
+        disabled={false}
+        id="confirm-event-submit"
+        isLoading={false}
+        label="global.submit"
+        onClick={[Function]}
+        variant="primary"
+        variantColor="primary"
+        variantSize="big"
+      >
+        global.submit
+      </Button>
+    </Flex>
+  </Modal.Footer>
+</Modal>
+`;

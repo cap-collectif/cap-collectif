@@ -39,9 +39,9 @@ export enum StatusEnum {
 
 export interface Member {
     user: {
-        id: string;
-        username: string;
-        email: string;
+        id: string,
+        username: string,
+        email: string,
     };
     role: OrganizationMemberRole;
     status: StatusEnum;
@@ -106,13 +106,13 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
     ];
     const hasInvitations = membersList.length > 0;
     const { handleSubmit, formState, control } = useForm<{
-        memberEmail: string;
-        memberRole: 'ADMIN' | 'USER';
+        memberEmail: string,
+        memberRole: 'ADMIN' | 'USER',
     }>({
         defaultValues: { memberEmail: undefined, memberRole: undefined },
         mode: 'onChange',
     });
-    const onSubmit = (values: { memberEmail: string; memberRole: 'ADMIN' | 'USER' }) => {
+    const onSubmit = (values: { memberEmail: string, memberRole: 'ADMIN' | 'USER' }) => {
         const connectionId = formatConnectionPath(
             ['client', organization.id || ''],
             'OrgIdQuery_pendingOrganizationInvitations',
@@ -265,8 +265,8 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                         </Table.Thead>
                         <Table.Tbody>
                             {membersList &&
-                                membersList.map(invite => (
-                                    <Table.Tr>
+                                membersList.map((invite, idx) => (
+                                    <Table.Tr key={idx}>
                                         <Table.Td>
                                             <Flex direction="row" spacing={1}>
                                                 {invite?.status === StatusEnum.PENDING ? (

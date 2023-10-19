@@ -1,0 +1,489 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserFollowingsOpinions /> should render following opinion close 1`] = `
+<div>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="followings"
+      values={Object {}}
+    />
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={false}
+      mountOnEnter={false}
+      style={
+        Object {
+          "float": "right",
+        }
+      }
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="unfollow-all"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow-all"
+          values={Object {}}
+        />
+      </Button>
+    </Collapse>
+  </h2>
+  <div>
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={false}
+      mountOnEnter={false}
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <div
+        id="all-projects"
+      >
+        <Relay(OpinionProjectRow)
+          key="0"
+          project={
+            Object {
+              "id": "project1",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <Relay(OpinionProjectRow)
+          key="1"
+          project={
+            Object {
+              "id": "project2",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <Relay(OpinionProjectRow)
+          key="2"
+          project={
+            Object {
+              "id": "project3",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+      </div>
+    </Collapse>
+  </div>
+  <div>
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={false}
+      mountOnEnter={false}
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <div>
+        <FormattedMessage
+          id="no-following"
+          values={Object {}}
+        />
+      </div>
+    </Collapse>
+  </div>
+</div>
+`;
+
+exports[`<UserFollowingsOpinions /> should render following opinion open 1`] = `
+<div>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="followings"
+      values={Object {}}
+    />
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={true}
+      mountOnEnter={false}
+      style={
+        Object {
+          "float": "right",
+        }
+      }
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="unfollow-all"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow-all"
+          values={Object {}}
+        />
+      </Button>
+    </Collapse>
+  </h2>
+  <div>
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={true}
+      mountOnEnter={false}
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <div
+        id="all-projects"
+      >
+        <Relay(OpinionProjectRow)
+          key="0"
+          project={
+            Object {
+              "id": "project1",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <Relay(OpinionProjectRow)
+          key="1"
+          project={
+            Object {
+              "id": "project2",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+        <Relay(OpinionProjectRow)
+          key="2"
+          project={
+            Object {
+              "id": "project3",
+              "title": "Un projet de l'internet",
+              "url": "http://carte.perdu.com",
+            }
+          }
+          viewer={
+            Object {
+              " $refType": null,
+              "followingOpinions": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "opinion1",
+                      "project": Object {
+                        "id": "project1",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Une carte de l'internet",
+                      "url": "http://carte.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion2",
+                      "project": Object {
+                        "id": "project2",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Un GPS de l'internet",
+                      "url": "http://gps.perdu.com",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "opinion3",
+                      "project": Object {
+                        "id": "project3",
+                        "title": "Un projet de l'internet",
+                        "url": "http://carte.perdu.com",
+                      },
+                      "title": "Go  nowhere",
+                      "url": "https://randomstreetview.com/",
+                    },
+                  },
+                ],
+                "totalCount": 3,
+              },
+            }
+          }
+        />
+      </div>
+    </Collapse>
+  </div>
+  <div>
+    <Collapse
+      appear={false}
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={true}
+      mountOnEnter={false}
+      timeout={300}
+      unmountOnExit={false}
+    >
+      <div>
+        <FormattedMessage
+          id="no-following"
+          values={Object {}}
+        />
+      </div>
+    </Collapse>
+  </div>
+</div>
+`;

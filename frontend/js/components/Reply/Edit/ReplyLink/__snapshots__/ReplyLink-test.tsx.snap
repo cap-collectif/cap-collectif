@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReplyLink /> render a draft reply in a closed questionnaire 1`] = `
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
+  <div>
+    <Link
+      to="/replies/replay1"
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-03-01T09:11:12.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-03-01T09:11:12.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
+     
+    <ReplyDraftLabel
+      draft={true}
+    />
+     
+  </div>
+</ReplyLinkstyle__ReplyLinkContainer>
+`;
+
+exports[`<ReplyLink /> render a draft reply in a contribuable questionnaire 1`] = `
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
+  <div>
+    <Link
+      to="/replies/replay1"
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-03-01T09:11:12.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-03-01T09:11:12.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
+     
+    <ReplyDraftLabel
+      draft={true}
+    />
+     
+  </div>
+  <Relay(DeleteReplyModal)
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    reply={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "__typename": "UserReply",
+        "createdAt": "2016-03-01 10:11:12",
+        "draft": true,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": null,
+        "viewerCanDelete": true,
+      }
+    }
+  />
+</ReplyLinkstyle__ReplyLinkContainer>
+`;
+
+exports[`<ReplyLink /> render a private reply in a contribuable questionnaire 1`] = `
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
+  <div>
+    <Link
+      to="/replies/replay1"
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
+    <FormattedMessage
+      id="reply.private"
+      values={Object {}}
+    />
+     
+     
+    <UnpublishedLabel
+      publishable={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "__typename": "UserReply",
+          "createdAt": "2016-03-01 10:11:12",
+          "draft": false,
+          "id": "replay1",
+          "private": true,
+          "publishedAt": "2016-04-25 14:33:17",
+          "viewerCanDelete": true,
+        }
+      }
+    />
+  </div>
+  <Relay(DeleteReplyModal)
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    reply={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "__typename": "UserReply",
+        "createdAt": "2016-03-01 10:11:12",
+        "draft": false,
+        "id": "replay1",
+        "private": true,
+        "publishedAt": "2016-04-25 14:33:17",
+        "viewerCanDelete": true,
+      }
+    }
+  />
+</ReplyLinkstyle__ReplyLinkContainer>
+`;
+
+exports[`<ReplyLink /> render a reply in a closed questionnaire 1`] = `
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
+  <div>
+    <Link
+      to="/replies/replay1"
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
+     
+     
+    <UnpublishedLabel
+      publishable={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "__typename": "UserReply",
+          "createdAt": "2016-03-01 10:11:12",
+          "draft": false,
+          "id": "replay1",
+          "private": false,
+          "publishedAt": "2016-04-25 14:33:17",
+          "viewerCanDelete": false,
+        }
+      }
+    />
+  </div>
+</ReplyLinkstyle__ReplyLinkContainer>
+`;
+
+exports[`<ReplyLink /> render a reply in a contribuable questionnaire 1`] = `
+<ReplyLinkstyle__ReplyLinkContainer
+  onMouseEnter={[Function]}
+>
+  <div>
+    <Link
+      to="/replies/replay1"
+    >
+      <FormattedMessage
+        id="reply.show.link"
+        values={
+          Object {
+            "date": <FormattedDate
+              day="numeric"
+              month="long"
+              value={"2016-04-25T12:33:17.000Z"}
+              year="numeric"
+            />,
+            "time": <FormattedDate
+              hour="numeric"
+              minute="numeric"
+              value={"2016-04-25T12:33:17.000Z"}
+            />,
+          }
+        }
+      />
+    </Link>
+     
+     
+    <UnpublishedLabel
+      publishable={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "__typename": "UserReply",
+          "createdAt": "2016-03-01 10:11:12",
+          "draft": false,
+          "id": "replay1",
+          "private": false,
+          "publishedAt": "2016-04-25 14:33:17",
+          "viewerCanDelete": true,
+        }
+      }
+    />
+  </div>
+  <Relay(DeleteReplyModal)
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    reply={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "__typename": "UserReply",
+        "createdAt": "2016-03-01 10:11:12",
+        "draft": false,
+        "id": "replay1",
+        "private": false,
+        "publishedAt": "2016-04-25 14:33:17",
+        "viewerCanDelete": true,
+      }
+    }
+  />
+</ReplyLinkstyle__ReplyLinkContainer>
+`;

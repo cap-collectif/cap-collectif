@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPreview /> should render correctly project with participative step, without type 1`] = `
+<Col
+  bsClass="col"
+  className="d-flex"
+  componentClass="div"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <Card
+    className="project-preview"
+    id="project-preview-UHJvamVjdDpwcm9qZWN0MQ=="
+  >
+    <Relay(ProjectType)
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        }
+      }
+    />
+    <Relay(ProjectCover)
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        }
+      }
+    />
+    <Relay(ProjectPreviewBody)
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+        }
+      }
+    />
+  </Card>
+</Col>
+`;
+
+exports[`<ProjectPreview /> should render correctly with the new card type 1`] = `
+<ForwardRef
+  mb={7}
+  ml={5}
+  mr={5}
+  mt={7}
+>
+  <Relay(Connect(ProjectCard))
+    isProjectsPage={false}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+      }
+    }
+  />
+</ForwardRef>
+`;

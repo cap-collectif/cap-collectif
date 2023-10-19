@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileReplyList /> should render correctly 1`] = `
+<div>
+  <Relay(Reply)
+    key="0"
+    reply={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+</div>
+`;

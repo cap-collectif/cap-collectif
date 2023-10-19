@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepEvents /> should render a sliders with 3 events 1`] = `
+<StepEventsstyle__Container
+  className="block"
+  id="StepEvents"
+>
+  <h2
+    className="h2"
+  >
+    <FormattedMessage
+      id="global.events"
+      values={Object {}}
+    />
+     
+    <span
+      className="small excerpt"
+    >
+      3
+    </span>
+  </h2>
+  <Slider
+    arrows={true}
+    dots={false}
+    infinite={false}
+    nextArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-right"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    prevArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-left"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    slidesToShow={2}
+    speed={500}
+  >
+    <Relay(ProjectEventPreview)
+      event={
+        Object {
+          " $fragmentRefs": null,
+          "id": "event1",
+        }
+      }
+      key="event1"
+    />
+  </Slider>
+</StepEventsstyle__Container>
+`;
+
+exports[`<StepEvents /> should render full width and no arrows with 1 event 1`] = `
+<StepEventsstyle__Container
+  className="block"
+  id="StepEvents"
+>
+  <h2
+    className="h2"
+  >
+    <FormattedMessage
+      id="global.events"
+      values={Object {}}
+    />
+     
+    <span
+      className="small excerpt"
+    >
+      1
+    </span>
+  </h2>
+  <Slider
+    arrows={false}
+    dots={false}
+    infinite={false}
+    nextArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-right"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    prevArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-left"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    slidesToShow={1}
+    speed={500}
+  >
+    <Relay(ProjectEventPreview)
+      event={
+        Object {
+          " $fragmentRefs": null,
+          "id": "event1",
+        }
+      }
+      key="event1"
+    />
+  </Slider>
+</StepEventsstyle__Container>
+`;
+
+exports[`<StepEvents /> should render nothing without events 1`] = `""`;
+
+exports[`<StepEvents /> should render without arrows with 2 events 1`] = `
+<StepEventsstyle__Container
+  className="block"
+  id="StepEvents"
+>
+  <h2
+    className="h2"
+  >
+    <FormattedMessage
+      id="global.events"
+      values={Object {}}
+    />
+     
+    <span
+      className="small excerpt"
+    >
+      2
+    </span>
+  </h2>
+  <Slider
+    arrows={false}
+    dots={false}
+    infinite={false}
+    nextArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-right"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    prevArrow={
+      <Arrow>
+        <IconRounded
+          borderColor="#e3e3e3"
+          size={36}
+        >
+          <Icon
+            color="#acacac"
+            name="chevron-left"
+            size={18}
+          />
+        </IconRounded>
+      </Arrow>
+    }
+    slidesToShow={2}
+    speed={500}
+  >
+    <Relay(ProjectEventPreview)
+      event={
+        Object {
+          " $fragmentRefs": null,
+          "id": "event1",
+        }
+      }
+      key="event1"
+    />
+  </Slider>
+</StepEventsstyle__Container>
+`;

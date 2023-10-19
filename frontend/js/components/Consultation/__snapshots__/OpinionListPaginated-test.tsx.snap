@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionListPaginated /> renders correcty with pagination disabled 1`] = `
+<Fragment>
+  <Relay(Opinion)
+    key="0"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="1"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="2"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <div
+    id="OpinionListPaginated-end-pagination"
+  />
+</Fragment>
+`;
+
+exports[`<OpinionListPaginated /> renders correcty with pagination enabled 1`] = `
+<Fragment>
+  <Relay(Opinion)
+    key="0"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="1"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="2"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+  >
+    <Button
+      active={false}
+      block={true}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
+      id="OpinionListPaginated-loadmore"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="see-more-proposals"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
+</Fragment>
+`;
+
+exports[`<OpinionListPaginated /> renders correcty with pagination enabled 2`] = `
+<Fragment>
+  <Relay(Opinion)
+    key="0"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion1",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="1"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion2",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <Relay(Opinion)
+    key="2"
+    opinion={
+      Object {
+        " $fragmentRefs": null,
+        "id": "opinion3",
+      }
+    }
+    showUpdatedDate={false}
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+  >
+    <Loader
+      color="#333333"
+      inline={true}
+      show={true}
+      size={28}
+    />
+  </ListGroupItem>
+</Fragment>
+`;

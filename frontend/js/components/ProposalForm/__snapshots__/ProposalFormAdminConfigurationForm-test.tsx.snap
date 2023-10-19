@@ -1,0 +1,2922 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
+<form
+  id="proposalFormVote"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="global.formulaire"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        className="pull-right link"
+        href="admin.help.link.form.configuration"
+        rel="noopener noreferrer"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         
+        <FormattedMessage
+          id="global.help"
+          values={Object {}}
+        />
+      </a>
+    </div>
+    <div
+      className="box-content"
+    >
+      <Field
+        component={[Function]}
+        id="proposal_form_objectType"
+        label={
+          <FormattedMessage
+            id="object-deposited"
+            values={Object {}}
+          />
+        }
+        name="objectType"
+        options={
+          Array [
+            Object {
+              "label": "global.proposal",
+              "value": "PROPOSAL",
+            },
+            Object {
+              "label": "admin.fields.response.question",
+              "value": "QUESTION",
+            },
+            Object {
+              "label": "global.establishment",
+              "value": "ESTABLISHMENT",
+            },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
+            },
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_description"
+        label={
+          <FormattedMessage
+            id="global.intro"
+            values={Object {}}
+          />
+        }
+        name="description"
+        type="admin-editor"
+      />
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.permanent_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading m-0"
+        >
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_title_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="titleHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <Relay(Connect(SectionDisplayMode))
+    dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "addressHelpText": "",
+        "allowAknowledge": true,
+        "canContact": false,
+        "categories": Array [
+          Object {
+            "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
+            "id": "category1",
+            "name": "Category 1 ",
+          },
+        ],
+        "categoryHelpText": "",
+        "categoryMandatory": true,
+        "description": "description",
+        "descriptionHelpText": "",
+        "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
+        "districtHelpText": "",
+        "districtMandatory": true,
+        "districts": Array [],
+        "id": "proposalFormId",
+        "illustrationHelpText": "",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false,
+        "mapCenter": Object {
+          "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+          "lat": 0,
+          "lng": 0,
+        },
+        "objectType": "PROPOSAL",
+        "proposalInAZoneRequired": true,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-1",
+            "jumps": Array [],
+            "level": 0,
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "rangeMax": null,
+            "rangeMin": null,
+            "required": false,
+            "title": "Titre 1",
+            "type": "text",
+          },
+        ],
+        "summaryHelpText": "",
+        "themeHelpText": "",
+        "themeMandatory": true,
+        "titleHelpText": "",
+        "usingAddress": true,
+        "usingCategories": true,
+        "usingDescription": true,
+        "usingDistrict": true,
+        "usingFacebook": true,
+        "usingIllustration": false,
+        "usingInstagram": true,
+        "usingLinkedIn": true,
+        "usingSummary": false,
+        "usingThemes": true,
+        "usingTwitter": true,
+        "usingWebPage": true,
+        "usingYoutube": true,
+        "zoomMap": 0,
+      }
+    }
+  />
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="proposal_form.admin.configuration.optional_field"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_description_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="description"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.description"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_description_field"
+              name="usingDescription"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_description_mandatory"
+            name="descriptionMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_description_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="descriptionHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_summary_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="summary"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.summary"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_summary_field"
+              name="usingSummary"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_summary_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="summaryHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_illustration_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="illustration"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_illustration_field"
+              name="usingIllustration"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_illustration_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="illustrationHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_category_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="proposal_form_admin_category_panel"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.category"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_categories_field"
+              name="usingCategories"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_category_mandatory"
+            name="categoryMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="make.input.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_category_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="categoryHelpText"
+            type="text"
+          />
+          <FieldArray
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "__ComponentClass": [Function],
+                "render": [Function],
+              }
+            }
+            name="categories"
+            props={
+              Object {
+                "proposalForm": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "objectType": "PROPOSAL",
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": null,
+                      "rangeMin": null,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "text",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingFacebook": true,
+                  "usingIllustration": false,
+                  "usingInstagram": true,
+                  "usingLinkedIn": true,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "usingTwitter": true,
+                  "usingWebPage": true,
+                  "usingYoutube": true,
+                  "zoomMap": 0,
+                },
+                "query": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "viewer": Object {
+                    "isSuperAdmin": false,
+                  },
+                },
+              }
+            }
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="address-body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="address"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              id="proposal_form_using_address_field"
+              name="usingAddress"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_address_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="addressHelpText"
+            type="text"
+          />
+          <p
+            className="link"
+          >
+            <Glyphicon
+              bsClass="glyphicon"
+              glyph="info-sign"
+            />
+             
+            <FormattedMessage
+              id="the-proposals-will-be-posted-on-a-map"
+              values={Object {}}
+            />
+          </p>
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+  </div>
+  <ForwardRef
+    backgroundColor="#ffffff"
+    direction="column"
+    mt={4}
+    paddingX={7}
+    paddingY={8}
+  >
+    <AppBox>
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Text
+        color="#85919D"
+        fontSize="13px"
+        lineHeight="16px"
+        mb={8}
+        mt={2}
+      >
+        <FormattedMessage
+          id="authorize-external-links"
+          values={Object {}}
+        />
+      </Text>
+    </AppBox>
+    <ProposalFormAdminConfigurationForm__ExternaLinksFlex
+      alignContent="baseline"
+      direction="column"
+      justifyItems="baseline"
+    >
+      <Field
+        className="mb-0 mt-0"
+        component={[Function]}
+        id="proposal_form_web_page"
+        name="usingWebPage"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_twitter"
+        name="usingTwitter"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_facebook"
+        name="usingFacebook"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_instagram"
+        name="usingInstagram"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_linkedin"
+        name="usingLinkedIn"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_youtubr"
+        name="usingYoutube"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+    </ProposalFormAdminConfigurationForm__ExternaLinksFlex>
+  </ForwardRef>
+  <AppBox
+    mt={6}
+  >
+    <div
+      className="box box-primary container-fluid"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.custom_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <FieldArray
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          }
+        }
+        formName="proposal-form-admin-configuration"
+        name="questions"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_allow_aknowledge"
+        name="allowAknowledge"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor"
+          values={Object {}}
+        />
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="proposal-form-admin-content-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </AppBox>
+</form>
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render correctly with question type number 1`] = `
+<form
+  id="proposalFormVote"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="global.formulaire"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        className="pull-right link"
+        href="admin.help.link.form.configuration"
+        rel="noopener noreferrer"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         
+        <FormattedMessage
+          id="global.help"
+          values={Object {}}
+        />
+      </a>
+    </div>
+    <div
+      className="box-content"
+    >
+      <Field
+        component={[Function]}
+        id="proposal_form_objectType"
+        label={
+          <FormattedMessage
+            id="object-deposited"
+            values={Object {}}
+          />
+        }
+        name="objectType"
+        options={
+          Array [
+            Object {
+              "label": "global.proposal",
+              "value": "PROPOSAL",
+            },
+            Object {
+              "label": "admin.fields.response.question",
+              "value": "QUESTION",
+            },
+            Object {
+              "label": "global.establishment",
+              "value": "ESTABLISHMENT",
+            },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
+            },
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_description"
+        label={
+          <FormattedMessage
+            id="global.intro"
+            values={Object {}}
+          />
+        }
+        name="description"
+        type="admin-editor"
+      />
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.permanent_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading m-0"
+        >
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_title_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="titleHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <Relay(Connect(SectionDisplayMode))
+    dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "addressHelpText": "",
+        "allowAknowledge": true,
+        "canContact": false,
+        "categories": Array [
+          Object {
+            "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
+            "id": "category1",
+            "name": "Category 1 ",
+          },
+        ],
+        "categoryHelpText": "",
+        "categoryMandatory": true,
+        "description": "description",
+        "descriptionHelpText": "",
+        "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
+        "districtHelpText": "",
+        "districtMandatory": true,
+        "districts": Array [],
+        "id": "proposalFormId",
+        "illustrationHelpText": "",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false,
+        "mapCenter": Object {
+          "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+          "lat": 0,
+          "lng": 0,
+        },
+        "objectType": "PROPOSAL",
+        "proposalInAZoneRequired": true,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-1",
+            "isRangeBetween": true,
+            "jumps": Array [],
+            "level": 0,
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "rangeMax": 10000,
+            "rangeMin": 0,
+            "required": false,
+            "title": "Titre 1",
+            "type": "number",
+          },
+        ],
+        "summaryHelpText": "",
+        "themeHelpText": "",
+        "themeMandatory": true,
+        "titleHelpText": "",
+        "usingAddress": true,
+        "usingCategories": true,
+        "usingDescription": true,
+        "usingDistrict": true,
+        "usingFacebook": true,
+        "usingIllustration": false,
+        "usingInstagram": true,
+        "usingLinkedIn": true,
+        "usingSummary": false,
+        "usingThemes": true,
+        "usingTwitter": true,
+        "usingWebPage": true,
+        "usingYoutube": true,
+        "zoomMap": 0,
+      }
+    }
+  />
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="proposal_form.admin.configuration.optional_field"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_description_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="description"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.description"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_description_field"
+              name="usingDescription"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_description_mandatory"
+            name="descriptionMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_description_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="descriptionHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_summary_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="summary"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.summary"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_summary_field"
+              name="usingSummary"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_summary_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="summaryHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_illustration_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="illustration"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_illustration_field"
+              name="usingIllustration"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_illustration_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="illustrationHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_category_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="proposal_form_admin_category_panel"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.category"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_categories_field"
+              name="usingCategories"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_category_mandatory"
+            name="categoryMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="make.input.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_category_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="categoryHelpText"
+            type="text"
+          />
+          <FieldArray
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "__ComponentClass": [Function],
+                "render": [Function],
+              }
+            }
+            name="categories"
+            props={
+              Object {
+                "proposalForm": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "objectType": "PROPOSAL",
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": 10000,
+                      "rangeMin": 0,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "number",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingFacebook": true,
+                  "usingIllustration": false,
+                  "usingInstagram": true,
+                  "usingLinkedIn": true,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "usingTwitter": true,
+                  "usingWebPage": true,
+                  "usingYoutube": true,
+                  "zoomMap": 0,
+                },
+                "query": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "viewer": Object {
+                    "isSuperAdmin": false,
+                  },
+                },
+              }
+            }
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="address-body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="address"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              id="proposal_form_using_address_field"
+              name="usingAddress"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_address_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="addressHelpText"
+            type="text"
+          />
+          <p
+            className="link"
+          >
+            <Glyphicon
+              bsClass="glyphicon"
+              glyph="info-sign"
+            />
+             
+            <FormattedMessage
+              id="the-proposals-will-be-posted-on-a-map"
+              values={Object {}}
+            />
+          </p>
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+  </div>
+  <ForwardRef
+    backgroundColor="#ffffff"
+    direction="column"
+    mt={4}
+    paddingX={7}
+    paddingY={8}
+  >
+    <AppBox>
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Text
+        color="#85919D"
+        fontSize="13px"
+        lineHeight="16px"
+        mb={8}
+        mt={2}
+      >
+        <FormattedMessage
+          id="authorize-external-links"
+          values={Object {}}
+        />
+      </Text>
+    </AppBox>
+    <ProposalFormAdminConfigurationForm__ExternaLinksFlex
+      alignContent="baseline"
+      direction="column"
+      justifyItems="baseline"
+    >
+      <Field
+        className="mb-0 mt-0"
+        component={[Function]}
+        id="proposal_form_web_page"
+        name="usingWebPage"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_twitter"
+        name="usingTwitter"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_facebook"
+        name="usingFacebook"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_instagram"
+        name="usingInstagram"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_linkedin"
+        name="usingLinkedIn"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_youtubr"
+        name="usingYoutube"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+    </ProposalFormAdminConfigurationForm__ExternaLinksFlex>
+  </ForwardRef>
+  <AppBox
+    mt={6}
+  >
+    <div
+      className="box box-primary container-fluid"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.custom_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <FieldArray
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          }
+        }
+        formName="proposal-form-admin-configuration"
+        name="questions"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_allow_aknowledge"
+        name="allowAknowledge"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor"
+          values={Object {}}
+        />
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="proposal-form-admin-content-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </AppBox>
+</form>
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number 1`] = `
+<form
+  id="proposalFormVote"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="global.formulaire"
+          values={Object {}}
+        />
+      </h3>
+      <a
+        className="pull-right link"
+        href="admin.help.link.form.configuration"
+        rel="noopener noreferrer"
+      >
+        <i
+          className="fa fa-info-circle"
+        />
+         
+        <FormattedMessage
+          id="global.help"
+          values={Object {}}
+        />
+      </a>
+    </div>
+    <div
+      className="box-content"
+    >
+      <Field
+        component={[Function]}
+        id="proposal_form_objectType"
+        label={
+          <FormattedMessage
+            id="object-deposited"
+            values={Object {}}
+          />
+        }
+        name="objectType"
+        options={
+          Array [
+            Object {
+              "label": "global.proposal",
+              "value": "PROPOSAL",
+            },
+            Object {
+              "label": "admin.fields.response.question",
+              "value": "QUESTION",
+            },
+            Object {
+              "label": "global.establishment",
+              "value": "ESTABLISHMENT",
+            },
+            Object {
+              "label": "global.review",
+              "value": "OPINION",
+            },
+          ]
+        }
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_description"
+        label={
+          <FormattedMessage
+            id="global.intro"
+            values={Object {}}
+          />
+        }
+        name="description"
+        type="admin-editor"
+      />
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.permanent_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <div
+        className="panel panel-default"
+      >
+        <h4
+          className="panel-heading m-0"
+        >
+          <FormattedMessage
+            id="global.title"
+            values={Object {}}
+          />
+        </h4>
+        <div
+          className="panel-body"
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_title_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="titleHelpText"
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <Relay(Connect(SectionDisplayMode))
+    dispatch={[MockFunction]}
+    formName="proposal-form-admin-configuration"
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "addressHelpText": "",
+        "allowAknowledge": true,
+        "canContact": false,
+        "categories": Array [
+          Object {
+            "categoryImage": null,
+            "color": "purple",
+            "icon": "wheelchair",
+            "id": "category1",
+            "name": "Category 1 ",
+          },
+        ],
+        "categoryHelpText": "",
+        "categoryMandatory": true,
+        "description": "description",
+        "descriptionHelpText": "",
+        "descriptionMandatory": true,
+        "descriptionUsingJoditWysiwyg": false,
+        "districtHelpText": "",
+        "districtMandatory": true,
+        "districts": Array [],
+        "id": "proposalFormId",
+        "illustrationHelpText": "",
+        "isGridViewEnabled": false,
+        "isListViewEnabled": false,
+        "isMapViewEnabled": false,
+        "mapCenter": Object {
+          "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+          "lat": 0,
+          "lng": 0,
+        },
+        "objectType": "PROPOSAL",
+        "proposalInAZoneRequired": true,
+        "questions": Array [
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-1",
+            "isRangeBetween": true,
+            "jumps": Array [],
+            "level": 0,
+            "number": 1,
+            "position": 1,
+            "private": false,
+            "rangeMax": 0,
+            "rangeMin": 10,
+            "required": false,
+            "title": "Titre 1",
+            "type": "number",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-2",
+            "isRangeBetween": true,
+            "jumps": Array [],
+            "level": 0,
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "rangeMax": 0,
+            "rangeMin": 0,
+            "required": false,
+            "title": "Titre 2",
+            "type": "number",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-3",
+            "isRangeBetween": true,
+            "jumps": Array [],
+            "level": 0,
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "rangeMax": null,
+            "rangeMin": 1000,
+            "required": false,
+            "title": "Titre 3",
+            "type": "number",
+          },
+          Object {
+            "__typename": "SimpleQuestion",
+            "alwaysJumpDestinationQuestion": null,
+            "description": "des cryptes Sion",
+            "descriptionUsingJoditWysiwyg": false,
+            "destinationJumps": Array [],
+            "helpText": null,
+            "hidden": false,
+            "id": "field-4",
+            "isRangeBetween": true,
+            "jumps": Array [],
+            "level": 0,
+            "number": 2,
+            "position": 2,
+            "private": false,
+            "rangeMax": 10000,
+            "rangeMin": null,
+            "required": false,
+            "title": "Titre 4",
+            "type": "number",
+          },
+        ],
+        "summaryHelpText": "",
+        "themeHelpText": "",
+        "themeMandatory": true,
+        "titleHelpText": "",
+        "usingAddress": true,
+        "usingCategories": true,
+        "usingDescription": true,
+        "usingDistrict": true,
+        "usingFacebook": true,
+        "usingIllustration": false,
+        "usingInstagram": true,
+        "usingLinkedIn": true,
+        "usingSummary": false,
+        "usingThemes": true,
+        "usingTwitter": true,
+        "usingWebPage": true,
+        "usingYoutube": true,
+        "zoomMap": 0,
+      }
+    }
+  />
+  <div
+    className="box box-primary container-fluid mt-10"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="proposal_form.admin.configuration.optional_field"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_description_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="description"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.description"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_description_field"
+              name="usingDescription"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_description_mandatory"
+            name="descriptionMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_description_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="descriptionHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_summary_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="summary"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.summary"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_summary_field"
+              name="usingSummary"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_summary_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="summaryHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={false}
+      id="proposal_form_admin_illustration_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="illustration"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.illustration"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_illustration_field"
+              name="usingIllustration"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_illustration_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="illustrationHelpText"
+            type="text"
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="proposal_form_admin_category_panel_body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="proposal_form_admin_category_panel"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="global.category"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_using_categories_field"
+              name="usingCategories"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_category_mandatory"
+            name="categoryMandatory"
+            type="checkbox"
+          >
+            <FormattedMessage
+              id="make.input.mandatory"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            component={[Function]}
+            id="proposal_form_category_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="categoryHelpText"
+            type="text"
+          />
+          <FieldArray
+            component={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "__ComponentClass": [Function],
+                "render": [Function],
+              }
+            }
+            name="categories"
+            props={
+              Object {
+                "proposalForm": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "addressHelpText": "",
+                  "allowAknowledge": true,
+                  "canContact": false,
+                  "categories": Array [
+                    Object {
+                      "categoryImage": null,
+                      "color": "purple",
+                      "icon": "wheelchair",
+                      "id": "category1",
+                      "name": "Category 1 ",
+                    },
+                  ],
+                  "categoryHelpText": "",
+                  "categoryMandatory": true,
+                  "description": "description",
+                  "descriptionHelpText": "",
+                  "descriptionMandatory": true,
+                  "descriptionUsingJoditWysiwyg": false,
+                  "districtHelpText": "",
+                  "districtMandatory": true,
+                  "districts": Array [],
+                  "id": "proposalFormId",
+                  "illustrationHelpText": "",
+                  "isGridViewEnabled": false,
+                  "isListViewEnabled": false,
+                  "isMapViewEnabled": false,
+                  "mapCenter": Object {
+                    "json": "[{\\"formatted_address\\":\\"10 Yonge St, Toronto, ON M5E 1R4, Canada\\",\\"geometry\\":{\\"location\\":{\\"lat\\":43.6424564,\\"lng\\":-79.3755156},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":43.6411074197085,\\"west\\":-79.37686458029151,\\"north\\":43.6438053802915,\\"east\\":-79.37416661970849}},\\"types\\":[\\"street_address\\"],\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Yonge Street\\",\\"short_name\\":\\"Yonge St\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Old Toronto\\",\\"short_name\\":\\"Old Toronto\\",\\"types\\":[\\"political\\",\\"sublocality\\",\\"sublocality_level_1\\"]},{\\"long_name\\":\\"Toronto\\",\\"short_name\\":\\"Toronto\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Toronto Division\\",\\"short_name\\":\\"Toronto Division\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Ontario\\",\\"short_name\\":\\"ON\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Canada\\",\\"short_name\\":\\"CA\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"M5E 1R4\\",\\"short_name\\":\\"M5E 1R4\\",\\"types\\":[\\"postal_code\\"]}],\\"place_id\\":\\"ChIJrbgtxSvL1IkR2xGe7JZyuw0\\",\\"plus_code\\":{\\"compound_code\\":\\"JJRF+XQ Toronto, ON, Canada\\",\\"global_code\\":\\"87M2JJRF+XQ\\"}}]",
+                    "lat": 0,
+                    "lng": 0,
+                  },
+                  "objectType": "PROPOSAL",
+                  "proposalInAZoneRequired": true,
+                  "questions": Array [
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-1",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 1,
+                      "position": 1,
+                      "private": false,
+                      "rangeMax": 0,
+                      "rangeMin": 10,
+                      "required": false,
+                      "title": "Titre 1",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-2",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": 0,
+                      "rangeMin": 0,
+                      "required": false,
+                      "title": "Titre 2",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-3",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": null,
+                      "rangeMin": 1000,
+                      "required": false,
+                      "title": "Titre 3",
+                      "type": "number",
+                    },
+                    Object {
+                      "__typename": "SimpleQuestion",
+                      "alwaysJumpDestinationQuestion": null,
+                      "description": "des cryptes Sion",
+                      "descriptionUsingJoditWysiwyg": false,
+                      "destinationJumps": Array [],
+                      "helpText": null,
+                      "hidden": false,
+                      "id": "field-4",
+                      "isRangeBetween": true,
+                      "jumps": Array [],
+                      "level": 0,
+                      "number": 2,
+                      "position": 2,
+                      "private": false,
+                      "rangeMax": 10000,
+                      "rangeMin": null,
+                      "required": false,
+                      "title": "Titre 4",
+                      "type": "number",
+                    },
+                  ],
+                  "summaryHelpText": "",
+                  "themeHelpText": "",
+                  "themeMandatory": true,
+                  "titleHelpText": "",
+                  "usingAddress": true,
+                  "usingCategories": true,
+                  "usingDescription": true,
+                  "usingDistrict": true,
+                  "usingFacebook": true,
+                  "usingIllustration": false,
+                  "usingInstagram": true,
+                  "usingLinkedIn": true,
+                  "usingSummary": false,
+                  "usingThemes": true,
+                  "usingTwitter": true,
+                  "usingWebPage": true,
+                  "usingYoutube": true,
+                  "zoomMap": 0,
+                },
+                "query": Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "viewer": Object {
+                    "isSuperAdmin": false,
+                  },
+                },
+              }
+            }
+          />
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+    <Uncontrolled(Panel)
+      expanded={true}
+      id="address-body"
+      onToggle={[Function]}
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
+        <div
+          id="address"
+        >
+          <h4
+            className="pull-left"
+          >
+            <FormattedMessage
+              id="proposal_form.address"
+              values={Object {}}
+            />
+          </h4>
+          <div
+            className="pull-right"
+          >
+            <Field
+              component={[Function]}
+              disabled={false}
+              id="proposal_form_using_address_field"
+              name="usingAddress"
+              normalize={[Function]}
+            />
+          </div>
+          <div
+            className="clearfix"
+          />
+        </div>
+      </PanelHeading>
+      <PanelCollapse
+        bsClass="panel"
+      >
+        <PanelBody
+          bsClass="panel"
+          collapsible={false}
+        >
+          <Field
+            component={[Function]}
+            id="proposal_form_address_help_text"
+            label={
+              <span>
+                <FormattedMessage
+                  id="global.help.text"
+                  values={Object {}}
+                />
+                <span
+                  className="excerpt"
+                >
+                  <FormattedMessage
+                    id="global.optional"
+                    values={Object {}}
+                  />
+                </span>
+              </span>
+            }
+            name="addressHelpText"
+            type="text"
+          />
+          <p
+            className="link"
+          >
+            <Glyphicon
+              bsClass="glyphicon"
+              glyph="info-sign"
+            />
+             
+            <FormattedMessage
+              id="the-proposals-will-be-posted-on-a-map"
+              values={Object {}}
+            />
+          </p>
+        </PanelBody>
+      </PanelCollapse>
+    </Uncontrolled(Panel)>
+  </div>
+  <ForwardRef
+    backgroundColor="#ffffff"
+    direction="column"
+    mt={4}
+    paddingX={7}
+    paddingY={8}
+  >
+    <AppBox>
+      <Heading
+        as="h3"
+        color="#003670"
+        fontSize="18px"
+        fontWeight="600"
+        lineHeight="24px"
+      >
+        <FormattedMessage
+          id="external-links"
+          values={Object {}}
+        />
+      </Heading>
+      <Text
+        color="#85919D"
+        fontSize="13px"
+        lineHeight="16px"
+        mb={8}
+        mt={2}
+      >
+        <FormattedMessage
+          id="authorize-external-links"
+          values={Object {}}
+        />
+      </Text>
+    </AppBox>
+    <ProposalFormAdminConfigurationForm__ExternaLinksFlex
+      alignContent="baseline"
+      direction="column"
+      justifyItems="baseline"
+    >
+      <Field
+        className="mb-0 mt-0"
+        component={[Function]}
+        id="proposal_form_web_page"
+        name="usingWebPage"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_twitter"
+        name="usingTwitter"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.twitter"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_facebook"
+        name="usingFacebook"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.facebook"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_instagram"
+        name="usingInstagram"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="instagram"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_linkedin"
+        name="usingLinkedIn"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="share.linkedin"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+      <Field
+        component={[Function]}
+        id="proposal_form_youtubr"
+        name="usingYoutube"
+        type="checkbox"
+      >
+        <Text>
+          <FormattedMessage
+            id="youtube"
+            values={Object {}}
+          />
+        </Text>
+      </Field>
+    </ProposalFormAdminConfigurationForm__ExternaLinksFlex>
+  </ForwardRef>
+  <AppBox
+    mt={6}
+  >
+    <div
+      className="box box-primary container-fluid"
+    >
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="proposal_form.admin.configuration.custom_field"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <FieldArray
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "type": [Function],
+          }
+        }
+        formName="proposal-form-admin-configuration"
+        name="questions"
+      />
+      <Field
+        component={[Function]}
+        id="proposal_form_allow_aknowledge"
+        name="allowAknowledge"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor"
+          values={Object {}}
+        />
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="proposal-form-admin-content-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={true}
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </AppBox>
+</form>
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as 0 1`] = `
+Object {
+  "questions": Array [
+    Object {
+      "rangeMax": "error.define-value",
+      "rangeMin": "error.define-value",
+    },
+  ],
+  "viewEnabled": "select.display.mode",
+}
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min < max 1`] = `
+Object {
+  "viewEnabled": "select.display.mode",
+}
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min > max 1`] = `
+Object {
+  "questions": Array [
+    Object {
+      "rangeMin": "error.min-higher-maximum",
+    },
+  ],
+  "viewEnabled": "select.display.mode",
+}
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min equal 0 and max equal 10000 1`] = `
+Object {
+  "viewEnabled": "select.display.mode",
+}
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as min equal 1000 and max equal 0 1`] = `
+Object {
+  "questions": Array [
+    Object {
+      "rangeMin": "error.min-higher-maximum",
+    },
+  ],
+  "viewEnabled": "select.display.mode",
+}
+`;
+
+exports[`<ProposalFormAdminConfigurationForm /> render error with question type number with value as null 1`] = `
+Object {
+  "questions": Array [
+    Object {
+      "rangeMax": "error.define-value",
+      "rangeMin": "error.define-value",
+    },
+  ],
+  "viewEnabled": "select.display.mode",
+}
+`;

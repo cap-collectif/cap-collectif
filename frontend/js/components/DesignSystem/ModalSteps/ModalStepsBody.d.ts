@@ -1,5 +1,6 @@
-import ModalBody from '../Modal/ModalBody';
+// @ts-nocheck
+import ModalBody from '../Modal/ModalBody'
 
 declare const ModalStepsBody: ModalBody
 
-export default ModalStepsBody;
+export default ModalStepsBody

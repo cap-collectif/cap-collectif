@@ -1,9 +1,12 @@
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
-import { ComponentProps } from 'react';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../Ui/Primitives/AppBox'
+import { ComponentProps } from 'react'
 
-declare const Spinner: PolymorphicComponent<ComponentProps<SVGElement> & {
-    size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | string,
-    color?: string,
-}>;
+declare const Spinner: PolymorphicComponent<
+  ComponentProps<SVGElement> & {
+    size?: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | string
+    color?: string
+  }
+>
 
-export default Spinner;
+export default Spinner

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FaceToFace /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <Text
+    color="gray.500"
+    mb={8}
+  >
+    add.opposing.opinions
+  </Text>
+  <ForwardRef
+    align="stretch"
+    direction="row"
+    spacing={6}
+  >
+    <Relay(DebateOpinion)
+      debateOpinion={
+        Object {
+          " $fragmentRefs": null,
+          "id": "opinion123",
+          "type": "FOR",
+        }
+      }
+      onDelete={[Function]}
+      onEdit={[Function]}
+    />
+    <Relay(DebateOpinion)
+      debateOpinion={
+        Object {
+          " $fragmentRefs": null,
+          "id": "opinion456",
+          "type": "AGAINST",
+        }
+      }
+      onDelete={[Function]}
+      onEdit={[Function]}
+    />
+  </ForwardRef>
+</ForwardRef>
+`;

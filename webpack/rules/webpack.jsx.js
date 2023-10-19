@@ -12,9 +12,9 @@ function getRulesConf() {
             path.resolve('node_modules/intl-messageformat'),
             path.resolve('node_modules/intl-messageformat-parser'),
             path.resolve('node_modules/@marsidev/react-turnstile'),
-            /\.(js|jsx|mjs)$/i,
+            /\.(ts|tsx)$/i,
           ],
-          exclude: [/(-test\.js|\.snap|-stories\.js)$/],
+          exclude: [/(-test\.tsx|\.snap|-stories\.tsx)$/, /node_modules/],
           use: [
             {
               loader: 'babel-loader',
@@ -29,6 +29,12 @@ function getRulesConf() {
                   '@babel/plugin-proposal-optional-chaining',
                   '@babel/plugin-proposal-nullish-coalescing-operator',
                 ],
+              },
+            },
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
               },
             },
           ],

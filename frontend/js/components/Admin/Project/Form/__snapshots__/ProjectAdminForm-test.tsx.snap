@@ -1,0 +1,639 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectAdminForm /> renders correctly empty 1`] = `
+<form
+  id="projectAdminForm"
+  onSubmit={[MockFunction]}
+>
+  <Relay(ProjectContentAdminForm)
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <Relay(Connect(ProjectExternalAdminPage))
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    formName="projectAdminForm"
+    handleSubmit={[MockFunction]}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <Relay(ProjectStepAdmin)
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    hasIdentificationCodeLists={true}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    viewerIsAdmin={false}
+    warning={null}
+  />
+  <Relay(Connect(ProjectAccessAdminForm))
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    formName="projectAdminForm"
+    handleSubmit={[MockFunction]}
+    hasIdentificationCodeLists={true}
+    initialGroups={Array []}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    onTitleChange={[MockFunction]}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    title="testTitle"
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    viewerIsAdmin={false}
+    warning={null}
+  />
+  <Relay(ProjectProposalsAdminForm)
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <Relay(ProjectPublishAdminForm)
+    anyTouched={false}
+    array={
+      Object {
+        "insert": [MockFunction],
+        "move": [MockFunction],
+        "pop": [MockFunction],
+        "push": [MockFunction],
+        "remove": [MockFunction],
+        "removeAll": [MockFunction],
+        "shift": [MockFunction],
+        "splice": [MockFunction],
+        "swap": [MockFunction],
+        "unshift": [MockFunction],
+      }
+    }
+    asyncValidate={[MockFunction]}
+    asyncValidating={false}
+    autofill={[MockFunction]}
+    blur={[MockFunction]}
+    change={[MockFunction]}
+    clearAsyncError={[MockFunction]}
+    clearSubmit={[MockFunction]}
+    destroy={[MockFunction]}
+    dirty={false}
+    dispatch={[MockFunction]}
+    error={null}
+    form="formName"
+    handleSubmit={[MockFunction]}
+    initialize={[MockFunction]}
+    initialized={true}
+    intl={
+      Object {
+        "formatDate": [Function],
+        "formatHTMLMessage": [Function],
+        "formatMessage": [Function],
+        "formatNumber": [Function],
+        "formatPlural": [Function],
+        "formatRelative": [Function],
+        "formatTime": [Function],
+        "formats": Object {},
+        "locale": "fr-FR",
+        "messages": Object {},
+        "now": [Function],
+      }
+    }
+    invalid={false}
+    pristine={true}
+    project={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "address": null,
+        "archived": false,
+        "authors": Array [],
+        "cover": null,
+        "districts": null,
+        "externalContributionsCount": null,
+        "externalLink": null,
+        "externalParticipantsCount": null,
+        "externalVotesCount": null,
+        "firstCollectStep": Object {
+          "form": Object {
+            "isGridViewEnabled": true,
+            "isListViewEnabled": false,
+            "isMapViewEnabled": false,
+          },
+        },
+        "id": "1",
+        "isExternal": false,
+        "locale": null,
+        "metaDescription": "so meta",
+        "opinionCanBeFollowed": true,
+        "publishedAt": "22/22/22",
+        "restrictedViewers": null,
+        "steps": Array [],
+        "themes": Array [],
+        "title": "testTitle",
+        "type": Object {
+          "id": "1",
+        },
+        "url": "/project1",
+        "video": "dailymotion.com/issou",
+        "visibility": "ADMIN",
+      }
+    }
+    reset={[MockFunction]}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    touch={[MockFunction]}
+    untouch={[MockFunction]}
+    updateSyncErrors={[MockFunction]}
+    valid={true}
+    warning={null}
+  />
+  <div
+    className="col-md-12"
+  >
+    <ProjectAdminFormstyle__ProjectBoxContainer
+      className="box container-fluid"
+    >
+      <div
+        className="box-content p-15"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="submit-project-content"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </div>
+    </ProjectAdminFormstyle__ProjectBoxContainer>
+  </div>
+</form>
+`;

@@ -1,8 +1,11 @@
-import { FC } from 'react';
-import type { FlexProps } from '../../Ui/Primitives/Layout/Flex';
+// @ts-nocheck
+import { FC } from 'react'
+import type { FlexProps } from '../../Ui/Primitives/Layout/Flex'
 
-declare const InlineList: FC<Omit<FlexProps, 'as'> & {
+declare const InlineList: FC<
+  Omit<FlexProps, 'as'> & {
     readonly separator: string
-}>
+  }
+>
 
 export default InlineList

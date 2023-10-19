@@ -1,0 +1,716 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentCard /> renders correctly 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <Flex
+    direction="column"
+    height="100%"
+  >
+    <Flex
+      align="start"
+      direction="row"
+      justify="space-between"
+      mb={2}
+    >
+      <Flex
+        align="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variantColor="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </Flex>
+      <Flex
+        align="center"
+        direction="row"
+      />
+    </Flex>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <Flex
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
+      >
+        <Connect(NewLoginOverlay)
+          enabled={false}
+          placement="bottom"
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <Icon
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
+          />
+        </Connect(NewLoginOverlay)>
+      </ConditionalWrapper>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </Flex>
+  </Flex>
+  <Relay(ModalReportArgumentMobile)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+          "url": "/debate123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <Flex
+    direction="column"
+    height="100%"
+  >
+    <Flex
+      align="start"
+      direction="row"
+      justify="space-between"
+      mb={2}
+    >
+      <Flex
+        align="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variantColor="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </Flex>
+      <Flex
+        align="center"
+        direction="row"
+      />
+    </Flex>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <Flex
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
+      >
+        <Connect(NewLoginOverlay)
+          enabled={false}
+          placement="bottom"
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <Icon
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
+          />
+        </Connect(NewLoginOverlay)>
+      </ConditionalWrapper>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </Flex>
+  </Flex>
+  <Relay(ModalReportArgumentMobile)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+          "url": "/debate123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <Flex
+    direction="column"
+    height="100%"
+  >
+    <Flex
+      align="start"
+      direction="row"
+      justify="space-between"
+      mb={2}
+    >
+      <Flex
+        align="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variantColor="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </Flex>
+      <Flex
+        align="center"
+        direction="row"
+      />
+    </Flex>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <Flex
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
+      >
+        <Connect(NewLoginOverlay)
+          enabled={false}
+          placement="bottom"
+        >
+          <Button
+            aria-label="global.cancel"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <Icon
+                name="CLAP"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
+          />
+        </Connect(NewLoginOverlay)>
+      </ConditionalWrapper>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </Flex>
+  </Flex>
+  <Relay(ModalReportArgumentMobile)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+          "url": "/debate123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": true,
+        "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <Flex
+    direction="column"
+    height="100%"
+  >
+    <Flex
+      align="start"
+      direction="row"
+      justify="space-between"
+      mb={2}
+    >
+      <Flex
+        align="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variantColor="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </Flex>
+      <Flex
+        align="center"
+        direction="row"
+      />
+    </Flex>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <Flex
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <ConditionalWrapper
+        when={false}
+        wrapper={[Function]}
+      >
+        <Connect(NewLoginOverlay)
+          enabled={false}
+          placement="bottom"
+        >
+          <Button
+            aria-label="global.cancel"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <Icon
+                name="CLAP"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
+          />
+        </Connect(NewLoginOverlay)>
+      </ConditionalWrapper>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </Flex>
+  </Flex>
+  <Relay(ModalReportArgumentMobile)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+          "url": "/debate123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": true,
+        "viewerDidAuthor": true,
+        "viewerHasVote": true,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;
+
+exports[`<ArgumentCard /> renders correctly when connected as viewer not confirmed 1`] = `
+<Card
+  bg="white"
+  p={6}
+>
+  <Flex
+    direction="column"
+    height="100%"
+  >
+    <Flex
+      align="start"
+      direction="row"
+      justify="space-between"
+      mb={2}
+    >
+      <Flex
+        align="center"
+        direction="row"
+        flexWrap="wrap"
+      >
+        <Text
+          maxWidth="100%"
+          mb="8px !important"
+          mr={2}
+          overflow="hidden"
+        >
+          Agui
+        </Text>
+        <Tag
+          interactive={false}
+          mb={2}
+          mr={2}
+          variantColor="green"
+        >
+          <Text
+            as="span"
+            fontSize={1}
+            fontWeight="700"
+            lineHeight="sm"
+            uppercase={true}
+          >
+            <FormattedMessage
+              id="global.for"
+              values={Object {}}
+            />
+          </Text>
+        </Tag>
+      </Flex>
+      <Flex
+        align="center"
+        direction="row"
+      />
+    </Flex>
+    <Text>
+      Je suis pour le LSD dans nos cantines
+       
+    </Text>
+    <Flex
+      align="center"
+      flexDirection="row"
+      justify="center"
+      mt={
+        Array [
+          "auto",
+          3,
+        ]
+      }
+    >
+      <ConditionalWrapper
+        when={true}
+        wrapper={[Function]}
+      >
+        <Connect(NewLoginOverlay)
+          enabled={false}
+          placement="bottom"
+        >
+          <Button
+            aria-label="vote.add"
+            color="neutral-gray.500"
+            disabled={true}
+            leftIcon={
+              <Icon
+                name="CLAP_O"
+                size="lg"
+              />
+            }
+            onClick={[Function]}
+            variant="link"
+            variantColor="hierarchy"
+          />
+        </Connect(NewLoginOverlay)>
+      </ConditionalWrapper>
+      <Text
+        as="span"
+        color="neutral-gray.900"
+        fontSize={
+          Array [
+            4,
+            3,
+          ]
+        }
+        ml={
+          Array [
+            1,
+            0,
+          ]
+        }
+      >
+        500
+      </Text>
+    </Flex>
+  </Flex>
+  <Relay(ModalReportArgumentMobile)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "id": "AguiLeBg",
+          "username": "Agui",
+        },
+        "body": "Je suis pour le LSD dans nos cantines",
+        "debate": Object {
+          "id": "debate-123",
+          "url": "/debate123",
+        },
+        "id": "argumentPour42",
+        "published": true,
+        "type": "FOR",
+        "viewerCanReport": false,
+        "viewerDidAuthor": false,
+        "viewerHasVote": false,
+        "votes": Object {
+          "totalCount": 500,
+        },
+      }
+    }
+    onClose={[Function]}
+    show={false}
+  />
+</Card>
+`;

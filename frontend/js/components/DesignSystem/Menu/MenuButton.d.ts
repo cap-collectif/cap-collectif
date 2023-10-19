@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { MenuButtonHTMLProps } from 'reakit/Menu'
-import { FC } from 'react';
+import { FC } from 'react'
 
 type Props = MenuButtonHTMLProps & {
   as?: any
@@ -7,4 +8,4 @@ type Props = MenuButtonHTMLProps & {
 
 declare const MenuButton: FC<Props>
 
-export default MenuButton;
+export default MenuButton

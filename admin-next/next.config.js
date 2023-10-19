@@ -2,7 +2,7 @@
 
 /**
  * @type {import('next').NextConfig}
-*/
+ */
 const nextConfig = {
   // TODO enable this
   reactStrictMode: false,

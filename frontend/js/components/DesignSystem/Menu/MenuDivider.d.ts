@@ -1,5 +1,6 @@
-import { PolymorphicAppBox } from '../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicAppBox } from '../../Ui/Primitives/AppBox'
 
-declare const MenuDivider: PolymorphicAppBox;
+declare const MenuDivider: PolymorphicAppBox
 
-export default MenuDivider;
+export default MenuDivider

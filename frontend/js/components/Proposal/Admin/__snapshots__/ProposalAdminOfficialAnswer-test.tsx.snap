@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminOfficialAnswer /> render correctly with analysis 1`] = `
+<div
+  className="mt-20"
+>
+  <NoMailingListstyle__Container>
+    <Icon
+      color="#ffffff"
+      name="stampedPaper"
+      size={64}
+    />
+    <FormattedMessage
+      id="title.analysisPhase.configured"
+      tagName="p"
+      values={Object {}}
+    />
+    <FormattedMessage
+      id="text.officialAnswer.publish.explanation"
+      tagName="p"
+      values={Object {}}
+    />
+    <a
+      href="/adminurl"
+    >
+      <FormattedMessage
+        id="link.parameters.check"
+        values={Object {}}
+      />
+    </a>
+  </NoMailingListstyle__Container>
+</div>
+`;
+
+exports[`<ProposalAdminOfficialAnswer /> render correctly with response 1`] = `
+<div
+  className="mt-20"
+>
+  <ProposalAdminstyle__Container>
+    <div>
+      <h3>
+        <FormattedMessage
+          id="official.answer"
+          values={Object {}}
+        />
+      </h3>
+      <Label
+        color="#E4F9E9"
+        fontSize={12}
+      >
+        <FormattedMessage
+          id="global.publishDate.publishTime.feminine"
+          values={
+            Object {
+              "date": <FormattedDate
+                day="numeric"
+                month="long"
+                value={"2017-01-31T23:03:00.000Z"}
+                year="numeric"
+              />,
+              "time": <FormattedDate
+                hour="numeric"
+                minute="numeric"
+                value={"2017-01-31T23:03:00.000Z"}
+              />,
+            }
+          }
+        />
+      </Label>
+    </div>
+    <WYSIWYGRender
+      value="<p>slt</p>"
+    />
+    <br />
+    0
+  </ProposalAdminstyle__Container>
+  <Connect(SubmitButton)
+    bsStyle="primary"
+    id="proposal_admin_official_answer_publish"
+    label="global.edit"
+    onSubmit={[Function]}
+    type="submit"
+  />
+</div>
+`;
+
+exports[`<ProposalAdminOfficialAnswer /> render correctly without response 1`] = `
+<div
+  className="mt-20"
+>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    onValidate={[Function]}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "form": Object {
+          "adminUrl": "/adminurl",
+        },
+        "id": "proposal3",
+        "officialResponse": null,
+        "project": Object {
+          "hasAnalysis": false,
+          "id": "project5",
+        },
+      }
+    }
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</div>
+`;

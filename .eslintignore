@@ -1,7 +1,7 @@
-flow-typed
 __generated__
 node_modules
 features
 
 # Ignore WYSIWYG files (because we uninstall draft-js & his friends, its too heavy)
-frontend/js/components/AdminEditor/**/*.js
+frontend/js/components/AdminEditor/**/*.ts
+frontend/js/components/AdminEditor/**/*.tsx

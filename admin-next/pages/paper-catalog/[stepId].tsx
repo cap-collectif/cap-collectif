@@ -114,9 +114,9 @@ const PaperCatalogPage: React.FC<PaperCatalogPageProps> = ({ stepId }) => {
                 onClick={() => window.print()}>
                 {intl.formatMessage({ id: 'print-the-catalog' })}
             </Button>
-            {areas.map(area => {
+            {areas.map((area, index) => {
                 return (
-                    <Box>
+                    <Box key={index}>
                         <Flex
                             alignItems="center"
                             className="areaHeading"
@@ -140,6 +140,7 @@ const PaperCatalogPage: React.FC<PaperCatalogPageProps> = ({ stepId }) => {
                                 if (!proposal) return null;
                                 return (
                                     <ProposalCard
+                                        key={idx}
                                         proposal={proposal}
                                         className={idx && !((idx + 1) % 4) ? 'break' : ''}
                                     />

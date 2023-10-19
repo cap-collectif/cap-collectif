@@ -1,0 +1,398 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPublishAdminForm /> renders correctly empty 1`] = `
+<div
+  className="col-md-12"
+>
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        global.publication
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label="global.date.text"
+          name="publishedAt"
+          type="datetime"
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <Field
+        component={[Function]}
+        id="project-is-archived"
+        name="archived"
+        type="checkbox"
+      >
+        archive.project
+      </Field>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            permalink
+             
+            :
+          </strong>
+           
+          <a
+            target="blank"
+          />
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={null}
+          projectId=""
+          show={false}
+        />
+      </ForwardRef>
+    </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
+</div>
+`;
+
+exports[`<ProjectPublishAdminForm /> renders correctly with a project with locale 1`] = `
+<div
+  className="col-md-12"
+>
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        global.publication
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label="global.date.text"
+          name="publishedAt"
+          type="datetime"
+        />
+        <Field
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          autoload={true}
+          component={[Function]}
+          id="project-locale"
+          label="form.label_locale"
+          labelClassName="control-label"
+          loadOptions={[Function]}
+          name="locale"
+          placeholder="locale.all-locales"
+          role="combobox"
+          selectFieldIsObject={true}
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <Field
+        component={[Function]}
+        id="project-is-archived"
+        name="archived"
+        type="checkbox"
+      >
+        archive.project
+      </Field>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            permalink
+             
+            :
+          </strong>
+           
+          <a
+            href="/sku"
+            target="blank"
+          >
+            /sku
+          </a>
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={
+            Object {
+              " $fragmentRefs": null,
+              " $refType": null,
+              "archived": false,
+              "id": "1",
+              "locale": Object {
+                "label": "french",
+                "value": "locale-en-GB",
+              },
+              "publishedAt": "18/08/1998",
+              "url": "/sku",
+            }
+          }
+          projectId="1"
+          show={false}
+        />
+      </ForwardRef>
+    </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
+</div>
+`;
+
+exports[`<ProjectPublishAdminForm /> renders correctly with a project without locale 1`] = `
+<div
+  className="col-md-12"
+>
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        global.publication
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label="global.date.text"
+          name="publishedAt"
+          type="datetime"
+        />
+        <Field
+          aria-autocomplete="list"
+          aria-haspopup="true"
+          autoload={true}
+          component={[Function]}
+          id="project-locale"
+          label="form.label_locale"
+          labelClassName="control-label"
+          loadOptions={[Function]}
+          name="locale"
+          placeholder="locale.all-locales"
+          role="combobox"
+          selectFieldIsObject={true}
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <Field
+        component={[Function]}
+        id="project-is-archived"
+        name="archived"
+        type="checkbox"
+      >
+        archive.project
+      </Field>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            permalink
+             
+            :
+          </strong>
+           
+          <a
+            href="/sku"
+            target="blank"
+          >
+            /sku
+          </a>
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={
+            Object {
+              " $fragmentRefs": null,
+              " $refType": null,
+              "archived": false,
+              "id": "1",
+              "locale": null,
+              "publishedAt": "18/08/1998",
+              "url": "/sku",
+            }
+          }
+          projectId="1"
+          show={false}
+        />
+      </ForwardRef>
+    </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
+</div>
+`;
+
+exports[`<ProjectPublishAdminForm /> renders correctly without multilangue 1`] = `
+<div
+  className="col-md-12"
+>
+  <ProjectAdminFormstyle__ProjectBoxContainer
+    className="box container-fluid"
+  >
+    <ProjectAdminFormstyle__ProjectBoxHeader>
+      <h4>
+        global.publication
+      </h4>
+    </ProjectAdminFormstyle__ProjectBoxHeader>
+    <div
+      className="box-content"
+    >
+      <ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+        <Field
+          addonAfter={
+            <i
+              className="cap-calendar-2"
+            />
+          }
+          component={[Function]}
+          id="project-publishedAt"
+          label="global.date.text"
+          name="publishedAt"
+          type="datetime"
+        />
+      </ProjectAdminFormstyle__ProjectSmallFieldsContainer>
+      <Field
+        component={[Function]}
+        id="project-is-archived"
+        name="archived"
+        type="checkbox"
+      >
+        archive.project
+      </Field>
+      <ForwardRef
+        alignItems="center"
+        mb={4}
+      >
+        <ProjectAdminFormstyle__PermalinkWrapper>
+          <strong>
+            permalink
+             
+            :
+          </strong>
+           
+          <a
+            target="blank"
+          />
+        </ProjectAdminFormstyle__PermalinkWrapper>
+        <ProjectAdminFormstyle__UpdateSlugIcon
+          color="gray.500"
+          id="update-slug-icon"
+          name="PENCIL"
+          onClick={[Function]}
+        />
+        <WrapperComponent
+          intl={
+            Object {
+              "formatDate": [Function],
+              "formatHTMLMessage": [Function],
+              "formatMessage": [Function],
+              "formatNumber": [Function],
+              "formatPlural": [Function],
+              "formatRelative": [Function],
+              "formatTime": [Function],
+              "formats": Object {},
+              "locale": "fr-FR",
+              "messages": Object {},
+              "now": [Function],
+            }
+          }
+          onClose={[Function]}
+          project={null}
+          projectId=""
+          show={false}
+        />
+      </ForwardRef>
+    </div>
+  </ProjectAdminFormstyle__ProjectBoxContainer>
+</div>
+`;

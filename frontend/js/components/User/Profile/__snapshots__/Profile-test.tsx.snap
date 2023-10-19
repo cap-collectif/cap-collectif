@@ -1,0 +1,694 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile /> should render my profile with features user_type 1`] = `
+<form
+  className="form-horizontal"
+  onSubmit={[MockFunction]}
+>
+  <Uncontrolled(Panel)
+    id="capco_horizontal_form"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <h1>
+          <FormattedMessage
+            id="user.profile.title"
+            values={Object {}}
+          />
+        </h1>
+      </div>
+    </PanelHeading>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
+    >
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile_avatar"
+        >
+          <FormattedMessage
+            id="sonata.media.provider.image"
+            values={Object {}}
+          />
+        </label>
+        <Connect(UserAvatarDeprecated)
+          className="col-sm-1"
+          user={
+            Object {
+              " $refType": null,
+              "biography": "I am a fucking customer",
+              "facebookUrl": "https://facebook.com/mmm",
+              "id": "user1234",
+              "instagramUrl": "https://instagram.com/cuicui",
+              "linkedInUrl": "https://linkedin.com/neurchi",
+              "media": Object {
+                "id": "media1",
+                "name": "media1",
+                "size": "128*128",
+                "url": "http://imgur.com/15645613.jpg",
+              },
+              "neighborhood": "DTC",
+              "organizations": Array [],
+              "profilePageIndexed": false,
+              "twitterUrl": "https://twitter.com/cuicui",
+              "userType": Object {
+                "id": "1",
+              },
+              "username": "username",
+            }
+          }
+        />
+        <div
+          className="clearfix"
+        />
+        <div
+          className="col-sm-3"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="profile_avatar"
+          name="media"
+          type="image"
+        />
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile-form-username"
+        >
+          <FormattedMessage
+            id="global.fullname"
+            values={Object {}}
+          />
+          <br />
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </span>
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="profile-form-username"
+            name="username"
+            required={true}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile-form-userType"
+        >
+          <FormattedMessage
+            id="registration.type"
+            values={Object {}}
+          />
+           
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="profile-form-userType"
+            name="userType"
+            type="select"
+          >
+            <FormattedMessage
+              id="registration.select.type"
+              values={Object {}}
+            >
+              <Component />
+            </FormattedMessage>
+            <option
+              key="1"
+              value={1}
+            >
+              type_1
+            </option>
+          </Field>
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-biography"
+        >
+          <FormattedMessage
+            id="form.label_biography"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-biography"
+            name="biography"
+            type="textarea"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-neighborhood"
+        >
+          <FormattedMessage
+            id="form.label_neighborhood"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-neighborhood"
+            name="neighborhood"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="clearfix"
+      />
+      <h2>
+        <FormattedMessage
+          id="social-medias"
+          values={Object {}}
+        />
+      </h2>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-facebook"
+        >
+          <FormattedMessage
+            id="user.profile.edit.facebook"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-facebook"
+            name="facebookUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-instagram"
+        >
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-instagram"
+            name="instagramUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-twitter"
+        >
+          <FormattedMessage
+            id="user.profile.edit.twitter"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-twitter"
+            name="twitterUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-linkedIn"
+        >
+          <FormattedMessage
+            id="show.label_linked_in_url"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-linkedIn"
+            name="linkedInUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="clearfix"
+      />
+      <div
+        className="horizontal_field_with_border_top"
+      >
+        <div
+          className="col-sm-3"
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+          className="col-sm-6 pl-0"
+        >
+          <AlertForm
+            errorMessage={null}
+            invalid={false}
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            valid={true}
+          />
+        </ButtonToolbar>
+      </div>
+    </PanelBody>
+    <PanelFooter
+      bsClass="panel"
+    >
+      <div
+        className="col-sm-offset-4"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="profile-form-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    </PanelFooter>
+  </Uncontrolled(Panel)>
+</form>
+`;
+
+exports[`<Profile /> should render my profile without features user_type 1`] = `
+<form
+  className="form-horizontal"
+  onSubmit={[MockFunction]}
+>
+  <Uncontrolled(Panel)
+    id="capco_horizontal_form"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <h1>
+          <FormattedMessage
+            id="user.profile.title"
+            values={Object {}}
+          />
+        </h1>
+      </div>
+    </PanelHeading>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
+    >
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile_avatar"
+        >
+          <FormattedMessage
+            id="sonata.media.provider.image"
+            values={Object {}}
+          />
+        </label>
+        <Connect(UserAvatarDeprecated)
+          className="col-sm-1"
+          user={
+            Object {
+              " $refType": null,
+              "biography": "I am a fucking customer",
+              "facebookUrl": "https://facebook.com/mmm",
+              "id": "user1234",
+              "instagramUrl": "https://instagram.com/cuicui",
+              "linkedInUrl": "https://linkedin.com/neurchi",
+              "media": Object {
+                "id": "media1",
+                "name": "media1",
+                "size": "128*128",
+                "url": "http://imgur.com/15645613.jpg",
+              },
+              "neighborhood": "DTC",
+              "organizations": Array [],
+              "profilePageIndexed": false,
+              "twitterUrl": "https://twitter.com/cuicui",
+              "userType": Object {
+                "id": "1",
+              },
+              "username": "username",
+            }
+          }
+        />
+        <div
+          className="clearfix"
+        />
+        <div
+          className="col-sm-3"
+        />
+        <Field
+          component={[Function]}
+          disabled={false}
+          divClassName="col-sm-6"
+          id="profile_avatar"
+          name="media"
+          type="image"
+        />
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="profile-form-username"
+        >
+          <FormattedMessage
+            id="global.fullname"
+            values={Object {}}
+          />
+          <br />
+          <span
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="global.mandatory"
+              values={Object {}}
+            />
+          </span>
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="profile-form-username"
+            name="username"
+            required={true}
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-biography"
+        >
+          <FormattedMessage
+            id="form.label_biography"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-biography"
+            name="biography"
+            type="textarea"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-neighborhood"
+        >
+          <FormattedMessage
+            id="form.label_neighborhood"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-neighborhood"
+            name="neighborhood"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="clearfix"
+      />
+      <h2>
+        <FormattedMessage
+          id="social-medias"
+          values={Object {}}
+        />
+      </h2>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-facebook"
+        >
+          <FormattedMessage
+            id="user.profile.edit.facebook"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-facebook"
+            name="facebookUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-instagram"
+        >
+          <FormattedMessage
+            id="instagram-profile"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-instagram"
+            name="instagramUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-twitter"
+        >
+          <FormattedMessage
+            id="user.profile.edit.twitter"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-twitter"
+            name="twitterUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="horizontal_field_with_border_top no-border"
+      >
+        <label
+          className="col-sm-3 control-label"
+          htmlFor="public-data-form-linkedIn"
+        >
+          <FormattedMessage
+            id="show.label_linked_in_url"
+            values={Object {}}
+          />
+        </label>
+        <div>
+          <Field
+            component={[Function]}
+            disabled={false}
+            divClassName="col-sm-6"
+            id="public-data-form-linkedIn"
+            name="linkedInUrl"
+            placeholder="https://"
+            type="text"
+          />
+        </div>
+      </div>
+      <div
+        className="clearfix"
+      />
+      <h2>
+        <FormattedMessage
+          id="confidentialite.title"
+          values={Object {}}
+        />
+      </h2>
+      <div
+        className="horizontal_field_with_border_top"
+      >
+        <div
+          className="col-sm-3"
+        />
+        <Field
+          component={[Function]}
+          divClassName="col-sm-8"
+          id="profilePageIndexed"
+          labelClassName="font-weight-normal"
+          name="doNotIndexProfile"
+          type="checkbox"
+        >
+          <FormattedMessage
+            id="user.profile.edit.profilePageIndexed"
+            values={Object {}}
+          />
+        </Field>
+      </div>
+      <div
+        className="horizontal_field_with_border_top"
+      >
+        <div
+          className="col-sm-3"
+        />
+        <ButtonToolbar
+          bsClass="btn-toolbar"
+          className="col-sm-6 pl-0"
+        >
+          <AlertForm
+            errorMessage={null}
+            invalid={false}
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            valid={true}
+          />
+        </ButtonToolbar>
+      </div>
+    </PanelBody>
+    <PanelFooter
+      bsClass="panel"
+    >
+      <div
+        className="col-sm-offset-4"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="profile-form-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    </PanelFooter>
+  </Uncontrolled(Panel)>
+</form>
+`;

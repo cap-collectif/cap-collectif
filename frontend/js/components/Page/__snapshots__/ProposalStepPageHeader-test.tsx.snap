@@ -1,0 +1,411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalStepPageHeader /> renders with a map view 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with interpellation context in collect step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="interpellation.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="interpellation.count"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+      <span
+        className="font-weight-300 color-dark-gray"
+      >
+         
+        <FormattedMessage
+          id="interpellation.count_fusions"
+          values={
+            Object {
+              "num": 2,
+            }
+          }
+        />
+      </span>
+    </h3>
+    <Box
+      as="span"
+      bg={
+        Array [
+          "white",
+          "unset",
+        ]
+      }
+      borderRadius={
+        Array [
+          "8px 8px 0px 0px",
+          "unset",
+        ]
+      }
+      bottom={
+        Array [
+          0,
+          "unset",
+        ]
+      }
+      boxShadow={
+        Array [
+          "0px 10px 50px rgba(0, 0, 0, 0.15)",
+          "unset",
+        ]
+      }
+      className="pull-right"
+      display="block"
+      left={
+        Array [
+          0,
+          "unset",
+        ]
+      }
+      my={
+        Array [
+          0,
+          20,
+        ]
+      }
+      p={
+        Array [
+          4,
+          0,
+        ]
+      }
+      position={
+        Array [
+          "fixed",
+          "relative",
+        ]
+      }
+      width={
+        Array [
+          "100%",
+          "unset",
+        ]
+      }
+      zIndex={1000}
+    >
+      <Connect(NewLoginOverlay)>
+        <Button
+          bg="undefined !important"
+          color="undefined !important"
+          disabled={false}
+          display="block"
+          id="add-proposal"
+          m="auto"
+          maxWidth="300px"
+          onClick={[Function]}
+          opacity={1}
+          textAlign="center"
+          variantSize="small"
+          width={
+            Array [
+              "100%",
+              "",
+            ]
+          }
+        >
+          interpellation.add
+        </Button>
+      </Connect(NewLoginOverlay)>
+    </Box>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with interpellation context in selection step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="interpellation.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="interpellation.count"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with proposal context in collect step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+      <span
+        className="font-weight-300 color-dark-gray"
+      >
+         
+        <FormattedMessage
+          id="proposal.count_fusions"
+          values={
+            Object {
+              "num": 2,
+            }
+          }
+        />
+      </span>
+    </h3>
+    <Box
+      as="span"
+      bg={
+        Array [
+          "white",
+          "unset",
+        ]
+      }
+      borderRadius={
+        Array [
+          "8px 8px 0px 0px",
+          "unset",
+        ]
+      }
+      bottom={
+        Array [
+          0,
+          "unset",
+        ]
+      }
+      boxShadow={
+        Array [
+          "0px 10px 50px rgba(0, 0, 0, 0.15)",
+          "unset",
+        ]
+      }
+      className="pull-right"
+      display="block"
+      left={
+        Array [
+          0,
+          "unset",
+        ]
+      }
+      my={
+        Array [
+          0,
+          20,
+        ]
+      }
+      p={
+        Array [
+          4,
+          0,
+        ]
+      }
+      position={
+        Array [
+          "fixed",
+          "relative",
+        ]
+      }
+      width={
+        Array [
+          "100%",
+          "unset",
+        ]
+      }
+      zIndex={1000}
+    >
+      <Connect(NewLoginOverlay)>
+        <Button
+          bg="undefined !important"
+          color="undefined !important"
+          disabled={false}
+          display="block"
+          id="add-proposal"
+          m="auto"
+          maxWidth="300px"
+          onClick={[Function]}
+          opacity={1}
+          textAlign="center"
+          variantSize="small"
+          width={
+            Array [
+              "100%",
+              "",
+            ]
+          }
+        >
+          proposal.add
+        </Button>
+      </Connect(NewLoginOverlay)>
+    </Box>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with proposal context in selection step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="proposal.count"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalStepPageHeader /> renders with question context in selection step 1`] = `
+<Fragment>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        "contribuable": true,
+        "id": "form1",
+        "objectType": "QUESTION",
+      }
+    }
+    show={false}
+    title="submit-a-question"
+  />
+  <div
+    id="proposal-step-page-header"
+  >
+    <h3
+      className="h3 d-ib mb-15"
+    >
+      <FormattedMessage
+        id="count-questions"
+        values={
+          Object {
+            "count": 5,
+            "num": 5,
+          }
+        }
+      />
+    </h3>
+  </div>
+</Fragment>
+`;

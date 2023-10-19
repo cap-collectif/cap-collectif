@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HomePageProjectsSectionConfigurationPage /> renders correctly 1`] = `
+<form
+  method="POST"
+  onSubmit={[MockFunction]}
+>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+    <h1>
+      global.general
+    </h1>
+    <HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+      <Field
+        component={[Function]}
+        id="title"
+        label="global.title"
+        name="title"
+        placeholder="global.participative.project"
+        type="text"
+      />
+      <Field
+        component={[Function]}
+        id="teaser"
+        label={
+          <ForwardRef>
+            <Text>
+              admin.fields.project.teaser
+            </Text>
+            <Text
+              color="gray.500"
+              ml={2}
+            >
+              global.optional
+            </Text>
+          </ForwardRef>
+        }
+        name="teaser"
+        placeholder="section-admin-teaser-placeholder"
+        type="textarea"
+      />
+      <Field
+        component={[Function]}
+        id="position"
+        label="section-admin-display-order"
+        min={0}
+        name="position"
+        type="number"
+      />
+    </HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+    <ForwardRef
+      alignItems="center"
+      direction="row"
+      justify="space-between"
+    >
+      <h1>
+        section-admin-display-settings
+      </h1>
+      <HomePageProjectsSectionConfigurationPagestyle__PreviewLink
+        alignItems="center"
+        direction="row"
+        mb={24}
+      >
+        <Icon
+          color="inherit"
+          name="PREVIEW"
+          size="md"
+        />
+        <a
+          href="/"
+          target="_blank"
+        >
+          global.preview
+        </a>
+      </HomePageProjectsSectionConfigurationPagestyle__PreviewLink>
+    </ForwardRef>
+    <HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+      <div>
+        <Text
+          mb={4}
+        >
+          section-admin-projects-selection
+        </Text>
+        <Field
+          component={[Function]}
+          id="section-display-mode-most-recent"
+          name="displayMode"
+          type="radio"
+          value="MOST_RECENT"
+        >
+          <span>
+            section-admin-most-recents
+          </span>
+        </Field>
+        <Field
+          component={[Function]}
+          id="section-display-mode-custom"
+          name="displayMode"
+          type="radio"
+          value="CUSTOM"
+        >
+          <span>
+            global.custom.feminine.lowercase
+          </span>
+        </Field>
+      </div>
+      <HomePageProjectsSectionConfigurationPageDisplayMostRecent
+        homePageProjectsSectionConfiguration={
+          Object {
+            " $refType": null,
+            "displayMode": "MOST_RECENT",
+            "enabled": true,
+            "id": "SG9tZVBhZ2VQcm9qZWN0c1NlY3Rpb25BZG1pbjpzZWN0aW9uUHJvamVjdHM=",
+            "nbObjects": 4,
+            "position": 3,
+            "projects": Object {
+              "edges": Array [],
+            },
+            "teaser": "sous titre",
+            "title": "titre",
+          }
+        }
+        maxProjectsDisplay={9}
+        paginatedProjectsFragmentRef={null}
+      />
+    </HomePageProjectsSectionConfigurationPagestyle__SectionInner>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+  <HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+    <h1>
+      global.publication
+    </h1>
+    <div>
+      <Field
+        component={[Function]}
+        id="section-is-not-published"
+        name="enabled"
+        type="radio"
+        value="unpublished"
+      >
+        <span>
+          post_is_not_public
+        </span>
+      </Field>
+      <Field
+        component={[Function]}
+        id="section-is-published"
+        name="enabled"
+        type="radio"
+        value="published"
+      >
+        <span>
+          admin.fields.section.enabled
+        </span>
+      </Field>
+    </div>
+  </HomePageProjectsSectionConfigurationPagestyle__SectionContainer>
+  <Button
+    isLoading={false}
+    type="submit"
+    variant="primary"
+    variantSize="big"
+  >
+    global.save
+  </Button>
+</form>
+`;

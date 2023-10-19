@@ -45,13 +45,14 @@ const ChooseQuestionTypeModal: FC<ChooseQuestionTypeProps> = ({ onCancel }) => {
             </MultiStepModal.Header>
             <Modal.Body pt={0}>
                 <Flex wrap="wrap" justify="space-between">
-                    {questionCategories.map(key => (
-                        <Flex direction="column" width="33%" alignItems="flex-start">
+                    {questionCategories.map((key, idx) => (
+                        <Flex direction="column" width="33%" alignItems="flex-start" key={idx}>
                             <Text mb={2} mt={4}>
                                 {intl.formatMessage({ id: QuestionTypes[key].label })}
                             </Text>
-                            {QuestionTypes[key].values.map(value => (
+                            {QuestionTypes[key].values.map((value, idx) => (
                                 <Button
+                                    key={idx}
                                     mb={2}
                                     variant={type === value.type ? 'primary' : 'secondary'}
                                     variantColor="hierarchy"

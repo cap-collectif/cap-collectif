@@ -1,0 +1,2188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentSection /> should render correctly 1`] = `
+<div
+  className="comments__section"
+>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={
+      Object {
+        "default": Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "commentableId",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "isAuthenticated",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "CommentSectionQuery",
+            "selections": Array [
+              Object {
+                "alias": "commentable",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "id",
+                    "variableName": "commentableId",
+                  },
+                ],
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "abstractKey": "__isCommentable",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": "allComments",
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 0,
+                          },
+                        ],
+                        "concreteType": "CommentConnection",
+                        "kind": "LinkedField",
+                        "name": "comments",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCountWithAnswers",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "comments(first:0)",
+                      },
+                      Object {
+                        "args": null,
+                        "kind": "FragmentSpread",
+                        "name": "CommentListNotApprovedByModerator_commentable",
+                      },
+                      Object {
+                        "args": Array [
+                          Object {
+                            "kind": "Variable",
+                            "name": "isAuthenticated",
+                            "variableName": "isAuthenticated",
+                          },
+                        ],
+                        "kind": "FragmentSpread",
+                        "name": "CommentListView_commentable",
+                      },
+                      Object {
+                        "args": null,
+                        "kind": "FragmentSpread",
+                        "name": "CommentForm_commentable",
+                      },
+                    ],
+                    "type": "Commentable",
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "9d767650bf2276bf809e6ad86dff0397",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "commentableId",
+              },
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "isAuthenticated",
+              },
+            ],
+            "kind": "Operation",
+            "name": "CommentSectionQuery",
+            "selections": Array [
+              Object {
+                "alias": "commentable",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "id",
+                    "variableName": "commentableId",
+                  },
+                ],
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__typename",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": "__isCommentable",
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": "allComments",
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 0,
+                          },
+                        ],
+                        "concreteType": "CommentConnection",
+                        "kind": "LinkedField",
+                        "name": "comments",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCountWithAnswers",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "comments(first:0)",
+                      },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 100,
+                          },
+                        ],
+                        "concreteType": "CommentConnection",
+                        "kind": "LinkedField",
+                        "name": "viewerNotApprovedByModeratorComments",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "CommentEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Comment",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "moderationStatus",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "kind": "LinkedField",
+                                    "name": "author",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "username",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isViewer",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "vip",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isAdmin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "slug",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "answers",
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 100,
+                                      },
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "orderBy",
+                                        "value": Object {
+                                          "direction": "ASC",
+                                          "field": "PUBLISHED_AT",
+                                        },
+                                      },
+                                    ],
+                                    "concreteType": "CommentConnection",
+                                    "kind": "LinkedField",
+                                    "name": "comments",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "CommentEdge",
+                                        "kind": "LinkedField",
+                                        "name": "edges",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "concreteType": "Comment",
+                                            "kind": "LinkedField",
+                                            "name": "node",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "User",
+                                                "kind": "LinkedField",
+                                                "name": "author",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "vip",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "url",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "username",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "concreteType": "Media",
+                                                    "kind": "LinkedField",
+                                                    "name": "media",
+                                                    "plural": false,
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "url",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "id",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "id",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "isAdmin",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "isViewer",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "slug",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "createdAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "publishedAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "updatedAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "moderationStatus",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "pinned",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "authorName",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "contribuable",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "editUrl",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "trashed",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "trashedReason",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "body",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": Array [
+                                                  Object {
+                                                    "kind": "Literal",
+                                                    "name": "first",
+                                                    "value": 0,
+                                                  },
+                                                ],
+                                                "concreteType": "CommentVoteConnection",
+                                                "kind": "LinkedField",
+                                                "name": "votes",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "totalCount",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": "votes(first:0)",
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasVote",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "CommentVote",
+                                                "kind": "LinkedField",
+                                                "name": "viewerVote",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "id",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "abstractKey": "__isPublishable",
+                                                    "kind": "InlineFragment",
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "published",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "notPublishedReason",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
+                                                    "type": "Publishable",
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "viewerHasReport",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "__typename",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "abstractKey": "__isPublishable",
+                                                "kind": "InlineFragment",
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "published",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "notPublishedReason",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "publishableUntil",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "type": "Publishable",
+                                              },
+                                            ],
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "cursor",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "PageInfo",
+                                        "kind": "LinkedField",
+                                        "name": "pageInfo",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "endCursor",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "hasNextPage",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": "comments(first:100,orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"PUBLISHED_AT\\"})",
+                                  },
+                                  Object {
+                                    "alias": "answers",
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 100,
+                                      },
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "orderBy",
+                                        "value": Object {
+                                          "direction": "ASC",
+                                          "field": "PUBLISHED_AT",
+                                        },
+                                      },
+                                    ],
+                                    "filters": Array [],
+                                    "handle": "connection",
+                                    "key": "CommentAnswers_answers",
+                                    "kind": "LinkedHandle",
+                                    "name": "comments",
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "updatedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "pinned",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "authorName",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "trashed",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "trashedReason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "body",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "contribuable",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "editUrl",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 0,
+                                      },
+                                    ],
+                                    "concreteType": "CommentVoteConnection",
+                                    "kind": "LinkedField",
+                                    "name": "votes",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": "votes(first:0)",
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerHasVote",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "CommentVote",
+                                    "kind": "LinkedField",
+                                    "name": "viewerVote",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "abstractKey": "__isPublishable",
+                                        "kind": "InlineFragment",
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "published",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "notPublishedReason",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "type": "Publishable",
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "viewerHasReport",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                  Object {
+                                    "abstractKey": "__isCommentable",
+                                    "kind": "TypeDiscriminator",
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "cursor",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "PageInfo",
+                            "kind": "LinkedField",
+                            "name": "pageInfo",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endCursor",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "hasNextPage",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "viewerNotApprovedByModeratorComments(first:100)",
+                      },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 100,
+                          },
+                        ],
+                        "filters": null,
+                        "handle": "connection",
+                        "key": "CommentListNotApprovedByModerator_viewerNotApprovedByModeratorComments",
+                        "kind": "LinkedHandle",
+                        "name": "viewerNotApprovedByModeratorComments",
+                      },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 100,
+                          },
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "PUBLISHED_AT",
+                            },
+                          },
+                        ],
+                        "concreteType": "CommentConnection",
+                        "kind": "LinkedField",
+                        "name": "comments",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "CommentEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Comment",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "moderationStatus",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "User",
+                                    "kind": "LinkedField",
+                                    "name": "author",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "username",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "vip",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "isAdmin",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "slug",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "isViewer",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": "answers",
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 100,
+                                      },
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "orderBy",
+                                        "value": Object {
+                                          "direction": "ASC",
+                                          "field": "PUBLISHED_AT",
+                                        },
+                                      },
+                                    ],
+                                    "concreteType": "CommentConnection",
+                                    "kind": "LinkedField",
+                                    "name": "comments",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "CommentEdge",
+                                        "kind": "LinkedField",
+                                        "name": "edges",
+                                        "plural": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "concreteType": "Comment",
+                                            "kind": "LinkedField",
+                                            "name": "node",
+                                            "plural": false,
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "id",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "concreteType": "User",
+                                                "kind": "LinkedField",
+                                                "name": "author",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "vip",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "url",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "username",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "concreteType": "Media",
+                                                    "kind": "LinkedField",
+                                                    "name": "media",
+                                                    "plural": false,
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "url",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "id",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "id",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "isAdmin",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "slug",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "condition": "isAuthenticated",
+                                                    "kind": "Condition",
+                                                    "passingValue": true,
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "isViewer",
+                                                        "storageKey": null,
+                                                      },
+                                                    ],
+                                                  },
+                                                ],
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "createdAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "publishedAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "updatedAt",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "moderationStatus",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "pinned",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "authorName",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "contribuable",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "editUrl",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "trashed",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "trashedReason",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "body",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": Array [
+                                                  Object {
+                                                    "kind": "Literal",
+                                                    "name": "first",
+                                                    "value": 0,
+                                                  },
+                                                ],
+                                                "concreteType": "CommentVoteConnection",
+                                                "kind": "LinkedField",
+                                                "name": "votes",
+                                                "plural": false,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "totalCount",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "storageKey": "votes(first:0)",
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "__typename",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "abstractKey": "__isPublishable",
+                                                "kind": "InlineFragment",
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "published",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "notPublishedReason",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "publishableUntil",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                                "type": "Publishable",
+                                              },
+                                              Object {
+                                                "condition": "isAuthenticated",
+                                                "kind": "Condition",
+                                                "passingValue": true,
+                                                "selections": Array [
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "viewerHasVote",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "concreteType": "CommentVote",
+                                                    "kind": "LinkedField",
+                                                    "name": "viewerVote",
+                                                    "plural": false,
+                                                    "selections": Array [
+                                                      Object {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "kind": "ScalarField",
+                                                        "name": "id",
+                                                        "storageKey": null,
+                                                      },
+                                                      Object {
+                                                        "abstractKey": "__isPublishable",
+                                                        "kind": "InlineFragment",
+                                                        "selections": Array [
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "published",
+                                                            "storageKey": null,
+                                                          },
+                                                          Object {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "notPublishedReason",
+                                                            "storageKey": null,
+                                                          },
+                                                        ],
+                                                        "type": "Publishable",
+                                                      },
+                                                    ],
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "viewerHasReport",
+                                                    "storageKey": null,
+                                                  },
+                                                ],
+                                              },
+                                            ],
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "cursor",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "PageInfo",
+                                        "kind": "LinkedField",
+                                        "name": "pageInfo",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "endCursor",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "hasNextPage",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": "comments(first:100,orderBy:{\\"direction\\":\\"ASC\\",\\"field\\":\\"PUBLISHED_AT\\"})",
+                                  },
+                                  Object {
+                                    "alias": "answers",
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 100,
+                                      },
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "orderBy",
+                                        "value": Object {
+                                          "direction": "ASC",
+                                          "field": "PUBLISHED_AT",
+                                        },
+                                      },
+                                    ],
+                                    "filters": Array [],
+                                    "handle": "connection",
+                                    "key": "CommentAnswers_answers",
+                                    "kind": "LinkedHandle",
+                                    "name": "comments",
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "createdAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "publishedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "updatedAt",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "pinned",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "authorName",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "trashed",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "trashedReason",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "body",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "contribuable",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "editUrl",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": Array [
+                                      Object {
+                                        "kind": "Literal",
+                                        "name": "first",
+                                        "value": 0,
+                                      },
+                                    ],
+                                    "concreteType": "CommentVoteConnection",
+                                    "kind": "LinkedField",
+                                    "name": "votes",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": "votes(first:0)",
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "__typename",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "abstractKey": "__isPublishable",
+                                    "kind": "InlineFragment",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "published",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "notPublishedReason",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "publishableUntil",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "type": "Publishable",
+                                  },
+                                  Object {
+                                    "condition": "isAuthenticated",
+                                    "kind": "Condition",
+                                    "passingValue": true,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerHasVote",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "CommentVote",
+                                        "kind": "LinkedField",
+                                        "name": "viewerVote",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "abstractKey": "__isPublishable",
+                                            "kind": "InlineFragment",
+                                            "selections": Array [
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "published",
+                                                "storageKey": null,
+                                              },
+                                              Object {
+                                                "alias": null,
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "notPublishedReason",
+                                                "storageKey": null,
+                                              },
+                                            ],
+                                            "type": "Publishable",
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "viewerHasReport",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                  },
+                                  Object {
+                                    "abstractKey": "__isCommentable",
+                                    "kind": "TypeDiscriminator",
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "cursor",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "PageInfo",
+                            "kind": "LinkedField",
+                            "name": "pageInfo",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "hasPreviousPage",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "hasNextPage",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "startCursor",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "endCursor",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": "comments(first:100,orderBy:{\\"direction\\":\\"DESC\\",\\"field\\":\\"PUBLISHED_AT\\"})",
+                      },
+                      Object {
+                        "alias": null,
+                        "args": Array [
+                          Object {
+                            "kind": "Literal",
+                            "name": "first",
+                            "value": 100,
+                          },
+                          Object {
+                            "kind": "Literal",
+                            "name": "orderBy",
+                            "value": Object {
+                              "direction": "DESC",
+                              "field": "PUBLISHED_AT",
+                            },
+                          },
+                        ],
+                        "filters": Array [
+                          "orderBy",
+                        ],
+                        "handle": "connection",
+                        "key": "CommentListViewPaginated_comments",
+                        "kind": "LinkedHandle",
+                        "name": "comments",
+                      },
+                    ],
+                    "type": "Commentable",
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "017289c220fa8e1ee9015683456f874d",
+            "id": null,
+            "metadata": Object {},
+            "name": "CommentSectionQuery",
+            "operationKind": "query",
+            "text": "query CommentSectionQuery(
+  $commentableId: ID!
+  $isAuthenticated: Boolean!
+) {
+  commentable: node(id: $commentableId) {
+    __typename
+    ... on Commentable {
+      __isCommentable: __typename
+      id
+      allComments: comments(first: 0) {
+        totalCountWithAnswers
+      }
+      ...CommentListNotApprovedByModerator_commentable
+      ...CommentListView_commentable_39ngnn
+      ...CommentForm_commentable
+    }
+    id
+  }
+}
+
+fragment CommentAnswer_comment_39ngnn on Comment {
+  id
+  author {
+    vip
+    displayName
+    ...UserAvatar_user
+    id
+  }
+  ...CommentDate_comment
+  ...CommentInfos_comment
+  ...CommentEdit_comment_39ngnn
+  ...CommentBody_comment
+  ...CommentVoteButton_comment_39ngnn
+  ...CommentReportButton_comment_39ngnn
+}
+
+fragment CommentAnswer_comment_FngS2 on Comment {
+  id
+  author {
+    vip
+    displayName
+    ...UserAvatar_user
+    id
+  }
+  ...CommentDate_comment
+  ...CommentInfos_comment
+  ...CommentEdit_comment_FngS2
+  ...CommentBody_comment
+  ...CommentVoteButton_comment_FngS2
+  ...CommentReportButton_comment_FngS2
+}
+
+fragment CommentAnswers_comment_39ngnn on Comment {
+  id
+  answers: comments(first: 100, orderBy: {field: PUBLISHED_AT, direction: ASC}) {
+    totalCount
+    edges {
+      node {
+        id
+        ...CommentAnswer_comment_39ngnn
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+fragment CommentAnswers_comment_FngS2 on Comment {
+  id
+  answers: comments(first: 100, orderBy: {field: PUBLISHED_AT, direction: ASC}) {
+    totalCount
+    edges {
+      node {
+        id
+        ...CommentAnswer_comment_FngS2
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+fragment CommentBody_comment on Comment {
+  trashed
+  trashedReason
+  body
+}
+
+fragment CommentDate_comment on Comment {
+  id
+  createdAt
+  publishedAt
+  updatedAt
+}
+
+fragment CommentEdit_comment_39ngnn on Comment {
+  id
+  contribuable
+  moderationStatus
+  author {
+    isAdmin
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  editUrl
+}
+
+fragment CommentEdit_comment_FngS2 on Comment {
+  id
+  contribuable
+  moderationStatus
+  author {
+    isAdmin
+    isViewer
+    id
+  }
+  editUrl
+}
+
+fragment CommentForm_commentable on Commentable {
+  __isCommentable: __typename
+  id
+}
+
+fragment CommentInfos_comment on Comment {
+  moderationStatus
+  pinned
+  author {
+    ...UserLink_user
+    displayName
+    url
+    id
+  }
+  ...CommentDate_comment
+  ...UnpublishedLabel_publishable
+  authorName
+}
+
+fragment CommentListNotApprovedByModerator_commentable on Commentable {
+  __isCommentable: __typename
+  viewerNotApprovedByModeratorComments(first: 100) {
+    totalCount
+    edges {
+      node {
+        ...Comment_comment_FngS2
+        id
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+fragment CommentListViewPaginated_commentable_3BDpyU on Commentable {
+  __isCommentable: __typename
+  id
+  comments(first: 100, orderBy: {field: PUBLISHED_AT, direction: DESC}) {
+    totalCount
+    edges {
+      node {
+        id
+        ...Comment_comment_39ngnn
+        __typename
+      }
+      cursor
+    }
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+fragment CommentListView_commentable_39ngnn on Commentable {
+  __isCommentable: __typename
+  id
+  ...CommentListViewPaginated_commentable_3BDpyU
+}
+
+fragment CommentReportButton_comment_39ngnn on Comment {
+  id
+  viewerHasReport @include(if: $isAuthenticated)
+  author {
+    slug
+    id
+  }
+}
+
+fragment CommentReportButton_comment_FngS2 on Comment {
+  id
+  viewerHasReport
+  author {
+    slug
+    id
+  }
+}
+
+fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
+fragment CommentVoteButtonLegacy_comment_FngS2 on Comment {
+  id
+  author {
+    isViewer
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote
+  viewerVote {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
+fragment CommentVoteButton_comment_39ngnn on Comment {
+  id
+  author {
+    isViewer @include(if: $isAuthenticated)
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote @include(if: $isAuthenticated)
+  viewerVote @include(if: $isAuthenticated) {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
+fragment CommentVoteButton_comment_FngS2 on Comment {
+  id
+  author {
+    isViewer
+    id
+  }
+  votes(first: 0) {
+    totalCount
+  }
+  viewerHasVote
+  viewerVote {
+    id
+    ...UnpublishedTooltip_publishable
+  }
+}
+
+fragment Comment_comment_39ngnn on Comment {
+  id
+  moderationStatus
+  author {
+    ...UserAvatar_user
+    isViewer @include(if: $isAuthenticated)
+    vip
+    displayName
+    media {
+      url
+      id
+    }
+    id
+  }
+  ...CommentAnswers_comment_39ngnn
+  ...CommentDate_comment
+  ...CommentInfos_comment
+  ...CommentBody_comment
+  ...CommentEdit_comment_39ngnn
+  ...CommentVoteButton_comment_39ngnn
+  ...CommentVoteButtonLegacy_comment_39ngnn
+  ...CommentReportButton_comment_39ngnn
+  ...CommentForm_commentable
+}
+
+fragment Comment_comment_FngS2 on Comment {
+  id
+  moderationStatus
+  author {
+    ...UserAvatar_user
+    isViewer
+    vip
+    displayName
+    media {
+      url
+      id
+    }
+    id
+  }
+  ...CommentAnswers_comment_FngS2
+  ...CommentDate_comment
+  ...CommentInfos_comment
+  ...CommentBody_comment
+  ...CommentEdit_comment_FngS2
+  ...CommentVoteButton_comment_FngS2
+  ...CommentVoteButtonLegacy_comment_FngS2
+  ...CommentReportButton_comment_FngS2
+  ...CommentForm_commentable
+}
+
+fragment UnpublishedLabel_publishable on Publishable {
+  __isPublishable: __typename
+  id
+  published
+  notPublishedReason
+  publishableUntil
+}
+
+fragment UnpublishedTooltip_publishable on Publishable {
+  __isPublishable: __typename
+  id
+  published
+  notPublishedReason
+}
+
+fragment UserAvatar_user on User {
+  url
+  username
+  media {
+    url
+    id
+  }
+}
+
+fragment UserLink_user on User {
+  displayName
+  url
+}
+",
+          },
+        },
+      }
+    }
+    render={[Function]}
+    variables={
+      Object {
+        "commentableId": "1",
+        "isAuthenticated": true,
+      }
+    }
+  />
+</div>
+`;

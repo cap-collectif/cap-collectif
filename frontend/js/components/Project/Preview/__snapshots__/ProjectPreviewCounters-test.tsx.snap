@@ -1,0 +1,298 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectPreviewCounters /> should render correctly counters when project is archived 1`] = `
+<div
+  className="mt-10"
+>
+  <TagsList>
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-baloon-1"
+      label="project.preview.counters.interpellations"
+      showZero={true}
+      value={71}
+    />
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-hand-like-2-1"
+      label="project.preview.counters.supports"
+      showZero={false}
+      value={48}
+    />
+    <ProjectPreviewCounter
+      archived={true}
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={72}
+    />
+    <ProjectRestrictedAccessFragmentLegacy
+      icon="cap-lock-2-1"
+      isOnProjectCard={true}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": true,
+          "contributions": Object {
+            "totalCount": 71,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "hasParticipativeStep": true,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "project.types.interpellation",
+          },
+          "votes": Object {
+            "totalCount": 48,
+          },
+        }
+      }
+    />
+  </TagsList>
+</div>
+`;
+
+exports[`<ProjectPreviewCounters /> should render correctly counters with districts 1`] = `
+<div
+  className="mt-10"
+>
+  <TagsList>
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-baloon-1"
+      label="project.preview.counters.contributions"
+      showZero={true}
+      value={89}
+    />
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-hand-like-2-1"
+      label="project.preview.counters.votes"
+      showZero={false}
+      value={54}
+    />
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={72}
+    />
+    <ProjectHeaderDistrictsListLegacy
+      breakingNumber={1}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": false,
+          "contributions": Object {
+            "totalCount": 89,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "name": "zone 1",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 2",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 3",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 4",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 5",
+                },
+              },
+            ],
+            "totalCount": 5,
+          },
+          "hasParticipativeStep": true,
+          "id": "project2",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "global.consultation",
+          },
+          "votes": Object {
+            "totalCount": 54,
+          },
+        }
+      }
+    />
+    <ProjectRestrictedAccessFragmentLegacy
+      icon="cap-lock-2-1"
+      isOnProjectCard={true}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": false,
+          "contributions": Object {
+            "totalCount": 89,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "name": "zone 1",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 2",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 3",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 4",
+                },
+              },
+              Object {
+                "node": Object {
+                  "name": "zone 5",
+                },
+              },
+            ],
+            "totalCount": 5,
+          },
+          "hasParticipativeStep": true,
+          "id": "project2",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "global.consultation",
+          },
+          "votes": Object {
+            "totalCount": 54,
+          },
+        }
+      }
+    />
+  </TagsList>
+</div>
+`;
+
+exports[`<ProjectPreviewCounters /> should render correctly counters without districts 1`] = `
+<div
+  className="mt-10"
+>
+  <TagsList>
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-baloon-1"
+      label="project.preview.counters.interpellations"
+      showZero={true}
+      value={71}
+    />
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-hand-like-2-1"
+      label="project.preview.counters.supports"
+      showZero={false}
+      value={48}
+    />
+    <ProjectPreviewCounter
+      archived={false}
+      icon="cap-user-2-1"
+      label="project.preview.counters.contributors"
+      showZero={true}
+      value={72}
+    />
+    <ProjectRestrictedAccessFragmentLegacy
+      icon="cap-lock-2-1"
+      isOnProjectCard={true}
+      project={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "anonymousReplies": Object {
+            "totalCount": 12,
+          },
+          "anonymousVotes": Object {
+            "totalCount": 12,
+          },
+          "archived": false,
+          "contributions": Object {
+            "totalCount": 71,
+          },
+          "contributors": Object {
+            "totalCount": 48,
+          },
+          "districts": Object {
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "hasParticipativeStep": true,
+          "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          "isContributionsCounterDisplayable": true,
+          "isExternal": false,
+          "isParticipantsCounterDisplayable": true,
+          "isVotesCounterDisplayable": true,
+          "type": Object {
+            "title": "project.types.interpellation",
+          },
+          "votes": Object {
+            "totalCount": 48,
+          },
+        }
+      }
+    />
+  </TagsList>
+</div>
+`;

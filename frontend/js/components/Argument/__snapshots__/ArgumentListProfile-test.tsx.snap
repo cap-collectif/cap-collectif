@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentListProfile /> renders correcty with empty node 1`] = `
+<ListGroup
+  bsClass="media-list"
+/>
+`;
+
+exports[`<ArgumentListProfile /> renders correcty with two nodes 1`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+</ListGroup>
+`;
+
+exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 1`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+  <ListGroupItem
+    bsClass="list-group-item"
+    listItem={false}
+  >
+    <Button
+      active={false}
+      block={true}
+      bsClass="btn"
+      bsStyle="link"
+      disabled={false}
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.more"
+        values={Object {}}
+      />
+    </Button>
+  </ListGroupItem>
+</ListGroup>
+`;
+
+exports[`<ArgumentListProfile /> renders two nodes and a loadmore button 2`] = `
+<ListGroup
+  bsClass="media-list"
+>
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "1",
+      }
+    }
+    isProfile={true}
+    key="1"
+  />
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "2",
+      }
+    }
+    isProfile={true}
+    key="2"
+  />
+  <Relay(ArgumentItem)
+    argument={
+      Object {
+        " $fragmentRefs": null,
+        "id": "3",
+      }
+    }
+    isProfile={true}
+    key="3"
+  />
+</ListGroup>
+`;

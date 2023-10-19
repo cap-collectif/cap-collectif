@@ -1,4 +1,5 @@
-import { FC, ReactNode, ComponentProps } from 'react';
+// @ts-nocheck
+import { FC, ReactNode, ComponentProps } from 'react'
 
 export type Props = ComponentProps<'button'> & {
   readonly disabled?: boolean
@@ -8,4 +9,4 @@ export type Props = ComponentProps<'button'> & {
 
 declare const MenuListItem: FC<Props>
 
-export default MenuListItem;
+export default MenuListItem

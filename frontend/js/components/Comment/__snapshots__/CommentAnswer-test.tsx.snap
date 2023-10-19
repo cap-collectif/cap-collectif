@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentAnswer /> should render correctly 1`] = `
+<Connect(ComponentWithColors)
+  as="li"
+  isAnswer={true}
+  useBodyColor={true}
+>
+  <div
+    className="Commentavatar"
+  >
+    <Relay(Connect(UserAvatarLegacy))
+      user={
+        Object {
+          " $fragmentRefs": null,
+          "displayName": "admin",
+          "vip": true,
+        }
+      }
+    />
+  </div>
+  <Media
+    className="opinion"
+  >
+    <Body
+      className="opinion__body"
+    >
+      <div
+        className="opinion__data"
+        style={
+          Object {
+            "overflow": "visible",
+          }
+        }
+      >
+        <CommentInfos
+          comment={
+            Object {
+              " $fragmentRefs": null,
+              " $refType": null,
+              "author": Object {
+                " $fragmentRefs": null,
+                "displayName": "admin",
+                "vip": true,
+              },
+              "id": "proposalComment1",
+            }
+          }
+        />
+      </div>
+      <Relay(CommentBody)
+        comment={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "author": Object {
+              " $fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+    </Body>
+    <Commentstyle__CommentBottom>
+      <Relay(CommentVoteButton)
+        comment={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "author": Object {
+              " $fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(Connect(CommentReportButton))
+        comment={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "author": Object {
+              " $fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+      <Relay(CommentEdit)
+        comment={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "author": Object {
+              " $fragmentRefs": null,
+              "displayName": "admin",
+              "vip": true,
+            },
+            "id": "proposalComment1",
+          }
+        }
+      />
+    </Commentstyle__CommentBottom>
+  </Media>
+</Connect(ComponentWithColors)>
+`;

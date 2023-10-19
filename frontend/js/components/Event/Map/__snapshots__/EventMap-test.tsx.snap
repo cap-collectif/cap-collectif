@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventMap /> renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "position": "relative",
+    }
+  }
+>
+  <Relay(Connect(LeafletMap))
+    defaultMapOptions={
+      Object {
+        "zoom": 12,
+      }
+    }
+    loading={false}
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "events": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "event1",
+              },
+            },
+            Object {
+              "node": Object {
+                "id": "event2",
+              },
+            },
+          ],
+          "pageInfo": Object {
+            "endCursor": "cursor2",
+            "hasNextPage": true,
+            "hasPreviousPage": false,
+            "startCursor": "cursor1",
+          },
+        },
+      }
+    }
+  />
+</div>
+`;

@@ -1,3 +1,13 @@
 {
-    "extends": ["next", "next/core-web-vitals"]
+    "extends": ["next", "next/core-web-vitals"],
+    "rules": {
+        "react/display-name": "warn",
+        "react/no-unescaped-entities": "off",
+        "jsx-a11y/accessible-emoji": "warn",
+        "react-hooks/rules-of-hooks": "warn",
+        "@next/next/no-img-element": "warn",
+        "@next/next/no-sync-scripts": "warn",
+        "@typescript-eslint/no-unused-vars": "off",
+        "prefer-destructuring": "off"
+    }    
 }

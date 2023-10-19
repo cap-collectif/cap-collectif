@@ -1,5 +1,6 @@
-import { PolymorphicAppBox } from '../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicAppBox } from '~ui/Primitives/AppBox'
 
 declare const Panel: PolymorphicAppBox
 
-export default Panel;
+export default Panel

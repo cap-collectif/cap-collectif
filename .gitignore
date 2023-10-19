@@ -113,3 +113,5 @@ nohup.out
 
 .kube
 patch
+
+tsconfig.tsbuildinfo

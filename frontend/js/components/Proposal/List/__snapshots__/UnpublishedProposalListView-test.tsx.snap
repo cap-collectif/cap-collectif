@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnpublishedProposalListView /> renders correcty 1`] = `
+<Uncontrolled(Panel)
+  bsStyle="danger"
+>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="h3"
+    >
+      <strong>
+        <FormattedMessage
+          id="count-proposal"
+          values={
+            Object {
+              "num": 1,
+            }
+          }
+        />
+      </strong>
+       
+      <FormattedMessage
+        id="awaiting-publication-lowercase"
+        values={
+          Object {
+            "num": 1,
+          }
+        }
+      />
+    </PanelTitle>
+  </PanelHeading>
+  <PanelBody
+    bsClass="panel"
+    collapsible={false}
+  >
+    <Relay(ProposalList)
+      id="proposals-unpublished-list"
+      proposals={
+        Object {
+          " $fragmentRefs": null,
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "proposal1",
+                "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
+              },
+            },
+          ],
+          "totalCount": 1,
+        }
+      }
+      step={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "id": "step1",
+          "viewerProposalsUnpublished": Object {
+            " $fragmentRefs": null,
+            "edges": Array [
+              Object {
+                "node": Object {
+                  "id": "proposal1",
+                  "notPublishedReason": "WAITING_AUTHOR_CONFIRMATION",
+                },
+              },
+            ],
+            "totalCount": 1,
+          },
+        }
+      }
+      view="GRID"
+      viewer={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+    />
+  </PanelBody>
+</Uncontrolled(Panel)>
+`;
+
+exports[`<UnpublishedProposalListView /> renders nothing when empty 1`] = `""`;

@@ -1,9 +1,10 @@
-import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox'
 
 type Props = {
-    readonly value: string,
+  readonly value: string
 }
 
-declare const InlineSelectChoice: PolymorphicComponent<Props>;
+declare const InlineSelectChoice: PolymorphicComponent<Props>
 
-export default InlineSelectChoice;
+export default InlineSelectChoice

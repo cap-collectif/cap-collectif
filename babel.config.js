@@ -1,15 +1,16 @@
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
   {
     // Fix: [BABEL] Note: The code generator has deoptimised the styling of cap-collectif/platform/bower_components/ckeditor/ckeditor.js as it exceeds the max of 500KB.
-    const compact = false;
+    const compact = false
     const env = {
       test: {
         // Make sure to have { "modules": true } in test environment.
         presets: [['@babel/preset-env'], '@babel/preset-react'],
       },
-    };
+    }
     const presets = [
+      ['@babel/preset-typescript'],
       [
         '@babel/preset-react',
         {
@@ -21,7 +22,6 @@ module.exports = function (api) {
           useBuiltIns: true,
         },
       ],
-      '@babel/preset-flow',
       // Latest stable ECMAScript features
       [
         '@babel/preset-env',
@@ -42,7 +42,8 @@ module.exports = function (api) {
           exclude: ['transform-typeof-symbol'],
         },
       ],
-    ];
+      ['@emotion/babel-preset-css-prop'],
+    ]
     const plugins = [
       ['@babel/plugin-proposal-private-methods', { loose: true }],
       '@babel/plugin-transform-arrow-functions',
@@ -69,13 +70,13 @@ module.exports = function (api) {
           },
         },
       ],
-      ["@babel/plugin-transform-private-property-in-object", { "loose": true }],
-    ];
+      ['@babel/plugin-transform-private-property-in-object', { loose: true }],
+    ]
     return {
       compact,
       env,
       presets,
       plugins,
-    };
+    }
   }
-};
+}

@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SectionContainer /> should render correctly 1`] = `
+<div
+  className="row"
+>
+  <h2
+    className="h2"
+  >
+    concert
+  </h2>
+  <p
+    className="block"
+  >
+    lhhc
+  </p>
+  <p
+    className="block"
+  >
+    <WYSIWYGRender
+      value="lionheart"
+    />
+  </p>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={
+      Object {
+        "default": Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "SectionContainerQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "VoteConnection",
+                "kind": "LinkedField",
+                "name": "votes",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": "contributions",
+                "args": null,
+                "kind": "ScalarField",
+                "name": "allContributions",
+                "storageKey": null,
+              },
+              Object {
+                "alias": "contributors",
+                "args": null,
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "allContributors",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "onlyPublic",
+                    "value": true,
+                  },
+                ],
+                "concreteType": "ProjectConnection",
+                "kind": "LinkedField",
+                "name": "projects",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "projects(onlyPublic:true)",
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "cb847a2e3f1f8df77907b53b8742054b",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [],
+            "kind": "Operation",
+            "name": "SectionContainerQuery",
+            "selections": Array [
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "VoteConnection",
+                "kind": "LinkedField",
+                "name": "votes",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": "contributions",
+                "args": null,
+                "kind": "ScalarField",
+                "name": "allContributions",
+                "storageKey": null,
+              },
+              Object {
+                "alias": "contributors",
+                "args": null,
+                "concreteType": "UserConnection",
+                "kind": "LinkedField",
+                "name": "allContributors",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "onlyPublic",
+                    "value": true,
+                  },
+                ],
+                "concreteType": "ProjectConnection",
+                "kind": "LinkedField",
+                "name": "projects",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "projects(onlyPublic:true)",
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "b6f13775ae52551a75f1c59f9b7a93ba",
+            "id": null,
+            "metadata": Object {},
+            "name": "SectionContainerQuery",
+            "operationKind": "query",
+            "text": "query SectionContainerQuery {
+  votes {
+    totalCount
+  }
+  contributions: allContributions
+  contributors: allContributors {
+    totalCount
+  }
+  events {
+    totalCount
+  }
+  projects(onlyPublic: true) {
+    totalCount
+  }
+}
+",
+          },
+        },
+      }
+    }
+    render={[Function]}
+    variables={Object {}}
+  />
+</div>
+`;

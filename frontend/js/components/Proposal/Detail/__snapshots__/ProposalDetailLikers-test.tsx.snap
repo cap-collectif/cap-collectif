@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalDetailLikers /> should not render anything when proposal has no likers 1`] = `""`;
+
+exports[`<ProposalDetailLikers /> should render a <Modal /> when proposal has likers 1`] = `
+<Fragment>
+  <Relay(ProposalDetailLikersLabel)
+    componentClass="a"
+    newDesign={false}
+    onClick={[Function]}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    title="list-of-favorites"
+  />
+  <Relay(Connect(injectIntl(ProposalDetailLikersModal)))
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    show={true}
+  />
+</Fragment>
+`;
+
+exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
+<Fragment>
+  <Relay(ProposalDetailLikersLabel)
+    componentClass="div"
+    newDesign={false}
+    onClick={[Function]}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    title="list-of-favorites"
+  />
+  <Relay(Connect(injectIntl(ProposalDetailLikersModal)))
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "1",
+        "likers": Array [
+          Object {
+            "id": "1",
+          },
+          Object {
+            "id": "2",
+          },
+        ],
+      }
+    }
+    show={true}
+  />
+</Fragment>
+`;

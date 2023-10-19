@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardMailingList /> should renders correctly 1`] = `
+<Fragment>
+  <DashboardMailingListstyle__Header>
+    <ClearableInput
+      disabled={false}
+      icon={
+        <i
+          className="cap cap-magnifier"
+        />
+      }
+      id="search"
+      initialValue={null}
+      name="search"
+      onClear={[Function]}
+      onSubmit={[Function]}
+      placeholder="global.menu.search"
+      type="text"
+    />
+  </DashboardMailingListstyle__Header>
+  <InfoMessage
+    my={4}
+    variant="info"
+  >
+    <InfoMessage.Title>
+      mailingList-update
+    </InfoMessage.Title>
+    <InfoMessage.Content>
+      mailingList-update-beta
+    </InfoMessage.Content>
+  </InfoMessage>
+  <PickableList
+    hasMore={false}
+    isLoading={false}
+    loader={<EmailingLoader />}
+    onScrollToBottom={[Function]}
+    useInfiniteScroll={true}
+  >
+    <DashboardMailingListstyle__DashboardMailingListHeader
+      disabled={false}
+      isSelectable={true}
+    >
+      <DashboardHeader />
+    </DashboardMailingListstyle__DashboardMailingListHeader>
+    <PickableList.Body>
+      <Relay(MailingListItem)
+        key="1"
+        mailingList={
+          Object {
+            " $fragmentRefs": null,
+            "id": "1",
+          }
+        }
+        rowId="1"
+        selected={false}
+        setMailingListSelected={[Function]}
+      />
+      <Relay(MailingListItem)
+        key="1"
+        mailingList={
+          Object {
+            " $fragmentRefs": null,
+            "id": "1",
+          }
+        }
+        rowId="1"
+        selected={false}
+        setMailingListSelected={[Function]}
+      />
+    </PickableList.Body>
+  </PickableList>
+  <ModalOnboarding
+    isOnlyProjectAdmin={false}
+  />
+</Fragment>
+`;

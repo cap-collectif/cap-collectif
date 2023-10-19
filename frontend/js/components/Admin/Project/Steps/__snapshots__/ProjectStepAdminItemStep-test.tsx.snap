@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectStepAdminItemStep /> renders collect step disabled when there is selection step 1`] = `
+<ProjectStepAdminItemStep__StepRow>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <strong>
+        testStep
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="collect_step"
+          values={Object {}}
+        />
+      </span>
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <ProjectStepAdminItemStep__EditButton
+        bsStyle="warning"
+        id="js-btn-edit-0"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+      </ProjectStepAdminItemStep__EditButton>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={true}
+        id="js-btn-delete-0"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-trash"
+        />
+      </Button>
+      <Relay(ProjectAdminStepFormModal)
+        form="oui"
+        hasIdentificationCodeLists={true}
+        index={0}
+        onClose={[Function]}
+        project={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "_id": "project123",
+            "steps": Array [
+              Object {
+                "__typename": "SelectionStep",
+              },
+            ],
+          }
+        }
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
+        show={false}
+        step={
+          Object {
+            "__typename": "CollectStep",
+            "debateType": "FACE_TO_FACE",
+            "hasOpinionsFilled": false,
+            "id": "1",
+            "label": "label",
+            "slug": "slugTest",
+            "title": "testStep",
+            "url": "urlTest",
+          }
+        }
+        type="CollectStep"
+      />
+    </ButtonToolbar>
+  </Col>
+</ProjectStepAdminItemStep__StepRow>
+`;
+
+exports[`<ProjectStepAdminItemStep /> renders correctly 1`] = `
+<ProjectStepAdminItemStep__StepRow>
+  <Col
+    bsClass="col"
+    className="d-flex align-items-center"
+    componentClass="div"
+    xs={8}
+  >
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <i
+        className="cap cap-android-menu"
+        style={
+          Object {
+            "color": "#aaa",
+            "fontSize": "20px",
+          }
+        }
+      />
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+    <ProjectStepAdminItemStep__ItemQuestionWrapper>
+      <strong>
+        testStep
+      </strong>
+      <br />
+      <span
+        className="excerpt"
+      >
+        <FormattedMessage
+          id="questionnaire_step"
+          values={Object {}}
+        />
+      </span>
+    </ProjectStepAdminItemStep__ItemQuestionWrapper>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    xs={4}
+  >
+    <ButtonToolbar
+      bsClass="btn-toolbar"
+      className="pull-right"
+    >
+      <ProjectStepAdminItemStep__EditButton
+        bsStyle="warning"
+        id="js-btn-edit-0"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-pencil"
+        />
+      </ProjectStepAdminItemStep__EditButton>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        className="btn-outline-danger"
+        disabled={false}
+        id="js-btn-delete-0"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-trash"
+        />
+      </Button>
+      <Relay(ProjectAdminStepFormModal)
+        form="oui"
+        hasIdentificationCodeLists={true}
+        index={0}
+        onClose={[Function]}
+        project={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "_id": "project123",
+            "steps": Array [
+              Object {
+                "__typename": "SelectionStep",
+              },
+            ],
+          }
+        }
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
+        show={false}
+        step={
+          Object {
+            "__typename": "QuestionnaireStep",
+            "debateType": "FACE_TO_FACE",
+            "hasOpinionsFilled": false,
+            "id": "1",
+            "label": "label",
+            "slug": "slugTest",
+            "title": "testStep",
+            "url": "urlTest",
+          }
+        }
+        type="QuestionnaireStep"
+      />
+    </ButtonToolbar>
+  </Col>
+</ProjectStepAdminItemStep__StepRow>
+`;

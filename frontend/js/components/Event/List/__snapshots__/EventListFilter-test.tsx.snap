@@ -1,0 +1,486 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventListFilters /> renders correctly 1`] = `
+<Row
+  bsClass="row"
+  className="align-items-center d-flex flex-wrap"
+  componentClass="div"
+>
+  <EventListFilters__StatusContainer
+    md={5}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
+  >
+    <Relay(EventListCounter)
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+    />
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
+  </EventListFilters__StatusContainer>
+  <EventListFilters__FiltersWrapper
+    id="event-filters"
+    md={4}
+    xs={12}
+  >
+    <div
+      className="pull-right"
+    >
+      <FiltersContainer
+        filterCount={3}
+        overlay={
+          <div>
+            <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={true}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    label="registration-required"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "indifferent",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "global.yes",
+                          "value": "yes",
+                        },
+                        Object {
+                          "label": "global.no",
+                          "value": "no",
+                        },
+                      ]
+                    }
+                    placeholder="indifferent"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    autoload={false}
+                    className=""
+                    clearable={true}
+                    debounce={true}
+                    id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    label={
+                      <FormattedMessage
+                        id="global.author"
+                        values={Object {}}
+                      />
+                    }
+                    labelClassName="control-label"
+                    multi={false}
+                    name="author"
+                    placeholder="all-the-authors"
+                    selectFieldIsObject={true}
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div
+                    className="visible-xs-block visible-sm-block"
+                  >
+                    <Field
+                      addonAfter={
+                        <i
+                          className="cap cap-magnifier"
+                        />
+                      }
+                      aria-autocomplete="list"
+                      aria-controls="event-search-input-listbox"
+                      aria-haspopup="true"
+                      clearable={true}
+                      component={[Function]}
+                      groupClassName="event-search-group pull-right"
+                      id="event-search-input"
+                      label="search.form.placeholder.term"
+                      name="search"
+                      placeholder="search.form.placeholder.term"
+                      role="combobox"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div>
+                    <Relay(injectIntl(SelectTheme))
+                      query={
+                        Object {
+                          " $fragmentRefs": null,
+                          " $refType": null,
+                        }
+                      }
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div>
+                    <Relay(injectIntl(SelectProject))
+                      query={
+                        Object {
+                          " $fragmentRefs": null,
+                          " $refType": null,
+                        }
+                      }
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-userType-listbox"
+                    aria-haspopup="true"
+                    component={[Function]}
+                    id="EventListFilters-filter-userType"
+                    label="filter-userType"
+                    name="userType"
+                    options={
+                      Array [
+                        Object {
+                          "label": "Citoyen",
+                          "value": "userType-1",
+                        },
+                        Object {
+                          "label": "Institution",
+                          "value": "userType-2",
+                        },
+                      ]
+                    }
+                    placeholder="global.select_project_types"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="link"
+                    className="p-0"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
+                </div>
+              </Col>
+            </form>
+          </div>
+        }
+        type="event"
+      />
+    </div>
+    <Connect(EventListToggleMobileViewBtn)
+      isMobileListView={true}
+      onChange={[Function]}
+      showMapButton={true}
+    />
+  </EventListFilters__FiltersWrapper>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        component={[Function]}
+        divClassName="event-search-group pull-right w-100"
+        id="event-search-input"
+        name="search"
+        placeholder="search.form.placeholder.term"
+        type="text"
+      />
+    </form>
+  </Col>
+</Row>
+`;
+
+exports[`<EventListFilters /> renders correctly without filters 1`] = `
+<Row
+  bsClass="row"
+  className="align-items-center d-flex flex-wrap"
+  componentClass="div"
+>
+  <EventListFilters__StatusContainer
+    md={5}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
+  >
+    <Relay(EventListCounter)
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+        }
+      }
+    />
+    <Connect(EventListStatusFilter)
+      screen="desktop"
+    />
+  </EventListFilters__StatusContainer>
+  <EventListFilters__FiltersWrapper
+    id="event-filters"
+    md={4}
+    xs={12}
+  >
+    <div
+      className="pull-right"
+    >
+      <FiltersContainer
+        filterCount={3}
+        overlay={
+          <div>
+            <form>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
+                    aria-haspopup="true"
+                    clearable={true}
+                    component={[Function]}
+                    id="EventListFilters-filter-isRegistrable"
+                    label="registration-required"
+                    name="isRegistrable"
+                    options={
+                      Array [
+                        Object {
+                          "label": "indifferent",
+                          "value": "all",
+                        },
+                        Object {
+                          "label": "global.yes",
+                          "value": "yes",
+                        },
+                        Object {
+                          "label": "global.no",
+                          "value": "no",
+                        },
+                      ]
+                    }
+                    placeholder="indifferent"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <UserListField
+                    ariaControls="EventListFilters-filter-author-listbox"
+                    authorOfEvent={true}
+                    autoload={false}
+                    className=""
+                    clearable={true}
+                    debounce={true}
+                    id="EventListFilters-filter-authors"
+                    inputClassName="fake-inputClassName"
+                    label={
+                      <FormattedMessage
+                        id="global.author"
+                        values={Object {}}
+                      />
+                    }
+                    labelClassName="control-label"
+                    multi={false}
+                    name="author"
+                    placeholder="all-the-authors"
+                    selectFieldIsObject={true}
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <div
+                    className="visible-xs-block visible-sm-block"
+                  >
+                    <Field
+                      addonAfter={
+                        <i
+                          className="cap cap-magnifier"
+                        />
+                      }
+                      aria-autocomplete="list"
+                      aria-controls="event-search-input-listbox"
+                      aria-haspopup="true"
+                      clearable={true}
+                      component={[Function]}
+                      groupClassName="event-search-group pull-right"
+                      id="event-search-input"
+                      label="search.form.placeholder.term"
+                      name="search"
+                      placeholder="search.form.placeholder.term"
+                      role="combobox"
+                      type="text"
+                    />
+                  </div>
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Field
+                    aria-autocomplete="list"
+                    aria-controls="EventListFilters-filter-userType-listbox"
+                    aria-haspopup="true"
+                    component={[Function]}
+                    id="EventListFilters-filter-userType"
+                    label="filter-userType"
+                    name="userType"
+                    options={
+                      Array [
+                        Object {
+                          "label": "Citoyen",
+                          "value": "userType-1",
+                        },
+                        Object {
+                          "label": "Institution",
+                          "value": "userType-2",
+                        },
+                      ]
+                    }
+                    placeholder="global.select_project_types"
+                    role="combobox"
+                  />
+                </div>
+              </Col>
+              <Col
+                bsClass="col"
+                className="mt-5"
+                componentClass="div"
+              >
+                <div>
+                  <Button
+                    active={false}
+                    block={false}
+                    bsClass="btn"
+                    bsStyle="link"
+                    className="p-0"
+                    disabled={false}
+                    onClick={[Function]}
+                  >
+                    <FormattedMessage
+                      id="reset-filters"
+                      values={Object {}}
+                    />
+                  </Button>
+                </div>
+              </Col>
+            </form>
+          </div>
+        }
+        type="event"
+      />
+    </div>
+  </EventListFilters__FiltersWrapper>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    md={3}
+    smHidden={true}
+    xs={4}
+    xsHidden={true}
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <Field
+        addonAfter={
+          <i
+            className="cap cap-magnifier"
+          />
+        }
+        component={[Function]}
+        divClassName="event-search-group pull-right w-100"
+        id="event-search-input"
+        name="search"
+        placeholder="search.form.placeholder.term"
+        type="text"
+      />
+    </form>
+  </Col>
+</Row>
+`;

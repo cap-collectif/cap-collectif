@@ -1,0 +1,201 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionBox /> should render correctly 1`] = `
+<Relay(TrashedMessage)
+  className="mb-15"
+  contribution={
+    Object {
+      " $fragmentRefs": null,
+      " $refType": null,
+      "__typename": "Opinion",
+      "section": Object {
+        "color": "info",
+        "title": "sectionTitle",
+        "url": "#",
+      },
+      "title": "title",
+    }
+  }
+>
+  <div
+    className="block block--bordered opinion__details"
+    id="OpinionBox"
+  >
+    <div
+      className="opinion opinion--info opinion--current"
+    >
+      <div
+        className="opinion__header opinion__header--centered"
+        style={
+          Object {
+            "height": "auto",
+          }
+        }
+      >
+        <a
+          className="pull-left btn btn-default opinion__header__back"
+          href="#"
+        >
+          <i
+            className="cap cap-arrow-1-1"
+          />
+          <span
+            className="hidden-xs hidden-sm"
+          >
+             
+            <FormattedMessage
+              id="opinion.header.back"
+              values={Object {}}
+            />
+          </span>
+        </a>
+        <div
+          className="opinion__header__title"
+        />
+        <h2
+          className="h4 opinion__header__title"
+        >
+          <FormattedMessage
+            id="global.proposal"
+            values={Object {}}
+          />
+          <p
+            className="small excerpt"
+            style={
+              Object {
+                "marginTop": "5px",
+              }
+            }
+          >
+            sectionTitle
+          </p>
+        </h2>
+      </div>
+      <ListGroup
+        className="mb-0"
+      >
+        <ListGroupItem
+          bsClass="list-group-item"
+          className="list-group-item__opinion no-border"
+          listItem={false}
+        >
+          <Opinion__OpinionContainer>
+            <Relay(OpinionPreview)
+              opinion={
+                Object {
+                  " $fragmentRefs": null,
+                  " $refType": null,
+                  "__typename": "Opinion",
+                  "section": Object {
+                    "color": "info",
+                    "title": "sectionTitle",
+                    "url": "#",
+                  },
+                  "title": "title",
+                }
+              }
+              rankingThreshold={0}
+              showUpdatedDate={true}
+            />
+          </Opinion__OpinionContainer>
+        </ListGroupItem>
+      </ListGroup>
+    </div>
+    <Relay(OpinionAppendices)
+      opinion={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "__typename": "Opinion",
+          "section": Object {
+            "color": "info",
+            "title": "sectionTitle",
+            "url": "#",
+          },
+          "title": "title",
+        }
+      }
+    />
+    <div
+      className="opinion__description"
+    >
+      <Relay(OpinionBody)
+        opinion={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "__typename": "Opinion",
+            "section": Object {
+              "color": "info",
+              "title": "sectionTitle",
+              "url": "#",
+            },
+            "title": "title",
+          }
+        }
+      />
+      <Relay(OpinionVotesBox)
+        opinion={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "__typename": "Opinion",
+            "section": Object {
+              "color": "info",
+              "title": "sectionTitle",
+              "url": "#",
+            },
+            "title": "title",
+          }
+        }
+      />
+      <div
+        aria-label={
+          <FormattedMessage
+            id="vote.form"
+            values={Object {}}
+          />
+        }
+        className="opinion__buttons"
+        style={
+          Object {
+            "marginBottom": 0,
+            "marginTop": "15px",
+          }
+        }
+      >
+        <Relay(Connect(OpinionButtons))
+          opinion={
+            Object {
+              " $fragmentRefs": null,
+              " $refType": null,
+              "__typename": "Opinion",
+              "section": Object {
+                "color": "info",
+                "title": "sectionTitle",
+                "url": "#",
+              },
+              "title": "title",
+            }
+          }
+        />
+      </div>
+    </div>
+    <Relay(OpinionAnswer)
+      opinion={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "__typename": "Opinion",
+          "section": Object {
+            "color": "info",
+            "title": "sectionTitle",
+            "url": "#",
+          },
+          "title": "title",
+        }
+      }
+    />
+  </div>
+</Relay(TrashedMessage)>
+`;

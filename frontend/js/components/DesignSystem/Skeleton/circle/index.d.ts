@@ -1,10 +1,11 @@
-import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox'
 
 type Props = {
-    readonly size: number | string,
-    readonly animate?: boolean,
+  readonly size: number | string
+  readonly animate?: boolean
 }
 
-declare const SkeletonCircle: PolymorphicComponent<Props>;
+declare const SkeletonCircle: PolymorphicComponent<Props>
 
-export default SkeletonCircle;
+export default SkeletonCircle

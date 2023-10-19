@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalViewAnalysisPanel  />  renders correctly 1`] = `
+<Fragment>
+  <ProposalViewAnalysisPanel__ResponsesView
+    tooLate={false}
+  >
+    <ProposalAnalysisStatusLabel
+      color="#28a745"
+      fontSize={14}
+      iconName="favorable"
+      iconSize={10}
+      text="global.favorable"
+    />
+  </ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        " $fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [
+          Object {
+            " $fragmentRefs": null,
+            "__typename": "ValueResponse",
+            "question": Object {
+              "id": "q1",
+            },
+          },
+        ],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</Fragment>
+`;
+
+exports[`<ProposalViewAnalysisPanel  />  renders correctly with ValueResponse and MediaResponse 1`] = `
+<Fragment>
+  <ProposalViewAnalysisPanel__ResponsesView
+    tooLate={false}
+  >
+    <ProposalAnalysisStatusLabel
+      color="#28a745"
+      fontSize={14}
+      iconName="favorable"
+      iconSize={10}
+      text="global.favorable"
+    />
+  </ProposalViewAnalysisPanel__ResponsesView>
+  <ProposalAnalysisComments
+    proposalAnalysis={
+      Object {
+        " $fragmentRefs": null,
+        "analyst": Object {
+          "id": "userID345",
+        },
+        "id": "a1id",
+        "responses": Array [
+          Object {
+            " $fragmentRefs": null,
+            "__typename": "ValueResponse",
+            "question": Object {
+              "id": "q1",
+            },
+          },
+          Object {
+            " $fragmentRefs": null,
+            "__typename": "MediaResponse",
+            "question": Object {
+              "id": "q2",
+            },
+          },
+        ],
+        "state": "FAVOURABLE",
+      }
+    }
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</Fragment>
+`;

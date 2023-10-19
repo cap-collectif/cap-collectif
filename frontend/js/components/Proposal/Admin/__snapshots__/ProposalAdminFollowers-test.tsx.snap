@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAdminFollowers /> should render a proposal page follower with 3 users 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 3,
+          }
+        }
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.proposal.subscribers"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <div
+      className="clearfix"
+    />
+    <Relay(ProposalPageFollowers)
+      pageAdmin={true}
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "allFollowers": Object {
+            "totalCount": 3,
+          },
+          "id": "proposal1",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`<ProposalAdminFollowers /> should render a proposal page follower without users 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal.follower.count"
+        values={
+          Object {
+            "num": 0,
+          }
+        }
+      />
+    </h3>
+    <a
+      className="pull-right link"
+      href="admin.help.link.proposal.subscribers"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <i
+        className="fa fa-info-circle"
+      />
+       
+      <FormattedMessage
+        id="global.help"
+        values={Object {}}
+      />
+    </a>
+  </div>
+  <div
+    className="box-content"
+  >
+    <div
+      className="clearfix"
+    />
+    <Relay(ProposalPageFollowers)
+      pageAdmin={true}
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "allFollowers": Object {
+            "totalCount": 0,
+          },
+          "id": "proposal1",
+        }
+      }
+    />
+  </div>
+</div>
+`;

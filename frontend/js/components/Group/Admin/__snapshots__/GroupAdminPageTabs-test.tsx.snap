@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GroupAdminPageTabs /> render correctly 1`] = `
+<div
+  className="col-xs-12"
+>
+  <Uncontrolled(Tabs)
+    id="group-admin-tabs"
+  >
+    <Tab
+      eventKey={1}
+      title="admin.fields.group.number_users"
+    >
+      <Connect(GroupAdminUsers)
+        group={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
+        pendingInvitationFragmentRef={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
+      />
+    </Tab>
+    <Tab
+      eventKey={2}
+      title="global.params"
+    >
+      <Relay(Connect(ReduxForm))
+        group={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
+      />
+    </Tab>
+  </Uncontrolled(Tabs)>
+</div>
+`;

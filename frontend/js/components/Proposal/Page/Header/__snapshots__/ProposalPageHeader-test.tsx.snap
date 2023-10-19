@@ -1,0 +1,657 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageHeader /> should not render theme if proposal has none and form type is question 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="questions-list"
+      />
+      <div />
+    </ProposalPageHeader__HeaderActions>
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#1E88E5"
+        viewBox="0 0 230 75"
+      />
+    </div>
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "QUESTION",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": null,
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="proposal.back"
+      />
+      <div />
+    </ProposalPageHeader__HeaderActions>
+    <ProposalPageHeader__Cover
+      alt="proposal-illustration"
+      loading="eager"
+      src="/image.exe"
+    />
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": Object {
+            "categoryImage": Object {
+              "image": Object {
+                "url": "./",
+              },
+            },
+            "color": "red",
+            "icon": null,
+          },
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": Object {
+            "url": "/image.exe",
+          },
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom with an analysing button 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="proposal.back"
+      />
+      <div>
+        <button
+          id="side-analysis-open-button"
+          type="button"
+        >
+          <Icon
+            color="#0388cc"
+            name="chart"
+            size={16}
+          />
+          panel.analysis.subtitle
+        </button>
+      </div>
+    </ProposalPageHeader__HeaderActions>
+    <ProposalPageHeader__Cover
+      alt="proposal-illustration"
+      loading="eager"
+      src="/image.exe"
+    />
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": Object {
+            "categoryImage": Object {
+              "image": Object {
+                "url": "./",
+              },
+            },
+            "color": "red",
+            "icon": null,
+          },
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": Object {
+            "url": "/image.exe",
+          },
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="questions-list"
+      />
+      <div />
+    </ProposalPageHeader__HeaderActions>
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#1E88E5"
+        viewBox="0 0 230 75"
+      />
+    </div>
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "QUESTION",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": null,
+          "project": Object {
+            "type": Object {
+              "title": "global.consultation",
+            },
+          },
+          "publishedAt": null,
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:10:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render an establishment 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="establishment-back"
+      />
+      <div />
+    </ProposalPageHeader__HeaderActions>
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#1E88E5"
+        viewBox="0 0 230 75"
+      />
+    </div>
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "ESTABLISHMENT",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": null,
+          "project": Object {
+            "type": Object {
+              "title": "project.types.establishment",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;
+
+exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
+<ProposalPageHeader__Header
+  id="ProposalPageHeader"
+>
+  <div>
+    <ProposalPageHeader__HeaderActions>
+      <BackUrl
+        defaultStepUrl="/step"
+        platformLocale="fr-FR"
+        tradKeyToBack="interpellation.back"
+      />
+      <div />
+    </ProposalPageHeader__HeaderActions>
+    <div
+      className="default-header"
+    >
+      <CategoryBackground
+        color="#1E88E5"
+        viewBox="0 0 230 75"
+      />
+    </div>
+    <ProposalPageHeader__Informations>
+      <h1>
+        titre
+      </h1>
+      <Skeleton
+        isLoaded={true}
+        placeholder={<AvatarPlaceholder />}
+      >
+        <Flex
+          direction="row"
+        >
+          <Relay(Connect(UserAvatarLegacy))
+            user={
+              Object {
+                " $fragmentRefs": null,
+                "username": "userAdmin",
+              }
+            }
+          />
+          <ProposalPageHeader__About>
+            <div>
+              userAdmin
+            </div>
+            <div>
+              <FormattedDate
+                day="numeric"
+                hour="numeric"
+                minute="numeric"
+                month="long"
+                value={"2014-12-31T23:00:00.000Z"}
+                year="numeric"
+              />
+              <span>
+                 • 
+                <FormattedMessage
+                  id="proposal_form.notifications_comment.on_update"
+                  values={Object {}}
+                />
+              </span>
+            </div>
+          </ProposalPageHeader__About>
+        </Flex>
+      </Skeleton>
+    </ProposalPageHeader__Informations>
+    <Relay(Connect(ProposalPageHeaderButtons))
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "author": Object {
+            " $fragmentRefs": null,
+            "username": "userAdmin",
+          },
+          "category": null,
+          "createdAt": "2015-01-01 00:00:00",
+          "currentVotableStep": null,
+          "form": Object {
+            "objectType": "PROPOSAL",
+            "step": Object {
+              "state": "CLOSED",
+              "url": "/step",
+            },
+            "usingIllustration": true,
+          },
+          "id": "1",
+          "media": null,
+          "project": Object {
+            "type": Object {
+              "title": "project.types.interpellation",
+            },
+          },
+          "publishedAt": "2015-01-01 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+          "url": "true",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </div>
+</ProposalPageHeader__Header>
+`;

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TextProps } from '../../Primitives/Text';
+import { TextProps } from '~ui/Primitives/Text'
 
 declare const Title: FC<TextProps>
 

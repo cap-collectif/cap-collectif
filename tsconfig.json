@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "~ui/*": [
+        "./frontend/js/components/Ui/*"
+      ],
+      "~relay/*": [
+        "./frontend/js/__generated__/~relay/*"
+      ],
+      "~ds/*": [
+        "./frontend/js/components/DesignSystem/*"
+      ],
+      "~/*": [
+        "./frontend/js/*"
+      ],
+      "~svg/*": [
+        "./public/svg/*"
+      ],
+      "~image/*": [
+        "./public/image/*"
+      ]
+    },
+    "incremental": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.d.ts",
+    "**/*.graphql",
+    "**/*.json",
+    "**/*.svg",
+  ],
+  "exclude": [
+    "node_modules","admin-next","cypress"
+  ]
+}

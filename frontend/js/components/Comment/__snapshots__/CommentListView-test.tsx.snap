@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentListView /> should render correctly 1`] = `
+<Relay(injectIntl(CommentListViewPaginated))
+  commentable={
+    Object {
+      " $fragmentRefs": null,
+      " $refType": null,
+      "id": "1",
+    }
+  }
+  highlightedComment={null}
+  useBodyColor={false}
+/>
+`;
+
+exports[`<CommentListView /> should render correctly when refecting 1`] = `
+<Loader
+  color="#333333"
+  inline={false}
+  show={true}
+  size={40}
+/>
+`;

@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionVotesButton /> should not render a button when value is -1 and vote type is disabled 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should not render a button when value is -1 and vote type is simple 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should not render a button when value is 0 and vote type is disabled 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should not render a button when value is 0 and vote type is simple 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should not render a button when value is 1 and vote type is disabled 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is both 1`] = `
+<div>
+  <Relay(Connect(RequirementsModal))
+    handleClose={[Function]}
+    show={false}
+    step={
+      Object {
+        " $fragmentRefs": null,
+        "requirements": Object {
+          "viewerMeetsTheRequirements": true,
+        },
+      }
+    }
+  />
+  <Connect(NewLoginOverlay)>
+    <button
+      aria-label="vote.aria_label.ok"
+      className="btn btn-success btn--outline"
+      disabled={false}
+      onClick={[Function]}
+      style={Object {}}
+      type="button"
+    >
+      <i
+        className="cap cap-hand-like-2-1"
+      />
+       
+      <FormattedMessage
+        id="vote.ok"
+        values={Object {}}
+      />
+    </button>
+  </Connect(NewLoginOverlay)>
+</div>
+`;
+
+exports[`<OpinionVotesButton /> should render a green button when value is 1 and vote type is simple 1`] = `""`;
+
+exports[`<OpinionVotesButton /> should render a red button when value is -1 and vote type is both 1`] = `
+<div>
+  <Relay(Connect(RequirementsModal))
+    handleClose={[Function]}
+    show={false}
+    step={
+      Object {
+        " $fragmentRefs": null,
+        "requirements": Object {
+          "viewerMeetsTheRequirements": true,
+        },
+      }
+    }
+  />
+  <Connect(NewLoginOverlay)>
+    <button
+      aria-label="vote.aria_label.nok"
+      className="btn btn-danger btn--outline"
+      disabled={false}
+      onClick={[Function]}
+      style={Object {}}
+      type="button"
+    >
+      <i
+        className="cap cap-hand-unlike-2-1"
+      />
+       
+      <FormattedMessage
+        id="vote.nok"
+        values={Object {}}
+      />
+    </button>
+  </Connect(NewLoginOverlay)>
+</div>
+`;
+
+exports[`<OpinionVotesButton /> should render an orange button when value is 0 and vote type is both 1`] = `
+<div>
+  <Relay(Connect(RequirementsModal))
+    handleClose={[Function]}
+    show={false}
+    step={
+      Object {
+        " $fragmentRefs": null,
+        "requirements": Object {
+          "viewerMeetsTheRequirements": true,
+        },
+      }
+    }
+  />
+  <Connect(NewLoginOverlay)>
+    <button
+      aria-label="vote.aria_label.mitige"
+      className="btn btn-warning btn--outline"
+      disabled={false}
+      onClick={[Function]}
+      style={Object {}}
+      type="button"
+    >
+      <i
+        className="cap cap-hand-like-2-1 icon-rotate"
+      />
+       
+      <FormattedMessage
+        id="vote.mitige"
+        values={Object {}}
+      />
+    </button>
+  </Connect(NewLoginOverlay)>
+</div>
+`;

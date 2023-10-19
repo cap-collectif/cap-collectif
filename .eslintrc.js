@@ -1,20 +1,28 @@
 module.exports = {
+  settings: {
+    'import/resolver': {
+      typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
+    },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts'],
+    },
+  },
   extends: [
-    'airbnb',
     'prettier',
-    'prettier/flowtype',
     'prettier/react',
-    'plugin:flowtype/recommended',
     'plugin:jest/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:relay/recommended',
   ],
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
+
   parserOptions: {
-    ecmaVersion: 2015,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
   },
   plugins: [
-    'flowtype',
     'import',
     'react',
     'react-hooks',
@@ -23,6 +31,7 @@ module.exports = {
     'relay',
     'graphql',
     'formatjs',
+    '@typescript-eslint',
   ],
   globals: {
     $: true,
@@ -43,19 +52,43 @@ module.exports = {
     __SERVER__: true,
     ReactIntlLocaleData: true,
     Cookies: true,
-    // Flow vars
-    HTMLInputElement: true,
-    Element: true,
     // Jest e2e
     graphql: true,
     toGlobalId: true,
   },
   rules: {
+    'relay/generated-flow-types': 'off',
+    'no-unused-vars': 'off',
+    'import/no-unresolved': 'error',
+    '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
+    'no-console': 'warn',
+    'no-empty': 'error',
+    'no-eval': 'error',
+    'prefer-destructuring': [
+      'error',
+      {
+        array: false,
+        object: true,
+      },
+      {
+        enforceForRenamedProperties: false,
+      },
+    ],
+    'no-restricted-globals': 'error',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        '': 'never',
+      },
+    ],
     'react/destructuring-assignment': 'off',
     // TODO
     'react/no-unescaped-entities': 'warn',
-    // TODO restore this
-    'relay/generated-flow-types': 'off',
     'react/no-this-in-sfc': 'warn',
     'react/sort-comp': 'warn',
 
@@ -67,6 +100,7 @@ module.exports = {
     // TODO find a solution to activate this
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md#case-i-have-two-labels-for-the-same-input
     'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/no-autofocus': 'off',
     // TODO set this to error
     'prefer-promise-reject-errors': 'warn',
     'react-hooks/rules-of-hooks': 'error',
@@ -97,10 +131,6 @@ module.exports = {
     'jsx-a11y/href-no-hash': 'off',
     // Deprecated: https://github.com/evcohen/eslint-plugin-jsx-a11y/releases/tag/v6.1.0
     'jsx-a11y/label-has-for': 'off',
-    // Disabled for Flow generated props
-    // Maybe we could use a different syntax
-    // Such as import * as generated from …
-    camelcase: 'off',
     'import/no-cycle': 'off',
     // TODO: https://github.com/cap-collectif/platform/issues/5966
     'react/require-default-props': 'off',
@@ -128,8 +158,6 @@ module.exports = {
     'react/no-find-dom-node': 'off',
     // TODO turn this into an error to prepare for React 17
     'react/no-string-refs': 'warn',
-    // We use .js instead of .jsx
-    'react/jsx-filename-extension': ['error', { extensions: ['.js'] }],
     // TODO enable this
     'react/jsx-no-bind': 'off',
     // TODO enable this
@@ -140,16 +168,12 @@ module.exports = {
     'no-nested-ternary': 'off',
     // This conflict with `style` props of `<FormattedNumber />`
     'react/style-prop-object': 'off',
-    // This conflict with Prettier
-    'flowtype/space-after-type-colon': 'off',
     // TODO enable this
     'no-param-reassign': 'off',
     // Maybe enable this
     'consistent-return': 'off',
     // Maybe enable this
     'array-callback-return': 'off',
-    // With styled-component typed it's not viable
-    'flowtype/generic-spacing': 'off',
     'no-restricted-imports': [
       'error',
       {
@@ -162,22 +186,7 @@ module.exports = {
         ],
       },
     ],
-    'flowtype/require-valid-file-annotation': ['error', 'always'],
     // No large Snapshots
     'jest/no-large-snapshots': 'warn',
-  },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: [
-          ['~relay', './frontend/js/__generated__/~relay'],
-          ['~ui', './frontend/js/components/Ui'],
-          ['~ds', './frontend/js/components/DesignSystem'],
-          ['~svg', './public/svg'],
-          ['~image', './public/image'],
-          ['~', './frontend/js/'],
-        ],
-      },
-    },
   },
 };

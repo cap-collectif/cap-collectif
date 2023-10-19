@@ -1,10 +1,11 @@
-import { ReactChild } from 'react';
-import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { ReactChild } from 'react'
+import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox'
 
 type Props = {
-    readonly children: ReactChild
+  readonly children: ReactChild
 }
 
-declare const ActionBar: PolymorphicComponent<Props>;
+declare const ActionBar: PolymorphicComponent<Props>
 
-export default ActionBar;
+export default ActionBar

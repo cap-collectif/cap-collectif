@@ -1,5 +1,6 @@
-import { PolymorphicAppBox } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicAppBox } from '../../../Ui/Primitives/AppBox'
 
-declare const Trigger: PolymorphicAppBox;
+declare const Trigger: PolymorphicAppBox
 
-export default Trigger;
+export default Trigger

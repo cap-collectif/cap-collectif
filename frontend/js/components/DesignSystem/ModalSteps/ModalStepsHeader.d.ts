@@ -1,5 +1,6 @@
-import ModalHeader from '../Modal/ModalHeader';
+// @ts-nocheck
+import ModalHeader from '../Modal/ModalHeader'
 
 declare const ModalStepsHeader: ModalHeader
 
-export default ModalStepsHeader;
+export default ModalStepsHeader

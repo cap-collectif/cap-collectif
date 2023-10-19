@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalTrashedListPaginated /> render null 1`] = `""`;
+
+exports[`<ProposalTrashedListPaginated /> should render correctly 1`] = `
+<Fragment>
+  <FormattedMessage
+    id="count-proposal"
+    tagName="h3"
+    values={
+      Object {
+        "count": 3,
+        "num": 3,
+      }
+    }
+  />
+  <ListGroup
+    bsClass="media-list proposal-preview-list"
+    componentClass="ul"
+  >
+    <Relay(Connect(ProposalPreview))
+      key="proposal1"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal1",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <Relay(Connect(ProposalPreview))
+      key="proposal2"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal2",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <Relay(Connect(ProposalPreview))
+      key="proposal3"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal3",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </ListGroup>
+  <div
+    className="text-center"
+    id="proposal-list-pagination-footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={false}
+      id="ProposalTrashedListPaginated-loadMore"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="see-more-proposals"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalTrashedListPaginated /> should render correctly 2`] = `
+<Fragment>
+  <FormattedMessage
+    id="count-proposal"
+    tagName="h3"
+    values={
+      Object {
+        "count": 3,
+        "num": 3,
+      }
+    }
+  />
+  <ListGroup
+    bsClass="media-list proposal-preview-list"
+    componentClass="ul"
+  >
+    <Relay(Connect(ProposalPreview))
+      key="proposal1"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal1",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <Relay(Connect(ProposalPreview))
+      key="proposal2"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal2",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+    <Relay(Connect(ProposalPreview))
+      key="proposal3"
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          "id": "proposal3",
+        }
+      }
+      step={null}
+      viewer={null}
+    />
+  </ListGroup>
+  <div
+    className="text-center"
+    id="proposal-list-pagination-footer"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      disabled={true}
+      id="ProposalTrashedListPaginated-loadMore"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.loading"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+</Fragment>
+`;
+
+exports[`<ProposalTrashedListPaginated /> should render correctly 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      20,
+      [Function],
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;

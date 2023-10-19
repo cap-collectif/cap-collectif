@@ -1,5 +1,6 @@
-import { ButtonProps } from '../Button/Button';
+// @ts-nocheck
+import { ButtonProps } from '../Button/Button'
 
 declare const ModalStepsFooterBackButton: ButtonProps
 
-export default ModalStepsFooterBackButton;
+export default ModalStepsFooterBackButton

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
+<Fragment>
+  <ProposalAnalysisUserRow__Row
+    decidor={false}
+    disabled={false}
+  >
+    <div>
+      <Relay(Connect(UserAvatarLegacy))
+        className="pull-left"
+        size={32}
+        user={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+            "displayName": "Goultard",
+            "id": "id",
+          }
+        }
+      />
+      <div>
+        Goultard
+      </div>
+      <Label
+        color="#f09200"
+        fontSize={8}
+      >
+        <Icon
+          color="#ffffff"
+          name="ongoing"
+          size={8}
+        />
+        <span
+          className="ml-5"
+        >
+          <FormattedMessage
+            id="step.status.open"
+            values={Object {}}
+          />
+        </span>
+      </Label>
+    </div>
+    <button
+      className="edit-analysis-icon"
+      onClick={[Function]}
+      type="button"
+    >
+      <Icon
+        color="#6c757d"
+        name="pen"
+        size={16}
+      />
+    </button>
+  </ProposalAnalysisUserRow__Row>
+</Fragment>
+`;

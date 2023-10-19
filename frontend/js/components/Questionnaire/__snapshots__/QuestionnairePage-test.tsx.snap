@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionnairePage /> renders correctly 1`] = `
+<QuestionnairePage__QuestionnaireContainer
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
+>
+  <QuestionnaireHeader
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+  <Relay(UserReplies)
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "questionnaire1",
+        "multipleRepliesAllowed": false,
+        "step": Object {
+          " $fragmentRefs": null,
+        },
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
+      }
+    }
+  />
+  <div
+    className="wrapper-replies-max"
+  >
+    <Icon
+      color="#1D8293"
+      name="information"
+      size={16}
+    />
+    <FormattedMessage
+      id="reply.user_has_reply.error"
+      values={Object {}}
+    />
+  </div>
+  <QuestionnaireFooter
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+</QuestionnairePage__QuestionnaireContainer>
+`;
+
+exports[`<QuestionnairePage /> renders correctly with multipleRepliesAllowed 1`] = `
+<QuestionnairePage__QuestionnaireContainer
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
+>
+  <QuestionnaireHeader
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+  <Relay(UserReplies)
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "questionnaire1",
+        "multipleRepliesAllowed": true,
+        "step": Object {
+          " $fragmentRefs": null,
+        },
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
+      }
+    }
+  />
+  <button
+    className="btn-answer-again"
+    onClick={[Function]}
+    type="button"
+  >
+    <FormattedMessage
+      id="answer-again"
+      values={Object {}}
+    />
+  </button>
+  <QuestionnaireFooter
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+</QuestionnairePage__QuestionnaireContainer>
+`;
+
+exports[`<QuestionnairePage /> renders correctly without viewerReplies 1`] = `
+<QuestionnairePage__QuestionnaireContainer
+  className="questionnaire-page"
+  id="questionnaire-questionnaire1"
+>
+  <QuestionnaireHeader
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+  <Relay(UserReplies)
+    query={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "questionnaire1",
+        "multipleRepliesAllowed": false,
+        "step": Object {
+          " $fragmentRefs": null,
+        },
+        "viewerReplies": Object {
+          "totalCount": 0,
+        },
+      }
+    }
+  />
+  <Relay(Connect(ReplyCreateFormWrapper))
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "id": "questionnaire1",
+        "multipleRepliesAllowed": false,
+        "step": Object {
+          " $fragmentRefs": null,
+        },
+        "viewerReplies": Object {
+          "totalCount": 0,
+        },
+      }
+    }
+    setIsShow={[Function]}
+  />
+  <QuestionnaireFooter
+    step={
+      Object {
+        " $fragmentRefs": null,
+      }
+    }
+  />
+</QuestionnairePage__QuestionnaireContainer>
+`;

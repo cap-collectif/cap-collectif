@@ -1,6 +1,7 @@
-import { FC } from 'react';
-import { AppBoxProps } from "../../Ui/Primitives/AppBox";
+// @ts-nocheck
+import { FC } from 'react'
+import { AppBoxProps } from '~ui/Primitives/AppBox'
 
-declare const InfoMessageContent: FC<AppBoxProps>;
+declare const InfoMessageContent: FC<AppBoxProps>
 
-export default InfoMessageContent;
+export default InfoMessageContent

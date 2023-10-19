@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalVotes /> should render correctly proposal votes 1`] = `
+<div>
+  <div
+    className="proposal__votes"
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <Relay(UserBox)
+        className="proposal__vote"
+        key="0"
+        user={
+          Object {
+            " $fragmentRefs": null,
+            "id": "userAdmin",
+          }
+        }
+      />
+      <Relay(UserBox)
+        className="proposal__vote"
+        key="1"
+        user={
+          Object {
+            " $fragmentRefs": null,
+            "id": "userJean",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalVotes /> should render correctly proposal votes ranked 1`] = `
+<div>
+  <div
+    className="proposal__votes"
+  >
+    <div
+      style={
+        Object {
+          "display": "flex",
+          "flexWrap": "wrap",
+        }
+      }
+    >
+      <Relay(UserBox)
+        className="proposal__vote"
+        key="0"
+        user={
+          Object {
+            " $fragmentRefs": null,
+            "id": "userAdmin",
+          }
+        }
+      />
+      <Relay(UserBox)
+        className="proposal__vote"
+        key="1"
+        user={
+          Object {
+            " $fragmentRefs": null,
+            "id": "userJean",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

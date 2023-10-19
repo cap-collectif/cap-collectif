@@ -4,7 +4,6 @@ import Layout from '../components/Layout/Layout';
 import { Text } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import withPageAuthRequired from '../utils/withPageAuthRequired';
-import Link from 'next/link';
 
 const Index: NextPage<PageProps> = ({ viewerSession }) => {
     const intl = useIntl();
@@ -31,9 +30,6 @@ const Index: NextPage<PageProps> = ({ viewerSession }) => {
             <Text>
                 {intl.formatMessage({ id: 'global-hello' })}: {JSON.stringify(viewerSession)}
             </Text>
-            <Link href="/spyl">
-                <a>Go to spyl</a>
-            </Link>
         </Layout>
     );
 };

@@ -27,8 +27,8 @@ const devConf = {
     chunkFilename: 'js/chunks/[name].js',
     path: webpackConfig.outputDir,
   },
-
   resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
@@ -68,10 +68,10 @@ const devConf = {
         webpackConfig.nodeModulesDir,
         'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
       ),
-      path.join(webpackConfig.frontendDir, 'js/jsapi.js'),
-      path.join(webpackConfig.frontendDir, 'js/googleCharts.js'),
-      path.join(webpackConfig.frontendDir, 'js/browserUpdate.js'),
-      path.join(webpackConfig.frontendDir, 'js/modernizr.js'),
+      path.join(webpackConfig.frontendDir, 'js/jsapi.ts'),
+      path.join(webpackConfig.frontendDir, 'js/googleCharts.ts'),
+      path.join(webpackConfig.frontendDir, 'js/browserUpdate.ts'),
+      path.join(webpackConfig.frontendDir, 'js/modernizr.ts'),
       path.join(webpackConfig.nodeModulesDir, 'react-datetime/css/react-datetime.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet/dist/leaflet.css'),
       path.join(webpackConfig.nodeModulesDir, 'leaflet-geosearch/dist/geosearch.css'),
@@ -79,11 +79,11 @@ const devConf = {
     ],
 
     // Common file for JS
-    app: path.join(webpackConfig.frontendDir, 'js/app.js'),
+    app: path.join(webpackConfig.frontendDir, 'js/app.ts'),
 
-    admin: path.join(webpackConfig.frontendDir, 'js/registrationAdmin.js'),
+    admin: path.join(webpackConfig.frontendDir, 'js/registrationAdmin.ts'),
     front: [
-      path.join(webpackConfig.frontendDir, 'js/registration.js'),
+      path.join(webpackConfig.frontendDir, 'js/registration.ts'),
       path.join(webpackConfig.srcDir, 'Resources/scss/style.scss'),
     ],
 

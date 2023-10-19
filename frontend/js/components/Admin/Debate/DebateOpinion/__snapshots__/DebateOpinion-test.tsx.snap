@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DebateOpinion /> should render correctly 1`] = `
+<Card
+  bg="white"
+  flex="1"
+  maxHeight="400px"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  overflow="hidden"
+  p={0}
+  position="relative"
+>
+  <DebateOpinion___StyledTag
+    _css={[Function]}
+    borderBottomLeftRadius={0}
+    borderTopRightRadius={0}
+    interactive={false}
+    variant="green"
+  >
+    <FormattedMessage
+      id="opinion.for"
+      values={Object {}}
+    />
+  </DebateOpinion___StyledTag>
+  <ForwardRef
+    direction="column"
+    maxHeight="100%"
+    pb={6}
+    pt={10}
+    px={6}
+  >
+    <ForwardRef
+      align="center"
+      direction="row"
+      mb={4}
+      spacing={2}
+    >
+      <Relay(NewUserAvatarLegacy)
+        border="2px solid"
+        borderColor="yellow.500"
+        size="md"
+        user={
+          Object {
+            " $fragmentRefs": null,
+            "username": "Emmanuel Macron",
+          }
+        }
+      />
+      <Text
+        color="gray.500"
+        fontSize={3}
+      >
+        Emmanuel Macron
+      </Text>
+    </ForwardRef>
+    <ForwardRef
+      direction="column"
+      maxHeight="100%"
+      overflow="hidden"
+      spacing={2}
+    >
+      <Text
+        fontWeight="600"
+      >
+        Thats my opinion
+      </Text>
+      <WYSIWYGRender
+        value="Thats it"
+      />
+    </ForwardRef>
+  </ForwardRef>
+</Card>
+`;

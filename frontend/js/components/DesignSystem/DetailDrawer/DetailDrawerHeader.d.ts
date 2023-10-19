@@ -1,4 +1,5 @@
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../Ui/Primitives/AppBox'
 
 type Props = {
   readonly showBackArrow?: boolean
@@ -6,4 +7,4 @@ type Props = {
 
 declare const DetailDrawerHeader: PolymorphicComponent<Props>
 
-export default DetailDrawerHeader;
+export default DetailDrawerHeader

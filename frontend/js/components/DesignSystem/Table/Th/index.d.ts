@@ -1,12 +1,13 @@
-import { ReactChild } from 'react';
-import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { ReactChild } from 'react'
+import { PolymorphicComponent } from '../../../Ui/Primitives/AppBox'
 
 type Props = {
-    readonly isNumeric?: boolean,
-    readonly noPlaceholder?: boolean,
-    readonly children?: ReactChild | (({ styles: DefaultStyles }) => ReactChild),
+  readonly isNumeric?: boolean
+  readonly noPlaceholder?: boolean
+  readonly children?: ReactChild | (({ styles: DefaultStyles }) => ReactChild)
 }
 
-declare const Th: PolymorphicComponent<Props>;
+declare const Th: PolymorphicComponent<Props>
 
-export default Th;
+export default Th

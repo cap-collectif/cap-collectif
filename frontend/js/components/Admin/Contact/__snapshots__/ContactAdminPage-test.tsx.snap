@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ContactAdminForm /> renders correctly 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-6"
+    >
+      <h3
+        className="m-15"
+      >
+        <FormattedMessage
+          id="contact.title"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="col-md-6"
+    >
+      <div
+        align="right"
+        className="m-15"
+      >
+        <Connect(LanguageButtonContainer) />
+      </div>
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.group.content"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="box-content"
+    >
+      <ContactAdminForm
+        anyTouched={false}
+        array={
+          Object {
+            "insert": [MockFunction],
+            "move": [MockFunction],
+            "pop": [MockFunction],
+            "push": [MockFunction],
+            "remove": [MockFunction],
+            "removeAll": [MockFunction],
+            "shift": [MockFunction],
+            "splice": [MockFunction],
+            "swap": [MockFunction],
+            "unshift": [MockFunction],
+          }
+        }
+        asyncValidate={[MockFunction]}
+        asyncValidating={false}
+        autofill={[MockFunction]}
+        blur={[MockFunction]}
+        change={[MockFunction]}
+        clearAsyncError={[MockFunction]}
+        clearSubmit={[MockFunction]}
+        currentLanguage="fr-FR"
+        destroy={[MockFunction]}
+        dirty={false}
+        dispatch={[MockFunction]}
+        error={null}
+        form="formName"
+        formName="contact-admin-form"
+        handleSubmit={[MockFunction]}
+        initialValues={Object {}}
+        initialize={[MockFunction]}
+        initialized={true}
+        invalid={false}
+        pristine={true}
+        query={
+          Object {
+            " $refType": null,
+            "content": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "contenu",
+                },
+              ],
+            },
+            "customCode": Object {
+              "value": "<code>",
+            },
+            "metadescription": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "meta description",
+                },
+              ],
+            },
+            "siteImage": Object {
+              "id": "image1",
+              "media": Object {
+                "id": "IDimage1",
+                "name": "image1.jpg",
+                "url": "capco/image1.jpg",
+              },
+            },
+            "title": Object {
+              "translations": Array [
+                Object {
+                  "locale": "FR",
+                  "value": "titre",
+                },
+              ],
+            },
+          }
+        }
+        reset={[MockFunction]}
+        submitFailed={false}
+        submitSucceeded={false}
+        submitting={false}
+        touch={[MockFunction]}
+        untouch={[MockFunction]}
+        updateSyncErrors={[MockFunction]}
+        valid={true}
+        warning={null}
+      />
+      <ReactRelayQueryRenderer
+        environment={"RelayModernEnvironment()"}
+        query={
+          Object {
+            "default": Object {
+              "fragment": Object {
+                "abstractKey": null,
+                "argumentDefinitions": Array [],
+                "kind": "Fragment",
+                "metadata": null,
+                "name": "ContactAdminPageQuery",
+                "selections": Array [
+                  Object {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "ContactAdminList_query",
+                  },
+                ],
+                "type": "Query",
+              },
+              "hash": "97ff3b45ddb66fae4945b205d3f36b56",
+              "kind": "Request",
+              "operation": Object {
+                "argumentDefinitions": Array [],
+                "kind": "Operation",
+                "name": "ContactAdminPageQuery",
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "ContactForm",
+                    "kind": "LinkedField",
+                    "name": "contactForms",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "id",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "title",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "ContactFormTranslation",
+                        "kind": "LinkedField",
+                        "name": "translations",
+                        "plural": true,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "locale",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "body",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "confidentiality",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "email",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "bodyUsingJoditWysiwyg",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "confidentialityUsingJoditWysiwyg",
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+              },
+              "params": Object {
+                "cacheID": "03ed17a84d99c6cbf7c9c05dbe1f0a7d",
+                "id": null,
+                "metadata": Object {},
+                "name": "ContactAdminPageQuery",
+                "operationKind": "query",
+                "text": "query ContactAdminPageQuery {
+  ...ContactAdminList_query
+}
+
+fragment ContactAdminListItem_contactForm on ContactForm {
+  id
+  title
+  translations {
+    locale
+    title
+  }
+  ...ContactFormAdminModal_contactForm
+}
+
+fragment ContactAdminList_query on Query {
+  contactForms {
+    id
+    ...ContactAdminListItem_contactForm
+  }
+}
+
+fragment ContactFormAdminForm_contactForm on ContactForm {
+  id
+  email
+  bodyUsingJoditWysiwyg
+  confidentialityUsingJoditWysiwyg
+  translations {
+    locale
+    body
+    title
+    confidentiality
+  }
+}
+
+fragment ContactFormAdminModal_contactForm on ContactForm {
+  id
+  title
+  ...ContactFormAdminForm_contactForm
+}
+",
+              },
+            },
+          }
+        }
+        render={[Function]}
+        variables={Object {}}
+      />
+    </div>
+  </div>
+  <div
+    className="box box-primary container-fluid"
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.step.advanced"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <CustomPageFields
+      picto={true}
+    />
+  </div>
+  <div
+    className="box no-border"
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="m-15"
+      disabled={true}
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </div>
+  <AlertForm
+    errorMessage={null}
+    invalid={false}
+    submitFailed={false}
+    submitSucceeded={false}
+    submitting={false}
+    valid={true}
+  />
+</form>
+`;

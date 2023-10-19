@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageHeaderButtons /> should render correctly 1`] = `
+<ProposalPageHeaderButtons__Buttons>
+  <Relay(Connect(ProposalDeleteModal))
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "displayName": "flex",
+          "id": "authorid",
+          "slug": "metal",
+        },
+        "contribuable": true,
+        "currentVotableStep": Object {
+          "id": "stepid",
+        },
+        "form": Object {
+          "canContact": true,
+          "contribuable": true,
+        },
+        "id": "proposalId",
+        "isArchived": false,
+        "pendingRevisions": Object {
+          "totalCount": 0,
+        },
+        "publicationStatus": "PUBLISHED",
+        "title": "OEEEEE",
+        "url": "/slash",
+      }
+    }
+  />
+  <Connect(ShareButtonDropdown)
+    disabled={false}
+    id="proposal-share-button"
+    title="OEEEEE"
+    url="/slash"
+  />
+  <Relay(Connect(ProposalReportButton))
+    disabled={false}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "author": Object {
+          "displayName": "flex",
+          "id": "authorid",
+          "slug": "metal",
+        },
+        "contribuable": true,
+        "currentVotableStep": Object {
+          "id": "stepid",
+        },
+        "form": Object {
+          "canContact": true,
+          "contribuable": true,
+        },
+        "id": "proposalId",
+        "isArchived": false,
+        "pendingRevisions": Object {
+          "totalCount": 0,
+        },
+        "publicationStatus": "PUBLISHED",
+        "title": "OEEEEE",
+        "url": "/slash",
+      }
+    }
+  />
+  <ProposalContactButton
+    authorName="flex"
+    proposalId="proposalId"
+  />
+</ProposalPageHeaderButtons__Buttons>
+`;

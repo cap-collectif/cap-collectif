@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": false,
+        "id": "123",
+        "multipleRepliesAllowed": false,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and doesn't allow multiple votes and user has already votes 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    className="hidden-print"
+    closeLabel="Close alert"
+  >
+    <strong>
+      <FormattedMessage
+        id="reply.user_has_reply.reason"
+        values={Object {}}
+      />
+    </strong>
+    <p>
+      <FormattedMessage
+        id="reply.user_has_reply.error"
+        values={Object {}}
+      />
+    </p>
+  </Alert>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "id": "123",
+        "multipleRepliesAllowed": false,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
+        "viewerReplies": Object {
+          "totalCount": 2,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form when form is contribuable and user is not logged in 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Alert
+    bsClass="alert"
+    bsStyle="warning"
+    className="hidden-print text-center"
+    closeLabel="Close alert"
+  >
+    <strong>
+      <FormattedMessage
+        id="reply.not_logged_in.error"
+        values={Object {}}
+      />
+    </strong>
+    <Connect(injectIntl(RegistrationButton))
+      bsStyle="primary"
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }
+    />
+    <Connect(LoginButton)
+      style={
+        Object {
+          "marginLeft": 5,
+        }
+      }
+    />
+  </Alert>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "id": "123",
+        "multipleRepliesAllowed": true,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "id": "123",
+        "multipleRepliesAllowed": true,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": false,
+        },
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;
+
+exports[`<ReplyCreateFormWrapper /> should render no alert when anonymous particpants are allowed 1`] = `
+<ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+  <Relay(withRouter(Connect(injectIntl(ReduxForm))))
+    anonymousRepliesIds={Array []}
+    questionnaire={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "id": "123",
+        "multipleRepliesAllowed": true,
+        "phoneConfirmationRequired": false,
+        "step": Object {
+          "isAnonymousParticipationAllowed": true,
+        },
+        "viewerReplies": Object {
+          "totalCount": 1,
+        },
+      }
+    }
+    reply={null}
+    setIsShow={[MockFunction]}
+  />
+</ReplyCreateFormWrapper__ReplyCreateFormWrapperContainer>
+`;

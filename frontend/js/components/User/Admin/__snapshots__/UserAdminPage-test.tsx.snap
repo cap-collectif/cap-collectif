@@ -1,0 +1,617 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAdminPage/> should render 1`] = `
+<div
+  className="admin_proposal_form"
+>
+  <ReactRelayQueryRenderer
+    environment={"RelayModernEnvironment()"}
+    query={
+      Object {
+        "default": Object {
+          "fragment": Object {
+            "abstractKey": null,
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "id",
+              },
+            ],
+            "kind": "Fragment",
+            "metadata": null,
+            "name": "UserAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": "user",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "id",
+                    "variableName": "id",
+                  },
+                ],
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "UserAdminPageTabs_user",
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "User",
+                "kind": "LinkedField",
+                "name": "viewer",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "args": null,
+                    "kind": "FragmentSpread",
+                    "name": "UserAdminPageTabs_viewer",
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+            "type": "Query",
+          },
+          "hash": "e334a2a8ef74b5aff53705a5adc4a642",
+          "kind": "Request",
+          "operation": Object {
+            "argumentDefinitions": Array [
+              Object {
+                "defaultValue": null,
+                "kind": "LocalArgument",
+                "name": "id",
+              },
+            ],
+            "kind": "Operation",
+            "name": "UserAdminPageQuery",
+            "selections": Array [
+              Object {
+                "alias": "user",
+                "args": Array [
+                  Object {
+                    "kind": "Variable",
+                    "name": "id",
+                    "variableName": "id",
+                  },
+                ],
+                "concreteType": null,
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "__typename",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "abstractKey": null,
+                    "kind": "InlineFragment",
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "url",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isViewer",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "roles",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "locked",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "vip",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "enabled",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isAdmin",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isSuperAdmin",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isSubscribedToNewsLetter",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isSubscribedToProposalNews",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "subscribedToNewsLetterAt",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "contributionsCount",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "VoteConnection",
+                        "kind": "LinkedField",
+                        "name": "votes",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "totalCount",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "contributionsToDeleteCount",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "Media",
+                        "kind": "LinkedField",
+                        "name": "media",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "name",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "size",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "username",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "biography",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "websiteUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "facebookUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "linkedInUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "twitterUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "instagramUrl",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "profilePageIndexed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "UserType",
+                        "kind": "LinkedField",
+                        "name": "userType",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "neighborhood",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "email",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "isEmailConfirmed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "emailConfirmationSentAt",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "firstname",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "lastname",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "gender",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "dateOfBirth",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "address",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "address2",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "city",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "zipCode",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "phone",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "phoneConfirmed",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "phoneConfirmationSentAt",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "userIdentificationCode",
+                        "storageKey": null,
+                      },
+                    ],
+                    "type": "User",
+                  },
+                ],
+                "storageKey": null,
+              },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "User",
+                "kind": "LinkedField",
+                "name": "viewer",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isSuperAdmin",
+                    "storageKey": null,
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
+            ],
+          },
+          "params": Object {
+            "cacheID": "003bf38b2c389dd14be93de469e35ae1",
+            "id": null,
+            "metadata": Object {},
+            "name": "UserAdminPageQuery",
+            "operationKind": "query",
+            "text": "query UserAdminPageQuery(
+  $id: ID!
+) {
+  user: node(id: $id) {
+    __typename
+    ...UserAdminPageTabs_user
+    id
+  }
+  viewer {
+    ...UserAdminPageTabs_viewer
+    id
+  }
+}
+
+fragment DeleteAccountModal_viewer on User {
+  contributionsCount
+  votes {
+    totalCount
+  }
+  contributionsToDeleteCount
+  id
+}
+
+fragment UserAdminAccount_user on User {
+  id
+  isViewer
+  roles
+  locked
+  vip
+  enabled
+  isAdmin
+  isSuperAdmin
+  isSubscribedToNewsLetter
+  isSubscribedToProposalNews
+  subscribedToNewsLetterAt
+  ...DeleteAccountModal_viewer
+}
+
+fragment UserAdminAccount_viewer on User {
+  isAdmin
+  isSuperAdmin
+}
+
+fragment UserAdminPageTabs_user on User {
+  url
+  ...UserAdminAccount_user
+  ...UserAdminProfile_user
+  ...UserAdminPersonalData_user
+  ...UserAdminPassword_user
+}
+
+fragment UserAdminPageTabs_viewer on User {
+  ...UserAdminAccount_viewer
+  ...UserAdminPersonalData_viewer
+  ...UserAdminProfile_viewer
+}
+
+fragment UserAdminPassword_user on User {
+  id
+  isViewer
+}
+
+fragment UserAdminPersonalData_user on User {
+  id
+  email
+  isEmailConfirmed
+  emailConfirmationSentAt
+  firstname
+  lastname
+  gender
+  dateOfBirth
+  address
+  address2
+  city
+  zipCode
+  phone
+  phoneConfirmed
+  phoneConfirmationSentAt
+  userIdentificationCode
+  isViewer
+}
+
+fragment UserAdminPersonalData_viewer on User {
+  isSuperAdmin
+}
+
+fragment UserAdminProfile_user on User {
+  id
+  media {
+    id
+    name
+    size
+    url
+  }
+  url
+  username
+  biography
+  websiteUrl
+  facebookUrl
+  linkedInUrl
+  twitterUrl
+  instagramUrl
+  profilePageIndexed
+  userType {
+    id
+  }
+  neighborhood
+  isViewer
+}
+
+fragment UserAdminProfile_viewer on User {
+  isSuperAdmin
+}
+",
+          },
+        },
+      }
+    }
+    render={[Function]}
+    variables={
+      Object {
+        "id": "userMaxime",
+      }
+    }
+  />
+</div>
+`;

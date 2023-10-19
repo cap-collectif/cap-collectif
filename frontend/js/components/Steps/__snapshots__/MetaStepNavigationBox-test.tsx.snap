@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MetaStepNavigationBox /> should render correctly 1`] = `
+<ReactRelayQueryRenderer
+  environment={"RelayModernEnvironment()"}
+  query={
+    Object {
+      "default": Object {
+        "fragment": Object {
+          "abstractKey": null,
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "relatedSlug",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "stepId",
+            },
+          ],
+          "kind": "Fragment",
+          "metadata": null,
+          "name": "MetaStepNavigationBoxQuery",
+          "selections": Array [
+            Object {
+              "alias": "step",
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "id",
+                  "variableName": "stepId",
+                },
+              ],
+              "concreteType": null,
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "relatedSlug",
+                      "variableName": "relatedSlug",
+                    },
+                  ],
+                  "kind": "FragmentSpread",
+                  "name": "MetaStepNavigation_step",
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+          "type": "Query",
+        },
+        "hash": "ec4beae88eda706940213191e7d0b3ac",
+        "kind": "Request",
+        "operation": Object {
+          "argumentDefinitions": Array [
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "stepId",
+            },
+            Object {
+              "defaultValue": null,
+              "kind": "LocalArgument",
+              "name": "relatedSlug",
+            },
+          ],
+          "kind": "Operation",
+          "name": "MetaStepNavigationBoxQuery",
+          "selections": Array [
+            Object {
+              "alias": "step",
+              "args": Array [
+                Object {
+                  "kind": "Variable",
+                  "name": "id",
+                  "variableName": "stepId",
+                },
+              ],
+              "concreteType": null,
+              "kind": "LinkedField",
+              "name": "node",
+              "plural": false,
+              "selections": Array [
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "__typename",
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
+                },
+                Object {
+                  "abstractKey": "__isStep",
+                  "kind": "InlineFragment",
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "abstractKey": null,
+                      "kind": "InlineFragment",
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": Array [
+                            Object {
+                              "kind": "Variable",
+                              "name": "slug",
+                              "variableName": "relatedSlug",
+                            },
+                          ],
+                          "concreteType": "Consultation",
+                          "kind": "LinkedField",
+                          "name": "consultation",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "type": "ConsultationStep",
+                    },
+                  ],
+                  "type": "Step",
+                },
+              ],
+              "storageKey": null,
+            },
+          ],
+        },
+        "params": Object {
+          "cacheID": "f64b1edd3babbdb40823a96940db41ce",
+          "id": null,
+          "metadata": Object {},
+          "name": "MetaStepNavigationBoxQuery",
+          "operationKind": "query",
+          "text": "query MetaStepNavigationBoxQuery(
+  $stepId: ID!
+  $relatedSlug: String!
+) {
+  step: node(id: $stepId) {
+    __typename
+    ...MetaStepNavigation_step_2rPbsh
+    id
+  }
+}
+
+fragment MetaStepNavigation_step_2rPbsh on Step {
+  __isStep: __typename
+  __typename
+  url
+  ... on ConsultationStep {
+    consultation(slug: $relatedSlug) {
+      url
+      title
+      id
+    }
+  }
+}
+",
+        },
+      },
+    }
+  }
+  render={[Function]}
+  variables={
+    Object {
+      "relatedSlug": "deuxieme-consultation",
+      "stepId": "cstep1",
+    }
+  }
+/>
+`;

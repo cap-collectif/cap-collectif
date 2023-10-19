@@ -1,0 +1,569 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalLeafletMap /> should not render a map with visible = false 1`] = `""`;
+
+exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] = `
+<ProposalLeafletMapstyle__MapContainer
+  isMobile={false}
+>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <Address
+    debounce={1200}
+    getAddress={[Function]}
+    getPosition={[Function]}
+    id="address"
+    onChange={[Function]}
+    placeholder="proposal.map.form.placeholder"
+    value={null}
+  />
+  <ProposalLeafletMapstyle__StyledMap
+    center={
+      Object {
+        "lat": 48.8586047,
+        "lng": 2.3137325,
+      }
+    }
+    doubleClickZoom={false}
+    dragging={true}
+    gestureHandling={true}
+    maxZoom={18}
+    style={
+      Object {
+        "height": "50vw",
+        "maxHeight": "calc(100vh - 70px)",
+        "zIndex": 0,
+      }
+    }
+    tap={false}
+    whenCreated={[Function]}
+    zoom={12}
+    zoomControl={false}
+  >
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
+    />
+    <CapcoTileLayer />
+    <ForwardRef(OverlayComponent)
+      autoPan={false}
+      className="popup-proposal"
+      closeButton={false}
+      key="popup-proposal"
+      position={
+        Object {
+          "lat": 0,
+          "lng": 0,
+        }
+      }
+    >
+      <Connect(NewLoginOverlay)
+        placement="top"
+      >
+        <Button
+          bg="#4EE323 !important"
+          color="##FFF !important"
+          disabled={false}
+          onClick={[Function]}
+          opacity={1}
+          variantSize="small"
+        >
+          proposal.add
+        </Button>
+      </Connect(NewLoginOverlay)>
+    </ForwardRef(OverlayComponent)>
+    <ForwardRef(ContainerComponent)
+      maxClusterRadius={30}
+      onClick={[Function]}
+      showCoverageOnHover={false}
+      spiderfyDistanceMultiplier={4}
+      spiderfyOnMaxZoom={true}
+      zoomToBoundsOnClick={true}
+    >
+      <ForwardRef(ContainerComponent)
+        alt="marker-0"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="0"
+        position={
+          Array [
+            49.8397,
+            24.0297,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 49.8397,
+                  "lng": 24.0297,
+                },
+                "category": Object {
+                  "color": "#EEE",
+                  "icon": null,
+                },
+                "id": "pid1",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
+        alt="marker-1"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="1"
+        position={
+          Array [
+            52.2297,
+            21.0122,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 52.2297,
+                  "lng": 21.0122,
+                },
+                "category": Object {
+                  "color": "blue",
+                  "icon": "water",
+                },
+                "id": "pid2",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
+        alt="marker-2"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></div>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="2"
+        position={
+          Array [
+            51.5074,
+            -0.0901,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 51.5074,
+                  "lng": -0.0901,
+                },
+                "category": Object {
+                  "color": "purple",
+                  "icon": "wheelchair",
+                },
+                "id": "pid4",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+    </ForwardRef(ContainerComponent)>
+    <ForwardRef(LeafComponent)
+      position="bottomright"
+    />
+    <ProposalMapDiscoverPane
+      handleClose={[Function]}
+      show={true}
+    />
+  </ProposalLeafletMapstyle__StyledMap>
+</ProposalLeafletMapstyle__MapContainer>
+`;
+
+exports[`<ProposalLeafletMap /> should render a map with proposals still loading 1`] = `
+<ProposalLeafletMapstyle__MapContainer
+  isMobile={false}
+>
+  <Connect(ProposalCreateModal)
+    onClose={[Function]}
+    onOpen={[Function]}
+    proposalForm={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "contribuable": true,
+        "objectType": "PROPOSAL",
+      }
+    }
+    show={false}
+    title="proposal.add"
+  />
+  <Address
+    debounce={1200}
+    getAddress={[Function]}
+    getPosition={[Function]}
+    id="address"
+    onChange={[Function]}
+    placeholder="proposal.map.form.placeholder"
+    value={null}
+  />
+  <ProposalLeafletMapstyle__StyledMap
+    center={
+      Object {
+        "lat": 48.8586047,
+        "lng": 2.3137325,
+      }
+    }
+    doubleClickZoom={false}
+    dragging={true}
+    gestureHandling={true}
+    maxZoom={18}
+    style={
+      Object {
+        "height": "50vw",
+        "maxHeight": "calc(100vh - 70px)",
+        "zIndex": 0,
+      }
+    }
+    tap={false}
+    whenCreated={[Function]}
+    zoom={12}
+    zoomControl={false}
+  >
+    <ProposalMapOutOfAreaPane
+      content="[object Object]"
+    />
+    <CapcoTileLayer />
+    <ForwardRef(OverlayComponent)
+      autoPan={false}
+      className="popup-proposal"
+      closeButton={false}
+      key="popup-proposal"
+      position={
+        Object {
+          "lat": 0,
+          "lng": 0,
+        }
+      }
+    >
+      <Connect(NewLoginOverlay)
+        placement="top"
+      >
+        <Button
+          bg="#4EE323 !important"
+          color="##FFF !important"
+          disabled={false}
+          onClick={[Function]}
+          opacity={1}
+          variantSize="small"
+        >
+          proposal.add
+        </Button>
+      </Connect(NewLoginOverlay)>
+    </ForwardRef(OverlayComponent)>
+    <ForwardRef(ContainerComponent)
+      maxClusterRadius={30}
+      onClick={[Function]}
+      showCoverageOnHover={false}
+      spiderfyDistanceMultiplier={4}
+      spiderfyOnMaxZoom={true}
+      zoomToBoundsOnClick={true}
+    >
+      <ForwardRef(ContainerComponent)
+        alt="marker-0"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="0"
+        position={
+          Array [
+            49.8397,
+            24.0297,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 49.8397,
+                  "lng": 24.0297,
+                },
+                "category": Object {
+                  "color": "#EEE",
+                  "icon": null,
+                },
+                "id": "pid1",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
+        alt="marker-1"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="1"
+        position={
+          Array [
+            52.2297,
+            21.0122,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 52.2297,
+                  "lng": 21.0122,
+                },
+                "category": Object {
+                  "color": "blue",
+                  "icon": "water",
+                },
+                "id": "pid2",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+      <ForwardRef(ContainerComponent)
+        alt="marker-2"
+        eventHandlers={
+          Object {
+            "click": [Function],
+          }
+        }
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "className": "preview-icn",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\" data-reactroot=\\"\\"></div>",
+              "iconAnchor": Array [
+                20,
+                40,
+              ],
+              "iconSize": Array [
+                40,
+                40,
+              ],
+              "popupAnchor": Array [
+                0,
+                -40,
+              ],
+            },
+          }
+        }
+        key="2"
+        position={
+          Array [
+            51.5074,
+            -0.0901,
+          ]
+        }
+      >
+        <ProposalLeafletMapstyle__BlankPopup
+          autoClose={false}
+          closeButton={false}
+          key="popup-info"
+        >
+          <Relay(Connect(ProposalMapPopover))
+            proposal={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+                "address": Object {
+                  "lat": 51.5074,
+                  "lng": -0.0901,
+                },
+                "category": Object {
+                  "color": "purple",
+                  "icon": "wheelchair",
+                },
+                "id": "pid4",
+              }
+            }
+          />
+        </ProposalLeafletMapstyle__BlankPopup>
+      </ForwardRef(ContainerComponent)>
+    </ForwardRef(ContainerComponent)>
+    <ForwardRef(LeafComponent)
+      position="bottomright"
+    />
+    <ProposalMapLoaderPane
+      hasError={false}
+      retry={[MockFunction]}
+    />
+    <ProposalMapDiscoverPane
+      handleClose={[Function]}
+      show={true}
+    />
+  </ProposalLeafletMapstyle__StyledMap>
+</ProposalLeafletMapstyle__MapContainer>
+`;

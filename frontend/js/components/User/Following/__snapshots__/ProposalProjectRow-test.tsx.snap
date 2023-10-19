@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalProjectRow /> should render close collapse 1`] = `
+<Collapse
+  appear={false}
+  dimension="height"
+  getDimensionValue={[Function]}
+  id="profile-project-collapse-project1"
+  in={false}
+  mountOnEnter={false}
+  timeout={300}
+  unmountOnExit={false}
+>
+  <Uncontrolled(Panel)
+    className="panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <h3>
+        <a
+          href="http://perdu.com"
+          id="profile-project-link-project1"
+          title="Perdu sur internet ?"
+        >
+          Perdu sur internet ?
+        </a>
+      </h3>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="profile-project-unfollow-button-project1"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow-this-project"
+          values={Object {}}
+        />
+      </Button>
+    </PanelHeading>
+    <ListGroup
+      className=""
+    >
+      <Relay(ProposalRow)
+        key="0"
+        proposal={
+          Object {
+            " $fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Une carte de l'internet",
+              "url": "http://carte.perdu.com",
+            },
+          }
+        }
+      />
+      <Relay(ProposalRow)
+        key="1"
+        proposal={
+          Object {
+            " $fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Un GPS de l'internet",
+              "url": "http://gps.perdu.com",
+            },
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</Collapse>
+`;
+
+exports[`<ProposalProjectRow /> should render the project 1 with his proposal displayed 1`] = `
+<Collapse
+  appear={false}
+  dimension="height"
+  getDimensionValue={[Function]}
+  id="profile-project-collapse-project1"
+  in={true}
+  mountOnEnter={false}
+  timeout={300}
+  unmountOnExit={false}
+>
+  <Uncontrolled(Panel)
+    className="panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <h3>
+        <a
+          href="http://perdu.com"
+          id="profile-project-link-project1"
+          title="Perdu sur internet ?"
+        >
+          Perdu sur internet ?
+        </a>
+      </h3>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="profile-project-unfollow-button-project1"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow-this-project"
+          values={Object {}}
+        />
+      </Button>
+    </PanelHeading>
+    <ListGroup
+      className=""
+    >
+      <Relay(ProposalRow)
+        key="0"
+        proposal={
+          Object {
+            " $fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Une carte de l'internet",
+              "url": "http://carte.perdu.com",
+            },
+          }
+        }
+      />
+      <Relay(ProposalRow)
+        key="1"
+        proposal={
+          Object {
+            " $fragmentRefs": null,
+            "project": Object {
+              "id": "project1",
+              "title": "Un GPS de l'internet",
+              "url": "http://gps.perdu.com",
+            },
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</Collapse>
+`;
+
+exports[`<ProposalProjectRow /> should render the project 2 with his proposal displayed 1`] = `
+<Collapse
+  appear={false}
+  dimension="height"
+  getDimensionValue={[Function]}
+  id="profile-project-collapse-project2"
+  in={true}
+  mountOnEnter={false}
+  timeout={300}
+  unmountOnExit={false}
+>
+  <Uncontrolled(Panel)
+    className="panel-custom"
+  >
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
+    >
+      <h3>
+        <a
+          href="http://theuselessweb.com"
+          id="profile-project-link-project2"
+          title="Se perdre sur internet"
+        >
+          Se perdre sur internet
+        </a>
+      </h3>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        id="profile-project-unfollow-button-project2"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="unfollow-this-project"
+          values={Object {}}
+        />
+      </Button>
+    </PanelHeading>
+    <ListGroup
+      className=""
+    >
+      <Relay(ProposalRow)
+        key="0"
+        proposal={
+          Object {
+            " $fragmentRefs": null,
+            "project": Object {
+              "id": "project2",
+              "title": "Go  nowhere",
+              "url": "https://randomstreetview.com/",
+            },
+          }
+        }
+      />
+    </ListGroup>
+  </Uncontrolled(Panel)>
+</Collapse>
+`;

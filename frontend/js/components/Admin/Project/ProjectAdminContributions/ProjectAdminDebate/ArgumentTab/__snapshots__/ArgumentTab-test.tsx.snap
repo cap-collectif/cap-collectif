@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArgumentTab /> should render correctly 1`] = `
+<ForwardRef
+  direction="column"
+>
+  <ArgumentTab___StyledAppBox
+    _css="520px"
+    as="ul"
+    m={0}
+    p={0}
+  >
+    <InfiniteScroll
+      element="div"
+      getScrollParent={[Function]}
+      hasMore={false}
+      initialLoad={false}
+      isReverse={false}
+      key="infinite-scroll-argument"
+      loadMore={[Function]}
+      loader={
+        <ForwardRef
+          direction="row"
+          justify="center"
+        >
+          <ForwardRef
+            size="m"
+          />
+        </ForwardRef>
+      }
+      pageStart={0}
+      ref={null}
+      threshold={250}
+      useCapture={false}
+      useWindow={false}
+    >
+      <AppBox
+        as="li"
+        key="argument123"
+      >
+        <Relay(DebateArgument)
+          argument={
+            Object {
+              " $fragmentRefs": null,
+              "id": "argument123",
+            }
+          }
+          setModerateArgumentModal={[Function]}
+        />
+      </AppBox>
+      <AppBox
+        as="li"
+        key="argument456"
+      >
+        <Relay(DebateArgument)
+          argument={
+            Object {
+              " $fragmentRefs": null,
+              "id": "argument456",
+            }
+          }
+          setModerateArgumentModal={[Function]}
+        />
+      </AppBox>
+    </InfiniteScroll>
+  </ArgumentTab___StyledAppBox>
+</ForwardRef>
+`;
+
+exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
+<ForwardRef
+  align="center"
+  direction="column"
+  spacing={6}
+>
+  <SpotIcon
+    name="PENCIL_SOFTWARE"
+    size="lg"
+  />
+  <Text
+    color="gray.500"
+  >
+    debate.empty.arguments.section
+  </Text>
+</ForwardRef>
+`;

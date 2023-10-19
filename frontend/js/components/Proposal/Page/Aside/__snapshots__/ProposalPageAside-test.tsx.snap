@@ -1,0 +1,460 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageAside /> should not render correctly with votableStep 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={true}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": false,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": false,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+    <ProposalSocialNetworkLinks
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": false,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={false}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+    <Relay(ProposalPageVoteThreshold)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          " $fragmentRefs": null,
+          "canDisplayBallot": true,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
+        }
+      }
+    />
+    <ProposalSocialNetworkLinks
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly with analysis 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={true}
+  id="ProposalPageAside"
+  isAnalysing={true}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+    <Relay(ProposalPageVoteThreshold)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          " $fragmentRefs": null,
+          "canDisplayBallot": true,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
+        }
+      }
+    />
+    <ProposalSocialNetworkLinks
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;
+
+exports[`<ProposalPageAside /> should render correctly with votableStep 1`] = `
+<ProposalPageAside__Aside
+  hasVoteBar={false}
+  id="ProposalPageAside"
+  isAnalysing={false}
+  isFixedToBottom={false}
+  isFixedToTop={false}
+  isMovingUp={false}
+>
+  <div>
+    <Relay(ProposalPageMetadata)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showCategories={true}
+      showDistricts={false}
+      showNullEstimation={false}
+      showThemes={false}
+    />
+    <Relay(ProposalPageAdvancement)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+    <Relay(ProposalPageVoteThreshold)
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+      showPoints={true}
+      step={
+        Object {
+          " $fragmentRefs": null,
+          "canDisplayBallot": true,
+          "voteType": "SIMPLE",
+          "votesRanking": true,
+        }
+      }
+    />
+    <ProposalSocialNetworkLinks
+      proposal={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "currentVotableStep": Object {
+            " $fragmentRefs": null,
+            "canDisplayBallot": true,
+            "voteType": "SIMPLE",
+            "votesRanking": true,
+          },
+          "form": Object {
+            "isUsingAnySocialNetworks": true,
+            "step": Object {
+              "state": "CLOSED",
+            },
+            "usingCategories": true,
+            "usingThemes": false,
+          },
+          "isProposalUsingAnySocialNetworks": true,
+          "viewerDidAuthor": true,
+        }
+      }
+    />
+  </div>
+</ProposalPageAside__Aside>
+`;

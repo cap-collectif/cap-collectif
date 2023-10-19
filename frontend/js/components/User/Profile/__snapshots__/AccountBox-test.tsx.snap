@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AccountBox /> should render a disabled button when the form is invalid 1`] = `
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
+        Object {
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</Uncontrolled(Panel)>
+`;
+
+exports[`<AccountBox /> should render a disabled button when the form is submitting 1`] = `
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
+        Object {
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</Uncontrolled(Panel)>
+`;
+
+exports[`<AccountBox /> should render and enabled button when the form is valid 1`] = `
+<Uncontrolled(Panel)>
+  <PanelHeading
+    bsClass="panel"
+    componentClass="div"
+  >
+    <PanelTitle
+      bsClass="panel"
+      componentClass="div"
+    >
+      <div
+        className="panel-heading profile-header"
+      >
+        <FormattedMessage
+          id="profile.account.title"
+          tagName="h1"
+          values={Object {}}
+        />
+      </div>
+    </PanelTitle>
+  </PanelHeading>
+  <Relay(Connect(injectIntl(ReduxForm)))
+    languageList={
+      Array [
+        Object {
+          "code": "fr-FR",
+          "translationKey": "french",
+        },
+        Object {
+          "code": "en-GB",
+          "translationKey": "english",
+        },
+      ]
+    }
+    loginWithOpenId={false}
+    viewer={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</Uncontrolled(Panel)>
+`;

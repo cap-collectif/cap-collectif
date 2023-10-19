@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPageMainContent /> should render correctly 1`] = `
+<ProposalPageMainContent__ProposalPageMainContentContainer
+  id="ProposalPageMainContent"
+>
+  <Relay(ProposalPageFusionInformations)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageOfficialAnswer)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageDescription)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageLocalisation)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(Connect(ProposalPageCustomSections))
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageMainAside)
+    display={false}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageNews)
+    goToBlog={[MockFunction]}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageDiscussions)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</ProposalPageMainContent__ProposalPageMainContentContainer>
+`;
+
+exports[`<ProposalPageMainContent /> should render correctly whith analysis 1`] = `
+<ProposalPageMainContent__ProposalPageMainContentContainer
+  id="ProposalPageMainContent"
+>
+  <Relay(ProposalPageFusionInformations)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageOfficialAnswer)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageDescription)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageLocalisation)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(Connect(ProposalPageCustomSections))
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageMainAside)
+    display={true}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageNews)
+    goToBlog={[MockFunction]}
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+  <Relay(ProposalPageDiscussions)
+    proposal={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+      }
+    }
+  />
+</ProposalPageMainContent__ProposalPageMainContentContainer>
+`;

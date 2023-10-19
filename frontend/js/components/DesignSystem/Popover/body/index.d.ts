@@ -1,5 +1,6 @@
-import { PolymorphicAppBox } from '../../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicAppBox } from '../../../Ui/Primitives/AppBox'
 
-declare const Body: PolymorphicAppBox;
+declare const Body: PolymorphicAppBox
 
-export default Body;
+export default Body

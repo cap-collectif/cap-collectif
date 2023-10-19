@@ -84,7 +84,6 @@ function download(url: string, name: string, opts: Object) {
     xhr.open('GET', url);
     xhr.responseType = 'blob';
     xhr.onload = () => {
-        // eslint-disable-next-line no-use-before-define
         saveAs(xhr.response, name, opts);
     };
     xhr.onerror = () => {

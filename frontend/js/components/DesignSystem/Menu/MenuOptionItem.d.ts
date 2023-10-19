@@ -1,4 +1,5 @@
-import { PolymorphicComponent } from '../../Ui/Primitives/AppBox';
+// @ts-nocheck
+import { PolymorphicComponent } from '../../Ui/Primitives/AppBox'
 import { Props as ListItemProps } from './MenuListItem'
 
 type Props = ListItemProps & {
@@ -7,4 +8,4 @@ type Props = ListItemProps & {
 
 declare const MenuOptionItem: PolymorphicComponent<Props>
 
-export default MenuOptionItem;
+export default MenuOptionItem

@@ -11,7 +11,7 @@ import {
     Modal,
     Text,
     toast,
-    InfoMessage
+    InfoMessage,
 } from '@cap-collectif/ui';
 import type { ModalConfirmationDelete_questionnaire$key } from '@relay/ModalConfirmationDelete_questionnaire.graphql';
 import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation';
@@ -31,8 +31,8 @@ const FRAGMENT = graphql`
             id
             title
             project {
-              title
-              adminAlphaUrl
+                title
+                adminAlphaUrl
             }
         }
     }
@@ -92,11 +92,22 @@ const ModalConfirmationDelete: React.FC<Props> = ({
                             <InfoMessage variant="warning" mb={4}>
                                 <InfoMessage.Content>
                                     <Text fontSize={2}>
-                                        {intl.formatMessage({
-                                            id: 'delete-questionnaire-linked-to-project-message'},
-                                            {step: <strong>{step.title}</strong>,
-                                                project: <a href={step?.project?.adminAlphaUrl} target="_blank"><strong>{step?.project?.title}</strong></a>})
-                                        }
+                                        {intl.formatMessage(
+                                            {
+                                                id: 'delete-questionnaire-linked-to-project-message',
+                                            },
+                                            {
+                                                step: <strong>{step.title}</strong>,
+                                                project: (
+                                                    <a
+                                                        href={step?.project?.adminAlphaUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer">
+                                                        <strong>{step?.project?.title}</strong>
+                                                    </a>
+                                                ),
+                                            },
+                                        )}
                                     </Text>
                                 </InfoMessage.Content>
                             </InfoMessage>

@@ -34,8 +34,14 @@ const MajorityPreview: React.FC = () => {
                     {title || ''}
                 </Text>
                 <Flex borderRadius="normal" overflow="hidden" width="max-content">
-                    {COLORS.map(majority => (
-                        <Flex px={6} py={1} bg={majority.color} color="white" fontWeight="bold">
+                    {COLORS.map((majority, idx) => (
+                        <Flex
+                            px={6}
+                            py={1}
+                            bg={majority.color}
+                            color="white"
+                            fontWeight="bold"
+                            key={idx}>
                             {intl.formatMessage({ id: majority.label })}
                         </Flex>
                     ))}
