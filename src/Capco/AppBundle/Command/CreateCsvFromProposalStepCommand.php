@@ -21,12 +21,14 @@ use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -337,6 +339,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     private string $projectRootDir;
     private CollectStepRepository $collectStepRepository;
     private ConnectionTraversor $connectionTraversor;
+    private ProposalRepository $proposalRepository;
 
     public function __construct(
         Executor $executor,
@@ -348,7 +351,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         Manager $toggleManager,
         LoggerInterface $logger,
         ConnectionTraversor $connectionTraversor,
-        string $projectRootDir
+        string $projectRootDir,
+        ProposalRepository $proposalRepository
     ) {
         $listener->disableAcl();
         $this->executor = $executor;
@@ -360,6 +364,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         $this->projectRootDir = $projectRootDir;
         $this->collectStepRepository = $collectStepRepository;
         $this->connectionTraversor = $connectionTraversor;
+        $this->proposalRepository = $proposalRepository;
         parent::__construct($exportUtils);
     }
 
@@ -589,6 +594,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         string $path,
         array &$row
     ): void {
+        // we need to count paperVotes by accessing repository directly, because we can not bypass the acess restriction in graphql field when exporting
+        // see https://github.com/cap-collectif/platform/issues/16305#issuecomment-1766033783
+        $id = GlobalId::fromGlobalId($proposal['id'])['id'];
+        $paperVotesTotalCount = $this->proposalRepository->countPaperVotes($id);
+
         $arr = explode('.', $path);
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
@@ -602,8 +612,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
             $row[] = $val;
         } elseif ('reference' === $arr[0]) {
             $row[] = '"' . $proposal['reference'] . '"';
+        } elseif ('proposal_votes_paperCount' === $columnName) {
+            $row[] = $paperVotesTotalCount;
         } elseif ('proposal_votes_totalCount' === $columnName) {
-            $row[] = $proposal['paperVotesTotalCount'] + $proposal['allVotes']['totalCount'];
+            $row[] = $paperVotesTotalCount + $proposal['allVotes']['totalCount'];
         } elseif ('proposal_votes_totalPointsCount' === $columnName) {
             $row[] =
                 $proposal['paperVotesTotalPointsCount'] + $proposal['allVotes']['totalPointsCount'];

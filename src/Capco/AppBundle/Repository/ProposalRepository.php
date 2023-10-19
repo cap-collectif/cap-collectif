@@ -12,6 +12,7 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -815,6 +816,22 @@ class ProposalRepository extends EntityRepository
         $this->_em->flush();
 
         return true;
+    }
+
+    public function countPaperVotes(string $proposalId): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('pv.totalCount')
+            ->join('p.paperVotes', 'pv')
+            ->where('p.id = :proposalId')
+            ->setParameter('proposalId', $proposalId)
+        ;
+
+        try {
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (NoResultException $e) {
+            return 0;
+        }
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
