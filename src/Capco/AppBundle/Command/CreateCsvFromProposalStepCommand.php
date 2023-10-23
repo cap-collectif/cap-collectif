@@ -612,6 +612,9 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
             $row[] = $val;
         } elseif ('reference' === $arr[0]) {
             $row[] = '"' . $proposal['reference'] . '"';
+        } elseif ('proposal_votes_paperPointsCount' === $columnName) {
+            $paperVotesPointsTotalCount = $this->proposalRepository->countPaperVotesPoints($id);
+            $row[] = $paperVotesPointsTotalCount;
         } elseif ('proposal_votes_paperCount' === $columnName) {
             $row[] = $paperVotesTotalCount;
         } elseif ('proposal_votes_totalCount' === $columnName) {

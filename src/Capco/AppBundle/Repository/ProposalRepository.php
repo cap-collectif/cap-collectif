@@ -834,6 +834,22 @@ class ProposalRepository extends EntityRepository
         }
     }
 
+    public function countPaperVotesPoints(string $proposalId): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('pv.totalPointsCount')
+            ->join('p.paperVotes', 'pv')
+            ->where('p.id = :proposalId')
+            ->setParameter('proposalId', $proposalId)
+        ;
+
+        try {
+            return $qb->getQuery()->getSingleScalarResult();
+        } catch (NoResultException $e) {
+            return 0;
+        }
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
