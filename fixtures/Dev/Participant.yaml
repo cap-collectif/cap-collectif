@@ -1,0 +1,46 @@
+Capco\AppBundle\Entity\Participant:
+    participant1:
+        id: 'participant1'
+        firstname: Laurent
+        lastname: Brunet
+        email: lbrunet@cap-collectif.com
+        phone: '+3300000000'
+        address: '10 rue de la savate qui glisse'
+        zipCode: '75018'
+        dateOfBirth: <(new \DateTime('2023-02-01'))>
+        identificationCode: '879234'
+        phoneConfirmed: true
+        token: 'fakeToken1'
+        replies: ['@reply1']
+        proposals: ['@proposal1']
+        votes: []
+        user: '@user1'
+    participant2:
+        id: 'participant2'
+        firstname: Suzanne
+        lastname: Favot
+        email: sfavot@cap-collectif.com
+        address: '3 rue brisemiche'
+        zipCode: '75015'
+        dateOfBirth: <(new \DateTime('2023-03-01'))>
+        identificationCode: '756937'
+        token: 'fakeToken2'
+        replies: ['@reply1', '@reply2']
+        proposals: ['@proposal1', '@proposal2']
+        votes: ['@proposalSelectionVote1', '@proposalSelectionVote53']
+        user: '@user2'
+    participant3:
+        id: 'participant3'
+        firstname: Toto
+        lastname: Lasticot
+        email: tlasticot@cap-collectif.com
+        phone: '+3300000000'
+        address: '8 rue briserein'
+        zipCode: '75010'
+        dateOfBirth: <(new \DateTime('2023-07-01'))>
+        identificationCode: '635874'
+        token: 'fakeToken3'
+        replies: []
+        proposals: []
+        votes: []
+        user: null

@@ -524,7 +524,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "ParticipantConnection",
+                        "concreteType": "EventParticipantConnection",
                         "kind": "LinkedField",
                         "name": "participants",
                         "plural": false,
@@ -1200,7 +1200,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                       Object {
                         "alias": null,
                         "args": null,
-                        "concreteType": "ParticipantConnection",
+                        "concreteType": "EventParticipantConnection",
                         "kind": "LinkedField",
                         "name": "participants",
                         "plural": false,

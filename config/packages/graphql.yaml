@@ -87,9 +87,30 @@ overblog_graphql:
                 # These types names should be explicitly declare here
                 types:
                     - MultipleChoiceQuestionLogicJumpCondition
+                    - OtherStep
+                    - PresentationStep
+                    - RankingStep
+                    - VersionVote
+                    - Locale
+                    # Base Type
+                    - InternalQuestionnaireStep
+                    - InternalDebateStep
                     - InternalArgument
                     - InternalProject
-                    - AnswerOrPost
+                    - InternalSimpleQuestion
+                    - InternalMultipleChoiceQuestion
+                    - InternalValueResponse
+                    - InternalSectionQuestion
+                    - InternalMediaQuestion
+                    - InternalMediaResponse
+                    - InternalOauth2SSOConfiguration
+                    - InternalMajorityQuestion
+                    - InternalTimeRange
+                    - InternalProposalVoteConnection
+                    - InternalAnonymousReply
+                    - InternalOrganization
+                    - InternalParticipant
+                    # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement
                     - LastnameRequirement
@@ -99,26 +120,10 @@ overblog_graphql:
                     - PhoneRequirement
                     - PostalAddressRequirement
                     - PhoneVerifiedRequirement
+                    # Union
+                    - AnswerOrPost
                     - OpinionOrVersion
-                    - OtherStep
-                    - PresentationStep
-                    - InternalQuestionnaireStep
-                    - InternalDebateStep
-                    - RankingStep
-                    - VersionVote
-                    - InternalSimpleQuestion
-                    - InternalMultipleChoiceQuestion
-                    - InternalValueResponse
-                    - InternalSectionQuestion
-                    - InternalMediaQuestion
-                    - InternalMediaResponse
-                    - InternalOauth2SSOConfiguration
-                    - Locale
-                    - InternalMajorityQuestion
-                    - InternalTimeRange
-                    - InternalProposalVoteConnection
-                    - InternalAnonymousReply
-                    - InternalOrganization
+                    - UserOrNotRegistered
             # This is our dev schema (used in development only)
             dev:
                 query: DevQuery
@@ -128,9 +133,29 @@ overblog_graphql:
                 # These types names should be explicitly declare here
                 types:
                     - MultipleChoiceQuestionLogicJumpCondition
+                    - OtherStep
+                    - PresentationStep
+                    - RankingStep
+                    - Locale
+                    - VersionVote
+                    # Base Type
+                    - InternalQuestionnaireStep
+                    - InternalDebateStep
                     - InternalArgument
                     - InternalProject
-                    - AnswerOrPost
+                    - InternalSimpleQuestion
+                    - InternalMultipleChoiceQuestion
+                    - InternalValueResponse
+                    - InternalSectionQuestion
+                    - InternalMediaQuestion
+                    - InternalMediaResponse
+                    - InternalOauth2SSOConfiguration
+                    - InternalMajorityQuestion
+                    - InternalTimeRange
+                    - InternalProposalVoteConnection
+                    - InternalAnonymousReply
+                    - InternalOrganization
+                    # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement
                     - LastnameRequirement
@@ -140,23 +165,6 @@ overblog_graphql:
                     - PhoneRequirement
                     - PostalAddressRequirement
                     - PhoneVerifiedRequirement
+                    # Union
+                    - AnswerOrPost
                     - OpinionOrVersion
-                    - OtherStep
-                    - PresentationStep
-                    - InternalQuestionnaireStep
-                    - InternalDebateStep
-                    - RankingStep
-                    - VersionVote
-                    - InternalSimpleQuestion
-                    - InternalMultipleChoiceQuestion
-                    - InternalValueResponse
-                    - InternalSectionQuestion
-                    - InternalMediaQuestion
-                    - InternalMediaResponse
-                    - InternalOauth2SSOConfiguration
-                    - Locale
-                    - InternalMajorityQuestion
-                    - InternalTimeRange
-                    - InternalProposalVoteConnection
-                    - InternalAnonymousReply
-                    - InternalOrganization

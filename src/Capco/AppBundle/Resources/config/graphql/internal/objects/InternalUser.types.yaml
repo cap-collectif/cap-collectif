@@ -398,3 +398,7 @@ InternalUser:
                 description: "The organizations of which user is a member"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", [value])'
+            participant:
+                type: 'InternalParticipant'
+                description: "The user (who has already participated / is participating) in a questionnaire or other type of interaction"
+                resolve: '@=value.getParticipant()'

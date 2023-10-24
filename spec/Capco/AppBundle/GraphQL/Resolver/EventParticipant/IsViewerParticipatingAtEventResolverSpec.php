@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Capco\AppBundle\GraphQL\Resolver\Participant;
+namespace spec\Capco\AppBundle\GraphQL\Resolver\EventParticipant;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventRegistration;
-use Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver;
+use Capco\AppBundle\GraphQL\Resolver\EventParticipant\IsViewerParticipatingAtEventResolver;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;

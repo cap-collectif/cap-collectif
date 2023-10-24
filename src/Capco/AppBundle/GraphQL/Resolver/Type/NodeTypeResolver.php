@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Organization\Organization;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -316,6 +317,10 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof ProjectDistrict) {
             return $this->districtTypeResolver->__invoke($node);
+        }
+
+        if ($node instanceof Participant) {
+            return $this->typeResolver->resolve('InternalParticipant');
         }
 
         throw new UserError('Could not resolve type of Node.');

@@ -91,7 +91,7 @@ services:
             $locale: '%locale%'
             $locales: '%locales%'
 
-    Capco\AppBundle\GraphQL\Resolver\Participant\IsViewerParticipatingAtEventResolver: ~
+    Capco\AppBundle\GraphQL\Resolver\EventParticipant\IsViewerParticipatingAtEventResolver: ~
 
     Capco\AppBundle\Mailer\SenderEmailResolver:
         public: true

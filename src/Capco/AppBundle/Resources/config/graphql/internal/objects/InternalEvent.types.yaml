@@ -22,7 +22,7 @@ InternalEvent:
                 description: 'The event admin edit url'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAdminUrlResolver", [value])'
             participants:
-                type: 'ParticipantConnection!'
+                type: 'EventParticipantConnection!'
                 description: 'A list of Users that are participating to the event.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -98,7 +98,7 @@ InternalEvent:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Show if user is already participating at event'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'
             steps:
                 type: '[InternalStep!]!'
                 description: 'The steps corresponding to this event.'

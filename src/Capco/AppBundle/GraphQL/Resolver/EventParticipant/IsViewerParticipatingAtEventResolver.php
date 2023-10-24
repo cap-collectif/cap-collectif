@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Participant;
+namespace Capco\AppBundle\GraphQL\Resolver\EventParticipant;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;

@@ -303,7 +303,6 @@ InternalQuery:
                         description: 'the term to filter questions'
                         type: 'String'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver", [args])'
-
             projectDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'InternalProjectDistrictConnection!'
@@ -407,7 +406,6 @@ InternalQuery:
                         type: 'String'
                         description: 'Retrieve consultation where title match term param.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver", [args["term"]])'
-
             viewerAssignedProjectsToAnalyse:
                 description: 'Fetch projects with assignment'
                 access: "@=hasRole('ROLE_USER')"
@@ -582,3 +580,8 @@ InternalQuery:
                         description: |
                             Array of affiliations of viewer to organizations.
                             For example, ADMIN will return only organizations the viewer is member of
+            participants:
+                type: 'ParticipantConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", [args])'

@@ -513,7 +513,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "ParticipantConnection",
+                      "concreteType": "EventParticipantConnection",
                       "kind": "LinkedField",
                       "name": "participants",
                       "plural": false,
@@ -1488,7 +1488,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "ParticipantConnection",
+                      "concreteType": "EventParticipantConnection",
                       "kind": "LinkedField",
                       "name": "participants",
                       "plural": false,
@@ -2463,7 +2463,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "ParticipantConnection",
+                      "concreteType": "EventParticipantConnection",
                       "kind": "LinkedField",
                       "name": "participants",
                       "plural": false,
@@ -3438,7 +3438,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
-                      "concreteType": "ParticipantConnection",
+                      "concreteType": "EventParticipantConnection",
                       "kind": "LinkedField",
                       "name": "participants",
                       "plural": false,

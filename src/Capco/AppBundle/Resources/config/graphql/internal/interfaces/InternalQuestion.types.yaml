@@ -61,7 +61,7 @@ InternalQuestion:
             slug:
                 type: 'String!'
             participants:
-                type: 'ParticipantConnection!'
+                type: 'EventParticipantConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
                 description: 'Return users who answered the question'

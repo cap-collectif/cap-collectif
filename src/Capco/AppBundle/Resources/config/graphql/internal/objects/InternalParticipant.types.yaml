@@ -1,0 +1,52 @@
+InternalParticipant:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: Participant
+        description: 'One participant'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Participant
+            email:
+                type: 'String'
+            firstName:
+                type: 'String'
+            lastName:
+                type: 'String'
+            phone:
+                type: 'String'
+            address:
+                type: 'String'
+            zipCode:
+                type: 'String'
+            dateOfBirth:
+                type: 'DateTime'
+            identificationCode:
+                type: 'String'
+            token:
+                type: 'String!'
+                description: 'The participant token.'
+            phoneConfirmed:
+                type: 'Boolean!'
+                description: 'Wether or not the user has confirmed his phone.'
+            replies:
+                type: 'InternalReplyConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", [value, args])'
+            proposals:
+                type: 'InternalProposalConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantProposalsResolver", [value, args])'
+            votes:
+                type: 'InternalVoteConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", [value, args])'
+            user:
+                type: 'InternalUser'
+                description: 'If already registered, the user to add as participant.'

@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
@@ -119,6 +120,11 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
     private Collection $starredResponses;
 
     private Collection $emailingCampaignUsers;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Participant", mappedBy="user", cascade={"persist"})
+     */
+    private ?Participant $participant = null;
 
     public function __construct()
     {
@@ -1184,6 +1190,18 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
                 $emailingCampaignUser->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
 
         return $this;
     }

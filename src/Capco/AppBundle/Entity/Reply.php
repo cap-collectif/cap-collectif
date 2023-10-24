@@ -48,6 +48,11 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
      */
     private $responses;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="replies")
+     */
+    private ?Participant $participant = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -92,5 +97,17 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
         }
 
         return ReplyStatus::NOT_PUBLISHED;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
     }
 }

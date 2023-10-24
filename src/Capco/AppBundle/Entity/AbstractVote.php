@@ -56,6 +56,10 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *            columns={"voter_id", "comment_id"}
  *        ),
  *        @UniqueConstraint(
+ *            name="participant_vote_unique",
+ *            columns={"voter_id", "participant_id"}
+ *         ),
+ *        @UniqueConstraint(
  *            name="debate_vote_unique",
  *            columns={"voter_id", "debate_id"}
  *        ),
@@ -108,6 +112,11 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
      * @ORM\Column(name="is_accounted", type="boolean", options={"default": true})
      */
     private bool $isAccounted = true;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
+     */
+    private ?Participant $participant = null;
 
     public function getKind(): string
     {
@@ -217,5 +226,17 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
             'ElasticsearchVoteNestedDebateArgument',
             'ElasticsearchVoteNestedDebate',
         ];
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
     }
 }

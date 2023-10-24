@@ -40,6 +40,7 @@ use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -117,6 +118,7 @@ class GlobalIdResolver
         'District',
         'Organization',
         'PendingOrganizationInvitation',
+        'Participant',
     ];
     private ContainerInterface $container;
     private LoggerInterface $logger;
@@ -398,6 +400,11 @@ class GlobalIdResolver
 
                 case 'PendingOrganizationInvitation':
                     $node = $this->container->get(PendingOrganizationInvitationRepository::class)->find($uuid);
+
+                    break;
+
+                case 'Participant':
+                    $node = $this->container->get(ParticipantRepository::class)->find($uuid);
 
                     break;
 

@@ -561,7 +561,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
-                          "concreteType": "ParticipantConnection",
+                          "concreteType": "EventParticipantConnection",
                           "kind": "LinkedField",
                           "name": "participants",
                           "plural": false,

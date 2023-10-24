@@ -6065,7 +6065,7 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
   themes: [Theme!]!
   projects: [Project!]!
   commentable: Boolean!
@@ -6246,6 +6246,30 @@ interface EventOwner {
     """only fetch where user is author"""
     onlyWhenAuthor: Boolean = false
   ): EventConnection!
+}
+
+"""A connection to a list of items."""
+type EventParticipantConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [EventParticipantEdge]
+}
+
+"""An edge in a connection."""
+type EventParticipantEdge {
+  registeredAt: DateTime!
+  registeredAnonymously: Boolean!
+
+  """The item at the end of the edge."""
+  node: UserOrNotRegistered!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Type of refused event reason"""
@@ -7514,7 +7538,7 @@ type MajorityQuestion implements Question & Node {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -7727,7 +7751,7 @@ type MediaQuestion implements Question & Node {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -7832,7 +7856,7 @@ type MultipleChoiceQuestion implements Question & Node {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -9263,8 +9287,55 @@ type PageTranslation {
   body: String
 }
 
-"""User and NotRegistered"""
-union Participant = User | NotRegistered
+"""One participant"""
+type Participant implements Node {
+  """The ID of an object."""
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+  phone: String
+  address: String
+  zipCode: String
+  dateOfBirth: DateTime
+  identificationCode: String
+
+  """The participant token."""
+  token: String!
+
+  """Wether or not the user has confirmed his phone."""
+  phoneConfirmed: Boolean!
+  replies(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ReplyConnection
+  proposals(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProposalConnection
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): VoteConnection
+
+  """If already registered, the user to add as participant."""
+  user: User
+}
 
 """A connection to a list of items."""
 type ParticipantConnection {
@@ -9280,9 +9351,6 @@ type ParticipantConnection {
 
 """An edge in a connection."""
 type ParticipantEdge {
-  registeredAt: DateTime!
-  registeredAnonymously: Boolean!
-
   """The item at the end of the edge."""
   node: Participant!
 
@@ -13031,6 +13099,15 @@ type Query {
     """
     affiliations: [OrganizationAffiliation!]
   ): OrganizationConnection!
+  participants(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ParticipantConnection!
 }
 
 input QueryAnalyticsFilter {
@@ -13103,7 +13180,7 @@ interface Question {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -14877,7 +14954,7 @@ type SectionQuestion implements Question & Node {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -15526,7 +15603,7 @@ type SimpleQuestion implements Question & Node {
 
     """Get participant with user not confirmed"""
     withNotConfirmedUser: Boolean = false
-  ): ParticipantConnection!
+  ): EventParticipantConnection!
 
   """The associated logic jumps to this question."""
   jumps(
@@ -19278,6 +19355,11 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
   """The organizations of which user is a member"""
   organizations: [Organization]
+
+  """
+  The user (who has already participated / is participating) in a questionnaire or other type of interaction
+  """
+  participant: Participant
 }
 
 """A connection to a list of items."""
@@ -19500,6 +19582,9 @@ type UserNotificationsConfiguration {
   """
   onProposalCommentMail: Boolean!
 }
+
+"""User and NotRegistered"""
+union UserOrNotRegistered = User | NotRegistered
 
 """Ways in which lists of users can be ordered upon return."""
 input UserOrder {

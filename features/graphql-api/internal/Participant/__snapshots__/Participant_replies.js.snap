@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Participant.Replies super admin should be able to fetch replies from participant 1`] = `
+Object {
+  "node": Object {
+    "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQy",
+    "replies": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "adminUrl": "https://capco.test/admin/capco/app/reply/reply1/show?_locale=fr-FR",
+            "status": "PUBLISHED",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "UserReply",
+            "adminUrl": "https://capco.test/admin/capco/app/reply/reply2/show?_locale=fr-FR",
+            "status": "PUBLISHED",
+          },
+        },
+      ],
+      "totalCount": 2,
+    },
+  },
+}
+`;

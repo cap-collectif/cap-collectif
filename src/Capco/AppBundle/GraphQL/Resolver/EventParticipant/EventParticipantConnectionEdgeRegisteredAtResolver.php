@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Participant;
+namespace Capco\AppBundle\GraphQL\Resolver\EventParticipant;
 
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
@@ -8,19 +8,19 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class ParticipantConnectionEdgeRegisteredAnonymouslyResolver implements ResolverInterface
+class EventParticipantConnectionEdgeRegisteredAtResolver implements ResolverInterface
 {
-    private $eventRegistrationRepository;
+    private EventRegistrationRepository $eventRegistrationRepository;
 
     public function __construct(EventRegistrationRepository $eventRegistrationRepository)
     {
         $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
-    public function __invoke(Edge $edge): bool
+    public function __invoke(Edge $edge): ?\DateTime
     {
         if ($edge->getNode() instanceof EventRegistration) {
-            return $edge->getNode()->isPrivate();
+            return $edge->getNode()->getCreatedAt();
         }
         if ($edge->getNode() instanceof User) {
             $registration = $this->eventRegistrationRepository->getOneByUserAndEvent(
@@ -28,9 +28,9 @@ class ParticipantConnectionEdgeRegisteredAnonymouslyResolver implements Resolver
                 $edge->getNode()->registeredEvent
             );
 
-            return $registration->isPrivate();
+            return $registration->getCreatedAt();
         }
 
-        return false;
+        return null;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reply;
@@ -37,6 +38,31 @@ class ReplyRepository extends EntityRepository
         ;
 
         return (int) $query->getSingleScalarResult();
+    }
+
+    public function findPaginatedByParticipant(
+        Participant $participant,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        return $this->createQueryBuilder('r')
+            ->where('r.participant = :participant')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('participant', $participant)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function countByParticipant(Participant $participant): int
+    {
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.participant = :participant')
+            ->setParameter('participant', $participant)
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
     }
 
     public function countForQuestionnaire(
