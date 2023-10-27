@@ -5,6 +5,7 @@ import UserPreview from './UserPreview'
 import type { UserBox_user } from '~relay/UserBox_user.graphql'
 
 type Props = {
+  id?: string | number
   user: UserBox_user | null | undefined
   className: string
 }
