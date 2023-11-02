@@ -9,12 +9,13 @@ use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Handler\CasHandler;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/login_check", name="login_check", options={"i18n" = false})
@@ -83,15 +84,18 @@ class DefaultController extends Controller
      * @Route("/cookies-page", name="app_cookies")
      * @Template("CapcoAppBundle:Default:cookies.html.twig")
      */
-    public function cookiesAction(Request $request)
-    {
+    public function cookiesAction(
+        Request $request,
+        SiteParameterRepository $siteParameterRepository,
+        TranslatorInterface $translator
+    ): array {
         try {
-            $cookiesList = $this->get(SiteParameterRepository::class)->getValue(
+            $siteParameterRepository->getValue(
                 'cookies-list',
                 $request->getLocale()
             );
         } catch (NoResultException $exception) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 
         return [];
@@ -101,15 +105,18 @@ class DefaultController extends Controller
      * @Route("/privacy", name="app_privacy")
      * @Template("CapcoAppBundle:Default:privacyPolicy.html.twig")
      */
-    public function privacyPolicyAction(Request $request)
-    {
+    public function privacyPolicyAction(
+        Request $request,
+        SiteParameterRepository $siteParameterRepository,
+        TranslatorInterface $translator
+    ): array {
         try {
-            $policy = $this->get(SiteParameterRepository::class)->getValue(
+            $policy = $siteParameterRepository->getValue(
                 'privacy-policy',
                 $request->getLocale()
             );
         } catch (NoResultException $exception) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 
         return [
@@ -121,15 +128,18 @@ class DefaultController extends Controller
      * @Route("/legal", name="app_legal")
      * @Template("CapcoAppBundle:Default:legalMentions.html.twig")
      */
-    public function legalMentionsAction(Request $request)
-    {
+    public function legalMentionsAction(
+        Request $request,
+        SiteParameterRepository $siteParameterRepository,
+        TranslatorInterface $translator
+    ): array {
         try {
-            $legal = $this->get(SiteParameterRepository::class)->getValue(
+            $legal = $siteParameterRepository->getValue(
                 'legal-mentions',
                 $request->getLocale()
             );
         } catch (NoResultException $exception) {
-            return $this->createNotFoundException();
+            throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 
         return [
