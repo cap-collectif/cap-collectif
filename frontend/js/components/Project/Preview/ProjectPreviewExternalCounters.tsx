@@ -4,7 +4,6 @@ import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import ProjectPreviewCounter from './ProjectPreviewCounter'
 import TagsList from '../../Ui/List/TagsList'
-import ProjectRestrictedAccessFragmentLegacy from '../Page/ProjectRestrictedAccessFragmentLegacy'
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql'
 import colors from '~/utils/colors'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
@@ -62,8 +61,6 @@ export class ProjectPreviewExternalCounters extends React.Component<Props> {
               archived={project.archived}
             />
           )}
-
-          <ProjectRestrictedAccessFragmentLegacy project={project} icon="cap-lock-2-1" />
         </TagsList>
       </>
     )
