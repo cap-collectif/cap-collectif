@@ -34,10 +34,6 @@ export const StyledMap: StyledComponent<any, {}, typeof Map> = styled(Map)`
     transform: translate(-50%, 0%);
   }
 
-  .leaflet-control-attribution.leaflet-control {
-    display: none;
-  }
-
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     .leaflet-popup:not(.popup-proposal) {
       display: none;

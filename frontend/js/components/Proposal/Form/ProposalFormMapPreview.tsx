@@ -59,9 +59,6 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
         width: '100%',
         height: 200,
         marginBottom: 12,
-        '.leaflet-control-attribution.leaflet-control': {
-          display: 'none',
-        },
       }}
       tap={!L.Browser.mobile}
       gestureHandling

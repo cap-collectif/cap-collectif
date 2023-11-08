@@ -20,10 +20,6 @@ export const MapContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div
     animation: leaflet-control-locate-throb 2s infinite cubic-bezier(0.36, 0.11, 0.89, 0.32);
   }
 
-  .leaflet-control-attribution.leaflet-control {
-    display: none;
-  }
-
   @keyframes leaflet-control-locate-throb {
     from {
       transform: scale(0.75, 0.75);

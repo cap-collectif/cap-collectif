@@ -207,9 +207,6 @@ const ProposalChangeAddressModal = ({
               width: '100%',
               height: '100%',
               minHeight: L.Browser.mobile ? 'calc(100vh - 100px)' : '550px',
-              '.leaflet-control-attribution.leaflet-control': {
-                display: 'none',
-              },
               '.leaflet-bottom.leaflet-left': {
                 left: '50%',
                 transform: 'translate(-50%, 0%)',
