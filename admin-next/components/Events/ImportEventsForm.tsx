@@ -21,6 +21,7 @@ import {
 } from '@relay/AddEventsMutation.graphql';
 import { HEADERS } from './EventImportModal';
 import styled from 'styled-components';
+import jschardet from 'jschardet'
 
 type EventCsv = Omit<
     EventInput,
@@ -126,23 +127,28 @@ const ImportEventsForm: React.FC<ImportEventsFormProps> = ({ setData }) => {
                     format=".csv"
                     onDrop={(acceptedFiles: File[]) => {
                         acceptedFiles.forEach(file => {
-                            const reader = new window.FileReader();
-                            reader.readAsText(file);
-                            setLoading(true);
-                            reader.onloadend = () => {
-                                const result = reader.result as string;
-                                const variables = prepareVariablesFromAnalyzedFile(result, true);
-                                if (variables) {
-                                    setData(variables);
-                                    return AddEventsMutation.commit({ input: variables }).then(
-                                        (response: AddEventsMutationResponse) => {
-                                            if (response.addEvents) {
-                                                setLoading(false);
-                                                setResults(response.addEvents);
-                                            }
-                                        },
-                                    );
-                                }
+                            const reader = new FileReader();
+                            reader.readAsBinaryString(file);
+                            reader.onload = () => {
+                                const encoding = jschardet.detect(reader.result as Buffer);
+                                reader.readAsText(file, encoding.encoding);
+                                setLoading(true);
+                                reader.onload = () => {
+                                    const result = reader.result as string;
+                                    debugger;
+                                    const variables = prepareVariablesFromAnalyzedFile(result, true);
+                                    if (variables) {
+                                        setData(variables);
+                                        return AddEventsMutation.commit({ input: variables }).then(
+                                            (response: AddEventsMutationResponse) => {
+                                                if (response.addEvents) {
+                                                    setLoading(false);
+                                                    setResults(response.addEvents);
+                                                }
+                                            },
+                                        );
+                                    }
+                                };
                             };
                         });
                     }}
