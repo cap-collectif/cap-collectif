@@ -195,7 +195,7 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
           {validChildren.map((child, index) =>
             React.cloneElement(child, {
               isStart: index === 0,
-              isEnd: index === validChildren.length - 1,
+              isEnd: (index === validChildren.length - 1 && index !== 0),
             }),
           )}
         </StepsContainer>
