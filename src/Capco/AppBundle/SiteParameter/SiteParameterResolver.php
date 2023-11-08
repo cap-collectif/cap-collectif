@@ -35,6 +35,13 @@ class SiteParameterResolver
             $locale =
                 $this->requestStack->getCurrentRequest()->query->get('tl') ?:
                 $this->requestStack->getCurrentRequest()->getLocale();
+
+            // If request locale is not enabled, fallback to default locale
+            if (!$this->entityManager
+                ->getRepository(Locale::class)
+                ->isCodePublished($locale)) {
+                $locale = $this->getDefaultLocale();
+            }
         }
         if (null === $locale) {
             $locale = $this->getDefaultLocale();

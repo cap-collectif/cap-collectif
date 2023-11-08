@@ -65,8 +65,8 @@ class MailerFactory
         );
 
         self::setFooter($message, $type, $recipientEmail, $params);
-        $message->setSitename($params['siteName']);
-        $message->setSiteUrl($params['siteURL']);
+        $message->setSitename((string) $params['siteName']);
+        $message->setSiteUrl((string) $params['siteURL']);
 
         if (
             AbstractModeratorMessage::class === $subType
@@ -113,8 +113,8 @@ class MailerFactory
         $footerVars = \call_user_func(
             "{$type}::getMyFooterVars",
             $email,
-            $params['siteName'],
-            $params['baseURL']
+            (string) $params['siteName'],
+            (string) $params['baseURL']
         );
         $message->setFooterTemplate($footer);
         $message->setFooterTemplateVars($footerVars);
