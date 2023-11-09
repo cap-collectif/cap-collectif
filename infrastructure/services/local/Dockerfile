@@ -68,6 +68,7 @@ RUN <<EOF
 echo "
 xdebug.mode=debug
 xdebug.discover_client_host=true
+xdebug.client_host=host.docker.internal
 xdebug.force_display_errors=1
 xdebug.force_error_reporting=1
 " >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini
