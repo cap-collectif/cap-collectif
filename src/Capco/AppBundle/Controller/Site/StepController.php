@@ -304,7 +304,7 @@ class StepController extends Controller
         }
 
         if (!$step->getProposalForm()) {
-            $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         return [

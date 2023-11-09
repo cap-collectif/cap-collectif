@@ -11,7 +11,6 @@ use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
-use Http\Discovery\Exception\NotFoundException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
@@ -122,7 +121,7 @@ class EventController extends Controller
         $event = $this->eventRepository->getOneBySlug($slug);
 
         if (!$event) {
-            throw new NotFoundException();
+            throw $this->createNotFoundException('Could not find a published event for this slug.');
         }
 
         if ($event->isDeleted()) {
