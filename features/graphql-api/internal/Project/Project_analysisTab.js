@@ -8,6 +8,7 @@ const ProjectAdminAnalysisTabQuery = /* GraphQL */ `
     $supervisor: ID
     $analysts: [ID!]
     $decisionMaker: ID
+    $progressStatus: ProposalProgressState!
   ) {
     project: node(id: $projectId) {
       id
@@ -20,9 +21,12 @@ const ProjectAdminAnalysisTabQuery = /* GraphQL */ `
             supervisor: $supervisor
             analysts: $analysts
             decisionMaker: $decisionMaker
+            progressStatus: $progressStatus
           ) {
             edges {
               node {
+                id
+                progressStatus
                 supervisor {
                   id
                 }
@@ -50,10 +54,49 @@ describe('Internal|Query.ProjectAdminAnalysisTab', () => {
           category: null,
           count: 5,
           district: null,
-          projectId: 'UHJvamVjdDpwcm9qZWN0SWRm',
-          analysts: ['VXNlcjp1c2VyTWF4aW1l', 'VXNlcjp1c2VyQWd1aQ=='],
-          supervisor: 'VXNlcjp1c2VyU3B5bA==',
-          decisionMaker: 'VXNlcjp1c2VyTWF4aW1lUUE=',
+          projectId: toGlobalId('Project', 'projectIdf'),
+          analysts: [toGlobalId('User', 'userMaxime'), toGlobalId('User', 'userAgui')],
+          supervisor: toGlobalId('User', 'userSpyl'),
+          decisionMaker: toGlobalId('User', 'userMaximeQA'),
+          progressStatus: 'TODO'
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches proposals with progressStatus filter "en cours"', async () => {
+    await expect(
+      graphql(
+        ProjectAdminAnalysisTabQuery,
+        {
+          category: null,
+          count: 5,
+          district: null,
+          projectId: toGlobalId('Project', 'projectIdf'),
+          analysts: null,
+          supervisor: null,
+          decisionMaker: null,
+          progressStatus: 'IN_PROGRESS'
+        },
+        'internal_admin',
+      ),
+    ).resolves.toMatchSnapshot();
+  });
+
+  it('fetches proposals assigned to specific analysts, supervisor, decisionMaker and with progressStatus filter "en cours"', async () => {
+    await expect(
+      graphql(
+        ProjectAdminAnalysisTabQuery,
+        {
+          category: null,
+          count: 5,
+          district: null,
+          projectId: toGlobalId('Project', 'projectIdf'),
+          analysts: [toGlobalId('User', 'userMaxime'), toGlobalId('User', 'userTheo')],
+          supervisor: toGlobalId('User', 'userSpyl'),
+          decisionMaker: toGlobalId('User', 'userMaximeQA'),
+          progressStatus: 'IN_PROGRESS'
         },
         'internal_admin',
       ),

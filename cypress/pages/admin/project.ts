@@ -11,6 +11,37 @@ export default new (class AdminProjectPage {
     return `admin/alpha/project/${projectName}/contributions/proposals?state=ALL`
   }
 
+  visitAnalysisTabPath(projectName: string, parameters?: { [key: string]: string }) {
+    this.cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminParticipantTabQuery' })
+
+    let url = `admin/alpha/project/${projectName}/analysis`
+
+    if (parameters) {
+      const queryParameters = Object.keys(parameters)
+        .map(key => `${key}=${parameters[key]}`)
+        .join('&')
+
+      url += `?${queryParameters}`
+    }
+
+    return this.cy.visit(url)
+  }
+
+  assertProposalsAndProgressStatusLengthOnAnalysisTab(expectedProgressStatus: string, expectedLength: number) {
+    this.cy.get('div.pickableList-row').should('have.length', expectedLength)
+    this.cy.get('button.analysis-status-container span').should('have.length', expectedLength)
+    for (let i = 0; i < expectedLength; i++) {
+      this.cy
+        .get(`div:nth-child(${i + 1}) > div > div > button span.ml-5`)
+        .contains(expectedProgressStatus)
+        .should('exist')
+    }
+  }
+
   visit(projectName: string) {
     return this.cy.visit(this.path(projectName))
   }
@@ -57,7 +88,7 @@ export default new (class AdminProjectPage {
   get stepFilterSelect() {
     return this.cy.get('#admin_label_step')
   }
-  
+
   selectCollectStep(stepName: string) {
     this.stepFilterSelect.click()
     cy.wait(1000)

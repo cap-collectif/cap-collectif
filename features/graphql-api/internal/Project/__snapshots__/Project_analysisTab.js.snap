@@ -22,6 +22,102 @@ Object {
               "decisionMaker": Object {
                 "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
               },
+              "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY2",
+              "progressStatus": "TODO",
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+            },
+          },
+        ],
+      },
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+  },
+}
+`;
+
+exports[`Internal|Query.ProjectAdminAnalysisTab fetches proposals assigned to specific analysts, supervisor, decisionMaker and with progressStatus filter "en cours" 1`] = `
+Object {
+  "project": Object {
+    "firstAnalysisStep": Object {
+      "proposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VyTWF4aW1l",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVGhlbw==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVmluY2VudA==",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+              "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+              "progressStatus": "IN_PROGRESS",
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+            },
+          },
+        ],
+      },
+    },
+    "id": "UHJvamVjdDpwcm9qZWN0SWRm",
+  },
+}
+`;
+
+exports[`Internal|Query.ProjectAdminAnalysisTab fetches proposals with progressStatus filter "en cours" 1`] = `
+Object {
+  "project": Object {
+    "firstAnalysisStep": Object {
+      "proposals": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VySnBlYw==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVGhlbw==",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyU3B5bA==",
+              },
+              "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYy",
+              "progressStatus": "IN_PROGRESS",
+              "supervisor": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "analysts": Array [
+                Object {
+                  "id": "VXNlcjp1c2VyTWF4aW1l",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVGhlbw==",
+                },
+                Object {
+                  "id": "VXNlcjp1c2VyVmluY2VudA==",
+                },
+              ],
+              "decisionMaker": Object {
+                "id": "VXNlcjp1c2VyTWF4aW1lUUE=",
+              },
+              "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGY1",
+              "progressStatus": "IN_PROGRESS",
               "supervisor": Object {
                 "id": "VXNlcjp1c2VyU3B5bA==",
               },

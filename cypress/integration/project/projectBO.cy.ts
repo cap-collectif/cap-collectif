@@ -85,4 +85,31 @@ describe('Project', () => {
       AdminProjectPage.leastMessageReceivedFilter.should('not.exist')
     })
   })
+  describe('Filter progress status on analysis tab', () => {
+    beforeEach(() => {
+      cy.task('db:restore')
+      cy.directLoginAs('admin')
+    })
+    it('should filter proposals with progress state "IN_PROGRESS" and with an analyst on tab analysis', () => {
+      AdminProjectPage.visitAnalysisTabPath('projectIdf')
+
+      cy.wait('@AdminRightNavbarAppQuery')
+      cy.wait('@ProjectAdminPageQuery')
+      cy.wait('@ProjectAdminAnalysisTabQuery')
+      cy.wait('@ProjectAdminContributionsPageQuery')
+      cy.wait('@ProjectAdminParticipantTabQuery')
+
+      cy.get('div > span').contains('table.header.filter.progress').click()
+      cy.get('ul > li:nth-child(3) > span').contains('step.status.open').click()
+
+      cy.wait('@ProjectAdminAnalysisTabQuery')
+      AdminProjectPage.assertProposalsAndProgressStatusLengthOnAnalysisTab('step.status.open', 2)
+
+      cy.get('div > span').contains('panel.analysis.subtitle').click()
+      cy.get('div:nth-child(4) li:nth-child(2) span:nth-child(2)').contains('Jpec').click()
+
+      cy.wait('@ProjectAdminAnalysisTabQuery')
+      AdminProjectPage.assertProposalsAndProgressStatusLengthOnAnalysisTab('step.status.open', 1)
+    })
+  })
 })
