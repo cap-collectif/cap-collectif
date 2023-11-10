@@ -30,6 +30,7 @@ const Container = styled.div<{
     position: absolute;
     top: calc(calc(50% - 20px) - 20px);
     left: calc(50% - 20px);
+    z-index: 1;
   }
 
   > img {
