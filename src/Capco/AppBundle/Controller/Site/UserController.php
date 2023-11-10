@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\Enum\SSOType;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -175,13 +176,13 @@ class UserController extends AbstractController
 
     private function isFacebookEnabled(): bool
     {
-        return null !== $this->ssoConfigurationRepository->findOneActiveByType('facebook');
+        return null !== $this->ssoConfigurationRepository->findOneByType(SSOType::FACEBOOK, true);
     }
 
     private function isFranceConnectEnabled(): bool
     {
         return $this->toggleManager->isActive('login_franceconnect')
-            && $this->ssoConfigurationRepository->findOneActiveByType('franceconnect');
+            && $this->ssoConfigurationRepository->findOneByType(SSOType::FRANCE_CONNECT, true);
     }
 
     private function isSAMLEnabled(): bool

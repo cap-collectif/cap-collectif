@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Enum\SSOType;
 use Capco\AppBundle\Event\ToggleFeatureEvent;
+use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
+use Capco\AppBundle\Repository\SectionRepository;
+use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Qandidate\Toggle\Toggle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,10 +14,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class ToggleSubscriber implements EventSubscriberInterface
 {
     private EntityManagerInterface $em;
+    private AbstractSSOConfigurationRepository $SSOConfigurationRepository;
+    private SectionRepository $sectionRepository;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, AbstractSSOConfigurationRepository $SSOConfigurationRepository, SectionRepository $sectionRepository)
     {
         $this->em = $em;
+        $this->SSOConfigurationRepository = $SSOConfigurationRepository;
+        $this->sectionRepository = $sectionRepository;
     }
 
     public static function getSubscribedEvents(): array
@@ -27,7 +34,7 @@ class ToggleSubscriber implements EventSubscriberInterface
     public function onFeatureToggle(ToggleFeatureEvent $event)
     {
         $toggle = $event->getToggle();
-        if ('new_project_card' === $toggle->getName()) {
+        if (Manager::new_project_card === $toggle->getName()) {
             $status = $toggle->getStatus();
             $maxProjects = null;
             if (Toggle::ALWAYS_ACTIVE === $status) {
@@ -35,12 +42,27 @@ class ToggleSubscriber implements EventSubscriberInterface
             } elseif (Toggle::INACTIVE === $status) {
                 $maxProjects = 8;
             }
-            $section = $this->em->getRepository(Section::class)->findOneBy(['type' => 'projects']);
+            $section = $this->sectionRepository->findOneBy(['type' => 'projects']);
             if ($section->getNbObjects() > $maxProjects) {
                 $section->setNbObjects($maxProjects);
                 $this->em->persist($section);
                 $this->em->flush();
             }
+        }
+        if (Manager::oauth2_switch_user === $toggle->getName()) {
+            $status = $toggle->getStatus();
+            if (Toggle::ALWAYS_ACTIVE !== $status) {
+                return;
+            }
+
+            $openIdConfig = $this->SSOConfigurationRepository->findOneByType(SSOType::OAUTH2);
+
+            if (!$openIdConfig) {
+                return;
+            }
+
+            $openIdConfig->setDisconnectSsoOnLogout(true);
+            $this->em->flush();
         }
     }
 }

@@ -64,12 +64,20 @@ class AbstractSSOConfigurationRepository extends EntityRepository
         return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
     }
 
-    public function findOneActiveByType(string $type): ?AbstractSSOConfiguration
+    public function findOneByType(string $type, ?bool $isEnabled = null): ?AbstractSSOConfiguration
     {
-        return $this->createQueryBuilder('sso')
+        $qb = $this->createQueryBuilder('sso')
             ->andWhere('sso INSTANCE OF :type')
-            ->andWhere('sso.enabled = true')
             ->setParameters(['type' => $type])
+        ;
+
+        if (true === $isEnabled || false === $isEnabled) {
+            $qb->andWhere('sso.enabled = :enabled')
+                ->setParameter('enabled', $isEnabled)
+            ;
+        }
+
+        return $qb
             ->getQuery()
             ->getOneOrNullResult()
         ;
