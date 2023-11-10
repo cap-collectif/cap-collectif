@@ -123,6 +123,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'carpentras':
             case 'debatpenly':
             case 'debateauidf':
+            case 'debatdsf':
                 $resolver
                     ->setDefaults([
                         'state' => null,

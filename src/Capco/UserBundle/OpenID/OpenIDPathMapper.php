@@ -69,6 +69,7 @@ class OpenIDPathMapper
 
             case 'debatpenly':
             case 'debateauidf':
+            case 'debatdsf':
                 $this->instanceMapper = new CndpMapping();
 
                 break;
