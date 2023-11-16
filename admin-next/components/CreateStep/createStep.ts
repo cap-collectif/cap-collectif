@@ -1,16 +1,16 @@
 import {StepType} from "@components/CreateStep/CreateStepPage";
-import {IntlShape} from "react-intl";
 import AddOtherStepMutation from '@mutations/AddOtherStepMutation';
 import AddConsultationStepMutation from '@mutations/AddConsultationStepMutation';
 import AddQuestionnaireStepMutation from '@mutations/AddQuestionnaireStepMutation';
 import AddDebateStepMutation from '@mutations/AddDebateStepMutation';
-import AddSelectionStepMutation from '@mutations/AddSelectionStepMutation';
 import AddCollectStepMutation from '@mutations/AddCollectStepMutation';
 import { StepTypeEnum } from "./defaultStepConfig";
+import AddAnalysisStepMutation from "@mutations/AddAnalysisStepMutation";
+import AddResultStepMutation from "@mutations/AddResultStepMutation";
+import AddVoteAndSelectionStepMutation from "@mutations/AddVoteAndSelectionStepMutation";
 
-const createStep = async (intl: IntlShape, projectId: string, stepType: StepType) => {
+const createStep = async (projectId: string, stepType: StepType) => {
     const input = {
-        title: '',
         projectId,
     };
     switch (stepType) {
@@ -23,8 +23,8 @@ const createStep = async (intl: IntlShape, projectId: string, stepType: StepType
             break;
         }
         case StepTypeEnum.VOTE: {
-            const response = await AddSelectionStepMutation.commit({input});
-            const adminUrl = response.addSelectionStep?.step?.adminUrl;
+            const response = await AddVoteAndSelectionStepMutation.commit({input});
+            const adminUrl = response.addVoteAndSelectionStep?.step?.adminUrl;
             if (adminUrl) {
                 window.location.href = adminUrl;
             }
@@ -55,16 +55,16 @@ const createStep = async (intl: IntlShape, projectId: string, stepType: StepType
             break;
         }
         case StepTypeEnum.ANALYSIS: {
-            const response = await AddSelectionStepMutation.commit({input});
-            const adminUrl = response.addSelectionStep?.step?.adminUrl;
+            const response = await AddAnalysisStepMutation.commit({input});
+            const adminUrl = response.addAnalysisStep?.step?.adminUrl;
             if (adminUrl) {
                 window.location.href = adminUrl;
             }
             break;
         }
         case StepTypeEnum.RESULT: {
-            const response = await AddSelectionStepMutation.commit({input});
-            const adminUrl = response.addSelectionStep?.step?.adminUrl;
+            const response = await AddResultStepMutation.commit({input});
+            const adminUrl = response.addResultStep?.step?.adminUrl;
             if (adminUrl) {
                 window.location.href = adminUrl;
             }

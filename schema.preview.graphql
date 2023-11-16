@@ -1368,6 +1368,9 @@ enum ProposalStepStatusColor {
   """Warning color."""
   WARNING
 
+  """Caution color."""
+  CAUTION
+
   """Danger color."""
   DANGER
 

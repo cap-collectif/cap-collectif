@@ -34,6 +34,7 @@ class Status
         'success' => StatusColor::SUCCESS,
         'info' => StatusColor::INFO,
         'warning' => StatusColor::WARNING,
+        'caution' => StatusColor::CAUTION,
         'danger' => StatusColor::DANGER,
     ];
 
@@ -43,6 +44,7 @@ class Status
         'statuses.labels.success' => StatusColor::SUCCESS,
         'statuses.labels.info' => StatusColor::INFO,
         'statuses.labels.warning' => StatusColor::WARNING,
+        'statuses.labels.caution' => StatusColor::CAUTION,
         'statuses.labels.danger' => StatusColor::DANGER,
     ];
 

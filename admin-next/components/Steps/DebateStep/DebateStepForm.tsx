@@ -153,7 +153,7 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
             },
             {
                 title: intl.formatMessage({id: 'add-step'}),
-                href: `/project/${project?.id}/create-step`,
+                href: `/admin-next/project/${project?.id}/create-step`,
             },
             {
                 title: intl.formatMessage({id: 'debate-step'}),

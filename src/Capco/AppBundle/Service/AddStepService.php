@@ -36,13 +36,11 @@ class AddStepService
     public function addStep(Argument $input, User $viewer, string $stepType): array
     {
         $projectId = $input->offsetGet('projectId');
-        $title = $input->offsetGet('title');
 
         $project = $this->getProject($projectId, $viewer);
         $stepsCount = $project->getSteps()->count();
 
         $step = $this->createStepObject($stepType);
-        !$title ?: $step->setTitle($title);
         $projectAbstractStep = (new ProjectAbstractStep())->setProject($project)->setStep($step)->setPosition($stepsCount + 1);
         $project->addStep($projectAbstractStep);
         $step->setProjectAbstractStep($projectAbstractStep);
@@ -65,6 +63,17 @@ class AddStepService
             ProjectVoter::EDIT,
             $project
         );
+    }
+
+    public function getProject($projectId, User $viewer): Project
+    {
+        $project = $this->globalIdResolver->resolve($projectId, $viewer);
+
+        if (!$project instanceof Project) {
+            throw new UserError("Project with id {$projectId} was not found.");
+        }
+
+        return $project;
     }
 
     private function createStepObject(string $stepType): AbstractStep
@@ -100,16 +109,5 @@ class AddStepService
             default:
                 throw new UserError('Please select a valid step type');
         }
-    }
-
-    private function getProject($projectId, User $viewer): Project
-    {
-        $project = $this->globalIdResolver->resolve($projectId, $viewer);
-
-        if (!$project instanceof Project) {
-            throw new UserError("Project with id {$projectId} was not found.");
-        }
-
-        return $project;
     }
 }

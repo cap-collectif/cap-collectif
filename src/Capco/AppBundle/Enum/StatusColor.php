@@ -12,5 +12,6 @@ final class StatusColor
     public const SUCCESS = 'success';
     public const INFO = 'info';
     public const WARNING = 'warning';
+    public const CAUTION = 'caution';
     public const DANGER = 'danger';
 }

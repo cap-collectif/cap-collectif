@@ -36,7 +36,9 @@ class StepFactory
     public function createCollectStep(): CollectStep
     {
         return (new CollectStep())
+            ->setLabel($this->trans('step.collect.default.title'))
             ->setTitle($this->trans('step.collect.default.title'))
+            ->setBody($this->trans('submit.your.proposal'))
             ->setStartAt(new \DateTime('today midnight'))
             ->setEndAt((new \DateTime('today 23:59:00'))->add(new \DateInterval('P1M')))
         ;
@@ -88,11 +90,10 @@ class StepFactory
         return (new DebateStep($debate))
             ->setLabel($this->trans('step.types.debate'))
             ->setTitle($this->trans('step.debate.default.title'))
-            ->setBody($this->trans('step.debate.default.description'))
             ->setDebateType(DebateType::WYSIWYG)
             ->setIsEnabled(true)
             ->setTimeless(true)
-            ->setIsAnonymousParticipationAllowed(false)
+            ->setIsAnonymousParticipationAllowed(true)
         ;
     }
 
@@ -107,7 +108,7 @@ class StepFactory
     {
         $question = (new SimpleQuestion())
             ->setTitle($this->trans('question.default.title'))
-            ->setType(SimpleQuestion::QUESTION_TYPE_EDITOR)
+            ->setType(SimpleQuestion::QUESTION_TYPE_MULTILINE_TEXT)
         ;
 
         $qaq = (new QuestionnaireAbstractQuestion())
@@ -154,15 +155,14 @@ class StepFactory
 
     public function createAnalysisStep(): SelectionStep
     {
-        // Censé être du orange ici pour ce status mais l'enum se base sur des nom de class bootstrap
-        $defaultStatus = $this->createStatus('analysis-of-projects', StatusColor::PRIMARY, 1);
+        $defaultStatus = $this->createStatus('under-analysis', StatusColor::WARNING, 1);
 
         return (new SelectionStep())
             ->setTitle($this->trans('step.analysis.default.title'))
             ->setLabel($this->trans('step.analysis.default.label'))
             ->setBody($this->trans('step.analysis.default.description'))
             ->setStartAt(new \DateTime('today midnight'))
-            ->setEndAt((new \DateTime('today 23:59:00'))->add(new \DateInterval('P1M')))
+            ->setEndAt((new \DateTime('today 23:59:00'))->add(new \DateInterval('P3M')))
             ->setStatuses(new ArrayCollection([
                 $defaultStatus,
                 $this->createStatus('put-to-the-vote', StatusColor::SUCCESS, 2),
@@ -194,6 +194,7 @@ class StepFactory
                 $this->createStatus('award-winning-project', StatusColor::INFO, 4),
             ]))
             ->setAllowAuthorsToAddNews(true)
+            ->setAllowingProgressSteps(true)
             ->setDefaultSort('random')
             ->setVoteType(0)
         ;

@@ -116,9 +116,10 @@ export const colorsData = {
   PRIMARY: '',
   // platform primary color, leaving empty
   SUCCESS: '#399a39',
-  WARNING: '#f4b721',
+  WARNING: '#f09200',
   DANGER: '#f75d56',
   INFO: '#77b5fe',
+  CAUTION: '#f4b721',
   DEFAULT: '#707070',
 }
 export const AlertColors = {

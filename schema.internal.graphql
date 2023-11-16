@@ -748,9 +748,6 @@ type AddSourceVotePayload {
 input AddStepInput {
   """The project linked to the step."""
   projectId: ID!
-
-  """The step title."""
-  title: String
   clientMutationId: String
 }
 
@@ -8255,7 +8252,6 @@ type Mutation {
   deleteOrganizationInvitation(input: DeleteOrganizationInvitationInput!): DeleteOrganizationInvitationPayload
   createProposalAnalysisComment(input: CreateProposalAnalysisCommentInput!): CreateProposalAnalysisCommentPayload
   addCollectStep(input: AddStepInput!): AddStepPayload
-  addSelectionStep(input: AddStepInput!): AddStepPayload
   addDebateStep(input: AddStepInput!): AddStepPayload
   addQuestionnaireStep(input: AddStepInput!): AddStepPayload
   addConsultationStep(input: AddStepInput!): AddStepPayload
@@ -12377,6 +12373,9 @@ enum ProposalStepStatusColor {
 
   """Warning color."""
   WARNING
+
+  """Caution color."""
+  CAUTION
 
   """Danger color."""
   DANGER

@@ -47,6 +47,11 @@ export function StepStatusesList({ fields, statuses, onInputChange, onInputDelet
     {
       label: 'global.orange',
       name: 'WARNING',
+      hexValue: '#f09200',
+    },
+    {
+      label: 'global.yellow',
+      name: 'CAUTION',
       hexValue: '#f4b721',
     },
     {

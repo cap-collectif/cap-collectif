@@ -15,6 +15,9 @@ ProposalStepStatusColor:
             WARNING:
                 description: 'Warning color.'
                 value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::WARNING")'
+            CAUTION:
+                description: 'Caution color.'
+                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::CAUTION")'
             DANGER:
                 description: 'Danger color.'
                 value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::DANGER")'

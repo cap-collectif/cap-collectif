@@ -114,7 +114,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
                             <Flex
                                 onMouseEnter={() => setStepHovered(step.type)}
                                 onMouseLeave={() => setStepHovered(null)}
-                                onClick={() => createStep(intl, projectId, step.type)}
+                                onClick={() => createStep(projectId, step.type)}
                                 key={step.type}
                                 p={4}
                                 borderColor={stepHovered === step.type ? 'blue.200' : ''}

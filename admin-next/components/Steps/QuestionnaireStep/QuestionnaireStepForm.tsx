@@ -172,7 +172,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/project/${project?.id}/create-step`,
+        href: `/admin-next/project/${project?.id}/create-step`,
       },
       {
         title: intl.formatMessage({ id: 'questionnaire-step' }),

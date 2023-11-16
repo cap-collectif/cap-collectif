@@ -5,6 +5,3 @@ AddStepInput:
             projectId:
                 type: 'ID!'
                 description: 'The project linked to the step.'
-            title:
-                type: 'String'
-                description: 'The step title.'
