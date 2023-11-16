@@ -117,6 +117,7 @@ const CONSULTATION_STEP_QUERY = graphql`
                     id
                     title
                     adminAlphaUrl
+                    canEdit
                 }
                 enabled
                 label
@@ -354,6 +355,11 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
             return mutationErrorToast(intl);
         }
     };
+
+    if (!project?.canEdit) {
+        window.location.href = '/admin-next/projects';
+        return null;
+    }
 
     return (
         <Box bg="white" width="70%" p={6} borderRadius="8px">

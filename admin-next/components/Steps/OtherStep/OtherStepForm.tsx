@@ -72,10 +72,6 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
         throw new Error('Please provide a valid project and step');
     }
 
-    if (!project.canEdit) {
-        window.location.href = '/admin-next/projects';
-    }
-
     const [isEditing, setIsEditing] = useState(() => {
         return !!step.label;
     });
@@ -153,6 +149,11 @@ const OtherStepForm: React.FC<Props> = ({ stepId}) => {
             return mutationErrorToast(intl);
         }
     };
+
+    if (!project.canEdit) {
+        window.location.href = '/admin-next/projects';
+        return null;
+    }
 
     return (
         <Box bg="white" width="70%" p={6} borderRadius="8px">

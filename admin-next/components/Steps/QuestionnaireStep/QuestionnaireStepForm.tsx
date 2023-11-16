@@ -308,6 +308,11 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
   const stepDurationType = watch('stepDurationType')
   const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
 
+  if (!project.canEdit) {
+    window.location.href = '/admin-next/projects';
+    return null;
+  }
+
   return (
     <Box bg="white" width="100%" p={6} borderRadius="8px">
       <Text fontWeight={600} color="blue.800" fontSize={4}>

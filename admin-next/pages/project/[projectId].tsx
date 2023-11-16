@@ -18,6 +18,9 @@ export const QUERY = graphql`
     query ProjectIdQuery($id: ID!) {
         node(id: $id) {
             id
+            ...on Project {
+                canEdit
+            }
             ...ProjectConfigForm_project
         }
     }
@@ -25,9 +28,14 @@ export const QUERY = graphql`
 
 const ProjectConfigPage: React.FC<ProjectConfigPageProps> = ({ projectId }) => {
     const response = useLazyLoadQuery<ProjectIdQuery>(QUERY, { id: projectId });
-    if (!response.node) return null;
+    const project = response.node;
 
-    return <ProjectConfigForm project={response.node} />;
+    if (!project || !project?.canEdit) {
+        window.location.href = '/admin-next/projects';
+        return null;
+    }
+
+    return <ProjectConfigForm project={project} />;
 };
 
 const ProjectConfig: NextPage<PageProps> = ({ viewerSession }) => {

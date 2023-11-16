@@ -35,6 +35,7 @@ export const PROJECT_QUERY = graphql`
     query CreateStepPageQuery($id: ID!) {
         project: node(id: $id) {
             ... on Project {
+                canEdit
                 id
                 title
                 adminAlphaUrl
@@ -56,7 +57,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
     const steps = project?.steps;
     const canEdit = project?.canEdit ?? false;
     const hasCollectStep = steps?.some(step => step.__typename === 'CollectStep');
-
+    
     const breadCrumbItems = [
         {
             title: project?.title ?? '',
@@ -71,7 +72,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
     useEffect(() => {
         setBreadCrumbItems(breadCrumbItems);
         return () => setBreadCrumbItems([]);
-    }, []);
+    }, [breadCrumbItems, setBreadCrumbItems]);
 
     const [stepHovered, setStepHovered] = useState<StepType | null>(null);
 
@@ -101,6 +102,11 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
         }
         return 4;
     };
+
+    if (!project || !canEdit) {
+        window.location.href = '/admin-next/projects';
+        return null;
+    }
 
     return (
         <Flex>

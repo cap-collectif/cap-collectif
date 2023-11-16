@@ -242,6 +242,11 @@ const DebateStepForm: React.FC<Props> = ({stepId}) => {
         }
     }
 
+    if (!project.canEdit) {
+        window.location.href = '/admin-next/projects';
+        return null;
+    }
+
     return (
         <Box bg="white" width="70%" p={6} borderRadius={2}>
             <Text fontWeight={600} color="blue.800" fontSize={4}>
