@@ -4,12 +4,15 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Traits\ProposalSelectionVoteRepositoryTrait;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalSelectionSmsVoteRepository extends EntityRepository
 {
+    use ProposalSelectionVoteRepositoryTrait;
+
     public function getByTokenAndStep(
         SelectionStep $step,
         string $token,

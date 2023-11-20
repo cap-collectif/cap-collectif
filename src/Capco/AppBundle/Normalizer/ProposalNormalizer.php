@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResponsesResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -25,6 +26,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
     private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
     private CommentableCommentsDataLoader $commentableCommentsDataLoader;
     private ProposalResponsesResolver $proposalResponsesResolver;
+    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         ObjectNormalizer $normalizer,
@@ -32,7 +34,8 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository,
         CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        ProposalResponsesResolver $proposalResponsesResolver
+        ProposalResponsesResolver $proposalResponsesResolver,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository
     ) {
         $this->normalizer = $normalizer;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
@@ -40,6 +43,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $this->proposalStepPaperVoteCounterRepository = $proposalStepPaperVoteCounterRepository;
         $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
         $this->proposalResponsesResolver = $proposalResponsesResolver;
+        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
     }
 
     public function hasCacheableSupportsMethod(): bool
@@ -117,47 +121,29 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         $selectionCount = $this->proposalSelectionVoteRepository->getCountsByProposalGroupedByStepsId(
             $proposal
         );
+        $selectionSmsCount = $this->proposalSelectionSmsVoteRepository->getCountsByProposalGroupedBySteps(
+            $proposal
+        );
         $collectCount = $this->proposalCollectVoteRepository->getCountsByProposalGroupedByStepsId(
             $proposal
         );
 
-        $selectionVotesCount = $selectionCount['votesBySteps'];
-        $selectionVotesCountPoints = $selectionCount['pointsBySteps'];
-        $collectVotesCount = $collectCount['votesBySteps'];
-        $collectVotesCountPoints = $collectCount['pointsBySteps'];
-
-        foreach ($collectVotesCount as $stepId => $value) {
-            $stepCounter[$stepId] = self::emptyStepCounter($stepId);
-            $stepCounter[$stepId]['numericVotes'] += $value;
-            $stepCounter[$stepId]['votes'] += $value;
-            $totalNumericVoteCount += $value;
-            $totalVoteCount += $value;
-        }
-        foreach ($selectionVotesCount as $stepId => $value) {
-            $stepCounter[$stepId] = self::emptyStepCounter($stepId);
-            $stepCounter[$stepId]['numericVotes'] += $value;
-            $stepCounter[$stepId]['votes'] += $value;
-            $totalNumericVoteCount += $value;
-            $totalVoteCount += $value;
+        foreach ([$selectionCount, $selectionSmsCount, $collectCount] as $votesCount) {
+            list($stepCounter, $totalNumericVoteCount, $totalVoteCount) = $this->votesCount(
+                $votesCount['votesBySteps'],
+                $stepCounter,
+                $totalNumericVoteCount,
+                $totalVoteCount
+            );
         }
 
-        foreach ($collectVotesCountPoints as $stepId => $value) {
-            if (!isset($stepCounter[$stepId])) {
-                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
-            }
-            $stepCounter[$stepId]['numericPoints'] += $value;
-            $stepCounter[$stepId]['points'] += $value;
-            $totalNumericPointsCount += $value;
-            $totalPointsCount += $value;
-        }
-        foreach ($selectionVotesCountPoints as $stepId => $value) {
-            if (!isset($stepCounter[$stepId])) {
-                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
-            }
-            $stepCounter[$stepId]['numericPoints'] += $value;
-            $stepCounter[$stepId]['points'] += $value;
-            $totalNumericPointsCount += $value;
-            $totalPointsCount += $value;
+        foreach ([$selectionCount, $collectCount] as $pointsCount) {
+            list($stepCounter, $totalNumericPointsCount, $totalPointsCount) = $this->pointsCount(
+                $pointsCount['pointsBySteps'],
+                $stepCounter,
+                $totalNumericPointsCount,
+                $totalPointsCount
+            );
         }
 
         $paperVoteCounters = $this->proposalStepPaperVoteCounterRepository->findBy([
@@ -201,5 +187,35 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
             'paperPoints' => 0,
             'points' => 0,
         ];
+    }
+
+    private function votesCount($votesCount, array $stepCounter, $totalNumericVoteCount, $totalVoteCount): array
+    {
+        foreach ($votesCount as $stepId => $value) {
+            if (!isset($stepCounter[$stepId])) {
+                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            }
+            $stepCounter[$stepId]['numericVotes'] += $value;
+            $stepCounter[$stepId]['votes'] += $value;
+            $totalNumericVoteCount += $value;
+            $totalVoteCount += $value;
+        }
+
+        return [$stepCounter, $totalNumericVoteCount, $totalVoteCount];
+    }
+
+    private function pointsCount($countPoints, $stepCounter, $totalNumericPointsCount, $totalPointsCount): array
+    {
+        foreach ($countPoints as $stepId => $value) {
+            if (!isset($stepCounter[$stepId])) {
+                $stepCounter[$stepId] = self::emptyStepCounter($stepId);
+            }
+            $stepCounter[$stepId]['numericPoints'] += $value;
+            $stepCounter[$stepId]['points'] += $value;
+            $totalNumericPointsCount += $value;
+            $totalPointsCount += $value;
+        }
+
+        return [$stepCounter, $totalNumericPointsCount, $totalPointsCount];
     }
 }

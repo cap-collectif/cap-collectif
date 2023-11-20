@@ -3,3 +3,7 @@ volumes:
     driver_opts:
       type: tmpfs
       device: tmpfs
+services:
+  application:
+    extra_hosts:
+      - host.docker.internal:host-gateway
