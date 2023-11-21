@@ -1,10 +1,10 @@
-import React, { useRef } from 'react';
-import { FormLabel, Box } from '@cap-collectif/ui';
-import { FieldInput, FormControl } from '@cap-collectif/form';
-import { graphql, useFragment } from 'react-relay';
-import { useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
-import { ConsultationModel_query$key } from '@relay/ConsultationModel_query.graphql';
+import React, {useRef} from 'react';
+import {FormLabel, Box} from '@cap-collectif/ui';
+import {FieldInput, FormControl} from '@cap-collectif/form';
+import {graphql, useFragment} from 'react-relay';
+import {useFormContext} from 'react-hook-form';
+import {useIntl} from 'react-intl';
+import {ConsultationModel_query$key} from '@relay/ConsultationModel_query.graphql';
 
 type Props = {
     query: ConsultationModel_query$key;
@@ -43,11 +43,11 @@ const QUERY_FRAGMENT = graphql`
     }
 `;
 
-const ConsultationModel: React.FC<Props> = ({ query: queryRef, consultationFormKey, children }) => {
+const ConsultationModel: React.FC<Props> = ({query: queryRef, consultationFormKey, children}) => {
     const intl = useIntl();
     const query = useFragment(QUERY_FRAGMENT, queryRef);
-    const { consultations, consultationsWithStep } = query;
-    const { control, setValue, watch } = useFormContext();
+    const {consultations, consultationsWithStep} = query;
+    const {control, setValue, watch} = useFormContext();
 
     const options = consultationsWithStep.map(consultation => {
         const projectTitle = consultation.step?.project?.title;
@@ -58,16 +58,17 @@ const ConsultationModel: React.FC<Props> = ({ query: queryRef, consultationFormK
     });
 
     const initialModelValue = useRef<string>(watch(`${consultationFormKey}.model`));
+    
+    const model = watch(`${consultationFormKey}.model`);
 
-    // TS typing for onChange is fucked up
     const onChange = (value: any) => {
         const selectedModel = consultations.find(consultation => consultation.id === value) ?? null;
 
         if (selectedModel) {
-            const { id: _, ...consultation } = selectedModel;
             const model = initialModelValue.current
-                ? { id: initialModelValue.current, ...consultation }
-                : consultation;
+                ? {...selectedModel, id: initialModelValue.current}
+                : {...selectedModel, id: `temp-${crypto.randomUUID()}`};
+
             setValue(consultationFormKey, model);
             setValue(`${consultationFormKey}.sections`, model.sections);
             return;
@@ -85,7 +86,7 @@ const ConsultationModel: React.FC<Props> = ({ query: queryRef, consultationFormK
                     control={control}
                     name={`${consultationFormKey}.model`}
                     id={`${consultationFormKey}.model`}>
-                    <FormLabel label={intl.formatMessage({ id: 'select-a-consultation' })} />
+                    <FormLabel label={intl.formatMessage({id: 'select-a-consultation'})}/>
                     <FieldInput
                         name={`${consultationFormKey}.model`}
                         control={control}
@@ -96,7 +97,11 @@ const ConsultationModel: React.FC<Props> = ({ query: queryRef, consultationFormK
                     />
                 </FormControl>
             </Box>
-            {children}
+            {
+                model && (
+                    children
+                )
+            }
         </>
     );
 };

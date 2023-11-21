@@ -2196,7 +2196,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -2954,7 +2954,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   project: Project!
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """A list of contributor associated with the consultation step."""
   contributors(
@@ -4815,7 +4815,7 @@ type DebateStep implements Step & Node {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """The debate of the step."""
   debate: Debate!
@@ -9240,7 +9240,7 @@ type OtherStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 }
 
 """A page."""
@@ -10001,7 +10001,7 @@ type PresentationStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 }
 
 """A vote that can be anonymous."""
@@ -12166,7 +12166,7 @@ interface ProposalStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -13634,7 +13634,7 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """Requirements for answering the questionnaire"""
   requirements(
@@ -13751,7 +13751,7 @@ type RankingStep implements Node & Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -15079,7 +15079,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
 
   """A list of proposals associated to the object."""
   proposals(
@@ -16120,7 +16120,12 @@ interface Step {
   project: Project
   exportStepUrl: URI
   exportContributorsUrl: URI
-  adminUrl: URI!
+  adminUrl(operationType: StepAdminUrlOperationType): URI!
+}
+
+enum StepAdminUrlOperationType {
+  CREATE
+  EDIT
 }
 
 """Ways in which lists of steps can be ordered upon return."""

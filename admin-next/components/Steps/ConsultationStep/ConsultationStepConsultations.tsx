@@ -10,7 +10,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 type Props = {
   query: ConsultationStepConsultations_query$key
-  isEditing: boolean
 }
 
 const QUERY_FRAGMENT = graphql`
@@ -19,7 +18,7 @@ const QUERY_FRAGMENT = graphql`
   }
 `
 
-const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef, isEditing }) => {
+const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef }) => {
   const intl = useIntl()
   const { control, formState } = useFormContext<FormValues>()
   const { errors } = formState
@@ -48,7 +47,7 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef, isEdi
 
   return (
     <>
-      <Accordion color={CapUIAccordionColor.Transparent}>
+      <Accordion color={CapUIAccordionColor.Transparent} defaultAccordion="consultations">
         <Accordion.Item id="consultations">
           <Accordion.Button>{intl.formatMessage({ id: 'consultations' })}</Accordion.Button>
           <Accordion.Panel>
@@ -68,7 +67,6 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef, isEdi
                         consultationIndex={index}
                         removeConsultation={remove}
                         query={query}
-                        isEditing={isEditing}
                       />
                     </motion.div>
                   </AnimatePresence>

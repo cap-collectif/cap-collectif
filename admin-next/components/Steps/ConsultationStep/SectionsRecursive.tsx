@@ -33,6 +33,10 @@ const SectionsRecursive: React.FC<Props> = ({
         name: formKey,
     });
 
+    if ((sections?.length ?? 0) === 0) {
+        return null;
+    }
+
     const hasAtLeastOneSubSections = sections.some(section => {
         return (section?.sections?.length ?? 0) > 0;
     });

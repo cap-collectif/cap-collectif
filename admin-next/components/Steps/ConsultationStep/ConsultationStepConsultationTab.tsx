@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Box, Tabs } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
 import { useFormContext } from 'react-hook-form';
@@ -11,6 +11,7 @@ import {
     FormValues,
     getDefaultSection,
 } from '@components/Steps/ConsultationStep/ConsultationStepForm';
+import useUrlState from "../../../hooks/useUrlState";
 
 const QUERY_FRAGMENT = graphql`
     fragment ConsultationStepConsultationTab_query on Query {
@@ -22,15 +23,17 @@ type Props = {
     consultationIndex: number;
     removeConsultation: UseFieldArrayRemove;
     query: ConsultationStepConsultationTab_query$key;
-    isEditing: boolean;
 };
 
 const ConsultationStepConsultationTab: React.FC<Props> = ({
     consultationIndex,
     removeConsultation,
     query: queryRef,
-    isEditing,
 }) => {
+
+    const [operationType] = useUrlState('operationType', 'EDIT');
+    const isEditing = operationType === 'EDIT';
+
     const ConsultationCreationTypeEnum = {
         NEW: `NEW-${consultationIndex}`,
         MODEL: `MODEL-${consultationIndex}`,
@@ -39,7 +42,7 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
     const query = useFragment(QUERY_FRAGMENT, queryRef);
 
     const intl = useIntl();
-    const { watch, setValue } = useFormContext<FormValues>();
+    const { setValue, watch } = useFormContext<FormValues>();
 
     const consultationFormKey = `consultations.${consultationIndex}` as `consultations.${number}`;
     const sectionsFormKey = `${consultationFormKey}.sections` as `consultations.${number}.sections`;
@@ -48,9 +51,12 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
         ConsultationCreationTypeEnum.NEW,
     );
 
+    // we store the current NEW tab consultation in a ref to not lose the value when switching with model tab
+    const newTabConsultationRef = useRef(null);
+    const modelTabConsultationRef = useRef(null);
     const consultation = watch(consultationFormKey);
 
-    if (isEditing && consultation.model) {
+    if (isEditing) {
         return (
             <Box
                 id={`consultation-${consultationIndex}`}
@@ -58,14 +64,12 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
                 bg="gray.100"
                 borderRadius={8}
                 mb={4}>
-                <ConsultationModel query={query} consultationFormKey={consultationFormKey}>
-                    <ConsultationForm
-                        consultationIndex={consultationIndex}
-                        consultationFormKey={consultationFormKey}
-                        sectionsFormKey={sectionsFormKey}
-                        removeConsultation={removeConsultation}
-                    />
-                </ConsultationModel>
+                <ConsultationForm
+                    consultationIndex={consultationIndex}
+                    consultationFormKey={consultationFormKey}
+                    sectionsFormKey={sectionsFormKey}
+                    removeConsultation={removeConsultation}
+                />
             </Box>
         );
     }
@@ -81,17 +85,17 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
                         previousSelectedTab === ConsultationCreationTypeEnum.MODEL &&
                         selectedTab === ConsultationCreationTypeEnum.NEW
                     ) {
-                        setValue(`${consultationFormKey}.title`, '');
-                        setValue(`${consultationFormKey}.description`, '');
-                        setValue(`${consultationFormKey}.sections`, [getDefaultSection(intl)]);
+                        modelTabConsultationRef.current = consultation;
+                        setValue(`${consultationFormKey}`, newTabConsultationRef?.current);
                     }
                     if (
                         previousSelectedTab === ConsultationCreationTypeEnum.NEW &&
                         selectedTab === ConsultationCreationTypeEnum.MODEL
                     ) {
-                        setValue(`${consultationFormKey}.title`, '');
-                        setValue(`${consultationFormKey}.description`, '');
-                        setValue(`${consultationFormKey}.sections`, []);
+                        if (consultation.model === null) {
+                            newTabConsultationRef.current = consultation;
+                            setValue(`${consultationFormKey}`, modelTabConsultationRef?.current);
+                        }
                     }
                     setPreviousSelectedTab(selectedTab);
                 }}>

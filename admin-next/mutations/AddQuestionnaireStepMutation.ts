@@ -12,7 +12,7 @@ const mutation = graphql`
     mutation AddQuestionnaireStepMutation($input: AddStepInput!) {
         addQuestionnaireStep(input: $input) {
             step {
-                adminUrl
+                adminUrl(operationType: CREATE)
             }
         }
     }

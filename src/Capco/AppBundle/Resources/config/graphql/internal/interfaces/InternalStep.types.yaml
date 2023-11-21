@@ -62,4 +62,7 @@ InternalStep:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportContributorsResolver", [value])'
             adminUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAdminUrlResolver", [value])'
+                args:
+                    operationType:
+                        type: 'StepAdminUrlOperationType'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAdminUrlResolver", [value, args])'

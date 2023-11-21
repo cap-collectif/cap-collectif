@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import {
     ConsultationStepFormQueryResponse,
@@ -34,6 +34,7 @@ import { mutationErrorToast } from '@utils/mutation-error-toast';
 import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.graphql';
 import ConsultationStepRequirementsTabs from '@components/Requirements/ConsultationStepRequirementsTabs';
 import { onBack } from '@components/Steps/utils';
+import useUrlState from "../../../hooks/useUrlState";
 
 type Props = {
     stepId: string;
@@ -92,7 +93,6 @@ type QueryResponse = DeepWriteable<ConsultationStepFormQueryResponse>;
 graphql`
     fragment ConsultationStepFormSectionFragment on Section {
         color
-        id
         position
         title
         description
@@ -143,14 +143,17 @@ const CONSULTATION_STEP_QUERY = graphql`
                                 url(format: "reference")
                             }
                             sections {
+                                id
                                 ...ConsultationStepFormSectionFragment @relay(mask: false)
                                 sections {
+                                    id
                                     ...ConsultationStepFormSectionFragment @relay(mask: false)
                                     sections {
+                                        id
                                         ...ConsultationStepFormSectionFragment @relay(mask: false)
                                         sections {
-                                            ...ConsultationStepFormSectionFragment
-                                                @relay(mask: false)
+                                            id
+                                            ...ConsultationStepFormSectionFragment @relay(mask: false)
                                         }
                                     }
                                 }
@@ -190,6 +193,9 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
         stepId,
     }) as QueryResponse;
 
+    const [operationType, setOperationType] = useUrlState('operationType', 'EDIT');
+    const isEditing = operationType === 'EDIT';
+
     const { setBreadCrumbItems } = useNavBarContext();
 
     const { step, availableLocales } = query;
@@ -197,10 +203,6 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
 
     const defaultLocale =
         availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr';
-
-    const [isEditing, setIsEditing] = useState(() => {
-        return !!step?.label;
-    });
 
     const getBreadCrumbItems = () => {
         const breadCrumbItems = [
@@ -228,7 +230,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
     useEffect(() => {
         setBreadCrumbItems(getBreadCrumbItems());
         return () => setBreadCrumbItems([]);
-    }, []);
+    }, [setBreadCrumbItems]);
 
     const getDefaultValues = (): FormValues => {
         const stepDurationType = step
@@ -244,7 +246,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
             .map(consultation => {
                 return {
                     ...consultation,
-                    model: consultation.id ?? null,
+                    model: null,
                 };
             });
 
@@ -300,19 +302,19 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
             const sections = consultation.sections.map((section, sectionIndex) => {
                 return {
                     ...section,
-                    id: section.id.startsWith('temp-') ? undefined : section.id,
+                    id: section?.id?.startsWith('temp-') ? undefined : section.id,
                     color: 'white',
                     position: sectionIndex,
                 };
             });
 
-            if (consultation?.model) {
+            if (consultation.hasOwnProperty('model')) {
                 delete consultation.model;
             }
 
             return {
                 ...consultation,
-                id: consultation.id.startsWith('temp-') ? undefined : consultation.id,
+                id: consultation?.id?.startsWith('temp-') ? undefined : consultation.id,
                 title: consultation.title || intl.formatMessage({ id: 'consultation-form' }),
                 position: consultationIndex,
                 illustration: consultation?.illustration?.id ?? null,
@@ -345,7 +347,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
                 input: updateStepInput,
             });
 
-            setIsEditing(true);
+            setOperationType('EDIT');
 
             toast({
                 variant: 'success',
@@ -453,7 +455,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId }) => {
                         </Flex>
                     ) : null}
 
-                    <ConsultationStepConsultations query={query} isEditing={isEditing} />
+                    <ConsultationStepConsultations query={query} />
 
                     <Accordion color={CapUIAccordionColor.Transparent} defaultAccordion={intl.formatMessage({ id: 'required-infos-to-participate' })}>
                         <Accordion.Item

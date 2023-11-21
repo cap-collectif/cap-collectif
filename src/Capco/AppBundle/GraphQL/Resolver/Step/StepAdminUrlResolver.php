@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\Common\Util\ClassUtils;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\RouterInterface;
@@ -33,8 +34,10 @@ class StepAdminUrlResolver implements ResolverInterface
         $this->router = $router;
     }
 
-    public function __invoke(AbstractStep $step): string
+    public function __invoke(AbstractStep $step, Argument $args): string
     {
+        $operationType = $args->offsetGet('operationType');
+
         $className = ClassUtils::getClass($step);
         $stepType = self::ADMIN_NEXT_STEP_TYPE[$className];
 
@@ -46,6 +49,12 @@ class StepAdminUrlResolver implements ResolverInterface
         $classNameWithoutNameSpace = end($splittedClassName);
         $stepId = GlobalId::toGlobalId($classNameWithoutNameSpace, $step->getId());
 
-        return "{$baseUrl}/admin-next/project/{$projectId}/update-step/{$stepType}/{$stepId}";
+        $url = "{$baseUrl}/admin-next/project/{$projectId}/update-step/{$stepType}/{$stepId}";
+
+        if (!$operationType) {
+            return $url;
+        }
+
+        return "{$url}?operationType={$operationType}";
     }
 }

@@ -19,10 +19,9 @@ export default new (class AdminConsultationPage {
     return cy
   }
 
-  visitConsultationPage() {
-    cy.visit(
-      '/admin-next/project/UHJvamVjdDpwcm9qZWN0MQ==/update-step/consultation-step/Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=',
-    )
+  visitConsultationPage(operationType: 'EDIT' | 'CREATE' = 'EDIT') {
+    const url = `/admin-next/project/UHJvamVjdDpwcm9qZWN0MQ==/update-step/consultation-step/Q29uc3VsdGF0aW9uU3RlcDpjc3RlcDE=?operationType=${operationType}`
+    cy.visit(url)
     cy.interceptGraphQLOperation({ operationName: 'ConsultationStepFormQuery' })
   }
 
@@ -47,8 +46,14 @@ export default new (class AdminConsultationPage {
     return cy.getByDataCy(`consultations.${consultationIndex}-append-section-button`).click()
   }
 
-  getSectionsList(consultationIndex = 0) {
-    return cy.get(`[data-rbd-droppable-id="consultations.${consultationIndex}.sections"]`).children()
+  getSectionsList(consultationIndex = 0, type: 'MODEL' | 'NEW' | 'EDIT' = 'EDIT') {
+    let selector = ''
+    if (['NEW', 'MODEL'].includes(type)) {
+      selector += `[aria-labelledby=${type}-${consultationIndex}] `
+    }
+
+    selector += `[data-rbd-droppable-id="consultations.${consultationIndex}.sections"]`
+    return cy.get(selector)
   }
 
   getSectionItem(consultationIndex: number, sectionIndex: number) {
@@ -135,32 +140,33 @@ export default new (class AdminConsultationPage {
     return cy.get('#consultations-list').children()
   }
 
-  fillConsultation(consultationIndex: number, mode: 'NEW' | 'MODEL', data: ConsutlationData) {
+  fillConsultation(consultationIndex: number, data: ConsutlationData) {
     const { title, description } = data
-    cy.get(`[aria-labelledby="${mode}-${consultationIndex}"] [name="consultations.${consultationIndex}.title"]`).type(
-      title,
-    )
+    cy.get(`[name="consultations.${consultationIndex}.title"]`).type(title)
 
     if (description) {
-      cy.get(
-        `[aria-labelledby="${mode}-${consultationIndex}"] [name="consultations.${consultationIndex}.description"]`,
-      ).type(description)
+      cy.get(`[name="consultations.${consultationIndex}.description"]`).type(description)
     }
   }
 
   fillModel(consultationIndex: number, consultationTitle: string) {
+    cy.contains('from_model').click()
     cy.get(`[id="consultations.${consultationIndex}.model"] .cap-select__input-container`)
       .click()
       .type(consultationTitle)
     cy.get('body').type('{enter}')
   }
 
-  getAppendSectionButton(consultationIndex: number) {
-    return cy.getByDataCy(`consultations.${consultationIndex}-append-section-button`)
+  getAppendSectionButton(consultationIndex: number, type: 'MODEL' | 'NEW' = 'MODEL') {
+    return cy.get(
+      `[aria-labelledby="${type}-${consultationIndex}"] [data-cy="consultations.${consultationIndex}-append-section-button"]`,
+    )
   }
 
-  getSectionDeleteButton(consultationIndex: number, sectionIndex: number) {
-    return cy.getByDataCy(`consultations.${consultationIndex}.sections.${sectionIndex}-delete-button`)
+  getSectionDeleteButton(consultationIndex: number, sectionIndex: number, type: 'MODEL' | 'NEW' = 'MODEL') {
+    return cy.get(
+      `[aria-labelledby="${type}-${consultationIndex}"] [data-cy="consultations.${consultationIndex}.sections.${sectionIndex}-delete-button"]`,
+    )
   }
 
   openConsultationsAccordion() {
