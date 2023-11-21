@@ -11,11 +11,14 @@ import CreateProjectMutation from '@mutations/CreateProjectMutation';
 import { CreateProjectForm_viewer$key } from '@relay/CreateProjectForm_viewer.graphql';
 import { useNavBarContext } from '../../NavBar/NavBar.context';
 import { getParticipatoryBudgetInput } from './ConfigureParticipatoryBudgetInput';
+import { getParticipatoryBudgetAnalysisInput } from './ConfigureParticipatoryBudgetAnalysisInput';
 import PreConfigureProjectMutation from '@mutations/PreConfigureProjectMutation';
 import { CreateProjectMutationResponse } from '@relay/CreateProjectMutation.graphql';
 import { PreConfigureProjectMutationResponse } from '@relay/PreConfigureProjectMutation.graphql';
 
-type ProjectModelType = 'PARTICIPATORY_BUDGET';
+type ParticipatoryBudget = 'PARTICIPATORY_BUDGET';
+
+type ParticipatoryBudgetAnalysis = 'PARTICIPATORY_BUDGET_ANALYSIS';
 
 type Props = {
     viewer: CreateProjectForm_viewer$key;
@@ -29,7 +32,7 @@ type MutationResponse = CreateProjectMutationResponse | PreConfigureProjectMutat
 type FormValues = {
     title: string;
     authors: Array<{ label: string; value: string }>;
-    model: ProjectModelType | null;
+    model: ParticipatoryBudget | ParticipatoryBudgetAnalysis | null;
 };
 
 const VIEWER_FRAGMENT = graphql`
@@ -61,6 +64,10 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
         {
             value: 'PARTICIPATORY_BUDGET',
             label: intl.formatMessage({ id: 'project.types.participatoryBudgeting' }),
+        },
+        {
+            value: 'PARTICIPATORY_BUDGET_ANALYSIS',
+            label: intl.formatMessage({ id: 'project.types.participatoryBudgetingAnalysis' }),
         },
     ];
 
@@ -121,12 +128,24 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                 case 'PARTICIPATORY_BUDGET':
                     const participatoryBudgetInput = getParticipatoryBudgetInput({
                         projectTitle: title,
-                        authors,
-                        intl,
+                        authors: authors,
+                        intl: intl,
                     });
 
                     response = await PreConfigureProjectMutation.commit({
                         input: participatoryBudgetInput,
+                    });
+                    project = response.preConfigureProject?.project;
+                    break;
+                case 'PARTICIPATORY_BUDGET_ANALYSIS':
+                    const participatoryBudgetAnalysisInput = getParticipatoryBudgetAnalysisInput({
+                        projectTitle: title,
+                        authors: authors,
+                        intl: intl,
+                    });
+
+                    response = await PreConfigureProjectMutation.commit({
+                        input: participatoryBudgetAnalysisInput,
                     });
                     project = response.preConfigureProject?.project;
                     break;
@@ -158,26 +177,26 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
 
     return (
         <Box>
-            <Box maxWidth="437px">
-                <Text color="blue.900" fontSize={5} fontWeight={600} mb={4}>
+            <Box maxWidth='437px'>
+                <Text color='blue.900' fontSize={5} fontWeight={600} mb={4}>
                     {intl.formatMessage({ id: 'customize-your-new-project' })}
                 </Text>
-                <Text color="blue.900" fontSize={4} fontWeight={400} width="100%">
+                <Text color='blue.900' fontSize={4} fontWeight={400} width='100%'>
                     {intl.formatMessage({ id: 'create-project-help-text' })}
                 </Text>
-                <Box mt={5} as="form" onSubmit={handleSubmit(onSubmit)}>
-                    <FormControl name="title" control={control} isRequired>
+                <Box mt={5} as='form' onSubmit={handleSubmit(onSubmit)}>
+                    <FormControl name='title' control={control} isRequired>
                         <FormLabel
-                            htmlFor="title"
+                            htmlFor='title'
                             label={intl.formatMessage({ id: 'global.project.name' })}
                         />
                         <FieldInput
                             ref={inputTitleRef}
-                            data-cy="create-project-modal-title"
-                            id="title"
-                            name="title"
+                            data-cy='create-project-modal-title'
+                            id='title'
+                            name='title'
                             control={control}
-                            type="text"
+                            type='text'
                             onFocus={() => {
                                 setShowHelpMessage(true);
                             }}
@@ -187,30 +206,30 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                         />
                     </FormControl>
                     <FormControl
-                        name="authors"
+                        name='authors'
                         control={control}
                         isRequired
                         isDisabled={isOnlyProjectAdmin || !!organization}
-                        data-cy="create-project-modal-authors">
+                        data-cy='create-project-modal-authors'>
                         <FormLabel
-                            htmlFor="authors"
+                            htmlFor='authors'
                             label={intl.formatMessage({ id: 'project.owner' })}
                         />
-                        <UserListField name="authors" control={control} isMulti />
+                        <UserListField name='authors' control={control} isMulti />
                     </FormControl>
-                    <FormControl name="model" control={control}>
+                    <FormControl name='model' control={control}>
                         <FormLabel
-                            htmlFor="model"
+                            htmlFor='model'
                             label={intl.formatMessage({ id: 'global.model' })}>
-                            <Text color="gray.500">
+                            <Text color='gray.500'>
                                 {intl.formatMessage({ id: 'global.optional' })}
                             </Text>
                         </FormLabel>
                         <FieldInput
-                            name="model"
+                            name='model'
                             control={control}
                             options={modelOptions}
-                            type="select"
+                            type='select'
                             clearable
                             placeholder={intl.formatMessage({
                                 id: 'global.model',
@@ -218,13 +237,13 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
                         />
                     </FormControl>
                     <Button
-                        data-cy="create-project-create-button"
+                        data-cy='create-project-create-button'
                         mt={5}
-                        variant="primary"
-                        variantColor="primary"
-                        variantSize="big"
+                        variant='primary'
+                        variantColor='primary'
+                        variantSize='big'
                         mr={8}
-                        type="submit"
+                        type='submit'
                         isLoading={isSubmitting}
                         disabled={!isValid}>
                         {intl.formatMessage({ id: 'lets-go' })}
