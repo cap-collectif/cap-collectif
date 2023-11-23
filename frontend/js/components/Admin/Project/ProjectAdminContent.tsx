@@ -11,7 +11,7 @@ import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query
 import '~relay/ProjectAdminContent_query.graphql'
 import environment from '~/createRelayEnvironment'
 import type { GlobalState } from '~/types'
-import ProjectAdminForm from './Form/ProjectAdminForm'
+import ProjectAdminForm from './Form/ProjectAdminForm';
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style'
 import {
   initialVariables as queryVariableProposal,
@@ -105,9 +105,14 @@ const formatNavbarLinks = (
   location: string,
   viewerIsAdmin: boolean,
   hasIdentificationCodeLists: boolean,
+  newCreateProjectFlag: boolean,
 ) => {
   const links = []
-  const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS')
+  const baseUrlContributions = getProjectAdminPath(
+    project._id,
+    'CONTRIBUTIONS',
+    newCreateProjectFlag,
+  )
   const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep')
   links.push({
     title: 'global.contribution',
@@ -121,8 +126,8 @@ const formatNavbarLinks = (
   links.push({
     title: 'capco.section.metrics.participants',
     count: project.contributors.totalCount,
-    url: getProjectAdminPath(project._id, 'PARTICIPANTS'),
-    to: getProjectAdminPath(project._id, 'PARTICIPANTS'),
+    url: getProjectAdminPath(project._id, 'PARTICIPANTS', newCreateProjectFlag),
+    to: getProjectAdminPath(project._id, 'PARTICIPANTS', newCreateProjectFlag),
     component: () => (
       <ProjectAdminParticipantsProvider>
         <ProjectAdminParticipantTab projectId={project.id} dataPrefetch={dataPrefetchPage.participant} />
@@ -133,8 +138,8 @@ const formatNavbarLinks = (
   if (project.hasAnalysis) {
     links.push({
       title: 'proposal.tabs.evaluation',
-      url: getProjectAdminPath(project._id, 'ANALYSIS'),
-      to: getProjectAdminPath(project._id, 'ANALYSIS'),
+      url: getProjectAdminPath(project._id, 'ANALYSIS', newCreateProjectFlag),
+      to: getProjectAdminPath(project._id, 'ANALYSIS', newCreateProjectFlag),
       count: project.firstAnalysisStep ? project.firstAnalysisStep.proposals.totalCount : undefined,
       component: () => (
         <ProjectAdminProposalsProvider firstCollectStepId={firstCollectStepId}>
@@ -146,20 +151,31 @@ const formatNavbarLinks = (
 
   links.push({
     title: 'global.configuration',
-    url: getProjectAdminPath(project._id, 'CONFIGURATION'),
-    to: getProjectAdminPath(project._id, 'CONFIGURATION'),
-    component: () => (
-      <ProjectAdminForm
-        project={project}
-        onTitleChange={setTitle}
-        viewerIsAdmin={viewerIsAdmin}
-        query={query}
-        hasIdentificationCodeLists={hasIdentificationCodeLists}
-      />
+    url: getProjectAdminPath(
+      newCreateProjectFlag ? project.id : project._id,
+      'CONFIGURATION',
+      newCreateProjectFlag,
     ),
-  })
-  return links
-}
+    to: getProjectAdminPath(
+      newCreateProjectFlag ? project.id : project._id,
+      'CONFIGURATION',
+      newCreateProjectFlag,
+    ),
+    component: () =>
+      newCreateProjectFlag ? (
+        <></>
+      ) : (
+        <ProjectAdminForm
+          project={project}
+          onTitleChange={setTitle}
+          viewerIsAdmin={viewerIsAdmin}
+          query={query}
+          hasIdentificationCodeLists={hasIdentificationCodeLists}
+        />
+      ),
+  });
+  return links;
+};
 
 export const ProjectAdminContent = ({
   project,
@@ -172,6 +188,8 @@ export const ProjectAdminContent = ({
   const [title, setTitle] = useState<string>(project.title)
   const path = getProjectAdminBaseUrl(project._id)
   const hasProjectRevisionEnabled = useFeatureFlag('proposal_revisions')
+  const newCreateProjectFlag = useFeatureFlag('unstable__new_create_project');
+
   const dataAnalysisPrefetch = loadQuery()
   dataAnalysisPrefetch.next(
     environment,
@@ -257,6 +275,7 @@ export const ProjectAdminContent = ({
         location.pathname,
         viewerIsAdmin,
         hasIdentificationCodeLists,
+        newCreateProjectFlag,
       ),
     [
       project,
@@ -268,6 +287,7 @@ export const ProjectAdminContent = ({
       location.pathname,
       viewerIsAdmin,
       hasIdentificationCodeLists,
+      newCreateProjectFlag,
     ],
   )
   return (
@@ -284,9 +304,14 @@ export const ProjectAdminContent = ({
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname.includes(link.url)}>
-              <Link to={link.to}>
-                <FormattedMessage id={link.title} />
-              </Link>
+                {(link.title === 'global.configuration' && newCreateProjectFlag) ? (
+                    <a href={link.to} id="qsgqsg"   >
+                        <FormattedMessage id={link.title} />
+                    </a>
+                ): ( <Link to={link.to}  >
+                    <FormattedMessage id={link.title} />
+                </Link>)}
+
 
               {link.count !== undefined && <Count active={location.pathname.includes(link.url)}>{link.count}</Count>}
             </NavItem>

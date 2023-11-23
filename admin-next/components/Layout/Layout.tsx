@@ -118,6 +118,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                                 p={6}
                                 className="container-content"
                                 overflowY="scroll"
+                                position="relative"
                                 ref={contentRef}>
                                 {children}
                             </Box>

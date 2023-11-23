@@ -17,9 +17,10 @@ import { mutationErrorToast } from '@utils/mutation-error-toast';
 import moment from 'moment';
 import { ProjectVisibility } from '@relay/CreateProjectMutation.graphql';
 import { yupResolver } from '@hookform/resolvers/yup';
+import ProjectTabs from '@components/Projects/ProjectTabs';
 
 export type ProjectConfigFormProps = {
-    project: ProjectConfigForm_project$key,
+    project: ProjectConfigForm_project$key;
 };
 
 export const QUERY = graphql`
@@ -108,6 +109,7 @@ const FRAGMENT = graphql`
             __typename
         }
         ...ProjectConfigFormSide_project
+        ...ProjectTabs_project
     }
 `;
 
@@ -224,25 +226,29 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
     }, [watch]);
 
     return (
-        <Flex
-            as="form"
-            id={formName}
-            onSubmit={handleSubmit(onSubmit)}
-            direction="column"
-            alignItems="flex-start"
-            spacing={6}>
-            <FormProvider {...methods}>
-                <Flex direction="row" width="100%" spacing={6}>
-                    <Flex direction="column" spacing={6} width="70%">
-                        <ProjectConfigFormGeneral query={query} />
-                        <ProjectConfigFormSteps />
+        <>
+            <ProjectTabs project={project} />
+            <Flex
+                marginTop="48px"
+                as="form"
+                id={formName}
+                onSubmit={handleSubmit(onSubmit)}
+                direction="column"
+                alignItems="flex-start"
+                spacing={6}>
+                <FormProvider {...methods}>
+                    <Flex direction="row" width="100%" spacing={6}>
+                        <Flex direction="column" spacing={6} width="70%">
+                            <ProjectConfigFormGeneral query={query} />
+                            <ProjectConfigFormSteps />
+                        </Flex>
+                        <Flex direction="column" spacing={6} width="30%">
+                            <ProjectConfigFormSide query={query} project={project} />
+                        </Flex>
                     </Flex>
-                    <Flex direction="column" spacing={6} width="30%">
-                        <ProjectConfigFormSide query={query} project={project} />
-                    </Flex>
-                </Flex>
-            </FormProvider>
-        </Flex>
+                </FormProvider>
+            </Flex>
+        </>
     );
 };
 
