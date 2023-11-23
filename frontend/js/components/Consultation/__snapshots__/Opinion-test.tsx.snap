@@ -9,7 +9,6 @@ exports[`<Opinion /> renders correcty 1`] = `
   <Opinion__OpinionContainer
     isFlex={false}
   >
-    ,
     <Relay(OpinionPreview)
       opinion={
         Object {

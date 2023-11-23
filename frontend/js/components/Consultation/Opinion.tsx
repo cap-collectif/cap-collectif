@@ -48,7 +48,7 @@ export class Opinion extends React.Component<Props> {
         className={`list-group-item__opinion opinion text-left has-chart${author && author.vip ? ' bg-vip' : ''}`}
       >
         <OpinionContainer isFlex={opinion.votes && opinion.votes.totalCount > 0}>
-          {/** @ts-ignore */},
+          {/** @ts-ignore */}
           <OpinionPreview opinion={opinion} showUpdatedDate={showUpdatedDate} />
           {opinion.votes && opinion.votes.totalCount > 0 ? (
             <VotePiechart
