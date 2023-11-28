@@ -1,7 +1,0 @@
-UpdateJumpsPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            questions:
-                type: '[InternalQuestion!]!'
-                description: 'The updated questions.'

@@ -83,7 +83,7 @@ class QuestionJumpsHandler
         }
 
         foreach ($questionnaire['questions'] as &$questionData) {
-            unset($questionData['question']['jumps']);
+            unset($questionData['question']['alwaysJumpDestinationQuestion'], $questionData['question']['jumps']);
         }
     }
 

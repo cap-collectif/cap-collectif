@@ -7326,21 +7326,6 @@ input LogicJumpInput {
   conditions: [LogicJumpConditionInput]
 }
 
-input LogicJumpInputNew {
-  id: ID
-  always: Boolean
-
-  """
-  The id of the question where the logic jump end if the conditions are fulfilled
-  """
-  destination: ID!
-
-  """
-  A collection of conditions that you have to fulfill for displaying the destination question
-  """
-  conditions: [LogicJumpConditionInput!]!
-}
-
 """A list of users to send email"""
 type MailingList implements Node {
   """uuid of the mailing list"""
@@ -8263,7 +8248,6 @@ type Mutation {
   deleteStep(input: DeleteStepInput!): DeleteStepPayload
   updateDebateStep(input: UpdateDebateStepInput!): UpdateDebateStepPayload
   updateQuestionnaireStep(input: UpdateQuestionnaireStepInput!): UpdateQuestionnaireStepPayload
-  updateJumps(input: UpdateJumpsInput!): UpdateJumpsPayload
   updateCollectStep(input: UpdateCollectStepInput!): UpdateCollectStepPayload
   updateSelectionStep(input: UpdateSelectionStepInput!): UpdateSelectionStepPayload
   updateNewProject(input: UpdateNewProjectInput!): UpdateNewProjectPayload
@@ -13324,17 +13308,6 @@ input QuestionInput {
   temporaryId: ID
 }
 
-input QuestionJumpInput {
-  """The question ID."""
-  questionId: ID!
-
-  """The question to display if no conditions are met."""
-  alwaysJumpDestinationQuestion: ID
-
-  """The logic jumps associated to the question."""
-  jumps: [LogicJumpInputNew]!
-}
-
 """Value of type of question"""
 enum QuestionTypeValue {
   text
@@ -17300,20 +17273,6 @@ type UpdateHomePageProjectsSectionConfigurationPayload {
 
   """An unsuccessful mutation will return an error."""
   errorCode: UpdateHomePageProjectsSectionConfigurationErrorCode
-  clientMutationId: String
-}
-
-input UpdateJumpsInput {
-  questionsJumps: [QuestionJumpInput]!
-
-  """The questionnaire associated to the jump."""
-  questionnaireId: ID!
-  clientMutationId: String
-}
-
-type UpdateJumpsPayload {
-  """The updated questions."""
-  questions: [Question!]!
   clientMutationId: String
 }
 

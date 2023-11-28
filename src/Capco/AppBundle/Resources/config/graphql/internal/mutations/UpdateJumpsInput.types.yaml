@@ -1,9 +1,0 @@
-UpdateJumpsInput:
-    type: relay-mutation-input
-    config:
-        fields:
-            questionsJumps:
-                type: '[QuestionJumpInput]!'
-            questionnaireId:
-                type: 'ID!'
-                description: 'The questionnaire associated to the jump.'

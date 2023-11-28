@@ -1739,13 +1739,6 @@ InternalMutation:
                     inputType: UpdateQuestionnaireStepInput
                     payloadType: UpdateQuestionnaireStepPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateQuestionnaireStepMutation", [value, getUser()])'
-            updateJumps:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateJumpsMutation").isGranted(args["input"]["questionnaireId"], getUser())'
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: UpdateJumpsInput
-                    payloadType: UpdateJumpsPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateJumpsMutation", [value, getUser()])'
             updateCollectStep:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCollectStepMutation").isGranted(args["input"]["stepId"], getUser())'
                 builder: 'Relay::Mutation'

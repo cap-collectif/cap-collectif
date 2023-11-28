@@ -24,16 +24,4 @@ class LogicJumpRepository extends EntityRepository
             ->getResult()
         ;
     }
-
-    public function findJumpsByQuestions(array $questionsId): array
-    {
-        $query = $this->createQueryBuilder('j')
-            ->where('j.origin IN (:questionsId)')
-            ->orWhere('j.destination IN (:questionsId)')
-            ->setParameter('questionsId', $questionsId)
-            ->getQuery()
-        ;
-
-        return $query->getResult();
-    }
 }
