@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UnfollowProposalMutation implements MutationInterface
 {
@@ -55,7 +56,9 @@ class UnfollowProposalMutation implements MutationInterface
 
         $this->em->flush();
 
-        return ['proposal' => $proposal, 'unfollowerId' => $user->getId()];
+        $unfollowerId = GlobalId::toGlobalId('User', $user->getId());
+
+        return ['proposal' => $proposal, 'unfollowerId' => $unfollowerId];
     }
 
     protected function unfollowAProposal(Proposal $proposal, User $user): void
