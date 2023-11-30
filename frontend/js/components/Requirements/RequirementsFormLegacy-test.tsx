@@ -84,6 +84,7 @@ describe('<RequirementsFormLegacy />', () => {
       <RequirementsFormLegacy
         step={step}
         isAuthenticated
+        onValidate={jest.fn()}
         {...formMock}
         isIdentificationCodeValid={isIdentificationCodeValid}
       />,
@@ -100,7 +101,13 @@ describe('<RequirementsFormLegacy />', () => {
       requirement5: false,
       requirement6: false,
     }
-    const props = { ...formMock, step, pristine: false, isAuthenticated: false, isIdentificationCodeValid }
+    const props = {
+      ...formMock,
+      step,
+      pristine: false,
+      isAuthenticated: false,
+      onValidate: jest.fn(),
+      isIdentificationCodeValid}
     const dispatch = jest.fn()
     expect(onChange(previousValues, dispatch, props, previousValues)).toMatchSnapshot()
     jest.runAllTimers()
@@ -126,7 +133,13 @@ describe('<RequirementsFormLegacy />', () => {
       requirement5: true,
       requirement6: 'GG2AZR54',
     }
-    const props = { ...formMock, step, isAuthenticated: false, pristine: false, isIdentificationCodeValid }
+    const props = {
+      ...formMock,
+      step,
+      isAuthenticated: false,
+      onValidate: jest.fn(),
+      pristine: false,
+      isIdentificationCodeValid}
     const dispatch = jest.fn()
     expect(onChange(values, dispatch, props, previousValues)).toMatchSnapshot()
     jest.runAllTimers()
@@ -137,7 +150,13 @@ describe('<RequirementsFormLegacy />', () => {
     expect(UpdateProfilePersonalDataMutation.commit).toMatchSnapshot()
   })
   it('validate correctly', () => {
-    const props = { ...formMock, pristine: false, step, isAuthenticated: false, isIdentificationCodeValid }
+    const props = {
+      ...formMock,
+      pristine: false,
+      step,
+      isAuthenticated: false,
+      onValidate: jest.fn(),
+      isIdentificationCodeValid }
     expect(
       validate(
         {},

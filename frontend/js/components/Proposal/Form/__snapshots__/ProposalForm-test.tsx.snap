@@ -18,7 +18,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help="Title help"
     id="proposal_title"
     label={
@@ -84,7 +84,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help="Summary help"
     id="global.summary"
     label={
@@ -108,7 +108,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help="Theme help"
     id="global.theme"
     label={
@@ -134,7 +134,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help="Category help"
     id="global.category"
     label={
@@ -171,7 +171,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
@@ -202,7 +202,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help="District help"
     id="proposal_district"
     label={
@@ -234,6 +234,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help="Description help"
     id="proposal_body"
     label={
@@ -249,7 +250,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -307,7 +308,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help
@@ -423,7 +424,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help="Title help"
     id="proposal_title"
     label={
@@ -489,7 +490,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help="Summary help"
     id="global.summary"
     label={
@@ -513,7 +514,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help="Theme help"
     id="global.theme"
     label={
@@ -539,7 +540,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help="Category help"
     id="global.category"
     label={
@@ -576,7 +577,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
@@ -607,7 +608,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help="District help"
     id="proposal_district"
     label={
@@ -639,6 +640,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help="Description help"
     id="proposal_body"
     label={
@@ -654,7 +656,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -712,7 +714,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help
@@ -824,7 +826,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help={null}
     id="proposal_title"
     label={
@@ -890,7 +892,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help={null}
     id="global.summary"
     label={
@@ -919,7 +921,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     className=""
     clearable={false}
     debounce={false}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_author_container"
     id="proposal-admin-author"
     inputClassName="fake-inputClassName"
     label={
@@ -947,7 +949,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
         "dateFormat": "DD/MM/YYYY HH:mm:ss",
       }
     }
-    divClassName="bo_width_200"
+    divClassName="bo_width_200 proposal_publishedAt_container"
     formName="proposal-form"
     id="proposal-publishedAt"
     label="global.date.text"
@@ -957,7 +959,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help={null}
     id="global.theme"
     label={
@@ -983,7 +985,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help={null}
     id="global.category"
     label={
@@ -1020,7 +1022,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help={null}
     id="proposal_address"
@@ -1051,7 +1053,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help={null}
     id="proposal_district"
     label={
@@ -1083,6 +1085,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help={null}
     id="proposal_body"
     label={
@@ -1098,7 +1101,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -1156,7 +1159,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help
@@ -1272,7 +1275,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help="Title help"
     id="proposal_title"
     label={
@@ -1338,7 +1341,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help="Summary help"
     id="global.summary"
     label={
@@ -1362,7 +1365,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help="Theme help"
     id="global.theme"
     label={
@@ -1388,7 +1391,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help="Category help"
     id="global.category"
     label={
@@ -1425,7 +1428,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
@@ -1456,7 +1459,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help="District help"
     id="proposal_district"
     label={
@@ -1488,6 +1491,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help="Description help"
     id="proposal_body"
     label={
@@ -1503,7 +1507,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -1561,7 +1565,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help
@@ -1677,7 +1681,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help="Title help"
     id="proposal_title"
     label={
@@ -1743,7 +1747,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help="Summary help"
     id="global.summary"
     label={
@@ -1767,7 +1771,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help="Theme help"
     id="global.theme"
     label={
@@ -1793,7 +1797,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help="Category help"
     id="global.category"
     label={
@@ -1830,7 +1834,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
@@ -1861,7 +1865,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help="District help"
     id="proposal_district"
     label={
@@ -1893,6 +1897,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help="Description help"
     id="proposal_body"
     label={
@@ -1908,7 +1913,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -1966,7 +1971,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help
@@ -2082,7 +2087,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     }
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_title_container"
     help="Title help"
     id="proposal_title"
     label={
@@ -2148,7 +2153,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   <Field
     autoComplete="off"
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_summary_container"
     help="Summary help"
     id="global.summary"
     label={
@@ -2172,7 +2177,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_theme_container"
     help="Theme help"
     id="global.theme"
     label={
@@ -2198,7 +2203,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   </Field>
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_category_container"
     help="Category help"
     id="global.category"
     label={
@@ -2235,7 +2240,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       }
     }
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_addressText_container"
     formName="proposal-form"
     help="Address help"
     id="proposal_address"
@@ -2266,7 +2271,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_560"
+    divClassName="bo_width_560 proposal_district_container"
     help="District help"
     id="proposal_district"
     label={
@@ -2298,6 +2303,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   </Field>
   <Field
     component={[Function]}
+    divClassName="bo_width_560 proposal_body_container"
     help="Description help"
     id="proposal_body"
     label={
@@ -2313,7 +2319,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     change={[MockFunction]}
     component={[Function]}
     dispatch={[MockFunction]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747_container"
     form="formName"
     intl={
       Object {
@@ -2371,7 +2377,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
   />
   <Field
     component={[Function]}
-    divClassName="bo_width_747"
+    divClassName="bo_width_747 proposal_media_container"
     help={
       <span>
         Illustration help

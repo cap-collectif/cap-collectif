@@ -46,6 +46,7 @@ type Props = ReduxFormFormProps & {
   isAuthenticated: boolean
   pristine: boolean
   isIdentificationCodeValid: boolean
+  onValidate: (errors: any) => void,
 }
 export const refetchViewer = graphql`
   query RequirementsFormLegacy_userQuery($stepId: ID!, $isAuthenticated: Boolean!) {
@@ -169,7 +170,7 @@ export const validate = (values: FormValues, props: Props) => {
       errors[fieldName] = 'global.required'
     }
   }
-
+  props.onValidate(errors);
   return errors
 }
 export const onChange = (values: FormValues, dispatch: Dispatch, props: Props, previousValues: FormValues): void => {

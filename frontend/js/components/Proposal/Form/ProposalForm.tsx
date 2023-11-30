@@ -44,6 +44,8 @@ import { mapOpenPopup } from '~/components/Proposal/Map/Map.events'
 import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql'
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql'
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
+import scrollToFormError from '~/components/Proposal/Form/ProposalForm.utils'
+
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
@@ -321,7 +323,6 @@ const validate = (values: FormValues, { proposalForm, features, intl, geoJsons, 
     if (!geoContains(geoJsons, address?.geometry?.location))
       return { ...errors, addressText: 'constraints.address_in_zone' }
   }
-
   return errors
 }
 
@@ -513,7 +514,7 @@ export class ProposalForm extends React.Component<Props, State> {
         {!isBackOfficeInput && <WYSIWYGRender className="mb-15" value={proposalForm.description} />}
         {error && this.renderError()}
         <Field
-          divClassName="bo_width_747"
+          divClassName="bo_width_747 proposal_title_container"
           name="title"
           component={component}
           type="text"
@@ -571,7 +572,7 @@ export class ProposalForm extends React.Component<Props, State> {
         ) : null}
         {proposalForm.usingSummary && (
           <Field
-            divClassName="bo_width_747"
+            divClassName="bo_width_747 proposal_summary_container"
             name="summary"
             component={component}
             type="textarea"
@@ -595,7 +596,7 @@ export class ProposalForm extends React.Component<Props, State> {
           <>
             <UserListField
               id="proposal-admin-author"
-              divClassName="bo_width_560"
+              divClassName="bo_width_560 proposal_author_container"
               name="author"
               ariaControls="ProposalAdminContentForm-filter-user-listbox"
               label={<FormattedMessage id="global.author" />}
@@ -619,7 +620,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 dateFormat: 'DD/MM/YYYY HH:mm:ss',
               }}
               type="datetime"
-              divClassName="bo_width_200"
+              divClassName="bo_width_200 proposal_publishedAt_container"
               formName={formName}
               component={component}
               placeholder="date.placeholder"
@@ -632,7 +633,7 @@ export class ProposalForm extends React.Component<Props, State> {
             name="theme"
             type="select"
             id="global.theme"
-            divClassName="bo_width_560"
+            divClassName="bo_width_560 proposal_theme_container"
             component={component}
             help={!isBackOfficeInput ? proposalForm.themeHelpText : null}
             label={
@@ -663,7 +664,7 @@ export class ProposalForm extends React.Component<Props, State> {
             id="global.category"
             type="select"
             name="category"
-            divClassName="bo_width_560"
+            divClassName="bo_width_560 proposal_category_container"
             component={component}
             help={!isBackOfficeInput ? proposalForm.categoryHelpText : null}
             label={
@@ -696,7 +697,7 @@ export class ProposalForm extends React.Component<Props, State> {
             type="address"
             help={!isBackOfficeInput ? proposalForm.addressHelpText : null}
             name="addressText"
-            divClassName="bo_width_560"
+            divClassName="bo_width_560 proposal_addressText_container"
             formName={formName}
             label={intl.formatMessage({
               id: 'proposal_form.address',
@@ -719,7 +720,7 @@ export class ProposalForm extends React.Component<Props, State> {
             id="proposal_district"
             type="select"
             name="district"
-            divClassName="bo_width_560"
+            divClassName="bo_width_560 proposal_district_container"
             component={component}
             help={!isBackOfficeInput ? proposalForm.districtHelpText : null}
             label={
@@ -746,6 +747,7 @@ export class ProposalForm extends React.Component<Props, State> {
             id="proposal_body"
             type="editor-ds"
             name="body"
+            divClassName="bo_width_560 proposal_body_container"
             component={component}
             placeholder={
               isBackOfficeInput
@@ -768,7 +770,7 @@ export class ProposalForm extends React.Component<Props, State> {
         <FieldArray
           name="responses"
           component={renderResponses}
-          divClassName="bo_width_747"
+          divClassName="bo_width_747_container"
           form={form}
           dispatch={dispatch}
           questions={proposalForm.questions}
@@ -782,7 +784,7 @@ export class ProposalForm extends React.Component<Props, State> {
         />
         {proposalForm.usingIllustration && (
           <Field
-            divClassName="bo_width_747"
+            divClassName="bo_width_747 proposal_media_container"
             maxSize={ILLUSTRATION_MAX_SIZE}
             id="proposal_media"
             name="media"
@@ -947,6 +949,9 @@ const form = reduxForm({
   form: formName,
   validate,
   onSubmit,
+  onSubmitFail: errors => {
+    scrollToFormError(errors)
+  },
 })(ProposalForm)
 // @ts-ignore
 const container = connect<any, any>(mapStateToProps)(injectIntl(form))

@@ -30,9 +30,10 @@ const Address = ({
   allowReset = true,
   showSearchBar = true,
 }: Props) => {
-  const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true)
-  const intl = useIntl()
-  const hasReset = allowReset && !!value
+  const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true);
+  const intl = useIntl();
+  const hasReset = allowReset && !!value;
+
 
   const dispatchLocationWarning = () => {
     FluxDispatcher.dispatch({

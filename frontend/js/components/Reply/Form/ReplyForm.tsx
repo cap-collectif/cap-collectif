@@ -57,6 +57,8 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
 import Section from '~/components/Form/Section/Section'
 import SectionTitle from '~ui/Form/Section/SectionTitle'
+import scrollToFormError from '~/components/Reply/Form/ReplyForm.utils'
+
 type Props = ReduxFormFormProps & {
   readonly questionnaire: ReplyForm_questionnaire
   readonly reply: ReplyForm_reply | null | undefined
@@ -101,6 +103,7 @@ const memoizeAvailableQuestions: any = memoize(() => {})
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, state: GlobalState) => {
   const { questionnaire, reply, history, setIsShow, isAnonymousReply, anonymousRepliesIds, isAuthenticated, intl } =
     props
+
   const data: any = {}
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions)
   data.draft = values.draft
@@ -249,7 +252,6 @@ const validate = (values: FormValues, props: Props) => {
   if (responsesError.responses && responsesError.responses.length) {
     errors.responses = responsesError.responses
   }
-
   return errors
 }
 
@@ -269,6 +271,10 @@ const asyncValidate = (values: FormValues) => {
 export const getFormNameUpdate = (id: string) => `Update${formName}-${id}`
 export class ReplyForm extends React.Component<Props, State> {
   formRef: ReactObjRef<'form'>
+
+  static defaultProps = {
+    reply: null,
+  }
 
   constructor() {
     super()
@@ -306,6 +312,15 @@ export class ReplyForm extends React.Component<Props, State> {
     const { setIsEditingReplyForm } = this.props
     window.removeEventListener('beforeunload', onUnload)
     if (setIsEditingReplyForm) setIsEditingReplyForm(false)
+  }
+
+  onRequirementsValidate(errors: any) {
+    const error = Object.keys(errors).filter(errorKey => errorKey !== 'form_valid')[0]
+    if (error) {
+      const selector = `label-${error}`
+      const element = document.getElementById(selector)
+      if (element) element.scrollIntoView(true)
+    }
   }
 
   submitReply(
@@ -427,7 +442,11 @@ export class ReplyForm extends React.Component<Props, State> {
                   <WYSIWYGRender value={questionnaire.step?.requirements?.reason} />
                 )}
 
-                <RequirementsFormLegacy step={questionnaire.step} stepId={questionnaire.step?.id} />
+                <RequirementsFormLegacy
+                  step={questionnaire.step}
+                  stepId={questionnaire.step?.id}
+                  onValidate={this.onRequirementsValidate.bind(this)}
+                />
               </WrapperWithMarge>
             </>
           )}
@@ -611,6 +630,9 @@ const form = reduxForm({
   asyncValidate: debounce(asyncValidate, 1000),
   enableReinitialize: true,
   destroyOnUnmount: false,
+  onSubmitFail: (errors, _, __, props: Props) => {
+    scrollToFormError(errors, props.reply)
+  },
 })(ReplyForm)
 // @ts-ignore
 const container = connect<any, any>(mapStateToProps)(injectIntl(form))

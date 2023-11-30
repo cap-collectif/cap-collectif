@@ -1854,6 +1854,7 @@ exports[`<ReplyForm /> should render correctly with requirements filled 1`] = `
       overflow="hidden"
     >
       <Relay(Connect(ReduxForm))
+        onValidate={[Function]}
         step={
           Object {
             " $fragmentRefs": null,
@@ -2053,6 +2054,7 @@ exports[`<ReplyForm /> should render correctly with requirements not full filled
       overflow="hidden"
     >
       <Relay(Connect(ReduxForm))
+        onValidate={[Function]}
         step={
           Object {
             " $fragmentRefs": null,
