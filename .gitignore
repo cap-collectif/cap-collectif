@@ -1,16 +1,21 @@
 # Generated files
 **/__generated__/**
+
+/frontend/js/__generated__/**
+!frontend/js/__generated__/.gitkeep
+
 schema.internal.json
 
 # Tests files
 __snapshots-diff__/*
 
 # Symfony directories
+/public/js/**
+!public/js/.gitkeep
 /public/bundles/
 /public/images/*
 /public/assets/*
 /public/css/*
-/public/js/*
 /public/media/*
 /public/uploads/*
 /public/export/*
