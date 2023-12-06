@@ -94,7 +94,7 @@ export const EventFormAnonymousModal = ({ eventId, register }: Props) => {
               <FormLabel
                 htmlFor="EventFormAnonymousModal-username"
                 label={intl.formatMessage({
-                  id: 'form.label_username',
+                  id: 'form.label_firstname_lastname',
                 })}
               />
               <FieldInput id="EventFormAnonymousModal-username" name="username" control={control} type="text" />
