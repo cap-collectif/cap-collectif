@@ -115,6 +115,8 @@ class Manager
         self::developer_documentation,
         self::new_project_card,
         self::unstable__paper_vote,
+        self::projects_form,
+        self::project_trash,
     ];
 
     public static $toggles = [
