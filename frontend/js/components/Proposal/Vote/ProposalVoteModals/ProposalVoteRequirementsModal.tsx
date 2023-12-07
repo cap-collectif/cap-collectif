@@ -225,6 +225,18 @@ const ProposalVoteRequirementsModal = ({
   const { goToNextStep, hide } = useMultiStepModal()
   const { control, formState, trigger, setValue } = requirementsForm
 
+  const hasErrors = () => {
+    const isFCRequired = initialValues.hasOwnProperty('FranceConnectRequirement');
+    const hasFormErrors = Object.keys(requirementsForm.formState.errors).length > 0;
+
+    if (!isFCRequired) {
+      return hasFormErrors
+    }
+
+    return hasFormErrors || !initialValues['FranceConnectRequirement']
+  }
+
+
   const onClick = e => {
     requirementsForm.handleSubmit(data => {
       onRequirementsSubmit(
@@ -277,7 +289,7 @@ const ProposalVoteRequirementsModal = ({
           variantSize="medium"
           variant="secondary"
           isLoading={requirementsForm.formState.isSubmitting || isLoading}
-          disabled={Object.keys(requirementsForm.formState.errors).length > 0}
+          disabled={hasErrors()}
           rightIcon={CapUIIcon.LongArrowRight}
           onClick={onClick}
         >
