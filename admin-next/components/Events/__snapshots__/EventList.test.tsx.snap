@@ -356,7 +356,7 @@ Array [
             03/01/2015
           </td>
           <td
-            className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -538,7 +538,7 @@ Array [
             01/01/2015
           </td>
           <td
-            className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -653,7 +653,7 @@ Array [
             06/01/2015
           </td>
           <td
-            className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+            className="sc-bdnxRM jWrtJR cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",

@@ -182,7 +182,7 @@ const EventItem: React.FC<Props> = ({
                         year: 'numeric',
                     })}
             </Table.Td>
-            <Table.Td visibleOnHover>
+            <Table.Td>
                 <Flex direction="row" justify="space-evenly">
                     {!!event.exportParticipantsUrl && event.guestListEnabled && (
                         <ButtonQuickAction
