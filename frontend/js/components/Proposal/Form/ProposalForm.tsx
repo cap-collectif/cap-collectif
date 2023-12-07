@@ -46,6 +46,8 @@ import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMut
 import { getAvailabeQuestionsCacheKey } from '~/utils/questionsCacheKey'
 import scrollToFormError from '~/components/Proposal/Form/ProposalForm.utils'
 
+const SELECT_DISTRICT = '-1'
+
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
@@ -173,7 +175,7 @@ const onSubmit = (
     address: values.address,
     theme: values.theme,
     category: values.category,
-    district: values.district,
+    district: values.district === SELECT_DISTRICT ? null : values.district,
     draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
@@ -322,6 +324,13 @@ const validate = (values: FormValues, { proposalForm, features, intl, geoJsons, 
     const address = JSON.parse(values.address.substring(1, values.address.length - 1))
     if (!geoContains(geoJsons, address?.geometry?.location))
       return { ...errors, addressText: 'constraints.address_in_zone' }
+  }
+  if (
+    proposalForm.usingDistrict &&
+    proposalForm.districtMandatory &&
+    (!values.district || values.district === SELECT_DISTRICT)
+  ) {
+    return { ...errors, district: 'proposal.constraints.district' }
   }
   return errors
 }
@@ -733,7 +742,7 @@ export class ProposalForm extends React.Component<Props, State> {
             }
           >
             <FormattedMessage id="proposal.select.district">
-              {(message: string) => <option>{message}</option>}
+              {(message: string) => <option value={SELECT_DISTRICT}>{message}</option>}
             </FormattedMessage>
             {districtIdsFilteredByAddress.map(districtId => (
               <option key={districtId} value={districtId}>
