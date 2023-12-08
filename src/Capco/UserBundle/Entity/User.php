@@ -1154,17 +1154,28 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
 
     public function getOrganizationId(): ?string
     {
-        if ($this->getMemberOfOrganizations()->isEmpty()) {
+        $organization = $this->getOrganization();
+
+        if (!$organization) {
             return null;
         }
 
         return GlobalId::toGlobalId(
             'Organization',
-            $this->getMemberOfOrganizations()
-                ->first()
-                ->getOrganization()
-                ->getId()
+            $organization->getId()
         );
+    }
+
+    public function getOrganization(): ?Organization
+    {
+        if ($this->getMemberOfOrganizations()->isEmpty()) {
+            return null;
+        }
+
+        return $this->getMemberOfOrganizations()
+            ->first()
+            ->getOrganization()
+        ;
     }
 
     public function getEmailingCampaignUsers(): Collection

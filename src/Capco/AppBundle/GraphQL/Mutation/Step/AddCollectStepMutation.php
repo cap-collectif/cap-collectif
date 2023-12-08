@@ -30,6 +30,9 @@ class AddCollectStepMutation implements MutationInterface
         $projectId = $input->offsetGet('projectId');
         $project = $this->addStepService->getProject($projectId, $viewer);
 
+        $organization = $viewer->getOrganization();
+        $owner = $organization ?? $viewer;
+
         $proposalForm = (new ProposalForm())
             ->setTitle("{$project->getTitle()} - {$this->translator->trans('proposal-form')}")
             ->setUsingCategories(true)
@@ -44,6 +47,8 @@ class AddCollectStepMutation implements MutationInterface
             ->setUsingYoutube(false)
             ->setUsingLinkedIn(false)
             ->setUsingIllustration(false)
+            ->setCreator($viewer)
+            ->setOwner($owner)
         ;
 
         /** * @var CollectStep $step */

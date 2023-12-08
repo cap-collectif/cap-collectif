@@ -11,12 +11,18 @@ Object {
       "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
+        "creator": Object {
+          "username": "Théo QP",
+        },
         "description": "Répondez à l'enquête",
+        "owner": Object {
+          "username": "Théo QP",
+        },
         "questions": Array [
           Object {
             "position": 1,
             "title": "Avez-vous une remarque à apporter ?",
-            "type": "editor",
+            "type": "textarea",
           },
         ],
         "title": "Questionnaire",
@@ -38,12 +44,18 @@ Object {
       "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
+        "creator": Object {
+          "username": "admin",
+        },
         "description": "Répondez à l'enquête",
+        "owner": Object {
+          "username": "admin",
+        },
         "questions": Array [
           Object {
             "position": 1,
             "title": "Avez-vous une remarque à apporter ?",
-            "type": "editor",
+            "type": "textarea",
           },
         ],
         "title": "Questionnaire",
@@ -65,12 +77,18 @@ Object {
       "isAnonymousParticipationAllowed": true,
       "label": "Questionnaire",
       "questionnaire": Object {
+        "creator": Object {
+          "username": "Christophe Cassou",
+        },
         "description": "Répondez à l'enquête",
+        "owner": Object {
+          "username": "GIEC",
+        },
         "questions": Array [
           Object {
             "position": 1,
             "title": "Avez-vous une remarque à apporter ?",
-            "type": "editor",
+            "type": "textarea",
           },
         ],
         "title": "Questionnaire",

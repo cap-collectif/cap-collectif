@@ -5,6 +5,15 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
+      "form": Object {
+        "creator": Object {
+          "username": "Théo QP",
+        },
+        "owner": Object {
+          "username": "Théo QP",
+        },
+        "title": "Projet avec administrateur de projet - proposal-form",
+      },
       "title": "Dépôt",
     },
   },
@@ -16,6 +25,15 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
+      "form": Object {
+        "creator": Object {
+          "username": "admin",
+        },
+        "owner": Object {
+          "username": "admin",
+        },
+        "title": "Appel à projets - proposal-form",
+      },
       "title": "Dépôt",
     },
   },
@@ -27,6 +45,15 @@ Object {
   "addCollectStep": Object {
     "step": Object {
       "__typename": "CollectStep",
+      "form": Object {
+        "creator": Object {
+          "username": "Christophe Cassou",
+        },
+        "owner": Object {
+          "username": "GIEC",
+        },
+        "title": "projectOrgaVisibilityMe - proposal-form",
+      },
       "title": "Dépôt",
     },
   },

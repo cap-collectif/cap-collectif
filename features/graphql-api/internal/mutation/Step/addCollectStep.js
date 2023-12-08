@@ -7,6 +7,17 @@ const AddCollectStep = /* GraphQL*/ `
       step {
         __typename
         title
+        ...on CollectStep {
+          form {
+            title
+            creator {
+              username
+            }
+            owner {
+              username
+            }
+          }
+        }
       }
     }
   }

@@ -14,6 +14,12 @@ const AddQuestionnaireStep = /* GraphQL*/ `
                 isAnonymousParticipationAllowed
                 collectParticipantsEmail
                 questionnaire {
+                    owner {
+                        username
+                    }
+                    creator {
+                        username
+                    }
                     title
                     description
                     questions {
