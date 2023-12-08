@@ -1,0 +1,80 @@
+// import { AdminProjectsListPage } from '~e2e-pages/index'
+//
+// describe('Organization Project', () => {
+//   before(() => {
+//     cy.task('enable:feature', 'unstable__new_create_project')
+//   })
+//
+//   beforeEach(() => {
+//     cy.task('db:restore')
+//     cy.directLoginAs('valerie')
+//   })
+//   describe('Project BO', () => {
+//     it('CRUD project', () => {
+//       cy.interceptGraphQLOperation({ operationName: 'projectsQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'CreateProjectMutation' })
+//       cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'UpdateProjectAlphaMutation' })
+//       cy.interceptGraphQLOperation({ operationName: 'HotJarQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'NavBarQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'ProjectIdConfig' })
+//       cy.interceptGraphQLOperation({ operationName: 'ProjectIdQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'ProjectConfigFormQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+//       cy.interceptGraphQLOperation({ operationName: 'CreateStepPageQuery' })
+//       // list project
+//       AdminProjectsListPage.visit()
+//       cy.wait('@projectsQuery')
+//       cy.wait('@NavBarQuery')
+//       cy.wait('@HotJarQuery')
+//
+//       cy.contains("Rapport d'évaluation 6 (AR6)")
+//       cy.getByDataCy('project-item').should('have.length', 3)
+//
+//       // open create project modal
+//       cy.getByDataCy('create-project-button').click()
+//       cy.contains('customize-your-new-project')
+//       cy.wait('@UserListFieldQuery')
+//       cy.wait('@NavBarQuery')
+//       cy.wait('@HotJarQuery')
+//
+//       cy.getByDataCy('create-project-create-button').should('be.disabled')
+//       cy.getByDataCy('create-project-modal-title').type('my new project')
+//       cy.getByDataCy('create-project-create-button').should('not.be.disabled')
+//       cy.getByDataCy('create-project-modal-authors')
+//         .children('div')
+//         .children()
+//         .should('have.class', 'cap-async-select--is-disabled')
+//       cy.getByDataCy('create-project-create-button').should('not.be.disabled').click()
+//       cy.wait('@CreateProjectMutation')
+//       cy.wait('@HotJarQuery')
+//       cy.wait('@NavBarQuery')
+//       cy.wait('@ProjectIdQuery')
+//       cy.wait('@ProjectConfigFormQuery')
+//
+//       // update project
+//       cy.contains('my new project').click()
+// add collect step
+// TODO WIP New add collect step page on admin next is 404
+// cy.contains('global.add').click()
+// cy.contains('global.collect.step.label').click()
+// cy.get('#step-label').type('proposal form orga')
+// cy.get('#step-title').type('proposal form orga')
+// cy.assertReactSelectOptionCount('#step-proposalForm', 1)
+// cy.selectReactSelectOption('div[id="step-proposalForm"]', 'Formulaire organisation crée par un membre')
+// cy.get('#step-modal-submit').click()
+// add questionnaire step
+// cy.contains('global.add').click()
+// cy.wait('@HotJarQuery')
+// cy.wait('@NavBarQuery')
+// cy.wait('@CreateStepPageQuery')
+// cy.contains('global.questionnaire').click()
+// cy.get('input[id="label"]').should('have.value', 'Questionnaire')
+// cy.get('p:contains("Répondez à l\'enquête")').should('have.length', 1)
+// cy.get('textarea:contains("Répondez à l\'enquête")').should('have.length', 1)
+// cy.get('#stepDurationType_choice-CUSTOM').should('be.checked')
+// cy.get('#isEnabled_choice-PUBLISHED').should('be.checked')
+// cy.contains('global.save').click()
+//     })
+//   })
+// })

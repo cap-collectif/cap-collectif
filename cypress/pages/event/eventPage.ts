@@ -8,13 +8,7 @@ export default new (class EventPage {
   }
 
   get quickActionButton() {
-    this.cy.wait(1000)
     return this.cy.get('.cap-buttonQuickAction')
-  }
-
-  get downloadAction() {
-    this.cy.wait(1000)
-    return this.cy.get('#download-event-registration')
   }
 
   visit({ event }: VisitOptions) {

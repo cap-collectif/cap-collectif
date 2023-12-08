@@ -36,3 +36,8 @@ def toggle_disable(ctx, toggle='public_api', environment='test'):
 def toggle_enable(ctx, toggle='public_api', environment='test'):
     environments.ci()
     app.toggle_enable(toggle, environment)
+
+@task
+def cmd(ctx, commandName='', environment='test'):
+    environments.ci()
+    app.cmd(commandName, environment)

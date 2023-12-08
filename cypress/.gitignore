@@ -6,3 +6,6 @@
 # local env files
 .env.local
 .env.*.local
+
+# junit test results
+tests-results/*

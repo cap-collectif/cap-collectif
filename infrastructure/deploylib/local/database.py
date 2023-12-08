@@ -13,7 +13,6 @@ def importbdd(ctx):
     environments.local()
     database.importbdd()
 
-
 @task
 def mysqlconsole(ctx):
     environments.local()
