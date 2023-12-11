@@ -24,11 +24,10 @@ export class ProfileReplyList extends React.Component<Props> {
 }
 export default createFragmentContainer(ProfileReplyList, {
   replies: graphql`
-    fragment ProfileReplyList_replies on ReplyConnection
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: false }) {
+    fragment ProfileReplyList_replies on ReplyConnection {
       edges {
         node {
-          ...Reply_reply @arguments(isAuthenticated: $isAuthenticated)
+          ...Reply_reply
         }
       }
     }

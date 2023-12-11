@@ -191,7 +191,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       }
       isProposalSmsVoteEnabled
       ...ProposalSmsVoteModal_step @arguments(token: $token)
-      ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+      ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
       ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     }
   `,
@@ -227,8 +227,7 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-      ...ProposalEditModal_proposal
-        @arguments(isAuthenticated: $isAuthenticated, proposalRevisionsEnabled: $proposalRevisionsEnabled)
+      ...ProposalEditModal_proposal @arguments(proposalRevisionsEnabled: $proposalRevisionsEnabled)
       ...ProposalDeleteModal_proposal
     }
   `,

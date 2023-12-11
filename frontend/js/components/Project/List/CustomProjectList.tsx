@@ -12,12 +12,12 @@ type Props = {
   readonly features: FeatureToggles
 }
 const query = graphql`
-  query CustomProjectListQuery($count: Int, $cursor: String) {
+  query CustomProjectListQuery {
     homePageProjectsSectionConfiguration {
       projects {
         edges {
           node {
-            ...ProjectPreview_project @arguments(count: $count, cursor: $cursor)
+            ...ProjectPreview_project
           }
         }
       }
@@ -32,8 +32,6 @@ const CustomProjectList = ({ projectsCount, features }: Props) => {
       query={query}
       variables={{
         author: null,
-        count: projectsCount,
-        cursor: null,
       }}
       render={({
         error,

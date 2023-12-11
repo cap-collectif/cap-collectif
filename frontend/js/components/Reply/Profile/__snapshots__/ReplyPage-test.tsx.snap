@@ -13,11 +13,6 @@ exports[`<ReplyPage /> should render correctly 1`] = `
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
-                "name": "isAuthenticated",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
                 "name": "userId",
               },
             ],
@@ -52,13 +47,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                         "plural": false,
                         "selections": Array [
                           Object {
-                            "args": Array [
-                              Object {
-                                "kind": "Variable",
-                                "name": "isAuthenticated",
-                                "variableName": "isAuthenticated",
-                              },
-                            ],
+                            "args": null,
                             "kind": "FragmentSpread",
                             "name": "ProfileReplyList_replies",
                           },
@@ -74,7 +63,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
             ],
             "type": "Query",
           },
-          "hash": "90684a0c1dd73cd957f5b2bbdfba221e",
+          "hash": "02761f422c917c5e4be8c1d148b5b34b",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -82,11 +71,6 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "userId",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "isAuthenticated",
               },
             ],
             "kind": "Operation",
@@ -111,13 +95,6 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                     "args": null,
                     "kind": "ScalarField",
                     "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
                     "storageKey": null,
                   },
                   Object {
@@ -306,13 +283,20 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                     ],
                     "type": "User",
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
+            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -324,24 +308,24 @@ exports[`<ReplyPage /> should render correctly 1`] = `
     __typename
     ... on User {
       replies {
-        ...ProfileReplyList_replies_39ngnn
+        ...ProfileReplyList_replies
       }
     }
     id
   }
 }
 
-fragment ProfileReplyList_replies_39ngnn on ReplyConnection {
+fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
       __typename
-      ...Reply_reply_39ngnn
+      ...Reply_reply
       id
     }
   }
 }
 
-fragment Reply_reply_39ngnn on Reply {
+fragment Reply_reply on Reply {
   __isReply: __typename
   id
   createdAt
@@ -383,7 +367,6 @@ fragment UserLink_user on User {
     render={[Function]}
     variables={
       Object {
-        "isAuthenticated": true,
         "userId": "VXNlcjp1c2VyNQo=",
       }
     }
@@ -404,11 +387,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
-                "name": "isAuthenticated",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
                 "name": "userId",
               },
             ],
@@ -443,13 +421,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                         "plural": false,
                         "selections": Array [
                           Object {
-                            "args": Array [
-                              Object {
-                                "kind": "Variable",
-                                "name": "isAuthenticated",
-                                "variableName": "isAuthenticated",
-                              },
-                            ],
+                            "args": null,
                             "kind": "FragmentSpread",
                             "name": "ProfileReplyList_replies",
                           },
@@ -465,7 +437,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
             ],
             "type": "Query",
           },
-          "hash": "90684a0c1dd73cd957f5b2bbdfba221e",
+          "hash": "02761f422c917c5e4be8c1d148b5b34b",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -473,11 +445,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "userId",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "isAuthenticated",
               },
             ],
             "kind": "Operation",
@@ -502,13 +469,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                     "args": null,
                     "kind": "ScalarField",
                     "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
                     "storageKey": null,
                   },
                   Object {
@@ -697,13 +657,20 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                     ],
                     "type": "User",
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
+            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -715,24 +682,24 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
     __typename
     ... on User {
       replies {
-        ...ProfileReplyList_replies_39ngnn
+        ...ProfileReplyList_replies
       }
     }
     id
   }
 }
 
-fragment ProfileReplyList_replies_39ngnn on ReplyConnection {
+fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
       __typename
-      ...Reply_reply_39ngnn
+      ...Reply_reply
       id
     }
   }
 }
 
-fragment Reply_reply_39ngnn on Reply {
+fragment Reply_reply on Reply {
   __isReply: __typename
   id
   createdAt
@@ -774,7 +741,6 @@ fragment UserLink_user on User {
     render={[Function]}
     variables={
       Object {
-        "isAuthenticated": true,
         "userId": "VXNlcjp1c2VyNQo=",
       }
     }
@@ -795,11 +761,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
               Object {
                 "defaultValue": null,
                 "kind": "LocalArgument",
-                "name": "isAuthenticated",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
                 "name": "userId",
               },
             ],
@@ -834,13 +795,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                         "plural": false,
                         "selections": Array [
                           Object {
-                            "args": Array [
-                              Object {
-                                "kind": "Variable",
-                                "name": "isAuthenticated",
-                                "variableName": "isAuthenticated",
-                              },
-                            ],
+                            "args": null,
                             "kind": "FragmentSpread",
                             "name": "ProfileReplyList_replies",
                           },
@@ -856,7 +811,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
             ],
             "type": "Query",
           },
-          "hash": "90684a0c1dd73cd957f5b2bbdfba221e",
+          "hash": "02761f422c917c5e4be8c1d148b5b34b",
           "kind": "Request",
           "operation": Object {
             "argumentDefinitions": Array [
@@ -864,11 +819,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                 "defaultValue": null,
                 "kind": "LocalArgument",
                 "name": "userId",
-              },
-              Object {
-                "defaultValue": null,
-                "kind": "LocalArgument",
-                "name": "isAuthenticated",
               },
             ],
             "kind": "Operation",
@@ -893,13 +843,6 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                     "args": null,
                     "kind": "ScalarField",
                     "name": "__typename",
-                    "storageKey": null,
-                  },
-                  Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "id",
                     "storageKey": null,
                   },
                   Object {
@@ -1088,13 +1031,20 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                     ],
                     "type": "User",
                   },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "id",
+                    "storageKey": null,
+                  },
                 ],
                 "storageKey": null,
               },
             ],
           },
           "params": Object {
-            "cacheID": "745ee6a5547d7ae6dae29c906cd852cc",
+            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -1106,24 +1056,24 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
     __typename
     ... on User {
       replies {
-        ...ProfileReplyList_replies_39ngnn
+        ...ProfileReplyList_replies
       }
     }
     id
   }
 }
 
-fragment ProfileReplyList_replies_39ngnn on ReplyConnection {
+fragment ProfileReplyList_replies on ReplyConnection {
   edges {
     node {
       __typename
-      ...Reply_reply_39ngnn
+      ...Reply_reply
       id
     }
   }
 }
 
-fragment Reply_reply_39ngnn on Reply {
+fragment Reply_reply on Reply {
   __isReply: __typename
   id
   createdAt
@@ -1165,7 +1115,6 @@ fragment UserLink_user on User {
     render={[Function]}
     variables={
       Object {
-        "isAuthenticated": false,
         "userId": "VXNlcjp1c2VyNQo=",
       }
     }

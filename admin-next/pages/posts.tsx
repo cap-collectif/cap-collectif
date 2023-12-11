@@ -20,7 +20,7 @@ export interface PostListPageProps {
 
 export const PostListPageQuery = graphql`
     query postsQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [PostAffiliation!]

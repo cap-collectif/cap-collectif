@@ -85,11 +85,10 @@ export const queryAnalysis = graphql`
     $count: Int!
     $proposalRevisionsEnabled: Boolean!
     $cursor: String
-    $orderBy: [ProposalOrder]!
+    $orderBy: [ProposalOrder!]
     $category: ID
     $district: ID
     $theme: ID
-    $status: ID
     $term: String
     $analysts: [ID!]
     $supervisor: ID
@@ -107,7 +106,6 @@ export const queryAnalysis = graphql`
     project: node(id: $projectId) {
       ...ProjectAdminAnalysis_project
         @arguments(
-          projectId: $projectId
           count: $count
           proposalRevisionsEnabled: $proposalRevisionsEnabled
           cursor: $cursor
@@ -115,7 +113,6 @@ export const queryAnalysis = graphql`
           category: $category
           district: $district
           theme: $theme
-          status: $status
           term: $term
           analysts: $analysts
           supervisor: $supervisor

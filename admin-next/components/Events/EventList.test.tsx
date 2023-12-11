@@ -117,7 +117,7 @@ describe('<EventList />', () => {
     };
     const query = graphql`
         query EventListTestQuery(
-            $count: Int
+            $count: Int!
             $cursor: String
             $term: String
             $affiliations: [EventAffiliation!]

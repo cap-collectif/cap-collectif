@@ -20,7 +20,7 @@ import convertIconToDs from '@utils/convertIconToDs';
 import stripHTML from '@utils/stripHTML';
 
 const FRAGMENT = graphql`
-    fragment ProposalCard_proposal on Proposal @argumentDefinitions(stepId: { type: "ID!" }) {
+    fragment ProposalCard_proposal on Proposal {
         id
         title
         url

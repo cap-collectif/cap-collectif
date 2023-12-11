@@ -82,7 +82,8 @@ export default createPaginationContainer(
       fragment UserOpinionVersionListViewPaginated_user on User
       @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }) {
         id
-        opinionVersions(first: $count) @connection(key: "UserOpinionVersionListViewPaginated_opinionVersions") {
+        opinionVersions(first: $count, after: $cursor)
+          @connection(key: "UserOpinionVersionListViewPaginated_opinionVersions") {
           edges {
             node {
               id

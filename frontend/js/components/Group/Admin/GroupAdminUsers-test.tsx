@@ -71,7 +71,7 @@ describe('<GroupAdminUsers />', () => {
   const query = graphql`
     query GroupAdminUsersTestQuery(
       $id: ID = "<default>"
-      $countUsers: Int
+      $countUsers: Int!
       $cursorUsers: String
       $countInvitations: Int
       $cursorInvitations: String

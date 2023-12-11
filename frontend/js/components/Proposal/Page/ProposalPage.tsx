@@ -4,7 +4,6 @@ import { QueryRenderer, graphql } from 'react-relay'
 import { useParams, useLocation } from 'react-router-dom'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import type { State } from '~/types'
-import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants'
 import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql'
 import ProposalPageLogic from './ProposalPageLogic'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
@@ -29,8 +28,6 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
           $proposalSlug: String!
           $hasVotableStep: Boolean!
           $stepId: ID!
-          $count: Int!
-          $cursor: String
           $isAuthenticated: Boolean!
           $proposalRevisionsEnabled: Boolean!
           $token: String
@@ -40,8 +37,6 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
               proposalSlug: $proposalSlug
               hasVotableStep: $hasVotableStep
               stepId: $stepId
-              count: $count
-              cursor: $cursor
               isAuthenticated: $isAuthenticated
               proposalRevisionsEnabled: $proposalRevisionsEnabled
               token: $token
@@ -55,8 +50,6 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
         proposalSlug,
         hasVotableStep,
         stepId: state?.currentVotableStepId || currentVotableStepId || '',
-        count: PROPOSAL_FOLLOWERS_TO_SHOW,
-        cursor: null,
         isAuthenticated,
         proposalRevisionsEnabled: proposalRevisionsEnabled && isAuthenticated,
         token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),

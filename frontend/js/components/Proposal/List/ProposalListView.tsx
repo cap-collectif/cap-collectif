@@ -128,14 +128,14 @@ export class ProposalListView extends React.Component<Props, State> {
       isRefetching: true,
       hasRefetchError: false,
     })
-    const { filters, order, step, term, relay, viewer } = this.props
+    const { filters, order, step, term, relay, viewer, count } = this.props
 
     const refetchVariables = fragmentVariables => {
       return {
         ...queryVariables(filters, order),
         stepId: step.id,
         isAuthenticated: !!viewer,
-        count: fragmentVariables.count,
+        count: fragmentVariables.count || count,
         term: term || null,
       }
     }
@@ -193,6 +193,7 @@ const mapStateToProps = (state: GlobalState) => ({
   filters: state.proposal.filters || {},
   term: state.proposal.terms,
   order: state.proposal.order,
+  count: 50,
 })
 
 // @ts-ignore
@@ -206,10 +207,9 @@ export default createRefetchContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListView_step on ProposalStep
-      @argumentDefinitions(count: { type: "Int" }, token: { type: "String" }) {
+      fragment ProposalListView_step on ProposalStep {
         id
-        ...ProposalListViewPaginated_step @arguments(token: $token)
+        ...ProposalListViewPaginated_step
       }
     `,
   },

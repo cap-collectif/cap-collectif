@@ -19,7 +19,6 @@ import {
 import ProposalCard from '@components/Proposal/ProposalCard';
 import styled from 'styled-components';
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql';
-import { FragmentRefs } from 'relay-runtime';
 
 export interface PaperCatalogPageProps {
     stepId: string;
@@ -35,7 +34,7 @@ export const QUERY = graphql`
                 ) {
                     edges {
                         node {
-                            ...ProposalCard_proposal @arguments(stepId: $id)
+                            ...ProposalCard_proposal
                             district {
                                 name
                             }

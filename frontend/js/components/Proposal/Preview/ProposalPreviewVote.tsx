@@ -45,7 +45,7 @@ const STEP_FRAGMENT = graphql`
     }
     ...ProposalSmsVoteModal_step @arguments(token: $token)
     ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
-    ...ProposalVoteButtonWrapperFragment_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
   }
 `
 export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({

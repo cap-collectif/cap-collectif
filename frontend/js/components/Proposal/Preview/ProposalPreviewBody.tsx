@@ -165,7 +165,6 @@ export default createFragmentContainer(ProposalPreviewBody, {
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
       stepId: { type: "ID!" }
-      token: { type: "String" }
     ) {
       isArchived
       id

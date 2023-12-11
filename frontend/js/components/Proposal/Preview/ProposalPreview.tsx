@@ -128,7 +128,6 @@ export default createFragmentContainer(connect<any, any>(mapStateToProps)(Propos
       stepId: { type: "ID!" }
       isAuthenticated: { type: "Boolean!" }
       isProfileView: { type: "Boolean", defaultValue: false }
-      token: { type: "String" }
     ) {
       id
       media {
@@ -150,7 +149,7 @@ export default createFragmentContainer(connect<any, any>(mapStateToProps)(Propos
       isArchived
       ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
-        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView, stepId: $stepId, token: $token)
+        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView, stepId: $stepId)
       ...ProposalPreviewStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
     }
   `,

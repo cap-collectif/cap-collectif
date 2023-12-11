@@ -60,15 +60,15 @@ const PanelContainer = styled.div.attrs(({ bottom, scrollY }: any) => ({
   overflow: hidden;
   width: 100%;
 `
+
 type MODAL_STATE = 'TRUE' | 'FALSE' | 'SHOWED'
+
 const FRAGMENT = graphql`
   fragment ProposalPageLogic_query on Query
   @argumentDefinitions(
     proposalSlug: { type: "String!" }
     hasVotableStep: { type: "Boolean!" }
     stepId: { type: "ID!" }
-    count: { type: "Int!" }
-    cursor: { type: "String" }
     isAuthenticated: { type: "Boolean!" }
     proposalRevisionsEnabled: { type: "Boolean!" }
     token: { type: "String" }

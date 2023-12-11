@@ -10,8 +10,8 @@
     "lint": "next lint",
     "prettier": "prettier --write {pages,utils,.}/*.{ts,tsx,js}",
     "test": "jest",
-    "relay": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__",
-    "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --language typescript --artifactDirectory ./__generated__ --watch",
+    "relay": "relay-compiler",
+    "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --artifactDirectory ./__generated__ --watch",
     "storybook": "start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook",
     "chromatic": "chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --auto-accept-changes"
@@ -19,7 +19,7 @@
   "dependencies": {
     "@babel/preset-flow": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
-    "babel-plugin-relay": "^12.0.0",
+    "babel-plugin-relay": "^15.0.0",
     "cookie": "^0.4.1",
     "nookies": "^2.5.2",
     "next": "12",
@@ -27,10 +27,9 @@
     "react-dom": "17.0.2",
     "redis": "^4.0.0",
     "react-qr-code": "^2.0.11",
-    "react-relay": "^12.0.0",
-    "relay-runtime": "^12.0.0",
-    "relay-compiler": "^12.0.0",
-    "relay-config": "^12.0.1"
+    "react-relay": "^15.0.0",
+    "relay-runtime": "^15.0.0",
+    "relay-compiler": "^15.0.0"
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.4",
@@ -38,8 +37,8 @@
     "@types/cookie": "^0.4.1",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.14",
-    "@types/react-relay": "^11.0.2",
-    "@types/relay-runtime": "12.0.1",
+    "@types/react-relay": "^14.0.0",
+    "@types/relay-runtime": "14.1.9",
     "@types/styled-components": "^5.1.15",
     "@types/papaparse": "^5.3.2",
     "eslint": "^7.30.0",

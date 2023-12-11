@@ -57,7 +57,7 @@ export const ModalMembers = ({ show, onClose, mailingList }: Props) => {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ModalMembersQuery($count: Int, $cursor: String, $mailingListId: ID!, $isAdmin: Boolean!) {
+            query ModalMembersQuery($count: Int!, $cursor: String, $mailingListId: ID!, $isAdmin: Boolean!) {
               mailingList: node(id: $mailingListId) {
                 ... on MailingList {
                   ...Members_mailingList @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin)

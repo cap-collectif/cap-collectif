@@ -18,7 +18,7 @@ import CreateProject from '@components/Projects/CreateProject/CreateProject';
 
 export const projectsQuery = graphql`
     query projectsQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [ProjectAffiliation!]

@@ -122,16 +122,9 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
           <QueryRenderer
             environment={environment}
             query={graphql`
-              query OpinionVersionsBoxQuery(
-                $opinionId: ID!
-                $isAuthenticated: Boolean!
-                $count: Int!
-                $cursor: String
-                $orderBy: VersionOrder!
-              ) {
+              query OpinionVersionsBoxQuery($opinionId: ID!, $count: Int!, $cursor: String, $orderBy: VersionOrder!) {
                 opinion: node(id: $opinionId) {
-                  ...OpinionVersionListView_opinion
-                    @arguments(cursor: $cursor, orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
+                  ...OpinionVersionListView_opinion @arguments(cursor: $cursor, orderBy: $orderBy, count: $count)
                 }
               }
             `}

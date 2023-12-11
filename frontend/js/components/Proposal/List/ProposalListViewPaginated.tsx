@@ -87,7 +87,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListViewPaginated_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
+      fragment ProposalListViewPaginated_step on ProposalStep {
         id
         ... on CollectStep {
           private
@@ -109,7 +109,7 @@ const ProposalListViewPaginatedRelay = createPaginationContainer(
           userType: $userType
           state: $state
         ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
-          ...ProposalList_proposals @arguments(token: $token)
+          ...ProposalList_proposals
           edges {
             node {
               id

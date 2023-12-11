@@ -69,12 +69,7 @@ export default createPaginationContainer(
   {
     opinion: graphql`
       fragment OpinionVersionListViewPaginated_opinion on Opinion
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        orderBy: { type: "VersionOrder!" }
-      ) {
+      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, orderBy: { type: "VersionOrder!" }) {
         id
         versions(first: $count, after: $cursor, orderBy: $orderBy)
           @connection(key: "OpinionVersionListViewPaginated_versions", filters: ["orderBy"]) {
@@ -113,15 +108,13 @@ export default createPaginationContainer(
     query: graphql`
       query OpinionVersionListViewPaginatedPaginatedQuery(
         $opinionId: ID!
-        $isAuthenticated: Boolean!
         $cursor: String
         $orderBy: VersionOrder!
         $count: Int!
       ) {
         opinion: node(id: $opinionId) {
           id
-          ...OpinionVersionListViewPaginated_opinion
-            @arguments(isAuthenticated: $isAuthenticated, cursor: $cursor, orderBy: $orderBy, count: $count)
+          ...OpinionVersionListViewPaginated_opinion @arguments(cursor: $cursor, orderBy: $orderBy, count: $count)
         }
       }
     `,

@@ -131,6 +131,48 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "level",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SectionQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
                         "alias": null,
                         "args": Array [
                           Object {
@@ -405,48 +447,6 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
                         "kind": "ScalarField",
                         "name": "description",
                         "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "level",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SectionQuestion",
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isRangeBetween",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMin",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMax",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SimpleQuestion",
                       },
                       Object {
                         "abstractKey": null,
@@ -1015,6 +1015,48 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "level",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SectionQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
                         "alias": null,
                         "args": Array [
                           Object {
@@ -1289,48 +1331,6 @@ exports[`<ShieldPage /> renders with registration disabled and classical auth by
                         "kind": "ScalarField",
                         "name": "description",
                         "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "level",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SectionQuestion",
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isRangeBetween",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMin",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMax",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SimpleQuestion",
                       },
                       Object {
                         "abstractKey": null,
@@ -1879,6 +1879,48 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                         "storageKey": null,
                       },
                       Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "level",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SectionQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
+                      },
+                      Object {
                         "alias": null,
                         "args": Array [
                           Object {
@@ -2153,48 +2195,6 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
                         "kind": "ScalarField",
                         "name": "description",
                         "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "level",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SectionQuestion",
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isRangeBetween",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMin",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMax",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SimpleQuestion",
                       },
                       Object {
                         "abstractKey": null,

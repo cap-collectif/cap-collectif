@@ -17,7 +17,7 @@ describe('<QuestionnaireList />', () => {
     let TestQuestionnaireList: any;
 
     const query = graphql`
-        query QuestionnaireListTestQuery($count: Int, $cursor: String, $term: String)
+        query QuestionnaireListTestQuery($count: Int!, $cursor: String, $term: String)
         @relay_test_operation {
             viewer {
                 ...QuestionnaireList_questionnaireOwner

@@ -7,7 +7,7 @@ import type { QuestionnaireListOldQuery as QuestionnaireListOldQueryType } from 
 
 export const QUERY = graphql`
     query QuestionnaireListOldQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [QuestionnaireAffiliation!]

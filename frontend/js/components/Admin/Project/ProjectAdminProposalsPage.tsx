@@ -154,7 +154,6 @@ export const queryProposals = graphql`
     project: node(id: $projectId) {
       ...ProjectAdminProposals_project
         @arguments(
-          projectId: $projectId
           viewerIsAdmin: $viewerIsAdmin
           count: $count
           proposalRevisionsEnabled: $proposalRevisionsEnabled
@@ -275,7 +274,7 @@ export default createFragmentContainer(connect<any, any>(mapStateToProps)(Projec
       count: { type: "Int!" }
       proposalRevisionsEnabled: { type: "Boolean!" }
       cursor: { type: "String" }
-      orderBy: { type: "ProposalOrder!", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
+      orderBy: { type: "[ProposalOrder!]", defaultValue: { field: PUBLISHED_AT, direction: DESC } }
       state: { type: "ProposalsState!", defaultValue: ALL }
       category: { type: "ID", defaultValue: null }
       district: { type: "ID", defaultValue: null }
@@ -288,7 +287,6 @@ export default createFragmentContainer(connect<any, any>(mapStateToProps)(Projec
         id
         ...ProjectAdminProposals_project
           @arguments(
-            projectId: $projectId
             viewerIsAdmin: $viewerIsAdmin
             count: $count
             proposalRevisionsEnabled: $proposalRevisionsEnabled

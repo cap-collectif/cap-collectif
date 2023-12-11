@@ -64,7 +64,7 @@ export const ModalInternalMembers = ({ show, onClose, type }: Props) => {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ModalInternalMembersQuery($count: Int, $cursor: String, $emailConfirmed: Boolean) {
+            query ModalInternalMembersQuery($count: Int!, $cursor: String, $emailConfirmed: Boolean) {
               ...InternalMembers_query @arguments(count: $count, cursor: $cursor, emailConfirmed: $emailConfirmed)
             }
           `}

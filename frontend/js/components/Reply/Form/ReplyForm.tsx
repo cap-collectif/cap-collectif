@@ -639,7 +639,7 @@ const container = connect<any, any>(mapStateToProps)(injectIntl(form))
 const containerWithRouter = withRouter(container)
 export default createFragmentContainer(containerWithRouter, {
   reply: graphql`
-    fragment ReplyForm_reply on Reply @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    fragment ReplyForm_reply on Reply {
       id
       ... on UserReply {
         draft

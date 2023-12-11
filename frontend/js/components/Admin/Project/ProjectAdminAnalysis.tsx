@@ -1036,7 +1036,6 @@ export default createPaginationContainer(
     project: graphql`
       fragment ProjectAdminAnalysis_project on Project
       @argumentDefinitions(
-        projectId: { type: "ID!" }
         count: { type: "Int!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
         cursor: { type: "String" }
@@ -1045,7 +1044,6 @@ export default createPaginationContainer(
         district: { type: "ID", defaultValue: null }
         theme: { type: "ID", defaultValue: null }
         progressStatus: { type: "ProposalProgressState", defaultValue: null }
-        status: { type: "ID", defaultValue: null }
         term: { type: "String", defaultValue: null }
         analysts: { type: "[ID!]", defaultValue: null }
         supervisor: { type: "ID", defaultValue: null }
@@ -1232,7 +1230,6 @@ export default createPaginationContainer(
           id
           ...ProjectAdminAnalysis_project
             @arguments(
-              projectId: $projectId
               count: $count
               proposalRevisionsEnabled: $proposalRevisionsEnabled
               cursor: $cursor

@@ -41,7 +41,7 @@ const queryArgument = graphql`
     $count: Int!
     $cursor: String
     $value: ForOrAgainstValue
-    $isPublished: Boolean
+    $isPublished: Boolean!
     $isTrashed: Boolean!
   ) {
     debate: node(id: $debateId) {

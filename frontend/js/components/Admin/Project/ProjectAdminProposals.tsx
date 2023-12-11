@@ -1207,7 +1207,6 @@ const container = createPaginationContainer(
     project: graphql`
       fragment ProjectAdminProposals_project on Project
       @argumentDefinitions(
-        projectId: { type: "ID!" }
         viewerIsAdmin: { type: "Boolean!" }
         count: { type: "Int!" }
         proposalRevisionsEnabled: { type: "Boolean!" }
@@ -1429,7 +1428,6 @@ const container = createPaginationContainer(
           id
           ...ProjectAdminProposals_project
             @arguments(
-              projectId: $projectId
               viewerIsAdmin: $viewerIsAdmin
               count: $count
               proposalRevisionsEnabled: $proposalRevisionsEnabled

@@ -24,7 +24,7 @@ export const queryContributions = graphql`
     $countProposalPagination: Int!
     $cursorProposalPagination: String
     $proposalRevisionsEnabled: Boolean!
-    $proposalOrderBy: [ProposalOrder]!
+    $proposalOrderBy: [ProposalOrder!]
     $proposalState: ProposalsState!
     $proposalCategory: ID
     $proposalDistrict: ID

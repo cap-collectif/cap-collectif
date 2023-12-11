@@ -6,7 +6,7 @@ import ProposalFormList from '../ProposalForm/ProposalFormList';
 
 export const PROPOSAL_FORM_LIST_QUERY = graphql`
     query ProposalFormListQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [ProposalFormAffiliation!]

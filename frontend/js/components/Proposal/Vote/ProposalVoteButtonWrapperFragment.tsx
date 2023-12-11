@@ -41,8 +41,7 @@ const PROPOSAL_FRAGMENT = graphql`
   }
 `
 const STEP_FRAGMENT = graphql`
-  fragment ProposalVoteButtonWrapperFragment_step on ProposalStep
-  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+  fragment ProposalVoteButtonWrapperFragment_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
     id
     votesLimit
     voteType

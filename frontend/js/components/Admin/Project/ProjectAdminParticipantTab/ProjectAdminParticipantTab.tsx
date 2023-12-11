@@ -57,7 +57,6 @@ export const queryParticipant = graphql`
     project: node(id: $projectId) {
       ...ProjectAdminParticipants_project
         @arguments(
-          projectId: $projectId
           viewerIsAdmin: $viewerIsAdmin
           count: $count
           cursor: $cursor

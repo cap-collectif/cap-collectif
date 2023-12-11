@@ -29,9 +29,9 @@ export default (data: { projectId: string }) => {
           }
           environment={environment}
           query={graphql`
-            query ProposalsUserVotesPageAppQuery($project: ID!, $isAuthenticated: Boolean!) {
+            query ProposalsUserVotesPageAppQuery($project: ID!) {
               project: node(id: $project) {
-                ...ProposalsUserVotesPage_project @arguments(isAuthenticated: $isAuthenticated)
+                ...ProposalsUserVotesPage_project
               }
             }
           `}

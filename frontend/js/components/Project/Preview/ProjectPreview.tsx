@@ -43,8 +43,7 @@ const mapStateToProps = (state: State) => ({
 const connector = connect<any, any>(mapStateToProps)
 export default createFragmentContainer(connector(ProjectPreview), {
   project: graphql`
-    fragment ProjectPreview_project on Project
-    @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
+    fragment ProjectPreview_project on Project {
       id
       ...ProjectCard_project
       ...ProjectPreviewBody_project

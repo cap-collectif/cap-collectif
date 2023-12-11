@@ -241,7 +241,7 @@ describe('<ProjectList />', () => {
         }),
     };
     const query = graphql`
-        query ProjectListTestQuery($count: Int, $cursor: String, $term: String)
+        query ProjectListTestQuery($count: Int!, $cursor: String, $term: String)
         @relay_test_operation {
             viewer {
                 ...ProjectList_projectOwner @arguments(count: $count, cursor: $cursor, term: $term)

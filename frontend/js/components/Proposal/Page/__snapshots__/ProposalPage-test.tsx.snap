@@ -13,16 +13,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
             Object {
               "defaultValue": null,
               "kind": "LocalArgument",
-              "name": "count",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "cursor",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
               "name": "hasVotableStep",
             },
             Object {
@@ -57,16 +47,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           "selections": Array [
             Object {
               "args": Array [
-                Object {
-                  "kind": "Variable",
-                  "name": "count",
-                  "variableName": "count",
-                },
-                Object {
-                  "kind": "Variable",
-                  "name": "cursor",
-                  "variableName": "cursor",
-                },
                 Object {
                   "kind": "Variable",
                   "name": "hasVotableStep",
@@ -135,7 +115,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "23f0e20a7b8b7cdcfa118afd033e8d3c",
+        "hash": "61ae6358103170e04b6a2df1f37e8a59",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -153,16 +133,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
               "defaultValue": null,
               "kind": "LocalArgument",
               "name": "stepId",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "count",
-            },
-            Object {
-              "defaultValue": null,
-              "kind": "LocalArgument",
-              "name": "cursor",
             },
             Object {
               "defaultValue": null,
@@ -1361,6 +1331,48 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "level",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SectionQuestion",
+                        },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isRangeBetween",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMin",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMax",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SimpleQuestion",
+                        },
+                        Object {
                           "alias": null,
                           "args": Array [
                             Object {
@@ -1642,48 +1654,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "kind": "ScalarField",
                           "name": "type",
                           "storageKey": null,
-                        },
-                        Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "level",
-                              "storageKey": null,
-                            },
-                          ],
-                          "type": "SectionQuestion",
-                        },
-                        Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "isRangeBetween",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "rangeMin",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "rangeMax",
-                              "storageKey": null,
-                            },
-                          ],
-                          "type": "SimpleQuestion",
                         },
                         Object {
                           "abstractKey": null,
@@ -2458,6 +2428,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "level",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SectionQuestion",
+                        },
+                        Object {
                           "abstractKey": "__isQuestion",
                           "kind": "TypeDiscriminator",
                         },
@@ -2502,6 +2486,34 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "kind": "ScalarField",
                           "name": "hidden",
                           "storageKey": null,
+                        },
+                        Object {
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "isRangeBetween",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMin",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "rangeMax",
+                              "storageKey": null,
+                            },
+                          ],
+                          "type": "SimpleQuestion",
                         },
                         Object {
                           "alias": null,
@@ -2794,48 +2806,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "level",
-                              "storageKey": null,
-                            },
-                          ],
-                          "type": "SectionQuestion",
-                        },
-                        Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "isRangeBetween",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "rangeMin",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "rangeMax",
-                              "storageKey": null,
-                            },
-                          ],
-                          "type": "SimpleQuestion",
-                        },
-                        Object {
-                          "abstractKey": null,
-                          "kind": "InlineFragment",
-                          "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
                               "name": "isOtherAllowed",
                               "storageKey": null,
                             },
@@ -3013,13 +2983,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "kind": "TypeDiscriminator",
                     },
                     Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "id",
-                      "storageKey": null,
-                    },
-                    Object {
                       "abstractKey": null,
                       "kind": "InlineFragment",
                       "selections": Array [
@@ -3078,6 +3041,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                       ],
                       "type": "MediaResponse",
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
                     },
                   ],
                   "storageKey": null,
@@ -3258,6 +3228,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "storageKey": null,
                     },
                     Object {
+                      "condition": "isAuthenticated",
+                      "kind": "Condition",
+                      "passingValue": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isViewer",
+                          "storageKey": null,
+                        },
+                      ],
+                    },
+                    Object {
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
@@ -3288,20 +3272,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         },
                       ],
                       "storageKey": null,
-                    },
-                    Object {
-                      "condition": "isAuthenticated",
-                      "kind": "Condition",
-                      "passingValue": true,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isViewer",
-                          "storageKey": null,
-                        },
-                      ],
                     },
                   ],
                   "storageKey": null,
@@ -3908,6 +3878,48 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
+                                      "abstractKey": null,
+                                      "kind": "InlineFragment",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "level",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "type": "SectionQuestion",
+                                    },
+                                    Object {
+                                      "abstractKey": null,
+                                      "kind": "InlineFragment",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "isRangeBetween",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "rangeMin",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "rangeMax",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                      "type": "SimpleQuestion",
+                                    },
+                                    Object {
                                       "alias": null,
                                       "args": Array [
                                         Object {
@@ -4189,48 +4201,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "kind": "ScalarField",
                                       "name": "type",
                                       "storageKey": null,
-                                    },
-                                    Object {
-                                      "abstractKey": null,
-                                      "kind": "InlineFragment",
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "level",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "type": "SectionQuestion",
-                                    },
-                                    Object {
-                                      "abstractKey": null,
-                                      "kind": "InlineFragment",
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "isRangeBetween",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "rangeMin",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "rangeMax",
-                                          "storageKey": null,
-                                        },
-                                      ],
-                                      "type": "SimpleQuestion",
                                     },
                                     Object {
                                       "abstractKey": null,
@@ -4824,6 +4794,48 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                   "storageKey": null,
                                 },
                                 Object {
+                                  "abstractKey": null,
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "level",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "SectionQuestion",
+                                },
+                                Object {
+                                  "abstractKey": null,
+                                  "kind": "InlineFragment",
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "isRangeBetween",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "rangeMin",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "rangeMax",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "type": "SimpleQuestion",
+                                },
+                                Object {
                                   "alias": null,
                                   "args": Array [
                                     Object {
@@ -5114,48 +5126,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
-                                      "name": "level",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "type": "SectionQuestion",
-                                },
-                                Object {
-                                  "abstractKey": null,
-                                  "kind": "InlineFragment",
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "isRangeBetween",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "rangeMin",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "rangeMax",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                  "type": "SimpleQuestion",
-                                },
-                                Object {
-                                  "abstractKey": null,
-                                  "kind": "InlineFragment",
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
                                       "name": "isOtherAllowed",
                                       "storageKey": null,
                                     },
@@ -5329,13 +5299,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                             Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
                               "abstractKey": null,
                               "kind": "InlineFragment",
                               "selections": Array [
@@ -5394,6 +5357,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                 },
                               ],
                               "type": "MediaResponse",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
                             },
                           ],
                           "storageKey": null,
@@ -6903,6 +6873,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "storageKey": null,
                                     },
                                     Object {
+                                      "condition": "isAuthenticated",
+                                      "kind": "Condition",
+                                      "passingValue": true,
+                                      "selections": Array [
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "isViewer",
+                                          "storageKey": null,
+                                        },
+                                      ],
+                                    },
+                                    Object {
                                       "alias": null,
                                       "args": null,
                                       "kind": "ScalarField",
@@ -6936,20 +6920,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                       "kind": "ScalarField",
                                       "name": "slug",
                                       "storageKey": null,
-                                    },
-                                    Object {
-                                      "condition": "isAuthenticated",
-                                      "kind": "Condition",
-                                      "passingValue": true,
-                                      "selections": Array [
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "isViewer",
-                                          "storageKey": null,
-                                        },
-                                      ],
                                     },
                                   ],
                                   "storageKey": null,
@@ -7082,13 +7052,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                   "storageKey": null,
                                                 },
                                                 Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "slug",
-                                                  "storageKey": null,
-                                                },
-                                                Object {
                                                   "condition": "isAuthenticated",
                                                   "kind": "Condition",
                                                   "passingValue": true,
@@ -7101,6 +7064,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "slug",
+                                                  "storageKey": null,
                                                 },
                                               ],
                                               "storageKey": null,
@@ -8861,7 +8831,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "32679bb85e55b2e94dfc09f3c3c3fddf",
+          "cacheID": "dda585a42e0caa37e7b9077c27bb7d27",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -8874,7 +8844,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
   $proposalRevisionsEnabled: Boolean!
   $token: String
 ) {
-  ...ProposalPageLogic_query_3yqA1H
+  ...ProposalPageLogic_query_4aPrgF
   step: node(id: $stepId) @include(if: $hasVotableStep) {
     __typename
     id
@@ -9785,7 +9755,7 @@ fragment ProposalDraftAlert_proposal on Proposal {
   }
 }
 
-fragment ProposalEditModal_proposal_2Ag0mE on Proposal {
+fragment ProposalEditModal_proposal_2uwUKI on Proposal {
   id
   allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
     totalCount
@@ -10381,7 +10351,7 @@ fragment ProposalPageHeaderButtons_proposal_2Ag0mE on Proposal {
   ...ProposalVoteModal_proposal @include(if: $isAuthenticated)
   ...ProposalFollowButton_proposal_39ngnn
   ...ProposalReportButton_proposal_39ngnn
-  ...ProposalEditModal_proposal_2Ag0mE
+  ...ProposalEditModal_proposal_2uwUKI
   ...ProposalDeleteModal_proposal
 }
 
@@ -10394,7 +10364,7 @@ fragment ProposalPageHeaderButtons_step_2uzqnG on ProposalStep {
   }
   isProposalSmsVoteEnabled
   ...ProposalSmsVoteModal_step_3Q7IHq
-  ...ProposalVoteButtonWrapperFragment_step_2uzqnG
+  ...ProposalVoteButtonWrapperFragment_step_3Q7IHq
   ...ProposalVoteModal_step_2uzqnG
 }
 
@@ -10482,7 +10452,7 @@ fragment ProposalPageLocalisation_proposal on Proposal {
   }
 }
 
-fragment ProposalPageLogic_query_3yqA1H on Query {
+fragment ProposalPageLogic_query_4aPrgF on Query {
   viewer @include(if: $isAuthenticated) {
     id
     ...ProposalAnalysisPanel_viewer
@@ -11167,7 +11137,7 @@ fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
   ...ProposalVoteButton_proposal_Q37Wz
 }
 
-fragment ProposalVoteButtonWrapperFragment_step_2uzqnG on ProposalStep {
+fragment ProposalVoteButtonWrapperFragment_step_3Q7IHq on ProposalStep {
   __isProposalStep: __typename
   id
   votesLimit
@@ -11453,8 +11423,6 @@ fragment VoteMinAlert_step_3Q7IHq on ProposalStep {
   render={[Function]}
   variables={
     Object {
-      "count": 32,
-      "cursor": null,
       "hasVotableStep": true,
       "isAuthenticated": false,
       "proposalRevisionsEnabled": false,

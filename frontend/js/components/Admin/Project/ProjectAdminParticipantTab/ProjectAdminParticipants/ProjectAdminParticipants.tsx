@@ -367,7 +367,6 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
       fragment ProjectAdminParticipants_project on Project
       @argumentDefinitions(
         viewerIsAdmin: { type: "Boolean!" }
-        projectId: { type: "ID!" }
         count: { type: "Int!" }
         cursor: { type: "String" }
         orderBy: { type: "UserOrder!", defaultValue: { field: ACTIVITY, direction: DESC } }
@@ -481,7 +480,6 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
           id
           ...ProjectAdminParticipants_project
             @arguments(
-              projectId: $projectId
               count: $count
               cursor: $cursor
               orderBy: $orderBy

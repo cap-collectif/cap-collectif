@@ -6,7 +6,7 @@ import EventListPage from './EventListPage';
 
 export const QUERY: GraphQLTaggedNode = graphql`
     query EventListQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [EventAffiliation!]

@@ -332,7 +332,7 @@ export default createFragmentContainer(AnalysisProposal, {
   proposal: graphql`
     fragment AnalysisProposal_proposal on Proposal
     @argumentDefinitions(
-      isAdminView: { type: "Boolean" }
+      isAdminView: { type: "Boolean!" }
       proposalRevisionsEnabled: { type: "Boolean!" }
       step: { type: "ID", defaultValue: null }
     ) {

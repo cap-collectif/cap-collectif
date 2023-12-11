@@ -160,8 +160,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
 const container = connect<any, any>(mapStateToProps)(withColors(ProposalsUserVotesStep))
 export default createFragmentContainer(container, {
   step: graphql`
-    fragment ProposalsUserVotesStep_step on ProposalStep
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+    fragment ProposalsUserVotesStep_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
       ...ProposalsUserVotesTable_step @arguments(token: $token)
       ...VoteMinAlert_step @arguments(token: $token)
       id

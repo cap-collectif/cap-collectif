@@ -101,7 +101,7 @@ export default createFragmentContainer(ProjectAdminDebate, {
       isPublishedArgument: { type: "Boolean!" }
       isTrashedArgument: { type: "Boolean!" }
       # VOTE #
-      isPublishedVote: { type: "Boolean!" }
+      isPublishedVote: { type: "Boolean" }
       countVotePagination: { type: "Int!" }
       cursorVotePagination: { type: "String" }
     ) {

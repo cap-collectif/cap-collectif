@@ -43,7 +43,7 @@ describe('<PostList />', () => {
         }),
     };
     const query = graphql`
-        query PostListTestQuery($count: Int, $cursor: String, $term: String) @relay_test_operation {
+        query PostListTestQuery($count: Int!, $cursor: String, $term: String) @relay_test_operation {
             viewer {
                 ...PostList_postOwner @arguments(count: $count, cursor: $cursor, term: $term)
                 ...PostList_viewer

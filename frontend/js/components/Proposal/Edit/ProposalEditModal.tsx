@@ -386,7 +386,7 @@ const container = connect<any, any>(mapStateToProps)(injectIntl(ProposalEditModa
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalEditModal_proposal on Proposal
-    @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, proposalRevisionsEnabled: { type: "Boolean!" }) {
+    @argumentDefinitions(proposalRevisionsEnabled: { type: "Boolean!" }) {
       id
       allRevisions: revisions @include(if: $proposalRevisionsEnabled) {
         totalCount

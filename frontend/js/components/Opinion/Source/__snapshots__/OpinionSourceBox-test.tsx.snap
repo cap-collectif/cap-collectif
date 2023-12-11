@@ -465,6 +465,20 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                           "storageKey": null,
                                         },
                                         Object {
+                                          "condition": "isAuthenticated",
+                                          "kind": "Condition",
+                                          "passingValue": true,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "isViewer",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                        },
+                                        Object {
                                           "alias": null,
                                           "args": null,
                                           "kind": "ScalarField",
@@ -509,20 +523,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                             },
                                           ],
                                           "storageKey": null,
-                                        },
-                                        Object {
-                                          "condition": "isAuthenticated",
-                                          "kind": "Condition",
-                                          "passingValue": true,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "isViewer",
-                                              "storageKey": null,
-                                            },
-                                          ],
                                         },
                                       ],
                                       "storageKey": null,
@@ -575,13 +575,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                           "plural": false,
                                           "selections": Array [
                                             Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "reason",
-                                              "storageKey": null,
-                                            },
-                                            Object {
                                               "condition": "isAuthenticated",
                                               "kind": "Condition",
                                               "passingValue": true,
@@ -595,14 +588,14 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                                 },
                                               ],
                                             },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "reason",
+                                              "storageKey": null,
+                                            },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -851,6 +844,13 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                             },
                                           ],
                                           "type": "RequirementStep",
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "id",
+                                          "storageKey": null,
                                         },
                                       ],
                                       "storageKey": null,
@@ -1192,45 +1192,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                               "storageKey": null,
                             },
                             Object {
-                              "alias": null,
-                              "args": null,
-                              "concreteType": "RequirementConnection",
-                              "kind": "LinkedField",
-                              "name": "requirements",
-                              "plural": false,
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "reason",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "totalCount",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "condition": "isAuthenticated",
-                                  "kind": "Condition",
-                                  "passingValue": true,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "viewerMeetsTheRequirements",
-                                      "storageKey": null,
-                                    },
-                                  ],
-                                },
-                              ],
-                              "storageKey": null,
-                            },
-                            Object {
                               "abstractKey": "__isRequirementStep",
                               "kind": "InlineFragment",
                               "selections": Array [
@@ -1476,6 +1437,45 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 },
                               ],
                               "type": "RequirementStep",
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "RequirementConnection",
+                              "kind": "LinkedField",
+                              "name": "requirements",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "condition": "isAuthenticated",
+                                  "kind": "Condition",
+                                  "passingValue": true,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "viewerMeetsTheRequirements",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "reason",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "totalCount",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
                             },
                           ],
                           "storageKey": null,

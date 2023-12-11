@@ -274,7 +274,7 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
 }
 export default createFragmentContainer(DebateStepPageVote, {
   step: graphql`
-    fragment DebateStepPageVote_step on DebateStep @argumentDefinitions(isMobile: { type: "Boolean!" }) {
+    fragment DebateStepPageVote_step on DebateStep {
       isAnonymousParticipationAllowed
       debate {
         url

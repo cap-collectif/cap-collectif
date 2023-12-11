@@ -222,7 +222,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }:
                 ...ProposalsDisplayMap_step
                 ...StepPageHeader_step
                 ...ProposalListFilters_step
-                ...ProposalListView_step @arguments(count: $count)
+                ...ProposalListView_step
                 ...UnpublishedProposalListView_step @arguments(isAuthenticated: $isAuthenticated)
                 ...ProposalStepPageHeader_step
                 ...StepEvents_step

@@ -149,7 +149,7 @@ export default createFragmentContainer(DebateStepPageVoteAndShare, {
         }
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
       }
-      ...DebateStepPageVote_step @arguments(isMobile: $isMobile)
+      ...DebateStepPageVote_step
       ...DebateStepPageAbsoluteVoteAndShare_step @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
     }
   `,

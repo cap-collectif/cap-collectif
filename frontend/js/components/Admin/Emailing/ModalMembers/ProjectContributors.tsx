@@ -11,12 +11,7 @@ import InfoMessage from '~ds/InfoMessage/InfoMessage'
 export const USERS_PAGINATION = 20
 export const ProjectContributorsQuery: GraphQLTaggedNode = graphql`
   fragment ProjectContributors_project on Project
-  @argumentDefinitions(
-    count: { type: "Int!" }
-    cursor: { type: "String" }
-    isAdmin: { type: "Boolean!" }
-    emailConfirmed: { type: "Boolean!" }
-  )
+  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, isAdmin: { type: "Boolean!" })
   @refetchable(queryName: "ProjectContributorsPaginationQuery") {
     id
     emailableContributors(first: $count, after: $cursor)

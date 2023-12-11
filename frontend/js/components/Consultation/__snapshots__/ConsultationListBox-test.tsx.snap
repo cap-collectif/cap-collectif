@@ -38,6 +38,17 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
+                      "args": Array [
+                        Object {
+                          "kind": "Variable",
+                          "name": "exceptStepId",
+                          "variableName": "consultationStepId",
+                        },
+                      ],
+                      "kind": "FragmentSpread",
+                      "name": "ConsultationStepHeader_step",
+                    },
+                    Object {
                       "alias": null,
                       "args": null,
                       "concreteType": "ConsultationConnection",
@@ -52,17 +63,6 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                         },
                       ],
                       "storageKey": null,
-                    },
-                    Object {
-                      "args": Array [
-                        Object {
-                          "kind": "Variable",
-                          "name": "exceptStepId",
-                          "variableName": "consultationStepId",
-                        },
-                      ],
-                      "kind": "FragmentSpread",
-                      "name": "ConsultationStepHeader_step",
                     },
                   ],
                   "type": "ConsultationStep",
@@ -105,13 +105,6 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                   "args": null,
                   "kind": "ScalarField",
                   "name": "__typename",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "id",
                   "storageKey": null,
                 },
                 Object {
@@ -396,6 +389,13 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                     },
                   ],
                   "type": "ConsultationStep",
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null,
                 },
               ],
               "storageKey": null,

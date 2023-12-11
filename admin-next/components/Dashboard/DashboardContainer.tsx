@@ -10,7 +10,7 @@ import { useAppContext } from '../AppProvider/App.context';
 const QUERY = graphql`
     query DashboardContainerQuery(
         $affiliations: [ProjectAffiliation!]
-        $count: Int
+        $count: Int!
         $cursor: String
     ) {
         viewer {

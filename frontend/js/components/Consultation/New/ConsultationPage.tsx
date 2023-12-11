@@ -16,14 +16,12 @@ export const ConsultationPage = ({ id: stepId, isAuthenticated, consultationSlug
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query ConsultationPageQuery($stepId: ID!, $isAuthenticated: Boolean!, $consultationSlug: String!) {
-          ...ConsultationPageLogic_query
-            @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated, consultationSlug: $consultationSlug)
+        query ConsultationPageQuery($stepId: ID!, $consultationSlug: String!) {
+          ...ConsultationPageLogic_query @arguments(stepId: $stepId, consultationSlug: $consultationSlug)
         }
       `}
       variables={{
         stepId,
-        isAuthenticated,
         consultationSlug,
       }}
       render={({

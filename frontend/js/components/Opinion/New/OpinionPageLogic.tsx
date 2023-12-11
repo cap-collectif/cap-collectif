@@ -20,8 +20,7 @@ const OpinionPageLogic = ({ query }: Props) => {
 
 export default createFragmentContainer(OpinionPageLogic, {
   query: graphql`
-    fragment OpinionPageLogic_query on Query
-    @argumentDefinitions(opinionId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+    fragment OpinionPageLogic_query on Query @argumentDefinitions(opinionId: { type: "ID!" }) {
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title

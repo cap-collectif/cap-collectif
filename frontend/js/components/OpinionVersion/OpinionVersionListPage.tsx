@@ -17,10 +17,10 @@ export class OpinionVersionListPage extends React.Component<Props> {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query OpinionVersionListPageQuery($userId: ID!, $count: Int!, $cursor: String) {
+          query OpinionVersionListPageQuery($userId: ID!, $count: Int!) {
             user: node(id: $userId) {
               ... on User {
-                ...UserOpinionVersionListViewPaginated_user @arguments(cursor: $cursor, count: $count)
+                ...UserOpinionVersionListViewPaginated_user @arguments(count: $count)
               }
             }
           }
@@ -28,7 +28,6 @@ export class OpinionVersionListPage extends React.Component<Props> {
         variables={
           {
             userId,
-            cursor: null,
             count: 25,
           } as OpinionVersionListPageQueryVariables
         }

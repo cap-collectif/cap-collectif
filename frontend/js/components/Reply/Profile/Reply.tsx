@@ -58,7 +58,7 @@ export class Reply extends React.Component<Props> {
 }
 export default createFragmentContainer(Reply, {
   reply: graphql`
-    fragment Reply_reply on Reply @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+    fragment Reply_reply on Reply {
       id
       createdAt
       questionnaire {

@@ -242,6 +242,20 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "storageKey": null,
                                       },
                                       Object {
+                                        "condition": "isAuthenticated",
+                                        "kind": "Condition",
+                                        "passingValue": true,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "isViewer",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                      },
+                                      Object {
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
@@ -275,20 +289,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "kind": "ScalarField",
                                         "name": "slug",
                                         "storageKey": null,
-                                      },
-                                      Object {
-                                        "condition": "isAuthenticated",
-                                        "kind": "Condition",
-                                        "passingValue": true,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "isViewer",
-                                            "storageKey": null,
-                                          },
-                                        ],
                                       },
                                     ],
                                     "storageKey": null,
@@ -421,13 +421,6 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                     "storageKey": null,
                                                   },
                                                   Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "slug",
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
                                                     "condition": "isAuthenticated",
                                                     "kind": "Condition",
                                                     "passingValue": true,
@@ -440,6 +433,13 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "slug",
+                                                    "storageKey": null,
                                                   },
                                                 ],
                                                 "storageKey": null,

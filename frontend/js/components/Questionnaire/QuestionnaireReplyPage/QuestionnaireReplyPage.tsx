@@ -23,7 +23,7 @@ import Loader from '~ui/FeedbacksIndicators/Loader'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
 import CookieMonster from '~/CookieMonster'
 export const queryReply = graphql`
-  query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
+  query QuestionnaireReplyPageQuery($replyId: ID!) {
     reply: node(id: $replyId) {
       id
       ... on Reply {
@@ -32,7 +32,7 @@ export const queryReply = graphql`
         questionnaire {
           ...ReplyForm_questionnaire
         }
-        ...ReplyForm_reply @arguments(isAuthenticated: $isAuthenticated)
+        ...ReplyForm_reply
       }
     }
   }

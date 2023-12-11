@@ -17,7 +17,7 @@ export const ProjectAdminPage = ({ projectId, firstCollectStepId }: Props) => {
       query={graphql`
         query ProjectAdminPageQuery($projectId: ID!, $isEditMode: Boolean!, $isAdmin: Boolean!) {
           project: node(id: $projectId) @include(if: $isEditMode) {
-            ...ProjectAdminContent_project @arguments(projectId: $projectId)
+            ...ProjectAdminContent_project
           }
           ...ProjectAdminContent_query
           viewer @include(if: $isAdmin) {

@@ -7,7 +7,7 @@ import type { ProposalFormListOldQuery as ProposalFormListOldQueryType } from '@
 
 export const QUERY = graphql`
     query ProposalFormListOldQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [ProposalFormAffiliation!]

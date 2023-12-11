@@ -20,17 +20,10 @@ const FRAGMENT_PROJECT = graphql`
   }
 `
 const QUERY = graphql`
-  query ModalProjectContributorsQuery(
-    $count: Int
-    $cursor: String
-    $projectId: ID!
-    $isAdmin: Boolean!
-    $emailConfirmed: Boolean!
-  ) {
+  query ModalProjectContributorsQuery($count: Int!, $cursor: String, $projectId: ID!, $isAdmin: Boolean!) {
     project: node(id: $projectId) {
       ... on Project {
-        ...ProjectContributors_project
-          @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin, emailConfirmed: $emailConfirmed)
+        ...ProjectContributors_project @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin)
       }
     }
   }
@@ -41,7 +34,6 @@ export const ModalProjectContributors = ({ show, onClose, projectRef, isAdmin }:
     projectId: project?.id,
     count: 10,
     isAdmin,
-    emailConfirmed: true,
   })
   if (!project) return null
   return (

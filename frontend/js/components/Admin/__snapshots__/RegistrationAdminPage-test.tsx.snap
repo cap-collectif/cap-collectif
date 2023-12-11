@@ -23,13 +23,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                 "plural": false,
                 "selections": Array [
                   Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isIndexationDone",
-                    "storageKey": null,
-                  },
-                  Object {
                     "args": null,
                     "kind": "FragmentSpread",
                     "name": "RegistrationFormQuestions_registrationForm",
@@ -38,6 +31,13 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                     "args": null,
                     "kind": "FragmentSpread",
                     "name": "RegistrationFormCommunication_registrationForm",
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isIndexationDone",
+                    "storageKey": null,
                   },
                 ],
                 "storageKey": null,
@@ -141,6 +141,48 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                         "kind": "ScalarField",
                         "name": "helpText",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "level",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SectionQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
                       },
                       Object {
                         "alias": null,
@@ -431,48 +473,6 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                         "kind": "ScalarField",
                         "name": "type",
                         "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "level",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SectionQuestion",
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isRangeBetween",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMin",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMax",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SimpleQuestion",
                       },
                       Object {
                         "abstractKey": null,
@@ -1023,13 +1023,6 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                       "plural": false,
                       "selections": Array [
                         Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isIndexationDone",
-                          "storageKey": null,
-                        },
-                        Object {
                           "args": null,
                           "kind": "FragmentSpread",
                           "name": "RegistrationFormQuestions_registrationForm",
@@ -1038,6 +1031,13 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                           "args": null,
                           "kind": "FragmentSpread",
                           "name": "RegistrationFormCommunication_registrationForm",
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isIndexationDone",
+                          "storageKey": null,
                         },
                       ],
                       "storageKey": null,
@@ -1141,6 +1141,48 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                               "kind": "ScalarField",
                               "name": "helpText",
                               "storageKey": null,
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "level",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "SectionQuestion",
+                            },
+                            Object {
+                              "abstractKey": null,
+                              "kind": "InlineFragment",
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "isRangeBetween",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "rangeMin",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "rangeMax",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "type": "SimpleQuestion",
                             },
                             Object {
                               "alias": null,
@@ -1431,48 +1473,6 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                               "kind": "ScalarField",
                               "name": "type",
                               "storageKey": null,
-                            },
-                            Object {
-                              "abstractKey": null,
-                              "kind": "InlineFragment",
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "level",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "type": "SectionQuestion",
-                            },
-                            Object {
-                              "abstractKey": null,
-                              "kind": "InlineFragment",
-                              "selections": Array [
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "isRangeBetween",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "rangeMin",
-                                  "storageKey": null,
-                                },
-                                Object {
-                                  "alias": null,
-                                  "args": null,
-                                  "kind": "ScalarField",
-                                  "name": "rangeMax",
-                                  "storageKey": null,
-                                },
-                              ],
-                              "type": "SimpleQuestion",
                             },
                             Object {
                               "abstractKey": null,
@@ -1987,13 +1987,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                 "plural": false,
                 "selections": Array [
                   Object {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "isIndexationDone",
-                    "storageKey": null,
-                  },
-                  Object {
                     "args": null,
                     "kind": "FragmentSpread",
                     "name": "RegistrationFormQuestions_registrationForm",
@@ -2002,6 +1995,13 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                     "args": null,
                     "kind": "FragmentSpread",
                     "name": "RegistrationFormCommunication_registrationForm",
+                  },
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "isIndexationDone",
+                    "storageKey": null,
                   },
                 ],
                 "storageKey": null,
@@ -2105,6 +2105,48 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                         "kind": "ScalarField",
                         "name": "helpText",
                         "storageKey": null,
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "level",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SectionQuestion",
+                      },
+                      Object {
+                        "abstractKey": null,
+                        "kind": "InlineFragment",
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "isRangeBetween",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMin",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "rangeMax",
+                            "storageKey": null,
+                          },
+                        ],
+                        "type": "SimpleQuestion",
                       },
                       Object {
                         "alias": null,
@@ -2395,48 +2437,6 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                         "kind": "ScalarField",
                         "name": "type",
                         "storageKey": null,
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "level",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SectionQuestion",
-                      },
-                      Object {
-                        "abstractKey": null,
-                        "kind": "InlineFragment",
-                        "selections": Array [
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "isRangeBetween",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMin",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "rangeMax",
-                            "storageKey": null,
-                          },
-                        ],
-                        "type": "SimpleQuestion",
                       },
                       Object {
                         "abstractKey": null,

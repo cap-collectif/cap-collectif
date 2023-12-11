@@ -21,7 +21,7 @@ const FRAGMENT_GROUPLIST = graphql`
   }
 `
 const QUERY = graphql`
-  query ModalGroupMembersQuery($count: Int, $cursor: String, $groupListId: ID!, $isAdmin: Boolean!) {
+  query ModalGroupMembersQuery($count: Int!, $cursor: String, $groupListId: ID!, $isAdmin: Boolean!) {
     groupList: node(id: $groupListId) {
       ... on Group {
         ...GroupMembers_groupList @arguments(count: $count, cursor: $cursor, isAdmin: $isAdmin)

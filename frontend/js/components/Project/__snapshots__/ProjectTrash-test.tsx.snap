@@ -361,6 +361,20 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "storageKey": null,
                                         },
                                         Object {
+                                          "condition": "isAuthenticated",
+                                          "kind": "Condition",
+                                          "passingValue": true,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "isViewer",
+                                              "storageKey": null,
+                                            },
+                                          ],
+                                        },
+                                        Object {
                                           "alias": null,
                                           "args": null,
                                           "kind": "ScalarField",
@@ -394,20 +408,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "kind": "ScalarField",
                                           "name": "slug",
                                           "storageKey": null,
-                                        },
-                                        Object {
-                                          "condition": "isAuthenticated",
-                                          "kind": "Condition",
-                                          "passingValue": true,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "isViewer",
-                                              "storageKey": null,
-                                            },
-                                          ],
                                         },
                                       ],
                                       "storageKey": null,
@@ -540,13 +540,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                       "storageKey": null,
                                                     },
                                                     Object {
-                                                      "alias": null,
-                                                      "args": null,
-                                                      "kind": "ScalarField",
-                                                      "name": "slug",
-                                                      "storageKey": null,
-                                                    },
-                                                    Object {
                                                       "condition": "isAuthenticated",
                                                       "kind": "Condition",
                                                       "passingValue": true,
@@ -559,6 +552,13 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                           "storageKey": null,
                                                         },
                                                       ],
+                                                    },
+                                                    Object {
+                                                      "alias": null,
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "slug",
+                                                      "storageKey": null,
                                                     },
                                                   ],
                                                   "storageKey": null,
@@ -1857,7 +1857,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "bdea8bb955682ac2d073ba1d83175527",
+              "cacheID": "f904ef218174c657311be4f67f86c353",
               "id": null,
               "metadata": Object {},
               "name": "ProjectTrashQuery",
@@ -2096,7 +2096,7 @@ fragment ProposalFollowButton_proposal_39ngnn on Proposal {
   viewerFollowingConfiguration @include(if: $isAuthenticated)
 }
 
-fragment ProposalPreviewBody_proposal_4cQoTr on Proposal {
+fragment ProposalPreviewBody_proposal_4died5 on Proposal {
   isArchived
   id
   slug
@@ -2201,7 +2201,7 @@ fragment ProposalPreview_proposal_4died5 on Proposal {
   }
   isArchived
   ...ProposalPreviewFooter_proposal_2tPna9
-  ...ProposalPreviewBody_proposal_4cQoTr
+  ...ProposalPreviewBody_proposal_4died5
   ...ProposalPreviewStatus_proposal_2tPna9
 }
 

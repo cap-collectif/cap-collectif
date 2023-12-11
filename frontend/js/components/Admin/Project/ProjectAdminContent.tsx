@@ -11,7 +11,7 @@ import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query
 import '~relay/ProjectAdminContent_query.graphql'
 import environment from '~/createRelayEnvironment'
 import type { GlobalState } from '~/types'
-import ProjectAdminForm from './Form/ProjectAdminForm';
+import ProjectAdminForm from './Form/ProjectAdminForm'
 import { Content, Count, Header, NavContainer, NavItem } from './ProjectAdminContent.style'
 import {
   initialVariables as queryVariableProposal,
@@ -108,11 +108,7 @@ const formatNavbarLinks = (
   newCreateProjectFlag: boolean,
 ) => {
   const links = []
-  const baseUrlContributions = getProjectAdminPath(
-    project._id,
-    'CONTRIBUTIONS',
-    newCreateProjectFlag,
-  )
+  const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS', newCreateProjectFlag)
   const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep')
   links.push({
     title: 'global.contribution',
@@ -151,16 +147,8 @@ const formatNavbarLinks = (
 
   links.push({
     title: 'global.configuration',
-    url: getProjectAdminPath(
-      newCreateProjectFlag ? project.id : project._id,
-      'CONFIGURATION',
-      newCreateProjectFlag,
-    ),
-    to: getProjectAdminPath(
-      newCreateProjectFlag ? project.id : project._id,
-      'CONFIGURATION',
-      newCreateProjectFlag,
-    ),
+    url: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
+    to: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
     component: () =>
       newCreateProjectFlag ? (
         <></>
@@ -173,9 +161,9 @@ const formatNavbarLinks = (
           hasIdentificationCodeLists={hasIdentificationCodeLists}
         />
       ),
-  });
-  return links;
-};
+  })
+  return links
+}
 
 export const ProjectAdminContent = ({
   project,
@@ -188,7 +176,7 @@ export const ProjectAdminContent = ({
   const [title, setTitle] = useState<string>(project.title)
   const path = getProjectAdminBaseUrl(project._id)
   const hasProjectRevisionEnabled = useFeatureFlag('proposal_revisions')
-  const newCreateProjectFlag = useFeatureFlag('unstable__new_create_project');
+  const newCreateProjectFlag = useFeatureFlag('unstable__new_create_project')
 
   const dataAnalysisPrefetch = loadQuery()
   dataAnalysisPrefetch.next(
@@ -304,14 +292,15 @@ export const ProjectAdminContent = ({
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname.includes(link.url)}>
-                {(link.title === 'global.configuration' && newCreateProjectFlag) ? (
-                    <a href={link.to} id="qsgqsg"   >
-                        <FormattedMessage id={link.title} />
-                    </a>
-                ): ( <Link to={link.to}  >
-                    <FormattedMessage id={link.title} />
-                </Link>)}
-
+              {link.title === 'global.configuration' && newCreateProjectFlag ? (
+                <a href={link.to} id="qsgqsg">
+                  <FormattedMessage id={link.title} />
+                </a>
+              ) : (
+                <Link to={link.to}>
+                  <FormattedMessage id={link.title} />
+                </Link>
+              )}
 
               {link.count !== undefined && <Count active={location.pathname.includes(link.url)}>{link.count}</Count>}
             </NavItem>
@@ -371,7 +360,7 @@ const mapStateToProps = (state: GlobalState) => ({
 
 export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProjectAdminRouterWrapper), {
   project: graphql`
-    fragment ProjectAdminContent_project on Project @argumentDefinitions(projectId: { type: "ID!" }) {
+    fragment ProjectAdminContent_project on Project {
       _id
       id
       title

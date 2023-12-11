@@ -102,7 +102,7 @@ export default createFragmentContainer(DebateStepPageAbsoluteVoteAndShare, {
       debate {
         ...DebateStepPageVoteForm_debate @arguments(isAuthenticated: $isAuthenticated, isMobile: $isMobile)
       }
-      ...DebateStepPageVote_step @arguments(isMobile: $isMobile)
+      ...DebateStepPageVote_step
     }
   `,
 }) as RelayFragmentContainer<typeof DebateStepPageAbsoluteVoteAndShare>

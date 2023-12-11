@@ -112,30 +112,17 @@ export default createRefetchContainer(
   {
     opinion: graphql`
       fragment OpinionVersionListView_opinion on Sourceable
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean!" }
-        count: { type: "Int!" }
-        cursor: { type: "String" }
-        orderBy: { type: "VersionOrder!" }
-      ) {
+      @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, orderBy: { type: "VersionOrder!" }) {
         id
-        ...OpinionVersionListViewPaginated_opinion
-          @arguments(isAuthenticated: $isAuthenticated, cursor: $cursor, count: $count, orderBy: $orderBy)
+        ...OpinionVersionListViewPaginated_opinion @arguments(cursor: $cursor, count: $count, orderBy: $orderBy)
       }
     `,
   },
   graphql`
-    query OpinionVersionListViewRefetchQuery(
-      $isAuthenticated: Boolean!
-      $opinionId: ID!
-      $cursor: String
-      $orderBy: VersionOrder!
-      $count: Int!
-    ) {
+    query OpinionVersionListViewRefetchQuery($opinionId: ID!, $cursor: String, $orderBy: VersionOrder!, $count: Int!) {
       opinion: node(id: $opinionId) {
         id
-        ...OpinionVersionListView_opinion
-          @arguments(isAuthenticated: $isAuthenticated, cursor: $cursor, count: $count, orderBy: $orderBy)
+        ...OpinionVersionListView_opinion @arguments(cursor: $cursor, count: $count, orderBy: $orderBy)
       }
     }
   `,

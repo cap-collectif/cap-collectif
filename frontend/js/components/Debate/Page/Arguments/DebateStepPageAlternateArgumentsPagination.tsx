@@ -117,7 +117,7 @@ export const CONNECTION_CONFIG = {
       $debateId: ID!
       $first: Int!
       $cursor: String
-      $orderBy: DebateArgumentOrder
+      $orderBy: DebateArgumentOrder!
       $isAuthenticated: Boolean!
     ) {
       debate: node(id: $debateId) {

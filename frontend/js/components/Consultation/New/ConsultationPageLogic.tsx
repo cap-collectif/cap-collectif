@@ -23,11 +23,7 @@ const ConsultationPageLogic = ({ query }: Props) => {
 export default createFragmentContainer(ConsultationPageLogic, {
   query: graphql`
     fragment ConsultationPageLogic_query on Query
-    @argumentDefinitions(
-      stepId: { type: "ID!" }
-      consultationSlug: { type: "String!" }
-      isAuthenticated: { type: "Boolean!" }
-    ) {
+    @argumentDefinitions(stepId: { type: "ID!" }, consultationSlug: { type: "String!" }) {
       consultationStep: node(id: $stepId) {
         ... on ConsultationStep {
           title

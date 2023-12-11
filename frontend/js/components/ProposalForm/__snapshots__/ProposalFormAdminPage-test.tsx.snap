@@ -986,6 +986,48 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                             "storageKey": null,
                           },
                           Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "level",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SectionQuestion",
+                          },
+                          Object {
+                            "abstractKey": null,
+                            "kind": "InlineFragment",
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "isRangeBetween",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMin",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "rangeMax",
+                                "storageKey": null,
+                              },
+                            ],
+                            "type": "SimpleQuestion",
+                          },
+                          Object {
                             "alias": null,
                             "args": Array [
                               Object {
@@ -1274,48 +1316,6 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                             "kind": "ScalarField",
                             "name": "type",
                             "storageKey": null,
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "level",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "SectionQuestion",
-                          },
-                          Object {
-                            "abstractKey": null,
-                            "kind": "InlineFragment",
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "isRangeBetween",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "rangeMin",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "rangeMax",
-                                "storageKey": null,
-                              },
-                            ],
-                            "type": "SimpleQuestion",
                           },
                           Object {
                             "abstractKey": null,

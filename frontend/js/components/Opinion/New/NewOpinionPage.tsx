@@ -21,8 +21,8 @@ export const NewOpinionPage = ({ opinionId, versionId, isAuthenticated }: Props)
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query NewOpinionPageQuery($opinionId: ID!, $isAuthenticated: Boolean!) {
-          ...OpinionPageLogic_query @arguments(opinionId: $opinionId, isAuthenticated: $isAuthenticated)
+        query NewOpinionPageQuery($opinionId: ID!) {
+          ...OpinionPageLogic_query @arguments(opinionId: $opinionId)
         }
       `}
       variables={{

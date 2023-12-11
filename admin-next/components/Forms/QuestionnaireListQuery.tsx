@@ -9,7 +9,7 @@ import withPageAuthRequired from '@utils/withPageAuthRequired';
 
 export const QUESTIONNAIRE_LIST_QUERY = graphql`
     query QuestionnaireListQuery(
-        $count: Int
+        $count: Int!
         $cursor: String
         $term: String
         $affiliations: [QuestionnaireAffiliation!]
