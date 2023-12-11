@@ -290,6 +290,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
             $this->updatedAt = new \DateTime();
             $this->proposals = new ArrayCollection();
 
+            $clonedEvaluationForm = null;
             if ($this->evaluationForm) {
                 /** @var Questionnaire $clonedEvaluationForm */
                 $clonedEvaluationForm = clone $this->evaluationForm;
@@ -301,6 +302,10 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
                 /** @var AnalysisConfiguration $clonedAnalysisConfig */
                 $clonedAnalysisConfig = clone $this->analysisConfiguration;
                 $clonedAnalysisConfig->setProposalForm($this);
+
+                if ($clonedEvaluationForm) {
+                    $clonedAnalysisConfig->setEvaluationForm($clonedEvaluationForm);
+                }
             } else {
                 $this->analysisConfiguration = null;
             }

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,17 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
             $this->resetTitle($proposalForm, $clone);
             $this->setOwner($clone, $viewer);
 
+            $proposalFormEvaluationForm = $clone->getEvaluationForm() ?? null;
+            $analysisConfigurationEvaluationForm = $clone->getAnalysisConfiguration() ? $clone->getAnalysisConfiguration()->getEvaluationForm() : null;
+
+            if ($proposalFormEvaluationForm) {
+                $this->updateEvaluationForm($proposalFormEvaluationForm);
+            }
+
+            if ($analysisConfigurationEvaluationForm) {
+                $this->updateEvaluationForm($analysisConfigurationEvaluationForm);
+            }
+
             $this->em->persist($clone);
             $this->em->flush();
         } catch (UserError $error) {
@@ -62,5 +74,11 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
     {
         //proposalForm:__clone is overridden and will do all the job
         return clone $model;
+    }
+
+    private function updateEvaluationForm(Questionnaire $evaluationForm): void
+    {
+        $evaluationForm->setSlug('copy-of-' . $evaluationForm->getSlug());
+        $evaluationForm->setTitle($this->translator->trans('copy-of') . ' ' . $evaluationForm->getTitle());
     }
 }
