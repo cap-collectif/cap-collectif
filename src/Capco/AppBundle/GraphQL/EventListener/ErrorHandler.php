@@ -9,24 +9,20 @@ use Psr\Log\LoggerInterface;
 /** https://github.com/overblog/GraphQLBundle/blob/master/docs/error-handling/index.md#custom-error-handling--formatting */
 final class ErrorHandler
 {
-    private $errorHandler;
+    private GraphQLErrorHandler $errorHandler;
 
-    private $throwException;
+    private bool $throwException;
 
-    private $debug;
-
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(
         LoggerInterface $logger,
         GraphQLErrorHandler $errorHandler,
-        bool $throwException = false,
-        bool $debug = false
+        bool $throwException = false
     ) {
         $this->errorHandler = $errorHandler;
         $this->logger = $logger;
         $this->throwException = $throwException;
-        $this->debug = $debug;
     }
 
     public function onPostExecutor(ExecutorResultEvent $executorResultEvent)
@@ -37,7 +33,7 @@ final class ErrorHandler
         $result = $result->toArray();
 
         if (isset($result['errors'])) {
-            $this->logger->error(__METHOD__ . ' : ' . json_encode($result['errors']));
+            $this->logger->warning(__METHOD__ . ' : ' . json_encode($result['errors']));
         }
     }
 }
