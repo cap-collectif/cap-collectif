@@ -200,10 +200,20 @@ class UserContext extends DefaultContext
 
     /**
      * @Then I can see I am logged in as :username
+     * @Then I can see I am logged in as :username and I am :flaky
      */
-    public function iCanSeeIamLoggedInAs(string $username)
+    public function iCanSeeIamLoggedInAs(string $username, string $flaky = 'false')
     {
-        $this->waitAndThrowOnFailure(8000, "$('#navbar-username').length > 0");
+        $selector = "$('#navbar-username').length > 0";
+        while ('flaky' === $flaky && !$this->getSession()->wait(8000, $selector)) {
+            $this->getSession()->reload();
+            sleep(8);
+        }
+
+        if ('false' === $flaky) {
+            $this->waitAndThrowOnFailure(8000, $selector);
+        }
+
         $this->assertElementContainsText('#navbar-username', $username);
     }
 

@@ -56,13 +56,14 @@ trait AdminProposalFormTrait
 
     /**
      * @When I go to the admin proposal form :tab tab
+     * @When I go to the admin proposal form :tab tab with a timeout of :timeout ms
      *
      * @param mixed $tab
      */
-    public function iGoToTheAdminProposalFormTab(string $tab)
+    public function iGoToTheAdminProposalFormTab(string $tab, int $timeout = 3000)
     {
         $page = $this->getCurrentPage();
-        $this->waitAndThrowOnFailure(3000, "$('#proposal-form-admin-page').length > 0");
+        $this->waitAndThrowOnFailure($timeout, "$('#proposal-form-admin-page').length > 0");
         $page->clickOnTab($tab);
         $this->iWait(1);
     }

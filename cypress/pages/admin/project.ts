@@ -28,7 +28,7 @@ export default new (class AdminProjectPage {
       url += `?${queryParameters}`
     }
 
-    return this.cy.visit(url)
+    this.cy.visit(url)
   }
 
   assertProposalsAndProgressStatusLengthOnAnalysisTab(expectedProgressStatus: string, expectedLength: number) {
@@ -43,17 +43,41 @@ export default new (class AdminProjectPage {
   }
 
   visit(projectName: string) {
-    return this.cy.visit(this.path(projectName))
+    cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'UpdateProjectAlphaMutation' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminParticipantTabQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectTypeListFieldQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectMetadataAdminFormThemeQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectMetadataAdminFormDistrictQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ProjectAdminCollectStepFormProposalsQuery' })
+
+    this.cy.visit(this.path(projectName))
+
+    cy.wait('@AdminRightNavbarAppQuery')
+    cy.wait('@ProjectAdminPageQuery')
+    cy.wait('@ProjectAdminAnalysisTabQuery')
+    cy.wait('@ProjectAdminContributionsPageQuery')
+    cy.wait('@ProjectAdminParticipantTabQuery')
+    cy.wait('@ProjectTypeListFieldQuery')
+    cy.wait('@ProjectMetadataAdminFormThemeQuery')
+    cy.wait('@ProjectMetadataAdminFormDistrictQuery')
   }
 
   visitContributionsPage({ projectSlug, state, stepId }: { projectSlug: string; state: string; stepId: string }) {
-    const url = `admin/alpha/project/${projectSlug}/contributions/proposals?state=${state}&step=${stepId}`
-    this.cy.visit(url)
+    this.cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminParticipantTabQuery' })
     this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
-    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
-    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
-    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+
+    this.cy.visit(`admin/alpha/project/${projectSlug}/contributions/proposals?state=${state}&step=${stepId}`)
+
+    this.cy.wait('@AdminRightNavbarAppQuery')
+    this.cy.wait('@ProjectAdminPageQuery')
     this.cy.wait('@ProjectAdminParticipantTabQuery')
     this.cy.wait('@ProjectAdminProposalsPageQuery')
     this.cy.wait('@ProjectAdminContributionsPageQuery')
@@ -62,7 +86,21 @@ export default new (class AdminProjectPage {
   }
 
   visitProposalsTab(projectName: string) {
-    return this.cy.visit(this.proposalsTabPath(projectName))
+    this.cy.interceptGraphQLOperation({ operationName: 'AdminRightNavbarAppQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminAnalysisTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminContributionsPageQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminParticipantTabQuery' })
+    this.cy.interceptGraphQLOperation({ operationName: 'ProjectAdminProposalsPageQuery' })
+
+    this.cy.visit(this.proposalsTabPath(projectName))
+
+    this.cy.wait('@AdminRightNavbarAppQuery')
+    this.cy.wait('@ProjectAdminPageQuery')
+    this.cy.wait('@ProjectAdminParticipantTabQuery')
+    this.cy.wait('@ProjectAdminContributionsPageQuery')
+    this.cy.wait('@ProjectAdminProposalsPageQuery')
+    this.cy.wait('@ProjectAdminProposalsPageQuery')
   }
 
   openAddModal() {
@@ -74,11 +112,11 @@ export default new (class AdminProjectPage {
   }
 
   get mostMessageReceivedFilter() {
-    return this.cy.get('span').contains('filter.messages_received.most')
+    return this.cy.contains('filter.messages_received.most')
   }
 
   get leastMessageReceivedFilter() {
-    return this.cy.get('span').contains('filter.messages_received.least')
+    return this.cy.contains('filter.messages_received.least')
   }
 
   get firstNumberOfMessagesSentToAuthor() {
@@ -91,7 +129,6 @@ export default new (class AdminProjectPage {
 
   selectCollectStep(stepName: string) {
     this.stepFilterSelect.click()
-    cy.wait(1000)
     this.cy.get('span').contains(stepName).click()
   }
 

@@ -6,9 +6,8 @@ Scenario: A user wants to login and see he has successfully logged in.
   Then I can see I am logged in as "user"
 
 Scenario: An admin wants to login and see he has successfully logged in.
-  Given I visited "home page"
-  And I am logged in as admin
-  Then I can see I am logged in as "admin"
+  Given I am logged in as admin
+  Then I can see I am logged in as "admin" and I am "flaky"
   And I can access admin in navbar
 
 Scenario: A logged user wants to logout

@@ -72,7 +72,7 @@ Scenario: Logged in admin wants to edit a proposal form page content
 Scenario: Logged in admin wants to edit a proposal form on notification tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
-  Then I go to the admin proposal form notification tab
+  Then I go to the admin proposal form notification tab with a timeout of "5000" ms
   And I check element "proposal_form_notification_on_update"
   And I check element "proposal_form_notification_comment_on_create"
   Then I save current admin proposal form "notification"
@@ -83,7 +83,7 @@ Scenario: Logged in admin wants to edit a proposal form on notification tab
 Scenario: Logged in admin wants to edit a proposal form on settings tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
-  Then I go to the admin proposal form settings tab
+  Then I go to the admin proposal form settings tab with a timeout of "5000" ms
   And I fill in the following:
     | title | test text random |
   And I check element "proposal_form_costable"

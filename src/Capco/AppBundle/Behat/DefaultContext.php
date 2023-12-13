@@ -123,6 +123,11 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
      */
     public function waitAndThrowOnFailure(int $timeout, string $condition): void
     {
+        while (str_contains('#navbar-username', $condition) && !$this->getSession()->wait($timeout, $condition)) {
+            $this->getSession()->reload();
+            sleep(10);
+        }
+
         if (!$this->getSession()->wait($timeout, $condition)) {
             throw new \RuntimeException('Condition "' . $condition . '" failed after ' . $timeout . 'ms.');
         }

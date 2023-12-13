@@ -6,9 +6,13 @@
   "videoUploadOnPasses": false,
   "videoCompression": false,
   "experimentalSessionAndOrigin": true,
-  "retries": 0,
+  "retries": {
+    "runMode": 0,
+    "openMode": 3
+  },
   "reporter": "junit",
   "reporterOptions": {
     "mochaFile": "tests-results/output-[hash].xml"
-  }
+  },
+  "watchForFileChanges": false
 }
