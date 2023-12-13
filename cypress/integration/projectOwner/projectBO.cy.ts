@@ -4,6 +4,7 @@ describe('Project Owner', () => {
   describe('Project BO', () => {
     beforeEach(() => {
       cy.task('db:restore')
+      cy.task('disable:feature', 'unstable__new_create_project')
       cy.directLoginAs('project_owner')
     })
     it('should allow a project admin to add his proposalform', () => {
