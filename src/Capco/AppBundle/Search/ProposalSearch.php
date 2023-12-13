@@ -157,6 +157,10 @@ class ProposalSearch extends Search
         foreach ($filters as $key => $value) {
             if ('proposalAnalysts.analyst.id' === $key) {
                 foreach ($value as $analyst) {
+                    if (false === uuid_parse($analyst)) {
+                        $analyst = GlobalIdResolver::getDecodedId($analyst, true);
+                    }
+
                     $boolQuery->addFilter(new Term([$key => ['value' => $analyst]]));
                 }
 

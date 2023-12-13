@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Elasticsearch;
 use Capco\AppBundle\Elasticsearch\IndexBuilder;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -82,8 +83,14 @@ class CreateIndexCommand extends Command
             $output->writeln('<info>All the documents are LIVE!</info>');
         }
 
-        $this->indexManager->markAsLive($newIndex);
-        $output->writeln(['<info>New Index is now LIVE!</info>']);
+        $markAsLiveCommand = $this->getApplication()->find('capco:es:set-live-index');
+        $markAsLiveCommand->run(
+            new ArrayInput([
+                'index' => $newIndex->getName(),
+                '--isJustCreated' => true,
+            ]),
+            $output,
+        );
 
         return 0;
     }
