@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35a1592eca7f03ebf91fffcc3754b31d",
+    "content-hash": "bc395490477a3451962561a1b1db5648",
     "packages": [
         {
             "name": "accord/mandrill-swiftmailer",
@@ -16310,58 +16310,6 @@
                 "source": "https://github.com/tkotosz/behat-step-time-logger/tree/master"
             },
             "time": "2018-10-12T07:06:30+00:00"
-        },
-        {
-            "name": "bossa/phpspec2-expect",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cap-collectif/phpspec2-expect.git",
-                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/phpspec2-expect/zipball/69288069ba3479bab84daf6459a3fac5a08d30cf",
-                "reference": "69288069ba3479bab84daf6459a3fac5a08d30cf",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "phpspec/phpspec": "^5.0 || ^6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "expect.php"
-                ],
-                "psr-0": {
-                    "Bossa\\PhpSpec\\Expect\\": ""
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marcello Duarte",
-                    "homepage": "http://marcelloduarte.net/"
-                }
-            ],
-            "description": "Helper that decorates any SUS with a phpspec lazy object wrapper",
-            "keywords": [
-                "BDD",
-                "SpecBDD",
-                "TDD",
-                "spec",
-                "specification"
-            ],
-            "support": {
-                "source": "https://github.com/cap-collectif/phpspec2-expect/tree/3.2.0"
-            },
-            "time": "2019-11-08T18:39:31+00:00"
         },
         {
             "name": "coduo/php-matcher",

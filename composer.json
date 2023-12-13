@@ -60,10 +60,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/cap-collectif/phpspec2-expect"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/theofidry/AliceBundle"
         }
     ],
@@ -177,7 +173,6 @@
         "sensiolabs/behat-page-object-extension": "^2.3",
         "alexandresalome/mailcatcher": "dev-master#a982d42 as 1.3.0",
         "phpspec/phpspec": "^6.0",
-        "bossa/phpspec2-expect": "^3.2",
         "phpunit/phpunit": "^8.0",
         "bex/behat-step-time-logger": "^2.0",
         "friendsofphp/php-cs-fixer": "^3",

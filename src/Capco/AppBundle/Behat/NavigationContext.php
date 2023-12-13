@@ -22,6 +22,8 @@ class NavigationContext extends PageObjectContext
      */
     public function theFirstSourceVoteCounterShouldBe(int $value)
     {
-        expect($this->getPage('opinion page')->getFirstSourceVoteCounter())->toBe($value);
+        if ($this->getPage('opinion page')->getFirstSourceVoteCounter() !== $value) {
+            throw new \RuntimeException('The first source vote counter is not ' . $value);
+        }
     }
 }

@@ -173,7 +173,15 @@ class GraphQLContext implements Context
      */
     public function headerContainsValue(string $header, string $value)
     {
-        expect($this->rawResponse->getHeaders()[$header][0])->toBe($value);
+        if ($this->rawResponse->getHeaders()[$header][0] !== $value) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Header %s does not contain %s',
+                    $header,
+                    $value
+                )
+            );
+        }
     }
 
     /**

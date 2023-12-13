@@ -562,7 +562,9 @@ class ApplicationContext extends UserContext
     {
         $toggleManager = $this->getService('qandidate.toggle.manager');
         $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
-        expect($toggleManager->active($feature, $contextFactory->createContext()))->toBe(true);
+        if (true !== $toggleManager->active($feature, $contextFactory->createContext())) {
+            throw new \RuntimeException("Feature {$feature} is not enabled");
+        }
     }
 
     /**
@@ -604,7 +606,9 @@ class ApplicationContext extends UserContext
     {
         $toggleManager = $this->getService('qandidate.toggle.manager');
         $contextFactory = $this->getService('qandidate.toggle.user_context_factory');
-        expect($toggleManager->active($feature, $contextFactory->createContext()))->toBe(false);
+        if (false !== $toggleManager->active($feature, $contextFactory->createContext())) {
+            throw new \RuntimeException("Feature {$feature} is not disabled");
+        }
     }
 
     /**
@@ -623,7 +627,9 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeElementOnPage(string $element, string $page)
     {
-        expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(true);
+        if (false === $this->navigationContext->getPage($page)->containsElement($element)) {
+            throw new \RuntimeException("Element {$element} not found on page {$page}");
+        }
     }
 
     /**
@@ -631,7 +637,9 @@ class ApplicationContext extends UserContext
      */
     public function iShouldNotSeeElementOnPage(string $element, string $page)
     {
-        expect($this->navigationContext->getPage($page)->containsElement($element))->toBe(false);
+        if (true === $this->navigationContext->getPage($page)->containsElement($element)) {
+            throw new \RuntimeException("Element {$element} found on page {$page}");
+        }
     }
 
     /**
@@ -641,7 +649,9 @@ class ApplicationContext extends UserContext
     {
         $page = $this->navigationContext->getPage($pageSlug);
         $this->waitAndThrowOnFailure(2000, "$('" . $page->getSelector($element) . "').length > 0");
-        expect($page->getElement($element)->hasAttribute('disabled'))->toBe(true);
+        if (false === $page->getElement($element)->hasAttribute('disabled')) {
+            throw new \RuntimeException("Element: {$element} not disabled on Page: {$pageSlug}");
+        }
     }
 
     /**

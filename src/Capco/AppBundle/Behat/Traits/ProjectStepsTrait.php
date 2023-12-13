@@ -18,7 +18,9 @@ trait ProjectStepsTrait
     {
         $this->getEntityManager()->clear();
         $project = $this->getRepository('CapcoAppBundle:Project')->findOneBySlug($slug);
-        expect($project->getFirstAuthor()->getId())->toBe($authorId);
+        if ($project->getFirstAuthor()->getId() !== $authorId) {
+            throw new \RuntimeException('The project does not have the author ' . $authorId);
+        }
     }
 
     /**
@@ -30,7 +32,9 @@ trait ProjectStepsTrait
         $this->getEntityManager()->clear();
         /** @var Project $project */
         $project = $this->getRepository('CapcoAppBundle:Project')->findOneBySlug($slug);
-        expect($project->isPublic())->toBe(false);
+        if (true === $project->isPublic()) {
+            throw new \RuntimeException('The project is published');
+        }
     }
 
     /**

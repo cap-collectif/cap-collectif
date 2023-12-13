@@ -6,7 +6,6 @@ use Capco\AppBundle\Behat\Storage\BehatStorage;
 use Capco\AppBundle\Behat\Traits\FranceConnectTrait;
 use Capco\AppBundle\Behat\Traits\OpenidConnectTrait;
 use Capco\AppBundle\Entity\EventRegistration;
-use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
@@ -55,29 +54,12 @@ class UserContext extends DefaultContext
         $this->getEntityManager()->clear();
         $user = $this->getRepository(User::class)->findOneByEmail($email);
         foreach ($user->getResponses() as $response) {
-            if ($response->getQuestion()->getId() === $questionId) {
-                expect($response->getValue())->toBe($value);
-
+            if ($response->getQuestion()->getId() === $questionId && $response->getValue() === $value) {
                 return;
             }
         }
 
-        throw new \Exception('userHasResponseToQuestion failed.');
-    }
-
-    /**
-     * @Then the question :questionAId should be positioned before :questionBId
-     */
-    public function questionIsBefore(int $questionAId, int $questionBId)
-    {
-        $this->getEntityManager()->clear();
-        $qA = $this->getRepository(AbstractQuestion::class)->find($questionAId);
-        $qB = $this->getRepository(AbstractQuestion::class)->find($questionBId);
-        expect(
-            $qB->getQuestionnaireAbstractQuestion()->getPosition() -
-                $qA->getQuestionnaireAbstractQuestion()->getPosition() >
-                0
-        )->toBe(true);
+        throw new \RuntimeException('userHasResponseToQuestion failed.');
     }
 
     /**
@@ -105,35 +87,15 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Then user :userId should have role :role
-     * @Given user :userId has role :role
-     */
-    public function userHasRole(string $userId, string $role)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        expect($user->hasRole($role))->toBe(true);
-    }
-
-    /**
-     * @Then user :userId should not have role :role
-     * @Given user :userId doesn't have role :role
-     */
-    public function userDoesntHaveRole(string $userId, string $role)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
-        expect($user->hasRole($role))->toBe(false);
-    }
-
-    /**
      * @Then user :userName should have email :email
      */
     public function userEmailIs(string $userName, string $email)
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByUsername($userName);
-        expect($user->getEmail())->toBe($email);
+        if ($user->getEmail() !== $email) {
+            throw new \RuntimeException('Could not find user\'s email associated with username:' . $userName);
+        }
     }
 
     /**
@@ -143,17 +105,9 @@ class UserContext extends DefaultContext
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->findOneByEmail($email);
-        expect($user->getUsername())->toBe($userName);
-    }
-
-    /**
-     * @Then user :userSlug email_to_confirm should be :email
-     */
-    public function userNewEmailIs(string $userSlug, string $email)
-    {
-        $this->getEntityManager()->clear();
-        $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
-        expect($user->getNewEmailToConfirm())->toBe($email);
+        if ($user->getUsername() !== $userName) {
+            throw new \RuntimeException('Could not find user associated with email:' . $email);
+        }
     }
 
     /**
