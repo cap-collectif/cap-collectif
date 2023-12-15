@@ -7,11 +7,15 @@ Object {
       "values": Array [
         Object {
           "key": "/projects",
-          "totalCount": 7,
+          "totalCount": 8,
         },
         Object {
           "key": "/project/budget-participatif-rennes",
-          "totalCount": 4,
+          "totalCount": 5,
+        },
+        Object {
+          "key": "/",
+          "totalCount": 3,
         },
         Object {
           "key": "/project/debat-sur-le-cannabis",
@@ -20,10 +24,6 @@ Object {
         Object {
           "key": "/project/project-analyse",
           "totalCount": 3,
-        },
-        Object {
-          "key": "/",
-          "totalCount": 2,
         },
         Object {
           "key": "/project/pour-ou-contre-la-vaccination-obligatoire-des-soignants/debate/pour-ou-contre-la-vaccination-des-soignants",
@@ -51,7 +51,7 @@ exports[`Internal|Analytics fetches analytics data 1`] = `
 Object {
   "analytics": Object {
     "anonymousContributors": Object {
-      "totalCount": 3,
+      "totalCount": 4,
       "values": Array [
         Object {
           "key": "2014-12-01T00:00:00.000Z",
@@ -208,6 +208,198 @@ Object {
         Object {
           "key": "2018-02-01T00:00:00.000Z",
           "totalCount": 0,
+        },
+        Object {
+          "key": "2018-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2018-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2019-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2020-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-04-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-02-01T00:00:00.000Z",
+          "totalCount": 1,
         },
       ],
     },
@@ -653,6 +845,102 @@ Object {
           "key": "2021-07-01T00:00:00.000Z",
           "totalCount": 1,
         },
+        Object {
+          "key": "2021-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-01-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-02-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-04-01T00:00:00.000Z",
+          "totalCount": 17,
+        },
+        Object {
+          "key": "2022-05-01T00:00:00.000Z",
+          "totalCount": 22,
+        },
+        Object {
+          "key": "2022-06-01T00:00:00.000Z",
+          "totalCount": 21,
+        },
+        Object {
+          "key": "2022-07-01T00:00:00.000Z",
+          "totalCount": 15,
+        },
+        Object {
+          "key": "2022-08-01T00:00:00.000Z",
+          "totalCount": 31,
+        },
+        Object {
+          "key": "2022-09-01T00:00:00.000Z",
+          "totalCount": 23,
+        },
+        Object {
+          "key": "2022-10-01T00:00:00.000Z",
+          "totalCount": 28,
+        },
+        Object {
+          "key": "2022-11-01T00:00:00.000Z",
+          "totalCount": 24,
+        },
+        Object {
+          "key": "2022-12-01T00:00:00.000Z",
+          "totalCount": 24,
+        },
+        Object {
+          "key": "2023-01-01T00:00:00.000Z",
+          "totalCount": 28,
+        },
+        Object {
+          "key": "2023-02-01T00:00:00.000Z",
+          "totalCount": 23,
+        },
+        Object {
+          "key": "2023-03-01T00:00:00.000Z",
+          "totalCount": 28,
+        },
+        Object {
+          "key": "2023-04-01T00:00:00.000Z",
+          "totalCount": 19,
+        },
+        Object {
+          "key": "2023-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2023-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2023-07-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
       ],
     },
     "contributors": Object {
@@ -977,6 +1265,102 @@ Object {
           "key": "2021-07-01T00:00:00.000Z",
           "totalCount": 1,
         },
+        Object {
+          "key": "2021-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-01-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2022-02-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-03-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-04-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-05-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-06-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-07-01T00:00:00.000Z",
+          "totalCount": 2,
+        },
+        Object {
+          "key": "2022-08-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-09-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-10-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-11-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2022-12-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2023-01-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2023-02-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2023-03-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2023-04-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
+        Object {
+          "key": "2023-05-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2023-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2023-07-01T00:00:00.000Z",
+          "totalCount": 1,
+        },
       ],
     },
     "followers": Object {
@@ -1187,33 +1571,33 @@ Object {
       "values": Array [
         Object {
           "category": Object {
-            "id": "pCategoryAssigned1",
+            "id": "pCategoryBp3Idf5",
           },
-          "totalCount": 11,
+          "totalCount": 69,
         },
         Object {
           "category": Object {
-            "id": "pCategoryAssigned2",
+            "id": "pCategoryBp3Idf3",
           },
-          "totalCount": 7,
+          "totalCount": 65,
         },
         Object {
           "category": Object {
-            "id": "pCategory1",
+            "id": "pCategoryBp3Idf1",
           },
-          "totalCount": 5,
+          "totalCount": 61,
         },
         Object {
           "category": Object {
-            "id": "pCategoryIdf2",
+            "id": "pCategoryBp3Idf4",
           },
-          "totalCount": 5,
+          "totalCount": 57,
         },
         Object {
           "category": Object {
-            "id": "pCategory2",
+            "id": "pCategoryBp3Idf2",
           },
-          "totalCount": 4,
+          "totalCount": 50,
         },
       ],
     },
@@ -1221,11 +1605,15 @@ Object {
       "values": Array [
         Object {
           "key": "/projects",
-          "totalCount": 7,
+          "totalCount": 8,
         },
         Object {
           "key": "/project/budget-participatif-rennes",
-          "totalCount": 4,
+          "totalCount": 5,
+        },
+        Object {
+          "key": "/",
+          "totalCount": 3,
         },
         Object {
           "key": "/project/debat-sur-le-cannabis",
@@ -1234,10 +1622,6 @@ Object {
         Object {
           "key": "/project/project-analyse",
           "totalCount": 3,
-        },
-        Object {
-          "key": "/",
-          "totalCount": 2,
         },
         Object {
           "key": "/project/pour-ou-contre-la-vaccination-obligatoire-des-soignants/debate/pour-ou-contre-la-vaccination-des-soignants",
@@ -1524,12 +1908,12 @@ Object {
     "topContributors": Array [
       Object {
         "user": Object {
-          "id": "VXNlcjp1c2VyMQ==",
+          "id": "VXNlcjp1c2VyNQ==",
         },
       },
       Object {
         "user": Object {
-          "id": "VXNlcjp1c2VyNQ==",
+          "id": "VXNlcjp1c2VyMQ==",
         },
       },
       Object {
@@ -1546,7 +1930,7 @@ Object {
     "trafficSources": Object {
       "sources": Array [
         Object {
-          "totalCount": 3,
+          "totalCount": 5,
           "type": "SEARCH_ENGINE",
         },
         Object {
@@ -1554,11 +1938,11 @@ Object {
           "type": "SOCIAL_NETWORK",
         },
         Object {
-          "totalCount": 9,
+          "totalCount": 10,
           "type": "DIRECT",
         },
         Object {
-          "totalCount": 4,
+          "totalCount": 6,
           "type": "EXTERNAL_LINK",
         },
       ],
@@ -1566,356 +1950,8 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
-          "key": "2013-08-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-08-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2014-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2014-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2015-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-08-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2016-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-01-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-05-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2018-06-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2018-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-03-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2019-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-06-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2019-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-08-01T00:00:00.000Z",
-          "totalCount": 6,
-        },
-        Object {
-          "key": "2019-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-11-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2019-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-06-01T00:00:00.000Z",
-          "totalCount": 3,
-        },
-        Object {
-          "key": "2020-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2020-11-01T00:00:00.000Z",
-          "totalCount": 1,
+          "key": "2023-12-01T00:00:00.000Z",
+          "totalCount": 27,
         },
       ],
     },
@@ -2232,6 +2268,42 @@ Object {
         Object {
           "key": "2021-05-01T00:00:00.000Z",
           "totalCount": 1,
+        },
+        Object {
+          "key": "2021-06-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-07-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-08-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-09-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-10-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-11-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2021-12-01T00:00:00.000Z",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2022-01-01T00:00:00.000Z",
+          "totalCount": 3,
+        },
+        Object {
+          "key": "2022-02-01T00:00:00.000Z",
+          "totalCount": 3,
         },
       ],
     },
@@ -2738,7 +2810,7 @@ Object {
       "values": Array [
         Object {
           "key": "/project/budget-participatif-rennes",
-          "totalCount": 2,
+          "totalCount": 4,
         },
       ],
     },
@@ -3035,7 +3107,7 @@ Object {
           "type": "SEARCH_ENGINE",
         },
         Object {
-          "totalCount": 1,
+          "totalCount": 2,
           "type": "SOCIAL_NETWORK",
         },
         Object {
@@ -3043,7 +3115,7 @@ Object {
           "type": "DIRECT",
         },
         Object {
-          "totalCount": 1,
+          "totalCount": 2,
           "type": "EXTERNAL_LINK",
         },
       ],
@@ -3051,152 +3123,8 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
-          "key": "2016-08-01T00:00:00.000Z",
-          "totalCount": 1,
-        },
-        Object {
-          "key": "2016-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2016-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2017-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-08-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-09-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-10-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-11-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2018-12-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-01-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-02-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-03-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-04-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-05-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-06-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-07-01T00:00:00.000Z",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2019-08-01T00:00:00.000Z",
-          "totalCount": 1,
+          "key": "2023-12-01T00:00:00.000Z",
+          "totalCount": 4,
         },
       ],
     },

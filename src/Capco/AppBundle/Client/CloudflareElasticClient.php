@@ -135,7 +135,7 @@ class CloudflareElasticClient
 
         $searchQueries = $this->getExternalAnalyticsSearches(
             $start,
-            $end,
+            $end->setTime(23, 59, 59),
             $projectSlug,
             $requestedFields
         );
