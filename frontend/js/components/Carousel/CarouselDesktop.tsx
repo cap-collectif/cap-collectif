@@ -119,6 +119,8 @@ export const CarouselDesktop = ({ highlighteds }: CarouselDesktopProps) => {
                 return <div className="bg--default bg--project" />
               }
 
+              const locale = window.location.pathname.slice(0, -1);
+
               return (
                 <div key={index} className={activeItem} data-item={index}>
                   {getMedia()}
@@ -128,7 +130,7 @@ export const CarouselDesktop = ({ highlighteds }: CarouselDesktopProps) => {
                         <FormattedMessage id={`type-${highlighted.object_type}`} />
                       </span>
                       <br />
-                      <a className="carousel__title" href={item._links ? item._links.show : '#'}>
+                      <a className="carousel__title" href={item._links ? `${locale}${item._links.show}` : '#'}>
                         {item.title}
                       </a>
                       <br />
