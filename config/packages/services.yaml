@@ -238,12 +238,6 @@ services:
             $translationDomain: 'routes'
             $defaultLocale: 'fr-FR'
 
-    webfactory_icu_translation.translator: '@Capco\AppBundle\Translator\FormatterDecorator'
-
-    Capco\AppBundle\Translator\FormatterDecorator:
-        arguments:
-            $formatter: '@Webfactory\IcuTranslationBundle\Translator\Formatting\IntlFormatter'
-
     Capco\AppBundle\Router\I18nRouter:
         autowire: true
         arguments:

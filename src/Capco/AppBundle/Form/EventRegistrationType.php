@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\EventRegistration;
-use Capco\AppBundle\Translator\FormatterDecorator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,12 +12,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class EventRegistrationType extends AbstractType
 {
     private $user;
-    private $translator;
 
-    public function __construct(TokenStorageInterface $token, FormatterDecorator $translator)
+    public function __construct(TokenStorageInterface $token)
     {
         $this->user = $token->getToken() ? $token->getToken()->getUser() : null;
-        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

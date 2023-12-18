@@ -8,7 +8,6 @@ parameters:
             interfaces: [Capco\AppBundle\Entity\Interfaces\VotableInterface]
     nelmio_alice.seed: 1
     jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
-    webfactory_icu_translation.translator: Capco\AppBundle\Translator\FormatterDecorator
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN']
     knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
     knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
