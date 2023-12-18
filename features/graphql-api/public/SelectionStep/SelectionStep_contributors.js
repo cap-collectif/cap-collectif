@@ -11,7 +11,9 @@ const SelectionStepContributorsQuery = /* GraphQL */ `
           }
           edges {
             node {
-              _id
+              ...on User {
+                _id
+              }
               createdAt
             }
           }

@@ -19,8 +19,7 @@ export default new (class ProposalVotePage {
     return this.cy.get('#confirm-proposal-vote')
   }
 
-  getVoterCardUsername() {
-    return this.cy.get('.proposal__vote a.excerpt')
+  getVoterCards() {
+    return this.cy.get('.proposal__vote')
   }
-
 })()

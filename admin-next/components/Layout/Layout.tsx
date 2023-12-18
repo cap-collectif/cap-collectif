@@ -1,50 +1,49 @@
-import * as React from 'react';
-import NavBar, { NavBarProps } from '../NavBar/NavBar';
-import SideBar, { setSideBarCookie, SIDE_BAR_COOKIE } from '../SideBar/SideBar';
-import { useIntl } from 'react-intl';
-import { Box, Flex, Spinner } from '@cap-collectif/ui';
-import Head from 'next/head';
-import NavBarPlaceholder from '../NavBar/NavBarPlaceholder';
-import { NavBarProvider } from '../NavBar/NavBar.context';
-import { useAppContext } from '../AppProvider/App.context';
-import { FONT_PATH } from '../../styles/Fonts';
-import { SideBarProvider } from '@ui/SideBar/SideBar.context';
-import sideBarItems from '../SideBar/SideBarItems.json';
-import { useRouter } from 'next/router';
-import CookieHelper from '@utils/cookie-helper';
-import { LayoutProvider } from './Layout.context';
-import useFeatureFlag from '@hooks/useFeatureFlag';
-import HotJar from './HotJar';
+import * as React from 'react'
+import NavBar, { NavBarProps } from '../NavBar/NavBar'
+import SideBar, { setSideBarCookie, SIDE_BAR_COOKIE } from '../SideBar/SideBar'
+import { useIntl } from 'react-intl'
+import { Box, Flex, Spinner } from '@cap-collectif/ui'
+import Head from 'next/head'
+import NavBarPlaceholder from '../NavBar/NavBarPlaceholder'
+import { NavBarProvider } from '../NavBar/NavBar.context'
+import { useAppContext } from '../AppProvider/App.context'
+import { FONT_PATH } from '../../styles/Fonts'
+import { SideBarProvider } from '@ui/SideBar/SideBar.context'
+import sideBarItems from '../SideBar/SideBarItems.json'
+import { useRouter } from 'next/router'
+import CookieHelper from '@utils/cookie-helper'
+import { LayoutProvider } from './Layout.context'
+import useFeatureFlag from '@hooks/useFeatureFlag'
+import HotJar from './HotJar'
 
 export interface LayoutProps {
-    children: React.ReactNode;
-    navTitle: NavBarProps['title'];
-    navData?: NavBarProps['data'];
-    title?: string;
+    children: React.ReactNode
+    navTitle: NavBarProps['title']
+    navData?: NavBarProps['data']
+    title?: string
+    hideSidebar?: boolean
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) => {
-    const intl = useIntl();
-    const contentRef = React.useRef(null);
-    const { viewerSession } = useAppContext();
-    const { pathname } = useRouter();
-    const helpscoutBeacon = useFeatureFlag('helpscout_beacon');
+const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hideSidebar }) => {
+    const intl = useIntl()
+    const contentRef = React.useRef(null)
+    const { viewerSession } = useAppContext()
+    const { pathname } = useRouter()
+    const helpscoutBeacon = useFeatureFlag('helpscout_beacon')
 
     const menuOpen = sideBarItems.find(sideBarItem => {
-        if (sideBarItem.items.length > 0)
-            return sideBarItem.items.some(item => item.href.includes(pathname));
-    });
-    const defaultSideBarFold = CookieHelper.getCookie(SIDE_BAR_COOKIE);
+        if (sideBarItem.items.length > 0) return sideBarItem.items.some(item => item.href.includes(pathname))
+    })
+    const defaultSideBarFold = CookieHelper.getCookie(SIDE_BAR_COOKIE)
     return (
         <NavBarProvider>
             <SideBarProvider
                 defaultMenuOpen={menuOpen ? menuOpen.id : null}
-                defaultFold={
-                    typeof defaultSideBarFold === 'undefined' ? true : defaultSideBarFold === 'true'
-                }
+                defaultFold={typeof defaultSideBarFold === 'undefined' ? true : defaultSideBarFold === 'true'}
                 onFold={fold => {
-                    setSideBarCookie(fold);
-                }}>
+                    setSideBarCookie(fold)
+                }}
+            >
                 <Head>
                     <title>{title || intl.formatMessage({ id: 'global.administration' })}</title>
                     <script
@@ -57,11 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             }`,
                         }}
                     />
-                    <script
-                        type="text/javascript"
-                        src="https://app.getbeamer.com/js/beamer-embed.js"
-                        defer
-                    />
+                    <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer />
                     <script
                         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_SYMFONY_GOOGLE_MAP_PUBLIC_KEY}&libraries=places`}
                     />
@@ -88,18 +83,8 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                             />
                         </>
                     )}
-                    <link
-                        rel="preload"
-                        href={`${FONT_PATH}/OpenSans-Regular.ttf`}
-                        as="font"
-                        crossOrigin=""
-                    />
-                    <link
-                        rel="preload"
-                        href={`${FONT_PATH}/OpenSans-SemiBold.ttf`}
-                        as="font"
-                        crossOrigin=""
-                    />
+                    <link rel="preload" href={`${FONT_PATH}/OpenSans-Regular.ttf`} as="font" crossOrigin="" />
+                    <link rel="preload" href={`${FONT_PATH}/OpenSans-SemiBold.ttf`} as="font" crossOrigin="" />
                 </Head>
 
                 <Flex direction="row" height="100%">
@@ -107,19 +92,15 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                         <HotJar />
                     </React.Suspense>
 
-                    <SideBar />
+                    {!hideSidebar ? <SideBar /> : null}
 
                     <Flex direction="column" width="100%" bg="gray.100">
                         <React.Suspense fallback={<NavBarPlaceholder />}>
                             <NavBar title={navTitle} data={navData} />
                         </React.Suspense>
                         <LayoutProvider contentRef={contentRef}>
-                            <Box
-                                p={6}
-                                className="container-content"
-                                overflowY="scroll"
-                                position="relative"
-                                ref={contentRef}>
+                            <Box p={6} className="container-content" overflowY="scroll" ref={contentRef}
+                                 position="relative">
                                 {children}
                             </Box>
                         </LayoutProvider>
@@ -127,7 +108,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title }) =
                 </Flex>
             </SideBarProvider>
         </NavBarProvider>
-    );
-};
+    )
+}
 
-export default Layout;
+export default Layout

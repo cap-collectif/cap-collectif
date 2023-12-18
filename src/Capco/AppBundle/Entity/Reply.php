@@ -50,6 +50,7 @@ class Reply extends AbstractReply implements Publishable, DraftableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="replies")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private ?Participant $participant = null;
 

@@ -254,10 +254,10 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 
             return $this->proposalSearch->searchProposals(
                 $limit,
-                $term,
                 $filters,
                 $seed,
                 $cursor,
+                $term,
                 $orders
             );
         });

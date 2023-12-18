@@ -2,7 +2,11 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Repository\ParticipantRepository;
+use Capco\AppBundle\Traits\ContributorTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,8 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="participant")
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant
+class Participant implements ContributorInterface
 {
+    use ContributorTrait;
+    use TimestampableTrait;
     use UuidTrait;
 
     /**
@@ -23,49 +29,11 @@ class Participant
     private ?string $email = null;
 
     /**
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
-     */
-    private ?string $lastName = null;
-
-    /**
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
-     */
-    private ?string $firstName = null;
-
-    /**
-     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
-     */
-    private ?string $phone = null;
-
-    /**
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
-     */
-    private ?string $address = null;
-
-    /**
-     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
-     */
-    private ?string $zipCode = null;
-
-    /**
-     * @ORM\Column(name="date_of_birth", type="datetime", nullable=true)
-     */
-    private ?\DateTimeInterface $dateOfBirth = null;
-
-    /**
-     * @ORM\Column(name="identification_code", type="string", length=255, nullable=true)
-     */
-    private ?string $identificationCode = null;
-
-    /**
-     * @ORM\Column(name="phone_confirmed", type="boolean")
-     */
-    private bool $phoneConfirmed = false;
-
-    /**
      * @ORM\Column(name="token", type="string", length=255)
      */
     private string $token;
+
+    private ?string $locale = null;
 
     /**
      * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="participant", cascade={"persist"})
@@ -73,25 +41,31 @@ class Participant
     private Collection $replies;
 
     /**
-     * @ORM\OneToMany(targetEntity=Proposal::class, mappedBy="participant", cascade={"persist"})
-     */
-    private Collection $proposals;
-
-    /**
-     * @ORM\OneToMany(targetEntity=AbstractVote::class, mappedBy="participant", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=ProposalSelectionVote::class, mappedBy="participant", cascade={"persist"})
      */
     private Collection $votes;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="participant", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="participant", cascade={"persist"})
      */
     private ?User $user = null;
+
+    /**
+     * @ORM\OneToOne(targetEntity=UserIdentificationCode::class)
+     * @ORM\JoinColumn(name="user_identification_code", referencedColumnName="identification_code", onDelete="SET NULL")
+     */
+    private ?UserIdentificationCode $userIdentificationCode = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MediatorParticipantStep::class, mappedBy="participant", orphanRemoval=true)
+     */
+    private Collection $mediatorParticipantSteps;
 
     public function __construct()
     {
         $this->replies = new ArrayCollection();
-        $this->proposals = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->mediatorParticipantSteps = new ArrayCollection();
     }
 
     public function getEmail(): ?string
@@ -99,93 +73,9 @@ class Participant
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail($email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(?string $lastName): self
-    {
-        $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(?string $firstName): self
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipCode(): ?string
-    {
-        return $this->zipCode;
-    }
-
-    public function setZipCode(?string $zipCode): self
-    {
-        $this->zipCode = $zipCode;
-
-        return $this;
-    }
-
-    public function getDateOfBirth(): ?\DateTimeInterface
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function setDateOfBirth(?\DateTimeInterface $dateOfBirth): self
-    {
-        $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    public function getIdentificationCode(): ?string
-    {
-        return $this->identificationCode;
-    }
-
-    public function setIdentificationCode(?string $identificationCode): self
-    {
-        $this->identificationCode = $identificationCode;
 
         return $this;
     }
@@ -230,41 +120,14 @@ class Participant
     }
 
     /**
-     * @return Collection<int, Proposal>
-     */
-    public function getProposals(): Collection
-    {
-        return $this->proposals;
-    }
-
-    public function addProposal(Proposal $proposal): self
-    {
-        if (!$this->proposals->contains($proposal)) {
-            $this->proposals[] = $proposal;
-            $proposal->setParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProposal(Proposal $proposal): self
-    {
-        if ($this->proposals->removeElement($proposal) && $proposal->getParticipant() === $this) {
-            $proposal->setParticipant(null);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, AbstractVote>
+     * @return Collection<int, ProposalSelectionVote>
      */
     public function getVotes(): Collection
     {
         return $this->votes;
     }
 
-    public function addVote(AbstractVote $vote): self
+    public function addVote(ProposalSelectionVote $vote): self
     {
         if (!$this->votes->contains($vote)) {
             $this->votes[] = $vote;
@@ -274,7 +137,7 @@ class Participant
         return $this;
     }
 
-    public function removeVote(AbstractVote $vote): self
+    public function removeVote(ProposalSelectionVote $vote): self
     {
         if ($this->votes->removeElement($vote) && $vote->getParticipant() === $this) {
             $vote->setParticipant(null);
@@ -303,6 +166,72 @@ class Participant
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUserIdentificationCode(): ?UserIdentificationCode
+    {
+        return $this->userIdentificationCode;
+    }
+
+    public function setUserIdentificationCode(?UserIdentificationCode $userIdentificationCode): self
+    {
+        $this->userIdentificationCode = $userIdentificationCode;
+
+        return $this;
+    }
+
+    public function getUserIdentificationCodeValue(): ?string
+    {
+        return $this->userIdentificationCode
+            ? $this->userIdentificationCode->getIdentificationCode()
+            : null;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): self
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getShowName(): ?string
+    {
+        return $this->getFirstname();
+    }
+
+    /**
+     * @return Collection<int, MediatorParticipantStep>
+     */
+    public function getMediatorParticipantSteps(): Collection
+    {
+        return $this->mediatorParticipantSteps;
+    }
+
+    public function addMediatorParticipantStep(MediatorParticipantStep $mediatorParticipantStep): self
+    {
+        if (!$this->mediatorParticipantSteps->contains($mediatorParticipantStep)) {
+            $this->mediatorParticipantSteps[] = $mediatorParticipantStep;
+            $mediatorParticipantStep->setParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediatorParticipantStep(MediatorParticipantStep $mediatorParticipantStep): self
+    {
+        if ($this->mediatorParticipantSteps->removeElement($mediatorParticipantStep)) {
+            // set the owning side to null (unless already changed)
+            if ($mediatorParticipantStep->getParticipant() === $this) {
+                $mediatorParticipantStep->setParticipant(null);
+            }
+        }
 
         return $this;
     }

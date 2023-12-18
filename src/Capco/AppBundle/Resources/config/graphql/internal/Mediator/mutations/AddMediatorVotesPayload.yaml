@@ -1,0 +1,8 @@
+AddMediatorVotesPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            mediator:
+                type: 'InternalMediator!'
+            participant:
+                type: 'InternalParticipant!'

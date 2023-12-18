@@ -24,15 +24,17 @@ const ProjectContributorsQuery = /* GraphQL */ `
           edges {
             node {
               id
-              userType {
-                id
-              }
-              vip
-              contributions(contribuableId: $contribuableId, includeTrashed: true) {
-                totalCount
-              }
-              votes(contribuableId: $contribuableId) {
-                totalCount
+              ...on User {
+                  userType {
+                      id
+                  }
+                  vip
+                  contributions(contribuableId: $contribuableId, includeTrashed: true) {
+                      totalCount
+                  }
+                  votes(contribuableId: $contribuableId) {
+                      totalCount
+                  }
               }
             }
           }
@@ -49,7 +51,9 @@ const ProjectContributorsConsentQuery = /* GraphQL */ `
         contributors {
           edges {
             node {
-              consentInternalCommunication
+              ...on User {
+                  consentInternalCommunication
+              }
             }
           }
         }

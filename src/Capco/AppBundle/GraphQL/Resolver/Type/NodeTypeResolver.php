@@ -17,8 +17,10 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Group;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\MapToken;
+use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -47,6 +49,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\GraphQL\Resolver\ContributorTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\District\DistrictTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
@@ -66,6 +69,7 @@ class NodeTypeResolver implements ResolverInterface
     private ResponseResolver $responseTypeResolver;
     private ReplyTypeResolver $replyTypeResolver;
     private DistrictTypeResolver $districtTypeResolver;
+    private ContributorTypeResolver $contributorTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,
@@ -73,7 +77,8 @@ class NodeTypeResolver implements ResolverInterface
         QuestionTypeResolver $questionTypeResolver,
         ResponseResolver $responseTypeResolver,
         ReplyTypeResolver $replyTypeResolver,
-        DistrictTypeResolver $districtTypeResolver
+        DistrictTypeResolver $districtTypeResolver,
+        ContributorTypeResolver $contributorTypeResolver
     ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
@@ -81,6 +86,7 @@ class NodeTypeResolver implements ResolverInterface
         $this->responseTypeResolver = $responseTypeResolver;
         $this->replyTypeResolver = $replyTypeResolver;
         $this->districtTypeResolver = $districtTypeResolver;
+        $this->contributorTypeResolver = $contributorTypeResolver;
     }
 
     public function __invoke($node): Type
@@ -321,6 +327,14 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof Participant) {
             return $this->typeResolver->resolve('InternalParticipant');
+        }
+
+        if ($node instanceof Mediator) {
+            return $this->typeResolver->resolve('InternalMediator');
+        }
+
+        if ($node instanceof ContributorInterface) {
+            return $this->contributorTypeResolver->__invoke($node);
         }
 
         throw new UserError('Could not resolve type of Node.');

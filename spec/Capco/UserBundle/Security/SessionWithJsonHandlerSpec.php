@@ -38,7 +38,7 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $this->encode(self::$symfonySession, $viewer)->shouldBe(
             self::$symfonySession .
                 '___JSON_SESSION_SEPARATOR__' .
-                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true,"organization":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbklk"}}'
+                '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true,"isMediator":true,"organization":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbklk"}}'
         );
     }
 
@@ -57,6 +57,7 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
         $viewer->isProjectAdmin()->willReturn(true);
         $viewer->isAdminOrganization()->willReturn(true);
         $viewer->isOrganizationMember()->willReturn(true);
+        $viewer->isMediator()->willReturn(true);
         $viewer->getMemberOfOrganizations()->willReturn(new ArrayCollection([$organizationMember->getWrappedObject()]));
         $organizationMember->getOrganization()->shouldBeCalledOnce()->willReturn($organization);
         $organization->getId()->shouldBeCalledOnce()->willReturn('organizationId');

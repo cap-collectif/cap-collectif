@@ -41,6 +41,12 @@ class ProposalSelectionVote extends AbstractProposalVote
      */
     private SelectionStep $selectionStep;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private ?Participant $participant = null;
+
     public function getProposal(): ?Proposal
     {
         try {
@@ -113,5 +119,17 @@ class ProposalSelectionVote extends AbstractProposalVote
     public function getVoteTypeName(): string
     {
         return 'proposalSelectionVote';
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
     }
 }

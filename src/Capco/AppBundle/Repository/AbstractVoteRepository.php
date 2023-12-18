@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Consultation;
-use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
@@ -281,31 +280,6 @@ class AbstractVoteRepository extends EntityRepository
             ->getConnection()
             ->executeQuery($sql)
             ->fetchAll()[0]['result'];
-    }
-
-    public function findPaginatedByParticipant(
-        Participant $participant,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
-        return $this->createQueryBuilder('v')
-            ->where('v.participant = :participant')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->setParameter('participant', $participant)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function countByParticipant(Participant $participant): int
-    {
-        return $this->createQueryBuilder('v')
-            ->select('COUNT(v.id)')
-            ->where('v.participant = :participant')
-            ->setParameter('participant', $participant)
-            ->getQuery()
-            ->getSingleScalarResult() ?? 0;
     }
 
     protected function getQueryBuilder()

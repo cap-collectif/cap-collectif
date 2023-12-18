@@ -5,15 +5,16 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\Requirement;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\UserRequirement;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementViewerValueResolver;
+use Capco\AppBundle\Repository\ParticipantRequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 
 class RequirementViewerValueResolverSpec extends ObjectBehavior
 {
-    public function let(UserRequirementRepository $repository)
+    public function let(UserRequirementRepository $repository, ParticipantRequirementRepository $participantRequirementRepository)
     {
-        $this->beConstructedWith($repository);
+        $this->beConstructedWith($repository, $participantRequirementRepository);
     }
 
     public function it_is_initializable(): void

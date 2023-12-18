@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\Entity\MediatorParticipantStep;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
@@ -17,6 +18,7 @@ use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -89,10 +91,16 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
      */
     private $defaultStatus;
 
+    /**
+     * @ORM\OneToMany(targetEntity=MediatorParticipantStep::class, mappedBy="step", orphanRemoval=true)
+     */
+    private Collection $mediatorParticipantSteps;
+
     public function __construct()
     {
         parent::__construct();
         $this->selections = new ArrayCollection();
+        $this->mediatorParticipantSteps = new ArrayCollection();
     }
 
     public function addSelection(Selection $selection)
@@ -225,5 +233,35 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         }
 
         return false;
+    }
+
+    /**
+     * @return Collection<int, MediatorParticipantStep>
+     */
+    public function getMediatorParticipantSteps(): Collection
+    {
+        return $this->mediatorParticipantSteps;
+    }
+
+    public function addMediatorParticipantStep(MediatorParticipantStep $mediatorParticipantStep): self
+    {
+        if (!$this->mediatorParticipantSteps->contains($mediatorParticipantStep)) {
+            $this->mediatorParticipantSteps[] = $mediatorParticipantStep;
+            $mediatorParticipantStep->setStep($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediatorParticipantStep(MediatorParticipantStep $mediatorParticipantStep): self
+    {
+        if ($this->mediatorParticipantSteps->removeElement($mediatorParticipantStep)) {
+            // set the owning side to null (unless already changed)
+            if ($mediatorParticipantStep->getStep() === $this) {
+                $mediatorParticipantStep->setStep(null);
+            }
+        }
+
+        return $this;
     }
 }

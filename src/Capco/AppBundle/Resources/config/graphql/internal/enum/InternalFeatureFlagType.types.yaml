@@ -176,3 +176,6 @@ InternalFeatureFlagType:
             new_vote_step:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_vote_step")'
                 description: 'Whether or not new voting step is enabled'
+            mediator:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::mediator")'
+                description: 'Whether or not votes can be added by mediators'

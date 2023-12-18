@@ -1,0 +1,58 @@
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set btnBgColor = capco_site_color_value('color.btn.primary.bg') %}
+{% set btnTextColor = capco_site_color_value('color.btn.text') %}
+{% set linkTextColor = capco_site_color_value('color.link.default') %}
+
+{% block style_mail %}
+    {{ parent() }}
+{% endblock %}
+
+{% block html_title %}
+    {{ 'acknowledgement-of-receipt'|trans({}, 'CapcoAppBundle', user_locale) }}
+{% endblock %}
+
+{% set logo = app_logo_url() %}
+
+{% block core_mail %}
+    <div>
+        <img style="margin-bottom: 10px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt="" />
+
+        <div style="margin: 20px 0; color: #2B2B2B; text-align: left;">
+            <p style="margin: 0 0 24px 0; font-weight: 600; line-height: 32px; color: #2B2B2B; font-size: 24px;">
+                {{ 'notification.pub.participation.title'|trans({'{projectName}': projectName}, 'CapcoAppBundle', user_locale) | raw }}
+            </p>
+            <div style="margin-bottom: 16px">
+                <p style="margin:0; font-weight: 400; line-height: 24px; color: #2B2B2B; font-size: 14px;">
+                    {{ 'global-hello'|trans({}, 'CapcoAppBundle', user_locale) | raw }} 👋,<br/><br/>
+                    {{ 'email.notification.pub.participation'|trans({
+                        '{siteName}': siteName,
+                        '{projectName}': projectName,
+                    }, 'CapcoAppBundle', user_locale) | raw }}
+                </p>
+            </div>
+        </div>
+
+        <p style="margin: 20px 0">
+            <a href="{{ participationUrl }}"
+               style="display: inline-block;color:{{ btnTextColor }};padding:18px 24px;border-radius:4px;background-color:{{ btnBgColor }};font-weight: bold;">
+                {{ 'global.participate'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            </a>
+        </p>
+
+        <a href="{{ participationUrl }}" style="color:{{ linkTextColor }};">{{ participationUrl }}</a>
+    </div>
+{% endblock %}
+
+{% block footer_mail %}
+    <div style="font-size:10px">
+        <p style="margin: 0; text-align: left">
+            {{ 'notification.pub.participation'|trans({'{siteName}': siteName}, 'CapcoAppBundle', user_locale) | raw }}
+        </p>
+        <p style="text-align: left">
+            {{ 'email.propulsed.by'|trans({}, 'CapcoAppBundle', user_locale) | raw }}
+            <img src="{{ baseUrl ~ asset("capco-logo-mail.png")}}" alt="logo cap collectif" style="width: 15px;height: 15px;margin: 0 2px 0 4px;"  />
+            Cap Collectif
+        </p>
+    </div>
+{% endblock %}

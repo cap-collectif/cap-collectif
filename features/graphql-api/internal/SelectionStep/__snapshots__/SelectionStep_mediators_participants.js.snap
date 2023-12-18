@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SelectionStep.mediators.participants fetches the participants created by a mediator from a selectionStep 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "mediators": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "participants": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "createdAt": "2021-01-14 00:00:00",
+                    "firstname": "Suzanne",
+                    "votes": Object {
+                      "edges": Array [
+                        Object {
+                          "node": Object {
+                            "id": "1067",
+                            "isAccounted": false,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2020-01-14 00:00:00",
+                    "firstname": "Laurent",
+                    "votes": Object {
+                      "edges": Array [
+                        Object {
+                          "node": Object {
+                            "id": "1066",
+                            "isAccounted": true,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|SelectionStep.mediators.participants fetches the participants created by a mediator from a selectionStep ordered by CREATED_AT ASC 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "mediators": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "participants": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "createdAt": "2020-01-14 00:00:00",
+                    "firstname": "Laurent",
+                    "votes": Object {
+                      "edges": Array [
+                        Object {
+                          "node": Object {
+                            "id": "1066",
+                            "isAccounted": true,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "createdAt": "2021-01-14 00:00:00",
+                    "firstname": "Suzanne",
+                    "votes": Object {
+                      "edges": Array [
+                        Object {
+                          "node": Object {
+                            "id": "1067",
+                            "isAccounted": false,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+    },
+  },
+}
+`;

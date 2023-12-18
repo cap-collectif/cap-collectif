@@ -172,6 +172,9 @@ swarrot:
         organization_member.invitation:
             exchange: capco_direct_exchange
             routing_key: organization_member_invitation
+        mediator_participate_email:
+            exchange: capco_direct_exchange
+            routing_key: mediator_participate_email_delayed
     consumers:
         elasticsearch_indexation:
             processor: Capco\AppBundle\Elasticsearch\IndexationProcessor
@@ -1096,3 +1099,20 @@ swarrot:
                       retry_attempts: 3
                       retry_exchange: 'retry'
                       retry_routing_key_pattern: 'sms_credit_alert_consumed_credit_%%attempt%%'
+        mediator_participate_email:
+            processor: Capco\AppBundle\Processor\Mediator\MediatorProcessor
+            middleware_stack:
+                - configurator: swarrot.processor.signal_handler
+                - configurator: swarrot.processor.max_execution_time
+                  extras:
+                      max_execution_time: 100
+                - configurator: swarrot.processor.max_messages
+                - configurator: swarrot.processor.doctrine_connection
+                - configurator: swarrot.processor.doctrine_object_manager
+                - configurator: swarrot.processor.exception_catcher
+                - configurator: swarrot.processor.ack
+                - configurator: swarrot.processor.retry
+                  extras:
+                      retry_attempts: 3
+                      retry_exchange: 'retry'
+                      retry_routing_key_pattern: 'participate_email_%%attempt%%'

@@ -1,0 +1,13 @@
+InternalParticipantOrder:
+    type: input-object
+    config:
+        description: 'Properties by which participant connections can be ordered.'
+        name: ParticipantOrder
+        fields:
+            field:
+                type: 'InternalParticipantOrderField!'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'ASC'
+                description: 'The direction in which to order nodes.'

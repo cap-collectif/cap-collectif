@@ -332,3 +332,23 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: user_invite_invitation_by_organization
+        mediator_participate_email:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: mediator_participate_email
+
+        # QUEUE DELAYED
+        # x-dead-letter-exchange: Messages are republished to an exchange after ttl
+        # x-dead-letter-routing-key: The queue where the message is transfered after ttl
+        # x-message-ttl: Time to live in ms (delay before the message will be consumed)
+        mediator_participate_email_delayed:
+            durable: true
+            arguments:
+                x-dead-letter-exchange: capco_direct_exchange
+                x-dead-letter-routing-key: mediator_participate_email
+                x-message-ttl: 3600000
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: mediator_participate_email_delayed

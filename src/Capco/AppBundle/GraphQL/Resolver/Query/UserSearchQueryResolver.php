@@ -17,11 +17,14 @@ class UserSearchQueryResolver implements ResolverInterface
 
     public function __invoke(Argument $args): array
     {
+        $onlyUsers = true;
+
         return $this->userSearch->searchAllUsers(
             $args['displayName'],
             $args['notInIds'],
             $args['authorsOfEventOnly'],
-            true
+            $onlyUsers,
+            $args['isMediatorCompliant']
         );
     }
 }

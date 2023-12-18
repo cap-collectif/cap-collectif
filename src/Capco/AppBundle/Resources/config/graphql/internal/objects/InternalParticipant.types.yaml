@@ -2,51 +2,47 @@ InternalParticipant:
     type: object
     inherits:
         - Node
+        - InternalContributor
     config:
         name: Participant
         description: 'One participant'
         interfaces:
             - Node
+            - InternalContributor
         fields:
             id:
                 description: 'The ID of an object.'
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Participant
-            email:
-                type: 'String'
-            firstName:
-                type: 'String'
-            lastName:
-                type: 'String'
-            phone:
-                type: 'String'
-            address:
-                type: 'String'
-            zipCode:
-                type: 'String'
-            dateOfBirth:
-                type: 'DateTime'
-            identificationCode:
-                type: 'String'
             token:
+                access: '@=hasRole("ROLE_ADMIN") or hasRole("ROLE_MEDIATOR")'
                 type: 'String!'
                 description: 'The participant token.'
-            phoneConfirmed:
-                type: 'Boolean!'
-                description: 'Wether or not the user has confirmed his phone.'
             replies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", [value, args])'
-            proposals:
-                type: 'InternalProposalConnection'
-                argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantProposalsResolver", [value, args])'
             votes:
-                type: 'InternalVoteConnection'
+                type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", [value, args])'
+                args:
+                    contribuableId:
+                        type: 'ID'
+                        description: 'The id of the contribuable entity (Project, Step)'
+                    mediatorId:
+                        type: 'ID'
+                        description: 'Filter votes created by a mediator'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", [value, getUser(), args])'
             user:
                 type: 'InternalUser'
                 description: 'If already registered, the user to add as participant.'
+            isMeetingRequirements:
+                type: 'Boolean'
+                description: 'Wether or not the participant meets the step requirement.'
+                args:
+                    stepId:
+                        type: 'ID!'
+                        description: 'The step containing requirements.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", [value, args])'
+

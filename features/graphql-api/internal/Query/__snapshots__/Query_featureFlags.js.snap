@@ -307,6 +307,10 @@ Object {
       "enabled": false,
       "type": "new_vote_step",
     },
+    Object {
+      "enabled": true,
+      "type": "mediator",
+    },
   ],
 }
 `;

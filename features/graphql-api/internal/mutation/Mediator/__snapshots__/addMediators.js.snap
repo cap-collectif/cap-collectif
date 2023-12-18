@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|addMediators admin add users as mediator. 1`] = `
+Object {
+  "addMediators": Object {
+    "mediators": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "user": Object {
+              "roles": Array [
+                "ROLE_USER",
+                "ROLE_MEDIATOR",
+              ],
+              "username": "user6",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "user": Object {
+              "roles": Array [
+                "ROLE_USER",
+                "ROLE_MEDIATOR",
+              ],
+              "username": "user7",
+            },
+          },
+        },
+      ],
+    },
+    "step": Object {
+      "__typename": "SelectionStep",
+      "title": "Vainqueur",
+    },
+  },
+}
+`;

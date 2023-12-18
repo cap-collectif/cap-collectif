@@ -2,15 +2,19 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Mediator;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\ProposalSelectionVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalSelectionVoteRepository extends EntityRepository
@@ -446,5 +450,151 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function findPaginatedByParticipant(
+        Participant $participant,
+        ?Mediator $mediator = null,
+        ?Project $project = null,
+        ?AbstractStep $step = null,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->findByParticipantQueryBuilder($participant, $mediator, $project, $step)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameter('participant', $participant)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function countByParticipant(
+        Participant $participant,
+        ?Mediator $mediator = null,
+        ?Project $project = null,
+        ?AbstractStep $step = null
+    ): int {
+        $qb = $this->findByParticipantQueryBuilder($participant, $mediator, $project, $step);
+
+        return $qb
+            ->select('COUNT(v.id)')
+            ->getQuery()
+            ->getSingleScalarResult() ?? 0;
+    }
+
+    private function findByParticipantQueryBuilder(
+        Participant $participant,
+        ?Mediator $mediator = null,
+        ?Project $project = null,
+        ?AbstractStep $step = null
+    ): QueryBuilder {
+        $qb = $this->createQueryBuilder('v')
+            ->where('v.participant = :participant')
+            ->setParameter('participant', $participant)
+        ;
+
+        if ($mediator) {
+            $qb->andWhere('v.mediator = :mediator')
+                ->setParameter('mediator', $mediator)
+            ;
+        }
+
+        if ($project) {
+            $qb->join('v.selectionStep', 's')
+                ->join('s.projectAbstractStep', 'pas')
+                ->join('pas.project', 'p')
+                ->andWhere('p = :project')
+                ->setParameter('project', $project)
+            ;
+        }
+
+        if ($step) {
+            $qb->join('v.selectionStep', 's')
+                ->andWhere('s = :step')
+                ->setParameter('step', $step)
+            ;
+        }
+
+        return $qb;
+    }
+
+    private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
+    {
+        $items = array_map(function ($value) use ($asTitle) {
+            return $asTitle ? $value->getTitle() : $value->getId();
+        }, $proposal->getSelectionSteps());
+
+        $qb = $this->createQueryBuilder('pv');
+
+        if ($asTitle) {
+            $qb->select(
+                'pv.position as position',
+                'ss.votesLimit as max',
+                'ss.title as stepId',
+                'ss.votesRanking as votesRanking'
+            );
+        } else {
+            $qb->select(
+                'pv.position as position',
+                'ss.votesLimit as max',
+                'ss.id as stepId',
+                'ss.votesRanking as votesRanking'
+            );
+        }
+
+        $qb->leftJoin('pv.selectionStep', 'ss')
+            ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.published = true')
+            ->andWhere('pv.isAccounted = 1')
+            ->setParameter('proposal', $proposal)
+        ;
+
+        $results = $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getResult()
+        ;
+
+        $data = [];
+        $data['votesBySteps'] = [];
+        $data['pointsBySteps'] = [];
+        /** @var ProposalSelectionVote $result */
+        foreach ($results as $result) {
+            $pointsAvailable = [];
+            for ($i = $result['max']; $i > 0; --$i) {
+                $pointsAvailable[] = $i;
+            }
+            $data['votesBySteps'][$result['stepId']] = \count($results);
+
+            if (true === $result['votesRanking'] && null !== $result['position']) {
+                if (
+                    isset(
+                        $data['pointsBySteps'][$result['stepId']],
+                        $pointsAvailable[$result['position']]
+                    )
+                ) {
+                    $data['pointsBySteps'][$result['stepId']] +=
+                        $pointsAvailable[$result['position']];
+                } elseif (isset($pointsAvailable[$result['position']])) {
+                    $data['pointsBySteps'][$result['stepId']] =
+                        $pointsAvailable[$result['position']];
+                }
+            }
+        }
+
+        foreach ($items as $item) {
+            if (!isset($data['votesBySteps'][$item])) {
+                $data['votesBySteps'][$item] = 0;
+            }
+            if (!isset($data['pointsBySteps'][$item])) {
+                $data['pointsBySteps'][$item] = 0;
+            }
+        }
+
+        return $data;
     }
 }

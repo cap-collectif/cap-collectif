@@ -15,3 +15,11 @@ IdentificationCodeRequirement:
                 type: 'String'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
                 description: "The viewer's identification code"
+            participantValue:
+                type: 'String'
+                args:
+                    token:
+                        type: 'String!'
+                        description: 'The token associated to the Participant.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", [value, args])'
+                description: 'The identification code of the participant.'

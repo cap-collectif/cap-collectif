@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|SelectionStep.mediators fetches the mediators 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "mediators": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "totalParticipantsAccounted": 1,
+            "totalParticipantsOptIn": 2,
+            "user": Object {
+              "username": "mediator",
+            },
+            "votes": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "isAccounted": true,
+                    "participant": Object {
+                      "email": "lbrunet@cap-collectif.com",
+                    },
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "isAccounted": false,
+                    "participant": Object {
+                      "email": "sfavot@cap-collectif.com",
+                    },
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          },
+        },
+      ],
+    },
+    "title": "Sélection",
+  },
+}
+`;
+
+exports[`Internal|SelectionStep.mediators fetches the mediators with username filter 1`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "mediators": Object {
+      "edges": Array [],
+    },
+    "title": "Sélection",
+  },
+}
+`;
+
+exports[`Internal|SelectionStep.mediators fetches the mediators with username filter 2`] = `
+Object {
+  "node": Object {
+    "id": "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwMQ==",
+    "mediators": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "user": Object {
+              "username": "mediator",
+            },
+          },
+        },
+      ],
+    },
+    "title": "Sélection",
+  },
+}
+`;

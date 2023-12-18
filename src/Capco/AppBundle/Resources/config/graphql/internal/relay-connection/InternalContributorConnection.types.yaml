@@ -1,0 +1,11 @@
+InternalContributorConnection:
+  type: relay-connection
+  config:
+    name: ContributorConnection
+    nodeType: InternalContributor!
+    connectionFields:
+      totalCount:
+        type: Int!
+      anonymousCount:
+        type: Int!
+        description: Identifies the total count of anonymous items in the connection. (Not fetched from connection)

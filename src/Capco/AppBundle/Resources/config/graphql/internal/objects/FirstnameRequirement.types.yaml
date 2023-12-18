@@ -10,3 +10,11 @@ FirstnameRequirement:
                 access: "@hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
                 description: 'The firstname of the viewer.'
+            participantValue:
+                type: 'String'
+                args:
+                    token:
+                        type: 'String!'
+                        description: 'The token associated to the Participant.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", [value, args])'
+                description: 'The firstname of the participant.'

@@ -26,3 +26,6 @@ InternalVote:
             isAccounted:
                 type: 'Boolean!'
                 description: 'Returns if vote is accounted or not'
+            participant:
+                type: 'InternalParticipant'
+                description: 'The participant of the contribution.'

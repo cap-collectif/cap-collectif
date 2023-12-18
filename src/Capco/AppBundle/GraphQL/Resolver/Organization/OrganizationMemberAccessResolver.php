@@ -17,6 +17,10 @@ class OrganizationMemberAccessResolver implements ResolverInterface
             return true;
         }
 
+        if ($viewer->isMediator()) {
+            return true;
+        }
+
         return $viewer->isOrganizationMember();
     }
 }

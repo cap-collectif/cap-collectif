@@ -755,3 +755,19 @@ Capco\UserBundle\Entity\User:
     createdAt: <(new \DateTime('1972-10-29 00:00:00'))>
     biography: "Valérie Masson-Delmotte, née le 29 octobre 1971 à Nancy1, est une paléoclimatologue française. Elle est directrice de recherche au CEA et coprésidente du groupe no 1 du GIEC depuis 2015."
     consentInternalCommunication: true
+  userMediator:
+      id: 'userMediator'
+      username: mediator
+      firstname: mediator
+      lastname: mediator
+      email: mediator@cap-collectif.com
+      userType: '@UserType1'
+      plainpassword: toto
+      roles:
+          - 'ROLE_USER'
+          - 'ROLE_MEDIATOR'
+      biography: Je suis un mediateur
+      vip: false
+      emailConfirmationSentAt: <(new \DateTime('2018-09-05 17:16:00'))>
+      enabled: true
+      createdAt: <identity((new \DateTime('2015-01-01 13:01:02'))->modify("+ 18 days"))>

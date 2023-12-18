@@ -55,6 +55,11 @@ Object {
               "edges": Array [
                 Object {
                   "node": Object {
+                    "author": null,
+                  },
+                },
+                Object {
+                  "node": Object {
                     "author": Object {
                       "email": null,
                       "id": "VXNlcjp1c2VyQWRtaW4=",

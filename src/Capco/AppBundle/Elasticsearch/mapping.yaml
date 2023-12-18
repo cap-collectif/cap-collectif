@@ -64,13 +64,15 @@ mappings:
         firstname: *text_analysis_highlighted
         lastname: *text_analysis_highlighted
         enabled: { type: boolean }
-        roles: { type: text }
+        roles: { type: keyword }
         userType:
             properties:
                 id:
                     type: keyword
         vip: { type: boolean }
         isOnlyProjectAdmin: { type: boolean }
+        isOnlyUser: { type: boolean }
+        organizationId: { type: keyword }
         participationsCountByProject: &ContributionProject
             type: nested
             properties:

@@ -33,6 +33,7 @@ use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
+use Capco\AppBundle\Repository\MediatorRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -119,6 +120,8 @@ class GlobalIdResolver
         'Organization',
         'PendingOrganizationInvitation',
         'Participant',
+        'Mediator',
+        'Contributor',
     ];
     private ContainerInterface $container;
     private LoggerInterface $logger;
@@ -135,7 +138,7 @@ class GlobalIdResolver
         $this->entityManager = $entityManager;
     }
 
-    public function resolve(string $uuidOrGlobalId, $userOrAnon, ?\ArrayObject $context = null)
+    public function resolve(string $uuidOrGlobalId, $userOrAnon = null, ?\ArrayObject $context = null)
     {
         $skipVerification =
             $context
@@ -405,6 +408,20 @@ class GlobalIdResolver
 
                 case 'Participant':
                     $node = $this->container->get(ParticipantRepository::class)->find($uuid);
+
+                    break;
+
+                case 'Mediator':
+                    $node = $this->container->get(MediatorRepository::class)->find($uuid);
+
+                    break;
+
+                case 'Contributor':
+                    $node = $this->container->get(UserRepository::class)->find($uuid);
+
+                    if (!$node) {
+                        $node = $this->container->get(ParticipantRepository::class)->find($uuid);
+                    }
 
                     break;
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Traits;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserWarning;
@@ -22,7 +23,7 @@ trait ResolverTrait
         }
     }
 
-    private function preventNullableViewer($viewer): User
+    private function preventNullableViewer($viewer): ContributorInterface
     {
         if (!$viewer) {
             throw new UserWarning('Cannot call this resolver with a nullable viewer.');

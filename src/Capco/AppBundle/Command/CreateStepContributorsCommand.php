@@ -116,33 +116,33 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 $row = [
                     $contributor['id'],
                     $contributor['email'],
-                    $contributor['username'],
-                    $contributor['userType'] ? $contributor['userType']['name'] : null,
+                    $contributor['username'] ?? null,
+                    ($contributor['userType'] ?? null) ? $contributor['userType']['name'] : null,
                     $contributor['createdAt'],
-                    $contributor['updatedAt'],
-                    $contributor['lastLogin'],
-                    $contributor['rolesText'],
-                    $contributor['consentInternalCommunication'],
-                    $contributor['enabled'],
-                    $contributor['isEmailConfirmed'],
-                    $contributor['locked'],
+                    $contributor['updatedAt'] ?? null,
+                    $contributor['lastLogin'] ?? null,
+                    $contributor['rolesText'] ?? null,
+                    $contributor['consentInternalCommunication'] ?? null,
+                    $contributor['enabled'] ?? null,
+                    $contributor['isEmailConfirmed'] ?? null,
+                    $contributor['locked'] ?? null,
                     $contributor['phoneConfirmed'],
-                    $contributor['gender'],
-                    $contributor['websiteUrl'],
-                    $contributor['biography'],
-                    $contributor['zipCode'],
-                    $contributor['city'],
+                    $contributor['gender'] ?? null,
+                    $contributor['websiteUrl'] ?? null,
+                    $contributor['biography'] ?? null,
+                    $contributor['zipCode'] ?? null,
+                    $contributor['city'] ?? null,
                     $contributor['firstname'],
                     $contributor['lastname'],
                     $contributor['dateOfBirth'],
                     $contributor['postalAddress']
                         ? $contributor['postalAddress']['formatted']
                         : null,
-                    filter_var($contributor['isFranceConnectAccount'], \FILTER_VALIDATE_BOOLEAN)
+                    ($contributor['isFranceConnectAccount'] ?? null) ? filter_var($contributor['isFranceConnectAccount'], \FILTER_VALIDATE_BOOLEAN)
                         ? 'YES'
-                        : 'NO',
+                        : 'NO' : 'NO',
                     $contributor['phone'],
-                    $contributor['url'],
+                    $contributor['url'] ?? null,
                     $contributor['userIdentificationCode'],
                 ];
                 if (!$isCollectOrSelectionStep) {
@@ -206,6 +206,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             $userCursor = sprintf(', after: "%s"', $userCursor);
         }
         $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
+        $CONTRIBUTOR_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::CONTRIBUTOR_FRAGMENT;
 
         return <<<EOF
                     query {
@@ -215,7 +216,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount
@@ -231,7 +235,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount
@@ -247,7 +254,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount
@@ -263,7 +273,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount
@@ -279,7 +292,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount
@@ -295,7 +311,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             edges {
                               cursor
                               node {
-                                {$USER_FRAGMENT}
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
                               }
                             }
                             totalCount

@@ -140,26 +140,26 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                         [
                             $contributor['id'],
                             $contributor['email'],
-                            $contributor['username'],
-                            $contributor['userType'] ? $contributor['userType']['name'] : null,
+                            $contributor['username'] ?? null,
+                            ($contributor['userType'] ?? null) ? $contributor['userType']['name'] : null,
                             $contributor['createdAt'],
-                            $contributor['updatedAt'],
-                            $contributor['lastLogin'],
-                            $contributor['rolesText'],
-                            $contributor['consentInternalCommunication'],
-                            $contributor['enabled'],
-                            $contributor['isEmailConfirmed'],
-                            $contributor['locked'],
-                            $contributor['phoneConfirmed'],
-                            $contributor['gender'],
+                            $contributor['updatedAt'] ?? null,
+                            $contributor['lastLogin'] ?? null,
+                            $contributor['rolesText'] ?? null,
+                            $contributor['consentInternalCommunication'] ?? null,
+                            $contributor['enabled'] ?? null,
+                            $contributor['isEmailConfirmed'] ?? null,
+                            $contributor['locked'] ?? null,
+                            $contributor['phoneConfirmed'] ?? null,
+                            $contributor['gender'] ?? null,
                             $contributor['dateOfBirth'],
-                            $contributor['websiteUrl'],
-                            $contributor['biography'],
-                            $contributor['address'],
-                            $contributor['zipCode'],
-                            $contributor['city'],
+                            $contributor['websiteUrl'] ?? null,
+                            $contributor['biography'] ?? null,
+                            $contributor['address'] ?? null,
+                            $contributor['zipCode'] ?? null,
+                            $contributor['city'] ?? null,
                             $contributor['phone'],
-                            $contributor['url'],
+                            $contributor['url'] ?? null,
                             $contributor['userIdentificationCode'],
                         ]
                     );
@@ -191,6 +191,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
         }
 
         $userFragment = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
+        $contributorFragment = GraphqlQueryAndCsvHeaderHelper::CONTRIBUTOR_FRAGMENT;
 
         return <<<EOF
                     query {
@@ -207,7 +208,10 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                                   edges {
                                     cursor
                                     node {
-                                      {$userFragment}
+                                      {$contributorFragment}
+                                      ...on User {
+                                        {$userFragment}
+                                      }
                                     }
                                   }
                                 }

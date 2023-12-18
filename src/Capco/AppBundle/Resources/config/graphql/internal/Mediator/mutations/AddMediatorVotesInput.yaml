@@ -1,0 +1,13 @@
+AddMediatorVotesInput:
+    type: relay-mutation-input
+    config:
+        description: 'Add Mediator votes.'
+        fields:
+            mediatorId:
+                type: ID!
+            stepId:
+                type: ID!
+            proposals:
+                type: '[ID]!'
+            participantInfos:
+                type: 'ParticipantInfosInput!'

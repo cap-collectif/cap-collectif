@@ -4,14 +4,26 @@ namespace Capco\AppBundle\Helper;
 
 class GraphqlQueryAndCsvHeaderHelper
 {
+    public const CONTRIBUTOR_FRAGMENT = '
+        id
+        email
+        lastname
+        firstname
+        phone
+        phoneConfirmed
+        postalAddress {
+          formatted
+        }
+        dateOfBirth
+        userIdentificationCode
+        createdAt
+    ';
+
     public const USER_FRAGMENT = '
-    id
-    email
     username
     userType {
       name
     }
-    createdAt
     updatedAt
     lastLogin
     rolesText
@@ -19,22 +31,13 @@ class GraphqlQueryAndCsvHeaderHelper
     enabled
     isEmailConfirmed
     locked
-    phoneConfirmed
     gender
-    firstname
-    lastname
-    dateOfBirth
     websiteUrl
     biography
-    postalAddress {
-      formatted
-    }
     address
     zipCode
     city
-    phone
     url
-    userIdentificationCode
     isFranceConnectAccount
 ';
 

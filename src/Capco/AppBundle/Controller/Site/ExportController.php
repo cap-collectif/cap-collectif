@@ -9,6 +9,7 @@ use Box\Spout\Writer\Common\Entity\Options;
 use Box\Spout\Writer\CSV\Manager\OptionsManager as CSVOptionsManager;
 use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
+use Capco\AppBundle\Command\CreateCsvFromProjectMediatorsProposalsVotesCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Entity\Event;
@@ -35,6 +36,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -376,6 +378,29 @@ class ExportController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/export-project-mediators-proposals-votes/{projectId}", name="app_export_project_mediators_proposals_votes", options={"i18n" = false})
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function downloadProjectMediatorsProposalsVotesAction(string $projectId): BinaryFileResponse
+    {
+        $project = $this->globalIdResolver->resolve($projectId, $this->getUser());
+        $output = new NullOutput();
+        $this->runCommands(
+            [
+                'capco:export:projects-mediators-proposals-votes' => ['projectId' => $project->getId()],
+            ],
+            $output
+        );
+
+        $fileName = CreateCsvFromProjectMediatorsProposalsVotesCommand::getFilename($project->getSlug());
+
+        $response = $this->file($this->exportDir . $fileName, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
     private function getEventContributorsGraphQLQuery(
         string $eventId,
         ?string $userCursor = null
@@ -386,6 +411,7 @@ class ExportController extends Controller
 
         $eventId = GlobalId::toGlobalId('Event', $eventId);
         $USER_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::USER_FRAGMENT;
+        $CONTRIBUTOR_FRAGMENT = GraphqlQueryAndCsvHeaderHelper::CONTRIBUTOR_FRAGMENT;
 
         return <<<EOF
                     query {
@@ -397,6 +423,7 @@ class ExportController extends Controller
                               registeredAt
                               registeredAnonymously
                               node {
+                                {$CONTRIBUTOR_FRAGMENT}
                                 ... on User {
                                     {$USER_FRAGMENT}
                                 }

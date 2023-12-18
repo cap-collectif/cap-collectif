@@ -146,6 +146,13 @@ const formatNavbarLinks = (
   }
 
   links.push({
+    title: 'global.mediator',
+    url: getProjectAdminPath(project.id, 'MEDIATOR', true),
+    to: getProjectAdminPath(project.id, 'MEDIATOR', true),
+    component: () => <></>,
+  })
+
+  links.push({
     title: 'global.configuration',
     url: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
     to: getProjectAdminPath(newCreateProjectFlag ? project.id : project._id, 'CONFIGURATION', newCreateProjectFlag),
@@ -292,8 +299,8 @@ export const ProjectAdminContent = ({
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname.includes(link.url)}>
-              {link.title === 'global.configuration' && newCreateProjectFlag ? (
-                <a href={link.to} id="qsgqsg">
+              {(link.title === 'global.configuration' && newCreateProjectFlag) || link.title === 'global.mediator' ? (
+                <a href={link.to} id={link.title}>
                   <FormattedMessage id={link.title} />
                 </a>
               ) : (

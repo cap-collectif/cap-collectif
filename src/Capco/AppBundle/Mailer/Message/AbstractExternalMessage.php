@@ -2,13 +2,11 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 
 abstract class AbstractExternalMessage extends AbstractMessage
 {
     public const FOOTER = 'notification.email.external_footer';
-
-    private User $recipient;
 
     public function __construct(
         string $recipientEmail,
@@ -16,13 +14,13 @@ abstract class AbstractExternalMessage extends AbstractMessage
         array $subjectVars,
         string $template,
         array $templateVars,
-        User $recipient,
+        ContributorInterface $recipient,
         ?string $replyTo = null
     ) {
         parent::__construct(
             $recipientEmail,
             $recipient->getLocale(),
-            $recipient->getUsername(),
+            $recipient->getShowName(),
             $subject,
             $subjectVars,
             $template,
@@ -31,7 +29,6 @@ abstract class AbstractExternalMessage extends AbstractMessage
             null,
             $replyTo
         );
-        $this->recipient = $recipient;
     }
 
     public static function getMyFooterVars(

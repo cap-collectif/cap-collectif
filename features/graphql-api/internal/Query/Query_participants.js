@@ -9,7 +9,7 @@ const ParticipantsQuery = /* GraphQL */ `
       edges {
         node {
           id
-          firstName
+          firstname
           __typename
         }
         cursor

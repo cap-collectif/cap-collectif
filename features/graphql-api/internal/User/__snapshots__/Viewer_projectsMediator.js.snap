@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.viewer.projectsMediator should fetch mediators projects, steps and votes 1`] = `
+Object {
+  "viewer": Object {
+    "projectsMediator": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "steps": Array [
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Collecte des propositions",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Collecte des propositions privée",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Collecte des propositions fermée",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Collecte des propositions avec questions",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "votes": Object {
+                          "edges": Array [
+                            Object {
+                              "node": Object {
+                                "id": "1066",
+                                "isAccounted": true,
+                                "participant": Object {
+                                  "email": "lbrunet@cap-collectif.com",
+                                },
+                              },
+                            },
+                            Object {
+                              "node": Object {
+                                "id": "1067",
+                                "isAccounted": false,
+                                "participant": Object {
+                                  "email": "sfavot@cap-collectif.com",
+                                },
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
+                "title": "Sélection",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Vainqueur",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Sélection à venir",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Fermée",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Dépôt avec vote",
+              },
+              Object {
+                "mediators": Object {
+                  "edges": Array [],
+                },
+                "title": "Réalisation",
+              },
+            ],
+            "title": "Budget Participatif Rennes",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

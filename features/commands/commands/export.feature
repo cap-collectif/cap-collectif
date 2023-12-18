@@ -182,3 +182,10 @@ Scenario: Admin wants to export debate arguments and votes
   And exported "csv" file with name "debate-debateProjectAdmin-arguments-project-admin.csv" should match its snapshot
   And exported "csv" file with name "debate-debateProjectAdmin-votes.csv" should match its snapshot
   And exported "csv" file with name "debate-debateProjectAdmin-votes-project-admin.csv" should match its snapshot
+
+  Scenario: Admin or Mediator wants to export projects mediators proposals votes
+    Given I run a command "capco:export:projects-mediators-proposals-votes" with parameters:
+      | projectId |project6|
+      | --delimiter |,|
+    Then the command exit code should be 0
+    And exported "csv" file with name "mediators_proposals_votes_budget-participatif-rennes.csv" should match its snapshot

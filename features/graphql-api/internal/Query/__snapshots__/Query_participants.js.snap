@@ -8,7 +8,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
         "node": Object {
           "__typename": "Participant",
-          "firstName": "Laurent",
+          "firstname": "Laurent",
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQx",
         },
       },
@@ -16,7 +16,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
         "node": Object {
           "__typename": "Participant",
-          "firstName": "Suzanne",
+          "firstname": "Suzanne",
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQy",
         },
       },
@@ -24,7 +24,7 @@ Object {
         "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
         "node": Object {
           "__typename": "Participant",
-          "firstName": "Toto",
+          "firstname": "Toto",
           "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQz",
         },
       },

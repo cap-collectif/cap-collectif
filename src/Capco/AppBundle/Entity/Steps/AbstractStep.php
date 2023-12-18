@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
+use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalStepPaperVoteCounter;
@@ -175,6 +176,11 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     private Collection $proposalStepPaperVoteCounters;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Mediator", mappedBy="step", orphanRemoval=true)
+     */
+    private Collection $mediators;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -184,6 +190,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
         $this->requirements = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->proposalStepPaperVoteCounters = new ArrayCollection();
+        $this->mediators = new ArrayCollection();
     }
 
     public function __clone()
@@ -479,5 +486,35 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
     public function getOwner(): ?Owner
     {
         return $this->getProject() ? $this->getProject()->getOwner() : null;
+    }
+
+    /**
+     * @return Collection<int, Mediator>
+     */
+    public function getMediators(): Collection
+    {
+        return $this->mediators;
+    }
+
+    public function addMediator(Mediator $mediator): self
+    {
+        if (!$this->mediators->contains($mediator)) {
+            $this->mediators[] = $mediator;
+            $mediator->setStep($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediator(Mediator $mediator): self
+    {
+        if ($this->mediators->removeElement($mediator)) {
+            // set the owning side to null (unless already changed)
+            if ($mediator->getStep() === $this) {
+                $mediator->setStep(null);
+            }
+        }
+
+        return $this;
     }
 }

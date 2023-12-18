@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectionStep.contributors returns proposals filter by proposalTitle 1`] = `
+Object {
+  "selectionStep": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "media": null,
+            "reference": "1-3",
+            "title": "Installation de bancs sur la place de la mairie",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`SelectionStep.contributors returns proposals filter by proposalTitle and reference 1`] = `
+Object {
+  "selectionStep": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "media": Object {
+              "url": "https://capco.test/media/default/0001/01/gymnase.jpg",
+            },
+            "reference": "1-2",
+            "title": "Rénovation du gymnase",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwz",
+            "media": null,
+            "reference": "1-3",
+            "title": "Installation de bancs sur la place de la mairie",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`SelectionStep.contributors returns proposals filter by reference 1`] = `
+Object {
+  "selectionStep": Object {
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+            "media": Object {
+              "url": "https://capco.test/media/default/0001/01/gymnase.jpg",
+            },
+            "reference": "1-2",
+            "title": "Rénovation du gymnase",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

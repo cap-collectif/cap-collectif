@@ -1,0 +1,42 @@
+InternalMediator:
+    type: object
+    inherits:
+        - Node
+    config:
+        description: "User assigned to a project who can add votes in behalf of offline users."
+        name: Mediator
+        interfaces:
+            - Node
+        fields:
+            id:
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: Mediator
+            user:
+                type: 'InternalUser!'
+                description: 'The user who has a mediator role.'
+            participants:
+                type: 'ParticipantConnection'
+                description: 'Participants who are added by the mediator'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    fullname:
+                        type: 'String'
+                        description: 'Filter participants by fullname.'
+                    orderBy:
+                        type: 'InternalParticipantOrder'
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorParticipantsResolver", [value, args])'
+            votes:
+                type: 'InternalVoteConnection'
+                description: 'The votes added by the mediator.'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorVotesResolver", [value, args])'
+            totalParticipantsAccounted:
+                type: Int
+                description: 'The total of participants who have all their votes accounted.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsAccountedResolver", [value])'
+            totalParticipantsOptIn:
+                type: Int
+                description: 'The total of participants who have filled in their email.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsOptInResolver", [value])'

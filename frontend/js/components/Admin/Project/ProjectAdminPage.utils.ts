@@ -7,12 +7,13 @@ const PROJECT_ROUTE = {
   PARTICIPANTS: '/participants',
   ANALYSIS: '/analysis',
   CONFIGURATION: '/edit',
-};
+  MEDIATOR: '/mediators',
+}
 
 export const getProjectAdminPath = (
   projectId: string,
   type: $Keys<typeof PROJECT_ROUTE>,
-  newCreateProjectFlag: boolean| undefined = false,
+  newCreateProjectFlag: boolean | undefined = false,
 ): string => {
   switch (type) {
     case 'CONTRIBUTIONS':
@@ -23,11 +24,12 @@ export const getProjectAdminPath = (
 
     case 'ANALYSIS':
       return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.ANALYSIS}`
-
+    case 'MEDIATOR':
+      return `${getProjectAdminBaseUrl(projectId, true)}${PROJECT_ROUTE.MEDIATOR}`
     case 'CONFIGURATION':
       return newCreateProjectFlag
         ? `${getProjectAdminBaseUrl(projectId, true)}`
-        : `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`;
+        : `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`
     default:
       return getProjectAdminBaseUrl(projectId)
   }

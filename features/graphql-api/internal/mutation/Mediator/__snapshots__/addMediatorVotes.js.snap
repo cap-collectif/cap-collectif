@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|addMediatorVotes Mediator add votes. 1`] = `
+Object {
+  "addMediatorVotes": Object {
+    "mediator": Object {
+      "votes": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "participant": Object {
+                "dateOfBirth": "2023-02-01 00:00:00",
+                "email": "lbrunet@cap-collectif.com",
+                "firstname": "Laurent",
+                "lastname": "Brunet",
+                "phone": "+3300000000",
+                "postalAddress": Object {
+                  "json": "[{\\"address_components\\": [{ \\"long_name\\": \\"10\\", \\"short_name\\": \\"10\\", \\"types\\": [\\"street_number\\"] },{ \\"long_name\\": \\"Rue de la Savate\\", \\"short_name\\": \\"Rue de la Savate\\", \\"types\\": [\\"route\\"] },{ \\"long_name\\": \\"Awans\\", \\"short_name\\": \\"Awans\\", \\"types\\": [\\"locality\\", \\"political\\"] },{ \\"long_name\\": \\"Liège\\", \\"short_name\\": \\"LG\\", \\"types\\": [\\"administrative_area_level_2\\", \\"political\\"] },{ \\"long_name\\": \\"Région Wallonne\\", \\"short_name\\": \\"Région Wallonne\\", \\"types\\": [\\"administrative_area_level_1\\", \\"political\\"] },{ \\"long_name\\": \\"Belgium\\", \\"short_name\\": \\"BE\\", \\"types\\": [\\"country\\", \\"political\\"] },{ \\"long_name\\": \\"4340\\", \\"short_name\\": \\"4340\\", \\"types\\": [\\"postal_code\\"] }],\\"formatted_address\\": \\"Rue de la Savate 10, 4340 Awans, Belgium\\",\\"geometry\\": {\\"location\\": { \\"lat\\": 50.7228035, \\"lng\\": 5.464624 },\\"location_type\\": \\"ROOFTOP\\",\\"viewport\\": {\\"south\\": 50.7214585197085,\\"west\\": 5.463225469708497,\\"north\\": 50.72415648029149,\\"east\\": 5.465923430291502}},\\"place_id\\": \\"ChIJ1T224zPjwEcR1kNhE8iPg_k\\",\\"plus_code\\": { \\"compound_code\\": \\"PFF7+4R Awans, Belgium\\", \\"global_code\\": \\"9F27PFF7+4R\\" },\\"types\\": [\\"street_address\\"]}]",
+                },
+                "votes": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Rénovation du gymnase",
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "participant": Object {
+                "dateOfBirth": "2023-03-01 00:00:00",
+                "email": "sfavot@cap-collectif.com",
+                "firstname": "Suzanne",
+                "lastname": "Favot",
+                "phone": null,
+                "postalAddress": null,
+                "votes": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Rénovation du gymnase",
+                        },
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Proposition 17",
+                        },
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Installation de bancs sur la place de la mairie",
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "participant": Object {
+                "dateOfBirth": "1990-10-01 00:00:00",
+                "email": "toto@gmail.com",
+                "firstname": "toto",
+                "lastname": "tata",
+                "phone": "+33333333333",
+                "postalAddress": Object {
+                  "json": "[{\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"RuedelaSavate\\",\\"short_name\\":\\"RuedelaSavate\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Awans\\",\\"short_name\\":\\"Awans\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Liège\\",\\"short_name\\":\\"LG\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"RégionWallonne\\",\\"short_name\\":\\"RégionWallonne\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Belgium\\",\\"short_name\\":\\"BE\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"4340\\",\\"short_name\\":\\"4340\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"RuedelaSavate10,4340Awans,Belgium\\",\\"geometry\\":{\\"location\\":{\\"lat\\":50.7228035,\\"lng\\":5.464624},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":50.7214585197085,\\"west\\":5.463225469708497,\\"north\\":50.72415648029149,\\"east\\":5.465923430291502}},\\"place_id\\":\\"ChIJ1T224zPjwEcR1kNhE8iPg_k\\",\\"plus_code\\":{\\"compound_code\\":\\"PFF7+4RAwans,Belgium\\",\\"global_code\\":\\"9F27PFF7+4R\\"},\\"types\\":[\\"street_address\\"]}]",
+                },
+                "votes": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Rénovation du gymnase",
+                        },
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Installation de bancs sur la place de la mairie",
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+          Object {
+            "node": Object {
+              "participant": Object {
+                "dateOfBirth": "1990-10-01 00:00:00",
+                "email": "toto@gmail.com",
+                "firstname": "toto",
+                "lastname": "tata",
+                "phone": "+33333333333",
+                "postalAddress": Object {
+                  "json": "[{\\"address_components\\":[{\\"long_name\\":\\"10\\",\\"short_name\\":\\"10\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"RuedelaSavate\\",\\"short_name\\":\\"RuedelaSavate\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Awans\\",\\"short_name\\":\\"Awans\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Liège\\",\\"short_name\\":\\"LG\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"RégionWallonne\\",\\"short_name\\":\\"RégionWallonne\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"Belgium\\",\\"short_name\\":\\"BE\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"4340\\",\\"short_name\\":\\"4340\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"RuedelaSavate10,4340Awans,Belgium\\",\\"geometry\\":{\\"location\\":{\\"lat\\":50.7228035,\\"lng\\":5.464624},\\"location_type\\":\\"ROOFTOP\\",\\"viewport\\":{\\"south\\":50.7214585197085,\\"west\\":5.463225469708497,\\"north\\":50.72415648029149,\\"east\\":5.465923430291502}},\\"place_id\\":\\"ChIJ1T224zPjwEcR1kNhE8iPg_k\\",\\"plus_code\\":{\\"compound_code\\":\\"PFF7+4RAwans,Belgium\\",\\"global_code\\":\\"9F27PFF7+4R\\"},\\"types\\":[\\"street_address\\"]}]",
+                },
+                "votes": Object {
+                  "edges": Array [
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Rénovation du gymnase",
+                        },
+                      },
+                    },
+                    Object {
+                      "node": Object {
+                        "proposal": Object {
+                          "title": "Installation de bancs sur la place de la mairie",
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          },
+        ],
+        "totalCount": 4,
+      },
+    },
+  },
+}
+`;

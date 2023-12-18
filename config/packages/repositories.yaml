@@ -761,3 +761,20 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:Participant']
+
+    Capco\AppBundle\Repository\MediatorRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Mediator']
+
+    Capco\AppBundle\Repository\ParticipantRequirementRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:ParticipantRequirement']
+
+    Capco\AppBundle\Repository\MediatorParticipantStepRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:MediatorParticipantStep']

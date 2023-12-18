@@ -153,7 +153,8 @@ class UserSearch extends Search
         $terms = null,
         ?array $notInIds = [],
         bool $authorsOfEventOnly = false,
-        bool $onlyUsers = false
+        bool $onlyUsers = false,
+        bool $isMediatorCompliant = false
     ): array {
         $query = new Query\BoolQuery();
         $query->addFilter(new Term(['enabled' => true]));
@@ -185,9 +186,15 @@ class UserSearch extends Search
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 
+        if ($isMediatorCompliant) {
+            $query->addFilter(new Term(['isOnlyUser' => true]));
+            $query->addMustNot(new Query\Exists('organizationId'));
+            $query->addMustNot(new Term(['roles' => 'ROLE_MEDIATOR']));
+        }
+
         $realQuery = Query::create($query);
         $this->addObjectTypeFilter($realQuery);
-        $realQuery->setTrackTotalHits(true);
+        $realQuery->setTrackTotalHits();
         $resultSet = $this->index->search($realQuery);
         $users = $this->getHydratedResultsFromResultSet($this->userRepo, $resultSet);
 

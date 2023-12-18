@@ -18,8 +18,14 @@ Object {
             "kind": "proposalUserVote",
           },
         },
+        Object {
+          "node": Object {
+            "id": "1067",
+            "kind": "proposalUserVote",
+          },
+        },
       ],
-      "totalCount": 2,
+      "totalCount": 3,
     },
   },
 }

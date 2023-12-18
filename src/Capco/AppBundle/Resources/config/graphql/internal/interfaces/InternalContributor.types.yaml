@@ -1,0 +1,41 @@
+InternalContributor:
+  type: interface
+  inherits:
+    - Node
+  config:
+    name: Contributor
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ContributorTypeResolver", [value])'
+    fields:
+      id:
+        description: 'The ID of an object'
+        builder: 'Relay::GlobalId'
+        builderConfig:
+          typeName: Contributor
+      email:
+        type: 'String'
+      firstname:
+        type: 'String'
+      lastname:
+        type: 'String'
+      phone:
+        type: 'String'
+      phoneConfirmed:
+        type: 'Boolean!'
+      postalAddress:
+        type: 'PreviewGoogleMapsAddress'
+      dateOfBirth:
+        type: 'DateTime'
+      userIdentificationCode:
+        type: 'String'
+        resolve: '@=value.getUserIdentificationCodeValue()'
+        description: "The contributor identification code value"
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      votes:
+        type: 'InternalVoteConnection!'
+        argsBuilder: 'Relay::ForwardConnection'
+        args:
+          contribuableId:
+            type: 'ID'
+            description: 'The id of the contribuable entity (Project, Step)'

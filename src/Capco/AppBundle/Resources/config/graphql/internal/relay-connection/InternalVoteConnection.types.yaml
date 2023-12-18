@@ -7,3 +7,4 @@ InternalVoteConnection:
             totalCount:
                 type: Int!
                 description: Identifies the total count of items in the connection.
+

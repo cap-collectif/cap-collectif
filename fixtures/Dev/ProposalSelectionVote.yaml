@@ -132,3 +132,22 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
         position: 0
         publishedAt: <(new \DateTime('2022-01-03'))>
         createdAt: <(new \DateTime('2022-01-03'))>
+    proposalSelectionVoteMediator1:
+        id: 1066
+        proposal: '@proposal2'
+        selectionStep: '@selectionstep1'
+        position: 0
+        publishedAt: <(new \DateTime('2024-01-01'))>
+        createdAt: <(new \DateTime('2024-01-01'))>
+        mediator: '@mediator1'
+        participant: '@participant1'
+    proposalSelectionVoteMediator2:
+        id: 1067
+        proposal: '@proposal3'
+        selectionStep: '@selectionstep1'
+        position: 0
+        publishedAt: <(new \DateTime('2024-01-03'))>
+        createdAt: <(new \DateTime('2024-01-03'))>
+        mediator: '@mediator1'
+        participant: '@participant2'
+        isAccounted: false

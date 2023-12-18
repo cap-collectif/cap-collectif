@@ -133,7 +133,7 @@
             <cascade-remove/>
         </cascade>
         </one-to-many>
-        <one-to-one field="participant" target-entity="Capco\AppBundle\Entity\Participant" inversed-by="user">
+        <one-to-one field="participant" target-entity="Capco\AppBundle\Entity\Participant" mapped-by="user">
             <cascade>
                 <cascade-persist/>
             </cascade>
@@ -201,6 +201,7 @@
         <one-to-many field="userPhoneVerificationSms" target-entity="Capco\AppBundle\Entity\UserPhoneVerificationSms" mapped-by="user" />
         <many-to-many field="starredResponses" target-entity="Capco\AppBundle\Entity\Responses\AbstractResponse" mapped-by="starCrafters" />
         <one-to-many field="emailingCampaignUsers" target-entity="Capco\AppBundle\Entity\EmailingCampaignUser" mapped-by="user" />
+        <one-to-many target-entity="Capco\AppBundle\Entity\Mediator" mapped-by="user" field="mediators" orphan-removal="true"/>
 
         <one-to-many target-entity="Capco\AppBundle\Entity\Organization\OrganizationMember" mapped-by="user" field="memberOfOrganizations">
             <cascade>

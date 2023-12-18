@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -18,10 +19,11 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Requirement $requirement, $viewer): bool
+    public function __invoke(Requirement $requirement, ?ContributorInterface $contributor = null): bool
     {
-        $viewer = $this->preventNullableViewer($viewer);
-        $value = $this->resolver->__invoke($requirement, $viewer);
+        $contributor = $this->preventNullableViewer($contributor);
+        $value = $this->resolver->__invoke($requirement, $contributor);
+
         if (null === $value) {
             return false;
         }

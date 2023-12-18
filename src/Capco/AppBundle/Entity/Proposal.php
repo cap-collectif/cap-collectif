@@ -345,11 +345,6 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
      */
     private ?ProposalStatistics $statistics = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="proposals")
-     */
-    private ?Participant $participant = null;
-
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1776,17 +1771,5 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         }
 
         return null;
-    }
-
-    public function getParticipant(): ?Participant
-    {
-        return $this->participant;
-    }
-
-    public function setParticipant(?Participant $participant): self
-    {
-        $this->participant = $participant;
-
-        return $this;
     }
 }

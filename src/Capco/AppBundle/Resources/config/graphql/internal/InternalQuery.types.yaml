@@ -221,6 +221,10 @@ InternalQuery:
             userSearch:
                 type: '[InternalUser]'
                 args:
+                    isMediatorCompliant:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'Filter users with ROLE_USER only and who does not belong to an organization.'
                     displayName:
                         type: 'String'
                         defaultValue: null

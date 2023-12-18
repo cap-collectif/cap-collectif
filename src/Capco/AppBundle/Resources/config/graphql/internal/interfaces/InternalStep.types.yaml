@@ -66,3 +66,13 @@ InternalStep:
                     operationType:
                         type: 'StepAdminUrlOperationType'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAdminUrlResolver", [value, args])'
+            mediators:
+                access: "hasFeatureFlag('mediator')"
+                type: 'MediatorConnection'
+                description: 'Mediators assigned to this step.'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    username:
+                        type: 'String'
+                        description: 'Filter mediators by user username.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepMediatorsResolver", [value, args, getUser()])'

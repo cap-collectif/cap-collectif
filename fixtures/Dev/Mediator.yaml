@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Mediator:
+    mediator1:
+        id: 'mediator1'
+        user: '@userMediator'
+        step: '@selectionstep1'

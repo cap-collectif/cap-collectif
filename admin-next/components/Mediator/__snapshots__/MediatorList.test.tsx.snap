@@ -1,0 +1,310 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediatorList /> should render correctly and display mediators 1`] = `
+Array [
+  <div
+    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bdnxRM kuZhqT"
+  >
+    <table
+      className="sc-bdnxRM cRMMXk"
+    >
+      <thead
+        className="sc-bdnxRM kMzwfc"
+      >
+        <tr
+          className="sc-bdnxRM dwXJfE cap-table__tr"
+        >
+          <th
+            className="sc-bdnxRM jcBQPC cap-table__th"
+          >
+            <p
+              className="sc-bdnxRM cRlrvQ cap-text"
+            >
+              global.mediator
+            </p>
+          </th>
+          <th
+            className="sc-bdnxRM jcBQPC cap-table__th"
+          >
+            <p
+              className="sc-bdnxRM cRlrvQ cap-text"
+            >
+              admin.label.step
+            </p>
+          </th>
+          <th
+            className="sc-bdnxRM jcBQPC cap-table__th"
+          >
+            <p
+              className="sc-bdnxRM cRlrvQ cap-text"
+            >
+              mediator.participants_count
+            </p>
+          </th>
+          <th
+            className="sc-bdnxRM jcBQPC cap-table__th"
+          >
+            <p
+              className="sc-bdnxRM cRlrvQ cap-text"
+            >
+              global.email.short
+            </p>
+          </th>
+          <th
+            className="sc-bdnxRM jcBQPC cap-table__th"
+          />
+        </tr>
+      </thead>
+      <tbody
+        className="sc-bdnxRM gboeoA cap-table__tbody"
+      >
+        <tr
+          className="sc-bdnxRM hgMoZa cap-table__tr"
+          data-cy="mediator-item"
+          id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=-Etape de vote"
+        >
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <p
+              className="sc-bdnxRM WTDFb cap-text"
+            >
+              Mediateur 1
+            </p>
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            Etape de vote
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            2/3
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            3
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <button
+              aria-describedby="id-g"
+              aria-label="action_delete"
+              className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              tabIndex={0}
+            >
+              <svg
+                className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                fill="none"
+                viewBox="0 0 12 12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.091 3.75H1.909a.286.286 0 00-.193.073.24.24 0 00-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 00.32-.707V4a.24.24 0 00-.08-.177.286.286 0 00-.193-.073zm-5.045 6.5a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11c.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zm2.727 0a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zM11.454 2h-2.59a.143.143 0 01-.097-.037.12.12 0 01-.04-.088V1.25a1.2 1.2 0 00-.4-.884A1.429 1.429 0 007.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 00-.4.884v.625a.12.12 0 01-.04.088.143.143 0 01-.096.037H.546a.572.572 0 00-.386.146A.48.48 0 000 2.5c0 .133.057.26.16.354A.572.572 0 00.545 3h10.91a.572.572 0 00.385-.146A.48.48 0 0012 2.5a.48.48 0 00-.16-.354.572.572 0 00-.386-.146zm-7.09-.125V1.25a.24.24 0 01.08-.177A.286.286 0 014.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 01.08.177v.625a.12.12 0 01-.04.088A.143.143 0 017.5 2h-3a.143.143 0 01-.096-.037.12.12 0 01-.04-.088z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+            <div
+              className="cap-tooltip-container"
+              hidden={true}
+              id="id-g"
+              onAnimationEnd={[Function]}
+              onTransitionEnd={[Function]}
+              role="tooltip"
+              style={
+                Object {
+                  "display": "none",
+                  "left": "100%",
+                  "pointerEvents": "none",
+                  "position": "fixed",
+                  "top": "100%",
+                  "zIndex": 1800,
+                }
+              }
+            />
+          </td>
+        </tr>
+        <tr
+          className="sc-bdnxRM hgMoZa cap-table__tr"
+          data-cy="mediator-item"
+          id="UHJvamDfooke4XJjaGl2ZWQ=-Etape de vote"
+        >
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <p
+              className="sc-bdnxRM WTDFb cap-text"
+            >
+              Mediateur 2
+            </p>
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            Etape de vote
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            0/0
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            0
+          </td>
+          <td
+            className="sc-bdnxRM jWrtJR cap-table__td"
+            style={
+              Object {
+                "whiteSpace": "initial",
+              }
+            }
+          >
+            <button
+              aria-describedby="id-g"
+              aria-label="action_delete"
+              className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              tabIndex={0}
+            >
+              <svg
+                className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                fill="none"
+                viewBox="0 0 12 12"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.091 3.75H1.909a.286.286 0 00-.193.073.24.24 0 00-.08.177v7c0 .265.115.52.32.707.205.188.482.293.771.293h6.546c.29 0 .567-.105.771-.293a.96.96 0 00.32-.707V4a.24.24 0 00-.08-.177.286.286 0 00-.193-.073zm-5.045 6.5a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.043-.195.12-.265s.181-.11.29-.11c.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zm2.727 0a.36.36 0 01-.12.265.429.429 0 01-.29.11.429.429 0 01-.289-.11.36.36 0 01-.12-.265v-4.5c0-.1.044-.195.12-.265.077-.07.181-.11.29-.11.108 0 .212.04.289.11a.36.36 0 01.12.265v4.5zM11.454 2h-2.59a.143.143 0 01-.097-.037.12.12 0 01-.04-.088V1.25a1.2 1.2 0 00-.4-.884A1.429 1.429 0 007.365 0H4.636c-.361 0-.708.132-.964.366a1.2 1.2 0 00-.4.884v.625a.12.12 0 01-.04.088.143.143 0 01-.096.037H.546a.572.572 0 00-.386.146A.48.48 0 000 2.5c0 .133.057.26.16.354A.572.572 0 00.545 3h10.91a.572.572 0 00.385-.146A.48.48 0 0012 2.5a.48.48 0 00-.16-.354.572.572 0 00-.386-.146zm-7.09-.125V1.25a.24.24 0 01.08-.177A.286.286 0 014.636 1h2.728c.072 0 .141.026.192.073a.24.24 0 01.08.177v.625a.12.12 0 01-.04.088A.143.143 0 017.5 2h-3a.143.143 0 01-.096-.037.12.12 0 01-.04-.088z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+            <div
+              className="cap-tooltip-container"
+              hidden={true}
+              id="id-g"
+              onAnimationEnd={[Function]}
+              onTransitionEnd={[Function]}
+              role="tooltip"
+              style={
+                Object {
+                  "display": "none",
+                  "left": "100%",
+                  "pointerEvents": "none",
+                  "position": "fixed",
+                  "top": "100%",
+                  "zIndex": 1800,
+                }
+              }
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      className="sc-bdnxRM kqhhXZ"
+    >
+      <p
+        className="sc-bdnxRM iNlgqP cap-text"
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        no-result-found
+      </p>
+      <p
+        className="sc-bdnxRM AXuEq cap-text"
+      >
+        adjust-search-filters-to-find
+      </p>
+      <button
+        className="sc-bdnxRM sc-lbVvki cMVVDx bA-duud cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        clean-search-and-filters
+      </button>
+    </div>
+  </div>,
+]
+`;

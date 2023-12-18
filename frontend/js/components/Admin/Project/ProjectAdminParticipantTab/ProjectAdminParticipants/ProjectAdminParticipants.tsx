@@ -429,10 +429,12 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
             cursor
             node {
               id
-              consentInternalCommunication
-              userType {
-                id
-                name
+              ...on User {
+                consentInternalCommunication
+                userType {
+                  id
+                  name
+                }
               }
               ...ProjectAdminParticipant_participant
                 @arguments(contribuableId: $contribuableId, viewerIsAdmin: $viewerIsAdmin)

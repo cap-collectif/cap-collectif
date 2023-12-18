@@ -493,6 +493,35 @@ type AddEventsPayload {
   clientMutationId: String
 }
 
+input AddMediatorVotesInput {
+  mediatorId: ID!
+  stepId: ID!
+  proposals: [ID]!
+  participantInfos: ParticipantInfosInput!
+  clientMutationId: String
+}
+
+type AddMediatorVotesPayload {
+  mediator: Mediator!
+  participant: Participant!
+  clientMutationId: String
+}
+
+input AddMediatorsInput {
+  """List of users to add as mediator."""
+  usersId: [ID]!
+
+  """The step attached to the mediator."""
+  stepId: ID!
+  clientMutationId: String
+}
+
+type AddMediatorsPayload {
+  mediators: MediatorConnection!
+  step: Step!
+  clientMutationId: String
+}
+
 input AddOpinionVoteInput {
   """The Node ID of the opinion/version to vote."""
   opinionId: ID!
@@ -1208,6 +1237,9 @@ type ArgumentVote implements Vote & Publishable & Contribution {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -2104,6 +2136,12 @@ type CheckboxRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The condition set by the requirement."""
   label: String!
 }
@@ -2198,6 +2236,20 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -2256,6 +2308,7 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+    reference: String
 
     """Affiliation options for proposals returned from the connection."""
     affiliations: [ProposalAffiliation]
@@ -2605,6 +2658,9 @@ type CommentVote implements Node & Vote & Publishable {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -2956,6 +3012,20 @@ type ConsultationStep implements Node & Step & RequirementStep {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """A list of contributor associated with the consultation step."""
   contributors(
     """
@@ -3210,6 +3280,62 @@ enum ContributionType {
 interface ContributionWithAuthor {
   """The author of the contribution."""
   author: User!
+}
+
+"""Fetches an object given its ID"""
+interface Contributor {
+  """The ID of an object"""
+  id: ID!
+  email: String
+  firstname: String
+  lastname: String
+  phone: String
+  phoneConfirmed: Boolean!
+  postalAddress: GoogleMapsAddress
+  dateOfBirth: DateTime
+
+  """The contributor identification code value"""
+  userIdentificationCode: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """The id of the contribuable entity (Project, Step)"""
+    contribuableId: ID
+  ): VoteConnection!
+}
+
+"""A connection to a list of items."""
+type ContributorConnection {
+  totalCount: Int!
+
+  """
+  Identifies the total count of anonymous items in the connection. (Not fetched from connection)
+  """
+  anonymousCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ContributorEdge]
+}
+
+"""An edge in a connection."""
+type ContributorEdge {
+  """The item at the end of the edge."""
+  node: Contributor!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 """Associates a value with a count."""
@@ -4110,8 +4236,20 @@ type DateOfBirthRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The date of birth of the viewer."""
   viewerDateOfBirth: DateTime
+
+  """The date of birth of the participant."""
+  participantDateOfBirth(
+    """The token associated to the Participant."""
+    token: String!
+  ): DateTime
 }
 
 """A string containing a datetime."""
@@ -4603,6 +4741,9 @@ type DebateArgumentVote implements Node & Publishable & Vote & Contribution {
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
 
+  """The participant of the contribution."""
+  participant: Participant
+
   """Url of the contribution"""
   url: URI!
 
@@ -4817,6 +4958,20 @@ type DebateStep implements Step & Node {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """The debate of the step."""
   debate: Debate!
 
@@ -4894,6 +5049,9 @@ type DebateVote implements Node & AbstractDebateVote & Vote & Publishable {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Identifies when the entity can no more be published."""
   publishableUntil: DateTime
@@ -5236,6 +5394,17 @@ type DeleteMediaAdminPayload {
   clientMutationId: String
 }
 
+input DeleteMediatorInput {
+  """The mediator ID to delete"""
+  mediatorId: ID!
+  clientMutationId: String
+}
+
+type DeleteMediatorPayload {
+  deletedMediatorId: ID!
+  clientMutationId: String
+}
+
 """Available errors on OfficialResponse removal"""
 enum DeleteOfficialResponseErrorCode {
   """No OfficialResponse match your id"""
@@ -5311,6 +5480,21 @@ type DeleteOrganizationPayload {
 
   """Errors for deleteOrganization mutation."""
   errorCode: DeleteOrganizationErrorCode
+  clientMutationId: String
+}
+
+input DeleteParticipantInput {
+  """Token of the participant."""
+  participantToken: ID!
+
+  """ID of the mediator."""
+  mediatorId: ID!
+  clientMutationId: String
+}
+
+type DeleteParticipantPayload {
+  """The ID of the deleted participant."""
+  deletedParticipantId: ID!
   clientMutationId: String
 }
 
@@ -6563,6 +6747,9 @@ enum FeatureFlagType {
 
   """Whether or not new voting step is enabled"""
   new_vote_step
+
+  """Whether or not votes can be added by mediators"""
+  mediator
 }
 
 """Require a firstname"""
@@ -6573,8 +6760,20 @@ type FirstnameRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The firstname of the viewer."""
   viewerValue: String
+
+  """The firstname of the participant."""
+  participantValue(
+    """The token associated to the Participant."""
+    token: String!
+  ): String
 }
 
 input FollowOpinionInput {
@@ -6748,6 +6947,12 @@ type FranceConnectRequirement implements Node & Requirement {
 
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
+
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
 
   """The viewer's france connect id"""
   viewerValue: String
@@ -7032,8 +7237,20 @@ type IdentificationCodeRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The viewer's identification code"""
   viewerValue: String
+
+  """The identification code of the participant."""
+  participantValue(
+    """The token associated to the Participant."""
+    token: String!
+  ): String
 }
 
 """Available errors for an `inviteOrganizationMember` mutation."""
@@ -7170,8 +7387,20 @@ type LastnameRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The lastname of the viewer."""
   viewerValue: String
+
+  """The lastname of the participant."""
+  participantValue(
+    """The token associated to the Participant."""
+    token: String!
+  ): String
 }
 
 """Available errors on leave organization mutation."""
@@ -7775,6 +8004,70 @@ type MediaResponse implements Response {
   medias: [Media!]!
 }
 
+"""
+User assigned to a project who can add votes in behalf of offline users.
+"""
+type Mediator implements Node {
+  """The ID of an object"""
+  id: ID!
+
+  """The user who has a mediator role."""
+  user: User!
+
+  """Participants who are added by the mediator"""
+  participants(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter participants by fullname."""
+    fullname: String
+    orderBy: ParticipantOrder = {field: CREATED_AT, direction: DESC}
+  ): ParticipantConnection
+
+  """The votes added by the mediator."""
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): VoteConnection
+
+  """The total of participants who have all their votes accounted."""
+  totalParticipantsAccounted: Int
+
+  """The total of participants who have filled in their email."""
+  totalParticipantsOptIn: Int
+}
+
+"""A connection to a list of items."""
+type MediatorConnection {
+  """Identifies the total count of items in the connection."""
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [MediatorEdge]
+}
+
+"""An edge in a connection."""
+type MediatorEdge {
+  """The item at the end of the edge."""
+  node: Mediator!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """A multiple choice question"""
 type MultipleChoiceQuestion implements Question & Node {
   """The ID of an object"""
@@ -8254,6 +8547,11 @@ type Mutation {
   updateLocale(input: UpdateLocaleInput!): UpdateLocalePayload
   updateConsultationStep(input: UpdateConsultationStepInput!): UpdateConsultationStepPayload
   createOrUpdateConsultation(input: CreateOrUpdateConsultationInput!): CreateOrUpdateConsultationPayload
+  addMediators(input: AddMediatorsInput!): AddMediatorsPayload
+  deleteMediator(input: DeleteMediatorInput!): DeleteMediatorPayload
+  addMediatorVotes(input: AddMediatorVotesInput!): AddMediatorVotesPayload
+  updateMediatorVotes(input: UpdateMediatorVotesInput!): UpdateMediatorVotesPayload
+  deleteParticipant(input: DeleteParticipantInput!): DeleteParticipantPayload
 }
 
 """A connection to a list of items."""
@@ -8760,6 +9058,9 @@ type OpinionVote implements YesNoPairedVote & Publishable & Vote {
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
 
+  """The participant of the contribution."""
+  participant: Participant
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -9225,6 +9526,20 @@ type OtherStep implements Node & Step {
   exportStepUrl: URI
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
+
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
 }
 
 """A page."""
@@ -9268,23 +9583,40 @@ type PageTranslation {
 }
 
 """One participant"""
-type Participant implements Node {
+type Participant implements Node & Contributor {
   """The ID of an object."""
   id: ID!
   email: String
-  firstName: String
-  lastName: String
+  firstname: String
+  lastname: String
   phone: String
-  address: String
-  zipCode: String
+  phoneConfirmed: Boolean!
+  postalAddress: GoogleMapsAddress
   dateOfBirth: DateTime
-  identificationCode: String
+
+  """The contributor identification code value"""
+  userIdentificationCode: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """The id of the contribuable entity (Project, Step)"""
+    contribuableId: ID
+
+    """Filter votes created by a mediator"""
+    mediatorId: ID
+  ): VoteConnection!
 
   """The participant token."""
   token: String!
-
-  """Wether or not the user has confirmed his phone."""
-  phoneConfirmed: Boolean!
   replies(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -9294,27 +9626,15 @@ type Participant implements Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ReplyConnection
-  proposals(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): ProposalConnection
-  votes(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): VoteConnection
 
   """If already registered, the user to add as participant."""
   user: User
+
+  """Wether or not the participant meets the step requirement."""
+  isMeetingRequirements(
+    """The step containing requirements."""
+    stepId: ID!
+  ): Boolean
 }
 
 """A connection to a list of items."""
@@ -9336,6 +9656,31 @@ type ParticipantEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+"""Infos Participant"""
+input ParticipantInfosInput {
+  email: String
+  firstname: String
+  lastname: String
+  dateOfBirth: DateTime
+  postalAddress: String
+  phone: String
+}
+
+"""Properties by which participant connections can be ordered."""
+input ParticipantOrder {
+  """The field in which to order nodes by."""
+  field: ParticipantOrderField!
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = ASC
+}
+
+"""Ordering options for participant votes connections."""
+enum ParticipantOrderField {
+  """Allows ordering a list of participant by createdAt."""
+  CREATED_AT
 }
 
 """Represent an invitation to join an organization."""
@@ -9387,8 +9732,20 @@ type PhoneRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The phone of the viewer."""
   viewerValue: String
+
+  """The phone of the participant."""
+  participantValue(
+    """The token associated to the Participant."""
+    token: String!
+  ): String
 }
 
 """Requires a validated phone number"""
@@ -9398,6 +9755,12 @@ type PhoneVerifiedRequirement implements Node & Requirement {
 
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
+
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
 }
 
 """Represent a set of analytics for a platform"""
@@ -9810,8 +10173,20 @@ type PostalAddressRequirement implements Node & Requirement {
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
 
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
+
   """The postal address of the viewer."""
   viewerAddress: GoogleMapsAddress
+
+  """The postal address of the participant."""
+  participantAddress(
+    """The token associated to the Participant."""
+    token: String!
+  ): GoogleMapsAddress
 }
 
 input PreConfigureProjectInput {
@@ -9986,6 +10361,20 @@ type PresentationStep implements Node & Step {
   exportStepUrl: URI
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
+
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
 }
 
 """A vote that can be anonymous."""
@@ -10071,7 +10460,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Search contributor by his email, username, lastname"""
     term: String
-  ): UserConnection!
+  ): ContributorConnection!
 
   """Count of contributions associated with the project."""
   contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-04-01 UTC.")
@@ -10179,6 +10568,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+    reference: String
 
     """Affiliation options for proposals returned from the connection."""
     affiliations: [ProposalAffiliation]
@@ -11490,6 +11880,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+    reference: String
 
     """Affiliation options for proposals returned from the connection."""
     affiliations: [ProposalAffiliation]
@@ -12004,6 +12395,9 @@ type ProposalSmsVote implements ProposalVote & Vote {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 }
 
 """A connection to a list of items."""
@@ -12152,6 +12546,20 @@ interface ProposalStep {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -12210,6 +12618,7 @@ interface ProposalStep {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+    reference: String
 
     """Affiliation options for proposals returned from the connection."""
     affiliations: [ProposalAffiliation]
@@ -12439,6 +12848,9 @@ type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableV
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Return the ranking of the vote (if any)"""
   ranking: Int
@@ -12778,6 +13190,11 @@ type Query {
     onlyUsedByProjects: Boolean = false
   ): [ProjectType!]!
   userSearch(
+    """
+    Filter users with ROLE_USER only and who does not belong to an organization.
+    """
+    isMediatorCompliant: Boolean = false
+
     """Filter by displayName."""
     displayName: String = null
 
@@ -13609,6 +14026,20 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """Requirements for answering the questionnaire"""
   requirements(
     """
@@ -13725,6 +14156,20 @@ type RankingStep implements Node & Step {
   exportStepUrl: URI
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
+
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
   nbOpinionsToDisplay: Int
   nbVersionsToDisplay: Int
 }
@@ -14477,6 +14922,12 @@ interface Requirement {
 
   """Does the viewer meets the requirement ?"""
   viewerMeetsTheRequirement: Boolean!
+
+  """Does the participant meets the requirement ?"""
+  participantMeetsTheRequirement(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
 }
 
 """A connection to a list of items."""
@@ -14486,6 +14937,12 @@ type RequirementConnection {
 
   """Does the viewer meets all the requirements ?"""
   viewerMeetsTheRequirements: Boolean!
+
+  """Does the participant meets all the requirements ?"""
+  participantMeetsTheRequirements(
+    """The token associated to the Participant."""
+    token: String!
+  ): Boolean!
 
   """The reason for requirements."""
   reason: String
@@ -15054,6 +15511,20 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
 
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
+
   """A list of proposals associated to the object."""
   proposals(
     """
@@ -15112,6 +15583,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """If non-null, filters proposals with the given string to look for."""
     term: String
+    reference: String
 
     """Affiliation options for proposals returned from the connection."""
     affiliations: [ProposalAffiliation]
@@ -15239,7 +15711,7 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-  ): UserConnection!
+  ): ContributorConnection!
 
   """The main view : GRID, LIST or MAP"""
   mainView: MainView!
@@ -15937,6 +16409,9 @@ type SourceVote implements Vote & Publishable & Contribution {
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
 
+  """The participant of the contribution."""
+  participant: Participant
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -16094,6 +16569,20 @@ interface Step {
   exportStepUrl: URI
   exportContributorsUrl: URI
   adminUrl(operationType: StepAdminUrlOperationType): URI!
+
+  """Mediators assigned to this step."""
+  mediators(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter mediators by user username."""
+    username: String
+  ): MediatorConnection
 }
 
 enum StepAdminUrlOperationType {
@@ -17293,6 +17782,20 @@ input UpdateLocaleStatusInput {
 
 type UpdateLocaleStatusPayload {
   locales: LocaleConnection!
+  clientMutationId: String
+}
+
+input UpdateMediatorVotesInput {
+  mediatorId: ID!
+  proposals: [ID]!
+  participantId: ID!
+  participantInfos: ParticipantInfosInput!
+  clientMutationId: String
+}
+
+type UpdateMediatorVotesPayload {
+  mediator: Mediator!
+  participant: Participant!
   clientMutationId: String
 }
 
@@ -18659,7 +19162,7 @@ type UpdateUsernamePayload {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Author {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Contributor & Author {
   """Author ID"""
   id: ID!
 
@@ -19248,6 +19751,7 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   isSuperAdmin: Boolean!
   isOnlyProjectAdmin: Boolean!
   isAdminOrganization: Boolean!
+  isMediator: Boolean!
 
   """Get any connection attempt"""
   connectionAttempt(
@@ -19323,6 +19827,15 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
   The user (who has already participated / is participating) in a questionnaire or other type of interaction
   """
   participant: Participant
+  projectsMediator(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectConnection
 }
 
 """A connection to a list of items."""
@@ -19645,6 +20158,9 @@ enum UserRole {
 
   """Represents Cap Collectif account."""
   ROLE_SUPER_ADMIN
+
+  """Represents a user who can vote in behalf of offline users."""
+  ROLE_MEDIATOR
 }
 
 """A type of person"""
@@ -20010,6 +20526,9 @@ type VersionVote implements YesNoPairedVote & Publishable & Vote {
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
 
+  """The participant of the contribution."""
+  participant: Participant
+
   """Whether or not the entity is published."""
   published: Boolean!
 
@@ -20041,6 +20560,9 @@ interface Vote {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 }
 
 """A connection to a list of items."""
@@ -20107,6 +20629,9 @@ interface YesNoPairedVote {
 
   """Returns if vote is accounted or not"""
   isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Whether or not the entity is published."""
   published: Boolean!

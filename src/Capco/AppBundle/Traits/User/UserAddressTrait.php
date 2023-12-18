@@ -3,12 +3,18 @@
 namespace Capco\AppBundle\Traits\User;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
+use Doctrine\ORM\Mapping as ORM;
 
 trait UserAddressTrait
 {
-    protected ?string $postalAddress;
+    /**
+     * @ORM\Column(name="postal_address", type="text", nullable=true)
+     */
+    protected ?string $postalAddress = null;
+
     protected ?string $address;
     protected ?string $address2;
+
     protected ?string $zipCode;
     protected ?string $neighborhood;
     protected ?string $city;

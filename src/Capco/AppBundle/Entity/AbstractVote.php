@@ -114,9 +114,10 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
     private bool $isAccounted = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Participant::class, inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Mediator", inversedBy="votes")
+     * @ORM\JoinColumn(name="mediator_id", referencedColumnName="id")
      */
-    private ?Participant $participant = null;
+    private ?Mediator $mediator = null;
 
     public function getKind(): string
     {
@@ -228,14 +229,14 @@ abstract class AbstractVote implements Publishable, VoteContribution, IndexableI
         ];
     }
 
-    public function getParticipant(): ?Participant
+    public function getMediator(): ?Mediator
     {
-        return $this->participant;
+        return $this->mediator;
     }
 
-    public function setParticipant(?Participant $participant): self
+    public function setMediator(?Mediator $mediator): self
     {
-        $this->participant = $participant;
+        $this->mediator = $mediator;
 
         return $this;
     }

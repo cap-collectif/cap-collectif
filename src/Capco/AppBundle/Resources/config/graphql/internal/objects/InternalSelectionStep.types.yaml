@@ -31,7 +31,7 @@ InternalSelectionStep:
             proposals:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
             contributors:
-                type: 'InternalUserConnection!'
+                type: 'InternalContributorConnection!'
                 description: 'A list of contributor associated with the consultation.'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'

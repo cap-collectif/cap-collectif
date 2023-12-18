@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|CollectStep.requirements connection fetches requirements for a participant 1`] = `
+Object {
+  "node": Object {
+    "id": "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBWb3RlQ2xhc3NlbWVudA==",
+    "requirements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "FirstnameRequirement",
+            "participantMeetsTheRequirement": true,
+            "participantValue": "Laurent",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "LastnameRequirement",
+            "participantMeetsTheRequirement": true,
+            "participantValue": "Brunet",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "PhoneRequirement",
+            "participantMeetsTheRequirement": true,
+            "participantValue": "+3300000000",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "CheckboxRequirement",
+            "participantMeetsTheRequirement": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "CheckboxRequirement",
+            "participantMeetsTheRequirement": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "CheckboxRequirement",
+            "participantMeetsTheRequirement": false,
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "DateOfBirthRequirement",
+            "participantDateOfBirth": "2023-02-01 00:00:00",
+            "participantMeetsTheRequirement": true,
+          },
+        },
+      ],
+    },
+    "title": "Collecte avec vote classement limité",
+  },
+}
+`;

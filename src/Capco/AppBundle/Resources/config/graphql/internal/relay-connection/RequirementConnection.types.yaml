@@ -10,6 +10,14 @@ RequirementConnection:
                 type: 'Boolean!'
                 access: "@hasRole=('ROLE_USER')"
                 description: 'Does the viewer meets all the requirements ?'
+            participantMeetsTheRequirements:
+                type: 'Boolean!'
+                description: 'Does the participant meets all the requirements ?'
+                args:
+                    token:
+                        type: 'String!'
+                        description: 'The token associated to the Participant.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementConnectionParticipantMeetsTheRequirementsResolver", [value, args])'
             reason:
                 type: 'String'
                 description: 'The reason for requirements.'

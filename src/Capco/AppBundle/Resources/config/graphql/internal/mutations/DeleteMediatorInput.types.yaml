@@ -1,0 +1,7 @@
+DeleteMediatorInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            mediatorId:
+                type: 'ID!'
+                description: 'The mediator ID to delete'

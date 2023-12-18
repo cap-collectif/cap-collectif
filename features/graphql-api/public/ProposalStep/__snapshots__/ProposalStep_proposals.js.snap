@@ -155,11 +155,11 @@ Object {
               "name": "Vote gagné",
             },
             "voteOnStep": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
           },
@@ -331,11 +331,11 @@ Object {
               "name": "Vote gagné",
             },
             "voteOnStep": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
           },
@@ -946,11 +946,11 @@ Object {
               "name": "Vote gagné",
             },
             "voteOnStep": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
           },
@@ -1027,11 +1027,11 @@ Object {
               "name": "Vote gagné",
             },
             "voteOnStep": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
             "votes": Object {
-              "totalCount": 1,
+              "totalCount": 2,
               "totalPointsCount": 0,
             },
           },

@@ -17,7 +17,7 @@ class ProposalUrlResolver implements ResolverInterface
         $this->router = $router;
     }
 
-    public function __invoke(Proposal $proposal, RequestStack $requestStack): string
+    public function __invoke(Proposal $proposal, ?RequestStack $requestStack = null): string
     {
         $step = $proposal->getStep();
         if (!$step) {
@@ -28,7 +28,8 @@ class ProposalUrlResolver implements ResolverInterface
             return '';
         }
 
-        $request = $requestStack->getCurrentRequest();
+        $request = isset($requestStack) ? $requestStack->getCurrentRequest() : null;
+
         if ($request) {
             $locale = $request->getLocale();
         }

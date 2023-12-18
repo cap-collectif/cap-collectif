@@ -12,6 +12,7 @@ import { translateContent } from '~/utils/ContentTranslator'
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
+import Text from '~ui/Primitives/Text'
 export type OwnProps = {
   readonly rowId: string
   readonly selected: boolean
@@ -40,14 +41,19 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     isEmailConfirmed,
     consentInternalCommunication,
   } = participant
+
   const hasCompleteName = !!firstname && !!lastname
   const hasAccountDeleted = username === 'deleted-user'
   return (
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
-          <a href={adminUrl ?? url}>{translateContent(username)}</a>
-
+          {
+              participant.__typename === 'User' && (<a href={adminUrl ?? url}>{translateContent(username)}</a>)
+          }
+          {
+            (participant.__typename === 'Participant') ? <Text fontWeight={600}>{intl.formatMessage({ id: 'accompanied-participants' })}</Text> : null
+          }
           {vip && !hasAccountDeleted && (
             <Tooltip
               placement="top"
@@ -110,7 +116,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
 
         {(lastLogin || hasCompleteName) && (
           <NameContainer>
-            {firstname && lastname && <span>{`${firstname} ${lastname}`}</span>}
+            {hasCompleteName && <span>{`${firstname} ${lastname}`}</span>}
             {hasCompleteName && lastLogin && <span className="separator">•</span>}
             {lastLogin && (
               <FormattedMessage
@@ -147,26 +153,32 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
               <span>{email}</span>
             </li>
           )}
-
-          <li>
-            <Icon name={ICON_NAME.like} size={12} color={colors.darkGray} />
-            <FormattedMessage
-              id="global.votes"
-              values={{
-                num: votes.totalCount,
-              }}
-            />
-          </li>
-
-          <li>
-            <Icon name={ICON_NAME.messageBubbleFilled} size={12} color={colors.darkGray} />
-            <FormattedMessage
-              id="synthesis.common.elements.nb"
-              values={{
-                num: contributions.totalCount,
-              }}
-            />
-          </li>
+          {
+            votes?.totalCount ? (
+                <li>
+                  <Icon name={ICON_NAME.like} size={12} color={colors.darkGray} />
+                  <FormattedMessage
+                      id="global.votes"
+                      values={{
+                        num: votes.totalCount,
+                      }}
+                  />
+                </li>
+            ) : null
+          }
+          {
+            contributions?.totalCount ? (
+                <li>
+                  <Icon name={ICON_NAME.messageBubbleFilled} size={12} color={colors.darkGray} />
+                  <FormattedMessage
+                      id="synthesis.common.elements.nb"
+                      values={{
+                        num: contributions.totalCount,
+                      }}
+                  />
+                </li>
+            ) : null
+          }
         </InlineList>
       </ParticipantInfo>
 
@@ -177,30 +189,33 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
 
 const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminParticipant, {
   participant: graphql`
-    fragment ProjectAdminParticipant_participant on User
+    fragment ProjectAdminParticipant_participant on Contributor
     @argumentDefinitions(contribuableId: { type: "ID" }, viewerIsAdmin: { type: "Boolean!" }) {
+      __typename
       id
-      username
       firstname
       lastname
-      adminUrl @include(if: $viewerIsAdmin)
-      url
-      lastLogin
       email
-      vip
-      isEmailConfirmed
-      consentInternalCommunication
-      userType {
-        id
-        name
-      }
       votes(contribuableId: $contribuableId) {
-        totalCount
+          totalCount
       }
-      contributions(contribuableId: $contribuableId, includeTrashed: true) {
-        totalCount
+      ...on User {
+        username
+        adminUrl @include(if: $viewerIsAdmin)
+        url
+        lastLogin
+        vip
+        isEmailConfirmed
+        consentInternalCommunication
+        userType {
+          id
+          name
+        }
+        contributions(contribuableId: $contribuableId, includeTrashed: true) {
+          totalCount
+        }
+        ...UserAvatarLegacy_user
       }
-      ...UserAvatarLegacy_user
     }
   `,
 })

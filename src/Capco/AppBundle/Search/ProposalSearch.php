@@ -72,7 +72,7 @@ class ProposalSearch extends Search
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
         if ($providedFilters['term']) {
-            $this->searchTermsInMultipleNestedFields($boolQuery, $providedFilters['term']);
+            $this->searchTermsInMultipleNestedFields($boolQuery, [$providedFilters['term']]);
         }
         $boolQuery->addFilter(new Term(['project.id' => ['value' => $project->getId()]]));
 
@@ -141,15 +141,37 @@ class ProposalSearch extends Search
     // This method is called in ProposalFormProposalsDataLoader and is based only on the first collectstep of the project.
     public function searchProposals(
         int $limit,
-        $terms,
         array $providedFilters,
         int $seed,
         ?string $cursor,
+        ?string $term = null,
         ?array $orders = null
     ): ElasticsearchPaginatedResult {
         $boolQuery = new Query\BoolQuery();
-        if ($terms) {
-            $this->searchTermsInMultipleNestedFields($boolQuery, $terms);
+
+        $reference = $providedFilters['reference'] ?? null;
+        if ($term && $reference) {
+            $this->searchTermsInMultipleNestedFields(
+                $boolQuery,
+                [$term, $reference],
+                [
+                    'proposalTitle' => 9,
+                    'proposalTitle.std' => 9,
+                    'reference' => 8,
+                    'reference.std' => 8,
+                ],
+            );
+        } elseif ($reference) {
+            $this->searchTermsInMultipleNestedFields(
+                $boolQuery,
+                [$reference],
+                [
+                    'reference' => 9,
+                    'reference.std' => 9,
+                ]
+            );
+        } elseif ($term) {
+            $this->searchTermsInMultipleNestedFields($boolQuery, [$term]);
         }
         $this->applyInaplicableFilters($boolQuery, $providedFilters);
         $stateTerms = [];
@@ -249,7 +271,7 @@ class ProposalSearch extends Search
         $this->applyCursor($query, $cursor);
         $query->setSource(['id'])->setSize($limit);
         $this->addObjectTypeFilter($query, $this->type);
-        $query->setTrackTotalHits(true);
+        $query->setTrackTotalHits();
         $resultSet = $this->index->search($query);
 
         $ids = [];
@@ -835,28 +857,34 @@ class ProposalSearch extends Search
         }
     }
 
-    private function searchTermsInMultipleNestedFields(BoolQuery $boolQuery, string $terms): void
+    private function searchTermsInMultipleNestedFields(BoolQuery $boolQuery, array $terms, array $searchFields = self::SEARCH_FIELDS): void
     {
         $nestedBoostedFields = $this->formatFieldsBoosts(self::NESTED_SEARCH_FIELDS);
-        $boostedFields = $this->formatFieldsBoosts(self::SEARCH_FIELDS);
-        $boolQuery->addMust(
-            (new BoolQuery())
-                ->addShould(
-                    (new Query\MultiMatch())
-                        ->setFields($boostedFields)
-                        ->setQuery($terms)
-                        ->setType('phrase_prefix')
-                )
-                ->addShould(
-                    (new Query\Nested())->setPath('responses')->setQuery(
-                        (new BoolQuery())->addMust(
-                            (new Query\MultiMatch())
-                                ->setFields($nestedBoostedFields)
-                                ->setQuery($terms)
-                                ->setType('phrase_prefix')
-                        )
+        $boostedFields = $this->formatFieldsBoosts($searchFields);
+
+        $boolSubQuery = new BoolQuery();
+        foreach ($terms as $term) {
+            $boolSubQuery->addShould(
+                (new Query\MultiMatch())
+                    ->setFields($boostedFields)
+                    ->setQuery($term)
+                    ->setType('phrase_prefix')
+            );
+
+            $boolSubQuery->addShould(
+                (new Query\Nested())->setPath('responses')->setQuery(
+                    (new BoolQuery())->addMust(
+                        (new Query\MultiMatch())
+                            ->setFields($nestedBoostedFields)
+                            ->setQuery($term)
+                            ->setType('phrase_prefix')
                     )
                 )
+            );
+        }
+
+        $boolQuery->addMust(
+            $boolSubQuery
         );
     }
 

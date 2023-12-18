@@ -1,0 +1,9 @@
+InternalParticipantOrderField:
+    type: enum
+    config:
+        name: ParticipantOrderField
+        description: 'Ordering options for participant votes connections.'
+        values:
+            CREATED_AT:
+                value: '@=constant("Capco\\AppBundle\\Enum\\ParticipantOrderField::CREATED_AT")'
+                description: 'Allows ordering a list of participant by createdAt.'

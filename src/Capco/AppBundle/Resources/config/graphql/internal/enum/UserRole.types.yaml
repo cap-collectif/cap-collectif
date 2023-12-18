@@ -15,3 +15,6 @@ UserRole:
             ROLE_SUPER_ADMIN:
                 value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_SUPER_ADMIN")'
                 description: 'Represents Cap Collectif account.'
+            ROLE_MEDIATOR:
+                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_MEDIATOR")'
+                description: 'Represents a user who can vote in behalf of offline users.'

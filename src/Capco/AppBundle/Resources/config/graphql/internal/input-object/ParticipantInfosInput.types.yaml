@@ -1,0 +1,17 @@
+ParticipantInfosInput:
+    type: input-object
+    config:
+        description: 'Infos Participant'
+        fields:
+            email:
+                type: 'String'
+            firstname:
+                type: 'String'
+            lastname:
+                type: 'String'
+            dateOfBirth:
+                type: 'DateTime'
+            postalAddress:
+                type: 'String'
+            phone:
+                type: 'String'

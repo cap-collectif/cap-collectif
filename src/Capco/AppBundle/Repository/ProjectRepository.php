@@ -443,6 +443,19 @@ class ProjectRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findMediatorProjectsByUser(User $user): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->join('p.steps', 'pas')
+            ->join('pas.step', 's')
+            ->join('s.mediators', 'm')
+            ->where('m.user = :user')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function getUserProjectPublicQueryBuilder(User $user): QueryBuilder
     {
         return $this->getProjectsViewerCanSeeQueryBuilder($user)

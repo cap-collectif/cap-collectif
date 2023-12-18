@@ -1,0 +1,6 @@
+DeleteMediatorPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedMediatorId:
+                type: 'ID!'

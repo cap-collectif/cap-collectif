@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Mailer;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Mailer\Message\AbstractAdminMessage;
 use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
@@ -9,7 +10,6 @@ use Capco\AppBundle\Mailer\Message\AbstractModeratorMessage;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\AbstractEmailingCampaignMessage;
 use Capco\AppBundle\Mailer\Message\Reporting\ReportingCreateMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,7 +36,7 @@ class MailerFactory
         string $type,
         $element,
         array $params,
-        ?User $recipient = null,
+        ?ContributorInterface $recipient = null,
         ?string $recipientEmail = null,
         ?string $replyTo = null
     ): AbstractMessage {

@@ -43,20 +43,20 @@ describe('Proposal Vote Page', () => {
       cy.visit('project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/renovation-du-gymnase')
       cy.wait('@ProposalPageQuery')
 
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 1)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
       ProposalVotePage.getVoteButton().click({ force: true })
       ProposalVotePage.getConfirmVoteModalButton().click({ force: true })
       cy.wait('@AddProposalVoteMutation')
       cy.contains('vote.add_success')
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 3)
 
       ProposalVotePage.getVoteButton().click({ force: true })
       cy.wait('@RemoveProposalVoteMutation')
       cy.contains('vote.delete_success')
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 1)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
 
       ProposalVotePage.getTotalVotesTab().click({ force: true })
-      ProposalVotePage.getVoterCardUsername().should('not.have.text', 'user')
+      ProposalVotePage.getVoterCards().should('have.length', 2)
     })
 
     it('Logged in user wants to vote for a proposal anonymously', () => {
@@ -68,7 +68,7 @@ describe('Proposal Vote Page', () => {
       cy.visit('project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/renovation-du-gymnase')
       cy.wait('@ProposalPageQuery')
 
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 1)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
       ProposalVotePage.getVoteButton().click({ force: true })
 
       cy.get('.circle-toggler').click({ force: true, multiple: true })
@@ -76,15 +76,15 @@ describe('Proposal Vote Page', () => {
       ProposalVotePage.getConfirmVoteModalButton().click({ force: true })
       cy.wait('@AddProposalVoteMutation')
       cy.contains('vote.add_success')
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 3)
 
       cy.directLoginAs('user_not_confirmed')
       cy.visit('project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/renovation-du-gymnase')
       cy.wait('@ProposalPageQuery')
 
-      ProposalVotePage.getTotalVotesCounter().should('have.text', 2)
+      ProposalVotePage.getTotalVotesCounter().should('have.text', 3)
       ProposalVotePage.getTotalVotesTab().click({ force: true })
-      ProposalVotePage.getVoterCardUsername().should('not.have.text', 'user')
+      ProposalVotePage.getVoterCards().should('have.length', 3)
     })
     it('Proposal should stay voted after user refresh the page', () => {
       cy.directLoginAs('user')

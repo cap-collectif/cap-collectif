@@ -24,6 +24,8 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import StepEvents from '../Steps/StepEvents'
 import ProposalVoteBasketWidget from '../Proposal/Vote/ProposalVoteBasketWidget'
 import CookieMonster from '~/CookieMonster'
+import MediatorAddVotesLink from './MediatorAddVotesLink'
+
 type OwnProps = {
   stepId: string
   projectId: string
@@ -41,6 +43,7 @@ type RenderedProps = ProposalStepPageQueryResponse & {
   count: number
   isAuthenticated: boolean
   features: FeatureToggles
+  projectId?: string
 }
 export const ProposalStepPageRendered = (props: RenderedProps) => {
   const { viewer, isAuthenticated, features, step, count } = props
@@ -70,6 +73,9 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   if (features.display_map && form.districts) {
     geoJsons = formatGeoJsons(form.districts)
   }
+
+  const relatedMediatorProjectId = viewer?.projectsMediator?.edges?.find(edge => edge.node.id === props.projectId)?.node
+    ?.id
 
   return (
     <>
@@ -112,6 +118,9 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
         <StepPageHeader step={step} />
         {isAuthenticated && step.kind === 'collect' && <DraftProposalList step={step} />}
         {isAuthenticated && <UnpublishedProposalListView step={step} viewer={viewer} />}
+        {relatedMediatorProjectId && step.votable && step.state === 'OPENED' ? (
+          <MediatorAddVotesLink projectId={relatedMediatorProjectId} />
+        ) : null}
         <ProposalStepPageHeader step={step} displayMode={displayMode} />
         <ProposalListFilters step={step} setDisplayMode={setDisplayMode} displayMode={displayMode} />
         <ProposalListView
@@ -134,7 +143,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   )
 }
 
-const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }: Props) => {
+const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, projectId }: Props) => {
   const { state } = useLocation()
   const urlSearch = new URLSearchParams(window.location.search)
   const category = urlSearch.get('category') ?? null
@@ -170,6 +179,13 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }:
               ...ProposalListView_viewer @arguments(stepId: $stepId)
               ...UnpublishedProposalListView_viewer @arguments(stepId: $stepId)
               ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
+              projectsMediator {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
             }
             step: node(id: $stepId) {
               ... on ProposalStep {
@@ -261,7 +277,13 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order }:
 
           if (props) {
             return (
-              <ProposalStepPageRendered {...props} count={50} isAuthenticated={isAuthenticated} features={features} />
+              <ProposalStepPageRendered
+                {...props}
+                count={50}
+                isAuthenticated={isAuthenticated}
+                features={features}
+                projectId={projectId}
+              />
             )
           }
 

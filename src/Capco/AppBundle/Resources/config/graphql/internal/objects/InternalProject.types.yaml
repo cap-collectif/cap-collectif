@@ -18,7 +18,7 @@ InternalProject:
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectHasAnalysisResolver", [value])'
             contributors:
-                type: 'InternalUserConnection!'
+                type: 'InternalContributorConnection!'
                 args:
                     step:
                         type: 'ID'

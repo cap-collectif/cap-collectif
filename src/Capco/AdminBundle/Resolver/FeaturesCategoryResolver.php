@@ -74,6 +74,7 @@ class FeaturesCategoryResolver
                     Manager::organizations,
                     Manager::moderation_comment,
                     Manager::unstable__new_create_project,
+                    Manager::mediator,
                 ],
             ],
         ],

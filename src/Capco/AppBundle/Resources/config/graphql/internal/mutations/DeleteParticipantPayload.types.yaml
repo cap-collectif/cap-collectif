@@ -1,0 +1,7 @@
+DeleteParticipantPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      deletedParticipantId:
+        type: 'ID!'
+        description: 'The ID of the deleted participant.'

@@ -7,7 +7,9 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\EmailingCampaignUser;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\Author;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
+use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Participant;
@@ -20,7 +22,7 @@ use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Traits\User\UserAddressTrait;
+use Capco\AppBundle\Traits\ContributorTrait;
 use Capco\AppBundle\Traits\User\UserSSOTrait;
 use Capco\Capco\UserBundle\Entity\AbstractUser;
 use Capco\MediaBundle\Entity\Media;
@@ -31,9 +33,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends AbstractUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author
+class User extends AbstractUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author, ContributorInterface
 {
-    use UserAddressTrait;
+    use ContributorTrait;
     use UserSSOTrait;
 
     public const GENDER_OTHER = 'o';
@@ -87,7 +89,6 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
     protected ?string $newEmailToConfirm = null;
     protected ?string $newEmailConfirmationToken = null;
     protected ?\DateTime $emailConfirmationSentAt = null;
-    protected bool $phoneConfirmed = false;
     protected ?string $smsConfirmationCode = null;
     protected ?\DateTime $smsConfirmationSentAt = null;
     protected ?\DateTime $confirmedAccountAt = null;
@@ -126,6 +127,8 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
      */
     private ?Participant $participant = null;
 
+    private Collection $mediators;
+
     public function __construct()
     {
         parent::__construct();
@@ -149,6 +152,7 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
         $this->starredResponses = new ArrayCollection();
         $this->memberOfOrganizations = new ArrayCollection();
         $this->emailingCampaignUsers = new ArrayCollection();
+        $this->mediators = new ArrayCollection();
     }
 
     public function isAdminOrganization(): bool
@@ -730,6 +734,11 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
         return $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 
+    public function isMediator(): bool
+    {
+        return $this->hasRole(UserRole::ROLE_MEDIATOR);
+    }
+
     public function isProjectAdmin(): bool
     {
         return $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->isAdmin();
@@ -1215,5 +1224,40 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
         $this->participant = $participant;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Mediator>
+     */
+    public function getMediators(): Collection
+    {
+        return $this->mediators;
+    }
+
+    public function addMediator(Mediator $mediator): self
+    {
+        if (!$this->mediators->contains($mediator)) {
+            $this->mediators[] = $mediator;
+            $mediator->setMediator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediator(Mediator $mediator): self
+    {
+        if ($this->mediators->removeElement($mediator)) {
+            // set the owning side to null (unless already changed)
+            if ($mediator->getMediator() === $this) {
+                $mediator->setMediator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getShowName(): ?string
+    {
+        return $this->getUsername();
     }
 }

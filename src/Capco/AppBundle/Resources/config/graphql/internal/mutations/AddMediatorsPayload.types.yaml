@@ -1,0 +1,8 @@
+AddMediatorsPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            mediators:
+                type: 'MediatorConnection!'
+            step:
+                type: 'InternalStep!'

@@ -33,6 +33,23 @@ class SelectionStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findProjectMediatorsProposalsVotes(string $projectId): array
+    {
+        $sql = "
+            SELECT v.id, v.proposal_id, p.title, p.reference
+            FROM votes v
+            JOIN project_abstractstep pas on v.selection_step_id = pas.step_id
+            JOIN proposal p on v.proposal_id = p.id
+            WHERE v.mediator_id is not null and pas.project_id = \"{$projectId}\"
+        ";
+
+        return $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($sql)
+            ->fetchAllAssociative()
+        ;
+    }
+
     private function getEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('ss')->where('ss.isEnabled = 1');

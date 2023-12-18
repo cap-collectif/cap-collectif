@@ -1,0 +1,10 @@
+AddMediatorsInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            usersId:
+                type: '[ID]!'
+                description: 'List of users to add as mediator.'
+            stepId:
+                type: 'ID!'
+                description: 'The step attached to the mediator.'

@@ -2,9 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\ParticipantRequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class RequirementViewerValueResolver implements ResolverInterface
@@ -12,53 +16,66 @@ class RequirementViewerValueResolver implements ResolverInterface
     use ResolverTrait;
 
     private UserRequirementRepository $userRequirementsRepo;
+    private ParticipantRequirementRepository $participantRequirementRepo;
 
-    public function __construct(UserRequirementRepository $userRequirementsRepo)
+    public function __construct(UserRequirementRepository $userRequirementsRepo, ParticipantRequirementRepository $participantRequirementRepo)
     {
         $this->userRequirementsRepo = $userRequirementsRepo;
+        $this->participantRequirementRepo = $participantRequirementRepo;
     }
 
     /**
      * Returns a string, a GoogleMapsAddress or a bool.
      *
-     * @param mixed $viewer
+     * @param mixed $contributor
      */
-    public function __invoke(Requirement $requirement, $viewer)
+    public function __invoke(Requirement $requirement, ContributorInterface $contributor)
     {
-        $viewer = $this->preventNullableViewer($viewer);
+        $contributor = $this->preventNullableViewer($contributor);
 
         if (Requirement::FIRSTNAME === $requirement->getType()) {
-            return $viewer->getFirstname();
+            return $contributor->getFirstname();
         }
         if (Requirement::LASTNAME === $requirement->getType()) {
-            return $viewer->getLastname();
+            return $contributor->getLastname();
         }
         if (Requirement::PHONE === $requirement->getType()) {
-            return $viewer->getPhone();
+            return $contributor->getPhone();
         }
         if (Requirement::DATE_OF_BIRTH === $requirement->getType()) {
-            return $viewer->getDateOfBirth();
+            return $contributor->getDateOfBirth();
         }
         if (Requirement::POSTAL_ADDRESS === $requirement->getType()) {
-            return $viewer->getPostalAddress();
+            return $contributor->getPostalAddress();
         }
         if (Requirement::IDENTIFICATION_CODE === $requirement->getType()) {
-            return $viewer->getUserIdentificationCodeValue();
+            return $contributor->getUserIdentificationCodeValue();
         }
         if (Requirement::PHONE_VERIFIED === $requirement->getType()) {
-            return $viewer->isPhoneConfirmed();
+            return $contributor->isPhoneConfirmed();
         }
-        if (Requirement::FRANCE_CONNECT === $requirement->getType()) {
-            return $viewer->getFranceConnectId();
+        if ($contributor instanceof User && Requirement::FRANCE_CONNECT === $requirement->getType()) {
+            return $contributor->getFranceConnectId();
         }
 
         if (Requirement::CHECKBOX === $requirement->getType()) {
-            $found = $this->userRequirementsRepo->findOneBy([
-                'requirement' => $requirement,
-                'user' => $viewer,
-            ]);
+            if ($contributor instanceof User) {
+                $found = $this->userRequirementsRepo->findOneBy([
+                    'requirement' => $requirement,
+                    'user' => $contributor,
+                ]);
 
-            return $found ? $found->getValue() : false;
+                return $found ? $found->getValue() : false;
+            }
+
+            if ($contributor instanceof Participant) {
+                $found = $this->participantRequirementRepo->findOneBy([
+                    'requirement' => $requirement,
+                    'participant' => $contributor,
+                ]);
+
+                return $found ? $found->getValue() : false;
+            }
         }
 
         return false;

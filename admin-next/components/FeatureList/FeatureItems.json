@@ -372,6 +372,11 @@
                         "title": "capco.module.proposal_sms_vote",
                         "description": "",
                         "onlySuperAdmin": false
+                    },
+                    "mediator": {
+                        "title": "global.mediator",
+                        "description": "",
+                        "onlySuperAdmin": false
                     }
                 }
             }

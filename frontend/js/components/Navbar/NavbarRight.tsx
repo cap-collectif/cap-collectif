@@ -12,12 +12,14 @@ import { loginWithOpenID } from '~/redux/modules/default'
 import * as S from '~ui/TabsBar/styles'
 import AppBox from '~ui/Primitives/AppBox'
 import useIsMobile from '~/utils/hooks/useIsMobile'
+import NavbarRightMediator from './NavbarRightMediator'
+
 type Props = {
-  readonly currentLanguage: string
-  readonly user: User | null | undefined
-  readonly features: FeatureToggles
-  readonly loginWithOpenId: boolean
-  readonly instanceName: string
+  currentLanguage: string
+  user: User | null | undefined
+  features: FeatureToggles
+  loginWithOpenId: boolean
+  instanceName: string
 }
 export const NavbarRight = ({ user = null, features, loginWithOpenId, currentLanguage, instanceName }: Props) => {
   const intl = useIntl()
@@ -91,6 +93,11 @@ export const NavbarRight = ({ user = null, features, loginWithOpenId, currentLan
               },
             )}
           >
+            {user.roles?.includes('ROLE_MEDIATOR') && (
+              <React.Suspense fallback={null}>
+                <NavbarRightMediator />
+              </React.Suspense>
+            )}
             {showAdminLink && (
               <MenuItem {...menu} href={user.isAdmin ? '/admin/' : '/admin-next/projects'} as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />

@@ -1780,3 +1780,40 @@ InternalMutation:
                     inputType: CreateOrUpdateConsultationInput
                     payloadType: CreateOrUpdateConsultationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOrUpdateConsultationMutation", [value, getUser()])'
+            # Mediator
+            addMediators:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddMediatorsMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddMediatorsInput
+                    payloadType: AddMediatorsPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddMediatorsMutation", [value, getUser()])'
+            deleteMediator:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteMediatorMutation").isGranted(args["input"]["mediatorId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteMediatorInput
+                    payloadType: DeleteMediatorPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteMediatorMutation", [value, getUser()])'
+            addMediatorVotes:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mediator\\AddMediatorVotesMutation").isGranted(args["input"]["proposals"], args["input"]["mediatorId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: AddMediatorVotesInput
+                    payloadType: AddMediatorVotesPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mediator\\AddMediatorVotesMutation", [value, getUser()])'
+            updateMediatorVotes:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\Mediator\\UpdateMediatorVotesMutation").isGranted(args["input"]["proposals"], args["input"]["mediatorId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateMediatorVotesInput
+                    payloadType: UpdateMediatorVotesPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mediator\\UpdateMediatorVotesMutation", [value, getUser()])'
+            deleteParticipant:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteParticipantMutation").isGranted(args["input"]["mediatorId"], args["input"]["participantToken"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteParticipantInput
+                    payloadType: DeleteParticipantPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteParticipantMutation", [value, getUser()])'
+

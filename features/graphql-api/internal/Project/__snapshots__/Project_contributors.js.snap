@@ -420,8 +420,18 @@ Object {
             },
           },
         },
+        Object {
+          "node": Object {
+            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQy",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "UGFydGljaXBhbnQ6cGFydGljaXBhbnQx",
+          },
+        },
       ],
-      "totalCount": 1,
+      "totalCount": 3,
     },
     "id": "UHJvamVjdDpwcm9qZWN0Ng==",
   },

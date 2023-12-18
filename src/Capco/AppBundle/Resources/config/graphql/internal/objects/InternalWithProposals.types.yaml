@@ -29,6 +29,8 @@ InternalWithProposals:
                     term:
                         type: 'String'
                         description: 'If non-null, filters proposals with the given string to look for.'
+                    reference:
+                        type: 'String'
                     affiliations:
                         type: '[ProposalAffiliation]'
                         description: 'Affiliation options for proposals returned from the connection.'

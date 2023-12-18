@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -817,31 +816,6 @@ class ProposalRepository extends EntityRepository
         $this->_em->flush();
 
         return true;
-    }
-
-    public function findPaginatedByParticipant(
-        Participant $participant,
-        ?int $limit = null,
-        ?int $offset = null
-    ): array {
-        return $this->createQueryBuilder('r')
-            ->where('r.participant = :participant')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->setParameter('participant', $participant)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
-
-    public function countByParticipant(Participant $participant): int
-    {
-        return $this->createQueryBuilder('p')
-            ->select('COUNT(p.id)')
-            ->where('p.participant = :participant')
-            ->setParameter('participant', $participant)
-            ->getQuery()
-            ->getSingleScalarResult() ?? 0;
     }
 
     public function countPaperVotes(string $proposalId): int

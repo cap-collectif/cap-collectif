@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\MediatorParticipantStep:
+  mPs1:
+    id: mPs1
+    step: '@selectionstep1'
+    mediator: '@mediator1'
+    participant: '@participant1'
+  mPs2:
+    id: mPs2
+    step: '@selectionstep1'
+    mediator: '@mediator1'
+    participant: '@participant2'

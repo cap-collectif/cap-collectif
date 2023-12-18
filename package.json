@@ -15,7 +15,7 @@
         "test-e2e-mutations-debate-district": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand --testMatch '<rootDir>/features/graphql-api/{dev,internal,public,preview}/mutation/{Debate,District}/*.js'",
         "test-e2e-mutations-other-add-change-organization-event": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand --testMatch '<rootDir>/features/graphql-api/{dev,internal,public,preview}/mutation/{Other/{add,change},Organization,Event}/*.js'",
         "test-e2e-mutations-other-create-delete-proposal-form-sms": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand --testMatch '<rootDir>/features/graphql-api/{dev,internal,public,preview}/mutation/{Other/{create,delete},ProposalForm,Sms}/*.js'",
-        "test-e2e-mutations-other-update-proposal": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand --testMatch '<rootDir>/features/graphql-api/{dev,internal,public,preview}/mutation/{Other/{update},Proposal}/*.js'",
+        "test-e2e-mutations-other-update-proposal-mediator": "NODE_TLS_REJECT_UNAUTHORIZED='0' NODE_ENV=test jest -c jest.config.e2e.js --ci --runInBand --testMatch '<rootDir>/features/graphql-api/{dev,internal,public,preview}/mutation/{Other/{update},Proposal,Mediator}/*.js'",
         "ts": "tsc --project tsconfig.json --noEmit",
         "ts:coverage": "typescript-coverage-report",
         "build": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.js",

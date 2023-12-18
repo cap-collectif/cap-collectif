@@ -12,13 +12,9 @@ abstract class AbstractUser extends FosUser
 {
     use TimestampableTrait;
     protected ?\DateTime $updatedAt = null;
-    protected ?\DateTime $dateOfBirth = null;
-    protected ?string $firstname = null;
-    protected ?string $lastname = null;
     protected ?string $website = null;
     protected ?string $biography = null;
     protected ?string $gender = null;
-    protected ?string $phone = null;
     protected ?string $locale = null;
 
     public function __construct()
@@ -44,30 +40,6 @@ abstract class AbstractUser extends FosUser
         return $this->biography;
     }
 
-    public function setDateOfBirth(?\DateTime $dateOfBirth): self
-    {
-        $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    public function getDateOfBirth(): ?\DateTime
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function setFirstname(?string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
     public function setGender(?string $gender): self
     {
         $this->gender = $gender;
@@ -80,18 +52,6 @@ abstract class AbstractUser extends FosUser
         return $this->gender;
     }
 
-    public function setLastname(?string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
     public function setLocale(?string $locale): self
     {
         $this->locale = $locale;
@@ -102,18 +62,6 @@ abstract class AbstractUser extends FosUser
     public function getLocale(): ?string
     {
         return $this->locale;
-    }
-
-    public function setPhone(?string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
     }
 
     public function setWebsite(?string $website): self

@@ -30,8 +30,9 @@ class UserRolesTextResolver implements ResolverInterface
                     UserRole::ROLE_ADMIN,
                     UserRole::ROLE_PROJECT_ADMIN,
                     UserRole::ROLE_SUPER_ADMIN,
+                    UserRole::ROLE_MEDIATOR,
                 ],
-                ['Utilisateur', 'Administrateur', 'Créateur de projet', 'Super Admin'],
+                ['Utilisateur', 'Administrateur', 'Créateur de projet', 'Super Admin', 'Mediateur'],
                 $role
             );
         }, $user->getRoles());

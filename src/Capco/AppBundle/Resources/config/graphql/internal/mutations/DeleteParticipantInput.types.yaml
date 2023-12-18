@@ -1,0 +1,10 @@
+DeleteParticipantInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      participantToken:
+        type: 'ID!'
+        description: 'Token of the participant.'
+      mediatorId:
+        type: 'ID!'
+        description: 'ID of the mediator.'

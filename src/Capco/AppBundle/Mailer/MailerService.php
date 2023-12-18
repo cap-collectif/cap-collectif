@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Mailer;
 
 use Capco\AppBundle\Entity\ActionToken;
+use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Mailer\Message\MessageRecipient;
 use Capco\AppBundle\Manager\TokenManager;
@@ -40,11 +41,11 @@ class MailerService extends MailerFactory
         string $type,
         $element,
         array $params = [],
-        ?User $recipient = null,
+        ?ContributorInterface $recipient = null,
         ?string $recipientEmail = null,
         ?string $replyTo = null
     ): bool {
-        if ($recipient && $recipient->getId()) {
+        if ($recipient && $recipient->getId() && $recipient instanceof User) {
             $params['unsubscribeUrl'] = $this->getUnsubscribeUrl($recipient);
         }
         $params['locale'] =

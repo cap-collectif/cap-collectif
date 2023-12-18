@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|deleteMediator admin should be able to delete a mediator. 1`] = `
+Object {
+  "deleteMediator": Object {
+    "deletedMediatorId": "TWVkaWF0b3I6bWVkaWF0b3Ix",
+  },
+}
+`;

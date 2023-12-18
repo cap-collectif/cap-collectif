@@ -6,7 +6,11 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
+use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
@@ -21,21 +25,33 @@ class ProjectContributorResolver implements ResolverInterface
 {
     use ResolverTrait;
 
-    private $userSearch;
-    private $logger;
-    private $proposalSelectionVoteRepository;
-    private $proposalCollectVoteRepository;
+    private UserSearch $userSearch;
+    private LoggerInterface $logger;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private GlobalIdResolver $globalIdResolver;
+    private AbstractStepRepository $stepRepository;
+    private ConnectionBuilder $connectionBuilder;
+    private ParticipantRepository $participantRepository;
 
     public function __construct(
         UserSearch $userSearch,
         LoggerInterface $logger,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        GlobalIdResolver $globalIdResolver,
+        AbstractStepRepository $stepRepository,
+        ConnectionBuilder $connectionBuilder,
+        ParticipantRepository $participantRepository
     ) {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
+        $this->globalIdResolver = $globalIdResolver;
+        $this->stepRepository = $stepRepository;
+        $this->connectionBuilder = $connectionBuilder;
+        $this->participantRepository = $participantRepository;
     }
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface
@@ -84,8 +100,19 @@ class ProjectContributorResolver implements ResolverInterface
                         $limit,
                         $cursor
                     );
+                    $userContributors = $response->getEntities();
+
+                    list($participantsContributors, $participantsCount, $participantsCursors) = $this->getParticipants($project, $providedFilters['step']);
+
+                    $cursors = array_merge($response->getCursors(), $participantsCursors);
+                    $response->setCursors($cursors);
+
+                    $allContributors = array_merge($userContributors, $participantsContributors);
+
+                    $response->setEntities($allContributors);
                     // Set the totalCount here because of the else statement below.
-                    $totalCount = $response->getTotalCount();
+                    $totalCount = $response->getTotalCount() + $participantsCount;
+                    $response->setTotalCount($totalCount);
 
                     return $response;
                 } catch (\RuntimeException $exception) {
@@ -109,6 +136,28 @@ class ProjectContributorResolver implements ResolverInterface
         return $connection;
     }
 
+    public function getParticipants(Project $project, ?string $stepId = null): array
+    {
+        $participantsContributors = $this->getParticipantsContributors($project, $stepId) ?? [];
+        $participantsCount = \count($participantsContributors);
+        $participantsCursors = array_map(function ($participantContributor) {
+            return [1, $participantContributor->getId()];
+        }, $participantsContributors);
+
+        return [$participantsContributors, $participantsCount, $participantsCursors];
+    }
+
+    private function getParticipantsContributors(Project $project, ?string $stepId = null): array
+    {
+        $step = $stepId ? $this->stepRepository->find($stepId) : null;
+
+        if ($step && !$step instanceof SelectionStep) {
+            return [];
+        }
+
+        return $this->participantRepository->findWithVotes($project, $step);
+    }
+
     private function getAnonymousCount(Project $project): int
     {
         if (!$project->hasVotableStep() || $project->isExternal()) {
@@ -129,8 +178,6 @@ class ProjectContributorResolver implements ResolverInterface
                 $anonymousCount += $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep(
                     $step
                 );
-
-                continue;
             }
         }
 

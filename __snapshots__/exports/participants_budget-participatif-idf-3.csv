@@ -1,3 +1,4 @@
 ﻿id,email,userName,typeName,createdAt,updatedAt,lastLogin,rolesText,consentInternalCommunication,enabled,isEmailConfirmed,locked,phoneConfirmed,gender,dateOfBirth,websiteUrl,biography,address,zipCode,city,phone,profileUrl,userIdentificationCode
 VXNlcjp1c2VyQ29ubmVjdGVkRnJhbmNlQ29ubmVjdA==,ducowanet-7006@yopmail.com,"LAMPE Geraldine",,"2020-03-10 09:30:00","2020-03-10 09:30:00",,Utilisateur,No,Yes,Yes,No,No,,,,"Je suis créé via france connect",,,,,https://capco.dev/profile/lampegeraldine,
 VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,Yes,Yes,Yes,No,Yes,FEMALE,"1996-03-01 00:00:00",,,"12 rue des boulets",75012,Paris,+33635492871,https://capco.dev/profile/user,DK2AZ554
+VXNlcjp1c2VyMQ==,lbrunet@cap-collectif.com,lbrunet,Citoyen,"2015-01-01 00:00:00",,,"Super Admin|Utilisateur",Yes,Yes,Yes,No,No,,,,,,,,+3300000000,https://capco.dev/profile/lbrunet,

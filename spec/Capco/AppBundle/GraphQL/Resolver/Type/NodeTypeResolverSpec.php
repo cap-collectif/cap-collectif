@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\GraphQL\Resolver\ContributorTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\District\DistrictTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Question\QuestionTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
@@ -26,7 +27,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
         QuestionTypeResolver $questionTypeResolver,
         ResponseResolver $responseTypeResolver,
         ReplyTypeResolver $replyTypeResolver,
-        DistrictTypeResolver $districtTypeResolver
+        DistrictTypeResolver $districtTypeResolver,
+        ContributorTypeResolver $contributorTypeResolver
     ) {
         $this->beConstructedWith(
             $typeResolver,
@@ -34,7 +36,8 @@ class NodeTypeResolverSpec extends ObjectBehavior
             $questionTypeResolver,
             $responseTypeResolver,
             $replyTypeResolver,
-            $districtTypeResolver
+            $districtTypeResolver,
+            $contributorTypeResolver
         );
     }
 
