@@ -815,3 +815,15 @@ div.embeddedContent {
         padding-left: 15px;
     }
 }
+
+/* ======================= Project ============================*/
+
+body[class*='app_project_show'] #main .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+body[class*='app_project_show'] #details {
+    padding-right: 0px;
+    padding-left: 0px;
+}
