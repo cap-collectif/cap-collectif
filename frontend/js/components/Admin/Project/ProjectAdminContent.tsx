@@ -106,10 +106,13 @@ const formatNavbarLinks = (
   viewerIsAdmin: boolean,
   hasIdentificationCodeLists: boolean,
   newCreateProjectFlag: boolean,
+  mediatorFeatureFlag: boolean
 ) => {
   const links = []
   const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS', newCreateProjectFlag)
   const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep')
+  const hasSelectionStep = project.steps.some(step => step.__typename === 'SelectionStep');
+
   links.push({
     title: 'global.contribution',
     count: isCollectStepPage ? project.proposals.totalCount : undefined,
@@ -145,12 +148,14 @@ const formatNavbarLinks = (
     })
   }
 
-  links.push({
-    title: 'global.mediator',
-    url: getProjectAdminPath(project.id, 'MEDIATOR', true),
-    to: getProjectAdminPath(project.id, 'MEDIATOR', true),
-    component: () => <></>,
-  })
+  if (mediatorFeatureFlag && hasSelectionStep) {
+    links.push({
+      title: 'global.mediator',
+      url: getProjectAdminPath(project.id, 'MEDIATOR', true),
+      to: getProjectAdminPath(project.id, 'MEDIATOR', true),
+      component: () => <></>,
+    })
+  }
 
   links.push({
     title: 'global.configuration',
@@ -184,6 +189,7 @@ export const ProjectAdminContent = ({
   const path = getProjectAdminBaseUrl(project._id)
   const hasProjectRevisionEnabled = useFeatureFlag('proposal_revisions')
   const newCreateProjectFlag = useFeatureFlag('unstable__new_create_project')
+  const mediatorFeatureFlag = useFeatureFlag('mediator');
 
   const dataAnalysisPrefetch = loadQuery()
   dataAnalysisPrefetch.next(
@@ -271,6 +277,7 @@ export const ProjectAdminContent = ({
         viewerIsAdmin,
         hasIdentificationCodeLists,
         newCreateProjectFlag,
+        mediatorFeatureFlag,
       ),
     [
       project,
@@ -283,6 +290,7 @@ export const ProjectAdminContent = ({
       viewerIsAdmin,
       hasIdentificationCodeLists,
       newCreateProjectFlag,
+      mediatorFeatureFlag
     ],
   )
   return (
