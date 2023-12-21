@@ -409,7 +409,7 @@
         "id": "emailing",
         "title": "admin.group.emailing",
         "icon": "ENVELOPE_O",
-        "featuresRequired": ["beta__emailing"],
+        "featuresRequired": ["emailing"],
         "rolesRequired": [],
         "items": [
             {
@@ -428,7 +428,7 @@
                 "title": "admin-menu-parameters",
                 "href": "/admin/mailingParameters/list",
                 "rolesRequired": ["admin"],
-                "featuresRequired": ["beta__emailing_parameters"]
+                "featuresRequired": ["emailing_parameters"]
             }
         ]
     },

@@ -6,8 +6,8 @@ InternalFeatureFlagType:
         values:
             graphql_query_analytics:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::graphql_query_analytics")'
-            beta__questionnaire_result:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__questionnaire_result")'
+            questionnaire_result:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::questionnaire_result")'
             blog:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::blog")'
             calendar:
@@ -95,8 +95,6 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sentry_log")'
             multilangue:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::multilangue")'
-            beta__admin_editor:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__admin_editor")'
             http_redirects:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::http_redirects")'
             report_browers_errors_to_sentry:
@@ -115,17 +113,14 @@ InternalFeatureFlagType:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_map")'
             votes_min:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_min")'
-            beta__emailing:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__emailing")'
-            beta__emailing_parameters:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__emailing_parameters")'
-            beta__emailing_group:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::beta__emailing_group")'
+            emailing:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing")'
+            emailing_parameters:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing_parameters")'
+            emailing_group:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing_group")'
             proposal_revisions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_revisions")'
-            unstable__new_consultation_page:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_consultation_page")'
-                description: 'Whether or not the new consultation page is active.'
             new_project_card:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_project_card")'
                 description: 'Whether or not the new project card is active.'
@@ -138,20 +133,20 @@ InternalFeatureFlagType:
             analytics_page:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::analytics_page")'
                 description: 'Whether or not the analytics page is visible in BO.'
-            unstable__project_admin:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__project_admin")'
+            project_admin:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::project_admin")'
                 description: 'Whether or not admin can use the project administrator feature.'
             noindex_on_profiles:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles")'
                 description: 'Whether or not profiles can be indexed.'
-            unstable__anonymous_questionnaire:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__anonymous_questionnaire")'
+            anonymous_questionnaire:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::anonymous_questionnaire")'
                 description: 'Whether or not admin can create anonymous questionnaire.'
             twilio:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::twilio")'
                 description: 'Whether or not the twilio service is enabled.'
-            unstable__paper_vote:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__paper_vote")'
+            paper_vote:
+                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::paper_vote")'
                 description: 'Whether or not the paper vote is enabled.'
             versions:
                 value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::versions")'

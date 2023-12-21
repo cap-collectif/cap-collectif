@@ -24,7 +24,7 @@ class EmailingParametersController extends AbstractController
 
     private function isFeatureActivated(): bool
     {
-        return $this->get(Manager::class)->isActive(Manager::beta__emailing_parameters);
+        return $this->get(Manager::class)->isActive(Manager::emailing_parameters);
     }
 
     private function redirectToHome(): RedirectResponse

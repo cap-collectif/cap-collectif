@@ -24,7 +24,7 @@ type Props = OwnProps & {
 const ProjectAdminParticipant = ({ participant, selected }: Props) => {
   const intl = useIntl()
   const { dispatch } = useProjectAdminParticipantsContext()
-  const hasFeatureEmail = useFeatureFlag('beta__emailing')
+  const hasFeatureEmail = useFeatureFlag('emailing')
   const {
     id,
     username,

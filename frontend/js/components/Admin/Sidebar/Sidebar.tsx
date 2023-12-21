@@ -259,7 +259,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
                     />
                   ) : null}
                   <SidebarLink text="admin.label.settings.modules" href="/admin-next/features" />
-                  {(!features.beta__emailing || (features.beta__emailing && !features.beta__emailing_parameters)) && (
+                  {(!features.emailing || (features.emailing && !features.emailing_parameters)) && (
                     <SidebarLink
                       text="admin.label.settings.notifications"
                       href="/admin/settings/settings.notifications/list"
@@ -297,13 +297,13 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}
-            {features.beta__emailing ? (
+            {features.emailing ? (
               <SidebarAccordionItem id="emailing">
                 <SidebarButton icon={ICON_NAME.ENVELOPE_O} text="admin.group.emailing" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin-menu-campaign-list" href="/admin/mailingCampaign/list" />
                   <SidebarLink text="admin-menu-emailing-list" href="/admin/mailingList/list" />
-                  {features.beta__emailing_parameters && isAdmin ? (
+                  {features.emailing_parameters && isAdmin ? (
                     <SidebarLink text="admin-menu-parameters" href="/admin/mailingParameters/list" />
                   ) : null}
                 </SidebarAccordionPanel>

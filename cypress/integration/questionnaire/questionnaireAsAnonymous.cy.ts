@@ -16,7 +16,7 @@ describe('Questionnaire Anonymous', () => {
   })
   describe('Anonymous Questionnaire', () => {
     beforeEach(() => {
-      cy.task('enable:feature', 'unstable__anonymous_questionnaire')
+      cy.task('enable:feature', 'anonymous_questionnaire')
       QuestionnairePage.visitAnonymousQuestionnaire()
     })
     it('should correctly show a questionnaire', () => {

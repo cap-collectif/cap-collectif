@@ -79,7 +79,7 @@ export class QuestionnaireAdminPage extends Component<Props> {
 }
 
 const mapStateToProps = (state: GlobalState) => ({
-  enableResultsTab: state.default.features.beta__questionnaire_result,
+  enableResultsTab: state.default.features.questionnaire_result,
 })
 
 export default connect<any, any>(mapStateToProps)(QuestionnaireAdminPage)

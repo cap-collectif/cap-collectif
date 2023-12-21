@@ -1,7 +1,6 @@
 describe('Argument', () => {
   beforeEach(() => {
     cy.task('db:restore')
-    cy.task('disable:feature', 'unstable__new_consultation_page')
     cy.directLoginAs('admin')
   })
   it('Logged in user wants to vote for an argument on an opinion then delete his vote', () => {

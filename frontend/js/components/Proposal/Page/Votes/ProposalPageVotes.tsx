@@ -91,7 +91,7 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
   const showVotesTab = votesCount > 0 || proposal?.currentVotableStep !== null
   const paperVotesTotalCount = proposal?.paperVotesTotalCount ?? 0
   const votesTotalCount = votesCount + paperVotesTotalCount
-  const unstable__paper_vote = useFeatureFlag('unstable__paper_vote')
+  const paper_vote = useFeatureFlag('paper_vote')
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0)
   }, [proposal])
@@ -112,7 +112,7 @@ export const ProposalPageVotes = ({ proposal, setGlobalVotesCount }: Props) => {
                 id="proposal.vote.count"
               />
             </h3>
-            {unstable__paper_vote ? (
+            {paper_vote ? (
               <h5>
                 {intl.formatMessage(
                   {

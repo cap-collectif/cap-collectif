@@ -44,13 +44,13 @@ describe('<ProjectAdminParticipant />', () => {
 
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
   })
-  it('should render a non-selectable list when "beta__emailing" is disabled', async () => {
+  it('should render a non-selectable list when "emailing" is disabled', async () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent rowId="1" selected={false} />)
     expect(testComponentTree).toMatchSnapshot()
     expect(testComponentTree.root.findAllByType('input').length).toBe(0)
   })
-  it('should render a selectable list when "beta__emailing" is enabled', async () => {
-    enableFeatureFlags(['beta__emailing'])
+  it('should render a selectable list when "emailing" is enabled', async () => {
+    enableFeatureFlags(['emailing'])
     testComponentTree = ReactTestRenderer.create(<TestComponent rowId="1" selected={false} />)
     expect(testComponentTree).toMatchSnapshot()
     expect(testComponentTree.root.findAllByType('input').length).toBe(1)

@@ -2,7 +2,7 @@
 Feature: SenderEmail mutations
 
 Background:
-  Given feature "beta__emailing" is enabled
+  Given feature "emailing" is enabled
 
 Scenario: Admin tries to add a SenderEmail without adding domain first
   Given I am logged in to graphql as admin

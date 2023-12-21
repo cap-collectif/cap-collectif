@@ -614,7 +614,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
     user: state.user.user,
     isAuthenticated: !!state.user.user,
     form: reply ? getFormNameUpdate(reply.id) : `Create${formName}`,
-    isAnonymousQuestionnaireFeatureEnabled: state.default.features.unstable__anonymous_questionnaire,
+    isAnonymousQuestionnaireFeatureEnabled: state.default.features.anonymous_questionnaire,
     invalidRequirements:
       isInvalid(RequirementsFormLegacyName)(state) ||
       Object.keys(getFormSyncErrors(RequirementsFormLegacyName)(state)).length > 0,

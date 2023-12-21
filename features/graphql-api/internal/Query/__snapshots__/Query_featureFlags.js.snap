@@ -13,7 +13,7 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "beta__questionnaire_result",
+      "type": "questionnaire_result",
     },
     Object {
       "enabled": true,
@@ -216,10 +216,6 @@ Object {
       "type": "multilangue",
     },
     Object {
-      "enabled": false,
-      "type": "beta__admin_editor",
-    },
-    Object {
       "enabled": true,
       "type": "http_redirects",
     },
@@ -229,23 +225,19 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "beta__emailing",
+      "type": "emailing",
     },
     Object {
       "enabled": false,
-      "type": "beta__emailing_parameters",
+      "type": "emailing_parameters",
     },
     Object {
-      "enabled": false,
-      "type": "beta__emailing_group",
+      "enabled": true,
+      "type": "emailing_group",
     },
     Object {
       "enabled": true,
       "type": "proposal_revisions",
-    },
-    Object {
-      "enabled": true,
-      "type": "unstable__new_consultation_page",
     },
     Object {
       "enabled": true,
@@ -265,11 +257,11 @@ Object {
     },
     Object {
       "enabled": true,
-      "type": "unstable__project_admin",
+      "type": "project_admin",
     },
     Object {
       "enabled": false,
-      "type": "unstable__anonymous_questionnaire",
+      "type": "anonymous_questionnaire",
     },
     Object {
       "enabled": false,
@@ -277,7 +269,7 @@ Object {
     },
     Object {
       "enabled": false,
-      "type": "unstable__paper_vote",
+      "type": "paper_vote",
     },
     Object {
       "enabled": false,

@@ -78,7 +78,7 @@ export const ParameterPage = ({
   const { mailingLists } = mailingListOwner
   const { projects } = projectOwner
   const { user } = useSelector((state: GlobalState) => state.user)
-  const emailingGroupEnabled = useFeatureFlag('beta__emailing_group')
+  const emailingGroupEnabled = useFeatureFlag('emailing_group')
   const isAdmin = user ? user.isAdmin : false
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)

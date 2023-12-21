@@ -13,7 +13,7 @@ class Manager
 {
     public const noindex_on_profiles = 'noindex_on_profiles';
     public const graphql_query_analytics = 'graphql_query_analytics';
-    public const beta__questionnaire_result = 'beta__questionnaire_result';
+    public const questionnaire_result = 'questionnaire_result';
     public const blog = 'blog';
     public const calendar = 'calendar';
     public const captcha = 'captcha';
@@ -63,24 +63,22 @@ class Manager
     public const login_openid = 'login_openid';
     public const versions = 'versions';
     public const multilangue = 'multilangue';
-    public const beta__admin_editor = 'beta__admin_editor';
     public const http_redirects = 'http_redirects';
     public const report_browers_errors_to_sentry = 'report_browers_errors_to_sentry';
     public const phone_confirmation = 'phone_confirmation';
     public const reporting = 'reporting';
-    public const beta__emailing = 'beta__emailing';
-    public const beta__emailing_parameters = 'beta__emailing_parameters';
-    public const beta__emailing_group = 'beta__emailing_group';
+    public const emailing = 'emailing';
+    public const emailing_parameters = 'emailing_parameters';
+    public const emailing_group = 'emailing_group';
     public const proposal_revisions = 'proposal_revisions';
-    public const unstable__new_consultation_page = 'unstable__new_consultation_page';
     public const new_project_card = 'new_project_card';
     public const export_legacy_users = 'export_legacy_users';
     public const import_proposals = 'import_proposals';
     public const analytics_page = 'analytics_page';
-    public const unstable__project_admin = 'unstable__project_admin';
-    public const unstable__anonymous_questionnaire = 'unstable__anonymous_questionnaire';
+    public const project_admin = 'project_admin';
+    public const anonymous_questionnaire = 'anonymous_questionnaire';
     public const twilio = 'twilio';
-    public const unstable__paper_vote = 'unstable__paper_vote';
+    public const paper_vote = 'paper_vote';
     public const helpscout_beacon = 'helpscout_beacon';
     public const api_sendinblue = 'api_sendinblue';
     public const proposal_sms_vote = 'proposal_sms_vote';
@@ -115,7 +113,7 @@ class Manager
         self::graphql_introspection,
         self::developer_documentation,
         self::new_project_card,
-        self::unstable__paper_vote,
+        self::paper_vote,
         self::projects_form,
         self::project_trash,
         self::mediator,
@@ -124,7 +122,7 @@ class Manager
     public static $toggles = [
         self::noindex_on_profiles,
         self::graphql_query_analytics,
-        self::beta__questionnaire_result,
+        self::questionnaire_result,
         self::blog,
         self::calendar,
         self::captcha,
@@ -175,22 +173,20 @@ class Manager
         self::external_project,
         self::sentry_log,
         self::multilangue,
-        self::beta__admin_editor,
         self::http_redirects,
         self::report_browers_errors_to_sentry,
-        self::beta__emailing,
-        self::beta__emailing_parameters,
-        self::beta__emailing_group,
+        self::emailing,
+        self::emailing_parameters,
+        self::emailing_group,
         self::proposal_revisions,
-        self::unstable__new_consultation_page,
         self::new_project_card,
         self::export_legacy_users,
         self::import_proposals,
         self::analytics_page,
-        self::unstable__project_admin,
-        self::unstable__anonymous_questionnaire,
+        self::project_admin,
+        self::anonymous_questionnaire,
         self::twilio,
-        self::unstable__paper_vote,
+        self::paper_vote,
         self::helpscout_beacon,
         self::api_sendinblue,
         self::proposal_sms_vote,

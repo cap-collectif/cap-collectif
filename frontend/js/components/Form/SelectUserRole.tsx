@@ -71,7 +71,7 @@ export class SelectUserRole extends Component<Props> {
 
 const mapStateToProps = (state: GlobalState) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  hasProjectAdminFeature: state.default.features.unstable__project_admin ?? false,
+  hasProjectAdminFeature: state.default.features.project_admin ?? false,
 })
 
 const connector = connect<any, any>(mapStateToProps)

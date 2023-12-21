@@ -536,7 +536,7 @@ InternalQuery:
             senderEmailDomains:
                 type: '[SenderEmailDomain!]!'
                 description: 'Get all domains registered'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailDomainResolver", [args])'
             senderEmails:
                 type: '[SenderEmail!]!'

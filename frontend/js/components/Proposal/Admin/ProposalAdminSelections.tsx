@@ -523,7 +523,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
       }),
       paperVotes: paperVotesIndexed(props.proposal.paperVotes),
     },
-    paperVoteEnabled: state.default.features.unstable__paper_vote ?? false,
+    paperVoteEnabled: state.default.features.paper_vote ?? false,
   }
 }
 

@@ -11,7 +11,7 @@ class EmailingListAdmin extends AbstractAdmin
 
     public function getFeatures(): array
     {
-        return ['beta__emailing'];
+        return ['emailing'];
     }
 
     protected function configure(): void

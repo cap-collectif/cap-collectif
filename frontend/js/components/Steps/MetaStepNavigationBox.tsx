@@ -31,12 +31,10 @@ const MetaStepNavigationBoxInner: StyledComponent<any, {}, HTMLDivElement> = sty
   align-items: center;
   margin: auto;
   max-width: 1180px;
-
   & h2 {
     color: ${colors.white};
     margin: 0;
   }
-
   @media (max-width: 1200px) {
     max-width: 980px;
   }
@@ -57,10 +55,8 @@ const renderMetaStepNavigation =
 
     if (error) {
       console.log(error) // eslint-disable-line no-console
-
       return graphqlError
     }
-
     if (props) {
       if (props.step) {
         const { step } = props
@@ -70,10 +66,8 @@ const renderMetaStepNavigation =
           </MetaStepNavigationBoxInner>
         )
       }
-
       return graphqlError
     }
-
     return null
   }
 

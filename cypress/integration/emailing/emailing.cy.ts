@@ -4,8 +4,8 @@ describe('Emailing Campaign', () => {
   describe('Create Emailing BO', () => {
     beforeEach(() => {
       cy.task('db:restore')
-      cy.task('enable:feature', 'beta__emailing')
-      cy.task('enable:feature', 'beta__emailing_parameters')
+      cy.task('enable:feature', 'emailing')
+      cy.task('enable:feature', 'emailing_parameters')
       cy.directLoginAs('super_admin')
     })
     it('should super admin want to create a mailing campaign', () => {

@@ -83,7 +83,7 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::graphql_introspection);
         $this->manager->activate(Manager::votes_min);
         $this->manager->activate(Manager::consent_internal_communication);
-        $this->manager->activate(Manager::beta__questionnaire_result);
+        $this->manager->activate(Manager::questionnaire_result);
         $this->manager->activate(Manager::multilangue);
         $this->manager->activate(Manager::http_redirects);
         $this->manager->deactivate(Manager::login_franceconnect);
@@ -92,18 +92,17 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->activate(Manager::display_pictures_in_event_list);
         $this->manager->activate(Manager::sentry_log);
         $this->manager->activate(Manager::remind_user_account_confirmation);
-        $this->manager->deactivate(Manager::beta__emailing);
-        $this->manager->deactivate(Manager::beta__emailing_parameters);
+        $this->manager->deactivate(Manager::emailing);
+        $this->manager->deactivate(Manager::emailing_parameters);
         $this->manager->activate(Manager::proposal_revisions);
-        $this->manager->activate(Manager::unstable__new_consultation_page);
         $this->manager->activate(Manager::new_project_card);
         $this->manager->deactivate(Manager::export_legacy_users);
         $this->manager->activate(Manager::import_proposals);
-        $this->manager->deactivate(Manager::analytics_page);
-        $this->manager->activate(Manager::unstable__project_admin);
+        $this->manager->activate(Manager::analytics_page);
+        $this->manager->activate(Manager::project_admin);
         $this->manager->deactivate(Manager::noindex_on_profiles);
-        $this->manager->activate(Manager::unstable__paper_vote);
-        $this->manager->deactivate(Manager::beta__emailing_group);
+        $this->manager->activate(Manager::paper_vote);
+        $this->manager->activate(Manager::emailing_group);
 
         if ('test' === $this->env) {
             $this->manager->activate(Manager::votes_min);
@@ -114,11 +113,11 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::export_legacy_users);
             $this->manager->deactivate(Manager::import_proposals);
             $this->manager->deactivate(Manager::analytics_page);
-            $this->manager->deactivate(Manager::unstable__paper_vote);
+            $this->manager->deactivate(Manager::paper_vote);
         }
 
         if ('prod' === $this->env) {
-            $this->manager->deactivate(Manager::votes_min);
+            $this->manager->activate(Manager::votes_min);
             $this->manager->deactivate(Manager::registration);
             $this->manager->deactivate(Manager::login_facebook);
             $this->manager->deactivate(Manager::server_side_rendering);
@@ -128,30 +127,31 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::oauth2_switch_user);
             $this->manager->deactivate(Manager::public_api);
             $this->manager->deactivate(Manager::search);
-            $this->manager->deactivate(Manager::http_redirects);
+            $this->manager->activate(Manager::http_redirects);
             $this->manager->activate(Manager::captcha);
             $this->manager->deactivate(Manager::turnstile_captcha);
             $this->manager->activate(Manager::consent_internal_communication);
             $this->manager->activate(Manager::export);
             $this->manager->activate(Manager::shield_mode);
             $this->manager->deactivate(Manager::multilangue);
-            $this->manager->deactivate(Manager::unstable__new_consultation_page);
             $this->manager->deactivate(Manager::export_legacy_users);
-            $this->manager->deactivate(Manager::import_proposals);
-            $this->manager->deactivate(Manager::analytics_page);
-            $this->manager->deactivate(Manager::unstable__project_admin);
-            $this->manager->deactivate(Manager::unstable__paper_vote);
+            $this->manager->activate(Manager::import_proposals);
+            $this->manager->activate(Manager::analytics_page);
+            $this->manager->deactivate(Manager::project_admin);
+            $this->manager->activate(Manager::paper_vote);
             $this->manager->activate(Manager::secure_password);
             $this->manager->activate(Manager::restrict_connection);
             $this->manager->activate(Manager::display_pictures_in_depository_proposals_list);
             $this->manager->activate(Manager::display_pictures_in_event_list);
-            $this->manager->activate(Manager::beta__emailing);
-            $this->manager->activate(Manager::beta__emailing_parameters);
+            $this->manager->activate(Manager::emailing);
+            $this->manager->activate(Manager::emailing_parameters);
             $this->manager->activate(Manager::proposal_revisions);
             $this->manager->activate(Manager::new_project_card);
-            $this->manager->activate(Manager::unstable__anonymous_questionnaire);
+            $this->manager->activate(Manager::anonymous_questionnaire);
             $this->manager->deactivate(Manager::user_type);
             $this->manager->activate(Manager::helpscout_beacon);
+            $this->manager->activate(Manager::emailing_group);
+            $this->manager->deactivate(Manager::organizations);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

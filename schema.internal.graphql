@@ -6635,7 +6635,7 @@ type FeatureFlag {
 """The possible types for a feature flag."""
 enum FeatureFlagType {
   graphql_query_analytics
-  beta__questionnaire_result
+  questionnaire_result
   blog
   calendar
   captcha
@@ -6681,7 +6681,6 @@ enum FeatureFlagType {
   external_project
   sentry_log
   multilangue
-  beta__admin_editor
   http_redirects
   report_browers_errors_to_sentry
   login_saml
@@ -6691,13 +6690,10 @@ enum FeatureFlagType {
   reporting
   display_map
   votes_min
-  beta__emailing
-  beta__emailing_parameters
-  beta__emailing_group
+  emailing
+  emailing_parameters
+  emailing_group
   proposal_revisions
-
-  """Whether or not the new consultation page is active."""
-  unstable__new_consultation_page
 
   """Whether or not the new project card is active."""
   new_project_card
@@ -6712,19 +6708,19 @@ enum FeatureFlagType {
   analytics_page
 
   """Whether or not admin can use the project administrator feature."""
-  unstable__project_admin
+  project_admin
 
   """Whether or not profiles can be indexed."""
   noindex_on_profiles
 
   """Whether or not admin can create anonymous questionnaire."""
-  unstable__anonymous_questionnaire
+  anonymous_questionnaire
 
   """Whether or not the twilio service is enabled."""
   twilio
 
   """Whether or not the paper vote is enabled."""
-  unstable__paper_vote
+  paper_vote
   versions
 
   """Whether or not the Helpscout beacon is enabled"""

@@ -201,7 +201,7 @@
                 "description": "description.group.questionnaire",
                 "onlySuperAdmin": true,
                 "items": {
-                    "beta__questionnaire_result": {
+                    "questionnaire_result": {
                         "title": "capco.module.questionnaire_result",
                         "description": "description.module.questionnaire_result",
                         "onlySuperAdmin": false
@@ -241,9 +241,9 @@
                 "title": "capco.module.emailing",
                 "description": "emailing-tool-description",
                 "onlySuperAdmin": false,
-                "featuresRequired": ["beta__emailing"],
+                "featuresRequired": ["emailing"],
                 "items": {
-                    "beta__emailing_group": {
+                    "emailing_group": {
                         "title": "admin.label.group",
                         "description": "emailing-group-description",
                         "onlySuperAdmin": false
@@ -293,27 +293,22 @@
                         "description": "",
                         "onlySuperAdmin": false
                     },
-                    "beta__emailing": {
+                    "emailing": {
                         "title": "capco.module.emailing",
                         "description": "",
                         "onlySuperAdmin": false
                     },
-                    "beta__emailing_parameters": {
+                    "emailing_parameters": {
                         "title": "capco.module.emailing_parameters",
                         "description": "description.module.emailing_parameters",
                         "onlySuperAdmin": false
                     },
-                    "beta__admin_editor": {
-                        "title": "capco.module.admin_editor",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
-                    "unstable__anonymous_questionnaire": {
+                    "anonymous_questionnaire": {
                         "title": "capco.module.questionnaire__anonymous",
                         "description": "",
                         "onlySuperAdmin": false
                     },
-                    "unstable__project_admin": {
+                    "project_admin": {
                         "title": "capco.module.project_admin",
                         "description": "",
                         "onlySuperAdmin": false
@@ -328,12 +323,7 @@
                         "description": "description.module.proposal_revisions",
                         "onlySuperAdmin": false
                     },
-                    "unstable__new_consultation_page": {
-                        "title": "capco.module.new_consultation_page",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
-                    "unstable__paper_vote": {
+                    "paper_vote": {
                         "title": "capco.module.paper_vote",
                         "description": "",
                         "onlySuperAdmin": false

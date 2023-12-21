@@ -1397,7 +1397,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateExternalServiceConfigurationMutation", [value])'
             createSenderEmailDomain:
                 description: 'Create a senderEmailDomain.'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateSenderEmailDomainInput
@@ -1405,7 +1405,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailDomainMutation", [value])'
             deleteSenderEmailDomain:
                 description: 'Delete a senderEmailDomain.'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: DeleteSenderEmailDomainInput
@@ -1413,7 +1413,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteSenderEmailDomainMutation", [value])'
             createSenderEmail:
                 description: 'Add an email to address to send emails.'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: CreateSenderEmailInput
@@ -1421,7 +1421,7 @@ InternalMutation:
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailMutation", [value])'
             selectSenderEmail:
                 description: 'select a senderEmail as the one to send emails'
-                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('beta__emailing')"
+                access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: SelectSenderEmailInput

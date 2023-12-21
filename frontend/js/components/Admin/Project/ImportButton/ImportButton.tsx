@@ -68,7 +68,7 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
   const [showPaperVotesModal, setShowPaperVotesModal] = useState<boolean>(false)
   const [failOneTime, setFailOneTime] = useState<boolean>(false)
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions')
-  const paperVotesEnabled = useFeatureFlag('unstable__paper_vote')
+  const paperVotesEnabled = useFeatureFlag('paper_vote')
   const { parameters } = useProjectAdminProposalsContext()
 
   if (!selectedStep) {

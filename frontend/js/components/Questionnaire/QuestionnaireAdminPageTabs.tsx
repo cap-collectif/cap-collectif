@@ -66,7 +66,7 @@ export class QuestionnaireAdminPageTabs extends Component<Props> {
 }
 
 const mapStateToProps = (state: State) => ({
-  enableResultsTab: state.default.features.beta__questionnaire_result,
+  enableResultsTab: state.default.features.questionnaire_result,
 })
 
 // @ts-ignore

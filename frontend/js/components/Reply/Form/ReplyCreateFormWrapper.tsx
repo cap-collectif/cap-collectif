@@ -26,7 +26,7 @@ const ReplyCreateFormWrapperContainer: StyledComponent<any, {}, HTMLDivElement> 
 export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
   const { anonymousRepliesIds } = React.useContext(QuestionnaireStepPageContext)
   const isAnonymousParticipationAllowed = questionnaire?.step?.isAnonymousParticipationAllowed
-  const isAnonymousQuestionnaireFeatureEnabled = useFeatureFlag('unstable__anonymous_questionnaire')
+  const isAnonymousQuestionnaireFeatureEnabled = useFeatureFlag('anonymous_questionnaire')
   const formIsDisabled =
     questionnaire.contribuable &&
     questionnaire.viewerReplies &&

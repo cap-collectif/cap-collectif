@@ -424,7 +424,7 @@ export function ProjectAdminStepForm({
   const canSetDisplayMode =
     (step.__typename === 'SelectionStep' || step.__typename === 'CollectStep') &&
     (isGridViewEnabled || isListViewEnabled || isMapViewEnabled)
-  const unstable__anonymous_questionnaire = useFeatureFlag('unstable__anonymous_questionnaire')
+  const anonymous_questionnaire = useFeatureFlag('anonymous_questionnaire')
   React.useEffect(() => {
     // mainView is not in the reduxForm's initialValues because the proposalForm is selected after.
     // Normally, need to use enableReinitialize but it resets the form...
@@ -538,7 +538,7 @@ export function ProjectAdminStepForm({
               {!timeless && renderDateContainer(formName, intl)}
             </>
           )}
-          {step.__typename === 'QuestionnaireStep' && unstable__anonymous_questionnaire && (
+          {step.__typename === 'QuestionnaireStep' && anonymous_questionnaire && (
             <>
               <Field
                 component={toggle}

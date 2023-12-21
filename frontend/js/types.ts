@@ -47,8 +47,7 @@ export type MediaFromAPI = {
 // TODO We can (now) extract this enum from our GraphQL schema
 export type FeatureToggles = {
   blog: boolean | null | undefined
-  beta__questionnaire_result: boolean | null | undefined
-  beta__admin_editor: boolean | null | undefined
+  questionnaire_result: boolean | null | undefined
   calendar: boolean | null | undefined
   captcha: boolean | null | undefined
   consent_external_communication: boolean | null | undefined
@@ -91,19 +90,18 @@ export type FeatureToggles = {
   multilangue: boolean | null | undefined
   display_pictures_in_event_list: boolean | null | undefined
   report_browers_errors_to_sentry: boolean | null | undefined
-  beta__emailing: boolean | null | undefined
-  beta__emailing_parameters: boolean | null | undefined
+  emailing: boolean | null | undefined
+  emailing_parameters: boolean | null | undefined
   proposal_revisions: boolean | null | undefined
-  unstable__new_consultation_page: boolean | null | undefined
   new_project_card: boolean | null | undefined
   import_proposals: boolean | null | undefined
   analytics_page: boolean | null | undefined
-  unstable__project_admin: boolean | null | undefined
+  project_admin: boolean | null | undefined
   http_redirects: boolean | null | undefined
   noindex_on_profiles: boolean | null | undefined
-  unstable__anonymous_questionnaire: boolean | null | undefined
+  anonymous_questionnaire: boolean | null | undefined
   twilio: boolean | null | undefined
-  unstable__paper_vote: boolean | null | undefined
+  paper_vote: boolean | null | undefined
   helpscout_beacon: boolean | null | undefined
   proposal_sms_vote: boolean | null | undefined
   organizations: boolean | null | undefined
