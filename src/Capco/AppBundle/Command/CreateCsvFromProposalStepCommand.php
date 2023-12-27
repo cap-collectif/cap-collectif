@@ -19,6 +19,7 @@ use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -28,6 +29,7 @@ use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Capco\AppBundle\Utils\Arr;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
@@ -39,6 +41,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromProposalStepCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
+    public const PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesTotalCountFromRepository';
+    public const PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesPointsTotalCountFromRepository';
 
     protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
@@ -341,6 +345,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     private ConnectionTraversor $connectionTraversor;
     private ProposalRepository $proposalRepository;
 
+    private EntityManagerInterface $entityManager;
+
     public function __construct(
         Executor $executor,
         ExportUtils $exportUtils,
@@ -352,7 +358,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         LoggerInterface $logger,
         ConnectionTraversor $connectionTraversor,
         string $projectRootDir,
-        ProposalRepository $proposalRepository
+        ProposalRepository $proposalRepository,
+        EntityManagerInterface $entityManager
     ) {
         $listener->disableAcl();
         $this->executor = $executor;
@@ -366,6 +373,56 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         $this->connectionTraversor = $connectionTraversor;
         $this->proposalRepository = $proposalRepository;
         parent::__construct($exportUtils);
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @param $input
+     * @param $output
+     * @param mixed $repository
+     */
+    public function loopOverSteps(
+        int $limit,
+        int $offset,
+        InputInterface $input,
+        OutputInterface $output,
+        AbstractStepRepository $repository
+    ): void {
+        $steps = $repository->getPaginator($limit, $offset);
+        $counter = $steps->count();
+
+        while ($offset < $counter) {
+            foreach ($steps as $step) {
+                $project = $step ? $step->getProject() : null;
+
+                if ($project) {
+                    $this->proceedExport($project, $step, $input, $output);
+                }
+            }
+
+            $offset += $limit;
+            $steps = $repository->getPaginator($limit, $offset);
+        }
+    }
+
+    public function proceedExport(Project $project, AbstractStep $step, InputInterface $input, OutputInterface $output): array
+    {
+        $isProjectAdmin = $project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin();
+        $belongsToOrga = $project->getOwner() instanceof Organization;
+        $ownerNotAdmin = $isProjectAdmin || $belongsToOrga;
+
+        $fileName = self::getFilename($step, '.csv', $ownerNotAdmin);
+        $this->currentStep = $step;
+        $this->generateSheet($this->currentStep, $input, $output, $fileName, $ownerNotAdmin);
+        $this->executeSnapshot($input, $output, $fileName);
+        $this->printMemoryUsage($output);
+
+        if ($ownerNotAdmin) {
+            $fileName = self::getFilename($step);
+            $this->generateSheet($this->currentStep, $input, $output, $fileName);
+        }
+
+        return [$input, $output];
     }
 
     public function sanitizeResponses(array &$proposal): void
@@ -435,41 +492,37 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
             return 1;
         }
 
-        if ($project = $this->getProject($input)) {
+        $projectId = $input->getArgument('projectId');
+
+        if ($projectId) {
+            $project = $this->getProject($projectId);
+
+            if (!$project) {
+                $output->writeln(sprintf('Project can\'t be found. Please check if the projectId %s is correct. ', $projectId));
+
+                return 1;
+            }
+
             $steps = $project->getSteps()->map(function (ProjectAbstractStep $projectAbstractStep) {
                 $step = $projectAbstractStep->getStep();
+
                 if ($step instanceof SelectionStep || $step instanceof CollectStep) {
-                    return $projectAbstractStep->getStep();
+                    return $step;
                 }
+
+                return null;
             });
+
+            foreach ($steps as $step) {
+                $this->proceedExport($project, $step, $input, $output);
+            }
         } else {
-            $steps = array_merge(
-                $this->collectStepRepository->findAll(),
-                $this->selectionStepRepository->findAll()
-            );
-        }
+            $offset = 0;
+            $limit = 5;
 
-        /** @var AbstractStep $step */
-        foreach ($steps as $step) {
-            $project = $step ? $step->getProject() : null;
-            if (!$project) {
-                continue;
-            }
+            $this->loopOverSteps($limit, $offset, $input, $output, $this->collectStepRepository);
 
-            $isProjectAdmin = $project->getOwner() instanceof User && $project->getOwner()->isOnlyProjectAdmin();
-            $belongsToOrga = $project->getOwner() instanceof Organization;
-            $ownerNotAdmin = $isProjectAdmin || $belongsToOrga;
-
-            $fileName = self::getFilename($step, '.csv', $ownerNotAdmin);
-            $this->currentStep = $step;
-            $this->generateSheet($this->currentStep, $input, $output, $fileName, $ownerNotAdmin);
-            $this->executeSnapshot($input, $output, $fileName);
-            $this->printMemoryUsage($output);
-
-            if ($ownerNotAdmin) {
-                $fileName = self::getFilename($step);
-                $this->generateSheet($this->currentStep, $input, $output, $fileName);
-            }
+            $this->loopOverSteps($limit, $offset, $input, $output, $this->selectionStepRepository);
         }
 
         return 0;
@@ -498,6 +551,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
             ])
             ->toArray()
         ;
+
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
 
         $this->writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
@@ -594,11 +648,6 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         string $path,
         array &$row
     ): void {
-        // we need to count paperVotes by accessing repository directly, because we can not bypass the acess restriction in graphql field when exporting
-        // see https://github.com/cap-collectif/platform/issues/16305#issuecomment-1766033783
-        $id = GlobalId::fromGlobalId($proposal['id'])['id'];
-        $paperVotesTotalCount = $this->proposalRepository->countPaperVotes($id);
-
         $arr = explode('.', $path);
         if ('responses' === $arr[0]) {
             $val = isset($proposal['responses'])
@@ -613,12 +662,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         } elseif ('reference' === $arr[0]) {
             $row[] = '"' . $proposal['reference'] . '"';
         } elseif ('proposal_votes_paperPointsCount' === $columnName) {
-            $paperVotesPointsTotalCount = $this->proposalRepository->countPaperVotesPoints($id);
-            $row[] = $paperVotesPointsTotalCount;
+            $row[] = $proposal[self::PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY];
         } elseif ('proposal_votes_paperCount' === $columnName) {
-            $row[] = $paperVotesTotalCount;
+            $row[] = $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY];
         } elseif ('proposal_votes_totalCount' === $columnName) {
-            $row[] = $paperVotesTotalCount + $proposal['allVotes']['totalCount'];
+            $row[] = $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY] + $proposal['allVotes']['totalCount'];
         } elseif ('proposal_votes_totalPointsCount' === $columnName) {
             $row[] =
                 $proposal['paperVotesTotalPointsCount'] + $proposal['allVotes']['totalPointsCount'];
@@ -718,7 +766,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 function ($edge) use ($proposal, $progress) {
                     $comment = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalCommentRow($comment, $proposal);
-                    if (isset($comment['answers']) && !empty($comment['answers'])) {
+                    if (!empty($comment['answers'])) {
                         foreach ($comment['answers'] as $answer) {
                             $this->addProposalCommentRow($answer, $proposal);
                         }
@@ -771,6 +819,12 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     protected function addProposalRow(array $proposal, OutputInterface $output): void
     {
         $this->sanitizeResponses($proposal);
+
+        // we need to count paperVotes by accessing repository directly, because we can not bypass the acess restriction in graphql field when exporting
+        // see https://github.com/cap-collectif/platform/issues/16305#issuecomment-1766033783
+        $id = GlobalId::fromGlobalId($proposal['id'])['id'];
+        $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotes($id);
+        $proposal[self::PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotesPoints($id);
 
         $row = ['proposal'];
         foreach ($this->headersMap as $columnName => $path) {
@@ -1011,7 +1065,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
     protected function addProposalCommentRow(array $comment, array $proposal): void
     {
-        $this->addDataBlock($comment['kind'], 'comment', $comment, $proposal);
+        $this->addDataBlock($comment['kind'] ?: '', 'comment', $comment, $proposal);
 
         $commentVotesQuery = $this->getProposalCommentVotesGraphQLQuery($comment['id']);
         $commentWithVotes = $this->executor
@@ -1223,13 +1277,9 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         return array_merge($this->proposalHeaderMap, $columnMappingExceptProposalHeader);
     }
 
-    protected function getProject(InputInterface $input): ?Project
+    protected function getProject(?string $projectId): ?Project
     {
-        if ($input->getArgument('projectId')) {
-            return $this->projectRepository->find($input->getArgument('projectId'));
-        }
-
-        return null;
+        return $this->projectRepository->find($projectId);
     }
 
     protected function getProposalVotesGraphQLQuery(

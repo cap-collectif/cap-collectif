@@ -44,7 +44,7 @@ class ConnectionTraversorSpec extends ObjectBehavior
         ];
 
         $logger
-            ->error('The GraphQL request resulted in `null` edges.', [
+            ->notice('The GraphQL request resulted in `null` edges.', [
                 'path' => 'contributionConnection',
                 'errors' => [['some errors']],
             ])

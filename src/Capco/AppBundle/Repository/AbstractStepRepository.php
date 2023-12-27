@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class AbstractStepRepository extends EntityRepository
 {
@@ -88,6 +89,15 @@ class AbstractStepRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleResult();
+    }
+
+    public function getPaginator($limit, $offset): Paginator
+    {
+        $qb = $this->createQueryBuilder('s');
+
+        $qb->setMaxResults($limit)->setFirstResult($offset);
+
+        return new Paginator($qb);
     }
 
     protected function getIsEnabledQueryBuilder()

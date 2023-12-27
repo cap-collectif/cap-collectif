@@ -86,7 +86,7 @@ def snapshots(tags='false'):
         'xls',
     ]
 
-    print(color_cyan + '/!\ Your database must be up to date, to generate accurate snapshots !' + color_white)
+    print(color_cyan + '/ ! \\ Your database must be up to date, to generate accurate snapshots !' + color_white)
 
     if tags == 'false':
         print(color_cyan + 'Deleting email snapshots...' + color_white)
@@ -120,6 +120,7 @@ def snapshots(tags='false'):
 
 def restore_db():
     command('mysql -h database -u root symfony < var/db.backup', 'application', Config.www_app, "capco", False)
+
 
 def save_db():
     command('mysqldump --opt -h database -u root symfony > var/db.backup', 'application', Config.www_app, "capco", False)

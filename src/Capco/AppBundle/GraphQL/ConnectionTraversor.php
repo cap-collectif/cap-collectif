@@ -35,7 +35,7 @@ class ConnectionTraversor
             // In the relay spec, "edges" field is nullable
             // See https://relay.dev/graphql/connections.htm#sec-Edges
             if (!$edges || !\is_array($edges)) {
-                $this->logger->error('The GraphQL request resulted in `null` edges.', [
+                $this->logger->notice('The GraphQL request resulted in `null` edges.', [
                     'path' => $path,
                     'errors' => $data['errors'] ?? [],
                 ]);

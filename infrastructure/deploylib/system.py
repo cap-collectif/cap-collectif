@@ -25,17 +25,17 @@ def linux_docker_install(force=False):
 def doctor():
     if _platform == "darwin":
         print(color_yellow + "On MacOS, please use 'Docker Desktop for Mac' and dedicate at least 6GB of memory (Preferences > Resources > Memory)." + color_white)
-    run('echo "Docker: ' + color_yellow + '`docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
-    run('echo "Docker compose: ' + color_yellow + '`docker compose version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
-    run('echo "Node: ' + color_yellow + '`node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
-    run('echo "Yarn: ' + color_yellow + '`yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Docker: ' + color_yellow + r'`docker -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Docker compose: ' + color_yellow + r'`docker compose version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Node: ' + color_yellow + r'`node -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
+    run('echo "Yarn: ' + color_yellow + r'`yarn -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\'`"' + color_white)
     if _platform == 'darwin':
-        run('echo "PHP: ' + color_yellow + '`php -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
+        run('echo "PHP: ' + color_yellow + r'`php -v | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
         run('php -m | grep -qi redis && echo "PHP extension: redis enabled" || echo "PHP extension: redis not found"' + color_white)
         run('php -m | grep -qi imagick && echo "PHP extension: imagick enabled" || echo "PHP extension: imagick not found"' + color_white)
         run('php -m | grep -qi amqp && echo "PHP extension: amqp enabled" || echo "PHP extension: amqp not found"' + color_white)
-        run('echo "Composer: ' + color_yellow + '`composer --version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
-        run('echo "Symfony CLI: ' + color_yellow + ' `symfony -V | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
+        run('echo "Composer: ' + color_yellow + r'`composer --version | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
+        run('echo "Symfony CLI: ' + color_yellow + r' `symfony -V | grep -Eo \'[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\' | head -1`"' + color_white)
 
 
 def symfony_bin_deps():
