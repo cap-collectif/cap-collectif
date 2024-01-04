@@ -10,13 +10,16 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Elastica\Aggregation\Terms;
 use Elastica\Index;
@@ -34,17 +37,23 @@ class VoteSearch extends Search
 {
     private AbstractVoteRepository $abstractVoteRepository;
     private DebateAnonymousVoteRepository $debateAnonymousVoteRepository;
+    private ProjectRepository $projectRepository;
+    private AbstractStepRepository $abstractStepRepository;
 
     public function __construct(
         Index $index,
         AbstractVoteRepository $abstractVoteRepository,
-        DebateAnonymousVoteRepository $debateAnonymousVoteRepository
+        DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
+        ProjectRepository $projectRepository,
+        AbstractStepRepository $abstractStepRepository
     ) {
         parent::__construct($index);
         $this->type = 'vote';
         $this->index = $index;
         $this->abstractVoteRepository = $abstractVoteRepository;
         $this->debateAnonymousVoteRepository = $debateAnonymousVoteRepository;
+        $this->projectRepository = $projectRepository;
+        $this->abstractStepRepository = $abstractStepRepository;
     }
 
     public function getVotesByAuthorViewerCanSee(
@@ -488,10 +497,18 @@ class VoteSearch extends Search
     ): Query {
         $boolQuery = new BoolQuery();
 
+        $canOrganizationView = false;
+
         if ($contribuableId) {
             $globalId = GlobalId::fromGlobalId($contribuableId);
             list($type, $id) = [$globalId['type'], $globalId['id']];
             if ($type === ucfirst(Project::getElasticsearchTypeName())) {
+                $project = $this->projectRepository->find($id);
+                $projectOwner = $project->getOwner();
+                if ($projectOwner instanceof Organization && $viewer->getOrganization() === $projectOwner) {
+                    $canOrganizationView = true;
+                }
+
                 $boolQuery
                     ->addFilter(
                         new Query\Term([
@@ -501,6 +518,12 @@ class VoteSearch extends Search
                     ->addFilter(new Query\Exists('project'))
                 ;
             } elseif (strpos($type, 'Step')) {
+                $step = $this->abstractStepRepository->find($id);
+                $project = $step->getProject();
+                $projectOwner = $project->getOwner();
+                if ($projectOwner instanceof Organization && $viewer->getOrganization() === $projectOwner) {
+                    $canOrganizationView = true;
+                }
                 $boolQuery
                     ->addFilter(
                         new Query\Term([
@@ -528,7 +551,9 @@ class VoteSearch extends Search
             $projectViewerCanSeeShouldQuery->addShould($filter);
         }
 
-        if ($viewer !== $author && !$viewer->isAdmin()) {
+        $hidePrivate = $viewer !== $author && (!$viewer->isAdmin() && !$canOrganizationView);
+
+        if ($hidePrivate) {
             $conditions[] = new Term(['private' => ['value' => false]]);
             $firstShouldQuery = (new BoolQuery())
                 ->addMustNot(new Exists('proposal'))
