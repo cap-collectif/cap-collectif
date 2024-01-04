@@ -93,6 +93,7 @@ export const RegistrationModal = ({
         bsSize="small"
         aria-labelledby="contained-modal-title-lg"
         enforceFocus={false}
+        backdrop="static"
       >
         <Modal.Header
           closeButton

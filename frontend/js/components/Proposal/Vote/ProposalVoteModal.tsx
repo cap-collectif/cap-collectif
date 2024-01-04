@@ -429,6 +429,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
         fullSizeOnMobile
         forceModalDialogToFalse={isIos()}
         show={showModal}
+        hideOnClickOutside={false}
       >
         <ProposalVoteRequirementsModal
           modalTitle={keyTradForModalVoteTitle}
@@ -514,6 +515,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
       size={CapUIModalSize.Md}
       fullSizeOnMobile
       show={showModal}
+      hideOnClickOutside={false}
     >
       {({ hide }) => (
         <>

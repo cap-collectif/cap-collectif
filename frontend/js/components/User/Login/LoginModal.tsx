@@ -28,6 +28,7 @@ export const LoginModal = ({ submitting, show, onClose, onSubmit, byPassAuth }: 
       autoFocus
       bsSize="small"
       aria-labelledby="contained-modal-title-lg"
+      backdrop="static"
     >
       <form id="login-form" onSubmit={onSubmit}>
         <Modal.Header
