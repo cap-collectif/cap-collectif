@@ -28,7 +28,7 @@ export const VoteMinAlert = ({ step, translationKey, isVotesPage = false }: Prop
           <FormattedMessage
             id={translationKey}
             values={{
-              num: step.viewerVotes ? viewerVotesBeforeValidation : 0,
+              num: step.viewerVotes ? viewerVotesBeforeValidation + 1 : 0,
             }}
           />
         </h4>
