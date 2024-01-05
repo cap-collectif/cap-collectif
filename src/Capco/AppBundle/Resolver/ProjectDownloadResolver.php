@@ -12,7 +12,6 @@ use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
-use Capco\AppBundle\Utils\Text;
 use Doctrine\ORM\EntityManagerInterface;
 use Liuggio\ExcelBundle\Factory;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -77,8 +76,12 @@ class ProjectDownloadResolver
         if ($projectAdmin) {
             $headers = array_diff($headers, $this->projectAdminExcludedHeaders);
         }
+
+        /**
+         * @var AbstractQuestion $question
+         */
         foreach ($questionnaire->getRealQuestions() as $question) {
-            $headers[] = ['label' => Text::unslug($question->getSlug()), 'raw' => true];
+            $headers[] = ['label' => $question->getTitle(), 'raw' => true];
         }
 
         return $headers;
@@ -192,7 +195,7 @@ class ProjectDownloadResolver
 
         foreach ($responses as $response) {
             $question = $response['question'];
-            $item[Text::unslug($question['slug'])] = $this->getResponseValue($response);
+            $item[$question['title']] = $this->getResponseValue($response);
         }
 
         foreach ($this->headers as $header) {

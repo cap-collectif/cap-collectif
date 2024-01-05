@@ -1,3 +1,3 @@
-﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm,"Comment ca va"
+﻿id,published,published_at,author,author_id,author_email,phone,created_at,updated_at,anonymous,draft,undraft_at,account,noAccount_email,noAccount_email_isConfirmed,internalComm,"Comment ça va ?"
 replyQuestionnaireAnonPOwner,Yes,"2016-03-02 00:00:00",lbrunet,user1,lbrunet@cap-collectif.com,+3300000000,"2016-03-02 00:00:00","2016-03-02 00:00:00",No,No,,Yes,,,No,
 replyAnonQuestionnaireAnonPOwner,Yes,"2018-03-01 00:00:00",,,,,"2018-03-01 00:00:00","2018-03-01 00:00:00",,,,No,,No,No,
