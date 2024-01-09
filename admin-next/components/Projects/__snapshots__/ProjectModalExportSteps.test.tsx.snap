@@ -3,22 +3,22 @@
 exports[`<ProjectModalExportSteps /> <TestProjectModalExportSteps /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <button
     aria-controls="id-g"
@@ -40,7 +40,7 @@ Array [
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
+    className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -69,7 +69,7 @@ Array [
       aria-controls="id-g"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM fCgUxE cap-menu__item"
+      className="sc-bcXGCL cNCpXV cap-menu__item"
       id="id-g"
       onBlurCapture={[Function]}
       onClick={[Function]}
@@ -88,7 +88,7 @@ Array [
       type="button"
     >
       <p
-        className="sc-bdnxRM WTDFb cap-text"
+        className="sc-bcXGCL Ebxhi cap-text"
       >
          
         project.download.button

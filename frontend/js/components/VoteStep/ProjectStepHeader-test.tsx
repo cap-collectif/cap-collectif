@@ -45,7 +45,7 @@ describe('<ProjectStepHeader />', () => {
     }
 
     TestProjectStepHeader = () => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer />
       </RelaySuspensFragmentTest>
     )

@@ -1,89 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectHeader /> should render correctly 1`] = `
-<div
-  className="sc-bdnxRM kbtnrb projectHeader"
->
+Array [
   <div
-    className="sc-bdnxRM eExfRE projectHeader__cover"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL kcBBm projectHeader"
   >
     <div
-      className="sc-bdnxRM koNNPB projectHeader__cover__content"
+      className="sc-bcXGCL dYXQnD projectHeader__cover"
     >
       <div
-        className="sc-bdnxRM fhbsqI"
+        className="sc-bcXGCL craUUX projectHeader__cover__content"
       >
         <div
-          className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
-          id="project-header"
-          onClick={[Function]}
-          role="group"
-          style={
-            Object {
-              "cursor": "default",
-            }
-          }
+          className="sc-bcXGCL uaeZr"
         >
           <div
-            className="sc-bdnxRM iBUlEp"
+            className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
+            id="project-header"
+            onClick={[Function]}
+            role="group"
+            style={
+              Object {
+                "cursor": "default",
+              }
+            }
           >
             <div
-              className="sc-bdnxRM kWKQGR sc-ckTSus gtiRfi cap-avatar"
-              title="Vince"
+              className="sc-bcXGCL kVLtqA"
             >
-              <img
-                alt="Vince"
-                className="sc-bdnxRM jVCZhC"
-                src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
+              <div
+                className="sc-bcXGCL dhMDWI sc-ckEbfr gIIayp cap-avatar"
                 title="Vince"
-              />
+              >
+                <img
+                  alt="Vince"
+                  className="sc-bcXGCL exSVBv"
+                  src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
+                  style={
+                    Object {
+                      "objectFit": "cover",
+                    }
+                  }
+                  title="Vince"
+                />
+              </div>
             </div>
           </div>
+          <p
+            className="sc-bcXGCL hFnnay cap-text platform__body"
+            id="authors-credit"
+            onClick={[Function]}
+          >
+            Vince
+          </p>
         </div>
-        <p
-          className="sc-bdnxRM ifbFlZ cap-text platform__body"
-          id="authors-credit"
-          onClick={[Function]}
+        <h3
+          className="sc-bcXGCL kmrImc cap-text projectHeader__title platform__title"
+          title="Food project "
         >
-          Vince
-        </p>
+          Food project
+           
+        </h3>
       </div>
-      <h3
-        className="sc-bdnxRM aIhTV cap-text projectHeader__title platform__title"
-        title="Food project "
-      >
-        Food project
-         
-      </h3>
-    </div>
-    <div
-      className="sc-bdnxRM kvVkjE projectHeader__coverVideo"
-    >
       <div
-        aria-controls="project-header-cover-modal"
-        aria-expanded={false}
-        aria-haspopup="dialog"
-        className="sc-bdnxRM gAYeYG"
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        type="button"
+        className="sc-bcXGCL bfgqnv projectHeader__coverVideo"
       >
-        <img
-          alt="Media Food"
-          className="sc-bdnxRM bnKRvo"
-          loading="lazy"
-          sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-          srcSet="
+        <div
+          aria-controls="project-header-cover-modal"
+          aria-expanded={false}
+          aria-haspopup="dialog"
+          className="sc-bcXGCL hcddpv"
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          type="button"
+        >
+          <img
+            alt="Media Food"
+            className="sc-breQAM kuBums"
+            loading="lazy"
+            sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+            srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   960w,
@@ -92,104 +111,105 @@ exports[`<ProjectHeader /> should render correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 3x,
          "
+            style={
+              Object {
+                "objectFit": "cover",
+              }
+            }
+          />
+          <svg
+            fill="none"
+            height="48px"
+            style={
+              Object {
+                "left": "50%",
+                "position": "absolute",
+                "top": "50%",
+                "transform": "translate3d(-50%,-50%,0)",
+              }
+            }
+            viewBox="0 0 48 48"
+            width="48px"
+          >
+            <rect
+              fill="#272B30"
+              height="48"
+              opacity="0.6"
+              rx="24"
+              width="48"
+            />
+            <path
+              d="M33 22.2679C34.3333 23.0377 34.3333 24.9623 33 25.7321L21 32.6603C19.6667 33.4301 18 32.4678 18 30.9282V17.0718C18 15.5322 19.6667 14.5699 21 15.3397L33 22.2679Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+        <div
+          aria-label="project-header-video-modal"
+          aria-modal={true}
+          data-dialog={true}
+          hidden={true}
+          id="project-header-cover-modal"
+          onAnimationEnd={[Function]}
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onTransitionEnd={[Function]}
+          role="dialog"
           style={
             Object {
-              "objectFit": "cover",
+              "display": "none",
+            }
+          }
+          tabIndex={-1}
+        />
+      </div>
+      <div
+        className="sc-bcXGCL bHDScw"
+      >
+        <div
+          aria-describedby="id-g"
+          className="sc-bcXGCL guTJTH sc-fXqqsB gHWJqw cap-tag"
+          id="restricted-access"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          tabIndex={0}
+          title=""
+        >
+          <svg
+            className="sc-bcXGCL sc-eJDTud cKTLIj hEjMCZ cap-icon"
+            fill="none"
+            viewBox="0 0 10 12"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+              fill="currentColor"
+            />
+          </svg>
+          restrictedaccess
+        </div>
+        <div
+          className="cap-tooltip-container"
+          hidden={true}
+          id="id-g"
+          onAnimationEnd={[Function]}
+          onTransitionEnd={[Function]}
+          role="tooltip"
+          style={
+            Object {
+              "display": "none",
+              "left": "100%",
+              "pointerEvents": "none",
+              "position": "fixed",
+              "top": "100%",
+              "zIndex": 1800,
             }
           }
         />
-        <svg
-          fill="none"
-          height="48px"
-          style={
-            Object {
-              "left": "50%",
-              "position": "absolute",
-              "top": "50%",
-              "transform": "translate3d(-50%,-50%,0)",
-            }
-          }
-          viewBox="0 0 48 48"
-          width="48px"
-        >
-          <rect
-            fill="#272B30"
-            height="48"
-            opacity="0.6"
-            rx="24"
-            width="48"
-          />
-          <path
-            d="M33 22.2679C34.3333 23.0377 34.3333 24.9623 33 25.7321L21 32.6603C19.6667 33.4301 18 32.4678 18 30.9282V17.0718C18 15.5322 19.6667 14.5699 21 15.3397L33 22.2679Z"
-            fill="white"
-          />
-        </svg>
       </div>
-      <div
-        aria-label="project-header-video-modal"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="project-header-cover-modal"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
-      />
     </div>
-    <div
-      className="sc-bdnxRM cYcgUp"
-    >
-      <div
-        aria-describedby="id-g"
-        className="sc-bdnxRM jBIFPT sc-fXazdy llVDbw cap-tag"
-        id="restricted-access"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        tabIndex={0}
-        title=""
-      >
-        <svg
-          className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon"
-          fill="none"
-          viewBox="0 0 10 12"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
-            fill="currentColor"
-          />
-        </svg>
-        restrictedaccess
-      </div>
-      <div
-        className="cap-tooltip-container"
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
-        style={
-          Object {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
-            "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+  </div>,
+]
 `;

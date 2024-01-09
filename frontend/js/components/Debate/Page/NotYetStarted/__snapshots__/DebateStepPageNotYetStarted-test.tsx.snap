@@ -1,24 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
-<div
-  className="sc-bdnxRM"
-  id="DebateStepPageNotYetStarted"
->
+Array [
   <div
-    className="sc-bdnxRM cefOPV"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL"
+    id="DebateStepPageNotYetStarted"
   >
     <div
-      className="sc-bdnxRM zqsiY sc-fXazdy hCrgT cap-tag"
-      title=""
+      className="sc-bcXGCL gOMtuO"
     >
-      count.daysUntil {"count":725}
+      <div
+        className="sc-bcXGCL ivAGAo sc-fXqqsB ewilwr cap-tag"
+        title=""
+      >
+        count.daysUntil {"count":725}
+      </div>
+      <h2
+        className="sc-bcXGCL dcngbR cap-heading"
+      >
+        &lt;mock-value-for-field-"title"&gt;
+      </h2>
     </div>
-    <h2
-      className="sc-bdnxRM kYuusp cap-heading"
-    >
-      &lt;mock-value-for-field-"title"&gt;
-    </h2>
-  </div>
-</div>
+  </div>,
+]
 `;

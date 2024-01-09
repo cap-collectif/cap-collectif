@@ -8,7 +8,7 @@ import MockProviders from '~/testUtils'
 describe('<LocateAndZoomControl />', () => {
   it('should render correctly', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <MapContainer>
           <LocateAndZoomControl />
         </MapContainer>

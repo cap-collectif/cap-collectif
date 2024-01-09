@@ -14,7 +14,7 @@ describe('<EventQuickActions />', () => {
   it('should render correctly with the right conditions', () => {
     enableFeatureFlags(['allow_users_to_propose_events'])
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <EventQuickActions id="id" viewerDidAuthor status="APPROVED" />
       </MockProviders>,
     )
@@ -22,7 +22,7 @@ describe('<EventQuickActions />', () => {
   })
   it('should return nothing with the right conditions', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <EventQuickActions id="id" viewerDidAuthor={false} status="REFUSED" />
       </MockProviders>,
     )

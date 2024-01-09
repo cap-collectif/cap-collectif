@@ -3,86 +3,86 @@
 exports[`<MediatorList /> should render correctly and display mediators 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM kuZhqT"
+    className="sc-bcXGCL EeYuu"
   >
     <table
-      className="sc-bdnxRM cRMMXk"
+      className="sc-bcXGCL cvErHd"
     >
       <thead
-        className="sc-bdnxRM kMzwfc"
+        className="sc-bcXGCL PEPvR"
       >
         <tr
-          className="sc-bdnxRM dwXJfE cap-table__tr"
+          className="sc-bcXGCL pTgyT cap-table__tr"
         >
           <th
-            className="sc-bdnxRM jcBQPC cap-table__th"
+            className="sc-bcXGCL bDfeYb cap-table__th"
           >
             <p
-              className="sc-bdnxRM cRlrvQ cap-text"
+              className="sc-bcXGCL KTkyh cap-text"
             >
               global.mediator
             </p>
           </th>
           <th
-            className="sc-bdnxRM jcBQPC cap-table__th"
+            className="sc-bcXGCL bDfeYb cap-table__th"
           >
             <p
-              className="sc-bdnxRM cRlrvQ cap-text"
+              className="sc-bcXGCL KTkyh cap-text"
             >
               admin.label.step
             </p>
           </th>
           <th
-            className="sc-bdnxRM jcBQPC cap-table__th"
+            className="sc-bcXGCL bDfeYb cap-table__th"
           >
             <p
-              className="sc-bdnxRM cRlrvQ cap-text"
+              className="sc-bcXGCL KTkyh cap-text"
             >
               mediator.participants_count
             </p>
           </th>
           <th
-            className="sc-bdnxRM jcBQPC cap-table__th"
+            className="sc-bcXGCL bDfeYb cap-table__th"
           >
             <p
-              className="sc-bdnxRM cRlrvQ cap-text"
+              className="sc-bcXGCL KTkyh cap-text"
             >
               global.email.short
             </p>
           </th>
           <th
-            className="sc-bdnxRM jcBQPC cap-table__th"
+            className="sc-bcXGCL bDfeYb cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bdnxRM gboeoA cap-table__tbody"
+        className="sc-bcXGCL jTUKZp cap-table__tbody"
       >
         <tr
-          className="sc-bdnxRM hgMoZa cap-table__tr"
+          className="sc-bcXGCL ipWTAl cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -90,13 +90,13 @@ Array [
             }
           >
             <p
-              className="sc-bdnxRM WTDFb cap-text"
+              className="sc-bcXGCL Ebxhi cap-text"
             >
               Mediateur 1
             </p>
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -106,7 +106,7 @@ Array [
             Etape de vote
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -116,7 +116,7 @@ Array [
             2/3
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -126,7 +126,7 @@ Array [
             3
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -136,7 +136,7 @@ Array [
             <button
               aria-describedby="id-g"
               aria-label="action_delete"
-              className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
+              className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -145,7 +145,7 @@ Array [
               tabIndex={0}
             >
               <svg
-                className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,12 +177,12 @@ Array [
           </td>
         </tr>
         <tr
-          className="sc-bdnxRM hgMoZa cap-table__tr"
+          className="sc-bcXGCL ipWTAl cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamDfooke4XJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -190,13 +190,13 @@ Array [
             }
           >
             <p
-              className="sc-bdnxRM WTDFb cap-text"
+              className="sc-bcXGCL Ebxhi cap-text"
             >
               Mediateur 2
             </p>
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -206,7 +206,7 @@ Array [
             Etape de vote
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -216,7 +216,7 @@ Array [
             0/0
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -226,7 +226,7 @@ Array [
             0
           </td>
           <td
-            className="sc-bdnxRM jWrtJR cap-table__td"
+            className="sc-bcXGCL kdBJtI cap-table__td"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -236,7 +236,7 @@ Array [
             <button
               aria-describedby="id-g"
               aria-label="action_delete"
-              className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
+              className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -245,7 +245,7 @@ Array [
               tabIndex={0}
             >
               <svg
-                className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -279,10 +279,10 @@ Array [
       </tbody>
     </table>
     <div
-      className="sc-bdnxRM kqhhXZ"
+      className="sc-bcXGCL eihals"
     >
       <p
-        className="sc-bdnxRM iNlgqP cap-text"
+        className="sc-bcXGCL hczTPS cap-text"
         style={
           Object {
             "marginLeft": 0,
@@ -293,12 +293,12 @@ Array [
         no-result-found
       </p>
       <p
-        className="sc-bdnxRM AXuEq cap-text"
+        className="sc-bcXGCL NhRPT cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bdnxRM sc-lbVvki cMVVDx bA-duud cap-button"
+        className="sc-bcXGCL sc-laZSpB hgLfnE gEVMxs cap-button"
         onClick={[Function]}
         type="button"
       >

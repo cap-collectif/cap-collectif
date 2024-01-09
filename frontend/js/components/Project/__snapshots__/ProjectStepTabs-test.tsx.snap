@@ -1,202 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
-<div
-  className="sc-bdnxRM iisAqJ frise"
->
-  <ul
-    className="sc-bdnxRM ldKNCK frise__stepList"
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL kwhQQv frise"
   >
-    <div
-      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
+    <ul
+      className="sc-bcXGCL bnYdZz frise__stepList"
     >
-      
       <div
-        className="slick-list"
+        className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
       >
+        
         <div
-          className="slick-track"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseOver={[Function]}
-          style={
-            Object {
-              "WebkitTransform": "translate3d(0px, 0px, 0px)",
-              "WebkitTransition": "",
-              "msTransform": "translateX(0px)",
-              "opacity": 1,
-              "transform": "translate3d(0px, 0px, 0px)",
-              "transition": "",
-            }
-          }
+          className="slick-list"
         >
           <div
-            aria-hidden={false}
-            className="slick-slide slick-active slick-current"
-            data-index={0}
-            onClick={[Function]}
+            className="slick-track"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
             style={
               Object {
-                "outline": "none",
-                "width": null,
+                "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                "WebkitTransition": "",
+                "msTransform": "translateX(0px)",
+                "opacity": 1,
+                "transform": "translate3d(0px, 0px, 0px)",
+                "transition": "",
               }
             }
-            tabIndex="-1"
           >
-            <div>
-              <a
-                href="/project//presentation/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
-                <li
-                  className="sc-bdnxRM hJQsKZ frise__stepItem"
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active slick-current"
+              data-index={0}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//presentation/<mock-value-for-field-\\"slug\\">"
                   onClick={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
                 >
-                  <svg
-                    fill="none"
-                    height="56"
-                    viewBox="0 0 231 56"
-                    width="248"
-                  >
-                    <rect
-                      fill="currentColor"
-                      height="56"
-                      width="215.6"
-                    />
-                    <path
-                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      clipRule="evenodd"
-                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
-                      fill="white"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
+                  <li
+                    className="sc-bcXGCL jnySMR frise__stepItem"
+                    onClick={[Function]}
                     style={
                       Object {
-                        "transform": "translate(-45%,-50%)",
+                        "display": "inline-block",
+                        "width": "100%",
                       }
                     }
+                    tabIndex={-1}
                   >
-                    <p
-                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
-                      title="Présentation"
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 231 56"
+                      width="248"
                     >
-                      Présentation
-                    </p>
-                    <p
-                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
+                      <rect
+                        fill="currentColor"
+                        height="56"
+                        width="215.6"
+                      />
+                      <path
+                        d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                        fill="white"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
                     >
-                      
-                    </p>
-                  </a>
-                </li>
-              </a>
-            </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={1}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
-              }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <li
-                className="sc-bdnxRM dSYUnY frise__stepItem"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
-              >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdnxRM iPFbeP frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
-                  style={
-                    Object {
-                      "transform": "translate(-45%,-50%)",
-                    }
-                  }
-                >
-                  <p
-                    className="sc-bdnxRM gnOSmT cap-text frise__stepItem__link__title platform__body"
-                    title="Consultation"
-                  >
-                    Consultation
-                  </p>
-                  <p
-                    className="sc-bdnxRM gmGkaB cap-text frise__stepItem__link__content platform__body"
-                  >
-                    step.status.closed
-                  </p>
+                      <p
+                        className="sc-bcXGCL fRRhsG cap-text frise__stepItem__link__title platform__body"
+                        title="Présentation"
+                      >
+                        Présentation
+                      </p>
+                      <p
+                        className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
+                      >
+                        
+                      </p>
+                    </a>
+                  </li>
                 </a>
-              </li>
+              </div>
             </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={2}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
               }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <a
-                href="/project//collect/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
+              tabIndex="-1"
+            >
+              <div>
                 <li
-                  className="sc-bdnxRM hYAsWX frise__stepItem"
+                  className="sc-bcXGCL jcQoMK frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -230,7 +173,8 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     />
                   </svg>
                   <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
+                    className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -238,24 +182,189 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                     }
                   >
                     <p
-                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
-                      title="Dépôt"
+                      className="sc-bcXGCL izykdq cap-text frise__stepItem__link__title platform__body"
+                      title="Consultation"
                     >
-                      Dépôt
+                      Consultation
                     </p>
                     <p
-                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bcXGCL hshufM cap-text frise__stepItem__link__content platform__body"
                     >
-                      <div
+                      step.status.closed
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={2}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//collect/<mock-value-for-field-\\"slug\\">"
+                  onClick={[Function]}
+                >
+                  <li
+                    className="sc-bcXGCL goAiPf frise__stepItem"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 248 56"
+                      width="248"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                      <rect
+                        fill="currentColor"
+                        height="56"
+                        transform="translate(17)"
+                        width="216"
+                      />
+                      <path
+                        d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
+                    >
+                      <p
+                        className="sc-bcXGCL fRRhsG cap-text frise__stepItem__link__title platform__body"
+                        title="Dépôt"
+                      >
+                        Dépôt
+                      </p>
+                      <p
+                        className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
+                      >
+                        <div
+                          aria-describedby="id-g"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          onMouseEnter={[Function]}
+                          onMouseLeave={[Function]}
+                          tabIndex={0}
+                        >
+                          count.block.daysLeft
+                        </div>
+                        <div
+                          className="cap-tooltip-container"
+                          hidden={true}
+                          id="id-g"
+                          onAnimationEnd={[Function]}
+                          onTransitionEnd={[Function]}
+                          role="tooltip"
+                          style={
+                            Object {
+                              "display": "none",
+                              "left": "100%",
+                              "pointerEvents": "none",
+                              "position": "fixed",
+                              "top": "100%",
+                              "zIndex": 1800,
+                            }
+                          }
+                        />
+                      </p>
+                    </a>
+                  </li>
+                </a>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={3}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//questionnaire/<mock-value-for-field-\\"slug\\">"
+                  onClick={[Function]}
+                >
+                  <li
+                    className="sc-bcXGCL eVqpyb frise__stepItem"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 232 56"
+                      width="248"
+                    >
+                      <path
+                        d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
+                    >
+                      <p
                         aria-describedby="id-g"
+                        className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
                         onBlur={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
                         tabIndex={0}
+                        title="Questionnaire qui dénonce"
                       >
-                        count.block.daysLeft
-                      </div>
+                        Questionnaire qui dénonce
+                      </p>
                       <div
                         className="cap-tooltip-container"
                         hidden={true}
@@ -274,310 +383,164 @@ exports[`<ProjectStepTabs /> should render correctly without arrow & with active
                           }
                         }
                       />
-                    </p>
-                  </a>
-                </li>
-              </a>
-            </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={3}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
-              }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <a
-                href="/project//questionnaire/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
-                <li
-                  className="sc-bdnxRM fCkZpF frise__stepItem"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
-                >
-                  <svg
-                    fill="none"
-                    height="56"
-                    viewBox="0 0 232 56"
-                    width="248"
-                  >
-                    <path
-                      d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      clipRule="evenodd"
-                      d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
-                      fill="currentColor"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
-                    style={
-                      Object {
-                        "transform": "translate(-45%,-50%)",
-                      }
-                    }
-                  >
-                    <p
-                      aria-describedby="id-g"
-                      className="sc-bdnxRM fnGKEC cap-text frise__stepItem__link__title platform__body"
-                      onBlur={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      tabIndex={0}
-                      title="Questionnaire qui dénonce"
-                    >
-                      Questionnaire qui dénonce
-                    </p>
-                    <div
-                      className="cap-tooltip-container"
-                      hidden={true}
-                      id="id-g"
-                      onAnimationEnd={[Function]}
-                      onTransitionEnd={[Function]}
-                      role="tooltip"
-                      style={
-                        Object {
-                          "display": "none",
-                          "left": "100%",
-                          "pointerEvents": "none",
-                          "position": "fixed",
-                          "top": "100%",
-                          "zIndex": 1800,
-                        }
-                      }
-                    />
-                    <p
-                      className="sc-bdnxRM gFxpes cap-text frise__stepItem__link__content platform__body"
-                    />
-                  </a>
-                </li>
-              </a>
+                      <p
+                        className="sc-bcXGCL gQqqnI cap-text frise__stepItem__link__content platform__body"
+                      />
+                    </a>
+                  </li>
+                </a>
+              </div>
             </div>
           </div>
         </div>
+        
+        
       </div>
-      
-      
-    </div>
-  </ul>
-</div>
+    </ul>
+  </div>,
+]
 `;
 
 exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
-<div
-  className="sc-bdnxRM iisAqJ frise"
->
-  <ul
-    className="sc-bdnxRM ldKNCK frise__stepList"
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL kwhQQv frise"
   >
-    <div
-      className="slick-slider ProjectHeaderFrise__StepsContainer-ffMvVj gaLuHz slick-initialized"
+    <ul
+      className="sc-bcXGCL bnYdZz frise__stepList"
     >
-      
       <div
-        className="slick-list"
+        className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
       >
+        
         <div
-          className="slick-track"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          onMouseOver={[Function]}
-          style={
-            Object {
-              "WebkitTransform": "translate3d(0px, 0px, 0px)",
-              "WebkitTransition": "",
-              "msTransform": "translateX(0px)",
-              "opacity": 1,
-              "transform": "translate3d(0px, 0px, 0px)",
-              "transition": "",
-            }
-          }
+          className="slick-list"
         >
           <div
-            aria-hidden={false}
-            className="slick-slide slick-active slick-current"
-            data-index={0}
-            onClick={[Function]}
+            className="slick-track"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
             style={
               Object {
-                "outline": "none",
-                "width": null,
+                "WebkitTransform": "translate3d(0px, 0px, 0px)",
+                "WebkitTransition": "",
+                "msTransform": "translateX(0px)",
+                "opacity": 1,
+                "transform": "translate3d(0px, 0px, 0px)",
+                "transition": "",
               }
             }
-            tabIndex="-1"
           >
-            <div>
-              <a
-                href="/project//presentation/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
-                <li
-                  className="sc-bdnxRM hJQsKZ frise__stepItem"
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active slick-current"
+              data-index={0}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//presentation/<mock-value-for-field-\\"slug\\">"
                   onClick={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
                 >
-                  <svg
-                    fill="none"
-                    height="56"
-                    viewBox="0 0 231 56"
-                    width="248"
-                  >
-                    <rect
-                      fill="currentColor"
-                      height="56"
-                      width="215.6"
-                    />
-                    <path
-                      d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      clipRule="evenodd"
-                      d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
-                      fill="white"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
+                  <li
+                    className="sc-bcXGCL jnySMR frise__stepItem"
+                    onClick={[Function]}
                     style={
                       Object {
-                        "transform": "translate(-45%,-50%)",
+                        "display": "inline-block",
+                        "width": "100%",
                       }
                     }
+                    tabIndex={-1}
                   >
-                    <p
-                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
-                      title="Présentation"
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 231 56"
+                      width="248"
                     >
-                      Présentation
-                    </p>
-                    <p
-                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
+                      <rect
+                        fill="currentColor"
+                        height="56"
+                        width="215.6"
+                      />
+                      <path
+                        d="M215.6 0L229.236 26.1506C229.84 27.3095 229.84 28.6905 229.236 29.8494L215.6 56V0Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M215.6 0H230.2V56H215.6L228.706 29.7889C229.269 28.6627 229.269 27.3373 228.706 26.2111L215.6 0Z"
+                        fill="white"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
                     >
-                      
-                    </p>
-                  </a>
-                </li>
-              </a>
-            </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={1}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
-              }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <li
-                className="sc-bdnxRM dSYUnY frise__stepItem"
-                onClick={[Function]}
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "width": "100%",
-                  }
-                }
-                tabIndex={-1}
-              >
-                <svg
-                  fill="none"
-                  height="56"
-                  viewBox="0 0 248 56"
-                  width="248"
-                >
-                  <path
-                    clipRule="evenodd"
-                    d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                  />
-                  <rect
-                    fill="currentColor"
-                    height="56"
-                    transform="translate(17)"
-                    width="216"
-                  />
-                  <path
-                    d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
-                    fill="currentColor"
-                  />
-                </svg>
-                <a
-                  className="sc-bdnxRM iPFbeP frise__stepItem__link"
-                  href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
-                  style={
-                    Object {
-                      "transform": "translate(-45%,-50%)",
-                    }
-                  }
-                >
-                  <p
-                    className="sc-bdnxRM gnOSmT cap-text frise__stepItem__link__title platform__body"
-                    title="Consultation"
-                  >
-                    Consultation
-                  </p>
-                  <p
-                    className="sc-bdnxRM gmGkaB cap-text frise__stepItem__link__content platform__body"
-                  >
-                    step.status.closed
-                  </p>
+                      <p
+                        className="sc-bcXGCL fRRhsG cap-text frise__stepItem__link__title platform__body"
+                        title="Présentation"
+                      >
+                        Présentation
+                      </p>
+                      <p
+                        className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
+                      >
+                        
+                      </p>
+                    </a>
+                  </li>
                 </a>
-              </li>
+              </div>
             </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={2}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={1}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
               }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <a
-                href="/project//collect/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
+              tabIndex="-1"
+            >
+              <div>
                 <li
-                  className="sc-bdnxRM hYAsWX frise__stepItem"
+                  className="sc-bcXGCL jcQoMK frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -611,7 +574,8 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     />
                   </svg>
                   <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
+                    className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                    href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                     style={
                       Object {
                         "transform": "translate(-45%,-50%)",
@@ -619,24 +583,189 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                     }
                   >
                     <p
-                      className="sc-bdnxRM iylKZC cap-text frise__stepItem__link__title platform__body"
-                      title="Dépôt"
+                      className="sc-bcXGCL izykdq cap-text frise__stepItem__link__title platform__body"
+                      title="Consultation"
                     >
-                      Dépôt
+                      Consultation
                     </p>
                     <p
-                      className="sc-bdnxRM cUexEw cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bcXGCL hshufM cap-text frise__stepItem__link__content platform__body"
                     >
-                      <div
+                      step.status.closed
+                    </p>
+                  </a>
+                </li>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={2}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//collect/<mock-value-for-field-\\"slug\\">"
+                  onClick={[Function]}
+                >
+                  <li
+                    className="sc-bcXGCL goAiPf frise__stepItem"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 248 56"
+                      width="248"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M0.999756 0H16.9998V26.6896C16.9094 26.429 16.7913 26.1756 16.6454 25.9337L0.999756 0ZM16.9998 29.3104C16.9094 29.571 16.7913 29.8244 16.6454 30.0663L0.999756 56H16.9998V29.3104Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                      <rect
+                        fill="currentColor"
+                        height="56"
+                        transform="translate(17)"
+                        width="216"
+                      />
+                      <path
+                        d="M233 0L246.636 26.1506C247.24 27.3095 247.24 28.6905 246.636 29.8494L233 56V0Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
+                    >
+                      <p
+                        className="sc-bcXGCL fRRhsG cap-text frise__stepItem__link__title platform__body"
+                        title="Dépôt"
+                      >
+                        Dépôt
+                      </p>
+                      <p
+                        className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
+                      >
+                        <div
+                          aria-describedby="id-g"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          onMouseEnter={[Function]}
+                          onMouseLeave={[Function]}
+                          tabIndex={0}
+                        >
+                          count.block.daysLeft
+                        </div>
+                        <div
+                          className="cap-tooltip-container"
+                          hidden={true}
+                          id="id-g"
+                          onAnimationEnd={[Function]}
+                          onTransitionEnd={[Function]}
+                          role="tooltip"
+                          style={
+                            Object {
+                              "display": "none",
+                              "left": "100%",
+                              "pointerEvents": "none",
+                              "position": "fixed",
+                              "top": "100%",
+                              "zIndex": 1800,
+                            }
+                          }
+                        />
+                      </p>
+                    </a>
+                  </li>
+                </a>
+              </div>
+            </div>
+            <div
+              aria-hidden={false}
+              className="slick-slide slick-active"
+              data-index={3}
+              onClick={[Function]}
+              style={
+                Object {
+                  "outline": "none",
+                  "width": null,
+                }
+              }
+              tabIndex="-1"
+            >
+              <div>
+                <a
+                  href="/project//questionnaire/<mock-value-for-field-\\"slug\\">"
+                  onClick={[Function]}
+                >
+                  <li
+                    className="sc-bcXGCL eVqpyb frise__stepItem"
+                    onClick={[Function]}
+                    style={
+                      Object {
+                        "display": "inline-block",
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={-1}
+                  >
+                    <svg
+                      fill="none"
+                      height="56"
+                      viewBox="0 0 232 56"
+                      width="248"
+                    >
+                      <path
+                        d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        clipRule="evenodd"
+                        d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
+                        fill="currentColor"
+                        fillRule="evenodd"
+                      />
+                    </svg>
+                    <a
+                      className="sc-bcXGCL bMNDYU frise__stepItem__link"
+                      style={
+                        Object {
+                          "transform": "translate(-45%,-50%)",
+                        }
+                      }
+                    >
+                      <p
                         aria-describedby="id-g"
+                        className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
                         onBlur={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
                         tabIndex={0}
+                        title="Questionnaire qui dénonce"
                       >
-                        count.block.daysLeft
-                      </div>
+                        Questionnaire qui dénonce
+                      </p>
                       <div
                         className="cap-tooltip-container"
                         hidden={true}
@@ -655,109 +784,20 @@ exports[`<ProjectStepTabs /> should render null when there is only one step 1`] 
                           }
                         }
                       />
-                    </p>
-                  </a>
-                </li>
-              </a>
-            </div>
-          </div>
-          <div
-            aria-hidden={false}
-            className="slick-slide slick-active"
-            data-index={3}
-            onClick={[Function]}
-            style={
-              Object {
-                "outline": "none",
-                "width": null,
-              }
-            }
-            tabIndex="-1"
-          >
-            <div>
-              <a
-                href="/project//questionnaire/<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
-                <li
-                  className="sc-bdnxRM fCkZpF frise__stepItem"
-                  onClick={[Function]}
-                  style={
-                    Object {
-                      "display": "inline-block",
-                      "width": "100%",
-                    }
-                  }
-                  tabIndex={-1}
-                >
-                  <svg
-                    fill="none"
-                    height="56"
-                    viewBox="0 0 232 56"
-                    width="248"
-                  >
-                    <path
-                      d="M16 0H223.6C228.018 0 231.6 3.58172 231.6 8V48C231.6 52.4183 228.018 56 223.6 56H16V0Z"
-                      fill="currentColor"
-                    />
-                    <path
-                      clipRule="evenodd"
-                      d="M0 0H16V26.6896C15.9096 26.429 15.7915 26.1756 15.6456 25.9337L0 0ZM16 29.3104C15.9096 29.571 15.7915 29.8244 15.6456 30.0663L0 56H16V29.3104Z"
-                      fill="currentColor"
-                      fillRule="evenodd"
-                    />
-                  </svg>
-                  <a
-                    className="sc-bdnxRM iPFbeP frise__stepItem__link"
-                    style={
-                      Object {
-                        "transform": "translate(-45%,-50%)",
-                      }
-                    }
-                  >
-                    <p
-                      aria-describedby="id-g"
-                      className="sc-bdnxRM fnGKEC cap-text frise__stepItem__link__title platform__body"
-                      onBlur={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      tabIndex={0}
-                      title="Questionnaire qui dénonce"
-                    >
-                      Questionnaire qui dénonce
-                    </p>
-                    <div
-                      className="cap-tooltip-container"
-                      hidden={true}
-                      id="id-g"
-                      onAnimationEnd={[Function]}
-                      onTransitionEnd={[Function]}
-                      role="tooltip"
-                      style={
-                        Object {
-                          "display": "none",
-                          "left": "100%",
-                          "pointerEvents": "none",
-                          "position": "fixed",
-                          "top": "100%",
-                          "zIndex": 1800,
-                        }
-                      }
-                    />
-                    <p
-                      className="sc-bdnxRM gFxpes cap-text frise__stepItem__link__content platform__body"
-                    />
-                  </a>
-                </li>
-              </a>
+                      <p
+                        className="sc-bcXGCL gQqqnI cap-text frise__stepItem__link__content platform__body"
+                      />
+                    </a>
+                  </li>
+                </a>
+              </div>
             </div>
           </div>
         </div>
+        
+        
       </div>
-      
-      
-    </div>
-  </ul>
-</div>
+    </ul>
+  </div>,
+]
 `;

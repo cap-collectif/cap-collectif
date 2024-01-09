@@ -97,6 +97,7 @@ describe('<ProjectStepTabs />', () => {
             },
           },
         }}
+        useCapUIProvider
         environment={environment}
       >
         <TestRenderer {...props} />

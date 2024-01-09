@@ -2,7 +2,7 @@
 
 exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] = `
 <div
-  className="ProposalPageTabs__Tabs-dVxsf iddESn"
+  className="ProposalPageTabs__Tabs-eloHg ELnYN"
   loading={false}
 >
   <ul
@@ -64,7 +64,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
 
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 <div
-  className="ProposalPageTabs__Tabs-dVxsf iddESn"
+  className="ProposalPageTabs__Tabs-eloHg ELnYN"
   loading={false}
 >
   <ul
@@ -126,7 +126,7 @@ exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
 
 exports[`<ProposalPageTabs /> should render without vote tab 1`] = `
 <div
-  className="ProposalPageTabs__Tabs-dVxsf iddESn"
+  className="ProposalPageTabs__Tabs-eloHg ELnYN"
   loading={false}
 >
   <ul

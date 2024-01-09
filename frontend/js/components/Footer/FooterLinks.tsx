@@ -39,7 +39,7 @@ const Links = styled.div<{
     color: ${props => props.textColor};
     font-size: 16px;
     margin-top: -4px;
-    :hover {
+    &:hover {
       color: ${props => props.textColor};
     }
   }

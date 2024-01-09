@@ -2,17 +2,17 @@
 
 exports[`<ProjectAdminParticipant /> should render a non-selectable list when "emailing" is disabled 1`] = `
 <div
-  className="styles__Container-fmnQRi kkTtPG ProjectAdminParticipantstyle__Container-gABQlB iirJBD pickableList-row"
+  className="styles__Container-fmDIgl iKKqeY pickableList-row ProjectAdminParticipantstyle__Container-gBxtgi eWyfNu"
 >
   <div
-    className="styles__ChildWrapper-gzHiWF pickableList-row-content"
+    className="styles__ChildWrapper-gACLRm pickableList-row-content"
     selected={false}
   >
     <div
-      className="ProjectAdminParticipantstyle__ParticipantInfo-eLA-dsP cBQXYt"
+      className="ProjectAdminParticipantstyle__ParticipantInfo-eKEAyg ivxndD"
     >
       <div
-        className="ProjectAdminParticipantstyle__UsernameContainer-fhbkmr huCIOa"
+        className="ProjectAdminParticipantstyle__UsernameContainer-fgfHrI jBpEnu"
       >
         <a
           href="<mock-value-for-field-\\"adminUrl\\">"
@@ -21,7 +21,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
         </a>
       </div>
       <div
-        className="ProjectAdminParticipantstyle__NameContainer-dEyhZK guqxjL"
+        className="ProjectAdminParticipantstyle__NameContainer-dDCFfd brFOlC"
       >
         <span>
           &lt;mock-value-for-field-"firstname"&gt; &lt;mock-value-for-field-"lastname"&gt;
@@ -34,7 +34,9 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
         active.on.date {"date":"2 avr. 2021"}
       </div>
       <ul
-        className="InlineList__Container-jABgTk guAQSn inline-list"
+        className="InlineList__Container-jBwJNT lbXmrW inline-list"
+        margin={true}
+        separator=" "
       >
         <li>
           <button
@@ -112,7 +114,8 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
       </ul>
     </div>
     <span
-      className="UserAvatarLegacy__UserAvatarContainer-eQVGyq fSduWg"
+      className="UserAvatarLegacy__UserAvatarContainer-eQa-dDJ krYksw"
+      hasBadge={false}
       onBlur={[Function]}
       onFocus={[Function]}
       onMouseOut={[Function]}
@@ -121,7 +124,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
+        className="sc-breQAM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="
@@ -148,7 +151,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
 
 exports[`<ProjectAdminParticipant /> should render a selectable list when "emailing" is enabled 1`] = `
 <div
-  className="styles__Container-fmnQRi kkTtPG ProjectAdminParticipantstyle__Container-gABQlB iirJBD pickableList-row"
+  className="styles__Container-fmDIgl iKKqeY pickableList-row ProjectAdminParticipantstyle__Container-gBxtgi eWyfNu"
 >
   <input
     checked={false}
@@ -156,14 +159,14 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
     type="checkbox"
   />
   <div
-    className="styles__ChildWrapper-gzHiWF pickableList-row-content"
+    className="styles__ChildWrapper-gACLRm pickableList-row-content"
     selected={false}
   >
     <div
-      className="ProjectAdminParticipantstyle__ParticipantInfo-eLA-dsP cBQXYt"
+      className="ProjectAdminParticipantstyle__ParticipantInfo-eKEAyg ivxndD"
     >
       <div
-        className="ProjectAdminParticipantstyle__UsernameContainer-fhbkmr huCIOa"
+        className="ProjectAdminParticipantstyle__UsernameContainer-fgfHrI jBpEnu"
       >
         <a
           href="<mock-value-for-field-\\"adminUrl\\">"
@@ -172,7 +175,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
         </a>
       </div>
       <div
-        className="ProjectAdminParticipantstyle__NameContainer-dEyhZK guqxjL"
+        className="ProjectAdminParticipantstyle__NameContainer-dDCFfd brFOlC"
       >
         <span>
           &lt;mock-value-for-field-"firstname"&gt; &lt;mock-value-for-field-"lastname"&gt;
@@ -185,7 +188,9 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
         active.on.date {"date":"2 avr. 2021"}
       </div>
       <ul
-        className="InlineList__Container-jABgTk guAQSn inline-list"
+        className="InlineList__Container-jBwJNT lbXmrW inline-list"
+        margin={true}
+        separator=" "
       >
         <li>
           <button
@@ -263,7 +268,8 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
       </ul>
     </div>
     <span
-      className="UserAvatarLegacy__UserAvatarContainer-eQVGyq fSduWg"
+      className="UserAvatarLegacy__UserAvatarContainer-eQa-dDJ krYksw"
+      hasBadge={false}
       onBlur={[Function]}
       onFocus={[Function]}
       onMouseOut={[Function]}
@@ -272,7 +278,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="sc-bdnxRM img-circle object-cover user-avatar mr-10 "
+        className="sc-breQAM img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="

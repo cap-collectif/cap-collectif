@@ -2,10 +2,10 @@
 
 exports[`<PickableListPlaceholder /> should render correctly 1`] = `
 <div
-  class="styles__Container-hXBJYj dSvulo"
+  class="styles__Container-hWGhdA ljdDnp"
 >
   <div
-    class="styles__Container-dhAnWt fRDxhy pickableList-header"
+    class="styles__Container-dhkwHq kdXIHH pickableList-header"
   >
     <p
       style="margin:0"
@@ -16,115 +16,115 @@ exports[`<PickableListPlaceholder /> should render correctly 1`] = `
     </p>
   </div>
   <div
-    class="styles__Container-jNZwcA iMzebZ"
+    class="styles__Container-jNJENz gimbCd"
   >
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>
     <div
-      class="styles__Container-fmnQRi kkTtPG pickableList-row"
+      class="styles__Container-fmDIgl iKKqeY pickableList-row"
     >
       <div
-        class="styles__ChildWrapper-gzHiWF pickableList-row-content"
+        class="styles__ChildWrapper-gACLRm pickableList-row-content"
       >
         <div
-          class="sc-bkbkJK fHybcO text__SkeletonTextInner-fMcnuD iuwXVO"
+          class="sc-bjfHPd xNZVy text__SkeletonTextInner-fMseJE iytuvI"
         />
       </div>
     </div>

@@ -3,25 +3,25 @@
 exports[`<ProposalsList /> <TestProposalsList /> should render correctly with images 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM isvuJP"
+    className="sc-bcXGCL dAOeNq"
     id="proposals-list"
   >
     <div>
@@ -39,31 +39,31 @@ Array [
           }
         >
           <div
-            className="sc-bdnxRM bmfVZA cap-card"
+            className="sc-bcXGCL cidgwN cap-card"
             id="proposal-<Proposal-mock-id-2>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
             <div
-              className="sc-bdnxRM iWefQu"
+              className="sc-bcXGCL dWSxDH"
             >
               <div
-                className="sc-bdnxRM jrYySR"
+                className="sc-bcXGCL eInRiY"
               >
                 <div
-                  className="sc-bdnxRM iRwfor"
+                  className="sc-bcXGCL jkGtSa"
                 >
                   <div
-                    className="sc-bdnxRM leHKWD sc-fXazdy fmGqjI cap-tag"
+                    className="sc-bcXGCL dOmiK sc-fXqqsB gHWJqw cap-tag"
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;
                   </div>
                   <div
-                    className="sc-bdnxRM ewqWBY"
+                    className="sc-bcXGCL eIDLJl"
                   >
                     <svg
-                      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                       fill="none"
                       style={
                         Object {
@@ -90,17 +90,17 @@ Array [
                       />
                     </svg>
                     <span
-                      className="sc-bdnxRM cYARDV cap-text"
+                      className="sc-bcXGCL bdHBGk cap-text"
                       title="<mock-value-for-field-\\"name\\">"
                     >
                       &lt;mock-value-for-field-"name"&gt;
                     </span>
                   </div>
                   <div
-                    className="sc-bdnxRM ewqWBY"
+                    className="sc-bcXGCL eIDLJl"
                   >
                     <span
-                      className="sc-bdnxRM cYARDV cap-text"
+                      className="sc-bcXGCL bdHBGk cap-text"
                       style={
                         Object {
                           "marginLeft": 0,
@@ -118,30 +118,30 @@ Array [
                   onClick={[Function]}
                 >
                   <h3
-                    className="sc-bdnxRM hxcxCL cap-heading"
+                    className="sc-bcXGCL etgZSC cap-heading"
                   >
                     &lt;mock-value-for-field-"title"&gt;
                   </h3>
                   <div
-                    className="sc-bdnxRM eerSQ cap-text"
+                    className="sc-bcXGCL fjdPth cap-text"
                   >
                     &lt;mock-value-for-field-"summary"&gt;
                   </div>
                 </a>
                 <div
-                  className="sc-bdnxRM Evvok"
+                  className="sc-bcXGCL gMmiyl"
                 >
                   <div
-                    className="sc-bdnxRM lkiVWk"
+                    className="sc-bcXGCL eoRdhh"
                   >
                     <div
-                      className="sc-bdnxRM DwDmK"
+                      className="sc-bcXGCL zNZlr"
                     >
                       <button
                         aria-controls="popover-overlay"
                         aria-expanded={false}
                         aria-haspopup="dialog"
-                        className="sc-bdnxRM dxOXkI"
+                        className="sc-bcXGCL chhFoB"
                         disabled={false}
                         id="proposal-vote-button-<Proposal-mock-id-2>"
                         onClick={[Function]}
@@ -154,18 +154,18 @@ Array [
                         type="button"
                       >
                         <div
-                          className="sc-bdnxRM jKrcqA toggle-btn"
+                          className="sc-bcXGCL ixfmfF toggle-btn"
                         >
                           <span
-                            className="sc-bdnxRM eLfIMN cap-text"
+                            className="sc-bcXGCL dCtyrs cap-text"
                           >
                             global.vote.for
                           </span>
                           <div
-                            className="sc-bdnxRM rYDSf inner-circle"
+                            className="sc-bcXGCL CGGUK inner-circle"
                           >
                             <svg
-                              className="sc-bdnxRM sc-eJocfa zBqSO dUIXVZ cap-icon"
+                              className="sc-bcXGCL sc-eJDTud cKZjeH cpMilg cap-icon"
                               fill="none"
                               viewBox="0 0 20 19"
                               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +190,7 @@ Array [
                       </button>
                       <div
                         aria-label="vote.popover.title"
-                        className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
+                        className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
                         data-dialog={true}
                         hidden={true}
                         id="login-popover"
@@ -210,7 +210,7 @@ Array [
                         tabIndex={0}
                       >
                         <div
-                          className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+                          className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
                           style={
                             Object {
                               "auto": "100%",
@@ -240,18 +240,18 @@ Array [
                           </svg>
                         </div>
                         <div
-                          className="sc-bdnxRM htoMAJ"
+                          className="sc-bcXGCL jBLBwk"
                         >
                           <p
-                            className="sc-bdnxRM kUmORS cap-text"
+                            className="sc-bcXGCL eIjTDD cap-text"
                           >
                             vote.popover.title
                           </p>
                           <div
-                            className="sc-bdnxRM jaCxns"
+                            className="sc-bcXGCL jbmmEh"
                           >
                             <p
-                              className="sc-bdnxRM dNfCSD cap-text"
+                              className="sc-bcXGCL eVdTHW cap-text"
                               style={
                                 Object {
                                   "marginLeft": 0,
@@ -262,11 +262,11 @@ Array [
                               vote.popover.body
                             </p>
                             <span
-                              className="sc-bdnxRM hptjof"
+                              className="sc-breQAM dGgcIL"
                               clip="rect(0px, 0px, 0px, 0px)"
                             >
                               <button
-                                className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+                                className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
                                 onClick={[Function]}
                                 type="button"
                               >
@@ -292,13 +292,13 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bdnxRM MObqW"
+                      className="sc-bcXGCL tAhwr"
                     >
                       <div
-                        className="sc-bdnxRM bFLtGa"
+                        className="sc-bcXGCL hyYZCj"
                       >
                         <svg
-                          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                           fill="none"
                           style={
                             Object {
@@ -318,7 +318,7 @@ Array [
                           />
                         </svg>
                         <span
-                          className="sc-bdnxRM sHwtO cap-text"
+                          className="sc-bcXGCL ichMUL cap-text"
                         >
                           &lt;mock-value-for-field-"totalCount"&gt;
                         </span>
@@ -326,10 +326,10 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="sc-bdnxRM iRwWVh"
+                    className="sc-bcXGCL fIRSQ"
                   >
                     <svg
-                      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                       fill="none"
                       style={
                         Object {
@@ -355,7 +355,7 @@ Array [
                       />
                     </svg>
                     <span
-                      className="sc-bdnxRM sHwtO cap-text"
+                      className="sc-bcXGCL ichMUL cap-text"
                     >
                       &lt;mock-value-for-field-"displayName"&gt;
                     </span>
@@ -363,10 +363,10 @@ Array [
                 </div>
               </div>
               <div
-                className="sc-bdnxRM kxNXvw"
+                className="sc-bcXGCL hcvSPF"
               >
                 <div
-                  className="sc-bdnxRM enfYRc"
+                  className="sc-bcXGCL bIMaLd"
                 >
                   <a
                     href="/project///<mock-value-for-field-\\"slug\\">"
@@ -374,7 +374,7 @@ Array [
                   >
                     <img
                       alt="<mock-value-for-field-\\"name\\">"
-                      className="sc-bdnxRM lkWbVD"
+                      className="sc-breQAM ebpOIr"
                       loading="lazy"
                       sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                       srcSet="
@@ -402,25 +402,25 @@ Array [
 exports[`<ProposalsList /> <TestProposalsList /> should render correctly without images 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM isvuJP"
+    className="sc-bcXGCL dAOeNq"
     id="proposals-list"
   >
     <div>
@@ -438,31 +438,31 @@ Array [
           }
         >
           <div
-            className="sc-bdnxRM bmfVZA cap-card"
+            className="sc-bcXGCL cidgwN cap-card"
             id="proposal-<Proposal-mock-id-2>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
             <div
-              className="sc-bdnxRM iWefQu"
+              className="sc-bcXGCL dWSxDH"
             >
               <div
-                className="sc-bdnxRM WSLxe"
+                className="sc-bcXGCL leiYdD"
               >
                 <div
-                  className="sc-bdnxRM iRwfor"
+                  className="sc-bcXGCL jkGtSa"
                 >
                   <div
-                    className="sc-bdnxRM leHKWD sc-fXazdy fmGqjI cap-tag"
+                    className="sc-bcXGCL dOmiK sc-fXqqsB gHWJqw cap-tag"
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;
                   </div>
                   <div
-                    className="sc-bdnxRM ewqWBY"
+                    className="sc-bcXGCL eIDLJl"
                   >
                     <svg
-                      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                       fill="none"
                       style={
                         Object {
@@ -489,17 +489,17 @@ Array [
                       />
                     </svg>
                     <span
-                      className="sc-bdnxRM cYARDV cap-text"
+                      className="sc-bcXGCL bdHBGk cap-text"
                       title="<mock-value-for-field-\\"name\\">"
                     >
                       &lt;mock-value-for-field-"name"&gt;
                     </span>
                   </div>
                   <div
-                    className="sc-bdnxRM ewqWBY"
+                    className="sc-bcXGCL eIDLJl"
                   >
                     <span
-                      className="sc-bdnxRM cYARDV cap-text"
+                      className="sc-bcXGCL bdHBGk cap-text"
                       style={
                         Object {
                           "marginLeft": 0,
@@ -517,30 +517,30 @@ Array [
                   onClick={[Function]}
                 >
                   <h3
-                    className="sc-bdnxRM hxcxCL cap-heading"
+                    className="sc-bcXGCL etgZSC cap-heading"
                   >
                     &lt;mock-value-for-field-"title"&gt;
                   </h3>
                   <div
-                    className="sc-bdnxRM eerSQ cap-text"
+                    className="sc-bcXGCL fjdPth cap-text"
                   >
                     &lt;mock-value-for-field-"summary"&gt;
                   </div>
                 </a>
                 <div
-                  className="sc-bdnxRM Evvok"
+                  className="sc-bcXGCL gMmiyl"
                 >
                   <div
-                    className="sc-bdnxRM lkiVWk"
+                    className="sc-bcXGCL eoRdhh"
                   >
                     <div
-                      className="sc-bdnxRM DwDmK"
+                      className="sc-bcXGCL zNZlr"
                     >
                       <button
                         aria-controls="popover-overlay"
                         aria-expanded={false}
                         aria-haspopup="dialog"
-                        className="sc-bdnxRM dxOXkI"
+                        className="sc-bcXGCL chhFoB"
                         disabled={false}
                         id="proposal-vote-button-<Proposal-mock-id-2>"
                         onClick={[Function]}
@@ -553,18 +553,18 @@ Array [
                         type="button"
                       >
                         <div
-                          className="sc-bdnxRM jKrcqA toggle-btn"
+                          className="sc-bcXGCL ixfmfF toggle-btn"
                         >
                           <span
-                            className="sc-bdnxRM eLfIMN cap-text"
+                            className="sc-bcXGCL dCtyrs cap-text"
                           >
                             global.vote.for
                           </span>
                           <div
-                            className="sc-bdnxRM rYDSf inner-circle"
+                            className="sc-bcXGCL CGGUK inner-circle"
                           >
                             <svg
-                              className="sc-bdnxRM sc-eJocfa zBqSO dUIXVZ cap-icon"
+                              className="sc-bcXGCL sc-eJDTud cKZjeH cpMilg cap-icon"
                               fill="none"
                               viewBox="0 0 20 19"
                               xmlns="http://www.w3.org/2000/svg"
@@ -589,7 +589,7 @@ Array [
                       </button>
                       <div
                         aria-label="vote.popover.title"
-                        className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
+                        className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
                         data-dialog={true}
                         hidden={true}
                         id="login-popover"
@@ -609,7 +609,7 @@ Array [
                         tabIndex={0}
                       >
                         <div
-                          className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+                          className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
                           style={
                             Object {
                               "auto": "100%",
@@ -639,18 +639,18 @@ Array [
                           </svg>
                         </div>
                         <div
-                          className="sc-bdnxRM htoMAJ"
+                          className="sc-bcXGCL jBLBwk"
                         >
                           <p
-                            className="sc-bdnxRM kUmORS cap-text"
+                            className="sc-bcXGCL eIjTDD cap-text"
                           >
                             vote.popover.title
                           </p>
                           <div
-                            className="sc-bdnxRM jaCxns"
+                            className="sc-bcXGCL jbmmEh"
                           >
                             <p
-                              className="sc-bdnxRM dNfCSD cap-text"
+                              className="sc-bcXGCL eVdTHW cap-text"
                               style={
                                 Object {
                                   "marginLeft": 0,
@@ -661,11 +661,11 @@ Array [
                               vote.popover.body
                             </p>
                             <span
-                              className="sc-bdnxRM hptjof"
+                              className="sc-breQAM dGgcIL"
                               clip="rect(0px, 0px, 0px, 0px)"
                             >
                               <button
-                                className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+                                className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
                                 onClick={[Function]}
                                 type="button"
                               >
@@ -691,13 +691,13 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bdnxRM ccpbKG"
+                      className="sc-bcXGCL gRgNiP"
                     >
                       <div
-                        className="sc-bdnxRM bFLtGa"
+                        className="sc-bcXGCL hyYZCj"
                       >
                         <svg
-                          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                           fill="none"
                           style={
                             Object {
@@ -717,7 +717,7 @@ Array [
                           />
                         </svg>
                         <span
-                          className="sc-bdnxRM sHwtO cap-text"
+                          className="sc-bcXGCL ichMUL cap-text"
                         >
                           &lt;mock-value-for-field-"totalCount"&gt;
                         </span>
@@ -725,10 +725,10 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="sc-bdnxRM iRwWVh"
+                    className="sc-bcXGCL fIRSQ"
                   >
                     <svg
-                      className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
                       fill="none"
                       style={
                         Object {
@@ -754,7 +754,7 @@ Array [
                       />
                     </svg>
                     <span
-                      className="sc-bdnxRM sHwtO cap-text"
+                      className="sc-bcXGCL ichMUL cap-text"
                     >
                       &lt;mock-value-for-field-"displayName"&gt;
                     </span>

@@ -1,81 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LocateAndZoomControl /> should render correctly 1`] = `
-<div
-  data-testid="map"
->
+Array [
   <div
-    className="leaflet-top leaflet-right"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="map"
   >
     <div
-      className="leaflet-control"
+      className="leaflet-top leaflet-right"
     >
       <div
-        className="sc-bdnxRM fXHFXK"
+        className="leaflet-control"
       >
-        <button
-          className="sc-bdnxRM ewQzxq"
-          onClick={[Function]}
+        <div
+          className="sc-bcXGCL cdJeQF"
         >
-          <svg
-            className="sc-bdnxRM sc-eJocfa eZPlJD kuPXuU cap-icon"
-            fill="none"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            className="sc-bcXGCL gKlFSi"
+            onClick={[Function]}
           >
-            <path
-              d="M6 1v1.667M6 9.333V11M1 6h1.667M9.333 6H11M6 9.333a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666z"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
-            />
-            <path
-              d="M6 4.333a1.667 1.667 0 110 3.334 1.667 1.667 0 010-3.334z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
-        <button
-          className="sc-bdnxRM dUKYob"
-          onClick={[Function]}
-        >
-          <svg
-            className="sc-bdnxRM sc-eJocfa eZPlJD kuPXuU cap-icon"
-            fill="none"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 1v1.667M6 9.333V11M1 6h1.667M9.333 6H11M6 9.333a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+              <path
+                d="M6 4.333a1.667 1.667 0 110 3.334 1.667 1.667 0 010-3.334z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <button
+            className="sc-bcXGCL itjhrd"
+            onClick={[Function]}
           >
-            <path
-              d="M1 6h10M6 1v10"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
-            />
-          </svg>
-        </button>
-        <button
-          className="sc-bdnxRM eDoJOO"
-          onClick={[Function]}
-        >
-          <svg
-            className="sc-bdnxRM sc-eJocfa eZPlJD kuPXuU cap-icon"
-            fill="none"
-            viewBox="0 0 12 2"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 6h10M6 1v10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+          <button
+            className="sc-bcXGCL kFXhyi"
+            onClick={[Function]}
           >
-            <path
-              d="M1 1h10"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={0.8}
-            />
-          </svg>
-        </button>
+            <svg
+              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              fill="none"
+              viewBox="0 0 12 2"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1h10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

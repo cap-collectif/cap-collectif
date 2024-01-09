@@ -6,7 +6,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX laeJgQ"
+    className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -45,7 +45,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX laeJgQ"
+    className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -74,7 +74,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
+        className="sc-breQAM iqRiiI Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -83,7 +83,7 @@ Array [
         }
       >
         <div
-          className="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda"
+          className="sc-breQAM hOIBrM Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -92,43 +92,44 @@ Array [
           }
         >
           <header
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+            className="sc-breQAM Flex___StyledAppBox-SiGEY bWQpCu"
           >
             <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+              className="sc-breQAM Flex___StyledAppBox-SiGEY fLXUyd ModalHeader___StyledFlex-hKIJSk eRNTmy"
             >
               <p
-                className="sc-bdnxRM hXTLIU"
+                className="sc-breQAM juODjc"
               >
                 notification-email
               </p>
               <h2
-                className="sc-bdnxRM fenvOW"
+                className="sc-breQAM eHUpPC"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+              className="sc-breQAM Button__ButtonInner-dXfNcJ drSKjX iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+                className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ hLpMUH exKJSE AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+            className="sc-breQAM Flex___StyledAppBox-SiGEY amxUE"
           >
             <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX iozDfw ModalAddEmailSender__FieldContainer-dDjynM jGvvbL"
+              className="sc-breQAM Flex___StyledAppBox-SiGEY jgnOIc ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
             >
               <div
                 className="form-group"
               >
                 <label
-                  className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                  className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+                  hasImage={false}
                   htmlFor="email"
                   id="label-email"
                   type="label"
@@ -161,7 +162,8 @@ Array [
                   id="email-domain"
                 >
                   <div
-                    className="Select__SelectContainer-bqbDYn select-container"
+                    className="Select__SelectContainer-bqrvno select-container"
+                    hasButtonAfter={false}
                   >
                     <div
                       className="react-select-container css-2b097c-container"
@@ -284,20 +286,20 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+            className="sc-breQAM Flex___StyledAppBox-SiGEY cPblrQ"
           >
             <div
-              className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+              className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG gEtlaU"
             >
               <button
-                className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX guoZRU"
+                className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-bdnxRM Button__ButtonInner-dWPVNG fXAuOL kFclcg"
+                className="sc-breQAM Button__ButtonInner-dXfNcJ fAUWBj erDeRS"
                 onClick={[Function]}
                 type="button"
               >

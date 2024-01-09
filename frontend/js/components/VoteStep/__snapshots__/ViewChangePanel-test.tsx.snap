@@ -3,35 +3,35 @@
 exports[`<ViewChangePanel /> should render correctly on mobile 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM imjVxR"
+    className="sc-bcXGCL ioBqSU"
     id="view-change-panel"
   >
     <button
       aria-label="global.list"
-      className="sc-bdnxRM hooAiq"
+      className="sc-bcXGCL itsNKP"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa dOHRRe dUIXVZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud Qdvnv cpMilg cap-icon"
         fill="none"
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
@@ -73,16 +73,16 @@ Array [
       </svg>
     </button>
     <div
-      className="sc-bdnxRM ddAHpw"
+      className="sc-bcXGCL efFZF"
     />
     <button
       aria-label="global.card"
-      className="sc-bdnxRM ChioT"
+      className="sc-bcXGCL jLsbIK"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa dOHRRe dUIXVZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud Qdvnv cpMilg cap-icon"
         fill="none"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -104,17 +104,17 @@ Array [
       </svg>
     </button>
     <div
-      className="sc-bdnxRM ddAHpw"
+      className="sc-bcXGCL efFZF"
     />
     <button
       aria-label="project.votes.title"
-      className="sc-bdnxRM jiAVct"
+      className="sc-bcXGCL iGEcOY"
       disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa iaVuPM dUIXVZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud jeazSJ cpMilg cap-icon"
         fill="none"
         viewBox="0 0 20 19"
         xmlns="http://www.w3.org/2000/svg"
@@ -142,35 +142,35 @@ Array [
 exports[`<ViewChangePanel /> should render correctly on web 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM gigllu"
+    className="sc-bcXGCL gZgunv"
     id="view-change-panel"
   >
     <button
       aria-label="global.list"
-      className="sc-bdnxRM iCDwzQ"
+      className="sc-bcXGCL cjqTLZ"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa kGLuiq iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud kBCJhT hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
@@ -211,22 +211,22 @@ Array [
         />
       </svg>
       <span
-        className="sc-bdnxRM hJjDff cap-text"
+        className="sc-bcXGCL fTaPSa cap-text"
       >
         global.list
       </span>
     </button>
     <div
-      className="sc-bdnxRM ddAHpw"
+      className="sc-bcXGCL efFZF"
     />
     <button
       aria-label="global.card"
-      className="sc-bdnxRM jjRVZF"
+      className="sc-bcXGCL jeZNFw"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa kGLuiq iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud kBCJhT hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -247,23 +247,23 @@ Array [
         />
       </svg>
       <span
-        className="sc-bdnxRM hJjDff cap-text"
+        className="sc-bcXGCL fTaPSa cap-text"
       >
         global.card
       </span>
     </button>
     <div
-      className="sc-bdnxRM ddAHpw"
+      className="sc-bcXGCL efFZF"
     />
     <button
       aria-label="project.votes.title"
-      className="sc-bdnxRM iwLMGL"
+      className="sc-bcXGCL iSKaFW"
       disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa icQMhU iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud cnXBxh hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 20 19"
         xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +284,7 @@ Array [
         />
       </svg>
       <span
-        className="sc-bdnxRM kpNAOZ cap-text"
+        className="sc-bcXGCL dgjBXM cap-text"
       >
         project.votes.title
       </span>

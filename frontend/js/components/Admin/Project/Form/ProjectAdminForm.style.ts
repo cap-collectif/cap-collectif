@@ -41,7 +41,7 @@ export const BoxDeprecated: StyledComponent<any, {}, HTMLDivElement> = styled.di
     > span {
       margin-right: 5px;
 
-      :hover {
+      &:hover {
         text-decoration: underline;
       }
     }

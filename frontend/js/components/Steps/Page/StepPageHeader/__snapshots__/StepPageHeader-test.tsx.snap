@@ -2,7 +2,7 @@
 
 exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
 <div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
 >
   <h2
     className="h2"
@@ -23,10 +23,12 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
     </div>
   </div>
   <div
-    className="Card__Container-dKzlwP fosnBM card"
+    className="Card__Container-dJDICg iYLzKo card"
+    isHorizontal={false}
   >
     <div
-      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
+      maxLines={5}
     >
       <div
         className="step__intro"
@@ -58,7 +60,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
 
 exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
 <div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
 >
   <h2
     className="h2"
@@ -79,10 +81,12 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
     </div>
   </div>
   <div
-    className="Card__Container-dKzlwP fosnBM card"
+    className="Card__Container-dJDICg iYLzKo card"
+    isHorizontal={false}
   >
     <div
-      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
+      maxLines={5}
     >
       <div
         className="step__intro"
@@ -114,7 +118,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
 
 exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
 <div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
 >
   <h2
     className="h2"
@@ -135,10 +139,12 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
     </div>
   </div>
   <div
-    className="Card__Container-dKzlwP fosnBM card"
+    className="Card__Container-dJDICg iYLzKo card"
+    isHorizontal={false}
   >
     <div
-      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
+      maxLines={5}
     >
       <div
         className="step__intro"
@@ -170,7 +176,7 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
 
 exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
 <div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
 >
   <h2
     className="h2"
@@ -191,10 +197,12 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
     </div>
   </div>
   <div
-    className="Card__Container-dKzlwP fosnBM card"
+    className="Card__Container-dJDICg iYLzKo card"
+    isHorizontal={false}
   >
     <div
-      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
+      maxLines={5}
     >
       <div
         className="step__intro"
@@ -226,7 +234,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
 
 exports[`<StepPageHeader /> should render correctly a selectionStep with interpellation 1`] = `
 <div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTJUuc denA-DI"
+  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
 >
   <h2
     className="h2"
@@ -247,10 +255,12 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
     </div>
   </div>
   <div
-    className="Card__Container-dKzlwP fosnBM card"
+    className="Card__Container-dJDICg iYLzKo card"
+    isHorizontal={false}
   >
     <div
-      className="Body-jQnOas BodyInfos__CardBodyInfos-Ubnyg bbuThy jOXmws card__body body__infos--body"
+      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
+      maxLines={5}
     >
       <div
         className="step__intro"

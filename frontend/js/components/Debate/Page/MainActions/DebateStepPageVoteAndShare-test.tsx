@@ -56,6 +56,7 @@ describe('<DebateStepPageVoteAndShare/>', () => {
         store={{
           user: normalUser,
         }}
+        useCapUIProvider
       >
         <DebateStepPageVoteAndShare {...props.basic} />
       </MockProviders>,
@@ -68,6 +69,7 @@ describe('<DebateStepPageVoteAndShare/>', () => {
         store={{
           user: normalUser,
         }}
+        useCapUIProvider
       >
         <DebateStepPageVoteAndShare {...props.onMobile} />
       </MockProviders>,
@@ -80,6 +82,7 @@ describe('<DebateStepPageVoteAndShare/>', () => {
         store={{
           user: nonConfirmedUser,
         }}
+        useCapUIProvider
       >
         <DebateStepPageVoteAndShare {...props.basic} />
       </MockProviders>,
@@ -94,6 +97,7 @@ describe('<DebateStepPageVoteAndShare/>', () => {
             user: null,
           },
         }}
+        useCapUIProvider
       >
         <DebateStepPageVoteAndShare {...props.isAnonymousParticipationAllowed} />
       </MockProviders>,

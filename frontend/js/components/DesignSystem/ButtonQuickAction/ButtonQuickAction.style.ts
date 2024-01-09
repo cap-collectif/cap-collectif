@@ -4,7 +4,7 @@ import colors from '~/styles/modules/colors'
 const styles = {
   primary: {
     outline: 'none',
-    ':hover': {
+    '&:hover': {
       backgroundColor: colors.blue['150'],
       '.icon': {
         color: colors.blue['500'],
@@ -19,7 +19,7 @@ const styles = {
   },
   danger: {
     outline: 'none',
-    ':hover': {
+    '&:hover': {
       backgroundColor: colors.red['150'],
       '.icon': {
         color: colors.red['500'],
@@ -34,7 +34,7 @@ const styles = {
   },
   green: {
     outline: 'none',
-    ':hover': {
+    '&:hover': {
       backgroundColor: colors.green['150'],
       '.icon': {
         color: colors.green['500'],

@@ -49,7 +49,7 @@ describe('<CommentInfos />', () => {
     }
 
     TestCommentInfos = componentProps => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
       </RelaySuspensFragmentTest>
     )

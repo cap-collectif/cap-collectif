@@ -7,7 +7,7 @@ import MockProviders from '~/testUtils'
 describe('<EmptyList />', () => {
   it('should render correctly', () => {
     const testComponentTree = ReactTestRenderer.create(
-      <MockProviders>
+      <MockProviders useCapUIProvider>
         <EmptyList />
       </MockProviders>,
     )

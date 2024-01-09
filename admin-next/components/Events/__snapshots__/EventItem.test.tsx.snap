@@ -3,25 +3,25 @@
 exports[`<EventItem /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -29,14 +29,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
     >
       GrenobleWeb2015
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -44,21 +44,21 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
       >
         Croissance, innovation, disruption
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       />
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -66,7 +66,7 @@ Array [
     }
   >
     <p
-      className="sc-bdnxRM cyLHrE cap-text"
+      className="sc-bcXGCL JgMzh cap-text"
     >
       10/06/2032
        
@@ -76,7 +76,7 @@ Array [
     </p>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -84,14 +84,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -101,7 +101,7 @@ Array [
     03/01/2015
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -109,12 +109,12 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM junMSj"
+      className="sc-bcXGCL rtTxe"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.download"
-        className="sc-bdnxRM cefOTL cap-buttonQuickAction"
+        className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
         href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onBlur={[Function]}
         onClick={[Function]}
@@ -124,7 +124,7 @@ Array [
         tabIndex={0}
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -163,25 +163,25 @@ Array [
 exports[`<EventItem /> should render correctly with deleted event 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -189,14 +189,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
     >
       GrenobleWeb2015
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -204,21 +204,21 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
       >
         Croissance, innovation, disruption
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       />
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -226,7 +226,7 @@ Array [
     }
   >
     <p
-      className="sc-bdnxRM cyLHrE cap-text"
+      className="sc-bcXGCL JgMzh cap-text"
     >
       10/06/2032
        
@@ -236,7 +236,7 @@ Array [
     </p>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -244,14 +244,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -261,7 +261,7 @@ Array [
     03/01/2015
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -269,12 +269,12 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM junMSj"
+      className="sc-bcXGCL rtTxe"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.download"
-        className="sc-bdnxRM cefOTL cap-buttonQuickAction"
+        className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
         href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onBlur={[Function]}
         onClick={[Function]}
@@ -284,7 +284,7 @@ Array [
         tabIndex={0}
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

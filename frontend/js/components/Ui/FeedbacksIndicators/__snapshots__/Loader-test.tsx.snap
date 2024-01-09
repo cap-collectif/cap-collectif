@@ -39,9 +39,6 @@ exports[`<Loader /> renders Loader with a white color 1`] = `
 exports[`<Loader /> renders LoaderContainer 1`] = `
 .c0 {
   text-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   padding-top: 50px;
   padding-bottom: 30px;

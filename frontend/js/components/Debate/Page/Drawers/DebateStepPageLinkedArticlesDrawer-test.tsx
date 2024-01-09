@@ -76,7 +76,7 @@ describe('<DebateStepPageLinkedArticlesDrawer />', () => {
     }
 
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
@@ -97,7 +97,8 @@ describe('<DebateStepPageLinkedArticlesDrawer />', () => {
     }
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, emptyMockResolvers))
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toEqual(null)
+    // Length 6 for the toast container
+    expect(testComponentTree.toJSON()).toHaveLength(6)
   })
   it('should render nothing when API could not load articles', async () => {
     const erroredMockResolvers = {
@@ -109,10 +110,10 @@ describe('<DebateStepPageLinkedArticlesDrawer />', () => {
     }
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, erroredMockResolvers))
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toEqual(null)
+    expect(testComponentTree.toJSON()).toHaveLength(6)
   })
   it('should render nothing when closed', async () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toEqual(null)
+    expect(testComponentTree.toJSON()).toHaveLength(6)
   })
 })

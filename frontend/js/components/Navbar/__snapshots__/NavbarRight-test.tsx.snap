@@ -33,9 +33,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           },
         ],
         "componentStyle": e {
-          "baseHash": -861558889,
+          "baseHash": 1786445520,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-ckofMh",
+          "componentId": "styles__DropdownToggle-cljIGO",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}padding:8px 16px;",
@@ -48,17 +48,15 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-ckofMh",
+        "styledComponentId": "styles__DropdownToggle-cljIGO",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -208,9 +206,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           },
         ],
         "componentStyle": e {
-          "baseHash": -1788907091,
+          "baseHash": -647725488,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-OiPbk",
+          "componentId": "styles__DropdownMenu-PerVT",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -221,17 +219,15 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-OiPbk",
+        "styledComponentId": "styles__DropdownMenu-PerVT",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -327,9 +323,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -344,14 +340,12 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -453,9 +447,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -470,14 +464,12 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -579,23 +571,21 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1071551424,
+            "baseHash": 2055268417,
             "baseStyle": undefined,
-            "componentId": "styles__Separator-hGLvdV",
+            "componentId": "styles__Separator-hGvDOS",
             "isStatic": false,
             "rules": Array [
               "margin:10px 0;border:1px solid #e3e3e3;width:100%;",
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__Separator-hGLvdV",
+          "styledComponentId": "styles__Separator-hGvDOS",
           "target": "hr",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -690,9 +680,9 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -707,14 +697,12 @@ exports[`<NavbarRight /> should render when authenticated 1`] = `
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -830,9 +818,9 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           },
         ],
         "componentStyle": e {
-          "baseHash": -861558889,
+          "baseHash": 1786445520,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-ckofMh",
+          "componentId": "styles__DropdownToggle-cljIGO",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}padding:8px 16px;",
@@ -845,17 +833,15 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-ckofMh",
+        "styledComponentId": "styles__DropdownToggle-cljIGO",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -1005,9 +991,9 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           },
         ],
         "componentStyle": e {
-          "baseHash": -1788907091,
+          "baseHash": -647725488,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-OiPbk",
+          "componentId": "styles__DropdownMenu-PerVT",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -1018,17 +1004,15 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-OiPbk",
+        "styledComponentId": "styles__DropdownMenu-PerVT",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -1124,9 +1108,9 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -1141,14 +1125,12 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -1250,9 +1232,9 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -1267,14 +1249,12 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -1376,23 +1356,21 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1071551424,
+            "baseHash": 2055268417,
             "baseStyle": undefined,
-            "componentId": "styles__Separator-hGLvdV",
+            "componentId": "styles__Separator-hGvDOS",
             "isStatic": false,
             "rules": Array [
               "margin:10px 0;border:1px solid #e3e3e3;width:100%;",
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__Separator-hGLvdV",
+          "styledComponentId": "styles__Separator-hGvDOS",
           "target": "hr",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -1487,9 +1465,9 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -1504,14 +1482,12 @@ exports[`<NavbarRight /> should render with an admin link when user is a project
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -1627,9 +1603,9 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           },
         ],
         "componentStyle": e {
-          "baseHash": -861558889,
+          "baseHash": 1786445520,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-ckofMh",
+          "componentId": "styles__DropdownToggle-cljIGO",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}padding:8px 16px;",
@@ -1642,17 +1618,15 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-ckofMh",
+        "styledComponentId": "styles__DropdownToggle-cljIGO",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -1802,9 +1776,9 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           },
         ],
         "componentStyle": e {
-          "baseHash": -1788907091,
+          "baseHash": -647725488,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-OiPbk",
+          "componentId": "styles__DropdownMenu-PerVT",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -1815,17 +1789,15 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-OiPbk",
+        "styledComponentId": "styles__DropdownMenu-PerVT",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -1921,9 +1893,9 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -1938,14 +1910,12 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2047,9 +2017,9 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -2064,14 +2034,12 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2173,23 +2141,21 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1071551424,
+            "baseHash": 2055268417,
             "baseStyle": undefined,
-            "componentId": "styles__Separator-hGLvdV",
+            "componentId": "styles__Separator-hGvDOS",
             "isStatic": false,
             "rules": Array [
               "margin:10px 0;border:1px solid #e3e3e3;width:100%;",
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__Separator-hGLvdV",
+          "styledComponentId": "styles__Separator-hGvDOS",
           "target": "hr",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2284,9 +2250,9 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -2301,14 +2267,12 @@ exports[`<NavbarRight /> should render with an admin link when user is member of
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2424,9 +2388,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           },
         ],
         "componentStyle": e {
-          "baseHash": -861558889,
+          "baseHash": 1786445520,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownToggle-ckofMh",
+          "componentId": "styles__DropdownToggle-cljIGO",
           "isStatic": false,
           "rules": Array [
             ".caret{margin-left:5px;}padding:8px 16px;",
@@ -2439,17 +2403,15 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownToggle-ckofMh",
+        "styledComponentId": "styles__DropdownToggle-cljIGO",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -2599,9 +2561,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           },
         ],
         "componentStyle": e {
-          "baseHash": -1788907091,
+          "baseHash": -647725488,
           "baseStyle": undefined,
-          "componentId": "styles__DropdownMenu-OiPbk",
+          "componentId": "styles__DropdownMenu-PerVT",
           "isStatic": false,
           "rules": Array [
             "border-radius:0 0 4px 4px;background-color:",
@@ -2612,17 +2574,15 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           ],
           "staticRulesId": "",
         },
-        "foldedComponentIds": Array [],
+        "foldedComponentIds": "",
         "render": [Function],
         "shouldForwardProp": undefined,
-        "styledComponentId": "styles__DropdownMenu-OiPbk",
+        "styledComponentId": "styles__DropdownMenu-PerVT",
         "target": Object {
           "$$typeof": Symbol(react.forward_ref),
           "render": [Function],
         },
-        "toString": [Function],
         "warnTooManyClasses": [Function],
-        "withComponent": [Function],
       }
     }
     baseId="mock"
@@ -2718,9 +2678,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -2735,14 +2695,12 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2844,9 +2802,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -2861,14 +2819,12 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -2970,9 +2926,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -2987,14 +2943,12 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -3096,23 +3050,21 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1071551424,
+            "baseHash": 2055268417,
             "baseStyle": undefined,
-            "componentId": "styles__Separator-hGLvdV",
+            "componentId": "styles__Separator-hGvDOS",
             "isStatic": false,
             "rules": Array [
               "margin:10px 0;border:1px solid #e3e3e3;width:100%;",
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__Separator-hGLvdV",
+          "styledComponentId": "styles__Separator-hGvDOS",
           "target": "hr",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"
@@ -3207,9 +3159,9 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
           "$$typeof": Symbol(react.forward_ref),
           "attrs": Array [],
           "componentStyle": e {
-            "baseHash": -1015264920,
+            "baseHash": 1817096034,
             "baseStyle": undefined,
-            "componentId": "styles__TabsLink-eEYuCY",
+            "componentId": "styles__TabsLink-eEIDnX",
             "isStatic": false,
             "rules": Array [
               "color:",
@@ -3224,14 +3176,12 @@ exports[`<NavbarRight /> should render with profile even with SSO for IDF 1`] = 
             ],
             "staticRulesId": "",
           },
-          "foldedComponentIds": Array [],
+          "foldedComponentIds": "",
           "render": [Function],
           "shouldForwardProp": undefined,
-          "styledComponentId": "styles__TabsLink-eEYuCY",
+          "styledComponentId": "styles__TabsLink-eEIDnX",
           "target": "a",
-          "toString": [Function],
           "warnTooManyClasses": [Function],
-          "withComponent": [Function],
         }
       }
       baseId="mock"

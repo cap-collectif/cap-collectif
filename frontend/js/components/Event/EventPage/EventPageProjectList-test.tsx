@@ -132,7 +132,7 @@ describe('<EventPageProjectList />', () => {
     }
 
     TestEventPageProjectList = () => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer queryVariables={queryVariables} />
       </RelaySuspensFragmentTest>
     )

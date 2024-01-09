@@ -43,7 +43,7 @@ describe('<EventModerationMotive />', () => {
     }
 
     TestEventModerationMotive = () => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer queryVariables={queryVariables} />
       </RelaySuspensFragmentTest>
     )

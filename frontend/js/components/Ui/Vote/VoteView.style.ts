@@ -123,7 +123,7 @@ export const Container = styled.div<{
         border-radius: 50px;
         ${left > 10 &&
         css`
-          :not(.reverse) {
+          &:not(.reverse) {
             animation: ${bubble('left', 20)} 0.75s ease-in-out;
             animation-fill-mode: both;
 

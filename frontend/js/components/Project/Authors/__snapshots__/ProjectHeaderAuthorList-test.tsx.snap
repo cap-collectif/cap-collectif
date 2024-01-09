@@ -3,6 +3,24 @@
 exports[`<ProjectHeaderAuthorList /> renders correctly with one author 1`] = `
 Array [
   <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
     aria-label="project.authors"
     aria-modal={true}
     data-dialog={true}
@@ -21,10 +39,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM fhbsqI"
+    className="sc-bcXGCL uaeZr"
   >
     <div
-      className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -35,24 +53,24 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
         >
           a
         </div>
       </div>
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
           title="welcomattic"
         >
           <img
             alt="welcomattic"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             style={
               Object {
@@ -65,7 +83,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM ifbFlZ cap-text platform__body"
+      className="sc-bcXGCL hFnnay cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -78,6 +96,24 @@ Array [
 exports[`<ProjectHeaderAuthorList /> renders correctly with two authors but profiles are disabled 1`] = `
 Array [
   <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
     aria-label="project.authors"
     aria-modal={true}
     data-dialog={true}
@@ -96,10 +132,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM fhbsqI"
+    className="sc-bcXGCL uaeZr"
   >
     <div
-      className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -110,24 +146,24 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
         >
           a
         </div>
       </div>
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
           title="welcomattic"
         >
           <img
             alt="welcomattic"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             style={
               Object {
@@ -140,7 +176,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM ifbFlZ cap-text platform__body"
+      className="sc-bcXGCL hFnnay cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -153,6 +189,24 @@ Array [
 exports[`<ProjectHeaderAuthorList /> renders correctly without authors 1`] = `
 Array [
   <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
     aria-label="project.authors"
     aria-modal={true}
     data-dialog={true}
@@ -171,10 +225,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM fhbsqI"
+    className="sc-bcXGCL uaeZr"
   >
     <div
-      className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -185,24 +239,24 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
         >
           a
         </div>
       </div>
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
           title="welcomattic"
         >
           <img
             alt="welcomattic"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             style={
               Object {
@@ -215,7 +269,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM ifbFlZ cap-text platform__body"
+      className="sc-bcXGCL hFnnay cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -228,6 +282,24 @@ Array [
 exports[`<ProjectHeaderAuthorList /> should render correctly 1`] = `
 Array [
   <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
     aria-label="project.authors"
     aria-modal={true}
     data-dialog={true}
@@ -246,10 +318,10 @@ Array [
     tabIndex={-1}
   />,
   <div
-    className="sc-bdnxRM fhbsqI"
+    className="sc-bcXGCL uaeZr"
   >
     <div
-      className="sc-bdnxRM bWuIsU cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -260,24 +332,24 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
         >
           a
         </div>
       </div>
       <div
-        className="sc-bdnxRM iBUlEp"
+        className="sc-bcXGCL kVLtqA"
       >
         <div
-          className="sc-bdnxRM gGtZSq sc-ckTSus gtiRfi cap-avatar"
+          className="sc-bcXGCL iqSnjs sc-ckEbfr gIIayp cap-avatar"
           title="welcomattic"
         >
           <img
             alt="welcomattic"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             style={
               Object {
@@ -290,7 +362,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bdnxRM ifbFlZ cap-text platform__body"
+      className="sc-bcXGCL hFnnay cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >

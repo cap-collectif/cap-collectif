@@ -2,13 +2,31 @@
 
 exports[`<EventQuickActions /> should render correctly with the right conditions 1`] = `
 Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
   <button
     aria-controls="id-g"
     aria-describedby="id-g"
     aria-expanded={false}
     aria-haspopup="menu"
     aria-label="global.plus"
-    className="sc-bdnxRM euyNTt cap-buttonQuickAction cap-menu__disclosure"
+    className="sc-bcXGCL ZTkTc cap-buttonQuickAction cap-menu__disclosure"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -24,7 +42,7 @@ Array [
     type="button"
   >
     <svg
-      className="sc-bdnxRM sc-eJocfa eapaKB kuPXuU cap-icon"
+      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
       fill="currentColor"
       viewBox="0 0 12 4"
       xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +72,7 @@ Array [
   />,
   <div
     aria-orientation="vertical"
-    className="sc-bdnxRM fjLEpq sc-fcmMJX cap-menu__list cap-menu__list"
+    className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -71,7 +89,7 @@ Array [
     tabIndex={-1}
   >
     <div
-      className="sc-bdnxRM gmUple cap-menu__item"
+      className="sc-bcXGCL gVhzXF cap-menu__item"
       id="download-event-registration"
       loop={false}
       onClick={[Function]}
@@ -80,7 +98,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdnxRM ipdWIi cap-text"
+        className="sc-bcXGCL Ebxhi cap-text"
       >
          
         export-registered
@@ -91,7 +109,7 @@ Array [
       aria-controls="id-g"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM gmUple cap-menu__item"
+      className="sc-bcXGCL gVhzXF cap-menu__item"
       loop={false}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -105,7 +123,7 @@ Array [
       wrap={false}
     >
       <p
-        className="sc-bdnxRM ipdWIi cap-text"
+        className="sc-bcXGCL Ebxhi cap-text"
       >
          
         global.delete
@@ -133,4 +151,25 @@ Array [
 ]
 `;
 
-exports[`<EventQuickActions /> should return nothing with the right conditions 1`] = `null`;
+exports[`<EventQuickActions /> should return nothing with the right conditions 1`] = `
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+]
+`;

@@ -2,19 +2,19 @@
 
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render facebook sso button 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX hsmwud UserInvitationSSOPagestyle__Container-dqcskM gfEZSl"
+  className="sc-breQAM Flex___StyledAppBox-SiGEY juLXdh UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDOTRG UserInvitationSSOPagestyle__LeftSide-hxTIJT jXeXli"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY ekOETO UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
   >
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kkRZix UserInvitationSSOPagestyle__LeftSideInner-jdiSwF kBWVTx"
+      className="sc-breQAM Flex___StyledAppBox-SiGEY hInvt UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
     >
       <div
-        className="sc-bdnxRM UserInvitationSSOPagestyle__WelcomeMessage-hsrIYq flMSnR eyOJtW"
+        className="sc-breQAM UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ DaYtt dPMeBO"
       >
         <h2
-          className="sc-bdnxRM hdEyrP"
+          className="sc-breQAM bbScrj"
         >
           global-welcome
            
@@ -26,16 +26,16 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
           </span>
         </h2>
         <p
-          className="sc-bdnxRM cbhbJF"
+          className="sc-breQAM ipZRBF"
         >
           invite-join-platform
         </p>
       </div>
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fitFXx UserInvitationSSOPagestyle__ButtonsContainer-ekelIt knVuOM"
+        className="sc-breQAM Flex___StyledAppBox-SiGEY ksdEhV UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
       >
         <div
-          className="SSOButtonstyle__LinkButton-inldgY dvVgld"
+          className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
           type="facebook"
         >
           <span
@@ -69,23 +69,23 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
           </a>
         </div>
         <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX eEoMPv"
+          className="sc-breQAM Flex___StyledAppBox-SiGEY bALgQH"
         >
           <div
-            className="sc-bdnxRM UserInvitationSSOPagestyle__Line-eDQTMF fSxcQx eKkebp"
+            className="sc-breQAM UserInvitationSSOPagestyle__Line-eEMwHm iQqRTR hPTlau"
           />
           <p
-            className="sc-bdnxRM eaTeCp"
+            className="sc-breQAM bIETvR"
           >
             global-or
           </p>
           <div
-            className="sc-bdnxRM UserInvitationSSOPagestyle__Line-eDQTMF fSxcQx eKkebp"
+            className="sc-breQAM UserInvitationSSOPagestyle__Line-eEMwHm iQqRTR hPTlau"
           />
         </div>
         <a
           backgroundColor="green"
-          className="SSOButtonstyle__BaseButton-dfBTRJ SSOButtonstyle__PrimarySSOButton-fjCAej bEDTed hTYcqt"
+          className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
           href="/?token=onishan"
           onClick={[Function]}
           textColor="white"
@@ -96,14 +96,14 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
     </div>
   </div>
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX egROXr UserInvitationSSOPagestyle__RigthSide-icSZSY ggEWDE"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY rgwFz UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
   >
     <div
-      className="UserInvitationPagestyle__Symbols-eeCpyJ jvTyqS"
+      className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
     />
     <img
       alt=""
-      className="UserInvitationSSOPagestyle__Logo-ismXzE hJrHso"
+      className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
       src="/logo"
     />
   </div>
@@ -112,19 +112,19 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
 
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX hsmwud UserInvitationSSOPagestyle__Container-dqcskM gfEZSl"
+  className="sc-breQAM Flex___StyledAppBox-SiGEY juLXdh UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX kDOTRG UserInvitationSSOPagestyle__LeftSide-hxTIJT jXeXli"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY ekOETO UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
   >
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX kkRZix UserInvitationSSOPagestyle__LeftSideInner-jdiSwF kBWVTx"
+      className="sc-breQAM Flex___StyledAppBox-SiGEY hInvt UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
     >
       <div
-        className="sc-bdnxRM UserInvitationSSOPagestyle__WelcomeMessage-hsrIYq flMSnR eyOJtW"
+        className="sc-breQAM UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ DaYtt dPMeBO"
       >
         <h2
-          className="sc-bdnxRM hdEyrP"
+          className="sc-breQAM bbScrj"
         >
           global-welcome
            
@@ -136,19 +136,19 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
           </span>
         </h2>
         <p
-          className="sc-bdnxRM cbhbJF"
+          className="sc-breQAM ipZRBF"
         >
           invite-join-platform
         </p>
       </div>
       <div
-        className="sc-bdnxRM Flex___StyledAppBox-RSPpX fitFXx UserInvitationSSOPagestyle__ButtonsContainer-ekelIt knVuOM"
+        className="sc-breQAM Flex___StyledAppBox-SiGEY ksdEhV UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
       >
         <div
-          className="SSOButtonstyle__FranceConnectButton-iJkBJn jDFPkc"
+          className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
         >
           <a
-            className="sc-bdnxRM Link__LinkInner-jUwnjy kZFksl jnxQhY"
+            className="sc-breQAM Link__LinkInner-jUMeyB fUcvMl jQFfTS"
             href="/login/franceconnect?_destination=http://localhost"
             target="_blank"
           >
@@ -174,23 +174,23 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
           </a>
         </div>
         <div
-          className="sc-bdnxRM Flex___StyledAppBox-RSPpX eEoMPv"
+          className="sc-breQAM Flex___StyledAppBox-SiGEY bALgQH"
         >
           <div
-            className="sc-bdnxRM UserInvitationSSOPagestyle__Line-eDQTMF fSxcQx eKkebp"
+            className="sc-breQAM UserInvitationSSOPagestyle__Line-eEMwHm iQqRTR hPTlau"
           />
           <p
-            className="sc-bdnxRM eaTeCp"
+            className="sc-breQAM bIETvR"
           >
             global-or
           </p>
           <div
-            className="sc-bdnxRM UserInvitationSSOPagestyle__Line-eDQTMF fSxcQx eKkebp"
+            className="sc-breQAM UserInvitationSSOPagestyle__Line-eEMwHm iQqRTR hPTlau"
           />
         </div>
         <a
           backgroundColor="green"
-          className="SSOButtonstyle__BaseButton-dfBTRJ SSOButtonstyle__PrimarySSOButton-fjCAej bEDTed hTYcqt"
+          className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
           href="/?token=onishan"
           onClick={[Function]}
           textColor="white"
@@ -201,14 +201,14 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
     </div>
   </div>
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX egROXr UserInvitationSSOPagestyle__RigthSide-icSZSY ggEWDE"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY rgwFz UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
   >
     <div
-      className="UserInvitationPagestyle__Symbols-eeCpyJ jvTyqS"
+      className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
     />
     <img
       alt=""
-      className="UserInvitationSSOPagestyle__Logo-ismXzE hJrHso"
+      className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
       src="/logo"
     />
   </div>

@@ -3,62 +3,62 @@
 exports[`<ProposalMapSelectedView /> <TestProposalMapSelectedView /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM hDVCKG"
+    className="sc-bcXGCL bWSuLt"
     onTouchEnd={[Function]}
     onTouchStart={[Function]}
   >
     <div
-      className="sc-bdnxRM egisTH"
+      className="sc-bcXGCL gwIacT"
     >
       <div
-        className="sc-bdnxRM bTpObR"
+        className="sc-bcXGCL chpKhi"
       />
     </div>
     <div
-      className="sc-bdnxRM erLbUX"
+      className="sc-bcXGCL dTkjmI"
     >
       <a
         href="/project///votez-pour-vos-projets"
         onClick={[Function]}
       >
         <h3
-          className="sc-bdnxRM jnAIAL cap-heading"
+          className="sc-bcXGCL eXsKFZ cap-heading"
           title="Votez pour vos projets favoris"
         >
           Votez pour vos projets favoris
         </h3>
         <div
-          className="sc-bdnxRM erJTop cap-text"
+          className="sc-bcXGCL dyxqmw cap-text"
         >
           Lorem ipsum
         </div>
       </a>
       <div
-        className="sc-bdnxRM fSQvmr"
+        className="sc-bcXGCL jTfoOu"
       >
         <div
-          className="sc-bdnxRM coOJDN"
+          className="sc-bcXGCL hWQjMp"
         >
           <div
-            className="sc-bdnxRM WOGgK sc-ckTSus jixKkK cap-avatar"
+            className="sc-bcXGCL fDbJpC sc-ckEbfr hRjurn cap-avatar"
             style={
               Object {
                 "marginLeft": 0,
@@ -69,7 +69,7 @@ Array [
           >
             <img
               alt="Jane Doe"
-              className="sc-bdnxRM jVCZhC"
+              className="sc-bcXGCL exSVBv"
               src="profile_pic.jpg"
               style={
                 Object {
@@ -80,22 +80,22 @@ Array [
             />
           </div>
           <span
-            className="sc-bdnxRM cYARDV cap-text"
+            className="sc-bcXGCL DXWTn cap-text"
           >
             Jane Doe
           </span>
         </div>
         <div
-          className="sc-bdnxRM hfMttE"
+          className="sc-bcXGCL fWIBtd"
         >
           <div
-            className="sc-bdnxRM DwDmK"
+            className="sc-bcXGCL zNZlr"
           >
             <button
               aria-controls="popover-overlay"
               aria-expanded={false}
               aria-haspopup="dialog"
-              className="sc-bdnxRM dxOXkI"
+              className="sc-bcXGCL iiyonT"
               disabled={false}
               id="proposal-vote-button-<default>"
               onClick={[Function]}
@@ -108,18 +108,18 @@ Array [
               type="button"
             >
               <div
-                className="sc-bdnxRM jKrcqA toggle-btn"
+                className="sc-bcXGCL bTRcoP toggle-btn"
               >
                 <span
-                  className="sc-bdnxRM eLfIMN cap-text"
+                  className="sc-bcXGCL lhkxEe cap-text"
                 >
                   global.vote.for
                 </span>
                 <div
-                  className="sc-bdnxRM rYDSf inner-circle"
+                  className="sc-bcXGCL hsPVvy inner-circle"
                 >
                   <svg
-                    className="sc-bdnxRM sc-eJocfa zBqSO dUIXVZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud kOPfUz hRSbNM cap-icon"
                     fill="none"
                     viewBox="0 0 20 19"
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@ Array [
             </button>
             <div
               aria-label="vote.popover.title"
-              className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr gA-dolT ehiDfV"
+              className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
               data-dialog={true}
               hidden={true}
               id="login-popover"
@@ -164,7 +164,7 @@ Array [
               tabIndex={0}
             >
               <div
-                className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+                className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
                 style={
                   Object {
                     "auto": "100%",
@@ -194,18 +194,18 @@ Array [
                 </svg>
               </div>
               <div
-                className="sc-bdnxRM htoMAJ"
+                className="sc-bcXGCL jBLBwk"
               >
                 <p
-                  className="sc-bdnxRM kUmORS cap-text"
+                  className="sc-bcXGCL crCcjN cap-text"
                 >
                   vote.popover.title
                 </p>
                 <div
-                  className="sc-bdnxRM jaCxns"
+                  className="sc-bcXGCL jkDxUv"
                 >
                   <p
-                    className="sc-bdnxRM dNfCSD cap-text"
+                    className="sc-bcXGCL kDshYM cap-text"
                     style={
                       Object {
                         "marginLeft": 0,
@@ -216,11 +216,11 @@ Array [
                     vote.popover.body
                   </p>
                   <span
-                    className="sc-bdnxRM hptjof"
+                    className="sc-breQAM dGgcIL"
                     clip="rect(0px, 0px, 0px, 0px)"
                   >
                     <button
-                      className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+                      className="sc-bcXGCL sc-laZSpB eIQCcq kmqqqs cap-button"
                       onClick={[Function]}
                       type="button"
                     >

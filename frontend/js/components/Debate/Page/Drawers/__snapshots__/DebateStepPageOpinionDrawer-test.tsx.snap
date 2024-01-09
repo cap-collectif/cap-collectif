@@ -1,207 +1,247 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1`] = `
-<div
-  data-testid="AnimatePresence"
->
+Array [
   <div
-    className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-    style={
-      Object {
-        "opacity": 0,
-        "transform": "translateX(100vw) translateZ(0)",
-      }
-    }
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM dGfmSu"
-      onClose={[MockFunction]}
+      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateX(100vw) translateZ(0)",
+        }
+      }
     >
-      <svg
-        className="sc-bdnxRM sc-eJocfa hLuWnh MmfJJ cap-icon detail__drawer--back-arow"
-        fill="none"
-        onClick={[MockFunction]}
-        viewBox="0 0 12 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-        />
-      </svg>
       <div
-        className="sc-bdnxRM gpfrak"
+        className="sc-bcXGCL dtHJDj"
+        onClose={[MockFunction]}
       >
-        <div
-          className="sc-bdnxRM cvgdpa sc-ckTSus hqXPTB cap-avatar"
-          title="Agui le penseur"
+        <svg
+          className="sc-bcXGCL sc-eJDTud bQmYFy cpMilg cap-icon detail__drawer--back-arow"
+          fill="none"
+          onClick={[MockFunction]}
+          viewBox="0 0 12 6"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
-            src="<media-url>"
+          <path
+            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+          />
+        </svg>
+        <div
+          className="sc-bcXGCL bcdXRC"
+        >
+          <div
+            className="sc-bcXGCL cKGnkY sc-ckEbfr gOeGmr cap-avatar"
+            title="Agui le penseur"
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL exSVBv"
+              src="<media-url>"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+          <p
+            className="sc-bcXGCL jZgtKM cap-text"
+          >
+            Agui le penseur
+          </p>
+          <div
+            className="sc-bcXGCL hNFpfA sc-fXqqsB gHWJqw cap-tag"
+            title=""
+          >
+            <h5
+              className="sc-bcXGCL bJpDVA cap-heading"
+            >
+              opinion.for
+            </h5>
+          </div>
+          <p
+            className="sc-bcXGCL yqxTs cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
+        <div
+          className="sc-bcXGCL fKRqYl"
+        >
+          <h4
+            className="sc-bcXGCL cpsRIJ cap-heading"
             style={
               Object {
-                "objectFit": "cover",
+                "marginLeft": 0,
+                "marginTop": 0,
               }
             }
-            title="Agui le penseur"
-          />
-        </div>
-        <p
-          className="sc-bdnxRM kbkujW cap-text"
-        >
-          Agui le penseur
-        </p>
-        <div
-          className="sc-bdnxRM fFGSHa sc-fXazdy llVDbw cap-tag"
-          title=""
-        >
-          <h5
-            className="sc-bdnxRM jxtjkG cap-heading"
           >
-            opinion.for
-          </h5>
-        </div>
-        <p
-          className="sc-bdnxRM iTUwvv cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-      <div
-        className="sc-bdnxRM gpaGRP"
-      >
-        <h4
-          className="sc-bdnxRM iJMGcs cap-heading"
-          style={
-            Object {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Je suis pour
-        </h4>
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+            Je suis pour
+          </h4>
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
+          />
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when open 1`] = `
-<div
-  data-testid="AnimatePresence"
->
+Array [
   <div
-    className="sc-bdnxRM iLVaXs DetailDrawer__DetailDrawerInner-iBqxvi"
-    style={
-      Object {
-        "opacity": 0,
-        "transform": "translateX(100vw) translateZ(0)",
-      }
-    }
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM dGfmSu"
-      onClose={[MockFunction]}
+      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
+      style={
+        Object {
+          "opacity": 0,
+          "transform": "translateX(100vw) translateZ(0)",
+        }
+      }
     >
-      <svg
-        className="sc-bdnxRM sc-eJocfa hLuWnh MmfJJ cap-icon detail__drawer--back-arow"
-        fill="none"
-        onClick={[MockFunction]}
-        viewBox="0 0 12 6"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-        />
-      </svg>
       <div
-        className="sc-bdnxRM gpfrak"
+        className="sc-bcXGCL dtHJDj"
+        onClose={[MockFunction]}
       >
-        <div
-          className="sc-bdnxRM cvgdpa sc-ckTSus hqXPTB cap-avatar"
-          title="Agui le penseur"
+        <svg
+          className="sc-bcXGCL sc-eJDTud bQmYFy cpMilg cap-icon detail__drawer--back-arow"
+          fill="none"
+          onClick={[MockFunction]}
+          viewBox="0 0 12 6"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
-            src="<media-url>"
+          <path
+            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+          />
+        </svg>
+        <div
+          className="sc-bcXGCL bcdXRC"
+        >
+          <div
+            className="sc-bcXGCL cKGnkY sc-ckEbfr gOeGmr cap-avatar"
+            title="Agui le penseur"
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL exSVBv"
+              src="<media-url>"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+          <p
+            className="sc-bcXGCL jZgtKM cap-text"
+          >
+            Agui le penseur
+          </p>
+          <div
+            className="sc-bcXGCL hNFpfA sc-fXqqsB gHWJqw cap-tag"
+            title=""
+          >
+            <h5
+              className="sc-bcXGCL bJpDVA cap-heading"
+            >
+              opinion.for
+            </h5>
+          </div>
+          <p
+            className="sc-bcXGCL yqxTs cap-text"
+          >
+            Jsuis né dans les favela au brésil
+          </p>
+        </div>
+        <div
+          className="sc-bcXGCL fKRqYl"
+        >
+          <h4
+            className="sc-bcXGCL cpsRIJ cap-heading"
             style={
               Object {
-                "objectFit": "cover",
+                "marginLeft": 0,
+                "marginTop": 0,
               }
             }
-            title="Agui le penseur"
-          />
-        </div>
-        <p
-          className="sc-bdnxRM kbkujW cap-text"
-        >
-          Agui le penseur
-        </p>
-        <div
-          className="sc-bdnxRM fFGSHa sc-fXazdy llVDbw cap-tag"
-          title=""
-        >
-          <h5
-            className="sc-bdnxRM jxtjkG cap-heading"
           >
-            opinion.for
-          </h5>
-        </div>
-        <p
-          className="sc-bdnxRM iTUwvv cap-text"
-        >
-          Jsuis né dans les favela au brésil
-        </p>
-      </div>
-      <div
-        className="sc-bdnxRM gpaGRP"
-      >
-        <h4
-          className="sc-bdnxRM iJMGcs cap-heading"
-          style={
-            Object {
-              "marginLeft": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Je suis pour
-        </h4>
-        <div
-          className=" ql-editor wysiwyg-render"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
+            Je suis pour
+          </h4>
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Oui, ma gâtée, RS4 gris nardo, bien sûr qu'ils m'ont raté (gros, bien sûr)
     Soleil dans la bulle, sur le Prado, Shifter pro' (Shifter pro')
     Contre-sens (ah), ma chérie, tu es à contre-sens
     Puta, où tu étais quand j'mettais des sept euros d'essence (hein)",
+              }
             }
-          }
-        />
+          />
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

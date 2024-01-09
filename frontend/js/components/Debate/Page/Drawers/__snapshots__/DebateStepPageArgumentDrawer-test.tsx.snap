@@ -3,28 +3,28 @@
 exports[`<DebateStepPageArgumentDrawer /> should render when open 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -33,10 +33,10 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM fCTwzN"
+        className="sc-bcXGCL gfZeyC"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud dlMClB hRSbNM cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -51,10 +51,10 @@ Array [
           />
         </svg>
         <div
-          className="sc-bdnxRM kVIluv"
+          className="sc-bcXGCL edbZFa"
         >
           <p
-            className="sc-bdnxRM gcfCkn cap-text"
+            className="sc-bcXGCL cdJaTo cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -65,11 +65,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            className="sc-bcXGCL gmOhHF sc-fXqqsB kJyISH cap-tag"
             title=""
           >
             <h5
-              className="sc-bdnxRM eGzXIx cap-heading"
+              className="sc-bcXGCL bsDqjL cap-heading"
             >
               global.for
             </h5>
@@ -77,28 +77,28 @@ Array [
         </div>
       </div>
       <div
-        className="sc-bdnxRM fPIidS"
+        className="sc-bcXGCL cKSHZf"
         onClose={[MockFunction]}
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           coucou
         </p>
       </div>
       <div
-        className="sc-bdnxRM fAmESm"
+        className="sc-bcXGCL hihYbZ"
         onClose={[MockFunction]}
       >
         <button
           aria-label="vote.add"
-          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
             fill="none"
             viewBox="0 0 10 12"
             xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ Array [
           </svg>
         </button>
         <span
-          className="sc-bdnxRM bITUbm cap-text"
+          className="sc-bcXGCL eTNnVV cap-text"
         >
           10
         </span>
@@ -141,28 +141,28 @@ Array [
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer has vote 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -171,10 +171,10 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM fCTwzN"
+        className="sc-bcXGCL gfZeyC"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud dlMClB hRSbNM cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -189,10 +189,10 @@ Array [
           />
         </svg>
         <div
-          className="sc-bdnxRM kVIluv"
+          className="sc-bcXGCL edbZFa"
         >
           <p
-            className="sc-bdnxRM gcfCkn cap-text"
+            className="sc-bcXGCL cdJaTo cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -203,11 +203,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            className="sc-bcXGCL gmOhHF sc-fXqqsB kJyISH cap-tag"
             title=""
           >
             <h5
-              className="sc-bdnxRM eGzXIx cap-heading"
+              className="sc-bcXGCL bsDqjL cap-heading"
             >
               global.for
             </h5>
@@ -215,28 +215,28 @@ Array [
         </div>
       </div>
       <div
-        className="sc-bdnxRM fPIidS"
+        className="sc-bcXGCL cKSHZf"
         onClose={[MockFunction]}
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           coucou
         </p>
       </div>
       <div
-        className="sc-bdnxRM fAmESm"
+        className="sc-bcXGCL hihYbZ"
         onClose={[MockFunction]}
       >
         <button
           aria-label="vote.add"
-          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
             fill="none"
             viewBox="0 0 10 12"
             xmlns="http://www.w3.org/2000/svg"
@@ -248,7 +248,7 @@ Array [
           </svg>
         </button>
         <span
-          className="sc-bdnxRM bITUbm cap-text"
+          className="sc-bcXGCL eTNnVV cap-text"
         >
           10
         </span>
@@ -279,28 +279,28 @@ Array [
 exports[`<DebateStepPageArgumentDrawer /> should render when open and viewer is the author 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bdnxRM dSriPq DetailDrawer__DetailDrawerInner-iBqxvi"
+      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -309,10 +309,10 @@ Array [
       }
     >
       <div
-        className="sc-bdnxRM fCTwzN"
+        className="sc-bcXGCL gfZeyC"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa jioXbQ dUIXVZ cap-icon DetailDrawerHeader___StyledIcon-dMTfDO lfuDZJ detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud dlMClB hRSbNM cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -327,10 +327,10 @@ Array [
           />
         </svg>
         <div
-          className="sc-bdnxRM kVIluv"
+          className="sc-bcXGCL edbZFa"
         >
           <p
-            className="sc-bdnxRM gcfCkn cap-text"
+            className="sc-bcXGCL cdJaTo cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -341,11 +341,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bdnxRM kSnIks sc-fXazdy fmGqjI cap-tag"
+            className="sc-bcXGCL gmOhHF sc-fXqqsB kJyISH cap-tag"
             title=""
           >
             <h5
-              className="sc-bdnxRM eGzXIx cap-heading"
+              className="sc-bcXGCL bsDqjL cap-heading"
             >
               global.for
             </h5>
@@ -353,28 +353,28 @@ Array [
         </div>
       </div>
       <div
-        className="sc-bdnxRM fPIidS"
+        className="sc-bcXGCL cKSHZf"
         onClose={[MockFunction]}
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           coucou
         </p>
       </div>
       <div
-        className="sc-bdnxRM fAmESm"
+        className="sc-bcXGCL hihYbZ"
         onClose={[MockFunction]}
       >
         <button
           aria-label="vote.add"
-          className="sc-bdnxRM sc-lbVvki fSMmUe hAEwAQ cap-button"
+          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
-            className="sc-bdnxRM sc-eJocfa cnrXMa dUIXVZ cap-icon"
+            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
             fill="none"
             viewBox="0 0 10 12"
             xmlns="http://www.w3.org/2000/svg"
@@ -386,7 +386,7 @@ Array [
           </svg>
         </button>
         <span
-          className="sc-bdnxRM bITUbm cap-text"
+          className="sc-bcXGCL eTNnVV cap-text"
         >
           10
         </span>

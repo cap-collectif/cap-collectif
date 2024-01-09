@@ -65,7 +65,7 @@ export const MediaColumnImage: StyledComponent<any, {}, HTMLDivElement> = styled
     margin-top: 5px;
   }
 
-  :hover {
+  &:hover {
     > div:nth-child(2) {
       display: block;
     }

@@ -2,7 +2,7 @@
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
 <span
-  className="ProposalPreviewVote__Container-byMYDN kiKOLG"
+  className="ProposalPreviewVote__Container-byxhoK cwsVIb"
 >
   <div
     aria-modal={true}

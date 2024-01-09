@@ -59,7 +59,7 @@ describe('<ProjectHeader />', () => {
     }
 
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )

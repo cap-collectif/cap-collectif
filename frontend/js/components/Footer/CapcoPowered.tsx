@@ -20,7 +20,7 @@ const CapcoLink = styled.a<{
 }>`
   font-weight: bold;
   color: ${props => props.textColor};
-  :hover {
+  &:hover {
     color: ${props => props.textColor};
   }
 `

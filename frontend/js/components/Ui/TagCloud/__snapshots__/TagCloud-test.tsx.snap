@@ -69,7 +69,8 @@ exports[`<TagCloud /> should render correctly 1`] = `
     isHover={false}
   >
     <div
-      className="TagCloud__Container-jQhbLY hufUNN"
+      className="TagCloud__Container-jRcEGH rBUGX"
+      isHover={false}
     >
       <Tooltip
         className="text-left"

@@ -46,6 +46,7 @@ describe('<UnpublishedLabel />', () => {
             },
           },
         }}
+        useCapUIProvider
       >
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>

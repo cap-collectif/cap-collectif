@@ -4,7 +4,7 @@ exports[`<RenderCustomAccess /> should render correctly 1`] = `
 Array [
   <div
     aria-describedby="id-g"
-    className="sc-bdnxRM jBIFPT sc-fXazdy llVDbw cap-tag"
+    className="sc-bcXGCL guTJTH sc-fXqqsB kJyISH cap-tag"
     id="restricted-access"
     onBlur={[Function]}
     onClick={[Function]}
@@ -15,7 +15,7 @@ Array [
     title=""
   >
     <svg
-      className="sc-bdnxRM sc-eJocfa gBXoQq kuPXuU cap-icon"
+      className="sc-bcXGCL sc-eJDTud kRiMXT dxHlFh cap-icon"
       fill="none"
       viewBox="0 0 10 12"
       xmlns="http://www.w3.org/2000/svg"

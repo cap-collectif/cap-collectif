@@ -2,30 +2,31 @@
 
 exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX lkufbK fGTmtL"
+  className="sc-breQAM Flex___StyledAppBox-SiGEY iSfTVm gEtlaU"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP jFCIdI"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY hSRYCv bLsrSH"
   >
     <p
-      className="sc-bdnxRM gJQnhc"
+      className="sc-breQAM dumkdc"
     >
       notification-email
     </p>
     <p
-      className="sc-bdnxRM lhgRuK"
+      className="sc-breQAM ggGZpO"
     >
       notification-email-explanation
     </p>
   </div>
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX gCRThG SectionEmailNotification__FieldContainer-gEsUaV eYlQoX"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY gsBKBG SectionEmailNotification__FieldContainer-gFowVC exZAvD"
   >
     <div
       className="form-group"
     >
       <label
-        className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+        className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+        hasImage={false}
         htmlFor="recipient-email"
         id="label-recipient-email"
         type="label"
@@ -51,13 +52,14 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       />
     </div>
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX hekVRm fGTmtL"
+      className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG gEtlaU"
     >
       <div
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+          className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+          hasImage={false}
           htmlFor="sender-email"
           id="label-select-sender-email"
           type="label"
@@ -69,7 +71,8 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
           id="sender-email"
         >
           <div
-            className="Select__SelectContainer-bqbDYn select-container"
+            className="Select__SelectContainer-bqrvno select-container"
+            hasButtonAfter={false}
           >
             <div
               className="react-select-container css-2b097c-container"
@@ -193,7 +196,8 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
         className="form-group"
       >
         <label
-          className="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+          className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+          hasImage={false}
           htmlFor="sender-name"
           id="label-sender-name"
           type="label"
@@ -223,7 +227,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       aria-controls="id-1"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM Button__ButtonInner-dWPVNG hhCGPX laeJgQ"
+      className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr egpGUm"
       onClick={[Function]}
       onClickCapture={[Function]}
       onKeyDown={[Function]}

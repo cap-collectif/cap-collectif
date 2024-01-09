@@ -3,25 +3,25 @@
 exports[`<ProjectItem /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -29,19 +29,19 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       >
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -50,7 +50,7 @@ Array [
           ,   
         </span>
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -59,7 +59,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -67,14 +67,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -82,7 +82,7 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
       style={Object {}}
       title="public-everybody"
     >
@@ -90,7 +90,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -100,7 +100,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -113,7 +113,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bdnxRM cefOTL cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL iKLPNA cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -129,7 +129,7 @@ Array [
       type="button"
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +159,7 @@ Array [
     />
     <div
       aria-orientation="vertical"
-      className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -185,7 +185,7 @@ Array [
       tabIndex={-1}
     >
       <button
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -204,7 +204,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           action_show
@@ -215,7 +215,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -234,7 +234,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           project.download.button
@@ -263,7 +263,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -282,7 +282,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           admin.global.delete
@@ -315,25 +315,25 @@ Array [
 exports[`<ProjectItem /> should render correctly without authors 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -341,19 +341,19 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       >
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -362,7 +362,7 @@ Array [
           ,   
         </span>
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -371,7 +371,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -379,14 +379,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -394,7 +394,7 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
       style={Object {}}
       title="public-everybody"
     >
@@ -402,7 +402,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -412,7 +412,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -425,7 +425,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bdnxRM cefOTL cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL iKLPNA cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -441,7 +441,7 @@ Array [
       type="button"
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -471,7 +471,7 @@ Array [
     />
     <div
       aria-orientation="vertical"
-      className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -497,7 +497,7 @@ Array [
       tabIndex={-1}
     >
       <button
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -516,7 +516,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           action_show
@@ -527,7 +527,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -546,7 +546,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           project.download.button
@@ -575,7 +575,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -594,7 +594,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           admin.global.delete
@@ -627,25 +627,25 @@ Array [
 exports[`<ProjectItem /> should render correctly without exportable steps 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -653,19 +653,19 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       >
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -674,7 +674,7 @@ Array [
           ,   
         </span>
         <a
-          className="sc-bdnxRM kVmaBt cap-link"
+          className="sc-bcXGCL dTwKYU cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -683,7 +683,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -691,14 +691,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -706,7 +706,7 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
       style={Object {}}
       title="public-everybody"
     >
@@ -714,7 +714,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -724,7 +724,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -737,7 +737,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bdnxRM cefOTL cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL iKLPNA cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -753,7 +753,7 @@ Array [
       type="button"
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -783,7 +783,7 @@ Array [
     />
     <div
       aria-orientation="vertical"
-      className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -809,7 +809,7 @@ Array [
       tabIndex={-1}
     >
       <button
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -828,7 +828,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           action_show
@@ -839,7 +839,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -858,7 +858,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           admin.global.delete
@@ -891,25 +891,25 @@ Array [
 exports[`<ProjectItem /> should render correctly without themes 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -917,21 +917,21 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM dXNwuA"
+      className="sc-bcXGCL iGEwYR"
     >
       <a
-        className="sc-bdnxRM bjOoai cap-link"
+        className="sc-bcXGCL ZqqiX cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bdnxRM bAjkiX"
+        className="sc-bcXGCL lbjJQq"
       />
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -939,14 +939,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="<mock-value-for-field-\\"url\\">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -954,7 +954,7 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM loAfsu sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
       style={Object {}}
       title="public-everybody"
     >
@@ -962,7 +962,7 @@ Array [
     </div>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -972,7 +972,7 @@ Array [
     30/12/2014
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -985,7 +985,7 @@ Array [
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bdnxRM cefOTL cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL iKLPNA cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -1001,7 +1001,7 @@ Array [
       type="button"
     >
       <svg
-        className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+        className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -1031,7 +1031,7 @@ Array [
     />
     <div
       aria-orientation="vertical"
-      className="sc-bdnxRM drDxxu sc-fcmMJX cap-menu__list cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -1057,7 +1057,7 @@ Array [
       tabIndex={-1}
     >
       <button
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1076,7 +1076,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           action_show
@@ -1087,7 +1087,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1106,7 +1106,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           project.download.button
@@ -1135,7 +1135,7 @@ Array [
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bdnxRM fCgUxE cap-menu__item"
+        className="sc-bcXGCL cNCpXV cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1154,7 +1154,7 @@ Array [
         type="button"
       >
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL Ebxhi cap-text"
         >
            
           admin.global.delete

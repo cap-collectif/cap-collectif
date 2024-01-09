@@ -11,7 +11,7 @@ const CloseIconContainer: StyledComponent<any, {}, HTMLButtonElement> = styled.b
   padding: 0;
   background: none;
 
-  :hover {
+  &:hover {
     cursor: pointer;
   }
 `

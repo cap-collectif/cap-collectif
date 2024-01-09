@@ -1,48 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BreadCrumbItems /> should render multiple items with slash in between them 1`] = `
-<div
-  className="sc-bdnxRM dRTyhu"
->
+Array [
   <div
-    className="sc-bdnxRM dRTyhu"
-  >
-    <a
-      className="sc-bdnxRM hiWSzS cap-link"
-      href="/projects"
-    >
-      Project list
-    </a>
-    <span
-      className="sc-bdnxRM dTrxhp cap-text"
-    >
-      /
-    </span>
-  </div>
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-bdnxRM dRTyhu"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL gwrAWp"
   >
-    <p
-      className="sc-bdnxRM hCilNi cap-text"
+    <div
+      className="sc-bcXGCL gwrAWp"
     >
-      New Project
-    </p>
-  </div>
-</div>
+      <a
+        className="sc-bcXGCL gvDgP cap-link"
+        href="/projects"
+      >
+        Project list
+      </a>
+      <span
+        className="sc-bcXGCL gGiqCp cap-text"
+      >
+        /
+      </span>
+    </div>
+    <div
+      className="sc-bcXGCL gwrAWp"
+    >
+      <p
+        className="sc-bcXGCL cOMoVT cap-text"
+      >
+        New Project
+      </p>
+    </div>
+  </div>,
+]
 `;
 
 exports[`<BreadCrumbItems /> should render one single item 1`] = `
-<div
-  className="sc-bdnxRM dRTyhu"
->
+Array [
   <div
-    className="sc-bdnxRM dRTyhu"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    className="sc-bcXGCL gwrAWp"
   >
-    <p
-      className="sc-bdnxRM hCilNi cap-text"
+    <div
+      className="sc-bcXGCL gwrAWp"
     >
-      Project list
-    </p>
-  </div>
-</div>
+      <p
+        className="sc-bcXGCL cOMoVT cap-text"
+      >
+        Project list
+      </p>
+    </div>
+  </div>,
+]
 `;

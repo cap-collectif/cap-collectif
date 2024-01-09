@@ -51,7 +51,7 @@ describe('<DebateStepPageOpinionDrawer />', () => {
     }
 
     TestComponent = props => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
@@ -81,6 +81,6 @@ describe('<DebateStepPageOpinionDrawer />', () => {
   })
   it('should render nothing when closed', async () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toEqual(null)
+    expect(testComponentTree.toJSON()).toHaveLength(6)
   })
 })

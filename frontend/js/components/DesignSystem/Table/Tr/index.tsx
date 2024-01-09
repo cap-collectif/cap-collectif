@@ -17,7 +17,7 @@ type TrProps = AppBoxProps & {
 
 const styles = (isLoading: boolean | null | undefined, verticalAlign: VerticalAlign) =>
   css({
-    ':hover': isLoading
+    '&:hover': isLoading
       ? {}
       : {
           bg: 'gray.100',

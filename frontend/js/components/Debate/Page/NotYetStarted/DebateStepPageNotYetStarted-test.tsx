@@ -27,7 +27,7 @@ describe('<DebateStepPageNotYetStarted />', () => {
     }
 
     TestComponent = () => (
-      <RelaySuspensFragmentTest environment={environment}>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
         <TestRenderer />
       </RelaySuspensFragmentTest>
     )

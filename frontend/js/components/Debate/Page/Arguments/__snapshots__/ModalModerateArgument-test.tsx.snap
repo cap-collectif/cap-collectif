@@ -12,55 +12,56 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
     data-testid="AnimatePresence"
   >
     <div
-      class="sc-bdnxRM duLURM Modal__ModalContainerInner-gRLtaR"
+      class="sc-breQAM iqRiiI Modal__ModalContainerInner-gRvBLO"
       style="opacity:0"
     >
       <div
         aria-labelledby="modal-title"
-        class="sc-bdnxRM hwveCA Modal__ModalInner-fNqOda ModalModerateArgument__ModalContainer-aka-Dt hrZTXB ModalModerateArgument__ModalContainer-aka-Dt hrZTXB"
+        class="sc-breQAM hOIBrM Modal__ModalInner-fNGFsd ModalModerateArgument__ModalContainer-bbfDya hQdUzZ"
         style="opacity:0;transform:translateY(-20px) translateZ(0)"
       >
         <header
-          class="sc-bdnxRM Flex___StyledAppBox-RSPpX fatVBi"
+          class="sc-breQAM Flex___StyledAppBox-SiGEY bWQpCu"
         >
           <div
-            class="sc-bdnxRM Flex___StyledAppBox-RSPpX ivpLqZ ModalHeader___StyledFlex-hKsSDj bhUULg"
+            class="sc-breQAM Flex___StyledAppBox-SiGEY fLXUyd ModalHeader___StyledFlex-hKIJSk eRNTmy"
           >
             <h2
-              class="sc-bdnxRM fenvOW"
+              class="sc-breQAM eHUpPC"
               id="modal-title"
             >
               moderate-argument
             </h2>
           </div>
           <button
-            class="sc-bdnxRM Button__ButtonInner-dWPVNG gwEOTH jfKDDI"
+            class="sc-breQAM Button__ButtonInner-dXfNcJ drSKjX iWxcUO"
             type="button"
           >
             <iconmock
-              class="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG eRcwCj fZkSKg AMDLx icon"
+              class="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ hLpMUH exKJSE AjyOr icon"
             />
           </button>
         </header>
         <main
-          class="sc-bdnxRM Flex___StyledAppBox-RSPpX fwqGPs"
+          class="sc-breQAM Flex___StyledAppBox-SiGEY amxUE"
         >
           <form
             id="moderate-form"
           >
             <div
-              class="sc-bdnxRM form-group"
+              class="sc-breQAM form-group"
             >
               <div
-                class="Togglestyle__ToggleContainer-bAFtsA ymDGz toggle-container"
+                class="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"
               >
                 <div>
                   <label
-                    class="Togglestyle__LabelContainer-nyUOg beKyY unchecked labelContainer"
+                    class="Togglestyle__LabelContainer-ouxIP dbfpPa unchecked labelContainer"
                     for="toggle-isVisible"
+                    labelside="RIGHT"
                   >
                     <div
-                      class="Togglestyle__TogglerWrapper-hIrWcm gVufNR"
+                      class="Togglestyle__TogglerWrapper-hIHNrp PKPnB"
                       id="TOGGLE_hideContent"
                     >
                       <span
@@ -95,12 +96,12 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                             data-testid="AnimatePresence"
                           >
                             <div
-                              class="sc-bdnxRM dOpKpO cap-tooltip text-left"
+                              class="sc-breQAM fOAZXq cap-tooltip text-left"
                               id="tooltip-description"
                               style="word-break:break-word;opacity:0"
                             >
                               <div
-                                class="Tooltip__Arrow-kQwTtI hMJWpD"
+                                class="Tooltip__Arrow-kRswor hvJnND"
                                 style="font-size:16px;width:1em;height:1em;pointer-events:none;top:100%"
                               >
                                 <svg
@@ -118,7 +119,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                                 </svg>
                               </div>
                               <p
-                                class="sc-bdnxRM ehoPif"
+                                class="sc-breQAM kizcjb"
                               >
                                 tooltip.explanation.hide.content
                               </p>
@@ -140,7 +141,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
               class="form-group"
             >
               <label
-                class="Labelstyle__LabelContainer-jXVmhf gjkhnL control-label label-container"
+                class="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
                 for="reason"
                 id="label-reason"
                 type="label"
@@ -165,7 +166,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
           </form>
         </main>
         <footer
-          class="sc-bdnxRM Flex___StyledAppBox-RSPpX fLmEkM"
+          class="sc-breQAM Flex___StyledAppBox-SiGEY cPblrQ"
         >
           <button
             class="btn btn-default"

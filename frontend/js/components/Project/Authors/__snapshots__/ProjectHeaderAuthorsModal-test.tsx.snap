@@ -3,22 +3,22 @@
 exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     aria-label="project.authors"
@@ -37,24 +37,24 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-bdnxRM cGKXaX sc-gsWcmt cap-modal__overlay"
+        className="sc-bcXGCL kkunZo sc-gsGkXq cap-modal__overlay"
         onClick={[Function]}
       >
         <div
-          className="sc-bdnxRM ePBqVQ sc-bXexck fObdwY cap-modal"
+          className="sc-bcXGCL eSCgdK sc-bWOFNj GFNVU cap-modal"
           id="show-authors-modal"
         >
           <div
-            className="ResetCss-jmHeCe hpqhdm"
+            className="ResetCss-jmWVRh exBVVd"
           >
             <header
-              className="sc-bdnxRM jjfrHe cap-modal__header"
+              className="sc-bcXGCL MfvHV cap-modal__header"
             >
               <div
-                className="sc-bdnxRM kjxros"
+                className="sc-bcXGCL gkcWxQ"
               >
                 <h2
-                  className="sc-bdnxRM hZqJQu cap-heading"
+                  className="sc-bcXGCL ggqhBm cap-heading"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -66,12 +66,12 @@ Array [
                 </h2>
               </div>
               <button
-                className="sc-bdnxRM eVPzhQ"
+                className="sc-bcXGCL kvTszR"
                 onClick={[Function]}
                 type="button"
               >
                 <svg
-                  className="sc-bdnxRM sc-eJocfa jApSuO igzNGz cap-icon"
+                  className="sc-bcXGCL sc-eJDTud diAjQP iYOzKe cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,20 +88,21 @@ Array [
             </header>
           </div>
           <main
-            className="sc-bdnxRM bVOKYS cap-modal__body"
+            className="sc-bcXGCL eowUbB cap-modal__body"
           >
             <div
-              className="ListGroupFlush__Container-eGshRq kTxvA-D ProjectHeaderAuthorsModal__ProjectAuthorList-ewUUPt gcaloH mb-0 list-group-flush list-group"
+              className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush ProjectHeaderAuthorsModal__ProjectAuthorList-exQxKa gZQIvY mb-0 list-group"
               striped={false}
             >
               <span
-                className="ProjectHeaderAuthorsModal__ProjectAuthorItem-fAXgWq jevrND projectAuthorItem list-group-item"
+                className="ProjectHeaderAuthorsModal__ProjectAuthorItem-fAbEbJ cawNyi projectAuthorItem list-group-item"
               >
                 <div
                   className="d-flex"
                 >
                   <span
-                    className="UserAvatar__UserAvatarContainer-jwYVWv btlQRr"
+                    className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+                    hasBadge={false}
                     onBlur={[Function]}
                     onFocus={[Function]}
                     onMouseOut={[Function]}
@@ -165,10 +166,10 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-bdnxRM gaOscV cap-modal__footer"
+            className="sc-bcXGCL iWaRWR cap-modal__footer"
           >
             <button
-              className="sc-bdnxRM sc-lbVvki liwAnN edAWqw cap-button"
+              className="sc-bcXGCL sc-laZSpB hUhKMG kmqqqs cap-button"
               onClick={[MockFunction]}
               style={
                 Object {

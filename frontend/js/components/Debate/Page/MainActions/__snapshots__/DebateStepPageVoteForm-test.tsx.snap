@@ -3,32 +3,32 @@
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:0"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        class="DebateStepPageVoteForm___StyledSpan2-llVMxp jJypkj"
         role="img"
       >
         🎉
@@ -37,14 +37,14 @@ Array [
         thanks-for-debate-richer
       </span>
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
     </div>
     <div
-      class="sc-bdnxRM eSZtmj"
+      class="sc-bcXGCL deHSoy"
     >
       <a
         class="twitter-share-button"
@@ -56,12 +56,12 @@ Array [
       </a>
       <button
         aria-describedby="id-g"
-        class="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
+        class="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
         tabindex="0"
         type="button"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
+          class="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
           fill="none"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
@@ -86,10 +86,10 @@ Array [
       />
     </div>
     <div
-      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+      class="sc-bcXGCL dwaSaK cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
     >
       <form
-        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
         id="debate-argument-form"
       >
         <div
@@ -107,7 +107,7 @@ Array [
             type="textarea"
           />
           <div
-            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            class="Notepad__Container-imViwV dJKVKi visible-print-block"
           >
             <span />
             <span />
@@ -127,16 +127,16 @@ Array [
           </div>
         </div>
         <div
-          class="sc-bdnxRM khSCne"
+          class="sc-bcXGCL gwyxKX"
         >
           <button
-            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            class="sc-bcXGCL sc-laZSpB eUXbaw gSJdVP cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            class="sc-bcXGCL sc-laZSpB jujdjU hiHtil cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -151,32 +151,32 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:0"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        class="DebateStepPageVoteForm___StyledSpan2-llVMxp jJypkj"
         role="img"
       >
         🎉
@@ -185,17 +185,17 @@ Array [
         publish.argument.validate.account
       </span>
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
     </div>
     <div
-      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+      class="sc-bcXGCL dwaSaK cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
     >
       <form
-        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
         id="debate-argument-form"
       >
         <div
@@ -213,7 +213,7 @@ Array [
             type="textarea"
           />
           <div
-            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            class="Notepad__Container-imViwV dJKVKi visible-print-block"
           >
             <span />
             <span />
@@ -233,16 +233,16 @@ Array [
           </div>
         </div>
         <div
-          class="sc-bdnxRM khSCne"
+          class="sc-bcXGCL gwyxKX"
         >
           <button
-            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            class="sc-bcXGCL sc-laZSpB eUXbaw gSJdVP cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            class="sc-bcXGCL sc-laZSpB jujdjU hiHtil cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -257,41 +257,41 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed on mobile 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:1"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
       <p
-        class="sc-bdnxRM fPGzgI cap-text"
+        class="sc-bcXGCL kRzAGt cap-text"
       >
         <span
           aria-label="vote"
-          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          class="DebateStepPageVoteForm___StyledSpan-bFgDPf jqyYXc"
           role="img"
         >
           🎉
@@ -302,7 +302,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
+      class="sc-bcXGCL sc-laZSpB hgBEdJ hiHtil cap-button"
       type="button"
     >
       publish-argument
@@ -314,41 +314,41 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:1"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
       <p
-        class="sc-bdnxRM fPGzgI cap-text"
+        class="sc-bcXGCL kRzAGt cap-text"
       >
         <span
           aria-label="vote"
-          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          class="DebateStepPageVoteForm___StyledSpan-bFgDPf jqyYXc"
           role="img"
         >
           🎉
@@ -359,7 +359,7 @@ Array [
       </p>
     </div>
     <div
-      class="sc-bdnxRM eSZtmj"
+      class="sc-bcXGCL deHSoy"
     >
       <a
         class="twitter-share-button"
@@ -371,12 +371,12 @@ Array [
       </a>
       <button
         aria-describedby="id-g"
-        class="sc-bdnxRM sc-lbVvki kONNTE gRvyyk cap-button"
+        class="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
         tabindex="0"
         type="button"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa gqgzAW igzNGz cap-icon"
+          class="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
           fill="none"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
@@ -401,7 +401,7 @@ Array [
       />
     </div>
     <button
-      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
+      class="sc-bcXGCL sc-laZSpB hgBEdJ hiHtil cap-button"
       type="button"
     >
       publish-argument
@@ -413,32 +413,32 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:0"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        class="DebateStepPageVoteForm___StyledSpan2-llVMxp jJypkj"
         role="img"
       >
         🗳️
@@ -447,17 +447,17 @@ Array [
         thanks-for-your-vote
       </span>
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
     </div>
     <div
-      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+      class="sc-bcXGCL dwaSaK cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
     >
       <form
-        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
         id="debate-argument-form"
       >
         <div
@@ -475,7 +475,7 @@ Array [
             type="textarea"
           />
           <div
-            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            class="Notepad__Container-imViwV dJKVKi visible-print-block"
           >
             <span />
             <span />
@@ -495,16 +495,16 @@ Array [
           </div>
         </div>
         <div
-          class="sc-bdnxRM khSCne"
+          class="sc-bcXGCL gwyxKX"
         >
           <button
-            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            class="sc-bcXGCL sc-laZSpB eUXbaw gSJdVP cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bdnxRM sc-lbVvki bTjVvx edAWqw cap-button"
+            class="sc-bcXGCL sc-laZSpB jujdjU hiHtil cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -519,32 +519,32 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:0"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <span
         aria-label="vote"
-        class="DebateStepPageVoteForm___StyledSpan2-llFVim coOvRu"
+        class="DebateStepPageVoteForm___StyledSpan2-llVMxp jJypkj"
         role="img"
       >
         🗳️
@@ -553,17 +553,17 @@ Array [
         thanks-for-your-vote {"instance":"CapCollectif"}
       </span>
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
     </div>
     <div
-      class="sc-bdnxRM dYOtlX cap-card DebateStepPageVoteForm___StyledCard-fgMgDs eazeOX"
+      class="sc-bcXGCL dwaSaK cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
     >
       <form
-        class="DebateStepPageVoteForm__Form-kqneNm bfjQmP"
+        class="DebateStepPageVoteForm__Form-kprBSF GzXgt"
         id="debate-argument-form"
       >
         <div
@@ -581,7 +581,7 @@ Array [
             type="textarea"
           />
           <div
-            class="Notepad__Container-inQLrC cTBqFb visible-print-block"
+            class="Notepad__Container-imViwV dJKVKi visible-print-block"
           >
             <span />
             <span />
@@ -601,10 +601,10 @@ Array [
           </div>
         </div>
         <div
-          class="sc-bdnxRM khSCne"
+          class="sc-bcXGCL gwyxKX"
         >
           <button
-            class="sc-bdnxRM sc-lbVvki hjWNVJ imkXzK cap-button"
+            class="sc-bcXGCL sc-laZSpB eUXbaw gSJdVP cap-button"
             type="button"
           >
             global.cancel
@@ -613,7 +613,7 @@ Array [
             aria-controls="id-g"
             aria-expanded="false"
             aria-haspopup="dialog"
-            class="sc-bdnxRM sc-lbVvki bGeYeY edAWqw cap-button"
+            class="sc-bcXGCL sc-laZSpB gsKLNF hiHtil cap-button"
             type="submit"
           >
             global.validate
@@ -638,41 +638,41 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously on mobile 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:1"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
       <p
-        class="sc-bdnxRM fPGzgI cap-text"
+        class="sc-bcXGCL kRzAGt cap-text"
       >
         <span
           aria-label="vote"
-          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          class="DebateStepPageVoteForm___StyledSpan-bFgDPf jqyYXc"
           role="img"
         >
           🗳️
@@ -686,7 +686,7 @@ Array [
       aria-controls="id-g"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bdnxRM sc-lbVvki jA-dhit edAWqw cap-button"
+      class="sc-bcXGCL sc-laZSpB gEjntU hiHtil cap-button"
       type="submit"
     >
       publish-argument
@@ -708,41 +708,41 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
     style="width:100%;opacity:1"
   >
     <div
-      class="sc-bdnxRM cmylwr"
+      class="sc-bcXGCL dlOtCG"
     >
       <button
-        class="sc-bdnxRM sc-lbVvki jfwYij hAEwAQ cap-button"
+        class="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
         type="button"
       >
         delete.vote.against
       </button>
       <p
-        class="sc-bdnxRM fPGzgI cap-text"
+        class="sc-bcXGCL kRzAGt cap-text"
       >
         <span
           aria-label="vote"
-          class="DebateStepPageVoteForm___StyledSpan-bElaUw jzKwr"
+          class="DebateStepPageVoteForm___StyledSpan-bFgDPf jqyYXc"
           role="img"
         >
           🗳️
@@ -753,7 +753,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bdnxRM sc-lbVvki ivaZSg edAWqw cap-button"
+      class="sc-bcXGCL sc-laZSpB hgBEdJ hiHtil cap-button"
       type="button"
     >
       publish-argument

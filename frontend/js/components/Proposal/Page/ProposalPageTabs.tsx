@@ -95,7 +95,7 @@ const Tabs = styled.div<{
       opacity: ${({ loading }) => loading && '0.5'};
     }
 
-    :hover {
+    &:hover {
       background: none !important;
       color: ${colors.black};
     }

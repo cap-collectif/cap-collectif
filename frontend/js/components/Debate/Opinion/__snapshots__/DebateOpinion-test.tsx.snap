@@ -3,47 +3,47 @@
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM bUeabV cap-card"
+    className="sc-bcXGCL jRgIZE cap-card"
   >
     <div
-      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
       title=""
     >
       <span
-        className="sc-bdnxRM kjQezm cap-text"
+        className="sc-bcXGCL dBdnLI cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bdnxRM bTikNC"
+      className="sc-bcXGCL kvrZpm"
     />
     <div
-      className="sc-bdnxRM bqbbdd"
+      className="sc-bcXGCL kOvzDP"
     >
       <div
-        className="sc-bdnxRM bHbGcK"
+        className="sc-bcXGCL lntwuc"
       >
         <div
-          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
+          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -54,7 +54,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -65,25 +65,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bdnxRM dXNwuA"
+          className="sc-bcXGCL VbuOr"
         >
           <p
-            className="sc-bdnxRM gQbCgt cap-text"
+            className="sc-bcXGCL bCkqIq cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bdnxRM SwLGZ cap-text"
+            className="sc-bcXGCL dQJkPy cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM jWvjdR"
+        className="sc-bcXGCL hQZIZa"
       >
         <h4
-          className="sc-bdnxRM Rdzhg cap-heading"
+          className="sc-bcXGCL hCBCzh cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -94,7 +94,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -117,47 +117,47 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM bUeabV cap-card"
+    className="sc-bcXGCL jRgIZE cap-card"
   >
     <div
-      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
       title=""
     >
       <span
-        className="sc-bdnxRM kjQezm cap-text"
+        className="sc-bcXGCL dBdnLI cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bdnxRM bTikNC"
+      className="sc-bcXGCL kvrZpm"
     />
     <div
-      className="sc-bdnxRM bqbbdd"
+      className="sc-bcXGCL kOvzDP"
     >
       <div
-        className="sc-bdnxRM bHbGcK"
+        className="sc-bcXGCL lntwuc"
       >
         <div
-          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
+          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -168,7 +168,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -179,25 +179,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bdnxRM dXNwuA"
+          className="sc-bcXGCL VbuOr"
         >
           <p
-            className="sc-bdnxRM gQbCgt cap-text"
+            className="sc-bcXGCL bCkqIq cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bdnxRM SwLGZ cap-text"
+            className="sc-bcXGCL dQJkPy cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM jWvjdR"
+        className="sc-bcXGCL hQZIZa"
       >
         <h4
-          className="sc-bdnxRM Rdzhg cap-heading"
+          className="sc-bcXGCL hCBCzh cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -208,7 +208,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -231,44 +231,44 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM iPXmrH cap-card"
+    className="sc-bcXGCL enPTBa cap-card"
   >
     <div
-      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
       title=""
     >
       <span
-        className="sc-bdnxRM kjQezm cap-text"
+        className="sc-bcXGCL dBdnLI cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bdnxRM bqbbdd"
+      className="sc-bcXGCL kOvzDP"
     >
       <div
-        className="sc-bdnxRM bHbGcK"
+        className="sc-bcXGCL lntwuc"
       >
         <div
-          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
+          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -279,7 +279,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -290,25 +290,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bdnxRM dXNwuA"
+          className="sc-bcXGCL VbuOr"
         >
           <p
-            className="sc-bdnxRM gQbCgt cap-text"
+            className="sc-bcXGCL bCkqIq cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bdnxRM SwLGZ cap-text"
+            className="sc-bcXGCL dQJkPy cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM jWvjdR"
+        className="sc-bcXGCL hQZIZa"
       >
         <h4
-          className="sc-bdnxRM Rdzhg cap-heading"
+          className="sc-bcXGCL hCBCzh cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -319,7 +319,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -342,47 +342,47 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM bUeabV cap-card"
+    className="sc-bcXGCL jRgIZE cap-card"
   >
     <div
-      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
       title=""
     >
       <span
-        className="sc-bdnxRM kjQezm cap-text"
+        className="sc-bcXGCL dBdnLI cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bdnxRM bTikNC"
+      className="sc-bcXGCL kvrZpm"
     />
     <div
-      className="sc-bdnxRM bqbbdd"
+      className="sc-bcXGCL kOvzDP"
     >
       <div
-        className="sc-bdnxRM bHbGcK"
+        className="sc-bcXGCL lntwuc"
       >
         <div
-          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
+          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -393,7 +393,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -404,25 +404,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bdnxRM dXNwuA"
+          className="sc-bcXGCL VbuOr"
         >
           <p
-            className="sc-bdnxRM gQbCgt cap-text"
+            className="sc-bcXGCL bCkqIq cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bdnxRM SwLGZ cap-text"
+            className="sc-bcXGCL dQJkPy cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM jWvjdR"
+        className="sc-bcXGCL hQZIZa"
       >
         <h4
-          className="sc-bdnxRM Rdzhg cap-heading"
+          className="sc-bcXGCL hCBCzh cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -433,7 +433,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -448,7 +448,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bdnxRM sc-lbVvki kOaFry imkXzK cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+          className="sc-bcXGCL sc-laZSpB cnvzQc cqMtAY cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >
@@ -463,44 +463,44 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM iPXmrH cap-card"
+    className="sc-bcXGCL enPTBa cap-card"
   >
     <div
-      className="sc-bdnxRM inSyHj sc-fXazdy fmGqjI cap-tag"
+      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
       title=""
     >
       <span
-        className="sc-bdnxRM kjQezm cap-text"
+        className="sc-bcXGCL dBdnLI cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bdnxRM bqbbdd"
+      className="sc-bcXGCL kOvzDP"
     >
       <div
-        className="sc-bdnxRM bHbGcK"
+        className="sc-bcXGCL lntwuc"
       >
         <div
-          className="sc-bdnxRM ikeBrY sc-ckTSus eGbCgm cap-avatar"
+          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -511,7 +511,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bdnxRM jVCZhC"
+            className="sc-bcXGCL exSVBv"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -522,25 +522,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bdnxRM dXNwuA"
+          className="sc-bcXGCL VbuOr"
         >
           <p
-            className="sc-bdnxRM gQbCgt cap-text"
+            className="sc-bcXGCL bCkqIq cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bdnxRM SwLGZ cap-text"
+            className="sc-bcXGCL dQJkPy cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM jWvjdR"
+        className="sc-bcXGCL hQZIZa"
       >
         <h4
-          className="sc-bdnxRM Rdzhg cap-heading"
+          className="sc-bcXGCL hCBCzh cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -551,7 +551,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bdnxRM WTDFb cap-text"
+          className="sc-bcXGCL dBUDbw cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -566,7 +566,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bdnxRM sc-lbVvki kOaFry imkXzK cap-button DebateOpinion___StyledButton-eaGvMt iPqugS"
+          className="sc-bcXGCL sc-laZSpB cnvzQc cqMtAY cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >

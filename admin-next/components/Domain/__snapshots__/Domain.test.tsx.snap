@@ -3,60 +3,60 @@
 exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <form
-    className="sc-bdnxRM ikHgea"
+    className="sc-bcXGCL ikCHIX"
     id="custom-domain-form"
     onSubmit={[Function]}
   >
     <h4
-      className="sc-bdnxRM lgNWHB cap-heading"
+      className="sc-bcXGCL iydxHs cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bdnxRM byCbgM"
+      className="sc-bcXGCL agnBR"
     >
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM dgrqOD"
+          className="sc-bcXGCL ojXDq"
         >
           <p
-            className="sc-bdnxRM cTaJwS cap-text"
+            className="sc-bcXGCL hMzJdb cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bdnxRM WTDFb cap-text"
+            className="sc-bcXGCL Ebxhi cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM fjTIYU cap-form-control"
+        className="sc-bcXGCL fEPdMN cap-form-control"
         role="group"
       >
         <label
-          className="sc-bdnxRM kGZvuB cap-form-label"
+          className="sc-bcXGCL ituTec cap-form-label"
           htmlFor="subDomain"
           style={
             Object {
@@ -66,7 +66,7 @@ Array [
           }
         >
           <p
-            className="sc-bdnxRM WxzeU cap-text"
+            className="sc-bcXGCL JNsrJ cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -79,7 +79,7 @@ Array [
         </label>
         <input
           aria-required={true}
-          className="sc-bdnxRM sc-TtZnY dUfREC hOdGym cap-input"
+          className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -94,35 +94,35 @@ Array [
       </div>
     </div>
     <div
-      className="sc-bdnxRM hIfpSw"
+      className="sc-bcXGCL gwrAWp"
     >
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM dgrqOD"
+          className="sc-bcXGCL ojXDq"
         >
           <p
-            className="sc-bdnxRM cTaJwS cap-text"
+            className="sc-bcXGCL hMzJdb cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bdnxRM WTDFb cap-text"
+            className="sc-bcXGCL Ebxhi cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM fjTIYU cap-form-control"
+          className="sc-bcXGCL fEPdMN cap-form-control"
           role="group"
         >
           <label
-            className="sc-bdnxRM kGZvuB cap-form-label"
+            className="sc-bcXGCL ituTec cap-form-label"
             htmlFor="customDomain"
             style={
               Object {
@@ -132,7 +132,7 @@ Array [
             }
           >
             <p
-              className="sc-bdnxRM WxzeU cap-text"
+              className="sc-bcXGCL JNsrJ cap-text"
               style={
                 Object {
                   "marginLeft": 0,
@@ -144,34 +144,34 @@ Array [
             </p>
           </label>
           <span
-            className="sc-bdnxRM eobapS cap-form-guideline"
+            className="sc-bcXGCL iWfQcz cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bdnxRM WTDFb cap-text"
+              className="sc-bcXGCL Ebxhi cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bdnxRM bPgAhL cap-input-group"
+            className="sc-bcXGCL lmURJC cap-input-group"
           >
             <div
-              className="sc-bdnxRM ipHSTK"
+              className="sc-bcXGCL irGATn"
             >
               <div
-                className="sc-bdnxRM dYcHSW sc-fXazdy fmGqjI cap-tag"
+                className="sc-bcXGCL cTrnv sc-fXqqsB gHWJqw cap-tag"
                 style={Object {}}
                 title="custom.domain.com"
               >
                 <p
-                  className="sc-bdnxRM gXaTKi cap-text cap-tag__label"
+                  className="sc-bcXGCL kOjlpv cap-text cap-tag__label"
                 >
                   custom.domain.com
                 </p>
                 <div
                   aria-label="close"
-                  className="sc-bdnxRM hJRjaE cap-tag__closeButton"
+                  className="sc-bcXGCL gLfoLZ cap-tag__closeButton"
                   onClick={[Function]}
                   role="button"
                   style={
@@ -182,7 +182,7 @@ Array [
                   }
                 >
                   <svg
-                    className="sc-bdnxRM sc-eJocfa jkKNnK iyiXbf cap-icon"
+                    className="sc-bcXGCL sc-eJDTud fFcDCb dUaqWe cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
@@ -227,60 +227,60 @@ Array [
 exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <form
-    className="sc-bdnxRM ikHgea"
+    className="sc-bcXGCL ikCHIX"
     id="custom-domain-form"
     onSubmit={[Function]}
   >
     <h4
-      className="sc-bdnxRM lgNWHB cap-heading"
+      className="sc-bcXGCL iydxHs cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bdnxRM byCbgM"
+      className="sc-bcXGCL agnBR"
     >
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM dgrqOD"
+          className="sc-bcXGCL ojXDq"
         >
           <p
-            className="sc-bdnxRM cTaJwS cap-text"
+            className="sc-bcXGCL hMzJdb cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bdnxRM WTDFb cap-text"
+            className="sc-bcXGCL Ebxhi cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM fjTIYU cap-form-control"
+        className="sc-bcXGCL fEPdMN cap-form-control"
         role="group"
       >
         <label
-          className="sc-bdnxRM kGZvuB cap-form-label"
+          className="sc-bcXGCL ituTec cap-form-label"
           htmlFor="subDomain"
           style={
             Object {
@@ -290,7 +290,7 @@ Array [
           }
         >
           <p
-            className="sc-bdnxRM WxzeU cap-text"
+            className="sc-bcXGCL JNsrJ cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -303,7 +303,7 @@ Array [
         </label>
         <input
           aria-required={true}
-          className="sc-bdnxRM sc-TtZnY dUfREC hOdGym cap-input"
+          className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -318,35 +318,35 @@ Array [
       </div>
     </div>
     <div
-      className="sc-bdnxRM hIfpSw"
+      className="sc-bcXGCL gwrAWp"
     >
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM dgrqOD"
+          className="sc-bcXGCL ojXDq"
         >
           <p
-            className="sc-bdnxRM cTaJwS cap-text"
+            className="sc-bcXGCL hMzJdb cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bdnxRM WTDFb cap-text"
+            className="sc-bcXGCL Ebxhi cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bdnxRM dkwaPi"
+        className="sc-bcXGCL kikZuf"
       >
         <div
-          className="sc-bdnxRM fjTIYU cap-form-control"
+          className="sc-bcXGCL fEPdMN cap-form-control"
           role="group"
         >
           <label
-            className="sc-bdnxRM kGZvuB cap-form-label"
+            className="sc-bcXGCL ituTec cap-form-label"
             htmlFor="customDomain"
             style={
               Object {
@@ -356,7 +356,7 @@ Array [
             }
           >
             <p
-              className="sc-bdnxRM WxzeU cap-text"
+              className="sc-bcXGCL JNsrJ cap-text"
               style={
                 Object {
                   "marginLeft": 0,
@@ -368,20 +368,20 @@ Array [
             </p>
           </label>
           <span
-            className="sc-bdnxRM eobapS cap-form-guideline"
+            className="sc-bcXGCL iWfQcz cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bdnxRM WTDFb cap-text"
+              className="sc-bcXGCL Ebxhi cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bdnxRM bPgAhL cap-input-group"
+            className="sc-bcXGCL lmURJC cap-input-group"
           >
             <input
-              className="sc-bdnxRM sc-TtZnY dUfREC hOdGym cap-input"
+              className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"
@@ -393,7 +393,7 @@ Array [
               type="text"
             />
             <button
-              className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
               disabled={true}
               type="submit"
             >

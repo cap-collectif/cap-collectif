@@ -3,31 +3,31 @@
 exports[`<VoteButton /> should render correctly when not voted 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM DwDmK"
+    className="sc-bcXGCL zNZlr"
   >
     <button
       aria-controls="popover-overlay"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM dxOXkI"
+      className="sc-bcXGCL chhFoB"
       disabled={false}
       id="proposal-vote-button-<proposalId>"
       onClick={[Function]}
@@ -40,18 +40,18 @@ Array [
       type="button"
     >
       <div
-        className="sc-bdnxRM jKrcqA toggle-btn"
+        className="sc-bcXGCL ixfmfF toggle-btn"
       >
         <span
-          className="sc-bdnxRM eLfIMN cap-text"
+          className="sc-bcXGCL dCtyrs cap-text"
         >
           global.vote.for
         </span>
         <div
-          className="sc-bdnxRM rYDSf inner-circle"
+          className="sc-bcXGCL CGGUK inner-circle"
         >
           <svg
-            className="sc-bdnxRM sc-eJocfa zBqSO dUIXVZ cap-icon"
+            className="sc-bcXGCL sc-eJDTud cKZjeH cpMilg cap-icon"
             fill="none"
             viewBox="0 0 20 19"
             xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
       data-dialog={true}
       hidden={true}
       id="login-popover"
@@ -96,7 +96,7 @@ Array [
       tabIndex={0}
     >
       <div
-        className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+        className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
         style={
           Object {
             "auto": "100%",
@@ -126,18 +126,18 @@ Array [
         </svg>
       </div>
       <div
-        className="sc-bdnxRM htoMAJ"
+        className="sc-bcXGCL jBLBwk"
       >
         <p
-          className="sc-bdnxRM kUmORS cap-text"
+          className="sc-bcXGCL eIjTDD cap-text"
         >
           vote.popover.title
         </p>
         <div
-          className="sc-bdnxRM jaCxns"
+          className="sc-bcXGCL jbmmEh"
         >
           <p
-            className="sc-bdnxRM dNfCSD cap-text"
+            className="sc-bcXGCL eVdTHW cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -148,11 +148,11 @@ Array [
             vote.popover.body
           </p>
           <span
-            className="sc-bdnxRM hptjof"
+            className="sc-breQAM dGgcIL"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
               onClick={[Function]}
               type="button"
             >
@@ -183,31 +183,31 @@ Array [
 exports[`<VoteButton /> should render correctly when voted 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bdnxRM DwDmK"
+    className="sc-bcXGCL zNZlr"
   >
     <button
       aria-controls="popover-overlay"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM kKRAYf"
+      className="sc-bcXGCL BPbdi"
       disabled={false}
       id="proposal-vote-button-<proposalId>"
       onClick={[Function]}
@@ -220,18 +220,18 @@ Array [
       type="button"
     >
       <div
-        className="sc-bdnxRM jKrcqA toggle-btn"
+        className="sc-bcXGCL ixfmfF toggle-btn"
       >
         <span
-          className="sc-bdnxRM kGBjui cap-text"
+          className="sc-bcXGCL cZiHFv cap-text"
         >
           global.thank.you
         </span>
         <div
-          className="sc-bdnxRM hUnfGI inner-circle"
+          className="sc-bcXGCL bVIMvh inner-circle"
         >
           <svg
-            className="sc-bdnxRM sc-eJocfa hLXDfB dUIXVZ cap-icon"
+            className="sc-bcXGCL sc-eJDTud qkrzY cpMilg cap-icon"
             fill="none"
             viewBox="0 0 20 19"
             xmlns="http://www.w3.org/2000/svg"
@@ -256,7 +256,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      className="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
       data-dialog={true}
       hidden={true}
       id="login-popover"
@@ -276,7 +276,7 @@ Array [
       tabIndex={0}
     >
       <div
-        className="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg kpfMLY juLQlw"
+        className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
         style={
           Object {
             "auto": "100%",
@@ -306,18 +306,18 @@ Array [
         </svg>
       </div>
       <div
-        className="sc-bdnxRM htoMAJ"
+        className="sc-bcXGCL jBLBwk"
       >
         <p
-          className="sc-bdnxRM kUmORS cap-text"
+          className="sc-bcXGCL eIjTDD cap-text"
         >
           vote.popover.title
         </p>
         <div
-          className="sc-bdnxRM jaCxns"
+          className="sc-bcXGCL jbmmEh"
         >
           <p
-            className="sc-bdnxRM dNfCSD cap-text"
+            className="sc-bcXGCL eVdTHW cap-text"
             style={
               Object {
                 "marginLeft": 0,
@@ -328,11 +328,11 @@ Array [
             vote.popover.body
           </p>
           <span
-            className="sc-bdnxRM hptjof"
+            className="sc-breQAM dGgcIL"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              className="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
               onClick={[Function]}
               type="button"
             >

@@ -3,35 +3,35 @@
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    class="sc-bdnxRM bIOcrz"
+    class="sc-bcXGCL dOygWu"
     style="opacity:0"
   >
     <button
-      class="sc-bdnxRM jXtrwG"
+      class="sc-bcXGCL ioCXKX"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -42,20 +42,20 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bdnxRM qRJsX"
+      class="sc-bcXGCL kgkipK"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.against
         </p>
@@ -79,39 +79,39 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    class="sc-bdnxRM bIOcrz"
+    class="sc-bcXGCL dOygWu"
     style="opacity:0"
   >
     <button
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bdnxRM jXtrwG"
+      class="sc-bcXGCL ioCXKX"
       type="button"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.for
         </p>
@@ -130,7 +130,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      class="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
       data-dialog="true"
       hidden=""
       id="login-popover"
@@ -139,7 +139,7 @@ Array [
       tabindex="0"
     >
       <div
-        class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
+        class="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -157,28 +157,28 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bdnxRM htoMAJ"
+        class="sc-bcXGCL jBLBwk"
       >
         <p
-          class="sc-bdnxRM kUmORS cap-text"
+          class="sc-bcXGCL eIjTDD cap-text"
         >
           vote.popover.title
         </p>
         <div
-          class="sc-bdnxRM jaCxns"
+          class="sc-bcXGCL jbmmEh"
         >
           <p
-            class="sc-bdnxRM dNfCSD cap-text"
+            class="sc-bcXGCL eVdTHW cap-text"
             style="margin-left:0;margin-top:0"
           >
             vote.popover.body
           </p>
           <span
-            class="sc-bdnxRM hptjof"
+            class="sc-breQAM dGgcIL"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              class="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
               type="button"
             >
               global.close
@@ -201,14 +201,14 @@ Array [
       aria-controls="popover-overlay"
       aria-expanded="false"
       aria-haspopup="dialog"
-      class="sc-bdnxRM qRJsX"
+      class="sc-bcXGCL kgkipK"
       type="button"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.against
         </p>
@@ -227,7 +227,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      class="sc-bdnxRM NewLoginOverlay__PopoverContainer-hazOKr bEyEIq ehiDfV"
+      class="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
       data-dialog="true"
       hidden=""
       id="login-popover"
@@ -236,7 +236,7 @@ Array [
       tabindex="0"
     >
       <div
-        class="sc-bdnxRM NewLoginOverlay__Arrow-csxmwg GwkjI ipxCrt"
+        class="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -254,28 +254,28 @@ Array [
         </svg>
       </div>
       <div
-        class="sc-bdnxRM htoMAJ"
+        class="sc-bcXGCL jBLBwk"
       >
         <p
-          class="sc-bdnxRM kUmORS cap-text"
+          class="sc-bcXGCL eIjTDD cap-text"
         >
           vote.popover.title
         </p>
         <div
-          class="sc-bdnxRM jaCxns"
+          class="sc-bcXGCL jbmmEh"
         >
           <p
-            class="sc-bdnxRM dNfCSD cap-text"
+            class="sc-bcXGCL eVdTHW cap-text"
             style="margin-left:0;margin-top:0"
           >
             vote.popover.body
           </p>
           <span
-            class="sc-bdnxRM hptjof"
+            class="sc-breQAM dGgcIL"
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bdnxRM sc-lbVvki cMVVDx edAWqw cap-button"
+              class="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
               type="button"
             >
               global.close
@@ -301,35 +301,35 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    class="sc-bdnxRM bIOcrz"
+    class="sc-bcXGCL dOygWu"
     style="opacity:0"
   >
     <button
-      class="sc-bdnxRM jXtrwG"
+      class="sc-bcXGCL ioCXKX"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -340,20 +340,20 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bdnxRM qRJsX"
+      class="sc-bcXGCL kgkipK"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -364,7 +364,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.against
         </p>
@@ -377,35 +377,35 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 Array [
   <div
-    class="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    class="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    class="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    class="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    class="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    class="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    class="sc-bdnxRM bIOcrz"
+    class="sc-bcXGCL dOygWu"
     style="opacity:0"
   >
     <button
-      class="sc-bdnxRM jXtrwG"
+      class="sc-bcXGCL ioCXKX"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -416,20 +416,20 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.for
         </p>
       </div>
     </button>
     <button
-      class="sc-bdnxRM qRJsX"
+      class="sc-bcXGCL kgkipK"
     >
       <div
-        class="sc-bdnxRM gLsJsI"
+        class="sc-bcXGCL jmSOyd"
       >
         <svg
-          class="sc-bdnxRM sc-eJocfa ifxlQq iiyXFY cap-icon"
+          class="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
           xmlns="http://www.w3.org/2000/svg"
@@ -440,7 +440,7 @@ Array [
           />
         </svg>
         <p
-          class="sc-bdnxRM WTDFb cap-text"
+          class="sc-bcXGCL Ebxhi cap-text"
         >
           global.against
         </p>

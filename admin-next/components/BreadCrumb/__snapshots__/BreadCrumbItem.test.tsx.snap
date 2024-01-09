@@ -2,7 +2,7 @@
 
 exports[`<BreadCrumbItem /> should render a text when link is active 1`] = `
 <p
-  className="sc-bdnxRM hCilNi cap-text"
+  className="sc-bcXGCL dXacZb cap-text"
 >
   Project List
 </p>
@@ -10,7 +10,7 @@ exports[`<BreadCrumbItem /> should render a text when link is active 1`] = `
 
 exports[`<BreadCrumbItem /> should render link with href when link is not active 1`] = `
 <a
-  className="sc-bdnxRM hiWSzS cap-link"
+  className="sc-bcXGCL ePrxmz cap-link"
   href="/projects"
 >
   Project List

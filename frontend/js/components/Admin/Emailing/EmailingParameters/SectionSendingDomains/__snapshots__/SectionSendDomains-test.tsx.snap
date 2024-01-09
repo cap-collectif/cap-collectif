@@ -2,26 +2,26 @@
 
 exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render correctly 1`] = `
 <div
-  className="sc-bdnxRM Flex___StyledAppBox-RSPpX lkufbK fGTmtL"
+  className="sc-breQAM Flex___StyledAppBox-SiGEY iSfTVm gEtlaU"
 >
   <div
-    className="sc-bdnxRM Flex___StyledAppBox-RSPpX eGAzNP"
+    className="sc-breQAM Flex___StyledAppBox-SiGEY hSRYCv"
   >
     <div
-      className="sc-bdnxRM Flex___StyledAppBox-RSPpX cGcQDd jFCIdI"
+      className="sc-breQAM Flex___StyledAppBox-SiGEY ixZaON bLsrSH"
     >
       <p
-        className="sc-bdnxRM gJQnhc"
+        className="sc-breQAM dumkdc"
       >
         authentication-sender-domains-dkim-spf
       </p>
       <p
-        className="sc-bdnxRM lhgRuK"
+        className="sc-breQAM ggGZpO"
       >
         authentication-sender-domains-explanation
          
         <a
-          className="sc-bdnxRM Link__LinkInner-jUwnjy  jnxQhY"
+          className="sc-breQAM Link__LinkInner-jUMeyB jQFfTS"
           href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
           rel="noopener noreferrer"
           target="blank"
@@ -34,7 +34,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
       aria-controls="id-1"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bdnxRM Button__ButtonInner-dWPVNG YWcLE dgvgEZ"
+      className="sc-breQAM Button__ButtonInner-dXfNcJ dKtXPE cYRsYv"
       onClick={[Function]}
       onClickCapture={[Function]}
       onKeyDown={[Function]}
@@ -66,51 +66,51 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
     />
   </div>
   <div
-    className="sc-bdnxRM kZFksl"
+    className="sc-breQAM fUcvMl"
   >
     <table
-      className="sc-bdnxRM jIIBsu"
+      className="sc-breQAM bFEqIe"
     >
       <thead
-        className="sc-bdnxRM dSQJSh"
+        className="sc-breQAM broOfJ"
       >
         <tr
-          className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
+          className="sc-breQAM Tr___StyledAppBox-hsTUSR kqvrPx"
         >
           <th
-            className="sc-bdnxRM ejslJN"
+            className="sc-breQAM inxeWZ"
           >
             global.domain
           </th>
           <th
-            className="sc-bdnxRM ejslJN"
+            className="sc-breQAM inxeWZ"
           >
             global.service
           </th>
           <th
-            className="sc-bdnxRM ejslJN"
+            className="sc-breQAM inxeWZ"
           >
             global.spf
           </th>
           <th
-            className="sc-bdnxRM ejslJN"
+            className="sc-breQAM inxeWZ"
           >
             global.dkim
           </th>
           <th
-            className="sc-bdnxRM ejslJN"
+            className="sc-breQAM inxeWZ"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bdnxRM dZBmCd"
+        className="sc-breQAM gXvbFx"
       >
         <tr
-          className="sc-bdnxRM Tr___StyledAppBox-hsEdDO  fBURYy"
+          className="sc-breQAM Tr___StyledAppBox-hsTUSR kqvrPx"
           id="sender-email-domain-1"
         >
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+            className="sc-breQAM Td___StyledAppBox-cCcTFr eEmgF dthgpN"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -120,7 +120,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             test.com
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+            className="sc-breQAM Td___StyledAppBox-cCcTFr eEmgF dthgpN"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -130,7 +130,7 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             Mailjet
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+            className="sc-breQAM Td___StyledAppBox-cCcTFr eEmgF dthgpN"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -138,11 +138,11 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             }
           >
             <IconMock
-              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG fgFRjg fZkSKg AMDLx icon"
+              className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ iaThBE exKJSE AjyOr icon"
             />
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+            className="sc-breQAM Td___StyledAppBox-cCcTFr eEmgF dthgpN"
             style={
               Object {
                 "whiteSpace": "initial",
@@ -150,11 +150,11 @@ exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render c
             }
           >
             <IconMock
-              className="sc-bdnxRM Icon__IconInner-dsjTlW Icon___StyledIconInner-cEPYKG fgFRjg fZkSKg AMDLx icon"
+              className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ iaThBE exKJSE AjyOr icon"
             />
           </td>
           <td
-            className="sc-bdnxRM Td___StyledAppBox-cCsKUs gnlIxl crfCBn"
+            className="sc-breQAM Td___StyledAppBox-cCcTFr eEmgF dthgpN"
             style={
               Object {
                 "whiteSpace": "initial",

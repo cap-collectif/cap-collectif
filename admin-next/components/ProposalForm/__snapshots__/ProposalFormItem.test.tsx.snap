@@ -3,25 +3,25 @@
 exports[`<ProposalFormItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -29,14 +29,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
     >
       Formulaire organisation crée par un admin
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -46,7 +46,7 @@ Array [
     -
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -56,7 +56,7 @@ Array [
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -66,7 +66,7 @@ Array [
     25/10/2022
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -76,7 +76,7 @@ Array [
     25/10/2022
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -84,12 +84,12 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM faBWgd cap-buttonGroup"
+      className="sc-bcXGCL hyIxtw cap-buttonGroup"
     >
       <button
         aria-describedby="id-g"
         aria-label="duplicate"
-        className="sc-bdnxRM cefOTL cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL iKLPNA cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -104,7 +104,7 @@ Array [
         tabIndex={0}
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 10 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -145,25 +145,25 @@ Array [
 exports[`<ProposalFormItem /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bdnxRM hXMCPX toasts-container toasts-container--top"
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bdnxRM iyonkx toasts-container toasts-container--top-left"
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
   />,
   <div
-    className="sc-bdnxRM ffNWZe toasts-container toasts-container--top-right"
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
   />,
   <div
-    className="sc-bdnxRM drnSqO toasts-container toasts-container--bottom"
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
   />,
   <div
-    className="sc-bdnxRM lhKBDU toasts-container toasts-container--bottom-left"
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
   />,
   <div
-    className="sc-bdnxRM fjDKdX toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -171,14 +171,14 @@ Array [
     }
   >
     <a
-      className="sc-bdnxRM bjOoai cap-link"
+      className="sc-bcXGCL ZqqiX cap-link"
       href="https://capco.dev/admin/capco/app/proposalform/proposalFormOrgaAdmin/edit?_locale=fr-FR"
     >
       Formulaire organisation crée par un admin
     </a>
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -188,7 +188,7 @@ Array [
     -
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -198,7 +198,7 @@ Array [
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -208,7 +208,7 @@ Array [
     25/10/2022
   </td>,
   <td
-    className="sc-bdnxRM jWrtJR cap-table__td"
+    className="sc-bcXGCL kdBJtI cap-table__td"
     style={
       Object {
         "whiteSpace": "initial",
@@ -218,7 +218,7 @@ Array [
     25/10/2022
   </td>,
   <td
-    className="sc-bdnxRM kYHBHt cap-table__td visible-on-hover"
+    className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
       Object {
         "whiteSpace": "initial",
@@ -226,12 +226,12 @@ Array [
     }
   >
     <div
-      className="sc-bdnxRM faBWgd cap-buttonGroup"
+      className="sc-bcXGCL hyIxtw cap-buttonGroup"
     >
       <button
         aria-describedby="id-g"
         aria-label="duplicate"
-        className="sc-bdnxRM cefOTL cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL iKLPNA cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -246,7 +246,7 @@ Array [
         tabIndex={0}
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 10 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -285,7 +285,7 @@ Array [
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="global.delete"
-        className="sc-bdnxRM fvMhpc cap-buttonQuickAction"
+        className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -301,7 +301,7 @@ Array [
         type="button"
       >
         <svg
-          className="sc-bdnxRM sc-eJocfa czzlfs iiyXFY cap-icon"
+          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"
