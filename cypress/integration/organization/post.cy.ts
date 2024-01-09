@@ -22,9 +22,7 @@ describe('Organization Post', () => {
       // udate title / body
       cy.get('#FR_FR-title').type('post title')
       cy.get('.jodit-wysiwyg').type('post body')
-      cy.get(
-        '#project > .Select__SelectContainer-bqbDYn > .react-select-container > .react-select__control > .react-select__value-container',
-      ).click()
+      cy.get('#project .react-select-container > .react-select__control > .react-select__value-container').click()
       cy.get('#react-select-3-option-0').click()
       // submit post
       cy.contains('admin.post.createAndPublish').click()

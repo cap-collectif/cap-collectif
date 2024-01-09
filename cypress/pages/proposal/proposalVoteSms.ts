@@ -34,7 +34,7 @@ export default new (class ProposalSms {
   }
 
   getProposalSuggestionCards() {
-    return this.cy.get('.ProposalSuggestionCard__Link-kjlWko')
+    return this.cy.get('a[class*="ProposalSuggestionCard__Link"]')
   }
 
   getVoteHeaderMaxVoteCounter() {
