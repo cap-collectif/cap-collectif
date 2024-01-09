@@ -423,9 +423,10 @@ class ExportController extends Controller
                               registeredAt
                               registeredAnonymously
                               node {
-                                {$CONTRIBUTOR_FRAGMENT}
                                 ... on User {
+                                    {$CONTRIBUTOR_FRAGMENT}
                                     {$USER_FRAGMENT}
+                                    consentExternalCommunication
                                 }
                                 ... on NotRegistered {
                                   username
