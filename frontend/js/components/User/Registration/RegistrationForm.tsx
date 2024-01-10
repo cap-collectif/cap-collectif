@@ -20,7 +20,7 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import type { Questions, ResponsesInReduxForm } from '~/components/Form/Form.type'
 import { REGEX_USERNAME } from '~/constants/FormConstants'
 import AppBox from '~/components/Ui/Primitives/AppBox'
-import Popover from '~ds/Popover'
+
 type Props = ReduxFormFormProps & {
   intl: IntlShape
   responses: Array<Record<string, any>>
@@ -145,35 +145,18 @@ export const RegistrationForm = ({
   return (
     <form onSubmit={handleSubmit} id="registration-form">
       <Field name="locale" id="locale" component={renderComponent} value={locale} type="hidden" />
-      <Popover
-        id="registration-email-tooltip"
-        placement={window.innerWidth >= 768 ? 'right' : 'top'}
-        keepOnHover
-        useArrow
-      >
-        <Popover.Trigger>
-          <div>
-            <Field
-              name="email"
-              disabled={!!email}
-              id="email"
-              component={renderComponent}
-              type="email"
-              autoComplete="email"
-              ariaRequired
-              label={<FormattedMessage id="global.email" />}
-              labelClassName="font-weight-normal"
-              placeholder="global.placeholder.email"
-            />
-          </div>
-        </Popover.Trigger>
-        <Popover.Content>
-          <Popover.Body marginBottom={0}>
-            <FormattedMessage id="registration.tooltip.email" />
-          </Popover.Body>
-        </Popover.Content>
-      </Popover>
-
+      <Field
+        name="email"
+        disabled={!!email}
+        id="email"
+        component={renderComponent}
+        type="email"
+        autoComplete="email"
+        ariaRequired
+        label={<FormattedMessage id="global.email" />}
+        labelClassName="font-weight-normal"
+        placeholder="global.placeholder.email"
+      />
       <UserPasswordField
         formName={form}
         id="password"
