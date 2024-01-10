@@ -1,66 +1,14 @@
 import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MenuItem, Modal } from 'react-bootstrap'
-import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
+import colors from '~/utils/colors'
 import Icon from '~ds/Icon/Icon'
 
 export const ProjectBoxContainer = styled.div<{
   color?: string | null | undefined
 }>`
   border-top-color: ${({ color }) => color || '#858e95'};
-`
-export const BoxContainer = styled.div<{
-  color?: string | null | undefined
-}>`
-  width: auto;
-  margin: 0 2rem 2rem 2rem;
-  border-top-color: ${({ color }) => color || '#858e95'};
-`
-export const BoxDeprecated: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
-  className: 'box-content',
-})`
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 0;
-
-  > span {
-    font-weight: bold;
-  }
-
-  a {
-    font-weight: 600;
-    display: flex;
-    color: #0388cc;
-
-    :hover,
-    :focus {
-      text-decoration: none;
-    }
-
-    > span {
-      margin-right: 5px;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  span[class*='Label'] {
-    padding: 1px 8px !important;
-  }
-
-  > div span + span {
-    font-weight: bold;
-    margin-left: 5px;
-  }
-
-  i {
-    font-size: 10px;
-    top: 5px;
-    left: 2px;
-  }
 `
 export const ProjectBoxHeader = styled.div<{
   noBorder?: boolean
