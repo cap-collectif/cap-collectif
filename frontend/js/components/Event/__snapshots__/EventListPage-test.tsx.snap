@@ -1786,7 +1786,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "1722c56af81daa622ab438fb2d5a8068",
+            "cacheID": "c7fc79f04ec1cd65e55ea9155bb01e9e",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -1901,6 +1901,10 @@ fragment EventListPaginated_query_17yZ05 on Query {
   }
 }
 
+fragment EventMapModal_query_307oU4 on Query {
+  ...LeafletMap_query_307oU4
+}
+
 fragment EventMapPreview_event on Event {
   id
   title
@@ -1937,6 +1941,7 @@ fragment EventMap_query_307oU4 on Query {
     }
   }
   ...LeafletMap_query_307oU4
+  ...EventMapModal_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_pkHIz on Query {
@@ -3882,7 +3887,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "1722c56af81daa622ab438fb2d5a8068",
+            "cacheID": "c7fc79f04ec1cd65e55ea9155bb01e9e",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -3997,6 +4002,10 @@ fragment EventListPaginated_query_17yZ05 on Query {
   }
 }
 
+fragment EventMapModal_query_307oU4 on Query {
+  ...LeafletMap_query_307oU4
+}
+
 fragment EventMapPreview_event on Event {
   id
   title
@@ -4033,6 +4042,7 @@ fragment EventMap_query_307oU4 on Query {
     }
   }
   ...LeafletMap_query_307oU4
+  ...EventMapModal_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_pkHIz on Query {
@@ -5978,7 +5988,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "1722c56af81daa622ab438fb2d5a8068",
+            "cacheID": "c7fc79f04ec1cd65e55ea9155bb01e9e",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -6093,6 +6103,10 @@ fragment EventListPaginated_query_17yZ05 on Query {
   }
 }
 
+fragment EventMapModal_query_307oU4 on Query {
+  ...LeafletMap_query_307oU4
+}
+
 fragment EventMapPreview_event on Event {
   id
   title
@@ -6129,6 +6143,7 @@ fragment EventMap_query_307oU4 on Query {
     }
   }
   ...LeafletMap_query_307oU4
+  ...EventMapModal_query_307oU4
 }
 
 fragment EventPagePassedEventsPreview_query_pkHIz on Query {

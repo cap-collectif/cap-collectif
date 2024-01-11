@@ -5,76 +5,70 @@ import { FormattedMessage } from 'react-intl'
 import { Button } from 'react-bootstrap'
 import LeafletMap from './LeafletMap'
 import type { EventMap_query } from '~relay/EventMap_query.graphql'
+import { useDisclosure } from '@liinkiing/react-hooks'
+import EventMapModal from './EventMapModal'
 
 type Props = {
   query: EventMap_query
   relay: RelayPaginationProp
 }
-type State = {
-  loading: boolean
-}
+
 const PAGINATION = 50
-export class EventMap extends React.Component<Props, State> {
-  state = {
-    loading: false,
-  }
 
-  loadMore = () => {
-    const { relay, query } = this.props
+export const EventMap = ({ relay, query }: Props) => {
+  const [loading, setLoading] = React.useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure(false)
 
+  const loadMore = () => {
     if (!query.events.pageInfo.hasNextPage) {
-      this.setState({
-        loading: false,
-      })
+      setLoading(false)
       return
     }
 
     relay.loadMore(PAGINATION, () => {
-      this.loadMore()
+      loadMore()
     })
   }
 
-  loadAll = () => {
-    this.setState({
-      loading: true,
-    })
-    this.loadMore()
+  const loadAll = () => {
+    setLoading(true)
+    loadMore()
   }
 
-  render() {
-    const { relay, query } = this.props
-    const { loading } = this.state
-    return (
-      <div
-        style={{
-          position: 'relative',
-        }}
-      >
-        {relay.hasMore() && !loading && (
-          <Button
-            style={{
-              position: 'absolute',
-              marginLeft: '5%',
-              top: '85%',
-              zIndex: '1500',
-              width: '90%',
-            }}
-            onClick={this.loadAll}
-          >
-            <FormattedMessage id="see-more-events" />
-          </Button>
-        )}
-        <LeafletMap
-          loading={loading}
-          query={query}
-          defaultMapOptions={{
-            zoom: 12,
+  return (
+    <div
+      style={{
+        position: 'relative',
+      }}
+    >
+      {relay.hasMore() && !loading && (
+        <Button
+          style={{
+            position: 'absolute',
+            marginLeft: '5%',
+            top: '85%',
+            zIndex: '1500',
+            width: '90%',
           }}
-        />
-      </div>
-    )
-  }
+          onClick={loadAll}
+        >
+          <FormattedMessage id="see-more-events" />
+        </Button>
+      )}
+      <LeafletMap
+        key="map"
+        loading={loading}
+        query={query}
+        defaultMapOptions={{
+          zoom: 12,
+        }}
+        toggleFullScreen={() => onOpen()}
+      />
+      {isOpen ? <EventMapModal onClose={onClose} query={query} /> : null}
+    </div>
+  )
 }
+
 export default createPaginationContainer(
   EventMap,
   {
@@ -119,6 +113,20 @@ export default createPaginationContainer(
           }
         }
         ...LeafletMap_query
+          @arguments(
+            count: $count
+            cursor: $cursor
+            theme: $theme
+            project: $project
+            locale: $locale
+            search: $search
+            userType: $userType
+            isFuture: $isFuture
+            author: $author
+            isRegistrable: $isRegistrable
+            orderBy: $orderBy
+          )
+        ...EventMapModal_query
           @arguments(
             count: $count
             cursor: $cursor

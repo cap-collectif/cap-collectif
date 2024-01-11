@@ -27,7 +27,7 @@ Array [
       className="leaflet-top leaflet-right"
     >
       <div
-        className="leaflet-control"
+        className="leaflet-control "
       >
         <div
           className="sc-bcXGCL cdJeQF"

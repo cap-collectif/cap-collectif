@@ -129,6 +129,15 @@
     height: 430px;
 }
 
+#event-map.fullscreen {
+    height: 100%;
+    min-height: 600px;
+}
+
+#event-map .below {
+    margin-top: 126px;
+}
+
 @media (max-width: 380px) {
     .event{
         font-size: 1.3rem;

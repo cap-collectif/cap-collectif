@@ -75,6 +75,7 @@ declare const ICON_NAME = {
   EARTH: 'EARTH',
   SORT: 'SORT',
   ORGANISATION: 'ORGANISATION',
+  EXPAND: 'EXPAND',
 }
 
 declare const ICON_SIZE = {

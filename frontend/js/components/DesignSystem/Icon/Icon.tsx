@@ -84,6 +84,7 @@ export const ICON_NAME = {
   EARTH: 'EARTH',
   SORT: 'SORT',
   ORGANISATION: 'ORGANISATION',
+  EXPAND: 'EXPAND',
 }
 export const ICON_SIZE = {
   XS: 'xs',

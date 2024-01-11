@@ -8,11 +8,12 @@ const ControlClasses = {
   topright: 'leaflet-top leaflet-right',
 }
 type Props = {
-  readonly position?: $Keys<typeof ControlClasses>
-  readonly children: JSX.Element | JSX.Element[] | string
+  position?: $Keys<typeof ControlClasses>
+  children: JSX.Element | JSX.Element[] | string
+  className?: string
 }
 
-const LeafletControl = ({ position, children }: Props) => {
+const LeafletControl = ({ position, children, className = '' }: Props) => {
   const ref = React.useRef(null)
   React.useEffect(() => {
     if (ref.current) {
@@ -22,7 +23,7 @@ const LeafletControl = ({ position, children }: Props) => {
   })
   return (
     <div ref={ref} className={position && ControlClasses[position]}>
-      <div className="leaflet-control">{children}</div>
+      <div className={`leaflet-control ${className}`}>{children}</div>
     </div>
   )
 }

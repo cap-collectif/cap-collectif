@@ -1,6 +1,6 @@
 import React from 'react'
 import { MapContainer, Marker, Popup } from 'react-leaflet'
-import { connect, useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { graphql } from 'relay-runtime'
 import { FormattedMessage } from 'react-intl'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
@@ -8,22 +8,68 @@ import L from 'leaflet'
 import { GestureHandling } from 'leaflet-gesture-handling'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
-import { createFragmentContainer } from 'react-relay'
+import { useFragment } from 'react-relay'
 import LocateControl from '~/components/Proposal/Map/LocateControl'
 import type { GlobalState, Dispatch } from '~/types'
 import { changeEventSelected } from '~/redux/modules/event'
 import type { MapOptions } from '~/components/Proposal/Map/Map.types'
 import EventMapPreview from './EventMapPreview/EventMapPreview'
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables'
-import type { LeafletMap_query } from '~relay/LeafletMap_query.graphql'
+import type { LeafletMap_query$key } from '~relay/LeafletMap_query.graphql'
 import { isSafari } from '~/config'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
+import FullScreenControl from './FullScreenControl'
+import useIsMobile from '~/utils/hooks/useIsMobile'
 
 type Props = {
-  query: LeafletMap_query
+  query: LeafletMap_query$key
   defaultMapOptions: MapOptions
   loading: boolean
+  toggleFullScreen: () => void
+  isFullScreen?: boolean
 }
+
+const FRAGMENT = graphql`
+  fragment LeafletMap_query on Query
+  @argumentDefinitions(
+    count: { type: "Int!" }
+    cursor: { type: "String" }
+    theme: { type: "ID" }
+    project: { type: "ID" }
+    locale: { type: "TranslationLocale" }
+    search: { type: "String" }
+    userType: { type: "ID" }
+    isFuture: { type: "Boolean" }
+    author: { type: "ID" }
+    isRegistrable: { type: "Boolean" }
+    orderBy: { type: "EventOrder" }
+  ) {
+    events(
+      first: $count
+      after: $cursor
+      theme: $theme
+      project: $project
+      locale: $locale
+      search: $search
+      userType: $userType
+      isFuture: $isFuture
+      author: $author
+      isRegistrable: $isRegistrable
+      orderBy: $orderBy
+    ) @connection(key: "EventMap_events", filters: []) {
+      edges {
+        node {
+          id
+          googleMapsAddress {
+            lat
+            lng
+          }
+          ...EventMapPreview_event
+        }
+      }
+    }
+  }
+`
 
 const formatBounds = bounds => {
   if (
@@ -44,10 +90,19 @@ const formatBounds = bounds => {
   return bounds
 }
 
-export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
+export const LeafletMap = ({
+  loading,
+  query: queryKey,
+  defaultMapOptions,
+  toggleFullScreen,
+  isFullScreen = false,
+}: Props) => {
+  const query = useFragment(FRAGMENT, queryKey)
   const markers = query.events
   const eventSelected: string | null | undefined = useSelector((state: GlobalState) => state.event.eventSelected)
   const dispatch: Dispatch = useDispatch()
+  const isMobile = useIsMobile()
+
   React.useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
   }, [])
@@ -112,6 +167,7 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
         maxZoom={MAX_MAP_ZOOM}
         preferCanvas
         id="event-map"
+        className={isFullScreen ? 'fullscreen' : null}
         style={
           loading
             ? {
@@ -159,51 +215,9 @@ export const LeafletMap = ({ loading, query, defaultMapOptions }: Props) => {
               )}
         </MarkerClusterGroup>
         <LocateControl />
+        {!isMobile ? <FullScreenControl onClick={toggleFullScreen} /> : null}
       </MapContainer>
     </div>
   )
 }
-const Container = connect<any, any>()(LeafletMap)
-export default createFragmentContainer(Container, {
-  query: graphql`
-    fragment LeafletMap_query on Query
-    @argumentDefinitions(
-      count: { type: "Int!" }
-      cursor: { type: "String" }
-      theme: { type: "ID" }
-      project: { type: "ID" }
-      locale: { type: "TranslationLocale" }
-      search: { type: "String" }
-      userType: { type: "ID" }
-      isFuture: { type: "Boolean" }
-      author: { type: "ID" }
-      isRegistrable: { type: "Boolean" }
-      orderBy: { type: "EventOrder" }
-    ) {
-      events(
-        first: $count
-        after: $cursor
-        theme: $theme
-        project: $project
-        locale: $locale
-        search: $search
-        userType: $userType
-        isFuture: $isFuture
-        author: $author
-        isRegistrable: $isRegistrable
-        orderBy: $orderBy
-      ) @connection(key: "EventMap_events", filters: []) {
-        edges {
-          node {
-            id
-            googleMapsAddress {
-              lat
-              lng
-            }
-            ...EventMapPreview_event
-          }
-        }
-      }
-    }
-  `,
-})
+export default LeafletMap

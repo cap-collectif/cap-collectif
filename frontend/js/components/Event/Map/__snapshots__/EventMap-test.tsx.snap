@@ -8,12 +8,13 @@ exports[`<EventMap /> renders correctly 1`] = `
     }
   }
 >
-  <Relay(Connect(LeafletMap))
+  <LeafletMap
     defaultMapOptions={
       Object {
         "zoom": 12,
       }
     }
+    key="map"
     loading={false}
     query={
       Object {
@@ -41,6 +42,7 @@ exports[`<EventMap /> renders correctly 1`] = `
         },
       }
     }
+    toggleFullScreen={[Function]}
   />
 </div>
 `;
