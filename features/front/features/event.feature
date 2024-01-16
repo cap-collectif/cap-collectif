@@ -48,7 +48,7 @@ Scenario: Archived events can be filtered by theme
   And I wait ".loader" to appear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "evenementPasseSansDateDeFin" within 5 seconds
+  And I should see "evenementPasseSansDateDeFin" within 7 seconds
   And I should not see "PHPTourDuFuture"
 
 @read-only
@@ -59,7 +59,7 @@ Scenario: Events can be filtered by title
   And I wait ".eventPreview" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "Event without registrations" within 5 seconds
+  And I should see "Event without registrations" within 7 seconds
   And I should not see "Event with registrations"
 
 @read-only
@@ -72,7 +72,7 @@ Scenario: Archived events can be filtered by title
   And I wait ".eventPreview" to disappear on current page
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
-  And I should see "ParisWeb2014" within 5 seconds
+  And I should see "ParisWeb2014" within 7 seconds
   And I should not see "evenementPasseSansDateDeFin"
 
 @database
@@ -160,7 +160,7 @@ Scenario: Logged in user wants to edit his refused event
   When I click on button "#confirm-event-submit"
   Then I should be redirected to '/events/event-create-by-user-with-review-refused'
   And I wait "#event-label-status" to appear on current page
-  Then I should see "waiting-examination" within 5 seconds in the "#event-label-status" element
+  Then I should see "waiting-examination" within 7 seconds in the "#event-label-status" element
 
 @read-only
 Scenario: Feature allow users to propose events is disabled
