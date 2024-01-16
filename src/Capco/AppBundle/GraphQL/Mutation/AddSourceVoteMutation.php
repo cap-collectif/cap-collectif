@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
@@ -21,6 +22,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddSourceVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private SourceRepository $sourceRepo;
     private SourceVoteRepository $sourceVoteRepo;
@@ -46,6 +48,7 @@ class AddSourceVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $contributionId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         $source = $this->sourceRepo->find($contributionId);
 

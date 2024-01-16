@@ -5,12 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\EmailingCampaignMessage;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
-class EmailingCampaignPreviewResolver implements ResolverInterface
+class EmailingCampaignPreviewResolver implements QueryInterface
 {
     private SiteParameterResolver $siteParams;
     private RouterInterface $router;

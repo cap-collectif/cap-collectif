@@ -7,11 +7,11 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Argument as Args;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 
-class ConsultationStepVotesResolver implements ResolverInterface
+class ConsultationStepVotesResolver implements QueryInterface
 {
     private VoteSearch $voteSearch;
     private LoggerInterface $logger;

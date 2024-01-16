@@ -27,7 +27,7 @@ PreviewProposalDecision:
             post:
                 type: 'PreviewOfficialResponse!'
                 description: 'The related official response.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-11-13", reason: "Replaced by OfficialResponse", description: "Field `post` will be removed.", supersededBy: "Use `officialResponse` instead."})'
+                deprecationReason: 'Field "post" will be removed, Use "officialResponse" instead.'
             officialResponse:
                 type: 'PreviewOfficialResponse!'
                 description: 'The related official response.'

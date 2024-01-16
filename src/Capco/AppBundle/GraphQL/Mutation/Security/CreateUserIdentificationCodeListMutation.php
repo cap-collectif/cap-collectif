@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Security;
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
 use Capco\AppBundle\Generator\IdentificationCodeGenerator;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class CreateUserIdentificationCodeListMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private UserIdentificationCodeRepository $codeRepository;
 
@@ -26,6 +28,7 @@ class CreateUserIdentificationCodeListMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $list = $this->generateListAndCodes(
             $input->offsetGet('name'),
             $viewer,

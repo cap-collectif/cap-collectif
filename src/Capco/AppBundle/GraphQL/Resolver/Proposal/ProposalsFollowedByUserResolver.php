@@ -5,12 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalsFollowedByUserResolver implements ResolverInterface
+class ProposalsFollowedByUserResolver implements QueryInterface
 {
     private $proposalRepository;
     private $logger;

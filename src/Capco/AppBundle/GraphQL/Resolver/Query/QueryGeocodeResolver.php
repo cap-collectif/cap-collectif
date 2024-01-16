@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
 use Capco\AppBundle\Utils\Map;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryGeocodeResolver implements ResolverInterface
+class QueryGeocodeResolver implements QueryInterface
 {
     private Map $map;
 

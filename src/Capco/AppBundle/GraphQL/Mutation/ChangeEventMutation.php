@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -15,8 +16,11 @@ use Swarrot\Broker\Message;
 
 class ChangeEventMutation extends AbstractEventMutation
 {
+    use MutationTrait;
+
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         try {

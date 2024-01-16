@@ -3,6 +3,6 @@ StepAdminUrlOperationType:
     config:
         values:
             CREATE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\StepAdminUrlOperationType::CREATE")'
+                value: !php/const Capco\AppBundle\Enum\StepAdminUrlOperationType::CREATE
             EDIT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\StepAdminUrlOperationType::EDIT")'
+                value: !php/const Capco\AppBundle\Enum\StepAdminUrlOperationType::EDIT

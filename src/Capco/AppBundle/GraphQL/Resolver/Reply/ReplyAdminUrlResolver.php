@@ -4,11 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
 use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ReplyAdminUrlResolver implements ResolverInterface
+class ReplyAdminUrlResolver implements QueryInterface
 {
     private RouterInterface $router;
 

@@ -5,5 +5,5 @@ InternalProposalFormAffiliation:
         description: 'The affiliation of a user to a `ProposalForm.`'
         values:
             OWNER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormAffiliation::OWNER")'
+                value: !php/const Capco\AppBundle\Enum\ProposalFormAffiliation::OWNER
                 description: '`ProposalForms` that are owned by the authenticated user.'

@@ -10,6 +10,7 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -19,13 +20,15 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         ProposalRepository $proposalRepository,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalAnalysisRepository $analysisRepository,
         LoggerInterface $logger,
         ResponsesFormatter $responsesFormatter,
@@ -54,7 +57,7 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         Argument $argument,
         ProposalRepository $proposalRepository,
         Proposal $proposal,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalAnalysisRepository $analysisRepository,
         ResponsesFormatter $responsesFormatter,
         User $viewer,
@@ -72,6 +75,8 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
             $formFactory,
             $form
         );
+
+        $this->getMockedGraphQLArgumentFormatted($argument);
 
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::FAVOURABLE);
@@ -90,7 +95,7 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         Argument $argument,
         ProposalRepository $proposalRepository,
         Proposal $proposal,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalAnalysisRepository $analysisRepository,
         ResponsesFormatter $responsesFormatter,
         User $viewer,
@@ -108,6 +113,8 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
             $formFactory,
             $form
         );
+
+        $this->getMockedGraphQLArgumentFormatted($argument);
 
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::IN_PROGRESS);

@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\DebateVoteRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DebateViewerVoteResolver implements ResolverInterface
+class DebateViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
     private DebateVoteRepository $repository;

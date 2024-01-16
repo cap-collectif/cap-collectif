@@ -18,7 +18,7 @@ class Media
      */
     use UuidTrait;
     protected ?string $name = null;
-    protected string $description;
+    protected ?string $description = null;
     protected bool $enabled = false;
     protected string $providerName;
     protected int $providerStatus = 1;
@@ -28,7 +28,7 @@ class Media
     protected int $height;
     protected float $length;
     protected string $copyright;
-    protected string $authorName;
+    protected ?string $authorName = null;
     protected string $context;
     protected ?bool $cdnIsFlushable = false;
     protected string $cdnFlushIdentifier;

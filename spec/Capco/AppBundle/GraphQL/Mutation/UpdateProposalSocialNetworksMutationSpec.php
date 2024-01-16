@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\ProposalSocialNetworks;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProposalSocialNetworksMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -15,6 +16,8 @@ use Psr\Log\LoggerInterface;
 
 class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -33,6 +36,7 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
 
@@ -49,6 +53,7 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
         ProposalForm $proposalForm
     ) {
         $proposalForm->isUsingAnySocialNetworks()->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposal);
         $proposal->getProposalForm()->willReturn($proposalForm);
@@ -67,6 +72,7 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
         ProposalForm $proposalForm
     ) {
         $proposalForm->isUsingAnySocialNetworks()->willReturn(true);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposal);
         $proposal->getProposalForm()->willReturn($proposalForm);
@@ -94,6 +100,7 @@ class UpdateProposalSocialNetworksMutationSpec extends ObjectBehavior
         $proposalForm->isUsingTwitter()->willReturn(false);
         $proposalForm->isUsingYoutube()->willReturn(false);
         $proposalForm->isUsingLinkedIn()->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposal);
         $proposal->getProposalForm()->willReturn($proposalForm);

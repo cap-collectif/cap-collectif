@@ -4,11 +4,11 @@ ProposalAnalysisDecision:
         description: 'Available decisions value for a proposal analysis.'
         values:
             FAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::FAVOURABLE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::FAVOURABLE
                 description: "The proposal's assessment state is favourable."
             UNFAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::UNFAVOURABLE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::UNFAVOURABLE
                 description: "The proposal's assessment state is unfavourable."
             NONE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::NONE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::NONE
                 description: "The proposal's assessment state is unfavourable."

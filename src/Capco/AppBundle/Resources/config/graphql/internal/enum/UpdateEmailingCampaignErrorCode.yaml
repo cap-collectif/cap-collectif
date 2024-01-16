@@ -7,11 +7,11 @@ UpdateEmailingCampaignErrorCode:
         description: 'Available errors on campaign edition'
         values:
             ID_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::ID_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode::ID_NOT_FOUND
                 description: 'No campaign match your id'
             NOT_EDITABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::NOT_EDITABLE")'
+                value: !php/const Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode::NOT_EDITABLE
                 description: 'The campaign is not editable'
             TOO_LATE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateEmailingCampaignErrorCode::TOO_LATE")'
+                value: !php/const Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode::TOO_LATE
                 description: 'sendAt must be in the future'

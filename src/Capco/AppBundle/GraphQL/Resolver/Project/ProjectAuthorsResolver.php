@@ -7,10 +7,10 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ProjectAuthorsResolver implements ResolverInterface
+class ProjectAuthorsResolver implements QueryInterface
 {
     private UserRepository $userRepository;
     private LoggerInterface $logger;

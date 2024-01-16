@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\SectionType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
     public const INVALID_FORM = 'INVALID_FORM';
 
@@ -40,6 +43,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         /**
          * @var Section $section
          */

@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ProjectCanEditResolver implements ResolverInterface
+class ProjectCanEditResolver implements QueryInterface
 {
     private AuthorizationCheckerInterface $authorizationChecker;
 

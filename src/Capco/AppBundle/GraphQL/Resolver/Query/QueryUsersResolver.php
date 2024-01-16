@@ -11,10 +11,10 @@ use Capco\AppBundle\Search\UserSearch;
 use Capco\UserBundle\Repository\UserRepository;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class QueryUsersResolver implements ResolverInterface
+class QueryUsersResolver implements QueryInterface
 {
     use ResolverTrait;
 

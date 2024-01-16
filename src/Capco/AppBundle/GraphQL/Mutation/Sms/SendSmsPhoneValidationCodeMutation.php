@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Entity\User;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class SendSmsPhoneValidationCodeMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
     public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
     private const RETRY_PER_MINUTE = 2;
@@ -32,6 +35,7 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         if ($viewer->isPhoneConfirmed()) {
             return ['errorCode' => self::PHONE_ALREADY_CONFIRMED];
         }

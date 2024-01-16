@@ -9,32 +9,32 @@ class AbstractSocialNetworks
     /**
      * @ORM\Column(name="web_page_url", type="string", length=255, nullable=true)
      */
-    protected ?string $webPageUrl;
+    protected ?string $webPageUrl = null;
 
     /**
      * @ORM\Column(name="facebook_url", type="string", length=255, nullable=true)
      */
-    protected ?string $facebookUrl;
+    protected ?string $facebookUrl = null;
 
     /**
      * @ORM\Column(name="twitter_url", type="string", length=255, nullable=true)
      */
-    protected ?string $twitterUrl;
+    protected ?string $twitterUrl = null;
 
     /**
      * @ORM\Column(name="instagram_url", type="string", length=255, nullable=true)
      */
-    protected ?string $instagramUrl;
+    protected ?string $instagramUrl = null;
 
     /**
      * @ORM\Column(name="linked_in_url", type="string", length=255, nullable=true)
      */
-    protected ?string $linkedInUrl;
+    protected ?string $linkedInUrl = null;
 
     /**
      * @ORM\Column(name="youtube_url", type="string", length=255, nullable=true)
      */
-    protected ?string $youtubeUrl;
+    protected ?string $youtubeUrl = null;
 
     public function getWebPageUrl(): ?string
     {

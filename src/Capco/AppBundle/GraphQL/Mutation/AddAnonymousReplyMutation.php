@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Utils\RequestGuesser;
@@ -21,6 +22,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddAnonymousReplyMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_FORM = 'INVALID_FORM';
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
@@ -56,6 +59,7 @@ class AddAnonymousReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         /** @var Questionnaire $questionnaire */

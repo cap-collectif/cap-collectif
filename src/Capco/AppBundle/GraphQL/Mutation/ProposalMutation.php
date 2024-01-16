@@ -20,6 +20,7 @@ use Capco\AppBundle\Form\ProposalProgressStepType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
@@ -46,6 +47,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ProposalMutation extends CreateProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+    use MutationTrait;
     use ResolverTrait;
 
     protected AuthorizationCheckerInterface $authorizationChecker;
@@ -104,6 +106,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function changeNotation(Argument $input, $user)
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
@@ -161,6 +164,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function changeProgressSteps(Argument $input, $user): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         /** @var Proposal $proposal */
         $proposal = $this->globalIdResolver->resolve($values['proposalId'], $user);
@@ -350,6 +354,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function changePublicationStatus(Argument $values, $user): array
     {
+        $this->formatInput($values);
         if ($user && $user->isAdmin() && $this->em->getFilters()->isEnabled('softdeleted')) {
             // If user is an admin, we allow to retrieve deleted proposal
             $this->em->getFilters()->disable('softdeleted');
@@ -427,6 +432,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function changeContent(Argument $input, $viewer): array
     {
+        $this->formatInput($input);
         $viewer = $this->preventNullableViewer($viewer);
         $values = $input->getArrayCopy();
 

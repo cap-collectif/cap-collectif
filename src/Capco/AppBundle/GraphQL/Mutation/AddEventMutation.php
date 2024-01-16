@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
@@ -28,6 +29,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventMutation extends AbstractEventMutation
 {
+    use MutationTrait;
+
     private SettableOwnerResolver $settableOwnerResolver;
     private LocaleRepository $localeRepository;
 
@@ -57,6 +60,7 @@ class AddEventMutation extends AbstractEventMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         try {

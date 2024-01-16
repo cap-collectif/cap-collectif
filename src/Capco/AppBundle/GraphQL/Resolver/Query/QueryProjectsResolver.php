@@ -14,7 +14,7 @@ use Capco\AppBundle\Search\ProjectSearch;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -22,7 +22,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class QueryProjectsResolver implements ResolverInterface
+class QueryProjectsResolver implements QueryInterface
 {
     use ResolverTrait;
 

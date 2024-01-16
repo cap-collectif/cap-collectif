@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserOpinionVoteCountResolver implements ResolverInterface
+class UserOpinionVoteCountResolver implements QueryInterface
 {
     private $opinionVoteRepository;
 

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireParametersUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
@@ -20,6 +21,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private QuestionnaireRepository $questionnaireRepository;
@@ -45,6 +47,7 @@ class UpdateQuestionnaireParametersMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $questionnaireId = GlobalId::fromGlobalId($arguments['questionnaireId'])['id'];

@@ -7,11 +7,11 @@ InternalProposalOrderField:
         description: 'Ordering options for proposals votes connections.'
         values:
             REVISION_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::REVISION_AT")'
+                value: !php/const Capco\AppBundle\Enum\ProposalOrderField::REVISION_AT
                 description: 'Allows ordering a list of proposals by revision date.'
             CATEGORY:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::CATEGORY")'
+                value: !php/const Capco\AppBundle\Enum\ProposalOrderField::CATEGORY
                 description: 'Allows ordering a list of proposals by categories.'
             DISTRICT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalOrderField::DISTRICT")'
+                value: !php/const Capco\AppBundle\Enum\ProposalOrderField::DISTRICT
                 description: 'Allows ordering a list of proposals by district.'

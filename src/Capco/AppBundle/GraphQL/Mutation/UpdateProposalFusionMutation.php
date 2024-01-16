@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProposalFusionMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $formFactory;
     private $globalIdResolver;
@@ -28,6 +30,7 @@ class UpdateProposalFusionMutation implements MutationInterface
 
     public function __invoke(Argument $input, $user): array
     {
+        $this->formatInput($input);
         $proposalIds = $input->getArrayCopy()['fromProposals'];
         $proposalId = $input->getArrayCopy()['proposalId'];
 

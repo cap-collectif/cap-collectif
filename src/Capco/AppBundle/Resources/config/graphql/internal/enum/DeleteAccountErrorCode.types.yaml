@@ -5,5 +5,5 @@ DeleteAccountErrorCode:
         description: 'Available errors for a `DeleteAccount` mutation.'
         values:
             CANNOT_DELETE_SUPER_ADMIN:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation::CANNOT_DELETE_SUPER_ADMIN")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation::CANNOT_DELETE_SUPER_ADMIN
                 description: 'Cannot delete super admin account !'

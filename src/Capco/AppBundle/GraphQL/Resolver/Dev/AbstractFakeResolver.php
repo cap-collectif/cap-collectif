@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Dev;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 /**
  * Extends this abstract class to fake a resolver with "random" data.
  */
-abstract class AbstractFakeResolver implements ResolverInterface
+abstract class AbstractFakeResolver implements QueryInterface
 {
     protected EntityManagerInterface $manager;
 

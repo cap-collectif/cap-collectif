@@ -72,7 +72,7 @@ class DebateArgument implements DebateArgumentInterface, Publishable
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private \DateTime $updatedAt;
+    private ?\DateTime $updatedAt = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="debateArgument", cascade={"persist", "remove"})

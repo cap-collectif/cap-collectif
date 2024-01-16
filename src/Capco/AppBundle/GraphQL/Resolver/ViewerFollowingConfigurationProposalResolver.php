@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Executor\Promise\Promise;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ViewerFollowingConfigurationProposalResolver implements ResolverInterface
+class ViewerFollowingConfigurationProposalResolver implements QueryInterface
 {
     private $proposalViewerFollowingConfigurationDataLoader;
     private $logger;

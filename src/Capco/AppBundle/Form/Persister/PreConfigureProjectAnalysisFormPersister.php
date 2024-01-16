@@ -56,6 +56,6 @@ class PreConfigureProjectAnalysisFormPersister
             $input['favourableStatus'] = $favourableStatuses[0]->getId();
         }
 
-        $this->configureAnalysisMutation->__invoke(new Argument($input), $viewer);
+        $this->configureAnalysisMutation->__invoke(new Argument(['input' => $input]), $viewer);
     }
 }

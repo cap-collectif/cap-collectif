@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalAdminType;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -20,11 +21,13 @@ use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProposalFromBackofficeMutation extends CreateProposalMutation
 {
-    private AuthorizationChecker $authorizationChecker;
+    use MutationTrait;
+
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         LoggerInterface $logger,
@@ -39,7 +42,7 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         parent::__construct(
             $logger,
@@ -60,6 +63,7 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
 
     public function __invoke(Argument $input, $user): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         $proposalForm = $this->getProposalForm($values, $user);
         unset($values['proposalFormId']); // This only useful to retrieve the proposalForm

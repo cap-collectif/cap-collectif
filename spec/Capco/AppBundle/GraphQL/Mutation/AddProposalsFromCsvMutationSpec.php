@@ -11,6 +11,7 @@ use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,8 @@ BypassFinals::enable();
 
 class AddProposalsFromCsvMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         ProposalFormRepository $proposalFormRepository,
         LoggerInterface $logger,
@@ -61,6 +64,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ConnectionBuilder $connectionBuilder,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $viewer->isOnlyProjectAdmin()->willReturn(false);
         $input->offsetGet('csvToImport')->willReturn('MediaUUID');
         $media->getProviderReference()->willReturn('filename.csv');
@@ -107,6 +112,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ConnectionBuilder $connectionBuilder,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 
@@ -164,6 +171,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         ConnectionBuilder $connectionBuilder,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 
@@ -220,6 +229,8 @@ class AddProposalsFromCsvMutationSpec extends ObjectBehavior
         CollectStep $step,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $viewer->isOnlyProjectAdmin()->willReturn(false);
         BypassFinals::enable();
 

@@ -14,6 +14,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
@@ -29,6 +30,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ProposalVotesDataLoader $proposalVotesDataLoader;
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
@@ -75,6 +77,7 @@ class AddProposalVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $proposalId = $input->offsetGet('proposalId');
         $stepId = $input->offsetGet('stepId');
         $proposal = $this->globalIdResolver->resolve($proposalId, $user);

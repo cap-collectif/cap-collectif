@@ -8,15 +8,13 @@ services:
             Swarrot\SwarrotBundle\Broker\PeclFactory: '@swarrot.factory.pecl'
             $authorizationChecker: '@security.authorization_checker'
 
-    _instanceof:
-        Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface:
-            tags: ['overblog_graphql.resolver']
-
     Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver:
         public: true
 
     Capco\AppBundle\GraphQL\Resolver\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Resolver/*'
+        autowire: true
+        public: true
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Resolver/{GlobalIdResolver.php,UserIsGrantedResolver.php}'
 
     Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver:
@@ -24,30 +22,9 @@ services:
 
     # This is not a resolver but a voter, rename and move this elsewhere
     Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
-        autowire: true
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalAssessmentResolver:
-        autowire: true
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalDecisionResolver:
-        autowire: true
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalAnalysisResolver:
-        autowire: true
-        public: true
-
-    Capco\AppBundle\GraphQL\Resolver\ViewerCanSeeProposalAnalystsResolver:
-        autowire: true
         public: true
 
     # Public services :
-    Capco\AppBundle\GraphQL\Deprecation:
-        autowire: true
-        public: true
-
     Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver:
         bind:
             $routerRequestContextHost: '%router.request_context.host%'

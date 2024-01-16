@@ -29,7 +29,7 @@ InternalPostOwner:
                         type: 'PostOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\PostOrderField::UPDATED_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\PostOrderField::UPDATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for posts'

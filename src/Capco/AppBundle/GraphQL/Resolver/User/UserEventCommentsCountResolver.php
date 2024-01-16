@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserEventCommentsCountResolver implements ResolverInterface
+class UserEventCommentsCountResolver implements QueryInterface
 {
     private const REDIS_CACHE_KEY = 'EventCommentsCount';
     protected $commentRepository;

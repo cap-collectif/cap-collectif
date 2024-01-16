@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class AdminAwaitingEventResolver implements ResolverInterface
+class AdminAwaitingEventResolver implements QueryInterface
 {
     private EventRepository $eventRepository;
 

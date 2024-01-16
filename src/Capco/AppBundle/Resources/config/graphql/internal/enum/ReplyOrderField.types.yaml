@@ -4,8 +4,8 @@ ReplyOrderField:
         description: 'Properties by which replies can be ordered'
         values:
             UPDATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::UPDATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\ReplyOrderField::UPDATED_AT
                 description: 'Allows ordering a list of replies by when they have been updated.'
             CREATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::CREATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\ReplyOrderField::CREATED_AT
                 description: 'Allows ordering a list of replies by when they have been created.'

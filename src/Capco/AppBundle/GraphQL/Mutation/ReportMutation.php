@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class ReportMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const REPORTABLE_NOT_FOUND = 'REPORTABLE_NOT_FOUND';
     public const ALREADY_REPORTED = 'ALREADY_REPORTED';
 
@@ -35,6 +38,8 @@ class ReportMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $reportable = $this->getReportable($input, $viewer);
             self::checkNotAlreadyReported($reportable, $viewer);

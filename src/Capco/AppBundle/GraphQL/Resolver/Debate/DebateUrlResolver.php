@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DebateUrlResolver implements ResolverInterface
+class DebateUrlResolver implements QueryInterface
 {
     private UrlResolver $urlResolver;
 

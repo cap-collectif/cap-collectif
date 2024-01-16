@@ -8,10 +8,10 @@ use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class UserInvitationsAvailabilitySearchQueryResolver implements ResolverInterface
+class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
 {
     private UserRepository $userRepository;
     private UserInviteRepository $userInviteRepository;

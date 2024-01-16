@@ -12,11 +12,11 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\RouterInterface;
 
-class StepAdminUrlResolver implements ResolverInterface
+class StepAdminUrlResolver implements QueryInterface
 {
     private const ADMIN_NEXT_STEP_TYPE = [
         OtherStep::class => 'other-step',

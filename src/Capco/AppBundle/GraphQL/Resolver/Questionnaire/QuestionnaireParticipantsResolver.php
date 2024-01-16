@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Search\ReplySearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class QuestionnaireParticipantsResolver implements ResolverInterface
+class QuestionnaireParticipantsResolver implements QueryInterface
 {
     private ReplySearch $replySearch;
 

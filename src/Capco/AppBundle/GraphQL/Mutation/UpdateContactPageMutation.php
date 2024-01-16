@@ -6,6 +6,7 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -18,6 +19,7 @@ use Psr\Cache\CacheItemInterface;
 
 class UpdateContactPageMutation implements MutationInterface
 {
+    use MutationTrait;
     private const CONTACT_PAGE_TITLE_KEYNAME = 'contact.title';
     private const CONTACT_PAGE_DESCRIPTION_KEYNAME = 'contact.content.body';
     private const CONTACT_PAGE_PICTO_KEYNAME = 'contact.picto';
@@ -59,6 +61,7 @@ class UpdateContactPageMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $locale = $args->offsetGet('locale');
         $updated = $return = [];
         foreach (self::CONTACT_PARAMETERS as $graphqlKey => $dbKey) {

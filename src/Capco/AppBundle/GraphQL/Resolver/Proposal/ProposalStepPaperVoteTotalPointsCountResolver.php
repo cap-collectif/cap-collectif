@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalStepPaperVoteTotalPointsCountResolver extends ProposalStepPaperVoteTotalCountResolver implements ResolverInterface
+class ProposalStepPaperVoteTotalPointsCountResolver extends ProposalStepPaperVoteTotalCountResolver implements QueryInterface
 {
     public function __invoke(Proposal $proposal, Argument $args, ?User $viewer = null): int
     {

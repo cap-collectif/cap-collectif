@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalLikersDataLoader;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalLikersResolver implements ResolverInterface
+class ProposalLikersResolver implements QueryInterface
 {
     private $proposalLikersDataLoader;
 

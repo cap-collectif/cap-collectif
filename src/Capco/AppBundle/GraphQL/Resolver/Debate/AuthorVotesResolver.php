@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class AuthorVotesResolver implements ResolverInterface
+class AuthorVotesResolver implements QueryInterface
 {
     private DebateVoteRepository $repository;
 

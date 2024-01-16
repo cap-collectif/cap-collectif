@@ -5,14 +5,14 @@ InternalEventStatus:
         description: 'List of available filters to filter `Event`'
         values:
             APPROVED:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::APPROVED")'
+                value: !php/const Capco\AppBundle\DBAL\Enum\EventReviewStatusType::APPROVED
                 description: 'Filter by approved status.'
             AWAITING:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::AWAITING")'
+                value: !php/const Capco\AppBundle\DBAL\Enum\EventReviewStatusType::AWAITING
                 description: 'Filter by awaiting status.'
             REFUSED:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::REFUSED")'
+                value: !php/const Capco\AppBundle\DBAL\Enum\EventReviewStatusType::REFUSED
                 description: 'Filter by refused status.'
             DELETED:
-                value: '@=constant("Capco\\AppBundle\\DBAL\\Enum\\EventReviewStatusType::DELETED")'
+                value: !php/const Capco\AppBundle\DBAL\Enum\EventReviewStatusType::DELETED
                 description: 'Filter by deleted status.'

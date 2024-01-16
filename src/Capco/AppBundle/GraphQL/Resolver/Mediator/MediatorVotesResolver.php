@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Mediator;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class MediatorVotesResolver implements ResolverInterface
+class MediatorVotesResolver implements QueryInterface
 {
     private ConnectionBuilder $connectionBuilder;
 

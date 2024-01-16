@@ -5,8 +5,8 @@ DeleteEmailingCampaignsErrorCode:
         description: 'Available errors on campaign deletion'
         values:
             ID_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode::ID_NOT_FOUND
                 description: 'No campaign match your id'
             EMPTY:
-                value: '@=constant("Capco\\AppBundle\\Enum\\DeleteEmailingCampaignsErrorCode::EMPTY")'
+                value: !php/const Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode::EMPTY
                 description: 'No campaign in request'

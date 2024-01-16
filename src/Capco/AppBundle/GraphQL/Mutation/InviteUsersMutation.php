@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -22,6 +23,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class InviteUsersMutation implements MutationInterface
 {
+    use MutationTrait;
     private const BATCH_SIZE = 800;
 
     private TokenGeneratorInterface $tokenGenerator;
@@ -49,6 +51,7 @@ class InviteUsersMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         list($emails, $role, $maxResults, $groupIds, $message, $redirectionUrl) = [
             array_filter($args->offsetGet('emails')),
             $args->offsetGet('role'),

@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\AbstractLogicJumpCondition;
 use Capco\AppBundle\Entity\MultipleChoiceQuestionLogicJumpCondition;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class LogicJumpConditionTypeResolver implements ResolverInterface
+class LogicJumpConditionTypeResolver implements QueryInterface
 {
     private $typeResolver;
 

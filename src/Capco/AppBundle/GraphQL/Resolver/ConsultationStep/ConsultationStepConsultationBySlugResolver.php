@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ConsultationStepConsultationBySlugResolver implements ResolverInterface
+class ConsultationStepConsultationBySlugResolver implements QueryInterface
 {
     protected $router;
 

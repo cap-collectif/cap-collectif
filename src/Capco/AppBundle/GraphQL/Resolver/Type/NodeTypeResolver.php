@@ -58,10 +58,10 @@ use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class NodeTypeResolver implements ResolverInterface
+class NodeTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
     private RequirementTypeResolver $requirementTypeResolver;

@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\Enum\UserInviteStatus;
 use Capco\AppBundle\Repository\UserInviteEmailMessageRepository;
 use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserInviteStatusResolver implements ResolverInterface
+class UserInviteStatusResolver implements QueryInterface
 {
     private UserRepository $userRepository;
     private UserInviteEmailMessageRepository $emailMessageRepository;

@@ -10,6 +10,7 @@ use Capco\AppBundle\Enum\CreateEmailingCampaignErrorCode;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\AppBundle\Enum\SendEmailingCampaignErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\AppBundle\Security\MailingListVoter;
 use Capco\AppBundle\Security\ProjectVoter;
@@ -22,6 +23,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractEmailingCampaignMutation implements MutationInterface
 {
+    use MutationTrait;
+
     protected GlobalIdResolver $resolver;
     protected EntityManagerInterface $entityManager;
     protected AuthorizationCheckerInterface $authorizationChecker;
@@ -48,6 +51,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 
     protected function getPlannedCampaign(Argument $input, User $viewer): EmailingCampaign
     {
+        $this->formatInput($input);
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (
             null === $emailingCampaign
@@ -68,6 +72,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 
     protected function getSendableCampaign(Argument $input, User $viewer): EmailingCampaign
     {
+        $this->formatInput($input);
         $emailingCampaign = $this->findCampaignFromGlobalId($input->offsetGet('id'), $viewer);
         if (
             null === $emailingCampaign

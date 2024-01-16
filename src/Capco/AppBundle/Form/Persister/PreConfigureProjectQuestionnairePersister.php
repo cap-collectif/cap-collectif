@@ -51,8 +51,10 @@ class PreConfigureProjectQuestionnairePersister
         foreach ($questionnairesInput as $questionnaireInput) {
             list('questionnaire' => $questionnaire) = $this->createQuestionnaireMutation->__invoke(
                 new Argument([
-                    'title' => $questionnaireInput['title'],
-                    'owner' => $ownerId,
+                    'input' => [
+                        'title' => $questionnaireInput['title'],
+                        'owner' => $ownerId,
+                    ],
                 ]),
                 $viewer
             );
@@ -63,12 +65,14 @@ class PreConfigureProjectQuestionnairePersister
             list(
                 'questionnaire' => $updatedQuestionnaire) = $this->updateQuestionnaireConfigurationMutation->__invoke(
                     new Argument([
-                        'questionnaireId' => GlobalId::toGlobalId(
-                            'Questionnaire',
-                            $questionnaire->getId()
-                        ),
-                        'questions' => $questionnaireInput['questions'],
-                        'description' => $questionnaireInput['description'],
+                        'input' => [
+                            'questionnaireId' => GlobalId::toGlobalId(
+                                'Questionnaire',
+                                $questionnaire->getId()
+                            ),
+                            'questions' => $questionnaireInput['questions'],
+                            'description' => $questionnaireInput['description'],
+                        ],
                     ]),
                     $viewer
                 );

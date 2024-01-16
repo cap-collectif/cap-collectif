@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ConsultationStepConsultationsResolver implements ResolverInterface
+class ConsultationStepConsultationsResolver implements QueryInterface
 {
     private $repository;
 

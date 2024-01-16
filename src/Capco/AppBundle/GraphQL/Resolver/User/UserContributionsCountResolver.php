@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserContributionsCountResolver implements ResolverInterface
+class UserContributionsCountResolver implements QueryInterface
 {
     protected UserEventCommentsCountResolver $userEventCommentsCountResolver;
     protected UserOpinionVersionResolver $userOpinionVersionResolver;

@@ -5,5 +5,5 @@ UpdateHomePageProjectsMapSectionConfigurationErrorCode:
         description: 'Available errors for an `updateHomePageProjectsMapSectionConfiguration` mutation.'
         values:
             INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsMapSectionConfigurationMutation::INVALID_FORM")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateHomePageProjectsMapSectionConfigurationMutation::INVALID_FORM
                 description: 'The form is not valid'

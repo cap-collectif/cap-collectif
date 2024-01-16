@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserSubscribedToNewsLetterAtResolver implements ResolverInterface
+class UserSubscribedToNewsLetterAtResolver implements QueryInterface
 {
     protected NewsletterSubscriptionRepository $newLetterRepository;
 

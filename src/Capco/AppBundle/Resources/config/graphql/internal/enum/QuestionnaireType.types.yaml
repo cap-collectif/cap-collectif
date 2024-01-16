@@ -4,11 +4,11 @@ QuestionnaireType:
         description: 'Available questionnaire types.'
         values:
             QUESTIONNAIRE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireType::QUESTIONNAIRE
                 description: 'Draft are allowed.'
             VOTING:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::VOTING")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireType::VOTING
                 description: 'Draft are not allowed.'
             QUESTIONNAIRE_ANALYSIS:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireType::QUESTIONNAIRE_ANALYSIS")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireType::QUESTIONNAIRE_ANALYSIS
                 description: 'Questionnaire that are used in analysis step.'

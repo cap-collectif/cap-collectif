@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\OfficialResponseAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateOfficialResponseMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $resolver;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -30,6 +32,8 @@ class UpdateOfficialResponseMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
+
         try {
             $officialResponse = $this->getOfficialResponse($input, $user);
             $this->updateOfficialResponse($officialResponse, $input, $user);

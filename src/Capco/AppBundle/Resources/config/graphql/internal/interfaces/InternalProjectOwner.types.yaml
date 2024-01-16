@@ -33,8 +33,8 @@ InternalProjectOwner:
                         type: 'InternalProjectOwnerProjectOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\ProjectOrderField::PUBLISHED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for posts'
                     status:

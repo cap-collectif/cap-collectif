@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\DataLoader\Question\QuestionChoicesDataLoader;
 use Capco\AppBundle\Search\Search;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class QuestionChoicesResolver implements ResolverInterface
+class QuestionChoicesResolver implements QueryInterface
 {
     private $dataLoader;
 

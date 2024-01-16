@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 /**
  * @deprecated this is our legacy evaluation tool
  */
-class ProposalViewerCanSeeEvaluationResolver implements ResolverInterface
+class ProposalViewerCanSeeEvaluationResolver implements QueryInterface
 {
     private $isViewerAnEvaluerResolver;
 

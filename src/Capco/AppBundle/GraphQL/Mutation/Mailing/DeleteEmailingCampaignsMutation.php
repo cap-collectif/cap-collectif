@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\DeleteEmailingCampaignsErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 {
+    use MutationTrait;
+
     private GlobalIdResolver $globalIdResolver;
 
     public function __construct(
@@ -28,6 +31,7 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $error = null;
         $deletedIds = [];
         $archivedIds = [];

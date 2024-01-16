@@ -7,7 +7,6 @@
             "**/Behat/"
         ],
         "psr-4": {
-            "spec\\": "spec/",
             "Capco\\": "src/",
             "Capco\\AppBundle\\": "src/Capco/AppBundle",
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
@@ -20,15 +19,17 @@
             "src/Kernel.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\": "spec/",
+            "Capco\\Tests\\": "tests/"
+        }
+    },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/samsonasik/phpspec-code-coverage",
             "no-api": true
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/spyl94/GraphQLBundle"
         },
         {
             "type": "vcs",
@@ -125,7 +126,7 @@
         "box/spout": "^3.1",
         "ruflin/elastica": "7.1.3",
         "overblog/dataloader-bundle": "^0.5.0",
-        "overblog/graphiql-bundle": "^0.1.1",
+        "overblog/graphiql-bundle": "^0.2.0",
         "tmarsteel/mockery-callable-mock": "^2.1",
         "friendsofsymfony/http-cache-bundle": "^2.10",
         "ksubileau/color-thief-php": "^1.4",
@@ -133,7 +134,7 @@
         "jolicode/jolinotif": "^2.0",
         "bjeavons/zxcvbn-php": "^1.0",
         "bgalati/monolog-sentry-handler": "^1.0",
-        "overblog/graphql-bundle": "0.12.x-dev",
+        "overblog/graphql-bundle": "^0.14",
         "sentry/sdk": "^2.0",
         "knplabs/doctrine-behaviors": "~1.1",
         "limenius/react-bundle": "5.0.1",

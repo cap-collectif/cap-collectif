@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\UserPhoneErrors;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
 use Capco\UserBundle\Repository\UserRepository;
@@ -14,6 +15,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 {
+    use MutationTrait;
+
     public const CANT_UPDATE = 'CANT_UPDATE';
 
     public function __construct(
@@ -27,6 +30,7 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
 

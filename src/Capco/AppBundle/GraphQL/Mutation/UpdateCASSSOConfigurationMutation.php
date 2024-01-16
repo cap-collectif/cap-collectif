@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateCASSSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
 
     private EntityManagerInterface $em;
@@ -25,6 +28,8 @@ class UpdateCASSSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $configuration = $this->getConfiguration($input, $viewer);
             self::updateConfiguration($input, $configuration);

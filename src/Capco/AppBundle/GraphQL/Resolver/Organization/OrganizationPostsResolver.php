@@ -7,11 +7,11 @@ use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OrganizationPostsResolver implements ResolverInterface
+class OrganizationPostsResolver implements QueryInterface
 {
     private PostRepository $repository;
 

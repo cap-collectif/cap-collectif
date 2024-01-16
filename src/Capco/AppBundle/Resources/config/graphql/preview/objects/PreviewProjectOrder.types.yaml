@@ -11,4 +11,4 @@ PreviewProjectOrder:
             field:
                 type: 'PreviewProjectOrderField!'
                 description: 'The field in which to order nodes by.'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")'
+                defaultValue: !php/const Capco\AppBundle\Enum\ProjectOrderField::PUBLISHED_AT

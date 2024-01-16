@@ -4,8 +4,8 @@ UserOrderField:
         description: 'Properties by which users connections can be ordered'
         values:
             CREATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserOrderField::CREATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\UserOrderField::CREATED_AT
                 description: 'Allows ordering a list of users by when they were created.'
             ACTIVITY:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserOrderField::ACTIVITY")'
+                value: !php/const Capco\AppBundle\Enum\UserOrderField::ACTIVITY
                 description: 'Allowing ordering a list of user by their activity.'

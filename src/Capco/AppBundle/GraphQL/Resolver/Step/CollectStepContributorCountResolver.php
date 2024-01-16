@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\Step\CollectStep\CollectStepContributorCountDataLoader;
 use GraphQL\Executor\Promise\Promise;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class CollectStepContributorCountResolver implements ResolverInterface
+class CollectStepContributorCountResolver implements QueryInterface
 {
     private CollectStepContributorCountDataLoader $collectStepCountContributorDataLoader;
     private LoggerInterface $logger;

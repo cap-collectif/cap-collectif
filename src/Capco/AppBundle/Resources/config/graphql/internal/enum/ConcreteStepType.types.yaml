@@ -4,26 +4,26 @@ ConcreteStepType:
         description: 'The different available types of step.'
         values:
             COLLECT:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\CollectStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\CollectStep::TYPE
                 description: 'Represent a collect step.'
             SELECTION:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\SelectionStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\SelectionStep::TYPE
                 description: 'Represent a selection step.'
             CONSULTATION:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\ConsultationStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\ConsultationStep::TYPE
                 description: 'Represent a consultation step.'
             OTHER:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\OtherStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\OtherStep::TYPE
                 description: 'Represent a step with no particular behaviour.'
             PRESENTATION:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\PresentationStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\PresentationStep::TYPE
                 description: 'Represent a presentation step, mainly used to show an introduction.'
             QUESTIONNAIRE:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\QuestionnaireStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\QuestionnaireStep::TYPE
                 description: 'Represent a questionnaire step.'
             RANKING:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\RankingStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\RankingStep::TYPE
                 description: 'Represent a ranking step.'
             DEBATE:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Steps\\DebateStep::TYPE")'
+                value: !php/const Capco\AppBundle\Entity\Steps\DebateStep::TYPE
                 description: 'Represent a debate step.'

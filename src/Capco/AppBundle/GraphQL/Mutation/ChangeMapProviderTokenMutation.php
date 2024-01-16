@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Client\MapboxClient;
 use Capco\AppBundle\Enum\MapProviderEnum;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,6 +14,8 @@ use Psr\Log\LoggerInterface;
 
 class ChangeMapProviderTokenMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ERROR_PROVIDE_BOTH_TOKENS = 'error-map-api-provide-tokens';
     public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
     public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
@@ -36,6 +39,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         list($provider, $publicToken, $secretToken) = [
             $input->offsetGet('provider'),
             $input->offsetGet('publicToken'),

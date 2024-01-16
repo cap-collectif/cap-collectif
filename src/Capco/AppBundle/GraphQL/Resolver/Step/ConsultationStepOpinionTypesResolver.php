@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ConsultationStepOpinionTypesResolver implements ResolverInterface
+class ConsultationStepOpinionTypesResolver implements QueryInterface
 {
     public function __invoke(ConsultationStep $consultationStep): array
     {

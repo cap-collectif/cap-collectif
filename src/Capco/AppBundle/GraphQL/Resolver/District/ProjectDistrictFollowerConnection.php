@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProjectDistrictFollowerConnection implements ResolverInterface
+class ProjectDistrictFollowerConnection implements QueryInterface
 {
     private UserRepository $userRepository;
     private LoggerInterface $logger;

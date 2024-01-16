@@ -8,11 +8,11 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Search\ReplySearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 
-class QuestionnaireAdminRepliesResolver implements ResolverInterface
+class QuestionnaireAdminRepliesResolver implements QueryInterface
 {
     private ReplySearch $replySearch;
     private LoggerInterface $logger;

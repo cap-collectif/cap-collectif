@@ -6,9 +6,9 @@ use Capco\AppBundle\DTO\GoogleMapsAddress;
 use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ViewerMeetsTheRequirementResolver implements ResolverInterface
+class ViewerMeetsTheRequirementResolver implements QueryInterface
 {
     use ResolverTrait;
 

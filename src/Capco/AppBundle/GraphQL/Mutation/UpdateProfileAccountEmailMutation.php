@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\UpdateUserEmailErrorCode;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
@@ -22,6 +23,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
 {
+    use MutationTrait;
+
     public const RATE_LIMITER_ACTION = 'UpdateProfileAccountEmail';
 
     private UserManager $userManager;
@@ -57,6 +60,7 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $newEmailToConfirm = $arguments['email'];

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
@@ -16,6 +17,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractDebateArgumentVoteMutation
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
@@ -44,6 +47,7 @@ abstract class AbstractDebateArgumentVoteMutation
 
     protected function getDebateArgument(Arg $input, User $viewer): DebateArgumentInterface
     {
+        $this->formatInput($input);
         $debateArgument = $this->globalIdResolver->resolve(
             $input->offsetGet('debateArgumentId'),
             $viewer

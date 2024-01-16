@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\GraphQL\Mutation\Debate\DeleteDebateOpinionMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
@@ -37,6 +40,7 @@ class DeleteDebateOpinionMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateOpinionId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, null)->willReturn($debateOpinion);
 
         $debateOpinion->getDebate()->willReturn($debate);
@@ -59,6 +63,7 @@ class DeleteDebateOpinionMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateOpinionId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, null)->willReturn(null);
 
         $payload = $this->__invoke($input);

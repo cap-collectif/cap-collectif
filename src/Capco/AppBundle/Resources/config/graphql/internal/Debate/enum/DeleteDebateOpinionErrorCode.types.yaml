@@ -5,5 +5,5 @@ DeleteDebateOpinionErrorCode:
         description: 'Available errors for an `deleteDebateOpinion` mutation.'
         values:
             UNKNOWN_DEBATE_OPINION:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\DeleteDebateOpinionMutation::UNKNOWN_DEBATE_OPINION")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\DeleteDebateOpinionMutation::UNKNOWN_DEBATE_OPINION
                 description: 'No `DebateOpinion` match your `debateOpinionId`.'

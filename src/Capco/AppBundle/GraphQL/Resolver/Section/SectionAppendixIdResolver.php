@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SectionAppendixIdResolver implements ResolverInterface
+class SectionAppendixIdResolver implements QueryInterface
 {
     public function __invoke(OpinionTypeAppendixType $type): ?string
     {

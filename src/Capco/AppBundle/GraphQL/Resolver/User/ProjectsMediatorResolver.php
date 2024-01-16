@@ -6,10 +6,10 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class ProjectsMediatorResolver implements ResolverInterface
+class ProjectsMediatorResolver implements QueryInterface
 {
     private ProjectRepository $projectRepository;
     private ConnectionBuilder $connectionBuilder;

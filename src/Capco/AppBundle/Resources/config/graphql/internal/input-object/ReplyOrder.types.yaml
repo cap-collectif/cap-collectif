@@ -5,9 +5,9 @@ ReplyOrder:
         fields:
             field:
                 type: 'ReplyOrderField!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::CREATED_AT")'
+                defaultValue: !php/const Capco\AppBundle\Enum\ReplyOrderField::CREATED_AT
                 description: The field to order reply by.
             direction:
                 type: 'OrderDirection!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
                 description: The ordering direction.

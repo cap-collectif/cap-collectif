@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
@@ -17,6 +18,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveSourceVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private SourceVoteRepository $sourceVoteRepo;
     private SourceRepository $sourceRepo;
@@ -42,6 +44,7 @@ class RemoveSourceVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         $source = $this->sourceRepo->find($id);
 

@@ -215,8 +215,8 @@ InternalQuery:
                         description: 'Ordering options for users returning from the connection.'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\SortField::CREATED_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\SortField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
             userSearch:
                 type: '[InternalUser]'
@@ -490,8 +490,8 @@ InternalQuery:
                         type: 'EmailingCampaignOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\EmailingCampaignOrderField::SEND_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for sending date'
                     term:
@@ -558,7 +558,7 @@ InternalQuery:
                     filter:
                         type: 'SmsOrdersFilters'
                         description: 'Filter sms orders.'
-                        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\SmsOrdersFilters::UNPROCESSED")'
+                        defaultValue: !php/const Capco\AppBundle\Enum\SmsOrdersFilters::UNPROCESSED
             smsCredits:
                 type: 'SmsCreditConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteProposalNewsMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeleteProposalNewsMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -53,6 +56,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $arguments->offsetGet('postId')->willReturn('123456');
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
         $payload = $this->__invoke($arguments, $viewer);
         $payload['errorCode']->shouldBe(DeleteProposalNewsMutation::POST_NOT_FOUND);
@@ -71,6 +76,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         $viewer->getId()->willReturn('viewer');
         $viewer->isAdmin()->willReturn(false);
         $arguments->offsetGet('postId')->willReturn('123456');
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $post->isAuthor($viewer)->willReturn(false);
         $globalIdResolver->resolve('123456', $viewer)->willReturn($post);
         $payload = $this->__invoke($arguments, $viewer);
@@ -91,6 +98,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         ProposalUrlResolver $proposalUrlResolver,
         CollectStep $collectStep
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->mockData(
             $globalIdResolver,
             $arguments,
@@ -153,6 +162,8 @@ class DeleteProposalNewsMutationSpec extends ObjectBehavior
         ProposalUrlResolver $proposalUrlResolver,
         CollectStep $collectStep
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->mockData(
             $globalIdResolver,
             $arguments,

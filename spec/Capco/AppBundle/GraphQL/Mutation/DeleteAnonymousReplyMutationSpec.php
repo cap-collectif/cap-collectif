@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\GraphQL\Mutation\DeleteAnonymousReplyMutation;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -20,6 +21,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         ReplyAnonymousRepository $replyAnonymousRepository,
@@ -48,6 +51,7 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($hashedToken)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])
@@ -94,6 +98,8 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
         Project $project
     ) {
         $hashedToken = 'token';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('hashedToken')
@@ -160,6 +166,9 @@ class DeleteAnonymousReplyMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($hashedToken)
         ;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $decodedToken = base64_decode($hashedToken);
         $replyAnonymousRepository
             ->findOneBy(['token' => $decodedToken])

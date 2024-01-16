@@ -5,11 +5,11 @@ RemoveDebateVoteErrorCode:
         description: 'Available errors for a `removeDebateVote` mutation.'
         values:
             UNKNOWN_DEBATE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation::UNKNOWN_DEBATE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateVoteMutation::UNKNOWN_DEBATE
                 description: 'No `Debate` match your `debateId`.'
             NO_VOTE_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation::NO_VOTE_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateVoteMutation::NO_VOTE_FOUND
                 description: 'No `DebateVote` match your `debateId`.'
             CLOSED_DEBATE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\RemoveDebateVoteMutation::CLOSED_DEBATE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateVoteMutation::CLOSED_DEBATE
                 description: 'The `Debate` is closed'

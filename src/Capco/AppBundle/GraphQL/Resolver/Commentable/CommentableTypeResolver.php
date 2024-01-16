@@ -8,10 +8,10 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class CommentableTypeResolver implements ResolverInterface
+class CommentableTypeResolver implements QueryInterface
 {
     private $typeResolver;
 

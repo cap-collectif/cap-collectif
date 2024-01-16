@@ -5,9 +5,9 @@ QuestionnaireOrder:
         fields:
             field:
                 type: 'QuestionnaireOrderField!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireOrderField::CREATED_AT")'
+                defaultValue: !php/const Capco\AppBundle\Enum\QuestionnaireOrderField::CREATED_AT
                 description: The field to order questionnaires by.
             direction:
                 type: 'OrderDirection!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
                 description: The ordering direction.

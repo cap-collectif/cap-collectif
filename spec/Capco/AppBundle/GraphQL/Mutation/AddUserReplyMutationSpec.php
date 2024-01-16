@@ -13,6 +13,7 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -26,6 +27,8 @@ use Symfony\Component\Form\FormInterface;
 
 class AddUserReplyMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -80,6 +83,10 @@ class AddUserReplyMutationSpec extends ObjectBehavior
                 ],
             ],
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $values);
 
         $input
             ->getArrayCopy()

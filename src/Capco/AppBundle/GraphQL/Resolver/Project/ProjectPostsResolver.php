@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ProjectPostsResolver implements ResolverInterface
+class ProjectPostsResolver implements QueryInterface
 {
     private PostRepository $repository;
 

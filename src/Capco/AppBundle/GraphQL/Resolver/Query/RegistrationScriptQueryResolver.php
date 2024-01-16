@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\SiteParameterRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class RegistrationScriptQueryResolver implements ResolverInterface
+class RegistrationScriptQueryResolver implements QueryInterface
 {
     private $siteParameterRepository;
 

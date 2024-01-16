@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 
 use Capco\AppBundle\Repository\SourceCategoryRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SourceableAvailableCategoriesResolver implements ResolverInterface
+class SourceableAvailableCategoriesResolver implements QueryInterface
 {
     protected $sourceCategoryRepository;
 

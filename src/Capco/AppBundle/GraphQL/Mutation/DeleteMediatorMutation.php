@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteMediatorMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -39,6 +41,7 @@ class DeleteMediatorMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $mediatorId = $input->offsetGet('mediatorId');
         $mediator = $this->getMediator($mediatorId, $viewer);
 

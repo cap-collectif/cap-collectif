@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Swarrot\SwarrotBundle\Broker\PeclFactory;
 
-class IsIndexationDoneResolver implements ResolverInterface
+class IsIndexationDoneResolver implements QueryInterface
 {
     private $peclFactory;
 

@@ -5,22 +5,22 @@ ProposalStepStatusColor:
         values:
             INFO:
                 description: 'Info color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::INFO")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::INFO
             PRIMARY:
                 description: 'Primary color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::PRIMARY")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::PRIMARY
             SUCCESS:
                 description: 'Success color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::SUCCESS")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::SUCCESS
             WARNING:
                 description: 'Warning color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::WARNING")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::WARNING
             CAUTION:
                 description: 'Caution color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::CAUTION")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::CAUTION
             DANGER:
                 description: 'Danger color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::DANGER")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::DANGER
             DEFAULT:
                 description: 'Default color.'
-                value: '@=constant("Capco\\AppBundle\\Enum\\StatusColor::NORMAL")'
+                value: !php/const Capco\AppBundle\Enum\StatusColor::NORMAL

@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
@@ -31,6 +32,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddProposalsFromCsvMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const TOO_MUCH_LINES = 'TOO_MUCH_LINES';
     public const MAX_LINES = 501;
     public const EMPTY_FILE = 'EMPTY_FILE';
@@ -80,6 +83,7 @@ class AddProposalsFromCsvMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         /** @var Media $media */
         $media = $this->mediaRepository->find($input->offsetGet('csvToImport'));
         $this->importProposalsFromCsv->setFilePath(

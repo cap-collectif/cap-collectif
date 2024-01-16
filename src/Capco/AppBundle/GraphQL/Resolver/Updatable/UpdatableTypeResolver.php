@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Updatable;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class UpdatableTypeResolver implements ResolverInterface
+class UpdatableTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

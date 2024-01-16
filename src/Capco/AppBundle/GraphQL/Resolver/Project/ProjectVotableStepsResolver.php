@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProjectVotableStepsResolver implements ResolverInterface
+class ProjectVotableStepsResolver implements QueryInterface
 {
     protected SelectionStepRepository $selectionStepRepository;
     protected CollectStepRepository $collectStepRepository;

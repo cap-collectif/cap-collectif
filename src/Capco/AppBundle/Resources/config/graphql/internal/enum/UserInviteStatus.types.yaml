@@ -4,14 +4,14 @@ UserInviteStatus:
         description: 'The invitation status'
         values:
             PENDING:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::PENDING")'
+                value: !php/const Capco\AppBundle\Enum\UserInviteStatus::PENDING
                 description: 'The invitation is still pending.'
             EXPIRED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::EXPIRED")'
+                value: !php/const Capco\AppBundle\Enum\UserInviteStatus::EXPIRED
                 description: 'The invitation has expired.'
             FAILED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::FAILED")'
+                value: !php/const Capco\AppBundle\Enum\UserInviteStatus::FAILED
                 description: 'Sending the invitation failed.'
             ACCEPTED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserInviteStatus::ACCEPTED")'
+                value: !php/const Capco\AppBundle\Enum\UserInviteStatus::ACCEPTED
                 description: 'The invitation has been accepted.'

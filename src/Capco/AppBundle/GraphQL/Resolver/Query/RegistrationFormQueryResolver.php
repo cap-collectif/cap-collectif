@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\RegistrationForm;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class RegistrationFormQueryResolver implements ResolverInterface
+class RegistrationFormQueryResolver implements QueryInterface
 {
     private $registrationFormRepository;
 

@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Mutation\Debate\RemoveDebateVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\DebateVoteRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,8 @@ use Psr\Log\LoggerInterface;
 
 class RemoveDebateVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
@@ -56,6 +59,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debate);
 
         $debate->viewerCanParticipate($viewer)->willReturn(true);
@@ -92,6 +96,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debate);
 
         $debate->viewerCanParticipate($viewer)->willReturn(true);
@@ -125,6 +130,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
 
         $payload = $this->__invoke($input, $viewer);
@@ -144,6 +150,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debate);
 
         $debate->viewerCanParticipate($viewer)->willReturn(true);
@@ -168,6 +175,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debate);
 
         $debate->viewerCanParticipate($viewer)->willReturn(false);
@@ -193,6 +201,7 @@ class RemoveDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debate);
 
         $debate->viewerCanParticipate($viewer)->willReturn(true);

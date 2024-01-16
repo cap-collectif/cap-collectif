@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Debate;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DebateViewerHasArgumentResolver implements ResolverInterface
+class DebateViewerHasArgumentResolver implements QueryInterface
 {
     use ResolverTrait;
 

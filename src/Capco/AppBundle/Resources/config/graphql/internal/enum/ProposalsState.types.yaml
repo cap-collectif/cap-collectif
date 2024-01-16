@@ -4,17 +4,17 @@ ProposalsState:
         description: 'Possible values to filters a list of proposals based on their state.'
         values:
             ALL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::ALL")'
+                value: !php/const Capco\AppBundle\Enum\ProposalsState::ALL
                 description: 'Show all proposals'
             PUBLISHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::PUBLISHED")'
+                value: !php/const Capco\AppBundle\Enum\ProposalsState::PUBLISHED
                 description: 'Show only published proposals'
             TRASHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::TRASHED")'
+                value: !php/const Capco\AppBundle\Enum\ProposalsState::TRASHED
                 description: 'Show only trashed proposals'
             DRAFT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::DRAFT")'
+                value: !php/const Capco\AppBundle\Enum\ProposalsState::DRAFT
                 description: 'Show only drafted proposals'
             ARCHIVED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalsState::ARCHIVED")'
+                value: !php/const Capco\AppBundle\Enum\ProposalsState::ARCHIVED
                 description: 'Show only archived proposals'

@@ -9,10 +9,10 @@ use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver as BaseTypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class TypeResolver implements ResolverInterface
+class TypeResolver implements QueryInterface
 {
     private BaseTypeResolver $typeResolver;
 

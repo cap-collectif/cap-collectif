@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteVersionMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $versionRepo;
     private $redisStorage;
@@ -29,6 +31,7 @@ class DeleteVersionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
+        $this->formatInput($input);
         $versionGlobalId = $input->offsetGet('versionId');
         $versionId = GlobalId::fromGlobalId($versionGlobalId)['id'];
         $version = $this->versionRepo->find($versionId);

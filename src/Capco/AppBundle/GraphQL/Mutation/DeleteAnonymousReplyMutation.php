@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractReply;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteAnonymousReplyMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ReplyAnonymousRepository $replyAnonymousRepository;
     private Indexer $indexer;
@@ -35,6 +37,7 @@ class DeleteAnonymousReplyMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $hashedToken = $args->offsetGet('hashedToken');
         $decodedToken = base64_decode($hashedToken);
         $reply = $this->replyAnonymousRepository->findOneBy(['token' => $decodedToken]);

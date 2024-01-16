@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class AbstractDebateVoteTypeResolver implements ResolverInterface
+class AbstractDebateVoteTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

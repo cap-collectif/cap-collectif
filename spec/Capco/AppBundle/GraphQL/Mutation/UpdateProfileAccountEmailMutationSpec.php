@@ -7,6 +7,7 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateProfileAccountEmailMutation;
 use Capco\AppBundle\Repository\EmailDomainRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -25,6 +26,8 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -64,6 +67,7 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         Arg $args,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn([
             'email' => 'someone@email.com',
             'passwordConfirm' => 'anything',
@@ -96,6 +100,7 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
 
     public function it_should_check_rate_limiting(RateLimiter $rateLimiter, Arg $args, User $viewer)
     {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn([
             'email' => 'someone@email.com',
             'passwordConfirm' => 'anything',
@@ -130,6 +135,7 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         User $existingUser,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn([
             'email' => 'someone@email.com',
             'passwordConfirm' => 'anything',
@@ -169,6 +175,7 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         Arg $args,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn([
             'email' => 'someone@email.com',
             'passwordConfirm' => 'anything',
@@ -222,6 +229,7 @@ class UpdateProfileAccountEmailMutationSpec extends ObjectBehavior
         Arg $args,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn([
             'email' => 'someone@email.com',
             'passwordConfirm' => 'anything',

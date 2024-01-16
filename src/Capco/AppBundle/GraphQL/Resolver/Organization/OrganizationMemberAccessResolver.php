@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class OrganizationMemberAccessResolver implements ResolverInterface
+class OrganizationMemberAccessResolver implements QueryInterface
 {
     public function __invoke(?User $viewer = null): bool
     {

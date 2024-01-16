@@ -28,7 +28,7 @@ overblog_graphql:
         # We generate types manually with "graphql:compile" command.
         auto_compile: false
         cache_dir: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/__generated__'
-        class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
+        class_namespace: "Capco\\AppBundle\\GraphQL\\__generated__"
         builders:
             args:
                 - alias: 'Relay::ForwardConnection'

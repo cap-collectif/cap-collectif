@@ -39,7 +39,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     /**
      * @ORM\Column(name="debate_content", type="text", nullable=true)
      */
-    private ?string $debateContent;
+    private ?string $debateContent = null;
 
     /**
      * @ORM\Column(name="debate_content_using_jodit_wysiwyg", type="boolean", nullable=false, options={"default": false})

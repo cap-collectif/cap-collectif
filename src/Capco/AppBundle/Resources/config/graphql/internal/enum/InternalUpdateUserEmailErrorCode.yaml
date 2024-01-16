@@ -5,14 +5,14 @@ InternalUpdateUserEmailErrorCode:
         description: 'Available errors on user email related mutations.'
         values:
             SPECIFY_PASSWORD:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::SPECIFY_PASSWORD")'
+                value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::SPECIFY_PASSWORD
                 description: 'You must specify your password to update your email.'
             ALREADY_USED_EMAIL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::ALREADY_USED_EMAIL")'
+                value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::ALREADY_USED_EMAIL
                 description: 'Already used email.'
             UNAUTHORIZED_EMAIL_DOMAIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::UNAUTHORIZED_EMAIL_DOMAIN")'
+                value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::UNAUTHORIZED_EMAIL_DOMAIN
                 description: 'Unauthorized email domain.'
             RATE_LIMIT_REACHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UpdateUserEmailErrorCode::RATE_LIMIT_REACHED")'
+                value: !php/const Capco\AppBundle\Enum\UpdateUserEmailErrorCode::RATE_LIMIT_REACHED
                 description: 'Rate limit reached.'

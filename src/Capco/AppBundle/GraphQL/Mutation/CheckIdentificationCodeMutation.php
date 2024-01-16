@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\UserBundle\Entity\User;
@@ -12,6 +13,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CheckIdentificationCodeMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const VIEWER_ALREADY_HAS_A_CODE = 'VIEWER_ALREADY_HAS_A_CODE';
     public const CODE_MINIMAL_LENGTH = 'CODE_MINIMAL_LENGTH';
     public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
@@ -33,6 +36,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         if ($user->getUserIdentificationCodeValue()) {

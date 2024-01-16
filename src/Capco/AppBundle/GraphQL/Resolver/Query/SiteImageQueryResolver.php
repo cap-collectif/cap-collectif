@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SiteImageQueryResolver implements ResolverInterface
+class SiteImageQueryResolver implements QueryInterface
 {
     private $repository;
 

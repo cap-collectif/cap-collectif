@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\CommentVoteRepository;
@@ -16,6 +17,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveCommentVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private CommentVoteRepository $commentVoteRepo;
     private CommentRepository $commentRepo;
@@ -38,6 +40,7 @@ class RemoveCommentVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('commentId');
         $comment = $this->commentRepo->find(GlobalId::fromGlobalId($id)['id']);
 

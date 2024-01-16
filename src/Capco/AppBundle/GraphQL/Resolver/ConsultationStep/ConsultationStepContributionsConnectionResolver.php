@@ -11,11 +11,11 @@ use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ConsultationStepContributionsConnectionResolver implements ResolverInterface
+class ConsultationStepContributionsConnectionResolver implements QueryInterface
 {
     private $opinionSearch;
     private $opinionRepository;

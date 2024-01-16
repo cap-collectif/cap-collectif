@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryMapTokenResolver implements ResolverInterface
+class QueryMapTokenResolver implements QueryInterface
 {
     private MapTokenRepository $repository;
     private ?string $defaultMapboxPublicToken = null;

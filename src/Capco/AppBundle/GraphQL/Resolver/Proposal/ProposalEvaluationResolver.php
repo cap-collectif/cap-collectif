@@ -9,13 +9,13 @@ use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @deprecated this is our legacy evaluation tool
  */
-class ProposalEvaluationResolver implements ResolverInterface
+class ProposalEvaluationResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 

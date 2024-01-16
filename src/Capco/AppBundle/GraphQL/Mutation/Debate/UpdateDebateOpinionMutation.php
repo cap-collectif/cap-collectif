@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Form\DebateOpinionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\DebateOpinionVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
     public const INVALID_FORM = 'INVALID_FORM';
 
@@ -42,6 +45,7 @@ class UpdateDebateOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $debateOpinionId = $input->offsetGet('debateOpinionId');
         $debateOpinion = $this->globalIdResolver->resolve($debateOpinionId, null);
 

@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Mutation\AddAnonymousReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -24,6 +25,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddAnonymousReplyMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -75,10 +78,14 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
             ],
             'participantEmail' => null,
         ];
+        $rawInput['input'] = $values;
 
         $userAgent = 'ABC';
         $ip = '1.1.1.1.1.1';
         $token = 'token';
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $values);
+
         $requestGuesser
             ->getUserAgent()
             ->shouldBeCalledOnce()
@@ -172,10 +179,14 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
             ],
             'participantEmail' => null,
         ];
+        $rawInput['input'] = $values;
 
         $userAgent = 'ABC';
         $ip = '1.1.1.1.1.1';
         $token = 'token';
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $values);
+
         $requestGuesser
             ->getUserAgent()
             ->shouldBeCalledOnce()

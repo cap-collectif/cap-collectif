@@ -12,6 +12,7 @@ use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddProposalNewsMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PROPOSAL_DOESNT_ALLOW_NEWS = 'PROPOSAL_DOESNT_ALLOW_NEWS';
 
     private EntityManagerInterface $em;
@@ -55,6 +58,8 @@ class AddProposalNewsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             /** @var Proposal $proposal */
             $proposal = $this->getProposal($input, $viewer);

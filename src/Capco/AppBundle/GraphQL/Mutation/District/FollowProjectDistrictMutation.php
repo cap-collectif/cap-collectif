@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
@@ -17,6 +18,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class FollowProjectDistrictMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private EntityManagerInterface $entityManager;
@@ -35,6 +37,7 @@ class FollowProjectDistrictMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $projectDistrictId = $input->offsetGet('projectDistrictId');
         $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
 

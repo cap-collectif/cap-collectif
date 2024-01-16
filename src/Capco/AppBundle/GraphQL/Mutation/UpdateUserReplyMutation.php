@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Publishable\DoctrineListener;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateUserReplyMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
@@ -43,6 +45,7 @@ class UpdateUserReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $reply = $this->getReply($input, $viewer);
         $wasDraft = $reply->isDraft();
         $reply = $this->updateReply($reply, $input, $wasDraft);

@@ -11,7 +11,7 @@ class HasFeatureFlag extends ExpressionFunction
     {
         parent::__construct('hasFeatureFlag', function (string $name) {
             return sprintf(
-                '$globalVariable->get(\'container\')->get(\'%s\')->isActive(%s)',
+                '$services->get(\'container\')->get(\'%s\')->isActive(%s)',
                 Manager::class,
                 $name
             );

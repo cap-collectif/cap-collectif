@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Security\EventVoter;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class EventExportParticipantsUrlResolver implements ResolverInterface
+class EventExportParticipantsUrlResolver implements QueryInterface
 {
     private RouterInterface $router;
     private AuthorizationCheckerInterface $authorizationChecker;

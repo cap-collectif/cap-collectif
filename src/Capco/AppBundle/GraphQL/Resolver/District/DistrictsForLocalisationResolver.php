@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\District;
 
 use Capco\AppBundle\Helper\GeometryHelper;
 use Capco\AppBundle\Repository\ProposalFormRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DistrictsForLocalisationResolver implements ResolverInterface
+class DistrictsForLocalisationResolver implements QueryInterface
 {
     private $proposalFormRepository;
 

@@ -13,12 +13,12 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Resolver\LocaleResolver;
 use Doctrine\Common\Util\ClassUtils;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class StepUrlResolver implements ResolverInterface
+class StepUrlResolver implements QueryInterface
 {
     protected $router;
     protected $requestStack;

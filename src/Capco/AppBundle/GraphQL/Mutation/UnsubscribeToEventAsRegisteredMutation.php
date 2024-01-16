@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $globalIdResolver;
     private EventRegistrationRepository $eventRegistrationRepository;
     private EntityManagerInterface $entityManager;
@@ -29,6 +31,7 @@ class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $eventId = $input->offsetGet('eventId');
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($eventId, $viewer);

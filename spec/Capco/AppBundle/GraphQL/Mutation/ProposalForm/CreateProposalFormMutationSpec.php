@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalForm\CreateProposalFormMutation;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -18,6 +19,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProposalFormMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
@@ -42,7 +45,9 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
     ): void {
         $title = 'title';
         $input = ['title' => $title, 'owner' => null];
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn($input);
+
         $args
             ->offsetGet('owner')
             ->shouldBeCalled()
@@ -86,6 +91,8 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
         $title = 'title';
         $organizationId = 'organizationId';
         $input = ['title' => $title, 'owner' => $organizationId];
+
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn($input);
         $args
             ->offsetGet('owner')
@@ -127,6 +134,8 @@ class CreateProposalFormMutationSpec extends ObjectBehavior
     ): void {
         $title = 'title';
         $input = ['title' => $title];
+
+        $this->getMockedGraphQLArgumentFormatted($args);
         $args->getArrayCopy()->willReturn($input);
 
         $formFactory

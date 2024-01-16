@@ -11,10 +11,10 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\Model\Publishable;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class PublishableTypeResolver implements ResolverInterface
+class PublishableTypeResolver implements QueryInterface
 {
     private $typeResolver;
 

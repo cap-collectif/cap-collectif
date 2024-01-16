@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $opinionRepo;
     private $redisStorage;
@@ -29,6 +31,7 @@ class DeleteOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
+        $this->formatInput($input);
         $opinionGlobalId = $input->offsetGet('opinionId');
         $opinionId = GlobalId::fromGlobalId($opinionGlobalId)['id'];
         $opinion = $this->opinionRepo->find($opinionId);

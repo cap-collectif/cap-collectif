@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $entityManager;
     private GlobalIdResolver $globalIdResolver;
     private TokenGeneratorInterface $tokenGenerator;
@@ -53,6 +55,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
 
     public function __invoke(Argument $argument, ?User $viewer): array
     {
+        $this->formatInput($argument);
         $mediatorId = $argument->offsetGet('mediatorId');
         $stepId = $argument->offsetGet('stepId');
         $proposals = $argument->offsetGet('proposals');

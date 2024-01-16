@@ -7,10 +7,10 @@ use Capco\AppBundle\Enum\ParticipantOrderField;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class MediatorParticipantsResolver implements ResolverInterface
+class MediatorParticipantsResolver implements QueryInterface
 {
     private ConnectionBuilder $connectionBuilder;
     private ParticipantRepository $participantRepository;

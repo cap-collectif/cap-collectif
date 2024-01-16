@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Sms;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class SmsCreditsResolver implements ResolverInterface
+class SmsCreditsResolver implements QueryInterface
 {
     use ResolverTrait;
 

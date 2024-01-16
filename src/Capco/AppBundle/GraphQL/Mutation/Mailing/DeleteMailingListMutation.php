@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Enum\DeleteMailingListErrorCode;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Security\MailingListVoter;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteMailingListMutation implements MutationInterface
 {
+    use MutationTrait;
     private MailingListRepository $repository;
     private EntityManagerInterface $entityManager;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -36,6 +38,7 @@ class DeleteMailingListMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $error = null;
         $deletedIds = [];
 

@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Enum\UserRole;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserRolesTextResolver implements ResolverInterface
+class UserRolesTextResolver implements QueryInterface
 {
     public function __invoke(User $user, $viewer, \ArrayObject $context): ?string
     {

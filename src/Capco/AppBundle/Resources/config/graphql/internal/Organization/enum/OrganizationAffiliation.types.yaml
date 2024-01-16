@@ -5,8 +5,8 @@ OrganizationAffiliation:
         description: 'The affiliation of a user to an Organization'
         values:
             ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationAffiliation::ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\OrganizationAffiliation::ADMIN
                 description: 'Organizations that are administered by the viewer.'
             USER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationAffiliation::USER")'
+                value: !php/const Capco\AppBundle\Enum\OrganizationAffiliation::USER
                 description: 'Organizations the viewer is member of.'

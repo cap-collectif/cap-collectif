@@ -6,11 +6,11 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Repository\Organization\OrganizationMemberRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OrganizationMembersResolver implements ResolverInterface
+class OrganizationMembersResolver implements QueryInterface
 {
     private OrganizationMemberRepository $memberRepository;
     private OrganizationAdminAccessResolver $organizationAdminAccessResolver;

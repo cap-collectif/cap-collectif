@@ -33,7 +33,7 @@ InternalProposalFormOwner:
                         type: 'ProposalFormOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormOrderField::CREATED_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\ProposalFormOrderField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for proposalForms'

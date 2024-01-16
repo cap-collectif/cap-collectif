@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class SourceableSourcesResolver implements ResolverInterface
+class SourceableSourcesResolver implements QueryInterface
 {
     private $sourceRepository;
 

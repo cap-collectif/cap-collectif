@@ -5,14 +5,14 @@ InternalRemainingSmsCreditStatus:
         description: 'Available status for RemainingSmsCredit'
         values:
             IDLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\RemainingSmsCreditStatus::IDLE")'
+                value: !php/const Capco\AppBundle\Enum\RemainingSmsCreditStatus::IDLE
                 description: 'The remaining amount is over 25% of its last refill.'
             LOW:
-                value: '@=constant("Capco\\AppBundle\\Enum\\RemainingSmsCreditStatus::LOW")'
+                value: !php/const Capco\AppBundle\Enum\RemainingSmsCreditStatus::LOW
                 description: 'The remaining amount is between 25% and 10% of its last refill.'
             VERY_LOW:
-                value: '@=constant("Capco\\AppBundle\\Enum\\RemainingSmsCreditStatus::VERY_LOW")'
+                value: !php/const Capco\AppBundle\Enum\RemainingSmsCreditStatus::VERY_LOW
                 description: 'The remaining amount is below 10% of its last refill.'
             TOTAL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\RemainingSmsCreditStatus::TOTAL")'
+                value: !php/const Capco\AppBundle\Enum\RemainingSmsCreditStatus::TOTAL
                 description: 'The remaining amount is equal or below 0% of its last refill'

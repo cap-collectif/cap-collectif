@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteStepMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -30,6 +32,7 @@ class DeleteStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $stepId = $input->offsetGet('stepId');
         $step = $this->getStep($stepId, $viewer);
         $this->em->remove($step);

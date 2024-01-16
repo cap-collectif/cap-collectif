@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -21,6 +22,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SendSmsProposalVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         TwilioHelper $twilioHelper,
         ValidatorInterface $validator,
@@ -55,6 +58,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
@@ -118,6 +122,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+33675492871';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
@@ -174,6 +179,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+331332';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
@@ -232,6 +238,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
@@ -287,6 +294,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()
@@ -348,6 +356,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('phone')
             ->shouldBeCalledOnce()

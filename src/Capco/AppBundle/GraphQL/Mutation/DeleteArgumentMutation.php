@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
@@ -14,6 +15,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteArgumentMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $argumentRepo;
     private $redisStorage;
@@ -30,6 +32,7 @@ class DeleteArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
+        $this->formatInput($input);
         $argumentGlobalId = $input->offsetGet('argumentId');
         $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
         /** @var Argument $argument */

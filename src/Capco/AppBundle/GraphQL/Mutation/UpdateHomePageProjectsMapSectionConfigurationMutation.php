@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Form\SectionType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,6 +13,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_FORM = 'INVALID_FORM';
 
     private EntityManagerInterface $em;
@@ -30,6 +33,7 @@ class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationI
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $section = $this->sectionRepository->findOneBy(['type' => 'projectsMap']);
 
         $arguments = $args->getArrayCopy();

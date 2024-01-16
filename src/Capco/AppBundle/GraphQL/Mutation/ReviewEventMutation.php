@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Form\EventReviewType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\EventReviewVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ReviewEventMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $globalIdResolver;
     private $formFactory;
@@ -49,6 +51,7 @@ class ReviewEventMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $reviewer): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         /** @var Event $event */

@@ -4,8 +4,8 @@ ProposalStepVoteType:
         description: 'Type of vote.'
         values:
             DISABLED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::DISABLED")'
+                value: !php/const Capco\AppBundle\Enum\VoteType::DISABLED
             SIMPLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::SIMPLE")'
+                value: !php/const Capco\AppBundle\Enum\VoteType::SIMPLE
             BUDGET:
-                value: '@=constant("Capco\\AppBundle\\Enum\\VoteType::BUDGET")'
+                value: !php/const Capco\AppBundle\Enum\VoteType::BUDGET

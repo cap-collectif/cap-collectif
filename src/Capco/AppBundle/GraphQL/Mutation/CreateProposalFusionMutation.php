@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateProposalFusionMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $formFactory;
     private $proposalRepo;
@@ -46,6 +48,7 @@ class CreateProposalFusionMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $author): array
     {
+        $this->formatInput($input);
         $proposalIds = array_unique($input->getArrayCopy()['fromProposals']);
         $title = $input->offsetGet('title');
         $body = $input->offsetGet('description');

@@ -16,10 +16,14 @@ services:
 
     Capco\AppBundle\GraphQL\Mutation\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/*'
+        autowire: true
+        autoconfigure: true
+        public: true
         exclude: '%kernel.project_dir%/src/Capco/AppBundle/GraphQL/Mutation/{ProposalMutation.php,ProposalFormMutation.php,GroupMutation.php, ContactFormMutation.php}'
 
     #follwoing mutations are legacy : now we make on mutation file for each mutation
     Capco\AppBundle\GraphQL\Mutation\ProposalMutation:
+        public: true
         tags:
             - {
                   name: overblog_graphql.mutation,
@@ -71,12 +75,6 @@ services:
                   method: 'setEvaluationForm',
               }
 
-    Capco\AppBundle\GraphQL\Mutation\ContactFormMutation:
-        tags:
-            - { name: overblog_graphql.mutation, alias: 'sendContactForm', method: 'send' }
-            - { name: overblog_graphql.mutation, alias: 'addContactForm', method: 'add' }
-            - { name: overblog_graphql.mutation, alias: 'removeContactForm', method: 'remove' }
-            - { name: overblog_graphql.mutation, alias: 'updateContactForm', method: 'update' }
 
     Capco\AppBundle\GraphQL\Mutation\GroupMutation:
         tags:
@@ -93,7 +91,3 @@ services:
                   alias: 'addUsersInGroup',
                   method: 'addUsersInGroup',
               }
-
-    Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
-        arguments:
-            $firewallName: '%fos_user.firewall_name%'

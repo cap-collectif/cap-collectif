@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Form\OpinionVersionType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -20,6 +21,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddVersionMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $opinionRepo;
     private $formFactory;
@@ -42,6 +44,7 @@ class AddVersionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $opinionId = $input->offsetGet('opinionId');
         $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($opinionId)['id']);
 

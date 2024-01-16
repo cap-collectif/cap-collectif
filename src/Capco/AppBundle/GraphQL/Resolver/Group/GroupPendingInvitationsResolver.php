@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Group;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class GroupPendingInvitationsResolver implements ResolverInterface
+class GroupPendingInvitationsResolver implements QueryInterface
 {
     private UserInviteRepository $userInviteRepository;
 

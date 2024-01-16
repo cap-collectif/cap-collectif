@@ -5,5 +5,5 @@ InternalQuestionnaireAffiliation:
         description: 'The affiliation of a user to a questionnaire'
         values:
             OWNER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireAffiliation::OWNER")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireAffiliation::OWNER
                 description: 'Questionnaires that are owned by the authenticated user.'

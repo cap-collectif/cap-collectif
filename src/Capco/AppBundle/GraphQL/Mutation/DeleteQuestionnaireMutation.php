@@ -3,27 +3,29 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteQuestionnaireMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
 
     private AnalysisConfigurationRepository $analysisConfigurationRepository;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AnalysisConfigurationRepository $analysisConfigurationRepository,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
@@ -33,6 +35,7 @@ class DeleteQuestionnaireMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('id');
         $questionnaire = $this->globalIdResolver->resolve($id, $viewer);
         $proposalForm = $questionnaire->getProposalForm();

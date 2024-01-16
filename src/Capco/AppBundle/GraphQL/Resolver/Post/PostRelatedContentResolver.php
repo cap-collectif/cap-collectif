@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Post;
 
 use Capco\AppBundle\Entity\Post;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class PostRelatedContentResolver implements ResolverInterface
+class PostRelatedContentResolver implements QueryInterface
 {
     public function __invoke(Post $post): iterable
     {

@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Mutation\Sms\CreateSmsOrderMutation;
 use Capco\AppBundle\Repository\SmsOrderRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -14,6 +15,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class CreateSmsOrderMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         SmsOrderRepository $smsOrderRepository,
@@ -34,6 +37,7 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         Publisher $publisher
     ) {
         $amount = '1000';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('amount')
             ->shouldBeCalledOnce()
@@ -69,6 +73,7 @@ class CreateSmsOrderMutationSpec extends ObjectBehavior
         Publisher $publisher
     ) {
         $amount = '1000';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('amount')
             ->shouldBeCalledOnce()

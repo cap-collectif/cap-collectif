@@ -4,6 +4,6 @@ DebateArgumentOrderField:
         description: 'Ordering options for arguments returned from the connection.'
         values:
             PUBLISHED_AT:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentsResolver::ORDER_PUBLISHED_AT")'
+                value: !php/const Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentsResolver::ORDER_PUBLISHED_AT
             VOTE_COUNT:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentsResolver::ORDER_VOTE_COUNT")'
+                value: !php/const Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentsResolver::ORDER_VOTE_COUNT

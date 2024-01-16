@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\ApiSourceType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -24,6 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddSourceMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private OpinionRepository $opinionRepo;
@@ -52,6 +54,7 @@ class AddSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $sourceableId = $input->offsetGet('sourceableId');
         $sourceable = $this->versionRepo->find($sourceableId);
 

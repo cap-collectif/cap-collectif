@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
@@ -27,6 +28,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalSmsVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PROPOSAL_ALREADY_VOTED = 'PROPOSAL_ALREADY_VOTED';
     public const VOTE_LIMIT_REACHED = 'VOTE_LIMIT_REACHED';
     public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
@@ -71,6 +74,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $proposalId = $input->offsetGet('proposalId');
         $stepId = $input->offsetGet('stepId');
 

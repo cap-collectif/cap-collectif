@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalPublicationStatus;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalPublicationStatusResolver implements ResolverInterface
+class ProposalPublicationStatusResolver implements QueryInterface
 {
     public function __invoke(Proposal $proposal): string
     {

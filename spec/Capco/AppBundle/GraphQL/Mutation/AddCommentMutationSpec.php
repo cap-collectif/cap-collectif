@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Form\FormFactory;
 
 class AddCommentMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactory $formFactory,
@@ -58,6 +61,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
 
@@ -76,6 +81,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         User $viewer,
         CommentableInterface $commentable
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $commentable->isCommentable()->willReturn(false);
         $arguments->offsetGet('commentableId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($commentable);
@@ -95,6 +102,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         User $viewer,
         CommentableInterface $commentable
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $commentable->acceptNewComments()->willReturn(false);
         $commentable->isCommentable()->willReturn(true);
         $arguments->offsetGet('commentableId')->willReturn('123456');
@@ -121,6 +130,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         Form $form,
         Manager $manager
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $formData = ['body' => 'My body'];
         $form->submit($formData, false)->willReturn(null);
         $form->isValid()->willReturn(true);
@@ -174,6 +185,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         Manager $manager,
         TokenGeneratorInterface $tokenGenerator
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $formData = ['body' => 'My body'];
         $form->submit($formData, false)->willReturn(null);
         $form->isValid()->willReturn(true);

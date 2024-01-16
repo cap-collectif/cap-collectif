@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Font;
 
 use Capco\AppBundle\Font\FontManager;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\FontRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ChangeFontMutation implements MutationInterface
 {
+    use MutationTrait;
     private $repository;
     private $manager;
 
@@ -22,6 +24,7 @@ class ChangeFontMutation implements MutationInterface
 
     public function __invoke(Argument $args): iterable
     {
+        $this->formatInput($args);
         list($headingFontId, $bodyFontId) = [
             GlobalId::fromGlobalId($args->offsetGet('heading'))['id'],
             GlobalId::fromGlobalId($args->offsetGet('body'))['id'],

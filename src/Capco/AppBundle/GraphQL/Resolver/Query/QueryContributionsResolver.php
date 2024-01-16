@@ -7,9 +7,9 @@ use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributionResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryContributionsResolver implements ResolverInterface
+class QueryContributionsResolver implements QueryInterface
 {
     protected $projectRepository;
     protected $projectContributionResolver;

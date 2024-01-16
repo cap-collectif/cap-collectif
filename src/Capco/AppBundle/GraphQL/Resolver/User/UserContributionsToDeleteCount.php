@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserContributionsToDeleteCount implements ResolverInterface
+class UserContributionsToDeleteCount implements QueryInterface
 {
     private $deleteAccountMutation;
 

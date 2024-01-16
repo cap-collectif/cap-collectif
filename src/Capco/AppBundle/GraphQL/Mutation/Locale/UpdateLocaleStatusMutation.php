@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Locale;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Exception\LocaleConfigurationException;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,6 +14,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateLocaleStatusMutation implements MutationInterface
 {
+    use MutationTrait;
+
     private $entityManager;
     private $localeRepository;
 
@@ -26,6 +29,7 @@ class UpdateLocaleStatusMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $localesInput = $args->offsetGet('locales');
         $locales = [];
         foreach ($localesInput as $localeInput) {

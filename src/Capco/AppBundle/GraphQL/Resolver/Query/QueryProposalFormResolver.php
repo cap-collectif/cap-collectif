@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\ProposalFormRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryProposalFormResolver implements ResolverInterface
+class QueryProposalFormResolver implements QueryInterface
 {
     private ProposalFormRepository $repository;
 

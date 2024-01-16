@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -9,8 +10,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class RemoveProposalsFromStepsMutation extends AbstractProposalStepMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public function __invoke(Argument $args, User $user): array
     {
+        $this->formatInput($args);
         $error = null;
         $proposals = [];
         $steps = [];

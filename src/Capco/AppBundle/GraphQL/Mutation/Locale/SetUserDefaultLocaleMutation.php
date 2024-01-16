@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Locale;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SetUserDefaultLocaleMutation implements MutationInterface
 {
+    use MutationTrait;
     private LocaleRepository $localeRepository;
     private EntityManagerInterface $entityManager;
     private UserRepository $userRepository;
@@ -29,6 +31,7 @@ class SetUserDefaultLocaleMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $viewer): array
     {
+        $this->formatInput($args);
         $code = $args->offsetGet('code');
         if ($viewer->isAdmin() && null !== $args->offsetGet('userId')) {
             $userId = $args->offsetGet('userId');

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Question;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionQueryResolver implements ResolverInterface
+class QuestionQueryResolver implements QueryInterface
 {
     private $abstractQuestionRepository;
 

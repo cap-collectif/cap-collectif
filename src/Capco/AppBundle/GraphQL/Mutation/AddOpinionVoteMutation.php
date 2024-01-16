@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
@@ -24,6 +25,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddOpinionVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $validator;
     private $opinionRepo;
@@ -52,6 +54,7 @@ class AddOpinionVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $contributionId = GlobalId::fromGlobalId($input->offsetGet('opinionId'))['id'];
         $opinion = $this->opinionRepo->find($contributionId);
         $version = $this->versionRepo->find($contributionId);

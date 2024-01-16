@@ -8,10 +8,10 @@ use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class DebateArgumentsResolver implements ResolverInterface
+class DebateArgumentsResolver implements QueryInterface
 {
     public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
     public const ORDER_VOTE_COUNT = 'VOTE_COUNT';

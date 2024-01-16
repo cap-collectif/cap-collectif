@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 class GraphQLException extends UserErrors
 {
     public function __construct(
-        array $errors,
+        array $errors = [],
         $message = '',
         $code = 0,
         ?\Exception $previous = null

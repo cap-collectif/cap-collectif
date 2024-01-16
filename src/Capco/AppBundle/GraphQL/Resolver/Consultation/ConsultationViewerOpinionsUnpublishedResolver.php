@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class ConsultationViewerOpinionsUnpublishedResolver implements ResolverInterface
+class ConsultationViewerOpinionsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 

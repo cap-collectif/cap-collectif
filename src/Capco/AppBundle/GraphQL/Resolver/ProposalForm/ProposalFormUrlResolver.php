@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProposalFormUrlResolver implements ResolverInterface
+class ProposalFormUrlResolver implements QueryInterface
 {
     private $router;
 

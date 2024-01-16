@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -26,6 +27,8 @@ use Symfony\Component\Form\FormInterface;
 
 class AddUserReplyMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
 
     private EntityManagerInterface $em;
@@ -65,6 +68,7 @@ class AddUserReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         /** @var Questionnaire $questionnaire */

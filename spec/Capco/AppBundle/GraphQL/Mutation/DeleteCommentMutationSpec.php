@@ -8,6 +8,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader
 use Capco\AppBundle\GraphQL\Mutation\DeleteCommentMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -18,6 +19,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteCommentMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         RedisStorageHelper $redisStorage,
@@ -49,6 +52,7 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         $commentId = 'commentId';
         $arguments->offsetGet('id')->willReturn($commentId);
         $globalIdResolver->resolve($commentId, $viewer)->willReturn(null);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'userErrors' => [
@@ -72,6 +76,7 @@ class DeleteCommentMutationSpec extends ObjectBehavior
         $commentId = 'commentId';
         $arguments->offsetGet('id')->willReturn($commentId);
         $globalIdResolver->resolve($commentId, $viewer)->willReturn($comment);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $proposal->getId()->willReturn('012234');
         $comment->getAuthor()->willReturn($viewer);

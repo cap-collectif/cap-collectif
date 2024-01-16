@@ -6,10 +6,10 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Search\OpinionSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class SectionContributionRelayResolver implements ResolverInterface
+class SectionContributionRelayResolver implements QueryInterface
 {
     private $opinionSearch;
 

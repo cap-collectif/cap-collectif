@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -32,6 +33,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {
+    use MutationTrait;
+
     private UserRepository $userRepository;
 
     public function __construct(
@@ -86,6 +89,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $user = $viewer;
         $email = $input->offsetGet('email');
 

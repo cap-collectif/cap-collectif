@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\OpinionVersion\OpinionVersionUrlResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ArgumentUrlResolver implements ResolverInterface
+class ArgumentUrlResolver implements QueryInterface
 {
     private $opinionUrlResolver;
     private $opinionVersionUrlResolver;

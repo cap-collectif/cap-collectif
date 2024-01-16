@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Form\Type\PasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ResetPasswordMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private UserPasswordEncoderInterface $userPasswordEncoder;
     private FormFactoryInterface $formFactory;
@@ -35,7 +37,7 @@ class ResetPasswordMutation implements MutationInterface
         UserPasswordEncoderInterface $userPasswordEncoder,
         TranslatorInterface $translator,
         LoggerInterface $logger,
-        $firewallName
+        string $firewallName
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -50,6 +52,7 @@ class ResetPasswordMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $token = $args->offsetGet('token');
         $user = $this->userManager->findUserByResetPasswordToken($token);
         if (null === $user) {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\ExternalServiceConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateTwilioVerifyServiceMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
     private TwilioClient $twilioClient;
@@ -29,6 +32,7 @@ class UpdateTwilioVerifyServiceMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $serviceName = $input->offsetGet('serviceName');
 
         $response = $this->twilioClient->updateVerifyService($serviceName);

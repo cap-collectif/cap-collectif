@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Factory\PostAuthorFactory;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
@@ -23,6 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreatePostMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_FORM = 'INVALID_FORM';
     public const INVALID_OWNER = 'INVALID_OWNER';
 
@@ -54,6 +57,7 @@ class CreatePostMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $post = Post::create($viewer);
         $data = $input->getArrayCopy();
 

@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         DebateArgumentVoteRepository $repository,
         DebateAnonymousArgumentVoteRepository $anonymousRepository,
@@ -56,6 +59,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $debateArgumentId = 'debateArgumentId';
         $debateArgumentVoteId = 'debateArgumentVoteId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('debateArgumentId')->willReturn($debateArgumentId);
         $globalIdResolver->resolve($debateArgumentId, $viewer)->willReturn($debateArgument);
         $debateArgument->setVotes(new ArrayCollection([$debateArgument]));
@@ -95,6 +99,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'wrongId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
 
         $this->__invoke($input, $viewer)->shouldBe(['errorCode' => 'UNKNOWN_DEBATE_ARGUMENT']);
@@ -109,6 +114,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->isPublished()->willReturn(true);
 
@@ -130,6 +136,7 @@ class RemoveDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->isPublished()->willReturn(true);
 

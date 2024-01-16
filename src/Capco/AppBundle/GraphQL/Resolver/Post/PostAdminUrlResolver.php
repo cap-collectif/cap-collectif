@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Post;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Security\PostVoter;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class PostAdminUrlResolver implements ResolverInterface
+class PostAdminUrlResolver implements QueryInterface
 {
     private RouterInterface $router;
     private AuthorizationCheckerInterface $authorizationChecker;

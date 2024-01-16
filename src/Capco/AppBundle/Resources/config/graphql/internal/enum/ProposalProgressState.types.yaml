@@ -4,17 +4,17 @@ ProposalProgressState:
         description: "Possible values of a proposal's global progress state."
         values:
             IN_PROGRESS:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::IN_PROGRESS")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::IN_PROGRESS
                 description: 'The proposal is currently being edited'
             FAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::FAVOURABLE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::FAVOURABLE
                 description: "The proposal's progress state is favourable."
             UNFAVOURABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::UNFAVOURABLE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::UNFAVOURABLE
                 description: "The proposal's progress state is unfavourable."
             TOO_LATE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::TOO_LATE")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::TOO_LATE
                 description: 'The evaluation of the proposal was not issued in time.'
             TODO:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementState::TODO")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementState::TODO
                 description: 'The evaluation of the proposal has not started yet.'

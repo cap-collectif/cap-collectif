@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\GraphQL\Mutation\Sms\VerifyUserPhoneNumberMutation;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -13,6 +14,8 @@ use PhpSpec\ObjectBehavior;
 
 class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         TwilioHelper $twilioHelper,
@@ -41,6 +44,7 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn(false)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
@@ -71,6 +75,8 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
     public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input)
     {
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
@@ -93,6 +99,7 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn(false)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
@@ -122,6 +129,7 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn(false)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()

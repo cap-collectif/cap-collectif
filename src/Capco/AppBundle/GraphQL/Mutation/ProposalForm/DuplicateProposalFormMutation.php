@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -14,6 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DuplicateProposalFormMutation extends AbstractProposalFormMutation
 {
+    use MutationTrait;
+
     private TranslatorInterface $translator;
 
     public function __construct(
@@ -28,6 +31,8 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $id = $input->offsetGet('id');
             $proposalForm = $this->getProposalForm($id, $viewer);

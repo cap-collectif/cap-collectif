@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Source;
 
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SourceViewerHasVoteResolver implements ResolverInterface
+class SourceViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 

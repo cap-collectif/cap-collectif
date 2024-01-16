@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\CategoryImageRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryCategoryImagesResolver implements ResolverInterface
+class QueryCategoryImagesResolver implements QueryInterface
 {
     private $repository;
 

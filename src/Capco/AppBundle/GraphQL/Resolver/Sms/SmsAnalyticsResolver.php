@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Sms;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Service\SmsAnalyticsHelper;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SmsAnalyticsResolver implements ResolverInterface
+class SmsAnalyticsResolver implements QueryInterface
 {
     use ResolverTrait;
 

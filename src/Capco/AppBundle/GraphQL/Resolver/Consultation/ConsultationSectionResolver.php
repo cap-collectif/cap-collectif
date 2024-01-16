@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\OpinionType;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ConsultationSectionResolver implements ResolverInterface
+class ConsultationSectionResolver implements QueryInterface
 {
     public function __invoke(Consultation $consultation, Arg $argument): array
     {

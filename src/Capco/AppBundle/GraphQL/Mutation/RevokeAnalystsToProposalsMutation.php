@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalAnalystRepository;
@@ -25,6 +26,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RevokeAnalystsToProposalsMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private GlobalIdResolver $globalIdResolver;
@@ -58,6 +60,7 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
 
     public function __invoke(Arg $input, $viewer): array
     {
+        $this->formatInput($input);
         $this->preventNullableViewer($viewer);
 
         $proposalIds = $input->offsetGet('proposalIds');

@@ -4,17 +4,17 @@ ReportingType:
         description: 'Type of reporting'
         values:
             SEX:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::SEX")'
+                value: !php/const Capco\AppBundle\Enum\ReportingType::SEX
                 description: 'The associated contribution has been flagged as sexual content'
             OFF:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::OFF")'
+                value: !php/const Capco\AppBundle\Enum\ReportingType::OFF
                 description: 'The associated contribution has been flagged as offending content'
             SPAM:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::SPAM")'
+                value: !php/const Capco\AppBundle\Enum\ReportingType::SPAM
                 description: 'The associated contribution has been flagged as spam'
             ERROR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::ERROR")'
+                value: !php/const Capco\AppBundle\Enum\ReportingType::ERROR
                 description: 'The associated contribution has been flagged as erroneous'
             OFF_TOPIC:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReportingType::OFF_TOPIC")'
+                value: !php/const Capco\AppBundle\Enum\ReportingType::OFF_TOPIC
                 description: 'The associated contribution has been flagged as off topic'

@@ -4,8 +4,8 @@ CreateSenderEmailErrorCode:
         description: 'Possible errors on createSenderDomain mutation.'
         values:
             ALREADY_EXIST:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailMutation::ALREADY_EXIST")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Mailing\CreateSenderEmailMutation::ALREADY_EXIST
                 description: 'There is already a SenderEmail matching locale and domain.'
             INVALID_DOMAIN:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\CreateSenderEmailMutation::INVALID_DOMAIN")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Mailing\CreateSenderEmailMutation::INVALID_DOMAIN
                 description: 'The domain is not in the list of domains.'

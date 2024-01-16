@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\GraphQL\Mutation\CheckIdentificationCodeMutation;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -19,6 +20,8 @@ BypassFinals::enable();
 
 class CheckIdentificationCodeMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         LoggerInterface $logger,
         ValidatorInterface $validator,
@@ -41,6 +44,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         RateLimiter $rateLimiter,
         ConstraintViolationList $violationList
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $this->firstCallOfCache($rateLimiter, $viewer);
         $error->count()->willReturn(0);
@@ -66,6 +71,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolation $violation,
         RateLimiter $rateLimiter
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $viewer
             ->getUserIdentificationCodeValue()
@@ -86,6 +93,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolation $violation,
         RateLimiter $rateLimiter
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $this->firstCallOfCache($rateLimiter, $viewer);
 
@@ -107,6 +116,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolation $violation,
         RateLimiter $rateLimiter
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
         $validator
             ->validate(
@@ -134,6 +145,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolationList $violationList,
         RateLimiter $rateLimiter
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
 
         $rateLimiter
@@ -156,6 +169,8 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolation $violation,
         RateLimiter $rateLimiter
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->initMutation($arguments, $viewer, $validator, $violationList);
 
         $rateLimiter

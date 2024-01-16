@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\SiteImage\SiteFaviconProcessor;
 use Capco\MediaBundle\Repository\MediaRepository;
@@ -12,6 +13,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class ChangeSiteFaviconMutation implements MutationInterface
 {
+    use MutationTrait;
     private $siteImageRepository;
     private $mediaRepository;
     private $em;
@@ -31,6 +33,7 @@ class ChangeSiteFaviconMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $mediaId = $input->offsetGet('mediaId');
 
         $media = $this->mediaRepository->find($mediaId);

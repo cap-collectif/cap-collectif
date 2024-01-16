@@ -5,5 +5,5 @@ InternalEventAffiliation:
         description: 'The affiliation of a user to a event'
         values:
             OWNER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EventAffiliation::OWNER")'
+                value: !php/const Capco\AppBundle\Enum\EventAffiliation::OWNER
                 description: 'Events that are owned by the authenticated user.'

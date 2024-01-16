@@ -4,17 +4,17 @@ ExternalServiceConfigurationType:
         description: 'possible types for ExternalServiceConfiguration.'
         values:
             MAILER:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TYPE_MAILER")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::TYPE_MAILER
                 description: 'Choice of the external mailer client : mandrill or mailjet.'
             TWILIO_VERIFY_SERVICE_SID:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_VERIFY_SERVICE_SID")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::TWILIO_VERIFY_SERVICE_SID
                 description: 'Twilio verify service sid.'
             TWILIO_VERIFY_SERVICE_NAME:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_VERIFY_SERVICE_NAME")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::TWILIO_VERIFY_SERVICE_NAME
                 description: 'Twilio verify service name.'
             TWILIO_SUBACCOUNT_SID:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_SUBACCOUNT_SID")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::TWILIO_SUBACCOUNT_SID
                 description: 'Twilio subaccount sid.'
             TWILIO_SUBACCOUNT_AUTH_TOKEN:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::TWILIO_SUBACCOUNT_AUTH_TOKEN")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::TWILIO_SUBACCOUNT_AUTH_TOKEN
                 description: 'Twilio subaccount auth token.'

@@ -5,8 +5,8 @@ AskProposalRevisionErrorCode:
         description: 'Available errors on proposal related mutations.'
         values:
             NON_EXISTING_PROPOSAL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::NON_EXISTING_PROPOSAL")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::NON_EXISTING_PROPOSAL
                 description: 'The given proposal does not exist.'
             INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalStatementErrorCode::INVALID_FORM")'
+                value: !php/const Capco\AppBundle\Enum\ProposalStatementErrorCode::INVALID_FORM
                 description: 'The provided values are not valid.'

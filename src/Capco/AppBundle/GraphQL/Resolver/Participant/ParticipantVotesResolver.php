@@ -10,11 +10,11 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ParticipantVotesResolver implements ResolverInterface
+class ParticipantVotesResolver implements QueryInterface
 {
     private ProposalSelectionVoteRepository $voteRepository;
     private GlobalIdResolver $globalIdResolver;

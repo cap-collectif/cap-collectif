@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class EmailingCampaignOwnerTypeResolver implements ResolverInterface
+class EmailingCampaignOwnerTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

@@ -7,12 +7,12 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserProposalsResolver implements ResolverInterface
+class UserProposalsResolver implements QueryInterface
 {
     private ProposalRepository $proposalRepository;
 

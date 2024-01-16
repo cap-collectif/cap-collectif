@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class ResponseResolver implements ResolverInterface
+class ResponseResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

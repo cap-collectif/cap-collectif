@@ -5,26 +5,26 @@ InternalProposalAssignmentErrorCode:
         description: 'Available errors on proposal assignment related mutations.'
         values:
             ACCESS_DENIED_TO_REVOKE_SUPERVISOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_SUPERVISOR
                 description: 'You dont have access to revoke supervisor.'
             ACCESS_DENIED_TO_ASSIGN_SUPERVISOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_SUPERVISOR
                 description: 'You dont have access to assign supervisor.'
             ACCESS_DENIED_TO_REVOKE_DECISION_MAKER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_DECISION_MAKER")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_REVOKE_DECISION_MAKER
                 description: 'You dont have access to revoke decision maker.'
             ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_DECISION_MAKER
                 description: 'You dont have access to assign decision maker.'
             CANT_REVOKE_YOURSELF:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::CANT_REVOKE_YOURSELF")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::CANT_REVOKE_YOURSELF
                 description: 'You cant revoke yourself'
             IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::IN_PROGRESS_ANALYSIS_REVOKE_ANALYST_DENIED
                 description: 'You dont have permission to revoke analyst with analysis in progress .'
             ACCESS_DENIED_TO_ASSIGN_ANALYST:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_ANALYST")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::ACCESS_DENIED_TO_ASSIGN_ANALYST
                 description: 'You dont have access to assign analyst.'
             MAX_ANALYSTS_REACHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED")'
+                value: !php/const Capco\AppBundle\Enum\ProposalAssignmentErrorCode::MAX_ANALYSTS_REACHED
                 description: 'You cant add more 10 analysts.'

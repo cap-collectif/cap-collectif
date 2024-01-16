@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\EventType;
 use Capco\AppBundle\GraphQL\Mutation\ChangeEventMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,8 @@ use Symfony\Component\Translation\Translator;
 
 class ChangeEventMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -73,6 +76,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $authorizationChecker
         );
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $viewer->isProjectAdmin()->willReturn(false);
         $viewer->isOrganizationMember()->willReturn(false);
         $publisher->publish('event.update', Argument::type(Message::class))->shouldBeCalled();
@@ -105,6 +110,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $authorizationChecker
         );
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $viewer->isProjectAdmin()->willReturn(true);
         $publisher->publish('event.update', Argument::type(Message::class))->shouldNotBeCalled();
 
@@ -135,6 +142,8 @@ class ChangeEventMutationSpec extends ObjectBehavior
             $em,
             $authorizationChecker
         );
+
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $viewer->isProjectAdmin()->willReturn(false);
         $viewer->isOrganizationMember()->willReturn(true);
@@ -171,6 +180,10 @@ class ChangeEventMutationSpec extends ObjectBehavior
             'author' => 'abc',
             'animator' => 'def',
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
 
         $viewer->isAdmin()->willReturn(true);
         $viewer->isProjectAdmin()->willReturn(true);
@@ -210,6 +223,10 @@ class ChangeEventMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $values = ['body' => 'My body', 'customCode' => 'abc'];
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
+
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
@@ -245,6 +262,10 @@ class ChangeEventMutationSpec extends ObjectBehavior
                 ],
             ],
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
 
         $viewer->isAdmin()->willReturn(false);
         $viewer->getOrganizationId()->willReturn(false);

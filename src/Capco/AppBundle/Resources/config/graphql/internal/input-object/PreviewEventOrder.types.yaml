@@ -6,9 +6,9 @@ PreviewEventOrder:
         fields:
             field:
                 type: 'PreviewEventOrderField!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\EventOrderField::START_AT")'
+                defaultValue: !php/const Capco\AppBundle\Enum\EventOrderField::START_AT
                 description: 'The field in which to order nodes by.'
             direction:
                 type: 'OrderDirection!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
                 description: 'The direction in which to order nodes.'

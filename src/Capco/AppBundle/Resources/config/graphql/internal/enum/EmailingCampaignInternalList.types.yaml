@@ -4,11 +4,11 @@ EmailingCampaignInternalList:
         description: 'The available automated emailing lists'
         values:
             REGISTERED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignInternalList::REGISTERED")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::REGISTERED
                 description: 'All users registered.'
             NOT_CONFIRMED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignInternalList::NOT_CONFIRMED")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::NOT_CONFIRMED
                 description: 'Users registered but with email not confirmed.'
             CONFIRMED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignInternalList::CONFIRMED")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignInternalList::CONFIRMED
                 description: 'Only confirmed users.'

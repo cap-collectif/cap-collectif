@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\OrganizationVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class KickFromOrganizationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     public const USER_NOT_MEMBER = 'USER_NOT_MEMBER';
 
@@ -34,6 +37,8 @@ class KickFromOrganizationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $organization = $this->getOrganization($input, $viewer);
             $user = $this->getUser($input, $viewer);

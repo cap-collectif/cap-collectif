@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalAssessment;
 use Capco\AppBundle\Entity\ProposalDecision;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -18,22 +19,23 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ChangeProposalAssessmentMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private ProposalRepository $proposalRepository;
     private EntityManagerInterface $entityManager;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
     private LoggerInterface $logger;
     private Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,
         EntityManagerInterface $entityManager,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         LoggerInterface $logger,
         Publisher $publisher
     ) {
@@ -46,6 +48,7 @@ class ChangeProposalAssessmentMutation implements MutationInterface
 
     public function __invoke(Argument $args, $viewer): array
     {
+        $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
         list($proposalId, $body, $estimatedCost, $officialResponse) = [

@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ExternalServiceConfigurationResolver implements ResolverInterface
+class ExternalServiceConfigurationResolver implements QueryInterface
 {
     use ResolverTrait;
 

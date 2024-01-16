@@ -5,23 +5,23 @@ UpdateOfficialResponseErrorCode:
         description: 'Available errors on OfficialResponse creation or edition'
         values:
             ID_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::ID_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::ID_NOT_FOUND
                 description: 'No OfficialResponse match your id'
             AUTHOR_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::AUTHOR_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::AUTHOR_NOT_FOUND
                 description: 'No author match your id'
             NO_AUTHOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::NO_AUTHOR")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::NO_AUTHOR
                 description: 'OfficialResponse needs at least one author'
             PROPOSAL_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::PROPOSAL_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::PROPOSAL_NOT_FOUND
                 description: 'No proposal match your id'
             PROPOSAL_HAS_RESPONSE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::PROPOSAL_HAS_RESPONSE")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::PROPOSAL_HAS_RESPONSE
                 description: 'The proposal already has an OfficialResponse'
             INVALID_DATE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::INVALID_DATE")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::INVALID_DATE
                 description: 'The received date is not valid.'
             NOT_ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ErrorCode\\UpdateOfficialResponseErrorCode::NOT_ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\ErrorCode\UpdateOfficialResponseErrorCode::NOT_ADMIN
                 description: 'Not admin of this project.'

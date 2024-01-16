@@ -11,7 +11,7 @@ PhoneRequirement:
         fields:
             viewerValue:
                 type: 'String'
-                access: "@hasRole('ROLE_USER')"
+                access: "@=hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
                 description: 'The phone of the viewer.'
             participantValue:

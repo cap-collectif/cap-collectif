@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class OpenIDRedirectUriResolver implements ResolverInterface
+class OpenIDRedirectUriResolver implements QueryInterface
 {
     private $router;
 

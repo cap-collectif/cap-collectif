@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\MediatorRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class StepMediatorsResolver implements ResolverInterface
+class StepMediatorsResolver implements QueryInterface
 {
     private ConnectionBuilder $connectionBuilder;
     private MediatorRepository $mediatorRepository;

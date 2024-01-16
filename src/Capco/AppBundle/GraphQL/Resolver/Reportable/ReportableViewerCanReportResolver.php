@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Reportable;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ReportableViewerCanReportResolver implements ResolverInterface
+class ReportableViewerCanReportResolver implements QueryInterface
 {
     use ResolverTrait;
 

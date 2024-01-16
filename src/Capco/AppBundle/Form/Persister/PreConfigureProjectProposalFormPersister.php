@@ -29,7 +29,7 @@ class PreConfigureProjectProposalFormPersister
 
         foreach ($proposalFormsInput as $proposalFormInput) {
             list('proposalForm' => $proposalForm) = $this->createProposalFormMutation->__invoke(
-                new Argument(['title' => $proposalFormInput['title'], 'owner' => $ownerId]),
+                new Argument(['input' => ['title' => $proposalFormInput['title'], 'owner' => $ownerId]]),
                 $viewer
             );
 
@@ -37,7 +37,7 @@ class PreConfigureProjectProposalFormPersister
             $proposalFormInput['proposalFormId'] = $proposalForm->getId();
 
             $this->updateProposalFormMutation->__invoke(
-                new Argument($proposalFormInput),
+                new Argument(['input' => $proposalFormInput]),
                 $viewer
             );
 

@@ -5,12 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\HomePageProjectsSectionConfiguration;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class HomePageProjectsSectionConfigurationProjectsResolver implements ResolverInterface
+class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInterface
 {
     private $logger;
     private $projectRepository;

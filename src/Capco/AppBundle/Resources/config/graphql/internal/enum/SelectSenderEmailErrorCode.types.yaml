@@ -4,5 +4,5 @@ SelectSenderEmailErrorCode:
         description: 'Possible errors on selectSenderDomain mutation.'
         values:
             UNKNOWN_SENDER_EMAIL:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\SelectSenderEmailMutation::UNKNOWN_SENDER_EMAIL")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Mailing\SelectSenderEmailMutation::UNKNOWN_SENDER_EMAIL
                 description: 'No `SenderEmail` matching your id.'

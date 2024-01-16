@@ -4,11 +4,11 @@ EmailingCampaignStatusFilter:
         description: '3 possible values'
         values:
             DRAFT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::DRAFT")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignStatus::DRAFT
                 description: 'campaigns not scheduled'
             SENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::SENT")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignStatus::SENT
                 description: 'campaigns already sent'
             PLANNED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignStatus::PLANNED")'
+                value: !php/const Capco\AppBundle\Enum\EmailingCampaignStatus::PLANNED
                 description: 'campaigns scheduled'

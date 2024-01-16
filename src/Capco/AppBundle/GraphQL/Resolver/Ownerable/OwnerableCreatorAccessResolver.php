@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\Organization\OrganizationAdminAccessResolver;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class OwnerableCreatorAccessResolver implements ResolverInterface
+class OwnerableCreatorAccessResolver implements QueryInterface
 {
     private OrganizationAdminAccessResolver $organizationAdminAccessResolver;
 

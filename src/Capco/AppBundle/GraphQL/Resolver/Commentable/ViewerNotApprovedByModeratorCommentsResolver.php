@@ -15,11 +15,11 @@ use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ViewerNotApprovedByModeratorCommentsResolver implements ResolverInterface
+class ViewerNotApprovedByModeratorCommentsResolver implements QueryInterface
 {
     private ProposalCommentRepository $proposalCommentRepository;
     private EventCommentRepository $eventCommentRepository;

@@ -13,6 +13,7 @@ use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Egulias\EmailValidator\EmailValidator;
@@ -26,6 +27,8 @@ BypassFinals::enable();
 
 class ContactProposalAuthorMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         ProposalRepository $proposalRepository,
         MailerService $mailerService,
@@ -64,6 +67,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         ProposalRepository $proposalRepository,
         Argument $argument
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
         $proposalRepository->find(GlobalId::fromGlobalId('fake-id')['id'])->willReturn(null);
 
@@ -74,6 +79,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         Argument $argument,
         CaptchaChecker $captchaChecker
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
         $captchaChecker->__invoke('fake-captcha', '0.0.0.1')->willReturn(false);
 
@@ -85,6 +92,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         Proposal $proposal,
         ProposalForm $form
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
         $proposal->getForm()->willReturn($form);
         $form->canContact()->willReturn(false);
@@ -96,6 +105,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         Argument $argument,
         EmailValidator $emailValidator
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
 
         $emailValidator->isValid('fake-email', new RFCValidation())->willReturn(false);
@@ -109,6 +120,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         User $user,
         MailerService $mailerService
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
 
         $mailerService->createAndSendMessage(ContactProposalAuthorMessage::class, $proposal, [
@@ -129,6 +142,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         User $user,
         MailerService $mailerService
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
         $proposal->getStatistics()->willReturn(null);
         $proposal->setStatistics(new ProposalStatistics(1))->shouldBeCalled();
@@ -152,6 +167,8 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         MailerService $mailerService,
         ProposalStatistics $statistics
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
+
         $argument = $this->mockArguments($argument);
         $proposal->getStatistics()->willReturn($statistics);
         $statistics->incrementNbrOfMessagesSentToAuthor()->shouldBeCalled();

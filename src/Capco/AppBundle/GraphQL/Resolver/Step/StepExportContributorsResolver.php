@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class StepExportContributorsResolver implements ResolverInterface
+class StepExportContributorsResolver implements QueryInterface
 {
     private RouterInterface $router;
 

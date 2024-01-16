@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\UserBundle\Entity\User;
@@ -20,6 +21,8 @@ use Psr\Log\LoggerInterface;
 
 class RemoveDebateVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     public const NO_VOTE_FOUND = 'NO_VOTE_FOUND';
@@ -49,6 +52,7 @@ class RemoveDebateVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $debateId = $input->offsetGet('debateId');
         $debate = $this->globalIdResolver->resolve($debateId, $viewer);
 

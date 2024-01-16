@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\AbstractEmailingCampaignMessage;
 use Capco\AppBundle\Mailer\Message\EmailingCampaign\TestEmailingCampaignMessage;
@@ -19,6 +20,8 @@ use Twig\Environment;
 
 class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
+    use MutationTrait;
+
     private MailerService $mailerService;
     private SiteParameterResolver $siteParams;
     private RouterInterface $router;
@@ -46,8 +49,8 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         $html = null;
 
         try {
-            $testEmail = $this->getTestEmail($input);
             $emailingCampaign = $this->getSendableCampaign($input, $viewer);
+            $testEmail = $this->getTestEmail($input);
             $html = $this->sendEmailAndGetHTML(
                 $this->createTestEmail($testEmail, $emailingCampaign)
             );

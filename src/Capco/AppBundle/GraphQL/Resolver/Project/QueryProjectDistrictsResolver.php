@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class QueryProjectDistrictsResolver implements ResolverInterface
+class QueryProjectDistrictsResolver implements QueryInterface
 {
     private $projectDistrictRepository;
     private $logger;

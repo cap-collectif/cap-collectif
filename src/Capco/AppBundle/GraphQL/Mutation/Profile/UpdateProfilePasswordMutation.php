@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Profile;
 
 use Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
@@ -16,6 +17,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
+    use MutationTrait;
+
     private UserManager $userManager;
     private Publisher $publisher;
 
@@ -34,6 +37,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $form = $this->formFactory->create(ChangePasswordFormType::class, null, [
             'csrf_protection' => false,

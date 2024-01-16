@@ -19,6 +19,7 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -38,6 +39,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProposalMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         LoggerInterface $logger,
         GlobalIdResolver $globalidResolver,
@@ -110,6 +113,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $author->isEmailConfirmed()->willReturn(true);
         $author->isAdmin()->willReturn(false);
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
 
         $proposal->getId()->willReturn('proposal21');
@@ -228,6 +232,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $admin->isEmailConfirmed()->willReturn(true);
         $admin->isAdmin()->willReturn(true);
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
 
         $now = new \DateTime();
@@ -381,6 +386,7 @@ class ProposalMutationSpec extends ObjectBehavior
             ->willReturn(false)
         ;
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
 
         $proposal->getId()->willReturn('proposal10');
@@ -496,6 +502,7 @@ class ProposalMutationSpec extends ObjectBehavior
         $admin->isEmailConfirmed()->willReturn(true);
         $admin->isAdmin()->willReturn(true);
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($values);
 
         $proposal->getId()->willReturn('proposal10');

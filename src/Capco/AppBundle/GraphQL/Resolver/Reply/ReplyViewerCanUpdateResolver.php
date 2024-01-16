@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Reply;
 
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ReplyViewerCanUpdateResolver implements ResolverInterface
+class ReplyViewerCanUpdateResolver implements QueryInterface
 {
     use ResolverTrait;
 

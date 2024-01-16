@@ -4,8 +4,8 @@ ProjectHeaderType:
         description: "Describe the type of the project's header."
         values:
             FULL_WIDTH:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectHeaderType::FULL_WIDTH")'
+                value: !php/const Capco\AppBundle\Enum\ProjectHeaderType::FULL_WIDTH
                 description: "The project's header cover take the entire width."
             THUMBNAIL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectHeaderType::THUMBNAIL")'
+                value: !php/const Capco\AppBundle\Enum\ProjectHeaderType::THUMBNAIL
                 description: "The project's thumbnail take half the width next to the project's informations."

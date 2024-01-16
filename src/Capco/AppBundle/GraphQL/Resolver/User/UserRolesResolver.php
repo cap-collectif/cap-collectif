@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserRolesResolver implements ResolverInterface
+class UserRolesResolver implements QueryInterface
 {
     use ResolverTrait;
 

@@ -10,12 +10,12 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ReportableReportingResolver implements ResolverInterface
+class ReportableReportingResolver implements QueryInterface
 {
     private ReportingRepository $repository;
     private LoggerInterface $logger;

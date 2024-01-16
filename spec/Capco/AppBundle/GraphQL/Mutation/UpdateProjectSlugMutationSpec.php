@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Mutation\UpdateProjectSlugMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -15,6 +16,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UpdateProjectSlugMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -39,6 +42,7 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         AbstractUnicodeString $abstractUnicodeString
     ) {
         $projectId = 'projectId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('projectId')
             ->shouldBeCalledOnce()
@@ -82,6 +86,7 @@ class UpdateProjectSlugMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $projectId = 'not_found';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('projectId')
             ->shouldBeCalledOnce()

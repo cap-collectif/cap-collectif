@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
@@ -18,6 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateAnonymousReplyMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private ResponsesFormatter $responsesFormatter;
@@ -40,6 +42,7 @@ class UpdateAnonymousReplyMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $reply = $this->getReply($input);
         $reply = $this->updateReply($reply, $input);
         $this->em->flush();

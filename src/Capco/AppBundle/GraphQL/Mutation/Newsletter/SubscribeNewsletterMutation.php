@@ -6,6 +6,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Security\RateLimiter;
@@ -23,6 +24,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class SubscribeNewsletterMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const FEATURE_NOT_ENABLED = 'FEATURE_NOT_ENABLED';
     public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
     public const EMAIL_ALREADY_SUBSCRIBED = 'EMAIL_ALREADY_SUBSCRIBED';
@@ -66,6 +69,7 @@ class SubscribeNewsletterMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         if (!$this->toggleManager->isActive(Manager::newsletter)) {
             return ['errorCode' => self::FEATURE_NOT_ENABLED];
         }

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\SenderEmailResolver;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
@@ -18,6 +19,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
+    use MutationTrait;
     private TranslatorInterface $translator;
     private SiteParameterResolver $siteParams;
     private SenderEmailResolver $senderEmailResolver;
@@ -42,6 +44,7 @@ class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     public function __invoke(Argument $input, User $viewer): array
     {
         try {
+            $this->formatInput($input);
             $this->checkSingleInput($input);
             $emailingCampaign = $this->createDefaultCampaign($viewer);
             $emailingCampaign->setOwner(

@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Security\ProjectVoter;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ProjectExportableSteps implements ResolverInterface
+class ProjectExportableSteps implements QueryInterface
 {
     private AuthorizationCheckerInterface $authorizationChecker;
     private ProjectRepository $projectRepository;

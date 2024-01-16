@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserAvatarUrlResolver implements ResolverInterface
+class UserAvatarUrlResolver implements QueryInterface
 {
     private MediaUrlResolver $urlResolver;
 

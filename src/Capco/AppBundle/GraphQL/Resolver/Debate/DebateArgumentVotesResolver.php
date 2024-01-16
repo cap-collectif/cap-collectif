@@ -6,10 +6,10 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class DebateArgumentVotesResolver implements ResolverInterface
+class DebateArgumentVotesResolver implements QueryInterface
 {
     public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
 

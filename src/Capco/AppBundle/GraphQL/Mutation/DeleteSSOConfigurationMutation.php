@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -11,6 +12,7 @@ use Psr\Log\LoggerInterface;
 
 class DeleteSSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $logger;
     private $repository;
@@ -27,6 +29,7 @@ class DeleteSSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $ssoConfigurationId = GlobalId::fromGlobalId($input->offsetGet('id'))['id'];
 
         $ssoConfiguration = $this->repository->find($ssoConfigurationId);

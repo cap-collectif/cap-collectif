@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class IsViewerParticipatingAtEventResolver implements ResolverInterface
+class IsViewerParticipatingAtEventResolver implements QueryInterface
 {
     use ResolverTrait;
 

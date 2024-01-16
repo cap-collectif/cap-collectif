@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\SenderEmailDomain;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SenderEmailDomainRepository;
 use Capco\AppBundle\Repository\SenderEmailRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class DeleteSenderEmailDomainMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const NOT_FOUND = 'NOT_FOUND';
     public const DOMAIN_USED = 'DOMAIN_USED';
 
@@ -31,6 +34,8 @@ class DeleteSenderEmailDomainMutation implements MutationInterface
 
     public function __invoke(Argument $input)
     {
+        $this->formatInput($input);
+
         try {
             $domain = $this->getSenderEmailDomain($input->offsetGet('id'));
             $this->checkIsNotUsed($domain);

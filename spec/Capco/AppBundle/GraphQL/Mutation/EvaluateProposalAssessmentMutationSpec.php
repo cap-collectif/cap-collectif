@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\GraphQL\Mutation\EvaluateProposalAssessmentMutation;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,13 +15,15 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         ProposalRepository $proposalRepository,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         Publisher $publisher
@@ -43,10 +46,11 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
         Argument $argument,
         ProposalRepository $proposalRepository,
         Proposal $proposal,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         Publisher $publisher,
         User $viewer
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::FAVOURABLE);
         $argument->offsetGet('body')->willReturn('body');
@@ -64,10 +68,11 @@ class EvaluateProposalAssessmentMutationSpec extends ObjectBehavior
         Argument $argument,
         ProposalRepository $proposalRepository,
         Proposal $proposal,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         Publisher $publisher,
         User $viewer
     ): void {
+        $this->getMockedGraphQLArgumentFormatted($argument);
         $argument->offsetGet('proposalId')->willReturn('proposalId');
         $argument->offsetGet('decision')->willReturn(ProposalStatementState::IN_PROGRESS);
         $argument->offsetGet('body')->willReturn('body');

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Step;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Service\AddStepService;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddCollectStepMutation implements MutationInterface
 {
+    use MutationTrait;
     private AddStepService $addStepService;
     private TranslatorInterface $translator;
     private EntityManagerInterface $em;
@@ -27,6 +29,7 @@ class AddCollectStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $projectId = $input->offsetGet('projectId');
         $project = $this->addStepService->getProject($projectId, $viewer);
 

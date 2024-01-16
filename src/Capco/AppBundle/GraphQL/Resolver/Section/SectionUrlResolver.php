@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Section;
 
 use Capco\AppBundle\Entity\OpinionType;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class SectionUrlResolver implements ResolverInterface
+class SectionUrlResolver implements QueryInterface
 {
     private RouterInterface $router;
 

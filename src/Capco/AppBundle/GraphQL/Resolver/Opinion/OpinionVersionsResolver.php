@@ -10,11 +10,11 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Search\Search;
 use Capco\AppBundle\Search\VersionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class OpinionVersionsResolver implements ResolverInterface
+class OpinionVersionsResolver implements QueryInterface
 {
     use ResolverTrait;
 

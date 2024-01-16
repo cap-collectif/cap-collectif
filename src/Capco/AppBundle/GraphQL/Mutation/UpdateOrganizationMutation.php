@@ -8,6 +8,7 @@ use Capco\AppBundle\Form\OrganizationType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\OrganizationVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,6 +20,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UpdateOrganizationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
 
     private EntityManagerInterface $em;
@@ -43,6 +46,7 @@ class UpdateOrganizationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $organizationId = $input->offsetGet('organizationId');
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
 

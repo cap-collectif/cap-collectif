@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalSelectionsResolver implements ResolverInterface
+class ProposalSelectionsResolver implements QueryInterface
 {
     public function __invoke(Proposal $proposal): array
     {

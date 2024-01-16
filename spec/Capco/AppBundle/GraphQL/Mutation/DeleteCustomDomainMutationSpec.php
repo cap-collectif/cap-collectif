@@ -7,12 +7,15 @@ use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\GraphQL\Mutation\DeleteCustomDomainMutation;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 
 class DeleteCustomDomainMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         SiteSettingsRepository $siteSettingsRepository,
@@ -45,6 +48,8 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
             ->willReturn($capcoDomain)
         ;
 
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $statusCode = '400';
         $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);
 
@@ -76,6 +81,8 @@ class DeleteCustomDomainMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($capcoDomain)
         ;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $statusCode = '201';
         $deployerClient->updateCurrentDomain($capcoDomain)->willReturn($statusCode);

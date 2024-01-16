@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class SSOConfigurationQueryResolver implements ResolverInterface
+class SSOConfigurationQueryResolver implements QueryInterface
 {
     protected AbstractSSOConfigurationRepository $ssoConfigurationRepository;
     protected LoggerInterface $logger;

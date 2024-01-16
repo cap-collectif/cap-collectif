@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
 use Capco\AppBundle\Helper\SplFileInfo;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class CasCertificateContentResolver implements ResolverInterface
+class CasCertificateContentResolver implements QueryInterface
 {
     /**
      * @var SplFileInfo the SplFileInfo service

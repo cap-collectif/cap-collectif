@@ -4,8 +4,8 @@ QuestionnaireOrderField:
         description: 'Properties by which questionnaires can be ordered'
         values:
             UPDATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireOrderField::UPDATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireOrderField::UPDATED_AT
                 description: 'Allows ordering a list of questionnaires by when they have been updated.'
             CREATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\QuestionnaireOrderField::CREATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\QuestionnaireOrderField::CREATED_AT
                 description: 'Allows ordering a list of questionnaires by when they have been created.'

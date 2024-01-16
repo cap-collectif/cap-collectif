@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Toggle\Manager;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryFeatureFlagsResolver implements ResolverInterface
+class QueryFeatureFlagsResolver implements QueryInterface
 {
     private Manager $toggleManager;
 

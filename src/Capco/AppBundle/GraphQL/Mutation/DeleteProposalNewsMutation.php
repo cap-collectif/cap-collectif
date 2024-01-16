@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationCo
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalUrlResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class DeleteProposalNewsMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const POST_NOT_FOUND = 'POST_NOT_FOUND';
     public const ACCESS_DENIED = 'ACCESS_DENIED';
 
@@ -46,6 +49,8 @@ class DeleteProposalNewsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $id = $input->offsetGet('postId');

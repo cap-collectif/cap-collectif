@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Toggle\Manager;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProjectAdminAlphaUrlResolver implements ResolverInterface
+class ProjectAdminAlphaUrlResolver implements QueryInterface
 {
     protected RouterInterface $router;
     private Manager $manager;

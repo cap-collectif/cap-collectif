@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class CollectStepProposalResolver implements ResolverInterface
+class CollectStepProposalResolver implements QueryInterface
 {
     use ResolverTrait;
 

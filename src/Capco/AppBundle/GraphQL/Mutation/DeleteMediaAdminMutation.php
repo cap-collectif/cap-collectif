@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class DeleteMediaAdminMutation implements MutationInterface
 {
+    use MutationTrait;
     protected LoggerInterface $logger;
     protected EntityManagerInterface $em;
     protected FormFactoryInterface $formFactory;
@@ -35,6 +37,7 @@ class DeleteMediaAdminMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         /**
          * @var array
          */

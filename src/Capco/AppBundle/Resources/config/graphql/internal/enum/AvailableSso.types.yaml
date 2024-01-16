@@ -4,8 +4,8 @@ AvailableSso:
         description: 'Type of sso service'
         values:
             FRANCE_CONNECT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableSso::FRANCE_CONNECT")'
+                value: !php/const Capco\AppBundle\Enum\AvailableSso::FRANCE_CONNECT
                 description: 'FranceConnect sso service'
             FACEBOOK:
-                value: '@=constant("Capco\\AppBundle\\Enum\\AvailableSso::FACEBOOK")'
+                value: !php/const Capco\AppBundle\Enum\AvailableSso::FACEBOOK
                 description: 'Facebook sso service'

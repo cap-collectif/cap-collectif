@@ -21,10 +21,10 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\GraphQL\Resolver\Reply\ReplyTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Vote\VoteTypeResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class ConsultationTypeResolver implements ResolverInterface
+class ConsultationTypeResolver implements QueryInterface
 {
     private $typeResolver;
     private ReplyTypeResolver $replyTypeResolver;

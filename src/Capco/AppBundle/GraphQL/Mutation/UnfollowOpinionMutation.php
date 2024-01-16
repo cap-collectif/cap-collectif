@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -19,6 +20,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UnfollowOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
     use ProjectOpinionSubscriptionGuard;
 
     private $em;
@@ -40,6 +42,7 @@ class UnfollowOpinionMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $user): array
     {
+        $this->formatInput($args);
         $opinion = null;
         $version = null;
         if (isset($args['opinionId']) && !empty($args['opinionId'])) {

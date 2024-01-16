@@ -9,9 +9,9 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ParticipantRequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class RequirementViewerValueResolver implements ResolverInterface
+class RequirementViewerValueResolver implements QueryInterface
 {
     use ResolverTrait;
 

@@ -4,30 +4,30 @@ QuestionTypeValue:
         description: 'Value of type of question'
         values:
             text:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_SIMPLE_TEXT
             textarea:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT
             editor:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_EDITOR")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_EDITOR
             radio:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RADIO")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_RADIO
             select:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SELECT")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_SELECT
             checkbox:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_CHECKBOX")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_CHECKBOX
             ranking:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RANKING")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_RANKING
             medias:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MEDIAS")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_MEDIAS
             button:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_BUTTON")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_BUTTON
             number:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_NUMBER")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_NUMBER
             section:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SECTION")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_SECTION
             siret:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_SIRET")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_SIRET
             rna:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_RNA")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_RNA
             majority:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Questions\\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION")'
+                value: !php/const Capco\AppBundle\Entity\Questions\AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION

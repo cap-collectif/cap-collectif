@@ -18,9 +18,9 @@ use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Error\UserError;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class VoteTypeResolver implements ResolverInterface
+class VoteTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

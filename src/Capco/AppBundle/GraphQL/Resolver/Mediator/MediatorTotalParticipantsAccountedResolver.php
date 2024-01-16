@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Mediator;
 
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Repository\ParticipantRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class MediatorTotalParticipantsAccountedResolver implements ResolverInterface
+class MediatorTotalParticipantsAccountedResolver implements QueryInterface
 {
     private ParticipantRepository $participantRepository;
 

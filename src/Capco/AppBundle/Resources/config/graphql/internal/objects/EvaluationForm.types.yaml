@@ -7,17 +7,17 @@ EvaluationForm:
                 builder: 'Relay::GlobalId'
                 builderConfig:
                     typeName: Questionnaire
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This type belongs to our legacy evaluation tool.", description: "Type `EvaluationForm` will be removed.", supersededBy: "TODO"})'
+                deprecationReason: '"This type belongs to our legacy evaluation tool.", "EvaluationForm" will be removed, Use TODO"})'
             title:
                 type: 'String!'
                 description: 'The title of evaluation form (question)'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This type belongs to our legacy evaluation tool.", description: "Type `EvaluationForm` will be removed.", supersededBy: "TODO"})'
+                deprecationReason: '"This type belongs to our legacy evaluation tool.", "EvaluationForm" will be removed, Use TODO"})'
             description:
                 type: 'String'
                 description: 'The description of evaluation form'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This type belongs to our legacy evaluation tool.", description: "Type `EvaluationForm` will be removed.", supersededBy: "TODO"})'
+                deprecationReason: '"This type belongs to our legacy evaluation tool.", "EvaluationForm" will be removed, Use TODO"})'
             questions:
                 type: '[InternalQuestion!]!'
                 description: 'List of questions in the evaluation form'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EvaluationForm\\EvaluationFormResolver", [value, getUser()])'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-01-01", reason: "This type belongs to our legacy evaluation tool.", description: "Type `EvaluationForm` will be removed.", supersededBy: "TODO"})'
+                deprecationReason: '"This type belongs to our legacy evaluation tool.", "EvaluationForm" will be remov, Use  "TODO"})'

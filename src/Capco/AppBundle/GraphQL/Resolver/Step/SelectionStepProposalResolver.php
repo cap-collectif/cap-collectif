@@ -9,12 +9,12 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class SelectionStepProposalResolver implements ResolverInterface
+class SelectionStepProposalResolver implements QueryInterface
 {
     private LoggerInterface $logger;
     private ProposalSearch $proposalSearch;

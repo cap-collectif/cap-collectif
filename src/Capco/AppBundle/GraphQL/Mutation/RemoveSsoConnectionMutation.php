@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Enum\AvailableSso;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\CreatePasswordFormType;
 use Capco\UserBundle\Security\Http\Logout\Handler\FranceConnectLogoutHandler;
@@ -23,6 +24,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RemoveSsoConnectionMutation implements MutationInterface
 {
+    use MutationTrait;
     private UserManagerInterface $userManager;
     private UserPasswordEncoderInterface $passwordEncoder;
     private Publisher $publisher;
@@ -54,6 +56,7 @@ class RemoveSsoConnectionMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requests): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         $service = AvailableSso::SsoList[$values['service']];
         $setter = 'set' . $service;

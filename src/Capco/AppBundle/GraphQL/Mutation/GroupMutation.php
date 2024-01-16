@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
@@ -21,6 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class GroupMutation implements MutationInterface
 {
+    use MutationTrait;
     private LoggerInterface $logger;
     private UserRepository $userRepository;
     private GroupRepository $groupRepository;
@@ -52,6 +54,7 @@ class GroupMutation implements MutationInterface
 
     public function create(Argument $input): array
     {
+        $this->formatInput($input);
         $group = new Group();
 
         $form = $this->formFactory->create(GroupCreateType::class, $group);
@@ -72,6 +75,7 @@ class GroupMutation implements MutationInterface
 
     public function update(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $group = $this->globalIdResolver->resolve($arguments['groupId'], $user);
 

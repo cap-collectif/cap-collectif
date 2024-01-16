@@ -7,12 +7,12 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserWarning;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProposalAdminUrlResolver implements ResolverInterface
+class ProposalAdminUrlResolver implements QueryInterface
 {
     use ResolverTrait;
 

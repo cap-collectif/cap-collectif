@@ -5,8 +5,8 @@ ReportErrorCode:
         description: 'Available errors on report mutations.'
         values:
             REPORTABLE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\ReportMutation::REPORTABLE_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ReportMutation::REPORTABLE_NOT_FOUND
                 description: 'The entity does not exist or is not reportable.'
             ALREADY_REPORTED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\ReportMutation::ALREADY_REPORTED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ReportMutation::ALREADY_REPORTED
                 description: 'The viewer has already reported this content.'

@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class QuestionnaireViewerRepliesResolver implements ResolverInterface
+class QuestionnaireViewerRepliesResolver implements QueryInterface
 {
     use ResolverTrait;
 

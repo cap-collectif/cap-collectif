@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\ContactFormRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ContactFormQueryResolver implements ResolverInterface
+class ContactFormQueryResolver implements QueryInterface
 {
     private $contactFormRepository;
 

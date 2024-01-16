@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireCreateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateQuestionnaireMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
@@ -39,6 +41,7 @@ class CreateQuestionnaireMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $questionnaire = new Questionnaire();
         $questionnaire->setCreator($viewer);
         $questionnaire->setOwner(

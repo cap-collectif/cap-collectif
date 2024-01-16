@@ -6,12 +6,12 @@ use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\ProposalRevisionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalRevisionsResolver implements ResolverInterface
+class ProposalRevisionsResolver implements QueryInterface
 {
     private ProposalRevisionRepository $proposalRevisionRepository;
     private LoggerInterface $logger;

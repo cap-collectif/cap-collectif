@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ShieldAdminFormQueryResolver implements ResolverInterface
+class ShieldAdminFormQueryResolver implements QueryInterface
 {
     protected $toggleManager;
     protected $siteParameterRepository;

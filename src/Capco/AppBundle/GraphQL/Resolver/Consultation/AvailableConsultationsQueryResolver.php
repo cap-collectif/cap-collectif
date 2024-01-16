@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Consultation;
 
 use Capco\AppBundle\Repository\ConsultationRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class AvailableConsultationsQueryResolver implements ResolverInterface
+class AvailableConsultationsQueryResolver implements QueryInterface
 {
     private $consultationRepository;
 

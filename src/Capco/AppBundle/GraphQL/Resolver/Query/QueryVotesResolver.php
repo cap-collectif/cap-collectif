@@ -13,12 +13,12 @@ use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
-class QueryVotesResolver implements ResolverInterface
+class QueryVotesResolver implements QueryInterface
 {
     protected AbstractVoteRepository $votesRepository;
     protected QueryProjectsResolver $projectsResolver;

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -11,6 +12,7 @@ use Psr\Log\LoggerInterface;
 
 class DeleteProjectDistrictMutation implements MutationInterface
 {
+    use MutationTrait;
     protected LoggerInterface $logger;
     protected EntityManagerInterface $em;
     protected GlobalIdResolver $globalIdResolver;
@@ -27,6 +29,7 @@ class DeleteProjectDistrictMutation implements MutationInterface
 
     public function __invoke(Argument $input, $viewer): array
     {
+        $this->formatInput($input);
         $projectDistrictId = $input->offsetGet('id');
 
         $projectDistrict = $this->globalIdResolver->resolve($projectDistrictId, $viewer);

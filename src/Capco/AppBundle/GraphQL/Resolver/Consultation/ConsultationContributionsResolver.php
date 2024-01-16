@@ -7,11 +7,11 @@ use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Search\Search;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ConsultationContributionsResolver implements ResolverInterface
+class ConsultationContributionsResolver implements QueryInterface
 {
     private $contributionSearch;
 

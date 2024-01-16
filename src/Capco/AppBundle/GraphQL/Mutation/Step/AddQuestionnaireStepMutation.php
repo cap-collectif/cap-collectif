@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Step;
 
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Service\AddStepService;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class AddQuestionnaireStepMutation implements MutationInterface
 {
+    use MutationTrait;
     private AddStepService $addStepService;
     private EntityManagerInterface $em;
 
@@ -22,6 +24,7 @@ class AddQuestionnaireStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         /** * @var QuestionnaireStep $step  */
         list('step' => $step) = $this->addStepService->addStep($input, $viewer, 'QUESTIONNAIRE');
         $questionnaire = $step->getQuestionnaire();

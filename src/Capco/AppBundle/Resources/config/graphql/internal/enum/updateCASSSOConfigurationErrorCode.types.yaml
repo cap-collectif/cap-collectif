@@ -5,5 +5,5 @@ updateCASSSOConfiguratonErrorCode:
         description: 'Available errors for an `updateCASSSOConfiguraton` mutation.'
         values:
             CONFIGURATION_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCASSSOConfigurationMutation::CONFIGURATION_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateCASSSOConfigurationMutation::CONFIGURATION_NOT_FOUND
                 description: 'No CAS configuration matching the id.'

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Form\ProposalDistrictAdminType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class DistrictMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
     private GlobalIdResolver $globalIdResolver;
@@ -28,6 +30,7 @@ class DistrictMutation implements MutationInterface
 
     public function __invoke(Argument $input, $viewer): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         $district = $this->globalIdResolver->resolve($values['districtId'], $viewer);
 

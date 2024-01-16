@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\CreatePostMutation;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\PostVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,11 +21,14 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 BypassFinals::enable();
 
 class CreatePostMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     private array $data = [
         'translations' => [
             'fr-FR' => [
@@ -47,7 +51,7 @@ class CreatePostMutationSpec extends ObjectBehavior
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         SettableOwnerResolver $settableOwnerResolver,
         PostAuthorFactory $postAuthorFactory,
         Indexer $indexer,
@@ -78,6 +82,10 @@ class CreatePostMutationSpec extends ObjectBehavior
         SettableOwnerResolver $settableOwnerResolver,
         PostAuthorFactory $postAuthorFactory
     ) {
+        $rawInput['input'] = $this->data;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $this->data);
+
         $viewer->isAdmin()->willReturn(true);
         $viewer->isOnlyProjectAdmin()->willReturn(false);
 
@@ -128,6 +136,10 @@ class CreatePostMutationSpec extends ObjectBehavior
         SettableOwnerResolver $settableOwnerResolver,
         PostAuthorFactory $postAuthorFactory
     ) {
+        $rawInput['input'] = $this->data;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $this->data);
+
         $viewer->isAdmin()->willReturn(true);
         $viewer->isOnlyProjectAdmin()->willReturn(false);
 
@@ -175,6 +187,10 @@ class CreatePostMutationSpec extends ObjectBehavior
         SettableOwnerResolver $settableOwnerResolver,
         PostAuthorFactory $postAuthorFactory
     ) {
+        $rawInput['input'] = $this->data;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $this->data);
+
         $viewer->isAdmin()->willReturn(false);
         $viewer->isOnlyProjectAdmin()->willReturn(true);
 
@@ -228,6 +244,11 @@ class CreatePostMutationSpec extends ObjectBehavior
         $organizationId = 'organizationId';
 
         $data = $this->data;
+
+        $rawInput['input'] = $data;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $data);
+
         unset($data['authors']);
         $data['owner'] = $organizationId;
         $input

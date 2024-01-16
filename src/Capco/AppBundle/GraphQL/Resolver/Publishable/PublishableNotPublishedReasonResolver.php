@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\NotPublishedReason;
 use Capco\AppBundle\Model\Publishable;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class PublishableNotPublishedReasonResolver implements ResolverInterface
+class PublishableNotPublishedReasonResolver implements QueryInterface
 {
     public function __invoke(Publishable $publishable): ?string
     {

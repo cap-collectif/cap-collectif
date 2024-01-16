@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\DebateVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,8 @@ use Psr\Log\LoggerInterface;
 
 class AddDebateVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
@@ -55,6 +58,9 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $debateId = '123';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input->offsetGet('debateId')->willReturn($debateId);
         $input
             ->offsetGet('widgetOriginURI')
@@ -95,6 +101,9 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
     ) {
         $debateId = '123';
         $input->offsetGet('debateId')->willReturn($debateId);
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input
             ->offsetGet('widgetOriginURI')
             ->shouldBeCalled()
@@ -128,6 +137,9 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $debateId = '123';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input->offsetGet('debateId')->willReturn($debateId);
         $input->offsetGet('widgetOriginURI')->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');
@@ -154,6 +166,9 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $debateId = '123';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input->offsetGet('debateId')->willReturn($debateId);
         $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($debateId, $viewer)->willReturn(null);
@@ -175,6 +190,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         DriverException $exception
     ) {
         $debateId = '123';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('debateId')->willReturn($debateId);
         $input->offsetGet('widgetOriginURI')->willReturn(null);
         $input->offsetGet('type')->willReturn('AGAINST');

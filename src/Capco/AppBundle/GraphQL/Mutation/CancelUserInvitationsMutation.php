@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class CancelUserInvitationsMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private UserInviteRepository $repository;
 
@@ -22,6 +24,7 @@ class CancelUserInvitationsMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $invitationsEmails = $args->offsetGet('invitationsEmails');
         $invitations = $this->repository->findByEmails($invitationsEmails);
         $invitationsIds = array_map(

@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MediatorRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Toggle\Manager;
@@ -22,6 +23,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddMediatorsMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private MediatorRepository $mediatorRepository;
@@ -50,6 +52,7 @@ class AddMediatorsMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $usersId = $input->offsetGet('usersId');
         $stepId = $input->offsetGet('stepId');
 

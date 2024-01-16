@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Security;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteUserIdentificationCodeListMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const NOT_FOUND = 'NOT_FOUND';
 
     private EntityManagerInterface $em;
@@ -27,6 +30,7 @@ class DeleteUserIdentificationCodeListMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $globalId = $input->offsetGet('id');
 
         try {

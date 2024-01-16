@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -18,6 +19,8 @@ use PhpSpec\ObjectBehavior;
 
 class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     private string $code = '123456';
     private string $phone = '+33611111111';
     private string $proposalId = 'proposalId';
@@ -60,6 +63,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
@@ -123,6 +127,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
@@ -170,6 +175,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()
@@ -220,6 +226,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
             ->shouldBeCalledOnce()

@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\UpdateQuestionnaireNotificationConfiguration;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -23,6 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         GlobalIdResolver $globalIdResolver,
         FormFactoryInterface $formFactory,
@@ -61,6 +64,8 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
             'onQuestionnaireReplyDelete' => true,
         ];
         $questionnaireId = 'abc';
+
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->getArrayCopy()->willReturn($data);
         $arguments->offsetGet('questionnaireId')->willReturn($questionnaireId);
@@ -105,6 +110,8 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
         ];
         $questionnaireId = 'abc';
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($data);
         $arguments->offsetGet('questionnaireId')->willReturn($questionnaireId);
 
@@ -136,7 +143,7 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
     public function it_should_return_false_if_questionnaire_is_not_found(
         GlobalIdResolver $globalIdResolver,
         User $viewer,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $id = 'abc';
         $questionnaire = null;

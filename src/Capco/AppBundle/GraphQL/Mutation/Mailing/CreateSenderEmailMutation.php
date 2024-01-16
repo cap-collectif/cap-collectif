@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\SenderEmail;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SenderEmailDomainRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class CreateSenderEmailMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ALREADY_EXIST = 'ALREADY_EXIST';
     public const INVALID_DOMAIN = 'INVALID_DOMAIN';
 
@@ -28,6 +31,8 @@ class CreateSenderEmailMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
+
         try {
             $this->checkDomainExists($input->offsetGet('domain'));
             $senderEmail = $this->createSenderEmail($input);

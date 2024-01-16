@@ -5,26 +5,26 @@ CreateOpinionErrorCode:
         description: 'Available errors on opinion creation'
         values:
             OPINION_TYPE_NOT_ENABLED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::OPINION_TYPE_NOT_ENABLED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::OPINION_TYPE_NOT_ENABLED
                 description: 'this opinionType is not enabled'
             UNKNOWN_STEP:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::UNKNOWN_STEP")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::UNKNOWN_STEP
                 description: 'the step is unknown'
             STEP_NOT_CONTRIBUABLE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::STEP_NOT_CONTRIBUABLE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::STEP_NOT_CONTRIBUABLE
                 description: 'the step is not contribuable'
             REQUIREMENTS_NOT_MET:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::REQUIREMENTS_NOT_MET")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::REQUIREMENTS_NOT_MET
                 description: 'the viewer does not meet requirements'
             CONTRIBUTED_TOO_MANY_TIMES:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::CONTRIBUTED_TOO_MANY_TIMES")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::CONTRIBUTED_TOO_MANY_TIMES
                 description: 'the viewer contributed too many times'
             INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::INVALID_FORM")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::INVALID_FORM
                 description: 'the form is invalid'
             OPINION_TYPE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::OPINION_TYPE_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::OPINION_TYPE_NOT_FOUND
                 description: 'this opinionType is not found'
             PROJECT_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOpinionMutation::PROJECT_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\CreateOpinionMutation::PROJECT_NOT_FOUND
                 description: 'this project is not found'

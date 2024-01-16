@@ -5,6 +5,6 @@ DeleteOrganizationInvitationErrorCode:
         description: 'Available errors for an `deleteOrganizationInvitionInput` mutation.'
         values:
             INVITATION_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\DeleteOrganizationInvitationMutation::INVITATION_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Organization\DeleteOrganizationInvitationMutation::INVITATION_NOT_FOUND
                 description: 'The invitation for the given ID is not found.'
 

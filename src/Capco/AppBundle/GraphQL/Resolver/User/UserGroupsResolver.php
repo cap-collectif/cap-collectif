@@ -6,11 +6,11 @@ use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class UserGroupsResolver implements ResolverInterface
+class UserGroupsResolver implements QueryInterface
 {
     protected UserGroupRepository $userGroupRepo;
     protected GroupRepository $groupRepo;

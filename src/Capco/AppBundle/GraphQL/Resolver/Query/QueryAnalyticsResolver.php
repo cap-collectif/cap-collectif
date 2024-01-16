@@ -6,9 +6,9 @@ use Capco\AppBundle\GraphQL\DataLoader\Query\QueryAnalyticsDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryAnalyticsResolver implements ResolverInterface
+class QueryAnalyticsResolver implements QueryInterface
 {
     private QueryAnalyticsDataLoader $loader;
 

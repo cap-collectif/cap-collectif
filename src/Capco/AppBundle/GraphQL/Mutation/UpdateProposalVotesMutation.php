@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -22,6 +23,7 @@ use Psr\Log\LoggerInterface;
 
 class UpdateProposalVotesMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
@@ -59,6 +61,7 @@ class UpdateProposalVotesMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $stepId = $input->offsetGet('step');
         $step = $this->globalIdResolver->resolve($stepId, $viewer);
         if (!$step) {

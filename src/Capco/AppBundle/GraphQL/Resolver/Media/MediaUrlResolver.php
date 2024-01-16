@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Media;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class MediaUrlResolver implements ResolverInterface
+class MediaUrlResolver implements QueryInterface
 {
     private MediaProvider $mediaProvider;
     private RouterInterface $router;

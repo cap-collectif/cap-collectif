@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormViewerProposalsUnpublishedResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class CollectStepViewerProposalsUnpublishedResolver implements ResolverInterface
+class CollectStepViewerProposalsUnpublishedResolver implements QueryInterface
 {
     private $resolver;
 

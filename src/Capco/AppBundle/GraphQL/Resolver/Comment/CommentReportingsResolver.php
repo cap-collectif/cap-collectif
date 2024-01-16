@@ -5,12 +5,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class CommentReportingsResolver implements ResolverInterface
+class CommentReportingsResolver implements QueryInterface
 {
     private $repository;
     private $logger;

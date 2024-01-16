@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use ZxcvbnPhp\Zxcvbn;
 
-class PasswordComplexityScoreResolver implements ResolverInterface
+class PasswordComplexityScoreResolver implements QueryInterface
 {
     private Zxcvbn $zxcvbn;
 

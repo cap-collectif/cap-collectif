@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Theme;
 
 use Capco\AppBundle\Entity\Theme;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ThemeUrlResolver implements ResolverInterface
+class ThemeUrlResolver implements QueryInterface
 {
     private $router;
 

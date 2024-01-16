@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -27,6 +28,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AddEventsMutation extends AbstractEventMutation
 {
+    use MutationTrait;
+
     private UserRepository $userRepo;
     private ThemeRepository $themeRepo;
     private LocaleRepository $localeRepository;
@@ -68,6 +71,7 @@ class AddEventsMutation extends AbstractEventMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $importedEvents = [];
         $notFoundEmails = [];
         $notFoundThemes = [];

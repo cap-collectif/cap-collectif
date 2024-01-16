@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
@@ -19,6 +20,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SendSmsProposalVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
     private const RETRY_PER_MINUTE = 2;
 
@@ -44,6 +47,7 @@ class SendSmsProposalVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $phone = $input->offsetGet('phone');
         $stepId = $input->offsetGet('stepId');
         $proposalId = $input->offsetGet('proposalId');

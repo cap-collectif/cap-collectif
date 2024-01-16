@@ -11,6 +11,7 @@ use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class SubscribeNewsletterMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         Manager $toggleManager,
         LoggerInterface $logger,
@@ -60,6 +63,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
     public function it_should_have_newsletter_toggle_on(Manager $toggleManager, Arg $args)
     {
         $toggleManager->isActive(Manager::newsletter)->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($args);
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(1);
@@ -78,6 +82,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         RateLimiter $rateLimiter,
         Arg $args
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
 
         $this->beConstructedWithRequest(
@@ -123,6 +128,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         RateLimiter $rateLimiter,
         Arg $args
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
 
         $this->beConstructedWithRequest(
@@ -171,6 +177,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Arg $args,
         FormInterface $form
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
@@ -201,6 +208,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Arg $args,
         FormInterface $form
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
 
         $this->beConstructedWithRequest(
@@ -254,6 +262,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Arg $args,
         FormInterface $form
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
@@ -291,6 +300,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Arg $args,
         FormInterface $form
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
@@ -337,6 +347,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Arg $args,
         FormInterface $form
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
@@ -383,6 +394,7 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         RateLimiter $rateLimiter,
         Arg $args
     ) {
+        $this->getMockedGraphQLArgumentFormatted($args);
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
 
         $this->beConstructedWithRequest(

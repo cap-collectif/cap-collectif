@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\SourceVote;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\SourceVoteRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SourceViewerVoteResolver implements ResolverInterface
+class SourceViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 

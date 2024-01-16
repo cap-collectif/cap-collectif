@@ -60,8 +60,8 @@ InternalQuestionnaire:
                         type: 'ReplyOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\ReplyOrderField::CREATED_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\ReplyOrderField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for questionnaires'
                     includePublished:
@@ -71,7 +71,7 @@ InternalQuestionnaire:
                     filterStatus:
                         description: 'Filter by status'
                         type: '[ReplyStatus]'
-                        defaultValue: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::DEFAULT_STATUSES")'
+                        defaultValue: !php/const Capco\AppBundle\Enum\ReplyStatus::DEFAULT_STATUSES
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", [value, args, getUser()])'
             privateResult:
                 type: 'Boolean!'

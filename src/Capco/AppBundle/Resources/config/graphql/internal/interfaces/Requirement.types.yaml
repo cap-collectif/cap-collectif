@@ -10,7 +10,7 @@ Requirement:
                     typeName: Requirement
             viewerMeetsTheRequirement:
                 type: 'Boolean!'
-                access: "@hasRole=('ROLE_USER')"
+                access: "@=hasRole('ROLE_USER')"
                 description: 'Does the viewer meets the requirement ?'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, getUser()])'
             participantMeetsTheRequirement:

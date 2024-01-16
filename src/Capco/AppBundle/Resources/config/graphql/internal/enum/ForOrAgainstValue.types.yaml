@@ -4,8 +4,8 @@ ForOrAgainstValue:
         description: 'For or against.'
         values:
             AGAINST:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ForOrAgainstType::AGAINST")'
+                value: !php/const Capco\AppBundle\Enum\ForOrAgainstType::AGAINST
                 description: 'An against value'
             FOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ForOrAgainstType::FOR")'
+                value: !php/const Capco\AppBundle\Enum\ForOrAgainstType::FOR
                 description: 'A for value'

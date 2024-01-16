@@ -6,11 +6,11 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 // This is a helper not a pure GraphQL resolver
-class CollectStepProposalCountResolver implements ResolverInterface
+class CollectStepProposalCountResolver implements QueryInterface
 {
     private $dataLoader;
     private $adapter;

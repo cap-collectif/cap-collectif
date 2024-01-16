@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Font;
 
 use Capco\AppBundle\Repository\FontRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class FontsQueryResolver implements ResolverInterface
+class FontsQueryResolver implements QueryInterface
 {
     protected $repository;
 

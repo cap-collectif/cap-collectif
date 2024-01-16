@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Enum\QuestionsFilterType;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionsListResolver implements ResolverInterface
+class QuestionsListResolver implements QueryInterface
 {
     private AbstractQuestionRepository $repository;
 

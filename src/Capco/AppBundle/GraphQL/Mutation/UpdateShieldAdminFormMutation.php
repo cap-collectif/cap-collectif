@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -18,6 +19,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateShieldAdminFormMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
     public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
     public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
@@ -50,6 +53,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $media = $this->updateMedia($input);
         $shieldMode = $this->updateShieldMode($input);
         $introduction = $this->updateIntroduction($input);

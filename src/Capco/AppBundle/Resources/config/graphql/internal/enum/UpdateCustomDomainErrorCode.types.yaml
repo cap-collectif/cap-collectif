@@ -5,11 +5,11 @@ UpdateCustomDomainErrorCode:
         description: 'Available errors for an `updateCustomDomain` mutation.'
         values:
             CUSTOM_DOMAIN_SYNTAX_NOT_VALID:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation::CUSTOM_DOMAIN_SYNTAX_NOT_VALID")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation::CUSTOM_DOMAIN_SYNTAX_NOT_VALID
                 description: 'The given customDomain syntax is not valid.'
             ERROR_DEPLOYER_API:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation::ERROR_DEPLOYER_API")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation::ERROR_DEPLOYER_API
                 description: 'Error occured while updating the custom domain.'
             CNAME_NOT_VALID:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateCustomDomainMutation::CNAME_NOT_VALID")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation::CNAME_NOT_VALID
                 description: 'The given CNAME is not valid.'

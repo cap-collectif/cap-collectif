@@ -7,11 +7,11 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Psr\Log\LoggerInterface;
 
-class OpinionViewerVersionsUnpublishedResolver implements ResolverInterface
+class OpinionViewerVersionsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 

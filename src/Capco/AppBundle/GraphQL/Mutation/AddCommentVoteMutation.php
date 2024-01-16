@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\CommentVoteRepository;
@@ -20,6 +21,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class AddCommentVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private CommentRepository $commentRepo;
     private CommentVoteRepository $commentVoteRepo;
@@ -42,6 +44,7 @@ class AddCommentVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $contributionId = $input->offsetGet('commentId');
         $comment = $this->commentRepo->find(GlobalId::fromGlobalId($contributionId)['id']);
 

@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionIACategoriesResolver implements ResolverInterface
+class QuestionIACategoriesResolver implements QueryInterface
 {
     private ValueResponseRepository $repository;
 

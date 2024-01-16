@@ -5,8 +5,8 @@ UpdateSiteParameterKeyname:
         description: 'Available keynames for an `updateSiteParameter` mutation.'
         values:
             RECEIVE_ADDRESS:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSiteParameterMutation::KEYNAME_RECEIVE_ADDRESS")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation::KEYNAME_RECEIVE_ADDRESS
                 description: 'Give the user the `ROLE_USER` role.'
             SEND_NAME:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSiteParameterMutation::KEYNAME_SEND_NAME")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation::KEYNAME_SEND_NAME
                 description: 'Give the user the `ROLE_ADMIN` role.'

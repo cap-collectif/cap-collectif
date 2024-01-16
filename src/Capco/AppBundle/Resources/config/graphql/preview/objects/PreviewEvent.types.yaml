@@ -24,11 +24,11 @@ PreviewEvent:
             startAt:
                 type: 'DateTime!'
                 description: 'The start date of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field has been moved.", description: "Field `startAt` will be removed.", supersededBy: "Use `timeRange.startAt` instead."})'
+                deprecationReason: 'Field "startAt" will be removed Use "timeRange.startAt" instead.'
             endAt:
                 type: 'DateTime'
                 description: 'The end date of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field has been moved.", description: "Field `endAt` will be removed.", supersededBy: "Use `timeRange.endAt` instead."})'
+                deprecationReason: 'Field "endAt" will be removed Use "timeRange.endAt" instead.'
             enabled:
                 type: 'Boolean!'
                 description: 'Whether or not this event is published.'
@@ -37,19 +37,19 @@ PreviewEvent:
             lat:
                 type: 'Float'
                 description: 'Identifies the latitude of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field use our legacy address format.", description: "Field `lat` will be removed.", supersededBy: "Use `googleMapsAddress.lat`  instead."})'
+                deprecationReason: 'Field "lat" will be removed, Use "googleMapsAddress.lat" instead.'
             lng:
                 type: 'Float'
                 description: 'Identifies the longitude of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field use our legacy address format.", description: "Field `lng` will be removed.", supersededBy: "Use `googleMapsAddress.lng` instead."})'
+                deprecationReason: 'reason: "This field use our legacy address format Field "lng" will be removed, Use "googleMapsAddress.lng" instead.'
             zipCode:
                 type: 'String'
                 description: 'Identifies the zip code of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field use our legacy address format.", description: "Field `zipCode` will be removed.", supersededBy: "Use `googleMapsAddress` instead."})'
+                deprecationReason: 'reason: "This field use our legacy address format Field "zipCode" will be removed, Use "googleMapsAddress.zipCode" instead.'
             fullAddress:
                 type: 'String'
                 description: 'Identifies the address of the event.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-03-01", reason: "This field use our legacy address format.", description: "Field `fullAddress` will be removed.", supersededBy: "Use `googleMapsAddress.formatted` instead."})'
+                deprecationReason: 'reason: "This field use our legacy address format Field "fullAddress" will be removed, Use "googleMapsAddress.formatted" instead.'
             googleMapsAddress:
                 type: 'PreviewGoogleMapsAddress'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'

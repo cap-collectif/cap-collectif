@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
@@ -23,6 +24,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RemoveDebateAnonymousVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     public const INVALID_HASH = 'INVALID_HASH';
@@ -59,6 +62,8 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
+
         try {
             $debate = $this->checkDebate($input->offsetGet('debateId'));
             $voteId = $this->removeVote($input, $debate);

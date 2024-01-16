@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Client\DeployerClient;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,6 +12,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class DeleteCustomDomainMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
 
     private EntityManagerInterface $em;
@@ -29,6 +32,7 @@ class DeleteCustomDomainMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $siteSettings = $this->siteSettingsRepository->findSiteSetting();
         $capcoDomain = $siteSettings->getCapcoDomain();
 

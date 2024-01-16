@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class UserConfirmNewEmailUrlResolver implements ResolverInterface
+class UserConfirmNewEmailUrlResolver implements QueryInterface
 {
     private $router;
 

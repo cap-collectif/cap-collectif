@@ -7,11 +7,11 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\EdgeInterface;
 
-class RequirementConnectionParticipantMeetsTheRequirementsResolver implements ResolverInterface
+class RequirementConnectionParticipantMeetsTheRequirementsResolver implements QueryInterface
 {
     use ResolverTrait;
 

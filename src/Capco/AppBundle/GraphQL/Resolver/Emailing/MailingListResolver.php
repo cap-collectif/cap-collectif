@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Repository\MailingListRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class MailingListResolver implements ResolverInterface
+class MailingListResolver implements QueryInterface
 {
     private MailingListRepository $repository;
 

@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class UserReportsResolver implements ResolverInterface
+class UserReportsResolver implements QueryInterface
 {
     protected $reportingRepo;
 

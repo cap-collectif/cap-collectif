@@ -11,10 +11,10 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class StepRequirementsResolver implements ResolverInterface
+class StepRequirementsResolver implements QueryInterface
 {
     private RequirementRepository $repository;
     private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;

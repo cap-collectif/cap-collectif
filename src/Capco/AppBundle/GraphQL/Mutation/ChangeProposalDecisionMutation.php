@@ -13,6 +13,7 @@ use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Event\DecisionEvent;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalDecisionRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -29,16 +30,17 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ChangeProposalDecisionMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private ProposalRepository $proposalRepository;
     private EntityManagerInterface $entityManager;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
     private LoggerInterface $logger;
     private ProposalDecisionRepository $proposalDecisionRepository;
     private UserRepository $userRepository;
@@ -54,7 +56,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         StatusRepository $statusRepository,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         LoggerInterface $logger,
         Indexer $indexer,
         TranslatorInterface $translator,
@@ -77,6 +79,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array
     {
+        $this->formatInput($args);
         $this->preventNullableViewer($viewer);
         $proposal = $this->getProposal($args);
 

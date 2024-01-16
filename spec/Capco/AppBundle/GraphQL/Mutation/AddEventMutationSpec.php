@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -29,6 +30,8 @@ use Symfony\Component\Translation\Translator;
 
 class AddEventMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -82,6 +85,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $settableOwnerResolver
         );
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $viewer->isOrganizationMember()->willReturn(false);
 
         $publisher->publish('event.create', Argument::type(Message::class))->shouldBeCalled();
@@ -117,6 +122,8 @@ class AddEventMutationSpec extends ObjectBehavior
             $settableOwnerResolver
         );
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $viewer->isOrganizationMember()->willReturn(true);
 
         $publisher->publish('event.create', Argument::type(Message::class))->shouldNotBeCalled();
@@ -151,6 +158,10 @@ class AddEventMutationSpec extends ObjectBehavior
             ],
             'author' => 'abc',
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
 
         $event->getBody()->willReturn('My body');
         $viewer->getId()->willReturn('iMTheAuthor');
@@ -216,6 +227,11 @@ class AddEventMutationSpec extends ObjectBehavior
                 ],
             ],
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
+
         $viewer->getId()->willReturn('iMTheAuthor');
         $viewer->getUsername()->willReturn('My username is toto');
         $viewer->isAdmin()->willReturn(false);
@@ -252,6 +268,10 @@ class AddEventMutationSpec extends ObjectBehavior
                 ],
             ],
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
 
         $event->getBody()->willReturn('My body');
         $viewer->getId()->willReturn('iMTheAuthor');
@@ -321,6 +341,11 @@ class AddEventMutationSpec extends ObjectBehavior
                 ],
             ],
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments, $rawInput, $values);
+
         $arguments->getArrayCopy()->willReturn($values);
         $arguments
             ->offsetGet('owner')

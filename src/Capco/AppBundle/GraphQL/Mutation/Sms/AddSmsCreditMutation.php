@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\Form\SmsCreditType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
@@ -23,6 +24,8 @@ use Twilio\Exceptions\TwilioException;
 
 class AddSmsCreditMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORDER_ALREADY_PROCESSED = 'ORDER_ALREADY_PROCESSED';
     public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
@@ -62,6 +65,7 @@ class AddSmsCreditMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $smsOrderId = $input->offsetGet('smsOrder');
 
         /** * @var SmsOrder $smsOrder  */

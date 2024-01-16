@@ -4,8 +4,8 @@ OrganizationMemberRole:
         description: 'Available roles for organization member'
         values:
             ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationMemberRoleType::ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\OrganizationMemberRoleType::ADMIN
                 description: 'Admin of the organization'
             USER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\OrganizationMemberRoleType::USER")'
+                value: !php/const Capco\AppBundle\Enum\OrganizationMemberRoleType::USER
                 description: 'Member of the organization.'

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Twig\FooterRuntime;
 use Capco\AppBundle\Twig\ParametersRuntime;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class UpdateSiteParameterMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_VALUE = 'INVALID_VALUE';
 
     public const KEYNAME_RECEIVE_ADDRESS = 'admin.mail.notifications.receive_address';
@@ -43,6 +46,8 @@ class UpdateSiteParameterMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
+
         try {
             self::checkValue($input);
             $siteParameter = $this->getSiteParameter($input);

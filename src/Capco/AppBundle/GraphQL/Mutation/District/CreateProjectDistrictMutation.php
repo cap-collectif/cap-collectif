@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\ProjectDistrictType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class CreateProjectDistrictMutation implements MutationInterface
 {
+    use MutationTrait;
     protected LoggerInterface $logger;
     protected EntityManagerInterface $em;
     protected FormFactoryInterface $formFactory;
@@ -32,6 +34,7 @@ class CreateProjectDistrictMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $projectDistrict = new ProjectDistrict();
         $values = $input->getArrayCopy();
         if (isset($values['border']) && !$values['border']['enabled']) {

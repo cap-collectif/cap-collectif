@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Form\ProposalFormNotificationsConfigurationType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormMutation
 {
+    use MutationTrait;
+
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
 
@@ -31,6 +34,7 @@ class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormM
 
     public function __invoke(Argument $input, User $viewer)
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $proposalForm = $this->getProposalForm($arguments['proposalFormId'], $viewer);
 

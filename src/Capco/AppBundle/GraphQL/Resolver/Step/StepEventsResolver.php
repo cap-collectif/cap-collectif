@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
-class StepEventsResolver implements ResolverInterface
+class StepEventsResolver implements QueryInterface
 {
     private ConnectionBuilder $builder;
 

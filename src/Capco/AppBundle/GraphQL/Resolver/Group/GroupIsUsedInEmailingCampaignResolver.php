@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Group;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class GroupIsUsedInEmailingCampaignResolver implements ResolverInterface
+class GroupIsUsedInEmailingCampaignResolver implements QueryInterface
 {
     private EmailingCampaignRepository $repository;
 

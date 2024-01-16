@@ -9,9 +9,9 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalVotesResolver implements ResolverInterface
+class ProposalVotesResolver implements QueryInterface
 {
     private ProposalVotesDataLoader $proposalVotesDataLoader;
     private GlobalIdResolver $globalIdResolver;

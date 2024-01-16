@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionChoiceRankingResolver implements ResolverInterface
+class QuestionChoiceRankingResolver implements QueryInterface
 {
     private AbstractResponseRepository $responseRepository;
 

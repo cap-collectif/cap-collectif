@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class UserHasReplyResolver implements ResolverInterface
+class UserHasReplyResolver implements QueryInterface
 {
     private $replyRepository;
     private $userRepository;

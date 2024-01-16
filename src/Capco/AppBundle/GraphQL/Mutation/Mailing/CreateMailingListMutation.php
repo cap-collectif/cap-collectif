@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\CreateMailingListErrorCode;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\MailingListVoter;
@@ -16,21 +17,22 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateMailingListMutation implements MutationInterface
 {
+    use MutationTrait;
     private UserRepository $userRepository;
     private ProjectRepository $projectRepository;
     private EntityManagerInterface $entityManager;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
     private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         UserRepository $userRepository,
         ProjectRepository $projectRepository,
         EntityManagerInterface $entityManager,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         SettableOwnerResolver $settableOwnerResolver
     ) {
         $this->userRepository = $userRepository;
@@ -42,6 +44,7 @@ class CreateMailingListMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $error = null;
         $mailingList = null;
 

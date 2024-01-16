@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Form\ApiToggleType;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ToggleFeatureMutation implements MutationInterface
 {
+    use MutationTrait;
     private Manager $toggleManager;
     private FormFactoryInterface $formFactory;
 
@@ -24,6 +26,7 @@ class ToggleFeatureMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $viewer)
     {
+        $this->formatInput($args);
         if (!$viewer || !$viewer->isAdmin()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }

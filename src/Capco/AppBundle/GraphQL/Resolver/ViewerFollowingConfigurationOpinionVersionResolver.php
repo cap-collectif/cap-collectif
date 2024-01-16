@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ViewerFollowingConfigurationOpinionVersionResolver implements ResolverInterface
+class ViewerFollowingConfigurationOpinionVersionResolver implements QueryInterface
 {
     private $followerRepository;
     private $logger;

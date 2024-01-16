@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\Utils\Text;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class FormattedValueResponseTypeResolver implements ResolverInterface
+class FormattedValueResponseTypeResolver implements QueryInterface
 {
     private TranslatorInterface $translator;
 

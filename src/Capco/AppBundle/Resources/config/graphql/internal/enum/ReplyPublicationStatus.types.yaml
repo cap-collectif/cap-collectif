@@ -4,8 +4,8 @@ ReplyPublicationStatus:
         description: 'Available statuses'
         values:
             PUBLISHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyPublicationStatus::PUBLISHED")'
+                value: !php/const Capco\AppBundle\Enum\ReplyPublicationStatus::PUBLISHED
                 description: 'Publicly visible'
             DRAFT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyPublicationStatus::DRAFT")'
+                value: !php/const Capco\AppBundle\Enum\ReplyPublicationStatus::DRAFT
                 description: 'Draft, not publicly visible, only showed for his author.'

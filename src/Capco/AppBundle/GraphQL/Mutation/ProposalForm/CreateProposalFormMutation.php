@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFormCreateType;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\UserBundle\Entity\User;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProposalFormMutation implements MutationInterface
 {
+    use MutationTrait;
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $em;
     private SettableOwnerResolver $settableOwnerResolver;
@@ -35,6 +37,7 @@ class CreateProposalFormMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $proposalForm = new ProposalForm();
         $proposalForm->setDescriptionUsingJoditWysiwyg(true);
 

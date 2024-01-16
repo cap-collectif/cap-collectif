@@ -6,12 +6,12 @@ use ArrayObject;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserSourcesResolver implements ResolverInterface
+class UserSourcesResolver implements QueryInterface
 {
     protected $sourceRepository;
 

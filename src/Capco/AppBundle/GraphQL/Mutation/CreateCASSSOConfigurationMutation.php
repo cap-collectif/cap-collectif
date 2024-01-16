@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\SSO\CASSSOConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class CreateCASSSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
@@ -18,6 +20,7 @@ class CreateCASSSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $configuration = new CASSSOConfiguration();
         $configuration->setName($input->offsetGet('name'));
         $configuration->setCasServerUrl($input->offsetGet('casServerUrl'));

@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class RequirementParticipantValueResolver implements ResolverInterface
+class RequirementParticipantValueResolver implements QueryInterface
 {
     private RequirementViewerValueResolver $requirementViewerValueResolver;
     private ParticipantRepository $participantRepository;

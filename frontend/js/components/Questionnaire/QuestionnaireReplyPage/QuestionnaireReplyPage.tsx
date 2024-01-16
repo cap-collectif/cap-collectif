@@ -23,14 +23,14 @@ import Loader from '~ui/FeedbacksIndicators/Loader'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
 import CookieMonster from '~/CookieMonster'
 export const queryReply = graphql`
-  query QuestionnaireReplyPageQuery($replyId: ID!) {
+  query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
     reply: node(id: $replyId) {
       id
       ... on Reply {
         createdAt
         publishedAt
         questionnaire {
-          ...ReplyForm_questionnaire
+          ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
         }
         ...ReplyForm_reply
       }

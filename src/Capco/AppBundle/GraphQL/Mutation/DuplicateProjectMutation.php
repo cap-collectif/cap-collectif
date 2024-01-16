@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class DuplicateProjectMutation implements MutationInterface
 {
+    use MutationTrait;
     private TranslatorInterface $translator;
     private EntityManagerInterface $entityManager;
 
@@ -47,6 +49,7 @@ class DuplicateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer)
     {
+        $this->formatInput($input);
         $projectId = $input->offsetGet('id');
         $project = $this->globalIdResolver->resolve($projectId, $viewer);
         if (!$project) {

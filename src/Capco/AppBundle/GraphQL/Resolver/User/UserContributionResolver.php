@@ -7,13 +7,13 @@ use Capco\AppBundle\Search\ContributionSearch;
 use Capco\AppBundle\Search\Search;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class UserContributionResolver implements ContainerAwareInterface, ResolverInterface
+class UserContributionResolver implements ContainerAwareInterface, QueryInterface
 {
     use ContainerAwareTrait;
 

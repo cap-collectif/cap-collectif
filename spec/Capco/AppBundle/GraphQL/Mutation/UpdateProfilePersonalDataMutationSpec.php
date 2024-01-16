@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
 use Capco\UserBundle\Repository\UserRepository;
@@ -17,6 +18,8 @@ use Symfony\Component\Form\FormFactory;
 
 class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactory $formFactory,
@@ -48,6 +51,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
@@ -73,6 +78,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $encodeId = GlobalId::toGlobalId('User', 'theUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
@@ -101,6 +108,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $encodeId = GlobalId::toGlobalId('User', 'simpleUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $userId = GlobalId::fromGlobalId($argumentsValues['userId'])['id'];
@@ -138,6 +147,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $encodeId = GlobalId::toGlobalId('User', 'badUserId');
         $argumentsValues = ['userId' => $encodeId, 'username' => 'Portos'];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
@@ -168,6 +179,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         $user->setPhoneConfirmed(false);
 
         $argumentsValues = ['username' => 'Portos', 'email' => 'portos@test.com'];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
         $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);

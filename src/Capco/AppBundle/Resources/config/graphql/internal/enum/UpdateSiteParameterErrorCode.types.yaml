@@ -5,5 +5,5 @@ UpdateSiteParameterErrorCode:
         description: 'Available errors for an `updateSiteParameter` mutation.'
         values:
             INVALID_VALUE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateSiteParameterMutation::INVALID_VALUE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation::INVALID_VALUE
                 description: 'The given value is invalid.'

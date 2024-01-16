@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Resolver\UrlResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class EventUrlResolver implements ResolverInterface
+class EventUrlResolver implements QueryInterface
 {
     private $urlResolver;
     private $router;

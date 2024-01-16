@@ -5,5 +5,5 @@ TrashErrorCode:
         description: 'Available errors for a `trash` mutation.'
         values:
             TRASHABLE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\TrashMutation::TRASHABLE_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\TrashMutation::TRASHABLE_NOT_FOUND
                 description: 'No trashable entity match your id.'

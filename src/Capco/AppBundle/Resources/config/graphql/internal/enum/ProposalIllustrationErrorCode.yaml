@@ -7,5 +7,5 @@ ProposalIllustrationErrorCode:
         description: 'Available errors on proposal illustration mutation'
         values:
             MEDIA_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalIllustrationMutation::MEDIA_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateProposalIllustrationMutation::MEDIA_NOT_FOUND
                 description: 'No media match.'

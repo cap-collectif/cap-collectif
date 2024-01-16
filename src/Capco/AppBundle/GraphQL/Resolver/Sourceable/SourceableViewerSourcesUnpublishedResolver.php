@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class SourceableViewerSourcesUnpublishedResolver implements ResolverInterface
+class SourceableViewerSourcesUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 

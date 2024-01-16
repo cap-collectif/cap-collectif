@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SiteParameterQueryResolver implements ResolverInterface
+class SiteParameterQueryResolver implements QueryInterface
 {
     private $repository;
     private $translationRepository;

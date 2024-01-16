@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,6 +21,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         DebateArgumentVoteRepository $repository,
         DebateAnonymousArgumentVoteRepository $anonymousRepository,
@@ -54,6 +57,9 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
     ) {
         $id = 'debateArgumentId';
         $input->offsetGet('debateArgumentId')->willReturn($id);
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input
             ->offsetGet('widgetOriginURI')
             ->shouldBeCalled()
@@ -88,6 +94,9 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'wrongId';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
@@ -107,6 +116,9 @@ class AddDebateArgumentVoteMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'debateArgumentId';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input->offsetGet('debateArgumentId')->willReturn($id);
         $input->offsetGet('widgetOriginURI')->willReturn(null);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);

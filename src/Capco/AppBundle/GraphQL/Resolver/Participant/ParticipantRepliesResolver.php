@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ParticipantRepliesResolver implements ResolverInterface
+class ParticipantRepliesResolver implements QueryInterface
 {
     private ReplyRepository $replyRepository;
 

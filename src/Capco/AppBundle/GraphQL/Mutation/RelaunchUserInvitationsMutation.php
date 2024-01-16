@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -14,6 +15,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class RelaunchUserInvitationsMutation implements MutationInterface
 {
+    use MutationTrait;
     private const BATCH_SIZE = 800;
 
     private UserInviteRepository $userInviteRepository;
@@ -32,6 +34,7 @@ class RelaunchUserInvitationsMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $invitationEmails = $args->offsetGet('emails');
         $invitations = $this->userInviteRepository->getExpiredInvitationByEmails($invitationEmails);
 

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -21,6 +22,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AssignDecisionMakerToProposalsMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private GlobalIdResolver $globalIdResolver;
@@ -48,6 +50,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $proposalIds = $input->offsetGet('proposalIds');
         $decisionMakerId = $input->offsetGet('decisionMakerId');
 

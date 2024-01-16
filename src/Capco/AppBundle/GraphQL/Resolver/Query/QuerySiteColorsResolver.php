@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\SiteColorRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuerySiteColorsResolver implements ResolverInterface
+class QuerySiteColorsResolver implements QueryInterface
 {
     private $repository;
 

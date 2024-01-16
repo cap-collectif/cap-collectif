@@ -26,7 +26,7 @@ PreviewConsultationStep:
             votesCount:
                 type: 'Int'
                 description: 'The number of votes in this consultation.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2022-01-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed.", supersededBy: "Use `votes.totalCount` instead."})'
+                deprecationReason: 'reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed, Use "votes.totalCount" instead'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepVotesResolver", [value, args]).totalCount'
             votes:
                 type: 'PreviewVoteConnection!'

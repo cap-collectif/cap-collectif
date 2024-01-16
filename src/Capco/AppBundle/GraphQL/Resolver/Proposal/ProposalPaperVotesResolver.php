@@ -10,9 +10,9 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalPaperVotesResolver implements ResolverInterface
+class ProposalPaperVotesResolver implements QueryInterface
 {
     private GlobalIdResolver $globalIdResolver;
 

@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -27,6 +28,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -73,7 +76,10 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             'questionnaireId' => 'abc',
             'title' => 'abc',
         ];
+
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($arguments);
+
         $globalIdResolver
             ->resolve($arguments['questionnaireId'], $viewer)
             ->willReturn($questionnaire)
@@ -112,6 +118,8 @@ class UpdateQuestionnaireConfigurationMutationSpec extends ObjectBehavior
             'questionnaireId' => 'abc',
             'title' => 'abc',
         ];
+
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($arguments);
         $globalIdResolver
             ->resolve($arguments['questionnaireId'], $viewer)

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Form\OrganizationType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -16,6 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AddOrganizationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private SluggerInterface $slugger;
@@ -32,6 +34,7 @@ class AddOrganizationMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $data = $input->getArrayCopy();
         LocaleUtils::indexTranslations($data);
 

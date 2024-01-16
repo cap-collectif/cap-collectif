@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\GraphQL\Mutation\Sms\DeleteSmsOrderMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -12,6 +13,8 @@ use PhpSpec\ObjectBehavior;
 
 class DeleteSmsOrderMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(EntityManagerInterface $em, GlobalIdResolver $globalIdResolver)
     {
         $this->beConstructedWith($em, $globalIdResolver);
@@ -30,6 +33,7 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
         SmsOrder $smsOrder
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('id')
             ->shouldBeCalledOnce()
@@ -53,6 +57,7 @@ class DeleteSmsOrderMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('id')
             ->shouldBeCalledOnce()

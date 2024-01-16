@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ReplyVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteRepliesMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
     private GlobalIdResolver $globalIdResolver;
@@ -36,6 +38,7 @@ class DeleteRepliesMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $replyIds = $args->offsetGet('replyIds');
         $decodedReplyIds = array_map(
             fn (string $globalId) => GlobalId::fromGlobalId($globalId)['id'],

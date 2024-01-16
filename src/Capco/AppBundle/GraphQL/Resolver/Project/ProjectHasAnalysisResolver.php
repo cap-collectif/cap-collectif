@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProjectHasAnalysisResolver implements ResolverInterface
+class ProjectHasAnalysisResolver implements QueryInterface
 {
     public function __invoke(Project $project): bool
     {

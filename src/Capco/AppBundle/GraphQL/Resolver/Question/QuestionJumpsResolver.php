@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\GraphQL\DataLoader\Question\QuestionJumpsDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionJumpsResolver implements ResolverInterface
+class QuestionJumpsResolver implements QueryInterface
 {
     private $dataLoader;
 

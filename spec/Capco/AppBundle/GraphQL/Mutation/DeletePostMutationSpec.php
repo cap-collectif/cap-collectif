@@ -6,19 +6,23 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\GraphQL\Mutation\DeletePostMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\PostVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeletePostMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->beConstructedWith($em, $globalIdResolver, $authorizationChecker);
     }
@@ -37,6 +41,8 @@ class DeletePostMutationSpec extends ObjectBehavior
     ) {
         $id = 'abc';
         $arguments->offsetGet('id')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $globalIdResolver->resolve($id, $viewer)->willReturn($post);
 
         $em->remove(Argument::type('Capco\\AppBundle\\Entity\\Post'))->shouldBeCalled();

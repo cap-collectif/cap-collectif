@@ -4,17 +4,17 @@ UserRole:
         description: '4 possible values'
         values:
             ROLE_USER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_USER")'
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_USER
                 description: 'Represents a user.'
             ROLE_PROJECT_ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_PROJECT_ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_PROJECT_ADMIN
                 description: 'Represents a project admin.'
             ROLE_ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_ADMIN
                 description: 'Represents an administrator.'
             ROLE_SUPER_ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_SUPER_ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_SUPER_ADMIN
                 description: 'Represents Cap Collectif account.'
             ROLE_MEDIATOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\UserRole::ROLE_MEDIATOR")'
+                value: !php/const Capco\AppBundle\Enum\UserRole::ROLE_MEDIATOR
                 description: 'Represents a user who can vote in behalf of offline users.'

@@ -8,11 +8,11 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Search\ContributionSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ProjectContributionResolver implements ResolverInterface
+class ProjectContributionResolver implements QueryInterface
 {
     protected ContributionSearch $contributionSearch;
     private RedisCache $cache;

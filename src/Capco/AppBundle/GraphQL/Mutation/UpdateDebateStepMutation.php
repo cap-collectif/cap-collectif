@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Form\DebateStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateStepMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -40,6 +42,7 @@ class UpdateDebateStepMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $data = $input->getArrayCopy();
         $debateStepId = $input->offsetGet('id');
         $debateStep = $this->getDebateStep($debateStepId, $viewer);

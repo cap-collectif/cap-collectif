@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Question;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionPositionResolver implements ResolverInterface
+class QuestionPositionResolver implements QueryInterface
 {
     public function __invoke(AbstractQuestion $question): int
     {

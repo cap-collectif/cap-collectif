@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Form\DebateOpinionType;
 use Capco\AppBundle\GraphQL\Mutation\Debate\UpdateDebateOpinionMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -16,6 +17,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateDebateOpinionMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -56,6 +59,10 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
             'author' => '123456',
         ];
 
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $values);
+
         $form
             ->submit(
                 [
@@ -84,6 +91,7 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
     {
         $id = '123';
         $input->offsetGet('debateOpinionId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, null)->willReturn(null);
 
         $payload = $this->__invoke($input);
@@ -110,6 +118,11 @@ class UpdateDebateOpinionMutationSpec extends ObjectBehavior
             'body' => 'Opinion Body',
             'author' => '123456',
         ];
+
+        $rawInput['input'] = $values;
+
+        $this->getMockedGraphQLArgumentFormatted($input, $rawInput, $values);
+
         $input->getArrayCopy()->willReturn($values);
 
         $form->submit($values, false)->willReturn(null);

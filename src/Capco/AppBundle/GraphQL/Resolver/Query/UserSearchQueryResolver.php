@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserSearchQueryResolver implements ResolverInterface
+class UserSearchQueryResolver implements QueryInterface
 {
     private UserSearch $userSearch;
 

@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalFormDistrictsResolver implements ResolverInterface
+class ProposalFormDistrictsResolver implements QueryInterface
 {
     public function __invoke(ProposalForm $form, ?string $order): array
     {

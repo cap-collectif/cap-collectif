@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ProposalViewerHasVoteResolver implements ResolverInterface
+class ProposalViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
     private $logger;

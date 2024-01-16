@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\SiteSettings;
 use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SiteSettingsResolver implements ResolverInterface
+class SiteSettingsResolver implements QueryInterface
 {
     use ResolverTrait;
 

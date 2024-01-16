@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Enum\SSOType;
 use Capco\AppBundle\Form\FranceConnectSSOConfigurationFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -14,6 +15,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private AbstractSSOConfigurationRepository $repository;
@@ -30,6 +32,7 @@ class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
 
         $fcConfiguration = $this->repository->findASsoByType(SSOType::FRANCE_CONNECT);

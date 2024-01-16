@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class TrashMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
 
     private GlobalIdResolver $globalIdResolver;
@@ -33,6 +36,8 @@ class TrashMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $trashable = $this->getTrashable($input, $viewer);
             self::trash($trashable, $input);

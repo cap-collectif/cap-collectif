@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalStatusDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalStatusResolver implements ResolverInterface
+class ProposalStatusResolver implements QueryInterface
 {
     private $dataLoader;
 

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerFollowingConfigurationDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerIsFollowingDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UnfollowProposalMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FollowerRepository $followerRepository;
     private ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
@@ -39,6 +41,7 @@ class UnfollowProposalMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $user): array
     {
+        $this->formatInput($args);
         $proposal = '';
         if (isset($args['proposalId'])) {
             /** @var Proposal $proposal */

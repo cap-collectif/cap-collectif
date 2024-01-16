@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Form\Type\UpdateProjectFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UpdateProjectMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $entityManager;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
@@ -44,6 +46,7 @@ class UpdateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $districts = $input->offsetGet('districts') ?? [];
         unset($arguments['districts']);

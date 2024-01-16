@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Form\OpinionForm;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const NOT_AUTHORIZED = 'NOT_AUTHORIZED';
     public const INVALID_FORM = 'INVALID_FORM';
     public const OPINION_NOT_CONTRIBUABLE = 'OPINION_NOT_CONTRIBUABLE';
@@ -42,6 +45,7 @@ class UpdateOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $opinionId = $input->offsetGet('opinionId');
         $data = $input->getArrayCopy();
 

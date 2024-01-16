@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Client\DeployerClient;
 use Capco\AppBundle\Entity\SiteSettings;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Validator\Constraints\CheckCustomDomainConstraint;
 use Capco\UserBundle\Entity\User;
@@ -16,6 +17,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateCustomDomainMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const CUSTOM_DOMAIN_SYNTAX_NOT_VALID = 'CUSTOM_DOMAIN_SYNTAX_NOT_VALID';
     public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
     public const CNAME_NOT_VALID = 'CNAME_NOT_VALID';
@@ -42,6 +45,7 @@ class UpdateCustomDomainMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $customDomain = $input->offsetGet('customDomain');
 
         $siteSettings = $this->siteSettingsRepository->findSiteSetting() ?? new SiteSettings();

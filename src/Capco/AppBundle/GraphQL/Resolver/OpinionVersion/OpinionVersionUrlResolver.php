@@ -6,11 +6,11 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class OpinionVersionUrlResolver implements ResolverInterface
+class OpinionVersionUrlResolver implements QueryInterface
 {
     private $router;
 

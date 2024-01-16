@@ -9,10 +9,10 @@ use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class ProposalVoteTypeResolver implements ResolverInterface
+class ProposalVoteTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

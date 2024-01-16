@@ -4,14 +4,14 @@ ProjectVisibility:
         description: '4 possible values'
         values:
             ADMIN:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ADMIN")'
+                value: !php/const Capco\AppBundle\Enum\ProjectVisibilityMode::VISIBILITY_ADMIN
                 description: 'visible for group admin'
             CUSTOM:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_CUSTOM")'
+                value: !php/const Capco\AppBundle\Enum\ProjectVisibilityMode::VISIBILITY_CUSTOM
                 description: 'the project is restricted to users groups'
             ME:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_ME")'
+                value: !php/const Capco\AppBundle\Enum\ProjectVisibilityMode::VISIBILITY_ME
                 description: 'visible for me only'
             PUBLIC:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectVisibilityMode::VISIBILITY_PUBLIC")'
+                value: !php/const Capco\AppBundle\Enum\ProjectVisibilityMode::VISIBILITY_PUBLIC
                 description: 'visible for all'

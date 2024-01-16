@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OrganizationsResolver implements ResolverInterface
+class OrganizationsResolver implements QueryInterface
 {
     private OrganizationRepository $repository;
 

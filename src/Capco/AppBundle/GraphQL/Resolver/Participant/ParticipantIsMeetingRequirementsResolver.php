@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerMeetsTheRequirementResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ParticipantIsMeetingRequirementsResolver implements ResolverInterface
+class ParticipantIsMeetingRequirementsResolver implements QueryInterface
 {
     private GlobalIdResolver $globalIdResolver;
     private ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;

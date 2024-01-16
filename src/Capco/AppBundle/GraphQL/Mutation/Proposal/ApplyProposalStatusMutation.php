@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,8 +13,12 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class ApplyProposalStatusMutation extends AbstractProposalStepMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public function __invoke(Argument $args, User $user): array
     {
+        $this->formatInput($args);
+
         try {
             $status = $this->getStatus($args->offsetGet('statusId'), $user);
             $proposals = $this->getProposals($args->offsetGet('proposalIds'), $user);

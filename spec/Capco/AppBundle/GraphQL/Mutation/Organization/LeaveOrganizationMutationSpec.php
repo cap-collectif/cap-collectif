@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\GraphQL\Mutation\Organization\LeaveOrganizationMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Organization\OrganizationMemberRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,8 @@ use PhpSpec\ObjectBehavior;
 
 class LeaveOrganizationMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $entityManager,
@@ -34,6 +37,7 @@ class LeaveOrganizationMutationSpec extends ObjectBehavior
         EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver
     ) {
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('organizationId')->willReturn('organizationNotFound');
         $globalIdResolver->resolve('organizationNotFound', $viewer)->willReturn(null);
 
@@ -56,6 +60,7 @@ class LeaveOrganizationMutationSpec extends ObjectBehavior
         OrganizationMemberRepository $repository
     ) {
         $organization->getId()->willReturn('organization1');
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('organizationId')->willReturn('organization1');
         $globalIdResolver->resolve('organization1', $viewer)->willReturn($organization);
 

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Security\CommentVoter;
 use Capco\UserBundle\Entity\User;
@@ -15,6 +16,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteCommentMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private RedisStorageHelper $redisStorage;
     private LoggerInterface $logger;
@@ -40,6 +42,7 @@ class DeleteCommentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $commentGlobalId = $input->offsetGet('id');
         $comment = $this->globalIdResolver->resolve($commentGlobalId, $viewer);
 

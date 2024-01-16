@@ -5,9 +5,9 @@ PostOrder:
         fields:
             field:
                 type: 'PostOrderField!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\PostOrderField::UPDATED_AT")'
+                defaultValue: !php/const Capco\AppBundle\Enum\PostOrderField::UPDATED_AT
                 description: The field to order posts by.
             direction:
                 type: 'OrderDirection!'
-                defaultValue: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
                 description: The ordering direction.

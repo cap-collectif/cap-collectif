@@ -5,8 +5,8 @@ UnstarResponseError:
         description: 'Available errors for a `unstarResponse` mutation.'
         values:
             RESPONSE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UnstarResponseMutation::RESPONSE_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UnstarResponseMutation::RESPONSE_NOT_FOUND
                 description: 'No response match your id.'
             NOT_STARRED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UnstarResponseMutation::NOT_STARRED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UnstarResponseMutation::NOT_STARRED
                 description: 'Viewer has not starred the response.'

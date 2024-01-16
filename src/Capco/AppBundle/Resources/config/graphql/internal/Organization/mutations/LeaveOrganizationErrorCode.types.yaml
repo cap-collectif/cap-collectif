@@ -5,5 +5,5 @@ LeaveOrganizationErrorCode:
         description: 'Available errors on leave organization mutation.'
         values:
             ORGANIZATION_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Organization\\LeaveOrganizationMutation::ORGANIZATION_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Organization\LeaveOrganizationMutation::ORGANIZATION_NOT_FOUND
                 description: 'The given organization does not exist.'

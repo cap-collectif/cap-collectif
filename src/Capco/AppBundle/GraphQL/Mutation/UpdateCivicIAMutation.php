@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CivicIA\CivicIAMassUpdater;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -10,6 +11,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateCivicIAMutation implements MutationInterface
 {
+    use MutationTrait;
     private CivicIAMassUpdater $updater;
 
     public function __construct(CivicIAMassUpdater $updater)
@@ -19,6 +21,8 @@ class UpdateCivicIAMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $results = $this->updater->__invoke($input->offsetGet('data'), $viewer);
 

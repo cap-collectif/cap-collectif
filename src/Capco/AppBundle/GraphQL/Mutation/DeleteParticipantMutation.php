@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\MediatorParticipantStep;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MediatorParticipantStepRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\UserBundle\Entity\User;
@@ -17,6 +18,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteParticipantMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private ParticipantRepository $participantRepository;
@@ -36,6 +38,7 @@ class DeleteParticipantMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $participantToken = $input->offsetGet('participantToken');
         $participant = $this->getParticipant($participantToken);
         $participantId = $participant->getId();

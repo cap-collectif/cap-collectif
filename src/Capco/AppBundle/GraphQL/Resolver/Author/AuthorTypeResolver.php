@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Author;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class AuthorTypeResolver implements ResolverInterface
+class AuthorTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

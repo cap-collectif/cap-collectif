@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalAnalysisComment;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProposalAnalysisCommentVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProposalAnalysisCommentMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
@@ -35,6 +37,7 @@ class CreateProposalAnalysisCommentMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $proposalAnalysisId = $input->offsetGet('proposalAnalysisId');
         $body = $input->offsetGet('body');
 

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Form\QuestionnaireNotificationConfigurationType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $globalIdResolver;
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $em;
@@ -38,6 +40,7 @@ class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
 
     public function __invoke(Argument $arguments, User $viewer): array
     {
+        $this->formatInput($arguments);
         $data = $arguments->getArrayCopy();
         $questionnaireId = $arguments->offsetGet('questionnaireId');
         $questionnaire = $this->globalIdResolver->resolve($questionnaireId, $viewer);

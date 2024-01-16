@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Organization;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Organization\OrganizationMemberRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class LeaveOrganizationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     private GlobalIdResolver $globalIdResolver;
     private EntityManagerInterface $entityManager;
@@ -29,6 +32,7 @@ class LeaveOrganizationMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $organizationId = $input->offsetGet('organizationId');
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
 

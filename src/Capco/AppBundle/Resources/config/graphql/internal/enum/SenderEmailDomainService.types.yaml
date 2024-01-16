@@ -4,8 +4,8 @@ SenderEmailDomainService:
         description: 'Possible types for SenderEmailDomain.'
         values:
             MANDRILL:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::MAILER_MANDRILL")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::MAILER_MANDRILL
                 description: 'Choice of the external mailer client : mandrill or mailjet.'
             MAILJET:
-                value: '@=constant("Capco\\AppBundle\\Entity\\ExternalServiceConfiguration::MAILER_MAILJET")'
+                value: !php/const Capco\AppBundle\Entity\ExternalServiceConfiguration::MAILER_MAILJET
                 description: 'Choice of the external mailer client : mandrill or mailjet.'

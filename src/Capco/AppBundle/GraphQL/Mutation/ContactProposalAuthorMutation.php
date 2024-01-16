@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalStatistics;
 use Capco\AppBundle\Enum\ContactProposalAuthorErrorCode;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\MailerException;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
@@ -19,6 +20,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ContactProposalAuthorMutation implements MutationInterface
 {
+    use MutationTrait;
     private ProposalRepository $proposalRepository;
     private MailerService $mailerService;
     private CaptchaChecker $captchaChecker;
@@ -41,6 +43,7 @@ class ContactProposalAuthorMutation implements MutationInterface
 
     public function __invoke(Argument $argument): array
     {
+        $this->formatInput($argument);
         $proposal = $this->getProposal($argument);
         $errorLog = $this->getErrorLog(
             $proposal,

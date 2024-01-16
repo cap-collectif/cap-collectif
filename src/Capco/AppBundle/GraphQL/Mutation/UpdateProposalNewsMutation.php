@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\ProposalPostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProposalNewsMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const POST_NOT_FOUND = 'POST_NOT_FOUND';
     public const ACCESS_DENIED = 'ACCESS_DENIED';
     public const INVALID_DATA = 'INVALID_DATA';
@@ -49,6 +52,8 @@ class UpdateProposalNewsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $proposalPost = $this->getPost($input, $viewer);
             $proposalPost = $this->updateProposalNews($input, $proposalPost);

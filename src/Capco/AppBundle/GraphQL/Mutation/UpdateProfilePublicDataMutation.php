@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PublicDataType;
@@ -14,6 +15,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
+    use MutationTrait;
+
     private Manager $toggleManager;
 
     public function __construct(
@@ -29,6 +32,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
         if (isset($this->arguments[self::USER_ID])) {

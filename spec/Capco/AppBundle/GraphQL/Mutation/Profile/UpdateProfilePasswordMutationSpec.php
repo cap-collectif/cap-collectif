@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Profile;
 
 use Capco\AppBundle\GraphQL\Mutation\Profile\UpdateProfilePasswordMutation;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
@@ -19,6 +20,8 @@ use Symfony\Component\Form\FormInterface;
 
 class UpdateProfilePasswordMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -53,6 +56,9 @@ class UpdateProfilePasswordMutationSpec extends ObjectBehavior
             'current_password' => 'currentPassword',
             'new_password' => 'newPassword',
         ];
+
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input
             ->getArrayCopy()
             ->shouldBeCalled()
@@ -103,6 +109,7 @@ class UpdateProfilePasswordMutationSpec extends ObjectBehavior
             'current_password' => 'currentPassword',
             'new_password' => $newPassword,
         ];
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->getArrayCopy()
             ->shouldBeCalled()

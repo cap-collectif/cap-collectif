@@ -4,14 +4,14 @@ ProposalFormObjectType:
         description: 'Value of a proposal sorting'
         values:
             PROPOSAL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::PROPOSAL")'
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::PROPOSAL
                 description: 'The proposal form allows to submit proposals'
             QUESTION:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::QUESTION")'
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::QUESTION
                 description: 'The proposal form allows to submit questions.'
             ESTABLISHMENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::ESTABLISHMENT")'
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::ESTABLISHMENT
                 description: 'The proposal form allows to submit establishment.'
             OPINION:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProposalFormObjectType::OPINION")'
+                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::OPINION
                 description: 'The proposal form allows to submit opinions.'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Mailing;
 
 use Capco\AppBundle\Entity\SenderEmail;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SenderEmailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,6 +13,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class SelectSenderEmailMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_SENDER_EMAIL = 'UNKNOWN_SENDER_EMAIL';
 
     private EntityManagerInterface $em;
@@ -25,6 +28,8 @@ class SelectSenderEmailMutation implements MutationInterface
 
     public function __invoke(Argument $input)
     {
+        $this->formatInput($input);
+
         try {
             $senderEmail = $this->getSenderEmail($input);
             if (!$senderEmail->isDefault()) {

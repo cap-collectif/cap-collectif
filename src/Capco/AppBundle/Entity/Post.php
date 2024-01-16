@@ -65,7 +65,7 @@ class Post implements CommentableInterface, IndexableInterface, Ownerable, Trans
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private ?Media $media;
+    private ?Media $media = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="posts", cascade={"persist"})

@@ -4,8 +4,8 @@ ProjectArchiveFilter:
         description: 'Project archive filter choices.'
         values:
             ARCHIVED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectArchiveFilter::ARCHIVED")'
+                value: !php/const Capco\AppBundle\Enum\ProjectArchiveFilter::ARCHIVED
                 description: 'Filters only archived projects.'
             ACTIVE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectArchiveFilter::ACTIVE")'
+                value: !php/const Capco\AppBundle\Enum\ProjectArchiveFilter::ACTIVE
                 description: 'Filters only non-archived projects.'

@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Repository\SenderEmailRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SenderEmailResolver implements ResolverInterface
+class SenderEmailResolver implements QueryInterface
 {
     private SenderEmailRepository $repository;
 

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalVoteAuthorResolver implements ResolverInterface
+class ProposalVoteAuthorResolver implements QueryInterface
 {
     use ResolverTrait;
 

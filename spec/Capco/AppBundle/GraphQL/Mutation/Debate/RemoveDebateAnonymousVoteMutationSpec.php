@@ -14,6 +14,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -22,6 +23,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         LoggerInterface $logger,
@@ -67,6 +70,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         // AGAINST:jesuisunsupertokengenshinimpact1
         $hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('debateId')->willReturn($id);
         $input->offsetGet('hash')->willReturn($hash);
         $input->offsetGet('argumentHash')->willReturn(null);
@@ -131,6 +135,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
         $argumentHash = 'Rk9SOmplc3Vpc2xldG9rZW5kdWRlYmF0ZWFub255bW91c2FyZ3VtZW50Zm9yMQ==';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('debateId')->willReturn($id);
         $input->offsetGet('hash')->willReturn($hash);
         $input->offsetGet('argumentHash')->willReturn($argumentHash);
@@ -191,6 +196,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
     {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver->resolve($id, null)->willReturn(null);
 
         $payload = $this->__invoke($input);
@@ -217,6 +223,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $hash = 'QUdBSU5TVDpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
         $input->offsetGet('debateId')->willReturn($id);
         $input->offsetGet('hash')->willReturn($hash);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $decoded->getType()->willReturn($type);
         $decoded->getToken()->willReturn($token);
         $encoder->decode($hash)->willReturn($decoded);
@@ -260,6 +267,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
         $hash = 'WU9MTzpqZXN1aXN1bnN1cGVydG9rZW5nZW5zaGluaW1wYWN0MQ==';
         $input->offsetGet('debateId')->willReturn($id);
         $input->offsetGet('hash')->willReturn($hash);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $decoded->getType()->willReturn($type);
         $decoded->getToken()->willReturn($token);
         $encoder->decode($hash)->willReturn($decoded);
@@ -294,6 +302,7 @@ class RemoveDebateAnonymousVoteMutationSpec extends ObjectBehavior
     ) {
         $id = '123';
         $input->offsetGet('debateId')->willReturn($id);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $debateStep->isOpen()->willReturn(false);
         $debate->getStep()->willReturn($debateStep);
         $globalIdResolver->resolve($id, null)->willReturn($debate);

@@ -8,6 +8,7 @@ use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\UpdatePostMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\PostVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -18,9 +19,12 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdatePostMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     private $data = [
         'translations' => [
             'fr-FR' => [
@@ -43,7 +47,7 @@ class UpdatePostMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         PostAuthorFactory $postAuthorFactory,
         LoggerInterface $logger
     ) {
@@ -76,6 +80,7 @@ class UpdatePostMutationSpec extends ObjectBehavior
         $input->offsetGet('id')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($post);
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->getArrayCopy()->willReturn($this->data);
         $input->offsetGet('authors')->willReturn(['VXNlcjp1c2VyVGhlbw==']);
 
@@ -113,6 +118,7 @@ class UpdatePostMutationSpec extends ObjectBehavior
         FormErrorIterator $formErrorIterator
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('id')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($post);
 

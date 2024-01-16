@@ -4,11 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\QuestionChoice;
 
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class QuestionChoiceRankingResponseResolver implements ResolverInterface
+class QuestionChoiceRankingResponseResolver implements QueryInterface
 {
     private $responseRepository;
 

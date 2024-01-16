@@ -5,11 +5,11 @@ AddDebateAnonymousVoteErrorCode:
         description: 'Available errors for an `addDebateAnonymousVote` mutation.'
         values:
             UNKNOWN_DEBATE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation::UNKNOWN_DEBATE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateAnonymousVoteMutation::UNKNOWN_DEBATE
                 description: 'No `Debate` match your `debateId`.'
             CLOSED_DEBATE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation::CLOSED_DEBATE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateAnonymousVoteMutation::CLOSED_DEBATE
                 description: 'The debate is closed and be voted.'
             INVALID_CAPTCHA:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\AddDebateAnonymousVoteMutation::INVALID_CAPTCHA")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateAnonymousVoteMutation::INVALID_CAPTCHA
                 description: 'The given captcha is invalid.'

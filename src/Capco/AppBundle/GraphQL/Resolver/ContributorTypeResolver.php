@@ -7,9 +7,9 @@ use Capco\AppBundle\Entity\Participant;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ContributorTypeResolver implements ResolverInterface
+class ContributorTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

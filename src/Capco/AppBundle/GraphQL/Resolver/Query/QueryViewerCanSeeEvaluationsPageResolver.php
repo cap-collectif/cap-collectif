@@ -7,9 +7,9 @@ use Capco\AppBundle\Repository\ProposalAnalystRepository;
 use Capco\AppBundle\Repository\ProposalDecisionMakerRepository;
 use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryViewerCanSeeEvaluationsPageResolver implements ResolverInterface
+class QueryViewerCanSeeEvaluationsPageResolver implements QueryInterface
 {
     use ResolverTrait;
 

@@ -15,6 +15,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\CategoryImageRepository;
@@ -36,6 +37,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateProposalFormMutation extends AbstractProposalFormMutation
 {
+    use MutationTrait;
     use QuestionPersisterTrait;
 
     private FormFactoryInterface $formFactory;
@@ -86,6 +88,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $id = $arguments['proposalFormId'];
         $oldChoices = null;

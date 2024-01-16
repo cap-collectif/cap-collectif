@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\RegistrationForm;
 
 use Capco\AppBundle\Entity\RegistrationForm;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class RegistrationFormQuestionsResolver implements ResolverInterface
+class RegistrationFormQuestionsResolver implements QueryInterface
 {
     public function __invoke(RegistrationForm $form): array
     {

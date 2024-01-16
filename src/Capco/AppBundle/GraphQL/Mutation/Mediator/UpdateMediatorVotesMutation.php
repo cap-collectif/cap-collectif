@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $entityManager;
     private GlobalIdResolver $globalIdResolver;
     private ProposalVoteAccountHandler $proposalVoteAccountHandler;
@@ -47,6 +49,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
 
     public function __invoke(Argument $argument, ?User $viewer): array
     {
+        $this->formatInput($argument);
         $mediatorId = $argument->offsetGet('mediatorId');
         $participantId = $argument->offsetGet('participantId');
         $proposalsId = $argument->offsetGet('proposals');

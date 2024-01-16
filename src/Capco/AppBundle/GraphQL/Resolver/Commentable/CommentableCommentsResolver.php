@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Commentable;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\Model\CommentableInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class CommentableCommentsResolver implements ResolverInterface
+class CommentableCommentsResolver implements QueryInterface
 {
     private $commentableCommentsDataLoader;
 

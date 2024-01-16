@@ -7,6 +7,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeArgumentMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ArgumentRepository $argumentRepo;
     private FormFactoryInterface $formFactory;
@@ -47,6 +49,7 @@ class ChangeArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $user): array
     {
+        $this->formatInput($input);
         $argumentGlobalId = $input->offsetGet('argumentId');
         $argumentId = GlobalId::fromGlobalId($argumentGlobalId)['id'];
         $argument = $this->argumentRepo->find($argumentId);

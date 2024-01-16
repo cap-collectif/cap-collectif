@@ -16,6 +16,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -24,6 +25,8 @@ use Prophecy\Argument;
 
 class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         ProposalVotesDataLoader $proposalVotesDataLoader,
@@ -73,6 +76,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
 
@@ -124,6 +128,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
@@ -149,6 +154,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
@@ -175,6 +181,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
@@ -202,6 +209,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);
@@ -234,6 +242,7 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('proposalId')->shouldBeCalledOnce()->willReturn($proposalId);
         $input->offsetGet('stepId')->shouldBeCalledOnce()->willReturn($stepId);
         $input->offsetGet('token')->shouldBeCalledOnce()->willReturn($token);

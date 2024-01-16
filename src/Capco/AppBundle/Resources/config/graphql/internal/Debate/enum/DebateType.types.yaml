@@ -6,7 +6,7 @@ DebateType:
         values:
             WYSIWYG:
                 description: add a wysiwyg to allow the author to add additional content to the debate
-                value: '@=constant("Capco\\AppBundle\\Enum\\DebateType::WYSIWYG")'
+                value: !php/const Capco\AppBundle\Enum\DebateType::WYSIWYG
             FACE_TO_FACE:
                 description: remove the wysiwyg to only let the face to face debate
-                value: '@=constant("Capco\\AppBundle\\Enum\\DebateType::FACE_TO_FACE")'
+                value: !php/const Capco\AppBundle\Enum\DebateType::FACE_TO_FACE

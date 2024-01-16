@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UsernameType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateUsernameMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
@@ -29,6 +31,7 @@ class UpdateUsernameMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $form = $this->formFactory->create(UsernameType::class, $user, [

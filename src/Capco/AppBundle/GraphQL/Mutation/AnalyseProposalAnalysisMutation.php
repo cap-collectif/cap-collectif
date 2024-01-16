@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Form\ProposalAnalysisType;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
@@ -22,14 +23,15 @@ use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AnalyseProposalAnalysisMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private ProposalRepository $proposalRepository;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
     private ProposalAnalysisRepository $analysisRepository;
     private LoggerInterface $logger;
     private ResponsesFormatter $responsesFormatter;
@@ -39,7 +41,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
 
     public function __construct(
         ProposalRepository $proposalRepository,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         ProposalAnalysisRepository $analysisRepository,
         LoggerInterface $logger,
         ResponsesFormatter $responsesFormatter,
@@ -59,6 +61,7 @@ class AnalyseProposalAnalysisMutation implements MutationInterface
 
     public function __invoke(Argument $args, $viewer)
     {
+        $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
         list($proposalId, $decision, $responses) = [

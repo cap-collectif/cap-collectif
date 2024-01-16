@@ -5,8 +5,8 @@ ResendEmailConfirmationErrorCode:
         description: 'Available errors on resendEmailConfirmationMutation'
         values:
             EMAIL_ALREADY_CONFIRMED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\ResendEmailConfirmationMutation::EMAIL_ALREADY_CONFIRMED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ResendEmailConfirmationMutation::EMAIL_ALREADY_CONFIRMED
                 description: 'The email is already confirmed'
             EMAIL_RECENTLY_SENT:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\ResendEmailConfirmationMutation::EMAIL_RECENTLY_SENT")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\ResendEmailConfirmationMutation::EMAIL_RECENTLY_SENT
                 description: 'The email has already been sent recently'

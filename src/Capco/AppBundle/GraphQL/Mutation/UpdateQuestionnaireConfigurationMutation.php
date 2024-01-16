@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Helper\QuestionJumpsHandler;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -25,6 +26,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     use QuestionPersisterTrait;
 
     private EntityManagerInterface $em;
@@ -69,6 +71,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         // we remove jumps from this array to handle it later when questions are already saved
         $this->questionJumpsHandler->unsetJumps($arguments);

@@ -3,12 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Post;
 
 use Capco\AppBundle\Entity\Post;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class PostUrlResolver implements ResolverInterface
+class PostUrlResolver implements QueryInterface
 {
     private RouterInterface $router;
     private LoggerInterface $logger;

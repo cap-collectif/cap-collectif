@@ -5,11 +5,11 @@ UpdateOpinionErrorCode:
         description: 'Available errors on opinion update'
         values:
             NOT_AUTHORIZED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation::NOT_AUTHORIZED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateOpinionMutation::NOT_AUTHORIZED
                 description: 'the user is not authorized to edit this opinion'
             OPINION_NOT_CONTRIBUABLE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation::OPINION_NOT_CONTRIBUABLE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateOpinionMutation::OPINION_NOT_CONTRIBUABLE
                 description: 'the opinion is not contribuable'
             INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateOpinionMutation::INVALID_FORM")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateOpinionMutation::INVALID_FORM
                 description: 'the form is invalid'

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Anonymizer\UserAnonymizer;
 use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -33,6 +34,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountMutation extends BaseDeleteUserMutation
 {
+    use MutationTrait;
+
     public const CANNOT_DELETE_SUPER_ADMIN = 'CANNOT_DELETE_SUPER_ADMIN';
     public const CANNOT_FIND_USER = 'Can not find this userId !';
 
@@ -93,6 +96,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $user = $this->getUser($input, $viewer);
         $userId = GlobalId::toGlobalId('User', $user->getId());
         if (!$viewer->isSuperAdmin() && $user->isSuperAdmin()) {

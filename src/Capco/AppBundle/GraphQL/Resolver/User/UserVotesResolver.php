@@ -6,11 +6,11 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Search\VoteSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserVotesResolver implements ResolverInterface
+class UserVotesResolver implements QueryInterface
 {
     private VoteSearch $voteSearch;
 

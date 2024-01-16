@@ -5,5 +5,5 @@ AddUserReplyErrorCode:
         description: 'Available errors for an `addUserReply` mutation.'
         values:
             REQUIREMENTS_NOT_MET:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\AddUserReplyMutation::REQUIREMENTS_NOT_MET")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddUserReplyMutation::REQUIREMENTS_NOT_MET
                 description: 'the viewer does not meet requirements'

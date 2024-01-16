@@ -6,9 +6,9 @@ use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ViewerProposalVotesResolver implements ResolverInterface
+class ViewerProposalVotesResolver implements QueryInterface
 {
     private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
 

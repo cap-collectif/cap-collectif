@@ -6,7 +6,7 @@ HomePageProjectsSectionConfigurationDisplayMode:
         values:
             MOST_RECENT:
                 description: display the most recents projects in the projects section of the homepage
-                value: '@=constant("Capco\\AppBundle\\Enum\\HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT")'
+                value: !php/const Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode::MOST_RECENT
             CUSTOM:
                 description: allow the admin to choose which projects to display in the projects section of the homepage
-                value: '@=constant("Capco\\AppBundle\\Enum\\HomePageProjectsSectionConfigurationDisplayMode::CUSTOM")'
+                value: !php/const Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode::CUSTOM

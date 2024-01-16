@@ -9,6 +9,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
@@ -20,6 +21,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class RemoveProposalSmsVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
 
     private EntityManagerInterface $em;
@@ -56,6 +59,7 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $proposalId = $input->offsetGet('proposalId');
         $stepId = $input->offsetGet('stepId');
         $token = $input->offsetGet('token');

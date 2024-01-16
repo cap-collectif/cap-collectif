@@ -5,14 +5,14 @@ ReplyStatus:
         description: 'Available status for a reply'
         values:
             PUBLISHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::PUBLISHED")'
+                value: !php/const Capco\AppBundle\Enum\ReplyStatus::PUBLISHED
                 description: 'The reply is published.'
             NOT_PUBLISHED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::NOT_PUBLISHED")'
+                value: !php/const Capco\AppBundle\Enum\ReplyStatus::NOT_PUBLISHED
                 description: 'The author confirmed his account too late or the step is already closed'
             DRAFT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::DRAFT")'
+                value: !php/const Capco\AppBundle\Enum\ReplyStatus::DRAFT
                 description: 'The reply is in draft.'
             PENDING:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ReplyStatus::PENDING")'
+                value: !php/const Capco\AppBundle\Enum\ReplyStatus::PENDING
                 description: 'The author has not confirmed his account yet.'

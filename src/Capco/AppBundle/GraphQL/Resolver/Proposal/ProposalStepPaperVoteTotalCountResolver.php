@@ -8,9 +8,9 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalStepPaperVoteTotalCountResolver implements ResolverInterface
+class ProposalStepPaperVoteTotalCountResolver implements QueryInterface
 {
     private ProposalStepPaperVoteCounterRepository $repository;
     private GlobalIdResolver $globalIdResolver;

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\GraphQL\Mutation\ReportMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class ReportMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
@@ -40,6 +43,8 @@ class ReportMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'debateArgumentId';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('reportableId')->willReturn($id);
         $input->offsetGet('body')->willReturn('nul');
         $input->offsetGet('type')->willReturn(2);
@@ -66,6 +71,7 @@ class ReportMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'wrongId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('reportableId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn(null);
 
@@ -78,6 +84,7 @@ class ReportMutationSpec extends ObjectBehavior
         User $viewer
     ) {
         $id = 'wrongId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('reportableId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($viewer);
 
@@ -92,6 +99,7 @@ class ReportMutationSpec extends ObjectBehavior
         Reporting $report
     ) {
         $id = 'debateArgumentId';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('reportableId')->willReturn($id);
         $globalIdResolver->resolve($id, $viewer)->willReturn($debateArgument);
         $debateArgument->getReports()->willReturn([$report]);

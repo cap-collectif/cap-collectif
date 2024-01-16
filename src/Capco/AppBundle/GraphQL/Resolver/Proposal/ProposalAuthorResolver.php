@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use GraphQL\Executor\Promise\Promise;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalAuthorResolver implements ResolverInterface
+class ProposalAuthorResolver implements QueryInterface
 {
     protected $proposalAuthorDataLoader;
 

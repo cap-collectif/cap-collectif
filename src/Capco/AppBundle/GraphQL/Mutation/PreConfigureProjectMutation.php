@@ -11,6 +11,7 @@ use Capco\AppBundle\Form\Persister\PreConfigureProjectProposalFormPersister;
 use Capco\AppBundle\Form\Persister\PreConfigureProjectQuestionnairePersister;
 use Capco\AppBundle\GraphQL\Mutation\ProposalForm\DeleteProposalFormMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -24,6 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class PreConfigureProjectMutation implements MutationInterface
 {
+    use MutationTrait;
     private PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister;
     private PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister;
     private PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister;
@@ -68,6 +70,7 @@ class PreConfigureProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $questionnairesInput = $input->offsetGet('questionnaires') ?? [];
         $proposalFormsInput = $input->offsetGet('proposalForms') ?? [];
         $projectInput = $input->offsetGet('project');

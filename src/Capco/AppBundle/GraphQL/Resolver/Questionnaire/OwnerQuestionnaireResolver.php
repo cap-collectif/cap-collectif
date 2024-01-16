@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OwnerQuestionnaireResolver implements ResolverInterface
+class OwnerQuestionnaireResolver implements QueryInterface
 {
     private QuestionnaireRepository $repository;
 

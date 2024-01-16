@@ -10,19 +10,23 @@ use Capco\AppBundle\GraphQL\Mutation\DeleteQuestionnaireMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\AnalysisConfigurationRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteQuestionnaireMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         AnalysisConfigurationRepository $analysisConfigurationRepository
     ) {
         $this->beConstructedWith(
@@ -46,7 +50,9 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         Questionnaire $questionnaire
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('id')->willReturn($id);
+
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
 
         $em->remove(Argument::type(Questionnaire::class))->shouldBeCalled();
@@ -66,7 +72,9 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         ProposalForm $proposalForm
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('id')->willReturn($id);
+
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
 
         $questionnaire->getProposalForm()->willReturn($proposalForm);
@@ -91,7 +99,9 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         AnalysisConfiguration $analysisConfiguration
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('id')->willReturn($id);
+
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
 
         $analysisConfigurationRepository
@@ -144,7 +154,9 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         QuestionnaireStep $questionnaireStep
     ) {
         $id = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('id')->willReturn($id);
+
         $globalIdResolver->resolve($id, $viewer)->willReturn($questionnaire);
 
         $questionnaire->getProposalForm()->willReturn($proposalForm);

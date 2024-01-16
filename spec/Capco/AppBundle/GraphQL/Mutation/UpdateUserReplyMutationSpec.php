@@ -12,6 +12,7 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateUserReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,6 +31,8 @@ BypassFinals::enable();
 
 class UpdateUserReplyMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -70,6 +73,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 
@@ -141,6 +146,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHkscmVwbHkxMA==';
         $values['draft'] = false;
         $values['responses'] = [];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn('UmVwbHkscmVwbHkxMA==');
 
@@ -166,6 +173,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 
@@ -203,6 +212,8 @@ class UpdateUserReplyMutationSpec extends ObjectBehavior
         $values['replyId'] = 'UmVwbHk6cmVwbHk1';
         $values['draft'] = false;
         $values['responses'] = [];
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->getArrayCopy()->willReturn($values);
         $arguments->offsetGet('replyId')->willReturn('UmVwbHk6cmVwbHk1');
 

@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -25,6 +26,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ConfigureAnalysisMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private $analysisConfigurationRepository;
@@ -59,6 +61,7 @@ class ConfigureAnalysisMutation implements MutationInterface
 
     public function __invoke(Argument $args, $viewer): array
     {
+        $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
         list(

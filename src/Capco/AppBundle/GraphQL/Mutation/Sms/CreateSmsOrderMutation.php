@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\SmsOrder;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -12,6 +13,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class CreateSmsOrderMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private SmsOrderRepository $smsOrderRepository;
     private Publisher $publisher;
@@ -28,6 +30,7 @@ class CreateSmsOrderMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $smsOrdersCount = $this->smsOrderRepository->countAll();
 
         $amount = $input->offsetGet('amount');

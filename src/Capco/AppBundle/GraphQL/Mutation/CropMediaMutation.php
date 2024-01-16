@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Capco\MediaBundle\Repository\MediaRepository;
 use InvalidArgumentException;
@@ -14,6 +15,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class CropMediaMutation implements MutationInterface
 {
+    use MutationTrait;
     private MediaRepository $mediaRepository;
     private MediaProvider $mediaProvider;
     private CacheManager $cacheManager;
@@ -36,6 +38,7 @@ class CropMediaMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $filters = $args->offsetGet('filters');
         $media = $this->mediaRepository->find($args->offsetGet('mediaId'));
         if (!$media) {

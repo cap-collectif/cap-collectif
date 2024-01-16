@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\AppBundle\Security\QuestionnaireVoter;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class QuestionMajorityCountResolver implements ResolverInterface
+class QuestionMajorityCountResolver implements QueryInterface
 {
     use ResolverTrait;
 

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Error\BaseProposalError;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -14,6 +15,8 @@ use Psr\Log\LoggerInterface;
 
 class UpdateProposalSocialNetworksMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS = 'PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS';
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
@@ -31,6 +34,8 @@ class UpdateProposalSocialNetworksMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $proposal = $this->getProposal($input, $viewer);
             $this->updateProposalSocialNetworks($input, $proposal);

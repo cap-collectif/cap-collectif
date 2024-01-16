@@ -14,6 +14,7 @@ services:
             $backChannelSecret: '%openid_backchannel_secret%'
             $redisSessionHandler: '@Capco\UserBundle\Security\SessionWithJsonHandler'
             $translator: '@translator.default'
+            $publisher: '@swarrot.publisher'
 
     Capco\AppBundle\Import\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
@@ -279,9 +280,7 @@ services:
             - '%agent_tcp%'
             - '%agent_unix%'
 
-    Capco\AppBundle\Manager\AnalysisConfigurationManager:
-        bind:
-            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+    Capco\AppBundle\Manager\AnalysisConfigurationManager: ~
 
     Egulias\EmailValidator\EmailValidator:
         autowire: true
@@ -290,9 +289,11 @@ services:
     Overblog\PromiseAdapter\PromiseAdapterInterface:
         alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
 
-    Capco\AppBundle\Command\RemindUserAccountConfirmationCommand:
-        bind:
-            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+    Capco\AppBundle\Command\RemindUserAccountConfirmationCommand: ~
+
+    Capco\AppBundle\GraphQL\Mutation\ResetPasswordMutation:
+        arguments:
+            $firewallName: '%fos_user.firewall_name%'
 
     Symfony\Component\Cache\Adapter\ApcuAdapter:
         public: true
@@ -336,10 +337,7 @@ services:
         arguments:
             $environment: '%kernel.environment%'
 
-    Capco\UserBundle\Handler\UserInvitationHandler:
-        autowire: true
-        bind:
-            Swarrot\SwarrotBundle\Broker\Publisher: '@swarrot.publisher'
+    Capco\UserBundle\Handler\UserInvitationHandler: ~
 
     Capco\UserBundle\Handler\CasHandler:
         autowire: true

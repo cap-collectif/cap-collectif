@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\ConsultationType;
 use Capco\AppBundle\Form\OpinionTypeType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -23,6 +24,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateOrUpdateConsultationMutation implements MutationInterface
 {
+    use MutationTrait;
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
@@ -48,6 +50,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $consultationsInput = $input->offsetGet('consultations');
         $stepId = $input->offsetGet('stepId');
         $step = $this->globalIdResolver->resolve($stepId, $viewer);

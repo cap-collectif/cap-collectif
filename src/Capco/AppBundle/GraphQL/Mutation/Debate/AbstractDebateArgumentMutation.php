@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\SendInBlue\SendInBlueManager;
 use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
@@ -26,6 +27,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AbstractDebateArgumentMutation
 {
+    use MutationTrait;
     public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
@@ -77,6 +79,7 @@ class AbstractDebateArgumentMutation
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate
     {
+        $this->formatInput($input);
         $debate = $this->globalIdResolver->resolve($input->offsetGet('debate'), $viewer);
         if (!($debate instanceof Debate)) {
             throw new UserError(self::UNKNOWN_DEBATE);

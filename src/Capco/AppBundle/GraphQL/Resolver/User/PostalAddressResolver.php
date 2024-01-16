@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\DTO\GoogleMapsAddress;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class PostalAddressResolver implements ResolverInterface
+class PostalAddressResolver implements QueryInterface
 {
     /**
      * $adressFromApi is a A JSON string litteral that is currently returned by Google Maps Address API and looks like this

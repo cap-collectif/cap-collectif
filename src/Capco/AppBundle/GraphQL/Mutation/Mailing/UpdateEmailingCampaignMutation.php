@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UpdateEmailingCampaignErrorCode;
 use Capco\AppBundle\Form\EmailingCampaignType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\EmailingCampaignVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,6 +18,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
+    use MutationTrait;
+
     //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
     public const SEND_AT_SECURITY = 5 * 60;
 
@@ -38,6 +41,7 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $error = null;
 
         try {

@@ -7,7 +7,7 @@ DateOfBirthRequirement:
         fields:
             viewerDateOfBirth:
                 type: 'DateTime'
-                access: "@hasRole('ROLE_USER')"
+                access: "@=hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
                 description: 'The date of birth of the viewer.'
             participantDateOfBirth:

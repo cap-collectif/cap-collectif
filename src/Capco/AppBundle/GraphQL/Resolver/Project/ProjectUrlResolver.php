@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
 use Capco\AppBundle\Resolver\LocaleResolver;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ProjectUrlResolver implements ResolverInterface
+class ProjectUrlResolver implements QueryInterface
 {
     protected RouterInterface $router;
     protected RequestStack $requestStack;

@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
@@ -35,6 +36,8 @@ BypassFinals::enable();
 
 class RegisterMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         Manager $toggleManager,
         UserInviteRepository $userInviteRepository,
@@ -84,6 +87,7 @@ class RegisterMutationSpec extends ObjectBehavior
             'email' => 'toto@test.com',
             'locale' => null,
         ]);
+        $this->getMockedGraphQLArgumentFormatted($args);
 
         $requestGuesser
             ->getClientIp()
@@ -124,6 +128,8 @@ class RegisterMutationSpec extends ObjectBehavior
             'email' => 'toto@test.com',
             'locale' => null,
         ]);
+
+        $this->getMockedGraphQLArgumentFormatted($args);
 
         $requestGuesser
             ->getClientIp()

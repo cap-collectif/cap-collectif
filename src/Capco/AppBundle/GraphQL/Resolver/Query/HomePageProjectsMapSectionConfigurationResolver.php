@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Repository\SectionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class HomePageProjectsMapSectionConfigurationResolver implements ResolverInterface
+class HomePageProjectsMapSectionConfigurationResolver implements QueryInterface
 {
     private SectionRepository $sectionRepository;
 

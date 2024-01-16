@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class TimeRangeResolver implements ResolverInterface
+class TimeRangeResolver implements QueryInterface
 {
     public function __invoke(TimeRangeable $entity): array
     {

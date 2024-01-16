@@ -5,8 +5,8 @@ SendEmailingCampaignErrorCode:
         description: 'Available errors when sending or testing a campaign'
         values:
             ID_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\Enum\\SendEmailingCampaignErrorCode::ID_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\Enum\SendEmailingCampaignErrorCode::ID_NOT_FOUND
                 description: 'No campaign match your id'
             CANNOT_BE_SENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\SendEmailingCampaignErrorCode::CANNOT_BE_SENT")'
+                value: !php/const Capco\AppBundle\Enum\SendEmailingCampaignErrorCode::CANNOT_BE_SENT
                 description: 'The campaign cannot be sent : maybe it is not a draft, maybe it is not complete'

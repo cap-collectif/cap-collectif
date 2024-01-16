@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Twig\SiteParameterRuntime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateRegistrationPageMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $siteParameterRepository;
     private $cache;
@@ -27,6 +29,7 @@ class UpdateRegistrationPageMutation implements MutationInterface
 
     public function __invoke(Argument $args)
     {
+        $this->formatInput($args);
         $customcode = $args->offsetGet('customcode');
         $codeParameter = $this->siteParameterRepository->findOneBy([
             'keyname' => SiteParameterRepository::REGISTRATION_PAGE_CODE_KEYNAME,

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepVotesCountDataLoader;
 use GraphQL\Executor\Promise\Promise;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class StepVotesCountResolver implements ResolverInterface
+class StepVotesCountResolver implements QueryInterface
 {
     private StepVotesCountDataLoader $votesCountDataLoader;
 

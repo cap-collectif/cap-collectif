@@ -7,10 +7,10 @@ use Capco\AppBundle\GraphQL\Resolver\Debate\DebateArgumentsResolver;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class UserDebateArgumentsResolver implements ResolverInterface
+class UserDebateArgumentsResolver implements QueryInterface
 {
     private DebateSearch $debateSearch;
 

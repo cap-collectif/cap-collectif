@@ -5,8 +5,8 @@ ProposalErrorCode:
         description: 'Available errors on proposal news mutation'
         values:
             PROPOSAL_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Error\\BaseProposalError::PROPOSAL_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Error\BaseProposalError::PROPOSAL_NOT_FOUND
                 description: 'No proposal match your id.'
             ACCESS_DENIED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Error\\BaseProposalError::ACCESS_DENIED")'
+                value: !php/const Capco\AppBundle\GraphQL\Error\BaseProposalError::ACCESS_DENIED
                 description: 'Access denied.'

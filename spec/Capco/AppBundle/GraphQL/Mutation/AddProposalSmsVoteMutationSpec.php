@@ -18,6 +18,7 @@ use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use GraphQL\Error\UserError;
@@ -32,6 +33,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalSmsVoteMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         ValidatorInterface $validator,
@@ -86,6 +89,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('token')
@@ -193,6 +198,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
 
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input
             ->offsetGet('token')
             ->shouldBeCalledOnce()
@@ -251,6 +258,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('token')
@@ -311,6 +320,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('token')
@@ -390,6 +401,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('token')
@@ -475,6 +488,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $stepId = 'stepId';
         $proposalId = 'proposalId';
         $consentSmsCommunication = true;
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('token')
@@ -574,6 +589,8 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         $token = 'SAJOJOFHOHX=';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('proposalId')

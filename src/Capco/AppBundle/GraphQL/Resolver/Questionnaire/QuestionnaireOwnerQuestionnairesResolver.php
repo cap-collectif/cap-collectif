@@ -6,12 +6,12 @@ use Capco\AppBundle\Enum\QuestionnaireOrderField;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class QuestionnaireOwnerQuestionnairesResolver implements ResolverInterface
+class QuestionnaireOwnerQuestionnairesResolver implements QueryInterface
 {
     private LoggerInterface $logger;
     private QuestionnaireRepository $questionnaireRepository;

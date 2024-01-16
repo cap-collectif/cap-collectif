@@ -5,15 +5,15 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ViewerCanSeeProposalAnalysisResolver
 {
     use ResolverTrait;
 
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(AuthorizationChecker $authorizationChecker)
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->authorizationChecker = $authorizationChecker;
     }

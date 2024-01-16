@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Form\RegistrationFormQuestionsUpdateType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
@@ -20,6 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 {
+    use MutationTrait;
     use QuestionPersisterTrait;
 
     private EntityManagerInterface $em;
@@ -56,6 +58,7 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $registrationForm = $this->registrationFormRepository->findCurrent();

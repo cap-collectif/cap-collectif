@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\SSO;
 
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class FranceConnectAllowedDataResolver implements ResolverInterface
+class FranceConnectAllowedDataResolver implements QueryInterface
 {
     private FranceConnectSSOConfigurationRepository $configurationRepository;
 

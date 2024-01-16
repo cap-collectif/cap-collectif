@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\UserArchive;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,6 +14,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class RequestUserArchiveMutation implements MutationInterface
 {
+    use MutationTrait;
     protected $em;
     protected $publisher;
 
@@ -24,6 +26,7 @@ class RequestUserArchiveMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $archive = new UserArchive();
         $viewer->addArchive($archive);
         $this->em->flush();

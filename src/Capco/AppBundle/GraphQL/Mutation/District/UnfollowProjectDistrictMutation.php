@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\District;
 
 use Capco\AppBundle\Entity\District\ProjectDistrict;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProjectDistrictRepository;
@@ -14,7 +15,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UnfollowProjectDistrictMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
+
     public const DISTRICT_NOT_FOUND = 'DISTRICT_NOT_FOUND';
     public const FOLLOWER_NOT_FOUND = 'FOLLOWER_NOT_FOUND';
     private EntityManagerInterface $entityManager;
@@ -33,6 +36,7 @@ class UnfollowProjectDistrictMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $projectDistrictId = $input->offsetGet('projectDistrictId');
         $projectDistrict = $this->projectDistrictRepository->find($projectDistrictId);
 

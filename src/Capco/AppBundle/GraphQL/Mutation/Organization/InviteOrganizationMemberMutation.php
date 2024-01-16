@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Entity\UserInviteEmailMessage;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Mailer\Message\AbstractMessage;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
@@ -24,6 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class InviteOrganizationMemberMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     public const USER_ALREADY_MEMBER = 'USER_ALREADY_MEMBER';
     public const USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION = 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION';
@@ -63,6 +66,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         list($organizationId, $email, $role) = $this->getData($input);
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
         if (!$organization instanceof Organization) {

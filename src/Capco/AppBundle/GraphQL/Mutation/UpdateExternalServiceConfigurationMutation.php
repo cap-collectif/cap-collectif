@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ExternalServiceConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,6 +12,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateExternalServiceConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_VALUE = 'INVALID_VALUE';
 
     private ExternalServiceConfigurationRepository $repository;
@@ -26,6 +29,7 @@ class UpdateExternalServiceConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $externalServiceConfiguration = $this->getExternalServiceConfiguration($input);
 
         try {

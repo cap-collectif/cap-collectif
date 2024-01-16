@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
 use Capco\AppBundle\Security\ProposalVoter;
 use Capco\UserBundle\Entity\User;
@@ -19,6 +20,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdatePaperVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
     public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
 
@@ -44,6 +47,8 @@ class UpdatePaperVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
+
         try {
             $proposal = $this->getProposal($input, $viewer);
             $step = $this->getStep($input, $viewer);

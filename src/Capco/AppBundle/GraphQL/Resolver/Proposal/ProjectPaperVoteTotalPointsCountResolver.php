@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProjectPaperVoteTotalPointsCountResolver implements ResolverInterface
+class ProjectPaperVoteTotalPointsCountResolver implements QueryInterface
 {
     private ProposalStepPaperVoteCounterRepository $repository;
 

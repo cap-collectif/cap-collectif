@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\UserRequirement;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\AppBundle\Repository\UserRequirementRepository;
 use Capco\UserBundle\Entity\User;
@@ -15,6 +16,7 @@ use Psr\Log\LoggerInterface;
 
 class UpdateRequirementMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private RequirementRepository $requirementRepository;
     private UserRequirementRepository $userRequirementRepository;
@@ -34,6 +36,7 @@ class UpdateRequirementMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $value = $input->offsetGet('value');
 
         // Requirement

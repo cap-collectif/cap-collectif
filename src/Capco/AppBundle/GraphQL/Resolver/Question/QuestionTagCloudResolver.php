@@ -6,9 +6,9 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QuestionTagCloudResolver implements ResolverInterface
+class QuestionTagCloudResolver implements QueryInterface
 {
     public const CACHE_KEY = 'questionTagCloudData';
     private ResponseSearch $responseSearch;

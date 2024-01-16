@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Deletable;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class DeletableTypeResolver implements ResolverInterface
+class DeletableTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

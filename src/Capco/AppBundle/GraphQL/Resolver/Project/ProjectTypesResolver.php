@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProjectTypeRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ProjectTypesResolver implements ResolverInterface
+class ProjectTypesResolver implements QueryInterface
 {
     private $projectTypeRepository;
     private $projectRepository;

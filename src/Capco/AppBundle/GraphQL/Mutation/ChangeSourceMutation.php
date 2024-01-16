@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Form\ApiSourceType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -18,6 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ChangeSourceMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private SourceRepository $sourceRepo;
     private FormFactoryInterface $formFactory;
@@ -37,6 +39,7 @@ class ChangeSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $sourceId = GlobalId::fromGlobalId($input->offsetGet('sourceId'))['id'];
         /** @var Source $source */
         $source = $this->sourceRepo->find($sourceId);

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\EventReview;
 use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Security\EventVoter;
@@ -22,6 +23,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteEventMutation extends BaseDeleteMutation
 {
+    use MutationTrait;
+
     private GlobalIdResolver $globalIdResolver;
     private Indexer $indexer;
     private Publisher $publisher;
@@ -50,6 +53,7 @@ class DeleteEventMutation extends BaseDeleteMutation
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('eventId');
         /** @var Event $event */
         $event = $this->globalIdResolver->resolve($id, $viewer);

@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Response;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ResponseValueResolver implements ResolverInterface
+class ResponseValueResolver implements QueryInterface
 {
     public function __invoke(ValueResponse $response): ?string
     {

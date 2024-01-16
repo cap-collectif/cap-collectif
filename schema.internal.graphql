@@ -2826,7 +2826,7 @@ type Consultation implements Node {
   ): Boolean!
 
   """The number of votes in the related step of this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2022-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "reason: \"In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.\", description: \"Field `votesCount` will be removed, use \"votes.totalCount\".")
 
   """The votes in the related step of this consultation."""
   votes(
@@ -3038,7 +3038,7 @@ type ConsultationStep implements Node & Step & RequirementStep {
   ): UserConnection!
 
   """The number of votes in this consultation."""
-  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2022-01-01 UTC.")
+  votesCount: Int @deprecated(reason: "Field \"votesCount\" will be removed Use \"votes.totalCount\" instead.")
   votes: VoteConnection!
 
   """
@@ -6062,9 +6062,9 @@ interface EmailingCampaignOwner {
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [EmailingCampaignAffiliation!]
 
@@ -6133,16 +6133,16 @@ type EvaluateProposalAssessmentPayload {
 """A Evaluation form (question)"""
 type EvaluationForm {
   """The ID of an object"""
-  id: ID! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  id: ID! @deprecated(reason: "\"This type belongs to our legacy evaluation tool.\", \"EvaluationForm\" will be removed, Use TODO\"})")
 
   """The title of evaluation form (question)"""
-  title: String! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  title: String! @deprecated(reason: "\"This type belongs to our legacy evaluation tool.\", \"EvaluationForm\" will be removed, Use TODO\"})")
 
   """The description of evaluation form"""
-  description: String @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  description: String @deprecated(reason: "\"This type belongs to our legacy evaluation tool.\", \"EvaluationForm\" will be removed, Use TODO\"})")
 
   """List of questions in the evaluation form"""
-  questions: [Question!]! @deprecated(reason: "Type `EvaluationForm` will be removed. TODO This type belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  questions: [Question!]! @deprecated(reason: "\"This type belongs to our legacy evaluation tool.\", \"EvaluationForm\" will be remov, Use  \"TODO\"})")
 }
 
 """An event."""
@@ -6169,25 +6169,25 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   author: Author
 
   """The start date of the event."""
-  startAt: DateTime! @deprecated(reason: "Field `startAt` will be removed. Use `timeRange.startAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
+  startAt: DateTime! @deprecated(reason: "Field \"startAt\" will be removed Use \"timeRange.startAt\" instead.")
 
   """The end date of the event."""
-  endAt: DateTime @deprecated(reason: "Field `endAt` will be removed. Use `timeRange.endAt` instead. This field has been moved. Removal on 2020-03-01 UTC.")
+  endAt: DateTime @deprecated(reason: "Field \"endAt\" will be removed Use \"timeRange.endAt\" instead.")
 
   """Whether or not this event is published."""
   enabled: Boolean!
 
   """Identifies the latitude of the event."""
-  lat: Float @deprecated(reason: "Field `lat` will be removed. Use `googleMapsAddress.lat`  instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  lat: Float @deprecated(reason: "Field \"lat\" will be removed, Use \"googleMapsAddress.lat\" instead.")
 
   """Identifies the longitude of the event."""
-  lng: Float @deprecated(reason: "Field `lng` will be removed. Use `googleMapsAddress.lng` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  lng: Float @deprecated(reason: "reason: \"This field use our legacy address format Field \"lng\" will be removed, Use \"googleMapsAddress.lng\" instead.")
 
   """Identifies the zip code of the event."""
-  zipCode: String @deprecated(reason: "Field `zipCode` will be removed. Use `googleMapsAddress` instead. This field use our legacy address format. Removal on 2020-03-01 UTC.")
+  zipCode: String @deprecated(reason: "reason: \"This field use our legacy address format Field \"zipCode\" will be removed, Use \"googleMapsAddress.zipCode\" instead.")
 
   """Identifies the address of the event."""
-  fullAddress: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
+  fullAddress: String @deprecated(reason: "reason:\"will be deleted\"")
 
   """Identifies the address of the event in google Maps format."""
   googleMapsAddress: GoogleMapsAddress
@@ -6251,12 +6251,12 @@ type Event implements Node & UniformResourceLocatable & Commentable {
   projects: [Project!]!
   commentable: Boolean!
   media: Media
-  address: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
+  address: String @deprecated(reason: "reason:\"will be deleted\"")
   addressJson: String
   guestListEnabled: Boolean!
   customCode: String
-  city: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
-  country: String @deprecated(reason: "will be deleted Removal on 2020-03-01 UTC.")
+  city: String @deprecated(reason: "reason:\"will be deleted\"")
+  country: String @deprecated(reason: "reason:\"will be deleted\"")
 
   """User submitted events must be reviewed by an admin"""
   review: EventReview
@@ -6410,8 +6410,8 @@ interface EventOwner {
 
     """
     Array of viewer's affiliation options for events returned from the connection.
-    For example, OWNER will include only events that the current viewer owns.
-    
+                                For example, OWNER will include only events that the current viewer owns.
+                                
     """
     affiliations: [EventAffiliation!]
 
@@ -7632,9 +7632,9 @@ interface MailingListOwner {
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [MailingListAffiliation!]
 
@@ -9139,8 +9139,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for posts returned from the connection.
-    For example, OWNER will include only posts that the current viewer owns.
-    
+                                For example, OWNER will include only posts that the current viewer owns.
+                                
     """
     affiliations: [PostAffiliation!]
 
@@ -9166,8 +9166,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for events returned from the connection.
-    For example, OWNER will include only events that the current viewer owns.
-    
+                                For example, OWNER will include only events that the current viewer owns.
+                                
     """
     affiliations: [EventAffiliation!]
 
@@ -9202,8 +9202,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for projects returned from the connection.
-    For example, OWNER will include only projects that the current viewer owns.
-    
+                                For example, OWNER will include only projects that the current viewer owns.
+                                
     """
     affiliations: [ProjectAffiliation!]
 
@@ -9234,8 +9234,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for proposalForms returned from the connection.
-    For example, OWNER will include only proposalForms that the current viewer owns.
-    
+                                For example, OWNER will include only proposalForms that the current viewer owns.
+                                
     """
     affiliations: [ProposalFormAffiliation!]
 
@@ -9258,8 +9258,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for questionnaires returned from the connection.
-    For example, OWNER will include only questionnaires that the current viewer owns.
-    
+                                For example, OWNER will include only questionnaires that the current viewer owns.
+                                
     """
     affiliations: [QuestionnaireAffiliation!]
 
@@ -9288,9 +9288,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [MailingListAffiliation!]
 
@@ -9316,9 +9316,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [EmailingCampaignAffiliation!]
 
@@ -10119,8 +10119,8 @@ interface PostOwner {
 
     """
     Array of viewer's affiliation options for posts returned from the connection.
-    For example, OWNER will include only posts that the current viewer owns.
-    
+                                For example, OWNER will include only posts that the current viewer owns.
+                                
     """
     affiliations: [PostAffiliation!]
 
@@ -10376,7 +10376,7 @@ type PresentationStep implements Node & Step {
 """A vote that can be anonymous."""
 interface PrivatableVote {
   """Whether the author of the vote is anonymous or not."""
-  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
+  private: Boolean @deprecated(reason: "reason: \"This field has been renamed, Field \"private\" will be removed, Use \"anonymous\" instead.")
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
@@ -10459,7 +10459,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
   ): ContributorConnection!
 
   """Count of contributions associated with the project."""
-  contributionsCount: Int! @deprecated(reason: "Field `contributionsCount` will be removed. Use `contributions.totalCount` instead when it will be published. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2020-04-01 UTC.")
+  contributionsCount: Int! @deprecated(reason: "reason: \"In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection, Field \"contributionsCount\" will be removed, Use \"contributions.totalCount\" instead when it will be published.")
 
   """Contributions associated with the project."""
   contributions(
@@ -11008,8 +11008,8 @@ interface ProjectOwner {
 
     """
     Array of viewer's affiliation options for projects returned from the connection.
-    For example, OWNER will include only projects that the current viewer owns.
-    
+                                For example, OWNER will include only projects that the current viewer owns.
+                                
     """
     affiliations: [ProjectAffiliation!]
 
@@ -11355,9 +11355,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """The slug of a proposal."""
   slug: String!
   progressSteps: [ProgressStep!]!
-  evaluers: [Group!]! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  evaluers: [Group!]! @deprecated(reason: "reason: \"This field belongs to our legacy evaluation tool Field \"evaluers\" will be removed \"TODO\"")
   currentVotableStep: ProposalStep
-  viewerIsAnEvaluer: Boolean! @deprecated(reason: "Field `evaluers` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  viewerIsAnEvaluer: Boolean! @deprecated(reason: "reason: \"This field belongs to our legacy evaluation tool Field \"evaluers\" will be removed \"TODO\"")
   news(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -11397,7 +11397,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   form: ProposalForm!
 
   """Identifies the answers to an evaluation form."""
-  evaluation: ProposalEvaluation @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  evaluation: ProposalEvaluation @deprecated(reason: "reason: \"This field belongs to our legacy evaluation tool Field \"viewerCanSeeEvaluation\" will be removed \"TODO\"")
 
   """Count of paper votes of the proposal."""
   paperVotesTotalCount(
@@ -11426,7 +11426,7 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
   """If the proposal is listed in a fusion, contains the list of fusions."""
   mergedIn: [Proposal!]!
   postsCount: Int!
-  viewerCanSeeEvaluation: Boolean! @deprecated(reason: "Field `viewerCanSeeEvaluation` will be removed. TODO This field belongs to our legacy evaluation tool. Removal on 2020-01-01 UTC.")
+  viewerCanSeeEvaluation: Boolean! @deprecated(reason: "reason: \"This field belongs to our legacy evaluation tool Field \"viewerCanSeeEvaluation` will be removed \"TODO\"})")
   viewerHasVote(
     """The concerned step."""
     step: ID!
@@ -11743,7 +11743,7 @@ type ProposalDecision {
   estimatedCost: Int
 
   """The related official response."""
-  post: OfficialResponse @deprecated(reason: "Field `post` will be removed. Use `officialResponse` instead. Replaced by OfficialResponse Removal on 2020-11-13 UTC.")
+  post: OfficialResponse @deprecated(reason: "reason: \"Replaced by OfficialResponse\", Field \"post\" will be removed, Use \"officialResponse\" instead.")
 
   """The related official response."""
   officialResponse: OfficialResponse
@@ -12122,8 +12122,8 @@ interface ProposalFormOwner {
 
     """
     Array of viewer's affiliation options for proposalForms returned from the connection.
-    For example, OWNER will include only proposalForms that the current viewer owns.
-    
+                                For example, OWNER will include only proposalForms that the current viewer owns.
+                                
     """
     affiliations: [ProposalFormAffiliation!]
 
@@ -12816,7 +12816,7 @@ type ProposalUserVote implements ProposalVote & Vote & Publishable & PrivatableV
   notPublishedReason: NotPublishedReason
 
   """Whether the author of the vote is anonymous or not."""
-  private: Boolean @deprecated(reason: "Field `private` will be removed. Use `anonymous` instead. This field has been renamed. Removal on 2020-01-01 UTC.")
+  private: Boolean @deprecated(reason: "reason: \"This field has been renamed, Field \"private\" will be removed, Use \"anonymous\" instead.")
 
   """Whether the author of the vote is anonymous or not."""
   anonymous: Boolean!
@@ -13490,8 +13490,8 @@ type Query {
 
     """
     Array of affiliations of viewer to organizations.
-    For example, ADMIN will return only organizations the viewer is member of
-    
+                                For example, ADMIN will return only organizations the viewer is member of
+                                
     """
     affiliations: [OrganizationAffiliation!]
   ): OrganizationConnection!
@@ -13940,8 +13940,8 @@ interface QuestionnaireOwner {
 
     """
     Array of viewer's affiliation options for questionnaires returned from the connection.
-    For example, OWNER will include only questionnaires that the current viewer owns.
-    
+                                For example, OWNER will include only questionnaires that the current viewer owns.
+                                
     """
     affiliations: [QuestionnaireAffiliation!]
 
@@ -19239,8 +19239,8 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for projects returned from the connection.
-    For example, OWNER will include only projects that the current viewer owns.
-    
+                                For example, OWNER will include only projects that the current viewer owns.
+                                
     """
     affiliations: [ProjectAffiliation!]
 
@@ -19268,8 +19268,8 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for posts returned from the connection.
-    For example, OWNER will include only posts that the current viewer owns.
-    
+                                For example, OWNER will include only posts that the current viewer owns.
+                                
     """
     affiliations: [PostAffiliation!]
 
@@ -19292,8 +19292,8 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for questionnaires returned from the connection.
-    For example, OWNER will include only questionnaires that the current viewer owns.
-    
+                                For example, OWNER will include only questionnaires that the current viewer owns.
+                                
     """
     affiliations: [QuestionnaireAffiliation!]
 
@@ -19322,8 +19322,8 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for events returned from the connection.
-    For example, OWNER will include only events that the current viewer owns.
-    
+                                For example, OWNER will include only events that the current viewer owns.
+                                
     """
     affiliations: [EventAffiliation!]
 
@@ -19355,8 +19355,8 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for proposalForms returned from the connection.
-    For example, OWNER will include only proposalForms that the current viewer owns.
-    
+                                For example, OWNER will include only proposalForms that the current viewer owns.
+                                
     """
     affiliations: [ProposalFormAffiliation!]
 
@@ -19379,9 +19379,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [MailingListAffiliation!]
 
@@ -19407,9 +19407,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """
     Array of viewer's affiliation options for mailing campaigns returned from
-    the connection. For example, OWNER will include only mailing lists that the
-    current viewer owns.
-    
+                                the connection. For example, OWNER will include only mailing lists that the
+                                current viewer owns.
+                                
     """
     affiliations: [EmailingCampaignAffiliation!]
 

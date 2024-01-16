@@ -7,7 +7,7 @@ PostalAddressRequirement:
         fields:
             viewerAddress:
                 type: 'PreviewGoogleMapsAddress'
-                access: "@hasRole('ROLE_USER')"
+                access: "@=hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
                 description: 'The postal address of the viewer.'
             participantAddress:

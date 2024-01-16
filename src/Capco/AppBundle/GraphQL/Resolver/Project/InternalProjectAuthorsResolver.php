@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class InternalProjectAuthorsResolver implements ResolverInterface
+class InternalProjectAuthorsResolver implements QueryInterface
 {
     protected OrganizationRepository $organizationRepository;
     private UserRepository $userRepository;

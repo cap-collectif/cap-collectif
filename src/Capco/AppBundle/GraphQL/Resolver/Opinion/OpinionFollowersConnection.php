@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class OpinionFollowersConnection implements ResolverInterface
+class OpinionFollowersConnection implements QueryInterface
 {
     use ProjectOpinionSubscriptionGuard;
 

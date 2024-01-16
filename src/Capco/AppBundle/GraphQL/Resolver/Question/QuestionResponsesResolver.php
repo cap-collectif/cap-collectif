@@ -10,10 +10,10 @@ use Capco\AppBundle\Enum\ResponsesOrderField;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\Search\ResponseSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class QuestionResponsesResolver implements ResolverInterface
+class QuestionResponsesResolver implements QueryInterface
 {
     private LoggerInterface $logger;
     private ResponseSearch $responseSearch;

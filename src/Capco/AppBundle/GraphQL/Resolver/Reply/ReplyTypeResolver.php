@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class ReplyTypeResolver implements ResolverInterface
+class ReplyTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

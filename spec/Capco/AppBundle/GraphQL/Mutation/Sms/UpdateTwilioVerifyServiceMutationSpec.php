@@ -6,12 +6,15 @@ use Capco\AppBundle\Entity\ExternalServiceConfiguration;
 use Capco\AppBundle\GraphQL\Mutation\Sms\UpdateTwilioVerifyServiceMutation;
 use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 
 class UpdateTwilioVerifyServiceMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         TwilioClient $twilioClient,
         EntityManagerInterface $em,
@@ -33,6 +36,7 @@ class UpdateTwilioVerifyServiceMutationSpec extends ObjectBehavior
         ExternalServiceConfiguration $externalServiceConfiguration
     ) {
         $serviceName = 'udpatedServiceName';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('serviceName')->willReturn($serviceName);
 
         $response = ['statusCode' => 200, 'data' => ['friendly_name' => 'udpatedServiceName']];
@@ -65,6 +69,7 @@ class UpdateTwilioVerifyServiceMutationSpec extends ObjectBehavior
         ExternalServiceConfiguration $externalServiceConfiguration
     ) {
         $serviceName = 'udpatedServiceName';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input->offsetGet('serviceName')->willReturn($serviceName);
 
         $response = ['statusCode' => 400, 'data' => []];

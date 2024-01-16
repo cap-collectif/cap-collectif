@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Organization;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class PendingOrganizationInvitationsResolver implements ResolverInterface
+class PendingOrganizationInvitationsResolver implements QueryInterface
 {
     private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
 

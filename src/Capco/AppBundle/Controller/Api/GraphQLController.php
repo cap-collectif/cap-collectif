@@ -6,6 +6,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Toggle\Manager;
 use Overblog\GraphQLBundle\Controller\GraphController as BaseController;
+use Overblog\GraphQLBundle\Request\BatchParser;
 use Overblog\GraphQLBundle\Request\Executor;
 use Overblog\GraphQLBundle\Request\Parser;
 use Overblog\GraphQLBundle\Request\ParserInterface;
@@ -34,22 +35,24 @@ class GraphQLController extends BaseController
     private Manager $manager;
 
     private string $env;
+    private bool $useApolloBatchingMethod;
 
     public function __construct(
-        ParserInterface $batchParser,
+        BatchParser $batchParser,
         Executor $requestExecutor,
         Parser $requestParser,
         LoggerInterface $logger,
         Manager $manager,
         string $env
     ) {
-        parent::__construct($batchParser, $requestExecutor, $requestParser, false, false);
+        parent::__construct($batchParser, $requestExecutor, $requestParser, false, $graphqlBatchingMethod = 'apollo');
         $this->batchParser = $batchParser;
         $this->requestExecutor = $requestExecutor;
         $this->requestParser = $requestParser;
         $this->logger = $logger;
         $this->manager = $manager;
         $this->env = $env;
+        $this->useApolloBatchingMethod = 'apollo' === $graphqlBatchingMethod;
     }
 
     /**

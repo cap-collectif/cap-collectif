@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Requirement;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class RequirementTypeResolver implements ResolverInterface
+class RequirementTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

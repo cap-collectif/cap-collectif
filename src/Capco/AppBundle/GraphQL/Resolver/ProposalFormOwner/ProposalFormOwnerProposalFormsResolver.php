@@ -6,12 +6,12 @@ use Capco\AppBundle\Enum\ProposalFormOrderField;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ProposalFormOwnerProposalFormsResolver implements ResolverInterface
+class ProposalFormOwnerProposalFormsResolver implements QueryInterface
 {
     private ProposalFormRepository $repository;
 

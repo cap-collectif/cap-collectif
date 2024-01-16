@@ -5,8 +5,8 @@ StarResponseError:
         description: 'Available errors for a `starResponse` mutation.'
         values:
             RESPONSE_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\StarResponseMutation::RESPONSE_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\StarResponseMutation::RESPONSE_NOT_FOUND
                 description: 'No response match your id.'
             ALREADY_STARRED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\StarResponseMutation::ALREADY_STARRED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\StarResponseMutation::ALREADY_STARRED
                 description: 'Viewer has already starred the response.'

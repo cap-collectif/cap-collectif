@@ -7,9 +7,9 @@ use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ViewerStepVotesResolver implements ResolverInterface
+class ViewerStepVotesResolver implements QueryInterface
 {
     use ResolverTrait;
 

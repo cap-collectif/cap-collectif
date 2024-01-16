@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Interfaces\Authorable;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ViewerDidAuthorResolver implements ResolverInterface
+class ViewerDidAuthorResolver implements QueryInterface
 {
     use ResolverTrait;
 

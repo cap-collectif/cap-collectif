@@ -8,9 +8,9 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Doctrine\Common\Collections\Criteria;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProjectStepsResolver implements ResolverInterface
+class ProjectStepsResolver implements QueryInterface
 {
     public function __invoke(Project $project, Argument $arguments): iterable
     {

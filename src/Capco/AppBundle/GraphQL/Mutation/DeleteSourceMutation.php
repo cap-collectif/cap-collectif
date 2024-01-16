@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\UserBundle\Entity\User;
@@ -14,6 +15,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteSourceMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $sourceRepo;
     private $redisStorage;
@@ -33,6 +35,7 @@ class DeleteSourceMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $sourceGlobalId = $input->offsetGet('sourceId');
         $sourceId = GlobalId::fromGlobalId($sourceGlobalId)['id'];
         $source = $this->sourceRepo->find($sourceId);

@@ -4,11 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class EmailingCampaignResolver implements ResolverInterface
+class EmailingCampaignResolver implements QueryInterface
 {
     private EmailingCampaignRepository $repository;
 

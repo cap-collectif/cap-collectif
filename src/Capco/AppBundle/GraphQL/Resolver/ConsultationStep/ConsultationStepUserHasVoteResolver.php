@@ -9,10 +9,10 @@ use Capco\AppBundle\Repository\OpinionVoteRepository;
 use Capco\AppBundle\Repository\SourceVoteRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ConsultationStepUserHasVoteResolver implements ResolverInterface
+class ConsultationStepUserHasVoteResolver implements QueryInterface
 {
     private $userRepo;
     private $opinionVoteRepo;

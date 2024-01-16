@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Emailing;
 
 use Capco\AppBundle\Mailer\SenderEmailDomains\SenderEmailDomainsManager;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class SenderEmailDomainResolver implements ResolverInterface
+class SenderEmailDomainResolver implements QueryInterface
 {
     private SenderEmailDomainsManager $manager;
 

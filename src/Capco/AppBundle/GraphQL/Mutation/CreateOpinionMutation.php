@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\OpinionForm;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
@@ -25,6 +26,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class CreateOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const OPINION_TYPE_NOT_ENABLED = 'OPINION_TYPE_NOT_ENABLED';
     public const OPINION_TYPE_NOT_FOUND = 'OPINION_TYPE_NOT_FOUND';
     public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
@@ -67,6 +70,7 @@ class CreateOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $projectId = $input->offsetGet('projectId');
         $opinionTypeId = $input->offsetGet('opinionTypeId');
         $data = $input->getArrayCopy();

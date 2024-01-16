@@ -11,12 +11,12 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepVotesCountResolver;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
-class ProjectVotesResolver implements ResolverInterface
+class ProjectVotesResolver implements QueryInterface
 {
     protected PromiseAdapterInterface $adapter;
     private StepVotesCountResolver $stepVotesCountResolver;

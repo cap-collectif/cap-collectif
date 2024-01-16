@@ -7,10 +7,10 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Search\VoteSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-class SourceVotesResolver implements ResolverInterface
+class SourceVotesResolver implements QueryInterface
 {
     private VoteSearch $voteSearch;
 

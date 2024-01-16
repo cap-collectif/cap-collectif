@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Font\FontManager;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\FontRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -11,6 +12,7 @@ use Psr\Log\LoggerInterface;
 
 class DeleteFontMutation implements MutationInterface
 {
+    use MutationTrait;
     private $repository;
     private $logger;
     private $manager;
@@ -27,6 +29,7 @@ class DeleteFontMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $fontGlobalId = $input->offsetGet('id');
         $fontId = GlobalId::fromGlobalId($fontGlobalId)['id'];
         $font = $this->repository->find($fontId);

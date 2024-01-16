@@ -24,7 +24,7 @@ PreviewProject:
                 type: 'Int!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionCountResolver", [value])'
                 description: 'Count of contributions associated with the project.'
-                deprecationReason: '@=service("Capco\\AppBundle\\GraphQL\\Deprecation").toString({startAt: "2020-04-01", reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `contributionsCount` will be removed.", supersededBy: "Use `contributions.totalCount` instead when it will be published."})'
+                deprecationReason: 'reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection, Field "contributionsCount" will be removed, Use "contributions.totalCount" instead when it will be published.'
             contributions:
                 type: 'ContributionConnection!'
                 description: 'Contributions associated with the project.'

@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Argument;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ArgumentViewerHasVoteResolver implements ResolverInterface
+class ArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 

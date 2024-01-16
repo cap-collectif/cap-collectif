@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserFormType;
 use Doctrine\DBAL\Driver\DriverException;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CreateUserMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $formFactory;
     private $logger;
@@ -31,6 +33,7 @@ class CreateUserMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $user = new User();
         if (isset($arguments['roles']['ROLE_ADMIN'])) {

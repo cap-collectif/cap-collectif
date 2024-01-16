@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Locale;
 
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Repository\LocaleRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DefaultLocaleQueryResolver implements ResolverInterface
+class DefaultLocaleQueryResolver implements QueryInterface
 {
     protected $localeRepository;
 

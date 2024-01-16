@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\OfficialResponse;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalOfficialResponseResolver implements ResolverInterface
+class ProposalOfficialResponseResolver implements QueryInterface
 {
     private OfficialResponseRepository $repository;
 

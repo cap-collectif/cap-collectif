@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\SSO\Oauth2SSOConfiguration;
 use Capco\AppBundle\Form\Oauth2SSOConfigurationFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -13,6 +14,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class CreateOauth2SSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
@@ -29,6 +31,7 @@ class CreateOauth2SSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         $ssoConfiguration = new Oauth2SSOConfiguration();
 

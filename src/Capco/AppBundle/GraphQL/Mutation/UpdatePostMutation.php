@@ -6,6 +6,7 @@ use Capco\AppBundle\Factory\PostAuthorFactory;
 use Capco\AppBundle\Form\PostType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,16 +14,18 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdatePostMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVALID_FORM = 'INVALID_FORM';
 
     private EntityManagerInterface $em;
     private FormFactoryInterface $formFactory;
     private GlobalIdResolver $globalIdResolver;
-    private AuthorizationChecker $authorizationChecker;
+    private AuthorizationCheckerInterface $authorizationChecker;
     private PostAuthorFactory $postAuthorFactory;
     private LoggerInterface $logger;
 
@@ -30,7 +33,7 @@ class UpdatePostMutation implements MutationInterface
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         GlobalIdResolver $globalIdResolver,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         PostAuthorFactory $postAuthorFactory,
         LoggerInterface $logger
     ) {
@@ -44,6 +47,7 @@ class UpdatePostMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('id');
         $post = $this->globalIdResolver->resolve($id, $viewer);
         $data = $input->getArrayCopy();

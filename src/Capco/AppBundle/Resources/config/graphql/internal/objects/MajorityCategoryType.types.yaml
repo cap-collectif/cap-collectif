@@ -4,20 +4,20 @@ MajorityChoiceType:
         description: 'Majority choice type'
         values:
             VERY_WELL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::VERY_WELL")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::VERY_WELL
                 description: 'The review is in approved status.'
             WELL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::WELL")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::WELL
                 description: 'The review is in awaiting status.'
             WELL_ENOUGH:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::WELL_ENOUGH")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::WELL_ENOUGH
                 description: 'The review is in refused status.'
             PASSABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::PASSABLE")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::PASSABLE
                 description: 'The review is in refused status.'
             NOT_PASSABLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::NOT_PASSABLE")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::NOT_PASSABLE
                 description: 'The review is in refused status.'
             REJECTED:
-                value: '@=constant("Capco\\AppBundle\\Enum\\MajorityVoteTypeEnum::REJECTED")'
+                value: !php/const Capco\AppBundle\Enum\MajorityVoteTypeEnum::REJECTED
                 description: 'The review is in refused status.'

@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalSupervisor;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalSupervisorRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -22,6 +23,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AssignSupervisorToProposalsMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private GlobalIdResolver $globalIdResolver;
@@ -49,6 +51,7 @@ class AssignSupervisorToProposalsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $proposalIds = $input->offsetGet('proposalIds');
         $supervisorId = $input->offsetGet('supervisorId');
 

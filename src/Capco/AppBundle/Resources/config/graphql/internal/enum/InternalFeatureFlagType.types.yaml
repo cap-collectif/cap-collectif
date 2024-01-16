@@ -5,172 +5,172 @@ InternalFeatureFlagType:
         description: 'The possible types for a feature flag.'
         values:
             graphql_query_analytics:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::graphql_query_analytics")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::graphql_query_analytics
             questionnaire_result:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::questionnaire_result")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::questionnaire_result
             blog:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::blog")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::blog
             calendar:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::calendar")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::calendar
             captcha:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::captcha")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::captcha
             turnstile_captcha:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::turnstile_captcha")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::turnstile_captcha
                 description: 'Whether to use Turnstile captcha instead of Google Recaptcha'
             consent_external_communication:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consent_external_communication")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::consent_external_communication
             developer_documentation:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::developer_documentation")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::developer_documentation
             public_api:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::public_api")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::public_api
             graphql_introspection:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::graphql_introspection")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::graphql_introspection
             login_facebook:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_facebook")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::login_facebook
             privacy_policy:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::privacy_policy")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::privacy_policy
             members_list:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::members_list")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::members_list
             newsletter:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::newsletter")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::newsletter
             profiles:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::profiles")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::profiles
             projects_form:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::projects_form")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::projects_form
             project_trash:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::project_trash")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::project_trash
             search:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::search")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::search
             share_buttons:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::share_buttons")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::share_buttons
             shield_mode:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::shield_mode")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::shield_mode
             registration:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::registration")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::registration
             restrict_registration_via_email_domain:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::restrict_registration_via_email_domain")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::restrict_registration_via_email_domain
             themes:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::themes")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::themes
             export:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::export")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::export
             districts:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::districts")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::districts
             user_type:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::user_type")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::user_type
             votes_evolution:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_evolution")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::votes_evolution
             server_side_rendering:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::server_side_rendering")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::server_side_rendering
             zipcode_at_register:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::zipcode_at_register")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::zipcode_at_register
             indexation:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::indexation")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::indexation
             consultation_plan:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consultation_plan")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::consultation_plan
             consent_internal_communication:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::consent_internal_communication")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::consent_internal_communication
             oauth2_switch_user:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::oauth2_switch_user")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::oauth2_switch_user
             sso_by_pass_auth:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sso_by_pass_auth")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::sso_by_pass_auth
             allow_users_to_propose_events:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::allow_users_to_propose_events")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::allow_users_to_propose_events
             login_franceconnect:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_franceconnect")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::login_franceconnect
             restrict_connection:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::restrict_connection")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::restrict_connection
             secure_password:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::secure_password")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::secure_password
             read_more:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::read_more")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::read_more
             remind_user_account_confirmation:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::remind_user_account_confirmation")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::remind_user_account_confirmation
             display_pictures_in_depository_proposals_list:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_pictures_in_depository_proposals_list")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::display_pictures_in_depository_proposals_list
             display_pictures_in_event_list:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_pictures_in_event_list")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::display_pictures_in_event_list
             external_project:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::external_project")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::external_project
             sentry_log:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::sentry_log")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::sentry_log
             multilangue:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::multilangue")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::multilangue
             http_redirects:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::http_redirects")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::http_redirects
             report_browers_errors_to_sentry:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::report_browers_errors_to_sentry")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::report_browers_errors_to_sentry
             login_saml:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_saml")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::login_saml
             login_cas:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_cas")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::login_cas
             login_openid:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::login_openid")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::login_openid
             phone_confirmation:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::phone_confirmation")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::phone_confirmation
             reporting:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::reporting")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::reporting
             display_map:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::display_map")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::display_map
             votes_min:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::votes_min")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::votes_min
             emailing:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::emailing
             emailing_parameters:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing_parameters")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::emailing_parameters
             emailing_group:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::emailing_group")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::emailing_group
             proposal_revisions:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_revisions")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::proposal_revisions
             new_project_card:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_project_card")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::new_project_card
                 description: 'Whether or not the new project card is active.'
             export_legacy_users:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::export_legacy_users")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::export_legacy_users
                 description: 'Secret export of users.'
             import_proposals:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::import_proposals")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::import_proposals
                 description: 'Whether or not admin can mass import proposals in BO.'
             analytics_page:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::analytics_page")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::analytics_page
                 description: 'Whether or not the analytics page is visible in BO.'
             project_admin:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::project_admin")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::project_admin
                 description: 'Whether or not admin can use the project administrator feature.'
             noindex_on_profiles:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::noindex_on_profiles")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::noindex_on_profiles
                 description: 'Whether or not profiles can be indexed.'
             anonymous_questionnaire:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::anonymous_questionnaire")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::anonymous_questionnaire
                 description: 'Whether or not admin can create anonymous questionnaire.'
             twilio:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::twilio")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::twilio
                 description: 'Whether or not the twilio service is enabled.'
             paper_vote:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::paper_vote")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::paper_vote
                 description: 'Whether or not the paper vote is enabled.'
             versions:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::versions")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::versions
             helpscout_beacon:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::helpscout_beacon")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::helpscout_beacon
                 description: 'Whether or not the Helpscout beacon is enabled'
             api_sendinblue:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::api_sendinblue")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::api_sendinblue
                 description: 'Whether or not the Sendiblue API is enabled'
             proposal_sms_vote:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::proposal_sms_vote")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::proposal_sms_vote
                 description: 'Whether or not proposal sms vote is enabled'
             organizations:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::organizations")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::organizations
                 description: 'Whether or not organizations are enabled'
             moderation_comment:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::moderation_comment")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::moderation_comment
                 description: 'Whether or not comment moderation is enabled'
             unstable__new_create_project:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::unstable__new_create_project")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::unstable__new_create_project
                 description: 'Whether or not project create rework is enabled'
             new_vote_step:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::new_vote_step")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::new_vote_step
                 description: 'Whether or not new voting step is enabled'
             mediator:
-                value: '@=constant("Capco\\AppBundle\\Toggle\\Manager::mediator")'
+                value: !php/const Capco\AppBundle\Toggle\Manager::mediator
                 description: 'Whether or not votes can be added by mediators'

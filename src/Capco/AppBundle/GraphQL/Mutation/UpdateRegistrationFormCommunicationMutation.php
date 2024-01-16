@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -10,6 +11,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UpdateRegistrationFormCommunicationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private RegistrationFormRepository $registrationFormRepository;
 
@@ -23,6 +25,7 @@ class UpdateRegistrationFormCommunicationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $registrationForm = $this->registrationFormRepository->findCurrent();

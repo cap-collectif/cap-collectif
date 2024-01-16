@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -30,6 +31,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateNewProjectMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
@@ -67,6 +69,7 @@ class UpdateNewProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         $projectId = $input->offsetGet('projectId');

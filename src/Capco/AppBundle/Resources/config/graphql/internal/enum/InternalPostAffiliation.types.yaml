@@ -5,5 +5,5 @@ InternalPostAffiliation:
         description: 'The affiliation of a user to a post'
         values:
             OWNER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\PostAffiliation::OWNER")'
+                value: !php/const Capco\AppBundle\Enum\PostAffiliation::OWNER
                 description: 'Posts that are owned by the authenticated user.'

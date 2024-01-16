@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Helper\EventHelper;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class EventIsCompleteAndRegistrationPossibleResolver implements ResolverInterface
+class EventIsCompleteAndRegistrationPossibleResolver implements QueryInterface
 {
     protected EventHelper $helper;
 

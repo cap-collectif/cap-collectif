@@ -8,12 +8,12 @@ use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\Search;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class SectionOpinionsResolver implements ResolverInterface
+class SectionOpinionsResolver implements QueryInterface
 {
     private $opinionSearch;
 

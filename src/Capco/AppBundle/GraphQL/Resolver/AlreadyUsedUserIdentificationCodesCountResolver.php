@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class AlreadyUsedUserIdentificationCodesCountResolver implements ResolverInterface
+class AlreadyUsedUserIdentificationCodesCountResolver implements QueryInterface
 {
     private UserIdentificationCodeRepository $repository;
 

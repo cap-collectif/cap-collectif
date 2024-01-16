@@ -16,6 +16,7 @@ use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Utils\RequestGuesser;
@@ -32,6 +33,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddCommentMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
     public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
     public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
@@ -69,6 +72,7 @@ class AddCommentMutation implements MutationInterface
 
     public function __invoke(Arg $input, /*User|string*/ $viewer): array
     {
+        $this->formatInput($input);
         $commentableGlobalId = $input->offsetGet('commentableId');
         $commentableId = GlobalId::fromGlobalId($commentableGlobalId)['id'];
         $commentable = $this->globalIdResolver->resolve($commentableGlobalId, $viewer);

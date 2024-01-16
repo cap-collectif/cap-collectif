@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\EventParticipant;
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class EventParticipantConnectionEdgeRegisteredAnonymouslyResolver implements ResolverInterface
+class EventParticipantConnectionEdgeRegisteredAnonymouslyResolver implements QueryInterface
 {
     private EventRegistrationRepository $eventRegistrationRepository;
 

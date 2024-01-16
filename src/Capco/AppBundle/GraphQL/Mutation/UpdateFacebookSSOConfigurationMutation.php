@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\SSO\FacebookSSOConfiguration;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\FacebookSSOConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -10,6 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private FacebookSSOConfigurationRepository $repository;
 
@@ -23,6 +25,7 @@ class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $facebookSSOConfiguration = $this->getConfiguration();
 
         $facebookSSOConfiguration->setClientId($input->offsetGet('clientId'));

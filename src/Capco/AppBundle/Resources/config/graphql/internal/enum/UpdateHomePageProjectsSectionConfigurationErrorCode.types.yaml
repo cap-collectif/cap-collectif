@@ -5,8 +5,8 @@ UpdateHomePageProjectsSectionConfigurationErrorCode:
         description: 'Available errors for an `updateHomePageProjectsSectionConfiguration` mutation.'
         values:
             TOO_MANY_PROJECTS:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation::TOO_MANY_PROJECTS")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateHomePageProjectsSectionConfigurationMutation::TOO_MANY_PROJECTS
                 description: 'Limit of projects that can be dispayed in the homepage'
             INVALID_FORM:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsSectionConfigurationMutation::INVALID_FORM")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\UpdateHomePageProjectsSectionConfigurationMutation::INVALID_FORM
                 description: 'The form is not valid'

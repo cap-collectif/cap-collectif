@@ -8,10 +8,10 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResponsesResolverTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class ReplyResponsesResolver implements ResolverInterface
+class ReplyResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 

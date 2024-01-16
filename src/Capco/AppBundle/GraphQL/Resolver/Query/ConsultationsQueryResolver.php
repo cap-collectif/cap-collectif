@@ -4,10 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\ConsultationRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
-class ConsultationsQueryResolver implements ResolverInterface
+class ConsultationsQueryResolver implements QueryInterface
 {
     private $consultationRepository;
 

@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OwnerProposalFormResolver implements ResolverInterface
+class OwnerProposalFormResolver implements QueryInterface
 {
     private ProposalFormRepository $repository;
 

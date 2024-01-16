@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalType;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -31,6 +32,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class CreateProposalMutation implements MutationInterface
 {
+    use MutationTrait;
     protected LoggerInterface $logger;
     protected GlobalIdResolver $globalIdResolver;
     protected EntityManagerInterface $em;
@@ -74,6 +76,7 @@ class CreateProposalMutation implements MutationInterface
 
     public function __invoke(Argument $input, $user): array
     {
+        $this->formatInput($input);
         $values = $input->getArrayCopy();
         $proposalForm = $this->getProposalForm($values, $user);
         unset($values['proposalFormId']); // This only useful to retrieve the proposalForm

@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -24,6 +25,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class RemoveProposalVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ProposalRepository $proposalRepo;
     private AbstractStepRepository $stepRepo;
@@ -67,6 +69,7 @@ class RemoveProposalVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $proposal = $this->globalIdResolver->resolve($input->offsetGet('proposalId'), $user);
         $step = $this->globalIdResolver->resolve($input->offsetGet('stepId'), $user);
 

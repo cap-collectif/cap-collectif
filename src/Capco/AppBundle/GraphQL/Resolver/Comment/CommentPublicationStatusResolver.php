@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Enum\CommentPublicationStatus;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class CommentPublicationStatusResolver implements ResolverInterface
+class CommentPublicationStatusResolver implements QueryInterface
 {
     public function __invoke(Comment $comment): string
     {

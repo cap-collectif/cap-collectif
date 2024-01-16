@@ -5,5 +5,5 @@ DeleteSmsOrderErrorCode:
         description: 'Available errors for an `deleteSmsOrder` mutation.'
         values:
             SMS_ORDER_NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Sms\\DeleteSmsOrderMutation::SMS_ORDER_NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Sms\DeleteSmsOrderMutation::SMS_ORDER_NOT_FOUND
                 description: 'No `SmsOrder` match your `id`.'

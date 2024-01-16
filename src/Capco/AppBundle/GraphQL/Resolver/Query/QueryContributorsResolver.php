@@ -5,11 +5,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Client\OccitanieClient;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class QueryContributorsResolver implements ResolverInterface
+class QueryContributorsResolver implements QueryInterface
 {
     public $useElasticsearch = true;
     private UserSearch $userSearch;

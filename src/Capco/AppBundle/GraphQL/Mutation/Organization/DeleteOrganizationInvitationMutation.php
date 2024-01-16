@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Organization;
 
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Security\PendingOrganizationInvitationVoter;
 use Capco\UserBundle\Entity\User;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteOrganizationInvitationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const INVITATION_NOT_FOUND = 'INVITATION_NOT_FOUND';
 
     private GlobalIdResolver $globalIdResolver;
@@ -35,6 +38,7 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $pendingOrganizationInvitationId = $input->offsetGet('invitationId');
 
         /** * @var PendingOrganizationInvitation $pendingOrganizationInvitation  */

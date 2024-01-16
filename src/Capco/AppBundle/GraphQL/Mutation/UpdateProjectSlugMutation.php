@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UpdateProjectSlugMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
 
     private EntityManagerInterface $em;
@@ -35,6 +38,7 @@ class UpdateProjectSlugMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $projectId = $input->offsetGet('projectId');
 
         /** * @var Project $project */

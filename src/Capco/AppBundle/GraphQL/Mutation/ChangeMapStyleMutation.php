@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -10,6 +11,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ChangeMapStyleMutation implements MutationInterface
 {
+    use MutationTrait;
     private $repository;
     private $em;
 
@@ -21,6 +23,7 @@ class ChangeMapStyleMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         list($mapTokenId, $styleOwner, $styleId) = [
             $input->offsetGet('mapTokenId'),
             $input->offsetGet('styleOwner'),

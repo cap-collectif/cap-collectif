@@ -4,32 +4,32 @@ ContributionType:
         description: 'Different contribution type'
         values:
             OPINION:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::OPINION")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::OPINION
                 description: 'Get contributions that are an opnion'
             OPINIONVERSION:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::OPINIONVERSION")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::OPINIONVERSION
                 description: 'Get contributions that are an opnion version'
             COMMENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::COMMENT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::COMMENT
                 description: 'Get contributions that are a comment'
             ARGUMENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::ARGUMENT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::ARGUMENT
                 description: 'Get contributions that are an argument'
             SOURCE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::SOURCE")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::SOURCE
                 description: 'Get contributions that are a source'
             PROPOSAL:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::PROPOSAL")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::PROPOSAL
                 description: 'Get contributions that are a proposal'
             REPLY:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::REPLY")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::REPLY
                 description: 'Get contributions that are a reply'
             DEBATEARGUMENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::DEBATEARGUMENT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::DEBATEARGUMENT
                 description: 'Get contributions that are debate argument.'
             DEBATEANONYMOUSARGUMENT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::DEBATEANONYMOUSARGUMENT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::DEBATEANONYMOUSARGUMENT
                 description: 'Get contributions that are debate anonymous argument.'
             REPLY_ANONYMOUS:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionType::REPLY_ANONYMOUS")'
+                value: !php/const Capco\AppBundle\Enum\ContributionType::REPLY_ANONYMOUS
                 description: 'Get contributions that are a reply anonymous'

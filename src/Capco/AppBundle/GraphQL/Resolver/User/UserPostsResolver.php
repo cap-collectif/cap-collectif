@@ -8,11 +8,11 @@ use Capco\AppBundle\Enum\OrderDirection;
 use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Search\PostSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Psr\Log\LoggerInterface;
 
-class UserPostsResolver implements ResolverInterface
+class UserPostsResolver implements QueryInterface
 {
     private LoggerInterface $logger;
     private PostSearch $postSearch;

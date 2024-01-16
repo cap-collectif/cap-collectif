@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\OfficialResponse;
 use Capco\AppBundle\Enum\ErrorCode\DeleteOfficialResponseErrorCode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -13,6 +14,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class DeleteOfficialResponseMutation implements MutationInterface
 {
+    use MutationTrait;
     private GlobalIdResolver $resolver;
     private EntityManagerInterface $em;
 
@@ -24,6 +26,7 @@ class DeleteOfficialResponseMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $user): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('id');
 
         try {

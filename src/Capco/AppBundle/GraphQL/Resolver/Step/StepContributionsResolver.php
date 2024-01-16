@@ -6,11 +6,11 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\DataLoader\Step\StepContributionsDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
-class StepContributionsResolver implements ResolverInterface
+class StepContributionsResolver implements QueryInterface
 {
     private $dataLoader;
     private $promiseAdapter;

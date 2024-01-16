@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Query;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class QueryProposalFromSlugResolver implements ResolverInterface
+class QueryProposalFromSlugResolver implements QueryInterface
 {
     private ProposalRepository $repository;
 

@@ -4,8 +4,8 @@ DeleteSenderEmailDomainErrorCode:
         description: 'Possible errors on createSenderEmailDomain mutation.'
         values:
             NOT_FOUND:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteSenderEmailDomainMutation::NOT_FOUND")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Mailing\DeleteSenderEmailDomainMutation::NOT_FOUND
                 description: 'No SenderEmailDomain match your id'
             DOMAIN_USED:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Mailing\\DeleteSenderEmailDomainMutation::DOMAIN_USED")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Mailing\DeleteSenderEmailDomainMutation::DOMAIN_USED
                 description: 'SenderEmailDomain is used by a SenderEmail'

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ProposalFormMutation
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ProposalFormRepository $proposalFormRepository;
     private QuestionnaireRepository $questionnaireRepository;
@@ -27,6 +29,7 @@ class ProposalFormMutation
 
     public function setEvaluationForm(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $proposalForm = $this->proposalFormRepository->find($arguments['proposalFormId']);
 

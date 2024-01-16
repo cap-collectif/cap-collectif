@@ -5,8 +5,8 @@ CreateDebateArgumentErrorCode:
         description: 'Available errors for an `createDebateArgument` mutation.'
         values:
             UNKNOWN_DEBATE:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateAnonymousArgumentMutation::UNKNOWN_DEBATE")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\CreateDebateAnonymousArgumentMutation::UNKNOWN_DEBATE
                 description: 'No `Debate` match your id.'
             ALREADY_HAS_ARGUMENT:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\Debate\\CreateDebateAnonymousArgumentMutation::ALREADY_HAS_ARGUMENT")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Debate\CreateDebateAnonymousArgumentMutation::ALREADY_HAS_ARGUMENT
                 description: 'User has already created an argument.'

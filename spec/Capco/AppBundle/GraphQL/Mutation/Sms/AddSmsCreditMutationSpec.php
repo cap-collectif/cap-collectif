@@ -12,6 +12,7 @@ use Capco\AppBundle\Helper\TwilioClient;
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -28,6 +29,8 @@ use Twilio\Rest\Api\V2010\AccountInstance;
 
 class AddSmsCreditMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         SmsCreditRepository $smsCreditRepository,
@@ -78,6 +81,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($smsOrderId)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
@@ -178,6 +182,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($smsOrderId)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
@@ -193,7 +198,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($values)
         ;
-
+        $this->getMockedGraphQLArgumentFormatted($input);
         $smsCredit = new SmsCredit();
         $formFactory
             ->create(SmsCreditType::class, Argument::type(SmsCredit::class))
@@ -239,6 +244,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($smsOrderId)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
@@ -264,6 +270,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($smsOrderId)
         ;
+        $this->getMockedGraphQLArgumentFormatted($input);
         $globalIdResolver
             ->resolve($smsOrderId, $viewer)
             ->shouldBeCalledOnce()
@@ -279,7 +286,7 @@ class AddSmsCreditMutationSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($values)
         ;
-
+        $this->getMockedGraphQLArgumentFormatted($input);
         $formFactory
             ->create(SmsCreditType::class, Argument::type(SmsCredit::class))
             ->willReturn($form)

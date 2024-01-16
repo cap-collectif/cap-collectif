@@ -14,6 +14,7 @@ use Capco\AppBundle\GraphQL\Mutation\UpdateProposalNewsMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateProposalNewsMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -56,6 +59,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('postId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
         $payload = $this->__invoke($arguments, $viewer);
@@ -74,6 +79,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         $proposal->getAuthor()->willReturn($proposalAuthor);
         $viewer->getId()->willReturn('viewer');
         $viewer->isAdmin()->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('postId')->willReturn('123456');
         $post->isAuthor($viewer)->willReturn(false);
         $globalIdResolver->resolve('123456', $viewer)->willReturn($post);
@@ -94,6 +101,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
     ) {
         $viewer->getId()->willReturn('viewer');
         $viewer->isAdmin()->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('postId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($post);
         $post->isAuthor($viewer)->willReturn(true);
@@ -183,6 +192,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
         ProposalFormNotificationConfiguration $configuration,
         Publisher $publisher
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->mockData(
             $em,
             $globalIdResolver,
@@ -227,6 +238,8 @@ class UpdateProposalNewsMutationSpec extends ObjectBehavior
     ) {
         $viewer->getId()->willReturn('viewer');
         $viewer->isAdmin()->willReturn(false);
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('postId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn($proposalPost);
         $proposalPost->isAuthor($viewer)->willReturn(true);

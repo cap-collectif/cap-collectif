@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Proposal;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class FormattedAddressTypeResolver implements ResolverInterface
+class FormattedAddressTypeResolver implements QueryInterface
 {
     public function __invoke(Proposal $proposal): ?string
     {

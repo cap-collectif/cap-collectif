@@ -5,10 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Type\Definition\Type;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 
-class ProposalFormOwnerTypeResolver implements ResolverInterface
+class ProposalFormOwnerTypeResolver implements QueryInterface
 {
     private TypeResolver $typeResolver;
 

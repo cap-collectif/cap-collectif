@@ -8,9 +8,9 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository;
 use Capco\AppBundle\Repository\Debate\DebateArgumentVoteRepository;
 use Doctrine\ORM\EntityRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class DebateArgumentViewerHasVoteResolver implements ResolverInterface
+class DebateArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
     private DebateArgumentVoteRepository $debateArgumentVoteRepository;

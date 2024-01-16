@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\TwilioHelper;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
@@ -16,6 +17,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class VerifySmsVotePhoneNumberMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
     private EntityManagerInterface $em;
@@ -43,6 +46,7 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $phone = $input->offsetGet('phone');
         $code = $input->offsetGet('code');
         $proposalId = $input->offsetGet('proposalId');

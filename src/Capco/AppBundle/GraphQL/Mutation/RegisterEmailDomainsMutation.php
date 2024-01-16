@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\RegistrationFormRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\AdminConfigureRegistrationType;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class RegisterEmailDomainsMutation implements MutationInterface
 {
+    use MutationTrait;
     private FormFactoryInterface $formFactory;
     private RegistrationFormRepository $registrationFormRepository;
     private EntityManagerInterface $em;
@@ -29,6 +31,7 @@ class RegisterEmailDomainsMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         if (!$viewer || !$viewer->isAdmin()) {
             throw new AccessDeniedHttpException('Not authorized.');
         }

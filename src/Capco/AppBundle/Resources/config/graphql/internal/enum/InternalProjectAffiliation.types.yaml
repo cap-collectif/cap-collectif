@@ -5,8 +5,8 @@ InternalProjectAffiliation:
         description: 'The affiliation of a user to a project'
         values:
             OWNER:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectAffiliation::OWNER")'
+                value: !php/const Capco\AppBundle\Enum\ProjectAffiliation::OWNER
                 description: 'Projects that are owned by the authenticated user.'
             AUTHOR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectAffiliation::AUTHOR")'
+                value: !php/const Capco\AppBundle\Enum\ProjectAffiliation::AUTHOR
                 description: 'Projects where the user is assigned as author.'

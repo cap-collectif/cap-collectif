@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\UserBundle\Repository\UserRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ViewerFollowOpinionResolver implements ResolverInterface
+class ViewerFollowOpinionResolver implements QueryInterface
 {
     use ResolverTrait;
 

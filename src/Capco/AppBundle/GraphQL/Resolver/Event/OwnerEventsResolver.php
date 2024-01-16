@@ -6,11 +6,11 @@ use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OwnerEventsResolver implements ResolverInterface
+class OwnerEventsResolver implements QueryInterface
 {
     private EventRepository $repository;
     private EntityManagerInterface $em;

@@ -7,11 +7,11 @@ use Capco\AppBundle\GraphQL\DataLoader\Project\ProjectProposalsDataLoader;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
-class ProjectProposalsResolver implements ResolverInterface
+class ProjectProposalsResolver implements QueryInterface
 {
     protected ProjectProposalsDataLoader $dataLoader;
     protected PromiseAdapterInterface $promiseAdapter;

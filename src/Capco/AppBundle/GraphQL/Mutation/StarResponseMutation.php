@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class StarResponseMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
     public const ALREADY_STARRED = 'ALREADY_STARRED';
 
@@ -34,6 +37,8 @@ class StarResponseMutation implements MutationInterface
 
     public function __invoke(Argument $argument, User $viewer): array
     {
+        $this->formatInput($argument);
+
         try {
             $response = $this->getResponse($argument, $viewer);
             $this->checkNotAlreadyStarred($response, $viewer);

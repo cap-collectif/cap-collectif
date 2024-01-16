@@ -6,10 +6,10 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\GraphQL\DataLoader\ProposalForm\ProposalFormProposalsDataLoader;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ProposalFormProposalsResolver implements ResolverInterface
+class ProposalFormProposalsResolver implements QueryInterface
 {
     private $dataLoader;
 

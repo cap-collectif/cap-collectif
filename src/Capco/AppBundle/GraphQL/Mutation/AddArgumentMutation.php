@@ -10,6 +10,7 @@ use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Model\Argumentable;
 use Capco\AppBundle\Repository\ArgumentRepository;
@@ -29,6 +30,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddArgumentMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private OpinionRepository $opinionRepo;
     private OpinionVersionRepository $versionRepo;
@@ -63,6 +65,7 @@ class AddArgumentMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $author): array
     {
+        $this->formatInput($input);
         $argumentableId = GlobalId::fromGlobalId($input->offsetGet('argumentableId'))['id'];
         $argumentable = $this->versionRepo->find($argumentableId);
 

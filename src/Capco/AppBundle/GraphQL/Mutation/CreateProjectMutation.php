@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -27,6 +28,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CreateProjectMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
@@ -55,6 +57,7 @@ class CreateProjectMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         if ($viewer->isOnlyProjectAdmin()) {

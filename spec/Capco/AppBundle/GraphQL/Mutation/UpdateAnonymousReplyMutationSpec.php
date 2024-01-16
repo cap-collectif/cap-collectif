@@ -8,6 +8,7 @@ use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Mutation\UpdateAnonymousReplyMutation;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -20,6 +21,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -60,6 +63,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
             ],
             'hashedToken' => $hashedToken,
         ];
+
+        $this->getMockedGraphQLArgumentFormatted($input);
 
         $input
             ->offsetGet('hashedToken')
@@ -135,6 +140,8 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
             'hashedToken' => $hashedToken,
         ];
 
+        $this->getMockedGraphQLArgumentFormatted($input);
+
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()
@@ -202,6 +209,7 @@ class UpdateAnonymousReplyMutationSpec extends ObjectBehavior
     ) {
         $hashedToken = 'abc';
 
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('hashedToken')
             ->shouldBeCalledOnce()

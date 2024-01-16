@@ -10,25 +10,25 @@ PreviewMutation:
                 builderConfig:
                     inputType: PreviewAddEventInput
                     payloadType: PreviewAddEventPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddEventMutation", args, getUser())'
             changeEvent:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: PreviewChangeEventInput
                     payloadType: PreviewChangeEventPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeEventMutation", args, getUser())'
             deleteEvent:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: PreviewDeleteEventInput
                     payloadType: PreviewDeleteEventPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteEventMutation", args, getUser())'
             deleteAccountByEmail:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: PreviewDeleteAccountByEmailInput
                     payloadType: PreviewDeleteAccountByEmailPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountByEmailMutation", [value, getUser()])'
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountByEmailMutation", args, getUser())'

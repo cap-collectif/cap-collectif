@@ -14,6 +14,7 @@ use Capco\AppBundle\GraphQL\Mutation\AddProposalNewsMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Post\PostUrlResolver;
 use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class AddProposalNewsMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
@@ -58,6 +61,8 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $arguments->offsetGet('proposalId')->willReturn('123456');
         $globalIdResolver->resolve('123456', $viewer)->willReturn(null);
         $payload = $this->__invoke($arguments, $viewer);
@@ -71,6 +76,8 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         User $proposalAuthor,
         Proposal $proposal
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $proposalAuthor->getId()->willReturn('proposalAuthor');
         $proposal->getAuthor()->willReturn($proposalAuthor);
         $viewer->getId()->willReturn('viewer');
@@ -89,6 +96,8 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         CollectStep $currentStep,
         Proposal $proposal
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments, [], [], true);
+
         $proposal->getAuthor()->willReturn($viewer);
         $proposal->isProposalAuthorAllowedToAddNews()->willReturn(false);
         $proposal->getProject()->willReturn($project);
@@ -124,6 +133,8 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         Publisher $publisher,
         PostUrlResolver $urlResolver
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->mockData(
             $em,
             $globalIdResolver,
@@ -174,6 +185,8 @@ class AddProposalNewsMutationSpec extends ObjectBehavior
         Publisher $publisher,
         PostUrlResolver $urlResolver
     ) {
+        $this->getMockedGraphQLArgumentFormatted($arguments);
+
         $this->mockData(
             $em,
             $globalIdResolver,

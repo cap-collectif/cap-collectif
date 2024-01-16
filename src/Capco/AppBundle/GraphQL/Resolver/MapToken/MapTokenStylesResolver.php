@@ -7,9 +7,9 @@ use Capco\AppBundle\DTO\MapboxStyle;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Enum\MapProviderEnum;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class MapTokenStylesResolver implements ResolverInterface
+class MapTokenStylesResolver implements QueryInterface
 {
     private MapboxClient $mapboxClient;
     private ?string $defaultMapboxPublicToken = null;

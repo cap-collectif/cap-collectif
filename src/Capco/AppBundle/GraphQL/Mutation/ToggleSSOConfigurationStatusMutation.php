@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ToggleSSOConfigurationStatusMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $repository;
 
@@ -24,6 +26,7 @@ class ToggleSSOConfigurationStatusMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
         $ssoConfigurationId = GlobalId::fromGlobalId($input->offsetGet('ssoConfigurationId'))['id'];
         $ssoConfiguration = $this->repository->find($ssoConfigurationId);
 

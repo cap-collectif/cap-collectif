@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\Organization\OrganizationMember;
 use Capco\AppBundle\Entity\Organization\PendingOrganizationInvitation;
 use Capco\AppBundle\Entity\UserInvite;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\FOSNotifier;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
@@ -26,6 +27,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegisterMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const EMAIL_ALREADY_USED = 'EMAIL_ALREADY_USED';
     public const EMAIL_DOMAIN_NOT_AUTHORIZED = 'EMAIL_DOMAIN_NOT_AUTHORIZED';
     public const CAPTCHA_INVALID = 'CAPTCHA_INVALID';
@@ -87,6 +90,7 @@ class RegisterMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $this->rateLimiter->setLimit(3);
 
         if (

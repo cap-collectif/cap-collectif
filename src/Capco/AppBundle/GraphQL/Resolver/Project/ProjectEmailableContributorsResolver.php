@@ -7,11 +7,11 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class ProjectEmailableContributorsResolver implements ResolverInterface
+class ProjectEmailableContributorsResolver implements QueryInterface
 {
     use ResolverTrait;
 

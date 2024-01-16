@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserAccountFormType;
 use GraphQL\Error\UserError;
@@ -11,8 +12,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UpdateUserAccountMutation extends BaseUpdateProfile
 {
+    use MutationTrait;
+
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $user = $viewer;
 

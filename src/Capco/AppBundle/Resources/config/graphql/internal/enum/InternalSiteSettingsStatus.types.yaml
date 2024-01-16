@@ -5,8 +5,8 @@ InternalSiteSettingsStatus:
         description: 'The status of the domain change.'
         values:
             IDLE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\SiteSettingsStatus::IDLE")'
+                value: !php/const Capco\AppBundle\Enum\SiteSettingsStatus::IDLE
                 description: 'Custom domain is not set.'
             ACTIVE:
-                value: '@=constant("Capco\\AppBundle\\Enum\\SiteSettingsStatus::ACTIVE")'
+                value: !php/const Capco\AppBundle\Enum\SiteSettingsStatus::ACTIVE
                 description: 'The site redirects correctly to the custom domain.'

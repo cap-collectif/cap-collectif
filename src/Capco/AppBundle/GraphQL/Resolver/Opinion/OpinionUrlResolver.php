@@ -4,12 +4,12 @@ namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class OpinionUrlResolver implements ResolverInterface
+class OpinionUrlResolver implements QueryInterface
 {
     private $consultationStepRepository;
     private $router;

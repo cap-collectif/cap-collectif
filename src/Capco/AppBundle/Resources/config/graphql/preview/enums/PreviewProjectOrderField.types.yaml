@@ -5,8 +5,8 @@ PreviewProjectOrderField:
         description: 'Ordering options for projects returned from the connection.'
         values:
             POPULAR:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::POPULAR")'
+                value: !php/const Capco\AppBundle\Enum\ProjectOrderField::POPULAR
                 description: 'Allows ordering a list of projects by their number of contributions.'
             PUBLISHED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ProjectOrderField::PUBLISHED_AT")'
+                value: !php/const Capco\AppBundle\Enum\ProjectOrderField::PUBLISHED_AT
                 description: 'Allows ordering a list of projects by when they were published.'

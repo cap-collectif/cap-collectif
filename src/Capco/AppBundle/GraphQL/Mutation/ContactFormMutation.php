@@ -9,6 +9,7 @@ use Capco\AppBundle\Form\ContactType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Notifier\ContactNotifier;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\UserBundle\Entity\User;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ContactFormMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private FormFactoryInterface $formFactory;
@@ -47,6 +49,7 @@ class ContactFormMutation implements MutationInterface
 
     public function send(Argument $input, ?User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $id = $arguments['idContactForm'];
 
@@ -83,6 +86,7 @@ class ContactFormMutation implements MutationInterface
 
     public function add(Argument $input): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
 
         /** @var ContactForm $contactForm */
@@ -125,6 +129,7 @@ class ContactFormMutation implements MutationInterface
 
     public function update(Argument $input, ?User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
 
@@ -161,6 +166,7 @@ class ContactFormMutation implements MutationInterface
 
     public function remove(Argument $input, ?User $viewer): array
     {
+        $this->formatInput($input);
         $arguments = $input->getArrayCopy();
         $id = $arguments['id'];
 

@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class UserEmailResolver implements ResolverInterface
+class UserEmailResolver implements QueryInterface
 {
     public function __invoke(User $user): ?string
     {

@@ -5,5 +5,5 @@ DeleteCustomDomainErrorCode:
         description: 'Available errors for an `updateCustomDomain` mutation.'
         values:
             ERROR_DEPLOYER_API:
-                value: '@=constant("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteCustomDomainMutation::ERROR_DEPLOYER_API")'
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\DeleteCustomDomainMutation::ERROR_DEPLOYER_API
                 description: 'Error occured while deleting the custom domain.'

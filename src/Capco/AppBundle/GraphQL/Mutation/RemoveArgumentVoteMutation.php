@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\ArgumentVoteRepository;
@@ -18,6 +19,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveArgumentVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ArgumentVoteRepository $argumentVoteRepo;
     private ArgumentRepository $argumentRepo;
@@ -43,6 +45,7 @@ class RemoveArgumentVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = GlobalId::fromGlobalId($input->offsetGet('argumentId'))['id'];
         /** @var Argument $argument */
         $argument = $this->argumentRepo->find($id);

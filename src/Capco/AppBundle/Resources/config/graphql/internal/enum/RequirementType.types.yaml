@@ -4,29 +4,29 @@ RequirementType:
         description: 'Possible values for a requirement'
         values:
             CHECKBOX:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::CHECKBOX")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::CHECKBOX
                 description: 'The requirement is a checkbox'
             FIRSTNAME:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::FIRSTNAME")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::FIRSTNAME
                 description: 'The requirement is a firstname'
             LASTNAME:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::LASTNAME")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::LASTNAME
                 description: 'The requirement is a lastname'
             PHONE:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::PHONE")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::PHONE
                 description: 'The requirement is a phone number'
             DATE_OF_BIRTH:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::DATE_OF_BIRTH")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::DATE_OF_BIRTH
                 description: 'The requirement is a date of birth'
             POSTAL_ADDRESS:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::POSTAL_ADDRESS")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::POSTAL_ADDRESS
                 description: 'The requirement is a postal address'
             IDENTIFICATION_CODE:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::IDENTIFICATION_CODE")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::IDENTIFICATION_CODE
                 description: 'The requirement is an identification code'
             PHONE_VERIFIED:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::PHONE_VERIFIED")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::PHONE_VERIFIED
                 description: 'The requirement is an verified phone number'
             FRANCE_CONNECT:
-                value: '@=constant("Capco\\AppBundle\\Entity\\Requirement::FRANCE_CONNECT")'
+                value: !php/const Capco\AppBundle\Entity\Requirement::FRANCE_CONNECT
                 description: 'The requirement is authentication to France Connect'

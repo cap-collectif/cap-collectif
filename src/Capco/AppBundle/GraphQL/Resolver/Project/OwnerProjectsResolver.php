@@ -7,11 +7,11 @@ use Capco\AppBundle\Enum\ProjectOrderField;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
-class OwnerProjectsResolver implements ResolverInterface
+class OwnerProjectsResolver implements QueryInterface
 {
     private ProjectRepository $repository;
 

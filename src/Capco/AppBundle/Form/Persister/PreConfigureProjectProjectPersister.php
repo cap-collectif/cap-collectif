@@ -47,7 +47,7 @@ class PreConfigureProjectProjectPersister
         $stepsWithProposalForm = $this->getStepsWithProposalForm($projectInput['steps']);
         $stepsWithQuestionnaire = $this->getStepsWithQuestionnaire($projectInput['steps']);
 
-        list('project' => $updatedProject) = $this->updateAlphaProjectMutation->__invoke(new Argument($projectInput), $viewer);
+        list('project' => $updatedProject) = $this->updateAlphaProjectMutation->__invoke(new Argument(['input' => $projectInput]), $viewer);
 
         $this->addDefaultStatus($updatedProject, $stepsWithDefaultStatus);
         $this->addProposalFormToProject($updatedProject, $stepsWithProposalForm, $proposalFormTitleToIdMap);

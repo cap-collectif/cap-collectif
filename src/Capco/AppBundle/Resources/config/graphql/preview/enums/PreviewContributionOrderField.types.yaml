@@ -5,8 +5,8 @@ PreviewContributionOrderField:
         description: 'Ordering options for contributions connections.'
         values:
             CREATED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::CREATED_AT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionOrderField::CREATED_AT
                 description: 'Allows ordering a list of contributions by when they were created.'
             PUBLISHED_AT:
-                value: '@=constant("Capco\\AppBundle\\Enum\\ContributionOrderField::PUBLISHED_AT")'
+                value: !php/const Capco\AppBundle\Enum\ContributionOrderField::PUBLISHED_AT
                 description: 'Allows ordering a list of contributions by when they were published.'

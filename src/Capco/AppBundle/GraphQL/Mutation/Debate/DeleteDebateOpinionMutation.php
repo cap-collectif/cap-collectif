@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\DebateOpinionVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteDebateOpinionMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
 
     private EntityManagerInterface $em;
@@ -35,6 +38,7 @@ class DeleteDebateOpinionMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $debateOpinionId = $input->offsetGet('debateOpinionId');
         $debateOpinion = $this->globalIdResolver->resolve($debateOpinionId, null);
 

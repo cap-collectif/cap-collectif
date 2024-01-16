@@ -5,9 +5,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalCurrentVotableStepDataLoader;
 use GraphQL\Executor\Promise\Promise;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalCurrentVotableStepResolver implements ResolverInterface
+class ProposalCurrentVotableStepResolver implements QueryInterface
 {
     private ProposalCurrentVotableStepDataLoader $dataLoader;
 

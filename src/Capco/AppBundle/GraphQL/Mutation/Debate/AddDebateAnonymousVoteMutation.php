@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
 use Doctrine\DBAL\Driver\DriverException;
@@ -19,6 +20,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddDebateAnonymousVoteMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
@@ -51,6 +54,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
 
     public function __invoke(Arg $input): array
     {
+        $this->formatInput($input);
         $debateId = $input->offsetGet('debateId');
         $debate = $this->globalIdResolver->resolve($debateId, null);
 

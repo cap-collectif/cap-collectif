@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,6 +24,8 @@ use SAML2\Utilities\ArrayCollection;
 
 class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         RedisCache $cache,
         SiteImageRepository $siteImageRepository,
@@ -72,6 +75,7 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         ];
         $mediaId = 'image';
 
+        $this->getMockedGraphQLArgumentFormatted($arguments);
         $arguments->offsetGet('mediaId')->willReturn($mediaId);
         $arguments->offsetGet('shieldMode')->willReturn($shieldMode);
         $arguments->offsetGet('translations')->willReturn($translations);
@@ -160,6 +164,8 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
             ],
         ];
         $mediaId = null;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->offsetGet('mediaId')->willReturn($mediaId);
         $arguments->offsetGet('shieldMode')->willReturn($shieldMode);
@@ -250,6 +256,8 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
             ],
         ];
         $mediaId = null;
+
+        $this->getMockedGraphQLArgumentFormatted($arguments);
 
         $arguments->offsetGet('mediaId')->willReturn($mediaId);
         $arguments->offsetGet('shieldMode')->willReturn($shieldMode);

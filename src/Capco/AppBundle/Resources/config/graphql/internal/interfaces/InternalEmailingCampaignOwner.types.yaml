@@ -24,8 +24,8 @@ InternalEmailingCampaignOwner:
                         type: 'EmailingCampaignOrder'
                         defaultValue:
                             {
-                                field: '@=constant("Capco\\AppBundle\\Enum\\EmailingCampaignOrderField::SEND_AT")',
-                                direction: '@=constant("Capco\\AppBundle\\Enum\\OrderDirection::DESC")',
+                                field: !php/const Capco\AppBundle\Enum\EmailingCampaignOrderField::SEND_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
                             }
                         description: 'The ordering direction for sending date'
                     affiliations:

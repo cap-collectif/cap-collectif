@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
@@ -22,6 +23,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AssignAnalystsToProposalsMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private const NB_MAX_ANALYSTS_ASSIGNED = 10;
@@ -50,6 +52,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
     public function __invoke(Arg $input, $viewer): array
     {
+        $this->formatInput($input);
         $this->preventNullableViewer($viewer);
 
         $proposalIds = $input->offsetGet('proposalIds');

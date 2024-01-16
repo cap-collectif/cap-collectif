@@ -23,12 +23,12 @@ class SimpleQuestion extends AbstractQuestion
     /**
      * @ORM\Column(name="range_min", type="integer", nullable=true)
      */
-    protected ?int $rangeMin;
+    protected ?int $rangeMin = null;
 
     /**
      * @ORM\Column(name="range_max", type="integer", nullable=true)
      */
-    protected ?int $rangeMax;
+    protected ?int $rangeMax = null;
 
     public function __construct()
     {

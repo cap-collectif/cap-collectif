@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\SiteParameter;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -10,6 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class UpdateRedirectIOProjectIdMutation implements MutationInterface
 {
+    use MutationTrait;
     private const REDIRECTION_IO_PROJECT_ID_PARAM_KEY = 'redirectionio.project.id';
     private $siteParameterRepository;
     private $em;
@@ -24,6 +26,7 @@ class UpdateRedirectIOProjectIdMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $parameter = $this->siteParameterRepository->findOneBy([
             'keyname' => self::REDIRECTION_IO_PROJECT_ID_PARAM_KEY,
         ]);

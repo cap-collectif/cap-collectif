@@ -8,11 +8,11 @@ use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
-class UserArgumentsResolver implements ResolverInterface
+class UserArgumentsResolver implements QueryInterface
 {
     use ResolverTrait;
     private $userArgumentsDataLoader;

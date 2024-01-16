@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class ProposalVotableStepsResolver implements ResolverInterface
+class ProposalVotableStepsResolver implements QueryInterface
 {
     public function __invoke(Proposal $proposal): iterable
     {

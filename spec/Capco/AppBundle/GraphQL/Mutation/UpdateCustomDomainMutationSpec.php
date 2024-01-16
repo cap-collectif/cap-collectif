@@ -8,6 +8,7 @@ use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\GraphQL\Mutation\UpdateCustomDomainMutation;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Validator\Constraints\CheckCustomDomainConstraint;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UpdateCustomDomainMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         SiteSettingsRepository $siteSettingsRepository,
@@ -49,6 +52,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         EntityManagerInterface $em
     ) {
         $customDomain = '';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
@@ -81,6 +85,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         ConstraintViolationInterface $violation
     ) {
         $customDomain = 'abc';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
@@ -124,6 +129,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         ConstraintViolationInterface $violation
     ) {
         $customDomain = 'domain.com';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
@@ -164,6 +170,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         DeployerClient $deployerClient
     ) {
         $customDomain = 'domain.com';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()
@@ -203,6 +210,7 @@ class UpdateCustomDomainMutationSpec extends ObjectBehavior
         DeployerClient $deployerClient
     ) {
         $customDomain = 'domain.com';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('customDomain')
             ->shouldBeCalledOnce()

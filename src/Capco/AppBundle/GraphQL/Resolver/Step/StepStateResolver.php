@@ -4,9 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Helper\StepHelper;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class StepStateResolver implements ResolverInterface
+class StepStateResolver implements QueryInterface
 {
     private $stepHelper;
 

@@ -11,6 +11,7 @@ use Capco\AppBundle\Form\ProposalRevisionType;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AskProposalRevisionMutation implements MutationInterface
 {
+    use MutationTrait;
     use ResolverTrait;
 
     private GlobalIdResolver $globalIdResolver;
@@ -57,6 +59,7 @@ class AskProposalRevisionMutation implements MutationInterface
 
     public function __invoke(Arg $input, $viewer): array
     {
+        $this->formatInput($input);
         $this->preventNullableViewer($viewer);
 
         $proposalId = $input->offsetGet('proposalId');

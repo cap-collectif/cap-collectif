@@ -128,7 +128,10 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         UserRepository $userRepository
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
-        $input = new Arg(['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD]);
+        $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
+        $rawInput['input'] = $values;
+        $input = new Arg($rawInput);
+
         $user->getEmail()->willReturn('admin@test.com');
 
         $userRepository
@@ -178,7 +181,11 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         FlashBag $flashBag
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
-        $input = new Arg(['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD]);
+
+        $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
+        $rawInput['input'] = $values;
+        $input = new Arg($rawInput);
+
         $user->getEmail()->willReturn('admin@test.com');
 
         $userRepository
@@ -247,7 +254,9 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         UserRepository $userRepository
     ) {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
-        $input = new Arg(['userId' => $encodeUserId]);
+        $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
+        $rawInput['input'] = $values;
+        $input = new Arg($rawInput);
 
         $viewer
             ->isAdmin()

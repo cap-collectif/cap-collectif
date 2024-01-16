@@ -9,10 +9,10 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Psr\Log\LoggerInterface;
 
-class OpinionViewerVoteResolver implements ResolverInterface
+class OpinionViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
@@ -18,6 +19,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveOpinionVoteMutation implements MutationInterface
 {
+    use MutationTrait;
     private $em;
     private $opinionVoteRepo;
     private $versionVoteRepo;
@@ -46,6 +48,7 @@ class RemoveOpinionVoteMutation implements MutationInterface
 
     public function __invoke(Argument $input, User $viewer): array
     {
+        $this->formatInput($input);
         $id = $input->offsetGet('opinionId');
         $opinion = $this->opinionRepo->find(GlobalId::fromGlobalId($id)['id']);
         $version = $this->versionRepo->find($id);

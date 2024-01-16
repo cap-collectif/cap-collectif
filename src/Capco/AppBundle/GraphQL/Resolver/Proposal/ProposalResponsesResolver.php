@@ -8,10 +8,10 @@ use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Security\ProposalAnalysisRelatedVoter;
 use Capco\UserBundle\Entity\User;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class ProposalResponsesResolver implements ResolverInterface
+class ProposalResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 

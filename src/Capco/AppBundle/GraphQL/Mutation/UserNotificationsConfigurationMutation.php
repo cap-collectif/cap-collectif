@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Form\UserNotificationsConfigurationType;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -16,6 +17,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class UserNotificationsConfigurationMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $entityManager;
     private LoggerInterface $logger;
     private FormFactoryInterface $formFactory;
@@ -35,6 +37,7 @@ class UserNotificationsConfigurationMutation implements MutationInterface
 
     public function __invoke(Argument $args, User $user): array
     {
+        $this->formatInput($args);
         $userNotificationsConfiguration = $user->getNotificationsConfiguration();
         $wasConsentingInternalComm = $userNotificationsConfiguration->isConsentInternalCommunication();
         $form = $this->formFactory->create(

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation\Organization;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -18,6 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteOrganizationMutation implements MutationInterface
 {
+    use MutationTrait;
+
     public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     public const ORGANIZATION_ALREADY_ANONYMIZED = 'ORGANIZATION_ALREADY_ANONYMIZED';
 
@@ -52,6 +55,7 @@ class DeleteOrganizationMutation implements MutationInterface
 
     public function __invoke(Arg $input, User $viewer): array
     {
+        $this->formatInput($input);
         $organizationId = $input->offsetGet('organizationId');
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
         if (!$organization instanceof Organization) {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Locale;
 
 use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,6 +12,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class SetDefaultLocaleMutation implements MutationInterface
 {
+    use MutationTrait;
     private $entityManager;
     private $localeRepository;
 
@@ -24,6 +26,7 @@ class SetDefaultLocaleMutation implements MutationInterface
 
     public function __invoke(Argument $args): array
     {
+        $this->formatInput($args);
         $localeId = $args->offsetGet('id');
         $locale = $this->localeRepository->find($localeId);
         if (!($locale instanceof Locale)) {
