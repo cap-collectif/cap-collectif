@@ -88,6 +88,20 @@ final class Map
         return $updatedAddress;
     }
 
+    public function getReadableAddress(?string $jsonStringAddress = null): string
+    {
+        if (!$jsonStringAddress) {
+            return '';
+        }
+
+        $jsonAddress = json_decode($jsonStringAddress, true);
+        if (!$jsonAddress[0] ?? null) {
+            return '';
+        }
+
+        return $jsonAddress[0]['formatted_address'];
+    }
+
     private function checkApiKey(): void
     {
         if (empty($this->apiServerKey) || 'INSERT_A_REAL_SECRET' === $this->apiServerKey) {

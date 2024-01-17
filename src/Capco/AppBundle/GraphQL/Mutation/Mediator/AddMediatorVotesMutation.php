@@ -53,7 +53,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Argument $argument, ?User $viewer): array
+    public function __invoke(Argument $argument, User $viewer): array
     {
         $this->formatInput($argument);
         $mediatorId = $argument->offsetGet('mediatorId');
@@ -89,7 +89,8 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
             $this->proposalVoteAccountHandler->checkIfMediatorParticipantVotesAreStillAccounted(
                 $step,
                 $mediator,
-                $participant
+                $participant,
+                $viewer
             );
         }
 

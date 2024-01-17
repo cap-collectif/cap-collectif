@@ -47,7 +47,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
         $this->formFactory = $formFactory;
     }
 
-    public function __invoke(Argument $argument, ?User $viewer): array
+    public function __invoke(Argument $argument, User $viewer): array
     {
         $this->formatInput($argument);
         $mediatorId = $argument->offsetGet('mediatorId');
@@ -71,7 +71,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
         $this->removeOldVotes($currentVotes, $proposalsId);
         $this->addNewVotes($currentVotes, $proposalsId, $viewer, $mediator, $step, $participant);
         $this->updateParticipantInfos($participant, $participantInfos);
-        $this->updateAccountedVotes($step, $mediator, $participant);
+        $this->updateAccountedVotes($step, $mediator, $participant, $viewer);
 
         $this->entityManager->flush();
 
@@ -113,12 +113,13 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
         $this->entityManager->flush();
     }
 
-    private function updateAccountedVotes(?AbstractStep $step, Mediator $mediator, Participant $participant): void
+    private function updateAccountedVotes(?AbstractStep $step, Mediator $mediator, Participant $participant, User $viewer): void
     {
         $this->proposalVoteAccountHandler->checkIfMediatorParticipantVotesAreStillAccounted(
             $step,
             $mediator,
-            $participant
+            $participant,
+            $viewer
         );
     }
 

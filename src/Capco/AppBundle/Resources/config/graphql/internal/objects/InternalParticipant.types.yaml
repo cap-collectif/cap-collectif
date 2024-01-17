@@ -44,5 +44,5 @@ InternalParticipant:
                     stepId:
                         type: 'ID!'
                         description: 'The step containing requirements.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", [value, args, getUser()])'
 

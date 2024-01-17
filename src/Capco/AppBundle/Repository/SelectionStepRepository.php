@@ -35,17 +35,19 @@ class SelectionStepRepository extends AbstractStepRepository
 
     public function findProjectMediatorsProposalsVotes(string $projectId): array
     {
-        $sql = "
-            SELECT v.id, v.proposal_id, p.title, p.reference
-            FROM votes v
-            JOIN project_abstractstep pas on v.selection_step_id = pas.step_id
-            JOIN proposal p on v.proposal_id = p.id
-            WHERE v.mediator_id is not null and pas.project_id = \"{$projectId}\"
-        ";
+        $sql = 'SELECT v.id as vote_id, v.proposal_id, p.title, p.reference, v.created_at, v.is_accounted, v.position, v.participant_id, p2.lastname, p2.firstname, p2.date_of_birth, p2.postal_address, p2.email, p2.phone, u.id as mediator_id, u.username
+                FROM votes v
+                         JOIN project_abstractstep pas on v.selection_step_id = pas.step_id
+                         JOIN proposal p on v.proposal_id = p.id
+                         JOIN participant p2 on v.participant_id = p2.id
+                         JOIN mediator m on v.mediator_id = m.id
+                JOIN fos_user u on u.id = m.user_id
+                WHERE v.mediator_id is not null and pas.project_id = :projectId
+        ';
 
         return $this->getEntityManager()
             ->getConnection()
-            ->executeQuery($sql)
+            ->executeQuery($sql, ['projectId' => $projectId])
             ->fetchAllAssociative()
         ;
     }

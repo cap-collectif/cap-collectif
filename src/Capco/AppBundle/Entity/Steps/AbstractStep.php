@@ -517,4 +517,15 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 
         return $this;
     }
+
+    public function isUserMediator(User $user): bool
+    {
+        foreach ($this->mediators as $mediator) {
+            if ($mediator->getUser() === $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

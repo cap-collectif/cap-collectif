@@ -14,6 +14,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
+use Capco\AppBundle\Utils\Map;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Overblog\GraphQLBundle\Request\Executor;
 use Psr\Log\LoggerInterface;
@@ -22,18 +23,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-
-    private const PROPOSALS_HEADERS = [
-        'proposal_id',
-        'proposal_title',
-        'proposal_reference',
-        'proposal_url',
-        'vote_id',
-    ];
 
     private ConnectionTraversor $connectionTraversor;
     private Executor $executor;
@@ -45,6 +39,8 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
     private ProposalUrlResolver $proposalUrlResolver;
     private RequestStack $requestStack;
     private ProposalRepository $proposalRepository;
+    private TranslatorInterface $translator;
+    private Map $map;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -58,7 +54,9 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         ProposalRepository $proposalRepository,
         LoggerInterface $logger,
         ProposalUrlResolver $proposalUrlResolver,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        TranslatorInterface $translator,
+        Map $map
     ) {
         $listener->disableAcl();
         $this->connectionTraversor = $connectionTraversor;
@@ -71,6 +69,8 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         $this->proposalUrlResolver = $proposalUrlResolver;
         $this->requestStack = $requestStack;
         $this->proposalRepository = $proposalRepository;
+        $this->translator = $translator;
+        $this->map = $map;
         parent::__construct($exportUtils);
     }
 
@@ -115,7 +115,8 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
             sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
         );
 
-        $writer->addRow(WriterEntityFactory::createRowFromArray(self::PROPOSALS_HEADERS));
+        list('keys' => $headerKeys, 'translations' => $headerTranslations) = $this->getHeaders();
+        $writer->addRow(WriterEntityFactory::createRowFromArray($headerTranslations));
         $progressBar = new ProgressBar($output, \count($projectMediatorsProposalsVotes));
 
         foreach ($projectMediatorsProposalsVotes as $projectMediatorsProposalsVote) {
@@ -123,12 +124,24 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
 
             $projectMediatorsProposalsVote['proposal_url'] = $this->proposalUrlResolver->__invoke($proposal);
 
-            $orderedArray = array_flip(self::PROPOSALS_HEADERS);
+            $orderedArray = array_flip($headerKeys);
             $orderedArray['proposal_id'] = GlobalId::toGlobalId('Proposal', $projectMediatorsProposalsVote['proposal_id']);
             $orderedArray['proposal_title'] = $projectMediatorsProposalsVote['title'];
             $orderedArray['proposal_reference'] = $projectMediatorsProposalsVote['reference'];
             $orderedArray['proposal_url'] = $projectMediatorsProposalsVote['proposal_url'];
-            $orderedArray['vote_id'] = $projectMediatorsProposalsVote['id'];
+            $orderedArray['vote_id'] = $projectMediatorsProposalsVote['vote_id'];
+            $orderedArray['vote_date'] = $projectMediatorsProposalsVote['created_at'];
+            $orderedArray['vote_ranking'] = $projectMediatorsProposalsVote['position'];
+            $orderedArray['vote_validation'] = 1 == $projectMediatorsProposalsVote['is_accounted'] ? $this->translator->trans('global.yes') : $this->translator->trans('global.no');
+            $orderedArray['voter_id'] = $projectMediatorsProposalsVote['participant_id'];
+            $orderedArray['voter_lastname'] = $projectMediatorsProposalsVote['lastname'];
+            $orderedArray['voter_firstname'] = $projectMediatorsProposalsVote['firstname'];
+            $orderedArray['voter_date_of_birth'] = $projectMediatorsProposalsVote['date_of_birth'];
+            $orderedArray['voter_address'] = $this->map->getReadableAddress($projectMediatorsProposalsVote['postal_address']);
+            $orderedArray['voter_email'] = $projectMediatorsProposalsVote['email'];
+            $orderedArray['voter_phone'] = $projectMediatorsProposalsVote['phone'];
+            $orderedArray['mediator_id'] = $projectMediatorsProposalsVote['mediator_id'];
+            $orderedArray['mediator_username'] = $projectMediatorsProposalsVote['username'];
 
             $writer->addRow(WriterEntityFactory::createRowFromArray($orderedArray));
         }
@@ -142,5 +155,33 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
         $output->writeln('All projects mediators proposals votes have been successfully exported!');
 
         return 0;
+    }
+
+    private function getHeaders(): array
+    {
+        $headers = [
+            'proposal_id' => $this->translator->trans('export_proposal_id'),
+            'proposal_reference' => $this->translator->trans('export_proposal_reference'),
+            'proposal_title' => $this->translator->trans('export_proposal_title'),
+            'proposal_url' => $this->translator->trans('export_proposal_url'),
+            'vote_id' => $this->translator->trans('export_vote_id'),
+            'vote_date' => $this->translator->trans('export_vote_date'),
+            'vote_ranking' => $this->translator->trans('export_vote_ranking'),
+            'vote_validation' => $this->translator->trans('export_vote_validation'),
+            'voter_id' => $this->translator->trans('export_voter_id'),
+            'voter_lastname' => $this->translator->trans('export_voter_lastname'),
+            'voter_firstname' => $this->translator->trans('export_voter_firstname'),
+            'voter_date_of_birth' => $this->translator->trans('export_voter_date_of_birth'),
+            'voter_address' => $this->translator->trans('export_voter_address'),
+            'voter_email' => $this->translator->trans('export_voter_email'),
+            'voter_phone' => $this->translator->trans('export_voter_phone'),
+            'mediator_id' => $this->translator->trans('export_mediator_id'),
+            'mediator_username' => $this->translator->trans('export_mediator_username'),
+        ];
+
+        return [
+            'keys' => array_keys($headers),
+            'translations' => array_values($headers),
+        ];
     }
 }

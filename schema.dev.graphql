@@ -8341,6 +8341,7 @@ type Mutation {
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
   deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
   updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
+  updateParticipantRequirement(input: UpdateParticipantRequirementInput!): UpdateParticipantRequirementPayload
   createUser(input: CreateUserInput!): CreateUserPayload
   updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
   addUsersToGroupFromEmail(input: AddUsersToGroupFromEmailInput!): AddUsersToGroupFromEmailPayload
@@ -18142,6 +18143,24 @@ type UpdatePaperVotePayload {
 
   """The error, if any."""
   error: UpdatePaperVoteErrorCode
+  clientMutationId: String
+}
+
+input UpdateParticipantRequirementInput {
+  """The Node ID of the requirement to modify."""
+  requirementId: ID!
+
+  """The updated value of the requirement."""
+  value: Boolean!
+
+  """The participant token."""
+  participantToken: String!
+  clientMutationId: String
+}
+
+type UpdateParticipantRequirementPayload {
+  participant: Participant
+  requirement: Requirement
   clientMutationId: String
 }
 

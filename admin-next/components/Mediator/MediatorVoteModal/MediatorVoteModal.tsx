@@ -6,7 +6,6 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { ConnectionHandler, graphql, useLazyLoadQuery } from 'react-relay'
 import { MediatorVoteModal_REQUIREMENTS_Query } from '@relay/MediatorVoteModal_REQUIREMENTS_Query.graphql'
 import FillRequirementsModal from './FillRequirementsModal'
-import { RequirementTypeName } from '@components/Requirements/Requirements'
 import FillOptionalsModal from './FillOptionalsModal'
 import AddMediatorVotesMutation from '@mutations/AddMediatorVotesMutation'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
@@ -14,6 +13,7 @@ import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
 import { MediatorVoteModal_EDIT_Query } from '@relay/MediatorVoteModal_EDIT_Query.graphql'
 import moment, { Moment } from 'moment'
 import UpdateMediatorVotesMutation from '@mutations/UpdateMediatorVotesMutation'
+import UpdateParticipantRequirement from '@mutations/UpdateParticipantRequirement'
 
 type Props = {
   onClose: () => void
@@ -39,6 +39,9 @@ type FormValues = {
   JSONaddress?: string
   phone?: string
   votes: Array<{ value: string; label: string }>
+  checkboxes: {
+    [requirementId: string]: boolean
+  } | null
 }
 
 export const REQUIREMENTS_QUERY = graphql`
@@ -47,13 +50,8 @@ export const REQUIREMENTS_QUERY = graphql`
       ... on SelectionStep {
         id
         votesMin
-        requirements {
-          edges {
-            node {
-              __typename
-            }
-          }
-        }
+        ...FillRequirementsModal_step
+        ...FillOptionalsModal_step
       }
     }
   }
@@ -111,21 +109,40 @@ const MediatorVoteModal = ({
     }
 
     try {
-      if (!participantId)
-        await AddMediatorVotesMutation.commit(
+      let participant = null;
+      if (!participantId) {
+        const response = await AddMediatorVotesMutation.commit(
           {
-            input: { ...input, stepId },
+            input: {...input, stepId},
           },
           connectionName,
         )
-      else
-        await UpdateMediatorVotesMutation.commit({
+        participant = await response.addMediatorVotes.participant;
+      }
+      else {
+        const response = await UpdateMediatorVotesMutation.commit({
           input: {
             ...input,
             participantId,
           },
           mediatorId
         })
+        participant = await response.updateMediatorVotes.participant;
+      }
+
+      const checkboxes = data.checkboxes
+      if (Object.keys(checkboxes).length > 0) {
+        for (const [requirementId, value] of Object.entries(checkboxes)) {
+          await UpdateParticipantRequirement.commit({
+            input: {
+              participantToken: participant.token,
+              requirementId,
+              value: value ?? false,
+            }
+          })
+        }
+      }
+
       toast({
         variant: 'success',
         content: intl.formatMessage({
@@ -146,7 +163,7 @@ const MediatorVoteModal = ({
 
   if (!query) return null
 
-  const requirements = query.node.requirements?.edges?.map(({ node }) => node.__typename as RequirementTypeName)
+  const step = query.node;
   const votesMin = query.node.votesMin || 1
   const { handleSubmit } = methods
 
@@ -163,8 +180,8 @@ const MediatorVoteModal = ({
           onClose={onClose}
         >
           <SelectProposalsModal onCancel={onClose} stepId={stepId} isNew={!participantId} votesMin={votesMin} />
-          <FillRequirementsModal requirements={requirements} isNew={!participantId} />
-          <FillOptionalsModal requirements={requirements} onSubmit={onSubmit} isNew={!participantId} />
+          <FillRequirementsModal step={step} isNew={!participantId} />
+          <FillOptionalsModal step={step} onSubmit={onSubmit} isNew={!participantId} />
         </MultiStepModal>
       </FormProvider>
     </form>
@@ -200,6 +217,11 @@ export const EDIT_QUERY = graphql`
                   formatted
                   json
                 }
+              }
+              ... on CheckboxRequirement {
+                id
+                label
+                participantMeetsTheRequirement(token: $token)
               }
             }
           }
@@ -270,8 +292,12 @@ export const MediatorVoteModalEdit = ({ token, ...props }: Props) => {
       ?.participantAddress?.formatted,
     JSONaddress: (requirements.find(r => r.__typename === 'PostalAddressRequirement') as AddressRequirement)
       ?.participantAddress?.json,
+    checkboxes: requirements.filter(r => r.__typename === 'CheckboxRequirement')
+      .reduce((object, requirement) => {
+        object[requirement.id] = requirement.participantMeetsTheRequirement ?? false
+        return object
+      }, {})
   }
-
   return <MediatorVoteModal {...props} defaultValues={defaultValues} />
 }
 export default MediatorVoteModal

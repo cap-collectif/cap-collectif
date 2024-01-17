@@ -723,6 +723,12 @@ InternalMutation:
                     inputType: UpdateRequirementInput
                     payloadType: UpdateRequirementPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRequirementMutation", args, getUser())'
+            updateParticipantRequirement:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateParticipantRequirementInput
+                    payloadType: UpdateParticipantRequirementPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateParticipantRequirementMutation", args)'
             createUser:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'

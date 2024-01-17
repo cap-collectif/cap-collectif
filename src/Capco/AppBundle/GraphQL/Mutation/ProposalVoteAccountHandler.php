@@ -64,11 +64,13 @@ class ProposalVoteAccountHandler
     public function checkIfMediatorParticipantVotesAreStillAccounted(
         SelectionStep $step,
         Mediator $mediator,
-        Participant $participant
+        Participant $participant,
+        User $viewer
     ): bool {
         $isMeetingRequirements = $this->participantIsMeetingRequirementsResolver->__invoke(
             $participant,
-            new Argument(['stepId' => $step->getId()])
+            new Argument(['stepId' => $step->getId()]),
+            $viewer
         );
 
         $minimumVote = $step->getVotesMin() ?? 0;
@@ -89,6 +91,8 @@ class ProposalVoteAccountHandler
         foreach ($proposalSelectionVotes as $proposalSelectionVote) {
             $proposalSelectionVote->setIsAccounted($isAccounted);
         }
+
+        $this->em->flush();
 
         return $isAccounted;
     }

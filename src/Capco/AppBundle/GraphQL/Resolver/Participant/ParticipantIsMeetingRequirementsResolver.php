@@ -3,9 +3,12 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 
 use Capco\AppBundle\Entity\Participant;
+use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\ViewerMeetsTheRequirementResolver;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
@@ -22,13 +25,14 @@ class ParticipantIsMeetingRequirementsResolver implements QueryInterface
         $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
     }
 
-    public function __invoke(Participant $participant, Argument $args): bool
+    public function __invoke(Participant $participant, Argument $args, User $viewer): bool
     {
         $stepId = $args->offsetGet('stepId');
 
         $step = $this->getStep($stepId);
 
-        $requirements = $step->getRequirements();
+        $requirements = $this->getRequirements($step, $viewer);
+
         $hasRequirements = $requirements->count() > 0;
 
         if (!$hasRequirements) {
@@ -53,5 +57,21 @@ class ParticipantIsMeetingRequirementsResolver implements QueryInterface
         }
 
         return $step;
+    }
+
+    private function getRequirements(AbstractStep $step, User $viewer): Collection
+    {
+        $requirements = $step->getRequirements();
+
+        if ($step->isUserMediator($viewer)) {
+            // TODO add EMAIL to $mediatorOptionnalRequirements when 15954-parcours-participation is merged
+            $mediatorOptionnalRequirements = [Requirement::PHONE, Requirement::PHONE_VERIFIED];
+
+            return $requirements->filter(function ($requirement) use ($mediatorOptionnalRequirements) {
+                return !\in_array($requirement->getType(), $mediatorOptionnalRequirements);
+            });
+        }
+
+        return $requirements;
     }
 }
