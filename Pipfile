@@ -1,7 +1,7 @@
 [packages]
 docker-compose = ">=1.23.0"
 docker = "*"
-PyYAML = "*"
+PyYAML = "<5.4"
 Fabric = "*"
 paramiko = "*"
 pycodestyle = "*"
