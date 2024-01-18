@@ -10,7 +10,7 @@ trait OpenidConnectTrait
     public function IShouldSeeTheOpenidConnectLoginScreen()
     {
         $this->assertSession()->addressMatches(
-            '/^\/auth\/realms\/master\/protocol\/openid-connect\/auth/i'
+            '/^\/realms\/master\/protocol\/openid-connect\/auth/i'
         );
     }
 

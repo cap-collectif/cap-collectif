@@ -75,7 +75,7 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         $resourceOwner
             ->getOption('logout_url')
             ->willReturn(
-                'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout'
+                'https://keycloak.cap-collectif.com/realms/master/protocol/openid-connect/logout'
             )
         ;
 
@@ -89,7 +89,7 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         $redirectResponse
             ->getTargetUrl()
             ->willReturn(
-                'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout?' .
+                'https://keycloak.cap-collectif.com/realms/master/protocol/openid-connect/logout?' .
                     http_build_query($parameters, '', '&')
             )
         ;
@@ -127,7 +127,7 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         $resourceOwner
             ->getOption('logout_url')
             ->willReturn(
-                'https://keycloak.cap-collectif.com/auth/realms/master/protocol/openid-connect/logout'
+                'https://keycloak.cap-collectif.com/realms/master/protocol/openid-connect/logout'
             )
         ;
         $dummyRedirectResponseWithRequest->getRequest()->willReturn($request);
