@@ -100,7 +100,16 @@ Cypress.Commands.add('directLogin', ({ email, password }: Cypress.LoginOptions) 
       autoEnd: false,
     })
 
-    cy.request('POST', '/login_check', { username: email, password }).then(response => {
+    cy.request({
+      url: '/login_check',
+      method: 'POST',
+      body: {
+        username: email,
+        password,
+      },
+      retryOnStatusCodeFailure: true,
+      retryOnNetworkFailure: true,
+    }).then(response => {
       expect(response.status).to.eq(200)
       log.set({
         consoleProps() {
