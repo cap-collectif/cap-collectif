@@ -13,8 +13,14 @@ use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use Doctrine\ORM\EntityManagerInterface;
-use Liuggio\ExcelBundle\Factory;
 use Overblog\GraphQLBundle\Definition\Argument;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Collection\Memory\SimpleCache1;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Settings;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\IWriter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
@@ -23,7 +29,7 @@ class ProjectDownloadResolver
     protected TranslatorInterface $translator;
     protected UrlArrayResolver $urlArrayResolver;
     protected MediaUrlResolver $urlResolver;
-    protected Factory $phpexcel;
+    protected Spreadsheet $spreadsheet;
     protected array $headers;
     protected array $data;
     protected array $customFields;
@@ -35,14 +41,14 @@ class ProjectDownloadResolver
         TranslatorInterface $translator,
         UrlArrayResolver $urlArrayResolver,
         MediaUrlResolver $urlResolver,
-        Factory $phpexcel,
+        Spreadsheet $spreadsheet,
         QuestionnaireExportResultsUrlResolver $exportUrlResolver
     ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->urlArrayResolver = $urlArrayResolver;
         $this->urlResolver = $urlResolver;
-        $this->phpexcel = $phpexcel;
+        $this->spreadsheet = $spreadsheet;
         $this->headers = [];
         $this->customFields = [];
         $this->data = [];
@@ -90,7 +96,7 @@ class ProjectDownloadResolver
     public function getContent(
         Questionnaire $questionnaire,
         ExportUtils $exportUtils
-    ): \PHPExcel_Writer_IWriter {
+    ): IWriter {
         $this->headers = $this->getQuestionnaireHeaders($questionnaire);
         $data = $this->getQuestionnaireData($questionnaire);
         $title = $this->exportUrlResolver->getFileName($questionnaire);
@@ -249,20 +255,19 @@ class ProjectDownloadResolver
         return $originalValue;
     }
 
-    private function getWriterFromData($data, $headers, $title): \PHPExcel_Writer_IWriter
+    private function getWriterFromData($data, $headers, $title): IWriter
     {
-        $phpExcelObject = $this->phpexcel->createPHPExcelObject();
-        $phpExcelObject->getProperties()->setTitle($title);
-        $phpExcelObject->setActiveSheetIndex();
-        $sheet = $phpExcelObject->getActiveSheet();
+        $this->spreadsheet->getProperties()->setTitle($title);
+        $this->spreadsheet->setActiveSheetIndex(0);
+        $sheet = $this->spreadsheet->getActiveSheet();
         $sheet->setTitle($this->translator->trans('global.contribution', [], 'CapcoAppBundle'));
-        \PHPExcel_Settings::setCacheStorageMethod(
-            \PHPExcel_CachedObjectStorageFactory::cache_in_memory,
-            ['memoryCacheSize' => '512M']
+
+        Settings::setCache(
+            new SimpleCache1()
         );
         $nbCols = \count($headers);
         // Add headers
-        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString();
+        list($startColumn, $startRow) = Coordinate::coordinateFromString('A1');
         $currentColumn = $startColumn;
         foreach ($headers as $header) {
             if (\is_array($header)) {
@@ -274,10 +279,10 @@ class ProjectDownloadResolver
                     'CapcoAppBundle'
                 );
             }
-            $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
+            $sheet->setCellValueExplicit([$currentColumn, $startRow], $header, DataType::TYPE_STRING);
             ++$currentColumn;
         }
-        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A2');
+        list($startColumn, $startRow) = Coordinate::coordinateFromString('A2');
         $currentRow = $startRow;
         // Loop through data
         foreach ($data as $row) {
@@ -291,7 +296,7 @@ class ProjectDownloadResolver
         }
 
         // create the writer
-        return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
+        return IOFactory::createWriter($this->spreadsheet, 'Xlsx');
     }
 
     private function booleanToString($boolean): string

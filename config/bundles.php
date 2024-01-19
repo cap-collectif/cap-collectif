@@ -71,8 +71,6 @@ return [
     Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle::class => ['all' => true],
     // Saml
     Hslavich\SimplesamlphpBundle\HslavichSimplesamlphpBundle::class => ['all' => true],
-    // Excel files generation
-    Liuggio\ExcelBundle\LiuggioExcelBundle::class => ['all' => true],
     // PolyCollection support.
     Infinite\FormBundle\InfiniteFormBundle::class => ['all' => true],
     Overblog\DataLoaderBundle\OverblogDataLoaderBundle::class => ['all' => true],

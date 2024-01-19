@@ -312,7 +312,7 @@ services:
 
     Capco\AppBundle\Mailer\EmailingCampaignSender: ~
 
-    Liuggio\ExcelBundle\Factory:
+    PhpOffice\PhpSpreadsheet\Spreadsheet:
         public: true
 
     Doctrine\Migrations\Version\DbalMigrationFactory: ~

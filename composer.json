@@ -95,7 +95,6 @@
         "jms/serializer-bundle": "^3.1",
         "jms/i18n-routing-bundle": "^3.0",
         "jms/translation-bundle": "^1.0",
-        "liuggio/excelbundle": "dev-master",
         "snc/redis-bundle": "^3.1",
         "ekino/newrelic-bundle": "^2.2",
         "google/recaptcha": "^1.1",
@@ -161,7 +160,8 @@
         "sendinblue/api-v3-sdk": "7.4.4",
         "knplabs/gaufrette": "0.9",
         "geocoder-php/common-http": "4.4.*",
-        "friendsofsymfony/ckeditor-bundle": "^2.4"
+        "friendsofsymfony/ckeditor-bundle": "^2.4",
+        "phpoffice/phpspreadsheet": "^1.29"
     },
     "require-dev": {
         "behat/behat": "^3.3",
