@@ -3,8 +3,8 @@ import { Tabs } from '@cap-collectif/ui';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
-import ConsultationStepRequirements from '@components/Requirements/ConsultationStepRequirements';
 import { ConsultationStepRequirementsTabs_consultationStep$key } from '@relay/ConsultationStepRequirementsTabs_consultationStep.graphql';
+import Requirements from "./Requirements";
 
 type Props = {
     consultationStep: ConsultationStepRequirementsTabs_consultationStep$key;
@@ -14,7 +14,7 @@ type Props = {
 const CONSULTATION_STEP_FRAGMENT = graphql`
     fragment ConsultationStepRequirementsTabs_consultationStep on ConsultationStep {
         ... on RequirementStep {
-            ...ConsultationStepRequirements_consultationStep
+            ...Requirements_requirementStep
         }
     }
 `;
@@ -42,9 +42,8 @@ const ConsultationStepRequirementsTabs: React.FC<Props> = ({
                 </Tabs.ButtonList>
                 <Tabs.PanelList>
                     <Tabs.Panel>
-                        <ConsultationStepRequirements
-                            consultationStep={consultationStep}
-                            formMethods={formMethods}
+                        <Requirements
+                          requirementStep={consultationStep}
                         />
                     </Tabs.Panel>
                     <Tabs.Panel></Tabs.Panel>

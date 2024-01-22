@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\QuestionnaireType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -148,6 +149,8 @@ class ConfigureAnalysisMutation implements MutationInterface
             }
         }
 
+        $this->handleEvaluationFormType($analysisConfiguration, $evaluationForm);
+
         $analysisConfiguration
             ->setProposalForm($proposalForm)
             ->setEvaluationForm($evaluationForm)
@@ -189,5 +192,18 @@ class ConfigureAnalysisMutation implements MutationInterface
         }
 
         return $proposalForm;
+    }
+
+    private function handleEvaluationFormType(AnalysisConfiguration $analysisConfiguration, ?Questionnaire $newEvaluationForm): void
+    {
+        $currentEvaluationForm = $analysisConfiguration->getEvaluationForm();
+
+        if ($currentEvaluationForm) {
+            $currentEvaluationForm->setType(QuestionnaireType::QUESTIONNAIRE);
+        }
+
+        if ($newEvaluationForm) {
+            $newEvaluationForm->setType(QuestionnaireType::QUESTIONNAIRE_ANALYSIS);
+        }
     }
 }

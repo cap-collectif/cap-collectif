@@ -13,13 +13,16 @@ import ProposalFormListQuery, {PROPOSAL_FORM_LIST_QUERY} from "./ProposalFormLis
 import QuestionnaireListQuery, {QUESTIONNAIRE_LIST_QUERY} from "./QuestionnaireListQuery";
 import type {ProposalFormListQuery as ProposalFormListQueryType} from '@relay/ProposalFormListQuery.graphql';
 import type {QuestionnaireListQuery as QuestionnaireListQueryType} from '@relay/QuestionnaireListQuery.graphql';
+import type {ConsultationListQuery as ConsultationListQueryType} from '@relay/ConsultationListQuery.graphql';
 import {Affiliations} from "./FormListQuery";
 import {FormListPage_viewer$key} from "@relay/FormListPage_viewer.graphql";
 import FormEmptyState from "./FormEmptyState";
 import CreateFormModal from "./CreateFormModal";
+import ConsultationListQuery, {CONSULTATION_LIST_QUERY} from "@components/Forms/ConsultationListQuery";
+import useUrlState from "@hooks/useUrlState";
 
 const VIEWER_FRAGMENT = graphql`
-    fragment FormListPage_viewer on User 
+    fragment FormListPage_viewer on User
     @argumentDefinitions(
         term: { type: String }
         proposalFormAffiliations: { type: "[ProposalFormAffiliation!]" }
@@ -32,21 +35,26 @@ const VIEWER_FRAGMENT = graphql`
                 affiliations: $proposalFormAffiliations
             ) {
                 totalCount
-            }    
+            }
             questionnaires(
                 query: $term
                 affiliations: $questionnaireAffiliations
                 types: [QUESTIONNAIRE, VOTING]
             ) {
                 totalCount
-            }     
+            }
             questionnaireAnalysis: questionnaires(
                 query: $term
                 affiliations: $questionnaireAffiliations
                 types: [QUESTIONNAIRE_ANALYSIS]
             ) {
                 totalCount
-            }    
+            }
+            consultations(
+                query: $term
+            ) {
+                totalCount
+            }
         }
         proposalForms(
             query: $term
@@ -60,12 +68,15 @@ const VIEWER_FRAGMENT = graphql`
             types: [QUESTIONNAIRE, VOTING]
         ) {
             totalCount
-        }     
+        }
         questionnaireAnalysis: questionnaires(
             query: $term
             affiliations: $questionnaireAffiliations
             types: [QUESTIONNAIRE_ANALYSIS]
         ) {
+            totalCount
+        }
+        consultations(query: $term) {
             totalCount
         }
         ...CreateFormModal_viewer
@@ -93,13 +104,15 @@ export type FormTypes = 'PROPOSAL_FORM' | 'QUESTIONNAIRE' | 'CONSULTATION' | 'QU
 
 const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
     const intl = useIntl();
-    const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
+    const viewer = useFragment<FormListPage_viewer$key>(VIEWER_FRAGMENT, viewerRef);
     const [term, setTerm] = React.useState<string>('');
-    const [selectedFormFilter, setSelectedFormFilter] = React.useState<FormTypes>('PROPOSAL_FORM');
+
+    const [selectedFormFilter, setSelectedFormFilter] = useUrlState('formType', 'PROPOSAL_FORM');
 
     const [proposalFormQueryReference, loadProposalFormQuery, disposeProposalFormQuery] = useQueryLoader<ProposalFormListQueryType>(PROPOSAL_FORM_LIST_QUERY);
     const [questionnaireQueryReference, loadQuestionnaireQuery, disposeQuestionnaireQuery] = useQueryLoader<QuestionnaireListQueryType>(QUESTIONNAIRE_LIST_QUERY);
-    const [questionnaireAnalysisQueryReference, loadquestionnaireAnalysisQueryReference, disposequestionnaireAnalysisQueryReference] = useQueryLoader<QuestionnaireListQueryType>(QUESTIONNAIRE_LIST_QUERY);
+    const [questionnaireAnalysisQueryReference, loadQuestionnaireAnalysisQueryReference, disposeQuestionnaireAnalysisQueryReference] = useQueryLoader<QuestionnaireListQueryType>(QUESTIONNAIRE_LIST_QUERY);
+    const [consultationQueryReference, loadConsultationQueryReference, disposeConsultationQueryReference] = useQueryLoader<ConsultationListQueryType>(CONSULTATION_LIST_QUERY);
 
     const organization = viewer?.organizations?.[0];
     const owner = organization ?? viewer;
@@ -116,7 +129,7 @@ const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
         'PROPOSAL_FORM': owner?.proposalForms?.totalCount ?? 0,
         'QUESTIONNAIRE': owner?.questionnaires?.totalCount ?? 0,
         'QUESTIONNAIRE_ANALYSIS': owner?.questionnaireAnalysis?.totalCount ?? 0,
-        'CONSULTATION': 0 // todo implement when consultation is done
+        'CONSULTATION': owner?.consultations?.totalCount ?? 0,
     }
 
     const queryVariables = {term, affiliations, orderBy: {field: 'CREATED_AT', direction: 'DESC'}, count: 20} as const;
@@ -127,12 +140,16 @@ const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
             return () => disposeProposalFormQuery();
         }
         if (selectedFormFilter === 'QUESTIONNAIRE_ANALYSIS') {
-            loadquestionnaireAnalysisQueryReference({...queryVariables, types: ['QUESTIONNAIRE_ANALYSIS']});
+            loadQuestionnaireAnalysisQueryReference({...queryVariables, types: ['QUESTIONNAIRE_ANALYSIS']});
             return () => disposeQuestionnaireQuery();
         }
         if (selectedFormFilter === 'QUESTIONNAIRE') {
             loadQuestionnaireQuery({...queryVariables, types: ['QUESTIONNAIRE']});
-            return () => disposequestionnaireAnalysisQueryReference();
+            return () => disposeQuestionnaireAnalysisQueryReference();
+        }
+        if (selectedFormFilter === 'CONSULTATION') {
+            loadConsultationQueryReference({...queryVariables});
+            return () => disposeConsultationQueryReference();
         }
     }, [selectedFormFilter, term]);
 
@@ -162,15 +179,18 @@ const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
                         setSelectedFormFilter(value as FormTypes)
                     }}
                     value={selectedFormFilter}>
-                    <InlineSelect.Choice value="PROPOSAL_FORM">
+                    <InlineSelect.Choice value="PROPOSAL_FORM" id="proposal_form_choice">
                         {intl.formatMessage({id: 'collect_step'})} ({totalCounts['PROPOSAL_FORM']})
                     </InlineSelect.Choice>
-                    <InlineSelect.Choice value="QUESTIONNAIRE">
+                    <InlineSelect.Choice value="QUESTIONNAIRE" id="questionnaire_choice">
                         <Box>
                             {intl.formatMessage({id: 'project.types.questionnaire'})} ({totalCounts['QUESTIONNAIRE']})
                         </Box>
                     </InlineSelect.Choice>
-                    <InlineSelect.Choice value="QUESTIONNAIRE_ANALYSIS">
+                    <InlineSelect.Choice value="CONSULTATION" id="consultation_choice">
+                        {intl.formatMessage({id: 'step.consultation.default.title'})} ({totalCounts['CONSULTATION']})
+                    </InlineSelect.Choice>
+                    <InlineSelect.Choice value="QUESTIONNAIRE_ANALYSIS" id="questionnaire_analysis_choice">
                         {intl.formatMessage({id: 'panel.analysis.subtitle'})} ({totalCounts['QUESTIONNAIRE_ANALYSIS']})
                     </InlineSelect.Choice>
                 </InlineSelect>
@@ -188,6 +208,10 @@ const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
                             {(selectedFormFilter === 'QUESTIONNAIRE' && questionnaireQueryReference) &&
                                 <QuestionnaireListQuery queryReference={questionnaireQueryReference} term={term}
                                                         resetTerm={resetTerm} types={['QUESTIONNAIRE', 'VOTING']}
+                                />}
+                            {(selectedFormFilter === 'CONSULTATION' && consultationQueryReference) &&
+                                <ConsultationListQuery queryReference={consultationQueryReference} term={term}
+                                                        resetTerm={resetTerm}
                                 />}
                         </React.Suspense>
                     ) : (

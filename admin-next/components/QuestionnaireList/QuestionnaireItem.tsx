@@ -5,11 +5,13 @@ import { Table, Link } from '@cap-collectif/ui';
 import ModalConfirmationDelete from './ModalConfirmationDelete';
 import type { QuestionnaireItem_questionnaire$key } from '@relay/QuestionnaireItem_questionnaire.graphql';
 import { QuestionnaireItem_viewer$key } from '@relay/QuestionnaireItem_viewer.graphql';
+import {QuestionnaireType} from "@relay/QuestionnaireListQuery.graphql";
 
 type QuestionnaireItemProps = {
     questionnaire: QuestionnaireItem_questionnaire$key;
     viewer: QuestionnaireItem_viewer$key;
     connectionName: string;
+    types?: Array<QuestionnaireType>;
 };
 
 const QUESTIONNAIRE_FRAGMENT = graphql`
@@ -50,6 +52,7 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
     questionnaire: questionnaireRef,
     viewer: viewerRef,
     connectionName,
+    types,
 }) => {
     const viewer = useFragment(VIEWER_FRAGMENT, viewerRef);
     const questionnaire = useFragment(QUESTIONNAIRE_FRAGMENT, questionnaireRef);
@@ -95,6 +98,7 @@ const QuestionnaireItem: React.FC<QuestionnaireItemProps> = ({
             <Table.Td visibleOnHover>
                 {canDelete && (
                     <ModalConfirmationDelete
+                        types={types}
                         questionnaire={questionnaire}
                         connectionName={connectionName}
                     />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay';
 import {
     QuestionnaireListQuery as QuestionnaireListQueryType,

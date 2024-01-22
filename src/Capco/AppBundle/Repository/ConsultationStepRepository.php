@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
@@ -137,6 +138,18 @@ class ConsultationStepRepository extends AbstractStepRepository
         }
 
         return $qb->getQuery()->execute();
+    }
+
+    public function findByOrganization(Organization $organization)
+    {
+        $qb = $this->createQueryBuilder('cs')
+            ->join('cs.projectAbstractStep', 'pas')
+            ->join('pas.project', 'p')
+            ->where('p.organizationOwner = :owner')
+            ->setParameter('owner', $organization)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder()

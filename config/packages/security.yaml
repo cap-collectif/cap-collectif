@@ -18,6 +18,15 @@ security:
         - { path: ^/admin/capco/app/proposalform, roles: ROLE_USER }
         - { path: ^/admin/capco/app/event, roles: ROLE_USER }
         - { path: ^/admin/capco/app/proposal/.*/edit, roles: ROLE_USER }
+        - { path: ^/admin/capco/app/consultation/.*/edit, roles: ROLE_USER }
+        - { path: ^/admin/capco/app/opiniontypeappendixtype, roles: ROLE_USER }
+        - { path: ^/admin/core/get-form-field-element, roles: ROLE_USER }
+        - { path: ^/admin/capco/media/media, roles: ROLE_USER }
+        - { path: ^/admin/core/get-short-object-description, roles: ROLE_USER }
+        - { path: ^/admin/capco/app/opiniontype/create, roles: ROLE_USER }
+        - { path: ^/admin/capco/app/opiniontype/.*/edit, roles: ROLE_USER }
+        - { path: ^/admin/core/append-form-field-element, roles: ROLE_USER }
+        - { path: ^/admin/capco/app/appendixtype, roles: ROLE_USER }
         - { path: ^/admin/capco/app/post, roles: ROLE_USER }
         - { path: ^/admin/capco/app/questionnaire, roles: ROLE_USER }
         - { path: ^/admin/dashboard, roles: ROLE_PROJECT_ADMIN }

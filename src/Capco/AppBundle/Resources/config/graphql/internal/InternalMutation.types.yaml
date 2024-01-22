@@ -1786,6 +1786,20 @@ InternalMutation:
                     inputType: CreateOrUpdateConsultationInput
                     payloadType: CreateOrUpdateConsultationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateOrUpdateConsultationMutation", args, getUser())'
+            deleteConsultation:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteConsultationMutation").isGranted(args["input"]["id"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteConsultationInput
+                    payloadType: DeleteConsultationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteConsultationMutation", args, getUser())'
+            createConsultation:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\CreateConsultationMutation").isGranted(getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateConsultationInput
+                    payloadType: CreateConsultationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateConsultationMutation", args, getUser())'
             # Mediator
             addMediators:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\AddMediatorsMutation").isGranted(args["input"]["stepId"], getUser())'

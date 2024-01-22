@@ -47,9 +47,6 @@ class UpdateQuestionnaireStepMutation implements MutationInterface
         $questionnaireStepId = $input->offsetGet('stepId');
         $questionnaireStep = $this->getQuestionnaireStep($questionnaireStepId, $viewer);
 
-        // since title is no longer required we set empty string to not break existing steps
-        $questionnaireStep->setTitle('');
-
         unset($data['stepId']);
         $this->handleAnonParticipation($data);
 

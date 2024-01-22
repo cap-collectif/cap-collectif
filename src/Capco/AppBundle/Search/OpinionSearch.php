@@ -45,6 +45,17 @@ class OpinionSearch extends Search
             foreach ($this->getFiltersForProjectViewerCanSee('project', $viewer) as $filter) {
                 $subBoolQuery->addShould($filter);
             }
+
+            if ($viewer->getOrganization()) {
+                $subBoolQuery->addShould((new BoolQuery())->addShould(
+                    new Term([
+                        'consultation.owner.id' => [
+                            'value' => $viewer->getOrganization()->getId(),
+                        ],
+                    ])
+                ));
+            }
+
             $conditions[] = $subBoolQuery;
         }
 

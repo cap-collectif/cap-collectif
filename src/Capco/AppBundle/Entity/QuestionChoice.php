@@ -49,7 +49,7 @@ class QuestionChoice implements IndexableInterface
     private $color;
 
     /**
-     * @ORM\Column(name="temporary_id", type="guid", nullable=true)
+     * @ORM\Column(name="temporary_id", type="string", nullable=true, length=255)
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private ?string $temporaryId = null;

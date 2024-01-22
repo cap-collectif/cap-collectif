@@ -32,9 +32,7 @@ class StepRequirementsResolver implements QueryInterface
 
     public function __invoke(
         AbstractStep $step,
-        // User|string
-
-        $user,
+        ?User $user = null,
         Argument $args
     ): ConnectionInterface {
         $requirements = $this->repository->getByStep($step);

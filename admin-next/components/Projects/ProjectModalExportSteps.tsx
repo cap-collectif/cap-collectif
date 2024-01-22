@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useIntl, IntlShape, FormattedHTMLMessage } from 'react-intl';
+import { useIntl, FormattedHTMLMessage } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
 import {
     Button,
@@ -19,13 +19,11 @@ import type {
 import downloadCSV from 'utils/download-csv';
 import { useForm } from 'react-hook-form';
 import { FormControl, FieldInput } from '@cap-collectif/form';
-import { ProjectModalExportSteps_viewer$key } from '@relay/ProjectModalExportSteps_viewer.graphql';
 
 const formName = 'form-export-project';
 
 interface ProjectModalExportStepsProps {
     project: ProjectModalExportSteps_project$key;
-    viewer: ProjectModalExportSteps_viewer$key;
 }
 
 type FormValues = {
@@ -47,17 +45,6 @@ const PROJECT_FRAGMENT = graphql`
         }
     }
 `;
-
-const VIEWER_FRAGMENT = graphql`
-    fragment ProjectModalExportSteps_viewer on User {
-        isAdmin
-        isOnlyProjectAdmin
-        organizations {
-            id
-        }
-    }
-`;
-
 const getSteptrad = (step: ProjectModalExportSteps_project['exportableSteps'][number]) => {
     if (step?.step.__typename === 'QuestionnaireStep') {
         return (
@@ -76,24 +63,11 @@ const getSteptrad = (step: ProjectModalExportSteps_project['exportableSteps'][nu
 };
 const ProjectModalExportSteps: React.FC<ProjectModalExportStepsProps> = ({
     project: projectFragment,
-    viewer: viewerFragment,
 }) => {
     const project = useFragment(PROJECT_FRAGMENT, projectFragment);
-    const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
-    const organization = viewer?.organizations?.[0];
-    const canExportContributors =
-        viewer?.isAdmin && !(!!organization && viewer?.isOnlyProjectAdmin);
 
     const intl = useIntl();
-    const exportChoices = !canExportContributors
-        ? project.exportableSteps.map(step => {
-              return {
-                  id: step?.step?.exportStepUrl,
-                  useIdAsValue: true,
-                  label: getSteptrad(step),
-              };
-          })
-        : [
+    const exportChoices = [
               {
                   id: project.exportContributorsUrl,
                   useIdAsValue: true,

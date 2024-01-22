@@ -10,6 +10,7 @@ InternalOrganization:
         - InternalQuestionnaireOwner
         - InternalMailingListOwner
         - InternalEmailingCampaignOwner
+        - InternalConsultationOwner
     config:
         description: 'An organization.'
         name: Organization
@@ -23,6 +24,7 @@ InternalOrganization:
             - InternalQuestionnaireOwner
             - InternalMailingListOwner
             - InternalEmailingCampaignOwner
+            - InternalConsultationOwner
         fields:
             id:
                 description: 'The ID of an object.'
@@ -133,3 +135,8 @@ InternalOrganization:
                     hideUnpublishedPosts:
                         type: 'Boolean'
                         description: 'Hide unpublished posts'
+            consultations:
+                type: 'InternalConsultationConnection!'
+                description: 'Get all consultations that the organization owns.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\OrganizationConsultationsResolver", [value, args])'
+                argsBuilder: 'Relay::ForwardConnection'

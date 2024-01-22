@@ -3,7 +3,6 @@ import {Flex, Switch, Text} from '@cap-collectif/ui'
 import {useIntl} from "react-intl";
 import {config, RequirementTypeName} from "../Requirements/Requirements";
 import {useFormContext} from "react-hook-form";
-import {useCheckFranceConnect} from "@components/Requirements/useCheckFranceConnect";
 
 type Props = {
     id: string
@@ -17,26 +16,28 @@ const RequirementItem: React.FC<Props> = ({
     id = '',
     index,
     typename,
-    disabled: disabledDefault = false,
+    disabled = false,
     onChange: onChangeCallback,
     children
 }) => {
-    const intl = useIntl();
-    const [disabled, setDisabled] = React.useState(() => disabledDefault);
+    const requirementKey = `requirements.${index}`;
     const {setValue, watch} = useFormContext();
+    const requirement = watch(requirementKey);
+    const isChecked = requirement.isChecked ?? false;
+
+    const intl = useIntl();
+    const [checked, setIsChecked] = React.useState(() => isChecked);
 
     const apiTypename = config[typename].apiTypename;
     const title = config[typename].title;
 
-    const isDataCollectedByFranceConnect = useCheckFranceConnect({index, typename, setDisabled, id, apiTypename});
-
-    const requirementKey = `requirements.${index}`;
-    const requirement = watch(requirementKey);
-    const isChecked = requirement ? Object.keys(requirement).length > 0 : false;
+    const fc = watch('requirements').find(r => r.typename === 'FRANCE_CONNECT');
+    const isDataCollectedByFranceConnect = requirement?.isCollectedByFranceConnect && fc?.isChecked;
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isChecked = e.target.checked;
-        const value = isChecked ? {id, label: '', typename: apiTypename} : {};
+        setIsChecked(isChecked);
+        const value = {id, label: '', typename: apiTypename, isCollectedByFranceConnect: requirement.isCollectedByFranceConnect, isChecked: isChecked}
         setValue(requirementKey, value);
         if (onChangeCallback) {
             onChangeCallback({isChecked})
@@ -45,7 +46,7 @@ const RequirementItem: React.FC<Props> = ({
 
     return (
         <Flex bg="white" direction="column" p={4} borderRadius="4px">
-            <Flex justifyContent="space-between" >
+            <Flex justifyContent="space-between">
                 <Text as="label" htmlFor={typename} fontWeight={600} width="100%" color="blue.900">
                     <Flex justifyContent="space-between">
                         {intl.formatMessage({id: title})}
@@ -58,9 +59,9 @@ const RequirementItem: React.FC<Props> = ({
                 </Text>
                 <Switch
                     id={typename}
-                    checked={isChecked}
+                    checked={checked || isDataCollectedByFranceConnect}
                     onChange={onChange}
-                    disabled={disabled}
+                    disabled={disabled || isDataCollectedByFranceConnect}
                 />
             </Flex>
             {children}

@@ -246,12 +246,21 @@ InternalQuery:
                         type: 'ID'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationStepsQueryResolver", [args])'
             consultations:
-                type: '[InternalConsultation!]!'
+                type: 'InternalConsultationConnection!'
+                description: 'Get all consultations.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
+                argsBuilder: 'Relay::ForwardConnection'
                 args:
                     id:
                         description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
                         type: 'ID'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
+                    query:
+                        description: 'Filter consultation by a given query.'
+                        type: 'String'
+                    orderBy:
+                        description: 'Order consultation by a given criterias.'
+                        type: 'ConsultationOrder'
+                        defaultValue: {field: 'POSITION', direction: 'ASC'}
             groups:
                 description: 'Lookup groups.'
                 type: 'GroupConnection!'

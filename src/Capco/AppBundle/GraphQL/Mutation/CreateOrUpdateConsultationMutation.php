@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,6 +32,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private OpinionTypeRepository $opinionTypeRepository;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         FormFactoryInterface $formFactory,
@@ -38,7 +40,8 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         LoggerInterface $logger,
         GlobalIdResolver $globalIdResolver,
         OpinionTypeRepository $opinionTypeRepository,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        SettableOwnerResolver $settableOwnerResolver
     ) {
         $this->formFactory = $formFactory;
         $this->em = $em;
@@ -46,6 +49,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         $this->globalIdResolver = $globalIdResolver;
         $this->opinionTypeRepository = $opinionTypeRepository;
         $this->authorizationChecker = $authorizationChecker;
+        $this->settableOwnerResolver = $settableOwnerResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -78,6 +82,11 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 
                 throw GraphQLException::fromFormErrors($form);
             }
+
+            $consultation->setCreator($viewer);
+            $consultation->setOwner(
+                $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
+            );
 
             $consultations->add($consultation);
         }

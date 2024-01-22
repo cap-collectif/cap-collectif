@@ -100,7 +100,8 @@ class StepFactory
     public function createOtherStep(): OtherStep
     {
         return (new OtherStep())
-            ->setTitle('')
+            ->setTitle($this->trans('custom-step'))
+            ->setLabel($this->trans('custom-step'))
         ;
     }
 

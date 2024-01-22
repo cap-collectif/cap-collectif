@@ -39,7 +39,7 @@ Capco\AppBundle\Entity\Opinion:
         pinned:
             groups: [Opinions, ElasticsearchOpinion]
         consultation:
-            groups: [Opinions, ElasticsearchOpinionNestedConsultation]
+            groups: [ElasticSearch, Opinions, ElasticsearchOpinionNestedConsultation]
         publishedAt:
             groups:
                 [

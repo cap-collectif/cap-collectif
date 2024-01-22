@@ -1,0 +1,7 @@
+DeleteConsultationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedConsultationId:
+                type: 'ID'
+                description: 'The deleted consultation id'

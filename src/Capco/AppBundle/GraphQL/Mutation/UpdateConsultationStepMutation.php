@@ -48,7 +48,6 @@ class UpdateConsultationStepMutation implements MutationInterface
         $stepId = $data['stepId'];
         $step = $this->getStep($stepId, $viewer);
 
-        $data['title'] = '';
         unset($data['stepId']);
 
         $form = $this->formFactory->create(ConsultationStepFormType::class, $step);

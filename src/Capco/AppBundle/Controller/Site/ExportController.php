@@ -44,6 +44,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -281,7 +282,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_USER')")
      *
      * @param mixed $stepId
      */
@@ -298,6 +299,12 @@ class ExportController extends Controller
             ]);
 
             throw new BadRequestHttpException('You must provide a valid step id.');
+        }
+
+        $organization = $this->getUser()->getOrganization();
+        $projectOwner = $step->getProject()->getOwner();
+        if ($organization && ($projectOwner !== $organization)) {
+            throw new AccessException();
         }
 
         $fileName = CreateStepContributorsCommand::getFilename($step);

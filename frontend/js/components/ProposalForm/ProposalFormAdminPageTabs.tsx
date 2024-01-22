@@ -60,7 +60,7 @@ export const ProposalFormAdminPageTabs = ({ intl, proposalForm, query }: Props) 
           />
 
           <ActionContainer>
-            <a href="/admin-next/proposalForm">
+            <a href="/admin/next/forms?formType=PROPOSAL_FORM">
               <Icon name={ICON_NAME.list} size={13} color={colors.primaryColor} />
               <span className="ml-5">
                 {intl.formatMessage({

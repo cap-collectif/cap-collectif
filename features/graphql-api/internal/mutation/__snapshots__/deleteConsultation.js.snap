@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteConsultation should delete a consultation as an admin 1`] = `
+Object {
+  "deleteConsultation": Object {
+    "deletedConsultationId": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
+  },
+}
+`;

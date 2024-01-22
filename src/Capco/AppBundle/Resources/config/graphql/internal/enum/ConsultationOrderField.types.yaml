@@ -1,0 +1,14 @@
+ConsultationOrderField:
+    type: enum
+    config:
+        description: 'Properties by which consultations can be ordered'
+        values:
+            UPDATED_AT:
+                value: !php/const Capco\AppBundle\Enum\ConsultationOrderField::UPDATED_AT
+                description: 'Allows ordering a list of consultations by when they have been updated.'
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\ConsultationOrderField::CREATED_AT
+                description: 'Allows ordering a list of consultations by when they have been created.'
+            POSITION:
+                value: !php/const Capco\AppBundle\Enum\ConsultationOrderField::POSITION
+                description: 'Allows ordering a list of consultations by their position.'

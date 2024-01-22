@@ -1,0 +1,13 @@
+ConsultationOrder:
+    type: input-object
+    config:
+        description: 'Ways in which lists of questionnaires can be ordered upon return.'
+        fields:
+            field:
+                type: 'ConsultationOrderField!'
+                defaultValue: !php/const Capco\AppBundle\Enum\ConsultationOrderField::POSITION
+                description: The field to order questionnaires by.
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: !php/const Capco\AppBundle\Enum\OrderDirection::DESC
+                description: The ordering direction.

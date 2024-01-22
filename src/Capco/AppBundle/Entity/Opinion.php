@@ -541,6 +541,7 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
     public static function getElasticsearchSerializationGroups(): array
     {
         return [
+            'Elasticsearch',
             'ElasticsearchOpinion',
             'ElasticsearchOpinionNestedAuthor',
             'ElasticsearchOpinionNestedProject',

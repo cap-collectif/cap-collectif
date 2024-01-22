@@ -1,3 +1,5 @@
+import { FormListPage } from '~e2e-pages/index'
+
 describe('Organization Questionnaire', () => {
   beforeEach(() => {
     cy.task('db:restore')
@@ -5,24 +7,20 @@ describe('Organization Questionnaire', () => {
   })
   describe('Questionnaire BO', () => {
     it('CRUD questionnaire', () => {
-      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListOldQuery' })
+      cy.interceptGraphQLOperation({ operationName: 'QuestionnaireListQuery' })
       cy.interceptGraphQLOperation({ operationName: 'CreateQuestionnaireMutation' })
       cy.interceptGraphQLOperation({ operationName: 'QuestionnaireAdminPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'UpdateQuestionnaireConfigurationMutation' })
       // list questionnaire
-      cy.visit('/admin-next/questionnaireList')
-      cy.wait('@QuestionnaireListOldQuery')
+      FormListPage.visit('QUESTIONNAIRE')
+      cy.wait('@QuestionnaireListQuery')
       cy.contains('Questionnaire owner orga')
       cy.contains('Questionnaire owner orga non rattaché à une step')
       cy.getByDataCy('questionnaire-item').should('have.length', 2)
       // open create questionnaire modal
-      cy.getByDataCy('create-questionnaire-button').click()
-      cy.getByDataCy('create-questionnaire-modal-title').type('my new questionnaire')
-      cy.getByDataCy('create-questionnaire-modal-create-button').click()
+      FormListPage.createForm('QUESTIONNAIRE', 'my new questionnaire')
       cy.wait('@CreateQuestionnaireMutation')
-      cy.contains('questionnaire-successfully-created')
       // update questionnaire
-      cy.contains('my new questionnaire').click()
       cy.wait('@QuestionnaireAdminPageQuery')
       // add section
       cy.get('#perso-field-add').click()
@@ -35,8 +33,8 @@ describe('Organization Questionnaire', () => {
       cy.wait('@UpdateQuestionnaireConfigurationMutation')
       cy.contains('global.saved')
       // back to questionnaire list
-      cy.visit('/admin-next/questionnaireList')
-      cy.wait('@QuestionnaireListOldQuery')
+      FormListPage.visit('QUESTIONNAIRE')
+      cy.wait('@QuestionnaireListQuery')
       cy.contains('my new questionnaire')
       cy.getByDataCy('questionnaire-item').should('have.length', 3)
     })

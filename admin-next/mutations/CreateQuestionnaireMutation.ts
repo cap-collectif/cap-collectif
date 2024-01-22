@@ -7,7 +7,8 @@ import type {
     CreateQuestionnaireMutationResponse,
     CreateQuestionnaireMutationVariables,
 } from '@relay/CreateQuestionnaireMutation.graphql';
-import { ModalCreateQuestionnaire_viewer } from '@relay/ModalCreateQuestionnaire_viewer.graphql';
+import {CreateFormModal_viewer} from '@relay/CreateFormModal_viewer.graphql';
+import {QuestionnaireType} from "@relay/QuestionnaireListQuery.graphql";
 
 type Owner = {
     readonly __typename: string;
@@ -15,7 +16,7 @@ type Owner = {
     readonly username: string | null;
 };
 
-type Viewer = Pick<ModalCreateQuestionnaire_viewer, '__typename' | 'id' | 'username'>
+type Viewer = Pick<CreateFormModal_viewer, '__typename' | 'id' | 'username'>
 
 const mutation = graphql`
     mutation CreateQuestionnaireMutation($input: CreateQuestionnaireInput!, $connections: [ID!]!)
@@ -37,6 +38,7 @@ const commit = (
     owner: Owner | null,
     viewer: Viewer | null,
     hasQuestionnaire: boolean,
+    types?: Array<QuestionnaireType>
 ): Promise<CreateQuestionnaireMutationResponse> =>
     commitMutation<CreateQuestionnaireMutation>(environment, {
         mutation,
@@ -74,9 +76,15 @@ const commit = (
             const rootFields = store.getRoot();
             const viewer = rootFields.getLinkedRecord('viewer');
             if (!viewer) return;
-            const questionnaires = viewer.getLinkedRecord('questionnaires', {
+
+            const organization = viewer.getLinkedRecords('organizations')[0] ?? null;
+            const owner = organization ?? viewer;
+
+            const questionnaires = owner.getLinkedRecord('questionnaires', {
                 affiliations: isAdmin ? null : ['OWNER'],
+                types
             });
+
             if (!questionnaires) return;
 
             const totalCount = parseInt(String(questionnaires.getValue('totalCount')), 10);

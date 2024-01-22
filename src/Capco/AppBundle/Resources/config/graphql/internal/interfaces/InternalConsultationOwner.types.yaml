@@ -1,0 +1,22 @@
+InternalConsultationOwner:
+    type: interface
+    config:
+        name: ConsultationOwner
+        description: 'Represent an owner of a consultation.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ConsultationOwnerTypeResolver", [value])'
+        fields:
+            consultations:
+                type: 'InternalConsultationConnection!'
+                description: 'Get all consultations.'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    id:
+                        description: 'If omitted, returns all consultations. If provided, returns the consultation of the particular id.'
+                        type: 'ID'
+                    query:
+                        description: 'Filter consultation by a given query.'
+                        type: 'String'
+                    orderBy:
+                        description: 'Order consultation by a given criterias.'
+                        type: 'ConsultationOrder'
+                        defaultValue: { field: 'POSITION', direction: 'ASC' }

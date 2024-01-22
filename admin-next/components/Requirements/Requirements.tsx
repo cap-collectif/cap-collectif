@@ -2,15 +2,13 @@ import React from 'react';
 import {graphql, useFragment} from "react-relay";
 import {Box} from "@cap-collectif/ui";
 import {FragmentRefs} from "relay-runtime";
-import {useFormContext} from "react-hook-form";
 import CheckBoxRequirementsList from "@components/Requirements/CheckBoxRequirementsList";
 import {Requirements_requirementStep$key} from "@relay/Requirements_requirementStep.graphql";
 import ToggleRequirementsList from "@components/Requirements/ToggleRequirementsList";
 import RequirementsReason from "@components/Requirements/RequirementsReason";
-import {useFranceConnectRequirement} from "@components/Requirements/useFranceConnectRequirement";
+import {KeyTypeData} from "react-relay/relay-hooks/helpers";
 
 type Props = {
-    modifyRequirementsCallback?: (requirements: Array<ToggleRequirement>) => Array<ToggleRequirement>
     requirementStep: Requirements_requirementStep$key
 };
 
@@ -21,7 +19,7 @@ export type RequirementNode = {
     readonly label?: string | undefined;
 }
 
-export type ToggleRequirement = { id: string, typename: RequirementTypeName, checked: boolean, disabled: boolean }
+export type ToggleRequirement = { id: string, typename: RequirementTypeName, isChecked: boolean, disabled: boolean }
 
 const REQUIREMENT_STEP_FRAGMENT = graphql`
     fragment Requirements_requirementStep on RequirementStep {
@@ -32,6 +30,22 @@ const REQUIREMENT_STEP_FRAGMENT = graphql`
                     __typename
                     ...on CheckboxRequirement {
                         label
+                    }
+                    ...on DataCollectedByFranceConnectRequirement {
+                        isCollectedByFranceConnect
+                    }
+                }
+            }
+        }
+        allRequirements {
+            edges {
+                node {
+                    __typename
+                    ...on CheckboxRequirement {
+                        label
+                    }
+                    ...on DataCollectedByFranceConnectRequirement {
+                        isCollectedByFranceConnect
                     }
                 }
             }
@@ -113,68 +127,76 @@ export const getRequirementsInput = <FormValues extends RequirementsFormValues>(
     return {
         requirementsReason: values.requirementsReason,
         requirements: values.requirements
-            .filter(requirement => !!requirement?.typename)
-            .filter(requirement => {
-                if (requirement?.typename === 'CHECKBOX') return !!requirement.label
-                return requirement
-            }).map(requirement => ({id: requirement.id, label: requirement.label, type: requirement.typename}))
+          .filter(requirement => {
+              if (requirement?.typename === 'CHECKBOX') {
+                  return !!requirement.label
+              }
+              return requirement.isChecked
+          })
+          .map(requirement => ({id: requirement.id, label: requirement.label, type: requirement.typename}))
     }
 }
 
 
-
-const Requirements: React.FC<Props> = ({requirementStep: requirementStepRef, modifyRequirementsCallback}) => {
-    const step = useFragment<Requirements_requirementStep$key>(REQUIREMENT_STEP_FRAGMENT, requirementStepRef);
-    const {setValue} = useFormContext();
-    const {isFranceConnectEnabled} = useFranceConnectRequirement();
+const getToggleRequirements = (step: KeyTypeData<Requirements_requirementStep$key>) => {
+    const allRequirements = step.allRequirements.edges.map(edge => edge.node);
 
     const stepRequirements = step?.requirements?.edges
-        ?.map(edge => edge?.node)
-        .filter((node): node is RequirementNode => !!node) ?? [];
+      ?.map(edge => edge?.node)
+      .filter((node): node is RequirementNode => !!node) ?? [];
+
+    const toggleRequirements: Array<ToggleRequirement> = allRequirements
+      .map((requirement) => {
+          const typename = requirement.__typename;
+          const stepRequirement = stepRequirements.find(requirement => requirement.__typename === typename);
+          return {
+              id: stepRequirement?.id ?? null,
+              typename: typename as RequirementTypeName,
+              isChecked: !!stepRequirement,
+              disabled: false,
+              isCollectedByFranceConnect: requirement?.isCollectedByFranceConnect ?? false
+          }
+      })
+    return toggleRequirements;
+};
+
+export const getDefaultRequirements = (step: KeyTypeData<Requirements_requirementStep$key>) => {
+
+    const toggleRequirements = getToggleRequirements(step);
+
+    const stepRequirements = step?.requirements?.edges
+      ?.map(edge => edge?.node)
+      .filter((node): node is RequirementNode => !!node) ?? [];
 
     const defaultCheckBoxRequirements = stepRequirements
-        .filter(requirement => requirement.__typename === 'CheckboxRequirement')
-        .map(({id, label}) => {
-            return {
-                id,
-                label: label ?? '',
-                typename: 'CHECKBOX' as RequirementApiTypeName
-            }
-        });
-
-    let toggleRequirements: Array<ToggleRequirement> = Object.keys(config)
-        .map((typename) => {
-            const stepRequirement = stepRequirements.find(requirement => requirement.__typename === typename);
-            return {
-                id: stepRequirement?.id ?? '',
-                typename: typename as RequirementTypeName,
-                checked: !!stepRequirement,
-                disabled: false,
-            }
-        })
-        .filter(requirement => {
-            if (requirement.typename === 'FranceConnectRequirement' && !isFranceConnectEnabled) return false;
-            return true;
-        })
-
-    if (typeof modifyRequirementsCallback === 'function') {
-        toggleRequirements = modifyRequirementsCallback(toggleRequirements);
-    }
+      .filter(requirement => requirement.__typename === 'CheckboxRequirement')
+      .map(({id, label}) => {
+          return {
+              id,
+              label: label ?? '',
+              typename: 'CHECKBOX' as RequirementApiTypeName
+          }
+      });
 
     const defaultRequirements = toggleRequirements
-        .map((requirement) => {
-            if (!requirement.checked) return {}
-            return {
-                id: requirement.id,
-                label: '',
-                typename: config[requirement.typename].apiTypename,
-            }
-        })
-        .concat(defaultCheckBoxRequirements)
+      .map((requirement) => {
+          return {
+              id: requirement.id,
+              label: '',
+              typename: config[requirement.typename].apiTypename,
+              isCollectedByFranceConnect: requirement.isCollectedByFranceConnect,
+              isChecked: requirement.isChecked
+          }
+      })
+      .concat(defaultCheckBoxRequirements)
 
-    React.useEffect(() => {
-        setValue('requirements', defaultRequirements)
-    }, []);
+    return defaultRequirements;
+};
+
+const Requirements: React.FC<Props> = ({requirementStep: requirementStepRef}) => {
+    const step = useFragment<Requirements_requirementStep$key>(REQUIREMENT_STEP_FRAGMENT, requirementStepRef);
+
+    const toggleRequirements = getToggleRequirements(step);
 
     return (
         <Box>

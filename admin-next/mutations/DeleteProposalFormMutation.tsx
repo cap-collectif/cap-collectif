@@ -39,9 +39,14 @@ const commit = (
       const rootFields = store.getRoot();
       const viewer = rootFields.getLinkedRecord('viewer');
       if (!viewer) return;
-      const proposalForms = viewer.getLinkedRecord('proposalForms', {
+
+      const organization = viewer.getLinkedRecords('organizations')[0] ?? null;
+      const owner = organization ?? viewer;
+
+      const proposalForms = owner.getLinkedRecord('proposalForms', {
         affiliations: isAdmin ? null : ['OWNER'],
       });
+
       if (!proposalForms) return;
 
       const proposalFormsTotalCount = parseInt(String(proposalForms.getValue('totalCount')), 10);

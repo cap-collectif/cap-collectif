@@ -627,7 +627,7 @@ services:
             [
                 ~,
                 Capco\AppBundle\Entity\Consultation,
-                Capco\AdminBundle\Controller\CRUDController,
+                Capco\AdminBundle\Controller\ConsultationController,
                 '@Capco\AppBundle\Repository\OpinionTypeRepository',
             ]
         tags:

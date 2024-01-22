@@ -2,11 +2,15 @@
 const InternalQuery = /* GraphQL */ `
   query InternalQuery {
     consultations {
-      id
-      title
-      contribuable
-      sections {
-        title
+      edges {
+        node {
+          id
+          title
+          contribuable
+          sections {
+            title
+          }
+        }
       }
     }
   }

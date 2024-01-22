@@ -21,15 +21,15 @@ final class Version20190911075248 extends AbstractMigration implements Container
 
     public function postUp(Schema $schema): void
     {
-        echo "-> Adding consultations slug...\n";
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $consultations = $em->getRepository('CapcoAppBundle:Consultation')->findAll();
+//       The data processing is no longer needed and it is causing bug in #16532 when adding new fields
 
-        foreach ($consultations as $consultation) {
-            $consultation->setSlug(null); // Allows Gedmo to regenerate itself the slugs
-        }
-        $em->flush();
-        echo '-> Finished adding consultations slug' . \PHP_EOL;
+//        echo "-> Adding consultations slug...\n";
+//
+//        foreach ($consultations as $consultation) {
+//            $consultation->setSlug(null); // Allows Gedmo to regenerate itself the slugs
+//        }
+//        $em->flush();
+//        echo '-> Finished adding consultations slug' . \PHP_EOL;
     }
 
     public function up(Schema $schema): void

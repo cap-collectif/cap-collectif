@@ -3,10 +3,12 @@ LastnameRequirement:
     inherits:
         - Node
         - Requirement
+        - DataCollectedByFranceConnectRequirement
     config:
         interfaces:
             - Node
             - Requirement
+            - DataCollectedByFranceConnectRequirement
         description: 'Requires a lastname'
         fields:
             viewerValue:

@@ -1,12 +1,12 @@
 // @ts-nocheck
 const getNodes = str => new window.DOMParser().parseFromString(str, 'text/html').head.childNodes
 
-export const insertCustomCode = (code?: string | null | undefined) => {
-  let customCode = document.getElementById('capcoCustomCodeWrapper')
+export const insertCustomCode = (code?: string | null | undefined, id?: string = 'capcoCustomCodeWrapper') => {
+  let customCode = document.getElementById(id)
 
   if (!customCode) {
     customCode = document.createElement('div')
-    customCode.setAttribute('id', 'capcoCustomCodeWrapper')
+    customCode.setAttribute('id', id)
     if (document.body) document.body.appendChild(customCode)
   }
 

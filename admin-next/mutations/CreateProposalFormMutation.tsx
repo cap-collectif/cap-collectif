@@ -7,7 +7,7 @@ import type {
     CreateProposalFormMutationResponse,
     CreateProposalFormMutationVariables,
 } from '@relay/CreateProposalFormMutation.graphql';
-import { ModalCreateProposalForm_viewer } from '@relay/ModalCreateProposalForm_viewer.graphql';
+import {CreateFormModal_viewer} from '@relay/CreateFormModal_viewer.graphql';
 
 type Owner = {
     readonly __typename: string;
@@ -15,7 +15,7 @@ type Owner = {
     readonly username: string | null;
 };
 
-type Viewer = Pick<ModalCreateProposalForm_viewer, '__typename' | 'id' | 'username'>
+type Viewer = Pick<CreateFormModal_viewer, '__typename' | 'id' | 'username'>
 
 const mutation = graphql`
     mutation CreateProposalFormMutation($input: CreateProposalFormInput!, $connections: [ID!]!)
@@ -24,6 +24,8 @@ const mutation = graphql`
             proposalForm @prependNode(connections: $connections, edgeTypeName: "ProposalFormEdge") {
                 ...ProposalFormItem_proposalForm
                 adminUrl
+                id
+                title
             }
         }
     }
@@ -71,7 +73,11 @@ const commit = (
             const rootFields = store.getRoot();
             const viewer = rootFields.getLinkedRecord('viewer');
             if (!viewer) return;
-            const proposalForms = viewer.getLinkedRecord('proposalForms', {
+
+            const organization = viewer.getLinkedRecords('organizations')[0] ?? null;
+            const owner = organization ?? viewer;
+
+            const proposalForms = owner.getLinkedRecord('proposalForms', {
                 affiliations: isAdmin ? null : ['OWNER'],
             });
             if (!proposalForms) return;

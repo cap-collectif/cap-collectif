@@ -31,7 +31,7 @@ const PhoneRequirementItem: React.FC<Props> = ({
     }
 
     const phone = watch(`requirements.${index}`);
-    const showPhoneVerified = (phone && isSmsVoteEnabled) ? Object.keys(phone).length > 0 : false;
+    const showPhoneVerified = (phone && isSmsVoteEnabled) ? phone.isChecked : false;
 
     return (
         <Flex direction="column">

@@ -1,0 +1,11 @@
+CreateConsultationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of createConsultation.'
+        fields:
+            title:
+                type: 'String!'
+                description: 'The consultation title.'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the consultation, user or organization. If null, fallback on the viewer.'

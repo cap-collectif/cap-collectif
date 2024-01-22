@@ -143,6 +143,9 @@ mappings:
         consultation: &Consultation
             properties:
                 id: { type: keyword }
+                owner:
+                    properties:
+                        id: { type: keyword }
         opinion:
             properties:
                 id: { type: keyword }

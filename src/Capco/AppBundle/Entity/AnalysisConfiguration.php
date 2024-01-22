@@ -36,13 +36,13 @@ class AnalysisConfiguration implements Timestampable
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
      */
-    private ?Questionnaire $evaluationForm;
+    private ?Questionnaire $evaluationForm = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="analysis_step", referencedColumnName="id", onDelete="SET NULL")
      */
-    private ?AbstractStep $analysisStep;
+    private ?AbstractStep $analysisStep = null;
 
     /**
      * @ORM\Column(type="datetime", name="effective_date", nullable=true)

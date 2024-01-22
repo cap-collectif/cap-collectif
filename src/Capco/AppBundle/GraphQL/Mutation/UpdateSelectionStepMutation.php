@@ -47,9 +47,6 @@ class UpdateSelectionStepMutation implements MutationInterface
         $selectionStepId = $input->offsetGet('stepId');
         $selectionStep = $this->getSelectionStep($selectionStepId, $viewer);
 
-        // since title is no longer required we set empty string to not break existing steps
-        $selectionStep->setTitle('');
-
         unset($data['stepId']);
         $this->handleAnonParticipation($data);
 

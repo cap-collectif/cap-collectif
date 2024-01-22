@@ -3,9 +3,13 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
+use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
+use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\MediaBundle\Entity\Media;
@@ -22,97 +26,95 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
-class Consultation implements IndexableInterface
+class Consultation implements IndexableInterface, Ownerable, CreatableInterface
 {
+    use CreatableTrait;
     use CustomCodeTrait;
     use DescriptionTrait;
     use MetaDescriptionTrait;
+    use OwnerableTrait;
     use UuidTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=100)
      * @Assert\NotNull()
      */
-    private $title;
+    private string $title;
 
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
      * @ORM\Column(length=255)
      */
-    private $slug;
+    private string $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $illustration;
+    private ?Media $illustration = null;
 
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
-    private $titleHelpText;
+    private string $titleHelpText;
 
     /**
      * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
      * @Assert\Range(max=20,min=1)
      */
-    private $opinionCountShownBySection = 10;
+    private int $opinionCountShownBySection = 10;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    private \DateTime $createdAt;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "opinionTypes"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    private \DateTime $updatedAt;
 
     /**
      * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultation", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
-    private $opinionTypes;
+    private Collection $opinionTypes;
 
     /**
      * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep", inversedBy="consultations", cascade={"persist"})
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $step;
+    private ?ConsultationStep $step = null;
 
     /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
-    private $descriptionHelpText;
+    private string $descriptionHelpText;
 
     /**
      * @ORM\Column(name="moderating_on_create", type="boolean", nullable=false, options={"default" = false})
      */
-    private $moderatingOnCreate = false;
+    private bool $moderatingOnCreate = false;
 
     /**
      * @ORM\Column(name="moderating_on_update", type="boolean", nullable=false, options={"default" = false})
      */
-    private $moderatingOnUpdate = false;
+    private bool $moderatingOnUpdate = false;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Opinion", mappedBy="consultation",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $opinions;
+    private Collection $opinions;
 
     /**
      * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer")
      */
-    private $position = 1;
+    private int $position = 1;
 
     /**
      * Constructor.

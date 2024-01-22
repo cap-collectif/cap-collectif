@@ -208,13 +208,14 @@ class ProjectController extends Controller
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
         $user = $this->getUser();
-        $isProjectAdmin = $user->isOnlyProjectAdmin() || $user->isOrganizationMember();
+        $isProjectAdmin = $user->isOnlyProjectAdmin();
 
         $filenameCsv = CreateCsvFromProposalStepCommand::getFilename(
             $step,
             '.csv',
             $isProjectAdmin
         );
+
         $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
 
         $isCSV = file_exists($this->exportDir . $filenameCsv);

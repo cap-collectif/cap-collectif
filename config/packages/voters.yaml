@@ -58,3 +58,6 @@ services:
     Capco\AppBundle\Security\PendingOrganizationInvitationVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\ConsultationVoter:
+        tags:
+            - { name: security.voter }

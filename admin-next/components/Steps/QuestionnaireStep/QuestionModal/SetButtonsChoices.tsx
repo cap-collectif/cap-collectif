@@ -24,6 +24,7 @@ const Wrapper = ({
         wrap="nowrap"
         sx={{
           '.cap-form-control:last-child': { width: '100% !important' },
+          '.cap-color-picker_container': { marginTop: '0 !important' },
         }}
       >
         <FormControl name={`${formFieldName}.color`} control={control} isRequired position="relative">
@@ -95,6 +96,7 @@ const SetButtonsChoices: React.FC = () => {
                 wrap="nowrap"
                 sx={{
                   '.cap-form-control:last-child': { width: '100% !important' },
+                  '.cap-color-picker_container': { marginTop: '0 !important' },
                 }}
               >
                 {type === 'button?' ? (

@@ -3,13 +3,10 @@ import { Box, CapUIFontWeight, CapUIShadow, Flex, FlexProps } from '@cap-collect
 import { useRouter } from 'next/router'
 import { graphql, useFragment } from 'react-relay'
 import { ProjectTabs_project$key } from '@relay/ProjectTabs_project.graphql'
-import {
-  getProjectAdminPath,
-  getRouteContributionPath,
-} from '@components/Projects/ProjectTabs.utils'
+import { getProjectAdminPath, getRouteContributionPath } from '@components/Projects/ProjectTabs.utils'
 import { useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import useFeatureFlag from "../../hooks/useFeatureFlag";
+import useFeatureFlag from '../../hooks/useFeatureFlag'
 
 export interface ProjectTabsProps extends FlexProps {
   project: ProjectTabs_project$key
@@ -31,6 +28,12 @@ const FRAGMENT = graphql`
       label
       __typename
       slug
+      ... on ConsultationStep {
+        id
+        contributions {
+          totalCount
+        }
+      }
     }
     firstCollectStep {
       id
@@ -56,13 +59,16 @@ const FRAGMENT = graphql`
 `
 
 const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
-  const project = useFragment<ProjectTabs_project$key>(FRAGMENT, projectRef)
+  const project = useFragment(FRAGMENT, projectRef)
   const router = useRouter()
   const intl = useIntl()
-  const isMediatorEnabled = useFeatureFlag('mediator');
+  const isMediatorEnabled = useFeatureFlag('mediator')
 
-  const steps = project.steps;
-  const hasSelectionStep = steps.some(step => step.__typename === 'SelectionStep');
+  const steps = project.steps
+  const hasSelectionStep = steps.some(step => step.__typename === 'SelectionStep')
+
+  const consultationStep = project.steps.find(step => step.__typename === 'ConsultationStep')
+  const consultationContribCount = consultationStep?.contributions?.totalCount ?? 0
 
   const getLinks = project => {
     const links = []
@@ -70,7 +76,7 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
 
     links.push({
       title: 'global.contribution',
-      count: project.proposals.totalCount,
+      count: project.proposals.totalCount + consultationContribCount,
       url: baseUrlContributions,
       to: getRouteContributionPath(
         project,
@@ -107,6 +113,7 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
     return links
   }
   const links = useMemo(() => getLinks(project), [project, router.asPath])
+
   return (
     <Flex
       position="absolute"
@@ -124,8 +131,9 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
       paddingX={6}
     >
       {links.map(link => {
-        const isMediatorTab = router.asPath.includes('/mediators')
-        const active = isMediatorTab ? link.url.includes('/mediators') : router.asPath.includes(link.url)
+        const url = link.url.replace('/admin-next', '')
+        const path = router.asPath.replace('/admin-next', '')
+        const isActive = path === url
         return (
           <Box
             as="a"
@@ -133,8 +141,8 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
             key={link.to}
             fontSize={1}
             fontWeight={CapUIFontWeight.Bold}
-            color={active ? 'blue.500' : 'gray.700'}
-            borderBottomColor={active ? 'blue.500' : 'transparent'}
+            color={isActive ? 'blue.500' : 'gray.700'}
+            borderBottomColor={isActive ? 'blue.500' : 'transparent'}
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -154,8 +162,8 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
             {link.count !== undefined && (
               <Box
                 as="span"
-                bg={active ? 'rgba(3, 136, 204, 0.2)' : 'neutral-gray.150'}
-                color={active ? 'blue.500' : 'neutral-gray.500'}
+                bg={isActive ? 'rgba(3, 136, 204, 0.2)' : 'neutral-gray.150'}
+                color={isActive ? 'blue.500' : 'neutral-gray.500'}
                 sx={{
                   fontWeight: 600,
                   height: '16px',

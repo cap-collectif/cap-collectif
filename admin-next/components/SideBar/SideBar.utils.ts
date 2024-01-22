@@ -36,18 +36,19 @@ export const getSideBarItemsFiltered = (
             return acc;
         }
 
-
         if ((isItemForAdminOnly || isItemForAll) && hasItemFeatureRequired) {
             // Filtering sub items of a menu here
             sideBarItem.items = sideBarItem.items.filter(subItem => {
                 const isSubItemForAdminOnly =
                     (subItem.rolesRequired as string[]).includes('admin') && isAdmin;
+                const isSubItemForSuperAdminOnly =
+                    (subItem.rolesRequired as string[]).includes('superAdmin') && isSuperAdmin;
                 const isSubItemForAll = subItem.rolesRequired.length === 0;
                 const hasSubItemsFeatureRequired = (
                     subItem.featuresRequired as FeatureFlagType[]
                 ).every(featureRequired => allFeatureFlags[featureRequired]);
 
-                if (isSubItemForAdminOnly || (isSubItemForAll && hasSubItemsFeatureRequired))
+                if (isSubItemForAdminOnly || isSubItemForSuperAdminOnly || (isSubItemForAll && hasSubItemsFeatureRequired))
                     return subItem;
             });
 

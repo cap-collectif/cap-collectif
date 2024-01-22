@@ -18,6 +18,6 @@ class SectionContributionsCountResolver implements QueryInterface
 
     public function __invoke(OpinionType $type, ?User $viewer): int
     {
-        return $this->opinionRepository->countByOpinionType($type->getId(), null, false, $viewer);
+        return $this->opinionRepository->countByOpinionType($type, null, false, $viewer);
     }
 }

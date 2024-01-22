@@ -1,8 +1,14 @@
 DateOfBirthRequirement:
     type: object
-    inherits: [Node, Requirement]
+    inherits:
+        - Node
+        - Requirement
+        - DataCollectedByFranceConnectRequirement
     config:
-        interfaces: [Node, Requirement]
+        interfaces:
+            - Node
+            - Requirement
+            - DataCollectedByFranceConnectRequirement
         description: 'Require a date of birth'
         fields:
             viewerDateOfBirth:

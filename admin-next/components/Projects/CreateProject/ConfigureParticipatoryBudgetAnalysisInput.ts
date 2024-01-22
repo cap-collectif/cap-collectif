@@ -136,7 +136,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
             'isExternal': false,
             'steps': [
                 {
-                    'body': `<p>- ${intl.formatMessage({ id: 'what-is-a-bp' })}</p><p>- ${intl.formatMessage({ id: 'amount-of-the-dedicated-budget' })}</p><p>- ${intl.formatMessage({ id: 'schedule-approach' })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
+                    'body': `<p><strong style="font-size:24px;">${intl.formatMessage({ id: 'presentation-of-your-project' })}</strong><span style="font-size:14px;"><br /></span></p><p>- ${intl.formatMessage({ id: 'what-is-a-bp' })}</p><p>- ${intl.formatMessage({ id: 'amount-of-the-dedicated-budget' })}</p><p>- ${intl.formatMessage({ id: 'schedule-approach' })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
                     'title': intl.formatMessage({ id: 'presentation-of-your-project' }),
                     'label': intl.formatMessage({ id: 'presentation_step' }),
                     'isEnabled': true,
@@ -242,7 +242,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
                     'votesLimit': 3,
                     'allowAuthorsToAddNews': true,
                     'type': 'SELECTION',
-                    'voteType': 'SIMPLE',
+                    'voteType': 'BUDGET',
                     'proposalArchivedTime': 0,
                     'proposalArchivedUnitTime': 'MONTHS',
                 },

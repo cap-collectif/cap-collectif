@@ -3,9 +3,12 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -87,5 +90,66 @@ class ConsultationRepository extends EntityRepository
         );
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findPaginated(
+        string $orderByField = 'created_at',
+        string $orderByDirection = 'ASC',
+        int $offset = 0,
+        int $limit = 100,
+        ?string $query = null
+    ): Paginator {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($query) {
+            $qb->andWhere('c.title LIKE :query')
+                ->setParameter('query', "%{$query}%")
+            ;
+        }
+
+        $query = $qb
+            ->addOrderBy('c.position')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->orderBy("c.{$orderByField}", $orderByDirection)
+        ;
+
+        return new Paginator($query);
+    }
+
+    public function getByOwner(Owner $owner, int $offset, int $limit, array $options): array
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function countByOwner(Owner $owner, array $options): int
+    {
+        return $this->getByOwnerQueryBuilder($owner, $options)
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
+    private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder
+    {
+        $ownerField = $owner instanceof User ? 'p.owner' : 'p.organizationOwner';
+
+        $qb = $this->createQueryBuilder('p')
+            ->where("{$ownerField} = :owner")
+            ->setParameter('owner', $owner)
+        ;
+
+        if ($query = $options['query']) {
+            $qb->andWhere('p.title LIKE :query');
+            $qb->setParameter('query', "%{$query}%");
+        }
+
+        return $qb;
     }
 }

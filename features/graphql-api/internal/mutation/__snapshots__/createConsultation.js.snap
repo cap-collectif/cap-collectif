@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createConsultation should create a consultation as an admin 1`] = `
+Object {
+  "createConsultation": Object {
+    "consultation": Object {
+      "title": "my new consultation",
+    },
+  },
+}
+`;

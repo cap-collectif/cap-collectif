@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Provider\AllowedExtensions;
+use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,6 +40,12 @@ class MediaAdminController extends AbstractController
      */
     public function createAction(?Request $request = null)
     {
+        /** * @var User $viewer  */
+        $viewer = $this->getUser();
+        if ($viewer->isOnlyUser() && null === $viewer->getOrganization()) {
+            throw $this->createAccessDeniedException();
+        }
+
         if ($request->isMethod(Request::METHOD_POST)) {
             try {
                 $newMedia = $this->mediaManager->createFileFromUploadedFile(

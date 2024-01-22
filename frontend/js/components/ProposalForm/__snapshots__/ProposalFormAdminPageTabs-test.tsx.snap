@@ -29,7 +29,7 @@ exports[`<ProposalFormAdminPageTabs /> doesnt render a (new)  analysis tab, if f
         />
         <ProposalFormAdminPageTabsstyle__ActionContainer>
           <a
-            href="/admin-next/proposalForm"
+            href="/admin/next/forms?formType=PROPOSAL_FORM"
           >
             <Icon
               color="#0388cc"
@@ -184,7 +184,7 @@ exports[`<ProposalFormAdminPageTabs /> should render correctly 1`] = `
         />
         <ProposalFormAdminPageTabsstyle__ActionContainer>
           <a
-            href="/admin-next/proposalForm"
+            href="/admin/next/forms?formType=PROPOSAL_FORM"
           >
             <Icon
               color="#0388cc"

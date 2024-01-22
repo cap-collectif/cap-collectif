@@ -12,14 +12,12 @@ const CollectStepWithoutAccountRequirements: React.FC = () => {
             <Text color="gray.900" mb={4}>{intl.formatMessage({ id: 'additional-options' })}</Text>
             <Flex bg="white" p={4} borderRadius="4px" direction="column">
                 <Flex justifyContent="space-between">
-                    <Text as="label" fontWeight={600} width="100%" color="blue.900">
-                        <Flex justifyContent="space-between">
-                            {intl.formatMessage({id: 'collect-particpants-email'})}
-                        </Flex>
+                    <Text as="label" fontWeight={600} width="100%" color="blue.900" lineHeight="normal">
+                        {intl.formatMessage({id: 'collect-particpants-email'})}
                     </Text>
                     <FieldInput id="collectParticipantsEmail" type="switch" name="collectParticipantsEmail" control={control} />
                 </Flex>
-                <Text mt={2} fontSize={1} color="gray.700">{intl.formatMessage({ id: 'collect-particpants-email-help' })}</Text>
+                <Text mt={1} fontSize={2} lineHeight="16px" color="gray.700">{intl.formatMessage({ id: 'collect-particpants-email-help' })}</Text>
             </Flex>
         </>
     );

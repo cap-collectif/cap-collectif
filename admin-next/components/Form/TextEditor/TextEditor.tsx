@@ -5,6 +5,7 @@ import {
     ButtonGroup,
     CapUIModalSize,
     Flex,
+    FlexProps,
     FormLabel,
     Heading,
     Modal,
@@ -12,8 +13,9 @@ import {
 } from '@cap-collectif/ui';
 import Jodit from './Jodit';
 import { Controller, useFormContext } from 'react-hook-form';
+import { bool } from 'yup';
 
-export type TextEditorProps = {
+export type TextEditorProps = FlexProps & {
     label: string,
     name: string,
     placeholder?: string,
@@ -26,6 +28,7 @@ export type TextEditorProps = {
         submit?: string,
     },
     limitChars?: number,
+    advancedEditor?: boolean,
 };
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -37,6 +40,8 @@ const TextEditor: React.FC<TextEditorProps> = ({
     platformLanguage = 'fr',
     buttonLabels,
     limitChars,
+    advancedEditor = true,
+    ...rest
 }) => {
     const intl = useIntl();
     const [isOpen, setIsOpen] = React.useState(false);
@@ -54,7 +59,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
     }, [selectedLanguage]);
 
     return (
-        <Flex direction="column" mb={4}>
+        <Flex direction="column" mb={4} {...rest}>
             <Flex justify="space-between" mb={1}>
                 <FormLabel htmlFor={name} label={label}>
                     {required ? null : (
@@ -63,63 +68,66 @@ const TextEditor: React.FC<TextEditorProps> = ({
                         </Text>
                     )}
                 </FormLabel>
-                <div>
-                    <Button variant="link" onClick={() => setIsOpen(true)} type="button">
-                        {intl.formatMessage({ id: 'advanced-editor' })}
-                    </Button>
+                {advancedEditor && (
+                    <div>
+                        <Button variant="link" onClick={() => setIsOpen(true)} type="button">
+                            {intl.formatMessage({ id: 'advanced-editor' })}
+                        </Button>
 
-                    <Modal
-                        show={isOpen}
-                        hideOnClickOutside={false}
-                        size={CapUIModalSize.Xl}
-                        ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
-                        onClose={() => setIsOpen(false)}
-                        forceModalDialogToFalse>
-                        <Modal.Header>
-                            <Modal.Header.Label>
-                                {intl.formatMessage({ id: 'advanced-editor' })}
-                            </Modal.Header.Label>
-                            <Heading>{label}</Heading>
-                        </Modal.Header>
-                        <Modal.Body
-                            p={0}
-                            pt={0}
-                            sx={{ '.jodit-container': { border: 'none !important' } }}>
-                            <Jodit
-                                id={`${name}-JoditModal-${selectedLanguage}`}
-                                placeholder={placeholder}
-                                onChange={value => setInModalValue(value)}
-                                value={value}
-                                platformLanguage={platformLanguage}
-                                limitChars={limitChars}
-                            />
-                        </Modal.Body>
-                        <Modal.Footer spacing={2}>
-                            <ButtonGroup>
-                                <Button
-                                    type="button"
-                                    variantSize="big"
-                                    variant="secondary"
-                                    variantColor="hierarchy"
-                                    onClick={() => setIsOpen(false)}>
-                                    {buttonLabels?.cancel ?? intl.formatMessage({ id: 'cancel' })}
-                                </Button>
-                                <Button
-                                    type="button"
-                                    variantSize="big"
-                                    variant="primary"
-                                    variantColor="primary"
-                                    onClick={() => {
-                                        setValue(name, inModalValue);
-                                        setIsOpen(false);
-                                    }}>
-                                    {buttonLabels?.submit ??
-                                        intl.formatMessage({ id: 'global.validate' })}
-                                </Button>
-                            </ButtonGroup>
-                        </Modal.Footer>
-                    </Modal>
-                </div>
+                        <Modal
+                            show={isOpen}
+                            hideOnClickOutside={false}
+                            size={CapUIModalSize.Xl}
+                            ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
+                            onClose={() => setIsOpen(false)}
+                            forceModalDialogToFalse>
+                            <Modal.Header>
+                                <Modal.Header.Label>
+                                    {intl.formatMessage({ id: 'advanced-editor' })}
+                                </Modal.Header.Label>
+                                <Heading>{label}</Heading>
+                            </Modal.Header>
+                            <Modal.Body
+                                p={0}
+                                pt={0}
+                                sx={{ '.jodit-container': { border: 'none !important' } }}>
+                                <Jodit
+                                    id={`${name}-JoditModal-${selectedLanguage}`}
+                                    placeholder={placeholder}
+                                    onChange={value => setInModalValue(value)}
+                                    value={value}
+                                    platformLanguage={platformLanguage}
+                                    limitChars={limitChars}
+                                />
+                            </Modal.Body>
+                            <Modal.Footer spacing={2}>
+                                <ButtonGroup>
+                                    <Button
+                                        type="button"
+                                        variantSize="big"
+                                        variant="secondary"
+                                        variantColor="hierarchy"
+                                        onClick={() => setIsOpen(false)}>
+                                        {buttonLabels?.cancel ??
+                                            intl.formatMessage({ id: 'cancel' })}
+                                    </Button>
+                                    <Button
+                                        type="button"
+                                        variantSize="big"
+                                        variant="primary"
+                                        variantColor="primary"
+                                        onClick={() => {
+                                            setValue(name, inModalValue);
+                                            setIsOpen(false);
+                                        }}>
+                                        {buttonLabels?.submit ??
+                                            intl.formatMessage({ id: 'global.validate' })}
+                                    </Button>
+                                </ButtonGroup>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
+                )}
             </Flex>
             <Controller
                 name={name}

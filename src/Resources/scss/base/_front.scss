@@ -767,6 +767,7 @@ div.embeddedContent {
     img {
         max-width: 100%;
         height: auto;
+        display: block;
     }
     iframe {
         max-width: 100%;
@@ -814,6 +815,10 @@ div.embeddedContent {
         padding-right: 15px;
         padding-left: 15px;
     }
+}
+
+.app_project_show_presentation .wysiwyg-render {
+    overflow: auto;
 }
 
 /* ======================= Project ============================*/

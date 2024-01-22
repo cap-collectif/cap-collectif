@@ -3,11 +3,52 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AppBundle\Repository\OpinionTypeRepository;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class OpinionTypeController extends Controller
 {
+    private OpinionTypeRepository $opinionTypeRepository;
+
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, OpinionTypeRepository $opinionTypeRepository)
+    {
+        parent::__construct($breadcrumbsBuilder, $pool);
+        $this->opinionTypeRepository = $opinionTypeRepository;
+    }
+
+    public function createAction(Request $request): Response
+    {
+        $viewer = $this->getUser();
+        if ($viewer->isOnlyUser() && null === $viewer->getOrganization()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return parent::createAction($request);
+    }
+
+    public function editAction(Request $request): Response
+    {
+        $opinionTypeId = $request->get('id');
+        $opinionType = $this->opinionTypeRepository->find($opinionTypeId);
+        $consultation = $opinionType->getConsultation();
+
+        $organization = $this->getUser()->getOrganization();
+
+        if (!$organization) {
+            return parent::editAction($request);
+        }
+
+        if ($consultation->getOwner() !== $organization) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return parent::editAction($request);
+    }
+
     protected function redirectTo(Request $request, object $object): RedirectResponse
     {
         $url = false;

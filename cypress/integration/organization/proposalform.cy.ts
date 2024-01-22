@@ -1,4 +1,4 @@
-import { ProposalFormPage } from '~e2e-pages/index'
+import { ProposalFormPage, FormListPage } from '~e2e-pages/index'
 
 describe('Organization Proposalform', () => {
   beforeEach(() => {
@@ -8,22 +8,16 @@ describe('Organization Proposalform', () => {
   describe('Proposalform BO', () => {
     it('CRUD proposalform', () => {
       cy.interceptGraphQLOperation({ operationName: 'ProposalFormListQuery' })
-      cy.interceptGraphQLOperation({ operationName: 'CreateProposalFormMutation' })
       cy.interceptGraphQLOperation({ operationName: 'ProposalFormAdminPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormMutation' })
       // list proposalform
-      cy.visit('/admin-next/proposalForm')
+      FormListPage.visit('PROPOSAL_FORM')
       cy.contains('Formulaire organisation crée par un admin')
       cy.contains('Formulaire organisation crée par un membre')
       cy.getByDataCy('proposalform-item').should('have.length', 3)
       // open create proposalform modal
-      cy.getByDataCy('create-proposalform-button').click()
-      cy.getByDataCy('create-proposalform-modal-title').type('my new proposalform')
-      cy.getByDataCy('create-proposalform-modal-create-button').click()
-      cy.wait('@CreateProposalFormMutation')
-      cy.contains('proposal-form-successfully-created')
+      FormListPage.createForm('PROPOSAL_FORM', 'my new proposalform')
       // update proposalform
-      cy.contains('my new proposalform').click()
       cy.wait('@ProposalFormAdminPageQuery')
       // add section
       cy.get('#perso-field-add').click()
@@ -35,7 +29,7 @@ describe('Organization Proposalform', () => {
       cy.wait('@UpdateProposalFormMutation')
       cy.contains('global.saved')
       // back to proposalform list
-      cy.visit('/admin-next/proposalForm')
+      FormListPage.visit('PROPOSAL_FORM')
       cy.contains('my new proposalform')
       cy.getByDataCy('proposalform-item').should('have.length', 4)
     })
@@ -43,7 +37,7 @@ describe('Organization Proposalform', () => {
       cy.interceptGraphQLOperation({ operationName: 'ChangeProposalFormParametersMutation' })
       ProposalFormPage.visit('proposalFormOrgaAdmin')
       ProposalFormPage.settingsTab.click()
-      cy.wait(200);
+      cy.wait(200)
       ProposalFormPage.contactAuthorCheckbox.should('have.value', 'false')
       ProposalFormPage.contactAuthorCheckbox.parent().click()
       ProposalFormPage.contactAuthorCheckbox.should('have.value', 'true')

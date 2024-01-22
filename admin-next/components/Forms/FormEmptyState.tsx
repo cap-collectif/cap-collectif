@@ -7,7 +7,7 @@ import {graphql, useFragment} from "react-relay";
 import {FormEmptyState_viewer$key} from "@relay/FormEmptyState_viewer.graphql";
 
 type Props = {
-    formType: FormTypes
+    formType: string
     term: string
     viewer: FormEmptyState_viewer$key,
 }
@@ -71,7 +71,7 @@ const FormEmptyState: React.FC<Props> = ({ formType, viewer: viewerRef, term }) 
 
     const initialValues: FormValues = {
         title: '',
-        type: formType
+        type: formType as FormTypes
     }
 
     return (

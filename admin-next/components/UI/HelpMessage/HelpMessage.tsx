@@ -71,6 +71,8 @@ const HelpMessage: React.FC<Props> = ({ variant = 'info', children }) => {
 
     return (
         <Box
+            position="sticky"
+            top={0}
             height="max-content"
             m={2}
             p={4}

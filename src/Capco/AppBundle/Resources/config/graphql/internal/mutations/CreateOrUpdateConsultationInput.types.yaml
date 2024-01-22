@@ -8,3 +8,6 @@ CreateOrUpdateConsultationInput:
             stepId:
                 type: 'ID'
                 description: 'If given determines if the consultations should be edited or copied'
+            owner:
+                type: 'ID'
+                description: 'ID of the owner of the consultation, user or organization. If null, fallback on the viewer.'

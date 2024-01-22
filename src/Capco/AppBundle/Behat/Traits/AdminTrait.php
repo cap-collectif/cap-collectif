@@ -88,7 +88,7 @@ trait AdminTrait
      */
     public function iGoToTheAdminProposalFormListPage()
     {
-        $this->visit('/admin-next/proposalForm');
+        $this->visit('/admin/next/forms?formType=PROPOSAL_FORM');
     }
 
     /**

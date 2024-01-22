@@ -115,32 +115,14 @@
                 "featuresRequired": []
             },
             {
-                "title": "admin.label.appendix",
-                "href": "/admin/capco/app/appendixtype/list",
-                "rolesRequired": ["admin"],
-                "featuresRequired": []
-            },
-            {
                 "title": "admin.label.category",
                 "href": "/admin/capco/app/sourcecategory/list",
-                "rolesRequired": ["admin"],
+                "rolesRequired": ["superAdmin"],
                 "featuresRequired": []
             },
             {
-                "title": "admin.label.consultation",
-                "href": "/admin/capco/app/consultation/list",
-                "rolesRequired": ["admin"],
-                "featuresRequired": []
-            },
-            {
-                "title": "admin.label.proposal_form",
-                "href": "/admin-next/proposalForm",
-                "rolesRequired": [],
-                "featuresRequired": []
-            },
-            {
-                "title": "admin.label.questionnaire",
-                "href": "/admin-next/questionnaireList",
+                "title": "steps.forms",
+                "href": "/admin-next/forms",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

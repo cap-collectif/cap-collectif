@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import withPageAuthRequired from '@utils/withPageAuthRequired';
 import { Flex, Box, Text, SpotIcon, CapUISpotIcon, Button } from '@cap-collectif/ui';
 import { useIntl } from 'react-intl';
@@ -58,16 +58,18 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
     const canEdit = project?.canEdit ?? false;
     const hasCollectStep = steps?.some(step => step.__typename === 'CollectStep');
     
-    const breadCrumbItems = [
-        {
-            title: project?.title ?? '',
-            href: project?.adminAlphaUrl ?? '',
-        },
-        {
-            title: intl.formatMessage({ id: 'add-step' }),
-            href: '/',
-        },
-    ];
+    const breadCrumbItems = React.useMemo(() => {
+        return [
+            {
+                title: project?.title ?? '',
+                href: project?.adminAlphaUrl ?? '',
+            },
+            {
+                title: intl.formatMessage({ id: 'add-step' }),
+                href: '/',
+            },
+        ]
+    }, [intl, project]);
 
     useEffect(() => {
         setBreadCrumbItems(breadCrumbItems);

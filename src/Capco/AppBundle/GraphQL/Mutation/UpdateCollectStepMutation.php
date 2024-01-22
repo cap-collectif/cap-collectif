@@ -47,9 +47,6 @@ class UpdateCollectStepMutation implements MutationInterface
         $collectStepId = $input->offsetGet('stepId');
         $collectStep = $this->getCollectStep($collectStepId, $viewer);
 
-        // since title is no longer required we set empty string to not break existing steps
-        $collectStep->setTitle('');
-
         unset($data['stepId']);
         $this->handleAnonParticipation($data);
 

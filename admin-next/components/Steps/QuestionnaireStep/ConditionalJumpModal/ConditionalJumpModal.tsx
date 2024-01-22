@@ -6,14 +6,14 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { QuestionIds, multipleChoiceQuestions } from '../utils'
 import ConditionalJumpItem from './ConditionalJumpItem'
 
-type Props = { onSuccess: () => void; onClose: () => void; isNewJump?: boolean }
+type Props = { onSuccess: () => void; onClose: () => void; isNewJump?: boolean; fieldName: string }
 
-export const ConditionalJumpModal: React.FC<Props> = ({ onClose, onSuccess, isNewJump = false }) => {
+export const ConditionalJumpModal: React.FC<Props> = ({ onClose, onSuccess, isNewJump = false, fieldName }) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext()
 
-  const questions = watch('questionnaire.questions')
-  const questionsWithJumps = watch('questionnaire.questionsWithJumps')
+  const questions = watch(`${fieldName}.questions`)
+  const questionsWithJumps = watch(`${fieldName}.questionsWithJumps`)
   const temporaryJump = watch('temporaryJump')
   const {
     fields: jumps,
@@ -70,6 +70,7 @@ export const ConditionalJumpModal: React.FC<Props> = ({ onClose, onSuccess, isNe
         {jumps.map((jump, index) => (
           <ConditionalJumpItem
             key={jump.id}
+            fieldName={fieldName}
             parentFormFieldName={`temporaryJump.jumps.${index}`}
             questionsWithNoJumps={questionsWithNoJumps}
             isChoiceDisabled={!isNewJump || jumps.length > 1}

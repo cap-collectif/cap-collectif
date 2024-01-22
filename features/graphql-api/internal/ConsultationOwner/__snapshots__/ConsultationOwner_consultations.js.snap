@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.consultationOwner.consultations should fetch all consultations as an admin 1`] = `
+Object {
+  "viewer": Object {
+    "consultations": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "title": "Première consultation",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Projet de loi",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Toutes",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Another Consultation in project without step",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Causes",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation dans un projet qui a un administrateur de projet",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in project with many opinions",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in project without step",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in project with custom access",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Défaut",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Projet sans fin",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in project with multi consult first part",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in private project",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Simple",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Deuxième consultation",
+          },
+        },
+        Object {
+          "node": Object {
+            "title": "Consultation in project with multi consult second part",
+          },
+        },
+      ],
+      "totalCount": 16,
+    },
+  },
+}
+`;

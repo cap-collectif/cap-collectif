@@ -2142,6 +2142,9 @@ type CheckboxRequirement implements Node & Requirement {
     token: String!
   ): Boolean!
 
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
   """The condition set by the requirement."""
   label: String!
 }
@@ -2346,6 +2349,15 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The requirements to vote on this step."""
   requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -2839,6 +2851,12 @@ type Consultation implements Node {
     first: Int = 100
   ): VoteConnection!
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
   """Get the associated description of the consultation"""
   description: HTML
 
@@ -2891,6 +2909,7 @@ type Consultation implements Node {
     """The connection will return the trashed results too."""
     includeTrashed: Boolean = false
   ): ContributionConnection
+  adminUrl: URI!
 }
 
 """A connection to a list of items."""
@@ -2933,6 +2952,56 @@ input ConsultationInput {
   illustration: ID
 }
 
+"""Ways in which lists of questionnaires can be ordered upon return."""
+input ConsultationOrder {
+  """The field to order questionnaires by."""
+  field: ConsultationOrderField! = POSITION
+
+  """The ordering direction."""
+  direction: OrderDirection! = DESC
+}
+
+"""Properties by which consultations can be ordered"""
+enum ConsultationOrderField {
+  """
+  Allows ordering a list of consultations by when they have been updated.
+  """
+  UPDATED_AT
+
+  """
+  Allows ordering a list of consultations by when they have been created.
+  """
+  CREATED_AT
+
+  """Allows ordering a list of consultations by their position."""
+  POSITION
+}
+
+"""Represent an owner of a consultation."""
+interface ConsultationOwner {
+  """Get all consultations."""
+  consultations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    If omitted, returns all consultations. If provided, returns the consultation of the particular id.
+    """
+    id: ID
+
+    """Filter consultation by a given query."""
+    query: String
+
+    """Order consultation by a given criterias."""
+    orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
+  ): ConsultationConnection!
+}
+
 """A consultation step"""
 type ConsultationStep implements Node & Step & RequirementStep {
   """Expose Primary Key, do not use it, except for testing purpose."""
@@ -2943,6 +3012,15 @@ type ConsultationStep implements Node & Step & RequirementStep {
 
   """The requirements to vote on this step."""
   requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -3443,6 +3521,22 @@ type CreateCASSSOConfigurationPayload {
   clientMutationId: String
 }
 
+input CreateConsultationInput {
+  """The consultation title."""
+  title: String!
+
+  """
+  ID of the owner of the consultation, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
+  clientMutationId: String
+}
+
+type CreateConsultationPayload {
+  consultation: Consultation
+  clientMutationId: String
+}
+
 """Available errors for a `createDebateAnonymousArgument` mutation."""
 enum CreateDebateAnonymousArgumentErrorCode {
   """No `Debate` match your id."""
@@ -3711,6 +3805,11 @@ input CreateOrUpdateConsultationInput {
 
   """If given determines if the consultations should be edited or copied"""
   stepId: ID
+
+  """
+  ID of the owner of the consultation, user or organization. If null, fallback on the viewer.
+  """
+  owner: ID
   clientMutationId: String
 }
 
@@ -4228,8 +4327,14 @@ input CroppingStartOptionInput {
 """A string containing CSS."""
 scalar CssJSON
 
+"""A requirement where data can be collected by france connect"""
+interface DataCollectedByFranceConnectRequirement {
+  """Wether or not the data is collected by france connect."""
+  isCollectedByFranceConnect: Boolean
+}
+
 """Require a date of birth"""
-type DateOfBirthRequirement implements Node & Requirement {
+type DateOfBirthRequirement implements Node & Requirement & DataCollectedByFranceConnectRequirement {
   """The ID of an object"""
   id: ID!
 
@@ -4241,6 +4346,12 @@ type DateOfBirthRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
+  """Wether or not the data is collected by france connect."""
+  isCollectedByFranceConnect: Boolean
 
   """The date of birth of the viewer."""
   viewerDateOfBirth: DateTime
@@ -5190,6 +5301,18 @@ type DeleteCommentPayload {
 
   """An unsuccessful mutation will return one or more `UserError` objects."""
   userErrors: [UserError]
+  clientMutationId: String
+}
+
+input DeleteConsultationInput {
+  """The global id of the Consultation to delete"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteConsultationPayload {
+  """The deleted consultation id"""
+  deletedConsultationId: ID
   clientMutationId: String
 }
 
@@ -6749,7 +6872,7 @@ enum FeatureFlagType {
 }
 
 """Require a firstname"""
-type FirstnameRequirement implements Node & Requirement {
+type FirstnameRequirement implements Node & Requirement & DataCollectedByFranceConnectRequirement {
   """The ID of an object"""
   id: ID!
 
@@ -6761,6 +6884,12 @@ type FirstnameRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
+  """Wether or not the data is collected by france connect."""
+  isCollectedByFranceConnect: Boolean
 
   """The firstname of the viewer."""
   viewerValue: String
@@ -6949,6 +7078,9 @@ type FranceConnectRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
 
   """The viewer's france connect id"""
   viewerValue: String
@@ -7239,6 +7371,9 @@ type IdentificationCodeRequirement implements Node & Requirement {
     token: String!
   ): Boolean!
 
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
   """The viewer's identification code"""
   viewerValue: String
 
@@ -7376,7 +7511,7 @@ type KickFromOrganizationPayload {
 }
 
 """Requires a lastname"""
-type LastnameRequirement implements Node & Requirement {
+type LastnameRequirement implements Node & Requirement & DataCollectedByFranceConnectRequirement {
   """The ID of an object"""
   id: ID!
 
@@ -7388,6 +7523,12 @@ type LastnameRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
+  """Wether or not the data is collected by france connect."""
+  isCollectedByFranceConnect: Boolean
 
   """The lastname of the viewer."""
   viewerValue: String
@@ -8544,6 +8685,8 @@ type Mutation {
   updateLocale(input: UpdateLocaleInput!): UpdateLocalePayload
   updateConsultationStep(input: UpdateConsultationStepInput!): UpdateConsultationStepPayload
   createOrUpdateConsultation(input: CreateOrUpdateConsultationInput!): CreateOrUpdateConsultationPayload
+  deleteConsultation(input: DeleteConsultationInput!): DeleteConsultationPayload
+  createConsultation(input: CreateConsultationInput!): CreateConsultationPayload
   addMediators(input: AddMediatorsInput!): AddMediatorsPayload
   deleteMediator(input: DeleteMediatorInput!): DeleteMediatorPayload
   addMediatorVotes(input: AddMediatorVotesInput!): AddMediatorVotesPayload
@@ -9084,7 +9227,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner & EmailingCampaignOwner {
+type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner & EmailingCampaignOwner & ConsultationOwner {
   """The ID of an object."""
   id: ID!
 
@@ -9326,6 +9469,28 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     """If provided, filter campaigns by name"""
     term: String
   ): EmailingCampaignConnection!
+
+  """Get all consultations that the organization owns."""
+  consultations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    If omitted, returns all consultations. If provided, returns the consultation of the particular id.
+    """
+    id: ID
+
+    """Filter consultation by a given query."""
+    query: String
+
+    """Order consultation by a given criterias."""
+    orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
+  ): ConsultationConnection!
 
   """The organization's logo file"""
   logo: Media
@@ -9735,6 +9900,9 @@ type PhoneRequirement implements Node & Requirement {
     token: String!
   ): Boolean!
 
+  """The requirement type sent to the api."""
+  type: RequirementType!
+
   """The phone of the viewer."""
   viewerValue: String
 
@@ -9758,6 +9926,9 @@ type PhoneVerifiedRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
 }
 
 """Represent a set of analytics for a platform"""
@@ -10175,6 +10346,9 @@ type PostalAddressRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
 
   """The postal address of the viewer."""
   viewerAddress: GoogleMapsAddress
@@ -12661,6 +12835,15 @@ interface ProposalStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): RequirementConnection!
+  allRequirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -13207,12 +13390,28 @@ type Query {
     """
     id: ID
   ): [ConsultationStep!]!
+
+  """Get all consultations."""
   consultations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
     """
     If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     """
     id: ID
-  ): [Consultation!]!
+
+    """Filter consultation by a given query."""
+    query: String
+
+    """Order consultation by a given criterias."""
+    orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
+  ): ConsultationConnection!
 
   """Lookup groups."""
   groups(
@@ -14039,6 +14238,15 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
 
   """Requirements for answering the questionnaire"""
   requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -14925,6 +15133,9 @@ interface Requirement {
     """The token associated to the Participant."""
     token: String!
   ): Boolean!
+
+  """The requirement type sent to the api."""
+  type: RequirementType!
 }
 
 """A connection to a list of items."""
@@ -14963,6 +15174,15 @@ type RequirementEdge {
 interface RequirementStep {
   """The requirements to vote on this step."""
   requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -15618,6 +15838,15 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
 
   """The requirements to vote on this step."""
   requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -17280,6 +17509,16 @@ input UpdateCollectStepInput {
   """Whether or not secret ballot is enable"""
   secretBallot: Boolean
   private: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int!
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime!
   clientMutationId: String
 }
 
@@ -19020,6 +19259,16 @@ input UpdateSelectionStepInput {
   """Whether or not secret ballot is enable"""
   secretBallot: Boolean
   private: Boolean
+
+  """
+  Determines how long it will take for the proposal to be archived, coupled with proposalArchivedUnitTime.
+  """
+  proposalArchivedTime: Int!
+
+  """
+  The unit chosen to set the archived duration can be either MONTHS or DAYS
+  """
+  proposalArchivedUnitTime: ProposalArchivedUnitTime!
   clientMutationId: String
 }
 
@@ -19177,7 +19426,7 @@ type UpdateUsernamePayload {
 }
 
 """A user is an individual's account."""
-type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Contributor & Author {
+type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Contributor & ConsultationOwner & Author {
   """Author ID"""
   id: ID!
 
@@ -19446,6 +19695,28 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): UserIdentificationCodeListConnection!
+
+  """Get all consultations."""
+  consultations(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """
+    If omitted, returns all consultations. If provided, returns the consultation of the particular id.
+    """
+    id: ID
+
+    """Filter consultation by a given query."""
+    query: String
+
+    """Order consultation by a given criterias."""
+    orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
+  ): ConsultationConnection!
 
   """The user's public profile name."""
   displayName: String!

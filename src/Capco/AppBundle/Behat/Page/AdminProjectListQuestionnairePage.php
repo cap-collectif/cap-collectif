@@ -9,7 +9,7 @@ class AdminProjectListQuestionnairePage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin-next/questionnaireList';
+    protected $path = '/admin/next/forms?formType=QUESTIONNAIRE';
 
     protected $elements = [
         'add button' => '#btn-add-questionnaire',

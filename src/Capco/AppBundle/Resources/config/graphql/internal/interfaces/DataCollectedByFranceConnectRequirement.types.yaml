@@ -1,0 +1,10 @@
+DataCollectedByFranceConnectRequirement:
+  type: interface
+  config:
+    description: 'A requirement where data can be collected by france connect'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\DataCollectedByFranceConnectRequirementTypeResolver", [value])'
+    fields:
+      isCollectedByFranceConnect:
+        type: 'Boolean'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementIsCollectedByFranceConnectResolver", [value])'
+        description: 'Wether or not the data is collected by france connect.'

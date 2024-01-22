@@ -11,6 +11,8 @@ import ProjectHeaderAuthorList from '~/components/Project/Authors/ProjectHeaderA
 import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList'
 import ProjectArchivedTag from '~/components/Project/ProjectArchivedTag'
 import htmlDecode from '~/components/Utils/htmlDecode'
+import { insertCustomCode } from '~/utils/customCode'
+
 const FRAGMENT = graphql`
   fragment ProjectHeader_project on Project
   @argumentDefinitions(count: { type: "Int", defaultValue: 10 }, cursor: { type: "String" }) {
@@ -33,6 +35,7 @@ const FRAGMENT = graphql`
     }
     archived
     visibility
+    customCode
     ...ProjectHeaderAuthorList_project
     ...ProjectHeaderBlocks_project
     ...ProjectHeaderDistrictsList_project
@@ -48,6 +51,10 @@ export type Props = {
 
 const ProjectHeader = ({ project, isConsultation, platformLocale }: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
+
+  React.useEffect(() => {
+    insertCustomCode(data?.customCode, 'projectCustomCode') // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.id])
 
   const renderCover = () => {
     if (data.video) {

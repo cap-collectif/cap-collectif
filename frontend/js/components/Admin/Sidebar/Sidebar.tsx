@@ -203,17 +203,10 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
                 <SidebarButton icon={ICON_NAME.BOOK_STAR_O} text="admin.group.project" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="admin.label.project" href="/admin-next/projects" />
-                  {isAdmin ? (
-                    <SidebarLink text="admin.label.appendix" href="/admin/capco/app/appendixtype/list" />
-                  ) : null}
-                  {isAdmin ? (
+                  {isSuperAdmin ? (
                     <SidebarLink text="admin.label.category" href="/admin/capco/app/sourcecategory/list" />
                   ) : null}
-                  {isAdmin ? (
-                    <SidebarLink text="admin.label.consultation" href="/admin/capco/app/consultation/list" />
-                  ) : null}
-                  <SidebarLink text="admin.label.proposal_form" href="/admin-next/proposalForm" />
-                  <SidebarLink text="admin.label.questionnaire" href="/admin-next/questionnaireList" />
+                  <SidebarLink text="steps.forms" href="/admin-next/forms" />
                   {isAdmin ? (
                     <SidebarLink text="admin.label.pages.types" href="/admin/capco/app/projecttype/list" />
                   ) : null}

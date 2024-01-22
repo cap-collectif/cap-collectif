@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -303,11 +304,18 @@ class OpinionRepository extends EntityRepository
     }
 
     public function countByOpinionType(
-        string $opinionTypeId,
+        OpinionType $opinionType,
         ?string $author = null,
         bool $includeTrashed = false,
         ?User $viewer = null
     ): int {
+        $bypassVisibilityCheck = false;
+        $consultation = $opinionType->getConsultation();
+        $consultationOwner = $consultation->getOwner();
+        if ($viewer && $viewer->getOrganization() === $consultationOwner) {
+            $bypassVisibilityCheck = true;
+        }
+
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(o)')
             ->leftJoin('o.consultation', 'oc')
@@ -317,7 +325,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('pro.restrictedViewerGroups', 'prvg')
             ->leftJoin('pro.authors', 'pr_au')
             ->andWhere('o.OpinionType = :opinionTypeId')
-            ->setParameter('opinionTypeId', $opinionTypeId)
+            ->setParameter('opinionTypeId', $opinionType)
         ;
 
         if ($author) {
@@ -328,7 +336,9 @@ class OpinionRepository extends EntityRepository
             $qb->andWhere('o.trashedAt IS NULL');
         }
 
-        $qb = $this->handleOpinionVisibility($qb, $viewer);
+        if (!$bypassVisibilityCheck) {
+            $qb = $this->handleOpinionVisibility($qb, $viewer);
+        }
 
         return $qb
             ->getQuery()

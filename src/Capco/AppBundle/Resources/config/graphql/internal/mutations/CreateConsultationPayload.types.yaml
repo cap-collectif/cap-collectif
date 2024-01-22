@@ -1,0 +1,6 @@
+CreateConsultationPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            consultation:
+                type: 'InternalConsultation'

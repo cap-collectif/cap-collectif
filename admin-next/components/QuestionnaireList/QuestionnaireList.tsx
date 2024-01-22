@@ -162,6 +162,7 @@ const QuestionnaireList: React.FC<QuestionnaireListProps> = ({
                                         viewer={viewer}
                                         questionnaire={questionnaire}
                                         connectionName={questionnaires.__id}
+                                        types={types}
                                     />
                                 </Table.Tr>
                             ),

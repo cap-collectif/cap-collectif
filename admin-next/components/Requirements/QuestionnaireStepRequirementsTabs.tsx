@@ -3,9 +3,9 @@ import { Spinner, Tabs } from '@cap-collectif/ui';
 import { FormProvider, UseFormReturn } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 import { graphql, useFragment } from 'react-relay';
-import QuestionnaireStepRequirements from '@components/Requirements/QuestionnaireStepRequirements';
 import { QuestionnaireStepRequirementsTabs_questionnaireStep$key } from '@relay/QuestionnaireStepRequirementsTabs_questionnaireStep.graphql';
 import QuestionnaireStepWithoutAccountRequirements from '@components/Requirements/QuestionnaireStepWithoutAccountRequirements';
+import Requirements from "./Requirements";
 
 type Props = {
     questionnaireStep: QuestionnaireStepRequirementsTabs_questionnaireStep$key,
@@ -15,7 +15,7 @@ type Props = {
 const COLLECT_STEP_FRAGMENT = graphql`
     fragment QuestionnaireStepRequirementsTabs_questionnaireStep on QuestionnaireStep {
         ... on RequirementStep {
-            ...QuestionnaireStepRequirements_questionnaireStep
+            ...Requirements_requirementStep
         }
     }
 `;
@@ -59,9 +59,8 @@ const QuestionnaireStepRequirementsTabs: React.FC<Props> = ({
                     </Tabs.ButtonList>
                     <Tabs.PanelList>
                         <Tabs.Panel>
-                            <QuestionnaireStepRequirements
-                                questionnaireStep={questionnaireStep}
-                                formMethods={formMethods}
+                            <Requirements
+                              requirementStep={questionnaireStep}
                             />
                         </Tabs.Panel>
                         <Tabs.Panel>

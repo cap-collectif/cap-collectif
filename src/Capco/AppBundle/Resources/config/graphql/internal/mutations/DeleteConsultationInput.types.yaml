@@ -1,0 +1,8 @@
+DeleteConsultationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Input of deleteConsultation mutation.'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The global id of the Consultation to delete'

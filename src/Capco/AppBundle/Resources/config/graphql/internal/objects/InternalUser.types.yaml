@@ -11,6 +11,7 @@ InternalUser:
         - InternalMailingListOwner
         - InternalEmailingCampaignOwner
         - InternalUserIdentificationCodeListOwner
+        - InternalConsultationOwner
         - Author
     config:
         description: "A user is an individual's account."
@@ -25,6 +26,7 @@ InternalUser:
             - InternalEmailingCampaignOwner
             - InternalUserIdentificationCodeListOwner
             - InternalContributor
+            - InternalConsultationOwner
             - Author
         fields:
             adminUrl:
@@ -402,6 +404,11 @@ InternalUser:
                 description: "The organizations of which user is a member"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", [value])'
+            consultations:
+                type: 'InternalConsultationConnection!'
+                description: 'Get all consultations.'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
             participant:
                 type: 'InternalParticipant'
                 description: "The user (who has already participated / is participating) in a questionnaire or other type of interaction"

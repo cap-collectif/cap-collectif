@@ -22,9 +22,19 @@ import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
 import CreateQuestionnaireMutation from '@mutations/CreateQuestionnaireMutation'
 import { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graphql'
 import { onBack } from '@components/Steps/utils'
+import useUrlState from '@hooks/useUrlState'
 
 type Props = {
   stepId: string
+  setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
+}
+
+type Questionnaire = {
+  questionnaireId: string
+  title: string
+  description: string
+  questions: Array<QuestionInput>
+  questionsWithJumps: Array<any>
 }
 
 export type FormValues = {
@@ -43,13 +53,8 @@ export type FormValues = {
   stepDurationType?: {
     labels: Array<string>
   }
-  questionnaire: {
-    questionnaireId: string
-    title: string
-    description: string
-    questions: Array<QuestionInput>
-    questionsWithJumps: Array<any>
-  }
+  questionnaire: Questionnaire
+  MODELquestionnaire?: Questionnaire
   temporaryQuestion?: QuestionInput | null
   temporaryJump?: any
   isUsingModel?: boolean
@@ -62,6 +67,7 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
     step: node(id: $stepId) {
       id
       ... on QuestionnaireStep {
+        ...Requirements_requirementStep @relay(mask: false)
         title
         label
         body
@@ -145,7 +151,7 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
   }
 `
 
-const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
+const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const intl = useIntl()
   const query = useLazyLoadQuery<QuestionnaireStepFormQuery>(QUESTIONNAIRE_STEP_QUERY, {
     stepId,
@@ -153,16 +159,15 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
 
   const { setBreadCrumbItems } = useNavBarContext()
 
+  const [operationType, setOperationType] = useUrlState('operationType', 'EDIT')
+  const isEditing = operationType === 'EDIT'
+
   const { step, availableLocales } = query
   const project = step?.project
 
   if (!step) return null
 
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
-
-  const [isEditing, setIsEditing] = useState(() => {
-    return !!step.label
-  })
 
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
@@ -199,19 +204,25 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
   const { handleSubmit, formState, control, watch, reset } = formMethods
   const { isSubmitting, isValid } = formState
 
-  const onSubmit = async ({ questionnaire, isUsingModel, questionnaireModel, ...values }: FormValues) => {
+  const onSubmit = async ({
+    questionnaire: CURRENTquestionnaire,
+    MODELquestionnaire,
+    isUsingModel,
+    questionnaireModel,
+    ...values
+  }: FormValues) => {
     const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
     delete values.stepDurationType
     delete values.temporaryQuestion
     delete values.temporaryJump
 
-    const isNewStep = !questionnaire.questionnaireId
+    const questionnaire = isUsingModel && !isEditing ? MODELquestionnaire : CURRENTquestionnaire
 
     const stepInput: UpdateQuestionnaireStepInput = {
       ...values,
       timeless,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
-      questionnaire: questionnaire.questionnaireId,
+      questionnaire: CURRENTquestionnaire.questionnaireId,
       ...getRequirementsInput(values),
     }
 
@@ -220,49 +231,13 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
       return { ...q, ...j }
     })
 
-    // @ts-ignore I'll fix that next PR, need to start recette
     delete questionnaire.questionsWithJumps
-
-    if (isUsingModel) stepInput.questionnaire = questionnaireModel?.value || ''
-
-    if (isNewStep && !isUsingModel) {
-      const qInput = {
-        title: `${stepInput.label} - ${intl.formatMessage({
-          id: 'global.questionnaire',
-        })}`,
-        type: 'QUESTIONNAIRE' as QuestionnaireType,
-      }
-      const response = await CreateQuestionnaireMutation.commit(
-        {
-          input: qInput,
-          connections: [],
-        },
-        false,
-        null,
-        null,
-        false,
-      )
-      stepInput.questionnaire = response.createQuestionnaire?.questionnaire?.id || ''
-    }
 
     if (!stepInput.questionnaire) return mutationErrorToast(intl)
 
     return UpdateQuestionnaireStepMutation.commit({ input: stepInput })
       .then(async response => {
         try {
-          if (isUsingModel) {
-            toast({
-              variant: 'success',
-              content: intl.formatMessage({ id: 'global.changes.saved' }),
-            })
-            const newFormValues = {
-              ...response.updateQuestionnaireStep.questionnaireStep,
-              requirements: values.requirements,
-              requirementsReason: values.requirementsReason,
-            }
-            reset(getDefaultValues(stepId, newFormValues, true))
-            return
-          }
           return UpdateQuestionnaireMutation.commit({
             input: {
               ...questionnaire,
@@ -278,7 +253,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                 variant: 'success',
                 content: intl.formatMessage({ id: 'global.changes.saved' }),
               })
-              setIsEditing(false)
+              setOperationType('EDIT')
               const newFormValues = {
                 ...response.updateQuestionnaireStep.questionnaireStep,
                 requirements: values.requirements,
@@ -309,18 +284,26 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
   const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
 
   if (!project.canEdit) {
-    window.location.href = '/admin-next/projects';
-    return null;
+    window.location.href = '/admin-next/projects'
+    return null
   }
 
   return (
-    <Box bg="white" width="100%" p={6} borderRadius="8px">
+    <Box bg="white" p={6} borderRadius="8px" width="70%">
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-questionnaire-step' })}
       </Text>
       <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
         <FormProvider {...formMethods}>
-          <FormControl name="label" control={control} isRequired mb={6}>
+          <FormControl
+            name="label"
+            control={control}
+            isRequired
+            mb={6}
+            onMouseEnter={() => {
+              setHelpMessage('step.create.label.helpText')
+            }}
+          >
             <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
             <FieldInput
               id="label"
@@ -338,7 +321,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
               selectedLanguage={defaultLocale}
             />
           </FormProvider>
-          <FormControl name="stepDurationType" control={control} isRequired mb={6}>
+          <FormControl name="stepDurationType" control={control} isRequired mb={6} mt={6}>
             <FormLabel htmlFor="stepDurationType" label={intl.formatMessage({ id: 'step-duration' })} />
             <FieldInput
               id="stepDurationType"
@@ -367,7 +350,13 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="startAt" name="startAt" control={control} type="dateHour" />
+                <FieldInput
+                  id="startAt"
+                  name="startAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
               <FormControl name="endAt" control={control} width="max-content">
                 <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
@@ -375,17 +364,18 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId }) => {
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="endAt" name="endAt" control={control} type="dateHour" />
+                <FieldInput
+                  id="endAt"
+                  name="endAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
             </Flex>
           ) : null}
-          <QuestionnaireStepFormQuestionnaireTab />
-          <Accordion
-            color={CapUIAccordionColor.Transparent}
-            defaultAccordion={intl.formatMessage({
-              id: 'required-infos-to-participate',
-            })}
-          >
+          <QuestionnaireStepFormQuestionnaireTab isEditing={isEditing} />
+          <Accordion color={CapUIAccordionColor.Transparent}>
             <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
               <Accordion.Panel>

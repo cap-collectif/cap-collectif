@@ -10,10 +10,6 @@ import useFeatureFlag from "@hooks/useFeatureFlag";
 
 const Forms: NextPage<PageProps> = () => {
     const intl = useIntl();
-    const isNewProjectCreateEnabled = useFeatureFlag('unstable__new_create_project');
-    if (!isNewProjectCreateEnabled) {
-        throw new Error('You need to enable unstable__new_create_project feature to access this page.')
-    }
 
     return (
         <Layout navTitle={intl.formatMessage({ id: 'global.formulaire' })}>

@@ -17,10 +17,12 @@ import type { ModalConfirmationDelete_questionnaire$key } from '@relay/ModalConf
 import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 import { useAppContext } from '../AppProvider/App.context';
+import {QuestionnaireType} from "@relay/QuestionnaireListQuery.graphql";
 
 type Props = {
     questionnaire: ModalConfirmationDelete_questionnaire$key,
     connectionName: string,
+    types?: Array<QuestionnaireType>;
 };
 
 const FRAGMENT = graphql`
@@ -44,13 +46,14 @@ const deleteQuestionnaire = (
     intl: IntlShape,
     connectionName: string,
     isAdmin: boolean,
+    types?: Array<QuestionnaireType>
 ) => {
     const input = {
         id: questionnaireId,
     };
     hide();
 
-    return DeleteQuestionnaireMutation.commit({ input, connections: [connectionName] }, isAdmin)
+    return DeleteQuestionnaireMutation.commit({ input, connections: [connectionName] }, isAdmin, types)
         .then(() => {
             toast({
                 variant: 'success',
@@ -65,6 +68,7 @@ const deleteQuestionnaire = (
 const ModalConfirmationDelete: React.FC<Props> = ({
     questionnaire: questionnaireFragment,
     connectionName,
+    types,
 }) => {
     const questionnaire = useFragment(FRAGMENT, questionnaireFragment);
     const { step } = questionnaire;
@@ -139,6 +143,7 @@ const ModalConfirmationDelete: React.FC<Props> = ({
                                         intl,
                                         connectionName,
                                         viewerSession.isAdmin,
+                                        types
                                     )
                                 }>
                                 {intl.formatMessage({ id: 'global.delete' })}

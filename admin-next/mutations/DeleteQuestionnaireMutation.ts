@@ -6,6 +6,7 @@ import type {
     DeleteQuestionnaireMutationResponse,
     DeleteQuestionnaireMutationVariables,
 } from '@relay/DeleteQuestionnaireMutation.graphql';
+import {QuestionnaireType} from "@relay/QuestionnaireListQuery.graphql";
 
 const mutation = graphql`
     mutation DeleteQuestionnaireMutation($input: DeleteQuestionnaireInput!, $connections: [ID!]!)
@@ -19,6 +20,7 @@ const mutation = graphql`
 const commit = (
     variables: DeleteQuestionnaireMutationVariables,
     isAdmin: boolean,
+    types?: Array<QuestionnaireType>
 ): Promise<DeleteQuestionnaireMutationResponse> =>
     commitMutation<DeleteQuestionnaireMutation>(environment, {
         mutation,
@@ -37,9 +39,20 @@ const commit = (
             const rootFields = store.getRoot();
             const viewer = rootFields.getLinkedRecord('viewer');
             if (!viewer) return;
-            const questionnaires = viewer.getLinkedRecord('questionnaires', {
-                affiliations: isAdmin ? null : ['OWNER'],
-            });
+
+            const organization = viewer.getLinkedRecords('organizations')[0] ?? null;
+            const owner = organization ?? viewer;
+
+            const args = {
+                types
+            };
+
+            if (!isAdmin) {
+                args['affiliations'] = ['OWNER'];
+            }
+
+            const questionnaires = owner.getLinkedRecord('questionnaires', args);
+
             if (!questionnaires) return;
 
             const totalCount = parseInt(String(questionnaires.getValue('totalCount')), 10);

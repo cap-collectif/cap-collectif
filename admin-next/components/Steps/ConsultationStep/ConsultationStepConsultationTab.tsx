@@ -8,10 +8,9 @@ import ConsultationForm from '@components/Steps/ConsultationStep/ConsultationFor
 import { ConsultationStepConsultationTab_query$key } from '@relay/ConsultationStepConsultationTab_query.graphql';
 import { UseFieldArrayRemove } from 'react-hook-form/dist/types/fieldArray';
 import {
-    FormValues,
-    getDefaultSection,
+    FormValues
 } from '@components/Steps/ConsultationStep/ConsultationStepForm';
-import useUrlState from "../../../hooks/useUrlState";
+import {useConsultationStep} from "./ConsultationStepContext";
 
 const QUERY_FRAGMENT = graphql`
     fragment ConsultationStepConsultationTab_query on Query {
@@ -31,7 +30,7 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
     query: queryRef,
 }) => {
 
-    const [operationType] = useUrlState('operationType', 'EDIT');
+    const {operationType} = useConsultationStep();
     const isEditing = operationType === 'EDIT';
 
     const ConsultationCreationTypeEnum = {
@@ -100,10 +99,10 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
                     setPreviousSelectedTab(selectedTab);
                 }}>
                 <Tabs.ButtonList ariaLabel="consultationType">
-                    <Tabs.Button id={ConsultationCreationTypeEnum.NEW}>
+                    <Tabs.Button id={ConsultationCreationTypeEnum.NEW} labelSx={{paddingLeft: '16px', paddingRight: '16px'}}>
                         {intl.formatMessage({ id: 'global.new' })}
                     </Tabs.Button>
-                    <Tabs.Button id={ConsultationCreationTypeEnum.MODEL}>
+                    <Tabs.Button id={ConsultationCreationTypeEnum.MODEL} labelSx={{paddingLeft: '16px', paddingRight: '16px'}}>
                         {intl.formatMessage({ id: 'from_model' })}
                     </Tabs.Button>
                 </Tabs.ButtonList>
@@ -117,7 +116,7 @@ const ConsultationStepConsultationTab: React.FC<Props> = ({
                         />
                     </Tabs.Panel>
                     <Tabs.Panel>
-                        <ConsultationModel query={query} consultationFormKey={consultationFormKey}>
+                        <ConsultationModel query={query} consultationFormKey={consultationFormKey} currentConsultationId={newTabConsultationRef?.current?.id}>
                             <ConsultationForm
                                 consultationIndex={consultationIndex}
                                 consultationFormKey={consultationFormKey}

@@ -2,192 +2,226 @@
 
 exports[`Internal|Query.consultations fetches all consultations 1`] = `
 Object {
-  "consultations": Array [
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
-      "sections": Array [
-        Object {
-          "title": "Première section dans la première consultation",
+  "consultations": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOjFzdENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
+          "sections": Array [
+            Object {
+              "title": "Première section dans la première consultation",
+            },
+            Object {
+              "title": "Deuxième section dans la première consultation",
+            },
+          ],
+          "title": "Première consultation",
         },
-        Object {
-          "title": "Deuxième section dans la première consultation",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOlBKTA==",
+          "sections": Array [
+            Object {
+              "title": "Titre Ier",
+            },
+            Object {
+              "title": "Titre II",
+            },
+            Object {
+              "title": "Titre III",
+            },
+          ],
+          "title": "Projet de loi",
         },
-      ],
-      "title": "Première consultation",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOjJuZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
-      "sections": Array [
-        Object {
-          "title": "Première section dans la deuxième consultation",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmFsbA==",
+          "sections": Array [
+            Object {
+              "title": "Le problème constaté",
+            },
+            Object {
+              "title": "Les causes",
+            },
+            Object {
+              "title": "Les enjeux",
+            },
+            Object {
+              "title": "Les solutions",
+            },
+          ],
+          "title": "Toutes",
         },
-        Object {
-          "title": "Deuxième section dans la deuxième consultation",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmFub3RoZXJDb25zdWx0YXRpb25XaXRob3V0U3RlcA==",
+          "sections": Array [],
+          "title": "Another Consultation in project without step",
         },
-      ],
-      "title": "Deuxième consultation",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOmFsbA==",
-      "sections": Array [
-        Object {
-          "title": "Le problème constaté",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOmNhdXNlcw==",
+          "sections": Array [
+            Object {
+              "title": "Les causes",
+            },
+          ],
+          "title": "Causes",
         },
-        Object {
-          "title": "Les causes",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvblByb2plY3RXaXRoT3duZXI=",
+          "sections": Array [
+            Object {
+              "title": "Première section",
+            },
+            Object {
+              "title": "Deuxième section",
+            },
+          ],
+          "title": "Consultation dans un projet qui a un administrateur de projet",
         },
-        Object {
-          "title": "Les enjeux",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhNYW55T3BpbmlvbnM=",
+          "sections": Array [
+            Object {
+              "title": "Opinion type avec beaucoup d'options",
+            },
+          ],
+          "title": "Consultation in project with many opinions",
         },
-        Object {
-          "title": "Les solutions",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhvdXRTdGVw",
+          "sections": Array [],
+          "title": "Consultation in project without step",
         },
-      ],
-      "title": "Toutes",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOmFub3RoZXJDb25zdWx0YXRpb25XaXRob3V0U3RlcA==",
-      "sections": Array [],
-      "title": "Another Consultation in project without step",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOmNhdXNlcw==",
-      "sections": Array [
-        Object {
-          "title": "Les causes",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmN1c3RvbUFjY2Vzcw==",
+          "sections": Array [
+            Object {
+              "title": "La section d'assaut",
+            },
+          ],
+          "title": "Consultation in project with custom access",
         },
-      ],
-      "title": "Causes",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvblByb2plY3RXaXRoT3duZXI=",
-      "sections": Array [
-        Object {
-          "title": "Première section",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOmRlZmF1bHQ=",
+          "sections": Array [
+            Object {
+              "title": "Le problème constaté",
+            },
+            Object {
+              "title": "Les causes",
+            },
+            Object {
+              "title": "Les enjeux",
+            },
+          ],
+          "title": "Défaut",
         },
-        Object {
-          "title": "Deuxième section",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOmVuZGxlc3M=",
+          "sections": Array [
+            Object {
+              "title": "Première section",
+            },
+          ],
+          "title": "Projet sans fin",
         },
-      ],
-      "title": "Consultation dans un projet qui a un administrateur de projet",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhNYW55T3BpbmlvbnM=",
-      "sections": Array [
-        Object {
-          "title": "Opinion type avec beaucoup d'options",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOm11bHRpQ29uc3VsdDE=",
+          "sections": Array [
+            Object {
+              "title": "Première section dans la première consultation",
+            },
+          ],
+          "title": "Consultation in project with multi consult first part",
         },
-      ],
-      "title": "Consultation in project with many opinions",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOmNvbnN1bHRhdGlvbldpdGhvdXRTdGVw",
-      "sections": Array [],
-      "title": "Consultation in project without step",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOmN1c3RvbUFjY2Vzcw==",
-      "sections": Array [
-        Object {
-          "title": "La section d'assaut",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOnByaXZhdGU=",
+          "sections": Array [
+            Object {
+              "title": "La section",
+            },
+          ],
+          "title": "Consultation in private project",
         },
-      ],
-      "title": "Consultation in project with custom access",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOmRlZmF1bHQ=",
-      "sections": Array [
-        Object {
-          "title": "Le problème constaté",
+      },
+      Object {
+        "node": Object {
+          "contribuable": false,
+          "id": "Q29uc3VsdGF0aW9uOnNpbXBsZQ==",
+          "sections": Array [
+            Object {
+              "title": "Le problème constaté",
+            },
+            Object {
+              "title": "Les causes",
+            },
+          ],
+          "title": "Simple",
         },
-        Object {
-          "title": "Les causes",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOjJuZENvbnN1bHRhdGlvbk11bHRpQ29uc3VsdGF0aW9uU3RlcA==",
+          "sections": Array [
+            Object {
+              "title": "Première section dans la deuxième consultation",
+            },
+            Object {
+              "title": "Deuxième section dans la deuxième consultation",
+            },
+          ],
+          "title": "Deuxième consultation",
         },
-        Object {
-          "title": "Les enjeux",
+      },
+      Object {
+        "node": Object {
+          "contribuable": true,
+          "id": "Q29uc3VsdGF0aW9uOm11bHRpQ29uc3VsdDI=",
+          "sections": Array [
+            Object {
+              "title": "Deuxième section dans la première consultation",
+            },
+          ],
+          "title": "Consultation in project with multi consult second part",
         },
-      ],
-      "title": "Défaut",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOmVuZGxlc3M=",
-      "sections": Array [
-        Object {
-          "title": "Première section",
-        },
-      ],
-      "title": "Projet sans fin",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOm11bHRpQ29uc3VsdDE=",
-      "sections": Array [
-        Object {
-          "title": "Première section dans la première consultation",
-        },
-      ],
-      "title": "Consultation in project with multi consult first part",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOm11bHRpQ29uc3VsdDI=",
-      "sections": Array [
-        Object {
-          "title": "Deuxième section dans la première consultation",
-        },
-      ],
-      "title": "Consultation in project with multi consult second part",
-    },
-    Object {
-      "contribuable": true,
-      "id": "Q29uc3VsdGF0aW9uOlBKTA==",
-      "sections": Array [
-        Object {
-          "title": "Titre Ier",
-        },
-        Object {
-          "title": "Titre II",
-        },
-        Object {
-          "title": "Titre III",
-        },
-      ],
-      "title": "Projet de loi",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOnByaXZhdGU=",
-      "sections": Array [
-        Object {
-          "title": "La section",
-        },
-      ],
-      "title": "Consultation in private project",
-    },
-    Object {
-      "contribuable": false,
-      "id": "Q29uc3VsdGF0aW9uOnNpbXBsZQ==",
-      "sections": Array [
-        Object {
-          "title": "Le problème constaté",
-        },
-        Object {
-          "title": "Les causes",
-        },
-      ],
-      "title": "Simple",
-    },
-  ],
+      },
+    ],
+  },
 }
 `;

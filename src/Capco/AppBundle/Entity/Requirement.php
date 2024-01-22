@@ -27,7 +27,19 @@ class Requirement
     public const PHONE_VERIFIED = 'PHONE_VERIFIED';
     public const FRANCE_CONNECT = 'FRANCE_CONNECT';
 
-    public static $requirementsLabels = [
+    public static array $types = [
+        self::CHECKBOX,
+        self::FIRSTNAME,
+        self::LASTNAME,
+        self::PHONE,
+        self::DATE_OF_BIRTH,
+        self::POSTAL_ADDRESS,
+        self::IDENTIFICATION_CODE,
+        self::PHONE_VERIFIED,
+        self::FRANCE_CONNECT,
+    ];
+
+    public static array $requirementsLabels = [
         self::CHECKBOX => 'check-box',
         self::FIRSTNAME => 'form.label_firstname',
         self::LASTNAME => 'group.title',

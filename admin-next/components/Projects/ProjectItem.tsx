@@ -77,7 +77,6 @@ const VIEWER_FRAGMENT = graphql`
         organizations {
             id
         }
-        ...ProjectModalExportSteps_viewer 
     }
 `;
 
@@ -209,7 +208,6 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
                             (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
                             <ProjectModalExportSteps
                                 project={project}
-                                viewer={viewer}
                             />
                         )}
                         {isSuperAdmin && (
