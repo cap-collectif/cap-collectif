@@ -81,10 +81,21 @@ class ProposalStatusDataLoader extends BatchDataLoader
 
     protected function serializeKey($key): array
     {
+        // the context is only useful when the disable_acl key is passed, so we can ignore request and request_file when serializing the key
+        // see https://github.com/cap-collectif/platform/issues/16661 for more infos
+        /** * @var \ArrayObject $context  */
+        $context = $key['context'];
+        $filteredKeys = ['request', 'request_files'];
+        foreach ($filteredKeys as $filteredKey) {
+            if ($context->offsetExists($filteredKey)) {
+                $context->offsetUnset($filteredKey);
+            }
+        }
+
         return [
             'proposalId' => $key['proposal']->getId(),
             'args' => $key['args']->getArrayCopy(),
-            'context' => $key['context'],
+            'context' => $context,
         ];
     }
 
