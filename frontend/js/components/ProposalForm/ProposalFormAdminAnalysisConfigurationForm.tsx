@@ -208,7 +208,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             query={graphql`
               query ProposalFormAdminAnalysisConfigurationFormQuery($affiliations: [QuestionnaireAffiliation!]) {
                 viewer {
-                  questionnaires(affiliations: $affiliations, availableOnly: true) {
+                  questionnaires(affiliations: $affiliations, availableOnly: true, types: [QUESTIONNAIRE_ANALYSIS]) {
                     edges {
                       node {
                         id
@@ -218,7 +218,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
                     }
                   }
                   organizations {
-                    questionnaires(affiliations: $affiliations, availableOnly: true) {
+                    questionnaires(affiliations: $affiliations, availableOnly: true, types: [QUESTIONNAIRE_ANALYSIS]) {
                       edges {
                         node {
                           id
