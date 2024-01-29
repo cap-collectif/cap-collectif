@@ -11,13 +11,14 @@ use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Handler\UserInvitationHandler;
 use Capco\UserBundle\OpenID\OpenIDExtraMapper;
+use Capco\UserBundle\OpenID\OpenIDResourceOwner;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Util\ClassUtils;
 use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
+use HWI\Bundle\OAuthBundle\OAuth\State\State;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -25,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class OauthUserProvider extends FOSUBUserProvider
+class OauthUserProvider implements OAuthAwareUserProviderInterface
 {
     protected OpenIDExtraMapper $extraMapper;
     private Indexer $indexer;
@@ -41,6 +42,8 @@ class OauthUserProvider extends FOSUBUserProvider
     private FlashBagInterface $flashBag;
     private TranslatorInterface $translator;
     private SessionInterface $session;
+    private UserManagerInterface $userManager;
+    private $properties = ['identifier' => 'id'];
 
     public function __construct(
         UserManagerInterface $userManager,
@@ -72,13 +75,13 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->flashBag = $flashBag;
         $this->translator = $translator;
         $this->session = $session;
-        parent::__construct($userManager, $properties);
+        $this->userManager = $userManager;
+        $this->properties = array_merge($this->properties, $properties);
     }
 
     public function connect(UserInterface $user, UserResponseInterface $response): void
     {
         $email = $response->getEmail() ?: $response->getUsername();
-        $this->debug($response);
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($service);
@@ -86,7 +89,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $setterToken = $setter . 'AccessToken';
 
         //we "disconnect" previously connected users
-        if (null !== ($previousUser = $this - $this->findUser($response, $email))) {
+        if (null !== ($previousUser = $this->findUser($response, $email))) {
             $previousUser->{$setterId}(null);
             $previousUser->{$setterToken}(null);
             $this->userManager->updateUser($previousUser);
@@ -98,23 +101,19 @@ class OauthUserProvider extends FOSUBUserProvider
         $this->userManager->updateUser($user);
     }
 
-    // TODO we need a unit test on France Connect behavior
-    public function loadUserByOAuthUserResponse(UserResponseInterface $response): ?UserInterface
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
     {
         $ressourceOwner = $response->getResourceOwner();
 
         if ($ressourceOwner instanceof FranceConnectResourceOwner) {
-            $redirectResponse = $this->verifyFranceConnectStateAndNonce($response);
-            if ($redirectResponse instanceof RedirectResponse) {
-                return null;
-            }
+            $this->verifyFranceConnectStateAndNonce($response);
         }
 
         $serviceName = $ressourceOwner->getName();
         $viewer = $this->tokenStorage->getToken()
             ? $this->tokenStorage->getToken()->getUser()
             : null;
-        $this->debug($response);
+
         $user = $this->getUser($response, $viewer);
         $this->userManager->updateUser($user);
         if ($this->isNewUser) {
@@ -131,10 +130,10 @@ class OauthUserProvider extends FOSUBUserProvider
      * https://partenaires.franceconnect.gouv.fr/fcp/fournisseur-service#identite-pivot.
      */
     public function mapFranceConnectData(
-        UserInterface $user,
+        User $user,
         UserResponseInterface $userResponse,
         array $allowedData
-    ): UserInterface {
+    ): User {
         $userInfoData = $userResponse->getData();
         $firstName = ucfirst(strtolower($userInfoData['given_name']));
         if ($allowedData['given_name']) {
@@ -182,14 +181,15 @@ class OauthUserProvider extends FOSUBUserProvider
         return $user;
     }
 
-    private function verifyFranceConnectStateAndNonce(UserResponseInterface $response)
+    /**
+     * @throws \Exception
+     */
+    private function verifyFranceConnectStateAndNonce(UserResponseInterface $response): void
     {
         $request = $this->requestStack->getCurrentRequest();
-
-        $state = $request->query->get('state');
+        $csrf = (new State($request->query->get('state')))->getCsrfToken();
         $rawToken = $response->getOAuthToken()->getRawToken();
         $franceConnectJwtToken = $rawToken['id_token'];
-
         $tokenParts = explode('.', $franceConnectJwtToken);
         $tokenPayload = json_decode(base64_decode($tokenParts[1]), true) ?? null;
         $nonce = $tokenPayload['nonce'] ?? null;
@@ -198,60 +198,37 @@ class OauthUserProvider extends FOSUBUserProvider
             ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
             ->get()
         ;
-
-        if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $state) {
+        if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $csrf) {
             $this->flashBag->add(
                 'danger',
                 $this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle')
             );
             $this->logger->error('state or nonce token does not match the one given by the server');
 
-            return new RedirectResponse('/');
+            throw new \Exception('state or nonce token does not match the one given by the server');
         }
-    }
-
-    private function debug(UserResponseInterface $response)
-    {
-        $this->logger->debug(__METHOD__ . ' getEmail {email}', ['email' => $response->getEmail()]);
-        $this->logger->debug(__METHOD__ . ' getUsername {username}', [
-            'username' => $response->getUsername(),
-        ]);
-        $this->logger->debug(__METHOD__ . ' resource owner name {service} ', [
-            'service' => $response->getResourceOwner()->getName(),
-        ]);
-        $this->logger->debug(__METHOD__ . ' getAccessToken {getAccessToken}', [
-            'getAccessToken' => $response->getAccessToken(),
-        ]);
-        $this->logger->debug(__METHOD__ . ' getLastName {getLastName}', [
-            'getLastName' => $response->getLastName(),
-        ]);
-        $this->logger->debug(__METHOD__ . ' getFirstName {getFirstName}', [
-            'getFirstName' => $response->getFirstName(),
-        ]);
-        $this->logger->debug(__METHOD__ . ' getNickname {getNickname}', [
-            'getNickname' => $response->getNickname(),
-        ]);
     }
 
     private function findUser(UserResponseInterface $response, ?string $email = null): ?User
     {
         $user = $this->userRepository->findByAccessTokenOrUsername(
-            $response->getAccessToken() ?? '',
-            $response->getUsername() ?? ''
+            $response->getAccessToken(),
+            $response->getUsername()
         );
 
         return !$user && $email ? $this->userRepository->findOneByEmail($email) : $user;
     }
 
-    private function getUser(UserResponseInterface $response, $viewer): ?User
+    private function getUser(UserResponseInterface $response, ?User $viewer = null): User
     {
         $ressourceOwner = $response->getResourceOwner();
         $serviceName = $ressourceOwner->getName();
-        // testing mail for RedHat
+
         $email =
             $response->getEmail() ??
             ($response->getData()['mail'] ?? ($response->getData()['email'] ?? null));
         $ssoIsFacebookOrOpenId = \in_array($serviceName, ['facebook', 'openid']);
+
         if (!$email && !$ssoIsFacebookOrOpenId) {
             $email = $serviceName . '_' . $response->getUsername();
         }
@@ -273,7 +250,7 @@ class OauthUserProvider extends FOSUBUserProvider
         $setterId = 'openid' === $serviceName ? $setter : $setter . 'Id';
         $setterToken = $setter . 'AccessToken';
 
-        if ('openid' === $serviceName) {
+        if ('openid' === $serviceName && $ressourceOwner instanceof OpenIDResourceOwner) {
             $needMapping =
                 $this->isNewUser || $ressourceOwner->isRefreshingUserInformationsAtEveryLogin();
             if ($needMapping) {
@@ -284,6 +261,7 @@ class OauthUserProvider extends FOSUBUserProvider
         }
         if (
             'franceconnect' === $serviceName
+            && $user instanceof User
             && ($this->isNewUser || !$user->getFranceConnectId())
         ) {
             $fcConfig = $this->franceConnectSSOConfigurationRepository->find('franceConnect');

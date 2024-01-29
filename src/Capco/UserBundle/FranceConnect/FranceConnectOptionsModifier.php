@@ -5,13 +5,12 @@ namespace Capco\UserBundle\FranceConnect;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
-use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\AbstractOptionsModifier;
-use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\OptionsModifierInterface;
+use Capco\UserBundle\Hwi\OptionsModifierInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class FranceConnectOptionsModifier extends AbstractOptionsModifier implements OptionsModifierInterface
+class FranceConnectOptionsModifier implements OptionsModifierInterface
 {
     public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';

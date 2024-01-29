@@ -3,12 +3,20 @@
 namespace Capco\UserBundle\OpenID;
 
 use Capco\AppBundle\Helper\EnvHelper;
+use Capco\UserBundle\Hwi\FeatureChecker;
+use Capco\UserBundle\Hwi\OptionsModifierInterface;
 use Capco\UserBundle\Security\JWT;
+use Http\Client\Common\HttpMethodsClientInterface;
+use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\OAuth\State\State;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\HttpUtils;
 
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
@@ -16,7 +24,48 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         'identifier' => 'sub',
     ];
 
-    private $instanceName;
+    private ?string $instanceName = null;
+    private FeatureChecker $featureChecker;
+    private LoggerInterface $logger;
+
+    public function __construct(
+        HttpMethodsClientInterface $hwiHttpClient,
+        HttpUtils $httpUtils,
+        array $options,
+        string $name,
+        RequestDataStorageInterface $hwiStorage,
+        OptionsModifierInterface $optionsModifier,
+        FeatureChecker $featureChecker,
+        LoggerInterface $logger
+    ) {
+        $this->httpClient = $hwiHttpClient;
+        $this->httpUtils = $httpUtils;
+        $this->name = $name;
+        $this->storage = $hwiStorage;
+        $this->featureChecker = $featureChecker;
+        $this->logger = $logger;
+
+        $options = $optionsModifier->modifyOptions($options, $this);
+        if (!empty($options['paths'])) {
+            $this->addPaths($options['paths']);
+        }
+        unset($options['paths']);
+
+        if (!empty($options['options'])) {
+            $options += $options['options'];
+            unset($options['options']);
+        }
+        unset($options['options']);
+
+        // Resolve merged options
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+        $this->options = $resolver->resolve($options);
+
+        $this->state = new State($this->options['state'] ?: null);
+
+        $this->configure();
+    }
 
     // TODO: please save this configuration in BO instead.
     public function isRefreshingUserInformationsAtEveryLogin(): bool
@@ -97,6 +146,13 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 
     public function getAuthorizationUrl($redirectUri, array $extraParameters = []): string
     {
+        if (!$this->featureChecker->isServiceEnabled('openid')) {
+            $message = 'Openid is not enabled';
+            $this->logger->error($message);
+
+            throw new AuthenticationException($message);
+        }
+
         switch ($this->getInstanceName()) {
             case 'pe':
             case 'parlons-energies':
@@ -161,7 +217,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         }
     }
 
-    protected function doGetTokenRequest($url, array $parameters = [])
+    protected function doGetTokenRequest($url, array $parameters = []): ResponseInterface
     {
         $headers = [];
 
@@ -171,13 +227,13 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
                 base64_encode($this->options['client_id'] . ':' . $this->options['client_secret']);
             unset($parameters['client_id'], $parameters['client_secret']);
         }
-        // TODO after hwi update, we will need to set this :
-        // $parameters['client_id'] = $this->options['client_id'];
-        // $parameters['client_secret'] = $this->options['client_secret'];
+
+        $parameters['client_id'] = $this->options['client_id'];
+        $parameters['client_secret'] = $this->options['client_secret'];
 
         return $this->httpRequest(
             $url,
-            http_build_query($parameters, null, '&', \PHP_QUERY_RFC3986),
+            http_build_query($parameters, '', '&', \PHP_QUERY_RFC3986),
             $headers
         );
     }
@@ -189,5 +245,10 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         }
 
         return $this->instanceName;
+    }
+
+    private function generateNonce(): string
+    {
+        return md5(microtime(true) . uniqid('', true));
     }
 }

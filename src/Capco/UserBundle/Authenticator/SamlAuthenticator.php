@@ -35,7 +35,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     public function getAuthenticationAttribute(): string
     {
         if ('dev' === $this->samlIdp) {
-            return 'https://samltest.id/attributes/role';
+            return 'email';
         }
 
         if ('grandest' === $this->samlIdp) {

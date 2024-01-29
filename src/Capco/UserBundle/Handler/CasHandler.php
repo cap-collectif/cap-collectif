@@ -42,7 +42,7 @@ class CasHandler
         $this->setupLogging();
         $this->initializeClient();
 
-        if ('dev' === $this->environment) {
+        if ('dev' === $this->environment || 'test' === $this->environment) {
             // THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION.
             // VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL!
             phpCAS::setNoCasServerValidation();
@@ -125,10 +125,11 @@ class CasHandler
     private function getServerUrlParts(): array
     {
         $serverUrl = $this->getConfiguration()->getCasServerUrl();
+        $defaultPort = 'https' === parse_url($serverUrl, \PHP_URL_SCHEME) ? 443 : 80;
 
         return [
             'host' => parse_url($serverUrl, \PHP_URL_HOST),
-            'port' => parse_url($serverUrl, \PHP_URL_PORT),
+            'port' => parse_url($serverUrl, \PHP_URL_PORT) ?? $defaultPort,
             'path' => parse_url($serverUrl, \PHP_URL_PATH),
         ];
     }

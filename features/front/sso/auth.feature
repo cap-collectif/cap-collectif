@@ -23,6 +23,7 @@ Feature: Sso redirection
 Scenario: Logged in from ssoOauth2 user wants to soft delete his account
   Given feature "oauth2_switch_user" is enabled
   Given feature "sso_by_pass_auth" is enabled
+  Given feature "login_openid" is enabled
   Then enable sso provider "ssoOauth2"
   And I visited "home page"
   When I press "global.login"

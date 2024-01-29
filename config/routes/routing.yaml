@@ -139,12 +139,6 @@ _liip_imagine:
     resource: '@LiipImagineBundle/Resources/config/routing.yaml'
     options: { i18n: false }
 
-#HWIOAuthBundle routes
-hwi_oauth:
-    resource: '@CapcoUserBundle/Resources/config/routing.xml'
-    prefix: /login
-    options: { i18n: false }
-
 facebook_login:
     path: /login/check-facebook
     options: { i18n: false }
@@ -159,6 +153,12 @@ openid_login:
 
 franceconnect_login:
     path: /login/check-franceconnect
+    options: { i18n: false }
+
+#HWIOAuthBundle routes
+hwi_oauth:
+    resource: '@CapcoUserBundle/Resources/config/routing.xml'
+    prefix: /login
     options: { i18n: false }
 
 _translation_edit_in_place:

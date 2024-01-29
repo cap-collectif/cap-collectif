@@ -1,15 +1,14 @@
 <?php
 
-namespace Capco\UserBundle\OpenID\OptionsModifier;
+namespace Capco\UserBundle\OpenID;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Toggle\Manager;
-use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\AbstractOptionsModifier;
-use HWI\Bundle\OAuthBundle\OAuth\OptionsModifier\OptionsModifierInterface;
+use Capco\UserBundle\Hwi\OptionsModifierInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 
-class OpenIDOptionsModifier extends AbstractOptionsModifier implements OptionsModifierInterface
+class OpenIDOptionsModifier implements OptionsModifierInterface
 {
     public const REDIS_CACHE_KEY = 'SSOConfiguration';
 

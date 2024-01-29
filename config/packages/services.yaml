@@ -15,6 +15,8 @@ services:
             $redisSessionHandler: '@Capco\UserBundle\Security\SessionWithJsonHandler'
             $translator: '@translator.default'
             $publisher: '@swarrot.publisher'
+            $hwiHttpClient: '@hwi_oauth.http_client'
+            $hwiStorage: '@hwi_oauth.storage.session'
 
     Capco\AppBundle\Import\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
@@ -134,7 +136,7 @@ services:
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler'
                 - '@Capco\UserBundle\Security\Http\Logout\Handler\CASLogoutHandler'
 
-    Capco\UserBundle\OpenID\OptionsModifier\OpenIDOptionsModifier: ~
+    Capco\UserBundle\OpenID\OpenIDOptionsModifier: ~
 
     Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier: ~
 
@@ -150,6 +152,9 @@ services:
     Capco\UserBundle\Authenticator\MagicLinkAuthenticator:
         arguments:
             $tokenLifetimeInDays: '%magiclinks_duration_in_days%'
+
+    Capco\UserBundle\Hwi\FeatureChecker:
+        public: true
 
     # Logout Handlers
     Capco\UserBundle\Security\Http\Logout\Handler\BasicAuthLogoutHandler: ~
@@ -413,22 +418,48 @@ services:
         public: true
         autowire: true
         arguments:
-            $httpClient: '@hwi_oauth.http_client'
-            $httpUtils: '@Symfony\Component\Security\Http\HttpUtils'
             $options:
                 client_id: 'fake'
                 client_secret: 'fake'
                 access_token_url: 'fake'
                 authorization_url: 'fake'
                 infos_url: 'fake'
-                options:
-                    'logout_url': 'fake'
-                    'csrf': true
+                logout_url: 'fake'
+                csrf: true
                 'paths': []
             $name: 'franceconnect'
             $optionsModifier: '@Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier'
-            $storage: '@hwi_oauth.storage.session'
-            $redisCache: '@Capco\AppBundle\Cache\RedisCache'
+
+    hwi_oauth.resource_owner.openid:
+        class: 'Capco\UserBundle\OpenID\OpenIDResourceOwner'
+        public: true
+        autowire: true
+        arguments:
+            $options:
+                client_id: 'fake'
+                client_secret: 'fake'
+                access_token_url: 'fake'
+                authorization_url: 'fake'
+                infos_url: 'fake'
+                logout_url: 'fake'
+                'paths': []
+            $name: 'openid'
+            $optionsModifier: '@Capco\UserBundle\OpenID\OpenIDOptionsModifier'
+
+    hwi_oauth.resource_owner.facebook:
+        class: 'Capco\UserBundle\Facebook\FacebookResourceOwner'
+        public: true
+        autowire: true
+        arguments:
+            $options:
+                client_id: 'fake'
+                client_secret: 'fake'
+                scope: 'email'
+                options:
+                    display: page
+                'paths': []
+            $name: 'facebook'
+            $optionsModifier: '@Capco\UserBundle\Facebook\FacebookOptionsModifier'
 
     Capco\AppBundle\Faker\AddressProvider:
         arguments:

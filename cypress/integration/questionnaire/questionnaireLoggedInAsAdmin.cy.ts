@@ -1,13 +1,11 @@
 import { QuestionnairePage } from '~e2e/pages'
 
 describe('Questionnaire Logged-in as admin', () => {
-  beforeEach(() => {
-    cy.directLoginAs('admin')
-  })
   describe('Opened Questionnaire', () => {
     describe('Mutation', () => {
       beforeEach(() => {
         cy.task('db:restore')
+        cy.directLoginAs('admin')
         QuestionnairePage.visitOpenedQuestionnaire()
       })
       it('should correctly add another reply when multiple replies is allowed', () => {
@@ -53,6 +51,7 @@ describe('Questionnaire Logged-in as admin', () => {
   })
   describe('Multiple replies Questionnaire', () => {
     beforeEach(() => {
+      cy.directLoginAs('admin')
       QuestionnairePage.visitQuestionnaireWithoutMultipleRepliesAllowed()
     })
     it('should not allow to add another reply when multiple replies is not allowed', () => {
@@ -62,6 +61,7 @@ describe('Questionnaire Logged-in as admin', () => {
   })
   describe('Closed Questionnaire', () => {
     beforeEach(() => {
+      cy.directLoginAs('admin')
       QuestionnairePage.visitClosedQuestionnaire()
     })
     it('should not be able to remove a reply in a closed questionnaire', () => {

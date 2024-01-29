@@ -33,6 +33,7 @@ parameters:
     rabbitmq_login: '%env(SYMFONY_RABBITMQ_LOGIN)%'
     rabbitmq_password: '%env(SYMFONY_RABBITMQ_PASSWORD)%'
     saml_sp: '%env(SYMFONY_SAML_SP)%'
+    saml_allow_login: '%env(bool:SYMFONY_LOGIN_SAML_ALLOWED)%'
     redis_prefix: '%env(SYMFONY_REDIS_PREFIX)%'
     redis_dsn: '%env(SYMFONY_REDIS_HOST)%'
     elasticsearch_host: '%env(SYMFONY_ELASTICSEARCH_HOST)%'
@@ -125,7 +126,7 @@ parameters:
     env(SYMFONY_SAML_SP): dev
     env(SYMFONY_DEPLOYER_API_URL): null
     env(SYMFONY_SAML_PROTECT): false
-    env(SYMFONY_LOGIN_SAML_ALLOWED): True
+    env(SYMFONY_LOGIN_SAML_ALLOWED): true
     env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
     env(SYMFONY_REDIS_HOST): 127.0.0.1
     env(SYMFONY_ELASTICSEARCH_INDEX): capco
