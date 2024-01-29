@@ -433,7 +433,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=='],
+          districts: ['RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=='],
         },
       },
       'internal_admin',
@@ -447,7 +447,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
                 },
               },
               {
@@ -479,10 +479,10 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           projectId,
           ...BASE_PROJECT,
           districts: [
-            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
-            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==',
-            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
-            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1',
             'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
           ],
         },
@@ -498,22 +498,22 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1',
                 },
               },
               {
@@ -532,7 +532,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng=='],
+          districts: ['RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy', 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0', 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2'],
         },
       },
       'internal_admin',
@@ -545,17 +545,17 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2',
                 },
               },
             ],

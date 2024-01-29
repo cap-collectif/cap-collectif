@@ -8,17 +8,17 @@ import type { ProjectListFiltersContainerQueryResponse } from '~relay/ProjectLis
 type Props = {
   readonly district: string | null | undefined
   readonly intl: IntlShape
-  readonly projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>
+  readonly globalDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'globalDistricts'>
 }
 export default class ProjectsListFilterDistricts extends React.Component<Props> {
   render() {
-    const { district, projectDistricts, intl } = this.props
+    const { district, globalDistricts, intl } = this.props
 
-    if (!projectDistricts.edges) {
+    if (!globalDistricts.edges) {
       return null
     }
 
-    const edges = projectDistricts.edges.filter(Boolean)
+    const edges = globalDistricts.edges.filter(Boolean)
 
     if (edges.length > 0) {
       return (

@@ -9,3 +9,6 @@ InternalChangeEventInput:
             id:
                 type: 'ID!'
                 description: 'The ID of the Event to modify.'
+            districts:
+                type: '[ID]'
+                description: 'An array of Node IDs of districts associated to this event.'

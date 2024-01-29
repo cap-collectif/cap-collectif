@@ -35,6 +35,13 @@ Scenario: An admin wants to add a list of events with dry run
             body
             link
           }
+          districts {
+            edges {
+              node {
+                id
+              }
+            }
+          }
         }
       }
     }",
@@ -63,7 +70,8 @@ Scenario: An admin wants to add a list of events with dry run
                 "metaDescription": "metaDescription",
                 "link": "https://facebook.com/inscrivez-vous-ici"
               }
-            ]
+            ],
+            "districts": ["Premier Quartier"]
           }
         ],
         "dryRun": false
@@ -110,7 +118,16 @@ Scenario: An admin wants to add a list of events with dry run
                 "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
                 "link": "https://facebook.com/inscrivez-vous-ici"
               }
-            ]
+            ],
+            "districts": {
+              "edges": [
+                {
+                  "node": {
+                    "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx"
+                  }
+                }
+              ]
+            }
           }
         ]
       }

@@ -74,7 +74,7 @@ const QUERY = graphql`
         }
       }
     }
-    projectDistricts {
+    globalDistricts {
       edges {
         node {
           id
@@ -122,7 +122,7 @@ export const ProjectsMapView = ({
   const [zoom, setZoom] = React.useState(query?.homePageProjectsMapSectionConfiguration.zoomMap)
   if (!query) return null
   const { homePageProjectsMapSectionConfiguration } = query
-  const districts = query?.projectDistricts?.edges?.map(d => d.node)
+  const districts = query?.globalDistricts?.edges?.map(d => d.node)
   const markers = query?.projects?.edges?.map(d => d.node).filter(p => !!(p.address && p.address.lat && p.address.lng))
   if (!markers.length) return null
   const geoJsons = districts ? formatGeoJsons(districts) : null

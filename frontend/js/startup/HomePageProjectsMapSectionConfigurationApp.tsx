@@ -13,7 +13,7 @@ const query = graphql`
     homePageProjectsMapSectionConfiguration {
       ...HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration
     }
-    projectDistricts {
+    globalDistricts {
       totalCount
     }
   }
@@ -43,7 +43,7 @@ export default () => (
               <HomePageProjectsMapSectionConfigurationPage
                 {...props}
                 homePageProjectsMapSectionConfigurationFragmentRef={props?.homePageProjectsMapSectionConfiguration}
-                hasDistrict={props?.projectDistricts.totalCount > 0}
+                hasDistrict={props?.globalDistricts.totalCount > 0}
               />
             )
           }

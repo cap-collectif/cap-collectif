@@ -53,11 +53,11 @@ abstract class BatchDataLoader extends DataLoader
                     ':',
                     '',
                     $this->cachePrefix .
-                        '-[' .
-                        (\is_string($serializedKey)
-                            ? $serializedKey
-                            : base64_encode(var_export($this->serializeKey($key), true))) .
-                        ']-'
+                    '-[' .
+                    (\is_string($serializedKey)
+                        ? $serializedKey
+                        : base64_encode(var_export($this->serializeKey($key), true))) .
+                    ']-'
                 );
             },
         ]);
@@ -117,8 +117,8 @@ abstract class BatchDataLoader extends DataLoader
             if ($this->debug && $this->enableCache) {
                 $this->logger->info(
                     static::class .
-                        ' Cache MISS for: ' .
-                        var_export($this->serializeKey($key), true)
+                    ' Cache MISS for: ' .
+                    var_export($this->serializeKey($key), true)
                 );
             }
             $promise = parent::load($key);

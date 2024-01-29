@@ -28,10 +28,10 @@ import { createOrReplaceTranslation, formatCodeToLocale } from '@utils/locale-he
 import { FieldInput, FormControl } from '@cap-collectif/form';
 import GeographicalAreaDeleteModal from 'components/GeographicalAreasList/GeographicalAreaDeleteModal';
 import { useDisclosure } from '@liinkiing/react-hooks';
-import CreateProjectDistrictMutation from '@mutations/CreateProjectDistrictMutation';
+import CreateGlobalDistrictMutation from '@mutations/CreateGlobalDistrictMutation';
 import { formatGeoJsons, FormattedDistrict } from '@utils/leaflet';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
-import UpdateProjectDistrictMutation from '@mutations/UpdateProjectDistrictMutation';
+import UpdateGlobalDistrictMutation from '@mutations/UpdateGlobalDistrictMutation';
 import { UPLOAD_PATH } from '@utils/config';
 import TextEditor from 'components/Form/TextEditor/TextEditor';
 
@@ -101,7 +101,7 @@ const onSubmit = (
         },
     };
     if (!data.id) {
-        return CreateProjectDistrictMutation.commit({
+        return CreateGlobalDistrictMutation.commit({
             input,
         })
             .then(() => {
@@ -116,7 +116,7 @@ const onSubmit = (
                 mutationErrorToast(intl);
             });
     } else {
-        UpdateProjectDistrictMutation.commit({
+        UpdateGlobalDistrictMutation.commit({
             input: {
                 ...input,
                 id: data.id,

@@ -1,0 +1,37 @@
+Capco\AppBundle\Entity\District\GlobalDistrict:
+    globalDistrict1:
+        id: globalDistrict1
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    globalDistrict2:
+        id: globalDistrict2
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    globalDistrict3:
+        id: globalDistrict3
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    globalDistrict4:
+        id: globalDistrict4
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+        cover: '@IlesDeNantes'
+    globalDistrict5:
+        id: globalDistrict5
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    globalDistrict6:
+        id: globalDistrict6
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'
+    globalDistrict7:
+        id: globalDistrict7
+        displayedOnMap: 1
+        border: '@borderStyle1'
+        background: '@backgroundStyle1'

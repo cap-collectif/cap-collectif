@@ -15,7 +15,7 @@ import MapAdminPageApp from '~/startup/MapAdminPageApp';
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp';
 import ProjectAdminApp from '~/startup/ProjectAdminApp';
 import ProjectAdminAppDeprecated from '~/startup/ProjectAdminAppDeprecated';
-import ProjectDistrictAdminApp from '~/startup/ProjectDistrictAdminApp';
+import GlobalDistrictAdminApp from '~/startup/GlobalDistrictAdminApp';
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp';
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated';
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
@@ -60,7 +60,7 @@ ReactOnRails.register({
     LocaleAdminPageApp,
     ProjectAdminApp,
     ProjectAdminAppDeprecated,
-    ProjectDistrictAdminApp,
+    GlobalDistrictAdminApp,
     EventAdminEditPageApp,
     ProjectExternalProjectAdminAppDeprecated,
     FontAdminPageApp,

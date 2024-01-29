@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Mailer\Message;
 
-use Capco\AppBundle\Mailer\Message\District\ProjectDistrictRefererMessage;
+use Capco\AppBundle\Mailer\Message\District\GlobalDistrictRefererMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Event\EventDeleteMessage;
@@ -46,7 +46,7 @@ final class MessagesList
         'refill_sms_order' => RefillSmsOrderMessage::class,
         'refill_sms_credit' => RefillSmsCreditMessage::class,
         'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::class,
-        'project_district_refer_project' => ProjectDistrictRefererMessage::class,
+        'project_district_refer_project' => GlobalDistrictRefererMessage::class,
         'organization_invitation' => InvitationMessage::class,
     ];
     public const TEMPLATE_LIST = [
@@ -68,7 +68,7 @@ final class MessagesList
         'refill_sms_order' => RefillSmsOrderMessage::TEMPLATE,
         'refill_sms_credit' => RefillSmsCreditMessage::TEMPLATE,
         'alert_sms_consumed_credit' => AlertSmsConsumedCreditMessage::TEMPLATE,
-        'project_district_refer_project' => ProjectDistrictRefererMessage::TEMPLATE,
+        'project_district_refer_project' => GlobalDistrictRefererMessage::TEMPLATE,
         'organization_invitation' => InvitationMessage::TEMPLATE,
     ];
 }

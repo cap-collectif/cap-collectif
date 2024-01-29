@@ -81,7 +81,7 @@ Scenario: GraphQL client want to get a node of all available types
       "requirementId": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQx",
       "questionId": "UXVlc3Rpb246Mg==",
       "responseId": "VmFsdWVSZXNwb25zZTpyZXNwb25zZVRhZ0Nsb3VkMjk=",
-      "districtId": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
+      "districtId": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
       "organizationId": "T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE="
     }
   }
@@ -122,8 +122,8 @@ Scenario: GraphQL client want to get a node of all available types
            "__typename":"ValueResponse"
         },
         "district":{
-           "id":"RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
-           "__typename":"ProjectDistrict"
+           "id":"RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
+           "__typename":"GlobalDistrict"
         },
         "organization":{
            "id":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbjE=",

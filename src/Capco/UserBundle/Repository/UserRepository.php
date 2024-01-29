@@ -1042,10 +1042,10 @@ class UserRepository extends EntityRepository
             ;
         }
 
-        if (isset($criteria['projectDistrict'])) {
-            $qb->join('f.projectDistrict', 'pd')
-                ->andWhere('pd.id = :projectDistrict')
-                ->setParameter('projectDistrict', $criteria['projectDistrict']->getId())
+        if (isset($criteria['globalDistrict'])) {
+            $qb->join('f.globalDistrict', 'pd')
+                ->andWhere('pd.id = :globalDistrict')
+                ->setParameter('globalDistrict', $criteria['globalDistrict']->getId())
             ;
         }
 

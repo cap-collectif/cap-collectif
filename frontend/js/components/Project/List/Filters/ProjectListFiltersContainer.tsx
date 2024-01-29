@@ -22,7 +22,7 @@ export type ProjectAuthor = {
   readonly id: string
   readonly username: string | null | undefined
 }
-export type ProjectDistrict = {
+export type GlobalDistrict = {
   readonly id: string
   readonly name: string | null | undefined
 }
@@ -42,7 +42,7 @@ type Props = {
 type State = {
   projectTypes: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectTypes'>
   projectAuthors: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectAuthors'>
-  projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>
+  globalDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'globalDistricts'>
   projects: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projects'>
 }
 const getAvailableProjectResources = graphql`
@@ -56,7 +56,7 @@ const getAvailableProjectResources = graphql`
       id
       username
     }
-    projectDistricts {
+    globalDistricts {
       totalCount
       edges {
         node {
@@ -77,7 +77,7 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
     },
     projectTypes: [],
     projectAuthors: [],
-    projectDistricts: {
+    globalDistricts: {
       totalCount: 0,
       edges: [],
     },
@@ -87,11 +87,11 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
     fetchQuery_DEPRECATED(environment, getAvailableProjectResources, {
       onlyUsedByProjects: true,
     }).then(
-      ({ projectTypes, projectAuthors, projectDistricts, projects }: ProjectListFiltersContainerQueryResponse) => {
+      ({ projectTypes, projectAuthors, globalDistricts, projects }: ProjectListFiltersContainerQueryResponse) => {
         this.setState({
           projectTypes: projectTypes || [],
           projectAuthors: projectAuthors || [],
-          projectDistricts: projectDistricts || {
+          globalDistricts: globalDistricts || {
             totalCount: 0,
           },
           projects: projects || {
@@ -108,12 +108,12 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   }
 
   renderFilters() {
-    const { projectTypes, projectAuthors, projectDistricts, projects } = this.state
+    const { projectTypes, projectAuthors, globalDistricts, projects } = this.state
     const { intl, themes } = this.props
 
     if (
       projects.totalCount > 1 &&
-      (projectTypes.length > 0 || projectAuthors.length > 0 || themes.length > 0 || projectDistricts.totalCount > 0)
+      (projectTypes.length > 0 || projectAuthors.length > 0 || themes.length > 0 || globalDistricts.totalCount > 0)
     ) {
       return (
         <Col md={7} className={config.isMobile ? 'mt-10 mb-5' : ''}>
@@ -124,7 +124,7 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
                 intl={intl}
                 projectAuthors={projectAuthors}
                 projectTypes={projectTypes}
-                projectDistricts={projectDistricts}
+                globalDistricts={globalDistricts}
                 themes={themes}
               />
             }

@@ -27,6 +27,7 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { isFloat } from '~/utils/string'
 import Tooltip from '~ds/Tooltip/Tooltip'
+import SelectDistrict from "~/components/Event/Form/SelectDistrict";
 
 type SelectedCurrentValues = {
   guestListEnabled: boolean
@@ -164,6 +165,7 @@ export type FormValues = {
       }
     | null
     | undefined
+  districts: []
   themes: []
   projects: []
   steps: []
@@ -612,6 +614,16 @@ export const EventForm = ({
           optional={isFrontendView}
           disabled={false}
         />
+        <SelectDistrict
+          query={query}
+          multi
+          clearable
+          name="districts"
+          label="global.district"
+          placeholder="select-one-or-more-zones"
+          optional={isFrontendView}
+          disabled={false}
+        />
         <SelectStep
           projectOwner={owner}
           multi
@@ -903,6 +915,10 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
                 label: th.title,
               }))
             : [],
+        districts: props?.event?.districts?.edges?.map(edge => edge?.node)?.map(district => ({
+                value: district.id,
+                label: district.title,
+              })) ?? [],
         author:
           props.event && props.event.author
             ? {
@@ -940,6 +956,7 @@ export default createFragmentContainer(container, {
   query: graphql`
     fragment EventForm_query on Query @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
       ...SelectTheme_query
+      ...SelectDistrict_query
       viewer {
         ...SelectProject_projectOwner @arguments(affiliations: $affiliations)
         ...SelectStep_projectOwner @arguments(affiliations: $affiliations)
@@ -1021,6 +1038,14 @@ export default createFragmentContainer(container, {
       isMeasurable
       participants {
         totalCount
+      }
+      districts {
+        edges {
+          node {
+            id
+            name
+          }
+        }
       }
     }
   `,

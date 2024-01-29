@@ -157,7 +157,7 @@ services:
                 Capco\AppBundle\Entity\Project,
                 Capco\AdminBundle\Controller\ProjectController,
                 '@security.token_storage',
-                '@Capco\AppBundle\Repository\ProjectDistrictRepository',
+                '@Capco\AppBundle\Repository\GlobalDistrictRepository',
                 '@Capco\AppBundle\Toggle\Manager',
             ]
         tags:
@@ -287,11 +287,11 @@ services:
             - [setTranslationDomain, [CapcoAppBundle]]
             - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
-    Capco\AdminBundle\Admin\ProjectDistrictAdmin:
+    Capco\AdminBundle\Admin\GlobalDistrictAdmin:
         arguments:
             [
                 ~,
-                Capco\AppBundle\Entity\District\ProjectDistrict,
+                Capco\AppBundle\Entity\District\GlobalDistrict,
                 Capco\AdminBundle\Controller\CRUDController,
             ]
         tags:

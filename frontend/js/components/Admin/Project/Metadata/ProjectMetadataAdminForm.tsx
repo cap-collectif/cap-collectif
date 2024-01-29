@@ -42,7 +42,7 @@ const formatOption = (options: Option[]): string[] => options.map(option => opti
 
 const getDistrictList = graphql`
   query ProjectMetadataAdminFormDistrictQuery($name: String) {
-    projectDistricts(name: $name) {
+    globalDistricts(name: $name) {
       edges {
         node {
           id
@@ -114,8 +114,8 @@ export const loadDistrictOptions = (search: string | null | undefined) => {
     name: search,
   }).then(data => {
     return (
-      data.projectDistricts.edges &&
-      data.projectDistricts.edges
+      data.globalDistricts.edges &&
+      data.globalDistricts.edges
         .filter(d => d.node)
         .map(d => {
           if (d.node) {

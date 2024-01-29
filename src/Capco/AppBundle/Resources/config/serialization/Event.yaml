@@ -12,6 +12,9 @@ Capco\AppBundle\Entity\Event:
             groups: [ElasticsearchEventNestedProject]
         themes:
             groups: [ElasticsearchEventNestedTheme]
+        getDistricts:
+            serialized_name: districts
+            groups: [ElasticsearchEvent, Events]
         canContribute:
             groups: [Events]
         createdAt:

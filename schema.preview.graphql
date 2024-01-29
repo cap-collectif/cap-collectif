@@ -552,6 +552,87 @@ enum FollowerOrderField {
 """A string containing GeoJSON code."""
 scalar GeoJSON
 
+"""A global district"""
+type GlobalDistrict implements District & Node {
+  """The ID of an object"""
+  id: ID!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+  border: Style
+  background: Style
+  translations: [DistrictTranslation!]!
+
+  """The list of followers of the district"""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for followers returning from the connection"""
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  """Identifies the viewer following configuration on the entity."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Identifies if the viewer is following the entity."""
+  viewerIsFollowing: Boolean!
+
+  """The list of projects in district"""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectConnection
+  projectDistrictPositioners: [ProjectDistrictPositioner]
+  cover: Media
+}
+
+"""A connection to a list of items."""
+type GlobalDistrictConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [GlobalDistrictEdge]
+}
+
+"""An edge in a connection."""
+type GlobalDistrictEdge {
+  """The item at the end of the edge."""
+  node: GlobalDistrict
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 """An address from Google Maps."""
 type GoogleMapsAddress {
   """The raw response from the Google Maps API that describes an address"""
@@ -890,7 +971,7 @@ type Project implements Node & UniformResourceLocatable {
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-  ): ProjectDistrictConnection
+  ): GlobalDistrictConnection
 
   """Themes associated with the project."""
   themes: [Theme!]
@@ -908,89 +989,8 @@ type ProjectConnection {
   edges: [ProjectEdge]
 }
 
-"""A project district"""
-type ProjectDistrict implements District & Node {
-  """The ID of an object"""
-  id: ID!
-  name(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-  slug(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-  titleOnMap(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-  description(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-  geojson: GeoJSON
-  geojsonStyle: CssJSON
-  displayedOnMap: Boolean!
-  border: Style
-  background: Style
-  translations: [DistrictTranslation!]!
-
-  """The list of followers of the district"""
-  followers(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """Ordering options for followers returning from the connection"""
-    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
-  ): UserConnection!
-
-  """Identifies the viewer following configuration on the entity."""
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  """Identifies if the viewer is following the entity."""
-  viewerIsFollowing: Boolean!
-
-  """The list of projects in district"""
-  projects(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): ProjectConnection
-  projectDistrictPositioners: [ProjectDistrictPositioner]
-  cover: Media
-}
-
-"""A connection to a list of items."""
-type ProjectDistrictConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [ProjectDistrictEdge]
-}
-
-"""An edge in a connection."""
-type ProjectDistrictEdge {
-  """The item at the end of the edge."""
-  node: ProjectDistrict
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
 type ProjectDistrictPositioner {
-  district: ProjectDistrict!
+  district: GlobalDistrict!
   project: Project!
   position: Int!
 }
@@ -1532,7 +1532,7 @@ type Query {
   ): UserConnection!
 
   """List all the district project in the platform."""
-  projectDistricts(
+  globalDistricts(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -1543,7 +1543,7 @@ type Query {
 
     """Filter by name."""
     name: String = null
-  ): ProjectDistrictConnection!
+  ): GlobalDistrictConnection!
 }
 
 """All custom forms are build using questions."""

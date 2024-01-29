@@ -1,0 +1,12 @@
+GlobalDistrictErrorCode:
+    type: enum
+    config:
+        name: GlobalDistrictErrorCode
+        description: 'Available errors on proposal news mutation'
+        values:
+            DISTRICT_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\District\UnfollowGlobalDistrictMutation::DISTRICT_NOT_FOUND
+                description: 'The given district is not found'
+            FOLLOWER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\District\UnfollowGlobalDistrictMutation::FOLLOWER_NOT_FOUND
+                description: 'The given follower is not found'

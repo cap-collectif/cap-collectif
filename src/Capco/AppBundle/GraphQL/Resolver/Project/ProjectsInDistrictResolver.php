@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -19,7 +19,7 @@ class ProjectsInDistrictResolver implements QueryInterface
     }
 
     public function __invoke(
-        ProjectDistrict $district,
+        GlobalDistrict $district,
         Argument $args,
         $viewer
     ): ConnectionInterface {

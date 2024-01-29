@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class EventRepository extends EntityRepository
 {
@@ -243,6 +245,38 @@ class EventRepository extends EntityRepository
         }
 
         return $qb;
+    }
+
+    public function countByDistrict(GlobalDistrict $district): int
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->select('COUNT(e.id)')
+            ->leftJoin('e.eventDistrictPositioners', 'ed')
+            ->andWhere('ed.district = :district')
+            ->setParameter('district', $district)
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findByDistrict(
+        GlobalDistrict $district,
+        int $offset,
+        int $limit
+    ): Paginator {
+        $qb = $this->createQueryBuilder('e');
+        $qb->leftJoin('e.eventDistrictPositioners', 'ed')
+            ->andWhere('ed.district = :district')
+            ->setParameter('district', $district)
+        ;
+
+        $query = $qb
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return new Paginator($query);
     }
 
     private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder

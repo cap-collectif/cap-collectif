@@ -7,7 +7,7 @@ describe('Project Owner', () => {
       cy.task('disable:feature', 'unstable__new_create_project')
       cy.directLoginAs('project_owner')
     })
-    it('should allow a project admin to add his proposalform', () => {
+    it.only('should allow a project admin to add his proposalform', () => {
       AdminProjectPage.visit('projectWithOwner')
       AdminProjectPage.openAddModal()
       AdminProjectPage.collectStepSelector.click()

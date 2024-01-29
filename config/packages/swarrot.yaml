@@ -976,7 +976,7 @@ swarrot:
                       retry_routing_key_pattern: 'emailing_campaign_%%attempt%%'
 
         project_district_notification:
-            processor: Capco\AppBundle\Processor\District\ProjectDistrictNotificationProcessor
+            processor: Capco\AppBundle\Processor\District\GlobalDistrictNotificationProcessor
             middleware_stack:
                 - configurator: swarrot.processor.signal_handler
                 - configurator: swarrot.processor.max_execution_time

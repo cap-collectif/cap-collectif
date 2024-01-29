@@ -232,15 +232,15 @@ class UpdateNewProjectMutation implements MutationInterface
         }, $arguments['restrictedViewerGroups']);
     }
 
-    private function notifyOnNewProjectInDistrict(array $projectDistrictsId, Project $project): void
+    private function notifyOnNewProjectInDistrict(array $globalDistrictsId, Project $project): void
     {
-        $projectDistrictsId = array_values($projectDistrictsId);
-        foreach ($projectDistrictsId as $projectDistrict) {
+        $globalDistrictsId = array_values($globalDistrictsId);
+        foreach ($globalDistrictsId as $globalDistrict) {
             $this->publisher->publish(
                 CapcoAppBundleMessagesTypes::PROJECT_DISTRICT_NOTIFICATION,
                 new Message(
                     json_encode([
-                        'projectDistrict' => $projectDistrict,
+                        'globalDistrict' => $globalDistrict,
                         'projectId' => $project->getId(),
                     ])
                 )

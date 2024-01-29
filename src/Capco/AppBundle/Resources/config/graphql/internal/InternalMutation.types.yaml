@@ -446,20 +446,20 @@ InternalMutation:
                     inputType: UnfollowOpinionInput
                     payloadType: UnfollowOpinionPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UnfollowOpinionMutation", args, getUser())'
-            followProjectDistrict:
+            followGlobalDistrict:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: FollowProjectDistrictInput
-                    payloadType: FollowProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\FollowProjectDistrictMutation", args, getUser())'
-            unfollowProjectDistrict:
+                    inputType: FollowGlobalDistrictInput
+                    payloadType: FollowGlobalDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\FollowGlobalDistrictMutation", args, getUser())'
+            unfollowGlobalDistrict:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: UnfollowProjectDistrictInput
-                    payloadType: UnfollowProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UnfollowProjectDistrictMutation", args, getUser())'
+                    inputType: UnfollowGlobalDistrictInput
+                    payloadType: UnfollowGlobalDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UnfollowGlobalDistrictMutation", args, getUser())'
             selectProposal:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\ProposalMutation").isGranted(args["input"]["proposalId"], getUser(), "selectProposal")'
                 builder: 'Relay::Mutation'
@@ -832,27 +832,27 @@ InternalMutation:
                     payloadType: DeleteProjectPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProjectMutation", args, getUser())'
             # Project District
-            createProjectDistrict:
+            createGlobalDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: CreateProjectDistrictInput
-                    payloadType: CreateProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\CreateProjectDistrictMutation", args)'
-            deleteProjectDistrict:
+                    inputType: CreateGlobalDistrictInput
+                    payloadType: CreateGlobalDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\CreateGlobalDistrictMutation", args)'
+            deleteGlobalDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: DeleteProjectDistrictInput
-                    payloadType: DeleteProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\DeleteProjectDistrictMutation", args, getUser())'
-            updateProjectDistrict:
+                    inputType: DeleteGlobalDistrictInput
+                    payloadType: DeleteGlobalDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\DeleteGlobalDistrictMutation", args, getUser())'
+            updateGlobalDistrict:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
-                    inputType: UpdateProjectDistrictInput
-                    payloadType: CreateProjectDistrictPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateProjectDistrictMutation", args, getUser())'
+                    inputType: UpdateGlobalDistrictInput
+                    payloadType: CreateGlobalDistrictPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\District\\UpdateGlobalDistrictMutation", args, getUser())'
 
             # Media Admin
             deleteMediaAdmin:

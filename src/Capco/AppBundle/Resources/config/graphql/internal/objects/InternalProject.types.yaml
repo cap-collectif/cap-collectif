@@ -142,7 +142,7 @@ InternalProject:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
                 description: 'Viewers that can access the project, null otherwise.'
             districts:
-                type: 'InternalProjectDistrictConnection'
+                type: 'InternalGlobalDistrictConnection'
             comments:
                 description: 'The comments related to the project.'
                 type: 'CommentConnection!'

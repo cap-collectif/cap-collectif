@@ -180,7 +180,7 @@ class ProjectPersister
                     CapcoAppBundleMessagesTypes::PROJECT_DISTRICT_NOTIFICATION,
                     new Message(
                         json_encode([
-                            'projectDistrict' => $id,
+                            'globalDistrict' => $id,
                             'projectId' => $project->getId(),
                         ])
                     )

@@ -60,6 +60,10 @@ class QueryEventsResolver implements QueryInterface
                 if ($args->offsetExists('theme')) {
                     $filters['themes'] = $args->offsetGet('theme');
                 }
+
+                if ($args->offsetExists('district')) {
+                    $filters['districts'] = $args->offsetGet('district');
+                }
                 if ($args->offsetExists('project')) {
                     $filters['projects'] = GlobalId::fromGlobalId($args->offsetGet('project'))[
                         'id'

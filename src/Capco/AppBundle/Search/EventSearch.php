@@ -15,6 +15,7 @@ use Elastica\Query\Exists;
 use Elastica\Query\Term;
 use Elastica\Result;
 use Elastica\ResultSet;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class EventSearch extends Search
 {
@@ -200,6 +201,9 @@ class EventSearch extends Search
 
         if (isset($providedFilters['themes'])) {
             $filters['themes.id'] = $providedFilters['themes'];
+        }
+        if (isset($providedFilters['districts'])) {
+            $filters['districts.id'] = GlobalId::fromGlobalId($providedFilters['districts'])['id'];
         }
         if (isset($providedFilters['locale'])) {
             $filters['translations.locale'] = $providedFilters['locale'];

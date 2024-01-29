@@ -11,6 +11,7 @@ use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\GlobalDistrictRepository;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
@@ -36,6 +37,7 @@ class AddEventsMutation extends AbstractEventMutation
     private ProjectRepository $projectRepository;
     private Map $map;
     private SettableOwnerResolver $settableOwnerResolver;
+    private GlobalDistrictRepository $globalDistrictRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -50,7 +52,8 @@ class AddEventsMutation extends AbstractEventMutation
         ThemeRepository $themeRepo,
         ProjectRepository $projectRepository,
         SettableOwnerResolver $settableOwnerResolver,
-        Map $map
+        Map $map,
+        GlobalDistrictRepository $globalDistrictRepository
     ) {
         parent::__construct(
             $em,
@@ -67,6 +70,7 @@ class AddEventsMutation extends AbstractEventMutation
         $this->localeRepository = $localeRepository;
         $this->projectRepository = $projectRepository;
         $this->map = $map;
+        $this->globalDistrictRepository = $globalDistrictRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -75,6 +79,7 @@ class AddEventsMutation extends AbstractEventMutation
         $importedEvents = [];
         $notFoundEmails = [];
         $notFoundThemes = [];
+        $notFoundDistricts = [];
         $notFoundProjects = [];
         $brokenDates = [];
 
@@ -119,6 +124,21 @@ class AddEventsMutation extends AbstractEventMutation
                         $themeIds[] = $theme->getId();
                     }
                     $eventInput['themes'] = $themeIds;
+                }
+
+                if (\is_array($eventInput['districts']) && !empty($eventInput['districts'])) {
+                    $districtIds = [];
+                    foreach ($eventInput['districts'] as $key => $districtTitle) {
+                        $district = $this->globalDistrictRepository->findOneByTitle($districtTitle);
+                        if (!$district) {
+                            $notFoundDistricts[] = $districtTitle;
+                            unset($eventInput['districts'][$key]);
+
+                            continue;
+                        }
+                        $districtIds[] = $district->getId();
+                    }
+                    $eventInput['districts'] = $districtIds;
                 }
 
                 if ($this->validateDates($eventInput['startAt'], $eventInput['endAt'])) {
@@ -222,6 +242,7 @@ class AddEventsMutation extends AbstractEventMutation
             'notFoundThemes' => array_unique($notFoundThemes),
             'notFoundProjects' => array_unique($notFoundProjects),
             'brokenDates' => array_unique($brokenDates),
+            'notFoundDistricts' => array_unique($notFoundDistricts),
         ];
     }
 

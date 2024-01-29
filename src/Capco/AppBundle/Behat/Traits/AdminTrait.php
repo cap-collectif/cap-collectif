@@ -7,8 +7,8 @@ use Behat\Mink\Session;
 trait AdminTrait
 {
     use AdminContactListTrait;
+    use AdminGlobalDistrictTrait;
     use AdminPageTrait;
-    use AdminProjectDistrictTrait;
     use AdminProposalFormTrait;
     use AdminProposalTrait;
     use AdminQuestionnaireTrait;

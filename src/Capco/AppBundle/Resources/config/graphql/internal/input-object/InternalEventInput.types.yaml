@@ -13,6 +13,8 @@ InternalEventInput:
                 type: '[String!]!'
             projects:
                 type: '[String!]!'
+            districts:
+                type: '[String!]!'
             guestListEnabled:
                 type: 'Boolean!'
             enabled:

@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
@@ -38,14 +38,14 @@ class FollowerRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function countFollowersOfProjectDistrict(ProjectDistrict $projectDistrict): int
+    public function countFollowersOfGlobalDistrict(GlobalDistrict $globalDistrict): int
     {
         $query = $this->createQueryBuilder('f')
             ->select('count(f.id)')
-            ->join('f.projectDistrict', 'p')
+            ->join('f.globalDistrict', 'p')
             ->join('f.user', 'u')
             ->andWhere('p.id = :districtId')
-            ->setParameter('districtId', $projectDistrict->getId())
+            ->setParameter('districtId', $globalDistrict->getId())
         ;
 
         return (int) $query->getQuery()->getSingleScalarResult();

@@ -113,7 +113,7 @@ InternalQuery:
                         description: 'ID of a ProjectType to filter by. If non-null, filter projects by types'
                     district:
                         type: 'ID'
-                        description: 'ID of a ProjectDistrict to filter by. If non-null, filter projects by district'
+                        description: 'ID of a GlobalDistrict to filter by. If non-null, filter projects by district'
                     # TODO before preview
                     # rename "withEventsOnly"
                     withEventOnly:
@@ -155,6 +155,9 @@ InternalQuery:
                     theme:
                         type: 'ID'
                         description: 'If non-null, filters events with the given theme.'
+                    district:
+                        type: 'ID'
+                        description: 'If non-null, filters events with the given district.'
                     # TODO
                     # Support multi-authors
                     author:
@@ -175,6 +178,7 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: true
                         description: 'If true get enabled only, if false get disabled, if null get all events'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info, serv("request_stack")])'
             projectAuthors:
                 type: '[Author!]!'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
@@ -316,16 +320,16 @@ InternalQuery:
                         description: 'the term to filter questions'
                         type: 'String'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver", [args])'
-            projectDistricts:
+            globalDistricts:
                 description: 'List all the district project in the platform.'
-                type: 'InternalProjectDistrictConnection!'
+                type: 'InternalGlobalDistrictConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     name:
                         type: 'String'
                         defaultValue: null
                         description: 'Filter by name.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryProjectDistrictResolver", [args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryGlobalDistrictResolver", [args])'
             allContributors:
                 description: 'List all the contributors in the platform, totalCount includes anon replies and votes.'
                 type: 'InternalUserConnection!'

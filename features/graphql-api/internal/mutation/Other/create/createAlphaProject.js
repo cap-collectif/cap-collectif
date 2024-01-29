@@ -249,7 +249,7 @@ describe('Internal|createAlphaProject simple mutations', () => {
         {
           input: {
             ...BASE_PROJECT,
-            districts: [toGlobalId('District', 'projectDistrict2'), toGlobalId('District', 'projectDistrict3')  , toGlobalId('District', 'projectDistrict4')],
+            districts: [toGlobalId('District', 'globalDistrict2'), toGlobalId('District', 'globalDistrict3')  , toGlobalId('District', 'globalDistrict4')],
           },
         },
         'internal_admin',
@@ -262,17 +262,17 @@ describe('Internal|createAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
                 },
               },
             ],

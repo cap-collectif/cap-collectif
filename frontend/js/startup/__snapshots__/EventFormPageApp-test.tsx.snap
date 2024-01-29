@@ -577,6 +577,53 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                           "storageKey": null,
                         },
                         Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrictConnection",
+                          "kind": "LinkedField",
+                          "name": "districts",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "GlobalDistrictEdge",
+                              "kind": "LinkedField",
+                              "name": "edges",
+                              "plural": true,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "concreteType": "GlobalDistrict",
+                                  "kind": "LinkedField",
+                                  "name": "node",
+                                  "plural": false,
+                                  "selections": Array [
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "id",
+                                      "storageKey": null,
+                                    },
+                                    Object {
+                                      "alias": null,
+                                      "args": null,
+                                      "kind": "ScalarField",
+                                      "name": "name",
+                                      "storageKey": null,
+                                    },
+                                  ],
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
                           "condition": "isAuthenticated",
                           "kind": "Condition",
                           "passingValue": true,
@@ -616,6 +663,60 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "title",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "GlobalDistrictConnection",
+                  "kind": "LinkedField",
+                  "name": "globalDistricts",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrict",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                   ],
@@ -886,7 +987,7 @@ exports[`<EventFormPageApp /> should render correctly with defaultProps 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "4b6392d1dee2d1e18fb6800aa1ca5dd7",
+              "cacheID": "01a5fc69c18e527e99f5a1d6e0d9dd61",
               "id": null,
               "metadata": Object {},
               "name": "EventFormPageAppQuery",
@@ -1015,10 +1116,19 @@ fragment EventForm_event on Event {
   participants {
     totalCount
   }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment EventForm_query_k3vj0 on Query {
   ...SelectTheme_query
+  ...SelectDistrict_query
   viewer {
     ...SelectProject_projectOwner_k3vj0
     ...SelectStep_projectOwner_k3vj0
@@ -1032,6 +1142,18 @@ fragment EventForm_query_k3vj0 on Query {
       displayName
       ...SelectProject_projectOwner_k3vj0
       ...SelectStep_projectOwner_k3vj0
+    }
+  }
+}
+
+fragment SelectDistrict_query on Query {
+  globalDistricts {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
     }
   }
 }

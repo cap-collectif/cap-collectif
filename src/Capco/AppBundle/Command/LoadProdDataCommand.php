@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Consultation;
 use Capco\AppBundle\Entity\ContactForm\ContactForm;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
@@ -143,7 +143,7 @@ class LoadProdDataCommand extends Command
             Comment::class,
             ProposalComment::class,
             EventComment::class,
-            ProjectDistrict::class,
+            GlobalDistrict::class,
             RankingStep::class,
             PresentationStep::class,
             Group::class,

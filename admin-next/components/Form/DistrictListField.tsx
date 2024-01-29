@@ -18,24 +18,28 @@ type DistrictListFieldValue = {
 }
 
 const getDistrictList = graphql`
-  query DistrictListFieldQuery($term: String) {
-    projectDistricts(name: $term) {
-      edges {
-        node {
-          value: id
-          label: name
+    query DistrictListFieldQuery($term: String) {
+        globalDistricts(name: $term) {
+            edges {
+                node {
+                    value: id
+                    label: name
+                }
+            }
         }
-      }
     }
-  }
-`
+`;
 
-const formatDistrictsData = (projectDistricts: DistrictListFieldQueryResponse['projectDistricts']) => {
-  if (!projectDistricts) return []
-  return (
-    projectDistricts.edges?.map(edge => edge?.node)?.map(d => ({ value: d?.value ?? '', label: d?.label ?? '' })) || []
-  )
-}
+const formatDistrictsData = (
+    globalDistricts: DistrictListFieldQueryResponse['globalDistricts'],
+) => {
+    if (!globalDistricts) return [];
+    return (
+        globalDistricts.edges
+            ?.map(edge => edge?.node)
+            ?.map(d => ({ value: d?.value ?? '', label: d?.label ?? '' })) || []
+    );
+};
 
 export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...props }) => {
   const { control } = useFormContext()
@@ -44,9 +48,9 @@ export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...p
       term,
     }).toPromise()
 
-    if (districtsData && districtsData.projectDistricts) {
-      return formatDistrictsData(districtsData.projectDistricts) as DistrictListFieldValue[]
-    }
+        if (districtsData && districtsData.globalDistricts) {
+            return formatDistrictsData(districtsData.globalDistricts) as DistrictListFieldValue[];
+        }
 
     return []
   }

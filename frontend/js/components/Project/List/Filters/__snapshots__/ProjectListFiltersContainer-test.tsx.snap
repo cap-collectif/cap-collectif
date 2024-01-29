@@ -46,6 +46,12 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects a
       filterCount={0}
       overlay={
         <Memo(Connect(ReduxForm))
+          globalDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
           intl={
             Object {
               "formatDate": [Function],
@@ -68,12 +74,6 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects a
                 "username": "Kaaris270",
               },
             ]
-          }
-          projectDistricts={
-            Object {
-              "edges": Array [],
-              "totalCount": 0,
-            }
           }
           projectTypes={Array []}
           themes={Array []}
@@ -116,6 +116,17 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects d
       filterCount={0}
       overlay={
         <Memo(Connect(ReduxForm))
+          globalDistricts={
+            Object {
+              "edges": Object {
+                "node": Object {
+                  "id": "1",
+                  "name": "district1",
+                },
+              },
+              "totalCount": 1,
+            }
+          }
           intl={
             Object {
               "formatDate": [Function],
@@ -132,17 +143,6 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects d
             }
           }
           projectAuthors={Array []}
-          projectDistricts={
-            Object {
-              "edges": Object {
-                "node": Object {
-                  "id": "1",
-                  "name": "district1",
-                },
-              },
-              "totalCount": 1,
-            }
-          }
           projectTypes={Array []}
           themes={Array []}
         />
@@ -184,6 +184,12 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects t
       filterCount={0}
       overlay={
         <Memo(Connect(ReduxForm))
+          globalDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
           intl={
             Object {
               "formatDate": [Function],
@@ -200,12 +206,6 @@ exports[`<ProjectListFiltersContainer /> should render correctly with projects t
             }
           }
           projectAuthors={Array []}
-          projectDistricts={
-            Object {
-              "edges": Array [],
-              "totalCount": 0,
-            }
-          }
           projectTypes={
             Array [
               Object {
@@ -255,6 +255,12 @@ exports[`<ProjectListFiltersContainer /> should render correctly with themes 1`]
       filterCount={0}
       overlay={
         <Memo(Connect(ReduxForm))
+          globalDistricts={
+            Object {
+              "edges": Array [],
+              "totalCount": 0,
+            }
+          }
           intl={
             Object {
               "formatDate": [Function],
@@ -271,12 +277,6 @@ exports[`<ProjectListFiltersContainer /> should render correctly with themes 1`]
             }
           }
           projectAuthors={Array []}
-          projectDistricts={
-            Object {
-              "edges": Array [],
-              "totalCount": 0,
-            }
-          }
           projectTypes={Array []}
           themes={
             Array [

@@ -2,14 +2,14 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Locale;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\ProjectHeaderType;
-use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
-use Capco\AppBundle\Form\Subscriber\ProjectDistrictsFieldSubscriber;
+use Capco\AppBundle\Form\Persister\GlobalDistrictsPersister;
+use Capco\AppBundle\Form\Subscriber\GlobalDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -27,9 +27,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AlphaProjectFormType extends AbstractType
 {
-    private ProjectDistrictsPersister $persister;
+    private GlobalDistrictsPersister $persister;
 
-    public function __construct(ProjectDistrictsPersister $persister)
+    public function __construct(GlobalDistrictsPersister $persister)
     {
         $this->persister = $persister;
     }
@@ -65,7 +65,7 @@ class AlphaProjectFormType extends AbstractType
                 ],
             ])
             ->add('districts', EntityType::class, [
-                'class' => ProjectDistrict::class,
+                'class' => GlobalDistrict::class,
                 'multiple' => true,
                 'required' => true,
                 'mapped' => false,
@@ -93,7 +93,7 @@ class AlphaProjectFormType extends AbstractType
             ->add('customCode', TextType::class)
         ;
 
-        $builder->addEventSubscriber(new ProjectDistrictsFieldSubscriber($this->persister));
+        $builder->addEventSubscriber(new GlobalDistrictsFieldSubscriber($this->persister));
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
             $form = $event->getForm();

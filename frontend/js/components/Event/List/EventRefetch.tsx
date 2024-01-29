@@ -17,6 +17,7 @@ type Props = {
   readonly relay: RelayRefetchProp
   readonly query: EventRefetch_query
   readonly theme: string | null | undefined
+  readonly district: string | null | undefined
   readonly project: string | null | undefined
   readonly userType: string | null | undefined
   readonly status: string | null | undefined
@@ -41,7 +42,7 @@ export class EventRefetch extends React.Component<Props, State> {
     hasRefetchError: false,
   }
   _refetch = debounce(() => {
-    const { relay, search, project, theme, author, status, isRegistrable, userType, isAuthenticated } = this.props
+    const { relay, search, project, theme, district, author, status, isRegistrable, userType, isAuthenticated } = this.props
     this.setState({
       isRefetching: true,
     })
@@ -52,11 +53,12 @@ export class EventRefetch extends React.Component<Props, State> {
         cursor: null,
         search: search || null,
         theme: theme || null,
+        district: district || null,
         project: project || null,
         userType: userType || null,
         isFuture: status === 'all' ? null : status === 'ongoing-and-future',
         author: author && author.value ? author.value : null,
-        isRegistrable: isRegistrable === 'all' || typeof isRegistrable === 'undefined' ? null : isRegistrable === 'yes',
+        isRegistrable: (isRegistrable === 'all' || !isRegistrable) ? null : isRegistrable === 'yes',
         orderBy: status === 'finished' || status === 'all' ? getOrderBy(ORDER_TYPE.OLD) : getOrderBy(ORDER_TYPE.LAST),
         isAuthenticated,
       } as EventRefetchRefetchQueryVariables)
@@ -82,10 +84,11 @@ export class EventRefetch extends React.Component<Props, State> {
   }, 500)
 
   componentDidUpdate(prevProps: Props) {
-    const { search, project, theme, orderBy, author, status, isRegistrable, userType } = this.props
+    const { search, project, theme, district, orderBy, author, status, isRegistrable, userType } = this.props
 
     if (
       prevProps.theme !== theme ||
+      prevProps.district !== district ||
       prevProps.project !== project ||
       prevProps.search !== search ||
       prevProps.status !== status ||
@@ -99,6 +102,10 @@ export class EventRefetch extends React.Component<Props, State> {
 
       if (theme) {
         searchParams.set('theme', theme)
+      }
+
+      if (district) {
+        searchParams.set('district', district)
       }
 
       url.search = searchParams.toString()
@@ -130,6 +137,7 @@ const mapStateToProps = (state: GlobalState) => {
   return {
     isAuthenticated: !!state.user.user,
     theme: selector(state, 'theme'),
+    district: selector(state, 'district'),
     project: selector(state, 'project'),
     search: selector(state, 'search'),
     userType: selector(state, 'userType'),
@@ -151,6 +159,7 @@ export default createRefetchContainer(
         count: { type: "Int!" }
         cursor: { type: "String" }
         theme: { type: "ID" }
+        district: { type: "ID"}
         project: { type: "ID" }
         locale: { type: "TranslationLocale" }
         search: { type: "String" }
@@ -166,6 +175,7 @@ export default createRefetchContainer(
             cursor: $cursor
             count: $count
             theme: $theme
+            district: $district
             project: $project
             locale: $locale
             search: $search
@@ -184,6 +194,7 @@ export default createRefetchContainer(
       $cursor: String
       $count: Int!
       $theme: ID
+      $district: ID
       $project: ID
       $userType: ID
       $locale: TranslationLocale
@@ -199,6 +210,7 @@ export default createRefetchContainer(
           cursor: $cursor
           count: $count
           theme: $theme
+          district: $district
           project: $project
           userType: $userType
           locale: $locale
@@ -213,6 +225,7 @@ export default createRefetchContainer(
         first: $count
         after: $cursor
         theme: $theme
+        district: $district
         project: $project
         locale: $locale
         search: $search

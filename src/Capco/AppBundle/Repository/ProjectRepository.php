@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Project;
@@ -409,7 +409,7 @@ class ProjectRepository extends EntityRepository
     }
 
     public function findByDistrict(
-        ProjectDistrict $district,
+        GlobalDistrict $district,
         $user,
         int $offset,
         int $limit
@@ -430,7 +430,7 @@ class ProjectRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countByDistrict(ProjectDistrict $district, $user): int
+    public function countByDistrict(GlobalDistrict $district, $user): int
     {
         $qb = $this->getProjectsViewerCanSeeQueryBuilder($user);
 

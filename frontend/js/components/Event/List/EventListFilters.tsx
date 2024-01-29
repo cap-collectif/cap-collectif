@@ -6,7 +6,7 @@ import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { graphql } from 'relay-runtime'
-import { Field, formValueSelector, reset } from 'redux-form'
+import { Field, formValueSelector, change } from 'redux-form'
 import { createFragmentContainer } from 'react-relay'
 import select from '../../Form/Select'
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types'
@@ -22,6 +22,7 @@ import type { EventListFilters_query } from '~relay/EventListFilters_query.graph
 import SelectTheme from '../../Utils/SelectTheme'
 import SelectProject from '../../Utils/SelectProject'
 import type { EventOrder } from '~relay/HomePageEventsQuery.graphql'
+import SelectDistrict from "~/components/Event/Form/SelectDistrict";
 
 type Registrable = 'all' | 'yes' | 'no'
 type Props = ReduxFormFormProps & {
@@ -47,6 +48,7 @@ const countFilters = (
   author: string | null | undefined,
   userType: string | null | undefined,
   isRegistrable: Registrable | null | undefined,
+  district: string | null | undefined,
 ): number => {
   let nbFilter = 0
 
@@ -55,6 +57,10 @@ const countFilters = (
   }
 
   if (theme) {
+    nbFilter++
+  }
+
+  if (district) {
     nbFilter++
   }
 
@@ -90,7 +96,7 @@ const FiltersWrapper: StyledComponent<any, {}, typeof Col> = styled(Col)`
 `
 export class EventListFilters extends React.Component<Props> {
   getFilters(nbFilter: number): [] {
-    const { features, theme, project, userTypes, intl, dispatch, query } = this.props
+    const { features, theme, project, userTypes, intl, dispatch, query, district } = this.props
     const filters = []
     filters.push(
       <Field
@@ -180,6 +186,14 @@ export class EventListFilters extends React.Component<Props> {
       )
     }
 
+    if (query) {
+      filters.push(
+        <div>
+          <SelectDistrict query={query} />
+        </div>,
+      )
+    }
+
     if (features.projects_form && query) {
       filters.push(
         <div>
@@ -212,9 +226,19 @@ export class EventListFilters extends React.Component<Props> {
       )
     }
 
-    if ((theme !== null || project !== null) && nbFilter > 0) {
+    const resetFilters = () => {
+      const filterKeys = ['theme', 'project', 'search', 'author', 'userType', 'isRegistrable', 'district'];
+      for (const key of filterKeys) {
+        dispatch(change('EventPageContainer', key, null))
+      }
+
+      const {origin, pathname} = window.location;
+      window.history.replaceState(null, '', `${origin}${pathname}`);
+    };
+
+    if ((theme !== null || project !== null || district !== null) && nbFilter > 0) {
       filters.push(
-        <Button bsStyle="link" className="p-0" onClick={() => dispatch(reset('EventPageContainer'))}>
+        <Button bsStyle="link" className="p-0" onClick={() => resetFilters()}>
           <FormattedMessage id="reset-filters" />
         </Button>,
       )
@@ -242,6 +266,7 @@ export class EventListFilters extends React.Component<Props> {
     const {
       features,
       theme,
+      district,
       project,
       search,
       author,
@@ -252,7 +277,7 @@ export class EventListFilters extends React.Component<Props> {
       dispatch,
       query,
     } = this.props
-    const nbFilter = countFilters(theme, project, search, author, userType, isRegistrable)
+    const nbFilter = countFilters(theme, project, search, author, userType, isRegistrable, district)
     const popoverBottom = this.getPopoverBottom(nbFilter)
 
     const filterCount = () => {
@@ -310,6 +335,7 @@ const selector = formValueSelector('EventPageContainer')
 const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
   theme: selector(state, 'theme'),
+  district: selector(state, 'district'),
   project: selector(state, 'project'),
   search: selector(state, 'search'),
   userType: selector(state, 'userType'),
@@ -328,6 +354,7 @@ export default createFragmentContainer(container, {
       count: { type: "Int!" }
       cursor: { type: "String" }
       theme: { type: "ID" }
+      district: { type: "ID" }
       project: { type: "ID" }
       locale: { type: "TranslationLocale" }
       search: { type: "String" }
@@ -344,6 +371,7 @@ export default createFragmentContainer(container, {
           locale: $locale
           search: $search
           theme: $theme
+          district: $district
           project: $project
           userType: $userType
           isFuture: $isFuture
@@ -353,6 +381,7 @@ export default createFragmentContainer(container, {
         )
       ...SelectTheme_query
       ...SelectProject_query @arguments(withEventOnly: true)
+      ...SelectDistrict_query
     }
   `,
 })

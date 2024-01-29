@@ -1,0 +1,10 @@
+FollowGlobalDistrictInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            globalDistrictId:
+                type: 'ID!'
+                description: 'The global district id'
+            notifiedOf:
+                type: 'SubscriptionTypeValue!'
+                description: 'The type of notification'

@@ -140,11 +140,13 @@ export const getInitialValues = () => {
   const urlSearch = new URLSearchParams(window.location.search)
   const project = urlSearch.get('projectId') || null
   const theme = urlSearch.get('theme') ?? null
+  const district = urlSearch.get('district') ?? null
   const hasFilteredUrl = !!project
   return {
     status: hasFilteredUrl ? 'all' : 'ongoing-and-future',
     project,
     theme,
+    district,
   }
 }
 const form = reduxForm({
@@ -160,6 +162,7 @@ export default createFragmentContainer(form, {
       cursor: { type: "String" }
       locale: { type: "TranslationLocale" }
       theme: { type: "ID" }
+      district: { type: "ID" }
       project: { type: "ID" }
       search: { type: "String" }
       userType: { type: "ID" }
@@ -188,6 +191,7 @@ export default createFragmentContainer(form, {
           search: $search
           locale: $locale
           theme: $theme
+          district: $district
           project: $project
           userType: $userType
           isFuture: $isFuture
@@ -203,6 +207,7 @@ export default createFragmentContainer(form, {
           search: $search
           locale: $locale
           theme: $theme
+          district: $district
           project: $project
           userType: $userType
           isFuture: $isFuture
@@ -217,6 +222,7 @@ export default createFragmentContainer(form, {
           locale: $locale
           search: $search
           theme: $theme
+          district: $district
           project: $project
           userType: $userType
           isFuture: $isFuture

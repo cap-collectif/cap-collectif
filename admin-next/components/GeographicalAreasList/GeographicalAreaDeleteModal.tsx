@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { Button, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui';
 import { IntlShape, useIntl } from 'react-intl';
 
-import DeleteProjectDistrictMutation from '@mutations/DeleteProjectDistrictMutation';
+import DeleteGlobalDistrictMutation from '@mutations/DeleteGlobalDistrictMutation';
 import { mutationErrorToast } from '@utils/mutation-error-toast';
 
 const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boolean): void => {
-    DeleteProjectDistrictMutation.commit({
+    DeleteGlobalDistrictMutation.commit({
         input: { id },
     }).then(response => {
-        if (!response?.deleteProjectDistrict?.deletedDistrictId) {
+        if (!response?.deleteGlobalDistrict?.deletedDistrictId) {
             return mutationErrorToast(intl);
         }
         toast({

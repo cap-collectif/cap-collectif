@@ -1,0 +1,19 @@
+InternalGlobalDistrict:
+    type: object
+    inherits:
+        - PreviewGlobalDistrict
+        - PreviewDistrict
+        - WithFollowers
+        - InternalPrimaryKey
+    config:
+        name: GlobalDistrict
+        fields:
+            projects:
+                type: 'InternalProjectConnection'
+            followers:
+                type: 'InternalUserConnection!'
+                description: 'The list of followers of the district'
+            projectDistrictPositioners:
+                type: '[InternalProjectDistrictPositioner]'
+            cover:
+                type: 'InternalMedia'

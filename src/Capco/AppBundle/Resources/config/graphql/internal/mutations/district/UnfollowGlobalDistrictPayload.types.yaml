@@ -1,0 +1,13 @@
+UnfollowGlobalDistrictPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            globalDistrict:
+                type: 'InternalGlobalDistrict'
+                description: 'The global district unfollowed'
+            unfollowerId:
+                type: 'ID'
+                description: 'The ID of viewer who unfollow the district'
+            errorCode:
+                type: 'GlobalDistrictErrorCode'
+                description: 'Available errors for the mutation.'

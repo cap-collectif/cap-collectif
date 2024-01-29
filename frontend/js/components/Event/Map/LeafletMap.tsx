@@ -35,6 +35,7 @@ const FRAGMENT = graphql`
     count: { type: "Int!" }
     cursor: { type: "String" }
     theme: { type: "ID" }
+    district: { type: "ID" }
     project: { type: "ID" }
     locale: { type: "TranslationLocale" }
     search: { type: "String" }
@@ -48,6 +49,7 @@ const FRAGMENT = graphql`
       first: $count
       after: $cursor
       theme: $theme
+      district: $district
       project: $project
       locale: $locale
       search: $search

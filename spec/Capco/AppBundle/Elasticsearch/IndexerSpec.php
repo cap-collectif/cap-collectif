@@ -6,7 +6,7 @@ use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\ArgumentVote;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\OpinionVote;
@@ -51,7 +51,7 @@ class IndexerSpec extends ObjectBehavior
                 new ClassMetadata(PostComment::class),
                 new ClassMetadata(ValueResponse::class),
                 new ClassMetadata(MediaResponse::class),
-                new ClassMetadata(ProjectDistrict::class),
+                new ClassMetadata(GlobalDistrict::class),
                 new ClassMetadata(AbstractVote::class),
                 new ClassMetadata(ProposalSelectionVote::class),
                 new ClassMetadata(ProposalCollectVote::class),
@@ -97,7 +97,7 @@ class IndexerSpec extends ObjectBehavior
 
     public function it_remove_project_district()
     {
-        $this->itShouldDeleteIndex(ProjectDistrict::class, 'district1', '_doc');
+        $this->itShouldDeleteIndex(GlobalDistrict::class, 'district1', '_doc');
     }
 
     public function it_remove_vote()

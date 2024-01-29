@@ -15,6 +15,9 @@ InternalAddEventsPayload:
             notFoundProjects:
                 type: '[ID]!'
                 description: "List of projects ID that didn't match an existing projects."
+            notFoundDistricts:
+                type: '[ID]!'
+                description: "List of districts ID that didn't match an existing districts."
             brokenDates:
                 type: '[String]!'
                 description: "List of dates that didn't got the good format"

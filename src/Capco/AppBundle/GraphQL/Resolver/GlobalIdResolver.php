@@ -29,6 +29,7 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
+use Capco\AppBundle\Repository\GlobalDistrictRepository;
 use Capco\AppBundle\Repository\GroupRepository;
 use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MapTokenRepository;
@@ -43,7 +44,6 @@ use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\PostRepository;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalAnalysisRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
@@ -389,7 +389,7 @@ class GlobalIdResolver
                     $node = $this->container->get(ProposalDistrictRepository::class)->find($uuid);
                     if (!$node) {
                         $node = $this->container
-                            ->get(ProjectDistrictRepository::class)
+                            ->get(GlobalDistrictRepository::class)
                             ->find($uuid)
                         ;
                     }
@@ -494,7 +494,7 @@ class GlobalIdResolver
             $node = $this->container->get(ReplyRepository::class)->find($uuid);
         }
         if (!$node) {
-            $node = $this->container->get(ProjectDistrictRepository::class)->find($uuid);
+            $node = $this->container->get(GlobalDistrictRepository::class)->find($uuid);
         }
         if (!$node) {
             $node = $this->container->get(ProposalDistrictRepository::class)->find($uuid);

@@ -184,6 +184,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
     enabled,
     media,
     measurable,
+    districts: values.districts ? values.districts.map(t => t.value) : null,
     themes: values.themes ? values.themes.map(t => t.value) : null,
     projects: values.projects ? values.projects.map(p => p.value) : null,
     steps: values.steps ? values.steps.map(s => s.value) : null,
@@ -465,6 +466,7 @@ export default createFragmentContainer(EventFormCreatePage, {
         metaDescription
         link
       }
+      
       viewerDidAuthor @include(if: $isAuthenticated)
       ...EventForm_event
     }

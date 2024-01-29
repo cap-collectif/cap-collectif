@@ -1,0 +1,8 @@
+PreviewGlobalDistrictConnection:
+    type: relay-connection
+    config:
+        name: GlobalDistrictConnection
+        nodeType: PreviewGlobalDistrict
+        connectionFields:
+            totalCount:
+                type: Int!

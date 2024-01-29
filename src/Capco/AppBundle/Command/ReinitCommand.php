@@ -18,7 +18,7 @@ use Capco\AppBundle\Entity\Debate\DebateArgumentVote;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
 use Capco\AppBundle\Entity\Debate\DebateVote;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
@@ -394,7 +394,7 @@ class ReinitCommand extends Command
             Comment::class,
             ProposalComment::class,
             EventComment::class,
-            ProjectDistrict::class,
+            GlobalDistrict::class,
             RankingStep::class,
             PresentationStep::class,
             Group::class,

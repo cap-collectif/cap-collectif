@@ -78,6 +78,7 @@ export default createPaginationContainer(
         count: { type: "Int!" }
         cursor: { type: "String" }
         theme: { type: "ID" }
+        district: { type: "ID" }
         project: { type: "ID" }
         locale: { type: "TranslationLocale" }
         search: { type: "String" }
@@ -91,6 +92,7 @@ export default createPaginationContainer(
           first: $count
           after: $cursor
           theme: $theme
+          district: $district
           project: $project
           locale: $locale
           search: $search
@@ -117,6 +119,7 @@ export default createPaginationContainer(
             count: $count
             cursor: $cursor
             theme: $theme
+            district: $district
             project: $project
             locale: $locale
             search: $search
@@ -131,6 +134,7 @@ export default createPaginationContainer(
             count: $count
             cursor: $cursor
             theme: $theme
+            district: $district
             project: $project
             locale: $locale
             search: $search
@@ -163,6 +167,7 @@ export default createPaginationContainer(
         $cursor: String
         $count: Int!
         $theme: ID
+        $district: ID
         $project: ID
         $locale: TranslationLocale
         $search: String
@@ -177,6 +182,7 @@ export default createPaginationContainer(
             cursor: $cursor
             count: $count
             theme: $theme
+            district: $district
             project: $project
             locale: $locale
             search: $search

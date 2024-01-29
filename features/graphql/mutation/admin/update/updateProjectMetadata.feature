@@ -39,11 +39,11 @@ Scenario: GraphQL client wants to update a project metadata
         "cover": "media2",
         "video": "rthwrht",
         "districts": [
-          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",
-          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==",
-          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==",
-          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==",
-          "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=="
+          "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz",
+          "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0",
+          "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1",
+          "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2",
+          "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q3"
         ],
         "themes": [
           "theme1",
@@ -81,31 +81,31 @@ Scenario: GraphQL client wants to update a project metadata
               {
                 "node": {
                   "name": "Centre ville",
-                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw=="
+                  "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz"
                 }
               },
               {
                 "node": {
                   "name": "Îles de Nantes",
-                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA=="
+                  "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0"
                 }
               },
               {
                 "node": {
                   "name": "Hauts pavés Saint-Félix",
-                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ=="
+                  "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1"
                 }
               },
               {
                 "node": {
                   "name": "Malakoff Saint-Donation",
-                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng=="
+                  "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2"
                 }
               },
               {
                 "node": {
                   "name": "Dervallières Zola",
-                  "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=="
+                  "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q3"
                 }
               }
             ]

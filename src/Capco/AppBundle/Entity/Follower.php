@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,10 +60,10 @@ class Follower implements IndexableInterface
     protected ?OpinionVersion $opinionVersion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="followers")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\GlobalDistrict", inversedBy="followers")
      * @ORM\JoinColumn(name="project_district_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected ?ProjectDistrict $projectDistrict;
+    protected ?GlobalDistrict $globalDistrict;
 
     /**
      * @ORM\Column(name="notified_of", columnDefinition="ENUM('MINIMAL', 'ESSENTIAL', 'ALL')", nullable=true)
@@ -136,21 +136,21 @@ class Follower implements IndexableInterface
         return $this;
     }
 
-    public function getProjectDistrict(): ?ProjectDistrict
+    public function getGlobalDistrict(): ?GlobalDistrict
     {
-        return $this->projectDistrict;
+        return $this->globalDistrict;
     }
 
-    public function setProjectDistrict(?ProjectDistrict $projectDistrict): self
+    public function setGlobalDistrict(?GlobalDistrict $globalDistrict): self
     {
-        if (!$projectDistrict && $this->projectDistrict) {
-            $this->projectDistrict->removeFollower($this);
+        if (!$globalDistrict && $this->globalDistrict) {
+            $this->globalDistrict->removeFollower($this);
         }
 
-        $this->projectDistrict = $projectDistrict;
+        $this->globalDistrict = $globalDistrict;
 
-        if ($projectDistrict) {
-            $projectDistrict->addFollower($this);
+        if ($globalDistrict) {
+            $globalDistrict->addFollower($this);
         }
 
         return $this;
@@ -173,8 +173,8 @@ class Follower implements IndexableInterface
             $this->opinionVersion->removeFollower($this);
         }
 
-        if ($this->projectDistrict) {
-            $this->projectDistrict->removeFollower($this);
+        if ($this->globalDistrict) {
+            $this->globalDistrict->removeFollower($this);
         }
     }
 

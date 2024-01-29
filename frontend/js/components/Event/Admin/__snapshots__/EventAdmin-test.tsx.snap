@@ -539,6 +539,53 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "GlobalDistrictConnection",
+                        "kind": "LinkedField",
+                        "name": "districts",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "GlobalDistrictEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "GlobalDistrict",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "name",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                     "type": "Event",
                   },
@@ -548,7 +595,7 @@ exports[`<EventAdmin /> it renders correctly with event Id 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "e08fef95406627d21db88efa514ba346",
+            "cacheID": "bebb5ac11a95ac0619e42acb8aece8c8",
             "id": null,
             "metadata": Object {},
             "name": "EventAdminQuery",
@@ -659,6 +706,14 @@ fragment EventForm_event on Event {
   isMeasurable
   participants {
     totalCount
+  }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
   }
 }
 ",
@@ -1215,6 +1270,53 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
                         ],
                         "storageKey": null,
                       },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "GlobalDistrictConnection",
+                        "kind": "LinkedField",
+                        "name": "districts",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "GlobalDistrictEdge",
+                            "kind": "LinkedField",
+                            "name": "edges",
+                            "plural": true,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "GlobalDistrict",
+                                "kind": "LinkedField",
+                                "name": "node",
+                                "plural": false,
+                                "selections": Array [
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "id",
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "kind": "ScalarField",
+                                    "name": "name",
+                                    "storageKey": null,
+                                  },
+                                ],
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
                     ],
                     "type": "Event",
                   },
@@ -1224,7 +1326,7 @@ exports[`<EventAdmin /> it renders correctly without event Id 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "e08fef95406627d21db88efa514ba346",
+            "cacheID": "bebb5ac11a95ac0619e42acb8aece8c8",
             "id": null,
             "metadata": Object {},
             "name": "EventAdminQuery",
@@ -1335,6 +1437,14 @@ fragment EventForm_event on Event {
   isMeasurable
   participants {
     totalCount
+  }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
   }
 }
 ",

@@ -22,7 +22,7 @@ type Props = {
   intl: IntlShape
   projectTypes: ProjectType[]
   projectAuthors: ProjectAuthor[]
-  projectDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'projectDistricts'>
+  globalDistricts: $PropertyType<ProjectListFiltersContainerQueryResponse, 'globalDistricts'>
   district: string | null | undefined
   theme: string | null | undefined
   status: string | null | undefined
@@ -55,8 +55,8 @@ class ProjectListFilters extends React.Component<Props> {
   }
 
   renderDistrictsFilter() {
-    const { district, projectDistricts, intl } = this.props
-    return <ProjectsListFilterDistricts district={district} projectDistricts={projectDistricts} intl={intl} />
+    const { district, globalDistricts, intl } = this.props
+    return <ProjectsListFilterDistricts district={district} globalDistricts={globalDistricts} intl={intl} />
   }
 
   renderStateFilter() {

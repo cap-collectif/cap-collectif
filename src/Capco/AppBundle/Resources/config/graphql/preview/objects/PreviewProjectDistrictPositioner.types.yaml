@@ -4,7 +4,7 @@ PreviewProjectDistrictPositioner:
         name: ProjectDistrictPositioner
         fields:
             district:
-                type: 'PreviewProjectDistrict!'
+                type: 'PreviewGlobalDistrict!'
             project:
                 type: 'PreviewProject!'
             position:

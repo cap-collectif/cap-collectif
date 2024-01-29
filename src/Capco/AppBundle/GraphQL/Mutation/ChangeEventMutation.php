@@ -12,6 +12,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Util\ClassUtils;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\Broker\Message;
 
 class ChangeEventMutation extends AbstractEventMutation
@@ -31,6 +32,7 @@ class ChangeEventMutation extends AbstractEventMutation
             LocaleUtils::indexTranslations($values);
             $this->setProjects($event, $viewer, $values);
             $this->setSteps($event, $viewer, $values);
+            $this->setDistricts($values);
             unset($values['projects']);
         } catch (UserError $error) {
             return [
@@ -67,6 +69,17 @@ class ChangeEventMutation extends AbstractEventMutation
         }
 
         return ['event' => $event, 'userErrors' => []];
+    }
+
+    public function setDistricts(array &$arguments): void
+    {
+        if (empty($arguments['districts'])) {
+            return;
+        }
+
+        $arguments['districts'] = array_map(function ($districtGlobalId) {
+            return GlobalId::fromGlobalId($districtGlobalId)['id'];
+        }, $arguments['districts']);
     }
 
     public function isGranted(string $eventId, User $viewer): bool

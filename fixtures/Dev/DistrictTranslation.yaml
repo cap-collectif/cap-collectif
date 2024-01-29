@@ -1,59 +1,59 @@
 Capco\AppBundle\Entity\District\DistrictTranslation:
-    projectDistrictTranslation1:
-        translatable: '@projectDistrict1'
+    globalDistrictTranslation1:
+        translatable: '@globalDistrict1'
         locale: fr-FR
-        id: projectDistrictTranslation1
+        id: globalDistrictTranslation1
         name: Premier Quartier
         slug: 'premier-quartier'
         titleOnMap: 1er
         description: "Ainsi les derniers seront les premiers, et les premiers seront les derniers, car il y a beaucoup d'appelés, mais peu d'élus."
-    projectDistrictTranslation1En:
-        translatable: '@projectDistrict1'
+    globalDistrictTranslation1En:
+        translatable: '@globalDistrict1'
         locale: en-GB
-        id: projectDistrictTranslation1En
+        id: globalDistrictTranslation1En
         name: First District
         slug: 'first-district'
         titleOnMap: 1st
         description: 'So the last shall be first, and the first last: for many be called, but few chosen.'
-    projectDistrictTranslation2:
-        translatable: '@projectDistrict2'
+    globalDistrictTranslation2:
+        translatable: '@globalDistrict2'
         locale: fr-FR
-        id: projectDistrictTranslation2
+        id: globalDistrictTranslation2
         name: Deuxième Quartier
         slug: 'deuxieme-quartier'
         titleOnMap: 2ième
-    projectDistrictTranslation3:
-        translatable: '@projectDistrict3'
+    globalDistrictTranslation3:
+        translatable: '@globalDistrict3'
         locale: fr-FR
-        id: projectDistrictTranslation3
+        id: globalDistrictTranslation3
         name: Centre ville
         slug: 'centre-ville'
         titleOnMap: Centre
-    projectDistrictTranslation4:
-        translatable: '@projectDistrict4'
+    globalDistrictTranslation4:
+        translatable: '@globalDistrict4'
         locale: fr-FR
-        id: projectDistrictTranslation4
+        id: globalDistrictTranslation4
         name: Îles de Nantes
         slug: 'iles-de-nantes'
         titleOnMap: Îles
-    projectDistrictTranslation5:
-        translatable: '@projectDistrict5'
+    globalDistrictTranslation5:
+        translatable: '@globalDistrict5'
         locale: fr-FR
-        id: projectDistrictTranslation5
+        id: globalDistrictTranslation5
         name: Hauts pavés Saint-Félix
         slug: 'hauts-paves-saint-felix'
         titleOnMap: St Félix
-    projectDistrictTranslation6:
-        translatable: '@projectDistrict6'
+    globalDistrictTranslation6:
+        translatable: '@globalDistrict6'
         locale: fr-FR
-        id: projectDistrictTranslation6
+        id: globalDistrictTranslation6
         name: Malakoff Saint-Donation
         slug: 'malakoff-saint-donation'
         titleOnMap: Malakoff
-    projectDistrictTranslation7:
-        translatable: '@projectDistrict7'
+    globalDistrictTranslation7:
+        translatable: '@globalDistrict7'
         locale: fr-FR
-        id: projectDistrictTranslation7
+        id: globalDistrictTranslation7
         name: Dervallières Zola
         slug: 'dervallieres-zola'
         titleOnMap: Dervallières

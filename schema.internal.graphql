@@ -488,6 +488,9 @@ type AddEventsPayload {
   """List of projects ID that didn't match an existing projects."""
   notFoundProjects: [ID]!
 
+  """List of districts ID that didn't match an existing districts."""
+  notFoundDistricts: [ID]!
+
   """List of dates that didn't got the good format"""
   brokenDates: [String]!
   clientMutationId: String
@@ -1753,6 +1756,9 @@ input ChangeEventInput {
 
   """The ID of the Event to modify."""
   id: ID!
+
+  """An array of Node IDs of districts associated to this event."""
+  districts: [ID]
 }
 
 type ChangeEventPayload {
@@ -3449,7 +3455,7 @@ input CreateAlphaProjectInput {
   """The project themes IDs"""
   themes: [ID!]!
 
-  """The project districts IDs"""
+  """The global districts IDs"""
   districts: [ID!]!
 
   """The project metadescription"""
@@ -3657,6 +3663,28 @@ type CreateEmailingCampaignPayload {
 
   """The error code, if any"""
   error: CreateEmailingCampaignErrorCode
+  clientMutationId: String
+}
+
+input CreateGlobalDistrictInput {
+  geojson: GeoJSON
+  displayedOnMap: Boolean = false
+  border: BorderStyleInput
+  background: BackgroundStyleInput
+  translations: [DistrictTranslationInput!]!
+
+  """The district cover."""
+  cover: ID
+}
+
+type CreateGlobalDistrictPayload {
+  district: GlobalDistrict
+
+  """The edge from the global district connection."""
+  districtEdge: GlobalDistrictEdge
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -3897,28 +3925,6 @@ input CreatePostTranslationInput {
 
   """the locale of the translation"""
   locale: TranslationLocale!
-  clientMutationId: String
-}
-
-input CreateProjectDistrictInput {
-  geojson: GeoJSON
-  displayedOnMap: Boolean = false
-  border: BorderStyleInput
-  background: BackgroundStyleInput
-  translations: [DistrictTranslationInput!]!
-
-  """The district cover."""
-  cover: ID
-}
-
-type CreateProjectDistrictPayload {
-  district: ProjectDistrict
-
-  """The edge from the project district connection."""
-  districtEdge: ProjectDistrictEdge
-
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -5478,6 +5484,18 @@ type DeleteFontPayload {
   clientMutationId: String
 }
 
+input DeleteGlobalDistrictInput {
+  id: ID!
+}
+
+type DeleteGlobalDistrictPayload {
+  deletedDistrictId: ID
+
+  """An unsuccessful mutation will return one or more `UserError` objects."""
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
 input DeleteGroupInput {
   """The group id"""
   groupId: ID!
@@ -5630,18 +5648,6 @@ input DeletePostInput {
 type DeletePostPayload {
   """The deleted post id"""
   deletedPostId: ID
-  clientMutationId: String
-}
-
-input DeleteProjectDistrictInput {
-  id: ID!
-}
-
-type DeleteProjectDistrictPayload {
-  deletedDistrictId: ID
-
-  """An unsuccessful mutation will return one or more `UserError` objects."""
-  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -6440,6 +6446,17 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The number of max registration available"""
   maxRegistrations: Int
+
+  """Events districts."""
+  districts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): GlobalDistrictConnection
 }
 
 """The affiliation of a user to a event"""
@@ -6474,6 +6491,7 @@ input EventInput {
   authorEmail: String!
   themes: [String!]!
   projects: [String!]!
+  districts: [String!]!
   guestListEnabled: Boolean!
   enabled: Boolean!
   commentable: Boolean!
@@ -6901,6 +6919,22 @@ type FirstnameRequirement implements Node & Requirement & DataCollectedByFranceC
   ): String
 }
 
+input FollowGlobalDistrictInput {
+  """The global district id"""
+  globalDistrictId: ID!
+
+  """The type of notification"""
+  notifiedOf: SubscriptionTypeValue!
+  clientMutationId: String
+}
+
+type FollowGlobalDistrictPayload {
+  globalDistrict: GlobalDistrict
+  followerEdge: FollowerEdge
+  errorCode: GlobalDistrictErrorCode
+  clientMutationId: String
+}
+
 input FollowOpinionInput {
   """The opinion id"""
   opinionId: ID!
@@ -6913,22 +6947,6 @@ input FollowOpinionInput {
 type FollowOpinionPayload {
   opinion: OpinionOrVersion
   followerEdge: FollowerEdge
-  clientMutationId: String
-}
-
-input FollowProjectDistrictInput {
-  """The project district id"""
-  projectDistrictId: ID!
-
-  """The type of notification"""
-  notifiedOf: SubscriptionTypeValue!
-  clientMutationId: String
-}
-
-type FollowProjectDistrictPayload {
-  projectDistrict: ProjectDistrict
-  followerEdge: FollowerEdge
-  errorCode: ProjectDistrictErrorCode
   clientMutationId: String
 }
 
@@ -7152,6 +7170,99 @@ input GeoBoundingBox {
 
 """A string containing GeoJSON code."""
 scalar GeoJSON
+
+"""A global district"""
+type GlobalDistrict implements District & Node {
+  """The ID of an object"""
+  id: ID!
+  name(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+  titleOnMap(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  description(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+  geojson: GeoJSON
+  geojsonStyle: CssJSON
+  displayedOnMap: Boolean!
+  border: Style
+  background: Style
+  translations: [DistrictTranslation!]!
+
+  """The list of followers of the district"""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for followers returning from the connection"""
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  """Identifies the viewer following configuration on the entity."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Identifies if the viewer is following the entity."""
+  viewerIsFollowing: Boolean!
+
+  """The list of projects in district"""
+  projects(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ProjectConnection
+  projectDistrictPositioners: [ProjectDistrictPositioner]
+  cover: Media
+
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
+}
+
+"""A connection to a list of items."""
+type GlobalDistrictConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [GlobalDistrictEdge]
+}
+
+"""An edge in a connection."""
+type GlobalDistrictEdge {
+  """The item at the end of the edge."""
+  node: GlobalDistrict
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""Available errors on proposal news mutation"""
+enum GlobalDistrictErrorCode {
+  """The given district is not found"""
+  DISTRICT_NOT_FOUND
+
+  """The given follower is not found"""
+  FOLLOWER_NOT_FOUND
+}
 
 """An address from Google Maps."""
 type GoogleMapsAddress {
@@ -8443,8 +8554,8 @@ type Mutation {
   updateFollowOpinion(input: UpdateFollowOpinionInput!): UpdateFollowOpinionPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   unfollowOpinion(input: UnfollowOpinionInput!): UnfollowOpinionPayload
-  followProjectDistrict(input: FollowProjectDistrictInput!): FollowProjectDistrictPayload
-  unfollowProjectDistrict(input: UnfollowProjectDistrictInput!): UnfollowProjectDistrictPayload
+  followGlobalDistrict(input: FollowGlobalDistrictInput!): FollowGlobalDistrictPayload
+  unfollowGlobalDistrict(input: UnfollowGlobalDistrictInput!): UnfollowGlobalDistrictPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
@@ -8497,9 +8608,9 @@ type Mutation {
   duplicateProject(input: DuplicateProjectInput!): DuplicateProjectPayload
   updateProject(input: UpdateProjectInput!): UpdateProjectPayload
   deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
-  createProjectDistrict(input: CreateProjectDistrictInput!): CreateProjectDistrictPayload
-  deleteProjectDistrict(input: DeleteProjectDistrictInput!): DeleteProjectDistrictPayload
-  updateProjectDistrict(input: UpdateProjectDistrictInput!): CreateProjectDistrictPayload
+  createGlobalDistrict(input: CreateGlobalDistrictInput!): CreateGlobalDistrictPayload
+  deleteGlobalDistrict(input: DeleteGlobalDistrictInput!): DeleteGlobalDistrictPayload
+  updateGlobalDistrict(input: UpdateGlobalDistrictInput!): CreateGlobalDistrictPayload
   deleteMediaAdmin(input: DeleteMediaAdminInput!): DeleteMediaAdminPayload
   updateShieldAdminForm(input: UpdateShieldAdminFormInput!): UpdateShieldAdminFormPayload
   createOauth2SSOConfiguration(input: CreateOauth2SSOConfigurationInput!): CreateOauth2SSOConfigurationPayload
@@ -10673,7 +10784,7 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
     """Returns the first `n` elements from the list."""
     first: Int = 100
-  ): ProjectDistrictConnection
+  ): GlobalDistrictConnection
 
   """Themes associated with the project."""
   themes: [Theme!]
@@ -11023,101 +11134,8 @@ type ProjectConnection {
   edges: [ProjectEdge]
 }
 
-"""A project district"""
-type ProjectDistrict implements District & Node {
-  """The ID of an object"""
-  id: ID!
-  name(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-  slug(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-  titleOnMap(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-  description(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-  geojson: GeoJSON
-  geojsonStyle: CssJSON
-  displayedOnMap: Boolean!
-  border: Style
-  background: Style
-  translations: [DistrictTranslation!]!
-
-  """The list of followers of the district"""
-  followers(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """Ordering options for followers returning from the connection"""
-    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
-  ): UserConnection!
-
-  """Identifies the viewer following configuration on the entity."""
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  """Identifies if the viewer is following the entity."""
-  viewerIsFollowing: Boolean!
-
-  """The list of projects in district"""
-  projects(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): ProjectConnection
-  projectDistrictPositioners: [ProjectDistrictPositioner]
-  cover: Media
-
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-}
-
-"""A connection to a list of items."""
-type ProjectDistrictConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [ProjectDistrictEdge]
-}
-
-"""An edge in a connection."""
-type ProjectDistrictEdge {
-  """The item at the end of the edge."""
-  node: ProjectDistrict
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-"""Available errors on proposal news mutation"""
-enum ProjectDistrictErrorCode {
-  """The given district is not found"""
-  DISTRICT_NOT_FOUND
-
-  """The given follower is not found"""
-  FOLLOWER_NOT_FOUND
-}
-
 type ProjectDistrictPositioner {
-  district: ProjectDistrict!
+  district: GlobalDistrict!
   project: Project!
   position: Int!
 }
@@ -13198,7 +13216,7 @@ type Query {
     type: ID
 
     """
-    ID of a ProjectDistrict to filter by. If non-null, filter projects by district
+    ID of a GlobalDistrict to filter by. If non-null, filter projects by district
     """
     district: ID
 
@@ -13244,6 +13262,9 @@ type Query {
 
     """If non-null, filters events with the given theme."""
     theme: ID
+
+    """If non-null, filters events with the given district."""
+    district: ID
 
     """If non-null, filters events with the given author."""
     author: ID
@@ -13293,7 +13314,7 @@ type Query {
   ): UserConnection!
 
   """List all the district project in the platform."""
-  projectDistricts(
+  globalDistricts(
     """
     Returns the elements in the list that come after the specified cursor.
     """
@@ -13304,7 +13325,7 @@ type Query {
 
     """Filter by name."""
     name: String = null
-  ): ProjectDistrictConnection!
+  ): GlobalDistrictConnection!
 
   """Lookup a proposal from its unique slug."""
   proposalFromSlug(slug: String!): Proposal
@@ -17171,6 +17192,24 @@ type UnTrashPayload {
   clientMutationId: String
 }
 
+input UnfollowGlobalDistrictInput {
+  """The global district id"""
+  globalDistrictId: ID
+  clientMutationId: String
+}
+
+type UnfollowGlobalDistrictPayload {
+  """The global district unfollowed"""
+  globalDistrict: GlobalDistrict
+
+  """The ID of viewer who unfollow the district"""
+  unfollowerId: ID
+
+  """Available errors for the mutation."""
+  errorCode: GlobalDistrictErrorCode
+  clientMutationId: String
+}
+
 input UnfollowOpinionInput {
   """The opinion id"""
   opinionId: ID
@@ -17183,24 +17222,6 @@ input UnfollowOpinionInput {
 type UnfollowOpinionPayload {
   opinion: OpinionOrVersion
   unfollowerId: ID
-  clientMutationId: String
-}
-
-input UnfollowProjectDistrictInput {
-  """The project district id"""
-  projectDistrictId: ID
-  clientMutationId: String
-}
-
-type UnfollowProjectDistrictPayload {
-  """The project district unfollowed"""
-  projectDistrict: ProjectDistrict
-
-  """The ID of viewer who unfollow the district"""
-  unfollowerId: ID
-
-  """Available errors for the mutation."""
-  errorCode: ProjectDistrictErrorCode
   clientMutationId: String
 }
 
@@ -17304,7 +17325,7 @@ input UpdateAlphaProjectInput {
   """The project themes IDs"""
   themes: [ID!]!
 
-  """The project districts IDs"""
+  """The global districts IDs"""
   districts: [ID!]!
 
   """The project metadescription"""
@@ -17916,6 +17937,28 @@ type UpdateFranceConnectSSOConfigurationPayload {
   clientMutationId: String
 }
 
+input UpdateGlobalDistrictInput {
+  id: ID!
+
+  """A GeoJSON format to display in map after."""
+  geojson: GeoJSON
+
+  """Should I display this on map?"""
+  displayedOnMap: Boolean = false
+
+  """The border style attached to this district."""
+  border: BorderStyleInput
+
+  """The background style attached to this district."""
+  background: BackgroundStyleInput
+
+  """The names of the district for each language"""
+  translations: [DistrictTranslationInput!]!
+
+  """The district cover."""
+  cover: ID
+}
+
 input UpdateGroupInput {
   groupId: ID!
   title: String!
@@ -18064,7 +18107,7 @@ input UpdateNewProjectInput {
   """The project themes IDs"""
   themes: [ID!]!
 
-  """The project districts IDs"""
+  """The global districts IDs"""
   districts: [ID!]!
 
   """The project metadescription"""
@@ -18637,28 +18680,6 @@ type UpdateProfilePublicDataPayload {
   """The user who just have been updated"""
   user: User!
   clientMutationId: String
-}
-
-input UpdateProjectDistrictInput {
-  id: ID!
-
-  """A GeoJSON format to display in map after."""
-  geojson: GeoJSON
-
-  """Should I display this on map?"""
-  displayedOnMap: Boolean = false
-
-  """The border style attached to this district."""
-  border: BorderStyleInput
-
-  """The background style attached to this district."""
-  background: BackgroundStyleInput
-
-  """The names of the district for each language"""
-  translations: [DistrictTranslationInput!]!
-
-  """The district cover."""
-  cover: ID
 }
 
 input UpdateProjectInput {

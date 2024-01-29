@@ -1,0 +1,12 @@
+CreateGlobalDistrictPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            district:
+                type: 'InternalGlobalDistrict'
+            districtEdge:
+                type: 'InternalGlobalDistrictEdge'
+                description: 'The edge from the global district connection.'
+            userErrors:
+                type: '[UserError!]!'
+                description: 'An unsuccessful mutation will return one or more `UserError` objects.'

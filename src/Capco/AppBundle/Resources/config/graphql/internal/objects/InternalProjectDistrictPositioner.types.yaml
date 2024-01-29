@@ -6,6 +6,6 @@ InternalProjectDistrictPositioner:
         name: ProjectDistrictPositioner
         fields:
             district:
-                type: 'InternalProjectDistrict!'
+                type: 'InternalGlobalDistrict!'
             project:
                 type: 'InternalProject!'

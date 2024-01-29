@@ -17,6 +17,7 @@ const mutation = graphql`
             notFoundEmails
             notFoundThemes
             notFoundProjects
+            notFoundDistricts
             brokenDates
         }
     }

@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GlobalDistrictAdminPage /> should render correctly with PUBLISHED status 1`] = `
+<div
+  className="box box-primary container-fluid pb-15"
+>
+  <GlobalDistrictAdminPage__PageTitleContainer>
+    <h3
+      className="box-title"
+    >
+      <FormattedMessage
+        id="proposal_form.districts"
+        values={Object {}}
+      />
+    </h3>
+    <span
+      className="mr-30 mt-15"
+    >
+      <Connect(LanguageButtonContainer) />
+    </span>
+  </GlobalDistrictAdminPage__PageTitleContainer>
+  <hr />
+  <Relay(Connect(ReduxForm))
+    handleClose={[Function]}
+    isCreating={true}
+    member="globalDistrict"
+    show={false}
+  />
+  <Relay(GlobalDistrictAdminList)
+    districts={
+      Object {
+        " $fragmentRefs": null,
+        " $refType": null,
+        "edges": Array [
+          Object {
+            "node": Object {
+              " $fragmentRefs": null,
+              "id": "1",
+            },
+          },
+          Object {
+            "node": Object {
+              " $fragmentRefs": null,
+              "id": "1",
+            },
+          },
+          Object {
+            "node": Object {
+              " $fragmentRefs": null,
+              "id": "1",
+            },
+          },
+        ],
+      }
+    }
+    handleDelete={[Function]}
+    handleEdit={[Function]}
+  />
+  <AddButton
+    onClick={[Function]}
+  />
+</div>
+`;

@@ -1,0 +1,12 @@
+InternalEventDistrictPositioner:
+  type: object
+  name: EventDistrictPositioner
+  config:
+    name: EventDistrictPositioner
+    fields:
+      district:
+        type: 'InternalEventDistrict!'
+      project:
+        type: 'InternalEvent!'
+      position:
+        type: 'Int!'

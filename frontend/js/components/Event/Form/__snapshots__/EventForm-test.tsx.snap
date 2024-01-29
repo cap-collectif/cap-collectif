@@ -225,6 +225,30 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         }
       }
     />
+    <SelectDistrict
+      clearable={true}
+      disabled={false}
+      label="global.district"
+      multi={true}
+      name="districts"
+      optional={false}
+      placeholder="select-one-or-more-zones"
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "viewer": Object {
+            " $fragmentRefs": null,
+            "displayName": "Théo QP",
+            "id": "VXNlcjp1c2VyVGhlbw==",
+            "isAdmin": true,
+            "isOnlyProjectAdmin": false,
+            "isSuperAdmin": false,
+            "organizations": null,
+          },
+        }
+      }
+    />
     <SelectStep
       clearable={true}
       disabled={true}
@@ -579,6 +603,30 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         }
       }
     />
+    <SelectDistrict
+      clearable={true}
+      disabled={false}
+      label="global.district"
+      multi={true}
+      name="districts"
+      optional={false}
+      placeholder="select-one-or-more-zones"
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "viewer": Object {
+            " $fragmentRefs": null,
+            "displayName": "Théo QP",
+            "id": "VXNlcjp1c2VyVGhlbw==",
+            "isAdmin": true,
+            "isOnlyProjectAdmin": false,
+            "isSuperAdmin": false,
+            "organizations": null,
+          },
+        }
+      }
+    />
     <SelectStep
       clearable={true}
       disabled={true}
@@ -930,6 +978,30 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           "isOnlyProjectAdmin": false,
           "isSuperAdmin": false,
           "organizations": null,
+        }
+      }
+    />
+    <SelectDistrict
+      clearable={true}
+      disabled={false}
+      label="global.district"
+      multi={true}
+      name="districts"
+      optional={false}
+      placeholder="select-one-or-more-zones"
+      query={
+        Object {
+          " $fragmentRefs": null,
+          " $refType": null,
+          "viewer": Object {
+            " $fragmentRefs": null,
+            "displayName": "Théo QP",
+            "id": "VXNlcjp1c2VyVGhlbw==",
+            "isAdmin": true,
+            "isOnlyProjectAdmin": false,
+            "isSuperAdmin": false,
+            "organizations": null,
+          },
         }
       }
     />

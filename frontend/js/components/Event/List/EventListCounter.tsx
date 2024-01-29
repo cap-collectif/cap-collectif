@@ -18,6 +18,7 @@ export default createFragmentContainer(EventListCounter, {
       count: { type: "Int!" }
       cursor: { type: "String" }
       theme: { type: "ID" }
+      district: { type: "ID" }
       project: { type: "ID" }
       locale: { type: "TranslationLocale" }
       search: { type: "String" }
@@ -31,6 +32,7 @@ export default createFragmentContainer(EventListCounter, {
         first: $count
         after: $cursor
         theme: $theme
+        district: $district
         project: $project
         locale: $locale
         search: $search

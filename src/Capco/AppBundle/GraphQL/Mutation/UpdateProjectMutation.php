@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Form\Persister\ProjectDistrictsPersister;
+use Capco\AppBundle\Form\Persister\GlobalDistrictsPersister;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -26,7 +26,7 @@ class UpdateProjectMutation implements MutationInterface
     private LoggerInterface $logger;
     private ProjectRepository $projectRepository;
     private ProjectAuthorTransformer $transformer;
-    private ProjectDistrictsPersister $districtsPersister;
+    private GlobalDistrictsPersister $districtsPersister;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -34,7 +34,7 @@ class UpdateProjectMutation implements MutationInterface
         LoggerInterface $logger,
         ProjectAuthorTransformer $transformer,
         ProjectRepository $projectRepository,
-        ProjectDistrictsPersister $districtsPersister
+        GlobalDistrictsPersister $districtsPersister
     ) {
         $this->entityManager = $entityManager;
         $this->logger = $logger;

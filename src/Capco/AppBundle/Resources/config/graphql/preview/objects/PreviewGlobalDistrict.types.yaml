@@ -1,0 +1,31 @@
+PreviewGlobalDistrict:
+    type: object
+    inherits:
+        - PreviewDistrict
+        - PreviewWithFollowers
+    config:
+        name: GlobalDistrict
+        interfaces:
+            - PreviewDistrict
+            - Node
+        description: 'A global district'
+        fields:
+            projects:
+                type: 'PreviewProjectConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectsInDistrictResolver", [value, args, getUser()])'
+                description: 'The list of projects in district'
+            followers:
+                type: 'PreviewUserConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'FollowerOrder'
+                        defaultValue: { field: FOLLOWED_AT, direction: DESC }
+                        description: 'Ordering options for followers returning from the connection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\GlobalDistrictFollowerConnection", [value, args])'
+                description: 'The list of followers of the district'
+            projectDistrictPositioners:
+                type: '[PreviewProjectDistrictPositioner]'
+            cover:
+                type: 'PreviewMedia'

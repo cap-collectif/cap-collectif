@@ -1,8 +1,0 @@
-PreviewProjectDistrictConnection:
-    type: relay-connection
-    config:
-        name: ProjectDistrictConnection
-        nodeType: PreviewProjectDistrict
-        connectionFields:
-            totalCount:
-                type: Int!

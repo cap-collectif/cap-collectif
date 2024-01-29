@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Form\Persister\EventDistrictsPersister;
+use Capco\AppBundle\Form\Subscriber\EventDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,6 +22,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
+    private EventDistrictsPersister $eventDistrictsPersister;
+
+    public function __construct(EventDistrictsPersister $eventDistrictsPersister)
+    {
+        $this->eventDistrictsPersister = $eventDistrictsPersister;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -66,7 +76,15 @@ class EventType extends AbstractType
             ->add('adminAuthorizeDataTransfer', CheckboxType::class)
             ->add('measurable', CheckboxType::class)
             ->add('maxRegistrations', NumberType::class)
+            ->add('districts', EntityType::class, [
+                'class' => GlobalDistrict::class,
+                'multiple' => true,
+                'required' => true,
+                'mapped' => false,
+            ])
         ;
+
+        $builder->addEventSubscriber(new EventDistrictsFieldSubscriber($this->eventDistrictsPersister));
     }
 
     public function configureOptions(OptionsResolver $resolver)

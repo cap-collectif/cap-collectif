@@ -26,9 +26,9 @@ class ProjectDistrictPositioner
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\ProjectDistrict", inversedBy="projectDistrictPositioners")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\GlobalDistrict", inversedBy="projectDistrictPositioners")
      */
-    private ?ProjectDistrict $district = null;
+    private ?GlobalDistrict $district = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="projectDistrictPositioners")
@@ -40,12 +40,12 @@ class ProjectDistrictPositioner
         return $this->getDistrict()->getName();
     }
 
-    public function getDistrict(): ProjectDistrict
+    public function getDistrict(): GlobalDistrict
     {
         return $this->district;
     }
 
-    public function setDistrict(?ProjectDistrict $district): self
+    public function setDistrict(?GlobalDistrict $district): self
     {
         $this->district = $district;
 

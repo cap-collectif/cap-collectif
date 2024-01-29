@@ -1,0 +1,10 @@
+FollowGlobalDistrictPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            globalDistrict:
+                type: 'InternalGlobalDistrict'
+            followerEdge:
+                type: 'FollowerEdge'
+            errorCode:
+                type: 'GlobalDistrictErrorCode'

@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Entity\Debate\DebateArticle;
 use Capco\AppBundle\Entity\Debate\DebateOpinion;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\EmailingCampaign;
 use Capco\AppBundle\Entity\Event;
@@ -321,7 +321,7 @@ class NodeTypeResolver implements QueryInterface
             return $this->typeResolver->resolve('ProposalDistrict');
         }
 
-        if ($node instanceof ProjectDistrict) {
+        if ($node instanceof GlobalDistrict) {
             return $this->districtTypeResolver->__invoke($node);
         }
 

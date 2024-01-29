@@ -24,6 +24,7 @@ export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventP
   const isFuture = initialValues.status === 'all' ? null : initialValues.status === 'ongoing-and-future'
   const urlSearch = new URLSearchParams(window.location.search)
   const theme = urlSearch.get('theme') ?? null
+  const district = urlSearch.get('district') ?? null
   return (
     <div className="event-page">
       <QueryRenderer
@@ -42,6 +43,7 @@ export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventP
             $isRegistrable: Boolean
             $orderBy: EventOrder!
             $isAuthenticated: Boolean!
+            $district: ID
           ) {
             ...EventListPageContainer_query
               @arguments(
@@ -57,6 +59,7 @@ export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventP
                 isFuture: $isFuture
                 orderBy: $orderBy
                 isAuthenticated: $isAuthenticated
+                district: $district
               )
             ...EventListPageHeader_queryViewer @arguments(isAuthenticated: $isAuthenticated)
           }
@@ -67,6 +70,7 @@ export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventP
             cursor: null,
             search: null,
             theme,
+            district,
             userType: null,
             project,
             isFuture,

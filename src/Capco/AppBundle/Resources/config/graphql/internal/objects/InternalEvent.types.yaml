@@ -141,3 +141,8 @@ InternalEvent:
             maxRegistrations:
                 type: 'Int'
                 description: 'The number of max registration available'
+            districts:
+                type: 'InternalGlobalDistrictConnection'
+                argsBuilder: 'Relay::ForwardConnection'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventDistrictsResolver", [value, args])'
+                description: 'Events districts.'

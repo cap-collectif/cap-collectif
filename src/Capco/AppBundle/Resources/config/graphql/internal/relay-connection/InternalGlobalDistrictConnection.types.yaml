@@ -1,0 +1,7 @@
+InternalGlobalDistrictConnection:
+    type: relay-connection
+    inherits:
+        - PreviewGlobalDistrictConnection
+    config:
+        nodeType: InternalGlobalDistrict
+        name: GlobalDistrictConnection

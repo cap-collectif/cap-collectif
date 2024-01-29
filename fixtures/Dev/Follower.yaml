@@ -207,22 +207,22 @@ Capco\AppBundle\Entity\Follower:
         followedAt: <identity((new \DateTime('2022-01-01'))->modify("- 7 days"))>
         notifiedOf: 'ALL'
     follower294:
-        projectDistrict: '@projectDistrict7'
+        globalDistrict: '@globalDistrict7'
         user: '@userMaxime'
         followedAt: <identity((new \DateTime('2022-01-01'))->modify("- 7 days"))>
         notifiedOf: 'ALL'
     follower295:
-        projectDistrict: '@projectDistrict6'
+        globalDistrict: '@globalDistrict6'
         user: '@userMaxime'
         followedAt: <identity((new \DateTime('2022-01-01'))->modify("- 7 days"))>
         notifiedOf: 'ALL'
     follower296:
-        projectDistrict: '@projectDistrict7'
+        globalDistrict: '@globalDistrict7'
         user: '@user5'
         followedAt: <identity((new \DateTime('2022-01-01'))->modify("- 7 days"))>
         notifiedOf: 'ALL'
     follower297:
-        projectDistrict: '@projectDistrict6'
+        globalDistrict: '@globalDistrict6'
         user: '@user5'
         followedAt: <identity((new \DateTime('2022-01-01'))->modify("- 7 days"))>
         notifiedOf: 'ALL'

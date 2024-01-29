@@ -528,6 +528,53 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictConnection",
+                      "kind": "LinkedField",
+                      "name": "districts",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrictEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "GlobalDistrict",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "name",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Event",
                 },
@@ -559,6 +606,60 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
                       "args": null,
                       "kind": "ScalarField",
                       "name": "title",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "GlobalDistrictConnection",
+                  "kind": "LinkedField",
+                  "name": "globalDistricts",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrict",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                   ],
@@ -812,7 +913,7 @@ exports[`<EventListPageHeader /> renders correctly with a non authenticated user
           ],
         },
         "params": Object {
-          "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
+          "cacheID": "dadabffe9330f08a75e09b54a80c3a86",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageHeaderQuery",
@@ -904,10 +1005,19 @@ fragment EventForm_event on Event {
   participants {
     totalCount
   }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
+  ...SelectDistrict_query
   viewer {
     ...SelectProject_projectOwner_3ggdEH
     ...SelectStep_projectOwner_3ggdEH
@@ -921,6 +1031,18 @@ fragment EventForm_query on Query {
       displayName
       ...SelectProject_projectOwner_3ggdEH
       ...SelectStep_projectOwner_3ggdEH
+    }
+  }
+}
+
+fragment SelectDistrict_query on Query {
+  globalDistricts {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
     }
   }
 }
@@ -1503,6 +1625,53 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictConnection",
+                      "kind": "LinkedField",
+                      "name": "districts",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrictEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "GlobalDistrict",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "name",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Event",
                 },
@@ -1534,6 +1703,60 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
                       "args": null,
                       "kind": "ScalarField",
                       "name": "title",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "GlobalDistrictConnection",
+                  "kind": "LinkedField",
+                  "name": "globalDistricts",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrict",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                   ],
@@ -1787,7 +2010,7 @@ exports[`<EventListPageHeader /> renders correctly with the create event feature
           ],
         },
         "params": Object {
-          "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
+          "cacheID": "dadabffe9330f08a75e09b54a80c3a86",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageHeaderQuery",
@@ -1879,10 +2102,19 @@ fragment EventForm_event on Event {
   participants {
     totalCount
   }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
+  ...SelectDistrict_query
   viewer {
     ...SelectProject_projectOwner_3ggdEH
     ...SelectStep_projectOwner_3ggdEH
@@ -1896,6 +2128,18 @@ fragment EventForm_query on Query {
       displayName
       ...SelectProject_projectOwner_3ggdEH
       ...SelectStep_projectOwner_3ggdEH
+    }
+  }
+}
+
+fragment SelectDistrict_query on Query {
+  globalDistricts {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
     }
   }
 }
@@ -2478,6 +2722,53 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictConnection",
+                      "kind": "LinkedField",
+                      "name": "districts",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrictEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "GlobalDistrict",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "name",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Event",
                 },
@@ -2509,6 +2800,60 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "title",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "GlobalDistrictConnection",
+                  "kind": "LinkedField",
+                  "name": "globalDistricts",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrict",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                   ],
@@ -2762,7 +3107,7 @@ exports[`<EventListPageHeader /> renders correctly without title 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
+          "cacheID": "dadabffe9330f08a75e09b54a80c3a86",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageHeaderQuery",
@@ -2854,10 +3199,19 @@ fragment EventForm_event on Event {
   participants {
     totalCount
   }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
+  ...SelectDistrict_query
   viewer {
     ...SelectProject_projectOwner_3ggdEH
     ...SelectStep_projectOwner_3ggdEH
@@ -2871,6 +3225,18 @@ fragment EventForm_query on Query {
       displayName
       ...SelectProject_projectOwner_3ggdEH
       ...SelectStep_projectOwner_3ggdEH
+    }
+  }
+}
+
+fragment SelectDistrict_query on Query {
+  globalDistricts {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
     }
   }
 }
@@ -3453,6 +3819,53 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                       ],
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictConnection",
+                      "kind": "LinkedField",
+                      "name": "districts",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrictEdge",
+                          "kind": "LinkedField",
+                          "name": "edges",
+                          "plural": true,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "GlobalDistrict",
+                              "kind": "LinkedField",
+                              "name": "node",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "name",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
                   ],
                   "type": "Event",
                 },
@@ -3484,6 +3897,60 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
                       "args": null,
                       "kind": "ScalarField",
                       "name": "title",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "GlobalDistrictConnection",
+                  "kind": "LinkedField",
+                  "name": "globalDistricts",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "totalCount",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "GlobalDistrictEdge",
+                      "kind": "LinkedField",
+                      "name": "edges",
+                      "plural": true,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "GlobalDistrict",
+                          "kind": "LinkedField",
+                          "name": "node",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "name",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                      ],
                       "storageKey": null,
                     },
                   ],
@@ -3737,7 +4204,7 @@ exports[`<EventListPageHeader /> renders correcty 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "7a6f08c04b28e38e25b63dc751d381f6",
+          "cacheID": "dadabffe9330f08a75e09b54a80c3a86",
           "id": null,
           "metadata": Object {},
           "name": "EventListPageHeaderQuery",
@@ -3829,10 +4296,19 @@ fragment EventForm_event on Event {
   participants {
     totalCount
   }
+  districts {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
 }
 
 fragment EventForm_query on Query {
   ...SelectTheme_query
+  ...SelectDistrict_query
   viewer {
     ...SelectProject_projectOwner_3ggdEH
     ...SelectStep_projectOwner_3ggdEH
@@ -3846,6 +4322,18 @@ fragment EventForm_query on Query {
       displayName
       ...SelectProject_projectOwner_3ggdEH
       ...SelectStep_projectOwner_3ggdEH
+    }
+  }
+}
+
+fragment SelectDistrict_query on Query {
+  globalDistricts {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
     }
   }
 }

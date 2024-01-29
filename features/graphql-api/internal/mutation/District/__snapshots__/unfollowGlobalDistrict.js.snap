@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.globalDistrict should return an error DISTRICT_NOT_FOUND 1`] = `
+Object {
+  "unfollowGlobalDistrict": Object {
+    "errorCode": "DISTRICT_NOT_FOUND",
+    "globalDistrict": null,
+  },
+}
+`;
+
+exports[`mutations.globalDistrict should unfollow to a global district 1`] = `
+Object {
+  "unfollowGlobalDistrict": Object {
+    "errorCode": null,
+    "globalDistrict": Object {
+      "followers": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "username": "user",
+            },
+          },
+        ],
+        "totalCount": 1,
+      },
+      "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2",
+    },
+  },
+}
+`;

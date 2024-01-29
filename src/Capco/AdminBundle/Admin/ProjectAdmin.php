@@ -3,10 +3,10 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\Repository\ProjectDistrictRepository;
+use Capco\AppBundle\Repository\GlobalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -38,7 +38,7 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected array $formOptions = ['cascade_validation' => true];
     private TokenStorageInterface $tokenStorage;
-    private ProjectDistrictRepository $projectDistrictRepository;
+    private GlobalDistrictRepository $globalDistrictRepository;
     private Manager $manager;
     private MediaProvider $mediaProvider;
     private ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
@@ -51,7 +51,7 @@ final class ProjectAdmin extends CapcoAdmin
         string $class,
         string $baseControllerName,
         TokenStorageInterface $tokenStorage,
-        ProjectDistrictRepository $projectDistrictRepository,
+        GlobalDistrictRepository $globalDistrictRepository,
         Manager $manager,
         MediaProvider $mediaProvider,
         ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
@@ -61,7 +61,7 @@ final class ProjectAdmin extends CapcoAdmin
     ) {
         parent::__construct($code, $class, $baseControllerName);
         $this->tokenStorage = $tokenStorage;
-        $this->projectDistrictRepository = $projectDistrictRepository;
+        $this->globalDistrictRepository = $globalDistrictRepository;
         $this->manager = $manager;
         $this->mediaProvider = $mediaProvider;
         $this->elasticsearchDoctrineListener = $elasticsearchDoctrineListener;
@@ -299,10 +299,10 @@ final class ProjectAdmin extends CapcoAdmin
         if ($this->hasSubject()) {
             $form->add('districts', EntityType::class, [
                 'mapped' => false,
-                'class' => ProjectDistrict::class,
+                'class' => GlobalDistrict::class,
                 'required' => false,
                 'label' => 'proposal_form.districts',
-                'data' => $this->projectDistrictRepository
+                'data' => $this->globalDistrictRepository
                     ->createQueryBuilder('d')
                     ->leftJoin('d.projectDistrictPositioners', 'positioner')
                     ->andWhere('positioner.project = :project')
@@ -310,11 +310,11 @@ final class ProjectAdmin extends CapcoAdmin
                     ->orderBy('positioner.position', 'ASC')
                     ->getQuery()
                     ->getResult(),
-                'choices' => $this->projectDistrictRepository->findAllOrderedByPosition(
+                'choices' => $this->globalDistrictRepository->findAllOrderedByPosition(
                     $this->getSubject()->getId()
                 ),
                 'multiple' => true,
-                'choice_label' => function (ProjectDistrict $district) {
+                'choice_label' => function (GlobalDistrict $district) {
                     return $district->getName();
                 },
             ]);

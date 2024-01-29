@@ -7,7 +7,7 @@ Scenario: A new project is refer in a district; Follower receive an notification
   """
   {
    "projectId": "project2",
-   "projectDistrict": "projectDistrict7"
+   "globalDistrict": "globalDistrict7"
   }
   """
   When I consume "project_district_notification"

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Internal|Query.projectDistricts fetches all project districts 1`] = `
+exports[`Internal|Query.globalDistricts fetches all project districts 1`] = `
 Object {
-  "projectDistricts": Object {
+  "globalDistricts": Object {
     "edges": Array [
       Object {
         "node": Object {
@@ -10,7 +10,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mw==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz",
           "name": "Centre ville",
           "projectDistrictPositioners": Array [
             Object {
@@ -39,7 +39,7 @@ Object {
           "followers": Object {
             "totalCount": 2,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q3",
           "name": "Dervallières Zola",
           "projectDistrictPositioners": Array [
             Object {
@@ -68,7 +68,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Mg==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy",
           "name": "Deuxième Quartier",
           "projectDistrictPositioners": Array [
             Object {
@@ -97,7 +97,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0MQ==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
           "name": "Premier Quartier",
           "projectDistrictPositioners": Array [
             Object {
@@ -126,7 +126,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NQ==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1",
           "name": "Hauts pavés Saint-Félix",
           "projectDistrictPositioners": Array [
             Object {
@@ -155,7 +155,7 @@ Object {
           "followers": Object {
             "totalCount": 0,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0NA==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0",
           "name": "Îles de Nantes",
           "projectDistrictPositioners": Array [
             Object {
@@ -184,7 +184,7 @@ Object {
           "followers": Object {
             "totalCount": 2,
           },
-          "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Ng==",
+          "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q2",
           "name": "Malakoff Saint-Donation",
           "projectDistrictPositioners": Array [
             Object {
@@ -208,7 +208,7 @@ Object {
         },
       },
     ],
-    "totalCount": 8,
+    "totalCount": 7,
   },
 }
 `;

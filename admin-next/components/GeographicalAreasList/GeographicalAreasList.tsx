@@ -22,7 +22,7 @@ import { formatCodeToLocale } from '@utils/locale-helper';
 
 export const QUERY = graphql`
     query GeographicalAreasListQuery {
-        projectDistricts {
+        globalDistricts {
             edges {
                 node {
                     id
@@ -45,7 +45,7 @@ export const QUERY = graphql`
 const GeographicalAreasList = () => {
     const intl = useIntl();
     const query = useLazyLoadQuery<GeographicalAreasListQuery>(QUERY, {});
-    const { projectDistricts, availableLocales } = query;
+    const { globalDistricts, availableLocales } = query;
     const { isOpen, onOpen, onClose } = useDisclosure(false);
     const [geographicalAreaId, setGeographicalAreaId] = useState<string | null>(null);
     const multilangue = useFeatureFlag('multilangue');
@@ -56,7 +56,7 @@ const GeographicalAreasList = () => {
         value: formatCodeToLocale(defaultLocale?.code || 'FR_FR'),
     });
 
-    return projectDistricts?.edges?.length ? (
+    return globalDistricts?.edges?.length ? (
         <Box bg="white" p={6} borderRadius="8px" mb={8}>
             <Flex justify="space-between" alignItems="flex-start">
                 <Heading as="h4" color="blue.800" fontWeight={600} mb={4}>
@@ -111,7 +111,7 @@ const GeographicalAreasList = () => {
                     geographicalAreaId={geographicalAreaId}
                 />
                 <ListCard width="100%">
-                    {projectDistricts?.edges
+                    {globalDistricts?.edges
                         ?.filter(Boolean)
                         .map(edge => edge?.node)
                         .filter(Boolean)

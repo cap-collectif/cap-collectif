@@ -70,7 +70,7 @@ describe('<ProjectListFiltersContainer />', () => {
     const wrapper = shallow(<ProjectListFiltersContainer {...defaultProps} />)
     wrapper.setState({
       ...defaultState,
-      projectDistricts: {
+      globalDistricts: {
         totalCount: 1,
         edges: {
           node: {

@@ -5,7 +5,7 @@ namespace spec\Capco\AppBundle\Elasticsearch;
 use Capco\AppBundle\Elasticsearch\ElasticsearchDoctrineListener;
 use Capco\AppBundle\Elasticsearch\ElasticsearchRabbitMQListener;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
@@ -375,7 +375,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     public function it_index_project_district(
         ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
-        ProjectDistrict $projectDistrict
+        GlobalDistrict $projectDistrict
     ): void {
         $projectDistrict->getId()->willReturn('projectDistrict1');
 

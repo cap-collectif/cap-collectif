@@ -370,10 +370,10 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:PublicApiToken']
 
-    Capco\AppBundle\Repository\ProjectDistrictRepository:
+    Capco\AppBundle\Repository\GlobalDistrictRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: ['CapcoAppBundle:District\ProjectDistrict']
+        arguments: ['CapcoAppBundle:District\GlobalDistrict']
 
     Capco\AppBundle\Repository\FooterSocialNetworkRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -778,3 +778,13 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:MediatorParticipantStep']
+
+    Capco\AppBundle\Repository\EventDistrictPositionerRepository:
+        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        lazy: true
+        arguments: [ 'CapcoAppBundle:District\EventDistrictPositioner' ]
+
+    Capco\AppBundle\Repository\EventDistrictRepository:
+        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        lazy: true
+        arguments: [ 'CapcoAppBundle:District\EventDistrict' ]

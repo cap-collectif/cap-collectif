@@ -31,6 +31,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -69,133 +70,133 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
      * @Gedmo\Timestampable(on="change", field={"startAt", "endAt", "zipCode", "address", "nbAddress", "media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(name="is_enabled", type="boolean", options={"default": false})
      */
-    private $enabled = false;
+    private bool $enabled = false;
 
     /**
      * @ORM\Column(name="start_at", type="datetime")
      */
-    private $startAt;
+    private \DateTimeInterface $startAt;
 
     /**
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt;
+    private ?\DateTimeInterface $endAt = null;
 
     /**
      * @ORM\Column(name="zipCode", type="string", nullable=true)
      */
-    private $zipCode;
+    private ?string $zipCode = null;
 
     /**
      * @ORM\Column(name="address_json", type="text", nullable=true)
      */
-    private $addressJson;
+    private ?string $addressJson = null;
 
     /**
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $address;
+    private ?string $address = null;
 
     /**
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $city;
+    private ?string $city = null;
 
     /**
      * @ORM\Column(name="country", type="string", nullable=true)
      */
-    private $country;
+    private ?string $country = null;
 
     /**
      * @ORM\Column(name="lat", type="float", nullable=true)
      */
-    private $lat;
+    private ?float $lat = null;
 
     /**
      * @ORM\Column(name="lng", type="float", nullable=true)
      */
-    private $lng;
+    private ?float $lng = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $media;
+    private ?Media $media = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
      * @ORM\JoinTable(name="theme_event")
      */
-    private $themes;
+    private Collection $themes;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="events", cascade={"persist"})
      * @ORM\JoinTable(name="project_event")
      */
-    private $projects;
+    private Collection $projects;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="events", cascade={"persist"})
      * @ORM\JoinTable(name="event_step")
      */
-    private $steps;
+    private ?Collection $steps = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
      */
-    private $comments;
+    private Collection $comments;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventRegistration", mappedBy="event",  cascade={"persist", "remove"})
      */
-    private $registrations;
+    private Collection $registrations;
 
     /**
      * @ORM\Column(name="guest_list_enabled", type="boolean", nullable=false)
      */
-    private $guestListEnabled = false;
+    private bool $guestListEnabled = false;
 
     /**
      * @ORM\Column(name="room_name", type="text", nullable=true)
      */
-    private $roomName;
+    private ?string $roomName = null;
 
     /**
      * TODO to remove after recette is ok.
      *
      * @ORM\Column(name="similarity_of_new_address", type="float", nullable=true)
      */
-    private $similarityOfNewAddress;
+    private ?bool $similarityOfNewAddress = null;
 
     /**
      * TODO to remove after recette is ok.
      *
      * @ORM\Column(name="new_address_is_similar", type="boolean", nullable=true)
      */
-    private $newAddressIsSimilar;
+    private ?bool $newAddressIsSimilar = null;
 
     /**
      * @var EventReview
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\EventReview", fetch="EAGER", cascade={"persist"})
      * @ORM\JoinColumn(name="review_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $review;
+    private ?EventReview $review = null;
 
     /**
      * @ORM\Column(name="admin_authorize_data_transfer", type="boolean", nullable=false)
      */
-    private $adminAuthorizeDataTransfer = false;
+    private bool $adminAuthorizeDataTransfer = false;
 
     /**
      * @ORM\Column(name="author_agree_to_use_personal_data_for_event_only", type="boolean", nullable=true)
      */
-    private $authorAgreeToUsePersonalDataForEventOnly;
+    private ?bool $authorAgreeToUsePersonalDataForEventOnly = null;
 
     /**
      * @ORM\Column(name="measurable", type="boolean", options={"default": false})
@@ -207,6 +208,12 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
      * @Assert\Positive
      */
     private ?int $maxRegistrations = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\District\EventDistrictPositioner", mappedBy="event", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="event_district_positioner_id", referencedColumnName="id", nullable=true)
+     */
+    private ?Collection $eventDistrictPositioners = null;
 
     public function __construct()
     {
@@ -824,5 +831,28 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         }
 
         return false;
+    }
+
+    public function getEventDistrictPositioners(): Collection
+    {
+        return $this->eventDistrictPositioners;
+    }
+
+    public function setEventDistrictPositioners(Collection $eventDistrictPositioners): self
+    {
+        $this->eventDistrictPositioners = $eventDistrictPositioners;
+
+        return $this;
+    }
+
+    public function getDistricts(): array
+    {
+        if (!$this->eventDistrictPositioners) {
+            return [];
+        }
+
+        return $this->eventDistrictPositioners->map(function ($eventDistrictPositioner) {
+            return $eventDistrictPositioner->getDistrict();
+        })->toArray();
     }
 }

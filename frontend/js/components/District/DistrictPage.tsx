@@ -22,7 +22,7 @@ const QUERY = graphql`
   query DistrictPageQuery($count: Int!, $cursor: String, $districtId: ID!) {
     ...DistrictPageProjectList_query @arguments(count: $count, cursor: $cursor, districtId: $districtId)
     district: node(id: $districtId) {
-      ... on ProjectDistrict {
+      ... on GlobalDistrict {
         id
         geojson
         name

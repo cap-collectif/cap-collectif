@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.globalDistrict should follow to a project district 1`] = `
+Object {
+  "followGlobalDistrict": Object {
+    "errorCode": null,
+    "followerEdge": Object {
+      "node": Object {
+        "id": "VXNlcjp1c2VyVGhlbw==",
+      },
+    },
+    "globalDistrict": Object {
+      "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1",
+    },
+  },
+}
+`;
+
+exports[`mutations.globalDistrict should return an error DISTRICT_NOT_FOUND 1`] = `
+Object {
+  "followGlobalDistrict": Object {
+    "errorCode": "DISTRICT_NOT_FOUND",
+    "followerEdge": null,
+    "globalDistrict": null,
+  },
+}
+`;

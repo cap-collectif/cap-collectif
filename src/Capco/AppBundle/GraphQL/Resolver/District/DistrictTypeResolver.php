@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\District;
 
 use Capco\AppBundle\Entity\District\AbstractDistrict;
-use Capco\AppBundle\Entity\District\ProjectDistrict;
+use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use GraphQL\Type\Definition\Type;
@@ -31,12 +31,12 @@ class DistrictTypeResolver implements QueryInterface
                 return $this->typeResolver->resolve('PreviewProposalDistrict');
             }
         }
-        if ($district instanceof ProjectDistrict) {
+        if ($district instanceof GlobalDistrict) {
             if ('internal' === $currentSchemaName) {
-                return $this->typeResolver->resolve('InternalProjectDistrict');
+                return $this->typeResolver->resolve('InternalGlobalDistrict');
             }
             if ('preview' === $currentSchemaName) {
-                return $this->typeResolver->resolve('PreviewProjectDistrict');
+                return $this->typeResolver->resolve('PreviewGlobalDistrict');
             }
         }
 

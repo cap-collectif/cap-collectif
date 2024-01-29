@@ -16,7 +16,7 @@ const GeographicalAreaForm = dynamic(
 export const QUERY = graphql`
     query geographicalAreaQuery($id: ID!) {
         node(id: $id) {
-            ... on ProjectDistrict {
+            ... on GlobalDistrict {
                 id
                 geojson
                 border {

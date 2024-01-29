@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\DiscriminatorColumn(name = "district_type", type = "string")
  * @ORM\DiscriminatorMap({
  *      "proposal"        = "ProposalDistrict",
- *      "project"         = "ProjectDistrict",
+ *      "global"         = "GlobalDistrict"
  * })
  */
 abstract class AbstractDistrict implements IndexableInterface, Translatable
@@ -31,35 +31,35 @@ abstract class AbstractDistrict implements IndexableInterface, Translatable
     /**
      * @ORM\Column(name="geojson", type="json", nullable=true)
      */
-    private $geojson;
+    private ?string $geojson = null;
 
     /**
      * @ORM\Column(name="geojson_style", type="string", nullable=true)
      */
-    private $geojsonStyle;
+    private ?string $geojsonStyle = null;
 
     /**
      * @ORM\Column(name="display_on_map", nullable=false, type="boolean", options={"default": true})
      */
-    private $displayedOnMap = true;
+    private bool $displayedOnMap = true;
 
     /**
      * @Gedmo\Timestampable(on="change", field={"name"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BorderStyle", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="border_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $border;
+    private ?BorderStyle $border = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Styles\BackgroundStyle", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="background_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $background;
+    private ?BackgroundStyle $background = null;
 
     public function __construct()
     {
