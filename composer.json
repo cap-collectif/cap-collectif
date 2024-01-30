@@ -58,6 +58,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/theofidry/AliceBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/Doctrinebehaviors"
         }
     ],
     "require": {
@@ -131,7 +135,7 @@
         "bgalati/monolog-sentry-handler": "^2.0",
         "overblog/graphql-bundle": "^0.14",
         "sentry/sdk": "^3.0",
-        "knplabs/doctrine-behaviors": "~1.1",
+        "knplabs/doctrine-behaviors": "1.6.1.1",
         "limenius/react-bundle": "5.0.1",
         "limenius/react-renderer": "dev-master as 4.0.2",
         "php-translation/symfony-bundle": "^0.12",
