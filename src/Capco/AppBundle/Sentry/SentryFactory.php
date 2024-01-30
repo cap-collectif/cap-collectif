@@ -3,7 +3,9 @@
 namespace Capco\AppBundle\Sentry;
 
 use Sentry\ClientBuilder;
+use Sentry\Integration\RequestFetcher;
 use Sentry\Integration\RequestIntegration;
+use Sentry\SentrySdk;
 use Sentry\State\Hub;
 use Sentry\State\HubInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -21,10 +23,9 @@ class SentryFactory
         string $projectRoot,
         string $cacheDir
     ): HubInterface {
-        $clientBuilder = ClientBuilder::create([
+        $options = [
             'dsn' => $dsn,
             'environment' => $environment, // I.e.: staging, testing, production, etc.
-            'project_root' => $projectRoot,
             'in_app_exclude' => [$cacheDir, "{$projectRoot}/vendor"],
             'prefixes' => [$projectRoot],
             'release' => $release,
@@ -32,7 +33,7 @@ class SentryFactory
             'capture_silenced_errors' => false,
             'enable_compression' => true,
             'error_types' => \E_ALL & ~\E_NOTICE & ~\E_DEPRECATED,
-            'excluded_exceptions' => [
+            'ignore_exceptions' => [
                 AccessDeniedException::class,
                 NotFoundHttpException::class,
                 AccessDeniedHttpException::class,
@@ -46,15 +47,19 @@ class SentryFactory
                 'framework' => 'symfony',
                 'symfony_version' => Kernel::VERSION,
             ],
-        ]);
+        ];
+
+        $clientBuilder = ClientBuilder::create($options);
 
         // Enable Sentry RequestIntegration
-        $options = $clientBuilder->getOptions();
-        $options->setIntegrations([new RequestIntegration($options)]);
+        $clientBuilder
+            ->getOptions()
+            ->setIntegrations([new RequestIntegration(new RequestFetcher(), [])])
+        ;
 
         $client = $clientBuilder->getClient();
 
         // A global HubInterface must be set otherwise some feature provided by the SDK does not work as they rely on this global state
-        return Hub::setCurrent(new Hub($client));
+        return SentrySdk::setCurrentHub(new Hub($client));
     }
 }

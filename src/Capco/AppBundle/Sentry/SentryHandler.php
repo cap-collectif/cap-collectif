@@ -9,8 +9,8 @@ use Sentry\State\HubInterface;
 
 class SentryHandler extends MonologSentryHandler
 {
-    protected $hub;
-    private $toggleManager;
+    protected HubInterface $hub;
+    private ?Manager $toggleManager;
 
     /**
      * {@inheritdoc}

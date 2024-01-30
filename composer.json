@@ -128,9 +128,9 @@
         "php-translation/loco-adapter": "^0.11",
         "jolicode/jolinotif": "^2.0",
         "bjeavons/zxcvbn-php": "^1.0",
-        "bgalati/monolog-sentry-handler": "^1.0",
+        "bgalati/monolog-sentry-handler": "^2.0",
         "overblog/graphql-bundle": "^0.14",
-        "sentry/sdk": "^2.0",
+        "sentry/sdk": "^3.0",
         "knplabs/doctrine-behaviors": "~1.1",
         "limenius/react-bundle": "5.0.1",
         "limenius/react-renderer": "dev-master as 4.0.2",
@@ -157,7 +157,8 @@
         "knplabs/gaufrette": "0.9",
         "geocoder-php/common-http": "4.4.*",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
-        "phpoffice/phpspreadsheet": "^1.29"
+        "phpoffice/phpspreadsheet": "^1.29",
+        "symfony/polyfill-uuid": "^1.2"
     },
     "require-dev": {
         "behat/behat": "^3.3",
