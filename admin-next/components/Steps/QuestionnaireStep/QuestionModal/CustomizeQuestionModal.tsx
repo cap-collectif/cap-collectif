@@ -17,10 +17,11 @@ import NumberRange from './NumberRange'
 import SetButtonsChoices from './SetButtonsChoices'
 import SetComplexChoices from './SetComplexChoices'
 import { multipleChoiceQuestions } from '../utils'
+import TextEditor from '@components/Form/TextEditor/TextEditor'
 
-type CustomizeQuestionProps = { onCancel?: () => void; isNewQuestion: boolean }
+type CustomizeQuestionProps = { onCancel?: () => void; isNewQuestion: boolean; defaultLocale?: string }
 
-const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQuestion }) => {
+const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQuestion, defaultLocale }) => {
   const intl = useIntl()
   const { hide, goToNextStep, goToPreviousStep } = useMultiStepModal()
   const { control, watch } = useFormContext()
@@ -46,17 +47,12 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQue
           <FormLabel htmlFor={`temporaryQuestion.title`} label={intl.formatMessage({ id: 'your-question' })} />
           <FieldInput id={`temporaryQuestion.title`} name={`temporaryQuestion.title`} control={control} type="text" />
         </FormControl>
-        <FormControl name={`temporaryQuestion.description`} control={control}>
-          <FormLabel htmlFor={`temporaryQuestion.description`} label={intl.formatMessage({ id: 'global.description' })}>
-            <Text color="gray.500">{intl.formatMessage({ id: 'global.optional' })}</Text>
-          </FormLabel>
-          <FieldInput
-            id={`temporaryQuestion.description`}
-            name={`temporaryQuestion.description`}
-            control={control}
-            type="text"
-          />
-        </FormControl>
+        <TextEditor
+          name={`temporaryQuestion.description`}
+          label={intl.formatMessage({ id: 'global.description' })}
+          platformLanguage={defaultLocale}
+          selectedLanguage={defaultLocale}
+        />
         <FormControl name={`temporaryQuestion.helpText`} control={control}>
           <FormLabel htmlFor={`temporaryQuestion.helpText`} label={intl.formatMessage({ id: 'global.help.text' })}>
             <Text color="gray.500">{intl.formatMessage({ id: 'global.optional' })}</Text>
@@ -71,7 +67,9 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQue
         {type === 'majority' ? <MajorityPreview /> : null}
         {type === 'number' ? <NumberRange /> : null}
         {type === 'button' || type === 'select' ? <SetButtonsChoices /> : null}
-        {type === 'radio' || type === 'checkbox' || type === 'ranking' ? <SetComplexChoices /> : null}
+        {type === 'radio' || type === 'checkbox' || type === 'ranking' ? (
+          <SetComplexChoices defaultLocale={defaultLocale} />
+        ) : null}
       </Modal.Body>
       <Modal.Footer>
         <Button

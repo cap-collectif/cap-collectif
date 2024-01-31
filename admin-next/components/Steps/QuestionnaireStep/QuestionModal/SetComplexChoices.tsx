@@ -16,8 +16,9 @@ import {
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { UPLOAD_PATH } from '@utils/config'
+import TextEditor from '@components/Form/TextEditor/TextEditor'
 
-const SetComplexChoices: React.FC = () => {
+const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale }) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext()
 
@@ -69,23 +70,13 @@ const SetComplexChoices: React.FC = () => {
                     type="text"
                   />
                 </FormControl>
-                <FormControl name={`${formFieldName}.description`} control={control}>
-                  <FormLabel
-                    htmlFor={`${formFieldName}.description`}
-                    label={intl.formatMessage({ id: 'global.description' })}
-                  >
-                    <Text fontSize={2} color="gray.500">
-                      {intl.formatMessage({ id: 'global.optional' })}
-                    </Text>
-                  </FormLabel>
-                  <FieldInput
-                    id={`${formFieldName}.description`}
-                    name={`${formFieldName}.description`}
-                    control={control}
-                    type="textarea"
-                    rows={4}
-                  />
-                </FormControl>
+                <TextEditor
+                  mb={0}
+                  name={`${formFieldName}.description`}
+                  label={intl.formatMessage({ id: 'global.description' })}
+                  platformLanguage={defaultLocale}
+                  selectedLanguage={defaultLocale}
+                />
               </Flex>
               <FormControl name={`${formFieldName}.image`} control={control} width="auto">
                 <FormLabel htmlFor={`${formFieldName}.image`} label={intl.formatMessage({ id: 'illustration' })}>

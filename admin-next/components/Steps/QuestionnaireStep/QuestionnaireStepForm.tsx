@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text, toast } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -10,17 +10,14 @@ import { QuestionnaireStepFormQuery } from '@relay/QuestionnaireStepFormQuery.gr
 import { UpdateQuestionnaireStepInput } from '@relay/UpdateQuestionnaireStepMutation.graphql'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
-import DeleteStepMutation from '@mutations/DeleteStepMutation'
 import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm'
 import QuestionnaireStepRequirementsTabs from '@components/Requirements/QuestionnaireStepRequirementsTabs'
 import { getRequirementsInput, RequirementsFormValues } from '@components/Requirements/Requirements'
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters'
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab'
-import { formatQuestions, formatQuestionsInput, getDefaultValues } from './utils'
+import { formatQuestionsInput, getDefaultValues } from './utils'
 import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
-import CreateQuestionnaireMutation from '@mutations/CreateQuestionnaireMutation'
-import { QuestionnaireType } from '@relay/CreateQuestionnaireMutation.graphql'
 import { onBack } from '@components/Steps/utils'
 import useUrlState from '@hooks/useUrlState'
 
@@ -374,7 +371,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               </FormControl>
             </Flex>
           ) : null}
-          <QuestionnaireStepFormQuestionnaireTab isEditing={isEditing} />
+          <QuestionnaireStepFormQuestionnaireTab isEditing={isEditing} defaultLocale={defaultLocale} />
           <Accordion color={CapUIAccordionColor.Transparent}>
             <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>

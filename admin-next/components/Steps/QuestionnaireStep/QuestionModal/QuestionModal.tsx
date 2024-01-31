@@ -1,37 +1,35 @@
-import * as React from 'react';
-import { useIntl } from 'react-intl';
-import { MultiStepModal, CapUIModalSize } from '@cap-collectif/ui';
-import ChooseQuestionTypeModal from './ChooseQuestionTypeModal';
-import CustomizeQuestionModal from './CustomizeQuestionModal';
-import AdditionalParametersModal from './AdditionalParametersModal';
+import * as React from 'react'
+import { useIntl } from 'react-intl'
+import { MultiStepModal, CapUIModalSize } from '@cap-collectif/ui'
+import ChooseQuestionTypeModal from './ChooseQuestionTypeModal'
+import CustomizeQuestionModal from './CustomizeQuestionModal'
+import AdditionalParametersModal from './AdditionalParametersModal'
 
 type Props = {
-    onSuccess: () => void,
-    onClose: () => void,
-    isNewQuestion: boolean,
-};
+  onSuccess: () => void
+  onClose: () => void
+  isNewQuestion: boolean
+  defaultLocale?: string
+}
 
-const QuestionModal = ({ onSuccess, onClose, isNewQuestion }: Props) => {
-    const intl = useIntl();
+const QuestionModal = ({ onSuccess, onClose, isNewQuestion, defaultLocale }: Props) => {
+  const intl = useIntl()
 
-    return (
-        <MultiStepModal
-            show
-            defaultStep={isNewQuestion ? 0 : 1}
-            resetStepOnClose
-            ariaLabel={intl.formatMessage({ id: 'import-list' })}
-            size={CapUIModalSize.Xl}
-            hideOnClickOutside={false}
-            onClose={onClose}>
-            <ChooseQuestionTypeModal onCancel={onClose} />
-            <CustomizeQuestionModal onCancel={onClose} isNewQuestion={isNewQuestion} />
-            <AdditionalParametersModal
-                onSuccess={onSuccess}
-                onCancel={onClose}
-                isNewQuestion={isNewQuestion}
-            />
-        </MultiStepModal>
-    );
-};
+  return (
+    <MultiStepModal
+      show
+      defaultStep={isNewQuestion ? 0 : 1}
+      resetStepOnClose
+      ariaLabel={intl.formatMessage({ id: 'import-list' })}
+      size={CapUIModalSize.Xl}
+      hideOnClickOutside={false}
+      onClose={onClose}
+    >
+      <ChooseQuestionTypeModal onCancel={onClose} />
+      <CustomizeQuestionModal onCancel={onClose} isNewQuestion={isNewQuestion} defaultLocale={defaultLocale} />
+      <AdditionalParametersModal onSuccess={onSuccess} onCancel={onClose} isNewQuestion={isNewQuestion} />
+    </MultiStepModal>
+  )
+}
 
-export default QuestionModal;
+export default QuestionModal

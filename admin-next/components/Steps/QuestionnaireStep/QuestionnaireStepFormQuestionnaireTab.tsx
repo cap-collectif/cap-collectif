@@ -36,7 +36,10 @@ const QuestionnaireCreationTypeEnum = {
 const ADD_NEW_QUESTION = -1
 const MODEL = 'MODEL'
 
-const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean }> = ({ model = false }) => {
+const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLocale?: string }> = ({
+  model = false,
+  defaultLocale,
+}) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useMultipleDisclosure({
     'question-modal': false,
@@ -66,7 +69,7 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean }> = ({ mod
     name: `${fieldName}.questionsWithJumps`,
   })
 
-  const questionsValues = watch(`${fieldName}.question`, questions)
+  const questionsValues = watch(`${fieldName}.questions`, questions)
   const questionsWithJumpsValues = watch(`${fieldName}.questionsWithJumps`, questionsWithJumps)
 
   const temporaryQuestion = watch('temporaryQuestion')
@@ -84,6 +87,7 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean }> = ({ mod
     <>
       {isOpen('question-modal') ? (
         <QuestionModal
+          defaultLocale={defaultLocale}
           isNewQuestion={questionIndex === ADD_NEW_QUESTION}
           onClose={() => {
             setValue('temporaryQuestion', {})
@@ -297,7 +301,10 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean }> = ({ mod
   )
 }
 
-const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean }> = ({ isEditing }) => {
+const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean; defaultLocale?: string }> = ({
+  isEditing,
+  defaultLocale,
+}) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext()
 
@@ -328,7 +335,7 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean }> = 
               </Tabs.ButtonList>
               <Tabs.PanelList>
                 <Tabs.Panel>
-                  <QuestionnaireStepFormQuestionnaire />
+                  <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
                 </Tabs.Panel>
                 <Tabs.Panel>
                   <FormControl name="questionnaireModel" control={control} isRequired={isUsingModel}>
@@ -340,13 +347,15 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean }> = 
                     />
                     <QuestionnaireListField name="questionnaireModel" control={control} onChange={onChange} />
                   </FormControl>
-                  {questionnaireModel ? <QuestionnaireStepFormQuestionnaire key="model" model /> : null}
+                  {questionnaireModel ? (
+                    <QuestionnaireStepFormQuestionnaire key="model" model defaultLocale={defaultLocale} />
+                  ) : null}
                 </Tabs.Panel>
               </Tabs.PanelList>
             </Tabs>
           ) : (
             <Box bg="gray.100" p={6} mb={6} borderRadius="accordion">
-              <QuestionnaireStepFormQuestionnaire />
+              <QuestionnaireStepFormQuestionnaire defaultLocale={defaultLocale} />
             </Box>
           )}
         </Accordion.Panel>
