@@ -7,7 +7,7 @@ import { AnalyticsProvider } from 'use-analytics'
 import { Provider as ReduxProvider } from 'react-redux'
 import ReactOnRails from 'react-on-rails'
 import { RelayEnvironmentProvider } from 'react-relay'
-import { CapUIProvider } from '@cap-collectif/ui'
+import { CapUIProvider, extendTheme, generateShades } from '@cap-collectif/ui'
 import IntlProvider from './IntlProvider'
 import { theme } from '~/styles/theme'
 import { analytics } from './analytics'
@@ -56,6 +56,15 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
     })
   }
 
+  const state = store.getState()
+
+  const CapUITheme = extendTheme({
+    colors: {
+      primary: generateShades(state.default.parameters['color.btn.primary.bg']),
+      primaryHover: state.default.parameters['color.btn.ghost.hover'],
+    },
+  })
+
   const Theme = designSystem ? CapUIProvider : ThemeProvider
   return (
     <ReduxProvider store={store}>
@@ -63,7 +72,7 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
         <RelayEnvironmentProvider environment={environment}>
           <AnalyticsProvider instance={analytics}>
             {/** @ts-expect-error resetCSS props is only temporary */}
-            <Theme theme={designSystem ? undefined : theme} resetCSS={designSystem ? resetCSS : undefined}>
+            <Theme theme={designSystem ? CapUITheme : theme} resetCSS={designSystem ? resetCSS : undefined}>
               <LazyMotion features={domAnimation}>{children}</LazyMotion>
             </Theme>
           </AnalyticsProvider>

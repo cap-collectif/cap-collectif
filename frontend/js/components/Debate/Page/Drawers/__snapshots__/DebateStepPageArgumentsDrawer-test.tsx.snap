@@ -68,7 +68,7 @@ Array [
           aria-controls="id-g"
           aria-expanded={false}
           aria-haspopup="dialog"
-          className="sc-bcXGCL sc-laZSpB dvTvxd kmqqqs cap-button"
+          className="sc-bcXGCL sc-laZSpB dvTvxd eMqMcb cap-button"
           onClick={[Function]}
           onClickCapture={[Function]}
           onKeyDown={[Function]}

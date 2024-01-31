@@ -394,7 +394,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB eIQCcq kmqqqs cap-button"
+            className="sc-bcXGCL sc-laZSpB eIQCcq eMqMcb cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -815,7 +815,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB eIQCcq kmqqqs cap-button"
+            className="sc-bcXGCL sc-laZSpB eIQCcq eMqMcb cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1236,7 +1236,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB eIQCcq kmqqqs cap-button"
+            className="sc-bcXGCL sc-laZSpB eIQCcq eMqMcb cap-button"
             onClick={[Function]}
             type="button"
           >

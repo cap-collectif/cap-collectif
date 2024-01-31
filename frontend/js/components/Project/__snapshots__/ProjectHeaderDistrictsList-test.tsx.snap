@@ -234,7 +234,7 @@ Array [
               className="sc-bcXGCL MfvHV cap-modal__header"
             >
               <div
-                className="sc-bcXGCL gkcWxQ"
+                className="sc-bcXGCL jGtgIo"
               >
                 count-area {"count":5}
               </div>
@@ -298,7 +298,7 @@ Array [
             className="sc-bcXGCL ibPPgn cap-modal__footer"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG kmqqqs cap-button"
+              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
               onClick={[Function]}
               style={
                 Object {

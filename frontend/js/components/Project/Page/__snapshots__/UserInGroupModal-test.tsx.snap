@@ -51,7 +51,7 @@ Array [
               className="sc-bcXGCL MfvHV cap-modal__header"
             >
               <div
-                className="sc-bcXGCL gkcWxQ"
+                className="sc-bcXGCL jGtgIo"
               >
                 <h2
                   className="sc-bcXGCL ggqhBm cap-heading"
@@ -144,7 +144,7 @@ Array [
             className="sc-bcXGCL ibPPgn cap-modal__footer"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG kmqqqs cap-button"
+              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
               onClick={[MockFunction]}
               style={
                 Object {
@@ -215,7 +215,7 @@ Array [
               className="sc-bcXGCL MfvHV cap-modal__header"
             >
               <div
-                className="sc-bcXGCL gkcWxQ"
+                className="sc-bcXGCL jGtgIo"
               >
                 <h2
                   className="sc-bcXGCL ggqhBm cap-heading"
@@ -308,7 +308,7 @@ Array [
             className="sc-bcXGCL ibPPgn cap-modal__footer"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG kmqqqs cap-button"
+              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
               onClick={[MockFunction]}
               style={
                 Object {
@@ -379,7 +379,7 @@ Array [
               className="sc-bcXGCL MfvHV cap-modal__header"
             >
               <div
-                className="sc-bcXGCL gkcWxQ"
+                className="sc-bcXGCL jGtgIo"
               >
                 <h2
                   className="sc-bcXGCL ggqhBm cap-heading"
@@ -472,7 +472,7 @@ Array [
             className="sc-bcXGCL ibPPgn cap-modal__footer"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG kmqqqs cap-button"
+              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
               onClick={[MockFunction]}
               style={
                 Object {
