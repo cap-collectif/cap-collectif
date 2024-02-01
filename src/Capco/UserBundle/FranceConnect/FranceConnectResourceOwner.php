@@ -128,7 +128,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
             && $this->optionsModifier instanceof FranceConnectOptionsModifier
         ) {
             $allowedData = $this->optionsModifier->getAllowedData();
-            $scope = array_merge(['franceconnect'], $allowedData);
+            $scope = array_merge(['openid'], $allowedData);
         }
 
         return implode(' ', $scope);

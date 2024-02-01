@@ -75,7 +75,7 @@ class FranceConnectResourceOwnerSpec extends ObjectBehavior
         );
         $optionsModifier->getAllowedData()->willReturn(['given_name', 'family_name', 'birthplace']);
 
-        $this->getScope()->shouldReturn('franceconnect given_name family_name birthplace');
+        $this->getScope()->shouldReturn('openid given_name family_name birthplace');
     }
 
     public function it_generates_nonce_if_it_is_not_found_in_storage(
