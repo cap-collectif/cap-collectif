@@ -152,6 +152,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate(Manager::helpscout_beacon);
             $this->manager->activate(Manager::emailing_group);
             $this->manager->deactivate(Manager::organizations);
+            $this->manager->deactivate(Manager::mediator);
         }
 
         $output->writeln('<info>Feature flags reseted ! </info>');

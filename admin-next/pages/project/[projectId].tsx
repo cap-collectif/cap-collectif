@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { graphql, useLazyLoadQuery } from 'react-relay';
 import { ProjectIdQuery } from '@relay/ProjectIdQuery.graphql';
 import ProjectConfigForm from '../../components/Projects/ProjectConfig/ProjectConfigForm';
+import useFeatureFlag from "../../hooks/useFeatureFlag";
 
 export interface ProjectConfigPageProps {
     projectId: string;
@@ -30,7 +31,9 @@ const ProjectConfigPage: React.FC<ProjectConfigPageProps> = ({ projectId }) => {
     const response = useLazyLoadQuery<ProjectIdQuery>(QUERY, { id: projectId });
     const project = response.node;
 
-    if (!project || !project?.canEdit) {
+    const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project');
+
+    if (!project || !project?.canEdit || !isNewBackOfficeEnabled) {
         window.location.href = '/admin-next/projects';
         return null;
     }

@@ -342,6 +342,8 @@ InternalUser:
                 type: 'Boolean!'
             isAdminOrganization:
                 type: 'Boolean!'
+            isOrganizationMember:
+                type: 'Boolean!'
             isMediator:
                 access: "hasFeatureFlag('mediator')"
                 type: 'Boolean!'

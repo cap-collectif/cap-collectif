@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import { Box, Button } from '@cap-collectif/ui'
+import { Button } from '@cap-collectif/ui'
 import type { GlobalState } from '~/types'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 
@@ -20,8 +20,12 @@ export const MediatorAddVotesLink = ({ projectId }: Props) => {
   if (isMobile) return null
 
   return (
-    <Box sx={{ '#add-mediator-votes': { '::before': { display: 'none' } } }}>
       <Button
+        sx={{
+          '&::before': {
+            display: 'none'
+          },
+        }}
         width="fit-content"
         bg={`${btnBgColor} !important`}
         color={`${btnTextColor} !important`}
@@ -36,7 +40,6 @@ export const MediatorAddVotesLink = ({ projectId }: Props) => {
           id: 'mediator.new_participant',
         })}
       </Button>
-    </Box>
   )
 }
 

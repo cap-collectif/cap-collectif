@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
+use Capco\AppBundle\GraphQL\Mutation\UpdateParticipantRequirementMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Toggle\Manager;
@@ -24,7 +25,7 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
-class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implements MutationInterface
+class AddMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
     private EntityManagerInterface $entityManager;
@@ -33,6 +34,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
     private ProposalVoteAccountHandler $proposalVoteAccountHandler;
     private Publisher $publisher;
     private FormFactoryInterface $formFactory;
+    private UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -41,9 +43,10 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
         ProposalVoteAccountHandler $proposalVoteAccountHandler,
         Publisher $publisher,
         Manager $manager,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
     ) {
-        parent::__construct($globalIdResolver, $manager);
+        parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
 
         $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
@@ -66,7 +69,14 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
         /** @var SelectionStep $step */
         $step = $this->getEntityByGlobalId($stepId, $viewer, SelectionStep::class);
 
+        $checkboxes = $participantInfos['checkboxes'] ?? null;
+        unset($participantInfos['checkboxes']);
+
         $participant = $this->getParticipant($participantInfos);
+
+        if ($checkboxes) {
+            $this->handleCheckboxes($participant, $checkboxes);
+        }
 
         $mediatorParticipantStep = (new MediatorParticipantStep())->setStep($step)->setParticipant($participant)->setMediator($mediator);
         $this->entityManager->persist($mediatorParticipantStep);
@@ -82,17 +92,16 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
 
             $proposalSelectionVote->setParticipant($participant);
 
-            $this->entityManager->persist($participant);
             $this->entityManager->persist($proposalSelectionVote);
             $this->entityManager->flush();
-
-            $this->proposalVoteAccountHandler->checkIfMediatorParticipantVotesAreStillAccounted(
-                $step,
-                $mediator,
-                $participant,
-                $viewer
-            );
         }
+
+        $this->proposalVoteAccountHandler->checkIfMediatorParticipantVotesAreStillAccounted(
+            $step,
+            $mediator,
+            $participant,
+            $viewer
+        );
 
         $this->entityManager->flush();
 
@@ -133,6 +142,7 @@ class AddMediatorVotesMutation extends MediatorVotesMutationAuthorization implem
         }
 
         $this->entityManager->persist($participant);
+        $this->entityManager->flush();
 
         return $participant;
     }

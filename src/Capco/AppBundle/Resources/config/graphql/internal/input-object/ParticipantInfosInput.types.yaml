@@ -15,3 +15,5 @@ ParticipantInfosInput:
                 type: 'String'
             phone:
                 type: 'String'
+            checkboxes:
+                type: '[ParticipantInfosCheckbox]'

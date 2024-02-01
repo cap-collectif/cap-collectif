@@ -13,7 +13,6 @@ import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
 import { MediatorVoteModal_EDIT_Query } from '@relay/MediatorVoteModal_EDIT_Query.graphql'
 import moment, { Moment } from 'moment'
 import UpdateMediatorVotesMutation from '@mutations/UpdateMediatorVotesMutation'
-import UpdateParticipantRequirement from '@mutations/UpdateParticipantRequirement'
 
 type Props = {
   onClose: () => void
@@ -97,7 +96,13 @@ const MediatorVoteModal = ({
         email: data.email || null,
         postalAddress: postalAddress(),
         phone: data.phone || null,
-      }
+        checkboxes: Object.entries(data.checkboxes ?? {}).map(([requirementId, value]) => {
+          return {
+            requirementId,
+            value: value ?? false
+          }
+        })
+    }
 
 
     const proposals = votes.map(v => v.value)
@@ -109,38 +114,22 @@ const MediatorVoteModal = ({
     }
 
     try {
-      let participant = null;
       if (!participantId) {
-        const response = await AddMediatorVotesMutation.commit(
+        await AddMediatorVotesMutation.commit(
           {
             input: {...input, stepId},
           },
           connectionName,
         )
-        participant = await response.addMediatorVotes.participant;
       }
       else {
-        const response = await UpdateMediatorVotesMutation.commit({
+        await UpdateMediatorVotesMutation.commit({
           input: {
             ...input,
             participantId,
           },
           mediatorId
         })
-        participant = await response.updateMediatorVotes.participant;
-      }
-
-      const checkboxes = data.checkboxes
-      if (Object.keys(checkboxes).length > 0) {
-        for (const [requirementId, value] of Object.entries(checkboxes)) {
-          await UpdateParticipantRequirement.commit({
-            input: {
-              participantToken: participant.token,
-              requirementId,
-              value: value ?? false,
-            }
-          })
-        }
       }
 
       toast({

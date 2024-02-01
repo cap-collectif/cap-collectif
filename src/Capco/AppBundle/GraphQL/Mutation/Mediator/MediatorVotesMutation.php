@@ -2,21 +2,26 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Mediator;
 
+use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Mutation\UpdateParticipantRequirementMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Argument;
 
-class MediatorVotesMutationAuthorization
+class MediatorVotesMutation
 {
     private GlobalIdResolver $globalIdResolver;
     private Manager $manager;
+    private UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
-    public function __construct(GlobalIdResolver $globalIdResolver, Manager $manager)
+    public function __construct(GlobalIdResolver $globalIdResolver, Manager $manager, UpdateParticipantRequirementMutation $updateParticipantRequirementMutation)
     {
         $this->globalIdResolver = $globalIdResolver;
         $this->manager = $manager;
+        $this->updateParticipantRequirementMutation = $updateParticipantRequirementMutation;
     }
 
     /**
@@ -49,5 +54,17 @@ class MediatorVotesMutationAuthorization
         }
 
         return true;
+    }
+
+    protected function handleCheckboxes(Participant $participant, array $checkboxes)
+    {
+        foreach ($checkboxes as $checkbox) {
+            list('requirementId' => $requirementId, 'value' => $value) = $checkbox;
+            $token = $participant->getToken();
+            $input = new Argument(['input' => [
+                'requirementId' => $requirementId, 'value' => $value, 'participantToken' => $token,
+            ]]);
+            $this->updateParticipantRequirementMutation->__invoke($input);
+        }
     }
 }

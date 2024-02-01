@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ParticipantRequirement;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Repository\ParticipantRequirementRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,6 +15,7 @@ use Psr\Log\LoggerInterface;
 
 class UpdateParticipantRequirementMutation implements MutationInterface
 {
+    use MutationTrait;
     private EntityManagerInterface $em;
     private ParticipantRequirementRepository $participantRequirementRepository;
     private LoggerInterface $logger;
@@ -36,11 +38,16 @@ class UpdateParticipantRequirementMutation implements MutationInterface
 
     public function __invoke(Argument $input): array
     {
+        $this->formatInput($input);
+
         $value = $input->offsetGet('value');
         $requirementId = $input->offsetGet('requirementId');
         $participantToken = $input->offsetGet('participantToken');
 
         $participant = $this->participantRepository->findOneBy(['token' => $participantToken]);
+        if (!$participant) {
+            throw new UserError('No participant found');
+        }
 
         $requirement = $this->globalIdResolver->resolve($requirementId);
 

@@ -9,6 +9,7 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ParticipantType;
 use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
+use Capco\AppBundle\GraphQL\Mutation\UpdateParticipantRequirementMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
@@ -21,7 +22,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization implements MutationInterface
+class UpdateMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
     private EntityManagerInterface $entityManager;
@@ -29,6 +30,7 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
     private ProposalVoteAccountHandler $proposalVoteAccountHandler;
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
     private FormFactoryInterface $formFactory;
+    private UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -36,9 +38,10 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
         ProposalVoteAccountHandler $proposalVoteAccountHandler,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         Manager $manager,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
     ) {
-        parent::__construct($globalIdResolver, $manager);
+        parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
 
         $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
@@ -60,6 +63,12 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutationAuthorization imp
 
         /** * @var Participant $participant  */
         $participant = $this->getEntityByGlobalId($participantId, $viewer, Participant::class);
+
+        $checkboxes = $participantInfos['checkboxes'] ?? null;
+        unset($participantInfos['checkboxes']);
+        if ($checkboxes) {
+            $this->handleCheckboxes($participant, $checkboxes);
+        }
 
         $step = $mediator->getStep();
 

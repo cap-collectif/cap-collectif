@@ -21,6 +21,8 @@ export const QUERY = graphql`
   query mediatorsQuery($projectId: ID!, $username: String) {
     viewer {
       isAdmin
+      isOrganizationMember
+      isOnlyProjectAdmin
     }
     node(id: $projectId) {
       ... on Project {
@@ -75,7 +77,9 @@ const MediatorsView = ({
     return () => setBreadCrumbItems([])
   }, [query, setBreadCrumbItems])
 
-  if (!projectId || !viewer || !viewer.isAdmin) return null
+  const hasAccess = viewer?.isAdmin || viewer?.isOrganizationMember || viewer.isOnlyProjectAdmin
+
+  if (!projectId || !hasAccess) return null
 
   const steps = query.node.steps
     .filter(step => step.id)

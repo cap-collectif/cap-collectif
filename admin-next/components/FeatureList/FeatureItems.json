@@ -193,6 +193,11 @@
                         "title": "capco.module.vote_min",
                         "description": "description.module.vote_min",
                         "onlySuperAdmin": false
+                    },
+                    "mediator": {
+                        "title": "global.mediator",
+                        "description": "description.module.mediator",
+                        "onlySuperAdmin": false
                     }
                 }
             },
@@ -360,11 +365,6 @@
                     },
                     "proposal_sms_vote": {
                         "title": "capco.module.proposal_sms_vote",
-                        "description": "",
-                        "onlySuperAdmin": false
-                    },
-                    "mediator": {
-                        "title": "global.mediator",
                         "description": "",
                         "onlySuperAdmin": false
                     }

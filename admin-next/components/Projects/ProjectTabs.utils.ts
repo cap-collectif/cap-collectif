@@ -1,8 +1,9 @@
 import { ProjectTabs_project } from '@relay/ProjectTabs_project.graphql'
 import { fromGlobalId } from '@utils/fromGlobalId'
 
-export const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
+const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
   isAdminNext ? `/admin-next/project/${projectId}` : `/admin/alpha/project/${projectId}`
+
 type ProjectRoute = {
   CONFIGURATION: string
   ANALYSIS: string
@@ -10,6 +11,7 @@ type ProjectRoute = {
   PARTICIPANTS: string
   MEDIATOR: string
 }
+
 const PROJECT_ROUTE: ProjectRoute = {
   CONTRIBUTIONS: '/contributions',
   PARTICIPANTS: '/participants',
@@ -18,20 +20,24 @@ const PROJECT_ROUTE: ProjectRoute = {
   MEDIATOR: '/mediators',
 }
 
-export const getProjectAdminPath = (projectId: string, type: keyof ProjectRoute): string => {
+export const getProjectAdminPath = (projectGlobalId: string, type: keyof ProjectRoute, isNewBackOfficeEnabled: boolean = false): string => {
+  const projectId = fromGlobalId(projectGlobalId).id;
   switch (type) {
     case 'CONTRIBUTIONS':
-      return `${getProjectAdminBaseUrl(fromGlobalId(projectId).id)}${PROJECT_ROUTE.CONTRIBUTIONS}`
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONTRIBUTIONS}`
     case 'PARTICIPANTS':
-      return `${getProjectAdminBaseUrl(fromGlobalId(projectId).id)}${PROJECT_ROUTE.PARTICIPANTS}`
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.PARTICIPANTS}`
     case 'ANALYSIS':
-      return `${getProjectAdminBaseUrl(fromGlobalId(projectId).id)}${PROJECT_ROUTE.ANALYSIS}`
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.ANALYSIS}`
     case 'CONFIGURATION':
-      return `${getProjectAdminBaseUrl(projectId, true)}`
+      if (isNewBackOfficeEnabled) {
+        return `${getProjectAdminBaseUrl(projectGlobalId, true)}`
+      }
+      return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONFIGURATION}`
     case 'MEDIATOR':
-      return `${getProjectAdminBaseUrl(projectId, true)}${PROJECT_ROUTE.MEDIATOR}`
+      return `${getProjectAdminBaseUrl(projectGlobalId, true)}${PROJECT_ROUTE.MEDIATOR}`
     default:
-      return getProjectAdminBaseUrl(projectId)
+      return getProjectAdminBaseUrl(projectGlobalId)
   }
 }
 

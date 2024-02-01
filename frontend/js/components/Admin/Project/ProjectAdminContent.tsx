@@ -149,7 +149,7 @@ const formatNavbarLinks = (
 
   if (mediatorFeatureFlag && hasSelectionStep) {
     links.push({
-      title: 'global.mediator',
+      title: 'global.mediators',
       url: getProjectAdminPath(project.id, 'MEDIATOR', true),
       to: getProjectAdminPath(project.id, 'MEDIATOR', true),
       component: () => <></>,
@@ -306,7 +306,7 @@ export const ProjectAdminContent = ({
         <NavContainer>
           {links.map((link, idx) => (
             <NavItem key={idx} active={location.pathname.includes(link.url)}>
-              {(link.title === 'global.configuration' && newCreateProjectFlag) || link.title === 'global.mediator' ? (
+              {(link.title === 'global.configuration' && newCreateProjectFlag) || link.title === 'global.mediators' ? (
                 <a href={link.to} id={link.title}>
                   <FormattedMessage id={link.title} />
                 </a>
