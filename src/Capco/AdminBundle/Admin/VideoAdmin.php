@@ -8,7 +8,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\Type\ModelListType;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
@@ -120,10 +119,12 @@ class VideoAdmin extends AbstractAdmin
             ->add('body', TextareaType::class, [
                 'label' => 'global.description',
             ])
-            ->add('author', ModelType::class, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
-
-                'required' => true,
+                'property' => 'username,email',
+                'to_string_callback' => function ($entity) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
+                },
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.video.link',
@@ -157,8 +158,12 @@ class VideoAdmin extends AbstractAdmin
             ->add('body', null, [
                 'label' => 'global.description',
             ])
-            ->add('author', null, [
+            ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
+                'property' => 'username,email',
+                'to_string_callback' => function ($entity) {
+                    return $entity->getEmail() . ' - ' . $entity->getUsername();
+                },
             ])
             ->add('media', null, [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
