@@ -13,7 +13,7 @@ export const onBack = async (adminAlphaUrl: string | null | undefined, isEditing
     }
 
     try {
-        await DeleteStepMutation.commit({input: {stepId}});
+        await DeleteStepMutation.commit({input: {stepId, deleteRelatedResource: true}});
         window.location.href = adminAlphaUrl;
     } catch (error) {
         return mutationErrorToast(intl);

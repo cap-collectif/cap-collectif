@@ -5803,6 +5803,11 @@ type DeleteSourcePayload {
 input DeleteStepInput {
   """The step ID to delete."""
   stepId: ID!
+
+  """
+  If true also delete the related proposal form/questionnaire/consultation
+  """
+  deleteRelatedResource: Boolean! = false
   clientMutationId: String
 }
 

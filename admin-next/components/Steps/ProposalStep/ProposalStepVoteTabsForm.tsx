@@ -20,69 +20,46 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import { useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import { VoteTabsForm_step$key, ProposalStepVoteType } from '@relay/VoteTabsForm_step.graphql'
 import { useFeatureFlags } from '@hooks/useFeatureFlag'
 
-export interface VoteTabsFormProps {
-  step: VoteTabsForm_step$key
+type ProposalStepVoteType = "BUDGET" | "DISABLED" | "SIMPLE"
+export interface ProposalStepVoteTabsFormProps {
   formMethods: UseFormReturn<any>
   defaultLocale: string
 }
 
-const VOTE_STEP_FRAGMENT = graphql`
-  fragment VoteTabsForm_step on Step {
-    ... on CollectStep {
-      voteType
-      votesMin
-      votable
-      votesLimit
-      votesRanking
-      voteThreshold
-      votesHelpText
-      budget
-      publishedVoteDate
-      isSecretBallot
-      isProposalSmsVoteEnabled
-      proposalArchivedTime
-      proposalArchivedUnitTime
-    }
-  }
-`
-
-const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale, step: stepRef }) => {
+const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
+                                                                           formMethods,
+                                                                           defaultLocale,
+                                                                         }) => {
   const intl = useIntl()
-  const query = useFragment(VOTE_STEP_FRAGMENT, stepRef)
   const { watch, setValue, control } = formMethods
-  const { proposal_sms_vote, twilio, votes_min } = useFeatureFlags(['proposal_sms_vote', 'twilio', 'votes_min'])
-  const hasEnabledFeaturesToVoteBySms = proposal_sms_vote && twilio
-  // const voteSmsEnabled = hasEnabledFeaturesToVoteBySms && watch("isProposalSmsVoteEnabled")
+  const { votes_min } = useFeatureFlags(['votes_min'])
+
+  const voteType = watch('voteType');
+  const budget = watch('budget');
+  const voteThreshold = watch('voteThreshold');
+  const secretBallot = watch('secretBallot');
+  const votesMin = watch('votesMin');
+  const votesLimit = watch('votesLimit');
+
   return (
     <Tabs
-      selectedId={watch('voteType')}
+      selectedId={voteType}
       onChange={selected => {
-        if ((selected as ProposalStepVoteType) !== watch('voteType')) {
+        if ((selected as ProposalStepVoteType) !== voteType) {
           setValue('voteType', selected as ProposalStepVoteType)
         }
       }}
     >
       <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'vote-capitalize' })}>
-        <Tabs.Button
-          id={'SIMPLE' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'SIMPLE' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
           {intl.formatMessage({ id: 'step.vote_type.simple' })}
         </Tabs.Button>
-        <Tabs.Button
-          id={'BUDGET' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'BUDGET' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
           {intl.formatMessage({ id: 'global.advanced.text' })}
         </Tabs.Button>
-        <Tabs.Button
-          id={'DISABLED' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'DISABLED' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
           {intl.formatMessage({ id: 'action_disable' })}
         </Tabs.Button>
       </Tabs.ButtonList>
@@ -97,6 +74,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
             {intl.formatMessage({
               id: 'admin.select.step.advanced.vote.prompt',
             })}
+
             <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%" alignItems="center">
@@ -107,10 +85,10 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                   </ListCard.Item.Label>
                   <Switch
                     id="budget"
-                    checked={watch('budget') !== null && watch('budget') !== undefined}
+                    checked={budget !== null && budget !== undefined}
                     name="budget"
                     onChange={event => {
-                      const toggle = watch('budget') !== null && watch('budget') !== undefined
+                      const toggle = budget !== null && budget !== undefined
                       if (toggle) {
                         setValue('budget', null)
                       } else {
@@ -119,7 +97,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                     }}
                   />
                 </Flex>
-                {watch('budget') !== null && watch('budget') !== undefined && (
+                {budget !== null && budget !== undefined && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -135,7 +113,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
             </ListCard.Item>
             <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
               <Flex direction="column" width="100%">
-                <Flex direction="row" justify="space-between" width="100%" mb={2}>
+                <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
                     {intl.formatMessage({
                       id: 'admin.fields.step.vote_threshold.input',
@@ -143,19 +121,18 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                   </ListCard.Item.Label>
                   <Switch
                     id="votesMin"
-                    checked={watch('voteThreshold') !== null && watch('voteThreshold') !== undefined}
+                    checked={(voteThreshold ?? 0) > 0}
                     name="voteThreshold"
                     onChange={event => {
-                      const toggle = watch('voteThreshold') !== null && watch('voteThreshold') !== undefined
-                      if (toggle) {
+                      if ((voteThreshold ?? 0) > 0) {
                         setValue('voteThreshold', null)
                       } else {
-                        setValue('voteThreshold', 0)
+                        setValue('voteThreshold', 1)
                       }
                     }}
                   />
                 </Flex>
-                {watch('voteThreshold') !== null && watch('voteThreshold') !== undefined && (
+                {(voteThreshold ?? 0) > 0 && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -163,7 +140,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                       })}
                     </Text>
                     <FormControl name="voteThreshold" width="auto" control={control} mb={6}>
-                      <FieldInput id="voteThreshold" name="voteThreshold" control={control} type="number" />
+                      <FieldInput id="voteThreshold" name="voteThreshold" control={control} min={0} type="number" />
                     </FormControl>
                     <Text
                       color="gray.700"
@@ -208,7 +185,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
             </ListCard.Item>
             <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
               <Flex direction="column" width="100%">
-                <Flex direction="row" justify="space-between" width="100%" mb={2}>
+                <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
                     {intl.formatMessage({
                       id: 'Number-of-votes-per-person',
@@ -216,10 +193,10 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                   </ListCard.Item.Label>
                   <Switch
                     id="votesMin-votesLimit"
-                    checked={watch('votesMin') !== null || watch('votesLimit') !== null}
+                    checked={votesMin !== null && votesLimit !== null}
                     name="voteThreshold"
                     onChange={event => {
-                      const toggle = watch('votesMin') !== null && watch('votesLimit') !== null
+                      const toggle = votesMin !== null && votesLimit !== null
                       if (toggle) {
                         setValue('votesMin', null)
                         setValue('votesLimit', null)
@@ -230,7 +207,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                     }}
                   />
                 </Flex>
-                {(watch('votesMin') !== null || watch('votesLimit') !== null) && (
+                {votesMin !== null && votesLimit !== null && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -272,7 +249,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
             </ListCard.Item>
             <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
               <Flex direction="column" width="100%">
-                <Flex direction="row" justify="space-between" width="100%" mb={2}>
+                <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
                     {intl.formatMessage({
                       id: 'secret-ballot',
@@ -280,11 +257,10 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                   </ListCard.Item.Label>
                   <Switch
                     id="secretBallot"
-                    checked={watch('secretBallot')}
+                    checked={secretBallot}
                     name="secretBallot"
                     onChange={event => {
-                      const toggle = watch('secretBallot')
-                      if (toggle) {
+                      if (secretBallot) {
                         setValue('secretBallot', false)
                         setValue('publishedVoteDate', null)
                       } else {
@@ -293,7 +269,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
                     }}
                   />
                 </Flex>
-                {watch('secretBallot') && (
+                {secretBallot && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -341,7 +317,7 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
               </Text>
 
               <Flex direction="row" gap={1}>
-                <Flex direction="row" spacing={1} align="center" width="50%" mb={2}>
+                <Flex direction="row" spacing={1} align="center" width="50%">
                   <SpotIcon name={CapUISpotIcon.SMS} size={CapUISpotIconSize.Sm} />
                   <Flex direction="column" spacing={1}>
                     <Text color="gray.900" fontSize={1} fontWeight="semibold" lineHeight="sm">
@@ -388,4 +364,4 @@ const VoteTabsForm: React.FC<VoteTabsFormProps> = ({ formMethods, defaultLocale,
   )
 }
 
-export default VoteTabsForm
+export default ProposalStepVoteTabsForm

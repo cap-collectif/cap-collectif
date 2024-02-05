@@ -36,6 +36,7 @@ export const getDefaultValues = (
             zoomMap: String(step?.form?.zoomMap) || null,
             mapCenter: step?.form?.mapCenter,
             canContact: step?.form?.canContact,
+            usingAddress: step?.form?.usingAddress,
         },
         voteType: step?.voteType,
         votesMin: step?.votesMin,

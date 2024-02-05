@@ -17,18 +17,12 @@ import {
   FormLabel,
   Text,
   Flex,
-  CapUIBorder,
-  SpotIcon,
-  CapUISpotIconSize,
-  CapUISpotIcon,
   Button,
-  Checkbox,
   toast,
-  Tooltip,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
-import VoteTabsForm from '@components/Steps/SelectStep/VoteTabsForm'
+import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import RequirementsTabsSkeleton from '@components/Requirements/RequirementsTabsSkeleton'
 import SelectStepStatusesList, { getStatusesInputList } from '@components/Steps/SelectStep/SelectStepStatusesList'
@@ -37,7 +31,6 @@ import {
   getRequirementsInput,
   RequirementsFormValues
 } from '@components/Requirements/Requirements'
-import DeleteStepMutation from '@mutations/DeleteStepMutation'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import UpdateSelectionStepMutation from '@mutations/UpdateSelectionStep'
@@ -45,6 +38,9 @@ import { getDefaultValues } from '@components/Steps/SelectStep/SelectStepForm.ut
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { ProposalStepRequirementsTabs_proposalStep$key } from '@relay/ProposalStepRequirementsTabs_proposalStep.graphql'
+import ProposalStepOptionnalAccordion from "../ProposalStep/ProposalStepOptionnalAccordion";
+import { onBack } from '@components/Steps/utils'
+import {useSelectionStep} from "./SelectionStepContext";
 
 export interface SelectStepFormProps {
   stepId: string
@@ -124,7 +120,6 @@ const SELECTION_QUERY = graphql`
         timeless
         allowAuthorsToAddNews
         defaultSort
-
         statuses {
           id
           name
@@ -151,6 +146,7 @@ const SELECTION_QUERY = graphql`
           isListViewEnabled
           isMapViewEnabled
           nbrOfMessagesSent
+          usingAddress
         }
         project {
           id
@@ -183,8 +179,8 @@ const SELECTION_QUERY = graphql`
         }
         mainView
         ...ProposalStepRequirementsTabs_proposalStep
-        ...VoteTabsForm_step
       }
+    ...ProposalStepOptionnalAccordion_step
     }
     ...SelectStepStatusesList_query
     siteColors {
@@ -243,7 +239,8 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
 
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
-  const isEditing = React.useMemo(() => !!step?.label, [step])
+  const {operationType, setOperationType} = useSelectionStep();
+  const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
@@ -264,23 +261,6 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       return breadCrumbItems.filter(item => item.title !== intl.formatMessage({ id: 'add-step' }))
     }
     return breadCrumbItems
-  }
-  const onBack = async () => {
-    if (!project?.adminAlphaUrl) {
-      return
-    }
-
-    if (!isEditing) {
-      window.location.href = project.adminAlphaUrl
-      return
-    }
-
-    try {
-      await DeleteStepMutation.commit({ input: { stepId } })
-      window.location.href = project.adminAlphaUrl
-    } catch (error) {
-      return mutationErrorToast(intl)
-    }
   }
 
   React.useEffect(() => {
@@ -354,6 +334,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           variant: 'success',
           content: intl.formatMessage({ id: 'admin.update.successful' }),
         })
+        setOperationType('EDIT')
       }
     } catch {
       return mutationErrorToast(intl)
@@ -376,43 +357,6 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
   const { isSubmitting, isValid } = formState
   const stepDurationType = watch('stepDurationType')
   const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
-
-  const isListViewEnabled = watch('form.isListViewEnabled');
-  const isGridViewEnabled = watch('form.isGridViewEnabled');
-  const isMapViewEnabled = watch('form.isMapViewEnabled');
-
-  const getMainViewChoices = () => {
-    let options = [];
-    if (isMapViewEnabled) {
-      options.push({
-        id: MainViewEnum.MAP,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.map',
-        }),
-      })
-    }
-    if (isGridViewEnabled) {
-      options.push({
-        id: MainViewEnum.GRID,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.grid',
-        }),
-      })
-    }
-    if (isListViewEnabled) {
-      options.push({
-        id: MainViewEnum.LIST,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.list',
-        }),
-      })
-    }
-
-    return options;
-  };
 
   return (
         <Box bg="white" width="70%" p={6} borderRadius="8px">
@@ -441,10 +385,10 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                         label={intl.formatMessage({ id: 'step-description' })}
                         platformLanguage={defaultLocale}
                         selectedLanguage={defaultLocale}
-                        advancedEditor={false}
+                        advancedEditor
                     />
                 </FormProvider>
-                <FormControl name="stepDurationType" control={control} mb={6}>
+                <FormControl name="stepDurationType" control={control} mt={6} mb={6}>
                     <FormLabel
                         htmlFor="stepDurationType"
                         label={intl.formatMessage({ id: 'step-duration' })}
@@ -518,8 +462,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                                 {intl.formatMessage({ id: 'vote-capitalize' })}
                             </Accordion.Button>
                             <Accordion.Panel>
-                                <VoteTabsForm
-                                    step={step}
+                                <ProposalStepVoteTabsForm
                                     defaultLocale={defaultLocale}
                                     formMethods={formMethods}
                                 />
@@ -673,328 +616,14 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                                 </FormControl>
                             </Accordion.Panel>
                         </Accordion.Item>
-                      <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
+                      <Accordion.Item id={intl.formatMessage({id: 'optional-settings'})}>
                         <Accordion.Button>
-                          {intl.formatMessage({ id: 'optional-settings' })}
+                          {intl.formatMessage({id: 'optional-settings'})}
                         </Accordion.Button>
                         <Accordion.Panel gap={6}>
-                          <Flex mt={2} direction="row" gap={4}>
-                            {
-                              isListViewEnabled && (
-                                <Flex
-                                  direction="column"
-                                  gap={1}
-                                  borderRadius={CapUIBorder.Normal}
-                                  sx={{ cursor: 'pointer' }}
-                                  _hover={{
-                                    borderColor: 'blue.500',
-                                    bg: 'blue.100',
-                                  }}
-                                  alignItems="center"
-                                  width="120px"
-                                  height="140px"
-                                  borderWidth={1}
-                                  borderColor={'gray.200'}
-                                  justifyItems="center">
-                                  <SpotIcon
-                                    name={CapUISpotIcon.TABLEAU}
-                                    size={CapUISpotIconSize.Md}
-                                  />
-                                  <Text
-                                    color="neutral-gray.900"
-                                    fontSize={3}
-                                    fontWeight={400}>
-                                    {intl.formatMessage({
-                                      id: 'collect.step.mainView.list',
-                                    })}
-                                  </Text>
-                                  <Checkbox
-                                    id={`mainView-${MainViewEnum.LIST}`}
-                                    name={MainViewEnum.LIST}
-                                    value={MainViewEnum.LIST}
-                                    checked={isListViewEnabled}
-                                    onClick={() => {
-                                      if (isListViewEnabled) {
-                                        setValue('form.isListViewEnabled', false);
-                                      } else {
-                                        setValue('form.isListViewEnabled', true);
-                                      }
-                                    }}
-                                  />
-                                </Flex>
-                              )
-                            }
-                            {
-                              isGridViewEnabled && (
-                                <Flex
-                                  direction="column"
-                                  gap={1}
-                                  borderRadius={CapUIBorder.Normal}
-                                  sx={{ cursor: 'pointer' }}
-                                  _hover={{
-                                    borderColor: 'blue.500',
-                                    bg: 'blue.100',
-                                  }}
-                                  alignItems="center"
-                                  width="120px"
-                                  height="140px"
-                                  borderWidth={1}
-                                  borderColor={'gray.200'}
-                                  justifyItems="center">
-                                  <SpotIcon
-                                    name={CapUISpotIcon.VIGNETTE}
-                                    size={CapUISpotIconSize.Md}
-                                  />
-                                  <Text
-                                    color="neutral-gray.900"
-                                    fontSize={3}
-                                    fontWeight={400}>
-                                    {intl.formatMessage({
-                                      id: 'collect.step.mainView.grid',
-                                    })}
-                                  </Text>
-                                  <Checkbox
-                                    id={`mainView-${MainViewEnum.GRID}`}
-                                    name={MainViewEnum.GRID}
-                                    value={MainViewEnum.GRID}
-                                    checked={isGridViewEnabled}
-                                    onClick={() => {
-                                      if (isGridViewEnabled) {
-                                        setValue('form.isGridViewEnabled', false);
-                                      } else {
-                                        setValue('form.isGridViewEnabled', true);
-                                      }
-                                    }}
-                                  />
-                                </Flex>
-                              )
-                            }
-                            {
-                              isMapViewEnabled && (
-                                <Flex
-
-                                  direction="row"
-                                  borderRadius={CapUIBorder.Normal}
-                                  sx={{ cursor: 'pointer' }}
-                                  _hover={{
-                                    borderColor: 'blue.500',
-                                    bg: 'blue.100',
-                                  }}
-                                  alignItems="flex-start"
-                                  width={isMapViewEnabled ? 'auto' : '120px'}
-                                  height={isMapViewEnabled ? 'auto' : '140px'}
-                                  borderWidth={1}
-                                  borderColor={'gray.200'}
-                                  justifyItems="center"
-                                  gap={4}>
-                                  <Flex
-                                    direction="column"
-                                    width={isMapViewEnabled ? '64px' : '100%'}
-                                    alignItems="center"
-                                    gap={1}>
-                                    <SpotIcon
-                                      name={CapUISpotIcon.CARTE}
-                                      size={CapUISpotIconSize.Md}
-                                    />
-                                    <Text
-                                      color="neutral-gray.900"
-                                      fontSize={3}
-                                      fontWeight={400}>
-                                      {intl.formatMessage({
-                                        id: 'collect.step.mainView.map',
-                                      })}
-                                    </Text>
-                                    <Checkbox
-                                      id={`mainView-${MainViewEnum.MAP}`}
-                                      name={MainViewEnum.MAP}
-                                      value={MainViewEnum.MAP}
-                                      checked={isMapViewEnabled}
-                                      onClick={() => {
-                                        if (isMapViewEnabled) {
-                                          setValue('form.isMapViewEnabled', false);
-                                        } else {
-                                          setValue('form.isMapViewEnabled', true);
-                                        }
-                                      }}
-                                    />
-                                  </Flex>
-                                  {isMapViewEnabled && (
-                                    <Flex
-                                      direction={'column'}
-                                      width="230px"
-                                      p={2}
-                                      gap={0}
-                                      height="100%"
-                                      sx={{ cursor: 'default' }}>
-                                      <FormControl
-                                        name="form.mapCenter.formatted"
-                                        control={control}
-                                        sx={{
-                                          position: 'relative',
-                                          "ul": {
-                                            position: 'absolute',
-                                            top: '54px',
-                                            zIndex: 1,
-                                          }
-                                        }}
-                                        mb={1}>
-                                        <FormLabel
-                                          label={intl.formatMessage({
-                                            id: 'initial-position-of-the-map',
-                                          })}
-                                        />
-                                        <FieldInput
-                                          name="form.mapCenter.formatted"
-                                          type="address"
-                                          control={control}
-                                          getAddress={add => {
-                                            setValue(
-                                              'form.mapCenter.formatted',
-                                              // @ts-ignore
-                                              add,
-                                            );
-                                          }}
-                                          getPosition={(lat: number, lng: number)=>{
-                                            setValue('form.mapCenter.lat',lat)
-                                            setValue('form.mapCenter.lng',lng)
-                                          }}
-                                        />
-                                      </FormControl>
-                                      <Flex direction="row" gap={2}>
-                                        <FormControl
-                                          name="form.mapCenter.lat"
-                                          control={control}
-                                          mb={1}>
-                                          <FormLabel
-                                            label={intl.formatMessage({
-                                              id: 'proposal_form.lat_map',
-                                            })}
-                                          />
-                                          <FieldInput
-                                            name="form.mapCenter.lat"
-                                            type="number"
-                                            control={control}
-                                          />
-                                        </FormControl>
-                                        <FormControl
-                                          name="form.mapCenter.lng"
-                                          control={control}
-                                          mb={1}>
-                                          <FormLabel
-                                            label={intl.formatMessage({
-                                              id: 'proposal_form.lng_map',
-                                            })}
-                                          />
-                                          <FieldInput
-                                            name="form.mapCenter.lng"
-                                            type="number"
-                                            control={control}
-                                          />
-                                        </FormControl>
-                                      </Flex>
-                                      <FormControl name="form.zoomMap" control={control}>
-                                        <FormLabel
-                                          label={intl.formatMessage({
-                                            id: 'proposal_form.zoom',
-                                          })}
-                                        />
-                                        <FieldInput
-                                          name="form.zoomMap"
-                                          type="select"
-                                          control={control}
-                                          options={zoomLevels.map(level => {
-                                            return {
-                                              label: `${level.id} ${
-                                                level.name
-                                                  ? `- ${intl.formatMessage({
-                                                    id: level.name,
-                                                  })}`
-                                                  : ''
-                                              }`,
-                                              value: String(level.id),
-                                            };
-                                          })}
-                                        />
-                                      </FormControl>
-                                    </Flex>
-                                  )}
-                                </Flex>
-                              )
-                            }
-                          </Flex>
-
-                          <FormControl name="mainView" control={control}>
-                            <FormLabel label={intl.formatMessage({ id: 'default.view' })} />
-                            <FieldInput
-                              type="radio"
-                              name="mainView"
-                              id="mainView"
-                              control={control}
-                              // @ts-ignore
-                              checked={watch('mainView')}
-                              choices={getMainViewChoices()}
-                            />
-                          </FormControl>
-                          <FormControl name="metaDescription" control={control}>
-                            <FormLabel
-                              htmlFor="metaDescription"
-                              label={intl.formatMessage({
-                                id: 'global.meta.description',
-                              })}>
-                              <Text fontSize={2} color="gray.500">
-                                {intl.formatMessage({ id: 'global.optional' })}
-                              </Text>
-                            </FormLabel>
-                            <FieldInput
-                              id="metaDescription"
-                              type="textarea"
-                              control={control}
-                              name="metaDescription"
-                            />
-                          </FormControl>
-                          <FormProvider {...formMethods}>
-                            <TextEditor
-                              name="customCode"
-                              required={false}
-                              label={intl.formatMessage({
-                                id: 'admin.customcode',
-                              })}
-                              platformLanguage={defaultLocale}
-                              selectedLanguage={defaultLocale}
-                              buttonLabels={{
-                                submit: isEditing
-                                  ? intl.formatMessage({ id: 'global.edit' })
-                                  : intl.formatMessage({ id: 'global.add' }),
-                              }}
-                            />
-                          </FormProvider>
-                <FormControl name="enabled" control={control}>
-                  <FormLabel label={intl.formatMessage({ id: 'global.publication' })} />
-                  <FieldInput
-                    type="radio"
-                    name="enabled"
-                    id="enabled"
-                    control={control}
-                    choices={[
-                      {
-                        id: EnabledEnum.PUBLISHED,
-                        useIdAsValue: true,
-                        label: intl.formatMessage({
-                          id: 'admin.fields.step.is_enabled',
-                        }),
-                      },
-                      {
-                        id: EnabledEnum.DRAFT,
-                        useIdAsValue: true,
-                        label: intl.formatMessage({
-                          id: 'admin.fields.proposal.state.choices.draft',
-                        }),
-                      },
-                    ]}
-                  />
-                </FormControl>
-              </Accordion.Panel>
-            </Accordion.Item>
+                          <ProposalStepOptionnalAccordion step={step} defaultLocale={defaultLocale} formMethods={formMethods} isEditing={isEditing} />
+                        </Accordion.Panel>
+                      </Accordion.Item>
           </Accordion>
           <Flex>
             <Button
@@ -1007,7 +636,8 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
             >
               {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
             </Button>
-            <Button variantSize="big" variant="secondary" disabled={isSubmitting} onClick={onBack}>
+            <Button variantSize="big" variant="secondary" disabled={isSubmitting}
+                    onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}>
               {intl.formatMessage({ id: 'global.back' })}
             </Button>
           </Flex>

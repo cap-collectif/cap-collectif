@@ -26,6 +26,7 @@ import { UpdateDebateStepInput } from '@relay/UpdateDebateStepMutation.graphql'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { onBack } from '@components/Steps/utils'
+import {useDebateStep} from "./DebateStepContext";
 
 type Props = {
   stepId: string
@@ -140,9 +141,8 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const debate = step?.debate
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
-  const [isEditing, setIsEditing] = useState(() => {
-    return !!step?.label
-  })
+  const {operationType, setOperationType} = useDebateStep();
+  const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
@@ -234,7 +234,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     try {
       await UpdateDebateStepMutation.commit({ input })
-      setIsEditing(false)
+      setOperationType('EDIT')
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'global.saved' }),

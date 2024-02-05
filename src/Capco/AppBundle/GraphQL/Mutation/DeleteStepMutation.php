@@ -3,6 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Security\ProjectVoter;
@@ -34,7 +39,13 @@ class DeleteStepMutation implements MutationInterface
     {
         $this->formatInput($input);
         $stepId = $input->offsetGet('stepId');
+        $deleteRelatedResource = $input->offsetGet('deleteRelatedResource');
         $step = $this->getStep($stepId, $viewer);
+
+        if ($deleteRelatedResource) {
+            $this->deleteResource($step);
+        }
+
         $this->em->remove($step);
         $this->em->flush();
 
@@ -60,5 +71,38 @@ class DeleteStepMutation implements MutationInterface
         }
 
         return $step;
+    }
+
+    private function deleteResource(AbstractStep $step): void
+    {
+        if ($step instanceof CollectStep) {
+            $this->em->remove($step->getProposalForm());
+
+            return;
+        }
+
+        if ($step instanceof SelectionStep) {
+            $this->em->remove($step->getProposalForm());
+
+            return;
+        }
+
+        if ($step instanceof QuestionnaireStep) {
+            $this->em->remove($step->getQuestionnaire());
+
+            return;
+        }
+
+        if ($step instanceof ConsultationStep) {
+            foreach ($step->getConsultations() as $consultation) {
+                $this->em->remove($consultation);
+            }
+
+            return;
+        }
+
+        if ($step instanceof DebateStep) {
+            $this->em->remove($step->getDebate());
+        }
     }
 }

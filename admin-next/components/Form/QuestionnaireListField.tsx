@@ -18,9 +18,9 @@ type QuestionnaireListFieldValue = {
 }
 
 const getQuestionnaireList = graphql`
-  query QuestionnaireListFieldQuery($term: String, $affiliations: [QuestionnaireAffiliation!]) {
+  query QuestionnaireListFieldQuery($term: String, $affiliations: [QuestionnaireAffiliation!], $types: [QuestionnaireType]) {
     viewer {
-      questionnaires(query: $term, affiliations: $affiliations, availableOnly: true) {
+      questionnaires(query: $term, affiliations: $affiliations, availableOnly: true, types: $types) {
         edges {
           node {
             id
@@ -79,7 +79,7 @@ const getQuestionnaireList = graphql`
         }
       }
       organizations {
-        questionnaires(query: $term, affiliations: $affiliations, availableOnly: true) {
+        questionnaires(query: $term, affiliations: $affiliations, availableOnly: true, types: $types) {
           edges {
             node {
               id
@@ -170,6 +170,7 @@ export const QuestionnaireListField: React.FC<QuestionnaireListFieldProps> = ({
     const questionnairesData = await fetchQuery<QuestionnaireListFieldQuery>(environment, getQuestionnaireList, {
       term: search,
       affiliations: null,
+      types: ['QUESTIONNAIRE']
     }).toPromise()
 
     const questionnairesEdges =

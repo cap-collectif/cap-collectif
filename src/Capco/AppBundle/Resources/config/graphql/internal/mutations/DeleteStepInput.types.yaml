@@ -5,4 +5,8 @@ DeleteStepInput:
             stepId:
                 type: 'ID!'
                 description: 'The step ID to delete.'
+            deleteRelatedResource:
+                type: 'Boolean!'
+                defaultValue: false
+                description: 'If true also delete the related proposal form/questionnaire/consultation'
 

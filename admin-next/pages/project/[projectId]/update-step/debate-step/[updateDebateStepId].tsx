@@ -5,6 +5,7 @@ import Layout from '@components/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import DebateStepForm from '@components/Steps/DebateStep/DebateStepForm'
 import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
+import {DebateStepContextProvider} from "../../../../../components/Steps/DebateStep/DebateStepContext";
 
 const UpdateDebateStepWrapper = () => {
   const router = useRouter()
@@ -24,7 +25,9 @@ const UpdateDebateStepWrapper = () => {
             </Flex>
           }
         >
-          <DebateStepForm stepId={stepId as string} setHelpMessage={setHelpMessage} />
+          <DebateStepContextProvider>
+            <DebateStepForm stepId={stepId as string} setHelpMessage={setHelpMessage} />
+          </DebateStepContextProvider>
           <StepCreationSide helpMessage={helpMessage} />
         </React.Suspense>
       </Flex>
