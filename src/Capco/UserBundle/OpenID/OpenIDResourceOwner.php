@@ -221,15 +221,15 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     {
         $headers = [];
 
+        $parameters['client_id'] = $this->options['client_id'];
+        $parameters['client_secret'] = $this->options['client_secret'];
+
         if ($this->isUsingAuthorizationHeaderToGetAccessToken()) {
             $headers['Authorization'] =
                 'Basic ' .
                 base64_encode($this->options['client_id'] . ':' . $this->options['client_secret']);
             unset($parameters['client_id'], $parameters['client_secret']);
         }
-
-        $parameters['client_id'] = $this->options['client_id'];
-        $parameters['client_secret'] = $this->options['client_secret'];
 
         return $this->httpRequest(
             $url,

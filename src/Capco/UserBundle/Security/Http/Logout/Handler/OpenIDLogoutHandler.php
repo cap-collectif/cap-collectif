@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Security\Http\Logout\Handler;
 
 use Capco\AppBundle\Repository\AbstractSSOConfigurationRepository;
+use Capco\Capco\UserBundle\OpenID\ReferrerResolver\KeycloakReferrerResolver;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use Doctrine\ORM\EntityManagerInterface;
@@ -70,6 +71,10 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
                         $user->removeOpenIdSessionFromUserSession($sessionId);
                         $this->em->flush();
                     }
+                }
+
+                if ($this->refererResolver->getRefererResolver() instanceof KeycloakReferrerResolver) {
+                    $parameters['id_token_hint'] = $token->getRawToken()['id_token'];
                 }
 
                 $responseWithRequest->setResponse(

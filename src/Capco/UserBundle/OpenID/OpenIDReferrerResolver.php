@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\OpenID;
 
+use Capco\Capco\UserBundle\OpenID\ReferrerResolver\KeycloakReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\DefaultReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\GrandLyonReferrerResolver;
 use Capco\UserBundle\OpenID\ReferrerResolver\OccitanieReferrerResolver;
@@ -26,8 +27,15 @@ class OpenIDReferrerResolver
 
                 break;
 
+            case 'preprod':
+                $this->refererResolver = new KeycloakReferrerResolver();
+
+                break;
+
             default:
-                $this->refererResolver = new DefaultReferrerResolver();
+                str_starts_with($instanceName, 'qa-')
+                    ? $this->refererResolver = new KeycloakReferrerResolver()
+                    : $this->refererResolver = new DefaultReferrerResolver();
         }
     }
 
@@ -39,5 +47,10 @@ class OpenIDReferrerResolver
     public function getRefererParameterForLogout(): string
     {
         return $this->refererResolver->getRefererForLogout();
+    }
+
+    public function getRefererResolver(): ReferrerInterface
+    {
+        return $this->refererResolver;
     }
 }
