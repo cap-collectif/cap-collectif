@@ -155,7 +155,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   }
 
   return (
-    <Box bg="white" width="70%" p={6} borderRadius="8px">
+    <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
       <Text fontWeight={600} color="blue.800" fontSize={4} mb={8}>
         {intl.formatMessage({ id: 'customize-your-custom-step' })}
       </Text>
@@ -165,8 +165,11 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
           name="label"
           control={control}
           isRequired
-          onMouseEnter={() => {
+          onFocus={() => {
             setHelpMessage('step.create.label.helpText')
+          }}
+          onBlur={() => {
+            setHelpMessage(null)
           }}
         >
           <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
@@ -200,7 +203,13 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Text>
               </FormLabel>
-              <FieldInput id="startAt" name="startAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+              <FieldInput
+                id="startAt"
+                name="startAt"
+                control={control}
+                type="dateHour"
+                dateInputProps={{ isOutsideRange: true }}
+              />
             </FormControl>
             <FormControl name="endAt" control={control} width="max-content">
               <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
@@ -208,7 +217,13 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Text>
               </FormLabel>
-              <FieldInput id="endAt" name="endAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+              <FieldInput
+                id="endAt"
+                name="endAt"
+                control={control}
+                type="dateHour"
+                dateInputProps={{ isOutsideRange: true }}
+              />
             </FormControl>
           </Flex>
         </Box>

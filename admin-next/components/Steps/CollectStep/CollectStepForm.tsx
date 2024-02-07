@@ -3,22 +3,13 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { FormProvider, useForm } from 'react-hook-form'
-import {
-  Accordion,
-  Box,
-  Button,
-  CapUIAccordionColor,
-  Flex,
-  FormLabel,
-  Text,
-  toast,
-} from '@cap-collectif/ui'
+import { Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text, toast } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import ProposalFormForm from '@components/Steps/CollectStep/ProposalFormForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
-import {RequirementsFormValues} from '@components/Requirements/Requirements'
+import { RequirementsFormValues } from '@components/Requirements/Requirements'
 import {
   CollectStepFormQuery,
   MainView,
@@ -42,10 +33,9 @@ import { useAppContext } from '@components/AppProvider/App.context'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {useCollectStep} from "./CollectStepContext";
-import ProposalStepOptionnalAccordion from "../ProposalStep/ProposalStepOptionnalAccordion";
+import { useCollectStep } from './CollectStepContext'
+import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
 import { onBack } from '@components/Steps/utils'
-
 
 export interface CollectStepFormProps {
   stepId: string
@@ -64,10 +54,10 @@ export type FormValues = {
   endAt: string | null
   statuses?:
     | Array<{
-    id: string
-    name: string
-    color: ProposalStepStatusColor
-  }>
+        id: string
+        name: string
+        color: ProposalStepStatusColor
+      }>
     | undefined
   defaultStatus: string | null
   form: {
@@ -381,7 +371,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   const project = step?.project
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
-  const {operationType, setOperationType} = useCollectStep();
+  const { operationType, setOperationType } = useCollectStep()
   const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
@@ -465,7 +455,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   const stepDurationType = watch('stepDurationType')
   const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
   return (
-    <Box bg="white" width="70%" p={6} borderRadius="8px">
+    <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-collect-step' })}
       </Text>
@@ -475,8 +465,11 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           control={control}
           isRequired
           mb={6}
-          onMouseEnter={() => {
+          onFocus={() => {
             setHelpMessage('step.create.label.helpText')
+          }}
+          onBlur={() => {
+            setHelpMessage(null)
           }}
         >
           <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
@@ -530,7 +523,13 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="startAt" name="startAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+                <FieldInput
+                  id="startAt"
+                  name="startAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
               <FormControl name="endAt" control={control} width="max-content">
                 <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
@@ -538,21 +537,26 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="endAt" name="endAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+                <FieldInput
+                  id="endAt"
+                  name="endAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
             </Flex>
           </Box>
         )}
         <Box>
           <Box mb={4}>
-            <Accordion
-              color={CapUIAccordionColor.Transparent}
-            >
+            <Accordion color={CapUIAccordionColor.Transparent}>
               <Accordion.Item
                 id={intl.formatMessage({ id: 'proposal-form' })}
                 onMouseEnter={e => {
                   setHelpMessage('step.create.proposalForm.helpText')
                 }}
+                onMouseLeave={() => setHelpMessage(null)}
               >
                 <Accordion.Button>{intl.formatMessage({ id: 'proposal-form' })}</Accordion.Button>
                 <Accordion.Panel>
@@ -572,15 +576,18 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
                 <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
                 <Accordion.Panel>
-                  <ProposalStepVoteTabsForm
-                    defaultLocale={defaultLocale}
-                    formMethods={formMethods}
-                  />
+                  <ProposalStepVoteTabsForm defaultLocale={defaultLocale} formMethods={formMethods} />
                 </Accordion.Panel>
               </Accordion.Item>
             </Accordion>
             <Accordion color={CapUIAccordionColor.Transparent}>
-              <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+              <Accordion.Item
+                id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+                onMouseEnter={() => {
+                  setHelpMessage('step.create.requirements.helpText')
+                }}
+                onMouseLeave={() => setHelpMessage(null)}
+              >
                 <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                 <Accordion.Panel>
                   <React.Suspense fallback={<RequirementsTabsSkeleton />}>
@@ -612,7 +619,12 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                       htmlFor="allowAuthorsToAddNews"
                       label={intl.formatMessage({ id: 'proposal-news-label' })}
                     />
-                    <FieldInput id="allowAuthorsToAddNews" name="allowAuthorsToAddNews" control={control} type="checkbox">
+                    <FieldInput
+                      id="allowAuthorsToAddNews"
+                      name="allowAuthorsToAddNews"
+                      control={control}
+                      type="checkbox"
+                    >
                       {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
                     </FieldInput>
                   </FormControl>
@@ -730,10 +742,14 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
                 <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
                 <Accordion.Panel gap={6}>
-                  <ProposalStepOptionnalAccordion step={step} defaultLocale={defaultLocale} formMethods={formMethods} isEditing={isEditing} />
+                  <ProposalStepOptionnalAccordion
+                    step={step}
+                    defaultLocale={defaultLocale}
+                    formMethods={formMethods}
+                    isEditing={isEditing}
+                  />
                 </Accordion.Panel>
               </Accordion.Item>
-
             </Accordion>
           </Box>
           <Flex>
@@ -747,8 +763,12 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
             >
               {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
             </Button>
-            <Button variantSize="big" variant="secondary" disabled={isSubmitting}
-                    onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}>
+            <Button
+              variantSize="big"
+              variant="secondary"
+              disabled={isSubmitting}
+              onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
+            >
               {intl.formatMessage({ id: 'global.back' })}
             </Button>
           </Flex>

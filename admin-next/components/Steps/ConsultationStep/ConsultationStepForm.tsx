@@ -7,7 +7,7 @@ import { EnabledEnum, StepDurationTypeEnum } from '@components/Steps/DebateStep/
 import {
   getDefaultRequirements,
   getRequirementsInput,
-  RequirementsFormValues
+  RequirementsFormValues,
 } from '@components/Requirements/Requirements'
 import { FormProvider, useForm } from 'react-hook-form'
 import {
@@ -358,7 +358,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   }
 
   return (
-    <Box bg="white" width="70%" p={6} borderRadius="8px">
+    <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-consultation-step' })}
       </Text>
@@ -369,8 +369,11 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             control={control}
             isRequired
             mb={6}
-            onMouseEnter={() => {
+            onFocus={() => {
               setHelpMessage('step.create.label.helpText')
+            }}
+            onBlur={() => {
+              setHelpMessage(null)
             }}
           >
             <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
@@ -419,7 +422,13 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="startAt" name="startAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+                <FieldInput
+                  id="startAt"
+                  name="startAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
               <FormControl name="endAt" control={control} width="max-content">
                 <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
@@ -427,17 +436,27 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
-                <FieldInput id="endAt" name="endAt" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+                <FieldInput
+                  id="endAt"
+                  name="endAt"
+                  control={control}
+                  type="dateHour"
+                  dateInputProps={{ isOutsideRange: true }}
+                />
               </FormControl>
             </Flex>
           ) : null}
 
           <ConsultationStepConsultations query={query} />
 
-          <Accordion
-            color={CapUIAccordionColor.Transparent}
-          >
-            <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+          <Accordion color={CapUIAccordionColor.Transparent}>
+            <Accordion.Item
+              id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+              onMouseEnter={() => {
+                setHelpMessage('step.create.requirements.helpText')
+              }}
+              onMouseLeave={() => setHelpMessage(null)}
+            >
               <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
               <Accordion.Panel>
                 <React.Suspense

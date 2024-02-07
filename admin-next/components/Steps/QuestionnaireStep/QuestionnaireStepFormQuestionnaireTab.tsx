@@ -301,10 +301,11 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLoc
   )
 }
 
-const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean; defaultLocale?: string }> = ({
-  isEditing,
-  defaultLocale,
-}) => {
+const QuestionnaireStepFormQuestionnaireTab: React.FC<{
+  isEditing: boolean
+  defaultLocale?: string
+  setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
+}> = ({ isEditing, defaultLocale, setHelpMessage }) => {
   const intl = useIntl()
   const { control, watch, setValue } = useFormContext()
 
@@ -320,7 +321,13 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{ isEditing: boolean; defa
 
   return (
     <Accordion color={CapUIAccordionColor.Transparent}>
-      <Accordion.Item id={intl.formatMessage({ id: 'global.questionnaire' })}>
+      <Accordion.Item
+        id={intl.formatMessage({ id: 'global.questionnaire' })}
+        onMouseEnter={() => {
+          setHelpMessage('step.create.questionnaire.helpText')
+        }}
+        onMouseLeave={() => setHelpMessage(null)}
+      >
         <Accordion.Button>{intl.formatMessage({ id: 'global.questionnaire' })}</Accordion.Button>
         <Accordion.Panel>
           {!isEditing ? (

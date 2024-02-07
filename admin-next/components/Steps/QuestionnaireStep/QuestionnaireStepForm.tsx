@@ -286,7 +286,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   }
 
   return (
-    <Box bg="white" p={6} borderRadius="8px" width="70%">
+    <Box bg="white" p={6} borderRadius="8px" width="70%" flex="none">
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-questionnaire-step' })}
       </Text>
@@ -297,8 +297,11 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             control={control}
             isRequired
             mb={6}
-            onMouseEnter={() => {
+            onFocus={() => {
               setHelpMessage('step.create.label.helpText')
+            }}
+            onBlur={() => {
+              setHelpMessage(null)
             }}
           >
             <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
@@ -371,9 +374,19 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               </FormControl>
             </Flex>
           ) : null}
-          <QuestionnaireStepFormQuestionnaireTab isEditing={isEditing} defaultLocale={defaultLocale} />
+          <QuestionnaireStepFormQuestionnaireTab
+            isEditing={isEditing}
+            defaultLocale={defaultLocale}
+            setHelpMessage={setHelpMessage}
+          />
           <Accordion color={CapUIAccordionColor.Transparent}>
-            <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+            <Accordion.Item
+              id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+              onMouseEnter={() => {
+                setHelpMessage('step.create.requirements.helpText')
+              }}
+              onMouseLeave={() => setHelpMessage(null)}
+            >
               <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
               <Accordion.Panel>
                 <QuestionnaireStepRequirementsTabs formMethods={formMethods} questionnaireStep={step} />
