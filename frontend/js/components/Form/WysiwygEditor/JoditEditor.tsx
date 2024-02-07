@@ -165,7 +165,7 @@ const Jodit = ({
         />
       </AppBox>
     ), // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedLanguage],
+    [selectedLanguage, value],
   )
 }
 
