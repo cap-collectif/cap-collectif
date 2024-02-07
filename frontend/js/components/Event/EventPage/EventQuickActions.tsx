@@ -16,8 +16,12 @@ export const EventQuickActions = ({ id, status, viewerDidAuthor }: Props) => {
   const intl = useIntl()
   const hasProposeEventEnabled = useFeatureFlag('allow_users_to_propose_events')
   const eventIsApproved = status === 'APPROVED'
-  const isSuperAdmin = useSelector((state: GlobalState) => state.user.user?.roles.includes('ROLE_SUPER_ADMIN'))
-  if (isSuperAdmin || (hasProposeEventEnabled && viewerDidAuthor && eventIsApproved))
+  const adminRoles = useSelector((state: GlobalState) => state.user.user?.roles ?? [])
+  const isSuperAdmin = adminRoles.includes('ROLE_SUPER_ADMIN')
+  const isAdmin = adminRoles.includes('ROLE_ADMIN')
+  const isValid = hasProposeEventEnabled && viewerDidAuthor && eventIsApproved
+  
+  if (isSuperAdmin || isAdmin || isValid)
     return (
       <Menu
         disclosure={
@@ -34,7 +38,7 @@ export const EventQuickActions = ({ id, status, viewerDidAuthor }: Props) => {
         }
       >
         <Menu.List>
-          {isSuperAdmin || viewerDidAuthor ? (
+          {isSuperAdmin || isAdmin || viewerDidAuthor ? (
             <Menu.Item
               as="div"
               sx={{
