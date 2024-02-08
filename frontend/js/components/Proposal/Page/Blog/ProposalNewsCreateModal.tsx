@@ -21,17 +21,19 @@ import { handleTranslationChange } from '~/services/Translation'
 import AddProposalNewsMutation from '~/mutations/AddProposalNewsMutation'
 import AlertForm from '~/components/Alert/AlertForm'
 import CloseButton from '~/components/Form/CloseButton'
-import type { ProposalNewsCreateModal_proposal } from '~relay/ProposalNewsCreateModal_proposal.graphql'
+import type { ProposalNewsCreateModal_proposal$data } from '~relay/ProposalNewsCreateModal_proposal.graphql'
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
-import type { AddProposalNewsMutationResponse } from '~relay/AddProposalNewsMutation.graphql'
+import type { AddProposalNewsMutation$data } from '~relay/AddProposalNewsMutation.graphql'
+
 type Props = ReduxFormFormProps & {
   readonly show: boolean
   readonly displayModal: (show: boolean) => void
   readonly dispatch: Dispatch
   readonly currentLanguage: string
   readonly onClose?: () => void
-  readonly proposal: ProposalNewsCreateModal_proposal
+  readonly proposal: ProposalNewsCreateModal_proposal$data
 }
+
 export const ProposalNewsCreateModal = ({
   displayModal,
   show,
@@ -66,11 +68,11 @@ export const ProposalNewsCreateModal = ({
     return AddProposalNewsMutation.commit({
       input: data,
     })
-      .then((response: AddProposalNewsMutationResponse) => {
+      .then((response: AddProposalNewsMutation$data) => {
         displayModal(false)
 
         if (response.addProposalNews?.postURL) {
-          window.location.href = response.addProposalNews.postURL
+          window.location.href = response.addProposalNews.postURL as string
         }
       })
       .catch(() => {
@@ -81,7 +83,13 @@ export const ProposalNewsCreateModal = ({
   }
 
   return (
-    <Modal show={show} onHide={() => displayModal(false)} animation={false} dialogClassName="modal--update">
+    <Modal
+      enforceFocus={false}
+      show={show}
+      onHide={() => displayModal(false)}
+      animation={false}
+      dialogClassName="modal--update"
+    >
       <Modal.Header
         closeButton
         closeLabel={intl.formatMessage({

@@ -8,7 +8,7 @@ exports[`<ProposalNewsCreateModal /> should render correctly 1`] = `
   bsClass="modal"
   dialogClassName="modal--update"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   keyboard={true}
   manager={
     ModalManager {
@@ -87,7 +87,7 @@ exports[`<ProposalNewsCreateModal /> should render correctly with modal open 1`]
   bsClass="modal"
   dialogClassName="modal--update"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   keyboard={true}
   manager={
     ModalManager {

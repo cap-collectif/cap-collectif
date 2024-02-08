@@ -31,7 +31,7 @@ type Props = ReduxFormFormProps &
   }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const customForm: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+const CustomForm: StyledComponent<any, {}, HTMLFormElement> = styled.form`
   label {
     font-weight: 400;
   }
@@ -54,7 +54,7 @@ const validate = ({ title, body }: FormValues) => {
 
 export const ProposalNewsForm = ({ handleSubmit }: Props) => {
   return (
-    <customForm id={`${formName}`} onSubmit={handleSubmit}>
+    <CustomForm id={`${formName}`} onSubmit={handleSubmit}>
       <Field
         name="title"
         component={component}
@@ -91,7 +91,7 @@ export const ProposalNewsForm = ({ handleSubmit }: Props) => {
         type="image"
         label={<FormattedMessage id="cover-image" />}
       />
-    </customForm>
+    </CustomForm>
   )
 }
 const formContainer = reduxForm({

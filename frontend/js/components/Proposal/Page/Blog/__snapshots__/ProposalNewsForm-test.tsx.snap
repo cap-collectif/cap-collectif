@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalNewsForm /> should render correctly 1`] = `
-<customForm
+<ProposalNewsForm__CustomForm
   id="ProposalNewsForm"
   onSubmit={[MockFunction]}
 >
@@ -64,11 +64,11 @@ exports[`<ProposalNewsForm /> should render correctly 1`] = `
     name="media"
     type="image"
   />
-</customForm>
+</ProposalNewsForm__CustomForm>
 `;
 
 exports[`<ProposalNewsForm /> should render correctly with post 1`] = `
-<customForm
+<ProposalNewsForm__CustomForm
   id="ProposalNewsForm"
   onSubmit={[MockFunction]}
 >
@@ -131,5 +131,5 @@ exports[`<ProposalNewsForm /> should render correctly with post 1`] = `
     name="media"
     type="image"
   />
-</customForm>
+</ProposalNewsForm__CustomForm>
 `;

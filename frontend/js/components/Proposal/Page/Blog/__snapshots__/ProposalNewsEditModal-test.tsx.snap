@@ -9,7 +9,7 @@ exports[`<ProposalNewsEditModal /> should render correctly 1`] = `
   className={null}
   dialogClassName="modal--update"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   keyboard={true}
   manager={
     ModalManager {
@@ -132,7 +132,7 @@ exports[`<ProposalNewsEditModal /> should render correctly with modal open 1`] =
   className="overflow-hidden"
   dialogClassName="modal--update"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   keyboard={true}
   manager={
     ModalManager {

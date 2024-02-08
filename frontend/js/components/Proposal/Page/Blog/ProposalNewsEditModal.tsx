@@ -119,6 +119,7 @@ export const ProposalNewsEditModal = ({
 
   return (
     <Modal
+      enforceFocus={false}
       show={show}
       onHide={() => displayModal(false)}
       animation={false}
