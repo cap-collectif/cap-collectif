@@ -145,12 +145,9 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
 
 const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, projectId }: Props) => {
   const { state } = useLocation()
-  const urlSearch = new URLSearchParams(window.location.search)
-  const category = urlSearch.get('category') ?? null
   const initialRenderVars = {
     term: '',
     ...queryVariables(filters, order),
-    category,
   }
   const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone()
   return (
@@ -298,13 +295,26 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
   )
 }
 
-const mapStateToProps = (state: State) => ({
-  isAuthenticated: state.user.user !== null,
-  filters: state.proposal.filters || {},
-  terms: state.proposal.terms,
-  order: state.proposal.order,
-  features: state.default.features,
-})
+const mapStateToProps = (state: State) => {
+
+  const urlSearch = new URLSearchParams(window.location.search)
+  const filters = Object.entries(state.proposal.filters).reduce((acc, [key, value]) => {
+    if (urlSearch.get(key)) {
+      acc[key] = urlSearch.get(key)
+    } else {
+      acc[key] = value
+    }
+    return acc;
+  }, {});
+
+  return {
+    isAuthenticated: state.user.user !== null,
+    filters: filters || {},
+    terms: state.proposal.terms,
+    order: state.proposal.order,
+    features: state.default.features,
+  }
+}
 
 // @ts-ignore
 export default connect<Props, OwnProps>(mapStateToProps)(ProposalStepPage)
