@@ -51,6 +51,13 @@ export const REQUIREMENTS_QUERY = graphql`
         votesMin
         ...FillRequirementsModal_step
         ...FillOptionalsModal_step
+        requirements {
+            edges {
+                node {
+                    __typename
+                }
+            }
+        }
       }
     }
   }
@@ -156,6 +163,11 @@ const MediatorVoteModal = ({
   const votesMin = query.node.votesMin || 1
   const { handleSubmit } = methods
 
+  const showRequiredRequirementsModal = step.requirements.edges.map(edge => edge?.node).map(node => node?.__typename).some(typename => {
+    return ['PhoneRequirement', 'PhoneVerifiedRequirement', 'EmailVerifiedRequirement'].includes(typename) === false
+  })
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormProvider {...methods}>
@@ -169,7 +181,11 @@ const MediatorVoteModal = ({
           onClose={onClose}
         >
           <SelectProposalsModal onCancel={onClose} stepId={stepId} isNew={!participantId} votesMin={votesMin} />
-          <FillRequirementsModal step={step} isNew={!participantId} />
+          {
+            showRequiredRequirementsModal && (
+              <FillRequirementsModal step={step} isNew={!participantId} />
+            )
+          }
           <FillOptionalsModal step={step} onSubmit={onSubmit} isNew={!participantId} />
         </MultiStepModal>
       </FormProvider>
