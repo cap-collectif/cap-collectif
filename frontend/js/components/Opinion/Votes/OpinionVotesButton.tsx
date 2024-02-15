@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import cn from 'classnames'
@@ -7,13 +6,14 @@ import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import NewLoginOverlay from '../../Utils/NewLoginOverlay'
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip'
-import FluxDispatcher from '../../../dispatchers/AppDispatcher'
 import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants'
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation'
 import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation'
 import RequirementsFormModal from '../../Requirements/RequirementsModal'
 import type { OpinionVotesButton_opinion } from '~relay/OpinionVotesButton_opinion.graphql'
 import type { Dispatch } from '../../../types'
+import { toast } from '~ds/Toast'
+
 type RelayProps = {
   readonly opinion: OpinionVotesButton_opinion
 }
@@ -63,7 +63,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
   }
   target = null
   vote = () => {
-    const { opinion, value } = this.props
+    const { opinion, value, intl } = this.props
 
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = {
@@ -81,25 +81,15 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             throw new Error('mutation failed')
           }
 
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'success',
-              content: 'vote.add_success',
-            },
-          })
+          toast({ content: intl.formatMessage({ id: 'vote.add_success' }), variant: 'success' })
+
           this.setState({
             isLoading: false,
           })
         })
         .catch(() => {
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'danger',
-              content: 'opinion.request.failure',
-            },
-          })
+          toast({ content: intl.formatMessage({ id: 'opinion.request.failure' }), variant: 'danger' })
+
           this.setState({
             isLoading: false,
           })
@@ -107,7 +97,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
     }
   }
   deleteVote = () => {
-    const { opinion } = this.props
+    const { opinion, intl } = this.props
 
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = {
@@ -123,26 +113,15 @@ export class OpinionVotesButton extends React.Component<Props, State> {
           if (!res.removeOpinionVote) {
             throw new Error('mutation failed')
           }
+          toast({ content: intl.formatMessage({ id: 'vote.delete_success' }), variant: 'success' })
 
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'success',
-              content: 'vote.delete_success',
-            },
-          })
           this.setState({
             isLoading: false,
           })
         })
         .catch(() => {
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'danger',
-              content: 'opinion.request.failure',
-            },
-          })
+          toast({ content: intl.formatMessage({ id: 'opinion.request.failure' }), variant: 'danger' })
+
           this.setState({
             isLoading: false,
           })
@@ -175,21 +154,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
 
     return false
   }
-  voteIsEnabled = () => {
-    const { opinion } = this.props
 
-    if (!opinion.section) {
-      return false
-    }
-
-    const voteType = opinion.section.voteWidgetType
-
-    if (voteType === VOTE_WIDGET_BOTH) {
-      return true
-    }
-
-    return false
-  }
   openModal = () => {
     this.setState({
       showModal: true,
@@ -224,6 +189,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             })}
             onClick={this.voteAction}
             ref={button => {
+              // @ts-expect-error
               this.target = button
             }}
             aria-label={intl.formatMessage({

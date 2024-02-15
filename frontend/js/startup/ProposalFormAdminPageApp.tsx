@@ -2,7 +2,6 @@
 import React, { lazy, Suspense } from 'react'
 import Providers from './Providers'
 import type { Props } from '~/components/ProposalForm/ProposalFormAdminPage'
-import AlertBoxApp from '~/startup/AlertBoxApp'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 
 const ProposalFormAdminPage = lazy(
@@ -15,7 +14,6 @@ const ProposalFormAdminPage = lazy(
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
     <Providers>
-      <AlertBoxApp />
       <ProposalFormAdminPage {...props} />
     </Providers>
   </Suspense>

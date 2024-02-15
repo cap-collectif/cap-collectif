@@ -1,8 +1,8 @@
 import type { Exact, Action, Dispatch } from '~/types'
-import { UPDATE_ALERT } from '~/constants/AlertConstants'
-import FluxDispatcher from '../../dispatchers/AppDispatcher'
 import ReportMutation from '~/mutations/ReportMutation'
 import { getType } from '~/components/Report/ReportForm'
+import { IntlShape } from 'react-intl'
+import { toast } from '~ds/Toast'
 export type State = {
   readonly currentReportingModal: (number | null | undefined) | (string | null | undefined)
   readonly isLoading: boolean
@@ -64,6 +64,7 @@ export const submitReport = async (
   report: ReportData,
   dispatch: Dispatch,
   successMessage: string,
+  intl: IntlShape,
 ) => {
   dispatch(startLoading())
   await ReportMutation.commit({
@@ -76,13 +77,7 @@ export const submitReport = async (
   dispatch(addReported())
   dispatch(stopLoading())
   dispatch(closeModal())
-  FluxDispatcher.dispatch({
-    actionType: UPDATE_ALERT,
-    alert: {
-      bsStyle: 'success',
-      content: successMessage,
-    },
-  })
+  toast({ content: intl.formatMessage({ id: successMessage }), variant: 'success' })
 }
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {

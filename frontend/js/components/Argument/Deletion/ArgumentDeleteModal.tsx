@@ -1,32 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl'
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl'
 import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
-import AppDispatcher from '../../../dispatchers/AppDispatcher'
 import DeleteArgumentMutation from '../../../mutations/DeleteArgumentMutation'
 import type { ArgumentDeleteModal_argument } from '~relay/ArgumentDeleteModal_argument.graphql'
+import { toast } from '~ds/Toast'
 
 type Props = {
   show: boolean
   argument: ArgumentDeleteModal_argument
   onClose: () => void
 }
-type State = {
-  isSubmitting: boolean
-}
 
-class ArgumentDeleteModal extends React.Component<Props, State> {
-  state = {
-    isSubmitting: false,
-  }
+const ArgumentDeleteModal = ({ argument, onClose, show }: Props) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  handleSubmit = () => {
-    const { argument, onClose } = this.props
-    this.setState({
-      isSubmitting: true,
-    })
+  const intl = useIntl()
+
+  const handleSubmit = () => {
+    setIsSubmitting(true)
     return DeleteArgumentMutation.commit(
       {
         input: {
@@ -38,55 +32,39 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
     )
       .then(response => {
         if (response.deleteArgument && response.deleteArgument.deletedArgumentId) {
-          AppDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'success',
-              content: 'alert.success.delete.argument',
-            },
-          })
+          toast({ content: intl.formatMessage({ id: 'alert.success.delete.argument' }), variant: 'success' })
           onClose()
         }
 
-        this.setState({
-          isSubmitting: false,
-        })
+        setIsSubmitting(false)
       })
       .catch(() => {
-        this.setState({
-          isSubmitting: false,
-        })
+        setIsSubmitting(false)
       })
   }
 
-  render() {
-    const { isSubmitting } = this.state
-    const { onClose, show } = this.props
-    return (
-      <Modal animation={false} show={show} onHide={onClose} bsSize="large" aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="global.removeMessage" />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <FormattedHTMLMessage id="proposal.delete.confirm" />
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseButton onClose={onClose} />
-          <SubmitButton
-            id="confirm-argument-delete"
-            label="global.removeDefinitively"
-            isSubmitting={isSubmitting}
-            onSubmit={() => {
-              this.handleSubmit()
-            }}
-            bsStyle="danger"
-          />
-        </Modal.Footer>
-      </Modal>
-    )
-  }
+  return (
+    <Modal animation={false} show={show} onHide={onClose} bsSize="large" aria-labelledby="contained-modal-title-lg">
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-lg">
+          <FormattedMessage id="global.removeMessage" />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <FormattedHTMLMessage id="proposal.delete.confirm" />
+      </Modal.Body>
+      <Modal.Footer>
+        <CloseButton onClose={onClose} />
+        <SubmitButton
+          id="confirm-argument-delete"
+          label="global.removeDefinitively"
+          isSubmitting={isSubmitting}
+          onSubmit={handleSubmit}
+          bsStyle="danger"
+        />
+      </Modal.Footer>
+    </Modal>
+  )
 }
 
 export default createFragmentContainer(ArgumentDeleteModal, {

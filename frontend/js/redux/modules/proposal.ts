@@ -1,7 +1,7 @@
 import { toast } from '@cap-collectif/ui'
+import { toast as oldToast } from '~ds/Toast'
+
 import type { IntlShape } from 'react-intl'
-import FluxDispatcher from '../../dispatchers/AppDispatcher'
-import { UPDATE_ALERT } from '../../constants/AlertConstants'
 import addVote from '../../mutations/AddProposalVoteMutation'
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation'
 import type { Exact, Dispatch, Uuid, Action } from '../../types'
@@ -190,7 +190,7 @@ const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 })
 
-export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => {
+export const deleteProposal = (proposalId: string, dispatch: Dispatch, intl: IntlShape): void => {
   dispatch(deleteRequest())
   DeleteProposalMutation.commit({
     input: {
@@ -203,28 +203,20 @@ export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => 
       if (response.deleteProposal) {
         window.location.href = response.deleteProposal.step.url
       }
-
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content:
+      oldToast({
+        content: intl.formatMessage({
+          id:
             response.deleteProposal &&
             response.deleteProposal.proposal &&
             isInterpellationContextFromProposal(response.deleteProposal.proposal)
               ? 'interpellation.request.delete.success'
               : 'proposal.request.delete.success',
-        },
+        }),
+        variant: 'success',
       })
     })
     .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'warning',
-          content: 'global.failure',
-        },
-      })
+      oldToast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'warning' })
     })
 }
 export const startVoting = (): RequestVotingAction => ({
@@ -276,13 +268,7 @@ export const vote = (
       console.log(e) // eslint-disable-line no-console
 
       dispatch(closeVoteModal())
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'danger',
-          content: 'global.failure',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'danger' })
     })
 }
 export type ProposalAction =

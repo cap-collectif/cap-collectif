@@ -10,8 +10,8 @@ Scenario: User wants to send a message via the first form in contact page
     | email        | enjoyphoenix@gmail.com                         |
     | body         | Salut les filles, aujourd'hui je vous présente ce super shampooing à la madeleine ! |
   And I press "global.send"
-  And I wait "#current-alert" to appear on current page
-  Then I should see "contact.email.sent_success" in the "#current-alert" element
+  And I wait ".toasts-container--top div" to appear on current page
+  Then I should see "contact.email.sent_success" in the ".toasts-container--top div" element
 
 Scenario: User wants to send a message via the first form with wrong email in contact page
   Given I visited "contact page"
@@ -45,7 +45,7 @@ Scenario: The email sent to the interlocutor should be sent
     | email        | enjoyphoenix@gmail.com                         |
     | body         | Salut les filles, aujourd'hui je vous présente ce super shampooing à la madeleine ! |
   And I press "global.send"
-  And I wait "#current-alert" to appear on current page
+  And I wait ".toasts-container--top div" to appear on current page
   Then 1 mails should be sent
   And I open mail with subject 'via-the-contact-form-of {"{object}":"Proposition de partenariat avec Dop","{siteName}":"Cap-Collectif"}'
   Then email should match snapshot "contact.html"

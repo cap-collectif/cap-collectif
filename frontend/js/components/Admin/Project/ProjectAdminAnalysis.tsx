@@ -1,6 +1,6 @@
 import { $Values, $PropertyType, $Diff } from 'utility-types'
 import * as React from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import PickableList from '~ui/List/PickableList'
@@ -47,8 +47,6 @@ import ModalConfirmRevokement from './ModalConfirmRevokement/ModalConfirmRevokem
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation'
 import AssignDecisionMakerToProposalsMutation from '~/mutations/AssignDecisionMakerToProposalsMutation'
 import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToProposalsMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import { PROPOSAL_STATUS, TYPE_ROLE } from '~/constants/AnalyseConstants'
 import ProjectAdminAnalysisNoProposals from './ProjectAdminAnalysisNoProposals'
 import ProjectAdminAnalysisShortcut from './ProjectAdminAnalysisShortcut'
@@ -75,6 +73,8 @@ import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 import { clearToasts, toast } from '~ds/Toast'
 import { PROJECT_ADMIN_PROPOSAL_LOAD_100 } from '~/components/Admin/Project/ProjectAdminProposals'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30
 type DataModalState = {
   analysts: Uuid[]
@@ -96,6 +96,7 @@ const assignAnalysts = async (
   analystsWithAnalyseBegin: ReadonlyArray<Analyst>,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean =
@@ -113,15 +114,8 @@ const assignAnalysts = async (
         },
       })
 
-      if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED') {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'analyst.maximum.assignment.reached',
-          },
-        })
-      }
+      if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED')
+        toast({ content: intl.formatMessage({ id: 'analyst.maximum.assignment.reached' }), variant: 'danger' })
     }
 
     if (analystsRemoved.length > 0) {
@@ -151,13 +145,7 @@ const assignAnalysts = async (
     dispatch({
       type: 'STOP_LOADING',
     })
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -170,6 +158,7 @@ const assignNobodyAnalysts = async (
   closeDropdown: () => void,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean = analystsWithAnalyseBegin.length > 0
@@ -196,13 +185,7 @@ const assignNobodyAnalysts = async (
       })
     }
   } catch (e) {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -216,6 +199,7 @@ const assignSupervisor = async (
   closeDropdown: () => void,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean = supervisorsWithAnalyseBegin.length > 0
@@ -247,13 +231,7 @@ const assignSupervisor = async (
     dispatch({
       type: 'STOP_LOADING',
     })
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -266,6 +244,7 @@ const assignNobodySupervisor = async (
   closeDropdown: () => void,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean = supervisorsWithAnalyseBegin.length > 0
@@ -297,13 +276,7 @@ const assignNobodySupervisor = async (
     dispatch({
       type: 'STOP_LOADING',
     })
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -317,6 +290,7 @@ const assignDecisionMaker = async (
   closeDropdown: () => void,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean = decisionMakersWithAnalyseBegin.length > 0
@@ -348,13 +322,7 @@ const assignDecisionMaker = async (
     dispatch({
       type: 'STOP_LOADING',
     })
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -367,6 +335,7 @@ const assignNobodyDecisionMaker = async (
   closeDropdown: () => void,
   setDataModal: (arg0: DataModalState) => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     const needConfirm: boolean = decisionMakersWithAnalyseBegin.length > 0
@@ -398,13 +367,7 @@ const assignNobodyDecisionMaker = async (
     dispatch({
       type: 'STOP_LOADING',
     })
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     // eslint-disable-next-line no-console
     console.error(e)
   }
@@ -591,6 +554,7 @@ const ProposalListHeader = ({
             analystsWithAnalyseBegin,
             setDataModal,
             dispatch,
+            intl,
           )
         }
       >
@@ -630,6 +594,7 @@ const ProposalListHeader = ({
                       closeDropdown,
                       setDataModal,
                       dispatch,
+                      intl,
                     ),
                 }}
                 title={intl.formatMessage({
@@ -680,6 +645,7 @@ const ProposalListHeader = ({
                     closeDropdown,
                     setDataModal,
                     dispatch,
+                    intl,
                   )
                 }
                 noResultsMessage={intl.formatMessage({
@@ -698,6 +664,7 @@ const ProposalListHeader = ({
                       closeDropdown,
                       setDataModal,
                       dispatch,
+                      intl,
                     ),
                 }}
                 title={intl.formatMessage({
@@ -748,6 +715,7 @@ const ProposalListHeader = ({
                     closeDropdown,
                     setDataModal,
                     dispatch,
+                    intl,
                   )
                 }
                 noResultsMessage={intl.formatMessage({
@@ -766,6 +734,7 @@ const ProposalListHeader = ({
                       closeDropdown,
                       setDataModal,
                       dispatch,
+                      intl,
                     ),
                 }}
                 title={intl.formatMessage({

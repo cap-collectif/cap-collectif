@@ -122,7 +122,7 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <Cookie analyticsJs={analyticsJs} adJs={adJs} ref={cookie} />
+          <Cookie analyticsJs={analyticsJs} adJs={adJs} ref={cookie} intl={intl} />
         </Modal.Body>
         <Modal.Footer spacing={2}>
           <CloseButton buttonId="cookies-cancel" onClose={onClose} />

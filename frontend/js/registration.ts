@@ -9,7 +9,6 @@ import MetricsApp from './startup/MetricsApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
 import ProposalVoteBasketWidgetApp from './startup/ProposalVoteBasketWidgetApp';
-import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
 import MetaStepNavigationApp from './startup/MetaStepNavigationApp';
 import UserProposalsApp from './startup/UserProposalsApp';
@@ -114,7 +113,6 @@ ReactOnRails.register({
     OpinionPageApp,
     CommentSectionApp,
     ProposalVoteBasketWidgetApp,
-    AlertBoxApp,
     ConsultationPageApp,
     ConsultationListPageApp,
     UserProposalsApp,

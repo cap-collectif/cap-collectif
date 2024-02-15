@@ -8,8 +8,6 @@ import { injectIntl, FormattedMessage, FormattedHTMLMessage } from 'react-intl'
 import renderComponent from '../../../Form/Field'
 import type { Dispatch } from '../../../../types'
 import UserListField from '../../Field/UserListField'
-import AppDispatcher from '../../../../dispatchers/AppDispatcher'
-import { UPDATE_ALERT } from '../../../../constants/AlertConstants'
 import ProjectTypeListField from '../../Field/ProjectTypeListField'
 import CreateProjectMutation from '../../../../mutations/CreateProjectMutation'
 import UpdateProjectMutation from '../../../../mutations/UpdateProjectMutation'
@@ -18,6 +16,7 @@ import '~relay/ProjectAdminFormDeprecated_project.graphql'
 import AlphaProjectModal from './AlphaProjectModal'
 import { ProjectBoxContainer, BoxDeprecated } from '../Form/ProjectAdminForm.style'
 import { Label } from '~/components/Ui/Labels/Label'
+import { toast } from '~ds/Toast'
 
 const formName = 'projectAdminFormDeprecated'
 type Props = ReduxFormFormProps & {
@@ -53,13 +52,7 @@ const onSubmit = ({ title, authors, projectType }: FormValues, dispatch: Dispatc
       },
     }).then(data => {
       if (data.updateProject && data.updateProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            bsStyle: 'success',
-            content: 'all.data.saved',
-          },
-        })
+        toast({ content: props.intl.formatMessage({ id: 'all.data.saved' }), variant: 'success' })
       }
     })
   }
@@ -75,13 +68,7 @@ const onSubmit = ({ title, authors, projectType }: FormValues, dispatch: Dispatc
   ).then(data => {
     if (data.createProject && data.createProject.project) {
       window.location.href = data.createProject.project.adminAlphaUrl
-      AppDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content: 'all.data.saved',
-        },
-      })
+      toast({ content: props.intl.formatMessage({ id: 'all.data.saved' }), variant: 'success' })
     }
   })
 }

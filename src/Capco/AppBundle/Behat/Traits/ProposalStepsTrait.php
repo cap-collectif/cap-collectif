@@ -643,7 +643,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCommentForm()
     {
         $this->navigationContext->getPage('proposal page')->submitCommentForm();
-        $this->waitAndThrowOnFailure(5000, "$('#current-alert').length > 0");
+        $this->waitAndThrowOnFailure(5000, "$('.toasts-container--top div').length > 0");
     }
 
     /**

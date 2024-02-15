@@ -2,7 +2,7 @@ import { $PropertyType, $Diff } from 'utility-types'
 import * as React from 'react'
 import { createPaginationContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay'
 import { connect } from 'react-redux'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import type { GlobalState, Uuid } from '~/types'
 import type { User } from '~/redux/modules/user'
 import type { AnalysisDashboardHeader_project } from '~relay/AnalysisDashboardHeader_project.graphql'
@@ -42,8 +42,6 @@ import {
 } from '~ui/Analysis/common.style'
 import UserSearchDropdownChoice from '~/components/Admin/Project/UserSearchDropdownChoice'
 import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToProposalsMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToProposalsMutation'
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation'
 import environment from '~/createRelayEnvironment'
@@ -55,6 +53,9 @@ import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFil
 import type { Analyst, Supervisor } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.utils'
 import AnalysisFilterTheme from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme'
 import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
 type Props = {
   readonly project: AnalysisDashboardHeader_project
   readonly themes: AnalysisDashboardHeader_themes
@@ -84,6 +85,7 @@ const assignAnalysts = async (
   selectedProposalIds: ReadonlyArray<Uuid>,
   analystWithAnalyseBegin: ReadonlyArray<Analyst>,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     dispatch({
@@ -99,13 +101,7 @@ const assignAnalysts = async (
       })
 
       if (response.assignAnalystsToProposals?.errorCode === 'MAX_ANALYSTS_REACHED') {
-        FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'analyst.maximum.assignment.reached',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'analyst.maximum.assignment.reached' }), variant: 'danger' })
       }
     }
 
@@ -122,13 +118,7 @@ const assignAnalysts = async (
       type: 'STOP_LOADING',
     })
   } catch (e) {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     dispatch({
       type: 'STOP_LOADING',
     })
@@ -144,6 +134,7 @@ const assignSupervisor = async (
   selectedProposalIds: ReadonlyArray<Uuid>,
   closeDropdown: () => void,
   dispatch: (arg0: any) => void,
+  intl: IntlShape,
 ) => {
   try {
     closeDropdown()
@@ -160,13 +151,7 @@ const assignSupervisor = async (
       type: 'STOP_LOADING',
     })
   } catch (e) {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'global.error.server.form',
-      },
-    })
+    mutationErrorToast(intl)
     dispatch({
       type: 'STOP_LOADING',
     })
@@ -335,7 +320,7 @@ const AnalysisDashboardHeader = ({
           align="right"
           key="action-analyst"
           onClose={() =>
-            assignAnalysts(analysts.added, analysts.removed, selectedRows, analystsWithAnalyseBegin, dispatch)
+            assignAnalysts(analysts.added, analysts.removed, selectedRows, analystsWithAnalyseBegin, dispatch, intl)
           }
         >
           {({ closeDropdown }) => (
@@ -383,13 +368,7 @@ const AnalysisDashboardHeader = ({
                           type: 'STOP_LOADING',
                         })
                       } catch (e) {
-                        FluxDispatcher.dispatch({
-                          actionType: UPDATE_ALERT,
-                          alert: {
-                            type: TYPE_ALERT.ERROR,
-                            content: 'global.error.server.form',
-                          },
-                        })
+                        mutationErrorToast(intl)
                         // eslint-disable-next-line no-console
                         console.error(e)
                       }
@@ -450,6 +429,7 @@ const AnalysisDashboardHeader = ({
                       selectedRows,
                       closeDropdown,
                       dispatch,
+                      intl,
                     )
                   }
                   noResultsMessage={intl.formatMessage({

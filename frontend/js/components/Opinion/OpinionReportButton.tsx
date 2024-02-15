@@ -4,43 +4,40 @@ import { connect } from 'react-redux'
 import { submitReport } from '~/redux/modules/report'
 import ReportBox from '../Report/ReportBox'
 import type { OpinionReportButton_opinion } from '~relay/OpinionReportButton_opinion.graphql'
+import { useIntl } from 'react-intl'
 
 type Props = {
   dispatch: (...args: Array<any>) => any
   opinion: OpinionReportButton_opinion
 }
 
-class OpinionReportButton extends React.Component<Props> {
-  handleReport = (data: Record<string, any>) => {
-    const { opinion, dispatch } = this.props
+const OpinionReportButton = ({ opinion, dispatch }: Props) => {
+  const intl = useIntl()
 
+  const handleReport = (data: Record<string, any>) => {
     if (opinion.id) {
-      return submitReport(opinion.id, data, dispatch, 'alert.success.report.proposal')
+      return submitReport(opinion.id, data, dispatch, 'alert.success.report.proposal', intl)
     }
   }
 
-  render() {
-    const { opinion } = this.props
-
-    if (!opinion || !opinion.author || !opinion.id) {
-      return null
-    }
-
-    return (
-      <ReportBox
-        id={`opinion-${opinion.id}`}
-        reported={opinion.viewerHasReport || false}
-        onReport={this.handleReport}
-        author={{
-          uniqueId: opinion.author.slug,
-        }}
-        buttonClassName="btn--default opinion__action--report"
-        buttonStyle={{
-          marginRight: 5,
-        }}
-      />
-    )
+  if (!opinion || !opinion.author || !opinion.id) {
+    return null
   }
+
+  return (
+    <ReportBox
+      id={`opinion-${opinion.id}`}
+      reported={opinion.viewerHasReport || false}
+      onReport={handleReport}
+      author={{
+        uniqueId: opinion.author.slug,
+      }}
+      buttonClassName="btn--default opinion__action--report"
+      buttonStyle={{
+        marginRight: 5,
+      }}
+    />
+  )
 }
 
 // @ts-ignore

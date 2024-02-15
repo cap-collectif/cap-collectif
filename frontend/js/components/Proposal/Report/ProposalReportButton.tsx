@@ -4,31 +4,30 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import ReportBox from '../../Report/ReportBox'
 import { submitReport } from '~/redux/modules/report'
 import type { ProposalReportButton_proposal } from '~relay/ProposalReportButton_proposal.graphql'
+import { useIntl } from 'react-intl'
 
 type Props = {
   proposal: ProposalReportButton_proposal
   dispatch: (...args: Array<any>) => any
   disabled?: boolean
 }
-export class ProposalReportButton extends React.Component<Props> {
-  handleReport = (data: Record<string, any>) => {
-    const { proposal, dispatch } = this.props
-    return submitReport(proposal.id, data, dispatch, 'alert.success.report.proposal')
+export const ProposalReportButton = ({ proposal, disabled, dispatch }: Props) => {
+  const intl = useIntl()
+
+  const handleReport = (data: Record<string, any>) => {
+    return submitReport(proposal.id, data, dispatch, 'alert.success.report.proposal', intl)
   }
 
-  render() {
-    const { proposal, disabled } = this.props
-    return (
-      <ReportBox
-        id={`proposal-${proposal?.id || 'placeholder'}`}
-        disabled={disabled}
-        reported={proposal?.viewerHasReport || false}
-        onReport={this.handleReport}
-        author={proposal?.author}
-        buttonClassName="proposal__btn--report"
-      />
-    )
-  }
+  return (
+    <ReportBox
+      id={`proposal-${proposal?.id || 'placeholder'}`}
+      disabled={disabled}
+      reported={proposal?.viewerHasReport || false}
+      onReport={handleReport}
+      author={proposal?.author}
+      buttonClassName="proposal__btn--report"
+    />
+  )
 }
 // @ts-ignore
 const container = connect<any, any>()(ProposalReportButton)

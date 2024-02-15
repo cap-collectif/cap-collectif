@@ -43,7 +43,7 @@ Scenario: Logged in admin wants to update a contact in /contact
   And I click on button "[id='UpdateContact-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x']"
   When I update the contact form
   And I press "UpdateContactAdminForm-Q29udGFjdEZvcm06Y29udGFjdEZvcm0x-submit-create-contact"
-  And I wait "#global-alert-box .alert-success" to appear on current page
+  And I wait ".toasts-container--top div" to appear on current page
 
 @database
 Scenario: Logged in admin wants to add a contact in /contact

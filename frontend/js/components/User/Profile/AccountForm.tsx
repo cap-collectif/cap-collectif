@@ -458,7 +458,7 @@ export const AccountForm = ({
                     />
                   </p>
                   <p className="small excerpt col-sm-6 col-sm-offset-3">
-                    <a href="#resend" onClick={() => resendConfirmation()}>
+                    <a href="#resend" onClick={() => resendConfirmation(intl)}>
                       <FormattedMessage id="user.confirm.resend" />
                     </a>
                     {' · '}

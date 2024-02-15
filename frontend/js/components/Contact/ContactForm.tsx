@@ -9,9 +9,9 @@ import SubmitButton from '../Form/SubmitButton'
 import WYSIWYGRender from '../Form/WYSIWYGRender'
 import { isEmail } from '../../services/Validator'
 import type { Dispatch, GlobalState } from '../../types'
-import AppDispatcher from '../../dispatchers/AppDispatcher'
 import SendContactFormMutation from '../../mutations/SendContactFormMutation'
 import type { ContactForm_contactForm } from '~relay/ContactForm_contactForm.graphql'
+import { toast } from '~ds/Toast'
 
 type OwnProps = ReduxFormFormProps & {
   contactForm: ContactForm_contactForm
@@ -36,13 +36,8 @@ const onSubmit = (values: any, dispatch: any, props: Props) =>
     input: { ...values, idContactForm: props.contactForm.id },
   })
     .then(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'contact.email.sent_success',
-        },
-      })
+      toast({ content: props.intl.formatMessage({ id: 'contact.email.sent_success' }), variant: 'success' })
+
       props.reset()
     })
     .catch(() => {
@@ -170,12 +165,13 @@ const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
   },
 })
 
-const container = injectIntl(ContactForm)
-const form = connect<any, any>(mapStateToProps)(
-  reduxForm({
-    validate,
-    onSubmit,
-  })(container),
+const form = injectIntl(
+  connect<any, any>(mapStateToProps)(
+    reduxForm({
+      validate,
+      onSubmit,
+    })(ContactForm),
+  ),
 )
 export default createFragmentContainer(form, {
   contactForm: graphql`

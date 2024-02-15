@@ -145,61 +145,6 @@ export function ProjectExternalAdminForm(props: Props) {
   )
 }
 
-/*
-const onSubmit = (
-  {
-    externalLink,
-    externalContributionsCount,
-    externalParticipantsCount,
-    externalVotesCount,
-    isExternal,
-  }: FormValues,
-  dispatch: Dispatch,
-  props: Props,
-) => {
-  const { project, hostUrl } = props;
-
-  const input = {
-    isExternal,
-    externalLink,
-    externalContributionsCount,
-    externalParticipantsCount,
-    externalVotesCount,
-  };
-
-  if (!externalLink || externalLink.length === 0) {
-    throw new SubmissionError({ externalLink: 'fill-field' });
-  } else if (externalLink.toLowerCase().indexOf(hostUrl) !== -1) {
-    throw new SubmissionError({ externalLink: 'available-external-link-required' });
-  }
-  if (project) {
-    return UpdateProjectMutation.commit({
-      input: {
-        id: project.id,
-        ...input,
-      },
-    }).then(data => {
-      if (data.updateProject && data.updateProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
-        });
-      }
-    });
-  }
-  return null;
-};
-
-
-
-const form = injectIntl(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-  })(ProjectExternalAdminForm),
-);
-*/
 const mapStateToProps = (state, { project, formName }: Props) => ({
   initialValues: {
     isExternal: project ? project.isExternal : false,

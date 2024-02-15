@@ -4,9 +4,10 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
-import FluxDispatcher from '../../../dispatchers/AppDispatcher'
 import DeleteSourceMutation from '../../../mutations/DeleteSourceMutation'
 import type { OpinionSourceDeleteModal_source } from '~relay/OpinionSourceDeleteModal_source.graphql'
+import { toast } from '~ds/Toast'
+
 type Props = {
   readonly show: boolean
   readonly source: OpinionSourceDeleteModal_source
@@ -30,13 +31,7 @@ const OpinionSourceDeleteModal = ({ onClose, source, show }: Props) => {
     )
       .then(res => {
         if (res.deleteSource && res.deleteSource.deletedSourceId) {
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'success',
-              content: 'alert.success.delete.source',
-            },
-          })
+          toast({ content: intl.formatMessage({ id: 'alert.success.delete.source' }), variant: 'success' })
           onClose()
         }
 

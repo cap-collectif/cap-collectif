@@ -1,7 +1,7 @@
 import * as React from 'react'
 import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import PickableList from '~ui/List/PickableList'
 import { usePickableList } from '~ui/List/PickableList/usePickableList'
@@ -17,13 +17,13 @@ import CampaignItem from '~/components/Admin/Emailing/EmailingCampaign/CampaignI
 import EmailingLoader from '../../EmailingLoader/EmailingLoader'
 import ModalConfirmDelete from '~/components/Admin/Emailing/EmailingCampaign/ModalConfirmDelete/ModalConfirmDelete'
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import NoCampaign from '~/components/Admin/Emailing/EmailingCampaign/NoCampaign/NoCampaign'
 import ModalOnboarding from '~/components/Admin/Emailing/ModalOnboarding/ModalOnboarding'
 import { CAMPAIGN_PAGINATION } from '../utils'
 import type { DashboardCampaign_emailingCampaignOwner } from '~relay/DashboardCampaign_emailingCampaignOwner.graphql'
 import type { DashboardCampaign_viewer } from '~relay/DashboardCampaign_viewer.graphql'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
 type Props = {
   relay: RelayPaginationProp
   emailingCampaignOwner: DashboardCampaign_emailingCampaignOwner
@@ -35,35 +35,21 @@ type HeaderProps = {
   showModalDelete: (arg0: boolean) => void
 }
 
-const createCampaign = (organizationId: string | null | undefined) => {
+const createCampaign = (organizationId: string | null | undefined, intl: IntlShape) => {
   return CreateEmailingCampaignMutation.commit({
     input: {
       owner: organizationId,
     },
   })
     .then(response => {
-      if (response.createEmailingCampaign?.error) {
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
-      }
+      if (response.createEmailingCampaign?.error) return mutationErrorToast(intl)
 
       if (response.createEmailingCampaign?.emailingCampaign?.id) {
         window.location.replace(`/admin/mailingCampaign/edit/${response.createEmailingCampaign.emailingCampaign.id}`)
       }
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 
@@ -243,7 +229,7 @@ export const DashboardCampaign = ({ viewer, relay, emailingCampaignOwner }: Prop
           <S.ButtonCreate
             type="button"
             onClick={() => {
-              createCampaign(organization?.id)
+              createCampaign(organization?.id, intl)
             }}
           >
             <FormattedMessage id="create-mail" />

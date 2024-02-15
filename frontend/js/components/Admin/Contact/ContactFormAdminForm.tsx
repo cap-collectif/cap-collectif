@@ -11,10 +11,11 @@ import renderInput from '~/components/Form/Field'
 import AlertForm from '~/components/Alert/AlertForm'
 import SubmitButton from '~/components/Form/SubmitButton'
 import { isEmail } from '~/services/Validator'
-import AppDispatcher from '~/dispatchers/AppDispatcher'
 import UpdateContactFormMutation from '~/mutations/UpdateContactFormMutation'
 import AddContactFormMutation from '~/mutations/AddContactFormMutation'
 import { getTranslation, handleTranslationChange } from '~/services/Translation'
+import { toast } from '~ds/Toast'
+
 type FormValues = {
   readonly body: string | null | undefined
   readonly email: string | null | undefined
@@ -49,7 +50,7 @@ type AfterConnectProps = BeforeConnectProps & StateProps
 type Props = AfterConnectProps & ReduxFormFormProps
 
 const onSubmit = (values: ValidFormValues, dispatch: Dispatch, props: Props) => {
-  const { contactForm, onClose } = props
+  const { contactForm, onClose, intl } = props
   const translationsData = handleTranslationChange(
     contactForm ? contactForm.translations : [],
     {
@@ -75,13 +76,7 @@ const onSubmit = (values: ValidFormValues, dispatch: Dispatch, props: Props) => 
       },
     })
       .then(() => {
-        AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'your-form-has-been-updated',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'your-form-has-been-updated' }), variant: 'success' })
 
         if (onClose) {
           onClose()
@@ -98,13 +93,7 @@ const onSubmit = (values: ValidFormValues, dispatch: Dispatch, props: Props) => 
     input: { ...data },
   })
     .then(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'your-form-has-been-added',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'your-form-has-been-added' }), variant: 'success' })
 
       if (onClose) {
         onClose()

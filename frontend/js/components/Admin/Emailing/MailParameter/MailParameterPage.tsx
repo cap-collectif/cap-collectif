@@ -15,8 +15,6 @@ import SendingPage from '~/components/Admin/Emailing/MailParameter/Sending'
 import type { Dispatch, GlobalState } from '~/types'
 import ModalCancelSending from '~/components/Admin/Emailing/MailParameter/ModalCancelSending/ModalCancelSending'
 import UpdateEmailingCampaignMutation from '~/mutations/UpdateEmailingCampaignMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import type { MailParameterPage_emailingCampaign } from '~relay/MailParameterPage_emailingCampaign.graphql'
 import '~relay/MailParameterPage_emailingCampaign.graphql'
 import type { MailParameterPage_query } from '~relay/MailParameterPage_query.graphql'
@@ -27,6 +25,9 @@ import stripHtml from '~/utils/stripHtml'
 import { DATE_ISO8601_FORMAT } from '~/shared/date'
 import { fromGlobalId } from '~/utils/fromGlobalId'
 import type { MailParameterPage_viewer } from '~relay/MailParameterPage_viewer.graphql'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
 const REGISTER_FIELDS = [
   'title',
   'senderEmail',
@@ -58,7 +59,7 @@ type Props = ReduxFormFormProps & {
 
 const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props: Props) => {
   const { title, senderEmail, mailingList, mailSubject, mailContent, sendingSchedule, plannedDate } = values
-  const { emailingCampaign, pristine } = props
+  const { emailingCampaign, pristine, intl } = props
   const { type } = fromGlobalId(mailingList)
 
   if (pristine) {
@@ -85,77 +86,32 @@ const handleChangeEmailingCampaign = (values: Values, dispatch: Dispatch, props:
   })
     .then(response => {
       if (response.updateEmailingCampaign?.error) {
-        if (response.updateEmailingCampaign.error === 'TOO_LATE') {
-          return FluxDispatcher.dispatch({
-            actionType: UPDATE_ALERT,
-            alert: {
-              type: TYPE_ALERT.ERROR,
-              content: 'date-sendAt-before-now',
-            },
-          })
-        }
+        if (response.updateEmailingCampaign.error === 'TOO_LATE')
+          return toast({ content: intl.formatMessage({ id: 'date-sendAt-before-now' }), variant: 'danger' })
 
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
+        return mutationErrorToast(intl)
       }
-
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'label.draft.saved',
-        },
-      })
+      return toast({ content: intl.formatMessage({ id: 'label.draft.saved' }), variant: 'success' })
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
+  const { intl } = props
+
   return SendEmailingCampaignMutation.commit({
     input: {
       id: props.emailingCampaign.id,
     },
   })
     .then(response => {
-      if (response.sendEmailingCampaign?.error) {
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
-      }
-
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'contact.email.sent_success',
-        },
-      })
+      if (response.sendEmailingCampaign?.error) return mutationErrorToast(intl)
+      return toast({ content: intl.formatMessage({ id: 'contact.email.sent_success' }), variant: 'success' })
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 

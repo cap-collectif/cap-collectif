@@ -32,9 +32,6 @@
 {% endblock %}
 
 {% block form %}
-    <div style="position: fixed; width: 60%; left: 30%; z-index: 1030; margin-top:10px;">
-        {{ react_render_component('AlertBoxApp') }}
-    </div>
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{
     react_render_component('ContactAdminPageApp', {

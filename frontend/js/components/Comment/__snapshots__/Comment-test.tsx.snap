@@ -478,7 +478,7 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
         }
         useBodyColor={true}
       />
-      <Relay(Connect(ReduxForm))
+      <Relay(injectIntl(Connect(ReduxForm)))
         answerOf="proposalComment1"
         commentable={
           Object {
@@ -657,7 +657,7 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
         }
         useBodyColor={true}
       />
-      <Relay(Connect(ReduxForm))
+      <Relay(injectIntl(Connect(ReduxForm)))
         answerOf="proposalComment1"
         commentable={
           Object {
@@ -1013,7 +1013,7 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
         }
         useBodyColor={true}
       />
-      <Relay(Connect(ReduxForm))
+      <Relay(injectIntl(Connect(ReduxForm)))
         answerOf="comment2"
         commentable={
           Object {

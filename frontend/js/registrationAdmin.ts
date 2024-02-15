@@ -21,7 +21,6 @@ import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalP
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
 import MediaAdminPageApp from '~/startup/MediaAdminPageApp';
 import appStore from '~/stores/AppStore';
-import AlertBoxApp from '~/startup/AlertBoxApp';
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp';
 import EventFormPageApp from './startup/EventFormPageApp';
 import LanguageButtonApp from '~/startup/LanguageButtonApp';
@@ -41,7 +40,6 @@ ReactOnRails.registerStore({
 });
 ReactOnRails.register({
     ToastsContainerApp,
-    AlertBoxApp,
     SiteFaviconAdminPageApp,
     AdminRightNavbarApp,
     ProjectCreateButtonApp,

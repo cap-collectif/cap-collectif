@@ -57,7 +57,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
         <div
           className="opinion opinion--add-argument block block--bordered"
         >
-          <Relay(Connect(ReduxForm))
+          <Relay(injectIntl(Connect(ReduxForm)))
             argumentable={
               Object {
                 " $fragmentRefs": null,
@@ -108,7 +108,7 @@ exports[`<ArgumentsBox /> should render correctly with a for/against commentSyst
         <div
           className="opinion opinion--add-argument block block--bordered"
         >
-          <Relay(Connect(ReduxForm))
+          <Relay(injectIntl(Connect(ReduxForm)))
             argumentable={
               Object {
                 " $fragmentRefs": null,
@@ -159,7 +159,7 @@ exports[`<ArgumentsBox /> should render correctly with a simple commentSystem 1`
   <div
     className="opinion opinion--add-argument block block--bordered"
   >
-    <Relay(Connect(ReduxForm))
+    <Relay(injectIntl(Connect(ReduxForm)))
       argumentable={
         Object {
           " $fragmentRefs": null,

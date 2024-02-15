@@ -1,14 +1,14 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, IntlShape, injectIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import component from '../../Form/Field'
-import AppDispatcher from '../../../dispatchers/AppDispatcher'
 import ChangeArgumentMutation from '../../../mutations/ChangeArgumentMutation'
 import { closeArgumentEditModal } from '../../../redux/modules/opinion'
 import type { State } from '../../../types'
 import type { ArgumentForm_argument } from '~relay/ArgumentForm_argument.graphql'
+import { toast } from '~ds/Toast'
 
 export const formName = 'argument-edit-form'
 type FormValues = {
@@ -21,6 +21,7 @@ type FormValidValues = {
 }
 type Props = {
   argument: ArgumentForm_argument
+  intl: IntlShape
 }
 
 const validate = ({ body, confirm }: FormValues) => {
@@ -37,7 +38,7 @@ const validate = ({ body, confirm }: FormValues) => {
   return errors
 }
 
-const onSubmit = (values: FormValidValues, dispatch, { argument }: Props) => {
+const onSubmit = (values: FormValidValues, dispatch, { argument, intl }: Props) => {
   const input = {
     argumentId: argument.id,
     body: values.body,
@@ -46,48 +47,31 @@ const onSubmit = (values: FormValidValues, dispatch, { argument }: Props) => {
     input,
   })
     .then(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'alert.success.update.argument',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'alert.success.update.argument' }), variant: 'success' })
       dispatch(closeArgumentEditModal())
     })
     .catch(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'danger',
-          content: 'alert.danger.update.argument',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'alert.danger.update.argument' }), variant: 'danger' })
     })
 }
 
-class ArgumentForm extends React.Component<Props> {
-  render() {
-    return (
-      // eslint-disable-next-line react/no-string-refs
-      <form id="argument-form" ref="form">
-        <div className="alert alert-warning edit-confirm-alert">
-          <Field type="checkbox" wrapperClassName="checkbox" component={component} id="argument-confirm" name="confirm">
-            <FormattedMessage id="argument.edit.confirm" />
-          </Field>
-        </div>
-        <Field
-          id="argument-body"
-          component={component}
-          type="textarea"
-          rows={2}
-          name="body"
-          label={<FormattedMessage id="global.contenu" />}
-        />
-      </form>
-    )
-  }
-}
+const ArgumentForm = () => (
+  <form id="argument-form">
+    <div className="alert alert-warning edit-confirm-alert">
+      <Field type="checkbox" wrapperClassName="checkbox" component={component} id="argument-confirm" name="confirm">
+        <FormattedMessage id="argument.edit.confirm" />
+      </Field>
+    </div>
+    <Field
+      id="argument-body"
+      component={component}
+      type="textarea"
+      rows={2}
+      name="body"
+      label={<FormattedMessage id="global.contenu" />}
+    />
+  </form>
+)
 
 const mapStateToProps = (state: State, props: Props) => ({
   initialValues: {
@@ -97,12 +81,14 @@ const mapStateToProps = (state: State, props: Props) => ({
 })
 
 const connector = connect<any, any>(mapStateToProps)
-const container = connector(
-  reduxForm({
-    validate,
-    onSubmit,
-    form: formName,
-  })(ArgumentForm),
+const container = injectIntl(
+  connector(
+    reduxForm({
+      validate,
+      onSubmit,
+      form: formName,
+    })(ArgumentForm),
+  ),
 )
 export default createFragmentContainer(container, {
   argument: graphql`

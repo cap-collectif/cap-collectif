@@ -1,6 +1,4 @@
 import { change, SubmissionError } from 'redux-form'
-import FluxDispatcher from '../../dispatchers/AppDispatcher'
-import { UPDATE_ALERT } from '~/constants/AlertConstants'
 import type { Exact, Dispatch, Action } from '~/types'
 import CookieMonster from '../../CookieMonster'
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql'
@@ -12,6 +10,8 @@ import ResendEmailConfirmationMutation from '~/mutations/ResendEmailConfirmation
 import RegisterEmailDomainsMutation from '~/mutations/RegisterEmailDomainsMutation'
 import type { RegisterEmailDomainsInput } from '~relay/RegisterEmailDomainsMutation.graphql'
 import { userActions } from './user_actions'
+import { IntlShape } from 'react-intl'
+import { toast } from '~ds/Toast'
 export const accountForm = 'accountForm'
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.'
 const MISSING_CAPTCHA = 'You must provide a captcha to login.'
@@ -46,6 +46,7 @@ export type User = {
 type Props = {
   shieldEnabled: boolean
   query: RegistrationForm_query
+  intl: IntlShape
 }
 export type State = {
   readonly showLoginModal: boolean
@@ -304,7 +305,11 @@ export const login = (
       }
     })
 }
-export const register = async (values: Record<string, any>, dispatch: Dispatch, { shieldEnabled, query }: Props) => {
+export const register = async (
+  values: Record<string, any>,
+  dispatch: Dispatch,
+  { shieldEnabled, query, intl }: Props,
+) => {
   const form = {
     ...values,
     questions: undefined,
@@ -341,24 +346,18 @@ export const register = async (values: Record<string, any>, dispatch: Dispatch, 
   }
 
   if (shieldEnabled && !form.invitationToken) {
-    FluxDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: {
-        bsStyle: 'success',
-        content: 'please-check-your-inbox',
-        values: {
+    toast({
+      content: intl.formatMessage(
+        { id: 'please-check-your-inbox' },
+        {
           emailAddress: values.email,
         },
-      },
+      ),
+      variant: 'success',
     })
   } else {
-    FluxDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: {
-        bsStyle: 'success',
-        content: 'alert.success.add.user',
-      },
-    })
+    toast({ content: intl.formatMessage({ id: 'alert.success.add.user' }), variant: 'success' })
+
     const adCookie = !(
       typeof CookieMonster.adCookieConsentValue() === 'undefined' || CookieMonster.adCookieConsentValue() === false
     )
@@ -389,21 +388,15 @@ export const cancelEmailChange = async (dispatch: Dispatch, previousEmail: strin
   dispatch(change(accountForm, 'email', previousEmail))
 }
 
-const sendEmail = () => {
-  FluxDispatcher.dispatch({
-    actionType: UPDATE_ALERT,
-    alert: {
-      bsStyle: 'success',
-      content: 'user.confirm.sent',
-    },
-  })
+const sendEmail = (intl: IntlShape) => {
+  toast({ content: intl.formatMessage({ id: 'user.confirm.sent' }), variant: 'success' })
 }
 
-export const resendConfirmation = async (): Promise<any> => {
+export const resendConfirmation = async (intl: IntlShape): Promise<any> => {
   const { resendEmailConfirmation } = await ResendEmailConfirmationMutation.commit()
 
   if (!resendEmailConfirmation?.errorCode) {
-    sendEmail()
+    sendEmail(intl)
   }
 }
 export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({

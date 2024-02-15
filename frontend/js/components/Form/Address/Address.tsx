@@ -1,15 +1,14 @@
 import * as React from 'react'
 import PlacesAutocomplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import IconDS, { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon'
 import colors from '~/utils/colors'
 import config from '~/config'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import { SearchContainer, ButtonLocation, ResultContainer, LoaderContainer } from './Address.style'
 import type { AddressProps, GoogleAddressAPI, AddressComplete, AddressWithoutPosition } from './Address.type'
+import { toast } from '~ds/Toast'
 
 type Props = AddressProps & {
   id: string
@@ -30,30 +29,22 @@ const Address = ({
   allowReset = true,
   showSearchBar = true,
 }: Props) => {
-  const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true);
-  const intl = useIntl();
-  const hasReset = allowReset && !!value;
-
+  const [hasLocationAuthorize, setHasLocationAuthorize] = React.useState<boolean>(true)
+  const intl = useIntl()
+  const hasReset = allowReset && !!value
 
   const dispatchLocationWarning = () => {
-    FluxDispatcher.dispatch({
-      actionType: UPDATE_ALERT,
-      alert: {
-        type: TYPE_ALERT.ERROR,
-        content: 'warning.gps.off',
-        extraContent: (
-          <a
-            href={intl.formatMessage({
-              id: 'geolocation.help.link',
-            })}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="ml-5"
-          >
-            <FormattedMessage id="learn.more" />
-          </a>
-        ),
-      },
+    toast({
+      content: `${intl.formatMessage({ id: 'warning.gps.off' })}<br/> <a
+        href="${intl.formatMessage({
+          id: 'geolocation.help.link',
+        })}"
+        rel="noopener noreferrer"
+        target="_blank"
+      >${intl.formatMessage({
+        id: 'learn.more',
+      })}</a>`,
+      variant: 'danger',
     })
   }
 

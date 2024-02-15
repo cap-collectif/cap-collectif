@@ -68,7 +68,7 @@ export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Pr
             id="confirm-proposal-delete"
             isSubmitting={isDeleting}
             onSubmit={() => {
-              deleteProposal(proposal.id, dispatch)
+              deleteProposal(proposal.id, dispatch, intl)
             }}
             label="global.removeDefinitively"
             bsStyle="danger"

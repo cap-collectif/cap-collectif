@@ -10,11 +10,11 @@ import SubmitButton from '~/components/Form/SubmitButton'
 import component from '~/components/Form/Field'
 import { isEmail } from '~/services/Validator'
 import TestEmailingCampaignMutation from '~/mutations/TestEmailingCampaignMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import type { ModalMailTest_emailingCampaign } from '~relay/ModalMailTest_emailingCampaign.graphql'
 import '~relay/ModalMailTest_emailingCampaign.graphql'
 import { ModalContainer } from '~/components/Admin/Emailing/MailParameter/common.style'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 
 type Values = {
   mailAddressee: string
@@ -28,7 +28,7 @@ type Props = ReduxFormFormProps & {
 const formName = 'form-mail-test'
 
 const onSubmit = ({ mailAddressee }: Values, dispatch: Dispatch, props: Props) => {
-  const { onClose, emailingCampaign } = props
+  const { onClose, emailingCampaign, intl } = props
   return TestEmailingCampaignMutation.commit({
     input: {
       id: emailingCampaign.id,
@@ -38,33 +38,12 @@ const onSubmit = ({ mailAddressee }: Values, dispatch: Dispatch, props: Props) =
     .then(response => {
       onClose()
 
-      if (response.testEmailingCampaign?.error) {
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
-      }
-
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'contact.email.sent_success',
-        },
-      })
+      if (response.testEmailingCampaign?.error) return mutationErrorToast(intl)
+      toast({ content: intl.formatMessage({ id: 'contact.email.sent_success' }), variant: 'success' })
     })
     .catch(() => {
       onClose()
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 

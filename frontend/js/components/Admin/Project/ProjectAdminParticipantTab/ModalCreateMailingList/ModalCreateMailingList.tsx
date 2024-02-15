@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { Field, reduxForm, formValueSelector, submit } from 'redux-form'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import { Modal } from 'react-bootstrap'
 import CloseButton from '~/components/Form/CloseButton'
 import SubmitButton from '~/components/Form/SubmitButton'
@@ -11,8 +11,6 @@ import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import type { Dispatch, GlobalState } from '~/types'
 import { Container, InfoContainer, ButtonSave } from './ModalCreateMailingList.style'
 import CreateMailingListMutation from '~/mutations/CreateMailingListMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import type { ModalCreateMailingList_project } from '~relay/ModalCreateMailingList_project.graphql'
 import CreateEmailingCampaignMutation from '~/mutations/CreateEmailingCampaignMutation'
 import colors from '~/styles/modules/colors'
@@ -22,6 +20,8 @@ import Link from '~ds/Link/Link'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Flex from '~ui/Primitives/Layout/Flex'
 import type { ModalCreateMailingList_viewer } from '~relay/ModalCreateMailingList_viewer.graphql'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 
 const formName = 'form-create-mailing-list'
 type Props = ReduxFormFormProps & {
@@ -38,35 +38,21 @@ type Values = {
   mailingListName: string
 }
 
-const createEmailingCampaign = (mailingListId: string) => {
+const createEmailingCampaign = (mailingListId: string, intl: IntlShape) => {
   return CreateEmailingCampaignMutation.commit({
     input: {
       mailingList: mailingListId,
     },
   })
     .then(response => {
-      if (response.createEmailingCampaign?.error) {
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
-      }
+      if (response.createEmailingCampaign?.error) return mutationErrorToast(intl)
 
       if (response.createEmailingCampaign?.emailingCampaign?.id) {
         window.location.replace(`/admin/mailingCampaign/edit/${response.createEmailingCampaign.emailingCampaign.id}`)
       }
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 
@@ -76,7 +62,8 @@ const createMailingList = (
   mailingListName: string,
   onClose: () => void,
   organizationId: string | null | undefined,
-  withRedirection?: boolean,
+  withRedirection: boolean,
+  intl: IntlShape,
 ) => {
   return CreateMailingListMutation.commit({
     input: {
@@ -89,52 +76,33 @@ const createMailingList = (
     .then(response => {
       onClose()
 
-      if (response.createMailingList?.error) {
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
-      }
+      if (response.createMailingList?.error) return mutationErrorToast(intl)
 
       if (withRedirection && response.createMailingList?.mailingList) {
-        createEmailingCampaign(response.createMailingList.mailingList.id)
+        createEmailingCampaign(response.createMailingList.mailingList.id, intl)
       }
-
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'success-create-mailing-list',
-          values: {
+      return toast({
+        content: `${intl.formatMessage(
+          { id: 'success-create-mailing-list' },
+          {
             name: response.createMailingList?.mailingList?.name,
           },
-          extraContent: (
-            <a href="/admin/mailingList/list">
-              <FormattedMessage id="action_show" />
-            </a>
-          ),
-        },
+        )}<br/><a href="/admin/mailingList/list">
+          ${intl.formatMessage({ id: 'action_show' })}
+        </a>`,
+        variant: 'success',
       })
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 
 const onSubmit = (values: Values, dispatch: Dispatch, props: Props) => {
-  const { project, onClose, members, viewer } = props
+  const { project, onClose, members, viewer, intl } = props
   const { mailingListName } = values
   const organization = viewer?.organizations?.[0]
-  createMailingList(project.id, members, mailingListName, onClose, organization?.id, true)
+  createMailingList(project.id, members, mailingListName, onClose, organization?.id, true, intl)
 }
 
 const ModalCreateMailingList = ({
@@ -233,7 +201,9 @@ const ModalCreateMailingList = ({
       <Modal.Footer>
         <ButtonSave
           type="button"
-          onClick={() => createMailingList(project.id, members, mailingListName, onClose, organization?.id)}
+          onClick={() =>
+            createMailingList(project.id, members, mailingListName, onClose, organization?.id, false, intl)
+          }
           disabled={pristine}
         >
           <FormattedMessage id="global.save" />

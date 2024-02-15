@@ -19,7 +19,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
         ]
       }
     >
-      <Relay(Connect(ReduxForm))
+      <Relay(injectIntl(Connect(ReduxForm)))
         contactForm={
           Object {
             " $fragmentRefs": null,
@@ -28,7 +28,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
         }
         key="0"
       />
-      <Relay(Connect(ReduxForm))
+      <Relay(injectIntl(Connect(ReduxForm)))
         contactForm={
           Object {
             " $fragmentRefs": null,
@@ -45,7 +45,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
 exports[`<ContactForm /> should render correctly with no contactForm 1`] = `""`;
 
 exports[`<ContactForm /> should render correctly with only one contactForm 1`] = `
-<Relay(Connect(ReduxForm))
+<Relay(injectIntl(Connect(ReduxForm)))
   contactForm={
     Object {
       " $fragmentRefs": null,

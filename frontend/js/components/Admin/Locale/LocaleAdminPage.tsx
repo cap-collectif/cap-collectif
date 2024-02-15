@@ -1,11 +1,9 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import AlertBoxApp from '~/startup/AlertBoxApp'
 import LocaleAdminContainer from './LocaleAdminContainer'
 
 const LocaleAdminPage = () => (
   <div className="box box-primary container-fluid">
-    <AlertBoxApp />
     <div className="box-header">
       <h3
         className="box-title font-weight-bold"

@@ -58,7 +58,7 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
         />
       </p>
     </div>
-    <Relay(ReduxForm)
+    <Relay(injectIntl(ReduxForm))
       consultation={
         Object {
           " $fragmentRefs": null,
@@ -159,7 +159,7 @@ exports[`<OpinionCreateModal /> renders correctly when requirements not meet 1`]
         />
       </p>
     </div>
-    <Relay(ReduxForm)
+    <Relay(injectIntl(ReduxForm))
       consultation={
         Object {
           " $fragmentRefs": null,

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl'
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl'
 import { Alert, Panel, Label } from 'react-bootstrap'
 import { reduxForm, Field, clearSubmitErrors, SubmissionError } from 'redux-form'
 import renderInput from '../../Form/Field'
@@ -12,7 +12,7 @@ import type { OpinionCreateForm_consultationStep } from '~relay/OpinionCreateFor
 import RequirementsFormLegacy from '../../Requirements/RequirementsFormLegacy'
 import type { OpinionCreateForm_consultation } from '~relay/OpinionCreateForm_consultation.graphql'
 import CreateOpinionMutation from '~/mutations/CreateOpinionMutation'
-import FluxDispatcher from '../../../dispatchers/AppDispatcher'
+import { toast } from '~ds/Toast'
 
 type RelayProps = {
   section: OpinionCreateForm_section
@@ -24,7 +24,7 @@ type Props = ReduxFormFormProps & RelayProps
 export const formName = 'opinion-create-form'
 
 const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
-  const { section, consultationStep } = props
+  const { section, consultationStep, intl } = props
   const appendices = section.appendixTypes
     ? section.appendixTypes
         .filter(Boolean)
@@ -49,13 +49,8 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, props: Props) => {
     const url = response?.createOpinion?.opinion?.url
 
     if (url) {
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'proposal-create',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'proposal-create' }), variant: 'success' })
+
       dispatch(closeOpinionCreateModal())
       setTimeout(() => {
         window.location.href = url
@@ -178,11 +173,13 @@ export class OpinionCreateForm extends React.Component<Props> {
     )
   }
 }
-const container = reduxForm({
-  form: formName,
-  onSubmit,
-  validate,
-})(OpinionCreateForm)
+const container = injectIntl(
+  reduxForm({
+    form: formName,
+    onSubmit,
+    validate,
+  })(OpinionCreateForm),
+)
 export default createFragmentContainer(container, {
   section: graphql`
     fragment OpinionCreateForm_section on Section {

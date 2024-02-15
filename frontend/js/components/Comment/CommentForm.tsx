@@ -13,9 +13,10 @@ import RegistrationButton from '../User/Registration/RegistrationButton'
 import LoginButton from '../User/Login/LoginButton'
 import { UserAvatarLegacy } from '../User/UserAvatarLegacy'
 import AddCommentMutation from '../../mutations/AddCommentMutation'
-import FluxDispatcher from '../../dispatchers/AppDispatcher'
 import type { Dispatch, GlobalState } from '../../types'
 import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql'
+import { toast } from '~ds/Toast'
+
 type RelayProps = {
   readonly commentable: CommentForm_commentable
 }
@@ -45,7 +46,7 @@ type FormValues = {
 }
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { commentable, user, reset, isModerationEnabled } = props
+  const { commentable, user, reset, isModerationEnabled, intl } = props
 
   if (user) {
     delete values.authorName
@@ -70,32 +71,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       reset()
 
       if (isAuthorAnonymous && isModerationEnabled) {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'confirm-email-address',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'confirm-email-address' }), variant: 'success' })
         return
       }
-
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'comment.submit_success',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'comment.submit_success' }), variant: 'success' })
     })
     .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'danger',
-          content: 'comment.submit_error',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'comment.submit_error' }), variant: 'danger' })
     })
 }
 
@@ -300,13 +282,14 @@ const mapStateToProps = (state: GlobalState, props: BeforeConnectProps) => {
   }
 }
 
-const container = injectIntl(CommentForm)
-// @ts-ignore
-const form = connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
-  reduxForm({
-    validate,
-    onSubmit,
-  })(container),
+const form = injectIntl(
+  // @ts-ignore
+  connect<AfterConnectProps, BeforeConnectProps, _, _, _, _>(mapStateToProps)(
+    reduxForm({
+      validate,
+      onSubmit,
+    })(CommentForm),
+  ),
 )
 export default createFragmentContainer(form, {
   commentable: graphql`

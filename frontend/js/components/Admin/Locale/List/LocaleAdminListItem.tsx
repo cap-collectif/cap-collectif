@@ -1,16 +1,16 @@
 import { Field } from 'redux-form'
 import React, { useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { ListGroupItem, Button, ButtonToolbar, Badge } from 'react-bootstrap'
 import config from '~/config'
 import Toggle from '~/components/Form/Toggle'
-import AppDispatcher from '~/dispatchers/AppDispatcher'
 import DeleteModal from '~/components/Modal/DeleteModal'
 import type { LocaleAdminListItem_locale } from '~relay/LocaleAdminListItem_locale.graphql'
 import UpdateLocaleStatusMutation from '~/mutations/UpdateLocaleStatusMutation'
+import { toast } from '~ds/Toast'
 
 type Props = {
   locale: LocaleAdminListItem_locale
@@ -28,7 +28,7 @@ const ContainerToggle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
   }
 `
 
-const onDelete = (locale: LocaleAdminListItem_locale) => {
+const onDelete = (locale: LocaleAdminListItem_locale, intl: IntlShape) => {
   UpdateLocaleStatusMutation.commit({
     input: {
       locales: [
@@ -39,15 +39,7 @@ const onDelete = (locale: LocaleAdminListItem_locale) => {
         },
       ],
     },
-  }).then(() =>
-    AppDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: {
-        bsStyle: 'success',
-        content: 'the-language-has-been-removed',
-      },
-    }),
-  )
+  }).then(() => toast({ content: intl.formatMessage({ id: 'the-language-has-been-removed' }), variant: 'success' }))
 }
 
 export const LocaleAdminListItem = ({ locale }: Props) => {
@@ -107,7 +99,7 @@ export const LocaleAdminListItem = ({ locale }: Props) => {
       <DeleteModal
         showDeleteModal={showModal}
         closeDeleteModal={() => displayModal(false)}
-        deleteElement={() => onDelete(locale)}
+        deleteElement={() => onDelete(locale, intl)}
         deleteModalTitle="are-you-sure-you-want-to-delete-this-language"
         deleteModalContent="translation-help-text"
       />

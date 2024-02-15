@@ -2,11 +2,12 @@
 import React from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { BrowserRouter as Router } from 'react-router-dom'
-import AlertBoxApp from '~/startup/AlertBoxApp'
+import Providers from './Providers'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import type { UserInvitationPageAppQueryResponse } from '~relay/UserInvitationPageAppQuery.graphql'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import UserInvitationRoot from '~/components/User/Invitation/UserInvitationRoot'
+
 export type UserInvitationPageAppProps = {
   readonly email: string
   readonly token: string
@@ -18,9 +19,11 @@ export type UserInvitationPageAppProps = {
   readonly hasEnabledSSO: boolean
   readonly isRegistrationAllowed: boolean
 }
+
 type Props = UserInvitationPageAppProps
+
 export default (propsComponent: Props) => (
-  <AlertBoxApp>
+  <Providers>
     <QueryRenderer
       environment={environment}
       query={graphql`
@@ -67,5 +70,5 @@ export default (propsComponent: Props) => (
         return <Loader />
       }}
     />
-  </AlertBoxApp>
+  </Providers>
 )

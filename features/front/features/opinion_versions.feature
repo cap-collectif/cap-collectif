@@ -36,7 +36,7 @@ Scenario: Non author wants to report a version
   When I click the reporting opinion version button
   And I fill the reporting form
   And I submit the reporting form
-  Then I should see "alert.success.report.proposal" in the "#global-alert-box" element
+  Then I should see "alert.success.report.proposal" in the ".toasts-container--top div" element
   And I should see "global.report.reported"
   And The element "[id='report-opinion-VmVyc2lvbjp2ZXJzaW9uMQ==-button']" should be disabled
 

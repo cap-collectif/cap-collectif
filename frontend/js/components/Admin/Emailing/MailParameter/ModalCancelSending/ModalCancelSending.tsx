@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import { Modal } from 'react-bootstrap'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import { Container, ButtonConfirmation } from './ModalCancelSending.style'
 import colors from '~/utils/colors'
 import CancelEmailingCampaignMutation from '~/mutations/CancelEmailingCampaignMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import type { ModalCancelSending_emailingCampaign } from '~relay/ModalCancelSending_emailingCampaign.graphql'
 import '~relay/ModalCancelSending_emailingCampaign.graphql'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 
 type Props = {
   show: boolean
@@ -17,7 +17,7 @@ type Props = {
   emailingCampaign: ModalCancelSending_emailingCampaign
 }
 
-const cancelSending = (id: string, onClose: () => void) => {
+const cancelSending = (id: string, onClose: () => void, intl: IntlShape) => {
   return CancelEmailingCampaignMutation.commit({
     input: {
       id,
@@ -26,60 +26,51 @@ const cancelSending = (id: string, onClose: () => void) => {
     .then(response => {
       if (response.cancelEmailingCampaign?.error) {
         onClose()
-        return FluxDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            type: TYPE_ALERT.ERROR,
-            content: 'global.error.server.form',
-          },
-        })
+        return mutationErrorToast(intl)
       }
 
       onClose()
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          content: 'success-cancel-emailing-campaign',
-          values: {
+      return toast({
+        content: intl.formatMessage(
+          { id: 'success-cancel-emailing-campaign' },
+          {
             title: response?.cancelEmailingCampaign?.emailingCampaign?.name,
           },
-        },
+        ),
+        variant: 'success',
       })
     })
     .catch(() => {
-      return FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      return mutationErrorToast(intl)
     })
 }
 
-export const ModalCancelSending = ({ show, onClose, emailingCampaign }: Props) => (
-  <Container animation={false} show={show} onHide={onClose} bsSize="small" aria-labelledby="modal-title">
-    <Modal.Header closeButton>
-      <Modal.Title id="modal-title">
-        <FormattedMessage id="title-modal-confirmation-cancel-sending" />
-      </Modal.Title>
-    </Modal.Header>
+export const ModalCancelSending = ({ show, onClose, emailingCampaign }: Props) => {
+  const intl = useIntl()
+  return (
+    <Container animation={false} show={show} onHide={onClose} bsSize="small" aria-labelledby="modal-title">
+      <Modal.Header closeButton>
+        <Modal.Title id="modal-title">
+          <FormattedMessage id="title-modal-confirmation-cancel-sending" />
+        </Modal.Title>
+      </Modal.Header>
 
-    <Modal.Body>
-      <p>
-        <Icon name={ICON_NAME.danger} size={14} color={colors.dangerColor} />
-        <FormattedMessage id="global-action-irreversible" />
-      </p>
-    </Modal.Body>
+      <Modal.Body>
+        <p>
+          <Icon name={ICON_NAME.danger} size={14} color={colors.dangerColor} />
+          <FormattedMessage id="global-action-irreversible" />
+        </p>
+      </Modal.Body>
 
-    <Modal.Footer>
-      <ButtonConfirmation type="button" onClick={() => cancelSending(emailingCampaign.id, onClose)}>
-        <FormattedMessage id="cancel-definitely" />
-      </ButtonConfirmation>
-    </Modal.Footer>
-  </Container>
-)
+      <Modal.Footer>
+        <ButtonConfirmation type="button" onClick={() => cancelSending(emailingCampaign.id, onClose, intl)}>
+          <FormattedMessage id="cancel-definitely" />
+        </ButtonConfirmation>
+      </Modal.Footer>
+    </Container>
+  )
+}
+
 export default createFragmentContainer(ModalCancelSending, {
   emailingCampaign: graphql`
     fragment ModalCancelSending_emailingCampaign on EmailingCampaign {

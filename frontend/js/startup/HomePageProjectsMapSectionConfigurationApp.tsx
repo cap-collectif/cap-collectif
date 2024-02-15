@@ -2,7 +2,6 @@
 import React from 'react'
 import { RelayEnvironmentProvider } from 'relay-hooks'
 import { graphql, QueryRenderer } from 'react-relay'
-import AlertBoxApp from '~/startup/AlertBoxApp'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import HomePageProjectsMapSectionConfigurationPage from '~/components/Admin/Section/HomePageProjectsMapSectionConfigurationPage'
 import Loader from '~ui/FeedbacksIndicators/Loader'
@@ -19,38 +18,36 @@ const query = graphql`
   }
 `
 export default () => (
-  <AlertBoxApp>
-    <RelayEnvironmentProvider environment={environment}>
-      <QueryRenderer
-        environment={environment}
-        query={query}
-        variables={{
-          first: 0,
-          cursor: null,
-        }}
-        render={({
-          error,
-          props,
-        }: ReactRelayReadyState & {
-          props: HomePageProjectsMapSectionConfigurationAppQueryResponse | null | undefined
-        }) => {
-          if (error) {
-            return graphqlError
-          }
+  <RelayEnvironmentProvider environment={environment}>
+    <QueryRenderer
+      environment={environment}
+      query={query}
+      variables={{
+        first: 0,
+        cursor: null,
+      }}
+      render={({
+        error,
+        props,
+      }: ReactRelayReadyState & {
+        props: HomePageProjectsMapSectionConfigurationAppQueryResponse | null | undefined
+      }) => {
+        if (error) {
+          return graphqlError
+        }
 
-          if (props && props?.homePageProjectsMapSectionConfiguration) {
-            return (
-              <HomePageProjectsMapSectionConfigurationPage
-                {...props}
-                homePageProjectsMapSectionConfigurationFragmentRef={props?.homePageProjectsMapSectionConfiguration}
-                hasDistrict={props?.globalDistricts.totalCount > 0}
-              />
-            )
-          }
+        if (props && props?.homePageProjectsMapSectionConfiguration) {
+          return (
+            <HomePageProjectsMapSectionConfigurationPage
+              {...props}
+              homePageProjectsMapSectionConfigurationFragmentRef={props?.homePageProjectsMapSectionConfiguration}
+              hasDistrict={props?.globalDistricts.totalCount > 0}
+            />
+          )
+        }
 
-          return <Loader />
-        }}
-      />
-    </RelayEnvironmentProvider>
-  </AlertBoxApp>
+        return <Loader />
+      }}
+    />
+  </RelayEnvironmentProvider>
 )

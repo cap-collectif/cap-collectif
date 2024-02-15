@@ -22,11 +22,12 @@ import useToggle from '~/components/AdminEditor/hooks/useToggle'
 import type { GlobalState } from '~/types'
 import { styleGuideColors } from '~/utils/colors'
 import AskProposalRevisionMutation from '~/mutations/AskProposalRevisionMutation'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
-import { TYPE_ALERT, UPDATE_ALERT } from '~/constants/AlertConstants'
 import { DATE_ISO8601_FORMAT, DATE_LONG_LOCALIZED_FORMAT } from '~/shared/date'
 import type { User } from '~/redux/modules/user'
 import stripHtml from '~/utils/stripHtml'
+import { toast } from '~ds/Toast'
+import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+
 type RelayProps = {
   readonly proposal: ProposalRevisionModalForm_proposal
 }
@@ -79,21 +80,21 @@ const validate = ({ reason, expiresAt, body }: FormValues) => {
   return errors
 }
 
-const onSubmit = (values: FormValues, _, { onClose }: Props) => {
+const onSubmit = (values: FormValues, _, { onClose, intl }: Props) => {
   return AskProposalRevisionMutation.commit({
     input: { ...values, expiresAt: moment(values.expiresAt).format(DATE_ISO8601_FORMAT) },
   })
     .then(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.SUCCESS,
-          values: {
+      toast({
+        content: intl.formatMessage(
+          { id: 'success.message.review.request' },
+          {
             date: moment(values.expiresAt).format(DATE_LONG_LOCALIZED_FORMAT),
           },
-          content: 'success.message.review.request',
-        },
+        ),
+        variant: 'success',
       })
+
       onClose()
       // On backend, the flash message in the ProposalAdminPage component is not fixed on the page
       // on the top. So to avoid to update the flash container (which may lead to other regressions)
@@ -101,13 +102,7 @@ const onSubmit = (values: FormValues, _, { onClose }: Props) => {
       window.scrollTo(0, 0)
     })
     .catch(() => {
-      FluxDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          type: TYPE_ALERT.ERROR,
-          content: 'global.error.server.form',
-        },
-      })
+      mutationErrorToast(intl)
       throw new SubmissionError({
         _error: 'global.error.server.form',
       })

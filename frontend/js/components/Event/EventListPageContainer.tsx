@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl'
+import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl'
 import { createFragmentContainer } from 'react-relay'
 import { reduxForm } from 'redux-form'
 import { graphql } from 'relay-runtime'
@@ -13,9 +13,9 @@ import EventRefetch from './List/EventRefetch'
 import EventListCounter from './List/EventListCounter'
 import EventListStatusFilter from './List/EventListStatusFilter'
 import colors from '~/utils/colors'
-import { UPDATE_ALERT } from '~/constants/AlertConstants'
-import AppDispatcher from '~/dispatchers/AppDispatcher'
 import EventPreview from './EventPreview/EventPreview'
+import { toast } from '~ds/Toast'
+
 type Props = {
   readonly query: EventListPageContainer_query
   readonly eventPageBody: string | null | undefined
@@ -99,18 +99,17 @@ const renderAwaitingOrRefusedEvents = (query: EventListPageContainer_query) => {
 }
 
 export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
+  const intl = useIntl()
+
   useEffect(() => {
     if (window.location.href.indexOf('?delete=success') !== -1) {
-      AppDispatcher.dispatch({
-        actionType: UPDATE_ALERT,
-        alert: {
-          bsStyle: 'success',
-          content: 'event-deleted',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'event-deleted' }), variant: 'success' })
+
       window.history.pushState('', '', '/events')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   return (
     <div className="container">
       {eventPageBody && (

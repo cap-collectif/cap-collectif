@@ -30,7 +30,7 @@ import DeleteEventMutation from '~/mutations/DeleteEventMutation'
 import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql'
 import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql'
 import { getTranslation, handleTranslationChange } from '~/services/Translation'
-import AppDispatcher from '~/dispatchers/AppDispatcher'
+import { toast } from '~ds/Toast'
 
 type Props = ReduxFormFormProps & {
   intl: IntlShape
@@ -114,15 +114,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       }
 
       if (response?.addEvent?.eventEdge?.node) {
-        if (isFrontendView) {
-          AppDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: {
-              bsStyle: 'success',
-              content: 'alert.success.add.argument',
-            },
-          })
-        }
+        if (isFrontendView)
+          toast({ content: intl.formatMessage({ id: 'alert.success.add.argument' }), variant: 'success' })
 
         window.location.href = isFrontendView
           ? response.addEvent.eventEdge.node.url

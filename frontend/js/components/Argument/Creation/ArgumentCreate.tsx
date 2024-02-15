@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { reduxForm, Field, submit, SubmissionError, clearSubmitErrors } from 'redux-form'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { FormattedMessage, FormattedHTMLMessage, useIntl } from 'react-intl'
+import { FormattedMessage, FormattedHTMLMessage, useIntl, injectIntl } from 'react-intl'
 import { Button, Alert } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import AppDispatcher from '../../../dispatchers/AppDispatcher'
 import component from '../../Form/Field'
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation'
 import type { ArgumentType, State, Dispatch } from '../../../types'
 import type { ArgumentCreate_argumentable } from '~relay/ArgumentCreate_argumentable.graphql'
 import RequirementsFormModal from '../../Requirements/RequirementsModal'
+import { toast } from '~ds/Toast'
 
 type FormValues = {
   body: string | null | undefined
@@ -29,7 +29,7 @@ type Props = ReduxFormFormProps & {
   dispatch: Dispatch
 }
 
-const onSubmit = (values: FormValidValues, dispatch: Dispatch, { argumentable, type, reset, user }: Props) => {
+const onSubmit = (values: FormValidValues, dispatch: Dispatch, { argumentable, type, reset, user, intl }: Props) => {
   const input = {
     argumentableId: argumentable.id,
     body: values.body,
@@ -43,13 +43,7 @@ const onSubmit = (values: FormValidValues, dispatch: Dispatch, { argumentable, t
   )
     .then(res => {
       if (res.addArgument && res.addArgument.userErrors.length === 0) {
-        AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'alert.success.add.argument',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'alert.success.add.argument' }), variant: 'success' })
         reset()
         return
       }
@@ -184,11 +178,13 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(
-  reduxForm({
-    onSubmit,
-    validate,
-  })(ArgumentCreate),
+const container = injectIntl(
+  connect<any, any>(mapStateToProps)(
+    reduxForm({
+      onSubmit,
+      validate,
+    })(ArgumentCreate),
+  ),
 )
 export default createFragmentContainer(container, {
   argumentable: graphql`

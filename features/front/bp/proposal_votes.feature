@@ -9,12 +9,12 @@ Feature: Proposal votes
 #  And the proposal has 1 votes
 #  When I click the proposal vote button
 #  And I submit the proposal vote form
-#  And I should see "vote.add_success" in the "#global-alert-box" element
+#  And I should see "vote.add_success" in the ".toasts-container--top div" element
 #  Then the proposal should have 2 votes
-#  And I wait "#global-alert-box .alert-success" to disappear on current page
+#  And I wait ".toasts-container--top div" to disappear on current page
 #  Then I click the proposal unvote button
 ## it works locally but not on CI :-(
-##  And I wait "vote.delete_success" to appear on current page in "#global-alert-box" maximum 50000
+##  And I wait "vote.delete_success" to appear on current page in ".toasts-container--top div" maximum 50000
 #  Then the proposal should have 1 votes
 
 @security @elasticsearch @votes_from_selection_step

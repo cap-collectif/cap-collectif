@@ -37,6 +37,21 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
       <Cookie
         adJs="here your js code bullshit the users"
         analyticsJs="here your js to analyse the website"
+        intl={
+          Object {
+            "formatDate": [Function],
+            "formatHTMLMessage": [Function],
+            "formatMessage": [Function],
+            "formatNumber": [Function],
+            "formatPlural": [Function],
+            "formatRelative": [Function],
+            "formatTime": [Function],
+            "formats": Object {},
+            "locale": "fr-FR",
+            "messages": Object {},
+            "now": [Function],
+          }
+        }
       />
     </Modal.Body>
     <Modal.Footer

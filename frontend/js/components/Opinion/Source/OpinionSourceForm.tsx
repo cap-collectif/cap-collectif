@@ -7,13 +7,13 @@ import { connect } from 'react-redux'
 import { reduxForm, Field, SubmissionError, clearSubmitErrors } from 'redux-form'
 import renderComponent from '../../Form/Field'
 import { isUrl } from '~/services/Validator'
-import FluxDispatcher from '~/dispatchers/AppDispatcher'
 import AddSourceMutation from '~/mutations/AddSourceMutation'
 import ChangeSourceMutation from '~/mutations/ChangeSourceMutation'
 import { hideSourceCreateModal, hideSourceEditModal } from '~/redux/modules/opinion'
 import type { OpinionSourceForm_source } from '~relay/OpinionSourceForm_source.graphql'
 import type { OpinionSourceForm_sourceable } from '~relay/OpinionSourceForm_sourceable.graphql'
 import type { State } from '~/types'
+import { toast } from '~ds/Toast'
 
 type SourceCategory = {
   title: string | null | undefined
@@ -75,7 +75,7 @@ const validate = ({ title, body, category, link, check }: FormValues) => {
 }
 
 const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
-  const { sourceable, source, user } = props
+  const { sourceable, source, user, intl } = props
 
   if (!source) {
     const input = {
@@ -92,25 +92,14 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
       user.isEmailConfirmed,
     ).then(res => {
       if (!res.addSource || !res.addSource.sourceEdge) {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'danger',
-            content: 'alert.danger.add.source',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'alert.danger.add.source' }), variant: 'danger' })
+
         throw new SubmissionError({
           _error: 'global.error.server.form',
         })
       }
+      toast({ content: intl.formatMessage({ id: 'alert.success.add.source' }), variant: 'success' })
 
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'alert.success.add.source',
-        },
-      })
       dispatch(hideSourceCreateModal())
     })
   }
@@ -126,25 +115,13 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
     input,
   }).then(res => {
     if (!res.changeSource || !res.changeSource.source) {
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'danger',
-          content: 'alert.danger.update.source',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'alert.danger.update.source' }), variant: 'danger' })
+
       throw new SubmissionError({
         _error: 'global.error.server.form',
       })
     }
-
-    FluxDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: {
-        bsStyle: 'success',
-        content: 'alert.success.update.source',
-      },
-    })
+    toast({ content: intl.formatMessage({ id: 'alert.success.update.source' }), variant: 'success' })
     dispatch(hideSourceEditModal())
   })
 }

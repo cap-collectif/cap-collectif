@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, injectIntl } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { closeOpinionEditModal } from '~/redux/modules/opinion'
 import type { OpinionEditForm_opinion } from '~relay/OpinionEditForm_opinion.graphql'
 import { isHTML } from '~/utils/isHtml'
 import UpdateOpinionMutation from '~/mutations/UpdateOpinionMutation'
-import FluxDispatcher from '../../../dispatchers/AppDispatcher'
+import { toast } from '~ds/Toast'
 
 type RelayProps = {
   opinion: OpinionEditForm_opinion
@@ -35,7 +35,7 @@ const validate = ({ title, body, check }: Record<string, any>) => {
 }
 
 const onSubmit = (data: Record<string, any>, dispatch: Dispatch, props: Record<string, any>) => {
-  const { opinion } = props
+  const { opinion, intl } = props
   // We format appendices to call API (could be improved by changing api design)
   const appendices = Object.keys(data)
     .filter(key => key !== 'title' && key !== 'body' && key !== 'check')
@@ -55,13 +55,7 @@ const onSubmit = (data: Record<string, any>, dispatch: Dispatch, props: Record<s
     const url = response?.updateOpinion?.opinion?.url
 
     if (url) {
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: {
-          bsStyle: 'success',
-          content: 'proposal-edit',
-        },
-      })
+      toast({ content: intl.formatMessage({ id: 'proposal-edit' }), variant: 'success' })
       dispatch(closeOpinionEditModal())
       setTimeout(() => {
         window.location.href = url
@@ -164,7 +158,7 @@ const container = connect<any, any>(mapStateToProps)(
     validate,
   })(OpinionEditForm),
 )
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   opinion: graphql`
     fragment OpinionEditForm_opinion on Opinion {
       appendices {

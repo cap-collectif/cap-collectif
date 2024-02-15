@@ -11,10 +11,9 @@ import type { ProjectExternalAdminFormDeprecated_project } from '~relay/ProjectE
 import AlertForm from '~/components/Alert/AlertForm'
 import type { Dispatch, FeatureToggle, FeatureToggles } from '~/types'
 import UpdateProjectMutation from '~/mutations/UpdateProjectMutation'
-import AppDispatcher from '~/dispatchers/AppDispatcher'
-import { UPDATE_ALERT } from '~/constants/AlertConstants'
 import toggle from '../../../Form/Toggle'
 import colors from '../../../../utils/colors'
+import { toast } from '~ds/Toast'
 
 type Props = ReduxFormFormProps & {
   project: ProjectExternalAdminFormDeprecated_project | null | undefined
@@ -149,7 +148,7 @@ const onSubmit = (
   dispatch: Dispatch,
   props: Props,
 ) => {
-  const { project, hostUrl } = props
+  const { project, hostUrl, intl } = props
   const input = {
     isExternal,
     externalLink,
@@ -176,13 +175,7 @@ const onSubmit = (
       },
     }).then(data => {
       if (data.updateProject && data.updateProject.project) {
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: {
-            bsStyle: 'success',
-            content: 'alert.success.report.argument',
-          },
-        })
+        toast({ content: intl.formatMessage({ id: 'alert.success.report.argument' }), variant: 'success' })
       }
     })
   }

@@ -1,14 +1,15 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, IntlShape } from 'react-intl'
 import { Col, Alert } from 'react-bootstrap'
 import Toggle from '~/components/Ui/Toggle/Toggle'
 import config from '../../config'
 import CookieMonster from '../../CookieMonster'
-import FluxDispatcher from '../../dispatchers/AppDispatcher'
+import { toast } from '~ds/Toast'
 
 type Props = {
   analyticsJs: string | null | undefined
   adJs: string | null | undefined
+  intl: IntlShape
 }
 type CookieState = {
   isAnalyticEnabled: boolean
@@ -77,12 +78,9 @@ export class Cookie extends React.Component<Props, CookieState> {
       CookieMonster.doNotConsiderFullConsent()
     }
 
-    FluxDispatcher.dispatch({
-      actionType: 'UPDATE_ALERT',
-      alert: {
-        bsStyle: 'success',
-        content: 'your-settings-have-been-saved-successfully',
-      },
+    toast({
+      content: this.props.intl.formatMessage({ id: 'your-settings-have-been-saved-successfully' }),
+      variant: 'success',
     })
   }
 

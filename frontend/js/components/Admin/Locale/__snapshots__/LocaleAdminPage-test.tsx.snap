@@ -4,7 +4,6 @@ exports[`<LocaleAdminPage /> renders correctly empty 1`] = `
 <div
   className="box box-primary container-fluid"
 >
-  <_default />
   <div
     className="box-header"
   >

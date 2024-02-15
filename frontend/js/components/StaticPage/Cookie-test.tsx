@@ -2,6 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import Cookie from './Cookie'
+import { intlMock } from '~/mocks'
 
 describe('<Cookie />', () => {
   const props = {
@@ -16,6 +17,7 @@ describe('<Cookie />', () => {
       '      }\n' +
       "      ga('send', 'pageview');",
     adJs: 'here your js code bullshit the users',
+    intl: intlMock,
   }
   it('should render all accepted', () => {
     const wrapper = shallow(<Cookie {...props} />)

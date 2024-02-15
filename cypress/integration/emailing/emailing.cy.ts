@@ -28,7 +28,7 @@ describe('Emailing Campaign', () => {
       cy.assertReactSelectOptionCount('#mailingList', 1)
       cy.selectReactSetOption('#mailingList', 'Agent de la ville')
       cy.wait('@UpdateEmailingCampaignMutation')
-      cy.get('#global-alert-box').should('contain', 'label.draft.saved')
+      cy.get('.toasts-container--top div').should('contain', 'label.draft.saved')
     })
   })
 })

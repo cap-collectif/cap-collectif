@@ -271,7 +271,7 @@ class UserContext extends DefaultContext
     {
         $alertCloseButton = $this->getSession()
             ->getPage()
-            ->find('css', '#current-alert .close')
+            ->find('css', '.toasts-container--top div .close')
         ;
         $alertCloseButton->click();
     }
