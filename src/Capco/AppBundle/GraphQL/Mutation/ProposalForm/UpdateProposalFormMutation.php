@@ -96,7 +96,6 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         $proposalForm = $this->getProposalFormFromUUID($id);
 
         unset($arguments['proposalFormId']);
-//        dd($arguments);
         $form = $this->formFactory->create(ProposalFormUpdateType::class, $proposalForm);
         $arguments = $this->districtsProcess($proposalForm, $arguments);
         $arguments = $this->categoriesProcess($proposalForm, $arguments);

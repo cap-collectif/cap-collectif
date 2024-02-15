@@ -121,7 +121,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
     used: usedIcons.some(ic => ic === i),
   }))
 
-  const { handleSubmit, formState, resetField, control, watch, setValue } =
+  const { reset, handleSubmit, formState, control, watch, setValue } =
     useForm<ProposalFormAdminCategoriesModalFormValues>({
       defaultValues: {
         categoryName: initialValue?.name ?? null,
@@ -133,14 +133,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
       },
       mode: 'onChange',
     })
-  const resetForm = () => {
-    resetField('categoryColor')
-    resetField('categoryIcon')
-    resetField('categoryImage')
-    resetField('categoryName')
-    resetField('categoryImageEnabled')
-    resetField('newCategoryImage')
-  }
+
   const onSubmit = (values: ProposalFormAdminCategoriesModalFormValues) => {
     if (isUpdating) {
       if (!features.display_pictures_in_depository_proposals_list) {
@@ -157,7 +150,6 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
           newCategoryImage: values.newCategoryImage,
         }
         update(index, updatedCategory)
-        resetForm()
       }
     }
     if (!isUpdating) {
@@ -175,7 +167,6 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
           newCategoryImage: values.newCategoryImage,
         }
         append(updatedCategory)
-        resetForm()
       }
     }
   }
@@ -384,15 +375,16 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
               {intl.formatMessage({ id: 'global.cancel' })}
             </Button>
             <Button
+              id="add-category-button"
               variant="primary"
               variantColor="primary"
               variantSize="big"
               disabled={!formState.isValid}
               onClick={e => {
                 handleSubmit(onSubmit)(e)
-                console.log(formState.isValid)
                 if (formState.isValid) {
                   hide()
+                  reset()
                 }
               }}
             >

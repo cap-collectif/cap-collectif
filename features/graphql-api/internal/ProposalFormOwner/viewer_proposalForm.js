@@ -45,9 +45,12 @@ describe('Internal | viewer_proposalForm', () => {
     expect(response.viewer.proposalForms.totalCount).toBe(1);
   });
   it('project admin cannot get all proposalForms', async () => {
-    await expect(
-      graphql(countAllProposalFormsQuery, { availableOnly: false }, 'internal_theo'),
-    ).rejects.toThrowError('not admin');
+    const response = await graphql(
+      countAllProposalFormsQuery,
+      { availableOnly: false },
+      'internal_theo',
+    );
+    expect(response.viewer.proposalForms.totalCount).toBe(0);
   });
   it('admin get all proposalForms', async () => {
     const response = await graphql(

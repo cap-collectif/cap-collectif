@@ -177,7 +177,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
   const breadCrumbItems = [
     {
       title: intl.formatMessage({ id: 'global.all.projects' }),
-      href: '/projects',
+      href: '/admin-next/projects',
     },
     {
       title: title || intl.formatMessage({ id: 'new-project' }),

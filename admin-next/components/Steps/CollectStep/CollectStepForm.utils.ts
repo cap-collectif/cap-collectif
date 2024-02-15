@@ -1,7 +1,6 @@
 import {
     EnabledEnum,
     FormValues,
-    StepDurationTypeEnum,
     StepVisibilityTypeEnum,
 } from '@components/Steps/CollectStep/CollectStepForm';
 import { CollectStepFormQueryResponse } from '@relay/CollectStepFormQuery.graphql';
@@ -12,6 +11,7 @@ import {
 } from '@components/Steps/CollectStep/CollectStepStatusesList';
 import {getDefaultRequirements, getRequirementsInput} from '@components/Requirements/Requirements';
 import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFormAdminCategories';
+import {StepDurationTypeEnum} from "../Shared/StepDurationInput";
 
 export const getInitialValues = (
     step: CollectStepFormQueryResponse['step'],
@@ -203,16 +203,16 @@ export const getCollectStepInput = (
         defaultSort: formValues.defaultSort,
         proposalForm: proposalFormId,
         votesHelpText: formValues.votesHelpText,
-        votesMin: formValues.votesMin,
-        votesLimit: formValues.votesLimit,
-        votesRanking: formValues.votesRanking,
-        voteThreshold: formValues.voteThreshold,
+        votesMin: parseInt(formValues.votesMin),
+        votesLimit: parseInt(formValues.votesLimit),
+        votesRanking: formValues.votesRanking ?? false,
+        voteThreshold: parseInt(formValues.voteThreshold),
         isProposalSmsVoteEnabled: formValues.isProposalSmsVoteEnabled,
-        proposalArchivedTime: formValues.proposalArchivedTime,
+        proposalArchivedTime: parseInt(formValues.proposalArchivedTime),
         proposalArchivedUnitTime: formValues.proposalArchivedUnitTime,
 
         allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
-        budget: formValues.budget,
+        budget: parseInt(formValues.budget),
         publishedVoteDate: formValues.publishedVoteDate,
         private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
         voteType: formValues.voteType,

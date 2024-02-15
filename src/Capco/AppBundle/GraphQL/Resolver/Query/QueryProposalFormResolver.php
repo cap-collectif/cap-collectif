@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\ProposalFormRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryProposalFormResolver implements QueryInterface
@@ -14,8 +15,13 @@ class QueryProposalFormResolver implements QueryInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(): array
+    public function __invoke(Argument $argument): array
     {
-        return $this->repository->findAll();
+        $query = $argument->offsetGet('query');
+        if (!$query) {
+            return $this->repository->findAll();
+        }
+
+        return $this->repository->searchByTerm($query);
     }
 }

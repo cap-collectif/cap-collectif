@@ -15,9 +15,10 @@ import { ProposalFormAdminCategories_query$key } from '@relay/ProposalFormAdminC
 import { useFeatureFlags } from '@hooks/useFeatureFlag';
 import ProposalFormAdminCategoriesModal from '@components/Steps/CollectStep/ProposalFormAdminCategoriesModal';
 import type { FormValues } from '@components/Steps/CollectStep/CollectStepForm';
-import type { Control } from 'react-hook-form';
+import {Control} from 'react-hook-form';
 import convertIconToDs from '@components/Steps/CollectStep/ProposalFormAdminCategories.utils';
 import { useFieldArray } from 'react-hook-form';
+import {useCollectStep} from "./CollectStepContext";
 
 export interface ProposalFormAdminCategoriesProps {
     query: ProposalFormAdminCategories_query$key;
@@ -37,7 +38,7 @@ const CATEGORIES_FRAGMENT = graphql`
 export const getFormattedCategories = (categories: FormValues['form']['categories']) => {
     return categories.map(category => ({
         ...category,
-        color: !!category.color ? category.color.replace('#', 'COLOR_').toUpperCase() : null,
+        color: !!category.color ? category.color.replace('#', 'COLOR_').toUpperCase() : 'COLOR_EF5350',
         icon: !!category.icon ? category.icon.toUpperCase().replace(/-/g, '_') : null,
         categoryImage: !!category.categoryImage ? category.categoryImage.id : null,
     }));
@@ -47,9 +48,10 @@ const ProposalFormAdminCategories: React.FC<ProposalFormAdminCategoriesProps> = 
     query: queryRef,
     control,
 }) => {
-    const intl = useIntl();
     const query = useFragment(CATEGORIES_FRAGMENT, queryRef);
     const { proposalCategoryOptions } = query;
+    const {proposalFormKey} = useCollectStep();
+
     const {
         fields: categories,
         append,
@@ -57,11 +59,12 @@ const ProposalFormAdminCategories: React.FC<ProposalFormAdminCategoriesProps> = 
         update,
     } = useFieldArray({
         control,
-        name: `form.categories`,
+        name: `${proposalFormKey}.categories`,
     });
     const features = useFeatureFlags(['display_pictures_in_depository_proposals_list']);
     const usedColors = categories.map(c => c.color);
     const usedIcons = categories.map(c => c.icon);
+
     return (
         <Flex direction="column" width="100%" gap={2}>
             {categories.length > 0 && (
@@ -88,33 +91,30 @@ const ProposalFormAdminCategories: React.FC<ProposalFormAdminCategoriesProps> = 
                                                 paddingLeft={0}
                                                 borderColor="gray.300"
                                                 borderRightWidth={1}>
-                                                {features.display_pictures_in_depository_proposals_list && (
-                                                    <Flex
-                                                        align="center"
-                                                        justify="center"
-                                                        backgroundColor={category.color
-                                                            .replace('COLOR_', '#')
-                                                            .toLowerCase()}
-                                                        width={4}
-                                                        height={4}>
-                                                        {category.icon && (
-                                                            <Icon
-                                                                name={
-                                                                    CapUIIcon[
-                                                                        // @ts-ignore
-                                                                        convertIconToDs(
-                                                                            category.icon,
-                                                                        )
-                                                                    ]
-                                                                }
-                                                                size={CapUIIconSize.Sm}
-                                                                color="white"
-                                                            />
-                                                        )}
-                                                    </Flex>
-                                                )}
+                                                <Flex
+                                                    align="center"
+                                                    justify="center"
+                                                    backgroundColor={category.color
+                                                        .replace('COLOR_', '#')
+                                                        .toLowerCase()}
+                                                    width={4}
+                                                    height={4}>
+                                                    {category.icon && (
+                                                        <Icon
+                                                            name={
+                                                                CapUIIcon[
+                                                                    // @ts-ignore
+                                                                    convertIconToDs(
+                                                                        category.icon,
+                                                                    )
+                                                                ]
+                                                            }
+                                                            size={CapUIIconSize.Sm}
+                                                            color="white"
+                                                        />
+                                                    )}
+                                                </Flex>
                                             </Flex>
-
                                             {category.name}
                                         </Flex>
                                     ) : (

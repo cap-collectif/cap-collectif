@@ -278,7 +278,11 @@ InternalQuery:
             proposalForms:
                 description: 'Lookup forms.'
                 type: '[ProposalForm]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
+                args:
+                    query:
+                        type: 'String'
+                        description: 'Filter proposal form by title'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver", [args])'
             categoryImages:
                 description: 'Lookup category images.'
                 type: '[CategoryImage!]!'

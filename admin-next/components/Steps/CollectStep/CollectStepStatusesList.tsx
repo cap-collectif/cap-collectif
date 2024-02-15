@@ -137,6 +137,7 @@ const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
                         />
                     </FormControl>
                     <FormControl
+                        data-cy={`statuses_${index}_name`}
                         name={`statuses[${index}].name`}
                         control={control}
                         sx={{ width: '100% !important' }}>
@@ -154,6 +155,7 @@ const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
                 </InputGroup>
             ))}
             <Button
+                id="add-status-button"
                 variant="tertiary"
                 mb={4}
                 onClick={() => {

@@ -13464,7 +13464,10 @@ type Query {
   ): GroupConnection!
 
   """Lookup forms."""
-  proposalForms: [ProposalForm]!
+  proposalForms(
+    """Filter proposal form by title"""
+    query: String
+  ): [ProposalForm]!
 
   """Lookup category images."""
   categoryImages(

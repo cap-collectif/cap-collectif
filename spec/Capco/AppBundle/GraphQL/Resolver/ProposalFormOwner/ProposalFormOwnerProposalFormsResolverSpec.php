@@ -7,7 +7,6 @@ use Capco\AppBundle\GraphQL\Resolver\ProposalFormOwner\ProposalFormOwnerProposal
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use PhpSpec\ObjectBehavior;
 
@@ -93,7 +92,11 @@ class ProposalFormOwnerProposalFormsResolverSpec extends ObjectBehavior
 
         $viewer->isAdmin()->willReturn(false);
 
-        $this->shouldThrow(UserError::class)->during('__invoke', [$args, $viewer]);
+        $return = $this->__invoke($args, $viewer);
+        $return->shouldHaveType(Connection::class);
+        $return->shouldReturnConnection();
+        $return->getTotalCount()->shouldBe(0);
+        $return->getEdges()->shouldHaveCount(0);
     }
 
     public function it_return_all_proposalForms_for_admin(

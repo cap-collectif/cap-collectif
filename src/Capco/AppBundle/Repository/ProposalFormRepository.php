@@ -39,7 +39,6 @@ class ProposalFormRepository extends EntityRepository
                 ->expr()
                 ->andX(
                     $qb->expr()->like('f.title', $qb->expr()->literal('%' . $term . '%')),
-                    $qb->expr()->isNull('f.step')
                 )
         );
 

@@ -15,6 +15,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form';
 import { useForm } from 'react-hook-form';
 import { UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { FormValues } from '@components/Steps/CollectStep/CollectStepForm';
+import {useCollectStep} from "./CollectStepContext";
 
 export interface InfoModalProps {
     title: string;
@@ -43,20 +44,23 @@ const InfoModal: React.FC<InfoModalProps> = ({
         defaultValues: initialValues,
         mode: 'onChange',
     });
+
+    const {proposalFormKey} = useCollectStep();
+
     const onSubmit = (values: {
         HelpText: string | null,
         Mandatory?: boolean,
         proposalInAZoneRequired?: boolean,
     }) => {
         // @ts-ignore
-        setValue(`form.${name}HelpText`, values.HelpText);
+        setValue(`${proposalFormKey}.${name}HelpText`, values.HelpText);
         if (values.Mandatory !== undefined) {
             // @ts-ignore
-            setValue(`form.${name}Mandatory`, values.Mandatory);
+            setValue(`${proposalFormKey}.${name}Mandatory`, values.Mandatory);
         }
         if (values.proposalInAZoneRequired !== undefined) {
             // @ts-ignore
-            setValue(`form.proposalInAZoneRequired`, values.proposalInAZoneRequired);
+            setValue(`${proposalFormKey}.proposalInAZoneRequired`, values.proposalInAZoneRequired);
         }
     };
 

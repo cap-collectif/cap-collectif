@@ -84,7 +84,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     })}
                   </ListCard.Item.Label>
                   <Switch
-                    id="budget"
+                    id="budget_switch"
                     checked={budget !== null && budget !== undefined}
                     name="budget"
                     onChange={event => {
@@ -120,7 +120,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     })}
                   </ListCard.Item.Label>
                   <Switch
-                    id="votesMin"
+                    id="votesMin_switch"
                     checked={(voteThreshold ?? 0) > 0}
                     name="voteThreshold"
                     onChange={event => {
@@ -164,10 +164,12 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                           name="proposalArchivedTime"
                           control={control}
                           type="number"
+                          min={0}
                         />
                       </FormControl>
                       <FormControl name="proposalArchivedUnitTime" width="auto" control={control}>
                         <FieldInput
+                          id="proposalArchivedUnitTime"
                           name="proposalArchivedUnitTime"
                           control={control}
                           type="select"
@@ -192,7 +194,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     })}
                   </ListCard.Item.Label>
                   <Switch
-                    id="votesMin-votesLimit"
+                    id="votesMin-votesLimit_switch"
                     checked={votesMin !== null && votesLimit !== null}
                     name="voteThreshold"
                     onChange={event => {
@@ -223,7 +225,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                               id: 'global-minimum-full',
                             })}
                           />
-                          <FieldInput id="votesMin" name="votesMin" control={control} type="number" />
+                          <FieldInput id="votesMin" name="votesMin" control={control} min={0} type="number" />
                         </FormControl>
                       )}
                       <FormControl name="votesLimit" width="auto" control={control} mb={6}>

@@ -1,6 +1,7 @@
 import { IntlShape } from 'react-intl';
 import { UseFormSetValue } from 'react-hook-form/dist/types/form';
 import { FormValues } from '@components/Steps/CollectStep/CollectStepForm';
+import {FormKeyType} from "./CollectStepContext";
 
 export const getDropDownOptions: (
     values: any,
@@ -52,88 +53,88 @@ export const getDropDownOptions: (
     return initial;
 };
 
-export const deleteRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>): void => {
+export const deleteRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>, formKey: FormKeyType): void => {
     if (info === 'summary') {
-        setValue('form.usingSummary', false);
-        setValue('form.summaryHelpText', null);
+        setValue(`${formKey}.usingSummary`, false);
+        setValue(`${formKey}.summaryHelpText`, null);
     }
     if (info === 'illustration') {
-        setValue('form.usingIllustration', false);
-        setValue('form.illustrationHelpText', null);
+        setValue(`${formKey}.usingIllustration`, false);
+        setValue(`${formKey}.illustrationHelpText`, null);
     }
     if (info === 'theme') {
-        setValue('form.usingThemes', false);
-        setValue('form.themeHelpText', null);
-        setValue('form.themeMandatory', false);
+        setValue(`${formKey}.usingThemes`, false);
+        setValue(`${formKey}.themeHelpText`, null);
+        setValue(`${formKey}.themeMandatory`, false);
     }
     if (info === 'categories') {
-        setValue('form.usingCategories', false);
+        setValue(`${formKey}.usingCategories`, false);
     }
     if (info === 'address') {
-        setValue('form.usingAddress', false);
-        setValue('form.addressHelpText', null);
+        setValue(`${formKey}.usingAddress`, false);
+        setValue(`${formKey}.addressHelpText`, null);
     }
     if (info === 'district') {
-        setValue('form.usingDistrict', false);
+        setValue(`${formKey}.usingDistrict`, false);
     }
     if (info === 'description') {
-        setValue('form.usingDescription', false);
-        setValue('form.descriptionHelpText', null);
-        setValue('form.descriptionMandatory', false);
+        setValue(`${formKey}.usingDescription`, false);
+        setValue(`${formKey}.descriptionHelpText`, null);
+        setValue(`${formKey}.descriptionMandatory`, false);
     }
 };
-export const addRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>): void => {
+export const addRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>, formKey: FormKeyType): void => {
     if (info === 'usingSummary') {
-        setValue('form.usingSummary', true);
-        setValue('form.summaryHelpText', null);
+        setValue(`${formKey}.usingSummary`, true);
+        setValue(`${formKey}.summaryHelpText`, null);
     }
     if (info === 'usingDescription') {
-        setValue('form.usingDescription', true);
+        setValue(`${formKey}.usingDescription`, true);
     }
     if (info === 'usingIllustration') {
-        setValue('form.usingIllustration', true);
-        setValue('form.illustrationHelpText', null);
+        setValue(`${formKey}.usingIllustration`, true);
+        setValue(`${formKey}.illustrationHelpText`, null);
     }
     if (info === 'usingThemes') {
-        setValue('form.usingThemes', true);
-        setValue('form.themeHelpText', null);
-        setValue('form.themeMandatory', false);
+        setValue(`${formKey}.usingThemes`, true);
+        setValue(`${formKey}.themeHelpText`, null);
+        setValue(`${formKey}.themeMandatory`, false);
     }
     if (info === 'usingCategories') {
-        setValue('form.usingCategories', true);
-        setValue('form.categories', []);
-        setValue('form.categoryMandatory', false);
+        setValue(`${formKey}.usingCategories`, true);
+        setValue(`${formKey}.categories`, []);
+        setValue(`${formKey}.categoryMandatory`, false);
     }
     if (info === 'usingAddress') {
-        setValue('form.usingAddress', true);
-        setValue('form.addressHelpText', null);
+        setValue(`${formKey}.usingAddress`, true);
+        setValue(`${formKey}.addressHelpText`, null);
     }
     if (info === 'usingDistrict') {
-        setValue('form.usingDistrict', true);
-        setValue('form.districts', []);
-        setValue('form.districtHelpText', null);
-        setValue('form.districtMandatory', false);
+        setValue(`${formKey}.usingDistrict`, true);
+        setValue(`${formKey}.districts`, []);
+        setValue(`${formKey}.districtHelpText`, null);
+        setValue(`${formKey}.districtMandatory`, false);
     }
 };
-export const resetForm = (setValue: UseFormSetValue<FormValues>): void => {
-    setValue('form.title', null);
-    setValue('form.titleHelpText', null);
-    setValue('form.description', null);
-    setValue('form.usingDescription', false);
-    setValue('form.usingSummary', false);
-    setValue('form.summaryHelpText', null);
-    setValue('form.usingIllustration', false);
-    setValue('form.illustrationHelpText', null);
-    setValue('form.usingThemes', false);
-    setValue('form.themeHelpText', null);
-    setValue('form.themeMandatory', false);
-    setValue('form.usingCategories', false);
-    setValue('form.categories', []);
-    setValue('form.categoryMandatory', false);
-    setValue('form.usingAddress', false);
-    setValue('form.addressHelpText', null);
-    setValue('form.usingDistrict', false);
-    setValue('form.districts', null);
-    setValue('form.districtHelpText', null);
-    setValue('form.districtMandatory', false);
+export const resetForm = (setValue: UseFormSetValue<FormValues>, formKey: FormKeyType): void => {
+    setValue(`${formKey}.title`, null);
+    setValue(`${formKey}.titleHelpText`, null);
+    setValue(`${formKey}.description`, null);
+    setValue(`${formKey}.usingDescription`, false);
+    setValue(`${formKey}.usingSummary`, false);
+    setValue(`${formKey}.summaryHelpText`, null);
+    setValue(`${formKey}.usingIllustration`, false);
+    setValue(`${formKey}.illustrationHelpText`, null);
+    setValue(`${formKey}.usingThemes`, false);
+    setValue(`${formKey}.themeHelpText`, null);
+    setValue(`${formKey}.themeMandatory`, false);
+    setValue(`${formKey}.usingCategories`, false);
+    setValue(`${formKey}.categories`, []);
+    setValue(`${formKey}.categoryMandatory`, false);
+    setValue(`${formKey}.usingAddress`, false);
+    setValue(`${formKey}.addressHelpText`, null);
+    setValue(`${formKey}.usingDistrict`, false);
+    setValue(`${formKey}.districts`, null);
+    setValue(`${formKey}.districtHelpText`, null);
+    setValue(`${formKey}.districtMandatory`, false);
 };

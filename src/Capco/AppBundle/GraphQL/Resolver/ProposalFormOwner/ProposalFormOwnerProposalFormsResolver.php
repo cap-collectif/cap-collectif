@@ -7,8 +7,8 @@ use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProposalFormOwnerProposalFormsResolver implements QueryInterface
@@ -27,8 +27,12 @@ class ProposalFormOwnerProposalFormsResolver implements QueryInterface
         $orderByDirection = $args->offsetGet('orderBy')['direction'];
         $affiliations = $args->offsetGet('affiliations') ?? [];
         $availableOnly = $args->offsetGet('availableOnly');
+
         if (!$affiliations && !$viewer->isAdmin()) {
-            throw new UserError('not admin');
+            $connection = new Connection([]);
+            $connection->setTotalCount(0);
+
+            return $connection;
         }
 
         $paginator = new Paginator(function (int $offset, ?int $limit) use (

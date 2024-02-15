@@ -18,7 +18,7 @@ const UpdateOtherStepWrapper = () => {
       <Flex direction="row" width="100%" gap={6}>
         <React.Suspense
           fallback={
-            <Flex alignItems="center" justifyContent="center">
+            <Flex alignItems="center" justifyContent="center" width="100%">
               <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
             </Flex>
           }

@@ -173,7 +173,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                         className={`NeededInfo_districts_item_edit_${index}`}
                     />
                 ) : (
-                    <Button width="60px" variant="tertiary">
+                    <Button width="60px" variant="tertiary" id="add-district-button">
                         {intl.formatMessage({ id: 'admin.global.add' })}
                     </Button>
                 )
@@ -257,7 +257,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                                             {intl.formatMessage({ id: 'border' })}
                                         </Text>
                                         <Switch
-                                            id="border.color.enabled"
+                                            id="border_color_enabled"
                                             checked={
                                                 !!watch('border.color') ||
                                                 !!watch('border.size') ||
@@ -326,6 +326,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                                                         name="border.size"
                                                         control={control}
                                                         type="number"
+                                                        min={0}
                                                     />
                                                 </FormControl>
                                                 <FormControl
@@ -346,6 +347,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                                                         name="border.opacity"
                                                         control={control}
                                                         type="number"
+                                                        min={0}
                                                     />
                                                 </FormControl>
                                             </Flex>
@@ -371,7 +373,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                                         </Text>
 
                                         <Switch
-                                            id="background.color.enabled"
+                                            id="background_color_enabled"
                                             checked={!!watch('background.color')}
                                             onChange={() => {
                                                 if (
@@ -433,6 +435,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                                                         name="background.opacity"
                                                         control={control}
                                                         type="number"
+                                                        min={0}
                                                     />
                                                 </FormControl>
                                             </Flex>
@@ -451,6 +454,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                             {intl.formatMessage({ id: 'global.cancel' })}
                         </Button>
                         <Button
+                            id="add-district-button"
                             variant="primary"
                             variantColor="primary"
                             variantSize="big"

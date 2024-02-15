@@ -5,6 +5,7 @@ import { ListCard } from '@ui/ListCard';
 import { ButtonGroup, ButtonQuickAction, CapUIIcon, Flex } from '@cap-collectif/ui';
 import ProposalFormAdminDistrictsModal from '@components/Steps/CollectStep/ProposalFormAdminDistrictsModal';
 import { Control, useFieldArray } from 'react-hook-form';
+import {useCollectStep} from "./CollectStepContext";
 
 export interface ProposalFormAdminDistrictsProps {
     control: Control<FormValues>;
@@ -15,6 +16,8 @@ const ProposalFormAdminDistricts: React.FC<ProposalFormAdminDistrictsProps> = ({
     defaultLocale,
     control,
 }) => {
+    const {proposalFormKey} = useCollectStep();
+    
     const {
         fields: districts,
         append,
@@ -22,7 +25,7 @@ const ProposalFormAdminDistricts: React.FC<ProposalFormAdminDistrictsProps> = ({
         update,
     } = useFieldArray({
         control,
-        name: `form.districts`,
+        name: `${proposalFormKey}.districts`,
     });
     return (
         <Flex direction="column" width="100%" gap={2}>
