@@ -229,7 +229,7 @@ const onSubmit = (
             budget:
               sTypename === 'SelectionStep' || sTypename === 'CollectStep'
                 ? s.isBudgetEnabled && s.votable
-                  ? s.budget
+                  ? parseInt(s.budget)
                   : null
                 : undefined,
             votesLimit:
