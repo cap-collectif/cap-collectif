@@ -245,6 +245,8 @@ class Manager
             }
         }
 
+        ksort($return);
+
         return $return;
     }
 
