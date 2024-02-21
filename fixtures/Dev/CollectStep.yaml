@@ -163,7 +163,6 @@ Capco\AppBundle\Entity\Steps\CollectStep:
         startAt: null
         endAt: null
         voteType: 1
-        votesLimit: 1
     collectstepIdf:
         id: collectstepIdf
         title: Collecte des projets Idf (privée)

@@ -20,7 +20,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import { useIntl } from 'react-intl'
-import { useFeatureFlags } from '@hooks/useFeatureFlag'
+import { useFeatureFlag } from '@hooks/useFeatureFlag'
 
 type ProposalStepVoteType = "BUDGET" | "DISABLED" | "SIMPLE"
 export interface ProposalStepVoteTabsFormProps {
@@ -34,7 +34,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                                                                          }) => {
   const intl = useIntl()
   const { watch, setValue, control } = formMethods
-  const { votes_min } = useFeatureFlags(['votes_min'])
+  const votesMinEnabled = useFeatureFlag('votes_min')
 
   const voteType = watch('voteType');
   const budget = watch('budget');
@@ -42,6 +42,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
   const secretBallot = watch('secretBallot');
   const votesMin = watch('votesMin');
   const votesLimit = watch('votesLimit');
+  const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
 
   return (
     <Tabs
@@ -195,21 +196,20 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                   </ListCard.Item.Label>
                   <Switch
                     id="votesMin-votesLimit_switch"
-                    checked={votesMin !== null && votesLimit !== null}
+                    checked={voteMinVoteLimitEnabled}
                     name="voteThreshold"
                     onChange={event => {
-                      const toggle = votesMin !== null && votesLimit !== null
-                      if (toggle) {
+                      if (voteMinVoteLimitEnabled) {
                         setValue('votesMin', null)
                         setValue('votesLimit', null)
                       } else {
-                        setValue('votesMin', 0)
-                        setValue('votesLimit', 0)
+                        setValue('votesMin',votesMinEnabled ? 1 : null)
+                        setValue('votesLimit', votesMinEnabled ? 2 : 1)
                       }
                     }}
                   />
                 </Flex>
-                {votesMin !== null && votesLimit !== null && (
+                {votesMin !== null || votesLimit !== null && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -217,7 +217,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                       })}
                     </Text>
                     <Flex direction="row" gap={2}>
-                      {votes_min && (
+                      {votesMinEnabled && (
                         <FormControl name="votesMin" width="auto" control={control} mb={6}>
                           <FormLabel
                             htmlFor="votesMin"
@@ -225,7 +225,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                               id: 'global-minimum-full',
                             })}
                           />
-                          <FieldInput id="votesMin" name="votesMin" control={control} min={0} type="number" />
+                          <FieldInput id="votesMin" name="votesMin" control={control} min={1} type="number" />
                         </FormControl>
                       )}
                       <FormControl name="votesLimit" width="auto" control={control} mb={6}>

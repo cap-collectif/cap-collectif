@@ -1,4 +1,4 @@
-import {AdminCollectStepPage} from '~e2e/pages'
+import { AdminCollectStepPage } from '~e2e/pages'
 
 describe('Collect Step back office', () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('Collect Step back office', () => {
     cy.directLoginAs('super_admin')
   })
 
-  it('should update the step when editing a existing consultation', () => {
+  it('should update the step when editing a existing collect step', () => {
     AdminCollectStepPage.visitCollectPage('EDIT')
     AdminCollectStepPage.fillLabel('Updated text')
     AdminCollectStepPage.fillDescription('Updated description')

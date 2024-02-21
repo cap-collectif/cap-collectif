@@ -13,8 +13,6 @@ import {
   Text,
   toast,
 } from '@cap-collectif/ui'
-import { FieldInput, FormControl } from '@cap-collectif/form'
-import TextEditor from '@components/Form/TextEditor/TextEditor'
 import ProposalFormForm from '@components/Steps/CollectStep/ProposalFormForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'

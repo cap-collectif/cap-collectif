@@ -2,6 +2,7 @@ import { SymfonyEnv } from './types';
 
 // We need to know if we are in dev or production.
 export const getEnv = (): SymfonyEnv => {
+    return 'test'
     const symfonyEnv = (process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV);
     const isTestEnv = process.env.SYMFONY_REDIS_HOST === 'redis';
 
