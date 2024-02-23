@@ -17,22 +17,22 @@ class MagicLinkAuthenticator
 {
     public const JWT_ENCRYPTION_ALGORITHM = 'RS256';
     public const TOKEN_CONFIG_FOLDER = '/jwt';
-    public const DEFAULT_TOKEN_LIFETIME_IN_DAYS = 365;
+    public const DEFAULT_TOKEN_LIFETIME_IN_MINUTES = 5;
 
     private UserEmailProvider $userProvider;
     private ConfigFileSystem $filesystem;
 
     private ?string $redirectUrl = null;
-    private int $tokenLifetimeInDays;
+    private int $tokenLifetimeInMinutes;
 
     public function __construct(
         UserEmailProvider $userProvider,
         ConfigFileSystem $filesystem,
-        int $tokenLifetimeInDays = self::DEFAULT_TOKEN_LIFETIME_IN_DAYS
+        int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES
     ) {
         $this->userProvider = $userProvider;
         $this->filesystem = $filesystem;
-        $this->tokenLifetimeInDays = $tokenLifetimeInDays;
+        $this->tokenLifetimeInMinutes = $tokenLifetimeInMinutes;
     }
 
     /**
@@ -82,9 +82,10 @@ class MagicLinkAuthenticator
 
     private function isOutOfDate(MagicLinkPayload $payload): bool
     {
-        $oldestPossibleDate = (new \DateTime())->sub(new \DateInterval('P' . $this->tokenLifetimeInDays . 'D'));
+        $expirationDate = $payload->getCreatedAt()->modify("+{$this->tokenLifetimeInMinutes} minutes");
+        $now = new \DateTime();
 
-        return $payload->getCreatedAt() < $oldestPossibleDate;
+        return $now > $expirationDate;
     }
 
     private function sanitizeUrl(string $url): ?string

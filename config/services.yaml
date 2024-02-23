@@ -106,7 +106,7 @@ parameters:
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
     turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
     turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
-    magiclinks_duration_in_days: '%env(SYMFONY_MAGICLINKS_DURATION_IN_DAYS)%'
+    magiclinks_duration_in_minutes: '%env(SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
 
     #
     # Default env values :
@@ -149,7 +149,7 @@ parameters:
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
     env(SYMFONY_REMEMBER_SECRET): secretRemember
     env(SYMFONY_INSTANCE_REMEMBER_SECRET): 'secretRemember'
-    env(SYMFONY_MAGICLINKS_DURATION_IN_DAYS): 1
+    env(SYMFONY_MAGICLINKS_DURATION_IN_MINUTES): 5
     # Turnstile testing tokens that forces an interactive challenge (same as Google Recaptcha)
     # see https://developers.cloudflare.com/turnstile/frequently-asked-questions/
     # /!\ In production you must use your own tokens /!\

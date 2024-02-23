@@ -104,7 +104,7 @@ Si des comptes ne peuvent pas être gérés (souvent des comptes softdeleted) il
 
       capco:generate:magiclinks <file>
 
-Les liens ainsi fournis ont une validitée déterminée par la variable d'environnement SYMFONY_MAGICLINKS_DURATION_IN_DAYS.
+Les liens ainsi fournis ont une validitée déterminée par la variable d'environnement SYMFONY_MAGICLINKS_DURATION_IN_MINUTES.
 
 <a div="autres"></a>Autres
 ---

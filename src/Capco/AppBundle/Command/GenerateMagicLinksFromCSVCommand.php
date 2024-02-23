@@ -389,10 +389,10 @@ class GenerateMagicLinksFromCSVCommand extends Command
             $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt for more details.');
         }
         $this->style->success('New completed file available at : ' . $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_complete.csv');
-        $durationInDays = $this->kernel->getContainer()->getParameter('magiclinks_duration_in_days');
+        $durationInDays = $this->kernel->getContainer()->getParameter('magiclinks_duration_in_minutes') / 1440;
         $this->style->note([
             'You can now send the file to the client after checking it.',
-            'The links will be valid for ' . $durationInDays . ' days. (Determined by env var SYMFONY_MAGICLINKS_DURATION_IN_DAYS during generation)',
+            'The links will be valid for ' . $durationInDays . ' days. (Determined by env var SYMFONY_MAGICLINKS_DURATION_IN_MINUTES during generation)',
             'The links will redirect to ' . $this->kernel->getContainer()->get('router')->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
         ]);
     }

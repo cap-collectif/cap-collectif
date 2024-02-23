@@ -151,7 +151,7 @@ services:
 
     Capco\UserBundle\Authenticator\MagicLinkAuthenticator:
         arguments:
-            $tokenLifetimeInDays: '%magiclinks_duration_in_days%'
+            $tokenLifetimeInMinutes: '%magiclinks_duration_in_minutes%'
 
     Capco\UserBundle\Hwi\FeatureChecker:
         public: true

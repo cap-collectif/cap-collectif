@@ -192,12 +192,10 @@ class MagicLinkAuthenticatorSpec extends ObjectBehavior
     {
         switch ($createdAtEnum) {
             case self::CREATED_AT_IN_DATE:
-                return (new DateTimeImmutable('now -1 day'))->format('Y-m-d H:i:s');
+                return (new DateTimeImmutable('now -3 minutes'))->format('Y-m-d H:i:s');
 
             case self::CREATED_AT_OUT_OF_DATE:
-                $ageInMonths = MagicLinkAuthenticator::DEFAULT_TOKEN_LIFETIME_IN_DAYS + 1;
-
-                return (new DateTimeImmutable('now -' . $ageInMonths . ' month'))->format('Y-m-d H:i:s');
+                return (new DateTimeImmutable('1980-01-01'))->format('Y-m-d H:i:s');
 
             default:
                 return (new DateTimeImmutable('now'))->format('Y-m-d H:i:s');
