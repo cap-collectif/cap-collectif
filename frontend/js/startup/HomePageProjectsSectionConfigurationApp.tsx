@@ -1,11 +1,11 @@
 // @ts-nocheck
 import React from 'react'
-import { RelayEnvironmentProvider } from 'relay-hooks'
 import { graphql, QueryRenderer } from 'react-relay'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import HomePageProjectsSectionConfigurationPage from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPage'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import type { HomePageProjectsSectionConfigurationAppQueryResponse } from '~relay/HomePageProjectsSectionConfigurationAppQuery.graphql'
+import Providers from '~/startup/Providers';
 
 const query = graphql`
   query HomePageProjectsSectionConfigurationAppQuery($first: Int!, $cursor: String) {
@@ -18,7 +18,7 @@ const query = graphql`
   }
 `
 export default () => (
-  <RelayEnvironmentProvider environment={environment}>
+  <Providers>
     <QueryRenderer
       environment={environment}
       query={query}
@@ -50,5 +50,5 @@ export default () => (
         return <Loader />
       }}
     />
-  </RelayEnvironmentProvider>
+  </Providers>
 )
