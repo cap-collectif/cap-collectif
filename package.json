@@ -182,7 +182,7 @@
         "@babel/preset-env": "^7.22.7",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
-        "@cap-collectif/form": "^0.5.8",
+        "@cap-collectif/form": "^0.5.9",
         "@cap-collectif/ui": "^1.9.0",
         "@emotion/babel-preset-css-prop": "^11.11.0",
         "@emotion/cache": "^10.0.29",
