@@ -18,6 +18,7 @@ import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import TeaserServices from './TeaserServices'
 import select from '~/components/Form/Select'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 type Props = ReduxFormFieldArrayProps & {
   dispatch: Dispatch
@@ -158,7 +159,9 @@ export function StepVotesFields(
                 />
               </FieldContainer>
               {isBudgetEnabled && (
-                <Field type="number" min={0} name="budget" step="any" id="step-budget" component={component} />
+                <Field type="number" min={0} name="budget" step="any" id="step-budget" component={component}
+                       normalize={normalizeNumberInput}
+                />
               )}
               <FieldContainer toggled={isTresholdEnabled}>
                 <Field
@@ -184,7 +187,8 @@ export function StepVotesFields(
 
               {isTresholdEnabled && (
                 <>
-                  <Field type="number" min={0} name="voteThreshold" id="step-voteThreshold" component={component} />
+                  <Field type="number" min={0} name="voteThreshold" id="step-voteThreshold" component={component}
+                         normalize={normalizeNumberInput} />
                   <AppBox>
                     <Flex alignItems="center" color={!canConfigureProposalArchived ? 'gray.500' : 'inherit'}>
                       <Text>
@@ -205,6 +209,7 @@ export function StepVotesFields(
                     <Flex alignItems="center" spacing="4">
                       <Field
                         type="number"
+                        normalize={normalizeNumberInput}
                         min={0}
                         name="proposalArchivedTime"
                         id="step-proposalArchivedTime"
@@ -274,8 +279,8 @@ export function StepVotesFields(
                       <div className="mr-30 vote-min">
                         <Field
                           type="number"
+                          normalize={normalizeNumberInput}
                           min={1}
-                          parse={value => Number(value)}
                           value={votesMinState}
                           name="votesMin"
                           id="step-votesMin"
@@ -300,8 +305,8 @@ export function StepVotesFields(
                     )}
                     <Field
                       type="number"
+                      normalize={normalizeNumberInput}
                       min={1}
-                      parse={value => Number(value)}
                       name="votesLimit"
                       id="step-votesLimit"
                       value={votesLimitState}

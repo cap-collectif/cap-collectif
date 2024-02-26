@@ -22,6 +22,7 @@ exports[`<ProjectAdminRankingStepForm /> renders correctly 1`] = `
       }
       min={0}
       name="nbOpinionsToDisplay"
+      normalize={[Function]}
       type="number"
     />
     <Field
@@ -35,6 +36,7 @@ exports[`<ProjectAdminRankingStepForm /> renders correctly 1`] = `
       }
       min={0}
       name="nbVersionsToDisplay"
+      normalize={[Function]}
       type="number"
     />
   </ProjectAdminFormstyle__ProjectSmallFieldsContainer>

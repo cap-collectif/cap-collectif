@@ -10,6 +10,7 @@ import type { DialogState } from '../components/Dialog'
 import Dialog, { DialogBackdrop } from '../components/Dialog'
 import type { IframeEntityData } from '../models/types'
 import '../models/types'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 const ActionsWrapper: ComponentType<{}> = styled('div')`
   display: flex;
@@ -101,6 +102,7 @@ function ImagePropertiesDialog({
           </SubLabel>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             id="width"
             name="width"
             value={formState.width || ''}
@@ -115,6 +117,7 @@ function ImagePropertiesDialog({
           </SubLabel>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             id="height"
             name="height"
             value={formState.height || ''}
@@ -134,6 +137,7 @@ function ImagePropertiesDialog({
           </SubLabel>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             id="marginX"
             name="marginX"
             value={formState.marginX || ''}
@@ -147,6 +151,7 @@ function ImagePropertiesDialog({
           </SubLabel>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             id="marginY"
             name="marginY"
             value={formState.marginY || ''}

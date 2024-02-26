@@ -8,6 +8,7 @@ import toggle from '../../Form/Toggle'
 import withPanelStyle from './withPanelStyle'
 import { PanelBody, PanelHeader } from './PanelStyle.style'
 import type { State, Dispatch } from '~/types'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 type Props = {
   member: string
@@ -58,7 +59,7 @@ const PanelBorderStyle = ({ member, isPanelOpen, handlePanelToggle, dispatch, op
           max={100}
           id="opacity"
           name={`${member}.border.opacity`}
-          normalize={val => (val && !Number.isNaN(parseInt(val, 10)) ? parseInt(val, 10) : 0)}
+          normalize={normalizeNumberInput}
           label={
             <div>
               <FormattedMessage id="opacity" />

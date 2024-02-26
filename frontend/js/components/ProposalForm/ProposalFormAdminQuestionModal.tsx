@@ -18,6 +18,7 @@ import { ModalContainer } from '~/components/Question/SectionQuestionAdminModal'
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 type ParentProps = {
   dispatch: Dispatch
@@ -329,12 +330,14 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                     <Field
                       name={`${member}.rangeMin`}
                       type="number"
+                      normalize={normalizeNumberInput}
                       component={component}
                       label={<FormattedMessage id="minimum-vote" />}
                     />
                     <Field
                       name={`${member}.rangeMax`}
                       type="number"
+                      normalize={normalizeNumberInput}
                       component={component}
                       label={<FormattedMessage id="maximum-vote" />}
                     />
@@ -560,6 +563,7 @@ export class ProposalFormAdminQuestionModal extends React.Component<Props, State
                     id={`${member}.validationRule.number`}
                     name={`${member}.validationRule.number`}
                     type="number"
+                    normalize={normalizeNumberInput}
                     component={component}
                     normalize={val => (val && !Number.isNaN(val) ? parseInt(val, 10) : null)}
                   />

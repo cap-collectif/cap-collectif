@@ -1070,6 +1070,7 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           label="maximum-vote"
           min="0"
           name="maxRegistrations"
+          normalize={[Function]}
           type="number"
         />
       </EventForm__OptionContainer>

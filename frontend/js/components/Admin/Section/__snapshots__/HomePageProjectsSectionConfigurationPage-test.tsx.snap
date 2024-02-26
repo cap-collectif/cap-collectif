@@ -44,6 +44,7 @@ exports[`<HomePageProjectsSectionConfigurationPage /> renders correctly 1`] = `
         label="section-admin-display-order"
         min={0}
         name="position"
+        normalize={[Function]}
         type="number"
       />
     </HomePageProjectsSectionConfigurationPagestyle__SectionInner>

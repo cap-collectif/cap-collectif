@@ -10,6 +10,7 @@ import type { DialogState } from '../components/Dialog'
 import Dialog, { DialogBackdrop } from '../components/Dialog'
 import type { TableEntityData } from '../models/types'
 import '../models/types'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 const ActionsWrapper: ComponentType<{}> = styled('div')`
   display: flex;
@@ -73,6 +74,7 @@ function Table({
           </Label>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             min={1}
             id="lines"
             name="lines"
@@ -87,6 +89,7 @@ function Table({
           </Label>
           <Input
             type="number"
+            normalize={normalizeNumberInput}
             min={1}
             id="columns"
             name="columns"

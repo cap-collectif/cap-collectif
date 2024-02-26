@@ -11,6 +11,7 @@ import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInpu
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority'
 import Majority, { COLORS as COLORS_MAJORITY } from '~ui/Form/Input/Majority/Majority'
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 /* ------ INPUT ------ */
 storiesOf('Core/Form/Input', module).add('Default', () => {
@@ -20,7 +21,8 @@ storiesOf('Core/Form/Input', module).add('Disabled', () => {
   return <Input type="text" id="1" name="test" value="Hello world" disabled />
 })
 storiesOf('Core/Form/Input', module).add('Number', () => {
-  return <Input type="number" id="1" name="test" value={12} />
+  return <Input type="number" id="1" name="test" value={12}
+                normalize={normalizeNumberInput} />
 })
 
 /* ------ END INPUT ------ */

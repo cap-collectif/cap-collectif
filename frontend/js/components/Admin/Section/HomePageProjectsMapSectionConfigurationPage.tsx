@@ -31,6 +31,7 @@ import AppBox from '~/components/Ui/Primitives/AppBox'
 import Address from '~/components/Form/Address/Address'
 import { flyToPosition } from '~/components/Proposal/Create/ProposalChangeAddressModal'
 import type { AddressComplete } from '~/components/Form/Address/Address.type'
+import { normalizeNumberInput } from '~/components/Form/utils'
 const formName = 'section-proposal-admin-form'
 type Props = ReduxFormFormProps & {
   readonly homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration
@@ -192,6 +193,7 @@ export const HomePageProjectsMapSectionConfigurationPage = ({
           />
           <Field
             type="number"
+            normalize={normalizeNumberInput}
             name="position"
             id="position"
             label={intl.formatMessage({

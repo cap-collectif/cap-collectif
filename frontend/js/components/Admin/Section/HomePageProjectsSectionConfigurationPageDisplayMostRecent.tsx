@@ -10,6 +10,7 @@ import type { HomePageProjectsSectionConfigurationPageDisplayMostRecentQuery } f
 import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql'
 import type { HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration } from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql'
 import Image from '~ui/Primitives/Image'
+import { normalizeNumberInput } from '~/components/Form/utils'
 type Props = {
   readonly paginatedProjectsFragmentRef: HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key
   readonly homePageProjectsSectionConfiguration: HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration
@@ -68,6 +69,7 @@ export const HomePageProjectsSectionConfigurationPageDisplayMostRecent = ({
     <>
       <Field
         type="number"
+        normalize={normalizeNumberInput}
         name="nbObjects"
         id="nbObjects"
         label={intl.formatMessage({

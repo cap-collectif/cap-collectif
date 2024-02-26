@@ -5,6 +5,7 @@ import { Field } from 'redux-form'
 import component from '~/components/Form/Field'
 import { renderSubSection } from './ProjectAdminStepForm.utils'
 import { ProjectSmallFieldsContainer } from '../Form/ProjectAdminForm.style'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 export const ProjectAdminRankingStepForm = () => (
   <>
@@ -12,6 +13,7 @@ export const ProjectAdminRankingStepForm = () => (
     <ProjectSmallFieldsContainer>
       <Field
         type="number"
+        normalize={normalizeNumberInput}
         min={0}
         name="nbOpinionsToDisplay"
         id="step-nbOpinionsToDisplay"
@@ -20,6 +22,7 @@ export const ProjectAdminRankingStepForm = () => (
       />
       <Field
         type="number"
+        normalize={normalizeNumberInput}
         min={0}
         name="nbVersionsToDisplay"
         id="step-nbVersionsToDisplay"

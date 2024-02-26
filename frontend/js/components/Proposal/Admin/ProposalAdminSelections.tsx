@@ -25,6 +25,7 @@ import UpdateProposalStepPaperVoteCounterMutation from '~/mutations/UpdatePropos
 import Text from '~ui/Primitives/Text'
 import AppBox from '~ui/Primitives/AppBox'
 import { Tooltip as DsTooltip } from '~ds/Tooltip/Tooltip'
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 export const formName = 'proposal-admin-selections'
 const selector = formValueSelector(formName)
@@ -324,6 +325,7 @@ export class ProposalAdminSelections extends Component<Props> {
                               : ''
                           }
                           type="number"
+                          normalize={normalizeNumberInput}
                           name={`paperVotes[${collectStep.id}].totalCount`}
                           component={component}
                         />
@@ -340,6 +342,7 @@ export class ProposalAdminSelections extends Component<Props> {
                               },
                             )}
                             type="number"
+                            normalize={normalizeNumberInput}
                             name={`paperVotes[${collectStep.id}].totalPointsCount`}
                             component={component}
                           />
@@ -442,6 +445,7 @@ export class ProposalAdminSelections extends Component<Props> {
                                 : ''
                             }
                             type="number"
+                            normalize={normalizeNumberInput}
                             name={`paperVotes[${step.id}].totalCount`}
                             component={component}
                           />
@@ -461,6 +465,7 @@ export class ProposalAdminSelections extends Component<Props> {
                                 },
                               )}
                               type="number"
+                              normalize={normalizeNumberInput}
                               name={`paperVotes[${step.id}].totalPointsCount`}
                               component={component}
                             />

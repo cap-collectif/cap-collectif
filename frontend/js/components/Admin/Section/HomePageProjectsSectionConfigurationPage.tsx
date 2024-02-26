@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, Field, formValueSelector } from 'redux-form'
+import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { injectIntl } from 'react-intl'
@@ -8,8 +8,11 @@ import * as S from './HomePageProjectsSectionConfigurationPage.style'
 import renderComponent from '~/components/Form/Field'
 import type { Dispatch, GlobalState } from '~/types'
 import Button from '~ds/Button/Button'
-import UpdateHomePageProjectsSectionConfigurationMutation from '~/mutations/UpdateHomePageProjectsSectionConfigurationMutation'
-import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql'
+import UpdateHomePageProjectsSectionConfigurationMutation
+  from '~/mutations/UpdateHomePageProjectsSectionConfigurationMutation'
+import type {
+  HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key,
+} from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Icon from '~ds/Icon/Icon'
 import { toast } from '~ds/Toast'
@@ -17,13 +20,21 @@ import type {
   HomePageProjectsSectionConfigurationDisplayMode,
   HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration,
 } from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql'
-import HomePageProjectsSectionConfigurationPageDisplayMostRecent from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayMostRecent'
+import HomePageProjectsSectionConfigurationPageDisplayMostRecent
+  from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayMostRecent'
 import { handleTranslationChange } from '~/services/Translation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import Text from '~ui/Primitives/Text'
-import HomePageProjectsSectionConfigurationPageDisplayCustom from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom'
-import type { HomePageProjectsSectionConfigurationPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql'
-import type { HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql'
+import HomePageProjectsSectionConfigurationPageDisplayCustom
+  from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom'
+import type {
+  HomePageProjectsSectionConfigurationPageDisplayCustom_query$key,
+} from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql'
+import type {
+  HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key,
+} from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql'
+import { normalizeNumberInput } from '~/components/Form/utils'
+
 const formName = 'section-proposal-admin-form'
 type Props = ReduxFormFormProps & {
   readonly displayMode: HomePageProjectsSectionConfigurationDisplayMode
@@ -84,7 +95,7 @@ const asyncValidate = (values: FormValues, dispatch: Dispatch, { maxProjectsDisp
 }
 
 const onSubmit = async (values: FormValues, dispatch: Dispatch, { currentLanguage, intl }: Props) => {
-  const { title, teaser, position, nbObjects, projects } = values
+  const { title, teaser, position, nbObjects, projects, displayMode, enabled } = values
   const translationsData = handleTranslationChange(
     [],
     {
@@ -95,10 +106,10 @@ const onSubmit = async (values: FormValues, dispatch: Dispatch, { currentLanguag
     currentLanguage,
   )
   const input = {
-    position: parseInt(position, 10),
-    displayMode: values.displayMode,
-    nbObjects: parseInt(nbObjects, 10),
-    enabled: values.enabled === 'published',
+    position,
+    displayMode,
+    nbObjects,
+    enabled: enabled === 'published',
     translations: translationsData,
     projects,
   }
@@ -194,6 +205,7 @@ export const HomePageProjectsSectionConfigurationPage = ({
           />
           <Field
             type="number"
+            normalize={normalizeNumberInput}
             name="position"
             id="position"
             label={intl.formatMessage({

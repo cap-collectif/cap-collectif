@@ -28,6 +28,7 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { isFloat } from '~/utils/string'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import SelectDistrict from "~/components/Event/Form/SelectDistrict";
+import { normalizeNumberInput } from '~/components/Form/utils'
 
 type SelectedCurrentValues = {
   guestListEnabled: boolean
@@ -715,6 +716,7 @@ export const EventForm = ({
                 component={component}
                 disabled={!isMaxRegistrationEnable}
                 type="number"
+                normalize={normalizeNumberInput}
                 min="0"
                 id="event_maxRegistrations"
               />
