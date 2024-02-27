@@ -393,6 +393,8 @@ class ImportProposalsFromCsvCommand extends Command
 
             return $sheet->getRowIterator();
         }
+
+        return new \ArrayIterator([]);
     }
 
     protected function generateContentException(OutputInterface $output): int

@@ -2,70 +2,19 @@ includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - phpstan-baseline.neon
 
 parameters:
-    level: 1
+    level: 7
     checkClassCaseSensitivity: true
     checkThisOnly: true
     paths:
         - src
+        - tests
     parallel:
         jobSize: 20
         maximumNumberOfProcesses: 16
         minimumNumberOfJobsPerProcess: 2
         processTimeout: 300.0
-    excludePaths:
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ModerableTrait.php
-        - %currentWorkingDirectory%/src/Kernel.php
-        - %currentWorkingDirectory%/config/packages/admin.yaml
-        - %currentWorkingDirectory%/app/config/parameters.php
-        - %currentWorkingDirectory%/src/DoctrineMigrations/*
-        - %currentWorkingDirectory%/src/DoctrineMigrations/*
-        - %currentWorkingDirectory%/fixtures/*
-        - %currentWorkingDirectory%/src/Capco/AdminBundle/*
-        - %currentWorkingDirectory%/src/Capco/AdminBundle/Controller/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Controller/Api/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Controller/Site/*
-        - %currentWorkingDirectory%/src/Capco/UserBundle/Controller
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Validator/Constraints
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Behat
-        - %currentWorkingDirectory%/src/Capco/AppBundle/EventListener/DynamicRelationSubscriber.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/EventListener/ReferenceEventListener.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/ConsultationResolver.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Resolver/ProjectStatsResolver.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/TimestampableTrait.php
-        - %currentWorkingDirectory%/src/Capco/MediaBundle/Entity/Media.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Maker/templates/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Paris/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Nantes/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ContributionNotifier
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/Contribution/ContributionModerationMessage
-        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
-        - %currentWorkingDirectory%/spec/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ProjectVisibilityTrait.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Repository/AbstractVoteRepository.php
-# because of $connection->totalUserCount = $totalUsersInGroups;
-        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectAllowedGroupsResolver.php
-# Avoid phpstan to create errors when it anticipates version upgrades on Sonata and Symfony
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Cache/SessionListener.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Twig/MediaExtension.php
-
-# Method Capco\AppBundle\Entity\Post::canContribute() invoked with 1 parameter, 0 required.
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/CommentableTrait.php
-
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Helper/GeometryHelper.php
     symfony:
         constant_hassers: true
-
-rules:
-    - \PHPStan\Rules\Cast\EchoRule
-    - \PHPStan\Rules\Cast\InvalidCastRule
-    - \PHPStan\Rules\Cast\InvalidPartOfEncapsedStringRule
-    - \PHPStan\Rules\Cast\PrintRule
-    - \PHPStan\Rules\Functions\IncompatibleDefaultParameterTypeRule
-    - \PHPStan\Rules\Methods\IncompatibleDefaultParameterTypeRule
-    - \PHPStan\Rules\Operators\InvalidBinaryOperationRule
-    - \PHPStan\Rules\Operators\InvalidUnaryOperationRule
-    - \PHPStan\Rules\Operators\InvalidComparisonOperationRule

@@ -78,9 +78,11 @@ class GraphQLController extends BaseController
         } catch (BadRequestHttpException $e) {
             if (self::SCHEMA_PUBLIC === $schemaName || self::SCHEMA_PREVIEW === $schemaName) {
                 $this->logger->warn('Wrong public query');
-            } else {
-                throw $e;
+
+                return new Response('Wrong public query', Response::HTTP_BAD_REQUEST);
             }
+
+            throw $e;
         }
     }
 
