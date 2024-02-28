@@ -273,6 +273,7 @@ export const EventForm = ({
   className,
   isFrontendView = false,
   handleSubmit,
+  currentLanguage
 }: Props) => {
   const intl = useIntl()
   const isFeatureUserEventEnabled = useFeatureFlag('allow_users_to_propose_events')
@@ -483,6 +484,7 @@ export const EventForm = ({
             label={intl.formatMessage({
               id: 'global.description',
             })}
+            key={currentLanguage}
           />
           <div className="datePickContainer">
             <Field

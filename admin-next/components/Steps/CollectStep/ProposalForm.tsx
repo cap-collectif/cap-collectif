@@ -45,7 +45,7 @@ const ProposalForm: React.FC<Props> = ({defaultLocale, query: queryRef}) => {
         placeholder={intl.formatMessage({
           id: 'admin.fields.proposal_form.introduction.placeholder',
         })}
-        key={proposalFormKey}
+        key={values.id}
       />
       <Text mb={4}>{intl.formatMessage({id: 'admin.proposal.form.needed.info'})}</Text>
       <ProposalFormFormNeededInfoList

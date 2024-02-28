@@ -12,6 +12,7 @@ import {
 import {getDefaultRequirements, getRequirementsInput} from '@components/Requirements/Requirements';
 import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFormAdminCategories';
 import {StepDurationTypeEnum} from "../Shared/StepDurationInput";
+import { FormTabs, FormTabsEnum } from './CollectStepContext'
 
 export const getInitialValues = (
     step: CollectStepFormQueryResponse['step'],
@@ -127,9 +128,10 @@ export const getInitialValues = (
 
 export const getProposalFormUpdateVariablesInput = (
     formValues: FormValues['form'],
+    selectedTab: FormTabs
 ): Omit<UpdateProposalFormMutationVariables['input'], 'clientMutationId' | 'proposalFormId'> => {
     return {
-        proposalFormId: formValues.id,
+        proposalFormId: selectedTab === FormTabsEnum.NEW ? formValues.id : undefined,
         description: formValues.description,
         descriptionUsingJoditWysiwyg: false,
         usingThemes: formValues.usingThemes,

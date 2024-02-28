@@ -252,6 +252,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         if (proposalForm) {
             // @ts-ignore
             setValue('form_model', {
+                id: proposalForm.id ?? null,
                 title: proposalForm.title ?? null,
                 titleHelpText: proposalForm.title ?? null,
                 usingSummary: proposalForm.usingSummary ?? false,

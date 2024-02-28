@@ -406,7 +406,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   const onSubmit = async (values: FormValues) => {
     const owner = viewer?.organizations?.[0] ?? viewer
     const proposalFormValues = selectedTab === FormTabsEnum.NEW ? values['form'] : values['form_model']
-    const proposalFormUpdateInput = getProposalFormUpdateVariablesInput(proposalFormValues)
+    const proposalFormUpdateInput = getProposalFormUpdateVariablesInput(proposalFormValues, selectedTab)
 
     try {
       const proposalFormUpdateResponse = await UpdateProposalFormMutation.commit({
