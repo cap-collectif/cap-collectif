@@ -77,7 +77,7 @@ export const HomePageProjectsSectionConfigurationPageDisplayMostRecent = ({
         })}
         component={renderComponent}
         onChange={event => {
-          const { value } = event.target
+          const value = Number(event.target.value)
 
           if (value > 0 && value <= maxProjectsDisplay) {
             refetch(
