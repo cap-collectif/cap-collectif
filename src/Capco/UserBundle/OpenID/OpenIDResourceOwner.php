@@ -180,6 +180,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'debatpenly':
             case 'debateauidf':
             case 'debatdsf':
+            case 'participer-debat-lithium':
                 $resolver
                     ->setDefaults([
                         'state' => null,
