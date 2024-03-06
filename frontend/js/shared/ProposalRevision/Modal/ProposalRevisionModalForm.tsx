@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Button, Modal } from 'react-bootstrap'
-import { FormattedMessage, FormattedHTMLMessage, useIntl } from 'react-intl'
+import { FormattedMessage, FormattedHTMLMessage, useIntl, injectIntl } from 'react-intl'
 import type { FormProps } from 'redux-form'
 import { reduxForm, Field, formValueSelector, SubmissionError } from 'redux-form'
 import moment from 'moment'
@@ -322,7 +322,7 @@ const form = reduxForm({
 })(ProposalRevisionModalForm)
 // @ts-ignore
 const container = connect<any, any>(mapStateToProps)(form)
-export default createFragmentContainer(container, {
+export default createFragmentContainer(injectIntl(container), {
   proposal: graphql`
     fragment ProposalRevisionModalForm_proposal on Proposal {
       id
