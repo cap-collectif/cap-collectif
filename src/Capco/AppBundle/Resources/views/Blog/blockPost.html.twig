@@ -36,7 +36,7 @@
             {% for theme in post.themes %}
                 <a href="{{ path('app_theme_show', {'slug': theme.translate.slug, '_locale': app.request.locale}) }}"><span class="label label-default">{{ theme.translate.title }}</span></a>
             {% endfor %}
-            {{ 'event.header.date'|trans({'{date}': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') | capitalize }}
+            <span class='date'>{{ 'event.header.date'|trans({'{date}': (post.publishedAt | localizeddate('long', 'none'))}, 'CapcoAppBundle') | capitalize }}<span>
             {% if post.authors|length > 0 %}
                 {{ 'global.written_by' | trans({}, 'CapcoAppBundle') }}
                 {% for author in post.authors %}
