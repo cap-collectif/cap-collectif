@@ -29,9 +29,9 @@ export interface ProposalStepVoteTabsFormProps {
 }
 
 const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
-                                                                           formMethods,
-                                                                           defaultLocale,
-                                                                         }) => {
+                                                                             formMethods,
+                                                                             defaultLocale,
+                                                                           }) => {
   const intl = useIntl()
   const { watch, setValue, control } = formMethods
   const votesMinEnabled = useFeatureFlag('votes_min')
@@ -43,6 +43,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
   const votesMin = watch('votesMin');
   const votesLimit = watch('votesLimit');
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
+  const voteThresholdEnabled = voteThreshold !== null
 
   return (
     <Tabs
@@ -122,7 +123,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                   </ListCard.Item.Label>
                   <Switch
                     id="votesMin_switch"
-                    checked={(voteThreshold ?? 0) > 0}
+                    checked={voteThresholdEnabled}
                     name="voteThreshold"
                     onChange={event => {
                       if ((voteThreshold ?? 0) > 0) {
@@ -133,7 +134,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     }}
                   />
                 </Flex>
-                {(voteThreshold ?? 0) > 0 && (
+                {voteThresholdEnabled && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -141,7 +142,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                       })}
                     </Text>
                     <FormControl name="voteThreshold" width="auto" control={control} mb={6}>
-                      <FieldInput id="voteThreshold" name="voteThreshold" control={control} min={0} type="number" />
+                      <FieldInput id="voteThreshold" name="voteThreshold" control={control} type="number" />
                     </FormControl>
                     <Text
                       color="gray.700"
@@ -209,7 +210,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     }}
                   />
                 </Flex>
-                {votesMin !== null || votesLimit !== null && (
+                {voteMinVoteLimitEnabled && (
                   <Flex direction="column" gap={2}>
                     <Text color="gray.700">
                       {intl.formatMessage({
@@ -225,7 +226,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                               id: 'global-minimum-full',
                             })}
                           />
-                          <FieldInput id="votesMin" name="votesMin" control={control} min={1} type="number" />
+                          <FieldInput id="votesMin" name="votesMin" control={control} type="number" />
                         </FormControl>
                       )}
                       <FormControl name="votesLimit" width="auto" control={control} mb={6}>
