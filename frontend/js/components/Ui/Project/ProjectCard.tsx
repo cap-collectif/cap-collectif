@@ -103,7 +103,7 @@ export const ProjectCard = ({
           </AppBox>
         )}
 
-        {renderTag(project, intl, isProjectsPage)}
+        {renderTag(project, intl)}
         <Flex direction="column" m={4} bg="white" flex={1} overflow="hidden">
           <Heading
             truncate={100}

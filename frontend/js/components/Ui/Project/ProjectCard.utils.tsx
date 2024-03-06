@@ -54,7 +54,7 @@ const getIsFutureStep = (steps: Steps): boolean => {
   return futureSteps.length > 0 && openedSteps.length === 0 && closedSteps.length === 0
 }
 
-export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProjectsPage: boolean) => {
+export const renderTag = (project: ProjectCard_project, intl: IntlShape) => {
   const restrictedTag = () => (
     <Tag
       variant="neutral-gray"
@@ -96,7 +96,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
   const now = moment()
   const publishedTime = now.diff(moment(project.publishedAt), 'hours')
   const isFutureStep = project.steps ? getIsFutureStep(project.steps) : null
-  if (isFutureStep && isProjectsPage)
+  if (isFutureStep)
     return tag(
       'aqua',
       intl.formatMessage({
@@ -106,7 +106,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
     )
   if (!project.currentStep) return null
   const isStepFinished = project.currentStep.state === 'CLOSED'
-  if (isStepFinished && isProjectsPage)
+  if (isStepFinished)
     return tag(
       'neutral-gray',
       intl.formatMessage({
@@ -115,7 +115,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
       isRestricted,
     )
   const hoursLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'hours')
-  if (hoursLeft > -48 && isProjectsPage && project.currentStep)
+  if (hoursLeft > -48 && project.currentStep)
     return tag(
       'red',
       `${-hoursLeft} ${intl.formatMessage(
@@ -129,7 +129,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
       isRestricted,
     )
   const daysLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'days')
-  if (daysLeft > -7 && isProjectsPage && project.currentStep)
+  if (daysLeft > -7 && project.currentStep)
     return tag(
       'orange',
       `${-daysLeft} ${intl.formatMessage(
@@ -142,7 +142,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
       )}`,
       isRestricted,
     )
-  if (publishedTime < 48 && isProjectsPage)
+  if (publishedTime < 48)
     return tag(
       'green',
       intl.formatMessage({
@@ -152,7 +152,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape, isProje
     )
   if (
     (isRestricted && !isStepFinished && !(daysLeft > -7) && !(hoursLeft > -48) && !(publishedTime < 48)) ||
-    (isRestricted && !isProjectsPage)
+    isRestricted
   )
     return (
       <Flex
