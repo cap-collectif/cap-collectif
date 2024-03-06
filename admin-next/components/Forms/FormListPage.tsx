@@ -144,7 +144,7 @@ const FormListPage: React.FC<Props> = ({viewer: viewerRef, affiliations}) => {
             return () => disposeQuestionnaireQuery();
         }
         if (selectedFormFilter === 'QUESTIONNAIRE') {
-            loadQuestionnaireQuery({...queryVariables, types: ['QUESTIONNAIRE']});
+            loadQuestionnaireQuery({...queryVariables, types: ['QUESTIONNAIRE', 'VOTING']});
             return () => disposeQuestionnaireAnalysisQueryReference();
         }
         if (selectedFormFilter === 'CONSULTATION') {
