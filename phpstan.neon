@@ -18,3 +18,4 @@ parameters:
         processTimeout: 300.0
     symfony:
         constant_hassers: true
+    reportUnmatchedIgnoredErrors: false
