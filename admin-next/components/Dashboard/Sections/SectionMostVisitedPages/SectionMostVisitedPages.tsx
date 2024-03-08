@@ -62,6 +62,7 @@ const SectionMostVisitedPages: FC<SectionMostVisitedPagesProps> = ({ queryOption
                                     ? intl.formatMessage({ id: 'navbar.homepage' })
                                     : `/${formatLabel(value.key)}`
                             }
+                            url={value.key}
                         />
                     ))}
                 </Section>

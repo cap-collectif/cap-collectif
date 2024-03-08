@@ -58,6 +58,7 @@ const ModalSectionMostVisitedPages: FC<ModalSectionMostVisitedPagesProps> = ({
                                 ? intl.formatMessage({ id: 'navbar.homepage' })
                                 : `/${formatLabel(value.key)}`
                         }
+                        url={value.key}
                     />
                 ))}
             </Modal.Body>
