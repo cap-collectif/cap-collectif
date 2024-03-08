@@ -36,7 +36,7 @@ export const QuestionnaireResponsesCsvDropZoneInput = ({
         <FormattedHTMLMessage
           id="reply-csv-file-helptext"
           values={{
-            url: encodeURI('data:text/csv;charset=utf-8, Couleur \n bleu \n blanc \n rouge \n vert'),
+            url: encodeURI('data:text/csv;charset=utf-8,choix 1 \nchoix 2 \nchoix 3 \nchoix 4'),
           }}
         />
       </HelpBlock>

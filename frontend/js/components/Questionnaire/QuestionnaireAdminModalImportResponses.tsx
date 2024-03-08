@@ -8,6 +8,7 @@ import type { DropzoneFile } from 'react-dropzone'
 import CloseButton from '../Form/CloseButton'
 import type { Dispatch, GlobalState } from '~/types'
 import { QuestionnaireResponsesCsvDropZoneInput } from './QuestionnaireResponsesCsvDropZoneInput'
+import jschardet from 'jschardet'
 
 type Props = {
   show: boolean
@@ -42,21 +43,25 @@ export class QuestionnaireAdminModalImportResponses extends React.Component<Prop
     })
     droppedFiles.forEach(file => {
       const reader = new window.FileReader()
+      reader.readAsBinaryString(file);
 
       reader.onload = () => {
-        input.onChange({
-          data: reader.result,
-          oldMember,
-          type,
-          fileType: file.type,
-        })
+        const encoding = jschardet.detect(reader.result as Buffer);
+        reader.readAsText(file, encoding.encoding);
+
+        reader.onload = () => {
+          input.onChange({
+            data: reader.result,
+            oldMember,
+            type,
+            fileType: file.type,
+          })
+        }
+
+        reader.onabort = () => input.onChange(null)
+
+        reader.onerror = () => input.onChange(null)
       }
-
-      reader.onabort = () => input.onChange(null)
-
-      reader.onerror = () => input.onChange(null)
-
-      reader.readAsText(file)
     })
   }
 

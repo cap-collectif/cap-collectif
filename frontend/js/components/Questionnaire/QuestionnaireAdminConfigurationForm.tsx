@@ -188,11 +188,6 @@ export const prepareVariablesFromAnalyzedFile = (
     .split('\n')
     .map((importedResponse: string) => importedResponse.replace(/['"]+/g, ''))
 
-  // detects if first line is a header
-  if (importedResponses.length > 0) {
-    importedResponses.shift()
-  }
-
   importedResponses = getUnique(importedResponses)
   const uniqResponses = importedResponses.cleanValues.map(response => ({
     title: response,
