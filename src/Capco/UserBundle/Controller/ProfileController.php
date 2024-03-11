@@ -25,6 +25,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -33,6 +34,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -429,20 +433,39 @@ class ProfileController extends Controller
     }
 
     /**
+     * @Route("/delete-account/csrf-token", name="get_csrf_token", options={"i18n" = false})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function getCsrfToken(CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
+    {
+        $token = $csrfTokenManager->getToken('delete_account')->getValue();
+
+        return new JsonResponse(['csrfToken' => $token]);
+    }
+
+    /**
      * @Route("/deleteAccount/{type}", name="capco_profile_delete_account", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
      */
-    public function deleteAccount(string $type): RedirectResponse
+    public function deleteAccount(string $type, Request $request, CsrfTokenManagerInterface $csrfTokenManager): RedirectResponse
     {
+        $csrfToken = $request->query->get('csrfToken');
+
+        if (!$csrfToken || !$csrfTokenManager->isTokenValid(new CsrfToken('delete_account', $csrfToken))) {
+            throw new AccessDeniedException('Invalid CSRF token');
+        }
+
         $redirectUrl = $this->router->generate(
             'app_homepage',
             ['deleteType' => $type],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
+
         $user = $this->getUser();
         if ($user->isFranceConnectAccount()) {
             $redirectUrl = $this->franceConnectLogoutHandler->getLogoutUrl($user);
         }
+
         $this->deleteAccountMutation->deleteAccount($type, $user);
 
         return $this->redirect($redirectUrl);

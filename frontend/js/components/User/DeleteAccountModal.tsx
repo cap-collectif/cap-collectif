@@ -41,7 +41,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
     })
   }
 
-  delete = () => {
+  delete = async () => {
     const { userDeletedIsNotViewer, viewer } = this.props
     const { removalType } = this.state
 
@@ -57,7 +57,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
         }, 1000)
       })
     } else {
-      window.location.href = `/profile/deleteAccount/${removalType}`
+      const { csrfToken } = await fetch('/profile/delete-account/csrf-token').then(response => response.json())
+      window.location.href = `/profile/deleteAccount/${removalType}?csrfToken=${csrfToken}`
     }
   }
 
