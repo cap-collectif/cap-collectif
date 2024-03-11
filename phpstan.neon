@@ -19,3 +19,5 @@ parameters:
     symfony:
         constant_hassers: true
     reportUnmatchedIgnoredErrors: false
+    excludePaths:
+        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
