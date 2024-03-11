@@ -41,7 +41,6 @@ class UpdateNewProjectMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private ProjectAbstractStepRepository $projectAbstractStepRepository;
     private TranslatorInterface $translator;
-    private \HTMLPurifier $HTMLPurifier;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -52,8 +51,7 @@ class UpdateNewProjectMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
         ProjectAbstractStepRepository $projectAbstractStepRepository,
-        TranslatorInterface $translator,
-        \HTMLPurifier $HTMLPurifier
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -64,7 +62,6 @@ class UpdateNewProjectMutation implements MutationInterface
         $this->authorizationChecker = $authorizationChecker;
         $this->projectAbstractStepRepository = $projectAbstractStepRepository;
         $this->translator = $translator;
-        $this->HTMLPurifier = $HTMLPurifier;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -254,7 +251,7 @@ class UpdateNewProjectMutation implements MutationInterface
             return;
         }
 
-        $description = $arguments['description'] ? $this->HTMLPurifier->purify($arguments['description']) : null;
+        $description = $arguments['description'] ?? null;
         unset($arguments['description']);
 
         $steps = $project->getRealSteps();
