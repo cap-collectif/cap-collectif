@@ -17,6 +17,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryCategoryImagesResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
+use Capco\AppBundle\Helper\QuestionJumpsHandler;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
 use Capco\AppBundle\Repository\CategoryImageRepository;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
@@ -53,6 +54,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     private Indexer $indexer;
     private ValidatorInterface $colorValidator;
     private Manager $toggleManager;
+    private QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -69,7 +71,8 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         Indexer $indexer,
         ValidatorInterface $colorValidator,
         Manager $toggleManager,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        QuestionJumpsHandler $questionJumpsHandler
     ) {
         parent::__construct($em, $globalIdResolver, $authorizationChecker);
         $this->formFactory = $formFactory;
@@ -84,12 +87,14 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         $this->indexer = $indexer;
         $this->colorValidator = $colorValidator;
         $this->toggleManager = $toggleManager;
+        $this->questionJumpsHandler = $questionJumpsHandler;
     }
 
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
         $arguments = $input->getArrayCopy();
+        $this->questionJumpsHandler->unsetJumps($arguments);
         $id = $arguments['proposalFormId'];
         $oldChoices = null;
 
@@ -132,7 +137,7 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
         $arguments = $this->associateNewCategoryImageToProposalCategory($proposalForm, $arguments);
 
         $this->em->flush();
-
+        $this->questionJumpsHandler->saveJumps($input->getArrayCopy(), $proposalForm);
         $this->reIndexChoices($oldChoices, $proposalForm);
 
         return ['proposalForm' => $proposalForm];

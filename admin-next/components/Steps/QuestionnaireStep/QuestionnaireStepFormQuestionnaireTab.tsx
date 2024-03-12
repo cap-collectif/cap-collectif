@@ -36,21 +36,36 @@ const QuestionnaireCreationTypeEnum = {
 const ADD_NEW_QUESTION = -1
 const MODEL = 'MODEL'
 
-const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLocale?: string }> = ({
-  model = false,
-  defaultLocale,
-}) => {
+export const QuestionnaireStepFormQuestionnaire: React.FC<{
+  model?: boolean
+  defaultLocale?: string
+  proposalFormKey?: string
+  openQuestionModal?: boolean
+  setOpenQuestionModal?: (boolean) => void
+}> = ({ model = false, defaultLocale, proposalFormKey, openQuestionModal, setOpenQuestionModal }) => {
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useMultipleDisclosure({
     'question-modal': false,
     'section-modal': false,
   })
+  const isCollectStep = !!proposalFormKey
   const [questionIndex, setQuestionIndex] = useState(ADD_NEW_QUESTION)
   const [isSubSection, setIsSubSection] = useState(false)
 
   const { control, watch, setValue } = useFormContext()
 
-  const fieldName = model ? `${MODEL}questionnaire` : 'questionnaire'
+  useEffect(() => {
+    if (isCollectStep && openQuestionModal) {
+      setQuestionIndex(ADD_NEW_QUESTION)
+      onOpen('question-modal')()
+    }
+  }, [openQuestionModal, onOpen, isCollectStep])
+
+  const fieldName = proposalFormKey
+    ? `${proposalFormKey}.questionnaire`
+    : model
+    ? `${MODEL}questionnaire`
+    : 'questionnaire'
 
   const {
     fields: questions,
@@ -87,9 +102,11 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLoc
     <>
       {isOpen('question-modal') ? (
         <QuestionModal
+          isCollectStep={isCollectStep}
           defaultLocale={defaultLocale}
           isNewQuestion={questionIndex === ADD_NEW_QUESTION}
           onClose={() => {
+            if (setOpenQuestionModal) setOpenQuestionModal(false)
             setValue('temporaryQuestion', {})
             onClose('question-modal')()
           }}
@@ -141,19 +158,23 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLoc
         />
       ) : null}
 
-      <FormControl name={`${fieldName}.description`} control={control} mb={6}>
-        <FormLabel htmlFor={`${fieldName}.description`} label={intl.formatMessage({ id: 'global.intro' })} />
-        <FieldInput
-          id={`${fieldName}.description`}
-          name={`${fieldName}.description`}
-          control={control}
-          type="textarea"
-          placeholder={intl.formatMessage({
-            id: 'questionnaire.explain_briefly',
-          })}
-        />
-      </FormControl>
-      <Text>{intl.formatMessage({ id: 'admin.fields.questionnaire.questions' })}</Text>
+      {!isCollectStep ? (
+        <>
+          <FormControl name={`${fieldName}.description`} control={control} mb={6}>
+            <FormLabel htmlFor={`${fieldName}.description`} label={intl.formatMessage({ id: 'global.intro' })} />
+            <FieldInput
+              id={`${fieldName}.description`}
+              name={`${fieldName}.description`}
+              control={control}
+              type="textarea"
+              placeholder={intl.formatMessage({
+                id: 'questionnaire.explain_briefly',
+              })}
+            />
+          </FormControl>
+          <Text>{intl.formatMessage({ id: 'admin.fields.questionnaire.questions' })}</Text>
+        </>
+      ) : null}
       {questions.length ? (
         // @ts-ignore
         <DragnDrop onDragEnd={onDragEnd} backgroundColor="red">
@@ -255,48 +276,55 @@ const QuestionnaireStepFormQuestionnaire: React.FC<{ model?: boolean; defaultLoc
           </DragnDrop.List>
         </DragnDrop>
       ) : null}
-      <Box mt={4}>
-        <Menu
-          placement="bottom-start"
-          closeOnSelect={false}
-          disclosure={
-            <Button variantColor="primary" variant="secondary" variantSize="small" rightIcon={CapUIIcon.ArrowDown}>
-              {intl.formatMessage({ id: 'global.add' })}
-            </Button>
-          }
-        >
-          <Menu.List>
-            <Menu.Item
-              onClick={() => {
-                setQuestionIndex(ADD_NEW_QUESTION)
-                onOpen('question-modal')()
-              }}
-            >
-              {intl.formatMessage({ id: 'a-question' })}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                setQuestionIndex(ADD_NEW_QUESTION)
-                setIsSubSection(false)
-                onOpen('section-modal')()
-              }}
-            >
-              {intl.formatMessage({ id: 'a-section' })}
-            </Menu.Item>
-            <Menu.Item
-              onClick={() => {
-                setQuestionIndex(ADD_NEW_QUESTION)
-                setIsSubSection(true)
-                onOpen('section-modal')()
-              }}
-            >
-              {intl.formatMessage({ id: 'a-subsection' })}
-            </Menu.Item>
-          </Menu.List>
-        </Menu>
-      </Box>
-      <Text mt={4}>{intl.formatMessage({ id: 'conditional-jumps' })}</Text>
-      <QuestionnaireStepFormJumpsTab fieldName={fieldName} />
+      {!isCollectStep ? (
+        <Box mt={4}>
+          <Menu
+            placement="bottom-start"
+            closeOnSelect={false}
+            disclosure={
+              <Button variantColor="primary" variant="secondary" variantSize="small" rightIcon={CapUIIcon.ArrowDown}>
+                {intl.formatMessage({ id: 'global.add' })}
+              </Button>
+            }
+          >
+            <Menu.List>
+              <Menu.Item
+                onClick={() => {
+                  setQuestionIndex(ADD_NEW_QUESTION)
+                  onOpen('question-modal')()
+                }}
+              >
+                {intl.formatMessage({ id: 'a-question' })}
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  setQuestionIndex(ADD_NEW_QUESTION)
+                  setIsSubSection(false)
+                  onOpen('section-modal')()
+                }}
+              >
+                {intl.formatMessage({ id: 'a-section' })}
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => {
+                  setQuestionIndex(ADD_NEW_QUESTION)
+                  setIsSubSection(true)
+                  onOpen('section-modal')()
+                }}
+              >
+                {intl.formatMessage({ id: 'a-subsection' })}
+              </Menu.Item>
+            </Menu.List>
+          </Menu>
+        </Box>
+      ) : null}
+
+      {questions.length || !isCollectStep ? (
+        <Box mb={isCollectStep ? 4 : 0}>
+          <Text mt={4}>{intl.formatMessage({ id: 'conditional-jumps' })}</Text>
+          <QuestionnaireStepFormJumpsTab fieldName={fieldName} />
+        </Box>
+      ) : null}
     </>
   )
 }

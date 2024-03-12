@@ -3,9 +3,12 @@
 namespace Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Interfaces\QuestionsInterface;
+use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
 use Capco\AppBundle\Repository\AbstractQuestionRepository;
@@ -13,6 +16,7 @@ use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Repository\QuestionChoiceRepository;
 use Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -57,22 +61,30 @@ class QuestionJumpsHandler
         $this->indexer = $indexer;
     }
 
-    public function saveJumps($arguments, Questionnaire $questionnaire): void
+    /**
+     * @param array<string, mixed> $arguments
+     */
+    public function saveJumps(array $arguments, QuestionsInterface $entity): void
     {
+        list('formType' => $formType, 'type' => $type) = $this->getEntityConfig($entity, $arguments);
+
         $questions = $arguments['questions'] ?? null;
 
         if (!$questions) {
             return;
         }
 
+        if (!$this->hasJumps($questions)) {
+            return;
+        }
+
         $this->parseTemporaryId($arguments['questions']);
 
-        $this->em->refresh($questionnaire);
+        $this->em->refresh($entity);
 
-        $form = $this->formFactory->create(QuestionnaireConfigurationUpdateType::class, $questionnaire);
+        $form = $this->formFactory->create($formType, $entity);
 
-        unset($arguments['questionnaireId']);
-        $this->handleQuestions($form, $questionnaire, $arguments, 'questionnaire');
+        $this->handleQuestions($form, $entity, $arguments, $type);
         $this->em->flush();
     }
 
@@ -87,7 +99,51 @@ class QuestionJumpsHandler
         }
     }
 
-    public function parseTemporaryId(array &$questions)
+    /**
+     * @param array<mixed> $questions
+     */
+    private function hasJumps(array $questions): bool
+    {
+        foreach ($questions as &$questionData) {
+            if ($questionData['question']['alwaysJumpDestinationQuestion'] ?? null) {
+                return true;
+            }
+
+            if ($questionData['question']['jumps'] ?? null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array<string, string> $arguments
+     *
+     * @return string[]
+     */
+    private function getEntityConfig(QuestionsInterface $entity, array &$arguments): array
+    {
+        $isQuestionnaire = true === $entity instanceof Questionnaire;
+        $isProposalForm = true === $entity instanceof ProposalForm;
+
+        if (!$isQuestionnaire && !$isProposalForm) {
+            throw new UserError('Given entity should be either of type Questionnaire or ProposalForm');
+        }
+
+        $formType = $isQuestionnaire ? QuestionnaireConfigurationUpdateType::class : ProposalFormUpdateType::class;
+        $type = $isQuestionnaire ? 'questionnaire' : 'proposalForm';
+
+        if ($isQuestionnaire && $arguments['questionnaireId']) {
+            unset($arguments['questionnaireId']);
+        } else {
+            unset($arguments['proposalFormId']);
+        }
+
+        return ['formType' => $formType, 'type' => $type];
+    }
+
+    private function parseTemporaryId(array &$questions)
     {
         foreach ($questions as &$questionData) {
             $questionTempId = $questionData['question']['temporaryId'] ?? null;

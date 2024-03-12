@@ -4,7 +4,7 @@ import uuid, { isUuidOrTmp } from '@utils/uuid'
 import { FormValues } from './QuestionnaireStepForm'
 import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm'
 import { IntlShape } from 'react-intl'
-import {getDefaultRequirements} from "../../Requirements/Requirements";
+import { getDefaultRequirements } from '../../Requirements/Requirements'
 
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
   switch (type) {

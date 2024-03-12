@@ -117,8 +117,8 @@ class ProposalFormUpdateType extends AbstractType
                     ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
                 ) {
                     return null === $questionnaireAbstractQuestion
-                        || null === $questionnaireAbstractQuestion->getQuestion()->getTitle()
-                        || '' === $questionnaireAbstractQuestion->getQuestion()->getTitle();
+                        || null === $questionnaireAbstractQuestion->getQuestion()
+                        || empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
                 },
             ])
 

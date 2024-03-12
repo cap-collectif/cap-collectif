@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\EventListener;
 
-use Doctrine\Orm\EntityManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class FilterConfigurator
 {
-    private $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

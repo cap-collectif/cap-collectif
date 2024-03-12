@@ -10,9 +10,10 @@ type Props = {
   onClose: () => void
   isNewQuestion: boolean
   defaultLocale?: string
+  isCollectStep?: boolean
 }
 
-const QuestionModal = ({ onSuccess, onClose, isNewQuestion, defaultLocale }: Props) => {
+const QuestionModal = ({ onSuccess, onClose, isNewQuestion, defaultLocale, isCollectStep = false }: Props) => {
   const intl = useIntl()
 
   return (
@@ -27,7 +28,12 @@ const QuestionModal = ({ onSuccess, onClose, isNewQuestion, defaultLocale }: Pro
     >
       <ChooseQuestionTypeModal onCancel={onClose} />
       <CustomizeQuestionModal onCancel={onClose} isNewQuestion={isNewQuestion} defaultLocale={defaultLocale} />
-      <AdditionalParametersModal onSuccess={onSuccess} onCancel={onClose} isNewQuestion={isNewQuestion} />
+      <AdditionalParametersModal
+        onSuccess={onSuccess}
+        onCancel={onClose}
+        isNewQuestion={isNewQuestion}
+        isCollectStep={isCollectStep}
+      />
     </MultiStepModal>
   )
 }

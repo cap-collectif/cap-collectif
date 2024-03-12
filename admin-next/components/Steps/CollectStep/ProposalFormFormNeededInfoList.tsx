@@ -8,16 +8,16 @@ import ProposalFormAdminDistricts from '@components/Steps/CollectStep/ProposalFo
 import { useIntl } from 'react-intl'
 import { FormValues } from '@components/Steps/CollectStep/CollectStepForm'
 import { UseFormSetValue } from 'react-hook-form/dist/types/form'
-import { Control } from 'react-hook-form'
-import { ProposalFormForm_query } from '@relay/ProposalFormForm_query.graphql'
+import { Control, FieldValue } from 'react-hook-form'
+import { ProposalFormForm_query$key } from '@relay/ProposalFormForm_query.graphql'
 import { graphql, useFragment } from 'react-relay'
 import { useCollectStep } from './CollectStepContext'
 
 export interface ProposalFormFormNeededInfoListProps {
   values: FormValues['form']
-  setValue: UseFormSetValue<FormValues>
+  setValue: UseFormSetValue<FieldValue<FormValues>>
   control: Control<any>
-  query: ProposalFormForm_query
+  query: ProposalFormForm_query$key
   defaultLocale: string
 }
 
@@ -90,6 +90,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {
+                // @ts-ignore setValue types are weird
                 deleteRequiredInfo('summary', setValue, proposalFormKey)
               }}
             />

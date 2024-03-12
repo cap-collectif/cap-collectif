@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
+use Capco\AppBundle\Entity\Interfaces\QuestionsInterface;
 use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
@@ -27,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
+class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;

@@ -12156,7 +12156,10 @@ type ProposalForm implements Node & UniformResourceLocatable {
   titleHelpText: String
   descriptionHelpText: String
   addressHelpText: String
-  questions: [Question!]!
+  questions(
+    """Filter questions by a given filter."""
+    filter: QuestionsFilterType
+  ): [Question!]!
   mapCenter: GoogleMapsAddress
   zoomMap: Int
   adminUrl: URI!

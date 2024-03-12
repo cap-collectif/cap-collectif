@@ -3,20 +3,11 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { FormProvider, useForm } from 'react-hook-form'
-import {
-  Accordion,
-  Box,
-  Button,
-  CapUIAccordionColor,
-  Flex,
-  FormLabel,
-  Text,
-  toast,
-} from '@cap-collectif/ui'
+import { Accordion, Box, Button, CapUIAccordionColor, Flex, Text, toast } from '@cap-collectif/ui'
 import ProposalFormForm from '@components/Steps/CollectStep/ProposalFormForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
-import {RequirementsFormValues} from '@components/Requirements/Requirements'
+import { RequirementsFormValues } from '@components/Requirements/Requirements'
 import {
   CollectStepFormQuery,
   MainView,
@@ -38,14 +29,15 @@ import UpdateCollectStepMutation from '@mutations/UpdateCollectStepMutation'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import {FormTabsEnum, useCollectStep} from "./CollectStepContext";
-import ProposalStepOptionnalAccordion from "../ProposalStep/ProposalStepOptionnalAccordion";
+import { FormTabsEnum, useCollectStep } from './CollectStepContext'
+import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
 import { onBack } from '@components/Steps/utils'
-import LabelInput from "../Shared/LabelInput";
-import BodyInput from "../Shared/BodyInput";
-import StepDurationInput from "../Shared/StepDurationInput";
-import ProposalSettings from "../ProposalStep/ProposalSettings";
-
+import LabelInput from '../Shared/LabelInput'
+import BodyInput from '../Shared/BodyInput'
+import StepDurationInput from '../Shared/StepDurationInput'
+import ProposalSettings from '../ProposalStep/ProposalSettings'
+import { formatQuestions } from '../QuestionnaireStep/utils'
+import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdateProposalFormMutation.graphql'
 
 export interface CollectStepFormProps {
   stepId: string
@@ -120,6 +112,7 @@ type ProposalFormType = {
   canContact: boolean
   nbrOfMessagesSent: number
   proposalInAZoneRequired: boolean
+  questionnaire: { questions: Array<QuestionInput>; questionsWithJumps: Array<any> }
 }
 
 export type FormValues = {
@@ -131,15 +124,15 @@ export type FormValues = {
   endAt: string | null
   statuses?:
     | Array<{
-    id: string
-    name: string
-    color: ProposalStepStatusColor
-  }>
+        id: string
+        name: string
+        color: ProposalStepStatusColor
+      }>
     | undefined
   defaultStatus: string | null
   form: ProposalFormType
   form_model?: ProposalFormType
-  selectedModel: null | {value: string, label: string}
+  selectedModel: null | { value: string; label: string }
   stepDurationType?: {
     labels: Array<string>
   }
@@ -172,166 +165,217 @@ export type FormValues = {
 } & RequirementsFormValues
 
 const COLLECT_FRAGMENT = graphql`
-    query CollectStepFormQuery($stepId: ID!) {
-        step: node(id: $stepId) {
+  query CollectStepFormQuery($stepId: ID!) {
+    step: node(id: $stepId) {
+      id
+      ... on CollectStep {
+        ...ProposalSettings_step
+        title
+        body
+        label
+        metaDescription
+        customCode
+        timeRange {
+          startAt
+          endAt
+        }
+        timeless
+        allowAuthorsToAddNews
+        defaultSort
+        private
+        statuses {
+          id
+          name
+          color
+        }
+        defaultStatus {
+          id
+          name
+          color
+        }
+        enabled
+        ...CollectStepStatusesList_step
+        ...ProposalFormForm_step
+        form {
+          id
+          title
+          isGridViewEnabled
+          isListViewEnabled
+          isMapViewEnabled
+          titleHelpText
+          descriptionMandatory
+          categoryHelpText
+          descriptionHelpText
+          usingSummary
+          summaryHelpText
+          usingDescription
+          description
+          usingIllustration
+          illustrationHelpText
+          usingThemes
+          themeHelpText
+          themeMandatory
+          usingCategories
+          categories {
             id
-            ... on CollectStep {
-                ...ProposalSettings_step
-                title
-                body
-                label
-                metaDescription
-                customCode
-                timeRange {
-                    startAt
-                    endAt
-                }
-                timeless
-                allowAuthorsToAddNews
-                defaultSort
-                private
-                statuses {
-                    id
-                    name
-                    color
-                }
-                defaultStatus {
-                    id
-                    name
-                    color
-                }
-                enabled
-                ...CollectStepStatusesList_step
-                ...ProposalFormForm_step
-                form {
-                    id
-                    title
-                    isGridViewEnabled
-                    isListViewEnabled
-                    isMapViewEnabled
-                    titleHelpText
-                    descriptionMandatory
-                    categoryHelpText
-                    descriptionHelpText
-                    usingSummary
-                    summaryHelpText
-                    usingDescription
-                    description
-                    usingIllustration
-                    illustrationHelpText
-                    usingThemes
-                    themeHelpText
-                    themeMandatory
-                    usingCategories
-                    categories {
-                        id
-                        name
-                        color
-                        icon
-                        categoryImage {
-                            id
-                            image {
-                                url
-                                id
-                            }
-                        }
-                    }
-                    categoryMandatory
-                    usingAddress
-                    addressHelpText
-                    usingDistrict
-                    districts {
-                        id
-                        name
-                        titleOnMap
-                        geojson
-                        displayedOnMap
-                        geojsonStyle
-                        border {
-                            enabled
-                            color
-                            opacity
-                            size
-                        }
-                        background {
-                            enabled
-                            color
-                            opacity
-                        }
-                        translations {
-                            name
-                            locale
-                        }
-                    }
-                    districtHelpText
-                    districtMandatory
-                    zoomMap
-                    mapCenter {
-                        formatted
-                        json
-                        lat
-                        lng
-                    }
-                    canContact
-                    nbrOfMessagesSent
-                    proposalInAZoneRequired
-                }
-                project {
-                    id
-                    title
-                    canEdit
-                    adminAlphaUrl
-                }
-                voteType
-                votesMin
-                votable
-                votesLimit
-                votesRanking
-                voteThreshold
-                votesHelpText
-                budget
-                publishedVoteDate
-                isSecretBallot
-                isProposalSmsVoteEnabled
-                proposalArchivedTime
-                proposalArchivedUnitTime
-                ...Requirements_requirementStep @relay(mask: false)
-                requirements {
-                    totalCount
-                    edges {
-                        node {
-                            id
-                            __typename
-                        }
-                    }
-                }
-                mainView
-                ...ProposalStepRequirementsTabs_proposalStep
-                ...ProposalStepOptionnalAccordion_step
-            }
-        }
-        ...ProposalFormForm_query
-        ...CollectStepStatusesList_query
-        siteColors {
-            keyname
-            value
-        }
-        availableLocales(includeDisabled: false) {
-            code
-            isDefault
-        }
-        viewer {
-            __typename
-            id
-            username
-            isAdmin
-            organizations {
-                __typename
+            name
+            color
+            icon
+            categoryImage {
+              id
+              image {
+                url
                 id
-                username
+              }
             }
+          }
+          categoryMandatory
+          usingAddress
+          addressHelpText
+          usingDistrict
+          districts {
+            id
+            name
+            titleOnMap
+            geojson
+            displayedOnMap
+            geojsonStyle
+            border {
+              enabled
+              color
+              opacity
+              size
+            }
+            background {
+              enabled
+              color
+              opacity
+            }
+            translations {
+              name
+              locale
+            }
+          }
+          districtHelpText
+          districtMandatory
+          zoomMap
+          mapCenter {
+            formatted
+            json
+            lat
+            lng
+          }
+          canContact
+          nbrOfMessagesSent
+          proposalInAZoneRequired
+
+          description
+          questions {
+            id
+            ...responsesHelper_adminQuestion @relay(mask: false)
+          }
+          questionsWithJumps: questions(filter: JUMPS_ONLY) {
+            id
+            title
+            jumps(orderBy: { field: POSITION, direction: ASC }) {
+              id
+              origin {
+                id
+                title
+              }
+              destination {
+                id
+                title
+                number
+              }
+              conditions {
+                id
+                operator
+                question {
+                  id
+                  title
+                  type
+                }
+                ... on MultipleChoiceQuestionLogicJumpCondition {
+                  value {
+                    id
+                    title
+                  }
+                }
+              }
+            }
+            # unused for now, will be usefull when we'll add error and warning messages
+            destinationJumps {
+              id
+              origin {
+                id
+                title
+              }
+            }
+
+            alwaysJumpDestinationQuestion {
+              id
+              title
+              number
+            }
+          }
         }
+        project {
+          id
+          title
+          canEdit
+          adminAlphaUrl
+        }
+        voteType
+        votesMin
+        votable
+        votesLimit
+        votesRanking
+        voteThreshold
+        votesHelpText
+        budget
+        publishedVoteDate
+        isSecretBallot
+        isProposalSmsVoteEnabled
+        proposalArchivedTime
+        proposalArchivedUnitTime
+        ...Requirements_requirementStep @relay(mask: false)
+        requirements {
+          totalCount
+          edges {
+            node {
+              id
+              __typename
+            }
+          }
+        }
+        mainView
+        ...ProposalStepRequirementsTabs_proposalStep
+        ...ProposalStepOptionnalAccordion_step
+      }
     }
+    ...ProposalFormForm_query
+    ...CollectStepStatusesList_query
+    siteColors {
+      keyname
+      value
+    }
+    availableLocales(includeDisabled: false) {
+      code
+      isDefault
+    }
+    viewer {
+      __typename
+      id
+      username
+      isAdmin
+      organizations {
+        __typename
+        id
+        username
+      }
+    }
+  }
 `
 export const zoomLevels = [
   { id: 1, name: 'map.zoom.world' },
@@ -380,7 +424,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   const project = step?.project
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
-  const {operationType, setOperationType, selectedTab, proposalFormKey} = useCollectStep();
+  const { operationType, setOperationType, selectedTab, proposalFormKey } = useCollectStep()
   const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
@@ -409,7 +453,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
     const proposalFormUpdateInput = getProposalFormUpdateVariablesInput(proposalFormValues, selectedTab)
 
     try {
-      const proposalFormUpdateResponse = await UpdateProposalFormMutation.commit({
+      const proposalFormUpdateResponse: UpdateProposalFormMutation$data = await UpdateProposalFormMutation.commit({
         input: {
           ...proposalFormUpdateInput,
           proposalFormId: step?.form?.id || '',
@@ -429,12 +473,24 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           if (!response.updateCollectStep) {
             return mutationErrorToast(intl)
           }
+
+          const questionnaire = {
+            questions: proposalFormUpdateResponse.updateProposalForm?.proposalForm?.questions
+              ? formatQuestions({
+                  questions: proposalFormUpdateResponse.updateProposalForm?.proposalForm?.questions,
+                })
+              : [],
+            questionsWithJumps: proposalFormUpdateResponse.updateProposalForm?.proposalForm?.questionsWithJumps ?? [],
+          }
+          setValue('form.questionnaire', questionnaire)
+          setValue('form_model.questionnaire', questionnaire)
           toast({
             variant: 'success',
             content: intl.formatMessage({ id: 'admin.update.successful' }),
           })
           setOperationType('EDIT')
-        } catch {
+        } catch (e) {
+          console.log(e)
           return mutationErrorToast(intl)
         }
       }
@@ -476,9 +532,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           <StepDurationInput />
           <Box>
             <Box mb={4}>
-              <Accordion
-                color={CapUIAccordionColor.Transparent}
-              >
+              <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item
                   id={intl.formatMessage({ id: 'proposal-form' })}
                   onMouseEnter={e => {
@@ -501,10 +555,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
                   <Accordion.Panel>
-                    <ProposalStepVoteTabsForm
-                      defaultLocale={defaultLocale}
-                      formMethods={formMethods}
-                    />
+                    <ProposalStepVoteTabsForm defaultLocale={defaultLocale} formMethods={formMethods} />
                   </Accordion.Panel>
                 </Accordion.Item>
               </Accordion>
@@ -534,7 +585,9 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               </Accordion>
               <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}>
-                  <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}</Accordion.Button>
+                  <Accordion.Button>
+                    {intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}
+                  </Accordion.Button>
                   <Accordion.Panel>
                     <ProposalSettings step={step} />
                   </Accordion.Panel>
@@ -544,10 +597,15 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
                   <Accordion.Panel gap={6}>
-                    <ProposalStepOptionnalAccordion step={step} defaultLocale={defaultLocale} formMethods={formMethods} isEditing={isEditing} proposalFormKey={proposalFormKey} />
+                    <ProposalStepOptionnalAccordion
+                      step={step}
+                      defaultLocale={defaultLocale}
+                      formMethods={formMethods}
+                      isEditing={isEditing}
+                      proposalFormKey={proposalFormKey}
+                    />
                   </Accordion.Panel>
                 </Accordion.Item>
-
               </Accordion>
             </Box>
             <Flex>
@@ -562,8 +620,12 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               >
                 {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
               </Button>
-              <Button variantSize="big" variant="secondary" disabled={isSubmitting}
-                      onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}>
+              <Button
+                variantSize="big"
+                variant="secondary"
+                disabled={isSubmitting}
+                onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
+              >
                 {intl.formatMessage({ id: 'global.back' })}
               </Button>
             </Flex>

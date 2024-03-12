@@ -10,9 +10,10 @@ type ChooseQuestionTypeProps = {
   onSuccess: () => void
   onCancel: () => void
   isNewQuestion: boolean
+  isCollectStep: boolean
 }
 
-const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onCancel, isNewQuestion }) => {
+const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, isCollectStep, isNewQuestion }) => {
   const intl = useIntl()
   const { viewerSession } = useAppContext()
   const { hide, goToPreviousStep } = useMultiStepModal()
@@ -22,8 +23,6 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, onC
   const validationRule = watch(`temporaryQuestion.validationRule`)
 
   const hasValidationRule = validationRule?.type?.labels?.[0] !== 'NONE' && validationRule
-
-  const isCollectStep = false // TODO pass as a prop once integrated on collect step
 
   const showLimits = ['checkbox', 'ranking'].includes(type)
   const canSortRandomly = multipleChoiceQuestions.includes(type)

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
+use Capco\AppBundle\Entity\Interfaces\QuestionsInterface;
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
@@ -48,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;

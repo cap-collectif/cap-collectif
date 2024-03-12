@@ -80,7 +80,11 @@ ProposalForm:
                 type: 'String'
             questions:
                 type: '[InternalQuestion!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
+                args:
+                    filter:
+                        type: 'QuestionsFilterType'
+                        description: 'Filter questions by a given filter.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value, args])'
             mapCenter:
                 type: 'PreviewGoogleMapsAddress'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormMapCenterResolver", [value])'

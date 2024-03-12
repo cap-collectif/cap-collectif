@@ -6,8 +6,7 @@
 const nextConfig = {
   // TODO enable this
   reactStrictMode: false,
-  basePath:
-    process.env.SYMFONY_ENV === 'prod' ? '/admin-next' : '',
+  basePath: process.env.SYMFONY_ENV === 'prod' ? '/admin-next' : '',
   env: {
     PRODUCTION: String(process.env.SYMFONY_ENV === 'prod'),
   },
@@ -15,7 +14,7 @@ const nextConfig = {
     defaultLocale: 'fr-FR',
     locales: ['fr-FR', 'es-ES', 'en-GB', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN'],
   },
-  excludeDefaultMomentLocales: true,
+  excludeDefaultMomentLocales: false,
   experimental: {
     externalDir: true,
   },
@@ -33,7 +32,7 @@ const nextConfig = {
       test: /\.svg$/,
       issuer: /\.(js|ts)x?$/,
       use: ['@svgr/webpack'],
-    });
+    })
     config.module.rules.push({
       test: /\.(js|jsx)$/,
       include: /..\/node_modules\/(?=(react-leaflet|@react-leaflet\/core)\/).*/,
@@ -42,7 +41,7 @@ const nextConfig = {
         presets: ['@babel/preset-env', '@babel/preset-react'],
         plugins: ['@babel/plugin-proposal-nullish-coalescing-operator'],
       },
-    });
+    })
 
     if (!isServer) {
       config.resolve.fallback = {
@@ -51,11 +50,11 @@ const nextConfig = {
         child_process: false,
         crypto: require.resolve('crypto-browserify'),
         stream: require.resolve('stream-browserify'),
-      };
+      }
     }
 
-    return config;
+    return config
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

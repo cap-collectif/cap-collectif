@@ -23,7 +23,7 @@ class QuestionsListResolver implements QueryInterface
 
         switch ($filter) {
             case QuestionsFilterType::JUMPS_ONLY:
-                return $this->repository->findWithJumpsOrWithAlwaysJumpDestination($questionnaire);
+                return $this->repository->findWithJumpsOrWithAlwaysJumpDestinationByQuestionnaire($questionnaire);
 
             default:
                 return $this->repository->findByQuestionnaire($questionnaire);

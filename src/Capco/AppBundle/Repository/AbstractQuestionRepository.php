@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 class AbstractQuestionRepository extends EntityRepository
 {
@@ -56,16 +57,38 @@ class AbstractQuestionRepository extends EntityRepository
         return $qb->getQuery()->getSingleResult();
     }
 
-    public function findWithJumpsOrWithAlwaysJumpDestination(Questionnaire $questionnaire): array
+    /**
+     * @return array<AbstractQuestion>
+     */
+    public function findWithJumpsOrWithAlwaysJumpDestinationByQuestionnaire(Questionnaire $questionnaire): array
     {
-        $qb = $this->createQueryBuilder('aq')
-            ->join('aq.questionnaireAbstractQuestion', 'qaq')
-            ->leftJoin('aq.jumps', 'j')
-            ->where('qaq.questionnaire = :questionnaire')
-            ->andWhere('j.id IS NOT NULL OR aq.alwaysJumpDestinationQuestion IS NOT NULL')
+        $qb = $this->findWithJumpsOrWithAlwaysJumpDestinationQueryBuilder()
+            ->andWhere('qaq.questionnaire = :questionnaire')
             ->setParameter('questionnaire', $questionnaire)
             ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<AbstractQuestion>
+     */
+    public function findWithJumpsOrWithAlwaysJumpDestinationByForm(ProposalForm $form): array
+    {
+        $qb = $this->findWithJumpsOrWithAlwaysJumpDestinationQueryBuilder()
+            ->andWhere('qaq.proposalForm = :form')
+            ->setParameter('form', $form)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    private function findWithJumpsOrWithAlwaysJumpDestinationQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('aq')
+            ->join('aq.questionnaireAbstractQuestion', 'qaq')
+            ->leftJoin('aq.jumps', 'j')
+            ->where('j.id IS NOT NULL OR aq.alwaysJumpDestinationQuestion IS NOT NULL')
+        ;
     }
 }
