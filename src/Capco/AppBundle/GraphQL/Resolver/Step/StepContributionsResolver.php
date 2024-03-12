@@ -12,8 +12,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class StepContributionsResolver implements QueryInterface
 {
-    private $dataLoader;
-    private $promiseAdapter;
+    private StepContributionsDataLoader $dataLoader;
+    private PromiseAdapterInterface $promiseAdapter;
 
     public function __construct(
         StepContributionsDataLoader $dataLoader,
@@ -30,7 +30,7 @@ class StepContributionsResolver implements QueryInterface
 
     public function resolveSync(AbstractStep $step, Argument $args): Connection
     {
-        $connection = null;
+        $connection = new Connection();
         $this->promiseAdapter->await(
             $this->__invoke($step, $args)->then(static function ($value) use (&$connection) {
                 $connection = $value;
