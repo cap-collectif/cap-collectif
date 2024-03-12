@@ -123,7 +123,7 @@ export const Steps = ({ children, modalTitle, currentStepIndex, ...rest }: Steps
     })[0] || validChildren.filter(child => child.props.state === 'ACTIVE')[0]
   const isMobile = useIsMobile()
   React.useEffect(() => {
-    const timeOutID = setTimeout(() => sliderEle.current.slickGoTo(currentStepIndex, false), 350)
+    const timeOutID = setTimeout(() => sliderEle.current?.slickGoTo(currentStepIndex, false), 350)
     return () => {
       clearTimeout(timeOutID)
     }
