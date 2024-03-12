@@ -9,11 +9,13 @@ import type { ProjectStepTabs_project$key } from '~relay/ProjectStepTabs_project
 import { fromGlobalId, isGlobalId } from '~/utils/fromGlobalId'
 import { convertTypenameToStepSlug } from '~/utils/router'
 import useIsMobile from '~/utils/hooks/useIsMobile'
+import { GlobalState } from '~/types'
 
 export type Props = {
   project: ProjectStepTabs_project$key
   platformLocale: string
   isConsultation?: boolean
+  currentStepId?: string
 }
 const FRAGMENT = graphql`
   fragment ProjectStepTabs_project on Project {
@@ -38,11 +40,19 @@ const FRAGMENT = graphql`
   }
 `
 
-const ProjectStepTabs = ({ project, isConsultation, platformLocale }: Props): JSX.Element => {
+const ProjectStepTabs = ({
+  project,
+  isConsultation,
+  platformLocale,
+  currentStepId: routerCurrentStep,
+}: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
   const intl = useIntl()
   const isMobile = useIsMobile()
-  const [currentStepId, setCurrentStepId] = React.useState(useSelector(state => state.project.currentProjectStepById))
+  const projectStepId = useSelector((state: GlobalState) => state.project.currentProjectStepById)
+
+  const [currentStepId, setCurrentStepId] = React.useState(routerCurrentStep ?? projectStepId)
+
   const { id: current } = isGlobalId(currentStepId)
     ? fromGlobalId(currentStepId)
     : {

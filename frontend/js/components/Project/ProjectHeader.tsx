@@ -47,9 +47,10 @@ export type Props = {
   readonly project: ProjectHeader_project$key
   readonly isConsultation?: boolean
   readonly platformLocale: string
+  readonly currentStepId?: string
 }
 
-const ProjectHeader = ({ project, isConsultation, platformLocale }: Props): JSX.Element => {
+const ProjectHeader = ({ project, isConsultation, platformLocale, currentStepId }: Props): JSX.Element => {
   const data = useFragment(FRAGMENT, project)
 
   React.useEffect(() => {
@@ -92,7 +93,12 @@ const ProjectHeader = ({ project, isConsultation, platformLocale }: Props): JSX.
         <ProjectRestrictedAccessFragment project={data} />
         {data.archived && data.visibility === 'PUBLIC' && <ProjectArchivedTag />}
       </ProjectHeaderLayout.Cover>
-      <ProjectStepTabs project={data} isConsultation={isConsultation} platformLocale={platformLocale} />
+      <ProjectStepTabs
+        project={data}
+        isConsultation={isConsultation}
+        platformLocale={platformLocale}
+        currentStepId={currentStepId}
+      />
     </ProjectHeaderLayout>
   )
 }

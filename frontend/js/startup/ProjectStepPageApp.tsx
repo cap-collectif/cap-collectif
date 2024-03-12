@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { Suspense } from 'react'
 import { RelayEnvironmentProvider } from 'relay-hooks'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Providers from './Providers'
 import { ProjectHeaderQueryRenderer } from './ProjectHeaderApp'
@@ -26,18 +26,26 @@ const ProjectHeader = ({
 }: {
   readonly projectId: string
   readonly platformLocale: string
-}) => (
-  <section>
-    <div
-      className="container"
-      style={{
-        padding: 0,
-      }}
-    >
-      <ProjectHeaderQueryRenderer projectId={projectId} platformLocale={platformLocale} />
-    </div>
-  </section>
-)
+}) => {
+  const { state } = useLocation()
+
+  return (
+    <section>
+      <div
+        className="container"
+        style={{
+          padding: 0,
+        }}
+      >
+        <ProjectHeaderQueryRenderer
+          projectId={projectId}
+          platformLocale={platformLocale}
+          currentStepId={state?.stepId}
+        />
+      </div>
+    </section>
+  )
+}
 
 const ProjectTrash = ({
   showTrash,

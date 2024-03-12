@@ -19,8 +19,9 @@ export type Props = {
   readonly projectId: Uuid
   readonly isConsultation?: boolean
   readonly platformLocale: string
+  readonly currentStepId?: string
 }
-export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platformLocale }: Props) => {
+export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platformLocale, currentStepId }: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
     <Providers resetCSS={false} designSystem>
@@ -59,6 +60,7 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platform
                   project={props.project}
                   isConsultation={isConsultation}
                   platformLocale={platformLocale}
+                  currentStepId={currentStepId}
                 />
               )}
             </Skeleton>
@@ -68,8 +70,13 @@ export const ProjectHeaderQueryRenderer = ({ projectId, isConsultation, platform
     </Providers>
   )
 }
-export default ({ projectId, isConsultation, platformLocale }: Props) => (
+export default ({ projectId, isConsultation, platformLocale, currentStepId }: Props) => (
   <Providers>
-    <ProjectHeaderQueryRenderer projectId={projectId} isConsultation={isConsultation} platformLocale={platformLocale} />
+    <ProjectHeaderQueryRenderer
+      projectId={projectId}
+      isConsultation={isConsultation}
+      platformLocale={platformLocale}
+      currentStepId={currentStepId}
+    />
   </Providers>
 )
