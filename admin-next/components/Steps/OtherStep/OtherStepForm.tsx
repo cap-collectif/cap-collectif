@@ -11,6 +11,7 @@ import withPageAuthRequired from '@utils/withPageAuthRequired'
 import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { onBack } from '@components/Steps/utils'
+import { useOtherStep } from './OtherStepContext'
 
 type Props = {
   stepId: string
@@ -72,9 +73,9 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     throw new Error('Please provide a valid project and step')
   }
 
-  const [isEditing, setIsEditing] = useState(() => {
-    return !!step.label
-  })
+  const { operationType, setOperationType } = useOtherStep()
+  const isEditing = operationType === 'EDIT';
+
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -139,7 +140,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       if (!response.updateOtherStep) {
         return mutationErrorToast(intl)
       }
-      setIsEditing(false)
+      setOperationType('EDIT')
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'global.saved' }),
@@ -281,7 +282,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             type="submit"
             mr={4}
             isLoading={isSubmitting}
-            disabled={!isDirty || !isValid}
+            disabled={!isValid}
           >
             {isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'add-the-step' })}
           </Button>

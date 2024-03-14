@@ -5,6 +5,7 @@ import Layout from '@components/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import OtherStepForm from '@components/Steps/OtherStep/OtherStepForm'
 import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
+import { OtherStepContextProvider } from '../../../../../components/Steps/OtherStep/OtherStepContext'
 
 const UpdateOtherStepWrapper = () => {
   const router = useRouter()
@@ -23,7 +24,9 @@ const UpdateOtherStepWrapper = () => {
             </Flex>
           }
         >
-          <OtherStepForm stepId={stepId as string} setHelpMessage={setHelpMessage} />
+          <OtherStepContextProvider>
+            <OtherStepForm stepId={stepId as string} setHelpMessage={setHelpMessage} />
+          </OtherStepContextProvider>
         </React.Suspense>
         <StepCreationSide helpMessage={helpMessage} />
       </Flex>
