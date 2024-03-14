@@ -1641,7 +1641,9 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventMap_events",
                 "kind": "LinkedHandle",
@@ -1711,7 +1713,10 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "orderBy",
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventListPaginated_events",
                 "kind": "LinkedHandle",
@@ -1734,6 +1739,54 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
                   },
                 ],
                 "storageKey": null,
+              },
+              Object {
+                "alias": "eventsFuture",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": true,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:true)",
+              },
+              Object {
+                "alias": "eventsPast",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:false)",
               },
               Object {
                 "alias": null,
@@ -1870,7 +1923,7 @@ exports[`<EventListPage /> renders correctly in english 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "9c8926a53612fb764e2a03c9311239b5",
+            "cacheID": "b479531f575340f0dc9073c362c58774",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -1909,28 +1962,20 @@ fragment EventLabelStatus_event on Event {
   }
 }
 
-fragment EventListCounter_query_fom6x on Query {
-  events(first: $count, after: $cursor, theme: $theme, district: $district, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    edges {
-      node {
-        id
-        __typename
-      }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
+fragment EventListCounter_query on Query {
   eventsWithoutFilters: events {
+    totalCount
+  }
+  eventsFuture: events(isFuture: true) {
+    totalCount
+  }
+  eventsPast: events(isFuture: false) {
     totalCount
   }
 }
 
-fragment EventListFilters_query_fom6x on Query {
-  ...EventListCounter_query_fom6x
+fragment EventListFilters_query on Query {
+  ...EventListCounter_query
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
   ...SelectDistrict_query
@@ -1951,8 +1996,8 @@ fragment EventListPageContainer_query_2EJKM on Query {
     id
   }
   ...EventRefetch_query_2EJKM
-  ...EventListFilters_query_fom6x
-  ...EventListCounter_query_fom6x
+  ...EventListFilters_query
+  ...EventListCounter_query
 }
 
 fragment EventListPageHeader_queryViewer_39ngnn on Query {
@@ -2183,7 +2228,7 @@ fragment UserLink_user on User {
         "cursor": null,
         "district": null,
         "isAuthenticated": false,
-        "isFuture": true,
+        "isFuture": null,
         "isRegistrable": null,
         "locale": "EN_GB",
         "orderBy": Object {
@@ -3841,7 +3886,9 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventMap_events",
                 "kind": "LinkedHandle",
@@ -3911,7 +3958,10 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "orderBy",
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventListPaginated_events",
                 "kind": "LinkedHandle",
@@ -3934,6 +3984,54 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
                   },
                 ],
                 "storageKey": null,
+              },
+              Object {
+                "alias": "eventsFuture",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": true,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:true)",
+              },
+              Object {
+                "alias": "eventsPast",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:false)",
               },
               Object {
                 "alias": null,
@@ -4070,7 +4168,7 @@ exports[`<EventListPage /> renders correctly in french 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "9c8926a53612fb764e2a03c9311239b5",
+            "cacheID": "b479531f575340f0dc9073c362c58774",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -4109,28 +4207,20 @@ fragment EventLabelStatus_event on Event {
   }
 }
 
-fragment EventListCounter_query_fom6x on Query {
-  events(first: $count, after: $cursor, theme: $theme, district: $district, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    edges {
-      node {
-        id
-        __typename
-      }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
+fragment EventListCounter_query on Query {
   eventsWithoutFilters: events {
+    totalCount
+  }
+  eventsFuture: events(isFuture: true) {
+    totalCount
+  }
+  eventsPast: events(isFuture: false) {
     totalCount
   }
 }
 
-fragment EventListFilters_query_fom6x on Query {
-  ...EventListCounter_query_fom6x
+fragment EventListFilters_query on Query {
+  ...EventListCounter_query
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
   ...SelectDistrict_query
@@ -4151,8 +4241,8 @@ fragment EventListPageContainer_query_2EJKM on Query {
     id
   }
   ...EventRefetch_query_2EJKM
-  ...EventListFilters_query_fom6x
-  ...EventListCounter_query_fom6x
+  ...EventListFilters_query
+  ...EventListCounter_query
 }
 
 fragment EventListPageHeader_queryViewer_39ngnn on Query {
@@ -4383,7 +4473,7 @@ fragment UserLink_user on User {
         "cursor": null,
         "district": null,
         "isAuthenticated": false,
-        "isFuture": true,
+        "isFuture": null,
         "isRegistrable": null,
         "locale": "FR_FR",
         "orderBy": Object {
@@ -6041,7 +6131,9 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventMap_events",
                 "kind": "LinkedHandle",
@@ -6111,7 +6203,10 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                     "variableName": "userType",
                   },
                 ],
-                "filters": Array [],
+                "filters": Array [
+                  "orderBy",
+                  "isFuture",
+                ],
                 "handle": "connection",
                 "key": "EventListPaginated_events",
                 "kind": "LinkedHandle",
@@ -6134,6 +6229,54 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
                   },
                 ],
                 "storageKey": null,
+              },
+              Object {
+                "alias": "eventsFuture",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": true,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:true)",
+              },
+              Object {
+                "alias": "eventsPast",
+                "args": Array [
+                  Object {
+                    "kind": "Literal",
+                    "name": "isFuture",
+                    "value": false,
+                  },
+                ],
+                "concreteType": "EventConnection",
+                "kind": "LinkedField",
+                "name": "events",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "totalCount",
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": "events(isFuture:false)",
               },
               Object {
                 "alias": null,
@@ -6270,7 +6413,7 @@ exports[`<EventListPage /> renders correctly without title and body 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "9c8926a53612fb764e2a03c9311239b5",
+            "cacheID": "b479531f575340f0dc9073c362c58774",
             "id": null,
             "metadata": Object {},
             "name": "EventListPageQuery",
@@ -6309,28 +6452,20 @@ fragment EventLabelStatus_event on Event {
   }
 }
 
-fragment EventListCounter_query_fom6x on Query {
-  events(first: $count, after: $cursor, theme: $theme, district: $district, project: $project, locale: $locale, search: $search, userType: $userType, isFuture: $isFuture, author: $author, isRegistrable: $isRegistrable, orderBy: $orderBy) {
-    edges {
-      node {
-        id
-        __typename
-      }
-      cursor
-    }
-    totalCount
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-  }
+fragment EventListCounter_query on Query {
   eventsWithoutFilters: events {
+    totalCount
+  }
+  eventsFuture: events(isFuture: true) {
+    totalCount
+  }
+  eventsPast: events(isFuture: false) {
     totalCount
   }
 }
 
-fragment EventListFilters_query_fom6x on Query {
-  ...EventListCounter_query_fom6x
+fragment EventListFilters_query on Query {
+  ...EventListCounter_query
   ...SelectTheme_query
   ...SelectProject_query_2yiOJi
   ...SelectDistrict_query
@@ -6351,8 +6486,8 @@ fragment EventListPageContainer_query_2EJKM on Query {
     id
   }
   ...EventRefetch_query_2EJKM
-  ...EventListFilters_query_fom6x
-  ...EventListCounter_query_fom6x
+  ...EventListFilters_query
+  ...EventListCounter_query
 }
 
 fragment EventListPageHeader_queryViewer_39ngnn on Query {
@@ -6583,7 +6718,7 @@ fragment UserLink_user on User {
         "cursor": null,
         "district": null,
         "isAuthenticated": false,
-        "isFuture": true,
+        "isFuture": null,
         "isRegistrable": null,
         "locale": "FR_FR",
         "orderBy": Object {

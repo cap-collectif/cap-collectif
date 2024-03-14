@@ -2239,6 +2239,9 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -3088,6 +3091,9 @@ type ConsultationStep implements Node & Step & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
 
   """The project"""
@@ -5069,6 +5075,9 @@ type DebateStep implements Step & Node {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -9448,6 +9457,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
     """Hide unpublished events"""
     hideUnpublishedEvents: Boolean
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
 
   """Get all projects that the organization owns."""
@@ -9799,6 +9811,9 @@ type OtherStep implements Node & Step {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -10653,6 +10668,9 @@ type PresentationStep implements Node & Step {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -12747,6 +12765,9 @@ interface ProposalStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -14258,6 +14279,9 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -14398,6 +14422,9 @@ type RankingStep implements Node & Step {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -15764,6 +15791,9 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI
@@ -16832,6 +16862,9 @@ interface Step {
     """Returns the first `n` elements from the list."""
     first: Int = 100
     orderBy: EventOrder! = {field: START_AT, direction: DESC}
+
+    """If non-null, filters events by comparing the start date with present."""
+    isFuture: Boolean
   ): EventConnection!
   project: Project
   exportStepUrl: URI

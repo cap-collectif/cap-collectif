@@ -15,6 +15,10 @@ import EventListStatusFilter from './List/EventListStatusFilter'
 import colors from '~/utils/colors'
 import EventPreview from './EventPreview/EventPreview'
 import { toast } from '~ds/Toast'
+import { getOrderBy, ORDER_TYPE } from './Profile/EventListProfileRefetch'
+import { useSelector } from 'react-redux'
+import { GlobalState } from '~/types'
+import Heading from '~ui/Primitives/Heading'
 
 type Props = {
   readonly query: EventListPageContainer_query
@@ -100,7 +104,7 @@ const renderAwaitingOrRefusedEvents = (query: EventListPageContainer_query) => {
 
 export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
   const intl = useIntl()
-
+  const status = useSelector((state: GlobalState) => state.form[formName].values.status)
   useEffect(() => {
     if (window.location.href.indexOf('?delete=success') !== -1) {
       toast({ content: intl.formatMessage({ id: 'event-deleted' }), variant: 'success' })
@@ -121,16 +125,41 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
       <div>
         <div className="visible-xs-block visible-sm-block mt-15">
           <div className="d-flex align-items-center">
-            <EventListCounter query={query} />
+            <EventListCounter query={query} status={status} />
             <EventListStatusFilter screen="mobile" />
           </div>
         </div>
       </div>
       <EventFiltersContainer darkness={10} backgroundColor={backgroundColor || colors.primaryColor}>
-        <EventListFilters query={query} addToggleViewButton />
+        <EventListFilters query={query} addToggleViewButton formName={formName} />
       </EventFiltersContainer>
       <div id="event-page-rendered">
-        <EventRefetch query={query} formName={formName} />
+        {status === 'all' ? (
+          <Heading as="h4" mb={2} fontWeight={600}>
+            {intl.formatMessage({ id: 'theme.show.status.future' })}
+          </Heading>
+        ) : null}
+        <EventRefetch
+          query={query}
+          formName={formName}
+          orderBy={getOrderBy(ORDER_TYPE.OLD)}
+          isFuture
+          hide={status === 'finished'}
+        />
+        {status === 'all' ? (
+          <Heading as="h4" mb={2} mt={5} fontWeight={600}>
+            {intl.formatMessage({ id: 'finished' })}
+          </Heading>
+        ) : null}
+        <EventRefetch
+          query={query}
+          formName={formName}
+          orderBy={getOrderBy(ORDER_TYPE.LAST)}
+          isFuture={false}
+          hide={status === 'ongoing-and-future'}
+          count={3}
+          hideMap={status === 'all'}
+        />
       </div>
     </div>
   )
@@ -140,9 +169,8 @@ export const getInitialValues = () => {
   const project = urlSearch.get('projectId') || null
   const theme = urlSearch.get('theme') ?? null
   const district = urlSearch.get('district') ?? null
-  const hasFilteredUrl = !!project
   return {
-    status: hasFilteredUrl ? 'all' : 'ongoing-and-future',
+    status: 'all',
     project,
     theme,
     district,
@@ -200,35 +228,7 @@ export default createFragmentContainer(form, {
           isAuthenticated: $isAuthenticated
         )
       ...EventListFilters_query
-        @arguments(
-          cursor: $cursor
-          count: $count
-          search: $search
-          locale: $locale
-          theme: $theme
-          district: $district
-          project: $project
-          userType: $userType
-          isFuture: $isFuture
-          author: $author
-          isRegistrable: $isRegistrable
-          orderBy: $orderBy
-        )
       ...EventListCounter_query
-        @arguments(
-          cursor: $cursor
-          count: $count
-          locale: $locale
-          search: $search
-          theme: $theme
-          district: $district
-          project: $project
-          userType: $userType
-          isFuture: $isFuture
-          author: $author
-          isRegistrable: $isRegistrable
-          orderBy: $orderBy
-        )
     }
   `,
 })

@@ -72,7 +72,7 @@ const Component = ({
       const { step } = questionnaire
       return (
         <>
-          {step && step?.events?.totalCount > 0 && hasFeatureFlagCalendar && <StepEvents step={step} />}
+          {step && step?.eventCount?.totalCount > 0 && hasFeatureFlagCalendar && <StepEvents step={step} />}
           {step?.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
             <div className="alert alert-info alert-dismissible block" role="alert">
               <p>
@@ -172,7 +172,7 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
                   startAt
                 }
                 customCode
-                events(orderBy: { field: START_AT, direction: DESC }) {
+                eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
                   totalCount
                 }
                 ...StepEvents_step

@@ -23,7 +23,7 @@ const QUERY = graphql`
         }
         customCode
         ...StepEvents_step
-        events(orderBy: { field: START_AT, direction: DESC }) {
+        eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
           totalCount
         }
       }
@@ -54,7 +54,7 @@ export const CustomStepPage = ({ stepId }: Props) => {
   return (
     <section className="section--alt" id={`customStep-${customStep.id || ''}`}>
       <div className="container">
-        {customStep.events && customStep.events.totalCount > 0 && hasFeatureFlagCalendar && (
+        {customStep.eventCount && customStep.eventCount.totalCount > 0 && hasFeatureFlagCalendar && (
           <StepEvents step={customStep} />
         )}
 

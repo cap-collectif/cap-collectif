@@ -101,7 +101,7 @@ export default createPaginationContainer(
           author: $author
           isRegistrable: $isRegistrable
           orderBy: $orderBy
-        ) @connection(key: "EventMap_events", filters: []) {
+        ) @connection(key: "EventMap_events", filters: ["isFuture"]) {
           pageInfo {
             hasNextPage
             endCursor

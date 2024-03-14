@@ -3,15 +3,14 @@ import type { RelayRefetchProp } from 'react-relay'
 import { createRefetchContainer, graphql } from 'react-relay'
 import { connect } from 'react-redux'
 import { formValueSelector } from 'redux-form'
-import { debounce } from 'lodash'
 import Loader from '../../Ui/FeedbacksIndicators/Loader'
 import EventListPaginated from './EventListPaginated'
 import { graphqlError } from '../../../createRelayEnvironment'
 import type { GlobalState } from '../../../types'
 import type { EventRefetch_query } from '~relay/EventRefetch_query.graphql'
 import type { EventOrder } from '~relay/HomePageEventsQuery.graphql'
-import { getOrderBy, ORDER_TYPE } from '../Profile/EventListProfileRefetch'
-import type { EventRefetchRefetchQueryVariables } from '~relay/EventRefetchRefetchQuery.graphql'
+
+import type { EventRefetchRefetchQuery$variables } from '~relay/EventRefetchRefetchQuery.graphql'
 type Props = {
   readonly search: string | null | undefined
   readonly relay: RelayRefetchProp
@@ -22,6 +21,10 @@ type Props = {
   readonly userType: string | null | undefined
   readonly status: string | null | undefined
   readonly isRegistrable: string | null | undefined
+  readonly isFuture: boolean | null | undefined
+  readonly hide: boolean
+  readonly hideMap: boolean
+  readonly count: number
   readonly author:
     | {
         value: string
@@ -41,27 +44,40 @@ export class EventRefetch extends React.Component<Props, State> {
     isRefetching: false,
     hasRefetchError: false,
   }
-  _refetch = debounce(() => {
-    const { relay, search, project, theme, district, author, status, isRegistrable, userType, isAuthenticated } = this.props
+  _refetch = () => {
+    const {
+      relay,
+      search,
+      project,
+      theme,
+      district,
+      author,
+      isFuture,
+      count,
+      isRegistrable,
+      userType,
+      isAuthenticated,
+      orderBy,
+    } = this.props
     this.setState({
       isRefetching: true,
     })
 
     const refetchVariables = fragmentVariables =>
       ({
-        count: fragmentVariables.count,
+        count: count === undefined ? fragmentVariables.count : count,
         cursor: null,
         search: search || null,
         theme: theme || null,
         district: district || null,
         project: project || null,
         userType: userType || null,
-        isFuture: status === 'all' ? null : status === 'ongoing-and-future',
+        isFuture: isFuture,
         author: author && author.value ? author.value : null,
-        isRegistrable: (isRegistrable === 'all' || !isRegistrable) ? null : isRegistrable === 'yes',
-        orderBy: status === 'finished' || status === 'all' ? getOrderBy(ORDER_TYPE.OLD) : getOrderBy(ORDER_TYPE.LAST),
+        isRegistrable: isRegistrable === 'all' || !isRegistrable ? null : isRegistrable === 'yes',
+        orderBy: orderBy,
         isAuthenticated,
-      } as EventRefetchRefetchQueryVariables)
+      } as EventRefetchRefetchQuery$variables)
 
     relay.refetch(
       refetchVariables,
@@ -81,7 +97,7 @@ export class EventRefetch extends React.Component<Props, State> {
         force: true,
       },
     )
-  }, 500)
+  }
 
   componentDidUpdate(prevProps: Props) {
     const { search, project, theme, district, orderBy, author, status, isRegistrable, userType } = this.props
@@ -116,19 +132,20 @@ export class EventRefetch extends React.Component<Props, State> {
   }
 
   render() {
-    const { query, formName } = this.props
+    const { query, formName, hide, hideMap } = this.props
     const { isRefetching, hasRefetchError } = this.state
 
     if (hasRefetchError) {
       return graphqlError
     }
 
+    if (hide) return null
+
     if (isRefetching) {
       return <Loader />
     }
 
-    // @ts-expect-error Flow failed to infer redux's dispatch
-    return <EventListPaginated query={query} formName={formName} />
+    return <EventListPaginated query={query} formName={formName} hideMap={hideMap} />
   }
 }
 
@@ -144,7 +161,6 @@ const mapStateToProps = (state: GlobalState) => {
     status: selector(state, 'status'),
     author: selector(state, 'author'),
     isRegistrable: selector(state, 'isRegistrable'),
-    orderBy: selector(state, 'orderBy'),
   }
 }
 
@@ -159,7 +175,7 @@ export default createRefetchContainer(
         count: { type: "Int!" }
         cursor: { type: "String" }
         theme: { type: "ID" }
-        district: { type: "ID"}
+        district: { type: "ID" }
         project: { type: "ID" }
         locale: { type: "TranslationLocale" }
         search: { type: "String" }
@@ -234,7 +250,7 @@ export default createRefetchContainer(
         author: $author
         isRegistrable: $isRegistrable
         orderBy: $orderBy
-      ) @connection(key: "EventListPaginated_events", filters: []) {
+      ) @connection(key: "EventListPaginated_events", filters: ["orderBy", "isFuture"]) {
         edges {
           node {
             id

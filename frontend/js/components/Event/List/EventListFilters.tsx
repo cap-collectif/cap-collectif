@@ -4,7 +4,7 @@ import { injectIntl, FormattedMessage } from 'react-intl'
 import { Button, Row, Col } from 'react-bootstrap'
 import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { graphql } from 'relay-runtime'
 import { Field, formValueSelector, change } from 'redux-form'
 import { createFragmentContainer } from 'react-relay'
@@ -22,7 +22,7 @@ import type { EventListFilters_query } from '~relay/EventListFilters_query.graph
 import SelectTheme from '../../Utils/SelectTheme'
 import SelectProject from '../../Utils/SelectProject'
 import type { EventOrder } from '~relay/HomePageEventsQuery.graphql'
-import SelectDistrict from "~/components/Event/Form/SelectDistrict";
+import SelectDistrict from '~/components/Event/Form/SelectDistrict'
 
 type Registrable = 'all' | 'yes' | 'no'
 type Props = ReduxFormFormProps & {
@@ -88,15 +88,31 @@ const StatusContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
   display: flex;
   align-items: center;
 `
+
 const FiltersWrapper: StyledComponent<any, {}, typeof Col> = styled(Col)`
   @media screen and (max-width: 991px) {
     display: flex;
     justify-content: space-between;
   }
 `
-export class EventListFilters extends React.Component<Props> {
-  getFilters(nbFilter: number): [] {
-    const { features, theme, project, userTypes, intl, dispatch, query, district } = this.props
+export const EventListFilters = ({
+  features,
+  theme,
+  project,
+  userTypes,
+  intl,
+  dispatch,
+  query,
+  district,
+  search,
+  author,
+  isRegistrable,
+  userType,
+  addToggleViewButton,
+  formName,
+}: Props) => {
+  const status = useSelector((state: GlobalState) => state.form[formName].values.status)
+  const getFilters = (nbFilter: number) => {
     const filters = []
     filters.push(
       <Field
@@ -227,14 +243,14 @@ export class EventListFilters extends React.Component<Props> {
     }
 
     const resetFilters = () => {
-      const filterKeys = ['theme', 'project', 'search', 'author', 'userType', 'isRegistrable', 'district'];
+      const filterKeys = ['theme', 'project', 'search', 'author', 'userType', 'isRegistrable', 'district']
       for (const key of filterKeys) {
         dispatch(change('EventPageContainer', key, null))
       }
 
-      const {origin, pathname} = window.location;
-      window.history.replaceState(null, '', `${origin}${pathname}`);
-    };
+      const { origin, pathname } = window.location
+      window.history.replaceState(null, '', `${origin}${pathname}`)
+    }
 
     if ((theme !== null || project !== null || district !== null) && nbFilter > 0) {
       filters.push(
@@ -247,8 +263,8 @@ export class EventListFilters extends React.Component<Props> {
     return filters
   }
 
-  getPopoverBottom(nbFilters: number) {
-    const filters = this.getFilters(nbFilters)
+  const getPopoverBottom = (nbFilters: number) => {
+    const filters = getFilters(nbFilters)
     return (
       <div>
         <form>
@@ -262,23 +278,9 @@ export class EventListFilters extends React.Component<Props> {
     )
   }
 
-  render() {
-    const {
-      features,
-      theme,
-      district,
-      project,
-      search,
-      author,
-      isRegistrable,
-      userType,
-      intl,
-      addToggleViewButton,
-      dispatch,
-      query,
-    } = this.props
+  {
     const nbFilter = countFilters(theme, project, search, author, userType, isRegistrable, district)
-    const popoverBottom = this.getPopoverBottom(nbFilter)
+    const popoverBottom = getPopoverBottom(nbFilter)
 
     const filterCount = () => {
       if (nbFilter > 0) {
@@ -289,7 +291,7 @@ export class EventListFilters extends React.Component<Props> {
     return (
       <Row className="align-items-center d-flex flex-wrap">
         <StatusContainer xs={4} md={5} xsHidden smHidden>
-          <EventListCounter query={query} />
+          <EventListCounter query={query} status={status} />
           <EventListStatusFilter screen="desktop" />
         </StatusContainer>
         <FiltersWrapper xs={12} md={4} id="event-filters">
@@ -349,36 +351,8 @@ const mapStateToProps = (state: GlobalState) => ({
 const container = connect<any, any>(mapStateToProps)(injectIntl(EventListFilters))
 export default createFragmentContainer(container, {
   query: graphql`
-    fragment EventListFilters_query on Query
-    @argumentDefinitions(
-      count: { type: "Int!" }
-      cursor: { type: "String" }
-      theme: { type: "ID" }
-      district: { type: "ID" }
-      project: { type: "ID" }
-      locale: { type: "TranslationLocale" }
-      search: { type: "String" }
-      userType: { type: "ID" }
-      isFuture: { type: "Boolean" }
-      author: { type: "ID" }
-      isRegistrable: { type: "Boolean" }
-      orderBy: { type: "EventOrder" }
-    ) {
+    fragment EventListFilters_query on Query {
       ...EventListCounter_query
-        @arguments(
-          cursor: $cursor
-          count: $count
-          locale: $locale
-          search: $search
-          theme: $theme
-          district: $district
-          project: $project
-          userType: $userType
-          isFuture: $isFuture
-          author: $author
-          isRegistrable: $isRegistrable
-          orderBy: $orderBy
-        )
       ...SelectTheme_query
       ...SelectProject_query @arguments(withEventOnly: true)
       ...SelectDistrict_query

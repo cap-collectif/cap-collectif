@@ -1,522 +1,823 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventListFilters /> renders correctly 1`] = `
-<Row
-  bsClass="row"
-  className="align-items-center d-flex flex-wrap"
-  componentClass="div"
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
 >
-  <EventListFilters__StatusContainer
-    md={5}
-    smHidden={true}
-    xs={4}
-    xsHidden={true}
-  >
-    <Relay(EventListCounter)
-      query={
-        Object {
-          " $fragmentRefs": null,
-          " $refType": null,
-        }
-      }
-    />
-    <Connect(EventListStatusFilter)
-      screen="desktop"
-    />
-  </EventListFilters__StatusContainer>
-  <EventListFilters__FiltersWrapper
-    id="event-filters"
-    md={4}
-    xs={12}
-  >
-    <div
-      className="pull-right"
-    >
-      <FiltersContainer
-        filterCount={3}
-        overlay={
-          <div>
-            <form>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
-                    aria-haspopup="true"
-                    clearable={true}
-                    component={[Function]}
-                    id="EventListFilters-filter-isRegistrable"
-                    label="registration-required"
-                    name="isRegistrable"
-                    options={
-                      Array [
-                        Object {
-                          "label": "indifferent",
-                          "value": "all",
-                        },
-                        Object {
-                          "label": "global.yes",
-                          "value": "yes",
-                        },
-                        Object {
-                          "label": "global.no",
-                          "value": "no",
-                        },
-                      ]
-                    }
-                    placeholder="indifferent"
-                    role="combobox"
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <UserListField
-                    ariaControls="EventListFilters-filter-author-listbox"
-                    authorOfEvent={true}
-                    autoload={false}
-                    className=""
-                    clearable={true}
-                    debounce={true}
-                    id="EventListFilters-filter-authors"
-                    inputClassName="fake-inputClassName"
-                    label={
-                      <FormattedMessage
-                        id="global.author"
-                        values={Object {}}
-                      />
-                    }
-                    labelClassName="control-label"
-                    multi={false}
-                    name="author"
-                    placeholder="all-the-authors"
-                    selectFieldIsObject={true}
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div
-                    className="visible-xs-block visible-sm-block"
-                  >
-                    <Field
-                      addonAfter={
-                        <i
-                          className="cap cap-magnifier"
-                        />
-                      }
-                      aria-autocomplete="list"
-                      aria-controls="event-search-input-listbox"
-                      aria-haspopup="true"
-                      clearable={true}
-                      component={[Function]}
-                      groupClassName="event-search-group pull-right"
-                      id="event-search-input"
-                      label="search.form.placeholder.term"
-                      name="search"
-                      placeholder="search.form.placeholder.term"
-                      role="combobox"
-                      type="text"
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div>
-                    <Relay(injectIntl(SelectTheme))
-                      query={
-                        Object {
-                          " $fragmentRefs": null,
-                          " $refType": null,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div>
-                    <SelectDistrict
-                      query={
-                        Object {
-                          " $fragmentRefs": null,
-                          " $refType": null,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div>
-                    <Relay(injectIntl(SelectProject))
-                      query={
-                        Object {
-                          " $fragmentRefs": null,
-                          " $refType": null,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-userType-listbox"
-                    aria-haspopup="true"
-                    component={[Function]}
-                    id="EventListFilters-filter-userType"
-                    label="filter-userType"
-                    name="userType"
-                    options={
-                      Array [
-                        Object {
-                          "label": "Citoyen",
-                          "value": "userType-1",
-                        },
-                        Object {
-                          "label": "Institution",
-                          "value": "userType-2",
-                        },
-                      ]
-                    }
-                    placeholder="global.select_project_types"
-                    role="combobox"
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="link"
-                    className="p-0"
-                    disabled={false}
-                    onClick={[Function]}
-                  >
-                    <FormattedMessage
-                      id="reset-filters"
-                      values={Object {}}
-                    />
-                  </Button>
-                </div>
-              </Col>
-            </form>
-          </div>
-        }
-        type="event"
-      />
-    </div>
-    <Connect(EventListToggleMobileViewBtn)
-      isMobileListView={true}
-      onChange={[Function]}
-      showMapButton={true}
-    />
-  </EventListFilters__FiltersWrapper>
-  <Col
-    bsClass="col"
-    componentClass="div"
-    md={3}
-    smHidden={true}
-    xs={4}
-    xsHidden={true}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <Field
-        addonAfter={
-          <i
-            className="cap cap-magnifier"
+  <BrowserRouter>
+    <Connect(IntlProvider)>
+      <Provider>
+        <Component
+          theme={
+            Object {
+              "borders": Object {
+                "avatar": "2px solid",
+                "button": "1px solid",
+                "card": "1px solid",
+                "normal": "1px solid",
+              },
+              "breakpoints": Array [
+                "767px",
+                "1024px",
+              ],
+              "colors": Object {
+                "aqua": Object {
+                  "100": "#FAFEFE",
+                  "150": "#E4F8FC",
+                  "200": "#C9F2F8",
+                  "300": "#97E6F2",
+                  "400": "#65DAEC",
+                  "500": "#33CEE6",
+                  "600": "#19B0C8",
+                  "700": "#138496",
+                  "800": "#0C5864",
+                  "900": "#062C32",
+                },
+                "black": "#000",
+                "blue": Object {
+                  "100": "#FAFCFF",
+                  "150": "#E0EFFF",
+                  "200": "#C2DFFF",
+                  "300": "#8AC2FF",
+                  "400": "#52A5FF",
+                  "500": "#1A88FF",
+                  "600": "#006CE0",
+                  "700": "#0051A8",
+                  "800": "#003670",
+                  "900": "#001B38",
+                },
+                "current": "currentColor",
+                "dark": "#30363D",
+                "gray": Object {
+                  "100": "#F7F7F8",
+                  "150": "#E8EBED",
+                  "200": "#DADEE1",
+                  "300": "#BEC4CB",
+                  "400": "#A2ABB4",
+                  "500": "#85919D",
+                  "600": "#6B7885",
+                  "700": "#545E68",
+                  "800": "#3D454C",
+                  "900": "#272B30",
+                },
+                "green": Object {
+                  "100": "#FBFEFC",
+                  "150": "#E4F9E9",
+                  "200": "#CEF3D6",
+                  "300": "#A1E8B1",
+                  "400": "#73DD8C",
+                  "500": "#46D267",
+                  "600": "#2CB54C",
+                  "700": "#218739",
+                  "800": "#165A26",
+                  "900": "#0B2D13",
+                },
+                "neutral-gray": Object {
+                  "100": "#F7F7F7",
+                  "150": "#EBEBEB",
+                  "200": "#DDDDDD",
+                  "300": "#C4C4C4",
+                  "400": "#ABABAB",
+                  "50": "#FAFAFA",
+                  "500": "#919191",
+                  "600": "#787878",
+                  "700": "#5E5E5E",
+                  "800": "#454545",
+                  "900": "#2B2B2B",
+                },
+                "orange": Object {
+                  "100": "#FFFDFA",
+                  "150": "#FFF3E0",
+                  "200": "#FFE7C2",
+                  "300": "#FFD08A",
+                  "400": "#FFBA52",
+                  "500": "#FFA31A",
+                  "600": "#E08700",
+                  "700": "#A86500",
+                  "800": "#704300",
+                  "900": "#382200",
+                },
+                "red": Object {
+                  "100": "#FEFBFB",
+                  "150": "#FAE5E7",
+                  "200": "#F6CBCF",
+                  "300": "#ED9BA4",
+                  "400": "#E56C78",
+                  "500": "#DD3C4C",
+                  "600": "#BF2231",
+                  "700": "#8F1925",
+                  "800": "#5F1119",
+                  "900": "#30080C",
+                },
+                "transparent": "transparent",
+                "white": "#fff",
+                "yellow": Object {
+                  "100": "#FFFEFA",
+                  "150": "#FFF7E0",
+                  "200": "#FFF0C2",
+                  "300": "#FFE28A",
+                  "400": "#FFDA52",
+                  "500": "#FFC61A",
+                  "600": "#E0A800",
+                  "700": "#A87E00",
+                  "800": "#705400",
+                  "900": "#382A00",
+                },
+              },
+              "fontSizes": Array [
+                0,
+                "1.100rem",
+                "1.300rem",
+                "1.400rem",
+                "1.800rem",
+                "2.400rem",
+                "3.300rem",
+                "4.400rem",
+              ],
+              "fontWeights": Object {
+                "black": 900,
+                "bold": 700,
+                "extrabold": 800,
+                "hairline": 100,
+                "light": 300,
+                "medium": 500,
+                "normal": 400,
+                "semibold": 600,
+                "thin": 200,
+              },
+              "fonts": Object {
+                "body": "OpenSans, Helvetica, Arial, sans-serif",
+                "content": "OpenSans, Helvetica, Arial, sans-serif",
+                "heading": "OpenSans, Helvetica, Arial, sans-serif",
+                "input": "Roboto, Helvetica, Arial, sans-serif",
+                "label": "OpenSans, Helvetica, Arial, sans-serif",
+                "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+                "roboto": "Roboto, Helvetica, Arial, sans-serif",
+              },
+              "iconSizes": Array [
+                "1.200rem",
+                "1.600rem",
+                "2.400rem",
+                "3.200rem",
+                "4.800rem",
+                "6.400rem",
+              ],
+              "letterSpacings": Object {
+                "normal": "0",
+                "tight": "-0.025em",
+                "tighter": "-0.05em",
+                "wide": "0.025em",
+                "wider": "0.05em",
+                "widest": "0.1em",
+              },
+              "lineHeights": Object {
+                "base": "2.400rem",
+                "l": "4.800rem",
+                "m": "3.200rem",
+                "normal": "1rem",
+                "s": "1.800rem",
+                "sm": "1.600rem",
+                "xl": "6.400rem",
+              },
+              "radii": Object {
+                "accordion": 8,
+                "adminSection": 8,
+                "button": 4,
+                "buttonQuickAction": 50,
+                "card": 4,
+                "modal": 5,
+                "normal": 4,
+                "notifications": 4,
+                "placeholder": 4,
+                "popover": 8,
+                "poppin": 8,
+                "project_card": 8,
+                "table": 8,
+                "tags": 4,
+                "toasts": 4,
+                "tooltip": 4,
+              },
+              "shadows": Object {
+                "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+                "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+                "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+              },
+              "sizes": Array [
+                0,
+                "0.400rem",
+                "0.800rem",
+                "1.200rem",
+                "1.600rem",
+                "2.000rem",
+                "2.400rem",
+                "2.800rem",
+                "3.200rem",
+                "4.000rem",
+                "4.800rem",
+                "5.600rem",
+                "6.400rem",
+                "7.200rem",
+                "12.800rem",
+                "25.600rem",
+                "51.200rem",
+              ],
+              "space": Array [
+                0,
+                "0.400rem",
+                "0.800rem",
+                "1.200rem",
+                "1.600rem",
+                "2.000rem",
+                "2.400rem",
+                "2.800rem",
+                "3.200rem",
+                "4.000rem",
+                "4.800rem",
+                "5.600rem",
+                "6.400rem",
+                "7.200rem",
+                "12.800rem",
+                "25.600rem",
+                "51.200rem",
+              ],
+            }
+          }
+        >
+          <EventListFilters
+            addToggleViewButton={true}
+            anyTouched={false}
+            array={
+              Object {
+                "insert": [MockFunction],
+                "move": [MockFunction],
+                "pop": [MockFunction],
+                "push": [MockFunction],
+                "remove": [MockFunction],
+                "removeAll": [MockFunction],
+                "shift": [MockFunction],
+                "splice": [MockFunction],
+                "swap": [MockFunction],
+                "unshift": [MockFunction],
+              }
+            }
+            asyncValidate={[MockFunction]}
+            asyncValidating={false}
+            author={null}
+            autofill={[MockFunction]}
+            blur={[MockFunction]}
+            change={[MockFunction]}
+            clearAsyncError={[MockFunction]}
+            clearSubmit={[MockFunction]}
+            destroy={[MockFunction]}
+            dirty={false}
+            dispatch={[MockFunction]}
+            error={null}
+            features={
+              Object {
+                "allow_users_to_propose_events": false,
+                "analytics_page": false,
+                "anonymous_questionnaire": false,
+                "blog": false,
+                "calendar": false,
+                "captcha": false,
+                "consent_external_communication": false,
+                "consent_internal_communication": false,
+                "consultation_plan": false,
+                "display_map": true,
+                "display_pictures_in_depository_proposals_list": false,
+                "display_pictures_in_event_list": false,
+                "districts": false,
+                "emailing": false,
+                "emailing_parameters": false,
+                "export": false,
+                "external_project": false,
+                "helpscout_beacon": false,
+                "http_redirects": false,
+                "import_proposals": false,
+                "login_cas": false,
+                "login_facebook": false,
+                "login_franceconnect": false,
+                "login_saml": false,
+                "members_list": false,
+                "moderation_comment": false,
+                "multilangue": false,
+                "new_project_card": false,
+                "newsletter": false,
+                "noindex_on_profiles": false,
+                "oauth2_switch_user": false,
+                "organizations": false,
+                "paper_vote": false,
+                "phone_confirmation": false,
+                "privacy_policy": false,
+                "profiles": false,
+                "project_admin": false,
+                "project_trash": false,
+                "projects_form": true,
+                "proposal_revisions": false,
+                "proposal_sms_vote": false,
+                "questionnaire_result": false,
+                "read_more": false,
+                "registration": false,
+                "report_browers_errors_to_sentry": false,
+                "reporting": false,
+                "restrict_connection": false,
+                "restrict_registration_via_email_domain": false,
+                "search": false,
+                "secure_password": false,
+                "server_side_rendering": false,
+                "share_buttons": false,
+                "shield_mode": false,
+                "sso_by_pass_auth": false,
+                "themes": true,
+                "twilio": false,
+                "user_type": false,
+                "votes_evolution": false,
+                "votes_min": false,
+                "zipcode_at_register": false,
+              }
+            }
+            form="formName"
+            handleSubmit={[MockFunction]}
+            initialize={[MockFunction]}
+            initialized={true}
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "formats": Object {},
+                "locale": "fr-FR",
+                "messages": Object {},
+                "now": [Function],
+              }
+            }
+            invalid={false}
+            isRegistrable="all"
+            orderBy={
+              Object {
+                "direction": "ASC",
+                "field": "START_AT",
+              }
+            }
+            pristine={true}
+            project="UHJvamVjdDpwcm9qZWN0MQ=="
+            query={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+              }
+            }
+            reset={[MockFunction]}
+            search="PHP"
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            theme="theme-1"
+            touch={[MockFunction]}
+            untouch={[MockFunction]}
+            updateSyncErrors={[MockFunction]}
+            userType={null}
+            userTypes={
+              Array [
+                Object {
+                  "id": "userType-1",
+                  "name": "Citoyen",
+                },
+                Object {
+                  "id": "userType-2",
+                  "name": "Institution",
+                },
+              ]
+            }
+            valid={true}
+            warning={null}
           />
-        }
-        component={[Function]}
-        divClassName="event-search-group pull-right w-100"
-        id="event-search-input"
-        name="search"
-        placeholder="search.form.placeholder.term"
-        type="text"
-      />
-    </form>
-  </Col>
-</Row>
+        </Component>
+      </Provider>
+    </Connect(IntlProvider)>
+  </BrowserRouter>
+</Provider>
 `;
 
 exports[`<EventListFilters /> renders correctly without filters 1`] = `
-<Row
-  bsClass="row"
-  className="align-items-center d-flex flex-wrap"
-  componentClass="div"
+<Provider
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(Symbol.observable): [Function],
+    }
+  }
 >
-  <EventListFilters__StatusContainer
-    md={5}
-    smHidden={true}
-    xs={4}
-    xsHidden={true}
-  >
-    <Relay(EventListCounter)
-      query={
-        Object {
-          " $fragmentRefs": null,
-          " $refType": null,
-        }
-      }
-    />
-    <Connect(EventListStatusFilter)
-      screen="desktop"
-    />
-  </EventListFilters__StatusContainer>
-  <EventListFilters__FiltersWrapper
-    id="event-filters"
-    md={4}
-    xs={12}
-  >
-    <div
-      className="pull-right"
-    >
-      <FiltersContainer
-        filterCount={3}
-        overlay={
-          <div>
-            <form>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-isRegistrable-listbox"
-                    aria-haspopup="true"
-                    clearable={true}
-                    component={[Function]}
-                    id="EventListFilters-filter-isRegistrable"
-                    label="registration-required"
-                    name="isRegistrable"
-                    options={
-                      Array [
-                        Object {
-                          "label": "indifferent",
-                          "value": "all",
-                        },
-                        Object {
-                          "label": "global.yes",
-                          "value": "yes",
-                        },
-                        Object {
-                          "label": "global.no",
-                          "value": "no",
-                        },
-                      ]
-                    }
-                    placeholder="indifferent"
-                    role="combobox"
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <UserListField
-                    ariaControls="EventListFilters-filter-author-listbox"
-                    authorOfEvent={true}
-                    autoload={false}
-                    className=""
-                    clearable={true}
-                    debounce={true}
-                    id="EventListFilters-filter-authors"
-                    inputClassName="fake-inputClassName"
-                    label={
-                      <FormattedMessage
-                        id="global.author"
-                        values={Object {}}
-                      />
-                    }
-                    labelClassName="control-label"
-                    multi={false}
-                    name="author"
-                    placeholder="all-the-authors"
-                    selectFieldIsObject={true}
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div
-                    className="visible-xs-block visible-sm-block"
-                  >
-                    <Field
-                      addonAfter={
-                        <i
-                          className="cap cap-magnifier"
-                        />
-                      }
-                      aria-autocomplete="list"
-                      aria-controls="event-search-input-listbox"
-                      aria-haspopup="true"
-                      clearable={true}
-                      component={[Function]}
-                      groupClassName="event-search-group pull-right"
-                      id="event-search-input"
-                      label="search.form.placeholder.term"
-                      name="search"
-                      placeholder="search.form.placeholder.term"
-                      role="combobox"
-                      type="text"
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <div>
-                    <SelectDistrict
-                      query={
-                        Object {
-                          " $fragmentRefs": null,
-                          " $refType": null,
-                        }
-                      }
-                    />
-                  </div>
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Field
-                    aria-autocomplete="list"
-                    aria-controls="EventListFilters-filter-userType-listbox"
-                    aria-haspopup="true"
-                    component={[Function]}
-                    id="EventListFilters-filter-userType"
-                    label="filter-userType"
-                    name="userType"
-                    options={
-                      Array [
-                        Object {
-                          "label": "Citoyen",
-                          "value": "userType-1",
-                        },
-                        Object {
-                          "label": "Institution",
-                          "value": "userType-2",
-                        },
-                      ]
-                    }
-                    placeholder="global.select_project_types"
-                    role="combobox"
-                  />
-                </div>
-              </Col>
-              <Col
-                bsClass="col"
-                className="mt-5"
-                componentClass="div"
-              >
-                <div>
-                  <Button
-                    active={false}
-                    block={false}
-                    bsClass="btn"
-                    bsStyle="link"
-                    className="p-0"
-                    disabled={false}
-                    onClick={[Function]}
-                  >
-                    <FormattedMessage
-                      id="reset-filters"
-                      values={Object {}}
-                    />
-                  </Button>
-                </div>
-              </Col>
-            </form>
-          </div>
-        }
-        type="event"
-      />
-    </div>
-  </EventListFilters__FiltersWrapper>
-  <Col
-    bsClass="col"
-    componentClass="div"
-    md={3}
-    smHidden={true}
-    xs={4}
-    xsHidden={true}
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <Field
-        addonAfter={
-          <i
-            className="cap cap-magnifier"
+  <BrowserRouter>
+    <Connect(IntlProvider)>
+      <Provider>
+        <Component
+          theme={
+            Object {
+              "borders": Object {
+                "avatar": "2px solid",
+                "button": "1px solid",
+                "card": "1px solid",
+                "normal": "1px solid",
+              },
+              "breakpoints": Array [
+                "767px",
+                "1024px",
+              ],
+              "colors": Object {
+                "aqua": Object {
+                  "100": "#FAFEFE",
+                  "150": "#E4F8FC",
+                  "200": "#C9F2F8",
+                  "300": "#97E6F2",
+                  "400": "#65DAEC",
+                  "500": "#33CEE6",
+                  "600": "#19B0C8",
+                  "700": "#138496",
+                  "800": "#0C5864",
+                  "900": "#062C32",
+                },
+                "black": "#000",
+                "blue": Object {
+                  "100": "#FAFCFF",
+                  "150": "#E0EFFF",
+                  "200": "#C2DFFF",
+                  "300": "#8AC2FF",
+                  "400": "#52A5FF",
+                  "500": "#1A88FF",
+                  "600": "#006CE0",
+                  "700": "#0051A8",
+                  "800": "#003670",
+                  "900": "#001B38",
+                },
+                "current": "currentColor",
+                "dark": "#30363D",
+                "gray": Object {
+                  "100": "#F7F7F8",
+                  "150": "#E8EBED",
+                  "200": "#DADEE1",
+                  "300": "#BEC4CB",
+                  "400": "#A2ABB4",
+                  "500": "#85919D",
+                  "600": "#6B7885",
+                  "700": "#545E68",
+                  "800": "#3D454C",
+                  "900": "#272B30",
+                },
+                "green": Object {
+                  "100": "#FBFEFC",
+                  "150": "#E4F9E9",
+                  "200": "#CEF3D6",
+                  "300": "#A1E8B1",
+                  "400": "#73DD8C",
+                  "500": "#46D267",
+                  "600": "#2CB54C",
+                  "700": "#218739",
+                  "800": "#165A26",
+                  "900": "#0B2D13",
+                },
+                "neutral-gray": Object {
+                  "100": "#F7F7F7",
+                  "150": "#EBEBEB",
+                  "200": "#DDDDDD",
+                  "300": "#C4C4C4",
+                  "400": "#ABABAB",
+                  "50": "#FAFAFA",
+                  "500": "#919191",
+                  "600": "#787878",
+                  "700": "#5E5E5E",
+                  "800": "#454545",
+                  "900": "#2B2B2B",
+                },
+                "orange": Object {
+                  "100": "#FFFDFA",
+                  "150": "#FFF3E0",
+                  "200": "#FFE7C2",
+                  "300": "#FFD08A",
+                  "400": "#FFBA52",
+                  "500": "#FFA31A",
+                  "600": "#E08700",
+                  "700": "#A86500",
+                  "800": "#704300",
+                  "900": "#382200",
+                },
+                "red": Object {
+                  "100": "#FEFBFB",
+                  "150": "#FAE5E7",
+                  "200": "#F6CBCF",
+                  "300": "#ED9BA4",
+                  "400": "#E56C78",
+                  "500": "#DD3C4C",
+                  "600": "#BF2231",
+                  "700": "#8F1925",
+                  "800": "#5F1119",
+                  "900": "#30080C",
+                },
+                "transparent": "transparent",
+                "white": "#fff",
+                "yellow": Object {
+                  "100": "#FFFEFA",
+                  "150": "#FFF7E0",
+                  "200": "#FFF0C2",
+                  "300": "#FFE28A",
+                  "400": "#FFDA52",
+                  "500": "#FFC61A",
+                  "600": "#E0A800",
+                  "700": "#A87E00",
+                  "800": "#705400",
+                  "900": "#382A00",
+                },
+              },
+              "fontSizes": Array [
+                0,
+                "1.100rem",
+                "1.300rem",
+                "1.400rem",
+                "1.800rem",
+                "2.400rem",
+                "3.300rem",
+                "4.400rem",
+              ],
+              "fontWeights": Object {
+                "black": 900,
+                "bold": 700,
+                "extrabold": 800,
+                "hairline": 100,
+                "light": 300,
+                "medium": 500,
+                "normal": 400,
+                "semibold": 600,
+                "thin": 200,
+              },
+              "fonts": Object {
+                "body": "OpenSans, Helvetica, Arial, sans-serif",
+                "content": "OpenSans, Helvetica, Arial, sans-serif",
+                "heading": "OpenSans, Helvetica, Arial, sans-serif",
+                "input": "Roboto, Helvetica, Arial, sans-serif",
+                "label": "OpenSans, Helvetica, Arial, sans-serif",
+                "openSans": "OpenSans, Helvetica, Arial, sans-serif",
+                "roboto": "Roboto, Helvetica, Arial, sans-serif",
+              },
+              "iconSizes": Array [
+                "1.200rem",
+                "1.600rem",
+                "2.400rem",
+                "3.200rem",
+                "4.800rem",
+                "6.400rem",
+              ],
+              "letterSpacings": Object {
+                "normal": "0",
+                "tight": "-0.025em",
+                "tighter": "-0.05em",
+                "wide": "0.025em",
+                "wider": "0.05em",
+                "widest": "0.1em",
+              },
+              "lineHeights": Object {
+                "base": "2.400rem",
+                "l": "4.800rem",
+                "m": "3.200rem",
+                "normal": "1rem",
+                "s": "1.800rem",
+                "sm": "1.600rem",
+                "xl": "6.400rem",
+              },
+              "radii": Object {
+                "accordion": 8,
+                "adminSection": 8,
+                "button": 4,
+                "buttonQuickAction": 50,
+                "card": 4,
+                "modal": 5,
+                "normal": 4,
+                "notifications": 4,
+                "placeholder": 4,
+                "popover": 8,
+                "poppin": 8,
+                "project_card": 8,
+                "table": 8,
+                "tags": 4,
+                "toasts": 4,
+                "tooltip": 4,
+              },
+              "shadows": Object {
+                "big": "0 10px 99px rgba(0, 0, 0, 0.302)",
+                "medium": "0 10px 50px rgba(0, 0, 0, 0.15)",
+                "small": "0 2px 8px rgba(0, 0, 0, 0.1)",
+              },
+              "sizes": Array [
+                0,
+                "0.400rem",
+                "0.800rem",
+                "1.200rem",
+                "1.600rem",
+                "2.000rem",
+                "2.400rem",
+                "2.800rem",
+                "3.200rem",
+                "4.000rem",
+                "4.800rem",
+                "5.600rem",
+                "6.400rem",
+                "7.200rem",
+                "12.800rem",
+                "25.600rem",
+                "51.200rem",
+              ],
+              "space": Array [
+                0,
+                "0.400rem",
+                "0.800rem",
+                "1.200rem",
+                "1.600rem",
+                "2.000rem",
+                "2.400rem",
+                "2.800rem",
+                "3.200rem",
+                "4.000rem",
+                "4.800rem",
+                "5.600rem",
+                "6.400rem",
+                "7.200rem",
+                "12.800rem",
+                "25.600rem",
+                "51.200rem",
+              ],
+            }
+          }
+        >
+          <EventListFilters
+            addToggleViewButton={false}
+            anyTouched={false}
+            array={
+              Object {
+                "insert": [MockFunction],
+                "move": [MockFunction],
+                "pop": [MockFunction],
+                "push": [MockFunction],
+                "remove": [MockFunction],
+                "removeAll": [MockFunction],
+                "shift": [MockFunction],
+                "splice": [MockFunction],
+                "swap": [MockFunction],
+                "unshift": [MockFunction],
+              }
+            }
+            asyncValidate={[MockFunction]}
+            asyncValidating={false}
+            author={null}
+            autofill={[MockFunction]}
+            blur={[MockFunction]}
+            change={[MockFunction]}
+            clearAsyncError={[MockFunction]}
+            clearSubmit={[MockFunction]}
+            destroy={[MockFunction]}
+            dirty={false}
+            dispatch={[MockFunction]}
+            error={null}
+            features={
+              Object {
+                "allow_users_to_propose_events": false,
+                "analytics_page": false,
+                "anonymous_questionnaire": false,
+                "blog": false,
+                "calendar": false,
+                "captcha": false,
+                "consent_external_communication": false,
+                "consent_internal_communication": false,
+                "consultation_plan": false,
+                "display_map": false,
+                "display_pictures_in_depository_proposals_list": false,
+                "display_pictures_in_event_list": false,
+                "districts": false,
+                "emailing": false,
+                "emailing_parameters": false,
+                "export": false,
+                "external_project": false,
+                "helpscout_beacon": false,
+                "http_redirects": false,
+                "import_proposals": false,
+                "login_cas": false,
+                "login_facebook": false,
+                "login_franceconnect": false,
+                "login_saml": false,
+                "members_list": false,
+                "moderation_comment": false,
+                "multilangue": false,
+                "new_project_card": false,
+                "newsletter": false,
+                "noindex_on_profiles": false,
+                "oauth2_switch_user": false,
+                "organizations": false,
+                "paper_vote": false,
+                "phone_confirmation": false,
+                "privacy_policy": false,
+                "profiles": false,
+                "project_admin": false,
+                "project_trash": false,
+                "projects_form": false,
+                "proposal_revisions": false,
+                "proposal_sms_vote": false,
+                "questionnaire_result": false,
+                "read_more": false,
+                "registration": false,
+                "report_browers_errors_to_sentry": false,
+                "reporting": false,
+                "restrict_connection": false,
+                "restrict_registration_via_email_domain": false,
+                "search": false,
+                "secure_password": false,
+                "server_side_rendering": false,
+                "share_buttons": false,
+                "shield_mode": false,
+                "sso_by_pass_auth": false,
+                "themes": false,
+                "twilio": false,
+                "user_type": false,
+                "votes_evolution": false,
+                "votes_min": false,
+                "zipcode_at_register": false,
+              }
+            }
+            form="formName"
+            handleSubmit={[MockFunction]}
+            initialize={[MockFunction]}
+            initialized={true}
+            intl={
+              Object {
+                "formatDate": [Function],
+                "formatHTMLMessage": [Function],
+                "formatMessage": [Function],
+                "formatNumber": [Function],
+                "formatPlural": [Function],
+                "formatRelative": [Function],
+                "formatTime": [Function],
+                "formats": Object {},
+                "locale": "fr-FR",
+                "messages": Object {},
+                "now": [Function],
+              }
+            }
+            invalid={false}
+            isRegistrable="all"
+            orderBy={
+              Object {
+                "direction": "ASC",
+                "field": "START_AT",
+              }
+            }
+            pristine={true}
+            project="UHJvamVjdDpwcm9qZWN0MQ=="
+            query={
+              Object {
+                " $fragmentRefs": null,
+                " $refType": null,
+              }
+            }
+            reset={[MockFunction]}
+            search="PHP"
+            submitFailed={false}
+            submitSucceeded={false}
+            submitting={false}
+            theme="theme-1"
+            touch={[MockFunction]}
+            untouch={[MockFunction]}
+            updateSyncErrors={[MockFunction]}
+            userType={null}
+            userTypes={
+              Array [
+                Object {
+                  "id": "userType-1",
+                  "name": "Citoyen",
+                },
+                Object {
+                  "id": "userType-2",
+                  "name": "Institution",
+                },
+              ]
+            }
+            valid={true}
+            warning={null}
           />
-        }
-        component={[Function]}
-        divClassName="event-search-group pull-right w-100"
-        id="event-search-input"
-        name="search"
-        placeholder="search.form.placeholder.term"
-        type="text"
-      />
-    </form>
-  </Col>
-</Row>
+        </Component>
+      </Provider>
+    </Connect(IntlProvider)>
+  </BrowserRouter>
+</Provider>
 `;

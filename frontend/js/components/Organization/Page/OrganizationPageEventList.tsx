@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { graphql, usePaginationFragment } from 'react-relay'
+import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import type { OrganizationPageEventList_organization$key } from '~relay/OrganizationPageEventList_organization.graphql'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Heading from '~/components/Ui/Primitives/Heading'
 import Button from '~/components/DesignSystem/Button/Button'
 import AppBox from '~/components/Ui/Primitives/AppBox'
 import EventCard from '~/components/Ui/Event/EventCard'
@@ -14,6 +13,7 @@ const FRAGMENT = graphql`
     cursor: { type: "String" }
     hideDeletedEvents: { type: "Boolean" }
     hideUnpublishedEvents: { type: "Boolean" }
+    isFuture: { type: "Boolean" }
   )
   @refetchable(queryName: "OrganizationPageEventListPaginationQuery") {
     events(
@@ -21,7 +21,8 @@ const FRAGMENT = graphql`
       after: $cursor
       hideDeletedEvents: $hideDeletedEvents
       hideUnpublishedEvents: $hideUnpublishedEvents
-    ) @connection(key: "OrganizationPageEventList_events", filters: ["query", "orderBy"]) {
+      isFuture: $isFuture
+    ) @connection(key: "OrganizationPageEventList_events", filters: ["query", "orderBy", "isFuture"]) {
       totalCount
       edges {
         node {
@@ -34,19 +35,21 @@ const FRAGMENT = graphql`
 `
 export type Props = {
   readonly organization: OrganizationPageEventList_organization$key
+  readonly filter: string
 }
-export const OrganizationPageEventList = ({ organization }: Props) => {
+export const OrganizationPageEventList = ({ organization, filter }: Props) => {
   const intl = useIntl()
-  const { data, loadNext, hasNext } = usePaginationFragment(FRAGMENT, organization)
+  const { data, loadNext, hasNext, refetch } = usePaginationFragment(FRAGMENT, organization)
+
+  useEffect(() => {
+    filter === 'theme.show.status.future' ? refetch({ isFuture: true }) : refetch({ isFuture: false })
+  }, [filter, refetch])
+
   if (!data) return null
   const { events } = data
+
   return (
-    <Flex direction="column" maxWidth={['100%', '380px']} width="100%">
-      <Heading as="h4" mb={4}>
-        {intl.formatMessage({
-          id: 'homepage.section.events',
-        })}
-      </Heading>
+    <>
       {events.edges?.filter(Boolean).map((edge, index) => (
         <EventCard event={edge?.node} key={index} mb={4} />
       ))}
@@ -59,7 +62,7 @@ export const OrganizationPageEventList = ({ organization }: Props) => {
           </Button>
         </AppBox>
       ) : null}
-    </Flex>
+    </>
   )
 }
 export default OrganizationPageEventList

@@ -1,204 +1,211 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StepEvents /> should render a sliders with 3 events 1`] = `
-<StepEventsstyle__Container
-  className="block"
+exports[`<StepEvents /> <TestStepEvents /> should render correctly 1`] = `
+<div
+  className="StepEventsstyle__Container-jvrJbu dRuOvl block"
   id="StepEvents"
 >
-  <h2
-    className="h2"
+  <div
+    className="sc-breQAM Flex___StyledAppBox-SiGEY gNCdlq"
   >
-    <FormattedMessage
-      id="global.events"
-      values={Object {}}
-    />
-     
-    <span
-      className="small excerpt"
+    <h2
+      className="sc-breQAM BHZiE"
     >
-      3
-    </span>
-  </h2>
-  <Slider
-    arrows={true}
-    dots={false}
-    infinite={false}
-    nextArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
-        >
-          <Icon
-            color="#acacac"
-            name="chevron-right"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    prevArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
-        >
-          <Icon
-            color="#acacac"
-            name="chevron-left"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    slidesToShow={2}
-    speed={500}
-  >
-    <Relay(ProjectEventPreview)
-      event={
-        Object {
-          " $fragmentRefs": null,
-          "id": "event1",
-        }
-      }
-      key="event1"
-    />
-  </Slider>
-</StepEventsstyle__Container>
-`;
-
-exports[`<StepEvents /> should render full width and no arrows with 1 event 1`] = `
-<StepEventsstyle__Container
-  className="block"
-  id="StepEvents"
->
-  <h2
-    className="h2"
-  >
-    <FormattedMessage
-      id="global.events"
-      values={Object {}}
-    />
-     
-    <span
-      className="small excerpt"
+      global.events
+       
+      <span
+        className="small excerpt"
+      >
+        3
+      </span>
+    </h2>
+    <div
+      className="sc-breQAM hYtsul"
     >
-      1
-    </span>
-  </h2>
-  <Slider
-    arrows={false}
-    dots={false}
-    infinite={false}
-    nextArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
+      <button
+        aria-controls="id-2"
+        aria-expanded={false}
+        aria-haspopup="menu"
+        className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr iWxcUO"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseEnter={[Function]}
+        type="button"
+      >
+        <div
+          className="sc-bcXGCL dLsLlo"
         >
-          <Icon
-            color="#acacac"
-            name="chevron-right"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    prevArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
-        >
-          <Icon
-            color="#acacac"
-            name="chevron-left"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    slidesToShow={1}
-    speed={500}
-  >
-    <Relay(ProjectEventPreview)
-      event={
-        Object {
-          " $fragmentRefs": null,
-          "id": "event1",
+          theme.show.status.future
+        </div>
+        <IconMock
+          aria-hidden={true}
+          className="icon"
+          fill="black"
+          height="8"
+          style={
+            Object {
+              "flexShrink": "0",
+              "verticalAlign": "middle",
+            }
+          }
+          width="8"
+        />
+      </button>
+      <div
+        aria-orientation="vertical"
+        className="sc-breQAM Flex___StyledAppBox-SiGEY iYqFpQ MenuList__MenuItems-gnQjCH cGgtuL"
+        data-dialog={true}
+        hidden={true}
+        id="id-2"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onBlurCapture={[Function]}
+        onFocus={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyDownCapture={[Function]}
+        onKeyUpCapture={[Function]}
+        onTransitionEnd={[Function]}
+        role="menu"
+        style={
+          Object {
+            "display": "none",
+            "left": "100%",
+            "opacity": 0,
+            "outline": "none",
+            "position": "fixed",
+            "top": "100%",
+          }
         }
-      }
-      key="event1"
-    />
-  </Slider>
-</StepEventsstyle__Container>
-`;
-
-exports[`<StepEvents /> should render nothing without events 1`] = `""`;
-
-exports[`<StepEvents /> should render without arrows with 2 events 1`] = `
-<StepEventsstyle__Container
-  className="block"
-  id="StepEvents"
->
-  <h2
-    className="h2"
+        tabIndex={-1}
+      >
+        <button
+          className="MenuListItem__MenuItemInner-gJlTyj jIDbKC"
+          id="id-2-1"
+          onBlurCapture={[Function]}
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <p
+            className="sc-breQAM lcNvFi"
+          >
+            theme.show.status.future
+          </p>
+        </button>
+        <button
+          className="MenuListItem__MenuItemInner-gJlTyj jIDbKC"
+          id="id-2-2"
+          onBlurCapture={[Function]}
+          onClick={[Function]}
+          onClickCapture={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyPressCapture={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseDownCapture={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <p
+            className="sc-breQAM lcNvFi"
+          >
+            finished
+          </p>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Loader__Container-dvTPbV qrEAX loader"
+    inline={false}
   >
-    <FormattedMessage
-      id="global.events"
-      values={Object {}}
-    />
-     
-    <span
-      className="small excerpt"
+    <div
+      className="sc-uhmsm giHpBj"
+      color="#333333"
+      size={40}
     >
-      2
-    </span>
-  </h2>
-  <Slider
-    arrows={false}
-    dots={false}
-    infinite={false}
-    nextArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
-        >
-          <Icon
-            color="#acacac"
-            name="chevron-right"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    prevArrow={
-      <Arrow>
-        <IconRounded
-          borderColor="#e3e3e3"
-          size={36}
-        >
-          <Icon
-            color="#acacac"
-            name="chevron-left"
-            size={18}
-          />
-        </IconRounded>
-      </Arrow>
-    }
-    slidesToShow={2}
-    speed={500}
-  >
-    <Relay(ProjectEventPreview)
-      event={
-        Object {
-          " $fragmentRefs": null,
-          "id": "event1",
-        }
-      }
-      key="event1"
-    />
-  </Slider>
-</StepEventsstyle__Container>
+      <div
+        className="sc-ikHFqL eVqQHs"
+        delay={-1.2}
+        transform={30}
+      />
+      <div
+        className="sc-ikHFqL jwgKtK"
+        delay={-1.1}
+        transform={60}
+      />
+      <div
+        className="sc-ikHFqL ifZDRK"
+        delay={-1}
+        transform={90}
+      />
+      <div
+        className="sc-ikHFqL kulvEu"
+        delay={-0.9}
+        transform={120}
+      />
+      <div
+        className="sc-ikHFqL hXQgoc"
+        delay={-0.8}
+        transform={150}
+      />
+      <div
+        className="sc-ikHFqL fwPare"
+        delay={-0.7}
+        transform={180}
+      />
+      <div
+        className="sc-ikHFqL grWuvp"
+        delay={-0.6}
+        transform={210}
+      />
+      <div
+        className="sc-ikHFqL hVvJRP"
+        delay={-0.5}
+        transform={240}
+      />
+      <div
+        className="sc-ikHFqL iNNYzJ"
+        delay={-0.4}
+        transform={270}
+      />
+      <div
+        className="sc-ikHFqL jkhFOM"
+        delay={-0.3}
+        transform={300}
+      />
+      <div
+        className="sc-ikHFqL iuQEQm"
+        delay={-0.2}
+        transform={330}
+      />
+      <div
+        className="sc-ikHFqL jmdzzo"
+        delay={-0.1}
+        transform={360}
+      />
+    </div>
+  </div>
+</div>
 `;

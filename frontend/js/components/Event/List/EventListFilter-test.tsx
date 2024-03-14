@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 import { EventListFilters } from './EventListFilters'
 import { intlMock, formMock, $refType, $fragmentRefs } from '../../../mocks'
 import { features } from '../../../redux/modules/default'
+import MockProviders from '~/testUtils'
 
 const defaultProps = {
   query: {
@@ -37,7 +38,11 @@ const defaultProps = {
 }
 describe('<EventListFilters />', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<EventListFilters {...defaultProps} />)
+    const wrapper = shallow(
+      <MockProviders>
+        <EventListFilters {...defaultProps} />
+      </MockProviders>,
+    )
     expect(wrapper).toMatchSnapshot()
   })
   it('renders correctly without filters', () => {
@@ -46,7 +51,11 @@ describe('<EventListFilters />', () => {
       addToggleViewButton: false,
       features: { ...features, themes: false, projects_form: false, display_map: false },
     }
-    const wrapper = shallow(<EventListFilters {...props} />)
+    const wrapper = shallow(
+      <MockProviders>
+        <EventListFilters {...props} />
+      </MockProviders>,
+    )
     expect(wrapper).toMatchSnapshot()
   })
 })

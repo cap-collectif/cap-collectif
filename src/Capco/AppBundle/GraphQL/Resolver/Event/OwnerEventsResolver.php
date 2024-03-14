@@ -27,7 +27,7 @@ class OwnerEventsResolver implements QueryInterface
         $query = $args->offsetGet('search');
         $hideDeletedEvents = $args->offsetGet('hideDeletedEvents');
         $hideUnpublishedEvents = $args->offsetGet('hideUnpublishedEvents');
-
+        $isFuture = $args->offsetGet('isFuture');
         $emFilters = $this->em->getFilters();
         $emFilters->enable('softdeleted');
         if (!$hideDeletedEvents) {
@@ -43,6 +43,9 @@ class OwnerEventsResolver implements QueryInterface
         }
         if ($hideUnpublishedEvents) {
             $options['hideUnpublishedEvents'] = $hideUnpublishedEvents;
+        }
+        if (null !== $isFuture) {
+            $options['isFuture'] = $isFuture;
         }
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {

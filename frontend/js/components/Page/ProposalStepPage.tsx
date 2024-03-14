@@ -81,7 +81,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
     <>
       {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} />}
       <div className="ProposalStepPage-rendered" id={`proposalsStep-${step.id || ''}`}>
-        {step.events?.totalCount && calendar ? <StepEvents step={step} /> : null}
+        {step.eventCount?.totalCount && calendar ? <StepEvents step={step} /> : null}
         {step.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
           <div className="alert alert-info alert-dismissible block" role="alert">
             <p>
@@ -189,7 +189,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
                 isProposalSmsVoteEnabled
                 customCode
                 id
-                events(orderBy: { field: START_AT, direction: DESC }) {
+                eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
                   totalCount
                 }
                 ...ProposalVoteBasketWidget_step @arguments(token: $token)

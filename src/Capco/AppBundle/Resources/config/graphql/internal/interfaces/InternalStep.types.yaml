@@ -51,6 +51,9 @@ InternalStep:
                     orderBy:
                         type: 'PreviewEventOrder!'
                         defaultValue: { field: START_AT, direction: DESC }
+                    isFuture:
+                        type: 'Boolean'
+                        description: 'If non-null, filters events by comparing the start date with present.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepEventsResolver", [value, args])'
             project:
                 type: 'InternalProject'

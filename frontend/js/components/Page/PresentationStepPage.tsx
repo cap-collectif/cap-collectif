@@ -39,7 +39,7 @@ const QUERY = graphql`
             anonymousCount
           }
         }
-        events(orderBy: { field: START_AT, direction: DESC }) {
+        eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
           totalCount
         }
         ...StepEvents_step
@@ -76,7 +76,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   if (!data) return null
   const { presentationStep } = data
   if (!presentationStep) return null
-  const { title, body, project, events } = presentationStep
+  const { title, body, project, eventCount } = presentationStep
   if (!project) return null
   const { contributors, url, posts, consultationStepOpen, slug } = project
   return (
@@ -130,7 +130,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
           </div>
         ) : null}
 
-        {(events?.totalCount ?? 0) > 0 && calendar ? <StepEvents step={presentationStep} /> : null}
+        {(eventCount?.totalCount ?? 0) > 0 && calendar ? <StepEvents step={presentationStep} /> : null}
         <div className="block">
           <h2 className="h2">
             {intl.formatMessage({

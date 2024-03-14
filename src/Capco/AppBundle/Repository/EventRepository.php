@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\Owner;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -24,6 +25,33 @@ class EventRepository extends EntityRepository
             ->where('e.id IN (:ids)')
             ->setParameter('ids', $ids)
         ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param array<string, bool> $options
+     *
+     * @return array<mixed>
+     */
+    public function getByStep(AbstractStep $step, array $options): array
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->join('e.steps', 's')
+            ->where('s = :step')
+            ->setParameter('step', $step)
+            ;
+        if (\array_key_exists('isFuture', $options)) {
+            if ($options['isFuture']) {
+                $qb->andWhere('e.startAt > :now OR (e.startAt < :now AND e.endAt > :now )')
+                    ->setParameter('now', new \DateTime())
+                ;
+            } else {
+                $qb->andWhere('e.endAt < :now')
+                    ->setParameter('now', new \DateTime())
+                ;
+            }
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -227,6 +255,18 @@ class EventRepository extends EntityRepository
 
         if ($options['hideUnpublishedEvents'] ?? false) {
             $qb->andWhere('e.enabled = true');
+        }
+
+        if (\array_key_exists('isFuture', $options)) {
+            if ($options['isFuture']) {
+                $qb->andWhere('e.startAt > :now OR (e.startAt < :now AND e.endAt > :now )')
+                    ->setParameter('now', new \DateTime())
+                ;
+            } else {
+                $qb->andWhere('e.endAt < :now')
+                    ->setParameter('now', new \DateTime())
+                ;
+            }
         }
 
         switch ($options['status'] ?? false) {

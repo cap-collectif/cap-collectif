@@ -9,8 +9,14 @@ import OrganizationPageProjectList from './OrganizationPageProjectList'
 import OrganizationPageEventList from './OrganizationPageEventList'
 import OrganizationPagePostList from './OrganizationPagePostList'
 import ProjectHeader from '~/components/Ui/Project/ProjectHeaderLegacy'
+import Button from '~/components/DesignSystem/Button/Button'
+import Menu from '~ds/Menu/Menu'
 import Image from '~ui/Primitives/Image'
+import { useIntl } from 'react-intl'
+import { useState } from 'react'
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import Loader from '~ui/FeedbacksIndicators/Loader'
+import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 const QUERY = graphql`
   query OrganizationPageQuery(
     $organizationId: ID!
@@ -21,6 +27,7 @@ const QUERY = graphql`
     $hideDeletedEvents: Boolean
     $hideUnpublishedEvents: Boolean
     $hideUnpublishedPosts: Boolean
+    $isFuture: Boolean
   ) {
     organization: node(id: $organizationId) {
       ... on Organization {
@@ -51,6 +58,27 @@ const QUERY = graphql`
         postsCount: posts(hideUnpublishedPosts: $hideUnpublishedPosts) {
           totalCount
         }
+        eventsFuture: events(
+          isFuture: true
+          hideDeletedEvents: $hideDeletedEvents
+          hideUnpublishedEvents: $hideUnpublishedEvents
+        ) {
+          totalCount
+        }
+        eventsPast: events(
+          isFuture: false
+          hideDeletedEvents: $hideDeletedEvents
+          hideUnpublishedEvents: $hideUnpublishedEvents
+        ) {
+          totalCount
+        }
+        eventsWithoutFilters: events(
+          isFuture: null
+          hideDeletedEvents: $hideDeletedEvents
+          hideUnpublishedEvents: $hideUnpublishedEvents
+        ) {
+          totalCount
+        }
         ...OrganizationPageProjectList_organization @arguments(count: $count, cursor: $cursorProjects)
         ...OrganizationPageEventList_organization
           @arguments(
@@ -58,6 +86,7 @@ const QUERY = graphql`
             cursor: $cursorEvents
             hideDeletedEvents: $hideDeletedEvents
             hideUnpublishedEvents: $hideUnpublishedEvents
+            isFuture: $isFuture
           )
         ...OrganizationPagePostList_organization
           @arguments(count: $count, cursor: $cursorPosts, hideUnpublishedPosts: $hideUnpublishedPosts)
@@ -78,8 +107,10 @@ export const OrganizationPage = ({ organizationId }: Props) => {
     hideDeletedEvents: true,
     hideUnpublishedEvents: true,
     hideUnpublishedPosts: true,
+    isFuture: undefined,
   })
-  if (!query || !query.organization) return null
+
+  const statusFilter = query.organization.eventsFuture.totalCount > 0 ? 'theme.show.status.future' : 'finished'
   const { organization } = query
   const { postsCount, eventsCount, socialNetworks, title, body, projectsCount } = organization
   const hasProjects = !!projectsCount?.totalCount
@@ -88,6 +119,11 @@ export const OrganizationPage = ({ organizationId }: Props) => {
   const cover = organization.banner?.url
   const logo = organization.media?.url
   const fullSizeLayout = !hasPosts && !hasEvents
+  const [filter, setFilter] = useState(statusFilter)
+
+  const intl = useIntl()
+  if (!query || !query.organization) return null
+
   return (
     <Flex direction="column">
       <Flex as="section" id="organizationHeader" bg="white">
@@ -197,7 +233,45 @@ export const OrganizationPage = ({ organizationId }: Props) => {
           {!fullSizeLayout ? (
             <Flex direction="column" width={['100%', '30%']}>
               {hasPosts ? <OrganizationPagePostList organization={organization} /> : null}
-              {hasEvents ? <OrganizationPageEventList organization={organization} /> : null}
+              {hasEvents ? (
+                <Flex direction="column" maxWidth={['100%', '380px']} width="100%">
+                  <Flex direction="row" justify="space-between">
+                    <Heading as="h4" mb={4}>
+                      {intl.formatMessage({
+                        id: 'homepage.section.events',
+                      })}
+                    </Heading>
+                    <Menu>
+                      <Menu.Button>
+                        <Button>
+                          <div style={{ marginRight: '4px' }}>{intl.formatMessage({ id: filter })}</div>
+                          <Icon name={ICON_NAME.chevronDown} size="8" color="black" />
+                        </Button>
+                      </Menu.Button>
+
+                      <Menu.List>
+                        <Menu.ListItem
+                          onClick={() => {
+                            setFilter('theme.show.status.future')
+                          }}
+                        >
+                          <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
+                        </Menu.ListItem>
+                        <Menu.ListItem
+                          onClick={() => {
+                            setFilter('finished')
+                          }}
+                        >
+                          <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
+                        </Menu.ListItem>
+                      </Menu.List>
+                    </Menu>
+                  </Flex>
+                  <React.Suspense fallback={<Loader />}>
+                    <OrganizationPageEventList organization={organization} filter={filter} />
+                  </React.Suspense>
+                </Flex>
+              ) : null}
             </Flex>
           ) : null}
         </Flex>

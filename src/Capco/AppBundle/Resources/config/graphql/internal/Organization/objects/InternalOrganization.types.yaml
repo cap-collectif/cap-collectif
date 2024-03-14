@@ -106,6 +106,9 @@ InternalOrganization:
                     hideUnpublishedEvents:
                         type: 'Boolean'
                         description: 'Hide unpublished events'
+                    isFuture:
+                        type: 'Boolean'
+                        description: 'If non-null, filters events by comparing the start date with present.'
             proposalForms:
                 type: 'InternalProposalFormConnection!'
                 description: 'Get all proposalForm that the organization owns.'

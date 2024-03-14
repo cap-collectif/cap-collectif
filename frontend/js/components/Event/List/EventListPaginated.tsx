@@ -20,6 +20,7 @@ type OwnProps = {
   readonly query: EventListPaginated_query
   readonly relay: RelayPaginationProp
   readonly formName: string
+  readonly hideMap: boolean
 }
 type Props = OwnProps & {
   readonly eventSelected: string | null | undefined
@@ -43,7 +44,7 @@ const EventListContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
   }
 `
 export const EventListPaginated = (props: Props) => {
-  const { status, query, relay, features, dispatch, eventSelected, isMobileListView, formName } = props
+  const { status, query, relay, features, dispatch, eventSelected, isMobileListView, formName, hideMap } = props
   const [loading, setLoading] = useState(false)
   const { width } = useWindowWidth()
 
@@ -128,7 +129,7 @@ export const EventListPaginated = (props: Props) => {
           )}
         </EventListContainer>
       ) : null}
-      {shouldRenderToggleListOrMap('map') ? (
+      {shouldRenderToggleListOrMap('map') && !hideMap ? (
         <MapContainer md={4} xs={12} aria-hidden="true">
           <EventMap query={query} />
         </MapContainer>
@@ -200,7 +201,7 @@ export default createPaginationContainer(
           author: $author
           isRegistrable: $isRegistrable
           orderBy: $orderBy
-        ) @connection(key: "EventListPaginated_events", filters: []) {
+        ) @connection(key: "EventListPaginated_events", filters: ["orderBy", "isFuture"]) {
           totalCount
           edges {
             node {

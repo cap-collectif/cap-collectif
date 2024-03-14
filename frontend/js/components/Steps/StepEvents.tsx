@@ -1,91 +1,87 @@
-import React from 'react'
-import { graphql, createFragmentContainer } from 'react-relay'
-import { FormattedMessage } from 'react-intl'
-import Slider from 'react-slick'
-import ProjectEventPreview from '~/components/Event/ProjectEventPreview/ProjectEventPreview'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import Arrow from '~ui/Slider/Arrow'
-import IconRounded from '~ui/Icons/IconRounded'
-import colors from '~/utils/colors'
-import config from '~/config'
+import React, { useState } from 'react'
+import { graphql, useFragment } from 'react-relay'
+import { FormattedMessage, useIntl } from 'react-intl'
+import StepEventsList from './StepEventsList'
 import { Container } from './StepEvents.style'
-import type { StepEvents_step } from '~relay/StepEvents_step.graphql'
-// TODO There is a lot of duplicate code with <PresentationStepEvents />.
-const settingsSlider = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  prevArrow: (
-    <Arrow>
-      <IconRounded size={36} borderColor={colors.borderColor}>
-        <Icon name={ICON_NAME.chevronLeft} size={18} color={colors.iconGrayColor} />
-      </IconRounded>
-    </Arrow>
-  ),
-  nextArrow: (
-    <Arrow>
-      <IconRounded size={36} borderColor={colors.borderColor}>
-        <Icon name={ICON_NAME.chevronRight} size={18} color={colors.iconGrayColor} />
-      </IconRounded>
-    </Arrow>
-  ),
-}
+import type { StepEvents_step$key } from '~relay/StepEvents_step.graphql'
+import Flex from '~/components/Ui/Primitives/Layout/Flex'
+import Heading from '~/components/Ui/Primitives/Heading'
+import Button from '~/components/DesignSystem/Button/Button'
+import Text from '~/components/Ui/Primitives/Text'
+import Menu from '~ds/Menu/Menu'
+import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Loader from '~ui/FeedbacksIndicators/Loader'
+import { Box } from '@cap-collectif/ui'
+
 type Props = {
-  readonly step: StepEvents_step
+  readonly step: StepEvents_step$key
 }
-export class StepEvents extends React.Component<Props> {
-  render() {
-    const { step } = this.props
-    const { events } = step
 
-    if (
-      events.totalCount === 0 ||
-      !events.edges ||
-      events.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean).length === 0
-    ) {
-      // We display nothing in case of empty result
-      return null
+const FRAGMENT = graphql`
+  fragment StepEvents_step on Step {
+    id
+    ...StepEventsList_step @arguments(count: 40, orderBy: { field: START_AT, direction: DESC })
+    eventsWithoutFilters: events(orderBy: { field: START_AT, direction: DESC }, isFuture: null) {
+      totalCount
     }
-
-    return (
-      <Container id="StepEvents" className="block">
-        <h2 className="h2">
-          <FormattedMessage id="global.events" /> <span className="small excerpt">{events.totalCount}</span>
-        </h2>
-        <Slider
-          {...{
-            ...settingsSlider,
-            slidesToShow: config.isMobile || events.totalCount === 1 ? 1 : 2,
-            arrows: events.totalCount > 2 && !config.isMobile,
-          }}
-        >
-          {events.edges &&
-            events.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(event => <ProjectEventPreview event={event} key={event.id} />)}
-        </Slider>
-      </Container>
-    )
+    eventsFuture: events(orderBy: { field: START_AT, direction: DESC }, isFuture: true) {
+      totalCount
+    }
+    eventsPast: events(isFuture: false) {
+      totalCount
+    }
   }
+`
+
+export const StepEvents = ({ step: stepKey }: Props) => {
+  const intl = useIntl()
+  const step = useFragment(FRAGMENT, stepKey)
+  const statusFilter = step.eventsFuture.totalCount > 0 ? 'theme.show.status.future' : 'finished'
+  const [filter, setFilter] = useState(statusFilter)
+  const totalCount =
+    filter === 'theme.show.status.future'
+      ? step.eventsFuture.totalCount
+      : filter === 'finished'
+      ? step.eventsPast.totalCount
+      : step.eventsWithoutFilters.totalCount
+
+  return (
+    <Container id="StepEvents" className="block">
+      <Flex direction="row" justify="space-between" alignItems={'center'}>
+        <Heading as="h2" mb={4}>
+          <FormattedMessage id="global.events" /> <span className="small excerpt">{totalCount}</span>
+        </Heading>
+        <Menu mr={4}>
+          <Menu.Button>
+            <Button>
+              <Box mr={1}>{intl.formatMessage({ id: filter })}</Box>
+              <Icon name={ICON_NAME.chevronDown} size="8" color="black" />
+            </Button>
+          </Menu.Button>
+
+          <Menu.List>
+            <Menu.ListItem
+              onClick={() => {
+                setFilter('theme.show.status.future')
+              }}
+            >
+              <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
+            </Menu.ListItem>
+            <Menu.ListItem
+              onClick={() => {
+                setFilter('finished')
+              }}
+            >
+              <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
+            </Menu.ListItem>
+          </Menu.List>
+        </Menu>
+      </Flex>
+      <React.Suspense fallback={<Loader />}>
+        <StepEventsList filter={filter} step={step} />
+      </React.Suspense>
+    </Container>
+  )
 }
-export default createFragmentContainer(StepEvents, {
-  step: graphql`
-    fragment StepEvents_step on Step {
-      id
-      events(orderBy: { field: START_AT, direction: DESC }) {
-        totalCount
-        edges {
-          node {
-            id
-            ...ProjectEventPreview_event
-          }
-        }
-      }
-    }
-  `,
-})
+
+export default StepEvents
