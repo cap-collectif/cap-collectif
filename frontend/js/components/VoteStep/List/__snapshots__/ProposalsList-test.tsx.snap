@@ -189,25 +189,101 @@ Array [
                         </div>
                       </button>
                       <div
+                        animated={false}
+                        animating={false}
                         aria-label="vote.popover.title"
-                        className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-                        data-dialog={true}
-                        hidden={true}
-                        id="login-popover"
-                        onAnimationEnd={[Function]}
-                        onBlur={[Function]}
-                        onKeyDown={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="dialog"
-                        style={
+                        as={
                           Object {
-                            "display": "none",
+                            "$$typeof": Symbol(react.forward_ref),
+                            "attrs": Array [
+                              Object {
+                                "maxWidth": "280px",
+                                "zIndex": 100,
+                              },
+                            ],
+                            "componentStyle": e {
+                              "baseHash": 833198423,
+                              "baseStyle": e {
+                                "baseHash": -120292040,
+                                "baseStyle": undefined,
+                                "componentId": "sc-bcXGCL",
+                                "isStatic": false,
+                                "rules": Array [
+                                  [Function],
+                                  [Function],
+                                  [Function],
+                                  [Function],
+                                ],
+                                "staticRulesId": "",
+                              },
+                              "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                              "isStatic": false,
+                              "rules": Array [
+                                "outline:none;",
+                              ],
+                              "staticRulesId": "",
+                            },
+                            "foldedComponentIds": "sc-bcXGCL",
+                            "render": [Function],
+                            "shouldForwardProp": [Function],
+                            "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                            "target": "div",
+                            "warnTooManyClasses": [Function],
+                          }
+                        }
+                        baseId="popover-overlay"
+                        borderRadius="popover"
+                        boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+                        data-testid="Popover"
+                        hide={[Function]}
+                        id="login-popover"
+                        modal={false}
+                        place={[Function]}
+                        placement="auto"
+                        setAnimated={[Function]}
+                        setBaseId={[Function]}
+                        setModal={[Function]}
+                        setVisible={[Function]}
+                        show={[Function]}
+                        stopAnimation={[Function]}
+                        tabIndex={0}
+                        toggle={[Function]}
+                        unstable_arrowRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_arrowStyles={Object {}}
+                        unstable_disclosureRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_idCountRef={
+                          Object {
+                            "current": 0,
+                          }
+                        }
+                        unstable_originalPlacement="auto"
+                        unstable_popoverRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_popoverStyles={
+                          Object {
                             "left": "100%",
                             "position": "fixed",
                             "top": "100%",
                           }
                         }
-                        tabIndex={0}
+                        unstable_referenceRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_update={[Function]}
+                        visible={false}
                       >
                         <div
                           className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
@@ -588,25 +664,101 @@ Array [
                         </div>
                       </button>
                       <div
+                        animated={false}
+                        animating={false}
                         aria-label="vote.popover.title"
-                        className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-                        data-dialog={true}
-                        hidden={true}
-                        id="login-popover"
-                        onAnimationEnd={[Function]}
-                        onBlur={[Function]}
-                        onKeyDown={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="dialog"
-                        style={
+                        as={
                           Object {
-                            "display": "none",
+                            "$$typeof": Symbol(react.forward_ref),
+                            "attrs": Array [
+                              Object {
+                                "maxWidth": "280px",
+                                "zIndex": 100,
+                              },
+                            ],
+                            "componentStyle": e {
+                              "baseHash": 833198423,
+                              "baseStyle": e {
+                                "baseHash": -120292040,
+                                "baseStyle": undefined,
+                                "componentId": "sc-bcXGCL",
+                                "isStatic": false,
+                                "rules": Array [
+                                  [Function],
+                                  [Function],
+                                  [Function],
+                                  [Function],
+                                ],
+                                "staticRulesId": "",
+                              },
+                              "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                              "isStatic": false,
+                              "rules": Array [
+                                "outline:none;",
+                              ],
+                              "staticRulesId": "",
+                            },
+                            "foldedComponentIds": "sc-bcXGCL",
+                            "render": [Function],
+                            "shouldForwardProp": [Function],
+                            "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                            "target": "div",
+                            "warnTooManyClasses": [Function],
+                          }
+                        }
+                        baseId="popover-overlay"
+                        borderRadius="popover"
+                        boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+                        data-testid="Popover"
+                        hide={[Function]}
+                        id="login-popover"
+                        modal={false}
+                        place={[Function]}
+                        placement="auto"
+                        setAnimated={[Function]}
+                        setBaseId={[Function]}
+                        setModal={[Function]}
+                        setVisible={[Function]}
+                        show={[Function]}
+                        stopAnimation={[Function]}
+                        tabIndex={0}
+                        toggle={[Function]}
+                        unstable_arrowRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_arrowStyles={Object {}}
+                        unstable_disclosureRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_idCountRef={
+                          Object {
+                            "current": 0,
+                          }
+                        }
+                        unstable_originalPlacement="auto"
+                        unstable_popoverRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_popoverStyles={
+                          Object {
                             "left": "100%",
                             "position": "fixed",
                             "top": "100%",
                           }
                         }
-                        tabIndex={0}
+                        unstable_referenceRef={
+                          Object {
+                            "current": null,
+                          }
+                        }
+                        unstable_update={[Function]}
+                        visible={false}
                       >
                         <div
                           className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"

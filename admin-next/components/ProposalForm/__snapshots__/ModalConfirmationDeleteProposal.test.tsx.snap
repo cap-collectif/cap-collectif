@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -61,7 +61,7 @@ Array [
     onTransitionEnd={[Function]}
     role="tooltip"
     style={
-      Object {
+      {
         "display": "none",
         "left": "100%",
         "pointerEvents": "none",
@@ -83,7 +83,7 @@ Array [
     onTransitionEnd={[Function]}
     role="dialog"
     style={
-      Object {
+      {
         "display": "none",
       }
     }
@@ -93,7 +93,7 @@ Array [
 `;
 
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render modal open 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -153,7 +153,7 @@ Array [
     onTransitionEnd={[Function]}
     role="tooltip"
     style={
-      Object {
+      {
         "display": "none",
         "left": "100%",
         "pointerEvents": "none",
@@ -180,7 +180,7 @@ Array [
       className="sc-bcXGCL hmVjey sc-gsGkXq cap-modal__overlay"
       onClick={[Function]}
       style={
-        Object {
+        {
           "opacity": 0,
         }
       }
@@ -188,7 +188,7 @@ Array [
       <div
         className="sc-bcXGCL cxKkgx sc-bWOFNj dgbxsZ cap-modal"
         style={
-          Object {
+          {
             "opacity": 0,
             "transform": "translateY(-20px) translateZ(0)",
           }
@@ -203,7 +203,7 @@ Array [
             <h2
               className="sc-bcXGCL jvuiiv cap-heading"
               style={
-                Object {
+                {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
@@ -248,7 +248,7 @@ Array [
           <div
             className="sc-bcXGCL hyIxtw cap-buttonGroup"
             style={
-              Object {
+              {
                 "marginLeft": 0,
                 "marginTop": 0,
               }
@@ -258,7 +258,7 @@ Array [
               className="sc-bcXGCL sc-laZSpB DTDIA iFfBPw cap-button"
               onClick={[Function]}
               style={
-                Object {
+                {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }

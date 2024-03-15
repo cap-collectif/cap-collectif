@@ -1,25 +1,425 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
-<span
-  className="ProposalPreviewVote__Container-byxhoK cwsVIb"
->
+Array [
   <div
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="proposal-vote-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    tabIndex={-1}
-  />
-</span>
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <span
+    className="ProposalPreviewVote__Container-byxhoK cwsVIb"
+  >
+    <div
+      aria-labelledby="contained-modal-title-lg"
+      baseId="proposal-vote-modal"
+      className="ProposalVoteModalstyle__ProposalVoteMultiModalContainer-iDByQu kqpRls proposalVote__modal"
+      data-testid="MultiStepModal"
+      forceModalDialogToFalse={false}
+      fullSizeOnMobile={true}
+      hideOnClickOutside={false}
+      id="proposal-vote-modal"
+      onClose={[Function]}
+      show={false}
+      size="md"
+    >
+      <div
+        className="ResetCss-jmWVRh exBVVd"
+      >
+        <div
+          data-testid="Header"
+        >
+          <p
+            className="sc-bcXGCL ipnyDk cap-text"
+          >
+            global.vote.for
+          </p>
+          <h2
+            className="sc-bcXGCL jvuiiv cap-heading"
+          >
+            requirements
+          </h2>
+        </div>
+      </div>
+      <div
+        data-testid="Body"
+      >
+        <div
+          className="sc-bcXGCL kwLbrU"
+        >
+          <form
+            className="sc-bcXGCL cbgxYp"
+          >
+            <h4
+              className="sc-bcXGCL kvsSTB cap-heading"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              vote.modal.body.form.title
+            </h4>
+            <div
+              className="sc-bcXGCL iStEWV"
+            >
+              <div
+                className="sc-bcXGCL MbKIk cap-form-control"
+                role="group"
+              >
+                <label
+                  className="sc-bcXGCL ituTec cap-form-label"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  <p
+                    className="sc-bcXGCL JNsrJ cap-text"
+                    style={
+                      Object {
+                        "marginLeft": 0,
+                        "marginTop": 0,
+                      }
+                    }
+                  >
+                    form.label_date_of_birth
+                  </p>
+                </label>
+                <div
+                  className="sc-bcXGCL sc-jRwapC jvopqN cap-date-input"
+                >
+                  <div
+                    className="SingleDatePicker SingleDatePicker_1"
+                  >
+                    <div>
+                      <div
+                        className="SingleDatePickerInput SingleDatePickerInput_1 SingleDatePickerInput__withBorder SingleDatePickerInput__withBorder_2"
+                      >
+                        <div
+                          className="DateInput DateInput_1"
+                        >
+                          <input
+                            aria-describedby="DateInput__screen-reader-message-cap-date-input-id"
+                            aria-label="jj/mm/aaaa"
+                            autoComplete="off"
+                            className="DateInput_input DateInput_input_1"
+                            disabled={false}
+                            id="cap-date-input-id"
+                            name="cap-date-input-id"
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            onKeyDown={[Function]}
+                            placeholder="jj/mm/aaaa"
+                            readOnly={false}
+                            required={false}
+                            type="text"
+                            value="Invalid date"
+                          />
+                          <p
+                            className="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
+                            id="DateInput__screen-reader-message-cap-date-input-id"
+                          >
+                            Navigate forward to interact with the calendar and select a date. Press the question mark key to get the keyboard shortcuts for changing dates.
+                          </p>
+                        </div>
+                        <button
+                          className="SingleDatePickerInput_calendarIcon SingleDatePickerInput_calendarIcon_1"
+                          disabled={false}
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          <svg
+                            className="sc-bcXGCL sc-eJDTud dXflne knzWyK cap-icon"
+                            fill="none"
+                            viewBox="0 0 12 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              clipRule="evenodd"
+                              d="M2.813 0c.31 0 .562.252.562.563v2.625a.563.563 0 01-1.125 0V.563c0-.311.252-.563.563-.563zM9.188 0c.31 0 .562.252.562.563v2.625a.563.563 0 01-1.125 0V.563c0-.311.252-.563.563-.563z"
+                              fill="currentColor"
+                              fillRule="evenodd"
+                            />
+                            <path
+                              clipRule="evenodd"
+                              d="M1.125 1.875C.504 1.875 0 2.38 0 3v2.25h12V3c0-.621-.504-1.125-1.125-1.125h-9.75zM12 6.375H0v4.5C0 11.496.504 12 1.125 12h9.75c.621 0 1.125-.504 1.125-1.125v-4.5z"
+                              fill="currentColor"
+                              fillRule="evenodd"
+                            />
+                            <path
+                              clipRule="evenodd"
+                              d="M1.125 2.625A.375.375 0 00.75 3v1.5h10.5V3a.375.375 0 00-.375-.375h-9.75zM12 3c0-.621-.504-1.125-1.125-1.125h-9.75C.504 1.875 0 2.38 0 3v2.25h12V3zM0 6.375h12v4.5c0 .621-.504 1.125-1.125 1.125h-9.75A1.125 1.125 0 010 10.875v-4.5zm11.25.75H.75v3.75c0 .207.168.375.375.375h9.75a.375.375 0 00.375-.375v-3.75z"
+                              fill="currentColor"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div
+        data-testid="Footer"
+      >
+        <button
+          className="sc-bcXGCL sc-laZSpB DTDIA iFfBPw cap-button"
+          onClick={[Function]}
+          type="button"
+        >
+          global.cancel
+        </button>
+        <button
+          className="sc-bcXGCL sc-laZSpB DTDIA hMZYMT cap-button"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          global.continue
+          <svg
+            className="sc-bcXGCL sc-eJDTud ceduAI hEjMCZ cap-icon"
+            fill="none"
+            viewBox="0 0 12 6"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 3h10M9.333 4.667L11 3 9.333 1.333"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={0.8}
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        className="ResetCss-jmWVRh exBVVd"
+      >
+        <div
+          data-testid="Header"
+        >
+          <h2
+            className="sc-bcXGCL jvuiiv cap-heading"
+          >
+            global.vote.for
+          </h2>
+        </div>
+      </div>
+      <div
+        data-testid="Body"
+      >
+        <div
+          id="proposal-validate-vote-modal"
+        >
+          <div
+            className="sc-bcXGCL iJAkKQ"
+          >
+            <div
+              className="ProposalsUserVotesTable__UserVotesTableContainer-ckCFiT bMkQke proposals-user-votes__table"
+            >
+              <div
+                className="ProposalsUserVotesstyle__NonDraggableItemContainer-fmybTZ eVMCCe"
+              >
+                <div
+                  className="ProposalsUserVotesstyle__VoteItemContainer-jjnNsf jGZCqd"
+                  id="vote-step<Node-mock-id-7>-proposalundefined"
+                >
+                  <div
+                    className="col-md-9 col-sm-12 col-xs-12"
+                  >
+                    <div>
+                      <div>
+                        <a
+                          className="proposals-user-votes__title"
+                          href="<mock-value-for-field-\\"url\\">"
+                        >
+                          &lt;mock-value-for-field-"title"&gt;
+                        </a>
+                        <br />
+                        voted-on-date-at-time
+                        <div>
+                          <div
+                            baseId="publishable-undefined-not-accounted-popover"
+                            className="UnpublishedLabel__StyledPopover-gbLcA hWAQjx"
+                            data-testid="Popover"
+                            disclosure={
+                              <Flex
+                                width="fit-content"
+                              >
+                                <Label
+                                  bsClass="label"
+                                  bsSize="xs"
+                                  bsStyle="danger"
+                                  className="ellipsis"
+                                >
+                                  <i
+                                    className="cap cap-delete-2"
+                                  />
+                                  <FormattedMessage
+                                    id="not-accounted"
+                                    values={Object {}}
+                                  />
+                                </Label>
+                              </Flex>
+                            }
+                            options={
+                              Object {
+                                "modal": true,
+                              }
+                            }
+                            placement="top"
+                            popoverProps={
+                              Object {
+                                "preventBodyScroll": false,
+                              }
+                            }
+                          >
+                            <div
+                              data-testid="Header"
+                            >
+                              <p
+                                className="sc-bcXGCL hfwPJN cap-text excerpt_dark"
+                              >
+                                account-confirmed-too-late
+                              </p>
+                            </div>
+                            <div
+                              data-testid="Body"
+                              marginBottom={0}
+                            >
+                              <p
+                                className="sc-bcXGCL JgMzh cap-text"
+                              >
+                                account-confirmed-too-late-message
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-md-3 col-sm-12 col-xs-12"
+                    id="undefined-proposal-vote__private"
+                  >
+                    <div>
+                      <div
+                        className="toggle-group"
+                      >
+                        <div
+                          className="sc-breQAM form-group"
+                        >
+                          <div
+                            className="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"
+                          >
+                            <div>
+                              <label
+                                className="Togglestyle__LabelContainer-ouxIP eLKVIA checked labelContainer"
+                                disabled={false}
+                                htmlFor="undefined-proposal-vote__private-toggle"
+                                labelSide="RIGHT"
+                              >
+                                <div
+                                  checked={true}
+                                  className="Togglestyle__TogglerWrapper-hIHNrp fPicRn"
+                                  disabled={false}
+                                  id="TOGGLE_votes[0].public"
+                                >
+                                  <span
+                                    className="circle-toggler"
+                                  />
+                                </div>
+                                <span
+                                  className="label-toggler"
+                                >
+                                  public
+                                </span>
+                              </label>
+                              <input
+                                checked={true}
+                                disabled={false}
+                                id="undefined-proposal-vote__private-toggle"
+                                name="votes[0].public"
+                                onChange={[Function]}
+                                type="checkbox"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sc-bcXGCL cFvYAO sc-GKYOR bKnLVQ cap-info-message"
+            >
+              <div
+                className="sc-bcXGCL kGqtxV cap-info-message__title"
+              >
+                <p
+                  className="sc-bcXGCL fhxRXz cap-text"
+                  style={
+                    Object {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  admin.fields.step.votesHelpText
+                </p>
+              </div>
+              <div
+                className="sc-bcXGCL kzSBII cap-info-message__content"
+              >
+                <div
+                  className=" ql-editor wysiwyg-render"
+                  dangerouslySetInnerHTML={
+                    Object {
+                      "__html": "<mock-value-for-field-\\"votesHelpText\\">",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        data-testid="Footer"
+      >
+        <button
+          className="sc-bcXGCL sc-laZSpB jujdjU hiHtil cap-button"
+          id="confirm-proposal-vote"
+          onClick={[Function]}
+          type="button"
+        >
+          proposal.validate.vote
+        </button>
+      </div>
+    </div>
+  </span>,
+]
 `;

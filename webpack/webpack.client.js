@@ -1,20 +1,18 @@
-// @flow
+const path = require('path')
+const webpack = require('webpack')
+const { merge } = require('webpack-merge')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CircularDependencyPlugin = require('circular-dependency-plugin')
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin')
 
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
-const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const webpackConfig = require('./config')
 
-const webpackConfig = require('./config');
-
-const webpackJsx = require('./rules/webpack.jsx.js')();
-const webpackScss = require('./rules/webpack.scss.js')();
-const webpackFile = require('./rules/webpack.file.js')();
+const webpackJsx = require('./rules/webpack.jsx.js')()
+const webpackScss = require('./rules/webpack.scss.js')()
+const webpackFile = require('./rules/webpack.file.js')()
 
 const devConf = {
   mode: 'development',
@@ -60,14 +58,8 @@ const devConf = {
 
   entry: {
     vendor: [
-      path.join(
-        webpackConfig.nodeModulesDir,
-        'bootstrap-sass/assets/javascripts/bootstrap/alert.js',
-      ),
-      path.join(
-        webpackConfig.nodeModulesDir,
-        'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
-      ),
+      path.join(webpackConfig.nodeModulesDir, 'bootstrap-sass/assets/javascripts/bootstrap/alert.js'),
+      path.join(webpackConfig.nodeModulesDir, 'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js'),
       path.join(webpackConfig.frontendDir, 'js/jsapi.ts'),
       path.join(webpackConfig.frontendDir, 'js/googleCharts.ts'),
       path.join(webpackConfig.frontendDir, 'js/browserUpdate.ts'),
@@ -152,10 +144,7 @@ const devConf = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: path.resolve(
-            __dirname,
-            '../node_modules/jquery-minicolors/jquery.minicolors.min.js',
-          ),
+          from: path.resolve(__dirname, '../node_modules/jquery-minicolors/jquery.minicolors.min.js'),
           to: path.resolve(__dirname, '../public/js/jquery.minicolors.js'),
         },
         {
@@ -173,6 +162,6 @@ const devConf = {
       process: 'process/browser',
     }),
   ],
-};
+}
 
-module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss);
+module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss)

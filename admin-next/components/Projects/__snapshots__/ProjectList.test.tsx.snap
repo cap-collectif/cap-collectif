@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectList /> should render correctly 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -124,7 +124,7 @@ Array [
               onTransitionEnd={[Function]}
               role="menu"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "opacity": 0,
@@ -250,7 +250,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -272,14 +272,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -287,14 +287,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -302,14 +302,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <div
               className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
-              style={Object {}}
+              style={{}}
               title="public-everybody"
             >
               public-everybody
@@ -318,7 +318,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -328,7 +328,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -373,7 +373,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -400,7 +400,7 @@ Array [
               onTransitionEnd={[Function]}
               role="menu"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "opacity": 0,
@@ -479,7 +479,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -527,7 +527,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -544,7 +544,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -566,14 +566,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -581,14 +581,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -596,14 +596,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <div
               className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
-              style={Object {}}
+              style={{}}
               title="public-everybody"
             >
               public-everybody
@@ -612,7 +612,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -622,7 +622,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -667,7 +667,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -694,7 +694,7 @@ Array [
               onTransitionEnd={[Function]}
               role="menu"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "opacity": 0,
@@ -773,7 +773,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -821,7 +821,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -838,7 +838,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -860,14 +860,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -875,14 +875,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -890,14 +890,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <div
               className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
-              style={Object {}}
+              style={{}}
               title="public-everybody"
             >
               public-everybody
@@ -906,7 +906,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -916,7 +916,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -961,7 +961,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -988,7 +988,7 @@ Array [
               onTransitionEnd={[Function]}
               role="menu"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "opacity": 0,
@@ -1067,7 +1067,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -1115,7 +1115,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -1132,7 +1132,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -1154,14 +1154,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -1169,14 +1169,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <a
               className="sc-bcXGCL ZqqiX cap-link"
-              href="<mock-value-for-field-\\"url\\">"
+              href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
@@ -1184,14 +1184,14 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
           >
             <div
               className="sc-bcXGCL hOAIIn sc-fXqqsB gHWJqw cap-tag"
-              style={Object {}}
+              style={{}}
               title="public-everybody"
             >
               public-everybody
@@ -1200,7 +1200,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -1210,7 +1210,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -1255,7 +1255,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -1282,7 +1282,7 @@ Array [
               onTransitionEnd={[Function]}
               role="menu"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "opacity": 0,
@@ -1361,7 +1361,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -1409,7 +1409,7 @@ Array [
                 onTransitionEnd={[Function]}
                 role="dialog"
                 style={
-                  Object {
+                  {
                     "display": "none",
                   }
                 }
@@ -1426,7 +1426,7 @@ Array [
       <p
         className="sc-bcXGCL hczTPS cap-text"
         style={
-          Object {
+          {
             "marginLeft": 0,
             "marginTop": 0,
           }

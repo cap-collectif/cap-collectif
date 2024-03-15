@@ -7,7 +7,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
   <h2
     className="h2"
   >
-    &lt;mock-value-for-field-"title"&gt;
+    I am a title
   </h2>
   <div
     className="mb-30 project__step-dates"
@@ -19,40 +19,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
         className="cap cap-calendar-2-1"
       />
        
-      global.dates.full.days
-    </div>
-  </div>
-  <div
-    className="Card__Container-dJDICg iYLzKo card"
-    isHorizontal={false}
-  >
-    <div
-      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
-      maxLines={5}
-    >
-      <div
-        className="step__intro"
-      >
-        <div
-          className="body__infos__content"
-        >
-          <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<mock-value-for-field-\\"body\\">",
-              }
-            }
-            style={
-              Object {
-                "maxHeight": "none",
-                "overflow": "visible",
-                "visibility": "visible",
-              }
-            }
-          />
-        </div>
-      </div>
+      global.dates.full_day
     </div>
   </div>
 </div>
@@ -65,7 +32,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
   <h2
     className="h2"
   >
-    &lt;mock-value-for-field-"title"&gt;
+    I am a title
   </h2>
   <div
     className="mb-30 project__step-dates"
@@ -77,40 +44,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
         className="cap cap-calendar-2-1"
       />
        
-      global.dates.full.days
-    </div>
-  </div>
-  <div
-    className="Card__Container-dJDICg iYLzKo card"
-    isHorizontal={false}
-  >
-    <div
-      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
-      maxLines={5}
-    >
-      <div
-        className="step__intro"
-      >
-        <div
-          className="body__infos__content"
-        >
-          <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<mock-value-for-field-\\"body\\">",
-              }
-            }
-            style={
-              Object {
-                "maxHeight": "none",
-                "overflow": "visible",
-                "visibility": "visible",
-              }
-            }
-          />
-        </div>
-      </div>
+      global.dates.full_day
     </div>
   </div>
 </div>
@@ -123,7 +57,7 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
   <h2
     className="h2"
   >
-    &lt;mock-value-for-field-"title"&gt;
+    I am a title
   </h2>
   <div
     className="mb-30 project__step-dates"
@@ -135,40 +69,7 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
         className="cap cap-calendar-2-1"
       />
        
-      global.dates.full.days
-    </div>
-  </div>
-  <div
-    className="Card__Container-dJDICg iYLzKo card"
-    isHorizontal={false}
-  >
-    <div
-      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
-      maxLines={5}
-    >
-      <div
-        className="step__intro"
-      >
-        <div
-          className="body__infos__content"
-        >
-          <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<mock-value-for-field-\\"body\\">",
-              }
-            }
-            style={
-              Object {
-                "maxHeight": "none",
-                "overflow": "visible",
-                "visibility": "visible",
-              }
-            }
-          />
-        </div>
-      </div>
+      global.dates.full_day
     </div>
   </div>
 </div>
@@ -181,7 +82,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
   <h2
     className="h2"
   >
-    &lt;mock-value-for-field-"title"&gt;
+    I am a title
   </h2>
   <div
     className="mb-30 project__step-dates"
@@ -193,40 +94,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
         className="cap cap-calendar-2-1"
       />
        
-      global.dates.full.days
-    </div>
-  </div>
-  <div
-    className="Card__Container-dJDICg iYLzKo card"
-    isHorizontal={false}
-  >
-    <div
-      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
-      maxLines={5}
-    >
-      <div
-        className="step__intro"
-      >
-        <div
-          className="body__infos__content"
-        >
-          <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<mock-value-for-field-\\"body\\">",
-              }
-            }
-            style={
-              Object {
-                "maxHeight": "none",
-                "overflow": "visible",
-                "visibility": "visible",
-              }
-            }
-          />
-        </div>
-      </div>
+      global.dates.full_day
     </div>
   </div>
 </div>
@@ -239,7 +107,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
   <h2
     className="h2"
   >
-    &lt;mock-value-for-field-"title"&gt;
+    I am a title
   </h2>
   <div
     className="mb-30 project__step-dates"
@@ -251,40 +119,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
         className="cap cap-calendar-2-1"
       />
        
-      global.dates.full.days
-    </div>
-  </div>
-  <div
-    className="Card__Container-dJDICg iYLzKo card"
-    isHorizontal={false}
-  >
-    <div
-      className="Body-jPXWLr BodyInfos__CardBodyInfos-UWQsP bOgUpK eONoIW card__body body__infos--body"
-      maxLines={5}
-    >
-      <div
-        className="step__intro"
-      >
-        <div
-          className="body__infos__content"
-        >
-          <div
-            className=" ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              Object {
-                "__html": "<mock-value-for-field-\\"body\\">",
-              }
-            }
-            style={
-              Object {
-                "maxHeight": "none",
-                "overflow": "visible",
-                "visibility": "visible",
-              }
-            }
-          />
-        </div>
-      </div>
+      global.dates.full_day
     </div>
   </div>
 </div>

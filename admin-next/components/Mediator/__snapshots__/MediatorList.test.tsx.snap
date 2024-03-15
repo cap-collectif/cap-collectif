@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MediatorList /> should render correctly and display mediators 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -84,7 +84,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -98,7 +98,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -108,7 +108,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -118,7 +118,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -128,7 +128,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -164,7 +164,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -184,7 +184,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -198,7 +198,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -208,7 +208,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -218,7 +218,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -228,7 +228,7 @@ Array [
           <td
             className="sc-bcXGCL kdBJtI cap-table__td"
             style={
-              Object {
+              {
                 "whiteSpace": "initial",
               }
             }
@@ -264,7 +264,7 @@ Array [
               onTransitionEnd={[Function]}
               role="tooltip"
               style={
-                Object {
+                {
                   "display": "none",
                   "left": "100%",
                   "pointerEvents": "none",
@@ -284,7 +284,7 @@ Array [
       <p
         className="sc-bcXGCL hczTPS cap-text"
         style={
-          Object {
+          {
             "marginLeft": 0,
             "marginTop": 0,
           }

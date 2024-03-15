@@ -64,50 +64,21 @@ Array [
             vote-count-for-and-against {"for":42,"against":42}
           </p>
         </div>
-        <button
-          aria-controls="id-g"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bcXGCL sc-laZSpB dvTvxd eMqMcb cap-button"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          type="button"
-        >
-          argument.sort.label
-          <svg
-            className="sc-bcXGCL sc-eJDTud eiAwpm dxHlFh cap-icon"
-            fill="none"
-            viewBox="0 0 12 7"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
         <div
-          aria-label="arguments.sort"
-          aria-modal={true}
-          data-dialog={true}
-          hidden={true}
-          id="id-g"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-            }
+          ariaLabel="arguments.sort"
+          data-testid="Modal"
+          disclosure={
+            <Button
+              color="gray.500"
+              rightIcon="ARROW_DOWN"
+            >
+              <FormattedMessage
+                id="argument.sort.label"
+                tagName={Symbol(react.fragment)}
+                values={Object {}}
+              />
+            </Button>
           }
-          tabIndex={-1}
         />
       </div>
       <div
@@ -149,39 +120,20 @@ Array [
                         </span>
                       </div>
                       <div
-                        aria-describedby="id-g"
-                        className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
-                        onBlur={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        tabIndex={0}
-                        title=""
+                        data-testid="Tooltip"
+                        label="account-not-confirmed-end-step"
                       >
-                        <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                        <div
+                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          title=""
                         >
-                          post_is_not_public
-                        </span>
+                          <span
+                            className="sc-bcXGCL dBdnLI cap-text"
+                          >
+                            post_is_not_public
+                          </span>
+                        </div>
                       </div>
-                      <div
-                        className="cap-tooltip-container"
-                        hidden={true}
-                        id="id-g"
-                        onAnimationEnd={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="tooltip"
-                        style={
-                          Object {
-                            "display": "none",
-                            "left": "100%",
-                            "pointerEvents": "none",
-                            "position": "fixed",
-                            "top": "100%",
-                            "zIndex": 1800,
-                          }
-                        }
-                      />
                     </div>
                     <div
                       className="sc-bcXGCL bTRcoP"
@@ -197,52 +149,33 @@ Array [
                     className="sc-bcXGCL hhmNZm"
                   >
                     <div
-                      aria-describedby="id-g"
-                      className="sc-bcXGCL"
-                      onBlur={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      tabIndex={0}
+                      data-testid="Tooltip"
+                      label="confirm-account-to-interact"
                     >
-                      <button
-                        aria-label="vote.add"
-                        className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
-                        disabled={true}
-                        onClick={[Function]}
-                        type="button"
+                      <div
+                        className="sc-bcXGCL"
                       >
-                        <svg
-                          className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
-                          fill="none"
-                          viewBox="0 0 10 12"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <button
+                          aria-label="vote.add"
+                          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
+                          disabled={true}
+                          onClick={[Function]}
+                          type="button"
                         >
-                          <path
-                            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </button>
+                          <svg
+                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            fill="none"
+                            viewBox="0 0 10 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div
-                      className="cap-tooltip-container"
-                      hidden={true}
-                      id="id-g"
-                      onAnimationEnd={[Function]}
-                      onTransitionEnd={[Function]}
-                      role="tooltip"
-                      style={
-                        Object {
-                          "display": "none",
-                          "left": "100%",
-                          "pointerEvents": "none",
-                          "position": "fixed",
-                          "top": "100%",
-                          "zIndex": 1800,
-                        }
-                      }
-                    />
                     <span
                       className="sc-bcXGCL cHtwpS cap-text"
                     >
@@ -251,22 +184,13 @@ Array [
                   </div>
                 </div>
                 <div
-                  aria-label="global.report.submit"
-                  aria-modal={true}
-                  data-dialog={true}
-                  hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onBlur={[Function]}
-                  onKeyDown={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="dialog"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                  tabIndex={-1}
+                  alwaysOpenInPortal={true}
+                  ariaLabel="global.report.submit"
+                  data-testid="Modal"
+                  hideCloseButton={true}
+                  onClose={[Function]}
+                  show={false}
+                  variantSize="xl"
                 />
               </div>
             </div>
@@ -301,39 +225,20 @@ Array [
                         </span>
                       </div>
                       <div
-                        aria-describedby="id-g"
-                        className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
-                        onBlur={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        tabIndex={0}
-                        title=""
+                        data-testid="Tooltip"
+                        label="account-not-confirmed-end-step"
                       >
-                        <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                        <div
+                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          title=""
                         >
-                          post_is_not_public
-                        </span>
+                          <span
+                            className="sc-bcXGCL dBdnLI cap-text"
+                          >
+                            post_is_not_public
+                          </span>
+                        </div>
                       </div>
-                      <div
-                        className="cap-tooltip-container"
-                        hidden={true}
-                        id="id-g"
-                        onAnimationEnd={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="tooltip"
-                        style={
-                          Object {
-                            "display": "none",
-                            "left": "100%",
-                            "pointerEvents": "none",
-                            "position": "fixed",
-                            "top": "100%",
-                            "zIndex": 1800,
-                          }
-                        }
-                      />
                     </div>
                     <div
                       className="sc-bcXGCL bTRcoP"
@@ -349,52 +254,33 @@ Array [
                     className="sc-bcXGCL hhmNZm"
                   >
                     <div
-                      aria-describedby="id-g"
-                      className="sc-bcXGCL"
-                      onBlur={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      tabIndex={0}
+                      data-testid="Tooltip"
+                      label="confirm-account-to-interact"
                     >
-                      <button
-                        aria-label="vote.add"
-                        className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
-                        disabled={true}
-                        onClick={[Function]}
-                        type="button"
+                      <div
+                        className="sc-bcXGCL"
                       >
-                        <svg
-                          className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
-                          fill="none"
-                          viewBox="0 0 10 12"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <button
+                          aria-label="vote.add"
+                          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
+                          disabled={true}
+                          onClick={[Function]}
+                          type="button"
                         >
-                          <path
-                            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </button>
+                          <svg
+                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            fill="none"
+                            viewBox="0 0 10 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div
-                      className="cap-tooltip-container"
-                      hidden={true}
-                      id="id-g"
-                      onAnimationEnd={[Function]}
-                      onTransitionEnd={[Function]}
-                      role="tooltip"
-                      style={
-                        Object {
-                          "display": "none",
-                          "left": "100%",
-                          "pointerEvents": "none",
-                          "position": "fixed",
-                          "top": "100%",
-                          "zIndex": 1800,
-                        }
-                      }
-                    />
                     <span
                       className="sc-bcXGCL cHtwpS cap-text"
                     >
@@ -403,22 +289,13 @@ Array [
                   </div>
                 </div>
                 <div
-                  aria-label="global.report.submit"
-                  aria-modal={true}
-                  data-dialog={true}
-                  hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onBlur={[Function]}
-                  onKeyDown={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="dialog"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                  tabIndex={-1}
+                  alwaysOpenInPortal={true}
+                  ariaLabel="global.report.submit"
+                  data-testid="Modal"
+                  hideCloseButton={true}
+                  onClose={[Function]}
+                  show={false}
+                  variantSize="xl"
                 />
               </div>
             </div>
@@ -453,39 +330,20 @@ Array [
                         </span>
                       </div>
                       <div
-                        aria-describedby="id-g"
-                        className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
-                        onBlur={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        tabIndex={0}
-                        title=""
+                        data-testid="Tooltip"
+                        label="account-not-confirmed-end-step"
                       >
-                        <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                        <div
+                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          title=""
                         >
-                          post_is_not_public
-                        </span>
+                          <span
+                            className="sc-bcXGCL dBdnLI cap-text"
+                          >
+                            post_is_not_public
+                          </span>
+                        </div>
                       </div>
-                      <div
-                        className="cap-tooltip-container"
-                        hidden={true}
-                        id="id-g"
-                        onAnimationEnd={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="tooltip"
-                        style={
-                          Object {
-                            "display": "none",
-                            "left": "100%",
-                            "pointerEvents": "none",
-                            "position": "fixed",
-                            "top": "100%",
-                            "zIndex": 1800,
-                          }
-                        }
-                      />
                     </div>
                     <div
                       className="sc-bcXGCL bTRcoP"
@@ -501,52 +359,33 @@ Array [
                     className="sc-bcXGCL hhmNZm"
                   >
                     <div
-                      aria-describedby="id-g"
-                      className="sc-bcXGCL"
-                      onBlur={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      tabIndex={0}
+                      data-testid="Tooltip"
+                      label="confirm-account-to-interact"
                     >
-                      <button
-                        aria-label="vote.add"
-                        className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
-                        disabled={true}
-                        onClick={[Function]}
-                        type="button"
+                      <div
+                        className="sc-bcXGCL"
                       >
-                        <svg
-                          className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
-                          fill="none"
-                          viewBox="0 0 10 12"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <button
+                          aria-label="vote.add"
+                          className="sc-bcXGCL sc-laZSpB jIXiip dZBxJZ cap-button"
+                          disabled={true}
+                          onClick={[Function]}
+                          type="button"
                         >
-                          <path
-                            d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </button>
+                          <svg
+                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            fill="none"
+                            viewBox="0 0 10 12"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M.001 4.365c.055.941.05 1.722.046 2.41-.01 1.826-.027 3.016 1.242 4.3a3.107 3.107 0 004.425 0l3.441-3.481a1.063 1.063 0 00-.288-1.698l.57-.577a1.065 1.065 0 000-1.492 1.037 1.037 0 00-.323-.222 1.063 1.063 0 00-.473-1.483A1.063 1.063 0 008.5.806c-.34-.344-.857-.4-1.255-.17A1.036 1.036 0 005.55.308c-.02.021-1.84 1.854-3.004 3.03L2.368 2.06a1.048 1.048 0 00-1.042-1.028A1.048 1.048 0 00.283 2.09c.028.478.043.96.048 1.502a1.05 1.05 0 00-.33.773zm8.663 2.732l-3.442 3.48c-.949.96-2.493.96-3.441 0C.726 9.511.73 8.598.742 6.78c.005-.696.01-1.483-.046-2.44a.348.348 0 01.593-.227c.118.12.073.17.105.298v.002l.28 1.996c.04.286.387.404.59.2.6-.608-.063.062 3.46-3.5a.345.345 0 01.481.01.354.354 0 010 .497L4.73 5.107a.354.354 0 000 .498.345.345 0 00.492 0l1.967-1.99a.345.345 0 01.491 0 .354.354 0 010 .498L5.714 6.102a.354.354 0 000 .497.345.345 0 00.491 0L7.68 5.107a.345.345 0 01.492 0 .355.355 0 010 .498L6.697 7.097a.354.354 0 000 .497.345.345 0 00.492 0l.985-.997a.345.345 0 01.49.002.354.354 0 010 .498zm-.21-4.264a.354.354 0 010 .497l-.078.08a1.056 1.056 0 00-.492-.498l.079-.08a.345.345 0 01.491 0zm.492 1.989l-.079.08a1.05 1.05 0 00-.492-.498l.08-.08a.345.345 0 01.491 0 .355.355 0 010 .498zm-.937-3.519a.354.354 0 010 .496c-.043.045.257-.257-1.108 1.113a1.056 1.056 0 00-.49-.495l1.106-1.114a.345.345 0 01.492 0zm-5.463 3.03C3.584 3.283 6.018.831 6.042.806a.345.345 0 01.492 0c.13.131.135.337.02.474-3.25 3.282 1.53-1.553-4.29 4.333L2.09 4.365c.14.107.334.092.456-.032zM.98 2.066a.348.348 0 01.592-.228c.118.12.073.17.106.298l.228 1.63a1.037 1.037 0 00-.882-.458c-.007-.438-.021-.84-.044-1.242z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div
-                      className="cap-tooltip-container"
-                      hidden={true}
-                      id="id-g"
-                      onAnimationEnd={[Function]}
-                      onTransitionEnd={[Function]}
-                      role="tooltip"
-                      style={
-                        Object {
-                          "display": "none",
-                          "left": "100%",
-                          "pointerEvents": "none",
-                          "position": "fixed",
-                          "top": "100%",
-                          "zIndex": 1800,
-                        }
-                      }
-                    />
                     <span
                       className="sc-bcXGCL cHtwpS cap-text"
                     >
@@ -555,22 +394,13 @@ Array [
                   </div>
                 </div>
                 <div
-                  aria-label="global.report.submit"
-                  aria-modal={true}
-                  data-dialog={true}
-                  hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onBlur={[Function]}
-                  onKeyDown={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="dialog"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                  tabIndex={-1}
+                  alwaysOpenInPortal={true}
+                  ariaLabel="global.report.submit"
+                  data-testid="Modal"
+                  hideCloseButton={true}
+                  onClose={[Function]}
+                  show={false}
+                  variantSize="xl"
                 />
               </div>
             </div>

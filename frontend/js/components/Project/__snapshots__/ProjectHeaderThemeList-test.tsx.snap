@@ -49,23 +49,74 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="theme_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="theme-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    tabIndex={-1}
-  />,
+    ariaLabel="theme_list"
+    baseId="theme-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={false}
+  >
+    <div
+      data-testid="Header"
+    >
+      count-themes {"count":4}
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
+      >
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+          >
+            Immobilier
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/justice?_locale=fr-FR"
+          >
+            Justice
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/transport?_locale=fr-FR"
+          >
+            Transport
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
+          >
+            Thème vide
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
+    </div>
+  </div>,
 ]
 `;
 
@@ -118,23 +169,74 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="theme_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="theme-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    tabIndex={-1}
-  />,
+    ariaLabel="theme_list"
+    baseId="theme-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={false}
+  >
+    <div
+      data-testid="Header"
+    >
+      count-themes {"count":4}
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
+      >
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/immobilier?_locale=fr-FR"
+          >
+            Immobilier
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/justice?_locale=fr-FR"
+          >
+            Justice
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/transport?_locale=fr-FR"
+          >
+            Transport
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
+          >
+            Thème vide
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
+    </div>
+  </div>,
 ]
 `;
 
@@ -187,121 +289,72 @@ Array [
     </p>
   </a>,
   <div
-    aria-label="theme_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={false}
-    id="theme-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    tabIndex={-1}
+    ariaLabel="theme_list"
+    baseId="theme-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={true}
   >
     <div
-      data-testid="AnimatePresence"
+      data-testid="Header"
     >
-      <div
-        className="sc-bcXGCL kkunZo sc-gsGkXq cap-modal__overlay"
-        onClick={[Function]}
+      count-themes {"count":4}
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
       >
-        <div
-          className="sc-bcXGCL fRjWjf sc-bWOFNj cap-modal"
+        <li
+          className="list-group-item"
         >
-          <header
-            className="sc-bcXGCL MfvHV cap-modal__header"
+          <a
+            href="https://capco.dev/themes/immobilier?_locale=fr-FR"
           >
-            <div
-              className="sc-bcXGCL jGtgIo"
-            >
-              count-themes {"count":4}
-            </div>
-            <button
-              className="sc-bcXGCL kvTszR"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                className="sc-bcXGCL sc-eJDTud diAjQP iYOzKe cap-icon"
-                fill="none"
-                viewBox="0 0 12 12"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 11L11 1M1 1l10 10"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </button>
-          </header>
-          <main
-            className="sc-bcXGCL eowUbB cap-modal__body"
+            Immobilier
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/justice?_locale=fr-FR"
           >
-            <ul
-              className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
-              striped={false}
-            >
-              <li
-                className="list-group-item"
-              >
-                <a
-                  href="https://capco.dev/themes/immobilier?_locale=fr-FR"
-                >
-                  Immobilier
-                </a>
-              </li>
-              <li
-                className="list-group-item"
-              >
-                <a
-                  href="https://capco.dev/themes/justice?_locale=fr-FR"
-                >
-                  Justice
-                </a>
-              </li>
-              <li
-                className="list-group-item"
-              >
-                <a
-                  href="https://capco.dev/themes/transport?_locale=fr-FR"
-                >
-                  Transport
-                </a>
-              </li>
-              <li
-                className="list-group-item"
-              >
-                <a
-                  href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
-                >
-                  Thème vide
-                </a>
-              </li>
-            </ul>
-          </main>
-          <footer
-            className="sc-bcXGCL ibPPgn cap-modal__footer"
+            Justice
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/transport?_locale=fr-FR"
           >
-            <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
-              onClick={[Function]}
-              style={
-                Object {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
-              type="button"
-            >
-              global.close
-            </button>
-          </footer>
-        </div>
-      </div>
+            Transport
+          </a>
+        </li>
+        <li
+          className="list-group-item"
+        >
+          <a
+            href="https://capco.dev/themes/theme-vide?_locale=fr-FR"
+          >
+            Thème vide
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
     </div>
   </div>,
 ]

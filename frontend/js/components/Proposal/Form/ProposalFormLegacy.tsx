@@ -375,7 +375,7 @@ export class ProposalFormLegacy extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+  UNSAFE_componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
     const { titleValue: titleValueProps, addressValue: addressValueProps } = this.props
 
     if (titleValueProps !== titleValue) {

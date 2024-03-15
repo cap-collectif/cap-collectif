@@ -2,6 +2,8 @@
 const getNodes = str => new window.DOMParser().parseFromString(str, 'text/html').head.childNodes
 
 export const insertCustomCode = (code?: string | null | undefined, id?: string = 'capcoCustomCodeWrapper') => {
+  if (!document) return
+
   let customCode = document.getElementById(id)
 
   if (!customCode) {

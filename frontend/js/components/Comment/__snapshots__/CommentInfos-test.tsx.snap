@@ -32,83 +32,92 @@ Array [
       className="excerpt small"
     >
        • 
-      <span
-        aria-describedby="id-g"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        tabIndex={0}
-      >
-        Invalid date
-      </span>
       <div
-        className="cap-tooltip-container"
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
+        className="text-left"
+        data-testid="Tooltip"
+        id="comment-createdAt-tooltip-commentId"
+        label={
+          <FormattedDate
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            value={null}
+            year="numeric"
+          />
+        }
+        placement="top"
         style={
           Object {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
-            "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
+            "wordBreak": "break-word",
           }
         }
-      />
+      >
+        <span>
+          Invalid date
+        </span>
+      </div>
       <span>
          • 
         global.edited
       </span>
     </span>
     <div
-      aria-controls="publishable-commentId-not-accounted-popover"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      className="sc-bcXGCL ezOFfd cap-popover__disclosure"
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      type="button"
-    >
-      <span
-        className="ellipsis label label-xs label-danger"
-      >
-        <i
-          className="cap cap-delete-2"
-        />
-        not-accounted
-      </span>
-    </div>
-    <div
-      aria-modal={true}
-      className="sc-GhiAJ cJIEss"
-      data-dialog={true}
-      hidden={true}
-      id="publishable-commentId-not-accounted-popover"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
+      baseId="publishable-commentId-not-accounted-popover"
+      className="UnpublishedLabel__StyledPopover-gbLcA hWAQjx"
+      data-testid="Popover"
+      disclosure={
+        <Flex
+          width="fit-content"
+        >
+          <Label
+            bsClass="label"
+            bsSize="xs"
+            bsStyle="danger"
+            className="ellipsis"
+          >
+            <i
+              className="cap cap-delete-2"
+            />
+            <FormattedMessage
+              id="not-accounted"
+              values={Object {}}
+            />
+          </Label>
+        </Flex>
+      }
+      options={
         Object {
-          "display": "none",
-          "left": "100%",
-          "position": "fixed",
-          "top": "100%",
+          "modal": true,
         }
       }
-      tabIndex={0}
-    />
+      placement="top"
+      popoverProps={
+        Object {
+          "preventBodyScroll": false,
+        }
+      }
+    >
+      <div
+        data-testid="Header"
+      >
+        <p
+          className="sc-bcXGCL hfwPJN cap-text excerpt_dark"
+        >
+          account-confirmed-too-late
+        </p>
+      </div>
+      <div
+        data-testid="Body"
+        marginBottom={0}
+      >
+        <p
+          className="sc-bcXGCL JgMzh cap-text"
+        >
+          account-confirmed-too-late-message
+        </p>
+      </div>
+    </div>
   </div>,
 ]
 `;
@@ -145,83 +154,92 @@ Array [
       className="excerpt small"
     >
        • 
-      <span
-        aria-describedby="id-g"
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        tabIndex={0}
-      >
-        Invalid date
-      </span>
       <div
-        className="cap-tooltip-container"
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
+        className="text-left"
+        data-testid="Tooltip"
+        id="comment-createdAt-tooltip-commentId"
+        label={
+          <FormattedDate
+            day="numeric"
+            hour="numeric"
+            minute="numeric"
+            month="long"
+            value={null}
+            year="numeric"
+          />
+        }
+        placement="top"
         style={
           Object {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
-            "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
+            "wordBreak": "break-word",
           }
         }
-      />
+      >
+        <span>
+          Invalid date
+        </span>
+      </div>
       <span>
          • 
         global.edited
       </span>
     </span>
     <div
-      aria-controls="publishable-commentId-not-accounted-popover"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      className="sc-bcXGCL ezOFfd cap-popover__disclosure"
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      type="button"
-    >
-      <span
-        className="ellipsis label label-xs label-danger"
-      >
-        <i
-          className="cap cap-delete-2"
-        />
-        not-accounted
-      </span>
-    </div>
-    <div
-      aria-modal={true}
-      className="sc-GhiAJ cJIEss"
-      data-dialog={true}
-      hidden={true}
-      id="publishable-commentId-not-accounted-popover"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
+      baseId="publishable-commentId-not-accounted-popover"
+      className="UnpublishedLabel__StyledPopover-gbLcA hWAQjx"
+      data-testid="Popover"
+      disclosure={
+        <Flex
+          width="fit-content"
+        >
+          <Label
+            bsClass="label"
+            bsSize="xs"
+            bsStyle="danger"
+            className="ellipsis"
+          >
+            <i
+              className="cap cap-delete-2"
+            />
+            <FormattedMessage
+              id="not-accounted"
+              values={Object {}}
+            />
+          </Label>
+        </Flex>
+      }
+      options={
         Object {
-          "display": "none",
-          "left": "100%",
-          "position": "fixed",
-          "top": "100%",
+          "modal": true,
         }
       }
-      tabIndex={0}
-    />
+      placement="top"
+      popoverProps={
+        Object {
+          "preventBodyScroll": false,
+        }
+      }
+    >
+      <div
+        data-testid="Header"
+      >
+        <p
+          className="sc-bcXGCL hfwPJN cap-text excerpt_dark"
+        >
+          account-confirmed-too-late
+        </p>
+      </div>
+      <div
+        data-testid="Body"
+        marginBottom={0}
+      >
+        <p
+          className="sc-bcXGCL JgMzh cap-text"
+        >
+          account-confirmed-too-late-message
+        </p>
+      </div>
+    </div>
   </div>,
 ]
 `;

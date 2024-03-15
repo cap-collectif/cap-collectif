@@ -20,331 +20,304 @@ Array [
   <div
     className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
-  <button
-    aria-controls="popover-overlay id-g"
+  <div
+    aria-controls="popover-overlay"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bcXGCL sc-laZSpB eIQCcq iFfBPw cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
-    id="proposal-follow-btn-proposal1"
+    data-testid="Menu"
+    disclosure={
+      <Button
+        className="dropdown-button custom-dropdown-button proposal__button__follow_options"
+        id="proposal-follow-btn-proposal1"
+        rightIcon="ARROW_DOWN_O"
+        style={
+          Object {
+            "borderColor": "#333",
+            "color": "#333",
+          }
+        }
+        variant="secondary"
+        variantColor="hierarchy"
+      >
+        <FormattedMessage
+          id="following"
+          values={Object {}}
+        />
+      </Button>
+    }
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPressCapture={[Function]}
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "borderColor": "#333",
-        "color": "#333",
-      }
-    }
+    placement="bottom"
     type="button"
   >
-    following
-    <svg
-      className="sc-bcXGCL sc-eJDTud eiAwpm dxHlFh cap-icon"
-      fill="none"
-      viewBox="0 0 12 7"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={0.8}
-      />
-    </svg>
-  </button>,
-  <div
-    aria-orientation="vertical"
-    className="sc-bcXGCL fCWnUb sc-fcCDYY cap-menu__list"
-    data-dialog={true}
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onBlurCapture={[Function]}
-    onFocus={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onKeyUpCapture={[Function]}
-    onTransitionEnd={[Function]}
-    role="menu"
-    tabIndex={-1}
-  >
     <div
-      className="sc-bcXGCL hZZdTS cap-menu__optionGroup"
-      role="group"
+      data-testid="List"
+      maxHeight="unset"
+      overflow="visible"
     >
-      <p
-        className="sc-bcXGCL jTXWeZ cap-text cap-menu__optionGroup--title"
+      <div
+        data-testid="OptionGroup"
+        onChange={[Function]}
+        title={
+          <Flex
+            spacing={2}
+            style={
+              Object {
+                "marginBottom": "unset",
+              }
+            }
+          >
+            <Heading
+              as="h4"
+              style={
+                Object {
+                  "fontSize": "16px",
+                }
+              }
+            >
+              to-be-notified-by-email
+            </Heading>
+            <Popover
+              disclosure={
+                <Icon
+                  name="INFO"
+                />
+              }
+              placement="top"
+            >
+              <Unknown>
+                <FormattedMessage
+                  id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                  values={Object {}}
+                />
+              </Unknown>
+            </Popover>
+          </Flex>
+        }
+        type="radio"
+        value="MINIMAL"
       >
         <div
-          className="sc-bcXGCL XLGkt"
+          className="proposal__follow__minimal"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-minimal-proposal1"
+          name="minimal"
           style={
             Object {
-              "marginBottom": "unset",
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
           }
+          value="MINIMAL"
         >
-          <h4
-            className="sc-bcXGCL lddvbv cap-heading"
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-          >
-            to-be-notified-by-email
-          </h4>
-          <svg
-            aria-controls="id-g"
-            aria-expanded={false}
-            aria-haspopup="dialog"
-            className="sc-bcXGCL sc-eJDTud kRiMXT dxHlFh cap-icon cap-popover__disclosure"
-            fill="none"
-            onClick={[Function]}
-            onClickCapture={[Function]}
-            onKeyDown={[Function]}
-            onKeyPressCapture={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseDownCapture={[Function]}
-            type="button"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
-              fill="currentColor"
-            />
-          </svg>
           <div
-            className="sc-GhiAJ cJIEss"
-            data-dialog={true}
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
-              Object {
-                "display": "none",
-                "left": "100%",
-                "position": "fixed",
-                "top": "100%",
-              }
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              essential
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-and-news
+            </p>
+          </div>
+        </div>
+        <div
+          className="proposal__follow__essential"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-essential-proposal1"
+          name="essential"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
-            tabIndex={0}
-          />
+          }
+          value="ESSENTIAL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              intermediate
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-and-new-contributions
+            </p>
+          </div>
         </div>
-      </p>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__minimal"
-        id="proposal-follow-btn-minimal-proposal1"
-        name="minimal"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
+        <div
+          className="proposal__follow__all"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-all-proposal1"
+          name="all"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
+            }
+          }
+          value="ALL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              complete
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-new-contributions-votes-and-subscriptions
+               
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        _hover={
           Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
+            "textDecoration": "underline",
           }
         }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={true}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            essential
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-and-news
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__essential"
-        id="proposal-follow-btn-essential-proposal1"
-        name="essential"
-        onBlurCapture={[Function]}
+        bg="white"
+        border="none"
+        className="proposal__unfollow"
+        data-testid="Item"
+        id="proposal-unfollow-btn-proposal1"
+        margin="0 !important"
         onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
       >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
+        <p
+          className="sc-bcXGCL hPyFKB cap-text"
         >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            intermediate
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-and-new-contributions
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__all"
-        id="proposal-follow-btn-all-proposal1"
-        name="all"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            complete
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-new-contributions-votes-and-subscriptions
-             
-          </p>
-        </div>
-      </button>
+          unfollow
+        </p>
+      </div>
     </div>
-    <button
-      className="sc-bcXGCL ddCsub cap-menu__item proposal__unfollow"
-      id="proposal-unfollow-btn-proposal1"
-      onBlurCapture={[Function]}
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      role="menuitem"
-      tabIndex={0}
-      type="button"
-    >
-      <p
-        className="sc-bcXGCL hPyFKB cap-text"
-      >
-        unfollow
-      </p>
-    </button>
   </div>,
   <div
+    animated={false}
+    animating={false}
     aria-label="vote.popover.title"
-    className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-    data-dialog={true}
-    hidden={true}
-    id="login-popover"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
+    as={
       Object {
-        "display": "none",
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [
+          Object {
+            "maxWidth": "280px",
+            "zIndex": 100,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": 833198423,
+          "baseStyle": e {
+            "baseHash": -120292040,
+            "baseStyle": undefined,
+            "componentId": "sc-bcXGCL",
+            "isStatic": false,
+            "rules": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "staticRulesId": "",
+          },
+          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "isStatic": false,
+          "rules": Array [
+            "outline:none;",
+          ],
+          "staticRulesId": "",
+        },
+        "foldedComponentIds": "sc-bcXGCL",
+        "render": [Function],
+        "shouldForwardProp": [Function],
+        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "target": "div",
+        "warnTooManyClasses": [Function],
+      }
+    }
+    baseId="popover-overlay"
+    borderRadius="popover"
+    boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+    data-testid="Popover"
+    hide={[Function]}
+    id="login-popover"
+    modal={false}
+    place={[Function]}
+    placement="auto"
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setModal={[Function]}
+    setVisible={[Function]}
+    show={[Function]}
+    stopAnimation={[Function]}
+    tabIndex={0}
+    toggle={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_originalPlacement="auto"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
         "left": "100%",
         "position": "fixed",
         "top": "100%",
       }
     }
-    tabIndex={0}
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_update={[Function]}
+    visible={false}
   >
     <div
       className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
@@ -450,331 +423,304 @@ Array [
   <div
     className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
-  <button
-    aria-controls="popover-overlay id-g"
+  <div
+    aria-controls="popover-overlay"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bcXGCL sc-laZSpB eIQCcq iFfBPw cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
-    id="proposal-follow-btn-proposal1"
+    data-testid="Menu"
+    disclosure={
+      <Button
+        className="dropdown-button custom-dropdown-button proposal__button__follow_options"
+        id="proposal-follow-btn-proposal1"
+        rightIcon="ARROW_DOWN_O"
+        style={
+          Object {
+            "borderColor": "#333",
+            "color": "#333",
+          }
+        }
+        variant="secondary"
+        variantColor="hierarchy"
+      >
+        <FormattedMessage
+          id="following"
+          values={Object {}}
+        />
+      </Button>
+    }
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPressCapture={[Function]}
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "borderColor": "#333",
-        "color": "#333",
-      }
-    }
+    placement="bottom"
     type="button"
   >
-    following
-    <svg
-      className="sc-bcXGCL sc-eJDTud eiAwpm dxHlFh cap-icon"
-      fill="none"
-      viewBox="0 0 12 7"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={0.8}
-      />
-    </svg>
-  </button>,
-  <div
-    aria-orientation="vertical"
-    className="sc-bcXGCL fCWnUb sc-fcCDYY cap-menu__list"
-    data-dialog={true}
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onBlurCapture={[Function]}
-    onFocus={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onKeyUpCapture={[Function]}
-    onTransitionEnd={[Function]}
-    role="menu"
-    tabIndex={-1}
-  >
     <div
-      className="sc-bcXGCL hZZdTS cap-menu__optionGroup"
-      role="group"
+      data-testid="List"
+      maxHeight="unset"
+      overflow="visible"
     >
-      <p
-        className="sc-bcXGCL jTXWeZ cap-text cap-menu__optionGroup--title"
+      <div
+        data-testid="OptionGroup"
+        onChange={[Function]}
+        title={
+          <Flex
+            spacing={2}
+            style={
+              Object {
+                "marginBottom": "unset",
+              }
+            }
+          >
+            <Heading
+              as="h4"
+              style={
+                Object {
+                  "fontSize": "16px",
+                }
+              }
+            >
+              to-be-notified-by-email
+            </Heading>
+            <Popover
+              disclosure={
+                <Icon
+                  name="INFO"
+                />
+              }
+              placement="top"
+            >
+              <Unknown>
+                <FormattedMessage
+                  id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                  values={Object {}}
+                />
+              </Unknown>
+            </Popover>
+          </Flex>
+        }
+        type="radio"
+        value="MINIMAL"
       >
         <div
-          className="sc-bcXGCL XLGkt"
+          className="proposal__follow__minimal"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-minimal-proposal1"
+          name="minimal"
           style={
             Object {
-              "marginBottom": "unset",
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
           }
+          value="MINIMAL"
         >
-          <h4
-            className="sc-bcXGCL lddvbv cap-heading"
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-          >
-            to-be-notified-by-email
-          </h4>
-          <svg
-            aria-controls="id-g"
-            aria-expanded={false}
-            aria-haspopup="dialog"
-            className="sc-bcXGCL sc-eJDTud kRiMXT dxHlFh cap-icon cap-popover__disclosure"
-            fill="none"
-            onClick={[Function]}
-            onClickCapture={[Function]}
-            onKeyDown={[Function]}
-            onKeyPressCapture={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseDownCapture={[Function]}
-            type="button"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
-              fill="currentColor"
-            />
-          </svg>
           <div
-            className="sc-GhiAJ cJIEss"
-            data-dialog={true}
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
-              Object {
-                "display": "none",
-                "left": "100%",
-                "position": "fixed",
-                "top": "100%",
-              }
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              essential
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-and-news
+            </p>
+          </div>
+        </div>
+        <div
+          className="proposal__follow__essential"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-essential-proposal1"
+          name="essential"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
-            tabIndex={0}
-          />
+          }
+          value="ESSENTIAL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              intermediate
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-and-new-contributions
+            </p>
+          </div>
         </div>
-      </p>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__minimal"
-        id="proposal-follow-btn-minimal-proposal1"
-        name="minimal"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
+        <div
+          className="proposal__follow__all"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-all-proposal1"
+          name="all"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
+            }
+          }
+          value="ALL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              complete
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-new-contributions-votes-and-subscriptions
+               
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        _hover={
           Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
+            "textDecoration": "underline",
           }
         }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={true}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            essential
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-and-news
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__essential"
-        id="proposal-follow-btn-essential-proposal1"
-        name="essential"
-        onBlurCapture={[Function]}
+        bg="white"
+        border="none"
+        className="proposal__unfollow"
+        data-testid="Item"
+        id="proposal-unfollow-btn-proposal1"
+        margin="0 !important"
         onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
       >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
+        <p
+          className="sc-bcXGCL hPyFKB cap-text"
         >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            intermediate
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-and-new-contributions
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__all"
-        id="proposal-follow-btn-all-proposal1"
-        name="all"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            complete
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-new-contributions-votes-and-subscriptions
-             
-          </p>
-        </div>
-      </button>
+          unfollow
+        </p>
+      </div>
     </div>
-    <button
-      className="sc-bcXGCL ddCsub cap-menu__item proposal__unfollow"
-      id="proposal-unfollow-btn-proposal1"
-      onBlurCapture={[Function]}
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      role="menuitem"
-      tabIndex={0}
-      type="button"
-    >
-      <p
-        className="sc-bcXGCL hPyFKB cap-text"
-      >
-        unfollow
-      </p>
-    </button>
   </div>,
   <div
+    animated={false}
+    animating={false}
     aria-label="vote.popover.title"
-    className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-    data-dialog={true}
-    hidden={true}
-    id="login-popover"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
+    as={
       Object {
-        "display": "none",
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [
+          Object {
+            "maxWidth": "280px",
+            "zIndex": 100,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": 833198423,
+          "baseStyle": e {
+            "baseHash": -120292040,
+            "baseStyle": undefined,
+            "componentId": "sc-bcXGCL",
+            "isStatic": false,
+            "rules": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "staticRulesId": "",
+          },
+          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "isStatic": false,
+          "rules": Array [
+            "outline:none;",
+          ],
+          "staticRulesId": "",
+        },
+        "foldedComponentIds": "sc-bcXGCL",
+        "render": [Function],
+        "shouldForwardProp": [Function],
+        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "target": "div",
+        "warnTooManyClasses": [Function],
+      }
+    }
+    baseId="popover-overlay"
+    borderRadius="popover"
+    boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+    data-testid="Popover"
+    hide={[Function]}
+    id="login-popover"
+    modal={false}
+    place={[Function]}
+    placement="auto"
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setModal={[Function]}
+    setVisible={[Function]}
+    show={[Function]}
+    stopAnimation={[Function]}
+    tabIndex={0}
+    toggle={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_originalPlacement="auto"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
         "left": "100%",
         "position": "fixed",
         "top": "100%",
       }
     }
-    tabIndex={0}
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_update={[Function]}
+    visible={false}
   >
     <div
       className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
@@ -880,331 +826,304 @@ Array [
   <div
     className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
-  <button
-    aria-controls="popover-overlay id-g"
+  <div
+    aria-controls="popover-overlay"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-bcXGCL sc-laZSpB eIQCcq iFfBPw cap-button cap-menu__disclosure dropdown-button custom-dropdown-button proposal__button__follow_options"
-    id="proposal-follow-btn-proposal1"
+    data-testid="Menu"
+    disclosure={
+      <Button
+        className="dropdown-button custom-dropdown-button proposal__button__follow_options"
+        id="proposal-follow-btn-proposal1"
+        rightIcon="ARROW_DOWN_O"
+        style={
+          Object {
+            "borderColor": "#333",
+            "color": "#333",
+          }
+        }
+        variant="secondary"
+        variantColor="hierarchy"
+      >
+        <FormattedMessage
+          id="following"
+          values={Object {}}
+        />
+      </Button>
+    }
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
     onKeyDown={[Function]}
     onKeyPressCapture={[Function]}
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
-    onMouseEnter={[Function]}
-    style={
-      Object {
-        "borderColor": "#333",
-        "color": "#333",
-      }
-    }
+    placement="bottom"
     type="button"
   >
-    following
-    <svg
-      className="sc-bcXGCL sc-eJDTud eiAwpm dxHlFh cap-icon"
-      fill="none"
-      viewBox="0 0 12 7"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={0.8}
-      />
-    </svg>
-  </button>,
-  <div
-    aria-orientation="vertical"
-    className="sc-bcXGCL fCWnUb sc-fcCDYY cap-menu__list"
-    data-dialog={true}
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onBlurCapture={[Function]}
-    onFocus={[Function]}
-    onFocusCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyDownCapture={[Function]}
-    onKeyUpCapture={[Function]}
-    onTransitionEnd={[Function]}
-    role="menu"
-    tabIndex={-1}
-  >
     <div
-      className="sc-bcXGCL hZZdTS cap-menu__optionGroup"
-      role="group"
+      data-testid="List"
+      maxHeight="unset"
+      overflow="visible"
     >
-      <p
-        className="sc-bcXGCL jTXWeZ cap-text cap-menu__optionGroup--title"
+      <div
+        data-testid="OptionGroup"
+        onChange={[Function]}
+        title={
+          <Flex
+            spacing={2}
+            style={
+              Object {
+                "marginBottom": "unset",
+              }
+            }
+          >
+            <Heading
+              as="h4"
+              style={
+                Object {
+                  "fontSize": "16px",
+                }
+              }
+            >
+              to-be-notified-by-email
+            </Heading>
+            <Popover
+              disclosure={
+                <Icon
+                  name="INFO"
+                />
+              }
+              placement="top"
+            >
+              <Unknown>
+                <FormattedMessage
+                  id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                  values={Object {}}
+                />
+              </Unknown>
+            </Popover>
+          </Flex>
+        }
+        type="radio"
+        value="MINIMAL"
       >
         <div
-          className="sc-bcXGCL XLGkt"
+          className="proposal__follow__minimal"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-minimal-proposal1"
+          name="minimal"
           style={
             Object {
-              "marginBottom": "unset",
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
           }
+          value="MINIMAL"
         >
-          <h4
-            className="sc-bcXGCL lddvbv cap-heading"
-            style={
-              Object {
-                "marginLeft": 0,
-                "marginTop": 0,
-              }
-            }
-          >
-            to-be-notified-by-email
-          </h4>
-          <svg
-            aria-controls="id-g"
-            aria-expanded={false}
-            aria-haspopup="dialog"
-            className="sc-bcXGCL sc-eJDTud kRiMXT dxHlFh cap-icon cap-popover__disclosure"
-            fill="none"
-            onClick={[Function]}
-            onClickCapture={[Function]}
-            onKeyDown={[Function]}
-            onKeyPressCapture={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseDownCapture={[Function]}
-            type="button"
-            viewBox="0 0 12 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6 0a6 6 0 106 6 6.006 6.006 0 00-6-6zm.125 2.5a.75.75 0 110 1.5.75.75 0 010-1.5zM7.25 9.25h-2a.5.5 0 010-1h.375a.125.125 0 00.125-.125v-2.25a.125.125 0 00-.125-.125H5.25a.5.5 0 010-1h.5a1 1 0 011 1v2.375a.125.125 0 00.125.125h.375a.5.5 0 110 1z"
-              fill="currentColor"
-            />
-          </svg>
           <div
-            className="sc-GhiAJ cJIEss"
-            data-dialog={true}
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
-              Object {
-                "display": "none",
-                "left": "100%",
-                "position": "fixed",
-                "top": "100%",
-              }
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              essential
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-and-news
+            </p>
+          </div>
+        </div>
+        <div
+          className="proposal__follow__essential"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-essential-proposal1"
+          name="essential"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
             }
-            tabIndex={0}
-          />
+          }
+          value="ESSENTIAL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              intermediate
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-and-new-contributions
+            </p>
+          </div>
         </div>
-      </p>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__minimal"
-        id="proposal-follow-btn-minimal-proposal1"
-        name="minimal"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
+        <div
+          className="proposal__follow__all"
+          data-testid="OptionItem"
+          id="proposal-follow-btn-all-proposal1"
+          name="all"
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "background": "transparent",
+              "borderStyle": "solid",
+              "borderTop": "none",
+              "borderWidth": "1px",
+              "marginBottom": 0,
+            }
+          }
+          value="ALL"
+        >
+          <div
+            className="sc-bcXGCL yKHba"
+          >
+            <p
+              className="sc-bcXGCL dnxqqt cap-text"
+            >
+              complete
+            </p>
+            <p
+              className="sc-bcXGCL hPyFKB cap-text"
+            >
+              updates-news-new-contributions-votes-and-subscriptions
+               
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        _hover={
           Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
+            "textDecoration": "underline",
           }
         }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={true}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            essential
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-and-news
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__essential"
-        id="proposal-follow-btn-essential-proposal1"
-        name="essential"
-        onBlurCapture={[Function]}
+        bg="white"
+        border="none"
+        className="proposal__unfollow"
+        data-testid="Item"
+        id="proposal-unfollow-btn-proposal1"
+        margin="0 !important"
         onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
       >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
+        <p
+          className="sc-bcXGCL hPyFKB cap-text"
         >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            intermediate
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-and-new-contributions
-          </p>
-        </div>
-      </button>
-      <button
-        className="sc-bcXGCL bruOhN cap-menu__item cap-menu__optionItem proposal__follow__all"
-        id="proposal-follow-btn-all-proposal1"
-        name="all"
-        onBlurCapture={[Function]}
-        onClick={[Function]}
-        onClickCapture={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyPressCapture={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseDownCapture={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        onMouseMove={[Function]}
-        role="menuitem"
-        style={
-          Object {
-            "alignItems": "flex-start",
-            "background": "transparent",
-            "borderStyle": "solid",
-            "borderTop": "none",
-            "borderWidth": "1px",
-            "marginBottom": 0,
-          }
-        }
-        tabIndex={0}
-        type="button"
-      >
-        <input
-          checked={false}
-          className="sc-bcXGCL jiwaCP"
-          type="radio"
-        />
-        <div
-          className="sc-bcXGCL yKHba"
-        >
-          <p
-            className="sc-bcXGCL dnxqqt cap-text"
-          >
-            complete
-          </p>
-          <p
-            className="sc-bcXGCL hPyFKB cap-text"
-          >
-            updates-news-new-contributions-votes-and-subscriptions
-             
-          </p>
-        </div>
-      </button>
+          unfollow
+        </p>
+      </div>
     </div>
-    <button
-      className="sc-bcXGCL ddCsub cap-menu__item proposal__unfollow"
-      id="proposal-unfollow-btn-proposal1"
-      onBlurCapture={[Function]}
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onMouseMove={[Function]}
-      role="menuitem"
-      tabIndex={0}
-      type="button"
-    >
-      <p
-        className="sc-bcXGCL hPyFKB cap-text"
-      >
-        unfollow
-      </p>
-    </button>
   </div>,
   <div
+    animated={false}
+    animating={false}
     aria-label="vote.popover.title"
-    className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-    data-dialog={true}
-    hidden={true}
-    id="login-popover"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
+    as={
       Object {
-        "display": "none",
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [
+          Object {
+            "maxWidth": "280px",
+            "zIndex": 100,
+          },
+        ],
+        "componentStyle": e {
+          "baseHash": 833198423,
+          "baseStyle": e {
+            "baseHash": -120292040,
+            "baseStyle": undefined,
+            "componentId": "sc-bcXGCL",
+            "isStatic": false,
+            "rules": Array [
+              [Function],
+              [Function],
+              [Function],
+              [Function],
+            ],
+            "staticRulesId": "",
+          },
+          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "isStatic": false,
+          "rules": Array [
+            "outline:none;",
+          ],
+          "staticRulesId": "",
+        },
+        "foldedComponentIds": "sc-bcXGCL",
+        "render": [Function],
+        "shouldForwardProp": [Function],
+        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "target": "div",
+        "warnTooManyClasses": [Function],
+      }
+    }
+    baseId="popover-overlay"
+    borderRadius="popover"
+    boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+    data-testid="Popover"
+    hide={[Function]}
+    id="login-popover"
+    modal={false}
+    place={[Function]}
+    placement="auto"
+    setAnimated={[Function]}
+    setBaseId={[Function]}
+    setModal={[Function]}
+    setVisible={[Function]}
+    show={[Function]}
+    stopAnimation={[Function]}
+    tabIndex={0}
+    toggle={[Function]}
+    unstable_arrowRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_arrowStyles={Object {}}
+    unstable_disclosureRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_idCountRef={
+      Object {
+        "current": 0,
+      }
+    }
+    unstable_originalPlacement="auto"
+    unstable_popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_popoverStyles={
+      Object {
         "left": "100%",
         "position": "fixed",
         "top": "100%",
       }
     }
-    tabIndex={0}
+    unstable_referenceRef={
+      Object {
+        "current": null,
+      }
+    }
+    unstable_update={[Function]}
+    visible={false}
   >
     <div
       className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"

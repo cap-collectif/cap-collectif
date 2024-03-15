@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -59,7 +59,7 @@ Array [
           className="sc-bcXGCL ituTec cap-form-label"
           htmlFor="subDomain"
           style={
-            Object {
+            {
               "marginLeft": 0,
               "marginTop": 0,
             }
@@ -68,7 +68,7 @@ Array [
           <p
             className="sc-bcXGCL JNsrJ cap-text"
             style={
-              Object {
+              {
                 "marginLeft": 0,
                 "marginTop": 0,
               }
@@ -125,7 +125,7 @@ Array [
             className="sc-bcXGCL ituTec cap-form-label"
             htmlFor="customDomain"
             style={
-              Object {
+              {
                 "marginLeft": 0,
                 "marginTop": 0,
               }
@@ -134,7 +134,7 @@ Array [
             <p
               className="sc-bcXGCL JNsrJ cap-text"
               style={
-                Object {
+                {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
@@ -161,7 +161,7 @@ Array [
             >
               <div
                 className="sc-bcXGCL cTrnv sc-fXqqsB gHWJqw cap-tag"
-                style={Object {}}
+                style={{}}
                 title="custom.domain.com"
               >
                 <p
@@ -175,7 +175,7 @@ Array [
                   onClick={[Function]}
                   role="button"
                   style={
-                    Object {
+                    {
                       "opacity": 0,
                       "right": "0rem",
                     }
@@ -214,7 +214,7 @@ Array [
       onTransitionEnd={[Function]}
       role="dialog"
       style={
-        Object {
+        {
           "display": "none",
         }
       }
@@ -225,7 +225,7 @@ Array [
 `;
 
 exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -283,7 +283,7 @@ Array [
           className="sc-bcXGCL ituTec cap-form-label"
           htmlFor="subDomain"
           style={
-            Object {
+            {
               "marginLeft": 0,
               "marginTop": 0,
             }
@@ -292,7 +292,7 @@ Array [
           <p
             className="sc-bcXGCL JNsrJ cap-text"
             style={
-              Object {
+              {
                 "marginLeft": 0,
                 "marginTop": 0,
               }
@@ -349,7 +349,7 @@ Array [
             className="sc-bcXGCL ituTec cap-form-label"
             htmlFor="customDomain"
             style={
-              Object {
+              {
                 "marginLeft": 0,
                 "marginTop": 0,
               }
@@ -358,7 +358,7 @@ Array [
             <p
               className="sc-bcXGCL JNsrJ cap-text"
               style={
-                Object {
+                {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
@@ -415,7 +415,7 @@ Array [
       onTransitionEnd={[Function]}
       role="dialog"
       style={
-        Object {
+        {
           "display": "none",
         }
       }

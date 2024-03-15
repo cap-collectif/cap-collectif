@@ -25,18 +25,18 @@ describe('<UserInvitationSSOPage />', () => {
       },
     }),
   }
+
   beforeEach(() => {
     addsSupportForPortals()
     environment = createMockEnvironment()
 
+    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
+
     const TestRenderer = ({ componentProps, queryVariables: variables }) => {
       const data = useLazyLoadQuery<UserInvitationSSOPageTestQuery>(query, variables)
+      if (!data) return null
 
-      if (data?.siteImage) {
-        return <UserInvitationSSOPage logoFragmentRef={data.siteImage} {...componentProps} />
-      }
-
-      return null
+      return <UserInvitationSSOPage logoFragmentRef={data.siteImage} {...componentProps} />
     }
 
     TestUserInvitationSSOPage = componentProps => (
@@ -46,12 +46,11 @@ describe('<UserInvitationSSOPage />', () => {
         </MockProviders>
       </RelaySuspensFragmentTest>
     )
-
-    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
   })
   afterEach(() => {
     clearSupportForPortals()
   })
+
   const props = {
     loginFacebook: false,
     loginFranceConnect: false,

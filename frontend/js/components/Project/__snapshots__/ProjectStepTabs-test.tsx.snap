@@ -29,7 +29,6 @@ Array [
       <div
         className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
       >
-        
         <div
           className="slick-list"
         >
@@ -116,9 +115,7 @@ Array [
                       </p>
                       <p
                         className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
-                      >
-                        
-                      </p>
+                      />
                     </a>
                   </li>
                 </a>
@@ -266,33 +263,13 @@ Array [
                         className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
                       >
                         <div
-                          aria-describedby="id-g"
-                          onBlur={[Function]}
-                          onFocus={[Function]}
-                          onMouseEnter={[Function]}
-                          onMouseLeave={[Function]}
-                          tabIndex={0}
+                          data-testid="Tooltip"
+                          label="fromDayToDay"
                         >
-                          count.block.daysLeft
+                          <div>
+                            count.block.daysLeft
+                          </div>
                         </div>
-                        <div
-                          className="cap-tooltip-container"
-                          hidden={true}
-                          id="id-g"
-                          onAnimationEnd={[Function]}
-                          onTransitionEnd={[Function]}
-                          role="tooltip"
-                          style={
-                            Object {
-                              "display": "none",
-                              "left": "100%",
-                              "pointerEvents": "none",
-                              "position": "fixed",
-                              "top": "100%",
-                              "zIndex": 1800,
-                            }
-                          }
-                        />
                       </p>
                     </a>
                   </li>
@@ -353,36 +330,18 @@ Array [
                         }
                       }
                     >
-                      <p
-                        aria-describedby="id-g"
-                        className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
-                        onBlur={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        tabIndex={0}
-                        title="Questionnaire qui dénonce"
-                      >
-                        Questionnaire qui dénonce
-                      </p>
                       <div
-                        className="cap-tooltip-container"
-                        hidden={true}
-                        id="id-g"
-                        onAnimationEnd={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="tooltip"
-                        style={
-                          Object {
-                            "display": "none",
-                            "left": "100%",
-                            "pointerEvents": "none",
-                            "position": "fixed",
-                            "top": "100%",
-                            "zIndex": 1800,
-                          }
-                        }
-                      />
+                        className="platform__body"
+                        data-testid="Tooltip"
+                        label="frise-tooltip-text"
+                      >
+                        <p
+                          className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
+                          title="Questionnaire qui dénonce"
+                        >
+                          Questionnaire qui dénonce
+                        </p>
+                      </div>
                       <p
                         className="sc-bcXGCL gQqqnI cap-text frise__stepItem__link__content platform__body"
                       />
@@ -393,8 +352,6 @@ Array [
             </div>
           </div>
         </div>
-        
-        
       </div>
     </ul>
   </div>,
@@ -430,7 +387,6 @@ Array [
       <div
         className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
       >
-        
         <div
           className="slick-list"
         >
@@ -517,9 +473,7 @@ Array [
                       </p>
                       <p
                         className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
-                      >
-                        
-                      </p>
+                      />
                     </a>
                   </li>
                 </a>
@@ -667,33 +621,13 @@ Array [
                         className="sc-bcXGCL eOSNZs cap-text frise__stepItem__link__content platform__body"
                       >
                         <div
-                          aria-describedby="id-g"
-                          onBlur={[Function]}
-                          onFocus={[Function]}
-                          onMouseEnter={[Function]}
-                          onMouseLeave={[Function]}
-                          tabIndex={0}
+                          data-testid="Tooltip"
+                          label="fromDayToDay"
                         >
-                          count.block.daysLeft
+                          <div>
+                            count.block.daysLeft
+                          </div>
                         </div>
-                        <div
-                          className="cap-tooltip-container"
-                          hidden={true}
-                          id="id-g"
-                          onAnimationEnd={[Function]}
-                          onTransitionEnd={[Function]}
-                          role="tooltip"
-                          style={
-                            Object {
-                              "display": "none",
-                              "left": "100%",
-                              "pointerEvents": "none",
-                              "position": "fixed",
-                              "top": "100%",
-                              "zIndex": 1800,
-                            }
-                          }
-                        />
                       </p>
                     </a>
                   </li>
@@ -754,36 +688,18 @@ Array [
                         }
                       }
                     >
-                      <p
-                        aria-describedby="id-g"
-                        className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
-                        onBlur={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
-                        tabIndex={0}
-                        title="Questionnaire qui dénonce"
-                      >
-                        Questionnaire qui dénonce
-                      </p>
                       <div
-                        className="cap-tooltip-container"
-                        hidden={true}
-                        id="id-g"
-                        onAnimationEnd={[Function]}
-                        onTransitionEnd={[Function]}
-                        role="tooltip"
-                        style={
-                          Object {
-                            "display": "none",
-                            "left": "100%",
-                            "pointerEvents": "none",
-                            "position": "fixed",
-                            "top": "100%",
-                            "zIndex": 1800,
-                          }
-                        }
-                      />
+                        className="platform__body"
+                        data-testid="Tooltip"
+                        label="frise-tooltip-text"
+                      >
+                        <p
+                          className="sc-bcXGCL cjfIcy cap-text frise__stepItem__link__title platform__body"
+                          title="Questionnaire qui dénonce"
+                        >
+                          Questionnaire qui dénonce
+                        </p>
+                      </div>
                       <p
                         className="sc-bcXGCL gQqqnI cap-text frise__stepItem__link__content platform__body"
                       />
@@ -794,8 +710,6 @@ Array [
             </div>
           </div>
         </div>
-        
-        
       </div>
     </ul>
   </div>,

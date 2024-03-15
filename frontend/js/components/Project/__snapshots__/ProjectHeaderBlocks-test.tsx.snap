@@ -4,123 +4,145 @@ exports[`<ProjectHeaderBlocks /> should render correctly 1`] = `
 <ul
   className="sc-bcXGCL hRSDAF projectHeader__blocks"
 >
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
-  >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
-    >
-      16
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Contribution-plural
-    </p>
-  </li>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          proposal-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          amendment-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          argument-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          source-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          answer-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id="votes-counter-pill"
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      47
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Vote-plural
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        16
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Contribution-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          numeric-votes-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          paper-votes-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      88
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Project.preview.counters.contributors
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id="votes-counter-pill"
+      >
+        47
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Vote-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          online-contributors
+        </Text>
+      </Box>
+    }
+    zIndex={10}
+  >
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
+    >
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        88
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Project.preview.counters.contributors
+      </p>
+    </li>
+  </div>
 </ul>
 `;
 
@@ -128,123 +150,145 @@ exports[`<ProjectHeaderBlocks /> should render correctly with one Step 1`] = `
 <ul
   className="sc-bcXGCL hRSDAF projectHeader__blocks"
 >
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
-  >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
-    >
-      16
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Contribution-plural
-    </p>
-  </li>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          proposal-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          amendment-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          argument-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          source-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          answer-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id="votes-counter-pill"
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      47
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Vote-plural
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        16
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Contribution-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          numeric-votes-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          paper-votes-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      88
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Project.preview.counters.contributors
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id="votes-counter-pill"
+      >
+        47
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Vote-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          online-contributors
+        </Text>
+      </Box>
+    }
+    zIndex={10}
+  >
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
+    >
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        88
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Project.preview.counters.contributors
+      </p>
+    </li>
+  </div>
 </ul>
 `;
 
@@ -252,122 +296,144 @@ exports[`<ProjectHeaderBlocks /> should render correctly without voter count 1`]
 <ul
   className="sc-bcXGCL hRSDAF projectHeader__blocks"
 >
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
-  >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
-    >
-      16
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Contribution-plural
-    </p>
-  </li>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          proposal-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          amendment-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          argument-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          source-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          answer-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id="votes-counter-pill"
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      47
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Vote-plural
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        16
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Contribution-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
-  <li
-    aria-describedby="id-g"
-    className="sc-bcXGCL bqabVC projectHeader__block"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          numeric-votes-count
+        </Text>
+        <Text
+          marginBottom="0px !important"
+        >
+          paper-votes-count
+        </Text>
+      </Box>
+    }
+    zIndex={10}
   >
-    <h2
-      className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
-      id=""
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
     >
-      88
-    </h2>
-    <p
-      className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
-    >
-      Project.preview.counters.contributors
-    </p>
-  </li>
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id="votes-counter-pill"
+      >
+        47
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Vote-plural
+      </p>
+    </li>
+  </div>
   <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 10,
-      }
+    data-testid="Tooltip"
+    delay={
+      Array [
+        200,
+        500,
+      ]
     }
-  />
+    label={
+      <Box
+        padding={1}
+        textAlign="center"
+      >
+        <Text
+          marginBottom="0px !important"
+        >
+          online-contributors
+        </Text>
+      </Box>
+    }
+    zIndex={10}
+  >
+    <li
+      className="sc-bcXGCL bqabVC projectHeader__block"
+    >
+      <h2
+        className="sc-bcXGCL daQFOO cap-heading projectHeader__block__content platform__body"
+        id=""
+      >
+        88
+      </h2>
+      <p
+        className="sc-bcXGCL ernmqx cap-text projectHeader__block__title platform__body"
+      >
+        Project.preview.counters.contributors
+      </p>
+    </li>
+  </div>
 </ul>
 `;

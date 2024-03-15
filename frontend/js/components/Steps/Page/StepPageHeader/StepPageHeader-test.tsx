@@ -12,11 +12,11 @@ describe('<StepPageHeader />', () => {
   let testComponentTree
   let TestStepPageHeader
   const defaultMockResolvers = {
-    Step: () => ({
+    Node: () => ({
       title: 'I am a title',
       body: null,
       timeRange: {
-        startAt: null,
+        startAt: '2020-06-06',
         endAt: null,
       },
       state: 'OPENED',
@@ -59,7 +59,7 @@ describe('<StepPageHeader />', () => {
   it('should render correctly a consultationStep with a description', () => {
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, {
-        Step: () => ({ ...defaultMockResolvers.Step(), body: 'Je suis la belle description' }),
+        Step: () => ({ ...defaultMockResolvers.Node(), body: 'Je suis la belle description' }),
       }),
     )
     testComponentTree = ReactTestRenderer.create(<TestStepPageHeader />)
@@ -68,7 +68,7 @@ describe('<StepPageHeader />', () => {
   it('should render correctly a selectionStep', () => {
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, {
-        Step: () => ({ ...defaultMockResolvers.Step(), __typename: 'SelectionStep', voteThreshold: 1, votable: true }),
+        Step: () => ({ ...defaultMockResolvers.Node(), __typename: 'SelectionStep', voteThreshold: 1, votable: true }),
       }),
     )
     testComponentTree = ReactTestRenderer.create(<TestStepPageHeader />)
@@ -78,7 +78,7 @@ describe('<StepPageHeader />', () => {
     environment.mock.queueOperationResolver(operation =>
       MockPayloadGenerator.generate(operation, {
         Step: () => ({
-          ...defaultMockResolvers.Step(),
+          ...defaultMockResolvers.Node(),
           __typename: 'SelectionStep',
           voteThreshold: 1,
           votable: true,

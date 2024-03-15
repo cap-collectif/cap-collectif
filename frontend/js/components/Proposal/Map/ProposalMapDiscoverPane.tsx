@@ -44,7 +44,8 @@ const ProposalMapDiscoverPane = ({ show, handleClose, type = 'CLICK' }: Props): 
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-discover')
-        ReactDOM.render(
+        const root = ReactDOM.createRoot(div)
+        root.render(
           Pane({
             intl,
             type,

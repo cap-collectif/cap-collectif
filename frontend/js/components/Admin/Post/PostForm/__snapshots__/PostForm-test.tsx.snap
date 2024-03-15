@@ -193,9 +193,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                           "whiteSpace": "pre",
                         }
                       }
-                    >
-                      
-                    </div>
+                    />
                   </div>
                 </div>
               </div>
@@ -502,7 +500,6 @@ exports[`<PostForm/> should render correctly 1`] = `
               </span>
             </div>
           </div>
-          
         </div>
       </div>
     </div>

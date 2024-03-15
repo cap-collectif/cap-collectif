@@ -20,6 +20,7 @@ const nextConfig = {
   },
   swcMinify: true,
   compiler: {
+    styledComponents: true,
     relay: {
       language: 'typescript',
       src: './',

@@ -116,22 +116,13 @@ Array [
         </span>
       </div>
       <div
-        aria-label="global.report.submit"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
+        alwaysOpenInPortal={true}
+        ariaLabel="global.report.submit"
+        data-testid="Modal"
+        hideCloseButton={true}
+        onClose={[Function]}
+        show={false}
+        variantSize="xl"
       />
     </div>
   </div>,
@@ -254,22 +245,13 @@ Array [
         </span>
       </div>
       <div
-        aria-label="global.report.submit"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
+        alwaysOpenInPortal={true}
+        ariaLabel="global.report.submit"
+        data-testid="Modal"
+        hideCloseButton={true}
+        onClose={[Function]}
+        show={false}
+        variantSize="xl"
       />
     </div>
   </div>,
@@ -392,22 +374,13 @@ Array [
         </span>
       </div>
       <div
-        aria-label="global.report.submit"
-        aria-modal={true}
-        data-dialog={true}
-        hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onTransitionEnd={[Function]}
-        role="dialog"
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        tabIndex={-1}
+        alwaysOpenInPortal={true}
+        ariaLabel="global.report.submit"
+        data-testid="Modal"
+        hideCloseButton={true}
+        onClose={[Function]}
+        show={false}
+        variantSize="xl"
       />
     </div>
   </div>,

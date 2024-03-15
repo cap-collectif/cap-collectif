@@ -226,8 +226,8 @@ const ProposalVoteRequirementsModal = ({
   const { control, formState, trigger, setValue } = requirementsForm
 
   const hasErrors = () => {
-    const isFCRequired = initialValues.hasOwnProperty('FranceConnectRequirement');
-    const hasFormErrors = Object.keys(requirementsForm.formState.errors).length > 0;
+    const isFCRequired = initialValues.hasOwnProperty('FranceConnectRequirement')
+    const hasFormErrors = Object.keys(requirementsForm.formState.errors).length > 0
 
     if (!isFCRequired) {
       return hasFormErrors
@@ -235,7 +235,6 @@ const ProposalVoteRequirementsModal = ({
 
     return hasFormErrors || !initialValues['FranceConnectRequirement']
   }
-
 
   const onClick = e => {
     requirementsForm.handleSubmit(data => {

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalFormItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -23,7 +23,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -38,7 +38,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -48,7 +48,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -58,7 +58,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -68,7 +68,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -78,7 +78,7 @@ Array [
   <td
     className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -96,7 +96,7 @@ Array [
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 0,
             "marginTop": 0,
           }
@@ -127,7 +127,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -143,7 +143,7 @@ Array [
 `;
 
 exports[`<ProposalFormItem /> should render correctly 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -165,7 +165,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -180,7 +180,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -190,7 +190,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -200,7 +200,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -210,7 +210,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -220,7 +220,7 @@ Array [
   <td
     className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -238,7 +238,7 @@ Array [
         onMouseEnter={[Function]}
         onMouseLeave={[Function]}
         style={
-          Object {
+          {
             "marginLeft": 0,
             "marginTop": 0,
           }
@@ -269,7 +269,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -320,7 +320,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -342,7 +342,7 @@ Array [
         onTransitionEnd={[Function]}
         role="dialog"
         style={
-          Object {
+          {
             "display": "none",
           }
         }

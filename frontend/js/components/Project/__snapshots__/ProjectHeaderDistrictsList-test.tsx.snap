@@ -55,23 +55,68 @@ Array [
     </p>
   </li>,
   <div
-    aria-label="data_district_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="project-header-district-list-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    tabIndex={-1}
-  />,
+    ariaLabel="data_district_list"
+    baseId="project-header-district-list-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={false}
+    size="lg"
+  >
+    <div
+      className="ResetCss-jmWVRh exBVVd"
+    >
+      <div
+        data-testid="Header"
+      >
+        count-area {"count":5}
+      </div>
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
+      >
+        <li
+          className="list-group-item"
+        >
+          zone 1
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 2
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 3
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 4
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 5
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
+    </div>
+  </div>,
 ]
 `;
 
@@ -130,23 +175,68 @@ Array [
     </p>
   </li>,
   <div
-    aria-label="data_district_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="project-header-district-list-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    tabIndex={-1}
-  />,
+    ariaLabel="data_district_list"
+    baseId="project-header-district-list-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={false}
+    size="lg"
+  >
+    <div
+      className="ResetCss-jmWVRh exBVVd"
+    >
+      <div
+        data-testid="Header"
+      >
+        count-area {"count":5}
+      </div>
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
+      >
+        <li
+          className="list-group-item"
+        >
+          zone 1
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 2
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 3
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 4
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 5
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
+    </div>
+  </div>,
 ]
 `;
 
@@ -205,114 +295,66 @@ Array [
     </p>
   </li>,
   <div
-    aria-label="data_district_list"
-    aria-modal={true}
-    data-dialog={true}
-    hidden={false}
-    id="project-header-district-list-modal"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    tabIndex={-1}
+    ariaLabel="data_district_list"
+    baseId="project-header-district-list-modal"
+    data-testid="Modal"
+    onClose={[Function]}
+    show={true}
+    size="lg"
   >
     <div
-      data-testid="AnimatePresence"
+      className="ResetCss-jmWVRh exBVVd"
     >
       <div
-        className="sc-bcXGCL kkunZo sc-gsGkXq cap-modal__overlay"
-        onClick={[Function]}
+        data-testid="Header"
       >
-        <div
-          className="sc-bcXGCL eSCgdK sc-bWOFNj GFNVU cap-modal"
-        >
-          <div
-            className="ResetCss-jmWVRh exBVVd"
-          >
-            <header
-              className="sc-bcXGCL MfvHV cap-modal__header"
-            >
-              <div
-                className="sc-bcXGCL jGtgIo"
-              >
-                count-area {"count":5}
-              </div>
-              <button
-                className="sc-bcXGCL kvTszR"
-                onClick={[Function]}
-                type="button"
-              >
-                <svg
-                  className="sc-bcXGCL sc-eJDTud diAjQP iYOzKe cap-icon"
-                  fill="none"
-                  viewBox="0 0 12 12"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M1 11L11 1M1 1l10 10"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={0.8}
-                  />
-                </svg>
-              </button>
-            </header>
-          </div>
-          <main
-            className="sc-bcXGCL eowUbB cap-modal__body"
-          >
-            <ul
-              className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
-              striped={false}
-            >
-              <li
-                className="list-group-item"
-              >
-                zone 1
-              </li>
-              <li
-                className="list-group-item"
-              >
-                zone 2
-              </li>
-              <li
-                className="list-group-item"
-              >
-                zone 3
-              </li>
-              <li
-                className="list-group-item"
-              >
-                zone 4
-              </li>
-              <li
-                className="list-group-item"
-              >
-                zone 5
-              </li>
-            </ul>
-          </main>
-          <footer
-            className="sc-bcXGCL ibPPgn cap-modal__footer"
-          >
-            <button
-              className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
-              onClick={[Function]}
-              style={
-                Object {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
-              type="button"
-            >
-              global.close
-            </button>
-          </footer>
-        </div>
+        count-area {"count":5}
       </div>
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <ul
+        className="ListGroupFlush__Container-eGHZgt cEkgdF list-group-flush list-group"
+        striped={false}
+      >
+        <li
+          className="list-group-item"
+        >
+          zone 1
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 2
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 3
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 4
+        </li>
+        <li
+          className="list-group-item"
+        >
+          zone 5
+        </li>
+      </ul>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        onClick={[Function]}
+        type="button"
+      >
+        global.close
+      </button>
     </div>
   </div>,
 ]

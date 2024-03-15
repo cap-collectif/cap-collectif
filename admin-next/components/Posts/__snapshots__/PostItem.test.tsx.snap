@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PostItem /> should render correctly 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -23,7 +23,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -38,7 +38,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -48,7 +48,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -80,7 +80,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -90,7 +90,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -100,7 +100,7 @@ Array [
   <td
     className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -146,7 +146,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -197,7 +197,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -219,7 +219,7 @@ Array [
         onTransitionEnd={[Function]}
         role="dialog"
         style={
-          Object {
+          {
             "display": "none",
           }
         }
@@ -231,7 +231,7 @@ Array [
 `;
 
 exports[`<PostItem /> should render correctly without authors 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -253,7 +253,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -268,7 +268,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -278,7 +278,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -310,7 +310,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -320,7 +320,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -330,7 +330,7 @@ Array [
   <td
     className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -376,7 +376,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -427,7 +427,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -449,7 +449,7 @@ Array [
         onTransitionEnd={[Function]}
         role="dialog"
         style={
-          Object {
+          {
             "display": "none",
           }
         }

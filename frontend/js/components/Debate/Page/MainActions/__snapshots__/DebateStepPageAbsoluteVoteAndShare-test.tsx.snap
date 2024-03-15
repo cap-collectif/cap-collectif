@@ -86,25 +86,101 @@ Array [
             </div>
           </button>
           <div
+            animated={false}
+            animating={false}
             aria-label="vote.popover.title"
-            className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-            data-dialog={true}
-            hidden={true}
-            id="login-popover"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
+            as={
               Object {
-                "display": "none",
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [
+                  Object {
+                    "maxWidth": "280px",
+                    "zIndex": 100,
+                  },
+                ],
+                "componentStyle": e {
+                  "baseHash": 833198423,
+                  "baseStyle": e {
+                    "baseHash": -120292040,
+                    "baseStyle": undefined,
+                    "componentId": "sc-bcXGCL",
+                    "isStatic": false,
+                    "rules": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "staticRulesId": "",
+                  },
+                  "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                  "isStatic": false,
+                  "rules": Array [
+                    "outline:none;",
+                  ],
+                  "staticRulesId": "",
+                },
+                "foldedComponentIds": "sc-bcXGCL",
+                "render": [Function],
+                "shouldForwardProp": [Function],
+                "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                "target": "div",
+                "warnTooManyClasses": [Function],
+              }
+            }
+            baseId="popover-overlay"
+            borderRadius="popover"
+            boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+            data-testid="Popover"
+            hide={[Function]}
+            id="login-popover"
+            modal={false}
+            place={[Function]}
+            placement="bottom"
+            setAnimated={[Function]}
+            setBaseId={[Function]}
+            setModal={[Function]}
+            setVisible={[Function]}
+            show={[Function]}
+            stopAnimation={[Function]}
+            tabIndex={0}
+            toggle={[Function]}
+            unstable_arrowRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_arrowStyles={Object {}}
+            unstable_disclosureRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_idCountRef={
+              Object {
+                "current": 0,
+              }
+            }
+            unstable_originalPlacement="bottom"
+            unstable_popoverRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_popoverStyles={
+              Object {
                 "left": "100%",
                 "position": "fixed",
                 "top": "100%",
               }
             }
-            tabIndex={0}
+            unstable_referenceRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_update={[Function]}
+            visible={false}
           >
             <div
               className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
@@ -225,25 +301,101 @@ Array [
             </div>
           </button>
           <div
+            animated={false}
+            animating={false}
             aria-label="vote.popover.title"
-            className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-            data-dialog={true}
-            hidden={true}
-            id="login-popover"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
+            as={
               Object {
-                "display": "none",
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [
+                  Object {
+                    "maxWidth": "280px",
+                    "zIndex": 100,
+                  },
+                ],
+                "componentStyle": e {
+                  "baseHash": 833198423,
+                  "baseStyle": e {
+                    "baseHash": -120292040,
+                    "baseStyle": undefined,
+                    "componentId": "sc-bcXGCL",
+                    "isStatic": false,
+                    "rules": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "staticRulesId": "",
+                  },
+                  "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                  "isStatic": false,
+                  "rules": Array [
+                    "outline:none;",
+                  ],
+                  "staticRulesId": "",
+                },
+                "foldedComponentIds": "sc-bcXGCL",
+                "render": [Function],
+                "shouldForwardProp": [Function],
+                "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                "target": "div",
+                "warnTooManyClasses": [Function],
+              }
+            }
+            baseId="popover-overlay"
+            borderRadius="popover"
+            boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+            data-testid="Popover"
+            hide={[Function]}
+            id="login-popover"
+            modal={false}
+            place={[Function]}
+            placement="bottom"
+            setAnimated={[Function]}
+            setBaseId={[Function]}
+            setModal={[Function]}
+            setVisible={[Function]}
+            show={[Function]}
+            stopAnimation={[Function]}
+            tabIndex={0}
+            toggle={[Function]}
+            unstable_arrowRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_arrowStyles={Object {}}
+            unstable_disclosureRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_idCountRef={
+              Object {
+                "current": 0,
+              }
+            }
+            unstable_originalPlacement="bottom"
+            unstable_popoverRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_popoverStyles={
+              Object {
                 "left": "100%",
                 "position": "fixed",
                 "top": "100%",
               }
             }
-            tabIndex={0}
+            unstable_referenceRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_update={[Function]}
+            visible={false}
           >
             <div
               className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
@@ -418,52 +570,33 @@ Array [
           >
             Tweet
           </a>
-          <button
-            aria-describedby="id-g"
-            className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            tabIndex={0}
-            type="button"
-          >
-            <svg
-              className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
-              fill="none"
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
-                fill="currentColor"
-              />
-              <path
-                d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
-                fill="currentColor"
-              />
-            </svg>
-            global.link
-          </button>
           <div
-            className="cap-tooltip-container"
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onTransitionEnd={[Function]}
-            role="tooltip"
-            style={
-              Object {
-                "display": "none",
-                "left": "100%",
-                "pointerEvents": "none",
-                "position": "fixed",
-                "top": "100%",
-                "zIndex": 1800,
-              }
-            }
-          />
+            data-testid="Tooltip"
+            label="copied-link"
+          >
+            <button
+              className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
+                fill="none"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+                  fill="currentColor"
+                />
+              </svg>
+              global.link
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -675,25 +808,101 @@ Array [
             </div>
           </button>
           <div
+            animated={false}
+            animating={false}
             aria-label="vote.popover.title"
-            className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-            data-dialog={true}
-            hidden={true}
-            id="login-popover"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
+            as={
               Object {
-                "display": "none",
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [
+                  Object {
+                    "maxWidth": "280px",
+                    "zIndex": 100,
+                  },
+                ],
+                "componentStyle": e {
+                  "baseHash": 833198423,
+                  "baseStyle": e {
+                    "baseHash": -120292040,
+                    "baseStyle": undefined,
+                    "componentId": "sc-bcXGCL",
+                    "isStatic": false,
+                    "rules": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "staticRulesId": "",
+                  },
+                  "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                  "isStatic": false,
+                  "rules": Array [
+                    "outline:none;",
+                  ],
+                  "staticRulesId": "",
+                },
+                "foldedComponentIds": "sc-bcXGCL",
+                "render": [Function],
+                "shouldForwardProp": [Function],
+                "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                "target": "div",
+                "warnTooManyClasses": [Function],
+              }
+            }
+            baseId="popover-overlay"
+            borderRadius="popover"
+            boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+            data-testid="Popover"
+            hide={[Function]}
+            id="login-popover"
+            modal={false}
+            place={[Function]}
+            placement="top"
+            setAnimated={[Function]}
+            setBaseId={[Function]}
+            setModal={[Function]}
+            setVisible={[Function]}
+            show={[Function]}
+            stopAnimation={[Function]}
+            tabIndex={0}
+            toggle={[Function]}
+            unstable_arrowRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_arrowStyles={Object {}}
+            unstable_disclosureRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_idCountRef={
+              Object {
+                "current": 0,
+              }
+            }
+            unstable_originalPlacement="top"
+            unstable_popoverRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_popoverStyles={
+              Object {
                 "left": "100%",
                 "position": "fixed",
                 "top": "100%",
               }
             }
-            tabIndex={0}
+            unstable_referenceRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_update={[Function]}
+            visible={false}
           >
             <div
               className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fMutPh ijQUdB"
@@ -814,25 +1023,101 @@ Array [
             </div>
           </button>
           <div
+            animated={false}
+            animating={false}
             aria-label="vote.popover.title"
-            className="sc-bcXGCL NewLoginOverlay__PopoverContainer-gZElPI kCGkNK gOvPxa"
-            data-dialog={true}
-            hidden={true}
-            id="login-popover"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
+            as={
               Object {
-                "display": "none",
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [
+                  Object {
+                    "maxWidth": "280px",
+                    "zIndex": 100,
+                  },
+                ],
+                "componentStyle": e {
+                  "baseHash": 833198423,
+                  "baseStyle": e {
+                    "baseHash": -120292040,
+                    "baseStyle": undefined,
+                    "componentId": "sc-bcXGCL",
+                    "isStatic": false,
+                    "rules": Array [
+                      [Function],
+                      [Function],
+                      [Function],
+                      [Function],
+                    ],
+                    "staticRulesId": "",
+                  },
+                  "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                  "isStatic": false,
+                  "rules": Array [
+                    "outline:none;",
+                  ],
+                  "staticRulesId": "",
+                },
+                "foldedComponentIds": "sc-bcXGCL",
+                "render": [Function],
+                "shouldForwardProp": [Function],
+                "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+                "target": "div",
+                "warnTooManyClasses": [Function],
+              }
+            }
+            baseId="popover-overlay"
+            borderRadius="popover"
+            boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
+            data-testid="Popover"
+            hide={[Function]}
+            id="login-popover"
+            modal={false}
+            place={[Function]}
+            placement="top"
+            setAnimated={[Function]}
+            setBaseId={[Function]}
+            setModal={[Function]}
+            setVisible={[Function]}
+            show={[Function]}
+            stopAnimation={[Function]}
+            tabIndex={0}
+            toggle={[Function]}
+            unstable_arrowRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_arrowStyles={Object {}}
+            unstable_disclosureRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_idCountRef={
+              Object {
+                "current": 0,
+              }
+            }
+            unstable_originalPlacement="top"
+            unstable_popoverRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_popoverStyles={
+              Object {
                 "left": "100%",
                 "position": "fixed",
                 "top": "100%",
               }
             }
-            tabIndex={0}
+            unstable_referenceRef={
+              Object {
+                "current": null,
+              }
+            }
+            unstable_update={[Function]}
+            visible={false}
           >
             <div
               className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fMutPh ijQUdB"
@@ -1007,52 +1292,33 @@ Array [
           >
             Tweet
           </a>
-          <button
-            aria-describedby="id-g"
-            className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
-            onBlur={[Function]}
-            onClick={[Function]}
-            onFocus={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-            tabIndex={0}
-            type="button"
-          >
-            <svg
-              className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
-              fill="none"
-              viewBox="0 0 32 32"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
-                fill="currentColor"
-              />
-              <path
-                d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
-                fill="currentColor"
-              />
-            </svg>
-            global.link
-          </button>
           <div
-            className="cap-tooltip-container"
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onTransitionEnd={[Function]}
-            role="tooltip"
-            style={
-              Object {
-                "display": "none",
-                "left": "100%",
-                "pointerEvents": "none",
-                "position": "fixed",
-                "top": "100%",
-                "zIndex": 1800,
-              }
-            }
-          />
+            data-testid="Tooltip"
+            label="copied-link"
+          >
+            <button
+              className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
+              onClick={[Function]}
+              type="button"
+            >
+              <svg
+                className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
+                fill="none"
+                viewBox="0 0 32 32"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.944 24.499l-3.65 3.648a3.804 3.804 0 01-5.255 0l-1.19-1.188a3.716 3.716 0 010-5.255l7.734-7.733a3.719 3.719 0 015.256 0l1.19 1.189a1.337 1.337 0 001.891-1.89l-1.19-1.19a6.388 6.388 0 00-9.029 0l-7.733 7.733a6.383 6.383 0 000 9.027l1.19 1.188a6.38 6.38 0 009.027 0l3.648-3.647a1.335 1.335 0 00-1.885-1.886l-.004.004z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M30.035 3.15l-1.19-1.189a6.4 6.4 0 00-9.026 0l-3.874 3.867a1.333 1.333 0 001.886 1.885l3.866-3.866a3.72 3.72 0 015.255 0l1.19 1.19a3.715 3.715 0 010 5.256l-7.733 7.734a3.692 3.692 0 01-2.628 1.089 3.687 3.687 0 01-2.625-1.088 1.334 1.334 0 10-1.887 1.883 6.336 6.336 0 004.512 1.866 6.336 6.336 0 004.514-1.866l7.733-7.734a6.38 6.38 0 000-9.028l.007.002z"
+                  fill="currentColor"
+                />
+              </svg>
+              global.link
+            </button>
+          </div>
         </div>
       </div>
     </div>

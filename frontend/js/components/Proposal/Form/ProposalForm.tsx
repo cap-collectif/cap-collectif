@@ -416,7 +416,7 @@ export class ProposalForm extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
+  UNSAFE_componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
     const { titleValue: titleValueProps, addressValue: addressValueProps, dispatch } = this.props
 
     if (titleValueProps !== titleValue) {

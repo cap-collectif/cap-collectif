@@ -43,12 +43,12 @@ const DetailDrawerInner = styled(motion(Box)).attrs({
 
 const DetailDrawer = ({ isOpen, onClose = noop, children }: Props) => {
   useEffect(() => {
-    if (!window.document.body) return
+    if (!window.document?.body) return
 
     if (isOpen === true) {
-      window.document.body.style.setProperty('overflow', 'hidden')
+      window.document?.body.style.setProperty('overflow', 'hidden')
     } else {
-      window.document.body.style.removeProperty('overflow')
+      window.document?.body.style.removeProperty('overflow')
     }
 
     return () => {

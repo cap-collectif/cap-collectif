@@ -3,6 +3,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { ProposalPageOfficialAnswer } from './ProposalPageOfficialAnswer'
 import { $refType } from '~/mocks'
+import moment from 'moment'
 
 describe('<ProposalPageOfficialAnswer />', () => {
   const emptyProposal = {
@@ -15,7 +16,7 @@ describe('<ProposalPageOfficialAnswer />', () => {
     officialResponse: {
       id: 'news1',
       body: 'GG mec c accepté',
-      publishedAt: '2020_06_07',
+      publishedAt: moment('2020-06-07', 'MM-DD-YYYY'),
       isPublished: true,
       authors: [
         {

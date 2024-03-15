@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EventItem /> should render correctly 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -23,7 +23,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -38,7 +38,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -60,7 +60,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -78,14 +78,14 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
   >
     <a
       className="sc-bcXGCL ZqqiX cap-link"
-      href="<mock-value-for-field-\\"url\\">"
+      href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
@@ -93,7 +93,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -103,7 +103,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -145,7 +145,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",
@@ -161,7 +161,7 @@ Array [
 `;
 
 exports[`<EventItem /> should render correctly with deleted event 1`] = `
-Array [
+[
   <div
     className="sc-bcXGCL klhoji toasts-container toasts-container--top"
   />,
@@ -183,7 +183,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -198,7 +198,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -220,7 +220,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -238,14 +238,14 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
   >
     <a
       className="sc-bcXGCL ZqqiX cap-link"
-      href="<mock-value-for-field-\\"url\\">"
+      href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
@@ -253,7 +253,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -263,7 +263,7 @@ Array [
   <td
     className="sc-bcXGCL kdBJtI cap-table__td"
     style={
-      Object {
+      {
         "whiteSpace": "initial",
       }
     }
@@ -305,7 +305,7 @@ Array [
         onTransitionEnd={[Function]}
         role="tooltip"
         style={
-          Object {
+          {
             "display": "none",
             "left": "100%",
             "pointerEvents": "none",

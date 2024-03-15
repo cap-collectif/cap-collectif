@@ -1,16 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RenderPrivateAccess /> should render correctly for admin only 1`] = `
-Array [
+<div
+  data-testid="Tooltip"
+  label={
+    <FormattedMessage
+      id="global.draft.only_visible_by_you"
+      values={Object {}}
+    />
+  }
+  placement="top"
+>
   <div
-    aria-describedby="id-g"
     className="sc-bcXGCL guTJTH sc-fXqqsB kJyISH cap-tag"
     id="restricted-access"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
     title=""
   >
     <svg
@@ -25,39 +28,24 @@ Array [
       />
     </svg>
     restrictedaccess
-  </div>,
-  <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 1800,
-      }
-    }
-  />,
-]
+  </div>
+</div>
 `;
 
 exports[`<RenderPrivateAccess /> should render correctly for me only 1`] = `
-Array [
+<div
+  data-testid="Tooltip"
+  label={
+    <FormattedMessage
+      id="global.draft.only_visible_by_you"
+      values={Object {}}
+    />
+  }
+  placement="top"
+>
   <div
-    aria-describedby="id-g"
     className="sc-bcXGCL guTJTH sc-fXqqsB kJyISH cap-tag"
     id="restricted-access"
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    tabIndex={0}
     title=""
   >
     <svg
@@ -72,24 +60,6 @@ Array [
       />
     </svg>
     restrictedaccess
-  </div>,
-  <div
-    className="cap-tooltip-container"
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
-    style={
-      Object {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
-        "position": "fixed",
-        "top": "100%",
-        "zIndex": 1800,
-      }
-    }
-  />,
-]
+  </div>
+</div>
 `;

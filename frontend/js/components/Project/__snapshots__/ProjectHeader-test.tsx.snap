@@ -84,130 +84,85 @@ Array [
         className="sc-bcXGCL bfgqnv projectHeader__coverVideo"
       >
         <div
-          aria-controls="project-header-cover-modal"
-          aria-expanded={false}
-          aria-haspopup="dialog"
-          className="sc-bcXGCL hcddpv"
-          onClick={[Function]}
-          onClickCapture={[Function]}
-          onKeyDown={[Function]}
-          onKeyPressCapture={[Function]}
-          onKeyUp={[Function]}
-          onMouseDown={[Function]}
-          onMouseDownCapture={[Function]}
-          type="button"
-        >
-          <img
-            alt="Media Food"
-            className="sc-breQAM kuBums"
-            loading="lazy"
-            sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-            srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/https://127.0.0.1/media/default/0001/01/providerReference58.jpg 3x,
-         "
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
-          />
-          <svg
-            fill="none"
-            height="48px"
-            style={
-              Object {
-                "left": "50%",
-                "position": "absolute",
-                "top": "50%",
-                "transform": "translate3d(-50%,-50%,0)",
-              }
-            }
-            viewBox="0 0 48 48"
-            width="48px"
-          >
-            <rect
-              fill="#272B30"
-              height="48"
-              opacity="0.6"
-              rx="24"
-              width="48"
-            />
-            <path
-              d="M33 22.2679C34.3333 23.0377 34.3333 24.9623 33 25.7321L21 32.6603C19.6667 33.4301 18 32.4678 18 30.9282V17.0718C18 15.5322 19.6667 14.5699 21 15.3397L33 22.2679Z"
-              fill="white"
-            />
-          </svg>
-        </div>
-        <div
-          aria-label="project-header-video-modal"
-          aria-modal={true}
-          data-dialog={true}
-          hidden={true}
-          id="project-header-cover-modal"
-          onAnimationEnd={[Function]}
-          onBlur={[Function]}
-          onKeyDown={[Function]}
-          onTransitionEnd={[Function]}
-          role="dialog"
-          style={
-            Object {
-              "display": "none",
-            }
+          ariaLabel="project-header-video-modal"
+          baseId="project-header-cover-modal"
+          data-testid="Modal"
+          disclosure={
+            <Box
+              height="100%"
+              maxHeight="315px"
+              minHeight="270px"
+              position="relative"
+              width="100%"
+            >
+              <Image
+                alt="Media Food"
+                height="100%"
+                minHeight="270px"
+                src="https://127.0.0.1/media/default/0001/01/providerReference58.jpg"
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                width={
+                  Array [
+                    "100%",
+                    "405px",
+                  ]
+                }
+              />
+              <Play />
+            </Box>
           }
-          tabIndex={-1}
-        />
+          fullSizeOnMobile={true}
+          height="60%"
+          size="md"
+          width="60%"
+        >
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={true}
+            frameBorder="0"
+            height="100%"
+            src="<mock-value-for-field-\\"video\\">"
+            title="Video player"
+            width="100%"
+          />
+        </div>
       </div>
       <div
         className="sc-bcXGCL bHDScw"
       >
         <div
-          aria-describedby="id-g"
-          className="sc-bcXGCL guTJTH sc-fXqqsB gHWJqw cap-tag"
-          id="restricted-access"
-          onBlur={[Function]}
-          onFocus={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          tabIndex={0}
-          title=""
-        >
-          <svg
-            className="sc-bcXGCL sc-eJDTud cKTLIj hEjMCZ cap-icon"
-            fill="none"
-            viewBox="0 0 10 12"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
-              fill="currentColor"
+          data-testid="Tooltip"
+          label={
+            <FormattedMessage
+              id="only-visible-by-administrators"
+              values={Object {}}
             />
-          </svg>
-          restrictedaccess
-        </div>
-        <div
-          className="cap-tooltip-container"
-          hidden={true}
-          id="id-g"
-          onAnimationEnd={[Function]}
-          onTransitionEnd={[Function]}
-          role="tooltip"
-          style={
-            Object {
-              "display": "none",
-              "left": "100%",
-              "pointerEvents": "none",
-              "position": "fixed",
-              "top": "100%",
-              "zIndex": 1800,
-            }
           }
-        />
+          placement="top"
+        >
+          <div
+            className="sc-bcXGCL guTJTH sc-fXqqsB gHWJqw cap-tag"
+            id="restricted-access"
+            title=""
+          >
+            <svg
+              className="sc-bcXGCL sc-eJDTud cKTLIj hEjMCZ cap-icon"
+              fill="none"
+              viewBox="0 0 10 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+                fill="currentColor"
+              />
+            </svg>
+            restrictedaccess
+          </div>
+        </div>
       </div>
     </div>
   </div>,

@@ -60,7 +60,8 @@ const ProposalMapLoaderPane = ({ hasError, retry }: Props): null => {
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-loader')
-        ReactDOM.render(Pane(hasError, retry, isOffline, intl), div)
+        const root = ReactDOM.createRoot(div)
+        root.render(Pane(hasError, retry, isOffline, intl), div)
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation)
         return div
       },

@@ -50,7 +50,8 @@ const ProposalMapOutOfAreaPane = ({ content }: Props): null => {
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-out-of-area')
-        ReactDOM.render(Pane(content), div)
+        const root = ReactDOM.createRoot(div)
+        root.render(Pane(content), div)
         L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation)
         return div
       },

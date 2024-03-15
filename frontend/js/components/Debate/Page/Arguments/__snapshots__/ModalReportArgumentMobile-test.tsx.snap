@@ -21,14 +21,9 @@ Array [
     class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    aria-label="global.report.submit"
-    aria-modal="true"
-    data-dialog="true"
-    hidden=""
-    id="id-g"
-    role="dialog"
-    style="display:none"
-    tabindex="-1"
+    arialabel="global.report.submit"
+    data-testid="Modal"
+    variantsize="xl"
   />,
 ]
 `;
@@ -54,152 +49,9 @@ Array [
     class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    aria-label="global.report.submit"
-    aria-modal="true"
-    data-dialog="true"
-    id="id-g"
-    role="dialog"
-    tabindex="-1"
-  >
-    <div
-      data-testid="AnimatePresence"
-    >
-      <div
-        class="sc-bcXGCL hmVjey sc-gsGkXq cap-modal__overlay"
-      >
-        <div
-          class="sc-bcXGCL fyQeUE sc-bWOFNj cap-modal"
-        >
-          <header
-            class="sc-bcXGCL gcFVlf cap-modal__header"
-          >
-            <div
-              class="sc-bcXGCL jqamMl"
-            >
-              <h4
-                class="sc-bcXGCL dZaIVn cap-heading"
-                style="margin-left:0;margin-top:0"
-              >
-                global.modal.report.title
-              </h4>
-            </div>
-          </header>
-          <main
-            class="sc-bcXGCL bujCIP cap-modal__body"
-          >
-            <form
-              id="report-form"
-            >
-              <div
-                class="form-group"
-              >
-                <label
-                  class="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
-                  for="reportType"
-                  id="label-reportType"
-                  type="label"
-                >
-                  global.modal.report.form.status
-                </label>
-                <span
-                  class="visible-print-block help-block"
-                >
-                  one-possible-answer
-                </span>
-                <select
-                  aria-describedby="label-reportType "
-                  aria-invalid="false"
-                  class="form-control"
-                  id="reportType"
-                  name="status"
-                >
-                  <option
-                    value="-1"
-                  >
-                    global.select
-                  </option>
-                  <option
-                    value="1"
-                  >
-                    reporting.status.offending
-                  </option>
-                  <option
-                    value="2"
-                  >
-                    reporting.status.spam
-                  </option>
-                  <option
-                    value="3"
-                  >
-                    reporting.status.error
-                  </option>
-                  <option
-                    value="4"
-                  >
-                    reporting.status.sexual
-                  </option>
-                  <option
-                    value="5"
-                  >
-                    reporting.status.off_topic
-                  </option>
-                </select>
-              </div>
-              <div
-                class="form-group"
-              >
-                <label
-                  class="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
-                  for="reportBody"
-                  id="label-reportBody"
-                  type="label"
-                >
-                  global.modal.report.form.body
-                </label>
-                <textarea
-                  aria-describedby="label-reportBody "
-                  aria-invalid="false"
-                  class="form-control"
-                  id="reportBody"
-                  name="body"
-                  type="textarea"
-                />
-                <div
-                  class="Notepad__Container-imViwV dJKVKi visible-print-block"
-                >
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-            </form>
-          </main>
-          <footer
-            class="sc-bcXGCL gsaGlp cap-modal__footer"
-          >
-            <button
-              class="sc-bcXGCL sc-laZSpB hoYNlv fMAAkN cap-button"
-              style="margin-left:0;margin-top:0"
-              type="button"
-            >
-              global.report.submit
-            </button>
-          </footer>
-        </div>
-      </div>
-    </div>
-  </div>,
+    arialabel="global.report.submit"
+    data-testid="Modal"
+    variantsize="xl"
+  />,
 ]
 `;

@@ -76,17 +76,17 @@ describe('<ProposalDetailLikersModal />', () => {
       likers: [],
     },
   }
-  it('should render a formatted message when one liker', () => {
+  it('should render a formatted message when one liker', async () => {
     const wrapper = shallow(<ProposalDetailLikersModal {...likerProps} />)
-    expect(wrapper).toMatchSnapshot()
+    await expect(wrapper).toMatchSnapshot()
   })
-  it('should render a formatted message when several liker', () => {
+  it('should render a formatted message when several liker', async () => {
     const wrapper = shallow(<ProposalDetailLikersModal {...likersProps} />)
-    expect(wrapper).toMatchSnapshot()
+    await expect(wrapper).toMatchSnapshot()
   })
-  it('should render nothing when no likers', () => {
+  it('should render nothing when no likers', async () => {
     const wrapper = shallow(<ProposalDetailLikersModal {...props} />)
-    expect(wrapper.children()).toHaveLength(0)
-    expect(wrapper).toMatchSnapshot()
+    await expect(wrapper.children()).toHaveLength(0)
+    await expect(wrapper).toMatchSnapshot()
   })
 })

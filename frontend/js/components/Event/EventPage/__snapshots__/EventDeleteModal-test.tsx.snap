@@ -20,39 +20,26 @@ Array [
   <div
     className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
-  <button
-    aria-controls="id-g"
-    aria-expanded={false}
-    aria-haspopup="dialog"
-    className="sc-bcXGCL sc-laZSpB eUSbYq eQvKto cap-button"
-    id="btn-delete-event"
-    onClick={[Function]}
-    onClickCapture={[Function]}
-    onKeyDown={[Function]}
-    onKeyPressCapture={[Function]}
-    onKeyUp={[Function]}
-    onMouseDown={[Function]}
-    onMouseDownCapture={[Function]}
-    type="button"
-  >
-    global.delete
-  </button>,
   <div
-    aria-modal={true}
-    data-dialog={true}
-    hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    role="dialog"
-    style={
-      Object {
-        "display": "none",
-      }
+    data-testid="Modal"
+    disclosure={
+      <Button
+        id="btn-delete-event"
+        justifyContent="center"
+        variant="secondary"
+        variantColor="danger"
+        variantSize="big"
+        width={
+          Array [
+            "100%",
+            "auto",
+          ]
+        }
+      >
+        global.delete
+      </Button>
     }
-    tabIndex={-1}
+    size="md"
   />,
 ]
 `;

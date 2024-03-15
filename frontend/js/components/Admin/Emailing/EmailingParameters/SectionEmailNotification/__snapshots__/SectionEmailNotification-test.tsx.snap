@@ -150,9 +150,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
                             "whiteSpace": "pre",
                           }
                         }
-                      >
-                        
-                      </div>
+                      />
                     </div>
                   </div>
                 </div>

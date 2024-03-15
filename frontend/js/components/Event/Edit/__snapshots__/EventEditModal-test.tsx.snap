@@ -8,15 +8,15 @@ exports[`<EventEditModal /> it renders correctly 1`] = `
   size="xl"
 >
   <ResetCss>
-    <Modal.Header>
+    <Component>
       <Heading
         as="h4"
       >
         edit-event
       </Heading>
-    </Modal.Header>
+    </Component>
   </ResetCss>
-  <Modal.Body>
+  <Component>
     <EventCreateModal__EventFormInModal
       event={
         Object {
@@ -35,8 +35,8 @@ exports[`<EventEditModal /> it renders correctly 1`] = `
         }
       }
     />
-  </Modal.Body>
-  <Modal.Footer>
+  </Component>
+  <Component>
     <Flex>
       <Button
         mr={2}
@@ -60,7 +60,7 @@ exports[`<EventEditModal /> it renders correctly 1`] = `
         global.submit
       </Button>
     </Flex>
-  </Modal.Footer>
+  </Component>
 </Modal>
 `;
 
@@ -72,15 +72,15 @@ exports[`<EventEditModal /> it renders correctly with participants 1`] = `
   size="xl"
 >
   <ResetCss>
-    <Modal.Header>
+    <Component>
       <Heading
         as="h4"
       >
         edit-event
       </Heading>
-    </Modal.Header>
+    </Component>
   </ResetCss>
-  <Modal.Body>
+  <Component>
     <EventCreateModal__EventFormInModal
       event={
         Object {
@@ -99,8 +99,8 @@ exports[`<EventEditModal /> it renders correctly with participants 1`] = `
         }
       }
     />
-  </Modal.Body>
-  <Modal.Footer>
+  </Component>
+  <Component>
     <EventEditModal__NotifyInfoMessage>
       event-modification-notification-to-members
     </EventEditModal__NotifyInfoMessage>
@@ -127,6 +127,6 @@ exports[`<EventEditModal /> it renders correctly with participants 1`] = `
         global.submit
       </Button>
     </Flex>
-  </Modal.Footer>
+  </Component>
 </Modal>
 `;

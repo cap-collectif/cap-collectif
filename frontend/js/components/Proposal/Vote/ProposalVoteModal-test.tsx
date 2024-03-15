@@ -167,6 +167,7 @@ describe('<ProposalVoteModal />', () => {
   beforeEach(() => {
     addsSupportForPortals()
     environment = createMockEnvironment()
+    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
 
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ProposalVoteModalTestQuery>(query, {
@@ -190,8 +191,6 @@ describe('<ProposalVoteModal />', () => {
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
-
-    environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
   })
   it('should render correctly', () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent />)

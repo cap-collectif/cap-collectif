@@ -147,8 +147,9 @@
           {% endblock fetcher_function_body %}
         }
 
-      ReactDOM.render(
-        React.createElement(GraphiQL, {
+        const container = document.getElementById('graphiql-render');
+        const root = createRoot(container);
+        root.render( React.createElement(GraphiQL, {
           fetcher: graphQLFetcher,
           query: parameters.query,
           variables: parameters.variables,
@@ -156,10 +157,8 @@
           onEditQuery: onEditQuery,
           onEditVariables: onEditVariables,
           onEditOperationName: onEditOperationName
-        }),
-        document.getElementById('graphiql-render')
-      )
-      document.getElementsByClassName('variable-editor')[0].style.marginBottom = "85px";
+        }));
+        document.getElementsByClassName('variable-editor')[0].style.marginBottom = "85px";
     </script>
   {% endblock body_script %}
 {% endblock body %}

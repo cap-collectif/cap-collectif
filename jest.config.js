@@ -32,6 +32,10 @@ module.exports = {
   testRegex: ['\\-test.ts$', '\\-test.tsx$'],
   setupFilesAfterEnv: ['<rootDir>/jest-setup.tsx'],
   snapshotSerializers: ['enzyme-to-json/serializer'],
+  snapshotFormat: {
+    escapeString: true,
+    printBasicPrototype: true,
+  },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
@@ -44,4 +48,4 @@ module.exports = {
       babelConfig: true,
     },
   },
-};
+}
