@@ -62,6 +62,7 @@ export type FormValues = {
       lng: number
     } | null
     zoomMap?: string | null
+    canContact?: boolean | null | undefined
   }
   stepDurationType?: {
     labels: Array<string>
@@ -135,6 +136,7 @@ const SELECTION_QUERY = graphql`
           isMapViewEnabled
           nbrOfMessagesSent
           usingAddress
+          canContact
         }
         project {
           id
@@ -213,6 +215,7 @@ export const MainViewEnum: Record<MainView, MainView> = {
   GRID: 'GRID',
   LIST: 'LIST',
   MAP: 'MAP',
+  '%future added value': '%future added value',
 } as const
 
 const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage }) => {
@@ -220,7 +223,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
   const query = useLazyLoadQuery<SelectStepFormQuery>(SELECTION_QUERY, {
     stepId,
   })
-  const { setBreadCrumbItems, setSaving: triggerNavBarSaving } = useNavBarContext()
+  const { setBreadCrumbItems } = useNavBarContext()
   const { step, availableLocales, siteColors } = query
   const bgColor = siteColors.find(elem => elem.keyname === 'color.btn.primary.bg').value
   const project = step?.project
@@ -296,26 +299,26 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           defaultSort: values.defaultSort,
           votesHelpText: values.votesHelpText,
           votesMin: values.votesMin,
-          votesLimit: parseInt(values.votesLimit),
+          votesLimit: parseInt(String(values.votesLimit)),
           votesRanking: values.votesRanking ?? false,
-          voteThreshold: parseInt(values.voteThreshold),
+          voteThreshold: parseInt(String(values.voteThreshold)),
           isProposalSmsVoteEnabled: values.isProposalSmsVoteEnabled,
-          proposalArchivedTime: parseInt(values.proposalArchivedTime),
+          proposalArchivedTime: parseInt(String(values.proposalArchivedTime)),
           proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
-          budget: parseInt(values.budget),
+          budget: parseInt(String(values.budget)),
           publishedVoteDate: values.publishedVoteDate,
           voteType: values.voteType,
           secretBallot: values.secretBallot,
           ...getRequirementsInput(values),
         }
 
-        const UpdateSelectionStepMutationResponse = await UpdateSelectionStepMutation.commit({
+        const UpdateSelectionStepMutation$data = await UpdateSelectionStepMutation.commit({
           // @ts-ignore
           input: StepInput,
         })
 
-        if (!UpdateSelectionStepMutationResponse.updateSelectionStep) {
+        if (!UpdateSelectionStepMutation$data.updateSelectionStep) {
           return mutationErrorToast(intl)
         }
         toast({
@@ -417,6 +420,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                   name="startAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>
@@ -431,6 +435,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                   name="endAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>

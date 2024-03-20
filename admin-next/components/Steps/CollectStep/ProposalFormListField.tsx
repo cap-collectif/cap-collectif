@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { fetchQuery, graphql, useFragment } from 'react-relay'
+import { graphql, useFragment } from 'react-relay'
 import { environment } from '@utils/relay-environement'
 import { ProposalFormListFieldQuery, ProposalFormListFieldQuery$data } from '@relay/ProposalFormListFieldQuery.graphql'
 import { FormLabel } from '@cap-collectif/ui'
@@ -9,6 +9,7 @@ import { useIntl } from 'react-intl'
 import { ProposalFormListField_proposalForm$key } from '../../../__generated__/ProposalFormListField_proposalForm.graphql'
 import { ProposalFormListField_query$key } from '../../../__generated__/ProposalFormListField_query.graphql'
 import { formatQuestions } from '../QuestionnaireStep/utils'
+import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
 
 type ProposalFormListFieldValue = {
   label: string
@@ -277,7 +278,7 @@ const PROPOSAL_FORMS_QUERY = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
 const PROPOSAL_FORM_FRAGMENT = graphql`
   fragment ProposalFormListField_proposalForm on ProposalForm {
@@ -292,7 +293,7 @@ const QUERY_FRAGMENT = graphql`
     }
   }
 `
-
+// @ts-expect-error relay lookup is hard, to improve
 const formatProposalListData = (proposalForms: ProposalFormListFieldQuery$data['proposalForms'][number]) => {
   if (!proposalForms) return []
   if (proposalForms) {
@@ -317,7 +318,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
 
   const [proposalForms, setProposalForms] =
     // @ts-ignore
-    React.useState<ProposalFormListFieldQueryResponse['proposalForms']>(null)
+    React.useState<ProposalFormListFieldQuery$data['proposalForms']>(null)
   const loadOptions = async (search: string): Promise<any[]> => {
     const proposalFormsData = await fetchQuery<ProposalFormListFieldQuery>(environment, PROPOSAL_FORMS_QUERY, {
       query: search,
@@ -413,6 +414,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         onChange={selected => {
           onProposalFormSelect(selected)
         }}
+        // @ts-expect-error MAJ DS Props
         menuPortalTarget={undefined}
       />
     </FormControl>

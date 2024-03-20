@@ -1,27 +1,26 @@
-import { graphql } from 'react-relay';
-import { RecordSourceSelectorProxy } from 'relay-runtime';
-import { environment } from 'utils/relay-environement';
-import commitMutation from './commitMutation';
+import { graphql } from 'react-relay'
+import { RecordSourceSelectorProxy } from 'relay-runtime'
+import { environment } from 'utils/relay-environement'
+import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
   DeleteProposalFormMutation,
-  DeleteProposalFormMutationResponse,
-  DeleteProposalFormMutationVariables,
-} from '@relay/DeleteProposalFormMutation.graphql';
+  DeleteProposalFormMutation$data,
+  DeleteProposalFormMutation$variables,
+} from '@relay/DeleteProposalFormMutation.graphql'
 
 const mutation = graphql`
-    mutation DeleteProposalFormMutation($input: DeleteProposalFormInput!, $connections: [ID!]!)
-    @raw_response_type
-    {
-        deleteProposalForm(input: $input) {
-            deletedProposalFormId @deleteEdge(connections: $connections)
-        }
+  mutation DeleteProposalFormMutation($input: DeleteProposalFormInput!, $connections: [ID!]!) @raw_response_type {
+    deleteProposalForm(input: $input) {
+      deletedProposalFormId @deleteEdge(connections: $connections)
     }
-`;
+  }
+` as GraphQLTaggedNode
 
 const commit = (
-  variables: DeleteProposalFormMutationVariables,
+  variables: DeleteProposalFormMutation$variables,
   isAdmin: boolean,
-): Promise<DeleteProposalFormMutationResponse> =>
+): Promise<DeleteProposalFormMutation$data> =>
   commitMutation<DeleteProposalFormMutation>(environment, {
     mutation,
     variables,
@@ -31,27 +30,27 @@ const commit = (
       },
     },
     updater: (store: RecordSourceSelectorProxy) => {
-      const payload = store.getRootField('deleteProposalForm');
-      if (!payload) return;
-      const errorCode = payload.getValue('errorCode');
-      if (errorCode) return;
+      const payload = store.getRootField('deleteProposalForm')
+      if (!payload) return
+      const errorCode = payload.getValue('errorCode')
+      if (errorCode) return
 
-      const rootFields = store.getRoot();
-      const viewer = rootFields.getLinkedRecord('viewer');
-      if (!viewer) return;
+      const rootFields = store.getRoot()
+      const viewer = rootFields.getLinkedRecord('viewer')
+      if (!viewer) return
 
-      const organization = viewer.getLinkedRecords('organizations')[0] ?? null;
-      const owner = organization ?? viewer;
+      const organization = viewer.getLinkedRecords('organizations')[0] ?? null
+      const owner = organization ?? viewer
 
       const proposalForms = owner.getLinkedRecord('proposalForms', {
         affiliations: isAdmin ? null : ['OWNER'],
-      });
+      })
 
-      if (!proposalForms) return;
+      if (!proposalForms) return
 
-      const proposalFormsTotalCount = parseInt(String(proposalForms.getValue('totalCount')), 10);
-      proposalForms.setValue(proposalFormsTotalCount - 1, 'totalCount');
+      const proposalFormsTotalCount = parseInt(String(proposalForms.getValue('totalCount')), 10)
+      proposalForms.setValue(proposalFormsTotalCount - 1, 'totalCount')
     },
-  });
+  })
 
-export default { commit };
+export default { commit }

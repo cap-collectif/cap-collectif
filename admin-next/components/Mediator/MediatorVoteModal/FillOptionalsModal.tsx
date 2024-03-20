@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl'
 import { MultiStepModal, Modal, Heading, Button, useMultiStepModal, FormLabel, Box } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import {graphql, useFragment} from "react-relay";
-import {FillOptionalsModal_step$key} from "../../../__generated__/FillOptionalsModal_step.graphql";
+import { graphql, useFragment } from 'react-relay'
+import { FillOptionalsModal_step$key } from '../../../__generated__/FillOptionalsModal_step.graphql'
 
 type FillOptionalsModalProps = {
   step: FillOptionalsModal_step$key
@@ -17,7 +17,7 @@ const STEP_FRAGMENT = graphql`
     requirements {
       edges {
         node {
-          ...on PhoneRequirement {
+          ... on PhoneRequirement {
             __typename
           }
         }
@@ -28,7 +28,7 @@ const STEP_FRAGMENT = graphql`
 
 const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubmit, isNew }) => {
   const intl = useIntl()
-  const step = useFragment(STEP_FRAGMENT, stepRef);
+  const step = useFragment(STEP_FRAGMENT, stepRef)
   const requirements = step.requirements.edges.map(edge => edge.node)
   const { control, formState, handleSubmit } = useFormContext()
   const { goToPreviousStep } = useMultiStepModal()
@@ -47,19 +47,17 @@ const FillOptionalsModal: FC<FillOptionalsModalProps> = ({ step: stepRef, onSubm
             <FormLabel htmlFor="email" label={intl.formatMessage({ id: 'global.email' })} />
             <FieldInput id="email" name="email" control={control} type="email" minLength={2} />
           </FormControl>
-          {
-            requirements.map(requirement => {
-              if (requirement.__typename === 'PhoneRequirement') {
-                return (
-                  <FormControl name="phone" control={control}>
-                    <FormLabel htmlFor="phone" label={intl.formatMessage({ id: 'filter.label_phone' })} />
-                    <FieldInput id="phone" name="phone" control={control} type="tel" />
-                  </FormControl>
-                )
-              }
-              return null;
-            })
-          }
+          {requirements.map(requirement => {
+            if (requirement.__typename === 'PhoneRequirement') {
+              return (
+                <FormControl name="phone" control={control}>
+                  <FormLabel htmlFor="phone" label={intl.formatMessage({ id: 'filter.label_phone' })} />
+                  <FieldInput id="phone" name="phone" control={control} type="tel" />
+                </FormControl>
+              )
+            }
+            return null
+          })}
         </Box>
       </Modal.Body>
       <Modal.Footer>

@@ -73,6 +73,7 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, isC
 
   useEffect(() => {
     if (showLimits && !validationRule) setValue('temporaryQuestion.validationRule.type', { labels: ['NONE'] })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showLimits])
 
   return (

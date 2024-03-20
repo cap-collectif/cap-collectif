@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { fetchQuery, graphql } from 'react-relay'
+import { graphql } from 'react-relay'
 import type {
   QuestionnaireListFieldQuery,
-  QuestionnaireListFieldQueryResponse,
+  QuestionnaireListFieldQuery$data,
 } from '@relay/QuestionnaireListFieldQuery.graphql'
 import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 
 interface QuestionnaireListFieldProps extends Omit<BaseField, 'onChange'>, Omit<FieldSelect, 'type'> {
   questionnaireIdsToNoSearch?: string[]
@@ -18,7 +19,11 @@ type QuestionnaireListFieldValue = {
 }
 
 const getQuestionnaireList = graphql`
-  query QuestionnaireListFieldQuery($term: String, $affiliations: [QuestionnaireAffiliation!], $types: [QuestionnaireType]) {
+  query QuestionnaireListFieldQuery(
+    $term: String
+    $affiliations: [QuestionnaireAffiliation!]
+    $types: [QuestionnaireType]
+  ) {
     viewer {
       questionnaires(query: $term, affiliations: $affiliations, availableOnly: true, types: $types) {
         edges {
@@ -139,11 +144,11 @@ const getQuestionnaireList = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
 const formatQuestionnairesData = (
   // @ts-ignore
-  questionnaires: QuestionnaireListFieldQueryResponse['questionnaireSearch'],
+  questionnaires: QuestionnaireListFieldQuery$data['questionnaireSearch'],
 ) => {
   if (!questionnaires) return []
 
@@ -159,18 +164,12 @@ const formatQuestionnairesData = (
   })
 }
 
-export const QuestionnaireListField: React.FC<QuestionnaireListFieldProps> = ({
-  questionnaireIdsToNoSearch = [],
-  authorOfEvent = false,
-  name,
-  control,
-  ...props
-}) => {
+export const QuestionnaireListField: React.FC<QuestionnaireListFieldProps> = ({ name, control, ...props }) => {
   const loadOptions = async (search: string): Promise<QuestionnaireListFieldValue[]> => {
     const questionnairesData = await fetchQuery<QuestionnaireListFieldQuery>(environment, getQuestionnaireList, {
       term: search,
       affiliations: null,
-      types: ['QUESTIONNAIRE']
+      types: ['QUESTIONNAIRE'],
     }).toPromise()
 
     const questionnairesEdges =

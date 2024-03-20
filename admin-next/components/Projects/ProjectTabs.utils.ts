@@ -1,4 +1,4 @@
-import { ProjectTabs_project } from '@relay/ProjectTabs_project.graphql'
+import { ProjectTabs_project$data } from '@relay/ProjectTabs_project.graphql'
 import { fromGlobalId } from '@utils/fromGlobalId'
 
 const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
@@ -20,8 +20,12 @@ const PROJECT_ROUTE: ProjectRoute = {
   MEDIATOR: '/mediators',
 }
 
-export const getProjectAdminPath = (projectGlobalId: string, type: keyof ProjectRoute, isNewBackOfficeEnabled: boolean = false): string => {
-  const projectId = fromGlobalId(projectGlobalId).id;
+export const getProjectAdminPath = (
+  projectGlobalId: string,
+  type: keyof ProjectRoute,
+  isNewBackOfficeEnabled: boolean = false,
+): string => {
+  const projectId = fromGlobalId(projectGlobalId).id
   switch (type) {
     case 'CONTRIBUTIONS':
       return `${getProjectAdminBaseUrl(projectId)}${PROJECT_ROUTE.CONTRIBUTIONS}`
@@ -57,7 +61,7 @@ export const getContributionsPath = (baseUrl: string, type: string, stepId?: str
   }
 }
 export const getRouteContributionPath = (
-  project: ProjectTabs_project,
+  project: ProjectTabs_project$data,
   baseUrlContributions: string,
   firstCollectStepId?: string,
 ): string => {

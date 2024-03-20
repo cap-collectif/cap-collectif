@@ -1,2 +1,2 @@
-export { CountSection } from './CountSection';
-export type { CountSectionProps } from './CountSection';
+export { CountSection } from './CountSection'
+export type { CountSectionProps } from './CountSection'

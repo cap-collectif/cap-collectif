@@ -1,28 +1,27 @@
-import { graphql } from 'react-relay';
-import { environment } from 'utils/relay-environement';
-import commitMutation from './commitMutation';
+import { graphql } from 'react-relay'
+import { environment } from 'utils/relay-environement'
+import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import {
-    UpdateNewProjectMutation,
-    UpdateNewProjectMutationResponse,
-    UpdateNewProjectMutationVariables,
-} from '@relay/UpdateNewProjectMutation.graphql';
+  UpdateNewProjectMutation,
+  UpdateNewProjectMutation$data,
+  UpdateNewProjectMutation$variables,
+} from '@relay/UpdateNewProjectMutation.graphql'
 
 const mutation = graphql`
-    mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
-        updateNewProject(input: $input) {
-            project {
-                title
-            }
-        }
+  mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
+    updateNewProject(input: $input) {
+      project {
+        title
+      }
     }
-`;
+  }
+` as GraphQLTaggedNode
 
-const commit = (
-    variables: UpdateNewProjectMutationVariables,
-): Promise<UpdateNewProjectMutationResponse> =>
-    commitMutation<UpdateNewProjectMutation>(environment, {
-        mutation,
-        variables,
-    });
+const commit = (variables: UpdateNewProjectMutation$variables): Promise<UpdateNewProjectMutation$data> =>
+  commitMutation<UpdateNewProjectMutation>(environment, {
+    mutation,
+    variables,
+  })
 
-export default { commit };
+export default { commit }

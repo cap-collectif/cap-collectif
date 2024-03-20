@@ -34,9 +34,12 @@ export type ViewerSession = {
   organization: string | null
 }
 
-export type FeatureFlags = {
-  [key in FeatureFlagType]: boolean
-}
+export type FeatureFlags = Omit<
+  {
+    [key in FeatureFlagType]: boolean
+  },
+  '%future added value'
+>
 
 export type IntlType = {
   locale: Locale
@@ -44,3 +47,6 @@ export type IntlType = {
     [key: string]: string
   }
 }
+
+// https://stackoverflow.com/questions/42999983/typescript-removing-readonly-modifier
+export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }

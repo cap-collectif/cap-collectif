@@ -117,7 +117,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
                         input: {
                           locale: formattedLocale,
                         },
-                      }).then(response => {
+                      }).then(() => {
                         setLocaleCookie(formattedLocale)
                         window.location.reload()
                       })

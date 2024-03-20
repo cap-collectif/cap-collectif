@@ -1,11 +1,11 @@
-import React from 'react';
-import {FieldInput, FormControl} from "@cap-collectif/form";
-import {FormLabel} from "@cap-collectif/ui";
-import {StepVisibilityTypeEnum} from "../CollectStep/CollectStepForm";
-import {useIntl} from "react-intl";
-import {useFormContext} from "react-hook-form";
-import {graphql, useFragment} from 'react-relay';
-import {ProposalSettings_step$key} from "../../../__generated__/ProposalSettings_step.graphql";
+import React from 'react'
+import { FieldInput, FormControl } from '@cap-collectif/form'
+import { FormLabel } from '@cap-collectif/ui'
+import { StepVisibilityTypeEnum } from '../CollectStep/CollectStepForm'
+import { useIntl } from 'react-intl'
+import { useFormContext } from 'react-hook-form'
+import { graphql, useFragment } from 'react-relay'
+import { ProposalSettings_step$key } from '../../../__generated__/ProposalSettings_step.graphql'
 
 const STEP_FRAGMENT = graphql`
   fragment ProposalSettings_step on ProposalStep {
@@ -18,17 +18,16 @@ const STEP_FRAGMENT = graphql`
 
 type Props = {
   step: ProposalSettings_step$key
-};
+}
 
-const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
-
-  const step = useFragment(STEP_FRAGMENT, stepRef);
-  const intl = useIntl();
-  const {control} = useFormContext();
+const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
+  const step = useFragment(STEP_FRAGMENT, stepRef)
+  const intl = useIntl()
+  const { control } = useFormContext()
 
   const sortOptions = [
     {
-      label: intl.formatMessage({id: 'global.random'}),
+      label: intl.formatMessage({ id: 'global.random' }),
       value: 'RANDOM',
     },
     {
@@ -78,16 +77,13 @@ const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
   return (
     <>
       <FormControl name="allowAuthorsToAddNews" control={control} mb={6}>
-        <FormLabel
-          htmlFor="allowAuthorsToAddNews"
-          label={intl.formatMessage({id: 'proposal-news-label'})}
-        />
+        <FormLabel htmlFor="allowAuthorsToAddNews" label={intl.formatMessage({ id: 'proposal-news-label' })} />
         <FieldInput id="allowAuthorsToAddNews" name="allowAuthorsToAddNews" control={control} type="checkbox">
-          {intl.formatMessage({id: 'admin.allow.proposal.news'})}
+          {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
         </FieldInput>
       </FormControl>
       <FormControl name="stepVisibilityType" control={control} mb={6}>
-        <FormLabel htmlFor="stepVisibilityType" label={intl.formatMessage({id: 'project-visibility'})}/>
+        <FormLabel htmlFor="stepVisibilityType" label={intl.formatMessage({ id: 'project-visibility' })} />
         <FieldInput
           id="stepVisibilityType"
           name="stepVisibilityType"
@@ -98,7 +94,7 @@ const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
               id: StepVisibilityTypeEnum.PUBLIC,
               label: `${intl.formatMessage({
                 id: 'public',
-              })} - (${intl.formatMessage({id: 'everybody'})})`,
+              })} - (${intl.formatMessage({ id: 'everybody' })})`,
               useIdAsValue: true,
             },
             {
@@ -121,6 +117,7 @@ const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
           })}
         />
         <FieldInput
+          // @ts-expect-error MAJ DS Props
           id="defaultSort"
           name="defaultSort"
           control={control}
@@ -137,6 +134,7 @@ const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
           })}
         />
         <FieldInput
+          // @ts-expect-error MAJ DS Props
           id="defaultStatus"
           name="defaultStatus"
           control={control}
@@ -149,7 +147,7 @@ const ProposalSettings: React.FC<Props> = ({step: stepRef}) => {
         />
       </FormControl>
     </>
-  );
-};
+  )
+}
 
-export default ProposalSettings;
+export default ProposalSettings

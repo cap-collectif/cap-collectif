@@ -22,26 +22,23 @@ import TextEditor from '@components/Form/TextEditor/TextEditor'
 import { useIntl } from 'react-intl'
 import { useFeatureFlag } from '@hooks/useFeatureFlag'
 
-type ProposalStepVoteType = "BUDGET" | "DISABLED" | "SIMPLE"
+type ProposalStepVoteType = 'BUDGET' | 'DISABLED' | 'SIMPLE'
 export interface ProposalStepVoteTabsFormProps {
   formMethods: UseFormReturn<any>
   defaultLocale: string
 }
 
-const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
-                                                                             formMethods,
-                                                                             defaultLocale,
-                                                                           }) => {
+const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ formMethods, defaultLocale }) => {
   const intl = useIntl()
   const { watch, setValue, control } = formMethods
   const votesMinEnabled = useFeatureFlag('votes_min')
 
-  const voteType = watch('voteType');
-  const budget = watch('budget');
-  const voteThreshold = watch('voteThreshold');
-  const secretBallot = watch('secretBallot');
-  const votesMin = watch('votesMin');
-  const votesLimit = watch('votesLimit');
+  const voteType = watch('voteType')
+  const budget = watch('budget')
+  const voteThreshold = watch('voteThreshold')
+  const secretBallot = watch('secretBallot')
+  const votesMin = watch('votesMin')
+  const votesLimit = watch('votesLimit')
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
   const voteThresholdEnabled = voteThreshold !== null
 
@@ -55,13 +52,22 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
       }}
     >
       <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'vote-capitalize' })}>
-        <Tabs.Button id={'SIMPLE' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
+        <Tabs.Button
+          id={'SIMPLE' as ProposalStepVoteType}
+          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
+        >
           {intl.formatMessage({ id: 'step.vote_type.simple' })}
         </Tabs.Button>
-        <Tabs.Button id={'BUDGET' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
+        <Tabs.Button
+          id={'BUDGET' as ProposalStepVoteType}
+          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
+        >
           {intl.formatMessage({ id: 'global.advanced.text' })}
         </Tabs.Button>
-        <Tabs.Button id={'DISABLED' as ProposalStepVoteType} labelSx={{paddingX:0, marginLeft:'auto',marginRight:'auto'}}>
+        <Tabs.Button
+          id={'DISABLED' as ProposalStepVoteType}
+          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
+        >
           {intl.formatMessage({ id: 'action_disable' })}
         </Tabs.Button>
       </Tabs.ButtonList>
@@ -89,7 +95,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     id="budget_switch"
                     checked={budget !== null && budget !== undefined}
                     name="budget"
-                    onChange={event => {
+                    onChange={() => {
                       const toggle = budget !== null && budget !== undefined
                       if (toggle) {
                         setValue('budget', null)
@@ -125,7 +131,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     id="votesMin_switch"
                     checked={voteThresholdEnabled}
                     name="voteThreshold"
-                    onChange={event => {
+                    onChange={() => {
                       if ((voteThreshold ?? 0) > 0) {
                         setValue('voteThreshold', null)
                       } else {
@@ -171,6 +177,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                       </FormControl>
                       <FormControl name="proposalArchivedUnitTime" width="auto" control={control}>
                         <FieldInput
+                          // @ts-expect-error MAJ DS Props
                           id="proposalArchivedUnitTime"
                           name="proposalArchivedUnitTime"
                           control={control}
@@ -199,12 +206,12 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     id="votesMin-votesLimit_switch"
                     checked={voteMinVoteLimitEnabled}
                     name="voteThreshold"
-                    onChange={event => {
+                    onChange={() => {
                       if (voteMinVoteLimitEnabled) {
                         setValue('votesMin', null)
                         setValue('votesLimit', null)
                       } else {
-                        setValue('votesMin',votesMinEnabled ? 1 : null)
+                        setValue('votesMin', votesMinEnabled ? 1 : null)
                         setValue('votesLimit', votesMinEnabled ? 2 : 1)
                       }
                     }}
@@ -262,7 +269,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                     id="secretBallot"
                     checked={secretBallot}
                     name="secretBallot"
-                    onChange={event => {
+                    onChange={() => {
                       if (secretBallot) {
                         setValue('secretBallot', false)
                         setValue('publishedVoteDate', null)
@@ -293,7 +300,14 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({
                             })}
                           </Text>
                         </FormLabel>
-                        <FieldInput id="publishedVoteDate" name="publishedVoteDate" control={control} type="dateHour" dateInputProps={{ isOutsideRange: true }}  />
+                        <FieldInput
+                          id="publishedVoteDate"
+                          name="publishedVoteDate"
+                          control={control}
+                          type="dateHour"
+                          // @ts-expect-error MAJ DS Props
+                          dateInputProps={{ isOutsideRange: true }}
+                        />
                       </FormControl>
                     </Flex>
                   </Flex>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
@@ -74,7 +74,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   }
 
   const { operationType, setOperationType } = useOtherStep()
-  const isEditing = operationType === 'EDIT';
+  const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
@@ -100,6 +100,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   useEffect(() => {
     setBreadCrumbItems(getBreadCrumbItems())
     return () => setBreadCrumbItems([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getInitialValues = (): FormValues => {
@@ -124,7 +125,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   })
 
   const { handleSubmit, formState, control } = formMethods
-  const { isSubmitting, isDirty, isValid } = formState
+  const { isSubmitting, isValid } = formState
   const onSubmit = async (values: FormValues) => {
     const input = {
       ...values,
@@ -209,6 +210,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 name="startAt"
                 control={control}
                 type="dateHour"
+                // @ts-expect-error MAJ DS Props
                 dateInputProps={{ isOutsideRange: true }}
               />
             </FormControl>
@@ -223,6 +225,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 name="endAt"
                 control={control}
                 type="dateHour"
+                // @ts-expect-error MAJ DS Props
                 dateInputProps={{ isOutsideRange: true }}
               />
             </FormControl>
@@ -276,14 +279,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         </FormControl>
 
         <Flex>
-          <Button
-            variantSize="big"
-            variant="primary"
-            type="submit"
-            mr={4}
-            isLoading={isSubmitting}
-            disabled={!isValid}
-          >
+          <Button variantSize="big" variant="primary" type="submit" mr={4} isLoading={isSubmitting} disabled={!isValid}>
             {isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'add-the-step' })}
           </Button>
           <Button

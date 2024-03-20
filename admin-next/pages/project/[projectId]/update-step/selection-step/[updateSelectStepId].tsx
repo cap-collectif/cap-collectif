@@ -5,7 +5,7 @@ import Layout from '@components/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import SelectStepForm from '@components/Steps/SelectStep/SelectStepForm'
 import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
-import {SelectionStepContextProvider} from "../../../../../components/Steps/SelectStep/SelectionStepContext";
+import { SelectionStepContextProvider } from '../../../../../components/Steps/SelectStep/SelectionStepContext'
 
 const UpdateSelectStepWrapper = () => {
   const router = useRouter()

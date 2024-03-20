@@ -46,6 +46,8 @@ export interface CollectStepFormProps {
 type StepVisibiltyTypeUnion = 'PUBLIC' | 'RESTRICTED'
 type EnabledUnion = 'PUBLISHED' | 'DRAFT'
 
+type Questionnaire = { questions: Array<QuestionInput>; questionsWithJumps: Array<any> }
+
 type ProposalFormType = {
   id: string | null
   title: string | null
@@ -112,7 +114,7 @@ type ProposalFormType = {
   canContact: boolean
   nbrOfMessagesSent: number
   proposalInAZoneRequired: boolean
-  questionnaire: { questions: Array<QuestionInput>; questionsWithJumps: Array<any> }
+  questionnaire: Questionnaire
 }
 
 export type FormValues = {
@@ -407,7 +409,7 @@ export const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
   PUBLISHED: 'PUBLISHED',
   DRAFT: 'DRAFT',
 } as const
-export const MainViewEnum: Record<MainView, MainView> = {
+export const MainViewEnum: Omit<Record<MainView, MainView>, '%future added value'> = {
   GRID: 'GRID',
   LIST: 'LIST',
   MAP: 'MAP',
@@ -419,7 +421,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   })
   const intl = useIntl()
   const { setBreadCrumbItems } = useNavBarContext()
-  const { step, availableLocales, viewer, siteColors } = query
+  const { step, availableLocales, siteColors } = query
   const bgColor = siteColors.find(elem => elem.keyname === 'color.btn.primary.bg').value
   const project = step?.project
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
@@ -448,7 +450,6 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
     return breadCrumbItems
   }
   const onSubmit = async (values: FormValues) => {
-    const owner = viewer?.organizations?.[0] ?? viewer
     const proposalFormValues = selectedTab === FormTabsEnum.NEW ? values['form'] : values['form_model']
     const proposalFormUpdateInput = getProposalFormUpdateVariablesInput(proposalFormValues, selectedTab)
 
@@ -482,8 +483,8 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               : [],
             questionsWithJumps: proposalFormUpdateResponse.updateProposalForm?.proposalForm?.questionsWithJumps ?? [],
           }
-          setValue('form.questionnaire', questionnaire)
-          setValue('form_model.questionnaire', questionnaire)
+          setValue('form.questionnaire', questionnaire as Questionnaire)
+          setValue('form_model.questionnaire', questionnaire as Questionnaire)
           toast({
             variant: 'success',
             content: intl.formatMessage({ id: 'admin.update.successful' }),
@@ -517,7 +518,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
     ),
   })
 
-  const { handleSubmit, formState, watch, setValue } = formMethods
+  const { handleSubmit, formState, setValue } = formMethods
   const { isSubmitting, isValid } = formState
 
   return (
@@ -535,18 +536,16 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item
                   id={intl.formatMessage({ id: 'proposal-form' })}
-                  onMouseEnter={e => {
+                  onMouseEnter={() => {
                     setHelpMessage('step.create.proposalForm.helpText')
                   }}
                 >
                   <Accordion.Button>{intl.formatMessage({ id: 'proposal-form' })}</Accordion.Button>
                   <Accordion.Panel>
                     <ProposalFormForm
-                      values={watch('form')}
                       query={query}
                       step={step as ProposalFormForm_step$key}
                       defaultLocale={defaultLocale}
-                      formMethods={formMethods}
                     />
                   </Accordion.Panel>
                 </Accordion.Item>

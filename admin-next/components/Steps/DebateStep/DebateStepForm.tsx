@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   Accordion,
   Box,
@@ -26,7 +26,7 @@ import { UpdateDebateStepInput } from '@relay/UpdateDebateStepMutation.graphql'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { onBack } from '@components/Steps/utils'
-import {useDebateStep} from "./DebateStepContext";
+import { useDebateStep } from './DebateStepContext'
 
 type Props = {
   stepId: string
@@ -123,7 +123,7 @@ const ParticipationTypeEnum: Record<ParticipationTypeUnion, ParticipationTypeUni
   WITHOUT_ACCOUNT: 'WITHOUT_ACCOUNT',
 } as const
 
-const DebateTypeEnum: Record<DebateType, DebateType> = {
+const DebateTypeEnum: Omit<Record<DebateType, DebateType>, '%future added value'> = {
   WYSIWYG: 'WYSIWYG',
   FACE_TO_FACE: 'FACE_TO_FACE',
 } as const
@@ -141,7 +141,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const debate = step?.debate
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
-  const {operationType, setOperationType} = useDebateStep();
+  const { operationType, setOperationType } = useDebateStep()
   const isEditing = operationType === 'EDIT'
 
   const getBreadCrumbItems = () => {
@@ -385,6 +385,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="startAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>
@@ -399,6 +400,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="endAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>

@@ -355,6 +355,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="startAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>
@@ -369,6 +370,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="endAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>

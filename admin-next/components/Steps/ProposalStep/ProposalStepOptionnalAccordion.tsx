@@ -19,7 +19,7 @@ import { graphql, useFragment } from 'react-relay'
 import { ProposalStepOptionnalAccordion_step$key } from '../../../__generated__/ProposalStepOptionnalAccordion_step.graphql'
 import { useEffect } from 'react'
 import { addRequiredInfo } from '../CollectStep/ProposalFormForm.utils'
-import { useCollectStep } from '../CollectStep/CollectStepContext'
+import { FormKeyType } from '../CollectStep/CollectStepContext'
 
 type Props = {
   step: ProposalStepOptionnalAccordion_step$key
@@ -40,7 +40,13 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, defaultLocale, formMethods, isEditing, proposalFormKey = 'form' }) => {
+const ProposalStepOptionnalAccordion: React.FC<Props> = ({
+  step: stepRef,
+  defaultLocale,
+  formMethods,
+  isEditing,
+  proposalFormKey = 'form',
+}) => {
   const intl = useIntl()
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const { watch, setValue, control, setError, clearErrors, formState, trigger } = formMethods
@@ -218,7 +224,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, defaul
                 checked={isMapViewEnabled}
                 onClick={() => {
                   setValue(`${proposalFormKey}.isMapViewEnabled`, !isMapViewEnabled)
-                  addRequiredInfo('usingAddress', setValue, proposalFormKey)
+                  addRequiredInfo('usingAddress', setValue, proposalFormKey as FormKeyType)
                 }}
               />
             </Flex>
@@ -281,6 +287,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, defaul
                     })}
                   />
                   <FieldInput
+                    // @ts-expect-error MAJ DS Props
                     id="zoomMap"
                     menuPortalTarget={undefined}
                     name={`${proposalFormKey}.zoomMap`}
@@ -306,7 +313,8 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, defaul
         }
       </Flex>
 
-      {errors[proposalFormKey]?.isListViewEnabled && (
+      {/** @ts-ignore errors not typed on react-hook-form */}
+      {errors[proposalFormKey]?.isListViewEnabled && ( // @ts-ignore errors not typed on react-hook-form
         <Text color="red.500">{errors[proposalFormKey].isListViewEnabled.message}</Text>
       )}
 
@@ -318,7 +326,6 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, defaul
             name="mainView"
             id="mainView"
             control={control}
-            // @ts-ignore
             checked={mainView}
             choices={getMainViewChoices()}
           />

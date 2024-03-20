@@ -1,14 +1,14 @@
-import TextEditor from "../../Form/TextEditor/TextEditor";
-import * as React from "react";
-import {useIntl} from "react-intl";
+import TextEditor from '../../Form/TextEditor/TextEditor'
+import * as React from 'react'
+import { useIntl } from 'react-intl'
 
 type Props = {
   defaultLocale?: string
   isEditing: boolean
 }
 
-const BodyInput: React.FC<Props> = ({defaultLocale, isEditing}) => {
-  const intl = useIntl();
+const BodyInput: React.FC<Props> = ({ defaultLocale, isEditing }) => {
+  const intl = useIntl()
   return (
     <TextEditor
       name="body"

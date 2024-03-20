@@ -8,7 +8,7 @@ import { getOnlyLanguage } from '@utils/locale-helper'
 import { PageProps } from 'types'
 
 // We use this component to only render when window is available (it's used by our Redux store)
-const SafeHydrate: FC = ({ children }) => {
+const SafeHydrate: FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <div suppressHydrationWarning>
       {typeof window === 'undefined' || typeof document === 'undefined' ? null : children}

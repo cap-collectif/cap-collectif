@@ -2,6 +2,7 @@ import { IntlShape } from 'react-intl'
 import { UseFormSetValue } from 'react-hook-form/dist/types/form'
 import { FormValues } from '@components/Steps/CollectStep/CollectStepForm'
 import { FormKeyType } from './CollectStepContext'
+import { FieldValues } from 'react-hook-form'
 
 export const getDropDownOptions: (values: any, intl: IntlShape) => { label: string; value: string }[] = (
   values,
@@ -57,7 +58,11 @@ export const getDropDownOptions: (values: any, intl: IntlShape) => { label: stri
   return initial
 }
 
-export const deleteRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>, formKey: FormKeyType): void => {
+export const deleteRequiredInfo = (
+  info: string,
+  setValue: UseFormSetValue<FieldValues>,
+  formKey: FormKeyType,
+): void => {
   if (info === 'summary') {
     setValue(`${formKey}.usingSummary`, false)
     setValue(`${formKey}.summaryHelpText`, null)
@@ -87,7 +92,7 @@ export const deleteRequiredInfo = (info: string, setValue: UseFormSetValue<FormV
     setValue(`${formKey}.descriptionMandatory`, false)
   }
 }
-export const addRequiredInfo = (info: string, setValue: UseFormSetValue<FormValues>, formKey: FormKeyType): void => {
+export const addRequiredInfo = (info: string, setValue: UseFormSetValue<FieldValues>, formKey: FormKeyType): void => {
   if (info === 'usingSummary') {
     setValue(`${formKey}.usingSummary`, true)
     setValue(`${formKey}.summaryHelpText`, null)

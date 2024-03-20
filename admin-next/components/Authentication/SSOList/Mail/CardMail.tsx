@@ -1,25 +1,25 @@
-import type { FC } from 'react';
-import CardSSO from '@ui/CardSSO/CardSSO';
-import { CapUIIcon, CapUIIconSize, Icon, Switch, Text } from '@cap-collectif/ui';
-import { useIntl } from 'react-intl';
+import type { FC } from 'react'
+import CardSSO from '@ui/CardSSO/CardSSO'
+import { CapUIIcon, CapUIIconSize, Icon, Switch, Text } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
 
 const CardMail: FC = () => {
-    const intl = useIntl();
+  const intl = useIntl()
 
-    return (
-        <CardSSO>
-            <CardSSO.Header>
-                <Icon size={CapUIIconSize.Xl} name={CapUIIcon.Envelope} color="gray.500" />
-            </CardSSO.Header>
-            <CardSSO.Body>
-                <Text as="label" color="gray.900" fontSize={3} htmlFor="mail" opacity={0.3}>
-                    {intl.formatMessage({ id: 'global.email' })}
-                </Text>
+  return (
+    <CardSSO>
+      <CardSSO.Header>
+        <Icon size={CapUIIconSize.Xl} name={CapUIIcon.Envelope} color="gray.500" />
+      </CardSSO.Header>
+      <CardSSO.Body>
+        <Text as="label" color="gray.900" fontSize={3} htmlFor="mail" opacity={0.3}>
+          {intl.formatMessage({ id: 'global.email' })}
+        </Text>
 
-                <Switch id="mail" checked disabled />
-            </CardSSO.Body>
-        </CardSSO>
-    );
-};
+        <Switch id="mail" checked disabled />
+      </CardSSO.Body>
+    </CardSSO>
+  )
+}
 
-export default CardMail;
+export default CardMail

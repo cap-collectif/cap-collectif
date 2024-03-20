@@ -1,12 +1,12 @@
-import useUrlState from "../../../../frontend/js/utils/hooks/useUrlState";
-import * as React from "react";
+import useUrlState from '../../../../frontend/js/utils/hooks/useUrlState'
+import * as React from 'react'
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string
 }
 
 type Context = {
-  operationType: string,
+  operationType: string
   setOperationType: (value: string) => void
 } | null
 
@@ -23,12 +23,11 @@ export const useDebateStep = () => {
 }
 
 export const DebateStepContextProvider = ({ children }: Props) => {
-
-  const [operationType, setOperationType] = useUrlState('operationType', 'EDIT');
+  const [operationType, setOperationType] = useUrlState('operationType', 'EDIT')
 
   const contextValue: Context = {
     operationType,
-    setOperationType
+    setOperationType,
   }
 
   return <DebateStepContext.Provider value={contextValue}>{children}</DebateStepContext.Provider>

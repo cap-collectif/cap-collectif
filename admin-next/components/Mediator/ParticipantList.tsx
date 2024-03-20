@@ -10,7 +10,7 @@ import TablePlaceholder from '@ui/Table/TablePlaceholder'
 import { MediatorVoteModalEdit, ParticipantInfos } from './MediatorVoteModal/MediatorVoteModal'
 import ModalSkeleton from './MediatorVoteModal/ModalSkeleton'
 import { useLayoutContext } from '@components/Layout/Layout.context'
-import DeleteParticipantModal from "./DeleteParticipantModal";
+import DeleteParticipantModal from './DeleteParticipantModal'
 
 export const ParticipantListFragment = graphql`
   fragment ParticipantList_mediator on Mediator
@@ -150,18 +150,18 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
           {data?.participants?.edges.map(({ node: participant }) => {
             const isAccounted = participant.votes?.edges?.[0]?.node.isAccounted
             const hasEmail = !!participant.email
-            const hasName = participant.firstname || participant.lastname;
-            const fullname = `${participant.firstname || ''} ${participant.lastname || ''}`;
+            const hasName = participant.firstname || participant.lastname
+            const fullname = `${participant.firstname || ''} ${participant.lastname || ''}`
             return (
               <Table.Tr key={participant.id} rowId={participant.id} data-cy="participant-item">
                 <Table.Td>
                   <Text
-                    sx={{cursor: 'pointer'}}
+                    sx={{ cursor: 'pointer' }}
                     onClick={() => {
                       setSelectedParticipant({ id: participant.id, token: participant.token })
                     }}
                   >
-                    {hasName ? fullname : intl.formatMessage({id: 'anonymous.participant'})}
+                    {hasName ? fullname : intl.formatMessage({ id: 'anonymous.participant' })}
                   </Text>
                 </Table.Td>
                 <Table.Td>
@@ -189,11 +189,13 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
                       setSelectedParticipant({ id: participant.id, token: participant.token })
                     }}
                   />
-                  {
-                    (!isAccounted && !hasEmail) && (
-                      <DeleteParticipantModal participant={participant} mediator={data} connection={data.participants.__id}/>
-                    )
-                  }
+                  {!isAccounted && !hasEmail && (
+                    <DeleteParticipantModal
+                      participant={participant}
+                      mediator={data}
+                      connection={data.participants.__id}
+                    />
+                  )}
                 </Table.Td>
               </Table.Tr>
             )

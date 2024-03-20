@@ -3083,10 +3083,10 @@
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.9.0.tgz#0a961233eaa1665a6dc43744df28f201474664c8"
-  integrity sha512-Qribs+YaPovpbRLgOAnODs28yzDT6S3HO8L4L2ZeFDGwrDlIag0hSaSgs/QBUWQCwriOFkSSZY5F5pvzh8/MhQ==
+"@cap-collectif/ui@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.9.2.tgz#8a931527fed5a7201c82ec0c5fac2ed98c526a08"
+  integrity sha512-gFFxWIU7+z2PhNRuZDNM6vmJuPDcxIxkJDY5JJm6dXi/nlgxV5sm+Czrr4Ka8zfUFDNZK7+9x9bNtji589JakQ==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -6774,16 +6774,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*":
-  version "17.0.14"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.14.tgz#f0629761ca02945c4e8fea99b8177f4c5c61fb0f"
-  integrity sha512-0WwKHUbWuQWOce61UexYuWTGuGY/8JvtUe/dtQ6lR4sZ3UiylHotJeWpf3ArP9+DSGUoLY3wbU59VyMrJps5VQ==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
-
-"@types/react@^18.2.0":
+"@types/react@*", "@types/react@^18.2.0":
   version "18.2.48"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.48.tgz#11df5664642d0bd879c1f58bc1d37205b064e8f1"
   integrity sha512-qboRCl6Ie70DQQG9hhNREz81jqC1cs9EVNcjQ1AU+jH6NFfSAhVVbrrY/+nSF+Bsk4AOwm9Qa61InvMCyV+H3w==
@@ -13062,6 +13053,15 @@ fragment-cache@^0.2.1:
   integrity sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
   dependencies:
     map-cache "^0.2.2"
+
+framer-motion@^11.0.10:
+  version "11.0.10"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-11.0.10.tgz#66a2ca6a4809fd61e8f969cbc30f561980858e9e"
+  integrity sha512-aaImib9FQlfno2yiZAdkvN6zLXLr8a9uGsGFlQO64hSm8NoCeiUng2//5ok7RHCW2ufzT74uuPsmWzUsrHPYDQ==
+  dependencies:
+    tslib "^2.4.0"
+  optionalDependencies:
+    "@emotion/is-prop-valid" "^0.8.2"
 
 framer-motion@^4.1.13, framer-motion@^4.1.17:
   version "4.1.17"

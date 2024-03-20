@@ -1,6 +1,6 @@
-import type { FC } from 'react';
-import { Skeleton } from '@cap-collectif/ui';
+import type { FC } from 'react'
+import { Skeleton } from '@cap-collectif/ui'
 
-const ViewChartPlaceholder: FC = () => <Skeleton.Text size="lg" width="100%" />;
+const ViewChartPlaceholder: FC = () => <Skeleton.Text size="lg" width="100%" />
 
-export default ViewChartPlaceholder;
+export default ViewChartPlaceholder

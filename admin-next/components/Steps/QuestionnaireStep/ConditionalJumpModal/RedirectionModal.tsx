@@ -4,7 +4,6 @@ import { Modal, Button, ButtonGroup, Heading, CapUIModalSize, FormLabel, Box } f
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 import { QuestionIds } from '../utils'
-import { isUuid } from '@utils/uuid'
 
 type Props = { onSuccess: () => void; onClose: () => void; isNewJump?: boolean; fieldName: string }
 

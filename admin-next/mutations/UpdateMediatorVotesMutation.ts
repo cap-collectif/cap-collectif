@@ -1,10 +1,11 @@
-import { ConnectionHandler, graphql } from 'react-relay'
+import { graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
   UpdateMediatorVotesMutation,
-  UpdateMediatorVotesMutationResponse,
-  UpdateMediatorVotesMutationVariables,
+  UpdateMediatorVotesMutation$data,
+  UpdateMediatorVotesMutation$variables,
 } from '@relay/UpdateMediatorVotesMutation.graphql'
 
 const mutation = graphql`
@@ -22,14 +23,14 @@ const mutation = graphql`
             node {
               id
               isAccounted
-              ...on ProposalVote {
-                  proposal {
-                      id
-                      title
-                      media {
-                          url
-                      }
+              ... on ProposalVote {
+                proposal {
+                  id
+                  title
+                  media {
+                    url
                   }
+                }
               }
             }
           }
@@ -37,9 +38,9 @@ const mutation = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
-const commit = (variables: UpdateMediatorVotesMutationVariables): Promise<UpdateMediatorVotesMutationResponse> =>
+const commit = (variables: UpdateMediatorVotesMutation$variables): Promise<UpdateMediatorVotesMutation$data> =>
   commitMutation<UpdateMediatorVotesMutation>(environment, {
     mutation,
     variables,

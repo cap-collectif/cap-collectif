@@ -65,6 +65,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
             {isAdmin ? (
               <FormControl name="authors" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'global.author' })} />
+                {/** @ts-expect-error MAJ DS Props */}
                 <UserListField name="authors" control={control} isMulti id="authors" menuPortalTarget={undefined} />
               </FormControl>
             ) : null}

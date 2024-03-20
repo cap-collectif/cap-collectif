@@ -1,25 +1,23 @@
-import React from 'react';
-import {Skeleton, Flex, Box} from "@cap-collectif/ui";
+import React from 'react'
+import { Skeleton, Flex } from '@cap-collectif/ui'
 
-type Props = {
+type Props = {}
 
-};
+const RequirementsTabsSkeleton: React.FC<Props> = () => {
+  return (
+    <Flex direction="column" spacing={4}>
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+      <Skeleton.Text size="lg" />
+    </Flex>
+  )
+}
 
-const RequirementsTabsSkeleton: React.FC<Props> = (props) => {
-    return (
-        <Flex direction="column" spacing={4}>
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-            <Skeleton.Text size="lg" />
-        </Flex>
-    );
-};
-
-export default RequirementsTabsSkeleton;
+export default RequirementsTabsSkeleton

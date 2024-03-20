@@ -5,9 +5,10 @@
         "react/no-unescaped-entities": "off",
         "jsx-a11y/accessible-emoji": "warn",
         "react-hooks/rules-of-hooks": "warn",
-        "@next/next/no-img-element": "warn",
+        "@next/next/no-img-element": "off",
         "@next/next/no-sync-scripts": "warn",
-        "@typescript-eslint/no-unused-vars": "off",
-        "prefer-destructuring": "off"
+        "prefer-destructuring": "off",
+        "import/no-anonymous-default-export": "off",
+        "relay/no-future-added-value": "off"
     }    
 }

@@ -1,7 +1,7 @@
+import { CollectStepFormQuery$data } from '@relay/CollectStepFormQuery.graphql'
 import { FormTabs, FormTabsEnum } from './CollectStepContext'
 import { EnabledEnum, FormValues, StepVisibilityTypeEnum } from '@components/Steps/CollectStep/CollectStepForm'
-import { CollectStepFormQueryResponse } from '@relay/CollectStepFormQuery.graphql'
-import { UpdateProposalFormMutationVariables } from '@relay/UpdateProposalFormMutation.graphql'
+import { UpdateProposalFormMutation$variables } from '@relay/UpdateProposalFormMutation.graphql'
 import { getStatusesInitialValues, getStatusesInputList } from '@components/Steps/CollectStep/CollectStepStatusesList'
 import { getDefaultRequirements, getRequirementsInput } from '@components/Requirements/Requirements'
 import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFormAdminCategories'
@@ -9,14 +9,13 @@ import { StepDurationTypeEnum } from '../Shared/StepDurationInput'
 import { formatQuestions, formatQuestionsInput } from '../QuestionnaireStep/utils'
 
 export const getInitialValues = (
-  step: CollectStepFormQueryResponse['step'],
+  step: CollectStepFormQuery$data['step'],
   stepId: string,
   bgColor: string,
 ): FormValues => {
   const stepDurationType = step?.timeless ? [StepDurationTypeEnum.TIMELESS] : [StepDurationTypeEnum.CUSTOM]
   const stepVisibilityType = step?.private ? [StepVisibilityTypeEnum.RESTRICTED] : [StepVisibilityTypeEnum.PUBLIC]
   const stepEnabledType = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
-
   return {
     requirementsReason: '',
     id: stepId,
@@ -85,6 +84,7 @@ export const getInitialValues = (
       proposalInAZoneRequired: step?.form?.proposalInAZoneRequired || false,
       questionnaire: {
         questions: step?.form.questions ? formatQuestions({ questions: step.form.questions }) : [],
+        // @ts-ignore
         questionsWithJumps: step.form.questionsWithJumps ?? [],
       },
     },
@@ -100,8 +100,8 @@ export const getInitialValues = (
     isProposalSmsVoteEnabled: step.isProposalSmsVoteEnabled,
     proposalArchivedTime: step.proposalArchivedTime,
     proposalArchivedUnitTime: step.proposalArchivedUnitTime,
+    // @ts-ignore relay lookup
     requirements: getDefaultRequirements(step),
-    // @ts-ignore
     statuses: getStatusesInitialValues(step?.statuses, bgColor),
     defaultStatus: step?.defaultStatus ? step?.defaultStatus.id : null,
     allowAuthorsToAddNews: step?.allowAuthorsToAddNews,
@@ -124,7 +124,7 @@ export const getInitialValues = (
 export const getProposalFormUpdateVariablesInput = (
   formValues: FormValues['form'],
   selectedTab: FormTabs,
-): Omit<UpdateProposalFormMutationVariables['input'], 'clientMutationId' | 'proposalFormId'> => {
+): Omit<UpdateProposalFormMutation$variables['input'], 'clientMutationId' | 'proposalFormId'> => {
   const mergedArr = formValues.questionnaire.questions.map(q => {
     const j = formValues.questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
     return { ...q, ...j }
@@ -201,16 +201,16 @@ export const getCollectStepInput = (
     defaultSort: formValues.defaultSort,
     proposalForm: proposalFormId,
     votesHelpText: formValues.votesHelpText,
-    votesMin: parseInt(formValues.votesMin),
-    votesLimit: parseInt(formValues.votesLimit),
+    votesMin: parseInt(String(formValues.votesMin)),
+    votesLimit: parseInt(String(formValues.votesLimit)),
     votesRanking: formValues.votesRanking ?? false,
-    voteThreshold: parseInt(formValues.voteThreshold),
+    voteThreshold: parseInt(String(formValues.voteThreshold)),
     isProposalSmsVoteEnabled: formValues.isProposalSmsVoteEnabled,
-    proposalArchivedTime: parseInt(formValues.proposalArchivedTime),
+    proposalArchivedTime: parseInt(String(formValues.proposalArchivedTime)),
     proposalArchivedUnitTime: formValues.proposalArchivedUnitTime,
 
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
-    budget: parseInt(formValues.budget),
+    budget: parseInt(String(formValues.budget)),
     publishedVoteDate: formValues.publishedVoteDate,
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
     voteType: formValues.voteType,

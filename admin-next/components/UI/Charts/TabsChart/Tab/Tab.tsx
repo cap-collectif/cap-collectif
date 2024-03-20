@@ -1,22 +1,22 @@
-import type { FC } from 'react';
-import type { LineChartProps } from '../../LineChart/LineChart';
+import type { FC } from 'react'
+import type { LineChartProps } from '../../LineChart/LineChart'
 import { Box, headingStyles, Flex, Text } from '@cap-collectif/ui'
-import { capitalizeFirstLetter } from '@utils/format-string';
-import { formatBigNumber } from '@utils/format-number';
+import { capitalizeFirstLetter } from '@utils/format-string'
+import { formatBigNumber } from '@utils/format-number'
 
 export type ActiveTab = {
-  readonly id: string,
+  readonly id: string
   readonly label: LineChartProps['label']
   readonly data: LineChartProps['data']
-};
+}
 
 export interface TabProps extends LineChartProps {
-  readonly id: string,
-  readonly count: number,
-  readonly active?: boolean,
-  readonly selectTab?: (activeTab: ActiveTab) => void,
+  readonly id: string
+  readonly count: number
+  readonly active?: boolean
+  readonly selectTab?: (activeTab: ActiveTab) => void
   readonly disabled?: boolean
-};
+}
 
 const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled }) => (
   <Box
@@ -26,7 +26,8 @@ const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled
     borderRight="normal"
     borderColor="gray.150"
     flex={1}
-    disabled={disabled}>
+    disabled={disabled}
+  >
     <Flex
       id={id}
       direction="column"
@@ -37,7 +38,8 @@ const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled
       borderBottom={active ? 'none' : 'normal'}
       borderRight={active ? 'normal' : 'none'}
       borderColor="gray.150"
-      opacity={active ? 1 : 0.5}>
+      opacity={active ? 1 : 0.5}
+    >
       <Text color="blue.900" fontSize={3}>
         {capitalizeFirstLetter(label)}
       </Text>
@@ -46,6 +48,6 @@ const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled
       </Text>
     </Flex>
   </Box>
-);
+)
 
-export default Tab;
+export default Tab

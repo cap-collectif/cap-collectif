@@ -14,8 +14,8 @@ import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FieldValue, useForm } from 'react-hook-form'
 import { UseFormSetValue } from 'react-hook-form/dist/types/form'
-import { FormValues } from '@components/Steps/CollectStep/CollectStepForm'
 import { useCollectStep } from './CollectStepContext'
+import { FormValues } from './CollectStepForm'
 
 export interface InfoModalProps {
   title: string
@@ -31,7 +31,7 @@ export interface InfoModalProps {
 
 const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setValue, className }) => {
   const intl = useIntl()
-  const { handleSubmit, formState, control, watch } = useForm<{
+  const { handleSubmit, control } = useForm<{
     HelpText: string | null
     Mandatory?: boolean
   }>({

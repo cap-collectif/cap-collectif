@@ -1,4 +1,4 @@
-import { QuestionnaireStepFormQueryResponse, QuestionTypeValue } from '@relay/QuestionnaireStepFormQuery.graphql'
+import { QuestionnaireStepFormQuery$data, QuestionTypeValue } from '@relay/QuestionnaireStepFormQuery.graphql'
 import { QuestionInput, QuestionnaireAbstractQuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
 import uuid, { isUuidOrTmp } from '@utils/uuid'
 import { FormValues } from './QuestionnaireStepForm'
@@ -89,7 +89,7 @@ export type QuestionCategory = 'TEXT' | 'NUMERIC' | 'DOCUMENT' | 'UNIQUE_CHOICE'
 export type QuestionIds = { id: string | null; temporaryId: string | null; title: string }
 
 export const formatQuestions = (
-  questionnaire: NonNullable<QuestionnaireStepFormQueryResponse['step']>['questionnaire'],
+  questionnaire: NonNullable<QuestionnaireStepFormQuery$data['step']>['questionnaire'] | any, // TODO type this better
   toTempIds?: boolean,
 ): any => {
   const questions = questionnaire?.questions.map(question => {
@@ -106,7 +106,7 @@ export const formatQuestions = (
 }
 
 export const formatJumpsToTmp = (
-  questions: NonNullable<QuestionnaireStepFormQueryResponse['step']>['questionnaire']['questionsWithJumps'],
+  questions: NonNullable<QuestionnaireStepFormQuery$data['step']>['questionnaire']['questionsWithJumps'],
 ): any => {
   return questions.map(question => ({
     ...question,

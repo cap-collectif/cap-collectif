@@ -1,26 +1,30 @@
-import React from 'react';
-import {Flex, Switch, Text} from "@cap-collectif/ui";
-import {useIntl} from "react-intl";
-import {useFormContext} from "react-hook-form";
-import {FieldInput} from '@cap-collectif/form';
+import React from 'react'
+import { Flex, Text } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
+import { useFormContext } from 'react-hook-form'
+import { FieldInput } from '@cap-collectif/form'
 
 const CollectStepWithoutAccountRequirements: React.FC = () => {
-    const intl = useIntl();
-    const {control} = useFormContext();
-    return (
-        <>
-            <Text color="gray.900" mb={4}>{intl.formatMessage({ id: 'additional-options' })}</Text>
-            <Flex bg="white" p={4} borderRadius="4px" direction="column">
-                <Flex justifyContent="space-between">
-                    <Text as="label" fontWeight={600} width="100%" color="blue.900" lineHeight="normal">
-                        {intl.formatMessage({id: 'collect-particpants-email'})}
-                    </Text>
-                    <FieldInput id="collectParticipantsEmail" type="switch" name="collectParticipantsEmail" control={control} />
-                </Flex>
-                <Text mt={1} fontSize={2} lineHeight="16px" color="gray.700">{intl.formatMessage({ id: 'collect-particpants-email-help' })}</Text>
-            </Flex>
-        </>
-    );
-};
+  const intl = useIntl()
+  const { control } = useFormContext()
+  return (
+    <>
+      <Text color="gray.900" mb={4}>
+        {intl.formatMessage({ id: 'additional-options' })}
+      </Text>
+      <Flex bg="white" p={4} borderRadius="4px" direction="column">
+        <Flex justifyContent="space-between">
+          <Text as="label" fontWeight={600} width="100%" color="blue.900" lineHeight="normal">
+            {intl.formatMessage({ id: 'collect-particpants-email' })}
+          </Text>
+          <FieldInput id="collectParticipantsEmail" type="switch" name="collectParticipantsEmail" control={control} />
+        </Flex>
+        <Text mt={1} fontSize={2} lineHeight="16px" color="gray.700">
+          {intl.formatMessage({ id: 'collect-particpants-email-help' })}
+        </Text>
+      </Flex>
+    </>
+  )
+}
 
-export default CollectStepWithoutAccountRequirements;
+export default CollectStepWithoutAccountRequirements

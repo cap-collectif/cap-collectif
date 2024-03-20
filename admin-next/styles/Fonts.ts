@@ -1,7 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
-import { BASE_PATH } from '../config';
+import { createGlobalStyle } from 'styled-components'
+import { BASE_PATH } from '../config'
 
-export const FONT_PATH: string = `${BASE_PATH}/fonts`;
+export const FONT_PATH: string = `${BASE_PATH}/fonts`
 
 const Fonts = createGlobalStyle`
   @font-face {
@@ -44,6 +44,6 @@ const Fonts = createGlobalStyle`
       src: url("${FONT_PATH}/Roboto-Bold.ttf") format("truetype")
   }
   
-`;
+`
 
-export default Fonts;
+export default Fonts

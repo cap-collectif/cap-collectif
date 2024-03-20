@@ -19,6 +19,20 @@ const nextConfig = {
     externalDir: true,
   },
   swcMinify: true,
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // We check the type errors separately on our CI build
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    // We check the linting errors separately on our CI build
+    ignoreDuringBuilds: true,
+  },
   compiler: {
     styledComponents: true,
     relay: {

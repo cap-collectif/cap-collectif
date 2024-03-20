@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { fetchQuery, graphql } from 'react-relay'
-import type { UserListFieldQuery, UserListFieldQueryResponse } from '@relay/UserListFieldQuery.graphql'
+import { graphql } from 'react-relay'
+import type { UserListFieldQuery, UserListFieldQuery$data } from '@relay/UserListFieldQuery.graphql'
 import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 
 interface UserListFieldProps extends Omit<BaseField, 'onChange'>, Omit<FieldSelect, 'type' | 'onChange'> {
   userIdsToNoSearch?: string[]
@@ -34,9 +35,9 @@ const getUserList = graphql`
       email
     }
   }
-`
+` as GraphQLTaggedNode
 
-const formatUsersData = (users: UserListFieldQueryResponse['userSearch']) => {
+const formatUsersData = (users: UserListFieldQuery$data['userSearch']) => {
   const duplicateNames: { [key: string]: [number] } = {}
 
   if (!users) return []

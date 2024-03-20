@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { fetchQuery, graphql } from 'react-relay'
-import type { ThemeListFieldQuery, ThemeListFieldQueryResponse } from '@relay/ThemeListFieldQuery.graphql'
+import { graphql } from 'react-relay'
+import type { ThemeListFieldQuery } from '@relay/ThemeListFieldQuery.graphql'
 import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 
 interface ThemeListFieldProps extends Omit<BaseField, 'onChange' | 'control'>, Omit<FieldSelect, 'onChange' | 'type'> {
   id?: string
@@ -22,7 +23,7 @@ const getThemeList = graphql`
       label: title
     }
   }
-`
+` as GraphQLTaggedNode
 
 export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, ...props }) => {
   const { control } = useFormContext()

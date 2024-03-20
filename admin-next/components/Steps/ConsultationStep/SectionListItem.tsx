@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonGroup, ButtonQuickAction, CapUIIcon, Flex, ListCard, Text } from '@cap-collectif/ui'
+import { ButtonQuickAction, CapUIIcon, Flex, ListCard, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import ConsultationSectionModal from '@components/Steps/ConsultationStep/ConsultationSectionModal'
 import { useFormContext } from 'react-hook-form'

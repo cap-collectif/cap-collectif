@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import { ConsultationStepFormQueryResponse, SectionOrderBy } from '@relay/ConsultationStepFormQuery.graphql'
+import { SectionOrderBy, ConsultationStepFormQuery } from '@relay/ConsultationStepFormQuery.graphql'
 import { IntlShape, useIntl } from 'react-intl'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { EnabledEnum, StepDurationTypeEnum } from '@components/Steps/DebateStep/DebateStepForm'
@@ -83,11 +83,6 @@ export type FormValues = {
     sections: ReadonlyArray<OpinionTypeInput>
   }>
 } & RequirementsFormValues
-
-// https://stackoverflow.com/questions/42999983/typescript-removing-readonly-modifier
-type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }
-
-type QueryResponse = DeepWriteable<ConsultationStepFormQueryResponse>
 
 graphql`
   fragment ConsultationStepFormSectionFragment on Section {
@@ -189,9 +184,9 @@ export const getDefaultSection = (intl: IntlShape) => {
 
 const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const intl = useIntl()
-  const query = useLazyLoadQuery(CONSULTATION_STEP_QUERY, {
+  const query = useLazyLoadQuery<ConsultationStepFormQuery>(CONSULTATION_STEP_QUERY, {
     stepId,
-  }) as QueryResponse
+  })
 
   const { operationType, setOperationType } = useConsultationStep()
   const isEditing = operationType === 'EDIT'
@@ -207,7 +202,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     const breadCrumbItems = [
       {
         title: project?.title ?? '',
-        href: project?.adminAlphaUrl ?? '',
+        href: (project?.adminAlphaUrl as string) ?? '',
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
@@ -262,6 +257,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       metaDescription: step?.metaDescription ?? '',
       customCode: step?.customCode ?? '',
+      // @ts-ignore relay stuff
       requirements: getDefaultRequirements(step),
       requirementsReason: '',
       consultations:
@@ -427,6 +423,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="startAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>
@@ -441,6 +438,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                   name="endAt"
                   control={control}
                   type="dateHour"
+                  // @ts-expect-error MAJ DS Props
                   dateInputProps={{ isOutsideRange: true }}
                 />
               </FormControl>

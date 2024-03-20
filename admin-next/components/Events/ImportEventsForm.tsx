@@ -14,20 +14,24 @@ import {
 import { IntlShape, useIntl } from 'react-intl'
 import Papa from 'papaparse'
 import AddEventsMutation from 'mutations/AddEventsMutation'
-import { AddEventsInput, AddEventsMutationResponse, EventInput } from '@relay/AddEventsMutation.graphql'
+import { AddEventsInput, AddEventsMutation$data, EventInput } from '@relay/AddEventsMutation.graphql'
 import { getHeaders } from './EventImportModal'
 import styled from 'styled-components'
 import jschardet from 'jschardet'
 
-type EventCsv = Omit<EventInput, 'themes' | 'projects' | 'guestListEnabled' | 'enabled' | 'commentable'> & {
+type EventCsv = Omit<
+  EventInput,
+  'themes' | 'projects' | 'guestListEnabled' | 'enabled' | 'commentable' | 'districts'
+> & {
   themes: string
   projects: string
   guestListEnabled: string
   enabled: string
   commentable: string
+  districts: string
 }
 
-type Results = AddEventsMutationResponse['addEvents']
+type Results = AddEventsMutation$data['addEvents']
 
 const prepareVariablesFromAnalyzedFile = (
   intl: IntlShape,
@@ -42,24 +46,25 @@ const prepareVariablesFromAnalyzedFile = (
   const areHeadersValid = JSON.stringify(translatedHeadersKey) === JSON.stringify(fields)
 
   if (!!fields && !areHeadersValid) {
+    // eslint-disable-next-line no-console
     console.warn('File headers are not valid.')
     return null
   }
 
-  const isTruthyValue = (value: string) => intl.formatMessage({id: 'global.yes'}).toLowerCase() === value
+  const isTruthyValue = (value: string) => intl.formatMessage({ id: 'global.yes' }).toLowerCase() === value
 
   const events: Array<EventInput> = result.data
-    .filter(event => event[intl.formatMessage({id: 'global.title'})] !== '')
+    .filter(event => event[intl.formatMessage({ id: 'global.title' })] !== '')
     .map(event => {
-      const formattedEvent: EventInput = Object.entries(headers).reduce(
+      const formattedEvent: EventCsv = Object.entries(headers).reduce(
         (formattedEvent, [header, headerTranslatedKey]) => {
           formattedEvent[header] = event[headerTranslatedKey]
           return formattedEvent
         },
         {},
-      )
+      ) as EventCsv
 
-      const {themes, enabled, districts, guestListEnabled, commentable, projects} = formattedEvent;
+      const { themes, enabled, districts, guestListEnabled, commentable, projects } = formattedEvent
       return {
         ...formattedEvent,
         guestListEnabled: isTruthyValue(guestListEnabled),
@@ -148,14 +153,12 @@ const ImportEventsForm: React.FC<ImportEventsFormProps> = ({ setData }) => {
                   const variables = prepareVariablesFromAnalyzedFile(intl, result, true)
                   if (variables) {
                     setData(variables)
-                    return AddEventsMutation.commit({ input: variables }).then(
-                      (response: AddEventsMutationResponse) => {
-                        if (response.addEvents) {
-                          setLoading(false)
-                          setResults(response.addEvents)
-                        }
-                      },
-                    )
+                    return AddEventsMutation.commit({ input: variables }).then((response: AddEventsMutation$data) => {
+                      if (response.addEvents) {
+                        setLoading(false)
+                        setResults(response.addEvents)
+                      }
+                    })
                   }
                 }
               }

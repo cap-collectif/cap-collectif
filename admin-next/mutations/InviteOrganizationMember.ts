@@ -1,41 +1,35 @@
-import { graphql } from 'react-relay';
-import { environment } from 'utils/relay-environement';
-import commitMutation from './commitMutation';
+import { graphql } from 'react-relay'
+import { environment } from 'utils/relay-environement'
+import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
-    InviteOrganizationMemberMutation,
-    InviteOrganizationMemberMutationResponse,
-    InviteOrganizationMemberMutationVariables,
-} from '@relay/InviteOrganizationMemberMutation.graphql';
+  InviteOrganizationMemberMutation,
+  InviteOrganizationMemberMutation$data,
+  InviteOrganizationMemberMutation$variables,
+} from '@relay/InviteOrganizationMemberMutation.graphql'
 
 const mutation = graphql`
-    mutation InviteOrganizationMemberMutation(
-        $input: InviteOrganizationMemberInput!
-        $connections: [ID!]!
-    ) {
-        inviteOrganizationMember(input: $input) {
-            invitation
-                @appendNode(
-                    connections: $connections
-                    edgeTypeName: "PendingOrganizationInvitationEdge"
-                ) {
-                email
-                user {
-                    email
-                    username
-                }
-                role
-            }
-            errorCode
+  mutation InviteOrganizationMemberMutation($input: InviteOrganizationMemberInput!, $connections: [ID!]!) {
+    inviteOrganizationMember(input: $input) {
+      invitation @appendNode(connections: $connections, edgeTypeName: "PendingOrganizationInvitationEdge") {
+        email
+        user {
+          email
+          username
         }
+        role
+      }
+      errorCode
     }
-`;
+  }
+` as GraphQLTaggedNode
 
 const commit = (
-    variables: InviteOrganizationMemberMutationVariables,
-): Promise<InviteOrganizationMemberMutationResponse> =>
-    commitMutation<InviteOrganizationMemberMutation>(environment, {
-        mutation,
-        variables,
-    });
+  variables: InviteOrganizationMemberMutation$variables,
+): Promise<InviteOrganizationMemberMutation$data> =>
+  commitMutation<InviteOrganizationMemberMutation>(environment, {
+    mutation,
+    variables,
+  })
 
-export default { commit };
+export default { commit }

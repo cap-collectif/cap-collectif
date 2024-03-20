@@ -1,10 +1,11 @@
 import { graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import {
   UpdateProposalFormMutation,
-  UpdateProposalFormMutationResponse,
-  UpdateProposalFormMutationVariables,
+  UpdateProposalFormMutation$data,
+  UpdateProposalFormMutation$variables,
 } from '@relay/UpdateProposalFormMutation.graphql'
 
 const mutation = graphql`
@@ -65,9 +66,9 @@ const mutation = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
-const commit = (variables: UpdateProposalFormMutationVariables): Promise<UpdateProposalFormMutationResponse> =>
+const commit = (variables: UpdateProposalFormMutation$variables): Promise<UpdateProposalFormMutation$data> =>
   commitMutation<UpdateProposalFormMutation>(environment, {
     mutation,
     variables,

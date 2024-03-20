@@ -1,10 +1,11 @@
 import { ConnectionHandler, graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
   DeleteMediatorMutation,
-  DeleteMediatorMutationResponse,
-  DeleteMediatorMutationVariables,
+  DeleteMediatorMutation$data,
+  DeleteMediatorMutation$variables,
 } from '@relay/DeleteMediatorMutation.graphql'
 
 const mutation = graphql`
@@ -13,9 +14,9 @@ const mutation = graphql`
       deletedMediatorId
     }
   }
-`
+` as GraphQLTaggedNode
 
-const commit = (variables: DeleteMediatorMutationVariables, connectionId): Promise<DeleteMediatorMutationResponse> =>
+const commit = (variables: DeleteMediatorMutation$variables, connectionId): Promise<DeleteMediatorMutation$data> =>
   commitMutation<DeleteMediatorMutation>(environment, {
     mutation,
     variables,

@@ -1,11 +1,8 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { Tabs, Box, CapUIRadius } from '@cap-collectif/ui'
-import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { ProposalFormForm_step$key } from '@relay/ProposalFormForm_step.graphql'
-import { UseFormSetValue } from 'react-hook-form/dist/types/form'
-import { FormValues } from './CollectStepForm'
 import { ProposalFormForm_query$key } from '@relay/ProposalFormForm_query.graphql'
 import ProposalFormListField from '@components/Steps/CollectStep/ProposalFormListField'
 import { FormTabsEnum, useCollectStep } from './CollectStepContext'
@@ -14,8 +11,6 @@ import ProposalForm from './ProposalForm'
 export interface ProposalFormFormProps {
   step: ProposalFormForm_step$key
   query: ProposalFormForm_query$key
-  setValue: UseFormSetValue<FormValues>
-  isEditing: boolean
   defaultLocale: string
 }
 

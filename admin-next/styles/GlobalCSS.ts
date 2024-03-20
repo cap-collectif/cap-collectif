@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalCSS = createGlobalStyle`
   html, body, #__next, #__next > div:first-child {
@@ -12,6 +12,6 @@ const GlobalCSS = createGlobalStyle`
   .beamer_defaultBeamerSelector {
       display: none;
   }
-`;
+`
 
-export default GlobalCSS;
+export default GlobalCSS

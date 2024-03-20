@@ -1,6 +1,6 @@
-import useUrlState from "../../../../frontend/js/utils/hooks/useUrlState";
-import * as React from "react";
-import {useState} from "react";
+import useUrlState from '../../../../frontend/js/utils/hooks/useUrlState'
+import * as React from 'react'
+import { useState } from 'react'
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string
@@ -11,11 +11,11 @@ export type FormTabs = 'NEW' | 'MODEL'
 
 export const FormTabsEnum: Record<FormTabs, FormTabs> = {
   NEW: 'NEW',
-  MODEL: 'MODEL'
+  MODEL: 'MODEL',
 } as const
 
 type Context = {
-  operationType: string,
+  operationType: string
   setOperationType: (value: string) => void
   proposalFormKey: FormKeyType
   setProposalFormKey: (value: FormKeyType) => void
@@ -36,9 +36,8 @@ export const useCollectStep = () => {
 }
 
 export const CollectStepContextProvider = ({ children }: Props) => {
-
-  const [operationType, setOperationType] = useUrlState('operationType', 'EDIT');
-  const [proposalFormKey, setProposalFormKey] = useState<FormKeyType>('form');
+  const [operationType, setOperationType] = useUrlState('operationType', 'EDIT')
+  const [proposalFormKey, setProposalFormKey] = useState<FormKeyType>('form')
   const [selectedTab, setSelectedTab] = useState<FormTabs>(FormTabsEnum.NEW)
 
   const contextValue: Context = {
@@ -47,7 +46,7 @@ export const CollectStepContextProvider = ({ children }: Props) => {
     proposalFormKey,
     setProposalFormKey,
     selectedTab,
-    setSelectedTab
+    setSelectedTab,
   }
 
   return <CollectStepContext.Provider value={contextValue}>{children}</CollectStepContext.Provider>

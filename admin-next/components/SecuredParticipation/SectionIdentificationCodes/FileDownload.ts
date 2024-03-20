@@ -1,12 +1,7 @@
-import { getBaseUrlWithAdminNextSupport } from '../../../utils/config';
+import { getBaseUrlWithAdminNextSupport } from '../../../utils/config'
 
 const getFileDownloadUrl = (listId: string): string => {
-    return (
-        getBaseUrlWithAdminNextSupport() +
-        '/identificationCodesList/download/cap-collectif-codes-' +
-        listId +
-        '.csv'
-    );
-};
+  return getBaseUrlWithAdminNextSupport() + '/identificationCodesList/download/cap-collectif-codes-' + listId + '.csv'
+}
 
-export default getFileDownloadUrl;
+export default getFileDownloadUrl

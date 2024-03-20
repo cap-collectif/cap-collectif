@@ -52,7 +52,8 @@
     "**/*.json"
   ],
   "exclude": [
-    "../**/*",
+    "../frontend/**/*",
+    "**/*.test.ts*",
     "node_modules",
   ]
 }

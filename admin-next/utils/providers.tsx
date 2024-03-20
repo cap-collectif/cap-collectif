@@ -14,13 +14,17 @@ type ProvidersProps = {
   intl: IntlType
   viewerSession: ViewerSession
   appVersion: string
+  children?: React.ReactNode
 }
 
 const Providers: React.FC<ProvidersProps> = ({ children, intl, featureFlags, viewerSession, appVersion }) => {
   return (
+    // @ts-expect-error types inconsistencies between react-relay and relay-runtime
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
+      {/** @ts-expect-error MAJ react-intl */}
       <IntlProvider locale={intl.locale} messages={intl.messages}>
         <NoSSR>
+          {/** @ts-expect-error MAJ DS to make CapUIProvider have valid children props */}
           <CapUIProvider>
             <AppProvider viewerSession={viewerSession} appVersion={appVersion}>
               <LazyMotion features={domAnimation}>{children}</LazyMotion>

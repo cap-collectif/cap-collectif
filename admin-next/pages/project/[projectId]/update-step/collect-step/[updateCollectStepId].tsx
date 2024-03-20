@@ -5,7 +5,7 @@ import Layout from '@components/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import CollectStepForm from '@components/Steps/CollectStep/CollectStepForm'
 import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
-import {CollectStepContextProvider} from "../../../../../components/Steps/CollectStep/CollectStepContext";
+import { CollectStepContextProvider } from '../../../../../components/Steps/CollectStep/CollectStepContext'
 
 const UpdateCollectStepWrapper = () => {
   const router = useRouter()

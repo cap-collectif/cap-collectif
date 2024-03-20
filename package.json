@@ -183,7 +183,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
         "@cap-collectif/form": "^0.5.9",
-        "@cap-collectif/ui": "^1.9.0",
+        "@cap-collectif/ui": "^1.9.2",
         "@cfaester/enzyme-adapter-react-18": "0.7.1",
         "@emotion/babel-preset-css-prop": "^11.11.0",
         "@emotion/cache": "^10.0.29",
@@ -428,7 +428,8 @@
         "qs": "^6.10.3",
         "http-cache-semantics": "^4.1.1",
         "minimatch": "^3.0.5",
-        "semver": "^7.5.4"
+        "semver": "^7.5.4",
+        "@types/react": "^18.2.0"
     },
     "devDependencies": {
         "@babel/preset-typescript": "^7.23.0",

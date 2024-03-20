@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Box, Button, CapUIModalSize, FormLabel, Heading, Modal } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { mutationErrorToast } from '@utils/mutation-error-toast'

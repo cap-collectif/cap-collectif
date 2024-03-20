@@ -1,47 +1,44 @@
 import React from 'react'
-import {Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Heading, Modal, Text, toast} from "@cap-collectif/ui";
-import {useIntl} from "react-intl";
+import { Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
 import DeleteParticipantMutation from '@mutations/DeleteParticipantMutation'
-import {graphql, useFragment} from "react-relay";
-import {mutationErrorToast} from "../../utils/mutation-error-toast";
+import { graphql, useFragment } from 'react-relay'
+import { mutationErrorToast } from '../../utils/mutation-error-toast'
 
 export const mediatorFragment = graphql`
-    fragment DeleteParticipantModal_mediator on Mediator {
-        id
-    }
+  fragment DeleteParticipantModal_mediator on Mediator {
+    id
+  }
 `
 export const participantFragment = graphql`
-    fragment DeleteParticipantModal_participant on Participant {
-        token
-    }
+  fragment DeleteParticipantModal_participant on Participant {
+    token
+  }
 `
 
-const DeleteParticipantModal = ({mediator: mediatorRef, participant: participantRef, connection}) => {
-  const intl = useIntl();
-  const mediator = useFragment(mediatorFragment, mediatorRef);
-  const participant = useFragment(participantFragment, participantRef);
+const DeleteParticipantModal = ({ mediator: mediatorRef, participant: participantRef, connection }) => {
+  const intl = useIntl()
+  const mediator = useFragment(mediatorFragment, mediatorRef)
+  const participant = useFragment(participantFragment, participantRef)
 
   const onDelete = async (hide: () => void) => {
-
     try {
-      await DeleteParticipantMutation.commit( {
+      await DeleteParticipantMutation.commit({
         connections: [connection],
         input: {
           mediatorId: mediator.id,
-          participantToken: participant.token
-        }
-      });
+          participantToken: participant.token,
+        },
+      })
       toast({
         variant: 'success',
-        content: intl.formatMessage(
-          {
-            id: 'participant-deleted-successfully',
-          },
-        ),
+        content: intl.formatMessage({
+          id: 'participant-deleted-successfully',
+        }),
       })
-      hide();
+      hide()
     } catch (error) {
-      return mutationErrorToast(intl);
+      return mutationErrorToast(intl)
     }
   }
 
@@ -60,7 +57,7 @@ const DeleteParticipantModal = ({mediator: mediatorRef, participant: participant
       }
       size={CapUIModalSize.Lg}
     >
-      {({hide}) => (
+      {({ hide }) => (
         <>
           <Modal.Header>
             <Heading>

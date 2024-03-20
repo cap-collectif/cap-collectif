@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { fetchQuery, graphql } from 'react-relay'
-import type { DistrictListFieldQuery, DistrictListFieldQueryResponse } from '@relay/DistrictListFieldQuery.graphql'
+import { graphql } from 'react-relay'
+import type { DistrictListFieldQuery, DistrictListFieldQuery$data } from '@relay/DistrictListFieldQuery.graphql'
 import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
+import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
 
 interface DistrictListFieldProps
   extends Omit<BaseField, 'onChange' | 'control'>,
@@ -18,28 +19,24 @@ type DistrictListFieldValue = {
 }
 
 const getDistrictList = graphql`
-    query DistrictListFieldQuery($term: String) {
-        globalDistricts(name: $term) {
-            edges {
-                node {
-                    value: id
-                    label: name
-                }
-            }
+  query DistrictListFieldQuery($term: String) {
+    globalDistricts(name: $term) {
+      edges {
+        node {
+          value: id
+          label: name
         }
+      }
     }
-`;
+  }
+` as GraphQLTaggedNode
 
-const formatDistrictsData = (
-    globalDistricts: DistrictListFieldQueryResponse['globalDistricts'],
-) => {
-    if (!globalDistricts) return [];
-    return (
-        globalDistricts.edges
-            ?.map(edge => edge?.node)
-            ?.map(d => ({ value: d?.value ?? '', label: d?.label ?? '' })) || []
-    );
-};
+const formatDistrictsData = (globalDistricts: DistrictListFieldQuery$data['globalDistricts']) => {
+  if (!globalDistricts) return []
+  return (
+    globalDistricts.edges?.map(edge => edge?.node)?.map(d => ({ value: d?.value ?? '', label: d?.label ?? '' })) || []
+  )
+}
 
 export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...props }) => {
   const { control } = useFormContext()
@@ -48,9 +45,9 @@ export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...p
       term,
     }).toPromise()
 
-        if (districtsData && districtsData.globalDistricts) {
-            return formatDistrictsData(districtsData.globalDistricts) as DistrictListFieldValue[];
-        }
+    if (districtsData && districtsData.globalDistricts) {
+      return formatDistrictsData(districtsData.globalDistricts) as DistrictListFieldValue[]
+    }
 
     return []
   }

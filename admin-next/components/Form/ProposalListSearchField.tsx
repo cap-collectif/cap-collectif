@@ -1,12 +1,13 @@
 import * as React from 'react'
-import { fetchQuery, graphql } from 'react-relay'
+import { graphql } from 'react-relay'
 import type {
   ProposalListSearchFieldQuery,
-  ProposalListSearchFieldQueryResponse,
+  ProposalListSearchFieldQuery$data,
 } from '@relay/ProposalListSearchFieldQuery.graphql'
 import { environment } from 'utils/relay-environement'
 import { Box, FormLabel, Search } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
+import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 
 type ProposalListSearchFieldValue = {
   label: string
@@ -39,9 +40,9 @@ const getProposalList = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
-const formatProposalsData = (proposals: ProposalListSearchFieldQueryResponse['node']['proposals']) => {
+const formatProposalsData = (proposals: ProposalListSearchFieldQuery$data['node']['proposals']) => {
   if (!proposals) return []
   return (
     proposals.edges

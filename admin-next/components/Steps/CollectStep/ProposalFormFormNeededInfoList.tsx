@@ -9,15 +9,15 @@ import { useIntl } from 'react-intl'
 import { FormValues } from '@components/Steps/CollectStep/CollectStepForm'
 import { UseFormSetValue } from 'react-hook-form/dist/types/form'
 import { Control, FieldValue } from 'react-hook-form'
-import { ProposalFormForm_query$key } from '@relay/ProposalFormForm_query.graphql'
 import { graphql, useFragment } from 'react-relay'
 import { useCollectStep } from './CollectStepContext'
+import { ProposalFormFormNeededInfoList_query$key } from '@relay/ProposalFormFormNeededInfoList_query.graphql'
 
 export interface ProposalFormFormNeededInfoListProps {
   values: FormValues['form']
   setValue: UseFormSetValue<FieldValue<FormValues>>
   control: Control<any>
-  query: ProposalFormForm_query$key
+  query: ProposalFormFormNeededInfoList_query$key
   defaultLocale: string
 }
 

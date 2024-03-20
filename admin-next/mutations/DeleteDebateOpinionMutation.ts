@@ -1,11 +1,12 @@
-import { graphql } from 'react-relay';
-import { environment } from 'utils/relay-environement';
-import commitMutation from './commitMutation';
+import { graphql } from 'react-relay'
+import { environment } from 'utils/relay-environement'
+import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
-    DeleteDebateOpinionMutation,
-    DeleteDebateOpinionMutationVariables,
-    DeleteDebateOpinionMutationResponse,
-} from '@relay/DeleteDebateOpinionMutation.graphql';
+  DeleteDebateOpinionMutation,
+  DeleteDebateOpinionMutation$variables,
+  DeleteDebateOpinionMutation$data,
+} from '@relay/DeleteDebateOpinionMutation.graphql'
 
 const mutation = graphql`
   mutation DeleteDebateOpinionMutation($input: DeleteDebateOpinionInput!, $connections: [ID!]!) {
@@ -14,14 +15,12 @@ const mutation = graphql`
       deletedDebateOpinionId @deleteEdge(connections: $connections)
     }
   }
-`;
+` as GraphQLTaggedNode
 
-const commit = (
-    variables: DeleteDebateOpinionMutationVariables,
-): Promise<DeleteDebateOpinionMutationResponse> =>
-    commitMutation<DeleteDebateOpinionMutation>(environment, {
-        mutation,
-        variables,
-    });
+const commit = (variables: DeleteDebateOpinionMutation$variables): Promise<DeleteDebateOpinionMutation$data> =>
+  commitMutation<DeleteDebateOpinionMutation>(environment, {
+    mutation,
+    variables,
+  })
 
-export default { commit };
+export default { commit }

@@ -1,55 +1,52 @@
-import { graphql } from 'react-relay';
-import commitMutation from './commitMutation';
-import { environment } from 'utils/relay-environement';
+import { graphql } from 'react-relay'
+import commitMutation from './commitMutation'
+import { environment } from 'utils/relay-environement'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
-    CreateUserIdentificationCodeListMutation,
-    CreateUserIdentificationCodeListMutationResponse,
-    CreateUserIdentificationCodeListMutationVariables,
-} from '@relay/CreateUserIdentificationCodeListMutation.graphql';
+  CreateUserIdentificationCodeListMutation,
+  CreateUserIdentificationCodeListMutation$data,
+  CreateUserIdentificationCodeListMutation$variables,
+} from '@relay/CreateUserIdentificationCodeListMutation.graphql'
 
 const mutation = graphql`
-    mutation CreateUserIdentificationCodeListMutation(
-        $input: CreateUserIdentificationCodeListInput!
-        $connections: [ID!]!
-    ) {
-        createUserIdentificationCodeList(input: $input) {
-            userIdentificationCodeList
-                @appendNode(connections: $connections, edgeTypeName: "UserIdentificationCodeList") {
-                id
-                name
-                codesCount
-                alreadyUsedCount
-            }
-        }
+  mutation CreateUserIdentificationCodeListMutation(
+    $input: CreateUserIdentificationCodeListInput!
+    $connections: [ID!]!
+  ) {
+    createUserIdentificationCodeList(input: $input) {
+      userIdentificationCodeList @appendNode(connections: $connections, edgeTypeName: "UserIdentificationCodeList") {
+        id
+        name
+        codesCount
+        alreadyUsedCount
+      }
     }
-`;
+  }
+` as GraphQLTaggedNode
 
 const commit = (
-    variables: CreateUserIdentificationCodeListMutationVariables,
-): Promise<CreateUserIdentificationCodeListMutationResponse> => {
-    return commitMutation<CreateUserIdentificationCodeListMutation>(environment, {
-        mutation,
-        variables,
-        updater: store => {
-            const payload = store.getRootField('createUserIdentificationCodeList');
-            if (!payload) return;
+  variables: CreateUserIdentificationCodeListMutation$variables,
+): Promise<CreateUserIdentificationCodeListMutation$data> => {
+  return commitMutation<CreateUserIdentificationCodeListMutation>(environment, {
+    mutation,
+    variables,
+    updater: store => {
+      const payload = store.getRootField('createUserIdentificationCodeList')
+      if (!payload) return
 
-            const rootFields = store.getRoot();
-            const viewer = rootFields.getLinkedRecord('viewer');
+      const rootFields = store.getRoot()
+      const viewer = rootFields.getLinkedRecord('viewer')
 
-            if (!viewer) return;
+      if (!viewer) return
 
-            const userIdentificationCodeLists = viewer.getLinkedRecord(
-                'userIdentificationCodeLists',
-                { first: 100 },
-            );
+      const userIdentificationCodeLists = viewer.getLinkedRecord('userIdentificationCodeLists', { first: 100 })
 
-            if (!userIdentificationCodeLists) return;
+      if (!userIdentificationCodeLists) return
 
-            const totalCount = Number(userIdentificationCodeLists.getValue('totalCount'));
-            userIdentificationCodeLists.setValue(totalCount + 1, 'totalCount');
-        },
-    });
-};
+      const totalCount = Number(userIdentificationCodeLists.getValue('totalCount'))
+      userIdentificationCodeLists.setValue(totalCount + 1, 'totalCount')
+    },
+  })
+}
 
-export default { commit };
+export default { commit }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, Flex, toast } from '@cap-collectif/ui'
+import { Flex } from '@cap-collectif/ui'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import * as yup from 'yup'
@@ -171,7 +171,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
       })
   }
 
-  const { handleSubmit, getValues, watch, setValue, formState, trigger } = methods
+  const { handleSubmit, getValues, watch, setValue, trigger } = methods
 
   const title = watch('title')
   const breadCrumbItems = [

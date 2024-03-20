@@ -1,10 +1,11 @@
 import { ConnectionHandler, graphql } from 'react-relay'
 import { environment } from 'utils/relay-environement'
 import commitMutation from './commitMutation'
+import { GraphQLTaggedNode } from 'relay-runtime'
 import type {
   AddMediatorVotesMutation,
-  AddMediatorVotesMutationResponse,
-  AddMediatorVotesMutationVariables,
+  AddMediatorVotesMutation$data,
+  AddMediatorVotesMutation$variables,
 } from '@relay/AddMediatorVotesMutation.graphql'
 import { RecordSourceSelectorProxy } from 'relay-runtime'
 
@@ -29,12 +30,12 @@ const mutation = graphql`
       }
     }
   }
-`
+` as GraphQLTaggedNode
 
 const commit = (
-  variables: AddMediatorVotesMutationVariables,
+  variables: AddMediatorVotesMutation$variables,
   connectionName,
-): Promise<AddMediatorVotesMutationResponse> =>
+): Promise<AddMediatorVotesMutation$data> =>
   commitMutation<AddMediatorVotesMutation>(environment, {
     mutation,
     variables,
