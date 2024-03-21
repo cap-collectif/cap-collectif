@@ -56,7 +56,7 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
-    private string $titleHelpText;
+    private ?string $titleHelpText = null;
 
     /**
      * @ORM\Column(name="opinion_count_shown_by_section", type="integer")
@@ -93,7 +93,7 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
     /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
-    private string $descriptionHelpText;
+    private ?string $descriptionHelpText = null;
 
     /**
      * @ORM\Column(name="moderating_on_create", type="boolean", nullable=false, options={"default" = false})
