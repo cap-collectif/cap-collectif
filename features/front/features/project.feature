@@ -340,6 +340,9 @@ Scenario: User wants to assess a project proposal analysis immediately
   And I click on button "#validate-proposal-assessment-button"
   And I wait ".saving" to appear on current page
   And I wait ".saved" to appear on current page
+  And I click on button "#confirm-assessment-button"
+  And I wait ".saving" to appear on current page
+  And I wait ".saved" to appear on current page
   And I reload the page
   And I wait "#proposal_analysis_assessment" to appear on current page
   Then I should see "global.favorable" in the "#proposal_analysis_assessment" element

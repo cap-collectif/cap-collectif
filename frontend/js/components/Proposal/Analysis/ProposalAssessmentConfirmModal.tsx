@@ -36,7 +36,13 @@ export const ProposalAssessmentConfirmModal = ({ onClose, onSubmit }: Props) => 
         <Button onClick={onClose} variant="secondary" variantColor="primary" variantSize="big">
           {intl.formatMessage({ id: 'global.cancel' })}
         </Button>
-        <Button onClick={onSubmit} variant="primary" variantColor="primary" variantSize="big">
+        <Button
+          onClick={onSubmit}
+          variant="primary"
+          variantColor="primary"
+          variantSize="big"
+          id="confirm-assessment-button"
+        >
           {intl.formatMessage({ id: 'global.validate' })}
         </Button>
       </Modal.Footer>
