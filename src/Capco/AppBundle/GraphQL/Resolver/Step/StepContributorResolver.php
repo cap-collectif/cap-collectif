@@ -73,7 +73,7 @@ class StepContributorResolver implements QueryInterface
 
     public function getParticipants(AbstractStep $step, ?Project $project): array
     {
-        if (!$step instanceof SelectionStep) {
+        if (!$step instanceof SelectionStep || null === $project) {
             return ['participants' => [], 'participantsCount' => 0, 'participantsCursors' => []];
         }
 
