@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import type { ProposalFormSwitcher_proposal } from '~relay/ProposalFormSwitcher_proposal.graphql'
 import colors from '~/utils/colors'
@@ -19,7 +18,7 @@ import ProposalViewAssessmentPanel from './ProposalViewAssessmentPanel'
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
 import type { ProposalFormSwitcher_viewer } from '~relay/ProposalFormSwitcher_viewer.graphql'
 
-const FormPanel: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FormPanel = styled.div`
   overflow: scroll;
   height: calc(100vh - 50px);
   width: 400px;

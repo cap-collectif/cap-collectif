@@ -24,6 +24,7 @@ describe('<ProposalAssessmentFormPanel  /> ', () => {
         officialResponse:
           'Je ne minterdis pas de jeter un oeil sur les caméras de surveillance dès lors quaucun membre du codir ne sera présent dans le locaux.',
       },
+      analysts: [{ id: 'analyst1' }],
       form: {
         analysisConfiguration: {
           costEstimationEnabled: true,

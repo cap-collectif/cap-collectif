@@ -137,6 +137,11 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
         Object {
           " $fragmentRefs": null,
           " $refType": null,
+          "analysts": Array [
+            Object {
+              "id": "analyst1",
+            },
+          ],
           "assessment": Object {
             "body": "summer body lol",
             "estimatedCost": 43,
@@ -275,6 +280,11 @@ exports[`<ProposalAssessmentFormPanel  />  renders correctly with proposal revis
           Object {
             " $fragmentRefs": null,
             " $refType": null,
+            "analysts": Array [
+              Object {
+                "id": "analyst1",
+              },
+            ],
             "assessment": Object {
               "body": "summer body lol",
               "estimatedCost": 43,

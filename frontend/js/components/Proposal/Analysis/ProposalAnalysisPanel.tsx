@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import ProposalAnalysisUserRow from './ProposalAnalysisUserRow'
 import type { ProposalAnalysisPanel_proposal } from '~relay/ProposalAnalysisPanel_proposal.graphql'
@@ -27,7 +26,7 @@ const PanelsSlider = styled.div<{
     min-width: 400px;
   }
 `
-const Panel: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Panel = styled.div`
   background: ${colors.white};
   margin-left: 30px;
   margin-right: 30px;
@@ -46,7 +45,7 @@ const PanelSection = styled.div<{
   border-bottom: ${props => props.border && `1px solid ${colors.lightGray}`};
   margin-bottom: 15px;
 `
-const CloseIconWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const CloseIconWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

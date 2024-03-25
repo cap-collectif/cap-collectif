@@ -90,6 +90,11 @@ const Row = styled.div<{
       `}
   }
 `
+
+export const TODO_KEY = 'global.filter_to.do'
+export const FAVOURABLE_KEY = 'global.favorable'
+export const IN_PROGRESS_KEY = 'step.status.open'
+
 export const getLabelData = (status: Status | null | undefined) => {
   switch (status) {
     case 'NONE':
@@ -103,14 +108,14 @@ export const getLabelData = (status: Status | null | undefined) => {
       return {
         color: colors.orange,
         icon: ICON_NAME.ongoing,
-        text: 'step.status.open',
+        text: IN_PROGRESS_KEY,
       }
 
     case 'FAVOURABLE':
       return {
         color: colors.lightGreen,
         icon: ICON_NAME.favorable,
-        text: 'global.favorable',
+        text: FAVOURABLE_KEY,
       }
 
     case 'UNFAVOURABLE':
@@ -131,7 +136,7 @@ export const getLabelData = (status: Status | null | undefined) => {
       return {
         color: colors.lightBlue,
         icon: ICON_NAME.todo,
-        text: 'global.filter_to.do',
+        text: TODO_KEY,
       }
   }
 }
