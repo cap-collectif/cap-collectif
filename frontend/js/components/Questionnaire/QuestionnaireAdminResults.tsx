@@ -226,4 +226,4 @@ const mapStateToProps = (state: GlobalState) => ({
   logoUrl: state.default?.images?.logoUrl,
 })
 
-export default connect<any, any>(mapStateToProps)(fragmentContainer)
+export default connect(mapStateToProps)(fragmentContainer)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import WYSIWYGRender from '../Form/WYSIWYGRender'
 import type { SocialNetwork } from './Footer'
@@ -32,7 +32,7 @@ const About = styled.div<{
     padding: 15px;
   }
 `
-const ContainerRow: StyledComponent<any, {}, typeof Row> = styled(Row)`
+const ContainerRow = styled(Row)`
   margin: auto;
   max-width: 960px;
 `
@@ -44,7 +44,7 @@ const FooterTitle = styled.h2<{
   font-size: 18px;
   margin-bottom: 10px;
 `
-const FooterBody: StyledComponent<any, {}, typeof WYSIWYGRender> = styled(WYSIWYGRender)`
+const FooterBody = styled(WYSIWYGRender)`
   text-align: center;
 
   a {
@@ -53,7 +53,7 @@ const FooterBody: StyledComponent<any, {}, typeof WYSIWYGRender> = styled(WYSIWY
     color: inherit;
   }
 `
-const SocialNetworks: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+const SocialNetworks = styled.ul`
   text-align: center;
   list-style: none;
   margin: 0;

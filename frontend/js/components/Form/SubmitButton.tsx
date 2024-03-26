@@ -21,6 +21,7 @@ type Props = {
   user?: User
   children?: any
   ariaLabel?: string
+  type?: string
 }
 
 class SubmitButton extends React.Component<Props> {
@@ -72,4 +73,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(SubmitButton)
+export default connect(mapStateToProps)(SubmitButton)

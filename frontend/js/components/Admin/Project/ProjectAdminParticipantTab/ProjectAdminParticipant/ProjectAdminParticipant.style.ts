@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors from '~/utils/colors'
@@ -24,7 +23,7 @@ export const Container = styled(PickableList.Row)<{
     margin-right: 0;
   }
 `
-export const UsernameContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const UsernameContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +37,7 @@ export const UsernameContainer: StyledComponent<any, {}, HTMLDivElement> = style
     margin-left: 8px;
   }
 `
-export const NameContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const NameContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -48,7 +47,7 @@ export const NameContainer: StyledComponent<any, {}, HTMLDivElement> = styled.di
     margin: 0 5px;
   }
 `
-export const ParticipantInfo: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ParticipantInfo = styled.div`
   display: flex;
   flex-direction: column;
 

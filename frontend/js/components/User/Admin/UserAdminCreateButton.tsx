@@ -3,7 +3,7 @@ import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { Button, Modal } from 'react-bootstrap'
 import { reduxForm, Field, SubmissionError } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import CloseButton from '../../Form/CloseButton'
 import component from '../../Form/Field'
@@ -20,7 +20,7 @@ import { asyncPasswordValidate } from '~/components/User/UserPasswordComplexityU
 import { REGEX_USERNAME } from '~/constants/FormConstants'
 
 const formName = 'user-admin-create'
-const FooterButtons: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FooterButtons = styled.div`
   display: inline-box;
 
   .right-buttons {
@@ -35,7 +35,7 @@ const FooterButtons: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin-left: 15px;
   }
 `
-const FooterContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FooterContainer = styled.div`
   .modal-footer {
     display: flex;
     flex: 1;

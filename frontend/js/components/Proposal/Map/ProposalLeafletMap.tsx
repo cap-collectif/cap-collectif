@@ -13,12 +13,12 @@ import L from 'leaflet'
 import { useResize, useDisclosure } from '@liinkiing/react-hooks'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
 import { Button } from '@cap-collectif/ui'
-import type { MapCenterObject, MapOptions, MapProps, MapRef, PopupRef } from './Map.types'
+import type { MapCenterObject, MapOptions, MapRef, PopupRef } from './Map.types'
 import type { State, Dispatch } from '~/types'
 import ProposalMapPopover from './ProposalMapPopover'
 import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
-import type { ProposalLeafletMap_proposals } from '~relay/ProposalLeafletMap_proposals.graphql'
-import type { ProposalLeafletMap_proposalForm } from '~relay/ProposalLeafletMap_proposalForm.graphql'
+import type { ProposalLeafletMap_proposals$data } from '~relay/ProposalLeafletMap_proposals.graphql'
+import type { ProposalLeafletMap_proposalForm$data } from '~relay/ProposalLeafletMap_proposalForm.graphql'
 import { isSafari, Emitter } from '~/config'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
 import {
@@ -48,7 +48,7 @@ import { getProposalLabelByType } from '~/utils/interpellationLabelHelper'
 import { mapToast, MapEvents } from './Map.events'
 
 type Props = {
-  proposals: ProposalLeafletMap_proposals
+  proposals: ProposalLeafletMap_proposals$data
   geoJsons?: Array<GeoJson>
   defaultMapOptions: MapOptions
   visible: boolean
@@ -61,7 +61,7 @@ type Props = {
   proposalInAZoneRequired: boolean
   dispatch: Dispatch
   projectType: string | null | undefined
-  proposalForm: ProposalLeafletMap_proposalForm
+  proposalForm: ProposalLeafletMap_proposalForm$data
   isCollectStep?: boolean
   btnBgColor: string
   btnTextColor: string
@@ -75,8 +75,8 @@ const locationIcon = L.divIcon({
   html: locationMarkerCode,
   iconSize: [48, 48],
 })
-let locationMarker: typeof L.Marker = {}
-export const flyToPosition = (mapRef: MapRef, lat: number, lng: number) => {
+let locationMarker: any = {}
+export const flyToPosition = (mapRef, lat: number, lng: number) => {
   if (mapRef.current) {
     mapRef.current.removeLayer(locationMarker)
   }
@@ -97,7 +97,7 @@ let lastPopoverLatLng = {
 const openPopup = (
   mapRef: MapRef,
   popupRef: PopupRef,
-  latlng?: MapCenterObject,
+  latlng: MapCenterObject | null,
   geoJsons,
   proposalInAZoneRequired: boolean,
 ) => {
@@ -219,25 +219,15 @@ export const ProposalLeafletMap = ({
         })}
       />
       <StyledMap
-        whenCreated={(map: MapProps) => {
+        whenCreated={map => {
           mapRef.current = map
-          map.on(
-            'click',
-            (
-              e:
-                | ((Event | null | undefined) & {
-                    latlng: MapCenterObject
-                  })
-                | null
-                | undefined,
-            ) => {
-              if (isCollectStep && proposalForm?.contribuable)
-                openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired)
-              setIsMobileSliderOpen(false)
-              isOnCluster = false
-              setShowDiscoverPane(false)
-            },
-          )
+          map.on('click', e => {
+            if (isCollectStep && proposalForm?.contribuable)
+              openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired)
+            setIsMobileSliderOpen(false)
+            isOnCluster = false
+            setShowDiscoverPane(false)
+          })
           map.on('zoomstart', () => {
             closePopup(mapRef, popupRef)
             setIsMobileSliderOpen(false)
@@ -259,6 +249,7 @@ export const ProposalLeafletMap = ({
         tap={false}
         className={className}
         doubleClickZoom={false}
+        // @ts-ignore safari sucks
         gestureHandling={!isSafari}
       >
         <ProposalMapOutOfAreaPane
@@ -357,6 +348,7 @@ export const ProposalLeafletMap = ({
         </MarkerClusterGroup>
         {geoJsons &&
           geoJsons.map((geoJson, idx) => (
+            // @ts-ignore geojson stuff
             <GeoJSON style={convertToGeoJsonStyle(geoJson.style)} key={idx} data={geoJson.district} />
           ))}
         {!isMobile && <ZoomControl position="bottomright" />}
@@ -404,8 +396,7 @@ const mapStateToProps = (state: State) => ({
   btnTextColor: state.default.parameters['color.btn.primary.text'],
 })
 
-// @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalLeafletMap)
+const container = connect(mapStateToProps)(ProposalLeafletMap)
 export default createFragmentContainer(container, {
   proposalForm: graphql`
     fragment ProposalLeafletMap_proposalForm on ProposalForm {

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
@@ -36,7 +35,7 @@ const ListContainer = styled.div.attrs({
     }
   }
 `
-export const ListItemContainer: StyledComponent<any, {}, HTMLLIElement> = styled.li.attrs({})`
+export const ListItemContainer = styled.li.attrs({})`
   position: relative;
   display: flex;
   flex-direction: row !important;

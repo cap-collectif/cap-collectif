@@ -36,7 +36,7 @@ const OpinionVersionCreateButton = ({ opinion, dispatch, style = {}, className }
 }
 
 // @ts-ignore
-const container = connect<any, any>()(OpinionVersionCreateButton)
+const container = connect()(OpinionVersionCreateButton)
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionVersionCreateButton_opinion on Opinion {

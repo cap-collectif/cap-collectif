@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import moment from 'moment'
 import { FormattedMessage } from 'react-intl'
 import { useAnalytics } from 'use-analytics'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Slider from 'react-slick'
 import { useDisclosure } from '@liinkiing/react-hooks'
@@ -19,7 +19,7 @@ type Props = {
   readonly isMobile: boolean
 }
 const SLIDER_MAX_ARTICLES_MOBILE = 4
-export const StyledSlider: StyledComponent<any, {}, typeof Slider> = styled(Slider)`
+export const StyledSlider = styled(Slider)`
   .slick-slide {
     padding: 0 ${props => props.spacing};
     height: unset;

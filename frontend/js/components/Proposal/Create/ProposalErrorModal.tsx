@@ -247,4 +247,4 @@ const mapStateToProps = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
 })
 
-export default connect<any, any>(mapStateToProps)(ProposalErrorModal)
+export default connect(mapStateToProps)(ProposalErrorModal)

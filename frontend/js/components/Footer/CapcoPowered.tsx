@@ -1,16 +1,16 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
 
 type Props = {
   textColor: string
 }
-const CapcoPoweredContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const CapcoPoweredContainer = styled.div`
   text-align: center;
   width: 100%;
 `
-const CapcoLogo: StyledComponent<any, {}, HTMLImageElement> = styled.img`
+const CapcoLogo = styled.img`
   width: 20px;
   height: 20px;
   margin: 0 5px;

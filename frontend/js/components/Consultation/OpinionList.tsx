@@ -7,15 +7,15 @@ import OpinionListPaginated from './OpinionListPaginated'
 import NewOpinionButton from '../Opinion/NewOpinionButton'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
-import type { SectionOrderBy, OpinionList_section } from '~relay/OpinionList_section.graphql'
-import type { OpinionList_consultation } from '~relay/OpinionList_consultation.graphql'
-import type { OpinionListQueryResponse, OpinionListQueryVariables, OpinionOrder } from '~relay/OpinionListQuery.graphql'
+import type { SectionOrderBy, OpinionList_section$data } from '~relay/OpinionList_section.graphql'
+import type { OpinionList_consultation$data } from '~relay/OpinionList_consultation.graphql'
+import type { OpinionListQuery$data, OpinionListQuery$variables, OpinionOrder } from '~relay/OpinionListQuery.graphql'
 import ListGroup from '../Ui/List/ListGroup'
 import Card from '../Ui/Card/Card'
 import config from '~/config'
 type Props = {
-  readonly section: OpinionList_section
-  readonly consultation: OpinionList_consultation
+  readonly section: OpinionList_section$data
+  readonly consultation: OpinionList_consultation$data
   readonly intl: IntlShape
   readonly enablePagination: boolean
 }
@@ -99,7 +99,7 @@ export class OpinionList extends React.Component<Props, State> {
         break
     }
 
-    return orderBy
+    return orderBy as OpinionOrder
   }
 
   render() {
@@ -198,7 +198,7 @@ export class OpinionList extends React.Component<Props, State> {
         {section.opinions.totalCount > 0 ? (
           <ListGroup className="m-0">
             <QueryRenderer
-              environment={environment}
+              environment={environment as any}
               query={graphql`
                 query OpinionListQuery($sectionId: ID!, $count: Int!, $cursor: String, $orderBy: OpinionOrder!) {
                   section: node(id: $sectionId) {
@@ -215,13 +215,13 @@ export class OpinionList extends React.Component<Props, State> {
                   count: enablePagination
                     ? INITIAL_PAGINATION_COUNT
                     : consultation.opinionCountShownBySection || INITIAL_PREVIEW_COUNT,
-                } as OpinionListQueryVariables
+                } as OpinionListQuery$variables
               }
               render={({
                 error,
                 props,
               }: ReactRelayReadyState & {
-                props: OpinionListQueryResponse | null | undefined
+                props: OpinionListQuery$data | null | undefined
               }) => {
                 if (error) {
                   console.log(error) // eslint-disable-line no-console

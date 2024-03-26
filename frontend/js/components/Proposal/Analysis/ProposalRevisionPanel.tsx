@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Panel, PanelGroup } from 'react-bootstrap'
 import { useFragment } from 'relay-hooks'
 import { graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import moment from 'moment'
 import { useIntl } from 'react-intl'
@@ -31,7 +31,7 @@ type RelayProps = {
   readonly proposal: ProposalRevision_proposal$key
 }
 type Props = RelayProps
-const ProposalRevisionsPanelContainer: StyledComponent<any, {}, typeof PanelGroup> = styled(PanelGroup)`
+const ProposalRevisionsPanelContainer = styled(PanelGroup)`
   margin-bottom: 0;
   & .collapsable-icon {
     transition: all 0.3s;

@@ -2,7 +2,7 @@ import React from 'react'
 import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedMessage } from 'react-intl'
 import { Button, Row, Col } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { connect, useSelector } from 'react-redux'
 import { graphql } from 'relay-runtime'
@@ -83,13 +83,13 @@ const countFilters = (
   return nbFilter
 }
 
-const StatusContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
+const StatusContainer = styled(Col)`
   color: white;
   display: flex;
   align-items: center;
 `
 
-const FiltersWrapper: StyledComponent<any, {}, typeof Col> = styled(Col)`
+const FiltersWrapper = styled(Col)`
   @media screen and (max-width: 991px) {
     display: flex;
     justify-content: space-between;
@@ -348,7 +348,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(EventListFilters))
+const container = connect(mapStateToProps)(injectIntl(EventListFilters))
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventListFilters_query on Query {

@@ -124,4 +124,4 @@ const mapDispatchToProps = (dispatch: Dispatch, props: Props) => ({
   dispatch,
 })
 
-export default connect<any, any>(null, mapDispatchToProps)(StepStatusesList)
+export default connect(null, mapDispatchToProps)(StepStatusesList)

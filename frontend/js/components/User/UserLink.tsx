@@ -68,7 +68,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(UserLink)
+const container = connect(mapStateToProps)(UserLink)
 export default createFragmentContainer(container, {
   user: graphql`
     fragment UserLink_user on User {

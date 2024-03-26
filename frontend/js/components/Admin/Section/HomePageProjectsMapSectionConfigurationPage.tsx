@@ -400,7 +400,7 @@ const form = injectIntl(
     asyncChangeFields: ['teaser', 'title'],
   })(HomePageProjectsMapSectionConfigurationPage),
 )
-const HomePageProjectsMapSectionConfigurationPageConnected = connect<any, any>(mapStateToProps)(form)
+const HomePageProjectsMapSectionConfigurationPageConnected = connect(mapStateToProps)(form)
 const fragmentContainer = createFragmentContainer(HomePageProjectsMapSectionConfigurationPageConnected, {
   homePageProjectsMapSectionConfiguration: graphql`
     fragment HomePageProjectsMapSectionConfigurationPage_homePageProjectsMapSectionConfiguration on HomePageProjectsMapSectionConfiguration {

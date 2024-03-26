@@ -176,7 +176,7 @@ const mapStateToProps = (state: GlobalState) => ({
 
 const withIntl = injectIntl(ProposalListFilters)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(withIntl)
+const container = connect(mapStateToProps)(withIntl)
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalListFilters_step on ProposalStep {

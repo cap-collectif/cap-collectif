@@ -5,7 +5,7 @@ import type { IntlShape } from 'react-intl'
 import 'react-intl'
 import { reduxForm, Field, formValueSelector, submit } from 'redux-form'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { ButtonGroup, Button } from '@cap-collectif/ui'
 import type { ArgumentCardFormEdition_argument } from '~relay/ArgumentCardFormEdition_argument.graphql'
@@ -62,7 +62,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     })
 }
 
-const Form: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+const Form = styled.form`
   margin-top: 16px;
 
   .form-group {

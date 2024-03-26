@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
@@ -7,7 +7,7 @@ export type Colors = {
   button: string
   name: string
 }
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'proposal-preview-item',
 })`
   display: flex;

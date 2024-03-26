@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { AvatarWrapper } from '~ui/List/UserAvatarList'
 
 export const AVATAR_SIZE = 25
-const AnalysisProposalListRoleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AnalysisProposalListRoleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31,7 +30,7 @@ const AnalysisProposalListRoleContainer: StyledComponent<any, {}, HTMLDivElement
     }
   }
 `
-export const RoleWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const RoleWrapper = styled.div`
   min-width: ${AVATAR_SIZE}px;
 
   &.role-analysts {

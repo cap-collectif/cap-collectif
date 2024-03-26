@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import AnalysisPlaceholderDashboard, {
   TYPE_DASHBOARD,
@@ -14,7 +14,7 @@ type Props = {
   fetchData: (() => void) | null | undefined
   selectedTab: ProposalsStateValues
 }
-const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+const Header = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

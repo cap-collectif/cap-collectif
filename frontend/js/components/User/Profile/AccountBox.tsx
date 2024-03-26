@@ -34,7 +34,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(AccountBox)
+const container = connect(mapStateToProps)(AccountBox)
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment AccountBox_viewer on User {

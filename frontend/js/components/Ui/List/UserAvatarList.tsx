@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
@@ -21,7 +21,7 @@ type PropsAvatarHidden = CommonProps & {
   reference?: any
 }
 const DEFAULT_AVATAR_SIZE = 45
-const UserAvatarListWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const UserAvatarListWrapper = styled.div.attrs({
   className: 'UserAvatarListWrapper',
 })`
   display: flex;

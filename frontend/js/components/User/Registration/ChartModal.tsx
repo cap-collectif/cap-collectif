@@ -58,5 +58,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onCloseChart: () => dispatch(hideChartModal()),
 })
 
-const ChartModalConnected = connect<any, any>(mapStateToProps, mapDispatchToProps)(ChartModal)
+const ChartModalConnected = connect(mapStateToProps, mapDispatchToProps)(ChartModal)
 export default ChartModalConnected

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import classNames from 'classnames'
 import { mediaQueryMobile } from '~/utils/sizes'
@@ -7,7 +6,7 @@ import colors from '~/utils/colors'
 const classes = classNames({
   'font-admin-page box box-primary container-fluid': true,
 })
-const FontAdminPageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const FontAdminPageContainer = styled.div.attrs({
   className: classes,
 })`
   .box-header {

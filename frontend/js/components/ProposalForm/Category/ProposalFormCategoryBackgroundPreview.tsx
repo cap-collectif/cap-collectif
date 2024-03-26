@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useResize } from '@liinkiing/react-hooks'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
@@ -70,7 +70,7 @@ const Container = styled.div<{
     }
   }
 `
-const CircledIcon: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const CircledIcon = styled.div`
   width: 24px;
   min-width: 24px;
   height: 24px;

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -34,11 +34,11 @@ export type Project =
     }
   | null
   | undefined
-const ErrorMessage: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ErrorMessage = styled.div`
   margin-bottom: 15px;
   color: ${colors.dangerColor};
 `
-const List: StyledComponent<any, {}, typeof ListGroup> = styled(ListGroup).attrs({})`
+const List = styled(ListGroup).attrs({})`
   div div .item-step {
     border-radius: 0 !important;
     border-bottom: 0 !important;
@@ -130,7 +130,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
 }
 
-const ProjectStepAdminListConnected = connect<any, any>(mapStateToProps)(ProjectStepAdminList)
+const ProjectStepAdminListConnected = connect(mapStateToProps)(ProjectStepAdminList)
 export default createFragmentContainer(ProjectStepAdminListConnected, {
   project: graphql`
     fragment ProjectStepAdminList_project on Project {

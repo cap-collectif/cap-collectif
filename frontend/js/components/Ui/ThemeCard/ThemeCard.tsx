@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 import Image from './Image'
@@ -19,7 +19,7 @@ export type ThemeProps = {
 type Props = {
   theme: ThemeProps
 }
-const ThemeContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ThemeContainer = styled.div`
   width: 250px;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);

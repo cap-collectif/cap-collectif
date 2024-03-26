@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { Media, ListGroupItem } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import UserAvatarLegacy from '../../User/UserAvatarLegacy'
 import OpinionInfos from '../OpinionInfos'
@@ -17,7 +17,7 @@ type Props = {
   readonly sourceable: OpinionSource_sourceable
   readonly isProfile: boolean
 }
-const MediaBody: StyledComponent<any, {}, typeof Media.Body> = styled(Media.Body)`
+const MediaBody = styled(Media.Body)`
   overflow: visible;
   .cap-popover {
     button {

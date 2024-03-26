@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl'
 import { ButtonToolbar, Button, Row, Col } from 'react-bootstrap'
@@ -28,16 +28,16 @@ type Props = {
   hasIdentificationCodeLists: boolean
   query: ProjectStepAdminItemStep_query
 }
-const ItemQuestionWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ItemQuestionWrapper = styled.div`
   padding-right: 8px;
 `
-const StepRow: StyledComponent<any, {}, typeof Row> = styled(Row)`
+const StepRow = styled(Row)`
   .btn-outline-danger.btn-danger {
     width: 33px;
     padding: 6px;
   }
 `
-const EditButton: StyledComponent<any, {}, typeof Button> = styled(Button).attrs({
+const EditButton = styled(Button).attrs({
   className: 'btn-edit btn-outline-warning',
 })`
   width: 33px;

@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-const FileContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const FileContainer = styled.div.attrs({
   className: 'file-container',
 })`
   display: flex;

@@ -417,7 +417,7 @@ const mapStateToProps = (state: GlobalState, { event }: Props) => {
   }
 }
 
-export const EventFormCreatePage = connect<any, any>(mapStateToProps)(injectIntl(EventFormPage))
+export const EventFormCreatePage = connect(mapStateToProps)(injectIntl(EventFormPage))
 export default createFragmentContainer(EventFormCreatePage, {
   query: graphql`
     fragment EventFormPage_query on Query @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {
@@ -459,7 +459,7 @@ export default createFragmentContainer(EventFormCreatePage, {
         metaDescription
         link
       }
-      
+
       viewerDidAuthor @include(if: $isAuthenticated)
       ...EventForm_event
     }

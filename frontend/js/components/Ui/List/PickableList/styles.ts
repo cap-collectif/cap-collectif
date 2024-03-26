@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import { CollapsableBody } from '~ui/Collapsable/index.styles'
@@ -9,7 +8,7 @@ export const Container = styled.div<{
 }>`
   position: relative;
 `
-export const GlobalLoaderContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const GlobalLoaderContainer = styled.div`
   & * {
     pointer-events: none;
     user-select: none;
@@ -37,6 +36,6 @@ export const GlobalLoaderContainer: StyledComponent<any, {}, HTMLDivElement> = s
   opacity: 0.6;
   z-index: 100;
 `
-export const GlobalLoader: StyledComponent<any, {}, typeof Loader> = styled(Loader)`
+export const GlobalLoader = styled(Loader)`
   z-index: 100;
 `

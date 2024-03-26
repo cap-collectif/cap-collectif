@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
@@ -17,7 +17,7 @@ type Props = {
   readonly questionnaire: QuestionnairePage_questionnaire | null | undefined
   readonly query: QuestionnairePage_query | null | undefined
 }
-export const QuestionnaireContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const QuestionnaireContainer = styled.div`
   .btn-answer-again {
     color: #fff;
     background-color: ${colors.primaryColor};

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import withColors from '../Utils/withColors'
 import colors from '../../utils/colors'
@@ -39,7 +38,7 @@ const CommentContainerbase = styled.div<{
   }
 `
 export const CommentContainer = withColors(CommentContainerbase)
-export const CommentAnswersContainer: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const CommentAnswersContainer = styled.ul`
   width: 100%;
   margin: 20px 0;
   padding: 0;

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   height: 32px;
   width: 40px;
   ${MAIN_BORDER_RADIUS};

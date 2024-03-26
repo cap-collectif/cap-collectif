@@ -56,4 +56,4 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 const container = injectIntl(ProposalListSearch)
-export default connect<any, any>(mapStateToProps)(container)
+export default connect(mapStateToProps)(container)

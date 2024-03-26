@@ -155,7 +155,7 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
     </Card.Counters>
   )
 }
-export default createFragmentContainer(connect<any, any>()(ProposalPreviewFooter), {
+export default createFragmentContainer(connect()(ProposalPreviewFooter), {
   step: graphql`
     fragment ProposalPreviewFooter_step on ProposalStep {
       voteType

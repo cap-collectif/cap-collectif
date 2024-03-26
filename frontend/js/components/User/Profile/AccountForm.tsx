@@ -17,7 +17,7 @@ import {
   submit,
   Field,
 } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { isEmail } from '../../../services/Validator'
@@ -192,7 +192,7 @@ export const onSubmit = (
       })
   }
 }
-const AccountContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AccountContainer = styled.div`
   display: flex;
   flex-direction: column;
   .account-form-hint {
@@ -207,11 +207,11 @@ const AccountContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     color: ${colors.gray};
   }
 `
-const FooterContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const SsoDiv: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const SsoDiv = styled.div`
   display: flex;
   align-items: center;
   a {
@@ -239,7 +239,7 @@ const SsoIcon = styled.div<{
     }
   }
 `
-const SsoGroup: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const SsoGroup = styled.div`
   margin-top: 10px;
   padding-left: 15px;
 
@@ -603,7 +603,7 @@ const mapStateToProps = (state: State, props: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment AccountForm_viewer on User {

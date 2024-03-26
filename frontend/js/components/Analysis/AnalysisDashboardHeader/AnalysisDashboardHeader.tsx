@@ -527,7 +527,7 @@ const mapStateToProps = (state: GlobalState) => ({
   userConnected: state.user.user,
 })
 
-const AnalysisDashboardHeaderConnected = connect<any, any>(mapStateToProps)(AnalysisDashboardHeader)
+const AnalysisDashboardHeaderConnected = connect(mapStateToProps)(AnalysisDashboardHeader)
 export default createPaginationContainer(
   AnalysisDashboardHeaderConnected,
   {

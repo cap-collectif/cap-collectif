@@ -64,4 +64,4 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 })
 
-export default connect<any, any>(mapStateToProps)(CustomProjectList)
+export default connect(mapStateToProps)(CustomProjectList)

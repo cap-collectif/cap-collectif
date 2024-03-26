@@ -3,7 +3,7 @@ import { Button, ButtonToolbar, Col, Row } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import type { DroppableProvided } from 'react-beautiful-dnd'
 import 'react-beautiful-dnd'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { change } from 'redux-form'
 import { useDeletePopoverMessage } from './useDeletePopoverMessage'
@@ -29,7 +29,7 @@ const ItemQuestionWrapper = styled.div<{
     fill: #999;
   }
 `
-const ActionIconWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ActionIconWrapper = styled.div`
   .action-icons {
     display: flex;
   }

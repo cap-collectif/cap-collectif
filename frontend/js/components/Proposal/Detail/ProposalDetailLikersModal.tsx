@@ -83,7 +83,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
   }
 }
 // @ts-ignore
-const container = connect<any, any>()(injectIntl(ProposalDetailLikersModal))
+const container = connect()(injectIntl(ProposalDetailLikersModal))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDetailLikersModal_proposal on Proposal {

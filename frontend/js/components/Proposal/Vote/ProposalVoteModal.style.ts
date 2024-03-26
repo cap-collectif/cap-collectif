@@ -1,10 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Modal, MultiStepModal } from '@cap-collectif/ui'
 
-export const ProposalVoteMultiModalContainer: StyledComponent<any, {}, typeof MultiStepModal> = styled(
-  MultiStepModal,
-).attrs({
+export const ProposalVoteMultiModalContainer = styled(MultiStepModal).attrs({
   className: 'proposalVote__modal',
 })`
   & .cap-tag {
@@ -54,7 +51,7 @@ export const ProposalVoteMultiModalContainer: StyledComponent<any, {}, typeof Mu
     }
   }
 `
-export const ProposalVoteModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal).attrs({
+export const ProposalVoteModalContainer = styled(Modal).attrs({
   className: 'proposalVote__modal',
 })`
   & .cap-tag {

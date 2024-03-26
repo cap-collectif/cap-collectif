@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Alert, Modal } from 'react-bootstrap'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -33,7 +33,7 @@ type Props = StateProps &
     query: RegistrationModal_query
     locale: string
   }
-export const ModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const ModalContainer = styled(Modal)`
   .modal-dialog {
     width: 400px;
   }
@@ -152,7 +152,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onCloseChart: () => dispatch(hideChartModal()),
 })
 
-const RegistrationModalConnected = connect<any, any>(mapStateToProps, mapDispatchToProps)(RegistrationModal)
+const RegistrationModalConnected = connect(mapStateToProps, mapDispatchToProps)(RegistrationModal)
 export default createFragmentContainer(RegistrationModalConnected, {
   query: graphql`
     fragment RegistrationModal_query on Query {

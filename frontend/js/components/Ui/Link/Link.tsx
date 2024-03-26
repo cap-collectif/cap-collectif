@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import copy from 'copy-to-clipboard'
 import { FormattedMessage } from 'react-intl'
@@ -11,7 +11,7 @@ type Props = {
   readonly url: string
   readonly className?: string
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   height: 24px;
   display: flex;
 

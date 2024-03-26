@@ -80,7 +80,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   },
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 const container = injectIntl(
   connector(
     reduxForm({

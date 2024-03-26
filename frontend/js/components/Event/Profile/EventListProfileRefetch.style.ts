@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 import colors from '~/utils/colors'
 
-const EventListProfileRefetchContainer: StyledComponent<any, {}, HTMLElement> = styled.section`
+const EventListProfileRefetchContainer = styled.section`
   header {
     display: flex;
     justify-content: space-between;

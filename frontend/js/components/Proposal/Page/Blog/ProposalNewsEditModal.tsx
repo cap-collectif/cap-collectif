@@ -192,7 +192,7 @@ const mapStateToProps = (state: GlobalState) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(ProposalNewsEditModal))
+const container = connect(mapStateToProps)(injectIntl(ProposalNewsEditModal))
 export default createFragmentContainer(container, {
   post: graphql`
     fragment ProposalNewsEditModal_post on Post {

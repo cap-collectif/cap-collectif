@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/styles/modules/colors'
 import Tag from '../../Ui/Labels/Tag'
@@ -12,7 +12,7 @@ type Props = {
   readonly icon?: string
   readonly archived: boolean
 }
-const StyledTag: StyledComponent<any, {}, typeof Tag> = styled(Tag)`
+const StyledTag = styled(Tag)<{ archived?: boolean }>`
   color: ${props => (props.archived ? colors['neutral-gray']['500'] : 'inherit')};
 `
 export class ProjectPreviewCounter extends React.Component<Props> {

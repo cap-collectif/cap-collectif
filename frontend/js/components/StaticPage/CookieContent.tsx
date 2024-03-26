@@ -106,4 +106,4 @@ const mapStateToProps = (state: State) => ({
   cookiesList: state.default.parameters['cookies-list'],
 })
 
-export default connect<any, any>(mapStateToProps)(CookieContent)
+export default connect(mapStateToProps)(CookieContent)

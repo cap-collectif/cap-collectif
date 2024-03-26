@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { graphql, QueryRenderer } from 'react-relay'
 import { connect } from 'react-redux'
@@ -19,7 +19,7 @@ export type Props = ReduxProps & {
   readonly relatedSlug: string
 }
 export const META_STEP_NAVIGATION_HEIGHT = 100
-const MetaStepNavigationBoxInner: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const MetaStepNavigationBoxInner = styled.div`
   height: ${META_STEP_NAVIGATION_HEIGHT}px;
   max-height: ${META_STEP_NAVIGATION_HEIGHT}px;
   min-height: ${META_STEP_NAVIGATION_HEIGHT}px;
@@ -99,4 +99,4 @@ const mapStateToProps = (state: GlobalState) => ({
   hasNewConsultationPage: state.default.features.unstable__new_consultation_page,
 })
 
-export default connect<any, any>(mapStateToProps)(MetaStepNavigationBox)
+export default connect(mapStateToProps)(MetaStepNavigationBox)

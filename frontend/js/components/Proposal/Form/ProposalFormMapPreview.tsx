@@ -9,7 +9,6 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import { colors as dsColors } from '~/styles/modules/colors'
 import { colors } from '~/utils/colors'
-import type { MapProps } from '~/components/Proposal/Map/Map.types'
 import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
 type Props = {
@@ -40,10 +39,11 @@ export const ProposalFormMapPreview = ({ address, category, categories }: Props)
   if (!L || !address) return null
   const proposalCategory = categories.find(cat => cat.id === category) || {
     color: dsColors.blue[500],
+    icon: null,
   }
   return (
     <MapContainer
-      whenCreated={(map: MapProps) => {
+      whenCreated={map => {
         mapRef.current = map
         setTimeout(() => map.invalidateSize(), 100)
       }}

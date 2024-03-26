@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useScrollYPosition } from 'react-use-scroll-position'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Tab } from 'react-bootstrap'
 import { useResize } from '@liinkiing/react-hooks' // TODO: find a better library
@@ -29,10 +29,10 @@ export type Props = {
   isAuthenticated: boolean
   platformLocale: string
 }
-export const PageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PageContainer = styled.div`
   background: ${colors.pageBgc};
 `
-const ProposalPageBody: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageBody = styled.div`
   width: 100%;
   max-width: 950px;
   margin: auto;

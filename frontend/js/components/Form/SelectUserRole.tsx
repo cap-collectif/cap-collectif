@@ -74,5 +74,5 @@ const mapStateToProps = (state: GlobalState) => ({
   hasProjectAdminFeature: state.default.features.project_admin ?? false,
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 export default connector(injectIntl(SelectUserRole))

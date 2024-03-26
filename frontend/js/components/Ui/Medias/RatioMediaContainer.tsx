@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   ratioX: number
   ratioY: number
 }
-export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs<Props>({
   className: 'ratio-media-container',
 })`
   position: relative;

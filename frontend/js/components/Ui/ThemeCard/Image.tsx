@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
 import { default as StyledImage } from '~ui/Primitives/Image'
@@ -8,7 +8,7 @@ type Props = {
   src: string
   alt: string
 }
-const ImageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ImageContainer = styled.div`
   width: 248px;
   height: 220px;
 

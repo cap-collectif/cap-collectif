@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -8,14 +8,14 @@ import { ListGroup, ListGroupItem, Row, Col, ButtonToolbar } from 'react-bootstr
 import DeleteButtonPopover from '~/components/Ui/Button/DeleteButtonPopover'
 import EditButton from '~/components/Ui/Button/EditButton'
 import Translation from '~/services/Translation'
-import type { GlobalDistrictAdminList_districts } from '~relay/GlobalDistrictAdminList_districts.graphql'
+import type { GlobalDistrictAdminList_districts$data } from '~relay/GlobalDistrictAdminList_districts.graphql'
 
 type Props = {
-  districts: GlobalDistrictAdminList_districts
+  districts: GlobalDistrictAdminList_districts$data
   handleEdit: (editId: string) => void
   handleDelete: (deleteId: string) => void
 }
-const ListGroupItemContainer: StyledComponent<any, {}, typeof ListGroupItem> = styled(ListGroupItem)`
+const ListGroupItemContainer = styled(ListGroupItem)`
   background-color: #fafafa;
 `
 export function GlobalDistrictAdminList(props: Props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { EventImage_event } from '~relay/EventImage_event.graphql'
 import DefaultEventCover from '../DefaultEventCover'
@@ -11,7 +11,7 @@ type EventImageProps = {
   readonly event: EventImage_event
   readonly enabled: boolean
 }
-export const EventImageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const EventImageContainer = styled.div.attrs({
   className: 'eventImage',
 })`
   position: relative;

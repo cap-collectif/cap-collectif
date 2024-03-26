@@ -1,8 +1,8 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
 

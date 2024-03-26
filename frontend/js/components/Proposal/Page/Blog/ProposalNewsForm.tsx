@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import component from '~/components/Form/Field'
 import stripHtml from '~/utils/stripHtml'
@@ -31,7 +31,7 @@ type Props = ReduxFormFormProps &
   }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const CustomForm: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+const CustomForm = styled.form`
   label {
     font-weight: 400;
   }
@@ -128,7 +128,7 @@ const mapStateToProps = (state: GlobalState, { post }: Props) => {
   }
 }
 
-export const ProposalNewsFormCreate = connect<any, any>(mapStateToProps)(formContainer)
+export const ProposalNewsFormCreate = connect(mapStateToProps)(formContainer)
 export default createFragmentContainer(ProposalNewsFormCreate, {
   post: graphql`
     fragment ProposalNewsForm_post on Post {

@@ -3,9 +3,9 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import moment from 'moment'
 import { Label } from 'react-bootstrap'
 import { FormattedDate, FormattedMessage } from 'react-intl'
-import type { ProposalListTable_proposals } from '~relay/ProposalListTable_proposals.graphql'
-import type { ProposalListTable_step } from '~relay/ProposalListTable_step.graphql'
-import type { ImplementationStepTitle_progressSteps } from '~relay/ImplementationStepTitle_progressSteps.graphql'
+import type { ProposalListTable_proposals$data } from '~relay/ProposalListTable_proposals.graphql'
+import type { ProposalListTable_step$data } from '~relay/ProposalListTable_step.graphql'
+import type { ImplementationStepTitle_progressSteps$data } from '~relay/ImplementationStepTitle_progressSteps.graphql'
 import Table from '../../Ui/Table/Table'
 import ProposalListTableMobile from './ProposalListTableMobile'
 import ImplementationStepTitle from '../ImplementationStepTitle'
@@ -16,8 +16,8 @@ import InlineList from '../../Ui/List/InlineList'
 import { translateContent } from '~/utils/ContentTranslator'
 
 type Props = {
-  proposals: ProposalListTable_proposals
-  step: ProposalListTable_step
+  proposals: ProposalListTable_proposals$data
+  step: ProposalListTable_step$data
 }
 type State = {
   windowWidth: number
@@ -53,7 +53,7 @@ export class ProposalListTable extends React.Component<Props, State> {
     })
   }
 
-  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps) => (
+  getPhaseTitle = (progressSteps: ImplementationStepTitle_progressSteps$data) => (
     <ImplementationStepTitle progressSteps={progressSteps} />
   )
 
@@ -88,10 +88,8 @@ export class ProposalListTable extends React.Component<Props, State> {
             implementationPhase: {
               text: 'implementation-phase',
               value: {
-                list: node.progressSteps || [],
-                title: node?.progressSteps?.length // @ts-expect-error
-                  ? this.getPhaseTitle(node.progressSteps)
-                  : false,
+                list: node.progressSteps || [], // @ts-ignore
+                title: node?.progressSteps?.length ? this.getPhaseTitle(node.progressSteps) : false,
               },
               width: '250px',
             },
@@ -266,7 +264,6 @@ export class ProposalListTable extends React.Component<Props, State> {
                   media: value.media,
                   _links: {},
                 }}
-                defaultAvatar={null}
               />
               {value.url ? (
                 <a href={value.url}>

@@ -5,7 +5,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 import ProposalPreview from '../Proposal/Preview/ProposalPreview'
-import type { LastProposalsQueryResponse, LastProposalsQueryVariables } from '~relay/LastProposalsQuery.graphql'
+import type { LastProposalsQuery$data, LastProposalsQuery$variables } from '~relay/LastProposalsQuery.graphql'
 export type Props = {
   readonly ids: ReadonlyArray<string>
 }
@@ -15,7 +15,7 @@ export class LastProposals extends React.Component<Props> {
     return (
       <div className="container">
         <QueryRenderer
-          environment={environment}
+          environment={environment as any}
           query={graphql`
             query LastProposalsQuery($ids: [ID!]!, $stepId: ID!) {
               proposals: nodes(ids: $ids) {
@@ -31,13 +31,13 @@ export class LastProposals extends React.Component<Props> {
               ids,
               // TODO fixme https://github.com/cap-collectif/platform/issues/7016
               stepId: '',
-            } as LastProposalsQueryVariables
+            } as LastProposalsQuery$variables
           }
           render={({
             error,
             props,
           }: ReactRelayReadyState & {
-            props: LastProposalsQueryResponse | null | undefined
+            props: LastProposalsQuery$data | null | undefined
           }) => {
             if (error) {
               return graphqlError

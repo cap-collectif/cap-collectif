@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { Container as PickableListBodyContainer } from '~ui/List/PickableList/body/styles'
@@ -41,7 +40,7 @@ export const Container = styled.div.attrs({
     border-top-right-radius: 0;
   }
 `
-export const Overlay: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Overlay = styled.div.attrs({
   className: 'overlay',
 })`
   position: absolute;

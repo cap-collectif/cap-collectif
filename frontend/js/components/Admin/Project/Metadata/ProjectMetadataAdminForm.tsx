@@ -4,7 +4,7 @@ import { Field } from 'redux-form'
 import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { injectIntl, FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { ProjectMetadataAdminForm_project } from '~relay/ProjectMetadataAdminForm_project.graphql'
 import '~relay/ProjectMetadataAdminForm_project.graphql'
@@ -74,7 +74,7 @@ export const formatInput = ({ publishedAt, themes, cover, video, districts }: Fo
   }
   return input
 }
-const Wrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   color: #000;
@@ -83,7 +83,7 @@ const Wrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     width: 50%;
   }
 `
-const VideoTextSpan: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const VideoTextSpan = styled.span`
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
@@ -253,7 +253,7 @@ const mapStateToProps = (state, { project }: Props) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProjectMetadataAdminForm)
+const container = connect(mapStateToProps)(ProjectMetadataAdminForm)
 export default createFragmentContainer(injectIntl(container), {
   project: graphql`
     fragment ProjectMetadataAdminForm_project on Project {

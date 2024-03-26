@@ -1,9 +1,9 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { LIGHT_BOX_SHADOW, MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const Container: StyledComponent<any, {}, HTMLAnchorElement> = styled.a.attrs({
+export const Container = styled.a.attrs({
   className: 'debate-preview-item',
 })`
   display: flex;

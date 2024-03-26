@@ -92,7 +92,7 @@ const mapStateToProps = (state: GlobalState) => ({
   cardColor: state.default.parameters['color.btn.primary.bg'],
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProposalPageCustomSections), {
+export default createFragmentContainer(connect(mapStateToProps)(ProposalPageCustomSections), {
   proposal: graphql`
     fragment ProposalPageCustomSections_proposal on Proposal {
       id

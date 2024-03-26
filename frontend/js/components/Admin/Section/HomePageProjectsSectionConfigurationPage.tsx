@@ -8,11 +8,8 @@ import * as S from './HomePageProjectsSectionConfigurationPage.style'
 import renderComponent from '~/components/Form/Field'
 import type { Dispatch, GlobalState } from '~/types'
 import Button from '~ds/Button/Button'
-import UpdateHomePageProjectsSectionConfigurationMutation
-  from '~/mutations/UpdateHomePageProjectsSectionConfigurationMutation'
-import type {
-  HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key,
-} from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql'
+import UpdateHomePageProjectsSectionConfigurationMutation from '~/mutations/UpdateHomePageProjectsSectionConfigurationMutation'
+import type { HomePageProjectsSectionConfigurationPageDisplayMostRecent_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayMostRecent_query.graphql'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Icon from '~ds/Icon/Icon'
 import { toast } from '~ds/Toast'
@@ -20,19 +17,13 @@ import type {
   HomePageProjectsSectionConfigurationDisplayMode,
   HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration,
 } from '~relay/HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration.graphql'
-import HomePageProjectsSectionConfigurationPageDisplayMostRecent
-  from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayMostRecent'
+import HomePageProjectsSectionConfigurationPageDisplayMostRecent from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayMostRecent'
 import { handleTranslationChange } from '~/services/Translation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import Text from '~ui/Primitives/Text'
-import HomePageProjectsSectionConfigurationPageDisplayCustom
-  from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom'
-import type {
-  HomePageProjectsSectionConfigurationPageDisplayCustom_query$key,
-} from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql'
-import type {
-  HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key,
-} from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql'
+import HomePageProjectsSectionConfigurationPageDisplayCustom from '~/components/Admin/Section/HomePageProjectsSectionConfigurationPageDisplayCustom'
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_query$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_query.graphql'
+import type { HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration$key } from '~relay/HomePageProjectsSectionConfigurationPageDisplayCustom_homePageProjectsSectionConfiguration.graphql'
 import { normalizeNumberInput } from '~/components/Form/utils'
 
 const formName = 'section-proposal-admin-form'
@@ -359,7 +350,7 @@ const form = injectIntl(
     asyncChangeFields: ['nbObjects', 'teaser', 'title'],
   })(HomePageProjectsSectionConfigurationPage),
 )
-const HomePageProjectsSectionConfigurationPageConnected = connect<any, any>(mapStateToProps)(form)
+const HomePageProjectsSectionConfigurationPageConnected = connect(mapStateToProps)(form)
 const fragmentContainer = createFragmentContainer(HomePageProjectsSectionConfigurationPageConnected, {
   homePageProjectsSectionConfiguration: graphql`
     fragment HomePageProjectsSectionConfigurationPage_homePageProjectsSectionConfiguration on HomePageProjectsSectionConfiguration {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { ProgressBar } from 'react-bootstrap'
 import { Box } from '@cap-collectif/ui'
@@ -19,7 +19,7 @@ type Props = {
   step: ProposalPageVoteThreshold_step
   showPoints: boolean
 }
-const ProposalPageVoteThresholdContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageVoteThresholdContainer = styled.div`
   padding: 20px 30px;
 
   > h4 {

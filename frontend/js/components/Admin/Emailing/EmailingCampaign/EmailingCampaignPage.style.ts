@@ -1,11 +1,10 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const Header: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,6 +19,6 @@ export const Header: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     font-weight: 600;
   }
 `
-export const Content: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Content = styled.div`
   padding: 20px;
 `

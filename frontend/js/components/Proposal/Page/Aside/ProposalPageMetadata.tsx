@@ -1,6 +1,6 @@
 import { $Values } from 'utility-types'
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedDate, FormattedNumber, useIntl } from 'react-intl'
@@ -13,7 +13,7 @@ import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPa
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import { MetadataPlaceHolder } from './ProposalPageMetadata.placeholder'
 
-const ProposalPageMetadataContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageMetadataContainer = styled.div`
   padding: 20px;
 
   > div {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { change } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import { Button, Row, Col } from 'react-bootstrap'
@@ -15,7 +15,7 @@ type Props = {
   dispatch: Dispatch
   formName: string
 }
-const EventPagePassedEventsPreviewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const EventPagePassedEventsPreviewContainer = styled.div`
   & > h4 {
     font-size: 16px;
     font-weight: bold;
@@ -61,7 +61,7 @@ export const EventPagePassedEventsPreview = ({ query, dispatch, formName }: Prop
     </EventPagePassedEventsPreviewContainer>
   )
 // @ts-ignore
-const container = connect<any, any>()(EventPagePassedEventsPreview)
+const container = connect()(EventPagePassedEventsPreview)
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventPagePassedEventsPreview_query on Query

@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import UserAvatarLegacy from '../User/UserAvatarLegacy'
 import CommentInfos from './CommentInfos'
@@ -23,7 +23,7 @@ type Props = {
   readonly disabledButton?: boolean | null | undefined
   readonly useBodyColor: boolean
 }
-const AnswerButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const AnswerButton = styled.button`
   display: flex;
   align-items: center;
   border: none;
@@ -37,7 +37,7 @@ const AnswerButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
     margin-right: 5px;
   }
 `
-const MediaBody: StyledComponent<any, {}, typeof Media.Body> = styled(Media.Body)`
+const MediaBody = styled(Media.Body)`
   overflow: visible;
   .cap-popover {
     button {

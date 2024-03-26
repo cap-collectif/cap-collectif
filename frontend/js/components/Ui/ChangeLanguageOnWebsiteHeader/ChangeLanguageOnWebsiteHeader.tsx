@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { LocaleMap } from '../Button/SiteLanguageChangeButton'
 import SiteLanguageChangeButton from '../Button/SiteLanguageChangeButton'
@@ -12,7 +12,7 @@ type Props = {
   languageList: Array<LocaleMap>
   defaultLanguage: string
 }
-const ChangeLanguageProposalContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ChangeLanguageProposalContainer = styled.div`
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
   width: 100%;
@@ -35,7 +35,7 @@ const ChangeLanguageProposalContainer: StyledComponent<any, {}, HTMLDivElement> 
     right: 30px;
   }
 `
-export const Content: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -45,7 +45,7 @@ export const Content: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     flex-direction: column;
   }
 `
-const Close: StyledComponent<any, {}, HTMLElement> = styled.i`
+const Close = styled.i`
   margin-left: 35px;
   margin-top: 2px;
   cursor: pointer;
@@ -56,7 +56,7 @@ const Close: StyledComponent<any, {}, HTMLElement> = styled.i`
     margin-top: -50px;
   }
 `
-const ChangeLanguageForm: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ChangeLanguageForm = styled.div`
   width: 50%;
   text-align: end;
 
@@ -72,7 +72,7 @@ const ChangeLanguageForm: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin-top: 10px;
   }
 `
-const ContinueButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
+const ContinueButton = styled(Button)`
   font-size: 16px;
   margin-left: 20px;
 
@@ -80,7 +80,7 @@ const ContinueButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
     margin-left: 10px;
   }
 `
-const ChangeLanguageText: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ChangeLanguageText = styled.div`
   @media (max-width: 991px) {
     align-self: start;
     max-width: 85%;

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
@@ -10,7 +10,7 @@ type Props = {
   expanded?: boolean
   onClick: () => void
 }
-const ReadMoreButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const ReadMoreButton = styled.button`
   text-align: left;
   padding: 0;
   color: ${colors.primaryColor};

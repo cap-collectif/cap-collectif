@@ -26,7 +26,7 @@ const OpinionPageApp = ({ hasNewConsultationPage, ...props }: Props) => {
   return hasNewConsultationPage ? <NewOpinionPage {...props} /> : <OpinionPage {...props} />
 }
 
-const OpinionPageAppContainer = connect<any, any>(mapStateToProps)(OpinionPageApp)
+const OpinionPageAppContainer = connect(mapStateToProps)(OpinionPageApp)
 export default (props: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (

@@ -164,7 +164,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProjectAccessAdminForm)
+const container = connect(mapStateToProps)(ProjectAccessAdminForm)
 export default createFragmentContainer(container, {
   project: graphql`
     fragment ProjectAccessAdminForm_project on Project {

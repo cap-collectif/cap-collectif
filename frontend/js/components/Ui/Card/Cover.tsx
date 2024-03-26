@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import * as React from 'react'
 
@@ -7,7 +6,7 @@ type Props = {
   width?: string
   children: JSX.Element | JSX.Element[] | string
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const Container = styled.div.attrs({
   className: 'card__cover',
 })`
   overflow: hidden;

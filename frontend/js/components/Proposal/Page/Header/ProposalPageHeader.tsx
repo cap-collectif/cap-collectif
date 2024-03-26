@@ -4,18 +4,18 @@ import { FormattedMessage, FormattedDate, useIntl } from 'react-intl'
 import { connect, useSelector } from 'react-redux'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import moment from 'moment'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
-import { Button, Box, Flex, Skeleton } from '@cap-collectif/ui'
+import { Button, Box, Flex, Skeleton, CapUIIcon } from '@cap-collectif/ui'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { getBaseUrl } from '~/config'
 import colors from '~/utils/colors'
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
 import type { GlobalState } from '~/types'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
-import type { ProposalPageHeader_proposal } from '~relay/ProposalPageHeader_proposal.graphql'
-import type { ProposalPageHeader_step } from '~relay/ProposalPageHeader_step.graphql'
-import type { ProposalPageHeader_viewer } from '~relay/ProposalPageHeader_viewer.graphql'
+import type { ProposalPageHeader_proposal$data } from '~relay/ProposalPageHeader_proposal.graphql'
+import type { ProposalPageHeader_step$data } from '~relay/ProposalPageHeader_step.graphql'
+import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_viewer.graphql'
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
@@ -27,15 +27,15 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 type Props = {
   title: string | null | undefined
-  proposal: ProposalPageHeader_proposal
-  viewer: ProposalPageHeader_viewer | null | undefined
-  step: ProposalPageHeader_step | null | undefined
+  proposal: ProposalPageHeader_proposal$data
+  viewer: ProposalPageHeader_viewer$data | null | undefined
+  step: ProposalPageHeader_step$data | null | undefined
   hasAnalysingButton?: boolean
   onAnalysisClick?: () => void
   shouldDisplayPictures: boolean
   platformLocale: string
 }
-const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+const Header = styled.header`
   border-bottom: 1px solid ${colors.lightGray};
   padding-bottom: 30px;
   background-color: ${colors.white};
@@ -79,7 +79,7 @@ const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
     }
   }
 `
-const Cover: StyledComponent<any, {}, typeof Image> = styled(Image)`
+const Cover = styled(Image)`
   width: 100%;
   height: 310px;
   border-radius: 6px;
@@ -89,7 +89,7 @@ const Cover: StyledComponent<any, {}, typeof Image> = styled(Image)`
     border-radius: 0;
   }
 `
-const Informations: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Informations = styled.div`
   margin: 15px;
 
   @media (min-width: ${bootstrapGrid.mdMin}px) {
@@ -106,14 +106,14 @@ const Informations: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     word-break: break-word;
   }
 `
-const About: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const About = styled.div`
   margin-left: 5px;
 
   div:first-child {
     font-weight: 600;
   }
 `
-const HeaderActions: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const HeaderActions = styled.div`
   z-index: 3;
   position: absolute;
   margin: 20px;
@@ -183,7 +183,7 @@ const BackUrl = ({
       : getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl)
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
-  const { projectSlug } = useParams()
+  const { projectSlug } = useParams<{ projectSlug?: string }>()
   return (
     <Link
       to={{
@@ -213,7 +213,7 @@ export const ProposalPageHeader = ({
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
-  const { state } = useLocation()
+  const { state } = useLocation<{ stepUrl?: string; stepId?: string }>()
   const createdDate = (
     <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
   )
@@ -265,7 +265,7 @@ export const ProposalPageHeader = ({
                     variant="secondary"
                     variantColor="primary"
                     variantSize="small"
-                    leftIcon="PICTURE_O"
+                    leftIcon={CapUIIcon.PictureO}
                   >
                     {intl.formatMessage({
                       id: 'edit-image',
@@ -324,7 +324,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalPageHeader)
+const container = connect(mapStateToProps)(ProposalPageHeader)
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment ProposalPageHeader_viewer on User

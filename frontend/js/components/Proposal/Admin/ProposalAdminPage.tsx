@@ -89,4 +89,4 @@ const mapStateToProps = (state: State, props: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(ProposalAdminPage)
+export default connect(mapStateToProps)(ProposalAdminPage)

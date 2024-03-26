@@ -1,6 +1,6 @@
 import * as React from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import type { StyledComponent } from 'styled-components'
+
 import 'styled-components'
 import * as S from './styles'
 import Header from './header'

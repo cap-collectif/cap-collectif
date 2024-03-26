@@ -122,4 +122,4 @@ export const ProjectAdminConsultationStepForm = ({
     </>
   )
 }
-export default connect<any, any>()(ProjectAdminConsultationStepForm)
+export default connect()(ProjectAdminConsultationStepForm)

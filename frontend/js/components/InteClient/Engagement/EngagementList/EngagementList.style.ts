@@ -1,8 +1,8 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-const EngagementListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const EngagementListContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -52,7 +52,7 @@ export const ProposalNewsDeleteModal = ({ post, showDeleteModal, onSubmit, displ
   )
 }
 // @ts-ignore
-const container = connect<any, any>()(ProposalNewsDeleteModal)
+const container = connect()(ProposalNewsDeleteModal)
 export default createFragmentContainer(container, {
   post: graphql`
     fragment ProposalNewsDeleteModal_post on Post {

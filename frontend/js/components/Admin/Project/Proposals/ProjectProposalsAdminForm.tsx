@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
@@ -20,9 +20,7 @@ export type FormValues = {
   opinionCanBeFollowed: boolean
 }
 
-const ActivityInformationIcon: StyledComponent<any, {}, typeof InformationIcon> = styled(props => (
-  <InformationIcon {...props} />
-))`
+const ActivityInformationIcon = styled(props => <InformationIcon {...props} />)`
   margin-left: 5px;
 `
 

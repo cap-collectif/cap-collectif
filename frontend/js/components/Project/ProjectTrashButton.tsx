@@ -62,4 +62,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(ProjectTrashButton)
+export default connect(mapStateToProps)(ProjectTrashButton)

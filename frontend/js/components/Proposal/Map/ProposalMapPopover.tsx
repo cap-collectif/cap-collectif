@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { Link, useParams } from 'react-router-dom'
@@ -31,7 +31,7 @@ export const PopoverContainer = styled.div<{
   border-top-left-radius: ${MAIN_BORDER_RADIUS_SIZE};
   border-top-right-radius: ${MAIN_BORDER_RADIUS_SIZE};
 `
-export const PopoverContent: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PopoverContent = styled.div`
   padding: 10px;
   position: relative;
 
@@ -190,7 +190,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProposalMapPopover), {
+export default createFragmentContainer(connect(mapStateToProps)(ProposalMapPopover), {
   proposal: graphql`
     fragment ProposalMapPopover_proposal on Proposal {
       title

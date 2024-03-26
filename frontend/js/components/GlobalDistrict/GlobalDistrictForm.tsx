@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form'
 import { FormattedMessage } from 'react-intl'
 import { Button, Modal } from 'react-bootstrap'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { isValid } from '~/services/GeoJsonValidator'
 import CloseButton from '~/components/Form/CloseButton'
@@ -117,7 +117,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   )
 }
 
-const ModalHeaderContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ModalHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `
@@ -188,7 +188,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
 }
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   district: graphql`
     fragment GlobalDistrictForm_district on GlobalDistrict {

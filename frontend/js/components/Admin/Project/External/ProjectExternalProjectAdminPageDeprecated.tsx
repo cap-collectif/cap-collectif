@@ -37,5 +37,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 })
 
-const connector = connect<any, any>(mapStateToProps, mapDispatchToProps)(ProjectExternalProjectAdminPageDeprecated)
+const connector = connect(mapStateToProps, mapDispatchToProps)(ProjectExternalProjectAdminPageDeprecated)
 export default connector

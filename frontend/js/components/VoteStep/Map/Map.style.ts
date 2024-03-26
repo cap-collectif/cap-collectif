@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-export const MapContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const MapContainer = styled.div`
   position: sticky;
   top: 0;
 

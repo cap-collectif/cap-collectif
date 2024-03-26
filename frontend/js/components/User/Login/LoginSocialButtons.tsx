@@ -83,4 +83,4 @@ const mapStateToProps = (state: State) => ({
   ssoList: state.default.ssoList,
 })
 
-export default connect<any, any>(mapStateToProps)(LoginSocialButtons)
+export default connect(mapStateToProps)(LoginSocialButtons)

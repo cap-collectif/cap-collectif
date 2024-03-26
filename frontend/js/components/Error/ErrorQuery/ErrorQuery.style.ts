@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const ButtonRetry: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonRetry = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;

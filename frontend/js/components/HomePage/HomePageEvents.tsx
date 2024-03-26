@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import EventPreview from '../Event/EventPreview/EventPreview'
 import { mediaQueryMobile } from '~/utils/sizes'
-import type { HomePageEventsQueryResponse, HomePageEventsQueryVariables } from '~relay/HomePageEventsQuery.graphql'
+import type { HomePageEventsQuery$data, HomePageEventsQuery$variables } from '~relay/HomePageEventsQuery.graphql'
 import type { State } from '~/types'
 export type Props = {
   readonly showAllUrl: string
@@ -19,7 +19,7 @@ export type Props = {
   }
   readonly isAuthenticated: boolean
 }
-export const EventContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const EventContainer = styled.div`
   padding-top: 20px;
   width: 100%;
   margin-bottom: 30px;
@@ -67,7 +67,7 @@ class HomePageEvents extends React.Component<Props> {
     error,
     props,
   }: ReactRelayReadyState & {
-    props: HomePageEventsQueryResponse | null | undefined
+    props: HomePageEventsQuery$data | null | undefined
   }) => {
     if (error) {
       return graphqlError
@@ -103,7 +103,7 @@ class HomePageEvents extends React.Component<Props> {
     const { section, isAuthenticated } = this.props
     return (
       <QueryRenderer
-        environment={environment}
+        environment={environment as any}
         query={graphql`
           query HomePageEventsQuery(
             $count: Int
@@ -130,7 +130,7 @@ class HomePageEvents extends React.Component<Props> {
               direction: 'ASC',
             },
             isAuthenticated,
-          } as HomePageEventsQueryVariables
+          } as HomePageEventsQuery$variables
         }
         render={this.renderEventList}
       />
@@ -142,4 +142,4 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
 })
 
-export default connect<any, any>(mapStateToProps)(HomePageEvents)
+export default connect(mapStateToProps)(HomePageEvents)

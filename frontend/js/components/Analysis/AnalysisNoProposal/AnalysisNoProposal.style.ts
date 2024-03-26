@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const AnalysisNoProposalContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AnalysisNoProposalContainer = styled.div`
   padding: 60px;
   display: flex;
   justify-content: center;

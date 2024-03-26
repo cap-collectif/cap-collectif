@@ -59,5 +59,5 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 export default connector(SSOSwitchUserPage)

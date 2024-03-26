@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MapContainer as Map, Popup } from 'react-leaflet'
 import Slider from 'react-slick'
@@ -12,7 +11,7 @@ export const OPENED_MARKER_SIZE = 42
 export const CLOSED_MARKER = '/svg/marker-not-selected.svg'
 export const OPENED_MARKER = '/svg/marker.svg'
 // A lot of classes here but that's just leaflet ones
-export const BlankPopup: StyledComponent<any, {}, typeof Popup> = styled(Popup)`
+export const BlankPopup = styled(Popup)`
   .leaflet-popup-content {
     margin: 0;
     width: 280px !important;
@@ -22,7 +21,7 @@ export const BlankPopup: StyledComponent<any, {}, typeof Popup> = styled(Popup)`
     border-radius: 4px;
   }
 `
-export const StyledMap: StyledComponent<any, {}, typeof Map> = styled(Map)`
+export const StyledMap = styled(Map)`
   width: 100%;
 
   /**
@@ -93,7 +92,7 @@ export const MapContainer = styled.div<{
   }
 `
 // I am hard-positioning the Slider onto the map, to allow 1-finger navigation, see https://github.com/Leaflet/Leaflet/issues/5425
-export const SliderPane: StyledComponent<any, {}, typeof Slider> = styled(Slider)`
+export const SliderPane = styled(Slider)`
   margin-top: -160px;
 `
 export const locationMarkerCode = `
@@ -103,7 +102,7 @@ export const locationMarkerCode = `
 <circle id="circle3" r="7" style="animation-delay: -1s"/>
 <circle id="circle4" r="7" style="animation-delay: -0s"/>
 </svg>`
-export const LoaderPane: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LoaderPane = styled.div`
   background: ${colors.white};
   ${MAIN_BORDER_RADIUS};
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.15);

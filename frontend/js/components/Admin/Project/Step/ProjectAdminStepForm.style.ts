@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { ListGroupItem } from 'react-bootstrap'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const DateContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const DateContainer = styled.div`
   display: flex;
   width: auto;
   flex-direction: row;
@@ -21,7 +20,7 @@ export const DateContainer: StyledComponent<any, {}, HTMLDivElement> = styled.di
     max-width: 238px;
   }
 `
-export const FormContainer: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+export const FormContainer = styled.form`
   .react-select__menu {
     z-index: 3;
   }
@@ -30,12 +29,12 @@ export const FormContainer: StyledComponent<any, {}, HTMLFormElement> = styled.f
     max-width: 50%;
   }
 `
-export const CustomCodeArea: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const CustomCodeArea = styled.div`
   textarea {
     max-height: 90px;
   }
 `
-export const RequirementDragItem: StyledComponent<any, {}, typeof ListGroupItem> = styled(ListGroupItem)`
+export const RequirementDragItem = styled(ListGroupItem)`
   display: flex;
   align-items: center;
   background: ${colors.formBgc};
@@ -84,7 +83,7 @@ export const RequirementSubItem = styled.div<{
     border-radius: 0 0 4px 4px;
   `}
 `
-export const CheckboxPlaceholder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const CheckboxPlaceholder = styled.div`
   flex: none;
   width: 23px;
   height: 23px;
@@ -95,7 +94,7 @@ export const CheckboxPlaceholder: StyledComponent<any, {}, HTMLDivElement> = sty
   padding: 2px 5px;
   color: ${colors.formBgc};
 `
-export const VoteFieldContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const VoteFieldContainer = styled.div`
   margin-left: 41px;
   > span {
     line-height: 24px;
@@ -142,7 +141,7 @@ export const VoteFieldContainer: StyledComponent<any, {}, HTMLDivElement> = styl
     }
   }
 `
-export const PrivacyContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PrivacyContainer = styled.div`
   display: flex;
   flex-direction: column;
   > span {
@@ -153,7 +152,7 @@ export const PrivacyContainer: StyledComponent<any, {}, HTMLDivElement> = styled
     margin-top: 15px;
   }
 `
-export const PrivacyInfo: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PrivacyInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -169,7 +168,7 @@ export const PrivacyInfo: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     font-weight: bold;
   }
 `
-export const ViewsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ViewsContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -203,7 +202,7 @@ export const ViewsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
     margin: 0;
   }
 `
-export const LabelField: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LabelField = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -225,7 +224,7 @@ export const LabelField: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     vertical-align: middle;
   }
 `
-export const LabelView: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LabelView = styled.div`
   display: flex;
   flex-direction: column;
 

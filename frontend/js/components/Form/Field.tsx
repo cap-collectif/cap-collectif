@@ -82,7 +82,6 @@ type Props = {
   style?: Record<string, any>
   radioImage?: Record<string, any>
   lang?: string
-  rows?: number
   // to use in case of decimal number input
   step?: string
   dateTimeInputProps?: DateTimeInputProps
@@ -168,8 +167,8 @@ class Field extends React.Component<Props> {
       captchaRef,
     } = this.props
     const check = touched || (dirty && !disableValidation)
-    let errorMessage = null
-    let warningMessage = null
+    let errorMessage: any = null
+    let warningMessage: any = null
 
     if (canCheckValidation(check, typeForm, disableValidation) && error && !hideValidationMessage) {
       if (error.id) {

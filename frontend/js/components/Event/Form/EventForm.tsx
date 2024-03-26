@@ -4,7 +4,7 @@ import { FormattedMessage, FormattedDate, injectIntl, useIntl } from 'react-intl
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Field, reduxForm, formValueSelector, change } from 'redux-form'
 import { Flex } from '@cap-collectif/ui'
@@ -27,7 +27,7 @@ import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { isFloat } from '~/utils/string'
 import Tooltip from '~ds/Tooltip/Tooltip'
-import SelectDistrict from "~/components/Event/Form/SelectDistrict";
+import SelectDistrict from '~/components/Event/Form/SelectDistrict'
 import { normalizeNumberInput } from '~/components/Form/utils'
 
 type SelectedCurrentValues = {
@@ -87,7 +87,7 @@ type Props = ReduxFormFormProps & {
   currentLanguage?: string
   bodyUsingJoditWysiwyg?: boolean
 }
-const PageTitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const PageTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,13 +97,13 @@ const PageTitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     border-bottom: 1px solid ${colors.borderColor};
   }
 `
-const TitleHint: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const TitleHint = styled.span`
   font-size: 14px;
   color: ${colors.darkGray};
   margin-left: 10px;
   font-weight: normal;
 `
-const FormContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FormContainer = styled.div`
   h3 {
     font-weight: 600;
   }
@@ -273,7 +273,7 @@ export const EventForm = ({
   className,
   isFrontendView = false,
   handleSubmit,
-  currentLanguage
+  currentLanguage,
 }: Props) => {
   const intl = useIntl()
   const isFeatureUserEventEnabled = useFeatureFlag('allow_users_to_propose_events')
@@ -919,10 +919,13 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
                 label: th.title,
               }))
             : [],
-        districts: props?.event?.districts?.edges?.map(edge => edge?.node)?.map(district => ({
-                value: district.id,
-                label: district.title,
-              })) ?? [],
+        districts:
+          props?.event?.districts?.edges
+            ?.map(edge => edge?.node)
+            ?.map(district => ({
+              value: district.id,
+              label: district.title,
+            })) ?? [],
         author:
           props.event && props.event.author
             ? {
@@ -955,7 +958,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(formContainer))
+const container = connect(mapStateToProps)(injectIntl(formContainer))
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventForm_query on Query @argumentDefinitions(affiliations: { type: "[ProjectAffiliation!]" }) {

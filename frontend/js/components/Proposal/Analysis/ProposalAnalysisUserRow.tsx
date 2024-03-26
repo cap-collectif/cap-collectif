@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import Label from '~/components/Ui/Labels/Label'
 import colors from '~/utils/colors'
@@ -24,7 +24,7 @@ type Props = {
   decidor?: boolean
   onClick?: (arg0: boolean | null | undefined) => void
 }
-const Decidor: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Decidor = styled.div`
   background: ${colors.yellow};
   width: 12px;
   height: 12px;

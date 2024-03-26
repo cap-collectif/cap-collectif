@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import colors from '~/utils/colors'
 import PickableList from '~ui/List/PickableList'
 
-export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+export const Header = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,9 +25,7 @@ export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
     }
   }
 `
-export const DashboardCampaignHeader: StyledComponent<any, {}, typeof PickableList.Header> = styled(
-  PickableList.Header,
-)`
+export const DashboardCampaignHeader = styled(PickableList.Header)`
   align-items: stretch;
 
   p {
@@ -39,7 +36,7 @@ export const DashboardCampaignHeader: StyledComponent<any, {}, typeof PickableLi
     }
   }
 `
-export const ButtonCreate: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonCreate = styled.button`
   padding: 8px;
   background-color: ${colors.blue};
   color: #fff;
@@ -47,7 +44,7 @@ export const ButtonCreate: StyledComponent<any, {}, HTMLButtonElement> = styled.
   margin-left: 10px;
   ${MAIN_BORDER_RADIUS};
 `
-export const ButtonDelete: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonDelete = styled.button`
   background-color: transparent;
   color: ${colors.red};
   border: none;

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Panel, Glyphicon, ButtonToolbar, Button } from 'react-bootstrap'
 import type { RelayRefetchProp } from 'react-relay'
@@ -19,19 +19,19 @@ import ProposalFormAdminDistricts from './ProposalFormAdminDistricts'
 import type { GlobalState, FeatureToggles, Dispatch } from '~/types'
 import UpdateProposalFormMutation from '~/mutations/UpdateProposalFormMutation'
 import { getTranslationField, handleTranslationChange } from '~/services/Translation'
-import type { ProposalFormAdminConfigurationForm_query } from '~relay/ProposalFormAdminConfigurationForm_query.graphql'
-import type { ProposalFormAdminConfigurationForm_proposalForm } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql'
+import type { ProposalFormAdminConfigurationForm_query$data } from '~relay/ProposalFormAdminConfigurationForm_query.graphql'
+import type { ProposalFormAdminConfigurationForm_proposalForm$data } from '~relay/ProposalFormAdminConfigurationForm_proposalForm.graphql'
 import { asyncValidate } from '~/components/Questionnaire/QuestionnaireAdminConfigurationForm'
 import SectionDisplayMode from '~/components/ProposalForm/Section/SectionDisplayMode/SectionDisplayMode'
-import type { ProposalFormAdminConfigurationFormRefetchQueryVariables } from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql'
+import type { ProposalFormAdminConfigurationFormRefetchQuery$variables } from '~relay/ProposalFormAdminConfigurationFormRefetchQuery.graphql'
 import AppBox from '~ui/Primitives/AppBox'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
 import { styleGuideColors } from '~/utils/colors'
 import Heading from '~ui/Primitives/Heading'
 type RelayProps = {
-  readonly proposalForm: ProposalFormAdminConfigurationForm_proposalForm
-  readonly query: ProposalFormAdminConfigurationForm_query
+  readonly proposalForm: ProposalFormAdminConfigurationForm_proposalForm$data
+  readonly query: ProposalFormAdminConfigurationForm_query$data
 }
 type Props = RelayProps &
   ReduxFormFormProps & {
@@ -94,7 +94,7 @@ export const validate = (values: Record<string, any>) => {
     if (values.districts && values.districts.length) {
       const districtsArrayErrors = []
       values.districts.forEach((district: Record<string, any>, districtIndex: number) => {
-        const districtErrors = {}
+        const districtErrors: any = {}
 
         if (!district.name || district.name.length === 0) {
           districtErrors.title = 'admin.fields.proposal_form.errors.question.title'
@@ -251,7 +251,7 @@ const headerPanelUsingIllustration = (
     <div className="clearfix" />
   </div>
 )
-const ExternaLinksFlex: StyledComponent<any, {}, typeof Flex> = styled(Flex)`
+const ExternaLinksFlex = styled(Flex)`
   .form-group {
     max-width: 400px;
     margin-top: 4px;
@@ -390,7 +390,7 @@ const onSubmit = (values: Record<string, any>, dispatch: Dispatch, props: Props)
       }
 
       if (response.updateProposalForm) {
-        props.relay.refetch({} as ProposalFormAdminConfigurationFormRefetchQueryVariables, null, () => {}, {
+        props.relay.refetch({} as ProposalFormAdminConfigurationFormRefetchQuery$variables, null, () => {}, {
           force: true,
         })
       }
@@ -884,7 +884,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 const intlContainer = injectIntl(container)
 export default createRefetchContainer(
   intlContainer,

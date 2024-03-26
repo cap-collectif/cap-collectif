@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { PieChart as PieChartRechart, Cell, Pie, Tooltip, ResponsiveContainer } from 'recharts'
 import { useIntl } from 'react-intl'
@@ -18,14 +18,14 @@ type Props = {
   width?: string
   height?: string
 }
-export const TooltipWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TooltipWrapper = styled.div`
   background-color: #fff;
   padding: 3px 10px;
   border-radius: 4px;
   border: 1px solid ${defaultColors.borderColor};
   white-space: nowrap;
 `
-const ContentWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const ContentWrapper = styled.div.attrs({
   className: 'pie-chart__container',
 })`
   min-width: ${props => props.width};

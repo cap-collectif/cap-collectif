@@ -3,13 +3,13 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import memoize from 'lodash/memoize'
 import { reduxForm, FieldArray, formValueSelector, change, Field, SubmissionError } from 'redux-form'
 import debounce from 'debounce-promise'
 import type {
-  ProposalAnalysisFormPanel_proposal,
+  ProposalAnalysisFormPanel_proposal$data,
   ProposalAnalysisState,
 } from '~relay/ProposalAnalysisFormPanel_proposal.graphql'
 import colors, { styleGuideColors } from '~/utils/colors'
@@ -31,10 +31,10 @@ import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision'
 import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel'
 import { RevisionButton } from '~/shared/ProposalRevision/styles'
 import ProposalAnalysisComments from '~/components/Proposal/Analysis/ProposalAnalysisComments'
-import type { ProposalAnalysisFormPanel_viewer } from '~relay/ProposalAnalysisFormPanel_viewer.graphql'
+import type { ProposalAnalysisFormPanel_viewer$data } from '~relay/ProposalAnalysisFormPanel_viewer.graphql'
 
 const memoizeAvailableQuestions: any = memoize(() => {})
-export const Validation: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Validation = styled.div`
   width: 400px;
   background: ${colors.grayF4};
   padding: 20px;
@@ -48,7 +48,7 @@ export const Validation: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     font-size: 16px;
   }
 `
-export const AnalysisForm: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisForm = styled.div`
   padding: 20px;
   background: ${colors.white};
 `
@@ -67,7 +67,7 @@ export const ValidateButton = styled.button<{
   opacity: ${({ disabled }) => disabled && '0.5'};
 `
 type Props = ReduxFormFormProps & {
-  proposal: ProposalAnalysisFormPanel_proposal
+  proposal: ProposalAnalysisFormPanel_proposal$data
   disabled?: boolean
   responses: ResponsesInReduxForm
   initialStatus: ProposalAnalysisState
@@ -75,7 +75,7 @@ type Props = ReduxFormFormProps & {
   intl: IntlShape
   onValidate: (arg0: SubmittingState, arg1: boolean | null | undefined) => void
   proposalRevisionsEnabled: boolean
-  viewer: ProposalAnalysisFormPanel_viewer
+  viewer: ProposalAnalysisFormPanel_viewer$data
 }
 type Decision = 'FAVOURABLE' | 'UNFAVOURABLE' | 'NONE'
 export type FormValues = {
@@ -313,7 +313,7 @@ const form = reduxForm({
   validate,
 })(ProposalAnalysisFormPanel)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment ProposalAnalysisFormPanel_viewer on User {

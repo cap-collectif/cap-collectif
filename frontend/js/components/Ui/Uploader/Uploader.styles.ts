@@ -1,5 +1,5 @@
 import { $Values } from 'utility-types'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { m as motion } from 'framer-motion'
 import colors from '~/styles/modules/colors'
@@ -50,7 +50,7 @@ export const Container = styled.div<{
     border: 1.5px dashed ${colors.blue[300]};
   `}
 `
-export const Content: StyledComponent<any, {}, any> = styled(motion.div)`
+export const Content = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -124,14 +124,14 @@ export const ThumbnailControls = styled.div<{
     }
   }
 `
-export const FileList: StyledComponent<any, {}, any> = styled.ul`
+export const FileList = styled.ul`
   margin-top: 8px;
   margin-bottom: 0;
   list-style: none;
   width: 100%;
   padding: 0;
 `
-export const FileItem: StyledComponent<any, {}, any> = styled.li`
+export const FileItem = styled.li`
   display: flex;
   flex-flow: row;
   width: 100%;
@@ -152,7 +152,7 @@ export const FileItem: StyledComponent<any, {}, any> = styled.li`
     }
   }
 `
-export const ErrorList: StyledComponent<any, {}, any> = styled(AppBox).attrs({
+export const ErrorList = styled(AppBox).attrs({
   mt: 2,
   p: 4,
 })`
@@ -163,7 +163,7 @@ export const ErrorList: StyledComponent<any, {}, any> = styled(AppBox).attrs({
   display: flex;
   flex-flow: column;
 `
-export const WarningList: StyledComponent<any, {}, any> = styled(AppBox).attrs({
+export const WarningList = styled(AppBox).attrs({
   mt: 2,
   p: 4,
 })`

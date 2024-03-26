@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Label from '../Label/Label'
 import type { CommonPropsInput } from './common'
@@ -9,7 +9,7 @@ import { BASE_INPUT } from '~/utils/styles/variables'
 export type Props = CommonPropsInput & {
   readonly type: 'text' | 'number' | 'email'
 }
-const InputContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const InputContainer = styled.div.attrs({
   className: 'input-container',
 })`
   input {

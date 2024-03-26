@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import UserBlockProfile from '../../Ui/BackOffice/UserBlockProfile'
@@ -21,7 +21,7 @@ export type Props = {
   features: FeatureToggles
   currentLocale: string
 }
-const Navbar: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+const Navbar = styled.ul`
   right: 0;
   position: absolute;
   list-style: none;
@@ -30,7 +30,7 @@ const Navbar: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
     display: none;
   }
 `
-const CustomNavbarItem: StyledComponent<any, {}, typeof Button> = styled(Button)`
+const CustomNavbarItem = styled(Button)`
   position: relative;
   float: left;
   height: 56px;
@@ -38,7 +38,7 @@ const CustomNavbarItem: StyledComponent<any, {}, typeof Button> = styled(Button)
   border-left: 1px solid ${colors.borderColor};
   padding: 8px;
 `
-const Placeholder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Placeholder = styled.div`
   width: 24px;
 `
 
@@ -138,7 +138,7 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(AdminRightNavbar), {
+export default createFragmentContainer(connect(mapStateToProps)(AdminRightNavbar), {
   query: graphql`
     fragment AdminRightNavbar_query on Query {
       ...UserBlockProfile_query

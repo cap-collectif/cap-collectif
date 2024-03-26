@@ -31,7 +31,7 @@ export const CommentReportButton = ({ comment, dispatch }: Props) => {
   )
 }
 // @ts-ignore
-const container = connect<any, any>()(CommentReportButton)
+const container = connect()(CommentReportButton)
 export default createFragmentContainer(container, {
   comment: graphql`
     fragment CommentReportButton_comment on Comment @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-export const EventMapPreviewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const EventMapPreviewContainer = styled.div.attrs({
   className: 'eventMapPreview',
 })`
   .card {

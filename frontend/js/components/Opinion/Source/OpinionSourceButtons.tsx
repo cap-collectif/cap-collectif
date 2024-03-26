@@ -56,7 +56,7 @@ const OpinionSourceButtons = ({ source, sourceable, dispatch }: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>()(OpinionSourceButtons)
+const container = connect()(OpinionSourceButtons)
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceButtons_source on Source @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

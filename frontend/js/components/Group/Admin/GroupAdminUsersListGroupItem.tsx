@@ -108,7 +108,7 @@ export class GroupAdminUsersListGroupItem extends React.Component<Props, State> 
   }
 }
 // @ts-ignore
-const container = connect<any, any>()(GroupAdminUsersListGroupItem)
+const container = connect()(GroupAdminUsersListGroupItem)
 export default createFragmentContainer(container, {
   user: graphql`
     fragment GroupAdminUsersListGroupItem_user on User {

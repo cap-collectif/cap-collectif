@@ -87,4 +87,4 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
 })
 
-export default connect<any, any>(mapStateToProps)(ProposalPage)
+export default connect(mapStateToProps)(ProposalPage)

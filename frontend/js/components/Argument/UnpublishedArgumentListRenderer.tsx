@@ -62,7 +62,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(UnpublishedArgumentListRenderer)
+const container = connect(mapStateToProps)(UnpublishedArgumentListRenderer)
 export default createFragmentContainer(container, {
   argumentable: graphql`
     fragment UnpublishedArgumentListRenderer_argumentable on Argumentable {

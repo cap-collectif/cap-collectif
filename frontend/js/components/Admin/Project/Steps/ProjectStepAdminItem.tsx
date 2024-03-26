@@ -3,7 +3,7 @@ import { ListGroupItem } from 'react-bootstrap'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { DraggableProvided } from 'react-beautiful-dnd'
 import { Draggable } from 'react-beautiful-dnd'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { Step } from './ProjectStepAdminList'
 import './ProjectStepAdminList'
@@ -25,7 +25,7 @@ type Props = {
   hasIdentificationCodeLists: boolean
   query: ProjectStepAdminItem_query
 }
-const Item: StyledComponent<any, {}, typeof ListGroupItem> = styled(ListGroupItem).attrs({
+const Item = styled(ListGroupItem).attrs({
   className: 'item-step',
 })`
   background-color: ${colors.formBgc};

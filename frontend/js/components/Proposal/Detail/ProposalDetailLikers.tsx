@@ -60,7 +60,7 @@ const mapStateToProps = (state: State, props: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(ProposalDetailLikers))
+const container = connect(mapStateToProps)(injectIntl(ProposalDetailLikers))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDetailLikers_proposal on Proposal {

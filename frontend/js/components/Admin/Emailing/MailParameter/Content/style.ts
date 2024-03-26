@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import colors from '~/utils/colors'
 
-export const PreviewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PreviewContainer = styled.div`
   font-weight: 600;
   margin-bottom: 15px;
 

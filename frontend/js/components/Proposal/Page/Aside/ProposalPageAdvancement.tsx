@@ -2,7 +2,7 @@ import { $Shape } from 'utility-types'
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Box, Skeleton } from '@cap-collectif/ui'
 import colors from '~/utils/colors'
@@ -14,7 +14,7 @@ import { Card } from '~/components/Proposal/Page/ProposalPage.style'
 type Props = {
   proposal: ProposalPageAdvancement_proposal
 }
-export const ProposalDetailAdvancementContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalDetailAdvancementContainer = styled.div`
   padding: 20px;
 
   h4 {

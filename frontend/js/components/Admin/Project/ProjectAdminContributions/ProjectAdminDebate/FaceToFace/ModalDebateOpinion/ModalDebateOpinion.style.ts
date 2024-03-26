@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 
-export const ModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const ModalContainer = styled(Modal)`
   .modal-header {
     border: none;
   }

@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import CloseButton from '../Form/CloseButton'
 import SubmitButton from '../Form/SubmitButton'
 import component from '../Form/Field'
-import type { ProposalFormAdminCategoriesStepModal_query } from '~relay/ProposalFormAdminCategoriesStepModal_query.graphql'
+import type { ProposalFormAdminCategoriesStepModal_query$data } from '~relay/ProposalFormAdminCategoriesStepModal_query.graphql'
 import type { Dispatch, FeatureToggles, GlobalState } from '~/types'
 import ProposalFormCategoryColor from './Category/ProposalFormCategoryColor'
 import ProposalFormCategoryIcon from './Category/ProposalFormCategoryIcon'
@@ -23,7 +23,7 @@ import Modal from '~ds/Modal/Modal'
 import Heading from '~ui/Primitives/Heading'
 
 type RelayProps = {
-  query: ProposalFormAdminCategoriesStepModal_query
+  query: ProposalFormAdminCategoriesStepModal_query$data
 }
 export type CategoryImage = {
   id: string
@@ -292,7 +292,7 @@ const mapStateToProps = (state: GlobalState, { member }: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalFormAdminCategoriesStepModal)
+const container = connect(mapStateToProps)(ProposalFormAdminCategoriesStepModal)
 export default createFragmentContainer(container, {
   query: graphql`
     fragment ProposalFormAdminCategoriesStepModal_query on Query {

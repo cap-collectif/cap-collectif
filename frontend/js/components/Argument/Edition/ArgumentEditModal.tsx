@@ -69,7 +69,7 @@ const mapStateToProps = (state: State, { argument }: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ArgumentEditModal)
+const container = connect(mapStateToProps)(ArgumentEditModal)
 export default createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentEditModal_argument on Argument {

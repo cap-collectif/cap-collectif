@@ -244,7 +244,7 @@ const mapStateToProps = (state: GlobalState, { mapToken }: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   mapToken: graphql`
     fragment MapboxAdminConfig_mapToken on MapToken {

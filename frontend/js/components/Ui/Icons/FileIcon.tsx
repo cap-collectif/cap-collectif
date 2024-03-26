@@ -1,19 +1,19 @@
 import * as React from 'react'
 import { Label as BtstLabel } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '../../../utils/colors'
 
 type Props = {
   format: string | null | undefined
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const Container = styled.div.attrs({
   className: 'file-icon',
 })`
   position: relative;
   display: inline-block;
 `
-const Label: StyledComponent<any, {}, typeof BtstLabel> = styled(BtstLabel)`
+const Label = styled(BtstLabel)`
   position: absolute;
   top: 24px;
   left: 22px;

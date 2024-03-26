@@ -94,4 +94,4 @@ const mapStateToProps = (state: State) => ({
     isDirty('user-admin-status')(state),
 })
 
-export default connect<any, any>(mapStateToProps)(UserAdminPage)
+export default connect(mapStateToProps)(UserAdminPage)

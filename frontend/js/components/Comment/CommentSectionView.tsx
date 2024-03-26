@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Menu, Button, Flex, Box } from '@cap-collectif/ui'
 import type { CommentOrderBy } from './CommentListView'
@@ -18,7 +18,7 @@ type Props = {
   readonly isAuthenticated: boolean
   readonly useBodyColor: boolean
 }
-export const FilterButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
+export const FilterButton = styled(Button)`
   border: none !important;
   outline: none !important;
   background-color: ${colors.white} !important;

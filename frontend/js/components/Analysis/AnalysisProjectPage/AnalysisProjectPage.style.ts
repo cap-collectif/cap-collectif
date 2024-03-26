@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   padding: 60px;
 
   h2 {
@@ -11,7 +10,7 @@ export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin: 0 0 30px 0;
   }
 `
-export const Header: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Header = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

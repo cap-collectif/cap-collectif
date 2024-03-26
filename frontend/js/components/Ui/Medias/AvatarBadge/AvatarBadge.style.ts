@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
 export const Circle = styled.div.attrs({
@@ -12,7 +11,7 @@ export const Circle = styled.div.attrs({
   height: ${props => `${props.size}px`};
   border-radius: ${props => `${props.size / 2}px`};
 `
-const AvatarBadgeContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AvatarBadgeContainer = styled.div`
   display: inline-block;
   position: relative;
 

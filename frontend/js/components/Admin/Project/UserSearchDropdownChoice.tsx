@@ -1,7 +1,7 @@
 import { $Values } from 'utility-types'
 import React from 'react'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
@@ -19,9 +19,7 @@ type Props = {
   readonly type: $Values<typeof TYPE_ROLE>
   readonly emailNotification?: string
 }
-const UserSearchDropdownChoiceContainer: StyledComponent<any, {}, typeof DropdownSelectChoice> = styled(
-  DropdownSelectChoice,
-)`
+const UserSearchDropdownChoiceContainer = styled(DropdownSelectChoice)`
   & > span {
     display: flex;
     flex-direction: row;
@@ -86,7 +84,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(UserSearchDropdownChoice)
+const container = connect(mapStateToProps)(UserSearchDropdownChoice)
 export default createFragmentContainer(container, {
   user: graphql`
     fragment UserSearchDropdownChoice_user on User {

@@ -134,7 +134,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps, mapDispatchToProps)(injectIntl(ConsultationPlan))
+const container = connect(mapStateToProps, mapDispatchToProps)(injectIntl(ConsultationPlan))
 export default createFragmentContainer(container, {
   consultation: graphql`
     fragment ConsultationPlan_consultation on Consultation {

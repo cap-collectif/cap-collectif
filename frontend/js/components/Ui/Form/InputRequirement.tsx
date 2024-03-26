@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormControl, FormGroup, InputGroup, Button } from 'react-bootstrap'
 import DeleteButton from '../Button/DeleteButton'
@@ -11,15 +11,15 @@ type Props = {
   onChange: (arg0: string) => void
   onDelete: (arg0: string) => void
 }
-const CheckButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
+const CheckButton = styled(Button)`
   padding-top: 9px;
   padding-bottom: 4px;
 `
-const FormGroupContainer: StyledComponent<any, {}, typeof FormGroup> = styled(FormGroup)`
+const FormGroupContainer = styled(FormGroup)`
   width: 100%;
   margin: 0;
 `
-const InputStaticContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const InputStaticContainer = styled.div`
   display: flex;
   width: calc(100% - 45px);
   justify-content: space-between;

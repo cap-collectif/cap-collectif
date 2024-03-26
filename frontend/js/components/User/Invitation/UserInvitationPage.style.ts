@@ -1,11 +1,10 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Link as RouterLink } from 'react-router-dom'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
 import { baseUrl } from '~/config'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'user-invitation-page',
 })`
   display: flex;
@@ -56,7 +55,7 @@ export const LogoContainer = styled.div.attrs({
     }
   }
 `
-export const Symbols: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Symbols = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -132,7 +131,7 @@ export const ContentContainer = styled.div.attrs({
     }
   }
 `
-export const BackLink: StyledComponent<any, {}, typeof RouterLink> = styled(RouterLink)`
+export const BackLink = styled(RouterLink)`
   text-decoration: none;
   color: #85919d !important;
   font-weight: 600;

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { isInvalid, submit, isSubmitting } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { formName } from '../Form/EventForm'
 import type { State, Dispatch } from '../../../types'
@@ -24,7 +24,7 @@ type Props = RelayProps & {
   pristine: boolean
   handleClose: () => void
 }
-const NotifyInfoMessage: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const NotifyInfoMessage = styled.div`
   font-size: 14px;
   font-style: italic;
   opacity: 0.8;
@@ -89,7 +89,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(EventEditModal)
+const container = connect(mapStateToProps)(EventEditModal)
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventEditModal_query on Query @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

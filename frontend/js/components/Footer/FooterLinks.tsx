@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { FooterLink, Legals } from './Footer'
 import './Footer'
@@ -60,7 +60,7 @@ const Links = styled.div<{
     }
   }
 `
-const FlexContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
   @media (max-width: 767px) {
@@ -70,7 +70,7 @@ const FlexContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
   max-width: 960px;
   margin: auto;
 `
-const SectionSeparator: StyledComponent<any, {}, HTMLHRElement> = styled.hr`
+const SectionSeparator = styled.hr`
   border-color: #999;
   margin-top: 25px;
   margin-bottom: 25px;
@@ -83,7 +83,7 @@ const SectionSeparator: StyledComponent<any, {}, HTMLHRElement> = styled.hr`
   margin-left: auto;
   margin-right: auto;
 `
-export const LinkList: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const LinkList = styled.ul`
   width: 100%;
   text-align: left;
   list-style: none;

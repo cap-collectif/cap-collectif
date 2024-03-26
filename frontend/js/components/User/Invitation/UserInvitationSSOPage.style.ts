@@ -1,16 +1,16 @@
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import AppBox from '~ui/Primitives/AppBox'
 import Flex from '~ui/Primitives/Layout/Flex'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-export const Line: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox).attrs({
+export const Line = styled(AppBox).attrs({
   backgroundColor: 'gray.200',
   width: '100%',
 })`
   height: 1px;
 `
-export const Container: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const Container = styled(Flex).attrs({
   height: '100vh',
   backgroundColor: 'white',
 })`
@@ -20,7 +20,7 @@ export const Container: StyledComponent<any, {}, typeof Flex> = styled(Flex).att
     height: 100vh;
   }
 `
-export const LeftSide: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const LeftSide = styled(Flex).attrs({
   width: '50%',
   direction: 'column',
   alignItems: 'center',
@@ -32,7 +32,7 @@ export const LeftSide: StyledComponent<any, {}, typeof Flex> = styled(Flex).attr
     height: 100%;
   }
 `
-export const LeftSideInner: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const LeftSideInner = styled(Flex).attrs({
   direction: 'column',
   maxWidth: '410px',
 })`
@@ -42,14 +42,14 @@ export const LeftSideInner: StyledComponent<any, {}, typeof Flex> = styled(Flex)
     align-items: center;
   }
 `
-export const RigthSide: StyledComponent<any, {}, typeof Flex> = styled(Flex)`
+export const RigthSide = styled(Flex)`
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     width: 100%;
     order: -1;
     padding: 24px 0;
   }
 `
-export const ButtonsContainer: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const ButtonsContainer = styled(Flex).attrs({
   direction: 'column',
   display: 'inline-flex',
   width: '325px',
@@ -60,11 +60,11 @@ export const ButtonsContainer: StyledComponent<any, {}, typeof Flex> = styled(Fl
     align-items: center;
   }
 `
-export const Logo: StyledComponent<any, {}, HTMLImageElement> = styled.img`
+export const Logo = styled.img`
   max-width: 300px;
   max-height: 130px;
 `
-export const WelcomeMessage: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox).attrs({
+export const WelcomeMessage = styled(AppBox).attrs({
   mb: 6,
 })`
   @media (max-width: ${mediaQueryMobile.maxWidth}) {

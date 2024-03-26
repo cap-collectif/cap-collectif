@@ -96,7 +96,7 @@ const ProposalFollowButton = ({ proposal: proposalFragment }: Props) => {
           <Menu.List maxHeight="unset" overflow="visible">
             <Menu.OptionGroup
               onChange={value => {
-                changeFollowType(value)
+                changeFollowType(value as SubscriptionTypeValue)
               }}
               value={proposal.viewerFollowingConfiguration}
               type="radio"

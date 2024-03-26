@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 import hexToRgb from '~/utils/colors/hexToRgb'
@@ -22,7 +22,7 @@ const getColorHover = (color: string) => {
   })
 }
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'home-header',
 })`
   display: flex;
@@ -38,14 +38,10 @@ export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.at
     justify-content: center;
   }
 `
-export const Content: StyledComponent<
-  {
-    mainLinkColors: Colors
-    secondLinkColor: string
-  },
-  {},
-  HTMLDivElement
-> = styled.div.attrs({
+export const Content = styled.div.attrs<{
+  mainLinkColors: Colors
+  secondLinkColor: string
+}>({
   className: 'home-content-wrapper',
 })`
   display: flex;

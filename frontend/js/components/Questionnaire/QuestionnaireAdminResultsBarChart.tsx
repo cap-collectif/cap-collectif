@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl'
 import ColorHash from 'color-hash'
 import { Bar, BarChart, ResponsiveContainer, LabelList, XAxis, YAxis, Cell } from 'recharts'
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import type { QuestionnaireAdminResultsBarChart_multipleChoiceQuestion } from '~relay/QuestionnaireAdminResultsBarChart_multipleChoiceQuestion.graphql'
 import { cleanMultipleChoiceQuestion } from '~/utils/cleanMultipleChoiceQuestion'
 
@@ -20,7 +20,7 @@ type DataType = {
   name: string
   value: number
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   width: 768px;
 `
 export class QuestionnaireAdminResultsBarChart extends React.Component<Props> {

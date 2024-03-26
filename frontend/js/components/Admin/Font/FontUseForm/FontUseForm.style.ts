@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-const FontUseFormContainer: StyledComponent<any, {}, HTMLFormElement> = styled.form.attrs({
+const FontUseFormContainer = styled.form.attrs({
   className: 'font-admin-content',
 })`
   table {

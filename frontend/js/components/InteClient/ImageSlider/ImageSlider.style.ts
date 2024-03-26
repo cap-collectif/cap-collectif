@@ -1,9 +1,9 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Slider from 'react-slick'
 
-export const Container: StyledComponent<any, {}, typeof Slider> = styled(Slider)`
+export const Container = styled(Slider)`
   width: 100%;
 
   .slick-track {

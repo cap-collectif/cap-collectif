@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import Context from '~/components/Ui/DragnDrop/Context/Context'
@@ -11,7 +11,7 @@ import Label from '~/components/Ui/DragnDrop/Label/Label'
 const fruits = {
   available: ['Pomme', 'Poire', 'Framboise', 'Fraise', 'Kaki'],
 }
-const RankingListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const RankingListContainer = styled.div.attrs({
   className: 'rankingList',
 })`
   .separator {

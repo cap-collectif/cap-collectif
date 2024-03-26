@@ -12,6 +12,7 @@ import type { ProposalAnalysisCommentListItem_viewer$key } from '~relay/Proposal
 import '~relay/ProposalAnalysisCommentListItem_viewer.graphql'
 import DeleteProposalAnalysisCommentMutation from '~/mutations/DeleteProposalAnalysisCommentMutation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { GlobalState } from '~/types'
 
 type Props = {
   comment: ProposalAnalysisCommentListItem_comment$key
@@ -61,7 +62,7 @@ const ProposalAnalysisCommentListItem = ({ comment: commentRef, viewer: viewerRe
     return author?.firstname ?? author?.username
   }
 
-  const buttonBackgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg'])
+  const buttonBackgroundColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
   const showDeleteButton = isAuthor && hover
 
   const onClick = async () => {

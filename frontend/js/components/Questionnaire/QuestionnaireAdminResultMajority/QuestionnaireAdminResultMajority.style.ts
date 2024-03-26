@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Panel } from 'react-bootstrap'
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
@@ -59,7 +58,7 @@ export const GraphContainer = styled.div.attrs({
   padding-left: ${({ isMobile }) => (isMobile ? '15px' : '10px')};
   padding-right: ${({ isMobile }) => (isMobile ? '15px' : '0')};
 `
-export const ResponseContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const ResponseContainer = styled.div.attrs({
   className: 'response-container',
 })`
   flex: 1;

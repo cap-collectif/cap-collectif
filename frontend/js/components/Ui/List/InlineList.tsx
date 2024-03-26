@@ -1,13 +1,13 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 type Props = {
   readonly margin: boolean
-  readonly children: JSX.Element | JSX.Element[] | string | null | undefined
+  readonly children: React.ReactNode
   readonly className?: string
   readonly separator?: string
 }
-const Container: StyledComponent<any, {}, HTMLUListElement> = styled.ul.attrs({
+const Container = styled.ul.attrs({
   className: 'inline-list',
 })`
   padding: 0;

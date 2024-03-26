@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import cn from 'classnames'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
@@ -30,7 +30,7 @@ const getBootstrapClassName = (size: BsSize) => ({
   'btn-xs': size === 'xsmall' || size === 'xs',
 })
 
-const NewReportButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const NewReportButton = styled.button`
   border: none;
   background: none;
 `
@@ -76,4 +76,4 @@ const mapStateToProps = (state: State, props: Props) => ({
   reported: props.reported || state.report.elements.includes(props.id),
 })
 
-export default connect<any, any>(mapStateToProps)(ReportButton)
+export default connect(mapStateToProps)(ReportButton)

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import ProposalVoteModal from '../Vote/ProposalVoteModal'
 import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment'
@@ -15,7 +15,7 @@ type Props = {
   step: ProposalPreviewVote_step$key
   viewer: ProposalPreviewVote_viewer$key | null | undefined
 }
-const Container: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const Container = styled.span`
   /** Boostrap for now until "Epurer" ticket */
   .proposal__button__vote.active:hover {
     background-color: #dc3545;

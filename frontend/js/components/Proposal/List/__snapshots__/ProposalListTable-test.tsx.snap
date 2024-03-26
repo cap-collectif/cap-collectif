@@ -387,7 +387,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           className="d-flex align-items-center text-ellipsis"
         >
           <Connect(UserAvatarDeprecated)
-            defaultAvatar={null}
             user={
               Object {
                 "_links": Object {},
@@ -453,7 +452,6 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
           className="d-flex align-items-center text-ellipsis"
         >
           <Connect(UserAvatarDeprecated)
-            defaultAvatar={null}
             user={
               Object {
                 "_links": Object {},

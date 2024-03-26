@@ -8,7 +8,7 @@ import moment from 'moment'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { ButtonToolbar, Button, ListGroup, ListGroupItem } from 'react-bootstrap'
-import type { ProposalAdminSelections_proposal } from '~relay/ProposalAdminSelections_proposal.graphql'
+import type { ProposalAdminSelections_proposal$data } from '~relay/ProposalAdminSelections_proposal.graphql'
 import type { State, Dispatch } from '~/types'
 import AlertForm from '../../Alert/AlertForm'
 import component from '../../Form/Field'
@@ -31,10 +31,10 @@ export const formName = 'proposal-admin-selections'
 const selector = formValueSelector(formName)
 type FormValues = Record<string, any>
 type PassedProps = {
-  proposal: ProposalAdminSelections_proposal
+  proposal: ProposalAdminSelections_proposal$data
 }
 type Props = PassedProps & {
-  proposal: ProposalAdminSelections_proposal
+  proposal: ProposalAdminSelections_proposal$data
   initialValues: FormValues
   intl: IntlShape
   selectionValues: Array<{
@@ -54,7 +54,7 @@ type Props = PassedProps & {
 
 const validate = (values: FormValues, props: Props) => {
   const errors: any = {}
-  const paperVoteErrors = {}
+  const paperVoteErrors: any = {}
 
   for (const stepId in values.paperVotes) {
     if (values.paperVotes[stepId].totalCount || values.paperVotes[stepId].totalPointsCount) {
@@ -62,7 +62,7 @@ const validate = (values: FormValues, props: Props) => {
 
       if (voteStep && voteStep.votesRanking) {
         const { totalCount, totalPointsCount } = values.paperVotes[stepId]
-        const paperVoteStepErrors = {}
+        const paperVoteStepErrors: any = {}
 
         if (undefined === totalCount) {
           paperVoteStepErrors.totalCount = 'error-paper-points-no-votes'
@@ -533,7 +533,7 @@ const mapStateToProps = (state: State, props: PassedProps) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminSelections_proposal on Proposal {

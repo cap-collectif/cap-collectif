@@ -48,4 +48,4 @@ const mapStateToProps = (state: GlobalState) => ({
   pristine: isPristine(formName)(state),
 })
 
-export default connect<any, any>(mapStateToProps)(ChooseAUsernameModal)
+export default connect(mapStateToProps)(ChooseAUsernameModal)

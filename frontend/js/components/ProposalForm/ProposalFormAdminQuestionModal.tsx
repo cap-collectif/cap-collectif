@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -43,7 +43,7 @@ type Props = ParentProps & {
 type State = {
   initialQuestionValues: Question
 }
-export const RangeDiv: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const RangeDiv = styled.div`
   max-width: 320px;
   div:first-child {
     margin-right: 15px;
@@ -64,7 +64,7 @@ export const RangeDiv: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     }
   }
 `
-export const MajorityContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const MajorityContainer = styled.div`
   margin-bottom: 20px;
 
   .preview-text {
@@ -614,4 +614,4 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(ProposalFormAdminQuestionModal))
+export default connect(mapStateToProps)(injectIntl(ProposalFormAdminQuestionModal))

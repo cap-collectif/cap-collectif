@@ -108,7 +108,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(OpinionSourceFormModal)
+const container = connect(mapStateToProps)(OpinionSourceFormModal)
 export default createFragmentContainer(container, {
   source: graphql`
     fragment OpinionSourceFormModal_source on Source {

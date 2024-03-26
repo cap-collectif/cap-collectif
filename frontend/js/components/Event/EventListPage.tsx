@@ -127,5 +127,5 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(EventListPage)
+const container = connect(mapStateToProps)(EventListPage)
 export default withColors(container)

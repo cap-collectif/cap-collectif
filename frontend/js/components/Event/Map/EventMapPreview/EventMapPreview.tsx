@@ -45,7 +45,7 @@ const mapStateToProps = (state: State) => ({
   hasIllustrationDisplayed: state.default.features.display_pictures_in_event_list,
 })
 
-const Container = connect<any, any>(mapStateToProps)(EventMapPreview)
+const Container = connect(mapStateToProps)(EventMapPreview)
 export default createFragmentContainer(Container, {
   event: graphql`
     fragment EventMapPreview_event on Event {

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import Flex from '~ui/Primitives/Layout/Flex'
 import { mediaQueryMobile } from '~/utils/sizes'
@@ -95,13 +94,13 @@ export const TabsParent = styled.div<{
     padding: 10px 15px;
   }
 `
-export const TabsDivider: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TabsDivider = styled.div`
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 `
-export const Separator: StyledComponent<any, {}, HTMLHRElement> = styled.hr`
+export const Separator = styled.hr`
   margin: 10px 0;
   border: 1px solid #e3e3e3;
   width: 100%;
@@ -131,7 +130,7 @@ export const DropdownToggle = styled(Flex).attrs({
     background-color: ${props => props.theme.mainNavbarBgActive};
   }
 `
-export const DropdownMenu: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const DropdownMenu = styled(Flex).attrs({
   direction: 'column',
   align: 'center',
   py: 1,

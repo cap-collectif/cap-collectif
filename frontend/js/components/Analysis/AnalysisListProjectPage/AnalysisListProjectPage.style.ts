@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-const AnalysisListProjectPageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AnalysisListProjectPageContainer = styled.div`
   padding: 80px;
 
   h2 {

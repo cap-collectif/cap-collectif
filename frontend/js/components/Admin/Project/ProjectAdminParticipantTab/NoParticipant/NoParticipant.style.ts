@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors from '~/utils/colors'
 
-export const Container: StyledComponent<any, {}, typeof PickableList.Row> = styled(PickableList.Row)`
+export const Container = styled(PickableList.Row)`
   display: flex;
   justify-content: center;
   align-items: center;

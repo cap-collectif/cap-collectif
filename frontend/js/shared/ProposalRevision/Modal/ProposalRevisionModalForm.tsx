@@ -321,7 +321,7 @@ const form = reduxForm({
   form: formName,
 })(ProposalRevisionModalForm)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(injectIntl(container), {
   proposal: graphql`
     fragment ProposalRevisionModalForm_proposal on Proposal {

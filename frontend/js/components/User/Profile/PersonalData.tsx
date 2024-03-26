@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { Alert, Button as ButtonLegacy, Panel, Well } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { change, Field, formValueSelector, reduxForm, SubmissionError, unregisterField } from 'redux-form'
 import type { IntlShape } from 'react-intl'
@@ -225,7 +225,7 @@ const hasData = (viewer: PersonalData_viewer, formValue: Record<string, any> | n
   )
 }
 
-const PersonnalDataContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const PersonnalDataContainer = styled.div`
   .alert-info {
     display: flex;
     .cap-information {
@@ -872,7 +872,7 @@ const mapStateToProps = (state: State, props: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment PersonalData_viewer on User {

@@ -200,5 +200,5 @@ const mapStateToProps = (state: GlobalState) => ({
   },
 })
 
-const DebateWidgetFormConnected = connect<any, any>(mapStateToProps)(DebateWidgetForm)
+const DebateWidgetFormConnected = connect(mapStateToProps)(DebateWidgetForm)
 export default DebateWidgetFormConnected

@@ -1,10 +1,10 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedHTMLMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { ProjectAdminAnalysisShortcut_project } from '~relay/ProjectAdminAnalysisShortcut_project.graphql'
-const Shortcut: StyledComponent<any, {}, HTMLParagraphElement> = styled.p`
+const Shortcut = styled.p`
   margin: 0 0 15px 0;
 `
 type Props = {

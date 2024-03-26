@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
@@ -20,7 +20,7 @@ type Props = {
   readonly user: User | null | undefined
   readonly setIsShow: (show: boolean) => void
 }
-const ReplyCreateFormWrapperContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ReplyCreateFormWrapperContainer = styled.div`
   margin-top: 35px;
 `
 export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props) => {
@@ -79,7 +79,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ReplyCreateFormWrapper)
+const container = connect(mapStateToProps)(ReplyCreateFormWrapper)
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment ReplyCreateFormWrapper_questionnaire on Questionnaire

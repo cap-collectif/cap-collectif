@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import * as React from 'react'
 import colors from '../../../utils/colors'
@@ -6,7 +5,7 @@ import colors from '../../../utils/colors'
 type Props = {
   children: JSX.Element | JSX.Element[] | string | null | undefined
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const Container = styled.div.attrs({
   className: 'stacked-nav',
 })`
   background-color: ${colors.pageBgc};

@@ -88,4 +88,4 @@ const mapStateToProps = (state: GlobalState) => ({
   readMore: state.default.features.read_more,
 })
 
-export default connect<any, any>(mapStateToProps)(ButtonBody)
+export default connect(mapStateToProps)(ButtonBody)

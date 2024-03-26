@@ -60,4 +60,4 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(NewOpinionAppClient)
+export default connect(mapStateToProps)(NewOpinionAppClient)

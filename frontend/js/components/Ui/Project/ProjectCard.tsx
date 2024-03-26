@@ -185,7 +185,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 ProjectCard.displayName = 'ProjectCard'
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProjectCard), {
+export default createFragmentContainer(connect(mapStateToProps)(ProjectCard), {
   project: graphql`
     fragment ProjectCard_project on Project {
       id

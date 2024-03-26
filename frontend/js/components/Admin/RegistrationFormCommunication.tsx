@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import type { RegistrationFormCommunication_registrationForm } from '~relay/RegistrationFormCommunication_registrationForm.graphql'
 import type { FeatureToggles, State, Dispatch } from '../../types'
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer'
@@ -33,7 +33,7 @@ type FormValues = {
   topTextUsingJoditWysiwyg?: boolean | null | undefined
   bottomTextUsingJoditWysiwyg?: boolean | null | undefined
 }
-const Title: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -147,7 +147,7 @@ const mapStateToProps = (state: State, { registrationForm }: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   registrationForm: graphql`
     fragment RegistrationFormCommunication_registrationForm on RegistrationForm {

@@ -7,7 +7,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import ProposalsUserVotesTable from './ProposalsUserVotesTable'
 import SubmitButton from '../../Form/SubmitButton'
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation'
-import type { ProposalsUserVotesStep_step } from '~relay/ProposalsUserVotesStep_step.graphql'
+import type { ProposalsUserVotesStep_step$data } from '~relay/ProposalsUserVotesStep_step.graphql'
 import WYSIWYGRender from '../../Form/WYSIWYGRender'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import VoteMinAlert from './VoteMinAlert'
@@ -17,7 +17,7 @@ import withColors from '~/components/Utils/withColors'
 import type { GlobalState } from '~/types'
 
 type RelayProps = {
-  step: ProposalsUserVotesStep_step
+  step: ProposalsUserVotesStep_step$data
 }
 type Props = RelayProps & {
   dispatch: (...args: Array<any>) => any
@@ -157,7 +157,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(withColors(ProposalsUserVotesStep))
+const container = connect(mapStateToProps)(withColors(ProposalsUserVotesStep))
 export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalsUserVotesStep_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {

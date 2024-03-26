@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/styles/modules/colors'
 
-export const QuestionnaireFooterContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const QuestionnaireFooterContainer = styled.div`
   padding: 32px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

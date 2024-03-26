@@ -144,4 +144,4 @@ const mapStateToProps = (state: GlobalState) => ({
   progressSteps: selector(state, 'progressSteps'),
 })
 
-export default connect<any, any>(mapStateToProps)(ProposalAdminProgressSteps)
+export default connect(mapStateToProps)(ProposalAdminProgressSteps)

@@ -54,7 +54,7 @@ const mapStateToProps = state => ({
 })
 
 // @ts-ignore
-const EmailNotConfirmedAppClientConnected = connect<any, any>(mapStateToProps)(EmailNotConfirmedAppClient)
+const EmailNotConfirmedAppClientConnected = connect(mapStateToProps)(EmailNotConfirmedAppClient)
 
 const EmailNotConfirmedApp = () => (
   <Providers>

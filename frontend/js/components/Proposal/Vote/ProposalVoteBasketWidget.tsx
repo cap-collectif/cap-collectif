@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedNumber, FormattedMessage } from 'react-intl'
 import { Navbar, Button } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import type { ProposalVoteBasketWidget_step } from '~relay/ProposalVoteBasketWidget_step.graphql'
 import type { ProposalVoteBasketWidget_viewer } from '~relay/ProposalVoteBasketWidget_viewer.graphql'
@@ -13,7 +13,7 @@ import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import withColors from '~/components/Utils/withColors'
 import type { FeatureToggles, State } from '~/types'
 
-export const BlockContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const BlockContainer = styled.div`
   display: flex;
   align-items: center;
 
@@ -307,7 +307,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(withColors(connect<any, any>(mapStateToProps)(ProposalVoteBasketWidget)), {
+export default createFragmentContainer(withColors(connect(mapStateToProps)(ProposalVoteBasketWidget)), {
   step: graphql`
     fragment ProposalVoteBasketWidget_step on ProposalStep @argumentDefinitions(token: { type: "String" }) {
       viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {

@@ -347,7 +347,7 @@ const formContainer = reduxForm({
   asyncChangeFields: ['plainPassword'],
   onSubmit,
 })(RegistrationForm)
-const RegistrationFormConnected = connect<any, any>(mapStateToProps)(injectIntl(formContainer))
+const RegistrationFormConnected = connect(mapStateToProps)(injectIntl(formContainer))
 export default createFragmentContainer(RegistrationFormConnected, {
   query: graphql`
     fragment RegistrationForm_query on Query {

@@ -2,7 +2,7 @@ import React from 'react'
 import type { RelayPaginationProp } from 'react-relay'
 import { graphql, createPaginationContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import UserBox from '~/components/User/UserBox'
@@ -20,7 +20,7 @@ type Props = {
   relay: RelayPaginationProp
   pageAdmin: boolean
 }
-const ProposalPageFollowersContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageFollowersContainer = styled.div`
   width: 100%;
   max-width: 950px;
   margin: auto;

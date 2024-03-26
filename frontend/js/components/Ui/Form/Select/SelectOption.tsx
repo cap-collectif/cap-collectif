@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '../../../../utils/colors'
 
@@ -39,7 +39,7 @@ const Button = styled.button<{
     }
   `}
 `
-const Li: StyledComponent<any, {}, HTMLLIElement> = styled.li.attrs({
+const Li = styled.li.attrs({
   className: 'select__option',
 })`
   list-style-type: none;

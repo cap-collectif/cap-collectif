@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Text, Flex } from '@cap-collectif/ui'
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import Image from '~ui/Primitives/Image'
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
   }
   readonly stepUrl: string
 }
-const Link: StyledComponent<any, {}, HTMLAnchorElement> = styled('a')`
+const Link = styled('a')`
   color: inherit;
   text-decoration: none !important;
   &:hover {

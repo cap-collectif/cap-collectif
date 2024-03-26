@@ -179,7 +179,7 @@ const mapStateToProps = (state: State) => ({
 
 // @ts-ignore
 const container = injectIntl(
-  connect<any, any>(mapStateToProps)(
+  connect(mapStateToProps)(
     reduxForm({
       onSubmit,
       validate,

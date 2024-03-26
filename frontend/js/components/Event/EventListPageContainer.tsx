@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedHTMLMessage, FormattedMessage, useIntl } from 'react-intl'
 import { createFragmentContainer } from 'react-relay'
@@ -25,7 +25,7 @@ type Props = {
   readonly eventPageBody: string | null | undefined
   readonly backgroundColor: string | null | undefined
 }
-const EventFiltersContainer: StyledComponent<any, {}, typeof ColorBox> = styled(ColorBox).attrs({
+const EventFiltersContainer = styled(ColorBox).attrs({
   id: 'event-page-filters',
 })`
   margin: 25px 0 30px;
@@ -36,7 +36,7 @@ const EventFiltersContainer: StyledComponent<any, {}, typeof ColorBox> = styled(
     margin-bottom: 0;
   }
 `
-const AwaitingEventsPanel: StyledComponent<any, {}, typeof Panel> = styled(Panel)`
+const AwaitingEventsPanel = styled(Panel)`
   margin-top: 15px;
   margin-bottom: 0 !important;
   & > div:last-child {

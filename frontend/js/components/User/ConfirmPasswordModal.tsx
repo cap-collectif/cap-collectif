@@ -51,4 +51,4 @@ export class ConfirmPasswordModal extends Component<Props> {
     )
   }
 }
-export default connect<any, any>()(ConfirmPasswordModal)
+export default connect()(ConfirmPasswordModal)

@@ -8,7 +8,7 @@ import ProposalFusionForm, { formName } from '../Form/ProposalFusionForm'
 import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
 import type { State, Dispatch } from '../../../types'
-import type { ProposalFusionForm_query } from '~relay/ProposalFusionForm_query.graphql'
+import type { ProposalFusionForm_query$data } from '~relay/ProposalFusionForm_query.graphql'
 
 export type Props = {
   showModal: boolean
@@ -18,7 +18,7 @@ export type Props = {
   open: () => void
   close: () => void
   submitForm: () => void
-  query: ProposalFusionForm_query
+  query: ProposalFusionForm_query$data
 }
 export const ProposalCreateFusionButton = ({
   showModal,
@@ -97,4 +97,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 })
 
-export default connect<any, any>(mapStateToProps, mapDispatchToProps)(ProposalCreateFusionButton)
+export default connect(mapStateToProps, mapDispatchToProps)(ProposalCreateFusionButton)

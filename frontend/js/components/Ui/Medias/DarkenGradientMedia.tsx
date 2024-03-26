@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   role?: string
   alt?: string
 }
-export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs<Props>({
   className: 'darken-gradient-media',
 })`
   background: ${props =>

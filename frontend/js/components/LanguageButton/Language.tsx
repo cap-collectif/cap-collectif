@@ -1,6 +1,6 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { Language_language } from '~relay/Language_language.graphql'
@@ -21,12 +21,12 @@ const Dot: StyledComponent<{ green: boolean }, {}, HTMLDivElement> = styled.div`
   margin-right: 10px;
 `;
 */
-export const LanguageTitle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LanguageTitle = styled.div`
   font-family: 'OpenSans', helvetica, arial, sans-serif;
   font-size: 16px;
   color: #000;
 `
-export const LanguageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LanguageContainer = styled.div`
   display: flex;
 `
 export const Language = ({ language }: Props) => {

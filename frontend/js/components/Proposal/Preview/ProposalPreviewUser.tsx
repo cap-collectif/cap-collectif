@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedDate } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Media from '../../Ui/Medias/Media/Media'
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
@@ -13,7 +13,7 @@ import type { ProposalPreviewUser_proposal } from '~relay/ProposalPreviewUser_pr
 type Props = {
   proposal: ProposalPreviewUser_proposal
 }
-const MediaBody: StyledComponent<any, {}, typeof Media.Body> = styled(Media.Body)`
+const MediaBody = styled(Media.Body)`
   overflow: visible;
   .cap-popover {
     button {

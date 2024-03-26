@@ -234,7 +234,7 @@ const mapStateToProps = (state: GlobalState) => ({
   mailingListName: selectorForm(state, 'mailingListName') || '',
 })
 
-const ModalCreateMailingListConnected = connect<any, any>(mapStateToProps)(form)
+const ModalCreateMailingListConnected = connect(mapStateToProps)(form)
 export default createFragmentContainer(ModalCreateMailingListConnected, {
   project: graphql`
     fragment ModalCreateMailingList_project on Project {

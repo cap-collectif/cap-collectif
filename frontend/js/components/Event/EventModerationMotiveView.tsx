@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import { Alert } from 'react-bootstrap'
@@ -12,7 +12,7 @@ import colors from '~/utils/colors'
 type Props = {
   readonly event: EventModerationMotiveView_event
 }
-const ViewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ViewContainer = styled.div`
   div {
     margin-top: 10px;
   }

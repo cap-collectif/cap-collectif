@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Label } from '~/components/Ui/Labels/Label'
 import { baseUrl } from '~/config'
@@ -13,7 +13,7 @@ type Props = {
   hasAnalysis: boolean
   id: string
 }
-const ModalWrapper: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+const ModalWrapper = styled(Modal)`
   .modal-header {
     border-bottom: none !important;
   }
@@ -22,7 +22,7 @@ const ModalWrapper: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
     padding: 1px 8px !important;
   }
 `
-const Body: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Body = styled.div`
   span:first-child {
     display: block;
     font-size: 16px;
@@ -30,7 +30,7 @@ const Body: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin-bottom: 10px;
   }
 `
-const Pictures: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Pictures = styled.div`
   display: flex;
   text-align: center;
   justify-content: center;

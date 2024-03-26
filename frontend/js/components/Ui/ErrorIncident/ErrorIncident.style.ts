@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-const ErrorIncidentContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ErrorIncidentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

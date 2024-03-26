@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { renderToString } from 'react-dom/server'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { MapContainer, Marker } from 'react-leaflet'
 import { GestureHandling } from 'leaflet-gesture-handling'
@@ -16,7 +16,7 @@ type Props = {
   readonly color: string
   readonly icon: string
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   max-height: 128px;
   min-height: 115px;
   position: relative;

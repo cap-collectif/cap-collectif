@@ -230,7 +230,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(Post)
+const container = connect(mapStateToProps)(Post)
 export default createFragmentContainer(container, {
   post: graphql`
     fragment Post_post on Post {

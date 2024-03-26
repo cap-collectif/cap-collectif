@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Panel, Accordion as BsAccordion } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
 type Input = {
@@ -33,7 +33,7 @@ export const PanelHeader = styled(Panel.Heading)<{
   padding: 30px !important;
   color: ${props => `${props.titleColor} !important` || ''};
 `
-export const PanelBody: StyledComponent<any, {}, typeof Panel.Body> = styled(Panel.Body)`
+export const PanelBody = styled(Panel.Body)`
   padding: 30px !important;
 `
 export const Accordion = ({ defaultActiveKey, inputs, openedColor, closedColor, titleColor }: Props) => {

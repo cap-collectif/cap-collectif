@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import Modal from '~ds/Modal/Modal'
 
-export const ModalDeleteProposalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const ModalDeleteProposalContainer = styled(Modal)`
   .hide-content {
     margin-bottom: 15px;
   }

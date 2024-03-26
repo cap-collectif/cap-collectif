@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { IntlShape } from 'react-intl'
 import { injectIntl } from 'react-intl'
@@ -9,8 +9,8 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import type { DragStart, DropResult, DragUpdate, DraggableStateSnapshot, ResponderProvided } from 'react-beautiful-dnd'
 import 'react-beautiful-dnd'
 import ProposalUserVoteItem from './ProposalUserVoteItem'
-import type { ProposalsUserVotesTable_step } from '~relay/ProposalsUserVotesTable_step.graphql'
-import type { ProposalsUserVotesTable_votes } from '~relay/ProposalsUserVotesTable_votes.graphql'
+import type { ProposalsUserVotesTable_step$data } from '~relay/ProposalsUserVotesTable_step.graphql'
+import type { ProposalsUserVotesTable_votes$data } from '~relay/ProposalsUserVotesTable_votes.graphql'
 import type { State, Dispatch, FeatureToggles } from '~/types'
 import config from '~/config'
 import invariant from '~/utils/invariant'
@@ -19,8 +19,8 @@ import List from '~/components/Ui/DragnDrop/List/List'
 import Item from '~/components/Ui/DragnDrop/Item/Item'
 import { NonDraggableItemContainer, VotePlaceholder, ItemPosition } from './ProposalsUserVotes.style'
 type RelayProps = {
-  step: ProposalsUserVotesTable_step
-  votes: ProposalsUserVotesTable_votes
+  step: ProposalsUserVotesTable_step$data
+  votes: ProposalsUserVotesTable_votes$data
 }
 type Props = ReduxFormFormProps &
   RelayProps & {
@@ -60,7 +60,7 @@ export const DraggableItem = styled.div<{
   user-select: none;
   transition: background-color 0.1s ease;
 `
-export const UserVotesTableContainer: StyledComponent<any, any, HTMLDivElement> = styled.div`
+export const UserVotesTableContainer = styled.div`
   .wrapper-item-container {
     overflow: visible !important;
   }
@@ -77,7 +77,7 @@ if (config.canUseDOM && document) {
 }
 
 const renderPlaceholders = (
-  step: ProposalsUserVotesTable_step,
+  step: ProposalsUserVotesTable_step$data,
   length: number,
   isDraggable: boolean,
   startNumber?: number,
@@ -293,7 +293,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       )
     }
   }
-  getTitle = (votes: ProposalsUserVotesTable_votes, position: DragStart | DragUpdate | DropResult) => {
+  getTitle = (votes: ProposalsUserVotesTable_votes$data, position: DragStart | DragUpdate | DropResult) => {
     const draggedProposal = votes.edges && votes.edges.filter(el => el && el.node.proposal.id === position.draggableId)
     invariant(draggedProposal && draggedProposal[0], 'Dragged proposal should be found.')
     return draggedProposal[0].node.proposal.title
@@ -379,7 +379,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   votes: graphql`
     fragment ProposalsUserVotesTable_votes on ProposalVoteConnection {

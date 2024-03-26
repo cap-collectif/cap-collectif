@@ -1,7 +1,7 @@
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { ProposalViewDecisionPanel_proposal } from '~relay/ProposalViewDecisionPanel_proposal.graphql'
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
@@ -9,7 +9,7 @@ import { getLabelData } from './ProposalAnalysisUserRow'
 import { ResponsesView } from './ProposalViewAnalysisPanel'
 import WYSIWYGRender from '../../Form/WYSIWYGRender'
 
-const DecidorView: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DecidorView = styled.div`
   p {
     font-size: 16px;
     margin-top: 20px;

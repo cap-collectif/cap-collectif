@@ -165,7 +165,7 @@ const mapStateToProps = (state: GlobalState) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(EventRefetch)
+const container = connect(mapStateToProps)(EventRefetch)
 export default createRefetchContainer(
   container,
   {

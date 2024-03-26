@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field, reduxForm, SubmissionError, submit } from 'redux-form'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Panel } from 'react-bootstrap'
 import UserPasswordField from '~/components/User/UserPasswordField'
@@ -74,7 +74,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { intl, token }) => {
 }
 
 export const formName = 'recreate_password_form'
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   width: 50%;
   margin: 20px auto;
 

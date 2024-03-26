@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import PickableList from '~ui/List/PickableList'
 
-export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+export const Header = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,9 +13,7 @@ export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
     width: 250px;
   }
 `
-export const DashboardMailingListHeader: StyledComponent<any, {}, typeof PickableList.Header> = styled(
-  PickableList.Header,
-)`
+export const DashboardMailingListHeader = styled(PickableList.Header)`
   align-items: stretch;
 
   p {
@@ -28,7 +25,7 @@ export const DashboardMailingListHeader: StyledComponent<any, {}, typeof Pickabl
     }
   }
 `
-export const ButtonDelete: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonDelete = styled.button`
   background-color: transparent;
   color: ${colors.red};
   border: none;

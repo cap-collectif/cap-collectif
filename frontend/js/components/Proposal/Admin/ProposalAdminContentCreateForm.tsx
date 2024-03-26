@@ -5,7 +5,6 @@ import { submit, SubmissionError, isPristine, isDirty, isInvalid, isSubmitting, 
 import { createFragmentContainer, graphql } from 'react-relay'
 import { useAnalytics } from 'use-analytics'
 import css from '@styled-system/css'
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import moment from 'moment'
 import type { Dispatch, GlobalState, Uuid } from '~/types'
@@ -13,7 +12,7 @@ import { styleGuideColors, colors } from '~/utils/colors'
 import Flex from '~ui/Primitives/Layout/Flex'
 import AppBox from '~ui/Primitives/AppBox'
 import Heading from '~ui/Primitives/Heading'
-import type { ProposalAdminContentCreateForm_proposalForm } from '~relay/ProposalAdminContentCreateForm_proposalForm.graphql'
+import type { ProposalAdminContentCreateForm_proposalForm$data } from '~relay/ProposalAdminContentCreateForm_proposalForm.graphql'
 import Help from '~ui/Form/Help/Help'
 import type { FormValues, Props as ProposalFormProps } from '~/components/Proposal/Form/ProposalFormLegacy'
 import ProposalFormLegacy, { formName, memoizeAvailableQuestions } from '~/components/Proposal/Form/ProposalFormLegacy'
@@ -28,9 +27,11 @@ import CreateProposalFromBackOfficeMutation from '~/mutations/CreateProposalFrom
 import { toast } from '~ds/Toast'
 import AlertForm from '~/components/Alert/AlertForm'
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine'
+
 type RelayProps = {
-  readonly proposalForm: ProposalAdminContentCreateForm_proposalForm
+  readonly proposalForm: ProposalAdminContentCreateForm_proposalForm$data
 }
+
 type Props = ReduxFormFormProps &
   RelayProps & {
     submitting: boolean
@@ -40,7 +41,7 @@ type Props = ReduxFormFormProps &
     dispatch: Dispatch
     projectType: string
   }
-const FormContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FormContainer = styled.div`
   font-size: 14px;
 
   .form-group > label > *, .form-group > label {
@@ -412,7 +413,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalAdminContentCreateForm)
+const container = connect(mapStateToProps)(ProposalAdminContentCreateForm)
 export default createFragmentContainer(container, {
   proposalForm: graphql`
     fragment ProposalAdminContentCreateForm_proposalForm on ProposalForm {

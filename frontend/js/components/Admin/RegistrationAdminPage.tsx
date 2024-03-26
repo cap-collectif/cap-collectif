@@ -248,7 +248,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 })
 
-const connector = connect<any, any>(mapStateToProps, mapDispatchToProps)
+const connector = connect(mapStateToProps, mapDispatchToProps)
 export default createFragmentContainer(connector(RegistrationAdminPage), {
   query: graphql`
     fragment RegistrationAdminPage_query on Query {

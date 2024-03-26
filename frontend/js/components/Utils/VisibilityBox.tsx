@@ -60,4 +60,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(VisibilityBox)
+export default connect(mapStateToProps)(VisibilityBox)

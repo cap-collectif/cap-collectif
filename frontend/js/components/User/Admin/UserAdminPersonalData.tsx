@@ -349,7 +349,7 @@ const mapStateToProps = (state: State, { user, viewer }: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form) // same as PersonalData.js I have to find a solution to merge both in one
+const container = connect(mapStateToProps)(form) // same as PersonalData.js I have to find a solution to merge both in one
 
 export default createFragmentContainer(container, {
   user: graphql`

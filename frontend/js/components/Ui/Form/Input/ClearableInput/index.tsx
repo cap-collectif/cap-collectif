@@ -1,7 +1,7 @@
 import { $Diff } from 'utility-types'
 import * as React from 'react'
 import { useInput, useKeyboardShortcuts } from '@liinkiing/react-hooks'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import type { Props as InputProps } from '~ui/Form/Input/Input'
 import { BASE_INPUT } from '~/utils/styles/variables'
@@ -99,7 +99,7 @@ const CloseIconContainer = styled.span<{
     height: 100%;
   }
 `
-const RightIconContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const RightIconContainer = styled.div`
   height: 100%;
   display: inline-block;
   position: absolute;

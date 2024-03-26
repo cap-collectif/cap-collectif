@@ -10,7 +10,7 @@ import styled from 'styled-components' // TODO https://github.com/cap-collectif/
 import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react-bootstrap'
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal'
 import type { GlobalState, Dispatch, FeatureToggles } from '../../types'
-import type { ProposalFormAdminCategories_query } from '~relay/ProposalFormAdminCategories_query.graphql'
+import type { ProposalFormAdminCategories_query$data } from '~relay/ProposalFormAdminCategories_query.graphql'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
@@ -42,7 +42,7 @@ type Props = {
     remove: (...args: Array<any>) => any
   }
   categories: Array<Record<string, any>>
-  query: ProposalFormAdminCategories_query
+  query: ProposalFormAdminCategories_query$data
   features: FeatureToggles
 }
 type State = {
@@ -202,7 +202,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalFormAdminCategories)
+const container = connect(mapStateToProps)(ProposalFormAdminCategories)
 export default createFragmentContainer(injectIntl(container), {
   query: graphql`
     fragment ProposalFormAdminCategories_query on Query {

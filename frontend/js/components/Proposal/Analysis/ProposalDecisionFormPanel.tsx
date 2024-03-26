@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, useIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { Glyphicon, InputGroup } from 'react-bootstrap'
 import { useResize } from '@liinkiing/react-hooks'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import debounce from 'debounce-promise'
 import { reduxForm, formValueSelector, change, Field, SubmissionError } from 'redux-form'
@@ -26,7 +26,7 @@ import ProposalRevision from '~/shared/ProposalRevision/ProposalRevision'
 import { RevisionButton } from '~/shared/ProposalRevision/styles'
 import ProposalRevisionPanel from '~/components/Proposal/Analysis/ProposalRevisionPanel'
 
-const PostWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const PostWrapper = styled.div`
   margin-top: 10px;
   padding: 15px;
   background: ${colors.grayF4};
@@ -283,7 +283,7 @@ const form = reduxForm({
   onSubmit,
 })(ProposalDecisionFormPanel)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDecisionFormPanel_proposal on Proposal

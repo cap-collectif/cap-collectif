@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Field, getFormSyncErrors, formValueSelector, change, arrayPop } from 'redux-form'
 import { Modal } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage, injectIntl } from 'react-intl'
 import { connect } from 'react-redux'
@@ -40,7 +40,7 @@ const optional = (
     <FormattedMessage id="global.optional" />
   </span>
 )
-export const ModalContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ModalContainer = styled.div`
   .modal-title,
   .label-container,
   .panel-title {
@@ -192,4 +192,4 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(SectionQuestionAdminModal))
+export default connect(mapStateToProps)(injectIntl(SectionQuestionAdminModal))

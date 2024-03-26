@@ -1,11 +1,10 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import DropdownSelect from '~ui/DropdownSelect'
 import { Body } from '~ui/DropdownSelect/index.style'
 import colors from '~/utils/colors'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 
-export const SearchableDropdownContainer: StyledComponent<any, {}, typeof DropdownSelect> = styled(DropdownSelect)`
+export const SearchableDropdownContainer = styled(DropdownSelect)`
   &
     ${
       /* sc-selector */
@@ -14,18 +13,18 @@ export const SearchableDropdownContainer: StyledComponent<any, {}, typeof Dropdo
     font-weight: 500;
   }
 `
-export const MessageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const MessageContainer = styled.div`
   padding: 20px;
   text-align: center;
 `
-export const Input: StyledComponent<any, {}, typeof ClearableInput> = styled(ClearableInput)`
+export const Input = styled(ClearableInput)`
   & input {
     background: ${colors.white};
     padding-top: 8px;
     padding-bottom: 8px;
   }
 `
-export const ButtonReset: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonReset = styled.button`
   color: ${colors.primaryColor};
   border: none;
   background: none;

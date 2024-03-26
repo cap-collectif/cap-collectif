@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import environment, { graphqlError } from '../../createRelayEnvironment'
@@ -13,7 +13,7 @@ export type Props = {
   readonly isAuthenticated: boolean
 }
 export const TRASHED_PAGINATOR_COUNT = 20
-const StyledContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const StyledContainer = styled.div`
   .width-100 {
     width: 100%;
   }

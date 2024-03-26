@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import NewsCard from '~/components/Ui/News/NewsCard'
 import type { ProposalPageBlog_proposal } from '~relay/ProposalPageBlog_proposal.graphql'
@@ -9,7 +9,7 @@ import type { ProposalPageBlog_proposal } from '~relay/ProposalPageBlog_proposal
 type Props = {
   proposal: ProposalPageBlog_proposal | null | undefined
 }
-const ProposalPageBlogContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageBlogContainer = styled.div`
   width: 100%;
   max-width: 950px;
   margin: auto;

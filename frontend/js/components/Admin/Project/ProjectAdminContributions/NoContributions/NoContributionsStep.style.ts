@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +24,7 @@ export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     cursor: pointer;
   }
 `
-export const Tiles: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const Tiles = styled.ul`
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-export const NavContainer: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const NavContainer = styled.ul`
   width: 100%;
   list-style: none;
   display: flex;
@@ -52,7 +51,7 @@ export const Count = styled.span<{
   margin-left: 5px;
   font-size: 12px;
 `
-export const Header: StyledComponent<any, {}, HTMLElement> = styled.nav`
+export const Header = styled.nav`
   width: calc(100% - 230px);
   background: ${colors.white};
   padding: 15px 15px 0 15px;
@@ -95,7 +94,7 @@ export const Header: StyledComponent<any, {}, HTMLElement> = styled.nav`
     position: absolute;
   }
 `
-export const Content: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Content = styled.div`
   width: 100%;
   margin-top: 95px;
   @media (max-width: 768px) {

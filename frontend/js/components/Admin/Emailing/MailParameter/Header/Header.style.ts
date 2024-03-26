@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import { LIGHT_BOX_SHADOW, MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import colors from '~/utils/colors'
@@ -11,13 +10,13 @@ const commonCssInput = css`
   margin: 0;
   background-color: transparent;
 `
-export const Container: StyledComponent<any, {}, HTMLElement> = styled.header`
+export const Container = styled.header`
   display: flex;
   flex-direction: column;
   padding: 15px 15px 0 15px;
   background-color: #fff;
 `
-export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -79,7 +78,7 @@ export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
     }
   }
 `
-export const LabelPlannedContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LabelPlannedContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,11 +87,11 @@ export const LabelPlannedContainer: StyledComponent<any, {}, HTMLDivElement> = s
     margin-right: 10px;
   }
 `
-export const ButtonSendContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ButtonSendContainer = styled.div`
   position: relative;
   flex-shrink: 0;
 `
-export const ErrorContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ErrorContainer = styled.div`
   position: absolute;
   top: 50px;
   right: 0;
@@ -106,7 +105,7 @@ export const ErrorContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
     margin-right: 5px;
   }
 `
-export const ButtonSendMail: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonSendMail = styled.button`
   padding: 8px;
   background-color: ${colors.blue};
   color: #fff;
@@ -114,14 +113,14 @@ export const ButtonSendMail: StyledComponent<any, {}, HTMLButtonElement> = style
   margin-left: 10px;
   ${MAIN_BORDER_RADIUS};
 `
-export const ButtonCancelPlanned: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonCancelPlanned = styled.button`
   padding: 8px;
   background: none;
   color: #000;
   border: 1px solid ${colors.borderColor};
   ${MAIN_BORDER_RADIUS};
 `
-export const NavContainer: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const NavContainer = styled.ul`
   width: 100%;
   list-style: none;
   display: flex;

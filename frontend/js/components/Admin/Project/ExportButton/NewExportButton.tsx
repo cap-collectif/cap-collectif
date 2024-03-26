@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Icon, { ICON_NAME as OLD_ICON } from '~ui/Icons/Icon'
 import colors from '~/utils/colors'
@@ -28,7 +28,7 @@ type Props = {
     | undefined
   >
 }
-const CustomOptionItem: StyledComponent<any, {}, typeof Menu.OptionItem> = styled(Menu.OptionItem)`
+const CustomOptionItem = styled(Menu.OptionItem)`
   input {
     display: none;
   }

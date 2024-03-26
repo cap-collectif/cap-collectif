@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
@@ -73,7 +72,7 @@ export const Container = styled.div<{
       }
   }`};
 `
-export const ModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const ModalContainer = styled(Modal)`
   .modal-dialog {
     width: 40%;
   }

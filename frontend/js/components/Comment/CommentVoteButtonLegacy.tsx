@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation'
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation'
@@ -14,7 +14,7 @@ import colors from '~/utils/colors'
 type Props = {
   readonly comment: CommentVoteButtonLegacy_comment
 }
-const VoteButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const VoteButton = styled.button`
   border: none;
   background: none;
   text-transform: lowercase;

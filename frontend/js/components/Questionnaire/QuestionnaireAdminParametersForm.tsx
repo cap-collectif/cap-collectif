@@ -130,7 +130,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireAdminParametersForm_questionnaire on Questionnaire {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import css from '@styled-system/css'
@@ -456,7 +456,7 @@ export const Socials = ({ children, ...rest }: SocialsProps) => (
     {children}
   </AppBox>
 )
-const SocialContainer: StyledComponent<any, {}, any> = styled(Link)(
+const SocialContainer = styled(Link)(
   css({
     color: 'neutral-gray.500',
     boxShadow: 'none !important',

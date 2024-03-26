@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const ProjectAnalysisPreviewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const ProjectAnalysisPreviewContainer = styled.div.attrs({
   className: 'project-analysis-preview',
 })`
   width: 100%;
@@ -69,7 +68,7 @@ const ProjectAnalysisPreviewContainer: StyledComponent<any, {}, HTMLDivElement> 
     }
   }
 `
-export const DefaultCoverPreview: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const DefaultCoverPreview = styled.div.attrs({
   className: 'default-cover',
 })`
   display: flex;

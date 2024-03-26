@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import moment from 'moment'
 import { Label } from 'react-bootstrap'
 import { Flex, Popover, Text } from '@cap-collectif/ui'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { UnpublishedLabel_publishable$key } from '~relay/UnpublishedLabel_publishable.graphql'
 
@@ -20,7 +20,7 @@ const FRAGMENT = graphql`
     publishableUntil
   }
 `
-const StyledPopover: StyledComponent<any, {}, typeof Popover> = styled(Popover)`
+const StyledPopover = styled(Popover)`
   button {
     background-color: transparent !important;
     border: none !important;

@@ -5,11 +5,11 @@ import { graphql, createFragmentContainer } from 'react-relay' // TODO https://g
 
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap'
-import type { ContactAdminList_query } from '~relay/ContactAdminList_query.graphql'
+import type { ContactAdminList_query$data } from '~relay/ContactAdminList_query.graphql'
 import ContactAdminListItem from './ContactAdminListItem'
 import ContactFormAdminAdd from './ContactFormAdminAdd'
 type Props = {
-  readonly query: ContactAdminList_query
+  readonly query: ContactAdminList_query$data
 }
 
 class ContactAdminList extends React.Component<Props> {

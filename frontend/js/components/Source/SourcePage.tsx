@@ -70,5 +70,5 @@ class SourcePage extends React.Component<Props> {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(SourcePage)
+const container = connect(mapStateToProps)(SourcePage)
 export default container

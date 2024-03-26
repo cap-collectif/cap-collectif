@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { ProposalPageMainContent_proposal } from '~relay/ProposalPageMainContent_proposal.graphql'
 import ProposalPageFusionInformations from './ProposalPageFusionInformations'
@@ -17,7 +17,7 @@ type Props = {
   goToBlog: () => void
   isAnalysing: boolean
 }
-const ProposalPageMainContentContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageMainContentContainer = styled.div`
   width: 100%;
   min-height: auto;
   @media (min-width: ${bootstrapGrid.mdMin}px) {

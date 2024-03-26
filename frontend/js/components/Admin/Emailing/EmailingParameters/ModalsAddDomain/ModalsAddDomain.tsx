@@ -159,7 +159,7 @@ const mapStateToProps = (state: GlobalState) => {
   }
 }
 
-const ModalsAddDomainFormConnected = connect<any, any>(mapStateToProps)(
+const ModalsAddDomainFormConnected = connect(mapStateToProps)(
   ModalsAddDomainForm,
 ) as React.AbstractComponent<BeforeProps>
 export default ModalsAddDomainFormConnected

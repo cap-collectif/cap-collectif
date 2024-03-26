@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import colors from '../../../utils/colors'
 import { avatarNb } from '../../../utils/sizes'
@@ -33,7 +33,7 @@ const createCSS = (props: CssProps) => {
   `
 }
 
-export const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs<{ length?: string }>({
   className: 'avatar-group',
 })`
   position: relative;

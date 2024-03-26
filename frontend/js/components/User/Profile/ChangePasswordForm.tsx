@@ -277,7 +277,7 @@ const mapStateToProps = (state: State) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment ChangePasswordForm_viewer on User {

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
@@ -8,7 +8,7 @@ import type { AnalystRevoked_analyst } from '~relay/AnalystRevoked_analyst.graph
 type Props = {
   analyst: AnalystRevoked_analyst
 }
-const AnalystRevokedContainer: StyledComponent<any, {}, HTMLLIElement> = styled.li.attrs({
+const AnalystRevokedContainer = styled.li.attrs({
   className: 'analyst-revoked-container',
 })`
   display: flex;

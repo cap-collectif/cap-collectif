@@ -1,11 +1,11 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 // eslint-disable-next-line no-restricted-imports
 import { ListGroup } from 'react-bootstrap'
 import colors from '../../../utils/colors'
 
-const Container: StyledComponent<any, {}, typeof ListGroup> = styled(ListGroup).attrs({
+const Container = styled(ListGroup).attrs({
   className: 'list-group-flush',
 })`
   .list-group-item:first-child {

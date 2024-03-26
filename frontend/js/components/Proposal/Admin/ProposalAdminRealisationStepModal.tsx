@@ -75,4 +75,4 @@ export class ProposalAdminRealisationStepModal extends React.Component<Props> {
     )
   }
 }
-export default connect<any, any>()(ProposalAdminRealisationStepModal)
+export default connect()(ProposalAdminRealisationStepModal)

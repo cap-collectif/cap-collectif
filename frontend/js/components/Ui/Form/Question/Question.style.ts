@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-const QuestionContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const QuestionContainer = styled.div.attrs({
   className: 'question',
 })`
   font-size: 20px;

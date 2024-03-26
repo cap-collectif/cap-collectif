@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants'
 import UnpublishedArgumentListRenderer from './UnpublishedArgumentListRenderer'
@@ -14,7 +14,7 @@ import type { ArgumentType } from '../../types'
 type Props = {
   opinion: ArgumentsBox_opinion
 }
-const Switcher: StyledComponent<any, {}, typeof Col> = styled(Col)`
+const Switcher = styled(Col)`
   display: none;
   margin-bottom: 15px;
   padding: 15px 15px 15px 15px;

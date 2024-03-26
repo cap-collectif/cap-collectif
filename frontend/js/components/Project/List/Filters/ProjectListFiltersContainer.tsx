@@ -86,20 +86,18 @@ export class ProjectListFiltersContainer extends React.Component<Props, State> {
   componentDidMount() {
     fetchQuery_DEPRECATED(environment, getAvailableProjectResources, {
       onlyUsedByProjects: true,
-    }).then(
-      ({ projectTypes, projectAuthors, globalDistricts, projects }: ProjectListFiltersContainerQueryResponse) => {
-        this.setState({
-          projectTypes: projectTypes || [],
-          projectAuthors: projectAuthors || [],
-          globalDistricts: globalDistricts || {
-            totalCount: 0,
-          },
-          projects: projects || {
-            totalCount: 0,
-          },
-        })
-      },
-    )
+    }).then(({ projectTypes, projectAuthors, globalDistricts, projects }: ProjectListFiltersContainerQueryResponse) => {
+      this.setState({
+        projectTypes: projectTypes || [],
+        projectAuthors: projectAuthors || [],
+        globalDistricts: globalDistricts || {
+          totalCount: 0,
+        },
+        projects: projects || {
+          totalCount: 0,
+        },
+      })
+    })
   }
 
   countFilter(): number {
@@ -161,4 +159,4 @@ const mapStateToProps = (state: GlobalState) => ({
   district: selector(state, 'district'),
 })
 
-export default connect<any, any>(mapStateToProps)(injectIntl(ProjectListFiltersContainer))
+export default connect(mapStateToProps)(injectIntl(ProjectListFiltersContainer))

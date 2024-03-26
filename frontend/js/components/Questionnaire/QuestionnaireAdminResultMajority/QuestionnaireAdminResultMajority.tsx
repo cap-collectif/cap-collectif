@@ -3,7 +3,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { useResize } from '@liinkiing/react-hooks'
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import type { QuestionnaireAdminResultMajority_majorityQuestion } from '~relay/QuestionnaireAdminResultMajority_majorityQuestion.graphql'
 import '~relay/QuestionnaireAdminResultMajority_majorityQuestion.graphql'
 import { bootstrapGrid } from '~/utils/sizes'
@@ -13,7 +13,7 @@ import { Container, ColorRow, GraphContainer, ResponseContainer } from './Questi
 type Props = {
   majorityQuestion: QuestionnaireAdminResultMajority_majorityQuestion
 }
-const Wrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Wrapper = styled.div`
   width: 768px;
 `
 export const medianCalculator = (question: QuestionnaireAdminResultMajority_majorityQuestion): number => {

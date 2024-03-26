@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { Box, Popover } from '@cap-collectif/ui'
-import type { VoteButtonOverlay_step } from '~relay/VoteButtonOverlay_step.graphql'
+import type { VoteButtonOverlay_step$data } from '~relay/VoteButtonOverlay_step.graphql'
 import ResetCss from '~/utils/ResetCss'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   popoverId: string
   hasReachedLimit: boolean
   hasUserEnoughCredits: boolean
-  step: VoteButtonOverlay_step | null | undefined
+  step: VoteButtonOverlay_step$data | null | undefined
 }
 export class VoteButtonOverlay extends React.Component<Props> {
   static defaultProps = {
@@ -26,9 +26,9 @@ export class VoteButtonOverlay extends React.Component<Props> {
       return children
     }
 
-    let title = ''
-    let content = ''
-    let help = ''
+    let title: any = ''
+    let content: any = ''
+    let help: any = ''
 
     if (!hasUserEnoughCredits && hasReachedLimit) {
       title = <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_title" />

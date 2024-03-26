@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import { BASE_INPUT, MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
 import colors from '~/utils/colors'
@@ -58,14 +57,14 @@ export const ButtonLocation = styled.button<{
   padding: 0 10px;
   height: ${({ isMobile }) => isMobile && '35px'};
 `
-export const LoaderContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const LoaderContainer = styled.div`
   background-color: #fff;
   width: 100%;
   padding: 20px;
   border-radius: 0 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE};
   border: 1px solid ${colors.lightGray};
 `
-export const ResultContainer: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const ResultContainer = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;

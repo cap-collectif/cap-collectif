@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import { Popover } from 'react-bootstrap'
 import colors from '~/utils/colors'
@@ -18,7 +17,7 @@ export const LabelContainer = styled.label<{
     font-weight: ${props => (props.bold ? 'bold' : 'normal')};
   }
 `
-export const ToggleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const ToggleContainer = styled.div.attrs({
   className: 'toggle-container',
 })`
   & > div {
@@ -86,19 +85,19 @@ export const PopoverContainer = styled(Popover)<{
 }>`
   max-width: ${props => props.width || '275px'};
 `
-export const TooltipContent: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TooltipContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 10px 0;
 `
-export const CloseButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const CloseButton = styled.button`
   border: none;
   background: none;
   padding: 0;
   margin-left: 12px;
 `
-export const TooltipFooter: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TooltipFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 9px;

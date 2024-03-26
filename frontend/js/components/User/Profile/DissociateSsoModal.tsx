@@ -14,7 +14,7 @@ import {
   Field,
 } from 'redux-form'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { DissociateSsoModal_viewer } from '~relay/DissociateSsoModal_viewer.graphql'
 import component from '../../Form/Field'
@@ -57,7 +57,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   })
 }
 
-const CreatePassword: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const CreatePassword = styled.div`
   display: flex;
   flex-direction: column;
 `
@@ -192,7 +192,7 @@ const formContainer = reduxForm({
   onSubmit,
 })(DissociateSsoModal)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(formContainer)
+const container = connect(mapStateToProps)(formContainer)
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment DissociateSsoModal_viewer on User {

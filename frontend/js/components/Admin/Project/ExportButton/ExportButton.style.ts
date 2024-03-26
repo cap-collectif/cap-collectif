@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import Collapsable from '~ui/Collapsable'
@@ -26,7 +25,7 @@ export const Container = styled(Collapsable)<{
     margin: 0;
   }
 `
-export const ButtonInformation: StyledComponent<any, {}, HTMLAnchorElement> = styled.a`
+export const ButtonInformation = styled.a`
   .icon {
     margin: 0;
   }
@@ -37,7 +36,7 @@ export const ButtonInformation: StyledComponent<any, {}, HTMLAnchorElement> = st
     }
   }
 `
-export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

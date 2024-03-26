@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const ProposalFormAdminPageTabsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalFormAdminPageTabsContainer = styled.div`
   h1 {
     font-size: 18px;
     font-weight: 600;
@@ -47,7 +46,7 @@ export const NavContainer = styled.ul<{
     -ms-overflow-style: none;
   }
 `
-export const NavItem: StyledComponent<any, {}, HTMLLIElement> = styled.li`
+export const NavItem = styled.li`
   margin-right: 20px;
   text-transform: uppercase;
   font-size: 12px;
@@ -71,7 +70,7 @@ export const NavItem: StyledComponent<any, {}, HTMLLIElement> = styled.li`
     text-decoration: none;
   }
 `
-export const ActionContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ActionContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

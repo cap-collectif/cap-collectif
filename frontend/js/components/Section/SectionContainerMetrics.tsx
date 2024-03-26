@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql'
 import MetricsBox from '../Ui/Metrics/MetricsBox'
@@ -10,7 +10,7 @@ export type Props = SectionContainerQueryResponse & {
   metricsToDisplayEvents: boolean
   metricsToDisplayProjects: boolean
 }
-const MetricsRow: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const MetricsRow = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

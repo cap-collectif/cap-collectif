@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { usePopoverState, Popover, PopoverDisclosure, PopoverArrow } from 'reakit/Popover'
 import { connect } from 'react-redux'
@@ -41,13 +41,13 @@ type Props = OwnProps &
   StateProps & {
     readonly dispatch: Dispatch
   }
-const PopoverContainer: StyledComponent<any, {}, HTMLDivElement> = styled(Box).attrs({
+const PopoverContainer = styled(Box).attrs({
   maxWidth: '280px',
   zIndex: 100,
 })`
   outline: none;
 `
-const ButtonRegistration: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const ButtonRegistration = styled.button`
   margin: 10px 0 0 0;
 `
 const Arrow = styled(Box)<{

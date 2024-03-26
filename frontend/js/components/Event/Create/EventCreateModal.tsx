@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { connect } from 'react-redux'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { isInvalid, isSubmitting, isPristine, submit } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { formName } from '../Form/EventForm'
 import CloseButton from '../../Form/CloseButton'
@@ -27,7 +27,7 @@ type Props = RelayProps & {
   invalid: boolean
   handleClose: () => void
 }
-export const EventFormInModal: StyledComponent<any, {}, typeof EventFormCreatePage> = styled(EventFormCreatePage)`
+export const EventFormInModal = styled(EventFormCreatePage)`
   & .box {
     padding: 0;
   }
@@ -80,7 +80,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(EventCreateModal)
+const container = connect(mapStateToProps)(EventCreateModal)
 export default createFragmentContainer(container, {
   query: graphql`
     fragment EventCreateModal_query on Query @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-const TagsListWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const TagsListWrapper = styled.div`
   padding: 0;
   margin: 0;
 `

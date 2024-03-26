@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import ProfileNeutralIcon from '../Icons/ProfileNeutralIcon'
 import PowerButtonIcon from '../Icons/PowerButtonIcon'
@@ -13,7 +13,7 @@ import Image from '~ui/Primitives/Image'
 export type Props = {
   readonly query: UserBlockProfile_query
 }
-export const ProfileInfo: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

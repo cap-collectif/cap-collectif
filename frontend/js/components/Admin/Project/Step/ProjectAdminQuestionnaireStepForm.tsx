@@ -178,4 +178,4 @@ export const ProjectAdminQuestionnaireStepForm = ({
   )
 }
 // @ts-ignore
-export default connect<any, any>()(ProjectAdminQuestionnaireStepForm)
+export default connect()(ProjectAdminQuestionnaireStepForm)

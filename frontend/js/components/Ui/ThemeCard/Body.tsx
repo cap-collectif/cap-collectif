@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import type { ThemeProps } from './ThemeCard'
@@ -8,7 +8,7 @@ import InlineList from '../List/InlineList'
 import { mediaQueryMobile } from '~/utils/sizes'
 
 type Props = ThemeProps
-const InfosContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const InfosContainer = styled.div`
   background-color: white;
   padding: 10px;
   line-height: 27px;
@@ -17,7 +17,7 @@ const InfosContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     width: 100%;
   }
 `
-const Title: StyledComponent<any, {}, HTMLHeadingElement> = styled.h2`
+const Title = styled.h2`
   font-size: 30px;
   text-align: center;
   margin: 5px;
@@ -26,7 +26,7 @@ const Title: StyledComponent<any, {}, HTMLHeadingElement> = styled.h2`
     margin: auto;
   }
 `
-const Infos: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const Infos = styled.span`
   font-size: 20px;
   color: grey;
   text-align: center;

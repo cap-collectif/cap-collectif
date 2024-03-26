@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors from '~/utils/colors'
@@ -18,7 +17,7 @@ export const Container = styled(PickableList.Row)<{
     margin-bottom: 5px;
   }
 `
-export const ButtonMembers: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonMembers = styled.button`
   border: none;
   background: none;
   padding: 0;

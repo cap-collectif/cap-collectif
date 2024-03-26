@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage, FormattedDate, injectIntl } from 'react-intl'
 import { useDisclosure } from '@liinkiing/react-hooks'
@@ -45,7 +45,7 @@ type Props = {
   readonly match: Match
   readonly isAuthenticated: boolean
 }
-const QuestionnaireReplyPageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const QuestionnaireReplyPageContainer = styled.div`
   .btn-goBack {
     padding: 0;
     background: none;
@@ -163,7 +163,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   resetReplyForm: (replyId: string) => dispatch(reset(getFormNameUpdate(replyId))),
 })
 
-const containerConnect = connect<any, any>(mapStateToProps, mapDispatchToProps)(container)
+const containerConnect = connect(mapStateToProps, mapDispatchToProps)(container)
 export default createFragmentContainer(containerConnect, {
   questionnaire: graphql`
     fragment QuestionnaireReplyPage_questionnaire on Questionnaire

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, FormattedDate } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Box, Skeleton } from '@cap-collectif/ui'
 import BodyText from '~/components/Ui/Boxes/BodyText'
@@ -22,7 +22,7 @@ import {
 type Props = {
   proposal: ProposalPageOfficialAnswer_proposal | null | undefined
 }
-const DecidorAvatarList: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DecidorAvatarList = styled.div`
   display: flex;
   margin-bottom: 20px;
 
@@ -49,11 +49,11 @@ const DecidorAvatarList: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin-left: 5px;
   }
 `
-const DecidorAvatar: StyledComponent<any, {}, typeof Avatar> = styled(Avatar)`
+const DecidorAvatar = styled(Avatar)`
   border: 1px solid ${colors.white} !important;
   box-shadow: 1px 1px ${colors.yellow}, -1px -1px ${colors.yellow}, -1px 1px ${colors.yellow}, 1px -1px ${colors.yellow};
 `
-const DecidorDefaultAvatar: StyledComponent<any, {}, typeof DefaultAvatar> = styled(DefaultAvatar)`
+const DecidorDefaultAvatar = styled(DefaultAvatar)`
   border: 1px solid ${colors.white} !important;
   box-shadow: 1px 1px ${colors.yellow}, -1px -1px ${colors.yellow}, -1px 1px ${colors.yellow}, 1px -1px ${colors.yellow} !important;
   border-radius: 20px;

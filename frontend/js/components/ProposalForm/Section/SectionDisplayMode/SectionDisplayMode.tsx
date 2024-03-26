@@ -21,10 +21,9 @@ import colors from '~/utils/colors'
 import PopoverToggleView from './PopoverToggleView/PopoverToggleView'
 import environment from '~/createRelayEnvironment'
 import { formatAddressFromGoogleAddress, getDataFromGoogleAddress } from '~/utils/googleMapAddress'
-import type { SectionDisplayMode_proposalForm } from '~relay/SectionDisplayMode_proposalForm.graphql'
-import type { SectionDisplayMode_GeoCodeQueryQueryResponse } from '~relay/SectionDisplayMode_GeoCodeQueryQuery.graphql'
+import type { SectionDisplayMode_proposalForm$data } from '~relay/SectionDisplayMode_proposalForm.graphql'
+import type { SectionDisplayMode_GeoCodeQueryQuery$data } from '~relay/SectionDisplayMode_GeoCodeQueryQuery.graphql'
 import type { AddressType, AddressCompleteFormatted, AddressComplete } from '~/components/Form/Address/Address.type'
-import type { MapProps } from '~/components/Proposal/Map/Map.types'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
 export const LOCATION_PARIS = {
   lat: 48.8534,
@@ -93,7 +92,10 @@ export const zoomLevels = [
   },
 ]
 
-const getStepsDependOfView = (proposalForm: SectionDisplayMode_proposalForm, viewSearched: 'GRID' | 'LIST' | 'MAP') => {
+const getStepsDependOfView = (
+  proposalForm: SectionDisplayMode_proposalForm$data,
+  viewSearched: 'GRID' | 'LIST' | 'MAP',
+) => {
   const firstCollectStep = proposalForm.step?.project?.firstCollectStep
   return proposalForm.step?.project?.steps.filter(Boolean).filter(step => {
     if (step.__typename === 'CollectStep') {
@@ -140,7 +142,7 @@ type Props = {
   longitude: number
   zoom?: number
   isMapViewEnabled: boolean
-  proposalForm: SectionDisplayMode_proposalForm
+  proposalForm: SectionDisplayMode_proposalForm$data
   errorViewEnabled: string | null | undefined
   dataMap: {
     json: string
@@ -163,8 +165,8 @@ export const loadLocationUser = (
   readonly json: string
 }> =>
   new Promise(async resolve => {
-    const response: SectionDisplayMode_GeoCodeQueryQueryResponse = await fetchQuery_DEPRECATED(
-      environment,
+    const response: SectionDisplayMode_GeoCodeQueryQuery$data = await fetchQuery_DEPRECATED(
+      environment as any,
       USER_LOCATION_QUERY,
       {
         latitude,
@@ -432,7 +434,7 @@ export const SectionDisplayMode = ({
                 />
 
                 <Map
-                  whenCreated={(map: MapProps) => {
+                  whenCreated={map => {
                     refMap.current = map
                   }}
                   className="map"
@@ -517,7 +519,7 @@ const mapStateToProps = (state: GlobalState, { formName, proposalForm }: Props) 
   }
 }
 
-const SectionDisplayModeConnected = connect<any, any>(mapStateToProps)(SectionDisplayMode)
+const SectionDisplayModeConnected = connect(mapStateToProps)(SectionDisplayMode)
 export default createFragmentContainer(SectionDisplayModeConnected, {
   proposalForm: graphql`
     fragment SectionDisplayMode_proposalForm on ProposalForm {

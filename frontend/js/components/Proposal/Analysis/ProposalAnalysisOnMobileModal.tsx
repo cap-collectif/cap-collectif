@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import CloseButton from '~/components/Form/CloseButton'
 import colors from '~/utils/colors'
@@ -10,7 +10,7 @@ type Props = {
   show: boolean
   onClose: () => void
 }
-const Body: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Body = styled.div`
   font-size: 15px;
   color: ${colors.darkGray};
 `

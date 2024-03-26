@@ -1,6 +1,6 @@
 import React from 'react'
 import BaseDateTime from 'react-datetime'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import moment from 'moment'
 export type DateTimeInputProps = {
@@ -52,7 +52,7 @@ type Props = DateProps & {
   timeConstraints?: TimeConstraintsProps
   isValidDate?: (current: moment) => boolean
 }
-const BasicDateTime: StyledComponent<any, {}, typeof BaseDateTime> = styled(BaseDateTime)`
+const BasicDateTime = styled(BaseDateTime)`
   .rdtPicker {
     margin-top: 35px;
   }

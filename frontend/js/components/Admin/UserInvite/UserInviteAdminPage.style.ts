@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import Modal from '~ds/Modal/Modal'
 import AppBox from '~ui/Primitives/AppBox'
 
-export const UserInviteAdminPageContainer: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox).attrs({
+export const UserInviteAdminPageContainer = styled(AppBox).attrs({
   className: 'user-invite-admin-page container-fluid',
   borderRadius: 'adminSection',
   pb: 6,
@@ -21,7 +20,7 @@ export const UserInviteAdminPageContainer: StyledComponent<any, {}, HTMLDivEleme
     }
   }
 `
-export const ModalBody: StyledComponent<any, {}, typeof Modal.Body> = styled(Modal.Body)`
+export const ModalBody = styled(Modal.Body)`
   border-top: 1px solid #dadee1;
   border-bottom: 1px solid #dadee1;
   overflow-wrap: break-word;

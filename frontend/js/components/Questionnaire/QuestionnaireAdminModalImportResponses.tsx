@@ -43,11 +43,11 @@ export class QuestionnaireAdminModalImportResponses extends React.Component<Prop
     })
     droppedFiles.forEach(file => {
       const reader = new window.FileReader()
-      reader.readAsBinaryString(file);
+      reader.readAsBinaryString(file)
 
       reader.onload = () => {
-        const encoding = jschardet.detect(reader.result as Buffer);
-        reader.readAsText(file, encoding.encoding);
+        const encoding = jschardet.detect(reader.result as Buffer)
+        reader.readAsText(file, encoding.encoding)
 
         reader.onload = () => {
           input.onChange({
@@ -115,4 +115,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(QuestionnaireAdminModalImportResponses))
+export default connect(mapStateToProps)(injectIntl(QuestionnaireAdminModalImportResponses))

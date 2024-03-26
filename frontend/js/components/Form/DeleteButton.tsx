@@ -12,6 +12,7 @@ type Props = {
   id?: string
   user?: Record<string, any>
   ariaLabel?: string
+  deletable?: boolean
 }
 
 class DeleteButton extends React.Component<Props> {
@@ -68,4 +69,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(DeleteButton)
+export default connect(mapStateToProps)(DeleteButton)

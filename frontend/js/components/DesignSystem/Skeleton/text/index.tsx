@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { m as motion } from 'framer-motion'
 import { variant } from 'styled-system'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import AppBox from '~ui/Primitives/AppBox'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
@@ -11,7 +11,7 @@ export type SkeletonTextProps = AppBoxProps & {
   animate?: boolean
   size?: 'sm' | 'md' | 'lg'
 }
-const SkeletonTextInner: StyledComponent<any, {}, any> = styled(motion(AppBox))(
+const SkeletonTextInner = styled(motion(AppBox))(
   variant({
     variants: {
       sm: {

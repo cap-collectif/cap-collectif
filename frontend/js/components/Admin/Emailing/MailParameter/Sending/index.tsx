@@ -141,7 +141,7 @@ const mapStateToProps = (state: GlobalState) => ({
   plannedDate: selectorForm(state, 'plannedDate'),
 })
 
-const SendingPageConnected = connect<any, any>(mapStateToProps)(SendingPage)
+const SendingPageConnected = connect(mapStateToProps)(SendingPage)
 export default createFragmentContainer(SendingPageConnected, {
   emailingCampaign: graphql`
     fragment Sending_emailingCampaign on EmailingCampaign {

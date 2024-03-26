@@ -9,12 +9,12 @@ import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion'
 import type { State, Dispatch } from '../../../types'
-import type { OpinionCreateModal_section } from '~relay/OpinionCreateModal_section.graphql'
-import type { OpinionCreateModal_consultation } from '~relay/OpinionCreateModal_consultation.graphql'
+import type { OpinionCreateModal_section$data } from '~relay/OpinionCreateModal_section.graphql'
+import type { OpinionCreateModal_consultation$data } from '~relay/OpinionCreateModal_consultation.graphql'
 import { formName as requirementsFormName } from '../../Requirements/RequirementsFormLegacy'
 type RelayProps = {
-  section: OpinionCreateModal_section
-  consultation: OpinionCreateModal_consultation
+  section: OpinionCreateModal_section$data
+  consultation: OpinionCreateModal_consultation$data
 }
 type Props = RelayProps & {
   readonly show: boolean
@@ -97,7 +97,7 @@ const mapStateToProps = (state: State, props: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(OpinionCreateModal)
+const container = connect(mapStateToProps)(OpinionCreateModal)
 export default createFragmentContainer(container, {
   section: graphql`
     fragment OpinionCreateModal_section on Section {

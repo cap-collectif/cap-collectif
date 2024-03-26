@@ -32,4 +32,4 @@ export const ProjectAdminRankingStepForm = () => (
     </ProjectSmallFieldsContainer>
   </>
 )
-export default connect<any, any>()(ProjectAdminRankingStepForm)
+export default connect()(ProjectAdminRankingStepForm)

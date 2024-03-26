@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 import { LIGHT_BOX_SHADOW, MAIN_BORDER_RADIUS, MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
@@ -6,14 +5,14 @@ import colors from '~/utils/colors'
 import type { DropdownSelectPointing } from '~ui/DropdownSelect/menu/index'
 
 const SPACE_BETWEEN_SUBPANELS = '6px'
-export const ContainerInner: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ContainerInner = styled.div`
   display: flex;
   align-items: center;
   & > svg {
     margin-left: auto;
   }
 `
-export const ListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ListContainer = styled.div`
   display: none;
 `
 export const Container = styled.li<{

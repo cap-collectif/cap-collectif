@@ -166,7 +166,7 @@ const mapStateToProps = (state: GlobalState, props: OwnProps) => ({
 })
 
 const form = injectIntl(
-  connect<any, any>(mapStateToProps)(
+  connect(mapStateToProps)(
     reduxForm({
       validate,
       onSubmit,

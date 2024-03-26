@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import { bootstrapGrid } from '~/utils/sizes'
 
-export const ProposalUserVoteStepContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalUserVoteStepContainer = styled.div`
   margin-bottom: 30px;
 
   h2 {
@@ -25,7 +24,7 @@ export const ProposalUserVoteStepContainer: StyledComponent<any, {}, HTMLDivElem
     outline: none;
   }
 `
-export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TitleContainer = styled.div`
   background-color: ${colors.pageBgc};
   padding: 45px 0;
   text-align: center;
@@ -33,11 +32,11 @@ export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
   font-weight: 600;
   border: 1px solid ${colors.borderColor};
 `
-export const BackToVote: StyledComponent<any, {}, HTMLAnchorElement> = styled.a`
+export const BackToVote = styled.a`
   font-size: 16px;
   font-weight: 600;
 `
-export const VoteItemContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const VoteItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -91,7 +90,7 @@ export const VoteItemContainer: StyledComponent<any, {}, HTMLDivElement> = style
     margin-bottom: 0;
   }
 `
-export const ButtonDeleteVote: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonDeleteVote = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,7 +100,7 @@ export const ButtonDeleteVote: StyledComponent<any, {}, HTMLButtonElement> = sty
   height: 30px;
   border-radius: 15px;
 `
-export const VoteMinAlertContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const VoteMinAlertContainer = styled.div`
   display: flex;
 
   svg {
@@ -124,7 +123,7 @@ export const VoteMinAlertContainer: StyledComponent<any, {}, HTMLDivElement> = s
     margin-bottom: 15px;
   }
 `
-export const NonDraggableItemContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const NonDraggableItemContainer = styled.div`
   border-radius: 4px;
   border: 1px solid ${colors.borderColor};
   margin-bottom: 10px;
@@ -154,7 +153,7 @@ export const VotePlaceholder = styled.div<{
       `}
   }
 `
-export const ItemPosition: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const ItemPosition = styled.span`
   width: 30px;
   height: 23px;
   line-height: 23px;

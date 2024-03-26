@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const UserAnalystListHiddenContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const UserAnalystListHiddenContainer = styled.div.attrs({
   className: 'user-analyst-list-hidden',
 })`
   .avatar-wrapper {
@@ -13,7 +12,7 @@ const UserAnalystListHiddenContainer: StyledComponent<any, {}, HTMLDivElement> =
     }
   }
 `
-export const TooltipAnalystListHiddenContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const TooltipAnalystListHiddenContainer = styled.div.attrs({
   className: 'tooltip-analyst-list-hidden',
 })`
   display: flex;
@@ -26,7 +25,7 @@ export const TooltipAnalystListHiddenContainer: StyledComponent<any, {}, HTMLDiv
     margin: 0;
   }
 `
-export const UserAvatarWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const UserAvatarWrapper = styled.div.attrs({
   className: 'user-avatar-wrapper',
 })`
   display: flex;
@@ -42,7 +41,7 @@ export const UserAvatarWrapper: StyledComponent<any, {}, HTMLDivElement> = style
     margin-bottom: 0;
   }
 `
-export const UsernameWrapper: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const UsernameWrapper = styled.span`
   margin-left: 3px;
 `
 export default UserAnalystListHiddenContainer

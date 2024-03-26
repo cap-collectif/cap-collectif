@@ -5,7 +5,7 @@ import { formValueSelector } from 'redux-form'
 import type { RelayPaginationProp } from 'react-relay'
 import { graphql, createPaginationContainer } from 'react-relay'
 import classNames from 'classnames'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
@@ -30,7 +30,7 @@ type Props = OwnProps & {
   readonly status: string
 }
 const EVENTS_PAGINATION = 50
-const MapContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
+const MapContainer = styled(Col)`
   top: 150px;
   position: sticky;
 
@@ -38,7 +38,7 @@ const MapContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
     top: 0;
   }
 `
-const EventListContainer: StyledComponent<any, {}, typeof Col> = styled(Col)`
+const EventListContainer = styled(Col)`
   .eventPreview {
     margin-bottom: 15px;
   }

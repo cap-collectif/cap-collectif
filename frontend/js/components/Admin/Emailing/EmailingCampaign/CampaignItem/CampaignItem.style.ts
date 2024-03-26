@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors from '~/utils/colors'
@@ -31,7 +30,7 @@ export const Container = styled(PickableList.Row)<{
     margin-bottom: 0;
   }
 `
-export const InfoRow: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const InfoRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

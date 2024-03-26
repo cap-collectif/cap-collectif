@@ -144,4 +144,4 @@ const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
 })(ProjectListFilters)
-export default connect<any, any>(mapStateToProps)(form)
+export default connect(mapStateToProps)(form)

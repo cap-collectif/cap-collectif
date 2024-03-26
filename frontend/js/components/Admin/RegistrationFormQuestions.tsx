@@ -102,7 +102,7 @@ const mapStateToProps = (state: State, props: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   registrationForm: graphql`
     fragment RegistrationFormQuestions_registrationForm on RegistrationForm {

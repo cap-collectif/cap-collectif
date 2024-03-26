@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import Language from './Language'
@@ -19,7 +19,7 @@ type Props = {
   defaultLanguage: string
   pullRight?: boolean
 }
-export const DropdownLanguageButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
+export const DropdownLanguageButton = styled(Button)`
   display: flex;
   background: rgba(108, 117, 125, 0.2);
   border-radius: 4px;

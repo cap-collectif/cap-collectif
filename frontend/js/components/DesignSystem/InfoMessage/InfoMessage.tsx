@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { variant as variantStyle } from 'styled-system'
 import type { FlexProps } from '~ui/Primitives/Layout/Flex'
@@ -13,7 +13,7 @@ export type InfoMessageProps = FlexProps & {
   >
   variant: 'info' | 'infoGray' | 'danger' | 'success' | 'warning'
 }
-const InfoMessageInner: StyledComponent<any, {}, any> = styled(Flex)(
+const InfoMessageInner = styled(Flex)(
   variantStyle({
     variants: {
       info: {

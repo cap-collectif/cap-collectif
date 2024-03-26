@@ -45,7 +45,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
 }
 
 // @ts-ignore
-const container = connect<any, any>()(NewOpinionButton)
+const container = connect()(NewOpinionButton)
 export default createFragmentContainer(container, {
   section: graphql`
     fragment NewOpinionButton_section on Section {

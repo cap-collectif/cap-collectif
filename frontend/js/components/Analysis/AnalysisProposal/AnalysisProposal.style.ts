@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors from '~/utils/colors'
@@ -18,7 +17,7 @@ export const AnalysisProposalContainer = styled(PickableList.Row)<{
     width: 90%;
   }
 `
-export const ProposalInformationsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalInformationsContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 50%;
@@ -28,7 +27,7 @@ export const ProposalInformationsContainer: StyledComponent<any, {}, HTMLDivElem
     color: ${colors.primaryColor};
   }
 `
-export const ProposalListRowHeader: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalListRowHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,7 +40,7 @@ export const ProposalListRowHeader: StyledComponent<any, {}, HTMLDivElement> = s
     margin: 0;
   }
 `
-export const StateTag: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const StateTag = styled.div`
   border-radius: 20px;
   font-weight: 600;
   font-size: 1.2rem;
@@ -50,7 +49,7 @@ export const StateTag: StyledComponent<any, {}, HTMLDivElement> = styled.div`
   padding: 0 4px;
   margin-right: 8px;
 `
-export const ProposalListRowInformations: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalListRowInformations = styled.div`
   display: flex;
   align-items: center;
 
@@ -58,7 +57,7 @@ export const ProposalListRowInformations: StyledComponent<any, {}, HTMLDivElemen
     margin: 0;
   }
 `
-export const ProposalTag: StyledComponent<any, {}, typeof Tag> = styled(Tag)`
+export const ProposalTag = styled(Tag)`
   max-width: 50%;
 
   &:hover {
@@ -66,7 +65,7 @@ export const ProposalTag: StyledComponent<any, {}, typeof Tag> = styled(Tag)`
     color: ${colors.primaryColor};
   }
 `
-export const ActionContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ActionContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

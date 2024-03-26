@@ -138,5 +138,5 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(QuestionJumpConditionAdminForm)
+const container = connect(mapStateToProps)(QuestionJumpConditionAdminForm)
 export default injectIntl(container)

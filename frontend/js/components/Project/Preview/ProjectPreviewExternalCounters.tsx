@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import ProjectPreviewCounter from './ProjectPreviewCounter'
 import TagsList from '../../Ui/List/TagsList'
@@ -11,7 +11,7 @@ import { getExternalExposedLink } from '~/utils/externalExposedLink'
 type Props = {
   readonly project: ProjectPreviewExternalCounters_project
 }
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   .link-gray {
     color: ${colors.darkGray};
     font-size: 16px;

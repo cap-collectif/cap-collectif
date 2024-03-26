@@ -38,7 +38,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalPageComments)
+const container = connect(mapStateToProps)(ProposalPageComments)
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalPageComments_proposal on Proposal {

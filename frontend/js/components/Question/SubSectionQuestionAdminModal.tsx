@@ -179,4 +179,4 @@ const mapStateToProps = (state: GlobalState, props: ParentProps) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(SubSectionQuestionAdminModal))
+export default connect(mapStateToProps)(injectIntl(SubSectionQuestionAdminModal))

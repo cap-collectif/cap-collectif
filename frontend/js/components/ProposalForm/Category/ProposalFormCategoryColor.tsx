@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
@@ -17,7 +17,7 @@ export type Props = {
     readonly used: boolean
   }>
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
 `

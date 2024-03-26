@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const MediaRow: StyledComponent<any, {}, typeof PickableList.Row> = styled(PickableList.Row)`
+export const MediaRow = styled(PickableList.Row)`
   display: flex;
   flex: 1;
   font-size: 11px;
@@ -35,7 +34,7 @@ export const MediaColumn = styled.div<{
     text-overflow: ellipsis;
   }
 `
-export const MediaColumnImage: StyledComponent<any, {}, HTMLDivElement> = styled(MediaColumn)`
+export const MediaColumnImage = styled(MediaColumn)`
   text-align: left;
 
   > div:first-child {
@@ -86,7 +85,7 @@ export const MediaColumnImage: StyledComponent<any, {}, HTMLDivElement> = styled
     margin-right: 8px;
   }
 `
-export const MediaHeaderList: StyledComponent<any, {}, typeof PickableList.Header> = styled(PickableList.Header)`
+export const MediaHeaderList = styled(PickableList.Header)`
   text-transform: uppercase;
   font-size: 11px;
   color: ${styleGuideColors.gray};
@@ -98,7 +97,7 @@ export const MediaHeaderList: StyledComponent<any, {}, typeof PickableList.Heade
     text-align: left;
   }
 `
-export const MediaListHead: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const MediaListHead = styled.div`
   width: calc(100% - 230px);
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   height: 60px;
@@ -126,7 +125,7 @@ export const MediaListHead: StyledComponent<any, {}, HTMLDivElement> = styled.di
     }
   }
 `
-export const ListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ListContainer = styled.div`
   margin: 25px;
   margin-top: 85px;
 

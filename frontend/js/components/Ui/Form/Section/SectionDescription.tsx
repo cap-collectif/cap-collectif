@@ -1,13 +1,13 @@
 import { $Values } from 'utility-types'
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import Description from '~ui/Form/Description/Description'
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
 
-const DescriptionSectionQuestionnaire: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DescriptionSectionQuestionnaire = styled.div`
   font-size: 14px;
   margin-bottom: 32px;
   margin-left: 32px;

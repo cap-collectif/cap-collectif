@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import * as React from 'react'
 import { colorsData } from '../../../utils/colors'

@@ -1,14 +1,14 @@
 // @ts-nocheck
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Image from '~ui/Primitives/Image'
 
 const importAll = r => r.keys().map(r)
 
 const images: Array<string> = importAll(require.context('../../../../__snapshots__/emails', false, /\.(png)$/))
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Container = styled.div`
   display: flex;
   img {
     width: 100%;

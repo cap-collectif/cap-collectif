@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import moment from 'moment'
 import Linkify from 'react-linkify'
 import { Label, ListGroupItem } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Media from '../Ui/Medias/Media/Media'
 import UserAvatarLegacy from '../User/UserAvatarLegacy'
@@ -20,7 +20,7 @@ type Props = {
   readonly argument: ArgumentItem_argument
   readonly isProfile: boolean
 }
-const MediaBody: StyledComponent<any, {}, typeof Media.Body> = styled(Media.Body)`
+const MediaBody = styled(Media.Body)`
   overflow: visible;
   .cap-popover {
     button {

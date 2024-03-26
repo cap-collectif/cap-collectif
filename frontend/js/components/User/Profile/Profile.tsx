@@ -503,7 +503,7 @@ const mapStateToProps = (state: State, props: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment Profile_viewer on User {

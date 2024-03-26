@@ -227,7 +227,7 @@ const mapStateToProps = (state: State, { source }: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,

@@ -186,4 +186,4 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(Navbar)

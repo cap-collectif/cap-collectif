@@ -69,4 +69,4 @@ export const DeleteModal = ({
     </Modal>
   )
 }
-export default connect<any, any>()(DeleteModal)
+export default connect()(DeleteModal)

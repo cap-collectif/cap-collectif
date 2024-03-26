@@ -197,7 +197,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalListView)
+const container = connect(mapStateToProps)(ProposalListView)
 export default createRefetchContainer(
   container,
   {

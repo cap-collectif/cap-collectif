@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Box } from '@cap-collectif/ui'
 import AppBox from '~ui/Primitives/AppBox'
 
-export const QuestionnaireContainer: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+export const QuestionnaireContainer = styled.form`
   position: relative;
 
   .questionnaire__description {
@@ -15,14 +14,14 @@ export const QuestionnaireContainer: StyledComponent<any, {}, HTMLFormElement> =
     margin-bottom: 32px;
   }
 `
-export const WrapperWithMarge: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox)`
+export const WrapperWithMarge = styled(AppBox)`
   padding: 32px;
 `
-export const WrapperWithMargeX: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox)`
+export const WrapperWithMargeX = styled(AppBox)`
   padding-left: 32px;
   padding-right: 32px;
 `
-export const ButtonGroupSubmit: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ButtonGroupSubmit = styled.div`
   margin-top: 22px;
 
   & > button {
@@ -33,7 +32,7 @@ export const ButtonGroupSubmit: StyledComponent<any, {}, HTMLDivElement> = style
     }
   }
 `
-export const ReplyFormContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ReplyFormContainer = styled.div`
   background-color: #fff;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -44,7 +43,7 @@ export const ReplyFormContainer: StyledComponent<any, {}, HTMLDivElement> = styl
     padding-top: 32px;
   }
 `
-export const ParticipantEmailWrapper: StyledComponent<any, {}, HTMLDivElement> = styled(Box)`
+export const ParticipantEmailWrapper = styled(Box)`
   padding-left: 32px;
   padding-right: 32px;
 

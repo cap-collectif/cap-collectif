@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { FormattedMessage, useIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { Button, Box, Flex, Icon, CapUIIcon, CapUIIconSize, Text } from '@cap-collectif/ui'
@@ -42,7 +42,7 @@ const FRAGMENT = graphql`
     }
   }
 `
-const ProposalSocialNetworkLinksContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalSocialNetworkLinksContainer = styled.div`
   padding: 32px 24px;
   .flex-flow {
     flex-flow: wrap;
@@ -60,7 +60,7 @@ const ProposalSocialNetworkLinksContainer: StyledComponent<any, {}, HTMLDivEleme
     padding: 0;
   }
 `
-const SNPlaceHolder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const SNPlaceHolder = styled.div`
   svg {
     padding: 0;
   }

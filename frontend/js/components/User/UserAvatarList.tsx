@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { graphql, createFragmentContainer } from 'react-relay'
 import UserAvatarList from '../Ui/List/UserAvatarList'
@@ -15,7 +15,7 @@ type Props = {
   readonly onClick?: () => void
   readonly features: FeatureToggles
 }
-const Button: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const Button = styled.button`
   border: none;
   background: transparent;
   padding-left: 0;
@@ -76,7 +76,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(UserAvatarListContainer), {
+export default createFragmentContainer(connect(mapStateToProps)(UserAvatarListContainer), {
   users: graphql`
     fragment UserAvatarList_users on User @relay(plural: true) {
       id

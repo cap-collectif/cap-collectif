@@ -1,8 +1,8 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-export const Button: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const Button = styled.button`
   background-color: transparent;
   border: none;
   padding: 0;

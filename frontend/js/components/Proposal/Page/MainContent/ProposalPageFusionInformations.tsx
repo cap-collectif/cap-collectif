@@ -1,7 +1,7 @@
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
@@ -13,7 +13,7 @@ import { bootstrapGrid } from '~/utils/sizes'
 type Props = {
   proposal: ProposalPageFusionInformations_proposal | null | undefined
 }
-const ProposalPageFusionInformationsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageFusionInformationsContainer = styled.div`
   margin: -15px 15px;
 
   @media (min-width: ${bootstrapGrid.mdMin}px) {

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import colors from '~/utils/colors'
 
@@ -39,7 +38,7 @@ export const CategoryCircledIcon = styled.div<{
   padding-left: ${({ paddingLeft }) => (paddingLeft || paddingLeft === 0 ? `${paddingLeft}px` : '8px')};
   padding-top: ${({ paddingTop }) => (paddingTop || paddingTop === 0 ? `${paddingTop}px` : '5px')};
 `
-export const CategoryTitle: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const CategoryTitle = styled.div.attrs({
   className: 'CategoryTitle',
 })`
   display: flex;
@@ -60,13 +59,13 @@ export const CategoryTitle: StyledComponent<any, {}, HTMLDivElement> = styled.di
     margin-left: 15px;
   }
 `
-export const Circle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Circle = styled.div`
   width: 18px;
   height: 18px;
   background: ${colors.secondaryGray};
   border-radius: 10px;
 `
-export const SeeMoreButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const SeeMoreButton = styled.button`
   width: 100%;
   background: none;
   text-align: center;

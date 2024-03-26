@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Button } from 'react-bootstrap' // Plz be my last
 
@@ -27,7 +27,7 @@ type Props = ReduxFormFormProps & {
   pristine: boolean
   invalid: boolean
 }
-const Form: StyledComponent<any, {}, HTMLFormElement> = styled.form`
+const Form = styled.form`
   .author_field {
     max-width: 300px;
   }
@@ -188,7 +188,7 @@ const form = reduxForm({
   validate,
 })(ProposalAdminOfficialAnswerForm)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminOfficialAnswerForm_proposal on Proposal {

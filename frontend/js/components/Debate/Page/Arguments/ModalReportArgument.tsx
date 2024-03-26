@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { isSubmitting, submit } from 'redux-form'
 import { useSelector, useDispatch } from 'react-redux'
@@ -26,7 +26,7 @@ export type Props = {
   readonly argument: ArgumentReported
   readonly id?: string | null | undefined
 }
-const ModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+const ModalContainer = styled(Modal)`
   .modal-dialog {
     width: 40%;
   }

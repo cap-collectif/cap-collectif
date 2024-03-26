@@ -10,6 +10,7 @@ import { formatConnectionPath } from '~/shared/utils/relay'
 import type { ProposalAnalysisCommentCreateForm_viewer$key } from '~relay/ProposalAnalysisCommentCreateForm_viewer.graphql'
 import type { ProposalAnalysisCommentCreateForm_proposalAnalysis$key } from '~relay/ProposalAnalysisCommentCreateForm_proposalAnalysis.graphql'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { GlobalState } from '~/types'
 
 type Props = {
   proposalAnalysis: ProposalAnalysisCommentCreateForm_proposalAnalysis$key
@@ -39,7 +40,7 @@ const Button = styled(DSButton)`
 const ProposalAnalysisCommentCreateForm = ({ proposalAnalysis: proposalAnalysisRef, viewer: viewerRef }: Props) => {
   const proposalAnalysis = useFragment(PROPOSAL_ANALYSIS_FRAGMENT, proposalAnalysisRef)
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
-  const [buttonBackgroundColor, buttonTextColor] = useSelector(state => {
+  const [buttonBackgroundColor, buttonTextColor] = useSelector((state: GlobalState) => {
     return [state.default.parameters['color.btn.primary.bg'], state.default.parameters['color.btn.primary.text']]
   })
   const intl = useIntl()
@@ -77,6 +78,7 @@ const ProposalAnalysisCommentCreateForm = ({ proposalAnalysis: proposalAnalysisR
           <TextArea
             name=""
             id=""
+            // @ts-ignore expect number
             rows="5"
             value={body}
             onChange={e => setBody(e.target.value)}

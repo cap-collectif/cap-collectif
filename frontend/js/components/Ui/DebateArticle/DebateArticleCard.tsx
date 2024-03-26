@@ -1,10 +1,10 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex } from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import Image from '~ui/Primitives/Image'
-export const DebateArticleCardTitle: StyledComponent<any, {}, typeof Heading> = styled(Heading).attrs(props => ({
+export const DebateArticleCardTitle = styled(Heading).attrs(props => ({
   mt: 0,
   mb: 1,
   fontSize: 3,
@@ -12,11 +12,11 @@ export const DebateArticleCardTitle: StyledComponent<any, {}, typeof Heading> = 
   lineHeight: 'base',
   color: props.color ?? 'gray.900',
 }))``
-export const DebateArticleCardDescription: StyledComponent<any, {}, typeof Text> = styled(Text).attrs(props => ({
+export const DebateArticleCardDescription = styled(Text).attrs(props => ({
   color: props.color ?? 'gray.900',
   mb: 1,
 }))``
-export const DebateArticleCardOrigin: StyledComponent<any, {}, typeof Text> = styled(Text).attrs(props => ({
+export const DebateArticleCardOrigin = styled(Text).attrs(props => ({
   color: props.color ?? 'gray.900',
 
   /*

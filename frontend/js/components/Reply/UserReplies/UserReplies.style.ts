@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { boxShadow } from '~/utils/colors'
 
-const UserRepliesContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const UserRepliesContainer = styled.div.attrs({
   className: 'userReplies hidden-print',
 })`
   .list-group {

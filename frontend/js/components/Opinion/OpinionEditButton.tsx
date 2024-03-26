@@ -32,7 +32,7 @@ export const OpinionEditButton = ({ opinion, dispatch }: Props) => {
   )
 }
 // @ts-ignore
-const container = connect<any, any>()(OpinionEditButton)
+const container = connect()(OpinionEditButton)
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionEditButton_opinion on Opinion {

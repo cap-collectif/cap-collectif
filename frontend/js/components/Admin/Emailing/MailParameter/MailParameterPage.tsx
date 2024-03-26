@@ -324,7 +324,7 @@ const mapStateToProps = (state: GlobalState, props: Props) => ({
     : [],
 })
 
-const MailParameterPageConnected = connect<any, any>(mapStateToProps)(injectIntl(MailParameterPageForm))
+const MailParameterPageConnected = connect(mapStateToProps)(injectIntl(MailParameterPageForm))
 export default createFragmentContainer(MailParameterPageConnected, {
   emailingCampaign: graphql`
     fragment MailParameterPage_emailingCampaign on EmailingCampaign {

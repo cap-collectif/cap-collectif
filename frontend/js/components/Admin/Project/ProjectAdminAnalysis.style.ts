@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-export const AnalysisDataContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisDataContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,7 +13,7 @@ export const AnalysisDataContainer: StyledComponent<any, {}, HTMLDivElement> = s
     flex-shrink: 0;
   }
 `
-export const AnalysisHeader: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisHeader = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

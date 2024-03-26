@@ -31,7 +31,7 @@ const mapStateToProps = ({ language }: State) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(LanguageButtonWrapper)
+const container = connect(mapStateToProps)(LanguageButtonWrapper)
 export default createFragmentContainer(container, {
   languages: graphql`
     fragment LanguageButtonWrapper_languages on Locale @relay(plural: true) {

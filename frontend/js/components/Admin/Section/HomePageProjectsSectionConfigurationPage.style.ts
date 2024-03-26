@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import css from '@styled-system/css'
 import AppBox from '~ui/Primitives/AppBox'
 import Flex from '~ui/Primitives/Layout/Flex'
 
-export const SectionContainer: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox)`
+export const SectionContainer = styled(AppBox)`
   background: white;
   padding: 24px;
   border-radius: 8px;
@@ -26,10 +25,10 @@ export const SectionContainer: StyledComponent<any, {}, HTMLDivElement> = styled
     margin: 0 0 24px 0;
   }
 `
-export const SectionInner: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox)`
+export const SectionInner = styled(AppBox)`
   max-width: 747px;
 `
-export const PreviewLink: StyledComponent<any, {}, typeof Flex> = styled(Flex).attrs({
+export const PreviewLink = styled(Flex).attrs({
   color: 'blue.500',
 })`
   a {
@@ -39,7 +38,7 @@ export const PreviewLink: StyledComponent<any, {}, typeof Flex> = styled(Flex).a
     font-weight: 600;
   }
 `
-export const ProjectCard: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox).attrs({
+export const ProjectCard = styled(AppBox).attrs({
   mb: 4,
   borderRadius: 'project_card',
   p: 2,
@@ -59,7 +58,7 @@ export const ProjectCard: StyledComponent<any, {}, HTMLDivElement> = styled(AppB
     margin: 0 0 0 15px;
   }
 `
-export const ProjectCardCustom: StyledComponent<any, {}, any> = styled(Flex).attrs({
+export const ProjectCardCustom = styled(Flex).attrs({
   my: 4,
   borderRadius: 'project_card',
   p: 2,
@@ -80,7 +79,7 @@ export const ProjectCardCustom: StyledComponent<any, {}, any> = styled(Flex).att
     opacity: 1;
   }
 `
-export const ProjectCardCustomDeleteIcon: StyledComponent<any, {}, HTMLDivElement> = styled(AppBox).attrs({
+export const ProjectCardCustomDeleteIcon = styled(AppBox).attrs({
   color: 'gray.500',
   width: 5,
   height: 5,

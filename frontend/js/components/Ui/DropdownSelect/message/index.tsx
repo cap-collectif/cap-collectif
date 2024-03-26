@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   readonly icon?: JSX.Element | JSX.Element[] | string
 }
 const ICON_SIZE = '18px'
-const DropdownSelectMessageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DropdownSelectMessageContainer = styled.div`
   padding: 10px 10px 10px 15px;
   background: ${colors.white};
   border-bottom: 1px solid ${colors.lightGray};

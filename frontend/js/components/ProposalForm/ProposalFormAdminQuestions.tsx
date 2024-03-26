@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { formValueSelector, arrayPush, arrayMove } from 'redux-form'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components' // TODO https://github.com/cap-collectif/platform/issues/7774
 
 // eslint-disable-next-line no-restricted-imports
@@ -46,21 +46,21 @@ type State = {
   flashMessages: Array<string>
   isDragging: boolean
 }
-const DraggableWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DraggableWrapper = styled.div`
   height: 60px !important;
 
   @media (max-width: 1035px) {
     height: 90px !important;
   }
 `
-const DraggableContainer: StyledComponent<any, {}, typeof ListGroupItem> = styled(ListGroupItem)`
+const DraggableContainer = styled(ListGroupItem)`
   height: 60px !important;
 
   @media (max-width: 1035px) {
     height: 90px !important;
   }
 `
-export const ButtonContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -516,4 +516,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(ProposalFormAdminQuestions))
+export default connect(mapStateToProps)(injectIntl(ProposalFormAdminQuestions))

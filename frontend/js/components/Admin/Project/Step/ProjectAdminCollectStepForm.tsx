@@ -4,7 +4,7 @@ import { connect, useSelector } from 'react-redux'
 import { fetchQuery_DEPRECATED, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Button as BootstrapButton } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import environment from '~/createRelayEnvironment'
 import component from '~/components/Form/Field'
@@ -51,7 +51,7 @@ type Props = {
   fcAllowedData: FranceConnectAllowedData
   endAt: string | null | undefined
 }
-export const StepVisibilityDropdown: StyledComponent<any, {}, typeof Button> = styled(Button)`
+export const StepVisibilityDropdown = styled(Button)`
   margin-top: 10px;
   height: 38px;
   color: #444;
@@ -356,4 +356,4 @@ export const ProjectAdminCollectStepForm = ({
     </>
   )
 }
-export default connect<any, any>()(ProjectAdminCollectStepForm)
+export default connect()(ProjectAdminCollectStepForm)

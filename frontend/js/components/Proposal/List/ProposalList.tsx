@@ -6,15 +6,15 @@ import { Row } from 'react-bootstrap'
 import ProposalPreview from '../Preview/ProposalPreview'
 import ProposalListTable from './ProposalListTable'
 import VisibilityBox from '../../Utils/VisibilityBox'
-import type { ProposalList_step } from '~relay/ProposalList_step.graphql'
-import type { ProposalList_viewer } from '~relay/ProposalList_viewer.graphql'
-import type { ProposalList_proposals } from '~relay/ProposalList_proposals.graphql'
+import type { ProposalList_step$data } from '~relay/ProposalList_step.graphql'
+import type { ProposalList_viewer$data } from '~relay/ProposalList_viewer.graphql'
+import type { ProposalList_proposals$data } from '~relay/ProposalList_proposals.graphql'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
 
 type Props = {
-  step: ProposalList_step | null | undefined
-  proposals: ProposalList_proposals
-  viewer: ProposalList_viewer | null | undefined
+  step: ProposalList_step$data | null | undefined
+  proposals: ProposalList_proposals$data
+  viewer: ProposalList_viewer$data | null | undefined
   view?: ProposalViewMode
 }
 const classes = classNames({
@@ -30,7 +30,7 @@ const renderProposals = (proposals, step, viewer) => (
         proposals.edges
           .filter(Boolean)
           .map(edge => edge.node)
-          .filter(Boolean) // @ts-expect-error
+          .filter(Boolean)
           .map((node, key) => <ProposalPreview key={key} proposal={node} step={step} viewer={viewer} isSPA />)}
     </ul>
   </Row>
@@ -38,7 +38,7 @@ const renderProposals = (proposals, step, viewer) => (
 
 const renderProposalListTableView = (proposals, step) => <ProposalListTable step={step} proposals={proposals} />
 
-const getEmptyWordingProposalList = (step: ProposalList_step | null | undefined): string => {
+const getEmptyWordingProposalList = (step: ProposalList_step$data | null | undefined): string => {
   if (step && step.form) {
     if (step.form.objectType === 'ESTABLISHMENT') return 'establishment.empty'
     if (step.form.objectType === 'QUESTION') return 'question.empty'

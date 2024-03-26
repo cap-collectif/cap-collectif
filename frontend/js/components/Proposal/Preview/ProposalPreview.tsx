@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { connect } from 'react-redux'
@@ -24,7 +24,7 @@ type Props = {
   readonly features: FeatureToggles
   readonly isSPA?: boolean
 }
-const ProposalCard: StyledComponent<any, {}, typeof Card> = styled(Card)`
+const ProposalCard = styled(Card)`
   > svg {
     position: absolute;
     left: calc(50% - 20px);
@@ -110,7 +110,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProposalPreview), {
+export default createFragmentContainer(connect(mapStateToProps)(ProposalPreview), {
   viewer: graphql`
     fragment ProposalPreview_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
       ...ProposalPreviewBody_viewer @arguments(stepId: $stepId)

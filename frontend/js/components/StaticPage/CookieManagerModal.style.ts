@@ -1,15 +1,14 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/styles/modules/colors'
 
-export const LinkSeparator: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const LinkSeparator = styled.span`
   padding: 0 8px;
 
   @media (max-width: 767px) {
     display: none;
   }
 `
-export const ButtonParameters: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonParameters = styled.button`
   text-decoration: underline;
   width: fit-content;
   background: transparent;
@@ -17,7 +16,7 @@ export const ButtonParameters: StyledComponent<any, {}, HTMLButtonElement> = sty
   border: none;
   padding: 0;
 `
-export const ButtonDecline: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonDecline = styled.button`
   background: transparent;
   color: #fff;
   border: none;
@@ -26,7 +25,7 @@ export const ButtonDecline: StyledComponent<any, {}, HTMLButtonElement> = styled
   font-weight: 600;
   line-height: 24px;
 `
-export const ButtonAccept: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonAccept = styled.button`
   background-color: #fff;
   color: ${colors['neutral-gray']['900']};
   border: none;
@@ -39,7 +38,7 @@ export const ButtonAccept: StyledComponent<any, {}, HTMLButtonElement> = styled.
     padding: 4px 8px;
   }
 `
-export const CookieBanner: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const CookieBanner = styled.div`
   z-index: 1040 !important;
   background-color: ${colors['neutral-gray']['900']};
   font-size: 14px;

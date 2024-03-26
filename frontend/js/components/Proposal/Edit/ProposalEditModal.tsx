@@ -1,7 +1,6 @@
 import { $Values } from 'utility-types'
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { AnimatePresence, m as motion } from 'framer-motion'
 import type { IntlShape } from 'react-intl'
@@ -14,7 +13,7 @@ import { Button, Heading, ButtonGroup, Modal, CapUIModalSize } from '@cap-collec
 import ProposalForm, { formName } from '../Form/ProposalForm'
 import ProposalDraftAlert from '../Page/ProposalDraftAlert'
 import type { Dispatch, GlobalState } from '~/types'
-import type { ProposalEditModal_proposal, ProposalRevisionState } from '~relay/ProposalEditModal_proposal.graphql'
+import type { ProposalEditModal_proposal$data, ProposalRevisionState } from '~relay/ProposalEditModal_proposal.graphql'
 import { ProposalRevisionItem } from '~/shared/ProposalRevision/Modal/ProposalRevisionModalForm.style'
 import { pxToRem } from '~/utils/styles/mixins'
 import ResetCss from '~/utils/ResetCss'
@@ -27,7 +26,7 @@ import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMut
 import isIos from '~/utils/isIos'
 type Props = {
   readonly intl: IntlShape
-  readonly proposal: ProposalEditModal_proposal
+  readonly proposal: ProposalEditModal_proposal$data
   readonly show: boolean
   readonly submitting: boolean
   readonly invalid: boolean
@@ -35,7 +34,7 @@ type Props = {
   readonly dispatch: Dispatch
   readonly onClose: () => void
 }
-const ModalProposalEditContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal).attrs({
+const ModalProposalEditContainer = styled(Modal).attrs({
   className: 'proposalCreate__modal',
 })`
   && .custom-modal-dialog {
@@ -65,7 +64,7 @@ const ModalProposalEditContainer: StyledComponent<any, {}, typeof Modal> = style
     }
   }
 `
-const ProposalRevisionsList: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+const ProposalRevisionsList = styled.ul`
   list-style: '- ';
   padding-left: 10px;
   margin-top: 10px;
@@ -87,7 +86,7 @@ const ProposalRevisionsList: StyledComponent<any, {}, HTMLUListElement> = styled
   }
 `
 
-const isProposalRevisionsExpired = (proposal: ProposalEditModal_proposal): boolean => {
+const isProposalRevisionsExpired = (proposal: ProposalEditModal_proposal$data): boolean => {
   if (!proposal.allRevisions) return false
   const unrevisedRevisions =
     proposal.allRevisions.totalCount > 0
@@ -105,7 +104,7 @@ const isProposalRevisionsExpired = (proposal: ProposalEditModal_proposal): boole
 // : readonly Array<ProposalEditModal_proposal['allRevisions']['edges'][0]['node']>
 // to pick the type of a sample of an element in an array, but Flow ¯\_(ツ)_/¯
 const getProposalPendingRevisions = (
-  proposal: ProposalEditModal_proposal,
+  proposal: ProposalEditModal_proposal$data,
 ): ReadonlyArray<{
   readonly id: string
   readonly state: ProposalRevisionState
@@ -164,6 +163,7 @@ export const ProposalEditModal = ({
       size={CapUIModalSize.Xl}
       fullSizeOnMobile
       show={show}
+      // @ts-ignore Moda types to improve in DS
       dialogClassName={cn('custom-modal-dialog', {
         'expired-revision': isRevisionExpired,
       })}
@@ -212,11 +212,12 @@ export const ProposalEditModal = ({
               </Heading>
             </Modal.Header>
           </ResetCss>
+          {/** @ts-ignore TODO Maj framer */}
           <AnimatePresence>
             <ProposalOtherPanelsModal
               proposalForm={proposal.form}
               onClose={onClose}
-              modalState={modalState}
+              modalState={modalState as 'NORMAL' | 'LEAVE' | 'MAP' | 'ERROR'}
               resetModalState={resetModalState}
             />
             <motion.div
@@ -382,7 +383,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(ProposalEditModal))
+const container = connect(mapStateToProps)(injectIntl(ProposalEditModal))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalEditModal_proposal on Proposal

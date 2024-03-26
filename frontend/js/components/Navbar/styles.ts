@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '../../utils/colors'
 
@@ -25,12 +24,12 @@ export const NavigationContainer = styled.div<Props>`
     position: absolute;
   }
 `
-export const NavigationHeader: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const NavigationHeader = styled.div`
   height: 50px;
   position: relative;
   text-align: center;
 `
-export const Brand: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Brand = styled.div`
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -78,7 +77,7 @@ export const Toggle = styled.button<Props>`
     display: none;
   }
 `
-export const NavigationContentDesktop: StyledComponent<any, {}, HTMLElement> = styled.nav`
+export const NavigationContentDesktop = styled.nav`
   justify-content: flex-end;
   align-items: center;
   flex: 1;

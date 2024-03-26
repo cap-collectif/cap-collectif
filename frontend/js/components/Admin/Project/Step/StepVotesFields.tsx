@@ -159,8 +159,14 @@ export function StepVotesFields(
                 />
               </FieldContainer>
               {isBudgetEnabled && (
-                <Field type="number" min={0} name="budget" step="any" id="step-budget" component={component}
-                       normalize={normalizeNumberInput}
+                <Field
+                  type="number"
+                  min={0}
+                  name="budget"
+                  step="any"
+                  id="step-budget"
+                  component={component}
+                  normalize={normalizeNumberInput}
                 />
               )}
               <FieldContainer toggled={isTresholdEnabled}>
@@ -187,8 +193,14 @@ export function StepVotesFields(
 
               {isTresholdEnabled && (
                 <>
-                  <Field type="number" min={0} name="voteThreshold" id="step-voteThreshold" component={component}
-                         normalize={normalizeNumberInput} />
+                  <Field
+                    type="number"
+                    min={0}
+                    name="voteThreshold"
+                    id="step-voteThreshold"
+                    component={component}
+                    normalize={normalizeNumberInput}
+                  />
                   <AppBox>
                     <Flex alignItems="center" color={!canConfigureProposalArchived ? 'gray.500' : 'inherit'}>
                       <Text>
@@ -454,4 +466,4 @@ export function StepVotesFields(
   )
 }
 // @ts-ignore
-export default connect<any, any>()(StepVotesFields)
+export default connect()(StepVotesFields)

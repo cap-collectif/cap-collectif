@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Legacy : https://github.com/cap-collectif/platform/issues/13828
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
@@ -10,7 +11,7 @@ import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-r
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Alert, Collapse, ListGroup, ListGroupItem, Panel, Glyphicon, Button } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { styleGuideColors } from '~/utils/colors'
 import component from '~/components/Form/Field'
@@ -140,7 +141,7 @@ const onUnload = e => {
 
 export const ILLUSTRATION_MAX_SIZE = '4000000'
 export const memoizeAvailableQuestions: any = memoize(() => {})
-export const ExternalLinks: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ExternalLinks = styled.div`
   .form-group {
     max-width: 400px;
     margin-bottom: 24px;
@@ -931,7 +932,7 @@ const form = reduxForm({
   destroyOnUnmount: false,
 })(ProposalFormLegacy)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalFormLegacy_proposal on Proposal {

@@ -126,7 +126,7 @@ const mapStateToProps = (state: State, { member, formName }: Props) => {
 }
 
 /* /!\ Care, This component is used as fragment, connect component and default functional component, sad story */
-export const DistrictAdminFieldsConnected = connect<any, any>(mapStateToProps)(DistrictAdminFields)
+export const DistrictAdminFieldsConnected = connect(mapStateToProps)(DistrictAdminFields)
 export default createFragmentContainer(DistrictAdminFields, {
   district: graphql`
     fragment DistrictAdminFields_district on District {

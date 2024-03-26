@@ -121,4 +121,4 @@ const mapStateToProps = (state: GlobalState, props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(QuestionChoiceAdminModal)
+export default connect(mapStateToProps)(QuestionChoiceAdminModal)

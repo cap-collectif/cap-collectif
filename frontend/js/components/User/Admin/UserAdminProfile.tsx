@@ -371,7 +371,7 @@ const mapStateToProps = (state: GlobalState, { user, viewer }: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form)) // same as Profile.js I have to find a solution to merge both in one
+const container = connect(mapStateToProps)(injectIntl(form)) // same as Profile.js I have to find a solution to merge both in one
 
 export default createFragmentContainer(container, {
   user: graphql`

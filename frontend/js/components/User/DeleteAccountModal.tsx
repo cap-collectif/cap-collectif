@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Modal, Button, Radio, Panel } from 'react-bootstrap'
 import { createFragmentContainer, graphql } from 'react-relay'
@@ -22,7 +22,7 @@ type Props = RelayProps & {
 type ModalState = {
   removalType: DeleteAccountType
 }
-const DeleteDiv: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const DeleteDiv = styled.div`
   .radio input[type='radio'] {
     margin-left: 0;
   }

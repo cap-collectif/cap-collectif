@@ -33,7 +33,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProjectPreviewThemes), {
+export default createFragmentContainer(connect(mapStateToProps)(ProjectPreviewThemes), {
   project: graphql`
     fragment ProjectPreviewThemes_project on Project {
       themes {

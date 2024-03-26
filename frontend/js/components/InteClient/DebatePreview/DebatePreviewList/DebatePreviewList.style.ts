@@ -1,9 +1,9 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'debate-preview-list',
 })`
   display: flex;

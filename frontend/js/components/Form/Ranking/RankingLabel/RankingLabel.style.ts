@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-const RankingLabelContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const RankingLabelContainer = styled.div.attrs({
   className: 'ranking__label',
 })`
   display: flex;

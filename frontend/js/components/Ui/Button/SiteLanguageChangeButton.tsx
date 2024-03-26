@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Menu from '../../DesignSystem/Menu/Menu'
 import Button from '~ds/Button/Button'
@@ -28,7 +28,7 @@ const Language = styled.div<{
   font-size: 16px;
   color: ${props => props.color};
 `
-const LanguageContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const LanguageContainer = styled.div`
   display: flex;
 `
 const DropdownLanguageButton = styled(Button)<{
@@ -45,10 +45,10 @@ const DropdownLanguageButton = styled(Button)<{
   border: ${props => props.borderless && 'none'};
   border-radius: 4px;
 `
-const Placeholder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Placeholder = styled.div`
   width: 21px;
 `
-const LanguageTitle: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const LanguageTitle = styled.span`
   color: initial;
   text-decoration: none;
 `

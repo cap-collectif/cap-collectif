@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '../../../utils/colors'
 import { avatarPx } from '../../../utils/sizes'

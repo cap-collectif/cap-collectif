@@ -205,7 +205,7 @@ const mapStateToProps = (state, { project }: Props) => ({
   },
 })
 
-const connector = connect<any, any>(mapStateToProps)(form)
+const connector = connect(mapStateToProps)(form)
 export default createFragmentContainer(connector, {
   project: graphql`
     fragment ProjectExternalAdminFormDeprecated_project on Project {

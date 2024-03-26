@@ -146,4 +146,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(QuestionJumpConditionsAdminForm)
+export default connect(mapStateToProps)(QuestionJumpConditionsAdminForm)

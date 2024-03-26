@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import { LIGHT_BOX_SHADOW, MAIN_BORDER_RADIUS, MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
 import colors from '~/utils/colors'
@@ -40,7 +39,7 @@ export const Container = styled.div<{
     }
   }
 `
-export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+export const Header = styled.header`
   position: sticky;
   z-index: 10;
   top: 0;
@@ -48,7 +47,7 @@ export const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
   padding: 10px;
   border-bottom: 1px solid ${colors.lightGray};
 `
-export const Body: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const Body = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;

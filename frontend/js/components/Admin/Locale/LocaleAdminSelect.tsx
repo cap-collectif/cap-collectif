@@ -4,7 +4,7 @@ import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { Field, formValueSelector } from 'redux-form'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { GlobalState } from '~/types'
 import select from '~/components/Form/Select'
@@ -44,7 +44,7 @@ const renderOptions = (props: Props, intl: IntlShape): LocaleOption[] => {
   return []
 }
 
-const SelectContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const SelectContainer = styled.div`
   max-width: 30%;
   @media (max-width: 768px) {
     max-width: 100%;
@@ -73,7 +73,7 @@ const mapStateToProps = (state: GlobalState, { formName }: Props) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(LocaleAdminSelect)
+const container = connect(mapStateToProps)(LocaleAdminSelect)
 export default createFragmentContainer(container, {
   locales: graphql`
     fragment LocaleAdminSelect_locales on Locale @relay(plural: true) {

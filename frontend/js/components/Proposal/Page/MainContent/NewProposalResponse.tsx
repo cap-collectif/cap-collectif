@@ -3,7 +3,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Text, Tooltip } from '@cap-collectif/ui'
 import type { NewProposalResponse_response } from '~relay/NewProposalResponse_response.graphql'
@@ -43,7 +43,7 @@ const QuestionTitle = styled.h3<{
   margin-bottom: 10px;
   margin-top: ${({ margin }) => margin && '20px'};
 `
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   display: flex;
   margin-top: 20px;
 
@@ -329,7 +329,7 @@ const mapStateToProps = (state: GlobalState) => ({
   color: state.default.parameters['color.btn.primary.bg'],
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(NewProposalResponse), {
+export default createFragmentContainer(connect(mapStateToProps)(NewProposalResponse), {
   response: graphql`
     fragment NewProposalResponse_response on Response {
       question {

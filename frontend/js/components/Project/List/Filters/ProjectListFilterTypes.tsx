@@ -54,4 +54,4 @@ const mapStateToProps = (state: GlobalState, { formName }: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(ProjectsListFilterTypes))
+export default connect(mapStateToProps)(injectIntl(ProjectsListFilterTypes))

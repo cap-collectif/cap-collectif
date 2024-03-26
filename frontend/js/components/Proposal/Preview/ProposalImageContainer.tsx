@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Box, Tag, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
@@ -7,7 +7,7 @@ import Image from '~ui/Primitives/Image'
 import { bootstrapGrid } from '~/utils/sizes'
 import { LineHeight } from '~ui/Primitives/constants'
 
-const ProposalImage: StyledComponent<any, {}, typeof Image> = styled(Image)`
+const ProposalImage = styled(Image)`
   border-radius: 4px 4px 0 0;
   height: 83px;
   max-width: 261px;

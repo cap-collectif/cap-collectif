@@ -40,7 +40,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 export default createFragmentContainer(connector(ProjectPreview), {
   project: graphql`
     fragment ProjectPreview_project on Project {

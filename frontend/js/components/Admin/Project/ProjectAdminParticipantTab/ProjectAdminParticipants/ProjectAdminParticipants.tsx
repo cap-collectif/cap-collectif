@@ -429,7 +429,7 @@ const ProjectAdminParticipantsRelay = createPaginationContainer(
             cursor
             node {
               id
-              ...on User {
+              ... on User {
                 consentInternalCommunication
                 userType {
                   id
@@ -501,7 +501,7 @@ const mapStateToProps = (state: GlobalState) => ({
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 })
 
-const ProjectAdminParticipantsConnected = connect<any, any>(mapStateToProps)(ProjectAdminParticipantsRelay)
+const ProjectAdminParticipantsConnected = connect(mapStateToProps)(ProjectAdminParticipantsRelay)
 export default createFragmentContainer(ProjectAdminParticipantsConnected, {
   viewer: graphql`
     fragment ProjectAdminParticipants_viewer on User {

@@ -402,4 +402,4 @@ const mapStateToProps = (state: GlobalState, props: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(injectIntl(QuestionChoiceAdminForm))
+export default connect(mapStateToProps)(injectIntl(QuestionChoiceAdminForm))

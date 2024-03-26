@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const TextAreaContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const TextAreaContainer = styled.div.attrs({
   className: 'textarea-container',
 })`
   textarea {

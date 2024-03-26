@@ -70,7 +70,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(QuestionnaireAdminPageTabs))
+const container = connect(mapStateToProps)(injectIntl(QuestionnaireAdminPageTabs))
 export default createFragmentContainer(container, {
   questionnaire: graphql`
     fragment QuestionnaireAdminPageTabs_questionnaire on Questionnaire {

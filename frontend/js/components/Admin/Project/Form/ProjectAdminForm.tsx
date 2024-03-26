@@ -610,7 +610,7 @@ const form = reduxForm({
   enableReinitialize: true,
 })(ProjectAdminForm)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(injectIntl(container), {
   project: graphql`
     fragment ProjectAdminForm_project on Project {

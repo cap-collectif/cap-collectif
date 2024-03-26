@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
 
-export const FieldContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const FieldContainer = styled.div`
   display: flex;
 
   .btn-group {
@@ -17,7 +16,7 @@ export const FieldContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
     border-radius: 0 ${MAIN_BORDER_RADIUS_SIZE} ${MAIN_BORDER_RADIUS_SIZE} 0;
   }
 `
-export const InfoRow: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const InfoRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

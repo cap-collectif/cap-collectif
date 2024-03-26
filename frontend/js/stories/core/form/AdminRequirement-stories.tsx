@@ -9,7 +9,7 @@ import type {
   DroppableStateSnapshot,
 } from 'react-beautiful-dnd'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import ReactDOM from 'react-dom'
 import Toggle from '~/components/Ui/Toggle/Toggle'
@@ -23,13 +23,13 @@ type DragglableMemberProps = {
   placeholder: string
   draggableId: string
 }
-export const RightNavSide: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const RightNavSide = styled.div`
   display: flex;
   width: 100%;
   padding-left: 20px;
   align-items: center;
 `
-export const InputPlaceholder: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const InputPlaceholder = styled.span`
   min-width: 100px;
 `
 let portal: HTMLElement | null | undefined = null

@@ -1,12 +1,12 @@
 import React from 'react'
 import { ButtonToolbar } from 'react-bootstrap'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import OpinionVotesButton from './OpinionVotesButton'
 import type { OpinionVotesButtons_opinion } from '~relay/OpinionVotesButtons_opinion.graphql'
 
-export const ButtonToolbarContainer: StyledComponent<any, {}, typeof ButtonToolbar> = styled(ButtonToolbar)`
+export const ButtonToolbarContainer = styled(ButtonToolbar)`
   margin-left: 10px;
   @media (max-width: 374px) {
     i {

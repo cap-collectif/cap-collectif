@@ -1,7 +1,7 @@
 import { $Values } from 'utility-types'
 import * as React from 'react'
 import isEqual from 'lodash/isEqual'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
@@ -17,7 +17,7 @@ import { useProjectAdminProposalsContext } from '~/components/Admin/Project/Proj
 import type { AnalystRevoked_analyst } from '~relay/AnalystRevoked_analyst.graphql'
 import AnalystRevoked from '~/components/Admin/Project/ModalConfirmRevokement/AnalystRevoked'
 import type { Analyst, DecisionMaker, Supervisor } from '~/components/Admin/Project/ProjectAdminProposals.utils'
-const AnalystRevokedList: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+const AnalystRevokedList = styled.ul`
   display: flex;
   flex-direction: column;
   list-style: none;

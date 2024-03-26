@@ -108,4 +108,4 @@ const mapStateToProps = (state: State) => ({
   defaultAvatar: state.default.images && state.default.images.avatar,
 })
 
-export default connect<any, any>(mapStateToProps)(UserAvatarDeprecated)
+export default connect(mapStateToProps)(UserAvatarDeprecated)

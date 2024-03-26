@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { NavItem } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
-import { Button, Box, Flex, Card, Text, Icon, CapUIIcon } from '@cap-collectif/ui'
+import { Button, Box, Flex, Card, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
 import colors from '~/utils/colors'
 import NewsCard from '~/components/Ui/News/NewsCard'
-import type { ProposalPageNews_proposal } from '~relay/ProposalPageNews_proposal.graphql'
+import type { ProposalPageNews_proposal$data } from '~relay/ProposalPageNews_proposal.graphql'
 import {
   Card as LegacyCard,
   CategoryContainer,
@@ -17,10 +17,10 @@ import {
 import ProposalNewsCreateModal from '~/components/Proposal/Page/Blog/ProposalNewsCreateModal'
 
 type Props = {
-  proposal: ProposalPageNews_proposal | null | undefined
+  proposal: ProposalPageNews_proposal$data | null | undefined
   goToBlog: () => void
 }
-export const NewsCardHolder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const NewsCardHolder = styled.div`
   > .Card {
     margin-bottom: 15px;
   }
@@ -61,6 +61,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
         <Flex>
           <CategoryTitle>
             <CategoryCircledIcon paddingLeft={9}>
+              {/** @ts-ignore size en dur */}
               <Icon name={CapUIIcon.Newspaper} size={20} color={colors.secondaryGray} />
             </CategoryCircledIcon>
             <h3>
@@ -73,7 +74,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 <Button
                   id="add-proposal-news"
                   variant="secondary"
-                  leftIcon="ADD"
+                  leftIcon={CapUIIcon.Add}
                   variantColor="primary"
                   variantSize="small"
                   className="mb-20"
@@ -92,7 +93,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
               {news && news.length > 1 && <NewsCard post={news[1] || null} />}
               {news && news.length > 2 && (
                 <NavItem eventKey="blog" onClick={goToBlog}>
-                  <Icon name={CapUIIcon.Add} size={16} color="currentColor" />
+                  <Icon name={CapUIIcon.Add} size={CapUIIconSize.Sm} color="currentColor" />
                   <FormattedMessage id="global.more" />
                 </NavItem>
               )}
@@ -101,6 +102,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
           {!news ||
             (news.length === 0 && proposal.isProposalAuthorAllowedToAddNews && viewerIsAuthor && (
               <Card
+                // @ts-ignore Polymorphic stuff
                 as={Flex}
                 flexDirection="column"
                 alignContent="center"
@@ -114,6 +116,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 pt={70}
                 pb={91}
               >
+                {/** @ts-ignore size en dur */}
                 <Icon name={CapUIIcon.Newspaper} size={40} color="#BEC4CB" />
                 <h4 color="gray.900">
                   <FormattedMessage id="add-proposal-news" />
@@ -123,7 +126,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 </Text>
                 <Button
                   id="add-proposal-news"
-                  leftIcon="ADD"
+                  leftIcon={CapUIIcon.Add}
                   variant="primary"
                   margin="auto"
                   mt={3}

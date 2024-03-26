@@ -26,4 +26,4 @@ const mapStateToProps = (state: GlobalState) => ({
   reportSentryError: state.default.features.report_browers_errors_to_sentry,
 })
 
-export default connect<any, any>(mapStateToProps)(ApiError)
+export default connect(mapStateToProps)(ApiError)

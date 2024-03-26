@@ -2,7 +2,7 @@
 import { $Values, $PropertyType } from 'utility-types'
 import * as React from 'react'
 import cn from 'classnames'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { variant } from 'styled-system'
 import type { AppBoxProps, Responsive } from '~ui/Primitives/AppBox.type'
@@ -129,7 +129,7 @@ const getSize = (size: $PropertyType<Props, 'size'> = 'md'): number => {
   }
 }
 
-const IconInner: StyledComponent<any, {}, any> = styled(AppBox).attrs(props => ({
+const IconInner = styled(AppBox).attrs(props => ({
   minSize: getSize(props.variant),
   maxSize: getSize(props.variant),
 }))(

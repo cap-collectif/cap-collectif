@@ -2,13 +2,13 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import LoginOverlay from '../../Utils/LoginOverlay'
-import type { ProposalCreateButton_proposalForm } from '~relay/ProposalCreateButton_proposalForm.graphql'
+import type { ProposalCreateButton_proposalForm$data } from '~relay/ProposalCreateButton_proposalForm.graphql'
 import { getProposalLabelByType } from '~/utils/interpellationLabelHelper'
 
 type Props = {
   handleClick: (...args: Array<any>) => any
   disabled: boolean
-  proposalForm: ProposalCreateButton_proposalForm
+  proposalForm: ProposalCreateButton_proposalForm$data
   projectType: string
 }
 export class ProposalCreateButton extends React.Component<Props> {

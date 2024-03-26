@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
@@ -11,7 +11,7 @@ type Props = {
   closeModal: () => void
   url: string | null | undefined
 }
-export const ViewModal: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const ViewModal = styled(Modal)`
   img {
     height: 100%;
     max-width: 100%;

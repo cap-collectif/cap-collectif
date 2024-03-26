@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
 import { getButtonColorForType, getLabelColorForType } from '~ui/Button/LoginSocialButton'
@@ -40,10 +39,10 @@ export const PrimarySSOButton = styled(BaseButton)<PrimarySSOButtonType>`
 export const SecondarySSOButton = styled(BaseButton)<SecondarySSOButtonType>`
   border: 1px solid ${props => props.borderColor};
 `
-export const TertiarySSOButton: StyledComponent<any, {}, typeof Link> = styled(BaseButton)`
+export const TertiarySSOButton = styled(BaseButton)`
   padding: 0;
 `
-export const FranceConnectButton: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const FranceConnectButton = styled.div`
   width: 325px;
   border-radius: 4px;
   background: rgb(3, 78, 162);

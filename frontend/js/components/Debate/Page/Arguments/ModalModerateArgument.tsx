@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { submit } from 'redux-form'
 import { useDispatch } from 'react-redux'
@@ -29,7 +29,7 @@ type Props = {
   relayConnection: string[]
   isAdmin?: boolean
 }
-const ModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+const ModalContainer = styled(Modal)`
   .modal-dialog {
     width: 40%;
   }

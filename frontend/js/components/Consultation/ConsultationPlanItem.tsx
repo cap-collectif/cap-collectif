@@ -81,7 +81,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ConsultationPlanItem)
+const container = connect(mapStateToProps)(ConsultationPlanItem)
 export default createFragmentContainer(container, {
   section: graphql`
     fragment ConsultationPlanItem_section on Section {

@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Label as BSLabel } from 'react-bootstrap'
 import DropdownSelect from '~ui/DropdownSelect'
 import colors from '~/utils/colors'
 
-export const ProjectAdminProposalsHeader: StyledComponent<any, {}, HTMLElement> = styled.header`
+export const ProjectAdminProposalsHeader = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,9 +25,7 @@ export const ProjectAdminProposalsHeader: StyledComponent<any, {}, HTMLElement> 
     }
   }
 `
-export const ProposalListDropdownChoice: StyledComponent<any, {}, typeof DropdownSelect.Choice> = styled(
-  DropdownSelect.Choice,
-)`
+export const ProposalListDropdownChoice = styled(DropdownSelect.Choice)`
   & span:first-of-type {
     padding-left: 0;
     & > span {
@@ -39,14 +36,14 @@ export const ProposalListDropdownChoice: StyledComponent<any, {}, typeof Dropdow
     }
   }
 `
-export const ProposalVotableStep: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const ProposalVotableStep = styled.span`
   font-size: 15px;
   font-weight: 600;
   line-height: 20px;
   margin: 0;
   padding: 0;
 `
-export const ProposalListRowInformationsStepState: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProposalListRowInformationsStepState = styled.div`
   display: flex;
   margin-left: auto;
   align-items: center;
@@ -57,11 +54,11 @@ export const ProposalListRowInformationsStepState: StyledComponent<any, {}, HTML
     margin-bottom: 0;
   }
 `
-export const Label: StyledComponent<any, {}, typeof BSLabel> = styled(BSLabel)`
+export const Label = styled(BSLabel)`
   border-radius: 12px;
   padding: 6px;
 `
-export const EmptyStatuses: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const EmptyStatuses = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -76,13 +73,13 @@ export const EmptyStatuses: StyledComponent<any, {}, HTMLDivElement> = styled.di
     margin-top: 2px;
   }
 `
-export const MergeButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const MergeButton = styled.button`
   padding: 0;
   margin: 0;
   background: none;
   border: none;
 `
-export const Divider: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const Divider = styled.span`
   width: 1px;
   height: 20px;
   background-color: ${colors.darkGray};

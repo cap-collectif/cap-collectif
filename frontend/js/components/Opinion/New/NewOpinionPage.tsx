@@ -51,4 +51,4 @@ const mapStateToProps = (state: State) => ({
   isAuthenticated: state.user.user !== null,
 })
 
-export default connect<any, any>(mapStateToProps)(NewOpinionPage)
+export default connect(mapStateToProps)(NewOpinionPage)

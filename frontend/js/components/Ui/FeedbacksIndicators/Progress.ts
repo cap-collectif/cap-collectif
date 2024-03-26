@@ -1,9 +1,9 @@
 // import * as React from 'react';
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import colors from '../../../utils/colors'
 
-export const Progress: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Progress = styled.div`
   .progress {
     margin: 15px 0;
     background-color: ${colors.pageBgc};

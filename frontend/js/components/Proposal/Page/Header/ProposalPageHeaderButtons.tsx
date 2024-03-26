@@ -1,15 +1,15 @@
 import { $PropertyType } from 'utility-types'
 import React, { useEffect } from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { useDisclosure } from '@liinkiing/react-hooks' // reviens
 
 import { openDeleteProposalModal } from '~/redux/modules/proposal'
-import type { ProposalPageHeaderButtons_proposal } from '~relay/ProposalPageHeaderButtons_proposal.graphql'
-import type { ProposalPageHeaderButtons_step } from '~relay/ProposalPageHeaderButtons_step.graphql'
-import type { ProposalPageHeaderButtons_viewer } from '~relay/ProposalPageHeaderButtons_viewer.graphql'
+import type { ProposalPageHeaderButtons_proposal$data } from '~relay/ProposalPageHeaderButtons_proposal.graphql'
+import type { ProposalPageHeaderButtons_step$data } from '~relay/ProposalPageHeaderButtons_step.graphql'
+import type { ProposalPageHeaderButtons_viewer$data } from '~relay/ProposalPageHeaderButtons_viewer.graphql'
 import ProposalVoteButtonWrapperFragment from '~/components/Proposal/Vote/ProposalVoteButtonWrapperFragment'
 import ProposalFollowButton from '~/components/Proposal/Follow/ProposalFollowButton'
 import ProposalVoteModal from '~/components/Proposal/Vote/ProposalVoteModal'
@@ -31,11 +31,11 @@ type ReduxProps = {
   readonly user?: $PropertyType<User, 'user'>
 }
 type Props = ReduxProps & {
-  readonly proposal: ProposalPageHeaderButtons_proposal
-  readonly step: ProposalPageHeaderButtons_step | null | undefined
-  readonly viewer: ProposalPageHeaderButtons_viewer | null | undefined
+  readonly proposal: ProposalPageHeaderButtons_proposal$data
+  readonly step: ProposalPageHeaderButtons_step$data | null | undefined
+  readonly viewer: ProposalPageHeaderButtons_viewer$data | null | undefined
 }
-const Buttons: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Buttons = styled.div`
   button {
     margin-right: 10px;
     margin-bottom: 10px;
@@ -53,7 +53,7 @@ const Buttons: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin-top: 15px;
   }
 `
-const FixedButtons: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const FixedButtons = styled.div`
   display: inline-block;
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
@@ -170,7 +170,7 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-const connector = connect<any, any>(mapStateToProps, mapDispatchToProps)
+const connector = connect(mapStateToProps, mapDispatchToProps)
 export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
   viewer: graphql`
     fragment ProposalPageHeaderButtons_viewer on User

@@ -82,7 +82,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(OpinionButtons)
+const container = connect(mapStateToProps)(OpinionButtons)
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionButtons_opinion on OpinionOrVersion @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

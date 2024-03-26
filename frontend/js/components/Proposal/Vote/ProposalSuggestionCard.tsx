@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Text, Avatar, Flex } from '@cap-collectif/ui'
 import styled from 'styled-components'
-import type { StyledComponent } from 'styled-components'
+
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
 type Props = {
   readonly proposal: {
@@ -22,7 +22,7 @@ const Body = styled(Box)`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 `
-const Link: StyledComponent<any, {}, HTMLAnchorElement> = styled('a')`
+const Link = styled('a')`
   color: inherit;
   text-decoration: none !important;
   &:hover {

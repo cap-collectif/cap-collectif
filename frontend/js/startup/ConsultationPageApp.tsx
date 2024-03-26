@@ -27,7 +27,7 @@ const ConsultationPageApp = ({ hasNewConsultationPage, ...props }: Props) => {
   return hasNewConsultationPage ? <ConsultationPropositionBox {...props} /> : <ConsultationPropositionBox {...props} />
 }
 
-const ConsultationPageAppContainer = connect<any, any>(mapStateToProps)(ConsultationPageApp)
+const ConsultationPageAppContainer = connect(mapStateToProps)(ConsultationPageApp)
 export default (props: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (

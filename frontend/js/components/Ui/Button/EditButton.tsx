@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Button } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-const SmallEditButton: StyledComponent<any, {}, typeof Button> = styled(Button)`
+const SmallEditButton = styled(Button)`
   border-color: #6c757d;
   background-color: transparent;
 `

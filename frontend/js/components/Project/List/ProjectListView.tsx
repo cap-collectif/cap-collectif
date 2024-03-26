@@ -111,7 +111,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProjectListView)
+const container = connect(mapStateToProps)(ProjectListView)
 export default createRefetchContainer(
   container,
   {

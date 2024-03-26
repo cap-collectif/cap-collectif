@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import PickableList from '~ui/List/PickableList'
 
-export const AnalysisPickableListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const AnalysisPickableListContainer = styled.div.attrs({
   className: 'analysis-pickable-list-container',
 })`
   margin: 0 2rem 2rem 2rem;
@@ -21,11 +20,11 @@ export const AnalysisProposalListHeaderContainer: any = styled(PickableList.Head
     align-self: start;
   }
 `
-export const AnalysisProposalListFiltersContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisProposalListFiltersContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-export const AnalysisProposalListFiltersAction: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisProposalListFiltersAction = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -38,7 +37,7 @@ export const AnalysisProposalListFiltersAction: StyledComponent<any, {}, HTMLDiv
     }
   }
 `
-export const AnalysisProposalListFiltersList: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisProposalListFiltersList = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -52,7 +51,7 @@ export const AnalysisProposalListFiltersList: StyledComponent<any, {}, HTMLDivEl
     }
   }
 `
-export const AnalysisProposalListRowMeta: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisProposalListRowMeta = styled.div`
   display: flex;
   align-items: center;
   margin-top: 8px;

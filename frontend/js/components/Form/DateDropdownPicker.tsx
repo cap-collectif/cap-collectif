@@ -9,7 +9,6 @@ type Props = {
   monthId: string
   yearDefaultValue: string
   yearId: string
-  dayDefaultValue: string
   input: Record<string, any>
   label: JSX.Element | JSX.Element[] | string
   componentId: string
@@ -21,13 +20,13 @@ type Props = {
 }
 
 const getDay = (date: string): number => {
-  let day = date.substr(8, 2)
+  let day: any = date.substr(8, 2)
   day = day[0] === 0 ? day[1] : day
   return parseInt(day, 10)
 }
 
 const getMonth = (date: string): number => {
-  let month = date.substr(5, 2)
+  let month: any = date.substr(5, 2)
   month = month[0] === 0 ? month[1] : month
   month = parseInt(month, 10)
   return month - 1

@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { CHECKBOX_CELL_WIDTH } from '~ui/List/PickableList/header/styles'
 
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'pickableList-row',
 })`
   padding: 15px 10px;
@@ -23,6 +22,6 @@ export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.at
     margin: 0 8px 0 0;
   }
 `
-export const ChildWrapper: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const ChildWrapper = styled.div.attrs({
   className: 'pickableList-row-content',
 })``

@@ -52,4 +52,4 @@ const mapStateToProps = (state: State, props) => ({
   isLoading: state.report.currentReportingModal === props.id && isSubmitting(formName)(state),
 })
 
-export default connect<any, any>(mapStateToProps)(ReportModal)
+export default connect(mapStateToProps)(ReportModal)

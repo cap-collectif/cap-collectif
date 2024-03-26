@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-export const PopoverToggleViewContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const PopoverToggleViewContainer = styled.div`
   .header {
     display: flex;
     justify-content: space-between;
@@ -19,7 +18,7 @@ export const PopoverToggleViewContainer: StyledComponent<any, {}, HTMLDivElement
     color: ${colors.darkGray};
   }
 `
-export const ListStep: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const ListStep = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;

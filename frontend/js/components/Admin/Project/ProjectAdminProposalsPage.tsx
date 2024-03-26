@@ -265,7 +265,7 @@ const mapStateToProps = (state: GlobalState) => ({
   viewerIsAdmin: state.user.user ? state.user.user.isAdmin : false,
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProjectAdminProposalsPage), {
+export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminProposalsPage), {
   query: graphql`
     fragment ProjectAdminProposalsPage_query on Query
     @argumentDefinitions(

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
 
@@ -9,7 +9,7 @@ type Props = {
   className: string
   darkness?: number
 }
-const BoxContainer: StyledComponent<Props, {}, HTMLDivElement> = styled.div`
+const BoxContainer = styled.div<Props>`
   padding: 15px;
   background-color: ${props =>
     props.darkness && props.darkness > 0

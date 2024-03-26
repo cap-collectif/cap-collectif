@@ -30,7 +30,7 @@ export const ProposalReportButton = ({ proposal, disabled, dispatch }: Props) =>
   )
 }
 // @ts-ignore
-const container = connect<any, any>()(ProposalReportButton)
+const container = connect()(ProposalReportButton)
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalReportButton_proposal on Proposal @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

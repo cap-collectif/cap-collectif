@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
 
-const ModalLeavePageContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+const ModalLeavePageContainer = styled(Modal)`
   .btn-danger {
     background-color: transparent;
     color: ${colors.dangerColor};

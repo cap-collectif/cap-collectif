@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import type { FooterLink, Legals } from './Footer'
@@ -9,7 +9,6 @@ import useShowMore from '../../utils/hooks/useShowMore'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 import CookieManagerModal from '../StaticPage/CookieManagerModal'
 import Menu from '../DesignSystem/Menu/Menu'
-import MenuButton from '~ds/Menu/MenuButton'
 import Button from '~ds/Button/Button'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import colors from '~/styles/modules/colors'
@@ -23,7 +22,7 @@ type Props = {
   legalPath: string
   left?: boolean
 }
-export const LinkSeparator: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+export const LinkSeparator = styled.span`
   padding: 0 8px;
   @media (max-width: 767px) {
     display: none;
@@ -51,7 +50,7 @@ export const LinkList = styled.ul<{
     }
   }
 `
-const SeeMoreFooterButton: StyledComponent<any, {}, typeof MenuButton> = styled(Button)`
+const SeeMoreFooterButton = styled(Button)`
   background: transparent !important;
   border: none;
   color: inherit !important;

@@ -1,6 +1,5 @@
 import { $Values } from 'utility-types'
 import * as React from 'react'
-import type { StyledComponent, SVGSVGElement } from 'styled-components'
 import styled from 'styled-components'
 import colors from '../../../utils/colors'
 import { avatarPx } from '../../../utils/sizes'
@@ -15,7 +14,7 @@ export const SIZE: {
 type Props = {
   size: $Values<typeof SIZE> | number
 }
-export const Container: StyledComponent<any, {}, SVGSVGElement> = styled.svg.attrs({
+export const Container = styled.svg.attrs({
   className: 'default-avatar',
 })`
   border-radius: 50%;

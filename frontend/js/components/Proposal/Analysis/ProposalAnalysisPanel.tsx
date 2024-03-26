@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ProposalAnalysisUserRow from './ProposalAnalysisUserRow'
-import type { ProposalAnalysisPanel_proposal } from '~relay/ProposalAnalysisPanel_proposal.graphql'
-import type { ProposalAnalysisPanel_viewer } from '~relay/ProposalAnalysisPanel_viewer.graphql'
+import type { ProposalAnalysisPanel_proposal$data } from '~relay/ProposalAnalysisPanel_proposal.graphql'
+import type { ProposalAnalysisPanel_viewer$data } from '~relay/ProposalAnalysisPanel_viewer.graphql'
 import colors from '~/utils/colors'
 import type { State } from '~/types'
 import ProposalFormSwitcher from './ProposalFormSwitcher'
@@ -56,10 +56,10 @@ const CloseIconWrapper = styled.div`
   }
 `
 type Props = {
-  proposal: ProposalAnalysisPanel_proposal
+  proposal: ProposalAnalysisPanel_proposal$data
   onClose: () => void
   user: User
-  viewer: ProposalAnalysisPanel_viewer
+  viewer: ProposalAnalysisPanel_viewer$data
 }
 export const getStatus = (status: any | null | undefined, proposal: any) => {
   if (
@@ -203,7 +203,7 @@ const mapStateToProps = (state: State) => ({
   },
 })
 
-export default createFragmentContainer(connect<any, any>(mapStateToProps)(ProposalAnalysisPanel), {
+export default createFragmentContainer(connect(mapStateToProps)(ProposalAnalysisPanel), {
   viewer: graphql`
     fragment ProposalAnalysisPanel_viewer on User {
       ...ProposalFormSwitcher_viewer

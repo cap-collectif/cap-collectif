@@ -8,9 +8,10 @@ import ProposalFusionEditForm, { formName } from './ProposalFusionEditForm'
 import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
 import type { State, Dispatch } from '../../../types'
-import type { ProposalFusionEditModal_proposal } from '~relay/ProposalFusionEditModal_proposal.graphql'
+import type { ProposalFusionEditModal_proposal$data } from '~relay/ProposalFusionEditModal_proposal.graphql'
+
 type Props = {
-  readonly proposal: ProposalFusionEditModal_proposal
+  readonly proposal: ProposalFusionEditModal_proposal$data
   readonly show: boolean
   readonly submitting: boolean
   readonly pristine: boolean
@@ -18,6 +19,7 @@ type Props = {
   readonly onClose: () => void
   readonly submitForm: () => void
 }
+
 export class ProposalFusionEditModal extends React.Component<Props> {
   render() {
     const { proposal, show, invalid, pristine, submitting, onClose, submitForm } = this.props
@@ -64,8 +66,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 })
 
-// @ts-ignore
-const container = connect<any, any>(mapStateToProps, mapDispatchToProps)(ProposalFusionEditModal)
+const container = connect(mapStateToProps, mapDispatchToProps)(ProposalFusionEditModal)
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalFusionEditModal_proposal on Proposal {

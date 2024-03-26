@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import AddButton from '~/components/Ui/Button/AddButton'
@@ -19,7 +19,7 @@ type State = {
   isCreating: boolean
   editDistrictId: string | null | undefined
 }
-const PageTitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const PageTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -108,7 +108,7 @@ export class GlobalDistrictAdminPage extends React.Component<Props, State> {
     )
   }
 }
-export default connect<any, any>()(
+export default connect()(
   createFragmentContainer(GlobalDistrictAdminPage, {
     districts: graphql`
       fragment GlobalDistrictAdminPage_districts on GlobalDistrictConnection {

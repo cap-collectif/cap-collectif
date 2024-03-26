@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '../../../utils/colors'
 
-const Counters: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const Counters = styled.div.attrs({
   className: 'card__counters small',
 })`
   padding: 5px;

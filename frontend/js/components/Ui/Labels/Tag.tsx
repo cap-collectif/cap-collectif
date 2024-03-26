@@ -1,8 +1,8 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-export const TagContainer: StyledComponent<any, {}, HTMLSpanElement> = styled.span.attrs({
+export const TagContainer = styled.span.attrs({
   className: 'tag',
 })`
   font-size: 14px;
@@ -37,7 +37,7 @@ export const TagContainer: StyledComponent<any, {}, HTMLSpanElement> = styled.sp
     }
   }
 `
-const TagLink: StyledComponent<any, {}, HTMLSpanElement> = styled(TagContainer)`
+const TagLink = styled(TagContainer)`
   &:hover {
     cursor: pointer;
   }

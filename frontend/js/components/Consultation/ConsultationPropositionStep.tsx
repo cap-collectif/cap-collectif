@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import ConsultationPlan from './ConsultationPlan'
@@ -21,7 +21,7 @@ type Props = RelayProps & {
 }
 const STICKY_OFFSET_TOP = 60
 const META_STEP_QUERY_SELECTOR = '.meta__step__navigation'
-const ConsultationPlanInner: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ConsultationPlanInner = styled.div`
   position: sticky;
   z-index: 1000;
   top: inherit;

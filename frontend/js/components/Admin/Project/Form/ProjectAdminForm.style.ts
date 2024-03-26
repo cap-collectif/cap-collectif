@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MenuItem, Modal } from 'react-bootstrap'
 import { mediaQueryMobile } from '~/utils/sizes'
@@ -29,14 +28,14 @@ export const ProjectBoxHeader = styled.div<{
     }
   }
 `
-export const StepModalContainer: StyledComponent<any, {}, typeof Modal> = styled(Modal).attrs({
+export const StepModalContainer = styled(Modal).attrs({
   className: 'step__modal',
 })`
   && .custom-modal-dialog {
     transform: none;
   }
 `
-export const NoStepsPlaceholder: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const NoStepsPlaceholder = styled.div`
   height: 50px;
   border: 1px solid ${colors.lightGray};
   border-radius: 4px;
@@ -45,7 +44,7 @@ export const NoStepsPlaceholder: StyledComponent<any, {}, HTMLDivElement> = styl
   padding: 15px;
   color: ${colors.darkGray};
 `
-export const ProjectSmallFieldsContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProjectSmallFieldsContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -72,29 +71,29 @@ export const ProjectSmallFieldsContainer: StyledComponent<any, {}, HTMLDivElemen
     z-index: 0;
   }
 `
-export const ProjectAccessContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProjectAccessContainer = styled.div`
   .radio label {
     font-weight: bold;
   }
 `
-export const ProjectSmallInput: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ProjectSmallInput = styled.div`
   width: 200px;
 `
-export const StepMenuItem: StyledComponent<any, {}, typeof MenuItem> = styled(MenuItem)`
+export const StepMenuItem = styled(MenuItem)`
   a {
     /** Just overriding some bootstrap */
     padding: 5px 20px !important;
     font-weight: 600 !important;
   }
 `
-export const StepModalTitle: StyledComponent<any, {}, typeof Modal.Title> = styled(Modal.Title)`
+export const StepModalTitle = styled(Modal.Title)`
   font-weight: 600;
   font-size: 20px;
 `
-export const PermalinkWrapper: StyledComponent<any, {}, HTMLParagraphElement> = styled.p`
+export const PermalinkWrapper = styled.p`
   word-break: break-all;
   margin: 0;
 `
-export const UpdateSlugIcon: StyledComponent<any, {}, typeof Icon> = styled(Icon)`
+export const UpdateSlugIcon = styled(Icon)`
   cursor: pointer;
 `

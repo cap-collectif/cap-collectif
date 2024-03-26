@@ -45,4 +45,4 @@ const mapStateToProps = (state: GlobalState) => ({
   orderBy: state.project.orderBy || 'PUBLISHED_AT',
 })
 
-export default connect<any, any>(mapStateToProps)(injectIntl(ProjectListFilterOrder))
+export default connect(mapStateToProps)(injectIntl(ProjectListFilterOrder))

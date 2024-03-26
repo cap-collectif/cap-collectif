@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormattedMessage, FormattedDate } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import moment from 'moment'
 import colors from '~/utils/colors'
@@ -11,7 +11,7 @@ type Props = {
   date: string
   children?: JSX.Element | JSX.Element[] | string
 }
-export const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: 'card__date',
 })`
   display: flex;

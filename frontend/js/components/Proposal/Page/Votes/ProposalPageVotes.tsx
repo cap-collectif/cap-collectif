@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { fetchQuery_DEPRECATED } from 'relay-runtime'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Menu, Button } from '@cap-collectif/ui'
 import colors from '~/utils/colors'
@@ -24,7 +24,7 @@ type Step = {
   readonly id: string
   readonly title: string
 }
-const ProposalPageVotesContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProposalPageVotesContainer = styled.div`
   width: 100%;
   max-width: 950px;
   margin: auto;
@@ -59,7 +59,7 @@ const ProposalPageVotesContainer: StyledComponent<any, {}, HTMLDivElement> = sty
     visibility: visible;
   }
 `
-const StepSelect: StyledComponent<any, {}, typeof Button> = styled(Button)`
+const StepSelect = styled(Button)`
   background: none !important;
   border: none;
   box-shadow: none !important;

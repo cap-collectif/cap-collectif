@@ -64,7 +64,7 @@ const ArgumentButtons = ({ argument, dispatch }: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>()(ArgumentButtons)
+const container = connect()(ArgumentButtons)
 export default createFragmentContainer(container, {
   argument: graphql`
     fragment ArgumentButtons_argument on Argument @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

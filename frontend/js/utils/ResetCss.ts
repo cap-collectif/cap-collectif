@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-export const ResetCss: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ResetCss = styled.div`
   *,
   *::before,
   *::after {

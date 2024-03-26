@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled, { css } from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import { Button } from 'react-bootstrap'
@@ -19,7 +19,7 @@ const BackIcon = styled.i.attrs({
 })`
   top: 2px;
 `
-const BackMessage: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const BackMessage = styled.span`
   display: none;
   ${breakpoint(
     'medium',
@@ -30,7 +30,7 @@ const BackMessage: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
 `
 // The consultation span selector is a bit hacky but I have no way to control the ShareButtonDropdownLegacy
 // component without redo some writing of the component to allow handle responsive cases
-const ShareButtonDropdownLegacyInner: StyledComponent<any, {}, HTMLSpanElement> = styled.span`
+const ShareButtonDropdownLegacyInner = styled.span`
   #${SHARE_BUTTON_ID} > span > span:last-child {
     display: none;
     ${breakpoint(

@@ -71,4 +71,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onLocaleChange: () => dispatch(changeLocaleAction()),
 })
 
-export default connect<any, any>(mapStateToProps, mapDispatchToProps)(LanguageHeader)
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageHeader)

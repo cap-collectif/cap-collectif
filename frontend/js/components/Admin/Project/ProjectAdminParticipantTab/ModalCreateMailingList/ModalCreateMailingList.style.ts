@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const Container: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+export const Container = styled(Modal)`
   .modal-title {
     font-weight: 600;
   }
@@ -21,7 +20,7 @@ export const Container: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
     }
   }
 `
-export const InfoContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const InfoContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +37,7 @@ export const InfoContainer: StyledComponent<any, {}, HTMLDivElement> = styled.di
     margin-left: 5px;
   }
 `
-export const ButtonSave: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+export const ButtonSave = styled.button`
   border: none;
   background-color: ${colors.darkGray};
   color: #fff;

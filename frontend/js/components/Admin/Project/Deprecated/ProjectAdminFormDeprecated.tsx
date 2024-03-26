@@ -220,7 +220,7 @@ const form = injectIntl(
   })(ProjectAdminFormDeprecated),
 )
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   project: graphql`
     fragment ProjectAdminFormDeprecated_project on Project {

@@ -1,6 +1,6 @@
 import { $Values } from 'utility-types'
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import Image from './Image'
 import { avatarPx } from '../../../utils/sizes'
@@ -20,7 +20,7 @@ export type Props = {
   src: string
   alt: string
 }
-export const Container: StyledComponent<any, {}, typeof Image> = styled(Image).attrs({
+export const Container = styled(Image).attrs({
   className: 'avatar',
 })`
   border-radius: 50%;

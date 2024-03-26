@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Button, Modal } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -11,7 +11,7 @@ import component from '~/components/Form/Field'
 import type { Dispatch } from '~/types'
 import CreateProposalFusionMutation from '~/mutations/CreateProposalFusionMutation'
 import AlertForm from '~/components/Alert/AlertForm'
-const ProjectAdminMergeModaleStyle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ProjectAdminMergeModaleStyle = styled.div`
   ul {
     list-style: none;
     padding-left: 0;
@@ -181,4 +181,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect<any, any>(mapDispatchToProps)(injectIntl(form))
+export default connect(mapDispatchToProps)(injectIntl(form))

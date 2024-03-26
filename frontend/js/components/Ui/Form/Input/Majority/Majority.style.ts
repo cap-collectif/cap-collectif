@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import { Field, formValueSelector } from 'redux-form'
@@ -17,7 +17,7 @@ type Props = {
 type State = {
   show: boolean
 }
-const StatusButton: StyledComponent<any, {}, typeof Button> = styled(Button).attrs(props => ({
+const StatusButton = styled(Button).attrs(props => ({
   bsStyle: 'link',
   id: `event-status-filter-button-${props.screen || ''}`,
 }))`
@@ -35,7 +35,7 @@ const StatusButton: StyledComponent<any, {}, typeof Button> = styled(Button).att
     }
   }
 `
-const StatusPopover: StyledComponent<any, {}, typeof Popover> = styled(Popover).attrs({
+const StatusPopover = styled(Popover).attrs({
   id: 'event-status-filter',
 })`
   color: black;
@@ -153,4 +153,4 @@ const mapStateToProps = (state: GlobalState) => ({
   status: selector(state, 'status'),
 })
 
-export default connect<any, any>(mapStateToProps)(EventListStatusFilter)
+export default connect(mapStateToProps)(EventListStatusFilter)

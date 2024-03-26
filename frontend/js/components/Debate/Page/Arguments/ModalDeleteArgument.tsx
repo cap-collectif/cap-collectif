@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
@@ -23,7 +23,7 @@ type Props = {
   }
   debateId: string
 }
-const ModalContainer: StyledComponent<any, {}, typeof DeleteModal> = styled(DeleteModal)`
+const ModalContainer = styled(DeleteModal)`
   .modal-dialog {
     width: 40%;
   }

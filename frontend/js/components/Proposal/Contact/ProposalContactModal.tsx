@@ -166,4 +166,4 @@ const mapStateToProps = (state: State) => ({
   addCaptchaField: state.default.features.captcha,
 })
 
-export default connect<any, any>(mapStateToProps)(ProposalContactModal)
+export default connect(mapStateToProps)(ProposalContactModal)

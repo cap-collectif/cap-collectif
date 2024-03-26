@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { Panel } from 'react-bootstrap'
 
-export const PanelHeader: StyledComponent<any, {}, typeof Panel.Heading> = styled(Panel.Heading)`
+export const PanelHeader = styled(Panel.Heading)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -13,7 +12,7 @@ export const PanelHeader: StyledComponent<any, {}, typeof Panel.Heading> = style
     margin: 0;
   }
 `
-export const PanelBody: StyledComponent<any, {}, typeof Panel.Body> = styled(Panel.Body)`
+export const PanelBody = styled(Panel.Body)`
   display: flex;
   flex-direction: row;
   align-items: center;

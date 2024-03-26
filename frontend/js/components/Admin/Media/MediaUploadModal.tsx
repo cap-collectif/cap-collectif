@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
@@ -9,7 +9,7 @@ type Props = {
   show: boolean
   closeModal: () => void
 }
-const UploadModal: StyledComponent<any, {}, typeof Modal> = styled(Modal)`
+const UploadModal = styled(Modal)`
   button + div {
     padding: 15px 20px;
   }

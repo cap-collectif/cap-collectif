@@ -32,7 +32,7 @@ const withColors = (Component: React.ComponentType<any>) => {
     voteBarButtonTextColor: state.default.parameters['color.votes_bar.btn.text'],
   })
 
-  return connect<any, any>(mapStateToProps)(ComponentWithColors)
+  return connect(mapStateToProps)(ComponentWithColors)
 }
 
 export default withColors

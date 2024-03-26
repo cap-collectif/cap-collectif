@@ -159,7 +159,7 @@ const mapStateToProps = (state: GlobalState, props: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   group: graphql`
     fragment GroupAdminParameters_group on Group {

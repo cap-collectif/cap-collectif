@@ -10,10 +10,13 @@ import ResetCss from '~/utils/ResetCss'
 import component from '~/components/Form/Field'
 import UpdateProposalIllustrationMutation from '~/mutations/UpdateProposalIllustrationMutation'
 import { ILLUSTRATION_MAX_SIZE } from '~/components/Proposal/Form/ProposalForm'
+
 const formName = 'proposal-illustration'
+
 type FormValues = {
   media?: any | null | undefined
 }
+
 type Props = ReduxFormFormProps & {
   readonly dispatch: Dispatch
   readonly show: boolean
@@ -93,7 +96,7 @@ const ModalProposalIllustration = ({ show, onClose, dispatch, submitting, pristi
         as="div"
         display="flex"
         flex={1}
-        justifyContent="flex-end"
+        justify="flex-end"
         py={4}
         px={6}
         align={['stretch', 'center']}
@@ -143,4 +146,4 @@ const form = reduxForm({
   enableReinitialize: true,
   form: formName,
 })(ModalProposalIllustration)
-export default connect<any, any>()(injectIntl(form))
+export default connect()(injectIntl(form))

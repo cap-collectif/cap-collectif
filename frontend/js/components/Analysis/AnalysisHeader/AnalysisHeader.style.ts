@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 
-export const AnalysisHeaderContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AnalysisHeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

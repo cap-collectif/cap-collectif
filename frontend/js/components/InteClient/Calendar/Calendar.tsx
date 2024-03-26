@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
 type Props = {
@@ -14,15 +14,11 @@ type Props = {
   activeNumber?: number
   withBorder?: boolean
 }
-const InputContent: StyledComponent<
-  {
-    color: string
-    last: boolean
-    branchColor: string
-  },
-  {},
-  HTMLDivElement
-> = styled.div`
+const InputContent = styled.div<{
+  color: string
+  last: boolean
+  branchColor: string
+}>`
   position: relative;
   display: flex;
   font-size: 16px;
@@ -44,7 +40,7 @@ const InputContent: StyledComponent<
     display: ${props => props.last && 'none !important'};
   }
 `
-const Circle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Circle = styled.div`
   margin-right: 15px;
 `
 const CircleData: StyledComponent<
@@ -74,16 +70,12 @@ const CircleData: StyledComponent<
   font-weight: ${props => props.active && 'bold'};
   outline: ${props => (props.withBorder ? '5px' : '0px')} solid ${props => props.backgroundColor};
 `
-const Data: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Data = styled.div`
   margin-right: 15px;
 `
-const Title: StyledComponent<
-  {
-    color: string
-  },
-  {},
-  HTMLDivElement
-> = styled.div`
+const Title = styled.div<{
+  color: string
+}>`
   color: ${props => props.color};
   font-weight: bold;
 `

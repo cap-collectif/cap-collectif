@@ -1,11 +1,11 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import * as React from 'react'
 
 type Props = {
+  className?: string
   children: JSX.Element | JSX.Element[] | string | null | undefined
 }
-export const Container: StyledComponent<any, {}, HTMLUListElement> = styled.ul`
+export const Container = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;

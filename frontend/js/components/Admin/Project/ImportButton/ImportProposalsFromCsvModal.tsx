@@ -338,4 +338,4 @@ const mapStateToProps = (state: GlobalState, { proposalFormId }: Props) => {
   }
 }
 
-export default connect<any, any>(mapStateToProps)(formContainer)
+export default connect(mapStateToProps)(formContainer)

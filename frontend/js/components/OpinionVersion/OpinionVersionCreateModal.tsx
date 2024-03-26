@@ -86,7 +86,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(OpinionVersionCreateModal)
+const container = connect(mapStateToProps)(OpinionVersionCreateModal)
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionVersionCreateModal_opinion on Opinion {

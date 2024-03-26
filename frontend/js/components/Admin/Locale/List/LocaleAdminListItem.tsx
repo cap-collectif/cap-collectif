@@ -2,7 +2,7 @@ import { Field } from 'redux-form'
 import React, { useState } from 'react'
 import { FormattedMessage, IntlShape, useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { ListGroupItem, Button, ButtonToolbar, Badge } from 'react-bootstrap'
 import config from '~/config'
@@ -15,14 +15,14 @@ import { toast } from '~ds/Toast'
 type Props = {
   locale: LocaleAdminListItem_locale
 }
-const ContainerTitle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ContainerTitle = styled.div`
   display: flex;
 `
-const ContainerDefault: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ContainerDefault = styled.div`
   height: 15px;
   padding-top: 2px;
 `
-const ContainerToggle: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const ContainerToggle = styled.div`
   .form-group {
     margin-bottom: 0;
   }

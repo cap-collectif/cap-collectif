@@ -114,4 +114,4 @@ const mapStateToProps = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 })
 
-export default connect<any, any>(mapStateToProps)(ShareButtonDropdownLegacy)
+export default connect(mapStateToProps)(ShareButtonDropdownLegacy)

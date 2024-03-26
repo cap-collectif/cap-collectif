@@ -87,6 +87,7 @@ const ProposalCreateModal = ({
       hideOnClickOutside={false}
       onOpen={onOpen}
       onClose={onClose}
+      // @ts-ignore MAJ DS types
       fullPageScrollable
       forceModalDialogToFalse={isIos()}
       ariaLabel={intl.formatMessage({
@@ -109,7 +110,7 @@ const ProposalCreateModal = ({
             <ProposalOtherPanelsModal
               proposalForm={proposalForm}
               onClose={onClose}
-              modalState={modalState}
+              modalState={modalState as 'NORMAL' | 'LEAVE' | 'MAP' | 'ERROR'}
               resetModalState={resetModalState}
             />
             <>
@@ -203,4 +204,4 @@ const mapStateToProps = (state: GlobalState) => ({
   invalid: isInvalid(formName)(state),
 })
 
-export default connect<any, any>(mapStateToProps)(ProposalCreateModal)
+export default connect(mapStateToProps)(ProposalCreateModal)

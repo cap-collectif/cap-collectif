@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { QueryRenderer, graphql } from 'react-relay'
 import environment, { graphqlError } from '../../../createRelayEnvironment'
 import Loader from '../../Ui/FeedbacksIndicators/Loader'
-import type { ProjectsListQueryResponse } from '~relay/ProjectsListQuery.graphql'
+import type { ProjectsListQuery$data } from '~relay/ProjectsListQuery.graphql'
 import type { GlobalState, FeatureToggles } from '../../../types'
 import '../../../types'
 import ProjectListView from './ProjectListView'
@@ -13,7 +13,6 @@ import type { ProjectArchiveFilter } from '~relay/ProjectListViewRefetchQuery.gr
 type Props = {
   readonly authorId?: string
   readonly onlyPublic: boolean
-  readonly orderBy: string | null | undefined
   readonly term?: string | null | undefined
   // Used only on /themes page
   readonly themeId: string | null | undefined
@@ -29,7 +28,7 @@ type Props = {
 }
 
 class ProjectsList extends React.Component<Props> {
-  initialRenderVars = {}
+  initialRenderVars: any = {}
   static defaultProps = {
     limit: 50,
     paginate: true,
@@ -57,7 +56,7 @@ class ProjectsList extends React.Component<Props> {
     error,
     props,
   }: ReactRelayReadyState & {
-    props: ProjectsListQueryResponse | null | undefined
+    props: ProjectsListQuery$data | null | undefined
   }) => {
     const { limit, paginate, isProjectsPage, features } = this.props
 
@@ -78,7 +77,7 @@ class ProjectsList extends React.Component<Props> {
     const { orderBy, type, theme, term, limit, status, author, onlyPublic, archived } = this.initialRenderVars
     return (
       <QueryRenderer
-        environment={environment}
+        environment={environment as any}
         query={graphql`
           query ProjectsListQuery(
             $author: ID
@@ -132,4 +131,4 @@ const mapStateToProps = (state: GlobalState) => ({
   features: state.default.features,
 })
 
-export default connect<any, any>(mapStateToProps)(ProjectsList)
+export default connect(mapStateToProps)(ProjectsList)

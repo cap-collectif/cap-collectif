@@ -2,13 +2,13 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import type { VoteMinAlert_step } from '~relay/VoteMinAlert_step.graphql'
+import type { VoteMinAlert_step$data } from '~relay/VoteMinAlert_step.graphql'
 import { VoteMinAlertContainer } from './ProposalsUserVotes.style'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 type Props = {
-  step: VoteMinAlert_step
+  step: VoteMinAlert_step$data
   translationKey: string
   isVotesPage?: boolean
 }

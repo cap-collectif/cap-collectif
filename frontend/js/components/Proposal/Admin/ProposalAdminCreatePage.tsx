@@ -52,4 +52,4 @@ export const ProposalAdminCreatePage = ({ stepId }: Props) => {
     </div>
   )
 }
-export default connect<any, any>()(ProposalAdminCreatePage)
+export default connect()(ProposalAdminCreatePage)

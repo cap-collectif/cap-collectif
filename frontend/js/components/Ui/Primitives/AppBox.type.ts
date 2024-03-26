@@ -1,4 +1,5 @@
-import { CSSRules } from 'styled-components'
+import { SystemStyleObject } from '@styled-system/css'
+
 type NumberOrString = number | string
 export type Responsive<T> = T | T[] | Record<string, T>
 export type ResponsiveBoolean = boolean | Array<boolean>
@@ -213,8 +214,8 @@ type Grid = {
   gridRow?: Responsive<NumberOrString>
 }
 type Css = {
-  css?: CSSRules | ((props: any) => Record<string, any>) | Record<string, any>
-  style?: CSSRules | Record<string, any>
+  css?: SystemStyleObject | ((props: any) => Record<string, any>) | Record<string, any>
+  style?: SystemStyleObject | Record<string, any>
 }
 type HTML = {
   id?: string
@@ -231,6 +232,7 @@ type HTML = {
   dangerouslySetInnerHTML?: {
     __html: any
   }
+  children?: any
 }
 type onMouse = {
   readonly onMouseOver?: (...args: Array<any>) => any

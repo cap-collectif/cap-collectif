@@ -73,7 +73,7 @@ const mapStateToProps = (state: State, props: Props) => ({
   submitting: isSubmitting(formName)(state),
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 const container = connector(injectIntl(OpinionEditModal))
 export default createFragmentContainer(container, {
   opinion: graphql`

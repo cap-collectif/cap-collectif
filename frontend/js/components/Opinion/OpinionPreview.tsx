@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated'
 import OpinionInfos from './OpinionInfos'
@@ -17,7 +17,7 @@ type Props = {
   readonly rankingThreshold?: number | null | undefined
   readonly isProfile: boolean
 }
-const MediaBody: StyledComponent<any, {}, typeof Media.Body> = styled(Media.Body)`
+const MediaBody = styled(Media.Body)`
   overflow: visible;
   .cap-popover {
     button {

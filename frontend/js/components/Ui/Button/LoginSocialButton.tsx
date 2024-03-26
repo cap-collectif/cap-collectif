@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
 import { connect } from 'react-redux'
@@ -195,7 +195,7 @@ export const FranceConnectButton = styled.div<{
     }
   }
 `
-const GrandLyonConnectButton: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const GrandLyonConnectButton = styled.div`
   position: relative;
   margin-top: 10px;
   width: 100%;
@@ -280,4 +280,4 @@ const mapStateToProps = (state: GlobalState) => ({
   colorText: state.default.parameters['color.btn.primary.text'],
 })
 
-export default connect<any, any>(mapStateToProps)(LoginSocialButton)
+export default connect(mapStateToProps)(LoginSocialButton)

@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-export const Container: StyledComponent<any, {}, HTMLElement> = styled.li.attrs({
+export const Container = styled.li.attrs({
   className: 'dropdown-select-separator',
 })`
   background: ${colors.pageBgc};

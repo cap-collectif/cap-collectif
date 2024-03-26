@@ -1,10 +1,9 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
 import { spaceItemPosition } from '~/components/Ui/DragnDrop/List/List.style'
 
-const RankingListContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const RankingListContainer = styled.div.attrs({
   className: 'rankingList',
 })`
   display: flex;

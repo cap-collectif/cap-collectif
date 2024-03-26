@@ -153,5 +153,5 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(GroupAdminUsers)
+const container = connect(mapStateToProps)(GroupAdminUsers)
 export default container

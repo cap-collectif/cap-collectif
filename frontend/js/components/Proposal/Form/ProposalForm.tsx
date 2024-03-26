@@ -9,21 +9,21 @@ import { createFragmentContainer, fetchQuery_DEPRECATED, graphql } from 'react-r
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
 import { Alert, Collapse, ListGroup, ListGroupItem, Panel, Glyphicon, Button } from 'react-bootstrap'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { toast, Button as DsButton, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
 import { styleGuideColors } from '~/utils/colors'
 import component from '~/components/Form/Field'
 import type {
-  ProposalFormSearchProposalsQueryResponse,
-  ProposalFormSearchProposalsQueryVariables,
+  ProposalFormSearchProposalsQuery$data,
+  ProposalFormSearchProposalsQuery$variables,
 } from '~relay/ProposalFormSearchProposalsQuery.graphql'
 import type {
-  ProposalFormAvailableDistrictsForLocalisationQueryResponse,
-  ProposalFormAvailableDistrictsForLocalisationQueryVariables,
+  ProposalFormAvailableDistrictsForLocalisationQuery$data,
+  ProposalFormAvailableDistrictsForLocalisationQuery$variables,
 } from '~relay/ProposalFormAvailableDistrictsForLocalisationQuery.graphql'
-import type { ProposalForm_proposal } from '~relay/ProposalForm_proposal.graphql'
-import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql'
+import type { ProposalForm_proposal$data } from '~relay/ProposalForm_proposal.graphql'
+import type { ProposalForm_proposalForm$data } from '~relay/ProposalForm_proposalForm.graphql'
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '~/types'
 import CreateProposalMutation from '~/mutations/CreateProposalMutation'
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
@@ -84,8 +84,8 @@ type LatLng = {
 export const formName = 'proposal-form'
 export const EDIT_MODAL_ANCHOR = '#edit-proposal'
 type RelayProps = {
-  readonly proposalForm: ProposalForm_proposalForm
-  readonly proposal: ProposalForm_proposal | null | undefined
+  readonly proposalForm: ProposalForm_proposalForm$data
+  readonly proposal: ProposalForm_proposal$data | null | undefined
 }
 export type Props = ReduxFormFormProps &
   RelayProps & {
@@ -144,7 +144,7 @@ const onUnload = e => {
 
 export const ILLUSTRATION_MAX_SIZE = '4000000'
 export const memoizeAvailableQuestions: any = memoize(() => {})
-export const ExternalLinks: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ExternalLinks = styled.div<{ paddingY?: string }>`
   .form-group {
     max-width: 400px;
     margin-bottom: 24px;
@@ -341,12 +341,12 @@ export const retrieveDistrictForLocation = (
   dispatch: Dispatch,
   updateDistrictsCallback?: (arg0: { districtIdsFilteredByAddress: Array<string> }) => void,
 ) => {
-  fetchQuery_DEPRECATED(environment, getAvailableDistrictsQuery, {
+  fetchQuery_DEPRECATED(environment as any, getAvailableDistrictsQuery, {
     proposalFormId,
     latitude: location.lat,
     longitude: location.lng,
-  } as ProposalFormAvailableDistrictsForLocalisationQueryVariables).then(
-    (data: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
+  } as ProposalFormAvailableDistrictsForLocalisationQuery$variables).then(
+    (data: ProposalFormAvailableDistrictsForLocalisationQuery$data) => {
       const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(district => district.id)
       dispatch(
         change(
@@ -377,10 +377,10 @@ export class ProposalForm extends React.Component<Props, State> {
     this.setState({
       isLoadingTitleSuggestions: true,
     })
-    fetchQuery_DEPRECATED(environment, searchProposalsQuery, {
+    fetchQuery_DEPRECATED(environment as any, searchProposalsQuery, {
       proposalFormId: proposalForm.id,
       term: title,
-    } as ProposalFormSearchProposalsQueryVariables).then((data: ProposalFormSearchProposalsQueryResponse) => {
+    } as ProposalFormSearchProposalsQuery$variables).then((data: ProposalFormSearchProposalsQuery$data) => {
       let titleSuggestions = []
 
       if (data.form && data.form.proposals && data.form.proposals.edges) {
@@ -816,6 +816,7 @@ export class ProposalForm extends React.Component<Props, State> {
           />
         )}
         {proposalForm.isUsingAnySocialNetworks && (
+          // @ts-ignore
           <ExternalLinks paddingY={8} backgroundColor={styleGuideColors.white} className="external-links">
             <Text
               as={isBackOfficeInput ? `span` : `h3`}
@@ -963,7 +964,7 @@ const form = reduxForm({
   },
 })(ProposalForm)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalForm_proposal on Proposal {

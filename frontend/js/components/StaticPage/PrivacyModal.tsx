@@ -63,4 +63,4 @@ const mapStateToProps = (state: State) => ({
   privacyContent: state.default.parameters['privacy-policy'],
 })
 
-export default connect<any, any>(mapStateToProps)(PrivacyModal)
+export default connect(mapStateToProps)(PrivacyModal)

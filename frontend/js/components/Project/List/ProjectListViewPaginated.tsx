@@ -77,7 +77,7 @@ const mapStateToProps = (state: State) => ({
   features: state.default.features,
 })
 
-const connector = connect<any, any>(mapStateToProps)
+const connector = connect(mapStateToProps)
 export default createPaginationContainer(
   connector(ProjectListViewPaginated),
   {

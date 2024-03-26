@@ -1,8 +1,7 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 
-const FontPopoverContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const FontPopoverContainer = styled.div.attrs({
   className: 'font-popover-content',
 })`
   .body {

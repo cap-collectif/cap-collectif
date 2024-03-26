@@ -1,7 +1,6 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 
-const AnalysisProposalListLoaderContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const AnalysisProposalListLoaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

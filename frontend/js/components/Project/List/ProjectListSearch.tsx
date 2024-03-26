@@ -57,4 +57,4 @@ class ProjectListSearch extends React.Component<Props, State> {
   }
 }
 
-export default connect<any, any>()(ProjectListSearch)
+export default connect()(ProjectListSearch)

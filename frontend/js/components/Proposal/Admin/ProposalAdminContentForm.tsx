@@ -9,7 +9,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 // eslint-disable-next-line no-restricted-imports
 import { Button, ButtonToolbar, Glyphicon, ListGroup, ListGroupItem, Panel } from 'react-bootstrap'
 import memoize from 'lodash/memoize'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { isUrl } from '~/services/Validator'
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
@@ -17,9 +17,9 @@ import UpdateProposalFusionMutation from '~/mutations/UpdateProposalFusionMutati
 import component from '../../Form/Field'
 import AlertForm from '../../Alert/AlertForm'
 import ProposalFusionEditModal from './ProposalFusionEditModal'
-import type { ProposalAdminContentForm_proposal } from '~relay/ProposalAdminContentForm_proposal.graphql'
-import type { ProposalForm_proposalForm } from '~relay/ProposalForm_proposalForm.graphql'
-import type { ProposalFormLegacy_proposalForm } from '~relay/ProposalFormLegacy_proposalForm.graphql'
+import type { ProposalAdminContentForm_proposal$data } from '~relay/ProposalAdminContentForm_proposal.graphql'
+import type { ProposalForm_proposalForm$data } from '~relay/ProposalForm_proposalForm.graphql'
+import type { ProposalFormLegacy_proposalForm$data } from '~relay/ProposalFormLegacy_proposalForm.graphql'
 import type { FormValues as FrontendFormValues } from '../Form/ProposalForm'
 import type { Dispatch, FeatureToggles, GlobalState, Uuid } from '~/types'
 import UserListField from '../../Admin/Field/UserListField'
@@ -85,7 +85,7 @@ type FormValues = {
   youtubeUrl: string | null | undefined
 }
 type RelayProps = {
-  readonly proposal: ProposalAdminContentForm_proposal
+  readonly proposal: ProposalAdminContentForm_proposal$data
 }
 type Props = ReduxFormFormProps &
   RelayProps & {
@@ -117,7 +117,7 @@ const RevisionButton = styled(Button)`
     background: transparent;
   }
 `
-const ExternaLinksCard: StyledComponent<any, {}, typeof Card> = styled(Card)`
+const ExternaLinksCard = styled(Card)`
   .form-group {
     max-width: 400px;
     margin-top: 24px;
@@ -131,7 +131,7 @@ const ExternaLinksCard: StyledComponent<any, {}, typeof Card> = styled(Card)`
     }
   }
 `
-const NotationCard: StyledComponent<any, {}, typeof Card> = styled(Card)`
+const NotationCard = styled(Card)`
   .form-fields,
   #likers,
   #proposal_estimation {
@@ -236,9 +236,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isAdmin, f
 export const checkProposalContent = (
   values: FormValues | FrontendFormValues | BackOfficeFormValues,
   proposalForm:
-    | ProposalForm_proposalForm
-    | ProposalFormLegacy_proposalForm
-    | $PropertyType<ProposalAdminContentForm_proposal, 'form'>,
+    | ProposalForm_proposalForm$data
+    | ProposalFormLegacy_proposalForm$data
+    | $PropertyType<ProposalAdminContentForm_proposal$data, 'form'>,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -286,7 +286,7 @@ export const checkProposalContent = (
 const memoizeAvailableQuestions: any = memoize(() => {})
 export const validateProposalContent = (
   values: FormValues | FrontendFormValues | BackOfficeFormValues,
-  proposalForm: ProposalForm_proposalForm | ProposalFormLegacy_proposalForm,
+  proposalForm: ProposalForm_proposalForm$data | ProposalFormLegacy_proposalForm$data,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -379,7 +379,7 @@ export const validateProposalContent = (
 }
 export const warnProposalContent = (
   values: FormValues | FrontendFormValues | BackOfficeFormValues,
-  proposalForm: ProposalForm_proposalForm,
+  proposalForm: ProposalForm_proposalForm$data,
   features: FeatureToggles,
   intl: IntlShape,
   isDraft: boolean,
@@ -1003,8 +1003,7 @@ const mapStateToProps = (state: GlobalState, { proposal }: RelayProps) => {
   }
 }
 
-// @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminContentForm_proposal on Proposal

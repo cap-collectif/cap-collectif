@@ -510,7 +510,7 @@ const mapStateToProps = (state: State, { step }: Props) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   step: graphql`
     fragment RequirementsFormLegacy_step on RequirementStep

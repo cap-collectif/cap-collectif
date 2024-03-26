@@ -186,4 +186,4 @@ const mapStateToProps = (state: State) => ({
   user: state.user.user,
 })
 
-export default connect<any, any>(mapStateToProps)(NavbarRight)
+export default connect(mapStateToProps)(NavbarRight)

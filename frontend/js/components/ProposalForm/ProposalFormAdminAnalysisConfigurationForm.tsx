@@ -9,8 +9,8 @@ import { Button, ButtonToolbar, ToggleButton } from 'react-bootstrap'
 import type { Dispatch, GlobalState, State, Uuid } from '~/types'
 import component from '../Form/Field'
 import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { ProposalFormAdminAnalysisConfigurationForm_proposalForm } from '~relay/ProposalFormAdminAnalysisConfigurationForm_proposalForm.graphql'
-import type { ProposalFormAdminAnalysisConfigurationFormQueryResponse } from '~relay/ProposalFormAdminAnalysisConfigurationFormQuery.graphql'
+import type { ProposalFormAdminAnalysisConfigurationForm_proposalForm$data } from '~relay/ProposalFormAdminAnalysisConfigurationForm_proposalForm.graphql'
+import type { ProposalFormAdminAnalysisConfigurationFormQuery$data } from '~relay/ProposalFormAdminAnalysisConfigurationFormQuery.graphql'
 import select from '~/components/Form/Select'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 import AlertForm from '~/components/Alert/AlertForm'
@@ -32,7 +32,7 @@ import ProposalFormAdminContainer, {
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Flex from '~ui/Primitives/Layout/Flex'
 type RelayProps = {
-  proposalForm: ProposalFormAdminAnalysisConfigurationForm_proposalForm
+  proposalForm: ProposalFormAdminAnalysisConfigurationForm_proposalForm$data
 }
 type Props = ReduxFormFormProps &
   RelayProps & {
@@ -53,7 +53,7 @@ type QuestionnaireFormatted = {
 type FormValues = Record<string, any>
 export const formName = 'proposal-form-admin-analysis-configuration'
 
-const getStatusesGroupedByStep = (proposalForm: ProposalFormAdminAnalysisConfigurationForm_proposalForm) =>
+const getStatusesGroupedByStep = (proposalForm: ProposalFormAdminAnalysisConfigurationForm_proposalForm$data) =>
   proposalForm.step?.project?.steps
     .filter(step => step.__typename === 'CollectStep' || step.__typename === 'SelectionStep')
     .reduce((acc, step) => {
@@ -204,7 +204,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
             variables={{
               affiliations: isAdmin ? null : ['OWNER'],
             }}
-            environment={environment}
+            environment={environment as any}
             query={graphql`
               query ProposalFormAdminAnalysisConfigurationFormQuery($affiliations: [QuestionnaireAffiliation!]) {
                 viewer {
@@ -235,7 +235,7 @@ export const ProposalFormAdminAnalysisConfigurationForm = ({
               error,
               props,
             }: ReactRelayReadyState & {
-              props: ProposalFormAdminAnalysisConfigurationFormQueryResponse | null | undefined
+              props: ProposalFormAdminAnalysisConfigurationFormQuery$data | null | undefined
             }) => {
               if (error) {
                 console.error(error) // eslint-disable-line no-console
@@ -576,7 +576,7 @@ const mapStateToProps = (state: State, props: RelayProps) => {
 }
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 const intlContainer = injectIntl(container)
 export default createFragmentContainer(intlContainer, {
   proposalForm: graphql`

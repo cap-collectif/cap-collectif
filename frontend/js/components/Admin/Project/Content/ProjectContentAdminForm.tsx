@@ -1,7 +1,5 @@
-import type { ComponentType } from 'react'
 import React from 'react'
 import { Field } from 'redux-form'
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
@@ -53,7 +51,7 @@ type Props = ReduxFormFormProps & {
   project: ProjectContentAdminForm_project | null | undefined
   intl: IntlShape
 }
-export const InformationIcon: StyledComponent<any, {}, ComponentType<any>> = styled(Icon).attrs({
+export const InformationIcon = styled(Icon).attrs({
   name: ICON_NAME.information,
   size: '12px',
   style: undefined, // Override default styles that `Icon` component apply

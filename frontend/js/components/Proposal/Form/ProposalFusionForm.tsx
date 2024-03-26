@@ -11,7 +11,8 @@ import type { CreateProposalFusionMutationResponse } from '../../../mutations/Cr
 import CreateProposalFusionMutation from '../../../mutations/CreateProposalFusionMutation'
 import { closeCreateFusionModal } from '../../../redux/modules/proposal'
 import type { State, Dispatch, Uuid } from '../../../types'
-import type { ProposalFusionForm_query } from '~relay/ProposalFusionForm_query.graphql'
+import type { ProposalFusionForm_query$data } from '~relay/ProposalFusionForm_query.graphql'
+import type { ProposalFusionFormAutocompleteQuery$data } from '~relay/ProposalFusionFormAutocompleteQuery.graphql'
 export const formName = 'create-proposal-fusion'
 const autocompleteQuery = graphql`
   query ProposalFusionFormAutocompleteQuery($stepId: ID!, $term: String) {
@@ -43,7 +44,7 @@ type Props = {
   currentCollectStep: Step | null | undefined
   onProjectChange: (form: string, field: string, value: any) => void
   intl: IntlShape
-  query: ProposalFusionForm_query
+  query: ProposalFusionForm_query$data
 }
 
 const validate = (values: FormValues, props: Props) => {
@@ -156,7 +157,7 @@ export class ProposalFusionForm extends React.Component<Props> {
               fetchQuery_DEPRECATED(environment, autocompleteQuery, {
                 term: input,
                 stepId: currentCollectStep.id,
-              }).then(res => {
+              }).then((res: ProposalFusionFormAutocompleteQuery$data) => {
                 const options = res.step.proposals.edges.map(edge => ({
                   value: edge.node.id,
                   label: edge.node.title,
@@ -205,8 +206,8 @@ const form = reduxForm({
   validate,
   onSubmit,
 })(ProposalFusionForm)
-// @ts-ignore
-const container = connect<any, any>(mapStateToProps, {
+
+const container = connect(mapStateToProps, {
   onProjectChange: change as (field: string, value: any) => void,
 })(injectIntl(form))
 export default createFragmentContainer(container, {

@@ -1,4 +1,3 @@
-import type { StyledComponent } from 'styled-components'
 import styled, { css } from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile } from '~/utils/sizes'
@@ -94,7 +93,7 @@ const EventPreviewContainer = styled(Card).attrs({
     border-radius: 4px;
   }
 `
-export const HeadContent: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const HeadContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -104,7 +103,7 @@ export const HeadContent: StyledComponent<any, {}, HTMLDivElement> = styled.div`
     margin: 0;
   }
 `
-export const Content: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const Content = styled.div`
   width: 100%;
 `
 export const TagsList = styled.div<{
@@ -136,7 +135,7 @@ export const TagsList = styled.div<{
     align-items: flex-start;
   }
 `
-export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -162,7 +161,7 @@ export const TitleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.d
     align-items: flex-start;
   }
 `
-export const DateContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const DateContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

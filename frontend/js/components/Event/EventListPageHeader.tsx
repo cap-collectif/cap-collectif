@@ -111,7 +111,7 @@ const mapStateToProps = (state: GlobalState) => ({
 })
 
 export // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(EventListPageHeader))
+const container = connect(mapStateToProps)(injectIntl(EventListPageHeader))
 export default createFragmentContainer(container, {
   queryViewer: graphql`
     fragment EventListPageHeader_queryViewer on Query @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { ProgressBar } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
@@ -26,7 +26,7 @@ type Props = {
   readonly formAsyncErrors: Record<string, any>
 }
 export const CHANGE_PASSWORD_FORM_NAME = 'password-form'
-const StyleContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const StyleContainer = styled.div`
   display: inline-block;
   width: 100%;
 
@@ -355,4 +355,4 @@ const mapStateToProps = (state: State, props: Props) => ({
   passwordConditions: formValueSelector(props.formName)(state, 'passwordConditions'),
 })
 
-export default connect<any, any>(mapStateToProps)(UserPasswordComplexityField)
+export default connect(mapStateToProps)(UserPasswordComplexityField)

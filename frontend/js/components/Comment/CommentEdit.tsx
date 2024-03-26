@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { CommentEdit_comment } from '~relay/CommentEdit_comment.graphql'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
@@ -10,7 +10,7 @@ import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 type Props = {
   readonly comment: CommentEdit_comment
 }
-const CommentEditLink: StyledComponent<any, {}, HTMLAnchorElement> = styled.a`
+const CommentEditLink = styled.a`
   display: flex;
   align-items: center;
   text-transform: uppercase;

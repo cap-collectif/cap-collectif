@@ -21,8 +21,8 @@ import css from '@styled-system/css'
 import debounce from 'debounce-promise'
 import { toast, Text } from '@cap-collectif/ui'
 import type { Dispatch, GlobalState } from '~/types'
-import type { ReplyForm_questionnaire } from '~relay/ReplyForm_questionnaire.graphql'
-import type { ReplyForm_reply } from '~relay/ReplyForm_reply.graphql'
+import type { ReplyForm_questionnaire$data } from '~relay/ReplyForm_questionnaire.graphql'
+import type { ReplyForm_reply$data } from '~relay/ReplyForm_reply.graphql'
 import renderComponent from '~/components/Form/Field'
 import type { ResponsesInReduxForm } from '~/components/Form/Form.type'
 import { TYPE_FORM } from '~/constants/FormConstants'
@@ -60,8 +60,8 @@ import SectionTitle from '~ui/Form/Section/SectionTitle'
 import scrollToFormError from '~/components/Reply/Form/ReplyForm.utils'
 
 type Props = ReduxFormFormProps & {
-  readonly questionnaire: ReplyForm_questionnaire
-  readonly reply: ReplyForm_reply | null | undefined
+  readonly questionnaire: ReplyForm_questionnaire$data
+  readonly reply: ReplyForm_reply$data | null | undefined
   readonly responses: ResponsesInReduxForm
   readonly user: Record<string, any> | null | undefined
   readonly intl: IntlShape
@@ -263,7 +263,7 @@ const asyncValidate = (values: FormValues) => {
       errors.participantEmail = 'email.wrong.format'
       return reject(errors)
     }
-
+    // @ts-ignore
     return resolve()
   })
 }
@@ -277,6 +277,7 @@ export class ReplyForm extends React.Component<Props, State> {
   }
 
   constructor() {
+    // @ts-ignore
     super()
     this.state = {
       captcha: {
@@ -285,10 +286,6 @@ export class ReplyForm extends React.Component<Props, State> {
       },
     }
     this.formRef = React.createRef()
-  }
-
-  static defaultProps = {
-    reply: null,
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -324,8 +321,8 @@ export class ReplyForm extends React.Component<Props, State> {
   }
 
   submitReply(
-    reply: ReplyForm_reply | null | undefined,
-    questionnaire: ReplyForm_questionnaire,
+    reply: ReplyForm_reply$data | null | undefined,
+    questionnaire: ReplyForm_questionnaire$data,
     form: string,
     dispatch: Dispatch,
   ) {
@@ -635,7 +632,7 @@ const form = reduxForm({
   },
 })(ReplyForm)
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(injectIntl(form))
+const container = connect(mapStateToProps)(injectIntl(form))
 const containerWithRouter = withRouter(container)
 export default createFragmentContainer(containerWithRouter, {
   reply: graphql`

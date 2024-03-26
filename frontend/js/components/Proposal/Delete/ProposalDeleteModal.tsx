@@ -7,11 +7,11 @@ import SubmitButton from '../../Form/SubmitButton'
 import CloseButton from '../../Form/CloseButton'
 import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal'
 import type { State, Dispatch } from '../../../types'
-import type { ProposalDeleteModal_proposal } from '~relay/ProposalDeleteModal_proposal.graphql'
+import type { ProposalDeleteModal_proposal$data } from '~relay/ProposalDeleteModal_proposal.graphql'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 
 type Props = {
-  proposal: ProposalDeleteModal_proposal
+  proposal: ProposalDeleteModal_proposal$data
   show: boolean
   isDeleting: boolean
   dispatch: Dispatch
@@ -64,6 +64,7 @@ export const ProposalDeleteModal = ({ proposal, show, isDeleting, dispatch }: Pr
               dispatch(closeDeleteProposalModal())
             }}
           />
+          {/** @ts-ignore see component */}
           <SubmitButton
             id="confirm-proposal-delete"
             isSubmitting={isDeleting}
@@ -84,8 +85,7 @@ const mapStateToProps = (state: State) => ({
   show: state.proposal.showDeleteModal,
 })
 
-// @ts-ignore
-const container = connect<any, any>(mapStateToProps)(ProposalDeleteModal)
+const container = connect(mapStateToProps)(ProposalDeleteModal)
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalDeleteModal_proposal on Proposal {

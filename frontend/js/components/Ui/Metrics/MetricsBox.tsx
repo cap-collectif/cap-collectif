@@ -1,5 +1,5 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   readonly icon: string
   readonly label: string
 }
-const MetricsBoxInner: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const MetricsBoxInner = styled.div.attrs({
   className: 'col-xs-6 col-md-4 col-lg-2',
 })`
   background-color: ${props => props.color};

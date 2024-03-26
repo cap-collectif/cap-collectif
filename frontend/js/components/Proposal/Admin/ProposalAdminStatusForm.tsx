@@ -231,7 +231,7 @@ const mapStateToProps = (state: State, { proposal }: RelayProps) => ({
 })
 
 // @ts-ignore
-const container = connect<any, any>(mapStateToProps)(form)
+const container = connect(mapStateToProps)(form)
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalAdminStatusForm_proposal on Proposal @argumentDefinitions(viewerIsAdmin: { type: "Boolean!" }) {

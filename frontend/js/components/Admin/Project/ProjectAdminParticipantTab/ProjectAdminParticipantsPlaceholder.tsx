@@ -1,5 +1,5 @@
 import * as React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import AnalysisPlaceholderDashboard, {
   TYPE_DASHBOARD,
@@ -10,7 +10,7 @@ type Props = {
   hasError: boolean
   fetchData: (() => void) | null | undefined
 }
-const Header: StyledComponent<any, {}, HTMLElement> = styled.header`
+const Header = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

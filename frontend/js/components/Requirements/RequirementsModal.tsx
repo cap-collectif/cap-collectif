@@ -43,7 +43,7 @@ export const RequirementsModal = ({ show, handleClose, step }: Props) => {
   )
 }
 // @ts-ignore
-const container = connect<any, any>()(RequirementsModal)
+const container = connect()(RequirementsModal)
 export default createFragmentContainer(container, {
   step: graphql`
     fragment RequirementsModal_step on ConsultationStep @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {

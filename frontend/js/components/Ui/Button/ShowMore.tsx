@@ -1,9 +1,9 @@
 import React from 'react'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 
-const ShowMoreButton: StyledComponent<any, {}, HTMLButtonElement> = styled.button`
+const ShowMoreButton = styled.button`
   align-items: center;
   width: 100%;
   background-color: white;

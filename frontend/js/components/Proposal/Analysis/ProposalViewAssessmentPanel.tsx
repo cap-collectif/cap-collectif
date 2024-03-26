@@ -1,7 +1,7 @@
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import type { ProposalViewAssessmentPanel_proposal } from '~relay/ProposalViewAssessmentPanel_proposal.graphql'
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
@@ -12,7 +12,7 @@ import WYSIWYGRender from '../../Form/WYSIWYGRender'
 type Props = {
   proposal: ProposalViewAssessmentPanel_proposal
 }
-export const AssessmentView: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const AssessmentView = styled.div`
   p {
     font-size: 16px;
     margin-top: 20px;
@@ -24,7 +24,7 @@ export const AssessmentView: StyledComponent<any, {}, HTMLDivElement> = styled.d
     margin-top: 20px;
   }
 `
-export const ResponseContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const ResponseContainer = styled.div`
   > p {
     font-size: 16px;
     margin-top: 20px;

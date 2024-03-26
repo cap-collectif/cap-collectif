@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
@@ -27,7 +27,7 @@ export type FormValues = {
   externalContributionsCount: number | null | undefined
   externalVotesCount: number | null | undefined
 }
-const Container: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+const Container = styled.div`
   .info {
     color: ${colors.gray};
   }
@@ -156,7 +156,7 @@ const mapStateToProps = (state, { project, formName }: Props) => ({
   isExternal: formValueSelector(formName)(state, 'isExternal') || false,
 })
 
-const connector = connect<any, any>(mapStateToProps)(ProjectExternalAdminForm)
+const connector = connect(mapStateToProps)(ProjectExternalAdminForm)
 export default createFragmentContainer(connector, {
   project: graphql`
     fragment ProjectExternalAdminForm_project on Project {

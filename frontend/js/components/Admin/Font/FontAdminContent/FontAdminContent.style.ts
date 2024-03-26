@@ -1,9 +1,8 @@
-import type { StyledComponent } from 'styled-components'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 
-const FontAdminContentContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div.attrs({
+const FontAdminContentContainer = styled.div.attrs({
   className: 'font-admin-content',
 })`
   width: 50%;

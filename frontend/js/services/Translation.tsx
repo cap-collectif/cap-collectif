@@ -82,4 +82,4 @@ const mapStateToProps = ({ language }: State) => ({
   defaultLanguage: language.currentLanguage,
 })
 
-export default connect<any, any>(mapStateToProps)(Translation)
+export default connect(mapStateToProps)(Translation)

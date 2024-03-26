@@ -1,8 +1,8 @@
 // @ts-nocheck
-import type { StyledComponent } from 'styled-components'
+
 import styled from 'styled-components'
 
-export const SearchContainer: StyledComponent<any, {}, HTMLDivElement> = styled.div`
+export const SearchContainer = styled.div`
   width: 600px;
   height: 124px;
   padding: 24px;
@@ -12,7 +12,7 @@ export const SearchContainer: StyledComponent<any, {}, HTMLDivElement> = styled.
   align-items: flex-start;
   background-color: #9cd8d9;
 `
-export const SearchLabel: StyledComponent<any, {}, HTMLParagraphElement> = styled.p`
+export const SearchLabel = styled.p`
   font-weight: normal !important;
   font-size: 16px !important;
   color: #faf4e6 !important;
