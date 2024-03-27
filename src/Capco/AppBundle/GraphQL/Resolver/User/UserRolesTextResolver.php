@@ -21,7 +21,7 @@ class UserRolesTextResolver implements QueryInterface
         return null;
     }
 
-    private function resolve(User $user)
+    public function resolve(User $user): string
     {
         $convertedRoles = array_map(function ($role) {
             return str_replace(

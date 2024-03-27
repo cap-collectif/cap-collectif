@@ -36,6 +36,15 @@ trait TimestampableTrait
         return $this;
     }
 
+    public function resetUpdatedAt(): self
+    {
+        if (property_exists($this, 'updatedAt')) {
+            $this->updatedAt = null;
+        }
+
+        return $this;
+    }
+
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         if (property_exists($this, 'updatedAt')) {

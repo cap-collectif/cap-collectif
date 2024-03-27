@@ -253,7 +253,7 @@ Scenario: GraphQL client wants to get anonymous questionnaire question's partici
     "data": {
       "questionnaire": {
         "participants": {
-          "totalCount": 3
+          "totalCount": 4
         },
         "questions": [
           {

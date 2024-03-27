@@ -1,0 +1,8 @@
+﻿export_contribution_id,export_contribution_published_at,export_contribution_author_id,"Decision majoritaire"
+replyExport1,"2020-03-20 00:00:00",user5,
+replyExport2,"2020-03-20 00:00:00",user5,global-well
+replyExport3,"2020-03-20 00:00:00",user5,global-not-passable
+replyExport4,"2020-03-20 00:00:00",user5,global-passable
+replyExport5,"2020-03-20 00:00:00",user5,global-well
+replyExport6,"2020-03-20 00:00:00",user5,global-reject
+replyExport7,"2020-03-20 00:00:00",user5,global-well-enough

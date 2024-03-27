@@ -53,7 +53,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
     /**
      * We have to make sure the string is unique for each step.
      */
-    public static function getFilename(AbstractStep $step): string
+    public static function getFilename(AbstractStep $step, ?bool $simplified = false): string
     {
         $slug = '';
         if ($step->getProject()) {
@@ -63,7 +63,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         }
         $slug .= $step->getSlug();
 
-        return self::getShortenedFilename('participants_' . $slug);
+        return self::getShortenedFilename('participants_' . $slug, '.csv', false, $simplified);
     }
 
     public function generateSheet(
@@ -173,7 +173,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $delimiter = $input->getOption('delimiter');
         $isVerbose = $input->getOption('verbose');
 
-        $steps = $this->stepRepository->findAll();
+        $steps = $this->stepRepository->findAllExceptDebateAndQuestionnaire();
         foreach ($steps as $step) {
             $type = $step->getType();
             if ($isVerbose) {
@@ -269,44 +269,6 @@ class CreateStepContributorsCommand extends BaseExportCommand
                           }
                         }
                         ... on SelectionStep {
-                          contributors(first: 50 {$userCursor}) {
-                            edges {
-                              cursor
-                              node {
-                                {$CONTRIBUTOR_FRAGMENT}
-                                ...on User {
-                                    {$USER_FRAGMENT}
-                                }
-                              }
-                            }
-                            totalCount
-                            pageInfo {
-                              startCursor
-                              endCursor
-                              hasNextPage
-                            }
-                          }
-                        }
-                        ... on QuestionnaireStep {
-                          contributors(first: 50 {$userCursor}) {
-                            edges {
-                              cursor
-                              node {
-                                {$CONTRIBUTOR_FRAGMENT}
-                                ...on User {
-                                    {$USER_FRAGMENT}
-                                }
-                              }
-                            }
-                            totalCount
-                            pageInfo {
-                              startCursor
-                              endCursor
-                              hasNextPage
-                            }
-                          }
-                        }
-                        ... on DebateStep {
                           contributors(first: 50 {$userCursor}) {
                             edges {
                               cursor

@@ -13,7 +13,8 @@
             "Capco\\ClassificationBundle\\": "src/Capco/ClassificationBundle",
             "Capco\\MediaBundle\\": "src/Capco/MediaBundle",
             "Capco\\UserBundle\\": "src/Capco/UserBundle",
-            "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__"
+            "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__",
+            "Capco\\Tests\\": "tests/"
         },
         "files": [
             "src/Kernel.php"

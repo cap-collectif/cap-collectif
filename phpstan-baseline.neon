@@ -11086,11 +11086,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/ArchiveProposalsCommand.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\BaseExportCommand\\:\\:\\$snapshot has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/BaseExportCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CheckUserInviteStatusCommand\\:\\:execute\\(\\) should return int but returns true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CheckUserInviteStatusCommand.php
@@ -11581,26 +11576,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/CreateCsvFromProposalStepCommand.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromQuestionnaireCommand\\:\\:getFormattedData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateCsvFromQuestionnaireCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$questionnaire of method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromQuestionnaireCommand\\:\\:generateSheet\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Questionnaire, object given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Command/CreateCsvFromQuestionnaireCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$questionnaire of static method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromQuestionnaireCommand\\:\\:getFileName\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Questionnaire, object given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Command/CreateCsvFromQuestionnaireCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromQuestionnaireCommand\\:\\:\\$customFields has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateCsvFromQuestionnaireCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromUserCommand\\:\\:createCsv\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateCsvFromUserCommand.php
@@ -11772,16 +11747,6 @@ parameters:
 
 		-
 			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateStepContributorsCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$step of static method Capco\\\\AppBundle\\\\Command\\\\CreateStepContributorsCommand\\:\\:getFilename\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep, object given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateStepContributorsCommand.php
-
-		-
-			message: "#^Parameter \\#2 \\$step of method Capco\\\\AppBundle\\\\Command\\\\CreateStepContributorsCommand\\:\\:generateSheet\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep, object given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateStepContributorsCommand.php
 
@@ -12174,6 +12139,56 @@ parameters:
 			message: "#^Strict comparison using \\=\\=\\= between null and array will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ExportDebateCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:formatHeaders\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:formatHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:getFormattedData\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:getFormattedHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:writeFiles\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:writeFiles\\(\\) has parameter \\$fullHeaders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:writeFiles\\(\\) has parameter \\$simplifiedHeaders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:writeHeaders\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^PHPDoc tag @return with type Exception\\|Symfony\\\\Component\\\\Filesystem\\\\Exception\\\\IOExceptionInterface is incompatible with native type void\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ExportQuestionnaireContributionsCommand\\:\\:\\$customFields type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\FeatureToggle\\\\DisableCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
@@ -13346,6 +13361,56 @@ parameters:
 			path: src/Capco/AppBundle/Command/SendSmsCreditConsumptionAlertCommand.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) should return array but returns array\\<string, mixed\\>\\|false\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\ReplyAnonymousNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/ReplyAnonymousNormalizer.php
+
+		-
+			message: "#^Instanceof between Capco\\\\UserBundle\\\\Entity\\\\User and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/UserNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\UserNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/UserNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:exportParticipants\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:initializeStyle\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:write\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:writeFiles\\(\\) has parameter \\$users with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\TranslateBasicParameters\\:\\:configure\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/TranslateBasicParameters.php
@@ -13392,11 +13457,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Utils\\\\ExportUtils\\:\\:parseCellValue\\(\\) has parameter \\$value with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Utils/ExportUtils.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\Utils\\\\ExportUtils\\:\\:\\$snapshot has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Utils/ExportUtils.php
 
@@ -15067,7 +15127,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/AbstractReply.php
 
 		-
@@ -15102,6 +15162,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/AbstractReply.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AbstractReply.php
 
@@ -15162,7 +15227,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
 
 		-
@@ -15207,6 +15272,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:\\$unfavourableStatuses with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
 
@@ -15267,7 +15337,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Answer\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Answer.php
 
 		-
@@ -15301,13 +15371,18 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Answer.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Answer\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Answer.php
+
+		-
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Answer.php
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
 		-
@@ -15377,6 +15452,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:\\$updatedAt \\(DateTime\\) does not accept DateTimeInterface\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/AppendixType.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
@@ -15622,7 +15702,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
 
 		-
@@ -15657,7 +15737,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Comment\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 2
+			count: 3
 			path: src/Capco/AppBundle/Entity/Comment.php
 
 		-
@@ -15852,6 +15932,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:\\$trashedStatus has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Comment.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Comment.php
 
@@ -16082,7 +16167,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
 
 		-
@@ -16227,7 +16312,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
 
 		-
@@ -16347,7 +16432,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArticle\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateArticle.php
 
 		-
@@ -16367,7 +16452,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
 
 		-
@@ -16407,7 +16492,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\District\\\\AbstractDistrict\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
 		-
@@ -16657,7 +16742,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Event\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Event.php
 
 		-
@@ -16977,7 +17062,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\EventReview\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
 		-
@@ -17232,7 +17317,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Group\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Group.php
 
 		-
@@ -17987,7 +18072,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 2
+			count: 3
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
 
 		-
@@ -18036,6 +18121,11 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/OfficialResponse.php
+
+		-
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
@@ -18047,7 +18137,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Opinion\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 3
+			count: 4
 			path: src/Capco/AppBundle/Entity/Opinion.php
 
 		-
@@ -18357,7 +18447,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
 		-
@@ -18421,6 +18511,11 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:\\$updatedAt \\(DateTime\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
@@ -18432,7 +18527,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/OpinionModal.php
 
 		-
@@ -18802,7 +18897,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
 
 		-
@@ -19317,7 +19412,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Page\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 3
+			count: 4
 			path: src/Capco/AppBundle/Entity/Page.php
 
 		-
@@ -19507,7 +19602,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Post\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 2
+			count: 3
 			path: src/Capco/AppBundle/Entity/Post.php
 
 		-
@@ -19632,6 +19727,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:\\$themes with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Post.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Post.php
 
@@ -20217,7 +20317,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Proposal\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
 		-
@@ -20752,7 +20852,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
 
 		-
@@ -20837,7 +20937,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalyst\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalAnalyst.php
 
 		-
@@ -20857,7 +20957,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalAssessment\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
 
 		-
@@ -20882,7 +20982,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
 
 		-
@@ -21027,7 +21127,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
 		-
@@ -21046,13 +21146,18 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\:\\:\\$updatedAt \\(DateTimeInterface\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/ProposalDecision.php
+
+		-
 			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalDecisionMaker\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalDecisionMaker.php
 
 		-
@@ -21072,7 +21177,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalEvaluation\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalEvaluation.php
 
 		-
@@ -21132,7 +21237,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalForm.php
 
 		-
@@ -21427,7 +21532,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\ProposalSupervisor\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/ProposalSupervisor.php
 
 		-
@@ -21537,7 +21642,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
 		-
@@ -21651,6 +21756,11 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Questionnaire.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:\\$updatedAt \\(DateTime\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
@@ -21662,7 +21772,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Questions\\\\AbstractQuestion\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Questions/AbstractQuestion.php
 
 		-
@@ -22167,7 +22277,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Responses\\\\AbstractResponse\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Responses/AbstractResponse.php
 
 		-
@@ -23137,7 +23247,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Status\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/AppBundle/Entity/Status.php
 
 		-
@@ -23211,6 +23321,11 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Status.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Status.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:\\$updatedAt \\(DateTime\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Status.php
@@ -23222,7 +23337,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 3
+			count: 4
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
 		-
@@ -23372,6 +23487,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:\\$updatedAt \\(DateTime\\) does not accept DateTimeInterface\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:\\$updatedAt \\(DateTime\\) does not accept null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
@@ -23787,7 +23907,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Theme\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 3
+			count: 4
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
@@ -24566,7 +24686,7 @@ parameters:
 			path: src/Capco/AppBundle/Enum/MajorityVoteTypeEnum.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\MajorityVoteTypeEnum\\:\\:getI18nKeys\\(\\) has no return type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Enum\\\\MajorityVoteTypeEnum\\:\\:getI18nKeys\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Enum/MajorityVoteTypeEnum.php
 
@@ -37002,11 +37122,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserRolesTextResolver\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserRolesTextResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserRolesTextResolver\\:\\:resolve\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserRolesTextResolver.php
 
@@ -54641,6 +54756,11 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentRepository.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentRepository\\:\\:getDebateAnonymousArguments\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentRepository\\:\\:hydrateFromIds\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentRepository.php
@@ -54746,6 +54866,11 @@ parameters:
 			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository\\:\\:hasNewArguments\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository\\:\\:hydrateFromIds\\(\\) has parameter \\$ids with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
@@ -54777,6 +54902,16 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateRepository\\:\\:findAllIds\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateRepository\\:\\:hasNewParticipants\\(\\) has parameter \\$oldestUpdateDate with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateRepository\\:\\:hasNewParticipants\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateRepository.php
 
@@ -54817,6 +54952,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository\\:\\:getUnpublishedByDebateAndUser\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository\\:\\:hasNewVotes\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
 
@@ -57506,6 +57646,11 @@ parameters:
 			path: src/Capco/AppBundle/Repository/QuestionnaireRepository.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireRepository\\:\\:hasRecentRepliesOrUpdatedUsers\\(\\) should return bool but returns bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/QuestionnaireRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\RankingStepRepository\\:\\:getOneBySlugAndProjectSlug\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\RankingStep\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/RankingStepRepository.php
@@ -57527,6 +57672,16 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:getEnabledByQuestionnaireAsArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:getQuestionnaireAnonymousRepliesWithDistinctEmails\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository\\:\\:hasNewAnonymousReplies\\(\\) should return bool but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
 
@@ -58611,6 +58766,16 @@ parameters:
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:translateHeaders\\(\\) has parameter \\$headers with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
+
+		-
 			message: "#^Parameter \\#1 \\$str of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
@@ -58632,11 +58797,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:\\$headers type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:\\$projectAdminExcludedHeaders type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
@@ -63192,7 +63352,7 @@ parameters:
 
 		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\Capco\\\\UserBundle\\\\Entity\\\\AbstractUser\\) and 'updatedAt' will always evaluate to true\\.$#"
-			count: 4
+			count: 5
 			path: src/Capco/UserBundle/Entity/AbstractUser.php
 
 		-
@@ -64491,6 +64651,11 @@ parameters:
 			path: src/Capco/UserBundle/Repository/UserRepository.php
 
 		-
+			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:getDebateParticipantsCombined\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
 			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:getFromInternalList\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserRepository.php
@@ -64512,6 +64677,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:getPublishedWith\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:getQuestionnaireParticipants\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserRepository.php
 
@@ -64552,6 +64722,16 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:getUsersInMailingList\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:hasNewParticipantsForADebate\\(\\) should return bool but returns bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:hasNewParticipantsForAQuestionnaire\\(\\) should return bool but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserRepository.php
 
@@ -66274,6 +66454,171 @@ parameters:
 			message: "#^Method App\\\\Kernel\\:\\:configureRoutes\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Kernel.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$actualOutputs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$expectedFiles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:executeCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:executeFirstCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:getCompletedFileNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportDebateParticipantsCommandTest\\:\\:setUpCommandTester\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportDebateParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$actualOutputs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$expectedFiles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:executeCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:executeFirstCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:getCompletedFileNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireContributionsCommandTest\\:\\:setUpCommandTester\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireContributionsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$actualOutputs with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:assertOutputs\\(\\) has parameter \\$expectedFiles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:executeCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:executeFirstCommand\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:getCompletedFileNames\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Command\\\\ExportQuestionnaireParticipantsCommandTest\\:\\:setUpCommandTester\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Command/ExportQuestionnaireParticipantsCommandTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Debate\\\\AnonymousArgumentNormalizerTest\\:\\:normalizationDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Normalizer/Debate/AnonymousArgumentNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Debate\\\\AnonymousArgumentNormalizerTest\\:\\:testNormalize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Debate/AnonymousArgumentNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Debate\\\\AnonymousArgumentNormalizerTest\\:\\:testSupportsNormalization\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Debate/AnonymousArgumentNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Debate\\\\DebateParticipantNormalizerKeysTest\\:\\:testExportDebateParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Debate/DebateParticipantNormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Debate\\\\DebateParticipantNormalizerKeysTest\\:\\:testFullExportQuestionnaireParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Debate/DebateParticipantNormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\NormalizerKeysTest\\:\\:testExportParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/NormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\NormalizerKeysTest\\:\\:testFullExportParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/NormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\QuestionnaireParticipantNormalizerKeysTest\\:\\:testFullExportQuestionnaireParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Questionnaire/QuestionnaireParticipantNormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\QuestionnaireParticipantNormalizerKeysTest\\:\\:testSimplifiedExportQuestionnaireParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Questionnaire/QuestionnaireParticipantNormalizerKeysTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:normalizationDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:testNormalize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:testSupportsNormalization\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\UserNormalizerTest\\:\\:normalizationDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Normalizer/UserNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\UserNormalizerTest\\:\\:testNormalize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/UserNormalizerTest.php
+
+		-
+			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\UserNormalizerTest\\:\\:testSupportsNormalization\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/Normalizer/UserNormalizerTest.php
 
 		-
 			message: "#^Trait Capco\\\\Tests\\\\phpspec\\\\MockHelper\\\\GraphQLMock is used zero times and is not analysed\\.$#"

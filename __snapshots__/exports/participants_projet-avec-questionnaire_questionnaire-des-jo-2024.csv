@@ -1,21 +1,21 @@
-﻿user_id,user_email,user_userName,user_TypeName,user_createdAt,user_updatedAt,user_lastLogin,user_rolesText,user_consentInternalCommunication,user_enabled,user_isEmailConfirmed,user_locked,user_phoneConfirmed,user_gender,user_websiteUrl,user_biography,user_zipCode,user_city,user_firstname,user_lastname,user_dateOfBirth,user_postalAddress,user_phone,user_profileUrl,userIdentificationCode
-VXNlcjp1c2VyMTUw,user150@cap-collectif.com,user150,Citoyen,"2017-01-01 02:30:00",,,Utilisateur,1,1,1,,,,,,,,firstname150,lastname150,,,,https://capco.dev/profile/user150,
-VXNlcjp1c2VyMjA=,user20@cap-collectif.com,user20,Citoyen,"2017-01-01 00:20:00",,,Utilisateur,1,1,1,,,,,,,,firstname20,lastname20,,,,https://capco.dev/profile/user20,
-VXNlcjp1c2VyMTk=,user19@cap-collectif.com,user19,Citoyen,"2017-01-01 00:19:00",,,Utilisateur,1,1,1,,,,,,,,firstname19,lastname19,,,,https://capco.dev/profile/user19,
-VXNlcjp1c2VyMTg=,user18@cap-collectif.com,user18,Citoyen,"2017-01-01 00:18:00",,,Utilisateur,1,1,1,,,,,,,,firstname18,lastname18,,,,https://capco.dev/profile/user18,
-VXNlcjp1c2VyMTc=,user17@cap-collectif.com,user17,Citoyen,"2017-01-01 00:17:00",,,Utilisateur,1,1,1,,,,,,,,firstname17,lastname17,,,,https://capco.dev/profile/user17,
-VXNlcjp1c2VyMTY=,user16@cap-collectif.com,user16,Citoyen,"2017-01-01 00:16:00",,,Utilisateur,1,1,1,,,,,,,,firstname16,lastname16,,,,https://capco.dev/profile/user16,
-VXNlcjp1c2VyMTU=,user15@cap-collectif.com,user15,Citoyen,"2017-01-01 00:15:00",,,Utilisateur,1,1,1,,,,,,,,firstname15,lastname15,,,,https://capco.dev/profile/user15,
-VXNlcjp1c2VyMTQ=,user14@cap-collectif.com,user14,Citoyen,"2017-01-01 00:14:00",,,Utilisateur,1,1,1,,,,,,,,firstname14,lastname14,,,,https://capco.dev/profile/user14,
-VXNlcjp1c2VyMTM=,user13@cap-collectif.com,user13,Citoyen,"2017-01-01 00:13:00",,,Utilisateur,1,1,1,,,,,,,,firstname13,lastname13,,,,https://capco.dev/profile/user13,
-VXNlcjp1c2VyMTI=,user12@cap-collectif.com,user12,Citoyen,"2017-01-01 00:12:00",,,Utilisateur,1,1,1,,,,,,,,firstname12,lastname12,,,,https://capco.dev/profile/user12,
-VXNlcjp1c2VyMTE=,user11@cap-collectif.com,user11,Citoyen,"2017-01-01 00:11:00",,,Utilisateur,1,1,1,,,,,,,,firstname11,lastname11,,,,https://capco.dev/profile/user11,
-VXNlcjp1c2VyMTA=,user10@cap-collectif.com,user10,Citoyen,"2017-01-01 00:10:00",,,Utilisateur,1,1,1,,,,,,,,firstname10,lastname10,,,,https://capco.dev/profile/user10,
-VXNlcjp1c2VyOQ==,user9@cap-collectif.com,user9,Citoyen,"2017-01-01 00:09:00",,,Utilisateur,1,1,1,,,,,,,,firstname9,lastname9,,,,https://capco.dev/profile/user9,
-VXNlcjp1c2VyOA==,user8@cap-collectif.com,user8,Citoyen,"2017-01-01 00:08:00",,,Utilisateur,1,1,1,,,,,,,,firstname8,lastname8,,,,https://capco.dev/profile/user8,
-VXNlcjp1c2VyNw==,user7@cap-collectif.com,user7,Citoyen,"2017-01-01 00:07:00",,,Utilisateur,1,1,1,,,,,,,,firstname7,lastname7,,,,https://capco.dev/profile/user7,
-VXNlcjp1c2VyNg==,user6@cap-collectif.com,user6,Citoyen,"2017-01-01 00:06:00",,,Utilisateur,1,1,1,,,,,,,,firstname6,lastname6,,,,https://capco.dev/profile/user6,
-VXNlcjp1c2VyNTE1,user_updating_email@test.com,user_updating_email,Citoyen,"2015-01-15 12:02:03","2016-01-01 13:37:42",,Utilisateur,,1,1,,,,,,,,user_updating_email,user_updating_email,,,,https://capco.dev/profile/userupdatingemail,
-VXNlcjp1c2VyV2VsY29tYXR0aWM=,msantostefano@cap-collectif.com,welcomattic,Citoyen,"2015-01-09 00:00:00",,,"Super Admin|Utilisateur",,1,1,,,,,,,,Mathieu,Santostefano,,,,https://capco.dev/profile/welcomattic,
-VXNlcjp1c2VyNQ==,user@test.com,user,Citoyen,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,1,1,1,,1,FEMALE,,,75012,Paris,Utilisateur,authentifier,"1996-03-01 00:00:00",,+33635492871,https://capco.dev/profile/user,DK2AZ554
-VXNlcjp1c2VyQWRtaW4=,admin@test.com,admin,Citoyen,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,,1,1,,1,,,,,,Administrateur,authentifier,,"26 Rue Claude Tillier, 75012 Paris, France",+33675492871,https://capco.dev/profile/admin,
+﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code,export_participant_user_created_at,export_participant_user_updated_at,export_participant_user_last_login,export_participant_user_roles_text,export_participant_user_enabled,export_participant_user_is_email_confirmed,export_participant_user_locked,export_participant_user_is_phone_confirmed,export_participant_gender,export_participant_website_url,export_participant_biography,export_participant_is_france_connect_associated
+user10,user10,user10@cap-collectif.com,Oui,,Citoyen,firstname10,lastname10,,,,,https://capco.dev/profile/user10,,"2017-01-01 00:10:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user11,user11,user11@cap-collectif.com,Oui,,Citoyen,firstname11,lastname11,,,,,https://capco.dev/profile/user11,,"2017-01-01 00:11:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user12,user12,user12@cap-collectif.com,Oui,,Citoyen,firstname12,lastname12,,,,,https://capco.dev/profile/user12,,"2017-01-01 00:12:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user13,user13,user13@cap-collectif.com,Oui,,Citoyen,firstname13,lastname13,,,,,https://capco.dev/profile/user13,,"2017-01-01 00:13:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user14,user14,user14@cap-collectif.com,Oui,,Citoyen,firstname14,lastname14,,,,,https://capco.dev/profile/user14,,"2017-01-01 00:14:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user15,user15,user15@cap-collectif.com,Oui,,Citoyen,firstname15,lastname15,,,,,https://capco.dev/profile/user15,,"2017-01-01 00:15:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user150,user150,user150@cap-collectif.com,Oui,,Citoyen,firstname150,lastname150,,,,,https://capco.dev/profile/user150,,"2017-01-01 02:30:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user16,user16,user16@cap-collectif.com,Oui,,Citoyen,firstname16,lastname16,,,,,https://capco.dev/profile/user16,,"2017-01-01 00:16:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user17,user17,user17@cap-collectif.com,Oui,,Citoyen,firstname17,lastname17,,,,,https://capco.dev/profile/user17,,"2017-01-01 00:17:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user18,user18,user18@cap-collectif.com,Oui,,Citoyen,firstname18,lastname18,,,,,https://capco.dev/profile/user18,,"2017-01-01 00:18:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user19,user19,user19@cap-collectif.com,Oui,,Citoyen,firstname19,lastname19,,,,,https://capco.dev/profile/user19,,"2017-01-01 00:19:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user20,user20,user20@cap-collectif.com,Oui,,Citoyen,firstname20,lastname20,,,,,https://capco.dev/profile/user20,,"2017-01-01 00:20:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996-03-01 00:00:00",,75012,Paris,https://capco.dev/profile/user,DK2AZ554,"2015-01-06 00:00:00","2016-01-01 00:00:00",,Utilisateur,Oui,Oui,Non,Oui,f,,,Non
+user515,user_updating_email,user_updating_email@test.com,Non,,Citoyen,user_updating_email,user_updating_email,,,,,https://capco.dev/profile/userupdatingemail,,"2015-01-15 12:02:03","2016-01-01 13:37:42",,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user6,user6,user6@cap-collectif.com,Oui,,Citoyen,firstname6,lastname6,,,,,https://capco.dev/profile/user6,,"2017-01-01 00:06:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user7,user7,user7@cap-collectif.com,Oui,,Citoyen,firstname7,lastname7,,,,,https://capco.dev/profile/user7,,"2017-01-01 00:07:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user8,user8,user8@cap-collectif.com,Oui,,Citoyen,firstname8,lastname8,,,,,https://capco.dev/profile/user8,,"2017-01-01 00:08:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+user9,user9,user9@cap-collectif.com,Oui,,Citoyen,firstname9,lastname9,,,,,https://capco.dev/profile/user9,,"2017-01-01 00:09:00",,,Utilisateur,Oui,Oui,Non,Non,,,,Non
+userAdmin,admin,admin@test.com,Non,+33675492871,Citoyen,Administrateur,authentifier,,"26 Rue Claude Tillier, 75012 Paris, France",,,https://capco.dev/profile/admin,,"2015-01-04 00:00:00",,,Administrateur|Utilisateur,Oui,Oui,Non,Oui,,,,Non
+userWelcomattic,welcomattic,msantostefano@cap-collectif.com,Non,,Citoyen,Mathieu,Santostefano,,,,,https://capco.dev/profile/welcomattic,,"2015-01-09 00:00:00",,,"Super Admin|Utilisateur",Oui,Oui,Non,Non,,,,Non

@@ -8,6 +8,9 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Enum\QuestionnaireAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -196,6 +199,43 @@ class QuestionnaireRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    /**
+     * @param mixed $questionnaireId
+     *
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasRecentRepliesOrUpdatedUsers($questionnaireId, \DateTime $date): bool
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('hasRecentRepliesOrUpdatedUsers', 'hasRecentRepliesOrUpdatedUsers', 'boolean');
+
+        $sql = '
+            SELECT
+                CASE
+                    WHEN COUNT(r.id) > 0 OR COUNT(ra.id) > 0 OR COUNT(u.id) > 0 THEN TRUE
+                    ELSE FALSE
+                END AS hasRecentRepliesOrUpdatedUsers
+            FROM
+                questionnaire q
+            LEFT JOIN
+                reply r ON q.id = r.questionnaire_id
+            LEFT JOIN
+                reply_anonymous ra ON q.id = ra.questionnaire_id
+            LEFT JOIN
+                fos_user u ON r.author_id = u.id
+            WHERE
+                q.id = :questionnaireId
+                AND (r.updated_at > :date OR ra.updated_at > :date OR u.updated_at > :date)
+        ';
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        $query->setParameter('questionnaireId', $questionnaireId);
+        $query->setParameter('date', $date->format('Y-m-d H:i:s'));
+
+        return $query->getSingleScalarResult();
     }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder

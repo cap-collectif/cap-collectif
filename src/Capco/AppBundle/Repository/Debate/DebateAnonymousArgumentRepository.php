@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository\Debate;
 
 use Capco\AppBundle\DTO\DebateAnonymousParticipationHashData;
+use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Doctrine\ORM\EntityRepository;
 
@@ -23,5 +24,17 @@ class DebateAnonymousArgumentRepository extends EntityRepository
             'token' => $hashData->getToken(),
             'type' => $hashData->getType(),
         ]);
+    }
+
+    public function getDebateAnonymousArguments(Debate $debate, int $anonymousArgumentsOffset, int $maxResults): array
+    {
+        $qb = $this->createQueryBuilder('daa');
+        $qb->where('daa.debate = :debate')
+            ->setParameter('debate', $debate)
+            ->setFirstResult($anonymousArgumentsOffset)
+            ->setMaxResults($maxResults)
+        ;
+
+        return $qb->getQuery()->getResult();
     }
 }

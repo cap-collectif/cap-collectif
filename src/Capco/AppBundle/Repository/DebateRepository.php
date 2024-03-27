@@ -23,4 +23,18 @@ class DebateRepository extends EntityRepository
             'id'
         );
     }
+
+    public function hasNewParticipants(Debate $debate, $oldestUpdateDate): int
+    {
+        return $this->createQueryBuilder('debate')
+            ->select('COUNT(participant.id)')
+            ->join('debate.participants', 'participant')
+            ->where('debate.id = :debateId')
+            ->andWhere('participant.updatedAt > :oldestUpdateDate')
+            ->setParameter('debateId', $debate->getId())
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

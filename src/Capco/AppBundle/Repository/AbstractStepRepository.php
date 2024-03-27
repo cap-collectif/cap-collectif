@@ -4,6 +4,8 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -98,6 +100,21 @@ class AbstractStepRepository extends EntityRepository
         $qb->setMaxResults($limit)->setFirstResult($offset);
 
         return new Paginator($qb);
+    }
+
+    /**
+     * @return array<AbstractStep>
+     */
+    public function findAllExceptDebateAndQuestionnaire(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s NOT INSTANCE OF :debateStep')
+            ->andWhere('s NOT INSTANCE OF :questionnaireStep')
+            ->setParameter('debateStep', $this->_em->getClassMetadata(DebateStep::class))
+            ->setParameter('questionnaireStep', $this->_em->getClassMetadata(QuestionnaireStep::class))
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     protected function getIsEnabledQueryBuilder()

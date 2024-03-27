@@ -42,3 +42,8 @@ def save_db(ctx):
 def save_es_snapshot(ctx):
     environments.ci()
     qa.save_es_snapshot()
+
+@task
+def phpunit(ctx):
+    environments.ci()
+    qa.phpunit()

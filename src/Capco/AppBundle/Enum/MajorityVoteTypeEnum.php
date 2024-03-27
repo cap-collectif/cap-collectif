@@ -52,7 +52,7 @@ final class MajorityVoteTypeEnum implements EnumType
         return '';
     }
 
-    public static function getI18nKeys()
+    public static function getI18nKeys(): array
     {
         return [
             'very-well',

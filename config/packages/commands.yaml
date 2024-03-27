@@ -5,6 +5,7 @@ services:
         public: false
         bind:
             $projectRootDir: '%kernel.project_dir%'
+            $exportDirectory: '%kernel.project_dir%/public/export/'
             Predis\ClientInterface: '@snc_redis.default'
             $logger: '@logger'
             $env: '%kernel.environment%'

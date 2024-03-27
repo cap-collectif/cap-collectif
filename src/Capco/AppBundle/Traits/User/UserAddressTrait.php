@@ -12,12 +12,12 @@ trait UserAddressTrait
      */
     protected ?string $postalAddress = null;
 
-    protected ?string $address;
-    protected ?string $address2;
+    protected ?string $address = null;
+    protected ?string $address2 = null;
 
-    protected ?string $zipCode;
-    protected ?string $neighborhood;
-    protected ?string $city;
+    protected ?string $zipCode = null;
+    protected ?string $neighborhood = null;
+    protected ?string $city = null;
 
     public function getPostalAddress(): ?GoogleMapsAddress
     {

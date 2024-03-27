@@ -32,6 +32,8 @@ def phpspec(desc='false'):
             'php -d memory_limit=-1 bin/phpspec run --no-code-generation',
             'application', Config.www_app)
 
+def phpunit():
+     command('php -d memory_limit=-1 bin/phpunit --configuration=phpunit.xml --color --testdox', 'application', Config.www_app)
 
 def compile_graphql():
     "Compile GraphQL PHP code"
@@ -65,7 +67,7 @@ def snapshots(tags='false'):
     # You can run these commands individually.
     export_commands = [
         'capco:export:users --updateSnapshot --delimiter "," --env test',
-        'capco:export:questionnaire --updateSnapshot --delimiter "," --env test',
+        'capco:export:questionnaire:contributions --updateSnapshot --delimiter "," --env test',
         'capco:export:consultation --updateSnapshot --delimiter "," --env test',
         'capco:export:projects-contributors --updateSnapshot --delimiter "," --env test',
         'capco:export:step-contributors --updateSnapshot --delimiter "," --env test',

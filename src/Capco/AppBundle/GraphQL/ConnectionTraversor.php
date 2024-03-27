@@ -30,6 +30,16 @@ class ConnectionTraversor
                 (Arr::path($copied, "data.node.{$path}") ?? Arr::path($copied, "data.{$path}"));
             $edges = Arr::path($connection, 'edges');
             $pageInfo = Arr::path($connection, 'pageInfo');
+
+            if (!$pageInfo || !isset($pageInfo['endCursor'])) {
+                $this->logger->notice('The GraphQL request resulted in `null` pageInfo or missing endCursor.', [
+                    'path' => $path,
+                    'errors' => $data['errors'] ?? [],
+                ]);
+
+                return;
+            }
+
             $endCursor = $pageInfo['endCursor'];
 
             // In the relay spec, "edges" field is nullable
@@ -46,7 +56,7 @@ class ConnectionTraversor
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge, $pageInfo);
-                    if ($edge['cursor'] === $endCursor && true === $pageInfo['hasNextPage']) {
+                    if (isset($edge['cursor']) && $edge['cursor'] === $endCursor && isset($pageInfo['hasNextPage']) && true === $pageInfo['hasNextPage']) {
                         if (!$renewalQuery) {
                             return;
                         }
@@ -60,6 +70,6 @@ class ConnectionTraversor
                     }
                 }
             }
-        } while (true === $pageInfo['hasNextPage']);
+        } while (isset($pageInfo['hasNextPage']) && true === $pageInfo['hasNextPage']);
     }
 }

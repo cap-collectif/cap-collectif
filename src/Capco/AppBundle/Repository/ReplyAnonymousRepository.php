@@ -38,4 +38,33 @@ class ReplyAnonymousRepository extends EntityRepository
             ->getQuery()
             ->getSingleScalarResult() ?? 0;
     }
+
+    public function getQuestionnaireAnonymousRepliesWithDistinctEmails(Questionnaire $questionnaire, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('replyAnonymous')
+            ->andWhere('replyAnonymous.participantEmail IS NOT NULL')
+            ->andWhere('replyAnonymous.questionnaire = :questionnaire')
+            ->andWhere('replyAnonymous.published = 1')
+            ->setParameter('questionnaire', $questionnaire)
+            ->groupBy('replyAnonymous.participantEmail')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function hasNewAnonymousReplies(Questionnaire $questionnaire, \DateTime $oldestUpdateDate): bool
+    {
+        $qb = $this->createQueryBuilder('replyAnonymous')
+            ->select('count(replyAnonymous.id)')
+            ->andWhere('replyAnonymous.questionnaire = :questionnaire')
+            ->andWhere('replyAnonymous.published = 1')
+            ->andWhere('replyAnonymous.updatedAt >= :oldestUpdateDate')
+            ->setParameter('questionnaire', $questionnaire)
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate->format('Y-m-d H:i:s'))
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

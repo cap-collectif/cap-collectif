@@ -114,6 +114,9 @@ nohup.out
 /.env.local.php
 /.env.*.local
 
+# phpunit
+/.phpunit.cache
+
 .now
 
 .kube

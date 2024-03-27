@@ -85,7 +85,7 @@ Pour les prochaines commandes d'export merci de ne pas utiliser graphQL, mais bi
       capco:export:legacyUsers  # la version legacy passe par graphql
       capco:export:projects-contributors          
       capco:export:proposalStep                   
-      capco:export:questionnaire                  
+      capco:export:questionnaire:contributions
       capco:export:step-contributors              
 
 

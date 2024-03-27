@@ -7,6 +7,14 @@ Capco\AppBundle\Entity\ReplyAnonymous:
         updatedAt: <(new \DateTime('2016-03-01'))>
         token: 'abc'
         participantEmail: 'abc@cap-collectif.com'
+    replyAnonymous1bis:
+        id: 'replyAnonymous1bis'
+        questionnaire: '@questionnaireAnonymous'
+        publishedAt: <(new \DateTime('2016-03-01'))>
+        createdAt: <(new \DateTime('2016-03-01'))>
+        updatedAt: <(new \DateTime('2016-03-01'))>
+        token: 'abc'
+        participantEmail: 'abc@cap-collectif.com'
     replyAnonymous2:
         id: 'replyAnonymous2'
         questionnaire: '@questionnaireAnonymous'

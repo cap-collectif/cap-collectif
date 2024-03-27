@@ -11,6 +11,9 @@ use Box\Spout\Reader\Common\Creator\ReaderFactory;
 use Box\Spout\Reader\CSV\Reader;
 use Box\Spout\Reader\ReaderInterface;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -85,8 +88,13 @@ class ExportContext implements KernelAwareContext
             ->get(AbstractStepRepository::class)
             ->findAll()
         ;
+
+        /** @var AbstractStep $step */
         foreach ($steps as $step) {
-            if ($step->isParticipative()) {
+            if (
+                $step->isParticipative()
+                && !($step instanceof DebateStep || $step instanceof QuestionnaireStep)
+            ) {
                 $fileName = CreateStepContributorsCommand::getFilename($step);
                 echo 'Checking ' . $fileName . ' snapshot…' . \PHP_EOL;
                 $this->exportedFileTypeFileWithNameShouldLooksLikeItsSnapshot('csv', $fileName);

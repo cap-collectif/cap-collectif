@@ -9,6 +9,7 @@ use Capco\AppBundle\Enum\VoteOrderField;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
@@ -116,6 +117,23 @@ class DebateVoteRepository extends EntityRepository
         $qb = $this->getPublishedByAuthorQB($author)->select('COUNT(v)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasNewVotes(Debate $debate, \DateTime $oldestUpdateDate): int
+    {
+        return $this->createQueryBuilder('dv')
+            ->select('COUNT(dv.id)')
+            ->where('dv.debate = :debate')
+            ->andWhere('dv.publishedAt > :oldestUpdateDate')
+            ->setParameter('debate', $debate)
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 
     private function getUnpublishedByDebateAndUserQB(Debate $debate, User $user): QueryBuilder

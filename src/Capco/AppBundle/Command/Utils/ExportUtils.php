@@ -6,7 +6,7 @@ final class ExportUtils
 {
     public const SNAPSHOT_DATETIME_PLACEHOLDER = '@datetime@';
 
-    private $snapshot = false;
+    private bool $snapshot = false;
 
     public function enableSnapshotMode(): self
     {

@@ -27,7 +27,7 @@ class ReplyAnonymous extends AbstractReply
      * @Assert\Email()
      * @ORM\Column(name="participant_email", type="string", nullable=true)
      */
-    private ?string $participantEmail;
+    private ?string $participantEmail = null;
 
     /**
      * @ORM\Column(name="email_confirmed", type="boolean", nullable=false, options={"default": false})

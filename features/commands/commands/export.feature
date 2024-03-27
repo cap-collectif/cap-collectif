@@ -100,33 +100,6 @@ Scenario: Admin wants to export legacy users
   And exported "csv" file with name "legacyUsers.csv" should match its snapshot
   Then the command exit code should be 0
 
-Scenario: Admin wants to export questionnaires
-  Given I run a command "capco:export:questionnaire" with parameters:
-    | --delimiter |,|
-  And exported "csv" file with name "consultation-pour-conquerir-le-monde.csv" should match its snapshot
-  And exported "csv" file with name "consultation-pour-la-capcobeer.csv" should match its snapshot
-  And exported "csv" file with name "consultation-pour-la-flnj.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-questionnaire_essais-de-sauts-conditionnels.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-questionnaire_etape-de-questionnaire-fermee.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-questionnaire_questionnaire-des-jo-2024.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-questionnaire_questionnaire.csv" should match its snapshot
-  And exported "csv" file with name "projet-pour-le-group2_questionnaire-step-pour-group2.csv" should match its snapshot
-  And exported "csv" file with name "questionnaire-non-rattache.csv" should match its snapshot
-  And exported "csv" file with name "questionnaire-pour-budget-participatif-de-la-force.csv" should match its snapshot
-  And exported "csv" file with name "questionnaire-pour-budget-participatif-disponible.csv" should match its snapshot
-  And exported "csv" file with name "questionnaire-pour-budget-participatif.csv" should match its snapshot
-  And exported "csv" file with name "qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins.csv" should match its snapshot
-  Then the command exit code should be 0
-
-Scenario: Project admin wants to export questionnaires
-  Given I run a command "capco:export:questionnaire" with parameters:
-    | --delimiter |,|
-  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-project-admin.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-administrateur-de-projet-2-project-admin.csv" should match its snapshot
-  And exported "csv" file with name "projet-avec-administrateur-de-projet_questionnaire-step-anonymous-project-owner.csv" should match its snapshot
-  Then the command exit code should be 0
-
 Scenario: Admin wants to export event participants
   Given I run a command "capco:export:events:participants" with parameters:
     | --delimiter |,|
@@ -183,9 +156,9 @@ Scenario: Admin wants to export debate arguments and votes
   And exported "csv" file with name "debate-debateProjectAdmin-votes.csv" should match its snapshot
   And exported "csv" file with name "debate-debateProjectAdmin-votes-project-admin.csv" should match its snapshot
 
-  Scenario: Admin or Mediator wants to export projects mediators proposals votes
-    Given I run a command "capco:export:projects-mediators-proposals-votes" with parameters:
-      | projectId |project6|
-      | --delimiter |,|
-    Then the command exit code should be 0
-    And exported "csv" file with name "mediators_proposals_votes_budget-participatif-rennes.csv" should match its snapshot
+Scenario: Admin or Mediator wants to export projects mediators proposals votes
+  Given I run a command "capco:export:projects-mediators-proposals-votes" with parameters:
+    | projectId |project6|
+    | --delimiter |,|
+  Then the command exit code should be 0
+  And exported "csv" file with name "mediators_proposals_votes_budget-participatif-rennes.csv" should match its snapshot

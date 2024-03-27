@@ -25,6 +25,39 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
 {
+    public const PROJECT_ADMIN_EXCLUDED_HEADER_KEYS = ['export_contribution_author_email', 'export_contribution_author_phone'];
+    public const EXPORT_CONTRIBUTION_ID_KEY = 'export_contribution_id';
+    public const EXPORT_CONTRIBUTION_PUBLISHED_KEY = 'export_contribution_published';
+    public const EXPORT_CONTRIBUTION_PUBLISHED_AT_KEY = 'export_contribution_published_at';
+    public const EXPORT_CONTRIBUTION_AUTHOR_KEY = 'export_contribution_author';
+    public const EXPORT_CONTRIBUTION_AUTHOR_ID_KEY = 'export_contribution_author_id';
+    public const EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY = 'export_contribution_author_email';
+    public const EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY = 'export_contribution_author_phone';
+    public const EXPORT_CONTRIBUTION_CREATED_AT_KEY = 'export_contribution_created_at';
+    public const EXPORT_CONTRIBUTION_UPDATED_AT_KEY = 'export_contribution_updated_at';
+    public const EXPORT_CONTRIBUTION_ANONYMOUS_KEY = 'export_contribution_anonymous';
+    public const EXPORT_CONTRIBUTION_DRAFT_KEY = 'export_contribution_draft';
+    public const EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY = 'export_contribution_undraft_at';
+    public const EXPORT_CONTRIBUTION_ACCOUNT_KEY = 'export_contribution_account';
+    public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY = 'export_contribution_no_account_email';
+    public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY = 'export_contribution_no_account_email_confirmed';
+    public const EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY = 'export_contribution_internal_comm';
+    private const FULL_EXPORT_HEADER_KEYS = [
+        self::EXPORT_CONTRIBUTION_PUBLISHED_KEY,
+        self::EXPORT_CONTRIBUTION_AUTHOR_KEY,
+        self::EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY,
+        self::EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY,
+        self::EXPORT_CONTRIBUTION_CREATED_AT_KEY,
+        self::EXPORT_CONTRIBUTION_UPDATED_AT_KEY,
+        self::EXPORT_CONTRIBUTION_ANONYMOUS_KEY,
+        self::EXPORT_CONTRIBUTION_DRAFT_KEY,
+        self::EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY,
+        self::EXPORT_CONTRIBUTION_ACCOUNT_KEY,
+        self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY,
+        self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY,
+        self::EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY,
+    ];
+
     protected EntityManagerInterface $em;
     protected TranslatorInterface $translator;
     protected UrlArrayResolver $urlArrayResolver;
@@ -33,7 +66,6 @@ class ProjectDownloadResolver
     protected array $headers;
     protected array $data;
     protected array $customFields;
-    private array $projectAdminExcludedHeaders;
     private QuestionnaireExportResultsUrlResolver $exportUrlResolver;
 
     public function __construct(
@@ -53,35 +85,41 @@ class ProjectDownloadResolver
         $this->customFields = [];
         $this->data = [];
         $this->exportUrlResolver = $exportUrlResolver;
-        $this->projectAdminExcludedHeaders = ['author_email', 'phone'];
     }
 
     public function getQuestionnaireHeaders(
         Questionnaire $questionnaire,
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        bool $isFullExport = false
     ): array {
         $headers = [
-            'id',
-            'published',
-            'published_at',
-            'author',
-            'author_id',
-            'author_email',
-            'phone',
-            'created_at',
-            'updated_at',
-            'anonymous',
-            'draft',
-            'undraft_at',
-            'account',
-            'noAccount_email',
-            'noAccount_email_isConfirmed',
-            'internalComm',
+            self::EXPORT_CONTRIBUTION_ID_KEY,
+            self::EXPORT_CONTRIBUTION_PUBLISHED_KEY,
+            self::EXPORT_CONTRIBUTION_PUBLISHED_AT_KEY,
+            self::EXPORT_CONTRIBUTION_AUTHOR_KEY,
+            self::EXPORT_CONTRIBUTION_AUTHOR_ID_KEY,
+            self::EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY,
+            self::EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY,
+            self::EXPORT_CONTRIBUTION_CREATED_AT_KEY,
+            self::EXPORT_CONTRIBUTION_UPDATED_AT_KEY,
+            self::EXPORT_CONTRIBUTION_ANONYMOUS_KEY,
+            self::EXPORT_CONTRIBUTION_DRAFT_KEY,
+            self::EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY,
+            self::EXPORT_CONTRIBUTION_ACCOUNT_KEY,
+            self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY,
+            self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY,
+            self::EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY,
         ];
 
         if ($projectAdmin) {
-            $headers = array_diff($headers, $this->projectAdminExcludedHeaders);
+            $headers = array_diff($headers, self::PROJECT_ADMIN_EXCLUDED_HEADER_KEYS);
         }
+
+        if (!$isFullExport) {
+            $headers = array_diff($headers, self::FULL_EXPORT_HEADER_KEYS);
+        }
+
+        $headers = $this->translateHeaders($headers);
 
         /**
          * @var AbstractQuestion $question
@@ -116,10 +154,8 @@ class ProjectDownloadResolver
         $this->data[] = $item;
     }
 
-    public function getQuestionnaireData(
-        Questionnaire $questionnaire,
-        bool $projectAdmin = false
-    ): array {
+    public function getQuestionnaireData(Questionnaire $questionnaire, bool $projectAdmin = false): array
+    {
         $this->data = [];
         $userReplies = $this->em
             ->getRepository(Reply::class)
@@ -166,6 +202,17 @@ class ProjectDownloadResolver
         return html_entity_decode($text, \ENT_QUOTES);
     }
 
+    private function translateHeaders(array $headers): array
+    {
+        $translatedHeaders = [];
+
+        foreach ($headers as $header) {
+            $translatedHeaders[] = $this->translator->trans($header);
+        }
+
+        return $translatedHeaders;
+    }
+
     // *************************** Generate items *******************************************
 
     private function getReplyItem(array $reply, array $responses, bool $projectAdmin = false): array
@@ -175,26 +222,26 @@ class ProjectDownloadResolver
         $participantEmailIsConfirmed = $isAnonymousReply ? ($reply['emailConfirmed'] ? 'Yes' : 'No') : null;
 
         $item = [
-            'id' => $reply['id'],
-            'published' => $this->booleanToString($reply['published']),
-            'published_at' => $this->dateToString($reply['publishedAt']),
-            'author' => $isAnonymousReply ? '' : $reply['author']['username'],
-            'author_id' => $isAnonymousReply ? '' : $reply['author']['id'],
-            'author_email' => $isAnonymousReply ? '' : $reply['author']['email'],
-            'phone' => (!$isAnonymousReply && $reply['author']['phone']) ? (string) $reply['author']['phone'] : '',
-            'created_at' => $this->dateToString($reply['createdAt']),
-            'updated_at' => $this->dateToString($reply['updatedAt']),
-            'anonymous' => $isAnonymousReply ? '' : $this->booleanToString($reply['private']),
-            'draft' => $isAnonymousReply ? '' : $this->booleanToString($reply['draft']),
-            'undraft_at' => $isAnonymousReply ? '' : $this->dateToString($reply['undraftAt']),
-            'account' => $this->booleanToString(!$isAnonymousReply),
-            'noAccount_email' => $participantEmail,
-            'noAccount_email_isConfirmed' => $participantEmailIsConfirmed,
-            'internalComm' => $this->booleanToString(!empty($participantEmail)),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_ID_KEY) => $reply['id'],
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_PUBLISHED_KEY) => $this->booleanToString($reply['published']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_PUBLISHED_AT_KEY) => $this->dateToString($reply['publishedAt']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_AUTHOR_KEY) => $isAnonymousReply ? '' : $reply['author']['username'],
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_AUTHOR_ID_KEY) => $isAnonymousReply ? '' : $reply['author']['id'],
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY) => $isAnonymousReply ? '' : $reply['author']['email'],
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY) => (!$isAnonymousReply && $reply['author']['phone']) ? (string) $reply['author']['phone'] : '',
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_CREATED_AT_KEY) => $this->dateToString($reply['createdAt']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_UPDATED_AT_KEY) => $this->dateToString($reply['updatedAt']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_ANONYMOUS_KEY) => $isAnonymousReply ? '' : $this->booleanToString($reply['private']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_DRAFT_KEY) => $isAnonymousReply ? '' : $this->booleanToString($reply['draft']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY) => $isAnonymousReply ? '' : $this->dateToString($reply['undraftAt']),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_ACCOUNT_KEY) => $this->booleanToString(!$isAnonymousReply),
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY) => $participantEmail,
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY) => $participantEmailIsConfirmed,
+            $this->translator->trans(self::EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY) => $this->booleanToString(!empty($participantEmail)),
         ];
 
         if ($projectAdmin) {
-            foreach ($this->projectAdminExcludedHeaders as $excludedHeader) {
+            foreach ($this->translateHeaders(self::PROJECT_ADMIN_EXCLUDED_HEADER_KEYS) as $excludedHeader) {
                 unset($item[$excludedHeader]);
             }
         }

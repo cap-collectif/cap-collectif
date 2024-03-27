@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
-use Capco\AppBundle\Command\CreateCsvFromQuestionnaireCommand;
+use Capco\AppBundle\Command\ExportQuestionnaireContributionsCommand;
 use Capco\AppBundle\Entity\Questionnaire;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -32,7 +32,7 @@ class QuestionnaireExportResultsUrlResolver implements QueryInterface
 
     public function getFileName(Questionnaire $questionnaire, bool $projectAdmin = false): string
     {
-        return CreateCsvFromQuestionnaireCommand::getFileName($questionnaire, $projectAdmin);
+        return ExportQuestionnaireContributionsCommand::getFileName($questionnaire, $projectAdmin);
     }
 
     public function getFilePath(Questionnaire $questionnaire, bool $projectAdmin = false): string

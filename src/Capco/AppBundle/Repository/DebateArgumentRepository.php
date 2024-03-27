@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
@@ -135,6 +136,25 @@ class DebateArgumentRepository extends EntityRepository
             ->orderBy('da.trashedAt', 'DESC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * @param mixed $oldestUpdateDate
+     *
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasNewArguments(Debate $debate, $oldestUpdateDate): int
+    {
+        return $this->createQueryBuilder('argument')
+            ->select('COUNT(argument.id)')
+            ->where('argument.debate = :debate')
+            ->andWhere('argument.updatedAt > :oldestUpdateDate')
+            ->setParameter('debate', $debate)
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 

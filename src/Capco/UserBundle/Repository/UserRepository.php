@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\PublicApiToken;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -19,7 +20,10 @@ use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -1647,6 +1651,99 @@ class UserRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getQuestionnaireParticipants(Questionnaire $questionnaire, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->innerJoin('u.replies', 'r')
+            ->innerJoin('r.questionnaire', 'q')
+            ->leftJoin('u.userType', 'ut')
+            ->leftJoin('ut.translations', 'utt', 'WITH', 'utt.locale = :locale')
+            ->where('q.id = :questionnaireId')
+            ->andWhere('u.confirmationToken IS NULL')
+            ->groupBy('u.id')
+            ->orderBy('u.id', 'ASC')
+            ->setParameter('questionnaireId', $questionnaire->getId())
+            ->setParameter('locale', 'fr-FR')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getDebateParticipantsCombined(Debate $debate, int $offset, int $limit): array
+    {
+        $userIdsFromArguments = $this->createQueryBuilder('u')
+            ->select('DISTINCT u.id')
+            ->innerJoin('u.debateArguments', 'da')
+            ->where('da.debate = :debate')
+            ->andWhere('u.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $userIdsFromVotes = $this->createQueryBuilder('dv')
+            ->select('DISTINCT voter.id')
+            ->from('Capco\AppBundle\Entity\Debate\DebateVote', 'vote')
+            ->join('vote.debate', 'debate')
+            ->join('vote.user', 'voter')
+            ->where('debate = :debate')
+            ->andWhere('voter.confirmationToken IS NULL')
+            ->setParameter('debate', $debate)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        $combinedUserIds = array_unique(array_column(array_merge($userIdsFromArguments, $userIdsFromVotes), 'id'));
+
+        $qbCombined = $this->createQueryBuilder('u');
+        $qbCombined
+            ->where('u.id IN (:combinedUserIds)')
+            ->setParameter('combinedUserIds', $combinedUserIds, Connection::PARAM_STR_ARRAY)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qbCombined->getQuery()->getResult();
+    }
+
+    public function hasNewParticipantsForAQuestionnaire(Questionnaire $questionnaire, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->innerJoin('u.replies', 'r')
+            ->innerJoin('r.questionnaire', 'q')
+            ->where('q.id = :questionnaireId')
+            ->andWhere('u.updatedAt > :userLastUpdateDate')
+            ->orWhere('r.updatedAt > :replyLastUpdateDate')
+            ->setParameter('questionnaireId', $questionnaire->getId())
+            ->setParameter('userLastUpdateDate', $mostRecentFileModificationDate)
+            ->setParameter('replyLastUpdateDate', $mostRecentFileModificationDate)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasNewParticipantsForADebate(Debate $debate, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->innerJoin('u.debateArguments', 'a')
+            ->where('a.debate = :debate')
+            ->andWhere('u.updatedAt > :lastCheck')
+            ->setParameter('debate', $debate)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

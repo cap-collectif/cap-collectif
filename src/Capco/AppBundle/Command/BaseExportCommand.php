@@ -10,7 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseExportCommand extends Command
 {
-    protected $snapshot;
+    public const DEFAULT_CSV_DELIMITER = ';';
+    protected bool $snapshot;
     protected ExportUtils $exportUtils;
 
     public function __construct(ExportUtils $exportUtils)
@@ -22,7 +23,8 @@ abstract class BaseExportCommand extends Command
     public static function getShortenedFilename(
         string $filename,
         string $extension = '.csv',
-        bool $projectAdmin = false
+        bool $projectAdmin = false,
+        ?bool $isSimplifiedExport = false
     ): string {
         //If filename is too long (> 255) it will cause an error since it includes path, we check for 230 characters
         if (\strlen($filename) >= 230) {
@@ -31,6 +33,10 @@ abstract class BaseExportCommand extends Command
 
         if ($projectAdmin) {
             return "{$filename}-project-admin{$extension}";
+        }
+
+        if ($isSimplifiedExport) {
+            return "{$filename}_simplified{$extension}";
         }
 
         return $filename . $extension;
@@ -43,13 +49,17 @@ abstract class BaseExportCommand extends Command
             's',
             InputOption::VALUE_NONE,
             'Use the export for a snapshot, by replacing dynamic data with placeholders.'
-        );
-        $this->addOption(
+        )->addOption(
             'delimiter',
             'd',
             InputOption::VALUE_OPTIONAL,
-            'Delimiter used in csv',
-            ';'
+            'Define the delimiter used in the CSV file.',
+            self::DEFAULT_CSV_DELIMITER
+        )->addOption(
+            'force',
+            false,
+            InputOption::VALUE_NONE,
+            'Set this option to force export even if feature toggle "export" is disabled.'
         );
     }
 
