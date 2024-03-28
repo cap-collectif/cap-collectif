@@ -58,6 +58,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         $consultationsInput = $input->offsetGet('consultations');
         $stepId = $input->offsetGet('stepId');
         $step = $this->globalIdResolver->resolve($stepId, $viewer);
+        $owner = $viewer->getOrganization() ?? $viewer;
 
         $consultations = new ArrayCollection();
         foreach ($consultationsInput as $consultationInput) {
@@ -68,6 +69,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 
             $consultation = $this->getConsultation($viewer, $id, $step);
             $consultation->setTitle($consultationInput['title']);
+            $consultation->setOwner($owner);
             $this->em->flush();
 
             $this->removeSections($consultationInput['sections'], $consultation);

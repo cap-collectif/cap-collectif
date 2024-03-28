@@ -66,6 +66,7 @@ class ConsultationController extends CRUDController
         $form->add('step', EntityType::class, [
             'class' => ConsultationStep::class,
             'choices' => $consultationSteps,
+            'required' => false,
         ]);
         // end changed parts
 
