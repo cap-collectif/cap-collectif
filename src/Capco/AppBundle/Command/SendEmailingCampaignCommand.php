@@ -117,8 +117,9 @@ class SendEmailingCampaignCommand extends Command
 
     private function logFail(OutputInterface $output, \Exception $exception): void
     {
-        $output->writeln('<error>' . $exception->getMessage() . '</error>');
-        $this->omarDjinn->sendFail();
+        $errorMessage = $exception->getMessage();
+        $output->writeln('<error>' . $errorMessage . '</error>');
+        $this->omarDjinn->sendFail($errorMessage);
     }
 
     private function persistAndFlush(EmailingCampaign $emailingCampaign): void

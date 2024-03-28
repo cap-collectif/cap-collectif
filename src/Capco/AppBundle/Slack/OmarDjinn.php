@@ -33,9 +33,10 @@ class OmarDjinn extends AbstractSlackMessager
         );
     }
 
-    public function sendFail(): void
+    public function sendFail(string $errorMessage): void
     {
         $this->send("Aie, ça s'est mal passé, vous devriez jeter un coup d'oeil");
+        $this->send($errorMessage);
     }
 
     protected function getHook(): string
