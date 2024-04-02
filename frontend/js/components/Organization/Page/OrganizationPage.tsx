@@ -1,22 +1,16 @@
 import * as React from 'react'
 import { useLazyLoadQuery, graphql } from 'react-relay'
 import type { OrganizationPageQuery } from '~relay/OrganizationPageQuery.graphql'
-import AppBox from '~/components/Ui/Primitives/AppBox'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Heading from '~/components/Ui/Primitives/Heading'
-import Text from '~/components/Ui/Primitives/Text'
 import OrganizationPageProjectList from './OrganizationPageProjectList'
 import OrganizationPageEventList from './OrganizationPageEventList'
 import OrganizationPagePostList from './OrganizationPagePostList'
-import ProjectHeader from '~/components/Ui/Project/ProjectHeaderLegacy'
-import Button from '~/components/DesignSystem/Button/Button'
-import Menu from '~ds/Menu/Menu'
 import Image from '~ui/Primitives/Image'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
 import Loader from '~ui/FeedbacksIndicators/Loader'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import { Flex, Box, Button, CapUIIcon, Menu, Heading, Text, Icon, CapUIIconSize } from '@cap-collectif/ui'
+
 const QUERY = graphql`
   query OrganizationPageQuery(
     $organizationId: ID!
@@ -94,9 +88,17 @@ const QUERY = graphql`
     }
   }
 `
+
 export type Props = {
   readonly organizationId: string
 }
+
+const SocialIconLink = ({ icon, href }: { icon: CapUIIcon; href: string }) => (
+  <a href={href}>
+    <Icon name={icon} size={CapUIIconSize.Md} color="neutral-gray.500" />
+  </a>
+)
+
 export const OrganizationPage = ({ organizationId }: Props) => {
   const query = useLazyLoadQuery<OrganizationPageQuery>(QUERY, {
     organizationId,
@@ -153,19 +155,19 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                 marginTop={[9, 6]}
               >
                 {socialNetworks.facebookUrl ? (
-                  <ProjectHeader.Social href={socialNetworks.facebookUrl} name="FACEBOOK" />
+                  <SocialIconLink href={socialNetworks.facebookUrl} icon={CapUIIcon.Facebook} />
                 ) : null}
                 {socialNetworks.twitterUrl ? (
-                  <ProjectHeader.Social href={socialNetworks.twitterUrl} name="TWITTER" />
+                  <SocialIconLink href={socialNetworks.twitterUrl} icon={CapUIIcon.Twitter} />
                 ) : null}
                 {socialNetworks.webPageUrl ? (
-                  <ProjectHeader.Social href={socialNetworks.webPageUrl} name="LINK" />
+                  <SocialIconLink href={socialNetworks.webPageUrl} icon={CapUIIcon.Link} />
                 ) : null}
               </Flex>
             ) : null}
           </Flex>
           {cover || logo ? (
-            <AppBox
+            <Box
               borderRadius="8px"
               position="relative"
               overflow="hidden"
@@ -174,6 +176,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
               }}
             >
               <Image
+                useDs
                 src={cover || logo}
                 alt="banner"
                 width={['100%', '405px']}
@@ -192,7 +195,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
         (max-width: 2560px) 960px,"
               />
               {cover && logo ? (
-                <AppBox
+                <Box
                   bg="white"
                   p={2}
                   width="120px"
@@ -205,6 +208,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                   }}
                 >
                   <Image
+                    useDs
                     src={logo}
                     alt="logo"
                     width="104px"
@@ -219,9 +223,9 @@ export const OrganizationPage = ({ organizationId }: Props) => {
         (max-width: 1280px) 320px,
         (max-width: 2560px) 320px,"
                   />
-                </AppBox>
+                </Box>
               ) : null}
-            </AppBox>
+            </Box>
           ) : null}
         </Flex>
       </Flex>
@@ -235,35 +239,34 @@ export const OrganizationPage = ({ organizationId }: Props) => {
               {hasPosts ? <OrganizationPagePostList organization={organization} /> : null}
               {hasEvents ? (
                 <Flex direction="column" maxWidth={['100%', '380px']} width="100%">
-                  <Flex direction="row" justify="space-between">
-                    <Heading as="h4" mb={4}>
+                  <Flex direction="row" justify="space-between" mb={4}>
+                    <Heading as="h4">
                       {intl.formatMessage({
                         id: 'homepage.section.events',
                       })}
                     </Heading>
-                    <Menu>
-                      <Menu.Button>
-                        <Button>
-                          <div style={{ marginRight: '4px' }}>{intl.formatMessage({ id: filter })}</div>
-                          <Icon name={ICON_NAME.chevronDown} size="8" color="black" />
+                    <Menu
+                      disclosure={
+                        <Button rightIcon={CapUIIcon.ArrowDown} variant="tertiary">
+                          {intl.formatMessage({ id: filter })}
                         </Button>
-                      </Menu.Button>
-
+                      }
+                    >
                       <Menu.List>
-                        <Menu.ListItem
+                        <Menu.Item
                           onClick={() => {
                             setFilter('theme.show.status.future')
                           }}
                         >
                           <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
-                        </Menu.ListItem>
-                        <Menu.ListItem
+                        </Menu.Item>
+                        <Menu.Item
                           onClick={() => {
                             setFilter('finished')
                           }}
                         >
                           <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
-                        </Menu.ListItem>
+                        </Menu.Item>
                       </Menu.List>
                     </Menu>
                   </Flex>

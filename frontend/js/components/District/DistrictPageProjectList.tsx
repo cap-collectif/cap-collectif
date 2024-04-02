@@ -1,17 +1,15 @@
-import { graphql } from 'graphql'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { usePaginationFragment } from 'react-relay'
-import type { DistrictPageQueryResponse } from '~relay/DistrictPageQuery.graphql'
+import { graphql, usePaginationFragment } from 'react-relay'
+import type { DistrictPageProjectList_query$key } from '~relay/DistrictPageProjectList_query.graphql'
 import Button from '../DesignSystem/Button/Button'
 import ProjectPreview from '../Project/Preview/ProjectPreview'
-import AppBox from '../Ui/Primitives/AppBox'
-import Heading from '../Ui/Primitives/Heading'
-import Grid from '../Ui/Primitives/Layout/Grid'
+import { Box, Heading, Grid } from '@cap-collectif/ui'
 
 export type Props = {
-  query: DistrictPageQueryResponse
+  query: DistrictPageProjectList_query$key
 }
+
 const DistrictPageProjectListQuery = graphql`
   fragment DistrictPageProjectList_query on Query
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, districtId: { type: "ID!" })
@@ -28,6 +26,7 @@ const DistrictPageProjectListQuery = graphql`
     }
   }
 `
+
 export const DistrictPageProjectList = ({ query }: Props) => {
   const intl = useIntl()
   const { data, loadNext, hasNext } = usePaginationFragment(DistrictPageProjectListQuery, query)
@@ -36,8 +35,8 @@ export const DistrictPageProjectList = ({ query }: Props) => {
     .map(edge => edge.node)
     .filter(Boolean)
   return (
-    <AppBox bg="white" pb={7}>
-      <Heading mb={0} as="h4" capitalize>
+    <Box bg="white" pb={7}>
+      <Heading mb={0} as="h4" sx={{ textTransform: 'capitalize' }}>
         {intl.formatMessage(
           {
             id: 'n_projects',
@@ -49,6 +48,7 @@ export const DistrictPageProjectList = ({ query }: Props) => {
       </Heading>
       <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} marginLeft={-4}>
         {projects.map((node, index) => (
+          // @ts-ignore old relay syntax
           <ProjectPreview key={index} project={node} forceNewCardDesign />
         ))}
       </Grid>
@@ -68,7 +68,7 @@ export const DistrictPageProjectList = ({ query }: Props) => {
           })}
         </Button>
       ) : null}
-    </AppBox>
+    </Box>
   )
 }
 export default DistrictPageProjectList

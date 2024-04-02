@@ -2,13 +2,13 @@ import * as React from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'
-import type { GlobalDistrictAdminPageQueryResponse } from '~relay/GlobalDistrictAdminPageQuery.graphql'
+import type { GlobalDistrictAdminPageQuery$data } from '~relay/GlobalDistrictAdminPageQuery.graphql'
 import GlobalDistrictAdminPage from './GlobalDistrictAdminPage'
 
 export default function GlobalDistrictAdmin() {
   return (
     <QueryRenderer
-      environment={environment}
+      environment={environment as any}
       query={graphql`
         query GlobalDistrictAdminPageQuery {
           districts: globalDistricts(first: 1000) @connection(key: "GlobalDistrictAdminPage_districts") {
@@ -26,7 +26,7 @@ export default function GlobalDistrictAdmin() {
         error,
         props: queryProps,
       }: ReactRelayReadyState & {
-        props: GlobalDistrictAdminPageQueryResponse | null | undefined
+        props: GlobalDistrictAdminPageQuery$data | null | undefined
       }) => {
         if (error) {
           return graphqlError

@@ -4,7 +4,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 import { useParams, useLocation } from 'react-router-dom'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import type { State } from '~/types'
-import type { ProposalPageQueryResponse } from '~relay/ProposalPageQuery.graphql'
+import type { ProposalPageQuery$data } from '~relay/ProposalPageQuery.graphql'
 import ProposalPageLogic from './ProposalPageLogic'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import CookieMonster from '~/CookieMonster'
@@ -15,8 +15,8 @@ export type Props = {
   readonly platformLocale: string
 }
 export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLocale }: Props) => {
-  const { proposalSlug } = useParams()
-  const { state } = useLocation()
+  const { proposalSlug } = useParams<{ proposalSlug?: string }>()
+  const { state } = useLocation<{ currentVotableStepId?: string }>()
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions')
   const hasVotableStep = !!state?.currentVotableStepId || !!currentVotableStepId
   return (
@@ -58,7 +58,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
         error,
         props,
       }: ReactRelayReadyState & {
-        props: ProposalPageQueryResponse | null | undefined
+        props: ProposalPageQuery$data | null | undefined
       }) => {
         if (error) {
           console.log(error) // eslint-disable-line no-console

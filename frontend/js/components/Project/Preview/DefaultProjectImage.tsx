@@ -3,7 +3,7 @@ type Props = {
   readonly isNewCard?: boolean
 }
 export const DefaultProjectImage = ({ isNewCard }: Props) => {
-  const style = isNewCard
+  const style: React.CSSProperties = isNewCard
     ? {
         position: 'absolute',
         top: 'calc(50% - 55px)',

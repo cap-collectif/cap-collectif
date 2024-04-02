@@ -6,17 +6,19 @@ import ProjectType from './ProjectType'
 import ProjectCover from './ProjectCover'
 import ProjectPreviewBody from './ProjectPreviewBody'
 import { Card } from '~ui/Card/Card'
-import type { ProjectPreview_project } from '~relay/ProjectPreview_project.graphql'
+import type { ProjectPreview_project$data } from '~relay/ProjectPreview_project.graphql'
 import type { State, FeatureToggles } from '~/types'
 import ProjectCard from '~ui/Project/ProjectCard'
 import Flex from '~ui/Primitives/Layout/Flex'
+
 type Props = {
-  readonly project: ProjectPreview_project
+  readonly project: ProjectPreview_project$data
   readonly hasSecondTitle?: boolean
   readonly features: FeatureToggles
   readonly isProjectsPage: boolean
   readonly forceNewCardDesign?: boolean | null | undefined
 }
+
 export const ProjectPreview = ({ project, hasSecondTitle, features, isProjectsPage, forceNewCardDesign }: Props) => {
   const projectID = project.id ? `project-preview-${project.id}` : 'project-preview'
   if (features.new_project_card || forceNewCardDesign)

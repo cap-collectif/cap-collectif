@@ -52,7 +52,7 @@ exports[`<ProjectPreview /> should render correctly with the new card type 1`] =
   mr={5}
   mt={7}
 >
-  <Relay(Connect(ProjectCard))
+  <Connect(ProjectCard)
     isProjectsPage={false}
     project={
       Object {

@@ -30,7 +30,6 @@ type Props = ReduxFormFormProps &
     readonly initialValues: FormValues
   }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CustomForm = styled.form`
   label {
     font-weight: 400;

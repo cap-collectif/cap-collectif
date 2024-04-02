@@ -9,10 +9,10 @@ import GlobalDistrictForm from './GlobalDistrictForm'
 import GlobalDistrictAdminList from './GlobalDistrictAdminList'
 import LanguageButtonContainer from '~/components/LanguageButton/LanguageButtonContainer'
 import DeleteGlobalDistrictMutation from '~/mutations/DeleteGlobalDistrictMutation'
-import type { GlobalDistrictAdminPage_districts } from '~relay/GlobalDistrictAdminPage_districts.graphql'
+import type { GlobalDistrictAdminPage_districts$data } from '~relay/GlobalDistrictAdminPage_districts.graphql'
 
 type Props = {
-  districts: GlobalDistrictAdminPage_districts
+  districts: GlobalDistrictAdminPage_districts$data
 }
 type State = {
   isModalOpen: boolean

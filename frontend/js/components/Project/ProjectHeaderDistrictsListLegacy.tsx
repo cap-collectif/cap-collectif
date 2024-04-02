@@ -43,7 +43,7 @@ const ProjectHeaderDistrictsListLegacy = ({ breakingNumber, project }: Props) =>
 
   if (!!data.districts && !!data.districts.edges) {
     if (!!data.districts?.totalCount && data.districts?.totalCount <= breakingNumber) {
-      return data.districts?.edges?.map<any>((district: any, key: number) => (
+      return data.districts?.edges?.map((district: any, key: number) => (
         <ProjectHeader.Info.Location key={key} content={district?.node?.name} />
       ))
     }

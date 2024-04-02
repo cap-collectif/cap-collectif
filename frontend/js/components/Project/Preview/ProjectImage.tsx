@@ -2,16 +2,19 @@ import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import styled from 'styled-components'
 import DefaultProjectImage from './DefaultProjectImage'
-import type { ProjectImage_project } from '~relay/ProjectImage_project.graphql'
+import type { ProjectImage_project$data } from '~relay/ProjectImage_project.graphql'
+
 type Props = {
-  readonly project: ProjectImage_project
+  readonly project: ProjectImage_project$data
 }
+
 const Image = styled.img<{
   archived: boolean
 }>`
   filter: ${props => (props.archived ? 'grayscale(1)' : null)};
   opacity: ${props => (props.archived ? '50%' : null)};
 `
+
 const DefaultProjectImageWrapper = styled.div<{
   archived: boolean
 }>`

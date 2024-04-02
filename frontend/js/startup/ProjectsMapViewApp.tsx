@@ -1,9 +1,8 @@
 // @ts-nocheck
 import React, { lazy, Suspense } from 'react'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Skeleton from '~ds/Skeleton'
 import Providers from './Providers'
+import { Flex, Skeleton } from '@cap-collectif/ui'
 
 const ProjectsMapView = lazy(
   () =>
@@ -34,7 +33,8 @@ const Fallback = () => (
 )
 
 export default () => (
-  <Providers>
+  <Providers designSystem>
+    <style>{'.cap-link:before {display:none;}'}</style>
     <Suspense fallback={<Fallback />}>
       <ProjectsMapView />
     </Suspense>

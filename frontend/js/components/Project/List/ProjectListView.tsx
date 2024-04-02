@@ -4,16 +4,16 @@ import type { RelayRefetchProp } from 'react-relay'
 import { createRefetchContainer, graphql } from 'react-relay'
 import Loader from '../../Ui/FeedbacksIndicators/Loader'
 import type { GlobalState } from '../../../types'
-import type { ProjectListView_query } from '~relay/ProjectListView_query.graphql'
+import type { ProjectListView_query$data } from '~relay/ProjectListView_query.graphql'
 import ProjectListViewPaginated from './ProjectListViewPaginated'
 import { selector } from './Filters/ProjectListFilters'
 import type {
-  ProjectListViewRefetchQueryVariables,
+  ProjectListViewRefetchQuery$variables,
   ProjectOrderField,
   ProjectArchiveFilter,
 } from '~relay/ProjectListViewRefetchQuery.graphql'
 type Props = {
-  query: ProjectListView_query
+  query: ProjectListView_query$data
   orderBy: ProjectOrderField
   author: string | null | undefined
   type: string | null | undefined
@@ -71,7 +71,7 @@ export class ProjectListView extends React.Component<Props, State> {
         term,
         status,
         archived,
-      } as ProjectListViewRefetchQueryVariables)
+      } as ProjectListViewRefetchQuery$variables)
 
     relay.refetch(
       refetchVariables,
@@ -110,7 +110,6 @@ const mapStateToProps = (state: GlobalState) => ({
   term: state.project.term,
 })
 
-// @ts-ignore
 const container = connect(mapStateToProps)(ProjectListView)
 export default createRefetchContainer(
   container,

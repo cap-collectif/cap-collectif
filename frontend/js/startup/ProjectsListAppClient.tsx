@@ -18,10 +18,13 @@ type Props = {
   onlyPublic?: boolean
   archived?: ProjectArchiveFilter | null
 }
-export default (props: Props) => (
-  <Suspense fallback={null}>
-    <Providers>
-      <ProjectsList {...props} />
-    </Providers>
-  </Suspense>
-)
+export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
+  return (
+    <Suspense fallback={null}>
+      <Providers designSystem>
+        <ProjectsList {...props} />
+      </Providers>
+    </Suspense>
+  )
+}

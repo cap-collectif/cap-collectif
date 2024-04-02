@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
 import type { RelayPaginationProp } from 'react-relay'
 import { graphql, createPaginationContainer } from 'react-relay'
-import type { ProjectListViewPaginated_query } from '~relay/ProjectListViewPaginated_query.graphql'
+import type { ProjectListViewPaginated_query$data } from '~relay/ProjectListViewPaginated_query.graphql'
 import ProjectPreview from '../Preview/ProjectPreview'
 import type { State, FeatureToggles } from '~/types'
 import Grid from '~ui/Primitives/Layout/Grid'
@@ -12,14 +12,14 @@ import AppBox from '~/components/Ui/Primitives/AppBox'
 
 type Props = {
   relay: RelayPaginationProp
-  query: ProjectListViewPaginated_query
+  query: ProjectListViewPaginated_query$data
   limit: number
   paginate: boolean
   features: FeatureToggles
   isProjectsPage?: boolean
 }
 
-const renderPreview = (query: ProjectListViewPaginated_query, isProjectsPage?: boolean) => {
+const renderPreview = (query: ProjectListViewPaginated_query$data, isProjectsPage?: boolean) => {
   return query.projects.edges
     ?.filter(Boolean)
     .map(edge => edge.node)

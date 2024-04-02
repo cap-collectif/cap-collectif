@@ -14,7 +14,7 @@ import { getTranslation, handleTranslationChange } from '~/services/Translation'
 import type { District, GlobalState, Dispatch } from '~/types'
 import CreateGlobalDistrictMutation from '~/mutations/CreateGlobalDistrictMutation'
 import UpdateGlobalDistrictMutation from '~/mutations/UpdateGlobalDistrictMutation'
-import type { GlobalDistrictForm_district } from '~relay/GlobalDistrictForm_district.graphql'
+import type { GlobalDistrictForm_district$data } from '~relay/GlobalDistrictForm_district.graphql'
 
 type Props = ReduxFormFormProps & {
   show: boolean
@@ -22,7 +22,7 @@ type Props = ReduxFormFormProps & {
   isCreating: boolean
   handleClose: () => void
   defaultLanguage: string
-  district: GlobalDistrictForm_district
+  district: GlobalDistrictForm_district$data
 }
 type FormValues = {
   globalDistrict: District

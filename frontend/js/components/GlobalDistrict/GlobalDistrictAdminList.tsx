@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
-
 import styled from 'styled-components'
 // TODO https://github.com/cap-collectif/platform/issues/7774
 // eslint-disable-next-line no-restricted-imports
@@ -31,7 +30,6 @@ export function GlobalDistrictAdminList(props: Props) {
             <ListGroupItemContainer key={district.id}>
               <Row>
                 <Col xs={6} sm={7}>
-                  {/* @ts-expect-error can't add generic types to jsx like in TS https://github.com/facebook/flow/issues/7672 */}
                   <Translation field="name" translations={district.translations} fallback="translation-not-available" />
                 </Col>
                 <Col xs={6} sm={5}>

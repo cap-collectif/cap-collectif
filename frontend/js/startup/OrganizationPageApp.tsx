@@ -12,8 +12,9 @@ const OrganizationPage = lazy(
     ),
 )
 export default (props: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
-    <Providers>
+    <Providers designSystem>
       <Suspense fallback={<OrganizationPagePlaceholder />}>
         <OrganizationPage {...props} />
       </Suspense>

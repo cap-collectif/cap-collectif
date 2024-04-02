@@ -1,30 +1,90 @@
 import * as React from 'react'
-import { graphql, createFragmentContainer } from 'react-relay'
+import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import type { ProjectCard_project } from '~relay/ProjectCard_project.graphql'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Heading from '~ui/Primitives/Heading'
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
-import AppBox from '~ui/Primitives/AppBox'
-import { ICON_NAME } from '~ds/Icon/Icon'
+import type { ProjectCard_project$key } from '~relay/ProjectCard_project.graphql'
 import type { State } from '~/types'
-import Card from '~ds/Card/Card'
-import { FontWeight, LineHeight } from '~ui/Primitives/constants'
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import { formatInfo, formatCounter, renderTag } from './ProjectCard.utils'
 import Image from '~ui/Primitives/Image'
 import htmlDecode from '~/components/Utils/htmlDecode'
-type Props = AppBoxProps & {
-  readonly project: ProjectCard_project
+import { Box, BoxProps, Flex, Heading, Card, CapUIIcon } from '@cap-collectif/ui'
+
+type Props = BoxProps & {
+  readonly project: ProjectCard_project$key
   readonly backgroundColor: string
-  readonly isProjectsPage: boolean
+  readonly isProjectsPage?: boolean
   readonly variantSize?: 'L' | 'M'
 }
 
+const FRAGMENT = graphql`
+  fragment ProjectCard_project on Project {
+    id
+    title
+    type {
+      title
+      color
+    }
+    themes {
+      title
+    }
+    cover {
+      url
+    }
+    isExternal
+    externalLink
+    url
+    isVotesCounterDisplayable
+    isContributionsCounterDisplayable
+    isParticipantsCounterDisplayable
+    archived
+    votes {
+      totalCount
+    }
+    anonymousVotes: votes(anonymous: true) {
+      totalCount
+    }
+    contributions {
+      totalCount
+    }
+    contributors {
+      totalCount
+    }
+    anonymousReplies: contributions(type: REPLY_ANONYMOUS) {
+      totalCount
+    }
+    hasParticipativeStep
+    externalParticipantsCount
+    externalContributionsCount
+    externalVotesCount
+    districts {
+      totalCount
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    visibility
+    publishedAt
+    steps {
+      state
+      __typename
+    }
+    currentStep {
+      id
+      timeless
+      state
+      timeRange {
+        endAt
+      }
+    }
+  }
+`
+
 export const ProjectCard = ({
-  project,
+  project: projectKey,
   backgroundColor,
   isProjectsPage,
   gridArea,
@@ -38,9 +98,13 @@ export const ProjectCard = ({
 }: Props) => {
   const intl = useIntl()
   const isMobile = useIsMobile()
+
+  const project = useFragment(FRAGMENT, projectKey)
+
   const showCounters = project.hasParticipativeStep || project.isExternal
+
   return (
-    <AppBox
+    <Box
       as="a"
       href={project.externalLink || project.url}
       display="grid"
@@ -69,6 +133,7 @@ export const ProjectCard = ({
       >
         {project.cover?.url ? (
           <Image
+            useDs
             overflow="hidden"
             src={project.cover?.url}
             css={{
@@ -87,7 +152,7 @@ export const ProjectCard = ({
         (max-width: 2560px) 960px,"
           />
         ) : (
-          <AppBox
+          <Box
             overflow="hidden"
             css={{
               background: backgroundColor,
@@ -100,7 +165,7 @@ export const ProjectCard = ({
             pt={variantSize === 'L' ? '300px' : variantSize === 'M' ? '33.33%' : '66.66%'} // 3:2 aspect ratio trick
           >
             {!project.cover?.url && <DefaultProjectImage isNewCard />}
-          </AppBox>
+          </Box>
         )}
 
         {renderTag(project, intl)}
@@ -108,10 +173,10 @@ export const ProjectCard = ({
           <Heading
             truncate={100}
             as="h4"
-            fontWeight={FontWeight.Semibold}
+            fontWeight="semibold"
             mb={4}
             color={project.archived ? 'gray.500' : 'gray.900'}
-            lineHeight={LineHeight.Base}
+            lineHeight="base"
           >
             {htmlDecode(project.title)}
           </Heading>
@@ -120,7 +185,7 @@ export const ProjectCard = ({
               <Flex direction="row" flexWrap="wrap" color="neutral-gray.700">
                 {project.type &&
                   formatInfo(
-                    ICON_NAME.BOOK_STAR_O,
+                    CapUIIcon.BookStarO,
                     intl.formatMessage({
                       id: project.type.title,
                     }),
@@ -130,16 +195,17 @@ export const ProjectCard = ({
                 {project.districts &&
                   project.districts?.totalCount > 0 &&
                   formatInfo(
-                    ICON_NAME.PIN_O,
+                    CapUIIcon.PinO,
                     project.districts.edges?.map(district => district?.node?.name).join(' • ') || null,
                     project.archived,
                   )}
                 {project.themes &&
                   project.themes?.length > 0 &&
                   formatInfo(
-                    ICON_NAME.FOLDER_O,
+                    CapUIIcon.FolderO,
                     project.themes?.map(({ title }) => title).join(', ') || '',
                     project.archived,
+                    null,
                   )}
               </Flex>
             )}
@@ -148,21 +214,21 @@ export const ProjectCard = ({
                 {(project.isVotesCounterDisplayable &&
                   ((project.isExternal && project.externalVotesCount) || project.votes.totalCount) &&
                   formatCounter(
-                    ICON_NAME.THUMB_UP_O,
+                    CapUIIcon.ThumbUpO,
                     project.isExternal ? project.externalVotesCount || 0 : project.votes.totalCount,
                     project.archived,
                   )) ||
                   null}
                 {(project.isContributionsCounterDisplayable &&
                   formatCounter(
-                    ICON_NAME.BUBBLE_O,
+                    CapUIIcon.BubbleO,
                     project.isExternal ? project.externalContributionsCount || 0 : project.contributions.totalCount,
                     project.archived,
                   )) ||
                   null}
                 {(project.isParticipantsCounterDisplayable &&
                   formatCounter(
-                    ICON_NAME.USER_O,
+                    CapUIIcon.UserO,
                     project.isExternal
                       ? project.externalParticipantsCount || 0
                       : project.contributors.totalCount +
@@ -176,7 +242,7 @@ export const ProjectCard = ({
           </Flex>
         </Flex>
       </Card>
-    </AppBox>
+    </Box>
   )
 }
 
@@ -185,69 +251,5 @@ const mapStateToProps = (state: State) => ({
 })
 
 ProjectCard.displayName = 'ProjectCard'
-export default createFragmentContainer(connect(mapStateToProps)(ProjectCard), {
-  project: graphql`
-    fragment ProjectCard_project on Project {
-      id
-      title
-      type {
-        title
-        color
-      }
-      themes {
-        title
-      }
-      cover {
-        url
-      }
-      isExternal
-      externalLink
-      url
-      isVotesCounterDisplayable
-      isContributionsCounterDisplayable
-      isParticipantsCounterDisplayable
-      archived
-      votes {
-        totalCount
-      }
-      anonymousVotes: votes(anonymous: true) {
-        totalCount
-      }
-      contributions {
-        totalCount
-      }
-      contributors {
-        totalCount
-      }
-      anonymousReplies: contributions(type: REPLY_ANONYMOUS) {
-        totalCount
-      }
-      hasParticipativeStep
-      externalParticipantsCount
-      externalContributionsCount
-      externalVotesCount
-      districts {
-        totalCount
-        edges {
-          node {
-            name
-          }
-        }
-      }
-      visibility
-      publishedAt
-      steps {
-        state
-        __typename
-      }
-      currentStep {
-        id
-        timeless
-        state
-        timeRange {
-          endAt
-        }
-      }
-    }
-  `,
-})
+
+export default connect(mapStateToProps)(ProjectCard)

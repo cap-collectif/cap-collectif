@@ -1,11 +1,13 @@
 import * as React from 'react'
-import { Box } from '@cap-collectif/ui'
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
+import { Box, BoxProps } from '@cap-collectif/ui'
 import config, { baseUrl } from '~/config'
-import AppBox from '~ui/Primitives/AppBox'
-export type ImageProps = AppBoxProps & {
+import AppBox from './AppBox'
+
+export type ImageProps = BoxProps & {
   readonly src?: string
   readonly useDs?: boolean
+  readonly alt?: string
+  readonly sizes?: string
 }
 
 const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
@@ -41,6 +43,7 @@ const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
   }
 
   return !config.isDevOrTest ? (
+    // @ts-ignore let's progressively remove old appbox for image
     <AppBox
       as="img"
       loading="lazy"
@@ -62,6 +65,7 @@ const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
       {...props}
     />
   ) : (
+    // @ts-ignore let's progressively remove old appbox for image
     <AppBox as="img" loading="lazy" src={src} alt={alt} {...props} />
   )
 }

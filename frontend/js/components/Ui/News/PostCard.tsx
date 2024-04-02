@@ -2,17 +2,15 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useSelector } from 'react-redux'
 import type { PostCard_post$key } from '~relay/PostCard_post.graphql'
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
-import AppBox from '~ui/Primitives/AppBox'
-import { ICON_NAME } from '~ds/Icon/Icon'
-import Card from '~ds/Card/Card'
-import Flex from '../Primitives/Layout/Flex'
-import Heading from '../Primitives/Heading'
 import { formatInfo } from '../Project/ProjectCard.utils'
 import Image from '~ui/Primitives/Image'
-type Props = AppBoxProps & {
+import { Box, BoxProps, CapUIIcon, Card, Flex, Heading } from '@cap-collectif/ui'
+import { GlobalState } from '~/types'
+
+type Props = BoxProps & {
   readonly post: PostCard_post$key
 }
+
 const FRAGMENT = graphql`
   fragment PostCard_post on Post {
     id
@@ -34,6 +32,7 @@ const PostCoverPlaceholder = ({ backgroundColor }: { backgroundColor: string }) 
     borderRadius="accordion"
     overflow="hidden"
     height="78px"
+    // @ts-ignore TODO MAJ DS
     objectFit="cover"
     mr={4}
     flexShrink={0}
@@ -196,9 +195,9 @@ const PostCoverPlaceholder = ({ backgroundColor }: { backgroundColor: string }) 
 
 export const PostCard = ({ post: postQuery, ...props }: Props) => {
   const post = useFragment(FRAGMENT, postQuery)
-  const backgroundColor = useSelector(state => state.default.parameters['color.btn.primary.bg'])
+  const backgroundColor = useSelector((state: GlobalState) => state.default.parameters['color.btn.primary.bg'])
   return (
-    <AppBox
+    <Box
       as="a"
       href={post.url}
       display="grid"
@@ -239,13 +238,13 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
           <Heading as="h4" mb={2} color="gray.900">
             {post.title}
           </Heading>
-          <AppBox color="neutral-gray.700">
+          <Box color="neutral-gray.700">
             {post.themes.length > 0 &&
-              formatInfo(ICON_NAME.FOLDER_O, post.themes?.map(({ title }) => title).join(', ') || '', false)}
-          </AppBox>
+              formatInfo(CapUIIcon.FolderO, post.themes?.map(({ title }) => title).join(', ') || '', false)}
+          </Box>
         </Flex>
       </Card>
-    </AppBox>
+    </Box>
   )
 }
 PostCard.displayName = 'PostCard'

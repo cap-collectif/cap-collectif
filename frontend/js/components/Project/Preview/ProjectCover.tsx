@@ -3,9 +3,10 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import classNames from 'classnames'
 import ProjectImage from './ProjectImage'
 import Card from '../../Ui/Card/Card'
-import type { ProjectCover_project } from '~relay/ProjectCover_project.graphql'
+import type { ProjectCover_project$data } from '~relay/ProjectCover_project.graphql'
+
 type Props = {
-  readonly project: ProjectCover_project
+  readonly project: ProjectCover_project$data
 }
 
 class ProjectCover extends React.Component<Props> {

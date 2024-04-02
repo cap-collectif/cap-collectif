@@ -9,7 +9,7 @@ const SmallEditButton = styled(Button)`
   background-color: transparent;
 `
 
-const EditButton = ({ onClick, small }: { onClick: () => void; small: boolean }) =>
+const EditButton = ({ onClick, small }: { onClick: () => void; small: boolean; id?: string }) =>
   !small ? (
     <Button bsStyle="warning" className="btn-outline-warning" onClick={onClick}>
       <i className="fa fa-pencil" />

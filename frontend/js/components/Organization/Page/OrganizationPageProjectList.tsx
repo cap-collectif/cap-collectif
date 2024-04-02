@@ -4,10 +4,8 @@ import { useIntl } from 'react-intl'
 import type { OrganizationPageProjectList_organization$key } from '~relay/OrganizationPageProjectList_organization.graphql'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import ProjectCard from '~/components/Ui/Project/ProjectCard'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Heading from '~/components/Ui/Primitives/Heading'
-import Button from '~/components/DesignSystem/Button/Button'
-import AppBox from '~/components/Ui/Primitives/AppBox'
+import { Flex, Button, Heading } from '@cap-collectif/ui'
+
 const FRAGMENT = graphql`
   fragment OrganizationPageProjectList_organization on Organization
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
@@ -82,7 +80,10 @@ export const OrganizationPageProjectList = ({ organization, fullSizeLayout }: Pr
           <ProjectCard
             project={edge?.node}
             key={index}
-            {...getItemStyles(index, fullSizeLayout, isMobile)}
+            {...(getItemStyles(index, fullSizeLayout, isMobile) as {
+              width: string
+              variantSize?: 'L' | 'M'
+            })}
             height="auto"
             px={[0, 4]}
             py={4}
@@ -90,13 +91,13 @@ export const OrganizationPageProjectList = ({ organization, fullSizeLayout }: Pr
         ))}
       </Flex>
       {hasNext ? (
-        <AppBox mt={2} width="100%">
-          <Button margin="auto" onClick={() => loadNext(20)} color="blue.500">
+        <Flex mt={2} width="100%">
+          <Button variant="tertiary" margin="auto" onClick={() => loadNext(20)}>
             {intl.formatMessage({
               id: 'global.more',
             })}
           </Button>
-        </AppBox>
+        </Flex>
       ) : null}
     </Flex>
   )

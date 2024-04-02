@@ -24,7 +24,7 @@ class DistrictTypeResolver implements QueryInterface
         $currentSchemaName = $this->typeResolver->getCurrentSchemaName();
 
         if ($district instanceof ProposalDistrict) {
-            if ('internal' === $currentSchemaName) {
+            if (\in_array($currentSchemaName, ['internal', 'dev'])) {
                 return $this->typeResolver->resolve('InternalProposalDistrict');
             }
             if ('preview' === $currentSchemaName) {
@@ -32,7 +32,7 @@ class DistrictTypeResolver implements QueryInterface
             }
         }
         if ($district instanceof GlobalDistrict) {
-            if ('internal' === $currentSchemaName) {
+            if (\in_array($currentSchemaName, ['internal', 'dev'])) {
                 return $this->typeResolver->resolve('InternalGlobalDistrict');
             }
             if ('preview' === $currentSchemaName) {

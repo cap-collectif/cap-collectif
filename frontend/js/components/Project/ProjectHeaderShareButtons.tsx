@@ -1,19 +1,18 @@
 import * as React from 'react'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { useIntl } from 'react-intl'
-import { Button, Heading, Modal, CapUIModalSize } from '@cap-collectif/ui'
+import { Button, Heading, Modal, CapUIModalSize, BoxProps } from '@cap-collectif/ui'
 import ProjectHeader from '~ui/Project/ProjectHeader'
 import share from '~/utils/share'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import ResetCss from '~/utils/ResetCss'
-import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import '~ui/Primitives/AppBox.type'
-export type Props = AppBoxProps & {
+export type Props = BoxProps & {
   readonly url: string
   readonly title: string
 }
 
-const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props): JSX.Element => {
+const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props) => {
   const hasShareButtons = useFeatureFlag('share_buttons')
   const intl = useIntl()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
@@ -45,7 +44,7 @@ const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props): JSX.Element 
               id: 'share.link',
             })}
             readOnly
-            rows="3"
+            rows={3}
           >
             {url}
           </textarea>

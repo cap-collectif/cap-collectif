@@ -10,13 +10,8 @@ import { GestureHandling } from 'leaflet-gesture-handling'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import { isSafari } from '~/config'
-import Link from '~ds/Link/Link'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
 import withColors from '~/components/Utils/withColors'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
-import type { MapProps } from '../../Proposal/Map/Map.types'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
-import { ICON_NAME as DSICON } from '~ds/Icon/Icon'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables'
 import { BlankPopup, MapContainer } from '~/components/Proposal/Map/ProposalLeafletMap.style'
@@ -29,6 +24,8 @@ import { formatCounter } from '~/components/Ui/Project/ProjectCard.utils'
 import { flyToPosition } from '~/components/Proposal/Map/ProposalLeafletMap'
 import Image from '~ui/Primitives/Image'
 import GeoJSONView from './GeoJSONView'
+import { CapUIIcon, Flex, Link, Icon, CapUIIconSize } from '@cap-collectif/ui'
+import type { ProjectsMapViewQuery } from '~relay/ProjectsMapViewQuery.graphql'
 
 const QUERY = graphql`
   query ProjectsMapViewQuery {
@@ -111,7 +108,7 @@ export const ProjectsMapView = ({
   backgroundColor: string
 }) => {
   const intl = useIntl()
-  const query = useLazyLoadQuery(QUERY)
+  const query = useLazyLoadQuery<ProjectsMapViewQuery>(QUERY, {})
   const mapRef = React.useRef(null)
   const markerRef = React.useRef(null)
   const [address, setAddress] = React.useState(null)
@@ -132,7 +129,7 @@ export const ProjectsMapView = ({
         <div className="row">
           <Flex
             direction="column"
-            css={{
+            sx={{
               '.leaflet-interactive': {
                 strokeDasharray: 10,
               },
@@ -144,19 +141,27 @@ export const ProjectsMapView = ({
                 marginLeft: '50%',
                 zIndex: 99,
                 width: 'fit-content',
-                '::before': {
-                  display: 'none',
-                },
+              },
+              '.titleTooltip:before': {
+                display: 'none',
               },
               '.rect': {
+                // @ts-ignore TS doesn't like !important
                 pointerEvents: 'none !important',
+              },
+              '.preview-icn svg': {
+                height: '40px !important',
+                width: '40px !important',
+                maxHeight: 'none !important',
+                maxWidth: 'none !important',
+                padding: '0 !important',
               },
             }}
           >
             <Flex justifyContent="space-between" alignItems="center" pl={[4, 0]}>
               <h2 className="h2">{homePageProjectsMapSectionConfiguration.title}</h2>
               <Flex
-                css={{
+                sx={{
                   '*': {
                     color: `${linkColor} !important`,
                     textDecoration: 'none',
@@ -169,15 +174,15 @@ export const ProjectsMapView = ({
                     },
                   },
                   svg: {
-                    marginLeft: 5,
+                    marginLeft: 1,
                   },
                 }}
               >
-                <Link href="/projects">
+                <Link href="/projects" display="flex">
                   {intl.formatMessage({
                     id: 'project.see_all',
                   })}
-                  <Icon name={ICON_NAME.arrowRight} size={15} color={linkColor} />
+                  <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Md} color={linkColor} />
                 </Link>
               </Flex>
             </Flex>
@@ -202,7 +207,7 @@ export const ProjectsMapView = ({
               />
 
               <Map
-                whenCreated={(map: MapProps) => {
+                whenCreated={map => {
                   mapRef.current = map
                   map.on('zoomend', () => setZoom(mapRef?.current?.getZoom() || 0))
                 }}
@@ -241,7 +246,9 @@ export const ProjectsMapView = ({
                           position={[mark.address?.lat, mark.address?.lng]}
                           icon={L.divIcon({
                             className: 'preview-icn',
-                            html: renderToString(<Icon name={ICON_NAME.pin3} size={40} color={backgroundColor} />),
+                            html: renderToString(
+                              <Icon name={CapUIIcon.PinFull} size={CapUIIconSize.Lg} color={backgroundColor} />,
+                            ),
                             iconSize: [40, 40],
                             iconAnchor: [40 / 2, 40],
                             popupAnchor: [0, -40],
@@ -249,11 +256,12 @@ export const ProjectsMapView = ({
                         >
                           <BlankPopup closeButton={false} key="popup-info" autoClose={false}>
                             <Flex p={4} direction="column">
-                              <Flex spacing={2}>
+                              <Flex>
                                 {mark.cover?.url ? (
                                   <Image
+                                    useDs
                                     src={mark.cover?.url}
-                                    style={{
+                                    sx={{
                                       width: 90,
                                       height: 60,
                                       borderRadius: 4,
@@ -262,7 +270,7 @@ export const ProjectsMapView = ({
                                     alt="cover"
                                   />
                                 ) : null}
-                                <Text as="div" fontSize="14px" fontWeight={600}>
+                                <Text as="div" fontSize="14px" fontWeight={600} ml={2}>
                                   {mark.title}
                                 </Text>
                               </Flex>
@@ -270,7 +278,7 @@ export const ProjectsMapView = ({
                                 <Flex spacing={4}>
                                   {(mark.isContributionsCounterDisplayable &&
                                     formatCounter(
-                                      DSICON.BUBBLE_O,
+                                      CapUIIcon.BubbleO,
                                       mark.isExternal
                                         ? mark.externalContributionsCount || 0
                                         : mark.contributions.totalCount,
@@ -279,7 +287,7 @@ export const ProjectsMapView = ({
                                     null}
                                   {(mark.isParticipantsCounterDisplayable &&
                                     formatCounter(
-                                      DSICON.USER_O,
+                                      CapUIIcon.UserO,
                                       mark.isExternal
                                         ? mark.externalParticipantsCount || 0
                                         : mark.contributors.totalCount +
@@ -291,27 +299,29 @@ export const ProjectsMapView = ({
                                 </Flex>
                                 <Link
                                   fontSize="14px"
+                                  display="flex"
                                   fontWeight={400}
+                                  alignItems="center"
                                   href={mark.isExternal ? mark.externalLink : mark.url}
                                   color={`${linkColor} !important`}
-                                  css={{
+                                  sx={{
                                     textDecoration: 'none !important',
                                     '&:hover *': {
-                                      color: `${linkHoverColor} !important`,
                                       textDecoration: 'none',
                                       svg: {
                                         fill: `${linkHoverColor} !important`,
                                       },
                                     },
                                     svg: {
-                                      marginLeft: 5,
+                                      marginLeft: 1,
                                     },
                                   }}
+                                  _hover={{ color: `${linkHoverColor} !important` }}
                                 >
                                   {intl.formatMessage({
                                     id: 'show-project',
                                   })}
-                                  <Icon name={ICON_NAME.arrowRight} size={12} color={linkColor} />
+                                  <Icon name={CapUIIcon.ArrowRight} size={CapUIIconSize.Xs} color={linkColor} />
                                 </Link>
                               </Flex>
                             </Flex>

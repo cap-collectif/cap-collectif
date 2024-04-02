@@ -3,35 +3,34 @@ import type { IntlShape } from 'react-intl'
 import 'react-intl'
 import moment from 'moment'
 import css from '@styled-system/css'
-import type { ProjectCard_project, StepState } from '~relay/ProjectCard_project.graphql'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
-import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
+import type { ProjectCard_project$data, StepState } from '~relay/ProjectCard_project.graphql'
 import { LineHeight } from '~ui/Primitives/constants'
-import type { TagVariant } from '~ds/Tag/Tag'
-import Tag from '~ds/Tag/Tag'
 import FormattedNumber from '~/components/Utils/FormattedNumber'
 import colors from '~/styles/modules/colors'
+import { Flex, Text, Tag, TagProps, Icon as DSIcon, CapUIIconSize, CapUIIcon } from '@cap-collectif/ui'
+
 type Steps = ReadonlyArray<{
   readonly state: StepState
   readonly __typename: string
 }>
-export const formatCounter = (iconName: string, count: number, archived: boolean) => (
+
+export const formatCounter = (iconName: CapUIIcon, count: number, archived: boolean) => (
   <Flex direction="row" alignItems="center">
-    <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} color={archived ? 'gray.500' : 'gray.700'} mr={1} />
+    <DSIcon size={CapUIIconSize.Md} color={archived ? 'gray.500' : 'gray.700'} mr={1} name={iconName} />
     <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'} as="div">
       <FormattedNumber number={count} />
     </Text>
   </Flex>
 )
-export const formatInfo = (iconName: string, text: string | null | undefined, archived: boolean, color?: string) => {
+
+export const formatInfo = (iconName: CapUIIcon, text: string | null | undefined, archived: boolean, color?: string) => {
   if (!text) {
     return null
   }
 
   return (
     <Flex maxWidth="100%" direction="row" alignItems="center" mb={2} mr={2}>
-      <Icon name={ICON_NAME[iconName]} size={ICON_SIZE.MD} mr={1} />
+      <DSIcon name={iconName} size={CapUIIconSize.Md} mr={1} />
       <Text
         as="span"
         css={{
@@ -54,21 +53,21 @@ const getIsFutureStep = (steps: Steps): boolean => {
   return futureSteps.length > 0 && openedSteps.length === 0 && closedSteps.length === 0
 }
 
-export const renderTag = (project: ProjectCard_project, intl: IntlShape) => {
+export const renderTag = (project: ProjectCard_project$data, intl: IntlShape) => {
   const restrictedTag = () => (
     <Tag
-      variant="neutral-gray"
+      variantColor="neutral-gray"
       css={css({
         p: {
           lineHeight: 1,
         },
       })}
     >
-      <Icon name="LOCK" size={ICON_SIZE.SM} color="gray.700" />
+      <DSIcon size={CapUIIconSize.Sm} name={CapUIIcon.Lock} color="gray.700" />
     </Tag>
   )
 
-  const tag = (variant: TagVariant, message: string, isRestricted?: boolean) => (
+  const tag = (variant: TagProps['variantColor'], message: string, isRestricted?: boolean) => (
     <Flex
       top={[2, 4]}
       left={[2, 4]}
@@ -76,7 +75,7 @@ export const renderTag = (project: ProjectCard_project, intl: IntlShape) => {
         position: 'absolute',
       })}
     >
-      <Tag variant={variant} mr={1}>
+      <Tag variantColor={variant} mr={1}>
         <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700">
           {message}
         </Text>

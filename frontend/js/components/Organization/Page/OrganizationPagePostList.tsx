@@ -2,11 +2,9 @@ import * as React from 'react'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import type { OrganizationPagePostList_organization$key } from '~relay/OrganizationPagePostList_organization.graphql'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Heading from '~/components/Ui/Primitives/Heading'
-import Button from '~/components/DesignSystem/Button/Button'
-import AppBox from '~/components/Ui/Primitives/AppBox'
 import PostCard from '~/components/Ui/News/PostCard'
+import { Flex, Heading, Button } from '@cap-collectif/ui'
+
 const FRAGMENT = graphql`
   fragment OrganizationPagePostList_organization on Organization
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, hideUnpublishedPosts: { type: "Boolean" })
@@ -23,9 +21,11 @@ const FRAGMENT = graphql`
     }
   }
 `
+
 export type Props = {
   readonly organization: OrganizationPagePostList_organization$key
 }
+
 export const OrganizationPagePostList = ({ organization }: Props) => {
   const intl = useIntl()
   const { data, loadNext, hasNext } = usePaginationFragment(FRAGMENT, organization)
@@ -42,13 +42,13 @@ export const OrganizationPagePostList = ({ organization }: Props) => {
         <PostCard post={edge?.node} key={index} mb={4} />
       ))}
       {hasNext ? (
-        <AppBox width="100%">
-          <Button margin="auto" onClick={() => loadNext(3)} color="blue.500">
+        <Flex width="100%">
+          <Button variant="tertiary" margin="auto" onClick={() => loadNext(3)}>
             {intl.formatMessage({
               id: 'global.more',
             })}
           </Button>
-        </AppBox>
+        </Flex>
       ) : null}
     </Flex>
   )

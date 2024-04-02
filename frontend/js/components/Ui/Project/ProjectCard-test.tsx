@@ -1,12 +1,26 @@
 /* eslint-env jest */
 import * as React from 'react'
-import { shallow } from 'enzyme'
-import { ProjectCard } from './ProjectCard'
-import { $refType } from '~/mocks'
+import ReactTestRenderer from 'react-test-renderer'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import type { ProjectCardTestQuery } from '~relay/ProjectCardTestQuery.graphql'
+import ProjectCard from './ProjectCard'
 
 describe('<ProjectCard />', () => {
+  let environment: any
+  let testComponentTree: any
+  let TestProjectCard: any
+
+  const query = graphql`
+    query ProjectCardTestQuery($id: ID = "project1") @relay_test_operation {
+      project: node(id: $id) {
+        ...ProjectCard_project
+      }
+    }
+  `
+
   const project = {
-    ' $refType': $refType,
     id: 'project1',
     title: 'Name of my project',
     publishedAt: '2030-03-10 00:00:00',
@@ -76,6 +90,7 @@ describe('<ProjectCard />', () => {
     isContributionsCounterDisplayable: true,
     isParticipantsCounterDisplayable: true,
   }
+
   const archivedProject = { ...project, archived: true }
   const projectWithoutCover = { ...project, cover: null }
   const projectWithoutParticipativeStep = { ...project, hasParticipativeStep: false }
@@ -113,36 +128,112 @@ describe('<ProjectCard />', () => {
     externalContributionsCount: 34,
     externalVotesCount: 41,
   }
-  it('should render correctly', () => {
-    const wrapper = shallow(<ProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} project={project} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly on project page', () => {
-    const wrapper = shallow(<ProjectCard backgroundColor="#e5e5e5" isProjectsPage project={project} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly without participative step', () => {
-    const wrapper = shallow(
-      <ProjectCard backgroundColor="#e5e5e5" isProjectsPage project={projectWithoutParticipativeStep} />,
+
+  const defaultMockResolvers = {
+    Project: () => project,
+  }
+
+  const archivedMockResolvers = {
+    Project: () => archivedProject,
+  }
+
+  const withoutCoverMockResolvers = {
+    Project: () => projectWithoutCover,
+  }
+
+  const withoutParticipativeStepMockResolvers = {
+    Project: () => projectWithoutParticipativeStep,
+  }
+
+  const withThemesAndDistrictsMockResolvers = {
+    Project: () => projectWithThemesAndDistricts,
+  }
+
+  const externalMockResolvers = {
+    Project: () => externalProject,
+  }
+
+  beforeEach(() => {
+    addsSupportForPortals()
+    environment = createMockEnvironment()
+    const queryVariables = {}
+
+    const TestRenderer = ({
+      componentProps,
+      queryVariables: variables,
+    }: {
+      componentProps: any
+      queryVariables: any
+    }) => {
+      const data = useLazyLoadQuery<ProjectCardTestQuery>(query, variables)
+
+      if (data?.project) {
+        return <ProjectCard project={data?.project} {...componentProps} />
+      }
+
+      return null
+    }
+
+    TestProjectCard = (componentProps: any) => (
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer componentProps={componentProps} queryVariables={queryVariables} />
+      </RelaySuspensFragmentTest>
     )
-    expect(wrapper).toMatchSnapshot()
   })
-  it('should render correctly with themes and districts', () => {
-    const wrapper = shallow(
-      <ProjectCard backgroundColor="#e5e5e5" isProjectsPage project={projectWithThemesAndDistricts} />,
-    )
-    expect(wrapper).toMatchSnapshot()
+
+  afterEach(() => {
+    clearSupportForPortals()
   })
-  it('should render correctly without cover', () => {
-    const wrapper = shallow(<ProjectCard backgroundColor="#e5e5e5" isProjectsPage project={projectWithoutCover} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly an external project', () => {
-    const wrapper = shallow(<ProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} project={externalProject} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly an archived project', () => {
-    const wrapper = shallow(<ProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} project={archivedProject} />)
-    expect(wrapper).toMatchSnapshot()
+
+  describe('<TestProjectCard />', () => {
+    it('should render correctly', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, defaultMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly on project page', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, defaultMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly without participative step', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, withoutParticipativeStepMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly with themes and districts', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, withThemesAndDistrictsMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly without cover', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, withoutCoverMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly an external project', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, externalMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render correctly an archived project', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, archivedMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
   })
 })
