@@ -186,7 +186,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -227,7 +227,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['enabled' => true]))
@@ -260,7 +260,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -302,7 +302,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -375,7 +375,7 @@ class AnalyticsSearch
         $boolQuery->addFilter(new Query\Term(['objectType' => 'follower']))->addFilter(
             new Range('followedAt', [
                 'gte' => $start->format(DateTimeInterface::ATOM),
-                'lte' => $end->format(DateTimeInterface::ATOM),
+                'lt' => $end->format(DateTimeInterface::ATOM),
             ])
         );
 
@@ -414,7 +414,7 @@ class AnalyticsSearch
         $boolQuery->addFilter(new Query\Term(['published' => true]))->addFilter(
             new Range('createdAt', [
                 'gte' => $start->format(DateTimeInterface::ATOM),
-                'lte' => $end->format(DateTimeInterface::ATOM),
+                'lt' => $end->format(DateTimeInterface::ATOM),
             ])
         );
         if ($projectId) {
@@ -457,7 +457,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range($aggregatedField, [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -492,7 +492,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))
@@ -527,7 +527,7 @@ class AnalyticsSearch
             ->addFilter(
                 new Range('createdAt', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['published' => true]))

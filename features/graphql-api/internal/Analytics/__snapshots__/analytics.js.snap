@@ -1970,7 +1970,7 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
-          "key": "2023-12-01T00:00:00.000Z",
+          "key": "2023-12-01T00:00:00.000+01:00",
           "totalCount": 27,
         },
       ],
@@ -3455,7 +3455,7 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
-          "key": "2023-12-01T00:00:00.000Z",
+          "key": "2023-12-01T00:00:00.000+01:00",
           "totalCount": 4,
         },
       ],

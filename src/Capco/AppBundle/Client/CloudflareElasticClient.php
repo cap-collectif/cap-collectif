@@ -16,6 +16,7 @@ use Elastica\Multi\Search;
 use Elastica\Query;
 use Elastica\Query\Range;
 use Psr\Log\LoggerInterface;
+use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
 class CloudflareElasticClient
 {
@@ -24,6 +25,7 @@ class CloudflareElasticClient
     private LoggerInterface $esLoggerCollector;
     private string $hostname;
     private string $index;
+    private TimezoneDetectorInterface $timezoneDetector;
 
     public function __construct(
         LoggerInterface $logger,
@@ -35,10 +37,12 @@ class CloudflareElasticClient
         string $logpushElasticsearchIndex,
         string $logpushElasticsearchUsername,
         string $logpushElasticsearchPassword,
-        string $logpushElasticsearchPort
+        string $logpushElasticsearchPort,
+        TimezoneDetectorInterface $timezoneDetector
     ) {
         $this->hostname = $hostname;
         $this->logger = $logger;
+        $this->timezoneDetector = $timezoneDetector;
         $this->esClient = $this->createEsClient(
             $environment,
             $elasticsearchHost,
@@ -135,7 +139,7 @@ class CloudflareElasticClient
 
         $searchQueries = $this->getExternalAnalyticsSearches(
             $start,
-            $end->setTime(23, 59, 59),
+            $end,
             $projectSlug,
             $requestedFields
         );
@@ -154,6 +158,45 @@ class CloudflareElasticClient
         return $searchResult;
     }
 
+    /**
+     * Checks if ALL documents for date range (and projectSlug) have "clientIP" field,
+     * so that we can use it later.
+     */
+    public function canUseClientIpField(
+        DateTimeInterface $start,
+        DateTimeInterface $end,
+        ?string $projectSlug
+    ): bool {
+        $useragentFieldSearchQuery = new Search($this->esClient);
+
+        // Actually counting how many documents don't have "clientIP" field.
+        $boolQuery = new Query\BoolQuery();
+
+        $boolQuery
+            ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addFilter(
+                new Range('edgeEndTimestamp', [
+                    'gte' => $start->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
+                ])
+            )
+            ->addMustNot(
+                (new Query\Exists('clientIP'))
+            )
+        ;
+
+        $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
+        $query->setSize(1);
+
+        $useragentFieldSearchQuery->addSearch($this->createSearchQuery($query));
+
+        $searchResult = $useragentFieldSearchQuery->search()->getResponse()->getData();
+
+        // If zero results, it means that ALL documents have the field.
+        return isset($searchResult['responses'][0]['hits']['total']['value'])
+            && 0 === $searchResult['responses'][0]['hits']['total']['value'];
+    }
+
     private function createUniqueVisitorsQuery(
         DateTimeInterface $start,
         DateTimeInterface $end,
@@ -162,28 +205,49 @@ class CloudflareElasticClient
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addMustNot(
+                (new Query\BoolQuery())->addFilter(
+                    new Query\Terms('clientIPClass.keyword', ['searchEngine', 'monitoringService', 'badHost', 'scan'])
+                )
+            )
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
         ;
+
+        $dateHistogram = (new DateHistogram(
+            'visitors_per_interval',
+            'edgeEndTimestamp',
+            $this->getDateHistogramInterval($start, $end)
+        ))
+            ->setTimezone($this->timezoneDetector->getTimezone())
+            ->addAggregation(
+                (new Cardinality('unique_visitors_per_interval'))->setField('clientIP.keyword')
+            )
+        ;
+
+        if ($this->canUseClientIpField($start, $end, $projectSlug)) {
+            $dateHistogram
+                ->addAggregation(
+                    (new Cardinality('unique_visitors_per_interval'))->setField('clientIP.keyword')
+                )
+            ;
+        } else {
+            $dateHistogram
+                ->addAggregation(
+                    (new Cardinality('unique_visitors_per_interval'))->setField('uniqueVisitorFingerprint.keyword')
+                )
+            ;
+        }
 
         $query = new Query($this->filterClientRequestURIByProject($boolQuery, $projectSlug));
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation((new Cardinality('unique_visitors'))->setField('clientIP.keyword'))
-            ->addAggregation(
-                (new DateHistogram(
-                    'visitors_per_interval',
-                    'edgeEndTimestamp',
-                    $this->getDateHistogramInterval($start, $end)
-                ))->addAggregation(
-                    (new Cardinality('unique_visitors_per_interval'))->setField('clientIP.keyword')
-                )
-            )
+            ->addAggregation($dateHistogram)
         ;
 
         return $this->createSearchQuery($query);
@@ -197,10 +261,15 @@ class CloudflareElasticClient
         $boolQuery = new Query\BoolQuery();
         $boolQuery
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
+            ->addMustNot(
+                (new Query\BoolQuery())->addFilter(
+                    new Query\Terms('clientIPClass.keyword', ['searchEngine', 'monitoringService', 'badHost', 'scan'])
+                )
+            )
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
         ;
@@ -210,11 +279,11 @@ class CloudflareElasticClient
             ->setTrackTotalHits(true)
             ->setSize(0)
             ->addAggregation(
-                new DateHistogram(
+                (new DateHistogram(
                     'page_view_per_interval',
                     'edgeEndTimestamp',
                     $this->getDateHistogramInterval($start, $end)
-                )
+                ))->setTimezone($this->timezoneDetector->getTimezone())
             )
         ;
 
@@ -231,7 +300,7 @@ class CloudflareElasticClient
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -275,7 +344,7 @@ class CloudflareElasticClient
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -303,7 +372,7 @@ class CloudflareElasticClient
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['socialNetworkReferer' => true]))
@@ -326,7 +395,7 @@ class CloudflareElasticClient
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Term(['clientRequestHost.keyword' => $this->hostname]))
@@ -350,7 +419,7 @@ class CloudflareElasticClient
             ->addFilter(
                 new Range('edgeEndTimestamp', [
                     'gte' => $start->format(DateTimeInterface::ATOM),
-                    'lte' => $end->format(DateTimeInterface::ATOM),
+                    'lt' => $end->format(DateTimeInterface::ATOM),
                 ])
             )
             ->addFilter(new Query\Exists('clientRequestReferer'))

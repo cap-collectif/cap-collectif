@@ -6,12 +6,18 @@ use Capco\AppBundle\Client\CloudflareElasticClient;
 use Elastica\Multi\ResultSet;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
+use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
+/**
+ * @extends ObjectBehavior<string, string>
+ */
 class CloudflareElasticClientSpec extends ObjectBehavior
 {
-    public function let(LoggerInterface $logger, LoggerInterface $esLogger)
+    public function let(LoggerInterface $logger, LoggerInterface $esLogger, TimezoneDetectorInterface $timeZoneDetector): void
     {
-        $this->beConstructedWith($logger, $esLogger, '', '', '', '', '', '', '', '');
+        $timeZoneDetector->getTimezone()->willReturn('Europe/Paris');
+
+        $this->beConstructedWith($logger, $esLogger, '', '', '', '', '', '', '', '', $timeZoneDetector);
     }
 
     public function it_is_initializable(): void
@@ -27,6 +33,7 @@ class CloudflareElasticClientSpec extends ObjectBehavior
 
         $searches = ['mostVisitedPages' => null];
 
+        /** @phpstan-ignore-next-line */
         $results = $this->getExternalAnalyticsSearches($startAt, $endAt, null, $requestedFields);
         $results->shouldHaveKey('mostVisitedPages');
         $results->shouldNotHaveKey('pageViews');
