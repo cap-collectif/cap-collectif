@@ -3,7 +3,6 @@
   "screenshotsFolder": "./screenshots",
   "screenshotOnRunFailure": true,
   "video": false,
-  "experimentalSessionAndOrigin": true,
   "reporter": "junit",
   "reporterOptions": {
     "mochaFile": "tests-results/output-[hash].xml"

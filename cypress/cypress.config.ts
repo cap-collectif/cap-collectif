@@ -17,6 +17,5 @@ export default defineConfig({
     specPattern: './integration/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: './support/index.ts',
     baseUrl: 'https://capco.test',
-    experimentalSessionAndOrigin: true,
   },
 })

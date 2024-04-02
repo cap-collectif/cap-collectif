@@ -5,7 +5,6 @@
   "screenshotOnRunFailure": true,
   "videoUploadOnPasses": false,
   "videoCompression": false,
-  "experimentalSessionAndOrigin": true,
   "retries": {
     "runMode": 0,
     "openMode": 3
