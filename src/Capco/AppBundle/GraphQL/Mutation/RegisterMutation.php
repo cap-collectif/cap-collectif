@@ -102,7 +102,7 @@ class RegisterMutation implements MutationInterface
         ) {
             return [
                 'user' => null,
-                'errorsCode' => self::RATE_LIMIT_REACHED,
+                'errorsCode' => [self::RATE_LIMIT_REACHED],
             ];
         }
 

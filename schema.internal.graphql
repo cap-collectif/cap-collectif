@@ -14488,6 +14488,11 @@ enum RegisterErrorCode {
 
   """The form should not contain extra fields"""
   NO_EXTRA_FIELDS
+
+  """
+  The rate limit has been reached, please wait a few minutes before retrying.
+  """
+  RATE_LIMIT_REACHED
 }
 
 input RegisterInput {

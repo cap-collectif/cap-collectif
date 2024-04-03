@@ -341,6 +341,10 @@ export const register = async (
       if (errorCode === 'EMAIL_DOMAIN_NOT_AUTHORIZED') {
         errors = { ...errors, email: 'registration.constraints.email.not_authorized' }
       }
+
+      if (errorCode === 'RATE_LIMIT_REACHED') {
+        errors = { ...errors, email: 'registration.constraints.rate.limit.reached' }
+      }
     })
     throw new SubmissionError(errors)
   }

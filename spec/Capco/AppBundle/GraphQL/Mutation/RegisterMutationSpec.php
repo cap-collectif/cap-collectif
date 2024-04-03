@@ -34,6 +34,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 BypassFinals::enable();
 
+/**
+ * @extends ObjectBehavior<string, string>
+ */
 class RegisterMutationSpec extends ObjectBehavior
 {
     use GraphQLMock;
@@ -53,7 +56,7 @@ class RegisterMutationSpec extends ObjectBehavior
         EntityManagerInterface $em,
         RateLimiter $rateLimiter,
         RequestGuesser $requestGuesser
-    ) {
+    ): void {
         $this->beConstructedWith(
             $toggleManager,
             $userInviteRepository,
@@ -72,7 +75,7 @@ class RegisterMutationSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(RegisterMutation::class);
     }
@@ -81,7 +84,7 @@ class RegisterMutationSpec extends ObjectBehavior
         Arg $args,
         RateLimiter $rateLimiter,
         RequestGuesser $requestGuesser
-    ) {
+    ): void {
         $args->getArrayCopy()->willReturn([
             'invitationToken' => 'theToken',
             'email' => 'toto@test.com',
@@ -103,7 +106,7 @@ class RegisterMutationSpec extends ObjectBehavior
 
         $payload = $this->__invoke($args);
         $payload->shouldHaveCount(2);
-        $payload['errorsCode']->shouldBe(RegisterMutation::RATE_LIMIT_REACHED);
+        $payload['errorsCode']->shouldBe([RegisterMutation::RATE_LIMIT_REACHED]);
         $payload['user']->shouldBe(null);
     }
 
@@ -122,7 +125,7 @@ class RegisterMutationSpec extends ObjectBehavior
         UserInvitationHandler $userInvitationHandler,
         RateLimiter $rateLimiter,
         RequestGuesser $requestGuesser
-    ) {
+    ): void {
         $args->getArrayCopy()->willReturn([
             'invitationToken' => 'theToken',
             'email' => 'toto@test.com',

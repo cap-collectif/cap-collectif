@@ -31,3 +31,6 @@ RegisterErrorCode:
             NO_EXTRA_FIELDS:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\RegisterMutation::NO_EXTRA_FIELDS
                 description: 'The form should not contain extra fields'
+            RATE_LIMIT_REACHED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\RegisterMutation::RATE_LIMIT_REACHED
+                description: 'The rate limit has been reached, please wait a few minutes before retrying.'
