@@ -64,6 +64,7 @@ describe('<ProjectCard />', () => {
     votes: {
       totalCount: 32,
     },
+    paperVotesTotalCount: 0,
     anonymousVotes: {
       totalCount: 12,
     },
@@ -129,6 +130,11 @@ describe('<ProjectCard />', () => {
     externalVotesCount: 41,
   }
 
+  const paperVotesProject = {
+    ...project,
+    paperVotesTotalCount: 10,
+  }
+
   const defaultMockResolvers = {
     Project: () => project,
   }
@@ -151,6 +157,10 @@ describe('<ProjectCard />', () => {
 
   const externalMockResolvers = {
     Project: () => externalProject,
+  }
+
+  const paperVotesMockResolvers = {
+    Project: () => paperVotesProject,
   }
 
   beforeEach(() => {
@@ -231,6 +241,13 @@ describe('<ProjectCard />', () => {
     it('should render correctly an archived project', () => {
       environment.mock.queueOperationResolver((operation: any) =>
         MockPayloadGenerator.generate(operation, archivedMockResolvers),
+      )
+      testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} />)
+      expect(testComponentTree).toMatchSnapshot()
+    })
+    it('should render a project with paper votes', () => {
+      environment.mock.queueOperationResolver((operation: any) =>
+        MockPayloadGenerator.generate(operation, paperVotesMockResolvers),
       )
       testComponentTree = ReactTestRenderer.create(<TestProjectCard backgroundColor="#e5e5e5" isProjectsPage={false} />)
       expect(testComponentTree).toMatchSnapshot()

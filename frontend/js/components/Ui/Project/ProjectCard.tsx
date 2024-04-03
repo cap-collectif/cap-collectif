@@ -42,6 +42,7 @@ const FRAGMENT = graphql`
     votes {
       totalCount
     }
+    paperVotesTotalCount
     anonymousVotes: votes(anonymous: true) {
       totalCount
     }
@@ -102,6 +103,10 @@ export const ProjectCard = ({
   const project = useFragment(FRAGMENT, projectKey)
 
   const showCounters = project.hasParticipativeStep || project.isExternal
+  const numericVotesTotalCount = project.votes?.totalCount ?? 0
+  const votesTotalCount = project.isExternal
+    ? project.externalVotesCount || 0
+    : numericVotesTotalCount + project.paperVotesTotalCount || 0
 
   return (
     <Box
@@ -211,22 +216,20 @@ export const ProjectCard = ({
             )}
             {showCounters && (
               <Flex direction="row" spacing={8} mt={4}>
-                {(project.isVotesCounterDisplayable &&
-                  ((project.isExternal && project.externalVotesCount) || project.votes.totalCount) &&
-                  formatCounter(
-                    CapUIIcon.ThumbUpO,
-                    project.isExternal ? project.externalVotesCount || 0 : project.votes.totalCount,
-                    project.archived,
-                  )) ||
+                {((project.isVotesCounterDisplayable || project.isExternal) &&
+                  votesTotalCount &&
+                  formatCounter(CapUIIcon.ThumbUpO, votesTotalCount, project.archived)) ||
                   null}
-                {(project.isContributionsCounterDisplayable &&
+                {((project.isContributionsCounterDisplayable ||
+                  (project.isExternal && project.externalContributionsCount)) &&
                   formatCounter(
                     CapUIIcon.BubbleO,
                     project.isExternal ? project.externalContributionsCount || 0 : project.contributions.totalCount,
                     project.archived,
                   )) ||
                   null}
-                {(project.isParticipantsCounterDisplayable &&
+                {((project.isParticipantsCounterDisplayable ||
+                  (project.isExternal && project.externalParticipantsCount)) &&
                   formatCounter(
                     CapUIIcon.UserO,
                     project.isExternal
