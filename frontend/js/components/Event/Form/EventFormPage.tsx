@@ -104,6 +104,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         ? Math.round(Number(values.maxRegistrations))
         : null,
     owner,
+    districts: values.districts ? values.districts.map(t => t.value) : null,
   }
   return AddEventMutation.commit({
     input,

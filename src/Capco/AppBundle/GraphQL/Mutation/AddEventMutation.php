@@ -77,6 +77,7 @@ class AddEventMutation extends AbstractEventMutation
             LocaleUtils::indexTranslations($values);
             $this->setProjects($event, $viewer, $values);
             $this->setSteps($event, $viewer, $values);
+            $this->setDistricts($values);
 
             if ($viewer->isOnlyUser() && !$viewer->isOrganizationMember()) {
                 $event->setReview(new EventReview());

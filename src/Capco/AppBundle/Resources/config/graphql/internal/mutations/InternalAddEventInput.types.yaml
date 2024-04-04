@@ -62,3 +62,6 @@ InternalAddEventInput:
             owner:
                 type: 'ID'
                 description: 'ID of the owner of the event, user or organization. If null, fallback on the viewer.'
+            districts:
+                type: '[ID]'
+                description: 'An array of Node IDs of districts associated to this event.'

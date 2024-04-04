@@ -13,6 +13,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -44,6 +45,17 @@ abstract class AbstractEventMutation implements MutationInterface
         $this->publisher = $publisher;
         $this->authorizationChecker = $authorizationChecker;
         $this->translator = $translator;
+    }
+
+    public function setDistricts(array &$arguments): void
+    {
+        if (empty($arguments['districts'])) {
+            return;
+        }
+
+        $arguments['districts'] = array_map(function ($districtGlobalId) {
+            return GlobalId::fromGlobalId($districtGlobalId)['id'];
+        }, $arguments['districts']);
     }
 
     protected function getEvent(string $globalId, User $viewer): Event
