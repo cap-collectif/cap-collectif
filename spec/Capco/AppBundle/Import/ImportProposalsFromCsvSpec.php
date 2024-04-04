@@ -15,6 +15,7 @@ use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Service\SocialNetworksUrlSanitizer;
 use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Repository\UserRepository;
 use DG\BypassFinals;
@@ -44,7 +45,8 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
         LoggerInterface $logger,
         TokenGeneratorInterface $tokenGenerator,
         ValidatorInterface $validator,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
     ) {
         $this->beConstructedWith(
             $mediaManager,
@@ -61,7 +63,8 @@ class ImportProposalsFromCsvSpec extends ObjectBehavior
             $tokenGenerator,
             $validator,
             $translator,
-            '/var/www/tmp'
+            '/var/www/tmp',
+            $socialNetworksUrlSanitizer
         );
     }
 

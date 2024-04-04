@@ -83,6 +83,7 @@ class ImportIDFProposalsFromCsvCommand extends Command
         $this->importProposalsFromCsv->setProposalForm($proposalForm);
 
         try {
+            $this->importProposalsFromCsv->permissiveSocialNetworksUrl = true;
             $result = $this->importProposalsFromCsv->import(
                 $dryRun,
                 $skipDuplicateLines,

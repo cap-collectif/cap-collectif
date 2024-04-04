@@ -25,6 +25,7 @@ use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Service\SocialNetworksUrlSanitizer;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Utils\Map;
 use Capco\AppBundle\Utils\SpoutHelper;
@@ -44,6 +45,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ImportProposalsFromCsv
 {
     use TranslationTrait;
+    public bool $permissiveSocialNetworksUrl = false;
 
     private ?string $projectDir;
     private ?string $filePath;
@@ -70,6 +72,7 @@ class ImportProposalsFromCsv
     private TokenGeneratorInterface $tokenGenerator;
     private ValidatorInterface $validator;
     private TranslatorInterface $translator;
+    private SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -86,7 +89,8 @@ class ImportProposalsFromCsv
         TokenGeneratorInterface $tokenGenerator,
         ValidatorInterface $validator,
         TranslatorInterface $translator,
-        string $projectDir
+        string $projectDir,
+        SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
     ) {
         $this->mediaManager = $mediaManager;
         $this->districtRepository = $districtRepository;
@@ -103,6 +107,7 @@ class ImportProposalsFromCsv
         $this->projectDir = $projectDir;
         $this->validator = $validator;
         $this->translator = $translator;
+        $this->socialNetworksUrlSanitizer = $socialNetworksUrlSanitizer;
     }
 
     public function setProposalForm(ProposalForm $proposalForm): void
@@ -424,6 +429,10 @@ class ImportProposalsFromCsv
                 );
 
                 $isCurrentLineFail = true;
+            }
+
+            if ($this->permissiveSocialNetworksUrl) {
+                $row = $this->socialNetworksUrlSanitizer->sanitize($row);
             }
 
             try {
