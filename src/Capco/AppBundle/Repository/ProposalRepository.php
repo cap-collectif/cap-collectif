@@ -818,13 +818,15 @@ class ProposalRepository extends EntityRepository
         return true;
     }
 
-    public function countPaperVotes(string $proposalId): int
+    public function countPaperVotes(string $proposalId, string $stepId): int
     {
         $qb = $this->createQueryBuilder('p')
             ->select('pv.totalCount')
             ->join('p.paperVotes', 'pv')
             ->where('p.id = :proposalId')
+            ->andWhere('pv.step = :stepId')
             ->setParameter('proposalId', $proposalId)
+            ->setParameter('stepId', $stepId)
         ;
 
         try {
@@ -834,13 +836,15 @@ class ProposalRepository extends EntityRepository
         }
     }
 
-    public function countPaperVotesPoints(string $proposalId): int
+    public function countPaperVotesPoints(string $proposalId, string $stepId): int
     {
         $qb = $this->createQueryBuilder('p')
             ->select('pv.totalPointsCount')
             ->join('p.paperVotes', 'pv')
             ->where('p.id = :proposalId')
+            ->andWhere('pv.step = :stepId')
             ->setParameter('proposalId', $proposalId)
+            ->setParameter('stepId', $stepId)
         ;
 
         try {

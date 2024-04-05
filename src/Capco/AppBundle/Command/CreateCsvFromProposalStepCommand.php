@@ -574,9 +574,9 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 $this->connectionTraversor->traverse(
                     $proposals,
                     'proposals',
-                    function ($edge) use ($progress, $output) {
+                    function ($edge) use ($step, $progress, $output) {
                         $proposal = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
-                        $this->addProposalRow($proposal, $output);
+                        $this->addProposalRow($proposal, $step, $output);
                         $progress->advance();
                     },
                     function ($pageInfo) use ($ownerNotAdmin) {
@@ -816,15 +816,15 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         }
     }
 
-    protected function addProposalRow(array $proposal, OutputInterface $output): void
+    protected function addProposalRow(array $proposal, AbstractStep $step, OutputInterface $output): void
     {
         $this->sanitizeResponses($proposal);
 
         // we need to count paperVotes by accessing repository directly, because we can not bypass the acess restriction in graphql field when exporting
         // see https://github.com/cap-collectif/platform/issues/16305#issuecomment-1766033783
         $id = GlobalId::fromGlobalId($proposal['id'])['id'];
-        $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotes($id);
-        $proposal[self::PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotesPoints($id);
+        $proposal[self::PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotes($id, $step->getId());
+        $proposal[self::PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY] = $this->proposalRepository->countPaperVotesPoints($id, $step->getId());
 
         $row = ['proposal'];
         foreach ($this->headersMap as $columnName => $path) {
