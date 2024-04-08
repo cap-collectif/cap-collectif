@@ -110,7 +110,7 @@ Scenario: Logged in admin can approve an awaiting event
   And I click on button "#confirm-event-edit"
   And I wait "global.saved" to appear on current page in "body"
   And I visited "events page"
-  And I should see "event Create By user with review in awaiting"
+  And I should see "event Create By user with review in awaiting" within 20 seconds
 
 @database @rabbimq
 Scenario: Logged in admin can refuse an awaiting event

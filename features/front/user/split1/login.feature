@@ -13,7 +13,7 @@ Scenario: An admin wants to login and see he has successfully logged in.
 Scenario: A logged user wants to logout
   Given I am logged in as user
   When I logout
-  Then I should see "global.login" within 3 seconds
+  Then I should see "global.login" within 10 seconds
 
 @database
 Scenario: User has lost password

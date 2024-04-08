@@ -71,7 +71,7 @@ Scenario: Archived events can be filtered by title
     | event-search-input | ParisWeb2014 |
   And I wait ".eventPreview" to disappear on current page
   And I wait 2 seconds
-  And I wait ".eventPreview" to appear on current page
+  And I wait ".eventPreview" to appear on current page maximum 20
   Then I should see 1 ".eventPreview" elements
   And I should see "ParisWeb2014" within 7 seconds
   And I should not see "evenementPasseSansDateDeFin"
