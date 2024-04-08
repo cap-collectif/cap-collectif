@@ -47,6 +47,9 @@ abstract class AbstractEventMutation implements MutationInterface
         $this->translator = $translator;
     }
 
+    /**
+     * @param array{'districts'?: array<int>} $arguments
+     */
     public function setDistricts(array &$arguments): void
     {
         if (empty($arguments['districts'])) {
