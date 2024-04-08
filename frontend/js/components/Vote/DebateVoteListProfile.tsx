@@ -5,14 +5,14 @@ import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import type { RelayPaginationProp } from 'react-relay'
 import { graphql, createPaginationContainer } from 'react-relay'
-import type { DebateVoteListProfile_debateVoteList } from '~relay/DebateVoteListProfile_debateVoteList.graphql'
+import type { DebateVoteListProfile_debateVoteList$data } from '~relay/DebateVoteListProfile_debateVoteList.graphql'
 import DebateVoteItem from './DebateVoteItem'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 
 const DEBATE_VOTE_PAGINATION = 5
 type Props = {
   relay: RelayPaginationProp
-  debateVoteList: DebateVoteListProfile_debateVoteList
+  debateVoteList: DebateVoteListProfile_debateVoteList$data
 }
 export const DebateVoteListProfile = ({ debateVoteList, relay }: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -35,6 +35,7 @@ export const DebateVoteListProfile = ({ debateVoteList, relay }: Props) => {
         .map(edge => edge.node)
         .filter(Boolean)
         .map(vote => (
+          // @ts-ignore old relay types
           <DebateVoteItem vote={vote} key={vote.id} />
         ))}
       {relay.hasMore() && (

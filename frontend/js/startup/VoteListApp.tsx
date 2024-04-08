@@ -22,7 +22,8 @@ const DebateVoteListProfile = lazy(
 )
 export default ({ userId }: { userId: string }) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <style>{'.cap-link:before {display:none;}'}</style>
+    <Providers designSystem>
       <QueryRenderer
         variables={{
           userId,

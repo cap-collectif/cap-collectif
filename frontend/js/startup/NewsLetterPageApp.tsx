@@ -4,7 +4,7 @@ import Providers from './Providers'
 import NewsLetterInput from '~/components/Newsletter/NewsLetterInput'
 
 export default () => (
-  <Providers>
+  <Providers designSystem>
     <React.Suspense fallback={null}>
       <NewsLetterInput />
     </React.Suspense>

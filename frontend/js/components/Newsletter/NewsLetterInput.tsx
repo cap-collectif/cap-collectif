@@ -2,11 +2,10 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
 import { SubmissionError } from 'redux-form'
-import Flex from '~ui/Primitives/Layout/Flex'
 import Captcha from '~/components/Form/Captcha'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import SubscribeNewsletterMutation from '~/mutations/SubscribeNewsletterMutation'
-import { toast } from '~/components/DesignSystem/Toast'
+import { Flex, toast } from '@cap-collectif/ui'
 
 const Input = styled.input`
   width: 250px;
@@ -34,7 +33,7 @@ const NewsLetterInput = () => {
     }
   }
 
-  const onSubmit = (event: Event) => {
+  const onSubmit = (event: React.FormEvent) => {
     setFormCaptchaError(false)
     event.preventDefault()
 

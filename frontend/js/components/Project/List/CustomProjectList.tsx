@@ -6,7 +6,7 @@ import Loader from '~ui/FeedbacksIndicators/Loader'
 import CustomProjectListView from './CustomProjectListView'
 import ProjectsListPlaceholder from '~/components/Project/List/ProjectsListPlaceholder'
 import type { FeatureToggles, GlobalState } from '~/types'
-import type { CustomProjectListQueryResponse } from '~relay/CustomProjectListQuery.graphql'
+import type { CustomProjectListQuery$data } from '~relay/CustomProjectListQuery.graphql'
 type Props = {
   readonly projectsCount: number
   readonly features: FeatureToggles
@@ -28,7 +28,7 @@ const query = graphql`
 const CustomProjectList = ({ projectsCount, features }: Props) => {
   return (
     <QueryRenderer
-      environment={environment}
+      environment={environment as any}
       query={query}
       variables={{
         author: null,
@@ -37,7 +37,7 @@ const CustomProjectList = ({ projectsCount, features }: Props) => {
         error,
         props,
       }: ReactRelayReadyState & {
-        props: CustomProjectListQueryResponse | null | undefined
+        props: CustomProjectListQuery$data | null | undefined
       }) => {
         if (error) {
           return graphqlError

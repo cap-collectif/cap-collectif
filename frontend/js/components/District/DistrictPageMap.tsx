@@ -6,7 +6,7 @@ import turf from 'turf-meta'
 import 'leaflet/dist/leaflet.css'
 import CapcoTileLayer from '../Utils/CapcoTileLayer'
 import { formatGeoJsons } from '~/utils/geojson'
-import AppBox from '../Ui/Primitives/AppBox'
+import { Box } from '@cap-collectif/ui'
 
 type Props = {
   geojson: string
@@ -70,7 +70,7 @@ const DistrictPageMap = ({ geojson }: Props) => {
   const districtGeoJSON = getDistrict(geoJSON)
   if (!districtGeoJSON) return null
   return (
-    <AppBox
+    <Box
       width="575px"
       height="300px"
       borderRadius={20}
@@ -122,7 +122,7 @@ const DistrictPageMap = ({ geojson }: Props) => {
       >
         <CapcoTileLayer />
       </MapContainer>
-    </AppBox>
+    </Box>
   )
 }
 

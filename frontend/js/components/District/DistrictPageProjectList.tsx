@@ -2,9 +2,8 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, usePaginationFragment } from 'react-relay'
 import type { DistrictPageProjectList_query$key } from '~relay/DistrictPageProjectList_query.graphql'
-import Button from '../DesignSystem/Button/Button'
 import ProjectPreview from '../Project/Preview/ProjectPreview'
-import { Box, Heading, Grid } from '@cap-collectif/ui'
+import { Box, Heading, Grid, Button } from '@cap-collectif/ui'
 
 export type Props = {
   query: DistrictPageProjectList_query$key

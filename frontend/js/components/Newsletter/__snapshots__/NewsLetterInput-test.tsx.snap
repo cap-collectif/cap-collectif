@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NewsLetterInput /> renders correctly 1`] = `
-<ForwardRef
+<Flex
   justifyContent="center"
 >
-  <ForwardRef
+  <Flex
     direction="column"
     padding={4}
   >
@@ -12,7 +12,7 @@ exports[`<NewsLetterInput /> renders correctly 1`] = `
       id="newsletterSubscriptionForm"
       onSubmit={[Function]}
     >
-      <ForwardRef
+      <Flex
         mb={2}
       >
         <NewsLetterInput__Input
@@ -31,7 +31,7 @@ exports[`<NewsLetterInput /> renders correctly 1`] = `
         >
           global.register
         </button>
-      </ForwardRef>
+      </Flex>
       <div
         className="form-group hidden "
       >
@@ -46,6 +46,6 @@ exports[`<NewsLetterInput /> renders correctly 1`] = `
         </span>
       </div>
     </form>
-  </ForwardRef>
-</ForwardRef>
+  </Flex>
+</Flex>
 `;

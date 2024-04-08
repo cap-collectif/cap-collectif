@@ -95,70 +95,24 @@ exports[`<ProjectPreviewCounters /> should render correctly counters with distri
       showZero={true}
       value={72}
     />
-    <ProjectHeaderDistrictsListLegacy
-      breakingNumber={1}
-      project={
+    <div
+      style={
         Object {
-          " $fragmentRefs": null,
-          " $refType": null,
-          "anonymousReplies": Object {
-            "totalCount": 12,
-          },
-          "anonymousVotes": Object {
-            "totalCount": 12,
-          },
-          "archived": false,
-          "contributions": Object {
-            "totalCount": 89,
-          },
-          "contributors": Object {
-            "totalCount": 48,
-          },
-          "districts": Object {
-            "edges": Array [
-              Object {
-                "node": Object {
-                  "name": "zone 1",
-                },
-              },
-              Object {
-                "node": Object {
-                  "name": "zone 2",
-                },
-              },
-              Object {
-                "node": Object {
-                  "name": "zone 3",
-                },
-              },
-              Object {
-                "node": Object {
-                  "name": "zone 4",
-                },
-              },
-              Object {
-                "node": Object {
-                  "name": "zone 5",
-                },
-              },
-            ],
-            "totalCount": 5,
-          },
-          "hasParticipativeStep": true,
-          "id": "project2",
-          "isContributionsCounterDisplayable": true,
-          "isExternal": false,
-          "isParticipantsCounterDisplayable": true,
-          "isVotesCounterDisplayable": true,
-          "type": Object {
-            "title": "global.consultation",
-          },
-          "votes": Object {
-            "totalCount": 54,
-          },
+          "fontSize": 14,
         }
       }
-    />
+    >
+      zone 1
+       
+      <FormattedMessage
+        id="and-count-other-areas"
+        values={
+          Object {
+            "count": 4,
+          }
+        }
+      />
+    </div>
     <ProjectRestrictedAccessFragmentLegacy
       icon="cap-lock-2-1"
       isOnProjectCard={true}

@@ -2,19 +2,15 @@ import * as React from 'react'
 import { FormattedMessage, FormattedDate } from 'react-intl'
 import moment from 'moment'
 import { graphql, createFragmentContainer } from 'react-relay'
-import type { DebateVoteItem_vote } from '~relay/DebateVoteItem_vote.graphql'
-import AppBox from '~ui/Primitives/AppBox'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
-import Tag from '~ds/Tag/Tag'
-import Link from '~ds/Link/Link'
+import type { DebateVoteItem_vote$data } from '~relay/DebateVoteItem_vote.graphql'
 import colors from '~/styles/modules/colors'
+import { Box, Flex, Link, Tag, Text } from '@cap-collectif/ui'
 
 type Props = {
-  vote: DebateVoteItem_vote
+  vote: DebateVoteItem_vote$data
 }
 export const DebateVoteItem = ({ vote }: Props) => (
-  <AppBox as="li" p={6} borderRadius={6} border="card" borderColor="gray.200" mb={6} bg="white">
+  <Box as="li" p={6} borderRadius={6} border="card" borderColor="gray.200" mb={6} bg="white">
     <Link
       href={vote.debate.url}
       fontSize={18}
@@ -31,13 +27,14 @@ export const DebateVoteItem = ({ vote }: Props) => (
       {vote.debate.step.title}
     </Link>
     <Flex flexDirection="row" spacing={2} alignItems="center">
-      <Text pt={3} fontSize={14} fontWeight={600} color="gray.900">
+      <Text fontSize={14} fontWeight={600} color="gray.900" as="div">
         <FormattedMessage id="i-voted" />
       </Text>
-      <Tag variant={vote.type === 'FOR' ? 'green' : 'red'} interactive={false}>
+      <Tag variantColor={vote.type === 'FOR' ? 'green' : 'red'}>
         <FormattedMessage id={vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'} />
       </Tag>
       <Text
+        as="div"
         fontSize={14}
         color="gray.700"
         css={{
@@ -53,7 +50,7 @@ export const DebateVoteItem = ({ vote }: Props) => (
         />
       </Text>
     </Flex>
-  </AppBox>
+  </Box>
 )
 export default createFragmentContainer(DebateVoteItem, {
   vote: graphql`

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
-<AppBox
+<Box
   as="li"
   bg="white"
   border="card"
@@ -19,16 +19,16 @@ exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
   >
     Pour ou contre
   </DebateVoteItem___StyledLink>
-  <ForwardRef
+  <Flex
     alignItems="center"
     flexDirection="row"
     spacing={2}
   >
     <Text
+      as="div"
       color="gray.900"
       fontSize={14}
       fontWeight={600}
-      pt={3}
     >
       <FormattedMessage
         id="i-voted"
@@ -36,8 +36,7 @@ exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
       />
     </Text>
     <Tag
-      interactive={false}
-      variant="red"
+      variantColor="red"
     >
       <FormattedMessage
         id="argument.show.type.against"
@@ -45,6 +44,7 @@ exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
       />
     </Tag>
     <DebateVoteItem___StyledText
+      as="div"
       color="gray.700"
       fontSize={14}
     >
@@ -67,12 +67,12 @@ exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
         }
       />
     </DebateVoteItem___StyledText>
-  </ForwardRef>
-</AppBox>
+  </Flex>
+</Box>
 `;
 
 exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
-<AppBox
+<Box
   as="li"
   bg="white"
   border="card"
@@ -90,16 +90,16 @@ exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
   >
     Pour ou contre
   </DebateVoteItem___StyledLink>
-  <ForwardRef
+  <Flex
     alignItems="center"
     flexDirection="row"
     spacing={2}
   >
     <Text
+      as="div"
       color="gray.900"
       fontSize={14}
       fontWeight={600}
-      pt={3}
     >
       <FormattedMessage
         id="i-voted"
@@ -107,8 +107,7 @@ exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
       />
     </Text>
     <Tag
-      interactive={false}
-      variant="green"
+      variantColor="green"
     >
       <FormattedMessage
         id="argument.show.type.for"
@@ -116,6 +115,7 @@ exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
       />
     </Tag>
     <DebateVoteItem___StyledText
+      as="div"
       color="gray.700"
       fontSize={14}
     >
@@ -138,6 +138,6 @@ exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
         }
       />
     </DebateVoteItem___StyledText>
-  </ForwardRef>
-</AppBox>
+  </Flex>
+</Box>
 `;

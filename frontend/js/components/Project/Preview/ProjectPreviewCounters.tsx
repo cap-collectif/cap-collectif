@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import ProjectPreviewCounter from './ProjectPreviewCounter'
-import ProjectHeaderDistrictsListLegacy from '../ProjectHeaderDistrictsListLegacy'
 import TagsList from '../../Ui/List/TagsList'
 import ProjectRestrictedAccessFragmentLegacy from '../Page/ProjectRestrictedAccessFragmentLegacy'
 import type { ProjectPreviewCounters_project } from '~relay/ProjectPreviewCounters_project.graphql'
+import { FormattedMessage } from 'react-intl'
 type Props = {
   readonly project: ProjectPreviewCounters_project
 }
@@ -52,7 +52,17 @@ export class ProjectPreviewCounters extends React.Component<Props> {
             />
           )}
           {project.districts && project.districts.totalCount > 0 && (
-            <ProjectHeaderDistrictsListLegacy project={project} breakingNumber={1} />
+            <div style={{ fontSize: 14 }}>
+              {project.districts.edges[0]?.node?.name}{' '}
+              {project.districts.totalCount > 1 ? (
+                <FormattedMessage
+                  id="and-count-other-areas"
+                  values={{
+                    count: project.districts.totalCount - 1,
+                  }}
+                />
+              ) : null}
+            </div>
           )}
           <ProjectRestrictedAccessFragmentLegacy project={project} icon="cap-lock-2-1" isOnProjectCard />
         </TagsList>
@@ -75,7 +85,6 @@ export default createFragmentContainer(ProjectPreviewCounters, {
       }
       hasParticipativeStep
       isExternal
-      ...ProjectHeaderDistrictsListLegacy_project
       isVotesCounterDisplayable
       isContributionsCounterDisplayable
       isParticipantsCounterDisplayable

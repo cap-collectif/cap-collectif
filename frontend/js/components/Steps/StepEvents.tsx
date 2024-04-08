@@ -4,14 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import StepEventsList from './StepEventsList'
 import { Container } from './StepEvents.style'
 import type { StepEvents_step$key } from '~relay/StepEvents_step.graphql'
-import Flex from '~/components/Ui/Primitives/Layout/Flex'
-import Heading from '~/components/Ui/Primitives/Heading'
-import Button from '~/components/DesignSystem/Button/Button'
-import Text from '~/components/Ui/Primitives/Text'
-import Menu from '~ds/Menu/Menu'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import Loader from '~ui/FeedbacksIndicators/Loader'
-import { Box } from '@cap-collectif/ui'
+import { Button, CapUIIcon, Flex, Heading, Menu, Text } from '@cap-collectif/ui'
 
 type Props = {
   readonly step: StepEvents_step$key
@@ -51,29 +45,30 @@ export const StepEvents = ({ step: stepKey }: Props) => {
         <Heading as="h2" mb={4}>
           <FormattedMessage id="global.events" /> <span className="small excerpt">{totalCount}</span>
         </Heading>
-        <Menu mr={4}>
-          <Menu.Button>
-            <Button>
-              <Box mr={1}>{intl.formatMessage({ id: filter })}</Box>
-              <Icon name={ICON_NAME.chevronDown} size="8" color="black" />
+        <Menu
+          disclosure={
+            <Button variant="tertiary" rightIcon={CapUIIcon.ArrowDown}>
+              {intl.formatMessage({ id: filter })}
             </Button>
-          </Menu.Button>
-
+          }
+        >
           <Menu.List>
-            <Menu.ListItem
+            <Menu.Item
+              border="none"
               onClick={() => {
                 setFilter('theme.show.status.future')
               }}
             >
               <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
-            </Menu.ListItem>
-            <Menu.ListItem
+            </Menu.Item>
+            <Menu.Item
+              border="none"
               onClick={() => {
                 setFilter('finished')
               }}
             >
               <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
-            </Menu.ListItem>
+            </Menu.Item>
           </Menu.List>
         </Menu>
       </Flex>

@@ -3,9 +3,9 @@ import { graphql, usePaginationFragment } from 'react-relay'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import type { OrganizationPageEventList_organization$key } from '~relay/OrganizationPageEventList_organization.graphql'
-import Button from '~/components/DesignSystem/Button/Button'
-import AppBox from '~/components/Ui/Primitives/AppBox'
 import EventCard from '~/components/Ui/Event/EventCard'
+import { Button, Flex } from '@cap-collectif/ui'
+
 const FRAGMENT = graphql`
   fragment OrganizationPageEventList_organization on Organization
   @argumentDefinitions(
@@ -54,13 +54,13 @@ export const OrganizationPageEventList = ({ organization, filter }: Props) => {
         <EventCard event={edge?.node} key={index} mb={4} />
       ))}
       {hasNext ? (
-        <AppBox width="100%">
-          <Button margin="auto" onClick={() => loadNext(3)} color="blue.500">
+        <Flex width="100%">
+          <Button margin="auto" onClick={() => loadNext(3)} variant="tertiary">
             {intl.formatMessage({
               id: 'global.more',
             })}
           </Button>
-        </AppBox>
+        </Flex>
       ) : null}
     </>
   )
