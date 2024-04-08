@@ -303,6 +303,10 @@ Object {
       "enabled": true,
       "type": "mediator",
     },
+    Object {
+      "enabled": false,
+      "type": "online_help",
+    },
   ],
 }
 `;

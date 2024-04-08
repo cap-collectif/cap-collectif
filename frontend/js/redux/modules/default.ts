@@ -102,6 +102,7 @@ export const features: FeatureToggles = {
   proposal_sms_vote: false,
   organizations: false,
   moderation_comment: false,
+  online_help: false,
 }
 export const initialState: State = {
   themes: [],

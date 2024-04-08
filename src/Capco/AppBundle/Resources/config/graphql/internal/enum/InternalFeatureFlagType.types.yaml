@@ -174,3 +174,6 @@ InternalFeatureFlagType:
             mediator:
                 value: !php/const Capco\AppBundle\Toggle\Manager::mediator
                 description: 'Whether or not votes can be added by mediators'
+            online_help:
+                value: !php/const Capco\AppBundle\Toggle\Manager::online_help
+                description: 'Wheter or not the custom online help is enabled'

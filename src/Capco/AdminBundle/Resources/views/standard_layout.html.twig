@@ -269,6 +269,9 @@
     {% if is_feature_enabled('helpscout_beacon') %}
         {% include 'CapcoAdminBundle:partials/javascripts:_helpscout.html.twig' %}
     {% endif %}
+    {% if is_feature_enabled('online_help') %}
+        {% include 'CapcoAdminBundle:partials/javascripts:_online_help.html.twig' %}
+    {% endif %}
     {#    jquery2 is deprecated but used by bootstrap, remove it when possible #}
     <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"

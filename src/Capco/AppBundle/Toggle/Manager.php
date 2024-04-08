@@ -87,6 +87,7 @@ class Manager
     public const unstable__new_create_project = 'unstable__new_create_project';
     public const new_vote_step = 'new_vote_step';
     public const mediator = 'mediator';
+    public const online_help = 'online_help';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -117,6 +118,7 @@ class Manager
         self::projects_form,
         self::project_trash,
         self::mediator,
+        self::online_help,
     ];
 
     public static $toggles = [
@@ -195,6 +197,7 @@ class Manager
         self::unstable__new_create_project,
         self::new_vote_step,
         self::mediator,
+        self::online_help,
     ];
 
     protected ToggleManager $toggleManager;

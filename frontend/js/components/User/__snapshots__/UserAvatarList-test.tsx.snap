@@ -54,6 +54,7 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
               "newsletter": false,
               "noindex_on_profiles": false,
               "oauth2_switch_user": false,
+              "online_help": false,
               "organizations": false,
               "paper_vote": false,
               "phone_confirmation": false,

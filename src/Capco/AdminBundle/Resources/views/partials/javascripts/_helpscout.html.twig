@@ -3,7 +3,7 @@
 <script type="text/javascript">
 window.Beacon('logout', { endActiveChat: true });
 window.Beacon('init', '224da0d3-665b-400b-9fc8-812e9e1ff8b8')
-window.Beacon('prefill', {
+window.Beacon('identify', {
     name: '{{ isLoggedIn ? app.user.username : 'anon.'}}',
     email: '{{ isLoggedIn ? app.user.email : 'anon.'}}'
 })

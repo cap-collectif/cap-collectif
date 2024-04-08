@@ -81,6 +81,11 @@
                         "description": "description.module.helpscout-beacon",
                         "onlySuperAdmin": true
                     },
+                    "online_help": {
+                        "title": "capco.module.online_help",
+                        "description": "",
+                        "onlySuperAdmin": true
+                    },
                     "organizations": {
                         "title": "capco.module.organizations",
                         "description": "description.module.organizations",

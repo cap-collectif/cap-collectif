@@ -6904,6 +6904,9 @@ enum FeatureFlagType {
 
   """Whether or not votes can be added by mediators"""
   mediator
+
+  """Wheter or not the custom online help is enabled"""
+  online_help
 }
 
 """Require a firstname"""
