@@ -24,143 +24,144 @@
 {% block body %}
 
   {% set isInternal = schemaName == 'internal' %}
-  {% if app.user %}  
+  {% if app.user %}
     {% set publicApiToken = publicApiKeyRepo.findPublicApiTokensByUser(app.user) is not empty ? publicApiKeyRepo.findPublicApiTokensByUser(app.user)[0] : null %}
   {% endif %}
 
   <div style="width: 100%; height: 100%">
     <p style="margin-left: 15px">
-    {% if app.user and (isInternal or publicApiToken) %}
-      <div style="margin-left: 15px">
-       Hello <strong>{{app.user.username}}</strong>, you’re ready to explore our GraphQL API with authenticated requests!
-      </div>
+      {% if app.user and (isInternal or publicApiToken) %}
+    <div style="margin-left: 15px">
+      Hello <strong>{{app.user.username}}</strong>, you’re ready to explore our GraphQL API with authenticated requests!
+    </div>
     {% else %}
       {% if app.user %}
-        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>. 
+        Sorry, we could not find an API key for your account <strong>{{app.user.username}}</strong>.
         <br />
-        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !). 
-       {% else %}
+        Your API requests are <strong>not authenticated</strong>. Contact <a href="mailto:api@cap-collectif.com">api@cap-collectif.com</a> if you need to use authenticated requests (but you probably don't !).
+      {% else %}
         Welcome to the GraphQL API explorer ! Your API requests are <strong>not authenticated</strong>.
         {# <br /> #}
         {# Start exploring GraphQL API queries using your account by <strong>logging in</strong>.  #}
-       {% endif %}
+      {% endif %}
     {% endif %}
-      <div style="margin-left: 15px">
+    <div style="margin-left: 15px">
       {% if isInternal %}
-         Hello capco dev ! You are querying <strong>Internal</strong> schema.
+        Hello capco dev ! You are querying <strong>Internal</strong> schema.
       {% else %}
         <a href="{{ path('app_developer_category', { category: 'previews' }) }}">Schema Previews</a> are <strong>enabled</strong> by default in the explorer.
       {% endif %}
-      </div>
+    </div>
     </p>
     <div id="graphiql-render" style="width: 100%; height: 100%; border-top: 1px solid #ddd"></div>
   </div>
   {% block body_loading %}Loading...{% endblock body_loading %}
-  {% block body_script %}
-    <script>
-      /**
-       * This GraphiQL example illustrates how to use some of GraphiQL's props
-       * in order to enable reading and updating the URL parameters, making
-       * link sharing of queries a little bit easier.
-       *
-       * This is only one example of this kind of feature, GraphiQL exposes
-       * various React params to enable interesting integrations.
-       */
-      // Parse the search string to get url parameters.
-      var search = window.location.search;
-      var parameters = {};
-      search.substr(1).split('&').forEach(function (entry) {
-        var eq = entry.indexOf('=');
-        if (eq >= 0) {
-          parameters[decodeURIComponent(entry.slice(0, eq))] =
-            decodeURIComponent(entry.slice(eq + 1));
-        }
-      });
-      // if variables was provided, try to format it.
-      if (parameters.variables) {
-        try {
-          parameters.variables =
-            JSON.stringify(JSON.parse(parameters.variables), null, 2);
-        } catch (e) {
-          // Do nothing, we want to display the invalid JSON as a string, rather
-          // than present an error.
-        }
+{% block body_script %}
+  <script>
+    /**
+     * This GraphiQL example illustrates how to use some of GraphiQL's props
+     * in order to enable reading and updating the URL parameters, making
+     * link sharing of queries a little bit easier.
+     *
+     * This is only one example of this kind of feature, GraphiQL exposes
+     * various React params to enable interesting integrations.
+     */
+            // Parse the search string to get url parameters.
+    var search = window.location.search;
+    var parameters = {};
+    search.substr(1).split('&').forEach(function (entry) {
+      var eq = entry.indexOf('=');
+      if (eq >= 0) {
+        parameters[decodeURIComponent(entry.slice(0, eq))] =
+                decodeURIComponent(entry.slice(eq + 1));
       }
-      // When the query and variables string is edited, update the URL bar so
-      // that it can be easily shared
-      function onEditQuery(newQuery) {
-        parameters.query = newQuery;
-        updateURL();
+    });
+    // if variables was provided, try to format it.
+    if (parameters.variables) {
+      try {
+        parameters.variables =
+                JSON.stringify(JSON.parse(parameters.variables), null, 2);
+      } catch (e) {
+        // Do nothing, we want to display the invalid JSON as a string, rather
+        // than present an error.
       }
-      function onEditVariables(newVariables) {
-        parameters.variables = newVariables;
-        updateURL();
-      }
-      function onEditOperationName(newOperationName) {
-        parameters.operationName = newOperationName;
-        updateURL();
-      }
-      function updateURL() {
-        var newSearch = '?' + Object.keys(parameters).filter(function (key) {
-          return Boolean(parameters[key]);
-        }).map(function (key) {
-          return encodeURIComponent(key) + '=' +
-            encodeURIComponent(parameters[key]);
-        }).join('&');
-        history.replaceState(null, null, newSearch);
-      }
-      
-      var endpoint = {{ endpoint | json_encode | raw }}
+    }
+    // When the query and variables string is edited, update the URL bar so
+    // that it can be easily shared
+    function onEditQuery(newQuery) {
+      parameters.query = newQuery;
+      updateURL();
+    }
+    function onEditVariables(newVariables) {
+      parameters.variables = newVariables;
+      updateURL();
+    }
+    function onEditOperationName(newOperationName) {
+      parameters.operationName = newOperationName;
+      updateURL();
+    }
+    function updateURL() {
+      var newSearch = '?' + Object.keys(parameters).filter(function (key) {
+        return Boolean(parameters[key]);
+      }).map(function (key) {
+        return encodeURIComponent(key) + '=' +
+                encodeURIComponent(parameters[key]);
+      }).join('&');
+      history.replaceState(null, null, newSearch);
+    }
 
-        function graphQLFetcher(params) {
-          {% block fetcher_function_body %}
-          var headers
+    var endpoint = {{ endpoint | json_encode | raw }}
 
-          {% block graphql_fetcher_headers %}
-          headers = {
-            {# Preview schema is enabled by default, maybe we should add a toggle #}
-            {% if isInternal == false %}
-            "Accept": "application/vnd.cap-collectif.preview+json",
-            {% endif %}
-            "Content-Type": "application/json",
-            {% if app.user and not isInternal and publicApiToken %}
-              "Authorization": "Bearer {{publicApiToken.value}}",
-            {% endif %}
-          }
-          {% endblock graphql_fetcher_headers %}
+            function graphQLFetcher(params) {
+              {% block fetcher_function_body %}
+              var headers
 
-          return fetch(endpoint, {
-              method: "post",
-              headers: headers,
-              body: JSON.stringify(params),
-              credentials: 'include',
-            }).then((res) => {
-              {% block post_fetch %}{% endblock post_fetch %}
-              return res.text()
-            }).then((body) => {
-            try {
-              return JSON.parse(body)
-            } catch (err) {
-              return body
+              {% block graphql_fetcher_headers %}
+              headers = {
+                {# Preview schema is enabled by default, maybe we should add a toggle #}
+                {% if isInternal == false %}
+                "Accept": "application/vnd.cap-collectif.preview+json",
+                {% endif %}
+                "Content-Type": "application/json",
+                {% if app.user and not isInternal and publicApiToken %}
+                "Authorization": "Bearer {{publicApiToken.value}}",
+                {% endif %}
+              }
+              {% endblock graphql_fetcher_headers %}
+
+              return fetch(endpoint, {
+                method: "post",
+                headers: headers,
+                body: JSON.stringify(params),
+                credentials: 'include',
+              }).then((res) => {
+                {% block post_fetch %}{% endblock post_fetch %}
+                return res.text()
+              }).then((body) => {
+                try {
+                  return JSON.parse(body)
+                } catch (err) {
+                  return body
+                }
+              })
+              {% endblock fetcher_function_body %}
             }
-          })
-          {% endblock fetcher_function_body %}
-        }
 
-        const container = document.getElementById('graphiql-render');
-        const root = createRoot(container);
-        root.render( React.createElement(GraphiQL, {
-          fetcher: graphQLFetcher,
-          query: parameters.query,
-          variables: parameters.variables,
-          operationName: parameters.operationName,
-          onEditQuery: onEditQuery,
-          onEditVariables: onEditVariables,
-          onEditOperationName: onEditOperationName
-        }));
-        document.getElementsByClassName('variable-editor')[0].style.marginBottom = "85px";
-    </script>
-  {% endblock body_script %}
+    ReactDOM.render(
+            React.createElement(GraphiQL, {
+              fetcher: graphQLFetcher,
+              query: parameters.query,
+              variables: parameters.variables,
+              operationName: parameters.operationName,
+              onEditQuery: onEditQuery,
+              onEditVariables: onEditVariables,
+              onEditOperationName: onEditOperationName
+            }),
+            document.getElementById('graphiql-render')
+    )
+    document.getElementsByClassName('variable-editor')[0].style.marginBottom = "85px";
+  </script>
+{% endblock body_script %}
 {% endblock body %}
 </body>
 </html>
