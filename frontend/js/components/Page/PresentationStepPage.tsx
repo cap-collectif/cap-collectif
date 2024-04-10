@@ -34,10 +34,6 @@ const QUERY = graphql`
           consultationStepOpen {
             url
           }
-          contributors {
-            totalCount
-            anonymousCount
-          }
         }
         eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
           totalCount
@@ -56,7 +52,7 @@ This is neither a rework nor a DS migration. It may come later if/when we decide
 refresh this page
 */
 export const PresentationStepPage = ({ stepId }: Props) => {
-  const { state } = useLocation()
+  const { state } = useLocation<{ stepId?: string }>()
   const data = useLazyLoadQuery<PresentationStepPageQueryType>(
     QUERY,
     {
@@ -68,7 +64,6 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   )
   const calendar = useFeatureFlag('calendar')
   const blog = useFeatureFlag('blog')
-  const share_buttons = useFeatureFlag('share_buttons')
   const intl = useIntl()
   React.useEffect(() => {
     insertCustomCode(data?.presentationStep?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,7 +73,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   if (!presentationStep) return null
   const { title, body, project, eventCount } = presentationStep
   if (!project) return null
-  const { contributors, url, posts, consultationStepOpen, slug } = project
+  const { posts, consultationStepOpen, slug } = project
   return (
     <section className="section--alt" id={`presentationStep-${presentationStep.id || ''}`}>
       <div
@@ -131,40 +126,6 @@ export const PresentationStepPage = ({ stepId }: Props) => {
         ) : null}
 
         {(eventCount?.totalCount ?? 0) > 0 && calendar ? <StepEvents step={presentationStep} /> : null}
-        <div className="block">
-          <h2 className="h2">
-            {intl.formatMessage({
-              id: 'capco.section.metrics.participants',
-            })}{' '}
-            <span className="small excerpt">
-              {contributors.totalCount + contributors.anonymousCount}
-              {contributors.anonymousCount > 0
-                ? intl.formatMessage(
-                    {
-                      id: 'contributors-anonymous-count',
-                    },
-                    {
-                      count: contributors.anonymousCount,
-                    },
-                  )
-                : null}
-            </span>
-            {share_buttons ? (
-              <a
-                className="btn btn-primary pull-right"
-                href={`mailto:?body=${url}`}
-                title={intl.formatMessage({
-                  id: 'share_button.share_on.email',
-                })}
-              >
-                <i className="cap cap-user-add-2" />
-                {intl.formatMessage({
-                  id: 'project.share_button',
-                })}
-              </a>
-            ) : null}
-          </h2>
-        </div>
       </div>
     </section>
   )
